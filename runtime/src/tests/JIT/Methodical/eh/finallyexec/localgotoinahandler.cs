@@ -33,6 +33,7 @@ class Class1
         {
             Console.WriteLine("In main try...");
         }
+
         finally
         {
             Console.WriteLine("In main finally...");
@@ -56,8 +57,8 @@ class Class1
 
                 LABEL:
                 Console.WriteLine("Back in inner try 1...");
-
             }
+
             finally
             {
                 Console.WriteLine("Now in inner finally...");

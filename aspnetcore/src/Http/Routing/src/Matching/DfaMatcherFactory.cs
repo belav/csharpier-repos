@@ -33,10 +33,14 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // when the services are disposed.
             var lifetime = _services.GetRequiredService<DataSourceDependentMatcher.Lifetime>();
 
-            return new DataSourceDependentMatcher(dataSource, lifetime, () =>
-            {
-                return _services.GetRequiredService<DfaMatcherBuilder>();
-            });
+            return new DataSourceDependentMatcher(
+                dataSource,
+                lifetime,
+                () =>
+                {
+                    return _services.GetRequiredService<DfaMatcherBuilder>();
+                }
+            );
         }
     }
 }

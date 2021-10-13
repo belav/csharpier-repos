@@ -10,17 +10,18 @@ namespace Microsoft.Extensions.FileProviders
 {
     public class TestFileProvider : IFileProvider
     {
-        private readonly Dictionary<string, IFileInfo> _lookup =
-            new Dictionary<string, IFileInfo>(StringComparer.Ordinal);
+        private readonly Dictionary<string, IFileInfo> _lookup = new Dictionary<string, IFileInfo>(
+            StringComparer.Ordinal
+        );
         private readonly Dictionary<string, IDirectoryContents> _directoryContentsLookup =
             new Dictionary<string, IDirectoryContents>();
 
-        private readonly Dictionary<string, TestFileChangeToken> _fileTriggers =
-            new Dictionary<string, TestFileChangeToken>(StringComparer.Ordinal);
+        private readonly Dictionary<string, TestFileChangeToken> _fileTriggers = new Dictionary<
+            string,
+            TestFileChangeToken
+        >(StringComparer.Ordinal);
 
-        public TestFileProvider() : this(string.Empty)
-        {
-        }
+        public TestFileProvider() : this(string.Empty) { }
 
         public TestFileProvider(string root)
         {
@@ -128,50 +129,32 @@ namespace Microsoft.Extensions.FileProviders
         {
             public bool Exists
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public bool IsDirectory
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public DateTimeOffset LastModified
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public long Length
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public string Name
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public string PhysicalPath
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public Stream CreateReadStream()

@@ -27,8 +27,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public FormValueProvider(
             BindingSource bindingSource,
             IFormCollection values,
-            CultureInfo? culture)
-            : base(bindingSource)
+            CultureInfo? culture
+        ) : base(bindingSource)
         {
             if (bindingSource == null)
             {

@@ -11,16 +11,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     /// <summary>
     ///     A convention that configures the maximum length based on the <see cref="StringLengthAttribute" /> applied on the property.
     /// </summary>
-    public class StringLengthAttributeConvention : PropertyAttributeConventionBase<StringLengthAttribute>
+    public class StringLengthAttributeConvention
+        : PropertyAttributeConventionBase<StringLengthAttribute>
     {
         /// <summary>
         ///     Creates a new instance of <see cref="StringLengthAttributeConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public StringLengthAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        public StringLengthAttributeConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -33,7 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             StringLengthAttribute attribute,
             MemberInfo clrMember,
-            IConventionContext context)
+            IConventionContext context
+        )
         {
             if (attribute.MaximumLength > 0)
             {

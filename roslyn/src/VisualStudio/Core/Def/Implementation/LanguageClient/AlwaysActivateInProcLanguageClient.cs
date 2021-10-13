@@ -41,9 +41,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             IAsynchronousOperationListenerProvider listenerProvider,
             ILspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             DefaultCapabilitiesProvider defaultCapabilitiesProvider,
-            [Import(typeof(SAsyncServiceProvider))] VSShell.IAsyncServiceProvider asyncServiceProvider,
-            IThreadingContext threadingContext)
-            : base(csharpVBRequestDispatcherFactory, workspace, diagnosticService: null, listenerProvider, lspWorkspaceRegistrationService, asyncServiceProvider, threadingContext, diagnosticsClientName: null)
+            [Import(typeof(SAsyncServiceProvider))]
+                VSShell.IAsyncServiceProvider asyncServiceProvider,
+            IThreadingContext threadingContext
+        )
+            : base(
+                csharpVBRequestDispatcherFactory,
+                workspace,
+                diagnosticService: null,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                asyncServiceProvider,
+                threadingContext,
+                diagnosticsClientName: null
+            )
         {
             _defaultCapabilitiesProvider = defaultCapabilitiesProvider;
         }
@@ -55,7 +66,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             var serverCapabilities = new VSServerCapabilities();
 
             // If the LSP editor feature flag is enabled advertise support for LSP features here so they are available locally and remote.
-            var isLspEditorEnabled = Workspace.Services.GetRequiredService<IExperimentationService>().IsExperimentEnabled(VisualStudioWorkspaceContextService.LspEditorFeatureFlagName);
+            var isLspEditorEnabled =
+                Workspace.Services.GetRequiredService<IExperimentationService>()
+                    .IsExperimentEnabled(
+                        VisualStudioWorkspaceContextService.LspEditorFeatureFlagName
+                    );
             if (isLspEditorEnabled)
             {
                 serverCapabilities = _defaultCapabilitiesProvider.GetCapabilities();
@@ -70,7 +85,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                 };
             }
 
-            serverCapabilities.SupportsDiagnosticRequests = Workspace.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
+            serverCapabilities.SupportsDiagnosticRequests = Workspace.IsPullDiagnostics(
+                InternalDiagnosticsOptions.NormalDiagnosticMode
+            );
 
             // This capability is always enabled as we provide cntrl+Q VS search only via LSP in ever scenario.
             serverCapabilities.WorkspaceSymbolProvider = true;

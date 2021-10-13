@@ -22,9 +22,16 @@ namespace System.Reflection.Emit.Tests
         public void SetParameters(Type[] parameterTypes, string[] typeParamNames)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public, typeof(void), parameterTypes);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                typeof(void),
+                parameterTypes
+            );
 
-            Type[] typeParameters = method.DefineGenericParameters(typeParamNames).Select(a => a.AsType()).ToArray();
+            Type[] typeParameters = method.DefineGenericParameters(typeParamNames)
+                .Select(a => a.AsType())
+                .ToArray();
             method.SetParameters(typeParameters);
 
             ILGenerator ilGenerator = method.GetILGenerator();
@@ -40,7 +47,9 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
             MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public);
-            Type[] typeParameters = method.DefineGenericParameters("T").Select(a => a.AsType()).ToArray();
+            Type[] typeParameters = method.DefineGenericParameters("T")
+                .Select(a => a.AsType())
+                .ToArray();
 
             method.SetParameters(typeParameters);
             ILGenerator ilGenerator = method.GetILGenerator();
@@ -105,8 +114,15 @@ namespace System.Reflection.Emit.Tests
         public void SetParameters_NullParameter_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder builder = type.DefineMethod("TestMethod", MethodAttributes.Public, typeof(void), new Type[] { typeof(int) });
-            Type[] typeParameters = builder.DefineGenericParameters("T").Select(a => a.AsType()).ToArray();
+            MethodBuilder builder = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                typeof(void),
+                new Type[] { typeof(int) }
+            );
+            Type[] typeParameters = builder.DefineGenericParameters("T")
+                .Select(a => a.AsType())
+                .ToArray();
 
             Type[] parameterTypes = new Type[typeParameters.Length + 1];
             for (int i = 0; i < typeParameters.Length; ++i)
@@ -119,10 +135,17 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = builder.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
 
-            AssertExtensions.Throws<ArgumentNullException>("argument", () => type.CreateTypeInfo().AsType());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "argument",
+                () => type.CreateTypeInfo().AsType()
+            );
         }
 
-        private void VerifyParameters(ParameterInfo[] parameters, Type[] parameterTypes, string[] parameterName)
+        private void VerifyParameters(
+            ParameterInfo[] parameters,
+            Type[] parameterTypes,
+            string[] parameterName
+        )
         {
             if (parameterTypes == null)
             {

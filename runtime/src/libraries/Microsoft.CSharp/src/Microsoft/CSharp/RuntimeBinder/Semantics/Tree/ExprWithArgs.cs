@@ -5,10 +5,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal abstract class ExprWithArgs : ExprWithType
     {
-        protected ExprWithArgs(ExpressionKind kind, CType type)
-            : base(kind, type)
-        {
-        }
+        protected ExprWithArgs(ExpressionKind kind, CType type) : base(kind, type) { }
 
         public ExprMemberGroup MemberGroup { get; set; }
 

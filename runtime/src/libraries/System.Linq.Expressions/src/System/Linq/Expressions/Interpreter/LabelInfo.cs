@@ -211,7 +211,10 @@ namespace System.Linq.Expressions.Interpreter
                 HashSet<LabelScopeInfo>? set = _definitions as HashSet<LabelScopeInfo>;
                 if (set == null)
                 {
-                    _definitions = set = new HashSet<LabelScopeInfo>() { (LabelScopeInfo)_definitions };
+                    _definitions = set = new HashSet<LabelScopeInfo>()
+                    {
+                        (LabelScopeInfo)_definitions
+                    };
                 }
                 set.Add(scope);
             }
@@ -246,18 +249,15 @@ namespace System.Linq.Expressions.Interpreter
     {
         // any "statement like" node that can be jumped into
         Statement,
-
         // these correspond to the node of the same name
         Block,
         Switch,
         Lambda,
         Try,
-
         // these correspond to the part of the try block we're in
         Catch,
         Finally,
         Filter,
-
         // the catch-all value for any other expression type
         // (means we can't jump into it)
         Expression,

@@ -13,7 +13,11 @@ internal static partial class Interop
         /// </summary>
         /// <param name="path">The path to the file system object</param>
         /// <returns>Returns the result string on success and null on failure</returns>
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_RealPath", SetLastError = true)]
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_RealPath",
+            SetLastError = true
+        )]
         internal static extern string RealPath(string path);
     }
 }

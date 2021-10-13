@@ -14,8 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = CreateConventionModelBuilder();
 
-            var entityType = modelBuilder
-                .Entity<Customer>();
+            var entityType = modelBuilder.Entity<Customer>();
 
             Assert.Equal(nameof(DbContext), entityType.Metadata.GetContainer());
 
@@ -41,19 +40,25 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal("pk", entityType.GetPartitionKeyPropertyName());
             Assert.Equal(
                 ConfigurationSource.Convention,
-                ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+                ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+            );
 
             entityTypeBuilder.HasPartitionKey("pk");
             Assert.Equal("pk", entityType.GetPartitionKeyPropertyName());
             Assert.Equal(
                 ConfigurationSource.Explicit,
-                ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+                ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+            );
 
-            Assert.False(((IConventionEntityType)entityType).Builder.CanSetPartitionKey("partition"));
+            Assert.False(
+                ((IConventionEntityType)entityType).Builder.CanSetPartitionKey("partition")
+            );
 
             entityTypeBuilder.HasPartitionKey(null);
             Assert.Null(entityType.GetPartitionKeyPropertyName());
-            Assert.Null(((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+            Assert.Null(
+                ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+            );
         }
 
         [ConditionalFact]
@@ -61,8 +66,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = CreateConventionModelBuilder();
 
-            modelBuilder
-                .Entity<Customer>();
+            modelBuilder.Entity<Customer>();
 
             var entityType = modelBuilder.Model.FindEntityType(typeof(Customer));
             modelBuilder.HasDefaultContainer(null);
@@ -75,9 +79,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal("db0", entityType.GetContainer());
             Assert.Equal("db0", modelBuilder.Model.GetDefaultContainer());
 
-            modelBuilder
-                .Entity<Customer>()
-                .ToContainer("db1");
+            modelBuilder.Entity<Customer>().ToContainer("db1");
 
             Assert.Equal("db1", entityType.GetContainer());
         }
@@ -116,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             modelBuilder.Entity<Customer>().UseETagConcurrency();
             var model = modelBuilder.Model;
 
-            var etagProperty = model.FindEntityType(typeof(Customer).FullName).FindProperty("_etag");
+            var etagProperty = model.FindEntityType(typeof(Customer).FullName)
+                .FindProperty("_etag");
             Assert.NotNull(etagProperty);
             Assert.Equal(ValueGenerated.OnAddOrUpdate, etagProperty.ValueGenerated);
             Assert.True(etagProperty.IsConcurrencyToken);
@@ -136,8 +139,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Assert.Equal("_etag", etagProperty.GetJsonPropertyName());
         }
 
-        protected virtual ModelBuilder CreateConventionModelBuilder()
-            => CosmosTestHelpers.Instance.CreateConventionBuilder();
+        protected virtual ModelBuilder CreateConventionModelBuilder() =>
+            CosmosTestHelpers.Instance.CreateConventionBuilder();
 
         private class Customer
         {

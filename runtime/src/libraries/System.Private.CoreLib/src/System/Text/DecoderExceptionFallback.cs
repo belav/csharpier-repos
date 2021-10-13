@@ -9,7 +9,8 @@ namespace System.Text
 {
     public sealed class DecoderExceptionFallback : DecoderFallback
     {
-        internal static readonly DecoderExceptionFallback s_default = new DecoderExceptionFallback();
+        internal static readonly DecoderExceptionFallback s_default =
+            new DecoderExceptionFallback();
 
         public override DecoderFallbackBuffer CreateFallbackBuffer() =>
             new DecoderExceptionFallbackBuffer();
@@ -22,7 +23,6 @@ namespace System.Text
 
         public override int GetHashCode() => 879;
     }
-
 
     public sealed class DecoderExceptionFallbackBuffer : DecoderFallbackBuffer
     {
@@ -64,27 +64,29 @@ namespace System.Text
 
             // Known index
             throw new DecoderFallbackException(
-                SR.Format(SR.Argument_InvalidCodePageBytesIndex,
-                   strBytes, index), bytesUnknown, index);
+                SR.Format(SR.Argument_InvalidCodePageBytesIndex, strBytes, index),
+                bytesUnknown,
+                index
+            );
         }
     }
 
     // Exception for decoding unknown byte sequences.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class DecoderFallbackException : ArgumentException
     {
         private readonly byte[]? _bytesUnknown;
         private readonly int _index;
 
-        public DecoderFallbackException()
-            : base(SR.Arg_ArgumentException)
+        public DecoderFallbackException() : base(SR.Arg_ArgumentException)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
 
-        public DecoderFallbackException(string? message)
-            : base(message)
+        public DecoderFallbackException(string? message) : base(message)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
@@ -102,10 +104,10 @@ namespace System.Text
             _index = index;
         }
 
-        private DecoderFallbackException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext)
-        {
-        }
+        private DecoderFallbackException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        ) : base(serializationInfo, streamingContext) { }
 
         public byte[]? BytesUnknown => _bytesUnknown;
 

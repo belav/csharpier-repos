@@ -45,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? buildExtensionsDir,
             string? framework = null,
             string? configuration = null,
-            string? runtime = null)
+            string? runtime = null
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(file), "file is null or empty.");
 
@@ -58,9 +59,13 @@ namespace Microsoft.EntityFrameworkCore.Tools
 
             var efTargetsPath = Path.Combine(
                 buildExtensionsDir,
-                Path.GetFileName(file) + ".EntityFrameworkCore.targets");
-            using (var input = typeof(Resources).Assembly.GetManifestResourceStream(
-                "Microsoft.EntityFrameworkCore.Tools.Resources.EntityFrameworkCore.targets")!)
+                Path.GetFileName(file) + ".EntityFrameworkCore.targets"
+            );
+            using (
+                var input = typeof(Resources).Assembly.GetManifestResourceStream(
+                    "Microsoft.EntityFrameworkCore.Tools.Resources.EntityFrameworkCore.targets"
+                )!
+            )
             using (var output = File.OpenWrite(efTargetsPath))
             {
                 // NB: Copy always in case it changes
@@ -108,9 +113,11 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     throw new CommandException(Resources.GetMetadataFailed);
                 }
 
-                metadata = File.ReadLines(metadataFile).Select(l => l.Split(new[] { ':' }, 2))
+                metadata = File.ReadLines(metadataFile)
+                    .Select(l => l.Split(new[] { ':' }, 2))
                     .ToDictionary(s => s[0], s => s[1].TrimStart());
             }
+
             finally
             {
                 File.Delete(metadataFile);

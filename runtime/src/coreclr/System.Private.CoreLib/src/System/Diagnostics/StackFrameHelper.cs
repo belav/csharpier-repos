@@ -38,9 +38,19 @@ namespace System.Diagnostics
         private int iFrameCount;
 #pragma warning restore 414
 
-        private delegate void GetSourceLineInfoDelegate(Assembly? assembly, string assemblyPath, IntPtr loadedPeAddress,
-            int loadedPeSize, IntPtr inMemoryPdbAddress, int inMemoryPdbSize, int methodToken, int ilOffset,
-            out string? sourceFile, out int sourceLine, out int sourceColumn);
+        private delegate void GetSourceLineInfoDelegate(
+            Assembly? assembly,
+            string assemblyPath,
+            IntPtr loadedPeAddress,
+            int loadedPeSize,
+            IntPtr inMemoryPdbAddress,
+            int inMemoryPdbSize,
+            int methodToken,
+            int ilOffset,
+            out string? sourceFile,
+            out int sourceLine,
+            out int sourceColumn
+        );
 
         private static GetSourceLineInfoDelegate? s_getSourceLineInfo;
 
@@ -101,7 +111,8 @@ namespace System.Diagnostics
                 {
                     Type? symbolsType = Type.GetType(
                         "System.Diagnostics.StackTraceSymbols, System.Diagnostics.StackTrace, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                        throwOnError: false);
+                        throwOnError: false
+                    );
 
                     if (symbolsType == null)
                     {
@@ -110,11 +121,25 @@ namespace System.Diagnostics
 
                     Type[] parameterTypes = new Type[]
                     {
-                        typeof(Assembly), typeof(string), typeof(IntPtr), typeof(int), typeof(IntPtr),
-                        typeof(int), typeof(int), typeof(int),
-                        typeof(string).MakeByRefType(), typeof(int).MakeByRefType(), typeof(int).MakeByRefType()
+                        typeof(Assembly),
+                        typeof(string),
+                        typeof(IntPtr),
+                        typeof(int),
+                        typeof(IntPtr),
+                        typeof(int),
+                        typeof(int),
+                        typeof(int),
+                        typeof(string).MakeByRefType(),
+                        typeof(int).MakeByRefType(),
+                        typeof(int).MakeByRefType()
                     };
-                    MethodInfo? symbolsMethodInfo = symbolsType.GetMethod("GetSourceLineInfo", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, parameterTypes, null);
+                    MethodInfo? symbolsMethodInfo = symbolsType.GetMethod(
+                        "GetSourceLineInfo",
+                        BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                        null,
+                        parameterTypes,
+                        null
+                    );
                     if (symbolsMethodInfo == null)
                     {
                         return;
@@ -124,7 +149,8 @@ namespace System.Diagnostics
                     object? target = Activator.CreateInstance(symbolsType);
 
                     // Create an instance delegate for the GetSourceLineInfo method
-                    GetSourceLineInfoDelegate getSourceLineInfo = symbolsMethodInfo.CreateDelegate<GetSourceLineInfoDelegate>(target);
+                    GetSourceLineInfoDelegate getSourceLineInfo =
+                        symbolsMethodInfo.CreateDelegate<GetSourceLineInfoDelegate>(target);
 
                     // We could race with another thread. It doesn't matter if we win or lose, the losing instance will be GC'ed and all threads including this one will
                     // use the winning instance
@@ -137,15 +163,23 @@ namespace System.Diagnostics
                     // ENC or the source/line info was already retrieved, the method token is 0.
                     if (rgiMethodToken![index] != 0)
                     {
-                        s_getSourceLineInfo!(rgAssembly![index], rgAssemblyPath![index]!, rgLoadedPeAddress![index], rgiLoadedPeSize![index],
-                            rgInMemoryPdbAddress![index], rgiInMemoryPdbSize![index], rgiMethodToken![index],
-                            rgiILOffset![index], out rgFilename![index], out rgiLineNumber![index], out rgiColumnNumber![index]);
+                        s_getSourceLineInfo!(
+                            rgAssembly![index],
+                            rgAssemblyPath![index]!,
+                            rgLoadedPeAddress![index],
+                            rgiLoadedPeSize![index],
+                            rgInMemoryPdbAddress![index],
+                            rgiInMemoryPdbSize![index],
+                            rgiMethodToken![index],
+                            rgiILOffset![index],
+                            out rgFilename![index],
+                            out rgiLineNumber![index],
+                            out rgiColumnNumber![index]
+                        );
                     }
                 }
             }
-            catch
-            {
-            }
+            catch { }
             finally
             {
                 t_reentrancy--;
@@ -164,22 +198,44 @@ namespace System.Diagnostics
             if (mh == IntPtr.Zero)
                 return null;
 
-            IRuntimeMethodInfo? mhReal = RuntimeMethodHandle.GetTypicalMethodDefinition(new RuntimeMethodInfoStub(mh, this));
+            IRuntimeMethodInfo? mhReal = RuntimeMethodHandle.GetTypicalMethodDefinition(
+                new RuntimeMethodInfoStub(mh, this)
+            );
 
             return RuntimeType.GetMethodBase(mhReal);
         }
 
-        public int GetOffset(int i) { return rgiOffset![i]; }
-        public int GetILOffset(int i) { return rgiILOffset![i]; }
-        public string? GetFilename(int i) { return rgFilename?[i]; }
-        public int GetLineNumber(int i) { return rgiLineNumber == null ? 0 : rgiLineNumber[i]; }
-        public int GetColumnNumber(int i) { return rgiColumnNumber == null ? 0 : rgiColumnNumber[i]; }
+        public int GetOffset(int i)
+        {
+            return rgiOffset![i];
+        }
+        public int GetILOffset(int i)
+        {
+            return rgiILOffset![i];
+        }
+        public string? GetFilename(int i)
+        {
+            return rgFilename?[i];
+        }
+        public int GetLineNumber(int i)
+        {
+            return rgiLineNumber == null ? 0 : rgiLineNumber[i];
+        }
+        public int GetColumnNumber(int i)
+        {
+            return rgiColumnNumber == null ? 0 : rgiColumnNumber[i];
+        }
 
         public bool IsLastFrameFromForeignExceptionStackTrace(int i)
         {
-            return (rgiLastFrameFromForeignExceptionStackTrace == null) ? false : rgiLastFrameFromForeignExceptionStackTrace[i];
+            return (rgiLastFrameFromForeignExceptionStackTrace == null)
+              ? false
+              : rgiLastFrameFromForeignExceptionStackTrace[i];
         }
 
-        public int GetNumberOfFrames() { return iFrameCount; }
+        public int GetNumberOfFrames()
+        {
+            return iFrameCount;
+        }
     }
 }

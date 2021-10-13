@@ -47,15 +47,23 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         /// <param name="authentication">The <see cref="IAuthenticationSchemeProvider"/>.</param>
         /// <param name="applicationLifetime">The <see cref="IHostApplicationLifetime"/>.</param>
         // Can't break public API, so creating a second constructor to propagate the isWebsocketsSupported flag.
-        public IISMiddleware(RequestDelegate next,
+        public IISMiddleware(
+            RequestDelegate next,
             ILoggerFactory loggerFactory,
             IOptions<IISOptions> options,
             string pairingToken,
             IAuthenticationSchemeProvider authentication,
-            IHostApplicationLifetime applicationLifetime)
-            : this(next, loggerFactory, options, pairingToken, isWebsocketsSupported: true, authentication, applicationLifetime)
-        {
-        }
+            IHostApplicationLifetime applicationLifetime
+        )
+            : this(
+                next,
+                loggerFactory,
+                options,
+                pairingToken,
+                isWebsocketsSupported: true,
+                authentication,
+                applicationLifetime
+            ) { }
 
         /// <summary>
         /// The middleware that enables IIS Out-Of-Process to work.
@@ -67,13 +75,15 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         /// <param name="isWebsocketsSupported">Whether websockets are supported by IIS.</param>
         /// <param name="authentication">The <see cref="IAuthenticationSchemeProvider"/>.</param>
         /// <param name="applicationLifetime">The <see cref="IHostApplicationLifetime"/>.</param>
-        public IISMiddleware(RequestDelegate next,
+        public IISMiddleware(
+            RequestDelegate next,
             ILoggerFactory loggerFactory,
             IOptions<IISOptions> options,
             string pairingToken,
             bool isWebsocketsSupported,
             IAuthenticationSchemeProvider authentication,
-            IHostApplicationLifetime applicationLifetime)
+            IHostApplicationLifetime applicationLifetime
+        )
         {
             if (next == null)
             {
@@ -101,7 +111,13 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
 
             if (_options.ForwardWindowsAuthentication)
             {
-                authentication.AddScheme(new AuthenticationScheme(IISDefaults.AuthenticationScheme, _options.AuthenticationDisplayName, typeof(AuthenticationHandler)));
+                authentication.AddScheme(
+                    new AuthenticationScheme(
+                        IISDefaults.AuthenticationScheme,
+                        _options.AuthenticationDisplayName,
+                        typeof(AuthenticationHandler)
+                    )
+                );
             }
 
             _pairingToken = pairingToken;
@@ -117,17 +133,31 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         /// <returns>A <see cref="Task"/> that represents the asynchronous operation.</returns>
         public async Task Invoke(HttpContext httpContext)
         {
-            if (!string.Equals(_pairingToken, httpContext.Request.Headers[MSAspNetCoreToken], StringComparison.Ordinal))
+            if (
+                !string.Equals(
+                    _pairingToken,
+                    httpContext.Request.Headers[MSAspNetCoreToken],
+                    StringComparison.Ordinal
+                )
+            )
             {
-                _logger.LogError($"'{MSAspNetCoreToken}' does not match the expected pairing token '{_pairingToken}', request rejected.");
+                _logger.LogError(
+                    $"'{MSAspNetCoreToken}' does not match the expected pairing token '{_pairingToken}', request rejected."
+                );
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 return;
             }
 
             // Handle shutdown from ANCM
-            if (HttpMethods.IsPost(httpContext.Request.Method) &&
-                httpContext.Request.Path.Equals(ANCMRequestPath) &&
-                string.Equals(ANCMShutdownEventHeaderValue, httpContext.Request.Headers[MSAspNetCoreEvent], StringComparison.OrdinalIgnoreCase))
+            if (
+                HttpMethods.IsPost(httpContext.Request.Method)
+                && httpContext.Request.Path.Equals(ANCMRequestPath)
+                && string.Equals(
+                    ANCMShutdownEventHeaderValue,
+                    httpContext.Request.Headers[MSAspNetCoreEvent],
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 // Execute shutdown task on background thread without waiting for completion
                 var shutdownTask = Task.Run(() => _applicationLifetime.StopApplication());
@@ -135,7 +165,14 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
                 return;
             }
 
-            if (Debugger.IsAttached && string.Equals("DEBUG", httpContext.Request.Method, StringComparison.OrdinalIgnoreCase))
+            if (
+                Debugger.IsAttached
+                && string.Equals(
+                    "DEBUG",
+                    httpContext.Request.Method,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 // The Visual Studio debugger tooling sends a DEBUG request to make IIS & AspNetCoreModule launch the process
                 // so the debugger can attach. Filter out this request from the app.
@@ -154,7 +191,9 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
                 var header = httpContext.Request.Headers[MSAspNetCoreClientCert];
                 if (!StringValues.IsNullOrEmpty(header))
                 {
-                    httpContext.Features.Set<ITlsConnectionFeature>(new ForwardedTlsConnectionFeature(_logger, header));
+                    httpContext.Features.Set<ITlsConnectionFeature>(
+                        new ForwardedTlsConnectionFeature(_logger, header)
+                    );
                 }
             }
 
@@ -188,8 +227,15 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         {
             var tokenHeader = context.Request.Headers[MSAspNetCoreWinAuthToken];
 
-            if (!StringValues.IsNullOrEmpty(tokenHeader)
-                && int.TryParse(tokenHeader, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var hexHandle))
+            if (
+                !StringValues.IsNullOrEmpty(tokenHeader)
+                && int.TryParse(
+                    tokenHeader,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out var hexHandle
+                )
+            )
             {
                 // Always create the identity if the handle exists, we need to dispose it so it does not leak.
                 var handle = new IntPtr(hexHandle);

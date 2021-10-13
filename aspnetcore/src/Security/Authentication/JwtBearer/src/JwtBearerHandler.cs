@@ -29,9 +29,12 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         /// Initializes a new instance of <see cref="JwtBearerHandler"/>.
         /// </summary>
         /// <inheritdoc />
-        public JwtBearerHandler(IOptionsMonitor<JwtBearerOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-            : base(options, logger, encoder, clock)
-        { }
+        public JwtBearerHandler(
+            IOptionsMonitor<JwtBearerOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock
+        ) : base(options, logger, encoder, clock) { }
 
         /// <summary>
         /// The handler calls methods on the events which give the application control at certain points where processing is occurring. 
@@ -44,7 +47,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         }
 
         /// <inheritdoc />
-        protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new JwtBearerEvents());
+        protected override Task<object> CreateEventsAsync() =>
+            Task.FromResult<object>(new JwtBearerEvents());
 
         /// <summary>
         /// Searches the 'Authorization' header for a 'Bearer' token. If the 'Bearer' token is found, it is validated using <see cref="TokenValidationParameters"/> set in the options.
@@ -92,16 +96,20 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
 
                 if (_configuration == null && Options.ConfigurationManager != null)
                 {
-                    _configuration = await Options.ConfigurationManager.GetConfigurationAsync(Context.RequestAborted);
+                    _configuration = await Options.ConfigurationManager.GetConfigurationAsync(
+                        Context.RequestAborted
+                    );
                 }
 
                 var validationParameters = Options.TokenValidationParameters.Clone();
                 if (_configuration != null)
                 {
                     var issuers = new[] { _configuration.Issuer };
-                    validationParameters.ValidIssuers = validationParameters.ValidIssuers?.Concat(issuers) ?? issuers;
+                    validationParameters.ValidIssuers =
+                        validationParameters.ValidIssuers?.Concat(issuers) ?? issuers;
 
-                    validationParameters.IssuerSigningKeys = validationParameters.IssuerSigningKeys?.Concat(_configuration.SigningKeys)
+                    validationParameters.IssuerSigningKeys =
+                        validationParameters.IssuerSigningKeys?.Concat(_configuration.SigningKeys)
                         ?? _configuration.SigningKeys;
                 }
 
@@ -114,15 +122,22 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                         ClaimsPrincipal principal;
                         try
                         {
-                            principal = validator.ValidateToken(token, validationParameters, out validatedToken);
+                            principal = validator.ValidateToken(
+                                token,
+                                validationParameters,
+                                out validatedToken
+                            );
                         }
                         catch (Exception ex)
                         {
                             Logger.TokenValidationFailed(ex);
 
                             // Refresh the configuration for exceptions that may be caused by key rollovers. The user can also request a refresh in the event.
-                            if (Options.RefreshOnIssuerKeyNotFound && Options.ConfigurationManager != null
-                                && ex is SecurityTokenSignatureKeyNotFoundException)
+                            if (
+                                Options.RefreshOnIssuerKeyNotFound
+                                && Options.ConfigurationManager != null
+                                && ex is SecurityTokenSignatureKeyNotFoundException
+                            )
                             {
                                 Options.ConfigurationManager.RequestRefresh();
                             }
@@ -137,8 +152,11 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
 
                         Logger.TokenValidationSucceeded();
 
-                        var tokenValidatedContext = new TokenValidatedContext(Context, Scheme, Options)
-                        {
+                        var tokenValidatedContext = new TokenValidatedContext(
+                            Context,
+                            Scheme,
+                            Options
+                        ) {
                             Principal = principal,
                             SecurityToken = validatedToken
                         };
@@ -151,10 +169,12 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
 
                         if (Options.SaveToken)
                         {
-                            tokenValidatedContext.Properties.StoreTokens(new[]
-                            {
-                                new AuthenticationToken { Name = "access_token", Value = token }
-                            });
+                            tokenValidatedContext.Properties.StoreTokens(
+                                new[]
+                                {
+                                    new AuthenticationToken { Name = "access_token", Value = token }
+                                }
+                            );
                         }
 
                         tokenValidatedContext.Success();
@@ -164,9 +184,15 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
 
                 if (validationFailures != null)
                 {
-                    var authenticationFailedContext = new AuthenticationFailedContext(Context, Scheme, Options)
-                    {
-                        Exception = (validationFailures.Count == 1) ? validationFailures[0] : new AggregateException(validationFailures)
+                    var authenticationFailedContext = new AuthenticationFailedContext(
+                        Context,
+                        Scheme,
+                        Options
+                    ) {
+                        Exception =
+                            (validationFailures.Count == 1)
+                                ? validationFailures[0]
+                                : new AggregateException(validationFailures)
                     };
 
                     await Events.AuthenticationFailed(authenticationFailedContext);
@@ -178,14 +204,19 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                     return AuthenticateResult.Fail(authenticationFailedContext.Exception);
                 }
 
-                return AuthenticateResult.Fail("No SecurityTokenValidator available for token: " + token ?? "[null]");
+                return AuthenticateResult.Fail(
+                    "No SecurityTokenValidator available for token: " + token ?? "[null]"
+                );
             }
             catch (Exception ex)
             {
                 Logger.ErrorProcessingMessage(ex);
 
-                var authenticationFailedContext = new AuthenticationFailedContext(Context, Scheme, Options)
-                {
+                var authenticationFailedContext = new AuthenticationFailedContext(
+                    Context,
+                    Scheme,
+                    Options
+                ) {
                     Exception = ex
                 };
 
@@ -212,7 +243,9 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
             if (Options.IncludeErrorDetails && eventContext.AuthenticateFailure != null)
             {
                 eventContext.Error = "invalid_token";
-                eventContext.ErrorDescription = CreateErrorDescription(eventContext.AuthenticateFailure);
+                eventContext.ErrorDescription = CreateErrorDescription(
+                    eventContext.AuthenticateFailure
+                );
             }
 
             await Events.Challenge(eventContext);
@@ -223,9 +256,11 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
 
             Response.StatusCode = 401;
 
-            if (string.IsNullOrEmpty(eventContext.Error) &&
-                string.IsNullOrEmpty(eventContext.ErrorDescription) &&
-                string.IsNullOrEmpty(eventContext.ErrorUri))
+            if (
+                string.IsNullOrEmpty(eventContext.Error)
+                && string.IsNullOrEmpty(eventContext.ErrorDescription)
+                && string.IsNullOrEmpty(eventContext.ErrorUri)
+            )
             {
                 Response.Headers.Append(HeaderNames.WWWAuthenticate, Options.Challenge);
             }
@@ -258,8 +293,10 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 }
                 if (!string.IsNullOrEmpty(eventContext.ErrorUri))
                 {
-                    if (!string.IsNullOrEmpty(eventContext.Error) ||
-                        !string.IsNullOrEmpty(eventContext.ErrorDescription))
+                    if (
+                        !string.IsNullOrEmpty(eventContext.Error)
+                        || !string.IsNullOrEmpty(eventContext.ErrorDescription)
+                    )
                     {
                         builder.Append(',');
                     }
@@ -280,7 +317,7 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
             Response.StatusCode = 403;
             return Events.Forbidden(forbiddenContext);
         }
-        
+
         private static string CreateErrorDescription(Exception authFailure)
         {
             IReadOnlyCollection<Exception> exceptions;
@@ -302,7 +339,9 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                 switch (ex)
                 {
                     case SecurityTokenInvalidAudienceException stia:
-                        messages.Add($"The audience '{stia.InvalidAudience ?? "(null)"}' is invalid");
+                        messages.Add(
+                            $"The audience '{stia.InvalidAudience ?? "(null)"}' is invalid"
+                        );
                         break;
                     case SecurityTokenInvalidIssuerException stii:
                         messages.Add($"The issuer '{stii.InvalidIssuer ?? "(null)"}' is invalid");
@@ -311,15 +350,21 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
                         messages.Add("The token has no expiration");
                         break;
                     case SecurityTokenInvalidLifetimeException stil:
-                        messages.Add("The token lifetime is invalid; NotBefore: "
-                            + $"'{stil.NotBefore?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'"
-                            + $", Expires: '{stil.Expires?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'");
+                        messages.Add(
+                            "The token lifetime is invalid; NotBefore: "
+                                + $"'{stil.NotBefore?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'"
+                                + $", Expires: '{stil.Expires?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'"
+                        );
                         break;
                     case SecurityTokenNotYetValidException stnyv:
-                        messages.Add($"The token is not valid before '{stnyv.NotBefore.ToString(CultureInfo.InvariantCulture)}'");
+                        messages.Add(
+                            $"The token is not valid before '{stnyv.NotBefore.ToString(CultureInfo.InvariantCulture)}'"
+                        );
                         break;
                     case SecurityTokenExpiredException ste:
-                        messages.Add($"The token expired at '{ste.Expires.ToString(CultureInfo.InvariantCulture)}'");
+                        messages.Add(
+                            $"The token expired at '{ste.Expires.ToString(CultureInfo.InvariantCulture)}'"
+                        );
                         break;
                     case SecurityTokenSignatureKeyNotFoundException _:
                         messages.Add("The signature key was not found");

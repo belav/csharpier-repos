@@ -64,7 +64,7 @@ namespace System.Reflection.PortableExecutable.Tests
 
             var reader3 = peBlock.GetReader(4, 0);
             Assert.Equal(0, reader3.Length);
-            AssertEx.Equal(new byte[] { }, reader3.ReadBytes(0));
+            AssertEx.Equal(new byte[] {  }, reader3.ReadBytes(0));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => peBlock.GetReader(0, 5));
             Assert.Throws<ArgumentOutOfRangeException>(() => peBlock.GetReader(4, 1));
@@ -91,7 +91,7 @@ namespace System.Reflection.PortableExecutable.Tests
 
             var reader3 = peBlock.GetReader(4, 0);
             Assert.Equal(0, reader3.Length);
-            AssertEx.Equal(new byte[] { }, reader3.ReadBytes(0));
+            AssertEx.Equal(new byte[] {  }, reader3.ReadBytes(0));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => peBlock.GetReader(0, 5));
             Assert.Throws<ArgumentOutOfRangeException>(() => peBlock.GetReader(4, 1));
@@ -109,7 +109,7 @@ namespace System.Reflection.PortableExecutable.Tests
 
             AssertEx.Equal(new byte[] { 1, 2, 3, 4 }, peBlock.GetContent());
             AssertEx.Equal(new byte[] { 2, 3 }, peBlock.GetContent(1, 2));
-            AssertEx.Equal(new byte[] { }, peBlock.GetContent(4, 0));
+            AssertEx.Equal(new byte[] {  }, peBlock.GetContent(4, 0));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => peBlock.GetContent(0, 5));
             Assert.Throws<ArgumentOutOfRangeException>(() => peBlock.GetContent(4, 1));
@@ -127,7 +127,7 @@ namespace System.Reflection.PortableExecutable.Tests
 
             AssertEx.Equal(new byte[] { 1, 2, 3, 4 }, peBlock.GetContent());
             AssertEx.Equal(new byte[] { 2, 3 }, peBlock.GetContent(1, 2));
-            AssertEx.Equal(new byte[] { }, peBlock.GetContent(4, 0));
+            AssertEx.Equal(new byte[] {  }, peBlock.GetContent(4, 0));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => peBlock.GetContent(0, 5));
             Assert.Throws<ArgumentOutOfRangeException>(() => peBlock.GetContent(4, 1));

@@ -41,7 +41,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             // Assert
             var written = GetWrittenBytes(context.HttpContext);
             Assert.Equal(expected, written);
-            Assert.Equal("application/json; charset=utf-8", context.HttpContext.Response.ContentType);
+            Assert.Equal(
+                "application/json; charset=utf-8",
+                context.HttpContext.Response.ContentType
+            );
         }
 
         [Fact]
@@ -69,7 +72,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_UsesEncodingSpecifiedInContentType()
         {
             // Arrange
-            var expected = Encoding.Unicode.GetBytes(JsonSerializer.Serialize(new { foo = "abcd" }));
+            var expected = Encoding.Unicode.GetBytes(
+                JsonSerializer.Serialize(new { foo = "abcd" })
+            );
 
             var context = GetActionContext();
             context.HttpContext.Response.ContentType = "text/json; charset=utf-8";
@@ -93,7 +98,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_UsesEncodingSpecifiedInResponseContentType()
         {
             // Arrange
-            var expected = Encoding.Unicode.GetBytes(JsonSerializer.Serialize(new { foo = "abcd" }));
+            var expected = Encoding.Unicode.GetBytes(
+                JsonSerializer.Serialize(new { foo = "abcd" })
+            );
 
             var context = GetActionContext();
             context.HttpContext.Response.ContentType = "text/json; charset=utf-16";
@@ -160,7 +167,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         [InlineData("text/foo; p1=p1-value", "text/foo; p1=p1-value")]
         public async Task ExecuteAsync_NoResultContentTypeSet_UsesDefaultEncoding_DoesNotSetCharset(
             string responseContentType,
-            string expectedContentType)
+            string expectedContentType
+        )
         {
             // Arrange
             var expected = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new { foo = "abcd" }));
@@ -184,9 +192,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_UsesPassedInSerializerSettings()
         {
             // Arrange
-            var expected = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(
-                new { foo = "abcd" },
-                new JsonSerializerOptions { WriteIndented = true }));
+            var expected = Encoding.UTF8.GetBytes(
+                JsonSerializer.Serialize(
+                    new { foo = "abcd" },
+                    new JsonSerializerOptions { WriteIndented = true }
+                )
+            );
 
             var context = GetActionContext();
 
@@ -201,7 +212,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             // Assert
             var written = GetWrittenBytes(context.HttpContext);
             Assert.Equal(expected, written);
-            Assert.Equal("application/json; charset=utf-8", context.HttpContext.Response.ContentType);
+            Assert.Equal(
+                "application/json; charset=utf-8",
+                context.HttpContext.Response.ContentType
+            );
         }
 
         protected abstract object GetIndentedSettings();
@@ -225,7 +239,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             }
             catch (Exception serializerException)
             {
-                var expectedException = Assert.IsType<NotImplementedException>(serializerException.InnerException);
+                var expectedException = Assert.IsType<NotImplementedException>(
+                    serializerException.InnerException
+                );
                 Assert.Equal("Property Age has not been implemented", expectedException.Message);
             }
 
@@ -274,10 +290,20 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_LargePayload_DoesNotPerformSynchronousWrites()
         {
             // Arrange
-            var model = Enumerable.Range(0, 1000).Select(p => new TestModel { Property = new string('a', 5000) }).ToArray();
+            var model = Enumerable.Range(0, 1000)
+                .Select(p => new TestModel { Property = new string('a', 5000) })
+                .ToArray();
 
             var stream = new Mock<Stream>();
-            stream.Setup(v => v.WriteAsync(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
+            stream.Setup(
+                    v =>
+                        v.WriteAsync(
+                            It.IsAny<byte[]>(),
+                            It.IsAny<int>(),
+                            It.IsAny<int>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(Task.CompletedTask)
                 .Verifiable();
             stream.SetupGet(s => s.CanWrite).Returns(true);
@@ -291,7 +317,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             await executor.ExecuteAsync(context, result);
 
             // Assert
-            stream.Verify(v => v.Write(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()), Times.Never());
+            stream.Verify(
+                v => v.Write(It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()),
+                Times.Never()
+            );
             stream.Verify(v => v.Flush(), Times.Never());
         }
 
@@ -305,10 +334,15 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var executor = CreateExecutor();
 
             // Act & Assert
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => executor.ExecuteAsync(context, result));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => executor.ExecuteAsync(context, result)
+            );
 
             // Assert
-            Assert.StartsWith("Property 'JsonResult.SerializerSettings' must be an instance of type", ex.Message);
+            Assert.StartsWith(
+                "Property 'JsonResult.SerializerSettings' must be an instance of type",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -333,7 +367,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         public async Task ExecuteAsync_SerializesAsyncEnumerables()
         {
             // Arrange
-            var expected = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new[] { "Hello", "world" }));
+            var expected = Encoding.UTF8.GetBytes(
+                JsonSerializer.Serialize(new[] { "Hello", "world" })
+            );
 
             var context = GetActionContext();
             var result = new JsonResult(TestAsyncEnumerable());
@@ -365,9 +401,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Assert.Equal(expected, written);
         }
 
-        protected IActionResultExecutor<JsonResult> CreateExecutor() => CreateExecutor(NullLoggerFactory.Instance);
+        protected IActionResultExecutor<JsonResult> CreateExecutor() =>
+            CreateExecutor(NullLoggerFactory.Instance);
 
-        protected abstract IActionResultExecutor<JsonResult> CreateExecutor(ILoggerFactory loggerFactory);
+        protected abstract IActionResultExecutor<JsonResult> CreateExecutor(
+            ILoggerFactory loggerFactory
+        );
 
         private static HttpContext GetHttpContext()
         {
@@ -400,7 +439,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 get
                 {
-                    throw new NotImplementedException($"Property {nameof(Age)} has not been implemented");
+                    throw new NotImplementedException(
+                        $"Property {nameof(Age)} has not been implemented"
+                    );
                 }
             }
         }

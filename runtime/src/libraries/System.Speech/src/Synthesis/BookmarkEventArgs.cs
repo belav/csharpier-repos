@@ -18,17 +18,11 @@ namespace System.Speech.Synthesis
         #region public Properties
         public string Bookmark
         {
-            get
-            {
-                return _bookmark;
-            }
+            get { return _bookmark; }
         }
         public TimeSpan AudioPosition
         {
-            get
-            {
-                return _audioPosition;
-            }
+            get { return _audioPosition; }
         }
 
         #endregion
@@ -39,7 +33,6 @@ namespace System.Speech.Synthesis
 
         // Audio and stream position
         private TimeSpan _audioPosition;
-
         #endregion
     }
 }

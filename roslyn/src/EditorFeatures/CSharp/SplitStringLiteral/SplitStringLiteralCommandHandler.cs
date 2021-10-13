@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public SplitStringLiteralCommandHandler(
             ITextUndoHistoryRegistry undoHistoryRegistry,
-            IEditorOperationsFactoryService editorOperationsFactoryService)
+            IEditorOperationsFactoryService editorOperationsFactoryService
+        )
         {
             _undoHistoryRegistry = undoHistoryRegistry;
             _editorOperationsFactoryService = editorOperationsFactoryService;
@@ -46,11 +47,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
         public string DisplayName => CSharpEditorResources.Split_string;
 
-        public CommandState GetCommandState(ReturnKeyCommandArgs args)
-            => CommandState.Unspecified;
+        public CommandState GetCommandState(ReturnKeyCommandArgs args) => CommandState.Unspecified;
 
-        public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommandWorker(args);
+        public bool ExecuteCommand(ReturnKeyCommandArgs args, CommandExecutionContext context) =>
+            ExecuteCommandWorker(args);
 
         public bool ExecuteCommandWorker(ReturnKeyCommandArgs args)
         {
@@ -100,26 +100,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
 
         private bool SplitString(ITextView textView, ITextBuffer subjectBuffer, SnapshotPoint caret)
         {
-            var document = subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
 
             if (document != null)
             {
-                var options = document.GetOptionsAsync(CancellationToken.None).WaitAndGetResult(CancellationToken.None);
+                var options = document.GetOptionsAsync(CancellationToken.None)
+                    .WaitAndGetResult(CancellationToken.None);
                 var enabled = options.GetOption(SplitStringLiteralOptions.Enabled);
 
                 if (enabled)
                 {
                     using var transaction = CaretPreservingEditTransaction.TryCreate(
-                        CSharpEditorResources.Split_string, textView, _undoHistoryRegistry, _editorOperationsFactoryService);
+                        CSharpEditorResources.Split_string,
+                        textView,
+                        _undoHistoryRegistry,
+                        _editorOperationsFactoryService
+                    );
 
-                    var cursorPosition = SplitStringLiteral(document, options, caret, CancellationToken.None);
+                    var cursorPosition = SplitStringLiteral(
+                        document,
+                        options,
+                        caret,
+                        CancellationToken.None
+                    );
                     if (cursorPosition != null)
                     {
                         var snapshotPoint = new SnapshotPoint(
-                            subjectBuffer.CurrentSnapshot, cursorPosition.Value);
+                            subjectBuffer.CurrentSnapshot,
+                            cursorPosition.Value
+                        );
                         var newCaretPoint = textView.BufferGraph.MapUpToBuffer(
-                            snapshotPoint, PointTrackingMode.Negative, PositionAffinity.Predecessor,
-                            textView.TextBuffer);
+                            snapshotPoint,
+                            PointTrackingMode.Negative,
+                            PositionAffinity.Predecessor,
+                            textView.TextBuffer
+                        );
 
                         if (newCaretPoint != null)
                         {
@@ -150,18 +166,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitStringLiteral
         }
 
         private static int? SplitStringLiteral(
-            Document document, DocumentOptionSet options, int position, CancellationToken cancellationToken)
+            Document document,
+            DocumentOptionSet options,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var useTabs = options.GetOption(FormattingOptions.UseTabs);
             var tabSize = options.GetOption(FormattingOptions.TabSize);
-            var indentStyle = options.GetOption(FormattingOptions.SmartIndent, LanguageNames.CSharp);
+            var indentStyle = options.GetOption(
+                FormattingOptions.SmartIndent,
+                LanguageNames.CSharp
+            );
 
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
             var sourceText = root.SyntaxTree.GetText(cancellationToken);
 
             var splitter = StringSplitter.Create(
-                document, position, root, sourceText,
-                useTabs, tabSize, indentStyle, cancellationToken);
+                document,
+                position,
+                root,
+                sourceText,
+                useTabs,
+                tabSize,
+                indentStyle,
+                cancellationToken
+            );
             if (splitter == null)
             {
                 return null;

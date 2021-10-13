@@ -18,16 +18,19 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
     {
         protected const int Iterations = 4;
 
-        protected static readonly IModelValidatorProvider[] ValidatorProviders = new IModelValidatorProvider[]
-        {
-            new DefaultModelValidatorProvider(),
-            new DataAnnotationsModelValidatorProvider(
-                new ValidationAttributeAdapterProvider(),
-                Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                null),
-        };
+        protected static readonly IModelValidatorProvider[] ValidatorProviders =
+            new IModelValidatorProvider[]
+            {
+                new DefaultModelValidatorProvider(),
+                new DataAnnotationsModelValidatorProvider(
+                    new ValidationAttributeAdapterProvider(),
+                    Options.Create(new MvcDataAnnotationsLocalizationOptions()),
+                    null
+                ),
+            };
 
-        protected static readonly CompositeModelValidatorProvider CompositeModelValidatorProvider = new CompositeModelValidatorProvider(ValidatorProviders);
+        protected static readonly CompositeModelValidatorProvider CompositeModelValidatorProvider =
+            new CompositeModelValidatorProvider(ValidatorProviders);
 
         public abstract object Model { get; }
 
@@ -41,16 +44,22 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
         [GlobalSetup]
         public void Setup()
         {
-            BaselineModelMetadataProvider = CreateModelMetadataProvider(addHasValidatorsProvider: false);
+            BaselineModelMetadataProvider = CreateModelMetadataProvider(
+                addHasValidatorsProvider: false
+            );
             ModelMetadataProvider = CreateModelMetadataProvider(addHasValidatorsProvider: true);
 
-            BaselineModelMetadata = BaselineModelMetadataProvider.GetMetadataForType(Model.GetType());
+            BaselineModelMetadata = BaselineModelMetadataProvider.GetMetadataForType(
+                Model.GetType()
+            );
             ModelMetadata = ModelMetadataProvider.GetMetadataForType(Model.GetType());
             ActionContext = GetActionContext();
             ValidatorCache = new ValidatorCache();
         }
 
-        protected static ModelMetadataProvider CreateModelMetadataProvider(bool addHasValidatorsProvider)
+        protected static ModelMetadataProvider CreateModelMetadataProvider(
+            bool addHasValidatorsProvider
+        )
         {
             var detailsProviders = new List<IMetadataDetailsProvider>
             {
@@ -59,16 +68,27 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks
 
             if (addHasValidatorsProvider)
             {
-                detailsProviders.Add(new HasValidatorsValidationMetadataProvider(ValidatorProviders));
+                detailsProviders.Add(
+                    new HasValidatorsValidationMetadataProvider(ValidatorProviders)
+                );
             }
 
-            var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(detailsProviders);
-            return new DefaultModelMetadataProvider(compositeDetailsProvider, Options.Create(new MvcOptions()));
+            var compositeDetailsProvider = new DefaultCompositeMetadataDetailsProvider(
+                detailsProviders
+            );
+            return new DefaultModelMetadataProvider(
+                compositeDetailsProvider,
+                Options.Create(new MvcOptions())
+            );
         }
 
         protected static ActionContext GetActionContext()
         {
-            return new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            return new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
         }
     }
 }

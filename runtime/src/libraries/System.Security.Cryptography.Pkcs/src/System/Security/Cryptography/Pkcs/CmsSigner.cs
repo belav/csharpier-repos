@@ -19,37 +19,38 @@ namespace System.Security.Cryptography.Pkcs
 
         public X509Certificate2? Certificate { get; set; }
         public AsymmetricAlgorithm? PrivateKey { get; set; }
-        public X509Certificate2Collection Certificates { get; private set; } = new X509Certificate2Collection();
+        public X509Certificate2Collection Certificates { get; private set; } =
+            new X509Certificate2Collection();
         public Oid DigestAlgorithm { get; set; }
         public X509IncludeOption IncludeOption { get; set; }
-        public CryptographicAttributeObjectCollection SignedAttributes { get; private set; } = new CryptographicAttributeObjectCollection();
-        public CryptographicAttributeObjectCollection UnsignedAttributes { get; private set; } = new CryptographicAttributeObjectCollection();
+        public CryptographicAttributeObjectCollection SignedAttributes { get; private set; } =
+            new CryptographicAttributeObjectCollection();
+        public CryptographicAttributeObjectCollection UnsignedAttributes { get; private set; } =
+            new CryptographicAttributeObjectCollection();
 
         public SubjectIdentifierType SignerIdentifierType
         {
             get { return _signerIdentifierType; }
             set
             {
-                if (value < SubjectIdentifierType.IssuerAndSerialNumber || value > SubjectIdentifierType.NoSignature)
-                    throw new ArgumentException(SR.Format(SR.Cryptography_Cms_Invalid_Subject_Identifier_Type, value));
+                if (
+                    value < SubjectIdentifierType.IssuerAndSerialNumber
+                    || value > SubjectIdentifierType.NoSignature
+                )
+                    throw new ArgumentException(
+                        SR.Format(SR.Cryptography_Cms_Invalid_Subject_Identifier_Type, value)
+                    );
                 _signerIdentifierType = value;
             }
         }
 
-        public CmsSigner()
-            : this(SubjectIdentifierType.IssuerAndSerialNumber, null)
-        {
-        }
+        public CmsSigner() : this(SubjectIdentifierType.IssuerAndSerialNumber, null) { }
 
         public CmsSigner(SubjectIdentifierType signerIdentifierType)
-            : this(signerIdentifierType, null)
-        {
-        }
+            : this(signerIdentifierType, null) { }
 
         public CmsSigner(X509Certificate2? certificate)
-            : this(SubjectIdentifierType.IssuerAndSerialNumber, certificate)
-        {
-        }
+            : this(SubjectIdentifierType.IssuerAndSerialNumber, certificate) { }
 
         // This can be implemented with NETCOREAPP2_0 with the cert creation API.
         // * Open the parameters as RSACSP (RSA PKCS#1 signature was hard-coded in netfx)
@@ -62,11 +63,14 @@ namespace System.Security.Cryptography.Pkcs
         // CertCreateSelfSignedCertificate on a split Windows/netstandard implementation.
         public CmsSigner(CspParameters parameters) => throw new PlatformNotSupportedException();
 
-        public CmsSigner(SubjectIdentifierType signerIdentifierType, X509Certificate2? certificate) : this(signerIdentifierType, certificate, null)
-        {
-        }
+        public CmsSigner(SubjectIdentifierType signerIdentifierType, X509Certificate2? certificate)
+            : this(signerIdentifierType, certificate, null) { }
 
-        public CmsSigner(SubjectIdentifierType signerIdentifierType, X509Certificate2? certificate, AsymmetricAlgorithm? privateKey)
+        public CmsSigner(
+            SubjectIdentifierType signerIdentifierType,
+            X509Certificate2? certificate,
+            AsymmetricAlgorithm? privateKey
+        )
         {
             switch (signerIdentifierType)
             {
@@ -119,7 +123,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlyMemory<byte> data,
             string? contentTypeOid,
             bool silent,
-            out X509Certificate2Collection chainCerts)
+            out X509Certificate2Collection chainCerts
+        )
         {
             HashAlgorithmName hashAlgorithmName = PkcsHelpers.GetDigestAlgorithm(DigestAlgorithm);
             IncrementalHash hasher = IncrementalHash.CreateHash(hashAlgorithmName);
@@ -145,7 +150,8 @@ namespace System.Security.Cryptography.Pkcs
                     {
                         AttrType = Oids.MessageDigest,
                         AttrValues = new[] { new ReadOnlyMemory<byte>(writer.Encode()) },
-                    });
+                    }
+                );
 
                 if (contentTypeOid != null)
                 {
@@ -157,14 +163,16 @@ namespace System.Security.Cryptography.Pkcs
                         {
                             AttrType = Oids.ContentType,
                             AttrValues = new[] { new ReadOnlyMemory<byte>(writer.Encode()) },
-                        });
+                        }
+                    );
                 }
 
                 // Use the serializer/deserializer to DER-normalize the attribute order.
                 SignedAttributesSet signedAttrsSet = default;
                 signedAttrsSet.SignedAttributes = PkcsHelpers.NormalizeAttributeSet(
                     signedAttrs.ToArray(),
-                    normalized => hasher.AppendData(normalized));
+                    normalized => hasher.AppendData(normalized)
+                );
 
                 // Since this contains user data in a context where BER is permitted, use BER.
                 // There shouldn't be any observable difference here between BER and DER, though,
@@ -191,7 +199,8 @@ namespace System.Security.Cryptography.Pkcs
                     newSignerInfo.Version = 1;
                     break;
                 case SubjectIdentifierType.SubjectKeyIdentifier:
-                    newSignerInfo.Sid.SubjectKeyIdentifier = PkcsPal.Instance.GetSubjectKeyIdentifier(Certificate!);
+                    newSignerInfo.Sid.SubjectKeyIdentifier =
+                        PkcsPal.Instance.GetSubjectKeyIdentifier(Certificate!);
                     newSignerInfo.Version = 3;
                     break;
                 case SubjectIdentifierType.NoSignature:
@@ -211,7 +220,9 @@ namespace System.Security.Cryptography.Pkcs
             {
                 List<AttributeAsn> attrs = BuildAttributes(UnsignedAttributes);
 
-                newSignerInfo.UnsignedAttributes = PkcsHelpers.NormalizeAttributeSet(attrs.ToArray());
+                newSignerInfo.UnsignedAttributes = PkcsHelpers.NormalizeAttributeSet(
+                    attrs.ToArray()
+                );
             }
 
             bool signed;
@@ -233,12 +244,15 @@ namespace System.Security.Cryptography.Pkcs
                     PrivateKey,
                     silent,
                     out signatureAlgorithm,
-                    out signatureValue);
+                    out signatureValue
+                );
             }
 
             if (!signed)
             {
-                throw new CryptographicException(SR.Cryptography_Cms_CannotDetermineSignatureAlgorithm);
+                throw new CryptographicException(
+                    SR.Cryptography_Cms_CannotDetermineSignatureAlgorithm
+                );
             }
 
             newSignerInfo.SignatureValue = signatureValue;
@@ -276,7 +290,9 @@ namespace System.Security.Cryptography.Pkcs
                                 }
                                 else
                                 {
-                                    throw new CryptographicException(SR.Cryptography_Cms_IncompleteCertChain);
+                                    throw new CryptographicException(
+                                        SR.Cryptography_Cms_IncompleteCertChain
+                                    );
                                 }
                             }
                         }
@@ -296,9 +312,12 @@ namespace System.Security.Cryptography.Pkcs
                     {
                         X509Certificate2 cert = elements[i].Certificate;
 
-                        if (i == last &&
-                            IncludeOption == X509IncludeOption.ExcludeRoot &&
-                            cert.SubjectName.RawData.AsSpan().SequenceEqual(cert.IssuerName.RawData))
+                        if (
+                            i == last
+                            && IncludeOption == X509IncludeOption.ExcludeRoot
+                            && cert.SubjectName.RawData.AsSpan()
+                                .SequenceEqual(cert.IssuerName.RawData)
+                        )
                         {
                             break;
                         }
@@ -312,7 +331,9 @@ namespace System.Security.Cryptography.Pkcs
             return newSignerInfo;
         }
 
-        internal static List<AttributeAsn> BuildAttributes(CryptographicAttributeObjectCollection? attributes)
+        internal static List<AttributeAsn> BuildAttributes(
+            CryptographicAttributeObjectCollection? attributes
+        )
         {
             List<AttributeAsn> signedAttrs = new List<AttributeAsn>();
 

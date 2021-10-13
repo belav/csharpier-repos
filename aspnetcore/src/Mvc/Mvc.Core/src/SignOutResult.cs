@@ -19,10 +19,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <summary>
         /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
         /// </summary>
-        public SignOutResult()
-            : this(Array.Empty<string>())
-        {
-        }
+        public SignOutResult() : this(Array.Empty<string>()) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
@@ -30,19 +27,14 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
         public SignOutResult(AuthenticationProperties properties)
-            : this(Array.Empty<string>(), properties)
-        {
-        }
+            : this(Array.Empty<string>(), properties) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SignOutResult"/> with the
         /// specified authentication scheme.
         /// </summary>
         /// <param name="authenticationScheme">The authentication scheme to use when signing out the user.</param>
-        public SignOutResult(string authenticationScheme)
-            : this(new[] { authenticationScheme })
-        {
-        }
+        public SignOutResult(string authenticationScheme) : this(new[] { authenticationScheme }) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -50,9 +42,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         /// <param name="authenticationSchemes">The authentication schemes to use when signing out the user.</param>
         public SignOutResult(IList<string> authenticationSchemes)
-            : this(authenticationSchemes, properties: null)
-        {
-        }
+            : this(authenticationSchemes, properties: null) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -61,9 +51,7 @@ namespace Microsoft.AspNetCore.Mvc
         /// <param name="authenticationScheme">The authentication schemes to use when signing out the user.</param>
         /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
         public SignOutResult(string authenticationScheme, AuthenticationProperties? properties)
-            : this(new[] { authenticationScheme }, properties)
-        {
-        }
+            : this(new[] { authenticationScheme }, properties) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -71,9 +59,14 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         /// <param name="authenticationSchemes">The authentication scheme to use when signing out the user.</param>
         /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
-        public SignOutResult(IList<string> authenticationSchemes, AuthenticationProperties? properties)
+        public SignOutResult(
+            IList<string> authenticationSchemes,
+            AuthenticationProperties? properties
+        )
         {
-            AuthenticationSchemes = authenticationSchemes ?? throw new ArgumentNullException(nameof(authenticationSchemes));
+            AuthenticationSchemes =
+                authenticationSchemes
+                ?? throw new ArgumentNullException(nameof(authenticationSchemes));
             Properties = properties;
         }
 
@@ -99,11 +92,14 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 throw new InvalidOperationException(
                     Resources.FormatPropertyOfTypeCannotBeNull(
-                        /* property: */ nameof(AuthenticationSchemes),
-                        /* type: */ nameof(SignOutResult)));
+                        /* property: */nameof(AuthenticationSchemes),
+                        /* type: */nameof(SignOutResult)
+                    )
+                );
             }
 
-            var loggerFactory = context.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>();
+            var loggerFactory =
+                context.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>();
             var logger = loggerFactory.CreateLogger<SignOutResult>();
 
             logger.SignOutResultExecuting(AuthenticationSchemes);

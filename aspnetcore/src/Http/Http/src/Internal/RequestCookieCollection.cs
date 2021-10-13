@@ -18,19 +18,25 @@ namespace Microsoft.AspNetCore.Http
         private static readonly string[] EmptyKeys = Array.Empty<string>();
         private static readonly Enumerator EmptyEnumerator = new Enumerator();
         // Pre-box
-        private static readonly IEnumerator<KeyValuePair<string, string>> EmptyIEnumeratorType = EmptyEnumerator;
+        private static readonly IEnumerator<KeyValuePair<string, string>> EmptyIEnumeratorType =
+            EmptyEnumerator;
         private static readonly IEnumerator EmptyIEnumerator = EmptyEnumerator;
 
         private AdaptiveCapacityDictionary<string, string> Store { get; set; }
 
         public RequestCookieCollection()
         {
-            Store = new AdaptiveCapacityDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            Store = new AdaptiveCapacityDictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public RequestCookieCollection(int capacity)
         {
-            Store = new AdaptiveCapacityDictionary<string, string>(capacity, StringComparer.OrdinalIgnoreCase);
+            Store = new AdaptiveCapacityDictionary<string, string>(
+                capacity,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         // For tests
@@ -61,10 +67,17 @@ namespace Microsoft.AspNetCore.Http
             }
         }
 
-        public static RequestCookieCollection Parse(StringValues values)
-           => ParseInternal(values, AppContext.TryGetSwitch(ResponseCookies.EnableCookieNameEncoding, out var enabled) && enabled);
+        public static RequestCookieCollection Parse(StringValues values) =>
+            ParseInternal(
+                values,
+                AppContext.TryGetSwitch(ResponseCookies.EnableCookieNameEncoding, out var enabled)
+                    && enabled
+            );
 
-        internal static RequestCookieCollection ParseInternal(StringValues values, bool enableCookieNameEncoding)
+        internal static RequestCookieCollection ParseInternal(
+            StringValues values,
+            bool enableCookieNameEncoding
+        )
         {
             if (values.Count == 0)
             {
@@ -73,7 +86,14 @@ namespace Microsoft.AspNetCore.Http
             var collection = new RequestCookieCollection(values.Count);
             var store = collection.Store!;
 
-            if (CookieHeaderParserShared.TryParseValues(values, store, enableCookieNameEncoding, supportsMultipleValues: true))
+            if (
+                CookieHeaderParserShared.TryParseValues(
+                    values,
+                    store,
+                    enableCookieNameEncoding,
+                    supportsMultipleValues: true
+                )
+            )
             {
                 if (store.Count == 0)
                 {
@@ -148,7 +168,9 @@ namespace Microsoft.AspNetCore.Http
         /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
         /// </summary>
         /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the collection.</returns>
-        IEnumerator<KeyValuePair<string, string>> IEnumerable<KeyValuePair<string, string>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, string>> IEnumerable<
+            KeyValuePair<string, string>
+        >.GetEnumerator()
         {
             if (Store == null || Store.Count == 0)
             {
@@ -180,7 +202,9 @@ namespace Microsoft.AspNetCore.Http
             private AdaptiveCapacityDictionary<string, string>.Enumerator _dictionaryEnumerator;
             private bool _notEmpty;
 
-            internal Enumerator(AdaptiveCapacityDictionary<string, string>.Enumerator dictionaryEnumerator)
+            internal Enumerator(
+                AdaptiveCapacityDictionary<string, string>.Enumerator dictionaryEnumerator
+            )
             {
                 _dictionaryEnumerator = dictionaryEnumerator;
                 _notEmpty = true;
@@ -202,7 +226,10 @@ namespace Microsoft.AspNetCore.Http
                     if (_notEmpty)
                     {
                         var current = _dictionaryEnumerator.Current;
-                        return new KeyValuePair<string, string>(current.Key, (string)current.Value!);
+                        return new KeyValuePair<string, string>(
+                            current.Key,
+                            (string)current.Value!
+                        );
                     }
                     return default(KeyValuePair<string, string>);
                 }
@@ -210,15 +237,10 @@ namespace Microsoft.AspNetCore.Http
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Reset()
             {

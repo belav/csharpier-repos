@@ -16,17 +16,17 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InternalSolutionCrawlerOptionsProvider()
-        {
-        }
+        public InternalSolutionCrawlerOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            InternalSolutionCrawlerOptions.SolutionCrawler,
-            InternalSolutionCrawlerOptions.ActiveFileWorkerBackOffTimeSpanInMS,
-            InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS,
-            InternalSolutionCrawlerOptions.EntireProjectWorkerBackOffTimeSpanInMS,
-            InternalSolutionCrawlerOptions.SemanticChangeBackOffTimeSpanInMS,
-            InternalSolutionCrawlerOptions.ProjectPropagationBackOffTimeSpanInMS,
-            InternalSolutionCrawlerOptions.PreviewBackOffTimeSpanInMS);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                InternalSolutionCrawlerOptions.SolutionCrawler,
+                InternalSolutionCrawlerOptions.ActiveFileWorkerBackOffTimeSpanInMS,
+                InternalSolutionCrawlerOptions.AllFilesWorkerBackOffTimeSpanInMS,
+                InternalSolutionCrawlerOptions.EntireProjectWorkerBackOffTimeSpanInMS,
+                InternalSolutionCrawlerOptions.SemanticChangeBackOffTimeSpanInMS,
+                InternalSolutionCrawlerOptions.ProjectPropagationBackOffTimeSpanInMS,
+                InternalSolutionCrawlerOptions.PreviewBackOffTimeSpanInMS
+            );
     }
 }

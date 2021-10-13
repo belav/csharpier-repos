@@ -8,7 +8,6 @@ using System.Runtime.CompilerServices;
 
 namespace Runtime_1241
 {
-
     public struct Vertex
     {
         public Vector3 Position;
@@ -34,20 +33,30 @@ namespace Runtime_1241
                 bug.MutateBroken();
 
                 Console.WriteLine(bug.Vertices[0].Position);
-                if ((bug.Vertices[0].Position.X != 1) || (bug.Vertices[0].Position.Y != 1) || (bug.Vertices[0].Position.Z != 1))
+                if (
+                    (bug.Vertices[0].Position.X != 1)
+                    || (bug.Vertices[0].Position.Y != 1)
+                    || (bug.Vertices[0].Position.Z != 1)
+                )
                 {
                     returnVal = -1;
                 }
             }
 
             // Works
-            Console.WriteLine("Replacing array element with new struct, stored in a local variable first");
+            Console.WriteLine(
+                "Replacing array element with new struct, stored in a local variable first"
+            );
             {
                 var bug = Bug.Create();
                 bug.MutateWorks();
 
                 Console.WriteLine(bug.Vertices[0].Position);
-                if ((bug.Vertices[0].Position.X != 1) || (bug.Vertices[0].Position.Y != 1) || (bug.Vertices[0].Position.Z != 1))
+                if (
+                    (bug.Vertices[0].Position.X != 1)
+                    || (bug.Vertices[0].Position.Y != 1)
+                    || (bug.Vertices[0].Position.Z != 1)
+                )
                 {
                     returnVal = -1;
                 }
@@ -63,7 +72,9 @@ namespace Runtime_1241
         {
             return new Bug
             {
-                Vertices = Enumerable.Range(1, 100).Select(i => new Vertex(new Vector3(i), Vector2.One)).ToArray()
+                Vertices = Enumerable.Range(1, 100)
+                    .Select(i => new Vertex(new Vector3(i), Vector2.One))
+                    .ToArray()
             };
         }
 

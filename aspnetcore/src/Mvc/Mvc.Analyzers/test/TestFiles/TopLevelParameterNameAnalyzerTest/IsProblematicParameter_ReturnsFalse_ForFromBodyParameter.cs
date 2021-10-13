@@ -4,6 +4,8 @@
     {
         public string Model { get; set; }
 
-        public void ActionMethod([FromBody] IsProblematicParameter_ReturnsFalse_ForFromBodyParameter model) { }
+        public void ActionMethod(
+            [FromBody] IsProblematicParameter_ReturnsFalse_ForFromBodyParameter model
+        ) { }
     }
 }

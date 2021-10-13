@@ -73,14 +73,16 @@ public class Reflection
         try
         {
             Console.WriteLine("Scenario: ActivateCOMType");
-            var contextMenu = (NETServer.ContextMenu)Activator.CreateInstance(typeof(NETServer.ContextMenu));
+            var contextMenu = (NETServer.ContextMenu)Activator.CreateInstance(
+                typeof(NETServer.ContextMenu)
+            );
 
             // Non-Windows should throw PlatformNotSupportedException
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 return false;
             }
-            
+
             if (contextMenu == null)
             {
                 Console.WriteLine("ActivateCOMType failed");
@@ -89,7 +91,8 @@ public class Reflection
 
             return true;
         }
-        catch (PlatformNotSupportedException) when (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        catch (PlatformNotSupportedException)
+            when (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             return true;
         }

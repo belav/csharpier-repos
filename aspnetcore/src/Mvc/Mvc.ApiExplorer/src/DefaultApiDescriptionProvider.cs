@@ -44,12 +44,17 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             IInlineConstraintResolver constraintResolver,
             IModelMetadataProvider modelMetadataProvider,
             IActionResultTypeMapper mapper,
-            IOptions<RouteOptions> routeOptions)
+            IOptions<RouteOptions> routeOptions
+        )
         {
             _mvcOptions = optionsAccessor.Value;
             _constraintResolver = constraintResolver;
             _modelMetadataProvider = modelMetadataProvider;
-            _responseTypeProvider = new ApiResponseTypeProvider(modelMetadataProvider, mapper, _mvcOptions);
+            _responseTypeProvider = new ApiResponseTypeProvider(
+                modelMetadataProvider,
+                mapper,
+                _mvcOptions
+            );
             _routeOptions = routeOptions.Value;
         }
 
@@ -66,7 +71,10 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
             foreach (var action in context.Actions.OfType<ControllerActionDescriptor>())
             {
-                if (action.AttributeRouteInfo != null && action.AttributeRouteInfo.SuppressPathMatching)
+                if (
+                    action.AttributeRouteInfo != null
+                    && action.AttributeRouteInfo.SuppressPathMatching
+                )
                 {
                     continue;
                 }
@@ -77,21 +85,22 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     var httpMethods = GetHttpMethods(action);
                     foreach (var httpMethod in httpMethods)
                     {
-                        context.Results.Add(CreateApiDescription(action, httpMethod, extensionData.GroupName));
+                        context.Results.Add(
+                            CreateApiDescription(action, httpMethod, extensionData.GroupName)
+                        );
                     }
                 }
             }
         }
 
         /// <inheritdoc />
-        public void OnProvidersExecuted(ApiDescriptionProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(ApiDescriptionProviderContext context) { }
 
         private ApiDescription CreateApiDescription(
             ControllerActionDescriptor action,
             string httpMethod,
-            string groupName)
+            string groupName
+        )
         {
             var parsedTemplate = ParseTemplate(action);
 
@@ -103,9 +112,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 RelativePath = GetRelativePath(parsedTemplate),
             };
 
-            var templateParameters = parsedTemplate?.Parameters?.ToList() ?? new List<TemplatePart>();
+            var templateParameters =
+                parsedTemplate?.Parameters?.ToList() ?? new List<TemplatePart>();
 
-            var parameterContext = new ApiParameterContext(_modelMetadataProvider, action, templateParameters);
+            var parameterContext = new ApiParameterContext(
+                _modelMetadataProvider,
+                action,
+                templateParameters
+            );
 
             foreach (var parameter in GetParameters(parameterContext))
             {
@@ -142,10 +156,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                         // Add all declared media types since FormFiles do not get processed by formatters.
                         foreach (var contentType in contentTypes)
                         {
-                            apiDescription.SupportedRequestFormats.Add(new ApiRequestFormat
-                            {
-                                MediaType = contentType,
-                            });
+                            apiDescription.SupportedRequestFormats.Add(
+                                new ApiRequestFormat { MediaType = contentType, }
+                            );
                         }
                     }
                 }
@@ -164,12 +177,17 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     var visitor = new PseudoModelBindingVisitor(context, actionParameter);
 
                     ModelMetadata metadata;
-                    if (actionParameter is ControllerParameterDescriptor controllerParameterDescriptor &&
-                        _modelMetadataProvider is ModelMetadataProvider provider)
+                    if (
+                        actionParameter
+                            is ControllerParameterDescriptor controllerParameterDescriptor
+                        && _modelMetadataProvider is ModelMetadataProvider provider
+                    )
                     {
                         // The default model metadata provider derives from ModelMetadataProvider
                         // and can therefore supply information about attributes applied to parameters.
-                        metadata = provider.GetMetadataForParameter(controllerParameterDescriptor.ParameterInfo);
+                        metadata = provider.GetMetadataForParameter(
+                            controllerParameterDescriptor.ParameterInfo
+                        );
                     }
                     else
                     {
@@ -177,13 +195,16 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                         // only implements the older IModelMetadataProvider interface, access the more
                         // limited metadata information it supplies. In this scenario, validation attributes
                         // are not supported on parameters.
-                        metadata = _modelMetadataProvider.GetMetadataForType(actionParameter.ParameterType);
+                        metadata = _modelMetadataProvider.GetMetadataForType(
+                            actionParameter.ParameterType
+                        );
                     }
 
                     var bindingContext = ApiParameterDescriptionContext.GetContext(
                         metadata,
                         actionParameter.BindingInfo,
-                        propertyName: actionParameter.Name);
+                        propertyName: actionParameter.Name
+                    );
                     visitor.WalkParameter(bindingContext);
                 }
             }
@@ -195,12 +216,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     var visitor = new PseudoModelBindingVisitor(context, actionParameter);
                     var modelMetadata = context.MetadataProvider.GetMetadataForProperty(
                         containerType: context.ActionDescriptor.ControllerTypeInfo.AsType(),
-                        propertyName: actionParameter.Name);
+                        propertyName: actionParameter.Name
+                    );
 
                     var bindingContext = ApiParameterDescriptionContext.GetContext(
                         modelMetadata,
                         actionParameter.BindingInfo,
-                        propertyName: actionParameter.Name);
+                        propertyName: actionParameter.Name
+                    );
 
                     visitor.WalkParameter(bindingContext);
                 }
@@ -232,7 +255,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
         private void ProcessRouteParameters(ApiParameterContext context)
         {
-            var routeParameters = new Dictionary<string, ApiParameterRouteInfo>(StringComparer.OrdinalIgnoreCase);
+            var routeParameters = new Dictionary<string, ApiParameterRouteInfo>(
+                StringComparer.OrdinalIgnoreCase
+            );
             foreach (var routeParameter in context.RouteParameters)
             {
                 routeParameters.Add(routeParameter.Name, CreateRouteInfo(routeParameter));
@@ -240,17 +265,21 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
             foreach (var parameter in context.Results)
             {
-                if (parameter.Source == BindingSource.Path ||
-                    parameter.Source == BindingSource.ModelBinding ||
-                    parameter.Source == BindingSource.Custom)
+                if (
+                    parameter.Source == BindingSource.Path
+                    || parameter.Source == BindingSource.ModelBinding
+                    || parameter.Source == BindingSource.Custom
+                )
                 {
                     if (routeParameters.TryGetValue(parameter.Name, out var routeInfo))
                     {
                         parameter.RouteInfo = routeInfo;
                         routeParameters.Remove(parameter.Name);
 
-                        if (parameter.Source == BindingSource.ModelBinding &&
-                            !parameter.RouteInfo.IsOptional)
+                        if (
+                            parameter.Source == BindingSource.ModelBinding
+                            && !parameter.RouteInfo.IsOptional
+                        )
                         {
                             // If we didn't see any information about the parameter, but we have
                             // a route parameter that matches, let's switch it to path.
@@ -264,12 +293,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             // a partner.
             foreach (var routeParameter in routeParameters)
             {
-                context.Results.Add(new ApiParameterDescription()
-                {
-                    Name = routeParameter.Key,
-                    RouteInfo = routeParameter.Value,
-                    Source = BindingSource.Path,
-                });
+                context.Results.Add(
+                    new ApiParameterDescription()
+                    {
+                        Name = routeParameter.Key,
+                        RouteInfo = routeParameter.Value,
+                        Source = BindingSource.Path,
+                    }
+                );
             }
         }
 
@@ -279,13 +310,18 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             {
                 if (parameter.Source == BindingSource.Body)
                 {
-                    if (parameter.BindingInfo == null || parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Default)
+                    if (
+                        parameter.BindingInfo == null
+                        || parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Default
+                    )
                     {
                         parameter.IsRequired = !mvcOptions.AllowEmptyInputInBodyModelBinding;
                     }
                     else
                     {
-                        parameter.IsRequired = !(parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Allow);
+                        parameter.IsRequired = !(
+                            parameter.BindingInfo.EmptyBodyBehavior == EmptyBodyBehavior.Allow
+                        );
                     }
                 }
 
@@ -294,7 +330,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     parameter.IsRequired = true;
                 }
 
-                if (parameter.Source == BindingSource.Path && parameter.RouteInfo != null && !parameter.RouteInfo.IsOptional)
+                if (
+                    parameter.Source == BindingSource.Path
+                    && parameter.RouteInfo != null
+                    && !parameter.RouteInfo.IsOptional
+                )
                 {
                     parameter.IsRequired = true;
                 }
@@ -311,8 +351,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 }
                 else
                 {
-                    if (parameter.ParameterDescriptor is ControllerParameterDescriptor controllerParameter &&
-                        ParameterDefaultValues.TryGetDeclaredParameterDefaultValue(controllerParameter.ParameterInfo, out var defaultValue))
+                    if (
+                        parameter.ParameterDescriptor
+                            is ControllerParameterDescriptor controllerParameter
+                        && ParameterDefaultValues.TryGetDeclaredParameterDefaultValue(
+                            controllerParameter.ParameterInfo,
+                            out var defaultValue
+                        )
+                    )
                     {
                         parameter.DefaultValue = defaultValue;
                     }
@@ -343,7 +389,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         {
             if (action.ActionConstraints != null && action.ActionConstraints.Count > 0)
             {
-                return action.ActionConstraints.OfType<HttpMethodActionConstraint>().SelectMany(c => c.HttpMethods);
+                return action.ActionConstraints.OfType<HttpMethodActionConstraint>()
+                    .SelectMany(c => c.HttpMethods);
             }
             else
             {
@@ -377,9 +424,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 {
                     if (part.IsLiteral)
                     {
-                        currentSegment += _routeOptions.LowercaseUrls ?
-                            part.Text.ToLowerInvariant() :
-                            part.Text;
+                        currentSegment += _routeOptions.LowercaseUrls
+                            ? part.Text.ToLowerInvariant()
+                            : part.Text;
                     }
                     else if (part.IsParameter)
                     {
@@ -393,14 +440,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             return string.Join("/", segments);
         }
 
-        private IReadOnlyList<ApiRequestFormat> GetSupportedFormats(MediaTypeCollection contentTypes, Type type)
+        private IReadOnlyList<ApiRequestFormat> GetSupportedFormats(
+            MediaTypeCollection contentTypes,
+            Type type
+        )
         {
             if (contentTypes.Count == 0)
             {
-                contentTypes = new MediaTypeCollection
-                {
-                    (string)null,
-                };
+                contentTypes = new MediaTypeCollection { (string)null, };
             }
 
             var results = new List<ApiRequestFormat>();
@@ -408,19 +455,26 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             {
                 foreach (var formatter in _mvcOptions.InputFormatters)
                 {
-                    if (formatter is IApiRequestFormatMetadataProvider requestFormatMetadataProvider)
+                    if (
+                        formatter is IApiRequestFormatMetadataProvider requestFormatMetadataProvider
+                    )
                     {
-                        var supportedTypes = requestFormatMetadataProvider.GetSupportedContentTypes(contentType, type);
+                        var supportedTypes = requestFormatMetadataProvider.GetSupportedContentTypes(
+                            contentType,
+                            type
+                        );
 
                         if (supportedTypes != null)
                         {
                             foreach (var supportedType in supportedTypes)
                             {
-                                results.Add(new ApiRequestFormat()
-                                {
-                                    Formatter = formatter,
-                                    MediaType = supportedType,
-                                });
+                                results.Add(
+                                    new ApiRequestFormat()
+                                    {
+                                        Formatter = formatter,
+                                        MediaType = supportedType,
+                                    }
+                                );
                             }
                         }
                     }
@@ -430,7 +484,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             return results;
         }
 
-        private static MediaTypeCollection GetDeclaredContentTypes(IApiRequestMetadataProvider[] requestMetadataAttributes)
+        private static MediaTypeCollection GetDeclaredContentTypes(
+            IApiRequestMetadataProvider[] requestMetadataAttributes
+        )
         {
             // Walk through all 'filter' attributes in order, and allow each one to see or override
             // the results of the previous ones. This is similar to the execution path for content-negotiation.
@@ -446,7 +502,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             return contentTypes;
         }
 
-        private IApiRequestMetadataProvider[] GetRequestMetadataAttributes(ControllerActionDescriptor action)
+        private IApiRequestMetadataProvider[] GetRequestMetadataAttributes(
+            ControllerActionDescriptor action
+        )
         {
             if (action.FilterDescriptors == null)
             {
@@ -457,8 +515,7 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             // while searching for a filter that implements IApiRequestMetadataProvider.
             //
             // The workaround for that is to implement the metadata interface on the IFilterFactory.
-            return action.FilterDescriptors
-                .Select(fd => fd.Filter)
+            return action.FilterDescriptors.Select(fd => fd.Filter)
                 .OfType<IApiRequestMetadataProvider>()
                 .ToArray();
         }
@@ -478,7 +535,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             public static ApiParameterDescriptionContext GetContext(
                 ModelMetadata metadata,
                 BindingInfo bindingInfo,
-                string propertyName)
+                string propertyName
+            )
             {
                 // BindingMetadata can be null if the metadata represents properties.
                 return new ApiParameterDescriptionContext
@@ -494,7 +552,10 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
 
         private class PseudoModelBindingVisitor
         {
-            public PseudoModelBindingVisitor(ApiParameterContext context, ParameterDescriptor parameter)
+            public PseudoModelBindingVisitor(
+                ApiParameterContext context,
+                ParameterDescriptor parameter
+            )
             {
                 Context = context;
                 Parameter = parameter;
@@ -521,7 +582,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             private void Visit(
                 ApiParameterDescriptionContext bindingContext,
                 BindingSource ambientSource,
-                string containerName)
+                string containerName
+            )
             {
                 var source = bindingContext.BindingSource;
                 if (source != null && source.IsGreedy)
@@ -544,11 +606,15 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 //
                 //  3)  Types with no properties. Obviously nothing to explore there.
                 //
-                if (modelMetadata.IsEnumerableType ||
-                    !modelMetadata.IsComplexType ||
-                    modelMetadata.Properties.Count == 0)
+                if (
+                    modelMetadata.IsEnumerableType
+                    || !modelMetadata.IsComplexType
+                    || modelMetadata.Properties.Count == 0
+                )
                 {
-                    Context.Results.Add(CreateResult(bindingContext, source ?? ambientSource, containerName));
+                    Context.Results.Add(
+                        CreateResult(bindingContext, source ?? ambientSource, containerName)
+                    );
                     return;
                 }
 
@@ -585,12 +651,16 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 {
                     var propertyMetadata = metadataProperties[i];
                     var key = new PropertyKey(propertyMetadata, source);
-                    var bindingInfo = BindingInfo.GetBindingInfo(Enumerable.Empty<object>(), propertyMetadata);
+                    var bindingInfo = BindingInfo.GetBindingInfo(
+                        Enumerable.Empty<object>(),
+                        propertyMetadata
+                    );
 
                     var propertyContext = ApiParameterDescriptionContext.GetContext(
                         propertyMetadata,
                         bindingInfo: bindingInfo,
-                        propertyName: null);
+                        propertyName: null
+                    );
 
                     if (Visited.Add(key))
                     {
@@ -600,7 +670,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                     else
                     {
                         // This is cycle, so just add a result rather than traversing.
-                        Context.Results.Add(CreateResult(propertyContext, source ?? ambientSource, newContainerName));
+                        Context.Results.Add(
+                            CreateResult(propertyContext, source ?? ambientSource, newContainerName)
+                        );
                     }
                 }
             }
@@ -608,7 +680,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             private ApiParameterDescription CreateResult(
                 ApiParameterDescriptionContext bindingContext,
                 BindingSource source,
-                string containerName)
+                string containerName
+            )
             {
                 return new ApiParameterDescription()
                 {
@@ -621,9 +694,14 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
                 };
             }
 
-            private static string GetName(string containerName, ApiParameterDescriptionContext metadata)
+            private static string GetName(
+                string containerName,
+                ApiParameterDescriptionContext metadata
+            )
             {
-                var propertyName = !string.IsNullOrEmpty(metadata.BinderModelName) ? metadata.BinderModelName : metadata.PropertyName;
+                var propertyName = !string.IsNullOrEmpty(metadata.BinderModelName)
+                    ? metadata.BinderModelName
+                    : metadata.PropertyName;
                 return ModelNames.CreatePropertyModelName(containerName, propertyName);
             }
 
@@ -647,10 +725,9 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
             {
                 public bool Equals(PropertyKey x, PropertyKey y)
                 {
-                    return
-                        x.ContainerType == y.ContainerType &&
-                        x.PropertyName == y.PropertyName &&
-                        x.Source == y.Source;
+                    return x.ContainerType == y.ContainerType
+                        && x.PropertyName == y.PropertyName
+                        && x.Source == y.Source;
                 }
 
                 public int GetHashCode(PropertyKey obj)

@@ -26,7 +26,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
     public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
     {
 #if LIBUV
-        [OSSkipCondition(OperatingSystems.Windows, SkipReason = "Libuv does not support unix domain sockets on Windows.")]
+        [OSSkipCondition(
+            OperatingSystems.Windows,
+            SkipReason = "Libuv does not support unix domain sockets on Windows."
+        )]
 #else
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_RS4)]
 #endif
@@ -40,22 +43,30 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
             try
             {
-                var serverConnectionCompletedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var serverConnectionCompletedTcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 async Task EchoServer(ConnectionContext connection)
                 {
                     // For graceful shutdown
-                    var notificationFeature = connection.Features.Get<IConnectionLifetimeNotificationFeature>();
+                    var notificationFeature =
+                        connection.Features.Get<IConnectionLifetimeNotificationFeature>();
 
                     try
                     {
                         while (true)
                         {
-                            var result = await connection.Transport.Input.ReadAsync(notificationFeature.ConnectionClosedRequested);
+                            var result = await connection.Transport.Input.ReadAsync(
+                                notificationFeature.ConnectionClosedRequested
+                            );
 
                             if (result.IsCompleted)
                             {
-                                Logger.LogDebug("Application receive loop ending for connection {connectionId}.", connection.ConnectionId);
+                                Logger.LogDebug(
+                                    "Application receive loop ending for connection {connectionId}.",
+                                    connection.ConnectionId
+                                );
                                 break;
                             }
 
@@ -66,7 +77,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     }
                     catch (OperationCanceledException)
                     {
-                        Logger.LogDebug("Graceful shutdown triggered for {connectionId}.", connection.ConnectionId);
+                        Logger.LogDebug(
+                            "Graceful shutdown triggered for {connectionId}.",
+                            connection.ConnectionId
+                        );
                     }
                     finally
                     {
@@ -75,27 +89,40 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                 }
 
                 var hostBuilder = TransportSelector.GetHostBuilder()
-                    .ConfigureWebHost(webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseKestrel(o =>
-                            {
-                                o.ListenUnixSocket(path, builder =>
-                                {
-                                    builder.Run(EchoServer);
-                                });
-                            })
-                            .Configure(c => { });
-                    })
+                    .ConfigureWebHost(
+                        webHostBuilder =>
+                        {
+                            webHostBuilder.UseKestrel(
+                                    o =>
+                                    {
+                                        o.ListenUnixSocket(
+                                            path,
+                                            builder =>
+                                            {
+                                                builder.Run(EchoServer);
+                                            }
+                                        );
+                                    }
+                                )
+                                .Configure(c => { });
+                        }
+                    )
                     .ConfigureServices(AddTestLogging);
 
                 using (var host = hostBuilder.Build())
                 {
                     await host.StartAsync().DefaultTimeout();
 
-                    using (var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
+                    using (
+                        var socket = new Socket(
+                            AddressFamily.Unix,
+                            SocketType.Stream,
+                            ProtocolType.Unspecified
+                        )
+                    )
                     {
-                        await socket.ConnectAsync(new UnixDomainSocketEndPoint(path)).DefaultTimeout();
+                        await socket.ConnectAsync(new UnixDomainSocketEndPoint(path))
+                            .DefaultTimeout();
 
                         var data = Encoding.ASCII.GetBytes("Hello World");
                         await socket.SendAsync(data, SocketFlags.None).DefaultTimeout();
@@ -104,7 +131,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         var read = 0;
                         while (read < data.Length)
                         {
-                            var bytesReceived = await socket.ReceiveAsync(buffer.AsMemory(read, buffer.Length - read), SocketFlags.None).DefaultTimeout();
+                            var bytesReceived = await socket.ReceiveAsync(
+                                    buffer.AsMemory(read, buffer.Length - read),
+                                    SocketFlags.None
+                                )
+                                .DefaultTimeout();
                             read += bytesReceived;
                             if (bytesReceived <= 0)
                             {
@@ -121,6 +152,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     await host.StopAsync().DefaultTimeout();
                 }
             }
+
             finally
             {
                 Delete(path);
@@ -128,7 +160,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         }
 
 #if LIBUV
-        [OSSkipCondition(OperatingSystems.Windows, SkipReason = "Libuv does not support unix domain sockets on Windows.")]
+        [OSSkipCondition(
+            OperatingSystems.Windows,
+            SkipReason = "Libuv does not support unix domain sockets on Windows."
+        )]
         [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/28067")]
 #else
         [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_RS4)]
@@ -145,19 +180,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             try
             {
                 var hostBuilder = TransportSelector.GetHostBuilder()
-                    .ConfigureWebHost(webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseUrls(url)
-                            .UseKestrel()
-                            .Configure(app =>
-                            {
-                                app.Run(async context =>
-                                {
-                                    await context.Response.WriteAsync("Hello World");
-                                });
-                            });
-                    })
+                    .ConfigureWebHost(
+                        webHostBuilder =>
+                        {
+                            webHostBuilder.UseUrls(url)
+                                .UseKestrel()
+                                .Configure(
+                                    app =>
+                                    {
+                                        app.Run(
+                                            async context =>
+                                            {
+                                                await context.Response.WriteAsync("Hello World");
+                                            }
+                                        );
+                                    }
+                                );
+                        }
+                    )
                     .ConfigureServices(AddTestLogging);
 
                 using (var host = hostBuilder.Build())
@@ -166,18 +206,31 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
 
                     // https://github.com/dotnet/corefx/issues/5999
                     // .NET Core HttpClient does not support unix sockets, it's difficult to parse raw response data. below is a little hacky way.
-                    using (var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified))
+                    using (
+                        var socket = new Socket(
+                            AddressFamily.Unix,
+                            SocketType.Stream,
+                            ProtocolType.Unspecified
+                        )
+                    )
                     {
-                        await socket.ConnectAsync(new UnixDomainSocketEndPoint(path)).DefaultTimeout();
+                        await socket.ConnectAsync(new UnixDomainSocketEndPoint(path))
+                            .DefaultTimeout();
 
-                        var httpRequest = Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n");
+                        var httpRequest = Encoding.ASCII.GetBytes(
+                            "GET / HTTP/1.1\r\nHost:\r\nConnection: close\r\n\r\n"
+                        );
                         await socket.SendAsync(httpRequest, SocketFlags.None).DefaultTimeout();
 
                         var readBuffer = new byte[512];
                         var read = 0;
                         while (true)
                         {
-                            var bytesReceived = await socket.ReceiveAsync(readBuffer.AsMemory(read), SocketFlags.None).DefaultTimeout();
+                            var bytesReceived = await socket.ReceiveAsync(
+                                    readBuffer.AsMemory(read),
+                                    SocketFlags.None
+                                )
+                                .DefaultTimeout();
                             read += bytesReceived;
                             if (bytesReceived <= 0)
                             {
@@ -189,15 +242,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                         int httpStatusStart = httpResponse.IndexOf(' ') + 1;
                         Assert.False(httpStatusStart == 0, $"Space not found in '{httpResponse}'.");
                         int httpStatusEnd = httpResponse.IndexOf(' ', httpStatusStart);
-                        Assert.False(httpStatusEnd == -1, $"Second space not found in '{httpResponse}'.");
+                        Assert.False(
+                            httpStatusEnd == -1,
+                            $"Second space not found in '{httpResponse}'."
+                        );
 
-                        var httpStatus = int.Parse(httpResponse.Substring(httpStatusStart, httpStatusEnd - httpStatusStart), CultureInfo.InvariantCulture);
+                        var httpStatus = int.Parse(
+                            httpResponse.Substring(
+                                httpStatusStart,
+                                httpStatusEnd - httpStatusStart
+                            ),
+                            CultureInfo.InvariantCulture
+                        );
                         Assert.Equal(httpStatus, StatusCodes.Status200OK);
-
                     }
                     await host.StopAsync().DefaultTimeout();
                 }
             }
+
             finally
             {
                 Delete(path);
@@ -210,10 +272,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
             {
                 File.Delete(path);
             }
-            catch (FileNotFoundException)
-            {
-
-            }
+            catch (FileNotFoundException) { }
         }
     }
 }

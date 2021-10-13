@@ -47,7 +47,11 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public void EvaluateBackReferenceRule(string testString, string expected)
         {
             var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
-            var result = middle.Evaluate(CreateTestRewriteContext(), CreateTestRuleBackReferences(), CreateTestCondBackReferences());
+            var result = middle.Evaluate(
+                CreateTestRewriteContext(),
+                CreateTestRuleBackReferences(),
+                CreateTestCondBackReferences()
+            );
             Assert.Equal(expected, result);
         }
 
@@ -60,7 +64,11 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public void EvaluatToLowerRule(string testString, string expected)
         {
             var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
-            var result = middle.Evaluate(CreateTestRewriteContext(), CreateTestRuleBackReferences(), CreateTestCondBackReferences());
+            var result = middle.Evaluate(
+                CreateTestRewriteContext(),
+                CreateTestRuleBackReferences(),
+                CreateTestCondBackReferences()
+            );
             Assert.Equal(expected, result);
         }
 
@@ -69,7 +77,11 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         public void EvaluatUriEncodeRule(string testString, string expected)
         {
             var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
-            var result = middle.Evaluate(CreateTestRewriteContext(), CreateTestRuleBackReferences(), CreateTestCondBackReferences());
+            var result = middle.Evaluate(
+                CreateTestRewriteContext(),
+                CreateTestRuleBackReferences(),
+                CreateTestCondBackReferences()
+            );
             Assert.Equal(expected, result);
         }
 
@@ -87,13 +99,21 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
         [InlineData("{HTTPS")]
         public void FormatExceptionsOnBadSyntax(string testString)
         {
-            Assert.Throws<FormatException>(() => new InputParser().ParseInputString(testString, UriMatchPart.Path));
+            Assert.Throws<FormatException>(
+                () => new InputParser().ParseInputString(testString, UriMatchPart.Path)
+            );
         }
 
         [Fact]
         public void Should_throw_FormatException_if_no_rewrite_maps_are_defined()
         {
-            Assert.Throws<FormatException>(() => new InputParser(null, false).ParseInputString("{apiMap:{R:1}}", UriMatchPart.Path));
+            Assert.Throws<FormatException>(
+                () =>
+                    new InputParser(null, false).ParseInputString(
+                        "{apiMap:{R:1}}",
+                        UriMatchPart.Path
+                    )
+            );
         }
 
         [Fact]
@@ -103,7 +123,13 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
             const string undefinedMapName = "apiMap";
             var map = new IISRewriteMap(definedMapName);
             var maps = new IISRewriteMapCollection { map };
-            Assert.Throws<FormatException>(() => new InputParser(maps, false).ParseInputString($"{{{undefinedMapName}:{{R:1}}}}", UriMatchPart.Path));
+            Assert.Throws<FormatException>(
+                () =>
+                    new InputParser(maps, false).ParseInputString(
+                        $"{{{undefinedMapName}:{{R:1}}}}",
+                        UriMatchPart.Path
+                    )
+            );
         }
 
         [Fact]
@@ -117,21 +143,33 @@ namespace Microsoft.AspNetCore.Rewrite.Tests.UrlRewrite
             var maps = new IISRewriteMapCollection { map };
 
             var inputString = $"{{{expectedMapName}:{{R:1}}}}";
-            var pattern = new InputParser(maps, false).ParseInputString(inputString, UriMatchPart.Path);
+            var pattern = new InputParser(maps, false).ParseInputString(
+                inputString,
+                UriMatchPart.Path
+            );
             Assert.Equal(1, pattern.PatternSegments.Count);
 
             var segment = pattern.PatternSegments.Single();
             var rewriteMapSegment = segment as RewriteMapSegment;
             Assert.NotNull(rewriteMapSegment);
 
-            var result = rewriteMapSegment.Evaluate(CreateTestRewriteContext(), CreateRewriteMapRuleMatch(expectedKey).BackReferences, CreateRewriteMapConditionMatch(inputString).BackReferences);
+            var result = rewriteMapSegment.Evaluate(
+                CreateTestRewriteContext(),
+                CreateRewriteMapRuleMatch(expectedKey).BackReferences,
+                CreateRewriteMapConditionMatch(inputString).BackReferences
+            );
             Assert.Equal(expectedValue, result);
         }
 
         private RewriteContext CreateTestRewriteContext()
         {
             var context = new DefaultHttpContext();
-            return new RewriteContext { HttpContext = context, StaticFileProvider = null, Logger = NullLogger.Instance };
+            return new RewriteContext
+            {
+                HttpContext = context,
+                StaticFileProvider = null,
+                Logger = NullLogger.Instance
+            };
         }
 
         private BackReferenceCollection CreateTestRuleBackReferences()

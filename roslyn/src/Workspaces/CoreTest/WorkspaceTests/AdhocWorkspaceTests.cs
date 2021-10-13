@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 version: VersionStamp.Default,
                 name: "TestProject",
                 assemblyName: "TestProject.dll",
-                language: LanguageNames.CSharp);
+                language: LanguageNames.CSharp
+            );
 
             using var ws = new AdhocWorkspace();
             var project = ws.AddProject(info);
@@ -83,13 +84,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var ws = new AdhocWorkspace();
             var pinfo = ProjectInfo.Create(
-ProjectId.CreateNewId(),
-version: VersionStamp.Default,
-name: "TestProject",
-assemblyName: "TestProject.dll",
-language: LanguageNames.CSharp);
+                ProjectId.CreateNewId(),
+                version: VersionStamp.Default,
+                name: "TestProject",
+                assemblyName: "TestProject.dll",
+                language: LanguageNames.CSharp
+            );
 
-            var sinfo = SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Default, projects: new ProjectInfo[] { pinfo });
+            var sinfo = SolutionInfo.Create(
+                SolutionId.CreateNewId(),
+                VersionStamp.Default,
+                projects: new ProjectInfo[] { pinfo }
+            );
 
             var solution = ws.AddSolution(sinfo);
 
@@ -114,7 +120,8 @@ language: LanguageNames.CSharp);
                 version: VersionStamp.Default,
                 name: "TestProject1",
                 assemblyName: "TestProject1.dll",
-                language: LanguageNames.CSharp);
+                language: LanguageNames.CSharp
+            );
 
             var id2 = ProjectId.CreateNewId();
             var info2 = ProjectInfo.Create(
@@ -123,7 +130,8 @@ language: LanguageNames.CSharp);
                 name: "TestProject2",
                 assemblyName: "TestProject2.dll",
                 language: LanguageNames.VisualBasic,
-                projectReferences: new[] { new ProjectReference(id1) });
+                projectReferences: new[] { new ProjectReference(id1) }
+            );
 
             using var ws = new AdhocWorkspace();
             ws.AddProjects(new[] { info1, info2 });
@@ -152,17 +160,21 @@ language: LanguageNames.CSharp);
             var pid = ProjectId.CreateNewId();
 
             var docInfo = DocumentInfo.Create(
-                            DocumentId.CreateNewId(pid),
-                            "MyDoc.cs",
-                            loader: TextLoader.From(TextAndVersion.Create(SourceText.From(""), VersionStamp.Create())));
+                DocumentId.CreateNewId(pid),
+                "MyDoc.cs",
+                loader: TextLoader.From(
+                    TextAndVersion.Create(SourceText.From(""), VersionStamp.Create())
+                )
+            );
 
             var projInfo = ProjectInfo.Create(
-                    pid,
-                    VersionStamp.Create(),
-                    "NewProject",
-                    "NewProject.dll",
-                    LanguageNames.CSharp,
-                    documents: new[] { docInfo });
+                pid,
+                VersionStamp.Create(),
+                "NewProject",
+                "NewProject.dll",
+                LanguageNames.CSharp,
+                documents: new[] { docInfo }
+            );
 
             var newSolution = ws.CurrentSolution.AddProject(projInfo);
 
@@ -192,7 +204,8 @@ language: LanguageNames.CSharp);
                 version: VersionStamp.Default,
                 name: "TestProject",
                 assemblyName: "TestProject.dll",
-                language: LanguageNames.CSharp);
+                language: LanguageNames.CSharp
+            );
 
             using var ws = new AdhocWorkspace();
             ws.AddProject(info);
@@ -214,14 +227,19 @@ language: LanguageNames.CSharp);
             var pid = ProjectId.CreateNewId();
             var text = SourceText.From("public class C { }");
             var version = VersionStamp.Create();
-            var docInfo = DocumentInfo.Create(DocumentId.CreateNewId(pid), "c.cs", loader: TextLoader.From(TextAndVersion.Create(text, version)));
+            var docInfo = DocumentInfo.Create(
+                DocumentId.CreateNewId(pid),
+                "c.cs",
+                loader: TextLoader.From(TextAndVersion.Create(text, version))
+            );
             var projInfo = ProjectInfo.Create(
                 pid,
                 version: VersionStamp.Default,
                 name: "TestProject",
                 assemblyName: "TestProject.dll",
                 language: LanguageNames.CSharp,
-                documents: new[] { docInfo });
+                documents: new[] { docInfo }
+            );
 
             using var ws = new AdhocWorkspace();
             ws.AddProject(projInfo);
@@ -248,14 +266,19 @@ language: LanguageNames.CSharp);
             var pid = ProjectId.CreateNewId();
             var text = SourceText.From("public class C { }");
             var version = VersionStamp.Create();
-            var docInfo = DocumentInfo.Create(DocumentId.CreateNewId(pid), "c.cs", loader: TextLoader.From(TextAndVersion.Create(text, version)));
+            var docInfo = DocumentInfo.Create(
+                DocumentId.CreateNewId(pid),
+                "c.cs",
+                loader: TextLoader.From(TextAndVersion.Create(text, version))
+            );
             var projInfo = ProjectInfo.Create(
                 pid,
                 version: VersionStamp.Default,
                 name: "TestProject",
                 assemblyName: "TestProject.dll",
                 language: LanguageNames.CSharp,
-                additionalDocuments: new[] { docInfo });
+                additionalDocuments: new[] { docInfo }
+            );
 
             using var ws = new AdhocWorkspace();
             ws.AddProject(projInfo);
@@ -282,18 +305,25 @@ language: LanguageNames.CSharp);
             var pid = ProjectId.CreateNewId();
             var text = SourceText.From("public class C { }");
             var version = VersionStamp.Create();
-            var analyzerConfigDocFilePath = PathUtilities.CombineAbsoluteAndRelativePaths(Temp.CreateDirectory().Path, ".editorconfig");
+            var analyzerConfigDocFilePath = PathUtilities.CombineAbsoluteAndRelativePaths(
+                Temp.CreateDirectory().Path,
+                ".editorconfig"
+            );
             var docInfo = DocumentInfo.Create(
-                    DocumentId.CreateNewId(pid),
-                    name: ".editorconfig",
-                    loader: TextLoader.From(TextAndVersion.Create(text, version, analyzerConfigDocFilePath)),
-                    filePath: analyzerConfigDocFilePath);
+                DocumentId.CreateNewId(pid),
+                name: ".editorconfig",
+                loader: TextLoader.From(
+                    TextAndVersion.Create(text, version, analyzerConfigDocFilePath)
+                ),
+                filePath: analyzerConfigDocFilePath
+            );
             var projInfo = ProjectInfo.Create(
-                pid,
-                version: VersionStamp.Default,
-                name: "TestProject",
-                assemblyName: "TestProject.dll",
-                language: LanguageNames.CSharp)
+                    pid,
+                    version: VersionStamp.Default,
+                    name: "TestProject",
+                    assemblyName: "TestProject.dll",
+                    language: LanguageNames.CSharp
+                )
                 .WithAnalyzerConfigDocuments(new[] { docInfo });
 
             using (var ws = new AdhocWorkspace())
@@ -342,14 +372,19 @@ language: LanguageNames.CSharp);
             var pid = ProjectId.CreateNewId();
             var text = SourceText.From("public class C { }");
             var version = VersionStamp.Create();
-            var docInfo = DocumentInfo.Create(DocumentId.CreateNewId(pid), "c.cs", loader: TextLoader.From(TextAndVersion.Create(text, version)));
+            var docInfo = DocumentInfo.Create(
+                DocumentId.CreateNewId(pid),
+                "c.cs",
+                loader: TextLoader.From(TextAndVersion.Create(text, version))
+            );
             var projInfo = ProjectInfo.Create(
                 pid,
                 version: VersionStamp.Default,
                 name: "TestProject",
                 assemblyName: "TestProject.dll",
                 language: LanguageNames.CSharp,
-                documents: new[] { docInfo });
+                documents: new[] { docInfo }
+            );
 
             using var ws = new AdhocWorkspace();
             ws.AddProject(projInfo);
@@ -379,7 +414,7 @@ language: LanguageNames.CSharp);
             // access it the hard way
             var actualVersion = await newDoc.GetTextVersionAsync();
 
-            // version is the same 
+            // version is the same
             Assert.Equal(currentVersion, actualVersion);
 
             // accessing text version did not cause text to be constructed.
@@ -408,10 +443,14 @@ language: LanguageNames.CSharp);
 
             // change language version
             var parseOptions = proj.ParseOptions as CS.CSharpParseOptions;
-            pws.SetParseOptions(projid, parseOptions.WithLanguageVersion(CS.LanguageVersion.CSharp3));
+            pws.SetParseOptions(
+                projid,
+                parseOptions.WithLanguageVersion(CS.LanguageVersion.CSharp3)
+            );
 
             // get partial semantics doc
-            var frozen = pws.CurrentSolution.GetDocument(docid1).WithFrozenPartialSemantics(CancellationToken.None);
+            var frozen = pws.CurrentSolution.GetDocument(docid1)
+                .WithFrozenPartialSemantics(CancellationToken.None);
         }
 
         public class WorkspaceWithPartialSemantics : Workspace
@@ -427,8 +466,8 @@ language: LanguageNames.CSharp);
                 get { return true; }
             }
 
-            public void SetParseOptions(ProjectId id, ParseOptions options)
-                => base.OnParseOptionsChanged(id, options);
+            public void SetParseOptions(ProjectId id, ParseOptions options) =>
+                base.OnParseOptionsChanged(id, options);
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -446,8 +485,10 @@ language: LanguageNames.CSharp);
             var tcs = new TaskCompletionSource<bool>();
             ws.WorkspaceChanged += (s, args) =>
             {
-                if (args.Kind == WorkspaceChangeKind.DocumentInfoChanged
-                    && args.DocumentId == originalDoc.Id)
+                if (
+                    args.Kind == WorkspaceChangeKind.DocumentInfoChanged
+                    && args.DocumentId == originalDoc.Id
+                )
                 {
                     tcs.SetResult(true);
                 }
@@ -479,8 +520,10 @@ language: LanguageNames.CSharp);
             var tcs = new TaskCompletionSource<bool>();
             ws.WorkspaceChanged += (s, args) =>
             {
-                if (args.Kind == WorkspaceChangeKind.DocumentInfoChanged
-                    && args.DocumentId == originalDoc.Id)
+                if (
+                    args.Kind == WorkspaceChangeKind.DocumentInfoChanged
+                    && args.DocumentId == originalDoc.Id
+                )
                 {
                     tcs.SetResult(true);
                 }
@@ -513,8 +556,10 @@ language: LanguageNames.CSharp);
             var tcs = new TaskCompletionSource<bool>();
             ws.WorkspaceChanged += (s, args) =>
             {
-                if (args.Kind == WorkspaceChangeKind.DocumentInfoChanged
-                    && args.DocumentId == originalDoc.Id)
+                if (
+                    args.Kind == WorkspaceChangeKind.DocumentInfoChanged
+                    && args.DocumentId == originalDoc.Id
+                )
                 {
                     tcs.SetResult(true);
                 }
@@ -544,8 +589,10 @@ language: LanguageNames.CSharp);
             var tcs = new TaskCompletionSource<bool>();
             ws.WorkspaceChanged += (s, args) =>
             {
-                if (args.Kind == WorkspaceChangeKind.DocumentInfoChanged
-                    && args.DocumentId == originalDoc.Id)
+                if (
+                    args.Kind == WorkspaceChangeKind.DocumentInfoChanged
+                    && args.DocumentId == originalDoc.Id
+                )
                 {
                     tcs.SetResult(true);
                 }
@@ -573,7 +620,9 @@ language: LanguageNames.CSharp);
 
             var newName = "ChangedName";
             var newPath = @"\A\B\ChangedName.cs";
-            var changedDoc = originalDoc.WithName(newName).WithFolders(new[] { "A", "B" }).WithFilePath(newPath);
+            var changedDoc = originalDoc.WithName(newName)
+                .WithFolders(new[] { "A", "B" })
+                .WithFilePath(newPath);
 
             Assert.Equal(newName, changedDoc.Name);
             Assert.Equal(2, changedDoc.Folders.Count);

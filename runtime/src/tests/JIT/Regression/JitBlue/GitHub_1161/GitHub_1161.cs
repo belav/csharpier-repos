@@ -30,7 +30,8 @@ class GitHub_1161
         [MethodImpl(MethodImplOptions.NoInlining)]
         static int Test()
         {
-            Number x = 4, y = 2;
+            Number x = 4,
+                y = 2;
             return (int)(x + y);
         }
         static int Main()

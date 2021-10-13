@@ -27,7 +27,11 @@ namespace Microsoft.AspNetCore.Razor.Hosting
         /// <param name="checksumAlgorithm">The algorithm used to create this checksum.</param>
         /// <param name="checksum">The checksum as a string of hex-encoded bytes.</param>
         /// <param name="identifier">The identifier associated with this thumbprint.</param>
-        public RazorSourceChecksumAttribute(string checksumAlgorithm, string checksum, string identifier)
+        public RazorSourceChecksumAttribute(
+            string checksumAlgorithm,
+            string checksum,
+            string identifier
+        )
         {
             if (checksumAlgorithm == null)
             {
@@ -58,7 +62,7 @@ namespace Microsoft.AspNetCore.Razor.Hosting
         /// Gets the name of the algorithm used to create this checksum.
         /// </summary>
         public string ChecksumAlgorithm { get; }
-        
+
         /// <summary>
         /// Gets the identifier of the source file associated with this checksum.
         /// </summary>

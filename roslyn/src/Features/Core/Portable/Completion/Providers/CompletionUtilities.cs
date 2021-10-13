@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal static class CompletionUtilities
     {
-        public static bool IsTypeImplicitlyConvertible(Compilation compilation, ITypeSymbol sourceType, ImmutableArray<ITypeSymbol> targetTypes)
+        public static bool IsTypeImplicitlyConvertible(
+            Compilation compilation,
+            ITypeSymbol sourceType,
+            ImmutableArray<ITypeSymbol> targetTypes
+        )
         {
             foreach (var targetType in targetTypes)
             {
@@ -25,12 +29,24 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         public static OptionSet GetUpdatedRecommendationOptions(OptionSet options, string language)
         {
-            var filterOutOfScopeLocals = options.GetOption(CompletionControllerOptions.FilterOutOfScopeLocals);
-            var hideAdvancedMembers = options.GetOption(CompletionOptions.HideAdvancedMembers, language);
+            var filterOutOfScopeLocals = options.GetOption(
+                CompletionControllerOptions.FilterOutOfScopeLocals
+            );
+            var hideAdvancedMembers = options.GetOption(
+                CompletionOptions.HideAdvancedMembers,
+                language
+            );
 
-            return options
-                .WithChangedOption(RecommendationOptions.FilterOutOfScopeLocals, language, filterOutOfScopeLocals)
-                .WithChangedOption(RecommendationOptions.HideAdvancedMembers, language, hideAdvancedMembers);
+            return options.WithChangedOption(
+                    RecommendationOptions.FilterOutOfScopeLocals,
+                    language,
+                    filterOutOfScopeLocals
+                )
+                .WithChangedOption(
+                    RecommendationOptions.HideAdvancedMembers,
+                    language,
+                    hideAdvancedMembers
+                );
         }
     }
 }

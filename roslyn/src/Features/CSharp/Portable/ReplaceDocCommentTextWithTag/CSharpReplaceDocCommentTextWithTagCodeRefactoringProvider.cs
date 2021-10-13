@@ -12,46 +12,55 @@ using Microsoft.CodeAnalysis.ReplaceDocCommentTextWithTag;
 
 namespace Microsoft.CodeAnalysis.CSharp.ReplaceDocCommentTextWithTag
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp,
-        Name = PredefinedCodeRefactoringProviderNames.ReplaceDocCommentTextWithTag), Shared]
-    internal class CSharpReplaceDocCommentTextWithTagCodeRefactoringProvider :
-        AbstractReplaceDocCommentTextWithTagCodeRefactoringProvider
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ReplaceDocCommentTextWithTag
+        ),
+        Shared
+    ]
+    internal class CSharpReplaceDocCommentTextWithTagCodeRefactoringProvider
+        : AbstractReplaceDocCommentTextWithTagCodeRefactoringProvider
     {
-        private static readonly ImmutableHashSet<string> s_triggerKeywords = ImmutableHashSet.Create(
-            SyntaxFacts.GetText(SyntaxKind.NullKeyword),
-            SyntaxFacts.GetText(SyntaxKind.StaticKeyword),
-            SyntaxFacts.GetText(SyntaxKind.VirtualKeyword),
-            SyntaxFacts.GetText(SyntaxKind.TrueKeyword),
-            SyntaxFacts.GetText(SyntaxKind.FalseKeyword),
-            SyntaxFacts.GetText(SyntaxKind.AbstractKeyword),
-            SyntaxFacts.GetText(SyntaxKind.SealedKeyword),
-            SyntaxFacts.GetText(SyntaxKind.AsyncKeyword),
-            SyntaxFacts.GetText(SyntaxKind.AwaitKeyword),
-            SyntaxFacts.GetText(SyntaxKind.BaseKeyword),
-            SyntaxFacts.GetText(SyntaxKind.ThisKeyword));
+        private static readonly ImmutableHashSet<string> s_triggerKeywords =
+            ImmutableHashSet.Create(
+                SyntaxFacts.GetText(SyntaxKind.NullKeyword),
+                SyntaxFacts.GetText(SyntaxKind.StaticKeyword),
+                SyntaxFacts.GetText(SyntaxKind.VirtualKeyword),
+                SyntaxFacts.GetText(SyntaxKind.TrueKeyword),
+                SyntaxFacts.GetText(SyntaxKind.FalseKeyword),
+                SyntaxFacts.GetText(SyntaxKind.AbstractKeyword),
+                SyntaxFacts.GetText(SyntaxKind.SealedKeyword),
+                SyntaxFacts.GetText(SyntaxKind.AsyncKeyword),
+                SyntaxFacts.GetText(SyntaxKind.AwaitKeyword),
+                SyntaxFacts.GetText(SyntaxKind.BaseKeyword),
+                SyntaxFacts.GetText(SyntaxKind.ThisKeyword)
+            );
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpReplaceDocCommentTextWithTagCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpReplaceDocCommentTextWithTagCodeRefactoringProvider() { }
 
-        protected override bool IsXmlTextToken(SyntaxToken token)
-            => token.Kind() == SyntaxKind.XmlTextLiteralToken ||
-               token.Kind() == SyntaxKind.XmlTextLiteralNewLineToken;
+        protected override bool IsXmlTextToken(SyntaxToken token) =>
+            token.Kind() == SyntaxKind.XmlTextLiteralToken
+            || token.Kind() == SyntaxKind.XmlTextLiteralNewLineToken;
 
         protected override bool IsInXMLAttribute(SyntaxToken token)
         {
-            return (token.Parent.Kind() == SyntaxKind.XmlCrefAttribute
+            return (
+                token.Parent.Kind() == SyntaxKind.XmlCrefAttribute
                 || token.Parent.Kind() == SyntaxKind.XmlNameAttribute
-                || token.Parent.Kind() == SyntaxKind.XmlTextAttribute);
+                || token.Parent.Kind() == SyntaxKind.XmlTextAttribute
+            );
         }
 
-        protected override bool IsKeyword(string text)
-            => s_triggerKeywords.Contains(text);
+        protected override bool IsKeyword(string text) => s_triggerKeywords.Contains(text);
 
-        protected override SyntaxNode ParseExpression(string text)
-            => SyntaxFactory.ParseExpression(text);
-
+        protected override SyntaxNode ParseExpression(string text) =>
+            SyntaxFactory.ParseExpression(text);
     }
 }

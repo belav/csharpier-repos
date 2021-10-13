@@ -15,19 +15,42 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
     {
         internal RemoteServiceConnection UnderlyingObject { get; }
 
-        internal UnitTestingRemoteServiceConnectionWrapper(RemoteServiceConnection underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        internal UnitTestingRemoteServiceConnectionWrapper(
+            RemoteServiceConnection underlyingObject
+        ) => UnderlyingObject = underlyingObject;
 
         public bool IsDefault => UnderlyingObject == null;
 
-        public async Task<bool> TryRunRemoteAsync(string targetName, Solution? solution, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
+        public async Task<bool> TryRunRemoteAsync(
+            string targetName,
+            Solution? solution,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        )
         {
-            await UnderlyingObject.RunRemoteAsync(targetName, solution, arguments, cancellationToken).ConfigureAwait(false);
+            await UnderlyingObject.RunRemoteAsync(
+                    targetName,
+                    solution,
+                    arguments,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return true;
         }
 
-        public async Task<Optional<T>> TryRunRemoteAsync<T>(string targetName, Solution? solution, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
-            => await UnderlyingObject.RunRemoteAsync<T>(targetName, solution, arguments, cancellationToken).ConfigureAwait(false);
+        public async Task<Optional<T>> TryRunRemoteAsync<T>(
+            string targetName,
+            Solution? solution,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        ) =>
+            await UnderlyingObject.RunRemoteAsync<T>(
+                    targetName,
+                    solution,
+                    arguments,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
         public void Dispose() => UnderlyingObject?.Dispose();
     }

@@ -64,8 +64,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public MigrationsAnnotationProviderDependencies()
-        {
-        }
+        public MigrationsAnnotationProviderDependencies() { }
     }
 }

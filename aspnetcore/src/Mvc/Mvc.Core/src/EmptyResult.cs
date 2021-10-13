@@ -10,8 +10,6 @@ namespace Microsoft.AspNetCore.Mvc
     public class EmptyResult : ActionResult
     {
         /// <inheritdoc />
-        public override void ExecuteResult(ActionContext context)
-        {
-        }
+        public override void ExecuteResult(ActionContext context) { }
     }
 }

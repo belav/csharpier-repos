@@ -24,9 +24,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     [Export, Shared]
     internal partial class AnalyzerConfigDocumentAsSolutionItemHandler : IDisposable
     {
-        private const string LocalRegistryPath = $@"Roslyn\Internal\{nameof(AnalyzerConfigDocumentAsSolutionItemHandler)}\";
-        private static readonly Option<bool> NeverShowAgain = new(nameof(AnalyzerConfigDocumentAsSolutionItemHandler), nameof(NeverShowAgain),
-            defaultValue: false, storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(NeverShowAgain)));
+        private const string LocalRegistryPath =
+            $@"Roslyn\Internal\{nameof(AnalyzerConfigDocumentAsSolutionItemHandler)}\";
+        private static readonly Option<bool> NeverShowAgain =
+            new(
+                nameof(AnalyzerConfigDocumentAsSolutionItemHandler),
+                nameof(NeverShowAgain),
+                defaultValue: false,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(NeverShowAgain)
+                )
+            );
 
         private readonly VisualStudioWorkspace _workspace;
         private readonly IThreadingContext _threadingContext;
@@ -38,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public AnalyzerConfigDocumentAsSolutionItemHandler(
             VisualStudioWorkspace workspace,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _workspace = workspace;
             _threadingContext = threadingContext;
@@ -46,11 +55,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             _workspace.WorkspaceChanged += OnWorkspaceChanged;
         }
 
-        public void Initialize(IServiceProvider serviceProvider)
-            => _dte = (DTE)serviceProvider.GetService(typeof(DTE));
+        public void Initialize(IServiceProvider serviceProvider) =>
+            _dte = (DTE)serviceProvider.GetService(typeof(DTE));
 
-        void IDisposable.Dispose()
-            => _workspace.WorkspaceChanged -= OnWorkspaceChanged;
+        void IDisposable.Dispose() => _workspace.WorkspaceChanged -= OnWorkspaceChanged;
 
         private void OnWorkspaceChanged(object sender, WorkspaceChangeEventArgs e)
         {
@@ -69,19 +77,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             // Bail out if we have a null DTE instance or we have already shown the info bar for current solution.
-            if (_dte == null ||
-                _infoBarShownForCurrentSolution)
+            if (_dte == null || _infoBarShownForCurrentSolution)
             {
                 return;
             }
 
             // Check if added analyzer config document is at the root of the current solution.
-            var analyzerConfigDocumentFilePath = e.NewSolution.GetAnalyzerConfigDocument(e.DocumentId)?.FilePath;
-            var analyzerConfigDirectory = PathUtilities.GetDirectoryName(analyzerConfigDocumentFilePath);
+            var analyzerConfigDocumentFilePath = e.NewSolution.GetAnalyzerConfigDocument(
+                e.DocumentId
+            )?.FilePath;
+            var analyzerConfigDirectory = PathUtilities.GetDirectoryName(
+                analyzerConfigDocumentFilePath
+            );
             var solutionDirectory = PathUtilities.GetDirectoryName(e.NewSolution.FilePath);
-            if (analyzerConfigDocumentFilePath == null ||
-                analyzerConfigDirectory == null ||
-                analyzerConfigDirectory != solutionDirectory)
+            if (
+                analyzerConfigDocumentFilePath == null
+                || analyzerConfigDirectory == null
+                || analyzerConfigDirectory != solutionDirectory
+            )
             {
                 return;
             }
@@ -93,26 +106,36 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             // Kick off a task to show info bar to make it a solution item.
-            Task.Run(async () =>
-            {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-
-                var solution = (Solution2)_dte.Solution;
-                if (VisualStudioAddSolutionItemService.TryGetExistingSolutionItemsFolder(solution, analyzerConfigDocumentFilePath, out _, out var hasExistingSolutionItem) &&
-                    hasExistingSolutionItem)
+            Task.Run(
+                async () =>
                 {
-                    return;
-                }
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                if (!_infoBarShownForCurrentSolution)
-                {
-                    _infoBarShownForCurrentSolution = true;
-                    var infoBarService = _workspace.Services.GetRequiredService<IInfoBarService>();
-                    infoBarService.ShowInfoBar(
-                        ServicesVSResources.A_new_editorconfig_file_was_detected_at_the_root_of_your_solution_Would_you_like_to_make_it_a_solution_item,
-                        GetInfoBarUIItems().ToArray());
+                    var solution = (Solution2)_dte.Solution;
+                    if (
+                        VisualStudioAddSolutionItemService.TryGetExistingSolutionItemsFolder(
+                            solution,
+                            analyzerConfigDocumentFilePath,
+                            out _,
+                            out var hasExistingSolutionItem
+                        ) && hasExistingSolutionItem
+                    )
+                    {
+                        return;
+                    }
+
+                    if (!_infoBarShownForCurrentSolution)
+                    {
+                        _infoBarShownForCurrentSolution = true;
+                        var infoBarService =
+                            _workspace.Services.GetRequiredService<IInfoBarService>();
+                        infoBarService.ShowInfoBar(
+                            ServicesVSResources.A_new_editorconfig_file_was_detected_at_the_root_of_your_solution_Would_you_like_to_make_it_a_solution_item,
+                            GetInfoBarUIItems().ToArray()
+                        );
+                    }
                 }
-            });
+            );
 
             return;
 
@@ -124,26 +147,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     title: ServicesVSResources.Yes,
                     kind: InfoBarUI.UIKind.Button,
                     action: AddEditorconfigSolutionItem,
-                    closeAfterAction: true);
+                    closeAfterAction: true
+                );
 
                 // No - do not add editorconfig solution item.
                 yield return new InfoBarUI(
                     title: ServicesVSResources.No,
                     kind: InfoBarUI.UIKind.Button,
                     action: () => { },
-                    closeAfterAction: true);
+                    closeAfterAction: true
+                );
 
                 // Don't show the InfoBar again link
-                yield return new InfoBarUI(title: ServicesVSResources.Never_show_this_again,
+                yield return new InfoBarUI(
+                    title: ServicesVSResources.Never_show_this_again,
                     kind: InfoBarUI.UIKind.Button,
-                    action: () => _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options.WithChangedOption(NeverShowAgain, true))),
-                    closeAfterAction: true);
+                    action: () =>
+                        _workspace.TryApplyChanges(
+                            _workspace.CurrentSolution.WithOptions(
+                                _workspace.Options.WithChangedOption(NeverShowAgain, true)
+                            )
+                        ),
+                    closeAfterAction: true
+                );
             }
 
             void AddEditorconfigSolutionItem()
             {
-                var addSolutionItemService = _workspace.Services.GetRequiredService<IAddSolutionItemService>();
-                addSolutionItemService.AddSolutionItemAsync(analyzerConfigDocumentFilePath, CancellationToken.None).Wait();
+                var addSolutionItemService =
+                    _workspace.Services.GetRequiredService<IAddSolutionItemService>();
+                addSolutionItemService.AddSolutionItemAsync(
+                        analyzerConfigDocumentFilePath,
+                        CancellationToken.None
+                    )
+                    .Wait();
             }
         }
     }

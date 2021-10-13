@@ -6,7 +6,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class File_Changed_Tests : FileSystemWatcherTest
     {
         [Fact]
@@ -14,9 +19,12 @@ namespace System.IO.Tests
         {
             using (var testDirectory = new TempDirectory(GetTestFilePath()))
             using (var file = new TempFile(Path.Combine(testDirectory.Path, "file")))
-            using (var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path)))
+            using (
+                var watcher = new FileSystemWatcher(testDirectory.Path, Path.GetFileName(file.Path))
+            )
             {
-                Action action = () => Directory.SetLastWriteTime(file.Path, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(file.Path, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 WatcherChangeTypes expected = WatcherChangeTypes.Changed;
                 ExpectEvent(watcher, expected, action, expectedPath: file.Path);
@@ -38,10 +46,13 @@ namespace System.IO.Tests
                 watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.Attributes;
 
                 var attributes = File.GetAttributes(nestedFile.Path);
-                Action action = () => File.SetAttributes(nestedFile.Path, attributes | FileAttributes.ReadOnly);
+                Action action = () =>
+                    File.SetAttributes(nestedFile.Path, attributes | FileAttributes.ReadOnly);
                 Action cleanup = () => File.SetAttributes(nestedFile.Path, attributes);
 
-                WatcherChangeTypes expected = includeSubdirectories ? WatcherChangeTypes.Changed : 0;
+                WatcherChangeTypes expected = includeSubdirectories
+                    ? WatcherChangeTypes.Changed
+                    : 0;
                 ExpectEvent(watcher, expected, action, cleanup, nestedFile.Path);
             }
         }

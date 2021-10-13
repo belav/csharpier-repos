@@ -16,9 +16,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     public class BasicErrorListNetCore : BasicErrorListCommon
     {
         public BasicErrorListNetCore(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary) { }
 
         [WorkItem(1825, "https://github.com/dotnet/roslyn-project-system/issues/1825")]
         [WpfFact]

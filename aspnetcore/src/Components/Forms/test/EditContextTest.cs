@@ -64,7 +64,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             Assert.False(editContext.IsModified(fieldOnThisModel2));
             Assert.True(editContext.IsModified(fieldOnOtherModel));
         }
-        
+
         [Fact]
         public void CanClearIndividualModifications()
         {
@@ -138,16 +138,17 @@ namespace Microsoft.AspNetCore.Components.Forms
             var fieldWithNoState = new FieldIdentifier(new object(), "field with no state");
             store1.Add(field, "Store 1 message 1");
             store1.Add(field, "Store 1 message 2");
-            store1.Add(new FieldIdentifier(new object(), "otherfield"), "Message for other field that should not appear in results");
+            store1.Add(
+                new FieldIdentifier(new object(), "otherfield"),
+                "Message for other field that should not appear in results"
+            );
             store2.Add(field, "Store 2 message 1");
 
             // Act/Assert: Can pick out the messages for a field
-            Assert.Equal(new[]
-            {
-                "Store 1 message 1",
-                "Store 1 message 2",
-                "Store 2 message 1",
-            }, editContext.GetValidationMessages(field).OrderBy(x => x)); // Sort because the order isn't defined
+            Assert.Equal(
+                new[] { "Store 1 message 1", "Store 1 message 2", "Store 2 message 1", },
+                editContext.GetValidationMessages(field).OrderBy(x => x)
+            ); // Sort because the order isn't defined
 
             // Act/Assert: It's fine to ask for messages for a field with no associated state
             Assert.Empty(editContext.GetValidationMessages(fieldWithNoState));
@@ -172,17 +173,23 @@ namespace Microsoft.AspNetCore.Components.Forms
             store2.Add(field1, "Store 2 field 1 message 1");
 
             // Act/Assert
-            Assert.Equal(new[]
-            {
-                "Store 1 field 1 message 1",
-                "Store 1 field 1 message 2",
-                "Store 1 field 2 message 1",
-                "Store 2 field 1 message 1",
-            }, editContext.GetValidationMessages().OrderBy(x => x)); // Sort because the order isn't defined
+            Assert.Equal(
+                new[]
+                {
+                    "Store 1 field 1 message 1",
+                    "Store 1 field 1 message 2",
+                    "Store 1 field 2 message 1",
+                    "Store 2 field 1 message 1",
+                },
+                editContext.GetValidationMessages().OrderBy(x => x)
+            ); // Sort because the order isn't defined
 
             // Act/Assert: After clearing a single store, we only see the results from other stores
             store1.Clear();
-            Assert.Equal(new[] { "Store 2 field 1 message 1", }, editContext.GetValidationMessages());
+            Assert.Equal(
+                new[] { "Store 2 field 1 message 1", },
+                editContext.GetValidationMessages()
+            );
         }
 
         [Fact]
@@ -204,9 +211,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             // Arrange
             var editContext = new EditContext(new object());
             var messages = new ValidationMessageStore(editContext);
-            messages.Add(
-                new FieldIdentifier(new object(), "some field"),
-                "Some message");
+            messages.Add(new FieldIdentifier(new object(), "some field"), "Some message");
 
             // Act
             var isValid = editContext.Validate();
@@ -225,9 +230,7 @@ namespace Microsoft.AspNetCore.Components.Forms
             {
                 Assert.Same(editContext, sender);
                 Assert.NotNull(eventArgs);
-                messages.Add(
-                    new FieldIdentifier(new object(), "some field"),
-                    "Some message");
+                messages.Add(new FieldIdentifier(new object(), "some field"), "Some message");
             };
 
             // Act

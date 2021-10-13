@@ -18,11 +18,16 @@ namespace System.Net.NetworkInformation
         private bool _autoConfigEnabled;
         private bool _autoConfigActive;
 
-        internal SystemIPv4InterfaceProperties(Interop.IpHlpApi.FIXED_INFO fixedInfo, Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses)
+        internal SystemIPv4InterfaceProperties(
+            Interop.IpHlpApi.FIXED_INFO fixedInfo,
+            Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses
+        )
         {
             _index = ipAdapterAddresses.index;
             _routingEnabled = fixedInfo.enableRouting;
-            _dhcpEnabled = ((ipAdapterAddresses.flags & Interop.IpHlpApi.AdapterFlags.DhcpEnabled) != 0);
+            _dhcpEnabled = (
+                (ipAdapterAddresses.flags & Interop.IpHlpApi.AdapterFlags.DhcpEnabled) != 0
+            );
             _haveWins = (ipAdapterAddresses.firstWinsServerAddress != IntPtr.Zero);
 
             _mtu = ipAdapterAddresses.mtu;
@@ -31,48 +36,42 @@ namespace System.Net.NetworkInformation
         }
 
         /// Only valid for Ipv4 Uses WINS for name resolution.
-        public override bool UsesWins { get { return _haveWins; } }
+        public override bool UsesWins
+        {
+            get { return _haveWins; }
+        }
 
         public override bool IsDhcpEnabled
         {
             get { return _dhcpEnabled; }
         }
 
-        public override bool IsForwardingEnabled { get { return _routingEnabled; } }
+        public override bool IsForwardingEnabled
+        {
+            get { return _routingEnabled; }
+        }
 
         /// Auto configuration of an ipv4 address for a client on a network where a DHCP server isn't available.
         public override bool IsAutomaticPrivateAddressingEnabled
         {
-            get
-            {
-                return _autoConfigEnabled;
-            }
+            get { return _autoConfigEnabled; }
         }
 
         public override bool IsAutomaticPrivateAddressingActive
         {
-            get
-            {
-                return _autoConfigActive;
-            }
+            get { return _autoConfigActive; }
         }
 
         // Specifies the Maximum transmission unit in bytes. Uses GetIFEntry.
         // We cache this to be consistent across all platforms.
         public override int Mtu
         {
-            get
-            {
-                return unchecked((int)_mtu);
-            }
+            get { return unchecked((int)_mtu); }
         }
 
         public override int Index
         {
-            get
-            {
-                return (int)_index;
-            }
+            get { return (int)_index; }
         }
 
         private void GetPerAdapterInfo(uint index)
@@ -98,6 +97,7 @@ namespace System.Net.NetworkInformation
                             _autoConfigActive = ipPerAdapterInfo.autoconfigActive;
                         }
                     }
+
                     finally
                     {
                         Marshal.FreeHGlobal(buffer);

@@ -80,7 +80,7 @@ public class WasmAppBuilder : Task
 
     private class AssetEntry
     {
-        protected AssetEntry (string name, string behavior)
+        protected AssetEntry(string name, string behavior)
         {
             Name = name;
             Behavior = behavior;
@@ -93,7 +93,7 @@ public class WasmAppBuilder : Task
 
     private class AssemblyEntry : AssetEntry
     {
-        public AssemblyEntry(string name) : base(name, "assembly") {}
+        public AssemblyEntry(string name) : base(name, "assembly") { }
     }
 
     private class SatelliteAssemblyEntry : AssetEntry
@@ -109,24 +109,26 @@ public class WasmAppBuilder : Task
 
     private class VfsEntry : AssetEntry
     {
-        public VfsEntry(string name) : base(name, "vfs") {}
+        public VfsEntry(string name) : base(name, "vfs") { }
         [JsonPropertyName("virtual_path")]
         public string? VirtualPath { get; set; }
     }
 
     private class IcuData : AssetEntry
     {
-        public IcuData(string name) : base(name, "icu") {}
+        public IcuData(string name) : base(name, "icu") { }
         [JsonPropertyName("load_remote")]
         public bool LoadRemote { get; set; }
     }
 
-    public override bool Execute ()
+    public override bool Execute()
     {
         if (!File.Exists(MainJS))
             throw new ArgumentException($"File MainJS='{MainJS}' doesn't exist.");
         if (!InvariantGlobalization && string.IsNullOrEmpty(IcuDataFileName))
-            throw new ArgumentException("IcuDataFileName property shouldn't be empty if InvariantGlobalization=false");
+            throw new ArgumentException(
+                "IcuDataFileName property shouldn't be empty if InvariantGlobalization=false"
+            );
 
         if (Assemblies?.Length == 0)
         {
@@ -141,7 +143,7 @@ public class WasmAppBuilder : Task
                 _assemblies.Add(asm);
         }
 
-        var config = new WasmAppConfig ();
+        var config = new WasmAppConfig();
 
         // Create app
         var asmRootPath = Path.Join(AppDir, config.AssemblyRoot);
@@ -149,13 +151,21 @@ public class WasmAppBuilder : Task
         Directory.CreateDirectory(asmRootPath);
         foreach (var assembly in _assemblies)
         {
-            FileCopyChecked(assembly, Path.Join(asmRootPath, Path.GetFileName(assembly)), "Assemblies");
+            FileCopyChecked(
+                assembly,
+                Path.Join(asmRootPath, Path.GetFileName(assembly)),
+                "Assemblies"
+            );
             if (DebugLevel != 0)
             {
                 var pdb = assembly;
                 pdb = Path.ChangeExtension(pdb, ".pdb");
                 if (File.Exists(pdb))
-                    FileCopyChecked(pdb, Path.Join(asmRootPath, Path.GetFileName(pdb)), "Assemblies");
+                    FileCopyChecked(
+                        pdb,
+                        Path.Join(asmRootPath, Path.GetFileName(pdb)),
+                        "Assemblies"
+                    );
             }
         }
 
@@ -167,13 +177,15 @@ public class WasmAppBuilder : Task
         }
         FileCopyChecked(MainJS!, Path.Join(AppDir, "runtime.js"), string.Empty);
 
-        var html = @"<html><body><script type=""text/javascript"" src=""runtime.js""></script></body></html>";
+        var html =
+            @"<html><body><script type=""text/javascript"" src=""runtime.js""></script></body></html>";
         File.WriteAllText(Path.Join(AppDir, "index.html"), html);
 
         foreach (var assembly in _assemblies)
         {
             config.Assets.Add(new AssemblyEntry(Path.GetFileName(assembly)));
-            if (DebugLevel != 0) {
+            if (DebugLevel != 0)
+            {
                 var pdb = assembly;
                 pdb = Path.ChangeExtension(pdb, ".pdb");
                 if (File.Exists(pdb))
@@ -216,9 +228,14 @@ public class WasmAppBuilder : Task
 
                 var generatedFileName = $"{i++}_{Path.GetFileName(item.ItemSpec)}";
 
-                FileCopyChecked(item.ItemSpec, Path.Join(supportFilesDir, generatedFileName), "FilesToIncludeInFileSystem");
+                FileCopyChecked(
+                    item.ItemSpec,
+                    Path.Join(supportFilesDir, generatedFileName),
+                    "FilesToIncludeInFileSystem"
+                );
 
-                var asset = new VfsEntry ($"supportFiles/{generatedFileName}") {
+                var asset = new VfsEntry($"supportFiles/{generatedFileName}")
+                {
                     VirtualPath = targetPath
                 };
                 config.Assets.Add(asset);
@@ -226,9 +243,13 @@ public class WasmAppBuilder : Task
         }
 
         if (!InvariantGlobalization)
-            config.Assets.Add(new IcuData(IcuDataFileName!) { LoadRemote = RemoteSources?.Length > 0 });
+            config.Assets.Add(
+                new IcuData(IcuDataFileName!) { LoadRemote = RemoteSources?.Length > 0 }
+            );
 
-        config.Assets.Add(new VfsEntry ("dotnet.timezones.blat") { VirtualPath = "/usr/share/zoneinfo/"});
+        config.Assets.Add(
+            new VfsEntry("dotnet.timezones.blat") { VirtualPath = "/usr/share/zoneinfo/" }
+        );
 
         if (RemoteSources?.Length > 0)
         {
@@ -249,7 +270,10 @@ public class WasmAppBuilder : Task
         string monoConfigPath = Path.Join(AppDir, "mono-config.js");
         using (var sw = File.CreateText(monoConfigPath))
         {
-            var json = JsonSerializer.Serialize (config, new JsonSerializerOptions { WriteIndented = true });
+            var json = JsonSerializer.Serialize(
+                config,
+                new JsonSerializerOptions { WriteIndented = true }
+            );
             sw.Write($"config = {json};");
         }
         _fileWrites.Add(monoConfigPath);
@@ -280,7 +304,10 @@ public class WasmAppBuilder : Task
         if (string.IsNullOrEmpty(rawValue))
             return true;
 
-        if (TryConvert(rawValue, typeof(double), out valueObject) || TryConvert(rawValue, typeof(bool), out valueObject))
+        if (
+            TryConvert(rawValue, typeof(double), out valueObject)
+            || TryConvert(rawValue, typeof(bool), out valueObject)
+        )
             return true;
 
         // Try parsing as a quoted string
@@ -299,7 +326,9 @@ public class WasmAppBuilder : Task
         }
         catch (JsonException je)
         {
-            Log.LogError($"ExtraConfig: {extraItem.ItemSpec} with Value={rawValue} cannot be parsed as a number, boolean, string, or json object/array: {je.Message}");
+            Log.LogError(
+                $"ExtraConfig: {extraItem.ItemSpec} with Value={rawValue} cannot be parsed as a number, boolean, string, or json object/array: {je.Message}"
+            );
             return false;
         }
     }
@@ -312,7 +341,8 @@ public class WasmAppBuilder : Task
             value = Convert.ChangeType(str, type);
             return true;
         }
-        catch (Exception ex) when (ex is FormatException || ex is InvalidCastException || ex is OverflowException)
+        catch (Exception ex)
+            when (ex is FormatException || ex is InvalidCastException || ex is OverflowException)
         {
             return false;
         }

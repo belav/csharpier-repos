@@ -14,29 +14,25 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 {
     public class IISCompressionSiteFixture : IISTestSiteFixture
     {
-        public IISCompressionSiteFixture() : base(Configure)
-        {
-        }
+        public IISCompressionSiteFixture() : base(Configure) { }
 
         private static void Configure(IISDeploymentParameters deploymentParameters)
         {
             // Enable dynamic compression
             deploymentParameters.ServerConfigActionList.Add(
-                (element, _) => {
-                    var webServerElement = element
-                        .RequiredElement("system.webServer");
+                (element, _) =>
+                {
+                    var webServerElement = element.RequiredElement("system.webServer");
 
-                    webServerElement
-                        .GetOrAdd("urlCompression")
+                    webServerElement.GetOrAdd("urlCompression")
                         .SetAttributeValue("doDynamicCompression", "true");
 
-                    webServerElement
-                        .GetOrAdd("httpCompression")
+                    webServerElement.GetOrAdd("httpCompression")
                         .GetOrAdd("dynamicTypes")
                         .GetOrAdd("add", "mimeType", "text/*")
                         .SetAttributeValue("enabled", "true");
-
-                });
+                }
+            );
 
             deploymentParameters.EnableModule("DynamicCompressionModule", "%IIS_BIN%\\compdyn.dll");
         }

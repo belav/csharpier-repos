@@ -29,7 +29,8 @@ namespace System.Diagnostics.Tests
 
                 p.Kill();
                 Assert.True(p.WaitForExit(WaitInMS));
-            };
+            }
+            ;
 
             // Don't test this on Windows containers, as the test is currently failing
             // cf. https://github.com/dotnet/runtime/issues/42000
@@ -49,6 +50,7 @@ namespace System.Diagnostics.Tests
 
                 RunWithExpectedCodePage(ConsoleEncoding);
             }
+
             finally
             {
                 Interop.SetConsoleCP(inputEncoding);

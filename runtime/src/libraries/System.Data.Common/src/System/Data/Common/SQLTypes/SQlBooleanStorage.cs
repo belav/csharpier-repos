@@ -15,9 +15,13 @@ namespace System.Data.Common
         private SqlBoolean[] _values = default!; // Late-initialized
 
         public SqlBooleanStorage(DataColumn column)
-        : base(column, typeof(SqlBoolean), SqlBoolean.Null, SqlBoolean.Null, StorageType.SqlBoolean)
-        {
-        }
+            : base(
+                column,
+                typeof(SqlBoolean),
+                SqlBoolean.Null,
+                SqlBoolean.Null,
+                StorageType.SqlBoolean
+            ) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -166,7 +170,12 @@ namespace System.Data.Common
             return new SqlBoolean[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             SqlBoolean[] typedStore = (SqlBoolean[])store;
             typedStore[storeIndex] = _values[record];

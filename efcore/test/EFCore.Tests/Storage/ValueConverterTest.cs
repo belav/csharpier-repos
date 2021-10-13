@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         Id = async ? 1 : 2,
                         ConvertedGoingIn = new DateTime(2015, 1, 10, 8, 8, 8, DateTimeKind.Local),
                         ConvertedComingOut = new DateTime(2015, 1, 10, 9, 9, 9, DateTimeKind.Local)
-                    });
+                    }
+                );
 
                 Assert.Equal(1, async ? await context.SaveChangesAsync() : context.SaveChanges());
             }
@@ -39,17 +40,24 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 var person = context.Set<Person>().Find(async ? 1L : 2L);
 
                 Assert.Equal(DateTimeKind.Utc, person.ConvertedGoingIn.Kind);
-                Assert.Equal(new DateTime(2015, 1, 10, 8, 8, 8, DateTimeKind.Utc), person.ConvertedGoingIn);
+                Assert.Equal(
+                    new DateTime(2015, 1, 10, 8, 8, 8, DateTimeKind.Utc),
+                    person.ConvertedGoingIn
+                );
 
                 Assert.Equal(DateTimeKind.Utc, person.ConvertedComingOut.Kind);
-                Assert.Equal(new DateTime(2015, 1, 10, 9, 9, 9, DateTimeKind.Utc), person.ConvertedComingOut);
+                Assert.Equal(
+                    new DateTime(2015, 1, 10, 9, 9, 9, DateTimeKind.Utc),
+                    person.ConvertedComingOut
+                );
             }
         }
 
         private class InMemoryConvertersContext : DbContext
         {
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseInMemoryDatabase(nameof(ValueComparerTest));
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) => optionsBuilder.UseInMemoryDatabase(nameof(ValueComparerTest));
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -61,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                         b.Property(o => o.ConvertedGoingIn)
                             .HasConversion(v => DateTime.SpecifyKind(v, DateTimeKind.Utc), v => v);
-                    });
+                    }
+                );
             }
         }
 
@@ -74,14 +83,22 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public DateTime ConvertedComingOut { get; set; }
         }
 
-        private static readonly ValueConverter<uint, int> _uIntToInt
-            = new CastingConverter<uint, int>();
+        private static readonly ValueConverter<uint, int> _uIntToInt = new CastingConverter<
+            uint,
+            int
+        >();
 
         [ConditionalFact]
         public void Can_access_raw_converters()
         {
-            Assert.Same(_uIntToInt.ConvertFromProviderExpression, ((ValueConverter)_uIntToInt).ConvertFromProviderExpression);
-            Assert.Same(_uIntToInt.ConvertToProviderExpression, ((ValueConverter)_uIntToInt).ConvertToProviderExpression);
+            Assert.Same(
+                _uIntToInt.ConvertFromProviderExpression,
+                ((ValueConverter)_uIntToInt).ConvertFromProviderExpression
+            );
+            Assert.Same(
+                _uIntToInt.ConvertToProviderExpression,
+                ((ValueConverter)_uIntToInt).ConvertToProviderExpression
+            );
 
             Assert.Equal(1, _uIntToInt.ConvertToProviderExpression.Compile()(1));
             Assert.Equal((uint)1, _uIntToInt.ConvertFromProviderExpression.Compile()(1));
@@ -143,8 +160,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Null(_uIntToInt.ConvertFromProvider(null));
         }
 
-        private static readonly ValueConverter<uint?, int?> _nullableUIntToNullableInt
-            = new CastingConverter<uint?, int?>();
+        private static readonly ValueConverter<uint?, int?> _nullableUIntToNullableInt =
+            new CastingConverter<uint?, int?>();
 
         [ConditionalFact]
         public void Can_convert_exact_types_with_nullable_converter()
@@ -152,8 +169,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal((int?)1, _nullableUIntToNullableInt.ConvertToProvider((uint?)1));
             Assert.Equal((uint?)1, _nullableUIntToNullableInt.ConvertFromProvider((int?)1));
 
-            Assert.Equal((int?)-1, _nullableUIntToNullableInt.ConvertToProvider((uint?)uint.MaxValue));
-            Assert.Equal((uint?)uint.MaxValue, _nullableUIntToNullableInt.ConvertFromProvider((int?)-1));
+            Assert.Equal(
+                (int?)-1,
+                _nullableUIntToNullableInt.ConvertToProvider((uint?)uint.MaxValue)
+            );
+            Assert.Equal(
+                (uint?)uint.MaxValue,
+                _nullableUIntToNullableInt.ConvertFromProvider((int?)-1)
+            );
         }
 
         [ConditionalFact]
@@ -162,8 +185,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal((int?)1, _nullableUIntToNullableInt.ConvertToProvider((uint?)1));
             Assert.Equal((uint?)1, _nullableUIntToNullableInt.ConvertFromProvider((int?)1));
 
-            Assert.Equal((int?)-1, _nullableUIntToNullableInt.ConvertToProvider((uint?)uint.MaxValue));
-            Assert.Equal((uint?)uint.MaxValue, _nullableUIntToNullableInt.ConvertFromProvider((int?)-1));
+            Assert.Equal(
+                (int?)-1,
+                _nullableUIntToNullableInt.ConvertToProvider((uint?)uint.MaxValue)
+            );
+            Assert.Equal(
+                (uint?)uint.MaxValue,
+                _nullableUIntToNullableInt.ConvertFromProvider((int?)-1)
+            );
         }
 
         [ConditionalFact]
@@ -235,16 +264,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 foreach (var toType in types)
                 {
                     var converter = (ValueConverter)Activator.CreateInstance(
-                        typeof(CastingConverter<,>).MakeGenericType(fromType, toType),
-                        new object[] { null });
+                        typeof(CastingConverter<, >).MakeGenericType(fromType, toType),
+                        new object[] { null }
+                    );
 
                     var resultToProvider = Expression.Lambda<Func<object>>(
                             Expression.Convert(
                                 Expression.Invoke(
                                     converter.ConvertToProviderExpression,
-                                    Expression.Convert(
-                                        Expression.Constant(1), fromType)),
-                                typeof(object)))
+                                    Expression.Convert(Expression.Constant(1), fromType)
+                                ),
+                                typeof(object)
+                            )
+                        )
                         .Compile()();
 
                     Assert.Same(toType.UnwrapNullableType(), resultToProvider.GetType());
@@ -253,9 +285,11 @@ namespace Microsoft.EntityFrameworkCore.Storage
                             Expression.Convert(
                                 Expression.Invoke(
                                     converter.ConvertFromProviderExpression,
-                                    Expression.Convert(
-                                        Expression.Constant(1), toType)),
-                                typeof(object)))
+                                    Expression.Convert(Expression.Constant(1), toType)
+                                ),
+                                typeof(object)
+                            )
+                        )
                         .Compile()();
 
                     Assert.Same(fromType.UnwrapNullableType(), resultFromProvider.GetType());
@@ -263,21 +297,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
         }
 
-        private static readonly ValueConverter<int, string> _intToString
-            = new(v => v.ToString(), v => ConvertToInt(v));
+        private static readonly ValueConverter<int, string> _intToString =
+            new(v => v.ToString(), v => ConvertToInt(v));
 
-        private static int ConvertToInt(string v)
-            => int.TryParse(v, out var result) ? result : 0;
+        private static int ConvertToInt(string v) => int.TryParse(v, out var result) ? result : 0;
 
-        private static readonly ValueConverter<Beatles, int> _enumToNumber
-            = new EnumToNumberConverter<Beatles, int>();
+        private static readonly ValueConverter<Beatles, int> _enumToNumber =
+            new EnumToNumberConverter<Beatles, int>();
 
         [ConditionalFact]
         public void Can_convert_compose_to_strings()
         {
-            var converter
-                = ((ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString))
-                .ConvertToProviderExpression.Compile();
+            var converter = (
+                (ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString)
+            ).ConvertToProviderExpression.Compile();
 
             Assert.Equal("7", converter(Beatles.John));
             Assert.Equal("4", converter(Beatles.Paul));
@@ -304,9 +337,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [ConditionalFact]
         public void Can_convert_compose_to_enums()
         {
-            var converter
-                = ((ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString))
-                .ConvertFromProviderExpression.Compile();
+            var converter = (
+                (ValueConverter<Beatles, string>)_enumToNumber.ComposeWith(_intToString)
+            ).ConvertFromProviderExpression.Compile();
 
             Assert.Equal(Beatles.John, converter("7"));
             Assert.Equal(Beatles.Paul, converter("4"));
@@ -344,14 +377,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(
                 CoreStrings.ConvertersCannotBeComposed("Beatles", "int", "uint", "int"),
                 Assert.Throws<ArgumentException>(
-                    () => _enumToNumber.ComposeWith(_uIntToInt)).Message);
+                    () => _enumToNumber.ComposeWith(_uIntToInt)
+                ).Message
+            );
         }
 
 #pragma warning disable xUnit1013 // Public method should be marked as test
         public static void OrderingTest<TModel, TProvider>(
 #pragma warning restore xUnit1013 // Public method should be marked as test
             ValueConverter<TModel, TProvider> converter,
-            params TModel[] values)
+            params TModel[] values
+        )
         {
             var convertToProvider = converter.ConvertToProviderExpression.Compile();
             var convertFromProvider = converter.ConvertFromProviderExpression.Compile();
@@ -359,16 +395,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(
                 values,
                 values.Select(v => convertToProvider(v))
-                    .OrderBy(v => v).ToList()
+                    .OrderBy(v => v)
+                    .ToList()
                     .Select(v => convertFromProvider(v))
-                    .ToArray());
+                    .ToArray()
+            );
         }
 
 #pragma warning disable xUnit1013 // Public method should be marked as test
         public static void OrderingTest<TModel>(
 #pragma warning restore xUnit1013 // Public method should be marked as test
             ValueConverter<TModel, byte[]> converter,
-            params TModel[] values)
+            params TModel[] values
+        )
         {
             var convertToProvider = converter.ConvertToProviderExpression.Compile();
             var convertFromProvider = converter.ConvertFromProviderExpression.Compile();
@@ -376,15 +415,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Assert.Equal(
                 values,
                 values.Select(v => convertToProvider(v))
-                    .OrderBy(v => v, new BytesComparer()).ToList()
+                    .OrderBy(v => v, new BytesComparer())
+                    .ToList()
                     .Select(v => convertFromProvider(v))
-                    .ToArray());
+                    .ToArray()
+            );
         }
 
         private class BytesComparer : IComparer<byte[]>
         {
-            public int Compare(byte[] x, byte[] y)
-                => StructuralComparisons.StructuralComparer.Compare(x, y);
+            public int Compare(byte[] x, byte[] y) =>
+                StructuralComparisons.StructuralComparer.Compare(x, y);
         }
     }
 }

@@ -46,30 +46,37 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             // Arrange
             var diagnosticListener = new DiagnosticListener("DummySource");
             var logger = new LoggerWithScopes(isEnabled: true);
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener, logger: logger);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener,
+                logger: logger
+            );
             var startFired = false;
             var stopFired = false;
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair =>
-            {
-                // This should not fire
-                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
-                {
-                    startFired = true;
-                }
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(
+                    pair =>
+                    {
+                        // This should not fire
+                        if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
+                        {
+                            startFired = true;
+                        }
 
-                // This should not fire
-                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
+                        // This should not fire
+                        if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
+                        {
+                            stopFired = true;
+                        }
+                    }
+                ),
+                (s, o, arg3) =>
                 {
-                    stopFired = true;
+                    // The events are off
+                    return false;
                 }
-            }),
-            (s, o, arg3) =>
-            {
-                // The events are off
-                return false;
-            });
-
+            );
 
             // Act
             var context = hostingApplication.CreateContext(features);
@@ -85,28 +92,39 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void ActivityIsNotCreatedWhenIsEnabledForActivityIsFalse()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
             bool eventsFired = false;
             bool isEnabledActivityFired = false;
             bool isEnabledStartFired = false;
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair =>
-            {
-                eventsFired |= pair.Key.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal);
-            }), (s, o, arg3) =>
-            {
-                if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn")
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(
+                    pair =>
+                    {
+                        eventsFired |= pair.Key.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        );
+                    }
+                ),
+                (s, o, arg3) =>
                 {
-                    Assert.IsAssignableFrom<HttpContext>(o);
-                    isEnabledActivityFired = true;
+                    if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn")
+                    {
+                        Assert.IsAssignableFrom<HttpContext>(o);
+                        isEnabledActivityFired = true;
+                    }
+                    if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
+                    {
+                        isEnabledStartFired = true;
+                    }
+                    return false;
                 }
-                if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
-                {
-                    isEnabledStartFired = true;
-                }
-                return false;
-            });
+            );
 
             hostingApplication.CreateContext(features);
             Assert.Null(Activity.Current);
@@ -119,31 +137,42 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void ActivityIsCreatedButNotLoggedWhenIsEnabledForActivityStartIsFalse()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
             bool eventsFired = false;
             bool isEnabledStartFired = false;
             bool isEnabledActivityFired = false;
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair =>
-            {
-                eventsFired |= pair.Key.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal);
-            }), (s, o, arg3) =>
-            {
-                if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn")
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(
+                    pair =>
+                    {
+                        eventsFired |= pair.Key.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        );
+                    }
+                ),
+                (s, o, arg3) =>
                 {
-                    Assert.IsAssignableFrom<HttpContext>(o);
-                    isEnabledActivityFired = true;
+                    if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn")
+                    {
+                        Assert.IsAssignableFrom<HttpContext>(o);
+                        isEnabledActivityFired = true;
+                        return true;
+                    }
+
+                    if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
+                    {
+                        isEnabledStartFired = true;
+                        return false;
+                    }
                     return true;
                 }
-
-                if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
-                {
-                    isEnabledStartFired = true;
-                    return false;
-                }
-                return true;
-            });
+            );
 
             hostingApplication.CreateContext(features);
             Assert.NotNull(Activity.Current);
@@ -156,21 +185,31 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void ActivityIsCreatedAndLogged()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
             bool startCalled = false;
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair =>
-            {
-                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
-                {
-                    startCalled = true;
-                    Assert.NotNull(pair.Value);
-                    Assert.NotNull(Activity.Current);
-                    Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-                    AssertProperty<HttpContext>(pair.Value, "HttpContext");
-                }
-            }));
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(
+                    pair =>
+                    {
+                        if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
+                        {
+                            startCalled = true;
+                            Assert.NotNull(pair.Value);
+                            Assert.NotNull(Activity.Current);
+                            Assert.Equal(
+                                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                                Activity.Current.OperationName
+                            );
+                            AssertProperty<HttpContext>(pair.Value, "HttpContext");
+                        }
+                    }
+                )
+            );
 
             hostingApplication.CreateContext(features);
             Assert.NotNull(Activity.Current);
@@ -181,21 +220,31 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void ActivityIsStoppedDuringStopCall()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
             bool endCalled = false;
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair =>
-            {
-                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
-                {
-                    endCalled = true;
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(
+                    pair =>
+                    {
+                        if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
+                        {
+                            endCalled = true;
 
-                    Assert.NotNull(Activity.Current);
-                    Assert.True(Activity.Current.Duration > TimeSpan.Zero);
-                    Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-                    AssertProperty<HttpContext>(pair.Value, "HttpContext");
-                }
-            }));
+                            Assert.NotNull(Activity.Current);
+                            Assert.True(Activity.Current.Duration > TimeSpan.Zero);
+                            Assert.Equal(
+                                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                                Activity.Current.OperationName
+                            );
+                            AssertProperty<HttpContext>(pair.Value, "HttpContext");
+                        }
+                    }
+                )
+            );
 
             var context = hostingApplication.CreateContext(features);
             hostingApplication.DisposeContext(context, null);
@@ -206,20 +255,30 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void ActivityIsStoppedDuringUnhandledExceptionCall()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
             bool endCalled = false;
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair =>
-            {
-                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
-                {
-                    endCalled = true;
-                    Assert.NotNull(Activity.Current);
-                    Assert.True(Activity.Current.Duration > TimeSpan.Zero);
-                    Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-                    AssertProperty<HttpContext>(pair.Value, "HttpContext");
-                }
-            }));
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(
+                    pair =>
+                    {
+                        if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
+                        {
+                            endCalled = true;
+                            Assert.NotNull(Activity.Current);
+                            Assert.True(Activity.Current.Duration > TimeSpan.Zero);
+                            Assert.Equal(
+                                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                                Activity.Current.OperationName
+                            );
+                            AssertProperty<HttpContext>(pair.Value, "HttpContext");
+                        }
+                    }
+                )
+            );
 
             var context = hostingApplication.CreateContext(features);
             hostingApplication.DisposeContext(context, new Exception());
@@ -230,18 +289,28 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void ActivityIsAvailableDuringUnhandledExceptionCall()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
             bool endCalled = false;
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair =>
-            {
-                if (pair.Key == "Microsoft.AspNetCore.Hosting.UnhandledException")
-                {
-                    endCalled = true;
-                    Assert.NotNull(Activity.Current);
-                    Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-                }
-            }));
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(
+                    pair =>
+                    {
+                        if (pair.Key == "Microsoft.AspNetCore.Hosting.UnhandledException")
+                        {
+                            endCalled = true;
+                            Assert.NotNull(Activity.Current);
+                            Assert.Equal(
+                                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                                Activity.Current.OperationName
+                            );
+                        }
+                    }
+                )
+            );
 
             var context = hostingApplication.CreateContext(features);
             hostingApplication.DisposeContext(context, new Exception());
@@ -252,149 +321,239 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void ActivityIsAvailibleDuringRequest()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }),
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(pair => { }),
                 s =>
                 {
-                    if (s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal))
+                    if (
+                        s.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return true;
                     }
                     return false;
-                });
+                }
+            );
 
             hostingApplication.CreateContext(features);
 
             Assert.NotNull(Activity.Current);
-            Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
+            Assert.Equal(
+                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                Activity.Current.OperationName
+            );
         }
 
         [Fact]
         public void ActivityParentIdAndBaggageReadFromHeaders()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }),
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(pair => { }),
                 s =>
                 {
-                    if (s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal))
+                    if (
+                        s.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return true;
                     }
                     return false;
-                });
-
-            features.Set<IHttpRequestFeature>(new HttpRequestFeature()
-            {
-                Headers = new HeaderDictionary()
-                {
-                    {"Request-Id", "ParentId1"},
-                    {"baggage", "Key1=value1, Key2=value2"}
                 }
-            });
+            );
+
+            features.Set<IHttpRequestFeature>(
+                new HttpRequestFeature()
+                {
+                    Headers = new HeaderDictionary()
+                    {
+                        { "Request-Id", "ParentId1" },
+                        { "baggage", "Key1=value1, Key2=value2" }
+                    }
+                }
+            );
             hostingApplication.CreateContext(features);
-            Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
+            Assert.Equal(
+                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                Activity.Current.OperationName
+            );
             Assert.Equal("ParentId1", Activity.Current.ParentId);
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key1" && pair.Value == "value1");
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key2" && pair.Value == "value2");
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key1" && pair.Value == "value1"
+            );
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key2" && pair.Value == "value2"
+            );
         }
 
         [Fact]
         public void ActivityBaggageReadFromLegacyHeaders()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }),
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(pair => { }),
                 s =>
                 {
-                    if (s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal))
+                    if (
+                        s.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return true;
                     }
                     return false;
-                });
-
-            features.Set<IHttpRequestFeature>(new HttpRequestFeature()
-            {
-                Headers = new HeaderDictionary()
-                {
-                    {"Request-Id", "ParentId1"},
-                    {"Correlation-Context", "Key1=value1, Key2=value2"}
                 }
-            });
+            );
+
+            features.Set<IHttpRequestFeature>(
+                new HttpRequestFeature()
+                {
+                    Headers = new HeaderDictionary()
+                    {
+                        { "Request-Id", "ParentId1" },
+                        { "Correlation-Context", "Key1=value1, Key2=value2" }
+                    }
+                }
+            );
             hostingApplication.CreateContext(features);
-            Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key1" && pair.Value == "value1");
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key2" && pair.Value == "value2");
+            Assert.Equal(
+                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                Activity.Current.OperationName
+            );
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key1" && pair.Value == "value1"
+            );
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key2" && pair.Value == "value2"
+            );
         }
 
         [Fact]
         public void ActivityBaggagePrefersW3CBaggageHeaderName()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }),
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(pair => { }),
                 s =>
                 {
-                    if (s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal))
+                    if (
+                        s.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return true;
                     }
                     return false;
-                });
-
-            features.Set<IHttpRequestFeature>(new HttpRequestFeature()
-            {
-                Headers = new HeaderDictionary()
-                {
-                    {"Request-Id", "ParentId1"},
-                    {"Correlation-Context", "Key1=value1, Key2=value2"},
-                    {"baggage", "Key1=value3, Key2=value4"}
                 }
-            });
-            hostingApplication.CreateContext(features);
-            Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key1" && pair.Value == "value3");
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key2" && pair.Value == "value4");
-        }
+            );
 
+            features.Set<IHttpRequestFeature>(
+                new HttpRequestFeature()
+                {
+                    Headers = new HeaderDictionary()
+                    {
+                        { "Request-Id", "ParentId1" },
+                        { "Correlation-Context", "Key1=value1, Key2=value2" },
+                        { "baggage", "Key1=value3, Key2=value4" }
+                    }
+                }
+            );
+            hostingApplication.CreateContext(features);
+            Assert.Equal(
+                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                Activity.Current.OperationName
+            );
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key1" && pair.Value == "value3"
+            );
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key2" && pair.Value == "value4"
+            );
+        }
 
         [Fact]
         public void ActivityBaggagePreservesItemsOrder()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }),
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(pair => { }),
                 s =>
                 {
-                    if (s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal))
+                    if (
+                        s.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return true;
                     }
                     return false;
-                });
-
-            features.Set<IHttpRequestFeature>(new HttpRequestFeature()
-            {
-                Headers = new HeaderDictionary()
-                {
-                    {"Request-Id", "ParentId1"},
-                    {"baggage", "Key1=value1, Key2=value2, Key1=value3"} // duplicated keys allowed by the contract
                 }
-            });
+            );
+
+            features.Set<IHttpRequestFeature>(
+                new HttpRequestFeature()
+                {
+                    Headers = new HeaderDictionary()
+                    {
+                        { "Request-Id", "ParentId1" },
+                        { "baggage", "Key1=value1, Key2=value2, Key1=value3" } // duplicated keys allowed by the contract
+                    }
+                }
+            );
             hostingApplication.CreateContext(features);
-            Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
+            Assert.Equal(
+                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                Activity.Current.OperationName
+            );
 
             var expectedBaggage = new[]
             {
-                KeyValuePair.Create("Key1","value1"),
-                KeyValuePair.Create("Key2","value2"),
-                KeyValuePair.Create("Key1","value3")
+                KeyValuePair.Create("Key1", "value1"),
+                KeyValuePair.Create("Key2", "value2"),
+                KeyValuePair.Create("Key1", "value3")
             };
 
             Assert.Equal(expectedBaggage, Activity.Current.Baggage);
@@ -404,72 +563,120 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         public void ActivityBaggageValuesAreUrlDecodedFromHeaders()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }),
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(pair => { }),
                 s =>
                 {
-                    if (s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal))
+                    if (
+                        s.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return true;
                     }
                     return false;
-                });
-
-            features.Set<IHttpRequestFeature>(new HttpRequestFeature()
-            {
-                Headers = new HeaderDictionary()
-                {
-                    {"Request-Id", "ParentId1"},
-                    {"baggage", "Key1=value1%2F1"}
                 }
-            });
+            );
+
+            features.Set<IHttpRequestFeature>(
+                new HttpRequestFeature()
+                {
+                    Headers = new HeaderDictionary()
+                    {
+                        { "Request-Id", "ParentId1" },
+                        { "baggage", "Key1=value1%2F1" }
+                    }
+                }
+            );
             hostingApplication.CreateContext(features);
-            Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key1" && pair.Value == "value1/1");
+            Assert.Equal(
+                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                Activity.Current.OperationName
+            );
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key1" && pair.Value == "value1/1"
+            );
         }
 
         [Fact]
         public void ActivityTraceParentAndTraceStateFromHeaders()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
-            diagnosticListener.Subscribe(new CallbackDiagnosticListener(pair => { }),
+            diagnosticListener.Subscribe(
+                new CallbackDiagnosticListener(pair => { }),
                 s =>
                 {
-                    if (s.StartsWith("Microsoft.AspNetCore.Hosting.HttpRequestIn", StringComparison.Ordinal))
+                    if (
+                        s.StartsWith(
+                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return true;
                     }
                     return false;
-                });
-
-            features.Set<IHttpRequestFeature>(new HttpRequestFeature()
-            {
-                Headers = new HeaderDictionary()
-                {
-                    {"traceparent", "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01"},
-                    {"tracestate", "TraceState1"},
-                    {"baggage", "Key1=value1, Key2=value2"}
                 }
-            });
+            );
+
+            features.Set<IHttpRequestFeature>(
+                new HttpRequestFeature()
+                {
+                    Headers = new HeaderDictionary()
+                    {
+                        {
+                            "traceparent",
+                            "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01"
+                        },
+                        { "tracestate", "TraceState1" },
+                        { "baggage", "Key1=value1, Key2=value2" }
+                    }
+                }
+            );
             hostingApplication.CreateContext(features);
-            Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", Activity.Current.OperationName);
+            Assert.Equal(
+                "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                Activity.Current.OperationName
+            );
             Assert.Equal(ActivityIdFormat.W3C, Activity.Current.IdFormat);
-            Assert.Equal("0123456789abcdef0123456789abcdef", Activity.Current.TraceId.ToHexString());
+            Assert.Equal(
+                "0123456789abcdef0123456789abcdef",
+                Activity.Current.TraceId.ToHexString()
+            );
             Assert.Equal("0123456789abcdef", Activity.Current.ParentSpanId.ToHexString());
             Assert.Equal("TraceState1", Activity.Current.TraceStateString);
 
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key1" && pair.Value == "value1");
-            Assert.Contains(Activity.Current.Baggage, pair => pair.Key == "Key2" && pair.Value == "value2");
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key1" && pair.Value == "value1"
+            );
+            Assert.Contains(
+                Activity.Current.Baggage,
+                pair => pair.Key == "Key2" && pair.Value == "value2"
+            );
         }
 
         [Fact]
         public void ActivityOnImportHookIsCalled()
         {
             var diagnosticListener = new DiagnosticListener("DummySource");
-            var hostingApplication = CreateApplication(out var features, diagnosticListener: diagnosticListener);
+            var hostingApplication = CreateApplication(
+                out var features,
+                diagnosticListener: diagnosticListener
+            );
 
             bool onActivityImportCalled = false;
             diagnosticListener.Subscribe(
@@ -479,12 +686,16 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                 {
                     onActivityImportCalled = true;
                     Assert.Null(Activity.Current);
-                    Assert.Equal("Microsoft.AspNetCore.Hosting.HttpRequestIn", activity.OperationName);
+                    Assert.Equal(
+                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                        activity.OperationName
+                    );
                     Assert.NotNull(context);
                     Assert.IsAssignableFrom<HttpContext>(context);
 
                     activity.ActivityTraceFlags = ActivityTraceFlags.Recorded;
-                });
+                }
+            );
 
             hostingApplication.CreateContext(features);
 
@@ -501,7 +712,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             using var listener = new ActivityListener
             {
                 ShouldListenTo = activitySource => true,
-                Sample = (ref ActivityCreationOptions<ActivityContext> _) => ActivitySamplingResult.AllData,
+                Sample = (ref ActivityCreationOptions<ActivityContext> _) =>
+                    ActivitySamplingResult.AllData,
                 ActivityStarted = activity =>
                 {
                     parentSpanId = Activity.Current.ParentSpanId.ToHexString();
@@ -510,33 +722,44 @@ namespace Microsoft.AspNetCore.Hosting.Tests
 
             ActivitySource.AddActivityListener(listener);
 
-            features.Set<IHttpRequestFeature>(new HttpRequestFeature()
-            {
-                Headers = new HeaderDictionary()
+            features.Set<IHttpRequestFeature>(
+                new HttpRequestFeature()
                 {
-                    {"traceparent", "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01"},
-                    {"tracestate", "TraceState1"},
-                    {"baggage", "Key1=value1, Key2=value2"}
+                    Headers = new HeaderDictionary()
+                    {
+                        {
+                            "traceparent",
+                            "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01"
+                        },
+                        { "tracestate", "TraceState1" },
+                        { "baggage", "Key1=value1, Key2=value2" }
+                    }
                 }
-            });
+            );
 
             hostingApplication.CreateContext(features);
             Assert.Equal("0123456789abcdef", parentSpanId);
         }
 
-
         private static void AssertProperty<T>(object o, string name)
         {
             Assert.NotNull(o);
-            var property = o.GetType().GetTypeInfo().GetProperty(name, BindingFlags.Instance | BindingFlags.Public);
+            var property = o.GetType()
+                .GetTypeInfo()
+                .GetProperty(name, BindingFlags.Instance | BindingFlags.Public);
             Assert.NotNull(property);
             var value = property.GetValue(o);
             Assert.NotNull(value);
             Assert.IsAssignableFrom<T>(value);
         }
 
-        private static HostingApplication CreateApplication(out FeatureCollection features,
-            DiagnosticListener diagnosticListener = null, ActivitySource activitySource = null, ILogger logger = null, Action<DefaultHttpContext> configure = null)
+        private static HostingApplication CreateApplication(
+            out FeatureCollection features,
+            DiagnosticListener diagnosticListener = null,
+            ActivitySource activitySource = null,
+            ILogger logger = null,
+            Action<DefaultHttpContext> configure = null
+        )
         {
             var httpContextFactory = new Mock<IHttpContextFactory>();
 
@@ -544,7 +767,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             features.Set<IHttpRequestFeature>(new HttpRequestFeature());
             var context = new DefaultHttpContext(features);
             configure?.Invoke(context);
-            httpContextFactory.Setup(s => s.Create(It.IsAny<IFeatureCollection>())).Returns(context);
+            httpContextFactory.Setup(s => s.Create(It.IsAny<IFeatureCollection>()))
+                .Returns(context);
             httpContextFactory.Setup(s => s.Dispose(It.IsAny<HttpContext>()));
 
             var hostingApplication = new HostingApplication(
@@ -552,7 +776,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                 logger ?? new NullScopeLogger(),
                 diagnosticListener ?? new NoopDiagnosticListener(),
                 activitySource ?? new ActivitySource("Microsoft.AspNetCore"),
-                httpContextFactory.Object);
+                httpContextFactory.Object
+            );
 
             return hostingApplication;
         }
@@ -569,9 +794,13 @@ namespace Microsoft.AspNetCore.Hosting.Tests
 
             public bool IsEnabled(LogLevel logLevel) => _isEnabled;
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-            {
-            }
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            ) { }
         }
 
         private class LoggerWithScopes : ILogger
@@ -592,16 +821,17 @@ namespace Microsoft.AspNetCore.Hosting.Tests
 
             public bool IsEnabled(LogLevel logLevel) => _isEnabled;
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-            {
-
-            }
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            ) { }
 
             private class Scope : IDisposable
             {
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
 
@@ -616,9 +846,7 @@ namespace Microsoft.AspNetCore.Hosting.Tests
 
             public override bool IsEnabled(string name) => _isEnabled;
 
-            public override void Write(string name, object value)
-            {
-            }
+            public override void Write(string name, object value) { }
         }
 
         private class CallbackDiagnosticListener : IObserver<KeyValuePair<string, object>>
@@ -635,13 +863,9 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                 _callback(value);
             }
 
-            public void OnError(Exception error)
-            {
-            }
+            public void OnError(Exception error) { }
 
-            public void OnCompleted()
-            {
-            }
+            public void OnCompleted() { }
         }
     }
 }

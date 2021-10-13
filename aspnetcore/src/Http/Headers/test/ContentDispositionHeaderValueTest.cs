@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -136,7 +136,10 @@ namespace Microsoft.Net.Http.Headers
             Assert.Equal("FileÃName.bat", contentDisposition.FileName);
             Assert.Equal(1, contentDisposition.Parameters.Count);
             Assert.Equal("filename", contentDisposition.Parameters.First().Name);
-            Assert.Equal("\"=?utf-8?B?RmlsZcODTmFtZS5iYXQ=?=\"", contentDisposition.Parameters.First().Value);
+            Assert.Equal(
+                "\"=?utf-8?B?RmlsZcODTmFtZS5iYXQ=?=\"",
+                contentDisposition.Parameters.First().Value
+            );
 
             contentDisposition.Parameters.Remove(contentDisposition.Parameters.First());
             Assert.Null(contentDisposition.FileName.Value);
@@ -151,7 +154,10 @@ namespace Microsoft.Net.Http.Headers
             Assert.Equal("File\nName.bat", contentDisposition.FileName);
             Assert.Equal(1, contentDisposition.Parameters.Count);
             Assert.Equal("filename", contentDisposition.Parameters.First().Name);
-            Assert.Equal("\"=?utf-8?B?RmlsZQpOYW1lLmJhdA==?=\"", contentDisposition.Parameters.First().Value);
+            Assert.Equal(
+                "\"=?utf-8?B?RmlsZQpOYW1lLmJhdA==?=\"",
+                contentDisposition.Parameters.First().Value
+            );
 
             contentDisposition.Parameters.Remove(contentDisposition.Parameters.First());
             Assert.Null(contentDisposition.FileName.Value);
@@ -163,11 +169,17 @@ namespace Microsoft.Net.Http.Headers
             var contentDisposition = new ContentDispositionHeaderValue("inline");
 
             // Note that uppercase letters are used. Comparison should happen case-insensitive.
-            var fileName = new NameValueHeaderValue("FILENAME", "\"=?utf-99?Q?R=mlsZcODTmFtZS5iYXQ=?=\"");
+            var fileName = new NameValueHeaderValue(
+                "FILENAME",
+                "\"=?utf-99?Q?R=mlsZcODTmFtZS5iYXQ=?=\""
+            );
             contentDisposition.Parameters.Add(fileName);
             Assert.Equal(1, contentDisposition.Parameters.Count);
             Assert.Equal("FILENAME", contentDisposition.Parameters.First().Name);
-            Assert.Equal("\"=?utf-99?Q?R=mlsZcODTmFtZS5iYXQ=?=\"", contentDisposition.Parameters.First().Value);
+            Assert.Equal(
+                "\"=?utf-99?Q?R=mlsZcODTmFtZS5iYXQ=?=\"",
+                contentDisposition.Parameters.First().Value
+            );
             Assert.Equal("=?utf-99?Q?R=mlsZcODTmFtZS5iYXQ=?=", contentDisposition.FileName);
 
             contentDisposition.FileName = "new_name";
@@ -210,7 +222,10 @@ namespace Microsoft.Net.Http.Headers
             Assert.Equal("FileÃName.bat", contentDisposition.FileNameStar);
             Assert.Equal(1, contentDisposition.Parameters.Count);
             Assert.Equal("filename*", contentDisposition.Parameters.First().Name);
-            Assert.Equal("UTF-8\'\'File%C3%83Name.bat", contentDisposition.Parameters.First().Value);
+            Assert.Equal(
+                "UTF-8\'\'File%C3%83Name.bat",
+                contentDisposition.Parameters.First().Value
+            );
 
             contentDisposition.Parameters.Remove(contentDisposition.Parameters.First());
             Assert.Null(contentDisposition.FileNameStar.Value);
@@ -226,7 +241,10 @@ namespace Microsoft.Net.Http.Headers
             contentDisposition.Parameters.Add(fileNameStar);
             Assert.Equal(1, contentDisposition.Parameters.Count);
             Assert.Equal("FILENAME*", contentDisposition.Parameters.First().Name);
-            Assert.Equal("utf-99'lang'File%CZName.bat", contentDisposition.Parameters.First().Value);
+            Assert.Equal(
+                "utf-99'lang'File%CZName.bat",
+                contentDisposition.Parameters.First().Value
+            );
             Assert.Null(contentDisposition.FileNameStar.Value); // Decode failure
 
             contentDisposition.FileNameStar = "new_name";
@@ -242,7 +260,10 @@ namespace Microsoft.Net.Http.Headers
         [InlineData("FileName.bat", "FileName.bat")]
         [InlineData("FileÃName.bat", "File_Name.bat")]
         [InlineData("File\nName.bat", "File_Name.bat")]
-        public void SetHttpFileName_ShouldSanitizeFileNameWhereNeeded(string httpFileName, string expectedFileName)
+        public void SetHttpFileName_ShouldSanitizeFileNameWhereNeeded(
+            string httpFileName,
+            string expectedFileName
+        )
         {
             var contentDisposition = new ContentDispositionHeaderValue("inline");
             contentDisposition.SetHttpFileName(httpFileName);
@@ -253,7 +274,10 @@ namespace Microsoft.Net.Http.Headers
         public void Dates_AddDateParameterThenUseProperty_ParametersEntryIsOverwritten()
         {
             string validDateString = "\"Tue, 15 Nov 1994 08:12:31 GMT\"";
-            DateTimeOffset validDate = DateTimeOffset.Parse("Tue, 15 Nov 1994 08:12:31 GMT", CultureInfo.InvariantCulture);
+            DateTimeOffset validDate = DateTimeOffset.Parse(
+                "Tue, 15 Nov 1994 08:12:31 GMT",
+                CultureInfo.InvariantCulture
+            );
 
             var contentDisposition = new ContentDispositionHeaderValue("inline");
 
@@ -270,7 +294,10 @@ namespace Microsoft.Net.Http.Headers
             Assert.Equal(newDate, contentDisposition.CreationDate);
             Assert.Equal(1, contentDisposition.Parameters.Count);
             Assert.Equal("Creation-DATE", contentDisposition.Parameters.First().Name);
-            Assert.Equal("\"Tue, 15 Nov 1994 08:12:32 GMT\"", contentDisposition.Parameters.First().Value);
+            Assert.Equal(
+                "\"Tue, 15 Nov 1994 08:12:32 GMT\"",
+                contentDisposition.Parameters.First().Value
+            );
 
             contentDisposition.Parameters.Remove(dateParameter);
             Assert.Null(contentDisposition.CreationDate);
@@ -330,7 +357,9 @@ namespace Microsoft.Net.Http.Headers
             Assert.Null(contentDisposition.Size);
 
             // Negatives not allowed
-            Assert.Throws<ArgumentOutOfRangeException>(() => contentDisposition.Size = -279172874240);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => contentDisposition.Size = -279172874240
+            );
             Assert.Null(contentDisposition.Size);
             Assert.Equal(1, contentDisposition.Parameters.Count);
             Assert.Equal("SIZE", contentDisposition.Parameters.First().Name);
@@ -349,32 +378,56 @@ namespace Microsoft.Net.Http.Headers
             Assert.Equal("inline; name=myname", contentDisposition.ToString());
 
             contentDisposition.FileName = "my File Name";
-            Assert.Equal("inline; name=myname; filename=\"my File Name\"", contentDisposition.ToString());
+            Assert.Equal(
+                "inline; name=myname; filename=\"my File Name\"",
+                contentDisposition.ToString()
+            );
 
-            contentDisposition.CreationDate = new DateTimeOffset(new DateTime(2011, 2, 15), new TimeSpan(-8, 0, 0));
-            Assert.Equal("inline; name=myname; filename=\"my File Name\"; creation-date="
-                + "\"Tue, 15 Feb 2011 08:00:00 GMT\"", contentDisposition.ToString());
+            contentDisposition.CreationDate = new DateTimeOffset(
+                new DateTime(2011, 2, 15),
+                new TimeSpan(-8, 0, 0)
+            );
+            Assert.Equal(
+                "inline; name=myname; filename=\"my File Name\"; creation-date="
+                    + "\"Tue, 15 Feb 2011 08:00:00 GMT\"",
+                contentDisposition.ToString()
+            );
 
-            contentDisposition.Parameters.Add(new NameValueHeaderValue("custom", "\"custom value\""));
-            Assert.Equal("inline; name=myname; filename=\"my File Name\"; creation-date="
-                + "\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\"",  contentDisposition.ToString());
+            contentDisposition.Parameters.Add(
+                new NameValueHeaderValue("custom", "\"custom value\"")
+            );
+            Assert.Equal(
+                "inline; name=myname; filename=\"my File Name\"; creation-date="
+                    + "\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\"",
+                contentDisposition.ToString()
+            );
 
             contentDisposition.Name = null;
-            Assert.Equal("inline; filename=\"my File Name\"; creation-date="
-                + "\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\"", contentDisposition.ToString());
+            Assert.Equal(
+                "inline; filename=\"my File Name\"; creation-date="
+                    + "\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\"",
+                contentDisposition.ToString()
+            );
 
             contentDisposition.FileNameStar = "File%Name";
-            Assert.Equal("inline; filename=\"my File Name\"; creation-date="
-                + "\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\"; filename*=UTF-8\'\'File%25Name",
-                contentDisposition.ToString());
+            Assert.Equal(
+                "inline; filename=\"my File Name\"; creation-date="
+                    + "\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\"; filename*=UTF-8\'\'File%25Name",
+                contentDisposition.ToString()
+            );
 
             contentDisposition.FileName = null;
-            Assert.Equal("inline; creation-date=\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\";"
-                + " filename*=UTF-8\'\'File%25Name", contentDisposition.ToString());
+            Assert.Equal(
+                "inline; creation-date=\"Tue, 15 Feb 2011 08:00:00 GMT\"; custom=\"custom value\";"
+                    + " filename*=UTF-8\'\'File%25Name",
+                contentDisposition.ToString()
+            );
 
             contentDisposition.CreationDate = null;
-            Assert.Equal("inline; custom=\"custom value\"; filename*=UTF-8\'\'File%25Name",
-                contentDisposition.ToString());
+            Assert.Equal(
+                "inline; custom=\"custom value\"; filename*=UTF-8\'\'File%25Name",
+                contentDisposition.ToString()
+            );
         }
 
         [Fact]
@@ -415,10 +468,16 @@ namespace Microsoft.Net.Http.Headers
             Assert.False(contentDisposition1.Equals(contentDisposition2), "No params vs. name.");
             Assert.False(contentDisposition2.Equals(contentDisposition1), "name vs. no params.");
             Assert.False(contentDisposition1.Equals(null), "No params vs. <null>.");
-            Assert.False(contentDisposition1!.Equals(contentDisposition3), "No params vs. custom param.");
+            Assert.False(
+                contentDisposition1!.Equals(contentDisposition3),
+                "No params vs. custom param."
+            );
             Assert.False(contentDisposition2.Equals(contentDisposition3), "name vs. custom param.");
             Assert.True(contentDisposition1.Equals(contentDisposition4), "Different casing.");
-            Assert.True(contentDisposition2.Equals(contentDisposition5), "Different casing in name.");
+            Assert.True(
+                contentDisposition2.Equals(contentDisposition5),
+                "Different casing in name."
+            );
             Assert.False(contentDisposition5.Equals(contentDisposition6), "name vs. custom param.");
             Assert.False(contentDisposition1.Equals(contentDisposition7), "inline vs. text/other.");
         }
@@ -440,8 +499,13 @@ namespace Microsoft.Net.Http.Headers
             expected.Name = null;
             expected.DispositionType = "attachment";
             expected.FileName = "foo-ae.html";
-            expected.Parameters.Add(new NameValueHeaderValue("filename*", "UTF-8''foo-%c3%a4.html"));
-            CheckValidParse(@"attachment; filename*=UTF-8''foo-%c3%a4.html; filename=foo-ae.html", expected);
+            expected.Parameters.Add(
+                new NameValueHeaderValue("filename*", "UTF-8''foo-%c3%a4.html")
+            );
+            CheckValidParse(
+                @"attachment; filename*=UTF-8''foo-%c3%a4.html; filename=foo-ae.html",
+                expected
+            );
         }
 
         [Fact]
@@ -488,61 +552,297 @@ namespace Microsoft.Net.Http.Headers
             CheckInvalidTryParse("text/");
         }
 
-        public static TheoryData<string, ContentDispositionHeaderValue> ValidContentDispositionTestCases = new TheoryData<string, ContentDispositionHeaderValue>()
+        public static TheoryData<
+            string,
+            ContentDispositionHeaderValue
+        > ValidContentDispositionTestCases = new TheoryData<
+            string,
+            ContentDispositionHeaderValue
+        >()
         {
             { "inline", new ContentDispositionHeaderValue("inline") }, // @"This should be equivalent to not including the header at all."
             { "inline;", new ContentDispositionHeaderValue("inline") },
-            { "inline;name=", new ContentDispositionHeaderValue("inline") { Parameters = { new NameValueHeaderValue("name", "") } } }, // TODO: passing in a null value causes a strange assert on CoreCLR before the test even starts. Not reproducible in the body of a test.
-            { "inline;name=value", new ContentDispositionHeaderValue("inline") { Name  = "value" } },
-            { "inline;name=value;", new ContentDispositionHeaderValue("inline") { Name  = "value" } },
-            { "inline;name=value;", new ContentDispositionHeaderValue("inline") { Name  = "value" } },
-            { @"inline; filename=""foo.html""", new ContentDispositionHeaderValue("inline") { FileName = @"""foo.html""" } },
-            { @"inline; filename=""Not an attachment!""", new ContentDispositionHeaderValue("inline") { FileName = @"""Not an attachment!""" } }, // 'inline', specifying a filename of Not an attachment! - this checks for proper parsing for disposition types.
-            { @"inline; filename=""foo.pdf""", new ContentDispositionHeaderValue("inline") { FileName = @"""foo.pdf""" } },
+            {
+                "inline;name=",
+                new ContentDispositionHeaderValue("inline")
+                {
+                    Parameters = { new NameValueHeaderValue("name", "") }
+                }
+            }, // TODO: passing in a null value causes a strange assert on CoreCLR before the test even starts. Not reproducible in the body of a test.
+            { "inline;name=value", new ContentDispositionHeaderValue("inline") { Name = "value" } },
+            {
+                "inline;name=value;",
+                new ContentDispositionHeaderValue("inline") { Name = "value" }
+            },
+            {
+                "inline;name=value;",
+                new ContentDispositionHeaderValue("inline") { Name = "value" }
+            },
+            {
+                @"inline; filename=""foo.html""",
+                new ContentDispositionHeaderValue("inline") { FileName = @"""foo.html""" }
+            },
+            {
+                @"inline; filename=""Not an attachment!""",
+                new ContentDispositionHeaderValue("inline") { FileName = @"""Not an attachment!""" }
+            }, // 'inline', specifying a filename of Not an attachment! - this checks for proper parsing for disposition types.
+            {
+                @"inline; filename=""foo.pdf""",
+                new ContentDispositionHeaderValue("inline") { FileName = @"""foo.pdf""" }
+            },
             { "attachment", new ContentDispositionHeaderValue("attachment") },
             { "ATTACHMENT", new ContentDispositionHeaderValue("ATTACHMENT") },
-            { @"attachment; filename=""foo.html""", new ContentDispositionHeaderValue("attachment") { FileName = @"""foo.html""" } },
-            { @"attachment; filename=""\""quoting\"" tested.html""", new ContentDispositionHeaderValue("attachment") { FileName = "\"\"quoting\" tested.html\"" } }, // 'attachment', specifying a filename of \"quoting\" tested.html (using double quotes around "quoting" to test... quoting)
-            { @"attachment; filename=""Here's a semicolon;.html""", new ContentDispositionHeaderValue("attachment") { FileName = @"""Here's a semicolon;.html""" } }, // , 'attachment', specifying a filename of Here's a semicolon;.html - this checks for proper parsing for parameters.
-            { @"attachment; foo=""bar""; filename=""foo.html""", new ContentDispositionHeaderValue(@"attachment") { FileName = @"""foo.html""", Parameters = { new NameValueHeaderValue("foo", @"""bar""") } } }, // 'attachment', specifying a filename of foo.html and an extension parameter "foo" which should be ignored (see <a href="http://greenbytes.de/tech/webdav/rfc2183.html#rfc.section.2.8">Section 2.8 of RFC 2183</a>.).
-            { @"attachment; foo=""\""\\"";filename=""foo.html""", new ContentDispositionHeaderValue(@"attachment") { FileName = @"""foo.html""", Parameters = { new NameValueHeaderValue("foo", @"""\""\\""") } } }, // 'attachment', specifying a filename of foo.html and an extension parameter "foo" which should be ignored (see <a href="http://greenbytes.de/tech/webdav/rfc2183.html#rfc.section.2.8">Section 2.8 of RFC 2183</a>.). The extension parameter actually uses backslash-escapes. This tests whether the UA properly skips the parameter.
-            { @"attachment; FILENAME=""foo.html""", new ContentDispositionHeaderValue("attachment") { FileName = @"""foo.html""" } },
-            { @"attachment; filename=foo.html", new ContentDispositionHeaderValue("attachment") { FileName = "foo.html" } }, // 'attachment', specifying a filename of foo.html using a token instead of a quoted-string.
-            { @"attachment; filename='foo.bar'", new ContentDispositionHeaderValue("attachment") { FileName = "'foo.bar'" } }, // 'attachment', specifying a filename of 'foo.bar' using single quotes.
-            { @"attachment; filename=""foo-ä.html""", new ContentDispositionHeaderValue("attachment" ) { Parameters = { new NameValueHeaderValue("filename", @"""foo-ä.html""") } } }, // 'attachment', specifying a filename of foo-ä.html, using plain ISO-8859-1
-            { @"attachment; filename=""foo-&#xc3;&#xa4;.html""", new ContentDispositionHeaderValue("attachment") { FileName = @"""foo-&#xc3;&#xa4;.html""" } }, // 'attachment', specifying a filename of foo-&#xc3;&#xa4;.html, which happens to be foo-ä.html using UTF-8 encoding.
-            { @"attachment; filename=""foo-%41.html""", new ContentDispositionHeaderValue("attachment") {  Parameters = { new NameValueHeaderValue("filename", @"""foo-%41.html""") } } },
-            { @"attachment; filename=""50%.html""", new ContentDispositionHeaderValue("attachment") { Parameters = { new NameValueHeaderValue("filename", @"""50%.html""") } } },
-            { @"attachment; filename=""foo-%\41.html""", new ContentDispositionHeaderValue("attachment") { Parameters = { new NameValueHeaderValue("filename", @"""foo-%\41.html""") } } }, // 'attachment', specifying a filename of foo-%41.html, using an escape character (this tests whether adding an escape character inside a %xx sequence can be used to disable the non-conformant %xx-unescaping).
-            { @"attachment; name=""foo-%41.html""", new ContentDispositionHeaderValue("attachment") { Name = @"""foo-%41.html""" } }, // 'attachment', specifying a <i>name</i> parameter of foo-%41.html. (this test was added to observe the behavior of the (unspecified) treatment of ""name"" as synonym for ""filename""; see <a href=""http://www.imc.org/ietf-smtp/mail-archive/msg05023.html"">Ned Freed's summary</a> where this comes from in MIME messages)
-            { @"attachment; filename=""ä-%41.html""", new ContentDispositionHeaderValue("attachment") { Parameters = { new NameValueHeaderValue("filename", @"""ä-%41.html""") } } }, // 'attachment', specifying a filename parameter of ä-%41.html. (this test was added to observe the behavior when non-ASCII characters and percent-hexdig sequences are combined)
-            { @"attachment; filename=""foo-%c3%a4-%e2%82%ac.html""", new ContentDispositionHeaderValue("attachment") { FileName = @"""foo-%c3%a4-%e2%82%ac.html""" } }, // 'attachment', specifying a filename of foo-%c3%a4-%e2%82%ac.html, using raw percent encoded UTF-8 to represent foo-ä-&#x20ac;.html
-            { @"attachment; filename =""foo.html""", new ContentDispositionHeaderValue("attachment") { FileName = @"""foo.html""" } },
-            { @"attachment; xfilename=foo.html", new ContentDispositionHeaderValue("attachment" ) { Parameters = { new NameValueHeaderValue("xfilename", "foo.html") } } },
-            { @"attachment; filename=""/foo.html""", new ContentDispositionHeaderValue("attachment") { FileName = @"""/foo.html""" } },
-            { @"attachment; creation-date=""Wed, 12 Feb 1997 16:29:51 -0500""", new ContentDispositionHeaderValue("attachment") { Parameters = { new NameValueHeaderValue("creation-date", @"""Wed, 12 Feb 1997 16:29:51 -0500""") } } },
-            { @"attachment; modification-date=""Wed, 12 Feb 1997 16:29:51 -0500""", new ContentDispositionHeaderValue("attachment") { Parameters = { new NameValueHeaderValue("modification-date", @"""Wed, 12 Feb 1997 16:29:51 -0500""") } } },
+            {
+                @"attachment; filename=""foo.html""",
+                new ContentDispositionHeaderValue("attachment") { FileName = @"""foo.html""" }
+            },
+            {
+                @"attachment; filename=""\""quoting\"" tested.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = "\"\"quoting\" tested.html\""
+                }
+            }, // 'attachment', specifying a filename of \"quoting\" tested.html (using double quotes around "quoting" to test... quoting)
+            {
+                @"attachment; filename=""Here's a semicolon;.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = @"""Here's a semicolon;.html"""
+                }
+            }, // , 'attachment', specifying a filename of Here's a semicolon;.html - this checks for proper parsing for parameters.
+            {
+                @"attachment; foo=""bar""; filename=""foo.html""",
+                new ContentDispositionHeaderValue(@"attachment")
+                {
+                    FileName = @"""foo.html""",
+                    Parameters = { new NameValueHeaderValue("foo", @"""bar""") }
+                }
+            }, // 'attachment', specifying a filename of foo.html and an extension parameter "foo" which should be ignored (see <a href="http://greenbytes.de/tech/webdav/rfc2183.html#rfc.section.2.8">Section 2.8 of RFC 2183</a>.).
+            {
+                @"attachment; foo=""\""\\"";filename=""foo.html""",
+                new ContentDispositionHeaderValue(@"attachment")
+                {
+                    FileName = @"""foo.html""",
+                    Parameters = { new NameValueHeaderValue("foo", @"""\""\\""") }
+                }
+            }, // 'attachment', specifying a filename of foo.html and an extension parameter "foo" which should be ignored (see <a href="http://greenbytes.de/tech/webdav/rfc2183.html#rfc.section.2.8">Section 2.8 of RFC 2183</a>.). The extension parameter actually uses backslash-escapes. This tests whether the UA properly skips the parameter.
+            {
+                @"attachment; FILENAME=""foo.html""",
+                new ContentDispositionHeaderValue("attachment") { FileName = @"""foo.html""" }
+            },
+            {
+                @"attachment; filename=foo.html",
+                new ContentDispositionHeaderValue("attachment") { FileName = "foo.html" }
+            }, // 'attachment', specifying a filename of foo.html using a token instead of a quoted-string.
+            {
+                @"attachment; filename='foo.bar'",
+                new ContentDispositionHeaderValue("attachment") { FileName = "'foo.bar'" }
+            }, // 'attachment', specifying a filename of 'foo.bar' using single quotes.
+            {
+                @"attachment; filename=""foo-ä.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters = { new NameValueHeaderValue("filename", @"""foo-ä.html""") }
+                }
+            }, // 'attachment', specifying a filename of foo-ä.html, using plain ISO-8859-1
+            {
+                @"attachment; filename=""foo-&#xc3;&#xa4;.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = @"""foo-&#xc3;&#xa4;.html"""
+                }
+            }, // 'attachment', specifying a filename of foo-&#xc3;&#xa4;.html, which happens to be foo-ä.html using UTF-8 encoding.
+            {
+                @"attachment; filename=""foo-%41.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters = { new NameValueHeaderValue("filename", @"""foo-%41.html""") }
+                }
+            },
+            {
+                @"attachment; filename=""50%.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters = { new NameValueHeaderValue("filename", @"""50%.html""") }
+                }
+            },
+            {
+                @"attachment; filename=""foo-%\41.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters = { new NameValueHeaderValue("filename", @"""foo-%\41.html""") }
+                }
+            }, // 'attachment', specifying a filename of foo-%41.html, using an escape character (this tests whether adding an escape character inside a %xx sequence can be used to disable the non-conformant %xx-unescaping).
+            {
+                @"attachment; name=""foo-%41.html""",
+                new ContentDispositionHeaderValue("attachment") { Name = @"""foo-%41.html""" }
+            }, // 'attachment', specifying a <i>name</i> parameter of foo-%41.html. (this test was added to observe the behavior of the (unspecified) treatment of ""name"" as synonym for ""filename""; see <a href=""http://www.imc.org/ietf-smtp/mail-archive/msg05023.html"">Ned Freed's summary</a> where this comes from in MIME messages)
+            {
+                @"attachment; filename=""ä-%41.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters = { new NameValueHeaderValue("filename", @"""ä-%41.html""") }
+                }
+            }, // 'attachment', specifying a filename parameter of ä-%41.html. (this test was added to observe the behavior when non-ASCII characters and percent-hexdig sequences are combined)
+            {
+                @"attachment; filename=""foo-%c3%a4-%e2%82%ac.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = @"""foo-%c3%a4-%e2%82%ac.html"""
+                }
+            }, // 'attachment', specifying a filename of foo-%c3%a4-%e2%82%ac.html, using raw percent encoded UTF-8 to represent foo-ä-&#x20ac;.html
+            {
+                @"attachment; filename =""foo.html""",
+                new ContentDispositionHeaderValue("attachment") { FileName = @"""foo.html""" }
+            },
+            {
+                @"attachment; xfilename=foo.html",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters = { new NameValueHeaderValue("xfilename", "foo.html") }
+                }
+            },
+            {
+                @"attachment; filename=""/foo.html""",
+                new ContentDispositionHeaderValue("attachment") { FileName = @"""/foo.html""" }
+            },
+            {
+                @"attachment; creation-date=""Wed, 12 Feb 1997 16:29:51 -0500""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters =
+                    {
+                        new NameValueHeaderValue(
+                            "creation-date",
+                            @"""Wed, 12 Feb 1997 16:29:51 -0500"""
+                        )
+                    }
+                }
+            },
+            {
+                @"attachment; modification-date=""Wed, 12 Feb 1997 16:29:51 -0500""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters =
+                    {
+                        new NameValueHeaderValue(
+                            "modification-date",
+                            @"""Wed, 12 Feb 1997 16:29:51 -0500"""
+                        )
+                    }
+                }
+            },
             { @"foobar", new ContentDispositionHeaderValue("foobar") }, //  @"This should be equivalent to using ""attachment""."
-            { @"attachment; example=""filename=example.txt""", new ContentDispositionHeaderValue("attachment") { Parameters = { new NameValueHeaderValue("example", @"""filename=example.txt""") } } },
-            { @"attachment; filename*=iso-8859-1''foo-%E4.html", new ContentDispositionHeaderValue("attachment") { Parameters = { new NameValueHeaderValue("filename*", "iso-8859-1''foo-%E4.html") } } }, // 'attachment', specifying a filename of foo-ä.html, using RFC2231 encoded ISO-8859-1
-            { @"attachment; filename*=UTF-8''foo-%c3%a4-%e2%82%ac.html", new ContentDispositionHeaderValue("attachment") {  Parameters = { new NameValueHeaderValue("filename*", "UTF-8''foo-%c3%a4-%e2%82%ac.html") } } }, // 'attachment', specifying a filename of foo-ä-&#x20ac;.html, using RFC2231 encoded UTF-8
-            { @"attachment; filename*=''foo-%c3%a4-%e2%82%ac.html", new ContentDispositionHeaderValue("attachment") { Parameters = { new NameValueHeaderValue("filename*", "''foo-%c3%a4-%e2%82%ac.html") } } }, // Behavior is undefined in RFC 2231, the charset part is missing, although UTF-8 was used.
-            { @"attachment; filename*=UTF-8''foo-a%22.html", new ContentDispositionHeaderValue("attachment") { FileNameStar = @"foo-a"".html" } },
-            { @"attachment; filename*= UTF-8''foo-%c3%a4.html", new ContentDispositionHeaderValue("attachment") { FileNameStar = "foo-ä.html" } },
-            { @"attachment; filename* =UTF-8''foo-%c3%a4.html", new ContentDispositionHeaderValue("attachment") { FileNameStar = "foo-ä.html" } },
-            { @"attachment; filename*=UTF-8''A-%2541.html", new ContentDispositionHeaderValue("attachment") { FileNameStar = "A-%41.html" } },
-            { @"attachment; filename*=UTF-8''%5cfoo.html", new ContentDispositionHeaderValue("attachment") { FileNameStar = @"\foo.html" } },
-            { @"attachment; filename=""foo-ae.html""; filename*=UTF-8''foo-%c3%a4.html", new ContentDispositionHeaderValue("attachment") { FileName = @"""foo-ae.html""", FileNameStar = "foo-ä.html" } },
-            { @"attachment; filename*=UTF-8''foo-%c3%a4.html; filename=""foo-ae.html""", new ContentDispositionHeaderValue("attachment") { FileNameStar = "foo-ä.html", FileName = @"""foo-ae.html""" } },
-            { @"attachment; foobar=x; filename=""foo.html""", new ContentDispositionHeaderValue("attachment") { FileName = @"""foo.html""", Parameters = { new NameValueHeaderValue("foobar", "x") } } },
-            { @"attachment; filename=""=?ISO-8859-1?Q?foo-=E4.html?=""", new ContentDispositionHeaderValue("attachment") { FileName = @"""=?ISO-8859-1?Q?foo-=E4.html?=""" } }, // attachment; filename="=?ISO-8859-1?Q?foo-=E4.html?="
-            { @"attachment; filename=""=?utf-8?B?Zm9vLeQuaHRtbA==?=""", new ContentDispositionHeaderValue("attachment") { FileName = @"""=?utf-8?B?Zm9vLeQuaHRtbA==?=""" } }, // attachment; filename="=?utf-8?B?Zm9vLeQuaHRtbA==?="
-            { @"attachment; filename=foo.html ;", new ContentDispositionHeaderValue("attachment") { FileName="foo.html" } }, // 'attachment', specifying a filename of foo.html using a token instead of a quoted-string, and adding a trailing semicolon.,
+            {
+                @"attachment; example=""filename=example.txt""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters =
+                    {
+                        new NameValueHeaderValue("example", @"""filename=example.txt""")
+                    }
+                }
+            },
+            {
+                @"attachment; filename*=iso-8859-1''foo-%E4.html",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters =
+                    {
+                        new NameValueHeaderValue("filename*", "iso-8859-1''foo-%E4.html")
+                    }
+                }
+            }, // 'attachment', specifying a filename of foo-ä.html, using RFC2231 encoded ISO-8859-1
+            {
+                @"attachment; filename*=UTF-8''foo-%c3%a4-%e2%82%ac.html",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters =
+                    {
+                        new NameValueHeaderValue("filename*", "UTF-8''foo-%c3%a4-%e2%82%ac.html")
+                    }
+                }
+            }, // 'attachment', specifying a filename of foo-ä-&#x20ac;.html, using RFC2231 encoded UTF-8
+            {
+                @"attachment; filename*=''foo-%c3%a4-%e2%82%ac.html",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    Parameters =
+                    {
+                        new NameValueHeaderValue("filename*", "''foo-%c3%a4-%e2%82%ac.html")
+                    }
+                }
+            }, // Behavior is undefined in RFC 2231, the charset part is missing, although UTF-8 was used.
+            {
+                @"attachment; filename*=UTF-8''foo-a%22.html",
+                new ContentDispositionHeaderValue("attachment") { FileNameStar = @"foo-a"".html" }
+            },
+            {
+                @"attachment; filename*= UTF-8''foo-%c3%a4.html",
+                new ContentDispositionHeaderValue("attachment") { FileNameStar = "foo-ä.html" }
+            },
+            {
+                @"attachment; filename* =UTF-8''foo-%c3%a4.html",
+                new ContentDispositionHeaderValue("attachment") { FileNameStar = "foo-ä.html" }
+            },
+            {
+                @"attachment; filename*=UTF-8''A-%2541.html",
+                new ContentDispositionHeaderValue("attachment") { FileNameStar = "A-%41.html" }
+            },
+            {
+                @"attachment; filename*=UTF-8''%5cfoo.html",
+                new ContentDispositionHeaderValue("attachment") { FileNameStar = @"\foo.html" }
+            },
+            {
+                @"attachment; filename=""foo-ae.html""; filename*=UTF-8''foo-%c3%a4.html",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = @"""foo-ae.html""",
+                    FileNameStar = "foo-ä.html"
+                }
+            },
+            {
+                @"attachment; filename*=UTF-8''foo-%c3%a4.html; filename=""foo-ae.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileNameStar = "foo-ä.html",
+                    FileName = @"""foo-ae.html"""
+                }
+            },
+            {
+                @"attachment; foobar=x; filename=""foo.html""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = @"""foo.html""",
+                    Parameters = { new NameValueHeaderValue("foobar", "x") }
+                }
+            },
+            {
+                @"attachment; filename=""=?ISO-8859-1?Q?foo-=E4.html?=""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = @"""=?ISO-8859-1?Q?foo-=E4.html?="""
+                }
+            }, // attachment; filename="=?ISO-8859-1?Q?foo-=E4.html?="
+            {
+                @"attachment; filename=""=?utf-8?B?Zm9vLeQuaHRtbA==?=""",
+                new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = @"""=?utf-8?B?Zm9vLeQuaHRtbA==?="""
+                }
+            }, // attachment; filename="=?utf-8?B?Zm9vLeQuaHRtbA==?="
+            {
+                @"attachment; filename=foo.html ;",
+                new ContentDispositionHeaderValue("attachment") { FileName = "foo.html" }
+            }, // 'attachment', specifying a filename of foo.html using a token instead of a quoted-string, and adding a trailing semicolon.,
         };
 
         [Theory]
         [MemberData(nameof(ValidContentDispositionTestCases))]
-        public void ContentDispositionHeaderValue_ParseValid_Success(string input, ContentDispositionHeaderValue expected)
+        public void ContentDispositionHeaderValue_ParseValid_Success(
+            string input,
+            ContentDispositionHeaderValue expected
+        )
         {
             // System.Diagnostics.Debugger.Launch();
             var result = ContentDispositionHeaderValue.Parse(input);
@@ -641,7 +941,9 @@ namespace Microsoft.Net.Http.Headers
 
         private static void AssertFormatException(string contentDisposition)
         {
-            Assert.Throws<FormatException>(() => new ContentDispositionHeaderValue(contentDisposition));
+            Assert.Throws<FormatException>(
+                () => new ContentDispositionHeaderValue(contentDisposition)
+            );
         }
     }
 }

@@ -13,8 +13,18 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 {
     internal static class DocumentationCommentOptions
     {
-        public static readonly PerLanguageOption2<bool> AutoXmlDocCommentGeneration = new(nameof(DocumentationCommentOptions), nameof(AutoXmlDocCommentGeneration), defaultValue: true,
-            storageLocations: new RoamingProfileStorageLocation(language => language == LanguageNames.VisualBasic ? "TextEditor.%LANGUAGE%.Specific.AutoComment" : "TextEditor.%LANGUAGE%.Specific.Automatic XML Doc Comment Generation"));
+        public static readonly PerLanguageOption2<bool> AutoXmlDocCommentGeneration =
+            new(
+                nameof(DocumentationCommentOptions),
+                nameof(AutoXmlDocCommentGeneration),
+                defaultValue: true,
+                storageLocations: new RoamingProfileStorageLocation(
+                    language =>
+                        language == LanguageNames.VisualBasic
+                            ? "TextEditor.%LANGUAGE%.Specific.AutoComment"
+                            : "TextEditor.%LANGUAGE%.Specific.Automatic XML Doc Comment Generation"
+                )
+            );
     }
 
     [ExportOptionProvider, Shared]
@@ -22,10 +32,9 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentationCommentOptionsProvider()
-        {
-        }
+        public DocumentationCommentOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(DocumentationCommentOptions.AutoXmlDocCommentGeneration);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(DocumentationCommentOptions.AutoXmlDocCommentGeneration);
     }
 }

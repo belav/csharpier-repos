@@ -23,8 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             fixture.ListLoggerFactory.Clear();
         }
 
-        protected NorthwindContext CreateContext()
-            => Fixture.CreateContext();
+        protected NorthwindContext CreateContext() => Fixture.CreateContext();
 
         [ConditionalFact]
         public virtual void Does_not_throw_for_top_level_single()
@@ -55,7 +54,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void FirstOrDefault_without_orderby_and_filter_issues_warning_subquery()
         {
             using var context = CreateContext();
-            var query = context.Customers.Where(c => c.CustomerID == "ALFKI" && c.Orders.FirstOrDefault().OrderID > 1000).ToList();
+            var query = context.Customers.Where(
+                    c => c.CustomerID == "ALFKI" && c.Orders.FirstOrDefault().OrderID > 1000
+                )
+                .ToList();
             Assert.Single(query);
         }
 
@@ -82,8 +84,12 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void LastOrDefault_with_order_by_does_not_issue_client_eval_warning()
         {
             using var context = CreateContext();
-            var query1 = context.Customers
-                .Where(c => c.CustomerID == "ALFKI" && c.Orders.OrderBy(o => o.OrderID).LastOrDefault().OrderID > 1000).ToList();
+            var query1 = context.Customers.Where(
+                    c =>
+                        c.CustomerID == "ALFKI"
+                        && c.Orders.OrderBy(o => o.OrderID).LastOrDefault().OrderID > 1000
+                )
+                .ToList();
             Assert.NotNull(query1);
 
             var query2 = context.Customers.OrderBy(c => c.CustomerID).LastOrDefault();

@@ -11,13 +11,21 @@ namespace Microsoft.Extensions.DependencyInjection
     /// <summary>
     /// The default IServiceProvider.
     /// </summary>
-    public sealed class ServiceProvider : IServiceProvider, IDisposable, IServiceProviderEngineCallback, IAsyncDisposable
+    public sealed class ServiceProvider
+        : IServiceProvider,
+          IDisposable,
+          IServiceProviderEngineCallback,
+          IAsyncDisposable
     {
         private readonly IServiceProviderEngine _engine;
 
         private readonly CallSiteValidator _callSiteValidator;
 
-        internal ServiceProvider(IEnumerable<ServiceDescriptor> serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
+        internal ServiceProvider(
+            IEnumerable<ServiceDescriptor> serviceDescriptors,
+            IServiceProviderEngine engine,
+            ServiceProviderOptions options
+        )
         {
             _engine = engine;
 
@@ -45,7 +53,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 if (exceptions != null)
                 {
-                    throw new AggregateException("Some services are not able to be constructed", exceptions.ToArray());
+                    throw new AggregateException(
+                        "Some services are not able to be constructed",
+                        exceptions.ToArray()
+                    );
                 }
             }
         }

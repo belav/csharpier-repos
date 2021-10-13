@@ -49,21 +49,35 @@ namespace Microsoft.CodeAnalysis.Options
         public ImmutableArray<OptionStorageLocation2> StorageLocations { get; }
 
         public Option2(string feature, string name, T defaultValue)
-            : this(feature, name, defaultValue, storageLocations: Array.Empty<OptionStorageLocation2>())
-        {
-        }
+            : this(
+                feature,
+                name,
+                defaultValue,
+                storageLocations: Array.Empty<OptionStorageLocation2>()
+            ) { }
 
-        public Option2(string feature, string name, T defaultValue, params OptionStorageLocation2[] storageLocations)
-            : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations)
-        {
-        }
+        public Option2(
+            string feature,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation2[] storageLocations
+        ) : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations) { }
 
-        internal Option2(string feature, OptionGroup group, string name, T defaultValue, params OptionStorageLocation2[] storageLocations)
-            : this(feature, group, name, defaultValue, storageLocations.ToImmutableArray())
-        {
-        }
+        internal Option2(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation2[] storageLocations
+        ) : this(feature, group, name, defaultValue, storageLocations.ToImmutableArray()) { }
 
-        internal Option2(string feature, OptionGroup group, string name, T defaultValue, ImmutableArray<OptionStorageLocation2> storageLocations)
+        internal Option2(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            ImmutableArray<OptionStorageLocation2> storageLocations
+        )
         {
             if (string.IsNullOrWhiteSpace(feature))
             {
@@ -75,7 +89,14 @@ namespace Microsoft.CodeAnalysis.Options
                 throw new ArgumentException(nameof(name));
             }
 
-            OptionDefinition = new OptionDefinition(feature, group, name, defaultValue, typeof(T), isPerLanguage: false);
+            OptionDefinition = new OptionDefinition(
+                feature,
+                group,
+                name,
+                defaultValue,
+                typeof(T),
+                isPerLanguage: false
+            );
             this.StorageLocations = storageLocations;
         }
 
@@ -88,8 +109,8 @@ namespace Microsoft.CodeAnalysis.Options
 
         bool IOption.IsPerLanguage => false;
 
-        ImmutableArray<OptionStorageLocation> IOption.StorageLocations
-            => this.StorageLocations.As<OptionStorageLocation>();
+        ImmutableArray<OptionStorageLocation> IOption.StorageLocations =>
+            this.StorageLocations.As<OptionStorageLocation>();
 #endif
 
         OptionGroup IOptionWithGroup.Group => this.Group;
@@ -112,7 +133,6 @@ namespace Microsoft.CodeAnalysis.Options
             return OptionDefinition == other?.OptionDefinition;
         }
 
-        public static implicit operator OptionKey2(Option2<T> option)
-            => new(option);
+        public static implicit operator OptionKey2(Option2<T> option) => new(option);
     }
 }

@@ -18,7 +18,7 @@ namespace System.Xml.Tests
 
         internal static string _XsdAuthor = Path.Combine(_Root, "xsdauthor.xsd");
         internal static string _XsdAuthorNoNs = Path.Combine(_Root, "xsdauthor_nons.xsd"); // No targetNS
-        internal static string _XsdAuthorDup = Path.Combine(_Root, "xsdauthor_dup.xsd");  // Colliding xsd
+        internal static string _XsdAuthorDup = Path.Combine(_Root, "xsdauthor_dup.xsd"); // Colliding xsd
         internal static string _XsdPrice = Path.Combine(_Root, "xsdprice.xsd");
         internal static string _XsdBookExternal = Path.Combine(_Root, "xsdbookexternal.xsd");
         internal static string _NmspBook = Path.Combine(_Root, "xsdbook");

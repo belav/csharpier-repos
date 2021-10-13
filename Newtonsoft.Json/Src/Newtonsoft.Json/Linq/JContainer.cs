@@ -47,13 +47,19 @@ namespace Newtonsoft.Json.Linq
     /// <summary>
     /// Represents a token that can contain other tokens.
     /// </summary>
-    public abstract partial class JContainer : JToken, IList<JToken>
+    public abstract partial class JContainer
+        : JToken,
+          IList<JToken>
 #if HAVE_COMPONENT_MODEL
-        , ITypedList, IBindingList
+          ,
+          ITypedList,
+          IBindingList
 #endif
-        , IList
+          ,
+          IList
 #if HAVE_INOTIFY_COLLECTION_CHANGED
-        , INotifyCollectionChanged
+          ,
+          INotifyCollectionChanged
 #endif
     {
 #if HAVE_COMPONENT_MODEL
@@ -102,12 +108,9 @@ namespace Newtonsoft.Json.Linq
         private bool _busy;
 #endif
 
-        internal JContainer()
-        {
-        }
+        internal JContainer() { }
 
-        internal JContainer(JContainer other)
-            : this()
+        internal JContainer(JContainer other) : this()
         {
             ValidationUtils.ArgumentNotNull(other, nameof(other));
 
@@ -126,7 +129,12 @@ namespace Newtonsoft.Json.Linq
 #if (HAVE_COMPONENT_MODEL || HAVE_INOTIFY_COLLECTION_CHANGED)
             if (_busy)
             {
-                throw new InvalidOperationException("Cannot change {0} during a collection change event.".FormatWith(CultureInfo.InvariantCulture, GetType()));
+                throw new InvalidOperationException(
+                    "Cannot change {0} during a collection change event.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType()
+                    )
+                );
             }
 #endif
         }
@@ -161,6 +169,7 @@ namespace Newtonsoft.Json.Linq
                 {
                     handler(this, e);
                 }
+
                 finally
                 {
                     _busy = false;
@@ -184,6 +193,7 @@ namespace Newtonsoft.Json.Linq
                 {
                     handler(this, e);
                 }
+
                 finally
                 {
                     _busy = false;
@@ -318,9 +328,14 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        internal bool IsMultiContent([NotNullWhen(true)]object? content)
+        internal bool IsMultiContent([NotNullWhen(true)] object? content)
         {
-            return (content is IEnumerable && !(content is string) && !(content is JToken) && !(content is byte[]));
+            return (
+                content is IEnumerable
+                && !(content is string)
+                && !(content is JToken)
+                && !(content is byte[])
+            );
         }
 
         internal JToken EnsureParentToken(JToken? item, bool skipParentCheck)
@@ -355,7 +370,10 @@ namespace Newtonsoft.Json.Linq
 
             if (index > children.Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), "Index must be within the bounds of the List.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    "Index must be within the bounds of the List."
+                );
             }
 
             CheckReentrancy();
@@ -393,7 +411,13 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Add,
+                        item,
+                        index
+                    )
+                );
             }
 #endif
 
@@ -410,7 +434,10 @@ namespace Newtonsoft.Json.Linq
             }
             if (index >= children.Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), "Index is equal to or greater than Count.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    "Index is equal to or greater than Count."
+                );
             }
 
             CheckReentrancy();
@@ -433,7 +460,6 @@ namespace Newtonsoft.Json.Linq
             item.Next = null;
 
             children.RemoveAt(index);
-
 #if HAVE_COMPONENT_MODEL
             if (_listChanged != null)
             {
@@ -443,7 +469,13 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Remove,
+                        item,
+                        index
+                    )
+                );
             }
 #endif
         }
@@ -478,7 +510,10 @@ namespace Newtonsoft.Json.Linq
             }
             if (index >= children.Count)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), "Index is equal to or greater than Count.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    "Index is equal to or greater than Count."
+                );
             }
 
             JToken existing = children[index];
@@ -516,7 +551,6 @@ namespace Newtonsoft.Json.Linq
             existing.Parent = null;
             existing.Previous = null;
             existing.Next = null;
-
 #if HAVE_COMPONENT_MODEL
             if (_listChanged != null)
             {
@@ -526,7 +560,14 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, item, existing, index));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(
+                        NotifyCollectionChangedAction.Replace,
+                        item,
+                        existing,
+                        index
+                    )
+                );
             }
 #endif
         }
@@ -545,7 +586,6 @@ namespace Newtonsoft.Json.Linq
             }
 
             children.Clear();
-
 #if HAVE_COMPONENT_MODEL
             if (_listChanged != null)
             {
@@ -555,7 +595,9 @@ namespace Newtonsoft.Json.Linq
 #if HAVE_INOTIFY_COLLECTION_CHANGED
             if (_collectionChanged != null)
             {
-                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                OnCollectionChanged(
+                    new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)
+                );
             }
 #endif
         }
@@ -584,15 +626,22 @@ namespace Newtonsoft.Json.Linq
             }
             if (arrayIndex < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), "arrayIndex is less than 0.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(arrayIndex),
+                    "arrayIndex is less than 0."
+                );
             }
             if (arrayIndex >= array.Length && arrayIndex != 0)
             {
-                throw new ArgumentException("arrayIndex is equal to or greater than the length of array.");
+                throw new ArgumentException(
+                    "arrayIndex is equal to or greater than the length of array."
+                );
             }
             if (Count > array.Length - arrayIndex)
             {
-                throw new ArgumentException("The number of elements in the source JObject is greater than the available space from arrayIndex to the end of the destination array.");
+                throw new ArgumentException(
+                    "The number of elements in the source JObject is greater than the available space from arrayIndex to the end of the destination array."
+                );
             }
 
             int index = 0;
@@ -625,7 +674,13 @@ namespace Newtonsoft.Json.Linq
 
             if (o.Type == JTokenType.Property)
             {
-                throw new ArgumentException("Can not add {0} to {1}.".FormatWith(CultureInfo.InvariantCulture, o.GetType(), GetType()));
+                throw new ArgumentException(
+                    "Can not add {0} to {1}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        o.GetType(),
+                        GetType()
+                    )
+                );
             }
         }
 
@@ -744,7 +799,13 @@ namespace Newtonsoft.Json.Linq
 
             if (!reader.Read())
             {
-                throw JsonReaderException.Create(reader, "Error reading {0} from JsonReader.".FormatWith(CultureInfo.InvariantCulture, GetType().Name));
+                throw JsonReaderException.Create(
+                    reader,
+                    "Error reading {0} from JsonReader.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType().Name
+                    )
+                );
             }
 
             ReadContentFrom(reader, options);
@@ -753,7 +814,13 @@ namespace Newtonsoft.Json.Linq
 
             if (endDepth > startDepth)
             {
-                throw JsonReaderException.Create(reader, "Unexpected end of content while loading {0}.".FormatWith(CultureInfo.InvariantCulture, GetType().Name));
+                throw JsonReaderException.Create(
+                    reader,
+                    "Unexpected end of content while loading {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType().Name
+                    )
+                );
             }
         }
 
@@ -866,18 +933,32 @@ namespace Newtonsoft.Json.Linq
                         }
                         break;
                     default:
-                        throw new InvalidOperationException("The JsonReader should not be on a token of type {0}.".FormatWith(CultureInfo.InvariantCulture, r.TokenType));
+                        throw new InvalidOperationException(
+                            "The JsonReader should not be on a token of type {0}.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                r.TokenType
+                            )
+                        );
                 }
             } while (r.Read());
         }
 
-        private static JProperty? ReadProperty(JsonReader r, JsonLoadSettings? settings, IJsonLineInfo? lineInfo, JContainer parent)
+        private static JProperty? ReadProperty(
+            JsonReader r,
+            JsonLoadSettings? settings,
+            IJsonLineInfo? lineInfo,
+            JContainer parent
+        )
         {
-            DuplicatePropertyNameHandling duplicatePropertyNameHandling = settings?.DuplicatePropertyNameHandling ?? DuplicatePropertyNameHandling.Replace;
+            DuplicatePropertyNameHandling duplicatePropertyNameHandling =
+                settings?.DuplicatePropertyNameHandling ?? DuplicatePropertyNameHandling.Replace;
 
             JObject parentObject = (JObject)parent;
             string propertyName = r.Value!.ToString();
-            JProperty? existingPropertyWithName = parentObject.Property(propertyName, StringComparison.Ordinal);
+            JProperty? existingPropertyWithName = parentObject.Property(
+                propertyName,
+                StringComparison.Ordinal
+            );
             if (existingPropertyWithName != null)
             {
                 if (duplicatePropertyNameHandling == DuplicatePropertyNameHandling.Ignore)
@@ -886,7 +967,13 @@ namespace Newtonsoft.Json.Linq
                 }
                 else if (duplicatePropertyNameHandling == DuplicatePropertyNameHandling.Error)
                 {
-                    throw JsonReaderException.Create(r, "Property with the name '{0}' already exists in the current JSON object.".FormatWith(CultureInfo.InvariantCulture, propertyName));
+                    throw JsonReaderException.Create(
+                        r,
+                        "Property with the name '{0}' already exists in the current JSON object.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            propertyName
+                        )
+                    );
                 }
             }
 
@@ -921,7 +1008,9 @@ namespace Newtonsoft.Json.Linq
             return string.Empty;
         }
 
-        PropertyDescriptorCollection? ITypedList.GetItemProperties(PropertyDescriptor[] listAccessors)
+        PropertyDescriptorCollection? ITypedList.GetItemProperties(
+            PropertyDescriptor[] listAccessors
+        )
         {
             ICustomTypeDescriptor? d = First as ICustomTypeDescriptor;
             return d?.GetProperties();
@@ -1073,9 +1162,7 @@ namespace Newtonsoft.Json.Linq
 
         #region IBindingList Members
 #if HAVE_COMPONENT_MODEL
-        void IBindingList.AddIndex(PropertyDescriptor property)
-        {
-        }
+        void IBindingList.AddIndex(PropertyDescriptor property) { }
 
         object IBindingList.AddNew()
         {
@@ -1084,12 +1171,22 @@ namespace Newtonsoft.Json.Linq
 
             if (args.NewObject == null)
             {
-                throw new JsonException("Could not determine new value to add to '{0}'.".FormatWith(CultureInfo.InvariantCulture, GetType()));
+                throw new JsonException(
+                    "Could not determine new value to add to '{0}'.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetType()
+                    )
+                );
             }
 
             if (!(args.NewObject is JToken newItem))
             {
-                throw new JsonException("New item to be added to collection must be compatible with {0}.".FormatWith(CultureInfo.InvariantCulture, typeof(JToken)));
+                throw new JsonException(
+                    "New item to be added to collection must be compatible with {0}.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        typeof(JToken)
+                    )
+                );
             }
 
             Add(newItem);
@@ -1115,9 +1212,7 @@ namespace Newtonsoft.Json.Linq
 
         bool IBindingList.IsSorted => false;
 
-        void IBindingList.RemoveIndex(PropertyDescriptor property)
-        {
-        }
+        void IBindingList.RemoveIndex(PropertyDescriptor property) { }
 
         void IBindingList.RemoveSort()
         {
@@ -1136,7 +1231,11 @@ namespace Newtonsoft.Json.Linq
 #endif
         #endregion
 
-        internal static void MergeEnumerableContent(JContainer target, IEnumerable content, JsonMergeSettings? settings)
+        internal static void MergeEnumerableContent(
+            JContainer target,
+            IEnumerable content,
+            JsonMergeSettings? settings
+        )
         {
             switch (settings?.MergeArrayHandling ?? MergeArrayHandling.Concat)
             {
@@ -1158,7 +1257,10 @@ namespace Newtonsoft.Json.Linq
                         }
                     }
 #else
-                    Dictionary<JToken, bool> items = new Dictionary<JToken, bool>(EqualityComparer);
+                    Dictionary<
+                        JToken,
+                        bool
+                    > items = new Dictionary<JToken, bool>(EqualityComparer);
                     foreach (JToken t in target)
                     {
                         items[t] = true;
@@ -1218,7 +1320,10 @@ namespace Newtonsoft.Json.Linq
                     }
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(settings), "Unexpected merge array handling when merging JSON.");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(settings),
+                        "Unexpected merge array handling when merging JSON."
+                    );
             }
         }
     }

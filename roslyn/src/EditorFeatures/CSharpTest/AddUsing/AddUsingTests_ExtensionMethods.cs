@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
         public async Task TestWhereExtension()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -27,7 +27,7 @@ class Program
     {
         var q = args.[|Where|] }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,14 +36,15 @@ class Program
     static void Main(string[] args)
     {
         var q = args.Where }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestSelectExtension()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -52,7 +53,7 @@ class Program
     {
         var q = args.[|Select|] }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,14 +62,15 @@ class Program
     static void Main(string[] args)
     {
         var q = args.Select }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestGroupByExtension()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -77,7 +79,7 @@ class Program
     {
         var q = args.[|GroupBy|] }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -86,14 +88,15 @@ class Program
     static void Main(string[] args)
     {
         var q = args.GroupBy }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestJoinExtension()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -102,7 +105,7 @@ class Program
     {
         var q = args.[|Join|] }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -111,20 +114,22 @@ class Program
     static void Main(string[] args)
     {
         var q = args.Join }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RegressionFor8455()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int dim = (int)Math.[|Min|]();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(772321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/772321")]
@@ -132,7 +137,7 @@ class Program
         public async Task TestExtensionWithThePresenceOfTheSameNameNonExtensionMethod()
         {
             await TestInRegularAndScriptAsync(
-@"namespace NS1
+                @"namespace NS1
 {
     class Program
     {
@@ -159,7 +164,7 @@ namespace NS2
         }
     }
 }",
-@"using NS2;
+                @"using NS2;
 
 namespace NS1
 {
@@ -187,7 +192,8 @@ namespace NS2
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(772321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/772321")]
@@ -196,7 +202,7 @@ namespace NS2
         public async Task TestExtensionWithThePresenceOfTheSameNameNonExtensionPrivateMethod()
         {
             await TestInRegularAndScriptAsync(
-@"namespace NS1
+                @"namespace NS1
 {
     class Program
     {
@@ -223,7 +229,7 @@ namespace NS2
         }
     }
 }",
-@"using NS2;
+                @"using NS2;
 
 namespace NS1
 {
@@ -251,7 +257,8 @@ namespace NS2
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(772321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/772321")]
@@ -260,7 +267,7 @@ namespace NS2
         public async Task TestExtensionWithThePresenceOfTheSameNameExtensionPrivateMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using NS2;
+                @"using NS2;
 
 namespace NS1
 {
@@ -296,7 +303,7 @@ namespace NS3
         }
     }
 }",
-@"using NS2;
+                @"using NS2;
 using NS3;
 
 namespace NS1
@@ -332,7 +339,8 @@ namespace NS3
         {
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -340,7 +348,7 @@ namespace NS3
         public async Task TestAddUsingForAddExtentionMethod()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -361,7 +369,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -383,7 +391,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -391,7 +400,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod2()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -412,7 +421,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -434,7 +443,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -442,7 +452,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod3()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -463,7 +473,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -485,7 +495,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -493,7 +504,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod4()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -514,7 +525,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -536,7 +547,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -544,7 +556,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod5()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -565,7 +577,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -587,7 +599,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -595,7 +608,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod6()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -616,7 +629,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -638,7 +651,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -646,7 +660,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod7()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -667,7 +681,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -689,7 +703,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -697,7 +712,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod8()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -718,7 +733,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -740,7 +755,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -748,7 +764,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod9()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -769,7 +785,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -791,7 +807,8 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -799,7 +816,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod10()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -830,7 +847,7 @@ namespace Ext2
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -862,7 +879,8 @@ namespace Ext2
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
@@ -870,7 +888,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethod11()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -901,7 +919,7 @@ namespace Ext2
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext2;
 
@@ -933,8 +951,9 @@ namespace Ext2
         }
     }
 }",
-index: 1,
-parseOptions: null);
+                index: 1,
+                parseOptions: null
+            );
         }
 
         [WorkItem(3818, "https://github.com/dotnet/roslyn/issues/3818")]
@@ -942,7 +961,7 @@ parseOptions: null);
         public async Task InExtensionMethodUnderConditionalAccessExpression()
         {
             var initialText =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <Document FilePath = ""Program"">
 namespace Sample
@@ -973,7 +992,7 @@ namespace Sample.Extensions
 </Workspace>";
 
             var expectedText =
-@"
+                @"
 using Sample.Extensions;
 
 namespace Sample
@@ -996,7 +1015,7 @@ namespace Sample
         public async Task InExtensionMethodUnderMultipleConditionalAccessExpressions()
         {
             var initialText =
-  @"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <Document FilePath = ""Program"">
 public class C
@@ -1023,7 +1042,7 @@ namespace Sample.Extensions
 </Workspace>";
 
             var expectedText =
-@"
+                @"
 using Sample.Extensions;
 
 public class C
@@ -1042,7 +1061,7 @@ public class C
         public async Task InExtensionMethodUnderMultipleConditionalAccessExpressions2()
         {
             var initialText =
-  @"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <Document FilePath = ""Program"">
 public class C
@@ -1069,7 +1088,7 @@ namespace Sample.Extensions
 </Workspace>";
 
             var expectedText =
-@"
+                @"
 using Sample.Extensions;
 
 public class C
@@ -1087,7 +1106,7 @@ public class C
         public async Task TestDeconstructExtension()
         {
             await TestAsync(
-@"
+                @"
 class Program
 {
     void M(Program p)
@@ -1103,7 +1122,7 @@ namespace N
         public static void Deconstruct(this Program p, out int x, out int y) { }
     }
 }",
-@"
+                @"
 using N;
 
 class Program
@@ -1121,7 +1140,8 @@ namespace N
         public static void Deconstruct(this Program p, out int x, out int y) { }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
         [Theory]
@@ -1130,7 +1150,7 @@ parseOptions: null);
         public async Task TestAddUsingForAddExtentionMethodWithSameNameAsProperty(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 namespace A
 {
     public class Foo
@@ -1157,7 +1177,7 @@ namespace A.Extensions
         }
     }
 }",
-@"
+                @"
 using A.Extensions;
 
 namespace A
@@ -1185,7 +1205,9 @@ namespace A.Extensions
             return foo;
         }
     }
-}", testHost);
+}",
+                testHost
+            );
         }
 
         [Theory]
@@ -1194,7 +1216,7 @@ namespace A.Extensions
         public async Task TestExtensionGetAwaiterOverload(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -1235,7 +1257,7 @@ namespace A.Extension
     }
 }
 ",
-@"
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using A.Extension;
@@ -1276,7 +1298,9 @@ namespace A.Extension
         }
     }
 }
-", testHost);
+",
+                testHost
+            );
         }
 
         [Theory]
@@ -1285,7 +1309,7 @@ namespace A.Extension
         public async Task TestExtensionSelectOverload(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1313,7 +1337,7 @@ namespace A.Extension
     }
 }
 ",
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using A.Extension;
@@ -1341,14 +1365,16 @@ namespace A.Extension
         public static IEnumerable<int> Select(this Foo foo, Func<int, int> f) => null;
     }
 }
-", testHost);
+",
+                testHost
+            );
         }
 
         [Fact]
         public async Task TestExtensionDeconstructOverload()
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1376,7 +1402,7 @@ namespace A.Extension
     }
 }
 ",
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using A.Extension;
@@ -1405,7 +1431,8 @@ namespace A.Extension
     }
 }
 ",
-parseOptions: null);
+                parseOptions: null
+            );
         }
     }
 }

@@ -43,28 +43,37 @@ namespace System.Linq.Tests
 
             public bool Equals(JoinRec other)
             {
-                if (!string.Equals(name, other.name)) return false;
+                if (!string.Equals(name, other.name))
+                    return false;
                 if (orderID == null)
                 {
-                    if (other.orderID != null) return false;
+                    if (other.orderID != null)
+                        return false;
                 }
                 else
                 {
-                    if (other.orderID == null) return false;
-                    if (orderID.Length != other.orderID.Length) return false;
+                    if (other.orderID == null)
+                        return false;
+                    if (orderID.Length != other.orderID.Length)
+                        return false;
                     for (int i = 0; i != other.orderID.Length; ++i)
-                        if (orderID[i] != other.orderID[i]) return false;
+                        if (orderID[i] != other.orderID[i])
+                            return false;
                 }
                 if (total == null)
                 {
-                    if (other.total != null) return false;
+                    if (other.total != null)
+                        return false;
                 }
                 else
                 {
-                    if (other.total == null) return false;
-                    if (total.Length != other.total.Length) return false;
+                    if (other.total == null)
+                        return false;
+                    if (total.Length != other.total.Length)
+                        return false;
                     for (int i = 0; i != other.total.Length; ++i)
-                        if (total[i] != other.total[i]) return false;
+                        if (total[i] != other.total[i])
+                            return false;
                 }
                 return true;
             }
@@ -78,37 +87,77 @@ namespace System.Linq.Tests
         [Fact]
         public void OuterEmptyInnerNonEmpty()
         {
-            CustomerRec[] outer = { };
-            OrderRec[] inner = new []
+            CustomerRec[] outer = {  };
+            OrderRec[] inner = new[]
             {
-                new OrderRec{ orderID = 45321, custID = 98022, total = 50 },
-                new OrderRec{ orderID = 97865, custID = 32103, total = 25 }
+                new OrderRec { orderID = 45321, custID = 98022, total = 50 },
+                new OrderRec { orderID = 97865, custID = 32103, total = 25 }
             };
-            Assert.Empty(outer.AsQueryable().GroupJoin(inner.AsQueryable(), e => e.custID, e => e.custID, (cr, orIE) => new JoinRec { name = cr.name, orderID = orIE.Select(o => o.orderID).ToArray(), total = orIE.Select(o => o.total).ToArray() }));
+            Assert.Empty(
+                outer.AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.custID,
+                        e => e.custID,
+                        (cr, orIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = orIE.Select(o => o.orderID).ToArray(),
+                                total = orIE.Select(o => o.total).ToArray()
+                            }
+                    )
+            );
         }
 
         [Fact]
         public void CustomComparer()
         {
-            CustomerRec[] outer = new []
+            CustomerRec[] outer = new[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
-            AnagramRec[] inner = new []
+            AnagramRec[] inner = new[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
-            JoinRec[] expected = new []
+            JoinRec[] expected = new[]
             {
-                new JoinRec{ name = "Tim", orderID = new int?[]{ 93489 }, total = new int?[]{ 45 } },
-                new JoinRec{ name = "Bob", orderID = new int?[]{ }, total = new int?[]{ } },
-                new JoinRec{ name = "Robert", orderID = new int?[]{ 93483 }, total = new int?[]{ 19 } }
+                new JoinRec
+                {
+                    name = "Tim",
+                    orderID = new int?[] { 93489 },
+                    total = new int?[] { 45 }
+                },
+                new JoinRec { name = "Bob", orderID = new int?[] {  }, total = new int?[] {  } },
+                new JoinRec
+                {
+                    name = "Robert",
+                    orderID = new int?[] { 93483 },
+                    total = new int?[] { 19 }
+                }
             };
 
-            Assert.Equal(expected, outer.AsQueryable().GroupJoin(inner.AsQueryable(), e => e.name, e => e.name, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }, new AnagramEqualityComparer()));
+            Assert.Equal(
+                expected,
+                outer.AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.name,
+                        e => e.name,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray()
+                            },
+                        new AnagramEqualityComparer()
+                    )
+            );
         }
 
         [Fact]
@@ -117,25 +166,58 @@ namespace System.Linq.Tests
             IQueryable<CustomerRec> outer = null;
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outer", () => outer.GroupJoin(inner.AsQueryable(), e => e.name, e => e.name, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "outer",
+                () =>
+                    outer.GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.name,
+                        e => e.name,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray()
+                            },
+                        new AnagramEqualityComparer()
+                    )
+            );
         }
 
         [Fact]
         public void InnerNull()
         {
-            CustomerRec[] outer = new []
+            CustomerRec[] outer = new[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
             IQueryable<AnagramRec> inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("inner", () => outer.AsQueryable().GroupJoin(inner, e => e.name, e => e.name, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "inner",
+                () =>
+                    outer.AsQueryable()
+                        .GroupJoin(
+                            inner,
+                            e => e.name,
+                            e => e.name,
+                            (cr, arIE) =>
+                                new JoinRec
+                                {
+                                    name = cr.name,
+                                    orderID = arIE.Select(o => o.orderID).ToArray(),
+                                    total = arIE.Select(o => o.total).ToArray()
+                                },
+                            new AnagramEqualityComparer()
+                        )
+            );
         }
 
         [Fact]
@@ -143,17 +225,34 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new CustomerRec[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () => outer.AsQueryable().GroupJoin(inner.AsQueryable(), null, e => e.name, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "outerKeySelector",
+                () =>
+                    outer.AsQueryable()
+                        .GroupJoin(
+                            inner.AsQueryable(),
+                            null,
+                            e => e.name,
+                            (cr, arIE) =>
+                                new JoinRec
+                                {
+                                    name = cr.name,
+                                    orderID = arIE.Select(o => o.orderID).ToArray(),
+                                    total = arIE.Select(o => o.total).ToArray()
+                                },
+                            new AnagramEqualityComparer()
+                        )
+            );
         }
 
         [Fact]
@@ -161,17 +260,34 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new CustomerRec[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () => outer.AsQueryable().GroupJoin(inner.AsQueryable(), e => e.name, null, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "innerKeySelector",
+                () =>
+                    outer.AsQueryable()
+                        .GroupJoin(
+                            inner.AsQueryable(),
+                            e => e.name,
+                            null,
+                            (cr, arIE) =>
+                                new JoinRec
+                                {
+                                    name = cr.name,
+                                    orderID = arIE.Select(o => o.orderID).ToArray(),
+                                    total = arIE.Select(o => o.total).ToArray()
+                                },
+                            new AnagramEqualityComparer()
+                        )
+            );
         }
 
         [Fact]
@@ -179,17 +295,28 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new CustomerRec[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () => outer.AsQueryable().GroupJoin(inner.AsQueryable(), e => e.name, e => e.name, (Expression<Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>>)null, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "resultSelector",
+                () =>
+                    outer.AsQueryable()
+                        .GroupJoin(
+                            inner.AsQueryable(),
+                            e => e.name,
+                            e => e.name,
+                            (Expression<Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>>)null,
+                            new AnagramEqualityComparer()
+                        )
+            );
         }
 
         [Fact]
@@ -198,11 +325,26 @@ namespace System.Linq.Tests
             IQueryable<CustomerRec> outer = null;
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outer", () => outer.GroupJoin(inner.AsQueryable(), e => e.name, e => e.name, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "outer",
+                () =>
+                    outer.GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.name,
+                        e => e.name,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray()
+                            }
+                    )
+            );
         }
 
         [Fact]
@@ -210,13 +352,29 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
             IQueryable<AnagramRec> inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("inner", () => outer.AsQueryable().GroupJoin(inner, e => e.name, e => e.name, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "inner",
+                () =>
+                    outer.AsQueryable()
+                        .GroupJoin(
+                            inner,
+                            e => e.name,
+                            e => e.name,
+                            (cr, arIE) =>
+                                new JoinRec
+                                {
+                                    name = cr.name,
+                                    orderID = arIE.Select(o => o.orderID).ToArray(),
+                                    total = arIE.Select(o => o.total).ToArray()
+                                }
+                        )
+            );
         }
 
         [Fact]
@@ -224,17 +382,33 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new CustomerRec[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () => outer.AsQueryable().GroupJoin(inner.AsQueryable(), null, e => e.name, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "outerKeySelector",
+                () =>
+                    outer.AsQueryable()
+                        .GroupJoin(
+                            inner.AsQueryable(),
+                            null,
+                            e => e.name,
+                            (cr, arIE) =>
+                                new JoinRec
+                                {
+                                    name = cr.name,
+                                    orderID = arIE.Select(o => o.orderID).ToArray(),
+                                    total = arIE.Select(o => o.total).ToArray()
+                                }
+                        )
+            );
         }
 
         [Fact]
@@ -242,17 +416,33 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new CustomerRec[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () => outer.AsQueryable().GroupJoin(inner.AsQueryable(), e => e.name, null, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "innerKeySelector",
+                () =>
+                    outer.AsQueryable()
+                        .GroupJoin(
+                            inner.AsQueryable(),
+                            e => e.name,
+                            null,
+                            (cr, arIE) =>
+                                new JoinRec
+                                {
+                                    name = cr.name,
+                                    orderID = arIE.Select(o => o.orderID).ToArray(),
+                                    total = arIE.Select(o => o.total).ToArray()
+                                }
+                        )
+            );
         }
 
         [Fact]
@@ -260,54 +450,95 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new CustomerRec[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
             AnagramRec[] inner = new AnagramRec[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
 
-            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () => outer.AsQueryable().GroupJoin(inner.AsQueryable(), e => e.name, e => e.name, (Expression<Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "resultSelector",
+                () =>
+                    outer.AsQueryable()
+                        .GroupJoin(
+                            inner.AsQueryable(),
+                            e => e.name,
+                            e => e.name,
+                            (Expression<Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>>)null
+                        )
+            );
         }
 
         [Fact]
         public void NullComparer()
         {
-            CustomerRec[] outer = new []
+            CustomerRec[] outer = new[]
             {
-                new CustomerRec{ name = "Tim", custID = 1234 },
-                new CustomerRec{ name = "Bob", custID = 9865 },
-                new CustomerRec{ name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Tim", custID = 1234 },
+                new CustomerRec { name = "Bob", custID = 9865 },
+                new CustomerRec { name = "Robert", custID = 9895 }
             };
-            AnagramRec[] inner = new []
+            AnagramRec[] inner = new[]
             {
-                new AnagramRec{ name = "Robert", orderID = 93483, total = 19 },
-                new AnagramRec{ name = "miT", orderID = 93489, total = 45 }
+                new AnagramRec { name = "Robert", orderID = 93483, total = 19 },
+                new AnagramRec { name = "miT", orderID = 93489, total = 45 }
             };
-            JoinRec[] expected = new []
+            JoinRec[] expected = new[]
             {
-                new JoinRec{ name = "Tim", orderID = new int?[]{ }, total = new int?[]{ } },
-                new JoinRec{ name = "Bob", orderID = new int?[]{ }, total = new int?[]{ } },
-                new JoinRec{ name = "Robert", orderID = new int?[]{ 93483 }, total = new int?[]{ 19 } }
+                new JoinRec { name = "Tim", orderID = new int?[] {  }, total = new int?[] {  } },
+                new JoinRec { name = "Bob", orderID = new int?[] {  }, total = new int?[] {  } },
+                new JoinRec
+                {
+                    name = "Robert",
+                    orderID = new int?[] { 93483 },
+                    total = new int?[] { 19 }
+                }
             };
 
-            Assert.Equal(expected, outer.AsQueryable().GroupJoin(inner.AsQueryable(), e => e.name, e => e.name, (cr, arIE) => new JoinRec { name = cr.name, orderID = arIE.Select(o => o.orderID).ToArray(), total = arIE.Select(o => o.total).ToArray() }, null));
+            Assert.Equal(
+                expected,
+                outer.AsQueryable()
+                    .GroupJoin(
+                        inner.AsQueryable(),
+                        e => e.name,
+                        e => e.name,
+                        (cr, arIE) =>
+                            new JoinRec
+                            {
+                                name = cr.name,
+                                orderID = arIE.Select(o => o.orderID).ToArray(),
+                                total = arIE.Select(o => o.total).ToArray()
+                            },
+                        null
+                    )
+            );
         }
 
         [Fact]
         public void GroupJoin1()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable().GroupJoin(new int[] { 1, 2, 3 }, n1 => n1, n2 => n2, (n1, n2) => n1).Count();
+            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+                .GroupJoin(new int[] { 1, 2, 3 }, n1 => n1, n2 => n2, (n1, n2) => n1)
+                .Count();
             Assert.Equal(3, count);
         }
 
         [Fact]
         public void GroupJoin2()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable().GroupJoin(new int[] { 1, 2, 3 }, n1 => n1, n2 => n2, (n1, n2) => n1, EqualityComparer<int>.Default).Count();
+            var count = (new int[] { 0, 1, 2 }).AsQueryable()
+                .GroupJoin(
+                    new int[] { 1, 2, 3 },
+                    n1 => n1,
+                    n2 => n2,
+                    (n1, n2) => n1,
+                    EqualityComparer<int>.Default
+                )
+                .Count();
             Assert.Equal(3, count);
         }
     }

@@ -23,10 +23,16 @@ namespace Microsoft.Extensions.ApiDescription.Tool
         {
             AssemblyPath = command.Option("--assembly <Path>", Resources.AssemblyDescription);
             AssetsFile = command.Option("--assets-file <Path>", Resources.AssetsFileDescription);
-            TargetFramework = command.Option("--framework <FRAMEWORK>", Resources.TargetFrameworkDescription);
+            TargetFramework = command.Option(
+                "--framework <FRAMEWORK>",
+                Resources.TargetFrameworkDescription
+            );
             Platform = command.Option("--platform <Target>", Resources.PlatformDescription);
             ProjectName = command.Option("--project <Name>", Resources.ProjectDescription);
-            RuntimeFrameworkVersion = command.Option("--runtime <RUNTIME_IDENTIFIER>", Resources.RuntimeDescription);
+            RuntimeFrameworkVersion = command.Option(
+                "--runtime <RUNTIME_IDENTIFIER>",
+                Resources.RuntimeDescription
+            );
         }
 
         public void Validate()

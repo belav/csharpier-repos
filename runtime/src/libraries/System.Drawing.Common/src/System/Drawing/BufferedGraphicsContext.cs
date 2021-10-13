@@ -36,7 +36,10 @@ namespace System.Drawing
             {
                 if (value.Width <= 0 || value.Height <= 0)
                 {
-                    throw new ArgumentException(SR.Format(SR.InvalidArgumentValue, nameof(MaximumBuffer), value), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidArgumentValue, nameof(MaximumBuffer), value),
+                        nameof(value)
+                    );
                 }
 
                 // If we've been asked to decrease the size of the maximum buffer,
@@ -81,7 +84,11 @@ namespace System.Drawing
         /// <summary>
         /// Returns a BufferedGraphics that is matched for the specified target HDC object.
         /// </summary>
-        private BufferedGraphics AllocBufferInTempManager(Graphics? targetGraphics, IntPtr targetDC, Rectangle targetRectangle)
+        private BufferedGraphics AllocBufferInTempManager(
+            Graphics? targetGraphics,
+            IntPtr targetDC,
+            Rectangle targetRectangle
+        )
         {
             BufferedGraphicsContext? tempContext = null;
             BufferedGraphics? tempBuffer = null;
@@ -92,9 +99,13 @@ namespace System.Drawing
                 tempBuffer = tempContext.AllocBuffer(targetGraphics, targetDC, targetRectangle);
                 tempBuffer.DisposeContext = true;
             }
+
             finally
             {
-                if (tempContext != null && (tempBuffer == null || (tempBuffer != null && !tempBuffer.DisposeContext)))
+                if (
+                    tempContext != null
+                    && (tempBuffer == null || (tempBuffer != null && !tempBuffer.DisposeContext))
+                )
                 {
                     tempContext.Dispose();
                 }
@@ -118,7 +129,8 @@ namespace System.Drawing
         /// </summary>
         private bool ShouldUseTempManager(Rectangle targetBounds)
         {
-            return (targetBounds.Width * targetBounds.Height) > (MaximumBuffer.Width * MaximumBuffer.Height);
+            return (targetBounds.Width * targetBounds.Height)
+                > (MaximumBuffer.Width * MaximumBuffer.Height);
         }
     }
 }

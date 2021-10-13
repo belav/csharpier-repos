@@ -45,7 +45,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             get
             {
                 var allDiagnostics = GetAllDiagnostics();
-                var errors = allDiagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+                var errors = allDiagnostics.Any(
+                    diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error
+                );
 
                 return errors;
             }
@@ -55,11 +57,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (_allDiagnostics == null)
             {
-                var allowedChildTagDiagnostics = AllowedChildTags.SelectMany(childTag => childTag.Diagnostics);
-                var attributeDiagnostics = BoundAttributes.SelectMany(attribute => attribute.Diagnostics);
+                var allowedChildTagDiagnostics = AllowedChildTags.SelectMany(
+                    childTag => childTag.Diagnostics
+                );
+                var attributeDiagnostics = BoundAttributes.SelectMany(
+                    attribute => attribute.Diagnostics
+                );
                 var ruleDiagnostics = TagMatchingRules.SelectMany(rule => rule.GetAllDiagnostics());
-                var combinedDiagnostics = allowedChildTagDiagnostics
-                    .Concat(attributeDiagnostics)
+                var combinedDiagnostics = allowedChildTagDiagnostics.Concat(attributeDiagnostics)
                     .Concat(ruleDiagnostics)
                     .Concat(Diagnostics);
                 _allDiagnostics = combinedDiagnostics.ToArray();

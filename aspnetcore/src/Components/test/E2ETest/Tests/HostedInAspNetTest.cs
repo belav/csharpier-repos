@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public HostedInAspNetTest(
             BrowserFixture browserFixture,
             AspNetSiteServerFixture serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output)
         {
             serverFixture.BuildWebHostMethod = HostedInAspNet.Server.Program.BuildWebHost;
             serverFixture.Environment = AspNetEnvironment.Development;
@@ -41,8 +41,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public void ServesStaticAssetsFromClientAppWebRoot()
         {
             var javascriptExecutor = (IJavaScriptExecutor)Browser;
-            var bootstrapTooltipType = javascriptExecutor
-                .ExecuteScript("return window.customJsWasLoaded;");
+            var bootstrapTooltipType = javascriptExecutor.ExecuteScript(
+                "return window.customJsWasLoaded;"
+            );
             Assert.True((bool)bootstrapTooltipType);
         }
 

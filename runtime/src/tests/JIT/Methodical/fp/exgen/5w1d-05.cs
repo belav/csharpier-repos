@@ -6,7 +6,6 @@ internal unsafe class testout1
 {
     private static float[] s_arr1d_0 = new float[6];
 
-
     public static int Func_0()
     {
         float* a2_0 = stackalloc float[1];

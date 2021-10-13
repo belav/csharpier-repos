@@ -575,7 +575,10 @@ namespace Microsoft.AspNetCore.Components
             var component = new EventComponent();
 
             // Act
-            var callback = EventCallback.Factory.Create<string>(component, (Func<string, Task>)null);
+            var callback = EventCallback.Factory.Create<string>(
+                component,
+                (Func<string, Task>)null
+            );
 
             // Assert
             Assert.Null(callback.Delegate);
@@ -617,13 +620,9 @@ namespace Microsoft.AspNetCore.Components
 
         private class EventComponent : IComponent, IHandleEvent
         {
-            public void SomeAction()
-            {
-            }
+            public void SomeAction() { }
 
-            public void SomeActionOfT(string e)
-            {
-            }
+            public void SomeActionOfT(string e) { }
 
             public Task SomeFuncTask()
             {

@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using FluentAssertions;
@@ -12,14 +12,17 @@ using Xunit;
 
 namespace Microsoft.NET.HostModel.Tests
 {
-    public class AppHostUsedWithSymbolicLinks : IClassFixture<AppHostUsedWithSymbolicLinks.SharedTestState>
+    public class AppHostUsedWithSymbolicLinks
+        : IClassFixture<AppHostUsedWithSymbolicLinks.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
         private void CreateSymbolicLink(string source, string target)
         {
             if (!SymbolicLinking.MakeSymbolicLink(source, target, out var errorString))
-                throw new Exception($"Failed to create symbolic link '{source}' targeting: '{target}': {errorString}");
+                throw new Exception(
+                    $"Failed to create symbolic link '{source}' targeting: '{target}': {errorString}"
+                );
         }
 
         public AppHostUsedWithSymbolicLinks(AppHostUsedWithSymbolicLinks.SharedTestState fixture)
@@ -28,20 +31,21 @@ namespace Microsoft.NET.HostModel.Tests
         }
 
         [Theory]
-        [InlineData ("a/b/SymlinkToApphost")]
-        [InlineData ("a/SymlinkToApphost")]
+        [InlineData("a/b/SymlinkToApphost")]
+        [InlineData("a/SymlinkToApphost")]
         public void Run_apphost_behind_symlink(string symlinkRelativePath)
         {
             // Creating symbolic links requires administrative privilege on Windows, so skip test.
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var testDir = Directory.GetParent(fixture.TestProject.Location).ToString();
-            Directory.CreateDirectory(Path.Combine(testDir, Path.GetDirectoryName(symlinkRelativePath)));
+            Directory.CreateDirectory(
+                Path.Combine(testDir, Path.GetDirectoryName(symlinkRelativePath))
+            );
             var symlinkFullPath = Path.Combine(testDir, symlinkRelativePath);
 
             CreateSymbolicLink(symlinkFullPath, appExe);
@@ -49,24 +53,27 @@ namespace Microsoft.NET.HostModel.Tests
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
         [Theory]
-        [InlineData ("a/b/FirstSymlink", "c/d/SecondSymlink")]
-        [InlineData ("a/b/FirstSymlink", "c/SecondSymlink")]
-        [InlineData ("a/FirstSymlink", "c/d/SecondSymlink")]
-        [InlineData ("a/FirstSymlink", "c/SecondSymlink")]
-        public void Run_apphost_behind_transitive_symlinks(string firstSymlinkRelativePath, string secondSymlinkRelativePath)
+        [InlineData("a/b/FirstSymlink", "c/d/SecondSymlink")]
+        [InlineData("a/b/FirstSymlink", "c/SecondSymlink")]
+        [InlineData("a/FirstSymlink", "c/d/SecondSymlink")]
+        [InlineData("a/FirstSymlink", "c/SecondSymlink")]
+        public void Run_apphost_behind_transitive_symlinks(
+            string firstSymlinkRelativePath,
+            string secondSymlinkRelativePath
+        )
         {
             // Creating symbolic links requires administrative privilege on Windows, so skip test.
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
-            
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
+
             var appExe = fixture.TestProject.AppExe;
             var testDir = Directory.GetParent(fixture.TestProject.Location).ToString();
 
@@ -84,16 +91,20 @@ namespace Microsoft.NET.HostModel.Tests
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
         //[Theory]
         //[InlineData("a/b/SymlinkToFrameworkDependentApp")]
         //[InlineData("a/SymlinkToFrameworkDependentApp")]
-        [Fact(Skip = "Currently failing in OSX with \"No such file or directory\" when running Command.Create. " +
-            "CI failing to use stat on symbolic links on Linux (permission denied).")]
-        public void Run_framework_dependent_app_behind_symlink(/* string symlinkRelativePath */)
+        [Fact(
+            Skip = "Currently failing in OSX with \"No such file or directory\" when running Command.Create. "
+                + "CI failing to use stat on symbolic links on Linux (permission denied)."
+        )]
+        public void Run_framework_dependent_app_behind_symlink( /* string symlinkRelativePath */
+        )
         {
             // Creating symbolic links requires administrative privilege on Windows, so skip test.
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
@@ -101,13 +112,14 @@ namespace Microsoft.NET.HostModel.Tests
 
             string symlinkRelativePath = string.Empty;
 
-            var fixture = sharedTestState.FrameworkDependentAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.FrameworkDependentAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var builtDotnet = fixture.BuiltDotnet.BinPath;
             var testDir = Directory.GetParent(fixture.TestProject.Location).ToString();
-            Directory.CreateDirectory(Path.Combine(testDir, Path.GetDirectoryName(symlinkRelativePath)));
+            Directory.CreateDirectory(
+                Path.Combine(testDir, Path.GetDirectoryName(symlinkRelativePath))
+            );
             var symlinkFullPath = Path.Combine(testDir, symlinkRelativePath);
 
             CreateSymbolicLink(symlinkFullPath, appExe);
@@ -117,20 +129,22 @@ namespace Microsoft.NET.HostModel.Tests
                 .EnvironmentVariable("DOTNET_ROOT", builtDotnet)
                 .EnvironmentVariable("DOTNET_ROOT(x86)", builtDotnet)
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
-        [Fact(Skip = "Currently failing in OSX with \"No such file or directory\" when running Command.Create. " +
-            "CI failing to use stat on symbolic links on Linux (permission denied).")]
+        [Fact(
+            Skip = "Currently failing in OSX with \"No such file or directory\" when running Command.Create. "
+                + "CI failing to use stat on symbolic links on Linux (permission denied)."
+        )]
         public void Run_framework_dependent_app_with_runtime_behind_symlink()
         {
             // Creating symbolic links requires administrative privilege on Windows, so skip test.
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            var fixture = sharedTestState.FrameworkDependentAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.FrameworkDependentAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var testDir = Directory.GetParent(fixture.TestProject.Location).ToString();
@@ -143,7 +157,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
@@ -154,12 +169,14 @@ namespace Microsoft.NET.HostModel.Tests
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var binDir = fixture.TestProject.OutputDirectory;
-            var binDirNewPath = Path.Combine(Directory.GetParent(fixture.TestProject.Location).ToString(), "PutTheBinDirSomewhereElse");
+            var binDirNewPath = Path.Combine(
+                Directory.GetParent(fixture.TestProject.Location).ToString(),
+                "PutTheBinDirSomewhereElse"
+            );
             Directory.Move(binDir, binDirNewPath);
 
             CreateSymbolicLink(binDir, binDirNewPath);
@@ -167,7 +184,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
@@ -178,8 +196,7 @@ namespace Microsoft.NET.HostModel.Tests
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var appDll = fixture.TestProject.AppDll;
             var dotnetExe = fixture.BuiltDotnet.DotnetExecutablePath;
@@ -191,7 +208,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
@@ -202,12 +220,14 @@ namespace Microsoft.NET.HostModel.Tests
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var dotnet = fixture.BuiltDotnet;
             var binDir = fixture.TestProject.OutputDirectory;
-            var binDirNewPath = Path.Combine(Directory.GetParent(fixture.TestProject.Location).ToString(), "PutTheBinDirSomewhereElse");
+            var binDirNewPath = Path.Combine(
+                Directory.GetParent(fixture.TestProject.Location).ToString(),
+                "PutTheBinDirSomewhereElse"
+            );
             Directory.Move(binDir, binDirNewPath);
 
             CreateSymbolicLink(binDir, binDirNewPath);
@@ -215,7 +235,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
@@ -226,12 +247,14 @@ namespace Microsoft.NET.HostModel.Tests
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            var fixture = sharedTestState.StandaloneAppFixture_Published
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Published.Copy();
 
             var dotnet = fixture.SdkDotnet;
             var binDir = fixture.TestProject.OutputDirectory;
-            var binDirNewPath = Path.Combine(Directory.GetParent(fixture.TestProject.Location).ToString(), "PutTheBinDirSomewhereElse"); 
+            var binDirNewPath = Path.Combine(
+                Directory.GetParent(fixture.TestProject.Location).ToString(),
+                "PutTheBinDirSomewhereElse"
+            );
             Directory.Move(binDir, binDirNewPath);
 
             CreateSymbolicLink(binDir, binDirNewPath);
@@ -240,7 +263,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World");
         }
 
@@ -253,20 +277,24 @@ namespace Microsoft.NET.HostModel.Tests
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return;
 
-            var fixture = sharedTestState.StandaloneAppFixture_Localized
-                .Copy();
+            var fixture = sharedTestState.StandaloneAppFixture_Localized.Copy();
 
             var appExe = fixture.TestProject.AppExe;
             var binDir = fixture.TestProject.OutputDirectory;
-            var satellitesDir = Path.Combine(Directory.GetParent(fixture.TestProject.Location).ToString(), "PutSatellitesSomewhereElse");
+            var satellitesDir = Path.Combine(
+                Directory.GetParent(fixture.TestProject.Location).ToString(),
+                "PutSatellitesSomewhereElse"
+            );
             Directory.CreateDirectory(satellitesDir);
 
-            var firstSatelliteDir = Directory.GetDirectories(binDir).Single(dir => dir.Contains("kn-IN"));
+            var firstSatelliteDir = Directory.GetDirectories(binDir)
+                .Single(dir => dir.Contains("kn-IN"));
             var firstSatelliteNewDir = Path.Combine(satellitesDir, "kn-IN");
             Directory.Move(firstSatelliteDir, firstSatelliteNewDir);
             CreateSymbolicLink(firstSatelliteDir, firstSatelliteNewDir);
 
-            var secondSatelliteDir = Directory.GetDirectories(binDir).Single(dir => dir.Contains("ta-IN"));
+            var secondSatelliteDir = Directory.GetDirectories(binDir)
+                .Single(dir => dir.Contains("ta-IN"));
             var secondSatelliteNewDir = Path.Combine(satellitesDir, "ta-IN");
             Directory.Move(secondSatelliteDir, secondSatelliteNewDir);
             CreateSymbolicLink(secondSatelliteDir, secondSatelliteNewDir);
@@ -275,7 +303,8 @@ namespace Microsoft.NET.HostModel.Tests
                 .CaptureStdErr()
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("ನಮಸ್ಕಾರ! வணக்கம்! Hello!");
         }
 
@@ -291,19 +320,15 @@ namespace Microsoft.NET.HostModel.Tests
                 RepoDirectories = new RepoDirectoriesProvider();
 
                 var localizedFixture = new TestProjectFixture("LocalizedApp", RepoDirectories);
-                localizedFixture
-                    .EnsureRestoredForRid(localizedFixture.CurrentRid)
+                localizedFixture.EnsureRestoredForRid(localizedFixture.CurrentRid)
                     .PublishProject(runtime: localizedFixture.CurrentRid);
 
                 var publishFixture = new TestProjectFixture("StandaloneApp", RepoDirectories);
-                publishFixture
-                    .EnsureRestoredForRid(publishFixture.CurrentRid)
+                publishFixture.EnsureRestoredForRid(publishFixture.CurrentRid)
                     .PublishProject(runtime: publishFixture.CurrentRid);
 
                 var fwPublishedFixture = new TestProjectFixture("PortableApp", RepoDirectories);
-                fwPublishedFixture
-                    .EnsureRestored()
-                    .PublishProject();
+                fwPublishedFixture.EnsureRestored().PublishProject();
 
                 StandaloneAppFixture_Localized = localizedFixture;
                 StandaloneAppFixture_Published = publishFixture;

@@ -140,8 +140,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 }
             }
 
-            private CommentBuilder(string xml)
-                => _comment = new DocumentationComment(xml);
+            private CommentBuilder(string xml) => _comment = new DocumentationComment(xml);
 
             private DocumentationComment ParseInternal(string xml)
             {
@@ -151,45 +150,76 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 {
                     foreach (var typeAndBuilderPair in _exceptionTextBuilders)
                     {
-                        _comment._exceptionTexts.Add(typeAndBuilderPair.Key, typeAndBuilderPair.Value.AsImmutable());
+                        _comment._exceptionTexts.Add(
+                            typeAndBuilderPair.Key,
+                            typeAndBuilderPair.Value.AsImmutable()
+                        );
                     }
                 }
 
-                _comment.ParameterNames = _parameterNamesBuilder == null ? ImmutableArray<string>.Empty : _parameterNamesBuilder.ToImmutable();
-                _comment.TypeParameterNames = _typeParameterNamesBuilder == null ? ImmutableArray<string>.Empty : _typeParameterNamesBuilder.ToImmutable();
-                _comment.ExceptionTypes = _exceptionTypesBuilder == null ? ImmutableArray<string>.Empty : _exceptionTypesBuilder.ToImmutable();
+                _comment.ParameterNames =
+                    _parameterNamesBuilder == null
+                        ? ImmutableArray<string>.Empty
+                        : _parameterNamesBuilder.ToImmutable();
+                _comment.TypeParameterNames =
+                    _typeParameterNamesBuilder == null
+                        ? ImmutableArray<string>.Empty
+                        : _typeParameterNamesBuilder.ToImmutable();
+                _comment.ExceptionTypes =
+                    _exceptionTypesBuilder == null
+                        ? ImmutableArray<string>.Empty
+                        : _exceptionTypesBuilder.ToImmutable();
 
                 return _comment;
             }
 
-            private static void ParseCallback(XmlReader reader, CommentBuilder builder)
-                => builder.ParseCallback(reader);
+            private static void ParseCallback(XmlReader reader, CommentBuilder builder) =>
+                builder.ParseCallback(reader);
 
-            private static string TrimEachLine(string text)
-                => string.Join(Environment.NewLine, text.Split(s_NewLineAsStringArray, StringSplitOptions.RemoveEmptyEntries).Select(i => i.Trim()));
+            private static string TrimEachLine(string text) =>
+                string.Join(
+                    Environment.NewLine,
+                    text.Split(s_NewLineAsStringArray, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(i => i.Trim())
+                );
 
             private void ParseCallback(XmlReader reader)
             {
                 if (reader.NodeType == XmlNodeType.Element)
                 {
                     var localName = reader.LocalName;
-                    if (XmlNames.ElementEquals(localName, XmlNames.ExampleElementName) && _comment.ExampleText == null)
+                    if (
+                        XmlNames.ElementEquals(localName, XmlNames.ExampleElementName)
+                        && _comment.ExampleText == null
+                    )
                     {
                         _comment.ExampleText = TrimEachLine(reader.ReadInnerXml());
                     }
-                    else if (XmlNames.ElementEquals(localName, XmlNames.SummaryElementName) && _comment.SummaryText == null)
+                    else if (
+                        XmlNames.ElementEquals(localName, XmlNames.SummaryElementName)
+                        && _comment.SummaryText == null
+                    )
                     {
                         _comment.SummaryText = TrimEachLine(reader.ReadInnerXml());
                     }
-                    else if (XmlNames.ElementEquals(localName, XmlNames.ReturnsElementName) && _comment.ReturnsText == null)
+                    else if (
+                        XmlNames.ElementEquals(localName, XmlNames.ReturnsElementName)
+                        && _comment.ReturnsText == null
+                    )
                     {
                         _comment.ReturnsText = TrimEachLine(reader.ReadInnerXml());
                     }
-                    else if (XmlNames.ElementEquals(localName, XmlNames.ValueElementName) && _comment.ValueText == null)
+                    else if (
+                        XmlNames.ElementEquals(localName, XmlNames.ValueElementName)
+                        && _comment.ValueText == null
+                    )
                     {
                         _comment.ValueText = TrimEachLine(reader.ReadInnerXml());
                     }
-                    else if (XmlNames.ElementEquals(localName, XmlNames.RemarksElementName) && _comment.RemarksText == null)
+                    else if (
+                        XmlNames.ElementEquals(localName, XmlNames.RemarksElementName)
+                        && _comment.RemarksText == null
+                    )
                     {
                         _comment.RemarksText = TrimEachLine(reader.ReadInnerXml());
                     }
@@ -198,9 +228,15 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         var name = reader.GetAttribute(XmlNames.NameAttributeName);
                         var paramText = reader.ReadInnerXml();
 
-                        if (!string.IsNullOrWhiteSpace(name) && !_comment._parameterTexts.ContainsKey(name))
+                        if (
+                            !string.IsNullOrWhiteSpace(name)
+                            && !_comment._parameterTexts.ContainsKey(name)
+                        )
                         {
-                            (_parameterNamesBuilder ?? (_parameterNamesBuilder = ImmutableArray.CreateBuilder<string>())).Add(name);
+                            (
+                                _parameterNamesBuilder
+                                ?? (_parameterNamesBuilder = ImmutableArray.CreateBuilder<string>())
+                            ).Add(name);
                             _comment._parameterTexts.Add(name, TrimEachLine(paramText));
                         }
                     }
@@ -209,9 +245,18 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                         var name = reader.GetAttribute(XmlNames.NameAttributeName);
                         var typeParamText = reader.ReadInnerXml();
 
-                        if (!string.IsNullOrWhiteSpace(name) && !_comment._typeParameterTexts.ContainsKey(name))
+                        if (
+                            !string.IsNullOrWhiteSpace(name)
+                            && !_comment._typeParameterTexts.ContainsKey(name)
+                        )
                         {
-                            (_typeParameterNamesBuilder ?? (_typeParameterNamesBuilder = ImmutableArray.CreateBuilder<string>())).Add(name);
+                            (
+                                _typeParameterNamesBuilder
+                                ?? (
+                                    _typeParameterNamesBuilder =
+                                        ImmutableArray.CreateBuilder<string>()
+                                )
+                            ).Add(name);
                             _comment._typeParameterTexts.Add(name, TrimEachLine(typeParamText));
                         }
                     }
@@ -222,10 +267,27 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
                         if (!string.IsNullOrWhiteSpace(type))
                         {
-                            if (_exceptionTextBuilders == null || !_exceptionTextBuilders.ContainsKey(type))
+                            if (
+                                _exceptionTextBuilders == null
+                                || !_exceptionTextBuilders.ContainsKey(type)
+                            )
                             {
-                                (_exceptionTypesBuilder ?? (_exceptionTypesBuilder = ImmutableArray.CreateBuilder<string>())).Add(type);
-                                (_exceptionTextBuilders ?? (_exceptionTextBuilders = new Dictionary<string, ImmutableArray<string>.Builder>())).Add(type, ImmutableArray.CreateBuilder<string>());
+                                (
+                                    _exceptionTypesBuilder
+                                    ?? (
+                                        _exceptionTypesBuilder =
+                                            ImmutableArray.CreateBuilder<string>()
+                                    )
+                                ).Add(type);
+                                (
+                                    _exceptionTextBuilders
+                                    ?? (
+                                        _exceptionTextBuilders = new Dictionary<
+                                            string,
+                                            ImmutableArray<string>.Builder
+                                        >()
+                                    )
+                                ).Add(type, ImmutableArray.CreateBuilder<string>());
                             }
 
                             _exceptionTextBuilders[type].Add(exceptionText);

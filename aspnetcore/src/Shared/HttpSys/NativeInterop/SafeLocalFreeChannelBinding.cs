@@ -20,7 +20,10 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         {
             SafeLocalFreeChannelBinding result;
 
-            result = UnsafeNclNativeMethods.SafeNetHandles.LocalAllocChannelBinding(LMEM_FIXED, (UIntPtr)cb);
+            result = UnsafeNclNativeMethods.SafeNetHandles.LocalAllocChannelBinding(
+                LMEM_FIXED,
+                (UIntPtr)cb
+            );
             if (result.IsInvalid)
             {
                 result.SetHandleAsInvalid();
@@ -38,10 +41,7 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
 
         public override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero || handle.ToInt32() == -1;
-            }
+            get { return handle == IntPtr.Zero || handle.ToInt32() == -1; }
         }
     }
 }

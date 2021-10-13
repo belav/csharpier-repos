@@ -43,7 +43,12 @@ namespace Microsoft.AspNetCore.Razor.Language
                         var snippetStartIndex = Math.Max(0, i - 10);
                         var snippetStartLength = i - snippetStartIndex;
                         var snippetStart = new char[snippetStartLength];
-                        syntaxTree.Source.CopyTo(snippetStartIndex, snippetStart, 0, snippetStartLength);
+                        syntaxTree.Source.CopyTo(
+                            snippetStartIndex,
+                            snippetStart,
+                            0,
+                            snippetStartLength
+                        );
 
                         var snippetEndIndex = Math.Min(syntaxTree.Source.Length - 1, i + 10);
                         var snippetEndLength = snippetEndIndex - i;
@@ -58,8 +63,9 @@ namespace Microsoft.AspNetCore.Razor.Language
                         var snippetString = new string(snippet);
 
                         throw new XunitException(
-$@"Could not locate Syntax Node owner at position '{i}':
-{snippetString}");
+                            $@"Could not locate Syntax Node owner at position '{i}':
+{snippetString}"
+                        );
                     }
                 }
             }
@@ -85,7 +91,9 @@ $@"Could not locate Syntax Node owner at position '{i}':
                     var start = token.GetSourceLocation(_source);
                     if (!start.Equals(_tracker.CurrentLocation))
                     {
-                        throw new InvalidOperationException($"Token starting at {start} should start at {_tracker.CurrentLocation} - {token} ");
+                        throw new InvalidOperationException(
+                            $"Token starting at {start} should start at {_tracker.CurrentLocation} - {token} "
+                        );
                     }
 
                     _tracker.UpdateLocation(token.Content);

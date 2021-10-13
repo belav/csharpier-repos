@@ -15,7 +15,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     [Collection(nameof(SharedIntegrationHostFixture))]
     public class BasicNavigationBar : AbstractEditorTest
     {
-        private const string TestSource = @"
+        private const string TestSource =
+            @"
 Class C
     Public WithEvents Domain As AppDomain
     Public Sub $$Goo()
@@ -30,13 +31,16 @@ End Structure";
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicNavigationBar(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicNavigationBar))
-        {
-        }
+            : base(instanceFactory, nameof(BasicNavigationBar)) { }
 
         public override async Task DisposeAsync()
         {
-            VisualStudio.Workspace.SetFeatureOption("NavigationBarOptions", "ShowNavigationBar", "Visual Basic", "True");
+            VisualStudio.Workspace.SetFeatureOption(
+                "NavigationBarOptions",
+                "ShowNavigationBar",
+                "Visual Basic",
+                "True"
+            );
             await base.DisposeAsync();
         }
 
@@ -52,12 +56,7 @@ End Structure";
             VerifyRightSelected("Goo");
 
             VisualStudio.Editor.ExpandTypeNavBar();
-            var expectedItems = new[]
-            {
-                "C",
-                "Domain",
-                "S"
-            };
+            var expectedItems = new[] { "C", "Domain", "S" };
 
             Assert.Equal(expectedItems, VisualStudio.Editor.GetTypeNavBarItems());
 
@@ -70,16 +69,16 @@ End Structure";
             VerifyRightSelected("A");
 
             VisualStudio.Editor.ExpandMemberNavBar();
-            expectedItems = new[]
-            {
-                "A",
-                "B",
-            };
+            expectedItems = new[] { "A", "B", };
 
             Assert.Equal(expectedItems, VisualStudio.Editor.GetMemberNavBarItems());
             VisualStudio.Editor.SelectMemberNavBarItem("B");
             VisualStudio.Editor.Verify.CaretPosition(169);
-            VisualStudio.Editor.Verify.CurrentLineText("Public Property $$B As Integer", assertCaretPosition: true, trimWhitespace: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "Public Property $$B As Integer",
+                assertCaretPosition: true,
+                trimWhitespace: true
+            );
         }
 
         [WpfFact]
@@ -91,12 +90,17 @@ End Structure";
             VisualStudio.Editor.PlaceCaret("C", charsOffset: 1);
             VerifyLeftSelected("C");
             VisualStudio.Editor.ExpandMemberNavBar();
-            Assert.Equal(new[] { "New", "Finalize", "Goo" }, VisualStudio.Editor.GetMemberNavBarItems());
+            Assert.Equal(
+                new[] { "New", "Finalize", "Goo" },
+                VisualStudio.Editor.GetMemberNavBarItems()
+            );
             VisualStudio.Editor.SelectMemberNavBarItem("New");
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
     Public Sub New()
 
-    End Sub");
+    End Sub"
+            );
             VisualStudio.Editor.Verify.CaretPosition(78); // Caret is between New() and End Sub() in virtual whitespace
             VisualStudio.Editor.Verify.CurrentLineText("$$", assertCaretPosition: true);
         }
@@ -104,10 +108,20 @@ End Structure";
         [WpfFact, Trait(Traits.Feature, Traits.Features.NavigationBar)]
         public void VerifyOption()
         {
-            VisualStudio.Workspace.SetFeatureOption("NavigationBarOptions", "ShowNavigationBar", "Visual Basic", "False");
+            VisualStudio.Workspace.SetFeatureOption(
+                "NavigationBarOptions",
+                "ShowNavigationBar",
+                "Visual Basic",
+                "False"
+            );
             Assert.False(VisualStudio.Editor.IsNavBarEnabled());
 
-            VisualStudio.Workspace.SetFeatureOption("NavigationBarOptions", "ShowNavigationBar", "Visual Basic", "True");
+            VisualStudio.Workspace.SetFeatureOption(
+                "NavigationBarOptions",
+                "ShowNavigationBar",
+                "Visual Basic",
+                "True"
+            );
             Assert.True(VisualStudio.Editor.IsNavBarEnabled());
         }
 

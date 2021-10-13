@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -53,24 +53,42 @@ namespace TestSite
             serviceCollection.AddHttpContextAccessor();
         }
 #if FORWARDCOMPAT
-        private async Task ContentRootPath(HttpContext ctx) => await ctx.Response.WriteAsync(ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().ContentRootPath);
+        private async Task ContentRootPath(HttpContext ctx) =>
+            await ctx.Response.WriteAsync(
+                ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().ContentRootPath
+            );
 
-        private async Task WebRootPath(HttpContext ctx) => await ctx.Response.WriteAsync(ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().WebRootPath);
+        private async Task WebRootPath(HttpContext ctx) =>
+            await ctx.Response.WriteAsync(
+                ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>().WebRootPath
+            );
 #else
-        private async Task ContentRootPath(HttpContext ctx) => await ctx.Response.WriteAsync(ctx.RequestServices.GetService<IWebHostEnvironment>().ContentRootPath);
+        private async Task ContentRootPath(HttpContext ctx) =>
+            await ctx.Response.WriteAsync(
+                ctx.RequestServices.GetService<IWebHostEnvironment>().ContentRootPath
+            );
 
-        private async Task WebRootPath(HttpContext ctx) => await ctx.Response.WriteAsync(ctx.RequestServices.GetService<IWebHostEnvironment>().WebRootPath);
+        private async Task WebRootPath(HttpContext ctx) =>
+            await ctx.Response.WriteAsync(
+                ctx.RequestServices.GetService<IWebHostEnvironment>().WebRootPath
+            );
 #endif
 
-        private async Task CurrentDirectory(HttpContext ctx) => await ctx.Response.WriteAsync(Environment.CurrentDirectory);
+        private async Task CurrentDirectory(HttpContext ctx) =>
+            await ctx.Response.WriteAsync(Environment.CurrentDirectory);
 
-        private async Task BaseDirectory(HttpContext ctx) => await ctx.Response.WriteAsync(AppContext.BaseDirectory);
+        private async Task BaseDirectory(HttpContext ctx) =>
+            await ctx.Response.WriteAsync(AppContext.BaseDirectory);
 
-        private async Task ASPNETCORE_IIS_PHYSICAL_PATH(HttpContext ctx) => await ctx.Response.WriteAsync(Environment.GetEnvironmentVariable("ASPNETCORE_IIS_PHYSICAL_PATH"));
+        private async Task ASPNETCORE_IIS_PHYSICAL_PATH(HttpContext ctx) =>
+            await ctx.Response.WriteAsync(
+                Environment.GetEnvironmentVariable("ASPNETCORE_IIS_PHYSICAL_PATH")
+            );
 
         private async Task ServerAddresses(HttpContext ctx)
         {
-            var serverAddresses = ctx.RequestServices.GetService<IServer>().Features.Get<IServerAddressesFeature>();
+            var serverAddresses = ctx.RequestServices.GetService<IServer>()
+                .Features.Get<IServerAddressesFeature>();
             await ctx.Response.WriteAsync(string.Join(",", serverAddresses.Addresses));
         }
 
@@ -108,7 +126,9 @@ namespace TestSite
         public async Task GetClientCert(HttpContext context)
         {
             var clientCert = context.Connection.ClientCertificate;
-            await context.Response.WriteAsync(clientCert != null ? $"Enabled;{clientCert.GetCertHashString()}" : "Disabled");
+            await context.Response.WriteAsync(
+                clientCert != null ? $"Enabled;{clientCert.GetCertHashString()}" : "Disabled"
+            );
         }
 
         private static int _waitingRequestCount;
@@ -121,6 +141,7 @@ namespace TestSite
                 context.RequestAborted.WaitHandle.WaitOne();
                 return Task.CompletedTask;
             }
+
             finally
             {
                 Interlocked.Decrement(ref _waitingRequestCount);
@@ -135,23 +156,32 @@ namespace TestSite
 
         public async Task WaitingRequestCount(HttpContext context)
         {
-            await context.Response.WriteAsync(_waitingRequestCount.ToString(CultureInfo.InvariantCulture));
+            await context.Response.WriteAsync(
+                _waitingRequestCount.ToString(CultureInfo.InvariantCulture)
+            );
         }
 
         public Task CreateFile(HttpContext context)
         {
 #if FORWARDCOMPAT
-            var hostingEnv = context.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>();
+            var hostingEnv =
+                context.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>();
 #else
             var hostingEnv = context.RequestServices.GetService<IWebHostEnvironment>();
 #endif
 
-            if (context.Connection.LocalIpAddress == null || context.Connection.RemoteIpAddress == null)
+            if (
+                context.Connection.LocalIpAddress == null
+                || context.Connection.RemoteIpAddress == null
+            )
             {
                 throw new Exception("Failed to set local and remote ip addresses");
             }
 
-            File.WriteAllText(System.IO.Path.Combine(hostingEnv.ContentRootPath, "Started.txt"), "");
+            File.WriteAllText(
+                System.IO.Path.Combine(hostingEnv.ContentRootPath, "Started.txt"),
+                ""
+            );
             return Task.CompletedTask;
         }
 
@@ -176,7 +206,8 @@ namespace TestSite
                 {
                     context.Response.ContentType = "text/html";
                     await context.Response.Body.WriteAsync(new byte[100], 0, 100);
-                });
+                }
+            );
         }
 
         [DllImport("kernel32.dll")]
@@ -191,7 +222,9 @@ namespace TestSite
 
         private async Task GetEnvironmentVariable(HttpContext ctx)
         {
-            await ctx.Response.WriteAsync(Environment.GetEnvironmentVariable(ctx.Request.Query["name"].ToString()));
+            await ctx.Response.WriteAsync(
+                Environment.GetEnvironmentVariable(ctx.Request.Query["name"].ToString())
+            );
         }
 
         private async Task ServerVariable(HttpContext ctx)
@@ -230,7 +263,13 @@ namespace TestSite
 
         private async Task AuthenticationRestrictedNTLM(HttpContext ctx)
         {
-            if (string.Equals("NTLM", ctx.User.Identity.AuthenticationType, StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    "NTLM",
+                    ctx.User.Identity.AuthenticationType,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 await ctx.Response.WriteAsync("NTLM");
             }
@@ -511,7 +550,8 @@ namespace TestSite
         {
             await ctx.Response.WriteAsync("test1");
 #if FORWARDCOMPAT
-            var lifetime = ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
+            var lifetime =
+                ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
 #else
             var lifetime = ctx.RequestServices.GetService<IHostApplicationLifetime>();
 #endif
@@ -762,7 +802,6 @@ namespace TestSite
                 }
             }
 
-
             await ctx.Response.WriteAsync(success ? "Success" : "Failure");
         }
 
@@ -875,7 +914,11 @@ namespace TestSite
 
             for (var i = 0; i < 1000; i++)
             {
-                await fileStream.WriteAsync(Encoding.UTF8.GetBytes(fileContent), 0, fileContent.Length);
+                await fileStream.WriteAsync(
+                    Encoding.UTF8.GetBytes(fileContent),
+                    0,
+                    fileContent.Length
+                );
             }
             fileStream.Close();
 
@@ -888,9 +931,7 @@ namespace TestSite
             {
                 File.Delete(tempFile);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         private async Task BasePath(HttpContext ctx)
@@ -908,7 +949,8 @@ namespace TestSite
         {
             await ctx.Response.WriteAsync("Shutting down");
 #if FORWARDCOMPAT
-            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>().StopApplication();
+            ctx.RequestServices.GetService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>()
+                .StopApplication();
 #else
             ctx.RequestServices.GetService<IHostApplicationLifetime>().StopApplication();
 #endif
@@ -976,19 +1018,33 @@ namespace TestSite
 
         private async Task CommandLineArgs(HttpContext ctx)
         {
-            await ctx.Response.WriteAsync(string.Join("|", Environment.GetCommandLineArgs().Skip(1)));
+            await ctx.Response.WriteAsync(
+                string.Join("|", Environment.GetCommandLineArgs().Skip(1))
+            );
         }
 
         public Task HttpsHelloWorld(HttpContext ctx) =>
-           ctx.Response.WriteAsync("Scheme:" + ctx.Request.Scheme + "; Original:" + ctx.Request.Headers["x-original-proto"]);
+            ctx.Response.WriteAsync(
+                "Scheme:"
+                    + ctx.Request.Scheme
+                    + "; Original:"
+                    + ctx.Request.Headers["x-original-proto"]
+            );
 
         public Task Path(HttpContext ctx) => ctx.Response.WriteAsync(ctx.Request.Path.Value);
 
-        public Task Query(HttpContext ctx) => ctx.Response.WriteAsync(ctx.Request.QueryString.Value);
+        public Task Query(HttpContext ctx) =>
+            ctx.Response.WriteAsync(ctx.Request.QueryString.Value);
 
-        public Task BodyLimit(HttpContext ctx) => ctx.Response.WriteAsync(ctx.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize?.ToString(CultureInfo.InvariantCulture) ?? "null");
+        public Task BodyLimit(HttpContext ctx) =>
+            ctx.Response.WriteAsync(
+                ctx.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize?.ToString(
+                    CultureInfo.InvariantCulture
+                ) ?? "null"
+            );
 
-        public Task Anonymous(HttpContext context) => context.Response.WriteAsync("Anonymous?" + !context.User.Identity.IsAuthenticated);
+        public Task Anonymous(HttpContext context) =>
+            context.Response.WriteAsync("Anonymous?" + !context.User.Identity.IsAuthenticated);
 
         public Task Restricted(HttpContext context)
         {
@@ -1003,11 +1059,18 @@ namespace TestSite
             }
         }
 
-        public Task Forbidden(HttpContext context) => context.ForbidAsync(IISDefaults.AuthenticationScheme);
+        public Task Forbidden(HttpContext context) =>
+            context.ForbidAsync(IISDefaults.AuthenticationScheme);
 
         public Task RestrictedNTLM(HttpContext context)
         {
-            if (string.Equals("NTLM", context.User.Identity.AuthenticationType, StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    "NTLM",
+                    context.User.Identity.AuthenticationType,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return context.Response.WriteAsync("NTLM");
             }
@@ -1018,7 +1081,9 @@ namespace TestSite
         }
 
         public Task UpgradeFeatureDetection(HttpContext context) =>
-            context.Response.WriteAsync(context.Features.Get<IHttpUpgradeFeature>() != null ? "Enabled" : "Disabled");
+            context.Response.WriteAsync(
+                context.Features.Get<IHttpUpgradeFeature>() != null ? "Enabled" : "Disabled"
+            );
 
         public Task CheckRequestHandlerVersion(HttpContext context)
         {
@@ -1040,21 +1105,33 @@ namespace TestSite
 
         private async Task ProcessId(HttpContext context)
         {
-            await context.Response.WriteAsync(Process.GetCurrentProcess().Id.ToString(CultureInfo.InvariantCulture));
+            await context.Response.WriteAsync(
+                Process.GetCurrentProcess().Id.ToString(CultureInfo.InvariantCulture)
+            );
         }
 
         public async Task ANCM_HTTPS_PORT(HttpContext context)
         {
-            var httpsPort = context.RequestServices.GetService<IConfiguration>().GetValue<int?>("ANCM_HTTPS_PORT");
+            var httpsPort = context.RequestServices.GetService<IConfiguration>()
+                .GetValue<int?>("ANCM_HTTPS_PORT");
 
-            await context.Response.WriteAsync(httpsPort.HasValue ? httpsPort.Value.ToString(CultureInfo.InvariantCulture) : "NOVALUE");
+            await context.Response.WriteAsync(
+                httpsPort.HasValue
+                  ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
+                  : "NOVALUE"
+            );
         }
 
         public async Task HTTPS_PORT(HttpContext context)
         {
-            var httpsPort = context.RequestServices.GetService<IConfiguration>().GetValue<int?>("HTTPS_PORT");
+            var httpsPort = context.RequestServices.GetService<IConfiguration>()
+                .GetValue<int?>("HTTPS_PORT");
 
-            await context.Response.WriteAsync(httpsPort.HasValue ? httpsPort.Value.ToString(CultureInfo.InvariantCulture) : "NOVALUE");
+            await context.Response.WriteAsync(
+                httpsPort.HasValue
+                  ? httpsPort.Value.ToString(CultureInfo.InvariantCulture)
+                  : "NOVALUE"
+            );
         }
 
         public Task Latin1(HttpContext context)
@@ -1091,7 +1168,9 @@ namespace TestSite
             Assert.True(context.Response.SupportsTrailers());
             foreach (var header in DisallowedTrailers)
             {
-                Assert.Throws<InvalidOperationException>(() => context.Response.AppendTrailer(header, "value"));
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Response.AppendTrailer(header, "value")
+                );
             }
             return Task.FromResult(0);
         }
@@ -1117,7 +1196,9 @@ namespace TestSite
             context.Response.AppendTrailer("TrailerName", "Trailer Value");
         }
 
-        public async Task ResponseTrailers_WithTrailersBeforeContentLengthBody_TrailersSent(HttpContext context)
+        public async Task ResponseTrailers_WithTrailersBeforeContentLengthBody_TrailersSent(
+            HttpContext context
+        )
         {
             var body = "Hello World";
             context.Response.ContentLength = body.Length * 2;
@@ -1126,7 +1207,9 @@ namespace TestSite
             await context.Response.WriteAsync(body);
         }
 
-        public async Task ResponseTrailers_WithContentLengthBodyAndDeclared_TrailersSent(HttpContext context)
+        public async Task ResponseTrailers_WithContentLengthBodyAndDeclared_TrailersSent(
+            HttpContext context
+        )
         {
             var body = "Hello World";
             context.Response.ContentLength = body.Length;
@@ -1135,7 +1218,9 @@ namespace TestSite
             context.Response.AppendTrailer("TrailerName", "Trailer Value");
         }
 
-        public async Task ResponseTrailers_WithContentLengthBodyAndDeclaredButMissingTrailers_Completes(HttpContext context)
+        public async Task ResponseTrailers_WithContentLengthBodyAndDeclaredButMissingTrailers_Completes(
+            HttpContext context
+        )
         {
             var body = "Hello World";
             context.Response.ContentLength = body.Length;
@@ -1145,21 +1230,29 @@ namespace TestSite
 
         public Task ResponseTrailers_MultipleValues_SentAsSeparateHeaders(HttpContext context)
         {
-            context.Response.AppendTrailer("trailername", new StringValues(new[] { "TrailerValue0", "TrailerValue1" }));
+            context.Response.AppendTrailer(
+                "trailername",
+                new StringValues(new[] { "TrailerValue0", "TrailerValue1" })
+            );
             return Task.FromResult(0);
         }
 
         public Task ResponseTrailers_LargeTrailers_Success(HttpContext context)
         {
-            var values = new[] {
+            var values = new[]
+            {
                 new string('a', 1024),
                 new string('b', 1024 * 4),
                 new string('c', 1024 * 8),
                 new string('d', 1024 * 16),
                 new string('e', 1024 * 32),
-                new string('f', 1024 * 64 - 1) }; // Max header size
+                new string('f', 1024 * 64 - 1)
+            }; // Max header size
 
-            context.Response.AppendTrailer("ThisIsALongerHeaderNameThatStillWorksForReals", new StringValues(values));
+            context.Response.AppendTrailer(
+                "ThisIsALongerHeaderNameThatStillWorksForReals",
+                new StringValues(values)
+            );
             return Task.FromResult(0);
         }
 
@@ -1178,7 +1271,9 @@ namespace TestSite
             throw new Exception("Application exception");
         }
 
-        public async Task AppException_AfterHeaders_PriorOSVersions_ResetCancel(HttpContext httpContext)
+        public async Task AppException_AfterHeaders_PriorOSVersions_ResetCancel(
+            HttpContext httpContext
+        )
         {
             await httpContext.Response.Body.FlushAsync();
             throw new Exception("Application exception");
@@ -1206,7 +1301,8 @@ namespace TestSite
             return httpContext.Response.WriteAsync("Hello World");
         }
 
-        private TaskCompletionSource<object> _resetBeforeResponseResetsCts = new TaskCompletionSource<object>();
+        private TaskCompletionSource<object> _resetBeforeResponseResetsCts =
+            new TaskCompletionSource<object>();
         public Task Reset_BeforeResponse_Resets(HttpContext httpContext)
         {
             try
@@ -1229,7 +1325,8 @@ namespace TestSite
             await _resetBeforeResponseResetsCts.Task;
         }
 
-        private TaskCompletionSource<object> _resetBeforeResponseZeroResetsCts = new TaskCompletionSource<object>();
+        private TaskCompletionSource<object> _resetBeforeResponseZeroResetsCts =
+            new TaskCompletionSource<object>();
         public Task Reset_BeforeResponse_Zero_Resets(HttpContext httpContext)
         {
             try
@@ -1252,7 +1349,8 @@ namespace TestSite
             await _resetBeforeResponseZeroResetsCts.Task;
         }
 
-        private TaskCompletionSource<object> _resetAfterResponseHeadersResetsCts = new TaskCompletionSource<object>();
+        private TaskCompletionSource<object> _resetAfterResponseHeadersResetsCts =
+            new TaskCompletionSource<object>();
 
         public async Task Reset_AfterResponseHeaders_Resets(HttpContext httpContext)
         {
@@ -1275,7 +1373,8 @@ namespace TestSite
             await _resetAfterResponseHeadersResetsCts.Task;
         }
 
-        private TaskCompletionSource<object> _resetDuringResponseBodyResetsCts = new TaskCompletionSource<object>();
+        private TaskCompletionSource<object> _resetDuringResponseBodyResetsCts =
+            new TaskCompletionSource<object>();
 
         public async Task Reset_DuringResponseBody_Resets(HttpContext httpContext)
         {
@@ -1300,7 +1399,8 @@ namespace TestSite
             await _resetDuringResponseBodyResetsCts.Task;
         }
 
-        private TaskCompletionSource<object> _resetBeforeRequestBodyResetsCts = new TaskCompletionSource<object>();
+        private TaskCompletionSource<object> _resetBeforeRequestBodyResetsCts =
+            new TaskCompletionSource<object>();
 
         public async Task Reset_BeforeRequestBody_Resets(HttpContext httpContext)
         {
@@ -1328,7 +1428,8 @@ namespace TestSite
             await _resetBeforeRequestBodyResetsCts.Task;
         }
 
-        private TaskCompletionSource<object> _resetDuringRequestBodyResetsCts = new TaskCompletionSource<object>();
+        private TaskCompletionSource<object> _resetDuringRequestBodyResetsCts =
+            new TaskCompletionSource<object>();
 
         public async Task Reset_DuringRequestBody_Resets(HttpContext httpContext)
         {
@@ -1382,43 +1483,46 @@ namespace TestSite
             await _resetDuringRequestBodyResetsCts.Task;
         }
 
-        private TaskCompletionSource<object> _onCompletedHttpContext = new TaskCompletionSource<object>();
+        private TaskCompletionSource<object> _onCompletedHttpContext =
+            new TaskCompletionSource<object>();
         public async Task OnCompletedHttpContext(HttpContext context)
         {
             // This shouldn't block the response or the server from shutting down.
-            context.Response.OnCompleted(async () =>
-            {
-                var context = _httpContextAccessor.HttpContext;
-
-                await Task.Delay(500);
-                // Access all fields of the connection after final flush.
-                try
+            context.Response.OnCompleted(
+                async () =>
                 {
-                    _ = context.Connection.RemoteIpAddress;
-                    _ = context.Connection.LocalIpAddress;
-                    _ = context.Connection.Id;
-                    _ = context.Connection.ClientCertificate;
-                    _ = context.Connection.LocalPort;
-                    _ = context.Connection.RemotePort;
+                    var context = _httpContextAccessor.HttpContext;
 
-                    _ = context.Request.ContentLength;
-                    _ = context.Request.Headers;
-                    _ = context.Request.Query;
-                    _ = context.Request.Body;
-                    _ = context.Request.ContentType;
+                    await Task.Delay(500);
+                    // Access all fields of the connection after final flush.
+                    try
+                    {
+                        _ = context.Connection.RemoteIpAddress;
+                        _ = context.Connection.LocalIpAddress;
+                        _ = context.Connection.Id;
+                        _ = context.Connection.ClientCertificate;
+                        _ = context.Connection.LocalPort;
+                        _ = context.Connection.RemotePort;
 
-                    _ = context.Response.StatusCode;
-                    _ = context.Response.Body;
-                    _ = context.Response.Headers;
-                    _ = context.Response.ContentType;
+                        _ = context.Request.ContentLength;
+                        _ = context.Request.Headers;
+                        _ = context.Request.Query;
+                        _ = context.Request.Body;
+                        _ = context.Request.ContentType;
+
+                        _ = context.Response.StatusCode;
+                        _ = context.Response.Body;
+                        _ = context.Response.Headers;
+                        _ = context.Response.ContentType;
+                    }
+                    catch (Exception ex)
+                    {
+                        _onCompletedHttpContext.TrySetResult(ex);
+                    }
+
+                    _onCompletedHttpContext.TrySetResult(null);
                 }
-                catch (Exception ex)
-                {
-                    _onCompletedHttpContext.TrySetResult(ex);
-                }
-
-                _onCompletedHttpContext.TrySetResult(null);
-            });
+            );
 
             await context.Response.WriteAsync("SlowOnCompleted");
         }
@@ -1428,7 +1532,8 @@ namespace TestSite
             await _onCompletedHttpContext.Task;
         }
 
-        private TaskCompletionSource<object> _responseTrailers_CompleteAsyncNoBody_TrailersSent = new TaskCompletionSource<object>();
+        private TaskCompletionSource<object> _responseTrailers_CompleteAsyncNoBody_TrailersSent =
+            new TaskCompletionSource<object>();
         public async Task ResponseTrailers_CompleteAsyncNoBody_TrailersSent(HttpContext httpContext)
         {
             httpContext.Response.AppendTrailer("trailername", "TrailerValue");
@@ -1436,14 +1541,19 @@ namespace TestSite
             await _responseTrailers_CompleteAsyncNoBody_TrailersSent.Task;
         }
 
-        public Task ResponseTrailers_CompleteAsyncNoBody_TrailersSent_Completed(HttpContext httpContext)
+        public Task ResponseTrailers_CompleteAsyncNoBody_TrailersSent_Completed(
+            HttpContext httpContext
+        )
         {
             _responseTrailers_CompleteAsyncNoBody_TrailersSent.TrySetResult(null);
             return Task.CompletedTask;
         }
 
-        private TaskCompletionSource<object> _responseTrailers_CompleteAsyncWithBody_TrailersSent = new TaskCompletionSource<object>();
-        public async Task ResponseTrailers_CompleteAsyncWithBody_TrailersSent(HttpContext httpContext)
+        private TaskCompletionSource<object> _responseTrailers_CompleteAsyncWithBody_TrailersSent =
+            new TaskCompletionSource<object>();
+        public async Task ResponseTrailers_CompleteAsyncWithBody_TrailersSent(
+            HttpContext httpContext
+        )
         {
             await httpContext.Response.WriteAsync("Hello World");
             httpContext.Response.AppendTrailer("TrailerName", "Trailer Value");
@@ -1451,7 +1561,9 @@ namespace TestSite
             await _responseTrailers_CompleteAsyncWithBody_TrailersSent.Task;
         }
 
-        public Task ResponseTrailers_CompleteAsyncWithBody_TrailersSent_Completed(HttpContext httpContext)
+        public Task ResponseTrailers_CompleteAsyncWithBody_TrailersSent_Completed(
+            HttpContext httpContext
+        )
         {
             _responseTrailers_CompleteAsyncWithBody_TrailersSent.TrySetResult(null);
             return Task.CompletedTask;
@@ -1529,57 +1641,84 @@ namespace TestSite
 
         public Task IncreaseRequestLimit(HttpContext httpContext)
         {
-            var maxRequestBodySizeFeature = httpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
+            var maxRequestBodySizeFeature =
+                httpContext.Features.Get<IHttpMaxRequestBodySizeFeature>();
             maxRequestBodySizeFeature.MaxRequestBodySize = 2;
             return Task.CompletedTask;
         }
 
         public Task OnCompletedThrows(HttpContext httpContext)
         {
-            httpContext.Response.OnCompleted(() =>
-            {
-                throw new Exception();
-            });
+            httpContext.Response.OnCompleted(
+                () =>
+                {
+                    throw new Exception();
+                }
+            );
 
             return Task.CompletedTask;
         }
 
-        internal static readonly HashSet<(string, StringValues, StringValues)> NullTrailers = new HashSet<(string, StringValues, StringValues)>()
-        {
-            ("NullString", (string)null, (string)null),
-            ("EmptyString", "", ""),
-            ("NullStringArray", new string[] { null }, ""),
-            ("EmptyStringArray", new string[] { "" }, ""),
-            ("MixedStringArray", new string[] { null, "" }, new string[] { "", "" }),
-            ("WithValidStrings", new string[] { null, "Value", "" }, new string[] { "", "Value", "" })
-        };
+        internal static readonly HashSet<(string, StringValues, StringValues)> NullTrailers =
+            new HashSet<(string, StringValues, StringValues)>()
+            {
+                ("NullString", (string)null, (string)null),
+                ("EmptyString", "", ""),
+                ("NullStringArray", new string[] { null }, ""),
+                ("EmptyStringArray", new string[] { "" }, ""),
+                ("MixedStringArray", new string[] { null, "" }, new string[] { "", "" }),
+                (
+                    "WithValidStrings",
+                    new string[] { null, "Value", "" },
+                    new string[] { "", "Value", "" }
+                )
+            };
 
         // https://tools.ietf.org/html/rfc7230#section-4.1.2
-        internal static readonly HashSet<string> DisallowedTrailers = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
+        internal static readonly HashSet<string> DisallowedTrailers = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        ) {
             // Message framing headers.
-            HeaderNames.TransferEncoding, HeaderNames.ContentLength,
-
+            HeaderNames.TransferEncoding,
+            HeaderNames.ContentLength,
             // Routing headers.
             HeaderNames.Host,
-
             // Request modifiers: controls and conditionals.
             // rfc7231#section-5.1: Controls.
-            HeaderNames.CacheControl, HeaderNames.Expect, HeaderNames.MaxForwards, HeaderNames.Pragma, HeaderNames.Range, HeaderNames.TE,
-
+            HeaderNames.CacheControl,
+            HeaderNames.Expect,
+            HeaderNames.MaxForwards,
+            HeaderNames.Pragma,
+            HeaderNames.Range,
+            HeaderNames.TE,
             // rfc7231#section-5.2: Conditionals.
-            HeaderNames.IfMatch, HeaderNames.IfNoneMatch, HeaderNames.IfModifiedSince, HeaderNames.IfUnmodifiedSince, HeaderNames.IfRange,
-
+            HeaderNames.IfMatch,
+            HeaderNames.IfNoneMatch,
+            HeaderNames.IfModifiedSince,
+            HeaderNames.IfUnmodifiedSince,
+            HeaderNames.IfRange,
             // Authentication headers.
-            HeaderNames.WWWAuthenticate, HeaderNames.Authorization, HeaderNames.ProxyAuthenticate, HeaderNames.ProxyAuthorization, HeaderNames.SetCookie, HeaderNames.Cookie,
-
+            HeaderNames.WWWAuthenticate,
+            HeaderNames.Authorization,
+            HeaderNames.ProxyAuthenticate,
+            HeaderNames.ProxyAuthorization,
+            HeaderNames.SetCookie,
+            HeaderNames.Cookie,
             // Response control data.
             // rfc7231#section-7.1: Control Data.
-            HeaderNames.Age, HeaderNames.Expires, HeaderNames.Date, HeaderNames.Location, HeaderNames.RetryAfter, HeaderNames.Vary, HeaderNames.Warning,
-
+            HeaderNames.Age,
+            HeaderNames.Expires,
+            HeaderNames.Date,
+            HeaderNames.Location,
+            HeaderNames.RetryAfter,
+            HeaderNames.Vary,
+            HeaderNames.Warning,
             // Content-Encoding, Content-Type, Content-Range, and Trailer itself.
-            HeaderNames.ContentEncoding, HeaderNames.ContentType, HeaderNames.ContentRange, HeaderNames.Trailer
+            HeaderNames.ContentEncoding,
+            HeaderNames.ContentType,
+            HeaderNames.ContentRange,
+            HeaderNames.Trailer
         };
 #endif
-        }
     }
+}

@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             Transaction transaction,
             DbConnection connection,
-            Guid connectionId)
-            : base(eventDefinition, messageGenerator)
+            Guid connectionId
+        ) : base(eventDefinition, messageGenerator)
         {
             Transaction = transaction;
             Connection = connection;

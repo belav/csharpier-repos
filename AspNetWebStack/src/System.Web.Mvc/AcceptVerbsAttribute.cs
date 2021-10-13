@@ -10,14 +10,15 @@ using System.Web.Mvc.Properties;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Design", "CA1019:DefineAccessorsForAttributeArguments", Justification = "The accessor is exposed as an ICollection<string>.")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1019:DefineAccessorsForAttributeArguments",
+        Justification = "The accessor is exposed as an ICollection<string>."
+    )]
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public sealed class AcceptVerbsAttribute : ActionMethodSelectorAttribute
     {
-        public AcceptVerbsAttribute(HttpVerbs verbs)
-            : this(EnumToArray(verbs))
-        {
-        }
+        public AcceptVerbsAttribute(HttpVerbs verbs) : this(EnumToArray(verbs)) { }
 
         public AcceptVerbsAttribute(params string[] verbs)
         {
@@ -31,7 +32,12 @@ namespace System.Web.Mvc
 
         public ICollection<string> Verbs { get; private set; }
 
-        private static void AddEntryToList(HttpVerbs verbs, HttpVerbs match, List<string> verbList, string entryText)
+        private static void AddEntryToList(
+            HttpVerbs verbs,
+            HttpVerbs match,
+            List<string> verbList,
+            string entryText
+        )
         {
             if ((verbs & match) != 0)
             {
@@ -54,7 +60,10 @@ namespace System.Web.Mvc
             return verbList.ToArray();
         }
 
-        public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+        public override bool IsValidForRequest(
+            ControllerContext controllerContext,
+            MethodInfo methodInfo
+        )
         {
             if (controllerContext == null)
             {

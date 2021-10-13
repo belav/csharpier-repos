@@ -16,7 +16,9 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
             var decryptor = new NullXmlDecryptor();
 
             // Act
-            var retVal = decryptor.Decrypt(XElement.Parse("<unencryptedKey><theElement /></unencryptedKey>"));
+            var retVal = decryptor.Decrypt(
+                XElement.Parse("<unencryptedKey><theElement /></unencryptedKey>")
+            );
 
             // Assert
             XmlAssert.Equal("<theElement />", retVal);
@@ -33,7 +35,10 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
 
             // Assert
             Assert.Equal(typeof(NullXmlDecryptor), retVal.DecryptorType);
-            XmlAssert.Equal("<unencryptedKey><theElement /></unencryptedKey>", retVal.EncryptedElement);
+            XmlAssert.Equal(
+                "<unencryptedKey><theElement /></unencryptedKey>",
+                retVal.EncryptedElement
+            );
         }
     }
 }

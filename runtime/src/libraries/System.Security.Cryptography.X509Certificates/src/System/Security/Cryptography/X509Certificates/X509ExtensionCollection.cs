@@ -16,9 +16,7 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public sealed class X509ExtensionCollection : ICollection, IEnumerable
     {
-        public X509ExtensionCollection()
-        {
-        }
+        public X509ExtensionCollection() { }
 
         public int Count
         {
@@ -42,7 +40,10 @@ namespace System.Security.Cryptography.X509Certificates
                 if (index < 0)
                     throw new InvalidOperationException(SR.InvalidOperation_EnumNotStarted);
                 if (index >= _list.Count)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_Index);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_Index
+                    );
 
                 return _list[index];
             }
@@ -55,7 +56,13 @@ namespace System.Security.Cryptography.X509Certificates
                 string? oidValue = new Oid(oid).Value;
                 foreach (X509Extension extension in _list)
                 {
-                    if (string.Equals(extension.Oid!.Value, oidValue, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            extension.Oid!.Value,
+                            oidValue,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         return extension;
                 }
                 return null;

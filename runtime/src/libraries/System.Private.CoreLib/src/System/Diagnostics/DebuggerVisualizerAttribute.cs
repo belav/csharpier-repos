@@ -7,7 +7,10 @@ namespace System.Diagnostics
     /// Signifies that the attributed type has a visualizer which is pointed
     /// to by the parameter type name strings.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Assembly,
+        AllowMultiple = true
+    )]
     public sealed class DebuggerVisualizerAttribute : Attribute
     {
         private Type? _target;
@@ -17,7 +20,10 @@ namespace System.Diagnostics
             VisualizerTypeName = visualizerTypeName;
         }
 
-        public DebuggerVisualizerAttribute(string visualizerTypeName, string? visualizerObjectSourceTypeName)
+        public DebuggerVisualizerAttribute(
+            string visualizerTypeName,
+            string? visualizerObjectSourceTypeName
+        )
         {
             VisualizerTypeName = visualizerTypeName;
             VisualizerObjectSourceTypeName = visualizerObjectSourceTypeName;

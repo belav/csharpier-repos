@@ -85,133 +85,220 @@ namespace Microsoft.CodeAnalysis.Remote
         /// <summary>
         /// Remote API. Initializes ServiceHub process global state.
         /// </summary>
-        public void InitializeGlobalState(int uiCultureLCID, int cultureLCID, CancellationToken cancellationToken)
+        public void InitializeGlobalState(
+            int uiCultureLCID,
+            int cultureLCID,
+            CancellationToken cancellationToken
+        )
         {
-            RunService(() =>
-            {
-                // initialize global asset storage
-                WorkspaceManager.InitializeAssetSource(this);
-
-                if (uiCultureLCID != 0)
+            RunService(
+                () =>
                 {
-                    EnsureCulture(uiCultureLCID, cultureLCID);
-                }
-            }, cancellationToken);
+                    // initialize global asset storage
+                    WorkspaceManager.InitializeAssetSource(this);
+
+                    if (uiCultureLCID != 0)
+                    {
+                        EnsureCulture(uiCultureLCID, cultureLCID);
+                    }
+                },
+                cancellationToken
+            );
         }
 
         /// <summary>
         /// Remote API. Initializes ServiceHub process global state.
         /// </summary>
-        public void InitializeTelemetrySession(int hostProcessId, string serializedSession, CancellationToken cancellationToken)
+        public void InitializeTelemetrySession(
+            int hostProcessId,
+            string serializedSession,
+            CancellationToken cancellationToken
+        )
         {
-            RunService(() =>
-            {
-                var services = GetWorkspace().Services;
-
-                var telemetryService = (RemoteWorkspaceTelemetryService)services.GetRequiredService<IWorkspaceTelemetryService>();
-                var telemetrySession = new TelemetrySession(serializedSession);
-                telemetrySession.Start();
-
-                telemetryService.InitializeTelemetrySession(telemetrySession);
-                telemetryService.RegisterUnexpectedExceptionLogger(Logger);
-
-                // log telemetry that service hub started
-                RoslynLogger.Log(FunctionId.RemoteHost_Connect, KeyValueLogMessage.Create(m =>
+            RunService(
+                () =>
                 {
-                    m["Host"] = hostProcessId;
-                    m["InstanceId"] = InstanceId;
-                }));
+                    var services = GetWorkspace().Services;
 
+                    var telemetryService =
+                        (RemoteWorkspaceTelemetryService)services.GetRequiredService<IWorkspaceTelemetryService>();
+                    var telemetrySession = new TelemetrySession(serializedSession);
+                    telemetrySession.Start();
+
+                    telemetryService.InitializeTelemetrySession(telemetrySession);
+                    telemetryService.RegisterUnexpectedExceptionLogger(Logger);
+
+                    // log telemetry that service hub started
+                    RoslynLogger.Log(
+                        FunctionId.RemoteHost_Connect,
+                        KeyValueLogMessage.Create(
+                            m =>
+                            {
+                                m["Host"] = hostProcessId;
+                                m["InstanceId"] = InstanceId;
+                            }
+                        )
+                    );
 #if DEBUG
-                // start performance reporter
-                var diagnosticAnalyzerPerformanceTracker = services.GetService<IPerformanceTrackerService>();
-                if (diagnosticAnalyzerPerformanceTracker != null)
-                {
-                    var globalOperationNotificationService = services.GetService<IGlobalOperationNotificationService>();
-                    _performanceReporter = new PerformanceReporter(Logger, telemetrySession, diagnosticAnalyzerPerformanceTracker, globalOperationNotificationService, s_reportInterval, _shutdownCancellationSource.Token);
-                }
+                    // start performance reporter
+                    var diagnosticAnalyzerPerformanceTracker =
+                        services.GetService<IPerformanceTrackerService>();
+                    if (diagnosticAnalyzerPerformanceTracker != null)
+                    {
+                        var globalOperationNotificationService =
+                            services.GetService<IGlobalOperationNotificationService>();
+                        _performanceReporter = new PerformanceReporter(
+                            Logger,
+                            telemetrySession,
+                            diagnosticAnalyzerPerformanceTracker,
+                            globalOperationNotificationService,
+                            s_reportInterval,
+                            _shutdownCancellationSource.Token
+                        );
+                    }
 #endif
-            }, cancellationToken);
+                },
+                cancellationToken
+            );
         }
 
-        async ValueTask<ImmutableArray<(Checksum, object)>> IAssetSource.GetAssetsAsync(int scopeId, ISet<Checksum> checksums, ISerializerService serializerService, CancellationToken cancellationToken)
+        async ValueTask<ImmutableArray<(Checksum, object)>> IAssetSource.GetAssetsAsync(
+            int scopeId,
+            ISet<Checksum> checksums,
+            ISerializerService serializerService,
+            CancellationToken cancellationToken
+        )
         {
-            return await RunServiceAsync(() =>
-            {
-                using (RoslynLogger.LogBlock(FunctionId.RemoteHostService_GetAssetsAsync, (serviceId, checksums) => $"{serviceId} - {Checksum.GetChecksumsLogInfo(checksums)}", scopeId, checksums, cancellationToken))
-                {
-                    return EndPoint.InvokeAsync(
-                        nameof(IRemoteHostServiceCallback.GetAssetsAsync),
-                        new object[] { scopeId, checksums.ToArray() },
-                        (stream, cancellationToken) => Task.FromResult(RemoteHostAssetSerialization.ReadData(stream, scopeId, checksums, serializerService, cancellationToken)),
-                        cancellationToken);
-                }
-            }, cancellationToken).ConfigureAwait(false);
+            return await RunServiceAsync(
+                    () =>
+                    {
+                        using (
+                            RoslynLogger.LogBlock(
+                                FunctionId.RemoteHostService_GetAssetsAsync,
+                                (serviceId, checksums) =>
+                                    $"{serviceId} - {Checksum.GetChecksumsLogInfo(checksums)}",
+                                scopeId,
+                                checksums,
+                                cancellationToken
+                            )
+                        )
+                        {
+                            return EndPoint.InvokeAsync(
+                                nameof(IRemoteHostServiceCallback.GetAssetsAsync),
+                                new object[] { scopeId, checksums.ToArray() },
+                                (stream, cancellationToken) =>
+                                    Task.FromResult(
+                                        RemoteHostAssetSerialization.ReadData(
+                                            stream,
+                                            scopeId,
+                                            checksums,
+                                            serializerService,
+                                            cancellationToken
+                                        )
+                                    ),
+                                cancellationToken
+                            );
+                        }
+                    },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         // TODO: remove (https://github.com/dotnet/roslyn/issues/43477)
-        async ValueTask<bool> IAssetSource.IsExperimentEnabledAsync(string experimentName, CancellationToken cancellationToken)
+        async ValueTask<bool> IAssetSource.IsExperimentEnabledAsync(
+            string experimentName,
+            CancellationToken cancellationToken
+        )
         {
-            return await RunServiceAsync(() =>
-            {
-                using (RoslynLogger.LogBlock(FunctionId.RemoteHostService_IsExperimentEnabledAsync, experimentName, cancellationToken))
-                {
-                    return EndPoint.InvokeAsync<bool>(
-                        nameof(IRemoteHostServiceCallback.IsExperimentEnabledAsync),
-                        new object[] { experimentName },
-                        cancellationToken);
-                }
-            }, cancellationToken).ConfigureAwait(false);
+            return await RunServiceAsync(
+                    () =>
+                    {
+                        using (
+                            RoslynLogger.LogBlock(
+                                FunctionId.RemoteHostService_IsExperimentEnabledAsync,
+                                experimentName,
+                                cancellationToken
+                            )
+                        )
+                        {
+                            return EndPoint.InvokeAsync<bool>(
+                                nameof(IRemoteHostServiceCallback.IsExperimentEnabledAsync),
+                                new object[] { experimentName },
+                                cancellationToken
+                            );
+                        }
+                    },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         /// <summary>
         /// Remote API.
         /// </summary>
-        public void SetLoggingFunctionIds(List<string> loggerTypes, List<string> functionIds, CancellationToken cancellationToken)
+        public void SetLoggingFunctionIds(
+            List<string> loggerTypes,
+            List<string> functionIds,
+            CancellationToken cancellationToken
+        )
         {
-            RunService(() =>
-            {
-                var functionIdType = typeof(FunctionId);
-
-                var set = new HashSet<FunctionId>();
-                foreach (var functionIdString in functionIds)
+            RunService(
+                () =>
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
+                    var functionIdType = typeof(FunctionId);
 
-                    try
+                    var set = new HashSet<FunctionId>();
+                    foreach (var functionIdString in functionIds)
                     {
-                        set.Add((FunctionId)Enum.Parse(functionIdType, functionIdString.Trim(), ignoreCase: true));
+                        cancellationToken.ThrowIfCancellationRequested();
+
+                        try
+                        {
+                            set.Add(
+                                (FunctionId)Enum.Parse(
+                                    functionIdType,
+                                    functionIdString.Trim(),
+                                    ignoreCase: true
+                                )
+                            );
+                        }
+                        catch
+                        {
+                            // unknown functionId, move on
+                            continue;
+                        }
                     }
-                    catch
+
+                    Func<FunctionId, bool> logChecker = id => set.Contains(id);
+                    lock (s_logChecker)
                     {
-                        // unknown functionId, move on
-                        continue;
+                        // holding onto it for debugging purpose
+                        s_logChecker = logChecker;
                     }
-                }
 
-                Func<FunctionId, bool> logChecker = id => set.Contains(id);
-                lock (s_logChecker)
-                {
-                    // holding onto it for debugging purpose
-                    s_logChecker = logChecker;
-                }
-
-                // we only support 2 types of loggers
-                SetRoslynLogger(loggerTypes, () => new EtwLogger(logChecker));
-                SetRoslynLogger(loggerTypes, () => new TraceLogger(logChecker));
-
-            }, cancellationToken);
+                    // we only support 2 types of loggers
+                    SetRoslynLogger(loggerTypes, () => new EtwLogger(logChecker));
+                    SetRoslynLogger(loggerTypes, () => new TraceLogger(logChecker));
+                },
+                cancellationToken
+            );
         }
 
-        private static void SetRoslynLogger<T>(List<string> loggerTypes, Func<T> creator) where T : ILogger
+        private static void SetRoslynLogger<T>(List<string> loggerTypes, Func<T> creator)
+            where T : ILogger
         {
             if (loggerTypes.Contains(typeof(T).Name))
             {
-                RoslynLogger.SetLogger(AggregateLogger.AddOrReplace(creator(), RoslynLogger.GetLogger(), l => l is T));
+                RoslynLogger.SetLogger(
+                    AggregateLogger.AddOrReplace(creator(), RoslynLogger.GetLogger(), l => l is T)
+                );
             }
             else
             {
-                RoslynLogger.SetLogger(AggregateLogger.Remove(RoslynLogger.GetLogger(), l => l is T));
+                RoslynLogger.SetLogger(
+                    AggregateLogger.Remove(RoslynLogger.GetLogger(), l => l is T)
+                );
             }
         }
 
@@ -268,7 +355,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 catch (EntryPointNotFoundException)
                 {
                     // AddDllDirectory API might not be available on Windows 7.
-                    Environment.SetEnvironmentVariable("MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH", loadDir);
+                    Environment.SetEnvironmentVariable(
+                        "MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH",
+                        loadDir
+                    );
                 }
             }
         }

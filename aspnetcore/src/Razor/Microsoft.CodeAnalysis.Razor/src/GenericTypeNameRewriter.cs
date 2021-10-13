@@ -38,7 +38,10 @@ namespace Microsoft.CodeAnalysis.Razor
             {
                 // We can handle a single IdentifierNameSyntax at the top level (like 'TItem)
                 // OR a GenericNameSyntax recursively (like `List<T>`)
-                if (node is IdentifierNameSyntax identifier && !(identifier.Parent is QualifiedNameSyntax))
+                if (
+                    node is IdentifierNameSyntax identifier
+                    && !(identifier.Parent is QualifiedNameSyntax)
+                )
                 {
                     if (_bindings.TryGetValue(identifier.Identifier.Text, out var binding))
                     {

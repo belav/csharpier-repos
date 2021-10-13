@@ -19,15 +19,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioErrorReportingServiceFactory()
-        {
-        }
+        public VisualStudioErrorReportingServiceFactory() { }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
             if (_singleton == null)
             {
-                _singleton = new VisualStudioErrorReportingService(workspaceServices.GetRequiredService<IInfoBarService>());
+                _singleton = new VisualStudioErrorReportingService(
+                    workspaceServices.GetRequiredService<IInfoBarService>()
+                );
             }
 
             return _singleton;

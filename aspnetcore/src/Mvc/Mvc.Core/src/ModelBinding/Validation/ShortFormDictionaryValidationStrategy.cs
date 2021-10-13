@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         /// </param>
         public ShortFormDictionaryValidationStrategy(
             IEnumerable<KeyValuePair<string, TKey>> keyMappings,
-            ModelMetadata valueMetadata)
+            ModelMetadata valueMetadata
+        )
         {
             KeyMappings = keyMappings;
             _valueMetadata = valueMetadata;
@@ -61,7 +62,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public IEnumerator<ValidationEntry> GetChildren(
             ModelMetadata metadata,
             string key,
-            object model)
+            object model
+        )
         {
             // key is not needed because KeyMappings maps from full ModelState keys to dictionary keys.
             return new Enumerator(_valueMetadata, KeyMappings, (IDictionary<TKey, TValue>)model);
@@ -78,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             public Enumerator(
                 ModelMetadata metadata,
                 IEnumerable<KeyValuePair<string, TKey>> keyMappings,
-                IDictionary<TKey, TValue> model)
+                IDictionary<TKey, TValue> model
+            )
             {
                 _metadata = metadata;
                 _model = model;
@@ -111,9 +114,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 return true;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Reset()
             {

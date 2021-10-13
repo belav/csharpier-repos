@@ -16,9 +16,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     [Collection(PublishedSitesCollection.Name)]
     public class MultipleAppTests : IISFunctionalTestBase
     {
-        public MultipleAppTests(PublishedSitesFixture fixture) : base(fixture)
-        {
-        }
+        public MultipleAppTests(PublishedSitesFixture fixture) : base(fixture) { }
 
         [ConditionalFact]
         public async Task Startup()
@@ -32,7 +30,9 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 // Deploy all apps
                 for (var i = 0; i < numApps; i++)
                 {
-                    var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel: IntegrationTesting.HostingModel.OutOfProcess);
+                    var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                        hostingModel: IntegrationTesting.HostingModel.OutOfProcess
+                    );
                     var deployer = CreateDeployer(deploymentParameters);
                     deployers.Add(deployer);
                     deploymentResults.Add(await deployer.DeployAsync());

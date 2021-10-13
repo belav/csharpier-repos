@@ -16,13 +16,13 @@ namespace Test
         public int Method1()
         {
             try { }
+
             finally
             {
 #pragma warning disable 1718
                 while ((bool)(object)(AA.m_bStatic1 != AA.m_bStatic1))
 #pragma warning restore
-                {
-                }
+                { }
             }
             return 0;
         }

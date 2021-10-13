@@ -42,9 +42,12 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         public override string Title => "Add ProducesResponseType attributes.";
 
-        protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+        protected override async Task<Document> GetChangedDocumentAsync(
+            CancellationToken cancellationToken
+        )
         {
-            var nullableContext = await CreateCodeActionContext(cancellationToken).ConfigureAwait(false);
+            var nullableContext = await CreateCodeActionContext(cancellationToken)
+                .ConfigureAwait(false);
             if (nullableContext == null)
             {
                 return _document;
@@ -52,8 +55,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
             var context = nullableContext.Value;
 
-            var declaredResponseMetadata = SymbolApiResponseMetadataProvider.GetDeclaredResponseMetadata(context.SymbolCache, context.Method);
-            var errorResponseType = SymbolApiResponseMetadataProvider.GetErrorResponseType(context.SymbolCache, context.Method);
+            var declaredResponseMetadata =
+                SymbolApiResponseMetadataProvider.GetDeclaredResponseMetadata(
+                    context.SymbolCache,
+                    context.Method
+                );
+            var errorResponseType = SymbolApiResponseMetadataProvider.GetErrorResponseType(
+                context.SymbolCache,
+                context.Method
+            );
 
             var results = CalculateStatusCodesToApply(context, declaredResponseMetadata);
             if (results.Count == 0)
@@ -61,7 +71,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 return _document;
             }
 
-            var documentEditor = await DocumentEditor.CreateAsync(_document, cancellationToken).ConfigureAwait(false);
+            var documentEditor = await DocumentEditor.CreateAsync(_document, cancellationToken)
+                .ConfigureAwait(false);
 
             var addUsingDirective = false;
             foreach (var item in results.OrderBy(s => s.statusCode))
@@ -72,35 +83,61 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 AttributeSyntax attributeSyntax;
                 bool addUsing;
 
-                if (statusCode >= 400 && returnType != null && !SymbolEqualityComparer.Default.Equals(returnType, errorResponseType))
+                if (
+                    statusCode >= 400
+                    && returnType != null
+                    && !SymbolEqualityComparer.Default.Equals(returnType, errorResponseType)
+                )
                 {
                     // If a returnType was discovered and is different from the errorResponseType, use it in the result.
-                    attributeSyntax = CreateProducesResponseTypeAttribute(context, statusCode, returnType, out addUsing);
+                    attributeSyntax = CreateProducesResponseTypeAttribute(
+                        context,
+                        statusCode,
+                        returnType,
+                        out addUsing
+                    );
                 }
                 else
                 {
-                    attributeSyntax = CreateProducesResponseTypeAttribute(context, statusCode, out addUsing);
+                    attributeSyntax = CreateProducesResponseTypeAttribute(
+                        context,
+                        statusCode,
+                        out addUsing
+                    );
                 }
 
                 documentEditor.AddAttribute(context.MethodSyntax, attributeSyntax);
                 addUsingDirective |= addUsing;
             }
 
-            if (!declaredResponseMetadata.Any(m => m.IsDefault && SymbolEqualityComparer.Default.Equals(m.AttributeSource, context.Method)))
+            if (
+                !declaredResponseMetadata.Any(
+                    m =>
+                        m.IsDefault
+                        && SymbolEqualityComparer.Default.Equals(m.AttributeSource, context.Method)
+                )
+            )
             {
                 // Add a ProducesDefaultResponseTypeAttribute if the method does not already have one.
-                documentEditor.AddAttribute(context.MethodSyntax, CreateProducesDefaultResponseTypeAttribute());
+                documentEditor.AddAttribute(
+                    context.MethodSyntax,
+                    CreateProducesDefaultResponseTypeAttribute()
+                );
             }
 
-            var apiConventionMethodAttribute = context.Method.GetAttributes(context.SymbolCache.ApiConventionMethodAttribute).FirstOrDefault();
+            var apiConventionMethodAttribute = context.Method.GetAttributes(
+                    context.SymbolCache.ApiConventionMethodAttribute
+                )
+                .FirstOrDefault();
 
             if (apiConventionMethodAttribute != null)
             {
                 // Remove [ApiConventionMethodAttribute] declared on the method since it's no longer required
-                var attributeSyntax = await apiConventionMethodAttribute
-                    .ApplicationSyntaxReference
-                    .GetSyntaxAsync(cancellationToken)
-                    .ConfigureAwait(false);
+                var attributeSyntax =
+                    await apiConventionMethodAttribute.ApplicationSyntaxReference.GetSyntaxAsync(
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 documentEditor.RemoveNode(attributeSyntax);
             }
@@ -113,11 +150,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 const string @namespace = "Microsoft.AspNetCore.Http";
 
-                var declaredUsings = new HashSet<string>(compilationUnit.Usings.Select(x => x.Name.ToString()));
+                var declaredUsings = new HashSet<string>(
+                    compilationUnit.Usings.Select(x => x.Name.ToString())
+                );
 
                 if (!declaredUsings.Contains(@namespace))
                 {
-                    root = compilationUnit.AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(@namespace)));
+                    root = compilationUnit.AddUsings(
+                        SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(@namespace))
+                    );
                 }
             }
 
@@ -129,7 +170,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             return document.WithSyntaxRoot(root);
         }
 
-        private async Task<CodeActionContext?> CreateCodeActionContext(CancellationToken cancellationToken)
+        private async Task<CodeActionContext?> CreateCodeActionContext(
+            CancellationToken cancellationToken
+        )
         {
             var root = await _document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
@@ -138,8 +181,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 throw new ArgumentNullException(nameof(root));
             }
 
-            var semanticModel = await _document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var methodReturnStatement = (ReturnStatementSyntax)root.FindNode(_diagnostic.Location.SourceSpan);
+            var semanticModel = await _document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var methodReturnStatement = (ReturnStatementSyntax)root.FindNode(
+                _diagnostic.Location.SourceSpan
+            );
             var methodSyntax = methodReturnStatement.FirstAncestorOrSelf<MethodDeclarationSyntax>();
             var method = semanticModel.GetDeclaredSymbol(methodSyntax, cancellationToken);
 
@@ -148,7 +194,9 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 throw new ArgumentNullException(nameof(semanticModel));
             }
 
-            var statusCodesType = semanticModel.Compilation.GetTypeByMetadataName(ApiSymbolNames.HttpStatusCodes);
+            var statusCodesType = semanticModel.Compilation.GetTypeByMetadataName(
+                ApiSymbolNames.HttpStatusCodes
+            );
 
             if (statusCodesType == null)
             {
@@ -162,11 +210,20 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                 return null;
             }
 
-            var codeActionContext = new CodeActionContext(semanticModel, symbolCache, method, methodSyntax, statusCodeConstants, cancellationToken);
+            var codeActionContext = new CodeActionContext(
+                semanticModel,
+                symbolCache,
+                method,
+                methodSyntax,
+                statusCodeConstants,
+                cancellationToken
+            );
             return codeActionContext;
         }
 
-        private static Dictionary<int, string> GetStatusCodeConstants(INamedTypeSymbol statusCodesType)
+        private static Dictionary<int, string> GetStatusCodeConstants(
+            INamedTypeSymbol statusCodesType
+        )
         {
             var statusCodeConstants = new Dictionary<int, string>();
 
@@ -174,11 +231,13 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 foreach (var member in statusCodesType.GetMembers())
                 {
-                    if (member is IFieldSymbol field &&
-                        field.Type.SpecialType == SpecialType.System_Int32 &&
-                        field.Name.StartsWith("Status", StringComparison.Ordinal) &&
-                        field.HasConstantValue &&
-                        field.ConstantValue is int statusCode)
+                    if (
+                        member is IFieldSymbol field
+                        && field.Type.SpecialType == SpecialType.System_Int32
+                        && field.Name.StartsWith("Status", StringComparison.Ordinal)
+                        && field.HasConstantValue
+                        && field.ConstantValue is int statusCode
+                    )
                     {
                         statusCodeConstants[statusCode] = field.Name;
                     }
@@ -188,9 +247,20 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             return statusCodeConstants;
         }
 
-        private ICollection<(int statusCode, ITypeSymbol? typeSymbol)> CalculateStatusCodesToApply(in CodeActionContext context, IList<DeclaredApiResponseMetadata> declaredResponseMetadata)
+        private ICollection<(int statusCode, ITypeSymbol? typeSymbol)> CalculateStatusCodesToApply(
+            in CodeActionContext context,
+            IList<DeclaredApiResponseMetadata> declaredResponseMetadata
+        )
         {
-            if (!ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(context.SymbolCache, context.SemanticModel, context.MethodSyntax, context.CancellationToken, out var actualResponseMetadata))
+            if (
+                !ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(
+                    context.SymbolCache,
+                    context.SemanticModel,
+                    context.MethodSyntax,
+                    context.CancellationToken,
+                    out var actualResponseMetadata
+                )
+            )
             {
                 // If we cannot parse metadata correctly, don't offer fixes.
                 return Array.Empty<(int, ITypeSymbol?)>();
@@ -199,8 +269,17 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             var statusCodes = new Dictionary<int, (int, ITypeSymbol?)>();
             foreach (var metadata in actualResponseMetadata)
             {
-                if (DeclaredApiResponseMetadata.TryGetDeclaredMetadata(declaredResponseMetadata, metadata, result: out var declaredMetadata) &&
-                    SymbolEqualityComparer.Default.Equals(declaredMetadata.AttributeSource, context.Method))
+                if (
+                    DeclaredApiResponseMetadata.TryGetDeclaredMetadata(
+                        declaredResponseMetadata,
+                        metadata,
+                        result: out var declaredMetadata
+                    )
+                    && SymbolEqualityComparer.Default.Equals(
+                        declaredMetadata.AttributeSource,
+                        context.Method
+                    )
+                )
                 {
                     // A ProducesResponseType attribute is declared on the method for the current status code.
                     continue;
@@ -218,36 +297,63 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             return statusCodes.Values;
         }
 
-        private static AttributeSyntax CreateProducesResponseTypeAttribute(in CodeActionContext context, int statusCode, out bool addUsingDirective)
+        private static AttributeSyntax CreateProducesResponseTypeAttribute(
+            in CodeActionContext context,
+            int statusCode,
+            out bool addUsingDirective
+        )
         {
             // [ProducesResponseType(StatusCodes.Status400NotFound)]
-            var statusCodeSyntax = CreateStatusCodeSyntax(context, statusCode, out addUsingDirective);
+            var statusCodeSyntax = CreateStatusCodeSyntax(
+                context,
+                statusCode,
+                out addUsingDirective
+            );
 
             return SyntaxFactory.Attribute(
                 SyntaxFactory.ParseName(ApiSymbolNames.ProducesResponseTypeAttribute)
                     .WithAdditionalAnnotations(Simplifier.Annotation),
-                SyntaxFactory.AttributeArgumentList().AddArguments(
-
-                    SyntaxFactory.AttributeArgument(statusCodeSyntax)));
+                SyntaxFactory.AttributeArgumentList()
+                    .AddArguments(SyntaxFactory.AttributeArgument(statusCodeSyntax))
+            );
         }
 
-        private static AttributeSyntax CreateProducesResponseTypeAttribute(in CodeActionContext context, int statusCode, ITypeSymbol typeSymbol, out bool addUsingDirective)
+        private static AttributeSyntax CreateProducesResponseTypeAttribute(
+            in CodeActionContext context,
+            int statusCode,
+            ITypeSymbol typeSymbol,
+            out bool addUsingDirective
+        )
         {
             // [ProducesResponseType(typeof(ReturnType), StatusCodes.Status400NotFound)]
-            var statusCodeSyntax = CreateStatusCodeSyntax(context, statusCode, out addUsingDirective);
+            var statusCodeSyntax = CreateStatusCodeSyntax(
+                context,
+                statusCode,
+                out addUsingDirective
+            );
             var responseTypeAttribute = SyntaxFactory.TypeOfExpression(
-                SyntaxFactory.ParseTypeName(typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
-                    .WithAdditionalAnnotations(Simplifier.Annotation));
+                SyntaxFactory.ParseTypeName(
+                        typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+                    )
+                    .WithAdditionalAnnotations(Simplifier.Annotation)
+            );
 
             return SyntaxFactory.Attribute(
                 SyntaxFactory.ParseName(ApiSymbolNames.ProducesResponseTypeAttribute)
                     .WithAdditionalAnnotations(Simplifier.Annotation),
-                SyntaxFactory.AttributeArgumentList().AddArguments(
-                    SyntaxFactory.AttributeArgument(responseTypeAttribute),
-                    SyntaxFactory.AttributeArgument(statusCodeSyntax)));
+                SyntaxFactory.AttributeArgumentList()
+                    .AddArguments(
+                        SyntaxFactory.AttributeArgument(responseTypeAttribute),
+                        SyntaxFactory.AttributeArgument(statusCodeSyntax)
+                    )
+            );
         }
 
-        private static ExpressionSyntax CreateStatusCodeSyntax(CodeActionContext context, int statusCode, out bool addUsingDirective)
+        private static ExpressionSyntax CreateStatusCodeSyntax(
+            CodeActionContext context,
+            int statusCode,
+            out bool addUsingDirective
+        )
         {
             if (context.StatusCodeConstants.TryGetValue(statusCode, out var constantName))
             {
@@ -256,28 +362,35 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
                     SyntaxKind.SimpleMemberAccessExpression,
                     SyntaxFactory.ParseTypeName(ApiSymbolNames.HttpStatusCodes)
                         .WithAdditionalAnnotations(Simplifier.Annotation),
-                    SyntaxFactory.IdentifierName(constantName));
+                    SyntaxFactory.IdentifierName(constantName)
+                );
             }
 
             addUsingDirective = false;
-            return SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(statusCode));
+            return SyntaxFactory.LiteralExpression(
+                SyntaxKind.NumericLiteralExpression,
+                SyntaxFactory.Literal(statusCode)
+            );
         }
 
         private static AttributeSyntax CreateProducesDefaultResponseTypeAttribute()
         {
             return SyntaxFactory.Attribute(
                 SyntaxFactory.ParseName(ApiSymbolNames.ProducesDefaultResponseTypeAttribute)
-                    .WithAdditionalAnnotations(Simplifier.Annotation));
+                    .WithAdditionalAnnotations(Simplifier.Annotation)
+            );
         }
 
         private readonly struct CodeActionContext
         {
-            public CodeActionContext(SemanticModel semanticModel,
+            public CodeActionContext(
+                SemanticModel semanticModel,
                 ApiControllerSymbolCache symbolCache,
                 IMethodSymbol method,
                 MethodDeclarationSyntax methodSyntax,
                 Dictionary<int, string> statusCodeConstants,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 SemanticModel = semanticModel;
                 SymbolCache = symbolCache;

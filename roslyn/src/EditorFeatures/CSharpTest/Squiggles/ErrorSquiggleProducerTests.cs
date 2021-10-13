@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
         public async Task ErrorTagGeneratedForWarningAsError()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <CompilationOptions ReportDiagnostic = ""Error"" />
             <Document FilePath = ""Test.cs"" >
@@ -75,7 +75,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
 </Workspace>";
 
             using var workspace = TestWorkspace.Create(workspaceXml);
-            var spans = (await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(workspace)).Item2;
+            var spans =
+                (
+                    await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(
+                        workspace
+                    )
+                ).Item2;
 
             Assert.Equal(1, spans.Count());
             Assert.Equal(PredefinedErrorTypeNames.SyntaxError, spans.First().Tag.ErrorType);
@@ -85,7 +90,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
         public async Task CustomizableTagsForUnnecessaryCode()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath = ""Test.cs"" >
 // System is used - rest are unused.
@@ -106,32 +111,51 @@ class Program
     </Project>
 </Workspace>";
 
-            using var workspace = TestWorkspace.Create(workspaceXml, composition: SquiggleUtilities.CompositionWithSolutionCrawler);
+            using var workspace = TestWorkspace.Create(
+                workspaceXml,
+                composition: SquiggleUtilities.CompositionWithSolutionCrawler
+            );
             var options = new Dictionary<OptionKey2, object>();
             var language = workspace.Projects.Single().Language;
-            var preferIntrinsicPredefinedTypeOption = new OptionKey2(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, language);
-            var preferIntrinsicPredefinedTypeOptionValue = new CodeStyleOption2<bool>(value: true, notification: NotificationOption2.Error);
-            options.Add(preferIntrinsicPredefinedTypeOption, preferIntrinsicPredefinedTypeOptionValue);
+            var preferIntrinsicPredefinedTypeOption = new OptionKey2(
+                CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                language
+            );
+            var preferIntrinsicPredefinedTypeOptionValue = new CodeStyleOption2<bool>(
+                value: true,
+                notification: NotificationOption2.Error
+            );
+            options.Add(
+                preferIntrinsicPredefinedTypeOption,
+                preferIntrinsicPredefinedTypeOptionValue
+            );
 
             workspace.ApplyOptions(options);
 
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
+            {
                 {
-                    {
-                        LanguageNames.CSharp,
-                        ImmutableArray.Create<DiagnosticAnalyzer>(
-                            new CSharpSimplifyTypeNamesDiagnosticAnalyzer(),
-                            new CSharpRemoveUnnecessaryImportsDiagnosticAnalyzer(),
-                            new ReportOnClassWithLink())
-                    }
-                };
+                    LanguageNames.CSharp,
+                    ImmutableArray.Create<DiagnosticAnalyzer>(
+                        new CSharpSimplifyTypeNamesDiagnosticAnalyzer(),
+                        new CSharpRemoveUnnecessaryImportsDiagnosticAnalyzer(),
+                        new ReportOnClassWithLink()
+                    )
+                }
+            };
 
-            var diagnosticsAndSpans = await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(workspace, analyzerMap);
+            var diagnosticsAndSpans =
+                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(
+                    workspace,
+                    analyzerMap
+                );
 
-            var spans =
-                diagnosticsAndSpans.Item1
-                    .Zip(diagnosticsAndSpans.Item2, (diagnostic, span) => (diagnostic, span))
-                    .OrderBy(s => s.span.Span.Span.Start).ToImmutableArray();
+            var spans = diagnosticsAndSpans.Item1.Zip(
+                    diagnosticsAndSpans.Item2,
+                    (diagnostic, span) => (diagnostic, span)
+                )
+                .OrderBy(s => s.span.Span.Span.Start)
+                .ToImmutableArray();
 
             Assert.Equal(4, spans.Length);
             var first = spans[0].span;
@@ -142,10 +166,25 @@ class Program
             var expectedToolTip = new ContainerElement(
                 ContainerElementStyle.Wrapped,
                 new ClassifiedTextElement(
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, "IDE0005", QuickInfoHyperLink.TestAccessor.CreateNavigationAction(new Uri("https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005", UriKind.Absolute)), "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005"),
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        "IDE0005",
+                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
+                            new Uri(
+                                "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
+                                UriKind.Absolute
+                            )
+                        ),
+                        "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005"
+                    ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
                     new ClassifiedTextRun(ClassificationTypeNames.WhiteSpace, " "),
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, CSharpAnalyzersResources.Using_directive_is_unnecessary)));
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        CSharpAnalyzersResources.Using_directive_is_unnecessary
+                    )
+                )
+            );
 
             Assert.Equal(PredefinedErrorTypeNames.Suggestion, first.Tag.ErrorType);
             ToolTipAssert.EqualContent(expectedToolTip, first.Tag.ToolTipContent);
@@ -155,10 +194,25 @@ class Program
             expectedToolTip = new ContainerElement(
                 ContainerElementStyle.Wrapped,
                 new ClassifiedTextElement(
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, "IDE0005", QuickInfoHyperLink.TestAccessor.CreateNavigationAction(new Uri("https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005", UriKind.Absolute)), "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005"),
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        "IDE0005",
+                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
+                            new Uri(
+                                "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005",
+                                UriKind.Absolute
+                            )
+                        ),
+                        "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0005"
+                    ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
                     new ClassifiedTextRun(ClassificationTypeNames.WhiteSpace, " "),
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, CSharpAnalyzersResources.Using_directive_is_unnecessary)));
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        CSharpAnalyzersResources.Using_directive_is_unnecessary
+                    )
+                )
+            );
 
             Assert.Equal(PredefinedErrorTypeNames.Suggestion, second.Tag.ErrorType);
             ToolTipAssert.EqualContent(expectedToolTip, second.Tag.ToolTipContent);
@@ -168,10 +222,19 @@ class Program
             expectedToolTip = new ContainerElement(
                 ContainerElementStyle.Wrapped,
                 new ClassifiedTextElement(
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, "id", QuickInfoHyperLink.TestAccessor.CreateNavigationAction(new Uri("https://github.com/dotnet/roslyn", UriKind.Absolute)), "https://github.com/dotnet/roslyn"),
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        "id",
+                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
+                            new Uri("https://github.com/dotnet/roslyn", UriKind.Absolute)
+                        ),
+                        "https://github.com/dotnet/roslyn"
+                    ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
                     new ClassifiedTextRun(ClassificationTypeNames.WhiteSpace, " "),
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, "messageFormat")));
+                    new ClassifiedTextRun(ClassificationTypeNames.Text, "messageFormat")
+                )
+            );
 
             Assert.Equal(PredefinedErrorTypeNames.Warning, third.Tag.ErrorType);
             ToolTipAssert.EqualContent(expectedToolTip, third.Tag.ToolTipContent);
@@ -181,10 +244,25 @@ class Program
             expectedToolTip = new ContainerElement(
                 ContainerElementStyle.Wrapped,
                 new ClassifiedTextElement(
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, "IDE0049", QuickInfoHyperLink.TestAccessor.CreateNavigationAction(new Uri("https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049", UriKind.Absolute)), "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049"),
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        "IDE0049",
+                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
+                            new Uri(
+                                "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049",
+                                UriKind.Absolute
+                            )
+                        ),
+                        "https://docs.microsoft.com/dotnet/fundamentals/code-analysis/style-rules/ide0049"
+                    ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
                     new ClassifiedTextRun(ClassificationTypeNames.WhiteSpace, " "),
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, WorkspacesResources.Name_can_be_simplified)));
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        WorkspacesResources.Name_can_be_simplified
+                    )
+                )
+            );
 
             Assert.Equal(PredefinedErrorTypeNames.SyntaxError, fourth.Tag.ErrorType);
             ToolTipAssert.EqualContent(expectedToolTip, fourth.Tag.ToolTipContent);
@@ -202,9 +280,15 @@ class Program
         [WpfFact, Trait(Traits.Feature, Traits.Features.ErrorSquiggles)]
         public async Task SemanticErrorReported()
         {
-            using var workspace = TestWorkspace.CreateCSharp("class C : Bar { }", composition: SquiggleUtilities.CompositionWithSolutionCrawler);
+            using var workspace = TestWorkspace.CreateCSharp(
+                "class C : Bar { }",
+                composition: SquiggleUtilities.CompositionWithSolutionCrawler
+            );
 
-            var spans = await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(workspace);
+            var spans =
+                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(
+                    workspace
+                );
 
             Assert.Equal(1, spans.Item2.Count());
 
@@ -215,10 +299,22 @@ class Program
             var expectedToolTip = new ContainerElement(
                 ContainerElementStyle.Wrapped,
                 new ClassifiedTextElement(
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, "CS0246", QuickInfoHyperLink.TestAccessor.CreateNavigationAction(new Uri("https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)", UriKind.Absolute)), "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)"),
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        "CS0246",
+                        QuickInfoHyperLink.TestAccessor.CreateNavigationAction(
+                            new Uri(
+                                "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)",
+                                UriKind.Absolute
+                            )
+                        ),
+                        "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0246)"
+                    ),
                     new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ":"),
                     new ClassifiedTextRun(ClassificationTypeNames.WhiteSpace, " "),
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, firstDiagnostic.Message)));
+                    new ClassifiedTextRun(ClassificationTypeNames.Text, firstDiagnostic.Message)
+                )
+            );
 
             ToolTipAssert.EqualContent(expectedToolTip, firstSpan.Tag.ToolTipContent);
         }
@@ -227,8 +323,13 @@ class Program
         public async Task TestNoErrorsAfterDocumentRemoved()
         {
             using var workspace = TestWorkspace.CreateCSharp("class");
-            using var wrapper = new DiagnosticTaggerWrapper<DiagnosticsSquiggleTaggerProvider, IErrorTag>(workspace);
-            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
+            using var wrapper = new DiagnosticTaggerWrapper<
+                DiagnosticsSquiggleTaggerProvider,
+                IErrorTag
+            >(workspace);
+            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
+                workspace.Documents.First().GetTextBuffer()
+            );
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
 
@@ -253,8 +354,13 @@ class Program
         public async Task TestNoErrorsAfterProjectRemoved()
         {
             using var workspace = TestWorkspace.CreateCSharp("class");
-            using var wrapper = new DiagnosticTaggerWrapper<DiagnosticsSquiggleTaggerProvider, IErrorTag>(workspace);
-            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(workspace.Documents.First().GetTextBuffer());
+            using var wrapper = new DiagnosticTaggerWrapper<
+                DiagnosticsSquiggleTaggerProvider,
+                IErrorTag
+            >(workspace);
+            var tagger = wrapper.TaggerProvider.CreateTagger<IErrorTag>(
+                workspace.Documents.First().GetTextBuffer()
+            );
             using var disposable = tagger as IDisposable;
             await wrapper.WaitForTags();
 
@@ -280,7 +386,7 @@ class Program
         public async Task BuildErrorZeroLengthSpan()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath = ""Test.cs"" >
             class Test
@@ -294,12 +400,28 @@ class Program
             var document = workspace.Documents.First();
 
             var updateArgs = DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                    new object(), workspace, workspace.CurrentSolution, document.Project.Id, document.Id,
-                    ImmutableArray.Create(
-                        TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.CreateDiagnosticData(document, new TextSpan(0, 0)),
-                        TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.CreateDiagnosticData(document, new TextSpan(0, 1))));
+                new object(),
+                workspace,
+                workspace.CurrentSolution,
+                document.Project.Id,
+                document.Id,
+                ImmutableArray.Create(
+                    TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.CreateDiagnosticData(
+                        document,
+                        new TextSpan(0, 0)
+                    ),
+                    TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.CreateDiagnosticData(
+                        document,
+                        new TextSpan(0, 1)
+                    )
+                )
+            );
 
-            var spans = await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetErrorsFromUpdateSource(workspace, updateArgs);
+            var spans =
+                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetErrorsFromUpdateSource(
+                    workspace,
+                    updateArgs
+                );
 
             Assert.Equal(1, spans.Count());
             var first = spans.First();
@@ -311,7 +433,7 @@ class Program
         public async Task LiveErrorZeroLengthSpan()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath = ""Test.cs"" >
             class Test
@@ -325,12 +447,28 @@ class Program
             var document = workspace.Documents.First();
 
             var updateArgs = DiagnosticsUpdatedArgs.DiagnosticsCreated(
-                    new LiveId(), workspace, workspace.CurrentSolution, document.Project.Id, document.Id,
-                    ImmutableArray.Create(
-                        TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.CreateDiagnosticData(document, new TextSpan(0, 0)),
-                        TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.CreateDiagnosticData(document, new TextSpan(0, 1))));
+                new LiveId(),
+                workspace,
+                workspace.CurrentSolution,
+                document.Project.Id,
+                document.Id,
+                ImmutableArray.Create(
+                    TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.CreateDiagnosticData(
+                        document,
+                        new TextSpan(0, 0)
+                    ),
+                    TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.CreateDiagnosticData(
+                        document,
+                        new TextSpan(0, 1)
+                    )
+                )
+            );
 
-            var spans = await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetErrorsFromUpdateSource(workspace, updateArgs);
+            var spans =
+                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetErrorsFromUpdateSource(
+                    workspace,
+                    updateArgs
+                );
 
             Assert.Equal(2, spans.Count());
             var first = spans.First();
@@ -342,15 +480,22 @@ class Program
 
         private class LiveId : ISupportLiveUpdate
         {
-            public LiveId()
-            {
-            }
+            public LiveId() { }
         }
 
-        private static async Task<ImmutableArray<ITagSpan<IErrorTag>>> GetTagSpansAsync(string content)
+        private static async Task<ImmutableArray<ITagSpan<IErrorTag>>> GetTagSpansAsync(
+            string content
+        )
         {
-            using var workspace = TestWorkspace.CreateCSharp(content, composition: SquiggleUtilities.CompositionWithSolutionCrawler);
-            return (await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(workspace)).Item2;
+            using var workspace = TestWorkspace.CreateCSharp(
+                content,
+                composition: SquiggleUtilities.CompositionWithSolutionCrawler
+            );
+            return (
+                await TestDiagnosticTagProducer<DiagnosticsSquiggleTaggerProvider>.GetDiagnosticsAndErrorSpans(
+                    workspace
+                )
+            ).Item2;
         }
 
         private sealed class ReportOnClassWithLink : DiagnosticAnalyzer
@@ -363,9 +508,11 @@ class Program
                 DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
                 "description",
-                "https://github.com/dotnet/roslyn");
+                "https://github.com/dotnet/roslyn"
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Rule);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -375,12 +522,18 @@ class Program
                 context.RegisterSymbolAction(
                     context =>
                     {
-                        if (!context.Symbol.IsImplicitlyDeclared && context.Symbol.Locations.First().IsInSource)
+                        if (
+                            !context.Symbol.IsImplicitlyDeclared
+                            && context.Symbol.Locations.First().IsInSource
+                        )
                         {
-                            context.ReportDiagnostic(Diagnostic.Create(Rule, context.Symbol.Locations.First()));
+                            context.ReportDiagnostic(
+                                Diagnostic.Create(Rule, context.Symbol.Locations.First())
+                            );
                         }
                     },
-                    SymbolKind.NamedType);
+                    SymbolKind.NamedType
+                );
             }
         }
     }

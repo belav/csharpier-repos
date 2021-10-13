@@ -13,9 +13,7 @@ namespace System.Data.Common
         private decimal[] _values = default!; // Late-initialized
 
         internal DecimalStorage(DataColumn column)
-        : base(column, typeof(decimal), DefaultValue, StorageType.Decimal)
-        {
-        }
+            : base(column, typeof(decimal), DefaultValue, StorageType.Decimal) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -30,7 +28,10 @@ namespace System.Data.Common
                         {
                             if (HasValue(record))
                             {
-                                checked { sum += _values[record]; }
+                                checked
+                                {
+                                    sum += _values[record];
+                                }
                                 hasData = true;
                             }
                         }
@@ -47,7 +48,10 @@ namespace System.Data.Common
                         {
                             if (HasValue(record))
                             {
-                                checked { meanSum += _values[record]; }
+                                checked
+                                {
+                                    meanSum += _values[record];
+                                }
                                 meanCount++;
                                 hasData = true;
                             }
@@ -55,7 +59,10 @@ namespace System.Data.Common
                         if (hasData)
                         {
                             decimal mean;
-                            checked { mean = (meanSum / meanCount); }
+                            checked
+                            {
+                                mean = (meanSum / meanCount);
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -252,7 +259,12 @@ namespace System.Data.Common
             return new decimal[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             decimal[] typedStore = (decimal[])store;
             typedStore[storeIndex] = _values[record];

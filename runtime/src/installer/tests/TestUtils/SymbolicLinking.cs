@@ -22,39 +22,48 @@ namespace Microsoft.DotNet.CoreSetup.Test
             internal static extern bool CreateSymbolicLink(
                 string symbolicLinkName,
                 string targetFileName,
-                SymbolicLinkFlag flags);
+                SymbolicLinkFlag flags
+            );
         }
 
         static class libc
         {
             [DllImport("libc", SetLastError = true)]
-            internal static extern int symlink(
-                string targetFileName,
-                string linkPath);
+            internal static extern int symlink(string targetFileName, string linkPath);
 
             [DllImport("libc", CharSet = CharSet.Ansi)]
             internal static extern IntPtr strerror(int errnum);
         }
 
-        public static bool MakeSymbolicLink(string symbolicLinkName, string targetFileName, out string errorMessage)
+        public static bool MakeSymbolicLink(
+            string symbolicLinkName,
+            string targetFileName,
+            out string errorMessage
+        )
         {
             errorMessage = string.Empty;
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                if (!Kernel32.CreateSymbolicLink(symbolicLinkName, targetFileName, Kernel32.SymbolicLinkFlag.IsFile))
+                if (
+                    !Kernel32.CreateSymbolicLink(
+                        symbolicLinkName,
+                        targetFileName,
+                        Kernel32.SymbolicLinkFlag.IsFile
+                    )
+                )
                 {
                     int errno = Marshal.GetLastWin32Error();
                     errorMessage = $"CreateSymbolicLink failed with error number {errno}";
                     return false;
                 }
             }
-            else 
+            else
             {
                 if (libc.symlink(targetFileName, symbolicLinkName) == -1)
                 {
                     int errno = Marshal.GetLastWin32Error();
                     errorMessage = Marshal.PtrToStringAnsi(libc.strerror(errno));
-                    return false; 
+                    return false;
                 }
             }
 

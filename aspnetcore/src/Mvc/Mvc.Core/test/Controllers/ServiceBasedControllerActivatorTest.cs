@@ -19,20 +19,20 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var controller = new DIController();
             var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
             serviceProvider.Setup(s => s.GetService(typeof(DIController)))
-                           .Returns(controller)
-                           .Verifiable();
-            var httpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider.Object
-            };
+                .Returns(controller)
+                .Verifiable();
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object };
             var activator = new ServiceBasedControllerActivator();
-            var context = new ControllerContext(new ActionContext(
-                httpContext,
-                new RouteData(),
-                new ControllerActionDescriptor
-                {
-                    ControllerTypeInfo = typeof(DIController).GetTypeInfo()
-                }));
+            var context = new ControllerContext(
+                new ActionContext(
+                    httpContext,
+                    new RouteData(),
+                    new ControllerActionDescriptor
+                    {
+                        ControllerTypeInfo = typeof(DIController).GetTypeInfo()
+                    }
+                )
+            );
 
             // Act
             var instance = activator.Create(context);
@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
         public void Create_ThrowsIfControllerIsNotRegisteredInServiceProvider()
         {
             // Arrange
-            var expected = "No service for type '" + typeof(DIController) + "' has been registered.";
+            var expected =
+                "No service for type '" + typeof(DIController) + "' has been registered.";
             var controller = new DIController();
 
             var httpContext = new DefaultHttpContext
@@ -57,16 +58,17 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var activator = new ServiceBasedControllerActivator();
             var context = new ControllerContext(
                 new ActionContext(
-                httpContext,
-                new RouteData(),
-                new ControllerActionDescriptor
-                {
-                    ControllerTypeInfo = typeof(DIController).GetTypeInfo()
-                }));
+                    httpContext,
+                    new RouteData(),
+                    new ControllerActionDescriptor
+                    {
+                        ControllerTypeInfo = typeof(DIController).GetTypeInfo()
+                    }
+                )
+            );
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => activator.Create(context));
+            var ex = Assert.Throws<InvalidOperationException>(() => activator.Create(context));
 
             Assert.Equal(expected, ex.Message);
         }

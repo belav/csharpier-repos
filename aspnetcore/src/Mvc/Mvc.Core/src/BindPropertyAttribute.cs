@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.Mvc
     /// indicates the property should not be bound for HTTP GET requests (see also <see cref="SupportsGet"/>).
     /// </remarks>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public class BindPropertyAttribute : Attribute, IModelNameProvider, IBinderTypeProviderMetadata, IRequestPredicateProvider
+    public class BindPropertyAttribute
+        : Attribute,
+          IModelNameProvider,
+          IBinderTypeProviderMetadata,
+          IRequestPredicateProvider
     {
         private static readonly Func<ActionContext, bool> _supportsAllRequests = (c) => true;
         private static readonly Func<ActionContext, bool> _supportsNonGetRequests = IsNonGetRequest;
@@ -49,8 +53,10 @@ namespace Microsoft.AspNetCore.Mvc
                     throw new ArgumentException(
                         Resources.FormatBinderType_MustBeIModelBinder(
                             value.FullName,
-                            typeof(IModelBinder).FullName),
-                        nameof(value));
+                            typeof(IModelBinder).FullName
+                        ),
+                        nameof(value)
+                    );
                 }
 
                 _binderType = value;
@@ -79,8 +85,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// <inheritdoc />
         public string? Name { get; set; }
 
-        Func<ActionContext, bool> IRequestPredicateProvider.RequestPredicate
-            => SupportsGet ? _supportsAllRequests : _supportsNonGetRequests;
+        Func<ActionContext, bool> IRequestPredicateProvider.RequestPredicate =>
+            SupportsGet ? _supportsAllRequests : _supportsNonGetRequests;
 
         private static bool IsNonGetRequest(ActionContext context)
         {

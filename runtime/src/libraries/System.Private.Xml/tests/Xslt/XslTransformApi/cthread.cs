@@ -112,7 +112,6 @@ namespace System.Xml.Tests
                     //we will catch it and store the exception for later throw from the calling function
                     _iReturn = HandleException(e);
                     _eReturn = e;
-
                     //We should break out of this iteration
                     break;
                 }
@@ -168,10 +167,11 @@ namespace System.Xml.Tests
                 switch (eResult)
                 {
                     case 1: //TEST_PASS
-                            //case TEST_SKIPPED:
+                        //case TEST_SKIPPED:
                         _output.WriteLine(eTest.Message);
                         return eResult; //were done
-                };
+                }
+                ;
             }
 
             _output.WriteLine("Actual  : {0}", actual);

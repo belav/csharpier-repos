@@ -21,37 +21,24 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         public async Task PongAsync(int id, int value)
         {
-            var parameters = new
-            {
-                Id = id,
-                Value = value
-            };
+            var parameters = new { Id = id, Value = value };
 
             await SendAsync("pong", JToken.FromObject(parameters));
         }
 
         public async Task LogAsync(int id, string text)
         {
-            var parameters = new
-            {
-                Id = id,
-                Text = text
-            };
+            var parameters = new { Id = id, Text = text };
 
             await SendAsync("log", JToken.FromObject(parameters));
         }
 
-        public async Task StatusAsync(
-            int id,
-            StatusInformation statusInformation)
+        public async Task StatusAsync(int id, StatusInformation statusInformation)
         {
-            var parameters = new
-            {
-                Id = id,
-                StatusInformation = statusInformation
-            };
+            var parameters = new { Id = id, StatusInformation = statusInformation };
 
-            await SendAsync("status", JToken.FromObject(parameters)); ;
+            await SendAsync("status", JToken.FromObject(parameters));
+            ;
         }
 
         private async Task SendAsync(string method, JToken parameters)
@@ -60,13 +47,13 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             try
             {
                 await _outputStreamWriter.WriteLineAsync(
-                    JsonConvert.SerializeObject(new Message
-                    {
-                        Command = method,
-                        Value = parameters
-                    }));
+                    JsonConvert.SerializeObject(
+                        new Message { Command = method, Value = parameters }
+                    )
+                );
                 await _outputStreamWriter.FlushAsync();
             }
+
             finally
             {
                 _lock.Release();

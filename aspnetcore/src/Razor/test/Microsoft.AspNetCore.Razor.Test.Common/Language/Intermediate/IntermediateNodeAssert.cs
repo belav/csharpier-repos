@@ -21,7 +21,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
             else if (node.Children.Count > 1)
             {
-                throw new IntermediateNodeAssertException(node, node.Children, "The node has multiple children");
+                throw new IntermediateNodeAssertException(
+                    node,
+                    node.Children,
+                    "The node has multiple children"
+                );
             }
 
             var child = node.Children[0];
@@ -32,18 +36,29 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
         {
             if (node.Children.Count > 0)
             {
-                throw new IntermediateNodeAssertException(node, node.Children, "The node has children.");
+                throw new IntermediateNodeAssertException(
+                    node,
+                    node.Children,
+                    "The node has children."
+                );
             }
         }
 
-        public static void Children(IntermediateNode node, params Action<IntermediateNode>[] validators)
+        public static void Children(
+            IntermediateNode node,
+            params Action<IntermediateNode>[] validators
+        )
         {
             var i = 0;
             for (; i < validators.Length; i++)
             {
                 if (node.Children.Count == i)
                 {
-                    throw new IntermediateNodeAssertException(node, node.Children, $"The node only has {node.Children.Count} children.");
+                    throw new IntermediateNodeAssertException(
+                        node,
+                        node.Children,
+                        $"The node only has {node.Children.Count} children."
+                    );
                 }
 
                 try
@@ -52,13 +67,22 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 }
                 catch (XunitException e)
                 {
-                    throw new IntermediateNodeAssertException(node, node.Children, $"Failed while validating node {node.Children[i]} at {i}.", e);
+                    throw new IntermediateNodeAssertException(
+                        node,
+                        node.Children,
+                        $"Failed while validating node {node.Children[i]} at {i}.",
+                        e
+                    );
                 }
             }
 
             if (i < node.Children.Count)
             {
-                throw new IntermediateNodeAssertException(node, node.Children, $"The node has extra child {node.Children[i]} at {i}.");
+                throw new IntermediateNodeAssertException(
+                    node,
+                    node.Children,
+                    $"The node has extra child {node.Children[i]} at {i}."
+                );
             }
         }
 
@@ -135,7 +159,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
         }
 
-        public static void Directive(string expectedName, IntermediateNode node, params Action<IntermediateNode>[] childValidators)
+        public static void Directive(
+            string expectedName,
+            IntermediateNode node,
+            params Action<IntermediateNode>[] childValidators
+        )
         {
             try
             {
@@ -150,7 +178,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             Children(node, childValidators);
         }
 
-        public static void DirectiveToken(DirectiveTokenKind expectedKind, string expectedContent, IntermediateNode node)
+        public static void DirectiveToken(
+            DirectiveTokenKind expectedKind,
+            string expectedContent,
+            IntermediateNode node
+        )
         {
             try
             {
@@ -182,7 +214,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             string name,
             string suffix,
             IntermediateNode node,
-            params Action<IntermediateNode>[] valueValidators)
+            params Action<IntermediateNode>[] valueValidators
+        )
         {
             var attribute = Assert.IsType<HtmlAttributeIntermediateNode>(node);
 
@@ -196,20 +229,33 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
             catch (XunitException e)
             {
-                throw new IntermediateNodeAssertException(attribute, attribute.Children, e.Message, e);
+                throw new IntermediateNodeAssertException(
+                    attribute,
+                    attribute.Children,
+                    e.Message,
+                    e
+                );
             }
         }
 
-        public static void CSharpExpressionAttributeValue(string prefix, string expected, IntermediateNode node)
+        public static void CSharpExpressionAttributeValue(
+            string prefix,
+            string expected,
+            IntermediateNode node
+        )
         {
-            var attributeValue = Assert.IsType<CSharpExpressionAttributeValueIntermediateNode>(node);
+            var attributeValue = Assert.IsType<CSharpExpressionAttributeValueIntermediateNode>(
+                node
+            );
 
             try
             {
                 var content = new StringBuilder();
                 for (var i = 0; i < attributeValue.Children.Count; i++)
                 {
-                    var token = Assert.IsAssignableFrom<IntermediateToken>(attributeValue.Children[i]);
+                    var token = Assert.IsAssignableFrom<IntermediateToken>(
+                        attributeValue.Children[i]
+                    );
                     Assert.True(token.IsCSharp);
                     content.Append(token.Content);
                 }
@@ -219,20 +265,31 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
             catch (XunitException e)
             {
-                throw new IntermediateNodeAssertException(attributeValue, attributeValue.Children, e.Message, e);
+                throw new IntermediateNodeAssertException(
+                    attributeValue,
+                    attributeValue.Children,
+                    e.Message,
+                    e
+                );
             }
         }
 
-        public static void LiteralAttributeValue(string prefix, string expected, IntermediateNode node)
+        public static void LiteralAttributeValue(
+            string prefix,
+            string expected,
+            IntermediateNode node
+        )
         {
             var attributeValue = Assert.IsType<HtmlAttributeValueIntermediateNode>(node);
-            
+
             try
             {
                 var content = new StringBuilder();
                 for (var i = 0; i < attributeValue.Children.Count; i++)
                 {
-                    var token = Assert.IsAssignableFrom<IntermediateToken>(attributeValue.Children[i]);
+                    var token = Assert.IsAssignableFrom<IntermediateToken>(
+                        attributeValue.Children[i]
+                    );
                     Assert.True(token.IsHtml);
                     content.Append(token.Content);
                 }
@@ -326,9 +383,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             IntermediateNode node,
             string attributeName,
             string value,
-            AttributeStructure valueStyle)
+            AttributeStructure valueStyle
+        )
         {
-            var propertyValueNode = Assert.IsType<PreallocatedTagHelperPropertyValueIntermediateNode>(node);
+            var propertyValueNode =
+                Assert.IsType<PreallocatedTagHelperPropertyValueIntermediateNode>(node);
 
             try
             {
@@ -341,8 +400,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 throw new IntermediateNodeAssertException(propertyValueNode, e.Message);
             }
         }
-        
-        internal static void TagHelper(string tagName, TagMode tagMode, IEnumerable<TagHelperDescriptor> tagHelpers, IntermediateNode node, params Action<IntermediateNode>[] childValidators)
+
+        internal static void TagHelper(
+            string tagName,
+            TagMode tagMode,
+            IEnumerable<TagHelperDescriptor> tagHelpers,
+            IntermediateNode node,
+            params Action<IntermediateNode>[] childValidators
+        )
         {
             var tagHelperNode = Assert.IsType<TagHelperIntermediateNode>(node);
 
@@ -351,7 +416,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 Assert.Equal(tagName, tagHelperNode.TagName);
                 Assert.Equal(tagMode, tagHelperNode.TagMode);
 
-                Assert.Equal(tagHelpers, tagHelperNode.TagHelpers, TagHelperDescriptorComparer.Default);
+                Assert.Equal(
+                    tagHelpers,
+                    tagHelperNode.TagHelpers,
+                    TagHelperDescriptorComparer.Default
+                );
             }
             catch (XunitException e)
             {
@@ -365,9 +434,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             string name,
             AttributeStructure valueStyle,
             IntermediateNode node,
-            params Action<IntermediateNode>[] valueValidators)
+            params Action<IntermediateNode>[] valueValidators
+        )
         {
-            var tagHelperHtmlAttribute = Assert.IsType<TagHelperHtmlAttributeIntermediateNode>(node);
+            var tagHelperHtmlAttribute = Assert.IsType<TagHelperHtmlAttributeIntermediateNode>(
+                node
+            );
 
             try
             {
@@ -377,13 +449,23 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
             catch (XunitException e)
             {
-                throw new IntermediateNodeAssertException(tagHelperHtmlAttribute, tagHelperHtmlAttribute.Children, e.Message, e);
+                throw new IntermediateNodeAssertException(
+                    tagHelperHtmlAttribute,
+                    tagHelperHtmlAttribute.Children,
+                    e.Message,
+                    e
+                );
             }
         }
 
-        internal static void SetPreallocatedTagHelperProperty(IntermediateNode node, string attributeName, string propertyName)
+        internal static void SetPreallocatedTagHelperProperty(
+            IntermediateNode node,
+            string attributeName,
+            string propertyName
+        )
         {
-            var setPreallocatedTagHelperProperty = Assert.IsType<PreallocatedTagHelperPropertyIntermediateNode>(node);
+            var setPreallocatedTagHelperProperty =
+                Assert.IsType<PreallocatedTagHelperPropertyIntermediateNode>(node);
 
             try
             {
@@ -392,7 +474,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
             catch (XunitException e)
             {
-                throw new IntermediateNodeAssertException(setPreallocatedTagHelperProperty, e.Message);
+                throw new IntermediateNodeAssertException(
+                    setPreallocatedTagHelperProperty,
+                    e.Message
+                );
             }
         }
 
@@ -401,7 +486,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             string propertyName,
             AttributeStructure valueStyle,
             IntermediateNode node,
-            params Action<IntermediateNode>[] valueValidators)
+            params Action<IntermediateNode>[] valueValidators
+        )
         {
             var propertyNode = Assert.IsType<TagHelperPropertyIntermediateNode>(node);
 
@@ -414,7 +500,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             }
             catch (XunitException e)
             {
-                throw new IntermediateNodeAssertException(propertyNode, propertyNode.Children, e.Message, e);
+                throw new IntermediateNodeAssertException(
+                    propertyNode,
+                    propertyNode.Children,
+                    e.Message,
+                    e
+                );
             }
         }
 
@@ -426,8 +517,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 Node = node;
             }
 
-            public IntermediateNodeAssertException(IntermediateNode node, IEnumerable<IntermediateNode> nodes, string userMessage)
-                : base(Format(node, null, nodes, userMessage))
+            public IntermediateNodeAssertException(
+                IntermediateNode node,
+                IEnumerable<IntermediateNode> nodes,
+                string userMessage
+            ) : base(Format(node, null, nodes, userMessage))
             {
                 Node = node;
                 Nodes = nodes;
@@ -437,26 +531,27 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
                 IntermediateNode node,
                 IEnumerable<IntermediateNode> nodes,
                 string userMessage,
-                Exception innerException)
-                : base(Format(node, null, nodes, userMessage), innerException)
-            {
-            }
+                Exception innerException
+            ) : base(Format(node, null, nodes, userMessage), innerException) { }
 
             public IntermediateNodeAssertException(
                 IntermediateNode node,
                 IntermediateNode[] ancestors,
                 IEnumerable<IntermediateNode> nodes,
                 string userMessage,
-                Exception innerException)
-                : base(Format(node, ancestors, nodes, userMessage), innerException)
-            {
-            }
+                Exception innerException
+            ) : base(Format(node, ancestors, nodes, userMessage), innerException) { }
 
             public IntermediateNode Node { get; }
 
             public IEnumerable<IntermediateNode> Nodes { get; }
 
-            private static string Format(IntermediateNode node, IntermediateNode[] ancestors, IEnumerable<IntermediateNode> nodes, string userMessage)
+            private static string Format(
+                IntermediateNode node,
+                IntermediateNode[] ancestors,
+                IEnumerable<IntermediateNode> nodes,
+                string userMessage
+            )
             {
                 var builder = new StringBuilder();
                 builder.AppendLine(userMessage);
@@ -473,7 +568,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
                     builder.AppendLine();
                 }
-
 
                 builder.AppendLine("Path:");
 

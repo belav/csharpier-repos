@@ -128,15 +128,31 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             return input.Length - startIndex;
         }
 
-        internal static HttpParseResult GetQuotedStringLength(string input, int startIndex, out int length)
+        internal static HttpParseResult GetQuotedStringLength(
+            string input,
+            int startIndex,
+            out int length
+        )
         {
             var nestedCount = 0;
-            return GetExpressionLength(input, startIndex, '"', '"', false, ref nestedCount, out length);
+            return GetExpressionLength(
+                input,
+                startIndex,
+                '"',
+                '"',
+                false,
+                ref nestedCount,
+                out length
+            );
         }
 
         // quoted-pair = "\" CHAR
         // CHAR = <any US-ASCII character (octets 0 - 127)>
-        internal static HttpParseResult GetQuotedPairLength(string input, int startIndex, out int length)
+        internal static HttpParseResult GetQuotedPairLength(
+            string input,
+            int startIndex,
+            out int length
+        )
         {
             Debug.Assert(input != null);
             Debug.Assert((startIndex >= 0) && (startIndex < input.Length));
@@ -178,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             char closeChar,
             bool supportsNesting,
             ref int nestedCount,
-            out int length)
+            out int length
+        )
         {
             Debug.Assert(input != null);
             Debug.Assert((startIndex >= 0) && (startIndex < input.Length));
@@ -195,8 +212,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             {
                 // Only check whether we have a quoted char, if we have at least 3 characters left to read (i.e.
                 // quoted char + closing char). Otherwise the closing char may be considered part of the quoted char.
-                if ((current + 2 < input.Length) &&
-                    (GetQuotedPairLength(input, current, out var quotedPairLength) == HttpParseResult.Parsed))
+                if (
+                    (current + 2 < input.Length)
+                    && (
+                        GetQuotedPairLength(input, current, out var quotedPairLength)
+                        == HttpParseResult.Parsed
+                    )
+                )
                 {
                     // We ignore invalid quoted-pairs. Invalid quoted-pairs may mean that it looked like a quoted pair,
                     // but we actually have a quoted-string: e.g. "\ü" ('\' followed by a char >127 - quoted-pair only
@@ -224,7 +246,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                             closeChar,
                             supportsNesting,
                             ref nestedCount,
-                            out var nestedLength);
+                            out var nestedLength
+                        );
 
                         switch (nestedResult)
                         {
@@ -233,9 +256,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                                 break;
 
                             case HttpParseResult.NotParsed:
-                                Debug.Fail("'NotParsed' is unexpected: We started nested expression " +
-                                    "parsing, because we found the open-char. So either it's a valid nested " +
-                                    "expression or it has invalid format.");
+                                Debug.Fail(
+                                    "'NotParsed' is unexpected: We started nested expression "
+                                        + "parsing, because we found the open-char. So either it's a valid nested "
+                                        + "expression or it has invalid format."
+                                );
                                 break;
 
                             case HttpParseResult.InvalidFormat:
@@ -247,6 +272,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                                 break;
                         }
                     }
+
                     finally
                     {
                         nestedCount--;

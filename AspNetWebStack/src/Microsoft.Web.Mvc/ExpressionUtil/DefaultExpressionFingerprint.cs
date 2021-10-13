@@ -12,7 +12,11 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     // DefaultExpression fingerprint class
     // Expression of form default(T)
 
-    [SuppressMessage("Microsoft.Usage", "CA2218:OverrideGetHashCodeOnOverridingEquals", Justification = "Overrides AddToHashCodeCombiner() instead.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2218:OverrideGetHashCodeOnOverridingEquals",
+        Justification = "Overrides AddToHashCodeCombiner() instead."
+    )]
     internal sealed class DefaultExpressionFingerprint : ExpressionFingerprint
     {
         public DefaultExpressionFingerprint(ExpressionType nodeType, Type type)
@@ -25,8 +29,7 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         public override bool Equals(object obj)
         {
             DefaultExpressionFingerprint other = obj as DefaultExpressionFingerprint;
-            return (other != null)
-                   && this.Equals(other);
+            return (other != null) && this.Equals(other);
         }
     }
 }

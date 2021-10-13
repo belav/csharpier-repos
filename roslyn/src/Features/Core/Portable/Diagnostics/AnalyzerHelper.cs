@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static partial class AnalyzerHelper
     {
-
-        // These are the error codes of the compiler warnings. 
+        // These are the error codes of the compiler warnings.
         // Keep the ids the same so that de-duplication against compiler errors
         // works in the error list (after a build).
         internal const string WRN_AnalyzerCannotBeCreatedIdCS = "CS8032";
@@ -46,23 +45,32 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         private const string AnalyzerExceptionDiagnosticCategory = "Intellisense";
 
-        public static bool IsWorkspaceDiagnosticAnalyzer(this DiagnosticAnalyzer analyzer)
-            => analyzer is DocumentDiagnosticAnalyzer || analyzer is ProjectDiagnosticAnalyzer || analyzer == FileContentLoadAnalyzer.Instance;
+        public static bool IsWorkspaceDiagnosticAnalyzer(this DiagnosticAnalyzer analyzer) =>
+            analyzer is DocumentDiagnosticAnalyzer
+            || analyzer is ProjectDiagnosticAnalyzer
+            || analyzer == FileContentLoadAnalyzer.Instance;
 
-        public static bool IsBuiltInAnalyzer(this DiagnosticAnalyzer analyzer)
-            => analyzer is IBuiltInAnalyzer || analyzer.IsWorkspaceDiagnosticAnalyzer() || analyzer.IsCompilerAnalyzer();
+        public static bool IsBuiltInAnalyzer(this DiagnosticAnalyzer analyzer) =>
+            analyzer is IBuiltInAnalyzer
+            || analyzer.IsWorkspaceDiagnosticAnalyzer()
+            || analyzer.IsCompilerAnalyzer();
 
-        public static bool IsOpenFileOnly(this DiagnosticAnalyzer analyzer, OptionSet options)
-            => analyzer is IBuiltInAnalyzer builtInAnalyzer && builtInAnalyzer.OpenFileOnly(options);
+        public static bool IsOpenFileOnly(this DiagnosticAnalyzer analyzer, OptionSet options) =>
+            analyzer is IBuiltInAnalyzer builtInAnalyzer && builtInAnalyzer.OpenFileOnly(options);
 
-        public static ReportDiagnostic GetEffectiveSeverity(this DiagnosticDescriptor descriptor, CompilationOptions options)
+        public static ReportDiagnostic GetEffectiveSeverity(
+            this DiagnosticDescriptor descriptor,
+            CompilationOptions options
+        )
         {
             return options == null
-                ? descriptor.DefaultSeverity.ToReportDiagnostic()
-                : descriptor.GetEffectiveSeverity(options);
+              ? descriptor.DefaultSeverity.ToReportDiagnostic()
+              : descriptor.GetEffectiveSeverity(options);
         }
 
-        public static (string analyzerId, VersionStamp version) GetAnalyzerIdAndVersion(this DiagnosticAnalyzer analyzer)
+        public static (string analyzerId, VersionStamp version) GetAnalyzerIdAndVersion(
+            this DiagnosticAnalyzer analyzer
+        )
         {
             // Get the unique ID for given diagnostic analyzer.
             // note that we also put version stamp so that we can detect changed analyzer.
@@ -70,47 +78,95 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return (analyzer.GetAnalyzerId(), GetAnalyzerVersion(typeInfo.Assembly.Location));
         }
 
-        public static string GetAnalyzerAssemblyName(this DiagnosticAnalyzer analyzer)
-            => analyzer.GetType().Assembly.GetName().Name ?? throw ExceptionUtilities.Unreachable;
+        public static string GetAnalyzerAssemblyName(this DiagnosticAnalyzer analyzer) =>
+            analyzer.GetType().Assembly.GetName().Name ?? throw ExceptionUtilities.Unreachable;
 
-        public static OptionSet GetAnalyzerOptionSet(this AnalyzerOptions analyzerOptions, SyntaxTree syntaxTree, CancellationToken cancellationToken)
+        public static OptionSet GetAnalyzerOptionSet(
+            this AnalyzerOptions analyzerOptions,
+            SyntaxTree syntaxTree,
+            CancellationToken cancellationToken
+        )
         {
-            var optionSetAsync = GetAnalyzerOptionSetAsync(analyzerOptions, syntaxTree, cancellationToken);
+            var optionSetAsync = GetAnalyzerOptionSetAsync(
+                analyzerOptions,
+                syntaxTree,
+                cancellationToken
+            );
             if (optionSetAsync.IsCompleted)
                 return optionSetAsync.Result;
 
             return optionSetAsync.AsTask().GetAwaiter().GetResult();
         }
 
-        public static async ValueTask<OptionSet> GetAnalyzerOptionSetAsync(this AnalyzerOptions analyzerOptions, SyntaxTree syntaxTree, CancellationToken cancellationToken)
+        public static async ValueTask<OptionSet> GetAnalyzerOptionSetAsync(
+            this AnalyzerOptions analyzerOptions,
+            SyntaxTree syntaxTree,
+            CancellationToken cancellationToken
+        )
         {
-            var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(syntaxTree);
+            var configOptions = analyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
+                syntaxTree
+            );
 #pragma warning disable CS0612 // Type or member is obsolete
-            var optionSet = await GetDocumentOptionSetAsync(analyzerOptions, syntaxTree, cancellationToken).ConfigureAwait(false);
+            var optionSet = await GetDocumentOptionSetAsync(
+                    analyzerOptions,
+                    syntaxTree,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 #pragma warning restore CS0612 // Type or member is obsolete
 
             return new AnalyzerConfigOptionSet(configOptions, optionSet);
         }
 
-        public static T GetOption<T>(this AnalyzerOptions analyzerOptions, ILanguageSpecificOption<T> option, SyntaxTree syntaxTree, CancellationToken cancellationToken)
+        public static T GetOption<T>(
+            this AnalyzerOptions analyzerOptions,
+            ILanguageSpecificOption<T> option,
+            SyntaxTree syntaxTree,
+            CancellationToken cancellationToken
+        )
         {
-            var optionAsync = GetOptionAsync<T>(analyzerOptions, option, language: null, syntaxTree, cancellationToken);
+            var optionAsync = GetOptionAsync<T>(
+                analyzerOptions,
+                option,
+                language: null,
+                syntaxTree,
+                cancellationToken
+            );
             if (optionAsync.IsCompleted)
                 return optionAsync.Result;
 
             return optionAsync.AsTask().GetAwaiter().GetResult();
         }
 
-        public static T GetOption<T>(this AnalyzerOptions analyzerOptions, IPerLanguageOption<T> option, string? language, SyntaxTree syntaxTree, CancellationToken cancellationToken)
+        public static T GetOption<T>(
+            this AnalyzerOptions analyzerOptions,
+            IPerLanguageOption<T> option,
+            string? language,
+            SyntaxTree syntaxTree,
+            CancellationToken cancellationToken
+        )
         {
-            var optionAsync = GetOptionAsync<T>(analyzerOptions, option, language, syntaxTree, cancellationToken);
+            var optionAsync = GetOptionAsync<T>(
+                analyzerOptions,
+                option,
+                language,
+                syntaxTree,
+                cancellationToken
+            );
             if (optionAsync.IsCompleted)
                 return optionAsync.Result;
 
             return optionAsync.AsTask().GetAwaiter().GetResult();
         }
 
-        public static async ValueTask<T> GetOptionAsync<T>(this AnalyzerOptions analyzerOptions, IOption option, string? language, SyntaxTree syntaxTree, CancellationToken cancellationToken)
+        public static async ValueTask<T> GetOptionAsync<T>(
+            this AnalyzerOptions analyzerOptions,
+            IOption option,
+            string? language,
+            SyntaxTree syntaxTree,
+            CancellationToken cancellationToken
+        )
         {
             if (analyzerOptions.TryGetEditorConfigOption<T>(option, syntaxTree, out var value))
             {
@@ -118,7 +174,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
 #pragma warning disable CS0612 // Type or member is obsolete
-            var optionSet = await analyzerOptions.GetDocumentOptionSetAsync(syntaxTree, cancellationToken).ConfigureAwait(false);
+            var optionSet = await analyzerOptions.GetDocumentOptionSetAsync(
+                    syntaxTree,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 #pragma warning restore CS0612 // Type or member is obsolete
 
             if (optionSet != null)
@@ -129,15 +189,25 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return value ?? (T)option.DefaultValue!;
         }
 
-        [PerformanceSensitive("https://github.com/dotnet/roslyn/issues/23582", OftenCompletesSynchronously = true)]
-        public static ValueTask<OptionSet?> GetDocumentOptionSetAsync(this AnalyzerOptions analyzerOptions, SyntaxTree syntaxTree, CancellationToken cancellationToken)
+        [PerformanceSensitive(
+            "https://github.com/dotnet/roslyn/issues/23582",
+            OftenCompletesSynchronously = true
+        )]
+        public static ValueTask<OptionSet?> GetDocumentOptionSetAsync(
+            this AnalyzerOptions analyzerOptions,
+            SyntaxTree syntaxTree,
+            CancellationToken cancellationToken
+        )
         {
             if (!(analyzerOptions is WorkspaceAnalyzerOptions workspaceAnalyzerOptions))
             {
                 return ValueTaskFactory.FromResult((OptionSet?)null);
             }
 
-            return workspaceAnalyzerOptions.GetDocumentOptionSetAsync(syntaxTree, cancellationToken);
+            return workspaceAnalyzerOptions.GetDocumentOptionSetAsync(
+                syntaxTree,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -146,23 +216,38 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <remarks>
         /// Keep this method in sync with "AnalyzerExecutor.CreateAnalyzerExceptionDiagnostic".
         /// </remarks>
-        internal static Diagnostic CreateAnalyzerExceptionDiagnostic(DiagnosticAnalyzer analyzer, Exception e)
+        internal static Diagnostic CreateAnalyzerExceptionDiagnostic(
+            DiagnosticAnalyzer analyzer,
+            Exception e
+        )
         {
             var analyzerName = analyzer.ToString();
 
             // TODO: It is not ideal to create a new descriptor per analyzer exception diagnostic instance.
             // However, until we add a LongMessage field to the Diagnostic, we are forced to park the instance specific description onto the Descriptor's Description field.
             // This requires us to create a new DiagnosticDescriptor instance per diagnostic instance.
-            var descriptor = new DiagnosticDescriptor(AnalyzerExceptionDiagnosticId,
+            var descriptor = new DiagnosticDescriptor(
+                AnalyzerExceptionDiagnosticId,
                 title: FeaturesResources.User_Diagnostic_Analyzer_Failure,
                 messageFormat: FeaturesResources.Analyzer_0_threw_an_exception_of_type_1_with_message_2,
-                description: string.Format(FeaturesResources.Analyzer_0_threw_the_following_exception_colon_1, analyzerName, e.CreateDiagnosticDescription()),
+                description: string.Format(
+                    FeaturesResources.Analyzer_0_threw_the_following_exception_colon_1,
+                    analyzerName,
+                    e.CreateDiagnosticDescription()
+                ),
                 category: AnalyzerExceptionDiagnosticCategory,
                 defaultSeverity: DiagnosticSeverity.Warning,
                 isEnabledByDefault: true,
-                customTags: WellKnownDiagnosticTags.AnalyzerException);
+                customTags: WellKnownDiagnosticTags.AnalyzerException
+            );
 
-            return Diagnostic.Create(descriptor, Location.None, analyzerName, e.GetType(), e.Message);
+            return Diagnostic.Create(
+                descriptor,
+                Location.None,
+                analyzerName,
+                e.GetType(),
+                e.Message
+            );
         }
 
         private static VersionStamp GetAnalyzerVersion(string path)
@@ -175,37 +260,89 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return VersionStamp.Create(File.GetLastWriteTimeUtc(path));
         }
 
-        public static DiagnosticData CreateAnalyzerLoadFailureDiagnostic(AnalyzerLoadFailureEventArgs e, string fullPath, ProjectId? projectId, string? language)
+        public static DiagnosticData CreateAnalyzerLoadFailureDiagnostic(
+            AnalyzerLoadFailureEventArgs e,
+            string fullPath,
+            ProjectId? projectId,
+            string? language
+        )
         {
-            static string GetLanguageSpecificId(string? language, string noLanguageId, string csharpId, string vbId)
-                => language == null ? noLanguageId : (language == LanguageNames.CSharp) ? csharpId : vbId;
+            static string GetLanguageSpecificId(
+                string? language,
+                string noLanguageId,
+                string csharpId,
+                string vbId
+            ) =>
+                language == null
+                    ? noLanguageId
+                    : (language == LanguageNames.CSharp) ? csharpId : vbId;
 
-            string id, messageFormat, message;
+            string id,
+                messageFormat,
+                message;
 
             switch (e.ErrorCode)
             {
                 case AnalyzerLoadFailureEventArgs.FailureErrorCode.UnableToLoadAnalyzer:
-                    id = GetLanguageSpecificId(language, WRN_UnableToLoadAnalyzerId, WRN_UnableToLoadAnalyzerIdCS, WRN_UnableToLoadAnalyzerIdVB);
+                    id = GetLanguageSpecificId(
+                        language,
+                        WRN_UnableToLoadAnalyzerId,
+                        WRN_UnableToLoadAnalyzerIdCS,
+                        WRN_UnableToLoadAnalyzerIdVB
+                    );
                     messageFormat = FeaturesResources.Unable_to_load_Analyzer_assembly_0_colon_1;
-                    message = string.Format(FeaturesResources.Unable_to_load_Analyzer_assembly_0_colon_1, fullPath, e.Message);
+                    message = string.Format(
+                        FeaturesResources.Unable_to_load_Analyzer_assembly_0_colon_1,
+                        fullPath,
+                        e.Message
+                    );
                     break;
 
                 case AnalyzerLoadFailureEventArgs.FailureErrorCode.UnableToCreateAnalyzer:
-                    id = GetLanguageSpecificId(language, WRN_AnalyzerCannotBeCreatedId, WRN_AnalyzerCannotBeCreatedIdCS, WRN_AnalyzerCannotBeCreatedIdVB);
-                    messageFormat = FeaturesResources.An_instance_of_analyzer_0_cannot_be_created_from_1_colon_2;
-                    message = string.Format(FeaturesResources.An_instance_of_analyzer_0_cannot_be_created_from_1_colon_2, e.TypeName, fullPath, e.Message);
+                    id = GetLanguageSpecificId(
+                        language,
+                        WRN_AnalyzerCannotBeCreatedId,
+                        WRN_AnalyzerCannotBeCreatedIdCS,
+                        WRN_AnalyzerCannotBeCreatedIdVB
+                    );
+                    messageFormat =
+                        FeaturesResources.An_instance_of_analyzer_0_cannot_be_created_from_1_colon_2;
+                    message = string.Format(
+                        FeaturesResources.An_instance_of_analyzer_0_cannot_be_created_from_1_colon_2,
+                        e.TypeName,
+                        fullPath,
+                        e.Message
+                    );
                     break;
 
                 case AnalyzerLoadFailureEventArgs.FailureErrorCode.NoAnalyzers:
-                    id = GetLanguageSpecificId(language, WRN_NoAnalyzerInAssemblyId, WRN_NoAnalyzerInAssemblyIdCS, WRN_NoAnalyzerInAssemblyIdVB);
+                    id = GetLanguageSpecificId(
+                        language,
+                        WRN_NoAnalyzerInAssemblyId,
+                        WRN_NoAnalyzerInAssemblyIdCS,
+                        WRN_NoAnalyzerInAssemblyIdVB
+                    );
                     messageFormat = FeaturesResources.The_assembly_0_does_not_contain_any_analyzers;
-                    message = string.Format(FeaturesResources.The_assembly_0_does_not_contain_any_analyzers, fullPath);
+                    message = string.Format(
+                        FeaturesResources.The_assembly_0_does_not_contain_any_analyzers,
+                        fullPath
+                    );
                     break;
 
                 case AnalyzerLoadFailureEventArgs.FailureErrorCode.ReferencesFramework:
-                    id = GetLanguageSpecificId(language, WRN_AnalyzerReferencesNetFrameworkId, WRN_AnalyzerReferencesNetFrameworkIdCS, WRN_AnalyzerReferencesNetFrameworkIdVB);
-                    messageFormat = FeaturesResources.The_assembly_0_containing_type_1_references_NET_Framework;
-                    message = string.Format(FeaturesResources.The_assembly_0_containing_type_1_references_NET_Framework, fullPath, e.TypeName);
+                    id = GetLanguageSpecificId(
+                        language,
+                        WRN_AnalyzerReferencesNetFrameworkId,
+                        WRN_AnalyzerReferencesNetFrameworkIdCS,
+                        WRN_AnalyzerReferencesNetFrameworkIdVB
+                    );
+                    messageFormat =
+                        FeaturesResources.The_assembly_0_containing_type_1_references_NET_Framework;
+                    message = string.Format(
+                        FeaturesResources.The_assembly_0_containing_type_1_references_NET_Framework,
+                        fullPath,
+                        e.TypeName
+                    );
                     break;
 
                 default:
@@ -227,10 +364,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 projectId: projectId,
                 customTags: ImmutableArray<string>.Empty,
                 properties: ImmutableDictionary<string, string?>.Empty,
-                language: language);
+                language: language
+            );
         }
 
-        public static void AppendAnalyzerMap(this Dictionary<string, DiagnosticAnalyzer> analyzerMap, IEnumerable<DiagnosticAnalyzer> analyzers)
+        public static void AppendAnalyzerMap(
+            this Dictionary<string, DiagnosticAnalyzer> analyzerMap,
+            IEnumerable<DiagnosticAnalyzer> analyzers
+        )
         {
             foreach (var analyzer in analyzers)
             {
@@ -239,16 +380,28 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        public static IEnumerable<AnalyzerPerformanceInfo> ToAnalyzerPerformanceInfo(this IDictionary<DiagnosticAnalyzer, AnalyzerTelemetryInfo> analysisResult, DiagnosticAnalyzerInfoCache analyzerInfo)
-            => analysisResult.Select(kv => new AnalyzerPerformanceInfo(kv.Key.GetAnalyzerId(), analyzerInfo.IsTelemetryCollectionAllowed(kv.Key), kv.Value.ExecutionTime));
+        public static IEnumerable<AnalyzerPerformanceInfo> ToAnalyzerPerformanceInfo(
+            this IDictionary<DiagnosticAnalyzer, AnalyzerTelemetryInfo> analysisResult,
+            DiagnosticAnalyzerInfoCache analyzerInfo
+        ) =>
+            analysisResult.Select(
+                kv =>
+                    new AnalyzerPerformanceInfo(
+                        kv.Key.GetAnalyzerId(),
+                        analyzerInfo.IsTelemetryCollectionAllowed(kv.Key),
+                        kv.Value.ExecutionTime
+                    )
+            );
 
         public static async Task<CompilationWithAnalyzers?> CreateCompilationWithAnalyzersAsync(
             Project project,
             IEnumerable<DiagnosticAnalyzer> analyzers,
             bool includeSuppressedDiagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project.GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (compilation == null)
             {
                 // project doesn't support compilation
@@ -256,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             // Create driver that holds onto compilation and associated analyzers
-            var filteredAnalyzers = analyzers.Where(a => !a.IsWorkspaceDiagnosticAnalyzer()).ToImmutableArrayOrEmpty();
+            var filteredAnalyzers = analyzers.Where(a => !a.IsWorkspaceDiagnosticAnalyzer())
+                .ToImmutableArrayOrEmpty();
 
             // PERF: there is no analyzers for this compilation.
             //       compilationWithAnalyzer will throw if it is created with no analyzers which is perf optimization.
@@ -276,7 +430,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 analyzerExceptionFilter: GetAnalyzerExceptionFilter(),
                 concurrentAnalysis: false,
                 logAnalyzerExecutionTime: true,
-                reportSuppressedDiagnostics: includeSuppressedDiagnostics);
+                reportSuppressedDiagnostics: includeSuppressedDiagnostics
+            );
 
             // Create driver that holds onto compilation and associated analyzers
             return compilation.WithAnalyzers(filteredAnalyzers, analyzerOptions);
@@ -285,7 +440,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 return ex =>
                 {
-                    if (ex is not OperationCanceledException && project.Solution.Workspace.Options.GetOption(InternalDiagnosticsOptions.CrashOnAnalyzerException))
+                    if (
+                        ex is not OperationCanceledException
+                        && project.Solution.Workspace.Options.GetOption(
+                            InternalDiagnosticsOptions.CrashOnAnalyzerException
+                        )
+                    )
                     {
                         // report telemetry
                         FatalError.ReportAndPropagate(ex);
@@ -307,12 +467,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Contract.ThrowIfFalse(compilation1 == compilation2);
         }
 
-        public static async Task<ImmutableArray<Diagnostic>> ComputeDocumentDiagnosticAnalyzerDiagnosticsAsync(
+        public static async Task<
+            ImmutableArray<Diagnostic>
+        > ComputeDocumentDiagnosticAnalyzerDiagnosticsAsync(
             DocumentDiagnosticAnalyzer analyzer,
             Document document,
             AnalysisKind kind,
             Compilation? compilation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -322,17 +485,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var analyzeAsync = kind switch
                 {
                     AnalysisKind.Syntax => analyzer.AnalyzeSyntaxAsync(document, cancellationToken),
-                    AnalysisKind.Semantic => analyzer.AnalyzeSemanticsAsync(document, cancellationToken),
+                    AnalysisKind.Semantic
+                      => analyzer.AnalyzeSemanticsAsync(document, cancellationToken),
                     _ => throw ExceptionUtilities.UnexpectedValue(kind),
                 };
 
                 diagnostics = (await analyzeAsync.ConfigureAwait(false)).NullToEmpty();
-
 #if DEBUG
                 // since all DocumentDiagnosticAnalyzers are from internal users, we only do debug check. also this can be expensive at runtime
                 // since it requires await. if we find any offender through NFW, we should be able to fix those since all those should
                 // from intern teams.
-                await VerifyDiagnosticLocationsAsync(diagnostics, document.Project, cancellationToken).ConfigureAwait(false);
+                await VerifyDiagnosticLocationsAsync(
+                        diagnostics,
+                        document.Project,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 #endif
             }
             catch (Exception e) when (!IsCanceled(e, cancellationToken))
@@ -342,29 +510,40 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             if (compilation != null)
             {
-                diagnostics = CompilationWithAnalyzers.GetEffectiveDiagnostics(diagnostics, compilation).ToImmutableArrayOrEmpty();
+                diagnostics = CompilationWithAnalyzers.GetEffectiveDiagnostics(
+                        diagnostics,
+                        compilation
+                    )
+                    .ToImmutableArrayOrEmpty();
             }
 
             return diagnostics;
         }
 
-        public static async Task<ImmutableArray<Diagnostic>> ComputeProjectDiagnosticAnalyzerDiagnosticsAsync(
+        public static async Task<
+            ImmutableArray<Diagnostic>
+        > ComputeProjectDiagnosticAnalyzerDiagnosticsAsync(
             ProjectDiagnosticAnalyzer analyzer,
             Project project,
             Compilation? compilation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             ImmutableArray<Diagnostic> diagnostics;
             try
             {
-                diagnostics = (await analyzer.AnalyzeProjectAsync(project, cancellationToken).ConfigureAwait(false)).NullToEmpty();
+                diagnostics = (
+                    await analyzer.AnalyzeProjectAsync(project, cancellationToken)
+                        .ConfigureAwait(false)
+                ).NullToEmpty();
 #if DEBUG
                 // since all ProjectDiagnosticAnalyzers are from internal users, we only do debug check. also this can be expensive at runtime
                 // since it requires await. if we find any offender through NFW, we should be able to fix those since all those should
                 // from intern teams.
-                await VerifyDiagnosticLocationsAsync(diagnostics, project, cancellationToken).ConfigureAwait(false);
+                await VerifyDiagnosticLocationsAsync(diagnostics, project, cancellationToken)
+                    .ConfigureAwait(false);
 #endif
             }
             catch (Exception e) when (!IsCanceled(e, cancellationToken))
@@ -375,27 +554,37 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // Apply filtering from compilation options (source suppressions, ruleset, etc.)
             if (compilation != null)
             {
-                diagnostics = CompilationWithAnalyzers.GetEffectiveDiagnostics(diagnostics, compilation).ToImmutableArrayOrEmpty();
+                diagnostics = CompilationWithAnalyzers.GetEffectiveDiagnostics(
+                        diagnostics,
+                        compilation
+                    )
+                    .ToImmutableArrayOrEmpty();
             }
 
             return diagnostics;
         }
 
-        private static bool IsCanceled(Exception ex, CancellationToken cancellationToken)
-            => (ex as OperationCanceledException)?.CancellationToken == cancellationToken;
+        private static bool IsCanceled(Exception ex, CancellationToken cancellationToken) =>
+            (ex as OperationCanceledException)?.CancellationToken == cancellationToken;
 
 #if DEBUG
-        private static async Task VerifyDiagnosticLocationsAsync(ImmutableArray<Diagnostic> diagnostics, Project project, CancellationToken cancellationToken)
+        private static async Task VerifyDiagnosticLocationsAsync(
+            ImmutableArray<Diagnostic> diagnostics,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
-                await VerifyDiagnosticLocationAsync(diagnostic.Id, diagnostic.Location).ConfigureAwait(false);
+                await VerifyDiagnosticLocationAsync(diagnostic.Id, diagnostic.Location)
+                    .ConfigureAwait(false);
 
                 if (diagnostic.AdditionalLocations != null)
                 {
                     foreach (var location in diagnostic.AdditionalLocations)
                     {
-                        await VerifyDiagnosticLocationAsync(diagnostic.Id, location).ConfigureAwait(false);
+                        await VerifyDiagnosticLocationAsync(diagnostic.Id, location)
+                            .ConfigureAwait(false);
                     }
                 }
             }
@@ -410,23 +599,39 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         // ignore these kinds
                         break;
                     case LocationKind.SourceFile:
+
                         {
                             RoslynDebug.Assert(location.SourceTree != null);
                             if (project.GetDocument(location.SourceTree) == null)
                             {
                                 // Disallow diagnostics with source locations outside this project.
-                                throw new ArgumentException(string.Format(FeaturesResources.Reported_diagnostic_0_has_a_source_location_in_file_1_which_is_not_part_of_the_compilation_being_analyzed, id, location.SourceTree.FilePath), "diagnostic");
+                                throw new ArgumentException(
+                                    string.Format(
+                                        FeaturesResources.Reported_diagnostic_0_has_a_source_location_in_file_1_which_is_not_part_of_the_compilation_being_analyzed,
+                                        id,
+                                        location.SourceTree.FilePath
+                                    ),
+                                    "diagnostic"
+                                );
                             }
 
                             if (location.SourceSpan.End > location.SourceTree.Length)
                             {
                                 // Disallow diagnostics with source locations outside this project.
-                                throw new ArgumentException(string.Format(FeaturesResources.Reported_diagnostic_0_has_a_source_location_1_in_file_2_which_is_outside_of_the_given_file, id, location.SourceSpan, location.SourceTree.FilePath), "diagnostic");
+                                throw new ArgumentException(
+                                    string.Format(
+                                        FeaturesResources.Reported_diagnostic_0_has_a_source_location_1_in_file_2_which_is_outside_of_the_given_file,
+                                        id,
+                                        location.SourceSpan,
+                                        location.SourceTree.FilePath
+                                    ),
+                                    "diagnostic"
+                                );
                             }
                         }
-
                         break;
                     case LocationKind.ExternalFile:
+
                         {
                             var filePath = location.GetLineSpan().Path;
                             var document = TryGetDocumentWithFilePath(filePath);
@@ -440,14 +645,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             // but, this text is most likely already loaded since producer of this diagnostic (Document/ProjectDiagnosticAnalyzers)
                             // should have loaded it to produce the diagnostic at the first place. once loaded, it should stay in memory until
                             // project cache goes away. when text is already there, await should return right away.
-                            var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                            var text = await document.GetTextAsync(cancellationToken)
+                                .ConfigureAwait(false);
                             if (location.SourceSpan.End > text.Length)
                             {
                                 // Disallow diagnostics with locations outside this project.
-                                throw new ArgumentException(string.Format(FeaturesResources.Reported_diagnostic_0_has_a_source_location_1_in_file_2_which_is_outside_of_the_given_file, id, location.SourceSpan, filePath), "diagnostic");
+                                throw new ArgumentException(
+                                    string.Format(
+                                        FeaturesResources.Reported_diagnostic_0_has_a_source_location_1_in_file_2_which_is_outside_of_the_given_file,
+                                        id,
+                                        location.SourceSpan,
+                                        filePath
+                                    ),
+                                    "diagnostic"
+                                );
                             }
                         }
-
                         break;
                     default:
                         throw ExceptionUtilities.Unreachable;
@@ -469,7 +682,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 #endif
 
-        public static IEnumerable<DiagnosticData> ConvertToLocalDiagnostics(this IEnumerable<Diagnostic> diagnostics, TextDocument targetTextDocument, TextSpan? span = null)
+        public static IEnumerable<DiagnosticData> ConvertToLocalDiagnostics(
+            this IEnumerable<Diagnostic> diagnostics,
+            TextDocument targetTextDocument,
+            TextSpan? span = null
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -490,13 +707,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (diagnostic.Location.SourceTree != null)
                 {
-                    return targetTextDocument.Project.GetDocument(diagnostic.Location.SourceTree) == targetTextDocument;
+                    return targetTextDocument.Project.GetDocument(diagnostic.Location.SourceTree)
+                        == targetTextDocument;
                 }
                 else if (diagnostic.Location.Kind == LocationKind.ExternalFile)
                 {
                     var lineSpan = diagnostic.Location.GetLineSpan();
 
-                    var documentIds = targetTextDocument.Project.Solution.GetDocumentIdsWithFilePath(lineSpan.Path);
+                    var documentIds =
+                        targetTextDocument.Project.Solution.GetDocumentIdsWithFilePath(
+                            lineSpan.Path
+                        );
                     return documentIds.Any(id => id == targetTextDocument.Id);
                 }
 

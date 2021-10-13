@@ -15,25 +15,35 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.MakeMemberStatic
 {
-    internal abstract class AbstractMakeMemberStaticCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractMakeMemberStaticCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         internal sealed override CodeFixCategory CodeFixCategory => CodeFixCategory.Compile;
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            if (context.Diagnostics.Length == 1 &&
-                IsValidMemberNode(context.Diagnostics[0].Location?.FindNode(context.CancellationToken)))
+            if (
+                context.Diagnostics.Length == 1
+                && IsValidMemberNode(
+                    context.Diagnostics[0].Location?.FindNode(context.CancellationToken)
+                )
+            )
             {
                 context.RegisterCodeFix(
                     new MyCodeAction(c => FixAsync(context.Document, context.Diagnostics[0], c)),
-                    context.Diagnostics);
+                    context.Diagnostics
+                );
             }
 
             return Task.CompletedTask;
         }
 
-        protected sealed override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor,
-            CancellationToken cancellationToken)
+        protected sealed override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             for (var i = 0; i < diagnostics.Length; i++)
             {
@@ -41,8 +51,11 @@ namespace Microsoft.CodeAnalysis.MakeMemberStatic
 
                 if (IsValidMemberNode(declaration))
                 {
-                    editor.ReplaceNode(declaration,
-                        (currentDeclaration, generator) => generator.WithModifiers(currentDeclaration, DeclarationModifiers.Static));
+                    editor.ReplaceNode(
+                        declaration,
+                        (currentDeclaration, generator) =>
+                            generator.WithModifiers(currentDeclaration, DeclarationModifiers.Static)
+                    );
                 }
             }
 
@@ -54,9 +67,11 @@ namespace Microsoft.CodeAnalysis.MakeMemberStatic
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(FeaturesResources.Make_member_static, createChangedDocument, nameof(AbstractMakeMemberStaticCodeFixProvider))
-            {
-            }
+                : base(
+                    FeaturesResources.Make_member_static,
+                    createChangedDocument,
+                    nameof(AbstractMakeMemberStaticCodeFixProvider)
+                ) { }
         }
     }
 }

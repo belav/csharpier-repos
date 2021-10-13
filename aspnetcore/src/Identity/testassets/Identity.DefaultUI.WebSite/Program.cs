@@ -20,12 +20,14 @@ namespace Identity.DefaultUI.WebSite
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    if (!args.Contains("--use-startup=false"))
+                .ConfigureWebHostDefaults(
+                    webBuilder =>
                     {
-                        webBuilder.UseStartup<Startup>();
+                        if (!args.Contains("--use-startup=false"))
+                        {
+                            webBuilder.UseStartup<Startup>();
+                        }
                     }
-                });
+                );
     }
 }

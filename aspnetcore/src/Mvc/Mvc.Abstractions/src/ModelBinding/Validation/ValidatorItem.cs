@@ -14,9 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         /// <summary>
         /// Creates a new <see cref="ValidatorItem"/>.
         /// </summary>
-        public ValidatorItem()
-        {
-        }
+        public ValidatorItem() { }
 
         /// <summary>
         /// Creates a new <see cref="ValidatorItem"/>.

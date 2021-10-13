@@ -10,15 +10,13 @@ namespace SecurityWebSite
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args)
-                .Build();
+            var host = CreateWebHostBuilder(args).Build();
 
             host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder()
-                .UseKestrel()
+            new WebHostBuilder().UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>();
     }

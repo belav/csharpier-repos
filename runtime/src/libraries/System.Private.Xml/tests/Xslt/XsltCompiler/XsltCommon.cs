@@ -37,12 +37,21 @@ namespace XmlCoreTest.Common
         It might support an optional helperObject that can perform delayed logging, but does not yet.
         ************************************************/
 
-        public static bool CompareXml(string baselineFile, string actualFile, string xmldiffoptionvalue)
+        public static bool CompareXml(
+            string baselineFile,
+            string actualFile,
+            string xmldiffoptionvalue
+        )
         {
             return CompareXml(baselineFile, actualFile, xmldiffoptionvalue, null);
         }
 
-        public static bool CompareXml(string baselineFile, string actualFile, string xmldiffoptionvalue, DelayedWriteLogger logger)
+        public static bool CompareXml(
+            string baselineFile,
+            string actualFile,
+            string xmldiffoptionvalue,
+            DelayedWriteLogger logger
+        )
         {
             using (var fsActual = new FileStream(actualFile, FileMode.Open, FileAccess.Read))
             using (var fsExpected = new FileStream(baselineFile, FileMode.Open, FileAccess.Read))
@@ -55,33 +64,53 @@ namespace XmlCoreTest.Common
         {
             actualStream.Seek(0, SeekOrigin.Begin);
 
-            using (var expectedStream = new FileStream(baselineFile, FileMode.Open, FileAccess.Read))
+            using (
+                var expectedStream = new FileStream(baselineFile, FileMode.Open, FileAccess.Read)
+            )
                 return CompareXml(expectedStream, actualStream, string.Empty, null);
         }
 
-        public static bool CompareXml(Stream expectedStream, Stream actualStream, string xmldiffoptionvalue, DelayedWriteLogger logger)
+        public static bool CompareXml(
+            Stream expectedStream,
+            Stream actualStream,
+            string xmldiffoptionvalue,
+            DelayedWriteLogger logger
+        )
         {
             bool bResult = false;
 
             // Default Diff options used by XSLT V2 driver.
-            int defaultXmlDiffOptions = (int)(XmlDiffOption.InfosetComparison | XmlDiffOption.IgnoreEmptyElement | XmlDiffOption.IgnoreAttributeOrder);
+            int defaultXmlDiffOptions = (int)(
+                XmlDiffOption.InfosetComparison
+                | XmlDiffOption.IgnoreEmptyElement
+                | XmlDiffOption.IgnoreAttributeOrder
+            );
             XmlDiff diff = new XmlDiff();
 
             if (xmldiffoptionvalue == null || xmldiffoptionvalue.Equals(string.Empty))
                 diff.Option = (XmlDiffOption)defaultXmlDiffOptions;
             else
             {
-                if (logger != null) logger.LogMessage("Custom XmlDiffOptions used. Value passed is " + xmldiffoptionvalue);
+                if (logger != null)
+                    logger.LogMessage(
+                        "Custom XmlDiffOptions used. Value passed is " + xmldiffoptionvalue
+                    );
                 diff.Option = (XmlDiffOption)int.Parse(xmldiffoptionvalue);
             }
 
-            XmlParserContext context = new XmlParserContext(new NameTable(), null, "", XmlSpace.None);
+            XmlParserContext context = new XmlParserContext(
+                new NameTable(),
+                null,
+                "",
+                XmlSpace.None
+            );
 
             try
             {
-                bResult =
-                   diff.Compare(new XmlTextReader(actualStream, XmlNodeType.Element, context),
-                             new XmlTextReader(expectedStream, XmlNodeType.Element, context));
+                bResult = diff.Compare(
+                    new XmlTextReader(actualStream, XmlNodeType.Element, context),
+                    new XmlTextReader(expectedStream, XmlNodeType.Element, context)
+                );
             }
             catch (Exception e)
             {
@@ -115,15 +144,21 @@ namespace XmlCoreTest.Common
             return CompareChecksum(Baseline, OutFile, driverVersion, null);
         }
 
-        public static bool CompareChecksum(string Baseline, string OutFile, int driverVersion, DelayedWriteLogger logger)
+        public static bool CompareChecksum(
+            string Baseline,
+            string OutFile,
+            int driverVersion,
+            DelayedWriteLogger logger
+        )
         {
             return CompareChecksum(
-               Baseline,
-               1,                //start from the first line in the baseline file
-               OutFile,
-               1,                //start from the first line in the output file
-               driverVersion,
-               logger);
+                Baseline,
+                1, //start from the first line in the baseline file
+                OutFile,
+                1, //start from the first line in the output file
+                driverVersion,
+                logger
+            );
         }
 
         /// <summary>
@@ -136,12 +171,20 @@ namespace XmlCoreTest.Common
         /// <param name="driverVersion"></param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        public static bool CompareChecksum(string Baseline, int baselineStartLine, string OutFile, int outFileStartLine, int driverVersion, DelayedWriteLogger logger)
+        public static bool CompareChecksum(
+            string Baseline,
+            int baselineStartLine,
+            string OutFile,
+            int outFileStartLine,
+            int driverVersion,
+            DelayedWriteLogger logger
+        )
         {
             // Keep people honest.
             if (driverVersion == 2)
             {
-                if (logger != null) logger.LogMessage("Calculating checksum for baseline output {0}...", Baseline);
+                if (logger != null)
+                    logger.LogMessage("Calculating checksum for baseline output {0}...", Baseline);
 
                 string expectedCheckSum = CalcChecksum(Baseline, baselineStartLine, logger);
                 string actualChecksum = CalcChecksum(OutFile, outFileStartLine, logger);
@@ -152,14 +195,19 @@ namespace XmlCoreTest.Common
                 {
                     if (logger != null)
                     {
-                        logger.LogMessage("Actual checksum: {0}, Expected checksum: {1}", actualChecksum, expectedCheckSum);
+                        logger.LogMessage(
+                            "Actual checksum: {0}, Expected checksum: {1}",
+                            actualChecksum,
+                            expectedCheckSum
+                        );
                         logger.LogMessage("Actual result: ");
                         logger.WriteOutputFileToLog(OutFile);
                     }
                     return false;
                 }
             }
-            else throw new NotSupportedException("Not a supported driver version");
+            else
+                throw new NotSupportedException("Not a supported driver version");
         }
 
         private static string CalcChecksum(string fileName, DelayedWriteLogger logger)
@@ -174,14 +222,18 @@ namespace XmlCoreTest.Common
         /// <param name="startFromLine">The line to start calculating the checksum. Any text before this line is ignored. First line is 1.</param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        private static string CalcChecksum(string fileName, int startFromLine, DelayedWriteLogger logger)
+        private static string CalcChecksum(
+            string fileName,
+            int startFromLine,
+            DelayedWriteLogger logger
+        )
         {
             const int BUFFERSIZE = 4096;
-            decimal dResult = 0;        // Numerical value of the checksum
-            int i = 0;                  // Generic counter
-            int cBytesRead = 1;        // # of bytes read at one time
-            int cTotalRead = 0;         // Total # of bytes read so far
-            decimal dEndBuffer = 0;     // Buffer to remove from the end (This is necessary because
+            decimal dResult = 0; // Numerical value of the checksum
+            int i = 0; // Generic counter
+            int cBytesRead = 1; // # of bytes read at one time
+            int cTotalRead = 0; // Total # of bytes read so far
+            decimal dEndBuffer = 0; // Buffer to remove from the end (This is necessary because
             // notepad adds CR/LF onto the end of every file)
             char[] rgBuffer = new char[BUFFERSIZE];
 
@@ -221,12 +273,14 @@ namespace XmlCoreTest.Common
             }
             catch (Exception ex)
             {
-                if (logger != null) logger.LogXml(ex.ToString());
+                if (logger != null)
+                    logger.LogXml(ex.ToString());
                 return "";
             }
             finally
             {
-                if (fs != null) fs.Dispose();
+                if (fs != null)
+                    fs.Dispose();
             }
             return Convert.ToString(dResult - dEndBuffer, NumberFormatInfo.InvariantInfo);
         }
@@ -234,13 +288,20 @@ namespace XmlCoreTest.Common
         // Is this really all there is to it?
         public static bool DetectEmittedPDB(string fileName)
         {
-            if (File.Exists(fileName)) return true;
-            else return File.Exists(fileName + ".pdb");
+            if (File.Exists(fileName))
+                return true;
+            else
+                return File.Exists(fileName + ".pdb");
         }
 
         // Call PEVerify on the Assembly name, parse the output,
         // and return true if the output is PASS and false if the output is FAIL.
-        public static bool VerifyAssemblyUsingPEVerify(string asmName, bool isValidCase, DelayedWriteLogger logger, ref string output)
+        public static bool VerifyAssemblyUsingPEVerify(
+            string asmName,
+            bool isValidCase,
+            DelayedWriteLogger logger,
+            ref string output
+        )
         {
             Debug.Assert(asmName != null);
             Debug.Assert(asmName != string.Empty);
@@ -262,11 +323,16 @@ namespace XmlCoreTest.Common
                     output = message;
                     return false;
                 }
-                else return true;
+                else
+                    return true;
             }
         }
 
-        public static bool VerifySingleAssemblyUsingPEVerify(string asmName, DelayedWriteLogger logger, ref string output)
+        public static bool VerifySingleAssemblyUsingPEVerify(
+            string asmName,
+            DelayedWriteLogger logger,
+            ref string output
+        )
         {
             Debug.Assert(asmName != null);
             Debug.Assert(asmName != string.Empty);
@@ -295,12 +361,19 @@ namespace XmlCoreTest.Common
                 // For example:
                 // C:>peverify /quiet 4AC8BD29F3CB888FAD76F7C08FD57AD3.dll
                 // 4AC8BD29F3CB888FAD76F7C08FD57AD3.dll PASS
-                if (peVerifyProcess.ExitCode == 0 && output.Contains(asmName) && output.Contains("PASS"))
+                if (
+                    peVerifyProcess.ExitCode == 0
+                    && output.Contains(asmName)
+                    && output.Contains("PASS")
+                )
                     result = true;
                 else
                 {
                     if (logger != null)
-                        logger.LogMessage("PEVerify could not be run or FAILED : {0}", asmName + " " + output);
+                        logger.LogMessage(
+                            "PEVerify could not be run or FAILED : {0}",
+                            asmName + " " + output
+                        );
                     result = false;
                 }
             }
@@ -314,7 +387,11 @@ namespace XmlCoreTest.Common
             return result;
         }
 
-        public static bool VerifyAssemblyUsingPEVerify(string asmName, DelayedWriteLogger logger, ref string output)
+        public static bool VerifyAssemblyUsingPEVerify(
+            string asmName,
+            DelayedWriteLogger logger,
+            ref string output
+        )
         {
             string scriptAsmNameFormat = Path.ChangeExtension(asmName, null) + "_Script{0}.dll";
             int scriptCounter = 0;
@@ -325,8 +402,7 @@ namespace XmlCoreTest.Common
             {
                 result = VerifySingleAssemblyUsingPEVerify(testAsm, logger, ref output);
                 testAsm = string.Format(scriptAsmNameFormat, ++scriptCounter);
-            }
-            while (result && File.Exists(testAsm));
+            } while (result && File.Exists(testAsm));
 
             return result;
         }
@@ -336,33 +412,59 @@ namespace XmlCoreTest.Common
             var locations = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             // 32 bit if on 64 bit Windows
-            locations.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"Microsoft SDKs\Windows"));
+            locations.Add(
+                Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                    @"Microsoft SDKs\Windows"
+                )
+            );
             // 32 bit if on 32 bit Windows, otherwise 64 bit
-            locations.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), @"Microsoft SDKs\Windows"));
+            locations.Add(
+                Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+                    @"Microsoft SDKs\Windows"
+                )
+            );
             // 64 bit if in 32 bit process on 64 bit Windows
-            locations.Add(Path.Combine(Environment.GetEnvironmentVariable("ProgramW6432"), @"Microsoft SDKs\Windows"));
+            locations.Add(
+                Path.Combine(
+                    Environment.GetEnvironmentVariable("ProgramW6432"),
+                    @"Microsoft SDKs\Windows"
+                )
+            );
 
             var files = new List<string>();
 
             foreach (var location in locations)
             {
                 if (Directory.Exists(location))
-                    files.AddRange(Directory.GetFiles(location, fileName, SearchOption.AllDirectories));
+                    files.AddRange(
+                        Directory.GetFiles(location, fileName, SearchOption.AllDirectories)
+                    );
             }
 
             if (files.Count == 0)
                 throw new FileNotFoundException(fileName);
 
             // Prefer newer versions, for stability
-            files.Sort((left, right) =>
-            {
-                int comparison = Comparer<float>.Default.Compare(GetVersionFromSDKPath(left), GetVersionFromSDKPath(right));
+            files.Sort(
+                (left, right) =>
+                {
+                    int comparison = Comparer<float>.Default.Compare(
+                        GetVersionFromSDKPath(left),
+                        GetVersionFromSDKPath(right)
+                    );
 
-                if (comparison == 0)
-                    comparison = string.Compare(left, right, StringComparison.OrdinalIgnoreCase);
+                    if (comparison == 0)
+                        comparison = string.Compare(
+                            left,
+                            right,
+                            StringComparison.OrdinalIgnoreCase
+                        );
 
-                return comparison;
-            });
+                    return comparison;
+                }
+            );
 
             return files[files.Count - 1];
         }
@@ -417,9 +519,11 @@ namespace XmlCoreTest.Common
                     cBytesRead = fs.Read(rgBuffer, 0, 4096);
                 }
             }
+
             finally
             {
-                if (fs != null) fs.Dispose();
+                if (fs != null)
+                    fs.Dispose();
                 this.LogMessage(string.Empty);
             }
         }
@@ -533,14 +637,9 @@ namespace XmlCoreTest.Common
     {
         public static string XMLUSEREX = "Xml_UserException";
 
-        private XsltRuntimeException()
-        {
-        } // no op, do not call
+        private XsltRuntimeException() { } // no op, do not call
 
-        public XsltRuntimeException(string a, bool d)
-            : this(a, XMLUSEREX, string.Empty, d)
-        {
-        }
+        public XsltRuntimeException(string a, bool d) : this(a, XMLUSEREX, string.Empty, d) { }
 
         public XsltRuntimeException(string a, string b, string c, bool d)
         {
@@ -573,12 +672,30 @@ namespace XmlCoreTest.Common
             XsltRuntimeException objectToCompareTo = o as XsltRuntimeException;
 
             Debug.Assert(objectToCompareTo != null);
-            Debug.Assert(objectToCompareTo.ExceptionId != null, "ExceptionId must be initialized to a valid fully qualified type name");
-            Debug.Assert(objectToCompareTo.ResourceId != null, "ResourceId must be initialized to String.Empty, in which case MessageFragment is used, or a legal resource Id");
-            Debug.Assert(objectToCompareTo.MessageFragment != null, "MessageFragment must be initialized to String.Empty, in which case ResourceId is used, or a string that represents a specific exception message.");
-            Debug.Assert(this.ExceptionId != null, "ExceptionId must be initialized to a valid fully qualified type name");
-            Debug.Assert(this.ResourceId != null, "ResourceId must be initialized to String.Empty, in which case MessageFragment is used, or a legal resource Id");
-            Debug.Assert(this.MessageFragment != null, "MessageFragment must be initialized to String.Empty, in which case ResourceId is used, or a string that represents a specific exception message.");
+            Debug.Assert(
+                objectToCompareTo.ExceptionId != null,
+                "ExceptionId must be initialized to a valid fully qualified type name"
+            );
+            Debug.Assert(
+                objectToCompareTo.ResourceId != null,
+                "ResourceId must be initialized to String.Empty, in which case MessageFragment is used, or a legal resource Id"
+            );
+            Debug.Assert(
+                objectToCompareTo.MessageFragment != null,
+                "MessageFragment must be initialized to String.Empty, in which case ResourceId is used, or a string that represents a specific exception message."
+            );
+            Debug.Assert(
+                this.ExceptionId != null,
+                "ExceptionId must be initialized to a valid fully qualified type name"
+            );
+            Debug.Assert(
+                this.ResourceId != null,
+                "ResourceId must be initialized to String.Empty, in which case MessageFragment is used, or a legal resource Id"
+            );
+            Debug.Assert(
+                this.MessageFragment != null,
+                "MessageFragment must be initialized to String.Empty, in which case ResourceId is used, or a string that represents a specific exception message."
+            );
 
             // Inside this block, we have two properly initialized XsltRuntimeExceptions to compare.
 
@@ -608,8 +725,11 @@ namespace XmlCoreTest.Common
             }
             else
             {
-                if (!objectToCompareTo.ResourceId.Equals(string.Empty) && !objectToCompareTo.ResourceId.Equals(XMLUSEREX) &&
-                    objectToCompareTo.ResourceId.Equals(this.ResourceId))
+                if (
+                    !objectToCompareTo.ResourceId.Equals(string.Empty)
+                    && !objectToCompareTo.ResourceId.Equals(XMLUSEREX)
+                    && objectToCompareTo.ResourceId.Equals(this.ResourceId)
+                )
                 {
                     //**** The highest degree of certainty we have. ****//
 
@@ -618,25 +738,34 @@ namespace XmlCoreTest.Common
                     // ResourceIds match, but Exception types dont.
                     else
                     {
-                        CError.WriteLine("match?\n {0} \ncompare to \n {1} \n pls investigate why this resource id is being thrown in 2 differet exceptions", objectToCompareTo.ToString(), this.ToString());
+                        CError.WriteLine(
+                            "match?\n {0} \ncompare to \n {1} \n pls investigate why this resource id is being thrown in 2 differet exceptions",
+                            objectToCompareTo.ToString(),
+                            this.ToString()
+                        );
                         return true;
                     }
                 }
                 // ResourceId is Empty or Xml_UserException, or they dont match
                 else if (!this.MessageFragment.Equals(string.Empty) && _examineMessages)
                 {
-                    if (objectToCompareTo.ResourceId.Equals(this.ResourceId) &&
-                        objectToCompareTo.MessageFragment.Contains(this.MessageFragment))
+                    if (
+                        objectToCompareTo.ResourceId.Equals(this.ResourceId)
+                        && objectToCompareTo.MessageFragment.Contains(this.MessageFragment)
+                    )
                     {
                         //**** Very high certainty equivalence ****//
 
                         if (objectToCompareTo.ExceptionId.Equals(this.ExceptionId))
                             return true;
-
                         // Messages match, but Exception types dont.
                         else
                         {
-                            CError.WriteLine("match?(message matches but exact typename doesn't)\n {0} \ncompare to \n {1} ", objectToCompareTo.ToString(), this.ToString());
+                            CError.WriteLine(
+                                "match?(message matches but exact typename doesn't)\n {0} \ncompare to \n {1} ",
+                                objectToCompareTo.ToString(),
+                                this.ToString()
+                            );
                             return false; // for now.
                         }
                     }
@@ -647,7 +776,11 @@ namespace XmlCoreTest.Common
                     //**** Lower degree of certainty ****//
                     // This is an exception that has not yet been updated in the control file with complete information.
                     // Use the older, less flexible comparison logic.
-                    CError.WriteLine("old comparison:{0} \ncompare to \n {1} ", objectToCompareTo.ToString(), this.ToString());
+                    CError.WriteLine(
+                        "old comparison:{0} \ncompare to \n {1} ",
+                        objectToCompareTo.ToString(),
+                        this.ToString()
+                    );
                     return objectToCompareTo.ExceptionId.Equals(this.ExceptionId);
                 }
             }

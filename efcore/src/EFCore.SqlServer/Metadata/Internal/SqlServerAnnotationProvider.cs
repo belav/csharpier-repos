@@ -31,9 +31,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
         public SqlServerAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,9 +44,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             var maxSize = model.Model.GetDatabaseMaxSize();
             var serviceTier = model.Model.GetServiceTierSql();
             var performanceLevel = model.Model.GetPerformanceLevelSql();
-            if (maxSize != null
-                || serviceTier != null
-                || performanceLevel != null)
+            if (maxSize != null || serviceTier != null || performanceLevel != null)
             {
                 var options = new StringBuilder();
 
@@ -75,10 +71,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
 
                 options.Remove(options.Length - 2, 2);
 
-                yield return new Annotation(SqlServerAnnotationNames.EditionOptions, options.ToString());
+                yield return new Annotation(
+                    SqlServerAnnotationNames.EditionOptions,
+                    options.ToString()
+                );
             }
 
-            if (model.Tables.Any(t => !t.IsExcludedFromMigrations && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)))
+            if (
+                model.Tables.Any(
+                    t =>
+                        !t.IsExcludedFromMigrations
+                        && (t[SqlServerAnnotationNames.MemoryOptimized] as bool? == true)
+                )
+            )
             {
                 yield return new Annotation(SqlServerAnnotationNames.MemoryOptimized, true);
             }
@@ -112,7 +117,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
 
             var table = constraint.Table;
 
-            if (key.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema)) is bool isClustered)
+            if (
+                key.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema))
+                is bool isClustered
+            )
             {
                 yield return new Annotation(SqlServerAnnotationNames.Clustered, isClustered);
             }
@@ -131,22 +139,25 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
 
             var table = index.Table;
 
-            if (modelIndex.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema)) is bool isClustered)
+            if (
+                modelIndex.IsClustered(StoreObjectIdentifier.Table(table.Name, table.Schema))
+                is bool isClustered
+            )
             {
                 yield return new Annotation(SqlServerAnnotationNames.Clustered, isClustered);
             }
 
             if (modelIndex.GetIncludeProperties() is IReadOnlyList<string> includeProperties)
             {
-                var includeColumns = includeProperties
-                    .Select(
-                        p => modelIndex.DeclaringEntityType.FindProperty(p)!
-                            .GetColumnName(StoreObjectIdentifier.Table(table.Name, table.Schema)))
+                var includeColumns = includeProperties.Select(
+                        p =>
+                            modelIndex.DeclaringEntityType.FindProperty(p)!.GetColumnName(
+                                StoreObjectIdentifier.Table(table.Name, table.Schema)
+                            )
+                    )
                     .ToArray();
 
-                yield return new Annotation(
-                    SqlServerAnnotationNames.Include,
-                    includeColumns);
+                yield return new Annotation(SqlServerAnnotationNames.Include, includeColumns);
             }
 
             if (modelIndex.IsCreatedOnline() is bool isOnline)
@@ -171,11 +182,15 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
             var table = StoreObjectIdentifier.Table(column.Table.Name, column.Table.Schema);
             var identityProperty = column.PropertyMappings.Where(
                     m =>
-                        m.TableMapping.IsSharedTablePrincipal && m.TableMapping.EntityType == m.Property.DeclaringEntityType)
+                        m.TableMapping.IsSharedTablePrincipal
+                        && m.TableMapping.EntityType == m.Property.DeclaringEntityType
+                )
                 .Select(m => m.Property)
                 .FirstOrDefault(
-                    p => p.GetValueGenerationStrategy(table)
-                        == SqlServerValueGenerationStrategy.IdentityColumn);
+                    p =>
+                        p.GetValueGenerationStrategy(table)
+                        == SqlServerValueGenerationStrategy.IdentityColumn
+                );
             if (identityProperty != null)
             {
                 var seed = identityProperty.GetIdentitySeed(table);
@@ -183,7 +198,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Metadata.Internal
 
                 yield return new Annotation(
                     SqlServerAnnotationNames.Identity,
-                    string.Format(CultureInfo.InvariantCulture, "{0}, {1}", seed ?? 1, increment ?? 1));
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}, {1}",
+                        seed ?? 1,
+                        increment ?? 1
+                    )
+                );
             }
 
             // Model validation ensures that these facets are the same on all mapped properties

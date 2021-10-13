@@ -20,35 +20,56 @@ namespace Microsoft.CodeAnalysis.AddImport
             public AssemblyReference(
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 SearchResult searchResult,
-                ReferenceAssemblyWithTypeResult referenceAssemblyWithType)
-                : base(provider, searchResult)
+                ReferenceAssemblyWithTypeResult referenceAssemblyWithType
+            ) : base(provider, searchResult)
             {
                 _referenceAssemblyWithType = referenceAssemblyWithType;
             }
 
             public override async Task<AddImportFixData> TryGetFixDataAsync(
-                Document document, SyntaxNode node, bool placeSystemNamespaceFirst, bool allowInHiddenRegions, CancellationToken cancellationToken)
+                Document document,
+                SyntaxNode node,
+                bool placeSystemNamespaceFirst,
+                bool allowInHiddenRegions,
+                CancellationToken cancellationToken
+            )
             {
                 var textChanges = await GetTextChangesAsync(
-                    document, node, placeSystemNamespaceFirst, allowInHiddenRegions, cancellationToken).ConfigureAwait(false);
+                        document,
+                        node,
+                        placeSystemNamespaceFirst,
+                        allowInHiddenRegions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                var title = $"{provider.GetDescription(SearchResult.NameParts)} ({string.Format(FeaturesResources.from_0, _referenceAssemblyWithType.AssemblyName)})";
+                var title =
+                    $"{provider.GetDescription(SearchResult.NameParts)} ({string.Format(FeaturesResources.from_0, _referenceAssemblyWithType.AssemblyName)})";
                 var fullyQualifiedTypeName = string.Join(
-                    ".", _referenceAssemblyWithType.ContainingNamespaceNames.Concat(_referenceAssemblyWithType.TypeName));
+                    ".",
+                    _referenceAssemblyWithType.ContainingNamespaceNames.Concat(
+                        _referenceAssemblyWithType.TypeName
+                    )
+                );
 
                 return AddImportFixData.CreateForReferenceAssemblySymbol(
-                    textChanges, title, _referenceAssemblyWithType.AssemblyName, fullyQualifiedTypeName);
+                    textChanges,
+                    title,
+                    _referenceAssemblyWithType.AssemblyName,
+                    fullyQualifiedTypeName
+                );
             }
 
             public override bool Equals(object obj)
             {
                 var reference = obj as AssemblyReference;
-                return base.Equals(obj) &&
-                    _referenceAssemblyWithType.AssemblyName == reference._referenceAssemblyWithType.AssemblyName;
+                return base.Equals(obj)
+                    && _referenceAssemblyWithType.AssemblyName
+                        == reference._referenceAssemblyWithType.AssemblyName;
             }
 
-            public override int GetHashCode()
-                => Hash.Combine(_referenceAssemblyWithType.AssemblyName, base.GetHashCode());
+            public override int GetHashCode() =>
+                Hash.Combine(_referenceAssemblyWithType.AssemblyName, base.GetHashCode());
         }
     }
 }

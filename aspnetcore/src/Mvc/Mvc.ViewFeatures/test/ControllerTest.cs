@@ -27,10 +27,12 @@ namespace Microsoft.AspNetCore.Mvc.Test
             get
             {
                 return typeof(Controller).GetTypeInfo()
-                    .DeclaredMethods
-                    .Where(method => method.IsPublic &&
-                    !method.IsSpecialName &&
-                    !method.Name.Equals("Dispose", StringComparison.OrdinalIgnoreCase))
+                    .DeclaredMethods.Where(
+                        method =>
+                            method.IsPublic
+                            && !method.IsSpecialName
+                            && !method.Name.Equals("Dispose", StringComparison.OrdinalIgnoreCase)
+                    )
                     .Select(method => new[] { method });
             }
         }
@@ -41,7 +43,9 @@ namespace Microsoft.AspNetCore.Mvc.Test
             // Arrange
             var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
             var controller = new TestableController();
-            var originalViewData = controller.ViewData = new ViewDataDictionary<object>(metadataProvider);
+            var originalViewData = controller.ViewData = new ViewDataDictionary<object>(
+                metadataProvider
+            );
             var replacementViewData = new ViewDataDictionary<object>(metadataProvider);
 
             // Act
@@ -72,7 +76,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
 
             // Act
@@ -93,7 +100,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
 
             var model = new object();
@@ -117,7 +127,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
 
             // Act
@@ -138,7 +151,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
             var model = new object();
 
@@ -160,7 +176,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
             var model = new object();
 
@@ -182,7 +201,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
             controller.ViewData.Model = new object();
 
@@ -204,7 +226,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
 
             var model = new object();
@@ -228,7 +253,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
             var model = new object();
             controller.ViewData.Model = model;
@@ -251,7 +279,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
             var model = new object();
 
@@ -273,7 +304,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
             var model = new object();
 
@@ -295,7 +329,10 @@ namespace Microsoft.AspNetCore.Mvc.Test
             var controller = new TestableController()
             {
                 ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider()),
-                TempData = new TempDataDictionary(new DefaultHttpContext(), Mock.Of<ITempDataProvider>()),
+                TempData = new TempDataDictionary(
+                    new DefaultHttpContext(),
+                    Mock.Of<ITempDataProvider>()
+                ),
             };
             controller.ViewData.Model = new object();
 
@@ -348,16 +385,14 @@ namespace Microsoft.AspNetCore.Mvc.Test
         public async Task Controller_ActionFilter_SettingResult_ShortCircuits()
         {
             // Arrange, Act &  Assert
-            await CommonFilterTest.ActionFilter_SettingResult_ShortCircuits(
-                new Mock<Controller>());
+            await CommonFilterTest.ActionFilter_SettingResult_ShortCircuits(new Mock<Controller>());
         }
 
         [Fact]
         public async Task Controller_ActionFilter_Calls_OnActionExecuted()
         {
             // Arrange, Act &  Assert
-            await CommonFilterTest.ActionFilter_Calls_OnActionExecuted(
-                new Mock<Controller>());
+            await CommonFilterTest.ActionFilter_Calls_OnActionExecuted(new Mock<Controller>());
         }
 
         [Fact]
@@ -410,11 +445,14 @@ namespace Microsoft.AspNetCore.Mvc.Test
         public void ViewDataModelSetter_DoesNotThrow(object model, Type expectedType)
         {
             // Arrange
-            var activator = new ViewDataDictionaryControllerPropertyActivator(new EmptyModelMetadataProvider());
+            var activator = new ViewDataDictionaryControllerPropertyActivator(
+                new EmptyModelMetadataProvider()
+            );
             var actionContext = new ActionContext(
                 new DefaultHttpContext(),
                 new RouteData(),
-                new ControllerActionDescriptor());
+                new ControllerActionDescriptor()
+            );
             var controllerContext = new ControllerContext(actionContext);
             var controller = new TestableController();
             activator.Activate(controllerContext, controller);
@@ -443,7 +481,8 @@ namespace Microsoft.AspNetCore.Mvc.Test
                 new DataAnnotationsModelValidatorProvider(
                     new ValidationAttributeAdapterProvider(),
                     Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                    stringLocalizerFactory: null),
+                    stringLocalizerFactory: null
+                ),
             };
 
             valueProvider = valueProvider ?? new SimpleValueProvider();
@@ -457,7 +496,11 @@ namespace Microsoft.AspNetCore.Mvc.Test
             {
                 ControllerContext = controllerContext,
                 MetadataProvider = metadataProvider,
-                ObjectValidator = new DefaultObjectValidator(metadataProvider, validatorProviders, new MvcOptions()),
+                ObjectValidator = new DefaultObjectValidator(
+                    metadataProvider,
+                    validatorProviders,
+                    new MvcOptions()
+                ),
                 TempData = tempData,
                 ViewData = viewData,
             };
@@ -476,7 +519,6 @@ namespace Microsoft.AspNetCore.Mvc.Test
 
         private class TestableController : Controller
         {
-
         }
 
         private class DisposableObject : IDisposable

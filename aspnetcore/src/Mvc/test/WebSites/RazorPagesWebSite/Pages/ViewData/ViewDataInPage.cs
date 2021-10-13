@@ -13,7 +13,7 @@ namespace RazorPagesWebSite
         public string Keywords { get; set; }
 
         [ViewData]
-        public  string Description { get; set;}
+        public string Description { get; set; }
 
         [ViewData(Key = "Author")]
         public string AuthorName { get; set; }

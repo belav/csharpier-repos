@@ -18,14 +18,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 {
     public partial class DocumentChangesTests
     {
-        protected override TestComposition Composition => base.Composition
-            .AddParts(typeof(GetLspSolutionHandlerProvider));
+        protected override TestComposition Composition =>
+            base.Composition.AddParts(typeof(GetLspSolutionHandlerProvider));
 
         [Fact]
         public async Task LinkedDocuments_AllTracked()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""CSProj1"">
         <Document FilePath=""C:\C.cs"">{|caret:|}</Document>
     </Project>
@@ -39,7 +39,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
             var documentText = "class C { }";
 
-            await DidOpen(testLspServer, CreateDidOpenTextDocumentParams(caretLocation, documentText));
+            await DidOpen(
+                testLspServer,
+                CreateDidOpenTextDocumentParams(caretLocation, documentText)
+            );
 
             var trackedDocuments = testLspServer.GetQueueAccessor().GetTrackedTexts();
             Assert.Equal(1, trackedDocuments.Count);
@@ -48,7 +51,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
             foreach (var document in solution.Projects.First().Documents)
             {
-                Assert.Equal(documentText, document.GetTextSynchronously(CancellationToken.None).ToString());
+                Assert.Equal(
+                    documentText,
+                    document.GetTextSynchronously(CancellationToken.None).ToString()
+                );
             }
 
             await DidClose(testLspServer, CreateDidCloseTextDocumentParams(caretLocation));
@@ -60,7 +66,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         public async Task LinkedDocuments_AllTextChanged()
         {
             var workspaceXml =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""CSProj1"">
         <Document FilePath=""C:\C.cs"">{|caret:|}</Document>
     </Project>
@@ -73,7 +79,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
             var caretLocation = locations["caret"].Single();
 
             var initialText =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -81,7 +87,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
             var updatedText =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -89,17 +95,26 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
     }
 }";
 
-            await DidOpen(testLspServer, CreateDidOpenTextDocumentParams(caretLocation, initialText));
+            await DidOpen(
+                testLspServer,
+                CreateDidOpenTextDocumentParams(caretLocation, initialText)
+            );
 
             Assert.Equal(1, testLspServer.GetQueueAccessor().GetTrackedTexts().Count);
 
-            await DidChange(testLspServer, CreateDidChangeTextDocumentParams(caretLocation.Uri, (4, 8, "// hi there")));
+            await DidChange(
+                testLspServer,
+                CreateDidChangeTextDocumentParams(caretLocation.Uri, (4, 8, "// hi there"))
+            );
 
             var solution = await GetLSPSolution(testLspServer, caretLocation.Uri);
 
             foreach (var document in solution.Projects.First().Documents)
             {
-                Assert.Equal(updatedText, document.GetTextSynchronously(CancellationToken.None).ToString());
+                Assert.Equal(
+                    updatedText,
+                    document.GetTextSynchronously(CancellationToken.None).ToString()
+                );
             }
 
             await DidClose(testLspServer, CreateDidCloseTextDocumentParams(caretLocation));
@@ -109,7 +124,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
 
         private static Task<Solution> GetLSPSolution(TestLspServer testLspServer, Uri uri)
         {
-            return testLspServer.ExecuteRequestAsync<Uri, Solution>(nameof(GetLSPSolutionHandler), uri, new ClientCapabilities(), null, CancellationToken.None);
+            return testLspServer.ExecuteRequestAsync<Uri, Solution>(
+                nameof(GetLSPSolutionHandler),
+                uri,
+                new ClientCapabilities(),
+                null,
+                CancellationToken.None
+            );
         }
 
         [Shared, ExportLspRequestHandlerProvider, PartNotDiscoverable]
@@ -118,11 +139,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public GetLspSolutionHandlerProvider()
-            {
-            }
+            public GetLspSolutionHandlerProvider() { }
 
-            public override ImmutableArray<IRequestHandler> CreateRequestHandlers() => ImmutableArray.Create<IRequestHandler>(new GetLSPSolutionHandler());
+            public override ImmutableArray<IRequestHandler> CreateRequestHandlers() =>
+                ImmutableArray.Create<IRequestHandler>(new GetLSPSolutionHandler());
         }
 
         private class GetLSPSolutionHandler : IRequestHandler<Uri, Solution>
@@ -134,11 +154,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.DocumentChanges
             public bool MutatesSolutionState => false;
             public bool RequiresLSPSolution => true;
 
-            public TextDocumentIdentifier? GetTextDocumentIdentifier(Uri request)
-                => new TextDocumentIdentifier { Uri = request };
+            public TextDocumentIdentifier? GetTextDocumentIdentifier(Uri request) =>
+                new TextDocumentIdentifier { Uri = request };
 
-            public Task<Solution> HandleRequestAsync(Uri request, RequestContext context, CancellationToken cancellationToken)
-                => Task.FromResult(context.Solution!);
+            public Task<Solution> HandleRequestAsync(
+                Uri request,
+                RequestContext context,
+                CancellationToken cancellationToken
+            ) => Task.FromResult(context.Solution!);
         }
     }
 }

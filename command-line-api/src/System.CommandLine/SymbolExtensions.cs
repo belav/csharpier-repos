@@ -12,23 +12,20 @@ namespace System.CommandLine
             switch (symbol)
             {
                 case IOption option:
-                    return new[]
-                    {
-                        option.Argument
-                    };
+                    return new[] { option.Argument };
                 case ICommand command:
                     return command.Arguments;
                 case IArgument argument:
-                    return new[]
-                    {
-                        argument
-                    };
+                    return new[] { argument };
                 default:
                     throw new NotSupportedException();
             }
         }
 
-        public static IEnumerable<string?> GetSuggestions(this ISymbol symbol, string? textToMatch = null)
+        public static IEnumerable<string?> GetSuggestions(
+            this ISymbol symbol,
+            string? textToMatch = null
+        )
         {
             return symbol.GetSuggestions(null, textToMatch);
         }

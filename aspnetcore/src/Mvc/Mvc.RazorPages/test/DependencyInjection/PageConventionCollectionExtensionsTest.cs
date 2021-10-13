@@ -35,10 +35,12 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Same(filter, Assert.Single(model.Filters)),
                 model => Assert.Same(filter, Assert.Single(model.Filters)),
-                model => Assert.Same(filter, Assert.Single(model.Filters)));
+                model => Assert.Same(filter, Assert.Single(model.Filters))
+            );
         }
 
         [Fact]
@@ -59,7 +61,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.EndpointMetadata),
                 model =>
                 {
@@ -73,7 +76,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     Assert.Empty(model.Filters);
                     Assert.IsType<AuthorizeAttribute>(model.EndpointMetadata[0]);
                     Assert.IsType<AllowAnonymousAttribute>(model.EndpointMetadata[1]);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -94,7 +98,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
@@ -106,7 +111,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     Assert.Equal("/Users/Contact", model.ViewEnginePath);
                     Assert.IsType<AuthorizeFilter>(model.Filters[0]);
                     Assert.IsType<AllowAnonymousFilter>(model.Filters[1]);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -117,7 +123,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var models = new[]
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Profile.cshtml", "/Profile", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Profile.cshtml",
+                    "/Profile",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -125,14 +135,16 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Profile.cshtml", model.RelativePath);
                     Assert.Empty(model.Filters);
                     Assert.IsType<AllowAnonymousAttribute>(Assert.Single(model.EndpointMetadata));
-                });
+                }
+            );
         }
 
         [Fact]
@@ -143,7 +155,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var models = new[]
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Profile.cshtml", "/Profile", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Profile.cshtml",
+                    "/Profile",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -151,13 +167,15 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Profile.cshtml", model.RelativePath);
                     Assert.IsType<AllowAnonymousFilter>(Assert.Single(model.Filters));
-                });
+                }
+            );
         }
 
         [Theory]
@@ -180,35 +198,45 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model =>
                 {
                     Assert.Equal("/Index", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    Assert.Collection(model.EndpointMetadata,
-                        metadata => Assert.IsType<AuthorizeAttribute>(metadata));
+                    Assert.Collection(
+                        model.EndpointMetadata,
+                        metadata => Assert.IsType<AuthorizeAttribute>(metadata)
+                    );
                 },
                 model =>
                 {
                     Assert.Equal("/Users/Account", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    Assert.Collection(model.EndpointMetadata,
+                    Assert.Collection(
+                        model.EndpointMetadata,
                         metadata => Assert.IsType<AuthorizeAttribute>(metadata),
-                        metadata => Assert.IsType<AllowAnonymousAttribute>(metadata));
+                        metadata => Assert.IsType<AllowAnonymousAttribute>(metadata)
+                    );
                 },
                 model =>
                 {
                     Assert.Equal("/Users/Contact", model.ViewEnginePath);
-                    Assert.Collection(model.EndpointMetadata,
+                    Assert.Collection(
+                        model.EndpointMetadata,
                         metadata => Assert.IsType<AuthorizeAttribute>(metadata),
-                        metadata => Assert.IsType<AllowAnonymousAttribute>(metadata));
-                });
+                        metadata => Assert.IsType<AllowAnonymousAttribute>(metadata)
+                    );
+                }
+            );
         }
 
         [Theory]
         [InlineData("/Users")]
         [InlineData("/Users/")]
-        public void AuthorizePage_WithoutEndpointRouting_AddsAllowAnonymousFilterToPageUnderFolder(string folderName)
+        public void AuthorizePage_WithoutEndpointRouting_AddsAllowAnonymousFilterToPageUnderFolder(
+            string folderName
+        )
         {
             // Arrange
             var conventions = GetConventions(enableEndpointRouting: false);
@@ -225,7 +253,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model =>
                 {
                     Assert.Equal("/Index", model.ViewEnginePath);
@@ -242,7 +271,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     Assert.Equal("/Users/Contact", model.ViewEnginePath);
                     Assert.IsType<AuthorizeFilter>(model.Filters[0]);
                     Assert.IsType<AllowAnonymousFilter>(model.Filters[1]);
-                });
+                }
+            );
         }
 
         [Theory]
@@ -265,36 +295,46 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model =>
                 {
                     Assert.Equal("/Index", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    Assert.Collection(model.EndpointMetadata,
-                        metadata => Assert.IsType<AuthorizeAttribute>(metadata));
+                    Assert.Collection(
+                        model.EndpointMetadata,
+                        metadata => Assert.IsType<AuthorizeAttribute>(metadata)
+                    );
                 },
                 model =>
                 {
                     Assert.Equal("/Users/Account", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    Assert.Collection(model.EndpointMetadata,
+                    Assert.Collection(
+                        model.EndpointMetadata,
                         metadata => Assert.IsType<AuthorizeAttribute>(metadata),
-                        metadata => Assert.IsType<AllowAnonymousAttribute>(metadata));
+                        metadata => Assert.IsType<AllowAnonymousAttribute>(metadata)
+                    );
                 },
                 model =>
                 {
                     Assert.Equal("/Users/Contact", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    Assert.Collection(model.EndpointMetadata,
+                    Assert.Collection(
+                        model.EndpointMetadata,
                         metadata => Assert.IsType<AuthorizeAttribute>(metadata),
-                        metadata => Assert.IsType<AllowAnonymousAttribute>(metadata));
-                });
+                        metadata => Assert.IsType<AllowAnonymousAttribute>(metadata)
+                    );
+                }
+            );
         }
 
         [Theory]
         [InlineData("/Users")]
         [InlineData("/Users/")]
-        public void AuthorizePage_WithoutEndpointRouting_AddsAllowAnonymousFilterToPagesUnderFolder(string folderName)
+        public void AuthorizePage_WithoutEndpointRouting_AddsAllowAnonymousFilterToPagesUnderFolder(
+            string folderName
+        )
         {
             // Arrange
             var conventions = GetConventions(enableEndpointRouting: false);
@@ -311,7 +351,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model =>
                 {
                     Assert.Equal("/Index", model.ViewEnginePath);
@@ -328,7 +369,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     Assert.Equal("/Users/Contact", model.ViewEnginePath);
                     Assert.IsType<AuthorizeFilter>(model.Filters[0]);
                     Assert.IsType<AllowAnonymousFilter>(model.Filters[1]);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -340,9 +382,21 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
                 CreateApplicationModel("/Mange/Profile.cshtml", "/Manage/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/Profile.cshtml", "/Manage/Profile", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/2FA.cshtml", "/Manage/2FA", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/View/OrderHistory.cshtml", "/View/OrderHistory", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/Profile.cshtml",
+                    "/Manage/Profile",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/2FA.cshtml",
+                    "/Manage/2FA",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/View/OrderHistory.cshtml",
+                    "/View/OrderHistory",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -350,7 +404,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.EndpointMetadata),
                 model => Assert.Empty(model.EndpointMetadata),
                 model =>
@@ -365,7 +420,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     Assert.Empty(model.Filters);
                     Assert.IsType<AllowAnonymousAttribute>(Assert.Single(model.EndpointMetadata));
                 },
-                model => Assert.Empty(model.EndpointMetadata));
+                model => Assert.Empty(model.EndpointMetadata)
+            );
         }
 
         [Fact]
@@ -377,9 +433,21 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
                 CreateApplicationModel("/Mange/Profile.cshtml", "/Manage/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/Profile.cshtml", "/Manage/Profile", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/2FA.cshtml", "/Manage/2FA", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/View/OrderHistory.cshtml", "/View/OrderHistory", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/Profile.cshtml",
+                    "/Manage/Profile",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/2FA.cshtml",
+                    "/Manage/2FA",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/View/OrderHistory.cshtml",
+                    "/View/OrderHistory",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -387,7 +455,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model => Assert.Empty(model.Filters),
                 model =>
@@ -400,7 +469,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     Assert.Equal("/Areas/Accounts/Pages/Manage/2FA.cshtml", model.RelativePath);
                     Assert.IsType<AllowAnonymousFilter>(Assert.Single(model.Filters));
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Fact]
@@ -420,16 +490,20 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Users/Account", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Equal("Manage-Accounts", authorizeData.Policy);
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Fact]
@@ -449,16 +523,22 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Users/Account", model.ViewEnginePath);
-                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(authorizeFilter.AuthorizeData));
+                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(
+                        Assert.Single(model.Filters)
+                    );
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(authorizeFilter.AuthorizeData)
+                    );
                     Assert.Equal("Manage-Accounts", authorizeData.Policy);
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Fact]
@@ -469,7 +549,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var models = new[]
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Profile.cshtml", "/Profile", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Profile.cshtml",
+                    "/Profile",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -477,15 +561,19 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Profile.cshtml", model.RelativePath);
                     Assert.Empty(model.Filters);
-                    var authorizeAttribute = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeAttribute = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Empty(authorizeAttribute.Policy);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -496,7 +584,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var models = new[]
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Profile.cshtml", "/Profile", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Profile.cshtml",
+                    "/Profile",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -504,7 +596,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
@@ -512,7 +605,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     var authFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
                     var authorizeAttribute = Assert.Single(authFilter.AuthorizeData);
                     Assert.Empty(authorizeAttribute.Policy);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -523,7 +617,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var models = new[]
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Profile.cshtml", "/Profile", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Profile.cshtml",
+                    "/Profile",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -531,15 +629,19 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Profile.cshtml", model.RelativePath);
                     Assert.Empty(model.Filters);
-                    var authorizeAttribute = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeAttribute = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Equal("custom", authorizeAttribute.Policy);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -550,7 +652,11 @@ namespace Microsoft.Extensions.DependencyInjection
             var models = new[]
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Profile.cshtml", "/Profile", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Profile.cshtml",
+                    "/Profile",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -558,7 +664,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
@@ -566,7 +673,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     var authFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
                     var authorizeAttribute = Assert.Single(authFilter.AuthorizeData);
                     Assert.Equal("custom", authorizeAttribute.Policy);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -586,16 +694,20 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Users/Account", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Equal(string.Empty, authorizeData.Policy);
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Fact]
@@ -615,22 +727,30 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Users/Account", model.ViewEnginePath);
-                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(authorizeFilter.AuthorizeData));
+                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(
+                        Assert.Single(model.Filters)
+                    );
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(authorizeFilter.AuthorizeData)
+                    );
                     Assert.Equal(string.Empty, authorizeData.Policy);
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Theory]
         [InlineData("/Users")]
         [InlineData("/Users/")]
-        public void AuthorizePage_WithoutEndpointRouting_AddsAuthorizeFilterWithPolicyToPagesUnderFolder(string folderName)
+        public void AuthorizePage_WithoutEndpointRouting_AddsAuthorizeFilterWithPolicyToPagesUnderFolder(
+            string folderName
+        )
         {
             // Arrange
             var conventions = GetConventions();
@@ -646,28 +766,36 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Users/Account", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Equal("Manage-Accounts", authorizeData.Policy);
                 },
                 model =>
                 {
                     Assert.Equal("/Users/Contact", model.ViewEnginePath);
                     Assert.Empty(model.Filters);
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Equal("Manage-Accounts", authorizeData.Policy);
-                });
+                }
+            );
         }
 
         [Theory]
         [InlineData("/Users")]
         [InlineData("/Users/")]
-        public void AuthorizePage_WithoutEndpointRouting_AddsAuthorizeFilterWithoutPolicyToPagesUnderFolder(string folderName)
+        public void AuthorizePage_WithoutEndpointRouting_AddsAuthorizeFilterWithoutPolicyToPagesUnderFolder(
+            string folderName
+        )
         {
             // Arrange
             var conventions = GetConventions(enableEndpointRouting: false);
@@ -683,22 +811,32 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Users/Account", model.ViewEnginePath);
-                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(authorizeFilter.AuthorizeData));
+                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(
+                        Assert.Single(model.Filters)
+                    );
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(authorizeFilter.AuthorizeData)
+                    );
                     Assert.Equal(string.Empty, authorizeData.Policy);
                 },
                 model =>
                 {
                     Assert.Equal("/Users/Contact", model.ViewEnginePath);
-                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(authorizeFilter.AuthorizeData));
+                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(
+                        Assert.Single(model.Filters)
+                    );
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(authorizeFilter.AuthorizeData)
+                    );
                     Assert.Equal(string.Empty, authorizeData.Policy);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -710,9 +848,21 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
                 CreateApplicationModel("/Mange/Profile.cshtml", "/Manage/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/Profile.cshtml", "/Manage/Profile", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/2FA.cshtml", "/Manage/2FA", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/View/OrderHistory.cshtml", "/View/OrderHistory", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/Profile.cshtml",
+                    "/Manage/Profile",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/2FA.cshtml",
+                    "/Manage/2FA",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/View/OrderHistory.cshtml",
+                    "/View/OrderHistory",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -720,24 +870,30 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Manage/Profile.cshtml", model.RelativePath);
                     Assert.Empty(model.Filters);
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Empty(authorizeData.Policy);
                 },
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Manage/2FA.cshtml", model.RelativePath);
                     Assert.Empty(model.Filters);
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Empty(authorizeData.Policy);
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Fact]
@@ -749,9 +905,21 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
                 CreateApplicationModel("/Mange/Profile.cshtml", "/Manage/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/Profile.cshtml", "/Manage/Profile", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/2FA.cshtml", "/Manage/2FA", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/View/OrderHistory.cshtml", "/View/OrderHistory", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/Profile.cshtml",
+                    "/Manage/Profile",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/2FA.cshtml",
+                    "/Manage/2FA",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/View/OrderHistory.cshtml",
+                    "/View/OrderHistory",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -759,24 +927,34 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Manage/Profile.cshtml", model.RelativePath);
-                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(authorizeFilter.AuthorizeData));
+                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(
+                        Assert.Single(model.Filters)
+                    );
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(authorizeFilter.AuthorizeData)
+                    );
                     Assert.Empty(authorizeData.Policy);
                 },
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Manage/2FA.cshtml", model.RelativePath);
-                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(authorizeFilter.AuthorizeData));
+                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(
+                        Assert.Single(model.Filters)
+                    );
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(authorizeFilter.AuthorizeData)
+                    );
                     Assert.Empty(authorizeData.Policy);
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Fact]
@@ -788,9 +966,21 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
                 CreateApplicationModel("/Mange/Profile.cshtml", "/Manage/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/Profile.cshtml", "/Manage/Profile", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/2FA.cshtml", "/Manage/2FA", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/View/OrderHistory.cshtml", "/View/OrderHistory", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/Profile.cshtml",
+                    "/Manage/Profile",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/2FA.cshtml",
+                    "/Manage/2FA",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/View/OrderHistory.cshtml",
+                    "/View/OrderHistory",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -798,24 +988,30 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.EndpointMetadata),
                 model => Assert.Empty(model.EndpointMetadata),
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Manage/Profile.cshtml", model.RelativePath);
                     Assert.Empty(model.Filters);
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Equal("custom", authorizeData.Policy);
                 },
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Manage/2FA.cshtml", model.RelativePath);
                     Assert.Empty(model.Filters);
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(model.EndpointMetadata));
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(model.EndpointMetadata)
+                    );
                     Assert.Equal("custom", authorizeData.Policy);
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Fact]
@@ -827,9 +1023,21 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 CreateApplicationModel("/Profile.cshtml", "/Profile"),
                 CreateApplicationModel("/Mange/Profile.cshtml", "/Manage/Profile"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/Profile.cshtml", "/Manage/Profile", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/Manage/2FA.cshtml", "/Manage/2FA", "Accounts"),
-                CreateApplicationModel("/Areas/Accounts/Pages/View/OrderHistory.cshtml", "/View/OrderHistory", "Accounts"),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/Profile.cshtml",
+                    "/Manage/Profile",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/Manage/2FA.cshtml",
+                    "/Manage/2FA",
+                    "Accounts"
+                ),
+                CreateApplicationModel(
+                    "/Areas/Accounts/Pages/View/OrderHistory.cshtml",
+                    "/View/OrderHistory",
+                    "Accounts"
+                ),
             };
 
             // Act
@@ -837,24 +1045,34 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model => Assert.Empty(model.Filters),
                 model => Assert.Empty(model.Filters),
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Manage/Profile.cshtml", model.RelativePath);
-                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(authorizeFilter.AuthorizeData));
+                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(
+                        Assert.Single(model.Filters)
+                    );
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(authorizeFilter.AuthorizeData)
+                    );
                     Assert.Equal("custom", authorizeData.Policy);
                 },
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Manage/2FA.cshtml", model.RelativePath);
-                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(Assert.Single(model.Filters));
-                    var authorizeData = Assert.IsType<AuthorizeAttribute>(Assert.Single(authorizeFilter.AuthorizeData));
+                    var authorizeFilter = Assert.IsType<AuthorizeFilter>(
+                        Assert.Single(model.Filters)
+                    );
+                    var authorizeData = Assert.IsType<AuthorizeAttribute>(
+                        Assert.Single(authorizeFilter.AuthorizeData)
+                    );
                     Assert.Equal("custom", authorizeData.Policy);
                 },
-                model => Assert.Empty(model.Filters));
+                model => Assert.Empty(model.Filters)
+            );
         }
 
         [Fact]
@@ -874,10 +1092,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 },
                 new PageRouteModel("/Pages/About.cshtml", "/About")
                 {
-                    Selectors =
-                    {
-                        CreateSelectorModel("About"),
-                    }
+                    Selectors = { CreateSelectorModel("About"), }
                 }
             };
 
@@ -886,11 +1101,13 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model =>
                 {
                     Assert.Equal("/Index", model.ViewEnginePath);
-                    Assert.Collection(model.Selectors,
+                    Assert.Collection(
+                        model.Selectors,
                         selector =>
                         {
                             Assert.Equal("Index", selector.AttributeRouteModel.Template);
@@ -905,18 +1122,22 @@ namespace Microsoft.Extensions.DependencyInjection
                         {
                             Assert.Equal("Different-Route", selector.AttributeRouteModel.Template);
                             Assert.False(selector.AttributeRouteModel.SuppressLinkGeneration);
-                        });
+                        }
+                    );
                 },
                 model =>
                 {
                     Assert.Equal("/About", model.ViewEnginePath);
-                    Assert.Collection(model.Selectors,
+                    Assert.Collection(
+                        model.Selectors,
                         selector =>
                         {
                             Assert.Equal("About", selector.AttributeRouteModel.Template);
                             Assert.False(selector.AttributeRouteModel.SuppressLinkGeneration);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -928,17 +1149,11 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 new PageRouteModel("/Pages/Profile.cshtml", "/Profile")
                 {
-                    Selectors =
-                    {
-                        CreateSelectorModel("Profile"),
-                    }
+                    Selectors = { CreateSelectorModel("Profile"), }
                 },
                 new PageRouteModel("/Areas/Accounts/Pages/Profile.cshtml", "/Profile", "Accounts")
                 {
-                    Selectors =
-                    {
-                        CreateSelectorModel("Accounts/Profile"),
-                    }
+                    Selectors = { CreateSelectorModel("Accounts/Profile"), }
                 }
             };
 
@@ -947,21 +1162,25 @@ namespace Microsoft.Extensions.DependencyInjection
             ApplyConventions(conventions, models);
 
             // Assert
-            Assert.Collection(models,
+            Assert.Collection(
+                models,
                 model =>
                 {
                     Assert.Equal("/Pages/Profile.cshtml", model.RelativePath);
-                    Assert.Collection(model.Selectors,
+                    Assert.Collection(
+                        model.Selectors,
                         selector =>
                         {
                             Assert.Equal("Profile", selector.AttributeRouteModel.Template);
                             Assert.False(selector.AttributeRouteModel.SuppressLinkGeneration);
-                        });
+                        }
+                    );
                 },
                 model =>
                 {
                     Assert.Equal("/Areas/Accounts/Pages/Profile.cshtml", model.RelativePath);
-                    Assert.Collection(model.Selectors,
+                    Assert.Collection(
+                        model.Selectors,
                         selector =>
                         {
                             Assert.Equal("Accounts/Profile", selector.AttributeRouteModel.Template);
@@ -971,20 +1190,26 @@ namespace Microsoft.Extensions.DependencyInjection
                         {
                             Assert.Equal("Different-Route", selector.AttributeRouteModel.Template);
                             Assert.False(selector.AttributeRouteModel.SuppressLinkGeneration);
-                        });
-                });
+                        }
+                    );
+                }
+            );
         }
 
         private PageConventionCollection GetConventions(bool enableEndpointRouting = true)
         {
             var options = new MvcOptions { EnableEndpointRouting = enableEndpointRouting };
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton<IOptions<MvcOptions>>(Options.Options.Create(options))
+            var serviceProvider = new ServiceCollection().AddSingleton<IOptions<MvcOptions>>(
+                    Options.Options.Create(options)
+                )
                 .BuildServiceProvider();
             return new PageConventionCollection(serviceProvider);
         }
 
-        private static SelectorModel CreateSelectorModel(string template, bool suppressLinkGeneration = false)
+        private static SelectorModel CreateSelectorModel(
+            string template,
+            bool suppressLinkGeneration = false
+        )
         {
             return new SelectorModel
             {
@@ -996,7 +1221,10 @@ namespace Microsoft.Extensions.DependencyInjection
             };
         }
 
-        private static void ApplyConventions(PageConventionCollection conventions, PageRouteModel[] models)
+        private static void ApplyConventions(
+            PageConventionCollection conventions,
+            PageRouteModel[] models
+        )
         {
             foreach (var convention in conventions.OfType<IPageRouteModelConvention>())
             {
@@ -1006,7 +1234,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
             }
         }
-        private static void ApplyConventions(PageConventionCollection conventions, PageApplicationModel[] models)
+        private static void ApplyConventions(
+            PageConventionCollection conventions,
+            PageApplicationModel[] models
+        )
         {
             foreach (var convention in conventions.OfType<IPageApplicationModelConvention>())
             {
@@ -1017,7 +1248,11 @@ namespace Microsoft.Extensions.DependencyInjection
             }
         }
 
-        private PageApplicationModel CreateApplicationModel(string relativePath, string viewEnginePath, string areaName = null)
+        private PageApplicationModel CreateApplicationModel(
+            string relativePath,
+            string viewEnginePath,
+            string areaName = null
+        )
         {
             var descriptor = new PageActionDescriptor
             {
@@ -1026,7 +1261,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 AreaName = areaName,
             };
 
-            return new PageApplicationModel(descriptor, typeof(object).GetTypeInfo(), new object[0]);
+            return new PageApplicationModel(
+                descriptor,
+                typeof(object).GetTypeInfo(),
+                new object[0]
+            );
         }
     }
 }

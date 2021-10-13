@@ -24,51 +24,34 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 {
     [ExcludeFromCodeCoverage]
     [Guid(Guids.CSharpLanguageServiceIdString)]
-    internal partial class CSharpLanguageService : AbstractLanguageService<CSharpPackage, CSharpLanguageService>
+    internal partial class CSharpLanguageService
+        : AbstractLanguageService<CSharpPackage, CSharpLanguageService>
     {
-        internal CSharpLanguageService(CSharpPackage package)
-            : base(package)
-        {
-        }
+        internal CSharpLanguageService(CSharpPackage package) : base(package) { }
 
         protected override Guid DebuggerLanguageId
         {
-            get
-            {
-                return Guids.CSharpDebuggerLanguageId;
-            }
+            get { return Guids.CSharpDebuggerLanguageId; }
         }
 
         protected override string ContentTypeName
         {
-            get
-            {
-                return ContentTypeNames.CSharpContentType;
-            }
+            get { return ContentTypeNames.CSharpContentType; }
         }
 
         public override Guid LanguageServiceId
         {
-            get
-            {
-                return Guids.CSharpLanguageServiceId;
-            }
+            get { return Guids.CSharpLanguageServiceId; }
         }
 
         protected override string LanguageName
         {
-            get
-            {
-                return CSharpVSResources.CSharp;
-            }
+            get { return CSharpVSResources.CSharp; }
         }
 
         protected override string RoslynLanguageName
         {
-            get
-            {
-                return LanguageNames.CSharp;
-            }
+            get { return LanguageNames.CSharp; }
         }
 
         protected override AbstractDebuggerIntelliSenseContext CreateContext(
@@ -76,15 +59,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             IVsTextView vsTextView,
             IVsTextLines debuggerBuffer,
             ITextBuffer subjectBuffer,
-            Microsoft.VisualStudio.TextManager.Interop.TextSpan[] currentStatementSpan)
+            Microsoft.VisualStudio.TextManager.Interop.TextSpan[] currentStatementSpan
+        )
         {
-            return new CSharpDebuggerIntelliSenseContext(view,
+            return new CSharpDebuggerIntelliSenseContext(
+                view,
                 vsTextView,
                 debuggerBuffer,
                 subjectBuffer,
                 currentStatementSpan,
                 this.Package.ComponentModel,
-                this.SystemServiceProvider);
+                this.SystemServiceProvider
+            );
         }
     }
 }

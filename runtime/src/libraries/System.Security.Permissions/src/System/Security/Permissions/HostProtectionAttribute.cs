@@ -4,7 +4,11 @@
 namespace System.Security.Permissions
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [AttributeUsage((AttributeTargets)(4205), AllowMultiple = true, Inherited = false)]
     public sealed partial class HostProtectionAttribute : CodeAccessSecurityAttribute
@@ -21,6 +25,9 @@ namespace System.Security.Permissions
         public bool SharedState { get; set; }
         public bool Synchronization { get; set; }
         public bool UI { get; set; }
-        public override IPermission CreatePermission() { return default(IPermission); }
+        public override IPermission CreatePermission()
+        {
+            return default(IPermission);
+        }
     }
 }

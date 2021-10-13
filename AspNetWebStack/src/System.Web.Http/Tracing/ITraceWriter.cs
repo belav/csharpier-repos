@@ -36,6 +36,11 @@ namespace System.Web.Http.Tracing
         /// <param name="level">The <see cref="TraceLevel"/> at which to write this trace.</param>
         /// <param name="traceAction">The action to invoke if tracing is enabled.  The caller is expected
         /// to fill in any or all of the values of the given <see cref="TraceRecord"/> in this action.</param>
-        void Trace(HttpRequestMessage request, string category, TraceLevel level, Action<TraceRecord> traceAction);
+        void Trace(
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            Action<TraceRecord> traceAction
+        );
     }
 }

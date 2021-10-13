@@ -11,6 +11,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
 {
     internal static class FSharpNavigationOptions
     {
-        public static Option<bool> PreferProvisionalTab { get; } = (Option<bool>)NavigationOptions.PreferProvisionalTab;
+        public static Option<bool> PreferProvisionalTab { get; } =
+            (Option<bool>)NavigationOptions.PreferProvisionalTab;
     }
 }

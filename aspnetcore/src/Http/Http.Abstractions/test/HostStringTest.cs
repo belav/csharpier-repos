@@ -16,7 +16,11 @@ namespace Microsoft.AspNetCore.Http
         public void CtorThrows_IfPortIsNotGreaterThanZero(int port)
         {
             // Act and Assert
-            ExceptionAssert.ThrowsArgumentOutOfRange(() => new HostString("localhost", port), "port", "The value must be greater than zero.");
+            ExceptionAssert.ThrowsArgumentOutOfRange(
+                () => new HostString("localhost", port),
+                "port",
+                "The value must be greater than zero."
+            );
         }
 
         [Theory]
@@ -81,7 +85,12 @@ namespace Microsoft.AspNetCore.Http
         [InlineData("[2001:db8:a0b:12f0::1]", 5000, "[2001:db8:a0b:12f0::1]", 5000)]
         [InlineData("2001:db8:a0b:12f0::1", 5000, "[2001:db8:a0b:12f0::1]", 5000)]
         [InlineData("本地主機", 5000, "本地主機", 5000)]
-        public void Ctor_CreatesFromHostAndPort(string sourceHost, int sourcePort, string expectedHost, int expectedPort)
+        public void Ctor_CreatesFromHostAndPort(
+            string sourceHost,
+            int sourcePort,
+            string expectedHost,
+            int expectedPort
+        )
         {
             // Arrange
             var hostString = new HostString(sourceHost, sourcePort);
@@ -169,7 +178,10 @@ namespace Microsoft.AspNetCore.Http
         [Fact]
         public void HostMatchThrowsForBadPort()
         {
-            Assert.Throws<FormatException>(() => HostString.MatchesAny("example.com:1abc", new StringSegment[] { "example.com" }));
+            Assert.Throws<FormatException>(
+                () =>
+                    HostString.MatchesAny("example.com:1abc", new StringSegment[] { "example.com" })
+            );
         }
     }
 }

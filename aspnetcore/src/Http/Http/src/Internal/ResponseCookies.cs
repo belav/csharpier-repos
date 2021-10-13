@@ -16,8 +16,10 @@ namespace Microsoft.AspNetCore.Http
     /// </summary>
     internal class ResponseCookies : IResponseCookies
     {
-        internal const string EnableCookieNameEncoding = "Microsoft.AspNetCore.Http.EnableCookieNameEncoding";
-        internal bool _enableCookieNameEncoding = AppContext.TryGetSwitch(EnableCookieNameEncoding, out var enabled) && enabled;
+        internal const string EnableCookieNameEncoding =
+            "Microsoft.AspNetCore.Http.EnableCookieNameEncoding";
+        internal bool _enableCookieNameEncoding =
+            AppContext.TryGetSwitch(EnableCookieNameEncoding, out var enabled) && enabled;
 
         private readonly IFeatureCollection _features;
         private ILogger? _logger;
@@ -38,13 +40,16 @@ namespace Microsoft.AspNetCore.Http
         {
             var setCookieHeaderValue = new SetCookieHeaderValue(
                 _enableCookieNameEncoding ? Uri.EscapeDataString(key) : key,
-                Uri.EscapeDataString(value))
-            {
+                Uri.EscapeDataString(value)
+            ) {
                 Path = "/"
             };
             var cookieValue = setCookieHeaderValue.ToString();
 
-            Headers[HeaderNames.SetCookie] = StringValues.Concat(Headers[HeaderNames.SetCookie], cookieValue);
+            Headers[HeaderNames.SetCookie] = StringValues.Concat(
+                Headers[HeaderNames.SetCookie],
+                cookieValue
+            );
         }
 
         /// <inheritdoc />
@@ -60,7 +65,8 @@ namespace Microsoft.AspNetCore.Http
             {
                 if (_logger == null)
                 {
-                    var services = _features.Get<Features.IServiceProvidersFeature>()?.RequestServices;
+                    var services =
+                        _features.Get<Features.IServiceProvidersFeature>()?.RequestServices;
                     _logger = services?.GetService<ILogger<ResponseCookies>>();
                 }
 
@@ -72,8 +78,8 @@ namespace Microsoft.AspNetCore.Http
 
             var setCookieHeaderValue = new SetCookieHeaderValue(
                 _enableCookieNameEncoding ? Uri.EscapeDataString(key) : key,
-                Uri.EscapeDataString(value))
-            {
+                Uri.EscapeDataString(value)
+            ) {
                 Domain = options.Domain,
                 Path = options.Path,
                 Expires = options.Expires,
@@ -85,7 +91,10 @@ namespace Microsoft.AspNetCore.Http
 
             var cookieValue = setCookieHeaderValue.ToString();
 
-            Headers[HeaderNames.SetCookie] = StringValues.Concat(Headers[HeaderNames.SetCookie], cookieValue);
+            Headers[HeaderNames.SetCookie] = StringValues.Concat(
+                Headers[HeaderNames.SetCookie],
+                cookieValue
+            );
         }
 
         /// <inheritdoc />
@@ -102,7 +111,8 @@ namespace Microsoft.AspNetCore.Http
                 throw new ArgumentNullException(nameof(options));
             }
 
-            var encodedKeyPlusEquals = (_enableCookieNameEncoding ? Uri.EscapeDataString(key) : key) + "=";
+            var encodedKeyPlusEquals =
+                (_enableCookieNameEncoding ? Uri.EscapeDataString(key) : key) + "=";
             bool domainHasValue = !string.IsNullOrEmpty(options.Domain);
             bool pathHasValue = !string.IsNullOrEmpty(options.Path);
 
@@ -110,18 +120,20 @@ namespace Microsoft.AspNetCore.Http
             if (domainHasValue)
             {
                 rejectPredicate = (value, encKeyPlusEquals, opts) =>
-                    value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase) &&
-                        value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase) != -1;
+                    value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase)
+                    && value.IndexOf($"domain={opts.Domain}", StringComparison.OrdinalIgnoreCase)
+                        != -1;
             }
             else if (pathHasValue)
             {
                 rejectPredicate = (value, encKeyPlusEquals, opts) =>
-                    value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase) &&
-                        value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
+                    value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase)
+                    && value.IndexOf($"path={opts.Path}", StringComparison.OrdinalIgnoreCase) != -1;
             }
             else
             {
-                rejectPredicate = (value, encKeyPlusEquals, opts) => value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase);
+                rejectPredicate = (value, encKeyPlusEquals, opts) =>
+                    value.StartsWith(encKeyPlusEquals, StringComparison.OrdinalIgnoreCase);
             }
 
             var existingValues = Headers[HeaderNames.SetCookie];
@@ -141,23 +153,29 @@ namespace Microsoft.AspNetCore.Http
                 Headers[HeaderNames.SetCookie] = new StringValues(newValues.ToArray());
             }
 
-            Append(key, string.Empty, new CookieOptions
-            {
-                Path = options.Path,
-                Domain = options.Domain,
-                Expires = DateTimeOffset.UnixEpoch,
-                Secure = options.Secure,
-                HttpOnly = options.HttpOnly,
-                SameSite = options.SameSite
-            });
+            Append(
+                key,
+                string.Empty,
+                new CookieOptions
+                {
+                    Path = options.Path,
+                    Domain = options.Domain,
+                    Expires = DateTimeOffset.UnixEpoch,
+                    Secure = options.Secure,
+                    HttpOnly = options.HttpOnly,
+                    SameSite = options.SameSite
+                }
+            );
         }
 
         private static class Log
         {
-            private static readonly Action<ILogger, string, Exception?> _samesiteNotSecure = LoggerMessage.Define<string>(
-                LogLevel.Warning,
-                EventIds.SameSiteNotSecure,
-                "The cookie '{name}' has set 'SameSite=None' and must also set 'Secure'.");
+            private static readonly Action<ILogger, string, Exception?> _samesiteNotSecure =
+                LoggerMessage.Define<string>(
+                    LogLevel.Warning,
+                    EventIds.SameSiteNotSecure,
+                    "The cookie '{name}' has set 'SameSite=None' and must also set 'Secure'."
+                );
 
             public static void SameSiteCookieNotSecure(ILogger logger, string name)
             {

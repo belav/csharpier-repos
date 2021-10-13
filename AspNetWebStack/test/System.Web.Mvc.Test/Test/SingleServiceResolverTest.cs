@@ -13,16 +13,32 @@ namespace System.Web.Mvc.Test
         {
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { new SingleServiceResolver<TestProvider>(null, null, "TestProvider.Current"); },
-                "currentValueThunk");
+                delegate
+                {
+                    new SingleServiceResolver<TestProvider>(null, null, "TestProvider.Current");
+                },
+                "currentValueThunk"
+            );
 
             Assert.ThrowsArgumentNull(
-                delegate { new SingleServiceResolver<TestProvider>(null, null, "TestProvider.Current"); },
-                "currentValueThunk");
+                delegate
+                {
+                    new SingleServiceResolver<TestProvider>(null, null, "TestProvider.Current");
+                },
+                "currentValueThunk"
+            );
 
             Assert.ThrowsArgumentNull(
-                delegate { new SingleServiceResolver<TestProvider>(() => null, null, "TestProvider.Current"); },
-                "defaultValue");
+                delegate
+                {
+                    new SingleServiceResolver<TestProvider>(
+                        () => null,
+                        null,
+                        "TestProvider.Current"
+                    );
+                },
+                "defaultValue"
+            );
         }
 
         [Fact]
@@ -36,7 +52,13 @@ namespace System.Web.Mvc.Test
             resolver.Setup(r => r.GetService(typeof(TestProvider)))
                 .Returns(providerFromServiceLocation);
 
-            SingleServiceResolver<TestProvider> singleResolver = new SingleServiceResolver<TestProvider>(() => null, providerFromDefaultValue, resolver.Object, "TestProvider.Current");
+            SingleServiceResolver<TestProvider> singleResolver =
+                new SingleServiceResolver<TestProvider>(
+                    () => null,
+                    providerFromDefaultValue,
+                    resolver.Object,
+                    "TestProvider.Current"
+                );
 
             // Act
             TestProvider returnedProvider = singleResolver.Current;
@@ -52,7 +74,13 @@ namespace System.Web.Mvc.Test
             TestProvider providerFromDefaultValue = new TestProvider();
             TestProvider providerFromCurrentValueThunk = null;
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();
-            SingleServiceResolver<TestProvider> singleResolver = new SingleServiceResolver<TestProvider>(() => providerFromCurrentValueThunk, providerFromDefaultValue, resolver.Object, "TestProvider.Current");
+            SingleServiceResolver<TestProvider> singleResolver =
+                new SingleServiceResolver<TestProvider>(
+                    () => providerFromCurrentValueThunk,
+                    providerFromDefaultValue,
+                    resolver.Object,
+                    "TestProvider.Current"
+                );
 
             // Act
             providerFromCurrentValueThunk = new TestProvider();
@@ -74,7 +102,13 @@ namespace System.Web.Mvc.Test
             resolver.Setup(r => r.GetService(typeof(TestProvider)))
                 .Returns(providerFromServiceLocation);
 
-            SingleServiceResolver<TestProvider> singleResolver = new SingleServiceResolver<TestProvider>(() => null, providerFromDefaultValue, resolver.Object, "TestProvider.Current");
+            SingleServiceResolver<TestProvider> singleResolver =
+                new SingleServiceResolver<TestProvider>(
+                    () => null,
+                    providerFromDefaultValue,
+                    resolver.Object,
+                    "TestProvider.Current"
+                );
 
             // Act
             TestProvider returnedProvider = singleResolver.Current;
@@ -93,7 +127,13 @@ namespace System.Web.Mvc.Test
             TestProvider providerFromDefaultValue = new TestProvider();
             TestProvider providerFromCurrentValueThunk = new TestProvider();
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();
-            SingleServiceResolver<TestProvider> singleResolver = new SingleServiceResolver<TestProvider>(() => providerFromCurrentValueThunk, providerFromDefaultValue, resolver.Object, "TestProvider.Current");
+            SingleServiceResolver<TestProvider> singleResolver =
+                new SingleServiceResolver<TestProvider>(
+                    () => providerFromCurrentValueThunk,
+                    providerFromDefaultValue,
+                    resolver.Object,
+                    "TestProvider.Current"
+                );
 
             // Act
             TestProvider returnedProvider = singleResolver.Current;
@@ -111,7 +151,13 @@ namespace System.Web.Mvc.Test
             //Arrange
             TestProvider providerFromDefaultValue = new TestProvider();
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();
-            SingleServiceResolver<TestProvider> singleResolver = new SingleServiceResolver<TestProvider>(() => null, providerFromDefaultValue, resolver.Object, "TestProvider.Current");
+            SingleServiceResolver<TestProvider> singleResolver =
+                new SingleServiceResolver<TestProvider>(
+                    () => null,
+                    providerFromDefaultValue,
+                    resolver.Object,
+                    "TestProvider.Current"
+                );
 
             //Act
             TestProvider returnedProvider = singleResolver.Current;
@@ -133,13 +179,19 @@ namespace System.Web.Mvc.Test
             resolver.Setup(r => r.GetService(typeof(TestProvider)))
                 .Returns(providerFromServiceLocation);
 
-            SingleServiceResolver<TestProvider> singleResolver = new SingleServiceResolver<TestProvider>(() => providerFromCurrentValueThunk, providerFromDefaultValue, resolver.Object, "TestProvider.Current");
+            SingleServiceResolver<TestProvider> singleResolver =
+                new SingleServiceResolver<TestProvider>(
+                    () => providerFromCurrentValueThunk,
+                    providerFromDefaultValue,
+                    resolver.Object,
+                    "TestProvider.Current"
+                );
 
             //Act & assert
             Assert.Throws<InvalidOperationException>(
                 () => singleResolver.Current,
                 "An instance of TestProvider was found in the resolver as well as a custom registered provider in TestProvider.Current. Please set only one or the other."
-                );
+            );
         }
 
         [Fact]
@@ -148,16 +200,23 @@ namespace System.Web.Mvc.Test
             // Arrange
             TestProvider providerFromDefaultValue = new TestProvider();
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>(MockBehavior.Strict);
-            SingleServiceResolver<TestProvider> singleResolver = new SingleServiceResolver<TestProvider>(() => null, providerFromDefaultValue, resolver.Object, "TestProvider.Current");
+            SingleServiceResolver<TestProvider> singleResolver =
+                new SingleServiceResolver<TestProvider>(
+                    () => null,
+                    providerFromDefaultValue,
+                    resolver.Object,
+                    "TestProvider.Current"
+                );
 
             // Act & Assert
             var ex = Assert.Throws<MockException>(() => singleResolver.Current);
             Assert.Equal(
-                "IDependencyResolver.GetService(System.Web.Mvc.Test.SingleServiceResolverTest+TestProvider) invocation failed with mock behavior Strict." +
-                Environment.NewLine +
-                "All invocations on the mock must have a corresponding setup.",
+                "IDependencyResolver.GetService(System.Web.Mvc.Test.SingleServiceResolverTest+TestProvider) invocation failed with mock behavior Strict."
+                    + Environment.NewLine
+                    + "All invocations on the mock must have a corresponding setup.",
                 ex.Message,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         private class TestProvider

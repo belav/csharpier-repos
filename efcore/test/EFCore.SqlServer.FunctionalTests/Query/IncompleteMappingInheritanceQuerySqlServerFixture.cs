@@ -3,9 +3,9 @@
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class IncompleteMappingInheritanceQuerySqlServerFixture : InheritanceQuerySqlServerFixture
+    public class IncompleteMappingInheritanceQuerySqlServerFixture
+        : InheritanceQuerySqlServerFixture
     {
-        protected override bool IsDiscriminatorMappingComplete
-            => false;
+        protected override bool IsDiscriminatorMappingComplete => false;
     }
 }

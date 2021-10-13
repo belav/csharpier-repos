@@ -19,8 +19,10 @@ namespace Microsoft.AspNetCore.Internal
                 if (_tempDirectory == null)
                 {
                     // Look for folders in the following order.
-                    var temp = Environment.GetEnvironmentVariable("ASPNETCORE_TEMP") ?? // ASPNETCORE_TEMP - User set temporary location.
-                               Path.GetTempPath();                                      // Fall back.
+                    var temp =
+                        Environment.GetEnvironmentVariable("ASPNETCORE_TEMP")
+                        ?? // ASPNETCORE_TEMP - User set temporary location.
+                        Path.GetTempPath(); // Fall back.
 
                     if (!Directory.Exists(temp))
                     {

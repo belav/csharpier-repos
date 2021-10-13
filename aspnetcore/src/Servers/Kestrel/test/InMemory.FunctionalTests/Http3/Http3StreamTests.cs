@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -35,7 +35,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var requestStream = await InitializeConnectionAndStreamsAsync(_echoApplication);
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers);
-            await requestStream.SendDataAsync(Encoding.ASCII.GetBytes("Hello world"), endStream: true);
+            await requestStream.SendDataAsync(
+                Encoding.ASCII.GetBytes("Hello world"),
+                endStream: true
+            );
 
             var responseHeaders = await requestStream.ExpectHeadersAsync();
             var responseData = await requestStream.ExpectDataAsync();
@@ -55,7 +58,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var requestStream = await InitializeConnectionAndStreamsAsync(_echoApplication);
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers);
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError, CoreStrings.FormatHttp3ErrorMethodInvalid(""));
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.FormatHttp3ErrorMethodInvalid("")
+            );
         }
 
         [Fact]
@@ -71,7 +77,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var requestStream = await InitializeConnectionAndStreamsAsync(_echoApplication);
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers);
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError, CoreStrings.FormatHttp3ErrorMethodInvalid("Hello,World"));
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.FormatHttp3ErrorMethodInvalid("Hello,World")
+            );
         }
 
         [Fact]
@@ -141,9 +150,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         public async Task OptionsStar_LeftOutOfPath()
         {
             var requestStream = await InitializeConnectionAndStreamsAsync(_echoPath);
-            var headers = new[] { new KeyValuePair<string, string>(HeaderNames.Method, "OPTIONS"),
+            var headers = new[]
+            {
+                new KeyValuePair<string, string>(HeaderNames.Method, "OPTIONS"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-                new KeyValuePair<string, string>(HeaderNames.Path, "*")};
+                new KeyValuePair<string, string>(HeaderNames.Path, "*")
+            };
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -162,9 +174,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var requestStream = await InitializeConnectionAndStreamsAsync(_echoPath);
 
-            var headers = new[] { new KeyValuePair<string, string>(HeaderNames.Method, "OPTIONS"),
+            var headers = new[]
+            {
+                new KeyValuePair<string, string>(HeaderNames.Method, "OPTIONS"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-                new KeyValuePair<string, string>(HeaderNames.Path, "/")};
+                new KeyValuePair<string, string>(HeaderNames.Path, "/")
+            };
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -181,18 +196,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task PathAndQuery_Separated()
         {
-            var requestStream = await InitializeConnectionAndStreamsAsync(context =>
-            {
-                context.Response.Headers["path"] = context.Request.Path.Value;
-                context.Response.Headers["query"] = context.Request.QueryString.Value;
-                context.Response.Headers["rawtarget"] = context.Features.Get<IHttpRequestFeature>().RawTarget;
-                return Task.CompletedTask;
-            });
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                context =>
+                {
+                    context.Response.Headers["path"] = context.Request.Path.Value;
+                    context.Response.Headers["query"] = context.Request.QueryString.Value;
+                    context.Response.Headers["rawtarget"] =
+                        context.Features.Get<IHttpRequestFeature>().RawTarget;
+                    return Task.CompletedTask;
+                }
+            );
 
             // :path and :scheme are not allowed, :authority is optional
-            var headers = new[] { new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
+            var headers = new[]
+            {
+                new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-                new KeyValuePair<string, string>(HeaderNames.Path, "/a/path?a&que%35ry")};
+                new KeyValuePair<string, string>(HeaderNames.Path, "/a/path?a&que%35ry")
+            };
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -218,17 +239,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [InlineData("/a/b/c/.%2E/d", "/a/b/d")] // Decode before navigation processing
         public async Task Path_DecodedAndNormalized(string input, string expected)
         {
-            var requestStream = await InitializeConnectionAndStreamsAsync(context =>
-            {
-                Assert.Equal(expected, context.Request.Path.Value);
-                Assert.Equal(input, context.Features.Get<IHttpRequestFeature>().RawTarget);
-                return Task.CompletedTask;
-            });
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                context =>
+                {
+                    Assert.Equal(expected, context.Request.Path.Value);
+                    Assert.Equal(input, context.Features.Get<IHttpRequestFeature>().RawTarget);
+                    return Task.CompletedTask;
+                }
+            );
 
             // :path and :scheme are not allowed, :authority is optional
-            var headers = new[] { new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
+            var headers = new[]
+            {
+                new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-                new KeyValuePair<string, string>(HeaderNames.Path, input)};
+                new KeyValuePair<string, string>(HeaderNames.Path, input)
+            };
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -248,12 +274,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var requestStream = await InitializeConnectionAndStreamsAsync(_noopApplication);
 
             // :path and :scheme are not allowed, :authority is optional
-            var headers = new[] { new KeyValuePair<string, string>(HeaderNames.Method, "CONNECT"),
-                new KeyValuePair<string, string>(headerName, value) };
+            var headers = new[]
+            {
+                new KeyValuePair<string, string>(HeaderNames.Method, "CONNECT"),
+                new KeyValuePair<string, string>(headerName, value)
+            };
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError, CoreStrings.Http3ErrorConnectMustNotSendSchemeOrPath);
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.Http3ErrorConnectMustNotSendSchemeOrPath
+            );
         }
 
         [Fact]
@@ -262,13 +294,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var requestStream = await InitializeConnectionAndStreamsAsync(_noopApplication);
 
             // :path and :scheme are not allowed, :authority is optional
-            var headers = new[] { new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
+            var headers = new[]
+            {
+                new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
-                new KeyValuePair<string, string>(HeaderNames.Scheme, "https") }; // Not the expected "http"
+                new KeyValuePair<string, string>(HeaderNames.Scheme, "https")
+            }; // Not the expected "http"
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError, CoreStrings.FormatHttp3StreamErrorSchemeMismatch("https", "http"));
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.FormatHttp3StreamErrorSchemeMismatch("https", "http")
+            );
         }
 
         [Fact]
@@ -424,8 +462,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var requestStream = await InitializeConnectionAndStreamsAsync(_noopApplication);
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError,
-                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("local=host:80"));
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("local=host:80")
+            );
         }
 
         [Fact]
@@ -443,8 +483,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var requestStream = await InitializeConnectionAndStreamsAsync(_noopApplication);
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError,
-                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("d=ef"));
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("d=ef")
+            );
         }
 
         [Fact]
@@ -462,8 +504,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var requestStream = await InitializeConnectionAndStreamsAsync(_noopApplication);
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError,
-                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("host1,host2"));
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("host1,host2")
+            );
         }
 
         [Fact]
@@ -474,16 +518,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             // https://github.com/aspnet/KestrelHttpServer/issues/2872
             var headers = new[]
             {
-                new KeyValuePair<string, string>(HeaderNames.Method, "GET" + new string('a', 1024 * 3)),
-                new KeyValuePair<string, string>(HeaderNames.Path, "/Hello/How/Are/You/" + new string('a', 1024 * 3)),
+                new KeyValuePair<string, string>(
+                    HeaderNames.Method,
+                    "GET" + new string('a', 1024 * 3)
+                ),
+                new KeyValuePair<string, string>(
+                    HeaderNames.Path,
+                    "/Hello/How/Are/You/" + new string('a', 1024 * 3)
+                ),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
-                new KeyValuePair<string, string>(HeaderNames.Authority, "localhost" + new string('a', 1024 * 3) + ":80"),
+                new KeyValuePair<string, string>(
+                    HeaderNames.Authority,
+                    "localhost" + new string('a', 1024 * 3) + ":80"
+                ),
             };
             var requestStream = await InitializeConnectionAndStreamsAsync(_noopApplication);
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError,
-                CoreStrings.BadRequest_RequestLineTooLong);
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.BadRequest_RequestLineTooLong
+            );
         }
 
         [Fact]
@@ -497,14 +552,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.ContentLength, "12"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                var buffer = new byte[100];
-                var read = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
-                Assert.Equal(12, read);
-                read = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
-                Assert.Equal(0, read);
-            });
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
+                {
+                    var buffer = new byte[100];
+                    var read = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
+                    Assert.Equal(12, read);
+                    read = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
+                    Assert.Equal(0, read);
+                }
+            );
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: false);
             await requestStream.SendDataAsync(new byte[12], endStream: true);
@@ -528,18 +585,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.ContentLength, "12"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                var buffer = new byte[100];
-                var read = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
-                var total = read;
-                while (read > 0)
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    read = await context.Request.Body.ReadAsync(buffer, total, buffer.Length - total);
-                    total += read;
+                    var buffer = new byte[100];
+                    var read = await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
+                    var total = read;
+                    while (read > 0)
+                    {
+                        read = await context.Request.Body.ReadAsync(
+                            buffer,
+                            total,
+                            buffer.Length - total
+                        );
+                        total += read;
+                    }
+                    Assert.Equal(12, total);
                 }
-                Assert.Equal(12, total);
-            });
+            );
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: false);
 
@@ -565,18 +628,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
                 new KeyValuePair<string, string>(HeaderNames.ContentLength, "12"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                var readResult = await context.Request.BodyReader.ReadAsync();
-                while (!readResult.IsCompleted)
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
-                    readResult = await context.Request.BodyReader.ReadAsync();
-                }
+                    var readResult = await context.Request.BodyReader.ReadAsync();
+                    while (!readResult.IsCompleted)
+                    {
+                        context.Request.BodyReader.AdvanceTo(
+                            readResult.Buffer.Start,
+                            readResult.Buffer.End
+                        );
+                        readResult = await context.Request.BodyReader.ReadAsync();
+                    }
 
-                Assert.Equal(12, readResult.Buffer.Length);
-                context.Request.BodyReader.AdvanceTo(readResult.Buffer.End);
-            });
+                    Assert.Equal(12, readResult.Buffer.Length);
+                    context.Request.BodyReader.AdvanceTo(readResult.Buffer.End);
+                }
+            );
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: false);
 
@@ -603,18 +671,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                var response = context.Response;
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
+                {
+                    var response = context.Response;
 
-                response.Headers.Add(HeaderNames.TransferEncoding, "chunked");
-                response.Headers.Add(HeaderNames.Upgrade, "websocket");
-                response.Headers.Add(HeaderNames.Connection, "Keep-Alive");
-                response.Headers.Add(HeaderNames.KeepAlive, "timeout=5, max=1000");
-                response.Headers.Add(HeaderNames.ProxyConnection, "keep-alive");
+                    response.Headers.Add(HeaderNames.TransferEncoding, "chunked");
+                    response.Headers.Add(HeaderNames.Upgrade, "websocket");
+                    response.Headers.Add(HeaderNames.Connection, "Keep-Alive");
+                    response.Headers.Add(HeaderNames.KeepAlive, "timeout=5, max=1000");
+                    response.Headers.Add(HeaderNames.ProxyConnection, "keep-alive");
 
-                await response.WriteAsync("Hello world");
-            });
+                    await response.WriteAsync("Hello world");
+                }
+            );
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -624,7 +694,13 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var responseData = await requestStream.ExpectDataAsync();
             Assert.Equal("Hello world", Encoding.ASCII.GetString(responseData.ToArray()));
 
-            Assert.Contains(LogMessages, m => m.Message.Equals("One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."));
+            Assert.Contains(
+                LogMessages,
+                m =>
+                    m.Message.Equals(
+                        "One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'."
+                    )
+            );
         }
 
         [Fact]
@@ -640,17 +716,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             };
 
             var requestDelegateCalled = false;
-            var requestStream = await InitializeConnectionAndStreamsAsync(c =>
-            {
-                // Bad content-length + end stream means the request delegate
-                // is never called by the server.
-                requestDelegateCalled = true;
-                return Task.CompletedTask;
-            });
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                c =>
+                {
+                    // Bad content-length + end stream means the request delegate
+                    // is never called by the server.
+                    requestDelegateCalled = true;
+                    return Task.CompletedTask;
+                }
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.ProtocolError, CoreStrings.Http3StreamErrorLessDataThanLength);
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.ProtocolError,
+                CoreStrings.Http3StreamErrorLessDataThanLength
+            );
 
             Assert.False(requestDelegateCalled);
         }
@@ -658,7 +739,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task EndRequestStream_ContinueReadingFromResponse()
         {
-            var headersTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var headersTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             var headers = new[]
             {
@@ -669,18 +752,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             var data = new byte[] { 1, 2, 3, 4, 5, 6 };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                await context.Response.BodyWriter.FlushAsync();
-
-                await headersTcs.Task;
-
-                for (var i = 0; i < data.Length; i++)
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    await Task.Delay(50);
-                    await context.Response.BodyWriter.WriteAsync(new byte[] { data[i] });
+                    await context.Response.BodyWriter.FlushAsync();
+
+                    await headersTcs.Task;
+
+                    for (var i = 0; i < data.Length; i++)
+                    {
+                        await Task.Delay(50);
+                        await context.Response.BodyWriter.WriteAsync(new byte[] { data[i] });
+                    }
                 }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
             await requestStream.ExpectHeadersAsync();
@@ -710,15 +795,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(context =>
-            {
-                var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                context =>
+                {
+                    var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
 
-                trailersFeature.Trailers.Add("Trailer1", "Value1");
-                trailersFeature.Trailers.Add("Trailer2", "Value2");
+                    trailersFeature.Trailers.Add("Trailer1", "Value1");
+                    trailersFeature.Trailers.Add("Trailer2", "Value2");
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                }
+            );
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -742,15 +829,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
+                {
+                    var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
 
-                trailersFeature.Trailers.Add("Trailer1", "Value1");
-                trailersFeature.Trailers.Add("Trailer2", "Value2");
+                    trailersFeature.Trailers.Add("Trailer1", "Value1");
+                    trailersFeature.Trailers.Add("Trailer2", "Value2");
 
-                await context.Response.WriteAsync("Hello world");
-            });
+                    await context.Response.WriteAsync("Hello world");
+                }
+            );
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -776,15 +865,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(context =>
-            {
-                var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                context =>
+                {
+                    var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
 
-                trailersFeature.Trailers.Add("Trailer1", "Value1");
-                trailersFeature.Trailers.Add("Trailer2", "Value2");
+                    trailersFeature.Trailers.Add("Trailer1", "Value1");
+                    trailersFeature.Trailers.Add("Trailer2", "Value2");
 
-                throw new NotImplementedException("Test Exception");
-            });
+                    throw new NotImplementedException("Test Exception");
+                }
+            );
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -804,28 +895,39 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Authority, "localhost:80"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(context =>
-            {
-                var resetFeature = context.Features.Get<IHttpResetFeature>();
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                context =>
+                {
+                    var resetFeature = context.Features.Get<IHttpResetFeature>();
 
-                resetFeature.Reset((int)Http3ErrorCode.RequestCancelled);
+                    resetFeature.Reset((int)Http3ErrorCode.RequestCancelled);
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                }
+            );
 
             var doneWithHeaders = await requestStream.SendHeadersAsync(headers, endStream: true);
 
             await requestStream.WaitForStreamErrorAsync(
                 Http3ErrorCode.RequestCancelled,
-                CoreStrings.FormatHttp3StreamResetByApplication(Http3Formatting.ToFormattedErrorCode(Http3ErrorCode.RequestCancelled)));
+                CoreStrings.FormatHttp3StreamResetByApplication(
+                    Http3Formatting.ToFormattedErrorCode(Http3ErrorCode.RequestCancelled)
+                )
+            );
         }
 
         [Fact]
         public async Task CompleteAsync_BeforeBodyStarted_SendsHeadersWithEndStream()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
@@ -833,26 +935,36 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
-                    await context.Response.CompleteAsync().DefaultTimeout();
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
+                        await context.Response.CompleteAsync().DefaultTimeout();
 
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -872,38 +984,54 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CompleteAsync_BeforeBodyStarted_WithTrailers_SendsHeadersAndTrailersWithEndStream()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
-                    await context.Response.CompleteAsync().DefaultTimeout(); // Can be called twice, no-ops
+                        await context.Response.CompleteAsync().DefaultTimeout();
+                        await context.Response.CompleteAsync().DefaultTimeout(); // Can be called twice, no-ops
 
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -927,37 +1055,53 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CompleteAsync_BeforeBodyStarted_WithTrailers_TruncatedContentLength_ThrowsAnd500()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    context.Response.ContentLength = 25;
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.ContentLength = 25;
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.CompleteAsync().DefaultTimeout());
-                    Assert.Equal(CoreStrings.FormatTooFewBytesWritten(0, 25), ex.Message);
+                        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => context.Response.CompleteAsync().DefaultTimeout()
+                        );
+                        Assert.Equal(CoreStrings.FormatTooFewBytesWritten(0, 25), ex.Message);
 
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully);
-                    Assert.False(context.Response.Headers.IsReadOnly);
-                    Assert.False(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully);
+                        Assert.False(context.Response.Headers.IsReadOnly);
+                        Assert.False(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    appTcs.SetResult(0);
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -976,39 +1120,55 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CompleteAsync_AfterBodyStarted_SendsBodyWithEndStream()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    await context.Response.WriteAsync("Hello World");
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        await context.Response.WriteAsync("Hello World");
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
-                    await context.Response.CompleteAsync().DefaultTimeout(); // Can be called twice, no-ops
+                        await context.Response.CompleteAsync().DefaultTimeout();
+                        await context.Response.CompleteAsync().DefaultTimeout(); // Can be called twice, no-ops
 
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1031,38 +1191,59 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CompleteAsync_WriteAfterComplete_Throws()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
-                    await context.Response.CompleteAsync().DefaultTimeout();
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
+                        await context.Response.CompleteAsync().DefaultTimeout();
 
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.WriteAsync("2 Hello World").DefaultTimeout());
-                    Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
+                        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
+                        );
+                        Assert.Equal(
+                            "Writing is not allowed after writer was completed.",
+                            ex.Message
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1082,41 +1263,62 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CompleteAsync_WriteAgainAfterComplete_Throws()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    await context.Response.WriteAsync("Hello World").DefaultTimeout();
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        await context.Response.WriteAsync("Hello World").DefaultTimeout();
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
+                        await context.Response.CompleteAsync().DefaultTimeout();
 
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.WriteAsync("2 Hello World").DefaultTimeout());
-                    Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
+                        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
+                        );
+                        Assert.Equal(
+                            "Writing is not allowed after writer was completed.",
+                            ex.Message
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1145,22 +1347,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                var memory = context.Response.BodyWriter.GetMemory(12);
-                await context.Response.CompleteAsync();
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.BodyWriter.Advance(memory.Length);
-                }
-                catch (InvalidOperationException)
-                {
-                    tcs.SetResult();
-                    return;
-                }
+                    var memory = context.Response.BodyWriter.GetMemory(12);
+                    await context.Response.CompleteAsync();
+                    try
+                    {
+                        context.Response.BodyWriter.Advance(memory.Length);
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        tcs.SetResult();
+                        return;
+                    }
 
-                Assert.True(false);
-            });
+                    Assert.True(false);
+                }
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1179,45 +1383,61 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CompleteAsync_AfterPipeWrite_WithTrailers_SendsBodyAndTrailersWithEndStream()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    var buffer = context.Response.BodyWriter.GetMemory();
-                    var length = Encoding.UTF8.GetBytes("Hello World", buffer.Span);
-                    context.Response.BodyWriter.Advance(length);
+                        var buffer = context.Response.BodyWriter.GetMemory();
+                        var length = Encoding.UTF8.GetBytes("Hello World", buffer.Span);
+                        context.Response.BodyWriter.Advance(length);
 
-                    Assert.False(startingTcs.Task.IsCompletedSuccessfully); // OnStarting did not get called.
-                    Assert.False(context.Response.Headers.IsReadOnly);
+                        Assert.False(startingTcs.Task.IsCompletedSuccessfully); // OnStarting did not get called.
+                        Assert.False(context.Response.Headers.IsReadOnly);
 
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        await context.Response.CompleteAsync().DefaultTimeout();
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1241,40 +1461,56 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CompleteAsync_AfterBodyStarted_WithTrailers_SendsBodyAndTrailersWithEndStream()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    await context.Response.WriteAsync("Hello World");
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        await context.Response.WriteAsync("Hello World");
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
+                        await context.Response.CompleteAsync().DefaultTimeout();
 
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1298,42 +1534,60 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task CompleteAsync_AfterBodyStarted_WithTrailers_TruncatedContentLength_ThrowsAndReset()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    context.Response.ContentLength = 25;
-                    await context.Response.WriteAsync("Hello World");
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        context.Response.ContentLength = 25;
+                        await context.Response.WriteAsync("Hello World");
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.CompleteAsync().DefaultTimeout());
-                    Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
+                        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                            () => context.Response.CompleteAsync().DefaultTimeout()
+                        );
+                        Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
-                    Assert.False(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.False(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1348,8 +1602,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             clientTcs.SetResult(0);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.InternalError,
-                expectedErrorMessage: CoreStrings.FormatTooFewBytesWritten(11, 25));
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.InternalError,
+                expectedErrorMessage: CoreStrings.FormatTooFewBytesWritten(11, 25)
+            );
 
             await appTcs.Task;
         }
@@ -1357,9 +1613,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task PipeWriterComplete_AfterBodyStarted_WithTrailers_TruncatedContentLength_ThrowsAndReset()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
@@ -1367,33 +1629,45 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
 
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    context.Response.ContentLength = 25;
-                    await context.Response.WriteAsync("Hello World");
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        context.Response.ContentLength = 25;
+                        await context.Response.WriteAsync("Hello World");
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = Assert.Throws<InvalidOperationException>(() => context.Response.BodyWriter.Complete());
-                    Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
+                        var ex = Assert.Throws<InvalidOperationException>(
+                            () => context.Response.BodyWriter.Complete()
+                        );
+                        Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
-                    Assert.False(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.False(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1408,8 +1682,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             clientTcs.SetResult(0);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.InternalError,
-                expectedErrorMessage: CoreStrings.FormatTooFewBytesWritten(11, 25));
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.InternalError,
+                expectedErrorMessage: CoreStrings.FormatTooFewBytesWritten(11, 25)
+            );
 
             await appTcs.Task;
         }
@@ -1417,44 +1693,60 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task AbortAfterCompleteAsync_GETWithResponseBodyAndTrailers_ResetsAfterResponse()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    await context.Response.WriteAsync("Hello World");
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        await context.Response.WriteAsync("Hello World");
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
+                        await context.Response.CompleteAsync().DefaultTimeout();
 
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // RequestAborted will no longer fire after CompleteAsync.
-                    Assert.False(context.RequestAborted.CanBeCanceled);
-                    context.Abort();
+                        // RequestAborted will no longer fire after CompleteAsync.
+                        Assert.False(context.RequestAborted.CanBeCanceled);
+                        context.Abort();
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1469,7 +1761,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var decodedTrailers = await requestStream.ExpectHeadersAsync();
             Assert.Equal("Custom Value", decodedTrailers["CustomName"]);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.InternalError, expectedErrorMessage: null);
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.InternalError,
+                expectedErrorMessage: null
+            );
 
             clientTcs.SetResult(0);
             await appTcs.Task;
@@ -1478,49 +1773,69 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task AbortAfterCompleteAsync_POSTWithResponseBodyAndTrailers_RequestBodyThrows()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "POST"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    var requestBodyTask = context.Request.BodyReader.ReadAsync();
+                    try
+                    {
+                        var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    await context.Response.WriteAsync("Hello World");
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        await context.Response.WriteAsync("Hello World");
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
+                        await context.Response.CompleteAsync().DefaultTimeout();
 
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // RequestAborted will no longer fire after CompleteAsync.
-                    Assert.False(context.RequestAborted.CanBeCanceled);
-                    context.Abort();
+                        // RequestAborted will no longer fire after CompleteAsync.
+                        Assert.False(context.RequestAborted.CanBeCanceled);
+                        context.Abort();
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(async () => await requestBodyTask);
-                    await Assert.ThrowsAsync<ConnectionAbortedException>(async () => await context.Request.BodyReader.ReadAsync());
+                        await Assert.ThrowsAsync<TaskCanceledException>(
+                            async () => await requestBodyTask
+                        );
+                        await Assert.ThrowsAsync<ConnectionAbortedException>(
+                            async () => await context.Request.BodyReader.ReadAsync()
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: false);
 
@@ -1535,7 +1850,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             var decodedTrailers = await requestStream.ExpectHeadersAsync();
             Assert.Equal("Custom Value", decodedTrailers["CustomName"]);
 
-            await requestStream.WaitForStreamErrorAsync(Http3ErrorCode.InternalError, expectedErrorMessage: null);
+            await requestStream.WaitForStreamErrorAsync(
+                Http3ErrorCode.InternalError,
+                expectedErrorMessage: null
+            );
 
             clientTcs.SetResult(0);
             await appTcs.Task;
@@ -1544,46 +1862,62 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task ResetAfterCompleteAsync_GETWithResponseBodyAndTrailers_ResetsAfterResponse()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "GET"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                    try
+                    {
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    await context.Response.WriteAsync("Hello World");
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        await context.Response.WriteAsync("Hello World");
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
+                        await context.Response.CompleteAsync().DefaultTimeout();
 
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // RequestAborted will no longer fire after CompleteAsync.
-                    Assert.False(context.RequestAborted.CanBeCanceled);
-                    var resetFeature = context.Features.Get<IHttpResetFeature>();
-                    Assert.NotNull(resetFeature);
-                    resetFeature.Reset((int)Http3ErrorCode.NoError);
+                        // RequestAborted will no longer fire after CompleteAsync.
+                        Assert.False(context.RequestAborted.CanBeCanceled);
+                        var resetFeature = context.Features.Get<IHttpResetFeature>();
+                        Assert.NotNull(resetFeature);
+                        resetFeature.Reset((int)Http3ErrorCode.NoError);
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: true);
 
@@ -1600,7 +1934,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             await requestStream.WaitForStreamErrorAsync(
                 Http3ErrorCode.NoError,
-                expectedErrorMessage: "The HTTP/3 stream was reset by the application with error code H3_NO_ERROR.");
+                expectedErrorMessage: "The HTTP/3 stream was reset by the application with error code H3_NO_ERROR."
+            );
 
             clientTcs.SetResult(0);
             await appTcs.Task;
@@ -1609,51 +1944,71 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         [Fact]
         public async Task ResetAfterCompleteAsync_POSTWithResponseBodyAndTrailers_RequestBodyThrows()
         {
-            var startingTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var appTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var clientTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var startingTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var appTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var clientTcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var headers = new[]
             {
                 new KeyValuePair<string, string>(HeaderNames.Method, "POST"),
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async context =>
-            {
-                try
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async context =>
                 {
-                    var requestBodyTask = context.Request.BodyReader.ReadAsync();
+                    try
+                    {
+                        var requestBodyTask = context.Request.BodyReader.ReadAsync();
 
-                    context.Response.OnStarting(() => { startingTcs.SetResult(0); return Task.CompletedTask; });
+                        context.Response.OnStarting(
+                            () =>
+                            {
+                                startingTcs.SetResult(0);
+                                return Task.CompletedTask;
+                            }
+                        );
 
-                    await context.Response.WriteAsync("Hello World");
-                    Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
-                    Assert.True(context.Response.Headers.IsReadOnly);
+                        await context.Response.WriteAsync("Hello World");
+                        Assert.True(startingTcs.Task.IsCompletedSuccessfully); // OnStarting got called.
+                        Assert.True(context.Response.Headers.IsReadOnly);
 
-                    context.Response.AppendTrailer("CustomName", "Custom Value");
+                        context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    await context.Response.CompleteAsync().DefaultTimeout();
+                        await context.Response.CompleteAsync().DefaultTimeout();
 
-                    Assert.True(context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly);
+                        Assert.True(
+                            context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
+                        );
 
-                    // RequestAborted will no longer fire after CompleteAsync.
-                    Assert.False(context.RequestAborted.CanBeCanceled);
-                    var resetFeature = context.Features.Get<IHttpResetFeature>();
-                    Assert.NotNull(resetFeature);
-                    resetFeature.Reset((int)Http3ErrorCode.NoError);
+                        // RequestAborted will no longer fire after CompleteAsync.
+                        Assert.False(context.RequestAborted.CanBeCanceled);
+                        var resetFeature = context.Features.Get<IHttpResetFeature>();
+                        Assert.NotNull(resetFeature);
+                        resetFeature.Reset((int)Http3ErrorCode.NoError);
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(async () => await requestBodyTask);
-                    await Assert.ThrowsAsync<ConnectionAbortedException>(async () => await context.Request.BodyReader.ReadAsync());
+                        await Assert.ThrowsAsync<TaskCanceledException>(
+                            async () => await requestBodyTask
+                        );
+                        await Assert.ThrowsAsync<ConnectionAbortedException>(
+                            async () => await context.Request.BodyReader.ReadAsync()
+                        );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
-                    await clientTcs.Task.DefaultTimeout();
-                    appTcs.SetResult(0);
+                        // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                        await clientTcs.Task.DefaultTimeout();
+                        appTcs.SetResult(0);
+                    }
+                    catch (Exception ex)
+                    {
+                        appTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    appTcs.SetException(ex);
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: false);
 
@@ -1670,7 +2025,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             await requestStream.WaitForStreamErrorAsync(
                 Http3ErrorCode.NoError,
-                expectedErrorMessage: "The HTTP/3 stream was reset by the application with error code H3_NO_ERROR.");
+                expectedErrorMessage: "The HTTP/3 stream was reset by the application with error code H3_NO_ERROR."
+            );
 
             clientTcs.SetResult(0);
             await appTcs.Task;
@@ -1686,7 +2042,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             await requestStream.WaitForStreamErrorAsync(
                 Http3ErrorCode.UnexpectedFrame,
-                expectedErrorMessage: CoreStrings.Http3StreamErrorDataReceivedBeforeHeaders);
+                expectedErrorMessage: CoreStrings.Http3StreamErrorDataReceivedBeforeHeaders
+            );
         }
 
         [Fact]
@@ -1701,16 +2058,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var trailers = new[]
-            {
-                new KeyValuePair<string, string>("TestName", "TestValue"),
-            };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async c =>
-            {
-                await c.Request.Body.DrainAsync(default);
+            var trailers = new[] { new KeyValuePair<string, string>("TestName", "TestValue"), };
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async c =>
+                {
+                    await c.Request.Body.DrainAsync(default);
 
-                testValue = c.Request.GetTrailer("TestName");
-            });
+                    testValue = c.Request.GetTrailer("TestName");
+                }
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: false);
             await requestStream.SendDataAsync(Encoding.UTF8.GetBytes("Hello world"));
@@ -1733,10 +2089,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var trailers = new[]
-            {
-                new KeyValuePair<string, string>("TestName", "TestValue"),
-            };
+            var trailers = new[] { new KeyValuePair<string, string>("TestName", "TestValue"), };
             var requestStream = await InitializeConnectionAndStreamsAsync(_noopApplication);
 
             await requestStream.SendHeadersAsync(headers, endStream: false);
@@ -1750,13 +2103,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             await requestStream.WaitForStreamErrorAsync(
                 Http3ErrorCode.UnexpectedFrame,
-                expectedErrorMessage: CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(Http3Formatting.ToFormattedType(Http3FrameType.Data)));
+                expectedErrorMessage: CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(
+                    Http3Formatting.ToFormattedType(Http3FrameType.Data)
+                )
+            );
         }
 
         [Fact]
         public async Task TrailersWithoutEndingStream_ErrorAccessingTrailers()
         {
-            var readTrailersTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var readTrailersTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             var syncPoint = new SyncPoint();
             var headers = new[]
             {
@@ -1764,27 +2122,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 new KeyValuePair<string, string>(HeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
             };
-            var trailers = new[]
-            {
-                new KeyValuePair<string, string>("TestName", "TestValue"),
-            };
-            var requestStream = await InitializeConnectionAndStreamsAsync(async c =>
-            {
-                var data = new byte[1024];
-                await c.Request.Body.ReadAsync(data);
-
-                await syncPoint.WaitToContinue();
-
-                try
+            var trailers = new[] { new KeyValuePair<string, string>("TestName", "TestValue"), };
+            var requestStream = await InitializeConnectionAndStreamsAsync(
+                async c =>
                 {
-                    c.Request.GetTrailer("TestName");
+                    var data = new byte[1024];
+                    await c.Request.Body.ReadAsync(data);
+
+                    await syncPoint.WaitToContinue();
+
+                    try
+                    {
+                        c.Request.GetTrailer("TestName");
+                    }
+                    catch (Exception ex)
+                    {
+                        readTrailersTcs.TrySetException(ex);
+                        throw;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    readTrailersTcs.TrySetException(ex);
-                    throw;
-                }
-            });
+            );
 
             await requestStream.SendHeadersAsync(headers, endStream: false);
             await requestStream.SendDataAsync(Encoding.UTF8.GetBytes("Hello world"));
@@ -1794,8 +2151,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             syncPoint.Continue();
 
             // Stream not ended after trailing headers.
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => readTrailersTcs.Task).DefaultTimeout();
-            Assert.Equal("The request trailers are not available yet. They may not be available until the full request body is read.", ex.Message);
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => readTrailersTcs.Task)
+                .DefaultTimeout();
+            Assert.Equal(
+                "The request trailers are not available yet. They may not be available until the full request body is read.",
+                ex.Message
+            );
         }
 
         [Theory]
@@ -1814,13 +2175,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             await requestStream.WaitForStreamErrorAsync(
                 Http3ErrorCode.UnexpectedFrame,
-                expectedErrorMessage: CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(frame.FormattedType));
+                expectedErrorMessage: CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(
+                    frame.FormattedType
+                )
+            );
 
             await WaitForConnectionErrorAsync<Http3ConnectionErrorException>(
                 ignoreNonGoAwayFrames: true,
                 expectedLastStreamId: 0,
                 expectedErrorCode: Http3ErrorCode.UnexpectedFrame,
-                expectedErrorMessage: CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(frame.FormattedType));
+                expectedErrorMessage: CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(
+                    frame.FormattedType
+                )
+            );
         }
 
         [Theory]
@@ -1835,7 +2202,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             await requestStream.WaitForStreamErrorAsync(
                 Http3ErrorCode.UnexpectedFrame,
-                expectedErrorMessage: CoreStrings.FormatHttp3ErrorUnsupportedFrameOnServer(frame.FormattedType));
+                expectedErrorMessage: CoreStrings.FormatHttp3ErrorUnsupportedFrameOnServer(
+                    frame.FormattedType
+                )
+            );
         }
     }
 }

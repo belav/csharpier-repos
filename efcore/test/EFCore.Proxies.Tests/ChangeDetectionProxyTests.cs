@@ -23,8 +23,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ChangeContext<ChangeSealedEntity>();
             Assert.Equal(
                 ProxiesStrings.ItsASeal(nameof(ChangeSealedEntity)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Model).Message);
+                Assert.Throws<InvalidOperationException>(() => context.Model).Message
+            );
         }
 
         [ConditionalFact]
@@ -32,18 +32,24 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = new ChangeContext<ChangeNonVirtualPropEntity>();
             Assert.Equal(
-                ProxiesStrings.NonVirtualProperty(nameof(ChangeNonVirtualPropEntity.Id), nameof(ChangeNonVirtualPropEntity)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Model).Message);
+                ProxiesStrings.NonVirtualProperty(
+                    nameof(ChangeNonVirtualPropEntity.Id),
+                    nameof(ChangeNonVirtualPropEntity)
+                ),
+                Assert.Throws<InvalidOperationException>(() => context.Model).Message
+            );
         }
 
         [ConditionalFact]
         public void Throws_if_non_virtual_indexer_property()
         {
-            using var context = new ChangeContext<ChangeNonVirtualIndexer>(entityBuilderAction: b => b.IndexerProperty<int>("Snoopy"));
+            using var context = new ChangeContext<ChangeNonVirtualIndexer>(
+                entityBuilderAction: b => b.IndexerProperty<int>("Snoopy")
+            );
             Assert.Equal(
                 ProxiesStrings.NonVirtualIndexerProperty(nameof(ChangeNonVirtualIndexer)),
-                Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+                Assert.Throws<InvalidOperationException>(() => context.Model).Message
+            );
         }
 
         [ConditionalFact]
@@ -52,7 +58,10 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ChangeContext<ChangeNonVirtualIndexerNotUsed>();
 
             Assert.DoesNotContain(
-                context.Model.FindEntityType(typeof(ChangeNonVirtualIndexerNotUsed)).GetProperties(), e => e.IsIndexerProperty());
+                context.Model.FindEntityType(typeof(ChangeNonVirtualIndexerNotUsed))
+                    .GetProperties(),
+                e => e.IsIndexerProperty()
+            );
         }
 
         [ConditionalFact]
@@ -66,13 +75,18 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_if_dictionary_type_with_additional_properties()
         {
-            using var context = new SharedChangeContext<Dictionary<string, int>>(b => b.IndexerProperty<int>("Snoopy"));
+            using var context = new SharedChangeContext<Dictionary<string, int>>(
+                b => b.IndexerProperty<int>("Snoopy")
+            );
 
             Assert.Equal(
                 ProxiesStrings.DictionaryCannotBeProxied(
-                    typeof(Dictionary<string, int>).ShortDisplayName(), "STET (Dictionary<string, int>)",
-                    typeof(IDictionary<string, int>).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+                    typeof(Dictionary<string, int>).ShortDisplayName(),
+                    "STET (Dictionary<string, int>)",
+                    typeof(IDictionary<string, int>).ShortDisplayName()
+                ),
+                Assert.Throws<InvalidOperationException>(() => context.Model).Message
+            );
         }
 
         [ConditionalFact]
@@ -80,9 +94,12 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = new ChangeContext<ChangeNonVirtualNavEntity>();
             Assert.Equal(
-                ProxiesStrings.NonVirtualProperty(nameof(ChangeNonVirtualNavEntity.SelfRef), nameof(ChangeNonVirtualNavEntity)),
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Model).Message);
+                ProxiesStrings.NonVirtualProperty(
+                    nameof(ChangeNonVirtualNavEntity.SelfRef),
+                    nameof(ChangeNonVirtualNavEntity)
+                ),
+                Assert.Throws<InvalidOperationException>(() => context.Model).Message
+            );
         }
 
         [ConditionalFact]
@@ -90,8 +107,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var context = new ChangeContext<ChangeValueEntity>();
 
-            Assert.Equal(ChangeTrackingStrategy.ChangingAndChangedNotifications,
-                context.GetService<IDesignTimeModel>().Model.GetChangeTrackingStrategy());
+            Assert.Equal(
+                ChangeTrackingStrategy.ChangingAndChangedNotifications,
+                context.GetService<IDesignTimeModel>().Model.GetChangeTrackingStrategy()
+            );
         }
 
         [ConditionalFact]
@@ -101,7 +120,10 @@ namespace Microsoft.EntityFrameworkCore
 
             var entityType = context.Model.FindEntityType(typeof(ChangeValueEntity));
 
-            Assert.Equal(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues, entityType.GetChangeTrackingStrategy());
+            Assert.Equal(
+                ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues,
+                entityType.GetChangeTrackingStrategy()
+            );
         }
 
         private static readonly Type changeInterface = typeof(INotifyPropertyChanged);
@@ -114,10 +136,13 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.FullChangeTrackingRequired(
-                    nameof(ChangeValueEntity), nameof(ChangeTrackingStrategy.Snapshot),
+                    nameof(ChangeValueEntity),
+                    nameof(ChangeTrackingStrategy.Snapshot),
                     nameof(ChangeTrackingStrategy.ChangingAndChangedNotifications),
-                    nameof(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)),
-                Assert.Throws<InvalidOperationException>(() => _ = context.Model).Message);
+                    nameof(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)
+                ),
+                Assert.Throws<InvalidOperationException>(() => _ = context.Model).Message
+            );
         }
 
         [ConditionalFact]
@@ -127,10 +152,13 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.FullChangeTrackingRequired(
-                    nameof(ChangeValueEntity), nameof(ChangeTrackingStrategy.ChangedNotifications),
+                    nameof(ChangeValueEntity),
+                    nameof(ChangeTrackingStrategy.ChangedNotifications),
                     nameof(ChangeTrackingStrategy.ChangingAndChangedNotifications),
-                    nameof(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)),
-                Assert.Throws<InvalidOperationException>(() => _ = context.Model).Message);
+                    nameof(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)
+                ),
+                Assert.Throws<InvalidOperationException>(() => _ = context.Model).Message
+            );
         }
 
         [ConditionalFact]
@@ -147,7 +175,7 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Proxies_correct_interfaces_for_ChangingAndChangedNotifications()
         {
-            using var context = new  ChangingAndChangedNotificationsContext();
+            using var context = new ChangingAndChangedNotificationsContext();
             var proxy = context.CreateProxy<ChangeValueEntity>();
             var proxyType = proxy.GetType();
 
@@ -171,7 +199,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Raises_changed_event_when_changed(bool useLazyLoading)
         {
-            using var context = new ChangeContext<ChangeValueEntity>(useLazyLoading: useLazyLoading);
+            using var context = new ChangeContext<ChangeValueEntity>(
+                useLazyLoading: useLazyLoading
+            );
             var proxy = context.CreateProxy<ChangeValueEntity>();
             context.Add(proxy);
             context.SaveChanges();
@@ -184,13 +214,9 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(proxy, s);
 
-                Assert.Equal(
-                    nameof(ChangeValueEntity.Value),
-                    e.PropertyName);
+                Assert.Equal(nameof(ChangeValueEntity.Value), e.PropertyName);
 
-                Assert.Equal(
-                    10,
-                    ((ChangeValueEntity)s).Value);
+                Assert.Equal(10, ((ChangeValueEntity)s).Value);
             };
 
             proxy.Value = 10;
@@ -202,7 +228,9 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Raises_changing_event_before_change(bool useLazyLoading)
         {
-            using var context = new ChangeContext<ChangeValueEntity>(useLazyLoading: useLazyLoading);
+            using var context = new ChangeContext<ChangeValueEntity>(
+                useLazyLoading: useLazyLoading
+            );
             var proxy = context.CreateProxy<ChangeValueEntity>();
             proxy.Value = 5;
             context.Add(proxy);
@@ -216,13 +244,9 @@ namespace Microsoft.EntityFrameworkCore
 
                 Assert.Equal(proxy, s);
 
-                Assert.Equal(
-                    nameof(ChangeValueEntity.Value),
-                    e.PropertyName);
+                Assert.Equal(nameof(ChangeValueEntity.Value), e.PropertyName);
 
-                Assert.Equal(
-                    5,
-                    ((ChangeValueEntity)s).Value);
+                Assert.Equal(5, ((ChangeValueEntity)s).Value);
             };
 
             proxy.Value = 10;
@@ -232,9 +256,14 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public void Doesnt_raise_change_event_when_equal_and_check_equality_true(bool useLazyLoading)
+        public void Doesnt_raise_change_event_when_equal_and_check_equality_true(
+            bool useLazyLoading
+        )
         {
-            using var context = new ChangeContext<ChangeValueEntity>(useLazyLoading: useLazyLoading, checkEquality: true);
+            using var context = new ChangeContext<ChangeValueEntity>(
+                useLazyLoading: useLazyLoading,
+                checkEquality: true
+            );
             var proxy = context.CreateProxy<ChangeValueEntity>();
             proxy.Value = 10;
             context.Add(proxy);
@@ -254,9 +283,14 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(true)]
-        public void Doesnt_raise_changing_event_when_equal_and_check_equality_true(bool useLazyLoading)
+        public void Doesnt_raise_changing_event_when_equal_and_check_equality_true(
+            bool useLazyLoading
+        )
         {
-            using var context = new ChangeContext<ChangeValueEntity>(useLazyLoading: useLazyLoading, checkEquality: true);
+            using var context = new ChangeContext<ChangeValueEntity>(
+                useLazyLoading: useLazyLoading,
+                checkEquality: true
+            );
             var proxy = context.CreateProxy<ChangeValueEntity>();
             proxy.Value = 10;
             context.Add(proxy);
@@ -278,7 +312,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Raises_change_event_when_equal_and_check_equality_false(bool useLazyLoading)
         {
-            using var context = new ChangeContext<ChangeValueEntity>(useLazyLoading: useLazyLoading, checkEquality: false);
+            using var context = new ChangeContext<ChangeValueEntity>(
+                useLazyLoading: useLazyLoading,
+                checkEquality: false
+            );
             var proxy = context.CreateProxy<ChangeValueEntity>();
             proxy.Value = 10;
             context.Add(proxy);
@@ -300,7 +337,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true)]
         public void Raises_changing_event_when_equal_and_check_equality_false(bool useLazyLoading)
         {
-            using var context = new ChangeContext<ChangeValueEntity>(useLazyLoading: useLazyLoading, checkEquality: false);
+            using var context = new ChangeContext<ChangeValueEntity>(
+                useLazyLoading: useLazyLoading,
+                checkEquality: false
+            );
             var proxy = context.CreateProxy<ChangeValueEntity>();
             proxy.Value = 10;
             context.Add(proxy);
@@ -317,18 +357,21 @@ namespace Microsoft.EntityFrameworkCore
             Assert.True(eventRaised);
         }
 
-        private class ChangeContext<TEntity> : TestContext<TEntity>
-            where TEntity : class
+        private class ChangeContext<TEntity> : TestContext<TEntity> where TEntity : class
         {
             private readonly Action<EntityTypeBuilder<TEntity>> _entityBuilderAction;
 
             public ChangeContext(
                 bool useLazyLoading = false,
                 bool checkEquality = true,
-                Action<EntityTypeBuilder<TEntity>> entityBuilderAction = null)
+                Action<EntityTypeBuilder<TEntity>> entityBuilderAction = null
+            )
                 : base(
-                    dbName: "ChangeDetectionContext", useLazyLoading: useLazyLoading, useChangeDetection: true,
-                    checkEquality: checkEquality)
+                    dbName: "ChangeDetectionContext",
+                    useLazyLoading: useLazyLoading,
+                    useChangeDetection: true,
+                    checkEquality: checkEquality
+                )
             {
                 _entityBuilderAction = entityBuilderAction;
             }
@@ -342,19 +385,19 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private class SharedChangeContext<TEntity> : DbContext
-            where TEntity : class
+        private class SharedChangeContext<TEntity> : DbContext where TEntity : class
         {
             private readonly Action<EntityTypeBuilder<TEntity>> _entityBuilderAction;
 
-            public SharedChangeContext(Action<EntityTypeBuilder<TEntity>> entityBuilderAction = null)
+            public SharedChangeContext(
+                Action<EntityTypeBuilder<TEntity>> entityBuilderAction = null
+            )
             {
                 _entityBuilderAction = entityBuilderAction;
             }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseChangeTrackingProxies()
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseChangeTrackingProxies()
                     .UseInMemoryDatabase(GetType().ShortDisplayName());
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -426,44 +469,51 @@ namespace Microsoft.EntityFrameworkCore
 
         private class DefaultContext : TestContext<ChangeValueEntity>
         {
-            public DefaultContext()
-                : base(nameof(DefaultContext), false, true, true, null)
-            {
-            }
+            public DefaultContext() : base(nameof(DefaultContext), false, true, true, null) { }
         }
 
         private class SnapshotContext : TestContext<ChangeValueEntity>
         {
             public SnapshotContext()
                 : base(nameof(SnapshotContext), false, true, true, ChangeTrackingStrategy.Snapshot)
-            {
-            }
+            { }
         }
 
         private class ChangedNotificationsContext : TestContext<ChangeValueEntity>
         {
             public ChangedNotificationsContext()
-                : base(nameof(ChangedNotificationsContext), false, true, true, ChangeTrackingStrategy.ChangedNotifications)
-            {
-            }
+                : base(
+                    nameof(ChangedNotificationsContext),
+                    false,
+                    true,
+                    true,
+                    ChangeTrackingStrategy.ChangedNotifications
+                ) { }
         }
 
         private class ChangingAndChangedNotificationsContext : TestContext<ChangeValueEntity>
         {
             public ChangingAndChangedNotificationsContext()
-                : base(nameof(ChangingAndChangedNotificationsContext), false, true, true, ChangeTrackingStrategy.ChangingAndChangedNotifications)
-            {
-            }
+                : base(
+                    nameof(ChangingAndChangedNotificationsContext),
+                    false,
+                    true,
+                    true,
+                    ChangeTrackingStrategy.ChangingAndChangedNotifications
+                ) { }
         }
 
-        private class ChangingAndChangedNotificationsWithOriginalValuesContext : TestContext<ChangeValueEntity>
+        private class ChangingAndChangedNotificationsWithOriginalValuesContext
+            : TestContext<ChangeValueEntity>
         {
             public ChangingAndChangedNotificationsWithOriginalValuesContext()
                 : base(
-                    nameof(ChangingAndChangedNotificationsWithOriginalValuesContext), false, true, true,
-                    ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)
-            {
-            }
+                    nameof(ChangingAndChangedNotificationsWithOriginalValuesContext),
+                    false,
+                    true,
+                    true,
+                    ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                ) { }
         }
     }
 }

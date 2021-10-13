@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -22,10 +22,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public RoutingTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
@@ -40,7 +38,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             var app = Browser.MountTestComponent<TestRouter>();
             Assert.Equal("This is the default page.", app.FindElement(By.Id("test-info")).Text);
-            AssertHighlightedLinks("Default (matches all)", "Default with base-relative URL (matches all)");
+            AssertHighlightedLinks(
+                "Default (matches all)",
+                "Default with base-relative URL (matches all)"
+            );
         }
 
         [Fact]
@@ -54,7 +55,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             var app = Browser.MountTestComponent<TestRouter>();
             Assert.Equal("This is the default page.", app.FindElement(By.Id("test-info")).Text);
-            AssertHighlightedLinks("Default (matches all)", "Default with base-relative URL (matches all)");
+            AssertHighlightedLinks(
+                "Default (matches all)",
+                "Default with base-relative URL (matches all)"
+            );
         }
 
         [Fact]
@@ -76,10 +80,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var testDouble = -1.489d;
             var testFloat = -2.666f;
 
-            SetUrlViaPushState($"/WithNumberParameters/{testInt}/{testLong}/{testDouble}/{testFloat}/{testDec}");
+            SetUrlViaPushState(
+                $"/WithNumberParameters/{testInt}/{testLong}/{testDouble}/{testFloat}/{testDec}"
+            );
 
             var app = Browser.MountTestComponent<TestRouter>();
-            var expected = $"Test parameters: {testInt} {testLong} {testDouble} {testFloat} {testDec}";
+            var expected =
+                $"Test parameters: {testInt} {testLong} {testDouble} {testFloat} {testDec}";
 
             Assert.Equal(expected, app.FindElement(By.Id("test-info")).Text);
         }
@@ -111,7 +118,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         [Fact]
         public void CanArriveAtPageWithCatchAllParameter()
         {
-            SetUrlViaPushState("/WithCatchAllParameter/life/the/universe/and/everything%20%3D%2042");
+            SetUrlViaPushState(
+                "/WithCatchAllParameter/life/the/universe/and/everything%20%3D%2042"
+            );
 
             var app = Browser.MountTestComponent<TestRouter>();
             var expected = $"The answer: life/the/universe/and/everything = 42.";
@@ -135,7 +144,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             SetUrlViaPushState("/Oopsie_Daisies%20%This_Aint_A_Real_Page");
 
             var app = Browser.MountTestComponent<TestRouter>();
-            Assert.Equal("Oops, that component wasn't found!", app.FindElement(By.Id("test-info")).Text);
+            Assert.Equal(
+                "Oops, that component wasn't found!",
+                app.FindElement(By.Id("test-info")).Text
+            );
         }
 
         [Fact]
@@ -166,6 +178,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
                 Browser.Equal(2, () => Browser.WindowHandles.Count);
             }
+
             finally
             {
                 // Leaving the ctrl key up
@@ -197,6 +210,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
                 Browser.Equal(2, () => Browser.WindowHandles.Count);
             }
+
             finally
             {
                 // Closing newly opened windows if a new one was opened
@@ -242,8 +256,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             var app = Browser.MountTestComponent<TestRouter>();
             app.FindElement(By.LinkText("Default with base-relative URL (matches all)")).Click();
-            Browser.Equal("This is the default page.", () => app.FindElement(By.Id("test-info")).Text);
-            AssertHighlightedLinks("Default (matches all)", "Default with base-relative URL (matches all)");
+            Browser.Equal(
+                "This is the default page.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
+            AssertHighlightedLinks(
+                "Default (matches all)",
+                "Default with base-relative URL (matches all)"
+            );
         }
 
         [Fact]
@@ -253,17 +273,26 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             var app = Browser.MountTestComponent<TestRouter>();
             app.FindElement(By.LinkText("With parameters")).Click();
-            Browser.Equal("Your full name is Abc .", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "Your full name is Abc .",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             AssertHighlightedLinks("With parameters");
 
             // Can add more parameters while remaining on same page
             app.FindElement(By.LinkText("With more parameters")).Click();
-            Browser.Equal("Your full name is Abc McDef.", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "Your full name is Abc McDef.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             AssertHighlightedLinks("With parameters", "With more parameters");
 
             // Can remove parameters while remaining on same page
             app.FindElement(By.LinkText("With parameters")).Click();
-            Browser.Equal("Your full name is Abc .", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "Your full name is Abc .",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             AssertHighlightedLinks("With parameters");
         }
 
@@ -274,8 +303,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             var app = Browser.MountTestComponent<TestRouter>();
             app.FindElement(By.LinkText("Default (matches all)")).Click();
-            Browser.Equal("This is the default page.", () => app.FindElement(By.Id("test-info")).Text);
-            AssertHighlightedLinks("Default (matches all)", "Default with base-relative URL (matches all)");
+            Browser.Equal(
+                "This is the default page.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
+            AssertHighlightedLinks(
+                "Default (matches all)",
+                "Default with base-relative URL (matches all)"
+            );
         }
 
         [Fact]
@@ -296,7 +331,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             var app = Browser.MountTestComponent<TestRouter>();
             app.FindElement(By.LinkText("Default with query")).Click();
-            Browser.Equal("This is the default page.", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "This is the default page.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             AssertHighlightedLinks("Default with query");
         }
 
@@ -318,7 +356,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             var app = Browser.MountTestComponent<TestRouter>();
             app.FindElement(By.LinkText("Default with hash")).Click();
-            Browser.Equal("This is the default page.", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "This is the default page.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             AssertHighlightedLinks("Default with hash");
         }
 
@@ -342,7 +383,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // It's difficult to access elements within a shadow root using Selenium's regular APIs
             // Bypass this limitation by clicking the element via JavaScript
             var shadowHost = app.FindElement(By.TagName("custom-link-with-shadow-root"));
-            ((IJavaScriptExecutor)Browser).ExecuteScript("arguments[0].shadowRoot.querySelector('a').click()", shadowHost);
+            ((IJavaScriptExecutor)Browser).ExecuteScript(
+                "arguments[0].shadowRoot.querySelector('a').click()",
+                shadowHost
+            );
 
             Browser.Equal("This is another page.", () => app.FindElement(By.Id("test-info")).Text);
             AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");
@@ -361,7 +405,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // Now follow a link out of the SPA entirely
             app.FindElement(By.LinkText("Not a component")).Click();
             Browser.Equal("Not a component!", () => Browser.Exists(By.Id("test-info")).Text);
-            Browser.True(() => Browser.Url.EndsWith("/NotAComponent.html", StringComparison.Ordinal));
+            Browser.True(
+                () => Browser.Url.EndsWith("/NotAComponent.html", StringComparison.Ordinal)
+            );
 
             // Now click back
             // Because of how the tests are structured with the router not appearing until the router
@@ -386,7 +432,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");
 
             // Because this was client-side navigation, we didn't lose the state in the test selector
-            Assert.Equal(typeof(TestRouter).FullName, testSelector.SelectedOption.GetAttribute("value"));
+            Assert.Equal(
+                typeof(TestRouter).FullName,
+                testSelector.SelectedOption.GetAttribute("value")
+            );
         }
 
         [Fact]
@@ -401,10 +450,12 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             Browser.True(() => Browser.Url.EndsWith("/Other", StringComparison.Ordinal));
 
             // Because this was a full-page load, our element references should no longer be valid
-            Assert.Throws<StaleElementReferenceException>(() =>
-            {
-                testSelector.SelectedOption.GetAttribute("value");
-            });
+            Assert.Throws<StaleElementReferenceException>(
+                () =>
+                {
+                    testSelector.SelectedOption.GetAttribute("value");
+                }
+            );
         }
 
         [Fact]
@@ -417,7 +468,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             app.FindElement(By.Id("anchor-with-no-href")).Click();
 
             Assert.Equal(initialUrl, Browser.Url);
-            AssertHighlightedLinks("Default (matches all)", "Default with base-relative URL (matches all)");
+            AssertHighlightedLinks(
+                "Default (matches all)",
+                "Default with base-relative URL (matches all)"
+            );
         }
 
         [Fact]
@@ -467,7 +521,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             SetUrlViaPushState("/routeablecomponentfrompackage.html");
 
             var app = Browser.MountTestComponent<TestRouter>();
-            Assert.Equal("Oops, that component wasn't found!", app.FindElement(By.Id("test-info")).Text);
+            Assert.Equal(
+                "Oops, that component wasn't found!",
+                app.FindElement(By.Id("test-info")).Text
+            );
         }
 
         [Fact]
@@ -476,7 +533,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             SetUrlViaPushState("/routeablecomponentfrompackage.html");
 
             var app = Browser.MountTestComponent<TestRouterWithAdditionalAssembly>();
-            Assert.Contains("This component, including the CSS and image required to produce its", app.FindElement(By.CssSelector("div.special-style")).Text);
+            Assert.Contains(
+                "This component, including the CSS and image required to produce its",
+                app.FindElement(By.CssSelector("div.special-style")).Text
+            );
         }
 
         [Fact]
@@ -484,12 +544,18 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             SetUrlViaPushState("/LongPage1");
             var app = Browser.MountTestComponent<TestRouter>();
-            Browser.Equal("This is a long page you can scroll.", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "This is a long page you can scroll.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             BrowserScrollY = 500;
             Browser.True(() => BrowserScrollY > 300); // Exact position doesn't matter
 
             app.FindElement(By.LinkText("Long page 2")).Click();
-            Browser.Equal("This is another long page you can scroll.", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "This is another long page you can scroll.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             Browser.Equal(0, () => BrowserScrollY);
         }
 
@@ -498,35 +564,46 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             SetUrlViaPushState("/LongPage1");
             var app = Browser.MountTestComponent<TestRouter>();
-            Browser.Equal("This is a long page you can scroll.", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "This is a long page you can scroll.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             BrowserScrollY = 500;
             Browser.True(() => BrowserScrollY > 300); // Exact position doesn't matter
 
             app.FindElement(By.Id("go-to-longpage2")).Click();
-            Browser.Equal("This is another long page you can scroll.", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "This is another long page you can scroll.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
             Browser.Equal(0, () => BrowserScrollY);
         }
 
         [Fact]
         [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/31195")]
-        public void PreventDefault_CanBlockNavigation_ForInternalNavigation_PreventDefaultTarget()
-            => PreventDefault_CanBlockNavigation("internal", "target");
+        public void PreventDefault_CanBlockNavigation_ForInternalNavigation_PreventDefaultTarget() =>
+            PreventDefault_CanBlockNavigation("internal", "target");
 
         [Fact]
         [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/31195")]
-        public void PreventDefault_CanBlockNavigation_ForExternalNavigation_PreventDefaultAncestor()
-            => PreventDefault_CanBlockNavigation("external", "ancestor");
+        public void PreventDefault_CanBlockNavigation_ForExternalNavigation_PreventDefaultAncestor() =>
+            PreventDefault_CanBlockNavigation("external", "ancestor");
 
         [Theory]
         [InlineData("external", "target")]
         [InlineData("external", "descendant")]
         [InlineData("internal", "ancestor")]
         [InlineData("internal", "descendant")]
-        public virtual void PreventDefault_CanBlockNavigation(string navigationType, string whereToPreventDefault)
+        public virtual void PreventDefault_CanBlockNavigation(
+            string navigationType,
+            string whereToPreventDefault
+        )
         {
             SetUrlViaPushState("/PreventDefaultCases");
             var app = Browser.MountTestComponent<TestRouter>();
-            var preventDefaultToggle = app.FindElement(By.CssSelector($".prevent-default .{whereToPreventDefault}"));
+            var preventDefaultToggle = app.FindElement(
+                By.CssSelector($".prevent-default .{whereToPreventDefault}")
+            );
             var linkElement = app.FindElement(By.Id($"{navigationType}-navigation"));
             var counterButton = app.FindElement(By.ClassName("counter-button"));
             if (whereToPreventDefault == "descendant")
@@ -553,7 +630,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             }
             else
             {
-                Browser.Equal("This is another page.", () => app.FindElement(By.Id("test-info")).Text);
+                Browser.Equal(
+                    "This is another page.",
+                    () => app.FindElement(By.Id("test-info")).Text
+                );
                 AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");
             }
         }
@@ -624,7 +704,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             SetUrlViaPushState("/LongPage1");
 
             // Confirm that the route was rendered
-            Browser.Equal("This is a long page you can scroll.", () => app.FindElement(By.Id("test-info")).Text);
+            Browser.Equal(
+                "This is a long page you can scroll.",
+                () => app.FindElement(By.Id("test-info")).Text
+            );
         }
 
         [Theory]
@@ -649,8 +732,13 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         {
             var pathBaseWithoutHash = ServerPathBase.Split('#')[0];
             var jsExecutor = (IJavaScriptExecutor)Browser;
-            var absoluteUri = new Uri(_serverFixture.RootUri, $"{pathBaseWithoutHash}{relativeUri}");
-            jsExecutor.ExecuteScript($"Blazor.navigateTo('{absoluteUri.ToString().Replace("'", "\\'")}', {(forceLoad ? "true" : "false")})");
+            var absoluteUri = new Uri(
+                _serverFixture.RootUri,
+                $"{pathBaseWithoutHash}{relativeUri}"
+            );
+            jsExecutor.ExecuteScript(
+                $"Blazor.navigateTo('{absoluteUri.ToString().Replace("'", "\\'")}', {(forceLoad ? "true" : "false")})"
+            );
 
             return absoluteUri.AbsoluteUri;
         }
@@ -666,9 +754,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
         private void AssertHighlightedLinks(params string[] linkTexts)
         {
-            Browser.Equal(linkTexts, () => Browser
-                .FindElements(By.CssSelector("a.active"))
-                .Select(x => x.Text));
+            Browser.Equal(
+                linkTexts,
+                () => Browser.FindElements(By.CssSelector("a.active")).Select(x => x.Text)
+            );
         }
     }
 }

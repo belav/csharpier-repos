@@ -18,10 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Creates a new <see cref="PropertyParameterBinding" /> instance for the given <see cref="IProperty" />.
         /// </summary>
         /// <param name="property"> The property to bind. </param>
-        public PropertyParameterBinding(IProperty property)
-            : base(property.ClrType, property)
-        {
-        }
+        public PropertyParameterBinding(IProperty property) : base(property.ClrType, property) { }
 
         /// <summary>
         ///     Creates an expression tree representing the binding of the value of a property from a
@@ -33,8 +30,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var property = ConsumedProperties[0];
 
-            return Expression.Call(bindingInfo.MaterializationContextExpression, MaterializationContext.GetValueBufferMethod)
-                .CreateValueBufferReadValueExpression(property.ClrType, bindingInfo.GetValueBufferIndex(property), property);
+            return Expression.Call(
+                    bindingInfo.MaterializationContextExpression,
+                    MaterializationContext.GetValueBufferMethod
+                )
+                .CreateValueBufferReadValueExpression(
+                    property.ClrType,
+                    bindingInfo.GetValueBufferIndex(property),
+                    property
+                );
         }
 
         /// <summary>
@@ -42,7 +46,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="consumedProperties"> The new consumed properties. </param>
         /// <returns> A copy with replaced consumed properties. </returns>
-        public override ParameterBinding With(IPropertyBase[] consumedProperties)
-            => new PropertyParameterBinding((IProperty)consumedProperties.Single());
+        public override ParameterBinding With(IPropertyBase[] consumedProperties) =>
+            new PropertyParameterBinding((IProperty)consumedProperties.Single());
     }
 }

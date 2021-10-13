@@ -26,14 +26,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             /// <summary>
             /// Mapping from the name of receiver type to extension method symbol infos.
             /// </summary>
-            public readonly MultiDictionary<string, DeclaredSymbolInfo> ReceiverTypeNameToExtensionMethodMap { get; }
+            public readonly MultiDictionary<
+                string,
+                DeclaredSymbolInfo
+            > ReceiverTypeNameToExtensionMethodMap { get; }
 
             public bool ContainsExtensionMethod => !ReceiverTypeNameToExtensionMethodMap.IsEmpty;
 
             private CacheEntry(
                 Checksum checksum,
                 string language,
-                MultiDictionary<string, DeclaredSymbolInfo> receiverTypeNameToExtensionMethodMap)
+                MultiDictionary<string, DeclaredSymbolInfo> receiverTypeNameToExtensionMethodMap
+            )
             {
                 Checksum = checksum;
                 Language = language;
@@ -47,7 +51,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 private readonly MultiDictionary<string, DeclaredSymbolInfo> _mapBuilder;
 
-                public Builder(Checksum checksum, string langauge, IEqualityComparer<string> comparer)
+                public Builder(
+                    Checksum checksum,
+                    string langauge,
+                    IEqualityComparer<string> comparer
+                )
                 {
                     _checksum = checksum;
                     _language = langauge;
@@ -57,15 +65,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 public CacheEntry ToCacheEntry()
                 {
-                    return new CacheEntry(
-                        _checksum,
-                        _language,
-                        _mapBuilder);
+                    return new CacheEntry(_checksum, _language, _mapBuilder);
                 }
 
                 public void AddItem(SyntaxTreeIndex syntaxIndex)
                 {
-                    foreach (var (receiverType, symbolInfoIndices) in syntaxIndex.ReceiverTypeNameToExtensionMethodMap)
+                    foreach (
+                        var (
+                            receiverType,
+                            symbolInfoIndices
+                        ) in syntaxIndex.ReceiverTypeNameToExtensionMethodMap
+                    )
                     {
                         foreach (var index in symbolInfoIndices)
                         {
@@ -79,36 +89,57 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         /// <summary>
         /// We don't use PE cache from the service, so just pass in type `object` for PE entries.
         /// </summary>
-        [ExportWorkspaceServiceFactory(typeof(IImportCompletionCacheService<CacheEntry, object>), ServiceLayer.Editor), Shared]
-        private sealed class CacheServiceFactory : AbstractImportCompletionCacheServiceFactory<CacheEntry, object>
+        [
+            ExportWorkspaceServiceFactory(
+                typeof(IImportCompletionCacheService<CacheEntry, object>),
+                ServiceLayer.Editor
+            ),
+            Shared
+        ]
+        private sealed class CacheServiceFactory
+            : AbstractImportCompletionCacheServiceFactory<CacheEntry, object>
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public CacheServiceFactory()
-            {
-            }
+            public CacheServiceFactory() { }
         }
 
-        private static IImportCompletionCacheService<CacheEntry, object> GetCacheService(Workspace workspace)
-            => workspace.Services.GetRequiredService<IImportCompletionCacheService<CacheEntry, object>>();
+        private static IImportCompletionCacheService<CacheEntry, object> GetCacheService(
+            Workspace workspace
+        ) =>
+            workspace.Services.GetRequiredService<
+                IImportCompletionCacheService<CacheEntry, object>
+            >();
 
         private static async Task<CacheEntry?> GetCacheEntryAsync(
             Project project,
             bool loadOnly,
             IImportCompletionCacheService<CacheEntry, object> cacheService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // While we are caching data from SyntaxTreeInfo, all the things we cared about here are actually based on sources symbols.
             // So using source symbol checksum would suffice.
-            var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(project, cancellationToken).ConfigureAwait(false);
+            var checksum = await SymbolTreeInfo.GetSourceSymbolsChecksumAsync(
+                    project,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Cache miss, create all requested items.
-            if (!cacheService.ProjectItemsCache.TryGetValue(project.Id, out var cacheEntry) ||
-                cacheEntry.Checksum != checksum ||
-                cacheEntry.Language != project.Language)
+            if (
+                !cacheService.ProjectItemsCache.TryGetValue(project.Id, out var cacheEntry)
+                || cacheEntry.Checksum != checksum
+                || cacheEntry.Language != project.Language
+            )
             {
-                var syntaxFacts = project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
-                var builder = new CacheEntry.Builder(checksum, project.Language, syntaxFacts.StringComparer);
+                var syntaxFacts =
+                    project.LanguageServices.GetRequiredService<ISyntaxFactsService>();
+                var builder = new CacheEntry.Builder(
+                    checksum,
+                    project.Language,
+                    syntaxFacts.StringComparer
+                );
 
                 foreach (var document in project.Documents)
                 {
@@ -118,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         continue;
                     }
 
-                    var info = await document.GetSyntaxTreeIndexAsync(loadOnly, cancellationToken).ConfigureAwait(false);
+                    var info = await document.GetSyntaxTreeIndexAsync(loadOnly, cancellationToken)
+                        .ConfigureAwait(false);
                     if (info == null)
                     {
                         return null;

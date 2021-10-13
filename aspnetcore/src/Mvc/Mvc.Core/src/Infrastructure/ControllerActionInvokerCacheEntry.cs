@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             Func<ControllerContext, object, ValueTask>? controllerReleaser,
             ControllerBinderDelegate? controllerBinderDelegate,
             ObjectMethodExecutor objectMethodExecutor,
-            ActionMethodExecutor actionMethodExecutor)
+            ActionMethodExecutor actionMethodExecutor
+        )
         {
             ControllerFactory = controllerFactory;
             ControllerReleaser = controllerReleaser;

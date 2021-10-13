@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Html.Test
             // Assert
             Assert.Collection(
                 builder.Entries,
-                entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry)));
+                entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry))
+            );
         }
 
         [Fact]
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Html.Test
             Assert.Collection(
                 builder.Entries,
                 entry => Assert.Equal("Hi", Assert.IsType<UnencodedString>(entry).Value),
-                entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry)));
+                entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry))
+            );
         }
 
         [Fact]
@@ -59,7 +61,8 @@ namespace Microsoft.AspNetCore.Html.Test
             Assert.Collection(
                 builder.Entries,
                 entry => Assert.Same(content, entry),
-                entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry)));
+                entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry))
+            );
         }
 
         [Fact]
@@ -75,7 +78,8 @@ namespace Microsoft.AspNetCore.Html.Test
             Assert.Collection(
                 builder.Entries,
                 entry => Assert.Equal("Hi", Assert.IsType<EncodedString>(entry).Value),
-                entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry)));
+                entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry))
+            );
         }
 
         [Fact]
@@ -91,7 +95,8 @@ namespace Microsoft.AspNetCore.Html.Test
             // Assert
             Assert.Collection(
                 builder.Entries,
-                entry => Assert.Equal("Hi", Assert.IsType<UnencodedString>(entry).Value));
+                entry => Assert.Equal("Hi", Assert.IsType<UnencodedString>(entry).Value)
+            );
         }
 
         [Fact]
@@ -107,9 +112,7 @@ namespace Microsoft.AspNetCore.Html.Test
             builder.SetHtmlContent(content);
 
             // Assert
-            Assert.Collection(
-                builder.Entries,
-                entry => Assert.Same(content, entry));
+            Assert.Collection(builder.Entries, entry => Assert.Same(content, entry));
         }
 
         [Fact]
@@ -125,7 +128,8 @@ namespace Microsoft.AspNetCore.Html.Test
             // Assert
             Assert.Collection(
                 builder.Entries,
-                entry => Assert.Equal("Hi", Assert.IsType<EncodedString>(entry).Value));
+                entry => Assert.Equal("Hi", Assert.IsType<EncodedString>(entry).Value)
+            );
         }
 
         [Fact]
@@ -140,7 +144,8 @@ namespace Microsoft.AspNetCore.Html.Test
             // Assert
             Assert.Equal(
                 "HtmlEncode[[First]] HtmlEncode[[Second]] HtmlEncode[[Third]] HtmlEncode[[Fourth]]!",
-                HtmlContentToString(builder));
+                HtmlContentToString(builder)
+            );
         }
 
         [Fact]
@@ -153,9 +158,7 @@ namespace Microsoft.AspNetCore.Html.Test
             builder.AppendFormat("{0}!", new EncodedString("First"));
 
             // Assert
-            Assert.Equal(
-                "First!",
-                HtmlContentToString(builder));
+            Assert.Equal("First!", HtmlContentToString(builder));
         }
 
         [Fact]
@@ -183,7 +186,8 @@ namespace Microsoft.AspNetCore.Html.Test
             // Assert
             Assert.Equal(
                 "0xHtmlEncode[[32]] - hex equivalent for 50.",
-                HtmlContentToString(builder));
+                HtmlContentToString(builder)
+            );
         }
 
         [Fact]
@@ -198,7 +202,8 @@ namespace Microsoft.AspNetCore.Html.Test
             // Assert
             Assert.Equal(
                 "0xHtmlEncode[[32]] - hex equivalent for HtmlEncode[[50]].",
-                HtmlContentToString(builder));
+                HtmlContentToString(builder)
+            );
         }
 
         [Fact]
@@ -213,7 +218,8 @@ namespace Microsoft.AspNetCore.Html.Test
             // Assert
             Assert.Equal(
                 "0xHtmlEncode[[32]] - HtmlEncode[[hex]] equivalent for HtmlEncode[[50]].",
-                HtmlContentToString(builder));
+                HtmlContentToString(builder)
+            );
         }
 
         [Fact]
@@ -226,9 +232,7 @@ namespace Microsoft.AspNetCore.Html.Test
             builder.AppendFormat("{0, -25} World!", "Hello");
 
             // Assert
-            Assert.Equal(
-                "HtmlEncode[[Hello]]       World!",
-                HtmlContentToString(builder));
+            Assert.Equal("HtmlEncode[[Hello]]       World!", HtmlContentToString(builder));
         }
 
         [Fact]
@@ -257,13 +261,15 @@ namespace Microsoft.AspNetCore.Html.Test
                 1.1,
                 2.98,
                 145.82,
-                32.86);
+                32.86
+            );
 
             // Assert
             Assert.Equal(
-                "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] " +
-                    "HtmlEncode[[145.82]] HtmlEncode[[32.86]]!",
-                HtmlContentToString(builder));
+                "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] "
+                    + "HtmlEncode[[145.82]] HtmlEncode[[32.86]]!",
+                HtmlContentToString(builder)
+            );
         }
 
         [Fact]
@@ -276,12 +282,14 @@ namespace Microsoft.AspNetCore.Html.Test
             builder.AppendFormat(
                 CultureInfo.InvariantCulture,
                 "Numbers in InvariantCulture - {0:N}!",
-                1.1);
+                1.1
+            );
 
             // Assert
             Assert.Equal(
                 "Numbers in InvariantCulture - HtmlEncode[[1.10]]!",
-                HtmlContentToString(builder));
+                HtmlContentToString(builder)
+            );
         }
 
         [Fact]
@@ -295,12 +303,14 @@ namespace Microsoft.AspNetCore.Html.Test
                 CultureInfo.InvariantCulture,
                 "Numbers in InvariantCulture - {0:N} {1}!",
                 1.1,
-                2.98);
+                2.98
+            );
 
             // Assert
             Assert.Equal(
                 "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]]!",
-                HtmlContentToString(builder));
+                HtmlContentToString(builder)
+            );
         }
 
         [Fact]
@@ -315,12 +325,14 @@ namespace Microsoft.AspNetCore.Html.Test
                 "Numbers in InvariantCulture - {0:N} {1} {2}!",
                 1.1,
                 2.98,
-                3.12);
+                3.12
+            );
 
             // Assert
             Assert.Equal(
                 "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] HtmlEncode[[3.12]]!",
-                HtmlContentToString(builder));
+                HtmlContentToString(builder)
+            );
         }
 
         [Fact]
@@ -334,9 +346,7 @@ namespace Microsoft.AspNetCore.Html.Test
             builder.AppendFormat(culture, "{0} in french!", 1.21);
 
             // Assert
-            Assert.Equal(
-                "HtmlEncode[[1,21]] in french!",
-                HtmlContentToString(builder));
+            Assert.Equal("HtmlEncode[[1,21]] in french!", HtmlContentToString(builder));
         }
 
         [Fact]
@@ -350,9 +360,7 @@ namespace Microsoft.AspNetCore.Html.Test
             builder.AppendFormat(CultureInfo.CurrentCulture, "{0:D}", new DateTime(2015, 02, 01));
 
             // Assert
-            Assert.Equal(
-                "HtmlEncode[[Sonntag, 1. Februar 2015]]",
-                HtmlContentToString(builder));
+            Assert.Equal("HtmlEncode[[Sonntag, 1. Februar 2015]]", HtmlContentToString(builder));
         }
 
         private static string HtmlContentToString(IHtmlContent content)

@@ -8,13 +8,26 @@ namespace System.ServiceProcess
     public class ServiceControllerPermissionEntryCollection : CollectionBase
     {
         internal ServiceControllerPermissionEntryCollection() { }
-        public ServiceControllerPermissionEntry this[int index] { get { return null; } set { } }
-        public int Add(ServiceControllerPermissionEntry value) { return 0; }
+        public ServiceControllerPermissionEntry this[int index]
+        {
+            get { return null; }
+            set { }
+        }
+        public int Add(ServiceControllerPermissionEntry value)
+        {
+            return 0;
+        }
         public void AddRange(ServiceControllerPermissionEntry[] value) { }
         public void AddRange(ServiceControllerPermissionEntryCollection value) { }
-        public bool Contains(ServiceControllerPermissionEntry value) { return false; }
+        public bool Contains(ServiceControllerPermissionEntry value)
+        {
+            return false;
+        }
         public void CopyTo(ServiceControllerPermissionEntry[] array, int index) { }
-        public int IndexOf(ServiceControllerPermissionEntry value) { return 0; }
+        public int IndexOf(ServiceControllerPermissionEntry value)
+        {
+            return 0;
+        }
         public void Insert(int index, ServiceControllerPermissionEntry value) { }
         protected override void OnClear() { }
         protected override void OnInsert(int index, object value) { }

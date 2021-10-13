@@ -69,7 +69,9 @@ namespace Microsoft.Extensions.SecretManager.Tools.Tests
             {
                 var finder = new MsBuildProjectFinder(files.Root);
 
-                Assert.Throws<FileNotFoundException>(() => finder.FindMsBuildProject("test.csproj"));
+                Assert.Throws<FileNotFoundException>(
+                    () => finder.FindMsBuildProject("test.csproj")
+                );
             }
         }
 

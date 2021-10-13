@@ -33,34 +33,78 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
         //    if (a && b)
         //        Console.WriteLine();
 
-        protected sealed override CodeAction CreateCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument, MergeDirection direction, string ifKeywordText)
-            => new MyCodeAction(createChangedDocument, direction, ifKeywordText);
+        protected sealed override CodeAction CreateCodeAction(
+            Func<CancellationToken, Task<Document>> createChangedDocument,
+            MergeDirection direction,
+            string ifKeywordText
+        ) => new MyCodeAction(createChangedDocument, direction, ifKeywordText);
 
         protected sealed override Task<bool> CanBeMergedUpAsync(
-            Document document, SyntaxNode ifOrElseIf, CancellationToken cancellationToken, out SyntaxNode outerIfOrElseIf)
+            Document document,
+            SyntaxNode ifOrElseIf,
+            CancellationToken cancellationToken,
+            out SyntaxNode outerIfOrElseIf
+        )
         {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
-            if (!IsFirstStatementOfIfOrElseIf(syntaxFacts, ifGenerator, ifOrElseIf, out outerIfOrElseIf))
+            if (
+                !IsFirstStatementOfIfOrElseIf(
+                    syntaxFacts,
+                    ifGenerator,
+                    ifOrElseIf,
+                    out outerIfOrElseIf
+                )
+            )
                 return SpecializedTasks.False;
 
-            return CanBeMergedAsync(document, syntaxFacts, ifGenerator, outerIfOrElseIf, ifOrElseIf, cancellationToken);
+            return CanBeMergedAsync(
+                document,
+                syntaxFacts,
+                ifGenerator,
+                outerIfOrElseIf,
+                ifOrElseIf,
+                cancellationToken
+            );
         }
 
         protected sealed override Task<bool> CanBeMergedDownAsync(
-            Document document, SyntaxNode ifOrElseIf, CancellationToken cancellationToken, out SyntaxNode innerIfStatement)
+            Document document,
+            SyntaxNode ifOrElseIf,
+            CancellationToken cancellationToken,
+            out SyntaxNode innerIfStatement
+        )
         {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
 
-            if (!IsFirstStatementIfStatement(syntaxFacts, ifGenerator, ifOrElseIf, out innerIfStatement))
+            if (
+                !IsFirstStatementIfStatement(
+                    syntaxFacts,
+                    ifGenerator,
+                    ifOrElseIf,
+                    out innerIfStatement
+                )
+            )
                 return SpecializedTasks.False;
 
-            return CanBeMergedAsync(document, syntaxFacts, ifGenerator, ifOrElseIf, innerIfStatement, cancellationToken);
+            return CanBeMergedAsync(
+                document,
+                syntaxFacts,
+                ifGenerator,
+                ifOrElseIf,
+                innerIfStatement,
+                cancellationToken
+            );
         }
 
-        protected sealed override SyntaxNode GetChangedRoot(Document document, SyntaxNode root, SyntaxNode outerIfOrElseIf, SyntaxNode innerIfStatement)
+        protected sealed override SyntaxNode GetChangedRoot(
+            Document document,
+            SyntaxNode root,
+            SyntaxNode outerIfOrElseIf,
+            SyntaxNode innerIfStatement
+        )
         {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             var ifGenerator = document.GetLanguageService<IIfLikeStatementGenerator>();
@@ -70,20 +114,26 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 
             var newCondition = generator.LogicalAndExpression(
                 ifGenerator.GetCondition(outerIfOrElseIf),
-                ifGenerator.GetCondition(innerIfStatement));
+                ifGenerator.GetCondition(innerIfStatement)
+            );
 
             var newIfOrElseIf = ifGenerator.WithStatementsOf(
                 ifGenerator.WithCondition(outerIfOrElseIf, newCondition),
-                innerIfStatement);
+                innerIfStatement
+            );
 
-            return root.ReplaceNode(outerIfOrElseIf, newIfOrElseIf.WithAdditionalAnnotations(Formatter.Annotation));
+            return root.ReplaceNode(
+                outerIfOrElseIf,
+                newIfOrElseIf.WithAdditionalAnnotations(Formatter.Annotation)
+            );
         }
 
         private static bool IsFirstStatementOfIfOrElseIf(
             ISyntaxFactsService syntaxFacts,
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode statement,
-            out SyntaxNode ifOrElseIf)
+            out SyntaxNode ifOrElseIf
+        )
         {
             // Check whether the statement is a first statement inside an if or else if.
             // If it's inside a block, it has to be the first statement of the block.
@@ -97,7 +147,10 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 if (statements.Count > 0 && statements[0] == statement)
                 {
                     var rootStatements = WalkUpScopeBlocks(syntaxFacts, statements);
-                    if (rootStatements.Count > 0 && ifGenerator.IsIfOrElseIf(rootStatements[0].Parent))
+                    if (
+                        rootStatements.Count > 0
+                        && ifGenerator.IsIfOrElseIf(rootStatements[0].Parent)
+                    )
                     {
                         ifOrElseIf = rootStatements[0].Parent;
                         return true;
@@ -113,7 +166,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             ISyntaxFactsService syntaxFacts,
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode ifOrElseIf,
-            out SyntaxNode ifStatement)
+            out SyntaxNode ifStatement
+        )
         {
             // Check whether the first statement inside an if or else if is an if statement.
             // If the if statement is inside a block, it has to be the first statement of the block.
@@ -142,7 +196,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode outerIfOrElseIf,
             SyntaxNode innerIfStatement,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We can only merge this with the outer if statement if any inner else-if and else clauses are equal
             // to else-if and else clauses following the outer if statement because we'll be removing the inner ones.
@@ -158,10 +213,13 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             //    {
             //        Foo();
             //    }
-            if (!System.Linq.ImmutableArrayExtensions.SequenceEqual(
+            if (
+                !System.Linq.ImmutableArrayExtensions.SequenceEqual(
                     ifGenerator.GetElseIfAndElseClauses(outerIfOrElseIf),
                     ifGenerator.GetElseIfAndElseClauses(innerIfStatement),
-                    (a, b) => IsElseIfOrElseClauseEquivalent(syntaxFacts, ifGenerator, a, b)))
+                    (a, b) => IsElseIfOrElseClauseEquivalent(syntaxFacts, ifGenerator, a, b)
+                )
+            )
             {
                 return false;
             }
@@ -207,13 +265,22 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 var remainingStatements = statements.Skip(1);
                 var remainingOuterStatements = outerStatements.Skip(outerIfStatementIndex + 1);
 
-                if (!remainingStatements.SequenceEqual(remainingOuterStatements.Take(statements.Count - 1), syntaxFacts.AreEquivalent))
+                if (
+                    !remainingStatements.SequenceEqual(
+                        remainingOuterStatements.Take(statements.Count - 1),
+                        syntaxFacts.AreEquivalent
+                    )
+                )
                 {
                     return false;
                 }
 
-                var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var controlFlow = semanticModel.AnalyzeControlFlow(statements[0], statements[statements.Count - 1]);
+                var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var controlFlow = semanticModel.AnalyzeControlFlow(
+                    statements[0],
+                    statements[statements.Count - 1]
+                );
 
                 return !controlFlow.EndPointIsReachable;
             }
@@ -223,7 +290,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             ISyntaxFactsService syntaxFacts,
             IIfLikeStatementGenerator ifGenerator,
             SyntaxNode elseIfOrElseClause1,
-            SyntaxNode elseIfOrElseClause2)
+            SyntaxNode elseIfOrElseClause2
+        )
         {
             // Compare Else/ElseIf clauses for equality.
 
@@ -246,21 +314,34 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 }
             }
 
-            var statements1 = WalkDownScopeBlocks(syntaxFacts, syntaxFacts.GetStatementContainerStatements(elseIfOrElseClause1));
-            var statements2 = WalkDownScopeBlocks(syntaxFacts, syntaxFacts.GetStatementContainerStatements(elseIfOrElseClause2));
+            var statements1 = WalkDownScopeBlocks(
+                syntaxFacts,
+                syntaxFacts.GetStatementContainerStatements(elseIfOrElseClause1)
+            );
+            var statements2 = WalkDownScopeBlocks(
+                syntaxFacts,
+                syntaxFacts.GetStatementContainerStatements(elseIfOrElseClause2)
+            );
 
             return statements1.SequenceEqual(statements2, syntaxFacts.AreEquivalent);
         }
 
         private sealed class MyCodeAction : CodeAction.DocumentChangeAction
         {
-            public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument, MergeDirection direction, string ifKeywordText)
-                : base(string.Format(GetResourceText(direction), ifKeywordText), createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                Func<CancellationToken, Task<Document>> createChangedDocument,
+                MergeDirection direction,
+                string ifKeywordText
+            )
+                : base(
+                    string.Format(GetResourceText(direction), ifKeywordText),
+                    createChangedDocument
+                ) { }
 
-            private static string GetResourceText(MergeDirection direction)
-                => direction == MergeDirection.Up ? FeaturesResources.Merge_with_outer_0_statement : FeaturesResources.Merge_with_nested_0_statement;
+            private static string GetResourceText(MergeDirection direction) =>
+                direction == MergeDirection.Up
+                    ? FeaturesResources.Merge_with_outer_0_statement
+                    : FeaturesResources.Merge_with_nested_0_statement;
         }
     }
 }

@@ -16,8 +16,10 @@ namespace System.Web.Http.Description
         {
             // Arrange
             ApiParameterDescription parameter = new ApiParameterDescription();
-            Mock<HttpParameterDescriptor> parameterDescriptorMock = new Mock<HttpParameterDescriptor>();
-            parameterDescriptorMock.SetupGet(p => p.ParameterType).Returns(typeof(ClassWithAllKindsOfProperties));
+            Mock<HttpParameterDescriptor> parameterDescriptorMock =
+                new Mock<HttpParameterDescriptor>();
+            parameterDescriptorMock.SetupGet(p => p.ParameterType)
+                .Returns(typeof(ClassWithAllKindsOfProperties));
             parameter.ParameterDescriptor = parameterDescriptorMock.Object;
 
             // Act
@@ -38,7 +40,13 @@ namespace System.Web.Http.Description
         internal int InternalProperty { get; set; }
         protected int ProtectedProperty { get; private set; }
         private int PrivateProperty { get; set; }
-        public int PropertyWithoutSetter { get { return 0; } }
-        public int PropertyWithoutGetter { set { return; } }
+        public int PropertyWithoutSetter
+        {
+            get { return 0; }
+        }
+        public int PropertyWithoutGetter
+        {
+            set { return; }
+        }
     }
 }

@@ -28,8 +28,7 @@ namespace Microsoft.NET.HostModel.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Wow! We now say hello to the big world and you.");
+                .And.HaveStdOutContaining("Wow! We now say hello to the big world and you.");
         }
 
         private void CheckFileNotarizable(string path)
@@ -70,7 +69,7 @@ namespace Microsoft.NET.HostModel.Tests
         private string RelativePath(string path)
         {
             return Path.GetRelativePath(Directory.GetCurrentDirectory(), path)
-                       .TrimEnd(Path.DirectorySeparatorChar);
+                .TrimEnd(Path.DirectorySeparatorChar);
         }
 
         [Fact]
@@ -93,7 +92,8 @@ namespace Microsoft.NET.HostModel.Tests
         public void TestWithRelativePathsDirSeparator()
         {
             var fixture = sharedTestState.TestFixture.Copy();
-            string publishDir = RelativePath(BundleHelper.GetPublishPath(fixture)) + Path.DirectorySeparatorChar;
+            string publishDir =
+                RelativePath(BundleHelper.GetPublishPath(fixture)) + Path.DirectorySeparatorChar;
             BundleRun(fixture, publishDir);
         }
 
@@ -109,10 +109,11 @@ namespace Microsoft.NET.HostModel.Tests
 
                 TestFixture = new TestProjectFixture("AppWithSubDirs", RepoDirectories);
                 BundleHelper.AddLongNameContentToAppWithSubDirs(TestFixture);
-                TestFixture
-                    .EnsureRestoredForRid(TestFixture.CurrentRid)
-                    .PublishProject(runtime: TestFixture.CurrentRid,
-                                    outputDirectory: BundleHelper.GetPublishPath(TestFixture));
+                TestFixture.EnsureRestoredForRid(TestFixture.CurrentRid)
+                    .PublishProject(
+                        runtime: TestFixture.CurrentRid,
+                        outputDirectory: BundleHelper.GetPublishPath(TestFixture)
+                    );
             }
 
             public void Dispose()

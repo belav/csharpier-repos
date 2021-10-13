@@ -26,24 +26,35 @@ namespace AutoMapper.IntegrationTests
         }
         public class Context : DbContext
         {
-            public Context() =>  Database.SetInitializer(new DatabaseInitializer());
+            public Context() => Database.SetInitializer(new DatabaseInitializer());
             public DbSet<Customer> Customers { get; set; }
         }
         public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer { Id = 1, FirstName = "Bob", LastName = "Smith", ConsoleColor = ConsoleColor.Yellow });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = ConsoleColor.Yellow
+                    }
+                );
                 base.Seed(context);
             }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
         [Fact]
         public void Can_map_with_projection()
         {
             using (var context = new Context())
             {
-                ProjectTo<CustomerViewModel>(context.Customers).First().ConsoleColor.ShouldBe((int)ConsoleColor.Yellow);
+                ProjectTo<CustomerViewModel>(context.Customers)
+                    .First()
+                    .ConsoleColor.ShouldBe((int)ConsoleColor.Yellow);
             }
         }
     }
@@ -71,17 +82,28 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer { Id = 1, FirstName = "Bob", LastName = "Smith", ConsoleColor = (int)ConsoleColor.Yellow });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = (int)ConsoleColor.Yellow
+                    }
+                );
                 base.Seed(context);
             }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
         [Fact]
         public void Can_map_with_projection()
         {
             using (var context = new Context())
             {
-                ProjectTo<CustomerViewModel>(context.Customers).First().ConsoleColor.ShouldBe(ConsoleColor.Yellow);
+                ProjectTo<CustomerViewModel>(context.Customers)
+                    .First()
+                    .ConsoleColor.ShouldBe(ConsoleColor.Yellow);
             }
         }
     }
@@ -109,17 +131,28 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer { Id = 1, FirstName = "Bob", LastName = "Smith", ConsoleColor = DayOfWeek.Saturday });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        ConsoleColor = DayOfWeek.Saturday
+                    }
+                );
                 base.Seed(context);
             }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(cfg => cfg.CreateProjection<Customer, CustomerViewModel>());
         [Fact]
         public void Can_map_with_projection()
         {
             using (var context = new Context())
             {
-                ProjectTo<CustomerViewModel>(context.Customers).First().ConsoleColor.ShouldBe(ConsoleColor.DarkYellow);
+                ProjectTo<CustomerViewModel>(context.Customers)
+                    .First()
+                    .ConsoleColor.ShouldBe(ConsoleColor.DarkYellow);
             }
         }
     }

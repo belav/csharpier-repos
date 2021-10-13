@@ -16,7 +16,11 @@ namespace Microsoft.AspNetCore.Mvc
     /// <summary>
     /// A base class for an MVC controller with view support.
     /// </summary>
-    public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFilter, IDisposable
+    public abstract class Controller
+        : ControllerBase,
+          IActionFilter,
+          IAsyncActionFilter,
+          IDisposable
     {
         private ITempDataDictionary? _tempData;
         private DynamicViewData? _viewBag;
@@ -45,7 +49,10 @@ namespace Microsoft.AspNetCore.Mvc
                 if (_viewData == null)
                 {
                     // This should run only for the controller unit test scenarios
-                    _viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), ControllerContext.ModelState);
+                    _viewData = new ViewDataDictionary(
+                        new EmptyModelMetadataProvider(),
+                        ControllerContext.ModelState
+                    );
                 }
 
                 return _viewData!;
@@ -54,7 +61,10 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 if (value == null)
                 {
-                    throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(ViewData));
+                    throw new ArgumentException(
+                        Resources.ArgumentCannotBeNullOrEmpty,
+                        nameof(ViewData)
+                    );
                 }
 
                 _viewData = value;
@@ -70,7 +80,8 @@ namespace Microsoft.AspNetCore.Mvc
             {
                 if (_tempData == null)
                 {
-                    var factory = HttpContext?.RequestServices?.GetRequiredService<ITempDataDictionaryFactory>();
+                    var factory =
+                        HttpContext?.RequestServices?.GetRequiredService<ITempDataDictionaryFactory>();
                     _tempData = factory?.GetTempData(HttpContext);
                 }
 
@@ -324,18 +335,14 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         /// <param name="context">The action executing context.</param>
         [NonAction]
-        public virtual void OnActionExecuting(ActionExecutingContext context)
-        {
-        }
+        public virtual void OnActionExecuting(ActionExecutingContext context) { }
 
         /// <summary>
         /// Called after the action method is invoked.
         /// </summary>
         /// <param name="context">The action executed context.</param>
         [NonAction]
-        public virtual void OnActionExecuted(ActionExecutedContext context)
-        {
-        }
+        public virtual void OnActionExecuted(ActionExecutedContext context) { }
 
         /// <summary>
         /// Called before the action method is invoked.
@@ -347,7 +354,8 @@ namespace Microsoft.AspNetCore.Mvc
         [NonAction]
         public virtual Task OnActionExecutionAsync(
             ActionExecutingContext context,
-            ActionExecutionDelegate next)
+            ActionExecutionDelegate next
+        )
         {
             if (context == null)
             {
@@ -387,8 +395,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         /// <param name="disposing"><c>true</c> if this method is being invoked by the <see cref="Dispose()"/> method,
         /// otherwise <c>false</c>.</param>
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
     }
 }

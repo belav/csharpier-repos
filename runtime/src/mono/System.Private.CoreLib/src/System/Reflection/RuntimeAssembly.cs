@@ -59,10 +59,13 @@ namespace System.Reflection
         //
         #region VM dependency
         private IntPtr _mono_assembly;
-        private object? _evidence;       // Unused, kept for layout compatibility
+        private object? _evidence; // Unused, kept for layout compatibility
         #endregion
 
-        internal IntPtr GetUnderlyingNativeHandle() { return _mono_assembly; }
+        internal IntPtr GetUnderlyingNativeHandle()
+        {
+            return _mono_assembly;
+        }
 
         private ResolveEventHolder? resolve_event_holder;
 
@@ -76,18 +79,12 @@ namespace System.Reflection
 
         public override string? CodeBase
         {
-            get
-            {
-                return get_code_base(this, false);
-            }
+            get { return get_code_base(this, false); }
         }
 
         public override string? FullName
         {
-            get
-            {
-                return get_fullname(this);
-            }
+            get { return get_fullname(this); }
         }
 
         //
@@ -96,19 +93,17 @@ namespace System.Reflection
         //
         public override event ModuleResolveEventHandler? ModuleResolve
         {
-            add
-            {
-                resolve_event_holder!.ModuleResolve += value;
-            }
-            remove
-            {
-                resolve_event_holder!.ModuleResolve -= value;
-            }
+            add { resolve_event_holder!.ModuleResolve += value; }
+            remove { resolve_event_holder!.ModuleResolve -= value; }
         }
 
         public override Module ManifestModule => GetManifestModuleInternal();
 
-        [Obsolete(Obsoletions.GlobalAssemblyCacheMessage, DiagnosticId = Obsoletions.GlobalAssemblyCacheDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.GlobalAssemblyCacheMessage,
+            DiagnosticId = Obsoletions.GlobalAssemblyCacheDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public override bool GlobalAssemblyCache => false;
 
         public override long HostContext => 0;
@@ -117,22 +112,22 @@ namespace System.Reflection
 
         public override string Location
         {
-            get
-            {
-                return get_location();
-            }
+            get { return get_location(); }
         }
 
         // TODO: consider a dedicated icall instead
-        public override bool IsCollectible => AssemblyLoadContext.GetLoadContext((Assembly)this)!.IsCollectible;
+        public override bool IsCollectible =>
+            AssemblyLoadContext.GetLoadContext((Assembly)this)!.IsCollectible;
 
-        internal static AssemblyName? CreateAssemblyName(string assemblyString, out RuntimeAssembly? assemblyFromResolveEvent)
+        internal static AssemblyName? CreateAssemblyName(
+            string assemblyString,
+            out RuntimeAssembly? assemblyFromResolveEvent
+        )
         {
             if (assemblyString == null)
                 throw new ArgumentNullException(nameof(assemblyString));
 
-            if ((assemblyString.Length == 0) ||
-                (assemblyString[0] == '\0'))
+            if ((assemblyString.Length == 0) || (assemblyString[0] == '\0'))
                 throw new ArgumentException(SR.Format_StringZeroLength);
 
             assemblyFromResolveEvent = null;
@@ -142,7 +137,9 @@ namespace System.Reflection
             }
             catch (Exception)
             {
-                assemblyFromResolveEvent = (RuntimeAssembly?)AssemblyLoadContext.DoAssemblyResolve(assemblyString);
+                assemblyFromResolveEvent = (RuntimeAssembly?)AssemblyLoadContext.DoAssemblyResolve(
+                    assemblyString
+                );
                 if (assemblyFromResolveEvent == null)
                     throw new FileLoadException(assemblyString);
                 return null;
@@ -173,14 +170,21 @@ namespace System.Reflection
             {
                 forwardedTypes.AddRange(new Type[exceptions.Count]); // add one null Type for each exception
                 exceptions.InsertRange(0, new Exception[forwardedTypes.Count]); // align the Exceptions with the null Types
-                throw new ReflectionTypeLoadException(forwardedTypes.ToArray(), exceptions.ToArray());
+                throw new ReflectionTypeLoadException(
+                    forwardedTypes.ToArray(),
+                    exceptions.ToArray()
+                );
             }
 
             return forwardedTypes.ToArray();
         }
 
         [RequiresUnreferencedCode("Types might be removed")]
-        private static void AddPublicNestedTypes(Type type, List<Type> types, List<Exception> exceptions)
+        private static void AddPublicNestedTypes(
+            Type type,
+            List<Type> types,
+            List<Exception> exceptions
+        )
         {
             Type[] nestedTypes;
 
@@ -188,11 +192,31 @@ namespace System.Reflection
             {
                 nestedTypes = type.GetNestedTypes(BindingFlags.Public);
             }
-            catch (FileLoadException e) { exceptions.Add(e); return; }
-            catch (FileNotFoundException e) { exceptions.Add(e); return; }
-            catch (TypeLoadException e) { exceptions.Add(e); return; }
-            catch (IOException e) { exceptions.Add(e); return; }
-            catch (UnauthorizedAccessException e) { exceptions.Add(e); return; }
+            catch (FileLoadException e)
+            {
+                exceptions.Add(e);
+                return;
+            }
+            catch (FileNotFoundException e)
+            {
+                exceptions.Add(e);
+                return;
+            }
+            catch (TypeLoadException e)
+            {
+                exceptions.Add(e);
+                return;
+            }
+            catch (IOException e)
+            {
+                exceptions.Add(e);
+                return;
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                exceptions.Add(e);
+                return;
+            }
 
             foreach (Type nestedType in nestedTypes)
             {
@@ -221,12 +245,14 @@ namespace System.Reflection
                 throw new ArgumentNullException(nameof(name));
 
             if (name.Length == 0)
-                throw new ArgumentException("String cannot have zero length.",
-                    nameof(name));
-
+                throw new ArgumentException("String cannot have zero length.", nameof(name));
             unsafe
             {
-                byte* data = (byte*)GetManifestResourceInternal(name, out int length, out Module resourceModule);
+                byte* data = (byte*)GetManifestResourceInternal(
+                    name,
+                    out int length,
+                    out Module resourceModule
+                );
                 if (data == null)
                     return null;
 
@@ -243,9 +269,10 @@ namespace System.Reflection
 
             string? nameSpace = type?.Namespace;
 
-            string resourceName = nameSpace != null && name != null ?
-                nameSpace + Type.Delimiter + name :
-                nameSpace + name;
+            string resourceName =
+                nameSpace != null && name != null
+                    ? nameSpace + Type.Delimiter + name
+                    : nameSpace + name;
 
             return GetManifestResourceStream(resourceName);
         }
@@ -327,7 +354,11 @@ namespace System.Reflection
 
         internal static AssemblyName[] GetReferencedAssemblies(Assembly assembly)
         {
-            using (var nativeNames = new Mono.SafeGPtrArrayHandle(InternalGetReferencedAssemblies(assembly)))
+            using (
+                var nativeNames = new Mono.SafeGPtrArrayHandle(
+                    InternalGetReferencedAssemblies(assembly)
+                )
+            )
             {
                 int numAssemblies = nativeNames.Length;
                 try
@@ -341,20 +372,25 @@ namespace System.Reflection
                         AssemblyName name = new AssemblyName();
                         unsafe
                         {
-                            Mono.MonoAssemblyName* nativeName = (Mono.MonoAssemblyName*)nativeNames[i];
+                            Mono.MonoAssemblyName* nativeName = (Mono.MonoAssemblyName*)nativeNames[
+                                i
+                            ];
                             name.FillName(nativeName, null, addVersion, addPublicKey, defaultToken);
                             result[i] = name;
                         }
                     }
                     return result;
                 }
+
                 finally
                 {
                     for (int i = 0; i < numAssemblies; i++)
                     {
                         unsafe
                         {
-                            Mono.MonoAssemblyName* nativeName = (Mono.MonoAssemblyName*)nativeNames[i];
+                            Mono.MonoAssemblyName* nativeName = (Mono.MonoAssemblyName*)nativeNames[
+                                i
+                            ];
                             Mono.RuntimeMarshal.FreeAssemblyName(ref *nativeName, true);
                         }
                     }
@@ -363,7 +399,8 @@ namespace System.Reflection
         }
 
         [RequiresUnreferencedCode("Assembly references might be removed")]
-        public override AssemblyName[] GetReferencedAssemblies() => RuntimeAssembly.GetReferencedAssemblies (this);
+        public override AssemblyName[] GetReferencedAssemblies() =>
+            RuntimeAssembly.GetReferencedAssemblies(this);
 
         public override Assembly GetSatelliteAssembly(CultureInfo culture)
         {
@@ -379,7 +416,12 @@ namespace System.Reflection
         }
 
         [System.Security.DynamicSecurityMethod] // Methods containing StackCrawlMark local var has to be marked DynamicSecurityMethod
-        internal static Assembly? InternalGetSatelliteAssembly(Assembly assembly, CultureInfo culture, Version? version, bool throwOnFileNotFound)
+        internal static Assembly? InternalGetSatelliteAssembly(
+            Assembly assembly,
+            CultureInfo culture,
+            Version? version,
+            bool throwOnFileNotFound
+        )
         {
             AssemblyName aname = assembly.GetName();
 
@@ -398,14 +440,14 @@ namespace System.Reflection
                 StackCrawlMark unused = default;
                 res = Load(an, ref unused, AssemblyLoadContext.GetLoadContext(assembly));
             }
-            catch
-            {
-            }
+            catch { }
 
             if (res == assembly)
                 res = null;
             if (res == null && throwOnFileNotFound)
-                throw new FileNotFoundException(string.Format(culture, SR.IO_FileNotFound_FileName, an.Name));
+                throw new FileNotFoundException(
+                    string.Format(culture, SR.IO_FileNotFound_FileName, an.Name)
+                );
             return res;
         }
 
@@ -453,9 +495,17 @@ namespace System.Reflection
             return res;
         }
 
-        internal static RuntimeAssembly InternalLoad(AssemblyName assemblyRef, ref StackCrawlMark stackMark, AssemblyLoadContext? assemblyLoadContext)
+        internal static RuntimeAssembly InternalLoad(
+            AssemblyName assemblyRef,
+            ref StackCrawlMark stackMark,
+            AssemblyLoadContext? assemblyLoadContext
+        )
         {
-            var assembly = (RuntimeAssembly)InternalLoad(assemblyRef.FullName, ref stackMark, assemblyLoadContext != null ? assemblyLoadContext.NativeALC : IntPtr.Zero);
+            var assembly = (RuntimeAssembly)InternalLoad(
+                assemblyRef.FullName,
+                ref stackMark,
+                assemblyLoadContext != null ? assemblyLoadContext.NativeALC : IntPtr.Zero
+            );
             if (assembly == null)
                 throw new FileNotFoundException(null, assemblyRef.Name);
             return assembly;
@@ -479,7 +529,8 @@ namespace System.Reflection
         private extern bool GetManifestResourceInfoInternal(string name, ManifestResourceInfo info);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern IntPtr /* byte* */ GetManifestResourceInternal(string name, out int size, out Module module);
+        private extern IntPtr /* byte* */
+        GetManifestResourceInternal(string name, out int size, out Module module);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern Module GetManifestModuleInternal();

@@ -59,6 +59,9 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns>
         /// The <see cref="Task"/> that represents the asynchronous operation, containing a list of users who are in the named role.
         /// </returns>
-        Task<IList<TUser>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken);
+        Task<IList<TUser>> GetUsersInRoleAsync(
+            string roleName,
+            CancellationToken cancellationToken
+        );
     }
 }

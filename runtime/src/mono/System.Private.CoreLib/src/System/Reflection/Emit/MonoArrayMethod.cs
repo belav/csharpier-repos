@@ -53,7 +53,13 @@ namespace System.Reflection
         internal CallingConventions call_conv;
 #pragma warning restore 649
 
-        internal MonoArrayMethod(Type arrayClass, string methodName, CallingConventions callingConvention, Type returnType, Type[] parameterTypes)
+        internal MonoArrayMethod(
+            Type arrayClass,
+            string methodName,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] parameterTypes
+        )
         {
             name = methodName;
             parent = arrayClass;
@@ -69,10 +75,7 @@ namespace System.Reflection
         }
         public override Type ReturnType
         {
-            get
-            {
-                return ret;
-            }
+            get { return ret; }
         }
 
         // FIXME: "Not implemented.  Always returns null"
@@ -105,7 +108,13 @@ namespace System.Reflection
         }
 
         // FIXME: "Not implemented"
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotImplementedException();
         }
@@ -118,32 +127,20 @@ namespace System.Reflection
         // FIXME: "Not implemented.  Always returns zero"
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return (MethodAttributes)0;
-            }
+            get { return (MethodAttributes)0; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return parent;
-            }
+            get { return parent; }
         }
         public override Type DeclaringType
         {
-            get
-            {
-                return parent;
-            }
+            get { return parent; }
         }
         public override string Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)

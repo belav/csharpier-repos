@@ -27,8 +27,7 @@ namespace System.Runtime.Intrinsics
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(Vector256DebugView<>))]
     [StructLayout(LayoutKind.Sequential, Size = Vector256.Size)]
-    public readonly struct Vector256<T> : IEquatable<Vector256<T>>
-        where T : struct
+    public readonly struct Vector256<T> : IEquatable<Vector256<T>> where T : struct
     {
         // These fields exist to ensure the alignment is 8, rather than 1.
         // This also allows the debug view to work https://github.com/dotnet/runtime/issues/9495)
@@ -61,7 +60,6 @@ namespace System.Runtime.Intrinsics
             }
         }
 
-
         /// <summary>Gets a new <see cref="Vector256{T}" /> with all bits set to 1.</summary>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>
         public static Vector256<T> AllBitsSet
@@ -73,7 +71,6 @@ namespace System.Runtime.Intrinsics
                 return Vector256.Create(0xFFFFFFFF).As<uint, T>();
             }
         }
-
 
         internal unsafe string DisplayString
         {
@@ -93,16 +90,17 @@ namespace System.Runtime.Intrinsics
         internal static bool IsSupported
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (typeof(T) == typeof(byte)) ||
-                   (typeof(T) == typeof(sbyte)) ||
-                   (typeof(T) == typeof(short)) ||
-                   (typeof(T) == typeof(ushort)) ||
-                   (typeof(T) == typeof(int)) ||
-                   (typeof(T) == typeof(uint)) ||
-                   (typeof(T) == typeof(long)) ||
-                   (typeof(T) == typeof(ulong)) ||
-                   (typeof(T) == typeof(float)) ||
-                   (typeof(T) == typeof(double));
+            get =>
+                (typeof(T) == typeof(byte))
+                || (typeof(T) == typeof(sbyte))
+                || (typeof(T) == typeof(short))
+                || (typeof(T) == typeof(ushort))
+                || (typeof(T) == typeof(int))
+                || (typeof(T) == typeof(uint))
+                || (typeof(T) == typeof(long))
+                || (typeof(T) == typeof(ulong))
+                || (typeof(T) == typeof(float))
+                || (typeof(T) == typeof(double));
         }
 
         /// <summary>Determines whether the specified <see cref="Vector256{T}" /> is equal to the current instance.</summary>
@@ -116,13 +114,21 @@ namespace System.Runtime.Intrinsics
             {
                 if (typeof(T) == typeof(float))
                 {
-                    Vector256<float> result = Avx.Compare(this.AsSingle(), other.AsSingle(), FloatComparisonMode.OrderedEqualNonSignaling);
+                    Vector256<float> result = Avx.Compare(
+                        this.AsSingle(),
+                        other.AsSingle(),
+                        FloatComparisonMode.OrderedEqualNonSignaling
+                    );
                     return Avx.MoveMask(result) == 0b1111_1111; // We have one bit per element
                 }
 
                 if (typeof(T) == typeof(double))
                 {
-                    Vector256<double> result = Avx.Compare(this.AsDouble(), other.AsDouble(), FloatComparisonMode.OrderedEqualNonSignaling);
+                    Vector256<double> result = Avx.Compare(
+                        this.AsDouble(),
+                        other.AsDouble(),
+                        FloatComparisonMode.OrderedEqualNonSignaling
+                    );
                     return Avx.MoveMask(result) == 0b1111; // We have one bit per element
                 }
             }
@@ -135,7 +141,8 @@ namespace System.Runtime.Intrinsics
 
                 Debug.Assert((typeof(T) != typeof(float)) && (typeof(T) != typeof(double)));
                 Vector256<byte> result = Avx2.CompareEqual(this.AsByte(), other.AsByte());
-                return Avx2.MoveMask(result) == unchecked((int)(0b1111_1111_1111_1111_1111_1111_1111_1111)); // We have one bit per element
+                return Avx2.MoveMask(result)
+                    == unchecked((int)(0b1111_1111_1111_1111_1111_1111_1111_1111)); // We have one bit per element
             }
 
             return SoftwareFallback(in this, other);

@@ -10,11 +10,16 @@ namespace Microsoft.AspNetCore.Routing.Matching
     {
         public static readonly int InvalidDestination = -1;
 
-        public static JumpTable Build(int defaultDestination, int exitDestination, (string text, int destination)[] pathEntries)
+        public static JumpTable Build(
+            int defaultDestination,
+            int exitDestination,
+            (string text, int destination)[] pathEntries
+        )
         {
             if (defaultDestination == InvalidDestination)
             {
-                var message = $"{nameof(defaultDestination)} is not set. Please report this as a bug.";
+                var message =
+                    $"{nameof(defaultDestination)} is not set. Please report this as a bug.";
                 throw new InvalidOperationException(message);
             }
 
@@ -45,14 +50,24 @@ namespace Microsoft.AspNetCore.Routing.Matching
             if (pathEntries.Length == 1 && Ascii.IsAscii(pathEntries[0].text))
             {
                 var entry = pathEntries[0];
-                return new SingleEntryAsciiJumpTable(defaultDestination, exitDestination, entry.text, entry.destination);
+                return new SingleEntryAsciiJumpTable(
+                    defaultDestination,
+                    exitDestination,
+                    entry.text,
+                    entry.destination
+                );
             }
 
             // We have a fallback that works for non-ASCII
             if (pathEntries.Length == 1)
             {
                 var entry = pathEntries[0];
-                return new SingleEntryJumpTable(defaultDestination, exitDestination, entry.text, entry.destination);
+                return new SingleEntryJumpTable(
+                    defaultDestination,
+                    exitDestination,
+                    entry.text,
+                    entry.destination
+                );
             }
 
             // We choose a hard upper bound of 100 as the limit for when we switch to a dictionary
@@ -78,17 +93,31 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Based on our testing a linear search is still faster than a dictionary at ten entries.
             if (pathEntries.Length <= 10)
             {
-                fallback = new LinearSearchJumpTable(defaultDestination, exitDestination, pathEntries);
+                fallback = new LinearSearchJumpTable(
+                    defaultDestination,
+                    exitDestination,
+                    pathEntries
+                );
             }
             else
             {
-                fallback = new DictionaryJumpTable(defaultDestination, exitDestination, pathEntries);
+                fallback = new DictionaryJumpTable(
+                    defaultDestination,
+                    exitDestination,
+                    pathEntries
+                );
             }
 
             // Use the ILEmitTrieJumpTable if the IL is going to be compiled (not interpreted)
             if (RuntimeFeature.IsDynamicCodeCompiled)
             {
-                return new ILEmitTrieJumpTable(defaultDestination, exitDestination, pathEntries, vectorize: null, fallback);
+                return new ILEmitTrieJumpTable(
+                    defaultDestination,
+                    exitDestination,
+                    pathEntries,
+                    vectorize: null,
+                    fallback
+                );
             }
 
             return fallback;

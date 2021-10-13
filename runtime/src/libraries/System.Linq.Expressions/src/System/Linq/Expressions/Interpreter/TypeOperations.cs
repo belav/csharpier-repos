@@ -112,7 +112,12 @@ namespace System.Linq.Expressions.Interpreter
 
     internal abstract class NullableMethodCallInstruction : Instruction
     {
-        private static NullableMethodCallInstruction? s_hasValue, s_value, s_equals, s_getHashCode, s_getValueOrDefault1, s_toString;
+        private static NullableMethodCallInstruction? s_hasValue,
+            s_value,
+            s_equals,
+            s_getHashCode,
+            s_getValueOrDefault1,
+            s_toString;
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -155,8 +160,11 @@ namespace System.Linq.Expressions.Interpreter
                 _defaultValueType = mi.ReturnType;
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2077:UnrecognizedReflectionPattern",
-                Justification = "_defaultValueType is a ValueType. You can always create an instance of a ValueType.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2077:UnrecognizedReflectionPattern",
+                Justification = "_defaultValueType is a ValueType. You can always create an instance of a ValueType."
+            )]
             public override int Run(InterpretedFrame frame)
             {
                 if (frame.Peek() == null)
@@ -229,10 +237,14 @@ namespace System.Linq.Expressions.Interpreter
         {
             switch (method)
             {
-                case "get_HasValue": return s_hasValue ?? (s_hasValue = new HasValue());
-                case "get_Value": return s_value ?? (s_value = new GetValue());
-                case "Equals": return s_equals ?? (s_equals = new EqualsClass());
-                case "GetHashCode": return s_getHashCode ?? (s_getHashCode = new GetHashCodeClass());
+                case "get_HasValue":
+                    return s_hasValue ?? (s_hasValue = new HasValue());
+                case "get_Value":
+                    return s_value ?? (s_value = new GetValue());
+                case "Equals":
+                    return s_equals ?? (s_equals = new EqualsClass());
+                case "GetHashCode":
+                    return s_getHashCode ?? (s_getHashCode = new GetHashCodeClass());
                 case "GetValueOrDefault":
                     if (argCount == 0)
                     {
@@ -240,9 +252,11 @@ namespace System.Linq.Expressions.Interpreter
                     }
                     else
                     {
-                        return s_getValueOrDefault1 ?? (s_getValueOrDefault1 = new GetValueOrDefault1());
+                        return s_getValueOrDefault1
+                            ?? (s_getValueOrDefault1 = new GetValueOrDefault1());
                     }
-                case "ToString": return s_toString ?? (s_toString = new ToStringClass());
+                case "ToString":
+                    return s_toString ?? (s_toString = new ToStringClass());
                 default:
                     // System.Nullable doesn't have other instance methods
                     throw ContractUtils.Unreachable;
@@ -257,7 +271,21 @@ namespace System.Linq.Expressions.Interpreter
 
     internal abstract class CastInstruction : Instruction
     {
-        private static CastInstruction? s_Boolean, s_Byte, s_Char, s_DateTime, s_Decimal, s_Double, s_Int16, s_Int32, s_Int64, s_SByte, s_Single, s_String, s_UInt16, s_UInt32, s_UInt64;
+        private static CastInstruction? s_Boolean,
+            s_Byte,
+            s_Char,
+            s_DateTime,
+            s_Decimal,
+            s_Double,
+            s_Int16,
+            s_Int32,
+            s_Int64,
+            s_SByte,
+            s_Single,
+            s_String,
+            s_UInt16,
+            s_UInt32,
+            s_UInt64;
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -301,8 +329,10 @@ namespace System.Linq.Expressions.Interpreter
                 {
                     Type valueType = value.GetType();
 
-                    if (!valueType.HasReferenceConversionTo(_t) &&
-                        !valueType.HasIdentityPrimitiveOrNullableConversionTo(_t))
+                    if (
+                        !valueType.HasReferenceConversionTo(_t)
+                        && !valueType.HasIdentityPrimitiveOrNullableConversionTo(_t)
+                    )
                     {
                         throw new InvalidCastException();
                     }
@@ -325,10 +355,7 @@ namespace System.Linq.Expressions.Interpreter
 
             private sealed class Ref : CastInstructionNoT
             {
-                public Ref(Type t)
-                    : base(t)
-                {
-                }
+                public Ref(Type t) : base(t) { }
 
                 protected override void ConvertNull(InterpretedFrame frame)
                 {
@@ -338,10 +365,7 @@ namespace System.Linq.Expressions.Interpreter
 
             private sealed class Value : CastInstructionNoT
             {
-                public Value(Type t)
-                    : base(t)
-                {
-                }
+                public Value(Type t) : base(t) { }
 
                 protected override void ConvertNull(InterpretedFrame frame)
                 {
@@ -392,9 +416,19 @@ namespace System.Linq.Expressions.Interpreter
             Debug.Assert(
                 new[]
                 {
-                    TypeCode.Empty, TypeCode.Int32, TypeCode.SByte, TypeCode.Int16, TypeCode.Int64, TypeCode.UInt32,
-                    TypeCode.Byte, TypeCode.UInt16, TypeCode.UInt64, TypeCode.Char, TypeCode.Boolean
-                }.Contains(Convert.GetTypeCode(from)));
+                    TypeCode.Empty,
+                    TypeCode.Int32,
+                    TypeCode.SByte,
+                    TypeCode.Int16,
+                    TypeCode.Int64,
+                    TypeCode.UInt32,
+                    TypeCode.Byte,
+                    TypeCode.UInt16,
+                    TypeCode.UInt64,
+                    TypeCode.Char,
+                    TypeCode.Boolean
+                }.Contains(Convert.GetTypeCode(from))
+            );
             frame.Push(from == null ? null : Enum.ToObject(_t, from));
             return 1;
         }
@@ -466,7 +500,10 @@ namespace System.Linq.Expressions.Interpreter
         private readonly Expression _operand;
         private readonly Dictionary<ParameterExpression, LocalVariable>? _hoistedVariables;
 
-        public QuoteInstruction(Expression operand, Dictionary<ParameterExpression, LocalVariable>? hoistedVariables)
+        public QuoteInstruction(
+            Expression operand,
+            Dictionary<ParameterExpression, LocalVariable>? hoistedVariables
+        )
         {
             _operand = operand;
             _hoistedVariables = hoistedVariables;
@@ -501,9 +538,14 @@ namespace System.Linq.Expressions.Interpreter
             // A stack of variables that are defined in nested scopes. We search
             // this first when resolving a variable in case a nested scope shadows
             // one of our variable instances.
-            private readonly Stack<HashSet<ParameterExpression>> _shadowedVars = new Stack<HashSet<ParameterExpression>>();
+            private readonly Stack<HashSet<ParameterExpression>> _shadowedVars = new Stack<
+                HashSet<ParameterExpression>
+            >();
 
-            internal ExpressionQuoter(Dictionary<ParameterExpression, LocalVariable> hoistedVariables, InterpretedFrame frame)
+            internal ExpressionQuoter(
+                Dictionary<ParameterExpression, LocalVariable> hoistedVariables,
+                InterpretedFrame frame
+            )
             {
                 _variables = hoistedVariables;
                 _frame = frame;
@@ -571,7 +613,9 @@ namespace System.Linq.Expressions.Interpreter
                 return Expression.MakeCatchBlock(node.Test, node.Variable, b, f);
             }
 
-            protected internal override Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
+            protected internal override Expression VisitRuntimeVariables(
+                RuntimeVariablesExpression node
+            )
             {
                 int count = node.Variables.Count;
                 var boxes = new List<IStrongBox>();
@@ -598,7 +642,10 @@ namespace System.Linq.Expressions.Interpreter
                     return node;
                 }
 
-                ConstantExpression boxesConst = Expression.Constant(new RuntimeOps.RuntimeVariables(boxes.ToArray()), typeof(IRuntimeVariables));
+                ConstantExpression boxesConst = Expression.Constant(
+                    new RuntimeOps.RuntimeVariables(boxes.ToArray()),
+                    typeof(IRuntimeVariables)
+                );
                 // All of them were rewritten. Just return the array as a constant
                 if (vars.Count == 0)
                 {
@@ -607,14 +654,24 @@ namespace System.Linq.Expressions.Interpreter
 
                 // Otherwise, we need to return an object that merges them.
                 return Expression.Invoke(
-                    Expression.Constant(new Func<IRuntimeVariables, IRuntimeVariables, int[], IRuntimeVariables>(MergeRuntimeVariables)),
-                    Expression.RuntimeVariables(new TrueReadOnlyCollection<ParameterExpression>(vars.ToArray())),
+                    Expression.Constant(
+                        new Func<IRuntimeVariables, IRuntimeVariables, int[], IRuntimeVariables>(
+                            MergeRuntimeVariables
+                        )
+                    ),
+                    Expression.RuntimeVariables(
+                        new TrueReadOnlyCollection<ParameterExpression>(vars.ToArray())
+                    ),
                     boxesConst,
                     Expression.Constant(indexes)
                 );
             }
 
-            private static IRuntimeVariables MergeRuntimeVariables(IRuntimeVariables first, IRuntimeVariables second, int[] indexes)
+            private static IRuntimeVariables MergeRuntimeVariables(
+                IRuntimeVariables first,
+                IRuntimeVariables second,
+                int[] indexes
+            )
             {
                 return new RuntimeOps.MergedRuntimeVariables(first, second, indexes);
             }
@@ -626,7 +683,10 @@ namespace System.Linq.Expressions.Interpreter
                 {
                     return node;
                 }
-                return Expression.Convert(Utils.GetStrongBoxValueField(Expression.Constant(box)), node.Type);
+                return Expression.Convert(
+                    Utils.GetStrongBoxValueField(Expression.Constant(box)),
+                    node.Type
+                );
             }
 
             private IStrongBox? GetBox(ParameterExpression variable)

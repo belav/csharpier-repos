@@ -14,14 +14,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
 {
     public class CheckedStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(CheckedStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(CheckedStatementHighlighter);
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample1_1()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -40,14 +39,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
         public async Task TestExample1_2()
         {
             await TestAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
             }
         }
     }
-}");
+}"
+            );
         }
     }
 }

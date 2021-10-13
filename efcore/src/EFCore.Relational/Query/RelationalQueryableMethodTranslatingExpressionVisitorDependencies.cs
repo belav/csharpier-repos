@@ -53,23 +53,24 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EntityFrameworkInternal]
         public RelationalQueryableMethodTranslatingExpressionVisitorDependencies(
             IRelationalSqlTranslatingExpressionVisitorFactory relationalSqlTranslatingExpressionVisitorFactory,
-            ISqlExpressionFactory sqlExpressionFactory)
+            ISqlExpressionFactory sqlExpressionFactory
+        )
         {
-            Check.NotNull(relationalSqlTranslatingExpressionVisitorFactory, nameof(relationalSqlTranslatingExpressionVisitorFactory));
+            Check.NotNull(
+                relationalSqlTranslatingExpressionVisitorFactory,
+                nameof(relationalSqlTranslatingExpressionVisitorFactory)
+            );
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
 
-            RelationalSqlTranslatingExpressionVisitorFactory = relationalSqlTranslatingExpressionVisitorFactory;
+            RelationalSqlTranslatingExpressionVisitorFactory =
+                relationalSqlTranslatingExpressionVisitorFactory;
             SqlExpressionFactory = sqlExpressionFactory;
         }
 
         /// <summary>
         ///     The SQL-translating expression visitor factory.
         /// </summary>
-        public IRelationalSqlTranslatingExpressionVisitorFactory RelationalSqlTranslatingExpressionVisitorFactory
-        {
-            get;
-            init;
-        }
+        public IRelationalSqlTranslatingExpressionVisitorFactory RelationalSqlTranslatingExpressionVisitorFactory { get; init; }
 
         /// <summary>
         ///     The SQL expression factory.

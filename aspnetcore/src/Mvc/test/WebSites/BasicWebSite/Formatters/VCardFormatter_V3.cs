@@ -29,7 +29,10 @@ namespace BasicWebSite.Formatters
             return typeof(Contact).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
         }
 
-        public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override async Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             var contact = (Contact)context.Object;
 
@@ -39,9 +42,7 @@ namespace BasicWebSite.Formatters
             builder.AppendLine();
             builder.AppendLine("END:VCARD");
 
-            await context.HttpContext.Response.WriteAsync(
-                builder.ToString(),
-                selectedEncoding);
+            await context.HttpContext.Response.WriteAsync(builder.ToString(), selectedEncoding);
         }
     }
 }

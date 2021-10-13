@@ -21,14 +21,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             var modelBuilder = CreateModelBuilder();
 
             modelBuilder.Entity(
-                "Customer", b =>
+                "Customer",
+                b =>
                 {
                     b.Property<string>("CustomerId");
 
                     b.HasKey("CustomerId");
 
                     b.OwnsOne(
-                        "CustomerDetails", "Details", b1 =>
+                        "CustomerDetails",
+                        "Details",
+                        b1 =>
                         {
                             b1.Property<string>("CustomerId");
 
@@ -38,10 +41,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 .WithOne("Details")
                                 .HasForeignKey("CustomerDetails", "CustomerId")
                                 .OnDelete(DeleteBehavior.Cascade);
-                        });
+                        }
+                    );
 
                     b.OwnsOne(
-                        "CustomerDetails", "AdditionalDetails", b1 =>
+                        "CustomerDetails",
+                        "AdditionalDetails",
+                        b1 =>
                         {
                             b1.Property<string>("CustomerId");
 
@@ -51,19 +57,24 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                                 .WithOne("AdditionalDetails")
                                 .HasForeignKey("CustomerDetails", "CustomerId")
                                 .OnDelete(DeleteBehavior.Cascade);
-                        });
-                });
+                        }
+                    );
+                }
+            );
 
             var model = modelBuilder.Model;
-            var ownership1 = model.FindEntityType("Customer")!.FindNavigation("Details")!.ForeignKey;
-            var ownership2 = model.FindEntityType("Customer")!.FindNavigation("AdditionalDetails")!.ForeignKey;
+            var ownership1 =
+                model.FindEntityType("Customer")!.FindNavigation("Details")!.ForeignKey;
+            var ownership2 =
+                model.FindEntityType("Customer")!.FindNavigation("AdditionalDetails")!.ForeignKey;
             Assert.True(ownership1.IsRequired);
             Assert.True(ownership2.IsRequired);
             Assert.NotEqual(ownership1.DeclaringEntityType, ownership2.DeclaringEntityType);
             Assert.Equal(ownership1.Properties.Single().Name, ownership2.Properties.Single().Name);
             Assert.Equal(
                 ownership1.DeclaringEntityType.FindPrimaryKey()!.Properties.Single().Name,
-                ownership2.DeclaringEntityType.FindPrimaryKey()!.Properties.Single().Name);
+                ownership2.DeclaringEntityType.FindPrimaryKey()!.Properties.Single().Name
+            );
             Assert.Equal(2, model.GetEntityTypes().Count(e => e.ShortName() == "CustomerDetails"));
         }
 
@@ -71,37 +82,55 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
         public virtual void Can_create_one_to_one_shadow_navigations_between_shadow_entity_types()
         {
             var modelBuilder = CreateModelBuilder();
-            var foreignKey = modelBuilder.Entity("Order")
-                .HasOne("OrderDetails", "OrderDetails")
-                .WithOne("Order")
-                .HasForeignKey("OrderDetails", "OrderId")
-                .Metadata;
+            var foreignKey =
+                modelBuilder.Entity("Order")
+                    .HasOne("OrderDetails", "OrderDetails")
+                    .WithOne("Order")
+                    .HasForeignKey("OrderDetails", "OrderId").Metadata;
 
-            Assert.Equal("OrderDetails", modelBuilder.Model.FindEntityType("Order")?.GetNavigations().Single().Name);
-            Assert.Equal("Order", modelBuilder.Model.FindEntityType("OrderDetails")?.GetNavigations().Single().Name);
+            Assert.Equal(
+                "OrderDetails",
+                modelBuilder.Model.FindEntityType("Order")?.GetNavigations().Single().Name
+            );
+            Assert.Equal(
+                "Order",
+                modelBuilder.Model.FindEntityType("OrderDetails")?.GetNavigations().Single().Name
+            );
             Assert.True(foreignKey.IsUnique);
 
             Assert.Equal(
                 CoreStrings.EntityRequiresKey("Order (Dictionary<string, object>)"),
-                Assert.Throws<InvalidOperationException>(() => InMemoryTestHelpers.Instance.Finalize(modelBuilder)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => InMemoryTestHelpers.Instance.Finalize(modelBuilder)
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public virtual void Can_create_one_to_many_shadow_navigations_between_shadow_entity_types()
         {
             var modelBuilder = CreateModelBuilder();
-            var foreignKey = modelBuilder.Entity("Order")
-                .HasOne("Customer", "Customer")
-                .WithMany("Orders")
-                .Metadata;
+            var foreignKey =
+                modelBuilder.Entity("Order")
+                    .HasOne("Customer", "Customer")
+                    .WithMany("Orders").Metadata;
 
-            Assert.Equal("Customer", modelBuilder.Model.FindEntityType("Order")?.GetNavigations().Single().Name);
-            Assert.Equal("Orders", modelBuilder.Model.FindEntityType("Customer")?.GetNavigations().Single().Name);
+            Assert.Equal(
+                "Customer",
+                modelBuilder.Model.FindEntityType("Order")?.GetNavigations().Single().Name
+            );
+            Assert.Equal(
+                "Orders",
+                modelBuilder.Model.FindEntityType("Customer")?.GetNavigations().Single().Name
+            );
             Assert.False(foreignKey.IsUnique);
 
             Assert.Equal(
                 CoreStrings.EntityRequiresKey("Customer (Dictionary<string, object>)"),
-                Assert.Throws<InvalidOperationException>(() => InMemoryTestHelpers.Instance.Finalize(modelBuilder)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => InMemoryTestHelpers.Instance.Finalize(modelBuilder)
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -112,8 +141,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             Assert.Equal(
                 CoreStrings.NavigationSingleWrongClrType(
-                    "Customer", typeof(Order).ShortDisplayName(), "Customer", "Dictionary<string, object>"),
-                Assert.Throws<InvalidOperationException>(() => orderEntityType.HasOne("Customer", "Customer")).Message);
+                    "Customer",
+                    typeof(Order).ShortDisplayName(),
+                    "Customer",
+                    "Dictionary<string, object>"
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => orderEntityType.HasOne("Customer", "Customer")
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -124,11 +160,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
             Assert.Equal(
                 CoreStrings.NoClrNavigation("CustomerNavigation", typeof(Order).ShortDisplayName()),
-                Assert.Throws<InvalidOperationException>(() => orderEntityType.HasOne(typeof(Customer), "CustomerNavigation")).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => orderEntityType.HasOne(typeof(Customer), "CustomerNavigation")
+                ).Message
+            );
         }
 
-        protected virtual ModelBuilder CreateModelBuilder()
-            => InMemoryTestHelpers.Instance.CreateConventionBuilder();
+        protected virtual ModelBuilder CreateModelBuilder() =>
+            InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         protected class Order
         {

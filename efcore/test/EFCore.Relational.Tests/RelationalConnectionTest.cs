@@ -19,30 +19,35 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_with_new_when_no_EF_services_use_Database()
         {
-            var options = new DbContextOptionsBuilder<ConstructorTestContext1A>()
-                .UseInternalServiceProvider(new ServiceCollection().BuildServiceProvider())
-                .Options;
+            var options =
+                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(
+                    new ServiceCollection().BuildServiceProvider()
+                ).Options;
 
             Assert.Equal(
                 CoreStrings.NoEfServices,
-                Assert.Throws<InvalidOperationException>(() => new ConstructorTestContext1A(options)).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => new ConstructorTestContext1A(options)
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public void Throws_with_add_when_no_EF_services_use_Database()
         {
-            var appServiceProvider = new ServiceCollection()
-                .AddDbContext<ConstructorTestContext1A>(
-                    (p, b) => b.UseInternalServiceProvider(p))
+            var appServiceProvider = new ServiceCollection().AddDbContext<ConstructorTestContext1A>(
+                    (p, b) => b.UseInternalServiceProvider(p)
+                )
                 .BuildServiceProvider();
 
-            using var serviceScope = appServiceProvider
-                .GetRequiredService<IServiceScopeFactory>()
+            using var serviceScope = appServiceProvider.GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
             Assert.Equal(
                 CoreStrings.NoEfServices,
                 Assert.Throws<InvalidOperationException>(
-                    () => serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()).Message);
+                    () => serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -52,14 +57,18 @@ namespace Microsoft.EntityFrameworkCore
             new EntityFrameworkServicesBuilder(serviceCollection).TryAddCoreServices();
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var options = new DbContextOptionsBuilder<ConstructorTestContext1A>()
-                .UseInternalServiceProvider(serviceProvider)
-                .Options;
+            var options =
+                new DbContextOptionsBuilder<ConstructorTestContext1A>().UseInternalServiceProvider(
+                    serviceProvider
+                ).Options;
 
             using var context = new ConstructorTestContext1A(options);
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(() => context.Database.GetDbConnection()).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Database.GetDbConnection()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -68,19 +77,21 @@ namespace Microsoft.EntityFrameworkCore
             var serviceCollection = new ServiceCollection();
             new EntityFrameworkServicesBuilder(serviceCollection).TryAddCoreServices();
 
-            var appServiceProvider = serviceCollection
-                .AddDbContext<ConstructorTestContext1A>(
-                    (p, b) => b.UseInternalServiceProvider(p))
+            var appServiceProvider = serviceCollection.AddDbContext<ConstructorTestContext1A>(
+                    (p, b) => b.UseInternalServiceProvider(p)
+                )
                 .BuildServiceProvider();
 
-            using var serviceScope = appServiceProvider
-                .GetRequiredService<IServiceScopeFactory>()
+            using var serviceScope = appServiceProvider.GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
             var context = serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>();
 
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(() => context.Database.GetDbConnection()).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Database.GetDbConnection()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -89,46 +100,54 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new ConstructorTestContextNoConfiguration();
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(() => context.Database.GetDbConnection()).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Database.GetDbConnection()
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public void Throws_with_add_when_no_EF_services_because_parameterless_constructor_use_Database()
         {
-            var appServiceProvider = new ServiceCollection()
-                .AddDbContext<ConstructorTestContextNoConfiguration>()
-                .BuildServiceProvider();
+            var appServiceProvider =
+                new ServiceCollection().AddDbContext<ConstructorTestContextNoConfiguration>()
+                    .BuildServiceProvider();
 
-            using var serviceScope = appServiceProvider
-                .GetRequiredService<IServiceScopeFactory>()
+            using var serviceScope = appServiceProvider.GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
-            var context = serviceScope.ServiceProvider.GetService<ConstructorTestContextNoConfiguration>();
+            var context =
+                serviceScope.ServiceProvider.GetService<ConstructorTestContextNoConfiguration>();
 
             Assert.Equal(
                 CoreStrings.NoProviderConfigured,
-                Assert.Throws<InvalidOperationException>(() => context.Database.GetDbConnection()).Message);
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Database.GetDbConnection()
+                ).Message
+            );
         }
 
         private class ConstructorTestContext1A : DbContext
         {
-            public ConstructorTestContext1A(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public ConstructorTestContext1A(DbContextOptions options) : base(options) { }
         }
 
         private class ConstructorTestContextNoConfiguration : DbContext
         {
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder.UseInternalServiceProvider(
-                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider());
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder.UseInternalServiceProvider(
+                    new ServiceCollection().AddEntityFrameworkInMemoryDatabase()
+                        .BuildServiceProvider()
+                );
         }
 
         [ConditionalFact]
         public void Can_create_new_connection_lazily_using_given_connection_string()
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             var dbConnection = connection.DbConnection;
@@ -141,7 +160,10 @@ namespace Microsoft.EntityFrameworkCore
         public void Can_change_or_reset_connection_string()
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
 
             connection.ConnectionString = null;
             Assert.Null(connection.ConnectionString);
@@ -176,7 +198,10 @@ namespace Microsoft.EntityFrameworkCore
         public void Lazy_connection_is_opened_and_closed_when_necessary()
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             Assert.True(connection.Open());
@@ -216,7 +241,10 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Lazy_connection_is_async_opened_and_closed_when_necessary()
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             var cancellationToken = new CancellationTokenSource().Token;
@@ -257,7 +285,10 @@ namespace Microsoft.EntityFrameworkCore
         public void Lazy_connection_is_recreated_if_used_again_after_being_disposed()
         {
             var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
 
             Assert.Equal(0, connection.DbConnections.Count);
             var dbConnection = (FakeDbConnection)connection.DbConnection;
@@ -290,7 +321,10 @@ namespace Microsoft.EntityFrameworkCore
         public void Lazy_connection_is_not_created_just_so_it_can_be_disposed()
         {
             var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
 
             connection.Dispose();
 
@@ -303,7 +337,8 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("Database=FrodoLives");
 
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             Assert.Same(dbConnection, connection.DbConnection);
@@ -317,7 +352,8 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("Database=FrodoLives");
 
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             connection.Open();
@@ -357,10 +393,12 @@ namespace Microsoft.EntityFrameworkCore
         {
             var dbConnection = new FakeDbConnection(
                 "Database=FrodoLives",
-                state: ConnectionState.Open);
+                state: ConnectionState.Open
+            );
 
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             connection.Open();
@@ -398,11 +436,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Existing_connection_can_be_opened_and_closed_externally()
         {
-            var dbConnection = new FakeDbConnection(
-                "Database=FrodoLives");
+            var dbConnection = new FakeDbConnection("Database=FrodoLives");
 
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             connection.Open();
@@ -480,7 +518,8 @@ namespace Microsoft.EntityFrameworkCore
             var dbConnection = new FakeDbConnection("Database=FrodoLives");
 
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
 
             Assert.Equal(0, connection.DbConnections.Count);
 
@@ -516,11 +555,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Existing_connection_can_be_opened_and_closed_externally_async()
         {
-            var dbConnection = new FakeDbConnection(
-                "Database=FrodoLives");
+            var dbConnection = new FakeDbConnection("Database=FrodoLives");
 
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             await connection.OpenAsync(default);
@@ -597,7 +636,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             var dbConnection = new FakeDbConnection("Database=FrodoLives");
             var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
 
             Assert.Equal(0, connection.DbConnections.Count);
             Assert.Same(dbConnection, connection.DbConnection);
@@ -628,7 +668,10 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Connection_is_opened_and_closed_by_using_transaction(bool async)
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             Assert.Null(connection.CurrentTransaction);
@@ -663,7 +706,10 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Transaction_can_begin_with_isolation_level(bool async)
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             Assert.Null(connection.CurrentTransaction);
@@ -693,7 +739,9 @@ namespace Microsoft.EntityFrameworkCore
         {
             var connection = new FakeRelationalConnection(
                 CreateOptions(
-                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
 
             Assert.Equal(0, connection.DbConnections.Count);
 
@@ -723,7 +771,8 @@ namespace Microsoft.EntityFrameworkCore
             var dbTransaction = dbConnection.BeginTransaction(IsolationLevel.Unspecified);
 
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
             Assert.Null(connection.CurrentTransaction);
 
             using (connection.UseTransaction(dbTransaction))
@@ -742,7 +791,8 @@ namespace Microsoft.EntityFrameworkCore
             var dbTransaction = dbConnection.BeginTransaction(IsolationLevel.Unspecified);
 
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+                CreateOptions(new FakeRelationalOptionsExtension().WithConnection(dbConnection))
+            );
             Assert.Null(connection.CurrentTransaction);
 
             var transactionId = Guid.NewGuid();
@@ -762,7 +812,10 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Commit_calls_Commit_on_DbTransaction(bool async)
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             Assert.Null(connection.CurrentTransaction);
@@ -798,7 +851,10 @@ namespace Microsoft.EntityFrameworkCore
         public async Task Rollback_calls_Rollback_on_DbTransaction(bool async)
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             Assert.Null(connection.CurrentTransaction);
@@ -833,9 +889,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             using var connection = new FakeRelationalConnection(
                 CreateOptions(
-                    new FakeRelationalOptionsExtension()
-                        .WithConnectionString("Database=FrodoLives")
-                        .WithCommandTimeout(99)));
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                        .WithCommandTimeout(99)
+                )
+            );
             Assert.Equal(99, connection.CommandTimeout);
         }
 
@@ -843,7 +900,10 @@ namespace Microsoft.EntityFrameworkCore
         public void Can_set_CommandTimeout()
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             connection.CommandTimeout = 88;
 
             Assert.Equal(88, connection.CommandTimeout);
@@ -853,9 +913,11 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_if_CommandTimeout_out_of_range()
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
-            Assert.Throws<ArgumentException>(
-                () => connection.CommandTimeout = -1);
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
+            Assert.Throws<ArgumentException>(() => connection.CommandTimeout = -1);
         }
 
         [ConditionalFact]
@@ -864,7 +926,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 RelationalStrings.NoProviderConfigured,
                 Assert.Throws<InvalidOperationException>(
-                    () => new FakeRelationalConnection(CreateOptions())).Message);
+                    () => new FakeRelationalConnection(CreateOptions())
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -873,21 +937,28 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 RelationalStrings.MultipleProvidersConfigured,
                 Assert.Throws<InvalidOperationException>(
-                    () => new FakeRelationalConnection(
-                        CreateOptions(
-                            new FakeRelationalOptionsExtension(),
-                            new FakeRelationalOptionsExtension()))).Message);
+                    () =>
+                        new FakeRelationalConnection(
+                            CreateOptions(
+                                new FakeRelationalOptionsExtension(),
+                                new FakeRelationalOptionsExtension()
+                            )
+                        )
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public void Throws_if_no_connection_or_connection_string_is_specified_only_when_accessed()
         {
-            var connection = new FakeRelationalConnection(CreateOptions(new FakeRelationalOptionsExtension()));
+            var connection = new FakeRelationalConnection(
+                CreateOptions(new FakeRelationalOptionsExtension())
+            );
 
             Assert.Equal(
                 RelationalStrings.NoConnectionOrConnectionString,
-                Assert.Throws<InvalidOperationException>(
-                    () => connection.DbConnection).Message);
+                Assert.Throws<InvalidOperationException>(() => connection.DbConnection).Message
+            );
 
             Assert.Null(connection.ConnectionString);
         }
@@ -897,9 +968,12 @@ namespace Microsoft.EntityFrameworkCore
         {
             var connection = new FakeRelationalConnection(
                 CreateOptions(
-                    new FakeRelationalOptionsExtension()
-                        .WithConnection(new FakeDbConnection("Database=FrodoLives"))
-                        .WithConnectionString("Database=SamLives")));
+                    new FakeRelationalOptionsExtension().WithConnection(
+                            new FakeDbConnection("Database=FrodoLives")
+                        )
+                        .WithConnectionString("Database=SamLives")
+                )
+            );
 
             Assert.Equal("Database=SamLives", connection.DbConnection.ConnectionString);
         }
@@ -908,35 +982,49 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_when_commit_is_called_without_active_transaction()
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             Assert.Equal(
                 RelationalStrings.NoActiveTransaction,
                 Assert.Throws<InvalidOperationException>(
-                    () => connection.CommitTransaction()).Message);
+                    () => connection.CommitTransaction()
+                ).Message
+            );
         }
 
         [ConditionalFact]
         public void Throws_when_rollback_is_called_without_active_transaction()
         {
             using var connection = new FakeRelationalConnection(
-                CreateOptions(new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")));
+                CreateOptions(
+                    new FakeRelationalOptionsExtension().WithConnectionString("Database=FrodoLives")
+                )
+            );
             Assert.Equal(0, connection.DbConnections.Count);
 
             Assert.Equal(
                 RelationalStrings.NoActiveTransaction,
                 Assert.Throws<InvalidOperationException>(
-                    () => connection.RollbackTransaction()).Message);
+                    () => connection.RollbackTransaction()
+                ).Message
+            );
         }
 
-        private static IDbContextOptions CreateOptions(params RelationalOptionsExtension[] optionsExtensions)
+        private static IDbContextOptions CreateOptions(
+            params RelationalOptionsExtension[] optionsExtensions
+        )
         {
             var optionsBuilder = new DbContextOptionsBuilder();
 
             foreach (var optionsExtension in optionsExtensions)
             {
-                ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(optionsExtension);
+                ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+                    optionsExtension
+                );
             }
 
             return optionsBuilder.Options;

@@ -44,17 +44,23 @@ namespace System.Reflection
 
                     //
                     // first take care of all the NO_INVOKE cases.
-                    if (declaringType == typeof(void) ||
-                         (declaringType != null && declaringType.ContainsGenericParameters) ||
-                         ((CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs))
+                    if (
+                        declaringType == typeof(void)
+                        || (declaringType != null && declaringType.ContainsGenericParameters)
+                        || (
+                            (CallingConvention & CallingConventions.VarArgs)
+                            == CallingConventions.VarArgs
+                        )
+                    )
                     {
                         // We don't need other flags if this method cannot be invoked
                         invocationFlags |= INVOCATION_FLAGS.INVOCATION_FLAGS_NO_INVOKE;
                     }
                     else if (IsStatic)
                     {
-                        invocationFlags |= INVOCATION_FLAGS.INVOCATION_FLAGS_RUN_CLASS_CONSTRUCTOR |
-                                           INVOCATION_FLAGS.INVOCATION_FLAGS_NO_CTOR_INVOKE;
+                        invocationFlags |=
+                            INVOCATION_FLAGS.INVOCATION_FLAGS_RUN_CLASS_CONSTRUCTOR
+                            | INVOCATION_FLAGS.INVOCATION_FLAGS_NO_CTOR_INVOKE;
                     }
                     else if (declaringType != null && declaringType.IsAbstract)
                     {
@@ -64,7 +70,8 @@ namespace System.Reflection
                     {
                         // Check for byref-like types
                         if (declaringType != null && declaringType.IsByRefLike)
-                            invocationFlags |= INVOCATION_FLAGS.INVOCATION_FLAGS_CONTAINS_STACK_POINTERS;
+                            invocationFlags |=
+                                INVOCATION_FLAGS.INVOCATION_FLAGS_CONTAINS_STACK_POINTERS;
 
                         // Check for attempt to create a delegate class.
                         if (typeof(Delegate).IsAssignableFrom(DeclaringType))
@@ -88,8 +95,12 @@ namespace System.Reflection
 
         #region Constructor
         internal RuntimeConstructorInfo(
-            RuntimeMethodHandleInternal handle, RuntimeType declaringType, RuntimeTypeCache reflectedTypeCache,
-            MethodAttributes methodAttributes, BindingFlags bindingFlags)
+            RuntimeMethodHandleInternal handle,
+            RuntimeType declaringType,
+            RuntimeTypeCache reflectedTypeCache,
+            MethodAttributes methodAttributes,
+            BindingFlags bindingFlags
+        )
         {
             m_bindingFlags = bindingFlags;
             m_reflectedTypeCache = reflectedTypeCache;
@@ -100,7 +111,8 @@ namespace System.Reflection
         #endregion
 
         #region NonPublic Methods
-        RuntimeMethodHandleInternal IRuntimeMethodInfo.Value => new RuntimeMethodHandleInternal(m_handle);
+        RuntimeMethodHandleInternal IRuntimeMethodInfo.Value =>
+            new RuntimeMethodHandleInternal(m_handle);
 
         internal override bool CacheEquals(object? o) =>
             o is RuntimeConstructorInfo m && m.m_handle == m_handle;
@@ -206,24 +218,39 @@ namespace System.Reflection
         public override string Name => RuntimeMethodHandle.GetName(this);
         public override MemberTypes MemberType => MemberTypes.Constructor;
 
-        public override Type? DeclaringType => m_reflectedTypeCache.IsGlobal ? null : m_declaringType;
+        public override Type? DeclaringType =>
+            m_reflectedTypeCache.IsGlobal ? null : m_declaringType;
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeConstructorInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeConstructorInfo>(other);
 
-        public override Type? ReflectedType => m_reflectedTypeCache.IsGlobal ? null : ReflectedTypeInternal;
+        public override Type? ReflectedType =>
+            m_reflectedTypeCache.IsGlobal ? null : ReflectedTypeInternal;
 
         public override int MetadataToken => RuntimeMethodHandle.GetMethodDef(this);
         public override Module Module => GetRuntimeModule();
 
-        internal RuntimeType GetRuntimeType() { return m_declaringType; }
-        internal RuntimeModule GetRuntimeModule() { return RuntimeTypeHandle.GetModule(m_declaringType); }
-        internal RuntimeAssembly GetRuntimeAssembly() { return GetRuntimeModule().GetRuntimeAssembly(); }
+        internal RuntimeType GetRuntimeType()
+        {
+            return m_declaringType;
+        }
+        internal RuntimeModule GetRuntimeModule()
+        {
+            return RuntimeTypeHandle.GetModule(m_declaringType);
+        }
+        internal RuntimeAssembly GetRuntimeAssembly()
+        {
+            return GetRuntimeModule().GetRuntimeAssembly();
+        }
         #endregion
 
         #region MethodBase Overrides
 
         // This seems to always returns System.Void.
-        internal override Type GetReturnType() { return Signature.ReturnType; }
+        internal override Type GetReturnType()
+        {
+            return Signature.ReturnType;
+        }
 
         internal override ParameterInfo[] GetParametersNoCopy() =>
             m_parameters ??= RuntimeParameterInfo.GetParameters(this, this, Signature);
@@ -258,29 +285,21 @@ namespace System.Reflection
 
             // ctor is declared on interface class
             if (declaringType.IsInterface)
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateInterfaceEx, declaringType));
-
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateInterfaceEx, declaringType));
             // ctor is on an abstract class
             else if (declaringType.IsAbstract)
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateAbstEx, declaringType));
-
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateAbstEx, declaringType));
             // ctor is on a class that contains stack pointers
             else if (declaringType.GetRootElementType() == typeof(ArgIterator))
                 throw new NotSupportedException();
-
             // ctor is vararg
             else if (isVarArg)
                 throw new NotSupportedException();
-
             // ctor is generic or on a generic class
             else if (declaringType.ContainsGenericParameters)
             {
-                throw new MemberAccessException(
-                    SR.Format(SR.Acc_CreateGenericEx, declaringType));
+                throw new MemberAccessException(SR.Format(SR.Acc_CreateGenericEx, declaringType));
             }
-
             // ctor is declared on System.Void
             else if (declaringType == typeof(void))
                 throw new MemberAccessException(SR.Access_Void);
@@ -289,7 +308,10 @@ namespace System.Reflection
         [DoesNotReturn]
         internal void ThrowNoInvokeException()
         {
-            CheckCanCreateInstance(DeclaringType!, (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs);
+            CheckCanCreateInstance(
+                DeclaringType!,
+                (CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs
+            );
 
             // ctor is .cctor
             if ((Attributes & MethodAttributes.Static) == MethodAttributes.Static)
@@ -300,10 +322,18 @@ namespace System.Reflection
 
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2059:RunClassConstructor",
-            Justification = "This ConstructorInfo instance represents the static constructor itself, so if this object was created, the static constructor exists.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2059:RunClassConstructor",
+            Justification = "This ConstructorInfo instance represents the static constructor itself, so if this object was created, the static constructor exists."
+        )]
         public override object? Invoke(
-            object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             INVOCATION_FLAGS invocationFlags = InvocationFlags;
 
@@ -340,8 +370,21 @@ namespace System.Reflection
             bool wrapExceptions = (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
 
             StackAllocedArguments stackArgs = default;
-            Span<object?> arguments = CheckArguments(ref stackArgs, parameters, binder, invokeAttr, culture, sig);
-            object? retValue = RuntimeMethodHandle.InvokeMethod(obj, arguments, sig, false, wrapExceptions);
+            Span<object?> arguments = CheckArguments(
+                ref stackArgs,
+                parameters,
+                binder,
+                invokeAttr,
+                culture,
+                sig
+            );
+            object? retValue = RuntimeMethodHandle.InvokeMethod(
+                obj,
+                arguments,
+                sig,
+                false,
+                wrapExceptions
+            );
 
             // copy out. This should be made only if ByRef are present.
             // n.b. cannot use Span<T>.CopyTo, as parameters.GetType() might not actually be typeof(object[])
@@ -351,7 +394,9 @@ namespace System.Reflection
             return retValue;
         }
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         public override MethodBody? GetMethodBody()
         {
             RuntimeMethodBody? mb = RuntimeMethodHandle.GetMethodBody(this, ReflectedTypeInternal);
@@ -366,17 +411,32 @@ namespace System.Reflection
 
         public override bool IsSecurityTransparent => false;
 
-        public override bool ContainsGenericParameters => DeclaringType != null && DeclaringType.ContainsGenericParameters;
+        public override bool ContainsGenericParameters =>
+            DeclaringType != null && DeclaringType.ContainsGenericParameters;
         #endregion
 
         #region ConstructorInfo Overrides
         [DebuggerStepThroughAttribute]
         [Diagnostics.DebuggerHidden]
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             INVOCATION_FLAGS invocationFlags = InvocationFlags;
 
-            if ((invocationFlags & (INVOCATION_FLAGS.INVOCATION_FLAGS_NO_INVOKE | INVOCATION_FLAGS.INVOCATION_FLAGS_CONTAINS_STACK_POINTERS | INVOCATION_FLAGS.INVOCATION_FLAGS_NO_CTOR_INVOKE)) != 0)
+            if (
+                (
+                    invocationFlags
+                    & (
+                        INVOCATION_FLAGS.INVOCATION_FLAGS_NO_INVOKE
+                        | INVOCATION_FLAGS.INVOCATION_FLAGS_CONTAINS_STACK_POINTERS
+                        | INVOCATION_FLAGS.INVOCATION_FLAGS_NO_CTOR_INVOKE
+                    )
+                ) != 0
+            )
                 ThrowNoInvokeException();
 
             // get the signature
@@ -394,8 +454,21 @@ namespace System.Reflection
             bool wrapExceptions = (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
 
             StackAllocedArguments stackArgs = default;
-            Span<object?> arguments = CheckArguments(ref stackArgs, parameters, binder, invokeAttr, culture, sig);
-            object retValue = RuntimeMethodHandle.InvokeMethod(null, arguments, sig, true, wrapExceptions)!; // ctor must return non-null
+            Span<object?> arguments = CheckArguments(
+                ref stackArgs,
+                parameters,
+                binder,
+                invokeAttr,
+                culture,
+                sig
+            );
+            object retValue = RuntimeMethodHandle.InvokeMethod(
+                null,
+                arguments,
+                sig,
+                true,
+                wrapExceptions
+            )!; // ctor must return non-null
 
             // copy out. This should be made only if ByRef are present.
             // n.b. cannot use Span<T>.CopyTo, as parameters.GetType() might not actually be typeof(object[])

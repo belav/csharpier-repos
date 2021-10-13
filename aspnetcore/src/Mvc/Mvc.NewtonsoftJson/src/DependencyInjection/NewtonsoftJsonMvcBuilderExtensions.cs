@@ -35,7 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcBuilder"/>.</returns>
         public static IMvcBuilder AddNewtonsoftJson(
             this IMvcBuilder builder,
-            Action<MvcNewtonsoftJsonOptions> setupAction)
+            Action<MvcNewtonsoftJsonOptions> setupAction
+        )
         {
             if (builder == null)
             {

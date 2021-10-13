@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Hosting
     /// <summary>
     /// Libuv <see cref="IWebHostBuilder"/> extensions.
     /// </summary>
-    [Obsolete("The libuv transport is obsolete and will be removed in a future release. See https://aka.ms/libuvtransport for details.", error: false)] // Remove after .NET 6.
+    [Obsolete(
+        "The libuv transport is obsolete and will be removed in a future release. See https://aka.ms/libuvtransport for details.",
+        error: false
+    )] // Remove after .NET 6.
     public static class WebHostBuilderLibuvExtensions
     {
         /// <summary>
@@ -24,13 +27,18 @@ namespace Microsoft.AspNetCore.Hosting
         /// <returns>
         /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
         /// </returns>
-        [Obsolete("The libuv transport is obsolete and will be removed in a future release. See https://aka.ms/libuvtransport for details.", error: false)] // Remove after .NET 6.
+        [Obsolete(
+            "The libuv transport is obsolete and will be removed in a future release. See https://aka.ms/libuvtransport for details.",
+            error: false
+        )] // Remove after .NET 6.
         public static IWebHostBuilder UseLibuv(this IWebHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(services =>
-            {
-                services.AddSingleton<IConnectionListenerFactory, LibuvTransportFactory>();
-            });
+            return hostBuilder.ConfigureServices(
+                services =>
+                {
+                    services.AddSingleton<IConnectionListenerFactory, LibuvTransportFactory>();
+                }
+            );
         }
 
         /// <summary>
@@ -45,13 +53,22 @@ namespace Microsoft.AspNetCore.Hosting
         /// <returns>
         /// The Microsoft.AspNetCore.Hosting.IWebHostBuilder.
         /// </returns>
-        [Obsolete("The libuv transport is obsolete and will be removed in a future release. See https://aka.ms/libuvtransport for details.", error: false)] // Remove after .NET 6.
-        public static IWebHostBuilder UseLibuv(this IWebHostBuilder hostBuilder, Action<LibuvTransportOptions> configureOptions)
+        [Obsolete(
+            "The libuv transport is obsolete and will be removed in a future release. See https://aka.ms/libuvtransport for details.",
+            error: false
+        )] // Remove after .NET 6.
+        public static IWebHostBuilder UseLibuv(
+            this IWebHostBuilder hostBuilder,
+            Action<LibuvTransportOptions> configureOptions
+        )
         {
-            return hostBuilder.UseLibuv().ConfigureServices(services =>
-            {
-                services.Configure(configureOptions);
-            });
+            return hostBuilder.UseLibuv()
+                .ConfigureServices(
+                    services =>
+                    {
+                        services.Configure(configureOptions);
+                    }
+                );
         }
     }
 }

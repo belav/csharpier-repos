@@ -23,7 +23,7 @@ namespace ApiExplorerWebSite
                 var changeTokenSource = new CancellationTokenSource();
                 return new CancellationChangeToken(changeTokenSource.Token);
             }
-            
+
             return new CancellationChangeToken(ChangeToken.TokenSource.Token);
         }
     }

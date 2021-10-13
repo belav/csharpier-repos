@@ -12,8 +12,10 @@ namespace Microsoft.EntityFrameworkCore
     public class UpdatesSqlServerTest : UpdatesRelationalTestBase<UpdatesSqlServerFixture>
     {
         // ReSharper disable once UnusedParameter.Local
-        public UpdatesSqlServerTest(UpdatesSqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public UpdatesSqlServerTest(
+            UpdatesSqlServerFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
             Fixture.TestSqlLoggerFactory.Clear();
@@ -26,8 +28,15 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     context.AddRange(
-                        new ProductWithBytes { ProductCategories = new List<ProductCategory> { new() { CategoryId = 77 } } },
-                        new Category { Id = 77, PrincipalId = 777 });
+                        new ProductWithBytes
+                        {
+                            ProductCategories = new List<ProductCategory>
+                            {
+                                new() { CategoryId = 77 }
+                            }
+                        },
+                        new Category { Id = 77, PrincipalId = 777 }
+                    );
 
                     context.SaveChanges();
                 },
@@ -39,9 +48,16 @@ namespace Microsoft.EntityFrameworkCore
                         .OfType<ProductWithBytes>()
                         .Single();
                     var productCategory = product.ProductCategories.Single();
-                    Assert.Equal(productCategory.CategoryId, context.Set<ProductCategory>().Single().CategoryId);
-                    Assert.Equal(productCategory.CategoryId, context.Set<Category>().Single(c => c.PrincipalId == 777).Id);
-                });
+                    Assert.Equal(
+                        productCategory.CategoryId,
+                        context.Set<ProductCategory>().Single().CategoryId
+                    );
+                    Assert.Equal(
+                        productCategory.CategoryId,
+                        context.Set<Category>().Single(c => c.PrincipalId == 777).Id
+                    );
+                }
+            );
 
             AssertContainsSql(
                 @"@p0='77'
@@ -68,7 +84,8 @@ INTO @inserted0;
 
 SELECT [t].[Id] FROM [ProductBase] t
 INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
-ORDER BY [i].[_Position];");
+ORDER BY [i].[_Position];"
+            );
         }
 
         public override void Save_replaced_principal()
@@ -82,55 +99,60 @@ ORDER BY [i].[_Position];");
 SET NOCOUNT ON;
 UPDATE [Categories] SET [Name] = @p0
 WHERE [Id] = @p1;
-SELECT @@ROWCOUNT;");
+SELECT @@ROWCOUNT;"
+            );
         }
 
         public override void Identifiers_are_generated_correctly()
         {
             using var context = CreateContext();
             var entityType = context.Model.FindEntityType(
-                typeof(
-                    LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly
-                ));
+                typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
+            );
             Assert.Equal(
                 "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorking~",
-                entityType.GetTableName());
+                entityType.GetTableName()
+            );
             Assert.Equal(
                 "PK_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-                entityType.GetKeys().Single().GetName());
+                entityType.GetKeys().Single().GetName()
+            );
             Assert.Equal(
                 "FK_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-                entityType.GetForeignKeys().Single().GetConstraintName());
+                entityType.GetForeignKeys().Single().GetConstraintName()
+            );
             Assert.Equal(
                 "IX_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-                entityType.GetIndexes().Single().GetDatabaseName());
+                entityType.GetIndexes().Single().GetDatabaseName()
+            );
 
             var entityType2 = context.Model.FindEntityType(
-                typeof(
-                    LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails
-                ));
+                typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails)
+            );
 
             Assert.Equal(
                 "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkin~1",
-                entityType2.GetTableName());
-            Assert.Equal(
-                "PK_LoginDetails",
-                entityType2.GetKeys().Single().GetName());
+                entityType2.GetTableName()
+            );
+            Assert.Equal("PK_LoginDetails", entityType2.GetKeys().Single().GetName());
             Assert.Equal(
                 "ExtraPropertyWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCo~",
-                entityType2.GetProperties().ElementAt(1).GetColumnBaseName());
+                entityType2.GetProperties().ElementAt(1).GetColumnBaseName()
+            );
             Assert.Equal(
                 "ExtraPropertyWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingC~1",
-                entityType2.GetProperties().ElementAt(2).GetColumnBaseName());
+                entityType2.GetProperties().ElementAt(2).GetColumnBaseName()
+            );
             Assert.Equal(
                 "IX_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWor~1",
-                entityType2.GetIndexes().Single().GetDatabaseName());
+                entityType2.GetIndexes().Single().GetDatabaseName()
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-        protected void AssertContainsSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
+        protected void AssertContainsSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
     }
 }

@@ -23,52 +23,102 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     internal static partial class DocumentExtensions
     {
         // ⚠ Verify IVTs do not use this method before removing it.
-        public static TLanguageService? GetLanguageService<TLanguageService>(this Document? document) where TLanguageService : class, ILanguageService
-            => document?.Project?.GetLanguageService<TLanguageService>();
+        public static TLanguageService? GetLanguageService<TLanguageService>(
+            this Document? document
+        ) where TLanguageService : class, ILanguageService =>
+            document?.Project?.GetLanguageService<TLanguageService>();
 
-        public static TLanguageService GetRequiredLanguageService<TLanguageService>(this Document document) where TLanguageService : class, ILanguageService
-            => document.Project.GetRequiredLanguageService<TLanguageService>();
+        public static TLanguageService GetRequiredLanguageService<TLanguageService>(
+            this Document document
+        ) where TLanguageService : class, ILanguageService =>
+            document.Project.GetRequiredLanguageService<TLanguageService>();
 
-        public static async ValueTask<SemanticModel> GetRequiredSemanticModelAsync(this Document document, CancellationToken cancellationToken)
+        public static async ValueTask<SemanticModel> GetRequiredSemanticModelAsync(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
             if (document.TryGetSemanticModel(out var semanticModel))
                 return semanticModel;
 
-            semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            return semanticModel ?? throw new InvalidOperationException(string.Format(WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0, document.Name));
+            semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return semanticModel
+                ?? throw new InvalidOperationException(
+                    string.Format(
+                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                        document.Name
+                    )
+                );
         }
 
-        public static async ValueTask<SyntaxTree> GetRequiredSyntaxTreeAsync(this Document document, CancellationToken cancellationToken)
+        public static async ValueTask<SyntaxTree> GetRequiredSyntaxTreeAsync(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
             if (document.TryGetSyntaxTree(out var syntaxTree))
                 return syntaxTree;
 
             syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            return syntaxTree ?? throw new InvalidOperationException(string.Format(WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0, document.Name));
+            return syntaxTree
+                ?? throw new InvalidOperationException(
+                    string.Format(
+                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                        document.Name
+                    )
+                );
         }
 
 #if !CODE_STYLE
-        public static SyntaxTree GetRequiredSyntaxTreeSynchronously(this Document document, CancellationToken cancellationToken)
+        public static SyntaxTree GetRequiredSyntaxTreeSynchronously(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = document.GetSyntaxTreeSynchronously(cancellationToken);
-            return syntaxTree ?? throw new InvalidOperationException(string.Format(WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0, document.Name));
+            return syntaxTree
+                ?? throw new InvalidOperationException(
+                    string.Format(
+                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                        document.Name
+                    )
+                );
         }
 #endif
 
-        public static async ValueTask<SyntaxNode> GetRequiredSyntaxRootAsync(this Document document, CancellationToken cancellationToken)
+        public static async ValueTask<SyntaxNode> GetRequiredSyntaxRootAsync(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
             if (document.TryGetSyntaxRoot(out var root))
                 return root;
 
             root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            return root ?? throw new InvalidOperationException(string.Format(WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0, document.Name));
+            return root
+                ?? throw new InvalidOperationException(
+                    string.Format(
+                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                        document.Name
+                    )
+                );
         }
 
 #if !CODE_STYLE
-        public static SyntaxNode GetRequiredSyntaxRootSynchronously(this Document document, CancellationToken cancellationToken)
+        public static SyntaxNode GetRequiredSyntaxRootSynchronously(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
             var root = document.GetSyntaxRootSynchronously(cancellationToken);
-            return root ?? throw new InvalidOperationException(string.Format(WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0, document.Name));
+            return root
+                ?? throw new InvalidOperationException(
+                    string.Format(
+                        WorkspaceExtensionsResources.SyntaxTree_is_required_to_accomplish_the_task_but_is_not_supported_by_document_0,
+                        document.Name
+                    )
+                );
         }
 #endif
 
@@ -92,8 +142,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <para/>
         /// As a speculative semantic model may be returned, location based information provided by it may be innacurate.
         /// </summary>
-        public static ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(this Document document, int position, CancellationToken cancellationToken)
-            => ReuseExistingSpeculativeModelAsync(document, new TextSpan(position, 0), cancellationToken);
+        public static ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(
+            this Document document,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            ReuseExistingSpeculativeModelAsync(
+                document,
+                new TextSpan(position, 0),
+                cancellationToken
+            );
 
         /// <summary>
         /// Attempts to return an speculative semantic model for <paramref name="document"/> if possible if <paramref
@@ -109,15 +167,21 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <para/>
         /// As a speculative semantic model may be returned, location based information provided by it may be innacurate.
         /// </summary>
-        public static async ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(this Document document, TextSpan span, CancellationToken cancellationToken)
+        public static async ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(
+            this Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(document.SupportsSemanticModel);
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = root.FindToken(span.Start);
             var node = token.Parent!.AncestorsAndSelf().First(a => a.FullSpan.Contains(span));
 
-            return await ReuseExistingSpeculativeModelAsync(document, node, cancellationToken).ConfigureAwait(false);
+            return await ReuseExistingSpeculativeModelAsync(document, node, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -134,25 +198,43 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <para/>
         /// As a speculative semantic model may be returned, location based information provided by it may be innacurate.
         /// </summary>
-        public static ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(this Document document, SyntaxNode? node, CancellationToken cancellationToken)
+        public static ValueTask<SemanticModel> ReuseExistingSpeculativeModelAsync(
+            this Document document,
+            SyntaxNode? node,
+            CancellationToken cancellationToken
+        )
         {
             if (node == null)
                 return document.GetRequiredSemanticModelAsync(cancellationToken);
 
             var workspace = document.Project.Solution.Workspace;
-            var semanticModelService = workspace.Services.GetRequiredService<ISemanticModelReuseWorkspaceService>();
+            var semanticModelService =
+                workspace.Services.GetRequiredService<ISemanticModelReuseWorkspaceService>();
 
-            return semanticModelService.ReuseExistingSpeculativeModelAsync(document, node, cancellationToken);
+            return semanticModelService.ReuseExistingSpeculativeModelAsync(
+                document,
+                node,
+                cancellationToken
+            );
         }
 
 #if DEBUG
-        public static async Task<bool> HasAnyErrorsAsync(this Document document, CancellationToken cancellationToken, List<string>? ignoreErrorCode = null)
+        public static async Task<bool> HasAnyErrorsAsync(
+            this Document document,
+            CancellationToken cancellationToken,
+            List<string>? ignoreErrorCode = null
+        )
         {
-            var errors = await GetErrorsAsync(document, cancellationToken, ignoreErrorCode).ConfigureAwait(false);
+            var errors = await GetErrorsAsync(document, cancellationToken, ignoreErrorCode)
+                .ConfigureAwait(false);
             return errors.Length > 0;
         }
 
-        public static async Task<ImmutableArray<Diagnostic>> GetErrorsAsync(this Document document, CancellationToken cancellationToken, IList<string>? ignoreErrorCode = null)
+        public static async Task<ImmutableArray<Diagnostic>> GetErrorsAsync(
+            this Document document,
+            CancellationToken cancellationToken,
+            IList<string>? ignoreErrorCode = null
+        )
         {
             if (!document.SupportsSemanticModel)
             {
@@ -160,17 +242,28 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             ignoreErrorCode ??= SpecializedCollections.EmptyList<string>();
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            return semanticModel!.GetDiagnostics(cancellationToken: cancellationToken).WhereAsArray(
-                diag => diag.Severity == DiagnosticSeverity.Error && !ignoreErrorCode.Contains(diag.Id));
+            var semanticModel = await document.GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return semanticModel!.GetDiagnostics(cancellationToken: cancellationToken)
+                .WhereAsArray(
+                    diag =>
+                        diag.Severity == DiagnosticSeverity.Error
+                        && !ignoreErrorCode.Contains(diag.Id)
+                );
         }
 
         /// <summary>
         /// Debug only extension method to verify no errors were introduced by formatting, pretty listing and other related document altering service in error-free code.
         /// </summary>
-        public static async Task VerifyNoErrorsAsync(this Document newDocument, string message, CancellationToken cancellationToken, List<string>? ignoreErrorCodes = null)
+        public static async Task VerifyNoErrorsAsync(
+            this Document newDocument,
+            string message,
+            CancellationToken cancellationToken,
+            List<string>? ignoreErrorCodes = null
+        )
         {
-            var errors = await newDocument.GetErrorsAsync(cancellationToken, ignoreErrorCodes).ConfigureAwait(false);
+            var errors = await newDocument.GetErrorsAsync(cancellationToken, ignoreErrorCodes)
+                .ConfigureAwait(false);
             if (errors.Length > 0)
             {
                 var diagnostics = string.Join(", ", errors.Select(d => d.ToString()));
@@ -180,18 +273,31 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 #endif
 
 #if !CODE_STYLE
-        public static bool IsGeneratedCode(this Document document, CancellationToken cancellationToken)
+        public static bool IsGeneratedCode(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var generatedCodeRecognitionService = document.GetLanguageService<IGeneratedCodeRecognitionService>();
-            return generatedCodeRecognitionService?.IsGeneratedCode(document, cancellationToken) == true;
+            var generatedCodeRecognitionService =
+                document.GetLanguageService<IGeneratedCodeRecognitionService>();
+            return generatedCodeRecognitionService?.IsGeneratedCode(document, cancellationToken)
+                == true;
         }
 #endif
 
-        public static async Task<bool> IsGeneratedCodeAsync(this Document document, CancellationToken cancellationToken)
+        public static async Task<bool> IsGeneratedCodeAsync(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var generatedCodeRecognitionService = document.GetLanguageService<IGeneratedCodeRecognitionService>();
-            return generatedCodeRecognitionService != null &&
-                await generatedCodeRecognitionService.IsGeneratedCodeAsync(document, cancellationToken).ConfigureAwait(false);
+            var generatedCodeRecognitionService =
+                document.GetLanguageService<IGeneratedCodeRecognitionService>();
+            return generatedCodeRecognitionService != null
+                && await generatedCodeRecognitionService.IsGeneratedCodeAsync(
+                        document,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
         }
 
         public static IEnumerable<Document> GetLinkedDocuments(this Document document)

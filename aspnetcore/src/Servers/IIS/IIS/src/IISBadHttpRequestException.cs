@@ -23,10 +23,18 @@ namespace Microsoft.AspNetCore.Server.IIS
             switch (reason)
             {
                 case RequestRejectionReason.RequestBodyTooLarge:
-                    ex = new BadHttpRequestException(CoreStrings.BadRequest_RequestBodyTooLarge, StatusCodes.Status413PayloadTooLarge, reason);
+                    ex = new BadHttpRequestException(
+                        CoreStrings.BadRequest_RequestBodyTooLarge,
+                        StatusCodes.Status413PayloadTooLarge,
+                        reason
+                    );
                     break;
                 default:
-                    ex = new BadHttpRequestException(CoreStrings.BadRequest, StatusCodes.Status400BadRequest, reason);
+                    ex = new BadHttpRequestException(
+                        CoreStrings.BadRequest,
+                        StatusCodes.Status400BadRequest,
+                        reason
+                    );
                     break;
             }
             return ex;

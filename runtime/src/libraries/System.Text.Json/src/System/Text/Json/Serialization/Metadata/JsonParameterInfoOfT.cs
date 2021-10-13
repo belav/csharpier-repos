@@ -18,13 +18,10 @@ namespace System.Text.Json.Serialization.Metadata
             Type runtimePropertyType,
             ParameterInfo parameterInfo,
             JsonPropertyInfo matchingProperty,
-            JsonSerializerOptions options)
+            JsonSerializerOptions options
+        )
         {
-            base.Initialize(
-                runtimePropertyType,
-                parameterInfo,
-                matchingProperty,
-                options);
+            base.Initialize(runtimePropertyType, parameterInfo, matchingProperty, options);
 
             Debug.Assert(parameterInfo.ParameterType == matchingProperty.DeclaredPropertyType);
 

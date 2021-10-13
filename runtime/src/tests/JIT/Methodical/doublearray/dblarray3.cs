@@ -51,7 +51,6 @@ internal class DblArray3
         }
     }
 
-
     public static void f1c()
     {
         double[,] arr = new double[5, 5];
@@ -71,7 +70,6 @@ internal class DblArray3
             throw new Exception();
         }
     }
-
 
     public static void f2a()
     {
@@ -133,6 +131,7 @@ internal class DblArray3
             GC.TryStartNoGCRegion(500_000);
             f();
         }
+
         finally
         {
             GC.EndNoGCRegion();

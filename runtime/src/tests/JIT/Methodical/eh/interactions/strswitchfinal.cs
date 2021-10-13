@@ -60,7 +60,7 @@ namespace strswitch
             s_testLog.StartRecording();
             for (int i = 0; i < s.Length; i++)
             {
-            beginloop:
+                beginloop:
                 try
                 {
                     try
@@ -84,6 +84,7 @@ namespace strswitch
                                     {
                                         Console.WriteLine("s == two");
                                     }
+
                                     finally
                                     {
                                         Console.WriteLine("After two");
@@ -102,6 +103,7 @@ namespace strswitch
                                             goto continueloop;
                                         }
                                     }
+
                                     finally
                                     {
                                         Console.WriteLine("After three");
@@ -125,15 +127,16 @@ namespace strswitch
                                                     }
                                                     break;
                                             }
-                                        label:
+                                            label:
                                             Console.WriteLine("Unreached");
                                             throw new Exception();
                                         }
+
                                         finally
                                         {
                                             Console.WriteLine("After after three");
                                         }
-                                    label2:
+                                        label2:
                                         Console.WriteLine("Unreached");
                                     }
                                     goto continueloop;
@@ -144,9 +147,8 @@ namespace strswitch
                                         try
                                         {
                                             Console.WriteLine("s == " + s[s.Length]);
-                                            try
-                                            {
-                                            }
+                                            try { }
+
                                             finally
                                             {
                                                 Console.WriteLine("Unreached");
@@ -155,9 +157,9 @@ namespace strswitch
                                         catch (Exception e)
                                         {
                                             goto test;
-                                        rethrowex:
+                                            rethrowex:
                                             throw;
-                                        test:
+                                            test:
                                             if (e is System.ArithmeticException)
                                             {
                                                 try
@@ -165,6 +167,7 @@ namespace strswitch
                                                     Console.WriteLine("unreached ");
                                                     goto finishfour;
                                                 }
+
                                                 finally
                                                 {
                                                     Console.WriteLine("also unreached");
@@ -176,11 +179,12 @@ namespace strswitch
                                             }
                                         }
                                     }
+
                                     finally
                                     {
                                         Console.WriteLine("In four's finally");
                                     }
-                                finishfour:
+                                    finishfour:
                                     break;
                                 case "five":
                                     try
@@ -191,6 +195,7 @@ namespace strswitch
                                             {
                                                 Console.WriteLine("s == five");
                                             }
+
                                             finally
                                             {
                                                 Console.WriteLine("Five's finally 0");
@@ -206,6 +211,7 @@ namespace strswitch
                                         }
                                         break;
                                     }
+
                                     finally
                                     {
                                         Console.WriteLine("Five's finally 2");
@@ -216,13 +222,16 @@ namespace strswitch
                                         Console.WriteLine("Greater than five");
                                         goto finish;
                                     }
+
                                     finally
                                     {
                                         Console.WriteLine("in six's finally");
                                     }
-                            };
+                            }
+                            ;
                             continue;
                         }
+
                         finally
                         {
                             Console.WriteLine("In inner finally");
@@ -260,15 +269,16 @@ namespace strswitch
 
                     Console.WriteLine("Unreached");
                 }
+
                 finally
                 {
                     Console.WriteLine("In outer finally\n");
                 }
 
-            continueloop:
+                continueloop:
                 Console.WriteLine("Continuing");
             }
-        finish:
+            finish:
             s_testLog.StopRecording();
 
             return s_testLog.VerifyOutput();

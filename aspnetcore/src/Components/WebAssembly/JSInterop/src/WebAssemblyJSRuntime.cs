@@ -19,11 +19,19 @@ namespace Microsoft.JSInterop.WebAssembly
         /// </summary>
         protected WebAssemblyJSRuntime()
         {
-            JsonSerializerOptions.Converters.Insert(0, new WebAssemblyJSObjectReferenceJsonConverter(this));
+            JsonSerializerOptions.Converters.Insert(
+                0,
+                new WebAssemblyJSObjectReferenceJsonConverter(this)
+            );
         }
 
         /// <inheritdoc />
-        protected override string InvokeJS(string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
+        protected override string InvokeJS(
+            string identifier,
+            string? argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        )
         {
             var callInfo = new JSCallInfo
             {
@@ -34,15 +42,25 @@ namespace Microsoft.JSInterop.WebAssembly
                 MarshalledCallAsyncHandle = default
             };
 
-            var result = InternalCalls.InvokeJS<object, object, object, string>(out var exception, ref callInfo, null, null, null);
+            var result = InternalCalls.InvokeJS<object, object, object, string>(
+                out var exception,
+                ref callInfo,
+                null,
+                null,
+                null
+            );
 
-            return exception != null
-                ? throw new JSException(exception)
-                : result;
+            return exception != null ? throw new JSException(exception) : result;
         }
 
         /// <inheritdoc />
-        protected override void BeginInvokeJS(long asyncHandle, string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
+        protected override void BeginInvokeJS(
+            long asyncHandle,
+            string identifier,
+            string? argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        )
         {
             var callInfo = new JSCallInfo
             {
@@ -53,24 +71,50 @@ namespace Microsoft.JSInterop.WebAssembly
                 MarshalledCallAsyncHandle = asyncHandle
             };
 
-            InternalCalls.InvokeJS<object, object, object, string>(out _, ref callInfo, null, null, null);
+            InternalCalls.InvokeJS<object, object, object, string>(
+                out _,
+                ref callInfo,
+                null,
+                null,
+                null
+            );
         }
 
         /// <inheritdoc />
-        protected override void EndInvokeDotNet(DotNetInvocationInfo callInfo, in DotNetInvocationResult dispatchResult)
+        protected override void EndInvokeDotNet(
+            DotNetInvocationInfo callInfo,
+            in DotNetInvocationResult dispatchResult
+        )
         {
             // For failures, the common case is to call EndInvokeDotNet with the Exception object.
             // For these we'll serialize as something that's useful to receive on the JS side.
             // If the value is not an Exception, we'll just rely on it being directly JSON-serializable.
-            var resultOrError = dispatchResult.Success ? dispatchResult.Result : dispatchResult.Exception!.ToString();
+            var resultOrError = dispatchResult.Success
+                ? dispatchResult.Result
+                : dispatchResult.Exception!.ToString();
 
             // We pass 0 as the async handle because we don't want the JS-side code to
             // send back any notification (we're just providing a result for an existing async call)
-            var args = JsonSerializer.Serialize(new[] { callInfo.CallId, dispatchResult.Success, resultOrError }, JsonSerializerOptions);
-            BeginInvokeJS(0, "DotNet.jsCallDispatcher.endInvokeDotNetFromJS", args, JSCallResultType.Default, 0);
+            var args = JsonSerializer.Serialize(
+                new[] { callInfo.CallId, dispatchResult.Success, resultOrError },
+                JsonSerializerOptions
+            );
+            BeginInvokeJS(
+                0,
+                "DotNet.jsCallDispatcher.endInvokeDotNetFromJS",
+                args,
+                JSCallResultType.Default,
+                0
+            );
         }
 
-        internal TResult InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2, long targetInstanceId)
+        internal TResult InvokeUnmarshalled<T0, T1, T2, TResult>(
+            string identifier,
+            T0 arg0,
+            T1 arg1,
+            T2 arg2,
+            long targetInstanceId
+        )
         {
             var resultType = JSCallResultTypeHelper.FromGeneric<TResult>();
 
@@ -86,34 +130,48 @@ namespace Microsoft.JSInterop.WebAssembly
             switch (resultType)
             {
                 case JSCallResultType.Default:
-                    var result = InternalCalls.InvokeJS<T0, T1, T2, TResult>(out exception, ref callInfo, arg0, arg1, arg2);
-                    return exception != null
-                        ? throw new JSException(exception)
-                        : result;
+                    var result = InternalCalls.InvokeJS<T0, T1, T2, TResult>(
+                        out exception,
+                        ref callInfo,
+                        arg0,
+                        arg1,
+                        arg2
+                    );
+                    return exception != null ? throw new JSException(exception) : result;
                 case JSCallResultType.JSObjectReference:
-                    var id = InternalCalls.InvokeJS<T0, T1, T2, int>(out exception, ref callInfo, arg0, arg1, arg2);
+                    var id = InternalCalls.InvokeJS<T0, T1, T2, int>(
+                        out exception,
+                        ref callInfo,
+                        arg0,
+                        arg1,
+                        arg2
+                    );
                     return exception != null
-                        ? throw new JSException(exception)
-                        : (TResult)(object)new WebAssemblyJSObjectReference(this, id);
+                      ? throw new JSException(exception)
+                      : (TResult)(object)new WebAssemblyJSObjectReference(this, id);
                 default:
                     throw new InvalidOperationException($"Invalid result type '{resultType}'.");
             }
         }
 
         /// <inheritdoc />
-        public TResult InvokeUnmarshalled<TResult>(string identifier)
-            => InvokeUnmarshalled<object?, object?, object?, TResult>(identifier, null, null, null, 0);
+        public TResult InvokeUnmarshalled<TResult>(string identifier) =>
+            InvokeUnmarshalled<object?, object?, object?, TResult>(identifier, null, null, null, 0);
 
         /// <inheritdoc />
-        public TResult InvokeUnmarshalled<T0, TResult>(string identifier, T0 arg0)
-            => InvokeUnmarshalled<T0, object?, object?, TResult>(identifier, arg0, null, null, 0);
+        public TResult InvokeUnmarshalled<T0, TResult>(string identifier, T0 arg0) =>
+            InvokeUnmarshalled<T0, object?, object?, TResult>(identifier, arg0, null, null, 0);
 
         /// <inheritdoc />
-        public TResult InvokeUnmarshalled<T0, T1, TResult>(string identifier, T0 arg0, T1 arg1)
-            => InvokeUnmarshalled<T0, T1, object?, TResult>(identifier, arg0, arg1, null, 0);
+        public TResult InvokeUnmarshalled<T0, T1, TResult>(string identifier, T0 arg0, T1 arg1) =>
+            InvokeUnmarshalled<T0, T1, object?, TResult>(identifier, arg0, arg1, null, 0);
 
         /// <inheritdoc />
-        public TResult InvokeUnmarshalled<T0, T1, T2, TResult>(string identifier, T0 arg0, T1 arg1, T2 arg2)
-            => InvokeUnmarshalled<T0, T1, T2, TResult>(identifier, arg0, arg1, arg2, 0);
+        public TResult InvokeUnmarshalled<T0, T1, T2, TResult>(
+            string identifier,
+            T0 arg0,
+            T1 arg1,
+            T2 arg2
+        ) => InvokeUnmarshalled<T0, T1, T2, TResult>(identifier, arg0, arg1, arg2, 0);
     }
 }

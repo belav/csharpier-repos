@@ -22,30 +22,36 @@ namespace System.CommandLine.Invocation
 
         public ModelBindingCommandHandler(
             MethodInfo handlerMethodInfo,
-            IMethodDescriptor methodDescriptor)
+            IMethodDescriptor methodDescriptor
+        )
         {
-            _handlerMethodInfo = handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
+            _handlerMethodInfo =
+                handlerMethodInfo ?? throw new ArgumentNullException(nameof(handlerMethodInfo));
             _invocationTargetBinder = _handlerMethodInfo.IsStatic
-                                          ? null
-                                          : new ModelBinder(_handlerMethodInfo.ReflectedType);
-            _methodDescriptor = methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
+                ? null
+                : new ModelBinder(_handlerMethodInfo.ReflectedType);
+            _methodDescriptor =
+                methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
         }
 
         public ModelBindingCommandHandler(
             MethodInfo handlerMethodInfo,
             IMethodDescriptor methodDescriptor,
-            object? invocationTarget)
-            :this(handlerMethodInfo, methodDescriptor )
+            object? invocationTarget
+        ) : this(handlerMethodInfo, methodDescriptor)
         {
             _invocationTarget = invocationTarget;
         }
 
         public ModelBindingCommandHandler(
-             Delegate handlerDelegate,
-             IMethodDescriptor methodDescriptor)
+            Delegate handlerDelegate,
+            IMethodDescriptor methodDescriptor
+        )
         {
-            _handlerDelegate = handlerDelegate ?? throw new ArgumentNullException(nameof(handlerDelegate));
-            _methodDescriptor = methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
+            _handlerDelegate =
+                handlerDelegate ?? throw new ArgumentNullException(nameof(handlerDelegate));
+            _methodDescriptor =
+                methodDescriptor ?? throw new ArgumentNullException(nameof(methodDescriptor));
         }
 
         public async Task<int> InvokeAsync(InvocationContext context)
@@ -53,21 +59,21 @@ namespace System.CommandLine.Invocation
             var bindingContext = context.BindingContext;
 
             var (boundValues, _) = ModelBinder.GetBoundValues(
-                                                invokeArgumentBindingSources,
-                                                bindingContext,
-                                                _methodDescriptor.ParameterDescriptors,
-                                                _enforceExplicitBinding);
+                invokeArgumentBindingSources,
+                bindingContext,
+                _methodDescriptor.ParameterDescriptors,
+                _enforceExplicitBinding
+            );
 
-            var invocationArguments = boundValues
-                                        .Select(x => x.Value)
-                                        .ToArray();
+            var invocationArguments = boundValues.Select(x => x.Value).ToArray();
 
             object result;
             if (_handlerDelegate is null)
             {
-                var invocationTarget = _invocationTarget ?? 
-                    bindingContext.ServiceProvider.GetService(_handlerMethodInfo!.DeclaringType);
-                if(invocationTarget is { })
+                var invocationTarget =
+                    _invocationTarget
+                    ?? bindingContext.ServiceProvider.GetService(_handlerMethodInfo!.DeclaringType);
+                if (invocationTarget is { })
                 {
                     _invocationTargetBinder?.UpdateInstance(invocationTarget, bindingContext);
                 }
@@ -85,13 +91,16 @@ namespace System.CommandLine.Invocation
 
         public void BindParameter(ParameterInfo param, Argument argument)
         {
-            var _ = argument ?? throw new InvalidOperationException("You must specify an argument to bind");
+            var _ =
+                argument
+                ?? throw new InvalidOperationException("You must specify an argument to bind");
             BindValueSource(param, new SpecificSymbolValueSource(argument));
         }
 
         public void BindParameter(ParameterInfo param, Option option)
         {
-            var _ = option ?? throw new InvalidOperationException("You must specify an option to bind");
+            var _ =
+                option ?? throw new InvalidOperationException("You must specify an option to bind");
             BindValueSource(param, new SpecificSymbolValueSource(option));
         }
 
@@ -105,11 +114,11 @@ namespace System.CommandLine.Invocation
             invokeArgumentBindingSources.Add(paramDesc, valueSource);
         }
 
-        private ParameterDescriptor? FindParameterDescriptor(ParameterInfo? param)
-            => param == null
-               ? null
-               : _methodDescriptor.ParameterDescriptors
-                    .FirstOrDefault(x => x.ValueName == param.Name &&
-                                            x.ValueType == param.ParameterType);
+        private ParameterDescriptor? FindParameterDescriptor(ParameterInfo? param) =>
+            param == null
+                ? null
+                : _methodDescriptor.ParameterDescriptors.FirstOrDefault(
+                      x => x.ValueName == param.Name && x.ValueType == param.ParameterType
+                  );
     }
 }

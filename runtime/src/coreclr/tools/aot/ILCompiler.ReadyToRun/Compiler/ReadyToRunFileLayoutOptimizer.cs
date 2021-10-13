@@ -34,10 +34,12 @@ namespace ILCompiler
 
     class ReadyToRunFileLayoutOptimizer
     {
-        public ReadyToRunFileLayoutOptimizer (ReadyToRunMethodLayoutAlgorithm methodAlgorithm,
-                                              ReadyToRunFileLayoutAlgorithm fileAlgorithm,
-                                              ProfileDataManager profileData,
-                                              NodeFactory nodeFactory)
+        public ReadyToRunFileLayoutOptimizer(
+            ReadyToRunMethodLayoutAlgorithm methodAlgorithm,
+            ReadyToRunFileLayoutAlgorithm fileAlgorithm,
+            ProfileDataManager profileData,
+            NodeFactory nodeFactory
+        )
         {
             _methodLayoutAlgorithm = methodAlgorithm;
             _fileLayoutAlgorithm = fileAlgorithm;
@@ -45,12 +47,16 @@ namespace ILCompiler
             _nodeFactory = nodeFactory;
         }
 
-        private ReadyToRunMethodLayoutAlgorithm _methodLayoutAlgorithm = ReadyToRunMethodLayoutAlgorithm.DefaultSort;
-        private ReadyToRunFileLayoutAlgorithm _fileLayoutAlgorithm = ReadyToRunFileLayoutAlgorithm.DefaultSort;
+        private ReadyToRunMethodLayoutAlgorithm _methodLayoutAlgorithm =
+            ReadyToRunMethodLayoutAlgorithm.DefaultSort;
+        private ReadyToRunFileLayoutAlgorithm _fileLayoutAlgorithm =
+            ReadyToRunFileLayoutAlgorithm.DefaultSort;
         private ProfileDataManager _profileData;
         private NodeFactory _nodeFactory;
 
-        public ImmutableArray<DependencyNodeCore<NodeFactory>> ApplyProfilerGuidedMethodSort(ImmutableArray<DependencyNodeCore<NodeFactory>> nodes)
+        public ImmutableArray<DependencyNodeCore<NodeFactory>> ApplyProfilerGuidedMethodSort(
+            ImmutableArray<DependencyNodeCore<NodeFactory>> nodes
+        )
         {
             if (_methodLayoutAlgorithm == ReadyToRunMethodLayoutAlgorithm.DefaultSort)
                 return nodes;
@@ -86,7 +92,9 @@ namespace ILCompiler
             }
 
             var newNodesArray = nodes.ToArray();
-            newNodesArray.MergeSortAllowDuplicates(new SortableDependencyNode.ObjectNodeComparer(new CompilerComparer()));
+            newNodesArray.MergeSortAllowDuplicates(
+                new SortableDependencyNode.ObjectNodeComparer(new CompilerComparer())
+            );
             return newNodesArray.ToImmutableArray();
 
             void ApplySortToDependencies(DependencyNodeCore<NodeFactory> node, int depth)
@@ -119,12 +127,16 @@ namespace ILCompiler
 
                     int sortMethodWithGCInfoByWeight(MethodWithGCInfo left, MethodWithGCInfo right)
                     {
-                        return -MethodWithGCInfoToWeight(left).CompareTo(MethodWithGCInfoToWeight(right));
+                        return -MethodWithGCInfoToWeight(left)
+                            .CompareTo(MethodWithGCInfoToWeight(right));
                     }
                     break;
 
                 case ReadyToRunMethodLayoutAlgorithm.HotCold:
-                    methods.MergeSortAllowDuplicates((MethodWithGCInfo left, MethodWithGCInfo right) => ComputeHotColdRegion(left).CompareTo(ComputeHotColdRegion(right)));
+                    methods.MergeSortAllowDuplicates(
+                        (MethodWithGCInfo left, MethodWithGCInfo right) =>
+                            ComputeHotColdRegion(left).CompareTo(ComputeHotColdRegion(right))
+                    );
 
                     int ComputeHotColdRegion(MethodWithGCInfo method)
                     {
@@ -133,7 +145,11 @@ namespace ILCompiler
                     break;
 
                 case ReadyToRunMethodLayoutAlgorithm.HotWarmCold:
-                    methods.MergeSortAllowDuplicates((MethodWithGCInfo left, MethodWithGCInfo right) => ComputeHotWarmColdRegion(left).CompareTo(ComputeHotWarmColdRegion(right)));
+                    methods.MergeSortAllowDuplicates(
+                        (MethodWithGCInfo left, MethodWithGCInfo right) =>
+                            ComputeHotWarmColdRegion(left)
+                                .CompareTo(ComputeHotWarmColdRegion(right))
+                    );
 
                     int ComputeHotWarmColdRegion(MethodWithGCInfo method)
                     {
@@ -150,7 +166,8 @@ namespace ILCompiler
 
                         // Methods without weight are probably relatively rarely used
                         return 2;
-                    };
+                    }
+                    ;
                     break;
 
                 case ReadyToRunMethodLayoutAlgorithm.CallFrequency:
@@ -197,25 +214,43 @@ namespace ILCompiler
         /// (or not matched) in the callchain profile go last.
         /// </summary>
         /// <param name="methodsToPlace">List of methods to place</param>
-        private List<MethodWithGCInfo> MethodCallFrequencySort(List<MethodWithGCInfo> methodsToPlace)
+        private List<MethodWithGCInfo> MethodCallFrequencySort(
+            List<MethodWithGCInfo> methodsToPlace
+        )
         {
             if (_profileData.CallChainProfile == null)
             {
                 return methodsToPlace;
             }
 
-            Dictionary<MethodDesc, MethodWithGCInfo> methodMap = new Dictionary<MethodDesc, MethodWithGCInfo>();
+            Dictionary<MethodDesc, MethodWithGCInfo> methodMap = new Dictionary<
+                MethodDesc,
+                MethodWithGCInfo
+            >();
             foreach (MethodWithGCInfo methodWithGCInfo in methodsToPlace)
             {
                 methodMap.Add(methodWithGCInfo.Method, methodWithGCInfo);
             }
 
             List<CallerCalleeCount> callList = new List<CallerCalleeCount>();
-            foreach (KeyValuePair<MethodDesc, Dictionary<MethodDesc, int>> methodProfile in _profileData.CallChainProfile.ResolvedProfileData.Where(kvp => methodMap.ContainsKey(kvp.Key)))
+            foreach (
+                KeyValuePair<
+                    MethodDesc,
+                    Dictionary<MethodDesc, int>
+                > methodProfile in _profileData.CallChainProfile.ResolvedProfileData.Where(
+                    kvp => methodMap.ContainsKey(kvp.Key)
+                )
+            )
             {
-                foreach (KeyValuePair<MethodDesc, int> callee in methodProfile.Value.Where(kvp => methodMap.ContainsKey(kvp.Key)))
+                foreach (
+                    KeyValuePair<MethodDesc, int> callee in methodProfile.Value.Where(
+                        kvp => methodMap.ContainsKey(kvp.Key)
+                    )
+                )
                 {
-                    callList.Add(new CallerCalleeCount(methodProfile.Key, callee.Key, callee.Value));
+                    callList.Add(
+                        new CallerCalleeCount(methodProfile.Key, callee.Key, callee.Value)
+                    );
                 }
             }
             callList.Sort((a, b) => b.Count.CompareTo(a.Count));
@@ -225,12 +260,18 @@ namespace ILCompiler
 
             foreach (CallerCalleeCount call in callList)
             {
-                if (methodMap.TryGetValue(call.Caller, out MethodWithGCInfo callerWithGCInfo) && callerWithGCInfo != null)
+                if (
+                    methodMap.TryGetValue(call.Caller, out MethodWithGCInfo callerWithGCInfo)
+                    && callerWithGCInfo != null
+                )
                 {
                     outputMethods.Add(callerWithGCInfo);
                     methodMap[call.Caller] = null;
                 }
-                if (methodMap.TryGetValue(call.Callee, out MethodWithGCInfo calleeWithGCInfo) && calleeWithGCInfo != null)
+                if (
+                    methodMap.TryGetValue(call.Callee, out MethodWithGCInfo calleeWithGCInfo)
+                    && calleeWithGCInfo != null
+                )
                 {
                     outputMethods.Add(calleeWithGCInfo);
                     methodMap[call.Callee] = null;

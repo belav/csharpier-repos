@@ -16,15 +16,14 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
     ///         and it is not designed to be directly constructed in your application code.
     ///     </para>
     /// </summary>
-    public class SqliteDbContextOptionsBuilder : RelationalDbContextOptionsBuilder<SqliteDbContextOptionsBuilder, SqliteOptionsExtension>
+    public class SqliteDbContextOptionsBuilder
+        : RelationalDbContextOptionsBuilder<SqliteDbContextOptionsBuilder, SqliteOptionsExtension>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteDbContextOptionsBuilder" /> class.
         /// </summary>
         /// <param name="optionsBuilder"> The options builder. </param>
         public SqliteDbContextOptionsBuilder(DbContextOptionsBuilder optionsBuilder)
-            : base(optionsBuilder)
-        {
-        }
+            : base(optionsBuilder) { }
     }
 }

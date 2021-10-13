@@ -15,10 +15,7 @@ namespace System.CommandLine.Rendering.Tests
 
         public ViewWrappingTests()
         {
-            _terminal = new TestTerminal
-                       {
-                           Width = 150
-                       };
+            _terminal = new TestTerminal { Width = 150 };
 
             consoleRenderer = new ConsoleRenderer(_terminal);
         }
@@ -30,18 +27,15 @@ namespace System.CommandLine.Rendering.Tests
 
             var view = new ContentView(text);
 
-            view.Render(consoleRenderer,
-                new Region(0, 0, 5, 2));
+            view.Render(consoleRenderer, new Region(0, 0, 5, 2));
 
             _terminal.RenderOperations()
-                    .Select(l => l.Text)
-                    .Should()
-                    .BeEquivalentTo(
-                        new[] {
-                            "1 1 1",
-                            "2 2  "
-                        },
-                        options => options.WithStrictOrdering());
+                .Select(l => l.Text)
+                .Should()
+                .BeEquivalentTo(
+                    new[] { "1 1 1", "2 2  " },
+                    options => options.WithStrictOrdering()
+                );
         }
     }
 }

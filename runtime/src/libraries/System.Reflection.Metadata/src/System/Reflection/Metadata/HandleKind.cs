@@ -32,7 +32,6 @@ namespace System.Reflection.Metadata
         MethodSpecification = (byte)HandleType.MethodSpec,
         GenericParameterConstraint = (byte)HandleType.GenericParamConstraint,
         ManifestResource = (byte)HandleType.ManifestResource,
-
         // Debug handles
         Document = (byte)HandleType.Document,
         MethodDebugInformation = (byte)HandleType.MethodDebugInformation,
@@ -41,14 +40,12 @@ namespace System.Reflection.Metadata
         LocalConstant = (byte)HandleType.LocalConstant,
         ImportScope = (byte)HandleType.ImportScope,
         CustomDebugInformation = (byte)HandleType.CustomDebugInformation,
-
         // Heap handles
         NamespaceDefinition = (byte)HandleType.Namespace,
         UserString = (byte)HandleType.UserString,
         String = (byte)HandleType.String,
         Blob = (byte)HandleType.Blob,
         Guid = (byte)HandleType.Guid,
-
         // note that the highest bit is reserved for virtual bit on Handle
     }
 

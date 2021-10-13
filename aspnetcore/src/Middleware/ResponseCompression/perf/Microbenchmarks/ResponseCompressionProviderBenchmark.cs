@@ -16,8 +16,7 @@ namespace Microsoft.AspNetCore.ResponseCompression.Benchmarks
         [GlobalSetup]
         public void GlobalSetup()
         {
-            var services = new ServiceCollection()
-                .AddOptions()
+            var services = new ServiceCollection().AddOptions()
                 .AddResponseCompression()
                 .AddLogging()
                 .BuildServiceProvider();

@@ -37,10 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType declaringEntityType,
             IMutableEntityType relatedEntityType,
             string? navigationName,
-            IMutableForeignKey foreignKey)
-            : base(declaringEntityType, relatedEntityType, navigationName, foreignKey)
-        {
-        }
+            IMutableForeignKey foreignKey
+        ) : base(declaringEntityType, relatedEntityType, navigationName, foreignKey) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,10 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
             IMutableEntityType declaringEntityType,
             IMutableEntityType relatedEntityType,
             MemberInfo? navigationMemberInfo,
-            IMutableForeignKey foreignKey)
-            : base(declaringEntityType, relatedEntityType, navigationMemberInfo, foreignKey)
-        {
-        }
+            IMutableForeignKey foreignKey
+        ) : base(declaringEntityType, relatedEntityType, navigationMemberInfo, foreignKey) { }
 
         /// <summary>
         ///     <para>
@@ -74,13 +70,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </param>
         /// <returns> An object to further configure the relationship. </returns>
         public new virtual ReferenceCollectionBuilder<TRelatedEntity, TEntity> WithMany(
-            string? navigationName = null)
+            string? navigationName = null
+        )
         {
             return new(
                 RelatedEntityType,
                 DeclaringEntityType,
                 WithManyBuilder(
-                    Check.NullButNotEmpty(navigationName, nameof(navigationName))).Metadata);
+                    Check.NullButNotEmpty(navigationName, nameof(navigationName))
+                ).Metadata
+            );
         }
 
         /// <summary>
@@ -100,12 +99,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </param>
         /// <returns> An object to further configure the relationship. </returns>
         public virtual ReferenceCollectionBuilder<TRelatedEntity, TEntity> WithMany(
-            Expression<Func<TRelatedEntity, IEnumerable<TEntity>?>>? navigationExpression)
+            Expression<Func<TRelatedEntity, IEnumerable<TEntity>?>>? navigationExpression
+        )
         {
             return new(
                 RelatedEntityType,
                 DeclaringEntityType,
-                WithManyBuilder(navigationExpression?.GetMemberAccess()).Metadata);
+                WithManyBuilder(navigationExpression?.GetMemberAccess()).Metadata
+            );
         }
 
         /// <summary>
@@ -124,12 +125,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </param>
         /// <returns> An object to further configure the relationship. </returns>
         public new virtual ReferenceReferenceBuilder<TEntity, TRelatedEntity> WithOne(
-           string? navigationName = null)
-            => new(
+            string? navigationName = null
+        ) =>
+            new(
                 DeclaringEntityType,
                 RelatedEntityType,
                 WithOneBuilder(
-                    Check.NullButNotEmpty(navigationName, nameof(navigationName))).Metadata);
+                    Check.NullButNotEmpty(navigationName, nameof(navigationName))
+                ).Metadata
+            );
 
         /// <summary>
         ///     <para>
@@ -148,10 +152,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// </param>
         /// <returns> An object to further configure the relationship. </returns>
         public virtual ReferenceReferenceBuilder<TEntity, TRelatedEntity> WithOne(
-            Expression<Func<TRelatedEntity, TEntity?>>? navigationExpression)
-            => new(
+            Expression<Func<TRelatedEntity, TEntity?>>? navigationExpression
+        ) =>
+            new(
                 DeclaringEntityType,
                 RelatedEntityType,
-                WithOneBuilder(navigationExpression?.GetMemberAccess()).Metadata);
+                WithOneBuilder(navigationExpression?.GetMemberAccess()).Metadata
+            );
     }
 }

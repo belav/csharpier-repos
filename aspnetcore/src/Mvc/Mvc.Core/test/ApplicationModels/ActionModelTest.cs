@@ -19,19 +19,20 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void CopyConstructor_DoesDeepCopyOfOtherModels()
         {
             // Arrange
-            var action = new ActionModel(typeof(TestController).GetMethod(nameof(TestController.Edit)),
-                                         new List<object>());
+            var action = new ActionModel(
+                typeof(TestController).GetMethod(nameof(TestController.Edit)),
+                new List<object>()
+            );
 
-            var parameter = new ParameterModel(action.ActionMethod.GetParameters()[0],
-                                               new List<object>());
+            var parameter = new ParameterModel(
+                action.ActionMethod.GetParameters()[0],
+                new List<object>()
+            );
             parameter.Action = action;
             action.Parameters.Add(parameter);
 
             var route = new AttributeRouteModel(new HttpGetAttribute("api/Products"));
-            action.Selectors.Add(new SelectorModel()
-            {
-                AttributeRouteModel = route
-            });
+            action.Selectors.Add(new SelectorModel() { AttributeRouteModel = route });
 
             var apiExplorer = action.ApiExplorer;
             apiExplorer.IsVisible = false;
@@ -62,20 +63,20 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var action = new ActionModel(
                 typeof(TestController).GetMethod("Edit"),
-                new List<object>()
-                {
-                    new HttpGetAttribute(),
-                    new MyFilterAttribute(),
-                });
+                new List<object>() { new HttpGetAttribute(), new MyFilterAttribute(), }
+            );
 
             var selectorModel = new SelectorModel();
-            selectorModel.ActionConstraints.Add(new HttpMethodActionConstraint(new string[] { "GET" }));
+            selectorModel.ActionConstraints.Add(
+                new HttpMethodActionConstraint(new string[] { "GET" })
+            );
             action.Selectors.Add(selectorModel);
             action.ActionName = "Edit";
 
-            action.Controller = new ControllerModel
-                (typeof(TestController).GetTypeInfo(),
-                new List<object>());
+            action.Controller = new ControllerModel(
+                typeof(TestController).GetTypeInfo(),
+                new List<object>()
+            );
             action.Filters.Add(new MyFilterAttribute());
             action.RouteParameterTransformer = Mock.Of<IOutboundParameterTransformer>();
             action.RouteValues.Add("key", "value");
@@ -88,9 +89,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             foreach (var property in typeof(ActionModel).GetProperties())
             {
                 // Reflection is used to make sure the test fails when a new property is added.
-                if (property.Name.Equals("ApiExplorer") ||
-                    property.Name.Equals("Selectors") ||
-                    property.Name.Equals("Parameters"))
+                if (
+                    property.Name.Equals("ApiExplorer")
+                    || property.Name.Equals("Selectors")
+                    || property.Name.Equals("Parameters")
+                )
                 {
                     // This test excludes other ApplicationModel objects on purpose because we deep copy them.
                     continue;
@@ -106,22 +109,28 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     // Ensure non-default value
                     Assert.NotEmpty((IEnumerable<object>)value1);
                 }
-                else if (typeof(IDictionary<string, string>).IsAssignableFrom(property.PropertyType))
+                else if (
+                    typeof(IDictionary<string, string>).IsAssignableFrom(property.PropertyType)
+                )
                 {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
                     Assert.NotEmpty((IDictionary<string, string>)value1);
                 }
-                else if (typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType))
+                else if (
+                    typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType)
+                )
                 {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
                     Assert.NotEmpty((IDictionary<object, object>)value1);
                 }
-                else if (property.PropertyType.IsValueType ||
-                    Nullable.GetUnderlyingType(property.PropertyType) != null)
+                else if (
+                    property.PropertyType.IsValueType
+                    || Nullable.GetUnderlyingType(property.PropertyType) != null
+                )
                 {
                     Assert.Equal(value1, value2);
 
@@ -145,9 +154,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private class TestController
         {
-            public void Edit(int id)
-            {
-            }
+            public void Edit(int id) { }
         }
 
         private class MyFilterAttribute : Attribute, IFilterMetadata

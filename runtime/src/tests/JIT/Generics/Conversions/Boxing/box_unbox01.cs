@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public class Gen<T>
 {
     public object Box(T t)
@@ -33,7 +32,6 @@ public class Gen<T>
     {
         return (T)obj;
     }
-
 }
 
 public class Test
@@ -48,7 +46,6 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
@@ -56,7 +53,10 @@ public class Test
         Eval(new Gen<int>().Unbox(new Gen<int>().Box(1)).Equals(1));
         Eval(new Gen<double>().Unbox(new Gen<double>().Box(1.111)).Equals(1.111));
         Eval(new Gen<string>().Unbox(new Gen<string>().Box("boxme")).Equals("boxme"));
-        Eval(new Gen<Guid>().Unbox(new Gen<Guid>().Box(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11))).Equals(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)));
+        Eval(
+            new Gen<Guid>().Unbox(new Gen<Guid>().Box(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)))
+                .Equals(new Guid(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11))
+        );
 
         if (result)
         {
@@ -69,5 +69,4 @@ public class Test
             return 1;
         }
     }
-
 }

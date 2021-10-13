@@ -9,9 +9,19 @@ using System.Runtime.CompilerServices;
 internal struct Vector
 {
     private Vector3 _simdVector;
-    public float X { get { return _simdVector.X; } }
-    public float Y { get { return _simdVector.Y; } set { _simdVector = new Vector3(_simdVector.X, value, _simdVector.Z); } }
-    public float Z { get { return _simdVector.Z; } }
+    public float X
+    {
+        get { return _simdVector.X; }
+    }
+    public float Y
+    {
+        get { return _simdVector.Y; }
+        set { _simdVector = new Vector3(_simdVector.X, value, _simdVector.Z); }
+    }
+    public float Z
+    {
+        get { return _simdVector.Z; }
+    }
 
     public Vector(double x, double y, double z)
     {
@@ -20,7 +30,8 @@ internal struct Vector
     public Vector(string str)
     {
         string[] nums = str.Split(',');
-        if (nums.Length != 3) throw new ArgumentException();
+        if (nums.Length != 3)
+            throw new ArgumentException();
         _simdVector = new Vector3(float.Parse(nums[0]), float.Parse(nums[1]), float.Parse(nums[2]));
     }
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
@@ -50,7 +61,10 @@ internal struct Vector
         return Vector3.Dot(v1._simdVector, v2._simdVector);
     }
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-    public static float Mag(Vector v) { return (float)Math.Sqrt(Dot(v, v)); }
+    public static float Mag(Vector v)
+    {
+        return (float)Math.Sqrt(Dot(v, v));
+    }
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static Vector Norm(Vector v)
     {
@@ -61,9 +75,11 @@ internal struct Vector
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static Vector Cross(Vector v1, Vector v2)
     {
-        return new Vector(((v1.Y * v2.Z) - (v1.Z * v2.Y)),
-                          ((v1.Z * v2.X) - (v1.X * v2.Z)),
-                          ((v1.X * v2.Y) - (v1.Y * v2.X)));
+        return new Vector(
+            ((v1.Y * v2.Z) - (v1.Z * v2.Y)),
+            ((v1.Z * v2.X) - (v1.X * v2.Z)),
+            ((v1.X * v2.Y) - (v1.Y * v2.X))
+        );
     }
     [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
     public static bool Equals(Vector v1, Vector v2)
@@ -71,6 +87,14 @@ internal struct Vector
         return v1._simdVector.Equals(v2._simdVector);
     }
 
-    public static Vector Null { get { Vector result; result._simdVector = Vector3.Zero; return result; } }
+    public static Vector Null
+    {
+        get
+        {
+            Vector result;
+            result._simdVector = Vector3.Zero;
+            return result;
+        }
+    }
 }
 

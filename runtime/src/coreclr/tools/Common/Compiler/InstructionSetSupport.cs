@@ -19,12 +19,26 @@ namespace ILCompiler
         private readonly InstructionSetFlags _unsupportedInstructionSets;
         private readonly InstructionSetFlags _nonSpecifiableInstructionSets;
 
-        public InstructionSetSupport(InstructionSetFlags supportedInstructionSets, InstructionSetFlags unsupportedInstructionSets, TargetArchitecture architecture) : 
-            this(supportedInstructionSets, unsupportedInstructionSets, supportedInstructionSets, default(InstructionSetFlags), architecture)
-        {
-        }
+        public InstructionSetSupport(
+            InstructionSetFlags supportedInstructionSets,
+            InstructionSetFlags unsupportedInstructionSets,
+            TargetArchitecture architecture
+        )
+            : this(
+                supportedInstructionSets,
+                unsupportedInstructionSets,
+                supportedInstructionSets,
+                default(InstructionSetFlags),
+                architecture
+            ) { }
 
-        public InstructionSetSupport(InstructionSetFlags supportedInstructionSets, InstructionSetFlags unsupportedInstructionSets, InstructionSetFlags optimisticInstructionSets, InstructionSetFlags nonSpecifiableInstructionSets, TargetArchitecture architecture)
+        public InstructionSetSupport(
+            InstructionSetFlags supportedInstructionSets,
+            InstructionSetFlags unsupportedInstructionSets,
+            InstructionSetFlags optimisticInstructionSets,
+            InstructionSetFlags nonSpecifiableInstructionSets,
+            TargetArchitecture architecture
+        )
         {
             _supportedInstructionSets = supportedInstructionSets;
             _unsupportedInstructionSets = unsupportedInstructionSets;
@@ -50,9 +64,14 @@ namespace ILCompiler
 
         public TargetArchitecture Architecture => _targetArchitecture;
 
-        public static string GetHardwareIntrinsicId(TargetArchitecture architecture, TypeDesc potentialTypeDesc)
+        public static string GetHardwareIntrinsicId(
+            TargetArchitecture architecture,
+            TypeDesc potentialTypeDesc
+        )
         {
-            if (!potentialTypeDesc.IsIntrinsic || !(potentialTypeDesc is MetadataType potentialType))
+            if (
+                !potentialTypeDesc.IsIntrinsic || !(potentialTypeDesc is MetadataType potentialType)
+            )
                 return "";
 
             if (architecture == TargetArchitecture.X64)
@@ -91,13 +110,19 @@ namespace ILCompiler
 
         public SimdVectorLength GetVectorTSimdVector()
         {
-            if ((_targetArchitecture == TargetArchitecture.X64) || (_targetArchitecture == TargetArchitecture.X86))
+            if (
+                (_targetArchitecture == TargetArchitecture.X64)
+                || (_targetArchitecture == TargetArchitecture.X86)
+            )
             {
                 Debug.Assert(InstructionSet.X64_AVX2 == InstructionSet.X86_AVX2);
                 Debug.Assert(InstructionSet.X64_SSE2 == InstructionSet.X86_SSE2);
                 if (IsInstructionSetSupported(InstructionSet.X86_AVX2))
                     return SimdVectorLength.Vector256Bit;
-                else if (IsInstructionSetExplicitlyUnsupported(InstructionSet.X86_AVX2) && IsInstructionSetSupported(InstructionSet.X64_SSE2))
+                else if (
+                    IsInstructionSetExplicitlyUnsupported(InstructionSet.X86_AVX2)
+                    && IsInstructionSetSupported(InstructionSet.X64_SSE2)
+                )
                     return SimdVectorLength.Vector128Bit;
                 else
                     return SimdVectorLength.None;
@@ -120,12 +145,22 @@ namespace ILCompiler
 
     public class InstructionSetSupportBuilder
     {
-        static Dictionary<TargetArchitecture, Dictionary<string, InstructionSet>> s_instructionSetSupport = ComputeInstructionSetSupport();
-        static Dictionary<TargetArchitecture, InstructionSetFlags> s_nonSpecifiableInstructionSets = ComputeNonSpecifiableInstructionSetSupport();
+        static Dictionary<
+            TargetArchitecture,
+            Dictionary<string, InstructionSet>
+        > s_instructionSetSupport = ComputeInstructionSetSupport();
+        static Dictionary<TargetArchitecture, InstructionSetFlags> s_nonSpecifiableInstructionSets =
+            ComputeNonSpecifiableInstructionSetSupport();
 
-        private static Dictionary<TargetArchitecture, Dictionary<string, InstructionSet>> ComputeInstructionSetSupport()
+        private static Dictionary<
+            TargetArchitecture,
+            Dictionary<string, InstructionSet>
+        > ComputeInstructionSetSupport()
         {
-            var supportMatrix = new Dictionary<TargetArchitecture, Dictionary<string, InstructionSet>>();
+            var supportMatrix = new Dictionary<
+                TargetArchitecture,
+                Dictionary<string, InstructionSet>
+            >();
             foreach (TargetArchitecture arch in Enum.GetValues(typeof(TargetArchitecture)))
             {
                 supportMatrix[arch] = ComputeInstructSetSupportForArch(arch);
@@ -134,7 +169,10 @@ namespace ILCompiler
             return supportMatrix;
         }
 
-        private static Dictionary<TargetArchitecture, InstructionSetFlags> ComputeNonSpecifiableInstructionSetSupport()
+        private static Dictionary<
+            TargetArchitecture,
+            InstructionSetFlags
+        > ComputeNonSpecifiableInstructionSetSupport()
         {
             var matrix = new Dictionary<TargetArchitecture, InstructionSetFlags>();
             foreach (TargetArchitecture arch in Enum.GetValues(typeof(TargetArchitecture)))
@@ -145,10 +183,16 @@ namespace ILCompiler
             return matrix;
         }
 
-        private static Dictionary<string, InstructionSet> ComputeInstructSetSupportForArch(TargetArchitecture architecture)
+        private static Dictionary<string, InstructionSet> ComputeInstructSetSupportForArch(
+            TargetArchitecture architecture
+        )
         {
             var support = new Dictionary<string, InstructionSet>();
-            foreach (var instructionSet in InstructionSetFlags.ArchitectureToValidInstructionSets(architecture))
+            foreach (
+                var instructionSet in InstructionSetFlags.ArchitectureToValidInstructionSets(
+                    architecture
+                )
+            )
             {
                 // Only instruction sets with associated R2R enum values are are specifiable
                 if (instructionSet.Specifiable)
@@ -158,10 +202,16 @@ namespace ILCompiler
             return support;
         }
 
-        private static InstructionSetFlags ComputeNonSpecifiableInstructionSetSupportForArch(TargetArchitecture architecture)
+        private static InstructionSetFlags ComputeNonSpecifiableInstructionSetSupportForArch(
+            TargetArchitecture architecture
+        )
         {
             var support = new InstructionSetFlags();
-            foreach (var instructionSet in InstructionSetFlags.ArchitectureToValidInstructionSets(architecture))
+            foreach (
+                var instructionSet in InstructionSetFlags.ArchitectureToValidInstructionSets(
+                    architecture
+                )
+            )
             {
                 // Only instruction sets with associated R2R enum values are are specifiable
                 if (!instructionSet.Specifiable)
@@ -171,7 +221,9 @@ namespace ILCompiler
             return support;
         }
 
-        public static InstructionSetFlags GetNonSpecifiableInstructionSetsForArch(TargetArchitecture architecture)
+        public static InstructionSetFlags GetNonSpecifiableInstructionSetsForArch(
+            TargetArchitecture architecture
+        )
         {
             return s_nonSpecifiableInstructionSets[architecture];
         }
@@ -217,13 +269,17 @@ namespace ILCompiler
         /// Seal modifications to instruction set support
         /// </summary>
         /// <returns>returns "false" if instruction set isn't valid on this architecture</returns>
-        public bool ComputeInstructionSetFlags(out InstructionSetFlags supportedInstructionSets,
-                                                              out InstructionSetFlags unsupportedInstructionSets,
-                                                              Action<string, string> invalidInstructionSetImplication)
+        public bool ComputeInstructionSetFlags(
+            out InstructionSetFlags supportedInstructionSets,
+            out InstructionSetFlags unsupportedInstructionSets,
+            Action<string, string> invalidInstructionSetImplication
+        )
         {
             supportedInstructionSets = new InstructionSetFlags();
             unsupportedInstructionSets = new InstructionSetFlags();
-            Dictionary<string, InstructionSet> instructionSetConversion = s_instructionSetSupport[_architecture];
+            Dictionary<string, InstructionSet> instructionSetConversion = s_instructionSetSupport[
+                _architecture
+            ];
 
             foreach (string unsupported in _unsupportedInstructionSets)
             {
@@ -232,8 +288,13 @@ namespace ILCompiler
             unsupportedInstructionSets.ExpandInstructionSetByReverseImplication(_architecture);
             unsupportedInstructionSets.Set64BitInstructionSetVariants(_architecture);
 
-            if ((_architecture == TargetArchitecture.X86) || (_architecture == TargetArchitecture.ARM))
-                unsupportedInstructionSets.Set64BitInstructionSetVariantsUnconditionally(_architecture);
+            if (
+                (_architecture == TargetArchitecture.X86)
+                || (_architecture == TargetArchitecture.ARM)
+            )
+                unsupportedInstructionSets.Set64BitInstructionSetVariantsUnconditionally(
+                    _architecture
+                );
 
             foreach (string supported in _supportedInstructionSets)
             {
@@ -243,8 +304,12 @@ namespace ILCompiler
                 foreach (string unsupported in _unsupportedInstructionSets)
                 {
                     InstructionSetFlags checkForExplictUnsupport = new InstructionSetFlags();
-                    checkForExplictUnsupport.AddInstructionSet(instructionSetConversion[unsupported]);
-                    checkForExplictUnsupport.ExpandInstructionSetByReverseImplication(_architecture);
+                    checkForExplictUnsupport.AddInstructionSet(
+                        instructionSetConversion[unsupported]
+                    );
+                    checkForExplictUnsupport.ExpandInstructionSetByReverseImplication(
+                        _architecture
+                    );
                     checkForExplictUnsupport.Set64BitInstructionSetVariants(_architecture);
 
                     InstructionSetFlags supportedTemp = supportedInstructionSets;

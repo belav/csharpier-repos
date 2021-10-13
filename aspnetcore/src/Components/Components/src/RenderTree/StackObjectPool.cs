@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         public StackObjectPool(int maxPreservedItems, Func<T> instanceFactory)
         {
             _maxPreservedItems = maxPreservedItems;
-            _instanceFactory = instanceFactory ?? throw new ArgumentNullException(nameof(instanceFactory));
+            _instanceFactory =
+                instanceFactory ?? throw new ArgumentNullException(nameof(instanceFactory));
             _contents = new T[_maxPreservedItems];
         }
 
@@ -54,7 +55,9 @@ namespace Microsoft.AspNetCore.Components.RenderTree
         {
             if (_numSuppliedItems <= 0)
             {
-                throw new InvalidOperationException("There are no outstanding instances to return.");
+                throw new InvalidOperationException(
+                    "There are no outstanding instances to return."
+                );
             }
             else if (_numSuppliedItems <= _maxPreservedItems)
             {
@@ -63,7 +66,9 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 var expectedInstance = _contents[_numSuppliedItems - 1];
                 if (!ReferenceEquals(instance, expectedInstance))
                 {
-                    throw new ArgumentException($"Attempting to return wrong pooled instance. {nameof(Get)}/{nameof(Return)} calls must form a stack.");
+                    throw new ArgumentException(
+                        $"Attempting to return wrong pooled instance. {nameof(Get)}/{nameof(Return)} calls must form a stack."
+                    );
                 }
             }
 

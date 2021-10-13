@@ -61,10 +61,46 @@ internal class C : ITest5
     {
         _code = this.GetHashCode();
     }
-    public int f6() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 13; }
-    public int f7() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 14; }
-    public int f8() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 16; }
-    public virtual int f9() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 18; }
+    public int f6()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 13;
+    }
+    public int f7()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 14;
+    }
+    public int f8()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 16;
+    }
+    public virtual int f9()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 18;
+    }
 }
 
 internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDerived2, IDerived
@@ -74,26 +110,170 @@ internal class CTest : C, ITest1, ITest2, ITest3, ITest4, IBase1, IDerived1, IDe
     {
         _code = this.GetHashCode();
     }
-    int ITest1.f1() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 1; }
-    public int f1() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 2; }
+    int ITest1.f1()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 1;
+    }
+    public int f1()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 2;
+    }
 
-    public int f2() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 3; }
+    public int f2()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 3;
+    }
 
-    int IBase.f2a { get { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 4; } }
-    int IDerived.f2a() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 5; }
-    public int f2b { get { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 6; } }
-    int IDerived.f2b() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 7; }
-    public int f2c { get { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 8; } }
-    int IDerived.f2c() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 9; }
+    int IBase.f2a
+    {
+        get
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            if (this.GetHashCode() != _code)
+                return 999;
+            else
+                return 4;
+        }
+    }
+    int IDerived.f2a()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 5;
+    }
+    public int f2b
+    {
+        get
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            if (this.GetHashCode() != _code)
+                return 999;
+            else
+                return 6;
+        }
+    }
+    int IDerived.f2b()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 7;
+    }
+    public int f2c
+    {
+        get
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
+            if (this.GetHashCode() != _code)
+                return 999;
+            else
+                return 8;
+        }
+    }
+    int IDerived.f2c()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 9;
+    }
 
-    int IBase1.f3() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 10; }
-    int IDerived1.f4() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 11; }
-    int IDerived2.f5() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 12; }
+    int IBase1.f3()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 10;
+    }
+    int IDerived1.f4()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 11;
+    }
+    int IDerived2.f5()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 12;
+    }
 
-    new public int f7() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 15; }
+    new public int f7()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 15;
+    }
 
-    new public int f8() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 17; }
-    override public int f9() { GC.Collect(); GC.WaitForPendingFinalizers(); GC.Collect(); if (this.GetHashCode() != _code) return 999; else return 19; }
+    new public int f8()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 17;
+    }
+    override public int f9()
+    {
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+        if (this.GetHashCode() != _code)
+            return 999;
+        else
+            return 19;
+    }
 
     public static int Main()
     {

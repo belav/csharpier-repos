@@ -18,13 +18,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task InvalidMethodName()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     static partial void __M1(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.InvalidLoggingMethodName.Id, diagnostics[0].Id);
@@ -33,13 +35,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingLogLevel()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Message = ""M1"")]
                     static partial void M1(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.MissingLogLevel.Id, diagnostics[0].Id);
@@ -48,7 +52,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task InvalidMethodBody()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     static partial void M1(ILogger logger);
@@ -58,7 +63,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                     {
                     }
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.LoggingMethodHasBody.Id, diagnostics[0].Id);
@@ -67,43 +73,55 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingTemplate()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""This is a message without foo"")]
                     static partial void M1(ILogger logger, string foo);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
-            Assert.Equal(DiagnosticDescriptors.ArgumentHasNoCorrespondingTemplate.Id, diagnostics[0].Id);
+            Assert.Equal(
+                DiagnosticDescriptors.ArgumentHasNoCorrespondingTemplate.Id,
+                diagnostics[0].Id
+            );
         }
 
         [Fact]
         public async Task MissingArgument()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""{foo}"")]
                     static partial void M1(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
-            Assert.Equal(DiagnosticDescriptors.TemplateHasNoCorrespondingArgument.Id, diagnostics[0].Id);
+            Assert.Equal(
+                DiagnosticDescriptors.TemplateHasNoCorrespondingArgument.Id,
+                diagnostics[0].Id
+            );
         }
 
         [Fact]
         public async Task NeedlessQualifierInMessage()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Information, Message = ""INFO: this is an informative message"")]
                     static partial void M1(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.RedundantQualifierInMessage.Id, diagnostics[0].Id);
@@ -112,88 +130,115 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task NeedlessExceptionInMessage()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1 {ex} {ex2}"")]
                     static partial void M1(ILogger logger, System.Exception ex, System.Exception ex2);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
-            Assert.Equal(DiagnosticDescriptors.ShouldntMentionExceptionInMessage.Id, diagnostics[0].Id);
+            Assert.Equal(
+                DiagnosticDescriptors.ShouldntMentionExceptionInMessage.Id,
+                diagnostics[0].Id
+            );
         }
 
         [Fact]
         public async Task NeedlessLogLevelInMessage()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Message = ""M1 {l1} {l2}"")]
                     static partial void M1(ILogger logger, LogLevel l1, LogLevel l2);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
-            Assert.Equal(DiagnosticDescriptors.ShouldntMentionLogLevelInMessage.Id, diagnostics[0].Id);
+            Assert.Equal(
+                DiagnosticDescriptors.ShouldntMentionLogLevelInMessage.Id,
+                diagnostics[0].Id
+            );
         }
 
         [Fact]
         public async Task NeedlessLoggerInMessage()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1 {logger}"")]
                     static partial void M1(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
-            Assert.Equal(DiagnosticDescriptors.ShouldntMentionLoggerInMessage.Id, diagnostics[0].Id);
+            Assert.Equal(
+                DiagnosticDescriptors.ShouldntMentionLoggerInMessage.Id,
+                diagnostics[0].Id
+            );
         }
 
         [Fact]
         public async Task DoubleLogLevel_InAttributeAndAsParameterButMissingInTemplate_ProducesDiagnostic()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     static partial void M1(ILogger logger, LogLevel levelParam);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
-            Assert.Equal(DiagnosticDescriptors.ArgumentHasNoCorrespondingTemplate.Id, diagnostics[0].Id);
+            Assert.Equal(
+                DiagnosticDescriptors.ArgumentHasNoCorrespondingTemplate.Id,
+                diagnostics[0].Id
+            );
         }
 
         [Fact]
         public async Task LogLevelDoublySet_AndInMessageTemplate_ProducesDiagnostic()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1 {level2}"")]
                     static partial void M1(ILogger logger, LogLevel level1, LogLevel level2);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
-            Assert.Equal(DiagnosticDescriptors.ArgumentHasNoCorrespondingTemplate.Id, diagnostics[0].Id);
+            Assert.Equal(
+                DiagnosticDescriptors.ArgumentHasNoCorrespondingTemplate.Id,
+                diagnostics[0].Id
+            );
         }
 
         [Fact]
         public async Task DoubleLogLevel_FirstOneSetAsMethodParameter_SecondOneInMessageTemplate_Supported()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Message = ""M1 {level2}"")]
                     static partial void M1(ILogger logger, LogLevel level1, LogLevel level2);
                 }
-            ");
+            "
+            );
 
             Assert.Empty(diagnostics);
         }
@@ -235,22 +280,28 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task InvalidParameterName()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1 {__foo}"")]
                     static partial void M1(ILogger logger, string __foo);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
-            Assert.Equal(DiagnosticDescriptors.InvalidLoggingMethodParameterName.Id, diagnostics[0].Id);
+            Assert.Equal(
+                DiagnosticDescriptors.InvalidLoggingMethodParameterName.Id,
+                diagnostics[0].Id
+            );
         }
 
         [Fact]
         public async Task NestedType()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     public partial class Nested
@@ -259,7 +310,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                         static partial void M1(ILogger logger);
                     }
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.LoggingMethodInNestedType.Id, diagnostics[0].Id);
@@ -268,7 +320,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingExceptionType()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 namespace System
                 {
                     public class Object {}
@@ -292,7 +345,11 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 partial class C
                 {
                 }
-            ", false, includeBaseReferences: false, includeLoggingReferences: false);
+            ",
+                false,
+                includeBaseReferences: false,
+                includeLoggingReferences: false
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.MissingRequiredType.Id, diagnostics[0].Id);
@@ -301,7 +358,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingStringType()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 namespace System
                 {
                     public class Object {}
@@ -325,7 +383,11 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 partial class C
                 {
                 }
-            ", false, includeBaseReferences: false, includeLoggingReferences: false);
+            ",
+                false,
+                includeBaseReferences: false,
+                includeLoggingReferences: false
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.MissingRequiredType.Id, diagnostics[0].Id);
@@ -334,7 +396,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingEnumerableType()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 namespace System
                 {
                     public class Object {}
@@ -355,7 +418,11 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 partial class C
                 {
                 }
-            ", false, includeBaseReferences: false, includeLoggingReferences: false);
+            ",
+                false,
+                includeBaseReferences: false,
+                includeLoggingReferences: false
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.MissingRequiredType.Id, diagnostics[0].Id);
@@ -364,11 +431,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingLoggerMessageAttributeType()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                 }
-            ", false, includeLoggingReferences: false);
+            ",
+                false,
+                includeLoggingReferences: false
+            );
 
             Assert.Empty(diagnostics);
         }
@@ -376,7 +447,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingILoggerType()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 namespace Microsoft.Extensions.Logging
                 {
                     public sealed class LoggerMessageAttribute : System.Attribute {}
@@ -384,7 +456,10 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 partial class C
                 {
                 }
-            ", false, includeLoggingReferences: false);
+            ",
+                false,
+                includeLoggingReferences: false
+            );
 
             Assert.Empty(diagnostics);
         }
@@ -392,7 +467,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingLogLevelType()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 namespace Microsoft.Extensions.Logging
                 {
                     public sealed class LoggerMessageAttribute : System.Attribute {}
@@ -404,7 +480,10 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                 partial class C
                 {
                 }
-            ", false, includeLoggingReferences: false);
+            ",
+                false,
+                includeLoggingReferences: false
+            );
 
             Assert.Empty(diagnostics);
         }
@@ -412,7 +491,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task EventIdReuse()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class MyClass
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
@@ -421,17 +501,23 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     static partial void M2(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.ShouldntReuseEventIds.Id, diagnostics[0].Id);
-            Assert.Contains("in class MyClass", diagnostics[0].GetMessage(), StringComparison.InvariantCulture);
+            Assert.Contains(
+                "in class MyClass",
+                diagnostics[0].GetMessage(),
+                StringComparison.InvariantCulture
+            );
         }
 
         [Fact]
         public async Task MethodReturnType()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
@@ -439,7 +525,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
 
                     public static partial int M1(ILogger logger) { return 0; }
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.LoggingMethodMustReturnVoid.Id, diagnostics[0].Id);
@@ -448,13 +535,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MissingILogger()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1 {p1}"")]
                     static partial void M1(int p1);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.MissingLoggerArgument.Id, diagnostics[0].Id);
@@ -463,13 +552,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task NotStatic()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     partial void M1(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.LoggingMethodShouldBeStatic.Id, diagnostics[0].Id);
@@ -478,13 +569,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task NoILoggerField()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     public partial void M1();
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.MissingLoggerField.Id, diagnostics[0].Id);
@@ -493,7 +586,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MultipleILoggerFields()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     public ILogger _logger1;
@@ -502,7 +596,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     public partial void M1();
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.MultipleLoggerFields.Id, diagnostics[0].Id);
@@ -511,13 +606,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task NotPartial()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     static void M1(ILogger logger) {}
                 }
-            ");
+            "
+            );
 
             Assert.Equal(2, diagnostics.Count);
             Assert.Equal(DiagnosticDescriptors.LoggingMethodMustBePartial.Id, diagnostics[0].Id);
@@ -527,13 +624,15 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task MethodGeneric()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     static partial void M1<T>(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Single(diagnostics);
             Assert.Equal(DiagnosticDescriptors.LoggingMethodIsGeneric.Id, diagnostics[0].Id);
@@ -542,7 +641,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task Templates()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 1, Level = LogLevel.Debug, Message = ""M1"")]
@@ -566,7 +666,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                     [LoggerMessage(EventId = 7, Level = LogLevel.Debug, Message = ""M7 {{arg1}}"")]
                     static partial void M7(ILogger logger);
                 }
-            ");
+            "
+            );
 
             Assert.Empty(diagnostics);
         }
@@ -574,20 +675,26 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
         [Fact]
         public async Task Cancellation()
         {
-            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
-                await RunGenerator(@"
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                async () =>
+                    await RunGenerator(
+                        @"
                 partial class C
                 {
                     [LoggerMessage(EventId = 0, Level = LogLevel.Debug, Message = ""M1"")]
                     static partial void M1(ILogger logger);
                 }
-            ", cancellationToken: new CancellationToken(true)));
+            ",
+                        cancellationToken: new CancellationToken(true)
+                    )
+            );
         }
 
         [Fact]
         public async Task SourceErrors()
         {
-            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(@"
+            IReadOnlyList<Diagnostic> diagnostics = await RunGenerator(
+                @"
                 static partial class C
                 {
                     // bogus argument type
@@ -606,9 +713,10 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                     [LoggerMessage(EventId = 4, Message = ""Hello"")]
                     int M5;
                 }
-            ");
+            "
+            );
 
-            Assert.Empty(diagnostics);    // should fail quietly on broken code
+            Assert.Empty(diagnostics); // should fail quietly on broken code
         }
 
         private static async Task<IReadOnlyList<Diagnostic>> RunGenerator(
@@ -617,7 +725,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             bool inNamespace = true,
             bool includeBaseReferences = true,
             bool includeLoggingReferences = true,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var text = code;
             if (wrap)
@@ -630,7 +739,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
                     nspaceEnd = "";
                 }
 
-                text = $@"
+                text =
+                    $@"
                     {nspaceStart}
                     using Microsoft.Extensions.Logging;
                     {code}
@@ -645,11 +755,13 @@ namespace Microsoft.Extensions.Logging.Generators.Tests
             }
 
             var (d, r) = await RoslynTestUtils.RunGenerator(
-                new LoggerMessageGenerator(),
-                refs,
-                new[] { text },
-                includeBaseReferences: includeBaseReferences,
-                cancellationToken: cancellationToken).ConfigureAwait(false);
+                    new LoggerMessageGenerator(),
+                    refs,
+                    new[] { text },
+                    includeBaseReferences: includeBaseReferences,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return d;
         }

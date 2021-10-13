@@ -13,18 +13,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
     internal class CSharpBlockStructureProvider : AbstractBlockStructureProvider
     {
-        private static ImmutableDictionary<Type, ImmutableArray<AbstractSyntaxStructureProvider>> CreateDefaultNodeProviderMap()
+        private static ImmutableDictionary<
+            Type,
+            ImmutableArray<AbstractSyntaxStructureProvider>
+        > CreateDefaultNodeProviderMap()
         {
-            var builder = ImmutableDictionary.CreateBuilder<Type, ImmutableArray<AbstractSyntaxStructureProvider>>();
+            var builder = ImmutableDictionary.CreateBuilder<
+                Type,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            >();
 
             builder.Add<AccessorDeclarationSyntax, AccessorDeclarationStructureProvider>();
-            builder.Add<AnonymousMethodExpressionSyntax, AnonymousMethodExpressionStructureProvider>();
+            builder.Add<
+                AnonymousMethodExpressionSyntax,
+                AnonymousMethodExpressionStructureProvider
+            >();
             builder.Add<ArrowExpressionClauseSyntax, ArrowExpressionClauseStructureProvider>();
             builder.Add<BlockSyntax, BlockSyntaxStructureProvider>();
             builder.Add<ClassDeclarationSyntax, TypeDeclarationStructureProvider>();
             builder.Add<CompilationUnitSyntax, CompilationUnitStructureProvider>();
             builder.Add<ConstructorDeclarationSyntax, ConstructorDeclarationStructureProvider>();
-            builder.Add<ConversionOperatorDeclarationSyntax, ConversionOperatorDeclarationStructureProvider>();
+            builder.Add<
+                ConversionOperatorDeclarationSyntax,
+                ConversionOperatorDeclarationStructureProvider
+            >();
             builder.Add<DelegateDeclarationSyntax, DelegateDeclarationStructureProvider>();
             builder.Add<DestructorDeclarationSyntax, DestructorDeclarationStructureProvider>();
             builder.Add<DocumentationCommentTriviaSyntax, DocumentationCommentStructureProvider>();
@@ -39,7 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             builder.Add<MethodDeclarationSyntax, MethodDeclarationStructureProvider>();
             builder.Add<NamespaceDeclarationSyntax, NamespaceDeclarationStructureProvider>();
             builder.Add<OperatorDeclarationSyntax, OperatorDeclarationStructureProvider>();
-            builder.Add<ParenthesizedLambdaExpressionSyntax, ParenthesizedLambdaExpressionStructureProvider>();
+            builder.Add<
+                ParenthesizedLambdaExpressionSyntax,
+                ParenthesizedLambdaExpressionStructureProvider
+            >();
             builder.Add<PropertyDeclarationSyntax, PropertyDeclarationStructureProvider>();
             builder.Add<RecordDeclarationSyntax, TypeDeclarationStructureProvider>();
             builder.Add<RegionDirectiveTriviaSyntax, RegionDirectiveStructureProvider>();
@@ -47,23 +62,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             builder.Add<StructDeclarationSyntax, TypeDeclarationStructureProvider>();
             builder.Add<SwitchStatementSyntax, SwitchStatementStructureProvider>();
             builder.Add<LiteralExpressionSyntax, StringLiteralExpressionStructureProvider>();
-            builder.Add<InterpolatedStringExpressionSyntax, InterpolatedStringExpressionStructureProvider>();
+            builder.Add<
+                InterpolatedStringExpressionSyntax,
+                InterpolatedStringExpressionStructureProvider
+            >();
 
             return builder.ToImmutable();
         }
 
-        private static ImmutableDictionary<int, ImmutableArray<AbstractSyntaxStructureProvider>> CreateDefaultTriviaProviderMap()
+        private static ImmutableDictionary<
+            int,
+            ImmutableArray<AbstractSyntaxStructureProvider>
+        > CreateDefaultTriviaProviderMap()
         {
-            var builder = ImmutableDictionary.CreateBuilder<int, ImmutableArray<AbstractSyntaxStructureProvider>>();
+            var builder = ImmutableDictionary.CreateBuilder<
+                int,
+                ImmutableArray<AbstractSyntaxStructureProvider>
+            >();
 
-            builder.Add((int)SyntaxKind.DisabledTextTrivia, ImmutableArray.Create<AbstractSyntaxStructureProvider>(new DisabledTextTriviaStructureProvider()));
+            builder.Add(
+                (int)SyntaxKind.DisabledTextTrivia,
+                ImmutableArray.Create<AbstractSyntaxStructureProvider>(
+                    new DisabledTextTriviaStructureProvider()
+                )
+            );
 
             return builder.ToImmutable();
         }
 
         internal CSharpBlockStructureProvider()
-            : base(CreateDefaultNodeProviderMap(), CreateDefaultTriviaProviderMap())
-        {
-        }
+            : base(CreateDefaultNodeProviderMap(), CreateDefaultTriviaProviderMap()) { }
     }
 }

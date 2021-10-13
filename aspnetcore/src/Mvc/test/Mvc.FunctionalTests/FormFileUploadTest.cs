@@ -49,13 +49,32 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var content = new MultipartFormDataContent();
             content.Add(new StringContent("Phone"), "Name");
             content.Add(new StringContent("camera"), "Specs[0].Key");
-            content.Add(new StringContent("camera spec1 file contents"), "Specs[0].Value", "camera_spec1.txt");
-            content.Add(new StringContent("camera spec2 file contents"), "Specs[0].Value", "camera_spec2.txt");
+            content.Add(
+                new StringContent("camera spec1 file contents"),
+                "Specs[0].Value",
+                "camera_spec1.txt"
+            );
+            content.Add(
+                new StringContent("camera spec2 file contents"),
+                "Specs[0].Value",
+                "camera_spec2.txt"
+            );
             content.Add(new StringContent("battery"), "Specs[1].Key");
-            content.Add(new StringContent("battery spec1 file contents"), "Specs[1].Value", "battery_spec1.txt");
-            content.Add(new StringContent("battery spec2 file contents"), "Specs[1].Value", "battery_spec2.txt");
+            content.Add(
+                new StringContent("battery spec1 file contents"),
+                "Specs[1].Value",
+                "battery_spec1.txt"
+            );
+            content.Add(
+                new StringContent("battery spec2 file contents"),
+                "Specs[1].Value",
+                "battery_spec2.txt"
+            );
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/UploadProductSpecs");
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/UploadProductSpecs"
+            );
             request.Content = content;
 
             // Act
@@ -71,7 +90,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.True(product.Specs.ContainsKey("camera"));
             Assert.Equal(new[] { "camera_spec1.txt", "camera_spec2.txt" }, product.Specs["camera"]);
             Assert.True(product.Specs.ContainsKey("battery"));
-            Assert.Equal(new[] { "battery_spec1.txt", "battery_spec2.txt" }, product.Specs["battery"]);
+            Assert.Equal(
+                new[] { "battery_spec1.txt", "battery_spec2.txt" },
+                product.Specs["battery"]
+            );
         }
 
         private class User

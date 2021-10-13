@@ -33,8 +33,14 @@ namespace System.Net.Quic.Tests
             Assert.Equal(listenEndPoint, serverConnection.LocalEndPoint);
             Assert.Equal(listenEndPoint, clientConnection.RemoteEndPoint);
             Assert.Equal(clientConnection.LocalEndPoint, serverConnection.RemoteEndPoint);
-            Assert.Equal(ApplicationProtocol.ToString(), clientConnection.NegotiatedApplicationProtocol.ToString());
-            Assert.Equal(ApplicationProtocol.ToString(), serverConnection.NegotiatedApplicationProtocol.ToString());
+            Assert.Equal(
+                ApplicationProtocol.ToString(),
+                clientConnection.NegotiatedApplicationProtocol.ToString()
+            );
+            Assert.Equal(
+                ApplicationProtocol.ToString(),
+                serverConnection.NegotiatedApplicationProtocol.ToString()
+            );
         }
 
         [Fact]
@@ -53,14 +59,23 @@ namespace System.Net.Quic.Tests
                 async serverConnection =>
                 {
                     await sync.WaitAsync();
-                    QuicConnectionAbortedException ex = await Assert.ThrowsAsync<QuicConnectionAbortedException>(() => serverConnection.AcceptStreamAsync().AsTask());
+                    QuicConnectionAbortedException ex =
+                        await Assert.ThrowsAsync<QuicConnectionAbortedException>(
+                            () => serverConnection.AcceptStreamAsync().AsTask()
+                        );
                     Assert.Equal(ExpectedErrorCode, ex.ErrorCode);
-                });
+                }
+            );
         }
     }
 
-    public sealed class QuicConnectionTests_MockProvider : QuicConnectionTests<MockProviderFactory> { }
+    public sealed class QuicConnectionTests_MockProvider
+        : QuicConnectionTests<MockProviderFactory> { }
 
-    [ConditionalClass(typeof(QuicTestBase<MsQuicProviderFactory>), nameof(QuicTestBase<MsQuicProviderFactory>.IsSupported))]
-    public sealed class QuicConnectionTests_MsQuicProvider : QuicConnectionTests<MsQuicProviderFactory> { }
+    [ConditionalClass(
+        typeof(QuicTestBase<MsQuicProviderFactory>),
+        nameof(QuicTestBase<MsQuicProviderFactory>.IsSupported)
+    )]
+    public sealed class QuicConnectionTests_MsQuicProvider
+        : QuicConnectionTests<MsQuicProviderFactory> { }
 }

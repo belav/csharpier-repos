@@ -22,15 +22,16 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public BindTest(
             BrowserFixture browserFixture,
             ToggleExecutionModeServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
-        {
-        }
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output) { }
 
         protected override void InitializeAsyncCore()
         {
             // On WebAssembly, page reloads are expensive so skip if possible
-            Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
+            Navigate(
+                ServerPathBase,
+                noReload: _serverFixture.ExecutionMode == ExecutionMode.Client
+            );
             Browser.MountTestComponent<BindCasesComponent>();
             Browser.Exists(By.Id("bind-cases"));
         }
@@ -89,9 +90,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public void CanBindTextbox_WithBindSuffixInitiallyPopulated()
         {
             var target = Browser.Exists(By.Id("bind-with-suffix-textbox-initially-populated"));
-            var boundValue = Browser.Exists(By.Id("bind-with-suffix-textbox-initially-populated-value"));
-            var mirrorValue = Browser.Exists(By.Id("bind-with-suffix-textbox-initially-populated-mirror"));
-            var setNullButton = Browser.Exists(By.Id("bind-with-suffix-textbox-initially-populated-setnull"));
+            var boundValue = Browser.Exists(
+                By.Id("bind-with-suffix-textbox-initially-populated-value")
+            );
+            var mirrorValue = Browser.Exists(
+                By.Id("bind-with-suffix-textbox-initially-populated-mirror")
+            );
+            var setNullButton = Browser.Exists(
+                By.Id("bind-with-suffix-textbox-initially-populated-setnull")
+            );
             Assert.Equal("Hello", target.GetAttribute("value"));
             Assert.Equal("Hello", boundValue.Text);
             Assert.Equal("Hello", mirrorValue.GetAttribute("value"));
@@ -729,23 +736,41 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var boundValue = Browser.Exists(By.Id("textbox-datetime-value"));
             var mirrorValue = Browser.Exists(By.Id("textbox-datetime-mirror"));
             var expected = new DateTime(1985, 3, 4);
-            Assert.Equal(expected, DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Clear textbox; value updates to 01/01/0001 because that's the default
             target.Clear();
             expected = default;
-            Browser.Equal(expected, () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("01/02/2000 00:00:00\t");
             expected = new DateTime(2000, 1, 2);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -768,8 +793,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             var expected = new DateTime(2000, 1, 2);
             target.SendKeys("01/02/2000 00:00:00\t");
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.Clear();
@@ -787,23 +818,57 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var boundValue = Browser.Exists(By.Id("textbox-datetimeoffset-value"));
             var mirrorValue = Browser.Exists(By.Id("textbox-datetimeoffset-mirror"));
             var expected = new DateTimeOffset(new DateTime(1985, 3, 4), TimeSpan.FromHours(8));
-            Assert.Equal(expected, DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                )
+            );
 
             // Clear textbox; value updates to 01/01/0001 because that's the default
             target.Clear();
             expected = default;
-            Browser.Equal(expected, () => DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () =>
+                    DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                )
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("01/02/2000 00:00:00 +08:00\t");
             expected = new DateTimeOffset(new DateTime(2000, 1, 2), TimeSpan.FromHours(8));
-            Browser.Equal(expected, () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                )
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -826,8 +891,17 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.SendKeys("01/02/2000 00:00:00 +08:00" + "\t");
             var expected = new DateTimeOffset(new DateTime(2000, 1, 2), TimeSpan.FromHours(8));
-            Browser.Equal(expected, () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                )
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.Clear();
@@ -847,7 +921,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var expected = new DateTime(1985, 3, 4);
             Assert.Equal("03-04", target.GetAttribute("value"));
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Clear textbox; value updates to the default
             target.Clear();
@@ -855,14 +932,23 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             expected = default;
             Browser.Equal("01-01", () => target.GetAttribute("value"));
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("01-02\t");
             expected = new DateTime(DateTime.Now.Year, 1, 2);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -885,8 +971,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.SendKeys("01-02\t");
             var expected = new DateTime(DateTime.Now.Year, 1, 2);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.Clear();
@@ -905,22 +997,52 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var mirrorValue = Browser.Exists(By.Id("textbox-datetimeoffset-format-mirror"));
             var expected = new DateTimeOffset(new DateTime(1985, 3, 4), TimeSpan.FromHours(8));
             Assert.Equal("03-04", target.GetAttribute("value"));
-            Assert.Equal(expected, DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                )
+            );
 
             // Clear textbox; value updates to the default
             target.Clear();
             expected = default;
             Browser.Equal("01-01", () => target.GetAttribute("value"));
-            Assert.Equal(expected, DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                )
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("01-02\t");
-            expected = new DateTimeOffset(new DateTime(DateTime.Now.Year, 1, 2), TimeSpan.FromHours(0));
-            Browser.Equal(expected.DateTime, () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
+            expected = new DateTimeOffset(
+                new DateTime(DateTime.Now.Year, 1, 2),
+                TimeSpan.FromHours(0)
+            );
+            Browser.Equal(
+                expected.DateTime,
+                () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                ).DateTime
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -945,9 +1067,21 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.SendKeys("01-02" + "\t");
-            var expected = new DateTimeOffset(new DateTime(DateTime.Now.Year, 1, 2), TimeSpan.FromHours(0));
-            Browser.Equal(expected.DateTime, () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
+            var expected = new DateTimeOffset(
+                new DateTime(DateTime.Now.Year, 1, 2),
+                TimeSpan.FromHours(0)
+            );
+            Browser.Equal(
+                expected.DateTime,
+                () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                ).DateTime
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.Clear();
@@ -971,8 +1105,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             var expected = new DateTime(2000, 1, 2);
             target.SendKeys("01/02/2000 00:00:00\t");
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target to something invalid - the invalid change is reverted
             // back to the last valid value
@@ -980,16 +1120,28 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             target.SendKeys("05/06X");
             Browser.Equal("05/06X", () => target.GetAttribute("value"));
             target.SendKeys("\t");
-            Browser.Equal(expected, () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Now change it to something valid
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("05/06\t");
             expected = new DateTime(DateTime.Now.Year, 5, 6);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -1001,16 +1153,37 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var boundValue = Browser.Exists(By.Id("textbox-datetimeoffset-invalid-value"));
             var mirrorValue = Browser.Exists(By.Id("textbox-datetimeoffset-invalid-mirror"));
             var expected = new DateTimeOffset(new DateTime(1985, 3, 4), TimeSpan.FromHours(8));
-            Assert.Equal(expected, DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                )
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             expected = new DateTime(2000, 1, 2);
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("01/02/2000 00:00:00\t");
-            Browser.Equal(expected.DateTime, () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
+            Browser.Equal(
+                expected.DateTime,
+                () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                ).DateTime
+            );
 
             // Modify target to something invalid - the invalid change is reverted
             // back to the last valid value
@@ -1018,16 +1191,41 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             target.SendKeys("05/06X");
             Browser.Equal("05/06X", () => target.GetAttribute("value"));
             target.SendKeys("\t");
-            Browser.Equal(expected.DateTime, () => DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
+            Browser.Equal(
+                expected.DateTime,
+                () =>
+                    DateTimeOffset.Parse(
+                        target.GetAttribute("value"),
+                        CultureInfo.InvariantCulture
+                    ).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                ).DateTime
+            );
 
             // Now change it to something valid
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("05/06\t");
             expected = new DateTime(DateTime.Now.Year, 5, 6);
-            Browser.Equal(expected.DateTime, () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
+            Browser.Equal(
+                expected.DateTime,
+                () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                ).DateTime
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -1041,7 +1239,10 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var expected = new DateTime(1985, 3, 4);
             Assert.Equal("03-04", target.GetAttribute("value"));
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target to something invalid - the invalid change is reverted
             // back to the last valid value
@@ -1051,14 +1252,23 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             target.SendKeys("\t");
             Browser.Equal("03-04", () => target.GetAttribute("value"));
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Now change it to something valid
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("05-06\t");
             expected = new DateTime(DateTime.Now.Year, 5, 6);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -1067,8 +1277,12 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public void CanBindTextboxNullableDateTimeOffsetWithFormat_InvalidValue()
         {
             var target = Browser.Exists(By.Id("textbox-nullable-datetimeoffset-format-invalid"));
-            var boundValue = Browser.Exists(By.Id("textbox-nullable-datetimeoffset-format-invalid-value"));
-            var mirrorValue = Browser.Exists(By.Id("textbox-nullable-datetimeoffset-format-invalid-mirror"));
+            var boundValue = Browser.Exists(
+                By.Id("textbox-nullable-datetimeoffset-format-invalid-value")
+            );
+            var mirrorValue = Browser.Exists(
+                By.Id("textbox-nullable-datetimeoffset-format-invalid-mirror")
+            );
             Assert.Equal(string.Empty, target.GetAttribute("value"));
             Assert.Equal(string.Empty, boundValue.Text);
             Assert.Equal(string.Empty, mirrorValue.GetAttribute("value"));
@@ -1077,8 +1291,17 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var expected = new DateTimeOffset(new DateTime(DateTime.Now.Year, 1, 2));
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("01-02\t");
-            Browser.Equal(expected.DateTime, () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
+            Browser.Equal(
+                expected.DateTime,
+                () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                ).DateTime
+            );
 
             // Modify target to something invalid - the invalid change is reverted
             // back to the last valid value
@@ -1086,16 +1309,41 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             target.SendKeys("05/06");
             Browser.Equal("05/06", () => target.GetAttribute("value"));
             target.SendKeys("\t");
-            Browser.Equal(expected.DateTime, () => DateTimeOffset.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
+            Browser.Equal(
+                expected.DateTime,
+                () =>
+                    DateTimeOffset.Parse(
+                        target.GetAttribute("value"),
+                        CultureInfo.InvariantCulture
+                    ).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                ).DateTime
+            );
 
             // Now change it to something valid
             target.SendKeys(Keys.Control + "a"); // select all
             target.SendKeys("05-06\t");
             expected = new DateTime(DateTime.Now.Year, 5, 6);
-            Browser.Equal(expected.DateTime, () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime);
-            Assert.Equal(expected.DateTime, DateTimeOffset.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture).DateTime);
+            Browser.Equal(
+                expected.DateTime,
+                () => DateTimeOffset.Parse(boundValue.Text, CultureInfo.InvariantCulture).DateTime
+            );
+            Assert.Equal(
+                expected.DateTime,
+                DateTimeOffset.Parse(
+                    mirrorValue.GetAttribute("value"),
+                    CultureInfo.InvariantCulture
+                ).DateTime
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -1107,23 +1355,41 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var boundValue = Browser.Exists(By.Id("datetime-local-textbox-datetime-value"));
             var mirrorValue = Browser.Exists(By.Id("datetime-local-textbox-datetime-mirror"));
             var expected = new DateTime(1985, 3, 4);
-            Assert.Equal(expected, DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Clear textbox; value updates to 01/01/0001 because that's the default
             target.Clear();
             expected = default;
-            Browser.Equal(expected, () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // We have to do it this way because the browser gets in the way when sending keys to the input
             // element directly.
             ApplyInputValue("#datetime-local-textbox-datetime", "2000-01-02T04:05:06");
             expected = new DateTime(2000, 1, 2, 04, 05, 06);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -1132,8 +1398,12 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public void CanBindDateTimeLocalTextboxNullableDateTime()
         {
             var target = Browser.Exists(By.Id("datetime-local-textbox-nullable-datetime"));
-            var boundValue = Browser.Exists(By.Id("datetime-local-textbox-nullable-datetime-value"));
-            var mirrorValue = Browser.Exists(By.Id("datetime-local-textbox-nullable-datetime-mirror"));
+            var boundValue = Browser.Exists(
+                By.Id("datetime-local-textbox-nullable-datetime-value")
+            );
+            var mirrorValue = Browser.Exists(
+                By.Id("datetime-local-textbox-nullable-datetime-mirror")
+            );
             Assert.Equal(string.Empty, target.GetAttribute("value"));
             Assert.Equal(string.Empty, boundValue.Text);
             Assert.Equal(string.Empty, mirrorValue.GetAttribute("value"));
@@ -1148,8 +1418,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // element directly.
             ApplyInputValue("#datetime-local-textbox-nullable-datetime", "2000-01-02T04:05:06");
             var expected = new DateTime(2000, 1, 2, 04, 05, 06);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.Clear();
@@ -1167,25 +1443,46 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var boundValue = Browser.Exists(By.Id("month-textbox-datetime-value"));
             var mirrorValue = Browser.Exists(By.Id("month-textbox-datetime-mirror"));
             var expected = new DateTime(1985, 3, 1);
-            Assert.Equal(expected, DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             // When the value gets displayed the first time it gets truncated to the 1st day,
             // until there is no change the bound value doesn't get updated.
-            Assert.Equal(expected.AddDays(3), DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected.AddDays(3), DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected.AddDays(3),
+                DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected.AddDays(3),
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Clear textbox; value updates to 01/01/0001 because that's the default
             target.Clear();
             expected = default;
-            Browser.Equal(expected, () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // We have to do it this way because the browser gets in the way when sending keys to the input
             // element directly.
             ApplyInputValue("#month-textbox-datetime", "2000-02");
             expected = new DateTime(2000, 2, 1);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -1210,8 +1507,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // element directly.
             ApplyInputValue("#month-textbox-nullable-datetime", "2000-02");
             var expected = new DateTime(2000, 2, 1);
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.Clear();
@@ -1229,23 +1532,41 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var boundValue = Browser.Exists(By.Id("time-textbox-datetime-value"));
             var mirrorValue = Browser.Exists(By.Id("time-textbox-datetime-mirror"));
             var expected = DateTime.Now.Date.AddHours(8).AddMinutes(5);
-            Assert.Equal(expected, DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Clear textbox; value updates to 00:00 because that's the default
             target.Clear();
             expected = default;
-            Browser.Equal(DateTime.Now.Date, () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                DateTime.Now.Date,
+                () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(default, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(default, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                default,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // We have to do it this way because the browser gets in the way when sending keys to the input
             // element directly.
             ApplyInputValue("#time-textbox-datetime", "04:05");
             expected = DateTime.Now.Date.Add(new TimeSpan(4, 5, 0));
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -1270,8 +1591,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // element directly.
             ApplyInputValue("#time-textbox-nullable-datetime", "05:06");
             var expected = DateTime.Now.Date.Add(new TimeSpan(05, 06, 0));
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.Clear();
@@ -1289,23 +1616,41 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var boundValue = Browser.Exists(By.Id("time-step-textbox-datetime-value"));
             var mirrorValue = Browser.Exists(By.Id("time-step-textbox-datetime-mirror"));
             var expected = DateTime.Now.Date.Add(new TimeSpan(8, 5, 30));
-            Assert.Equal(expected, DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(expected, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Clear textbox; value updates to 00:00 because that's the default
             target.Clear();
             expected = default;
-            Browser.Equal(DateTime.Now.Date, () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                DateTime.Now.Date,
+                () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
             Assert.Equal(default, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(default, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Assert.Equal(
+                default,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // We have to do it this way because the browser gets in the way when sending keys to the input
             // element directly.
             ApplyInputValue("#time-step-textbox-datetime", "04:05:06");
             expected = DateTime.Now.Date.Add(new TimeSpan(4, 5, 6));
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
         }
 
         // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
@@ -1330,8 +1675,14 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             // element directly.
             ApplyInputValue("#time-step-textbox-nullable-datetime", "05:06");
             var expected = DateTime.Now.Date.Add(new TimeSpan(05, 06, 0));
-            Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
-            Assert.Equal(expected, DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture));
+            Browser.Equal(
+                expected,
+                () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture)
+            );
+            Assert.Equal(
+                expected,
+                DateTime.Parse(mirrorValue.GetAttribute("value"), CultureInfo.InvariantCulture)
+            );
 
             // Modify target; verify value is updated and that textboxes linked to the same data are updated
             target.Clear();
@@ -1352,8 +1703,9 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
             var javascript = (IJavaScriptExecutor)Browser;
             javascript.ExecuteScript(
                 $"var elem = document.querySelector('{cssSelector}');"
-                + $"elem.value = '{value}';"
-                + "elem.dispatchEvent(new KeyboardEvent('change'));");
+                    + $"elem.value = '{value}';"
+                    + "elem.dispatchEvent(new KeyboardEvent('change'));"
+            );
         }
     }
 }

@@ -38,24 +38,31 @@ namespace Microsoft.EntityFrameworkCore.Query
         [return: NotNullIfNotNull("sqlExpression")]
         public virtual SqlExpression? ApplyDefaultTypeMapping(SqlExpression? sqlExpression)
         {
-            return sqlExpression == null
-                || sqlExpression.TypeMapping != null
-                    ? sqlExpression
-                    : sqlExpression is SqlUnaryExpression sqlUnaryExpression
-                    && sqlUnaryExpression.OperatorType == ExpressionType.Convert
-                    && sqlUnaryExpression.Type == typeof(object)
-                        ? sqlUnaryExpression.Operand
-                        : ApplyTypeMapping(sqlExpression, _typeMappingSource.FindMapping(sqlExpression.Type));
+            return sqlExpression == null || sqlExpression.TypeMapping != null
+              ? sqlExpression
+              : sqlExpression is SqlUnaryExpression sqlUnaryExpression
+                && sqlUnaryExpression.OperatorType == ExpressionType.Convert
+                && sqlUnaryExpression.Type == typeof(object)
+                  ? sqlUnaryExpression.Operand
+                  : ApplyTypeMapping(
+                        sqlExpression,
+                        _typeMappingSource.FindMapping(sqlExpression.Type)
+                    );
         }
 
         /// <inheritdoc />
         [return: NotNullIfNotNull("sqlExpression")]
-        public virtual SqlExpression? ApplyTypeMapping(SqlExpression? sqlExpression, RelationalTypeMapping? typeMapping)
+        public virtual SqlExpression? ApplyTypeMapping(
+            SqlExpression? sqlExpression,
+            RelationalTypeMapping? typeMapping
+        )
         {
 #pragma warning disable IDE0046 // Convert to conditional expression
-            if (sqlExpression == null
+            if (
+                sqlExpression == null
 #pragma warning restore IDE0046 // Convert to conditional expression
-                || sqlExpression.TypeMapping != null)
+                || sqlExpression.TypeMapping != null
+            )
             {
                 return sqlExpression;
             }
@@ -78,23 +85,32 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private SqlExpression ApplyTypeMappingOnLike(LikeExpression likeExpression)
         {
-            var inferredTypeMapping = (likeExpression.EscapeChar == null
-                    ? ExpressionExtensions.InferTypeMapping(
-                        likeExpression.Match, likeExpression.Pattern)
-                    : ExpressionExtensions.InferTypeMapping(
-                        likeExpression.Match, likeExpression.Pattern, likeExpression.EscapeChar))
-                ?? _typeMappingSource.FindMapping(likeExpression.Match.Type);
+            var inferredTypeMapping =
+                (
+                    likeExpression.EscapeChar == null
+                        ? ExpressionExtensions.InferTypeMapping(
+                              likeExpression.Match,
+                              likeExpression.Pattern
+                          )
+                        : ExpressionExtensions.InferTypeMapping(
+                              likeExpression.Match,
+                              likeExpression.Pattern,
+                              likeExpression.EscapeChar
+                          )
+                ) ?? _typeMappingSource.FindMapping(likeExpression.Match.Type);
 
             return new LikeExpression(
                 ApplyTypeMapping(likeExpression.Match, inferredTypeMapping),
                 ApplyTypeMapping(likeExpression.Pattern, inferredTypeMapping),
                 ApplyTypeMapping(likeExpression.EscapeChar, inferredTypeMapping),
-                _boolTypeMapping);
+                _boolTypeMapping
+            );
         }
 
         private SqlExpression ApplyTypeMappingOnCase(
             CaseExpression caseExpression,
-            RelationalTypeMapping? typeMapping)
+            RelationalTypeMapping? typeMapping
+        )
         {
             var whenClauses = new List<CaseWhenClause>();
             foreach (var caseWhenClause in caseExpression.WhenClauses)
@@ -102,7 +118,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 whenClauses.Add(
                     new CaseWhenClause(
                         caseWhenClause.Test,
-                        ApplyTypeMapping(caseWhenClause.Result, typeMapping)));
+                        ApplyTypeMapping(caseWhenClause.Result, typeMapping)
+                    )
+                );
             }
 
             var elseResult = ApplyTypeMapping(caseExpression.ElseResult, typeMapping);
@@ -112,17 +130,18 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         private SqlExpression ApplyTypeMappingOnCollate(
             CollateExpression collateExpression,
-            RelationalTypeMapping? typeMapping)
-            => collateExpression.Update(ApplyTypeMapping(collateExpression.Operand, typeMapping));
+            RelationalTypeMapping? typeMapping
+        ) => collateExpression.Update(ApplyTypeMapping(collateExpression.Operand, typeMapping));
 
         private SqlExpression ApplyTypeMappingOnDistinct(
             DistinctExpression distinctExpression,
-            RelationalTypeMapping? typeMapping)
-            => distinctExpression.Update(ApplyTypeMapping(distinctExpression.Operand, typeMapping));
+            RelationalTypeMapping? typeMapping
+        ) => distinctExpression.Update(ApplyTypeMapping(distinctExpression.Operand, typeMapping));
 
         private SqlExpression ApplyTypeMappingOnSqlUnary(
             SqlUnaryExpression sqlUnaryExpression,
-            RelationalTypeMapping? typeMapping)
+            RelationalTypeMapping? typeMapping
+        )
         {
             SqlExpression operand;
             Type resultType;
@@ -131,8 +150,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 case ExpressionType.Equal:
                 case ExpressionType.NotEqual:
-                case ExpressionType.Not
-                    when sqlUnaryExpression.Type == typeof(bool):
+                case ExpressionType.Not when sqlUnaryExpression.Type == typeof(bool):
                 {
                     resultTypeMapping = _boolTypeMapping;
                     resultType = typeof(bool);
@@ -158,15 +176,24 @@ namespace Microsoft.EntityFrameworkCore.Query
                 default:
                     throw new InvalidOperationException(
                         RelationalStrings.UnsupportedOperatorForSqlExpression(
-                            sqlUnaryExpression.OperatorType, typeof(SqlUnaryExpression).ShortDisplayName()));
+                            sqlUnaryExpression.OperatorType,
+                            typeof(SqlUnaryExpression).ShortDisplayName()
+                        )
+                    );
             }
 
-            return new SqlUnaryExpression(sqlUnaryExpression.OperatorType, operand, resultType, resultTypeMapping);
+            return new SqlUnaryExpression(
+                sqlUnaryExpression.OperatorType,
+                operand,
+                resultType,
+                resultTypeMapping
+            );
         }
 
         private SqlExpression ApplyTypeMappingOnSqlBinary(
             SqlBinaryExpression sqlBinaryExpression,
-            RelationalTypeMapping? typeMapping)
+            RelationalTypeMapping? typeMapping
+        )
         {
             var left = sqlBinaryExpression.Left;
             var right = sqlBinaryExpression.Right;
@@ -183,11 +210,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 case ExpressionType.LessThanOrEqual:
                 case ExpressionType.NotEqual:
                 {
-                    inferredTypeMapping = ExpressionExtensions.InferTypeMapping(left, right)
+                    inferredTypeMapping =
+                        ExpressionExtensions.InferTypeMapping(left, right)
                         // We avoid object here since the result does not get typeMapping from outside.
-                        ?? (left.Type != typeof(object)
-                            ? _typeMappingSource.FindMapping(left.Type)
-                            : _typeMappingSource.FindMapping(right.Type));
+                        ?? (
+                            left.Type != typeof(object)
+                                ? _typeMappingSource.FindMapping(left.Type)
+                                : _typeMappingSource.FindMapping(right.Type)
+                        );
                     resultType = typeof(bool);
                     resultTypeMapping = _boolTypeMapping;
                     break;
@@ -210,7 +240,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 case ExpressionType.And:
                 case ExpressionType.Or:
                 {
-                    inferredTypeMapping = typeMapping ?? ExpressionExtensions.InferTypeMapping(left, right);
+                    inferredTypeMapping =
+                        typeMapping ?? ExpressionExtensions.InferTypeMapping(left, right);
                     resultType = inferredTypeMapping?.ClrType ?? left.Type;
                     resultTypeMapping = inferredTypeMapping;
                     break;
@@ -219,7 +250,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 default:
                     throw new InvalidOperationException(
                         RelationalStrings.UnsupportedOperatorForSqlExpression(
-                            sqlBinaryExpression.OperatorType, typeof(SqlBinaryExpression).ShortDisplayName()));
+                            sqlBinaryExpression.OperatorType,
+                            typeof(SqlBinaryExpression).ShortDisplayName()
+                        )
+                    );
             }
 
             return new SqlBinaryExpression(
@@ -227,7 +261,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 ApplyTypeMapping(left, inferredTypeMapping),
                 ApplyTypeMapping(right, inferredTypeMapping),
                 resultType,
-                resultTypeMapping);
+                resultTypeMapping
+            );
         }
 
         /// <inheritdoc />
@@ -235,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             ExpressionType operatorType,
             SqlExpression left,
             SqlExpression right,
-            RelationalTypeMapping? typeMapping)
+            RelationalTypeMapping? typeMapping
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -261,7 +297,9 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             return (SqlBinaryExpression)ApplyTypeMapping(
-                new SqlBinaryExpression(operatorType, left, right, returnType, null), typeMapping);
+                new SqlBinaryExpression(operatorType, left, right, returnType, null),
+                typeMapping
+            );
         }
 
         /// <inheritdoc />
@@ -292,7 +330,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlBinaryExpression GreaterThanOrEqual(SqlExpression left, SqlExpression right)
+        public virtual SqlBinaryExpression GreaterThanOrEqual(
+            SqlExpression left,
+            SqlExpression right
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -337,7 +378,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlBinaryExpression Add(SqlExpression left, SqlExpression right, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlBinaryExpression Add(
+            SqlExpression left,
+            SqlExpression right,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -346,7 +391,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlBinaryExpression Subtract(SqlExpression left, SqlExpression right, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlBinaryExpression Subtract(
+            SqlExpression left,
+            SqlExpression right,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -355,7 +404,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlBinaryExpression Multiply(SqlExpression left, SqlExpression right, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlBinaryExpression Multiply(
+            SqlExpression left,
+            SqlExpression right,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -364,7 +417,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlBinaryExpression Divide(SqlExpression left, SqlExpression right, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlBinaryExpression Divide(
+            SqlExpression left,
+            SqlExpression right,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -373,7 +430,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlBinaryExpression Modulo(SqlExpression left, SqlExpression right, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlBinaryExpression Modulo(
+            SqlExpression left,
+            SqlExpression right,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -382,7 +443,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlBinaryExpression And(SqlExpression left, SqlExpression right, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlBinaryExpression And(
+            SqlExpression left,
+            SqlExpression right,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -391,7 +456,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlBinaryExpression Or(SqlExpression left, SqlExpression right, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlBinaryExpression Or(
+            SqlExpression left,
+            SqlExpression right,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
@@ -400,19 +469,25 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlFunctionExpression Coalesce(SqlExpression left, SqlExpression right, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlFunctionExpression Coalesce(
+            SqlExpression left,
+            SqlExpression right,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(left, nameof(left));
             Check.NotNull(right, nameof(right));
 
             var resultType = right.Type;
-            var inferredTypeMapping = typeMapping
+            var inferredTypeMapping =
+                typeMapping
                 ?? ExpressionExtensions.InferTypeMapping(left, right)
                 ?? _typeMappingSource.FindMapping(resultType);
 
             var typeMappedArguments = new List<SqlExpression>
             {
-                ApplyTypeMapping(left, inferredTypeMapping), ApplyTypeMapping(right, inferredTypeMapping)
+                ApplyTypeMapping(left, inferredTypeMapping),
+                ApplyTypeMapping(right, inferredTypeMapping)
             };
 
             return new SqlFunctionExpression(
@@ -422,7 +497,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 // COALESCE is handled separately since it's only nullable if *both* arguments are null
                 argumentsPropagateNullability: new[] { false, false },
                 resultType,
-                inferredTypeMapping);
+                inferredTypeMapping
+            );
         }
 
         /// <inheritdoc />
@@ -430,15 +506,19 @@ namespace Microsoft.EntityFrameworkCore.Query
             ExpressionType operatorType,
             SqlExpression operand,
             Type type,
-            RelationalTypeMapping? typeMapping = null)
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(operatorType, nameof(operand));
             Check.NotNull(operand, nameof(operand));
             Check.NotNull(type, nameof(type));
 
             return !SqlUnaryExpression.IsValidOperator(operatorType)
-                ? null
-                : (SqlUnaryExpression)ApplyTypeMapping(new SqlUnaryExpression(operatorType, operand, type, null), typeMapping);
+              ? null
+              : (SqlUnaryExpression)ApplyTypeMapping(
+                    new SqlUnaryExpression(operatorType, operand, type, null),
+                    typeMapping
+                );
         }
 
         /// <inheritdoc />
@@ -458,12 +538,21 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlUnaryExpression Convert(SqlExpression operand, Type type, RelationalTypeMapping? typeMapping = null)
+        public virtual SqlUnaryExpression Convert(
+            SqlExpression operand,
+            Type type,
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(operand, nameof(operand));
             Check.NotNull(type, nameof(type));
 
-            return MakeUnary(ExpressionType.Convert, operand, type.UnwrapNullableType(), typeMapping)!;
+            return MakeUnary(
+                ExpressionType.Convert,
+                operand,
+                type.UnwrapNullableType(),
+                typeMapping
+            )!;
         }
 
         /// <inheritdoc />
@@ -484,7 +573,10 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         /// <inheritdoc />
         [Obsolete("Use overload which takes IReadOnlyList instead of params")]
-        public virtual CaseExpression Case(SqlExpression operand, params CaseWhenClause[] whenClauses)
+        public virtual CaseExpression Case(
+            SqlExpression operand,
+            params CaseWhenClause[] whenClauses
+        )
         {
             Check.NotNull(operand, nameof(operand));
             Check.NotNull(whenClauses, nameof(whenClauses));
@@ -493,19 +585,27 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual CaseExpression Case(SqlExpression? operand, IReadOnlyList<CaseWhenClause> whenClauses, SqlExpression? elseResult)
+        public virtual CaseExpression Case(
+            SqlExpression? operand,
+            IReadOnlyList<CaseWhenClause> whenClauses,
+            SqlExpression? elseResult
+        )
         {
             Check.NotNull(operand, nameof(operand));
             Check.NotNull(whenClauses, nameof(whenClauses));
 
-            var operandTypeMapping = operand.TypeMapping
+            var operandTypeMapping =
+                operand.TypeMapping
                 ?? whenClauses.Select(wc => wc.Test.TypeMapping).FirstOrDefault(t => t != null)
                 // Since we never look at type of Operand/Test after this place,
                 // we need to find actual typeMapping based on non-object type.
                 ?? new[] { operand.Type }.Concat(whenClauses.Select(wc => wc.Test.Type))
-                    .Where(t => t != typeof(object)).Select(t => _typeMappingSource.FindMapping(t)).FirstOrDefault();
+                    .Where(t => t != typeof(object))
+                    .Select(t => _typeMappingSource.FindMapping(t))
+                    .FirstOrDefault();
 
-            var resultTypeMapping = elseResult?.TypeMapping
+            var resultTypeMapping =
+                elseResult?.TypeMapping
                 ?? whenClauses.Select(wc => wc.Result.TypeMapping).FirstOrDefault(t => t != null);
 
             operand = ApplyTypeMapping(operand, operandTypeMapping);
@@ -517,18 +617,24 @@ namespace Microsoft.EntityFrameworkCore.Query
                 typeMappedWhenClauses.Add(
                     new CaseWhenClause(
                         ApplyTypeMapping(caseWhenClause.Test, operandTypeMapping),
-                        ApplyTypeMapping(caseWhenClause.Result, resultTypeMapping)));
+                        ApplyTypeMapping(caseWhenClause.Result, resultTypeMapping)
+                    )
+                );
             }
 
             return new CaseExpression(operand, typeMappedWhenClauses, elseResult);
         }
 
         /// <inheritdoc />
-        public virtual CaseExpression Case(IReadOnlyList<CaseWhenClause> whenClauses, SqlExpression? elseResult)
+        public virtual CaseExpression Case(
+            IReadOnlyList<CaseWhenClause> whenClauses,
+            SqlExpression? elseResult
+        )
         {
             Check.NotNull(whenClauses, nameof(whenClauses));
 
-            var resultTypeMapping = elseResult?.TypeMapping
+            var resultTypeMapping =
+                elseResult?.TypeMapping
                 ?? whenClauses.Select(wc => wc.Result.TypeMapping).FirstOrDefault(t => t != null);
 
             var typeMappedWhenClauses = new List<CaseWhenClause>();
@@ -537,7 +643,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                 typeMappedWhenClauses.Add(
                     new CaseWhenClause(
                         ApplyTypeMapping(caseWhenClause.Test, _boolTypeMapping),
-                        ApplyTypeMapping(caseWhenClause.Result, resultTypeMapping)));
+                        ApplyTypeMapping(caseWhenClause.Result, resultTypeMapping)
+                    )
+                );
             }
 
             elseResult = ApplyTypeMapping(elseResult, resultTypeMapping);
@@ -546,39 +654,66 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        [Obsolete("Use overload that explicitly specifies value for 'argumentsPropagateNullability' argument.")]
+        [Obsolete(
+            "Use overload that explicitly specifies value for 'argumentsPropagateNullability' argument."
+        )]
         public virtual SqlFunctionExpression Function(
             string name,
             IEnumerable<SqlExpression> arguments,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
-            => Function(
-                name, arguments, nullable: true, argumentsPropagateNullability: arguments.Select(a => false), returnType, typeMapping);
+            RelationalTypeMapping? typeMapping = null
+        ) =>
+            Function(
+                name,
+                arguments,
+                nullable: true,
+                argumentsPropagateNullability: arguments.Select(a => false),
+                returnType,
+                typeMapping
+            );
 
         /// <inheritdoc />
-        [Obsolete("Use overload that explicitly specifies value for 'argumentsPropagateNullability' argument.")]
+        [Obsolete(
+            "Use overload that explicitly specifies value for 'argumentsPropagateNullability' argument."
+        )]
         public virtual SqlFunctionExpression Function(
             string? schema,
             string name,
             IEnumerable<SqlExpression> arguments,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
-            => schema != null
-            ? Function(
-                schema, name, arguments, nullable: true, argumentsPropagateNullability: arguments.Select(a => false), returnType, typeMapping)
-            : Function(
-                name, arguments, nullable: true, argumentsPropagateNullability: arguments.Select(a => false), returnType, typeMapping);
+            RelationalTypeMapping? typeMapping = null
+        ) =>
+            schema != null
+                ? Function(
+                      schema,
+                      name,
+                      arguments,
+                      nullable: true,
+                      argumentsPropagateNullability: arguments.Select(a => false),
+                      returnType,
+                      typeMapping
+                  )
+                : Function(
+                      name,
+                      arguments,
+                      nullable: true,
+                      argumentsPropagateNullability: arguments.Select(a => false),
+                      returnType,
+                      typeMapping
+                  );
 
         /// <inheritdoc />
         [Obsolete(
-            "Use overload that explicitly specifies values for 'instancePropagatesNullability' and 'argumentsPropagateNullability' arguments.")]
+            "Use overload that explicitly specifies values for 'instancePropagatesNullability' and 'argumentsPropagateNullability' arguments."
+        )]
         public virtual SqlFunctionExpression Function(
             SqlExpression instance,
             string name,
             IEnumerable<SqlExpression> arguments,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
-            => Function(
+            RelationalTypeMapping? typeMapping = null
+        ) =>
+            Function(
                 instance,
                 name,
                 arguments,
@@ -586,17 +721,25 @@ namespace Microsoft.EntityFrameworkCore.Query
                 instancePropagatesNullability: false,
                 argumentsPropagateNullability: arguments.Select(a => false),
                 returnType,
-                typeMapping);
+                typeMapping
+            );
 
         /// <inheritdoc />
         [Obsolete("Use NiladicFunction method.")]
-        public virtual SqlFunctionExpression Function(string name, Type returnType, RelationalTypeMapping? typeMapping = null)
-            => NiladicFunction(name, nullable: true, returnType, typeMapping);
+        public virtual SqlFunctionExpression Function(
+            string name,
+            Type returnType,
+            RelationalTypeMapping? typeMapping = null
+        ) => NiladicFunction(name, nullable: true, returnType, typeMapping);
 
         /// <inheritdoc />
         [Obsolete("Use NiladicFunction method.")]
-        public virtual SqlFunctionExpression Function(string schema, string name, Type returnType, RelationalTypeMapping? typeMapping = null)
-            => NiladicFunction(schema, name, nullable: true, returnType, typeMapping);
+        public virtual SqlFunctionExpression Function(
+            string schema,
+            string name,
+            Type returnType,
+            RelationalTypeMapping? typeMapping = null
+        ) => NiladicFunction(schema, name, nullable: true, returnType, typeMapping);
 
         /// <inheritdoc />
         [Obsolete("Use NiladicFunction method.")]
@@ -604,8 +747,16 @@ namespace Microsoft.EntityFrameworkCore.Query
             SqlExpression instance,
             string name,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
-            => NiladicFunction(instance, name, nullable: true, instancePropagatesNullability: false, returnType, typeMapping);
+            RelationalTypeMapping? typeMapping = null
+        ) =>
+            NiladicFunction(
+                instance,
+                name,
+                nullable: true,
+                instancePropagatesNullability: false,
+                returnType,
+                typeMapping
+            );
 
         /// <inheritdoc />
         public virtual SqlFunctionExpression Function(
@@ -614,7 +765,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool nullable,
             IEnumerable<bool> argumentsPropagateNullability,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(arguments, nameof(arguments));
@@ -628,7 +780,14 @@ namespace Microsoft.EntityFrameworkCore.Query
                 typeMappedArguments.Add(ApplyDefaultTypeMapping(argument));
             }
 
-            return new SqlFunctionExpression(name, typeMappedArguments, nullable, argumentsPropagateNullability, returnType, typeMapping);
+            return new SqlFunctionExpression(
+                name,
+                typeMappedArguments,
+                nullable,
+                argumentsPropagateNullability,
+                returnType,
+                typeMapping
+            );
         }
 
         /// <inheritdoc />
@@ -639,7 +798,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool nullable,
             IEnumerable<bool> argumentsPropagateNullability,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NullButNotEmpty(schema, nameof(schema));
             Check.NotEmpty(name, nameof(name));
@@ -654,7 +814,14 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             return new SqlFunctionExpression(
-                schema, name, typeMappedArguments, nullable, argumentsPropagateNullability, returnType, typeMapping);
+                schema,
+                name,
+                typeMappedArguments,
+                nullable,
+                argumentsPropagateNullability,
+                returnType,
+                typeMapping
+            );
         }
 
         /// <inheritdoc />
@@ -666,7 +833,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool instancePropagatesNullability,
             IEnumerable<bool> argumentsPropagateNullability,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(instance, nameof(instance));
             Check.NotEmpty(name, nameof(name));
@@ -682,8 +850,15 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
 
             return new SqlFunctionExpression(
-                instance, name, typeMappedArguments, nullable, instancePropagatesNullability, argumentsPropagateNullability, returnType,
-                typeMapping);
+                instance,
+                name,
+                typeMappedArguments,
+                nullable,
+                instancePropagatesNullability,
+                argumentsPropagateNullability,
+                returnType,
+                typeMapping
+            );
         }
 
         /// <inheritdoc />
@@ -691,7 +866,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             string name,
             bool nullable,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(returnType, nameof(returnType));
@@ -705,7 +881,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             string name,
             bool nullable,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotEmpty(schema, nameof(schema));
             Check.NotEmpty(name, nameof(name));
@@ -721,14 +898,21 @@ namespace Microsoft.EntityFrameworkCore.Query
             bool nullable,
             bool instancePropagatesNullability,
             Type returnType,
-            RelationalTypeMapping? typeMapping = null)
+            RelationalTypeMapping? typeMapping = null
+        )
         {
             Check.NotNull(instance, nameof(instance));
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(returnType, nameof(returnType));
 
             return new SqlFunctionExpression(
-                ApplyDefaultTypeMapping(instance), name, nullable, instancePropagatesNullability, returnType, typeMapping);
+                ApplyDefaultTypeMapping(instance),
+                name,
+                nullable,
+                instancePropagatesNullability,
+                returnType,
+                typeMapping
+            );
         }
 
         /// <inheritdoc />
@@ -767,12 +951,18 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual LikeExpression Like(SqlExpression match, SqlExpression pattern, SqlExpression? escapeChar = null)
+        public virtual LikeExpression Like(
+            SqlExpression match,
+            SqlExpression pattern,
+            SqlExpression? escapeChar = null
+        )
         {
             Check.NotNull(match, nameof(match));
             Check.NotNull(pattern, nameof(pattern));
 
-            return (LikeExpression)ApplyDefaultTypeMapping(new LikeExpression(match, pattern, escapeChar, null));
+            return (LikeExpression)ApplyDefaultTypeMapping(
+                new LikeExpression(match, pattern, escapeChar, null)
+            );
         }
 
         /// <inheritdoc />
@@ -784,12 +974,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SqlConstantExpression Constant(object? value, RelationalTypeMapping? typeMapping = null)
-            => new(Expression.Constant(value), typeMapping);
+        public virtual SqlConstantExpression Constant(
+            object? value,
+            RelationalTypeMapping? typeMapping = null
+        ) => new(Expression.Constant(value), typeMapping);
 
         /// <inheritdoc />
-        public virtual SelectExpression Select(SqlExpression? projection)
-            => new(projection);
+        public virtual SelectExpression Select(SqlExpression? projection) => new(projection);
 
         /// <inheritdoc />
         public virtual SelectExpression Select(IEntityType entityType)
@@ -803,7 +994,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        public virtual SelectExpression Select(IEntityType entityType, TableExpressionBase tableExpressionBase)
+        public virtual SelectExpression Select(
+            IEntityType entityType,
+            TableExpressionBase tableExpressionBase
+        )
         {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(tableExpressionBase, nameof(tableExpressionBase));
@@ -815,21 +1009,37 @@ namespace Microsoft.EntityFrameworkCore.Query
         }
 
         /// <inheritdoc />
-        [Obsolete("Use overload which takes TableExpressionBase by passing FromSqlExpression directly.")]
-        public virtual SelectExpression Select(IEntityType entityType, string sql, Expression sqlArguments)
+        [Obsolete(
+            "Use overload which takes TableExpressionBase by passing FromSqlExpression directly."
+        )]
+        public virtual SelectExpression Select(
+            IEntityType entityType,
+            string sql,
+            Expression sqlArguments
+        )
         {
             Check.NotNull(entityType, nameof(entityType));
             Check.NotNull(sql, nameof(sql));
 
             var tableExpression = new FromSqlExpression(
-                entityType.GetDefaultMappings().Single().Table.Name.Substring(0, 1).ToLowerInvariant(), sql, sqlArguments);
+                entityType.GetDefaultMappings()
+                    .Single()
+                    .Table.Name.Substring(0, 1)
+                    .ToLowerInvariant(),
+                sql,
+                sqlArguments
+            );
             var selectExpression = new SelectExpression(entityType, tableExpression);
             AddConditions(selectExpression, entityType);
 
             return selectExpression;
         }
 
-        private void AddSelfConditions(SelectExpression selectExpression, IEntityType entityType, ITableBase? table = null)
+        private void AddSelfConditions(
+            SelectExpression selectExpression,
+            IEntityType entityType,
+            ITableBase? table = null
+        )
         {
             // Add conditions if TPH
             var discriminatorAdded = AddDiscriminatorCondition(selectExpression, entityType);
@@ -840,15 +1050,17 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             // Add conditions if dependent sharing table with principal
             table ??= entityType.GetViewOrTableMappings().FirstOrDefault()?.Table;
-            if (table != null
-                && table.IsOptional(entityType)
-                && !discriminatorAdded)
+            if (table != null && table.IsOptional(entityType) && !discriminatorAdded)
             {
                 AddOptionalDependentConditions(selectExpression, entityType, table);
             }
         }
 
-        private void AddConditions(SelectExpression selectExpression, IEntityType entityType, ITableBase? table = null)
+        private void AddConditions(
+            SelectExpression selectExpression,
+            IEntityType entityType,
+            ITableBase? table = null
+        )
         {
             AddSelfConditions(selectExpression, entityType, table);
             // Add inner join to principal if table sharing
@@ -875,10 +1087,16 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
         }
 
-        private void AddInnerJoin(SelectExpression selectExpression, IForeignKey foreignKey, ITableBase? table)
+        private void AddInnerJoin(
+            SelectExpression selectExpression,
+            IForeignKey foreignKey,
+            ITableBase? table
+        )
         {
             var outerEntityProjection = GetMappedEntityProjectionExpression(selectExpression);
-            var outerIsPrincipal = foreignKey.PrincipalEntityType.IsAssignableFrom(outerEntityProjection.EntityType);
+            var outerIsPrincipal = foreignKey.PrincipalEntityType.IsAssignableFrom(
+                outerEntityProjection.EntityType
+            );
 
             var innerSelect = outerIsPrincipal
                 ? new SelectExpression(foreignKey.DeclaringEntityType, this)
@@ -895,32 +1113,52 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             var innerEntityProjection = GetMappedEntityProjectionExpression(innerSelect);
 
-            var outerKey = (outerIsPrincipal ? foreignKey.PrincipalKey.Properties : foreignKey.Properties)
-                .Select(p => outerEntityProjection.BindProperty(p));
-            var innerKey = (outerIsPrincipal ? foreignKey.Properties : foreignKey.PrincipalKey.Properties)
-                .Select(p => innerEntityProjection.BindProperty(p));
+            var outerKey = (
+                outerIsPrincipal ? foreignKey.PrincipalKey.Properties : foreignKey.Properties
+            ).Select(p => outerEntityProjection.BindProperty(p));
+            var innerKey = (
+                outerIsPrincipal ? foreignKey.Properties : foreignKey.PrincipalKey.Properties
+            ).Select(p => innerEntityProjection.BindProperty(p));
 
             var joinPredicate = outerKey.Zip(innerKey, Equal).Aggregate(AndAlso);
 
             selectExpression.AddInnerJoin(innerSelect, joinPredicate);
         }
 
-        private bool AddDiscriminatorCondition(SelectExpression selectExpression, IEntityType entityType)
+        private bool AddDiscriminatorCondition(
+            SelectExpression selectExpression,
+            IEntityType entityType
+        )
         {
             var discriminatorProperty = entityType.FindDiscriminatorProperty();
-            if (discriminatorProperty == null
-                || (entityType.GetRootType().GetIsDiscriminatorMappingComplete()
+            if (
+                discriminatorProperty == null
+                || (
+                    entityType.GetRootType().GetIsDiscriminatorMappingComplete()
                     && entityType.GetAllBaseTypesInclusiveAscending()
-                        .All(e => (e == entityType || e.IsAbstract()) && !HasSiblings(e))))
+                        .All(e => (e == entityType || e.IsAbstract()) && !HasSiblings(e))
+                )
+            )
             {
                 return false;
             }
 
-            var discriminatorColumn = GetMappedEntityProjectionExpression(selectExpression).BindProperty(discriminatorProperty);
+            var discriminatorColumn = GetMappedEntityProjectionExpression(selectExpression)
+                .BindProperty(discriminatorProperty);
             var concreteEntityTypes = entityType.GetConcreteDerivedTypesInclusive().ToList();
-            var predicate = concreteEntityTypes.Count == 1
-                ? (SqlExpression)Equal(discriminatorColumn, Constant(concreteEntityTypes[0].GetDiscriminatorValue()))
-                : In(discriminatorColumn, Constant(concreteEntityTypes.Select(et => et.GetDiscriminatorValue()).ToList()), negated: false);
+            var predicate =
+                concreteEntityTypes.Count == 1
+                    ? (SqlExpression)Equal(
+                          discriminatorColumn,
+                          Constant(concreteEntityTypes[0].GetDiscriminatorValue())
+                      )
+                    : In(
+                          discriminatorColumn,
+                          Constant(
+                              concreteEntityTypes.Select(et => et.GetDiscriminatorValue()).ToList()
+                          ),
+                          negated: false
+                      );
 
             selectExpression.ApplyPredicate(predicate);
 
@@ -928,35 +1166,49 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             bool HasSiblings(IEntityType entityType)
             {
-                return entityType.BaseType?.GetDirectlyDerivedTypes().Any(i => i != entityType) == true;
+                return entityType.BaseType?.GetDirectlyDerivedTypes().Any(i => i != entityType)
+                    == true;
             }
         }
 
         private void AddOptionalDependentConditions(
             SelectExpression selectExpression,
             IEntityType entityType,
-            ITableBase table)
+            ITableBase table
+        )
         {
             SqlExpression? predicate = null;
             var entityProjectionExpression = GetMappedEntityProjectionExpression(selectExpression);
-            var requiredNonPkProperties = entityType.GetProperties().Where(p => !p.IsNullable && !p.IsPrimaryKey()).ToList();
+            var requiredNonPkProperties = entityType.GetProperties()
+                .Where(p => !p.IsNullable && !p.IsPrimaryKey())
+                .ToList();
             if (requiredNonPkProperties.Count > 0)
             {
-                predicate = requiredNonPkProperties.Select(e => IsNotNull(e, entityProjectionExpression)).Aggregate((l, r) => AndAlso(l, r));
+                predicate = requiredNonPkProperties.Select(
+                        e => IsNotNull(e, entityProjectionExpression)
+                    )
+                    .Aggregate((l, r) => AndAlso(l, r));
             }
 
-            var allNonSharedNonPkProperties = entityType.GetNonPrincipalSharedNonPkProperties(table);
+            var allNonSharedNonPkProperties = entityType.GetNonPrincipalSharedNonPkProperties(
+                table
+            );
             // We don't need condition for nullable property if there exist at least one required property which is non shared.
-            if (allNonSharedNonPkProperties.Count != 0
-                && allNonSharedNonPkProperties.All(p => p.IsNullable))
+            if (
+                allNonSharedNonPkProperties.Count != 0
+                && allNonSharedNonPkProperties.All(p => p.IsNullable)
+            )
             {
-                var atLeastOneNonNullValueInNullablePropertyCondition = allNonSharedNonPkProperties
-                    .Select(e => IsNotNull(e, entityProjectionExpression))
-                    .Aggregate((a, b) => OrElse(a, b));
+                var atLeastOneNonNullValueInNullablePropertyCondition =
+                    allNonSharedNonPkProperties.Select(
+                            e => IsNotNull(e, entityProjectionExpression)
+                        )
+                        .Aggregate((a, b) => OrElse(a, b));
 
-                predicate = predicate == null
-                    ? atLeastOneNonNullValueInNullablePropertyCondition
-                    : AndAlso(predicate, atLeastOneNonNullValueInNullablePropertyCondition);
+                predicate =
+                    predicate == null
+                        ? atLeastOneNonNullValueInNullablePropertyCondition
+                        : AndAlso(predicate, atLeastOneNonNullValueInNullablePropertyCondition);
             }
 
             if (predicate != null)
@@ -965,20 +1217,26 @@ namespace Microsoft.EntityFrameworkCore.Query
             }
         }
 
-        private EntityProjectionExpression GetMappedEntityProjectionExpression(SelectExpression selectExpression)
-            => (EntityProjectionExpression)selectExpression.GetMappedProjection(new ProjectionMember());
+        private EntityProjectionExpression GetMappedEntityProjectionExpression(
+            SelectExpression selectExpression
+        ) =>
+            (EntityProjectionExpression)selectExpression.GetMappedProjection(
+                new ProjectionMember()
+            );
 
-        private SqlExpression IsNotNull(IProperty property, EntityProjectionExpression entityProjection)
-            => IsNotNull(entityProjection.BindProperty(property));
+        private SqlExpression IsNotNull(
+            IProperty property,
+            EntityProjectionExpression entityProjection
+        ) => IsNotNull(entityProjection.BindProperty(property));
 
         /// <inheritdoc />
         [Obsolete("Use IRelationalTypeMappingSource directly.")]
-        public virtual RelationalTypeMapping GetTypeMappingForValue(object? value)
-            => _typeMappingSource.GetMappingForValue(value);
+        public virtual RelationalTypeMapping GetTypeMappingForValue(object? value) =>
+            _typeMappingSource.GetMappingForValue(value);
 
         /// <inheritdoc />
         [Obsolete("Use IRelationalTypeMappingSource directly.")]
-        public virtual RelationalTypeMapping? FindMapping(Type type)
-            => _typeMappingSource.FindMapping(Check.NotNull(type, nameof(type)));
+        public virtual RelationalTypeMapping? FindMapping(Type type) =>
+            _typeMappingSource.FindMapping(Check.NotNull(type, nameof(type)));
     }
 }

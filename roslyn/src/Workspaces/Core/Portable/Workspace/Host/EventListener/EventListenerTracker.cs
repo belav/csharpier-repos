@@ -23,13 +23,18 @@ namespace Microsoft.CodeAnalysis.Host
         /// Workspace kind this event listener is initialized for
         /// </summary>
         private readonly HashSet<string> _eventListenerInitialized;
-        private readonly ImmutableArray<Lazy<IEventListener, EventListenerMetadata>> _eventListeners;
+        private readonly ImmutableArray<
+            Lazy<IEventListener, EventListenerMetadata>
+        > _eventListeners;
 
         public EventListenerTracker(
-            IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners, string kind)
+            IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners,
+            string kind
+        )
         {
             _eventListenerInitialized = new HashSet<string>();
-            _eventListeners = eventListeners.Where(el => el.Metadata.Service == kind).ToImmutableArray();
+            _eventListeners = eventListeners.Where(el => el.Metadata.Service == kind)
+                .ToImmutableArray();
         }
 
         public void EnsureEventListener(Workspace workspace, TService serviceOpt)
@@ -50,11 +55,13 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         public static IEnumerable<IEventListener<TService>> GetListeners(
-            Workspace workspace, IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners)
+            Workspace workspace,
+            IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
+        )
         {
             return eventListeners.Where(l => l.Metadata.WorkspaceKinds.Contains(workspace.Kind))
-                                 .Select(l => l.Value)
-                                 .OfType<IEventListener<TService>>();
+                .Select(l => l.Value)
+                .OfType<IEventListener<TService>>();
         }
 
         internal TestAccessor GetTestAccessor()
@@ -66,11 +73,12 @@ namespace Microsoft.CodeAnalysis.Host
         {
             private readonly EventListenerTracker<TService> _eventListenerTracker;
 
-            internal TestAccessor(EventListenerTracker<TService> eventListenerTracker)
-                => _eventListenerTracker = eventListenerTracker;
+            internal TestAccessor(EventListenerTracker<TService> eventListenerTracker) =>
+                _eventListenerTracker = eventListenerTracker;
 
-            internal ref readonly ImmutableArray<Lazy<IEventListener, EventListenerMetadata>> EventListeners
-                => ref _eventListenerTracker._eventListeners;
+            internal ref readonly ImmutableArray<
+                Lazy<IEventListener, EventListenerMetadata>
+            > EventListeners => ref _eventListenerTracker._eventListeners;
         }
     }
 }

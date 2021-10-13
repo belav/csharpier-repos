@@ -16,9 +16,7 @@ namespace GCLatencyTest
             _numGen0Collections = GC.CollectionCount(0) - _numGen0Collections;
         }
 
-        public void Cleanup()
-        {
-        }
+        public void Cleanup() { }
 
         public bool Pass(GCLatencyMode gcMode, int numCollections)
         {

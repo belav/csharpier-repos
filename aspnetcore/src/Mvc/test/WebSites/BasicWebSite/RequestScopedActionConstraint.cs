@@ -12,10 +12,10 @@ namespace BasicWebSite
     public class RequestScopedConstraintAttribute : Attribute, IActionConstraintFactory
     {
         private readonly string _requestId;
-        private readonly Func<Type, object, ObjectFactory> CreateFactory =
-            (t, s) => ActivatorUtilities.CreateFactory(t, new[] { s.GetType() });
+        private readonly Func<Type, object, ObjectFactory> CreateFactory = (t, s) =>
+            ActivatorUtilities.CreateFactory(t, new[] { s.GetType() });
         private readonly ConcurrentDictionary<Type, ObjectFactory> _constraintCache =
-               new ConcurrentDictionary<Type, ObjectFactory>();
+            new ConcurrentDictionary<Type, ObjectFactory>();
 
         public bool IsReusable => false;
 
@@ -32,7 +32,11 @@ namespace BasicWebSite
         private Constraint CreateInstanceCore(IServiceProvider services)
         {
             var constraintType = typeof(Constraint);
-            return (Constraint)ActivatorUtilities.CreateInstance(services, typeof(Constraint), new[] { _requestId });
+            return (Constraint)ActivatorUtilities.CreateInstance(
+                services,
+                typeof(Constraint),
+                new[] { _requestId }
+            );
         }
 
         private class Constraint : IActionConstraint

@@ -10,13 +10,16 @@ using Microsoft.CodeAnalysis.EmbeddedLanguages.LanguageServices;
 
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
 {
-    internal class RegexEmbeddedLanguageEditorFeatures : RegexEmbeddedLanguage, IEmbeddedLanguageEditorFeatures
+    internal class RegexEmbeddedLanguageEditorFeatures
+        : RegexEmbeddedLanguage,
+          IEmbeddedLanguageEditorFeatures
     {
         public IBraceMatcher BraceMatcher { get; }
 
         public RegexEmbeddedLanguageEditorFeatures(
-            AbstractEmbeddedLanguageFeaturesProvider provider, EmbeddedLanguageInfo info)
-            : base(provider, info)
+            AbstractEmbeddedLanguageFeaturesProvider provider,
+            EmbeddedLanguageInfo info
+        ) : base(provider, info)
         {
             BraceMatcher = new RegexBraceMatcher(this);
         }

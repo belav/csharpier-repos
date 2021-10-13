@@ -13,8 +13,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 {
     public class SqlServerHistoryRepositoryTest
     {
-        private static string EOL
-            => Environment.NewLine;
+        private static string EOL => Environment.NewLine;
 
         [ConditionalFact]
         public void GetCreateScript_works()
@@ -23,16 +22,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             Assert.Equal(
                 "CREATE TABLE [__EFMigrationsHistory] ("
-                + EOL
-                + "    [MigrationId] nvarchar(150) NOT NULL,"
-                + EOL
-                + "    [ProductVersion] nvarchar(32) NOT NULL,"
-                + EOL
-                + "    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])"
-                + EOL
-                + ");"
-                + EOL,
-                sql);
+                    + EOL
+                    + "    [MigrationId] nvarchar(150) NOT NULL,"
+                    + EOL
+                    + "    [ProductVersion] nvarchar(32) NOT NULL,"
+                    + EOL
+                    + "    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])"
+                    + EOL
+                    + ");"
+                    + EOL,
+                sql
+            );
         }
 
         [ConditionalFact]
@@ -42,18 +42,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             Assert.Equal(
                 "IF SCHEMA_ID(N'my') IS NULL EXEC(N'CREATE SCHEMA [my];');"
-                + EOL
-                + "CREATE TABLE [my].[__EFMigrationsHistory] ("
-                + EOL
-                + "    [MigrationId] nvarchar(150) NOT NULL,"
-                + EOL
-                + "    [ProductVersion] nvarchar(32) NOT NULL,"
-                + EOL
-                + "    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])"
-                + EOL
-                + ");"
-                + EOL,
-                sql);
+                    + EOL
+                    + "CREATE TABLE [my].[__EFMigrationsHistory] ("
+                    + EOL
+                    + "    [MigrationId] nvarchar(150) NOT NULL,"
+                    + EOL
+                    + "    [ProductVersion] nvarchar(32) NOT NULL,"
+                    + EOL
+                    + "    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])"
+                    + EOL
+                    + ");"
+                    + EOL,
+                sql
+            );
         }
 
         [ConditionalFact]
@@ -63,22 +64,23 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             Assert.Equal(
                 "IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL"
-                + EOL
-                + "BEGIN"
-                + EOL
-                + "    CREATE TABLE [__EFMigrationsHistory] ("
-                + EOL
-                + "        [MigrationId] nvarchar(150) NOT NULL,"
-                + EOL
-                + "        [ProductVersion] nvarchar(32) NOT NULL,"
-                + EOL
-                + "        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])"
-                + EOL
-                + "    );"
-                + EOL
-                + "END;"
-                + EOL,
-                sql);
+                    + EOL
+                    + "BEGIN"
+                    + EOL
+                    + "    CREATE TABLE [__EFMigrationsHistory] ("
+                    + EOL
+                    + "        [MigrationId] nvarchar(150) NOT NULL,"
+                    + EOL
+                    + "        [ProductVersion] nvarchar(32) NOT NULL,"
+                    + EOL
+                    + "        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])"
+                    + EOL
+                    + "    );"
+                    + EOL
+                    + "END;"
+                    + EOL,
+                sql
+            );
         }
 
         [ConditionalFact]
@@ -88,24 +90,25 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             Assert.Equal(
                 "IF OBJECT_ID(N'[my].[__EFMigrationsHistory]') IS NULL"
-                + EOL
-                + "BEGIN"
-                + EOL
-                + "    IF SCHEMA_ID(N'my') IS NULL EXEC(N'CREATE SCHEMA [my];');"
-                + EOL
-                + "    CREATE TABLE [my].[__EFMigrationsHistory] ("
-                + EOL
-                + "        [MigrationId] nvarchar(150) NOT NULL,"
-                + EOL
-                + "        [ProductVersion] nvarchar(32) NOT NULL,"
-                + EOL
-                + "        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])"
-                + EOL
-                + "    );"
-                + EOL
-                + "END;"
-                + EOL,
-                sql);
+                    + EOL
+                    + "BEGIN"
+                    + EOL
+                    + "    IF SCHEMA_ID(N'my') IS NULL EXEC(N'CREATE SCHEMA [my];');"
+                    + EOL
+                    + "    CREATE TABLE [my].[__EFMigrationsHistory] ("
+                    + EOL
+                    + "        [MigrationId] nvarchar(150) NOT NULL,"
+                    + EOL
+                    + "        [ProductVersion] nvarchar(32) NOT NULL,"
+                    + EOL
+                    + "        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])"
+                    + EOL
+                    + "    );"
+                    + EOL
+                    + "END;"
+                    + EOL,
+                sql
+            );
         }
 
         [ConditionalFact]
@@ -114,19 +117,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var sql = CreateHistoryRepository().GetDeleteScript("Migration1");
 
             Assert.Equal(
-                "DELETE FROM [__EFMigrationsHistory]" + EOL + "WHERE [MigrationId] = N'Migration1';" + EOL,
-                sql);
+                "DELETE FROM [__EFMigrationsHistory]"
+                    + EOL
+                    + "WHERE [MigrationId] = N'Migration1';"
+                    + EOL,
+                sql
+            );
         }
 
         [ConditionalFact]
         public void GetInsertScript_works()
         {
-            var sql = CreateHistoryRepository().GetInsertScript(
-                new HistoryRow("Migration1", "7.0.0"));
+            var sql = CreateHistoryRepository()
+                .GetInsertScript(new HistoryRow("Migration1", "7.0.0"));
 
             Assert.Equal(
-                "INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])" + EOL + "VALUES (N'Migration1', N'7.0.0');" + EOL,
-                sql);
+                "INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])"
+                    + EOL
+                    + "VALUES (N'Migration1', N'7.0.0');"
+                    + EOL,
+                sql
+            );
         }
 
         [ConditionalFact]
@@ -135,8 +146,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var sql = CreateHistoryRepository().GetBeginIfNotExistsScript("Migration1");
 
             Assert.Equal(
-                "IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'Migration1')" + EOL + "BEGIN",
-                sql);
+                "IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'Migration1')"
+                    + EOL
+                    + "BEGIN",
+                sql
+            );
         }
 
         [ConditionalFact]
@@ -145,8 +159,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var sql = CreateHistoryRepository().GetBeginIfExistsScript("Migration1");
 
             Assert.Equal(
-                "IF EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'Migration1')" + EOL + "BEGIN",
-                sql);
+                "IF EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'Migration1')"
+                    + EOL
+                    + "BEGIN",
+                sql
+            );
         }
 
         [ConditionalFact]
@@ -157,33 +174,28 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             Assert.Equal("END;" + EOL, sql);
         }
 
-        private static IHistoryRepository CreateHistoryRepository(string schema = null)
-            => new TestDbContext(
-                    new DbContextOptionsBuilder()
-                        .UseInternalServiceProvider(SqlServerTestHelpers.Instance.CreateServiceProvider())
-                        .UseSqlServer(
-                            new SqlConnection("Database=DummyDatabase"),
-                            b => b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema))
-                        .Options)
-                .GetService<IHistoryRepository>();
+        private static IHistoryRepository CreateHistoryRepository(string schema = null) =>
+            new TestDbContext(
+                new DbContextOptionsBuilder().UseInternalServiceProvider(
+                        SqlServerTestHelpers.Instance.CreateServiceProvider()
+                    )
+                    .UseSqlServer(
+                        new SqlConnection("Database=DummyDatabase"),
+                        b => b.MigrationsHistoryTable(HistoryRepository.DefaultTableName, schema)
+                    ).Options
+            ).GetService<IHistoryRepository>();
 
         private class TestDbContext : DbContext
         {
-            public TestDbContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public TestDbContext(DbContextOptions options) : base(options) { }
 
             public DbSet<Blog> Blogs { get; set; }
 
             [DbFunction("TableFunction")]
-            public IQueryable<TableFunction> TableFunction()
-                => FromExpression(() => TableFunction());
+            public IQueryable<TableFunction> TableFunction() =>
+                FromExpression(() => TableFunction());
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-            {
-            }
-
+            protected override void OnModelCreating(ModelBuilder modelBuilder) { }
         }
 
         private class Blog

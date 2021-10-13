@@ -72,7 +72,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure
                         break;
 
                     default:
-                        throw new InvalidOperationException(Resources.FormatTempData_CannotDeserializeType(item.Value.ValueKind));
+                        throw new InvalidOperationException(
+                            Resources.FormatTempData_CannotDeserializeType(item.Value.ValueKind)
+                        );
                 }
 
                 deserialized[item.Name] = deserializedValue;
@@ -115,7 +117,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure
                 return array.ToArray();
             }
 
-            throw new InvalidOperationException(Resources.FormatTempData_CannotDeserializeType(arrayElement.ValueKind));
+            throw new InvalidOperationException(
+                Resources.FormatTempData_CannotDeserializeType(arrayElement.ValueKind)
+            );
         }
 
         private static object DeserializeDictionaryEntry(in JsonElement objectElement)
@@ -154,7 +158,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure
                         throw new InvalidOperationException(
                             Resources.FormatTempData_CannotSerializeType(
                                 typeof(DefaultTempDataSerializer).FullName,
-                                value.GetType()));
+                                value.GetType()
+                            )
+                        );
                     }
 
                     switch (value)
@@ -227,16 +233,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure
 
             type = Nullable.GetUnderlyingType(type) ?? type;
 
-            return
-                type.IsEnum ||
-                type == typeof(int) ||
-                type == typeof(string) ||
-                type == typeof(bool) ||
-                type == typeof(DateTime) ||
-                type == typeof(Guid) ||
-                typeof(ICollection<int>).IsAssignableFrom(type) ||
-                typeof(ICollection<string>).IsAssignableFrom(type) ||
-                typeof(IDictionary<string, string>).IsAssignableFrom(type);
+            return type.IsEnum
+                || type == typeof(int)
+                || type == typeof(string)
+                || type == typeof(bool)
+                || type == typeof(DateTime)
+                || type == typeof(Guid)
+                || typeof(ICollection<int>).IsAssignableFrom(type)
+                || typeof(ICollection<string>).IsAssignableFrom(type)
+                || typeof(IDictionary<string, string>).IsAssignableFrom(type);
         }
     }
 }

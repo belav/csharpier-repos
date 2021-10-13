@@ -65,7 +65,7 @@ namespace Microsoft.Extensions.Primitives
                 {
                     { default(StringValues), (string)null },
                     { StringValues.Empty, (string)null },
-                    { new StringValues(new string[] { }), (string)null },
+                    { new StringValues(new string[] {  }), (string)null },
                     { new StringValues(string.Empty), string.Empty },
                     { new StringValues(new string[] { string.Empty }), string.Empty },
                     { new StringValues("abc"), "abc" }
@@ -81,7 +81,7 @@ namespace Microsoft.Extensions.Primitives
                 {
                     { default(StringValues), (object)null },
                     { StringValues.Empty, (object)null },
-                    { new StringValues(new string[] { }), (object)null },
+                    { new StringValues(new string[] {  }), (object)null },
                     { new StringValues("abc"), (object)"abc" },
                     { new StringValues("abc"), (object)new[] { "abc" } },
                     { new StringValues(new[] { "abc" }), (object)new[] { "abc" } },
@@ -102,7 +102,10 @@ namespace Microsoft.Extensions.Primitives
                     { new StringValues("abc"), new[] { "abc" } },
                     { new StringValues(new[] { "abc" }), new[] { "abc" } },
                     { new StringValues(new[] { "abc", "bcd" }), new[] { "abc", "bcd" } },
-                    { new StringValues(new[] { "abc", "bcd", "foo" }), new[] { "abc", "bcd", "foo" } },
+                    {
+                        new StringValues(new[] { "abc", "bcd", "foo" }),
+                        new[] { "abc", "bcd", "foo" }
+                    },
                     { string.Empty, new[] { string.Empty } },
                     { "abc", new[] { "abc" } },
                     { new[] { "abc" }, new[] { "abc" } },
@@ -111,9 +114,18 @@ namespace Microsoft.Extensions.Primitives
                     { new[] { null, "abc", "bcd", "foo" }, new[] { null, "abc", "bcd", "foo" } },
                     { new[] { "abc", null, "bcd", "foo" }, new[] { "abc", null, "bcd", "foo" } },
                     { new[] { "abc", "bcd", "foo", null }, new[] { "abc", "bcd", "foo", null } },
-                    { new[] { string.Empty, "abc", "bcd", "foo" }, new[] { string.Empty, "abc", "bcd", "foo" } },
-                    { new[] { "abc", string.Empty, "bcd", "foo" }, new[] { "abc", string.Empty, "bcd", "foo" } },
-                    { new[] { "abc", "bcd", "foo", string.Empty }, new[] { "abc", "bcd", "foo", string.Empty } }
+                    {
+                        new[] { string.Empty, "abc", "bcd", "foo" },
+                        new[] { string.Empty, "abc", "bcd", "foo" }
+                    },
+                    {
+                        new[] { "abc", string.Empty, "bcd", "foo" },
+                        new[] { "abc", string.Empty, "bcd", "foo" }
+                    },
+                    {
+                        new[] { "abc", "bcd", "foo", string.Empty },
+                        new[] { "abc", "bcd", "foo", string.Empty }
+                    }
                 };
             }
         }
@@ -133,7 +145,7 @@ namespace Microsoft.Extensions.Primitives
                     { new StringValues(new[] { "abc", "bcd", "foo" }), "abc,bcd,foo" },
                     { string.Empty, string.Empty },
                     { (string)null, string.Empty },
-                    { "abc","abc" },
+                    { "abc", "abc" },
                     { new[] { "abc" }, "abc" },
                     { new[] { "abc", "bcd" }, "abc,bcd" },
                     { new[] { "abc", null, "bcd" }, "abc,bcd" },
@@ -157,10 +169,18 @@ namespace Microsoft.Extensions.Primitives
         public void IsReadOnly_True(StringValues stringValues)
         {
             Assert.True(((IList<string>)stringValues).IsReadOnly);
-            Assert.Throws<NotSupportedException>(() => ((IList<string>)stringValues)[0] = string.Empty);
-            Assert.Throws<NotSupportedException>(() => ((ICollection<string>)stringValues).Add(string.Empty));
-            Assert.Throws<NotSupportedException>(() => ((IList<string>)stringValues).Insert(0, string.Empty));
-            Assert.Throws<NotSupportedException>(() => ((ICollection<string>)stringValues).Remove(string.Empty));
+            Assert.Throws<NotSupportedException>(
+                () => ((IList<string>)stringValues)[0] = string.Empty
+            );
+            Assert.Throws<NotSupportedException>(
+                () => ((ICollection<string>)stringValues).Add(string.Empty)
+            );
+            Assert.Throws<NotSupportedException>(
+                () => ((IList<string>)stringValues).Insert(0, string.Empty)
+            );
+            Assert.Throws<NotSupportedException>(
+                () => ((ICollection<string>)stringValues).Remove(string.Empty)
+            );
             Assert.Throws<NotSupportedException>(() => ((IList<string>)stringValues).RemoveAt(0));
             Assert.Throws<NotSupportedException>(() => ((ICollection<string>)stringValues).Clear());
         }
@@ -444,7 +464,9 @@ namespace Microsoft.Extensions.Primitives
             if (collection.Count > 0)
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(actual, -1));
-                Assert.Throws<ArgumentException>(() => collection.CopyTo(actual, actual.Length + 1));
+                Assert.Throws<ArgumentException>(
+                    () => collection.CopyTo(actual, actual.Length + 1)
+                );
             }
             collection.CopyTo(actual, 0);
             Assert.Equal(expected, actual);
@@ -479,10 +501,16 @@ namespace Microsoft.Extensions.Primitives
             string[] filled = new[] { "abc", "bcd", "foo" };
 
             string[] expectedPrepended = array.Concat(filled).ToArray();
-            Assert.Equal(expectedPrepended, StringValues.Concat(stringValues, new StringValues(filled)));
+            Assert.Equal(
+                expectedPrepended,
+                StringValues.Concat(stringValues, new StringValues(filled))
+            );
 
             string[] expectedAppended = filled.Concat(array).ToArray();
-            Assert.Equal(expectedAppended, StringValues.Concat(new StringValues(filled), stringValues));
+            Assert.Equal(
+                expectedAppended,
+                StringValues.Concat(new StringValues(filled), stringValues)
+            );
 
             StringValues values = stringValues;
             foreach (string s in filled)

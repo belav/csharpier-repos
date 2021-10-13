@@ -9,7 +9,10 @@ namespace BasicWebSite.Controllers
     {
         private readonly ControllerTestDisposeAsync _testDisposeAsync;
 
-        public AsyncDisposableController(ILogger<AsyncDisposableController> logger, ControllerTestDisposeAsync testDisposeAsync)
+        public AsyncDisposableController(
+            ILogger<AsyncDisposableController> logger,
+            ControllerTestDisposeAsync testDisposeAsync
+        )
         {
             Logger = logger;
             _testDisposeAsync = testDisposeAsync;

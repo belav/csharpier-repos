@@ -14,13 +14,15 @@ internal static partial class Interop
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             [Out] byte[]? pvData,
-            [In, Out] ref int pcbData);
+            [In, Out] ref int pcbData
+        );
 
         [DllImport(Libraries.Crypt32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern bool CertGetCertificateContextProperty(
             SafeCertContextHandle pCertContext,
             CertContextPropId dwPropId,
             out IntPtr pvData,
-            [In, Out] ref int pcbData);
+            [In, Out] ref int pcbData
+        );
     }
 }

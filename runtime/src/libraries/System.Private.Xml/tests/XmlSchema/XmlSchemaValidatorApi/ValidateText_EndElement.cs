@@ -14,7 +14,7 @@ namespace System.Xml.Tests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCValidateText(ITestOutputHelper output): base(output)
+        public TCValidateText(ITestOutputHelper output) : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -136,9 +136,15 @@ namespace System.Xml.Tests
             }
             catch (XmlSchemaValidationException e)
             {
-                _exVerifier.IsExceptionOk(e, new object[] { "Sch_InvalidTextInElementExpecting",
-                new object[] { "Sch_ElementName", "ElementOnlyElement" },
-                    new object[] { "Sch_ElementName", "child" } });
+                _exVerifier.IsExceptionOk(
+                    e,
+                    new object[]
+                    {
+                        "Sch_InvalidTextInElementExpecting",
+                        new object[] { "Sch_ElementName", "ElementOnlyElement" },
+                        new object[] { "Sch_ElementName", "child" }
+                    }
+                );
                 return;
             }
 
@@ -176,7 +182,7 @@ namespace System.Xml.Tests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCValidateWhitespace(ITestOutputHelper output): base(output)
+        public TCValidateWhitespace(ITestOutputHelper output) : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -230,7 +236,7 @@ namespace System.Xml.Tests
             val.ValidateElement("ElementOnlyElement", "", info);
             val.ValidateEndOfAttributes(null);
 
-            val.ValidateWhitespace(StringGetter(" \t"+ Environment.NewLine));
+            val.ValidateWhitespace(StringGetter(" \t" + Environment.NewLine));
 
             val.ValidateElement("child", "", info);
             val.ValidateEndOfAttributes(null);
@@ -301,7 +307,7 @@ namespace System.Xml.Tests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCValidateEndElement(ITestOutputHelper output): base(output)
+        public TCValidateEndElement(ITestOutputHelper output) : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -537,12 +543,14 @@ namespace System.Xml.Tests
         [InlineData("duplicate")]
         [InlineData("missing")]
         [InlineData("ignore")]
-        public void TestForIdentityConstraints_Valid_InvalidDuplicateKey_InvalidKeyRefMissing_InvalidIdentitiConstraintIsSet(string constrType)
+        public void TestForIdentityConstraints_Valid_InvalidDuplicateKey_InvalidKeyRefMissing_InvalidIdentitiConstraintIsSet(
+            string constrType
+        )
         {
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
-            string[] keys = new string[] { };
-            string[] keyrefs = new string[] { };
+            string[] keys = new string[] {  };
+            string[] keyrefs = new string[] {  };
             bool secondPass;
 
             switch (constrType)
@@ -573,7 +581,13 @@ namespace System.Xml.Tests
             }
 
             if (constrType == "ignore")
-                val = CreateValidator(XSDFILE_IDENTITY_CONSTRAINS, "", XmlSchemaValidationFlags.ReportValidationWarnings | XmlSchemaValidationFlags.ProcessSchemaLocation | XmlSchemaValidationFlags.ProcessInlineSchema);
+                val = CreateValidator(
+                    XSDFILE_IDENTITY_CONSTRAINS,
+                    "",
+                    XmlSchemaValidationFlags.ReportValidationWarnings
+                        | XmlSchemaValidationFlags.ProcessSchemaLocation
+                        | XmlSchemaValidationFlags.ProcessInlineSchema
+                );
             else
                 val = CreateValidator(XSDFILE_IDENTITY_CONSTRAINS);
 
@@ -615,7 +629,11 @@ namespace System.Xml.Tests
                     }
                     catch (XmlSchemaValidationException e)
                     {
-                        _exVerifier.IsExceptionOk(e, "Sch_DuplicateKey", new string[] { "1", "numberKey" });
+                        _exVerifier.IsExceptionOk(
+                            e,
+                            "Sch_DuplicateKey",
+                            new string[] { "1", "numberKey" }
+                        );
                         return;
                     }
                 }
@@ -633,7 +651,11 @@ namespace System.Xml.Tests
                 }
                 catch (XmlSchemaValidationException e)
                 {
-                    _exVerifier.IsExceptionOk(e, "Sch_UnresolvedKeyref", new string[] { "3", "numberKey" });
+                    _exVerifier.IsExceptionOk(
+                        e,
+                        "Sch_UnresolvedKeyref",
+                        new string[] { "3", "numberKey" }
+                    );
                     return;
                 }
             }
@@ -673,7 +695,9 @@ namespace System.Xml.Tests
         [Theory]
         [InlineData("first")]
         [InlineData("second")] //(BUG #307549)
-        public void TestXmlSchemaInfoValuesAfterUnionValidation_Without_With_ValidationEndElementOverload(string overload)
+        public void TestXmlSchemaInfoValuesAfterUnionValidation_Without_With_ValidationEndElementOverload(
+            string overload
+        )
         {
             XmlSchemaValidator val = CreateValidator(XSDFILE_VALIDATE_END_ELEMENT);
             XmlSchemaInfo info = new XmlSchemaInfo();
@@ -735,7 +759,7 @@ namespace System.Xml.Tests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCSkipToEndElement(ITestOutputHelper output): base(output)
+        public TCSkipToEndElement(ITestOutputHelper output) : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -771,8 +795,10 @@ namespace System.Xml.Tests
             val.ValidateEndOfAttributes(null);
 
             string[] tmp;
-            if (valid) tmp = new string[] { "e1", "e2", "e2" };
-            else tmp = new string[] { "e1", "e2" };
+            if (valid)
+                tmp = new string[] { "e1", "e2", "e2" };
+            else
+                tmp = new string[] { "e1", "e2" };
 
             foreach (string name in tmp)
             {
@@ -850,7 +876,11 @@ namespace System.Xml.Tests
             }
             catch (InvalidOperationException e)
             {
-                _exVerifier.IsExceptionOk(e, "Sch_InvalidEndElementMultiple", new string[] { "SkipToEndElement" });
+                _exVerifier.IsExceptionOk(
+                    e,
+                    "Sch_InvalidEndElementMultiple",
+                    new string[] { "SkipToEndElement" }
+                );
                 return;
             }
 

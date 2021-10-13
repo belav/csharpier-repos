@@ -21,14 +21,23 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse3.IsSupported)
             {
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[2] { 1, -5 }, new double[2]))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[2] { 1, -5 },
+                        new double[2]
+                    )
+                )
                 {
                     var vf1 = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     var vf2 = Sse3.MoveAndDuplicate(vf1);
                     Unsafe.Write(doubleTable.outArrayPtr, vf2);
 
-                    if (BitConverter.DoubleToInt64Bits(doubleTable.inArray[0]) != BitConverter.DoubleToInt64Bits(doubleTable.outArray[0]) || 
-                        BitConverter.DoubleToInt64Bits(doubleTable.inArray[0]) != BitConverter.DoubleToInt64Bits(doubleTable.outArray[1]))
+                    if (
+                        BitConverter.DoubleToInt64Bits(doubleTable.inArray[0])
+                            != BitConverter.DoubleToInt64Bits(doubleTable.outArray[0])
+                        || BitConverter.DoubleToInt64Bits(doubleTable.inArray[0])
+                            != BitConverter.DoubleToInt64Bits(doubleTable.outArray[1])
+                    )
                     {
                         Console.WriteLine("Sse3 MoveAndDuplicate failed on double:");
                         foreach (var item in doubleTable.outArray)
@@ -80,6 +89,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

@@ -11,24 +11,24 @@ public struct doublesStruct
     public double f4;
 }
 
-public class A 
+public class A
 {
-    static bool foo(doublesStruct d1, doublesStruct d2, doublesStruct d3) 
+    static bool foo(doublesStruct d1, doublesStruct d2, doublesStruct d3)
     {
-        bool success = (d1.f1 == 1   &&
-                        d1.f2 == 2   &&
-                        d1.f3 == 3   &&
-                        d1.f4 == 4   &&
-
-                        d2.f1 == 11  &&
-                        d2.f2 == 22  &&
-                        d2.f3 == 33  &&
-                        d2.f4 == 44  &&
-
-                        d3.f1 == 111 &&
-                        d3.f2 == 222 &&
-                        d3.f3 == 333 &&
-                        d3.f4 == 444);
+        bool success = (
+            d1.f1 == 1
+            && d1.f2 == 2
+            && d1.f3 == 3
+            && d1.f4 == 4
+            && d2.f1 == 11
+            && d2.f2 == 22
+            && d2.f3 == 33
+            && d2.f4 == 44
+            && d3.f1 == 111
+            && d3.f2 == 222
+            && d3.f3 == 333
+            && d3.f4 == 444
+        );
 
         if (!success)
         {

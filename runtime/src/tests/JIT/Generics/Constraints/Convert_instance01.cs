@@ -6,17 +6,14 @@ using System;
 
 public interface IFoo
 {
-
 }
 
 public class FooClass : IFoo
 {
-
 }
 
 public struct FooStruct : IFoo
 {
-
 }
 
 public class GenClass<T> where T : IFoo
@@ -51,19 +48,42 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-        Eval(new GenClass<FooClass>().ConvertToConstraint(new FooClass()).GetType().Equals(typeof(FooClass)));
-        Eval(new GenClass<FooStruct>().ConvertToConstraint(new FooStruct()).GetType().Equals(typeof(FooStruct)));
+        Eval(
+            new GenClass<FooClass>().ConvertToConstraint(new FooClass())
+                .GetType()
+                .Equals(typeof(FooClass))
+        );
+        Eval(
+            new GenClass<FooStruct>().ConvertToConstraint(new FooStruct())
+                .GetType()
+                .Equals(typeof(FooStruct))
+        );
 
-        Eval(new GenClass<FooClass>().VirtConvertToConstraint(new FooClass()).GetType().Equals(typeof(FooClass)));
-        Eval(new GenClass<FooStruct>().VirtConvertToConstraint(new FooStruct()).GetType().Equals(typeof(FooStruct)));
+        Eval(
+            new GenClass<FooClass>().VirtConvertToConstraint(new FooClass())
+                .GetType()
+                .Equals(typeof(FooClass))
+        );
+        Eval(
+            new GenClass<FooStruct>().VirtConvertToConstraint(new FooStruct())
+                .GetType()
+                .Equals(typeof(FooStruct))
+        );
 
-        Eval(new GenStruct<FooClass>().ConvertToConstraint(new FooClass()).GetType().Equals(typeof(FooClass)));
-        Eval(new GenStruct<FooStruct>().ConvertToConstraint(new FooStruct()).GetType().Equals(typeof(FooStruct)));
+        Eval(
+            new GenStruct<FooClass>().ConvertToConstraint(new FooClass())
+                .GetType()
+                .Equals(typeof(FooClass))
+        );
+        Eval(
+            new GenStruct<FooStruct>().ConvertToConstraint(new FooStruct())
+                .GetType()
+                .Equals(typeof(FooStruct))
+        );
 
         if (result)
         {
@@ -76,6 +96,5 @@ public class Test
             return 1;
         }
     }
-
 }
 

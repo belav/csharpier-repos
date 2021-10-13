@@ -14,12 +14,11 @@ using Xunit;
 namespace Microsoft.EntityFrameworkCore
 {
     [SqlServerCondition(SqlServerCondition.IsNotSqlAzure)]
-    public class EverythingIsBytesSqlServerTest : BuiltInDataTypesTestBase<EverythingIsBytesSqlServerTest.EverythingIsBytesSqlServerFixture>
+    public class EverythingIsBytesSqlServerTest
+        : BuiltInDataTypesTestBase<EverythingIsBytesSqlServerTest.EverythingIsBytesSqlServerFixture>
     {
         public EverythingIsBytesSqlServerTest(EverythingIsBytesSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         [ConditionalFact]
         public virtual void Columns_have_expected_data_types()
@@ -31,9 +30,11 @@ namespace Microsoft.EntityFrameworkCore
                 nameof(NonNullableBackedDataTypes),
                 nameof(Animal),
                 nameof(AnimalDetails),
-                nameof(AnimalIdentification));
+                nameof(AnimalIdentification)
+            );
 
-            const string expected = @"BinaryForeignKeyDataType.BinaryKeyDataTypeId ---> [nullable varbinary] [MaxLength = 900]
+            const string expected =
+                @"BinaryForeignKeyDataType.BinaryKeyDataTypeId ---> [nullable varbinary] [MaxLength = 900]
 BinaryForeignKeyDataType.Id ---> [varbinary] [MaxLength = 4]
 BinaryKeyDataType.Ex ---> [nullable varbinary] [MaxLength = -1]
 BinaryKeyDataType.Id ---> [varbinary] [MaxLength = 900]
@@ -197,37 +198,28 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
 
         public class EverythingIsBytesSqlServerFixture : BuiltInDataTypesFixtureBase
         {
-            public override bool StrictEquality
-                => true;
+            public override bool StrictEquality => true;
 
-            public override bool SupportsAnsi
-                => true;
+            public override bool SupportsAnsi => true;
 
-            public override bool SupportsUnicodeToAnsiConversion
-                => false;
+            public override bool SupportsUnicodeToAnsiConversion => false;
 
-            public override bool SupportsLargeStringComparisons
-                => true;
+            public override bool SupportsLargeStringComparisons => true;
 
             protected override string StoreName { get; } = "EverythingIsBytes";
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerBytesTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerBytesTestStoreFactory.Instance;
 
-            public override bool SupportsBinaryKeys
-                => true;
+            public override bool SupportsBinaryKeys => true;
 
-            public override bool SupportsDecimalComparisons
-                => true;
+            public override bool SupportsDecimalComparisons => true;
 
-            public override DateTime DefaultDateTime
-                => new();
+            public override DateTime DefaultDateTime => new();
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base
-                    .AddOptions(builder)
-                    .ConfigureWarnings(
-                        c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base.AddOptions(builder)
+                    .ConfigureWarnings(c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -243,36 +235,44 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
         {
             public static new SqlServerBytesTestStoreFactory Instance { get; } = new();
 
-            public override IServiceCollection AddProviderServices(IServiceCollection serviceCollection)
-                => base.AddProviderServices(
-                    serviceCollection.AddSingleton<IRelationalTypeMappingSource, SqlServerBytesTypeMappingSource>());
+            public override IServiceCollection AddProviderServices(
+                IServiceCollection serviceCollection
+            ) =>
+                base.AddProviderServices(
+                    serviceCollection.AddSingleton<
+                        IRelationalTypeMappingSource,
+                        SqlServerBytesTypeMappingSource
+                    >()
+                );
         }
 
         public class SqlServerBytesTypeMappingSource : RelationalTypeMappingSource
         {
             private readonly SqlServerByteArrayTypeMapping _rowversion = new("rowversion", size: 8);
             private readonly SqlServerByteArrayTypeMapping _variableLengthBinary = new();
-            private readonly SqlServerByteArrayTypeMapping _fixedLengthBinary = new(fixedLength: true);
+            private readonly SqlServerByteArrayTypeMapping _fixedLengthBinary =
+                new(fixedLength: true);
             private readonly Dictionary<string, RelationalTypeMapping> _storeTypeMappings;
 
             public SqlServerBytesTypeMappingSource(
                 TypeMappingSourceDependencies dependencies,
-                RelationalTypeMappingSourceDependencies relationalDependencies)
-                : base(dependencies, relationalDependencies)
+                RelationalTypeMappingSourceDependencies relationalDependencies
+            ) : base(dependencies, relationalDependencies)
             {
-                _storeTypeMappings
-                    = new Dictionary<string, RelationalTypeMapping>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "binary varying", _variableLengthBinary },
-                        { "binary", _fixedLengthBinary },
-                        { "image", _variableLengthBinary },
-                        { "rowversion", _rowversion },
-                        { "varbinary", _variableLengthBinary }
-                    };
+                _storeTypeMappings = new Dictionary<string, RelationalTypeMapping>(
+                    StringComparer.OrdinalIgnoreCase
+                ) {
+                    { "binary varying", _variableLengthBinary },
+                    { "binary", _fixedLengthBinary },
+                    { "image", _variableLengthBinary },
+                    { "rowversion", _rowversion },
+                    { "varbinary", _variableLengthBinary }
+                };
             }
 
-            protected override RelationalTypeMapping FindMapping(in RelationalTypeMappingInfo mappingInfo)
-                => FindRawMapping(mappingInfo)?.Clone(mappingInfo);
+            protected override RelationalTypeMapping FindMapping(
+                in RelationalTypeMappingInfo mappingInfo
+            ) => FindRawMapping(mappingInfo)?.Clone(mappingInfo);
 
             private RelationalTypeMapping FindRawMapping(RelationalTypeMappingInfo mappingInfo)
             {
@@ -282,13 +282,12 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
 
                 if (storeTypeName != null)
                 {
-                    if (_storeTypeMappings.TryGetValue(storeTypeName, out var mapping)
-                        || _storeTypeMappings.TryGetValue(storeTypeNameBase, out mapping))
+                    if (
+                        _storeTypeMappings.TryGetValue(storeTypeName, out var mapping)
+                        || _storeTypeMappings.TryGetValue(storeTypeNameBase, out mapping)
+                    )
                     {
-                        return clrType == null
-                            || mapping.ClrType == clrType
-                                ? mapping
-                                : null;
+                        return clrType == null || mapping.ClrType == clrType ? mapping : null;
                     }
                 }
 
@@ -311,7 +310,10 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
                         "varbinary(" + (size == null ? "max" : size.ToString()) + ")",
                         size,
                         isFixedLength,
-                        storeTypePostfix: size == null ? StoreTypePostfix.None : (StoreTypePostfix?)null);
+                        storeTypePostfix: size == null
+                          ? StoreTypePostfix.None
+                          : (StoreTypePostfix?)null
+                    );
                 }
 
                 return null;

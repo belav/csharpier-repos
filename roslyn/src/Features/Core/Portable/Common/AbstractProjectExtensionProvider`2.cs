@@ -26,11 +26,19 @@ namespace Microsoft.CodeAnalysis
 
         protected abstract bool SupportsLanguage(TExportAttribute exportAttribute, string language);
 
-        protected abstract bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<TExtension> extensions);
+        protected abstract bool TryGetExtensionsFromReference(
+            AnalyzerReference reference,
+            out ImmutableArray<TExtension> extensions
+        );
 
         public ImmutableArray<TExtension> GetExtensions(string language)
         {
-            return ImmutableInterlocked.GetOrAdd(ref _extensionsPerLanguage, language, (language, provider) => provider.CreateExtensions(language), this);
+            return ImmutableInterlocked.GetOrAdd(
+                ref _extensionsPerLanguage,
+                language,
+                (language, provider) => provider.CreateExtensions(language),
+                this
+            );
         }
 
         private ImmutableArray<TExtension> CreateExtensions(string language)
@@ -63,12 +71,12 @@ namespace Microsoft.CodeAnalysis
                             var attribute = typeInfo.GetCustomAttribute<TExportAttribute>();
                             if (attribute is object && SupportsLanguage(attribute, language))
                             {
-                                builder.Add((TExtension)Activator.CreateInstance(typeInfo.AsType()));
+                                builder.Add(
+                                    (TExtension)Activator.CreateInstance(typeInfo.AsType())
+                                );
                             }
                         }
-                        catch
-                        {
-                        }
+                        catch { }
                     }
                 }
             }

@@ -10,14 +10,14 @@ using System.Threading;
 
 // Tests disposing of a WaitHandle-derived type
 // via the IDisposable interface.
-// This test is ok for Desktop, but 
+// This test is ok for Desktop, but
 // SL does not support Mutex
 public class WaitHandleDispose2
 {
     #region Public Constants
     public const int c_DEFAULT_WAIT_TIME = 1000; // 1 second
     #endregion
-    
+
 #region Public Methods
     public bool RunTests()
     {
@@ -38,17 +38,17 @@ public class WaitHandleDispose2
 
         try
         {
-            // Mutex derives from WaitHandle, 
+            // Mutex derives from WaitHandle,
             // and normally you don't create a WaitHandle
             WaitHandle handle = new Mutex();
 
             // used to do a cast to IDisposable, but
-            // now WaitHandle implements the IDisposable 
+            // now WaitHandle implements the IDisposable
             // interface directly
             IDisposable disposable = handle as IDisposable;
             disposable.Dispose();
 
-            // Dispose 
+            // Dispose
             //handle.Dispose();
 
             // Do a waitone on the handle, should immediately throw
@@ -56,7 +56,10 @@ public class WaitHandleDispose2
             handle.WaitOne(c_DEFAULT_WAIT_TIME);
 
             // if we get here, it wasn't disposed of, error
-            TestLibrary.TestFramework.LogError("001", "handle.Dispose() did not dispose of the handle");
+            TestLibrary.TestFramework.LogError(
+                "001",
+                "handle.Dispose() did not dispose of the handle"
+            );
             retVal = false;
         }
         catch (ObjectDisposedException)

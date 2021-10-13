@@ -35,9 +35,7 @@ namespace System.Net.Mime
         /// </summary>
         internal const string Default = "application/octet-stream";
 
-        public ContentType() : this(Default)
-        {
-        }
+        public ContentType() : this(Default) { }
 
         /// <summary>
         /// ctor.
@@ -51,7 +49,10 @@ namespace System.Net.Mime
             }
             if (contentType.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.net_emptystringcall, nameof(contentType)), nameof(contentType));
+                throw new ArgumentException(
+                    SR.Format(SR.net_emptystringcall, nameof(contentType)),
+                    nameof(contentType)
+                );
             }
 
             _isChanged = true;
@@ -165,7 +166,10 @@ namespace System.Net.Mime
         {
             if (IsChanged || !_isPersisted || forcePersist)
             {
-                headers.InternalSet(MailHeaderInfo.GetString(MailHeaderID.ContentType)!, ToString());
+                headers.InternalSet(
+                    MailHeaderInfo.GetString(MailHeaderID.ContentType)!,
+                    ToString()
+                );
                 _isPersisted = true;
             }
         }
@@ -190,7 +194,7 @@ namespace System.Net.Mime
 
             builder.Append(_mediaType); // Must not have unicode, already validated
             builder.Append('/');
-            builder.Append(_subType);  // Must not have unicode, already validated
+            builder.Append(_subType); // Must not have unicode, already validated
 
             // Validate and encode unicode where required
             foreach (string key in Parameters.Keys)
@@ -211,8 +215,10 @@ namespace System.Net.Mime
             {
                 builder.Append('\"').Append(value).Append('"');
             }
-            else if ((allowUnicode && !MailBnfHelper.HasCROrLF(value)) // Unicode without CL or LF's
-                || MimeBasePart.IsAscii(value, false)) // Ascii
+            else if (
+                (allowUnicode && !MailBnfHelper.HasCROrLF(value)) // Unicode without CL or LF's
+                || MimeBasePart.IsAscii(value, false)
+            ) // Ascii
             {
                 MailBnfHelper.GetTokenOrQuotedString(value, builder, allowUnicode);
             }
@@ -220,12 +226,22 @@ namespace System.Net.Mime
             {
                 // MIME Encoding required
                 encoding = Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
-                builder.Append('"').Append(MimeBasePart.EncodeHeaderValue(value, encoding, MimeBasePart.ShouldUseBase64Encoding(encoding))).Append('"');
+                builder.Append('"')
+                    .Append(
+                        MimeBasePart.EncodeHeaderValue(
+                            value,
+                            encoding,
+                            MimeBasePart.ShouldUseBase64Encoding(encoding)
+                        )
+                    )
+                    .Append('"');
             }
         }
 
         public override bool Equals([NotNullWhen(true)] object? rparam) =>
-            rparam == null ? false : string.Equals(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase);
+            rparam == null
+                ? false
+                : string.Equals(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase);
 
         public override int GetHashCode() => ToString().ToLowerInvariant().GetHashCode();
 
@@ -239,7 +255,12 @@ namespace System.Net.Mime
                 int offset = 0;
 
                 _mediaType = MailBnfHelper.ReadToken(_type, ref offset, null);
-                if (_mediaType == null || _mediaType.Length == 0 || offset >= _type.Length || _type[offset++] != '/')
+                if (
+                    _mediaType == null
+                    || _mediaType.Length == 0
+                    || offset >= _type.Length
+                    || _type[offset++] != '/'
+                )
                 {
                     throw new FormatException(SR.ContentTypeInvalid);
                 }
@@ -262,7 +283,11 @@ namespace System.Net.Mime
                         break;
                     }
 
-                    string? paramAttribute = MailBnfHelper.ReadParameterAttribute(_type, ref offset, null);
+                    string? paramAttribute = MailBnfHelper.ReadParameterAttribute(
+                        _type,
+                        ref offset,
+                        null
+                    );
 
                     if (paramAttribute == null || paramAttribute.Length == 0)
                     {
@@ -280,9 +305,10 @@ namespace System.Net.Mime
                         throw new FormatException(SR.ContentTypeInvalid);
                     }
 
-                    paramValue = _type[offset] == '"' ?
-                        MailBnfHelper.ReadQuotedString(_type, ref offset, null) :
-                        MailBnfHelper.ReadToken(_type, ref offset, null);
+                    paramValue =
+                        _type[offset] == '"'
+                            ? MailBnfHelper.ReadQuotedString(_type, ref offset, null)
+                            : MailBnfHelper.ReadToken(_type, ref offset, null);
 
                     if (paramValue == null)
                     {

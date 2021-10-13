@@ -31,7 +31,6 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
 
             cts.Cancel();
             await task.TimeoutAfter(TimeSpan.FromSeconds(3));
-
             // Assert (does not throw)
         }
 
@@ -47,7 +46,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             var task = host.RunAsyncCore(cts.Token, cultureProvider);
 
             // Act
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => host.RunAsyncCore(cts.Token));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => host.RunAsyncCore(cts.Token)
+            );
 
             cts.Cancel();
             await task.TimeoutAfter(TimeSpan.FromSeconds(3));
@@ -96,9 +97,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         private class TestSatelliteResourcesLoader : WebAssemblyCultureProvider
         {
             internal TestSatelliteResourcesLoader()
-                : base(DefaultWebAssemblyJSRuntime.Instance, CultureInfo.CurrentCulture, CultureInfo.CurrentUICulture)
-            {
-            }
+                : base(
+                    DefaultWebAssemblyJSRuntime.Instance,
+                    CultureInfo.CurrentCulture,
+                    CultureInfo.CurrentUICulture
+                ) { }
 
             public override ValueTask LoadCurrentCultureResourcesAsync() => default;
         }

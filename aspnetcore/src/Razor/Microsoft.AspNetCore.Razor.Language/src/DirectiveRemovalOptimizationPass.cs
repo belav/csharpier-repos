@@ -6,11 +6,16 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language
 {
-    internal class DirectiveRemovalOptimizationPass : IntermediateNodePassBase, IRazorOptimizationPass
+    internal class DirectiveRemovalOptimizationPass
+        : IntermediateNodePassBase,
+          IRazorOptimizationPass
     {
         public override int Order => DefaultFeatureOrder + 50;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             var visitor = new Visitor();
             visitor.VisitDocument(documentNode);
@@ -29,7 +34,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private class Visitor : IntermediateNodeWalker
         {
-            public IList<IntermediateNodeReference> DirectiveNodes { get; } = new List<IntermediateNodeReference>();
+            public IList<IntermediateNodeReference> DirectiveNodes { get; } =
+                new List<IntermediateNodeReference>();
 
             public override void VisitDirective(DirectiveIntermediateNode node)
             {

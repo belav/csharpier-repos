@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.DataProtection
         [Fact]
         public void CreateRepository_ThrowsIf_ContextIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>(null, null));
+            Assert.Throws<ArgumentNullException>(
+                () => new EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>(null, null)
+            );
         }
 
         [Fact]
@@ -26,14 +28,24 @@ namespace Microsoft.AspNetCore.DataProtection
         {
             var element = XElement.Parse("<Element1/>");
             var friendlyName = "Element1";
-            var key = new DataProtectionKey() { FriendlyName = friendlyName, Xml = element.ToString() };
+            var key = new DataProtectionKey()
+            {
+                FriendlyName = friendlyName,
+                Xml = element.ToString()
+            };
 
             var services = GetServices(nameof(StoreElement_PersistsData));
-            var service = new EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>(services, NullLoggerFactory.Instance);
-                service.StoreElement(element, friendlyName);
+            var service = new EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>(
+                services,
+                NullLoggerFactory.Instance
+            );
+            service.StoreElement(element, friendlyName);
 
             // Use a separate instance of the context to verify correct data was saved to database
-            using (var context = services.CreateScope().ServiceProvider.GetRequiredService< DataProtectionKeyContext>())
+            using (
+                var context = services.CreateScope()
+                    .ServiceProvider.GetRequiredService<DataProtectionKeyContext>()
+            )
             {
                 Assert.Equal(1, context.DataProtectionKeys.Count());
                 Assert.Equal(key.FriendlyName, context.DataProtectionKeys.Single()?.FriendlyName);
@@ -58,12 +70,18 @@ namespace Microsoft.AspNetCore.DataProtection
             Assert.Equal(2, elements.Count);
         }
 
-        private EntityFrameworkCoreXmlRepository<DataProtectionKeyContext> CreateRepo(IServiceProvider services)
-            => new EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>(services, NullLoggerFactory.Instance);
+        private EntityFrameworkCoreXmlRepository<DataProtectionKeyContext> CreateRepo(
+            IServiceProvider services
+        ) =>
+            new EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>(
+                services,
+                NullLoggerFactory.Instance
+            );
 
-        private IServiceProvider GetServices(string dbName)
-            => new ServiceCollection()
-                .AddDbContext<DataProtectionKeyContext>(o => o.UseInMemoryDatabase(dbName))
+        private IServiceProvider GetServices(string dbName) =>
+            new ServiceCollection().AddDbContext<DataProtectionKeyContext>(
+                    o => o.UseInMemoryDatabase(dbName)
+                )
                 .BuildServiceProvider(validateScopes: true);
     }
 }

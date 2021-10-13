@@ -8,7 +8,10 @@ namespace System.Runtime.InteropServices.Tests
 {
     public partial class SetComObjectDataTests
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         public void SetComObjectData_NonNullValue_Success()
         {
             var comObject = new ComImportObject();
@@ -23,7 +26,10 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(2, Marshal.GetComObjectData(comObject, "otherKey"));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         public void SetComObjectData_NullValue_Success()
         {
             var comObject = new ComImportObject();

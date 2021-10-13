@@ -36,14 +36,20 @@ namespace SocialWeather
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapConnectionHandler<SocialWeatherConnectionHandler>("/weather");
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapConnectionHandler<SocialWeatherConnectionHandler>("/weather");
+                }
+            );
 
             var formatterResolver = app.ApplicationServices.GetRequiredService<FormatterResolver>();
-            formatterResolver.AddFormatter<WeatherReport, JsonStreamFormatter<WeatherReport>>("json");
-            formatterResolver.AddFormatter<WeatherReport, ProtobufWeatherStreamFormatter>("protobuf");
+            formatterResolver.AddFormatter<WeatherReport, JsonStreamFormatter<WeatherReport>>(
+                "json"
+            );
+            formatterResolver.AddFormatter<WeatherReport, ProtobufWeatherStreamFormatter>(
+                "protobuf"
+            );
             formatterResolver.AddFormatter<WeatherReport, PipeWeatherStreamFormatter>("pipe");
         }
     }

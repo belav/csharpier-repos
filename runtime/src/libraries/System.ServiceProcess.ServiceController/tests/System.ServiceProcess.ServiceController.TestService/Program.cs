@@ -25,7 +25,8 @@ namespace System.ServiceProcess.Tests
                     {
                         if (object.ReferenceEquals(expectedException, actualException))
                         {
-                            testService.WriteStreamAsync(PipeMessageByteCode.ExceptionThrown).Wait();
+                            testService.WriteStreamAsync(PipeMessageByteCode.ExceptionThrown)
+                                .Wait();
                         }
                         else
                         {

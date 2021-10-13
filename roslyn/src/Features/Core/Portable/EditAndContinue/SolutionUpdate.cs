@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<(Guid ModuleId, ImmutableArray<(ManagedModuleMethodId Method, NonRemappableRegion Region)>)> nonRemappableRegions,
             ImmutableArray<(ProjectId ProjectId, EmitBaseline Baseline)> emitBaselines,
             ImmutableArray<(ProjectId ProjectId, ImmutableArray<Diagnostic> Diagnostics)> diagnostics,
-            ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> documentsWithRudeEdits)
+            ImmutableArray<(DocumentId DocumentId, ImmutableArray<RudeEditDiagnostic> Diagnostics)> documentsWithRudeEdits
+        )
         {
             ModuleUpdates = moduleUpdates;
             NonRemappableRegions = nonRemappableRegions;
@@ -33,12 +34,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         public static SolutionUpdate Blocked(
             ImmutableArray<(ProjectId, ImmutableArray<Diagnostic>)> diagnostics,
-            ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic>)> documentsWithRudeEdits)
-            => new(
+            ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic>)> documentsWithRudeEdits
+        ) =>
+            new(
                 new(ManagedModuleUpdateStatus.Blocked, ImmutableArray<ManagedModuleUpdate>.Empty),
                 ImmutableArray<(Guid, ImmutableArray<(ManagedModuleMethodId, NonRemappableRegion)>)>.Empty,
                 ImmutableArray<(ProjectId, EmitBaseline)>.Empty,
                 diagnostics,
-                documentsWithRudeEdits);
+                documentsWithRudeEdits
+            );
     }
 }

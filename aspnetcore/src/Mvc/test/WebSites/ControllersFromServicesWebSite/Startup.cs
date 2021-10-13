@@ -21,22 +21,30 @@ namespace ControllersFromServicesWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            var builder = services
-                .AddControllersWithViews()
+            var builder = services.AddControllersWithViews()
                 .ConfigureApplicationPartManager(manager => manager.ApplicationParts.Clear())
                 .AddApplicationPart(typeof(TimeScheduleController).GetTypeInfo().Assembly)
-                .ConfigureApplicationPartManager(manager =>
-                {
-                    manager.ApplicationParts.Add(new TypesPart(
-                      typeof(AnotherController),
-                      typeof(ComponentFromServicesViewComponent),
-                      typeof(InServicesTagHelper)));
-
-                    foreach (var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(Assembly.GetExecutingAssembly()))
+                .ConfigureApplicationPartManager(
+                    manager =>
                     {
-                        manager.ApplicationParts.Add(part);
+                        manager.ApplicationParts.Add(
+                            new TypesPart(
+                                typeof(AnotherController),
+                                typeof(ComponentFromServicesViewComponent),
+                                typeof(InServicesTagHelper)
+                            )
+                        );
+
+                        foreach (
+                            var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(
+                                Assembly.GetExecutingAssembly()
+                            )
+                        )
+                        {
+                            manager.ApplicationParts.Add(part);
+                        }
                     }
-                })
+                )
                 .AddControllersAsServices()
                 .AddViewComponentsAsServices()
                 .AddTagHelpersAsServices();
@@ -61,23 +69,23 @@ namespace ControllersFromServicesWebSite
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                }
+            );
         }
 
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args)
-                .Build();
+            var host = CreateWebHostBuilder(args).Build();
 
             host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder()
-                .UseContentRoot(Directory.GetCurrentDirectory())
+            new WebHostBuilder().UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .UseKestrel()
                 .UseIISIntegration();

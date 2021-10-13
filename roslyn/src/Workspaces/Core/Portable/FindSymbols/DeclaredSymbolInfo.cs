@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             string fullyQualifiedContainerName,
             TextSpan span,
             ImmutableArray<string> inheritanceNames,
-            uint flags)
+            uint flags
+        )
         {
             Name = name;
             NameSuffix = nameSuffix;
@@ -124,7 +125,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Accessibility accessibility,
             TextSpan span,
             ImmutableArray<string> inheritanceNames,
-            bool isNestedType = false, int parameterCount = 0, int typeParameterCount = 0)
+            bool isNestedType = false,
+            int parameterCount = 0,
+            int typeParameterCount = 0
+        )
         {
             const uint MaxFlagValue = 0b1111;
 
@@ -135,12 +139,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             typeParameterCount = Math.Min(typeParameterCount, (byte)MaxFlagValue);
 
             var flags =
-                (uint)kind |
-                ((uint)accessibility << 4) |
-                ((uint)parameterCount << 8) |
-                ((uint)typeParameterCount << 12) |
-                ((isNestedType ? 1u : 0u) << 16) |
-                ((isPartial ? 1u : 0u) << 17);
+                (uint)kind
+                | ((uint)accessibility << 4)
+                | ((uint)parameterCount << 8)
+                | ((uint)typeParameterCount << 12)
+                | ((isNestedType ? 1u : 0u) << 16)
+                | ((isPartial ? 1u : 0u) << 17);
 
 #pragma warning disable CS0618 // Type or member is obsolete
             return new DeclaredSymbolInfo(
@@ -150,31 +154,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 Intern(stringTable, fullyQualifiedContainerName),
                 span,
                 inheritanceNames,
-                flags);
+                flags
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
         }
 
         [return: NotNullIfNotNull("name")]
-        public static string? Intern(StringTable stringTable, string? name)
-            => name == null ? null : stringTable.Add(name);
+        public static string? Intern(StringTable stringTable, string? name) =>
+            name == null ? null : stringTable.Add(name);
 
-        private static DeclaredSymbolInfoKind GetKind(uint flags)
-            => (DeclaredSymbolInfoKind)(flags & Lower4BitMask);
+        private static DeclaredSymbolInfoKind GetKind(uint flags) =>
+            (DeclaredSymbolInfoKind)(flags & Lower4BitMask);
 
-        private static Accessibility GetAccessibility(uint flags)
-            => (Accessibility)((flags >> 4) & Lower4BitMask);
+        private static Accessibility GetAccessibility(uint flags) =>
+            (Accessibility)((flags >> 4) & Lower4BitMask);
 
-        private static byte GetParameterCount(uint flags)
-            => (byte)((flags >> 8) & Lower4BitMask);
+        private static byte GetParameterCount(uint flags) => (byte)((flags >> 8) & Lower4BitMask);
 
-        private static byte GetTypeParameterCount(uint flags)
-            => (byte)((flags >> 12) & Lower4BitMask);
+        private static byte GetTypeParameterCount(uint flags) =>
+            (byte)((flags >> 12) & Lower4BitMask);
 
-        private static bool GetIsNestedType(uint flags)
-            => ((flags >> 16) & 1) == 1;
+        private static bool GetIsNestedType(uint flags) => ((flags >> 16) & 1) == 1;
 
-        private static bool GetIsPartial(uint flags)
-            => ((flags >> 17) & 1) == 1;
+        private static bool GetIsPartial(uint flags) => ((flags >> 17) & 1) == 1;
 
         internal void WriteTo(ObjectWriter writer)
         {
@@ -191,7 +193,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 writer.WriteString(name);
         }
 
-        internal static DeclaredSymbolInfo ReadFrom_ThrowsOnFailure(StringTable stringTable, ObjectReader reader)
+        internal static DeclaredSymbolInfo ReadFrom_ThrowsOnFailure(
+            StringTable stringTable,
+            ObjectReader reader
+        )
         {
             var name = reader.ReadString();
             var nameSuffix = reader.ReadString();
@@ -219,7 +224,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 span: span,
                 inheritanceNames: builder.ToImmutableAndFree(),
                 parameterCount: GetParameterCount(flags),
-                typeParameterCount: GetTypeParameterCount(flags));
+                typeParameterCount: GetTypeParameterCount(flags)
+            );
         }
 
         public ISymbol? TryResolve(SemanticModel semanticModel, CancellationToken cancellationToken)
@@ -233,7 +239,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             else
             {
                 var message =
-$@"Invalid span in {nameof(DeclaredSymbolInfo)}.
+                    $@"Invalid span in {nameof(DeclaredSymbolInfo)}.
 {nameof(this.Span)} = {this.Span}
 {nameof(root.FullSpan)} = {root.FullSpan}";
 
@@ -243,25 +249,37 @@ $@"Invalid span in {nameof(DeclaredSymbolInfo)}.
             }
         }
 
-        public override bool Equals(object? obj)
-            => obj is DeclaredSymbolInfo info && Equals(info);
+        public override bool Equals(object? obj) => obj is DeclaredSymbolInfo info && Equals(info);
 
-        public bool Equals(DeclaredSymbolInfo other)
-            => Name == other.Name
-               && NameSuffix == other.NameSuffix
-               && ContainerDisplayName == other.ContainerDisplayName
-               && FullyQualifiedContainerName == other.FullyQualifiedContainerName
-               && Span.Equals(other.Span)
-               && _flags == other._flags
-               && InheritanceNames.SequenceEqual(other.InheritanceNames, arg: true, (s1, s2, _) => s1 == s2);
+        public bool Equals(DeclaredSymbolInfo other) =>
+            Name == other.Name
+            && NameSuffix == other.NameSuffix
+            && ContainerDisplayName == other.ContainerDisplayName
+            && FullyQualifiedContainerName == other.FullyQualifiedContainerName
+            && Span.Equals(other.Span)
+            && _flags == other._flags
+            && InheritanceNames.SequenceEqual(
+                other.InheritanceNames,
+                arg: true,
+                (s1, s2, _) => s1 == s2
+            );
 
-        public override int GetHashCode()
-            => Hash.Combine(Name,
-               Hash.Combine(NameSuffix,
-               Hash.Combine(ContainerDisplayName,
-               Hash.Combine(FullyQualifiedContainerName,
-               Hash.Combine(Span.GetHashCode(),
-               Hash.Combine((int)_flags,
-               Hash.CombineValues(InheritanceNames)))))));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                Name,
+                Hash.Combine(
+                    NameSuffix,
+                    Hash.Combine(
+                        ContainerDisplayName,
+                        Hash.Combine(
+                            FullyQualifiedContainerName,
+                            Hash.Combine(
+                                Span.GetHashCode(),
+                                Hash.Combine((int)_flags, Hash.CombineValues(InheritanceNames))
+                            )
+                        )
+                    )
+                )
+            );
     }
 }

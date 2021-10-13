@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             IViewComponentFactory viewComponentFactory,
             ViewComponentInvokerCache viewComponentInvokerCache,
             DiagnosticListener diagnosticListener,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory
+        )
         {
             if (viewComponentFactory == null)
             {
@@ -62,7 +63,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 _viewComponentFactory,
                 _viewComponentInvokerCache,
                 _diagnosticListener,
-                _logger);
+                _logger
+            );
         }
     }
 }

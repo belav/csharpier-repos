@@ -22,12 +22,38 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract class AbstractImportCompletionProvider : LSPCompletionProvider
     {
-        protected abstract Task<SyntaxContext> CreateContextAsync(Document document, int position, bool usePartialSemantic, CancellationToken cancellationToken);
-        protected abstract ImmutableArray<string> GetImportedNamespaces(SyntaxNode location, SemanticModel semanticModel, CancellationToken cancellationToken);
-        protected abstract bool ShouldProvideCompletion(CompletionContext completionContext, SyntaxContext syntaxContext);
-        protected abstract Task AddCompletionItemsAsync(CompletionContext completionContext, SyntaxContext syntaxContext, HashSet<string> namespacesInScope, bool isExpandedCompletion, CancellationToken cancellationToken);
-        protected abstract bool IsFinalSemicolonOfUsingOrExtern(SyntaxNode directive, SyntaxToken token);
-        protected abstract Task<bool> ShouldProvideParenthesisCompletionAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken);
+        protected abstract Task<SyntaxContext> CreateContextAsync(
+            Document document,
+            int position,
+            bool usePartialSemantic,
+            CancellationToken cancellationToken
+        );
+        protected abstract ImmutableArray<string> GetImportedNamespaces(
+            SyntaxNode location,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        );
+        protected abstract bool ShouldProvideCompletion(
+            CompletionContext completionContext,
+            SyntaxContext syntaxContext
+        );
+        protected abstract Task AddCompletionItemsAsync(
+            CompletionContext completionContext,
+            SyntaxContext syntaxContext,
+            HashSet<string> namespacesInScope,
+            bool isExpandedCompletion,
+            CancellationToken cancellationToken
+        );
+        protected abstract bool IsFinalSemicolonOfUsingOrExtern(
+            SyntaxNode directive,
+            SyntaxToken token
+        );
+        protected abstract Task<bool> ShouldProvideParenthesisCompletionAsync(
+            Document document,
+            CompletionItem item,
+            char? commitKey,
+            CancellationToken cancellationToken
+        );
 
         // For telemetry reporting
         protected abstract void LogCommit();
@@ -40,8 +66,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             if (!_isImportCompletionExperimentEnabled.HasValue)
             {
-                var experimentationService = workspace.Services.GetRequiredService<IExperimentationService>();
-                _isImportCompletionExperimentEnabled = experimentationService.IsExperimentEnabled(WellKnownExperimentNames.TypeImportCompletion);
+                var experimentationService =
+                    workspace.Services.GetRequiredService<IExperimentationService>();
+                _isImportCompletionExperimentEnabled = experimentationService.IsExperimentEnabled(
+                    WellKnownExperimentNames.TypeImportCompletion
+                );
             }
 
             return _isImportCompletionExperimentEnabled == true;
@@ -54,8 +83,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             // We need to check for context before option values, so we can tell completion service that we are in a context to provide expanded items
             // even though import completion might be disabled. This would show the expander in completion list which user can then use to explicitly ask for unimported items.
-            var usePartialSemantic = completionContext.Options.GetOption(CompletionServiceOptions.UsePartialSemanticForImportCompletion);
-            var syntaxContext = await CreateContextAsync(document, completionContext.Position, usePartialSemantic, cancellationToken).ConfigureAwait(false);
+            var usePartialSemantic = completionContext.Options.GetOption(
+                CompletionServiceOptions.UsePartialSemanticForImportCompletion
+            );
+            var syntaxContext = await CreateContextAsync(
+                    document,
+                    completionContext.Position,
+                    usePartialSemantic,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (!ShouldProvideCompletion(completionContext, syntaxContext))
             {
                 return;
@@ -64,58 +101,106 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             completionContext.ExpandItemsAvailable = true;
 
             // We will trigger import completion regardless of the option/experiment if extended items is being requested explicitly (via expander in completion list)
-            var isExpandedCompletion = completionContext.Options.GetOption(CompletionServiceOptions.IsExpandedCompletion);
+            var isExpandedCompletion = completionContext.Options.GetOption(
+                CompletionServiceOptions.IsExpandedCompletion
+            );
             if (!isExpandedCompletion)
             {
-                var importCompletionOptionValue = completionContext.Options.GetOption(CompletionOptions.ShowItemsFromUnimportedNamespaces, document.Project.Language);
+                var importCompletionOptionValue = completionContext.Options.GetOption(
+                    CompletionOptions.ShowItemsFromUnimportedNamespaces,
+                    document.Project.Language
+                );
 
-                // Don't trigger import completion if the option value is "default" and the experiment is disabled for the user. 
-                if (importCompletionOptionValue == false ||
-                    (importCompletionOptionValue == null && !IsExperimentEnabled(document.Project.Solution.Workspace)))
+                // Don't trigger import completion if the option value is "default" and the experiment is disabled for the user.
+                if (
+                    importCompletionOptionValue == false
+                    || (
+                        importCompletionOptionValue == null
+                        && !IsExperimentEnabled(document.Project.Solution.Workspace)
+                    )
+                )
                 {
                     return;
                 }
             }
 
-            // Find all namespaces in scope at current cursor location, 
+            // Find all namespaces in scope at current cursor location,
             // which will be used to filter so the provider only returns out-of-scope types.
-            var namespacesInScope = GetNamespacesInScope(document, syntaxContext, cancellationToken);
-            await AddCompletionItemsAsync(completionContext, syntaxContext, namespacesInScope, isExpandedCompletion, cancellationToken).ConfigureAwait(false);
+            var namespacesInScope = GetNamespacesInScope(
+                document,
+                syntaxContext,
+                cancellationToken
+            );
+            await AddCompletionItemsAsync(
+                    completionContext,
+                    syntaxContext,
+                    namespacesInScope,
+                    isExpandedCompletion,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private HashSet<string> GetNamespacesInScope(Document document, SyntaxContext syntaxContext, CancellationToken cancellationToken)
+        private HashSet<string> GetNamespacesInScope(
+            Document document,
+            SyntaxContext syntaxContext,
+            CancellationToken cancellationToken
+        )
         {
             var semanticModel = syntaxContext.SemanticModel;
 
             // The location is the containing node of the LeftToken, or the compilation unit itsef if LeftToken
             // indicates the beginning of the document (i.e. no parent).
-            var location = syntaxContext.LeftToken.Parent ?? syntaxContext.SyntaxTree.GetRoot(cancellationToken);
-            var importedNamespaces = GetImportedNamespaces(location, semanticModel, cancellationToken);
+            var location =
+                syntaxContext.LeftToken.Parent
+                ?? syntaxContext.SyntaxTree.GetRoot(cancellationToken);
+            var importedNamespaces = GetImportedNamespaces(
+                location,
+                semanticModel,
+                cancellationToken
+            );
 
             // This hashset will be used to match namespace names, so it must have the same case-sensitivity as the source language.
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var namespacesInScope = new HashSet<string>(importedNamespaces, syntaxFacts.StringComparer);
+            var namespacesInScope = new HashSet<string>(
+                importedNamespaces,
+                syntaxFacts.StringComparer
+            );
 
             // Get containing namespaces.
-            var namespaceSymbol = semanticModel.GetEnclosingNamespace(syntaxContext.Position, cancellationToken);
+            var namespaceSymbol = semanticModel.GetEnclosingNamespace(
+                syntaxContext.Position,
+                cancellationToken
+            );
             while (namespaceSymbol != null)
             {
-                namespacesInScope.Add(namespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat));
+                namespacesInScope.Add(
+                    namespaceSymbol.ToDisplayString(SymbolDisplayFormats.NameFormat)
+                );
                 namespaceSymbol = namespaceSymbol.ContainingNamespace;
             }
 
             return namespacesInScope;
         }
 
-        internal override async Task<CompletionChange> GetChangeAsync(Document document, CompletionItem completionItem, TextSpan completionListSpan, char? commitKey, bool disallowAddingImports, CancellationToken cancellationToken)
+        internal override async Task<CompletionChange> GetChangeAsync(
+            Document document,
+            CompletionItem completionItem,
+            TextSpan completionListSpan,
+            char? commitKey,
+            bool disallowAddingImports,
+            CancellationToken cancellationToken
+        )
         {
             LogCommit();
             var containingNamespace = ImportCompletionItem.GetContainingNamespace(completionItem);
             var provideParenthesisCompletion = await ShouldProvideParenthesisCompletionAsync(
-                document,
-                completionItem,
-                commitKey,
-                cancellationToken).ConfigureAwait(false);
+                    document,
+                    completionItem,
+                    commitKey,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var insertText = completionItem.DisplayText;
             if (provideParenthesisCompletion)
@@ -131,41 +216,65 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             // Find context node so we can use it to decide where to insert using/imports.
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-            var addImportContextNode = root.FindToken(completionListSpan.Start, findInsideTrivia: true).Parent;
+            var addImportContextNode =
+                root.FindToken(completionListSpan.Start, findInsideTrivia: true).Parent;
 
             // Add required using/imports directive.
             var addImportService = document.GetRequiredLanguageService<IAddImportsService>();
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
             var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var placeSystemNamespaceFirst = optionSet.GetOption(GenerationOptions.PlaceSystemNamespaceFirst, document.Project.Language);
+            var placeSystemNamespaceFirst = optionSet.GetOption(
+                GenerationOptions.PlaceSystemNamespaceFirst,
+                document.Project.Language
+            );
             var allowInHiddenRegions = document.CanAddImportsInHiddenRegions();
             var importNode = CreateImport(document, containingNamespace);
 
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var rootWithImport = addImportService.AddImport(compilation, root, addImportContextNode!, importNode, generator, placeSystemNamespaceFirst, allowInHiddenRegions, cancellationToken);
+            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var rootWithImport = addImportService.AddImport(
+                compilation,
+                root,
+                addImportContextNode!,
+                importNode,
+                generator,
+                placeSystemNamespaceFirst,
+                allowInHiddenRegions,
+                cancellationToken
+            );
             var documentWithImport = document.WithSyntaxRoot(rootWithImport);
             // This only formats the annotated import we just added, not the entire document.
-            var formattedDocumentWithImport = await Formatter.FormatAsync(documentWithImport, Formatter.Annotation, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var formattedDocumentWithImport = await Formatter.FormatAsync(
+                    documentWithImport,
+                    Formatter.Annotation,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
 
             using var _ = ArrayBuilder<TextChange>.GetInstance(out var builder);
 
             // Get text change for add import
-            var importChanges = await formattedDocumentWithImport.GetTextChangesAsync(document, cancellationToken).ConfigureAwait(false);
+            var importChanges = await formattedDocumentWithImport.GetTextChangesAsync(
+                    document,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             builder.AddRange(importChanges);
 
             // Create text change for complete type name.
             //
-            // Note: Don't try to obtain TextChange for completed type name by replacing the text directly, 
+            // Note: Don't try to obtain TextChange for completed type name by replacing the text directly,
             //       then use Document.GetTextChangesAsync on document created from the changed text. This is
-            //       because it will do a diff and return TextChanges with minimum span instead of actual 
+            //       because it will do a diff and return TextChanges with minimum span instead of actual
             //       replacement span.
             //
             //       For example: If I'm typing "asd", the completion provider could be triggered after "a"
-            //       is typed. Then if I selected type "AsnEncodedData" to commit, by using the approach described 
-            //       above, we will get a TextChange of "AsnEncodedDat" with 0 length span, instead of a change of 
-            //       the full display text with a span of length 1. This will later mess up span-tracking and end up 
+            //       is typed. Then if I selected type "AsnEncodedData" to commit, by using the approach described
+            //       above, we will get a TextChange of "AsnEncodedDat" with 0 length span, instead of a change of
+            //       the full display text with a span of length 1. This will later mess up span-tracking and end up
             //       with "AsnEncodedDatasd" in the code.
             builder.Add(new TextChange(completionListSpan, insertText));
 
@@ -187,12 +296,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 // We might need to qualify unimported types to use them in an import directive, because they only affect members of the containing
                 // import container (e.g. namespace/class/etc. declarations).
                 //
-                // For example, `List` and `StringBuilder` both need to be fully qualified below: 
-                // 
+                // For example, `List` and `StringBuilder` both need to be fully qualified below:
+                //
                 //      using CollectionOfStringBuilders = System.Collections.Generic.List<System.Text.StringBuilder>;
                 //
-                // However, if we are typing in an C# using directive that is inside a nested import container (i.e. inside a namespace declaration block), 
-                // then we can add an using in the outer import container instead (this is not allowed in VB). 
+                // However, if we are typing in an C# using directive that is inside a nested import container (i.e. inside a namespace declaration block),
+                // then we can add an using in the outer import container instead (this is not allowed in VB).
                 //
                 // For example:
                 //
@@ -205,20 +314,37 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 //      }
                 //
                 // Here we will always choose to qualify the unimported type, just to be consistent and keeps things simple.
-                return await IsInImportsDirectiveAsync(document, completionListSpan.Start, cancellationToken).ConfigureAwait(false);
+                return await IsInImportsDirectiveAsync(
+                        document,
+                        completionListSpan.Start,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
-        private async Task<bool> IsInImportsDirectiveAsync(Document document, int position, CancellationToken cancellationToken)
+        private async Task<bool> IsInImportsDirectiveAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var leftToken = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken, includeDirectives: true);
+            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var leftToken = syntaxTree.FindTokenOnLeftOfPosition(
+                position,
+                cancellationToken,
+                includeDirectives: true
+            );
             return leftToken.GetAncestor(syntaxFacts.IsUsingOrExternOrImport) is { } node
                 && !IsFinalSemicolonOfUsingOrExtern(node, leftToken);
         }
 
-        protected static bool IsAddingImportsSupported(Document document, bool disallowAddingImports)
+        protected static bool IsAddingImportsSupported(
+            Document document,
+            bool disallowAddingImports
+        )
         {
             if (disallowAddingImports)
             {
@@ -234,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             }
 
             // Certain documents, e.g. Razor document, don't support adding imports
-            var documentSupportsFeatureService = workspace.Services.GetRequiredService<IDocumentSupportsFeatureService>();
+            var documentSupportsFeatureService =
+                workspace.Services.GetRequiredService<IDocumentSupportsFeatureService>();
             if (!documentSupportsFeatureService.SupportsRefactorings(document))
             {
                 return false;
@@ -246,10 +373,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         private static SyntaxNode CreateImport(Document document, string namespaceName)
         {
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
-            return syntaxGenerator.NamespaceImportDeclaration(namespaceName).WithAdditionalAnnotations(Formatter.Annotation);
+            return syntaxGenerator.NamespaceImportDeclaration(namespaceName)
+                .WithAdditionalAnnotations(Formatter.Annotation);
         }
 
-        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
-            => ImportCompletionItem.GetCompletionDescriptionAsync(document, item, cancellationToken);
+        protected override Task<CompletionDescription> GetDescriptionWorkerAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        ) => ImportCompletionItem.GetCompletionDescriptionAsync(document, item, cancellationToken);
     }
 }

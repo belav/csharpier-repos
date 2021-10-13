@@ -22,13 +22,11 @@ struct AA
         try
         {
             bool b = false;
-            b = ((bool)((
-                b ? b :
-                    (b ?
-                        (b ? (object)new AA() : (object)new CC())
-                        : (object)new CC())
-            )));
+            b = (
+                (bool)((b ? b : (b ? (b ? (object)new AA() : (object)new CC()) : (object)new CC())))
+            );
         }
+
         finally { }
     }
 }

@@ -21,9 +21,13 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("If-Range", original.Headers.ETag.ToString());
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
@@ -42,9 +46,13 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("If-Range", original.Headers.ETag.ToString());
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
@@ -63,9 +71,13 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("If-Range", original.Content.Headers.LastModified.Value.ToString("r"));
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
@@ -80,10 +92,17 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
-            req.Headers.Add("If-Modified-Since", original.Content.Headers.LastModified.Value.AddHours(-1).ToString("r"));
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
+            req.Headers.Add(
+                "If-Modified-Since",
+                original.Content.Headers.LastModified.Value.AddHours(-1).ToString("r")
+            );
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.PartialContent, resp.StatusCode);
@@ -97,10 +116,17 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
-            req.Headers.Add("If-Modified-Since", original.Content.Headers.LastModified.Value.ToString("r"));
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
+            req.Headers.Add(
+                "If-Modified-Since",
+                original.Content.Headers.LastModified.Value.ToString("r")
+            );
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.NotModified, resp.StatusCode);
@@ -114,9 +140,13 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("If-Range", original.Content.Headers.LastModified.Value.ToString("r"));
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
@@ -135,14 +165,20 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("If-Range", "\"OldEtag\"");
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
             Assert.Null(resp.Content.Headers.ContentRange);
             Assert.Equal(62, resp.Content.Headers.ContentLength);
-            Assert.Equal("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", await resp.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                await resp.Content.ReadAsStringAsync()
+            );
         }
 
         // 14.27 If-Range
@@ -152,7 +188,10 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("If-Range", "\"OldEtag\"");
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
@@ -169,16 +208,27 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
-            req.Headers.Add("If-Range", original.Content.Headers.LastModified.Value.Subtract(TimeSpan.FromDays(1)).ToString("r"));
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
+            req.Headers.Add(
+                "If-Range",
+                original.Content.Headers.LastModified.Value.Subtract(TimeSpan.FromDays(1))
+                    .ToString("r")
+            );
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
             Assert.Null(resp.Content.Headers.ContentRange);
             Assert.Equal(62, resp.Content.Headers.ContentLength);
-            Assert.Equal("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", await resp.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                await resp.Content.ReadAsStringAsync()
+            );
         }
 
         // 14.27 If-Range
@@ -188,10 +238,18 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
-            req.Headers.Add("If-Range", original.Content.Headers.LastModified.Value.Subtract(TimeSpan.FromDays(1)).ToString("r"));
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
+            req.Headers.Add(
+                "If-Range",
+                original.Content.Headers.LastModified.Value.Subtract(TimeSpan.FromDays(1))
+                    .ToString("r")
+            );
             req.Headers.Add("Range", "bytes=0-10");
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
@@ -208,15 +266,22 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("If-Range", original.Headers.ETag.ToString());
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
             Assert.Null(resp.Content.Headers.ContentRange);
             Assert.Equal(62, resp.Content.Headers.ContentLength);
-            Assert.Equal("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", await resp.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                await resp.Content.ReadAsStringAsync()
+            );
 
             req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
             req.Headers.Add("If-Range", original.Content.Headers.LastModified.Value.ToString("r"));
@@ -224,7 +289,10 @@ namespace Microsoft.AspNetCore.StaticFiles
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
             Assert.Null(resp.Content.Headers.ContentRange);
             Assert.Equal(62, resp.Content.Headers.ContentLength);
-            Assert.Equal("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", await resp.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                await resp.Content.ReadAsStringAsync()
+            );
         }
 
         // 14.27 If-Range
@@ -235,9 +303,13 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            HttpResponseMessage original = await server.CreateClient().GetAsync("http://localhost/SubFolder/ranges.txt");
+            HttpResponseMessage original = await server.CreateClient()
+                .GetAsync("http://localhost/SubFolder/ranges.txt");
 
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("If-Range", original.Headers.ETag.ToString());
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
@@ -264,18 +336,39 @@ namespace Microsoft.AspNetCore.StaticFiles
         [InlineData("36-61", "36-61", 26, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
         [InlineData("36-", "36-61", 26, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")] // Last 26
         [InlineData("-26", "36-61", 26, "ABCDEFGHIJKLMNOPQRSTUVWXYZ")] // Last 26
-        [InlineData("0-", "0-61", 62, "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")]
-        [InlineData("-1001", "0-61", 62, "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")]
-        public async Task SingleValidRangeShouldServePartialContent(string range, string expectedRange, int length, string expectedData)
+        [InlineData(
+            "0-",
+            "0-61",
+            62,
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        )]
+        [InlineData(
+            "-1001",
+            "0-61",
+            62,
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        )]
+        public async Task SingleValidRangeShouldServePartialContent(
+            string range,
+            string expectedRange,
+            int length,
+            string expectedData
+        )
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.PartialContent, resp.StatusCode);
             Assert.NotNull(resp.Content.Headers.ContentRange);
-            Assert.Equal("bytes " + expectedRange + "/62", resp.Content.Headers.ContentRange.ToString());
+            Assert.Equal(
+                "bytes " + expectedRange + "/62",
+                resp.Content.Headers.ContentRange.ToString()
+            );
             Assert.Equal(length, resp.Content.Headers.ContentLength);
             Assert.Equal(expectedData, await resp.Content.ReadAsStringAsync());
         }
@@ -287,16 +380,27 @@ namespace Microsoft.AspNetCore.StaticFiles
         [InlineData("-2", "0-0", 1, "A")]
         [InlineData("0-1", "0-0", 1, "A")]
         [InlineData("0-2", "0-0", 1, "A")]
-        public async Task SingleValidRangeShouldServePartialContentSingleByteFile(string range, string expectedRange, int length, string expectedData)
+        public async Task SingleValidRangeShouldServePartialContentSingleByteFile(
+            string range,
+            string expectedRange,
+            int length,
+            string expectedData
+        )
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/SingleByte.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/SingleByte.txt"
+            );
             req.Headers.Add("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.PartialContent, resp.StatusCode);
             Assert.NotNull(resp.Content.Headers.ContentRange);
-            Assert.Equal("bytes " + expectedRange + "/1", resp.Content.Headers.ContentRange.ToString());
+            Assert.Equal(
+                "bytes " + expectedRange + "/1",
+                resp.Content.Headers.ContentRange.ToString()
+            );
             Assert.Equal(length, resp.Content.Headers.ContentLength);
             Assert.Equal(expectedData, await resp.Content.ReadAsStringAsync());
         }
@@ -308,11 +412,16 @@ namespace Microsoft.AspNetCore.StaticFiles
         [InlineData("-2")]
         [InlineData("0-1")]
         [InlineData("0-2")]
-        public async Task SingleValidRangeShouldServeRequestedRangeNotSatisfiableEmptyFile(string range)
+        public async Task SingleValidRangeShouldServeRequestedRangeNotSatisfiableEmptyFile(
+            string range
+        )
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/Empty.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/Empty.txt"
+            );
             req.Headers.Add("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.RequestedRangeNotSatisfiable, resp.StatusCode);
@@ -326,7 +435,10 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
@@ -344,7 +456,10 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.TryAddWithoutValidation("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.RequestedRangeNotSatisfiable, resp.StatusCode);
@@ -359,7 +474,10 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.TryAddWithoutValidation("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
@@ -379,13 +497,19 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.TryAddWithoutValidation("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
             Assert.Null(resp.Content.Headers.ContentRange);
             Assert.Equal(62, resp.Content.Headers.ContentLength);
-            Assert.Equal("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", await resp.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                await resp.Content.ReadAsStringAsync()
+            );
         }
 
         // 14.35 Range
@@ -401,7 +525,10 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.TryAddWithoutValidation("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
@@ -422,14 +549,20 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Get, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("Range", "bytes=" + ranges);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);
             Assert.Equal("text/plain", resp.Content.Headers.ContentType.ToString());
             Assert.Null(resp.Content.Headers.ContentRange);
             Assert.Equal(62, resp.Content.Headers.ContentLength);
-            Assert.Equal("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", await resp.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                await resp.Content.ReadAsStringAsync()
+            );
         }
 
         // 14.35 Range
@@ -442,7 +575,10 @@ namespace Microsoft.AspNetCore.StaticFiles
         {
             using var host = await StaticFilesTestServer.Create(app => app.UseFileServer());
             using var server = host.GetTestServer();
-            var req = new HttpRequestMessage(HttpMethod.Head, "http://localhost/SubFolder/ranges.txt");
+            var req = new HttpRequestMessage(
+                HttpMethod.Head,
+                "http://localhost/SubFolder/ranges.txt"
+            );
             req.Headers.Add("Range", "bytes=" + range);
             HttpResponseMessage resp = await server.CreateClient().SendAsync(req);
             Assert.Equal(HttpStatusCode.OK, resp.StatusCode);

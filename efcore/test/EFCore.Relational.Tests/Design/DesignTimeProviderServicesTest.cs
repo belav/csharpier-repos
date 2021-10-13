@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Design
         public void Ensure_assembly_identity_matches()
         {
             var runtimeAssembly = GetRuntimeAssembly();
-            var dtAttribute = runtimeAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>();
+            var dtAttribute =
+                runtimeAssembly.GetCustomAttribute<DesignTimeProviderServicesAttribute>();
             var dtType = GetDesignTimeServicesType();
             Assert.NotNull(dtType);
 

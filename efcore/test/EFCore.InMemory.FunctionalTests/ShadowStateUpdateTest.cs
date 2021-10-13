@@ -21,8 +21,9 @@ namespace Microsoft.EntityFrameworkCore
 
             var customerType = (IEntityType)entityTypeBuilder.Metadata;
 
-            var optionsBuilder = new DbContextOptionsBuilder()
-                .UseModel(modelBuilder.FinalizeModel())
+            var optionsBuilder = new DbContextOptionsBuilder().UseModel(
+                    modelBuilder.FinalizeModel()
+                )
                 .UseInMemoryDatabase(nameof(ShadowStateUpdateTest))
                 .UseInternalServiceProvider(_fixture.ServiceProvider);
 
@@ -46,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(42, customerFromStore.Id);
                 Assert.Equal(
                     "Daenerys",
-                    (string)context.Entry(customerFromStore).Property("Name").CurrentValue);
+                    (string)context.Entry(customerFromStore).Property("Name").CurrentValue
+                );
             }
 
             using (var context = new DbContext(optionsBuilder.Options))
@@ -66,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore
                 Assert.Equal(42, customerFromStore.Id);
                 Assert.Equal(
                     "Daenerys Targaryen",
-                    (string)context.Entry(customerFromStore).Property("Name").CurrentValue);
+                    (string)context.Entry(customerFromStore).Property("Name").CurrentValue
+                );
             }
 
             using (var context = new DbContext(optionsBuilder.Options))
@@ -96,9 +99,7 @@ namespace Microsoft.EntityFrameworkCore
                 Id = (int)values[0];
             }
 
-            public Customer()
-            {
-            }
+            public Customer() { }
 
             public int Id { get; set; }
         }

@@ -13,15 +13,22 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertBetweenRegularAndVerbatimString
 {
-    public class ConvertBetweenRegularAndVerbatimInterpolatedStringTests : AbstractCSharpCodeActionTest
+    public class ConvertBetweenRegularAndVerbatimInterpolatedStringTests
+        : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ConvertBetweenRegularAndVerbatimInterpolatedStringCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ConvertBetweenRegularAndVerbatimInterpolatedStringCodeRefactoringProvider();
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task EmptyRegularString()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -29,13 +36,18 @@ class Test
         var v = $""[||]"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task RegularStringWithMissingCloseQuote()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -43,13 +55,18 @@ class Test
         var v = $""[||];
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task VerbatimStringWithMissingCloseQuote()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -57,13 +74,18 @@ class Test
         var v = $@""[||];
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task EmptyVerbatimString()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -72,7 +94,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -80,13 +102,18 @@ class Test
         var v = $"""";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task TestLeadingAndTrailingTrivia()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -97,7 +124,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -107,13 +134,18 @@ class Test
             $"""" /* trailing */;
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task RegularStringWithBasicText()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -121,13 +153,18 @@ class Test
         var v = $""[||]a"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task VerbatimStringWithBasicText()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -136,7 +173,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -144,13 +181,18 @@ class Test
         var v = $""a"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task RegularStringWithUnicodeEscape()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -158,13 +200,18 @@ class Test
         var v = $""[||]\u0001"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task RegularStringWithEscapedNewLine()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -173,7 +220,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -182,13 +229,18 @@ class Test
 b"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task VerbatimStringWithNewLine()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -198,7 +250,7 @@ b"";
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -206,13 +258,18 @@ class Test
         var v = $""a\r\nb"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task RegularStringWithEscapedNull()
         {
-            await TestMissingAsync(@"
+            await TestMissingAsync(
+                @"
 class Test
 {
     void Method()
@@ -220,13 +277,18 @@ class Test
         var v = $""[||]a\0b"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task RegularStringWithEscapedQuote()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -235,7 +297,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -243,13 +305,18 @@ class Test
         var v = $@""a""""b"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task VerbatimStringWithEscapedQuote()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -258,7 +325,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -266,13 +333,18 @@ class Test
         var v = $""a\""b"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task RegularStringWithEscapedQuoteAndMultipleParts()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -281,7 +353,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -289,13 +361,18 @@ class Test
         var v = $@""{1}""""{2}"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task VerbatimStringWithEscapedQuoteAndMultipleParts()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -304,7 +381,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -312,13 +389,18 @@ class Test
         var v = $""{1}\""{2}"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task EscapedCurlyBracesInRegularString()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -327,7 +409,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -336,13 +418,18 @@ class Test
 {{1}}"";
     }
 }
-");
+"
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsConvertBetweenRegularAndVerbatimString)
+        ]
         public async Task EscapedCurlyBracesInVerbatimString()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void Method()
@@ -352,7 +439,7 @@ class Test
     }
 }
 ",
-@"
+                @"
 class Test
 {
     void Method()
@@ -360,7 +447,8 @@ class Test
         var v = $""a\r\n{{1}}"";
     }
 }
-");
+"
+            );
         }
     }
 }

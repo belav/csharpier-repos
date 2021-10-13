@@ -14,42 +14,46 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
     {
         protected override RazorLanguageVersion Version => RazorLanguageVersion.Latest;
 
-        private static readonly TagHelperDescriptor StringPropertyTagHelper = CreateTagHelperDescriptor(
-            tagName: "input",
-            typeName: "InputTagHelper",
-            assemblyName: "TestAssembly",
-            attributes: new Action<BoundAttributeDescriptorBuilder>[]
-            {
-                builder => builder
-                    .Name("bound")
-                    .PropertyName("StringProp")
-                    .TypeName("System.String"),
-            });
+        private static readonly TagHelperDescriptor StringPropertyTagHelper =
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("bound").PropertyName("StringProp").TypeName("System.String"),
+                }
+            );
 
-        private static readonly TagHelperDescriptor IntPropertyTagHelper = CreateTagHelperDescriptor(
-            tagName: "input",
-            typeName: "InputTagHelper",
-            assemblyName: "TestAssembly",
-            attributes: new Action<BoundAttributeDescriptorBuilder>[]
-            {
-                builder => builder
-                    .Name("bound")
-                    .PropertyName("IntProp")
-                    .TypeName("System.Int32"),
-            });
+        private static readonly TagHelperDescriptor IntPropertyTagHelper =
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("bound").PropertyName("IntProp").TypeName("System.Int32"),
+                }
+            );
 
-        private static readonly TagHelperDescriptor StringIndexerTagHelper = CreateTagHelperDescriptor(
-            tagName: "input",
-            typeName: "InputTagHelper",
-            assemblyName: "TestAssembly",
-            attributes: new Action<BoundAttributeDescriptorBuilder>[]
-            {
-                builder => builder
-                    .Name("bound")
-                    .PropertyName("StringIndexer")
-                    .TypeName("System.Collections.Generic.Dictionary<System.String, System.String>")
-                    .AsDictionary("foo-", "System.String"),
-            });
+        private static readonly TagHelperDescriptor StringIndexerTagHelper =
+            CreateTagHelperDescriptor(
+                tagName: "input",
+                typeName: "InputTagHelper",
+                assemblyName: "TestAssembly",
+                attributes: new Action<BoundAttributeDescriptorBuilder>[]
+                {
+                    builder =>
+                        builder.Name("bound")
+                            .PropertyName("StringIndexer")
+                            .TypeName(
+                                "System.Collections.Generic.Dictionary<System.String, System.String>"
+                            )
+                            .AsDictionary("foo-", "System.String"),
+                }
+            );
 
         private static readonly TagHelperDescriptor IntIndexerTagHelper = CreateTagHelperDescriptor(
             tagName: "input",
@@ -57,12 +61,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             assemblyName: "TestAssembly",
             attributes: new Action<BoundAttributeDescriptorBuilder>[]
             {
-                builder => builder
-                    .Name("bound")
-                    .PropertyName("IntIndexer")
-                    .TypeName("System.Collections.Generic.Dictionary<System.String, System.Int32>")
-                    .AsDictionary("foo-", "System.Int32"),
-            });
+                builder =>
+                    builder.Name("bound")
+                        .PropertyName("IntIndexer")
+                        .TypeName(
+                            "System.Collections.Generic.Dictionary<System.String, System.Int32>"
+                        )
+                        .AsDictionary("foo-", "System.Int32"),
+            }
+        );
 
         private static readonly SourceSpan Span = new SourceSpan("test.cshtml", 15, 2, 5, 2);
 
@@ -76,10 +83,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             var tagHelperNode = new TagHelperIntermediateNode();
             var node = new DefaultTagHelperBodyIntermediateNode()
             {
-                Children =
-                {
-                    new CSharpExpressionIntermediateNode(),
-                }
+                Children = { new CSharpExpressionIntermediateNode(), }
             };
             tagHelperNode.Children.Add(node);
             Push(context, tagHelperNode);
@@ -90,10 +94,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"Render Children
+                @"Render Children
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -106,10 +111,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             var tagHelperNode = new TagHelperIntermediateNode();
             var node = new DefaultTagHelperBodyIntermediateNode()
             {
-                Children =
-                {
-                    new CSharpExpressionIntermediateNode(),
-                },
+                Children = { new CSharpExpressionIntermediateNode(), },
                 TagMode = TagMode.SelfClosing,
                 TagName = "p",
             };
@@ -122,13 +124,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__tagHelperExecutionContext = __tagHelperScopeManager.Begin(""p"", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, ""test"", async() => {
+                @"__tagHelperExecutionContext = __tagHelperScopeManager.Begin(""p"", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, ""test"", async() => {
     Render Children
 }
 );
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -153,10 +156,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__TestNamespace_MyTagHelper = CreateTagHelper<global::TestNamespace.MyTagHelper>();
+                @"__TestNamespace_MyTagHelper = CreateTagHelper<global::TestNamespace.MyTagHelper>();
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -181,11 +185,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__TestNamespace_MyTagHelper = CreateTagHelper<global::TestNamespace.MyTagHelper>();
+                @"__TestNamespace_MyTagHelper = CreateTagHelper<global::TestNamespace.MyTagHelper>();
 __tagHelperExecutionContext.Add(__TestNamespace_MyTagHelper);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -209,7 +214,8 @@ __tagHelperExecutionContext.Add(__TestNamespace_MyTagHelper);
                 @"await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -230,7 +236,7 @@ __tagHelperExecutionContext.Add(__TestNamespace_MyTagHelper);
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+                @"await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
 if (!__tagHelperExecutionContext.Output.IsContentModified)
 {
     await __tagHelperExecutionContext.SetOutputContentAsync();
@@ -239,7 +245,8 @@ Write(__tagHelperExecutionContext.Output);
 __tagHelperExecutionContext = __tagHelperScopeManager.End();
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -258,11 +265,17 @@ __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 {
                     new HtmlAttributeValueIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.Html, Content = "Blah-" } }
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.Html, Content = "Blah-" }
+                        }
                     },
                     new CSharpCodeAttributeValueIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"Foo\"", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"Foo\"", }
+                        },
                     }
                 }
             };
@@ -275,11 +288,12 @@ __tagHelperExecutionContext = __tagHelperScopeManager.End();
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"Render Children
+                @"Render Children
 Render Children
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -298,7 +312,10 @@ Render Children
                 {
                     new HtmlAttributeIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.Html, Content = "\"value\"", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.Html, Content = "\"value\"", }
+                        },
                     }
                 }
             };
@@ -311,13 +328,14 @@ Render Children
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"BeginWriteTagHelperAttribute();
+                @"BeginWriteTagHelperAttribute();
 Render Children
 __tagHelperStringValueBuffer = EndWriteTagHelperAttribute();
 __tagHelperExecutionContext.AddHtmlAttribute(""name"", Html.Raw(__tagHelperStringValueBuffer), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -336,11 +354,17 @@ __tagHelperExecutionContext.AddHtmlAttribute(""name"", Html.Raw(__tagHelperStrin
                 {
                     new HtmlAttributeValueIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.Html, Content = "Blah-" } }
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.Html, Content = "Blah-" }
+                        }
                     },
                     new CSharpCodeAttributeValueIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"Foo\"", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"Foo\"", }
+                        },
                     }
                 }
             };
@@ -353,13 +377,14 @@ __tagHelperExecutionContext.AddHtmlAttribute(""name"", Html.Raw(__tagHelperStrin
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"BeginAddHtmlAttributeValues(__tagHelperExecutionContext, ""name"", 2, global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
+                @"BeginAddHtmlAttributeValues(__tagHelperExecutionContext, ""name"", 2, global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 Render Children
 Render Children
 EndAddHtmlAttributeValues(__tagHelperExecutionContext);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -374,10 +399,18 @@ EndAddHtmlAttributeValues(__tagHelperExecutionContext);
                 IsIndexerNameMatch = false,
             };
             var expectedLocation = new SourceSpan(100, 10);
-            var expectedDiagnostic = RazorDiagnosticFactory.CreateTagHelper_CodeBlocksNotSupportedInAttributes(expectedLocation);
+            var expectedDiagnostic =
+                RazorDiagnosticFactory.CreateTagHelper_CodeBlocksNotSupportedInAttributes(
+                    expectedLocation
+                );
 
             // Act
-            extension.RenderTagHelperAttributeInline(context, node, new CSharpCodeIntermediateNode(), expectedLocation);
+            extension.RenderTagHelperAttributeInline(
+                context,
+                node,
+                new CSharpCodeIntermediateNode(),
+                expectedLocation
+            );
 
             // Assert
             var diagnostic = Assert.Single(context.Diagnostics);
@@ -396,10 +429,19 @@ EndAddHtmlAttributeValues(__tagHelperExecutionContext);
                 IsIndexerNameMatch = true,
             };
             var expectedLocation = new SourceSpan(100, 10);
-            var expectedDiagnostic = RazorDiagnosticFactory.CreateTagHelper_InlineMarkupBlocksNotSupportedInAttributes(expectedLocation, "System.Int32");
+            var expectedDiagnostic =
+                RazorDiagnosticFactory.CreateTagHelper_InlineMarkupBlocksNotSupportedInAttributes(
+                    expectedLocation,
+                    "System.Int32"
+                );
 
             // Act
-            extension.RenderTagHelperAttributeInline(context, node, new TemplateIntermediateNode(), expectedLocation);
+            extension.RenderTagHelperAttributeInline(
+                context,
+                node,
+                new TemplateIntermediateNode(),
+                expectedLocation
+            );
 
             // Assert
             var diagnostic = Assert.Single(context.Diagnostics);
@@ -418,12 +460,19 @@ EndAddHtmlAttributeValues(__tagHelperExecutionContext);
                 IsIndexerNameMatch = false,
             };
             var expectedLocation = new SourceSpan(100, 10);
-            var expectedDiagnostic = RazorDiagnosticFactory.CreateTagHelper_InlineMarkupBlocksNotSupportedInAttributes(
-                expectedLocation,
-                "System.Collections.Generic.Dictionary<System.String, System.Int32>");
+            var expectedDiagnostic =
+                RazorDiagnosticFactory.CreateTagHelper_InlineMarkupBlocksNotSupportedInAttributes(
+                    expectedLocation,
+                    "System.Collections.Generic.Dictionary<System.String, System.Int32>"
+                );
 
             // Act
-            extension.RenderTagHelperAttributeInline(context, node, new TemplateIntermediateNode(), expectedLocation);
+            extension.RenderTagHelperAttributeInline(
+                context,
+                node,
+                new TemplateIntermediateNode(),
+                expectedLocation
+            );
 
             // Assert
             var diagnostic = Assert.Single(context.Diagnostics);
@@ -451,7 +500,10 @@ EndAddHtmlAttributeValues(__tagHelperExecutionContext);
                 {
                     new HtmlContentIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.Html, Content = "value", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.Html, Content = "value", }
+                        },
                     }
                 }
             };
@@ -464,11 +516,12 @@ EndAddHtmlAttributeValues(__tagHelperExecutionContext);
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"Render Children
+                @"Render Children
 __InputTagHelper.StringProp = ""value"";
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact] // We don't actually assign the expression result at design time, we just use string.Empty as a placeholder.
@@ -492,7 +545,10 @@ __InputTagHelper.StringProp = ""value"";
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"3+5\"", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "\"3+5\"", }
+                        },
                     }
                 }
             };
@@ -505,11 +561,12 @@ __InputTagHelper.StringProp = ""value"";
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"Render Children
+                @"Render Children
 __InputTagHelper.StringProp = string.Empty;
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -534,7 +591,10 @@ __InputTagHelper.StringProp = string.Empty;
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 }
             };
@@ -547,7 +607,7 @@ __InputTagHelper.StringProp = string.Empty;
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"
+                @"
 #nullable restore
 #line 3 ""test.cshtml""
 __InputTagHelper.IntProp = 32;
@@ -557,7 +617,8 @@ __InputTagHelper.IntProp = 32;
 #nullable disable
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         // If a value is bound to multiple tag helpers, we want to make sure to only render the first
@@ -598,10 +659,11 @@ __InputTagHelper.IntProp = 32;
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__InputTagHelper.IntProp = __OtherTagHelper.IntProp;
+                @"__InputTagHelper.IntProp = __OtherTagHelper.IntProp;
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -625,7 +687,10 @@ __InputTagHelper.IntProp = 32;
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 }
             };
@@ -638,10 +703,11 @@ __InputTagHelper.IntProp = 32;
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__InputTagHelper.IntProp = 32;
+                @"__InputTagHelper.IntProp = 32;
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -666,7 +732,10 @@ __InputTagHelper.IntProp = 32;
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 }
             };
@@ -679,7 +748,7 @@ __InputTagHelper.IntProp = 32;
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"
+                @"
 #nullable restore
 #line 3 ""test.cshtml""
 __InputTagHelper.IntIndexer[""bound""] = 32;
@@ -689,7 +758,8 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
 #nullable disable
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -713,7 +783,10 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 }
             };
@@ -726,10 +799,11 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__InputTagHelper.IntIndexer[""bound""] = 32;
+                @"__InputTagHelper.IntIndexer[""bound""] = 32;
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -753,7 +827,10 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
                 {
                     new HtmlContentIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.Html, Content = "\"value\"", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.Html, Content = "\"value\"", }
+                        },
                     }
                 }
             };
@@ -768,14 +845,15 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
 
             // The attribute value is not rendered inline because we are not using the preallocated writer.
             Assert.Equal(
-@"BeginWriteTagHelperAttribute();
+                @"BeginWriteTagHelperAttribute();
 Render Children
 __tagHelperStringValueBuffer = EndWriteTagHelperAttribute();
 __InputTagHelper.StringProp = __tagHelperStringValueBuffer;
 __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.StringProp, global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -800,7 +878,10 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.St
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 },
             };
@@ -813,7 +894,7 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.St
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"
+                @"
 #nullable restore
 #line 3 ""test.cshtml""
 __InputTagHelper.IntProp = 32;
@@ -824,7 +905,8 @@ __InputTagHelper.IntProp = 32;
 __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.IntProp, global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         // If a value is bound to multiple tag helpers, we want to make sure to only render the first
@@ -865,10 +947,11 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.In
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__InputTagHelper.IntProp = __OtherTagHelper.IntProp;
+                @"__InputTagHelper.IntProp = __OtherTagHelper.IntProp;
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -892,7 +975,10 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.In
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 }
             };
@@ -905,11 +991,12 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.In
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"__InputTagHelper.IntProp = 32;
+                @"__InputTagHelper.IntProp = 32;
 __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.IntProp, global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -934,7 +1021,10 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.In
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 }
             };
@@ -947,7 +1037,7 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""bound"", __InputTagHelper.In
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"if (__InputTagHelper.IntIndexer == null)
+                @"if (__InputTagHelper.IntIndexer == null)
 {
     throw new InvalidOperationException(InvalidTagHelperIndexerAssignment(""foo-bound"", ""InputTagHelper"", ""IntIndexer""));
 }
@@ -961,7 +1051,8 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
 __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelper.IntIndexer[""bound""], global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact] // We should only emit the validation code for the first use of an indexer property.
@@ -986,7 +1077,10 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "17", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "17", }
+                        },
                     }
                 }
             };
@@ -1004,7 +1098,10 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 }
             };
@@ -1018,7 +1115,7 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"
+                @"
 #nullable restore
 #line 3 ""test.cshtml""
 __InputTagHelper.IntIndexer[""bound""] = 32;
@@ -1029,7 +1126,8 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
 __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelper.IntIndexer[""bound""], global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -1053,7 +1151,10 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
                 {
                     new CSharpExpressionIntermediateNode()
                     {
-                        Children = { new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", } },
+                        Children =
+                        {
+                            new IntermediateToken { Kind = TokenKind.CSharp, Content = "32", }
+                        },
                     }
                 }
             };
@@ -1066,7 +1167,7 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"if (__InputTagHelper.IntIndexer == null)
+                @"if (__InputTagHelper.IntIndexer == null)
 {
     throw new InvalidOperationException(InvalidTagHelperIndexerAssignment(""foo-bound"", ""InputTagHelper"", ""IntIndexer""));
 }
@@ -1074,7 +1175,8 @@ __InputTagHelper.IntIndexer[""bound""] = 32;
 __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelper.IntIndexer[""bound""], global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -1083,7 +1185,7 @@ __tagHelperExecutionContext.AddTagHelperAttribute(""foo-bound"", __InputTagHelpe
             // Arrange
             var extension = new DefaultTagHelperTargetExtension();
             var context = TestCodeRenderingContext.CreateDesignTime();
-            
+
             var node = new DefaultTagHelperRuntimeIntermediateNode();
 
             // Act
@@ -1099,7 +1201,8 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecution
 private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner __tagHelperRunner = new global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner();
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -1108,7 +1211,7 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner __
             // Arrange
             var extension = new DefaultTagHelperTargetExtension();
             var context = TestCodeRenderingContext.CreateRuntime();
-            
+
             var node = new DefaultTagHelperRuntimeIntermediateNode();
 
             // Act
@@ -1117,7 +1220,7 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner __
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"#line hidden
+                @"#line hidden
 #pragma warning disable 0649
 private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext __tagHelperExecutionContext;
 #pragma warning restore 0649
@@ -1139,7 +1242,8 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
 }
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -1169,15 +1273,20 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
 
         private DocumentIntermediateNode LowerDesignTime(RazorCodeDocument codeDocument)
         {
-            var projectEngine = RazorProjectEngine.Create(b =>
-            {
-                b.Features.Add(new DesignTimeOptionsFeature(designTime: true));
-            });
+            var projectEngine = RazorProjectEngine.Create(
+                b =>
+                {
+                    b.Features.Add(new DesignTimeOptionsFeature(designTime: true));
+                }
+            );
 
             return Lower(codeDocument, projectEngine);
         }
 
-        private static DocumentIntermediateNode Lower(RazorCodeDocument codeDocument, RazorProjectEngine engine)
+        private static DocumentIntermediateNode Lower(
+            RazorCodeDocument codeDocument,
+            RazorProjectEngine engine
+        )
         {
             for (var i = 0; i < engine.Phases.Count; i++)
             {
@@ -1200,7 +1309,8 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
             string tagName,
             string typeName,
             string assemblyName,
-            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
+        )
         {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);
@@ -1220,7 +1330,9 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
             return descriptor;
         }
 
-        private class DesignTimeOptionsFeature : IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
+        private class DesignTimeOptionsFeature
+            : IConfigureRazorParserOptionsFeature,
+              IConfigureRazorCodeGenerationOptionsFeature
         {
             private bool _designTime;
 

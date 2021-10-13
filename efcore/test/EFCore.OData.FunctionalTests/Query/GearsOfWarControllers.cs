@@ -35,16 +35,19 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         [HttpGet]
         [EnableQuery]
-        public ITestActionResult Get([FromODataUri] string keyNickname, [FromODataUri] int keySquadId)
+        public ITestActionResult Get(
+            [FromODataUri] string keyNickname,
+            [FromODataUri] int keySquadId
+        )
         {
-            var result = _context.Gears.FirstOrDefault(e => e.Nickname == keyNickname && e.SquadId == keySquadId);
+            var result = _context.Gears.FirstOrDefault(
+                e => e.Nickname == keyNickname && e.SquadId == keySquadId
+            );
 
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class SquadsController : TestODataController, IDisposable
@@ -72,9 +75,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class TagsController : TestODataController, IDisposable
@@ -102,9 +103,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class WeaponsController : TestODataController, IDisposable
@@ -132,9 +131,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class CitiesController : TestODataController, IDisposable
@@ -162,9 +159,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class MissionsController : TestODataController, IDisposable
@@ -192,9 +187,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class SquadMissionsController : TestODataController, IDisposable
@@ -217,14 +210,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         [EnableQuery]
         public ITestActionResult Get([FromODataUri] int keySquadId, [FromODataUri] int keyMissionId)
         {
-            var result = _context.SquadMissions.FirstOrDefault(e => e.SquadId == keySquadId && e.MissionId == keyMissionId);
+            var result = _context.SquadMissions.FirstOrDefault(
+                e => e.SquadId == keySquadId && e.MissionId == keyMissionId
+            );
 
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class FactionsController : TestODataController, IDisposable
@@ -259,9 +252,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class LocustLeadersController : TestODataController, IDisposable
@@ -296,9 +287,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class LocustHighCommandsController : TestODataController, IDisposable
@@ -326,8 +315,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

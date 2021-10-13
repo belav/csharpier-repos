@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
             Assert.Contains(assembly.Location, references);
             Assert.Contains(
                 typeof(AssemblyPart).Assembly.GetName().Name,
-                references.Select(Path.GetFileNameWithoutExtension));
+                references.Select(Path.GetFileNameWithoutExtension)
+            );
         }
 
         [Fact]
@@ -50,8 +51,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         {
             // Arrange
             var name = new AssemblyName($"DynamicAssembly-{Guid.NewGuid()}");
-            var assembly = AssemblyBuilder.DefineDynamicAssembly(name,
-                AssemblyBuilderAccess.RunAndCollect);
+            var assembly = AssemblyBuilder.DefineDynamicAssembly(
+                name,
+                AssemblyBuilderAccess.RunAndCollect
+            );
 
             var part = new AssemblyPart(assembly);
 

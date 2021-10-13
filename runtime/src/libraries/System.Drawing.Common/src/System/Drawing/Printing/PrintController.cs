@@ -5,9 +5,7 @@ namespace System.Drawing.Printing
 {
     public abstract partial class PrintController
     {
-        protected PrintController()
-        {
-        }
+        protected PrintController() { }
 
         public virtual bool IsPreview => false;
 
@@ -22,8 +20,6 @@ namespace System.Drawing.Printing
         /// <summary>
         /// When overridden in a derived class, completes the control sequence of when and how to print a page in a document.
         /// </summary>
-        public virtual void OnEndPage(PrintDocument document, PrintPageEventArgs e)
-        {
-        }
+        public virtual void OnEndPage(PrintDocument document, PrintPageEventArgs e) { }
     }
 }

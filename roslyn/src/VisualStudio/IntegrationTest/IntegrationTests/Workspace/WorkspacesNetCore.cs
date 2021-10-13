@@ -16,9 +16,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
     public class WorkspacesNetCore : WorkspaceBase
     {
         public WorkspacesNetCore(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.CSharpNetCoreClassLibrary) { }
 
         [WpfFact]
         [Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -35,11 +33,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
         {
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.EditProjectFile(project);
-            VisualStudio.Editor.SetText(@"<Project Sdk=""Microsoft.NET.Sdk"">
+            VisualStudio.Editor.SetText(
+                @"<Project Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
-</Project>");
+</Project>"
+            );
             VisualStudio.SolutionExplorer.SaveAll();
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(project);
             // 🐛 This should only need WaitForAsyncOperations for FeatureAttribute.Workspace
@@ -52,7 +52,6 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
         [WpfFact]
         [Trait(Traits.Feature, Traits.Features.Workspace)]
         [Trait(Traits.Feature, Traits.Features.NetCore)]
-
         public override void ProjectReference()
         {
             base.ProjectReference();
@@ -64,7 +63,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.Workspace
         {
             VisualStudio.SolutionExplorer.CreateSolution(nameof(WorkspacesDesktop));
             var project = new ProjectUtils.Project(ProjectName);
-            VisualStudio.SolutionExplorer.AddProject(project, WellKnownProjectTemplates.ClassLibrary, LanguageNames.VisualBasic);
+            VisualStudio.SolutionExplorer.AddProject(
+                project,
+                WellKnownProjectTemplates.ClassLibrary,
+                LanguageNames.VisualBasic
+            );
             VisualStudio.SolutionExplorer.RestoreNuGetPackages(project);
             base.ProjectProperties();
         }

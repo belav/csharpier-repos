@@ -27,21 +27,31 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Creates a statement that declares a single local variable with an optional initializer.
         /// </summary>
         internal abstract SyntaxNode LocalDeclarationStatement(
-            SyntaxNode type, SyntaxToken identifier, SyntaxNode initializer = null, bool isConst = false);
+            SyntaxNode type,
+            SyntaxToken identifier,
+            SyntaxNode initializer = null,
+            bool isConst = false
+        );
 
         /// <summary>
         /// Creates a statement that declares a single local variable.
         /// </summary>
-        internal SyntaxNode LocalDeclarationStatement(SyntaxToken name, SyntaxNode initializer)
-            => LocalDeclarationStatement(null, name, initializer);
+        internal SyntaxNode LocalDeclarationStatement(SyntaxToken name, SyntaxNode initializer) =>
+            LocalDeclarationStatement(null, name, initializer);
 
-        internal abstract SyntaxNode WithInitializer(SyntaxNode variableDeclarator, SyntaxNode initializer);
+        internal abstract SyntaxNode WithInitializer(
+            SyntaxNode variableDeclarator,
+            SyntaxNode initializer
+        );
 
         internal abstract SyntaxNode EqualsValueClause(SyntaxToken operatorToken, SyntaxNode value);
 
         internal abstract SyntaxToken Identifier(string identifier);
 
-        internal abstract SyntaxNode ConditionalAccessExpression(SyntaxNode expression, SyntaxNode whenNotNull);
+        internal abstract SyntaxNode ConditionalAccessExpression(
+            SyntaxNode expression,
+            SyntaxNode whenNotNull
+        );
 
         internal abstract SyntaxNode MemberBindingExpression(SyntaxNode name);
 
@@ -50,7 +60,11 @@ namespace Microsoft.CodeAnalysis.Editing
         /// <summary>
         /// Wraps with parens.
         /// </summary>
-        internal abstract SyntaxNode AddParentheses(SyntaxNode expression, bool includeElasticTrivia = true, bool addSimplifierAnnotation = true);
+        internal abstract SyntaxNode AddParentheses(
+            SyntaxNode expression,
+            bool includeElasticTrivia = true,
+            bool addSimplifierAnnotation = true
+        );
 
         /// <summary>
         /// Creates a statement that can be used to yield a value from an iterator method.
@@ -69,7 +83,11 @@ namespace Microsoft.CodeAnalysis.Editing
         internal abstract SyntaxToken InterpolatedStringTextToken(string content, string value);
         internal abstract SyntaxNode InterpolatedStringText(SyntaxToken textToken);
         internal abstract SyntaxNode Interpolation(SyntaxNode syntaxNode);
-        internal abstract SyntaxNode InterpolatedStringExpression(SyntaxToken startToken, IEnumerable<SyntaxNode> content, SyntaxToken endToken);
+        internal abstract SyntaxNode InterpolatedStringExpression(
+            SyntaxToken startToken,
+            IEnumerable<SyntaxNode> content,
+            SyntaxToken endToken
+        );
         internal abstract SyntaxNode InterpolationAlignmentClause(SyntaxNode alignment);
         internal abstract SyntaxNode InterpolationFormatClause(string format);
         internal abstract SyntaxNode TypeParameterList(IEnumerable<string> typeParameterNames);
@@ -77,7 +95,11 @@ namespace Microsoft.CodeAnalysis.Editing
         #region Patterns
 
         internal abstract bool SupportsPatterns(ParseOptions options);
-        internal abstract SyntaxNode IsPatternExpression(SyntaxNode expression, SyntaxToken isToken, SyntaxNode pattern);
+        internal abstract SyntaxNode IsPatternExpression(
+            SyntaxNode expression,
+            SyntaxToken isToken,
+            SyntaxNode pattern
+        );
 
         internal abstract SyntaxNode AndPattern(SyntaxNode left, SyntaxNode right);
         internal abstract SyntaxNode DeclarationPattern(INamedTypeSymbol type, string name);
@@ -86,7 +108,6 @@ namespace Microsoft.CodeAnalysis.Editing
         internal abstract SyntaxNode OrPattern(SyntaxNode left, SyntaxNode right);
         internal abstract SyntaxNode ParenthesizedPattern(SyntaxNode pattern);
         internal abstract SyntaxNode TypePattern(SyntaxNode type);
-
         #endregion
     }
 }

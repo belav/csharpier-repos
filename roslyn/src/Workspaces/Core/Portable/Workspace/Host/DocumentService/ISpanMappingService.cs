@@ -41,7 +41,11 @@ namespace Microsoft.CodeAnalysis.Host
         /// <param name="spans">Spans in the document</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Return mapped span. order of result should be same as the given span</returns>
-        Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(Document document, IEnumerable<TextSpan> spans, CancellationToken cancellationToken);
+        Task<ImmutableArray<MappedSpanResult>> MapSpansAsync(
+            Document document,
+            IEnumerable<TextSpan> spans,
+            CancellationToken cancellationToken
+        );
     }
 
     /// <summary>

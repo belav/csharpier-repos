@@ -11,11 +11,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         private class UnaOpSig
         {
-            protected UnaOpSig()
-            {
-            }
+            protected UnaOpSig() { }
 
-            public UnaOpSig(PredefinedType pt, UnaOpMask grfuom, int cuosSkip, PfnBindUnaOp pfn, UnaOpFuncKind fnkind)
+            public UnaOpSig(
+                PredefinedType pt,
+                UnaOpMask grfuom,
+                int cuosSkip,
+                PfnBindUnaOp pfn,
+                UnaOpFuncKind fnkind
+            )
             {
                 this.pt = pt;
                 this.grfuom = grfuom;
@@ -76,7 +80,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     return false;
                 }
                 // We can't both convert and lift.
-                Debug.Assert(((_grflt & LiftFlags.Lift1) == 0) || ((_grflt & LiftFlags.Convert1) == 0));
+                Debug.Assert(
+                    ((_grflt & LiftFlags.Lift1) == 0) || ((_grflt & LiftFlags.Convert1) == 0)
+                );
                 return true;
             }
             public bool Convert()

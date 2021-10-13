@@ -28,14 +28,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
         public async Task GenerateConstructorSimpleResult()
         {
             var initialText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
     {|typed:public C|}
 }";
             var expectedText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
@@ -52,14 +52,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
         public async Task GenerateConstructorTypedPrivate()
         {
             var initialText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
     {|typed:private C|}
 }";
             var expectedText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
@@ -76,19 +76,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
         public async Task GenerateConstructorWithFieldsInPartial()
         {
             var initialText =
-@"partial class C
+                @"partial class C
 {
     {|typed:public C|}
 }";
             var additionalDocuments = new string[]
             {
-@"partial class C
+                @"partial class C
 {
     private readonly int _someInt;
 }"
             };
             var expectedText =
-@"partial class C
+                @"partial class C
 {
     public C(int someInt)
     {
@@ -96,21 +96,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
     }
 }";
 
-            await VerifyExpectedTextAsync(initialText, additionalDocuments, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(initialText, additionalDocuments, expectedText)
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task GenerateConstructorWithReferenceType()
         {
             var initialText =
-@"class C
+                @"class C
 {
     private readonly object _someObject;
 
     {|typed:public C|}
 }";
             var expectedText =
-@"class C
+                @"class C
 {
     private readonly object _someObject;
 
@@ -127,36 +128,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
         public async Task GenerateConstructorWithExpressionBodyOption()
         {
             var initialText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
     {|typed:public C|}
 }";
             var expectedText =
-@"class C
+                @"class C
 {
     private readonly int _someInt;
 
     public C(int someInt) => _someInt = someInt;
 }";
 
-            await VerifyExpectedTextAsync(initialText, expectedText,
-                options: new OptionsCollection(LanguageNames.CSharp)
-                {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement }
-                }).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    initialText,
+                    expectedText,
+                    options: new OptionsCollection(LanguageNames.CSharp)
+                    {
+                        {
+                            CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                            CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                        }
+                    }
+                )
+                .ConfigureAwait(false);
         }
 
-        private static Task VerifyExpectedTextAsync(string markup, string expectedText, OptionsCollection? options = null)
+        private static Task VerifyExpectedTextAsync(
+            string markup,
+            string expectedText,
+            OptionsCollection? options = null
+        )
         {
-            return VerifyExpectedTextAsync(markup, new string[] { }, expectedText, options);
+            return VerifyExpectedTextAsync(markup, new string[] {  }, expectedText, options);
         }
 
-        private static async Task VerifyExpectedTextAsync(string activeDocument, string[] additionalDocuments, string expectedText, OptionsCollection? options = null)
+        private static async Task VerifyExpectedTextAsync(
+            string activeDocument,
+            string[] additionalDocuments,
+            string expectedText,
+            OptionsCollection? options = null
+        )
         {
             var documentSet = additionalDocuments.Prepend(activeDocument).ToArray();
-            using var workspace = TestWorkspace.CreateCSharp(documentSet, exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider());
+            using var workspace = TestWorkspace.CreateCSharp(
+                documentSet,
+                exportProvider: EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider()
+            );
             if (options != null)
             {
                 workspace.ApplyOptions(options!);
@@ -176,7 +196,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 currentSelectedSpan = TextSpan.FromBounds(annotatedSpan.End, annotatedSpan.End);
             }
 
-            var currentSnapshotSpan = new SnapshotSpan(textBuffer.CurrentSnapshot, currentSelectedSpan.ToSpan());
+            var currentSnapshotSpan = new SnapshotSpan(
+                textBuffer.CurrentSnapshot,
+                currentSelectedSpan.ToSpan()
+            );
 
             // Determine the edits to rewind to the prior snapshot by removing the changes in the annotated span.
             var rewindTextChange = new TextChange(annotatedSpan, "");
@@ -186,8 +209,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 currentSnapshotSpan,
                 ImmutableArray.Create(rewindTextChange),
                 TextSpan.FromBounds(rewindTextChange.Span.Start, rewindTextChange.Span.Start),
-                intentData: null);
-            var results = await intentSource.ComputeIntentsAsync(intentContext, CancellationToken.None).ConfigureAwait(false);
+                intentData: null
+            );
+            var results = await intentSource.ComputeIntentsAsync(
+                    intentContext,
+                    CancellationToken.None
+                )
+                .ConfigureAwait(false);
 
             // For now, we're just taking the first result to match intellicode behavior.
             var result = results.First();

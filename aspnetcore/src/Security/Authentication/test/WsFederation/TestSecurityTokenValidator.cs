@@ -17,7 +17,11 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
             return true;
         }
 
-        public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
+        public ClaimsPrincipal ValidateToken(
+            string securityToken,
+            TokenValidationParameters validationParameters,
+            out SecurityToken validatedToken
+        )
         {
             if (!string.IsNullOrEmpty(securityToken) && securityToken.Contains("ThisIsAValidToken"))
             {
@@ -25,7 +29,9 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
                 return new ClaimsPrincipal(new ClaimsIdentity("Test"));
             }
 
-            throw new SecurityTokenException("The security token did not contain ThisIsAValidToken");
+            throw new SecurityTokenException(
+                "The security token did not contain ThisIsAValidToken"
+            );
         }
     }
 }

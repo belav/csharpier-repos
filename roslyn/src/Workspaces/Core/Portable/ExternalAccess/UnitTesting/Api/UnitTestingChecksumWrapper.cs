@@ -10,10 +10,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
     {
         private Checksum UnderlyingObject { get; }
 
-        public UnitTestingChecksumWrapper(Checksum underlyingObject)
-            => UnderlyingObject = underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
+        public UnitTestingChecksumWrapper(Checksum underlyingObject) =>
+            UnderlyingObject =
+                underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
 
-        public bool IsEqualTo(UnitTestingChecksumWrapper other)
-            => other.UnderlyingObject == UnderlyingObject;
+        public bool IsEqualTo(UnitTestingChecksumWrapper other) =>
+            other.UnderlyingObject == UnderlyingObject;
     }
 }

@@ -28,14 +28,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
     public class KestrelServerOptions
     {
         // internal to fast-path header decoding when RequestHeaderEncodingSelector is unchanged.
-        internal static readonly Func<string, Encoding?> DefaultRequestHeaderEncodingSelector = _ => null;
+        internal static readonly Func<string, Encoding?> DefaultRequestHeaderEncodingSelector = _ =>
+            null;
 
-        private Func<string, Encoding?> _requestHeaderEncodingSelector = DefaultRequestHeaderEncodingSelector;
+        private Func<string, Encoding?> _requestHeaderEncodingSelector =
+            DefaultRequestHeaderEncodingSelector;
 
         // The following two lists configure the endpoints that Kestrel should listen to. If both lists are empty, the "urls" config setting (e.g. UseUrls) is used.
         internal List<ListenOptions> CodeBackedListenOptions { get; } = new List<ListenOptions>();
-        internal List<ListenOptions> ConfigurationBackedListenOptions { get; } = new List<ListenOptions>();
-        internal IEnumerable<ListenOptions> ListenOptions => CodeBackedListenOptions.Concat(ConfigurationBackedListenOptions);
+        internal List<ListenOptions> ConfigurationBackedListenOptions { get; } =
+            new List<ListenOptions>();
+        internal IEnumerable<ListenOptions> ListenOptions =>
+            CodeBackedListenOptions.Concat(ConfigurationBackedListenOptions);
 
         // For testing and debugging.
         internal List<ListenOptions> OptionsInUse { get; } = new List<ListenOptions>();
@@ -90,7 +94,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         public Func<string, Encoding?> RequestHeaderEncodingSelector
         {
             get => _requestHeaderEncodingSelector;
-            set => _requestHeaderEncodingSelector = value ?? throw new ArgumentNullException(nameof(value));
+            set =>
+                _requestHeaderEncodingSelector =
+                    value ?? throw new ArgumentNullException(nameof(value));
         }
 
         /// <summary>
@@ -136,7 +142,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         /// </summary>
         public void ConfigureEndpointDefaults(Action<ListenOptions> configureOptions)
         {
-            EndpointDefaults = configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+            EndpointDefaults =
+                configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
         }
 
         internal void ApplyEndpointDefaults(ListenOptions listenOptions)
@@ -152,7 +159,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         /// </summary>
         public void ConfigureHttpsDefaults(Action<HttpsConnectionAdapterOptions> configureOptions)
         {
-            HttpsDefaults = configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+            HttpsDefaults =
+                configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
         }
 
         internal void ApplyHttpsDefaults(HttpsConnectionAdapterOptions httpsOptions)
@@ -163,7 +171,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
 
         internal void ApplyDefaultCert(HttpsConnectionAdapterOptions httpsOptions)
         {
-            if (httpsOptions.ServerCertificate != null || httpsOptions.ServerCertificateSelector != null)
+            if (
+                httpsOptions.ServerCertificate != null
+                || httpsOptions.ServerCertificateSelector != null
+            )
             {
                 return;
             }
@@ -181,24 +192,37 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 var logger = ApplicationServices!.GetRequiredService<ILogger<KestrelServer>>();
                 try
                 {
-                    DefaultCertificate = CertificateManager.Instance.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true)
+                    DefaultCertificate = CertificateManager.Instance.ListCertificates(
+                            StoreName.My,
+                            StoreLocation.CurrentUser,
+                            isValid: true
+                        )
                         .FirstOrDefault();
 
                     if (DefaultCertificate != null)
                     {
-                        var status = CertificateManager.Instance.CheckCertificateState(DefaultCertificate, interactive: false);
+                        var status = CertificateManager.Instance.CheckCertificateState(
+                            DefaultCertificate,
+                            interactive: false
+                        );
                         if (!status.Success)
                         {
                             // Display a warning indicating to the user that a prompt might appear and provide instructions on what to do in that
                             // case. The underlying implementation of this check is specific to Mac OS and is handled within CheckCertificateState.
                             // Kestrel must NEVER cause a UI prompt on a production system. We only attempt this here because Mac OS is not supported
                             // in production.
-                            Debug.Assert(status.FailureMessage != null, "Status with a failure result must have a message.");
+                            Debug.Assert(
+                                status.FailureMessage != null,
+                                "Status with a failure result must have a message."
+                            );
                             logger.DeveloperCertificateFirstRun(status.FailureMessage);
 
                             // Now that we've displayed a warning in the logs so that the user gets a notification that a prompt might appear, try
                             // and access the certificate key, which might trigger a prompt.
-                            status = CertificateManager.Instance.CheckCertificateState(DefaultCertificate, interactive: true);
+                            status = CertificateManager.Instance.CheckCertificateState(
+                                DefaultCertificate,
+                                interactive: true
+                            );
                             if (!status.Success)
                             {
                                 logger.BadDeveloperCertificateState();
@@ -223,7 +247,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         /// Creates a configuration loader for setting up Kestrel.
         /// </summary>
         /// <returns>A <see cref="KestrelConfigurationLoader"/> for configuring endpoints.</returns>
-        public KestrelConfigurationLoader Configure() => Configure(new ConfigurationBuilder().Build());
+        public KestrelConfigurationLoader Configure() =>
+            Configure(new ConfigurationBuilder().Build());
 
         /// <summary>
         /// Creates a configuration loader for setting up Kestrel that takes an <see cref="IConfiguration"/> as input.
@@ -232,7 +257,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         /// </summary>
         /// <param name="config">The configuration section for Kestrel.</param>
         /// <returns>A <see cref="KestrelConfigurationLoader"/> for further endpoint configuration.</returns>
-        public KestrelConfigurationLoader Configure(IConfiguration config) => Configure(config, reloadOnChange: false);
+        public KestrelConfigurationLoader Configure(IConfiguration config) =>
+            Configure(config, reloadOnChange: false);
 
         /// <summary>
         /// Creates a configuration loader for setting up Kestrel that takes an <see cref="IConfiguration"/> as input.
@@ -248,14 +274,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
         {
             if (ApplicationServices is null)
             {
-                throw new InvalidOperationException($"{nameof(ApplicationServices)} must not be null. This is normally set automatically via {nameof(IConfigureOptions<KestrelServerOptions>)}.");
+                throw new InvalidOperationException(
+                    $"{nameof(ApplicationServices)} must not be null. This is normally set automatically via {nameof(IConfigureOptions<KestrelServerOptions>)}."
+                );
             }
 
             var hostEnvironment = ApplicationServices.GetRequiredService<IHostEnvironment>();
             var logger = ApplicationServices.GetRequiredService<ILogger<KestrelServer>>();
-            var httpsLogger = ApplicationServices.GetRequiredService<ILogger<HttpsConnectionMiddleware>>();
+            var httpsLogger = ApplicationServices.GetRequiredService<
+                ILogger<HttpsConnectionMiddleware>
+            >();
 
-            var loader = new KestrelConfigurationLoader(this, config, hostEnvironment, reloadOnChange, logger, httpsLogger);
+            var loader = new KestrelConfigurationLoader(
+                this,
+                config,
+                hostEnvironment,
+                reloadOnChange,
+                logger,
+                httpsLogger
+            );
             ConfigurationLoader = loader;
             return loader;
         }
@@ -394,7 +431,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
 
             if (!Path.IsPathRooted(socketPath))
             {
-                throw new ArgumentException(CoreStrings.UnixSocketPathMustBeAbsolute, nameof(socketPath));
+                throw new ArgumentException(
+                    CoreStrings.UnixSocketPathMustBeAbsolute,
+                    nameof(socketPath)
+                );
             }
             if (configure == null)
             {

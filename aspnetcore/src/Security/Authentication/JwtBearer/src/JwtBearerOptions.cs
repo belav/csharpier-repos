@@ -25,7 +25,7 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         {
             SecurityTokenValidators = new List<ISecurityTokenValidator> { _defaultHandler };
         }
-    
+
         /// <summary>
         /// Gets or sets if HTTPS is required for the metadata address or authority.
         /// The default is true. This should be disabled only in development environments.
@@ -112,7 +112,8 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         /// </summary>
         /// <remarks>Contains the types and definitions required for validating a token.</remarks>
         /// <exception cref="ArgumentNullException">if 'value' is null.</exception>
-        public TokenValidationParameters TokenValidationParameters { get; set; } = new TokenValidationParameters();
+        public TokenValidationParameters TokenValidationParameters { get; set; } =
+            new TokenValidationParameters();
 
         /// <summary>
         /// Defines whether the bearer token should be stored in the
@@ -126,7 +127,7 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         /// from returning an error and an error_description in the WWW-Authenticate header.
         /// </summary>
         public bool IncludeErrorDetails { get; set; } = true;
-        
+
         /// <summary>
         /// Gets or sets the <see cref="MapInboundClaims"/> property on the default instance of <see cref="JwtSecurityTokenHandler"/> in SecurityTokenValidators, which is used when determining 
         /// whether or not to map claim types that are extracted when validating a <see cref="JwtSecurityToken"/>. 
@@ -142,11 +143,13 @@ namespace Microsoft.AspNetCore.Authentication.JwtBearer
         /// <summary>
         /// 1 day is the default time interval that afterwards, <see cref="ConfigurationManager" /> will obtain new configuration.
         /// </summary>
-        public TimeSpan AutomaticRefreshInterval { get; set; } = ConfigurationManager<OpenIdConnectConfiguration>.DefaultAutomaticRefreshInterval;
+        public TimeSpan AutomaticRefreshInterval { get; set; } =
+            ConfigurationManager<OpenIdConnectConfiguration>.DefaultAutomaticRefreshInterval;
 
         /// <summary>
         /// The minimum time between <see cref="ConfigurationManager" /> retrievals, in the event that a retrieval failed, or that a refresh was explicitly requested. 30 seconds is the default.
         /// </summary>
-        public TimeSpan RefreshInterval { get; set; } = ConfigurationManager<OpenIdConnectConfiguration>.DefaultRefreshInterval;
+        public TimeSpan RefreshInterval { get; set; } =
+            ConfigurationManager<OpenIdConnectConfiguration>.DefaultRefreshInterval;
     }
 }

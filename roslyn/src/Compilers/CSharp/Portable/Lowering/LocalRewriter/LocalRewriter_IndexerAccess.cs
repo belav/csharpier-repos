@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class LocalRewriter
     {
-        private BoundExpression MakeDynamicIndexerAccessReceiver(BoundDynamicIndexerAccess indexerAccess, BoundExpression loweredReceiver)
+        private BoundExpression MakeDynamicIndexerAccessReceiver(
+            BoundDynamicIndexerAccess indexerAccess,
+            BoundExpression loweredReceiver
+        )
         {
             BoundExpression result;
 
@@ -28,7 +31,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // However, with the cast the scenarios don't work either, so we don't mimic Dev12.
                 // loweredReceiver = BoundConversion.Synthesized(loweredReceiver.Syntax, loweredReceiver, Conversion.Identity, false, false, null, DynamicTypeSymbol.Instance);
 
-                result = _dynamicFactory.MakeDynamicGetMember(loweredReceiver, indexedPropertyName, resultIndexed: true).ToExpression();
+                result = _dynamicFactory.MakeDynamicGetMember(
+                        loweredReceiver,
+                        indexedPropertyName,
+                        resultIndexed: true
+                    )
+                    .ToExpression();
             }
             else
             {
@@ -43,7 +51,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             var loweredReceiver = VisitExpression(node.Receiver);
             var loweredArguments = VisitList(node.Arguments);
 
-            return MakeDynamicGetIndex(node, loweredReceiver, loweredArguments, node.ArgumentNamesOpt, node.ArgumentRefKindsOpt);
+            return MakeDynamicGetIndex(
+                node,
+                loweredReceiver,
+                loweredArguments,
+                node.ArgumentNamesOpt,
+                node.ArgumentRefKindsOpt
+            );
         }
 
         private BoundExpression MakeDynamicGetIndex(
@@ -51,17 +65,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredReceiver,
             ImmutableArray<BoundExpression> loweredArguments,
             ImmutableArray<string> argumentNames,
-            ImmutableArray<RefKind> refKinds)
+            ImmutableArray<RefKind> refKinds
+        )
         {
             // If we are calling a method on a NoPIA type, we need to embed all methods/properties
             // with the matching name of this dynamic invocation.
             EmbedIfNeedTo(loweredReceiver, node.ApplicableIndexers, node.Syntax);
 
             return _dynamicFactory.MakeDynamicGetIndex(
-                MakeDynamicIndexerAccessReceiver(node, loweredReceiver),
-                loweredArguments,
-                argumentNames,
-                refKinds).ToExpression();
+                    MakeDynamicIndexerAccessReceiver(node, loweredReceiver),
+                    loweredArguments,
+                    argumentNames,
+                    refKinds
+                )
+                .ToExpression();
         }
 
         public override BoundNode VisitIndexerAccess(BoundIndexerAccess node)
@@ -98,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 node.DefaultArguments,
                 node.Type,
                 node,
-                isLeftOfAssignment);
+                isLeftOfAssignment
+            );
         }
 
         private BoundExpression MakeIndexerAccess(
@@ -113,16 +131,38 @@ namespace Microsoft.CodeAnalysis.CSharp
             BitVector defaultArguments,
             TypeSymbol type,
             BoundIndexerAccess? oldNodeOpt,
-            bool isLeftOfAssignment)
+            bool isLeftOfAssignment
+        )
         {
             if (isLeftOfAssignment && indexer.RefKind == RefKind.None)
             {
                 // This is an indexer set access. We return a BoundIndexerAccess node here.
                 // This node will be rewritten with MakePropertyAssignment when rewriting the enclosing BoundAssignmentOperator.
 
-                return oldNodeOpt != null ?
-                    oldNodeOpt.Update(rewrittenReceiver, indexer, rewrittenArguments, argumentNamesOpt, argumentRefKindsOpt, expanded, argsToParamsOpt, defaultArguments, type) :
-                    new BoundIndexerAccess(syntax, rewrittenReceiver, indexer, rewrittenArguments, argumentNamesOpt, argumentRefKindsOpt, expanded, argsToParamsOpt, defaultArguments, type);
+                return oldNodeOpt != null
+                  ? oldNodeOpt.Update(
+                        rewrittenReceiver,
+                        indexer,
+                        rewrittenArguments,
+                        argumentNamesOpt,
+                        argumentRefKindsOpt,
+                        expanded,
+                        argsToParamsOpt,
+                        defaultArguments,
+                        type
+                    )
+                  : new BoundIndexerAccess(
+                        syntax,
+                        rewrittenReceiver,
+                        indexer,
+                        rewrittenArguments,
+                        argumentNamesOpt,
+                        argumentRefKindsOpt,
+                        expanded,
+                        argsToParamsOpt,
+                        defaultArguments,
+                        type
+                    );
             }
             else
             {
@@ -140,9 +180,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argsToParamsOpt,
                     ref argumentRefKindsOpt,
                     out temps,
-                    enableCallerInfo: ThreeState.True);
+                    enableCallerInfo: ThreeState.True
+                );
 
-                BoundExpression call = MakePropertyGetAccess(syntax, rewrittenReceiver, indexer, rewrittenArguments, getMethod);
+                BoundExpression call = MakePropertyGetAccess(
+                    syntax,
+                    rewrittenReceiver,
+                    indexer,
+                    rewrittenArguments,
+                    getMethod
+                );
 
                 if (temps.IsDefaultOrEmpty)
                 {
@@ -155,22 +202,31 @@ namespace Microsoft.CodeAnalysis.CSharp
                         temps,
                         ImmutableArray<BoundExpression>.Empty,
                         call,
-                        type);
+                        type
+                    );
                 }
             }
         }
 
-        public override BoundNode VisitIndexOrRangePatternIndexerAccess(BoundIndexOrRangePatternIndexerAccess node)
+        public override BoundNode VisitIndexOrRangePatternIndexerAccess(
+            BoundIndexOrRangePatternIndexerAccess node
+        )
         {
             return VisitIndexOrRangePatternIndexerAccess(node, isLeftOfAssignment: false);
         }
 
-        private BoundSequence VisitIndexOrRangePatternIndexerAccess(BoundIndexOrRangePatternIndexerAccess node, bool isLeftOfAssignment)
+        private BoundSequence VisitIndexOrRangePatternIndexerAccess(
+            BoundIndexOrRangePatternIndexerAccess node,
+            bool isLeftOfAssignment
+        )
         {
-            if (TypeSymbol.Equals(
-                node.Argument.Type,
-                _compilation.GetWellKnownType(WellKnownType.System_Index),
-                TypeCompareKind.ConsiderEverything))
+            if (
+                TypeSymbol.Equals(
+                    node.Argument.Type,
+                    _compilation.GetWellKnownType(WellKnownType.System_Index),
+                    TypeCompareKind.ConsiderEverything
+                )
+            )
             {
                 return VisitIndexPatternIndexerAccess(
                     node.Syntax,
@@ -178,22 +234,26 @@ namespace Microsoft.CodeAnalysis.CSharp
                     node.LengthOrCountProperty,
                     (PropertySymbol)node.PatternSymbol,
                     node.Argument,
-                    isLeftOfAssignment: isLeftOfAssignment);
+                    isLeftOfAssignment: isLeftOfAssignment
+                );
             }
             else
             {
-                Debug.Assert(TypeSymbol.Equals(
-                    node.Argument.Type,
-                    _compilation.GetWellKnownType(WellKnownType.System_Range),
-                    TypeCompareKind.ConsiderEverything));
+                Debug.Assert(
+                    TypeSymbol.Equals(
+                        node.Argument.Type,
+                        _compilation.GetWellKnownType(WellKnownType.System_Range),
+                        TypeCompareKind.ConsiderEverything
+                    )
+                );
                 return VisitRangePatternIndexerAccess(
                     node.Receiver,
                     node.LengthOrCountProperty,
                     (MethodSymbol)node.PatternSymbol,
-                    node.Argument);
+                    node.Argument
+                );
             }
         }
-
 
         private BoundSequence VisitIndexPatternIndexerAccess(
             SyntaxNode syntax,
@@ -201,7 +261,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             PropertySymbol lengthOrCountProperty,
             PropertySymbol intIndexer,
             BoundExpression argument,
-            bool isLeftOfAssignment)
+            bool isLeftOfAssignment
+        )
         {
             // Lowered code:
             // ref var receiver = receiverExpr;
@@ -216,11 +277,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 VisitExpression(receiver),
                 out var receiverStore,
                 // Store the receiver as a ref local if it's a value type to ensure side effects are propagated
-                receiver.Type.IsReferenceType ? RefKind.None : RefKind.Ref);
-            var lengthLocal = F.StoreToTemp(F.Property(receiverLocal, lengthOrCountProperty), out var lengthStore);
+                receiver.Type.IsReferenceType ? RefKind.None : RefKind.Ref
+            );
+            var lengthLocal = F.StoreToTemp(
+                F.Property(receiverLocal, lengthOrCountProperty),
+                out var lengthStore
+            );
             var indexLocal = F.StoreToTemp(
                 MakePatternIndexOffsetExpression(argument, lengthLocal, out bool usedLength),
-                out var indexStore);
+                out var indexStore
+            );
 
             // Hint the array size here because the only case when the length is not needed is if the
             // user writes code like receiver[(Index)offset], as opposed to just receiver[offset]
@@ -255,7 +321,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     defaultArguments: default,
                     intIndexer.Type,
                     oldNodeOpt: null,
-                    isLeftOfAssignment));
+                    isLeftOfAssignment
+                )
+            );
         }
 
         /// <summary>
@@ -277,12 +345,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression MakePatternIndexOffsetExpression(
             BoundExpression unloweredExpr,
             BoundExpression lengthAccess,
-            out bool usedLength)
+            out bool usedLength
+        )
         {
-            Debug.Assert(TypeSymbol.Equals(
-                unloweredExpr.Type,
-                _compilation.GetWellKnownType(WellKnownType.System_Index),
-                TypeCompareKind.ConsiderEverything));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    unloweredExpr.Type,
+                    _compilation.GetWellKnownType(WellKnownType.System_Index),
+                    TypeCompareKind.ConsiderEverything
+                )
+            );
 
             var F = _factory;
 
@@ -290,11 +362,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // If the System.Index argument is `^index`, we can replace the
                 // `argument.GetOffset(length)` call with `length - index`
-                Debug.Assert(hatExpression.Operand is { Type: { SpecialType: SpecialType.System_Int32 } });
+                Debug.Assert(
+                    hatExpression.Operand is { Type: { SpecialType: SpecialType.System_Int32 } }
+                );
                 usedLength = true;
                 return F.IntSubtract(lengthAccess, VisitExpression(hatExpression.Operand));
             }
-            else if (unloweredExpr is BoundConversion { Operand: { Type: { SpecialType: SpecialType.System_Int32 } } operand })
+            else if (
+                unloweredExpr is BoundConversion
+                {
+                    Operand: { Type: { SpecialType: SpecialType.System_Int32 } } operand
+                }
+            )
             {
                 // If the System.Index argument is a conversion from int to Index we
                 // can return the int directly
@@ -307,7 +386,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return F.Call(
                     VisitExpression(unloweredExpr),
                     WellKnownMember.System_Index__GetOffset,
-                    lengthAccess);
+                    lengthAccess
+                );
             }
         }
 
@@ -315,12 +395,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression receiver,
             PropertySymbol lengthOrCountProperty,
             MethodSymbol sliceMethod,
-            BoundExpression rangeArg)
+            BoundExpression rangeArg
+        )
         {
-            Debug.Assert(TypeSymbol.Equals(
-                rangeArg.Type,
-                _compilation.GetWellKnownType(WellKnownType.System_Range),
-                TypeCompareKind.ConsiderEverything));
+            Debug.Assert(
+                TypeSymbol.Equals(
+                    rangeArg.Type,
+                    _compilation.GetWellKnownType(WellKnownType.System_Range),
+                    TypeCompareKind.ConsiderEverything
+                )
+            );
 
             // Lowered code without optimizations:
             // var receiver = receiverExpr;
@@ -336,7 +420,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             var sideEffectsBuilder = ArrayBuilder<BoundExpression>.GetInstance();
 
             var receiverLocal = F.StoreToTemp(VisitExpression(receiver), out var receiverStore);
-            var lengthLocal = F.StoreToTemp(F.Property(receiverLocal, lengthOrCountProperty), out var lengthStore);
+            var lengthLocal = F.StoreToTemp(
+                F.Property(receiverLocal, lengthOrCountProperty),
+                out var lengthStore
+            );
 
             localsBuilder.Add(receiverLocal.LocalSymbol);
             sideEffectsBuilder.Add(receiverStore);
@@ -347,7 +434,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // If we know that the input is a range expression, we can
                 // optimize by pulling it apart inline, so
-                // 
+                //
                 // Range range = argumentExpr;
                 // int start = range.Start.GetOffset(length)
                 // int rangeSize = range.End.GetOffset(length) - start
@@ -362,8 +449,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (rangeExpr.LeftOperandOpt is BoundExpression left)
                 {
                     var startLocal = F.StoreToTemp(
-                        MakePatternIndexOffsetExpression(rangeExpr.LeftOperandOpt, lengthLocal, out usedLength),
-                        out var startStore);
+                        MakePatternIndexOffsetExpression(
+                            rangeExpr.LeftOperandOpt,
+                            lengthLocal,
+                            out usedLength
+                        ),
+                        out var startStore
+                    );
 
                     localsBuilder.Add(startLocal.LocalSymbol);
                     sideEffectsBuilder.Add(startStore);
@@ -380,7 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     endExpr = MakePatternIndexOffsetExpression(
                         right,
                         lengthLocal,
-                        out bool usedLengthTemp);
+                        out bool usedLengthTemp
+                    );
                     usedLength |= usedLengthTemp;
                 }
                 else
@@ -400,7 +493,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var rangeSizeLocal = F.StoreToTemp(
                     F.IntSubtract(endExpr, startExpr),
-                    out var rangeStore);
+                    out var rangeStore
+                );
 
                 localsBuilder.Add(rangeSizeLocal.LocalSymbol);
                 sideEffectsBuilder.Add(rangeStore);
@@ -417,10 +511,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var startLocal = F.StoreToTemp(
                     F.Call(
-                        F.Call(rangeLocal, F.WellKnownMethod(WellKnownMember.System_Range__get_Start)),
+                        F.Call(
+                            rangeLocal,
+                            F.WellKnownMethod(WellKnownMember.System_Range__get_Start)
+                        ),
                         F.WellKnownMethod(WellKnownMember.System_Index__GetOffset),
-                        lengthLocal),
-                    out var startStore);
+                        lengthLocal
+                    ),
+                    out var startStore
+                );
 
                 localsBuilder.Add(startLocal.LocalSymbol);
                 sideEffectsBuilder.Add(startStore);
@@ -429,11 +528,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var rangeSizeLocal = F.StoreToTemp(
                     F.IntSubtract(
                         F.Call(
-                            F.Call(rangeLocal, F.WellKnownMethod(WellKnownMember.System_Range__get_End)),
+                            F.Call(
+                                rangeLocal,
+                                F.WellKnownMethod(WellKnownMember.System_Range__get_End)
+                            ),
                             F.WellKnownMethod(WellKnownMember.System_Index__GetOffset),
-                            lengthLocal),
-                        startExpr),
-                    out var rangeSizeStore);
+                            lengthLocal
+                        ),
+                        startExpr
+                    ),
+                    out var rangeSizeStore
+                );
 
                 localsBuilder.Add(rangeSizeLocal.LocalSymbol);
                 sideEffectsBuilder.Add(rangeSizeStore);
@@ -443,7 +548,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return (BoundSequence)F.Sequence(
                 localsBuilder.ToImmutableAndFree(),
                 sideEffectsBuilder.ToImmutableAndFree(),
-                F.Call(receiverLocal, sliceMethod, startExpr, rangeSizeExpr));
+                F.Call(receiverLocal, sliceMethod, startExpr, rangeSizeExpr)
+            );
         }
     }
 }

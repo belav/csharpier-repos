@@ -50,8 +50,10 @@ namespace System.Diagnostics
         public StackTrace(int skipFrames)
         {
             if (skipFrames < 0)
-                throw new ArgumentOutOfRangeException(nameof(skipFrames),
-                    SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(skipFrames),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             InitializeForCurrentThread(skipFrames + METHODS_TO_SKIP, false);
         }
@@ -63,8 +65,10 @@ namespace System.Diagnostics
         public StackTrace(int skipFrames, bool fNeedFileInfo)
         {
             if (skipFrames < 0)
-                throw new ArgumentOutOfRangeException(nameof(skipFrames),
-                    SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(skipFrames),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             InitializeForCurrentThread(skipFrames + METHODS_TO_SKIP, fNeedFileInfo);
         }
@@ -101,8 +105,10 @@ namespace System.Diagnostics
                 throw new ArgumentNullException(nameof(e));
 
             if (skipFrames < 0)
-                throw new ArgumentOutOfRangeException(nameof(skipFrames),
-                    SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(skipFrames),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             InitializeForException(e, skipFrames + METHODS_TO_SKIP, false);
         }
@@ -117,8 +123,10 @@ namespace System.Diagnostics
                 throw new ArgumentNullException(nameof(e));
 
             if (skipFrames < 0)
-                throw new ArgumentOutOfRangeException(nameof(skipFrames),
-                    SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(skipFrames),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             InitializeForException(e, skipFrames + METHODS_TO_SKIP, fNeedFileInfo);
         }
@@ -184,7 +192,7 @@ namespace System.Diagnostics
         internal enum TraceFormat
         {
             Normal,
-            TrailingNewLine,        // include a trailing new line character
+            TrailingNewLine, // include a trailing new line character
         }
 
 #if !CORERT
@@ -205,15 +213,20 @@ namespace System.Diagnostics
             // as this is a special case and we don't want to have "Word_At" on stack traces.
             string word_At = SR.GetResourceString(nameof(SR.Word_At), defaultString: "at");
             // We also want to pass in a default for inFileLineNumber.
-            string inFileLineNum = SR.GetResourceString(nameof(SR.StackTrace_InFileLineNumber), defaultString: "in {0}:line {1}");
-            string inFileILOffset = SR.GetResourceString(nameof(SR.StackTrace_InFileILOffset), defaultString: "in {0}:token 0x{1:x}+0x{2:x}");
+            string inFileLineNum = SR.GetResourceString(
+                nameof(SR.StackTrace_InFileLineNumber),
+                defaultString: "in {0}:line {1}"
+            );
+            string inFileILOffset = SR.GetResourceString(
+                nameof(SR.StackTrace_InFileILOffset),
+                defaultString: "in {0}:token 0x{1:x}+0x{2:x}"
+            );
             bool fFirstFrame = true;
             for (int iFrameIndex = 0; iFrameIndex < _numOfFrames; iFrameIndex++)
             {
                 StackFrame? sf = GetFrame(iFrameIndex);
                 MethodBase? mb = sf?.GetMethod();
-                if (mb != null && (ShowInStackTrace(mb) ||
-                                   (iFrameIndex == _numOfFrames - 1))) // Don't filter last frame
+                if (mb != null && (ShowInStackTrace(mb) || (iFrameIndex == _numOfFrames - 1))) // Don't filter last frame
                 {
                     // We want a newline at the end of every line except for the last
                     if (fFirstFrame)
@@ -227,7 +240,13 @@ namespace System.Diagnostics
                     Type? declaringType = mb.DeclaringType;
                     string methodName = mb.Name;
                     bool methodChanged = false;
-                    if (declaringType != null && declaringType.IsDefined(typeof(CompilerGeneratedAttribute), inherit: false))
+                    if (
+                        declaringType != null
+                        && declaringType.IsDefined(
+                            typeof(CompilerGeneratedAttribute),
+                            inherit: false
+                        )
+                    )
                     {
                         isAsync = declaringType.IsAssignableTo(typeof(IAsyncStateMachine));
                         if (isAsync || declaringType.IsAssignableTo(typeof(IEnumerator)))
@@ -322,7 +341,12 @@ namespace System.Diagnostics
                         {
                             // tack on " in c:\tmp\MyFile.cs:line 5"
                             sb.Append(' ');
-                            sb.AppendFormat(CultureInfo.InvariantCulture, inFileLineNum, fileName, sf.GetFileLineNumber());
+                            sb.AppendFormat(
+                                CultureInfo.InvariantCulture,
+                                inFileLineNum,
+                                fileName,
+                                sf.GetFileLineNumber()
+                            );
                         }
                         else if (LocalAppContextSwitches.ShowILOffsets && mb.ReflectedType != null)
                         {
@@ -331,9 +355,15 @@ namespace System.Diagnostics
                             {
                                 int token = mb.MetadataToken;
                                 sb.Append(' ');
-                                sb.AppendFormat(CultureInfo.InvariantCulture, inFileILOffset, assemblyName, token, sf.GetILOffset());
+                                sb.AppendFormat(
+                                    CultureInfo.InvariantCulture,
+                                    inFileILOffset,
+                                    assemblyName,
+                                    token,
+                                    sf.GetILOffset()
+                                );
                             }
-                            catch (System.InvalidOperationException) {}
+                            catch (System.InvalidOperationException) { }
                         }
                     }
 
@@ -342,8 +372,12 @@ namespace System.Diagnostics
                     {
                         sb.AppendLine();
                         // Passing default for Exception_EndStackTraceFromPreviousThrow in case SR.UsingResourceKeys is set.
-                        sb.Append(SR.GetResourceString(nameof(SR.Exception_EndStackTraceFromPreviousThrow),
-                            defaultString: "--- End of stack trace from previous location ---"));
+                        sb.Append(
+                            SR.GetResourceString(
+                                nameof(SR.Exception_EndStackTraceFromPreviousThrow),
+                                defaultString: "--- End of stack trace from previous location ---"
+                            )
+                        );
                     }
                 }
             }
@@ -376,8 +410,10 @@ namespace System.Diagnostics
 
                 Type? declaringType = mb.DeclaringType;
                 // Methods don't always have containing types, for example dynamic RefEmit generated methods.
-                if (declaringType != null &&
-                    declaringType.IsDefined(typeof(StackTraceHiddenAttribute), inherit: false))
+                if (
+                    declaringType != null
+                    && declaringType.IsDefined(typeof(StackTraceHiddenAttribute), inherit: false)
+                )
                 {
                     // Don't show where StackTraceHidden is applied to the containing Type of the method.
                     return false;
@@ -393,7 +429,10 @@ namespace System.Diagnostics
             return true;
         }
 
-        private static bool TryResolveStateMachineMethod(ref MethodBase method, out Type declaringType)
+        private static bool TryResolveStateMachineMethod(
+            ref MethodBase method,
+            out Type declaringType
+        )
         {
             Debug.Assert(method != null);
             Debug.Assert(method.DeclaringType != null);
@@ -406,11 +445,20 @@ namespace System.Diagnostics
                 return false;
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-                Justification = "Using Reflection to find the state machine's corresponding method is safe because the corresponding method is the only " +
-                                "caller of the state machine. If the state machine is present, the corresponding method will be, too.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2070:UnrecognizedReflectionPattern",
+                Justification = "Using Reflection to find the state machine's corresponding method is safe because the corresponding method is the only "
+                    + "caller of the state machine. If the state machine is present, the corresponding method will be, too."
+            )]
             static MethodInfo[]? GetDeclaredMethods(Type type) =>
-                type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                type.GetMethods(
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Static
+                        | BindingFlags.Instance
+                        | BindingFlags.DeclaredOnly
+                );
 
             MethodInfo[]? methods = GetDeclaredMethods(parentType);
             if (methods == null)
@@ -420,19 +468,23 @@ namespace System.Diagnostics
 
             foreach (MethodInfo candidateMethod in methods)
             {
-                IEnumerable<StateMachineAttribute>? attributes = candidateMethod.GetCustomAttributes<StateMachineAttribute>(inherit: false);
+                IEnumerable<StateMachineAttribute>? attributes =
+                    candidateMethod.GetCustomAttributes<StateMachineAttribute>(inherit: false);
                 if (attributes == null)
                 {
                     continue;
                 }
 
-                bool foundAttribute = false, foundIteratorAttribute = false;
+                bool foundAttribute = false,
+                    foundIteratorAttribute = false;
                 foreach (StateMachineAttribute asma in attributes)
                 {
                     if (asma.StateMachineType == declaringType)
                     {
                         foundAttribute = true;
-                        foundIteratorAttribute |= asma is IteratorStateMachineAttribute || asma is AsyncIteratorStateMachineAttribute;
+                        foundIteratorAttribute |=
+                            asma is IteratorStateMachineAttribute
+                            || asma is AsyncIteratorStateMachineAttribute;
                     }
                 }
 

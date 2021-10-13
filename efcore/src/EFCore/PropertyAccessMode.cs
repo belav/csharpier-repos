@@ -29,7 +29,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         Field,
-
         /// <summary>
         ///     <para>
         ///         Enforces that all accesses to the property must go through the field when
@@ -45,7 +44,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         FieldDuringConstruction,
-
         /// <summary>
         ///     <para>
         ///         Enforces that all accesses to the property must go through the property
@@ -57,7 +55,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         Property,
-
         /// <summary>
         ///     <para>
         ///         All accesses to the property goes directly to the field, unless the field is
@@ -65,7 +62,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         PreferField,
-
         /// <summary>
         ///     <para>
         ///         All accesses to the property when constructing new entity instances goes directly
@@ -76,7 +72,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         PreferFieldDuringConstruction,
-
         /// <summary>
         ///     <para>
         ///         All accesses to the property go through the property, unless there is no property or

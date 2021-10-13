@@ -7,7 +7,8 @@ namespace JitTest
 {
     internal class Test
     {
-        private static long s_op1,s_op2;
+        private static long s_op1,
+            s_op2;
         private static bool check(long product, bool overflow)
         {
             Console.Write("Multiplying {0} and {1}...", s_op1, s_op2);
@@ -66,7 +67,7 @@ namespace JitTest
 
             Console.WriteLine("Test passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Test failed");
             return 1;
         }

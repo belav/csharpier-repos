@@ -27,7 +27,10 @@ namespace Microsoft.AspNetCore.Http.Tests
         [Fact]
         public void AddHttpContextAccessor_ThrowsWithoutServices()
         {
-            Assert.Throws<ArgumentNullException>("services", () => HttpServiceCollectionExtensions.AddHttpContextAccessor(null));
+            Assert.Throws<ArgumentNullException>(
+                "services",
+                () => HttpServiceCollectionExtensions.AddHttpContextAccessor(null)
+            );
         }
     }
 }

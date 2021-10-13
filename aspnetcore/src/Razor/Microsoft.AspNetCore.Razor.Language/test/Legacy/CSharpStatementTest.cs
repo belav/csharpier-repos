@@ -67,7 +67,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void ElseIfClause()
         {
-            ParseDocumentTest("@if(true) { foo(); } else if(false) { foo(); } else if(!false) { foo(); }");
+            ParseDocumentTest(
+                "@if(true) { foo(); } else if(false) { foo(); } else if(!false) { foo(); }"
+            );
         }
 
         [Fact]
@@ -85,32 +87,40 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void CatchClause()
         {
-            ParseDocumentTest("@try { foo(); } catch(IOException ioex) { handleIO(); } catch(Exception ex) { handleOther(); }");
+            ParseDocumentTest(
+                "@try { foo(); } catch(IOException ioex) { handleIO(); } catch(Exception ex) { handleOther(); }"
+            );
         }
 
         [Fact]
         public void ExceptionFilter_TryCatchWhenComplete_SingleLine()
         {
-            ParseDocumentTest("@try { someMethod(); } catch(Exception) when (true) { handleIO(); }");
+            ParseDocumentTest(
+                "@try { someMethod(); } catch(Exception) when (true) { handleIO(); }"
+            );
         }
 
         [Fact]
         public void ExceptionFilter_TryCatchWhenFinallyComplete_SingleLine()
         {
-            ParseDocumentTest("@try { A(); } catch(Exception) when (true) { B(); } finally { C(); }");
+            ParseDocumentTest(
+                "@try { A(); } catch(Exception) when (true) { B(); } finally { C(); }"
+            );
         }
 
         [Fact]
         public void ExceptionFilter_TryCatchWhenCatchWhenComplete_SingleLine()
         {
-            ParseDocumentTest("@try { A(); } catch(Exception) when (true) { B(); } catch(IOException) when (false) { C(); }");
+            ParseDocumentTest(
+                "@try { A(); } catch(Exception) when (true) { B(); } catch(IOException) when (false) { C(); }"
+            );
         }
 
         [Fact]
         public void ExceptionFilter_MultiLine()
         {
             ParseDocumentTest(
-@"@try
+                @"@try
 {
 A();
 }
@@ -121,13 +131,16 @@ B();
 catch(IOException) when (false)
 {
 C();
-}");
+}"
+            );
         }
 
         [Fact]
         public void ExceptionFilter_NestedTryCatchWhen()
         {
-            ParseDocumentTest("@{try { someMethod(); } catch(Exception) when (true) { handleIO(); }}");
+            ParseDocumentTest(
+                "@{try { someMethod(); } catch(Exception) when (true) { handleIO(); }}"
+            );
         }
 
         [Fact]
@@ -181,7 +194,9 @@ C();
         [Fact]
         public void Using_VariableDeclaration_Complex()
         {
-            ParseDocumentTest("@{ using Some.Disposable.TypeName foo = GetDisposable<Some.Disposable.TypeName>(() => { using var bar = otherDisposable; }); }");
+            ParseDocumentTest(
+                "@{ using Some.Disposable.TypeName foo = GetDisposable<Some.Disposable.TypeName>(() => { using var bar = otherDisposable; }); }"
+            );
         }
 
         [Fact]
@@ -223,7 +238,9 @@ C();
         [Fact]
         public void UsingTypeAlias()
         {
-            ParseDocumentTest("@using StringDictionary = System.Collections.Generic.Dictionary<string, string>");
+            ParseDocumentTest(
+                "@using StringDictionary = System.Collections.Generic.Dictionary<string, string>"
+            );
         }
 
         [Fact]

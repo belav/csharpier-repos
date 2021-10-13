@@ -358,7 +358,13 @@ internal class TestApp
         }
         AA.init_all(0);
         loc_x = new AA(0, 100);
-        if (test_89(new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } }, 1, 1) != 100)
+        if (
+            test_89(
+                new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } },
+                1,
+                1
+            ) != 100
+        )
         {
             Console.WriteLine("test_89() failed.");
             return 189;
@@ -631,7 +637,13 @@ internal class TestApp
         }
         AA.init_all(0);
         loc_x = new AA(0, 100);
-        if (test_362(new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } }, 1, 1) != 100)
+        if (
+            test_362(
+                new B[][] { new B[] { new B(), new B() }, new B[] { new B(), loc_x.m_b } },
+                1,
+                1
+            ) != 100
+        )
         {
             Console.WriteLine("test_362() failed.");
             return 462;

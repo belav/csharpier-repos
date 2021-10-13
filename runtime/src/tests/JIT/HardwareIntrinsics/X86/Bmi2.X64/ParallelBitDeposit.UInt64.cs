@@ -131,11 +131,18 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi2.X64).GetMethod(nameof(Bmi2.X64.ParallelBitDeposit), new Type[] { typeof(UInt64), typeof(UInt64) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
-                                     });
+            var result = typeof(Bmi2.X64).GetMethod(
+                    nameof(Bmi2.X64.ParallelBitDeposit),
+                    new Type[] { typeof(UInt64), typeof(UInt64) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
+                    }
+                );
 
             ValidateResult(_data1, _data2, (UInt64)result);
         }
@@ -144,10 +151,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Bmi2.X64.ParallelBitDeposit(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = Bmi2.X64.ParallelBitDeposit(_clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, result);
         }
@@ -220,37 +224,43 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(UInt64 left, UInt64 right, UInt64 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64 left,
+            UInt64 right,
+            UInt64 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
-            
-// The validation logic defined here for Bmi2.ParallelBitDeposit and Bmi2.ParallelBitExtract is
-// based on the 'Operation' pseudo-code defined for the pdep and pext instruction in the 'Intel®
-// 64 and IA-32 Architectures Software Developer’s Manual; Volume 2 (2A, 2B, 2C & 2D): Instruction
-// Set Reference, A-Z'
+            // The validation logic defined here for Bmi2.ParallelBitDeposit and Bmi2.ParallelBitExtract is
+            // based on the 'Operation' pseudo-code defined for the pdep and pext instruction in the 'Intel®
+            // 64 and IA-32 Architectures Software Developer’s Manual; Volume 2 (2A, 2B, 2C & 2D): Instruction
+            // Set Reference, A-Z'
 
-ulong temp = left;
-ulong mask = right;
-ulong dest = 0;
-byte m = 0, k = 0;
+            ulong temp = left;
+            ulong mask = right;
+            ulong dest = 0;
+            byte m = 0,
+                k = 0;
 
-while (m < 64)
-{
-    if (((mask >> m) & 1) == 1) // Extract bit at index m of mask
-    {
-        dest |= (((temp >> k) & 1) << m); // Extract bit at index k of temp and insert to index m of dest
-        k++;
-    }
-    m++;
-}
+            while (m < 64)
+            {
+                if (((mask >> m) & 1) == 1) // Extract bit at index m of mask
+                {
+                    dest |= (((temp >> k) & 1) << m); // Extract bit at index k of temp and insert to index m of dest
+                    k++;
+                }
+                m++;
+            }
 
-isUnexpectedResult = (dest != result);
-
+            isUnexpectedResult = (dest != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Bmi2.X64)}.{nameof(Bmi2.X64.ParallelBitDeposit)}<UInt64>(UInt64, UInt64): ParallelBitDeposit failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Bmi2.X64)}.{nameof(Bmi2.X64.ParallelBitDeposit)}<UInt64>(UInt64, UInt64): ParallelBitDeposit failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

@@ -189,7 +189,9 @@ namespace Microsoft.AspNetCore.Components.Forms
             await inputSelectComponent.SetCurrentValueAsStringAsync("invalidNumber");
 
             // Assert
-            var validationMessages = rootComponent.EditContext.GetValidationMessages(fieldIdentifier);
+            var validationMessages = rootComponent.EditContext.GetValidationMessages(
+                fieldIdentifier
+            );
             Assert.NotEmpty(validationMessages);
             Assert.Contains("The Some number field is not valid.", validationMessages);
         }
@@ -250,7 +252,12 @@ namespace Microsoft.AspNetCore.Components.Forms
                 // (e.g., from @bind), except to simplify the test code there's an InvokeAsync
                 // here. In production code it wouldn't normally be required because @bind
                 // calls run on the sync context anyway.
-                await InvokeAsync(() => { base.CurrentValueAsString = value; });
+                await InvokeAsync(
+                    () =>
+                    {
+                        base.CurrentValueAsString = value;
+                    }
+                );
             }
         }
     }

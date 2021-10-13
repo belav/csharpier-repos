@@ -9,7 +9,10 @@ namespace System.Collections.Tests
 {
     public abstract partial class IEnumerable_Generic_Tests<T> : TestBase<T>
     {
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         [MemberData(nameof(ValidCollectionSizes))]
         public void IGenericSharedAPI_SerializeDeserialize(int count)
         {

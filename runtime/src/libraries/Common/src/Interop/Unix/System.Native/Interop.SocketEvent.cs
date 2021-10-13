@@ -34,18 +34,43 @@ internal static partial class Interop
         internal static extern Error CloseSocketEventPort(IntPtr port);
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_CreateSocketEventBuffer")]
-        internal static extern unsafe Error CreateSocketEventBuffer(int count, out SocketEvent* buffer);
+        internal static extern unsafe Error CreateSocketEventBuffer(
+            int count,
+            out SocketEvent* buffer
+        );
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_FreeSocketEventBuffer")]
         internal static extern unsafe Error FreeSocketEventBuffer(SocketEvent* buffer);
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_TryChangeSocketEventRegistration")]
-        internal static extern Error TryChangeSocketEventRegistration(IntPtr port, SafeHandle socket, SocketEvents currentEvents, SocketEvents newEvents, IntPtr data);
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_TryChangeSocketEventRegistration"
+        )]
+        internal static extern Error TryChangeSocketEventRegistration(
+            IntPtr port,
+            SafeHandle socket,
+            SocketEvents currentEvents,
+            SocketEvents newEvents,
+            IntPtr data
+        );
 
-        [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_TryChangeSocketEventRegistration")]
-        internal static extern Error TryChangeSocketEventRegistration(IntPtr port, IntPtr socket, SocketEvents currentEvents, SocketEvents newEvents, IntPtr data);
+        [DllImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_TryChangeSocketEventRegistration"
+        )]
+        internal static extern Error TryChangeSocketEventRegistration(
+            IntPtr port,
+            IntPtr socket,
+            SocketEvents currentEvents,
+            SocketEvents newEvents,
+            IntPtr data
+        );
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_WaitForSocketEvents")]
-        internal static extern unsafe Error WaitForSocketEvents(IntPtr port, SocketEvent* buffer, int* count);
+        internal static extern unsafe Error WaitForSocketEvents(
+            IntPtr port,
+            SocketEvent* buffer,
+            int* count
+        );
     }
 }

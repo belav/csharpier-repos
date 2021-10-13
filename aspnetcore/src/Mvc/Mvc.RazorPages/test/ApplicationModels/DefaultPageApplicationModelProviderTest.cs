@@ -28,12 +28,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var context = new PageApplicationModelProviderContext(descriptor, typeInfo);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => provider.OnProvidersExecuting(context)
+            );
 
             // Assert
             Assert.Equal(
-                 $"The type '{typeInfo.FullName}' is not a valid page. A page must inherit from '{typeof(PageBase).FullName}'.",
-                 ex.Message);
+                $"The type '{typeInfo.FullName}' is not a valid page. A page must inherit from '{typeof(PageBase).FullName}'.",
+                ex.Message
+            );
         }
 
         private class InvalidPageWithWrongBaseClass : RazorPageBase
@@ -69,12 +72,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var context = new PageApplicationModelProviderContext(descriptor, typeInfo);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => provider.OnProvidersExecuting(context)
+            );
 
             // Assert
             Assert.Equal(
                 $"The type '{typeInfo.FullName}' is not a valid page. A page must define a public, non-static 'Model' property.",
-                ex.Message);
+                ex.Message
+            );
         }
 
         private class PageWithoutModelProperty : PageBase
@@ -92,12 +98,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var context = new PageApplicationModelProviderContext(descriptor, typeInfo);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => provider.OnProvidersExecuting(context)
+            );
 
             // Assert
             Assert.Equal(
                 $"The type '{typeInfo.FullName}' is not a valid page. A page must define a public, non-static 'Model' property.",
-                ex.Message);
+                ex.Message
+            );
         }
 
         private class PageWithNonVisibleModel : PageBase
@@ -117,12 +126,15 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var context = new PageApplicationModelProviderContext(descriptor, typeInfo);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => provider.OnProvidersExecuting(context)
+            );
 
             // Assert
             Assert.Equal(
                 $"The type '{typeInfo.FullName}' is not a valid page. A page must define a public, non-static 'Model' property.",
-                ex.Message);
+                ex.Message
+            );
         }
 
         private class PageWithStaticModel : PageBase
@@ -146,28 +158,52 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             // Assert
             Assert.NotNull(context.PageApplicationModel);
-            var propertiesOnPage = context.PageApplicationModel.HandlerProperties
-                .Where(p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo);
+            var propertiesOnPage = context.PageApplicationModel.HandlerProperties.Where(
+                p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo
+            );
             Assert.Collection(
                 propertiesOnPage.OrderBy(p => p.PropertyName),
                 property =>
                 {
-                    Assert.Equal(typeInfo.GetProperty(nameof(PageWithModelWithoutPageModelAttribute.Model)), property.PropertyInfo);
-                    Assert.Equal(nameof(PageWithModelWithoutPageModelAttribute.Model), property.PropertyName);
+                    Assert.Equal(
+                        typeInfo.GetProperty(nameof(PageWithModelWithoutPageModelAttribute.Model)),
+                        property.PropertyInfo
+                    );
+                    Assert.Equal(
+                        nameof(PageWithModelWithoutPageModelAttribute.Model),
+                        property.PropertyName
+                    );
                 },
                 property =>
                 {
-                    Assert.Equal(typeInfo.GetProperty(nameof(PageWithModelWithoutPageModelAttribute.Property1)), property.PropertyInfo);
+                    Assert.Equal(
+                        typeInfo.GetProperty(
+                            nameof(PageWithModelWithoutPageModelAttribute.Property1)
+                        ),
+                        property.PropertyInfo
+                    );
                     Assert.Null(property.BindingInfo);
-                    Assert.Equal(nameof(PageWithModelWithoutPageModelAttribute.Property1), property.PropertyName);
+                    Assert.Equal(
+                        nameof(PageWithModelWithoutPageModelAttribute.Property1),
+                        property.PropertyName
+                    );
                 },
                 property =>
                 {
-                    Assert.Equal(typeInfo.GetProperty(nameof(PageWithModelWithoutPageModelAttribute.Property2)), property.PropertyInfo);
-                    Assert.Equal(nameof(PageWithModelWithoutPageModelAttribute.Property2), property.PropertyName);
+                    Assert.Equal(
+                        typeInfo.GetProperty(
+                            nameof(PageWithModelWithoutPageModelAttribute.Property2)
+                        ),
+                        property.PropertyInfo
+                    );
+                    Assert.Equal(
+                        nameof(PageWithModelWithoutPageModelAttribute.Property2),
+                        property.PropertyName
+                    );
                     Assert.NotNull(property.BindingInfo);
                     Assert.Equal(BindingSource.Path, property.BindingInfo.BindingSource);
-                });
+                }
+            );
         }
 
         private class PageWithModelWithoutPageModelAttribute : Page
@@ -205,11 +241,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 context.PageApplicationModel.HandlerProperties.OrderBy(p => p.PropertyName),
                 property =>
                 {
-                    Assert.Equal(modelType.GetProperty(nameof(ModelWithPageModelAttribute.Property)), property.PropertyInfo);
-                    Assert.Equal(nameof(ModelWithPageModelAttribute.Property), property.PropertyName);
+                    Assert.Equal(
+                        modelType.GetProperty(nameof(ModelWithPageModelAttribute.Property)),
+                        property.PropertyInfo
+                    );
+                    Assert.Equal(
+                        nameof(ModelWithPageModelAttribute.Property),
+                        property.PropertyName
+                    );
                     Assert.NotNull(property.BindingInfo);
                     Assert.Equal(BindingSource.Path, property.BindingInfo.BindingSource);
-                });
+                }
+            );
         }
 
         private class PageWithModelWithPageModelAttribute : Page
@@ -245,7 +288,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Assert
             Assert.NotNull(context.PageApplicationModel);
             Assert.Collection(
-                context.PageApplicationModel.HandlerProperties.OrderBy(p => p.PropertyName).Where(p => p.BindingInfo != null),
+                context.PageApplicationModel.HandlerProperties.OrderBy(p => p.PropertyName)
+                    .Where(p => p.BindingInfo != null),
                 property =>
                 {
                     var name = nameof(ModelLevel3.Property2);
@@ -259,7 +303,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     Assert.Equal(typeof(ModelLevel3).GetProperty(name), property.PropertyInfo);
                     Assert.Equal(name, property.PropertyName);
                     Assert.NotNull(property.BindingInfo);
-                });
+                }
+            );
         }
 
         private class BindPropertyAttributeOnBaseModelPage : Page
@@ -323,7 +368,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     Assert.Equal(name, handler.Name);
                     Assert.Equal("Post", handler.HttpMethod);
                     Assert.Equal("DeleteCustomer", handler.HandlerName);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -357,7 +403,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     Assert.Equal(name, property.PropertyName);
                     Assert.NotNull(property.BindingInfo);
                     Assert.Equal(BindingSource.Query, property.BindingInfo.BindingSource);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -387,7 +434,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     Assert.Equal(nameof(ModelWithBindProperty.Property2), property.PropertyName);
                     Assert.NotNull(property.BindingInfo);
                     Assert.Equal(BindingSource.Path, property.BindingInfo.BindingSource);
-                });
+                }
+            );
         }
 
         private class PageWithBindPropertyModel : PageBase
@@ -431,7 +479,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     Assert.Equal(name, handler.Name);
                     Assert.Equal("Get", handler.HttpMethod);
                     Assert.Equal("User", handler.HandlerName);
-                });
+                }
+            );
         }
 
         // We want to test the 'empty' page has no bound properties, and no handler methods.
@@ -441,7 +490,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(EmptyPage).GetTypeInfo();
-            var context = new PageApplicationModelProviderContext(new PageActionDescriptor(), typeInfo);
+            var context = new PageApplicationModelProviderContext(
+                new PageActionDescriptor(),
+                typeInfo
+            );
 
             // Act
             provider.OnProvidersExecuting(context);
@@ -462,7 +514,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(EmptyPageWithPageModel).GetTypeInfo();
-            var context = new PageApplicationModelProviderContext(new PageActionDescriptor(), typeInfo);
+            var context = new PageApplicationModelProviderContext(
+                new PageActionDescriptor(),
+                typeInfo
+            );
 
             // Act
             provider.OnProvidersExecuting(context);
@@ -481,16 +536,29 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             // Copied from generated code
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-            public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; }
+            public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider
+            {
+                get;
+                private set;
+            }
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
             public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; }
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-            public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; }
+            public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component
+            {
+                get;
+                private set;
+            }
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
             public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-            public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<EmptyPage> Html { get; private set; }
-            public global::Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<EmptyPage> ViewData => null;
+            public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<EmptyPage> Html
+            {
+                get;
+                private set;
+            }
+            public global::Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<EmptyPage> ViewData =>
+                null;
             public EmptyPage Model => ViewData.Model;
 
             public override Task ExecuteAsync()
@@ -503,16 +571,29 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             // Copied from generated code
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-            public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; }
+            public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider
+            {
+                get;
+                private set;
+            }
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
             public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; }
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-            public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; }
+            public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component
+            {
+                get;
+                private set;
+            }
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
             public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
             [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-            public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<EmptyPageModel> Html { get; private set; }
-            public global::Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<EmptyPageModel> ViewData => null;
+            public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<EmptyPageModel> Html
+            {
+                get;
+                private set;
+            }
+            public global::Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary<EmptyPageModel> ViewData =>
+                null;
             public EmptyPageModel Model => ViewData.Model;
 
             public override Task ExecuteAsync()
@@ -531,7 +612,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(PageWithFilters).GetTypeInfo();
-            var context = new PageApplicationModelProviderContext(new PageActionDescriptor(), typeInfo);
+            var context = new PageApplicationModelProviderContext(
+                new PageActionDescriptor(),
+                typeInfo
+            );
 
             // Act
             provider.OnProvidersExecuting(context);
@@ -543,7 +627,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 filter => Assert.IsType<TypeFilterAttribute>(filter),
                 filter => Assert.IsType<ServiceFilterAttribute>(filter),
                 filter => Assert.IsType<PageHandlerPageFilter>(filter),
-                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter));
+                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter)
+            );
         }
 
         [ServiceFilter(typeof(Guid))]
@@ -569,7 +654,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var provider = CreateProvider();
             var typeInfo = typeof(PageWithHandlerThatGetsIgnored).GetTypeInfo();
             var modelType = typeof(ModelWithHandler);
-            var context = new PageApplicationModelProviderContext(new PageActionDescriptor(), typeInfo);
+            var context = new PageApplicationModelProviderContext(
+                new PageActionDescriptor(),
+                typeInfo
+            );
 
             // Act
             provider.OnProvidersExecuting(context);
@@ -578,11 +666,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var pageModel = context.PageApplicationModel;
             Assert.Contains(
                 pageModel.HandlerProperties,
-                p => p.PropertyInfo == modelType.GetProperty(nameof(ModelWithHandler.BindMe)));
+                p => p.PropertyInfo == modelType.GetProperty(nameof(ModelWithHandler.BindMe))
+            );
 
             Assert.Collection(
                 pageModel.HandlerMethods,
-                p => Assert.Equal(modelType.GetMethod(nameof(ModelWithHandler.OnGet)), p.MethodInfo));
+                p => Assert.Equal(modelType.GetMethod(nameof(ModelWithHandler.OnGet)), p.MethodInfo)
+            );
 
             Assert.Same(typeof(ModelWithHandler).GetTypeInfo(), pageModel.HandlerType);
             Assert.Same(typeof(ModelWithHandler).GetTypeInfo(), pageModel.ModelType);
@@ -615,23 +705,37 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(PageWithHandler).GetTypeInfo();
-            var context = new PageApplicationModelProviderContext(new PageActionDescriptor(), typeInfo);
+            var context = new PageApplicationModelProviderContext(
+                new PageActionDescriptor(),
+                typeInfo
+            );
 
             // Act
             provider.OnProvidersExecuting(context);
 
             // Assert
             var pageModel = context.PageApplicationModel;
-            var propertiesOnPage = pageModel.HandlerProperties
-                .Where(p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo);
+            var propertiesOnPage = pageModel.HandlerProperties.Where(
+                p => p.PropertyInfo.DeclaringType.GetTypeInfo() == typeInfo
+            );
             Assert.Collection(
                 propertiesOnPage.OrderBy(p => p.PropertyName),
-                p => Assert.Equal(typeInfo.GetProperty(nameof(PageWithHandler.BindMe)), p.PropertyInfo),
-                p => Assert.Equal(typeInfo.GetProperty(nameof(PageWithHandler.Model)), p.PropertyInfo));
+                p =>
+                    Assert.Equal(
+                        typeInfo.GetProperty(nameof(PageWithHandler.BindMe)),
+                        p.PropertyInfo
+                    ),
+                p =>
+                    Assert.Equal(
+                        typeInfo.GetProperty(nameof(PageWithHandler.Model)),
+                        p.PropertyInfo
+                    )
+            );
 
             Assert.Collection(
                 pageModel.HandlerMethods,
-                p => Assert.Equal(typeInfo.GetMethod(nameof(PageWithHandler.OnGet)), p.MethodInfo));
+                p => Assert.Equal(typeInfo.GetMethod(nameof(PageWithHandler.OnGet)), p.MethodInfo)
+            );
 
             Assert.Same(typeof(PageWithHandler).GetTypeInfo(), pageModel.HandlerType);
             Assert.Same(typeof(PocoModel).GetTypeInfo(), pageModel.ModelType);
@@ -667,7 +771,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var provider = CreateProvider();
             var typeInfo = typeof(InheritsMethods).GetTypeInfo();
             var baseType = typeof(TestSetPageModel);
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerMethods(pageModel);
@@ -675,7 +783,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Assert
             var handlerMethods = pageModel.HandlerMethods;
             Assert.Collection(
-                handlerMethods.OrderBy(h => h.MethodInfo.DeclaringType.Name).ThenBy(h => h.MethodInfo.Name),
+                handlerMethods.OrderBy(h => h.MethodInfo.DeclaringType.Name)
+                    .ThenBy(h => h.MethodInfo.Name),
                 handler =>
                 {
                     Assert.Equal(nameof(InheritsMethods.OnGet), handler.MethodInfo.Name);
@@ -690,25 +799,20 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 {
                     Assert.Equal(nameof(TestSetPageModel.OnPost), handler.MethodInfo.Name);
                     Assert.Equal(baseType, handler.MethodInfo.DeclaringType);
-                });
+                }
+            );
         }
 
         private class TestSetPageModel
         {
-            public void OnGet()
-            {
-            }
+            public void OnGet() { }
 
-            public void OnPost()
-            {
-            }
+            public void OnPost() { }
         }
 
         private class InheritsMethods : TestSetPageModel
         {
-            public new void OnGet()
-            {
-            }
+            public new void OnGet() { }
         }
 
         [Fact]
@@ -718,7 +822,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var provider = CreateProvider();
             var typeInfo = typeof(ProtectedModel).GetTypeInfo();
             var baseType = typeof(TestSetPageModel);
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerMethods(pageModel);
@@ -730,13 +838,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private class ProtectedModel
         {
-            protected void OnGet()
-            {
-            }
+            protected void OnGet() { }
 
-            private void OnPost()
-            {
-            }
+            private void OnPost() { }
         }
 
         [Fact]
@@ -745,7 +849,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(GenericClassModel).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerMethods(pageModel);
@@ -757,9 +865,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         private class GenericClassModel
         {
-            public void OnGet<T>()
-            {
-            }
+            public void OnGet<T>() { }
         }
 
         [Fact]
@@ -768,28 +874,29 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(PageModelWithStaticHandler).GetTypeInfo();
-            var expected = typeInfo.GetMethod(nameof(PageModelWithStaticHandler.OnGet), BindingFlags.Public | BindingFlags.Instance);
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var expected = typeInfo.GetMethod(
+                nameof(PageModelWithStaticHandler.OnGet),
+                BindingFlags.Public | BindingFlags.Instance
+            );
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerMethods(pageModel);
 
             // Assert
             var handlerMethods = pageModel.HandlerMethods;
-            Assert.Collection(
-                handlerMethods,
-                handler => Assert.Same(expected, handler.MethodInfo));
+            Assert.Collection(handlerMethods, handler => Assert.Same(expected, handler.MethodInfo));
         }
 
         private class PageModelWithStaticHandler
         {
-            public static void OnGet(string name)
-            {
-            }
+            public static void OnGet(string name) { }
 
-            public void OnGet()
-            {
-            }
+            public void OnGet() { }
         }
 
         [Fact]
@@ -798,26 +905,29 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(PageModelWithAbstractMethod).GetTypeInfo();
-            var expected = typeInfo.GetMethod(nameof(PageModelWithAbstractMethod.OnGet), BindingFlags.Public | BindingFlags.Instance);
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var expected = typeInfo.GetMethod(
+                nameof(PageModelWithAbstractMethod.OnGet),
+                BindingFlags.Public | BindingFlags.Instance
+            );
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerMethods(pageModel);
 
             // Assert
             var handlerMethods = pageModel.HandlerMethods;
-            Assert.Collection(
-                handlerMethods,
-                handler => Assert.Same(expected, handler.MethodInfo));
+            Assert.Collection(handlerMethods, handler => Assert.Same(expected, handler.MethodInfo));
         }
 
         private abstract class PageModelWithAbstractMethod
         {
             public abstract void OnPost(string name);
 
-            public void OnGet()
-            {
-            }
+            public void OnGet() { }
         }
 
         [Fact]
@@ -826,17 +936,22 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(PageWithNonHandlerMethod).GetTypeInfo();
-            var expected = typeInfo.GetMethod(nameof(PageWithNonHandlerMethod.OnGet), BindingFlags.Public | BindingFlags.Instance);
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var expected = typeInfo.GetMethod(
+                nameof(PageWithNonHandlerMethod.OnGet),
+                BindingFlags.Public | BindingFlags.Instance
+            );
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerMethods(pageModel);
 
             // Assert
             var handlerMethods = pageModel.HandlerMethods;
-            Assert.Collection(
-                handlerMethods,
-                handler => Assert.Same(expected, handler.MethodInfo));
+            Assert.Collection(handlerMethods, handler => Assert.Same(expected, handler.MethodInfo));
         }
 
         private class PageWithNonHandlerMethod
@@ -844,9 +959,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             [NonHandler]
             public void OnPost(string name) { }
 
-            public void OnGet()
-            {
-            }
+            public void OnGet() { }
         }
 
         // There are more tests for the parsing elsewhere, this is just testing that it's wired
@@ -857,7 +970,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(PageModelWithHandlerNames).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerMethods(pageModel);
@@ -868,21 +985,22 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 handlerMethods.OrderBy(h => h.MethodInfo.Name),
                 handler =>
                 {
-                    Assert.Same(typeInfo.GetMethod(nameof(PageModelWithHandlerNames.OnPutDeleteAsync)), handler.MethodInfo);
+                    Assert.Same(
+                        typeInfo.GetMethod(nameof(PageModelWithHandlerNames.OnPutDeleteAsync)),
+                        handler.MethodInfo
+                    );
                     Assert.Equal("Put", handler.HttpMethod);
                     Assert.Equal("Delete", handler.HandlerName);
-                });
+                }
+            );
         }
 
         private class PageModelWithHandlerNames
         {
-            public void OnPutDeleteAsync()
-            {
-            }
+            public void OnPutDeleteAsync() { }
 
             public void Foo() // This isn't a valid handler name.
-            {
-            }
+            { }
         }
 
         [Fact]
@@ -892,7 +1010,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var provider = CreateProvider();
             var typeInfo = typeof(PageWithHandlerParameters).GetTypeInfo();
             var expected = typeInfo.GetMethod(nameof(PageWithHandlerParameters.OnPost));
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerMethods(pageModel);
@@ -915,7 +1037,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     Assert.Equal(typeof(int), p.ParameterInfo.ParameterType);
                     Assert.Equal("id", p.ParameterName);
                     Assert.Equal("personId", p.BindingInfo.BinderModelName);
-                });
+                }
+            );
         }
 
         private class PageWithHandlerParameters
@@ -935,7 +1058,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(HidesAProperty).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerProperties(pageModel);
@@ -946,8 +1073,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 properties,
                 p =>
                 {
-                    Assert.Equal(typeof(HidesAProperty).GetTypeInfo(), p.PropertyInfo.DeclaringType.GetTypeInfo());
-                });
+                    Assert.Equal(
+                        typeof(HidesAProperty).GetTypeInfo(),
+                        p.PropertyInfo.DeclaringType.GetTypeInfo()
+                    );
+                }
+            );
         }
 
         private class HasAHiddenProperty
@@ -968,7 +1099,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(ModelSupportsGetOnProperty).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, new object[0]);
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                new object[0]
+            );
 
             // Act
             provider.PopulateHandlerProperties(pageModel);
@@ -979,19 +1114,24 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 properties.OrderBy(p => p.PropertyName),
                 p =>
                 {
-                    Assert.Equal(typeInfo.GetProperty(nameof(ModelSupportsGetOnProperty.Property)), p.PropertyInfo);
+                    Assert.Equal(
+                        typeInfo.GetProperty(nameof(ModelSupportsGetOnProperty.Property)),
+                        p.PropertyInfo
+                    );
                     Assert.NotNull(p.BindingInfo.RequestPredicate);
-                    Assert.True(p.BindingInfo.RequestPredicate(new ActionContext
-                    {
-                        HttpContext = new DefaultHttpContext
-                        {
-                            Request =
+                    Assert.True(
+                        p.BindingInfo.RequestPredicate(
+                            new ActionContext
                             {
-                                Method ="GET",
+                                HttpContext = new DefaultHttpContext
+                                {
+                                    Request = { Method = "GET", }
+                                }
                             }
-                        }
-                    }));
-                });
+                        )
+                    );
+                }
+            );
         }
 
         private class ModelSupportsGetOnProperty
@@ -1008,7 +1148,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void TryParseHandler_ParsesHandlerNames_InvalidData(string methodName)
         {
             // Act
-            var result = DefaultPageApplicationModelPartsProvider.TryParseHandlerMethod(methodName, out var httpMethod, out var handler);
+            var result = DefaultPageApplicationModelPartsProvider.TryParseHandlerMethod(
+                methodName,
+                out var httpMethod,
+                out var handler
+            );
 
             // Assert
             Assert.False(result);
@@ -1025,12 +1169,20 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [InlineData("OnDeleteFooAsync", "Delete", "Foo")]
         [InlineData("OnMadeupLongHandlerName", "Madeup", "LongHandlerName")]
         [InlineData("OnMadeupLongHandlerNameAsync", "Madeup", "LongHandlerName")]
-        public void TryParseHandler_ParsesHandlerNames_ValidData(string methodName, string expectedHttpMethod, string expectedHandler)
+        public void TryParseHandler_ParsesHandlerNames_ValidData(
+            string methodName,
+            string expectedHttpMethod,
+            string expectedHandler
+        )
         {
             // Arrange
 
             // Act
-            var result = DefaultPageApplicationModelPartsProvider.TryParseHandlerMethod(methodName, out var httpMethod, out var handler);
+            var result = DefaultPageApplicationModelPartsProvider.TryParseHandlerMethod(
+                methodName,
+                out var httpMethod,
+                out var handler
+            );
 
             // Assert
             Assert.True(result);
@@ -1079,7 +1231,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(object).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, typeInfo.GetCustomAttributes(inherit: true));
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                typeInfo.GetCustomAttributes(inherit: true)
+            );
 
             // Act
             provider.PopulateFilters(pageModel);
@@ -1087,7 +1243,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Assert
             Assert.Collection(
                 pageModel.Filters,
-                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter));
+                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter)
+            );
         }
 
         [Fact]
@@ -1096,7 +1253,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(FilterModel).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, typeInfo.GetCustomAttributes(inherit: true));
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                typeInfo.GetCustomAttributes(inherit: true)
+            );
 
             // Act
             provider.PopulateFilters(pageModel);
@@ -1105,7 +1266,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             Assert.Collection(
                 pageModel.Filters,
                 filter => Assert.IsType<TypeFilterAttribute>(filter),
-                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter));
+                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter)
+            );
         }
 
         [PageModel]
@@ -1121,7 +1283,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(ModelImplementingAsyncPageFilter).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, typeInfo.GetCustomAttributes(inherit: true));
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                typeInfo.GetCustomAttributes(inherit: true)
+            );
 
             // Act
             provider.PopulateFilters(pageModel);
@@ -1130,12 +1296,16 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             Assert.Collection(
                 pageModel.Filters,
                 filter => Assert.IsType<PageHandlerPageFilter>(filter),
-                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter));
+                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter)
+            );
         }
 
         private class ModelImplementingAsyncPageFilter : IAsyncPageFilter
         {
-            public Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)
+            public Task OnPageHandlerExecutionAsync(
+                PageHandlerExecutingContext context,
+                PageHandlerExecutionDelegate next
+            )
             {
                 throw new NotImplementedException();
             }
@@ -1152,7 +1322,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(ModelImplementingPageFilter).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, typeInfo.GetCustomAttributes(inherit: true));
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                typeInfo.GetCustomAttributes(inherit: true)
+            );
 
             // Act
             provider.PopulateFilters(pageModel);
@@ -1161,7 +1335,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             Assert.Collection(
                 pageModel.Filters,
                 filter => Assert.IsType<PageHandlerPageFilter>(filter),
-                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter));
+                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter)
+            );
         }
 
         private class ModelImplementingPageFilter : IPageFilter
@@ -1188,7 +1363,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var provider = CreateProvider();
             var typeInfo = typeof(DerivedFromPageModel).GetTypeInfo();
-            var pageModel = new PageApplicationModel(new PageActionDescriptor(), typeInfo, typeInfo.GetCustomAttributes(inherit: true));
+            var pageModel = new PageApplicationModel(
+                new PageActionDescriptor(),
+                typeInfo,
+                typeInfo.GetCustomAttributes(inherit: true)
+            );
 
             // Act
             provider.PopulateFilters(pageModel);
@@ -1198,7 +1377,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 pageModel.Filters,
                 filter => Assert.IsType<ServiceFilterAttribute>(filter),
                 filter => Assert.IsType<PageHandlerPageFilter>(filter),
-                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter));
+                filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter)
+            );
         }
 
         [ServiceFilter(typeof(IServiceProvider))]
@@ -1211,7 +1391,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             return new DefaultPageApplicationModelProvider(
                 modelMetadataProvider,
                 Options.Create(new RazorPagesOptions()),
-                new DefaultPageApplicationModelPartsProvider(modelMetadataProvider));
+                new DefaultPageApplicationModelPartsProvider(modelMetadataProvider)
+            );
         }
     }
 }

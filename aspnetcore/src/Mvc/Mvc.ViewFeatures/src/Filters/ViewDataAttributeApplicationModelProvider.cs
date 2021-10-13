@@ -13,9 +13,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
         public int Order => -1000 + 10;
 
         /// <inheritdoc />
-        public void OnProvidersExecuted(ApplicationModelProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(ApplicationModelProviderContext context) { }
 
         /// <inheritdoc />
         public void OnProvidersExecuting(ApplicationModelProviderContext context)
@@ -29,7 +27,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             {
                 var controllerType = controllerModel.ControllerType.AsType();
 
-                var viewDataProperties = ViewDataAttributePropertyProvider.GetViewDataProperties(controllerType);
+                var viewDataProperties = ViewDataAttributePropertyProvider.GetViewDataProperties(
+                    controllerType
+                );
                 if (viewDataProperties == null)
                 {
                     continue;

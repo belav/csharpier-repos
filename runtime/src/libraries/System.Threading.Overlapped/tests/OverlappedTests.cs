@@ -90,14 +90,16 @@ public static partial class OverlappedTests
         try
         {
             Assert.True(nativeOverlapped != null);
-            Assert.Throws<InvalidOperationException>(() => ov.Pack(new IOCompletionCallback(callback), null));
+            Assert.Throws<InvalidOperationException>(
+                () => ov.Pack(new IOCompletionCallback(callback), null)
+            );
         }
+
         finally
         {
             Overlapped.Free(nativeOverlapped);
         }
     }
-
 
     [Fact]
     public static unsafe void PackNegTest1()
@@ -113,8 +115,11 @@ public static partial class OverlappedTests
         try
         {
             Assert.True(nativeOverlapped != null);
-            Assert.Throws<InvalidOperationException>(() => ov.Pack(new IOCompletionCallback(callback)));
+            Assert.Throws<InvalidOperationException>(
+                () => ov.Pack(new IOCompletionCallback(callback))
+            );
         }
+
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -138,6 +143,7 @@ public static partial class OverlappedTests
             Overlapped ov1 = Overlapped.Unpack(nativeOverlapped);
             Assert.Same(ov, ov1);
         }
+
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -162,6 +168,7 @@ public static partial class OverlappedTests
 
             Assert.True(helper.Wait());
         }
+
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -186,6 +193,7 @@ public static partial class OverlappedTests
 
             Assert.True(helper.Wait());
         }
+
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -194,9 +202,8 @@ public static partial class OverlappedTests
 
     internal static unsafe IOCompletionCallback MyCallback(AsyncHelper helper)
     {
-        IOCompletionCallback del = delegate (uint param1, uint param2, NativeOverlapped* overlapped)
+        IOCompletionCallback del = delegate(uint param1, uint param2, NativeOverlapped* overlapped)
         {
-
             Overlapped ov = new Overlapped();
             NativeOverlapped* nativeOverlapped2 = ov.Pack(helper.Callback, null);
             ThreadPool.UnsafeQueueNativeOverlapped(nativeOverlapped2);
@@ -209,7 +216,6 @@ public static partial class OverlappedTests
 internal class AsyncHelper
 {
     ManualResetEvent _event;
-
 
     internal AsyncHelper()
     {
@@ -226,6 +232,7 @@ internal class AsyncHelper
         {
             this._event.Set();
         }
+
         finally
         {
             Overlapped.Free(_overlapped);

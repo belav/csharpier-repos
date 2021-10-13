@@ -19,9 +19,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// </summary>
         /// <param name="parameterInfo">The parameter info.</param>
         /// <param name="attributes">The attributes.</param>
-        public PageParameterModel(
-            ParameterInfo parameterInfo,
-            IReadOnlyList<object> attributes)
+        public PageParameterModel(ParameterInfo parameterInfo, IReadOnlyList<object> attributes)
             : base(parameterInfo?.ParameterType, attributes)
         {
             if (parameterInfo == null)
@@ -41,8 +39,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         /// Copy constructor.
         /// </summary>
         /// <param name="other">The model to copy.</param>
-        public PageParameterModel(PageParameterModel other)
-            : base(other)
+        public PageParameterModel(PageParameterModel other) : base(other)
         {
             if (other == null)
             {

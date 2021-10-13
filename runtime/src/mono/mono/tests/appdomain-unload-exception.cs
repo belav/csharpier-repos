@@ -5,31 +5,49 @@ using System.Threading.Tasks;
 
 class Driver
 {
-	static void ThrowTP ()
-	{
-		ManualResetEvent mre = new ManualResetEvent (false);
+    static void ThrowTP()
+    {
+        ManualResetEvent mre = new ManualResetEvent(false);
 
-		ThreadPool.QueueUserWorkItem (_ => { try { throw new AppDomainUnloadedException (); } finally { mre.Set (); } });
+        ThreadPool.QueueUserWorkItem(
+            _ =>
+            {
+                try
+                {
+                    throw new AppDomainUnloadedException();
+                }
 
-		if (!mre.WaitOne (5000))
-			Environment.Exit (1);
+                finally
+                {
+                    mre.Set();
+                }
+            }
+        );
 
-		/* Wait for exception unwinding */
-		Thread.Sleep (500);
-	}
+        if (!mre.WaitOne(5000))
+            Environment.Exit(1);
 
-	static void ThrowThread ()
-	{
-		Thread thread = new Thread (_ => { throw new AppDomainUnloadedException (); });
-		thread.Start ();
-		thread.Join ();
-	}
+        /* Wait for exception unwinding */
+        Thread.Sleep(500);
+    }
 
-	static int Main (string[] args)
-	{
-		ThrowTP ();
-		ThrowThread ();
+    static void ThrowThread()
+    {
+        Thread thread = new Thread(
+            _ =>
+            {
+                throw new AppDomainUnloadedException();
+            }
+        );
+        thread.Start();
+        thread.Join();
+    }
 
-		return 0;
-	}
+    static int Main(string[] args)
+    {
+        ThrowTP();
+        ThrowThread();
+
+        return 0;
+    }
 }

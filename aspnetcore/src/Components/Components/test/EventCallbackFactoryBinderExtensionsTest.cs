@@ -51,15 +51,20 @@ namespace Microsoft.AspNetCore.Components
         {
             // Arrange
             var component = new EventCountingComponent();
-            Action<int> setter = (_) => { throw new InvalidTimeZoneException(); };
+            Action<int> setter = (_) =>
+            {
+                throw new InvalidTimeZoneException();
+            };
 
             var binder = EventCallback.Factory.CreateBinder(component, setter, 17);
 
             // Act
-            await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
-            {
-                return binder.InvokeAsync(new ChangeEventArgs() { Value = "18", });
-            });
+            await Assert.ThrowsAsync<InvalidTimeZoneException>(
+                () =>
+                {
+                    return binder.InvokeAsync(new ChangeEventArgs() { Value = "18", });
+                }
+            );
 
             Assert.Equal(1, component.Count);
         }
@@ -396,7 +401,12 @@ namespace Microsoft.AspNetCore.Components
             var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
             // Act
-            await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.InvariantCulture), });
+            await binder.InvokeAsync(
+                new ChangeEventArgs()
+                {
+                    Value = expectedValue.ToString(CultureInfo.InvariantCulture),
+                }
+            );
 
             Assert.Equal(expectedValue, value);
             Assert.Equal(1, component.Count);
@@ -415,7 +425,12 @@ namespace Microsoft.AspNetCore.Components
             var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
             // Act
-            await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.InvariantCulture), });
+            await binder.InvokeAsync(
+                new ChangeEventArgs()
+                {
+                    Value = expectedValue.ToString(CultureInfo.InvariantCulture),
+                }
+            );
 
             Assert.Equal(expectedValue, value);
             Assert.Equal(1, component.Count);
@@ -435,7 +450,12 @@ namespace Microsoft.AspNetCore.Components
             var expectedValue = new DateTime(2018, 3, 4);
 
             // Act
-            await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+            await binder.InvokeAsync(
+                new ChangeEventArgs()
+                {
+                    Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+                }
+            );
 
             Assert.Equal(expectedValue, value);
             Assert.Equal(1, component.Count);
@@ -455,7 +475,12 @@ namespace Microsoft.AspNetCore.Components
             var expectedValue = new DateTime(2018, 3, 4);
 
             // Act
-            await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+            await binder.InvokeAsync(
+                new ChangeEventArgs()
+                {
+                    Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+                }
+            );
 
             Assert.Equal(expectedValue, value);
             Assert.Equal(1, component.Count);
@@ -474,7 +499,12 @@ namespace Microsoft.AspNetCore.Components
             var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
             // Act
-            await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.InvariantCulture), });
+            await binder.InvokeAsync(
+                new ChangeEventArgs()
+                {
+                    Value = expectedValue.ToString(CultureInfo.InvariantCulture),
+                }
+            );
 
             Assert.Equal(expectedValue, value);
             Assert.Equal(1, component.Count);
@@ -493,7 +523,12 @@ namespace Microsoft.AspNetCore.Components
             var expectedValue = new DateTime(2018, 3, 4, 1, 2, 3);
 
             // Act
-            await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(CultureInfo.InvariantCulture), });
+            await binder.InvokeAsync(
+                new ChangeEventArgs()
+                {
+                    Value = expectedValue.ToString(CultureInfo.InvariantCulture),
+                }
+            );
 
             Assert.Equal(expectedValue, value);
             Assert.Equal(1, component.Count);
@@ -513,7 +548,12 @@ namespace Microsoft.AspNetCore.Components
             var expectedValue = new DateTime(2018, 3, 4);
 
             // Act
-            await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+            await binder.InvokeAsync(
+                new ChangeEventArgs()
+                {
+                    Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+                }
+            );
 
             Assert.Equal(expectedValue, value);
             Assert.Equal(1, component.Count);
@@ -533,7 +573,12 @@ namespace Microsoft.AspNetCore.Components
             var expectedValue = new DateTime(2018, 3, 4);
 
             // Act
-            await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(format, CultureInfo.InvariantCulture), });
+            await binder.InvokeAsync(
+                new ChangeEventArgs()
+                {
+                    Value = expectedValue.ToString(format, CultureInfo.InvariantCulture),
+                }
+            );
 
             Assert.Equal(expectedValue, value);
             Assert.Equal(1, component.Count);
@@ -583,13 +628,16 @@ namespace Microsoft.AspNetCore.Components
         public async Task CreateBinder_CustomTypeConverter()
         {
             // Arrange
-            var value = new SecretMessage() {  Message = "A message", };
+            var value = new SecretMessage() { Message = "A message", };
             var component = new EventCountingComponent();
             Action<SecretMessage> setter = (_) => value = _;
 
             var binder = EventCallback.Factory.CreateBinder(component, setter, value);
 
-            var expectedValue = new SecretMessage() { Message = "TypeConverter may be old, but it still works!", };
+            var expectedValue = new SecretMessage()
+            {
+                Message = "TypeConverter may be old, but it still works!",
+            };
 
             // Act
             await binder.InvokeAsync(new ChangeEventArgs() { Value = expectedValue.ToString(), });
@@ -605,12 +653,15 @@ namespace Microsoft.AspNetCore.Components
             var component = new EventCountingComponent();
             Action<ClassWithoutTypeConverter> setter = (_) => value = _;
 
-            var ex = Assert.Throws<InvalidOperationException>(() => EventCallback.Factory.CreateBinder(component, setter, value));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => EventCallback.Factory.CreateBinder(component, setter, value)
+            );
 
             Assert.Equal(
-                $"The type '{typeof(ClassWithoutTypeConverter).FullName}' does not have an associated TypeConverter that supports conversion from a string. " +
-                $"Apply 'TypeConverterAttribute' to the type to register a converter.",
-                ex.Message);
+                $"The type '{typeof(ClassWithoutTypeConverter).FullName}' does not have an associated TypeConverter that supports conversion from a string. "
+                    + $"Apply 'TypeConverterAttribute' to the type to register a converter.",
+                ex.Message
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/30312")]
@@ -622,7 +673,12 @@ namespace Microsoft.AspNetCore.Components
             var component = new EventCountingComponent();
             Action<int> setter = (_) => value = _;
 
-            var binder = EventCallback.Factory.CreateBinder(component, setter, value, culture: null);
+            var binder = EventCallback.Factory.CreateBinder(
+                component,
+                setter,
+                value,
+                culture: null
+            );
 
             var expectedValue = 42_000;
 
@@ -641,7 +697,12 @@ namespace Microsoft.AspNetCore.Components
             var component = new EventCountingComponent();
             Action<int> setter = (_) => value = _;
 
-            var binder = EventCallback.Factory.CreateBinder(component, setter, value, CultureInfo.InvariantCulture);
+            var binder = EventCallback.Factory.CreateBinder(
+                component,
+                setter,
+                value,
+                CultureInfo.InvariantCulture
+            );
 
             var expectedValue = 42_000;
 
@@ -699,7 +760,11 @@ namespace Microsoft.AspNetCore.Components
 
                 return false;
             }
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
                 if (value is string message)
                 {

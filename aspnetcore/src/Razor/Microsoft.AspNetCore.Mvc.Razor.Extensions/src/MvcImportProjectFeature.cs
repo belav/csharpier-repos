@@ -43,10 +43,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
         }
 
         // Internal for testing
-        internal void AddHierarchicalImports(RazorProjectItem projectItem, List<RazorProjectItem> imports)
+        internal void AddHierarchicalImports(
+            RazorProjectItem projectItem,
+            List<RazorProjectItem> imports
+        )
         {
             // We want items in descending order. FindHierarchicalItems returns items in ascending order.
-            var importProjectItems = ProjectEngine.FileSystem.FindHierarchicalItems(projectItem.FilePath, ImportsFileName).Reverse();
+            var importProjectItems = ProjectEngine.FileSystem.FindHierarchicalItems(
+                    projectItem.FilePath,
+                    ImportsFileName
+                )
+                .Reverse();
             imports.AddRange(importProjectItems);
         }
 
@@ -57,7 +64,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
             private DefaultDirectivesProjectItem()
             {
                 var preamble = Encoding.UTF8.GetPreamble();
-                var content = @"
+                var content =
+                    @"
 @using System
 @using System.Collections.Generic
 @using System.Linq
@@ -89,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
             public override bool Exists => true;
 
-            public static DefaultDirectivesProjectItem Instance { get; } = new DefaultDirectivesProjectItem();
+            public static DefaultDirectivesProjectItem Instance { get; } =
+                new DefaultDirectivesProjectItem();
 
             public override Stream Read() => new MemoryStream(_defaultImportBytes);
         }

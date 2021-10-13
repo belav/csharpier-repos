@@ -15,8 +15,11 @@ namespace SocialWeather
         private readonly FormatterResolver _formatterResolver;
         private readonly ILogger<SocialWeatherConnectionHandler> _logger;
 
-        public SocialWeatherConnectionHandler(PersistentConnectionLifeTimeManager lifetimeManager,
-            FormatterResolver formatterResolver, ILogger<SocialWeatherConnectionHandler> logger)
+        public SocialWeatherConnectionHandler(
+            PersistentConnectionLifeTimeManager lifetimeManager,
+            FormatterResolver formatterResolver,
+            ILogger<SocialWeatherConnectionHandler> logger
+        )
         {
             _lifetimeManager = lifetimeManager;
             _formatterResolver = formatterResolver;
@@ -33,7 +36,8 @@ namespace SocialWeather
         public async Task ProcessRequests(ConnectionContext connection)
         {
             var formatter = _formatterResolver.GetFormatter<WeatherReport>(
-                (string)connection.Items["format"]);
+                (string)connection.Items["format"]
+            );
 
             while (true)
             {
@@ -55,6 +59,7 @@ namespace SocialWeather
                         break;
                     }
                 }
+
                 finally
                 {
                     connection.Transport.Input.AdvanceTo(buffer.End);

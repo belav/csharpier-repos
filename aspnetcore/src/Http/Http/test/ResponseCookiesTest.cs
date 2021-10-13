@@ -15,10 +15,7 @@ namespace Microsoft.AspNetCore.Http.Tests
     {
         private IFeatureCollection MakeFeatures(IHeaderDictionary headers)
         {
-            var responseFeature = new HttpResponseFeature()
-            {
-                Headers = headers
-            };
+            var responseFeature = new HttpResponseFeature() { Headers = headers };
             var features = new FeatureCollection();
             features.Set<IHttpResponseFeature>(responseFeature);
             return features;
@@ -36,15 +33,18 @@ namespace Microsoft.AspNetCore.Http.Tests
             services.AddLogging();
             services.AddSingleton<ILoggerFactory>(loggerFactory);
 
-            features.Set<IServiceProvidersFeature>(new ServiceProvidersFeature() { RequestServices = services.BuildServiceProvider() });
+            features.Set<IServiceProvidersFeature>(
+                new ServiceProvidersFeature() { RequestServices = services.BuildServiceProvider() }
+            );
 
             var cookies = new ResponseCookies(features);
             var testCookie = "TestCookie";
 
-            cookies.Append(testCookie, "value", new CookieOptions()
-            {
-                SameSite = SameSiteMode.None,
-            });
+            cookies.Append(
+                testCookie,
+                "value",
+                new CookieOptions() { SameSite = SameSiteMode.None, }
+            );
 
             var cookieHeaderValues = headers[HeaderNames.SetCookie];
             Assert.Single(cookieHeaderValues);
@@ -54,7 +54,10 @@ namespace Microsoft.AspNetCore.Http.Tests
             Assert.DoesNotContain("secure", cookieHeaderValues[0]);
 
             var writeContext = Assert.Single(sink.Writes);
-            Assert.Equal("The cookie 'TestCookie' has set 'SameSite=None' and must also set 'Secure'.", writeContext.Message);
+            Assert.Equal(
+                "The cookie 'TestCookie' has set 'SameSite=None' and must also set 'Secure'.",
+                writeContext.Message
+            );
         }
 
         [Fact]
@@ -175,7 +178,11 @@ namespace Microsoft.AspNetCore.Http.Tests
         [InlineData("key,", "!value", "key%2C=%21value")]
         [InlineData("ke#y,", "val^ue", "ke%23y%2C=val%5Eue")]
         [InlineData("base64", "QUI+REU/Rw==", "base64=QUI%2BREU%2FRw%3D%3D")]
-        public void AppContextSwitchEscapesKeysAndValuesBeforeSettingCookie(string key, string value, string expected)
+        public void AppContextSwitchEscapesKeysAndValuesBeforeSettingCookie(
+            string key,
+            string value,
+            string expected
+        )
         {
             var headers = new HeaderDictionary();
             var features = MakeFeatures(headers);

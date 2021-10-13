@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
 
         public SocketTransportFactory(
             IOptions<SocketTransportOptions> options,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory
+        )
         {
             if (options == null)
             {
@@ -36,11 +37,16 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets
             }
 
             _options = options.Value;
-            var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets");
+            var logger = loggerFactory.CreateLogger(
+                "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            );
             _trace = new SocketsTrace(logger);
         }
 
-        public ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+        public ValueTask<IConnectionListener> BindAsync(
+            EndPoint endpoint,
+            CancellationToken cancellationToken = default
+        )
         {
             var transport = new SocketConnectionListener(endpoint, _options, _trace);
             transport.Bind();

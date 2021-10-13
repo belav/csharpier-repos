@@ -31,7 +31,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.NotHaveStdErrContaining(ExpectedInfoMessage)
                 .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
         }
@@ -48,7 +49,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining(ExpectedInfoMessage)
                 .And.HaveStdErrContaining(ExpectedVerboseMessage);
@@ -67,7 +69,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining(ExpectedInfoMessage)
                 .And.HaveStdErrContaining(ExpectedVerboseMessage);
@@ -86,7 +89,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining(ExpectedInfoMessage)
                 .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
@@ -105,7 +109,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.NotHaveStdErrContaining(ExpectedInfoMessage)
                 .And.NotHaveStdErrContaining(ExpectedVerboseMessage);
@@ -124,7 +129,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.NotHaveStdErrContaining(ExpectedInfoMessage)
                 .And.NotHaveStdErrContaining(ExpectedVerboseMessage)
@@ -141,11 +147,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             dotnet.Exec(appDll)
                 .EnvironmentVariable("COREHOST_TRACE", "1")
-                .EnvironmentVariable("COREHOST_TRACEFILE", "badpath/TracingOnToFileBadPathDefault.log")
+                .EnvironmentVariable(
+                    "COREHOST_TRACEFILE",
+                    "badpath/TracingOnToFileBadPathDefault.log"
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("Hello World")
                 .And.HaveStdErrContaining(ExpectedInfoMessage)
                 .And.HaveStdErrContaining(ExpectedVerboseMessage)
@@ -164,9 +174,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 RepoDirectories = new RepoDirectoriesProvider();
 
                 // Entry point projects
-                PortableAppFixture = new TestProjectFixture("PortableApp", RepoDirectories)
-                    .EnsureRestored()
-                    .PublishProject();
+                PortableAppFixture = new TestProjectFixture(
+                    "PortableApp",
+                    RepoDirectories
+                ).EnsureRestored().PublishProject();
             }
 
             public void Dispose()

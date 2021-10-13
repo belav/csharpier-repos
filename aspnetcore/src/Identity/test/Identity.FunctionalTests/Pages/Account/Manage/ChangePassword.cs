@@ -12,20 +12,29 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
     {
         private readonly IHtmlFormElement _changePasswordForm;
 
-        public ChangePassword(HttpClient client, IHtmlDocument changePassword, DefaultUIContext context)
-            : base(client, changePassword, context)
+        public ChangePassword(
+            HttpClient client,
+            IHtmlDocument changePassword,
+            DefaultUIContext context
+        ) : base(client, changePassword, context)
         {
             _changePasswordForm = HtmlAssert.HasForm("#change-password-form", changePassword);
         }
 
-        public async Task<ChangePassword> ChangePasswordAsync(string oldPassword, string newPassword)
+        public async Task<ChangePassword> ChangePasswordAsync(
+            string oldPassword,
+            string newPassword
+        )
         {
-            await Client.SendAsync(_changePasswordForm, new Dictionary<string, string>
-            {
-                ["Input_OldPassword"] = oldPassword,
-                ["Input_NewPassword"] = newPassword,
-                ["Input_ConfirmPassword"] = newPassword
-            });
+            await Client.SendAsync(
+                _changePasswordForm,
+                new Dictionary<string, string>
+                {
+                    ["Input_OldPassword"] = oldPassword,
+                    ["Input_NewPassword"] = newPassword,
+                    ["Input_ConfirmPassword"] = newPassword
+                }
+            );
 
             return this;
         }

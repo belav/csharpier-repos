@@ -12,7 +12,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 {
     public abstract partial class DependencyInjectionSpecificationTests
     {
-        protected abstract IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection);
+        protected abstract IServiceProvider CreateServiceProvider(
+            IServiceCollection serviceCollection
+        );
 
         [Fact]
         public void ServicesRegisteredWithImplementationTypeCanBeResolved()
@@ -184,9 +186,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var services = provider.GetService<IEnumerable<IFakeMultipleService>>();
 
             // Assert
-            Assert.Collection(services.OrderBy(s => s.GetType().FullName),
+            Assert.Collection(
+                services.OrderBy(s => s.GetType().FullName),
                 service => Assert.IsType<FakeOneMultipleService>(service),
-                service => Assert.IsType<FakeTwoMultipleService>(service));
+                service => Assert.IsType<FakeTwoMultipleService>(service)
+            );
         }
 
         [Fact]
@@ -207,13 +211,17 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var servicesReversed = providerReversed.GetService<IEnumerable<IFakeMultipleService>>();
 
             // Assert
-            Assert.Collection(services,
+            Assert.Collection(
+                services,
                 service => Assert.IsType<FakeOneMultipleService>(service),
-                service => Assert.IsType<FakeTwoMultipleService>(service));
+                service => Assert.IsType<FakeTwoMultipleService>(service)
+            );
 
-            Assert.Collection(servicesReversed,
+            Assert.Collection(
+                servicesReversed,
                 service => Assert.IsType<FakeTwoMultipleService>(service),
-                service => Assert.IsType<FakeOneMultipleService>(service));
+                service => Assert.IsType<FakeOneMultipleService>(service)
+            );
         }
 
         [Fact]
@@ -233,9 +241,11 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Assert
             Assert.Same(fakeService, services.SingleService);
-            Assert.Collection(services.MultipleServices.OrderBy(s => s.GetType().FullName),
+            Assert.Collection(
+                services.MultipleServices.OrderBy(s => s.GetType().FullName),
                 service => Assert.IsType<FakeOneMultipleService>(service),
-                service => Assert.IsType<FakeTwoMultipleService>(service));
+                service => Assert.IsType<FakeTwoMultipleService>(service)
+            );
         }
 
         [Fact]
@@ -244,15 +254,13 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Arrange
             var collection = new TestServiceCollection();
             collection.AddTransient<IFakeService, FakeService>();
-            collection.AddTransient<IFactoryService>(p =>
-            {
-                var fakeService = p.GetRequiredService<IFakeService>();
-                return new TransientFactoryService
+            collection.AddTransient<IFactoryService>(
+                p =>
                 {
-                    FakeService = fakeService,
-                    Value = 42
-                };
-            });
+                    var fakeService = p.GetRequiredService<IFakeService>();
+                    return new TransientFactoryService { FakeService = fakeService, Value = 42 };
+                }
+            );
             var provider = CreateServiceProvider(collection);
 
             // Act
@@ -271,23 +279,20 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             // Arrange
             var collection = new TestServiceCollection();
             collection.AddTransient<IFakeService, FakeService>();
-            collection.AddTransient<IFactoryService>(p =>
-            {
-                var fakeService = p.GetService<IFakeService>();
-                return new TransientFactoryService
+            collection.AddTransient<IFactoryService>(
+                p =>
                 {
-                    FakeService = fakeService,
-                    Value = 42
-                };
-            });
-            collection.AddScoped(p =>
-            {
-                var fakeService = p.GetService<IFakeService>();
-                return new ScopedFactoryService
+                    var fakeService = p.GetService<IFakeService>();
+                    return new TransientFactoryService { FakeService = fakeService, Value = 42 };
+                }
+            );
+            collection.AddScoped(
+                p =>
                 {
-                    FakeService = fakeService,
-                };
-            });
+                    var fakeService = p.GetService<IFakeService>();
+                    return new ScopedFactoryService { FakeService = fakeService, };
+                }
+            );
             collection.AddTransient<ServiceAcceptingFactoryService>();
             var provider = CreateServiceProvider(collection);
 
@@ -389,8 +394,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService = outerScope.ServiceProvider.GetService<IFakeScopedService>();
-                var innerScopedService = innerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var outerScopedService =
+                    outerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var innerScopedService =
+                    innerScope.ServiceProvider.GetService<IFakeScopedService>();
 
                 // Assert
                 Assert.NotNull(outerScopedService);
@@ -417,8 +424,12 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                     FakeService innerScopedService;
                     using (var innerScope = outerScope.ServiceProvider.CreateScope())
                     {
-                        outerScopedService = outerScope.ServiceProvider.GetService<IFakeScopedService>() as FakeService;
-                        innerScopedService = innerScope.ServiceProvider.GetService<IFakeScopedService>() as FakeService;
+                        outerScopedService =
+                            outerScope.ServiceProvider.GetService<IFakeScopedService>()
+                            as FakeService;
+                        innerScopedService =
+                            innerScope.ServiceProvider.GetService<IFakeScopedService>()
+                            as FakeService;
 
                         // Assert
                         Assert.NotNull(outerScopedService);
@@ -453,7 +464,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var transient3 = Assert.IsType<FakeService>(provider.GetService<IFakeService>());
             using (var scope = provider.CreateScope())
             {
-                disposableService = (FakeService)scope.ServiceProvider.GetService<IFakeScopedService>();
+                disposableService =
+                    (FakeService)scope.ServiceProvider.GetService<IFakeScopedService>();
                 transient1 = (FakeService)scope.ServiceProvider.GetService<IFakeService>();
                 transient2 = (FakeService)scope.ServiceProvider.GetService<IFakeService>();
                 singleton = (FakeService)scope.ServiceProvider.GetService<IFakeSingletonService>();
@@ -552,8 +564,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             using (var outerScope = provider.CreateScope())
             using (var innerScope = outerScope.ServiceProvider.CreateScope())
             {
-                var outerScopedService = outerScope.ServiceProvider.GetService<IFakeScopedService>();
-                var innerScopedService = innerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var outerScopedService =
+                    outerScope.ServiceProvider.GetService<IFakeScopedService>();
+                var innerScopedService =
+                    innerScope.ServiceProvider.GetService<IFakeScopedService>();
 
                 // Assert
                 Assert.NotSame(outerScopedService, innerScopedService);
@@ -565,12 +579,17 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         {
             // Arrange
             var collection = new TestServiceCollection();
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>));
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(FakeOpenGenericService<>)
+            );
             collection.AddSingleton<IFakeSingletonService, FakeService>();
             var provider = CreateServiceProvider(collection);
 
             // Act
-            var genericService = provider.GetService<IFakeOpenGenericService<IFakeSingletonService>>();
+            var genericService = provider.GetService<
+                IFakeOpenGenericService<IFakeSingletonService>
+            >();
             var singletonService = provider.GetService<IFakeSingletonService>();
 
             // Assert
@@ -582,15 +601,23 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         {
             // Arrange
             var collection = new TestServiceCollection();
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>));
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(ConstrainedFakeOpenGenericService<>));
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(FakeOpenGenericService<>)
+            );
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(ConstrainedFakeOpenGenericService<>)
+            );
             var poco = new PocoClass();
             collection.AddSingleton(poco);
             collection.AddSingleton<IFakeSingletonService, FakeService>();
             var provider = CreateServiceProvider(collection);
             // Act
             var allServices = provider.GetServices<IFakeOpenGenericService<PocoClass>>().ToList();
-            var constrainedServices = provider.GetServices<IFakeOpenGenericService<IFakeSingletonService>>().ToList();
+            var constrainedServices = provider.GetServices<
+                IFakeOpenGenericService<IFakeSingletonService>
+            >().ToList();
             var singletonService = provider.GetService<IFakeSingletonService>();
             // Assert
             Assert.Equal(2, allServices.Count);
@@ -605,11 +632,16 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         {
             // Arrange
             var collection = new TestServiceCollection();
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(ConstrainedFakeOpenGenericService<>));
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(ConstrainedFakeOpenGenericService<>)
+            );
             collection.AddSingleton<IFakeSingletonService, FakeService>();
             var provider = CreateServiceProvider(collection);
             // Act
-            var constrainedServices = provider.GetServices<IFakeOpenGenericService<IFakeSingletonService>>().ToList();
+            var constrainedServices = provider.GetServices<
+                IFakeOpenGenericService<IFakeSingletonService>
+            >().ToList();
             // Assert
             Assert.Equal(0, constrainedServices.Count);
         }
@@ -619,15 +651,25 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         {
             // Arrange
             var collection = new TestServiceCollection();
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>));
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(ClassWithInterfaceConstraint<>));
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(FakeOpenGenericService<>)
+            );
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(ClassWithInterfaceConstraint<>)
+            );
             var enumerableVal = new ClassImplementingIEnumerable();
             collection.AddSingleton(enumerableVal);
             collection.AddSingleton<IFakeSingletonService, FakeService>();
             var provider = CreateServiceProvider(collection);
             // Act
-            var allServices = provider.GetServices<IFakeOpenGenericService<ClassImplementingIEnumerable>>().ToList();
-            var constrainedServices = provider.GetServices<IFakeOpenGenericService<IFakeSingletonService>>().ToList();
+            var allServices = provider.GetServices<
+                IFakeOpenGenericService<ClassImplementingIEnumerable>
+            >().ToList();
+            var constrainedServices = provider.GetServices<
+                IFakeOpenGenericService<IFakeSingletonService>
+            >().ToList();
             var singletonService = provider.GetService<IFakeSingletonService>();
             // Assert
             Assert.Equal(2, allServices.Count);
@@ -642,16 +684,26 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         {
             // Arrange
             var collection = new TestServiceCollection();
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>));
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(ClassWithAbstractClassConstraint<>));
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(FakeOpenGenericService<>)
+            );
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(ClassWithAbstractClassConstraint<>)
+            );
             var poco = new PocoClass();
             collection.AddSingleton(poco);
-            var classInheritingClassInheritingAbstractClass = new ClassInheritingClassInheritingAbstractClass();
+            var classInheritingClassInheritingAbstractClass =
+                new ClassInheritingClassInheritingAbstractClass();
             collection.AddSingleton(classInheritingClassInheritingAbstractClass);
             var provider = CreateServiceProvider(collection);
             // Act
-            var allServices = provider.GetServices<IFakeOpenGenericService<ClassInheritingClassInheritingAbstractClass>>().ToList();
-            var constrainedServices = provider.GetServices<IFakeOpenGenericService<PocoClass>>().ToList();
+            var allServices = provider.GetServices<
+                IFakeOpenGenericService<ClassInheritingClassInheritingAbstractClass>
+            >().ToList();
+            var constrainedServices = provider.GetServices<IFakeOpenGenericService<PocoClass>>()
+                .ToList();
             // Assert
             Assert.Equal(2, allServices.Count);
             Assert.Same(classInheritingClassInheritingAbstractClass, allServices[0].Value);
@@ -665,8 +717,14 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         {
             // Arrange
             var collection = new TestServiceCollection();
-            collection.AddTransient(typeof(IFakeOpenGenericService<PocoClass>), typeof(FakeService));
-            collection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>));
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<PocoClass>),
+                typeof(FakeService)
+            );
+            collection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(FakeOpenGenericService<>)
+            );
             collection.AddSingleton<PocoClass>();
             var provider = CreateServiceProvider(collection);
 
@@ -717,35 +775,39 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 return new TheoryData<IServiceCollection, TypeWithSupersetConstructors>
                 {
                     {
-                        new TestServiceCollection()
-                            .AddSingleton<IFakeService>(fakeService),
+                        new TestServiceCollection().AddSingleton<IFakeService>(fakeService),
                         new TypeWithSupersetConstructors(fakeService)
                     },
                     {
-                        new TestServiceCollection()
-                            .AddSingleton<IFactoryService>(factoryService),
+                        new TestServiceCollection().AddSingleton<IFactoryService>(factoryService),
                         new TypeWithSupersetConstructors(factoryService)
                     },
                     {
-                        new TestServiceCollection()
-                            .AddSingleton<IFakeService>(fakeService)
+                        new TestServiceCollection().AddSingleton<IFakeService>(fakeService)
                             .AddSingleton<IFactoryService>(factoryService),
-                       new TypeWithSupersetConstructors(fakeService, factoryService)
+                        new TypeWithSupersetConstructors(fakeService, factoryService)
                     },
                     {
-                        new TestServiceCollection()
-                            .AddSingleton<IFakeService>(fakeService)
+                        new TestServiceCollection().AddSingleton<IFakeService>(fakeService)
                             .AddSingleton<IFakeMultipleService>(multipleService)
                             .AddSingleton<IFactoryService>(factoryService),
-                       new TypeWithSupersetConstructors(fakeService, multipleService, factoryService)
+                        new TypeWithSupersetConstructors(
+                            fakeService,
+                            multipleService,
+                            factoryService
+                        )
                     },
                     {
-                        new TestServiceCollection()
-                            .AddSingleton<IFakeService>(fakeService)
+                        new TestServiceCollection().AddSingleton<IFakeService>(fakeService)
                             .AddSingleton<IFakeMultipleService>(multipleService)
                             .AddSingleton<IFakeScopedService>(scopedService)
                             .AddSingleton<IFactoryService>(factoryService),
-                       new TypeWithSupersetConstructors(multipleService, factoryService, fakeService, scopedService)
+                        new TypeWithSupersetConstructors(
+                            multipleService,
+                            factoryService,
+                            fakeService,
+                            scopedService
+                        )
                     }
                 };
             }
@@ -755,7 +817,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         [MemberData(nameof(ServiceContainerPicksConstructorWithLongestMatchesData))]
         public void ServiceContainerPicksConstructorWithLongestMatches(
             IServiceCollection serviceCollection,
-            TypeWithSupersetConstructors expected)
+            TypeWithSupersetConstructors expected
+        )
         {
             // Arrange
             serviceCollection.AddTransient<TypeWithSupersetConstructors>();
@@ -779,9 +842,15 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceCollection = new TestServiceCollection();
             serviceCollection.AddSingleton<FakeDisposeCallback>();
             serviceCollection.AddTransient<IFakeOuterService, FakeDisposableCallbackOuterService>();
-            serviceCollection.AddSingleton<IFakeMultipleService, FakeDisposableCallbackInnerService>();
+            serviceCollection.AddSingleton<
+                IFakeMultipleService,
+                FakeDisposableCallbackInnerService
+            >();
             serviceCollection.AddScoped<IFakeMultipleService, FakeDisposableCallbackInnerService>();
-            serviceCollection.AddTransient<IFakeMultipleService, FakeDisposableCallbackInnerService>();
+            serviceCollection.AddTransient<
+                IFakeMultipleService,
+                FakeDisposableCallbackInnerService
+            >();
             serviceCollection.AddSingleton<IFakeService, FakeDisposableCallbackInnerService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
@@ -794,7 +863,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             // Assert
             Assert.Equal(outer, callback.Disposed[0]);
-            Assert.Equal(multipleServices.Reverse(), callback.Disposed.Skip(1).Take(3).OfType<IFakeMultipleService>());
+            Assert.Equal(
+                multipleServices.Reverse(),
+                callback.Disposed.Skip(1).Take(3).OfType<IFakeMultipleService>()
+            );
             Assert.Equal(outer.SingleService, callback.Disposed[4]);
         }
 
@@ -806,13 +878,21 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var instance = new FakeOpenGenericService<PocoClass>(null);
 
             serviceCollection.AddTransient<PocoClass, PocoClass>();
-            serviceCollection.AddSingleton(typeof(IFakeOpenGenericService<PocoClass>), typeof(FakeService));
-            serviceCollection.AddSingleton(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>));
+            serviceCollection.AddSingleton(
+                typeof(IFakeOpenGenericService<PocoClass>),
+                typeof(FakeService)
+            );
+            serviceCollection.AddSingleton(
+                typeof(IFakeOpenGenericService<>),
+                typeof(FakeOpenGenericService<>)
+            );
             serviceCollection.AddSingleton<IFakeOpenGenericService<PocoClass>>(instance);
 
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
-            var enumerable = serviceProvider.GetService<IEnumerable<IFakeOpenGenericService<PocoClass>>>().ToArray();
+            var enumerable = serviceProvider.GetService<
+                IEnumerable<IFakeOpenGenericService<PocoClass>>
+            >().ToArray();
 
             // Assert
             Assert.Equal(3, enumerable.Length);
@@ -825,11 +905,36 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         }
 
         [Theory]
-        [InlineData(typeof(IFakeService), typeof(FakeService), typeof(IFakeService), ServiceLifetime.Scoped)]
-        [InlineData(typeof(IFakeService), typeof(FakeService), typeof(IFakeService), ServiceLifetime.Singleton)]
-        [InlineData(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>), typeof(IFakeOpenGenericService<IServiceProvider>), ServiceLifetime.Scoped)]
-        [InlineData(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>), typeof(IFakeOpenGenericService<IServiceProvider>), ServiceLifetime.Singleton)]
-        public void ResolvesDifferentInstancesForServiceWhenResolvingEnumerable(Type serviceType, Type implementation, Type resolve, ServiceLifetime lifetime)
+        [InlineData(
+            typeof(IFakeService),
+            typeof(FakeService),
+            typeof(IFakeService),
+            ServiceLifetime.Scoped
+        )]
+        [InlineData(
+            typeof(IFakeService),
+            typeof(FakeService),
+            typeof(IFakeService),
+            ServiceLifetime.Singleton
+        )]
+        [InlineData(
+            typeof(IFakeOpenGenericService<>),
+            typeof(FakeOpenGenericService<>),
+            typeof(IFakeOpenGenericService<IServiceProvider>),
+            ServiceLifetime.Scoped
+        )]
+        [InlineData(
+            typeof(IFakeOpenGenericService<>),
+            typeof(FakeOpenGenericService<>),
+            typeof(IFakeOpenGenericService<IServiceProvider>),
+            ServiceLifetime.Singleton
+        )]
+        public void ResolvesDifferentInstancesForServiceWhenResolvingEnumerable(
+            Type serviceType,
+            Type implementation,
+            Type resolve,
+            ServiceLifetime lifetime
+        )
         {
             // Arrange
             var serviceCollection = new TestServiceCollection
@@ -842,8 +947,10 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceProvider = CreateServiceProvider(serviceCollection);
             using (var scope = serviceProvider.CreateScope())
             {
-                var enumerable = (scope.ServiceProvider.GetService(typeof(IEnumerable<>).MakeGenericType(resolve)) as IEnumerable)
-                    .OfType<object>().ToArray();
+                var enumerable = (
+                    scope.ServiceProvider.GetService(typeof(IEnumerable<>).MakeGenericType(resolve))
+                    as IEnumerable
+                ).OfType<object>().ToArray();
                 var service = scope.ServiceProvider.GetService(resolve);
 
                 // Assert

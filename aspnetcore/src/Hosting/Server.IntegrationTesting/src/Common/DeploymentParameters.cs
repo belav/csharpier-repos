@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         {
             EnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] = "true";
 
-            var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+            var configAttribute = Assembly.GetCallingAssembly()
+                .GetCustomAttribute<AssemblyConfigurationAttribute>();
             if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
             {
                 Configuration = configAttribute.Configuration;
@@ -29,7 +30,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         {
             EnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] = "true";
 
-            var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+            var configAttribute = Assembly.GetCallingAssembly()
+                .GetCustomAttribute<AssemblyConfigurationAttribute>();
             if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
             {
                 Configuration = configAttribute.Configuration;
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             string applicationPath,
             ServerType serverType,
             RuntimeFlavor runtimeFlavor,
-            RuntimeArchitecture runtimeArchitecture)
+            RuntimeArchitecture runtimeArchitecture
+        )
         {
             if (string.IsNullOrEmpty(applicationPath))
             {
@@ -62,7 +65,9 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
             if (!Directory.Exists(applicationPath))
             {
-                throw new DirectoryNotFoundException($"Application path {applicationPath} does not exist.");
+                throw new DirectoryNotFoundException(
+                    $"Application path {applicationPath} does not exist."
+                );
             }
 
             ApplicationPath = applicationPath;
@@ -71,7 +76,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             RuntimeFlavor = runtimeFlavor;
             EnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] = "true";
 
-            var configAttribute = Assembly.GetCallingAssembly().GetCustomAttribute<AssemblyConfigurationAttribute>();
+            var configAttribute = Assembly.GetCallingAssembly()
+                .GetCustomAttribute<AssemblyConfigurationAttribute>();
             if (configAttribute != null && !string.IsNullOrEmpty(configAttribute.Configuration))
             {
                 Configuration = configAttribute.Configuration;
@@ -101,9 +107,9 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
         public ApplicationPublisher ApplicationPublisher { get; set; }
 
-        public ServerType ServerType { get; set;  }
+        public ServerType ServerType { get; set; }
 
-        public RuntimeFlavor RuntimeFlavor { get; set;  }
+        public RuntimeFlavor RuntimeFlavor { get; set; }
 
         public RuntimeArchitecture RuntimeArchitecture { get; set; } = RuntimeArchitecture.x64;
 
@@ -168,12 +174,14 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         /// Environment variables to be set before starting the host.
         /// Not applicable for IIS Scenarios.
         /// </summary>
-        public IDictionary<string, string> EnvironmentVariables { get; } = new Dictionary<string, string>();
+        public IDictionary<string, string> EnvironmentVariables { get; } =
+            new Dictionary<string, string>();
 
         /// <summary>
         /// Environment variables used when invoking dotnet publish.
         /// </summary>
-        public IDictionary<string, string> PublishEnvironmentVariables { get; } = new Dictionary<string, string>();
+        public IDictionary<string, string> PublishEnvironmentVariables { get; } =
+            new Dictionary<string, string>();
 
         /// <summary>
         /// For any application level cleanup to be invoked after performing host cleanup.
@@ -194,7 +202,8 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 RuntimeFlavor,
                 RuntimeArchitecture,
                 ApplicationBaseUriHint,
-                PublishApplicationBeforeDeployment);
+                PublishApplicationBeforeDeployment
+            );
         }
     }
 }

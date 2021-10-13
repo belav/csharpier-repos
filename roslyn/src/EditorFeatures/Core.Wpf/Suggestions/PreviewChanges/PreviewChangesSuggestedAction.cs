@@ -25,15 +25,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 Workspace workspace,
                 ITextBuffer subjectBuffer,
                 object provider,
-                PreviewChangesCodeAction codeAction)
-                : base(threadingContext, sourceProvider, workspace, subjectBuffer, provider, codeAction)
-            {
-            }
+                PreviewChangesCodeAction codeAction
+            )
+                : base(
+                    threadingContext,
+                    sourceProvider,
+                    workspace,
+                    subjectBuffer,
+                    provider,
+                    codeAction
+                ) { }
 
             public static async Task<SuggestedAction> CreateAsync(
-                SuggestedActionWithNestedFlavors suggestedAction, CancellationToken cancellationToken)
+                SuggestedActionWithNestedFlavors suggestedAction,
+                CancellationToken cancellationToken
+            )
             {
-                var previewResult = await suggestedAction.GetPreviewResultAsync(cancellationToken).ConfigureAwait(true);
+                var previewResult = await suggestedAction.GetPreviewResultAsync(cancellationToken)
+                    .ConfigureAwait(true);
                 if (previewResult == null)
                 {
                     return null;
@@ -47,10 +56,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 return new PreviewChangesSuggestedAction(
                     suggestedAction.ThreadingContext,
-                    suggestedAction.SourceProvider, suggestedAction.Workspace,
-                    suggestedAction.SubjectBuffer, suggestedAction.Provider,
+                    suggestedAction.SourceProvider,
+                    suggestedAction.Workspace,
+                    suggestedAction.SubjectBuffer,
+                    suggestedAction.Provider,
                     new PreviewChangesCodeAction(
-                        suggestedAction.Workspace, suggestedAction.CodeAction, changeSummary));
+                        suggestedAction.Workspace,
+                        suggestedAction.CodeAction,
+                        changeSummary
+                    )
+                );
             }
         }
     }

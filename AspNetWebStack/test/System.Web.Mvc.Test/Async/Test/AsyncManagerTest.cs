@@ -16,7 +16,10 @@ namespace System.Web.Mvc.Async.Test
             AsyncManager helper = new AsyncManager();
 
             bool delegateCalled = false;
-            helper.Finished += delegate { delegateCalled = true; };
+            helper.Finished += delegate
+            {
+                delegateCalled = true;
+            };
 
             // Act
             helper.Finish();
@@ -32,7 +35,10 @@ namespace System.Web.Mvc.Async.Test
             AsyncManager helper = new AsyncManager();
 
             bool delegateCalled = false;
-            helper.Finished += delegate { delegateCalled = true; };
+            helper.Finished += delegate
+            {
+                delegateCalled = true;
+            };
 
             // Act
             helper.OutstandingOperations.Increment();
@@ -67,16 +73,24 @@ namespace System.Web.Mvc.Async.Test
         {
             // Arrange
             Mock<SynchronizationContext> mockSyncContext = new Mock<SynchronizationContext>();
-            mockSyncContext
-                .Setup(c => c.Send(It.IsAny<SendOrPostCallback>(), null))
+            mockSyncContext.Setup(c => c.Send(It.IsAny<SendOrPostCallback>(), null))
                 .Callback(
-                    delegate(SendOrPostCallback d, object state) { d(state); });
+                    delegate(SendOrPostCallback d, object state)
+                    {
+                        d(state);
+                    }
+                );
 
             AsyncManager helper = new AsyncManager(mockSyncContext.Object);
             bool wasCalled = false;
 
             // Act
-            helper.Sync(() => { wasCalled = true; });
+            helper.Sync(
+                () =>
+                {
+                    wasCalled = true;
+                }
+            );
 
             // Assert
             Assert.True(wasCalled);
@@ -108,8 +122,13 @@ namespace System.Web.Mvc.Async.Test
 
             // Act & assert
             Assert.ThrowsArgumentOutOfRange(
-                delegate { helper.Timeout = timeout; }, "value",
-                @"The timeout value must be non-negative or Timeout.Infinite.");
+                delegate
+                {
+                    helper.Timeout = timeout;
+                },
+                "value",
+                @"The timeout value must be non-negative or Timeout.Infinite."
+            );
         }
     }
 }

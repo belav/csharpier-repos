@@ -3,15 +3,15 @@
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public abstract class StoreGeneratedFixupRelationalTestBase<TFixture> : StoreGeneratedFixupTestBase<TFixture>
-        where TFixture : StoreGeneratedFixupRelationalTestBase<TFixture>.StoreGeneratedFixupRelationalFixtureBase, new()
+    public abstract class StoreGeneratedFixupRelationalTestBase<TFixture>
+        : StoreGeneratedFixupTestBase<TFixture>
+        where TFixture : StoreGeneratedFixupRelationalTestBase<TFixture>.StoreGeneratedFixupRelationalFixtureBase,
+            new()
     {
-        protected StoreGeneratedFixupRelationalTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected StoreGeneratedFixupRelationalTestBase(TFixture fixture) : base(fixture) { }
 
-        public abstract class StoreGeneratedFixupRelationalFixtureBase : StoreGeneratedFixupFixtureBase
+        public abstract class StoreGeneratedFixupRelationalFixtureBase
+            : StoreGeneratedFixupFixtureBase
         {
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
@@ -20,20 +20,34 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<Item>(
                     eb =>
                     {
-                        eb.HasOne(i => i.Game).WithMany(g => g.Items).HasConstraintName("FK_GameEntity_Game_GameId");
-                        eb.HasOne(i => i.Level).WithMany(g => g.Items).HasConstraintName("FK_GameEntity_Level_GameId_LevelId");
+                        eb.HasOne(i => i.Game)
+                            .WithMany(g => g.Items)
+                            .HasConstraintName("FK_GameEntity_Game_GameId");
+                        eb.HasOne(i => i.Level)
+                            .WithMany(g => g.Items)
+                            .HasConstraintName("FK_GameEntity_Level_GameId_LevelId");
                         eb.HasIndex(
-                            i => new { i.GameId, i.LevelId }, "IX_GameEntity_GameId_LevelId");
-                    });
+                            i => new { i.GameId, i.LevelId },
+                            "IX_GameEntity_GameId_LevelId"
+                        );
+                    }
+                );
 
                 modelBuilder.Entity<Actor>(
                     eb =>
                     {
-                        eb.HasOne(a => a.Game).WithMany(g => g.Actors).HasConstraintName("FK_GameEntity_Game_GameId");
-                        eb.HasOne(a => a.Level).WithMany(g => g.Actors).HasConstraintName("FK_GameEntity_Level_GameId_LevelId");
+                        eb.HasOne(a => a.Game)
+                            .WithMany(g => g.Actors)
+                            .HasConstraintName("FK_GameEntity_Game_GameId");
+                        eb.HasOne(a => a.Level)
+                            .WithMany(g => g.Actors)
+                            .HasConstraintName("FK_GameEntity_Level_GameId_LevelId");
                         eb.HasIndex(
-                            a => new { a.GameId, a.LevelId }, "IX_GameEntity_GameId_LevelId");
-                    });
+                            a => new { a.GameId, a.LevelId },
+                            "IX_GameEntity_GameId_LevelId"
+                        );
+                    }
+                );
             }
         }
     }

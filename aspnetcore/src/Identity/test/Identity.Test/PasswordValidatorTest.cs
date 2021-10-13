@@ -30,10 +30,15 @@ namespace Microsoft.AspNetCore.Identity.Test
 
             // Act
             // Assert
-            await Assert.ThrowsAsync<ArgumentNullException>("password", () => validator.ValidateAsync(null, null, null));
-            await Assert.ThrowsAsync<ArgumentNullException>("manager", () => validator.ValidateAsync(null, null, "foo"));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "password",
+                () => validator.ValidateAsync(null, null, null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "manager",
+                () => validator.ValidateAsync(null, null, "foo")
+            );
         }
-
 
         [Theory]
         [InlineData("")]
@@ -77,8 +82,10 @@ namespace Microsoft.AspNetCore.Identity.Test
             manager.Options.Password.RequireLowercase = false;
             manager.Options.Password.RequireDigit = false;
             manager.Options.Password.RequiredLength = 0;
-            IdentityResultAssert.IsFailure(await valid.ValidateAsync(manager, null, input),
-                "Passwords must have at least one non alphanumeric character.");
+            IdentityResultAssert.IsFailure(
+                await valid.ValidateAsync(manager, null, input),
+                "Passwords must have at least one non alphanumeric character."
+            );
         }
 
         [Theory]
@@ -111,8 +118,10 @@ namespace Microsoft.AspNetCore.Identity.Test
             manager.Options.Password.RequireDigit = false;
             manager.Options.Password.RequiredLength = 0;
             manager.Options.Password.RequiredUniqueChars = uniqueChars;
-            IdentityResultAssert.IsFailure(await valid.ValidateAsync(manager, null, input),
-                $"Passwords must use at least {uniqueChars} different characters.");
+            IdentityResultAssert.IsFailure(
+                await valid.ValidateAsync(manager, null, input),
+                $"Passwords must use at least {uniqueChars} different characters."
+            );
         }
 
         [Theory]
@@ -144,7 +153,8 @@ namespace Microsoft.AspNetCore.Identity.Test
         [InlineData("aB1@df", Errors.None)]
         public async Task UberMixedRequiredTests(string input, Errors errorMask)
         {
-            const string alphaError = "Passwords must have at least one non alphanumeric character.";
+            const string alphaError =
+                "Passwords must have at least one non alphanumeric character.";
             const string upperError = "Passwords must have at least one uppercase ('A'-'Z').";
             const string lowerError = "Passwords must have at least one lowercase ('a'-'z').";
             const string digitError = "Passwords must have at least one digit ('0'-'9').";

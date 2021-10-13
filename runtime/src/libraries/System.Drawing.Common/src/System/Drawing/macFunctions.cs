@@ -59,7 +59,10 @@ namespace System.Drawing
                     Type? driver_type = asm.GetType("System.Windows.Forms.XplatUICarbon");
                     if (driver_type != null)
                     {
-                        return (Delegate?)driver_type.GetField("HwndDelegate", BindingFlags.NonPublic | BindingFlags.Static)!.GetValue(null);
+                        return (Delegate?)driver_type.GetField(
+                            "HwndDelegate",
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )!.GetValue(null);
                     }
                 }
             }
@@ -69,7 +72,10 @@ namespace System.Drawing
 
         internal static CocoaContext GetCGContextForNSView(IntPtr handle)
         {
-            IntPtr graphicsContext = intptr_objc_msgSend(objc_getClass("NSGraphicsContext"), sel_registerName("currentContext"));
+            IntPtr graphicsContext = intptr_objc_msgSend(
+                objc_getClass("NSGraphicsContext"),
+                sel_registerName("currentContext")
+            );
             IntPtr ctx = intptr_objc_msgSend(graphicsContext, sel_registerName("graphicsPort"));
 
             CGContextSaveGState(ctx);
@@ -102,7 +108,12 @@ namespace System.Drawing
 
                 Rect desktop_bounds = CGDisplayBounds(CGMainDisplayID());
 
-                return new CarbonContext(port, context, (int)desktop_bounds.size.width, (int)desktop_bounds.size.height);
+                return new CarbonContext(
+                    port,
+                    context,
+                    (int)desktop_bounds.size.width,
+                    (int)desktop_bounds.size.height
+                );
             }
 
             QDRect window_bounds = default(QDRect);
@@ -123,14 +134,21 @@ namespace System.Drawing
             if (view_bounds.size.width < 0)
                 view_bounds.size.width = 0;
 
-            CGContextTranslateCTM(context, view_bounds.origin.x, (window_bounds.bottom - window_bounds.top) - (view_bounds.origin.y + view_bounds.size.height));
+            CGContextTranslateCTM(
+                context,
+                view_bounds.origin.x,
+                (window_bounds.bottom - window_bounds.top)
+                    - (view_bounds.origin.y + view_bounds.size.height)
+            );
 
             // Create the original rect path and clip to it
             Rect rc_clip = new Rect(0, 0, view_bounds.size.width, view_bounds.size.height);
 
             CGContextSaveGState(context);
 
-            Rectangle[]? clip_rectangles = (Rectangle[]?)hwnd_delegate!.DynamicInvoke(new object[] { handle });
+            Rectangle[]? clip_rectangles = (Rectangle[]?)hwnd_delegate!.DynamicInvoke(
+                new object[] { handle }
+            );
             if (clip_rectangles != null && clip_rectangles.Length > 0)
             {
                 int length = clip_rectangles.Length;
@@ -140,7 +158,17 @@ namespace System.Drawing
 
                 for (int i = 0; i < length; i++)
                 {
-                    CGContextAddRect(context, new Rect(clip_rectangles[i].X, view_bounds.size.height - clip_rectangles[i].Y - clip_rectangles[i].Height, clip_rectangles[i].Width, clip_rectangles[i].Height));
+                    CGContextAddRect(
+                        context,
+                        new Rect(
+                            clip_rectangles[i].X,
+                            view_bounds.size.height
+                                - clip_rectangles[i].Y
+                                - clip_rectangles[i].Height,
+                            clip_rectangles[i].Width,
+                            clip_rectangles[i].Height
+                        )
+                    );
                 }
                 CGContextClosePath(context);
                 CGContextEOClip(context);
@@ -164,7 +192,12 @@ namespace System.Drawing
                 CGContextClip(context);
             }
 
-            return new CarbonContext(port, context, (int)view_bounds.size.width, (int)view_bounds.size.height);
+            return new CarbonContext(
+                port,
+                context,
+                (int)view_bounds.size.width,
+                (int)view_bounds.size.height
+            );
         }
 
         internal static IntPtr GetContext(IntPtr port)
@@ -213,9 +246,13 @@ namespace System.Drawing
         [DllImport("libobjc.dylib", EntryPoint = "objc_msgSend")]
         public static extern IntPtr intptr_objc_msgSend(IntPtr basePtr, IntPtr selector);
         [DllImport("libobjc.dylib", EntryPoint = "objc_msgSend_stret")]
-        public static extern void Rect_objc_msgSend_stret(out Rect arect, IntPtr basePtr, IntPtr selector);
+        public static extern void Rect_objc_msgSend_stret(
+            out Rect arect,
+            IntPtr basePtr,
+            IntPtr selector
+        );
         [DllImport("libobjc.dylib", EntryPoint = "objc_msgSend")]
-        [return:MarshalAs(UnmanagedType.U1)]
+        [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool bool_objc_msgSend(IntPtr handle, IntPtr selector);
         [DllImport("libobjc.dylib")]
         public static extern IntPtr sel_registerName(string selectorName);
@@ -251,7 +288,11 @@ namespace System.Drawing
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         internal static extern int CGContextClipToRect(IntPtr context, Rect clip);
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal static extern int CGContextClipToRects(IntPtr context, Rect[] clip_rects, int count);
+        internal static extern int CGContextClipToRects(
+            IntPtr context,
+            Rect[] clip_rects,
+            int count
+        );
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         internal static extern void CGContextTranslateCTM(IntPtr context, float tx, float ty);
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
@@ -263,7 +304,12 @@ namespace System.Drawing
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         internal static extern IntPtr CGPathCreateMutable();
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
-        internal static extern void CGPathAddRects(IntPtr path, IntPtr _void, Rect[] rects, int count);
+        internal static extern void CGPathAddRects(
+            IntPtr path,
+            IntPtr _void,
+            Rect[] rects,
+            int count
+        );
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]
         internal static extern void CGPathAddRect(IntPtr path, IntPtr _void, Rect rect);
         [DllImport("/System/Library/Frameworks/Carbon.framework/Versions/Current/Carbon")]

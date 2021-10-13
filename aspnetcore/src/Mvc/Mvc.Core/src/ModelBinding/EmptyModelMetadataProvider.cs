@@ -19,10 +19,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </summary>
         public EmptyModelMetadataProvider()
             : base(
-                  new DefaultCompositeMetadataDetailsProvider(new List<IMetadataDetailsProvider>()),
-                  new OptionsAccessor())
-        {
-        }
+                new DefaultCompositeMetadataDetailsProvider(new List<IMetadataDetailsProvider>()),
+                new OptionsAccessor()
+            ) { }
 
         private class OptionsAccessor : IOptions<MvcOptions>
         {

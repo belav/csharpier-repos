@@ -35,7 +35,12 @@ namespace Roslyn.Test.Utilities.CoreClr
             Console.SetError(new SharedConsoleErrorWriter());
         }
 
-        public static void CaptureOutput(Action action, int expectedLength, out string output, out string errorOutput)
+        public static void CaptureOutput(
+            Action action,
+            int expectedLength,
+            out string output,
+            out string errorOutput
+        )
         {
             var outputWriter = new CappedStringWriter(expectedLength);
             var errorOutputWriter = new CappedStringWriter(expectedLength);
@@ -49,6 +54,7 @@ namespace Roslyn.Test.Utilities.CoreClr
                 s_currentError.Value = errorOutputWriter;
                 action();
             }
+
             finally
             {
                 s_currentOut.Value = savedOutput;

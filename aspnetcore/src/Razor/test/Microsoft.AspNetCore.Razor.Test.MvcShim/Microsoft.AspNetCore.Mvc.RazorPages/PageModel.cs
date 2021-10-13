@@ -22,8 +22,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
         public ViewDataDictionary ViewData { get; }
 
-        protected internal Task<bool> TryUpdateModelAsync<TModel>(TModel model)
-            where TModel : class
+        protected internal Task<bool> TryUpdateModelAsync<TModel>(TModel model) where TModel : class
         {
             throw new NotImplementedException();
         }
@@ -34,10 +33,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             throw new NotImplementedException();
         }
 
-        protected internal RedirectResult Redirect(string url) => throw new NotImplementedException();
+        protected internal RedirectResult Redirect(string url) =>
+            throw new NotImplementedException();
 
         public virtual bool TryValidateModel(object model) => throw new NotImplementedException();
 
-        public virtual bool TryValidateModel(object model, string name) => throw new NotImplementedException();
+        public virtual bool TryValidateModel(object model, string name) =>
+            throw new NotImplementedException();
     }
 }

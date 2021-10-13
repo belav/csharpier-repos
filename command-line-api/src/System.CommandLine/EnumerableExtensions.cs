@@ -13,7 +13,8 @@ namespace System.CommandLine
     {
         internal static IEnumerable<T> FlattenBreadthFirst<T>(
             this IEnumerable<T> source,
-            Func<T, IEnumerable<T>> children)
+            Func<T, IEnumerable<T>> children
+        )
         {
             var queue = new Queue<T>();
 
@@ -35,12 +36,11 @@ namespace System.CommandLine
             }
         }
 
-        internal static IEnumerable<T> RecurseWhileNotNull<T>(
-            this T? source,
-            Func<T, T?> next)
+        internal static IEnumerable<T> RecurseWhileNotNull<T>(this T? source, Func<T, T?> next)
             where T : class
         {
-            if (source is null) yield break;
+            if (source is null)
+                yield break;
 
             yield return source;
 

@@ -86,7 +86,6 @@ namespace System.Formats.Cbor
 
                 default:
                     throw new InvalidOperationException(SR.Cbor_Reader_NotAFloatEncoding);
-
             }
         }
 
@@ -220,11 +219,20 @@ namespace System.Formats.Cbor
                     EnsureReadCapacity(2);
                     byte value = _data.Span[_offset + 1];
 
-                    if (value <= (byte)CborAdditionalInfo.IndefiniteLength &&
-                        _isConformanceModeCheckEnabled &&
-                        CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(ConformanceMode))
+                    if (
+                        value <= (byte)CborAdditionalInfo.IndefiniteLength
+                        && _isConformanceModeCheckEnabled
+                        && CborConformanceModeHelpers.RequireCanonicalSimpleValueEncodings(
+                            ConformanceMode
+                        )
+                    )
                     {
-                        throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_InvalidSimpleValueEncoding, ConformanceMode));
+                        throw new CborContentException(
+                            SR.Format(
+                                SR.Cbor_ConformanceMode_InvalidSimpleValueEncoding,
+                                ConformanceMode
+                            )
+                        );
                     }
 
                     AdvanceBuffer(2);

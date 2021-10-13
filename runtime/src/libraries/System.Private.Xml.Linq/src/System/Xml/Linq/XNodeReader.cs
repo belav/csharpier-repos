@@ -25,15 +25,18 @@ namespace System.Xml.Linq
             _source = node;
             _root = node;
             _nameTable = nameTable != null ? nameTable : CreateNameTable();
-            _omitDuplicateNamespaces = (options & ReaderOptions.OmitDuplicateNamespaces) != 0 ? true : false;
+            _omitDuplicateNamespaces =
+                (options & ReaderOptions.OmitDuplicateNamespaces) != 0 ? true : false;
         }
 
         internal XNodeReader(XNode node, XmlNameTable? nameTable)
-            : this(node, nameTable,
-                (node.GetSaveOptionsFromAnnotations() & SaveOptions.OmitDuplicateNamespaces) != 0 ?
-                    ReaderOptions.OmitDuplicateNamespaces : ReaderOptions.None)
-        {
-        }
+            : this(
+                node,
+                nameTable,
+                (node.GetSaveOptionsFromAnnotations() & SaveOptions.OmitDuplicateNamespaces) != 0
+                  ? ReaderOptions.OmitDuplicateNamespaces
+                  : ReaderOptions.None
+            ) { }
 
         public override int AttributeCount
         {
@@ -472,7 +475,8 @@ namespace System.Xml.Linq
             XElement? e = GetElementInAttributeScope();
             if (e != null)
             {
-                string? localName, namespaceName;
+                string? localName,
+                    namespaceName;
                 GetNameInAttributeScope(name, e, out localName, out namespaceName);
                 XAttribute? a = e.lastAttr;
                 if (a != null)
@@ -599,7 +603,8 @@ namespace System.Xml.Linq
             XElement? e = GetElementInScope();
             if (e != null)
             {
-                XNamespace? ns = prefix.Length == 0 ? e.GetDefaultNamespace() : e.GetNamespaceOfPrefix(prefix);
+                XNamespace? ns =
+                    prefix.Length == 0 ? e.GetDefaultNamespace() : e.GetNamespaceOfPrefix(prefix);
                 if (ns != null)
                 {
                     return _nameTable.Add(ns.NamespaceName);
@@ -617,7 +622,8 @@ namespace System.Xml.Linq
             XElement? e = GetElementInAttributeScope();
             if (e != null)
             {
-                string? localName, namespaceName;
+                string? localName,
+                    namespaceName;
                 GetNameInAttributeScope(name, e, out localName, out namespaceName);
                 XAttribute? a = e.lastAttr;
                 if (a != null)
@@ -625,8 +631,7 @@ namespace System.Xml.Linq
                     do
                     {
                         a = a.next!;
-                        if (a.Name.LocalName == localName &&
-                            a.Name.NamespaceName == namespaceName)
+                        if (a.Name.LocalName == localName && a.Name.NamespaceName == namespaceName)
                         {
                             if (_omitDuplicateNamespaces && IsDuplicateNamespaceAttribute(a))
                             {
@@ -672,8 +677,7 @@ namespace System.Xml.Linq
                     do
                     {
                         a = a.next!;
-                        if (a.Name.LocalName == localName &&
-                            a.Name.NamespaceName == namespaceName)
+                        if (a.Name.LocalName == localName && a.Name.NamespaceName == namespaceName)
                         {
                             if (_omitDuplicateNamespaces && IsDuplicateNamespaceAttribute(a))
                             {
@@ -699,7 +703,8 @@ namespace System.Xml.Linq
             {
                 return;
             }
-            if (index < 0) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index < 0)
+                throw new ArgumentOutOfRangeException(nameof(index));
             XElement? e = GetElementInAttributeScope();
             if (e != null)
             {
@@ -894,8 +899,7 @@ namespace System.Xml.Linq
                 }
                 foreach (XElement e in c.Descendants())
                 {
-                    if (e.Name.LocalName == localName &&
-                        e.Name.NamespaceName == namespaceName)
+                    if (e.Name.LocalName == localName && e.Name.NamespaceName == namespaceName)
                     {
                         _source = e;
                         return true;
@@ -913,7 +917,8 @@ namespace System.Xml.Linq
                 XElement? e = _source as XElement;
                 if (e != null)
                 {
-                    if (IsEndElement) continue;
+                    if (IsEndElement)
+                        continue;
                     if (e.Name.LocalName == localName && e.Name.NamespaceName == namespaceName)
                     {
                         return true;
@@ -937,8 +942,7 @@ namespace System.Xml.Linq
                 {
                     foreach (XElement e in n.ElementsAfterSelf())
                     {
-                        if (e.Name.LocalName == localName &&
-                            e.Name.NamespaceName == namespaceName)
+                        if (e.Name.LocalName == localName && e.Name.NamespaceName == namespaceName)
                         {
                             _source = e;
                             IsEndElement = false;
@@ -966,9 +970,7 @@ namespace System.Xml.Linq
             return ReadToEnd();
         }
 
-        public override void ResolveEntity()
-        {
-        }
+        public override void ResolveEntity() { }
 
         public override void Skip()
         {
@@ -1013,7 +1015,8 @@ namespace System.Xml.Linq
                     XElement? e = _source as XElement;
                     if (e != null)
                     {
-                        LineInfoEndElementAnnotation? a = e.Annotation<LineInfoEndElementAnnotation>();
+                        LineInfoEndElementAnnotation? a =
+                            e.Annotation<LineInfoEndElementAnnotation>();
                         if (a != null)
                         {
                             return a.lineNumber;
@@ -1043,7 +1046,8 @@ namespace System.Xml.Linq
                     XElement? e = _source as XElement;
                     if (e != null)
                     {
-                        LineInfoEndElementAnnotation? a = e.Annotation<LineInfoEndElementAnnotation>();
+                        LineInfoEndElementAnnotation? a =
+                            e.Annotation<LineInfoEndElementAnnotation>();
                         if (a != null)
                         {
                             return a.linePosition;
@@ -1136,7 +1140,12 @@ namespace System.Xml.Linq
             return null;
         }
 
-        private static void GetNameInAttributeScope(string? qualifiedName, XElement e, out string? localName, out string? namespaceName)
+        private static void GetNameInAttributeScope(
+            string? qualifiedName,
+            XElement e,
+            out string? localName,
+            out string? namespaceName
+        )
         {
             if (!string.IsNullOrEmpty(qualifiedName))
             {
@@ -1388,8 +1397,11 @@ namespace System.Xml.Linq
         /// <returns>The first attribute which is not a namespace attribute or null if the end of attributes has bean reached</returns>
         private XAttribute? GetFirstNonDuplicateNamespaceAttribute(XAttribute candidate)
         {
-            Debug.Assert(_omitDuplicateNamespaces, "This method should only be called if we're omitting duplicate namespace attribute." +
-                                                  "For perf reason it's better to test this flag in the caller method.");
+            Debug.Assert(
+                _omitDuplicateNamespaces,
+                "This method should only be called if we're omitting duplicate namespace attribute."
+                    + "For perf reason it's better to test this flag in the caller method."
+            );
             if (!IsDuplicateNamespaceAttribute(candidate))
             {
                 return candidate;

@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 namespace Microsoft.AspNetCore.DataProtection.SP800_108
 {
-    internal unsafe sealed class Win8SP800_108_CTR_HMACSHA512Provider : ISP800_108_CTR_HMACSHA512Provider
+    internal unsafe sealed class Win8SP800_108_CTR_HMACSHA512Provider
+        : ISP800_108_CTR_HMACSHA512Provider
     {
         private readonly BCryptKeyHandle _keyHandle;
 
@@ -17,10 +18,20 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             _keyHandle = ImportKey(pbKdk, cbKdk);
         }
 
-        public void DeriveKey(byte* pbLabel, uint cbLabel, byte* pbContext, uint cbContext, byte* pbDerivedKey, uint cbDerivedKey)
+        public void DeriveKey(
+            byte* pbLabel,
+            uint cbLabel,
+            byte* pbContext,
+            uint cbContext,
+            byte* pbDerivedKey,
+            uint cbDerivedKey
+        )
         {
             const int SHA512_ALG_CHAR_COUNT = 7;
-            char* pszHashAlgorithm = stackalloc char[SHA512_ALG_CHAR_COUNT /* includes terminating null */];
+            char* pszHashAlgorithm =
+                stackalloc char[
+                    SHA512_ALG_CHAR_COUNT /* includes terminating null */
+                ];
             pszHashAlgorithm[0] = 'S';
             pszHashAlgorithm[1] = 'H';
             pszHashAlgorithm[2] = 'A';
@@ -50,7 +61,7 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
             bufferDesc.cBuffers = 3;
             bufferDesc.pBuffers = pBuffers;
 
-            // Finally, invoke the KDF 
+            // Finally, invoke the KDF
             uint numBytesDerived;
             var ntstatus = UnsafeNativeMethods.BCryptKeyDerivation(
                 hKey: _keyHandle,
@@ -58,7 +69,8 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
                 pbDerivedKey: pbDerivedKey,
                 cbDerivedKey: cbDerivedKey,
                 pcbResult: out numBytesDerived,
-                dwFlags: 0);
+                dwFlags: 0
+            );
             UnsafeNativeMethods.ThrowExceptionForBCryptStatus(ntstatus);
 
             // Final sanity checks before returning control to caller.
@@ -91,8 +103,12 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
                     {
                         hashHandle.HashData(pbKdk, cbKdk, pbHashedKey, SHA512_DIGEST_SIZE_IN_BYTES);
                     }
-                    return CachedAlgorithmHandles.SP800_108_CTR_HMAC.GenerateSymmetricKey(pbHashedKey, SHA512_DIGEST_SIZE_IN_BYTES);
+                    return CachedAlgorithmHandles.SP800_108_CTR_HMAC.GenerateSymmetricKey(
+                        pbHashedKey,
+                        SHA512_DIGEST_SIZE_IN_BYTES
+                    );
                 }
+
                 finally
                 {
                     UnsafeBufferUtil.SecureZeroMemory(pbHashedKey, SHA512_DIGEST_SIZE_IN_BYTES);

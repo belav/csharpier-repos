@@ -15,7 +15,10 @@ namespace System.Runtime.Caching
     internal sealed class MemoryCacheEntryChangeMonitor : CacheEntryChangeMonitor
     {
         // use UTC minimum DateTime for error free conversions to DateTimeOffset
-        private static readonly DateTime s_DATETIME_MINVALUE_UTC = new DateTime(0, DateTimeKind.Utc);
+        private static readonly DateTime s_DATETIME_MINVALUE_UTC = new DateTime(
+            0,
+            DateTimeKind.Utc
+        );
         private const int MAX_CHAR_COUNT_OF_LONG_CONVERTED_TO_HEXADECIMAL_STRING = 16;
         private readonly ReadOnlyCollection<string> _keys;
         private readonly string _regionName;
@@ -47,7 +50,8 @@ namespace System.Runtime.Caching
                     int capacity = 0;
                     foreach (string key in _keys)
                     {
-                        capacity += key.Length + MAX_CHAR_COUNT_OF_LONG_CONVERTED_TO_HEXADECIMAL_STRING;
+                        capacity +=
+                            key.Length + MAX_CHAR_COUNT_OF_LONG_CONVERTED_TO_HEXADECIMAL_STRING;
                     }
                     StringBuilder sb = new StringBuilder(capacity);
                     foreach (string key in _keys)
@@ -71,6 +75,7 @@ namespace System.Runtime.Caching
                 }
                 dispose = false;
             }
+
             finally
             {
                 InitializationComplete();
@@ -81,7 +86,12 @@ namespace System.Runtime.Caching
             }
         }
 
-        private void StartMonitoring(MemoryCache cache, MemoryCacheEntry entry, ref bool hasChanged, ref DateTime utcCreated)
+        private void StartMonitoring(
+            MemoryCache cache,
+            MemoryCacheEntry entry,
+            ref bool hasChanged,
+            ref DateTime utcCreated
+        )
         {
             if (entry != null)
             {
@@ -128,13 +138,32 @@ namespace System.Runtime.Caching
         // public and internal members
         //
 
-        public override ReadOnlyCollection<string> CacheKeys { get { return new ReadOnlyCollection<string>(_keys); } }
-        public override string RegionName { get { return _regionName; } }
-        public override string UniqueId { get { return _uniqueId; } }
-        public override DateTimeOffset LastModified { get { return _lastModified; } }
-        internal List<MemoryCacheEntry> Dependencies { get { return _dependencies; } }
+        public override ReadOnlyCollection<string> CacheKeys
+        {
+            get { return new ReadOnlyCollection<string>(_keys); }
+        }
+        public override string RegionName
+        {
+            get { return _regionName; }
+        }
+        public override string UniqueId
+        {
+            get { return _uniqueId; }
+        }
+        public override DateTimeOffset LastModified
+        {
+            get { return _lastModified; }
+        }
+        internal List<MemoryCacheEntry> Dependencies
+        {
+            get { return _dependencies; }
+        }
 
-        internal MemoryCacheEntryChangeMonitor(ReadOnlyCollection<string> keys, string regionName, MemoryCache cache)
+        internal MemoryCacheEntryChangeMonitor(
+            ReadOnlyCollection<string> keys,
+            string regionName,
+            MemoryCache cache
+        )
         {
             Debug.Assert(keys != null && keys.Count > 0, "keys != null && keys.Count > 0");
             _keys = keys;

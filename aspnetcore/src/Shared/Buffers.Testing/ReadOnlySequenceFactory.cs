@@ -11,11 +11,16 @@ namespace System.Buffers
 {
     internal abstract class ReadOnlySequenceFactory
     {
-        public static ReadOnlySequenceFactory ArrayFactory { get; } = new ArrayTestSequenceFactory();
-        public static ReadOnlySequenceFactory MemoryFactory { get; } = new MemoryTestSequenceFactory();
-        public static ReadOnlySequenceFactory OwnedMemoryFactory { get; } = new OwnedMemoryTestSequenceFactory();
-        public static ReadOnlySequenceFactory SingleSegmentFactory { get; } = new SingleSegmentTestSequenceFactory();
-        public static ReadOnlySequenceFactory SegmentPerByteFactory { get; } = new BytePerSegmentTestSequenceFactory();
+        public static ReadOnlySequenceFactory ArrayFactory { get; } =
+            new ArrayTestSequenceFactory();
+        public static ReadOnlySequenceFactory MemoryFactory { get; } =
+            new MemoryTestSequenceFactory();
+        public static ReadOnlySequenceFactory OwnedMemoryFactory { get; } =
+            new OwnedMemoryTestSequenceFactory();
+        public static ReadOnlySequenceFactory SingleSegmentFactory { get; } =
+            new SingleSegmentTestSequenceFactory();
+        public static ReadOnlySequenceFactory SegmentPerByteFactory { get; } =
+            new BytePerSegmentTestSequenceFactory();
 
         public abstract ReadOnlySequence<byte> CreateOfSize(int size);
         public abstract ReadOnlySequence<byte> CreateWithContent(byte[] data);
@@ -66,7 +71,9 @@ namespace System.Buffers
             {
                 var startSegment = new byte[data.Length + 20];
                 Array.Copy(data, 0, startSegment, 10, data.Length);
-                return new ReadOnlySequence<byte>(new CustomMemoryForTest<byte>(startSegment, 10, data.Length).Memory);
+                return new ReadOnlySequence<byte>(
+                    new CustomMemoryForTest<byte>(startSegment, 10, data.Length).Memory
+                );
             }
         }
 

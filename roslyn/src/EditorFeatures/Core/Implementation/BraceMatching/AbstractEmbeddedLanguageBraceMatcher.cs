@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
     internal abstract class AbstractEmbeddedLanguageBraceMatcher : IBraceMatcher
     {
         public async Task<BraceMatchingResult?> FindBracesAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var languagesProvider = document.GetLanguageService<IEmbeddedLanguagesProvider>();
             if (languagesProvider != null)
@@ -29,7 +32,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.BraceMatching
                     if (braceMatcher != null)
                     {
                         var result = await braceMatcher.FindBracesAsync(
-                            document, position, cancellationToken).ConfigureAwait(false);
+                                document,
+                                position,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         if (result != null)
                         {
                             return result;

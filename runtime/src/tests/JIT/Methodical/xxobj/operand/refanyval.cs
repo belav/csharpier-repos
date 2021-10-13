@@ -31,7 +31,7 @@ namespace JitTest
             Test T = new Test();
             T._m_v = 1;
             Test T1 = new Test();
-            TypedReference R = __makeref(T);    //replace with cpobj in IL
+            TypedReference R = __makeref(T); //replace with cpobj in IL
             __refvalue(R, Test) = T1;
             return T._m_v;
         }

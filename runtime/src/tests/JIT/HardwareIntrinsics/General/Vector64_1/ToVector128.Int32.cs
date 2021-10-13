@@ -75,20 +75,23 @@ namespace JIT.HardwareIntrinsics.General
 
             Vector64<Int32> value = Vector64.Create(values[0], values[1]);
 
-            object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.ToVector128))
-                                .MakeGenericMethod(typeof(Int32))
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector64).GetMethod(nameof(Vector64.ToVector128))
+                .MakeGenericMethod(typeof(Int32))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector128<Int32>)(result), values, isUnsafe: false);
 
-            object unsafeResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.ToVector128))
-                                    .MakeGenericMethod(typeof(Int32))
-                                    .Invoke(null, new object[] { value });
+            object unsafeResult = typeof(Vector64).GetMethod(nameof(Vector64.ToVector128))
+                .MakeGenericMethod(typeof(Int32))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector128<Int32>)(unsafeResult), values, isUnsafe: true);
         }
 
-        private void ValidateResult(Vector128<Int32> result, Int32[] values, bool isUnsafe, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Int32> result,
+            Int32[] values,
+            bool isUnsafe,
+            [CallerMemberName] string method = ""
+        )
         {
             Int32[] resultElements = new Int32[ElementCount * 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);
@@ -96,7 +99,12 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, values, isUnsafe, method);
         }
 
-        private void ValidateResult(Int32[] result, Int32[] values, bool isUnsafe, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int32[] result,
+            Int32[] values,
+            bool isUnsafe,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -123,9 +131,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Int32>.ToVector128{(isUnsafe ? "Unsafe" : "")}(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Int32>.ToVector128{(isUnsafe ? "Unsafe" : "")}(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

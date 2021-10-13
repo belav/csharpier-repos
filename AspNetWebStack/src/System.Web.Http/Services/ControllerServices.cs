@@ -14,7 +14,7 @@ namespace System.Web.Http.Controllers
     public class ControllerServices : ServicesContainer
     {
         // This lists specific services that have been over ridden for the controller.
-        // Anything missing means just fall through and ask the _parent. 
+        // Anything missing means just fall through and ask the _parent.
         // This dictionary is only written at initialization time, and then read-only during steady state.
         // So it can be safely read from multiple threads after initialization.
         private Dictionary<Type, object> _overrideSingle;
@@ -82,7 +82,11 @@ namespace System.Web.Http.Controllers
         }
 
         // This is called to request a mutation to services.
-        [SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Justification = "want a mutable list")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1002:DoNotExposeGenericLists",
+            Justification = "want a mutable list"
+        )]
         protected override List<object> GetServiceInstances(Type serviceType)
         {
             if (_overrideMulti == null)
@@ -92,7 +96,7 @@ namespace System.Web.Http.Controllers
             List<object> list;
             if (!_overrideMulti.TryGetValue(serviceType, out list))
             {
-                // Copy parents list. 
+                // Copy parents list.
                 list = new List<object>(_parent.GetServices(serviceType));
 
                 // Copy into per-controller. If they're asking for the list, the expectation is that it's going to get mutated.

@@ -14,12 +14,14 @@ namespace Internal.Cryptography
         public delegate void ImportEncryptedKeyAction<TPass>(
             ReadOnlySpan<TPass> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead);
+            out int bytesRead
+        );
 
         public static void ImportEncryptedPem<TPass>(
             ReadOnlySpan<char> input,
             ReadOnlySpan<TPass> password,
-            ImportEncryptedKeyAction<TPass> importAction)
+            ImportEncryptedKeyAction<TPass> importAction
+        )
         {
             bool foundEncryptedPem = false;
             PemFields foundFields = default;
@@ -34,7 +36,10 @@ namespace Internal.Cryptography
                 {
                     if (foundEncryptedPem)
                     {
-                        throw new ArgumentException(SR.Argument_PemImport_AmbiguousPem, nameof(input));
+                        throw new ArgumentException(
+                            SR.Argument_PemImport_AmbiguousPem,
+                            nameof(input)
+                        );
                     }
 
                     foundEncryptedPem = true;
@@ -73,6 +78,7 @@ namespace Internal.Cryptography
                 // on an input which is already a parsed subset of the input.
                 importAction(password, decodedBase64, out _);
             }
+
             finally
             {
                 CryptoPool.Return(decodeBuffer, clearSize: bytesWritten);
@@ -102,7 +108,10 @@ namespace Internal.Cryptography
                     // PEM, we will throw a duplicate exception.
                     if (importAction != null || containsEncryptedPem)
                     {
-                        throw new ArgumentException(SR.Argument_PemImport_AmbiguousPem, nameof(input));
+                        throw new ArgumentException(
+                            SR.Argument_PemImport_AmbiguousPem,
+                            nameof(input)
+                        );
                     }
 
                     importAction = action;
@@ -113,7 +122,10 @@ namespace Internal.Cryptography
                 {
                     if (importAction != null || containsEncryptedPem)
                     {
-                        throw new ArgumentException(SR.Argument_PemImport_AmbiguousPem, nameof(input));
+                        throw new ArgumentException(
+                            SR.Argument_PemImport_AmbiguousPem,
+                            nameof(input)
+                        );
                     }
 
                     containsEncryptedPem = true;
@@ -159,6 +171,7 @@ namespace Internal.Cryptography
                 // on an input which is already a parsed subset of the input.
                 importAction(decodedBase64, out _);
             }
+
             finally
             {
                 CryptoPool.Return(decodeBuffer, clearSize: bytesWritten);

@@ -14,14 +14,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData("MyProperty[0]", "MyProperty")]
         public void ContainsPrefix_ReturnsTrue_IfElementNameStartsWithPrefix(
             string elementName,
-            string prefix)
+            string prefix
+        )
         {
             // Arrange
             var culture = new CultureInfo("en-US");
-            var elementalValueProvider = new ElementalValueProvider(
-                elementName,
-                "hi",
-                culture);
+            var elementalValueProvider = new ElementalValueProvider(elementName, "hi", culture);
 
             // Act
             var containsPrefix = elementalValueProvider.ContainsPrefix(prefix);
@@ -36,14 +34,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         [InlineData("Random", "MyProperty")]
         public void ContainsPrefix_ReturnsFalse_IfElementCannotSpecifyValuesForPrefix(
             string elementName,
-            string prefix)
+            string prefix
+        )
         {
             // Arrange
             var culture = new CultureInfo("en-US");
-            var elementalValueProvider = new ElementalValueProvider(
-                elementName,
-                "hi",
-                culture);
+            var elementalValueProvider = new ElementalValueProvider(elementName, "hi", culture);
 
             // Act
             var containsPrefix = elementalValueProvider.ContainsPrefix(prefix);
@@ -77,7 +73,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
             var valueProvider = new ElementalValueProvider("foo", "hi", culture);
 
             // Act
-            var result =  valueProvider.GetValue(name);
+            var result = valueProvider.GetValue(name);
 
             // Assert
             Assert.Equal("hi", (string)result);

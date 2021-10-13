@@ -30,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(nameof(FindReferencesOfOverloadsCommandHandler))]
-    internal sealed class FindReferencesOfOverloadsCommandHandler :
-        AbstractNavigationCommandHandler<FindReferencesOfOverloadsCommandArgs>
+    internal sealed class FindReferencesOfOverloadsCommandHandler
+        : AbstractNavigationCommandHandler<FindReferencesOfOverloadsCommandArgs>
     {
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly IThreadingContext _threadingContext;
@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         public FindReferencesOfOverloadsCommandHandler(
             [ImportMany] IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IThreadingContext threadingContext)
-            : base(streamingPresenters)
+            IThreadingContext threadingContext
+        ) : base(streamingPresenters)
         {
             Contract.ThrowIfNull(streamingPresenters);
             Contract.ThrowIfNull(listenerProvider);
@@ -54,7 +54,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             _threadingContext = threadingContext;
         }
 
-        protected override bool TryExecuteCommand(int caretPosition, Document document, CommandExecutionContext context)
+        protected override bool TryExecuteCommand(
+            int caretPosition,
+            Document document,
+            CommandExecutionContext context
+        )
         {
             var streamingService = document.GetLanguageService<IFindUsagesService>();
             var streamingPresenter = GetStreamingPresenter();
@@ -65,17 +69,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             if (streamingService != null && streamingPresenter != null)
             {
                 // Fire and forget.  So no need for cancellation.
-                _ = StreamingFindReferencesAsync(document, caretPosition, streamingPresenter, CancellationToken.None);
+                _ = StreamingFindReferencesAsync(
+                    document,
+                    caretPosition,
+                    streamingPresenter,
+                    CancellationToken.None
+                );
                 return true;
             }
 
             return false;
         }
 
-        private static async Task<ISymbol[]> GatherSymbolsAsync(ISymbol symbol, Microsoft.CodeAnalysis.Solution solution, CancellationToken token)
+        private static async Task<ISymbol[]> GatherSymbolsAsync(
+            ISymbol symbol,
+            Microsoft.CodeAnalysis.Solution solution,
+            CancellationToken token
+        )
         {
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
-            var implementations = await SymbolFinder.FindImplementationsAsync(symbol, solution, null, token);
+            var implementations = await SymbolFinder.FindImplementationsAsync(
+                symbol,
+                solution,
+                null,
+                token
+            );
 #pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
             var result = new ISymbol[implementations.Count() + 1];
             result[0] = symbol;
@@ -88,34 +106,54 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         }
 
         private async Task StreamingFindReferencesAsync(
-            Document document, int caretPosition, IStreamingFindUsagesPresenter presenter, CancellationToken cancellationToken)
+            Document document,
+            int caretPosition,
+            IStreamingFindUsagesPresenter presenter,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 // first, let's see if we even have a comment, otherwise there's no use in starting a search
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
-                var relevantSymbol = await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(document, caretPosition, new CancellationToken());
+                var relevantSymbol =
+                    await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(
+                        document,
+                        caretPosition,
+                        new CancellationToken()
+                    );
 #pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
                 var symbol = relevantSymbol?.symbol;
                 if (symbol == null)
                     return; // would be useful if we could notify the user why we didn't do anything
-                            // maybe using something like an info bar?
+                // maybe using something like an info bar?
 
                 var findUsagesService = document.GetLanguageService<IFindUsagesService>();
 
-                using var token = _asyncListener.BeginAsyncOperation(nameof(StreamingFindReferencesAsync));
+                using var token = _asyncListener.BeginAsyncOperation(
+                    nameof(StreamingFindReferencesAsync)
+                );
 
-                var context = presenter.StartSearch(EditorFeaturesResources.Find_References, supportsReferences: true, cancellationToken);
+                var context = presenter.StartSearch(
+                    EditorFeaturesResources.Find_References,
+                    supportsReferences: true,
+                    cancellationToken
+                );
 
-                using (Logger.LogBlock(
-                    FunctionId.CommandHandler_FindAllReference,
-                    KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
-                    context.CancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.CommandHandler_FindAllReference,
+                        KeyValueLogMessage.Create(LogType.UserAction, m => m["type"] = "streaming"),
+                        context.CancellationToken
+                    )
+                )
                 {
                     var symbolsToLookup = new List<ISymbol>();
 
-                    foreach (var curSymbol in symbol.ContainingType.GetMembers()
-                                                    .Where(m => m.Kind == symbol.Kind && m.Name == symbol.Name))
+                    foreach (
+                        var curSymbol in symbol.ContainingType.GetMembers()
+                            .Where(m => m.Kind == symbol.Kind && m.Name == symbol.Name)
+                    )
                     {
                         Compilation compilation;
                         if (!document.Project.TryGetCompilation(out compilation))
@@ -124,11 +162,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                             continue;
                         }
 
-                        foreach (var sym in SymbolFinder.FindSimilarSymbols(curSymbol, compilation, context.CancellationToken))
+                        foreach (
+                            var sym in SymbolFinder.FindSimilarSymbols(
+                                curSymbol,
+                                compilation,
+                                context.CancellationToken
+                            )
+                        )
                         {
                             // assumption here is, that FindSimilarSymbols returns symbols inside same project
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
-                            var symbolsToAdd = await GatherSymbolsAsync(sym, document.Project.Solution, context.CancellationToken);
+                            var symbolsToAdd = await GatherSymbolsAsync(
+                                sym,
+                                document.Project.Solution,
+                                context.CancellationToken
+                            );
 #pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
                             symbolsToLookup.AddRange(symbolsToAdd);
                         }
@@ -137,7 +185,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                     foreach (var candidate in symbolsToLookup)
                     {
 #pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
-                        await AbstractFindUsagesService.FindSymbolReferencesAsync(context, candidate, document.Project);
+                        await AbstractFindUsagesService.FindSymbolReferencesAsync(
+                            context,
+                            candidate,
+                            document.Project
+                        );
 #pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
                     }
 
@@ -149,12 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                     await context.OnCompletedAsync().ConfigureAwait(false);
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
-            catch (Exception e) when (FatalError.ReportAndCatch(e))
-            {
-            }
+            catch (OperationCanceledException) { }
+            catch (Exception e) when (FatalError.ReportAndCatch(e)) { }
         }
     }
 }

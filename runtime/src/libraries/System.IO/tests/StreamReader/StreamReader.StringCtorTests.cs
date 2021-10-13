@@ -13,13 +13,34 @@ namespace System.IO.Tests
         [Fact]
         public static void NullArgs_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("path", () => new StreamReader((string)null));
-            AssertExtensions.Throws<ArgumentNullException>("path", () => new StreamReader((string)null, null));
-            AssertExtensions.Throws<ArgumentNullException>("path", () => new StreamReader((string)null, null, true));
-            AssertExtensions.Throws<ArgumentNullException>("path", () => new StreamReader((string)null, null, true, -1));
-            AssertExtensions.Throws<ArgumentNullException>("encoding", () => new StreamReader("", null));
-            AssertExtensions.Throws<ArgumentNullException>("encoding", () => new StreamReader("", null, true));
-            AssertExtensions.Throws<ArgumentNullException>("encoding", () => new StreamReader("", null, true, -1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => new StreamReader((string)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => new StreamReader((string)null, null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => new StreamReader((string)null, null, true)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "path",
+                () => new StreamReader((string)null, null, true, -1)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "encoding",
+                () => new StreamReader("", null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "encoding",
+                () => new StreamReader("", null, true)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "encoding",
+                () => new StreamReader("", null, true, -1)
+            );
         }
 
         [Fact]
@@ -27,22 +48,39 @@ namespace System.IO.Tests
         {
             // No argument name for the empty path exception
             AssertExtensions.Throws<ArgumentException>(null, () => new StreamReader(""));
-            AssertExtensions.Throws<ArgumentException>(null, () => new StreamReader("", Encoding.UTF8));
-            AssertExtensions.Throws<ArgumentException>(null, () => new StreamReader("", Encoding.UTF8, true));
-            AssertExtensions.Throws<ArgumentException>(null, () => new StreamReader("", Encoding.UTF8, true, -1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new StreamReader("", Encoding.UTF8)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new StreamReader("", Encoding.UTF8, true)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new StreamReader("", Encoding.UTF8, true, -1)
+            );
         }
 
         [Fact]
         public static void NegativeBufferSize_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => new StreamReader("path", Encoding.UTF8, true, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () => new StreamReader("path", Encoding.UTF8, true, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "bufferSize",
+                () => new StreamReader("path", Encoding.UTF8, true, -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "bufferSize",
+                () => new StreamReader("path", Encoding.UTF8, true, 0)
+            );
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public static void ReadToEnd_detectEncodingFromByteOrderMarks(bool detectEncodingFromByteOrderMarks)
+        public static void ReadToEnd_detectEncodingFromByteOrderMarks(
+            bool detectEncodingFromByteOrderMarks
+        )
         {
             string testfile = Path.GetTempFileName();
             try
@@ -53,6 +91,7 @@ namespace System.IO.Tests
                     Assert.Equal("ABCD", sr2.ReadToEnd());
                 }
             }
+
             finally
             {
                 File.Delete(testfile);

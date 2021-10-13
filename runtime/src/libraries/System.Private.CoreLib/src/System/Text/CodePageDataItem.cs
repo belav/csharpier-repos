@@ -18,7 +18,8 @@ namespace System.Text
             string headerName,
             string bodyName,
             string displayName,
-            uint flags)
+            uint flags
+        )
         {
             UIFamilyCodePage = uiFamilyCodePage;
             WebName = webName;

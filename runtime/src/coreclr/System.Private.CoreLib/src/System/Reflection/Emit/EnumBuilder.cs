@@ -21,7 +21,8 @@ namespace System.Reflection.Emit
     {
         public override bool IsAssignableFrom([NotNullWhen(true)] TypeInfo? typeInfo)
         {
-            if (typeInfo == null) return false;
+            if (typeInfo == null)
+                return false;
             return IsAssignableFrom(typeInfo.AsType());
         }
 
@@ -33,7 +34,8 @@ namespace System.Reflection.Emit
             FieldBuilder fieldBuilder = m_typeBuilder.DefineField(
                 literalName,
                 this,
-                FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal);
+                FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal
+            );
             fieldBuilder.SetConstant(literalValue);
             return fieldBuilder;
         }
@@ -54,7 +56,6 @@ namespace System.Reflection.Emit
         // Get the internal metadata token for this class.
         internal int TypeToken => m_typeBuilder.TypeToken;
 
-
         // return the underlying field for the enum
         public FieldBuilder UnderlyingField => m_underlyingField;
 
@@ -74,9 +75,19 @@ namespace System.Reflection.Emit
             object?[]? args,
             ParameterModifier[]? modifiers,
             CultureInfo? culture,
-            string[]? namedParameters)
+            string[]? namedParameters
+        )
         {
-            return m_typeBuilder.InvokeMember(name, invokeAttr, binder, target, args, modifiers, culture, namedParameters);
+            return m_typeBuilder.InvokeMember(
+                name,
+                invokeAttr,
+                binder,
+                target,
+                args,
+                modifiers,
+                culture,
+                namedParameters
+            );
         }
 
         public override Module Module => m_typeBuilder.Module;
@@ -95,43 +106,84 @@ namespace System.Reflection.Emit
 
         public override bool IsByRefLike => false;
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-        protected override ConstructorInfo? GetConstructorImpl(BindingFlags bindingAttr, Binder? binder,
-                CallingConventions callConvention, Type[] types, ParameterModifier[]? modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
+        protected override ConstructorInfo? GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[]? modifiers
+        )
         {
-            return m_typeBuilder.GetConstructor(bindingAttr, binder, callConvention,
-                            types, modifiers);
+            return m_typeBuilder.GetConstructor(
+                bindingAttr,
+                binder,
+                callConvention,
+                types,
+                modifiers
+            );
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+                | DynamicallyAccessedMemberTypes.NonPublicConstructors
+        )]
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetConstructors(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
-        protected override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder,
-                CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             if (types == null)
                 return m_typeBuilder.GetMethod(name, bindingAttr);
             else
-                return m_typeBuilder.GetMethod(name, bindingAttr, binder, callConvention, types, modifiers);
+                return m_typeBuilder.GetMethod(
+                    name,
+                    bindingAttr,
+                    binder,
+                    callConvention,
+                    types,
+                    modifiers
+                );
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicMethods
+                | DynamicallyAccessedMemberTypes.NonPublicMethods
+        )]
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetMethods(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo? GetField(string name, BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetField(name, bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.NonPublicFields)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicFields
+                | DynamicallyAccessedMemberTypes.NonPublicFields
+        )]
         public override FieldInfo[] GetFields(BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetFields(bindingAttr);
@@ -147,7 +199,10 @@ namespace System.Reflection.Emit
             return m_typeBuilder.GetInterfaces();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo? GetEvent(string name, BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetEvent(name, bindingAttr);
@@ -159,33 +214,55 @@ namespace System.Reflection.Emit
             return m_typeBuilder.GetEvents();
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
-        protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder,
-                Type? returnType, Type[]? types, ParameterModifier[]? modifiers)
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            Type? returnType,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties
+        )]
         public override PropertyInfo[] GetProperties(BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetProperties(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type[] GetNestedTypes(BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetNestedTypes(bindingAttr);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes | DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicNestedTypes
+                | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+        )]
         public override Type? GetNestedType(string name, BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetNestedType(name, bindingAttr);
         }
 
         [DynamicallyAccessedMembers(GetAllMembers)]
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             return m_typeBuilder.GetMember(name, type, bindingAttr);
         }
@@ -201,7 +278,10 @@ namespace System.Reflection.Emit
             return m_typeBuilder.GetInterfaceMap(interfaceType);
         }
 
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents | DynamicallyAccessedMemberTypes.NonPublicEvents)]
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicEvents
+                | DynamicallyAccessedMemberTypes.NonPublicEvents
+        )]
         public override EventInfo[] GetEvents(BindingFlags bindingAttr)
         {
             return m_typeBuilder.GetEvents(bindingAttr);
@@ -297,7 +377,6 @@ namespace System.Reflection.Emit
 
         public override Type? ReflectedType => m_typeBuilder.ReflectedType;
 
-
         // Returns true if one or more instance of attributeType is defined on this member.
         public override bool IsDefined(Type attributeType, bool inherit)
         {
@@ -331,24 +410,40 @@ namespace System.Reflection.Emit
             return SymbolType.FormCompoundType(s, this, 0)!;
         }
 
-
         // Constructs a EnumBuilder.
         // EnumBuilder can only be a top-level (not nested) enum type.
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2064:UnrecognizedReflectionPattern",
-            Justification = "Reflection.Emit is not subject to trimming")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2064:UnrecognizedReflectionPattern",
+            Justification = "Reflection.Emit is not subject to trimming"
+        )]
         internal EnumBuilder(
-            string name,                       // name of type
-            Type underlyingType,             // underlying type for an Enum
-            TypeAttributes visibility,              // any bits on TypeAttributes.VisibilityMask)
-            ModuleBuilder module)                     // module containing this type
+            string name, // name of type
+            Type underlyingType, // underlying type for an Enum
+            TypeAttributes visibility, // any bits on TypeAttributes.VisibilityMask)
+            ModuleBuilder module
+        ) // module containing this type
         {
             // Client should not set any bits other than the visibility bits.
             if ((visibility & ~TypeAttributes.VisibilityMask) != 0)
                 throw new ArgumentException(SR.Argument_ShouldOnlySetVisibilityFlags, nameof(name));
-            m_typeBuilder = new TypeBuilder(name, visibility | TypeAttributes.Sealed, typeof(System.Enum), null, module, PackingSize.Unspecified, TypeBuilder.UnspecifiedTypeSize, null);
+            m_typeBuilder = new TypeBuilder(
+                name,
+                visibility | TypeAttributes.Sealed,
+                typeof(System.Enum),
+                null,
+                module,
+                PackingSize.Unspecified,
+                TypeBuilder.UnspecifiedTypeSize,
+                null
+            );
 
             // Define the underlying field for the enum. It will be a non-static, private field with special name bit set.
-            m_underlyingField = m_typeBuilder.DefineField("value__", underlyingType, FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName);
+            m_underlyingField = m_typeBuilder.DefineField(
+                "value__",
+                underlyingType,
+                FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName
+            );
         }
 
         /*****************************************************

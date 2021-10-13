@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             private class LastLineCache
             {
                 // this helper class is primarily to improve active typing perf. don't bother to cache
-                // something very big. 
+                // something very big.
                 private const int MaxClassificationNumber = 32;
                 private readonly object _gate = new();
 
@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 private SnapshotSpan _span;
                 private List<ClassifiedSpan> _classifications;
 
-                public LastLineCache()
-                    => this.Clear();
+                public LastLineCache() => this.Clear();
 
                 private void Clear()
                 {

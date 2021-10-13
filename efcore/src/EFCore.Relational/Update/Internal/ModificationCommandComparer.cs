@@ -65,8 +65,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                 return result;
             }
 
-            if (x.Entries.Count > 0
-                && y.Entries.Count > 0)
+            if (x.Entries.Count > 0 && y.Entries.Count > 0)
             {
                 var xEntry = x.Entries[0];
                 var yEntry = y.Entries[0];

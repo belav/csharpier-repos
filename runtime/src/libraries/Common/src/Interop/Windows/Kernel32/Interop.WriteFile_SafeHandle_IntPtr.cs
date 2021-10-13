@@ -16,6 +16,12 @@ internal static partial class Interop
         // and pass in an address for the numBytesRead parameter.
 
         [DllImport(Libraries.Kernel32, SetLastError = true)]
-        internal static extern unsafe int WriteFile(SafeHandle handle, byte* bytes, int numBytesToWrite, out int numBytesWritten, IntPtr mustBeZero);
+        internal static extern unsafe int WriteFile(
+            SafeHandle handle,
+            byte* bytes,
+            int numBytesToWrite,
+            out int numBytesWritten,
+            IntPtr mustBeZero
+        );
     }
 }

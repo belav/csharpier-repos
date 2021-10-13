@@ -46,7 +46,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <param name="registry">The <see cref="IPolicyRegistry{String}"/>.</param>
         /// <returns>The provided <see cref="IPolicyRegistry{String}"/>.</returns>
-        public static IPolicyRegistry<string> AddPolicyRegistry(this IServiceCollection services, IPolicyRegistry<string> registry)
+        public static IPolicyRegistry<string> AddPolicyRegistry(
+            this IServiceCollection services,
+            IPolicyRegistry<string> registry
+        )
         {
             if (services == null)
             {
@@ -77,7 +80,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <param name="configureRegistry">A delegate that is used to configure an <see cref="IPolicyRegistry{String}"/>.</param>
         /// <returns>The provided <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddPolicyRegistry(this IServiceCollection services, Action<IServiceProvider, IPolicyRegistry<string>> configureRegistry)
+        public static IServiceCollection AddPolicyRegistry(
+            this IServiceCollection services,
+            Action<IServiceProvider, IPolicyRegistry<string>> configureRegistry
+        )
         {
             if (services == null)
             {
@@ -91,18 +97,26 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Create an empty registry, configure it and register it as an instance.
             // This is the best way to get a single instance registered using both interfaces.
-            services.AddSingleton(serviceProvider =>
-            {
-                var registry = new PolicyRegistry();
+            services.AddSingleton(
+                serviceProvider =>
+                {
+                    var registry = new PolicyRegistry();
 
-                configureRegistry(serviceProvider, registry);
+                    configureRegistry(serviceProvider, registry);
 
-                return registry;
-            });
+                    return registry;
+                }
+            );
 
-            services.AddSingleton<IConcurrentPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
-            services.AddSingleton<IPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
-            services.AddSingleton<IReadOnlyPolicyRegistry<string>>(serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>());
+            services.AddSingleton<IConcurrentPolicyRegistry<string>>(
+                serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>()
+            );
+            services.AddSingleton<IPolicyRegistry<string>>(
+                serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>()
+            );
+            services.AddSingleton<IReadOnlyPolicyRegistry<string>>(
+                serviceProvider => serviceProvider.GetRequiredService<PolicyRegistry>()
+            );
 
             return services;
         }

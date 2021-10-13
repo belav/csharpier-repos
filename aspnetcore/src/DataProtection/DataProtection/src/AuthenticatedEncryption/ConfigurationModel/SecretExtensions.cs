@@ -26,17 +26,22 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                 try
                 {
                     secret.WriteSecretIntoBuffer(new ArraySegment<byte>(unprotectedSecretRawBytes));
-                    unprotectedSecretAsBase64String = Convert.ToBase64String(unprotectedSecretRawBytes);
+                    unprotectedSecretAsBase64String = Convert.ToBase64String(
+                        unprotectedSecretRawBytes
+                    );
                 }
+
                 finally
                 {
                     Array.Clear(unprotectedSecretRawBytes, 0, unprotectedSecretRawBytes.Length);
                 }
             }
 
-            var masterKeyElement = new XElement("masterKey",
+            var masterKeyElement = new XElement(
+                "masterKey",
                 new XComment(" Warning: the key below is in an unencrypted form. "),
-                new XElement("value", unprotectedSecretAsBase64String));
+                new XElement("value", unprotectedSecretAsBase64String)
+            );
             masterKeyElement.MarkAsRequiresEncryption();
             return masterKeyElement;
         }
@@ -54,6 +59,7 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                 {
                     return new Secret(unprotectedSecret);
                 }
+
                 finally
                 {
                     Array.Clear(unprotectedSecret, 0, unprotectedSecret.Length);

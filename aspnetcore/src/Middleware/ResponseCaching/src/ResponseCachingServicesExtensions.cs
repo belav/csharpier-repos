@@ -36,7 +36,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
         /// <param name="configureOptions">A delegate to configure the <see cref="ResponseCachingOptions"/>.</param>
         /// <returns></returns>
-        public static IServiceCollection AddResponseCaching(this IServiceCollection services, Action<ResponseCachingOptions> configureOptions)
+        public static IServiceCollection AddResponseCaching(
+            this IServiceCollection services,
+            Action<ResponseCachingOptions> configureOptions
+        )
         {
             if (services == null)
             {

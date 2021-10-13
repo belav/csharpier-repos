@@ -6,7 +6,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal sealed class CompilationUnitCompletedEvent : CompilationEvent
     {
-        public CompilationUnitCompletedEvent(Compilation compilation, SyntaxTree compilationUnit) : base(compilation)
+        public CompilationUnitCompletedEvent(Compilation compilation, SyntaxTree compilationUnit)
+            : base(compilation)
         {
             this.CompilationUnit = compilationUnit;
         }

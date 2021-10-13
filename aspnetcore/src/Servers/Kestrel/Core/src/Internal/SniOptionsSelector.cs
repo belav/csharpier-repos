@@ -25,11 +25,24 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
         private readonly string _endpointName;
 
-        private readonly Func<ConnectionContext, string?, X509Certificate2?>? _fallbackServerCertificateSelector;
-        private readonly Action<ConnectionContext, SslServerAuthenticationOptions>? _onAuthenticateCallback;
+        private readonly Func<
+            ConnectionContext,
+            string?,
+            X509Certificate2?
+        >? _fallbackServerCertificateSelector;
+        private readonly Action<
+            ConnectionContext,
+            SslServerAuthenticationOptions
+        >? _onAuthenticateCallback;
 
-        private readonly Dictionary<string, SniOptions> _exactNameOptions = new Dictionary<string, SniOptions>(StringComparer.OrdinalIgnoreCase);
-        private readonly SortedList<string, SniOptions> _wildcardPrefixOptions = new SortedList<string, SniOptions>(LongestStringFirstComparer.Instance);
+        private readonly Dictionary<string, SniOptions> _exactNameOptions = new Dictionary<
+            string,
+            SniOptions
+        >(StringComparer.OrdinalIgnoreCase);
+        private readonly SortedList<string, SniOptions> _wildcardPrefixOptions = new SortedList<
+            string,
+            SniOptions
+        >(LongestStringFirstComparer.Instance);
         private readonly SniOptions? _wildcardOptions;
 
         public SniOptionsSelector(
@@ -38,7 +51,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             ICertificateConfigLoader certifcateConfigLoader,
             HttpsConnectionAdapterOptions fallbackHttpsOptions,
             HttpProtocols fallbackHttpProtocols,
-            ILogger<HttpsConnectionMiddleware> logger)
+            ILogger<HttpsConnectionMiddleware> logger
+        )
         {
             _endpointName = endpointName;
 
@@ -49,21 +63,32 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             {
                 var sslOptions = new SslServerAuthenticationOptions
                 {
-                    ServerCertificate = certifcateConfigLoader.LoadCertificate(sniConfig.Certificate, $"{endpointName}:Sni:{name}"),
-                    EnabledSslProtocols = sniConfig.SslProtocols ?? fallbackHttpsOptions.SslProtocols,
-                    CertificateRevocationCheckMode = fallbackHttpsOptions.CheckCertificateRevocation ? X509RevocationMode.Online : X509RevocationMode.NoCheck,
+                    ServerCertificate = certifcateConfigLoader.LoadCertificate(
+                        sniConfig.Certificate,
+                        $"{endpointName}:Sni:{name}"
+                    ),
+                    EnabledSslProtocols =
+                        sniConfig.SslProtocols ?? fallbackHttpsOptions.SslProtocols,
+                    CertificateRevocationCheckMode = fallbackHttpsOptions.CheckCertificateRevocation
+                        ? X509RevocationMode.Online
+                        : X509RevocationMode.NoCheck,
                 };
 
                 if (sslOptions.ServerCertificate is null)
                 {
-                    if (fallbackHttpsOptions.ServerCertificate is null && _fallbackServerCertificateSelector is null)
+                    if (
+                        fallbackHttpsOptions.ServerCertificate is null
+                        && _fallbackServerCertificateSelector is null
+                    )
                     {
-                        throw new InvalidOperationException(CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound);
+                        throw new InvalidOperationException(
+                            CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound
+                        );
                     }
 
                     if (_fallbackServerCertificateSelector is null)
                     {
-                        // Cache the fallback ServerCertificate since there's no fallback ServerCertificateSelector taking precedence. 
+                        // Cache the fallback ServerCertificate since there's no fallback ServerCertificateSelector taking precedence.
                         sslOptions.ServerCertificate = fallbackHttpsOptions.ServerCertificate;
                     }
                 }
@@ -72,26 +97,46 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                 {
                     // This might be do blocking IO but it'll resolve the certificate chain up front before any connections are
                     // made to the server
-                    sslOptions.ServerCertificateContext = SslStreamCertificateContext.Create((X509Certificate2)sslOptions.ServerCertificate, additionalCertificates: null);
+                    sslOptions.ServerCertificateContext = SslStreamCertificateContext.Create(
+                        (X509Certificate2)sslOptions.ServerCertificate,
+                        additionalCertificates: null
+                    );
                 }
 
-                if (!certifcateConfigLoader.IsTestMock && sslOptions.ServerCertificate is X509Certificate2 cert2)
+                if (
+                    !certifcateConfigLoader.IsTestMock
+                    && sslOptions.ServerCertificate is X509Certificate2 cert2
+                )
                 {
                     HttpsConnectionMiddleware.EnsureCertificateIsAllowedForServerAuth(cert2);
                 }
 
-                var clientCertificateMode = sniConfig.ClientCertificateMode ?? fallbackHttpsOptions.ClientCertificateMode;
+                var clientCertificateMode =
+                    sniConfig.ClientCertificateMode ?? fallbackHttpsOptions.ClientCertificateMode;
 
                 if (clientCertificateMode != ClientCertificateMode.NoCertificate)
                 {
                     sslOptions.ClientCertificateRequired = true;
-                    sslOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
+                    sslOptions.RemoteCertificateValidationCallback = (
+                        sender,
+                        certificate,
+                        chain,
+                        sslPolicyErrors
+                    ) =>
                         HttpsConnectionMiddleware.RemoteCertificateValidationCallback(
-                            clientCertificateMode, fallbackHttpsOptions.ClientCertificateValidation, certificate, chain, sslPolicyErrors);
+                            clientCertificateMode,
+                            fallbackHttpsOptions.ClientCertificateValidation,
+                            certificate,
+                            chain,
+                            sslPolicyErrors
+                        );
                 }
 
                 var httpProtocols = sniConfig.Protocols ?? fallbackHttpProtocols;
-                httpProtocols = HttpsConnectionMiddleware.ValidateAndNormalizeHttpProtocols(httpProtocols, logger);
+                httpProtocols = HttpsConnectionMiddleware.ValidateAndNormalizeHttpProtocols(
+                    httpProtocols,
+                    logger
+                );
                 HttpsConnectionMiddleware.ConfigureAlpn(sslOptions, httpProtocols);
 
                 var sniOptions = new SniOptions(sslOptions, httpProtocols);
@@ -112,11 +157,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             }
         }
 
-        public SslServerAuthenticationOptions GetOptions(ConnectionContext connection, string serverName)
+        public SslServerAuthenticationOptions GetOptions(
+            ConnectionContext connection,
+            string serverName
+        )
         {
             SniOptions? sniOptions = null;
 
-            if (!string.IsNullOrEmpty(serverName) && !_exactNameOptions.TryGetValue(serverName, out sniOptions))
+            if (
+                !string.IsNullOrEmpty(serverName)
+                && !_exactNameOptions.TryGetValue(serverName, out sniOptions)
+            )
             {
                 foreach (var (suffix, options) in _wildcardPrefixOptions)
                 {
@@ -136,11 +187,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                 if (serverName is null)
                 {
                     // There was no ALPN
-                    throw new AuthenticationException(CoreStrings.FormatSniNotConfiguredToAllowNoServerName(_endpointName));
+                    throw new AuthenticationException(
+                        CoreStrings.FormatSniNotConfiguredToAllowNoServerName(_endpointName)
+                    );
                 }
                 else
                 {
-                    throw new AuthenticationException(CoreStrings.FormatSniNotConfiguredForServerName(serverName, _endpointName));
+                    throw new AuthenticationException(
+                        CoreStrings.FormatSniNotConfiguredForServerName(serverName, _endpointName)
+                    );
                 }
             }
 
@@ -150,16 +205,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
             if (sslOptions.ServerCertificate is null)
             {
-                Debug.Assert(_fallbackServerCertificateSelector != null,
-                    "The cached SniOptions ServerCertificate can only be null if there's a fallback certificate selector.");
+                Debug.Assert(
+                    _fallbackServerCertificateSelector != null,
+                    "The cached SniOptions ServerCertificate can only be null if there's a fallback certificate selector."
+                );
 
                 // If a ServerCertificateSelector doesn't return a cert, HttpsConnectionMiddleware doesn't fallback to the ServerCertificate.
                 sslOptions = CloneSslOptions(sslOptions);
-                var fallbackCertificate = _fallbackServerCertificateSelector(connection, serverName);
+                var fallbackCertificate = _fallbackServerCertificateSelector(
+                    connection,
+                    serverName
+                );
 
                 if (fallbackCertificate != null)
                 {
-                    HttpsConnectionMiddleware.EnsureCertificateIsAllowedForServerAuth(fallbackCertificate);
+                    HttpsConnectionMiddleware.EnsureCertificateIsAllowedForServerAuth(
+                        fallbackCertificate
+                    );
                 }
 
                 sslOptions.ServerCertificate = fallbackCertificate;
@@ -175,14 +237,22 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
             return sslOptions;
         }
 
-        public static ValueTask<SslServerAuthenticationOptions> OptionsCallback(ConnectionContext connection, SslStream stream, SslClientHelloInfo clientHelloInfo, object state, CancellationToken cancellationToken)
+        public static ValueTask<SslServerAuthenticationOptions> OptionsCallback(
+            ConnectionContext connection,
+            SslStream stream,
+            SslClientHelloInfo clientHelloInfo,
+            object state,
+            CancellationToken cancellationToken
+        )
         {
             var sniOptionsSelector = (SniOptionsSelector)state;
             var options = sniOptionsSelector.GetOptions(connection, clientHelloInfo.ServerName);
             return new ValueTask<SslServerAuthenticationOptions>(options);
         }
 
-        internal static SslServerAuthenticationOptions CloneSslOptions(SslServerAuthenticationOptions sslOptions) =>
+        internal static SslServerAuthenticationOptions CloneSslOptions(
+            SslServerAuthenticationOptions sslOptions
+        ) =>
             new SslServerAuthenticationOptions
             {
                 AllowRenegotiation = sslOptions.AllowRenegotiation,
@@ -192,7 +262,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                 ClientCertificateRequired = sslOptions.ClientCertificateRequired,
                 EnabledSslProtocols = sslOptions.EnabledSslProtocols,
                 EncryptionPolicy = sslOptions.EncryptionPolicy,
-                RemoteCertificateValidationCallback = sslOptions.RemoteCertificateValidationCallback,
+                RemoteCertificateValidationCallback =
+                    sslOptions.RemoteCertificateValidationCallback,
                 ServerCertificate = sslOptions.ServerCertificate,
                 ServerCertificateContext = sslOptions.ServerCertificateContext,
                 ServerCertificateSelectionCallback = sslOptions.ServerCertificateSelectionCallback,
@@ -200,7 +271,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
         private class SniOptions
         {
-            public SniOptions(SslServerAuthenticationOptions sslOptions, HttpProtocols httpProtocols)
+            public SniOptions(
+                SslServerAuthenticationOptions sslOptions,
+                HttpProtocols httpProtocols
+            )
             {
                 SslOptions = sslOptions;
                 HttpProtocols = httpProtocols;
@@ -212,11 +286,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 
         private class LongestStringFirstComparer : IComparer<string>
         {
-            public static LongestStringFirstComparer Instance { get; } = new LongestStringFirstComparer();
+            public static LongestStringFirstComparer Instance { get; } =
+                new LongestStringFirstComparer();
 
-            private LongestStringFirstComparer()
-            {
-            }
+            private LongestStringFirstComparer() { }
 
             public int Compare(string? x, string? y)
             {

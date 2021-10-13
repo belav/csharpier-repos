@@ -11,8 +11,10 @@ namespace SocialWeather
     {
         private readonly IServiceProvider _serviceProvider;
 
-        private readonly Dictionary<string, Dictionary<Type, Type>> _formatters
-            = new Dictionary<string, Dictionary<Type, Type>>();
+        private readonly Dictionary<string, Dictionary<Type, Type>> _formatters = new Dictionary<
+            string,
+            Dictionary<Type, Type>
+        >();
 
         public FormatterResolver(IServiceProvider serviceProvider)
         {
@@ -34,8 +36,10 @@ namespace SocialWeather
         {
             Dictionary<Type, Type> typeFormatters;
             Type typeFormatterType;
-            if (_formatters.TryGetValue(formatType, out typeFormatters) &&
-                typeFormatters.TryGetValue(typeof(T), out typeFormatterType))
+            if (
+                _formatters.TryGetValue(formatType, out typeFormatters)
+                && typeFormatters.TryGetValue(typeof(T), out typeFormatterType)
+            )
             {
                 return (IStreamFormatter<T>)_serviceProvider.GetRequiredService(typeFormatterType);
             }

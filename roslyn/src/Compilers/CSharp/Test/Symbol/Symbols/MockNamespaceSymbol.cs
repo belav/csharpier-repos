@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private readonly IEnumerable<Symbol> _children;
         private readonly string _name;
 
-        public MockNamespaceSymbol(string name, NamespaceExtent extent, IEnumerable<Symbol> children)
+        public MockNamespaceSymbol(
+            string name,
+            NamespaceExtent extent,
+            IEnumerable<Symbol> children
+        )
         {
             _name = name;
             _extent = extent;
@@ -32,18 +36,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal override NamespaceExtent Extent
         {
-            get
-            {
-                return _extent;
-            }
+            get { return _extent; }
         }
 
         public override ImmutableArray<Symbol> GetMembers()
@@ -58,48 +56,40 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers()
         {
-            return (from c in _children
-                    where c is NamedTypeSymbol
-                    select (NamedTypeSymbol)c).ToArray().AsImmutableOrNull();
+            return (
+                from c in _children
+                where c is NamedTypeSymbol
+                select (NamedTypeSymbol)c
+            ).ToArray().AsImmutableOrNull();
         }
 
         public override ImmutableArray<NamedTypeSymbol> GetTypeMembers(string name)
         {
-            return (from c in _children
-                    where c is NamedTypeSymbol && c.Name == name
-                    select (NamedTypeSymbol)c).ToArray().AsImmutableOrNull();
+            return (
+                from c in _children
+                where c is NamedTypeSymbol && c.Name == name
+                select (NamedTypeSymbol)c
+            ).ToArray().AsImmutableOrNull();
         }
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _container;
-            }
+            get { return _container; }
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _container.ContainingAssembly;
-            }
+            get { return _container.ContainingAssembly; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return ImmutableArray.Create<Location>();
-            }
+            get { return ImmutableArray.Create<Location>(); }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray.Create<SyntaxReference>();
-            }
+            get { return ImmutableArray.Create<SyntaxReference>(); }
         }
     }
 }

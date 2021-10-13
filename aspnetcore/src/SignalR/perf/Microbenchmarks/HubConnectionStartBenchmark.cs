@@ -30,8 +30,13 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             try
             {
                 HandshakeProtocol.WriteResponseMessage(HandshakeResponseMessage.Empty, writer);
-                _handshakeResponseResult = new ReadResult(new ReadOnlySequence<byte>(writer.ToArray()), false, false);
+                _handshakeResponseResult = new ReadResult(
+                    new ReadOnlySequence<byte>(writer.ToArray()),
+                    false,
+                    false
+                );
             }
+
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -42,15 +47,21 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             var hubConnectionBuilder = new HubConnectionBuilder();
             hubConnectionBuilder.WithUrl("http://doesntmatter");
 
-            var delegateConnectionFactory = new DelegateConnectionFactory(endPoint =>
-            {
-                var connection = new DefaultConnectionContext();
-                // prevents keep alive time being activated
-                connection.Features.Set<IConnectionInherentKeepAliveFeature>(new TestConnectionInherentKeepAliveFeature());
-                connection.Transport = _pipe;
-                return new ValueTask<ConnectionContext>(connection);
-            });
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
+            var delegateConnectionFactory = new DelegateConnectionFactory(
+                endPoint =>
+                {
+                    var connection = new DefaultConnectionContext();
+                    // prevents keep alive time being activated
+                    connection.Features.Set<IConnectionInherentKeepAliveFeature>(
+                        new TestConnectionInherentKeepAliveFeature()
+                    );
+                    connection.Transport = _pipe;
+                    return new ValueTask<ConnectionContext>(connection);
+                }
+            );
+            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(
+                delegateConnectionFactory
+            );
 
             _hubConnection = hubConnectionBuilder.Build();
         }

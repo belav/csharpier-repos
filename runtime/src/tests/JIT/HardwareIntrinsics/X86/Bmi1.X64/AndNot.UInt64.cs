@@ -131,11 +131,18 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Bmi1.X64).GetMethod(nameof(Bmi1.X64.AndNot), new Type[] { typeof(UInt64), typeof(UInt64) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
-                                     });
+            var result = typeof(Bmi1.X64).GetMethod(
+                    nameof(Bmi1.X64.AndNot),
+                    new Type[] { typeof(UInt64), typeof(UInt64) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data1)),
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data2))
+                    }
+                );
 
             ValidateResult(_data1, _data2, (UInt64)result);
         }
@@ -144,10 +151,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Bmi1.X64.AndNot(
-                _clsVar1,
-                _clsVar2
-            );
+            var result = Bmi1.X64.AndNot(_clsVar1, _clsVar2);
 
             ValidateResult(_clsVar1, _clsVar2, result);
         }
@@ -220,7 +224,12 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(UInt64 left, UInt64 right, UInt64 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64 left,
+            UInt64 right,
+            UInt64 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
@@ -228,7 +237,9 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.AndNot)}<UInt64>(UInt64, UInt64): AndNot failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Bmi1.X64)}.{nameof(Bmi1.X64.AndNot)}<UInt64>(UInt64, UInt64): AndNot failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    left: {left}");
                 TestLibrary.TestFramework.LogInformation($"   right: {right}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");

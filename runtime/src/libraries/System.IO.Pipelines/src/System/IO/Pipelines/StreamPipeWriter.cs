@@ -234,7 +234,8 @@ namespace System.IO.Pipelines
 
             _isCompleted = true;
 
-            await FlushAsyncInternal(writeToStream: exception == null, data: Memory<byte>.Empty).ConfigureAwait(false);
+            await FlushAsyncInternal(writeToStream: exception == null, data: Memory<byte>.Empty)
+                .ConfigureAwait(false);
 
             _internalTokenSource?.Dispose();
 
@@ -249,17 +250,28 @@ namespace System.IO.Pipelines
         }
 
         /// <inheritdoc />
-        public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default)
+        public override ValueTask<FlushResult> FlushAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             if (_bytesBuffered == 0)
             {
-                return new ValueTask<FlushResult>(new FlushResult(isCanceled: false, isCompleted: false));
+                return new ValueTask<FlushResult>(
+                    new FlushResult(isCanceled: false, isCompleted: false)
+                );
             }
 
-            return FlushAsyncInternal(writeToStream: true, data: Memory<byte>.Empty, cancellationToken);
+            return FlushAsyncInternal(
+                writeToStream: true,
+                data: Memory<byte>.Empty,
+                cancellationToken
+            );
         }
 
-        public override ValueTask<FlushResult> WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+        public override ValueTask<FlushResult> WriteAsync(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken = default
+        )
         {
             return FlushAsyncInternal(writeToStream: true, data: source, cancellationToken);
         }
@@ -269,14 +281,21 @@ namespace System.IO.Pipelines
             InternalTokenSource.Cancel();
         }
 
-        private async ValueTask<FlushResult> FlushAsyncInternal(bool writeToStream, ReadOnlyMemory<byte> data, CancellationToken cancellationToken = default)
+        private async ValueTask<FlushResult> FlushAsyncInternal(
+            bool writeToStream,
+            ReadOnlyMemory<byte> data,
+            CancellationToken cancellationToken = default
+        )
         {
             // Write all completed segments and whatever remains in the current segment
             // and flush the result.
             CancellationTokenRegistration reg = default;
             if (cancellationToken.CanBeCanceled)
             {
-                reg = cancellationToken.UnsafeRegister(state => ((StreamPipeWriter)state!).Cancel(), this);
+                reg = cancellationToken.UnsafeRegister(
+                    state => ((StreamPipeWriter)state!).Cancel(),
+                    this
+                );
             }
 
             if (_tailBytesBuffered > 0)
@@ -301,7 +320,8 @@ namespace System.IO.Pipelines
 
                         if (returnSegment.Length > 0 && writeToStream)
                         {
-                            await InnerStream.WriteAsync(returnSegment.Memory, localToken).ConfigureAwait(false);
+                            await InnerStream.WriteAsync(returnSegment.Memory, localToken)
+                                .ConfigureAwait(false);
                         }
 
                         returnSegment.ResetMemory();
@@ -342,7 +362,10 @@ namespace System.IO.Pipelines
                         _internalTokenSource = null;
                     }
 
-                    if (localToken.IsCancellationRequested && !cancellationToken.IsCancellationRequested)
+                    if (
+                        localToken.IsCancellationRequested
+                        && !cancellationToken.IsCancellationRequested
+                    )
                     {
                         // Catch cancellation and translate it into setting isCanceled = true
                         return new FlushResult(isCanceled: true, isCompleted: false);

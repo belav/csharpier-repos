@@ -143,9 +143,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             }
 
             var providerDictionary = _provider.LoadTempData(_context);
-            _data = (providerDictionary != null)
-                ? new Dictionary<string, object?>(providerDictionary, StringComparer.OrdinalIgnoreCase)
-                : new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+            _data =
+                (providerDictionary != null)
+                    ? new Dictionary<string, object?>(
+                          providerDictionary,
+                          StringComparer.OrdinalIgnoreCase
+                      )
+                    : new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
             _initialKeys = new HashSet<string>(_data.Keys, StringComparer.OrdinalIgnoreCase);
             _retainedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             _loaded = true;
@@ -155,7 +159,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         [MemberNotNull(nameof(_initialKeys), nameof(_retainedKeys), nameof(_data))]
         private void AssertLoaded()
         {
-            Debug.Assert(_initialKeys is not null && _retainedKeys is not null && _data is not null);
+            Debug.Assert(
+                _initialKeys is not null && _retainedKeys is not null && _data is not null
+            );
         }
 
         /// <inheritdoc />
@@ -168,7 +174,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             AssertLoaded();
 
-            // In .NET Core 3.0 a Dictionary can have items removed during enumeration 
+            // In .NET Core 3.0 a Dictionary can have items removed during enumeration
             // https://github.com/dotnet/coreclr/pull/18854
             foreach (var entry in _data)
             {
@@ -245,26 +251,35 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return _data.TryGetValue(key, out value);
         }
 
-        void ICollection<KeyValuePair<string, object?>>.CopyTo(KeyValuePair<string, object?>[] array, int index)
+        void ICollection<KeyValuePair<string, object?>>.CopyTo(
+            KeyValuePair<string, object?>[] array,
+            int index
+        )
         {
             Load();
             ((ICollection<KeyValuePair<string, object?>>)_data).CopyTo(array, index);
         }
 
-        void ICollection<KeyValuePair<string, object?>>.Add(KeyValuePair<string, object?> keyValuePair)
+        void ICollection<KeyValuePair<string, object?>>.Add(
+            KeyValuePair<string, object?> keyValuePair
+        )
         {
             Load();
             _initialKeys.Add(keyValuePair.Key);
             ((ICollection<KeyValuePair<string, object?>>)_data).Add(keyValuePair);
         }
 
-        bool ICollection<KeyValuePair<string, object?>>.Contains(KeyValuePair<string, object?> keyValuePair)
+        bool ICollection<KeyValuePair<string, object?>>.Contains(
+            KeyValuePair<string, object?> keyValuePair
+        )
         {
             Load();
             return ((ICollection<KeyValuePair<string, object?>>)_data).Contains(keyValuePair);
         }
 
-        bool ICollection<KeyValuePair<string, object?>>.Remove(KeyValuePair<string, object?> keyValuePair)
+        bool ICollection<KeyValuePair<string, object?>>.Remove(
+            KeyValuePair<string, object?> keyValuePair
+        )
         {
             Load();
             _initialKeys.Remove(keyValuePair.Key);
@@ -277,7 +292,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return new TempDataDictionaryEnumerator(this);
         }
 
-        private sealed class TempDataDictionaryEnumerator : IEnumerator<KeyValuePair<string, object?>>
+        private sealed class TempDataDictionaryEnumerator
+            : IEnumerator<KeyValuePair<string, object?>>
         {
             // Do not make this readonly. This prevents MoveNext from functioning.
             private Dictionary<string, object?>.Enumerator _enumerator;
@@ -311,7 +327,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             public void Reset()
             {
-                ((IEnumerator < KeyValuePair<string, object?>>)_enumerator).Reset();
+                ((IEnumerator<KeyValuePair<string, object?>>)_enumerator).Reset();
             }
 
             void IDisposable.Dispose()

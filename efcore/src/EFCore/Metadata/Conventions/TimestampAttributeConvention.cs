@@ -18,9 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         public TimestampAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -33,7 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionPropertyBuilder propertyBuilder,
             TimestampAttribute attribute,
             MemberInfo clrMember,
-            IConventionContext context)
+            IConventionContext context
+        )
         {
             propertyBuilder.ValueGenerated(ValueGenerated.OnAddOrUpdate, fromDataAnnotation: true);
             propertyBuilder.IsConcurrencyToken(true, fromDataAnnotation: true);

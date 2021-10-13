@@ -25,7 +25,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
         /// <param name="storeLocation">The certificate store location.</param>
         /// <param name="allowInvalid">Whether or not to load certificates that are considered invalid.</param>
         /// <returns>The loaded certificate.</returns>
-        public static X509Certificate2 LoadFromStoreCert(string subject, string storeName, StoreLocation storeLocation, bool allowInvalid)
+        public static X509Certificate2 LoadFromStoreCert(
+            string subject,
+            string storeName,
+            StoreLocation storeLocation,
+            bool allowInvalid
+        )
         {
             using (var store = new X509Store(storeName, storeLocation))
             {
@@ -36,9 +41,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
                 {
                     store.Open(OpenFlags.ReadOnly);
                     storeCertificates = store.Certificates;
-                    var foundCertificates = storeCertificates.Find(X509FindType.FindBySubjectName, subject, !allowInvalid);
-                    foundCertificate = foundCertificates
-                        .OfType<X509Certificate2>()
+                    var foundCertificates = storeCertificates.Find(
+                        X509FindType.FindBySubjectName,
+                        subject,
+                        !allowInvalid
+                    );
+                    foundCertificate = foundCertificates.OfType<X509Certificate2>()
                         .Where(IsCertificateAllowedForServerAuth)
                         .Where(DoesCertificateHaveAnAccessiblePrivateKey)
                         .OrderByDescending(certificate => certificate.NotAfter)
@@ -46,11 +54,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
 
                     if (foundCertificate == null)
                     {
-                        throw new InvalidOperationException(CoreStrings.FormatCertNotFoundInStore(subject, storeLocation, storeName, allowInvalid));
+                        throw new InvalidOperationException(
+                            CoreStrings.FormatCertNotFoundInStore(
+                                subject,
+                                storeLocation,
+                                storeName,
+                                allowInvalid
+                            )
+                        );
                     }
 
                     return foundCertificate;
                 }
+
                 finally
                 {
                     DisposeCertificates(storeCertificates, except: foundCertificate);
@@ -77,7 +93,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
 
             var hasEkuExtension = false;
 
-            foreach (var extension in certificate.Extensions.OfType<X509EnhancedKeyUsageExtension>())
+            foreach (
+                var extension in certificate.Extensions.OfType<X509EnhancedKeyUsageExtension>()
+            )
             {
                 hasEkuExtension = true;
                 foreach (var oid in extension.EnhancedKeyUsages)
@@ -92,10 +110,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
             return !hasEkuExtension;
         }
 
-        internal static bool DoesCertificateHaveAnAccessiblePrivateKey(X509Certificate2 certificate)
-            => certificate.HasPrivateKey;
+        internal static bool DoesCertificateHaveAnAccessiblePrivateKey(
+            X509Certificate2 certificate
+        ) => certificate.HasPrivateKey;
 
-        private static void DisposeCertificates(X509Certificate2Collection? certificates, X509Certificate2? except)
+        private static void DisposeCertificates(
+            X509Certificate2Collection? certificates,
+            X509Certificate2? except
+        )
         {
             if (certificates != null)
             {

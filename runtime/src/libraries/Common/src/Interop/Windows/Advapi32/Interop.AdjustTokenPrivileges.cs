@@ -16,6 +16,7 @@ internal static partial class Interop
             TOKEN_PRIVILEGE* NewState,
             uint BufferLength,
             TOKEN_PRIVILEGE* PreviousState,
-            uint* ReturnLength);
+            uint* ReturnLength
+        );
     }
 }

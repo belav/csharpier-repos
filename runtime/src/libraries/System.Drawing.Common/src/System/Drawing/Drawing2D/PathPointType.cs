@@ -12,8 +12,7 @@ namespace System.Drawing.Drawing2D
         DashMode = 0x10, // currently in dash mode.
         PathMarker = 0x20, // a marker for the path.
         CloseSubpath = 0x80, // closed flag
-
         // Path types used for advanced path.
-        Bezier3 = 3,    // cubic Bezier
+        Bezier3 = 3, // cubic Bezier
     }
 }

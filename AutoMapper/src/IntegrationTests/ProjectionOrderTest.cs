@@ -26,7 +26,6 @@ namespace AutoMapper.IntegrationTests.ProjectionOrder
             public int Id { get; set; }
         }
 
-
         public class Source1 : BaseEntity
         {
             public DateTime Date { get; set; }
@@ -55,23 +54,28 @@ namespace AutoMapper.IntegrationTests.ProjectionOrder
             public DbSet<Source2> Source2 { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
-                                                                                        {
-                                                                                            cfg.CreateProjection<Source1, Destination>()
-                                                                                               .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Items.Count()))
-                                                                                               .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateProjection<Source1, Destination>()
+                        .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Items.Count()))
+                        .ForMember(dest => dest.Date, opt => opt.MapFrom(src => src.Date));
 
-                                                                                            cfg.CreateProjection<Source2, Destination>()
-                                                                                               .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Items.Count()))
-                                                                                               .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.MinValue));
-                                                                                        });
+                    cfg.CreateProjection<Source2, Destination>()
+                        .ForMember(dest => dest.Count, opt => opt.MapFrom(src => src.Items.Count()))
+                        .ForMember(dest => dest.Date, opt => opt.MapFrom(src => DateTime.MinValue));
+                }
+            );
 
         [Fact]
         public void Should_Not_Throw_NotSupportedException_On_Union()
         {
             using (var context = new ClientContext())
             {
-                ProjectTo<Destination>(context.Source1).Union(ProjectTo<Destination>(context.Source2)).ToString();
+                ProjectTo<Destination>(context.Source1)
+                    .Union(ProjectTo<Destination>(context.Source2))
+                    .ToString();
             }
         }
     }

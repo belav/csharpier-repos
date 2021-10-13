@@ -48,7 +48,15 @@ namespace Microsoft.DiaSymReader
         /// <exception cref="ObjectDisposedException">Object has been disposed.</exception>
         /// <exception cref="InvalidOperationException">Writes are not allowed to the underlying stream.</exception>
         /// <exception cref="SymUnmanagedWriterException">Error occurred while writing PDB data.</exception>
-        public abstract int DefineDocument(string name, Guid language, Guid vendor, Guid type, Guid algorithmId, ReadOnlySpan<byte> checksum, ReadOnlySpan<byte> source);
+        public abstract int DefineDocument(
+            string name,
+            Guid language,
+            Guid vendor,
+            Guid type,
+            Guid algorithmId,
+            ReadOnlySpan<byte> checksum,
+            ReadOnlySpan<byte> source
+        );
 
         /// <summary>
         /// Defines sequence points.
@@ -56,7 +64,15 @@ namespace Microsoft.DiaSymReader
         /// <exception cref="ObjectDisposedException">Object has been disposed.</exception>
         /// <exception cref="InvalidOperationException">Writes are not allowed to the underlying stream.</exception>
         /// <exception cref="SymUnmanagedWriterException">Error occurred while writing PDB data.</exception>
-        public abstract void DefineSequencePoints(int documentIndex, int count, int[] offsets, int[] startLines, int[] startColumns, int[] endLines, int[] endColumns);
+        public abstract void DefineSequencePoints(
+            int documentIndex,
+            int count,
+            int[] offsets,
+            int[] startLines,
+            int[] startColumns,
+            int[] endLines,
+            int[] endColumns
+        );
 
         /// <summary>
         /// Opens a method.
@@ -95,7 +111,12 @@ namespace Microsoft.DiaSymReader
         /// <exception cref="ObjectDisposedException">Object has been disposed.</exception>
         /// <exception cref="InvalidOperationException">Writes are not allowed to the underlying stream.</exception>
         /// <exception cref="SymUnmanagedWriterException">Error occurred while writing PDB data.</exception>
-        public abstract void DefineLocalVariable(int index, string name, int attributes, int localSignatureToken);
+        public abstract void DefineLocalVariable(
+            int index,
+            string name,
+            int attributes,
+            int localSignatureToken
+        );
 
         /// <summary>
         /// Defines a local constant.
@@ -108,7 +129,11 @@ namespace Microsoft.DiaSymReader
         /// <exception cref="InvalidOperationException">Writes are not allowed to the underlying stream.</exception>
         /// <exception cref="SymUnmanagedWriterException">Error occurred while writing PDB data.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="name"/> is null</exception>
-        public abstract bool DefineLocalConstant(string name, object value, int constantSignatureToken);
+        public abstract bool DefineLocalConstant(
+            string name,
+            object value,
+            int constantSignatureToken
+        );
 
         /// <summary>
         /// Adds namespace import.
@@ -132,7 +157,8 @@ namespace Microsoft.DiaSymReader
             int kickoffMethodToken,
             int catchHandlerOffset,
             ReadOnlySpan<int> yieldOffsets,
-            ReadOnlySpan<int> resumeOffsets);
+            ReadOnlySpan<int> resumeOffsets
+        );
 
         /// <summary>
         /// Associates custom debug information blob with the current method.
@@ -199,7 +225,14 @@ namespace Microsoft.DiaSymReader
         /// <exception cref="InvalidOperationException">Writes are not allowed to the underlying stream.</exception>
         /// <exception cref="SymUnmanagedWriterException">Error occurred while writing PDB data.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="documentIndex"/> doesn't correspond to any defined document.</exception>
-        public abstract void MapTokenToSourceSpan(int token, int documentIndex, int startLine, int startColumn, int endLine, int endColumn);
+        public abstract void MapTokenToSourceSpan(
+            int token,
+            int documentIndex,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        );
 
         /// <summary>
         /// Closes map of tokens to source spans previously opened using <see cref="OpenTokensToSourceSpansMap"/>.

@@ -49,13 +49,14 @@ namespace Microsoft.AspNetCore.SignalR
         /// <param name="userIdProvider">The user ID provider used to get the user ID from a hub connection.</param>
         /// <param name="serviceScopeFactory">The service scope factory.</param>
         /// <remarks>This class is typically created via dependency injection.</remarks>
-        public HubConnectionHandler(HubLifetimeManager<THub> lifetimeManager,
-                                    IHubProtocolResolver protocolResolver,
-                                    IOptions<HubOptions> globalHubOptions,
-                                    IOptions<HubOptions<THub>> hubOptions,
-                                    ILoggerFactory loggerFactory,
-                                    IUserIdProvider userIdProvider,
-                                    IServiceScopeFactory serviceScopeFactory
+        public HubConnectionHandler(
+            HubLifetimeManager<THub> lifetimeManager,
+            IHubProtocolResolver protocolResolver,
+            IOptions<HubOptions> globalHubOptions,
+            IOptions<HubOptions<THub>> hubOptions,
+            ILoggerFactory loggerFactory,
+            IUserIdProvider userIdProvider,
+            IServiceScopeFactory serviceScopeFactory
         )
         {
             _protocolResolver = protocolResolver;
@@ -83,7 +84,8 @@ namespace Microsoft.AspNetCore.SignalR
             else
             {
                 _maximumMessageSize = _globalHubOptions.MaximumReceiveMessageSize;
-                _enableDetailedErrors = _globalHubOptions.EnableDetailedErrors ?? _enableDetailedErrors;
+                _enableDetailedErrors =
+                    _globalHubOptions.EnableDetailedErrors ?? _enableDetailedErrors;
                 _maxParallelInvokes = _globalHubOptions.MaximumParallelInvocationsPerClient;
 
                 if (_globalHubOptions.HubFilters != null)
@@ -97,7 +99,8 @@ namespace Microsoft.AspNetCore.SignalR
                 new HubContext<THub>(lifetimeManager),
                 _enableDetailedErrors,
                 new Logger<DefaultHubDispatcher<THub>>(loggerFactory),
-                hubFilters);
+                hubFilters
+            );
         }
 
         /// <inheritdoc />
@@ -106,19 +109,32 @@ namespace Microsoft.AspNetCore.SignalR
             // We check to see if HubOptions<THub> are set because those take precedence over global hub options.
             // Then set the keepAlive and handshakeTimeout values to the defaults in HubOptionsSetup when they were explicitly set to null.
 
-            var supportedProtocols = _hubOptions.SupportedProtocols ?? _globalHubOptions.SupportedProtocols;
+            var supportedProtocols =
+                _hubOptions.SupportedProtocols ?? _globalHubOptions.SupportedProtocols;
             if (supportedProtocols == null || supportedProtocols.Count == 0)
             {
                 throw new InvalidOperationException("There are no supported protocols");
             }
 
-            var handshakeTimeout = _hubOptions.HandshakeTimeout ?? _globalHubOptions.HandshakeTimeout ?? HubOptionsSetup.DefaultHandshakeTimeout;
+            var handshakeTimeout =
+                _hubOptions.HandshakeTimeout
+                ?? _globalHubOptions.HandshakeTimeout
+                ?? HubOptionsSetup.DefaultHandshakeTimeout;
 
             var contextOptions = new HubConnectionContextOptions()
             {
-                KeepAliveInterval = _hubOptions.KeepAliveInterval ?? _globalHubOptions.KeepAliveInterval ?? HubOptionsSetup.DefaultKeepAliveInterval,
-                ClientTimeoutInterval = _hubOptions.ClientTimeoutInterval ?? _globalHubOptions.ClientTimeoutInterval ?? HubOptionsSetup.DefaultClientTimeoutInterval,
-                StreamBufferCapacity = _hubOptions.StreamBufferCapacity ?? _globalHubOptions.StreamBufferCapacity ?? HubOptionsSetup.DefaultStreamBufferCapacity,
+                KeepAliveInterval =
+                    _hubOptions.KeepAliveInterval
+                    ?? _globalHubOptions.KeepAliveInterval
+                    ?? HubOptionsSetup.DefaultKeepAliveInterval,
+                ClientTimeoutInterval =
+                    _hubOptions.ClientTimeoutInterval
+                    ?? _globalHubOptions.ClientTimeoutInterval
+                    ?? HubOptionsSetup.DefaultClientTimeoutInterval,
+                StreamBufferCapacity =
+                    _hubOptions.StreamBufferCapacity
+                    ?? _globalHubOptions.StreamBufferCapacity
+                    ?? HubOptionsSetup.DefaultStreamBufferCapacity,
                 MaximumReceiveMessageSize = _maximumMessageSize,
                 SystemClock = SystemClock,
                 MaximumParallelInvocations = _maxParallelInvokes,
@@ -126,10 +142,23 @@ namespace Microsoft.AspNetCore.SignalR
 
             Log.ConnectedStarting(_logger);
 
-            var connectionContext = new HubConnectionContext(connection, contextOptions, _loggerFactory);
+            var connectionContext = new HubConnectionContext(
+                connection,
+                contextOptions,
+                _loggerFactory
+            );
 
-            var resolvedSupportedProtocols = (supportedProtocols as IReadOnlyList<string>) ?? supportedProtocols.ToList();
-            if (!await connectionContext.HandshakeAsync(handshakeTimeout, resolvedSupportedProtocols, _protocolResolver, _userIdProvider, _enableDetailedErrors))
+            var resolvedSupportedProtocols =
+                (supportedProtocols as IReadOnlyList<string>) ?? supportedProtocols.ToList();
+            if (
+                !await connectionContext.HandshakeAsync(
+                    handshakeTimeout,
+                    resolvedSupportedProtocols,
+                    _protocolResolver,
+                    _userIdProvider,
+                    _enableDetailedErrors
+                )
+            )
             {
                 return;
             }
@@ -141,6 +170,7 @@ namespace Microsoft.AspNetCore.SignalR
                 await _lifetimeManager.OnConnectedAsync(connectionContext);
                 await RunHubAsync(connectionContext);
             }
+
             finally
             {
                 connectionContext.Cleanup();
@@ -189,7 +219,10 @@ namespace Microsoft.AspNetCore.SignalR
             await HubOnDisconnectedAsync(connection, connection.CloseException);
         }
 
-        private async Task HubOnDisconnectedAsync(HubConnectionContext connection, Exception? exception)
+        private async Task HubOnDisconnectedAsync(
+            HubConnectionContext connection,
+            Exception? exception
+        )
         {
             // send close message before aborting the connection
             await SendCloseAsync(connection, exception, connection.AllowReconnect);
@@ -211,13 +244,21 @@ namespace Microsoft.AspNetCore.SignalR
             }
         }
 
-        private async Task SendCloseAsync(HubConnectionContext connection, Exception? exception, bool allowReconnect)
+        private async Task SendCloseAsync(
+            HubConnectionContext connection,
+            Exception? exception,
+            bool allowReconnect
+        )
         {
             var closeMessage = CloseMessage.Empty;
 
             if (exception != null)
             {
-                var errorMessage = ErrorMessageHelper.BuildErrorMessage("Connection closed with an error.", exception, _enableDetailedErrors);
+                var errorMessage = ErrorMessageHelper.BuildErrorMessage(
+                    "Connection closed with an error.",
+                    exception,
+                    _enableDetailedErrors
+                );
                 closeMessage = new CloseMessage(errorMessage, allowReconnect);
             }
             else if (allowReconnect)
@@ -299,7 +340,9 @@ namespace Microsoft.AspNetCore.SignalR
                                 }
                                 else if (overLength)
                                 {
-                                    throw new InvalidDataException($"The maximum message size of {maxMessageSize}B was exceeded. The message size can be configured in AddHubOptions.");
+                                    throw new InvalidDataException(
+                                        $"The maximum message size of {maxMessageSize}B was exceeded. The message size can be configured in AddHubOptions."
+                                    );
                                 }
                                 else
                                 {
@@ -322,11 +365,14 @@ namespace Microsoft.AspNetCore.SignalR
                     {
                         if (!buffer.IsEmpty)
                         {
-                            throw new InvalidDataException("Connection terminated while reading a message.");
+                            throw new InvalidDataException(
+                                "Connection terminated while reading a message."
+                            );
                         }
                         break;
                     }
                 }
+
                 finally
                 {
                     // The buffer was sliced up to where it was consumed, so we can just advance to the start.

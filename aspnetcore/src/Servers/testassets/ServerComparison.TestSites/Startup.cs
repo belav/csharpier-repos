@@ -12,10 +12,14 @@ namespace ServerComparison.TestSites
     {
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            app.Run(ctx =>
-            {
-                return ctx.Response.WriteAsync("Hello World " + RuntimeInformation.ProcessArchitecture);
-            });
+            app.Run(
+                ctx =>
+                {
+                    return ctx.Response.WriteAsync(
+                        "Hello World " + RuntimeInformation.ProcessArchitecture
+                    );
+                }
+            );
         }
     }
 }

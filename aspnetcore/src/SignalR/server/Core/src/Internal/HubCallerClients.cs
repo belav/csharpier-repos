@@ -49,14 +49,17 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             return _hubClients.GroupExcept(groupName, _currentConnectionId);
         }
 
-        public IClientProxy GroupExcept(string groupName, IReadOnlyList<string> excludedConnectionIds)
+        public IClientProxy GroupExcept(
+            string groupName,
+            IReadOnlyList<string> excludedConnectionIds
+        )
         {
             return _hubClients.GroupExcept(groupName, excludedConnectionIds);
         }
 
         public IClientProxy User(string userId)
         {
-           return _hubClients.User(userId);
+            return _hubClients.User(userId);
         }
 
         public IClientProxy Clients(IReadOnlyList<string> connectionIds)

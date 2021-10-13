@@ -23,16 +23,16 @@ namespace Microsoft.AspNetCore.Routing
         public Route(
             IRouter target,
             string routeTemplate,
-            IInlineConstraintResolver inlineConstraintResolver)
+            IInlineConstraintResolver inlineConstraintResolver
+        )
             : this(
                 target,
                 routeTemplate,
                 defaults: null,
                 constraints: null,
                 dataTokens: null,
-                inlineConstraintResolver: inlineConstraintResolver)
-        {
-        }
+                inlineConstraintResolver: inlineConstraintResolver
+            ) { }
 
         /// <summary>
         /// Constructs a new <see cref="Route"/> instance.
@@ -49,10 +49,17 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary? defaults,
             IDictionary<string, object>? constraints,
             RouteValueDictionary? dataTokens,
-            IInlineConstraintResolver inlineConstraintResolver)
-            : this(target, null, routeTemplate, defaults, constraints, dataTokens, inlineConstraintResolver)
-        {
-        }
+            IInlineConstraintResolver inlineConstraintResolver
+        )
+            : this(
+                target,
+                null,
+                routeTemplate,
+                defaults,
+                constraints,
+                dataTokens,
+                inlineConstraintResolver
+            ) { }
 
         /// <summary>
         /// Constructs a new <see cref="Route"/> instance.
@@ -71,14 +78,16 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary? defaults,
             IDictionary<string, object>? constraints,
             RouteValueDictionary? dataTokens,
-            IInlineConstraintResolver inlineConstraintResolver)
+            IInlineConstraintResolver inlineConstraintResolver
+        )
             : base(
-                  routeTemplate,
-                  routeName,
-                  inlineConstraintResolver,
-                  defaults,
-                  constraints,
-                  dataTokens)
+                routeTemplate,
+                routeName,
+                inlineConstraintResolver,
+                defaults,
+                constraints,
+                dataTokens
+            )
         {
             if (target == null)
             {

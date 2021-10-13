@@ -11,13 +11,22 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
     {
         public override void Before(MethodInfo methodUnderTest)
         {
-            if (typeof(ParserTestBase).GetTypeInfo().IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo()))
+            if (
+                typeof(ParserTestBase).GetTypeInfo()
+                    .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
+            )
             {
                 var typeName = methodUnderTest.DeclaringType.Name;
-                ParserTestBase.FileName = $"TestFiles/ParserTests/{typeName}/{methodUnderTest.Name}";
+                ParserTestBase.FileName =
+                    $"TestFiles/ParserTests/{typeName}/{methodUnderTest.Name}";
                 ParserTestBase.IsTheory = false;
 
-                if (methodUnderTest.GetCustomAttributes(typeof(TheoryAttribute), inherit: false).Length > 0)
+                if (
+                    methodUnderTest.GetCustomAttributes(
+                        typeof(TheoryAttribute),
+                        inherit: false
+                    ).Length > 0
+                )
                 {
                     ParserTestBase.IsTheory = true;
                 }
@@ -26,7 +35,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public override void After(MethodInfo methodUnderTest)
         {
-            if (typeof(ParserTestBase).GetTypeInfo().IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo()))
+            if (
+                typeof(ParserTestBase).GetTypeInfo()
+                    .IsAssignableFrom(methodUnderTest.DeclaringType.GetTypeInfo())
+            )
             {
                 ParserTestBase.FileName = null;
                 ParserTestBase.IsTheory = false;

@@ -31,7 +31,10 @@ namespace DelegateTest
             }
             catch (Exception ex)
             {
-                Console.WriteLine("BeginInvoke resulted in unexpected exception: {0}", ex.ToString());
+                Console.WriteLine(
+                    "BeginInvoke resulted in unexpected exception: {0}",
+                    ex.ToString()
+                );
                 Console.WriteLine("FAILED!");
                 return -1;
             }

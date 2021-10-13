@@ -10,8 +10,7 @@ namespace System.Text.Json.Serialization.Converters
     /// Converter for <cref>System.Array</cref>.
     /// </summary>
     internal sealed class ArrayConverter<TCollection, TElement>
-        : IEnumerableDefaultConverter<TCollection, TElement>
-        where TCollection: IEnumerable
+        : IEnumerableDefaultConverter<TCollection, TElement> where TCollection : IEnumerable
     {
         internal override bool CanHaveIdMetadata => false;
 
@@ -20,18 +19,30 @@ namespace System.Text.Json.Serialization.Converters
             ((List<TElement>)state.Current.ReturnValue!).Add(value);
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             state.Current.ReturnValue = new List<TElement>();
         }
 
-        protected override void ConvertCollection(ref ReadStack state, JsonSerializerOptions options)
+        protected override void ConvertCollection(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             List<TElement> list = (List<TElement>)state.Current.ReturnValue!;
             state.Current.ReturnValue = list.ToArray();
         }
 
-        protected override bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state)
+        protected override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             TElement[] array = (TElement[])(IEnumerable)value;
 

@@ -21,7 +21,6 @@ namespace System.Threading
         /// accesses Value on this <see cref="System.Lazy{T}"/> instance, a <see cref="System.InvalidOperationException"/> will be thrown.
         /// </summary>
         None,
-
         /// <summary>
         /// When multiple threads attempt to simultaneously initialize a <see cref="System.Lazy{T}"/> instance, this mode allows each thread to execute the
         /// valueFactory but only the first thread to complete initialization will be allowed to set the final value of the  <see cref="System.Lazy{T}"/>.
@@ -31,7 +30,6 @@ namespace System.Threading
         /// the valueFactory delegate re-executing.  Also, if valueFactory recursively accesses Value on this  <see cref="System.Lazy{T}"/> instance, an exception will NOT be thrown.
         /// </summary>
         PublicationOnly,
-
         /// <summary>
         /// This mode uses locks to ensure that only a single thread can initialize a <see cref="System.Lazy{T}"/> instance in a thread-safe manner.  In general,
         /// taken if this mode is used in conjunction with a <see cref="System.Lazy{T}"/> valueFactory delegate that uses locks internally, a deadlock can occur if not

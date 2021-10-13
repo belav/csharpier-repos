@@ -22,7 +22,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "Name", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "Name",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.IsRequired(false, ConfigurationSource.Explicit);
 
@@ -36,7 +40,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         {
             var entityTypeBuilder = CreateInternalEntityTypeBuilder<A>();
 
-            var propertyBuilder = entityTypeBuilder.Property(typeof(string), "Name", ConfigurationSource.Explicit);
+            var propertyBuilder = entityTypeBuilder.Property(
+                typeof(string),
+                "Name",
+                ConfigurationSource.Explicit
+            );
 
             propertyBuilder.IsRequired(false, ConfigurationSource.DataAnnotation);
 
@@ -75,19 +83,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         [InlineData(typeof(DerivedClass), nameof(DerivedClass.NonNullable), false)]
         [InlineData(typeof(DerivedClass), nameof(DerivedClass.Nullable), true)]
         [InlineData(typeof(BaseClass), nameof(DerivedClass.Nullable), true)]
-        public void Reference_nullability_sets_is_nullable_correctly(Type type, string propertyName, bool expectedNullable)
+        public void Reference_nullability_sets_is_nullable_correctly(
+            Type type,
+            string propertyName,
+            bool expectedNullable
+        )
         {
             var modelBuilder = CreateModelBuilder();
             var entityTypeBuilder = modelBuilder.Entity(type);
 
-            Assert.Equal(expectedNullable, entityTypeBuilder.Property(propertyName).Metadata.IsNullable);
+            Assert.Equal(
+                expectedNullable,
+                entityTypeBuilder.Property(propertyName).Metadata.IsNullable
+            );
         }
 
         [ConditionalFact]
         public void Non_nullability_ignores_context_on_generic_types()
         {
             var modelBuilder = CreateModelBuilder();
-            var entityTypeBuilder = modelBuilder.SharedTypeEntity<Dictionary<string, object>>("SomeBag");
+            var entityTypeBuilder = modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
+                "SomeBag"
+            );
             entityTypeBuilder.IndexerProperty(typeof(string), "b");
             Assert.True(entityTypeBuilder.Property("b").Metadata.IsNullable);
         }
@@ -95,25 +112,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         private void RunConvention(InternalPropertyBuilder propertyBuilder)
         {
             var context = new ConventionContext<IConventionPropertyBuilder>(
-                propertyBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher);
+                propertyBuilder.Metadata.DeclaringEntityType.Model.ConventionDispatcher
+            );
 
-            new NonNullableReferencePropertyConvention(CreateDependencies())
-                .ProcessPropertyAdded(propertyBuilder, context);
+            new NonNullableReferencePropertyConvention(CreateDependencies()).ProcessPropertyAdded(
+                propertyBuilder,
+                context
+            );
         }
 
         private InternalEntityTypeBuilder CreateInternalEntityTypeBuilder<T>()
         {
             var conventionSet = new ConventionSet();
             conventionSet.EntityTypeAddedConventions.Add(
-                new PropertyDiscoveryConvention(CreateDependencies()));
+                new PropertyDiscoveryConvention(CreateDependencies())
+            );
 
             var modelBuilder = new InternalModelBuilder(new Model(conventionSet));
 
             return modelBuilder.Entity(typeof(T), ConfigurationSource.Explicit);
         }
 
-        private ProviderConventionSetBuilderDependencies CreateDependencies()
-            => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+        private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+            InMemoryTestHelpers.Instance.CreateContextServices()
+                .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
         private class A
         {
@@ -177,7 +199,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 #nullable disable
 
-        private static ModelBuilder CreateModelBuilder()
-            => InMemoryTestHelpers.Instance.CreateConventionBuilder();
+        private static ModelBuilder CreateModelBuilder() =>
+            InMemoryTestHelpers.Instance.CreateConventionBuilder();
     }
 }

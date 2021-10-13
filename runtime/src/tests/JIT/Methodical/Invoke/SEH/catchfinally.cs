@@ -67,6 +67,7 @@ namespace JitTest
                             throw new Exception();
                         }
                     }
+
                     finally
                     {
                         if (runHandler)
@@ -75,9 +76,7 @@ namespace JitTest
                         }
                     }
                 }
-                catch (NullReferenceException)
-                {
-                }
+                catch (NullReferenceException) { }
                 return ret;
             }
             return recurseLevel == 0;

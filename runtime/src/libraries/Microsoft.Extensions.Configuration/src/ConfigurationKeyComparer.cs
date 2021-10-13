@@ -11,7 +11,10 @@ namespace Microsoft.Extensions.Configuration
     /// </summary>
     public class ConfigurationKeyComparer : IComparer<string>
     {
-        private static readonly string[] _keyDelimiterArray = new[] { ConfigurationPath.KeyDelimiter };
+        private static readonly string[] _keyDelimiterArray = new[]
+        {
+            ConfigurationPath.KeyDelimiter
+        };
 
         /// <summary>
         /// The default instance.
@@ -29,8 +32,12 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>Less than 0 if x is less than y, 0 if x is equal to y and greater than 0 if x is greater than y.</returns>
         public int Compare(string x, string y)
         {
-            string[] xParts = x?.Split(_keyDelimiterArray, StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
-            string[] yParts = y?.Split(_keyDelimiterArray, StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+            string[] xParts =
+                x?.Split(_keyDelimiterArray, StringSplitOptions.RemoveEmptyEntries)
+                ?? Array.Empty<string>();
+            string[] yParts =
+                y?.Split(_keyDelimiterArray, StringSplitOptions.RemoveEmptyEntries)
+                ?? Array.Empty<string>();
 
             // Compare each part until we get two parts that are not equal
             for (int i = 0; i < Math.Min(xParts.Length, yParts.Length); i++)

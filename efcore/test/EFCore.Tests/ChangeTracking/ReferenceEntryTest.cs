@@ -29,7 +29,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             context.Add(entity);
 
             var entityEntry = context.Entry(entity);
-            Assert.Same(entityEntry.Entity, entityEntry.Reference(e => e.Garcia).EntityEntry.Entity);
+            Assert.Same(
+                entityEntry.Entity,
+                entityEntry.Reference(e => e.Garcia).EntityEntry.Entity
+            );
         }
 
         [ConditionalFact]
@@ -70,7 +73,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Same(chunky, cherry.Monkeys.Single());
             Assert.Equal(cherry.Id, chunky.GarciaId);
             Assert.Same(cherry, reference.CurrentValue);
-            Assert.Same(reference.TargetEntry.GetInfrastructure(), context.Entry(cherry).GetInfrastructure());
+            Assert.Same(
+                reference.TargetEntry.GetInfrastructure(),
+                context.Entry(cherry).GetInfrastructure()
+            );
 
             reference.CurrentValue = null;
 
@@ -99,7 +105,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Same(chunky, cherry.Monkeys.Single());
             Assert.Equal(cherry.Id, chunky.GarciaId);
             Assert.Same(cherry, reference.CurrentValue);
-            Assert.Same(reference.TargetEntry.GetInfrastructure(), context.Entry(cherry).GetInfrastructure());
+            Assert.Same(
+                reference.TargetEntry.GetInfrastructure(),
+                context.Entry(cherry).GetInfrastructure()
+            );
 
             reference.CurrentValue = null;
 
@@ -181,7 +190,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(cherry.Id, chunky.GarciaId);
             Assert.Same(cherry, reference.CurrentValue);
 
-            Assert.Same(reference.TargetEntry.GetInfrastructure(), context.Entry(cherry).GetInfrastructure());
+            Assert.Same(
+                reference.TargetEntry.GetInfrastructure(),
+                context.Entry(cherry).GetInfrastructure()
+            );
             Assert.Equal(EntityState.Added, context.Entry(cherry).State);
             Assert.Equal(EntityState.Added, context.Entry(chunky).State);
 
@@ -216,7 +228,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             Assert.Equal(cherry.Id, chunky.GarciaId);
             Assert.Same(cherry, reference.CurrentValue);
 
-            Assert.Same(reference.TargetEntry.GetInfrastructure(), context.Entry(cherry).GetInfrastructure());
+            Assert.Same(
+                reference.TargetEntry.GetInfrastructure(),
+                context.Entry(cherry).GetInfrastructure()
+            );
             Assert.Equal(EntityState.Added, context.Entry(cherry).State);
             Assert.Equal(EntityState.Added, context.Entry(chunky).State);
 
@@ -417,7 +432,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [InlineData(EntityState.Unchanged, EntityState.Deleted)]
         public void IsModified_can_set_fk_to_modified_principal_with_Added_or_Deleted_dependent(
             EntityState principalState,
-            EntityState dependentState)
+            EntityState dependentState
+        )
         {
             using var context = new FreezerContext();
             var half = new Half();
@@ -451,7 +467,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [InlineData(EntityState.Unchanged, EntityState.Unchanged)]
         public void IsModified_can_set_fk_to_modified_principal_with_Unchanged_dependent(
             EntityState principalState,
-            EntityState dependentState)
+            EntityState dependentState
+        )
         {
             using var context = new FreezerContext();
             var half = new Half();
@@ -485,7 +502,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         [InlineData(EntityState.Unchanged, EntityState.Modified)]
         public void IsModified_can_set_fk_to_modified_principal_with_Modified_dependent(
             EntityState principalState,
-            EntityState dependentState)
+            EntityState dependentState
+        )
         {
             using var context = new FreezerContext();
             var half = new Half { Id = 7 };
@@ -543,9 +561,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
         private class FreezerContext : DbContext
         {
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) =>
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase(nameof(FreezerContext));
 
             public DbSet<Chunky> Icecream { get; set; }

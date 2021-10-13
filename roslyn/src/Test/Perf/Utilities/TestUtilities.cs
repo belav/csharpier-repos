@@ -99,10 +99,11 @@ namespace Roslyn.Test.Performance.Utilities
         /// Shells out, and if the process fails, log the error and quit the script.
         /// </summary>
         public static void ShellOutVital(
-                string file,
-                string args,
-                string workingDirectory = null,
-                CancellationToken cancellationToken = default(CancellationToken))
+            string file,
+            string args,
+            string workingDirectory = null,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             var result = ShellOut(file, args, workingDirectory, cancellationToken);
             if (result.Failed)
@@ -116,10 +117,11 @@ namespace Roslyn.Test.Performance.Utilities
         /// Shells out, blocks, and returns the ProcessResult.
         /// </summary>
         public static ProcessResult ShellOut(
-                string file,
-                string args,
-                string workingDirectory = null,
-                CancellationToken cancellationToken = default(CancellationToken))
+            string file,
+            string args,
+            string workingDirectory = null,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (workingDirectory == null)
             {
@@ -132,11 +134,7 @@ namespace Roslyn.Test.Performance.Utilities
             startInfo.RedirectStandardError = true;
             startInfo.UseShellExecute = false;
             startInfo.WorkingDirectory = workingDirectory;
-            var process = new Process
-            {
-                StartInfo = startInfo,
-                EnableRaisingEvents = true,
-            };
+            var process = new Process { StartInfo = startInfo, EnableRaisingEvents = true, };
 
             if (cancellationToken != default(CancellationToken))
             {
@@ -145,7 +143,9 @@ namespace Roslyn.Test.Performance.Utilities
 
             if (RuntimeSettings.IsVerbose)
             {
-                Log($"running \"{file}\" with arguments \"{args}\" from directory {workingDirectory}");
+                Log(
+                    $"running \"{file}\" with arguments \"{args}\" from directory {workingDirectory}"
+                );
             }
 
             process.Start();
@@ -189,7 +189,11 @@ namespace Roslyn.Test.Performance.Utilities
         /// 
         /// Throws an exception if the process fails.
         /// </summary>
-        public static string StdoutFrom(string program, string args = "", string workingDirectory = null)
+        public static string StdoutFrom(
+            string program,
+            string args = "",
+            string workingDirectory = null
+        )
         {
             var result = ShellOut(program, args, workingDirectory);
             if (result.Failed)
@@ -217,10 +221,14 @@ namespace Roslyn.Test.Performance.Utilities
         /// </summary>
         public static void LogProcessResult(ProcessResult result)
         {
-            RuntimeSettings.Logger.Log(String.Format("The process \"{0}\" {1} with code {2}",
-                $"{result.ExecutablePath} {result.Args}",
-                result.Failed ? "failed" : "succeeded",
-                result.Code));
+            RuntimeSettings.Logger.Log(
+                String.Format(
+                    "The process \"{0}\" {1} with code {2}",
+                    $"{result.ExecutablePath} {result.Args}",
+                    result.Failed ? "failed" : "succeeded",
+                    result.Code
+                )
+            );
             RuntimeSettings.Logger.Log($"Standard Out:\n{result.StdOut}");
             RuntimeSettings.Logger.Log($"\nStandard Error:\n{result.StdErr}");
         }

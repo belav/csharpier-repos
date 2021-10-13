@@ -19,13 +19,19 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(KeyValuePair<int, string>)
+                ),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider()
             };
 
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<int, string>();
+            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
+                int,
+                string
+            >();
 
             // Act
             bool retVal = binder.BindModel(controllerContext, bindingContext);
@@ -43,24 +49,36 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(KeyValuePair<int, string>)
+                ),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider()
             };
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
-            mockIntBinder
-                .Setup(o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>()))
+            mockIntBinder.Setup(
+                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
                         mbc.Model = 42;
                         return true;
-                    });
-            bindingContext.ModelBinderProviders.RegisterBinderForType(typeof(int), mockIntBinder.Object, true /* suppressPrefixCheck */);
+                    }
+                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<int, string>();
+            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
+                int,
+                string
+            >();
 
             // Act
             bool retVal = binder.BindModel(controllerContext, bindingContext);
@@ -68,7 +86,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Assert
             Assert.True(retVal);
             Assert.Null(bindingContext.Model);
-            Assert.Equal(new[] { "someName.key" }, bindingContext.ValidationNode.ChildNodes.Select(n => n.ModelStateKey).ToArray());
+            Assert.Equal(
+                new[] { "someName.key" },
+                bindingContext.ValidationNode.ChildNodes.Select(n => n.ModelStateKey).ToArray()
+            );
         }
 
         [Fact]
@@ -78,34 +99,52 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(KeyValuePair<int, string>)
+                ),
                 ModelName = "someName",
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ValueProvider = new SimpleValueProvider()
             };
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
-            mockIntBinder
-                .Setup(o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>()))
+            mockIntBinder.Setup(
+                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
                         mbc.Model = 42;
                         return true;
-                    });
-            bindingContext.ModelBinderProviders.RegisterBinderForType(typeof(int), mockIntBinder.Object, true /* suppressPrefixCheck */);
+                    }
+                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                true /* suppressPrefixCheck */
+            );
             Mock<IExtensibleModelBinder> mockStringBinder = new Mock<IExtensibleModelBinder>();
-            mockStringBinder
-                .Setup(o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>()))
+            mockStringBinder.Setup(
+                    o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
                         mbc.Model = "forty-two";
                         return true;
-                    });
-            bindingContext.ModelBinderProviders.RegisterBinderForType(typeof(string), mockStringBinder.Object, true /* suppressPrefixCheck */);
+                    }
+                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(string),
+                mockStringBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
-            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<int, string>();
+            KeyValuePairModelBinder<int, string> binder = new KeyValuePairModelBinder<
+                int,
+                string
+            >();
 
             // Act
             bool retVal = binder.BindModel(controllerContext, bindingContext);
@@ -113,7 +152,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Assert
             Assert.True(retVal);
             Assert.Equal(new KeyValuePair<int, string>(42, "forty-two"), bindingContext.Model);
-            Assert.Equal(new[] { "someName.key", "someName.value" }, bindingContext.ValidationNode.ChildNodes.Select(n => n.ModelStateKey).ToArray());
+            Assert.Equal(
+                new[] { "someName.key", "someName.value" },
+                bindingContext.ValidationNode.ChildNodes.Select(n => n.ModelStateKey).ToArray()
+            );
         }
     }
 }

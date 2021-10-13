@@ -15,6 +15,7 @@ internal static partial class Interop
             [In] NativeOverlapped* overlapped,
             [Out] out uint bytesTransferred,
             [In] bool wait,
-            [Out] out SocketFlags socketFlags);
+            [Out] out SocketFlags socketFlags
+        );
     }
 }

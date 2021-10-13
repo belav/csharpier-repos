@@ -22,7 +22,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static PropertyBuilder ToJsonProperty(
             this PropertyBuilder propertyBuilder,
-            string name)
+            string name
+        )
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
             Check.NotNull(name, nameof(name));
@@ -41,8 +42,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static PropertyBuilder<TProperty> ToJsonProperty<TProperty>(
             this PropertyBuilder<TProperty> propertyBuilder,
-            string name)
-            => (PropertyBuilder<TProperty>)ToJsonProperty((PropertyBuilder)propertyBuilder, name);
+            string name
+        ) => (PropertyBuilder<TProperty>)ToJsonProperty((PropertyBuilder)propertyBuilder, name);
 
         /// <summary>
         ///     <para>
@@ -62,7 +63,8 @@ namespace Microsoft.EntityFrameworkCore
         public static IConventionPropertyBuilder? ToJsonProperty(
             this IConventionPropertyBuilder propertyBuilder,
             string? name,
-            bool fromDataAnnotation = false)
+            bool fromDataAnnotation = false
+        )
         {
             if (!propertyBuilder.CanSetJsonProperty(name, fromDataAnnotation))
             {
@@ -84,8 +86,13 @@ namespace Microsoft.EntityFrameworkCore
         public static bool CanSetJsonProperty(
             this IConventionPropertyBuilder propertyBuilder,
             string? name,
-            bool fromDataAnnotation = false)
-            => propertyBuilder.CanSetAnnotation(CosmosAnnotationNames.PropertyName, name, fromDataAnnotation);
+            bool fromDataAnnotation = false
+        ) =>
+            propertyBuilder.CanSetAnnotation(
+                CosmosAnnotationNames.PropertyName,
+                name,
+                fromDataAnnotation
+            );
 
         /// <summary>
         ///     Configures this property to be the etag concurrency token.
@@ -95,8 +102,7 @@ namespace Microsoft.EntityFrameworkCore
         public static PropertyBuilder IsETagConcurrency(this PropertyBuilder propertyBuilder)
         {
             Check.NotNull(propertyBuilder, nameof(propertyBuilder));
-            propertyBuilder
-                .IsConcurrencyToken()
+            propertyBuilder.IsConcurrencyToken()
                 .ToJsonProperty("_etag")
                 .ValueGeneratedOnAddOrUpdate();
             return propertyBuilder;
@@ -109,7 +115,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="propertyBuilder"> The builder for the property being configured. </param>
         /// <returns> The same builder instance so that multiple calls can be chained. </returns>
         public static PropertyBuilder<TProperty> IsETagConcurrency<TProperty>(
-            this PropertyBuilder<TProperty> propertyBuilder)
-            => (PropertyBuilder<TProperty>)IsETagConcurrency((PropertyBuilder)propertyBuilder);
+            this PropertyBuilder<TProperty> propertyBuilder
+        ) => (PropertyBuilder<TProperty>)IsETagConcurrency((PropertyBuilder)propertyBuilder);
     }
 }

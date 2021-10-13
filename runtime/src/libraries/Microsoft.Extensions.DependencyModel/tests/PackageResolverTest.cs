@@ -26,7 +26,6 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             result.Should().Contain(PackagesPath);
         }
 
-
         [Fact]
         public void ShouldUseNugetUnderUserProfileOnWindows()
         {
@@ -62,7 +61,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 .Build();
             var library = F.Create(assemblies: F.TwoAssemblies);
 
-            var resolver = new PackageCompilationAssemblyResolver(fileSystem, new string[] { PackagesPath });
+            var resolver = new PackageCompilationAssemblyResolver(
+                fileSystem,
+                new string[] { PackagesPath }
+            );
             var assemblies = new List<string>();
 
             var result = resolver.TryResolveAssemblyPaths(library, assemblies);
@@ -81,11 +83,13 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 .Build();
             var library = F.Create(assemblies: F.TwoAssemblies);
 
-            var resolver = new PackageCompilationAssemblyResolver(fileSystem,  new string[] { PackagesPath });
+            var resolver = new PackageCompilationAssemblyResolver(
+                fileSystem,
+                new string[] { PackagesPath }
+            );
             var assemblies = new List<string>();
 
-            resolver.TryResolveAssemblyPaths(library, assemblies)
-                .Should().BeFalse();
+            resolver.TryResolveAssemblyPaths(library, assemblies).Should().BeFalse();
 
             assemblies.Should().BeEmpty();
         }
@@ -102,11 +106,13 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 .Build();
             var library = F.Create(assemblies: F.TwoAssemblies);
 
-            var resolver = new PackageCompilationAssemblyResolver(fileSystem, new string[] { PackagesPath, secondPath });
+            var resolver = new PackageCompilationAssemblyResolver(
+                fileSystem,
+                new string[] { PackagesPath, secondPath }
+            );
             var assemblies = new List<string>();
 
-            resolver.TryResolveAssemblyPaths(library, assemblies)
-                .Should().BeTrue();
+            resolver.TryResolveAssemblyPaths(library, assemblies).Should().BeTrue();
 
             assemblies.Should().HaveCount(2);
             assemblies.Should().Contain(Path.Combine(packagePath2, F.DefaultAssemblyPath));

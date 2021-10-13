@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 
-
 namespace System.Runtime.Serialization
 {
     internal static class Globals
@@ -20,7 +19,11 @@ namespace System.Runtime.Serialization
         /// <SecurityNote>
         /// Review - changes to const could affect code generation logic; any changes should be reviewed.
         /// </SecurityNote>
-        internal const BindingFlags ScanAllMembers = BindingFlags.Static | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+        internal const BindingFlags ScanAllMembers =
+            BindingFlags.Static
+            | BindingFlags.Instance
+            | BindingFlags.NonPublic
+            | BindingFlags.Public;
 
         private static XmlQualifiedName? s_idQualifiedName;
         internal static XmlQualifiedName IdQualifiedName
@@ -28,7 +31,10 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_idQualifiedName == null)
-                    s_idQualifiedName = new XmlQualifiedName(Globals.IdLocalName, Globals.SerializationNamespace);
+                    s_idQualifiedName = new XmlQualifiedName(
+                        Globals.IdLocalName,
+                        Globals.SerializationNamespace
+                    );
                 return s_idQualifiedName;
             }
         }
@@ -39,7 +45,10 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_refQualifiedName == null)
-                    s_refQualifiedName = new XmlQualifiedName(Globals.RefLocalName, Globals.SerializationNamespace);
+                    s_refQualifiedName = new XmlQualifiedName(
+                        Globals.RefLocalName,
+                        Globals.SerializationNamespace
+                    );
                 return s_refQualifiedName;
             }
         }
@@ -259,7 +268,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfXmlFormatCollectionWriterDelegate == null)
-                    s_typeOfXmlFormatCollectionWriterDelegate = typeof(XmlFormatCollectionWriterDelegate);
+                    s_typeOfXmlFormatCollectionWriterDelegate =
+                        typeof(XmlFormatCollectionWriterDelegate);
                 return s_typeOfXmlFormatCollectionWriterDelegate;
             }
         }
@@ -281,7 +291,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfXmlFormatCollectionReaderDelegate == null)
-                    s_typeOfXmlFormatCollectionReaderDelegate = typeof(XmlFormatCollectionReaderDelegate);
+                    s_typeOfXmlFormatCollectionReaderDelegate =
+                        typeof(XmlFormatCollectionReaderDelegate);
                 return s_typeOfXmlFormatCollectionReaderDelegate;
             }
         }
@@ -292,7 +303,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfXmlFormatGetOnlyCollectionReaderDelegate == null)
-                    s_typeOfXmlFormatGetOnlyCollectionReaderDelegate = typeof(XmlFormatGetOnlyCollectionReaderDelegate);
+                    s_typeOfXmlFormatGetOnlyCollectionReaderDelegate =
+                        typeof(XmlFormatGetOnlyCollectionReaderDelegate);
                 return s_typeOfXmlFormatGetOnlyCollectionReaderDelegate;
             }
         }
@@ -347,7 +359,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfCollectionDataContractAttribute == null)
-                    s_typeOfCollectionDataContractAttribute = typeof(CollectionDataContractAttribute);
+                    s_typeOfCollectionDataContractAttribute =
+                        typeof(CollectionDataContractAttribute);
                 return s_typeOfCollectionDataContractAttribute;
             }
         }
@@ -491,10 +504,14 @@ namespace System.Runtime.Serialization
         }
 
         private static Type? s_typeOfIExtensibleDataObject;
-        internal static Type TypeOfIExtensibleDataObject => s_typeOfIExtensibleDataObject ?? (s_typeOfIExtensibleDataObject = typeof(IExtensibleDataObject));
+        internal static Type TypeOfIExtensibleDataObject =>
+            s_typeOfIExtensibleDataObject
+            ?? (s_typeOfIExtensibleDataObject = typeof(IExtensibleDataObject));
 
         private static Type? s_typeOfExtensionDataObject;
-        internal static Type TypeOfExtensionDataObject => s_typeOfExtensionDataObject ?? (s_typeOfExtensionDataObject = typeof(ExtensionDataObject));
+        internal static Type TypeOfExtensionDataObject =>
+            s_typeOfExtensionDataObject
+            ?? (s_typeOfExtensionDataObject = typeof(ExtensionDataObject));
 
         private static Type? s_typeOfISerializableDataNode;
         internal static Type TypeOfISerializableDataNode
@@ -530,7 +547,8 @@ namespace System.Runtime.Serialization
         }
 
         private static Type? s_typeOfXmlDataNode;
-        internal static Type TypeOfXmlDataNode => s_typeOfXmlDataNode ?? (s_typeOfXmlDataNode = typeof(XmlDataNode));
+        internal static Type TypeOfXmlDataNode =>
+            s_typeOfXmlDataNode ?? (s_typeOfXmlDataNode = typeof(XmlDataNode));
 
         private static Type? s_typeOfNullable;
         internal static Type TypeOfNullable
@@ -549,7 +567,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfIDictionaryGeneric == null)
-                    s_typeOfIDictionaryGeneric = typeof(IDictionary<,>);
+                    s_typeOfIDictionaryGeneric = typeof(IDictionary<, >);
                 return s_typeOfIDictionaryGeneric;
             }
         }
@@ -659,7 +677,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfKeyValuePair == null)
-                    s_typeOfKeyValuePair = typeof(KeyValuePair<,>);
+                    s_typeOfKeyValuePair = typeof(KeyValuePair<, >);
                 return s_typeOfKeyValuePair;
             }
         }
@@ -670,7 +688,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfKeyValuePairAdapter == null)
-                    s_typeOfKeyValuePairAdapter = typeof(KeyValuePairAdapter<,>);
+                    s_typeOfKeyValuePairAdapter = typeof(KeyValuePairAdapter<, >);
                 return s_typeOfKeyValuePairAdapter;
             }
         }
@@ -681,7 +699,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfKeyValue == null)
-                    s_typeOfKeyValue = typeof(KeyValue<,>);
+                    s_typeOfKeyValue = typeof(KeyValue<, >);
                 return s_typeOfKeyValue;
             }
         }
@@ -703,7 +721,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfDictionaryEnumerator == null)
-                    s_typeOfDictionaryEnumerator = typeof(CollectionDataContract.DictionaryEnumerator);
+                    s_typeOfDictionaryEnumerator =
+                        typeof(CollectionDataContract.DictionaryEnumerator);
                 return s_typeOfDictionaryEnumerator;
             }
         }
@@ -714,7 +733,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfGenericDictionaryEnumerator == null)
-                    s_typeOfGenericDictionaryEnumerator = typeof(CollectionDataContract.GenericDictionaryEnumerator<,>);
+                    s_typeOfGenericDictionaryEnumerator =
+                        typeof(CollectionDataContract.GenericDictionaryEnumerator<, >);
                 return s_typeOfGenericDictionaryEnumerator;
             }
         }
@@ -725,7 +745,7 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfDictionaryGeneric == null)
-                    s_typeOfDictionaryGeneric = typeof(Dictionary<,>);
+                    s_typeOfDictionaryGeneric = typeof(Dictionary<, >);
                 return s_typeOfDictionaryGeneric;
             }
         }
@@ -736,7 +756,10 @@ namespace System.Runtime.Serialization
             get
             {
                 if (s_typeOfHashtable == null)
-                    s_typeOfHashtable = TypeOfDictionaryGeneric.MakeGenericType(TypeOfObject, TypeOfObject);
+                    s_typeOfHashtable = TypeOfDictionaryGeneric.MakeGenericType(
+                        TypeOfObject,
+                        TypeOfObject
+                    );
                 return s_typeOfHashtable;
             }
         }
@@ -806,14 +829,16 @@ namespace System.Runtime.Serialization
         //     instead of string comparison method calls in IL.)
         public static readonly string NewObjectId = string.Empty;
         public const string NullObjectId = null;
-        public const string FullSRSInternalsVisiblePattern = @"^[\s]*System\.Runtime\.Serialization[\s]*,[\s]*PublicKey[\s]*=[\s]*(?i:00240000048000009400000006020000002400005253413100040000010001008d56c76f9e8649383049f383c44be0ec204181822a6c31cf5eb7ef486944d032188ea1d3920763712ccb12d75fb77e9811149e6148e5d32fbaab37611c1878ddc19e20ef135d0cb2cff2bfec3d115810c3d9069638fe4be215dbf795861920e5ab6f7db2e2ceef136ac23d5dd2bf031700aec232f6c6b1c785b4305c123b37ab)[\s]*$";
+        public const string FullSRSInternalsVisiblePattern =
+            @"^[\s]*System\.Runtime\.Serialization[\s]*,[\s]*PublicKey[\s]*=[\s]*(?i:00240000048000009400000006020000002400005253413100040000010001008d56c76f9e8649383049f383c44be0ec204181822a6c31cf5eb7ef486944d032188ea1d3920763712ccb12d75fb77e9811149e6148e5d32fbaab37611c1878ddc19e20ef135d0cb2cff2bfec3d115810c3d9069638fe4be215dbf795861920e5ab6f7db2e2ceef136ac23d5dd2bf031700aec232f6c6b1c785b4305c123b37ab)[\s]*$";
         public const string Space = " ";
         public const string XsiPrefix = "i";
         public const string XsdPrefix = "x";
         public const string SerPrefix = "z";
         public const string SerPrefixForSchema = "ser";
         public const string ElementPrefix = "q";
-        public const string DataContractXsdBaseNamespace = "http://schemas.datacontract.org/2004/07/";
+        public const string DataContractXsdBaseNamespace =
+            "http://schemas.datacontract.org/2004/07/";
         public const string DataContractXmlNamespace = DataContractXsdBaseNamespace + "System.Xml";
         public const string SchemaInstanceNamespace = "http://www.w3.org/2001/XMLSchema-instance";
         public const string SchemaNamespace = "http://www.w3.org/2001/XMLSchema";
@@ -830,7 +855,8 @@ namespace System.Runtime.Serialization
         public const string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
         public const string XmlnsPrefix = "xmlns";
         public const string SchemaLocalName = "schema";
-        public const string CollectionsNamespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
+        public const string CollectionsNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
         public const string DefaultClrNamespace = "GeneratedNamespace";
         public const string DefaultTypeName = "GeneratedType";
         public const string DefaultGeneratedMember = "GeneratedMember";
@@ -863,13 +889,15 @@ namespace System.Runtime.Serialization
         public const string EnumeratorFieldName = "enumerator";
         public const string SerializationEntryFieldName = "entry";
         public const string ExtensionDataSetMethod = "set_ExtensionData";
-        public const string ExtensionDataSetExplicitMethod = "System.Runtime.Serialization.IExtensibleDataObject.set_ExtensionData";
+        public const string ExtensionDataSetExplicitMethod =
+            "System.Runtime.Serialization.IExtensibleDataObject.set_ExtensionData";
         public const string ExtensionDataObjectPropertyName = "ExtensionData";
         public const string ExtensionDataObjectFieldName = "extensionDataField";
         public const string AddMethodName = "Add";
         public const string GetCurrentMethodName = "get_Current";
         // NOTE: These values are used in schema below. If you modify any value, please make the same change in the schema.
-        public const string SerializationNamespace = "http://schemas.microsoft.com/2003/10/Serialization/";
+        public const string SerializationNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/";
         public const string ClrTypeLocalName = "Type";
         public const string ClrAssemblyLocalName = "Assembly";
         public const string IsValueTypeLocalName = "IsValueType";
@@ -894,9 +922,11 @@ namespace System.Runtime.Serialization
         public const string MscorlibAssemblyName = "0";
         public const string ParseMethodName = "Parse";
         public const string SafeSerializationManagerName = "SafeSerializationManager";
-        public const string SafeSerializationManagerNamespace = "http://schemas.datacontract.org/2004/07/System.Runtime.Serialization";
+        public const string SafeSerializationManagerNamespace =
+            "http://schemas.datacontract.org/2004/07/System.Runtime.Serialization";
         public const string ISerializableFactoryTypeLocalName = "FactoryType";
-        public const string SerializationSchema = @"<?xml version='1.0' encoding='utf-8'?>
+        public const string SerializationSchema =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified' attributeFormDefault='qualified' xmlns:tns='http://schemas.microsoft.com/2003/10/Serialization/' targetNamespace='http://schemas.microsoft.com/2003/10/Serialization/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:element name='anyType' nillable='true' type='xs:anyType' />
   <xs:element name='anyURI' nillable='true' type='xs:anyURI' />

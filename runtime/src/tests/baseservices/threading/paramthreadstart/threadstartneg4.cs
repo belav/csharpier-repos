@@ -20,12 +20,12 @@ class ThreadStartInt
             t.Start(12345);
             Console.WriteLine("No exception thrown!");
         }
-        catch(ArgumentNullException)
+        catch (ArgumentNullException)
         {
             // Expected
             iRet = 100;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Console.WriteLine("Unexpected exception thrown: " + ex.ToString());
         }

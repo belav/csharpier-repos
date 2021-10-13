@@ -43,16 +43,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IAnnotation IMutableAnnotatable.AddAnnotation(string name, object? value)
-            => AddAnnotation(name, value);
+        IAnnotation IMutableAnnotatable.AddAnnotation(string name, object? value) =>
+            AddAnnotation(name, value);
 
         /// <inheritdoc />
         [DebuggerStepThrough]
-        IAnnotation? IMutableAnnotatable.RemoveAnnotation(string name)
-            => RemoveAnnotation(name);
+        IAnnotation? IMutableAnnotatable.RemoveAnnotation(string name) => RemoveAnnotation(name);
 
         /// <inheritdoc />
-        void IMutableAnnotatable.SetOrRemoveAnnotation(string name, object? value)
-            => this[name] = value;
+        void IMutableAnnotatable.SetOrRemoveAnnotation(string name, object? value) =>
+            this[name] = value;
     }
 }

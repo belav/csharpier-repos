@@ -34,9 +34,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public SqlServerHistoryRepository(HistoryRepositoryDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
 
                 return "SELECT OBJECT_ID("
                     + stringTypeMapping.GenerateSqlLiteral(
-                        SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
+                        SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema)
+                    )
                     + ")"
                     + SqlGenerationHelper.StatementTerminator;
             }
@@ -64,8 +63,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override bool InterpretExistsResult(object? value)
-            => value != DBNull.Value;
+        protected override bool InterpretExistsResult(object? value) => value != DBNull.Value;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,11 +75,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
         {
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-            var builder = new StringBuilder()
-                .Append("IF OBJECT_ID(")
+            var builder = new StringBuilder().Append("IF OBJECT_ID(")
                 .Append(
                     stringTypeMapping.GenerateSqlLiteral(
-                        SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema)))
+                        SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema)
+                    )
+                )
                 .AppendLine(") IS NULL")
                 .AppendLine("BEGIN");
 
@@ -102,17 +101,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
 
                     if (line.Length != 0)
                     {
-                        builder
-                            .Append("    ")
-                            .Append(line);
+                        builder.Append("    ").Append(line);
                     }
                 }
             }
 
-            builder
-                .AppendLine()
-                .Append("END")
-                .AppendLine(SqlGenerationHelper.StatementTerminator);
+            builder.AppendLine().Append("END").AppendLine(SqlGenerationHelper.StatementTerminator);
 
             return builder.ToString();
         }
@@ -129,8 +123,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
 
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-            return new StringBuilder()
-                .Append("IF NOT EXISTS(SELECT * FROM ")
+            return new StringBuilder().Append("IF NOT EXISTS(SELECT * FROM ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
                 .Append(" WHERE ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
@@ -153,8 +146,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
 
             var stringTypeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(string));
 
-            return new StringBuilder()
-                .Append("IF EXISTS(SELECT * FROM ")
+            return new StringBuilder().Append("IF EXISTS(SELECT * FROM ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(TableName, TableSchema))
                 .Append(" WHERE ")
                 .Append(SqlGenerationHelper.DelimitIdentifier(MigrationIdColumnName))
@@ -171,9 +163,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string GetEndIfScript()
-            => new StringBuilder()
-                .Append("END")
+        public override string GetEndIfScript() =>
+            new StringBuilder().Append("END")
                 .AppendLine(SqlGenerationHelper.StatementTerminator)
                 .ToString();
     }

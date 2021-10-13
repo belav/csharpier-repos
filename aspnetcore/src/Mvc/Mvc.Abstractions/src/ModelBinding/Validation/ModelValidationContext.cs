@@ -21,8 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             ModelMetadata modelMetadata,
             IModelMetadataProvider metadataProvider,
             object? container,
-            object? model)
-            : base(actionContext, modelMetadata, metadataProvider)
+            object? model
+        ) : base(actionContext, modelMetadata, metadataProvider)
         {
             Container = container;
             Model = model;

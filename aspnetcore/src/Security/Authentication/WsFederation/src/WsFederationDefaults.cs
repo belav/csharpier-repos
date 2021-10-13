@@ -12,7 +12,7 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// The default authentication type used when registering the WsFederationHandler.
         /// </summary>
         public const string AuthenticationScheme = "WsFederation";
-        
+
         /// <summary>
         /// The default display name used when registering the WsFederationHandler.
         /// </summary>

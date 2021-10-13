@@ -35,8 +35,10 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         public async Task CreateAndStartConnectionAsync(string url, HttpTransportType transportType)
         {
-            _connection = new HubConnectionBuilder()
-                .WithUrl(url, options => options.Transports = transportType)
+            _connection = new HubConnectionBuilder().WithUrl(
+                    url,
+                    options => options.Transports = transportType
+                )
                 .Build();
 
             _connection.Closed += (ex) =>
@@ -101,37 +103,47 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
             if (!String.IsNullOrEmpty(payload))
             {
-                _ = Task.Run(async () =>
-                {
-                    while (!_sendCts.Token.IsCancellationRequested && State != ConnectionState.Disconnected)
+                _ = Task.Run(
+                    async () =>
                     {
-                        try
+                        while (
+                            !_sendCts.Token.IsCancellationRequested
+                            && State != ConnectionState.Disconnected
+                        )
                         {
-                            await _connection.InvokeAsync("SendPayload", payload, _sendCts.Token);
-                        }
-                        // REVIEW: This is bad. We need a way to detect a closed connection when an Invocation fails!
-                        catch (InvalidOperationException)
-                        {
-                            // The connection was closed.
-                            Trace.WriteLine("Connection closed");
-                            break;
-                        }
-                        catch (OperationCanceledException)
-                        {
-                            // The connection was closed.
-                            Trace.WriteLine("Connection closed");
-                            break;
-                        }
-                        catch (Exception ex)
-                        {
-                            // Connection failed
-                            Trace.WriteLine($"Connection failed: {ex.GetType()}: {ex.Message}");
-                            throw;
-                        }
+                            try
+                            {
+                                await _connection.InvokeAsync(
+                                    "SendPayload",
+                                    payload,
+                                    _sendCts.Token
+                                );
+                            }
+                            // REVIEW: This is bad. We need a way to detect a closed connection when an Invocation fails!
+                            catch (InvalidOperationException)
+                            {
+                                // The connection was closed.
+                                Trace.WriteLine("Connection closed");
+                                break;
+                            }
+                            catch (OperationCanceledException)
+                            {
+                                // The connection was closed.
+                                Trace.WriteLine("Connection closed");
+                                break;
+                            }
+                            catch (Exception ex)
+                            {
+                                // Connection failed
+                                Trace.WriteLine($"Connection failed: {ex.GetType()}: {ex.Message}");
+                                throw;
+                            }
 
-                        await Task.Delay(sendInterval);
-                    }
-                }, _sendCts.Token);
+                            await Task.Delay(sendInterval);
+                        }
+                    },
+                    _sendCts.Token
+                );
             }
         }
 

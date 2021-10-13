@@ -9,7 +9,8 @@ namespace System.Data
 {
     internal sealed class DataColumnPropertyDescriptor : PropertyDescriptor
     {
-        internal DataColumnPropertyDescriptor(DataColumn dataColumn) : base(dataColumn.ColumnName, null)
+        internal DataColumnPropertyDescriptor(DataColumn dataColumn)
+            : base(dataColumn.ColumnName, null)
         {
             Column = dataColumn;
         }
@@ -87,6 +88,7 @@ namespace System.Data
 
         public override bool ShouldSerializeValue(object component) => false;
 
-        public override bool IsBrowsable => Column.ColumnMapping == MappingType.Hidden ? false : base.IsBrowsable;
+        public override bool IsBrowsable =>
+            Column.ColumnMapping == MappingType.Hidden ? false : base.IsBrowsable;
     }
 }

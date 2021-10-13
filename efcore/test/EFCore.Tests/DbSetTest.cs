@@ -51,39 +51,56 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Add(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Add(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Find(77)).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Find(77)).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Attach(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Attach(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Update(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Update(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Remove(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Remove(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.ToList()).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.ToList()).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.AddAsync(new Category()).AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        () => set.AddAsync(new Category()).AsTask()
+                    )
+                ).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.FindAsync(77).AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        () => set.FindAsync(77).AsTask()
+                    )
+                ).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.ToListAsync())).Message);
+                (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.ToListAsync())).Message
+            );
         }
 
         [ConditionalFact]
@@ -96,39 +113,56 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Add(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Add(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Find(77)).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Find(77)).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Attach(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Attach(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Update(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Update(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.Remove(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.Remove(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => set.ToList()).Message);
+                Assert.Throws<ObjectDisposedException>(() => set.ToList()).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.AddAsync(new Category()).AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        () => set.AddAsync(new Category()).AsTask()
+                    )
+                ).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.FindAsync(77).AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<ObjectDisposedException>(
+                        () => set.FindAsync(77).AsTask()
+                    )
+                ).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.ToListAsync())).Message);
+                (await Assert.ThrowsAsync<ObjectDisposedException>(() => set.ToListAsync())).Message
+            );
         }
 
         [ConditionalFact]
@@ -139,7 +173,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => context.Set<Category>()).Message);
+                Assert.Throws<ObjectDisposedException>(() => context.Set<Category>()).Message
+            );
         }
 
         [Fact]
@@ -150,7 +185,10 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => context.Set<Dictionary<string, object>>("SharedTypeEntityTypeName")).Message);
+                Assert.Throws<ObjectDisposedException>(
+                    () => context.Set<Dictionary<string, object>>("SharedTypeEntityTypeName")
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -166,11 +204,23 @@ namespace Microsoft.EntityFrameworkCore
             var wrongDbSet = context.Set<Category>("SharedEntity");
 
             Assert.Equal(
-                CoreStrings.DbSetIncorrectGenericType("SharedEntity", "Dictionary<string, object>", "Category"),
-                Assert.Throws<InvalidOperationException>(() => wrongDbSet.Add(new Category())).Message);
+                CoreStrings.DbSetIncorrectGenericType(
+                    "SharedEntity",
+                    "Dictionary<string, object>",
+                    "Category"
+                ),
+                Assert.Throws<InvalidOperationException>(
+                    () => wrongDbSet.Add(new Category())
+                ).Message
+            );
             Assert.Equal(
-                CoreStrings.DbSetIncorrectGenericType("SharedEntity", "Dictionary<string, object>", "Category"),
-                Assert.Throws<InvalidOperationException>(() => wrongDbSet.ToList()).Message);
+                CoreStrings.DbSetIncorrectGenericType(
+                    "SharedEntity",
+                    "Dictionary<string, object>",
+                    "Category"
+                ),
+                Assert.Throws<InvalidOperationException>(() => wrongDbSet.ToList()).Message
+            );
         }
 
         [ConditionalFact]
@@ -185,27 +235,35 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => view.Add(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => view.Add(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => view.Remove(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => view.Remove(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => view.Contains(new Category())).Message);
+                Assert.Throws<ObjectDisposedException>(() => view.Contains(new Category())).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => view.CopyTo(Array.Empty<Category>(), 0)).Message);
+                Assert.Throws<ObjectDisposedException>(
+                    () => view.CopyTo(Array.Empty<Category>(), 0)
+                ).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => view.Clear()).Message);
+                Assert.Throws<ObjectDisposedException>(() => view.Clear()).Message
+            );
 
             Assert.StartsWith(
                 CoreStrings.ContextDisposed,
-                Assert.Throws<ObjectDisposedException>(() => view.GetEnumerator()).Message);
+                Assert.Throws<ObjectDisposedException>(() => view.GetEnumerator()).Message
+            );
         }
 
         [ConditionalFact]
@@ -215,20 +273,22 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.InvalidSetType(nameof(IgnoredEntity)),
-                Assert.Throws<InvalidOperationException>(() => context.Ignored.ToList()).Message);
+                Assert.Throws<InvalidOperationException>(() => context.Ignored.ToList()).Message
+            );
         }
 
         private class IgnoredCntext : DbContext
         {
             public DbSet<IgnoredEntity> Ignored { get; set; }
 
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) =>
+                optionsBuilder.UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
-            protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Ignore<IgnoredEntity>();
+            protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Ignore<IgnoredEntity>();
         }
 
         private class IgnoredEntity
@@ -239,7 +299,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_deleted()
         {
-            return TrackEntitiesTest((c, e) => c.Remove(e), (c, e) => c.Remove(e), EntityState.Deleted);
+            return TrackEntitiesTest(
+                (c, e) => c.Remove(e),
+                (c, e) => c.Remove(e),
+                EntityState.Deleted
+            );
         }
 
         [ConditionalFact]
@@ -251,50 +315,55 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public Task Can_add_new_entities_to_context_graph_async()
         {
-            return TrackEntitiesTest((c, e) => c.AddAsync(e), (c, e) => c.AddAsync(e), EntityState.Added);
+            return TrackEntitiesTest(
+                (c, e) => c.AddAsync(e),
+                (c, e) => c.AddAsync(e),
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_attached_graph()
         {
-            return TrackEntitiesTest((c, e) => c.Attach(e), (c, e) => c.Attach(e), EntityState.Unchanged);
+            return TrackEntitiesTest(
+                (c, e) => c.Attach(e),
+                (c, e) => c.Attach(e),
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
         public Task Can_add_existing_entities_to_context_to_be_updated_graph()
         {
-            return TrackEntitiesTest((c, e) => c.Update(e), (c, e) => c.Update(e), EntityState.Modified);
+            return TrackEntitiesTest(
+                (c, e) => c.Update(e),
+                (c, e) => c.Update(e),
+                EntityState.Modified
+            );
         }
 
         private static Task TrackEntitiesTest(
             Func<DbSet<Category>, Category, EntityEntry<Category>> categoryAdder,
             Func<DbSet<Product>, Product, EntityEntry<Product>> productAdder,
-            EntityState expectedState)
-            => TrackEntitiesTest(
+            EntityState expectedState
+        ) =>
+            TrackEntitiesTest(
                 (c, e) => new ValueTask<EntityEntry<Category>>(categoryAdder(c, e)),
                 (c, e) => new ValueTask<EntityEntry<Product>>(productAdder(c, e)),
-                expectedState);
+                expectedState
+            );
 
         private static async Task TrackEntitiesTest(
             Func<DbSet<Category>, Category, ValueTask<EntityEntry<Category>>> categoryAdder,
             Func<DbSet<Product>, Product, ValueTask<EntityEntry<Product>>> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
             using var context = new EarlyLearningCenter();
             var category1 = new Category { Id = 1, Name = "Beverages" };
             var category2 = new Category { Id = 2, Name = "Foods" };
-            var product1 = new Product
-            {
-                Id = 1,
-                Name = "Marmite",
-                Price = 7.99m
-            };
-            var product2 = new Product
-            {
-                Id = 2,
-                Name = "Bovril",
-                Price = 4.99m
-            };
+            var product1 = new Product { Id = 1, Name = "Marmite", Price = 7.99m };
+            var product2 = new Product { Id = 2, Name = "Bovril", Price = 4.99m };
 
             var categoryEntry1 = await categoryAdder(context.Categories, category1);
             var categoryEntry2 = await categoryAdder(context.Categories, category2);
@@ -316,10 +385,22 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Same(product2, productEntry2.Entity);
             Assert.Equal(expectedState, productEntry2.State);
 
-            Assert.Same(categoryEntry1.GetInfrastructure(), context.Entry(category1).GetInfrastructure());
-            Assert.Same(categoryEntry2.GetInfrastructure(), context.Entry(category2).GetInfrastructure());
-            Assert.Same(productEntry1.GetInfrastructure(), context.Entry(product1).GetInfrastructure());
-            Assert.Same(productEntry2.GetInfrastructure(), context.Entry(product2).GetInfrastructure());
+            Assert.Same(
+                categoryEntry1.GetInfrastructure(),
+                context.Entry(category1).GetInfrastructure()
+            );
+            Assert.Same(
+                categoryEntry2.GetInfrastructure(),
+                context.Entry(category2).GetInfrastructure()
+            );
+            Assert.Same(
+                productEntry1.GetInfrastructure(),
+                context.Entry(product1).GetInfrastructure()
+            );
+            Assert.Same(
+                productEntry2.GetInfrastructure(),
+                context.Entry(product2).GetInfrastructure()
+            );
         }
 
         [ConditionalFact]
@@ -328,7 +409,8 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTest(
                 (c, e) => c.Categories.AddRange(e[0], e[1]),
                 (c, e) => c.Products.AddRange(e[0], e[1]),
-                EntityState.Added);
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
@@ -337,7 +419,8 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTest(
                 (c, e) => c.Categories.AddRangeAsync(e[0], e[1]),
                 (c, e) => c.Products.AddRangeAsync(e[0], e[1]),
-                EntityState.Added);
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
@@ -346,7 +429,8 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTest(
                 (c, e) => c.Categories.AttachRange(e[0], e[1]),
                 (c, e) => c.Products.AttachRange(e[0], e[1]),
-                EntityState.Unchanged);
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
@@ -355,7 +439,8 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTest(
                 (c, e) => c.Categories.UpdateRange(e[0], e[1]),
                 (c, e) => c.Products.UpdateRange(e[0], e[1]),
-                EntityState.Modified);
+                EntityState.Modified
+            );
         }
 
         [ConditionalFact]
@@ -364,14 +449,16 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTest(
                 (c, e) => c.Categories.RemoveRange(e[0], e[1]),
                 (c, e) => c.Products.RemoveRange(e[0], e[1]),
-                EntityState.Deleted);
+                EntityState.Deleted
+            );
         }
 
         private static Task TrackMultipleEntitiesTest(
             Action<EarlyLearningCenter, Category[]> categoryAdder,
             Action<EarlyLearningCenter, Product[]> productAdder,
-            EntityState expectedState)
-            => TrackMultipleEntitiesTest(
+            EntityState expectedState
+        ) =>
+            TrackMultipleEntitiesTest(
                 (c, e) =>
                 {
                     categoryAdder(c, e);
@@ -382,28 +469,20 @@ namespace Microsoft.EntityFrameworkCore
                     productAdder(c, e);
                     return Task.FromResult(0);
                 },
-                expectedState);
+                expectedState
+            );
 
         private static async Task TrackMultipleEntitiesTest(
             Func<EarlyLearningCenter, Category[], Task> categoryAdder,
             Func<EarlyLearningCenter, Product[], Task> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
             using var context = new EarlyLearningCenter();
             var category1 = new Category { Id = 1, Name = "Beverages" };
             var category2 = new Category { Id = 2, Name = "Foods" };
-            var product1 = new Product
-            {
-                Id = 1,
-                Name = "Marmite",
-                Price = 7.99m
-            };
-            var product2 = new Product
-            {
-                Id = 2,
-                Name = "Bovril",
-                Price = 4.99m
-            };
+            var product1 = new Product { Id = 1, Name = "Marmite", Price = 7.99m };
+            var product2 = new Product { Id = 2, Name = "Bovril", Price = 4.99m };
 
             await categoryAdder(context, new[] { category1, category2 });
             await productAdder(context, new[] { product1, product2 });
@@ -457,7 +536,10 @@ namespace Microsoft.EntityFrameworkCore
             TrackNoEntitiesTest(c => c.Categories.RemoveRange(), c => c.Products.RemoveRange());
         }
 
-        private static void TrackNoEntitiesTest(Action<EarlyLearningCenter> categoryAdder, Action<EarlyLearningCenter> productAdder)
+        private static void TrackNoEntitiesTest(
+            Action<EarlyLearningCenter> categoryAdder,
+            Action<EarlyLearningCenter> productAdder
+        )
         {
             using var context = new EarlyLearningCenter();
             categoryAdder(context);
@@ -471,7 +553,8 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTestEnumerable(
                 (c, e) => c.Categories.RemoveRange(e),
                 (c, e) => c.Products.RemoveRange(e),
-                EntityState.Deleted);
+                EntityState.Deleted
+            );
         }
 
         [ConditionalFact]
@@ -480,7 +563,8 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTestEnumerable(
                 (c, e) => c.Categories.AddRange(e),
                 (c, e) => c.Products.AddRange(e),
-                EntityState.Added);
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
@@ -489,7 +573,8 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTestEnumerable(
                 (c, e) => c.Categories.AddRangeAsync(e),
                 (c, e) => c.Products.AddRangeAsync(e),
-                EntityState.Added);
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
@@ -498,7 +583,8 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTestEnumerable(
                 (c, e) => c.Categories.AttachRange(e),
                 (c, e) => c.Products.AttachRange(e),
-                EntityState.Unchanged);
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
@@ -507,14 +593,16 @@ namespace Microsoft.EntityFrameworkCore
             return TrackMultipleEntitiesTestEnumerable(
                 (c, e) => c.Categories.UpdateRange(e),
                 (c, e) => c.Products.UpdateRange(e),
-                EntityState.Modified);
+                EntityState.Modified
+            );
         }
 
         private static Task TrackMultipleEntitiesTestEnumerable(
             Action<EarlyLearningCenter, IEnumerable<Category>> categoryAdder,
             Action<EarlyLearningCenter, IEnumerable<Product>> productAdder,
-            EntityState expectedState)
-            => TrackMultipleEntitiesTestEnumerable(
+            EntityState expectedState
+        ) =>
+            TrackMultipleEntitiesTestEnumerable(
                 (c, e) =>
                 {
                     categoryAdder(c, e);
@@ -525,33 +613,23 @@ namespace Microsoft.EntityFrameworkCore
                     productAdder(c, e);
                     return Task.FromResult(0);
                 },
-                expectedState);
+                expectedState
+            );
 
         private static async Task TrackMultipleEntitiesTestEnumerable(
             Func<EarlyLearningCenter, IEnumerable<Category>, Task> categoryAdder,
             Func<EarlyLearningCenter, IEnumerable<Product>, Task> productAdder,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
             using var context = new EarlyLearningCenter();
             var category1 = new Category { Id = 1, Name = "Beverages" };
             var category2 = new Category { Id = 2, Name = "Foods" };
-            var product1 = new Product
-            {
-                Id = 1,
-                Name = "Marmite",
-                Price = 7.99m
-            };
-            var product2 = new Product
-            {
-                Id = 2,
-                Name = "Bovril",
-                Price = 4.99m
-            };
+            var product1 = new Product { Id = 1, Name = "Marmite", Price = 7.99m };
+            var product2 = new Product { Id = 2, Name = "Bovril", Price = 4.99m };
 
-            await categoryAdder(
-                context, new List<Category> { category1, category2 });
-            await productAdder(
-                context, new List<Product> { product1, product2 });
+            await categoryAdder(context, new List<Category> { category1, category2 });
+            await productAdder(context, new List<Product> { product1, product2 });
 
             Assert.Same(category1, context.Entry(category1).Entity);
             Assert.Same(category2, context.Entry(category2).Entity);
@@ -572,13 +650,19 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_add_no_existing_entities_to_set_to_be_deleted_Enumerable()
         {
-            TrackNoEntitiesTestEnumerable((c, e) => c.Categories.RemoveRange(e), (c, e) => c.Products.RemoveRange(e));
+            TrackNoEntitiesTestEnumerable(
+                (c, e) => c.Categories.RemoveRange(e),
+                (c, e) => c.Products.RemoveRange(e)
+            );
         }
 
         [ConditionalFact]
         public void Can_add_no_new_entities_to_set_Enumerable_graph()
         {
-            TrackNoEntitiesTestEnumerable((c, e) => c.Categories.AddRange(e), (c, e) => c.Products.AddRange(e));
+            TrackNoEntitiesTestEnumerable(
+                (c, e) => c.Categories.AddRange(e),
+                (c, e) => c.Products.AddRange(e)
+            );
         }
 
         [ConditionalFact]
@@ -593,18 +677,25 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Can_add_no_existing_entities_to_set_to_be_attached_Enumerable_graph()
         {
-            TrackNoEntitiesTestEnumerable((c, e) => c.Categories.AttachRange(e), (c, e) => c.Products.AttachRange(e));
+            TrackNoEntitiesTestEnumerable(
+                (c, e) => c.Categories.AttachRange(e),
+                (c, e) => c.Products.AttachRange(e)
+            );
         }
 
         [ConditionalFact]
         public void Can_add_no_existing_entities_to_set_to_be_updated_Enumerable_graph()
         {
-            TrackNoEntitiesTestEnumerable((c, e) => c.Categories.UpdateRange(e), (c, e) => c.Products.UpdateRange(e));
+            TrackNoEntitiesTestEnumerable(
+                (c, e) => c.Categories.UpdateRange(e),
+                (c, e) => c.Products.UpdateRange(e)
+            );
         }
 
         private static void TrackNoEntitiesTestEnumerable(
             Action<EarlyLearningCenter, IEnumerable<Category>> categoryAdder,
-            Action<EarlyLearningCenter, IEnumerable<Product>> productAdder)
+            Action<EarlyLearningCenter, IEnumerable<Product>> productAdder
+        )
         {
             using var context = new EarlyLearningCenter();
             categoryAdder(context, new HashSet<Category>());
@@ -615,70 +706,173 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public async Task Can_use_Add_to_change_entity_state()
         {
-            await ChangeStateWithMethod((c, e) => c.Categories.Add(e), EntityState.Detached, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Categories.Add(e), EntityState.Unchanged, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Categories.Add(e), EntityState.Deleted, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Categories.Add(e), EntityState.Modified, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Categories.Add(e), EntityState.Added, EntityState.Added);
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Add(e),
+                EntityState.Detached,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Add(e),
+                EntityState.Unchanged,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Add(e),
+                EntityState.Deleted,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Add(e),
+                EntityState.Modified,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Add(e),
+                EntityState.Added,
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public async Task Can_use_Add_to_change_entity_state_async()
         {
-            await ChangeStateWithMethod((c, e) => c.Categories.AddAsync(e), EntityState.Detached, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Categories.AddAsync(e), EntityState.Unchanged, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Categories.AddAsync(e), EntityState.Deleted, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Categories.AddAsync(e), EntityState.Modified, EntityState.Added);
-            await ChangeStateWithMethod((c, e) => c.Categories.AddAsync(e), EntityState.Added, EntityState.Added);
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.AddAsync(e),
+                EntityState.Detached,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.AddAsync(e),
+                EntityState.Unchanged,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.AddAsync(e),
+                EntityState.Deleted,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.AddAsync(e),
+                EntityState.Modified,
+                EntityState.Added
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.AddAsync(e),
+                EntityState.Added,
+                EntityState.Added
+            );
         }
 
         [ConditionalFact]
         public async Task Can_use_Attach_to_change_entity_state()
         {
-            await ChangeStateWithMethod((c, e) => c.Categories.Attach(e), EntityState.Detached, EntityState.Unchanged);
-            await ChangeStateWithMethod((c, e) => c.Categories.Attach(e), EntityState.Unchanged, EntityState.Unchanged);
-            await ChangeStateWithMethod((c, e) => c.Categories.Attach(e), EntityState.Deleted, EntityState.Unchanged);
-            await ChangeStateWithMethod((c, e) => c.Categories.Attach(e), EntityState.Modified, EntityState.Unchanged);
-            await ChangeStateWithMethod((c, e) => c.Categories.Attach(e), EntityState.Added, EntityState.Unchanged);
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Attach(e),
+                EntityState.Detached,
+                EntityState.Unchanged
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Attach(e),
+                EntityState.Unchanged,
+                EntityState.Unchanged
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Attach(e),
+                EntityState.Deleted,
+                EntityState.Unchanged
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Attach(e),
+                EntityState.Modified,
+                EntityState.Unchanged
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Attach(e),
+                EntityState.Added,
+                EntityState.Unchanged
+            );
         }
 
         [ConditionalFact]
         public async Task Can_use_Update_to_change_entity_state()
         {
-            await ChangeStateWithMethod((c, e) => c.Categories.Update(e), EntityState.Detached, EntityState.Modified);
-            await ChangeStateWithMethod((c, e) => c.Categories.Update(e), EntityState.Unchanged, EntityState.Modified);
-            await ChangeStateWithMethod((c, e) => c.Categories.Update(e), EntityState.Deleted, EntityState.Modified);
-            await ChangeStateWithMethod((c, e) => c.Categories.Update(e), EntityState.Modified, EntityState.Modified);
-            await ChangeStateWithMethod((c, e) => c.Categories.Update(e), EntityState.Added, EntityState.Modified);
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Update(e),
+                EntityState.Detached,
+                EntityState.Modified
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Update(e),
+                EntityState.Unchanged,
+                EntityState.Modified
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Update(e),
+                EntityState.Deleted,
+                EntityState.Modified
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Update(e),
+                EntityState.Modified,
+                EntityState.Modified
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Update(e),
+                EntityState.Added,
+                EntityState.Modified
+            );
         }
 
         [ConditionalFact]
         public async Task Can_use_Remove_to_change_entity_state()
         {
-            await ChangeStateWithMethod((c, e) => c.Categories.Remove(e), EntityState.Detached, EntityState.Deleted);
-            await ChangeStateWithMethod((c, e) => c.Categories.Remove(e), EntityState.Unchanged, EntityState.Deleted);
-            await ChangeStateWithMethod((c, e) => c.Categories.Remove(e), EntityState.Deleted, EntityState.Deleted);
-            await ChangeStateWithMethod((c, e) => c.Categories.Remove(e), EntityState.Modified, EntityState.Deleted);
-            await ChangeStateWithMethod((c, e) => c.Categories.Remove(e), EntityState.Added, EntityState.Detached);
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Remove(e),
+                EntityState.Detached,
+                EntityState.Deleted
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Remove(e),
+                EntityState.Unchanged,
+                EntityState.Deleted
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Remove(e),
+                EntityState.Deleted,
+                EntityState.Deleted
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Remove(e),
+                EntityState.Modified,
+                EntityState.Deleted
+            );
+            await ChangeStateWithMethod(
+                (c, e) => c.Categories.Remove(e),
+                EntityState.Added,
+                EntityState.Detached
+            );
         }
 
         private Task ChangeStateWithMethod(
             Action<EarlyLearningCenter, Category> action,
             EntityState initialState,
-            EntityState expectedState)
-            => ChangeStateWithMethod(
+            EntityState expectedState
+        ) =>
+            ChangeStateWithMethod(
                 (c, e) =>
                 {
                     action(c, e);
                     return Task.FromResult(0);
                 },
                 initialState,
-                expectedState);
+                expectedState
+            );
 
         private async Task ChangeStateWithMethod(
             Func<EarlyLearningCenter, Category, Task> action,
             EntityState initialState,
-            EntityState expectedState)
+            EntityState expectedState
+        )
         {
             using var context = new EarlyLearningCenter();
             var entity = new Category { Id = 1, Name = "Beverages" };
@@ -730,7 +924,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter();
             Assert.Same(
                 ((IInfrastructure<IServiceProvider>)context).Instance,
-                ((IInfrastructure<IServiceProvider>)context.Products).Instance);
+                ((IInfrastructure<IServiceProvider>)context.Products).Instance
+            );
         }
 
         [ConditionalFact]
@@ -739,7 +934,10 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter();
             Assert.Equal(
                 CoreStrings.DataBindingWithIListSource,
-                Assert.Throws<NotSupportedException>(() => ((IListSource)context.Gus).GetList()).Message);
+                Assert.Throws<NotSupportedException>(
+                    () => ((IListSource)context.Gus).GetList()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -748,7 +946,10 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter();
             Assert.Equal(
                 CoreStrings.DataBindingWithIListSource,
-                Assert.Throws<NotSupportedException>(() => ((IListSource)context.Gus.Distinct()).GetList()).Message);
+                Assert.Throws<NotSupportedException>(
+                    () => ((IListSource)context.Gus.Distinct()).GetList()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -757,7 +958,10 @@ namespace Microsoft.EntityFrameworkCore
             using var context = new EarlyLearningCenter();
             Assert.Equal(
                 CoreStrings.DataBindingToLocalWithIListSource,
-                Assert.Throws<NotSupportedException>(() => ((IListSource)context.Gus.Local).GetList()).Message);
+                Assert.Throws<NotSupportedException>(
+                    () => ((IListSource)context.Gus.Local).GetList()
+                ).Message
+            );
         }
 
         private class Curious
@@ -790,16 +994,20 @@ namespace Microsoft.EntityFrameworkCore
             public DbSet<Category> Categories { get; set; }
             public DbSet<TheGu> Gus { get; set; }
 
-            protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
-                    .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                    .UseInternalServiceProvider(InMemoryTestHelpers.Instance.CreateServiceProvider());
+            protected internal override void OnConfiguring(
+                DbContextOptionsBuilder optionsBuilder
+            ) =>
+                optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString())
+                    .UseInternalServiceProvider(
+                        InMemoryTestHelpers.Instance.CreateServiceProvider()
+                    );
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.SharedTypeEntity<Dictionary<string, object>>("SharedEntity").IndexerProperty<int>("Id");
+                modelBuilder.SharedTypeEntity<Dictionary<string, object>>("SharedEntity")
+                    .IndexerProperty<int>("Id");
             }
         }
     }

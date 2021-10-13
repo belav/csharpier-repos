@@ -5,15 +5,11 @@
 using System;
 public class a
 {
-
     public static int Main(string[] args)
     {
-        try
-        {
-        }
-        finally
-        {
-        }
+        try { }
+
+        finally { }
         return 100;
     }
 }

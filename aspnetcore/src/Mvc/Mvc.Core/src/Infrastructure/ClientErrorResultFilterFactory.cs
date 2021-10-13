@@ -17,7 +17,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
         {
-            var resultFilter = ActivatorUtilities.CreateInstance<ClientErrorResultFilter>(serviceProvider);
+            var resultFilter = ActivatorUtilities.CreateInstance<ClientErrorResultFilter>(
+                serviceProvider
+            );
             return resultFilter;
         }
     }

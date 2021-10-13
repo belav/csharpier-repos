@@ -128,7 +128,11 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld),
+                    ref Unsafe.As<Byte, byte>(ref _data[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Byte>>()
+                );
 
                 return testStruct;
             }
@@ -145,10 +149,7 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 fixed (Vector128<Byte>* pFld = &_fld)
                 {
-                    var result = Aes.KeygenAssist(
-                        Aes.LoadVector128((Byte*)(pFld)),
-                        5
-                    );
+                    var result = Aes.KeygenAssist(Aes.LoadVector128((Byte*)(pFld)), 5);
 
                     Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                     testClass.ValidateResult(testClass._dataTable.outArrayPtr);
@@ -158,10 +159,47 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
 
-        private static Byte[] _data = new Byte[16] {0xef, 0xcd, 0xab, 0x89, 0x67, 0x45, 0x23, 0x01, 0xff, 0xee, 0xdd, 0xcc, 0xbb, 0xaa, 0x99, 0x88};
-        private static Byte[] _expectedRet = new Byte[16] {0x85, 0x6e, 0x26, 0x7c, 0x6b, 0x26, 0x7c, 0x85, 0xea, 0xac, 0xee, 0xc4, 0xa9, 0xee, 0xc4, 0xea};
+        private static Byte[] _data = new Byte[16]
+        {
+            0xef,
+            0xcd,
+            0xab,
+            0x89,
+            0x67,
+            0x45,
+            0x23,
+            0x01,
+            0xff,
+            0xee,
+            0xdd,
+            0xcc,
+            0xbb,
+            0xaa,
+            0x99,
+            0x88
+        };
+        private static Byte[] _expectedRet = new Byte[16]
+        {
+            0x85,
+            0x6e,
+            0x26,
+            0x7c,
+            0x6b,
+            0x26,
+            0x7c,
+            0x85,
+            0xea,
+            0xac,
+            0xee,
+            0xc4,
+            0xa9,
+            0xee,
+            0xc4,
+            0xea
+        };
 
         private static Vector128<Byte> _clsVar;
 
@@ -171,18 +209,28 @@ namespace JIT.HardwareIntrinsics.X86
 
         static AesImmOpTest__KeygenAssistByte5()
         {
-
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
         }
 
         public AesImmOpTest__KeygenAssistByte5()
         {
             Succeeded = true;
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _fld), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _fld),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
-
-            _dataTable = new SimpleUnaryOpTest__DataTable<Byte, Byte>(_data, new Byte[RetElementCount], LargestVectorSize);
+            _dataTable = new SimpleUnaryOpTest__DataTable<Byte, Byte>(
+                _data,
+                new Byte[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Aes.IsSupported;
@@ -193,10 +241,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Aes.KeygenAssist(
-                Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr),
-                5
-            );
+            var result = Aes.KeygenAssist(Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr), 5);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -206,10 +251,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Aes.KeygenAssist(
-                Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr)),
-                5
-            );
+            var result = Aes.KeygenAssist(Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr)), 5);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -232,11 +274,14 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.KeygenAssist), new Type[] { typeof(Vector128<Byte>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr),
-                                        (byte)5
-                                     });
+            var result = typeof(Aes).GetMethod(
+                    nameof(Aes.KeygenAssist),
+                    new Type[] { typeof(Vector128<Byte>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr), (byte)5 }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -246,11 +291,14 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.KeygenAssist), new Type[] { typeof(Vector128<Byte>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr)),
-                                        (byte)5
-                                     });
+            var result = typeof(Aes).GetMethod(
+                    nameof(Aes.KeygenAssist),
+                    new Type[] { typeof(Vector128<Byte>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr)), (byte)5 }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -260,11 +308,18 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.KeygenAssist), new Type[] { typeof(Vector128<Byte>), typeof(byte) })
-                                     .Invoke(null, new object[] {
-                                        Aes.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr)),
-                                        (byte)5
-                                     });
+            var result = typeof(Aes).GetMethod(
+                    nameof(Aes.KeygenAssist),
+                    new Type[] { typeof(Vector128<Byte>), typeof(byte) }
+                )
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Aes.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr)),
+                        (byte)5
+                    }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -274,10 +329,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Aes.KeygenAssist(
-                _clsVar,
-                5
-            );
+            var result = Aes.KeygenAssist(_clsVar, 5);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -289,10 +341,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pClsVar = &_clsVar)
             {
-                var result = Aes.KeygenAssist(
-                    Aes.LoadVector128((Byte*)(pClsVar)),
-                    5
-                );
+                var result = Aes.KeygenAssist(Aes.LoadVector128((Byte*)(pClsVar)), 5);
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_dataTable.outArrayPtr);
@@ -351,10 +400,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pFld = &test._fld)
             {
-                var result = Aes.KeygenAssist(
-                    Aes.LoadVector128((Byte*)(pFld)),
-                    5
-                );
+                var result = Aes.KeygenAssist(Aes.LoadVector128((Byte*)(pFld)), 5);
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_dataTable.outArrayPtr);
@@ -377,10 +423,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pFld = &_fld)
             {
-                var result = Aes.KeygenAssist(
-                    Aes.LoadVector128((Byte*)(pFld)),
-                    5
-                );
+                var result = Aes.KeygenAssist(Aes.LoadVector128((Byte*)(pFld)), 5);
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_dataTable.outArrayPtr);
@@ -403,10 +446,7 @@ namespace JIT.HardwareIntrinsics.X86
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = Aes.KeygenAssist(
-                Aes.LoadVector128((Byte*)(&test._fld)),
-                5
-            );
+            var result = Aes.KeygenAssist(Aes.LoadVector128((Byte*)(&test._fld)), 5);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -451,10 +491,13 @@ namespace JIT.HardwareIntrinsics.X86
 
         private void ValidateResult(void* result, [CallerMemberName] string method = "")
         {
-
             Byte[] outArray = new Byte[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
             ValidateResult(outArray, method);
         }
@@ -465,7 +508,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             for (int i = 0; i < result.Length; i++)
             {
-                if (result[i] != _expectedRet[i] )
+                if (result[i] != _expectedRet[i])
                 {
                     succeeded = false;
                     break;
@@ -474,9 +517,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Aes)}.{nameof(Aes.KeygenAssist)}<Byte>(Vector128<Byte>, 5): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Aes)}.{nameof(Aes.KeygenAssist)}<Byte>(Vector128<Byte>, 5): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

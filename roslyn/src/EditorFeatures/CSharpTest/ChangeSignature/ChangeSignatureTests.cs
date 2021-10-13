@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInExpressionBody()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     void Goo(int a, int b) => [||]0;
@@ -31,7 +32,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestAfterSemicolonForInvocationInExpressionStatement_ViaCommand()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -44,7 +46,8 @@ class Program
 
     static void M2(int x, int y, int z) { }
 }";
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -62,13 +65,15 @@ class Program
                 LanguageNames.CSharp,
                 markup: markup,
                 updatedSignature: new[] { 1, 0 },
-                expectedUpdatedInvocationDocumentCode: expectedCode);
+                expectedUpdatedInvocationDocumentCode: expectedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestOnLambdaWithTwoDiscardParameters_ViaCommand()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void M()
@@ -76,7 +81,8 @@ class Program
         System.Func<int, string, int> f = $$(int _, string _) => 1;
     }
 }";
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class Program
 {
     static void M()
@@ -89,13 +95,15 @@ class Program
                 LanguageNames.CSharp,
                 markup: markup,
                 updatedSignature: new[] { 1, 0 },
-                expectedUpdatedInvocationDocumentCode: expectedCode);
+                expectedUpdatedInvocationDocumentCode: expectedCode
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestOnAnonymousMethodWithTwoParameters_ViaCommand()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void M()
@@ -109,7 +117,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestOnAnonymousMethodWithTwoDiscardParameters_ViaCommand()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void M()
@@ -123,7 +132,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestAfterSemicolonForInvocationInExpressionStatement_ViaCodeAction()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -144,7 +154,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInLeadingWhitespace()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     [||]
@@ -160,7 +171,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInLeadingTrivia()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     // [||]
@@ -176,7 +188,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInLeadingTrivia2()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     [||]//
@@ -192,7 +205,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInLeadingDocComment()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     /// [||]
@@ -208,7 +222,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInLeadingDocComment2()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     [||]///
@@ -224,7 +239,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInLeadingAttributes1()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     [||][X]
@@ -240,7 +256,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInLeadingAttributes2()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     [[||]X]
@@ -256,7 +273,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInLeadingAttributes3()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     [X][||]
@@ -272,7 +290,8 @@ class Ext
         [Fact, Trait(Traits.Feature, Traits.Features.ChangeSignature)]
         public async Task TestNotInConstraints()
         {
-            var markup = @"
+            var markup =
+                @"
 class Ext
 {
     void Goo<T>(int a, int b) where [||]T : class

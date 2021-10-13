@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     /// Information about a reference to a symbol.
     /// </summary>
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    public readonly struct ReferenceLocation : IComparable<ReferenceLocation>, IEquatable<ReferenceLocation>
+    public readonly struct ReferenceLocation
+        : IComparable<ReferenceLocation>,
+          IEquatable<ReferenceLocation>
     {
         /// <summary>
         /// The document that the reference was found in.
@@ -65,15 +67,24 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public CandidateReason CandidateReason { get; }
 
-        private ReferenceLocation(Document document, IAliasSymbol alias, Location location, bool isImplicit, SymbolUsageInfo symbolUsageInfo, ImmutableDictionary<string, string> additionalProperties, CandidateReason candidateReason, Location containingStringLocation)
-            : this()
+        private ReferenceLocation(
+            Document document,
+            IAliasSymbol alias,
+            Location location,
+            bool isImplicit,
+            SymbolUsageInfo symbolUsageInfo,
+            ImmutableDictionary<string, string> additionalProperties,
+            CandidateReason candidateReason,
+            Location containingStringLocation
+        ) : this()
         {
             this.Document = document;
             this.Alias = alias;
             this.Location = location;
             this.IsImplicit = isImplicit;
             this.SymbolUsageInfo = symbolUsageInfo;
-            this.AdditionalProperties = additionalProperties ?? ImmutableDictionary<string, string>.Empty;
+            this.AdditionalProperties =
+                additionalProperties ?? ImmutableDictionary<string, string>.Empty;
             this.CandidateReason = candidateReason;
             this.ContainingStringLocation = containingStringLocation;
         }
@@ -81,21 +92,45 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// <summary>
         /// Creates a reference location with the given properties.
         /// </summary>
-        internal ReferenceLocation(Document document, IAliasSymbol alias, Location location, bool isImplicit, SymbolUsageInfo symbolUsageInfo, ImmutableDictionary<string, string> additionalProperties, CandidateReason candidateReason)
-            : this(document, alias, location, isImplicit, symbolUsageInfo, additionalProperties, candidateReason, containingStringLocation: Location.None)
-        {
-        }
+        internal ReferenceLocation(
+            Document document,
+            IAliasSymbol alias,
+            Location location,
+            bool isImplicit,
+            SymbolUsageInfo symbolUsageInfo,
+            ImmutableDictionary<string, string> additionalProperties,
+            CandidateReason candidateReason
+        )
+            : this(
+                document,
+                alias,
+                location,
+                isImplicit,
+                symbolUsageInfo,
+                additionalProperties,
+                candidateReason,
+                containingStringLocation: Location.None
+            ) { }
 
         /// <summary>
         /// Creates a reference location within a string literal.
         /// For example, location inside the target string of a global SuppressMessageAttribute.
         /// </summary>
-        internal ReferenceLocation(Document document, Location location, Location containingStringLocation)
-            : this(document, alias: null, location, isImplicit: false,
-                   SymbolUsageInfo.None, additionalProperties: ImmutableDictionary<string, string>.Empty,
-                   CandidateReason.None, containingStringLocation)
-        {
-        }
+        internal ReferenceLocation(
+            Document document,
+            Location location,
+            Location containingStringLocation
+        )
+            : this(
+                document,
+                alias: null,
+                location,
+                isImplicit: false,
+                SymbolUsageInfo.None,
+                additionalProperties: ImmutableDictionary<string, string>.Empty,
+                CandidateReason.None,
+                containingStringLocation
+            ) { }
 
         /// <summary>
         /// Indicates if this was not an exact reference to a location, but was instead a possible
@@ -105,35 +140,38 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// </summary>
         public bool IsCandidateLocation => this.CandidateReason != CandidateReason.None;
 
-        public static bool operator ==(ReferenceLocation left, ReferenceLocation right)
-            => left.Equals(right);
+        public static bool operator ==(ReferenceLocation left, ReferenceLocation right) =>
+            left.Equals(right);
 
-        public static bool operator !=(ReferenceLocation left, ReferenceLocation right)
-            => !(left == right);
+        public static bool operator !=(ReferenceLocation left, ReferenceLocation right) =>
+            !(left == right);
 
         public override bool Equals(object obj)
         {
-            return obj is ReferenceLocation &&
-                Equals((ReferenceLocation)obj);
+            return obj is ReferenceLocation && Equals((ReferenceLocation)obj);
         }
 
         public bool Equals(ReferenceLocation other)
         {
-            return
-                EqualityComparer<IAliasSymbol>.Default.Equals(this.Alias, other.Alias) &&
-                EqualityComparer<Location>.Default.Equals(this.Location, other.Location) &&
-                EqualityComparer<DocumentId>.Default.Equals(this.Document.Id, other.Document.Id) &&
-                this.CandidateReason == other.CandidateReason &&
-                this.IsImplicit == other.IsImplicit;
+            return EqualityComparer<IAliasSymbol>.Default.Equals(this.Alias, other.Alias)
+                && EqualityComparer<Location>.Default.Equals(this.Location, other.Location)
+                && EqualityComparer<DocumentId>.Default.Equals(this.Document.Id, other.Document.Id)
+                && this.CandidateReason == other.CandidateReason
+                && this.IsImplicit == other.IsImplicit;
         }
 
         public override int GetHashCode()
         {
-            return
-                Hash.Combine(this.IsImplicit,
-                Hash.Combine((int)this.CandidateReason,
-                Hash.Combine(this.Alias,
-                Hash.Combine(this.Location, this.Document.Id.GetHashCode()))));
+            return Hash.Combine(
+                this.IsImplicit,
+                Hash.Combine(
+                    (int)this.CandidateReason,
+                    Hash.Combine(
+                        this.Alias,
+                        Hash.Combine(this.Location, this.Document.Id.GetHashCode())
+                    )
+                )
+            );
         }
 
         public int CompareTo(ReferenceLocation other)
@@ -143,8 +181,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             var thisPath = this.Location.SourceTree.FilePath;
             var otherPath = other.Location.SourceTree.FilePath;
 
-            if ((compare = StringComparer.OrdinalIgnoreCase.Compare(thisPath, otherPath)) != 0 ||
-                (compare = this.Location.SourceSpan.CompareTo(other.Location.SourceSpan)) != 0)
+            if (
+                (compare = StringComparer.OrdinalIgnoreCase.Compare(thisPath, otherPath)) != 0
+                || (compare = this.Location.SourceSpan.CompareTo(other.Location.SourceSpan)) != 0
+            )
             {
                 return compare;
             }
@@ -152,7 +192,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             return 0;
         }
 
-        private string GetDebuggerDisplay()
-            => string.Format("{0}: {1}", this.Document.Name, this.Location);
+        private string GetDebuggerDisplay() =>
+            string.Format("{0}: {1}", this.Document.Name, this.Location);
     }
 }

@@ -21,10 +21,7 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             ByteUtils.RepeatByte(0xaa, 80),
         };
 
-        public HmacMD5Tests()
-            : base(s_testKeys2202)
-        {
-        }
+        public HmacMD5Tests() : base(s_testKeys2202) { }
 
         protected override HMAC Create()
         {
@@ -36,7 +33,10 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             return MD5.Create();
         }
 
-        protected override int BlockSize { get { return 64; } }
+        protected override int BlockSize
+        {
+            get { return 64; }
+        }
 
         [Fact]
         public void HmacMD5_Rfc2202_1()

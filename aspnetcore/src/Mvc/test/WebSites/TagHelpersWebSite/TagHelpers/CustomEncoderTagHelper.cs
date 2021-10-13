@@ -21,8 +21,7 @@ namespace TagHelpersWebSite.TagHelpers
             // Note this is very unsafe. Should always post-process content that may not be fully HTML encoded before
             // writing it into a response. Here for example, could pass SetContent() a string and that would be
             // HTML encoded later.
-            output.PreContent
-                .SetHtmlContent("Custom encoder: ")
+            output.PreContent.SetHtmlContent("Custom encoder: ")
                 .AppendHtml(customContent)
                 .AppendHtml("<br />");
         }
@@ -30,15 +29,18 @@ namespace TagHelpersWebSite.TagHelpers
         // Simple encoder that just wraps "string" as "Custom[[string]]". Note: Lacks all parameter checks.
         private class CustomEncoder : HtmlEncoder
         {
-            public CustomEncoder()
-            {
-            }
+            public CustomEncoder() { }
 
             public override int MaxOutputCharactersPerInputCharacter => 1;
 
-            public override string Encode(string value) => $"Custom[[{ value }]]";
+            public override string Encode(string value) => $"Custom[[{value}]]";
 
-            public override void Encode(TextWriter output, char[] value, int startIndex, int characterCount)
+            public override void Encode(
+                TextWriter output,
+                char[] value,
+                int startIndex,
+                int characterCount
+            )
             {
                 if (characterCount == 0)
                 {
@@ -50,7 +52,12 @@ namespace TagHelpersWebSite.TagHelpers
                 output.Write("]]");
             }
 
-            public override void Encode(TextWriter output, string value, int startIndex, int characterCount)
+            public override void Encode(
+                TextWriter output,
+                string value,
+                int startIndex,
+                int characterCount
+            )
             {
                 if (characterCount == 0)
                 {
@@ -68,7 +75,8 @@ namespace TagHelpersWebSite.TagHelpers
                 int unicodeScalar,
                 char* buffer,
                 int bufferLength,
-                out int numberOfCharactersWritten)
+                out int numberOfCharactersWritten
+            )
             {
                 numberOfCharactersWritten = 0;
 

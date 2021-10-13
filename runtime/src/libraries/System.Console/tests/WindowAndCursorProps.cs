@@ -11,35 +11,35 @@ using Xunit;
 public class WindowAndCursorProps
 {
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Expected behavior specific to Unix
     public static void BufferWidth_GetUnix_ReturnsWindowWidth()
     {
         Assert.Equal(Console.WindowWidth, Console.BufferWidth);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void BufferWidth_SetUnix_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.BufferWidth = 1);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Expected behavior specific to Unix
     public static void BufferHeight_GetUnix_ReturnsWindowHeight()
     {
         Assert.Equal(Console.WindowHeight, Console.BufferHeight);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void BufferHeight_SetUnix_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.BufferHeight = 1);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void SetBufferSize_Unix_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.SetBufferSize(0, 0));
@@ -57,12 +57,15 @@ public class WindowAndCursorProps
         }
         else
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("width", () => Console.WindowWidth = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "width",
+                () => Console.WindowWidth = value
+            );
         }
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Expected behavior specific to Unix
     public static void WindowWidth_GetUnix_Success()
     {
         // Validate that Console.WindowWidth returns some value in a non-redirected o/p.
@@ -71,14 +74,14 @@ public class WindowAndCursorProps
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Expected behavior specific to Unix
     public static void WindowWidth_SetUnix_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.WindowWidth = 100);
     }
 
     [Theory]
-    [PlatformSpecific(TestPlatforms.Windows)]  // Expected behavior specific to Windows
+    [PlatformSpecific(TestPlatforms.Windows)] // Expected behavior specific to Windows
     [InlineData(0)]
     [InlineData(-1)]
     public static void WindowHeight_SetInvalid_ThrowsArgumentOutOfRangeException(int value)
@@ -89,12 +92,15 @@ public class WindowAndCursorProps
         }
         else
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("height", () => Console.WindowHeight = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "height",
+                () => Console.WindowHeight = value
+            );
         }
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Expected behavior specific to Unix
     public static void WindowHeight_GetUnix_Success()
     {
         // Validate that Console.WindowHeight returns some value in a non-redirected o/p.
@@ -103,26 +109,34 @@ public class WindowAndCursorProps
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void WindowHeight_SetUnix_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.WindowHeight = 100);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Expected behavior specific to Unix
     public static void LargestWindowWidth_UnixGet_ReturnsExpected()
     {
-        Helpers.RunInNonRedirectedOutput((data) => Assert.Equal(Console.WindowWidth, Console.LargestWindowWidth));
-        Helpers.RunInRedirectedOutput((data) => Assert.Equal(Console.WindowWidth, Console.LargestWindowWidth));
+        Helpers.RunInNonRedirectedOutput(
+            (data) => Assert.Equal(Console.WindowWidth, Console.LargestWindowWidth)
+        );
+        Helpers.RunInRedirectedOutput(
+            (data) => Assert.Equal(Console.WindowWidth, Console.LargestWindowWidth)
+        );
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Expected behavior specific to Unix
     public static void LargestWindowHeight_UnixGet_ReturnsExpected()
     {
-        Helpers.RunInNonRedirectedOutput((data) => Assert.Equal(Console.WindowHeight, Console.LargestWindowHeight));
-        Helpers.RunInRedirectedOutput((data) => Assert.Equal(Console.WindowHeight, Console.LargestWindowHeight));
+        Helpers.RunInNonRedirectedOutput(
+            (data) => Assert.Equal(Console.WindowHeight, Console.LargestWindowHeight)
+        );
+        Helpers.RunInRedirectedOutput(
+            (data) => Assert.Equal(Console.WindowHeight, Console.LargestWindowHeight)
+        );
     }
 
     [Fact]
@@ -140,35 +154,35 @@ public class WindowAndCursorProps
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void WindowLeft_GetUnix_ReturnsZero()
     {
         Assert.Equal(0, Console.WindowLeft);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void WindowLeft_SetUnix_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.WindowLeft = 0);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void WindowTop_GetUnix_ReturnsZero()
     {
         Assert.Equal(0, Console.WindowTop);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void WindowTop_SetUnix_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.WindowTop = 0);
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.Windows)]  // Expected behavior specific to Windows
+    [PlatformSpecific(TestPlatforms.Windows)] // Expected behavior specific to Windows
     public static void WindowLeftTop_Windows()
     {
         if (Console.IsOutputRedirected)
@@ -184,39 +198,45 @@ public class WindowAndCursorProps
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void CursorVisible_GetUnix_ThrowsPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.CursorVisible);
     }
 
     [Theory]
-    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Expected behavior specific to Unix
     [InlineData(true)]
     [InlineData(false)]
     public static void CursorVisible_SetUnixRedirected_Nop(bool value)
     {
-        Helpers.RunInRedirectedOutput((data) => {
-            Console.CursorVisible = value;
-            Assert.Equal(0, data.ToArray().Length);
-        });
+        Helpers.RunInRedirectedOutput(
+            (data) =>
+            {
+                Console.CursorVisible = value;
+                Assert.Equal(0, data.ToArray().Length);
+            }
+        );
     }
 
     [Fact]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void Title_GetUnix_ThrowPlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.Title);
     }
 
     [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-    [PlatformSpecific(TestPlatforms.AnyUnix)]  // Expected behavior specific to Unix
+    [PlatformSpecific(TestPlatforms.AnyUnix)] // Expected behavior specific to Unix
     public static void Title_SetUnix_Success()
     {
-        RemoteExecutor.Invoke(() =>
-        {
-            Console.Title = "Title set by unit test";
-        }).Dispose();
+        RemoteExecutor.Invoke(
+                () =>
+                {
+                    Console.Title = "Title set by unit test";
+                }
+            )
+            .Dispose();
     }
 
     [Fact]
@@ -226,7 +246,10 @@ public class WindowAndCursorProps
         Assert.NotNull(Console.Title);
     }
 
-    [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+    [ConditionalFact(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+    )]
     [PlatformSpecific(TestPlatforms.Windows)]
     public static void Title_Get_Windows_NoNulls()
     {
@@ -235,10 +258,16 @@ public class WindowAndCursorProps
         Assert.Equal(trimmedTitle, title);
     }
 
-    private static bool IsNotWindowsNanoServerAndNotServerCoreAndRemoteExecutorSupported => PlatformDetection.IsNotWindowsNanoNorServerCore && RemoteExecutor.IsSupported;
+    private static bool IsNotWindowsNanoServerAndNotServerCoreAndRemoteExecutorSupported =>
+        PlatformDetection.IsNotWindowsNanoNorServerCore && RemoteExecutor.IsSupported;
 
     [ConditionalTheory(nameof(IsNotWindowsNanoServerAndNotServerCoreAndRemoteExecutorSupported))] // Nano and Server Core currently ignore set title
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34454", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34454",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     [InlineData(0)]
     [InlineData(1)]
     [InlineData(254)]
@@ -253,21 +282,30 @@ public class WindowAndCursorProps
     public static void Title_Set_Windows(int lengthOfTitle)
     {
         // Try to set the title to some other value.
-        RemoteExecutor.Invoke(lengthOfTitleString =>
-        {
-            string newTitle = new string('a', int.Parse(lengthOfTitleString));
-            Console.Title = newTitle;
+        RemoteExecutor.Invoke(
+                lengthOfTitleString =>
+                {
+                    string newTitle = new string('a', int.Parse(lengthOfTitleString));
+                    Console.Title = newTitle;
 
-            if (newTitle.Length >= 511 && !PlatformDetection.IsNetCore && PlatformDetection.IsWindows10Version1703OrGreater && !PlatformDetection.IsWindows10Version1709OrGreater)
-            {
-                // RS2 has a bug when getting the window title when the title length is longer than 513 character
-                Assert.Throws<IOException>(() => Console.Title);
-            }
-            else
-            {
-                Assert.Equal(newTitle, Console.Title);
-            }
-        }, lengthOfTitle.ToString()).Dispose();
+                    if (
+                        newTitle.Length >= 511
+                        && !PlatformDetection.IsNetCore
+                        && PlatformDetection.IsWindows10Version1703OrGreater
+                        && !PlatformDetection.IsWindows10Version1709OrGreater
+                    )
+                    {
+                        // RS2 has a bug when getting the window title when the title length is longer than 513 character
+                        Assert.Throws<IOException>(() => Console.Title);
+                    }
+                    else
+                    {
+                        Assert.Equal(newTitle, Console.Title);
+                    }
+                },
+                lengthOfTitle.ToString()
+            )
+            .Dispose();
     }
 
     [Fact]
@@ -299,7 +337,10 @@ public class WindowAndCursorProps
     [InlineData(32768)]
     public void BeepWithFrequency_InvalidFrequency_ThrowsArgumentOutOfRangeException(int frequency)
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("frequency", () => Console.Beep(frequency, 200));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "frequency",
+            () => Console.Beep(frequency, 200)
+        );
     }
 
     [Theory]
@@ -308,7 +349,10 @@ public class WindowAndCursorProps
     [InlineData(-1)]
     public void BeepWithFrequency_InvalidDuration_ThrowsArgumentOutOfRangeException(int duration)
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("duration", () => Console.Beep(800, duration));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "duration",
+            () => Console.Beep(800, duration)
+        );
     }
 
     [Fact]
@@ -322,7 +366,10 @@ public class WindowAndCursorProps
     [OuterLoop] // clears the screen, not very inner-loop friendly
     public static void Clear_Invoke_Success()
     {
-        if (!OperatingSystem.IsWindows() || (!Console.IsInputRedirected && !Console.IsOutputRedirected))
+        if (
+            !OperatingSystem.IsWindows()
+            || (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+        )
         {
             // Nothing to verify; just run the code.
             Console.Clear();
@@ -340,7 +387,10 @@ public class WindowAndCursorProps
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]
     public static void SetCursorPosition_Invoke_Success()
     {
-        if (!OperatingSystem.IsWindows() || (!Console.IsInputRedirected && !Console.IsOutputRedirected))
+        if (
+            !OperatingSystem.IsWindows()
+            || (!Console.IsInputRedirected && !Console.IsOutputRedirected)
+        )
         {
             int origLeft = Console.CursorLeft;
             int origTop = Console.CursorTop;
@@ -359,8 +409,14 @@ public class WindowAndCursorProps
     [InlineData(short.MaxValue + 1)]
     public void SetCursorPosition_InvalidPosition_ThrowsArgumentOutOfRangeException(int value)
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("left", () => Console.SetCursorPosition(value, 100));
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("top", () => Console.SetCursorPosition(100, value));
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "left",
+            () => Console.SetCursorPosition(value, 100)
+        );
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "top",
+            () => Console.SetCursorPosition(100, value)
+        );
     }
 
     [Fact]
@@ -369,7 +425,8 @@ public class WindowAndCursorProps
     {
         if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
         {
-            int origLeft = Console.CursorLeft, origTop = Console.CursorTop;
+            int origLeft = Console.CursorLeft,
+                origTop = Console.CursorTop;
             (int, int) origTuple = Console.GetCursorPosition();
 
             Console.SetCursorPosition(10, 12);
@@ -422,7 +479,10 @@ public class WindowAndCursorProps
         }
         else
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("left", () => Console.CursorLeft = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "left",
+                () => Console.CursorLeft = value
+            );
         }
     }
 
@@ -465,7 +525,10 @@ public class WindowAndCursorProps
         }
         else
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("top", () => Console.CursorTop = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "top",
+                () => Console.CursorTop = value
+            );
         }
     }
 
@@ -473,7 +536,7 @@ public class WindowAndCursorProps
     [PlatformSpecific(TestPlatforms.Browser)]
     public void CursorTop_Setter_Throws_PlatformNotSupportedException()
     {
-        Assert.Throws<PlatformNotSupportedException>(() => Console.CursorTop = 0 );
+        Assert.Throws<PlatformNotSupportedException>(() => Console.CursorTop = 0);
     }
 
     [Fact]
@@ -488,6 +551,7 @@ public class WindowAndCursorProps
                 Console.CursorSize = 50;
                 Assert.Equal(50, Console.CursorSize);
             }
+
             finally
             {
                 Console.CursorSize = orig;
@@ -501,7 +565,10 @@ public class WindowAndCursorProps
     [PlatformSpecific(TestPlatforms.Windows)]
     public void CursorSize_SetInvalidValue_ThrowsArgumentOutOfRangeException(int value)
     {
-        AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => Console.CursorSize = value);
+        AssertExtensions.Throws<ArgumentOutOfRangeException>(
+            "value",
+            () => Console.CursorSize = value
+        );
     }
 
     [Fact]
@@ -531,10 +598,30 @@ public class WindowAndCursorProps
     {
         if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("left", () => Console.SetWindowPosition(-1, Console.WindowTop));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("top", () => Console.SetWindowPosition(Console.WindowLeft, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("left", () => Console.SetWindowPosition(Console.BufferWidth - Console.WindowWidth + 2, Console.WindowTop));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("left", () => Console.SetWindowPosition(Console.WindowHeight, Console.BufferHeight - Console.WindowHeight + 2));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "left",
+                () => Console.SetWindowPosition(-1, Console.WindowTop)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "top",
+                () => Console.SetWindowPosition(Console.WindowLeft, -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "left",
+                () =>
+                    Console.SetWindowPosition(
+                        Console.BufferWidth - Console.WindowWidth + 2,
+                        Console.WindowTop
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "left",
+                () =>
+                    Console.SetWindowPosition(
+                        Console.WindowHeight,
+                        Console.BufferHeight - Console.WindowHeight + 2
+                    )
+            );
 
             int origTop = Console.WindowTop;
             int origLeft = Console.WindowLeft;
@@ -544,6 +631,7 @@ public class WindowAndCursorProps
                 Assert.Equal(0, Console.WindowTop);
                 Assert.Equal(0, Console.WindowLeft);
             }
+
             finally
             {
                 Console.WindowTop = origTop;
@@ -560,15 +648,31 @@ public class WindowAndCursorProps
     }
 
     [PlatformSpecific(TestPlatforms.Windows)]
-    [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+    [ConditionalFact(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+    )]
     public void SetWindowSize_GetWindowSize_ReturnsExpected()
     {
         if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("width", () => Console.SetWindowSize(-1, Console.WindowHeight));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("height", () => Console.SetWindowSize(Console.WindowHeight, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("width", () => Console.SetWindowSize(short.MaxValue - Console.WindowLeft, Console.WindowHeight));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("height", () => Console.SetWindowSize(Console.WindowWidth, short.MaxValue - Console.WindowTop));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "width",
+                () => Console.SetWindowSize(-1, Console.WindowHeight)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "height",
+                () => Console.SetWindowSize(Console.WindowHeight, -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "width",
+                () =>
+                    Console.SetWindowSize(short.MaxValue - Console.WindowLeft, Console.WindowHeight)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "height",
+                () => Console.SetWindowSize(Console.WindowWidth, short.MaxValue - Console.WindowTop)
+            );
 
             int origWidth = Console.WindowWidth;
             int origHeight = Console.WindowHeight;
@@ -578,6 +682,7 @@ public class WindowAndCursorProps
                 Assert.Equal(10, Console.WindowWidth);
                 Assert.Equal(10, Console.WindowHeight);
             }
+
             finally
             {
                 Console.WindowWidth = origWidth;
@@ -599,18 +704,54 @@ public class WindowAndCursorProps
     {
         if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceLeft", () => Console.MoveBufferArea(-1, 0, 0, 0, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceTop", () => Console.MoveBufferArea(0, -1, 0, 0, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceWidth", () => Console.MoveBufferArea(0, 0, -1, 0, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceHeight", () => Console.MoveBufferArea(0, 0, 0, -1, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("targetLeft", () => Console.MoveBufferArea(0, 0, 0, 0, -1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("targetTop", () => Console.MoveBufferArea(0, 0, 0, 0, 0, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceLeft", () => Console.MoveBufferArea(Console.BufferWidth + 1, 0, 0, 0, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("targetLeft", () => Console.MoveBufferArea(0, 0, 0, 0, Console.BufferWidth + 1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceTop", () => Console.MoveBufferArea(0, Console.BufferHeight + 1, 0, 0, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("targetTop", () => Console.MoveBufferArea(0, 0, 0, 0, 0, Console.BufferHeight + 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceHeight", () => Console.MoveBufferArea(0, 1, 0, Console.BufferHeight, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceWidth", () => Console.MoveBufferArea(1, 0, Console.BufferWidth, 0, 0, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceLeft",
+                () => Console.MoveBufferArea(-1, 0, 0, 0, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceTop",
+                () => Console.MoveBufferArea(0, -1, 0, 0, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceWidth",
+                () => Console.MoveBufferArea(0, 0, -1, 0, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceHeight",
+                () => Console.MoveBufferArea(0, 0, 0, -1, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "targetLeft",
+                () => Console.MoveBufferArea(0, 0, 0, 0, -1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "targetTop",
+                () => Console.MoveBufferArea(0, 0, 0, 0, 0, -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceLeft",
+                () => Console.MoveBufferArea(Console.BufferWidth + 1, 0, 0, 0, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "targetLeft",
+                () => Console.MoveBufferArea(0, 0, 0, 0, Console.BufferWidth + 1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceTop",
+                () => Console.MoveBufferArea(0, Console.BufferHeight + 1, 0, 0, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "targetTop",
+                () => Console.MoveBufferArea(0, 0, 0, 0, 0, Console.BufferHeight + 1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceHeight",
+                () => Console.MoveBufferArea(0, 1, 0, Console.BufferHeight, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceWidth",
+                () => Console.MoveBufferArea(1, 0, Console.BufferWidth, 0, 0, 0)
+            );
 
             // Nothing to verify; just run the code.
             Console.MoveBufferArea(0, 0, 1, 1, 2, 2);
@@ -623,18 +764,174 @@ public class WindowAndCursorProps
     {
         if (!Console.IsInputRedirected && !Console.IsOutputRedirected)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(-1, 0, 0, 0, 0, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, -1, 0, 0, 0, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, 0, -1, 0, 0, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, 0, 0, -1, 0, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, 0, 0, 0, -1, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, 0, 0, 0, 0, -1, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(Console.BufferWidth + 1, 0, 0, 0, 0, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, 0, 0, 0, Console.BufferWidth + 1, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, Console.BufferHeight + 1, 0, 0, 0, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, 0, 0, 0, 0, Console.BufferHeight + 1, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(0, 1, 0, Console.BufferHeight, 0, 0, '0', ConsoleColor.Black, ConsoleColor.White));
-            Assert.Throws<ArgumentOutOfRangeException>(() => Console.MoveBufferArea(1, 0, Console.BufferWidth, 0, 0, 0, '0', ConsoleColor.Black, ConsoleColor.White));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        -1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        -1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        0,
+                        -1,
+                        0,
+                        0,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        0,
+                        0,
+                        -1,
+                        0,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        0,
+                        0,
+                        0,
+                        -1,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        -1,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        Console.BufferWidth + 1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        0,
+                        0,
+                        0,
+                        Console.BufferWidth + 1,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        Console.BufferHeight + 1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        Console.BufferHeight + 1,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        0,
+                        1,
+                        0,
+                        Console.BufferHeight,
+                        0,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    Console.MoveBufferArea(
+                        1,
+                        0,
+                        Console.BufferWidth,
+                        0,
+                        0,
+                        0,
+                        '0',
+                        ConsoleColor.Black,
+                        ConsoleColor.White
+                    )
+            );
 
             // Nothing to verify; just run the code.
             Console.MoveBufferArea(0, 0, 1, 1, 2, 2, 'a', ConsoleColor.Black, ConsoleColor.White);
@@ -647,15 +944,36 @@ public class WindowAndCursorProps
     [PlatformSpecific(TestPlatforms.Windows)]
     public void MoveBufferArea_InvalidColor_ThrowsException(ConsoleColor color)
     {
-        AssertExtensions.Throws<ArgumentException>("sourceForeColor", () => Console.MoveBufferArea(0, 0, 0, 0, 0, 0, 'a', color, ConsoleColor.Black));
-        AssertExtensions.Throws<ArgumentException>("sourceBackColor", () => Console.MoveBufferArea(0, 0, 0, 0, 0, 0, 'a', ConsoleColor.Black, color));
+        AssertExtensions.Throws<ArgumentException>(
+            "sourceForeColor",
+            () => Console.MoveBufferArea(0, 0, 0, 0, 0, 0, 'a', color, ConsoleColor.Black)
+        );
+        AssertExtensions.Throws<ArgumentException>(
+            "sourceBackColor",
+            () => Console.MoveBufferArea(0, 0, 0, 0, 0, 0, 'a', ConsoleColor.Black, color)
+        );
     }
 
     [Fact]
     [PlatformSpecific(TestPlatforms.AnyUnix)]
     public void MoveBufferArea_Unix_ThrowsPlatformNotSupportedException()
     {
-        Assert.Throws<PlatformNotSupportedException>(() => Console.MoveBufferArea(0, 0, 0, 0, 0, 0));
-        Assert.Throws<PlatformNotSupportedException>(() => Console.MoveBufferArea(0, 0, 0, 0, 0, 0, 'c', ConsoleColor.White, ConsoleColor.Black));
+        Assert.Throws<PlatformNotSupportedException>(
+            () => Console.MoveBufferArea(0, 0, 0, 0, 0, 0)
+        );
+        Assert.Throws<PlatformNotSupportedException>(
+            () =>
+                Console.MoveBufferArea(
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    'c',
+                    ConsoleColor.White,
+                    ConsoleColor.Black
+                )
+        );
     }
 }

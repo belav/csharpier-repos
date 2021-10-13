@@ -104,7 +104,7 @@ namespace Microsoft.AspNetCore.WebSockets.Test
 
         public override int Read(byte[] buffer, int offset, int count)
         {
-            if(_terminated)
+            if (_terminated)
             {
                 return 0;
             }
@@ -134,25 +134,39 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         _topBuffer = new ArraySegment<byte>(topBuffer);
                     }
                     int actualCount = Math.Min(count, _topBuffer.Count);
-                    Buffer.BlockCopy(_topBuffer.Array, _topBuffer.Offset, buffer, offset, actualCount);
-                    _topBuffer = new ArraySegment<byte>(_topBuffer.Array,
+                    Buffer.BlockCopy(
+                        _topBuffer.Array,
+                        _topBuffer.Offset,
+                        buffer,
+                        offset,
+                        actualCount
+                    );
+                    _topBuffer = new ArraySegment<byte>(
+                        _topBuffer.Array,
                         _topBuffer.Offset + actualCount,
-                        _topBuffer.Count - actualCount);
+                        _topBuffer.Count - actualCount
+                    );
                     totalRead += actualCount;
                     offset += actualCount;
                     count -= actualCount;
-                }
-                while (count > 0 && (_topBuffer.Count > 0 || _bufferedData.Count > 0));
+                } while (count > 0 && (_topBuffer.Count > 0 || _bufferedData.Count > 0));
                 // Keep reading while there is more data available and we have more space to put it in.
                 return totalRead;
             }
+
             finally
             {
                 _readLock.Release();
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             // TODO: This option doesn't preserve the state object.
             // return ReadAsync(buffer, offset, count);
@@ -165,7 +179,12 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             return base.EndRead(asyncResult);
         }
 
-        public async override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public async override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (_terminated)
             {
@@ -198,18 +217,26 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                         _topBuffer = new ArraySegment<byte>(topBuffer);
                     }
                     var actualCount = Math.Min(count, _topBuffer.Count);
-                    Buffer.BlockCopy(_topBuffer.Array, _topBuffer.Offset, buffer, offset, actualCount);
-                    _topBuffer = new ArraySegment<byte>(_topBuffer.Array,
+                    Buffer.BlockCopy(
+                        _topBuffer.Array,
+                        _topBuffer.Offset,
+                        buffer,
+                        offset,
+                        actualCount
+                    );
+                    _topBuffer = new ArraySegment<byte>(
+                        _topBuffer.Array,
                         _topBuffer.Offset + actualCount,
-                        _topBuffer.Count - actualCount);
+                        _topBuffer.Count - actualCount
+                    );
                     totalRead += actualCount;
                     offset += actualCount;
                     count -= actualCount;
-                }
-                while (count > 0 && (_topBuffer.Count > 0 || _bufferedData.Count > 0));
+                } while (count > 0 && (_topBuffer.Count > 0 || _bufferedData.Count > 0));
                 // Keep reading while there is more data available and we have more space to put it in.
                 return totalRead;
             }
+
             finally
             {
                 registration.Dispose();
@@ -237,13 +264,20 @@ namespace Microsoft.AspNetCore.WebSockets.Test
 
                 SignalDataAvailable();
             }
+
             finally
             {
                 _writeLock.Release();
             }
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             Write(buffer, offset, count);
             var tcs = new TaskCompletionSource<object>(state);
@@ -258,7 +292,12 @@ namespace Microsoft.AspNetCore.WebSockets.Test
 
         public override void EndWrite(IAsyncResult asyncResult) { }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             VerifyBuffer(buffer, offset, count, allowEmpty: true);
             if (cancellationToken.IsCancellationRequested)
@@ -278,8 +317,7 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             {
                 throw new ArgumentOutOfRangeException(nameof(offset), offset, string.Empty);
             }
-            if (count < 0 || count > buffer.Length - offset
-                || (!allowEmpty && count == 0))
+            if (count < 0 || count > buffer.Length - offset || (!allowEmpty && count == 0))
             {
                 throw new ArgumentOutOfRangeException(nameof(count), count, string.Empty);
             }
@@ -325,8 +363,18 @@ namespace Microsoft.AspNetCore.WebSockets.Test
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_writeLock", Justification = "ODEs from the locks would mask IOEs from abort.")]
-        [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_readLock", Justification = "Data can still be read unless we get aborted.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "_writeLock",
+            Justification = "ODEs from the locks would mask IOEs from abort."
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "_readLock",
+            Justification = "Data can still be read unless we get aborted."
+        )]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

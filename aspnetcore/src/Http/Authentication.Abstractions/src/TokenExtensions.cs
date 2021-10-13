@@ -21,7 +21,10 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
         /// <param name="tokens">The tokens to store.</param>
-        public static void StoreTokens(this AuthenticationProperties properties, IEnumerable<AuthenticationToken> tokens)
+        public static void StoreTokens(
+            this AuthenticationProperties properties,
+            IEnumerable<AuthenticationToken> tokens
+        )
         {
             if (properties == null)
             {
@@ -64,7 +67,10 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
         /// <param name="tokenName">The token name.</param>
         /// <returns>The token value.</returns>
-        public static string? GetTokenValue(this AuthenticationProperties properties, string tokenName)
+        public static string? GetTokenValue(
+            this AuthenticationProperties properties,
+            string tokenName
+        )
         {
             if (properties == null)
             {
@@ -87,7 +93,11 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="tokenName">The token name.</param>
         /// <param name="tokenValue">The token value.</param>
         /// <returns><see langword="true"/> if the token was updated, otherwise <see langword="false"/>.</returns>
-        public static bool UpdateTokenValue(this AuthenticationProperties properties, string tokenName, string tokenValue)
+        public static bool UpdateTokenValue(
+            this AuthenticationProperties properties,
+            string tokenName,
+            string tokenValue
+        )
         {
             if (properties == null)
             {
@@ -112,7 +122,9 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
         /// <returns>The authentication tokens.</returns>
-        public static IEnumerable<AuthenticationToken> GetTokens(this AuthenticationProperties properties)
+        public static IEnumerable<AuthenticationToken> GetTokens(
+            this AuthenticationProperties properties
+        )
         {
             if (properties == null)
             {
@@ -120,7 +132,10 @@ namespace Microsoft.AspNetCore.Authentication
             }
 
             var tokens = new List<AuthenticationToken>();
-            if (properties.Items.TryGetValue(TokenNamesKey, out var value) && !string.IsNullOrEmpty(value))
+            if (
+                properties.Items.TryGetValue(TokenNamesKey, out var value)
+                && !string.IsNullOrEmpty(value)
+            )
             {
                 var tokenNames = value.Split(';');
                 foreach (var name in tokenNames)
@@ -143,8 +158,11 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="context">The <see cref="HttpContext"/> context.</param>
         /// <param name="tokenName">The name of the token.</param>
         /// <returns>The value of the token if present.</returns>
-        public static Task<string?> GetTokenAsync(this IAuthenticationService auth, HttpContext context, string tokenName)
-            => auth.GetTokenAsync(context, scheme: null, tokenName: tokenName);
+        public static Task<string?> GetTokenAsync(
+            this IAuthenticationService auth,
+            HttpContext context,
+            string tokenName
+        ) => auth.GetTokenAsync(context, scheme: null, tokenName: tokenName);
 
         /// <summary>
         /// Authenticates the request using the specified authentication scheme and returns the value for the token.
@@ -154,7 +172,12 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="scheme">The name of the authentication scheme.</param>
         /// <param name="tokenName">The name of the token.</param>
         /// <returns>The value of the token if present.</returns>
-        public static async Task<string?> GetTokenAsync(this IAuthenticationService auth, HttpContext context, string? scheme, string tokenName)
+        public static async Task<string?> GetTokenAsync(
+            this IAuthenticationService auth,
+            HttpContext context,
+            string? scheme,
+            string tokenName
+        )
         {
             if (auth == null)
             {

@@ -72,7 +72,6 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             Assert.False(result);
         }
 
-
         [Fact]
         public void FindEffectivePolicy_FindsLastFilter_ReturnsIt()
         {
@@ -122,10 +121,15 @@ namespace Microsoft.AspNetCore.Mvc.Filters
 
         private class TestFilterContext : FilterContext
         {
-            public TestFilterContext(IList<IFilterMetadata> filters) 
-                : base(new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor()), filters)
-            {
-            }
+            public TestFilterContext(IList<IFilterMetadata> filters)
+                : base(
+                    new ActionContext(
+                        new DefaultHttpContext(),
+                        new RouteData(),
+                        new ActionDescriptor()
+                    ),
+                    filters
+                ) { }
         }
     }
 }

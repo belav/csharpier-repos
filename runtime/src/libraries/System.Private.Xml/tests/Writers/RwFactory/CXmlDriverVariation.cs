@@ -13,9 +13,14 @@ namespace System.Xml.Tests
         private CXmlDriverParam _xmlDriverParams;
 
         //Constructor
-        internal CXmlDriverVariation(CXmlDriverScenario testCase,
-            string name, string description, int id, int pri,
-            CXmlDriverParam xmlDriverParams) : base(testCase)
+        internal CXmlDriverVariation(
+            CXmlDriverScenario testCase,
+            string name,
+            string description,
+            int id,
+            int pri,
+            CXmlDriverParam xmlDriverParams
+        ) : base(testCase)
         {
             _xmlDriverParams = xmlDriverParams;
 
@@ -26,11 +31,9 @@ namespace System.Xml.Tests
                 this.Desc = description;
             this.Name = name;
 
-
             this.Pri = pri;
             this.id = id;
         }
-
 
         private bool CheckSkipped()
         {
@@ -46,7 +49,8 @@ namespace System.Xml.Tests
 
             try
             {
-                if (!CheckSkipped()) return (tagVARIATION_STATUS)TEST_SKIPPED;
+                if (!CheckSkipped())
+                    return (tagVARIATION_STATUS)TEST_SKIPPED;
 
                 CXmlDriverScenario scenario = (CXmlDriverScenario)Parent;
 
@@ -64,6 +68,10 @@ namespace System.Xml.Tests
             return res;
         }
 
-        public CXmlDriverParam XmlDriverParam { get { return _xmlDriverParams; } set { _xmlDriverParams = value; } }
+        public CXmlDriverParam XmlDriverParam
+        {
+            get { return _xmlDriverParams; }
+            set { _xmlDriverParams = value; }
+        }
     }
 }

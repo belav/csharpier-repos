@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public static void TransactionIgnoredWarning(
-            this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics)
+            this IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> diagnostics
+        )
         {
             var definition = InMemoryResources.LogTransactionsNotSupported(diagnostics);
 
@@ -32,13 +33,25 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Internal
                 definition.Log(diagnostics);
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new EventData(
                     definition,
-                    (d, _) => ((EventDefinition)d).GenerateMessage());
+                    (d, _) => ((EventDefinition)d).GenerateMessage()
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 
@@ -51,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Internal
         public static void ChangesSaved(
             this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
             IEnumerable<IUpdateEntry> entries,
-            int rowsAffected)
+            int rowsAffected
+        )
         {
             var definition = InMemoryResources.LogSavedChanges(diagnostics);
 
@@ -60,15 +74,27 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Internal
                 definition.Log(diagnostics, rowsAffected);
             }
 
-            if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                diagnostics.NeedsEventData(
+                    definition,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = new SaveChangesEventData(
                     definition,
                     ChangesSaved,
                     entries,
-                    rowsAffected);
+                    rowsAffected
+                );
 
-                diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+                diagnostics.DispatchEventData(
+                    definition,
+                    eventData,
+                    diagnosticSourceEnabled,
+                    simpleLogEnabled
+                );
             }
         }
 

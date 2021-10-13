@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         private readonly RequestDelegate _requestDelegate;
         private readonly IRequestDelegateFactory[] _requestDelegateFactories;
 
-        public ActionEndpointFactory(RoutePatternTransformer routePatternTransformer, IEnumerable<IRequestDelegateFactory> requestDelegateFactories)
+        public ActionEndpointFactory(
+            RoutePatternTransformer routePatternTransformer,
+            IEnumerable<IRequestDelegateFactory> requestDelegateFactories
+        )
         {
             if (routePatternTransformer == null)
             {
@@ -42,7 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             ActionDescriptor action,
             IReadOnlyList<ConventionalRouteEntry> routes,
             IReadOnlyList<Action<EndpointBuilder>> conventions,
-            bool createInertEndpoints)
+            bool createInertEndpoints
+        )
         {
             if (endpoints == null)
             {
@@ -85,7 +89,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     suppressLinkGeneration: false,
                     suppressPathMatching: false,
                     conventions,
-                    Array.Empty<Action<EndpointBuilder>>());
+                    Array.Empty<Action<EndpointBuilder>>()
+                );
                 endpoints.Add(builder.Build());
             }
 
@@ -99,18 +104,25 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     // A route is applicable if:
                     // 1. It has a parameter (or default value) for 'required' non-null route value
                     // 2. It does not have a parameter (or default value) for 'required' null route value
-                    var updatedRoutePattern = _routePatternTransformer.SubstituteRequiredValues(route.Pattern, action.RouteValues);
+                    var updatedRoutePattern = _routePatternTransformer.SubstituteRequiredValues(
+                        route.Pattern,
+                        action.RouteValues
+                    );
                     if (updatedRoutePattern == null)
                     {
                         continue;
                     }
 
-                    var requestDelegate = CreateRequestDelegate(action, route.DataTokens) ?? _requestDelegate;
+                    var requestDelegate =
+                        CreateRequestDelegate(action, route.DataTokens) ?? _requestDelegate;
 
                     // We suppress link generation for each conventionally routed endpoint. We generate a single endpoint per-route
                     // to handle link generation.
-                    var builder = new RouteEndpointBuilder(requestDelegate, updatedRoutePattern, route.Order)
-                    {
+                    var builder = new RouteEndpointBuilder(
+                        requestDelegate,
+                        updatedRoutePattern,
+                        route.Order
+                    ) {
                         DisplayName = action.DisplayName,
                     };
                     AddActionDataToBuilder(
@@ -122,34 +134,50 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                         suppressLinkGeneration: true,
                         suppressPathMatching: false,
                         conventions,
-                        route.Conventions);
+                        route.Conventions
+                    );
                     endpoints.Add(builder.Build());
                 }
             }
             else
             {
                 var requestDelegate = CreateRequestDelegate(action) ?? _requestDelegate;
-                var attributeRoutePattern = RoutePatternFactory.Parse(action.AttributeRouteInfo.Template);
+                var attributeRoutePattern = RoutePatternFactory.Parse(
+                    action.AttributeRouteInfo.Template
+                );
 
                 // Modify the route and required values to ensure required values can be successfully subsituted.
                 // Subsitituting required values into an attribute route pattern should always succeed.
-                var (resolvedRoutePattern, resolvedRouteValues) = ResolveDefaultsAndRequiredValues(action, attributeRoutePattern);
+                var (resolvedRoutePattern, resolvedRouteValues) = ResolveDefaultsAndRequiredValues(
+                    action,
+                    attributeRoutePattern
+                );
 
-                var updatedRoutePattern = _routePatternTransformer.SubstituteRequiredValues(resolvedRoutePattern, resolvedRouteValues);
+                var updatedRoutePattern = _routePatternTransformer.SubstituteRequiredValues(
+                    resolvedRoutePattern,
+                    resolvedRouteValues
+                );
                 if (updatedRoutePattern == null)
                 {
                     // This kind of thing can happen when a route pattern uses a *reserved* route value such as `action`.
                     // See: https://github.com/dotnet/aspnetcore/issues/14789
-                    var formattedRouteKeys = string.Join(", ", resolvedRouteValues.Keys.Select(k => $"'{k}'"));
+                    var formattedRouteKeys = string.Join(
+                        ", ",
+                        resolvedRouteValues.Keys.Select(k => $"'{k}'")
+                    );
                     throw new InvalidOperationException(
-                        $"Failed to update the route pattern '{resolvedRoutePattern.RawText}' with required route values. " +
-                        $"This can occur when the route pattern contains parameters with reserved names such as: {formattedRouteKeys} " +
-                        $"and also uses route constraints such as '{{action:int}}'. " +
-                        $"To fix this error, choose a different parameter name.");
+                        $"Failed to update the route pattern '{resolvedRoutePattern.RawText}' with required route values. "
+                            + $"This can occur when the route pattern contains parameters with reserved names such as: {formattedRouteKeys} "
+                            + $"and also uses route constraints such as '{{action:int}}'. "
+                            + $"To fix this error, choose a different parameter name."
+                    );
                 }
 
-                var builder = new RouteEndpointBuilder(requestDelegate, updatedRoutePattern, action.AttributeRouteInfo.Order)
-                {
+                var builder = new RouteEndpointBuilder(
+                    requestDelegate,
+                    updatedRoutePattern,
+                    action.AttributeRouteInfo.Order
+                ) {
                     DisplayName = action.DisplayName,
                 };
                 AddActionDataToBuilder(
@@ -161,7 +189,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     action.AttributeRouteInfo.SuppressLinkGeneration,
                     action.AttributeRouteInfo.SuppressPathMatching,
                     conventions,
-                    perRouteConventions: Array.Empty<Action<EndpointBuilder>>());
+                    perRouteConventions: Array.Empty<Action<EndpointBuilder>>()
+                );
                 endpoints.Add(builder.Build());
             }
         }
@@ -171,7 +200,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             HashSet<string> routeNames,
             HashSet<string> keys,
             ConventionalRouteEntry route,
-            IReadOnlyList<Action<EndpointBuilder>> conventions)
+            IReadOnlyList<Action<EndpointBuilder>> conventions
+        )
         {
             if (endpoints == null)
             {
@@ -208,20 +238,25 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
             // We have to do some massaging of the pattern to try and get the
             // required values to be correct.
-            var pattern = _routePatternTransformer.SubstituteRequiredValues(route.Pattern, requiredValues);
+            var pattern = _routePatternTransformer.SubstituteRequiredValues(
+                route.Pattern,
+                requiredValues
+            );
             if (pattern == null)
             {
                 // We don't expect this to happen, but we want to know if it does because it will help diagnose the bug.
-                throw new InvalidOperationException("Failed to create a conventional route for pattern: " + route.Pattern);
+                throw new InvalidOperationException(
+                    "Failed to create a conventional route for pattern: " + route.Pattern
+                );
             }
 
-            var builder = new RouteEndpointBuilder(context => Task.CompletedTask, pattern, route.Order)
-            {
+            var builder = new RouteEndpointBuilder(
+                context => Task.CompletedTask,
+                pattern,
+                route.Order
+            ) {
                 DisplayName = "Route: " + route.Pattern.RawText,
-                Metadata =
-                {
-                    new SuppressMatchingMetadata(),
-                },
+                Metadata = { new SuppressMatchingMetadata(), },
             };
 
             if (route.RouteName != null)
@@ -252,7 +287,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             endpoints.Add((RouteEndpoint)builder.Build());
         }
 
-        private static (RoutePattern resolvedRoutePattern, IDictionary<string, string?> resolvedRequiredValues) ResolveDefaultsAndRequiredValues(ActionDescriptor action, RoutePattern attributeRoutePattern)
+        private static (RoutePattern resolvedRoutePattern, IDictionary<
+            string,
+            string?
+        > resolvedRequiredValues) ResolveDefaultsAndRequiredValues(
+            ActionDescriptor action,
+            RoutePattern attributeRoutePattern
+        )
         {
             RouteValueDictionary? updatedDefaults = null;
             IDictionary<string, string?>? resolvedRequiredValues = null;
@@ -274,7 +315,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                         if (updatedDefaults == null)
                         {
-                            updatedDefaults = new RouteValueDictionary(attributeRoutePattern.Defaults);
+                            updatedDefaults = new RouteValueDictionary(
+                                attributeRoutePattern.Defaults
+                            );
                         }
 
                         updatedDefaults[routeValue.Key] = routeValue.Value;
@@ -289,7 +332,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                         if (resolvedRequiredValues == null)
                         {
-                            resolvedRequiredValues = new Dictionary<string, string?>(action.RouteValues);
+                            resolvedRequiredValues = new Dictionary<string, string?>(
+                                action.RouteValues
+                            );
                         }
 
                         resolvedRequiredValues.Remove(parameter.Name);
@@ -298,7 +343,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             }
             if (updatedDefaults != null)
             {
-                attributeRoutePattern = RoutePatternFactory.Parse(action.AttributeRouteInfo!.Template!, updatedDefaults, parameterPolicies: null);
+                attributeRoutePattern = RoutePatternFactory.Parse(
+                    action.AttributeRouteInfo!.Template!,
+                    updatedDefaults,
+                    parameterPolicies: null
+                );
             }
 
             return (attributeRoutePattern, resolvedRequiredValues ?? action.RouteValues);
@@ -313,7 +362,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             bool suppressLinkGeneration,
             bool suppressPathMatching,
             IReadOnlyList<Action<EndpointBuilder>> conventions,
-            IReadOnlyList<Action<EndpointBuilder>> perRouteConventions)
+            IReadOnlyList<Action<EndpointBuilder>> perRouteConventions
+        )
         {
             // Add action metadata first so it has a low precedence
             if (action.EndpointMetadata != null)
@@ -339,10 +389,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             //
             // We can use the route name as the endpoint name if it's not set. Note that there's no
             // attribute for this today so it's unlikley. Using endpoint name on a
-            if (routeName != null &&
-                !suppressLinkGeneration &&
-                routeNames.Add(routeName) &&
-                builder.Metadata.OfType<IEndpointNameMetadata>().LastOrDefault()?.EndpointName == null)
+            if (
+                routeName != null
+                && !suppressLinkGeneration
+                && routeNames.Add(routeName)
+                && builder.Metadata.OfType<IEndpointNameMetadata>().LastOrDefault()?.EndpointName
+                    == null
+            )
             {
                 builder.Metadata.Add(new EndpointNameMetadata(routeName));
             }
@@ -357,7 +410,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Add filter descriptors to endpoint metadata
             if (action.FilterDescriptors != null && action.FilterDescriptors.Count > 0)
             {
-                foreach (var filter in action.FilterDescriptors.OrderBy(f => f, FilterDescriptorOrderComparer.Comparer).Select(f => f.Filter))
+                foreach (
+                    var filter in action.FilterDescriptors.OrderBy(
+                            f => f,
+                            FilterDescriptorOrderComparer.Comparer
+                        )
+                        .Select(f => f.Filter)
+                )
                 {
                     builder.Metadata.Add(filter);
                 }
@@ -372,15 +431,23 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 // action constraints.
                 foreach (var actionConstraint in action.ActionConstraints)
                 {
-                    if (actionConstraint is HttpMethodActionConstraint httpMethodActionConstraint &&
-                        !builder.Metadata.OfType<HttpMethodMetadata>().Any())
+                    if (
+                        actionConstraint is HttpMethodActionConstraint httpMethodActionConstraint
+                        && !builder.Metadata.OfType<HttpMethodMetadata>().Any()
+                    )
                     {
-                        builder.Metadata.Add(new HttpMethodMetadata(httpMethodActionConstraint.HttpMethods));
+                        builder.Metadata.Add(
+                            new HttpMethodMetadata(httpMethodActionConstraint.HttpMethods)
+                        );
                     }
-                    else if (actionConstraint is ConsumesAttribute consumesAttribute &&
-                        !builder.Metadata.OfType<ConsumesMetadata>().Any())
+                    else if (
+                        actionConstraint is ConsumesAttribute consumesAttribute
+                        && !builder.Metadata.OfType<ConsumesMetadata>().Any()
+                    )
                     {
-                        builder.Metadata.Add(new ConsumesMetadata(consumesAttribute.ContentTypes.ToArray()));
+                        builder.Metadata.Add(
+                            new ConsumesMetadata(consumesAttribute.ContentTypes.ToArray())
+                        );
                     }
                     else if (!builder.Metadata.Contains(actionConstraint))
                     {
@@ -411,7 +478,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             }
         }
 
-        private RequestDelegate? CreateRequestDelegate(ActionDescriptor action, RouteValueDictionary? dataTokens = null)
+        private RequestDelegate? CreateRequestDelegate(
+            ActionDescriptor action,
+            RouteValueDictionary? dataTokens = null
+        )
         {
             foreach (var factory in _requestDelegateFactories)
             {
@@ -442,7 +512,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 var dataTokens = endpoint.Metadata.GetMetadata<IDataTokensMetadata>();
 
                 var routeData = new RouteData();
-                routeData.PushState(router: null, context.Request.RouteValues, new RouteValueDictionary(dataTokens?.DataTokens));
+                routeData.PushState(
+                    router: null,
+                    context.Request.RouteValues,
+                    new RouteValueDictionary(dataTokens?.DataTokens)
+                );
 
                 // Don't close over the ActionDescriptor, that's not valid for pages.
                 var action = endpoint.Metadata.GetMetadata<ActionDescriptor>()!;
@@ -450,7 +524,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                 if (invokerFactory == null)
                 {
-                    invokerFactory = context.RequestServices.GetRequiredService<IActionInvokerFactory>();
+                    invokerFactory =
+                        context.RequestServices.GetRequiredService<IActionInvokerFactory>();
                 }
 
                 var invoker = invokerFactory.CreateInvoker(actionContext);
@@ -462,7 +537,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         {
             public override Endpoint Build()
             {
-                return new Endpoint(RequestDelegate, new EndpointMetadataCollection(Metadata), DisplayName);
+                return new Endpoint(
+                    RequestDelegate,
+                    new EndpointMetadataCollection(Metadata),
+                    DisplayName
+                );
             }
         }
     }

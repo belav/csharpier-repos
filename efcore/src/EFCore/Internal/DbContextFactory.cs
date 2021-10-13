@@ -12,8 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class DbContextFactory<TContext> : IDbContextFactory<TContext>
-        where TContext : DbContext
+    public class DbContextFactory<TContext> : IDbContextFactory<TContext> where TContext : DbContext
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly DbContextOptions<TContext> _options;
@@ -28,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore.Internal
         public DbContextFactory(
             IServiceProvider serviceProvider,
             DbContextOptions<TContext> options,
-            IDbContextFactorySource<TContext> factorySource)
+            IDbContextFactorySource<TContext> factorySource
+        )
         {
             Check.NotNull(serviceProvider, nameof(serviceProvider));
             Check.NotNull(options, nameof(options));
@@ -45,7 +45,6 @@ namespace Microsoft.EntityFrameworkCore.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual TContext CreateDbContext()
-            => _factory(_serviceProvider, _options);
+        public virtual TContext CreateDbContext() => _factory(_serviceProvider, _options);
     }
 }

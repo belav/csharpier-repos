@@ -26,28 +26,40 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         private static SyntaxNode Simplify(
             AdhocWorkspace workspace,
             SyntaxNode syntaxNode,
-            string languageName)
+            string languageName
+        )
         {
             var projectId = ProjectId.CreateNewId();
 
-            var project = workspace.CurrentSolution
-                .AddProject(projectId, languageName, $"{languageName}.dll", languageName).GetProject(projectId);
+            var project = workspace.CurrentSolution.AddProject(
+                    projectId,
+                    languageName,
+                    $"{languageName}.dll",
+                    languageName
+                )
+                .GetProject(projectId);
 
             var normalizedSyntax = syntaxNode.NormalizeWhitespace().ToFullString();
             var document = project.AddMetadataReference(TestMetadata.Net451.mscorlib)
                 .AddDocument("Fake Document", SourceText.From(normalizedSyntax));
 
             var annotatedDocument = document.WithSyntaxRoot(
-                    document.GetSyntaxRootAsync().Result.WithAdditionalAnnotations(Simplification.Simplifier.Annotation));
+                document.GetSyntaxRootAsync()
+                    .Result.WithAdditionalAnnotations(Simplification.Simplifier.Annotation)
+            );
 
-            var simplifiedDocument = Simplification.Simplifier.ReduceAsync(annotatedDocument).Result;
+            var simplifiedDocument =
+                Simplification.Simplifier.ReduceAsync(annotatedDocument).Result;
 
             var rootNode = simplifiedDocument.GetSyntaxRootAsync().Result;
 
             return rootNode;
         }
 
-        private static SyntaxNode WrapExpressionInBoilerplate(SyntaxNode expression, SyntaxGenerator codeDefFactory)
+        private static SyntaxNode WrapExpressionInBoilerplate(
+            SyntaxNode expression,
+            SyntaxGenerator codeDefFactory
+        )
         {
             return codeDefFactory.CompilationUnit(
                 codeDefFactory.NamespaceImportDeclaration(codeDefFactory.IdentifierName("System")),
@@ -61,24 +73,32 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                             statements: new[]
                             {
                                 codeDefFactory.LocalDeclarationStatement("test", expression)
-                            })
-                    })
-                );
+                            }
+                        )
+                    }
+                )
+            );
         }
 
         internal static void Test(
             Func<SyntaxGenerator, SyntaxNode> nodeCreator,
-            string cs, string csSimple,
-            string vb, string vbSimple)
+            string cs,
+            string csSimple,
+            string vb,
+            string vbSimple
+        )
         {
-            Assert.True(cs != null || csSimple != null || vb != null || vbSimple != null,
-                $"At least one of {nameof(cs)}, {nameof(csSimple)}, {nameof(vb)}, {nameof(vbSimple)} must be provided");
+            Assert.True(
+                cs != null || csSimple != null || vb != null || vbSimple != null,
+                $"At least one of {nameof(cs)}, {nameof(csSimple)}, {nameof(vb)}, {nameof(vbSimple)} must be provided"
+            );
 
             using var workspace = new AdhocWorkspace();
 
             if (cs != null || csSimple != null)
             {
-                var codeDefFactory = workspace.Services.GetLanguageServices(LanguageNames.CSharp).GetService<SyntaxGenerator>();
+                var codeDefFactory = workspace.Services.GetLanguageServices(LanguageNames.CSharp)
+                    .GetService<SyntaxGenerator>();
 
                 var node = nodeCreator(codeDefFactory);
                 node = node.NormalizeWhitespace();
@@ -90,31 +110,60 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
 
                 if (csSimple != null)
                 {
-                    var simplifiedRootNode = Simplify(workspace, WrapExpressionInBoilerplate(node, codeDefFactory), LanguageNames.CSharp);
-                    var expression = simplifiedRootNode.DescendantNodes().OfType<EqualsValueClauseSyntax>().First().Value;
+                    var simplifiedRootNode = Simplify(
+                        workspace,
+                        WrapExpressionInBoilerplate(node, codeDefFactory),
+                        LanguageNames.CSharp
+                    );
+                    var expression =
+                        simplifiedRootNode.DescendantNodes()
+                            .OfType<EqualsValueClauseSyntax>()
+                            .First().Value;
 
-                    TokenUtilities.AssertTokensEqual(csSimple, expression.NormalizeWhitespace().ToFullString(), LanguageNames.CSharp);
+                    TokenUtilities.AssertTokensEqual(
+                        csSimple,
+                        expression.NormalizeWhitespace().ToFullString(),
+                        LanguageNames.CSharp
+                    );
                 }
             }
 
             if (vb != null || vbSimple != null)
             {
-                var codeDefFactory = workspace.Services.GetLanguageServices(LanguageNames.VisualBasic).GetService<SyntaxGenerator>();
+                var codeDefFactory = workspace.Services.GetLanguageServices(
+                        LanguageNames.VisualBasic
+                    )
+                    .GetService<SyntaxGenerator>();
 
                 var node = nodeCreator(codeDefFactory);
                 node = node.NormalizeWhitespace();
 
                 if (vb != null)
                 {
-                    TokenUtilities.AssertTokensEqual(vb, node.ToFullString(), LanguageNames.VisualBasic);
+                    TokenUtilities.AssertTokensEqual(
+                        vb,
+                        node.ToFullString(),
+                        LanguageNames.VisualBasic
+                    );
                 }
 
                 if (vbSimple != null)
                 {
-                    var simplifiedRootNode = Simplify(workspace, WrapExpressionInBoilerplate(node, codeDefFactory), LanguageNames.VisualBasic);
-                    var expression = simplifiedRootNode.DescendantNodes().OfType<EqualsValueSyntax>().First().Value;
+                    var simplifiedRootNode = Simplify(
+                        workspace,
+                        WrapExpressionInBoilerplate(node, codeDefFactory),
+                        LanguageNames.VisualBasic
+                    );
+                    var expression =
+                        simplifiedRootNode.DescendantNodes()
+                            .OfType<EqualsValueSyntax>()
+                            .First().Value;
 
-                    TokenUtilities.AssertTokensEqual(vbSimple, expression.NormalizeWhitespace().ToFullString(), LanguageNames.VisualBasic);
+                    TokenUtilities.AssertTokensEqual(
+                        vbSimple,
+                        expression.NormalizeWhitespace().ToFullString(),
+                        LanguageNames.VisualBasic
+                    );
                 }
             }
         }
@@ -122,7 +171,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
         protected static ITypeSymbol CreateClass(string name)
         {
             return CodeGenerationSymbolFactory.CreateNamedTypeSymbol(
-                attributes: default, accessibility: default, modifiers: default, TypeKind.Class, name);
+                attributes: default,
+                accessibility: default,
+                modifiers: default,
+                TypeKind.Class,
+                name
+            );
         }
     }
 }

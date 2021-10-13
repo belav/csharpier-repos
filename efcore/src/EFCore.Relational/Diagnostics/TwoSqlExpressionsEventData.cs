@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             SqlExpression left,
-            SqlExpression right)
-            : base(eventDefinition, messageGenerator)
+            SqlExpression right
+        ) : base(eventDefinition, messageGenerator)
         {
             Left = left;
             Right = right;

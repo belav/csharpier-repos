@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector64<UInt32>>() / sizeof(UInt32);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector64<UInt32>>() / sizeof(UInt32);
 
         public bool Succeeded { get; set; } = true;
 
@@ -72,20 +73,27 @@ namespace JIT.HardwareIntrinsics.General
 
             Vector64<UInt32> value = Vector64.Create(values[0], values[1]);
 
-            object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.ToScalar))
-                                .MakeGenericMethod(typeof(UInt32))
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector64).GetMethod(nameof(Vector64.ToScalar))
+                .MakeGenericMethod(typeof(UInt32))
+                .Invoke(null, new object[] { value });
 
             ValidateResult((UInt32)(result), values);
         }
 
-        private void ValidateResult(UInt32 result, UInt32[] values, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt32 result,
+            UInt32[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[0])
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<UInt32>.ToScalar(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  values: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<UInt32>.ToScalar(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  values: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 

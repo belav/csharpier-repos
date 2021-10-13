@@ -15,17 +15,26 @@ namespace System.DirectoryServices.ActiveDirectory
         private bool _linkRetrieved;
         private bool _bridgeRetrieved;
 
-        private readonly ReadOnlySiteLinkCollection _siteLinkCollection = new ReadOnlySiteLinkCollection();
-        private readonly ReadOnlySiteLinkBridgeCollection _bridgeCollection = new ReadOnlySiteLinkBridgeCollection();
+        private readonly ReadOnlySiteLinkCollection _siteLinkCollection =
+            new ReadOnlySiteLinkCollection();
+        private readonly ReadOnlySiteLinkBridgeCollection _bridgeCollection =
+            new ReadOnlySiteLinkBridgeCollection();
 
-        internal ActiveDirectoryInterSiteTransport(DirectoryContext context, ActiveDirectoryTransportType transport, DirectoryEntry entry)
+        internal ActiveDirectoryInterSiteTransport(
+            DirectoryContext context,
+            ActiveDirectoryTransportType transport,
+            DirectoryEntry entry
+        )
         {
             _context = context;
             _transport = transport;
             _cachedEntry = entry;
         }
 
-        public static ActiveDirectoryInterSiteTransport FindByTransportType(DirectoryContext context, ActiveDirectoryTransportType transport)
+        public static ActiveDirectoryInterSiteTransport FindByTransportType(
+            DirectoryContext context,
+            ActiveDirectoryTransportType transport
+        )
         {
             if (context == null)
                 throw new ArgumentNullException(nameof(context));
@@ -43,8 +52,15 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw new ArgumentException(SR.NotADOrADAM, nameof(context));
             }
 
-            if (transport < ActiveDirectoryTransportType.Rpc || transport > ActiveDirectoryTransportType.Smtp)
-                throw new InvalidEnumArgumentException("value", (int)transport, typeof(ActiveDirectoryTransportType));
+            if (
+                transport < ActiveDirectoryTransportType.Rpc
+                || transport > ActiveDirectoryTransportType.Smtp
+            )
+                throw new InvalidEnumArgumentException(
+                    "value",
+                    (int)transport,
+                    typeof(ActiveDirectoryTransportType)
+                );
 
             //  work with copy of the context
             context = new DirectoryContext(context);
@@ -55,7 +71,11 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+                string config = (string)PropertyManager.GetPropertyValue(
+                    context,
+                    de,
+                    PropertyManager.ConfigurationNamingContext
+                )!;
                 string containerDN = "CN=Inter-Site Transports,CN=Sites," + config;
                 if (transport == ActiveDirectoryTransportType.Rpc)
                     containerDN = "CN=IP," + containerDN;
@@ -70,7 +90,9 @@ namespace System.DirectoryServices.ActiveDirectory
             catch (ActiveDirectoryObjectNotFoundException)
             {
                 // this is the case where the context is a config set and we could not find an ADAM instance in that config set
-                throw new ActiveDirectoryOperationException(SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name));
+                throw new ActiveDirectoryOperationException(
+                    SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
+                );
             }
 
             try
@@ -82,13 +104,23 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (e.ErrorCode == unchecked((int)0x80072030))
                 {
                     // if it is ADAM and transport type is SMTP, throw NotSupportedException.
-                    DirectoryEntry tmpDE = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                    if (Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode) && transport == ActiveDirectoryTransportType.Smtp)
+                    DirectoryEntry tmpDE = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        WellKnownDN.RootDSE
+                    );
+                    if (
+                        Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
+                        && transport == ActiveDirectoryTransportType.Smtp
+                    )
                     {
                         throw new NotSupportedException(SR.NotSupportTransportSMTP);
                     }
 
-                    throw new ActiveDirectoryObjectNotFoundException(SR.Format(SR.TransportNotFound, transport.ToString()), typeof(ActiveDirectoryInterSiteTransport), transport.ToString());
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.Format(SR.TransportNotFound, transport.ToString()),
+                        typeof(ActiveDirectoryInterSiteTransport),
+                        transport.ToString()
+                    );
                 }
                 else
                     throw ExceptionHelper.GetExceptionFromCOMException(context, e);
@@ -222,10 +254,12 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     _siteLinkCollection.Clear();
 
-                    ADSearcher adSearcher = new ADSearcher(_cachedEntry,
-                                                             "(&(objectClass=siteLink)(objectCategory=SiteLink))",
-                                                             new string[] { "cn" },
-                                                             SearchScope.OneLevel);
+                    ADSearcher adSearcher = new ADSearcher(
+                        _cachedEntry,
+                        "(&(objectClass=siteLink)(objectCategory=SiteLink))",
+                        new string[] { "cn" },
+                        SearchScope.OneLevel
+                    );
                     SearchResultCollection? results = null;
 
                     try
@@ -242,11 +276,21 @@ namespace System.DirectoryServices.ActiveDirectory
                         foreach (SearchResult result in results)
                         {
                             DirectoryEntry connectionEntry = result.GetDirectoryEntry();
-                            string cn = (string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.Cn)!;
-                            ActiveDirectorySiteLink link = new ActiveDirectorySiteLink(_context, cn, _transport, true, connectionEntry);
+                            string cn = (string)PropertyManager.GetSearchResultPropertyValue(
+                                result,
+                                PropertyManager.Cn
+                            )!;
+                            ActiveDirectorySiteLink link = new ActiveDirectorySiteLink(
+                                _context,
+                                cn,
+                                _transport,
+                                true,
+                                connectionEntry
+                            );
                             _siteLinkCollection.Add(link);
                         }
                     }
+
                     finally
                     {
                         results.Dispose();
@@ -270,10 +314,12 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     _bridgeCollection.Clear();
 
-                    ADSearcher adSearcher = new ADSearcher(_cachedEntry,
-                                                             "(&(objectClass=siteLinkBridge)(objectCategory=SiteLinkBridge))",
-                                                             new string[] { "cn" },
-                                                             SearchScope.OneLevel);
+                    ADSearcher adSearcher = new ADSearcher(
+                        _cachedEntry,
+                        "(&(objectClass=siteLinkBridge)(objectCategory=SiteLinkBridge))",
+                        new string[] { "cn" },
+                        SearchScope.OneLevel
+                    );
                     SearchResultCollection? results = null;
 
                     try
@@ -290,12 +336,17 @@ namespace System.DirectoryServices.ActiveDirectory
                         foreach (SearchResult result in results)
                         {
                             DirectoryEntry connectionEntry = result.GetDirectoryEntry();
-                            string cn = (string)PropertyManager.GetSearchResultPropertyValue(result, PropertyManager.Cn)!;
-                            ActiveDirectorySiteLinkBridge bridge = new ActiveDirectorySiteLinkBridge(_context, cn, _transport, true);
+                            string cn = (string)PropertyManager.GetSearchResultPropertyValue(
+                                result,
+                                PropertyManager.Cn
+                            )!;
+                            ActiveDirectorySiteLinkBridge bridge =
+                                new ActiveDirectorySiteLinkBridge(_context, cn, _transport, true);
                             bridge.cachedEntry = connectionEntry;
                             _bridgeCollection.Add(bridge);
                         }
                     }
+
                     finally
                     {
                         results.Dispose();

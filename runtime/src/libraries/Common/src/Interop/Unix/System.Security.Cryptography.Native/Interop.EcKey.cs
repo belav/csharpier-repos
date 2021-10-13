@@ -48,7 +48,10 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcKeyGetCurveName2")]
-        private static extern int CryptoNative_EcKeyGetCurveName(SafeEcKeyHandle ecKey, out int nid);
+        private static extern int CryptoNative_EcKeyGetCurveName(
+            SafeEcKeyHandle ecKey,
+            out int nid
+        );
 
         internal static string EcKeyGetCurveName(SafeEcKeyHandle key)
         {

@@ -155,7 +155,6 @@ internal class test
         return x;
     }
 
-
     public static int Main()
     {
         double x;
@@ -325,7 +324,10 @@ internal class test
         if (!x.Equals(1.6666666666666667D))
         {
             Console.WriteLine("\nInitial parameters: x is -10.0 and y is 4.0");
-            Console.WriteLine("f40	x /=	x + y;	failed.\nx: {0} \texpected: 1.6666666666666667\n", x);
+            Console.WriteLine(
+                "f40	x /=	x + y;	failed.\nx: {0} \texpected: 1.6666666666666667\n",
+                x
+            );
             pass = false;
         }
 
@@ -333,7 +335,10 @@ internal class test
         if (!x.Equals(0.7142857142857143))
         {
             Console.WriteLine("\nInitial parameters: x is -10.0 and y is 4.0");
-            Console.WriteLine("f41	x /=	x - y;	failed.\nx: {0} \texpected: 0.7142857142857143\n", x);
+            Console.WriteLine(
+                "f41	x /=	x - y;	failed.\nx: {0} \texpected: 0.7142857142857143\n",
+                x
+            );
             pass = false;
         }
 

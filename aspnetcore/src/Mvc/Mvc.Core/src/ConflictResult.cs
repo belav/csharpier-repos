@@ -17,9 +17,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// <summary>
         /// Creates a new <see cref="ConflictResult"/> instance.
         /// </summary>
-        public ConflictResult()
-            : base(DefaultStatusCode)
-        {
-        }
+        public ConflictResult() : base(DefaultStatusCode) { }
     }
 }

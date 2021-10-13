@@ -16,10 +16,7 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         private readonly IHtmlAnchorElement _manageLink;
         public static readonly string Path = "/";
 
-        public Index(
-            HttpClient client,
-            IHtmlDocument index,
-            DefaultUIContext context)
+        public Index(HttpClient client, IHtmlDocument index, DefaultUIContext context)
             : base(client, index, context)
         {
             if (!Context.UserAuthenticated)
@@ -33,7 +30,10 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             }
         }
 
-        public static async Task<Index> CreateAsync(HttpClient client, DefaultUIContext context = null)
+        public static async Task<Index> CreateAsync(
+            HttpClient client,
+            DefaultUIContext context = null
+        )
         {
             var goToIndex = await client.GetAsync("/");
             var index = await ResponseAssert.IsHtmlDocumentAsync(goToIndex);
@@ -78,9 +78,11 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             var goToManage = await Client.GetAsync(_manageLink.Href);
             var manage = await ResponseAssert.IsHtmlDocumentAsync(goToManage);
 
-            return new Account.Manage.Index(Client, manage, Context
-                .WithSocialLoginEnabled()
-                .WithSocialLoginProvider());
+            return new Account.Manage.Index(
+                Client,
+                manage,
+                Context.WithSocialLoginEnabled().WithSocialLoginProvider()
+            );
         }
     }
 }

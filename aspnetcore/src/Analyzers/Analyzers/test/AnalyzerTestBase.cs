@@ -18,10 +18,18 @@ namespace Microsoft.AspNetCore.Analyzers
                 source = source + ".cs";
             }
 
-            var filePath = Path.Combine(AppContext.BaseDirectory, "TestFiles", GetType().Name, source);
+            var filePath = Path.Combine(
+                AppContext.BaseDirectory,
+                "TestFiles",
+                GetType().Name,
+                source
+            );
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException($"TestFile {source} could not be found at {filePath}.", filePath);
+                throw new FileNotFoundException(
+                    $"TestFile {source} could not be found at {filePath}.",
+                    filePath
+                );
             }
 
             var fileContent = File.ReadAllText(filePath);
@@ -36,7 +44,10 @@ namespace Microsoft.AspNetCore.Analyzers
             }
 
             var read = Read(source);
-            return AnalyzersDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { read.Source, });
+            return AnalyzersDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+                GetType().Assembly,
+                new[] { read.Source, }
+            );
         }
 
         public Task<Compilation> CreateCompilationAsync(string source)

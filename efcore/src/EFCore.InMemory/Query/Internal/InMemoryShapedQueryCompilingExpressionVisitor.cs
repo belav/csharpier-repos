@@ -12,7 +12,8 @@ using Microsoft.EntityFrameworkCore.Utilities;
 
 namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 {
-    public partial class InMemoryShapedQueryCompilingExpressionVisitor : ShapedQueryCompilingExpressionVisitor
+    public partial class InMemoryShapedQueryCompilingExpressionVisitor
+        : ShapedQueryCompilingExpressionVisitor
     {
         private readonly Type _contextType;
         private readonly bool _concurrencyDetectionEnabled;
@@ -25,11 +26,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public InMemoryShapedQueryCompilingExpressionVisitor(
             ShapedQueryCompilingExpressionVisitorDependencies dependencies,
-            QueryCompilationContext queryCompilationContext)
-            : base(dependencies, queryCompilationContext)
+            QueryCompilationContext queryCompilationContext
+        ) : base(dependencies, queryCompilationContext)
         {
             _contextType = queryCompilationContext.ContextType;
-            _concurrencyDetectionEnabled = dependencies.CoreSingletonOptions.IsConcurrencyDetectionEnabled;
+            _concurrencyDetectionEnabled =
+                dependencies.CoreSingletonOptions.IsConcurrencyDetectionEnabled;
         }
 
         /// <summary>
@@ -52,7 +54,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     return Expression.Call(
                         _tableMethodInfo,
                         QueryCompilationContext.QueryContextParameter,
-                        Expression.Constant(inMemoryTableExpression.EntityType));
+                        Expression.Constant(inMemoryTableExpression.EntityType)
+                    );
             }
 
             return base.VisitExtension(extensionExpression);
@@ -68,11 +71,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         {
             Check.NotNull(shapedQueryExpression, nameof(shapedQueryExpression));
 
-            var inMemoryQueryExpression = (InMemoryQueryExpression)shapedQueryExpression.QueryExpression;
+            var inMemoryQueryExpression =
+                (InMemoryQueryExpression)shapedQueryExpression.QueryExpression;
 
             var shaper = new ShaperExpressionProcessingExpressionVisitor(
-                    inMemoryQueryExpression, inMemoryQueryExpression.CurrentParameter)
-                .Inject(shapedQueryExpression.ShaperExpression);
+                inMemoryQueryExpression,
+                inMemoryQueryExpression.CurrentParameter
+            ).Inject(shapedQueryExpression.ShaperExpression);
 
             shaper = InjectEntityMaterializers(shaper);
 
@@ -81,27 +86,34 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             shaper = new InMemoryProjectionBindingRemovingExpressionVisitor().Visit(shaper);
 
             shaper = new CustomShaperCompilingExpressionVisitor(
-                QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll).Visit(shaper);
+                QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.TrackAll
+            ).Visit(shaper);
 
             var shaperLambda = (LambdaExpression)shaper;
 
             return Expression.New(
-                typeof(QueryingEnumerable<>).MakeGenericType(shaperLambda.ReturnType).GetConstructors()[0],
+                typeof(QueryingEnumerable<>).MakeGenericType(shaperLambda.ReturnType)
+                    .GetConstructors()[0],
                 QueryCompilationContext.QueryContextParameter,
                 innerEnumerable,
                 Expression.Constant(shaperLambda.Compile()),
                 Expression.Constant(_contextType),
                 Expression.Constant(
-                    QueryCompilationContext.QueryTrackingBehavior == QueryTrackingBehavior.NoTrackingWithIdentityResolution),
-                Expression.Constant(_concurrencyDetectionEnabled));
+                    QueryCompilationContext.QueryTrackingBehavior
+                        == QueryTrackingBehavior.NoTrackingWithIdentityResolution
+                ),
+                Expression.Constant(_concurrencyDetectionEnabled)
+            );
         }
 
-        private static readonly MethodInfo _tableMethodInfo
-            = typeof(InMemoryShapedQueryCompilingExpressionVisitor).GetRequiredDeclaredMethod(nameof(Table));
+        private static readonly MethodInfo _tableMethodInfo =
+            typeof(InMemoryShapedQueryCompilingExpressionVisitor).GetRequiredDeclaredMethod(
+                nameof(Table)
+            );
 
         private static IEnumerable<ValueBuffer> Table(
             QueryContext queryContext,
-            IEntityType entityType)
-            => ((InMemoryQueryContext)queryContext).GetValueBuffers(entityType);
+            IEntityType entityType
+        ) => ((InMemoryQueryContext)queryContext).GetValueBuffers(entityType);
     }
 }

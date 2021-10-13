@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagNameWithoutPrefix,
             string parentTagNameWithoutPrefix,
             IReadOnlyList<KeyValuePair<string, string>> tagAttributes,
-            TagMatchingRuleDescriptor rule)
+            TagMatchingRuleDescriptor rule
+        )
         {
             if (tagNameWithoutPrefix == null)
             {
@@ -57,7 +58,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return true;
         }
 
-        public static bool SatisfiesTagName(string tagNameWithoutPrefix, TagMatchingRuleDescriptor rule)
+        public static bool SatisfiesTagName(
+            string tagNameWithoutPrefix,
+            TagMatchingRuleDescriptor rule
+        )
         {
             if (tagNameWithoutPrefix == null)
             {
@@ -80,9 +84,17 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return false;
             }
 
-            if (rule.TagName != ElementCatchAllName &&
-                rule.TagName != null &&
-                !string.Equals(tagNameWithoutPrefix, rule.TagName, rule.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase))
+            if (
+                rule.TagName != ElementCatchAllName
+                && rule.TagName != null
+                && !string.Equals(
+                    tagNameWithoutPrefix,
+                    rule.TagName,
+                    rule.CaseSensitive
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
@@ -90,14 +102,26 @@ namespace Microsoft.AspNetCore.Razor.Language
             return true;
         }
 
-        public static bool SatisfiesParentTag(string parentTagNameWithoutPrefix, TagMatchingRuleDescriptor rule)
+        public static bool SatisfiesParentTag(
+            string parentTagNameWithoutPrefix,
+            TagMatchingRuleDescriptor rule
+        )
         {
             if (rule == null)
             {
                 throw new ArgumentNullException(nameof(rule));
             }
 
-            if (rule.ParentTag != null && !string.Equals(parentTagNameWithoutPrefix, rule.ParentTag, rule.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase))
+            if (
+                rule.ParentTag != null
+                && !string.Equals(
+                    parentTagNameWithoutPrefix,
+                    rule.ParentTag,
+                    rule.CaseSensitive
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
@@ -105,7 +129,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return true;
         }
 
-        public static bool SatisfiesAttributes(IReadOnlyList<KeyValuePair<string, string>> tagAttributes, TagMatchingRuleDescriptor rule)
+        public static bool SatisfiesAttributes(
+            IReadOnlyList<KeyValuePair<string, string>> tagAttributes,
+            TagMatchingRuleDescriptor rule
+        )
         {
             if (tagAttributes == null)
             {
@@ -117,11 +144,21 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(rule));
             }
 
-            if (!rule.Attributes.All(
-                static (requiredAttribute, tagAttributes) => tagAttributes.Any(
-                    static (attribute, requiredAttribute) => SatisfiesRequiredAttribute(attribute.Key, attribute.Value, requiredAttribute),
-                    requiredAttribute),
-                tagAttributes))
+            if (
+                !rule.Attributes.All(
+                    static (requiredAttribute, tagAttributes) =>
+                        tagAttributes.Any(
+                            static (attribute, requiredAttribute) =>
+                                SatisfiesRequiredAttribute(
+                                    attribute.Key,
+                                    attribute.Value,
+                                    requiredAttribute
+                                ),
+                            requiredAttribute
+                        ),
+                    tagAttributes
+                )
+            )
             {
                 return false;
             }
@@ -129,34 +166,68 @@ namespace Microsoft.AspNetCore.Razor.Language
             return true;
         }
 
-        public static bool CanSatisfyBoundAttribute(string name, BoundAttributeDescriptor descriptor)
+        public static bool CanSatisfyBoundAttribute(
+            string name,
+            BoundAttributeDescriptor descriptor
+        )
         {
-            return SatisfiesBoundAttributeName(name, descriptor) ||
-                SatisfiesBoundAttributeIndexer(name, descriptor) ||
-                descriptor.BoundAttributeParameters.Any(p => SatisfiesBoundAttributeWithParameter(name, descriptor, p));
+            return SatisfiesBoundAttributeName(name, descriptor)
+                || SatisfiesBoundAttributeIndexer(name, descriptor)
+                || descriptor.BoundAttributeParameters.Any(
+                    p => SatisfiesBoundAttributeWithParameter(name, descriptor, p)
+                );
         }
 
-        public static bool SatisfiesBoundAttributeIndexer(string name, BoundAttributeDescriptor descriptor)
+        public static bool SatisfiesBoundAttributeIndexer(
+            string name,
+            BoundAttributeDescriptor descriptor
+        )
         {
-            return descriptor.IndexerNamePrefix != null &&
-                !SatisfiesBoundAttributeName(name, descriptor) &&
-                name.StartsWith(descriptor.IndexerNamePrefix, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+            return descriptor.IndexerNamePrefix != null
+                && !SatisfiesBoundAttributeName(name, descriptor)
+                && name.StartsWith(
+                    descriptor.IndexerNamePrefix,
+                    descriptor.CaseSensitive
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
+                );
         }
 
-        public static bool SatisfiesBoundAttributeWithParameter(string name, BoundAttributeDescriptor parent, BoundAttributeParameterDescriptor descriptor)
+        public static bool SatisfiesBoundAttributeWithParameter(
+            string name,
+            BoundAttributeDescriptor parent,
+            BoundAttributeParameterDescriptor descriptor
+        )
         {
             if (TryGetBoundAttributeParameter(name, out var attributeName, out var parameterName))
             {
-                var satisfiesBoundAttributeName = SatisfiesBoundAttributeName(attributeName, parent);
-                var satisfiesBoundAttributeIndexer = SatisfiesBoundAttributeIndexer(attributeName, parent);
-                var matchesParameter = string.Equals(descriptor.Name, parameterName, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
-                return (satisfiesBoundAttributeName || satisfiesBoundAttributeIndexer) && matchesParameter;
+                var satisfiesBoundAttributeName = SatisfiesBoundAttributeName(
+                    attributeName,
+                    parent
+                );
+                var satisfiesBoundAttributeIndexer = SatisfiesBoundAttributeIndexer(
+                    attributeName,
+                    parent
+                );
+                var matchesParameter = string.Equals(
+                    descriptor.Name,
+                    parameterName,
+                    descriptor.CaseSensitive
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
+                );
+                return (satisfiesBoundAttributeName || satisfiesBoundAttributeIndexer)
+                    && matchesParameter;
             }
 
             return false;
         }
 
-        public static bool TryGetBoundAttributeParameter(string fullAttributeName, out string boundAttributeName, out string parameterName)
+        public static bool TryGetBoundAttributeParameter(
+            string fullAttributeName,
+            out string boundAttributeName,
+            out string parameterName
+        )
         {
             boundAttributeName = null;
             parameterName = null;
@@ -178,7 +249,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             out BoundAttributeDescriptor boundAttribute,
             out bool indexerMatch,
             out bool parameterMatch,
-            out BoundAttributeParameterDescriptor boundAttributeParameter)
+            out BoundAttributeParameterDescriptor boundAttributeParameter
+        )
         {
             indexerMatch = false;
             parameterMatch = false;
@@ -194,7 +266,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             foreach (var attribute in descriptor.BoundAttributes)
             {
                 boundAttributeParameter = attribute.BoundAttributeParameters.FirstOrDefault(
-                    p => SatisfiesBoundAttributeWithParameter(name, attribute, p));
+                    p => SatisfiesBoundAttributeWithParameter(name, attribute, p)
+                );
 
                 if (boundAttributeParameter != null)
                 {
@@ -221,24 +294,55 @@ namespace Microsoft.AspNetCore.Razor.Language
             return false;
         }
 
-        private static bool SatisfiesBoundAttributeName(string name, BoundAttributeDescriptor descriptor)
+        private static bool SatisfiesBoundAttributeName(
+            string name,
+            BoundAttributeDescriptor descriptor
+        )
         {
-            return string.Equals(descriptor.Name, name, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+            return string.Equals(
+                descriptor.Name,
+                name,
+                descriptor.CaseSensitive
+                  ? StringComparison.Ordinal
+                  : StringComparison.OrdinalIgnoreCase
+            );
         }
 
         // Internal for testing
-        internal static bool SatisfiesRequiredAttribute(string attributeName, string attributeValue, RequiredAttributeDescriptor descriptor)
+        internal static bool SatisfiesRequiredAttribute(
+            string attributeName,
+            string attributeValue,
+            RequiredAttributeDescriptor descriptor
+        )
         {
             var nameMatches = false;
-            if (descriptor.NameComparison == RequiredAttributeDescriptor.NameComparisonMode.FullMatch)
+            if (
+                descriptor.NameComparison
+                == RequiredAttributeDescriptor.NameComparisonMode.FullMatch
+            )
             {
-                nameMatches = string.Equals(descriptor.Name, attributeName, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+                nameMatches = string.Equals(
+                    descriptor.Name,
+                    attributeName,
+                    descriptor.CaseSensitive
+                      ? StringComparison.Ordinal
+                      : StringComparison.OrdinalIgnoreCase
+                );
             }
-            else if (descriptor.NameComparison == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch)
+            else if (
+                descriptor.NameComparison
+                == RequiredAttributeDescriptor.NameComparisonMode.PrefixMatch
+            )
             {
                 // attributeName cannot equal the Name if comparing as a PrefixMatch.
-                nameMatches = attributeName.Length != descriptor.Name.Length &&
-                    attributeName.StartsWith(descriptor.Name, descriptor.CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
+                nameMatches =
+                    attributeName.Length != descriptor.Name.Length
+                    && attributeName.StartsWith(
+                        descriptor.Name,
+                        descriptor.CaseSensitive
+                          ? StringComparison.Ordinal
+                          : StringComparison.OrdinalIgnoreCase
+                    );
             }
             else
             {

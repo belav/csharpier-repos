@@ -14,7 +14,11 @@ namespace System.Net.Security.Tests
 
     // Callback method that is called when the server receives data from a connected client.
     // The callback method should return a byte array and the number of bytes to send from that array.
-    public delegate void DummyTcpServerReceiveCallback(byte[] bufferReceived, int bytesReceived, Stream stream);
+    public delegate void DummyTcpServerReceiveCallback(
+        byte[] bufferReceived,
+        int bytesReceived,
+        Stream stream
+    );
 
     // Provides a dummy TCP/IP server that accepts connections and supports SSL/TLS.
     // It normally echoes data received but can be configured to write a byte array
@@ -25,7 +29,8 @@ namespace System.Net.Security.Tests
         private VerboseTestLogging _log;
         private TcpListener _listener;
         private bool _useSsl;
-        private SslProtocols _sslProtocols = SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
+        private SslProtocols _sslProtocols =
+            SslProtocols.Tls12 | SslProtocols.Tls11 | SslProtocols.Tls;
         private EncryptionPolicy _sslEncryptionPolicy;
         private IPEndPoint _remoteEndPoint;
         private DummyTcpServerReceiveCallback _receiveCallback;
@@ -38,9 +43,7 @@ namespace System.Net.Security.Tests
             _listener.AcceptTcpClientAsync().ContinueWith(t => OnAccept(t), TaskScheduler.Default);
         }
 
-        public DummyTcpServer(IPEndPoint endPoint) : this(endPoint, null)
-        {
-        }
+        public DummyTcpServer(IPEndPoint endPoint) : this(endPoint, null) { }
 
         public DummyTcpServer(IPEndPoint endPoint, EncryptionPolicy? sslEncryptionPolicy)
         {
@@ -86,9 +89,7 @@ namespace System.Net.Security.Tests
             }
         }
 
-        protected virtual void OnClientAccepted(TcpClient client)
-        {
-        }
+        protected virtual void OnClientAccepted(TcpClient client) { }
 
         private void OnAuthenticate(Task result, ClientState state)
         {
@@ -97,23 +98,35 @@ namespace System.Net.Security.Tests
             try
             {
                 result.GetAwaiter().GetResult();
-                _log.WriteLine("Server authenticated to client with encryption cipher: {0} {1}-bit strength",
-                    sslStream.CipherAlgorithm, sslStream.CipherStrength);
+                _log.WriteLine(
+                    "Server authenticated to client with encryption cipher: {0} {1}-bit strength",
+                    sslStream.CipherAlgorithm,
+                    sslStream.CipherStrength
+                );
 
                 // Start listening for data from the client connection.
-                sslStream.BeginRead(state.ReceiveBuffer, 0, state.ReceiveBuffer.Length, OnReceive, state);
+                sslStream.BeginRead(
+                    state.ReceiveBuffer,
+                    0,
+                    state.ReceiveBuffer.Length,
+                    OnReceive,
+                    state
+                );
             }
             catch (AuthenticationException authEx)
             {
                 _log.WriteLine(
                     "Server disconnecting from client during authentication.  No shared SSL/TLS algorithm. ({0})",
-                    authEx);
+                    authEx
+                );
                 state.Dispose();
             }
             catch (Exception ex)
             {
-                _log.WriteLine("Server disconnecting from client during authentication.  Exception: {0}",
-                    ex.Message);
+                _log.WriteLine(
+                    "Server disconnecting from client during authentication.  Exception: {0}",
+                    ex.Message
+                );
                 state.Dispose();
             }
         }
@@ -127,9 +140,7 @@ namespace System.Net.Security.Tests
             {
                 client = result.Result;
             }
-            catch
-            {
-            }
+            catch { }
 
             // If we have a connection, then process it
             if (client != null)
@@ -144,20 +155,29 @@ namespace System.Net.Security.Tests
                     state = new ClientState(client, _sslEncryptionPolicy);
                     _log.WriteLine("Server: starting SSL authentication.");
 
-
                     SslStream sslStream = null;
-                    X509Certificate2 certificate = Configuration.Certificates.GetServerCertificate();
+                    X509Certificate2 certificate =
+                        Configuration.Certificates.GetServerCertificate();
 
                     try
                     {
                         sslStream = (SslStream)state.Stream;
 
                         _log.WriteLine("Server: attempting to open SslStream.");
-                        sslStream.AuthenticateAsServerAsync(certificate, false, _sslProtocols, false).ContinueWith(t =>
-                        {
-                            certificate.Dispose();
-                            OnAuthenticate(t, state);
-                        }, TaskScheduler.Default);
+                        sslStream.AuthenticateAsServerAsync(
+                                certificate,
+                                false,
+                                _sslProtocols,
+                                false
+                            )
+                            .ContinueWith(
+                                t =>
+                                {
+                                    certificate.Dispose();
+                                    OnAuthenticate(t, state);
+                                },
+                                TaskScheduler.Default
+                            );
                     }
                     catch (Exception ex)
                     {
@@ -173,22 +193,25 @@ namespace System.Net.Security.Tests
                     // Start listening for data from the client connection
                     try
                     {
-                        state.Stream.BeginRead(state.ReceiveBuffer, 0, state.ReceiveBuffer.Length, OnReceive, state);
+                        state.Stream.BeginRead(
+                            state.ReceiveBuffer,
+                            0,
+                            state.ReceiveBuffer.Length,
+                            OnReceive,
+                            state
+                        );
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
 
             // Listen for more client connections
             try
             {
-                _listener.AcceptTcpClientAsync().ContinueWith(t => OnAccept(t), TaskScheduler.Default);
+                _listener.AcceptTcpClientAsync()
+                    .ContinueWith(t => OnAccept(t), TaskScheduler.Default);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         private void OnReceive(IAsyncResult result)
@@ -215,7 +238,13 @@ namespace System.Net.Security.Tests
                 }
 
                 // Read more from client (asynchronous)
-                state.Stream.BeginRead(state.ReceiveBuffer, 0, state.ReceiveBuffer.Length, OnReceive, state);
+                state.Stream.BeginRead(
+                    state.ReceiveBuffer,
+                    0,
+                    state.ReceiveBuffer.Length,
+                    OnReceive,
+                    state
+                );
             }
             catch (IOException)
             {
@@ -236,14 +265,20 @@ namespace System.Net.Security.Tests
             {
                 throw new InvalidOperationException(
                     $"Exception in {nameof(DummyTcpServer)} created with stack: {_creationStack}",
-                    e);
+                    e
+                );
             }
         }
 
         // The following method is invoked by the RemoteCertificateValidationDelegate.
-        public static bool AlwaysValidServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        public static bool AlwaysValidServerCertificate(
+            object sender,
+            X509Certificate certificate,
+            X509Chain chain,
+            SslPolicyErrors sslPolicyErrors
+        )
         {
-            return true;  // allow everything
+            return true; // allow everything
         }
 
         private class ClientState
@@ -267,7 +302,13 @@ namespace System.Net.Security.Tests
                 _tcpClient = client;
                 _receiveBuffer = new byte[1024];
                 _useSsl = true;
-                _sslStream = new SslStream(client.GetStream(), false, AlwaysValidServerCertificate, null, sslEncryptionPolicy);
+                _sslStream = new SslStream(
+                    client.GetStream(),
+                    false,
+                    AlwaysValidServerCertificate,
+                    null,
+                    sslEncryptionPolicy
+                );
                 _closed = false;
             }
 

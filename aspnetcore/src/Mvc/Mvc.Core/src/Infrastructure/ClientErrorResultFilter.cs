@@ -17,9 +17,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         public ClientErrorResultFilter(
             IClientErrorFactory clientErrorFactory,
-            ILogger<ClientErrorResultFilter> logger)
+            ILogger<ClientErrorResultFilter> logger
+        )
         {
-            _clientErrorFactory = clientErrorFactory ?? throw new ArgumentNullException(nameof(clientErrorFactory));
+            _clientErrorFactory =
+                clientErrorFactory ?? throw new ArgumentNullException(nameof(clientErrorFactory));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -28,9 +30,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// </summary>
         public int Order => FilterOrder;
 
-        public void OnResultExecuted(ResultExecutedContext context)
-        {
-        }
+        public void OnResultExecuted(ResultExecutedContext context) { }
 
         public void OnResultExecuting(ResultExecutingContext context)
         {
@@ -57,7 +57,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 return;
             }
 
-            _logger.TransformingClientError(context.Result.GetType(), result.GetType(), clientError.StatusCode);
+            _logger.TransformingClientError(
+                context.Result.GetType(),
+                result.GetType(),
+                clientError.StatusCode
+            );
             context.Result = result;
         }
     }

@@ -33,14 +33,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
             public QuickInfoSource(
                 ITextBuffer subjectBuffer,
                 IThreadingContext threadingContext,
-                Lazy<IStreamingFindUsagesPresenter> streamingPresenter)
+                Lazy<IStreamingFindUsagesPresenter> streamingPresenter
+            )
             {
                 _subjectBuffer = subjectBuffer;
                 _threadingContext = threadingContext;
                 _streamingPresenter = streamingPresenter;
             }
 
-            public async Task<IntellisenseQuickInfoItem> GetQuickInfoItemAsync(IAsyncQuickInfoSession session, CancellationToken cancellationToken)
+            public async Task<IntellisenseQuickInfoItem> GetQuickInfoItemAsync(
+                IAsyncQuickInfoSession session,
+                CancellationToken cancellationToken
+            )
             {
                 var triggerPoint = session.GetTriggerPoint(_subjectBuffer.CurrentSnapshot);
                 if (!triggerPoint.HasValue)
@@ -63,30 +67,50 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
 
                 try
                 {
-                    using (Internal.Log.Logger.LogBlock(FunctionId.Get_QuickInfo_Async, cancellationToken))
+                    using (
+                        Internal.Log.Logger.LogBlock(
+                            FunctionId.Get_QuickInfo_Async,
+                            cancellationToken
+                        )
+                    )
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var item = await service.GetQuickInfoAsync(document, triggerPoint.Value, cancellationToken).ConfigureAwait(false);
+                        var item = await service.GetQuickInfoAsync(
+                                document,
+                                triggerPoint.Value,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         if (item != null)
                         {
                             var textVersion = snapshot.Version;
-                            var trackingSpan = textVersion.CreateTrackingSpan(item.Span.ToSpan(), SpanTrackingMode.EdgeInclusive);
-                            return await IntellisenseQuickInfoBuilder.BuildItemAsync(trackingSpan, item, document, _threadingContext, _streamingPresenter, cancellationToken).ConfigureAwait(false);
+                            var trackingSpan = textVersion.CreateTrackingSpan(
+                                item.Span.ToSpan(),
+                                SpanTrackingMode.EdgeInclusive
+                            );
+                            return await IntellisenseQuickInfoBuilder.BuildItemAsync(
+                                    trackingSpan,
+                                    item,
+                                    document,
+                                    _threadingContext,
+                                    _streamingPresenter,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                         }
 
                         return null;
                     }
                 }
-                catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                catch (Exception e)
+                    when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                 {
                     throw ExceptionUtilities.Unreachable;
                 }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

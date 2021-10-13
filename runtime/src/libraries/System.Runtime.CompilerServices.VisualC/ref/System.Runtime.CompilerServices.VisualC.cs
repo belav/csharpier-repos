@@ -9,10 +9,10 @@ namespace System.Runtime.CompilerServices
     public static partial class CompilerMarshalOverride
     {
     }
-    [AttributeUsageAttribute(AttributeTargets.Assembly, AllowMultiple=true)]
+    [AttributeUsageAttribute(AttributeTargets.Assembly, AllowMultiple = true)]
     public sealed class CppInlineNamespaceAttribute : Attribute
     {
-        public CppInlineNamespaceAttribute(string dottedName) {}
+        public CppInlineNamespaceAttribute(string dottedName) { }
     }
     [System.AttributeUsageAttribute(System.AttributeTargets.Struct)]
     public sealed partial class HasCopySemanticsAttribute : System.Attribute
@@ -49,16 +49,26 @@ namespace System.Runtime.CompilerServices
     public static partial class IsUdtReturn
     {
     }
-    [System.AttributeUsageAttribute(System.AttributeTargets.Struct, Inherited=true)]
+    [System.AttributeUsageAttribute(System.AttributeTargets.Struct, Inherited = true)]
     public sealed partial class NativeCppClassAttribute : System.Attribute
     {
         public NativeCppClassAttribute() { }
     }
-    [System.AttributeUsageAttribute(System.AttributeTargets.Class | System.AttributeTargets.Enum | System.AttributeTargets.Interface | System.AttributeTargets.Struct, AllowMultiple=true, Inherited=false)]
+    [System.AttributeUsageAttribute(
+        System.AttributeTargets.Class
+            | System.AttributeTargets.Enum
+            | System.AttributeTargets.Interface
+            | System.AttributeTargets.Struct,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed partial class RequiredAttributeAttribute : System.Attribute
     {
         public RequiredAttributeAttribute(System.Type requiredContract) { }
-        public System.Type RequiredContract { get { throw null; } }
+        public System.Type RequiredContract
+        {
+            get { throw null; }
+        }
     }
     [System.AttributeUsageAttribute(System.AttributeTargets.Enum)]
     public sealed partial class ScopelessEnumAttribute : System.Attribute

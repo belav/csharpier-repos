@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.TestHost
 {
     internal class RequestLifetimeFeature : IHttpRequestLifetimeFeature
     {
-        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cancellationTokenSource =
+            new CancellationTokenSource();
         private readonly Action<Exception> _abort;
 
         public RequestLifetimeFeature(Action<Exception> abort)

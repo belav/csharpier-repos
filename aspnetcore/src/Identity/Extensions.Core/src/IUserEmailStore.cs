@@ -48,7 +48,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="confirmed">A flag indicating if the email address has been confirmed, true if the address is confirmed otherwise false.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task SetEmailConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken);
+        Task SetEmailConfirmedAsync(
+            TUser user,
+            bool confirmed,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Gets the user, if any, associated with the specified, normalized email address.
@@ -77,6 +81,10 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="normalizedEmail">The normalized email to set for the specified <paramref name="user"/>.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task SetNormalizedEmailAsync(TUser user, string normalizedEmail, CancellationToken cancellationToken);
+        Task SetNormalizedEmailAsync(
+            TUser user,
+            string normalizedEmail,
+            CancellationToken cancellationToken
+        );
     }
 }

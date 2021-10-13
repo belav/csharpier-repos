@@ -29,9 +29,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public InMemoryOptionsExtension()
-        {
-        }
+        public InMemoryOptionsExtension() { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,8 +49,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual DbContextOptionsExtensionInfo Info
-            => _info ??= new ExtensionInfo(this);
+        public virtual DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,8 +57,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected virtual InMemoryOptionsExtension Clone()
-            => new(this);
+        protected virtual InMemoryOptionsExtension Clone() => new(this);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -69,8 +65,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual string StoreName
-            => _storeName!;
+        public virtual string StoreName => _storeName!;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -78,8 +73,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool IsNullabilityCheckEnabled
-            => _nullabilityCheckEnabled;
+        public virtual bool IsNullabilityCheckEnabled => _nullabilityCheckEnabled;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -102,7 +96,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InMemoryOptionsExtension WithNullabilityCheckEnabled(bool nullabilityCheckEnabled)
+        public virtual InMemoryOptionsExtension WithNullabilityCheckEnabled(
+            bool nullabilityCheckEnabled
+        )
         {
             var clone = Clone();
 
@@ -117,8 +113,7 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual InMemoryDatabaseRoot? DatabaseRoot
-            => _databaseRoot;
+        public virtual InMemoryDatabaseRoot? DatabaseRoot => _databaseRoot;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -141,8 +136,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void ApplyServices(IServiceCollection services)
-            => services.AddEntityFrameworkInMemoryDatabase();
+        public virtual void ApplyServices(IServiceCollection services) =>
+            services.AddEntityFrameworkInMemoryDatabase();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -150,24 +145,18 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void Validate(IDbContextOptions options)
-        {
-        }
+        public virtual void Validate(IDbContextOptions options) { }
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
             private string? _logFragment;
 
-            public ExtensionInfo(IDbContextOptionsExtension extension)
-                : base(extension)
-            {
-            }
+            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
 
-            private new InMemoryOptionsExtension Extension
-                => (InMemoryOptionsExtension)base.Extension;
+            private new InMemoryOptionsExtension Extension =>
+                (InMemoryOptionsExtension)base.Extension;
 
-            public override bool IsDatabaseProvider
-                => true;
+            public override bool IsDatabaseProvider => true;
 
             public override string LogFragment
             {
@@ -186,12 +175,13 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Infrastructure.Internal
                 }
             }
 
-            public override long GetServiceProviderHashCode()
-                => Extension._databaseRoot?.GetHashCode() ?? 0L;
+            public override long GetServiceProviderHashCode() =>
+                Extension._databaseRoot?.GetHashCode() ?? 0L;
 
-            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
-                => debugInfo["InMemoryDatabase:DatabaseRoot"]
-                    = (Extension._databaseRoot?.GetHashCode() ?? 0L).ToString(CultureInfo.InvariantCulture);
+            public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) =>
+                debugInfo["InMemoryDatabase:DatabaseRoot"] = (
+                    Extension._databaseRoot?.GetHashCode() ?? 0L
+                ).ToString(CultureInfo.InvariantCulture);
         }
     }
 }

@@ -25,7 +25,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
     /// regardless of whether a single value or multiple values were submitted.
     /// </para>
     /// </remarks>
-    public readonly struct ValueProviderResult : IEquatable<ValueProviderResult>, IEnumerable<string>
+    public readonly struct ValueProviderResult
+        : IEquatable<ValueProviderResult>,
+          IEnumerable<string>
     {
         private static readonly CultureInfo _invariantCulture = CultureInfo.InvariantCulture;
 
@@ -38,10 +40,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// Creates a new <see cref="ValueProviderResult"/> using <see cref="CultureInfo.InvariantCulture"/>.
         /// </summary>
         /// <param name="values">The submitted values.</param>
-        public ValueProviderResult(StringValues values)
-            : this(values, _invariantCulture)
-        {
-        }
+        public ValueProviderResult(StringValues values) : this(values, _invariantCulture) { }
 
         /// <summary>
         /// Creates a new <see cref="ValueProviderResult"/>.

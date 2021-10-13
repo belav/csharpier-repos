@@ -13,10 +13,7 @@ namespace System.Net.Test.Common
 
         public static EventSourceTestLogging Log
         {
-            get
-            {
-                return s_log;
-            }
+            get { return s_log; }
         }
 
         [Event(1, Keywords = Keywords.Default, Level = EventLevel.Informational)]

@@ -7,9 +7,7 @@ namespace System.CommandLine.Parsing
 {
     public class TokenizeResult
     {
-        internal TokenizeResult(
-            IReadOnlyList<Token> tokens,
-            IReadOnlyList<TokenizeError> errors)
+        internal TokenizeResult(IReadOnlyList<Token> tokens, IReadOnlyList<TokenizeError> errors)
         {
             Tokens = tokens ?? Array.Empty<Token>();
             Errors = errors ?? Array.Empty<TokenizeError>();

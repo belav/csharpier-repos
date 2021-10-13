@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks
     {
         public Culture()
         {
-            ProductModelProductDescriptionCulture = new HashSet<ProductModelProductDescriptionCulture>();
+            ProductModelProductDescriptionCulture =
+                new HashSet<ProductModelProductDescriptionCulture>();
         }
 
         public string CultureID { get; set; }

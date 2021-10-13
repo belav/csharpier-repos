@@ -25,15 +25,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         public SqlServerDoubleTypeMapping(
             string storeType,
             DbType? dbType = null,
-            StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+            StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+        )
             : base(
                 new RelationalTypeMappingParameters(
                     new CoreTypeMappingParameters(typeof(double)),
                     storeType,
                     storeTypePostfix,
-                    dbType))
-        {
-        }
+                    dbType
+                )
+            ) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,17 +43,16 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         protected SqlServerDoubleTypeMapping(RelationalTypeMappingParameters parameters)
-            : base(parameters)
-        {
-        }
+            : base(parameters) { }
 
         /// <summary>
         ///     Creates a copy of this mapping.
         /// </summary>
         /// <param name="parameters"> The parameters for this mapping. </param>
         /// <returns> The newly created mapping. </returns>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new SqlServerDoubleTypeMapping(parameters);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new SqlServerDoubleTypeMapping(parameters);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -65,12 +65,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             var literal = base.GenerateNonNullSqlLiteral(value);
 
             var doubleValue = Convert.ToDouble(value);
-            return !literal.Contains("E")
+            return
+                !literal.Contains("E")
                 && !literal.Contains("e")
                 && !double.IsNaN(doubleValue)
                 && !double.IsInfinity(doubleValue)
-                    ? literal + "E0"
-                    : literal;
+              ? literal + "E0"
+              : literal;
         }
 
         /// <summary>
@@ -83,8 +84,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         {
             base.ConfigureParameter(parameter);
 
-            if (Precision.HasValue
-                && Precision.Value != -1)
+            if (Precision.HasValue && Precision.Value != -1)
             {
                 // SqlClient wants this set as "size"
                 parameter.Size = Precision.Value;

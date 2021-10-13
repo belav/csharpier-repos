@@ -11,12 +11,18 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             if (context.DeclaredType == typeof(ProblemDetails))
             {
-                return new WrapperProvider(typeof(ProblemDetailsWrapper), p => new ProblemDetailsWrapper((ProblemDetails)p));
+                return new WrapperProvider(
+                    typeof(ProblemDetailsWrapper),
+                    p => new ProblemDetailsWrapper((ProblemDetails)p)
+                );
             }
 
             if (context.DeclaredType == typeof(ValidationProblemDetails))
             {
-                return new WrapperProvider(typeof(ValidationProblemDetailsWrapper), p => new ValidationProblemDetailsWrapper((ValidationProblemDetails)p));
+                return new WrapperProvider(
+                    typeof(ValidationProblemDetailsWrapper),
+                    p => new ValidationProblemDetailsWrapper((ValidationProblemDetails)p)
+                );
             }
 
             return null;

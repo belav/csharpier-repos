@@ -37,10 +37,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
         {
             Verify(OneOrMany.Create(ImmutableArray.Create(1, 2, 3)).Add(4), 1, 2, 3, 4);
             Verify(OneOrMany.Create(ImmutableArray.Create(1, 2, 3, 4)), 1, 2, 3, 4);
-            Verify(OneOrMany.Create(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4), 1, 2, 3, 4);
+            Verify(
+                OneOrMany.Create(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4),
+                1,
+                2,
+                3,
+                4
+            );
             Verify(new OneOrMany<int>(ImmutableArray.Create(1, 2, 3)).Add(4), 1, 2, 3, 4);
             Verify(new OneOrMany<int>(ImmutableArray.Create(1, 2, 3, 4)), 1, 2, 3, 4);
-            Verify(new OneOrMany<int>(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4), 1, 2, 3, 4);
+            Verify(
+                new OneOrMany<int>(ImmutableArray<int>.Empty).Add(1).Add(2).Add(3).Add(4),
+                1,
+                2,
+                3,
+                4
+            );
         }
 
         private static void Verify<T>(OneOrMany<T> actual, params T[] expected)
@@ -71,7 +83,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.Throws<IndexOutOfRangeException>(() => single[-1]);
             Assert.Throws<IndexOutOfRangeException>(() => quad[5]);
             Assert.Throws<IndexOutOfRangeException>(() => quad[-1]);
-            Assert.Throws<ArgumentNullException>(() => OneOrMany.Create(default(ImmutableArray<int>)));
+            Assert.Throws<ArgumentNullException>(
+                () => OneOrMany.Create(default(ImmutableArray<int>))
+            );
         }
     }
 }

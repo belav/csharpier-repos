@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             var applicationPartManager = GetApplicationPartManager();
             var referenceManager = new RazorReferenceManager(
                 applicationPartManager,
-                Options.Create(options));
+                Options.Create(options)
+            );
 
             var expected = new[] { ApplicationPartReferencePath, additionalReferencePath };
 

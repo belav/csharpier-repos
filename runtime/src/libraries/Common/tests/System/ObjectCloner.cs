@@ -17,8 +17,7 @@ namespace System
             Debug.Assert(obj != null);
 
             // Invoke MemberwiseClone() via reflection to create a shallow copy of the object
-            MethodInfo memberwiseClone = typeof(object)
-                .GetTypeInfo()
+            MethodInfo memberwiseClone = typeof(object).GetTypeInfo()
                 .GetDeclaredMethod("MemberwiseClone");
             object cloned = memberwiseClone.Invoke(obj, parameters: Array.Empty<object>());
 

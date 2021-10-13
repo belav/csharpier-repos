@@ -28,7 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 "InvariantName",
                 "Name",
                 new StringTypeMapping("nvarchar(100)"),
-                nullable: true);
+                nullable: true
+            );
 
             var command = commandBuilder.Build();
 
@@ -42,7 +43,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
             var dependencies = new RelationalCommandBuilderDependencies(
                 new TestRelationalTypeMappingSource(
                     TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                    TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()));
+                    TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+                )
+            );
 
             var commandBuilder = new RelationalCommandBuilder(dependencies);
             return commandBuilder;

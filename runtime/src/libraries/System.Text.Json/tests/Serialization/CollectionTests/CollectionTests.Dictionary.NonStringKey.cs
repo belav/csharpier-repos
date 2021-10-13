@@ -42,7 +42,9 @@ namespace System.Text.Json.Serialization.Tests
                 string json = JsonSerializer.Serialize(dictionary);
                 Assert.Equal(_expectedJson, json);
 
-                Dictionary<TKey, TValue> dictionaryCopy = JsonSerializer.Deserialize<Dictionary<TKey, TValue>>(json);
+                Dictionary<TKey, TValue> dictionaryCopy = JsonSerializer.Deserialize<
+                    Dictionary<TKey, TValue>
+                >(json);
                 Validate(dictionaryCopy);
             }
 
@@ -58,7 +60,9 @@ namespace System.Text.Json.Serialization.Tests
 
                 byte[] jsonBytes = Encoding.UTF8.GetBytes(json);
                 Stream deserializeStream = new MemoryStream(jsonBytes);
-                Dictionary<TKey, TValue> dictionaryCopy = await JsonSerializer.DeserializeAsync<Dictionary<TKey, TValue>>(deserializeStream);
+                Dictionary<TKey, TValue> dictionaryCopy = await JsonSerializer.DeserializeAsync<
+                    Dictionary<TKey, TValue>
+                >(deserializeStream);
                 Validate(dictionaryCopy);
             }
         }
@@ -98,14 +102,16 @@ namespace System.Text.Json.Serialization.Tests
 
         public class DictionaryDecimalKey : DictionaryKeyTestsBase<decimal, int>
         {
-            protected override string _expectedJson => $@"{{""{JsonSerializer.Serialize(decimal.MaxValue)}"":1}}";
+            protected override string _expectedJson =>
+                $@"{{""{JsonSerializer.Serialize(decimal.MaxValue)}"":1}}";
             protected override decimal Key => decimal.MaxValue;
             protected override int Value => 1;
         }
 
         public class DictionaryDoubleKey : DictionaryKeyTestsBase<double, int>
         {
-            protected override string _expectedJson => $@"{{""{JsonSerializer.Serialize(double.MaxValue)}"":1}}";
+            protected override string _expectedJson =>
+                $@"{{""{JsonSerializer.Serialize(double.MaxValue)}"":1}}";
             protected override double Key => double.MaxValue;
             protected override int Value => 1;
         }
@@ -155,7 +161,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public class DictionarySingleKey : DictionaryKeyTestsBase<float, int>
         {
-            protected override string _expectedJson => $@"{{""{JsonSerializer.Serialize(float.MaxValue)}"":1}}";
+            protected override string _expectedJson =>
+                $@"{{""{JsonSerializer.Serialize(float.MaxValue)}"":1}}";
             protected override float Key => float.MaxValue;
             protected override int Value => 1;
         }
@@ -194,44 +201,59 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             [Fact]
-            public void ThrowUnsupported_Serialize()
-                => Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(_dictionary));
+            public void ThrowUnsupported_Serialize() =>
+                Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(_dictionary));
 
             [Fact]
-            public Task ThrowUnsupported_SerializeAsync()
-                => Assert.ThrowsAsync<NotSupportedException>(() => JsonSerializer.SerializeAsync(new MemoryStream(), _dictionary));
+            public Task ThrowUnsupported_SerializeAsync() =>
+                Assert.ThrowsAsync<NotSupportedException>(
+                    () => JsonSerializer.SerializeAsync(new MemoryStream(), _dictionary)
+                );
 
             [Fact]
-            public void ThrowUnsupported_Deserialize() => Assert.Throws<NotSupportedException>(()
-                => JsonSerializer.Deserialize<Dictionary<TKey, TValue>>(@"{""foo"":1}"));
+            public void ThrowUnsupported_Deserialize() =>
+                Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<Dictionary<TKey, TValue>>(@"{""foo"":1}")
+                );
 
             [Fact]
-            public Task ThrowUnsupported_DeserializeAsync() => Assert.ThrowsAsync<NotSupportedException>(()
-                => JsonSerializer.DeserializeAsync<Dictionary<TKey, TValue>>(new MemoryStream(Encoding.UTF8.GetBytes(@"{""foo"":1}"))).AsTask());
+            public Task ThrowUnsupported_DeserializeAsync() =>
+                Assert.ThrowsAsync<NotSupportedException>(
+                    () =>
+                        JsonSerializer.DeserializeAsync<Dictionary<TKey, TValue>>(
+                                new MemoryStream(Encoding.UTF8.GetBytes(@"{""foo"":1}"))
+                            )
+                            .AsTask()
+                );
 
             [Fact]
-            public void DoesNotThrowIfEmpty_Serialize()
-                => JsonSerializer.Serialize(new Dictionary<TKey, TValue>());
+            public void DoesNotThrowIfEmpty_Serialize() =>
+                JsonSerializer.Serialize(new Dictionary<TKey, TValue>());
 
             [Fact]
-            public Task DoesNotThrowIfEmpty_SerializeAsync()
-                => JsonSerializer.SerializeAsync(new MemoryStream(), new Dictionary<TKey, TValue>());
+            public Task DoesNotThrowIfEmpty_SerializeAsync() =>
+                JsonSerializer.SerializeAsync(new MemoryStream(), new Dictionary<TKey, TValue>());
 
             [Fact]
-            public void DoesNotThrowIfEmpty_Deserialize()
-                => JsonSerializer.Deserialize<Dictionary<TKey, TValue>>("{}");
+            public void DoesNotThrowIfEmpty_Deserialize() =>
+                JsonSerializer.Deserialize<Dictionary<TKey, TValue>>("{}");
 
             [Fact]
-            public Task DoesNotThrowIfEmpty_DeserializeAsync()
-                => JsonSerializer.DeserializeAsync<Dictionary<TKey, TValue>>(new MemoryStream(Encoding.UTF8.GetBytes("{}"))).AsTask();
+            public Task DoesNotThrowIfEmpty_DeserializeAsync() =>
+                JsonSerializer.DeserializeAsync<Dictionary<TKey, TValue>>(
+                        new MemoryStream(Encoding.UTF8.GetBytes("{}"))
+                    )
+                    .AsTask();
         }
 
-        public class DictionaryMyPublicClassKeyUnsupported : DictionaryUnsupportedKeyTestsBase<MyPublicClass, int>
+        public class DictionaryMyPublicClassKeyUnsupported
+            : DictionaryUnsupportedKeyTestsBase<MyPublicClass, int>
         {
             protected override MyPublicClass Key => new MyPublicClass();
         }
 
-        public class DictionaryMyPublicStructKeyUnsupported : DictionaryUnsupportedKeyTestsBase<MyPublicStruct, int>
+        public class DictionaryMyPublicStructKeyUnsupported
+            : DictionaryUnsupportedKeyTestsBase<MyPublicStruct, int>
         {
             protected override MyPublicStruct Key => new MyPublicStruct();
         }
@@ -246,7 +268,8 @@ namespace System.Text.Json.Serialization.Tests
             protected override object Key => new object();
         }
 
-        public class DictionaryPolymorphicKeyUnsupported : DictionaryUnsupportedKeyTestsBase<object, int>
+        public class DictionaryPolymorphicKeyUnsupported
+            : DictionaryUnsupportedKeyTestsBase<object, int>
         {
             protected override object Key => new Uri("http://foo");
         }
@@ -264,17 +287,22 @@ namespace System.Text.Json.Serialization.Tests
                 dictionary.Add(MyEnum.Foo, 4);
                 dictionary.Add(MyEnumFlags.Foo | MyEnumFlags.Bar, 5);
 
-                const string expected = @"{""1"":1,""08314fa2-b1fe-4792-bcd1-6e62338ac7f3"":2,""KeyString"":3,""Foo"":4,""Foo, Bar"":5}";
+                const string expected =
+                    @"{""1"":1,""08314fa2-b1fe-4792-bcd1-6e62338ac7f3"":2,""KeyString"":3,""Foo"":4,""Foo, Bar"":5}";
 
                 string json = JsonSerializer.Serialize(dictionary);
                 Assert.Equal(expected, json);
                 // object type is not supported on deserialization.
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<Dictionary<object, object>>(json));
+                Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<Dictionary<object, object>>(json)
+                );
 
                 var @object = new ClassWithDictionary { Dictionary = dictionary };
                 json = JsonSerializer.Serialize(@object);
                 Assert.Equal($@"{{""Dictionary"":{expected}}}", json);
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<ClassWithDictionary>(json));
+                Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<ClassWithDictionary>(json)
+                );
             }
 
             [Fact]
@@ -288,7 +316,8 @@ namespace System.Text.Json.Serialization.Tests
                 dictionary.Add(MyEnum.Foo, 4);
                 dictionary.Add(MyEnumFlags.Foo | MyEnumFlags.Bar, 5);
 
-                const string expected = @"{""1"":1,""08314fa2-b1fe-4792-bcd1-6e62338ac7f3"":2,""KeyString"":3,""Foo"":4,""Foo, Bar"":5}";
+                const string expected =
+                    @"{""1"":1,""08314fa2-b1fe-4792-bcd1-6e62338ac7f3"":2,""KeyString"":3,""Foo"":4,""Foo, Bar"":5}";
                 string json = JsonSerializer.Serialize(dictionary);
                 Assert.Equal(expected, json);
 
@@ -311,22 +340,32 @@ namespace System.Text.Json.Serialization.Tests
 
             [Theory] // Extend this test when support for more types is added.
             [InlineData(@"{""1.1"":1}", typeof(Dictionary<int, int>))]
-            [InlineData(@"{""{00000000-0000-0000-0000-000000000000}"":1}", typeof(Dictionary<Guid, int>))]
+            [InlineData(
+                @"{""{00000000-0000-0000-0000-000000000000}"":1}",
+                typeof(Dictionary<Guid, int>)
+            )]
             public void ThrowOnInvalidFormat(string json, Type typeToConvert)
             {
-                JsonException ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize(json, typeToConvert));
+                JsonException ex = Assert.Throws<JsonException>(
+                    () => JsonSerializer.Deserialize(json, typeToConvert)
+                );
                 Assert.Contains(typeToConvert.ToString(), ex.Message);
             }
 
             [Theory] // Extend this test when support for more types is added.
             [InlineData(@"{""1.1"":1}", typeof(Dictionary<int, int>))]
-            [InlineData(@"{""{00000000-0000-0000-0000-000000000000}"":1}", typeof(Dictionary<Guid, int>))]
+            [InlineData(
+                @"{""{00000000-0000-0000-0000-000000000000}"":1}",
+                typeof(Dictionary<Guid, int>)
+            )]
             public async Task ThrowOnInvalidFormatAsync(string json, Type typeToConvert)
             {
                 byte[] jsonBytes = Encoding.UTF8.GetBytes(json);
                 Stream stream = new MemoryStream(jsonBytes);
 
-                JsonException ex = await Assert.ThrowsAsync<JsonException>(async () => await JsonSerializer.DeserializeAsync(stream, typeToConvert));
+                JsonException ex = await Assert.ThrowsAsync<JsonException>(
+                    async () => await JsonSerializer.DeserializeAsync(stream, typeToConvert)
+                );
                 Assert.Contains(typeToConvert.ToString(), ex.Message);
             }
 
@@ -335,19 +374,36 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // Dictionary<int[], int>>
                 Assert.Null(JsonSerializer.Deserialize<Dictionary<int[], int>>("null"));
-                Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<int[], int>>("\"\""));
+                Assert.Throws<JsonException>(
+                    () => JsonSerializer.Deserialize<Dictionary<int[], int>>("\"\"")
+                );
                 Assert.NotNull(JsonSerializer.Deserialize<Dictionary<int[], int>>("{}"));
 
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<Dictionary<int[], int>>(@"{""Foo"":1}"));
+                Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<Dictionary<int[], int>>(@"{""Foo"":1}")
+                );
 
                 // UnsupportedDictionaryWrapper
-                Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>("\"\""));
+                Assert.Throws<JsonException>(
+                    () => JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>("\"\"")
+                );
                 Assert.NotNull(JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>("{}"));
                 Assert.Null(JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>("null"));
-                Assert.NotNull(JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>(@"{""Dictionary"":null}"));
-                Assert.NotNull(JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>(@"{""Dictionary"":{}}"));
+                Assert.NotNull(
+                    JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>(
+                        @"{""Dictionary"":null}"
+                    )
+                );
+                Assert.NotNull(
+                    JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>(@"{""Dictionary"":{}}")
+                );
 
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>(@"{""Dictionary"":{""Foo"":1}}"));
+                Assert.Throws<NotSupportedException>(
+                    () =>
+                        JsonSerializer.Deserialize<UnsupportedDictionaryWrapper>(
+                            @"{""Dictionary"":{""Foo"":1}}"
+                        )
+                );
             }
 
             [Fact]
@@ -437,13 +493,18 @@ namespace System.Text.Json.Serialization.Tests
                 json = JsonSerializer.Serialize(myEnumFlagsIntDictionary);
                 Assert.Equal(@"{""-1"":1}", json);
 
-                myEnumFlagsIntDictionary = JsonSerializer.Deserialize<Dictionary<MyEnumFlags, int>>(json);
+                myEnumFlagsIntDictionary = JsonSerializer.Deserialize<Dictionary<MyEnumFlags, int>>(
+                    json
+                );
                 Assert.Equal(1, myEnumFlagsIntDictionary[(MyEnumFlags)(-1)]);
             }
 
             [Theory]
             [MemberData(nameof(DictionaryKeysWithSpecialCharacters))]
-            public void EnsureNonStringKeysDontGetEscapedOnSerialize(object key, string expectedKeySerialized)
+            public void EnsureNonStringKeysDontGetEscapedOnSerialize(
+                object key,
+                string expectedKeySerialized
+            )
             {
                 Dictionary<object, int> root = new Dictionary<object, int>();
                 root.Add(key, 1);
@@ -455,14 +516,22 @@ namespace System.Text.Json.Serialization.Tests
             public static IEnumerable<object[]> DictionaryKeysWithSpecialCharacters =>
                 new List<object[]>
                 {
-                    new object[] { float.MaxValue, JsonSerializer.Serialize(float.MaxValue)  },
+                    new object[] { float.MaxValue, JsonSerializer.Serialize(float.MaxValue) },
                     new object[] { double.MaxValue, JsonSerializer.Serialize(double.MaxValue) },
-                    new object[] { DateTimeOffset.MaxValue, JsonSerializer.Serialize(DateTimeOffset.MaxValue) }
+                    new object[]
+                    {
+                        DateTimeOffset.MaxValue,
+                        JsonSerializer.Serialize(DateTimeOffset.MaxValue)
+                    }
                 };
 
             [Theory]
             [MemberData(nameof(EscapedMemberData))]
-            public void TestEscapedValuesOnDeserialize(string escapedPropertyName, object expectedDictionaryKey, Type dictionaryType)
+            public void TestEscapedValuesOnDeserialize(
+                string escapedPropertyName,
+                object expectedDictionaryKey,
+                Type dictionaryType
+            )
             {
                 string json = $@"{{""{escapedPropertyName}"":1}}";
                 IDictionary root = (IDictionary)JsonSerializer.Deserialize(json, dictionaryType);
@@ -474,11 +543,18 @@ namespace System.Text.Json.Serialization.Tests
 
             [Theory]
             [MemberData(nameof(EscapedMemberData))]
-            public async Task TestEscapedValuesOnDeserializeAsync(string escapedPropertyName, object expectedDictionaryKey, Type dictionaryType)
+            public async Task TestEscapedValuesOnDeserializeAsync(
+                string escapedPropertyName,
+                object expectedDictionaryKey,
+                Type dictionaryType
+            )
             {
                 string json = $@"{{""{escapedPropertyName}"":1}}";
                 MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(json));
-                IDictionary root = (IDictionary)await JsonSerializer.DeserializeAsync(stream, dictionaryType);
+                IDictionary root = (IDictionary)await JsonSerializer.DeserializeAsync(
+                    stream,
+                    dictionaryType
+                );
 
                 bool containsKey = root.Contains(expectedDictionaryKey);
                 Assert.True(containsKey);
@@ -488,39 +564,103 @@ namespace System.Text.Json.Serialization.Tests
             public static IEnumerable<object[]> EscapedMemberData =>
                 new List<object[]>
                 {
-                    new object[] { @"\u0031\u0032\u0037",
-                        sbyte.MaxValue, typeof(Dictionary<sbyte, int>) },
-                    new object[] { @"\u0032\u0035\u0035",
-                        byte.MaxValue, typeof(Dictionary<byte, int>) },
-                    new object[] { @"\u0033\u0032\u0037\u0036\u0037",
-                        short.MaxValue, typeof(Dictionary<short, int>) },
-                    new object[] { @"\u0036\u0035\u0035\u0033\u0035",
-                        ushort.MaxValue, typeof(Dictionary<ushort, int>) },
-                    new object[] { @"\u0032\u0031\u0034\u0037\u0034\u0038\u0033\u0036\u0034\u0037",
-                        int.MaxValue, typeof(Dictionary<int, int>) },
-                    new object[] { @"\u0034\u0032\u0039\u0034\u0039\u0036\u0037\u0032\u0039\u0035",
-                        uint.MaxValue, typeof(Dictionary<uint, int>) },
-                    new object[] { @"\u0039\u0032\u0032\u0033\u0033\u0037\u0032\u0030\u0033\u0036\u0038\u0035\u0034\u0037\u0037\u0035\u0038\u0030\u0037",
-                        long.MaxValue, typeof(Dictionary<long, int>) },
-                    new object[] { @"\u0031\u0038\u0034\u0034\u0036\u0037\u0034\u0034\u0030\u0037\u0033\u0037\u0030\u0039\u0035\u0035\u0031\u0036\u0031\u0035",
-                        ulong.MaxValue, typeof(Dictionary<ulong, int>) },
+                    new object[]
+                    {
+                        @"\u0031\u0032\u0037",
+                        sbyte.MaxValue,
+                        typeof(Dictionary<sbyte, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0032\u0035\u0035",
+                        byte.MaxValue,
+                        typeof(Dictionary<byte, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0033\u0032\u0037\u0036\u0037",
+                        short.MaxValue,
+                        typeof(Dictionary<short, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0036\u0035\u0035\u0033\u0035",
+                        ushort.MaxValue,
+                        typeof(Dictionary<ushort, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0032\u0031\u0034\u0037\u0034\u0038\u0033\u0036\u0034\u0037",
+                        int.MaxValue,
+                        typeof(Dictionary<int, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0034\u0032\u0039\u0034\u0039\u0036\u0037\u0032\u0039\u0035",
+                        uint.MaxValue,
+                        typeof(Dictionary<uint, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0039\u0032\u0032\u0033\u0033\u0037\u0032\u0030\u0033\u0036\u0038\u0035\u0034\u0037\u0037\u0035\u0038\u0030\u0037",
+                        long.MaxValue,
+                        typeof(Dictionary<long, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0031\u0038\u0034\u0034\u0036\u0037\u0034\u0034\u0030\u0037\u0033\u0037\u0030\u0039\u0035\u0035\u0031\u0036\u0031\u0035",
+                        ulong.MaxValue,
+                        typeof(Dictionary<ulong, int>)
+                    },
                     // Do not use max values on floating point types since it may have different string representations depending on the tfm.
-                    new object[] { @"\u0033\u002e\u0031\u0032\u0035\u0065\u0037",
-                        3.125e7f, typeof(Dictionary<float, int>) },
-                    new object[] { @"\u0033\u002e\u0031\u0032\u0035\u0065\u0037",
-                        3.125e7d, typeof(Dictionary<double, int>) },
-                    new object[] { @"\u0033\u002e\u0031\u0032\u0035\u0065\u0037",
-                        3.125e7m, typeof(Dictionary<decimal, int>) },
-                    new object[] { @"\u0039\u0039\u0039\u0039\u002d\u0031\u0032\u002d\u0033\u0031\u0054\u0032\u0033\u003a\u0035\u0039\u003a\u0035\u0039\u002e\u0039\u0039\u0039\u0039\u0039\u0039\u0039",
-                        DateTime.MaxValue, typeof(Dictionary<DateTime, int>) },
-                    new object[] { @"\u0039\u0039\u0039\u0039\u002d\u0031\u0032\u002d\u0033\u0031\u0054\u0032\u0033\u003a\u0035\u0039\u003a\u0035\u0039\u002e\u0039\u0039\u0039\u0039\u0039\u0039\u0039\u002b\u0030\u0030\u003a\u0030\u0030",
-                        DateTimeOffset.MaxValue, typeof(Dictionary<DateTimeOffset, int>) },
-                    new object[] { @"\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u002d\u0030\u0030\u0030\u0030\u002d\u0030\u0030\u0030\u0030\u002d\u0030\u0030\u0030\u0030\u002d\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030",
-                        Guid.Empty, typeof(Dictionary<Guid, int>) },
-                    new object[] { @"\u0042\u0061\u0072",
-                        MyEnum.Bar, typeof(Dictionary<MyEnum, int>) },
-                    new object[] { @"\u0042\u0061\u0072\u002c\u0042\u0061\u007a",
-                        MyEnumFlags.Bar | MyEnumFlags.Baz, typeof(Dictionary<MyEnumFlags, int>) },
+                    new object[]
+                    {
+                        @"\u0033\u002e\u0031\u0032\u0035\u0065\u0037",
+                        3.125e7f,
+                        typeof(Dictionary<float, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0033\u002e\u0031\u0032\u0035\u0065\u0037",
+                        3.125e7d,
+                        typeof(Dictionary<double, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0033\u002e\u0031\u0032\u0035\u0065\u0037",
+                        3.125e7m,
+                        typeof(Dictionary<decimal, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0039\u0039\u0039\u0039\u002d\u0031\u0032\u002d\u0033\u0031\u0054\u0032\u0033\u003a\u0035\u0039\u003a\u0035\u0039\u002e\u0039\u0039\u0039\u0039\u0039\u0039\u0039",
+                        DateTime.MaxValue,
+                        typeof(Dictionary<DateTime, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0039\u0039\u0039\u0039\u002d\u0031\u0032\u002d\u0033\u0031\u0054\u0032\u0033\u003a\u0035\u0039\u003a\u0035\u0039\u002e\u0039\u0039\u0039\u0039\u0039\u0039\u0039\u002b\u0030\u0030\u003a\u0030\u0030",
+                        DateTimeOffset.MaxValue,
+                        typeof(Dictionary<DateTimeOffset, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u002d\u0030\u0030\u0030\u0030\u002d\u0030\u0030\u0030\u0030\u002d\u0030\u0030\u0030\u0030\u002d\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030\u0030",
+                        Guid.Empty,
+                        typeof(Dictionary<Guid, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0042\u0061\u0072",
+                        MyEnum.Bar,
+                        typeof(Dictionary<MyEnum, int>)
+                    },
+                    new object[]
+                    {
+                        @"\u0042\u0061\u0072\u002c\u0042\u0061\u007a",
+                        MyEnumFlags.Bar | MyEnumFlags.Baz,
+                        typeof(Dictionary<MyEnumFlags, int>)
+                    },
                     new object[] { @"\u002b", '+', typeof(Dictionary<char, int>) }
                 };
         }
@@ -625,45 +765,61 @@ namespace System.Text.Json.Serialization.Tests
         {
             // TODO: update these tests after https://github.com/dotnet/runtime/issues/50071 is implemented.
 
-            JsonSerializerOptions options = new()
-            {
-                Converters = { new ConverterForInt32(), new ComplexKeyConverter() }
-            };
+            JsonSerializerOptions options =
+                new() { Converters = { new ConverterForInt32(), new ComplexKeyConverter() } };
 
             // Primitive key
-            string json = @"{
+            string json =
+                @"{
     ""PrimitiveKey"":{
         ""1"":""1""
     }
 }
 ";
-            ClassWithNonStringDictKeys obj = new()
-            {
-                PrimitiveKey = new Dictionary<int, string> { [1] = "1" },
-            };
+            ClassWithNonStringDictKeys obj =
+                new() { PrimitiveKey = new Dictionary<int, string> { [1] = "1" }, };
             RunTest(obj, json, typeof(int).ToString(), typeof(ConverterForInt32).ToString());
 
             // Complex key
-            json = @"{
+            json =
+                @"{
     ""ComplexKey"":{
         ""SomeStringRepresentation"":""1""
     }
 }
 ";
-            obj = new()
-            {
-                ComplexKey = new Dictionary<ClassWithIDictionary, string> { [new ClassWithIDictionary()] = "1" },
-            };
-            RunTest(obj, json, typeof(ClassWithIDictionary).ToString(), typeof(ComplexKeyConverter).ToString());
+            obj =
+                new()
+                {
+                    ComplexKey = new Dictionary<ClassWithIDictionary, string>
+                    {
+                        [new ClassWithIDictionary()] = "1"
+                    },
+                };
+            RunTest(
+                obj,
+                json,
+                typeof(ClassWithIDictionary).ToString(),
+                typeof(ComplexKeyConverter).ToString()
+            );
 
-            void RunTest(ClassWithNonStringDictKeys obj, string payload, string keyTypeAsStr, string converterTypeAsStr)
+            void RunTest(
+                ClassWithNonStringDictKeys obj,
+                string payload,
+                string keyTypeAsStr,
+                string converterTypeAsStr
+            )
             {
-                NotSupportedException ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(obj, options));
+                NotSupportedException ex = Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Serialize(obj, options)
+                );
                 string exAsStr = ex.ToString();
                 Assert.Contains(keyTypeAsStr, exAsStr);
                 Assert.Contains(converterTypeAsStr, exAsStr);
 
-                ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<ClassWithNonStringDictKeys>(payload, options));
+                ex = Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<ClassWithNonStringDictKeys>(payload, options)
+                );
                 exAsStr = ex.ToString();
                 Assert.Contains(keyTypeAsStr, exAsStr);
                 Assert.Contains(converterTypeAsStr, exAsStr);
@@ -678,10 +834,16 @@ namespace System.Text.Json.Serialization.Tests
 
         private class ComplexKeyConverter : JsonConverter<ClassWithIDictionary>
         {
-            public override ClassWithIDictionary? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                => throw new NotImplementedException();
-            public override void Write(Utf8JsonWriter writer, ClassWithIDictionary value, JsonSerializerOptions options)
-                => throw new NotImplementedException();
+            public override ClassWithIDictionary? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
+            public override void Write(
+                Utf8JsonWriter writer,
+                ClassWithIDictionary value,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
         }
     }
 }

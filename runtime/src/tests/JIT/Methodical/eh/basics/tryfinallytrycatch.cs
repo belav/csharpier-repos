@@ -57,6 +57,7 @@ namespace hello
                     inTry2();
                     throw new Exception();
                 }
+
                 finally
                 {
                     inFinally();

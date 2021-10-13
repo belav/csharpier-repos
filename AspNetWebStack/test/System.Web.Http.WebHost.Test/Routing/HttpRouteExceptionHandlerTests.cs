@@ -26,7 +26,11 @@ namespace System.Web.Http.WebHost.Routing
             ExceptionDispatchInfo expectedExceptionInfo = CreateExceptionInfo();
             IExceptionLogger logger = CreateDummyLogger();
             IExceptionHandler handler = CreateDummyHandler();
-            HttpRouteExceptionHandler product = CreateProductUnderTest(expectedExceptionInfo, logger, handler);
+            HttpRouteExceptionHandler product = CreateProductUnderTest(
+                expectedExceptionInfo,
+                logger,
+                handler
+            );
 
             // Act
             ExceptionDispatchInfo exceptionInfo = product.ExceptionInfo;
@@ -42,7 +46,11 @@ namespace System.Web.Http.WebHost.Routing
             ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo();
             IExceptionLogger expectedLogger = CreateDummyLogger();
             IExceptionHandler handler = CreateDummyHandler();
-            HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, expectedLogger, handler);
+            HttpRouteExceptionHandler product = CreateProductUnderTest(
+                exceptionInfo,
+                expectedLogger,
+                handler
+            );
 
             // Act
             IExceptionLogger logger = product.ExceptionLogger;
@@ -58,7 +66,11 @@ namespace System.Web.Http.WebHost.Routing
             ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo();
             IExceptionLogger logger = CreateDummyLogger();
             IExceptionHandler expectedHandler = CreateDummyHandler();
-            HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, expectedHandler);
+            HttpRouteExceptionHandler product = CreateProductUnderTest(
+                exceptionInfo,
+                logger,
+                expectedHandler
+            );
 
             // Act
             IExceptionHandler handler = product.ExceptionHandler;
@@ -92,7 +104,9 @@ namespace System.Web.Http.WebHost.Routing
             IExceptionLogger logger = product.ExceptionLogger;
 
             // Assert
-            IExceptionLogger expectedLogger = ExceptionServices.GetLogger(GlobalConfiguration.Configuration);
+            IExceptionLogger expectedLogger = ExceptionServices.GetLogger(
+                GlobalConfiguration.Configuration
+            );
             Assert.Same(expectedLogger, logger);
         }
 
@@ -107,7 +121,9 @@ namespace System.Web.Http.WebHost.Routing
             IExceptionHandler handler = product.ExceptionHandler;
 
             // Assert
-            IExceptionHandler expectedHandler = ExceptionServices.GetHandler(GlobalConfiguration.Configuration);
+            IExceptionHandler expectedHandler = ExceptionServices.GetHandler(
+                GlobalConfiguration.Configuration
+            );
             Assert.Same(expectedHandler, handler);
         }
 
@@ -120,16 +136,24 @@ namespace System.Web.Http.WebHost.Routing
             using (HttpResponseMessage response = CreateResponse(expectedStatusCode))
             using (HttpRequestMessage request = CreateRequest())
             {
-                ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(new HttpResponseException(response));
+                ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(
+                    new HttpResponseException(response)
+                );
                 IExceptionLogger logger = CreateDummyLogger();
                 IExceptionHandler handler = CreateDummyHandler();
 
-                HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, handler);
+                HttpRouteExceptionHandler product = CreateProductUnderTest(
+                    exceptionInfo,
+                    logger,
+                    handler
+                );
 
                 int statusCode = 0;
                 Mock<HttpResponseBase> responseBaseMock = new Mock<HttpResponseBase>();
-                responseBaseMock.SetupSet(r => r.StatusCode = It.IsAny<int>()).Callback<int>((s) => statusCode = s);
-                responseBaseMock.SetupGet(r => r.Cache).Returns(() => new Mock<HttpCachePolicyBase>().Object);
+                responseBaseMock.SetupSet(r => r.StatusCode = It.IsAny<int>())
+                    .Callback<int>((s) => statusCode = s);
+                responseBaseMock.SetupGet(r => r.Cache)
+                    .Returns(() => new Mock<HttpCachePolicyBase>().Object);
                 HttpResponseBase responseBase = responseBaseMock.Object;
                 HttpContextBase contextBase = CreateStubContextBase(responseBase);
                 contextBase.SetHttpRequestMessage(request);
@@ -154,7 +178,11 @@ namespace System.Web.Http.WebHost.Routing
             Mock<IExceptionHandler> handlerMock = CreateStubExceptionHandlerMock();
             IExceptionHandler handler = handlerMock.Object;
 
-            HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, handler);
+            HttpRouteExceptionHandler product = CreateProductUnderTest(
+                exceptionInfo,
+                logger,
+                handler
+            );
 
             HttpResponseBase responseBase = CreateStubResponseBase();
             HttpContextBase contextBase = CreateStubContextBase(responseBase);
@@ -172,10 +200,26 @@ namespace System.Web.Http.WebHost.Routing
                     && c.CatchBlock == WebHostExceptionCatchBlocks.HttpWebRoute
                     && c.Request == expectedRequest;
 
-                loggerMock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>(c =>
-                    exceptionContextMatches(c.ExceptionContext)), CancellationToken.None), Times.Once());
-                handlerMock.Verify(l => l.HandleAsync(It.Is<ExceptionHandlerContext>(c =>
-                    exceptionContextMatches(c.ExceptionContext)), CancellationToken.None), Times.Once());
+                loggerMock.Verify(
+                    l =>
+                        l.LogAsync(
+                            It.Is<ExceptionLoggerContext>(
+                                c => exceptionContextMatches(c.ExceptionContext)
+                            ),
+                            CancellationToken.None
+                        ),
+                    Times.Once()
+                );
+                handlerMock.Verify(
+                    l =>
+                        l.HandleAsync(
+                            It.Is<ExceptionHandlerContext>(
+                                c => exceptionContextMatches(c.ExceptionContext)
+                            ),
+                            CancellationToken.None
+                        ),
+                    Times.Once()
+                );
             }
         }
 
@@ -189,21 +233,37 @@ namespace System.Web.Http.WebHost.Routing
 
             HttpStatusCode expectedStatusCode = HttpStatusCode.Ambiguous;
             Mock<IExceptionHandler> handlerMock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            handlerMock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
-                .Returns<ExceptionHandlerContext, CancellationToken>((c, i) =>
-                {
-                    c.Result = new StatusCodeResult(expectedStatusCode, new HttpRequestMessage());
-                    return Task.FromResult(0);
-                });
+            handlerMock.Setup(
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Returns<ExceptionHandlerContext, CancellationToken>(
+                    (c, i) =>
+                    {
+                        c.Result = new StatusCodeResult(
+                            expectedStatusCode,
+                            new HttpRequestMessage()
+                        );
+                        return Task.FromResult(0);
+                    }
+                );
             IExceptionHandler handler = handlerMock.Object;
 
-            HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, handler);
+            HttpRouteExceptionHandler product = CreateProductUnderTest(
+                exceptionInfo,
+                logger,
+                handler
+            );
 
             int statusCode = 0;
             Mock<HttpResponseBase> responseBaseMock = new Mock<HttpResponseBase>();
-            responseBaseMock.SetupSet(r => r.StatusCode = It.IsAny<int>()).Callback<int>((c) => statusCode = c);
-            responseBaseMock.SetupGet(r => r.Cache).Returns(() => new Mock<HttpCachePolicyBase>().Object);
+            responseBaseMock.SetupSet(r => r.StatusCode = It.IsAny<int>())
+                .Callback<int>((c) => statusCode = c);
+            responseBaseMock.SetupGet(r => r.Cache)
+                .Returns(() => new Mock<HttpCachePolicyBase>().Object);
             HttpResponseBase responseBase = responseBaseMock.Object;
             HttpContextBase contextBase = CreateStubContextBase(responseBase);
             using (HttpRequestMessage request = CreateRequest())
@@ -229,7 +289,11 @@ namespace System.Web.Http.WebHost.Routing
             IExceptionLogger logger = CreateStubExceptionLogger();
             IExceptionHandler handler = CreateStubExceptionHandler();
 
-            HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, handler);
+            HttpRouteExceptionHandler product = CreateProductUnderTest(
+                exceptionInfo,
+                logger,
+                handler
+            );
 
             HttpResponseBase responseBase = CreateStubResponseBase();
             HttpContextBase contextBase = CreateStubContextBase(responseBase);
@@ -239,13 +303,14 @@ namespace System.Web.Http.WebHost.Routing
                 contextBase.SetHttpRequestMessage(request);
 
                 // Act & Assert
-                var exception = await Assert.ThrowsAsync<Exception>(() => product.ProcessRequestAsync(contextBase));
+                var exception = await Assert.ThrowsAsync<Exception>(
+                    () => product.ProcessRequestAsync(contextBase)
+                );
 
                 Assert.Same(expectedException, exception);
                 Assert.NotNull(exception.StackTrace);
                 Assert.StartsWith(expectedStackTrace, exception.StackTrace);
             }
-
         }
 
         [Fact]
@@ -265,17 +330,30 @@ namespace System.Web.Http.WebHost.Routing
             {
                 expectedErrorResponse.Content = CreateFaultingContent(expectedErrorException);
 
-                Mock<IExceptionHandler> handlerMock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-                handlerMock
-                    .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
-                    .Returns<ExceptionHandlerContext, CancellationToken>((c, i) =>
-                    {
-                        c.Result = new ResponseMessageResult(expectedErrorResponse);
-                        return Task.FromResult(0);
-                    });
+                Mock<IExceptionHandler> handlerMock = new Mock<IExceptionHandler>(
+                    MockBehavior.Strict
+                );
+                handlerMock.Setup(
+                        h =>
+                            h.HandleAsync(
+                                It.IsAny<ExceptionHandlerContext>(),
+                                It.IsAny<CancellationToken>()
+                            )
+                    )
+                    .Returns<ExceptionHandlerContext, CancellationToken>(
+                        (c, i) =>
+                        {
+                            c.Result = new ResponseMessageResult(expectedErrorResponse);
+                            return Task.FromResult(0);
+                        }
+                    );
                 IExceptionHandler handler = handlerMock.Object;
 
-                HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, handler);
+                HttpRouteExceptionHandler product = CreateProductUnderTest(
+                    exceptionInfo,
+                    logger,
+                    handler
+                );
 
                 HttpResponseBase responseBase = CreateStubResponseBase(Stream.Null);
                 HttpContextBase contextBase = CreateStubContextBase(responseBase);
@@ -285,19 +363,37 @@ namespace System.Web.Http.WebHost.Routing
                 await product.ProcessRequestAsync(contextBase);
 
                 // Assert
-                loggerMock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>(c =>
-                    c.ExceptionContext != null
-                    && c.ExceptionContext.Exception == expectedOriginalException
-                    && c.ExceptionContext.CatchBlock == WebHostExceptionCatchBlocks.HttpWebRoute
-                    && c.ExceptionContext.Request == expectedRequest),
-                    CancellationToken.None), Times.Once());
-                loggerMock.Verify(l => l.LogAsync(It.Is<ExceptionLoggerContext>(c =>
-                    c.ExceptionContext != null
-                    && c.ExceptionContext.Exception == expectedErrorException
-                    && c.ExceptionContext.CatchBlock == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError
-                    && c.ExceptionContext.Request == expectedRequest
-                    && c.ExceptionContext.Response == expectedErrorResponse),
-                    CancellationToken.None), Times.Once());
+                loggerMock.Verify(
+                    l =>
+                        l.LogAsync(
+                            It.Is<ExceptionLoggerContext>(
+                                c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedOriginalException
+                                    && c.ExceptionContext.CatchBlock
+                                        == WebHostExceptionCatchBlocks.HttpWebRoute
+                                    && c.ExceptionContext.Request == expectedRequest
+                            ),
+                            CancellationToken.None
+                        ),
+                    Times.Once()
+                );
+                loggerMock.Verify(
+                    l =>
+                        l.LogAsync(
+                            It.Is<ExceptionLoggerContext>(
+                                c =>
+                                    c.ExceptionContext != null
+                                    && c.ExceptionContext.Exception == expectedErrorException
+                                    && c.ExceptionContext.CatchBlock
+                                        == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError
+                                    && c.ExceptionContext.Request == expectedRequest
+                                    && c.ExceptionContext.Response == expectedErrorResponse
+                            ),
+                            CancellationToken.None
+                        ),
+                    Times.Once()
+                );
             }
         }
 
@@ -311,14 +407,21 @@ namespace System.Web.Http.WebHost.Routing
             {
                 request.RegisterForDispose(spy);
 
-                ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(new HttpResponseException(response));
+                ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(
+                    new HttpResponseException(response)
+                );
                 IExceptionLogger logger = CreateDummyLogger();
                 IExceptionHandler handler = CreateDummyHandler();
 
-                HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, handler);
+                HttpRouteExceptionHandler product = CreateProductUnderTest(
+                    exceptionInfo,
+                    logger,
+                    handler
+                );
 
                 Mock<HttpResponseBase> responseBaseMock = new Mock<HttpResponseBase>();
-                responseBaseMock.SetupGet(r => r.Cache).Returns(() => new Mock<HttpCachePolicyBase>().Object);
+                responseBaseMock.SetupGet(r => r.Cache)
+                    .Returns(() => new Mock<HttpCachePolicyBase>().Object);
                 HttpResponseBase responseBase = responseBaseMock.Object;
                 HttpContextBase contextBase = CreateStubContextBase(responseBase);
                 contextBase.SetHttpRequestMessage(request);
@@ -328,10 +431,14 @@ namespace System.Web.Http.WebHost.Routing
 
                 // Assert
                 Assert.True(spy.Disposed);
-                Assert.ThrowsObjectDisposed(() => request.Method = HttpMethod.Get,
-                    typeof(HttpRequestMessage).FullName);
-                Assert.ThrowsObjectDisposed(() => response.StatusCode = HttpStatusCode.OK,
-                    typeof(HttpResponseMessage).FullName);
+                Assert.ThrowsObjectDisposed(
+                    () => request.Method = HttpMethod.Get,
+                    typeof(HttpRequestMessage).FullName
+                );
+                Assert.ThrowsObjectDisposed(
+                    () => response.StatusCode = HttpStatusCode.OK,
+                    typeof(HttpResponseMessage).FullName
+                );
             }
         }
 
@@ -346,18 +453,35 @@ namespace System.Web.Http.WebHost.Routing
 
                 ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(CreateException());
                 Mock<IExceptionLogger> loggerMock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-                loggerMock
-                    .Setup(l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>()))
+                loggerMock.Setup(
+                        l =>
+                            l.LogAsync(
+                                It.IsAny<ExceptionLoggerContext>(),
+                                It.IsAny<CancellationToken>()
+                            )
+                    )
                     .Returns(Task.FromResult(0));
-                Mock<IExceptionHandler> handlerMock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-                handlerMock
-                    .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+                Mock<IExceptionHandler> handlerMock = new Mock<IExceptionHandler>(
+                    MockBehavior.Strict
+                );
+                handlerMock.Setup(
+                        h =>
+                            h.HandleAsync(
+                                It.IsAny<ExceptionHandlerContext>(),
+                                It.IsAny<CancellationToken>()
+                            )
+                    )
                     .Returns(Task.FromResult(0));
 
-                HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, loggerMock.Object, handlerMock.Object);
+                HttpRouteExceptionHandler product = CreateProductUnderTest(
+                    exceptionInfo,
+                    loggerMock.Object,
+                    handlerMock.Object
+                );
 
                 Mock<HttpResponseBase> responseBaseMock = new Mock<HttpResponseBase>();
-                responseBaseMock.SetupGet(r => r.Cache).Returns(() => new Mock<HttpCachePolicyBase>().Object);
+                responseBaseMock.SetupGet(r => r.Cache)
+                    .Returns(() => new Mock<HttpCachePolicyBase>().Object);
                 HttpResponseBase responseBase = responseBaseMock.Object;
                 HttpContextBase contextBase = CreateStubContextBase(responseBase);
                 contextBase.SetHttpRequestMessage(request);
@@ -366,8 +490,10 @@ namespace System.Web.Http.WebHost.Routing
                 await Assert.ThrowsAsync<Exception>(() => product.ProcessRequestAsync(contextBase));
 
                 Assert.True(spy.Disposed);
-                Assert.ThrowsObjectDisposed(() => request.Method = HttpMethod.Get,
-                    typeof(HttpRequestMessage).FullName);
+                Assert.ThrowsObjectDisposed(
+                    () => request.Method = HttpMethod.Get,
+                    typeof(HttpRequestMessage).FullName
+                );
             }
         }
 
@@ -378,18 +504,29 @@ namespace System.Web.Http.WebHost.Routing
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
-                ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(new OperationCanceledException());
+                ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(
+                    new OperationCanceledException()
+                );
                 IExceptionLogger logger = CreateDummyLogger();
                 IExceptionHandler handler = CreateDummyHandler();
 
-                HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, handler);
+                HttpRouteExceptionHandler product = CreateProductUnderTest(
+                    exceptionInfo,
+                    logger,
+                    handler
+                );
 
                 Mock<HttpRequestBase> requestBase = new Mock<HttpRequestBase>(MockBehavior.Strict);
                 requestBase.Setup(r => r.Abort()).Verifiable();
 
-                Mock<HttpResponseBase> responseBase = new Mock<HttpResponseBase>(MockBehavior.Strict);
+                Mock<HttpResponseBase> responseBase = new Mock<HttpResponseBase>(
+                    MockBehavior.Strict
+                );
 
-                HttpContextBase contextBase = CreateStubContextBase(requestBase.Object, responseBase.Object);
+                HttpContextBase contextBase = CreateStubContextBase(
+                    requestBase.Object,
+                    responseBase.Object
+                );
                 contextBase.SetHttpRequestMessage(request);
 
                 // Act
@@ -408,19 +545,31 @@ namespace System.Web.Http.WebHost.Routing
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
-                ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(new HttpResponseException(HttpStatusCode.OK));
+                ExceptionDispatchInfo exceptionInfo = CreateExceptionInfo(
+                    new HttpResponseException(HttpStatusCode.OK)
+                );
                 IExceptionLogger logger = CreateDummyLogger();
                 IExceptionHandler handler = CreateDummyHandler();
 
-                HttpRouteExceptionHandler product = CreateProductUnderTest(exceptionInfo, logger, handler);
+                HttpRouteExceptionHandler product = CreateProductUnderTest(
+                    exceptionInfo,
+                    logger,
+                    handler
+                );
 
                 Mock<HttpRequestBase> requestBase = new Mock<HttpRequestBase>(MockBehavior.Strict);
                 requestBase.Setup(r => r.Abort()).Verifiable();
 
-                Mock<HttpResponseBase> responseBase = new Mock<HttpResponseBase>(MockBehavior.Strict);
-                responseBase.SetupSet(r => r.StatusCode = It.IsAny<int>()).Throws(new OperationCanceledException());
+                Mock<HttpResponseBase> responseBase = new Mock<HttpResponseBase>(
+                    MockBehavior.Strict
+                );
+                responseBase.SetupSet(r => r.StatusCode = It.IsAny<int>())
+                    .Throws(new OperationCanceledException());
 
-                HttpContextBase contextBase = CreateStubContextBase(requestBase.Object, responseBase.Object);
+                HttpContextBase contextBase = CreateStubContextBase(
+                    requestBase.Object,
+                    responseBase.Object
+                );
                 contextBase.SetHttpRequestMessage(request);
 
                 // Act
@@ -473,13 +622,18 @@ namespace System.Web.Http.WebHost.Routing
             return new FaultingHttpContent(exception);
         }
 
-        private static HttpRouteExceptionHandler CreateProductUnderTest(ExceptionDispatchInfo exceptionInfo)
+        private static HttpRouteExceptionHandler CreateProductUnderTest(
+            ExceptionDispatchInfo exceptionInfo
+        )
         {
             return new HttpRouteExceptionHandler(exceptionInfo);
         }
 
-        private static HttpRouteExceptionHandler CreateProductUnderTest(ExceptionDispatchInfo exceptionInfo,
-            IExceptionLogger exceptionLogger, IExceptionHandler exceptionHandler)
+        private static HttpRouteExceptionHandler CreateProductUnderTest(
+            ExceptionDispatchInfo exceptionInfo,
+            IExceptionLogger exceptionLogger,
+            IExceptionHandler exceptionHandler
+        )
         {
             return new HttpRouteExceptionHandler(exceptionInfo, exceptionLogger, exceptionHandler);
         }
@@ -504,7 +658,10 @@ namespace System.Web.Http.WebHost.Routing
             return CreateStubContextBase(request: null, response: response);
         }
 
-        private static HttpContextBase CreateStubContextBase(HttpRequestBase request, HttpResponseBase response)
+        private static HttpContextBase CreateStubContextBase(
+            HttpRequestBase request,
+            HttpResponseBase response
+        )
         {
             Mock<HttpContextBase> mock = new Mock<HttpContextBase>();
             mock.SetupGet(m => m.Request).Returns(request);
@@ -524,8 +681,13 @@ namespace System.Web.Http.WebHost.Routing
         private static Mock<IExceptionHandler> CreateStubExceptionHandlerMock()
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(Task.FromResult(0));
             return mock;
         }
@@ -538,8 +700,13 @@ namespace System.Web.Http.WebHost.Routing
         private static Mock<IExceptionLogger> CreateStubExceptionLoggerMock()
         {
             Mock<IExceptionLogger> mock = new Mock<IExceptionLogger>(MockBehavior.Strict);
-            mock
-                .Setup(l => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(
+                    l =>
+                        l.LogAsync(
+                            It.IsAny<ExceptionLoggerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(Task.FromResult(0));
             return mock;
         }

@@ -67,7 +67,9 @@ namespace Microsoft.AspNetCore.SignalR
             {
                 if (value < 1)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(MaximumParallelInvocationsPerClient));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(MaximumParallelInvocationsPerClient)
+                    );
                 }
 
                 _maximumParallelInvocationsPerClient = value;

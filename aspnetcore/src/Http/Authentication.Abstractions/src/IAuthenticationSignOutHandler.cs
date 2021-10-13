@@ -17,5 +17,4 @@ namespace Microsoft.AspNetCore.Authentication
         /// <returns>A task.</returns>
         Task SignOutAsync(AuthenticationProperties? properties);
     }
-
 }

@@ -20,8 +20,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             throw new NotImplementedException();
         }
 
-        public override object[] GetArguments()
-            => _arguments;
+        public override object[] GetArguments() => _arguments;
 
         public override string ToString(IFormatProvider formatProvider)
         {

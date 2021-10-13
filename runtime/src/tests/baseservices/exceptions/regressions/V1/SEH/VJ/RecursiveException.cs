@@ -4,46 +4,55 @@ using System;
 using System.Threading;
 using System.IO;
 
-class UserException : Exception {
-	
+class UserException : Exception
+{
 }
 
-public class RecursiveException {
-	public static int Main(String [] args) {
-		String s = "Done";
-		int retVal = 100;
-		Thread mv_Thread;
-		RecursiveException re = new RecursiveException();
-		for (int i = 0 ; i < 10; i++){
-			mv_Thread = new Thread(new ThreadStart(re.runtest));
-			try {
-				mv_Thread.Start();
-			}
-			catch (Exception ){
-				    Console.WriteLine("Exception was caught in main");
-					retVal = 0;
-			}
-		}
-		Console.WriteLine(s);
-		return retVal;
-	}
-		
-	public void runtest(){
-		try {
-			recurse(0);
-		}
-		catch (UserException ) {
-		    lock(this)
-			{
-			    Console.WriteLine("The Exception was caught");
-			}
-		}
-	}
-	
-	public void recurse(int counter) {	
-		if (counter == 1000) 
-			throw new UserException();
-		else
-			recurse(++counter);
-	}
+public class RecursiveException
+{
+    public static int Main(String[] args)
+    {
+        String s = "Done";
+        int retVal = 100;
+        Thread mv_Thread;
+        RecursiveException re = new RecursiveException();
+        for (int i = 0; i < 10; i++)
+        {
+            mv_Thread = new Thread(new ThreadStart(re.runtest));
+            try
+            {
+                mv_Thread.Start();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Exception was caught in main");
+                retVal = 0;
+            }
+        }
+        Console.WriteLine(s);
+        return retVal;
+    }
+
+    public void runtest()
+    {
+        try
+        {
+            recurse(0);
+        }
+        catch (UserException)
+        {
+            lock (this)
+            {
+                Console.WriteLine("The Exception was caught");
+            }
+        }
+    }
+
+    public void recurse(int counter)
+    {
+        if (counter == 1000)
+            throw new UserException();
+        else
+            recurse(++counter);
+    }
 }

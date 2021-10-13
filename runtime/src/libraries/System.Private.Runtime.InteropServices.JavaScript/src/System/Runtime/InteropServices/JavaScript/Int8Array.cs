@@ -8,32 +8,25 @@ namespace System.Runtime.InteropServices.JavaScript
     [CLSCompliant(false)]
     public sealed class Int8Array : TypedArray<Int8Array, sbyte>
     {
-        public Int8Array()
-        { }
+        public Int8Array() { }
 
-        public Int8Array(int length) : base(length)
-        { }
+        public Int8Array(int length) : base(length) { }
 
-        public Int8Array(ArrayBuffer buffer) : base(buffer)
-        { }
+        public Int8Array(ArrayBuffer buffer) : base(buffer) { }
 
-        public Int8Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset)
-        { }
+        public Int8Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Int8Array(ArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length)
-        { }
+        public Int8Array(ArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
-        public Int8Array(SharedArrayBuffer buffer) : base(buffer)
-        { }
+        public Int8Array(SharedArrayBuffer buffer) : base(buffer) { }
 
-        public Int8Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset)
-        { }
+        public Int8Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
 
-        public Int8Array(SharedArrayBuffer buffer, int byteOffset, int length) : base(buffer, byteOffset, length)
-        { }
+        public Int8Array(SharedArrayBuffer buffer, int byteOffset, int length)
+            : base(buffer, byteOffset, length) { }
 
-        internal Int8Array(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle)
-        { }
+        internal Int8Array(IntPtr jsHandle, bool ownsHandle) : base(jsHandle, ownsHandle) { }
 
         /// <summary>
         /// Defines an implicit conversion of Int8Array class to a sbyte

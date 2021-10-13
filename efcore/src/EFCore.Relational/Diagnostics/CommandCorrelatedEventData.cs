@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Guid commandId,
             Guid connectionId,
             bool async,
-            DateTimeOffset startTime)
-            : base(eventDefinition, messageGenerator, context)
+            DateTimeOffset startTime
+        ) : base(eventDefinition, messageGenerator, context)
         {
             Connection = connection;
             CommandId = commandId;

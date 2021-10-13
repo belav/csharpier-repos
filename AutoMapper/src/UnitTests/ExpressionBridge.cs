@@ -48,12 +48,16 @@ namespace AutoMapper.UnitTests
             public List<ProductTypeDto> Types { get; set; }
         }
         public abstract class ProductTypeDto { }
-        public class ProdTypeA : ProductTypeDto {}
-        public class ProdTypeB : ProductTypeDto {}
+        public class ProdTypeA : ProductTypeDto { }
+        public class ProdTypeB : ProductTypeDto { }
 
         public class ProductTypeConverter : ITypeConverter<ProductType, ProductTypeDto>
         {
-            public ProductTypeDto Convert(ProductType source, ProductTypeDto destination, ResolutionContext context)
+            public ProductTypeDto Convert(
+                ProductType source,
+                ProductTypeDto destination,
+                ResolutionContext context
+            )
             {
                 if (source.Name == "A")
                     return new ProdTypeA();
@@ -62,7 +66,6 @@ namespace AutoMapper.UnitTests
                 throw new ArgumentException();
             }
         }
-
 
         public class ProductType
         {
@@ -109,25 +112,36 @@ namespace AutoMapper.UnitTests
 
             protected override void Establish_context()
             {
-                _config = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateProjection<Product, SimpleProductDto>()
-                        .ForMember(m => m.CategoryName, dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name));
-                    cfg.CreateProjection<Product, ExtendedProductDto>()
-                        .ForMember(m => m.CategoryName, dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name))
-                        .ForMember(m => m.BOM, dst => dst.MapFrom(p => p.BillOfMaterials));
-                    cfg.CreateProjection<BillOfMaterials, BillOfMaterialsDto>();
-                    cfg.CreateProjection<Product, ComplexProductDto>();
-                    cfg.CreateProjection<ProductSubcategory, ProductSubcategoryDto>();
-                    cfg.CreateProjection<ProductCategory, ProductCategoryDto>();
-                    cfg.CreateProjection<Product, AbstractProductDto>();
-                    cfg.CreateMap<ProductType, ProductTypeDto>()
-                        //.ConvertUsing(x => ProductTypeDto.GetProdType(x));
-                        .ConvertUsing<ProductTypeConverter>();
-                });
-                _simpleProductConversionLinq = _config.Internal().ProjectionBuilder.GetMapExpression<Product, SimpleProductDto>();
-                _extendedProductConversionLinq = _config.Internal().ProjectionBuilder.GetMapExpression<Product, ExtendedProductDto>();
-                _abstractProductConversionLinq = _config.Internal().ProjectionBuilder.GetMapExpression<Product, AbstractProductDto>();
+                _config = new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.CreateProjection<Product, SimpleProductDto>()
+                            .ForMember(
+                                m => m.CategoryName,
+                                dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name)
+                            );
+                        cfg.CreateProjection<Product, ExtendedProductDto>()
+                            .ForMember(
+                                m => m.CategoryName,
+                                dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name)
+                            )
+                            .ForMember(m => m.BOM, dst => dst.MapFrom(p => p.BillOfMaterials));
+                        cfg.CreateProjection<BillOfMaterials, BillOfMaterialsDto>();
+                        cfg.CreateProjection<Product, ComplexProductDto>();
+                        cfg.CreateProjection<ProductSubcategory, ProductSubcategoryDto>();
+                        cfg.CreateProjection<ProductCategory, ProductCategoryDto>();
+                        cfg.CreateProjection<Product, AbstractProductDto>();
+                        cfg.CreateMap<ProductType, ProductTypeDto>()
+                            //.ConvertUsing(x => ProductTypeDto.GetProdType(x));
+                            .ConvertUsing<ProductTypeConverter>();
+                    }
+                );
+                _simpleProductConversionLinq = _config.Internal()
+                    .ProjectionBuilder.GetMapExpression<Product, SimpleProductDto>();
+                _extendedProductConversionLinq = _config.Internal()
+                    .ProjectionBuilder.GetMapExpression<Product, ExtendedProductDto>();
+                _abstractProductConversionLinq = _config.Internal()
+                    .ProjectionBuilder.GetMapExpression<Product, AbstractProductDto>();
 
                 _products = new List<Product>()
                 {
@@ -137,25 +151,18 @@ namespace AutoMapper.UnitTests
                         ProductSubcategory = new ProductSubcategory
                         {
                             Name = "Bar",
-                            ProductCategory = new ProductCategory
-                            {
-                                Name = "Baz"
-                            }
+                            ProductCategory = new ProductCategory { Name = "Baz" }
                         },
                         BillOfMaterials = new List<BillOfMaterials>
                         {
-                            new BillOfMaterials
-                            {
-                                BillOfMaterialsID = 5
-                            }
-                        }
-                        ,
+                            new BillOfMaterials { BillOfMaterialsID = 5 }
+                        },
                         Types = new List<ProductType>
-                                    {
-                                        new ProductType() { Name = "A" },
-                                        new ProductType() { Name = "B" },
-                                        new ProductType() { Name = "A" }
-                                    }
+                        {
+                            new ProductType() { Name = "A" },
+                            new ProductType() { Name = "B" },
+                            new ProductType() { Name = "A" }
+                        }
                     }
                 };
             }
@@ -167,14 +174,11 @@ namespace AutoMapper.UnitTests
                 _simpleProducts = queryable.Select(_simpleProductConversionLinq).ToList();
 
                 _extendedProducts = queryable.Select(_extendedProductConversionLinq).ToList();
-
             }
 
             [Fact]
             public void Should_map_and_flatten()
             {
-
-
                 _simpleProducts.Count.ShouldBe(1);
                 _simpleProducts[0].Name.ShouldBe("Foo");
                 _simpleProducts[0].ProductSubcategoryName.ShouldBe("Bar");
@@ -187,12 +191,10 @@ namespace AutoMapper.UnitTests
                 _extendedProducts[0].BOM.Count.ShouldBe(1);
                 _extendedProducts[0].BOM[0].BillOfMaterialsID.ShouldBe(5);
             }
-           
+
             [Fact]
             public void Should_use_extension_methods()
             {
-
-                
                 var queryable = _products.AsQueryable();
 
                 var simpleProducts = queryable.ProjectTo<SimpleProductDto>(_config).ToList();
@@ -264,11 +266,14 @@ namespace AutoMapper.UnitTests
             {
                 private IQueryable<BEntity> _bei;
 
-                protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-                {
-                    cfg.CreateProjection<BEntity, B>().MaxDepth(3);
-                    cfg.CreateProjection<AEntity, A>().MaxDepth(3);
-                });
+                protected override MapperConfiguration Configuration { get; } =
+                    new MapperConfiguration(
+                        cfg =>
+                        {
+                            cfg.CreateProjection<BEntity, B>().MaxDepth(3);
+                            cfg.CreateProjection<AEntity, A>().MaxDepth(3);
+                        }
+                    );
 
                 protected override void Because_of()
                 {

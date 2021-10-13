@@ -49,7 +49,10 @@ namespace Microsoft.AspNetCore.Components.Rendering
             Assert.Same(builder.Buffer, segment.Array);
             Assert.NotSame(originalBuffer, segment.Array); // Since there was a resize
             Assert.Equal(new[] { 1, 2, 3, 4, 5 }, segment);
-            Assert.Equal(new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }, builder.ToSegment(0, builder.Count));
+            Assert.Equal(
+                new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                builder.ToSegment(0, builder.Count)
+            );
         }
     }
 }

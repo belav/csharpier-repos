@@ -31,12 +31,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         }
 
         [Theory]
-
         // These aren't ICollection<> - we can handle them by creating a List<>
         [InlineData(typeof(IEnumerable<int>))]
         [InlineData(typeof(IReadOnlyCollection<int>))]
         [InlineData(typeof(IReadOnlyList<int>))]
-
         // These are ICollection<> - we can handle them by adding items to the existing collection or
         // creating a new one.
         [InlineData(typeof(ICollection<int>))]
@@ -51,12 +49,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var context = new TestModelBinderProviderContext(modelType);
 
             Type elementType = null;
-            context.OnCreatingBinder(m =>
-            {
-                Assert.Equal(typeof(int), m.ModelType);
-                elementType = m.ModelType;
-                return Mock.Of<IModelBinder>();
-            });
+            context.OnCreatingBinder(
+                m =>
+                {
+                    Assert.Equal(typeof(int), m.ModelType);
+                    elementType = m.ModelType;
+                    return Mock.Of<IModelBinder>();
+                }
+            );
 
             // Act
             var result = provider.GetBinder(context);
@@ -73,11 +73,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             var provider = new CollectionModelBinderProvider();
 
             var context = new TestModelBinderProviderContext(typeof(List<int>));
-            context.OnCreatingBinder(m =>
-            {
-                Assert.Equal(typeof(int), m.ModelType);
-                return Mock.Of<IModelBinder>();
-            });
+            context.OnCreatingBinder(
+                m =>
+                {
+                    Assert.Equal(typeof(int), m.ModelType);
+                    return Mock.Of<IModelBinder>();
+                }
+            );
 
             // Act
             var result = provider.GetBinder(context);

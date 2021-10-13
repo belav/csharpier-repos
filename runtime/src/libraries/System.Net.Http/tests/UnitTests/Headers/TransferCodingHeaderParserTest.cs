@@ -42,7 +42,9 @@ namespace System.Net.Http.Tests
 
             TransferCodingHeaderValue expected = new TransferCodingHeaderValue("custom");
             expected.Parameters.Add(new NameValueHeaderValue("name", "value"));
-            Assert.True(expected.Equals(parser.ParseValue("   custom ; name = value ", null, ref index)));
+            Assert.True(
+                expected.Equals(parser.ParseValue("   custom ; name = value ", null, ref index))
+            );
             Assert.Equal(25, index);
         }
 
@@ -53,7 +55,12 @@ namespace System.Net.Http.Tests
             TransferCodingHeaderParser parser = TransferCodingHeaderParser.MultipleValueParser;
             int index = 0;
 
-            Assert.Throws<FormatException>(() => { parser.ParseValue("custom;=value", null, ref index); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    parser.ParseValue("custom;=value", null, ref index);
+                }
+            );
         }
 
         [Fact]
@@ -96,13 +103,19 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int index, TransferCodingHeaderValue expectedResult,
-            int expectedIndex)
+        private void CheckValidParsedValue(
+            string input,
+            int index,
+            TransferCodingHeaderValue expectedResult,
+            int expectedIndex
+        )
         {
             TransferCodingHeaderParser parser = TransferCodingHeaderParser.MultipleValueParser;
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref index, out result),
-                string.Format("TryParse returned false. Input: '{0}', Index: {1}", input, index));
+            Assert.True(
+                parser.TryParseValue(input, null, ref index, out result),
+                string.Format("TryParse returned false. Input: '{0}', Index: {1}", input, index)
+            );
             Assert.Equal(expectedIndex, index);
             Assert.Equal(result, expectedResult);
         }
@@ -112,8 +125,10 @@ namespace System.Net.Http.Tests
             TransferCodingHeaderParser parser = TransferCodingHeaderParser.MultipleValueParser;
             object result = null;
             int newIndex = index;
-            Assert.False(parser.TryParseValue(source, null, ref newIndex, out result),
-                string.Format("TryParse returned true. Input: '{0}', Index: {1}", source, index));
+            Assert.False(
+                parser.TryParseValue(source, null, ref newIndex, out result),
+                string.Format("TryParse returned true. Input: '{0}', Index: {1}", source, index)
+            );
             Assert.Null(result);
             Assert.Equal(index, newIndex);
         }

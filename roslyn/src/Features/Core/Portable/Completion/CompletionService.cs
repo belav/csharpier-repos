@@ -27,8 +27,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// Gets the service corresponding to the specified document.
         /// </summary>
-        public static CompletionService GetService(Document document)
-            => document?.GetLanguageService<CompletionService>();
+        public static CompletionService GetService(Document document) =>
+            document?.GetLanguageService<CompletionService>();
 
         /// <summary>
         /// The language from <see cref="LanguageNames"/> this service corresponds to.
@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int caretPosition,
             CompletionTrigger trigger,
             ImmutableHashSet<string> roles = null,
-            OptionSet options = null)
+            OptionSet options = null
+        )
         {
             return false;
         }
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int caretPosition,
             CompletionTrigger trigger,
             ImmutableHashSet<string> roles = null,
-            OptionSet options = null)
+            OptionSet options = null
+        )
         {
             return ShouldTriggerCompletion(text, caretPosition, trigger, roles, options);
         }
@@ -92,14 +94,21 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         /// <param name="text">The document text that completion is occurring within.</param>
         /// <param name="caretPosition">The position of the caret within the text.</param>
-        [Obsolete("Not used anymore. CompletionService.GetDefaultCompletionListSpan is used instead.", error: true)]
-        public virtual TextSpan GetDefaultItemSpan(SourceText text, int caretPosition)
-            => GetDefaultCompletionListSpan(text, caretPosition);
+        [Obsolete(
+            "Not used anymore. CompletionService.GetDefaultCompletionListSpan is used instead.",
+            error: true
+        )]
+        public virtual TextSpan GetDefaultItemSpan(SourceText text, int caretPosition) =>
+            GetDefaultCompletionListSpan(text, caretPosition);
 
         public virtual TextSpan GetDefaultCompletionListSpan(SourceText text, int caretPosition)
         {
             return CommonCompletionUtilities.GetWordSpan(
-                text, caretPosition, c => char.IsLetter(c), c => char.IsLetterOrDigit(c));
+                text,
+                caretPosition,
+                c => char.IsLetter(c),
+                c => char.IsLetterOrDigit(c)
+            );
         }
 
         /// <summary>
@@ -117,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger = default,
             ImmutableHashSet<string> roles = null,
             OptionSet options = null,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Gets the completions available at the caret position, with additional info indicates 
@@ -127,14 +137,23 @@ namespace Microsoft.CodeAnalysis.Completion
         /// expandItemsAvailable is true when expanded items are returned or can be provided upon request.
         /// </remarks>
         internal virtual async Task<(CompletionList completionList, bool expandItemsAvailable)> GetCompletionsInternalAsync(
-             Document document,
-             int caretPosition,
-             CompletionTrigger trigger = default,
-             ImmutableHashSet<string> roles = null,
-             OptionSet options = null,
-             CancellationToken cancellationToken = default)
+            Document document,
+            int caretPosition,
+            CompletionTrigger trigger = default,
+            ImmutableHashSet<string> roles = null,
+            OptionSet options = null,
+            CancellationToken cancellationToken = default
+        )
         {
-            var completionList = await GetCompletionsAsync(document, caretPosition, trigger, roles, options, cancellationToken).ConfigureAwait(false);
+            var completionList = await GetCompletionsAsync(
+                    document,
+                    caretPosition,
+                    trigger,
+                    roles,
+                    options,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return (completionList, false);
         }
 
@@ -148,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Completion
         public virtual Task<CompletionDescription> GetDescriptionAsync(
             Document document,
             CompletionItem item,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             return Task.FromResult(CompletionDescription.Empty);
         }
@@ -166,9 +186,12 @@ namespace Microsoft.CodeAnalysis.Completion
             Document document,
             CompletionItem item,
             char? commitCharacter = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            return Task.FromResult(CompletionChange.Create(new TextChange(item.Span, item.DisplayText)));
+            return Task.FromResult(
+                CompletionChange.Create(new TextChange(item.Span, item.DisplayText))
+            );
         }
 
         /// <summary>
@@ -185,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Completion
             TextSpan completionListSpan,
             char? commitCharacter = null,
             bool disallowAddingImports = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             return GetChangeAsync(document, item, commitCharacter, cancellationToken);
         }
@@ -201,36 +225,54 @@ namespace Microsoft.CodeAnalysis.Completion
         public virtual ImmutableArray<CompletionItem> FilterItems(
             Document document,
             ImmutableArray<CompletionItem> items,
-            string filterText)
+            string filterText
+        )
         {
             var helper = CompletionHelper.GetHelper(document);
             return FilterItems(helper, items, filterText);
         }
 
         internal virtual ImmutableArray<CompletionItem> FilterItems(
-           Document document,
-           ImmutableArray<(CompletionItem, PatternMatch?)> itemsWithPatternMatch,
-           string filterText)
+            Document document,
+            ImmutableArray<(CompletionItem, PatternMatch?)> itemsWithPatternMatch,
+            string filterText
+        )
         {
             // Default implementation just drops the pattern matches and
             // calls the public overload of FilterItems for compatibility.
-            return FilterItems(document, itemsWithPatternMatch.SelectAsArray(item => item.Item1), filterText);
+            return FilterItems(
+                document,
+                itemsWithPatternMatch.SelectAsArray(item => item.Item1),
+                filterText
+            );
         }
 
         internal static ImmutableArray<CompletionItem> FilterItems(
             CompletionHelper completionHelper,
             ImmutableArray<CompletionItem> items,
-            string filterText)
+            string filterText
+        )
         {
             var itemsWithPatternMatch = items.SelectAsArray(
-                item => (item, completionHelper.GetMatch(item.FilterText, filterText, includeMatchSpans: false, CultureInfo.CurrentCulture)));
+                item =>
+                    (
+                        item,
+                        completionHelper.GetMatch(
+                            item.FilterText,
+                            filterText,
+                            includeMatchSpans: false,
+                            CultureInfo.CurrentCulture
+                        )
+                    )
+            );
 
             return FilterItems(completionHelper, itemsWithPatternMatch);
         }
 
         internal static ImmutableArray<CompletionItem> FilterItems(
             CompletionHelper completionHelper,
-            ImmutableArray<(CompletionItem item, PatternMatch? match)> itemsWithPatternMatch)
+            ImmutableArray<(CompletionItem item, PatternMatch? match)> itemsWithPatternMatch
+        )
         {
             var bestItems = ArrayBuilder<(CompletionItem, PatternMatch?)>.GetInstance();
             foreach (var pair in itemsWithPatternMatch)
@@ -243,7 +285,12 @@ namespace Microsoft.CodeAnalysis.Completion
                 else
                 {
                     var (bestItem, bestItemMatch) = bestItems.First();
-                    var comparison = completionHelper.CompareItems(pair.item, pair.match, bestItem, bestItemMatch);
+                    var comparison = completionHelper.CompareItems(
+                        pair.item,
+                        pair.match,
+                        bestItem,
+                        bestItemMatch
+                    );
                     if (comparison < 0)
                     {
                         // This item is strictly better than the best items we've found so far.
@@ -252,7 +299,7 @@ namespace Microsoft.CodeAnalysis.Completion
                     }
                     else if (comparison == 0)
                     {
-                        // This item is as good as the items we've been collecting.  We'll return 
+                        // This item is as good as the items we've been collecting.  We'll return
                         // it and let the controller decide what to do.  (For example, it will
                         // pick the one that has the best MRU index).
                         bestItems.Add(pair);
@@ -262,7 +309,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 }
             }
 
-            return bestItems.ToImmutableAndFree().SelectAsArray(itemWithPatternMatch => itemWithPatternMatch.Item1);
+            return bestItems.ToImmutableAndFree()
+                .SelectAsArray(itemWithPatternMatch => itemWithPatternMatch.Item1);
         }
     }
 }

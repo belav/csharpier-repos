@@ -31,30 +31,39 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
     [TagType(typeof(ActiveStatementTag))]
     [ContentType(ContentTypeNames.CSharpContentType)]
     [ContentType(ContentTypeNames.VisualBasicContentType)]
-    internal partial class ActiveStatementTaggerProvider : AsynchronousTaggerProvider<ITextMarkerTag>
+    internal partial class ActiveStatementTaggerProvider
+        : AsynchronousTaggerProvider<ITextMarkerTag>
     {
         // We want to track text changes so that we can try to only reclassify a method body if
         // all edits were contained within one.
-        protected override TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.TrackTextChanges;
+        protected override TaggerTextChangeBehavior TextChangeBehavior =>
+            TaggerTextChangeBehavior.TrackTextChanges;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public ActiveStatementTaggerProvider(
             IThreadingContext threadingContext,
             IForegroundNotificationService notificationService,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, listenerProvider.GetListener(FeatureAttribute.Classification), notificationService)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                listenerProvider.GetListener(FeatureAttribute.Classification),
+                notificationService
+            ) { }
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textView, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             AssertIsForeground();
 
             return TaggerEventSources.Compose(
                 new EventSource(subjectBuffer, TaggerDelay.Short),
                 TaggerEventSources.OnTextChanged(subjectBuffer, TaggerDelay.NearImmediate),
-                TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer, TaggerDelay.Short));
+                TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer, TaggerDelay.Short)
+            );
         }
 
         protected override async Task ProduceTagsAsync(TaggerContext<ITextMarkerTag> context)
@@ -69,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                 return;
             }
 
-            var activeStatementTrackingService = document.Project.Solution.Workspace.Services.GetService<IActiveStatementTrackingService>();
+            var activeStatementTrackingService =
+                document.Project.Solution.Workspace.Services.GetService<IActiveStatementTrackingService>();
             if (activeStatementTrackingService == null)
             {
                 return;
@@ -77,7 +87,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
 
             var snapshot = spanToTag.SnapshotSpan.Snapshot;
 
-            var activeStatementSpans = await activeStatementTrackingService.GetAdjustedTrackingSpansAsync(document, snapshot, context.CancellationToken).ConfigureAwait(false);
+            var activeStatementSpans =
+                await activeStatementTrackingService.GetAdjustedTrackingSpansAsync(
+                        document,
+                        snapshot,
+                        context.CancellationToken
+                    )
+                    .ConfigureAwait(false);
             foreach (var activeStatementSpan in activeStatementSpans)
             {
                 if (activeStatementSpan.IsLeaf)
@@ -88,7 +104,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
                 var snapshotSpan = activeStatementSpan.Span.GetSpan(snapshot);
                 if (snapshotSpan.OverlapsWith(spanToTag.SnapshotSpan))
                 {
-                    context.AddTag(new TagSpan<ITextMarkerTag>(snapshotSpan, ActiveStatementTag.Instance));
+                    context.AddTag(
+                        new TagSpan<ITextMarkerTag>(snapshotSpan, ActiveStatementTag.Instance)
+                    );
                 }
             }
 

@@ -113,7 +113,9 @@ namespace System.Xml
                     case XmlNodeType.CDATA:
                         if (_checkCharacters)
                         {
-                            CheckCharacters(await base.reader.GetValueAsync().ConfigureAwait(false));
+                            CheckCharacters(
+                                await base.reader.GetValueAsync().ConfigureAwait(false)
+                            );
                         }
                         break;
 
@@ -174,7 +176,10 @@ namespace System.Xml
                                 int i;
                                 if ((i = XmlCharType.IsPublicId(str)) >= 0)
                                 {
-                                    Throw(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(str, i));
+                                    Throw(
+                                        SR.Xml_InvalidCharacter,
+                                        XmlException.BuildCharExceptionArgs(str, i)
+                                    );
                                 }
                             }
                         }
@@ -187,14 +192,18 @@ namespace System.Xml
                         }
                         if (_checkCharacters)
                         {
-                            CheckWhitespace(await base.reader.GetValueAsync().ConfigureAwait(false));
+                            CheckWhitespace(
+                                await base.reader.GetValueAsync().ConfigureAwait(false)
+                            );
                         }
                         break;
 
                     case XmlNodeType.SignificantWhitespace:
                         if (_checkCharacters)
                         {
-                            CheckWhitespace(await base.reader.GetValueAsync().ConfigureAwait(false));
+                            CheckWhitespace(
+                                await base.reader.GetValueAsync().ConfigureAwait(false)
+                            );
                         }
                         break;
 
@@ -213,7 +222,11 @@ namespace System.Xml
             }
         }
 
-        public override async Task<int> ReadContentAsBase64Async(byte[] buffer, int index, int count)
+        public override async Task<int> ReadContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -228,12 +241,16 @@ namespace System.Xml
                 {
                     _readBinaryHelper = null;
                     _state = State.InReadBinary;
-                    return await base.ReadContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+                    return await base.ReadContentAsBase64Async(buffer, index, count)
+                        .ConfigureAwait(false);
                 }
                 // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore whitespace
                 else
                 {
-                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                        _readBinaryHelper,
+                        this
+                    );
                 }
             }
             else
@@ -241,7 +258,8 @@ namespace System.Xml
                 // forward calls into wrapped reader
                 if (_readBinaryHelper == null)
                 {
-                    return await base.ReadContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+                    return await base.ReadContentAsBase64Async(buffer, index, count)
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -249,14 +267,19 @@ namespace System.Xml
             _state = State.Interactive;
 
             // call to the helper
-            int readCount = await _readBinaryHelper.ReadContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper.ReadContentAsBase64Async(buffer, index, count)
+                .ConfigureAwait(false);
 
             // turn on InReadBinary in again and return
             _state = State.InReadBinary;
             return readCount;
         }
 
-        public override async Task<int> ReadContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override async Task<int> ReadContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -271,12 +294,16 @@ namespace System.Xml
                 {
                     _readBinaryHelper = null;
                     _state = State.InReadBinary;
-                    return await base.ReadContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+                    return await base.ReadContentAsBinHexAsync(buffer, index, count)
+                        .ConfigureAwait(false);
                 }
                 // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore whitespace
                 else
                 {
-                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                        _readBinaryHelper,
+                        this
+                    );
                 }
             }
             else
@@ -284,7 +311,8 @@ namespace System.Xml
                 // forward calls into wrapped reader
                 if (_readBinaryHelper == null)
                 {
-                    return await base.ReadContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+                    return await base.ReadContentAsBinHexAsync(buffer, index, count)
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -292,14 +320,19 @@ namespace System.Xml
             _state = State.Interactive;
 
             // call to the helper
-            int readCount = await _readBinaryHelper.ReadContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper.ReadContentAsBinHexAsync(buffer, index, count)
+                .ConfigureAwait(false);
 
             // turn on InReadBinary in again and return
             _state = State.InReadBinary;
             return readCount;
         }
 
-        public override async Task<int> ReadElementContentAsBase64Async(byte[] buffer, int index, int count)
+        public override async Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             // check arguments
             if (buffer == null)
@@ -332,12 +365,16 @@ namespace System.Xml
                 {
                     _readBinaryHelper = null;
                     _state = State.InReadBinary;
-                    return await base.ReadElementContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+                    return await base.ReadElementContentAsBase64Async(buffer, index, count)
+                        .ConfigureAwait(false);
                 }
                 // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore whitespace
                 else
                 {
-                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                        _readBinaryHelper,
+                        this
+                    );
                 }
             }
             else
@@ -345,7 +382,8 @@ namespace System.Xml
                 // forward calls into wrapped reader
                 if (_readBinaryHelper == null)
                 {
-                    return await base.ReadElementContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+                    return await base.ReadElementContentAsBase64Async(buffer, index, count)
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -353,14 +391,23 @@ namespace System.Xml
             _state = State.Interactive;
 
             // call to the helper
-            int readCount = await _readBinaryHelper.ReadElementContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper.ReadElementContentAsBase64Async(
+                    buffer,
+                    index,
+                    count
+                )
+                .ConfigureAwait(false);
 
             // turn on InReadBinary in again and return
             _state = State.InReadBinary;
             return readCount;
         }
 
-        public override async Task<int> ReadElementContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override async Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             // check arguments
             if (buffer == null)
@@ -392,12 +439,16 @@ namespace System.Xml
                 {
                     _readBinaryHelper = null;
                     _state = State.InReadBinary;
-                    return await base.ReadElementContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+                    return await base.ReadElementContentAsBinHexAsync(buffer, index, count)
+                        .ConfigureAwait(false);
                 }
                 // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore whitespace
                 else
                 {
-                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                    _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                        _readBinaryHelper,
+                        this
+                    );
                 }
             }
             else
@@ -405,7 +456,8 @@ namespace System.Xml
                 // forward calls into wrapped reader
                 if (_readBinaryHelper == null)
                 {
-                    return await base.ReadElementContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+                    return await base.ReadElementContentAsBinHexAsync(buffer, index, count)
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -413,7 +465,12 @@ namespace System.Xml
             _state = State.Interactive;
 
             // call to the helper
-            int readCount = await _readBinaryHelper.ReadElementContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper.ReadElementContentAsBinHexAsync(
+                    buffer,
+                    index,
+                    count
+                )
+                .ConfigureAwait(false);
 
             // turn on InReadBinary in again and return
             _state = State.InReadBinary;

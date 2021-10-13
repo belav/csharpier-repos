@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
 
         public bool Succeeded { get; set; } = true;
 
@@ -71,21 +72,28 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetDouble();
             }
 
-            object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1] });
+            object result = typeof(Vector128).GetMethod(nameof(Vector128.Create), operandTypes)
+                .Invoke(null, new object[] { values[0], values[1] });
 
             ValidateResult((Vector128<Double>)(result), values);
         }
 
-        private void ValidateResult(Vector128<Double> result, Double[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Double> result,
+            Double[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             Double[] resultElements = new Double[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(Double[] resultElements, Double[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Double[] resultElements,
+            Double[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -100,9 +108,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.Create(Double): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.Create(Double): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

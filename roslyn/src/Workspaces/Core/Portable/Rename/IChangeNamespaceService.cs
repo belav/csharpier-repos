@@ -36,7 +36,11 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         /// (e.g. Sync namespace refactoring), those logic is implemented by those individual features and isn't part 
         /// of the IChangeNamespaceService service.
         /// </remarks>
-        Task<bool> CanChangeNamespaceAsync(Document document, SyntaxNode container, CancellationToken cancellationToken);
+        Task<bool> CanChangeNamespaceAsync(
+            Document document,
+            SyntaxNode container,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Change namespace for given <paramref name="container"/> to the name specified by <paramref name="targetNamespace"/>.
@@ -52,12 +56,21 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         /// If the declared namespace for <paramref name="container"/> is already identical to <paramref name="targetNamespace"/>, then it will be
         /// a no-op and original solution will be returned.
         /// </remarks>
-        Task<Solution> ChangeNamespaceAsync(Document document, SyntaxNode container, string targetNamespace, CancellationToken cancellationToken);
+        Task<Solution> ChangeNamespaceAsync(
+            Document document,
+            SyntaxNode container,
+            string targetNamespace,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Using only the top level namespace declarations of a document, change all of them to the target namespace. Will only
         /// use namespace containers considered valid by <see cref="CanChangeNamespaceAsync(Document, SyntaxNode, CancellationToken)"/>
         /// </summary>
-        Task<Solution?> TryChangeTopLevelNamespacesAsync(Document document, string targetNamespace, CancellationToken cancellationToken);
+        Task<Solution?> TryChangeTopLevelNamespacesAsync(
+            Document document,
+            string targetNamespace,
+            CancellationToken cancellationToken
+        );
     }
 }

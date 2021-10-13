@@ -34,10 +34,8 @@ namespace CseTest
 {
     using System;
 
-
     public class Test_Main
     {
-
         static int Main()
         {
             int ret = 100;
@@ -164,6 +162,7 @@ namespace CseTest
             {
                 ans = input;
             }
+
             finally
             {
                 if (verbose)

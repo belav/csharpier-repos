@@ -21,7 +21,11 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 3 }))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 3 }
+                    )
+                )
                 {
                     try
                     {

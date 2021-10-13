@@ -19,7 +19,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         private int _status;
 
-        public static readonly Action<TRequest, int, UvException, object> Callback = (req, status, error, state) =>
+        public static readonly Action<TRequest, int, UvException, object> Callback = (
+            req,
+            status,
+            error,
+            state
+        ) =>
         {
             var awaitable = (LibuvAwaitable<TRequest>)state;
 
@@ -55,7 +60,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             // should always be on the libuv thread
             if (ReferenceEquals(_callback, _callbackCompleted))
             {
-                Debug.Fail($"{typeof(LibuvAwaitable<TRequest>)}.{nameof(OnCompleted)} raced with {nameof(IsCompleted)}, scheduling callback.");
+                Debug.Fail(
+                    $"{typeof(LibuvAwaitable<TRequest>)}.{nameof(OnCompleted)} raced with {nameof(IsCompleted)}, scheduling callback."
+                );
             }
 
             _callback = continuation;

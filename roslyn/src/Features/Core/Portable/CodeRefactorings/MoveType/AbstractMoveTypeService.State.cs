@@ -12,7 +12,13 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 {
-    internal abstract partial class AbstractMoveTypeService<TService, TTypeDeclarationSyntax, TNamespaceDeclarationSyntax, TMemberDeclarationSyntax, TCompilationUnitSyntax>
+    internal abstract partial class AbstractMoveTypeService<
+        TService,
+        TTypeDeclarationSyntax,
+        TNamespaceDeclarationSyntax,
+        TMemberDeclarationSyntax,
+        TCompilationUnitSyntax
+    >
     {
         private class State
         {
@@ -23,12 +29,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             public string DocumentNameWithoutExtension { get; set; }
             public bool IsDocumentNameAValidIdentifier { get; set; }
 
-            private State(SemanticDocument document)
-                => SemanticDocument = document;
+            private State(SemanticDocument document) => SemanticDocument = document;
 
             internal static State Generate(
-                SemanticDocument document, TTypeDeclarationSyntax typeDeclaration,
-                CancellationToken cancellationToken)
+                SemanticDocument document,
+                TTypeDeclarationSyntax typeDeclaration,
+                CancellationToken cancellationToken
+            )
             {
                 var state = new State(document);
                 if (!state.TryInitialize(typeDeclaration, cancellationToken))
@@ -41,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
             private bool TryInitialize(
                 TTypeDeclarationSyntax typeDeclaration,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (cancellationToken.IsCancellationRequested)
                 {
@@ -50,22 +58,35 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 
                 var tree = SemanticDocument.SyntaxTree;
                 var root = SemanticDocument.Root;
-                var syntaxFacts = SemanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
+                var syntaxFacts =
+                    SemanticDocument.Document.GetLanguageService<ISyntaxFactsService>();
 
                 // compiler declared types, anonymous types, types defined in metadata should be filtered out.
-                if (!(SemanticDocument.SemanticModel.GetDeclaredSymbol(typeDeclaration, cancellationToken) is INamedTypeSymbol typeSymbol) ||
-                    typeSymbol.Locations.Any(loc => loc.IsInMetadata) ||
-                    typeSymbol.IsAnonymousType ||
-                    typeSymbol.IsImplicitlyDeclared ||
-                    typeSymbol.Name == string.Empty)
+                if (
+                    !(
+                        SemanticDocument.SemanticModel.GetDeclaredSymbol(
+                            typeDeclaration,
+                            cancellationToken
+                        )
+                        is INamedTypeSymbol typeSymbol
+                    )
+                    || typeSymbol.Locations.Any(loc => loc.IsInMetadata)
+                    || typeSymbol.IsAnonymousType
+                    || typeSymbol.IsImplicitlyDeclared
+                    || typeSymbol.Name == string.Empty
+                )
                 {
                     return false;
                 }
 
                 TypeNode = typeDeclaration;
                 TypeName = typeSymbol.Name;
-                DocumentNameWithoutExtension = Path.GetFileNameWithoutExtension(SemanticDocument.Document.Name);
-                IsDocumentNameAValidIdentifier = syntaxFacts.IsValidIdentifier(DocumentNameWithoutExtension);
+                DocumentNameWithoutExtension = Path.GetFileNameWithoutExtension(
+                    SemanticDocument.Document.Name
+                );
+                IsDocumentNameAValidIdentifier = syntaxFacts.IsValidIdentifier(
+                    DocumentNameWithoutExtension
+                );
 
                 return true;
             }

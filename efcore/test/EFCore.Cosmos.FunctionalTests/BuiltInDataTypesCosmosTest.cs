@@ -10,12 +10,10 @@ using Xunit;
 
 namespace Microsoft.EntityFrameworkCore.Cosmos
 {
-    public class BuiltInDataTypesCosmosTest : BuiltInDataTypesTestBase<BuiltInDataTypesCosmosTest.BuiltInDataTypesCosmosFixture>
+    public class BuiltInDataTypesCosmosTest
+        : BuiltInDataTypesTestBase<BuiltInDataTypesCosmosTest.BuiltInDataTypesCosmosFixture>
     {
-        public BuiltInDataTypesCosmosTest(BuiltInDataTypesCosmosFixture fixture)
-            : base(fixture)
-        {
-        }
+        public BuiltInDataTypesCosmosTest(BuiltInDataTypesCosmosFixture fixture) : base(fixture) { }
 
         [ConditionalTheory(Skip = "Issue #17246 No Explicit Convert")]
         public override Task Can_filter_projection_with_inline_enum_variable(bool async)
@@ -71,51 +69,47 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
             AssertSql(
                 @"SELECT c[""TestSignedByte""], c[""TestByte""], c[""TestInt16""], c[""TestUnsignedInt16""], c[""TestInt32""], c[""TestUnsignedInt32""], c[""TestInt64""], c[""TestUnsignedInt64""], c[""TestSingle""], c[""TestDouble""], c[""TestDecimal""], c[""TestCharacter""], c[""TestDateTime""], c[""TestDateTimeOffset""], c[""TestTimeSpan""]
 FROM root c
-WHERE ((c[""Discriminator""] = ""BuiltInDataTypes"") AND (c[""Id""] = 13))");
+WHERE ((c[""Discriminator""] = ""BuiltInDataTypes"") AND (c[""Id""] = 13))"
+            );
         }
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
         public class BuiltInDataTypesCosmosFixture : BuiltInDataTypesFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => CosmosTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                CosmosTestStoreFactory.Instance;
 
-            public override bool StrictEquality
-                => true;
+            public override bool StrictEquality => true;
 
-            public override int IntegerPrecision
-                => 53;
+            public override int IntegerPrecision => 53;
 
-            public override bool SupportsAnsi
-                => false;
+            public override bool SupportsAnsi => false;
 
-            public override bool SupportsUnicodeToAnsiConversion
-                => false;
+            public override bool SupportsUnicodeToAnsiConversion => false;
 
-            public override bool SupportsLargeStringComparisons
-                => true;
+            public override bool SupportsLargeStringComparisons => true;
 
-            public override bool SupportsBinaryKeys
-                => true;
+            public override bool SupportsBinaryKeys => true;
 
-            public override bool SupportsDecimalComparisons
-                => true;
+            public override bool SupportsDecimalComparisons => true;
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            public override DateTime DefaultDateTime
-                => new();
+            public override DateTime DefaultDateTime => new();
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                var shadowJObject = (Property)modelBuilder.Entity<BuiltInDataTypesShadow>().Property("__jObject").Metadata;
+                var shadowJObject = (Property)modelBuilder.Entity<BuiltInDataTypesShadow>()
+                    .Property("__jObject").Metadata;
                 shadowJObject.SetConfigurationSource(ConfigurationSource.Convention);
-                var nullableShadowJObject = (Property)modelBuilder.Entity<BuiltInNullableDataTypesShadow>().Property("__jObject").Metadata;
+                var nullableShadowJObject =
+                    (Property)modelBuilder.Entity<BuiltInNullableDataTypesShadow>()
+                        .Property("__jObject").Metadata;
                 nullableShadowJObject.SetConfigurationSource(ConfigurationSource.Convention);
             }
         }

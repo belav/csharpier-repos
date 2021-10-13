@@ -28,7 +28,11 @@ namespace System.Security.Cryptography
             return Open(keyName, provider, openOptions: CngKeyOpenOptions.None);
         }
 
-        public static CngKey Open(string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
+        public static CngKey Open(
+            string keyName,
+            CngProvider provider,
+            CngKeyOpenOptions openOptions
+        )
         {
             if (keyName == null)
                 throw new ArgumentNullException(nameof(keyName));
@@ -37,7 +41,13 @@ namespace System.Security.Cryptography
 
             SafeNCryptProviderHandle providerHandle = provider.OpenStorageProvider();
             SafeNCryptKeyHandle keyHandle;
-            ErrorCode errorCode = Interop.NCrypt.NCryptOpenKey(providerHandle, out keyHandle, keyName, 0, openOptions);
+            ErrorCode errorCode = Interop.NCrypt.NCryptOpenKey(
+                providerHandle,
+                out keyHandle,
+                keyName,
+                0,
+                openOptions
+            );
             if (errorCode != ErrorCode.ERROR_SUCCESS)
                 throw errorCode.ToCryptographicException();
 

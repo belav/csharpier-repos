@@ -19,12 +19,24 @@ namespace System.Speech.Internal.SapiInterop
 
     #region Interface
 
-    [ComImport, Guid("BED530BE-2606-4F4D-A1C0-54C5CDA5566F"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport,
+        Guid("BED530BE-2606-4F4D-A1C0-54C5CDA5566F"),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface ISpStreamFormat : IStream
     {
         // ISequentialStream Methods
-        new void Read([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] pv, int cb, IntPtr pcbRead);
-        new void Write([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pv, int cb, IntPtr pcbWritten);
+        new void Read(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] pv,
+            int cb,
+            IntPtr pcbRead
+        );
+        new void Write(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pv,
+            int cb,
+            IntPtr pcbWritten
+        );
 
         // IStream Methods
         new void Seek(long dlibMove, int dwOrigin, IntPtr plibNewPosition);
@@ -41,12 +53,24 @@ namespace System.Speech.Internal.SapiInterop
         void GetFormat(out Guid pguidFormatId, out IntPtr ppCoMemWaveFormatEx);
     }
 
-    [ComImport, Guid("BED530BE-2606-4F4D-A1C0-54C5CDA5566F"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport,
+        Guid("BED530BE-2606-4F4D-A1C0-54C5CDA5566F"),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface ISpStream : ISpStreamFormat
     {
         // ISequentialStream Methods
-        new void Read([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] pv, int cb, IntPtr pcbRead);
-        new void Write([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pv, int cb, IntPtr pcbWritten);
+        new void Read(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] pv,
+            int cb,
+            IntPtr pcbRead
+        );
+        new void Write(
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] pv,
+            int cb,
+            IntPtr pcbWritten
+        );
         // IStream Methods
         new void Seek(long dlibMove, int dwOrigin, IntPtr plibNewPosition);
         new void SetSize(long libNewSize);
@@ -63,9 +87,14 @@ namespace System.Speech.Internal.SapiInterop
         // ISpStream Methods
         void SetBaseStream(IStream pStream, ref Guid rguidFormat, IntPtr pWaveFormatEx);
         void Slot14(); // void GetBaseStream(IStream ** ppStream);
-        void BindToFile(string pszFileName, SPFILEMODE eMode, ref Guid pFormatId, IntPtr pWaveFormatEx, ulong ullEventInterest);
+        void BindToFile(
+            string pszFileName,
+            SPFILEMODE eMode,
+            ref Guid pFormatId,
+            IntPtr pWaveFormatEx,
+            ulong ullEventInterest
+        );
         void Close();
     }
-
     #endregion
 }

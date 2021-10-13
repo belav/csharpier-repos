@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                     throw new DiagnosticLocationAssertException(
                         expected,
                         actual,
-                        $"Expected diagnostic to be on line \"{expected.Line}\" was actually on line \"{actualLinePosition.Line + 1}\"");
+                        $"Expected diagnostic to be on line \"{expected.Line}\" was actually on line \"{actualLinePosition.Line + 1}\""
+                    );
                 }
             }
 
@@ -34,7 +35,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
                     throw new DiagnosticLocationAssertException(
                         expected,
                         actual,
-                        $"Expected diagnostic to start at column \"{expected.Column}\" was actually on column \"{actualLinePosition.Character + 1}\"");
+                        $"Expected diagnostic to start at column \"{expected.Column}\" was actually on column \"{actualLinePosition.Character + 1}\""
+                    );
                 }
             }
         }
@@ -44,8 +46,8 @@ namespace Microsoft.AspNetCore.Analyzer.Testing
             public DiagnosticLocationAssertException(
                 DiagnosticLocation expected,
                 Location actual,
-                string message)
-                : base(expected, actual)
+                string message
+            ) : base(expected, actual)
             {
                 Message = message;
             }

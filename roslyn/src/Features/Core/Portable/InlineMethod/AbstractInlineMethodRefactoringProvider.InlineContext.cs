@@ -16,7 +16,12 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.InlineMethod
 {
-    internal abstract partial class AbstractInlineMethodRefactoringProvider<TMethodDeclarationSyntax, TStatementSyntax, TExpressionSyntax, TInvocationSyntax>
+    internal abstract partial class AbstractInlineMethodRefactoringProvider<
+        TMethodDeclarationSyntax,
+        TStatementSyntax,
+        TExpressionSyntax,
+        TInvocationSyntax
+    >
     {
         private readonly struct InlineMethodContext
         {
@@ -38,9 +43,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             public InlineMethodContext(
                 ImmutableArray<TStatementSyntax> statementsToInsertBeforeInvocationOfCallee,
                 TExpressionSyntax inlineExpression,
-                bool containsAwaitExpression)
+                bool containsAwaitExpression
+            )
             {
-                StatementsToInsertBeforeInvocationOfCallee = statementsToInsertBeforeInvocationOfCallee;
+                StatementsToInsertBeforeInvocationOfCallee =
+                    statementsToInsertBeforeInvocationOfCallee;
                 InlineExpression = inlineExpression;
                 ContainsAwaitExpression = containsAwaitExpression;
             }
@@ -53,13 +60,22 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             IMethodSymbol calleeMethodSymbol,
             TExpressionSyntax rawInlineExpression,
             MethodParametersInfo methodParametersInfo,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var inlineExpression = rawInlineExpression;
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
-            var callerSemanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var calleeDocument = document.Project.Solution.GetRequiredDocument(calleeMethodNode.SyntaxTree);
-            var calleeSemanticModel = await calleeDocument.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var callerSemanticModel = await document.GetRequiredSemanticModelAsync(
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var calleeDocument = document.Project.Solution.GetRequiredDocument(
+                calleeMethodNode.SyntaxTree
+            );
+            var calleeSemanticModel = await calleeDocument.GetRequiredSemanticModelAsync(
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // Generate a map which the key is the symbol need renaming, value is the new name.
             // After inlining, there might be naming conflict because
@@ -115,8 +131,11 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 calleeSemanticModel,
                 calleeInvocationNode,
                 rawInlineExpression,
-                methodParametersInfo.ParametersToGenerateFreshVariablesFor
-                    .SelectAsArray(parameterAndArgument => parameterAndArgument.parameterSymbol), cancellationToken);
+                methodParametersInfo.ParametersToGenerateFreshVariablesFor.SelectAsArray(
+                    parameterAndArgument => parameterAndArgument.parameterSymbol
+                ),
+                cancellationToken
+            );
 
             // Generate all the statements need to be put in the caller.
             // Use the parameter's name to generate declarations in caller might cause conflict in the caller,
@@ -166,9 +185,10 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 syntaxGenerator,
                 methodParametersInfo.ParametersToGenerateFreshVariablesFor,
                 methodParametersInfo.MergeInlineContentAndVariableDeclarationArgument
-                    ? ImmutableArray<(IParameterSymbol, string)>.Empty
-                    : methodParametersInfo.ParametersWithVariableDeclarationArgument,
-                renameTable);
+                  ? ImmutableArray<(IParameterSymbol, string)>.Empty
+                  : methodParametersInfo.ParametersWithVariableDeclarationArgument,
+                renameTable
+            );
 
             // Get a table which the key is the symbol needs replacement. Value is the replacement syntax node
             // Included 3 cases:
@@ -233,47 +253,63 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                 methodParametersInfo.ParametersWithVariableDeclarationArgument,
                 methodParametersInfo.ParametersToReplace,
                 syntaxGenerator,
-                renameTable);
+                renameTable
+            );
 
             var containsAwaitExpression = ContainsAwaitExpression(rawInlineExpression);
 
             // Do the replacement work within the callee's body so that it can be inserted to the caller later.
             inlineExpression = await ReplaceAllSyntaxNodesForSymbolAsync(
-               calleeDocument,
-               inlineExpression,
-               syntaxGenerator,
-               replacementTable,
-               cancellationToken).ConfigureAwait(false);
+                    calleeDocument,
+                    inlineExpression,
+                    syntaxGenerator,
+                    replacementTable,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return new InlineMethodContext(
                 localDeclarationStatementsNeedInsert,
                 inlineExpression,
-                containsAwaitExpression);
+                containsAwaitExpression
+            );
         }
 
         private static ImmutableArray<TStatementSyntax> GetLocalDeclarationStatementsNeedInsert(
             SyntaxGenerator syntaxGenerator,
             ImmutableArray<(IParameterSymbol parameterSymbol, TExpressionSyntax expression)> parametersToGenerateFreshVariablesFor,
             ImmutableArray<(IParameterSymbol parameterSymbol, string identifierName)> parametersWithVariableDeclarationArgument,
-            ImmutableDictionary<ISymbol, string> renameTable)
+            ImmutableDictionary<ISymbol, string> renameTable
+        )
         {
-            var declarationsQuery = parametersToGenerateFreshVariablesFor
-                .Select(parameterAndArguments => CreateLocalDeclarationStatement(syntaxGenerator, renameTable, parameterAndArguments));
+            var declarationsQuery = parametersToGenerateFreshVariablesFor.Select(
+                parameterAndArguments =>
+                    CreateLocalDeclarationStatement(
+                        syntaxGenerator,
+                        renameTable,
+                        parameterAndArguments
+                    )
+            );
 
-            var declarationsForVariableDeclarationArgumentQuery = parametersWithVariableDeclarationArgument
-                .Select(parameterAndName =>
-                    (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(
-                        parameterAndName.parameterSymbol.Type,
-                        parameterAndName.identifierName));
+            var declarationsForVariableDeclarationArgumentQuery =
+                parametersWithVariableDeclarationArgument.Select(
+                    parameterAndName =>
+                        (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(
+                            parameterAndName.parameterSymbol.Type,
+                            parameterAndName.identifierName
+                        )
+                );
 
-            return declarationsQuery.Concat(declarationsForVariableDeclarationArgumentQuery).ToImmutableArray();
+            return declarationsQuery.Concat(declarationsForVariableDeclarationArgumentQuery)
+                .ToImmutableArray();
         }
 
         private bool ContainsAwaitExpression(TExpressionSyntax inlineExpression)
         {
             // Check if there is await expression. It is used later if the caller should be changed to async
-            var awaitExpressions = inlineExpression
-                .DescendantNodesAndSelf(node => !_syntaxFacts.IsAnonymousFunction(node))
+            var awaitExpressions = inlineExpression.DescendantNodesAndSelf(
+                    node => !_syntaxFacts.IsAnonymousFunction(node)
+                )
                 .Where(_syntaxFacts.IsAwaitExpression)
                 .ToImmutableArray();
             return !awaitExpressions.IsEmpty;
@@ -282,11 +318,18 @@ namespace Microsoft.CodeAnalysis.InlineMethod
         private static TStatementSyntax CreateLocalDeclarationStatement(
             SyntaxGenerator syntaxGenerator,
             ImmutableDictionary<ISymbol, string> renameTable,
-            (IParameterSymbol parameterSymbol, TExpressionSyntax expression) parameterAndExpression)
+            (IParameterSymbol parameterSymbol, TExpressionSyntax expression) parameterAndExpression
+        )
         {
             var (parameterSymbol, expression) = parameterAndExpression;
-            var name = renameTable.TryGetValue(parameterSymbol, out var newName) ? newName : parameterSymbol.Name;
-            return (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(parameterSymbol.Type, name, expression);
+            var name = renameTable.TryGetValue(parameterSymbol, out var newName)
+                ? newName
+                : parameterSymbol.Name;
+            return (TStatementSyntax)syntaxGenerator.LocalDeclarationStatement(
+                parameterSymbol.Type,
+                name,
+                expression
+            );
         }
 
         private static async Task<TExpressionSyntax> ReplaceAllSyntaxNodesForSymbolAsync(
@@ -294,19 +337,31 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             TExpressionSyntax inlineExpression,
             SyntaxGenerator syntaxGenerator,
             ImmutableDictionary<ISymbol, SyntaxNode> replacementTable,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var editor = new SyntaxEditor(inlineExpression, syntaxGenerator);
 
             foreach (var (symbol, syntaxNode) in replacementTable)
             {
-                var allReferences = await SymbolFinder
-                    .FindReferencesAsync(symbol, document.Project.Solution, ImmutableHashSet<Document>.Empty.Add(document), cancellationToken)
+                var allReferences = await SymbolFinder.FindReferencesAsync(
+                        symbol,
+                        document.Project.Solution,
+                        ImmutableHashSet<Document>.Empty.Add(document),
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
-                var allSyntaxNodesToReplace = allReferences
-                    .SelectMany(reference => reference.Locations
-                        .Where(location => !location.IsImplicit)
-                        .Select(location => location.Location.FindNode(getInnermostNodeForTie: true, cancellationToken)))
+                var allSyntaxNodesToReplace = allReferences.SelectMany(
+                        reference =>
+                            reference.Locations.Where(location => !location.IsImplicit)
+                                .Select(
+                                    location =>
+                                        location.Location.FindNode(
+                                            getInnermostNodeForTie: true,
+                                            cancellationToken
+                                        )
+                                )
+                    )
                     .ToImmutableArray();
 
                 foreach (var nodeToReplace in allSyntaxNodesToReplace)
@@ -331,25 +386,41 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             ImmutableArray<(IParameterSymbol parameter, string identifierName)> parametersWithVariableDeclarationArgument,
             ImmutableDictionary<IParameterSymbol, TExpressionSyntax> parametersToReplace,
             SyntaxGenerator syntaxGenerator,
-            ImmutableDictionary<ISymbol, string> renameTable)
+            ImmutableDictionary<ISymbol, string> renameTable
+        )
         {
-            var typeParametersReplacementQuery = calleeMethodSymbol.TypeParameters
-                .Zip(calleeMethodSymbol.TypeArguments,
-                    (parameter, argument) => (parameter: (ISymbol)parameter,
-                        syntaxNode: GenerateTypeSyntax(argument, allowVar: true)));
-            var literalArgumentReplacementQuery = parametersToReplace
-                .Select(parameterAndExpressionPair => (parameter: (ISymbol)parameterAndExpressionPair.Key,
-                    syntaxNode: (SyntaxNode)parameterAndExpressionPair.Value));
+            var typeParametersReplacementQuery = calleeMethodSymbol.TypeParameters.Zip(
+                calleeMethodSymbol.TypeArguments,
+                (parameter, argument) =>
+                    (
+                        parameter: (ISymbol)parameter,
+                        syntaxNode: GenerateTypeSyntax(argument, allowVar: true)
+                    )
+            );
+            var literalArgumentReplacementQuery = parametersToReplace.Select(
+                parameterAndExpressionPair =>
+                    (
+                        parameter: (ISymbol)parameterAndExpressionPair.Key,
+                        syntaxNode: (SyntaxNode)parameterAndExpressionPair.Value
+                    )
+            );
 
-            var parametersWithVariableDeclarationArgumentQuery = parametersWithVariableDeclarationArgument
-                .Select(parameterAndName => (parameter: (ISymbol)parameterAndName.parameter,
-                    syntaxNode: syntaxGenerator.IdentifierName(parameterAndName.identifierName)));
+            var parametersWithVariableDeclarationArgumentQuery =
+                parametersWithVariableDeclarationArgument.Select(
+                    parameterAndName =>
+                        (
+                            parameter: (ISymbol)parameterAndName.parameter,
+                            syntaxNode: syntaxGenerator.IdentifierName(
+                                parameterAndName.identifierName
+                            )
+                        )
+                );
 
-            var parametersNeedRenameQuery = renameTable
-                .Select(kvp => (parameter: kvp.Key, syntaxNode: syntaxGenerator.IdentifierName(kvp.Value)));
+            var parametersNeedRenameQuery = renameTable.Select(
+                kvp => (parameter: kvp.Key, syntaxNode: syntaxGenerator.IdentifierName(kvp.Value))
+            );
 
-            return parametersNeedRenameQuery
-                .Concat(parametersWithVariableDeclarationArgumentQuery)
+            return parametersNeedRenameQuery.Concat(parametersWithVariableDeclarationArgumentQuery)
                 .Concat(typeParametersReplacementQuery)
                 .Concat(literalArgumentReplacementQuery)
                 .ToImmutableDictionary(tuple => tuple.parameter, tuple => tuple.syntaxNode);
@@ -362,22 +433,29 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             SyntaxNode calleeInvocationNode,
             TExpressionSyntax rawInlineExpression,
             ImmutableArray<IParameterSymbol> parametersNeedGenerateFreshVariableFor,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var renameTable = new Dictionary<ISymbol, string>();
-            var localSymbolsInCallee = LocalVariableDeclarationVisitor
-                .GetAllSymbols(calleeSemanticModel, rawInlineExpression, cancellationToken);
-            foreach (var symbol in parametersNeedGenerateFreshVariableFor.Concat(localSymbolsInCallee))
+            var localSymbolsInCallee = LocalVariableDeclarationVisitor.GetAllSymbols(
+                calleeSemanticModel,
+                rawInlineExpression,
+                cancellationToken
+            );
+            foreach (
+                var symbol in parametersNeedGenerateFreshVariableFor.Concat(localSymbolsInCallee)
+            )
             {
                 var usedNames = renameTable.Values;
-                renameTable[symbol] = semanticFacts
-                    .GenerateUniqueLocalName(
+                renameTable[symbol] =
+                    semanticFacts.GenerateUniqueLocalName(
                         callerSemanticModel,
                         calleeInvocationNode,
                         containerOpt: null,
                         symbol.Name,
                         usedNames,
-                        cancellationToken).Text;
+                        cancellationToken
+                    ).Text;
             }
 
             return renameTable.ToImmutableDictionary();
@@ -396,10 +474,14 @@ namespace Microsoft.CodeAnalysis.InlineMethod
             public static ImmutableHashSet<ISymbol> GetAllSymbols(
                 SemanticModel semanticModel,
                 TExpressionSyntax methodDeclarationSyntax,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var visitor = new LocalVariableDeclarationVisitor(cancellationToken);
-                var operation = semanticModel.GetOperation(methodDeclarationSyntax, cancellationToken);
+                var operation = semanticModel.GetOperation(
+                    methodDeclarationSyntax,
+                    cancellationToken
+                );
                 visitor.Visit(operation);
 
                 return visitor._allSymbols.ToImmutableHashSet();
@@ -418,14 +500,19 @@ namespace Microsoft.CodeAnalysis.InlineMethod
                     _allSymbols.Add(variableDeclarationOperation.Symbol);
                 }
 
-                if (operation is ILocalReferenceOperation localReferenceOperation
-                    && localReferenceOperation.IsDeclaration)
+                if (
+                    operation is ILocalReferenceOperation localReferenceOperation
+                    && localReferenceOperation.IsDeclaration
+                )
                 {
                     _allSymbols.Add(localReferenceOperation.Local);
                 }
 
                 // Stop when meet lambda or local function
-                if (operation.Kind == OperationKind.AnonymousFunction || operation.Kind == OperationKind.LocalFunction)
+                if (
+                    operation.Kind == OperationKind.AnonymousFunction
+                    || operation.Kind == OperationKind.LocalFunction
+                )
                 {
                     return;
                 }

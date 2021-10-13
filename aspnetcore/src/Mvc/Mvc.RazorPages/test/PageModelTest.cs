@@ -111,7 +111,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(
-                () => pageModel.Redirect(url: url), "url", "Value cannot be null or empty.");
+                () => pageModel.Redirect(url: url),
+                "url",
+                "Value cannot be null or empty."
+            );
         }
 
         [Theory]
@@ -124,7 +127,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
             // Act & Assert
             ExceptionAssert.ThrowsArgumentNullOrEmpty(
-                () => pageModel.RedirectPreserveMethod(url: url), "url");
+                () => pageModel.RedirectPreserveMethod(url: url),
+                "url"
+            );
         }
 
         [Fact]
@@ -205,7 +210,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
             // Act & Assert
             ExceptionAssert.ThrowsArgumentNullOrEmpty(
-                () => pageModel.LocalRedirect(localUrl: url), "localUrl");
+                () => pageModel.LocalRedirect(localUrl: url),
+                "localUrl"
+            );
         }
 
         [Theory]
@@ -218,20 +225,26 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
             // Act & Assert
             ExceptionAssert.ThrowsArgumentNullOrEmpty(
-                () => pageModel.LocalRedirectPreserveMethod(localUrl: url), "localUrl");
+                () => pageModel.LocalRedirectPreserveMethod(localUrl: url),
+                "localUrl"
+            );
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        public void LocalRedirectPermanentPreserveMethod_WithParameter_NullOrEmptyUrl_Throws(string url)
+        public void LocalRedirectPermanentPreserveMethod_WithParameter_NullOrEmptyUrl_Throws(
+            string url
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act & Assert
             ExceptionAssert.ThrowsArgumentNullOrEmpty(
-                () => pageModel.LocalRedirectPermanentPreserveMethod(localUrl: url), "localUrl");
+                () => pageModel.LocalRedirectPermanentPreserveMethod(localUrl: url),
+                "localUrl"
+            );
         }
 
         [Theory]
@@ -244,7 +257,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
             // Act & Assert
             ExceptionAssert.ThrowsArgumentNullOrEmpty(
-                () => pageModel.RedirectPermanent(url: url), "url");
+                () => pageModel.RedirectPermanent(url: url),
+                "url"
+            );
         }
 
         [Theory]
@@ -257,7 +272,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
             // Act & Assert
             ExceptionAssert.ThrowsArgumentNullOrEmpty(
-                () => pageModel.RedirectPermanentPreserveMethod(url: url), "url");
+                () => pageModel.RedirectPermanentPreserveMethod(url: url),
+                "url"
+            );
         }
 
         [Fact]
@@ -283,7 +300,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var pageModel = new TestPageModel();
 
             // Act
-            var resultTemporary = pageModel.RedirectToActionPreserveMethod(actionName: "SampleAction");
+            var resultTemporary = pageModel.RedirectToActionPreserveMethod(
+                actionName: "SampleAction"
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -315,7 +334,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var pageModel = new TestPageModel();
 
             // Act
-            var resultPermanent = pageModel.RedirectToActionPermanentPreserveMethod(actionName: "SampleAction");
+            var resultPermanent = pageModel.RedirectToActionPermanentPreserveMethod(
+                actionName: "SampleAction"
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -328,7 +349,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("")]
         [InlineData(null)]
         [InlineData("SampleController")]
-        public void RedirectToAction_WithParameterActionAndControllerName_SetsEqualNames(string controllerName)
+        public void RedirectToAction_WithParameterActionAndControllerName_SetsEqualNames(
+            string controllerName
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -348,13 +371,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("")]
         [InlineData(null)]
         [InlineData("SampleController")]
-        public void RedirectToActionPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(string controllerName)
+        public void RedirectToActionPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(
+            string controllerName
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act
-            var resultTemporary = pageModel.RedirectToActionPreserveMethod(actionName: "SampleAction", controllerName: controllerName);
+            var resultTemporary = pageModel.RedirectToActionPreserveMethod(
+                actionName: "SampleAction",
+                controllerName: controllerName
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -368,13 +396,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("")]
         [InlineData(null)]
         [InlineData("SampleController")]
-        public void RedirectToActionPermanent_WithParameterActionAndControllerName_SetsEqualNames(string controllerName)
+        public void RedirectToActionPermanent_WithParameterActionAndControllerName_SetsEqualNames(
+            string controllerName
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act
-            var resultPermanent = pageModel.RedirectToActionPermanent("SampleAction", controllerName);
+            var resultPermanent = pageModel.RedirectToActionPermanent(
+                "SampleAction",
+                controllerName
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -388,13 +421,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [InlineData("")]
         [InlineData(null)]
         [InlineData("SampleController")]
-        public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(string controllerName)
+        public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(
+            string controllerName
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act
-            var resultPermanent = pageModel.RedirectToActionPermanentPreserveMethod(actionName: "SampleAction", controllerName: controllerName);
+            var resultPermanent = pageModel.RedirectToActionPermanentPreserveMethod(
+                actionName: "SampleAction",
+                controllerName: controllerName
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -408,13 +446,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToAction_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act
-            var resultTemporary = pageModel.RedirectToAction("SampleAction", "SampleController", routeValues);
+            var resultTemporary = pageModel.RedirectToAction(
+                "SampleAction",
+                "SampleController",
+                routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -429,7 +472,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPreserveMethod_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -438,7 +482,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var resultTemporary = pageModel.RedirectToActionPreserveMethod(
                 actionName: "SampleAction",
                 controllerName: "SampleController",
-                routeValues: routeValues);
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -453,7 +498,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPermanent_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -462,7 +508,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var resultPermanent = pageModel.RedirectToActionPermanent(
                 "SampleAction",
                 "SampleController",
-                routeValues);
+                routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -477,7 +524,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionControllerRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -486,7 +534,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var resultPermanent = pageModel.RedirectToActionPermanentPreserveMethod(
                 actionName: "SampleAction",
                 controllerName: "SampleController",
-                routeValues: routeValues);
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -501,13 +550,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToAction_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act
-            var resultTemporary = pageModel.RedirectToAction(actionName: null, routeValues: routeValues);
+            var resultTemporary = pageModel.RedirectToAction(
+                actionName: null,
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -521,13 +574,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPreserveMethod_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act
-            var resultTemporary = pageModel.RedirectToActionPreserveMethod(actionName: null, routeValues: routeValues);
+            var resultTemporary = pageModel.RedirectToActionPreserveMethod(
+                actionName: null,
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -541,7 +598,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToAction_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+            IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -566,7 +624,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPreserveMethod_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+            IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -575,7 +634,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var expectedFragment = "test";
 
             // Act
-            var result = pageModel.RedirectToActionPreserveMethod("Action", "Home", routeValues, "test");
+            var result = pageModel.RedirectToActionPreserveMethod(
+                "Action",
+                "Home",
+                routeValues,
+                "test"
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(result);
@@ -591,7 +655,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPermanent_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -611,13 +676,17 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act
-            var resultPermanent = pageModel.RedirectToActionPermanentPreserveMethod(actionName: null, routeValues: routeValues);
+            var resultPermanent = pageModel.RedirectToActionPermanentPreserveMethod(
+                actionName: null,
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -631,7 +700,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPermanent_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+            IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -640,7 +710,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var expectedFragment = "test";
 
             // Act
-            var result = pageModel.RedirectToActionPermanent("Action", "Home", routeValues, fragment: "test");
+            var result = pageModel.RedirectToActionPermanent(
+                "Action",
+                "Home",
+                routeValues,
+                fragment: "test"
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(result);
@@ -656,7 +731,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+            IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -669,7 +745,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 actionName: "Action",
                 controllerName: "Home",
                 routeValues: routeValues,
-                fragment: "test");
+                fragment: "test"
+            );
 
             // Assert
             Assert.IsType<RedirectToActionResult>(result);
@@ -685,7 +762,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoute_WithParameterRouteValues_SetsResultEqualRouteValues(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -704,7 +782,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePreserveMethod_WithParameterRouteValues_SetsResultEqualRouteValues(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -723,7 +802,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoute_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+            IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -746,7 +826,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePreserveMethod_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+            IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -754,7 +835,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var expectedFragment = "test";
 
             // Act
-            var result = pageModel.RedirectToRoutePreserveMethod(routeName: "TestRoute", routeValues: routeValues, fragment: "test");
+            var result = pageModel.RedirectToRoutePreserveMethod(
+                routeName: "TestRoute",
+                routeValues: routeValues,
+                fragment: "test"
+            );
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(result);
@@ -769,7 +854,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePermanent_WithParameterRouteValues_SetsResultEqualRouteValuesAndPermanent(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -788,13 +874,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteValues_SetsResultEqualRouteValuesAndPermanent(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
 
             // Act
-            var resultPermanent = pageModel.RedirectToRoutePermanentPreserveMethod(routeValues: routeValues);
+            var resultPermanent = pageModel.RedirectToRoutePermanentPreserveMethod(
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultPermanent);
@@ -807,7 +896,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePermanent_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+            IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -830,7 +920,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+            IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -838,7 +929,11 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var expectedFragment = "test";
 
             // Act
-            var result = pageModel.RedirectToRoutePermanentPreserveMethod(routeName: "TestRoute", routeValues: routeValues, fragment: "test");
+            var result = pageModel.RedirectToRoutePermanentPreserveMethod(
+                routeName: "TestRoute",
+                routeValues: routeValues,
+                fragment: "test"
+            );
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(result);
@@ -908,7 +1003,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var routeName = "CustomRouteName";
 
             // Act
-            var resultPermanent = pageModel.RedirectToRoutePermanentPreserveMethod(routeName: routeName);
+            var resultPermanent = pageModel.RedirectToRoutePermanentPreserveMethod(
+                routeName: routeName
+            );
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultPermanent);
@@ -921,11 +1018,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         {
             get
             {
-                yield return new object[]
-                {
-                    null,
-                    null,
-                };
+                yield return new object[] { null, null, };
 
                 yield return new object[]
                 {
@@ -995,7 +1088,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 {
                     Assert.Equal("key", item.Key);
                     Assert.Equal("value", item.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -1035,7 +1129,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 {
                     Assert.Equal("key", item.Key);
                     Assert.Equal("value", item.Value);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -1080,7 +1175,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 {
                     Assert.Equal("key", item.Key);
                     Assert.Equal("value", item.Value);
-                });
+                }
+            );
             Assert.Equal(fragment, result.Fragment);
         }
 
@@ -1138,7 +1234,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 {
                     Assert.Equal("key", item.Key);
                     Assert.Equal("value", item.Value);
-                });
+                }
+            );
             Assert.True(result.Permanent);
         }
 
@@ -1164,7 +1261,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 {
                     Assert.Equal("key", item.Key);
                     Assert.Equal("value", item.Value);
-                });
+                }
+            );
             Assert.True(result.Permanent);
         }
 
@@ -1199,7 +1297,12 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var fragment = "fragment";
 
             // Act
-            var result = pageModel.RedirectToPagePermanent(pageName, pageHandler, routeValues, fragment);
+            var result = pageModel.RedirectToPagePermanent(
+                pageName,
+                pageHandler,
+                routeValues,
+                fragment
+            );
 
             // Assert
             Assert.IsType<RedirectToPageResult>(result);
@@ -1211,7 +1314,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
                 {
                     Assert.Equal("key", item.Key);
                     Assert.Equal("value", item.Value);
-                });
+                }
+            );
             Assert.Equal(fragment, result.Fragment);
             Assert.True(result.Permanent);
         }
@@ -1237,14 +1341,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToPagePreserveMethod_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
             var pageName = "CustomRouteName";
 
             // Act
-            var resultPermanent = pageModel.RedirectToPagePreserveMethod(pageName, routeValues: routeValues);
+            var resultPermanent = pageModel.RedirectToPagePreserveMethod(
+                pageName,
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToPageResult>(resultPermanent);
@@ -1258,14 +1366,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToPagePermanentPreserveMethod_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
             var routeName = "CustomRouteName";
 
             // Act
-            var resultPermanent = pageModel.RedirectToPagePermanentPreserveMethod(routeName, routeValues: routeValues);
+            var resultPermanent = pageModel.RedirectToPagePermanentPreserveMethod(
+                routeName,
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToPageResult>(resultPermanent);
@@ -1279,7 +1391,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoute_WithParameterRouteNameAndRouteValues_SetsResultSameRouteNameAndRouteValues(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -1300,14 +1413,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePreserveMethod_WithParameterRouteNameAndRouteValues_SetsResultSameRouteNameAndRouteValues(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
             var routeName = "CustomRouteName";
 
             // Act
-            var resultTemporary = pageModel.RedirectToRoutePreserveMethod(routeName: routeName, routeValues: routeValues);
+            var resultTemporary = pageModel.RedirectToRoutePreserveMethod(
+                routeName: routeName,
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultTemporary);
@@ -1321,7 +1438,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePermanent_WithParameterRouteNameAndRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
@@ -1342,14 +1460,18 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         [MemberData(nameof(RedirectTestData))]
         public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteNameAndRouteValues_SetsResultProperties(
             object routeValues,
-            IEnumerable<KeyValuePair<string, object>> expected)
+            IEnumerable<KeyValuePair<string, object>> expected
+        )
         {
             // Arrange
             var pageModel = new TestPageModel();
             var routeName = "CustomRouteName";
 
             // Act
-            var resultPermanent = pageModel.RedirectToRoutePermanentPreserveMethod(routeName: routeName, routeValues: routeValues);
+            var resultPermanent = pageModel.RedirectToRoutePermanentPreserveMethod(
+                routeName: routeName,
+                routeValues: routeValues
+            );
 
             // Assert
             Assert.IsType<RedirectToRouteResult>(resultPermanent);
@@ -1436,10 +1558,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
             var pageModel = new TestPageModel()
             {
-                PageContext = new PageContext
-                {
-                    HttpContext = mockHttpContext.Object
-                }
+                PageContext = new PageContext { HttpContext = mockHttpContext.Object }
             };
 
             var fileStream = Stream.Null;
@@ -1462,10 +1581,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
 
             var pageModel = new TestPageModel()
             {
-                PageContext = new PageContext
-                {
-                    HttpContext = mockHttpContext.Object
-                }
+                PageContext = new PageContext { HttpContext = mockHttpContext.Object }
             };
 
             var fileStream = Stream.Null;
@@ -1638,7 +1754,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var contentType = "text/xml; charset=us-ascii; p1=p1-value";
 
             // Act
-            var contentResult = (ContentResult)contentPageModel.Content_WithEncodingInCharset_AndEncodingParameter();
+            var contentResult =
+                (ContentResult)contentPageModel.Content_WithEncodingInCharset_AndEncodingParameter();
 
             // Assert
             MediaTypeAssert.Equal(contentType, contentResult.ContentType);
@@ -1712,23 +1829,19 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Arrange
             var httpContext = new DefaultHttpContext();
             var modelState = new ModelStateDictionary();
-            var actionContext = new ActionContext(httpContext, new RouteData(), new PageActionDescriptor(), modelState);
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new PageActionDescriptor(),
+                modelState
+            );
             var modelMetadataProvider = new EmptyModelMetadataProvider();
             var viewData = new ViewDataDictionary(modelMetadataProvider, modelState);
-            var pageContext = new PageContext(actionContext)
-            {
-                ViewData = viewData,
-            };
+            var pageContext = new PageContext(actionContext) { ViewData = viewData, };
 
-            var page = new TestPage
-            {
-                PageContext = pageContext,
-            };
+            var page = new TestPage { PageContext = pageContext, };
 
-            var pageModel = new TestPageModel
-            {
-                PageContext = pageContext,
-            };
+            var pageModel = new TestPageModel { PageContext = pageContext, };
 
             // Act & Assert
             Assert.Same(pageContext, pageModel.PageContext);
@@ -1744,7 +1857,9 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         {
             // Arrange
             var valueProviderFactory = new Mock<IValueProviderFactory>();
-            valueProviderFactory.Setup(f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>()))
+            valueProviderFactory.Setup(
+                    f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>())
+                )
                 .Throws(new ValueProviderException("some error"));
 
             var pageModel = new TestPageModel
@@ -1777,22 +1892,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             var urlHelperFactory = new Mock<IUrlHelperFactory>();
             urlHelperFactory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
                 .Returns(urlHelper);
-            httpContext.RequestServices = new ServiceCollection()
-                .AddSingleton(urlHelperFactory.Object)
+            httpContext.RequestServices = new ServiceCollection().AddSingleton(
+                    urlHelperFactory.Object
+                )
                 .BuildServiceProvider();
-            var actionContext = new ActionContext
-            {
-                HttpContext = httpContext,
-            };
-            var pageContext = new PageContext
-            {
-                HttpContext = httpContext,
-            };
+            var actionContext = new ActionContext { HttpContext = httpContext, };
+            var pageContext = new PageContext { HttpContext = httpContext, };
 
-            var pageModel = new TestPageModel
-            {
-                PageContext = pageContext,
-            };
+            var pageModel = new TestPageModel { PageContext = pageContext, };
 
             // Act & Assert
             Assert.Same(urlHelper, pageModel.Url);
@@ -1817,10 +1924,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         {
             // Arrange
             var page = new TestPage();
-            var pageModel = new TestPageModel
-            {
-                PageContext = new PageContext()
-            };
+            var pageModel = new TestPageModel { PageContext = new PageContext() };
 
             // Act
             var result = pageModel.Page();
@@ -1834,22 +1938,27 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public async Task AsyncPageHandlerExecutingMethod_InvokeSyncMethods()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var pageHandlerExecutingContext = new PageHandlerExecutingContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
                 new HandlerMethodDescriptor(),
                 new Dictionary<string, object>(),
-                new object());
+                new object()
+            );
             var pageHandlerExecutedContext = new PageHandlerExecutedContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
                 new HandlerMethodDescriptor(),
-                new object());
+                new object()
+            );
             var testPageModel = new Mock<PageModel> { CallBase = true };
             testPageModel.Setup(p => p.OnPageHandlerExecuting(pageHandlerExecutingContext))
                 .Verifiable();
@@ -1859,7 +1968,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Act
             await testPageModel.Object.OnPageHandlerExecutionAsync(
                 pageHandlerExecutingContext,
-                () => Task.FromResult(pageHandlerExecutedContext));
+                () => Task.FromResult(pageHandlerExecutedContext)
+            );
 
             testPageModel.Verify();
         }
@@ -1868,25 +1978,32 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public async Task AsyncPageHandlerExecutingMethod__DoesNotInvokeExecutedMethod_IfResultIsSet()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var pageHandlerExecutingContext = new PageHandlerExecutingContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
                 new HandlerMethodDescriptor(),
                 new Dictionary<string, object>(),
-                new object());
+                new object()
+            );
             var pageHandlerExecutedContext = new PageHandlerExecutedContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
                 new HandlerMethodDescriptor(),
-                new object());
+                new object()
+            );
             var testPageModel = new Mock<PageModel>() { CallBase = true };
             testPageModel.Setup(p => p.OnPageHandlerExecuting(pageHandlerExecutingContext))
-                .Callback((PageHandlerExecutingContext context) => context.Result = new PageResult())
+                .Callback(
+                    (PageHandlerExecutingContext context) => context.Result = new PageResult()
+                )
                 .Verifiable();
             testPageModel.Setup(p => p.OnPageHandlerExecuted(pageHandlerExecutedContext))
                 .Throws(new Exception("Shouldn't be called"));
@@ -1894,7 +2011,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
             // Act
             await testPageModel.Object.OnPageHandlerExecutionAsync(
                 pageHandlerExecutingContext,
-                () => Task.FromResult(pageHandlerExecutedContext));
+                () => Task.FromResult(pageHandlerExecutedContext)
+            );
 
             testPageModel.Verify();
         }
@@ -1903,15 +2021,19 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public async Task AsyncPageHandlerSelectingMethod_InvokeSyncMethods()
         {
             // Arrange
-            var pageContext = new PageContext(new ActionContext(
-                new DefaultHttpContext(),
-                new RouteData(),
-                new PageActionDescriptor(),
-                new ModelStateDictionary()));
+            var pageContext = new PageContext(
+                new ActionContext(
+                    new DefaultHttpContext(),
+                    new RouteData(),
+                    new PageActionDescriptor(),
+                    new ModelStateDictionary()
+                )
+            );
             var pageHandlerSelectedContext = new PageHandlerSelectedContext(
                 pageContext,
                 Array.Empty<IFilterMetadata>(),
-                new object());
+                new object()
+            );
 
             var testPageModel = new Mock<PageModel> { CallBase = true };
             testPageModel.Setup(p => p.OnPageHandlerSelected(pageHandlerSelectedContext))
@@ -1928,13 +2050,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         {
             // Arrange
             var modelMetadataProvider = new EmptyModelMetadataProvider();
-            var viewData = new ViewDataDictionary(modelMetadataProvider, new ModelStateDictionary());
+            var viewData = new ViewDataDictionary(
+                modelMetadataProvider,
+                new ModelStateDictionary()
+            );
             var pageModel = new TestPageModel
             {
-                PageContext = new PageContext
-                {
-                    ViewData = viewData
-                },
+                PageContext = new PageContext { ViewData = viewData },
                 MetadataProvider = modelMetadataProvider,
             };
 
@@ -1952,13 +2074,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         {
             // Arrange
             var modelMetadataProvider = new EmptyModelMetadataProvider();
-            var viewData = new ViewDataDictionary(modelMetadataProvider, new ModelStateDictionary());
+            var viewData = new ViewDataDictionary(
+                modelMetadataProvider,
+                new ModelStateDictionary()
+            );
             var pageModel = new TestPageModel
             {
-                PageContext = new PageContext
-                {
-                    ViewData = viewData
-                },
+                PageContext = new PageContext { ViewData = viewData },
                 MetadataProvider = modelMetadataProvider,
             };
             var model = new { Username = "Admin" };
@@ -1976,13 +2098,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void ViewComponent_WithName()
         {
             // Arrange
-            var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
+            var viewData = new ViewDataDictionary(
+                new EmptyModelMetadataProvider(),
+                new ModelStateDictionary()
+            );
             var pageModel = new TestPageModel
             {
-                PageContext = new PageContext
-                {
-                    ViewData = viewData,
-                },
+                PageContext = new PageContext { ViewData = viewData, },
             };
 
             // Act
@@ -1998,13 +2120,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages
         public void ViewComponent_WithType()
         {
             // Arrange
-            var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
+            var viewData = new ViewDataDictionary(
+                new EmptyModelMetadataProvider(),
+                new ModelStateDictionary()
+            );
             var pageModel = new TestPageModel
             {
-                PageContext = new PageContext
-                {
-                    ViewData = viewData,
-                },
+                PageContext = new PageContext { ViewData = viewData, },
             };
 
             // Act

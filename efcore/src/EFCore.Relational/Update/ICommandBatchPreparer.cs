@@ -32,6 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <returns> The list of batches to execute. </returns>
         IEnumerable<ModificationCommandBatch> BatchCommands(
             IList<IUpdateEntry> entries,
-            IUpdateAdapter updateAdapter);
+            IUpdateAdapter updateAdapter
+        );
     }
 }

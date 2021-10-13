@@ -17,9 +17,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         /// </summary>
         /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
         /// <param name="filters">All applicable <see cref="IFilterMetadata"/> implementations.</param>
-        public FilterContext(
-            ActionContext actionContext,
-            IList<IFilterMetadata> filters)
+        public FilterContext(ActionContext actionContext, IList<IFilterMetadata> filters)
             : base(actionContext)
         {
             if (filters == null)

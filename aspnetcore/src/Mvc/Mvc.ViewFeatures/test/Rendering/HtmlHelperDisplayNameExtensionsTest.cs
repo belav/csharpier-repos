@@ -18,12 +18,13 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
-            var enumerableHelper =
-                DefaultTemplatesUtilities.GetHtmlHelper<IEnumerable<DefaultTemplatesUtilities.ObjectTemplateModel>>(model: null);
+            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelper<
+                IEnumerable<DefaultTemplatesUtilities.ObjectTemplateModel>
+            >(model: null);
 
             // Act
             var displayNameResult = helper.DisplayName(expression: string.Empty);
-            var displayNameNullResult = helper.DisplayName(expression: null);   // null is another alias for current model
+            var displayNameNullResult = helper.DisplayName(expression: null); // null is another alias for current model
             var displayNameForResult = helper.DisplayNameFor(m => m);
             var displayNameForEnumerableModelResult = enumerableHelper.DisplayNameFor(m => m);
             var displayNameForModelResult = helper.DisplayNameForModel();
@@ -74,7 +75,9 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper<OuterClass>(model: null);
-            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelperForEnumerable<OuterClass>(model: null);
+            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelperForEnumerable<OuterClass>(
+                model: null
+            );
 
             // Act
             var displayNameResult = helper.DisplayName("Inner.Id");
@@ -88,23 +91,26 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         }
 
         [Theory]
-        [InlineData("")]    // Empty display name wins over non-empty property name.
+        [InlineData("")] // Empty display name wins over non-empty property name.
         [InlineData("Custom display name from metadata")]
         public void DisplayNameHelpers_ReturnDisplayName_IfNonNull(string displayName)
         {
             // Arrange
             var provider = new TestModelMetadataProvider();
-            provider
-                .ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
+            provider.ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
                 .DisplayDetails(dd => dd.DisplayName = () => displayName);
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
-            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelperForEnumerable(provider: provider);
+            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelperForEnumerable(
+                provider: provider
+            );
 
             // Act
             var displayNameResult = helper.DisplayName(expression: string.Empty);
             var displayNameForResult = helper.DisplayNameFor(m => m);
-            var displayNameForEnumerableResult = enumerableHelper.DisplayNameFor((DefaultTemplatesUtilities.ObjectTemplateModel m) => m);
+            var displayNameForEnumerableResult = enumerableHelper.DisplayNameFor(
+                (DefaultTemplatesUtilities.ObjectTemplateModel m) => m
+            );
             var displayNameForModelResult = helper.DisplayNameForModel();
 
             // Assert
@@ -121,12 +127,13 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var provider = new TestModelMetadataProvider();
-            provider
-                .ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
+            provider.ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
                 .DisplayDetails(dd => dd.DisplayName = () => displayName);
 
             var helper = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
-            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelperForEnumerable(provider: provider);
+            var enumerableHelper = DefaultTemplatesUtilities.GetHtmlHelperForEnumerable(
+                provider: provider
+            );
 
             // Act
             var displayNameResult = helper.DisplayName("Property1");
@@ -146,7 +153,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         [InlineData("A.B.C.D", "D")]
         public void DisplayName_ReturnsRightmostExpressionSegment_IfPropertiesNotFound(
             string expression,
-            string expectedResult)
+            string expectedResult
+        )
         {
             // Arrange
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
@@ -167,25 +175,30 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(
-                () => helper.DisplayNameFor(model => new { foo = "Bar" }));
+                () => helper.DisplayNameFor(model => new { foo = "Bar" })
+            );
             Assert.Equal(
                 "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.",
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
         public void EnumerableDisplayNameFor_ThrowsInvalidOperation_IfExpressionUnsupported()
         {
             // Arrange
-            var helper =
-                DefaultTemplatesUtilities.GetHtmlHelper<IEnumerable<DefaultTemplatesUtilities.ObjectTemplateModel>>(model: null);
+            var helper = DefaultTemplatesUtilities.GetHtmlHelper<
+                IEnumerable<DefaultTemplatesUtilities.ObjectTemplateModel>
+            >(model: null);
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(
-                () => helper.DisplayNameFor(model => new { foo = "Bar" }));
+                () => helper.DisplayNameFor(model => new { foo = "Bar" })
+            );
             Assert.Equal(
                 "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.",
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -207,8 +220,9 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
         {
             // Arrange
             var unknownKey = "this is a dummy parameter value";
-            var helper =
-                DefaultTemplatesUtilities.GetHtmlHelper<IEnumerable<DefaultTemplatesUtilities.ObjectTemplateModel>>(model: null);
+            var helper = DefaultTemplatesUtilities.GetHtmlHelper<
+                IEnumerable<DefaultTemplatesUtilities.ObjectTemplateModel>
+            >(model: null);
 
             // Act
             var result = helper.DisplayNameFor(model => unknownKey);

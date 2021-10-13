@@ -10,13 +10,18 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.MatchFolderAndNamespace
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ChangeNamespaceToMatchFolder), Shared]
-    internal class CSharpChangeNamespaceToMatchFolderCodeFixProvider : AbstractChangeNamespaceToMatchFolderCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ChangeNamespaceToMatchFolder
+        ),
+        Shared
+    ]
+    internal class CSharpChangeNamespaceToMatchFolderCodeFixProvider
+        : AbstractChangeNamespaceToMatchFolderCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpChangeNamespaceToMatchFolderCodeFixProvider()
-        {
-        }
+        public CSharpChangeNamespaceToMatchFolderCodeFixProvider() { }
     }
 }

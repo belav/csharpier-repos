@@ -23,8 +23,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
             }
 
             var bindingInfo = context.BindingInfo;
-            if (bindingInfo.BindingSource == null ||
-                !bindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Header))
+            if (
+                bindingInfo.BindingSource == null
+                || !bindingInfo.BindingSource.CanAcceptDataFrom(BindingSource.Header)
+            )
             {
                 return null;
             }
@@ -49,7 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             var innerModelBinder = context.CreateBinder(
                 modelMetadata.GetMetadataForType(modelMetadata.ModelType),
-                nestedBindingInfo);
+                nestedBindingInfo
+            );
 
             if (innerModelBinder == null)
             {

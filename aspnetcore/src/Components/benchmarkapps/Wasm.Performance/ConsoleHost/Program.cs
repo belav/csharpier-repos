@@ -15,11 +15,13 @@ namespace Wasm.Performance.ConsoleHost
 
         public Program()
         {
-            OnExecute(() =>
-            {
-                ShowHelp();
-                return 1;
-            });
+            OnExecute(
+                () =>
+                {
+                    ShowHelp();
+                    return 1;
+                }
+            );
 
             Commands.Add(new GridScenario());
         }

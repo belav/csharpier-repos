@@ -56,7 +56,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 var viewContext = ViewContext;
                 if (viewContext == null)
                 {
-                    throw new InvalidOperationException(Resources.FormatViewContextMustBeSet(nameof(ViewContext), nameof(Output)));
+                    throw new InvalidOperationException(
+                        Resources.FormatViewContextMustBeSet(nameof(ViewContext), nameof(Output))
+                    );
                 }
 
                 return viewContext.Writer;
@@ -82,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public IHtmlContent? BodyContent { get; set; }
 
         /// <inheritdoc />
-        public IDictionary<string, RenderAsyncDelegate> PreviousSectionWriters { get; set; } = default!;
+        public IDictionary<string, RenderAsyncDelegate> PreviousSectionWriters { get; set; } =
+            default!;
 
         /// <summary>
         /// Gets or sets a <see cref="System.Diagnostics.DiagnosticSource"/> instance used to instrument the page execution.
@@ -108,7 +111,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         /// <remarks>Returns null if <see cref="ViewContext"/> is null.</remarks>
         public ITempDataDictionary TempData => ViewContext?.TempData!;
 
-        private Stack<TagHelperScopeInfo> TagHelperScopes { get; } = new Stack<TagHelperScopeInfo>();
+        private Stack<TagHelperScopeInfo> TagHelperScopes { get; } =
+            new Stack<TagHelperScopeInfo>();
 
         private ITagHelperFactory TagHelperFactory
         {
@@ -152,12 +156,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         public string InvalidTagHelperIndexerAssignment(
             string attributeName,
             string tagHelperTypeName,
-            string propertyName)
+            string propertyName
+        )
         {
             return Resources.FormatRazorPage_InvalidTagHelperIndexerAssignment(
                 attributeName,
                 tagHelperTypeName,
-                propertyName);
+                propertyName
+            );
         }
 
         /// <summary>
@@ -209,7 +215,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         {
             if (TagHelperScopes.Count == 0)
             {
-                throw new InvalidOperationException(Resources.RazorPage_ThereIsNoActiveWritingScopeToEnd);
+                throw new InvalidOperationException(
+                    Resources.RazorPage_ThereIsNoActiveWritingScopeToEnd
+                );
             }
 
             var scopeInfo = TagHelperScopes.Pop();
@@ -239,7 +247,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         {
             if (_pageWriter != null)
             {
-                throw new InvalidOperationException(Resources.RazorPage_NestingAttributeWritingScopesNotSupported);
+                throw new InvalidOperationException(
+                    Resources.RazorPage_NestingAttributeWritingScopesNotSupported
+                );
             }
 
             var viewContext = ViewContext;
@@ -253,7 +263,6 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // We need to replace the ViewContext's Writer to ensure that all content (including content written
             // from HTML helpers) is redirected.
             viewContext.Writer = _valueBuffer;
-
         }
 
         /// <summary>
@@ -268,7 +277,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         {
             if (_pageWriter == null)
             {
-                throw new InvalidOperationException(Resources.RazorPage_ThereIsNoActiveWritingScopeToEnd);
+                throw new InvalidOperationException(
+                    Resources.RazorPage_ThereIsNoActiveWritingScopeToEnd
+                );
             }
 
             Debug.Assert(_valueBuffer is not null);
@@ -344,8 +355,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor
         /// <param name="section">The delegate to execute when rendering the section.</param>
         /// <remarks>This is a temporary placeholder method to support ASP.NET Core 2.0.0 editor code generation.</remarks>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected void DefineSection(string name, Func<object?, Task> section)
-            => DefineSection(name, () => section(null /* writer */));
+        protected void DefineSection(string name, Func<object?, Task> section) =>
+            DefineSection(
+                name,
+                () =>
+                    section(
+                        null /* writer */
+                    )
+            );
 
         /// <summary>
         /// Creates a named content section in the page that can be invoked in a Layout page using
@@ -470,7 +487,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             int prefixOffset,
             string suffix,
             int suffixOffset,
-            int attributeValuesCount)
+            int attributeValuesCount
+        )
         {
             if (prefix == null)
             {
@@ -482,7 +500,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 throw new ArgumentNullException(nameof(suffix));
             }
 
-            _attributeInfo = new AttributeInfo(name, prefix, prefixOffset, suffix, suffixOffset, attributeValuesCount);
+            _attributeInfo = new AttributeInfo(
+                name,
+                prefix,
+                prefixOffset,
+                suffix,
+                suffixOffset,
+                attributeValuesCount
+            );
 
             // Single valued attributes might be omitted in entirety if it the attribute value strictly evaluates to
             // null  or false. Consequently defer the prefix generation until we encounter the attribute value.
@@ -507,7 +532,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             object? value,
             int valueOffset,
             int valueLength,
-            bool isLiteral)
+            bool isLiteral
+        )
         {
             if (_attributeInfo.AttributeValuesCount == 1)
             {
@@ -568,13 +594,15 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             TagHelperExecutionContext executionContext,
             string attributeName,
             int attributeValuesCount,
-            HtmlAttributeValueStyle attributeValueStyle)
+            HtmlAttributeValueStyle attributeValueStyle
+        )
         {
             _tagHelperAttributeInfo = new TagHelperAttributeInfo(
                 executionContext,
                 attributeName,
                 attributeValuesCount,
-                attributeValueStyle);
+                attributeValueStyle
+            );
         }
 
         /// <summary>
@@ -592,7 +620,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             object? value,
             int valueOffset,
             int valueLength,
-            bool isLiteral)
+            bool isLiteral
+        )
         {
             Debug.Assert(_tagHelperAttributeInfo.ExecutionContext != null);
             if (_tagHelperAttributeInfo.AttributeValuesCount == 1)
@@ -606,7 +635,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     _tagHelperAttributeInfo.ExecutionContext.AddTagHelperAttribute(
                         _tagHelperAttributeInfo.Name,
                         value?.ToString() ?? string.Empty,
-                        _tagHelperAttributeInfo.AttributeValueStyle);
+                        _tagHelperAttributeInfo.AttributeValueStyle
+                    );
                     _tagHelperAttributeInfo.Suppressed = true;
                     return;
                 }
@@ -615,7 +645,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     _tagHelperAttributeInfo.ExecutionContext.AddHtmlAttribute(
                         _tagHelperAttributeInfo.Name,
                         _tagHelperAttributeInfo.Name,
-                        _tagHelperAttributeInfo.AttributeValueStyle);
+                        _tagHelperAttributeInfo.AttributeValueStyle
+                    );
                     _tagHelperAttributeInfo.Suppressed = true;
                     return;
                 }
@@ -651,10 +682,17 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             {
                 // Perf: _valueBuffer might be null if nothing was written. If it is set, clear it so
                 // it is reset for the next value.
-                var content = _valueBuffer == null ? HtmlString.Empty : new HtmlString(_valueBuffer.ToString());
+                var content =
+                    _valueBuffer == null
+                        ? HtmlString.Empty
+                        : new HtmlString(_valueBuffer.ToString());
                 _valueBuffer?.GetStringBuilder().Clear();
 
-                executionContext.AddHtmlAttribute(_tagHelperAttributeInfo.Name, content, _tagHelperAttributeInfo.AttributeValueStyle);
+                executionContext.AddHtmlAttribute(
+                    _tagHelperAttributeInfo.Name,
+                    content,
+                    _tagHelperAttributeInfo.AttributeValueStyle
+                );
             }
         }
 
@@ -676,7 +714,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             if (TagHelperScopes.Count > 0)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatRazorPage_CannotFlushWhileInAWritingScope(nameof(FlushAsync), Path));
+                    Resources.FormatRazorPage_CannotFlushWhileInAWritingScope(
+                        nameof(FlushAsync),
+                        Path
+                    )
+                );
             }
 
             // Calls to Flush are allowed if the page does not specify a Layout or if it is executing a section in the
@@ -703,7 +745,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var viewContext = ViewContext;
             if (viewContext != null)
             {
-                var antiforgery = viewContext.HttpContext.RequestServices.GetRequiredService<IAntiforgery>();
+                var antiforgery =
+                    viewContext.HttpContext.RequestServices.GetRequiredService<IAntiforgery>();
                 antiforgery.SetCookieTokenAndHeader(viewContext.HttpContext);
             }
             return HtmlString.Empty;
@@ -748,16 +791,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
         private static bool IsBoolFalseOrNullValue(string? prefix, object? value)
         {
-            return string.IsNullOrEmpty(prefix) &&
-                (value is null ||
-                (value is bool boolValue && !boolValue));
+            return string.IsNullOrEmpty(prefix)
+                && (value is null || (value is bool boolValue && !boolValue));
         }
 
         private static bool IsBoolTrueWithEmptyPrefixValue(string? prefix, object? value)
         {
             // If the value is just the bool 'true', use the attribute name as the value.
-            return string.IsNullOrEmpty(prefix) &&
-                (value is bool boolValue && boolValue);
+            return string.IsNullOrEmpty(prefix) && (value is bool boolValue && boolValue);
         }
 
         /// <inheritdoc />
@@ -771,7 +812,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 int prefixOffset,
                 string suffix,
                 int suffixOffset,
-                int attributeValuesCount)
+                int attributeValuesCount
+            )
             {
                 Name = name;
                 Prefix = prefix;
@@ -804,7 +846,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 TagHelperExecutionContext tagHelperExecutionContext,
                 string name,
                 int attributeValuesCount,
-                HtmlAttributeValueStyle attributeValueStyle)
+                HtmlAttributeValueStyle attributeValueStyle
+            )
             {
                 ExecutionContext = tagHelperExecutionContext;
                 Name = name;

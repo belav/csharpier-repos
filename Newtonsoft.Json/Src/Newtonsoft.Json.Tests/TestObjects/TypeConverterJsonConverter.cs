@@ -39,19 +39,28 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         private TypeConverter GetConverter(Type type)
         {
-            var converters = ReflectionUtils.GetAttributes(type, typeof(TypeConverterAttribute), true).Union(
-                from t in type.GetInterfaces()
-                from c in ReflectionUtils.GetAttributes(t, typeof(TypeConverterAttribute), true)
-                select c).Distinct();
+            var converters = ReflectionUtils.GetAttributes(
+                    type,
+                    typeof(TypeConverterAttribute),
+                    true
+                )
+                .Union(
+                    from t in type.GetInterfaces()
+                    from c in ReflectionUtils.GetAttributes(t, typeof(TypeConverterAttribute), true)
+                    select c
+                )
+                .Distinct();
 
-            return
-                (from c in converters
-                 let converter =
-                     (TypeConverter)Activator.CreateInstance(Type.GetType(((TypeConverterAttribute)c).ConverterTypeName))
-                 where converter.CanConvertFrom(typeof(string))
-                       && converter.CanConvertTo(typeof(string))
-                 select converter)
-                    .FirstOrDefault();
+            return (
+                from c in converters
+                let converter = (TypeConverter)Activator.CreateInstance(
+                    Type.GetType(((TypeConverterAttribute)c).ConverterTypeName)
+                )
+                where
+                    converter.CanConvertFrom(typeof(string))
+                    && converter.CanConvertTo(typeof(string))
+                select converter
+            ).FirstOrDefault();
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -62,7 +71,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             writer.WriteValue(text);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             var converter = GetConverter(objectType);
             return converter.ConvertFromInvariantString(reader.Value.ToString());

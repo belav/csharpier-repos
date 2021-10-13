@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
@@ -86,7 +86,10 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
         [Theory]
         [InlineData("HelloWorld!", "HtmlEncode[[HelloWorld!]]")]
         [InlineData("  ", "HtmlEncode[[  ]]")]
-        public void SetHtmlContent_WithTagHelperContent_WorksAsExpected(string content, string expected)
+        public void SetHtmlContent_WithTagHelperContent_WorksAsExpected(
+            string content,
+            string expected
+        )
         {
             // Arrange
             var tagHelperContent = new DefaultTagHelperContent();
@@ -238,12 +241,20 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             var tagHelperContent = new DefaultTagHelperContent();
 
             // Act
-            tagHelperContent.AppendFormat(CultureInfo.InvariantCulture, "{0} {1} {2} {3}!", "First", "Second", "Third", "Fourth");
+            tagHelperContent.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "{0} {1} {2} {3}!",
+                "First",
+                "Second",
+                "Third",
+                "Fourth"
+            );
 
             // Assert
             Assert.Equal(
                 "HtmlEncode[[First]] HtmlEncode[[Second]] HtmlEncode[[Third]] HtmlEncode[[Fourth]]!",
-                tagHelperContent.GetContent(new HtmlTestEncoder()));
+                tagHelperContent.GetContent(new HtmlTestEncoder())
+            );
         }
 
         [Fact]
@@ -259,13 +270,15 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
                 1.1,
                 2.98,
                 145.82,
-                32.86);
+                32.86
+            );
 
             // Assert
             Assert.Equal(
-                "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] " +
-                    "HtmlEncode[[145.82]] HtmlEncode[[32.86]]!",
-                tagHelperContent.GetContent(new HtmlTestEncoder()));
+                "Numbers in InvariantCulture - HtmlEncode[[1.10]] HtmlEncode[[2.98]] "
+                    + "HtmlEncode[[145.82]] HtmlEncode[[32.86]]!",
+                tagHelperContent.GetContent(new HtmlTestEncoder())
+            );
         }
 
         [Fact]
@@ -278,7 +291,11 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             var expected = "Content was HtmlEncode[[HelloWorld]]";
 
             // Act
-            tagHelperContent.AppendFormat(CultureInfo.InvariantCulture, "Content was {0}", helloWorldContent);
+            tagHelperContent.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "Content was {0}",
+                helloWorldContent
+            );
 
             // Assert
             Assert.Equal(expected, tagHelperContent.GetContent(new HtmlTestEncoder()));
@@ -315,7 +332,6 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             // Assert
             Assert.True(tagHelperContent.IsModified);
         }
-
 
         [Fact]
         public void IsModified_TrueAfterAppend()
@@ -539,7 +555,9 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
 
         [Theory]
         [MemberData(nameof(EmptyOrWhiteSpaceData))]
-        public void IsEmptyOrWhiteSpace_TrueAfterAppendTagHelperContent_WithDataToEncode(string data)
+        public void IsEmptyOrWhiteSpace_TrueAfterAppendTagHelperContent_WithDataToEncode(
+            string data
+        )
         {
             // Arrange
             var tagHelperContent = new DefaultTagHelperContent();
@@ -555,7 +573,9 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
 
         [Theory]
         [MemberData(nameof(EmptyOrWhiteSpaceData))]
-        public void IsEmptyOrWhiteSpace_TrueAfterAppendTagHelperContentTwice_WithDataToEncode(string data)
+        public void IsEmptyOrWhiteSpace_TrueAfterAppendTagHelperContentTwice_WithDataToEncode(
+            string data
+        )
         {
             // Arrange
             var tagHelperContent = new DefaultTagHelperContent();
@@ -705,7 +725,8 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             var expected = "HtmlEncode[[First ]]HtmlEncode[[Second]] Third";
 
             // Act
-            tagHelperContent.SetContent("First ").AppendFormat(CultureInfo.InvariantCulture, "{0} Third", "Second");
+            tagHelperContent.SetContent("First ")
+                .AppendFormat(CultureInfo.InvariantCulture, "{0} Third", "Second");
 
             // Assert
             Assert.Equal(expected, tagHelperContent.GetContent(new HtmlTestEncoder()));
@@ -719,8 +740,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
             var expected = "HtmlEncode[[First ]]HtmlEncode[[Second]] Third HtmlEncode[[Fourth]]";
 
             // Act
-            tagHelperContent
-                .SetContent("First ")
+            tagHelperContent.SetContent("First ")
                 .AppendFormat(CultureInfo.InvariantCulture, "{0} Third ", "Second")
                 .Append("Fourth");
 

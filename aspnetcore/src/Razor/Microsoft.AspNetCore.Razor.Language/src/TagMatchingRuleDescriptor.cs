@@ -28,7 +28,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             get
             {
                 var allDiagnostics = GetAllDiagnostics();
-                var errors = allDiagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+                var errors = allDiagnostics.Any(
+                    diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error
+                );
 
                 return errors;
             }
@@ -38,7 +40,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (_allDiagnostics == null)
             {
-                var attributeDiagnostics = Attributes.SelectMany(attribute => attribute.Diagnostics);
+                var attributeDiagnostics = Attributes.SelectMany(
+                    attribute => attribute.Diagnostics
+                );
                 var combinedDiagnostics = Diagnostics.Concat(attributeDiagnostics);
                 _allDiagnostics = combinedDiagnostics.ToArray();
             }

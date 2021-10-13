@@ -18,7 +18,11 @@ namespace Microsoft.Extensions.Tools.Internal
 
         public TemporaryDirectory()
         {
-            Root = Path.Combine(Path.GetTempPath(), "dotnet-tool-tests", Guid.NewGuid().ToString("N"));
+            Root = Path.Combine(
+                Path.GetTempPath(),
+                "dotnet-tool-tests",
+                Guid.NewGuid().ToString("N")
+            );
         }
 
         private TemporaryDirectory(string path, TemporaryDirectory parent)
@@ -36,14 +40,21 @@ namespace Microsoft.Extensions.Tools.Internal
 
         public string Root { get; }
 
-        public TemporaryCSharpProject WithCSharpProject(string name, string sdk = "Microsoft.NET.Sdk")
+        public TemporaryCSharpProject WithCSharpProject(
+            string name,
+            string sdk = "Microsoft.NET.Sdk"
+        )
         {
             var project = new TemporaryCSharpProject(name, this, sdk);
             _projects.Add(project);
             return project;
         }
 
-        public TemporaryCSharpProject WithCSharpProject(string name, out TemporaryCSharpProject project, string sdk = "Microsoft.NET.Sdk")
+        public TemporaryCSharpProject WithCSharpProject(
+            string name,
+            out TemporaryCSharpProject project,
+            string sdk = "Microsoft.NET.Sdk"
+        )
         {
             project = WithCSharpProject(name, sdk);
             return project;

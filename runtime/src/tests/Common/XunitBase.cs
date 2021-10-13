@@ -12,7 +12,7 @@ namespace Xunit
         private static object consoleLock = new object();
 
         private static ManualResetEvent finished = new ManualResetEvent(false);
-        
+
         private static int result = 100;
 
         public int RunTests()
@@ -36,13 +36,17 @@ namespace Xunit
         private static void OnDiscoveryComplete(DiscoveryCompleteInfo info)
         {
             lock (consoleLock)
-                Console.WriteLine($"Running {info.TestCasesToRun} of {info.TestCasesDiscovered} tests...");
+                Console.WriteLine(
+                    $"Running {info.TestCasesToRun} of {info.TestCasesDiscovered} tests..."
+                );
         }
 
         private static void OnExecutionComplete(ExecutionCompleteInfo info)
         {
             lock (consoleLock)
-                Console.WriteLine($"Finished: {info.TotalTests} tests in {Math.Round(info.ExecutionTime, 3)}s ({info.TestsFailed} failed, {info.TestsSkipped} skipped)");
+                Console.WriteLine(
+                    $"Finished: {info.TotalTests} tests in {Math.Round(info.ExecutionTime, 3)}s ({info.TestsFailed} failed, {info.TestsSkipped} skipped)"
+                );
 
             finished.Set();
         }

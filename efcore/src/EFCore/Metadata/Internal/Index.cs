@@ -40,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public Index(
             IReadOnlyList<Property> properties,
             EntityType declaringEntityType,
-            ConfigurationSource configurationSource)
+            ConfigurationSource configurationSource
+        )
         {
             Check.NotEmpty(properties, nameof(properties));
             Check.HasNoNulls(properties, nameof(properties));
@@ -63,8 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             IReadOnlyList<Property> properties,
             string name,
             EntityType declaringEntityType,
-            ConfigurationSource configurationSource)
-            : this(properties, declaringEntityType, configurationSource)
+            ConfigurationSource configurationSource
+        ) : this(properties, declaringEntityType, configurationSource)
         {
             Check.NotEmpty(name, nameof(name));
 
@@ -77,7 +78,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IReadOnlyList<Property> Properties { [DebuggerStepThrough] get; }
+        public virtual IReadOnlyList<Property> Properties
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,7 +90,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual string? Name { [DebuggerStepThrough] get; }
+        public virtual string? Name
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -93,7 +102,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual EntityType DeclaringEntityType { [DebuggerStepThrough] get; }
+        public virtual EntityType DeclaringEntityType
+        {
+            [DebuggerStepThrough]
+            get;
+        }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -103,7 +116,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual InternalIndexBuilder Builder
         {
-            [DebuggerStepThrough] get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
+            [DebuggerStepThrough]
+            get =>
+                _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel);
         }
 
         /// <summary>
@@ -112,8 +127,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool IsInModel
-            => _builder is not null;
+        public virtual bool IsInModel => _builder is not null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -121,8 +135,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void SetRemovedFromModel()
-            => _builder = null;
+        public virtual void SetRemovedFromModel() => _builder = null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -138,8 +151,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource GetConfigurationSource()
-            => _configurationSource;
+        public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -147,8 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource)
-            => _configurationSource = configurationSource.Max(_configurationSource);
+        public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource) =>
+            _configurationSource = configurationSource.Max(_configurationSource);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -186,12 +198,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             }
 
             return isChanging
-                ? DeclaringEntityType.Model.ConventionDispatcher.OnIndexUniquenessChanged(Builder)
-                : oldIsUnique;
+              ? DeclaringEntityType.Model.ConventionDispatcher.OnIndexUniquenessChanged(Builder)
+              : oldIsUnique;
         }
 
-        private static bool DefaultIsUnique
-            => false;
+        private static bool DefaultIsUnique => false;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -199,11 +210,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ConfigurationSource? GetIsUniqueConfigurationSource()
-            => _isUniqueConfigurationSource;
+        public virtual ConfigurationSource? GetIsUniqueConfigurationSource() =>
+            _isUniqueConfigurationSource;
 
-        private void UpdateIsUniqueConfigurationSource(ConfigurationSource configurationSource)
-            => _isUniqueConfigurationSource = configurationSource.Max(_isUniqueConfigurationSource);
+        private void UpdateIsUniqueConfigurationSource(ConfigurationSource configurationSource) =>
+            _isUniqueConfigurationSource = configurationSource.Max(_isUniqueConfigurationSource);
 
         /// <summary>
         ///     Runs the conventions when an annotation was set or removed.
@@ -215,8 +226,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         protected override IConventionAnnotation? OnAnnotationSet(
             string name,
             IConventionAnnotation? annotation,
-            IConventionAnnotation? oldAnnotation)
-            => Builder.ModelBuilder.Metadata.ConventionDispatcher.OnIndexAnnotationChanged(Builder, name, annotation, oldAnnotation);
+            IConventionAnnotation? oldAnnotation
+        ) =>
+            Builder.ModelBuilder.Metadata.ConventionDispatcher.OnIndexAnnotationChanged(
+                Builder,
+                name,
+                annotation,
+                oldAnnotation
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -224,13 +241,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IDependentKeyValueFactory<TKey> GetNullableValueFactory<TKey>()
-            => (IDependentKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
-                ref _nullableValueFactory, this, static index =>
+        public virtual IDependentKeyValueFactory<TKey> GetNullableValueFactory<TKey>() =>
+            (IDependentKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
+                ref _nullableValueFactory,
+                this,
+                static index =>
                 {
                     index.EnsureReadOnly();
                     return new CompositeValueFactory(index.Properties);
-                });
+                }
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -238,8 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override string ToString()
-            => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IIndex)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -247,10 +267,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual DebugView DebugView
-            => new(
+        public virtual DebugView DebugView =>
+            new(
                 () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
-                () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+                () => ((IIndex)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -260,7 +281,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyList<IReadOnlyProperty> IReadOnlyIndex.Properties
         {
-            [DebuggerStepThrough] get => Properties;
+            [DebuggerStepThrough]
+            get => Properties;
         }
 
         /// <summary>
@@ -271,7 +293,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyEntityType IReadOnlyIndex.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -282,7 +305,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyList<IMutableProperty> IMutableIndex.Properties
         {
-            [DebuggerStepThrough] get => Properties;
+            [DebuggerStepThrough]
+            get => Properties;
         }
 
         /// <summary>
@@ -293,7 +317,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IMutableEntityType IMutableIndex.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -304,7 +329,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IConventionIndexBuilder IConventionIndex.Builder
         {
-            [DebuggerStepThrough] get => Builder;
+            [DebuggerStepThrough]
+            get => Builder;
         }
 
         /// <summary>
@@ -315,7 +341,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IConventionAnnotatableBuilder IConventionAnnotatable.Builder
         {
-            [DebuggerStepThrough] get => Builder;
+            [DebuggerStepThrough]
+            get => Builder;
         }
 
         /// <summary>
@@ -326,7 +353,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IReadOnlyList<IConventionProperty> IConventionIndex.Properties
         {
-            [DebuggerStepThrough] get => Properties;
+            [DebuggerStepThrough]
+            get => Properties;
         }
 
         /// <summary>
@@ -349,7 +377,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         IConventionEntityType IConventionIndex.DeclaringEntityType
         {
-            [DebuggerStepThrough] get => DeclaringEntityType;
+            [DebuggerStepThrough]
+            get => DeclaringEntityType;
         }
 
         /// <summary>
@@ -371,7 +400,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [DebuggerStepThrough]
-        bool? IConventionIndex.SetIsUnique(bool? unique, bool fromDataAnnotation)
-            => SetIsUnique(unique, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool? IConventionIndex.SetIsUnique(bool? unique, bool fromDataAnnotation) =>
+            SetIsUnique(
+                unique,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
     }
 }

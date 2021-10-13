@@ -19,7 +19,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             return ConvertTo(value, typeToConvertTo, null);
         }
 
-        internal static ConversionResult ConvertTo(object value, Type typeToConvertTo, IContractResolver contractResolver)
+        internal static ConversionResult ConvertTo(
+            object value,
+            Type typeToConvertTo,
+            IContractResolver contractResolver
+        )
         {
             if (value == null)
             {
@@ -36,7 +40,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 {
                     if (contractResolver == null)
                     {
-                        var deserialized = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value), typeToConvertTo);
+                        var deserialized = JsonConvert.DeserializeObject(
+                            JsonConvert.SerializeObject(value),
+                            typeToConvertTo
+                        );
                         return new ConversionResult(true, deserialized);
                     }
                     else
@@ -45,7 +52,11 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                         {
                             ContractResolver = contractResolver
                         };
-                        var deserialized = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value), typeToConvertTo, serializerSettings);
+                        var deserialized = JsonConvert.DeserializeObject(
+                            JsonConvert.SerializeObject(value),
+                            typeToConvertTo,
+                            serializerSettings
+                        );
                         return new ConversionResult(true, deserialized);
                     }
                 }
@@ -70,7 +81,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             }
             try
             {
-                var deserialized = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value), targetType);
+                var deserialized = JsonConvert.DeserializeObject(
+                    JsonConvert.SerializeObject(value),
+                    targetType
+                );
                 return new ConversionResult(true, deserialized);
             }
             catch

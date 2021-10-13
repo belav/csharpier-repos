@@ -58,19 +58,24 @@ namespace Microsoft.EntityFrameworkCore.Query
             IQuerySqlGeneratorFactory querySqlGeneratorFactory,
             ISqlExpressionFactory sqlExpressionFactory,
             IParameterNameGeneratorFactory parameterNameGeneratorFactory,
-            IRelationalParameterBasedSqlProcessorFactory relationalParameterBasedSqlProcessorFactory)
+            IRelationalParameterBasedSqlProcessorFactory relationalParameterBasedSqlProcessorFactory
+        )
         {
             Check.NotNull(querySqlGeneratorFactory, nameof(querySqlGeneratorFactory));
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
             Check.NotNull(parameterNameGeneratorFactory, nameof(parameterNameGeneratorFactory));
-            Check.NotNull(relationalParameterBasedSqlProcessorFactory, nameof(relationalParameterBasedSqlProcessorFactory));
+            Check.NotNull(
+                relationalParameterBasedSqlProcessorFactory,
+                nameof(relationalParameterBasedSqlProcessorFactory)
+            );
 
             QuerySqlGeneratorFactory = querySqlGeneratorFactory;
 #pragma warning disable CS0618 // Type or member is obsolete
             SqlExpressionFactory = sqlExpressionFactory;
             ParameterNameGeneratorFactory = parameterNameGeneratorFactory;
 #pragma warning restore CS0618 // Type or member is obsolete
-            RelationalParameterBasedSqlProcessorFactory = relationalParameterBasedSqlProcessorFactory;
+            RelationalParameterBasedSqlProcessorFactory =
+                relationalParameterBasedSqlProcessorFactory;
         }
 
         /// <summary>
@@ -81,13 +86,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <summary>
         ///     The SQL expression factory.
         /// </summary>
-        [Obsolete("Use the service from " + nameof(RelationalParameterBasedSqlProcessorDependencies) + ".")]
+        [Obsolete(
+            "Use the service from " + nameof(RelationalParameterBasedSqlProcessorDependencies) + "."
+        )]
         public ISqlExpressionFactory SqlExpressionFactory { get; init; }
 
         /// <summary>
         ///     The parameter name-generator factory.
         /// </summary>
-        [Obsolete("Use the service from " + nameof(RelationalParameterBasedSqlProcessorDependencies) + ".")]
+        [Obsolete(
+            "Use the service from " + nameof(RelationalParameterBasedSqlProcessorDependencies) + "."
+        )]
         public IParameterNameGeneratorFactory ParameterNameGeneratorFactory { get; init; }
 
         /// <summary>

@@ -19,50 +19,57 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.InvertIf
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.InvertIf), Shared]
-    internal sealed class CSharpInvertIfCodeRefactoringProvider : AbstractInvertIfCodeRefactoringProvider<IfStatementSyntax, StatementSyntax, StatementSyntax>
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.InvertIf
+        ),
+        Shared
+    ]
+    internal sealed class CSharpInvertIfCodeRefactoringProvider
+        : AbstractInvertIfCodeRefactoringProvider<
+              IfStatementSyntax,
+              StatementSyntax,
+              StatementSyntax
+          >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpInvertIfCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpInvertIfCodeRefactoringProvider() { }
 
-        protected override string GetTitle()
-            => CSharpFeaturesResources.Invert_if;
+        protected override string GetTitle() => CSharpFeaturesResources.Invert_if;
 
-        protected override bool IsElseless(IfStatementSyntax ifNode)
-            => ifNode.Else == null;
+        protected override bool IsElseless(IfStatementSyntax ifNode) => ifNode.Else == null;
 
-        protected override bool CanInvert(IfStatementSyntax ifNode)
-            => ifNode.IsParentKind(SyntaxKind.Block, SyntaxKind.SwitchSection);
+        protected override bool CanInvert(IfStatementSyntax ifNode) =>
+            ifNode.IsParentKind(SyntaxKind.Block, SyntaxKind.SwitchSection);
 
-        protected override SyntaxNode GetCondition(IfStatementSyntax ifNode)
-            => ifNode.Condition;
+        protected override SyntaxNode GetCondition(IfStatementSyntax ifNode) => ifNode.Condition;
 
-        protected override StatementRange GetIfBodyStatementRange(IfStatementSyntax ifNode)
-            => new StatementRange(ifNode.Statement, ifNode.Statement);
+        protected override StatementRange GetIfBodyStatementRange(IfStatementSyntax ifNode) =>
+            new StatementRange(ifNode.Statement, ifNode.Statement);
 
-        protected override bool IsStatementContainer(SyntaxNode node)
-            => node.IsKind(SyntaxKind.Block, SyntaxKind.SwitchSection);
+        protected override bool IsStatementContainer(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.Block, SyntaxKind.SwitchSection);
 
-        protected override bool IsNoOpSyntaxNode(SyntaxNode node)
-            => node.IsKind(SyntaxKind.Block, SyntaxKind.EmptyStatement);
+        protected override bool IsNoOpSyntaxNode(SyntaxNode node) =>
+            node.IsKind(SyntaxKind.Block, SyntaxKind.EmptyStatement);
 
-        protected override bool IsExecutableStatement(SyntaxNode node)
-            => node is StatementSyntax;
+        protected override bool IsExecutableStatement(SyntaxNode node) => node is StatementSyntax;
 
-        protected override StatementSyntax GetNextStatement(StatementSyntax node)
-            => node.GetNextStatement();
+        protected override StatementSyntax GetNextStatement(StatementSyntax node) =>
+            node.GetNextStatement();
 
-        protected override StatementSyntax GetIfBody(IfStatementSyntax ifNode)
-            => ifNode.Statement;
+        protected override StatementSyntax GetIfBody(IfStatementSyntax ifNode) => ifNode.Statement;
 
-        protected override StatementSyntax GetEmptyEmbeddedStatement()
-            => SyntaxFactory.Block();
+        protected override StatementSyntax GetEmptyEmbeddedStatement() => SyntaxFactory.Block();
 
-        protected override StatementSyntax GetElseBody(IfStatementSyntax ifNode)
-            => ifNode.Else.Statement;
+        protected override StatementSyntax GetElseBody(IfStatementSyntax ifNode) =>
+            ifNode.Else.Statement;
 
         protected override bool CanControlFlowOut(SyntaxNode node)
         {
@@ -134,7 +141,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             }
         }
 
-        protected override StatementSyntax AsEmbeddedStatement(IEnumerable<StatementSyntax> statements, StatementSyntax original)
+        protected override StatementSyntax AsEmbeddedStatement(
+            IEnumerable<StatementSyntax> statements,
+            StatementSyntax original
+        )
         {
             var statementArray = statements.ToArray();
             if (statementArray.Length > 0)
@@ -143,10 +153,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             }
 
             return original is BlockSyntax block
-                ? block.WithStatements(SyntaxFactory.List(statementArray))
-                : statementArray.Length == 1
-                    ? statementArray[0]
-                    : SyntaxFactory.Block(statementArray);
+              ? block.WithStatements(SyntaxFactory.List(statementArray))
+              : statementArray.Length == 1
+                  ? statementArray[0]
+                  : SyntaxFactory.Block(statementArray);
         }
 
         protected override IfStatementSyntax UpdateIf(
@@ -154,9 +164,13 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             IfStatementSyntax ifNode,
             SyntaxNode condition,
             StatementSyntax trueStatement,
-            StatementSyntax falseStatementOpt = null)
+            StatementSyntax falseStatementOpt = null
+        )
         {
-            var isSingleLine = sourceText.AreOnSameLine(ifNode.GetFirstToken(), ifNode.GetLastToken());
+            var isSingleLine = sourceText.AreOnSameLine(
+                ifNode.GetFirstToken(),
+                ifNode.GetLastToken()
+            );
             if (isSingleLine && falseStatementOpt != null)
             {
                 // If statement is on a single line, and we're swapping the true/false parts.
@@ -164,36 +178,42 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
                 // That way the trailing comments/newlines at the end of hte 'if' stay there,
                 // and the spaces after the true-part stay where they are.
 
-                (trueStatement, falseStatementOpt) =
-                    (trueStatement.WithTrailingTrivia(falseStatementOpt.GetTrailingTrivia()),
-                     falseStatementOpt.WithTrailingTrivia(trueStatement.GetTrailingTrivia()));
+                (trueStatement, falseStatementOpt) = (
+                    trueStatement.WithTrailingTrivia(falseStatementOpt.GetTrailingTrivia()),
+                    falseStatementOpt.WithTrailingTrivia(trueStatement.GetTrailingTrivia())
+                );
             }
 
-            var updatedIf = ifNode
-                .WithCondition((ExpressionSyntax)condition)
-                .WithStatement(trueStatement is IfStatementSyntax
-                    ? SyntaxFactory.Block(trueStatement)
-                    : trueStatement);
+            var updatedIf = ifNode.WithCondition((ExpressionSyntax)condition)
+                .WithStatement(
+                    trueStatement is IfStatementSyntax
+                      ? SyntaxFactory.Block(trueStatement)
+                      : trueStatement
+                );
 
             if (falseStatementOpt != null)
             {
-                var elseClause = updatedIf.Else != null
-                    ? updatedIf.Else.WithStatement(falseStatementOpt)
-                    : SyntaxFactory.ElseClause(falseStatementOpt);
+                var elseClause =
+                    updatedIf.Else != null
+                        ? updatedIf.Else.WithStatement(falseStatementOpt)
+                        : SyntaxFactory.ElseClause(falseStatementOpt);
 
                 updatedIf = updatedIf.WithElse(elseClause);
             }
 
-            // If this is multiline, format things after we swap around the if/else.  Because 
+            // If this is multiline, format things after we swap around the if/else.  Because
             // of all the different types of rewriting, we may need indentation fixed up and
             // whatnot.  Don't do this with single-line because we want to ensure as closely
             // as possible that we've kept things on that single line.
             return isSingleLine
-                ? updatedIf
-                : updatedIf.WithAdditionalAnnotations(Formatter.Annotation);
+              ? updatedIf
+              : updatedIf.WithAdditionalAnnotations(Formatter.Annotation);
         }
 
-        protected override SyntaxNode WithStatements(SyntaxNode node, IEnumerable<StatementSyntax> statements)
+        protected override SyntaxNode WithStatements(
+            SyntaxNode node,
+            IEnumerable<StatementSyntax> statements
+        )
         {
             switch (node)
             {
@@ -209,8 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
         protected override IEnumerable<StatementSyntax> UnwrapBlock(StatementSyntax ifBody)
         {
             return ifBody is BlockSyntax block
-                ? block.Statements
-                : SyntaxFactory.SingletonList(ifBody);
+              ? block.Statements
+              : SyntaxFactory.SingletonList(ifBody);
         }
 
         protected override bool IsSingleStatementStatementRange(StatementRange statementRange)

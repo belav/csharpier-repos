@@ -29,7 +29,9 @@ namespace Microsoft.AspNetCore.Mvc
             var expectedMessage = $"The header contains invalid values at index 0: '{contentType}'";
 
             // Act & Assert
-            var exception = Assert.Throws<FormatException>(() => new ConsumesAttribute(contentType));
+            var exception = Assert.Throws<FormatException>(
+                () => new ConsumesAttribute(contentType)
+            );
             Assert.Equal(expectedMessage, exception.Message);
         }
 
@@ -40,42 +42,56 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("invalid", "invalid")]
         [InlineData("application/xml,invalid, application/json", "invalid")]
         [InlineData("invalid, application/json", "invalid")]
-        public void Constructor_UnparsableContentType_Throws(string content, string invalidContentType)
+        public void Constructor_UnparsableContentType_Throws(
+            string content,
+            string invalidContentType
+        )
         {
             // Act
-            var contentTypes = content.Split(',').Select(contentType => contentType.Trim()).ToArray();
+            var contentTypes = content.Split(',')
+                .Select(contentType => contentType.Trim())
+                .ToArray();
 
             // Assert
             var ex = Assert.Throws<FormatException>(
-                       () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
-            Assert.Equal("The header contains invalid values at index 0: '" + (invalidContentType ?? "<null>") + "'",
-                         ex.Message);
+                () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+            );
+            Assert.Equal(
+                "The header contains invalid values at index 0: '"
+                    + (invalidContentType ?? "<null>")
+                    + "'",
+                ex.Message
+            );
         }
 
         [Theory]
         [InlineData("application/*", "application/*")]
         [InlineData("application/xml, application/*, application/json", "application/*")]
         [InlineData("application/*, application/json", "application/*")]
-
         [InlineData("*/*", "*/*")]
         [InlineData("application/xml, */*, application/json", "*/*")]
         [InlineData("*/*, application/json", "*/*")]
         public void Constructor_InvalidContentType_Throws(string content, string invalidContentType)
         {
             // Act
-            var contentTypes = content.Split(',').Select(contentType => contentType.Trim()).ToArray();
+            var contentTypes = content.Split(',')
+                .Select(contentType => contentType.Trim())
+                .ToArray();
 
             // Assert
             var ex = Assert.Throws<InvalidOperationException>(
-                       () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
+                () => new ConsumesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+            );
 
             Assert.Equal(
                 string.Format(
                     CultureInfo.CurrentCulture,
-                    "The argument '{0}' is invalid. " +
-                    "Media types which match all types or match all subtypes are not supported.",
-                    invalidContentType),
-                ex.Message);
+                    "The argument '{0}' is invalid. "
+                        + "Media types which match all types or match all subtypes are not supported.",
+                    invalidContentType
+                ),
+                ex.Message
+            );
         }
 
         [Theory]
@@ -88,14 +104,16 @@ namespace Microsoft.AspNetCore.Mvc
             var constraint = new ConsumesAttribute("application/json", "text/xml");
             var action = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint, FilterScope.Action)
+                }
             };
 
             var context = new ActionConstraintContext();
             context.Candidates = new List<ActionSelectorCandidate>()
             {
-                new ActionSelectorCandidate(action, new [] { constraint }),
+                new ActionSelectorCandidate(action, new[] { constraint }),
             };
 
             context.CurrentCandidate = context.Candidates[0];
@@ -112,25 +130,28 @@ namespace Microsoft.AspNetCore.Mvc
             var constraint1 = new ConsumesAttribute("application/json", "text/xml");
             var action1 = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint1, FilterScope.Action)
+                }
             };
 
             var constraint2 = new Mock<ITestActionConsumeConstraint>();
             var action2 = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint2.Object, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint2.Object, FilterScope.Action)
+                }
             };
 
-            constraint2.Setup(o => o.Accept(It.IsAny<ActionConstraintContext>()))
-                       .Returns(true);
+            constraint2.Setup(o => o.Accept(It.IsAny<ActionConstraintContext>())).Returns(true);
 
             var context = new ActionConstraintContext();
             context.Candidates = new List<ActionSelectorCandidate>()
             {
-                new ActionSelectorCandidate(action1, new [] { constraint1 }),
-                new ActionSelectorCandidate(action2, new [] { constraint2.Object }),
+                new ActionSelectorCandidate(action1, new[] { constraint1 }),
+                new ActionSelectorCandidate(action2, new[] { constraint2.Object }),
             };
 
             context.CurrentCandidate = context.Candidates[0];
@@ -144,31 +165,36 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("application/custom")]
         [InlineData("")]
         [InlineData(null)]
-        public void ActionConstraint_Accept_ForNoMatchingCandidates_SelectsTheFirstCandidate(string contentType)
+        public void ActionConstraint_Accept_ForNoMatchingCandidates_SelectsTheFirstCandidate(
+            string contentType
+        )
         {
             // Arrange
             var constraint1 = new ConsumesAttribute("application/json", "text/xml");
             var action1 = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint1, FilterScope.Action)
+                }
             };
 
             var constraint2 = new Mock<ITestActionConsumeConstraint>();
             var action2 = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint2.Object, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint2.Object, FilterScope.Action)
+                }
             };
 
-            constraint2.Setup(o => o.Accept(It.IsAny<ActionConstraintContext>()))
-                       .Returns(false);
+            constraint2.Setup(o => o.Accept(It.IsAny<ActionConstraintContext>())).Returns(false);
 
             var context = new ActionConstraintContext();
             context.Candidates = new List<ActionSelectorCandidate>()
             {
-                new ActionSelectorCandidate(action1, new [] { constraint1 }),
-                new ActionSelectorCandidate(action2, new [] { constraint2.Object }),
+                new ActionSelectorCandidate(action1, new[] { constraint1 }),
+                new ActionSelectorCandidate(action2, new[] { constraint2.Object }),
             };
 
             context.CurrentCandidate = context.Candidates[0];
@@ -181,21 +207,27 @@ namespace Microsoft.AspNetCore.Mvc
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public void ActionConstraint_Accept_ForNoRequestType_SelectsTheCandidateWithoutConstraintIfPresent(string contentType)
+        public void ActionConstraint_Accept_ForNoRequestType_SelectsTheCandidateWithoutConstraintIfPresent(
+            string contentType
+        )
         {
             // Arrange
             var constraint1 = new ConsumesAttribute("application/json");
             var actionWithConstraint = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint1, FilterScope.Action)
+                }
             };
 
             var constraint2 = new ConsumesAttribute("text/xml");
             var actionWithConstraint2 = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint2, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint2, FilterScope.Action)
+                }
             };
 
             var actionWithoutConstraint = new ActionDescriptor();
@@ -203,8 +235,8 @@ namespace Microsoft.AspNetCore.Mvc
             var context = new ActionConstraintContext();
             context.Candidates = new List<ActionSelectorCandidate>()
             {
-                new ActionSelectorCandidate(actionWithConstraint, new [] { constraint1 }),
-                new ActionSelectorCandidate(actionWithConstraint2, new [] { constraint2 }),
+                new ActionSelectorCandidate(actionWithConstraint, new[] { constraint1 }),
+                new ActionSelectorCandidate(actionWithConstraint2, new[] { constraint2 }),
                 new ActionSelectorCandidate(actionWithoutConstraint, new List<IActionConstraint>()),
             };
 
@@ -221,29 +253,35 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("application/xml")]
         [InlineData("application/custom")]
         [InlineData("invalid/invalid")]
-        public void ActionConstraint_Accept_UnrecognizedMediaType_SelectsTheCandidateWithoutConstraintIfPresent(string contentType)
+        public void ActionConstraint_Accept_UnrecognizedMediaType_SelectsTheCandidateWithoutConstraintIfPresent(
+            string contentType
+        )
         {
             // Arrange
             var actionWithoutConstraint = new ActionDescriptor();
             var constraint1 = new ConsumesAttribute("application/json");
             var actionWithConstraint = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint1, FilterScope.Action)
+                }
             };
 
             var constraint2 = new ConsumesAttribute("text/xml");
             var actionWithConstraint2 = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint2, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint2, FilterScope.Action)
+                }
             };
 
             var context = new ActionConstraintContext();
             context.Candidates = new List<ActionSelectorCandidate>()
             {
-                new ActionSelectorCandidate(actionWithConstraint, new [] { constraint1 }),
-                new ActionSelectorCandidate(actionWithConstraint2, new [] { constraint2 }),
+                new ActionSelectorCandidate(actionWithConstraint, new[] { constraint1 }),
+                new ActionSelectorCandidate(actionWithConstraint2, new[] { constraint2 }),
                 new ActionSelectorCandidate(actionWithoutConstraint, new List<IActionConstraint>()),
             };
 
@@ -260,21 +298,27 @@ namespace Microsoft.AspNetCore.Mvc
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public void ActionConstraint_Accept_ForNoRequestType_ReturnsTrueForAllConstraints(string contentType)
+        public void ActionConstraint_Accept_ForNoRequestType_ReturnsTrueForAllConstraints(
+            string contentType
+        )
         {
             // Arrange
             var constraint1 = new ConsumesAttribute("application/json");
             var actionWithConstraint = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint1, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint1, FilterScope.Action)
+                }
             };
 
             var constraint2 = new ConsumesAttribute("text/xml");
             var actionWithConstraint2 = new ActionDescriptor()
             {
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(constraint2, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(constraint2, FilterScope.Action)
+                }
             };
 
             var actionWithoutConstraint = new ActionDescriptor();
@@ -282,8 +326,8 @@ namespace Microsoft.AspNetCore.Mvc
             var context = new ActionConstraintContext();
             context.Candidates = new List<ActionSelectorCandidate>()
             {
-                new ActionSelectorCandidate(actionWithConstraint, new [] { constraint1 }),
-                new ActionSelectorCandidate(actionWithConstraint2, new [] { constraint2 }),
+                new ActionSelectorCandidate(actionWithConstraint, new[] { constraint1 }),
+                new ActionSelectorCandidate(actionWithConstraint2, new[] { constraint2 }),
             };
 
             context.RouteContext = CreateRouteContext(contentType: contentType);
@@ -298,7 +342,9 @@ namespace Microsoft.AspNetCore.Mvc
         [Theory]
         [InlineData("application/xml")]
         [InlineData("application/custom")]
-        public void OnResourceExecuting_ForNoContentTypeMatch_SetsUnsupportedMediaTypeResult(string contentType)
+        public void OnResourceExecuting_ForNoContentTypeMatch_SetsUnsupportedMediaTypeResult(
+            string contentType
+        )
         {
             // Arrange
             var httpContext = new DefaultHttpContext();
@@ -307,15 +353,22 @@ namespace Microsoft.AspNetCore.Mvc
             var actionWithConstraint = new ActionDescriptor()
             {
                 ActionConstraints = new List<IActionConstraintMetadata>() { consumesFilter },
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(consumesFilter, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(consumesFilter, FilterScope.Action)
+                }
             };
-            var actionContext = new ActionContext(httpContext, new RouteData(), actionWithConstraint);
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                actionWithConstraint
+            );
 
             var resourceExecutingContext = new ResourceExecutingContext(
                 actionContext,
                 new[] { consumesFilter },
-                new List<IValueProviderFactory>());
+                new List<IValueProviderFactory>()
+            );
 
             // Act
             consumesFilter.OnResourceExecuting(resourceExecutingContext);
@@ -337,15 +390,22 @@ namespace Microsoft.AspNetCore.Mvc
             var actionWithConstraint = new ActionDescriptor()
             {
                 ActionConstraints = new List<IActionConstraintMetadata>() { consumesFilter },
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(consumesFilter, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(consumesFilter, FilterScope.Action)
+                }
             };
-            var actionContext = new ActionContext(httpContext, new RouteData(), actionWithConstraint);
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                actionWithConstraint
+            );
 
             var resourceExecutingContext = new ResourceExecutingContext(
                 actionContext,
                 new[] { consumesFilter },
-                new List<IValueProviderFactory>());
+                new List<IValueProviderFactory>()
+            );
 
             // Act
             consumesFilter.OnResourceExecuting(resourceExecutingContext);
@@ -366,14 +426,21 @@ namespace Microsoft.AspNetCore.Mvc
             var actionWithConstraint = new ActionDescriptor()
             {
                 ActionConstraints = new List<IActionConstraintMetadata>() { consumesFilter },
-                FilterDescriptors =
-                    new List<FilterDescriptor>() { new FilterDescriptor(consumesFilter, FilterScope.Action) }
+                FilterDescriptors = new List<FilterDescriptor>()
+                {
+                    new FilterDescriptor(consumesFilter, FilterScope.Action)
+                }
             };
-            var actionContext = new ActionContext(httpContext, new RouteData(), actionWithConstraint);
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                actionWithConstraint
+            );
             var resourceExecutingContext = new ResourceExecutingContext(
                 actionContext,
                 new[] { consumesFilter },
-                new List<IValueProviderFactory>());
+                new List<IValueProviderFactory>()
+            );
 
             // Act
             consumesFilter.OnResourceExecuting(resourceExecutingContext);
@@ -401,10 +468,14 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Collection(
                 contentTypes.OrderBy(t => t),
                 t => Assert.Equal("application/json", t),
-                t => Assert.Equal("text/json", t));
+                t => Assert.Equal("text/json", t)
+            );
         }
 
-        private static RouteContext CreateRouteContext(string contentType = null, object routeValues = null)
+        private static RouteContext CreateRouteContext(
+            string contentType = null,
+            object routeValues = null
+        )
         {
             var httpContext = CreateHttpContext(contentType);
 
@@ -419,7 +490,10 @@ namespace Microsoft.AspNetCore.Mvc
             return routeContext;
         }
 
-        private static HttpContext CreateHttpContext(string contentType = null, object routeValues = null)
+        private static HttpContext CreateHttpContext(
+            string contentType = null,
+            object routeValues = null
+        )
         {
             var httpContext = new DefaultHttpContext();
             if (contentType != null)

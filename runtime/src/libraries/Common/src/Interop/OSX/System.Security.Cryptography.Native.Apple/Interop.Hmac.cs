@@ -13,7 +13,10 @@ internal static partial class Interop
         internal static extern void HmacFree(IntPtr handle);
 
         [DllImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_HmacCreate")]
-        internal static extern SafeHmacHandle HmacCreate(PAL_HashAlgorithm algorithm, ref int cbDigest);
+        internal static extern SafeHmacHandle HmacCreate(
+            PAL_HashAlgorithm algorithm,
+            ref int cbDigest
+        );
 
         [DllImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_HmacInit")]
         internal static extern int HmacInit(SafeHmacHandle ctx, [In] byte[] pbKey, int cbKey);
@@ -42,10 +45,7 @@ namespace System.Security.Cryptography.Apple
 {
     internal sealed class SafeHmacHandle : SafeHandle
     {
-        public SafeHmacHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeHmacHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

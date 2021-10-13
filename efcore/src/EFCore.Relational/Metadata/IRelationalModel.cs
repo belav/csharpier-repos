@@ -37,8 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Returns all sequences contained in the model.
         /// </summary>
-        IEnumerable<ISequence> Sequences
-            => Model.GetSequences();
+        IEnumerable<ISequence> Sequences => Model.GetSequences();
 
         /// <summary>
         ///     Returns all user-defined functions contained in the model.
@@ -48,8 +47,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Returns the database collation.
         /// </summary>
-        string? Collation
-            => Model.GetCollation();
+        string? Collation => Model.GetCollation();
 
         /// <summary>
         ///     Gets the table with the given name. Returns <see langword="null" /> if no table with the given name is defined.
@@ -83,8 +81,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The <see cref="ISequence" /> or <see langword="null" /> if no sequence with the given name in
         ///     the given schema was found.
         /// </returns>
-        ISequence? FindSequence(string name, string? schema)
-            => Model.FindSequence(name, schema);
+        ISequence? FindSequence(string name, string? schema) => Model.FindSequence(name, schema);
 
         /// <summary>
         ///     Finds a <see cref="IStoreFunction" /> with the given signature.
@@ -107,7 +104,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options"> Options for generating the string. </param>
         /// <param name="indent"> The number of indent spaces to use before each new line. </param>
         /// <returns> A human-readable representation. </returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        )
         {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);

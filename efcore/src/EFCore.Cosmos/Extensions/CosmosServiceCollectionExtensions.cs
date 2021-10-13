@@ -42,12 +42,16 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>
         ///     The same service collection so that multiple calls can be chained.
         /// </returns>
-        public static IServiceCollection AddEntityFrameworkCosmos(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddEntityFrameworkCosmos(
+            this IServiceCollection serviceCollection
+        )
         {
             Check.NotNull(serviceCollection, nameof(serviceCollection));
 
-            var builder = new EntityFrameworkServicesBuilder(serviceCollection)
-                .TryAdd<LoggingDefinitions, CosmosLoggingDefinitions>()
+            var builder = new EntityFrameworkServicesBuilder(serviceCollection).TryAdd<
+                LoggingDefinitions,
+                CosmosLoggingDefinitions
+            >()
                 .TryAdd<IDatabaseProvider, DatabaseProvider<CosmosOptionsExtension>>()
                 .TryAdd<IDatabase, CosmosDatabaseWrapper>()
                 .TryAdd<IExecutionStrategyFactory, CosmosExecutionStrategyFactory>()
@@ -58,23 +62,45 @@ namespace Microsoft.Extensions.DependencyInjection
                 .TryAdd<IDatabaseCreator, CosmosDatabaseCreator>()
                 .TryAdd<IQueryContextFactory, CosmosQueryContextFactory>()
                 .TryAdd<ITypeMappingSource, CosmosTypeMappingSource>()
-
                 // New Query pipeline
-                .TryAdd<IQueryableMethodTranslatingExpressionVisitorFactory, CosmosQueryableMethodTranslatingExpressionVisitorFactory>()
-                .TryAdd<IShapedQueryCompilingExpressionVisitorFactory, CosmosShapedQueryCompilingExpressionVisitorFactory>()
-                .TryAdd<ISingletonOptions, ICosmosSingletonOptions>(p => p.GetRequiredService<ICosmosSingletonOptions>())
-                .TryAdd<IQueryTranslationPreprocessorFactory, CosmosQueryTranslationPreprocessorFactory>()
+                .TryAdd<
+                    IQueryableMethodTranslatingExpressionVisitorFactory,
+                    CosmosQueryableMethodTranslatingExpressionVisitorFactory
+                >()
+                .TryAdd<
+                    IShapedQueryCompilingExpressionVisitorFactory,
+                    CosmosShapedQueryCompilingExpressionVisitorFactory
+                >()
+                .TryAdd<ISingletonOptions, ICosmosSingletonOptions>(
+                    p => p.GetRequiredService<ICosmosSingletonOptions>()
+                )
+                .TryAdd<
+                    IQueryTranslationPreprocessorFactory,
+                    CosmosQueryTranslationPreprocessorFactory
+                >()
                 .TryAdd<IQueryCompilationContextFactory, CosmosQueryCompilationContextFactory>()
-                .TryAdd<IQueryTranslationPostprocessorFactory, CosmosQueryTranslationPostprocessorFactory>()
+                .TryAdd<
+                    IQueryTranslationPostprocessorFactory,
+                    CosmosQueryTranslationPostprocessorFactory
+                >()
                 .TryAddProviderSpecificServices(
-                    b => b
-                        .TryAddSingleton<ICosmosSingletonOptions, CosmosSingletonOptions>()
-                        .TryAddSingleton<ISingletonCosmosClientWrapper, SingletonCosmosClientWrapper>()
-                        .TryAddSingleton<ISqlExpressionFactory, SqlExpressionFactory>()
-                        .TryAddSingleton<IQuerySqlGeneratorFactory, QuerySqlGeneratorFactory>()
-                        .TryAddSingleton<IMethodCallTranslatorProvider, CosmosMethodCallTranslatorProvider>()
-                        .TryAddSingleton<IMemberTranslatorProvider, CosmosMemberTranslatorProvider>()
-                        .TryAddScoped<ICosmosClientWrapper, CosmosClientWrapper>()
+                    b =>
+                        b.TryAddSingleton<ICosmosSingletonOptions, CosmosSingletonOptions>()
+                            .TryAddSingleton<
+                                ISingletonCosmosClientWrapper,
+                                SingletonCosmosClientWrapper
+                            >()
+                            .TryAddSingleton<ISqlExpressionFactory, SqlExpressionFactory>()
+                            .TryAddSingleton<IQuerySqlGeneratorFactory, QuerySqlGeneratorFactory>()
+                            .TryAddSingleton<
+                                IMethodCallTranslatorProvider,
+                                CosmosMethodCallTranslatorProvider
+                            >()
+                            .TryAddSingleton<
+                                IMemberTranslatorProvider,
+                                CosmosMemberTranslatorProvider
+                            >()
+                            .TryAddScoped<ICosmosClientWrapper, CosmosClientWrapper>()
                 );
 
             builder.TryAddCoreServices();

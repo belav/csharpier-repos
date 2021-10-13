@@ -38,7 +38,10 @@ namespace BasicEventSourceTests
                 {
                     var events = new List<Event>();
                     Debug.WriteLine("Adding delegate to onevent");
-                    listener.OnEvent = delegate (Event data) { events.Add(data); };
+                    listener.OnEvent = delegate(Event data)
+                    {
+                        events.Add(data);
+                    };
 
                     listener.EventSourceCommand(source.Name, EventCommand.Enable);
 
@@ -54,6 +57,7 @@ namespace BasicEventSourceTests
                     Assert.Matches("Unsupported type", message);
                 }
             }
+
             finally
             {
                 source.Dispose();
@@ -63,7 +67,10 @@ namespace BasicEventSourceTests
         /// <summary>
         /// Test the
         /// </summary>
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // ActiveIssue: https://github.com/dotnet/runtime/issues/26197
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // ActiveIssue: https://github.com/dotnet/runtime/issues/26197
         public void Test_BadEventSource_MismatchedIds()
         {
             TestUtilities.CheckNoEventSourcesRunning("Start");
@@ -72,7 +79,11 @@ namespace BasicEventSourceTests
             var listenerGenerators = new List<Func<Listener>>();
             listenerGenerators.Add(() => new EventListenerListener());
 
-            var settings = new EventSourceSettings[] { EventSourceSettings.Default, EventSourceSettings.EtwSelfDescribingEventFormat };
+            var settings = new EventSourceSettings[]
+            {
+                EventSourceSettings.Default,
+                EventSourceSettings.EtwSelfDescribingEventFormat
+            };
 
             // For every interesting combination, run the test and see that we get a nice failure message.
             foreach (bool onStartup in onStartups)
@@ -95,17 +106,32 @@ namespace BasicEventSourceTests
         /// * Whether the listener is ETW or an EventListern
         /// * Whether the ETW output is self describing or not.
         /// </summary>
-        private void Test_Bad_EventSource_Startup(bool onStartup, Listener listener, EventSourceSettings settings)
+        private void Test_Bad_EventSource_Startup(
+            bool onStartup,
+            Listener listener,
+            EventSourceSettings settings
+        )
         {
             var eventSourceName = typeof(BadEventSource_MismatchedIds).Name;
-            Debug.WriteLine("***** Test_BadEventSource_Startup(OnStartUp: " + onStartup + " Listener: " + listener + " Settings: " + settings + ")");
+            Debug.WriteLine(
+                "***** Test_BadEventSource_Startup(OnStartUp: "
+                    + onStartup
+                    + " Listener: "
+                    + listener
+                    + " Settings: "
+                    + settings
+                    + ")"
+            );
 
             // Activate the source before the source exists (if told to).
             if (onStartup)
                 listener.EventSourceCommand(eventSourceName, EventCommand.Enable);
 
             var events = new List<Event>();
-            listener.OnEvent = delegate (Event data) { events.Add(data); };
+            listener.OnEvent = delegate(Event data)
+            {
+                events.Add(data);
+            };
 
             using (var source = new BadEventSource_MismatchedIds(settings))
             {
@@ -113,7 +139,7 @@ namespace BasicEventSourceTests
                 // activate the source after the source exists (if told to).
                 if (!onStartup)
                     listener.EventSourceCommand(eventSourceName, EventCommand.Enable);
-                source.Event1(1);       // Try to send something.
+                source.Event1(1); // Try to send something.
             }
             listener.Dispose();
 
@@ -125,7 +151,10 @@ namespace BasicEventSourceTests
             Debug.WriteLine(string.Format("Message=\"{0}\"", message));
             // expected message: "ERROR: Exception in Command Processing for EventSource BadEventSource_MismatchedIds: Event Event2 was assigned event ID 2 but 1 was passed to WriteEvent. "
             if (!PlatformDetection.IsNetFramework) // .NET Framework has typo
-                Assert.Matches("Event Event2 was assigned event ID 2 but 1 was passed to WriteEvent", message);
+                Assert.Matches(
+                    "Event Event2 was assigned event ID 2 but 1 was passed to WriteEvent",
+                    message
+                );
 
             // Validate the details of the EventWrittenEventArgs object
             if (_event is EventListenerListener.EventListenerEvent elEvent)
@@ -209,9 +238,15 @@ namespace BasicEventSourceTests
     internal class BadEventSource_MismatchedIds : EventSource
     {
         public BadEventSource_MismatchedIds(EventSourceSettings settings) : base(settings) { }
-        public void Event1(int arg) { WriteEvent(1, arg); }
+        public void Event1(int arg)
+        {
+            WriteEvent(1, arg);
+        }
         // Error Used the same event ID for this event.
-        public void Event2(int arg) { WriteEvent(1, arg); }
+        public void Event2(int arg)
+        {
+            WriteEvent(1, arg);
+        }
     }
 
     /// <summary>
@@ -219,7 +254,10 @@ namespace BasicEventSourceTests
     /// </summary>
     internal class BadEventSource_Bad_Type_ByteArray : EventSource
     {
-        public void Event1(byte[] myArray) { WriteEvent(1, myArray); }
+        public void Event1(byte[] myArray)
+        {
+            WriteEvent(1, myArray);
+        }
     }
 
     public sealed class BadEventSource_IncorrectWriteRelatedActivityIDFirstParameter : EventSource
@@ -229,9 +267,20 @@ namespace BasicEventSourceTests
             this.Write("sampleevent", new { a = "a string" });
         }
 
-        [Event(7, Keywords = Keywords.Debug, Message = "Hello Message 7", Channel = EventChannel.Admin, Opcode = EventOpcode.Send)]
-
-        public void RelatedActivity(Guid guid, string message, int value, string componentName, string instanceId)
+        [Event(
+            7,
+            Keywords = Keywords.Debug,
+            Message = "Hello Message 7",
+            Channel = EventChannel.Admin,
+            Opcode = EventOpcode.Send
+        )]
+        public void RelatedActivity(
+            Guid guid,
+            string message,
+            int value,
+            string componentName,
+            string instanceId
+        )
         {
             WriteEventWithRelatedActivityId(7, guid, message, value, componentName, instanceId);
         }
@@ -253,6 +302,9 @@ namespace BasicEventSourceTests
     /// </summary>
     internal class BadEventSource_Bad_Type_UserClass : EventSource
     {
-        public void Event1(UserClass myClass) { WriteEvent(1, myClass); }
+        public void Event1(UserClass myClass)
+        {
+            WriteEvent(1, myClass);
+        }
     }
 }

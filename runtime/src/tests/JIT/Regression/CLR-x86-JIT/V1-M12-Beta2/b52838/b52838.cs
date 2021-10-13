@@ -13,7 +13,10 @@ namespace Test
         {
             try
             {
-                while (checked(m_sb == m_sb)) { throw new Exception(); }
+                while (checked(m_sb == m_sb))
+                {
+                    throw new Exception();
+                }
                 try
                 {
                     return;
@@ -23,6 +26,7 @@ namespace Test
                     return;
                 }
             }
+
             finally
             {
                 Finally();

@@ -24,10 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public IndexBuilder(IMutableIndex index)
-            : base(index)
-        {
-        }
+        public IndexBuilder(IMutableIndex index) : base(index) { }
 
         /// <summary>
         ///     Adds or updates an annotation on the index. If an annotation with the key specified in
@@ -37,15 +34,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders
         /// <param name="annotation"> The key of the annotation to be added or updated. </param>
         /// <param name="value"> The value to be stored in the annotation. </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public new virtual IndexBuilder<T> HasAnnotation(string annotation, object? value)
-            => (IndexBuilder<T>)base.HasAnnotation(annotation, value);
+        public new virtual IndexBuilder<T> HasAnnotation(string annotation, object? value) =>
+            (IndexBuilder<T>)base.HasAnnotation(annotation, value);
 
         /// <summary>
         ///     Configures whether this index is unique (i.e. the value(s) for each instance must be unique).
         /// </summary>
         /// <param name="unique"> A value indicating whether this index is unique. </param>
         /// <returns> The same builder instance so that multiple configuration calls can be chained. </returns>
-        public new virtual IndexBuilder<T> IsUnique(bool unique = true)
-            => (IndexBuilder<T>)base.IsUnique(unique);
+        public new virtual IndexBuilder<T> IsUnique(bool unique = true) =>
+            (IndexBuilder<T>)base.IsUnique(unique);
     }
 }

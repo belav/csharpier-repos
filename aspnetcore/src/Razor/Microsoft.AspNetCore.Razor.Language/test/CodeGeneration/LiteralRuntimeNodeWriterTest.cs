@@ -20,11 +20,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 Source = new SourceSpan("test.cshtml", 0, 0, 0, 3),
             };
             var builder = IntermediateNodeBuilder.Create(node);
-            builder.Add(new IntermediateToken()
-            {
-                Content = "i++",
-                Kind = TokenKind.CSharp,
-            });
+            builder.Add(new IntermediateToken() { Content = "i++", Kind = TokenKind.CSharp, });
 
             // Act
             writer.WriteCSharpExpression(context, node);
@@ -32,7 +28,7 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"
+                @"
 #nullable restore
 #line 1 ""test.cshtml""
 WriteLiteral(i++);
@@ -42,7 +38,8 @@ WriteLiteral(i++);
 #nullable disable
 ",
                 csharp,
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
     }
 }

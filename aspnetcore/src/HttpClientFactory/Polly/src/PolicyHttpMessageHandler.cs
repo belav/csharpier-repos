@@ -75,7 +75,10 @@ namespace Microsoft.Extensions.Http
     public class PolicyHttpMessageHandler : DelegatingHandler
     {
         private readonly IAsyncPolicy<HttpResponseMessage> _policy;
-        private readonly Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> _policySelector;
+        private readonly Func<
+            HttpRequestMessage,
+            IAsyncPolicy<HttpResponseMessage>
+        > _policySelector;
 
         /// <summary>
         /// Creates a new <see cref="PolicyHttpMessageHandler"/>.
@@ -95,7 +98,9 @@ namespace Microsoft.Extensions.Http
         /// Creates a new <see cref="PolicyHttpMessageHandler"/>.
         /// </summary>
         /// <param name="policySelector">A function which can select the desired policy for a given <see cref="HttpRequestMessage"/>.</param>
-        public PolicyHttpMessageHandler(Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector)
+        public PolicyHttpMessageHandler(
+            Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
+        )
         {
             if (policySelector == null)
             {
@@ -106,7 +111,10 @@ namespace Microsoft.Extensions.Http
         }
 
         /// <inheritdoc />
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -128,8 +136,14 @@ namespace Microsoft.Extensions.Http
             try
             {
                 var policy = _policy ?? SelectPolicy(request);
-                response = await policy.ExecuteAsync((c, ct) => SendCoreAsync(request, c, ct), context, cancellationToken).ConfigureAwait(false);
+                response = await policy.ExecuteAsync(
+                        (c, ct) => SendCoreAsync(request, c, ct),
+                        context,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
+
             finally
             {
                 if (cleanUpContext)
@@ -148,7 +162,11 @@ namespace Microsoft.Extensions.Http
         /// <param name="context">The <see cref="Context"/>.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
         /// <returns>Returns a <see cref="Task{HttpResponseMessage}"/> that will yield a response when completed.</returns>
-        protected virtual Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
+        protected virtual Task<HttpResponseMessage> SendCoreAsync(
+            HttpRequestMessage request,
+            Context context,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -170,7 +188,8 @@ namespace Microsoft.Extensions.Http
             {
                 var message = Resources.FormatPolicyHttpMessageHandler_PolicySelector_ReturnedNull(
                     "policySelector",
-                    "Policy.NoOpAsync<HttpResponseMessage>()");
+                    "Policy.NoOpAsync<HttpResponseMessage>()"
+                );
                 throw new InvalidOperationException(message);
             }
 

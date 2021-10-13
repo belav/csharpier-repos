@@ -44,7 +44,7 @@ namespace SciMark2
             for (int i = 0; i < Iterations; i++)
             {
                 FFT.transform(x); // forward transform
-                FFT.inverse(x);   // backward transform
+                FFT.inverse(x); // backward transform
             }
         }
 
@@ -225,7 +225,6 @@ namespace SciMark2
             int nr = nz / N; // average number of nonzeros per row
             int anz = nr * N; // _actual_ number of nonzeros
 
-
             double[] val = RandomVector(anz, R);
             int[] col = new int[anz];
             int[] row = new int[N + 1];
@@ -294,7 +293,13 @@ namespace SciMark2
             validateLU(N, R, lu, A, pivot);
         }
 
-        public static void validateLU(int N, SciMark2.Random R, double[][] lu, double[][] A, int[] pivot)
+        public static void validateLU(
+            int N,
+            SciMark2.Random R,
+            double[][] lu,
+            double[][] A,
+            int[] pivot
+        )
         {
             // verify that LU is correct
             double[] b = RandomVector(N, R);

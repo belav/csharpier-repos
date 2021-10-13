@@ -4,12 +4,18 @@
 namespace System.Security.Permissions
 {
 #if NET50_OBSOLETIONS
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [Flags]
     public enum ReflectionPermissionFlag
     {
-        [Obsolete("This permission has been deprecated. Use PermissionState.Unrestricted to get full access.")]
+        [Obsolete(
+            "This permission has been deprecated. Use PermissionState.Unrestricted to get full access."
+        )]
         AllFlags = 7,
         MemberAccess = 2,
         NoFlags = 0,

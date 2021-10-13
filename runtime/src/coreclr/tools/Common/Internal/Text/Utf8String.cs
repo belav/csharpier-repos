@@ -60,12 +60,14 @@ namespace Internal.Text
                 while (length >= 4)
                 {
                     hash = (hash + _rotl(hash, 5)) ^ *(int*)a;
-                    a += 4; length -= 4;
+                    a += 4;
+                    length -= 4;
                 }
                 if (length >= 2)
                 {
                     hash = (hash + _rotl(hash, 5)) ^ *(short*)a;
-                    a += 2; length -= 2;
+                    a += 2;
+                    length -= 2;
                 }
                 if (length > 0)
                 {
@@ -85,27 +87,34 @@ namespace Internal.Text
 
             if (_value == other._value)
                 return true;
-
             unsafe
             {
-                fixed (byte* ap = _value) fixed (byte* bp = other._value)
+                fixed (byte* ap = _value)
+                fixed (byte* bp = other._value)
                 {
                     byte* a = ap;
                     byte* b = bp;
 
                     while (length >= 4)
                     {
-                        if (*(int*)a != *(int*)b) return false;
-                        a += 4; b += 4; length -= 4;
+                        if (*(int*)a != *(int*)b)
+                            return false;
+                        a += 4;
+                        b += 4;
+                        length -= 4;
                     }
                     if (length >= 2)
                     {
-                        if (*(short*)a != *(short*)b) return false;
-                        a += 2; b += 2; length -= 2;
+                        if (*(short*)a != *(short*)b)
+                            return false;
+                        a += 2;
+                        b += 2;
+                        length -= 2;
                     }
                     if (length > 0)
                     {
-                        if (*a != *b) return false;
+                        if (*a != *b)
+                            return false;
                     }
                     return true;
                 }
@@ -115,7 +124,6 @@ namespace Internal.Text
         private static int Compare(Utf8String strA, Utf8String strB)
         {
             int length = Math.Min(strA.Length, strB.Length);
-
             unsafe
             {
                 fixed (byte* ap = strA._value)

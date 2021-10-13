@@ -14,11 +14,10 @@ namespace System.ComponentModel
         /// Sets the System.ComponentModel.Design.ParenthesizePropertyName
         /// attribute by default to <see langword='false'/>.
         /// </summary>
-        public static readonly ParenthesizePropertyNameAttribute Default = new ParenthesizePropertyNameAttribute();
+        public static readonly ParenthesizePropertyNameAttribute Default =
+            new ParenthesizePropertyNameAttribute();
 
-        public ParenthesizePropertyNameAttribute() : this(false)
-        {
-        }
+        public ParenthesizePropertyNameAttribute() : this(false) { }
 
         /// <summary>
         /// Initializes a new instance of the System.ComponentModel.Design.ParenthesizePropertyNameAttribute
@@ -40,7 +39,8 @@ namespace System.ComponentModel
         /// Compares the specified object to this object and tests for equality.
         /// </summary>
         public override bool Equals(object? obj) =>
-            obj is ParenthesizePropertyNameAttribute other && other.NeedParenthesis == NeedParenthesis;
+            obj is ParenthesizePropertyNameAttribute other
+            && other.NeedParenthesis == NeedParenthesis;
 
         public override int GetHashCode() => base.GetHashCode();
 

@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_no_params(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder = (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder =
+                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -51,14 +52,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_array_of_int_params_as_object(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder = (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder =
+                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
                 if (cancellation)
                 {
                     var cancellationToken = new CancellationToken();
-                    await context.Database.ExecuteSqlRawAsync("<Some query>", new object[] { 1, 2 }, cancellationToken);
+                    await context.Database.ExecuteSqlRawAsync(
+                        "<Some query>",
+                        new object[] { 1, 2 },
+                        cancellationToken
+                    );
                 }
                 else
                 {
@@ -71,8 +77,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
 
             Assert.Equal("<Some query>", commandBuilder.Sql);
-            Assert.Equal(
-                new List<object> { 1, 2 }, commandBuilder.Parameters);
+            Assert.Equal(new List<object> { 1, 2 }, commandBuilder.Parameters);
         }
 
         [ConditionalTheory]
@@ -81,7 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_ints_as_params(bool async)
         {
             using var context = new ThudContext();
-            var commandBuilder = (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder =
+                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -93,8 +99,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
 
             Assert.Equal("<Some query>", commandBuilder.Sql);
-            Assert.Equal(
-                new List<object> { 1, 2 }, commandBuilder.Parameters);
+            Assert.Equal(new List<object> { 1, 2 }, commandBuilder.Parameters);
         }
 
         [ConditionalTheory]
@@ -104,14 +109,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_mixed_array_of_params(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder = (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder =
+                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
                 if (cancellation)
                 {
                     var cancellationToken = new CancellationToken();
-                    await context.Database.ExecuteSqlRawAsync("<Some query>", new object[] { 1, "Cheese" }, cancellationToken);
+                    await context.Database.ExecuteSqlRawAsync(
+                        "<Some query>",
+                        new object[] { 1, "Cheese" },
+                        cancellationToken
+                    );
                 }
                 else
                 {
@@ -124,8 +134,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
 
             Assert.Equal("<Some query>", commandBuilder.Sql);
-            Assert.Equal(
-                new List<object> { 1, "Cheese" }, commandBuilder.Parameters);
+            Assert.Equal(new List<object> { 1, "Cheese" }, commandBuilder.Parameters);
         }
 
         [ConditionalTheory]
@@ -135,7 +144,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_list_of_int_params_as_object(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder = (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder =
+                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -143,23 +153,26 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     var cancellationToken = new CancellationToken();
                     await context.Database.ExecuteSqlRawAsync(
-                        "<Some query>", new List<object> { 1, 2 }, cancellationToken);
+                        "<Some query>",
+                        new List<object> { 1, 2 },
+                        cancellationToken
+                    );
                 }
                 else
                 {
                     await context.Database.ExecuteSqlRawAsync(
-                        "<Some query>", new List<object> { 1, 2 });
+                        "<Some query>",
+                        new List<object> { 1, 2 }
+                    );
                 }
             }
             else
             {
-                context.Database.ExecuteSqlRaw(
-                    "<Some query>", new List<object> { 1, 2 });
+                context.Database.ExecuteSqlRaw("<Some query>", new List<object> { 1, 2 });
             }
 
             Assert.Equal("<Some query>", commandBuilder.Sql);
-            Assert.Equal(
-                new List<object> { 1, 2 }, commandBuilder.Parameters);
+            Assert.Equal(new List<object> { 1, 2 }, commandBuilder.Parameters);
         }
 
         [ConditionalTheory]
@@ -169,7 +182,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_mixed_list_of_params(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder = (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder =
+                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
@@ -177,23 +191,26 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 {
                     var cancellationToken = new CancellationToken();
                     await context.Database.ExecuteSqlRawAsync(
-                        "<Some query>", new List<object> { 1, "Pickle" }, cancellationToken);
+                        "<Some query>",
+                        new List<object> { 1, "Pickle" },
+                        cancellationToken
+                    );
                 }
                 else
                 {
                     await context.Database.ExecuteSqlRawAsync(
-                        "<Some query>", new List<object> { 1, "Pickle" });
+                        "<Some query>",
+                        new List<object> { 1, "Pickle" }
+                    );
                 }
             }
             else
             {
-                context.Database.ExecuteSqlRaw(
-                    "<Some query>", new List<object> { 1, "Pickle" });
+                context.Database.ExecuteSqlRaw("<Some query>", new List<object> { 1, "Pickle" });
             }
 
             Assert.Equal("<Some query>", commandBuilder.Sql);
-            Assert.Equal(
-                new List<object> { 1, "Pickle" }, commandBuilder.Parameters);
+            Assert.Equal(new List<object> { 1, "Pickle" }, commandBuilder.Parameters);
         }
 
         [ConditionalTheory]
@@ -203,14 +220,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_single_int_as_object(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder = (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder =
+                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
                 if (cancellation)
                 {
                     var cancellationToken = new CancellationToken();
-                    await context.Database.ExecuteSqlRawAsync("<Some query>", new object[] { 1 }, cancellationToken);
+                    await context.Database.ExecuteSqlRawAsync(
+                        "<Some query>",
+                        new object[] { 1 },
+                        cancellationToken
+                    );
                 }
                 else
                 {
@@ -223,8 +245,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
 
             Assert.Equal("<Some query>", commandBuilder.Sql);
-            Assert.Equal(
-                new List<object> { 1 }, commandBuilder.Parameters);
+            Assert.Equal(new List<object> { 1 }, commandBuilder.Parameters);
         }
 
         [ConditionalTheory]
@@ -234,14 +255,19 @@ namespace Microsoft.EntityFrameworkCore.Storage
         public async Task Can_pass_single_string(bool async, bool cancellation)
         {
             using var context = new ThudContext();
-            var commandBuilder = (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
+            var commandBuilder =
+                (TestRawSqlCommandBuilder)context.GetService<IRawSqlCommandBuilder>();
 
             if (async)
             {
                 if (cancellation)
                 {
                     var cancellationToken = new CancellationToken();
-                    await context.Database.ExecuteSqlRawAsync("<Some query>", new[] { "Branston" }, cancellationToken);
+                    await context.Database.ExecuteSqlRawAsync(
+                        "<Some query>",
+                        new[] { "Branston" },
+                        cancellationToken
+                    );
                 }
                 else
                 {
@@ -254,8 +280,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             }
 
             Assert.Equal("<Some query>", commandBuilder.Sql);
-            Assert.Equal(
-                new List<object> { "Branston" }, commandBuilder.Parameters);
+            Assert.Equal(new List<object> { "Branston" }, commandBuilder.Parameters);
         }
 
         private class ThudContext : DbContext
@@ -264,10 +289,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 : base(
                     RelationalTestHelpers.Instance.CreateOptions(
                         RelationalTestHelpers.Instance.CreateServiceProvider(
-                            new ServiceCollection()
-                                .AddScoped<IRawSqlCommandBuilder, TestRawSqlCommandBuilder>())))
-            {
-            }
+                            new ServiceCollection().AddScoped<
+                                IRawSqlCommandBuilder,
+                                TestRawSqlCommandBuilder
+                            >()
+                        )
+                    )
+                ) { }
         }
 
         private class TestRawSqlCommandBuilder : IRawSqlCommandBuilder
@@ -275,7 +303,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             private readonly IRelationalCommandBuilderFactory _commandBuilderFactory;
 
             public TestRawSqlCommandBuilder(
-                IRelationalCommandBuilderFactory relationalCommandBuilderFactory)
+                IRelationalCommandBuilderFactory relationalCommandBuilderFactory
+            )
             {
                 _commandBuilderFactory = relationalCommandBuilderFactory;
             }
@@ -283,15 +312,17 @@ namespace Microsoft.EntityFrameworkCore.Storage
             public string Sql { get; private set; }
             public IEnumerable<object> Parameters { get; private set; }
 
-            public IRelationalCommand Build(string sql)
-                => throw new NotImplementedException();
+            public IRelationalCommand Build(string sql) => throw new NotImplementedException();
 
             public RawSqlCommand Build(string sql, IEnumerable<object> parameters)
             {
                 Sql = sql;
                 Parameters = parameters;
 
-                return new RawSqlCommand(_commandBuilderFactory.Create().Build(), new Dictionary<string, object>());
+                return new RawSqlCommand(
+                    _commandBuilderFactory.Create().Build(),
+                    new Dictionary<string, object>()
+                );
             }
         }
     }

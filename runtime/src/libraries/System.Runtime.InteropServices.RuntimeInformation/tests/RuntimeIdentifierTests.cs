@@ -15,7 +15,11 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
         {
             Assert.NotNull(RuntimeInformation.RuntimeIdentifier);
             Assert.Same(RuntimeInformation.RuntimeIdentifier, RuntimeInformation.RuntimeIdentifier);
-            Assert.EndsWith(RuntimeInformation.ProcessArchitecture.ToString(), RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.EndsWith(
+                RuntimeInformation.ProcessArchitecture.ToString(),
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -24,45 +28,62 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.StartInfo.EnvironmentVariables.Add("DOTNET_RUNTIME_ID", "overridenFromEnv-rid");
 
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.Equal("overridenFromEnv-rid", RuntimeInformation.RuntimeIdentifier);
-            }, options).Dispose();
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        Assert.Equal("overridenFromEnv-rid", RuntimeInformation.RuntimeIdentifier);
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void VerifyAppContextVariable()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", "overriden-rid");
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", "overriden-rid");
 
-                Assert.Equal("overriden-rid", RuntimeInformation.RuntimeIdentifier);
-            }).Dispose();
+                        Assert.Equal("overriden-rid", RuntimeInformation.RuntimeIdentifier);
+                    }
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void VerifyAppContextVariableUnknown()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", null);
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", null);
 
-                Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
-            }).Dispose();
+                        Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
+                    }
+                )
+                .Dispose();
 
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", new object());
+            RemoteExecutor.Invoke(
+                    () =>
+                    {
+                        AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", new object());
 
-                Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
-            }).Dispose();
+                        Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
+                    }
+                )
+                .Dispose();
         }
 
         [Fact, PlatformSpecific(TestPlatforms.Windows)]
         public void VerifyWindowsRid()
         {
-            Assert.StartsWith("win", RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.StartsWith(
+                "win",
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         [Fact, PlatformSpecific(TestPlatforms.Linux)]
@@ -73,19 +94,31 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                 .Substring("ID=".Length)
                 .Trim('\"', '\'');
 
-            Assert.StartsWith(expectedOSName, RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.StartsWith(
+                expectedOSName,
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         [Fact, PlatformSpecific(TestPlatforms.FreeBSD)]
         public void VerifyFreeBSDRid()
         {
-            Assert.StartsWith("freebsd", RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.StartsWith(
+                "freebsd",
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         [Fact, PlatformSpecific(TestPlatforms.OSX)]
         public void VerifyOSXRid()
         {
-            Assert.StartsWith("osx", RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.StartsWith(
+                "osx",
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
     }
 }

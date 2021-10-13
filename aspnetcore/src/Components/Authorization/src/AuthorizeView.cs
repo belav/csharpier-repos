@@ -23,17 +23,18 @@ namespace Microsoft.AspNetCore.Components.Authorization
         /// <summary>
         /// The policy name that determines whether the content can be displayed.
         /// </summary>
-        [Parameter] public string Policy { get; set; }
+        [Parameter]
+        public string Policy { get; set; }
 
         /// <summary>
         /// A comma delimited list of roles that are allowed to display the content.
         /// </summary>
-        [Parameter] public string Roles { get; set; }
+        [Parameter]
+        public string Roles { get; set; }
 
         /// <summary>
         /// Gets the data used for authorization.
         /// </summary>
-        protected override IAuthorizeData[] GetAuthorizeData()
-            => selfAsAuthorizeData;
+        protected override IAuthorizeData[] GetAuthorizeData() => selfAsAuthorizeData;
     }
 }

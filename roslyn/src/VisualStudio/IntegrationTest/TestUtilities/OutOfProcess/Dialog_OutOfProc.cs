@@ -12,16 +12,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
     public class Dialog_OutOfProc : OutOfProcComponent
     {
         public Dialog_OutOfProc(VisualStudioInstance visualStudioInstance)
-            : base(visualStudioInstance)
-        {
-        }
+            : base(visualStudioInstance) { }
 
         public void VerifyOpen(string dialogName)
         {
-            using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
+            using var cancellationTokenSource = new CancellationTokenSource(
+                Helper.HangMitigatingTimeout
+            );
 
             // FindDialog will wait until the dialog is open, so the return value is unused.
-            DialogHelpers.FindDialogByName(GetMainWindowHWnd(), dialogName, isOpen: true, cancellationTokenSource.Token);
+            DialogHelpers.FindDialogByName(
+                GetMainWindowHWnd(),
+                dialogName,
+                isOpen: true,
+                cancellationTokenSource.Token
+            );
 
             // Wait for application idle to ensure the dialog is fully initialized
             VisualStudioInstance.WaitForApplicationIdle(cancellationTokenSource.Token);
@@ -29,16 +34,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         public void VerifyClosed(string dialogName)
         {
-            using var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout);
+            using var cancellationTokenSource = new CancellationTokenSource(
+                Helper.HangMitigatingTimeout
+            );
 
             // FindDialog will wait until the dialog is closed, so the return value is unused.
-            DialogHelpers.FindDialogByName(GetMainWindowHWnd(), dialogName, isOpen: false, cancellationTokenSource.Token);
+            DialogHelpers.FindDialogByName(
+                GetMainWindowHWnd(),
+                dialogName,
+                isOpen: false,
+                cancellationTokenSource.Token
+            );
         }
 
-        public void Click(string dialogName, string buttonName)
-            => DialogHelpers.PressButtonWithNameFromDialogWithName(GetMainWindowHWnd(), dialogName, buttonName);
+        public void Click(string dialogName, string buttonName) =>
+            DialogHelpers.PressButtonWithNameFromDialogWithName(
+                GetMainWindowHWnd(),
+                dialogName,
+                buttonName
+            );
 
-        private IntPtr GetMainWindowHWnd()
-            => VisualStudioInstance.Shell.GetHWnd();
+        private IntPtr GetMainWindowHWnd() => VisualStudioInstance.Shell.GetHWnd();
     }
 }

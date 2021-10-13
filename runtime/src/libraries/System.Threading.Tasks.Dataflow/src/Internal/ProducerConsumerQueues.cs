@@ -70,26 +70,43 @@ namespace System.Threading.Tasks
     /// </summary>
     /// <typeparam name="T">Specifies the type of data contained in the queue.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
-    internal sealed class MultiProducerMultiConsumerQueue<T> : ConcurrentQueue<T>, IProducerConsumerQueue<T>
+    internal sealed class MultiProducerMultiConsumerQueue<T>
+        : ConcurrentQueue<T>,
+          IProducerConsumerQueue<T>
     {
         /// <summary>Enqueues an item into the queue.</summary>
         /// <param name="item">The item to enqueue.</param>
-        void IProducerConsumerQueue<T>.Enqueue(T item) { base.Enqueue(item); }
+        void IProducerConsumerQueue<T>.Enqueue(T item)
+        {
+            base.Enqueue(item);
+        }
 
         /// <summary>Attempts to dequeue an item from the queue.</summary>
         /// <param name="result">The dequeued item.</param>
         /// <returns>true if an item could be dequeued; otherwise, false.</returns>
-        bool IProducerConsumerQueue<T>.TryDequeue([MaybeNullWhen(false)] out T result) { return base.TryDequeue(out result); }
+        bool IProducerConsumerQueue<T>.TryDequeue([MaybeNullWhen(false)] out T result)
+        {
+            return base.TryDequeue(out result);
+        }
 
         /// <summary>Gets whether the collection is currently empty.</summary>
-        bool IProducerConsumerQueue<T>.IsEmpty { get { return base.IsEmpty; } }
+        bool IProducerConsumerQueue<T>.IsEmpty
+        {
+            get { return base.IsEmpty; }
+        }
 
         /// <summary>Gets the number of items in the collection.</summary>
-        int IProducerConsumerQueue<T>.Count { get { return base.Count; } }
+        int IProducerConsumerQueue<T>.Count
+        {
+            get { return base.Count; }
+        }
 
         /// <summary>A thread-safe way to get the number of items in the collection. May synchronize access by locking the provided synchronization object.</summary>
         /// <remarks>ConcurrentQueue.Count is thread safe, no need to acquire the lock.</remarks>
-        int IProducerConsumerQueue<T>.GetCountSafe(object syncObj) { return base.Count; }
+        int IProducerConsumerQueue<T>.GetCountSafe(object syncObj)
+        {
+            return base.Count;
+        }
     }
 
     /// <summary>
@@ -97,7 +114,9 @@ namespace System.Threading.Tasks
     /// </summary>
     /// <typeparam name="T">Specifies the type of data contained in the queue.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
-    [DebuggerTypeProxy(typeof(SingleProducerSingleConsumerQueue<>.SingleProducerSingleConsumerQueue_DebugView))]
+    [DebuggerTypeProxy(
+        typeof(SingleProducerSingleConsumerQueue<>.SingleProducerSingleConsumerQueue_DebugView)
+    )]
     internal sealed class SingleProducerSingleConsumerQueue<T> : IProducerConsumerQueue<T>
     {
         // Design:
@@ -147,9 +166,18 @@ namespace System.Threading.Tasks
         {
             // Validate constants in ctor rather than in an explicit cctor that would cause perf degradation
             Debug.Assert(INIT_SEGMENT_SIZE > 0, "Initial segment size must be > 0.");
-            Debug.Assert((INIT_SEGMENT_SIZE & (INIT_SEGMENT_SIZE - 1)) == 0, "Initial segment size must be a power of 2");
-            Debug.Assert(INIT_SEGMENT_SIZE <= MAX_SEGMENT_SIZE, "Initial segment size should be <= maximum.");
-            Debug.Assert(MAX_SEGMENT_SIZE < int.MaxValue / 2, "Max segment size * 2 must be < Int32.MaxValue, or else overflow could occur.");
+            Debug.Assert(
+                (INIT_SEGMENT_SIZE & (INIT_SEGMENT_SIZE - 1)) == 0,
+                "Initial segment size must be a power of 2"
+            );
+            Debug.Assert(
+                INIT_SEGMENT_SIZE <= MAX_SEGMENT_SIZE,
+                "Initial segment size should be <= maximum."
+            );
+            Debug.Assert(
+                MAX_SEGMENT_SIZE < int.MaxValue / 2,
+                "Max segment size * 2 must be < Int32.MaxValue, or else overflow could occur."
+            );
 
             // Initialize the queue
             _head = _tail = new Segment(INIT_SEGMENT_SIZE);
@@ -171,7 +199,8 @@ namespace System.Threading.Tasks
                 segment._state._last = tail2;
             }
             // Slow path: there may not be room in the current segment.
-            else EnqueueSlow(item, ref segment);
+            else
+                EnqueueSlow(item, ref segment);
         }
 
         /// <summary>Enqueues an item into the queue.</summary>
@@ -189,8 +218,12 @@ namespace System.Threading.Tasks
             }
 
             int newSegmentSize = _tail._array.Length << 1; // double size
-            Debug.Assert(newSegmentSize > 0, "The max size should always be small enough that we don't overflow.");
-            if (newSegmentSize > MAX_SEGMENT_SIZE) newSegmentSize = MAX_SEGMENT_SIZE;
+            Debug.Assert(
+                newSegmentSize > 0,
+                "The max size should always be small enough that we don't overflow."
+            );
+            if (newSegmentSize > MAX_SEGMENT_SIZE)
+                newSegmentSize = MAX_SEGMENT_SIZE;
 
             var newSegment = new Segment(newSegmentSize);
             newSegment._array[0] = item;
@@ -198,6 +231,7 @@ namespace System.Threading.Tasks
             newSegment._state._lastCopy = 1;
 
             try { }
+
             finally
             {
                 // Finally block to protect against corruption due to a thread abort
@@ -225,7 +259,8 @@ namespace System.Threading.Tasks
                 return true;
             }
             // Slow path: there may not be data available in the current segment
-            else return TryDequeueSlow(ref segment, ref array, out result);
+            else
+                return TryDequeueSlow(ref segment, ref array, out result);
         }
 
         /// <summary>Attempts to dequeue an item from the queue.</summary>
@@ -233,7 +268,11 @@ namespace System.Threading.Tasks
         /// <param name="segment">The segment from which the item was dequeued.</param>
         /// <param name="result">The dequeued item.</param>
         /// <returns>true if an item could be dequeued; otherwise, false.</returns>
-        private bool TryDequeueSlow(ref Segment segment, ref T[] array, [MaybeNullWhen(false)] out T result)
+        private bool TryDequeueSlow(
+            ref Segment segment,
+            ref T[] array,
+            [MaybeNullWhen(false)] out T result
+        )
         {
             Debug.Assert(segment != null, "Expected a non-null segment.");
             Debug.Assert(array != null, "Expected a non-null item array.");
@@ -283,7 +322,8 @@ namespace System.Threading.Tasks
                 return true;
             }
             // Slow path: there may not be data available in the current segment
-            else return TryPeekSlow(ref segment, ref array, out result);
+            else
+                return TryPeekSlow(ref segment, ref array, out result);
         }
 
         /// <summary>Attempts to peek at an item in the queue.</summary>
@@ -291,7 +331,11 @@ namespace System.Threading.Tasks
         /// <param name="segment">The segment from which the item is peeked.</param>
         /// <param name="result">The peeked item.</param>
         /// <returns>true if an item could be peeked; otherwise, false.</returns>
-        private bool TryPeekSlow(ref Segment segment, ref T[] array, [MaybeNullWhen(false)] out T result)
+        private bool TryPeekSlow(
+            ref Segment segment,
+            ref T[] array,
+            [MaybeNullWhen(false)] out T result
+        )
         {
             Debug.Assert(segment != null, "Expected a non-null segment.");
             Debug.Assert(array != null, "Expected a non-null item array.");
@@ -348,7 +392,8 @@ namespace System.Threading.Tasks
                 }
             }
             // Slow path: there may not be data available in the current segment
-            else return TryDequeueIfSlow(predicate, ref segment, ref array, out result);
+            else
+                return TryDequeueIfSlow(predicate, ref segment, ref array, out result);
         }
 
         /// <summary>Attempts to dequeue an item from the queue.</summary>
@@ -357,7 +402,12 @@ namespace System.Threading.Tasks
         /// <param name="segment">The segment from which the item was dequeued.</param>
         /// <param name="result">The dequeued item.</param>
         /// <returns>true if an item could be dequeued; otherwise, false.</returns>
-        private bool TryDequeueIfSlow(Predicate<T>? predicate, ref Segment segment, ref T[] array, [MaybeNullWhen(false)] out T result)
+        private bool TryDequeueIfSlow(
+            Predicate<T>? predicate,
+            ref Segment segment,
+            ref T[] array,
+            [MaybeNullWhen(false)] out T result
+        )
         {
             Debug.Assert(segment != null, "Expected a non-null segment.");
             Debug.Assert(array != null, "Expected a non-null item array.");
@@ -400,7 +450,8 @@ namespace System.Threading.Tasks
 
         public void Clear()
         {
-            while (TryDequeue(out _)) ;
+            while (TryDequeue(out _))
+                ;
         }
 
         /// <summary>Gets whether the collection is currently empty.</summary>
@@ -411,8 +462,10 @@ namespace System.Threading.Tasks
             get
             {
                 Segment head = _head;
-                if (head._state._first != head._state._lastCopy) return false; // _first is volatile, so the read of _lastCopy cannot get reordered
-                if (head._state._first != head._state._last) return false;
+                if (head._state._first != head._state._lastCopy)
+                    return false; // _first is volatile, so the read of _lastCopy cannot get reordered
+                if (head._state._first != head._state._last)
+                    return false;
                 return head._next == null;
             }
         }
@@ -423,9 +476,11 @@ namespace System.Threading.Tasks
         {
             for (Segment? segment = _head; segment != null; segment = segment._next)
             {
-                for (int pt = segment._state._first;
+                for (
+                    int pt = segment._state._first;
                     pt != segment._state._last;
-                    pt = (pt + 1) & (segment._array.Length - 1))
+                    pt = (pt + 1) & (segment._array.Length - 1)
+                )
                 {
                     yield return segment._array[pt];
                 }
@@ -433,7 +488,10 @@ namespace System.Threading.Tasks
         }
         /// <summary>Gets an enumerable for the collection.</summary>
         /// <remarks>WARNING: This should only be used for debugging purposes.  It is not safe to be used concurrently.</remarks>
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
         /// <summary>Gets the number of items in the collection.</summary>
         /// <remarks>WARNING: This should only be used for debugging purposes.  It is not meant to be used concurrently.</remarks>
@@ -445,12 +503,14 @@ namespace System.Threading.Tasks
                 for (Segment? segment = _head; segment != null; segment = segment._next)
                 {
                     int arraySize = segment._array.Length;
-                    int first, last;
+                    int first,
+                        last;
                     while (true) // Count is not meant to be used concurrently, but this helps to avoid issues if it is
                     {
                         first = segment._state._first;
                         last = segment._state._last;
-                        if (first == segment._state._first) break;
+                        if (first == segment._state._first)
+                            break;
                     }
                     count += (last - first) & (arraySize - 1);
                 }
@@ -521,7 +581,9 @@ namespace System.Threading.Tasks
 
             /// <summary>Initializes the debug view.</summary>
             /// <param name="queue">The queue being debugged.</param>
-            public SingleProducerSingleConsumerQueue_DebugView(SingleProducerSingleConsumerQueue<T> queue)
+            public SingleProducerSingleConsumerQueue_DebugView(
+                SingleProducerSingleConsumerQueue<T> queue
+            )
             {
                 Debug.Assert(queue != null, "Expected a non-null queue.");
                 _queue = queue;

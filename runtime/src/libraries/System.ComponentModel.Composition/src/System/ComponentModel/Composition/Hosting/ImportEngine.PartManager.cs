@@ -32,10 +32,7 @@ namespace System.ComponentModel.Composition.Hosting
 
             public ComposablePart Part
             {
-                get
-                {
-                    return _part;
-                }
+                get { return _part; }
             }
 
             public ImportState State
@@ -67,7 +64,11 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (_importedContractNames == null)
                 {
-                    _importedContractNames = Part.ImportDefinitions.Select(import => import.ContractName ?? ImportDefinition.EmptyContractName).Distinct().ToArray();
+                    _importedContractNames = Part.ImportDefinitions.Select(
+                            import => import.ContractName ?? ImportDefinition.EmptyContractName
+                        )
+                        .Distinct()
+                        .ToArray();
                 }
                 return _importedContractNames;
             }
@@ -81,20 +82,24 @@ namespace System.ComponentModel.Composition.Hosting
                     return CompositionResult.SucceededResult;
                 }
                 catch (CompositionException ex)
-                {   // Pulling on one of the exports failed
-
+                { // Pulling on one of the exports failed
                     return new CompositionResult(
-                        ErrorBuilder.CreatePartCannotSetImport(Part, import, ex));
+                        ErrorBuilder.CreatePartCannotSetImport(Part, import, ex)
+                    );
                 }
                 catch (ComposablePartException ex)
-                {   // Type mismatch between export and import
-
+                { // Type mismatch between export and import
                     return new CompositionResult(
-                        ErrorBuilder.CreatePartCannotSetImport(Part, import, ex));
+                        ErrorBuilder.CreatePartCannotSetImport(Part, import, ex)
+                    );
                 }
             }
 
-            public void SetSavedImport(ImportDefinition import, Export[]? exports, AtomicComposition? atomicComposition)
+            public void SetSavedImport(
+                ImportDefinition import,
+                Export[]? exports,
+                AtomicComposition? atomicComposition
+            )
             {
                 if (atomicComposition != null)
                 {
@@ -102,8 +107,9 @@ namespace System.ComponentModel.Composition.Hosting
 
                     // Add a revert action to revert the stored exports
                     // in the case that this atomicComposition gets rolled back.
-                    atomicComposition.AddRevertAction(() =>
-                        SetSavedImport(import, savedExports, null));
+                    atomicComposition.AddRevertAction(
+                        () => SetSavedImport(import, savedExports, null)
+                    );
                 }
 
                 if (_importCache == null)
@@ -139,9 +145,8 @@ namespace System.ComponentModel.Composition.Hosting
                     return CompositionResult.SucceededResult;
                 }
                 catch (ComposablePartException ex)
-                {   // Type failed to be constructed, imports could not be set, etc
-                    return new CompositionResult(
-                        ErrorBuilder.CreatePartCannotActivate(Part, ex));
+                { // Type failed to be constructed, imports could not be set, etc
+                    return new CompositionResult(ErrorBuilder.CreatePartCannotActivate(Part, ex));
                 }
             }
 
@@ -164,8 +169,10 @@ namespace System.ComponentModel.Composition.Hosting
 
                 // Dispose any existing references previously set on this import
                 List<IDisposable>? oldDisposableExports = null;
-                if (_importedDisposableExports != null &&
-                    _importedDisposableExports.TryGetValue(import, out oldDisposableExports))
+                if (
+                    _importedDisposableExports != null
+                    && _importedDisposableExports.TryGetValue(import, out oldDisposableExports)
+                )
                 {
                     oldDisposableExports.ForEach(disposable => disposable.Dispose());
 
@@ -187,7 +194,10 @@ namespace System.ComponentModel.Composition.Hosting
                 {
                     if (_importedDisposableExports == null)
                     {
-                        _importedDisposableExports = new Dictionary<ImportDefinition, List<IDisposable>>();
+                        _importedDisposableExports = new Dictionary<
+                            ImportDefinition,
+                            List<IDisposable>
+                        >();
                     }
                     _importedDisposableExports[import] = disposableExports;
                 }
@@ -197,8 +207,8 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (_importedDisposableExports != null)
                 {
-                    IEnumerable<IDisposable> dependencies = _importedDisposableExports.Values
-                        .SelectMany(exports => exports);
+                    IEnumerable<IDisposable> dependencies =
+                        _importedDisposableExports.Values.SelectMany(exports => exports);
 
                     _importedDisposableExports = null;
 

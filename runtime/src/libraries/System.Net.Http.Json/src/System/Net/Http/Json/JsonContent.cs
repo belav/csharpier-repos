@@ -16,16 +16,22 @@ namespace System.Net.Http.Json
         internal const string JsonMediaType = "application/json";
         internal const string JsonType = "application";
         internal const string JsonSubtype = "json";
-        private static MediaTypeHeaderValue DefaultMediaType
-            => new MediaTypeHeaderValue(JsonMediaType) { CharSet = "utf-8" };
+        private static MediaTypeHeaderValue DefaultMediaType =>
+            new MediaTypeHeaderValue(JsonMediaType) { CharSet = "utf-8" };
 
-        internal static readonly JsonSerializerOptions s_defaultSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        internal static readonly JsonSerializerOptions s_defaultSerializerOptions =
+            new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
         private readonly JsonSerializerOptions? _jsonSerializerOptions;
         public Type ObjectType { get; }
         public object? Value { get; }
 
-        private JsonContent(object? inputValue, Type inputType, MediaTypeHeaderValue? mediaType, JsonSerializerOptions? options)
+        private JsonContent(
+            object? inputValue,
+            Type inputType,
+            MediaTypeHeaderValue? mediaType,
+            JsonSerializerOptions? options
+        )
         {
             if (inputType == null)
             {
@@ -34,7 +40,9 @@ namespace System.Net.Http.Json
 
             if (inputValue != null && !inputType.IsAssignableFrom(inputValue.GetType()))
             {
-                throw new ArgumentException(SR.Format(SR.SerializeWrongType, inputType, inputValue.GetType()));
+                throw new ArgumentException(
+                    SR.Format(SR.SerializeWrongType, inputType, inputValue.GetType())
+                );
             }
 
             Value = inputValue;
@@ -43,14 +51,21 @@ namespace System.Net.Http.Json
             _jsonSerializerOptions = options ?? s_defaultSerializerOptions;
         }
 
-        public static JsonContent Create<T>(T inputValue, MediaTypeHeaderValue? mediaType = null, JsonSerializerOptions? options = null)
-            => Create(inputValue, typeof(T), mediaType, options);
+        public static JsonContent Create<T>(
+            T inputValue,
+            MediaTypeHeaderValue? mediaType = null,
+            JsonSerializerOptions? options = null
+        ) => Create(inputValue, typeof(T), mediaType, options);
 
-        public static JsonContent Create(object? inputValue, Type inputType, MediaTypeHeaderValue? mediaType = null, JsonSerializerOptions? options = null)
-            => new JsonContent(inputValue, inputType, mediaType, options);
+        public static JsonContent Create(
+            object? inputValue,
+            Type inputType,
+            MediaTypeHeaderValue? mediaType = null,
+            JsonSerializerOptions? options = null
+        ) => new JsonContent(inputValue, inputType, mediaType, options);
 
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context)
-            => SerializeToStreamAsyncCore(stream, async: true, CancellationToken.None);
+        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context) =>
+            SerializeToStreamAsyncCore(stream, async: true, CancellationToken.None);
 
         protected override bool TryComputeLength(out long length)
         {
@@ -58,7 +73,11 @@ namespace System.Net.Http.Json
             return false;
         }
 
-        private async Task SerializeToStreamAsyncCore(Stream targetStream, bool async, CancellationToken cancellationToken)
+        private async Task SerializeToStreamAsyncCore(
+            Stream targetStream,
+            bool async,
+            CancellationToken cancellationToken
+        )
         {
             Encoding? targetEncoding = GetEncoding(Headers.ContentType?.CharSet);
 
@@ -66,12 +85,24 @@ namespace System.Net.Http.Json
             if (targetEncoding != null && targetEncoding != Encoding.UTF8)
             {
 #if NETCOREAPP
-                Stream transcodingStream = Encoding.CreateTranscodingStream(targetStream, targetEncoding, Encoding.UTF8, leaveOpen: true);
+                Stream transcodingStream = Encoding.CreateTranscodingStream(
+                    targetStream,
+                    targetEncoding,
+                    Encoding.UTF8,
+                    leaveOpen: true
+                );
                 try
                 {
                     if (async)
                     {
-                        await JsonSerializer.SerializeAsync(transcodingStream, Value, ObjectType, _jsonSerializerOptions, cancellationToken).ConfigureAwait(false);
+                        await JsonSerializer.SerializeAsync(
+                                transcodingStream,
+                                Value,
+                                ObjectType,
+                                _jsonSerializerOptions,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                     else
                     {
@@ -81,6 +112,7 @@ namespace System.Net.Http.Json
                         JsonSerializer.Serialize(writer, Value, ObjectType, _jsonSerializerOptions);
                     }
                 }
+
                 finally
                 {
                     // Dispose/DisposeAsync will flush any partial write buffers. In practice our partial write
@@ -97,13 +129,26 @@ namespace System.Net.Http.Json
 #else
                 Debug.Assert(async);
 
-                using (TranscodingWriteStream transcodingStream = new TranscodingWriteStream(targetStream, targetEncoding))
+                using (
+                    TranscodingWriteStream transcodingStream = new TranscodingWriteStream(
+                        targetStream,
+                        targetEncoding
+                    )
+                )
                 {
-                    await JsonSerializer.SerializeAsync(transcodingStream, Value, ObjectType, _jsonSerializerOptions, cancellationToken).ConfigureAwait(false);
+                    await JsonSerializer.SerializeAsync(
+                            transcodingStream,
+                            Value,
+                            ObjectType,
+                            _jsonSerializerOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     // The transcoding streams use Encoders and Decoders that have internal buffers. We need to flush these
                     // when there is no more data to be written. Stream.FlushAsync isn't suitable since it's
                     // acceptable to Flush a Stream (multiple times) prior to completion.
-                    await transcodingStream.FinalWriteAsync(cancellationToken).ConfigureAwait(false);
+                    await transcodingStream.FinalWriteAsync(cancellationToken)
+                        .ConfigureAwait(false);
                 }
 #endif
             }
@@ -111,7 +156,14 @@ namespace System.Net.Http.Json
             {
                 if (async)
                 {
-                    await JsonSerializer.SerializeAsync(targetStream, Value, ObjectType, _jsonSerializerOptions, cancellationToken).ConfigureAwait(false);
+                    await JsonSerializer.SerializeAsync(
+                            targetStream,
+                            Value,
+                            ObjectType,
+                            _jsonSerializerOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
@@ -136,7 +188,11 @@ namespace System.Net.Http.Json
                 try
                 {
                     // Remove at most a single set of quotes.
-                    if (charset.Length > 2 && charset[0] == '\"' && charset[charset.Length - 1] == '\"')
+                    if (
+                        charset.Length > 2
+                        && charset[0] == '\"'
+                        && charset[charset.Length - 1] == '\"'
+                    )
                     {
                         encoding = Encoding.GetEncoding(charset.Substring(1, charset.Length - 2));
                     }

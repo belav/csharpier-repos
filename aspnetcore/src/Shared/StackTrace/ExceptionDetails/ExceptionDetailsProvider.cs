@@ -19,7 +19,11 @@ namespace Microsoft.Extensions.StackTrace.Sources
         private readonly ILogger? _logger;
         private readonly int _sourceCodeLineCount;
 
-        public ExceptionDetailsProvider(IFileProvider fileProvider, ILogger? logger, int sourceCodeLineCount)
+        public ExceptionDetailsProvider(
+            IFileProvider fileProvider,
+            ILogger? logger,
+            int sourceCodeLineCount
+        )
         {
             _fileProvider = fileProvider;
             _logger = logger;
@@ -39,10 +43,14 @@ namespace Microsoft.Extensions.StackTrace.Sources
         private IEnumerable<StackFrameSourceCodeInfo> GetStackFrames(Exception original)
         {
             var stackFrames = StackTraceHelper.GetFrames(original, out var exception)
-                .Select(frame => GetStackFrameSourceCodeInfo(
-                    frame.MethodDisplayInfo?.ToString(),
-                    frame.FilePath,
-                    frame.LineNumber));
+                .Select(
+                    frame =>
+                        GetStackFrameSourceCodeInfo(
+                            frame.MethodDisplayInfo?.ToString(),
+                            frame.FilePath,
+                            frame.LineNumber
+                        )
+                );
 
             if (exception != null)
             {
@@ -78,7 +86,6 @@ namespace Microsoft.Extensions.StackTrace.Sources
                     list.Add(innerException);
                 }
             }
-
             else
             {
                 while (ex != null)
@@ -93,7 +100,11 @@ namespace Microsoft.Extensions.StackTrace.Sources
         }
 
         // make it internal to enable unit testing
-        internal StackFrameSourceCodeInfo GetStackFrameSourceCodeInfo(string? method, string? filePath, int lineNumber)
+        internal StackFrameSourceCodeInfo GetStackFrameSourceCodeInfo(
+            string? method,
+            string? filePath,
+            int lineNumber
+        )
         {
             var stackFrame = new StackFrameSourceCodeInfo
             {
@@ -144,13 +155,16 @@ namespace Microsoft.Extensions.StackTrace.Sources
             StackFrameSourceCodeInfo frame,
             IEnumerable<string> allLines,
             int errorStartLineNumberInFile,
-            int errorEndLineNumberInFile)
+            int errorEndLineNumberInFile
+        )
         {
             // Get the line boundaries in the file to be read and read all these lines at once into an array.
-            var preErrorLineNumberInFile = Math.Max(errorStartLineNumberInFile - _sourceCodeLineCount, 1);
+            var preErrorLineNumberInFile = Math.Max(
+                errorStartLineNumberInFile - _sourceCodeLineCount,
+                1
+            );
             var postErrorLineNumberInFile = errorEndLineNumberInFile + _sourceCodeLineCount;
-            var codeBlock = allLines
-                .Skip(preErrorLineNumberInFile - 1)
+            var codeBlock = allLines.Skip(preErrorLineNumberInFile - 1)
                 .Take(postErrorLineNumberInFile - preErrorLineNumberInFile + 1)
                 .ToArray();
 
@@ -159,12 +173,10 @@ namespace Microsoft.Extensions.StackTrace.Sources
 
             frame.PreContextLine = preErrorLineNumberInFile;
             frame.PreContextCode = codeBlock.Take(errorStartLineNumberInArray).ToArray();
-            frame.ContextCode = codeBlock
-                .Skip(errorStartLineNumberInArray)
+            frame.ContextCode = codeBlock.Skip(errorStartLineNumberInArray)
                 .Take(numOfErrorLines)
                 .ToArray();
-            frame.PostContextCode = codeBlock
-                .Skip(errorStartLineNumberInArray + numOfErrorLines)
+            frame.PostContextCode = codeBlock.Skip(errorStartLineNumberInArray + numOfErrorLines)
                 .ToArray();
         }
 

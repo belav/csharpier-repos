@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
     {
         public static SyntaxTree GenerateCodeFix(string typeName, string diagnosticId)
         {
-            var codefix = $@"
+            var codefix =
+                $@"
 using System;
 using System.Collections.Immutable;
 using System.Composition;
@@ -52,7 +53,8 @@ public class {typeName} : CodeFixProvider
 
         public static SyntaxTree GenerateAnalyzerCode(string typeName, string diagnosticId)
         {
-            var analyzer = $@"
+            var analyzer =
+                $@"
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -84,18 +86,28 @@ public class {typeName} : DiagnosticAnalyzer
                 MetadataReference.CreateFromFile(typeof(CodeFixProvider).Assembly.Location),
             };
 
-            var netstandardMetaDataReferences = await ReferenceAssemblies.NetStandard.NetStandard20.ResolveAsync(LanguageNames.CSharp, CancellationToken.None);
+            var netstandardMetaDataReferences =
+                await ReferenceAssemblies.NetStandard.NetStandard20.ResolveAsync(
+                    LanguageNames.CSharp,
+                    CancellationToken.None
+                );
             references.AddRange(netstandardMetaDataReferences);
-            var compilation = CSharpCompilation.Create(assemblyName, trees, references,
-                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            var compilation = CSharpCompilation.Create(
+                assemblyName,
+                trees,
+                references,
+                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
             using var ms = new MemoryStream();
             var result = compilation.Emit(ms);
             if (!result.Success)
             {
-                var failures = result.Diagnostics.Where(diagnostic =>
-                    diagnostic.IsWarningAsError ||
-                    diagnostic.Severity == DiagnosticSeverity.Error)
+                var failures = result.Diagnostics.Where(
+                        diagnostic =>
+                            diagnostic.IsWarningAsError
+                            || diagnostic.Severity == DiagnosticSeverity.Error
+                    )
                     .Select(diagnostic => $"{diagnostic.Id}: {diagnostic.GetMessage()}");
 
                 throw new Exception(string.Join(Environment.NewLine, failures));

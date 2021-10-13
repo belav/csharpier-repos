@@ -19,7 +19,11 @@ namespace XLinqTests
         [Fact]
         public void XDocumentSaveToFile()
         {
-            SerializeWithSaveOptions(SerializeXDocumentSaveToFile, testXElement: false, testXDocument: true);
+            SerializeWithSaveOptions(
+                SerializeXDocumentSaveToFile,
+                testXElement: false,
+                testXDocument: true
+            );
         }
 
         [Fact]
@@ -33,7 +37,10 @@ namespace XLinqTests
                 d.Save(temp.Path);
 
                 temp.AssertExists();
-                Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup, NormalizeNewLines(temp.ReadAllText()));
+                Assert.Equal(
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup,
+                    NormalizeNewLines(temp.ReadAllText())
+                );
             }
         }
 
@@ -47,7 +54,10 @@ namespace XLinqTests
                 d.Save(temp.Path, SaveOptions.DisableFormatting);
 
                 temp.AssertExists();
-                Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup, temp.ReadAllText());
+                Assert.Equal(
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup,
+                    temp.ReadAllText()
+                );
             }
         }
 
@@ -55,14 +65,22 @@ namespace XLinqTests
         public void XDocumentSave_NullParameter()
         {
             Assert.Throws<ArgumentNullException>(() => new XDocument().Save((string)null));
-            Assert.Throws<ArgumentNullException>(() => new XDocument().Save((string)null, SaveOptions.DisableFormatting));
-            Assert.Throws<ArgumentNullException>(() => new XDocument().Save((string)null, SaveOptions.None));
+            Assert.Throws<ArgumentNullException>(
+                () => new XDocument().Save((string)null, SaveOptions.DisableFormatting)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new XDocument().Save((string)null, SaveOptions.None)
+            );
         }
 
         [Fact]
         public void XElementSaveToFile()
         {
-            SerializeWithSaveOptions(SerializeXElementSaveToFile, testXElement: true, testXDocument: false);
+            SerializeWithSaveOptions(
+                SerializeXElementSaveToFile,
+                testXElement: true,
+                testXDocument: false
+            );
         }
 
         [Fact]
@@ -75,7 +93,10 @@ namespace XLinqTests
                 e.Save(temp.Path);
 
                 temp.AssertExists();
-                Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup, NormalizeNewLines(temp.ReadAllText()));
+                Assert.Equal(
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup,
+                    NormalizeNewLines(temp.ReadAllText())
+                );
             }
         }
 
@@ -89,7 +110,10 @@ namespace XLinqTests
                 e.Save(temp.Path, SaveOptions.DisableFormatting);
 
                 temp.AssertExists();
-                Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup, temp.ReadAllText());
+                Assert.Equal(
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup,
+                    temp.ReadAllText()
+                );
             }
         }
 
@@ -97,22 +121,33 @@ namespace XLinqTests
         public void XElementSave_NullParameter()
         {
             Assert.Throws<ArgumentNullException>(() => new XElement("e").Save((string)null));
-            Assert.Throws<ArgumentNullException>(() => new XElement("e").Save((string)null, SaveOptions.DisableFormatting));
-            Assert.Throws<ArgumentNullException>(() => new XElement("e").Save((string)null, SaveOptions.None));
+            Assert.Throws<ArgumentNullException>(
+                () => new XElement("e").Save((string)null, SaveOptions.DisableFormatting)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new XElement("e").Save((string)null, SaveOptions.None)
+            );
         }
 
         [Fact]
         public void XStreamingElementSave_NullParameter()
         {
-            Assert.Throws<ArgumentNullException>(() => new XStreamingElement("e").Save((string)null));
-            Assert.Throws<ArgumentNullException>(() => new XStreamingElement("e").Save((string)null, SaveOptions.DisableFormatting));
-            Assert.Throws<ArgumentNullException>(() => new XStreamingElement("e").Save((string)null, SaveOptions.None));
+            Assert.Throws<ArgumentNullException>(
+                () => new XStreamingElement("e").Save((string)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new XStreamingElement("e").Save((string)null, SaveOptions.DisableFormatting)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => new XStreamingElement("e").Save((string)null, SaveOptions.None)
+            );
         }
 
         [Fact]
         public void XStreamingElementSave()
         {
-            string markup = "<e a=\"value\"> <!--comment--> <e2> <![CDATA[cdata]]> </e2> <?pi target?> </e>";
+            string markup =
+                "<e a=\"value\"> <!--comment--> <e2> <![CDATA[cdata]]> </e2> <?pi target?> </e>";
             using (TempFile temp = TempFile.Create())
             {
                 XElement e = XElement.Parse(markup, LoadOptions.PreserveWhitespace);
@@ -120,14 +155,18 @@ namespace XLinqTests
                 e2.Save(temp.Path);
 
                 temp.AssertExists();
-                Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup, NormalizeNewLines(temp.ReadAllText()));
+                Assert.Equal(
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup,
+                    NormalizeNewLines(temp.ReadAllText())
+                );
             }
         }
 
         [Fact]
         public void XStreamingElementSave_SaveOptions()
         {
-            string markup = "<e a=\"value\"> <!--comment--> <e2> <![CDATA[cdata]]> </e2> <?pi target?> </e>";
+            string markup =
+                "<e a=\"value\"> <!--comment--> <e2> <![CDATA[cdata]]> </e2> <?pi target?> </e>";
             using (TempFile temp = TempFile.Create())
             {
                 XElement e = XElement.Parse(markup, LoadOptions.PreserveWhitespace);
@@ -135,7 +174,10 @@ namespace XLinqTests
                 e2.Save(temp.Path, SaveOptions.DisableFormatting);
 
                 temp.AssertExists();
-                Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup, temp.ReadAllText());
+                Assert.Equal(
+                    "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + markup,
+                    temp.ReadAllText()
+                );
             }
         }
 
@@ -176,12 +218,18 @@ namespace XLinqTests
 
         private delegate string SerializeNode(XNode node);
 
-        private static void SerializeWithSaveOptions(SerializeNode serialize, bool testXElement, bool testXDocument)
+        private static void SerializeWithSaveOptions(
+            SerializeNode serialize,
+            bool testXElement,
+            bool testXDocument
+        )
         {
             // Test both options at once as they don't really collide
             SaveOptions so = SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces;
 
-            XElement root = XElement.Parse("<root xmlns:a='uri'><child xmlns:a='uri'><baby xmlns:a='uri'>text</baby></child></root>");
+            XElement root = XElement.Parse(
+                "<root xmlns:a='uri'><child xmlns:a='uri'><baby xmlns:a='uri'>text</baby></child></root>"
+            );
             XElement child = root.Element("child");
             XElement baby = child.Element("baby");
             XNode text = baby.FirstNode;
@@ -189,7 +237,10 @@ namespace XLinqTests
             // Verify that without annotation the output gets indented and the duplicate ns decls are not removed
             if (testXElement)
             {
-                Assert.Equal("<child xmlns:a=\"uri\">  <baby xmlns:a=\"uri\">text</baby></child>", NormalizeNewLines(serialize(child)));
+                Assert.Equal(
+                    "<child xmlns:a=\"uri\">  <baby xmlns:a=\"uri\">text</baby></child>",
+                    NormalizeNewLines(serialize(child))
+                );
             }
 
             // Now add annotation to the leaf element node
@@ -207,9 +258,15 @@ namespace XLinqTests
             if (testXElement)
             {
                 // Verify that the options are applied correctly
-                Assert.Equal("<child xmlns:a=\"uri\"><baby>text</baby></child>", NormalizeNewLines(serialize(child)));
+                Assert.Equal(
+                    "<child xmlns:a=\"uri\"><baby>text</baby></child>",
+                    NormalizeNewLines(serialize(child))
+                );
                 // Verify that the root node is not affected as we don't look for the annotation among descendants
-                Assert.Equal("<root xmlns:a=\"uri\">  <child xmlns:a=\"uri\">    <baby xmlns:a=\"uri\">text</baby>  </child></root>", NormalizeNewLines(serialize(root)));
+                Assert.Equal(
+                    "<root xmlns:a=\"uri\">  <child xmlns:a=\"uri\">    <baby xmlns:a=\"uri\">text</baby>  </child></root>",
+                    NormalizeNewLines(serialize(root))
+                );
             }
 
             // And now add the annotation to the root and remove it from the child to test that we can correctly skip over a node
@@ -221,7 +278,10 @@ namespace XLinqTests
                 // Verify that the options are still applied to child
                 Assert.Equal("<child xmlns:a=\"uri\"><baby>text</baby></child>", serialize(child));
                 // And they should be also applied to the root now
-                Assert.Equal("<root xmlns:a=\"uri\"><child><baby>text</baby></child></root>", serialize(root));
+                Assert.Equal(
+                    "<root xmlns:a=\"uri\"><child><baby>text</baby></child></root>",
+                    serialize(root)
+                );
             }
 
             // Add a document node above it all to test that it works on non-XElement as well
@@ -233,12 +293,18 @@ namespace XLinqTests
             // Options should still apply to root as well as the doc
             if (testXElement)
             {
-                Assert.Equal("<root xmlns:a=\"uri\"><child><baby>text</baby></child></root>", serialize(root));
+                Assert.Equal(
+                    "<root xmlns:a=\"uri\"><child><baby>text</baby></child></root>",
+                    serialize(root)
+                );
             }
 
             if (testXDocument)
             {
-                Assert.Equal("<root xmlns:a=\"uri\"><child><baby>text</baby></child></root>", serialize(doc));
+                Assert.Equal(
+                    "<root xmlns:a=\"uri\"><child><baby>text</baby></child></root>",
+                    serialize(doc)
+                );
             }
         }
 

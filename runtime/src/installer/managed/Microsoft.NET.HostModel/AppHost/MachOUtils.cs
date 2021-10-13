@@ -117,7 +117,8 @@ namespace Microsoft.NET.HostModel.AppHost
                     fixed (byte* p = segname)
                     {
                         int len = 0;
-                        while (*(p + len) != 0 && len++ < 16) ;
+                        while (*(p + len) != 0 && len++ < 16)
+                            ;
 
                         try
                         {
@@ -202,12 +203,16 @@ namespace Microsoft.NET.HostModel.AppHost
         public static unsafe bool RemoveSignature(FileStream stream)
         {
             uint signatureSize = 0;
-            using (var mappedFile = MemoryMappedFile.CreateFromFile(stream,
-                                                                    mapName: null,
-                                                                    capacity: 0,
-                                                                    MemoryMappedFileAccess.ReadWrite,
-                                                                    HandleInheritability.None,
-                                                                    leaveOpen: true))
+            using (
+                var mappedFile = MemoryMappedFile.CreateFromFile(
+                    stream,
+                    mapName: null,
+                    capacity: 0,
+                    MemoryMappedFileAccess.ReadWrite,
+                    HandleInheritability.None,
+                    leaveOpen: true
+                )
+            )
             {
                 using (var accessor = mappedFile.CreateViewAccessor())
                 {
@@ -272,12 +277,22 @@ namespace Microsoft.NET.HostModel.AppHost
                             Verify(linkEditEnd == fileEnd, MachOFormatError.LinkEditNotLast);
                             Verify(signatureEnd == fileEnd, MachOFormatError.SignBlobNotLast);
 
-                            Verify(symtab->symoff > linkEdit->fileoff, MachOFormatError.SymtabNotInLinkEdit);
-                            Verify(signature->dataoff > linkEdit->fileoff, MachOFormatError.SignNotInLinkEdit);
+                            Verify(
+                                symtab->symoff > linkEdit->fileoff,
+                                MachOFormatError.SymtabNotInLinkEdit
+                            );
+                            Verify(
+                                signature->dataoff > linkEdit->fileoff,
+                                MachOFormatError.SignNotInLinkEdit
+                            );
 
                             // The signature blob immediately follows the symtab blob,
                             // except for a few bytes of padding.
-                            Verify(signature->dataoff >= symtabEnd && signature->dataoff - symtabEnd < 32, MachOFormatError.SignBlobNotLast);
+                            Verify(
+                                signature->dataoff >= symtabEnd
+                                    && signature->dataoff - symtabEnd < 32,
+                                MachOFormatError.SignBlobNotLast
+                            );
 
                             // Remove the signature command
                             header->ncmds--;
@@ -296,6 +311,7 @@ namespace Microsoft.NET.HostModel.AppHost
                             linkEdit->vmsize = linkEdit->filesize;
                         }
                     }
+
                     finally
                     {
                         if (file != null)
@@ -430,6 +446,7 @@ namespace Microsoft.NET.HostModel.AppHost
                         linkEdit->filesize = fileLength - linkEdit->fileoff;
                         linkEdit->vmsize = linkEdit->filesize;
                     }
+
                     finally
                     {
                         if (file != null)

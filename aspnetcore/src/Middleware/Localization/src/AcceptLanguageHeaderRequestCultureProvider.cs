@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved. 
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
 using System.Linq;
@@ -23,7 +23,9 @@ namespace Microsoft.AspNetCore.Localization
         public int MaximumAcceptLanguageHeaderValuesToTry { get; set; } = 3;
 
         /// <inheritdoc />
-        public override Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
+        public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
+            HttpContext httpContext
+        )
         {
             if (httpContext == null)
             {
@@ -46,12 +48,18 @@ namespace Microsoft.AspNetCore.Localization
                 languages = languages.Take(MaximumAcceptLanguageHeaderValuesToTry);
             }
 
-            var orderedLanguages = languages.OrderByDescending(h => h, StringWithQualityHeaderValueComparer.QualityComparer)
-                .Select(x => x.Value).ToList();
+            var orderedLanguages = languages.OrderByDescending(
+                    h => h,
+                    StringWithQualityHeaderValueComparer.QualityComparer
+                )
+                .Select(x => x.Value)
+                .ToList();
 
             if (orderedLanguages.Count > 0)
             {
-                return Task.FromResult<ProviderCultureResult?>(new ProviderCultureResult(orderedLanguages));
+                return Task.FromResult<ProviderCultureResult?>(
+                    new ProviderCultureResult(orderedLanguages)
+                );
             }
 
             return NullProviderCultureResult;

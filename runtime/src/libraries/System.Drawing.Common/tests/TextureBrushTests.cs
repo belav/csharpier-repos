@@ -13,8 +13,18 @@ namespace System.Drawing.Tests
     {
         public static IEnumerable<object[]> Ctor_Bitmap_TestData()
         {
-            yield return new object[] { new Bitmap(10, 10), PixelFormat.Format32bppPArgb, new Size(10, 10) };
-            yield return new object[] { new Metafile(Helpers.GetTestBitmapPath("telescope_01.wmf")), PixelFormat.Format32bppArgb, new Size(490, 654) };
+            yield return new object[]
+            {
+                new Bitmap(10, 10),
+                PixelFormat.Format32bppPArgb,
+                new Size(10, 10)
+            };
+            yield return new object[]
+            {
+                new Metafile(Helpers.GetTestBitmapPath("telescope_01.wmf")),
+                PixelFormat.Format32bppArgb,
+                new Size(490, 654)
+            };
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -35,6 +45,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(WrapMode.Tile, brush.WrapMode);
                 }
             }
+
             finally
             {
                 bitmap.Dispose();
@@ -56,18 +67,53 @@ namespace System.Drawing.Tests
         {
             foreach (object[] data in Ctor_Bitmap_TestData())
             {
-                yield return new object[] { ((Image)data[0]).Clone(), WrapMode.Clamp, data[1], data[2] };
-                yield return new object[] { ((Image)data[0]).Clone(), WrapMode.Tile, data[1], data[2] };
-                yield return new object[] { ((Image)data[0]).Clone(), WrapMode.TileFlipX, data[1], data[2] };
-                yield return new object[] { ((Image)data[0]).Clone(), WrapMode.TileFlipXY, data[1], data[2] };
-                yield return new object[] { ((Image)data[0]).Clone(), WrapMode.TileFlipY, data[1], data[2] };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    WrapMode.Clamp,
+                    data[1],
+                    data[2]
+                };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    WrapMode.Tile,
+                    data[1],
+                    data[2]
+                };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    WrapMode.TileFlipX,
+                    data[1],
+                    data[2]
+                };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    WrapMode.TileFlipXY,
+                    data[1],
+                    data[2]
+                };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    WrapMode.TileFlipY,
+                    data[1],
+                    data[2]
+                };
             }
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Image_WrapMode_TestData))]
-        public void Ctor_Image_WrapMode(Image image, WrapMode wrapMode, PixelFormat expectedPixelFormat, Size expectedSize)
+        public void Ctor_Image_WrapMode(
+            Image image,
+            WrapMode wrapMode,
+            PixelFormat expectedPixelFormat,
+            Size expectedSize
+        )
         {
             try
             {
@@ -82,6 +128,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(wrapMode, brush.WrapMode);
                 }
             }
+
             finally
             {
                 image.Dispose();
@@ -112,6 +159,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(WrapMode.Tile, brush.WrapMode);
                 }
             }
+
             finally
             {
                 image.Dispose();
@@ -136,6 +184,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(WrapMode.Tile, brush.WrapMode);
                 }
             }
+
             finally
             {
                 image.Dispose();
@@ -149,7 +198,12 @@ namespace System.Drawing.Tests
                 yield return new object[] { ((Image)data[0]).Clone(), WrapMode.Clamp, data[1] };
                 yield return new object[] { ((Image)data[0]).Clone(), WrapMode.Tile, data[1] };
                 yield return new object[] { ((Image)data[0]).Clone(), WrapMode.TileFlipX, data[1] };
-                yield return new object[] { ((Image)data[0]).Clone(), WrapMode.TileFlipXY, data[1] };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    WrapMode.TileFlipXY,
+                    data[1]
+                };
                 yield return new object[] { ((Image)data[0]).Clone(), WrapMode.TileFlipY, data[1] };
             }
         }
@@ -157,7 +211,11 @@ namespace System.Drawing.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Image_WrapMode_Rectangle_TestData))]
-        public void Ctor_Image_WrapMode_Rectangle(Image image, WrapMode wrapMode, Rectangle rectangle)
+        public void Ctor_Image_WrapMode_Rectangle(
+            Image image,
+            WrapMode wrapMode,
+            Rectangle rectangle
+        )
         {
             try
             {
@@ -172,6 +230,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(wrapMode, brush.WrapMode);
                 }
             }
+
             finally
             {
                 image.Dispose();
@@ -181,7 +240,11 @@ namespace System.Drawing.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Image_WrapMode_Rectangle_TestData))]
-        public void Ctor_Image_WrapMode_RectangleF(Image image, WrapMode wrapMode, Rectangle rectangle)
+        public void Ctor_Image_WrapMode_RectangleF(
+            Image image,
+            WrapMode wrapMode,
+            Rectangle rectangle
+        )
         {
             try
             {
@@ -196,6 +259,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(wrapMode, brush.WrapMode);
                 }
             }
+
             finally
             {
                 image.Dispose();
@@ -206,19 +270,42 @@ namespace System.Drawing.Tests
         {
             foreach (object[] data in Ctor_Image_Rectangle_TestData())
             {
-                yield return new object[] { ((Image)data[0]).Clone(), data[1], null, WrapMode.Tile };
-                yield return new object[] { ((Image)data[0]).Clone(), data[1], new ImageAttributes(), WrapMode.Clamp };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    data[1],
+                    null,
+                    WrapMode.Tile
+                };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    data[1],
+                    new ImageAttributes(),
+                    WrapMode.Clamp
+                };
 
                 var customWrapMode = new ImageAttributes();
                 customWrapMode.SetWrapMode(WrapMode.TileFlipXY);
-                yield return new object[] { ((Image)data[0]).Clone(), data[1], customWrapMode, WrapMode.TileFlipXY };
+                yield return new object[]
+                {
+                    ((Image)data[0]).Clone(),
+                    data[1],
+                    customWrapMode,
+                    WrapMode.TileFlipXY
+                };
             }
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Image_Rectangle_ImageAttributes_TestData))]
-        public void Ctor_Image_Rectangle_ImageAttributes(Image image, Rectangle rectangle, ImageAttributes attributes, WrapMode expectedWrapMode)
+        public void Ctor_Image_Rectangle_ImageAttributes(
+            Image image,
+            Rectangle rectangle,
+            ImageAttributes attributes,
+            WrapMode expectedWrapMode
+        )
         {
             try
             {
@@ -233,6 +320,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(expectedWrapMode, brush.WrapMode);
                 }
             }
+
             finally
             {
                 image.Dispose();
@@ -243,7 +331,12 @@ namespace System.Drawing.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Ctor_Image_Rectangle_ImageAttributes_TestData))]
-        public void Ctor_Image_RectangleF_ImageAttributes(Image image, Rectangle rectangle, ImageAttributes attributes, WrapMode expectedWrapMode)
+        public void Ctor_Image_RectangleF_ImageAttributes(
+            Image image,
+            Rectangle rectangle,
+            ImageAttributes attributes,
+            WrapMode expectedWrapMode
+        )
         {
             try
             {
@@ -258,6 +351,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(expectedWrapMode, brush.WrapMode);
                 }
             }
+
             finally
             {
                 image.Dispose();
@@ -269,13 +363,34 @@ namespace System.Drawing.Tests
         public void Ctor_NullImage_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("image", () => new TextureBrush(null));
-            AssertExtensions.Throws<ArgumentNullException>("image", () => new TextureBrush(null, WrapMode.Tile));
-            AssertExtensions.Throws<ArgumentNullException>("image", () => new TextureBrush(null, RectangleF.Empty));
-            AssertExtensions.Throws<ArgumentNullException>("image", () => new TextureBrush(null, Rectangle.Empty));
-            AssertExtensions.Throws<ArgumentNullException>("image", () => new TextureBrush(null, RectangleF.Empty, null));
-            AssertExtensions.Throws<ArgumentNullException>("image", () => new TextureBrush(null, Rectangle.Empty, null));
-            AssertExtensions.Throws<ArgumentNullException>("image", () => new TextureBrush(null, WrapMode.Tile, RectangleF.Empty));
-            AssertExtensions.Throws<ArgumentNullException>("image", () => new TextureBrush(null, WrapMode.Tile, Rectangle.Empty));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "image",
+                () => new TextureBrush(null, WrapMode.Tile)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "image",
+                () => new TextureBrush(null, RectangleF.Empty)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "image",
+                () => new TextureBrush(null, Rectangle.Empty)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "image",
+                () => new TextureBrush(null, RectangleF.Empty, null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "image",
+                () => new TextureBrush(null, Rectangle.Empty, null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "image",
+                () => new TextureBrush(null, WrapMode.Tile, RectangleF.Empty)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "image",
+                () => new TextureBrush(null, WrapMode.Tile, Rectangle.Empty)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -285,13 +400,34 @@ namespace System.Drawing.Tests
             image.Dispose();
 
             AssertExtensions.Throws<ArgumentException>(null, () => new TextureBrush(image));
-            AssertExtensions.Throws<ArgumentException>(null, () => new TextureBrush(image, WrapMode.Tile));
-            AssertExtensions.Throws<ArgumentException>(null, () => new TextureBrush(image, RectangleF.Empty));
-            AssertExtensions.Throws<ArgumentException>(null, () => new TextureBrush(image, Rectangle.Empty));
-            AssertExtensions.Throws<ArgumentException>(null, () => new TextureBrush(image, RectangleF.Empty, null));
-            AssertExtensions.Throws<ArgumentException>(null, () => new TextureBrush(image, Rectangle.Empty, null));
-            AssertExtensions.Throws<ArgumentException>(null, () => new TextureBrush(image, WrapMode.Tile, RectangleF.Empty));
-            AssertExtensions.Throws<ArgumentException>(null, () => new TextureBrush(image, WrapMode.Tile, Rectangle.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new TextureBrush(image, WrapMode.Tile)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new TextureBrush(image, RectangleF.Empty)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new TextureBrush(image, Rectangle.Empty)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new TextureBrush(image, RectangleF.Empty, null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new TextureBrush(image, Rectangle.Empty, null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new TextureBrush(image, WrapMode.Tile, RectangleF.Empty)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new TextureBrush(image, WrapMode.Tile, Rectangle.Empty)
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
@@ -302,8 +438,12 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             {
                 Assert.ThrowsAny<ArgumentException>(() => new TextureBrush(image, wrapMode));
-                Assert.ThrowsAny<ArgumentException>(() => new TextureBrush(image, wrapMode, RectangleF.Empty));
-                Assert.ThrowsAny<ArgumentException>(() => new TextureBrush(image, wrapMode, Rectangle.Empty));
+                Assert.ThrowsAny<ArgumentException>(
+                    () => new TextureBrush(image, wrapMode, RectangleF.Empty)
+                );
+                Assert.ThrowsAny<ArgumentException>(
+                    () => new TextureBrush(image, wrapMode, Rectangle.Empty)
+                );
             }
         }
 
@@ -316,17 +456,30 @@ namespace System.Drawing.Tests
         [InlineData(0, 5, 1, 6)]
         [InlineData(0, 0, 1, 0)]
         [InlineData(0, 0, 0, 1)]
-        public void Ctor_InvalidRectangle_ThrowsOutOfMemoryException(int x, int y, int width, int height)
+        public void Ctor_InvalidRectangle_ThrowsOutOfMemoryException(
+            int x,
+            int y,
+            int width,
+            int height
+        )
         {
             var rectangle = new Rectangle(x, y, width, height);
             using (var image = new Bitmap(10, 10))
             {
                 Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, rectangle));
-                Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, (RectangleF)rectangle));
-                Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, WrapMode.Tile, rectangle));
-                Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, WrapMode.Tile, (RectangleF)rectangle));
+                Assert.Throws<OutOfMemoryException>(
+                    () => new TextureBrush(image, (RectangleF)rectangle)
+                );
+                Assert.Throws<OutOfMemoryException>(
+                    () => new TextureBrush(image, WrapMode.Tile, rectangle)
+                );
+                Assert.Throws<OutOfMemoryException>(
+                    () => new TextureBrush(image, WrapMode.Tile, (RectangleF)rectangle)
+                );
                 Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, rectangle, null));
-                Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, (RectangleF)rectangle, null));
+                Assert.Throws<OutOfMemoryException>(
+                    () => new TextureBrush(image, (RectangleF)rectangle, null)
+                );
             }
         }
 
@@ -370,15 +523,39 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> MultiplyTransform_TestData()
         {
-            yield return new object[] { new Matrix(), new Matrix(1, 2, 3, 4, 5, 6), MatrixOrder.Prepend };
-            yield return new object[] { new Matrix(), new Matrix(1, 2, 3, 4, 5, 6), MatrixOrder.Append };
-            yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), new Matrix(2, 3, 4, 5, 6, 7), MatrixOrder.Prepend };
-            yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), new Matrix(2, 3, 4, 5, 6, 7), MatrixOrder.Append };
+            yield return new object[]
+            {
+                new Matrix(),
+                new Matrix(1, 2, 3, 4, 5, 6),
+                MatrixOrder.Prepend
+            };
+            yield return new object[]
+            {
+                new Matrix(),
+                new Matrix(1, 2, 3, 4, 5, 6),
+                MatrixOrder.Append
+            };
+            yield return new object[]
+            {
+                new Matrix(1, 2, 3, 4, 5, 6),
+                new Matrix(2, 3, 4, 5, 6, 7),
+                MatrixOrder.Prepend
+            };
+            yield return new object[]
+            {
+                new Matrix(1, 2, 3, 4, 5, 6),
+                new Matrix(2, 3, 4, 5, 6, 7),
+                MatrixOrder.Append
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(MultiplyTransform_TestData))]
-        public void MultiplyTransform_Matrix_SetsTransformToExpected(Matrix originalTransform, Matrix matrix, MatrixOrder matrixOrder)
+        public void MultiplyTransform_Matrix_SetsTransformToExpected(
+            Matrix originalTransform,
+            Matrix matrix,
+            MatrixOrder matrixOrder
+        )
         {
             try
             {
@@ -400,6 +577,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(expected, brush.Transform);
                 }
             }
+
             finally
             {
                 originalTransform.Dispose();
@@ -413,8 +591,14 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (var brush = new TextureBrush(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("matrix", () => brush.MultiplyTransform(null));
-                AssertExtensions.Throws<ArgumentNullException>("matrix", () => brush.MultiplyTransform(null, MatrixOrder.Prepend));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "matrix",
+                    () => brush.MultiplyTransform(null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "matrix",
+                    () => brush.MultiplyTransform(null, MatrixOrder.Prepend)
+                );
             }
         }
 
@@ -425,8 +609,14 @@ namespace System.Drawing.Tests
             using (var brush = new TextureBrush(image))
             using (var matrix = new Matrix(123, 24, 82, 16, 47, 30))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.MultiplyTransform(matrix));
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.MultiplyTransform(matrix, MatrixOrder.Prepend));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.MultiplyTransform(matrix)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.MultiplyTransform(matrix, MatrixOrder.Prepend)
+                );
             }
         }
 
@@ -476,8 +666,14 @@ namespace System.Drawing.Tests
                 var brush = new TextureBrush(image);
                 brush.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.MultiplyTransform(matrix));
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.MultiplyTransform(matrix, MatrixOrder.Prepend));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.MultiplyTransform(matrix)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.MultiplyTransform(matrix, MatrixOrder.Prepend)
+                );
             }
         }
 
@@ -524,7 +720,11 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(RotateTransform_TestData))]
-        public void RotateTransform_Invoke_SetsTransformToExpected(Matrix originalTransform, float angle, MatrixOrder matrixOrder)
+        public void RotateTransform_Invoke_SetsTransformToExpected(
+            Matrix originalTransform,
+            float angle,
+            MatrixOrder matrixOrder
+        )
         {
             try
             {
@@ -546,6 +746,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(expected, brush.Transform);
                 }
             }
+
             finally
             {
                 originalTransform.Dispose();
@@ -560,7 +761,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (var brush = new TextureBrush(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.RotateTransform(10, matrixOrder));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.RotateTransform(10, matrixOrder)
+                );
             }
         }
 
@@ -574,7 +778,10 @@ namespace System.Drawing.Tests
                 brush.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => brush.RotateTransform(1));
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.RotateTransform(1, MatrixOrder.Prepend));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.RotateTransform(1, MatrixOrder.Prepend)
+                );
             }
         }
 
@@ -588,13 +795,30 @@ namespace System.Drawing.Tests
             yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), 1, 1, MatrixOrder.Append };
             yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), -2, -3, MatrixOrder.Prepend };
             yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), -2, -3, MatrixOrder.Append };
-            yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), 0.5, 0.75, MatrixOrder.Prepend };
-            yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), 0.5, 0.75, MatrixOrder.Append };
+            yield return new object[]
+            {
+                new Matrix(1, 2, 3, 4, 5, 6),
+                0.5,
+                0.75,
+                MatrixOrder.Prepend
+            };
+            yield return new object[]
+            {
+                new Matrix(1, 2, 3, 4, 5, 6),
+                0.5,
+                0.75,
+                MatrixOrder.Append
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(ScaleTransform_TestData))]
-        public void ScaleTransform_Invoke_SetsTransformToExpected(Matrix originalTransform, float scaleX, float scaleY, MatrixOrder matrixOrder)
+        public void ScaleTransform_Invoke_SetsTransformToExpected(
+            Matrix originalTransform,
+            float scaleX,
+            float scaleY,
+            MatrixOrder matrixOrder
+        )
         {
             try
             {
@@ -616,6 +840,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(expected, brush.Transform);
                 }
             }
+
             finally
             {
                 originalTransform.Dispose();
@@ -630,7 +855,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (var brush = new TextureBrush(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.ScaleTransform(1, 2, matrixOrder));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.ScaleTransform(1, 2, matrixOrder)
+                );
             }
         }
 
@@ -644,7 +872,10 @@ namespace System.Drawing.Tests
                 brush.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => brush.ScaleTransform(1, 2));
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.ScaleTransform(1, 2, MatrixOrder.Prepend));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.ScaleTransform(1, 2, MatrixOrder.Prepend)
+                );
             }
         }
 
@@ -666,7 +897,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (var brush = new TextureBrush(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("value", () => brush.Transform = null);
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "value",
+                    () => brush.Transform = null
+                );
             }
         }
 
@@ -707,13 +941,30 @@ namespace System.Drawing.Tests
             yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), 1, 1, MatrixOrder.Append };
             yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), -2, -3, MatrixOrder.Prepend };
             yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), -2, -3, MatrixOrder.Append };
-            yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), 0.5, 0.75, MatrixOrder.Prepend };
-            yield return new object[] { new Matrix(1, 2, 3, 4, 5, 6), 0.5, 0.75, MatrixOrder.Append };
+            yield return new object[]
+            {
+                new Matrix(1, 2, 3, 4, 5, 6),
+                0.5,
+                0.75,
+                MatrixOrder.Prepend
+            };
+            yield return new object[]
+            {
+                new Matrix(1, 2, 3, 4, 5, 6),
+                0.5,
+                0.75,
+                MatrixOrder.Append
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(TranslateTransform_TestData))]
-        public void TranslateTransform_Invoke_SetsTransformToExpected(Matrix originalTransform, float dX, float dY, MatrixOrder matrixOrder)
+        public void TranslateTransform_Invoke_SetsTransformToExpected(
+            Matrix originalTransform,
+            float dX,
+            float dY,
+            MatrixOrder matrixOrder
+        )
         {
             try
             {
@@ -735,6 +986,7 @@ namespace System.Drawing.Tests
                     Assert.Equal(expected, brush.Transform);
                 }
             }
+
             finally
             {
                 originalTransform.Dispose();
@@ -749,7 +1001,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (var brush = new TextureBrush(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.TranslateTransform(1, 2, matrixOrder));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.TranslateTransform(1, 2, matrixOrder)
+                );
             }
         }
 
@@ -762,8 +1017,14 @@ namespace System.Drawing.Tests
                 var brush = new TextureBrush(image);
                 brush.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.TranslateTransform(1, 2));
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.TranslateTransform(1, 2, MatrixOrder.Prepend));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.TranslateTransform(1, 2)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.TranslateTransform(1, 2, MatrixOrder.Prepend)
+                );
             }
         }
 
@@ -804,7 +1065,10 @@ namespace System.Drawing.Tests
                 brush.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => brush.WrapMode);
-                AssertExtensions.Throws<ArgumentException>(null, () => brush.WrapMode = WrapMode.Tile);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => brush.WrapMode = WrapMode.Tile
+                );
             }
         }
 
@@ -816,13 +1080,16 @@ namespace System.Drawing.Tests
             // _|_|_|_
             // _|_|_|_
             Color empty = Color.FromArgb(0, 0, 0, 0);
-            VerifyFillRect(WrapMode.Clamp, new Color[][]
-            {
-                new Color[] { Color.Red,    Color.Green,    empty,  empty },
-                new Color[] { Color.Blue,   Color.Yellow,   empty,  empty },
-                new Color[] { empty,        empty,          empty,  empty },
-                new Color[] { empty,        empty,          empty,  empty }
-            });
+            VerifyFillRect(
+                WrapMode.Clamp,
+                new Color[][]
+                {
+                    new Color[] { Color.Red, Color.Green, empty, empty },
+                    new Color[] { Color.Blue, Color.Yellow, empty, empty },
+                    new Color[] { empty, empty, empty, empty },
+                    new Color[] { empty, empty, empty, empty }
+                }
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -832,13 +1099,16 @@ namespace System.Drawing.Tests
             // B|Y|B|Y
             // R|G|R|G
             // B|Y|B|Y
-            VerifyFillRect(WrapMode.Tile, new Color[][]
-            {
-                new Color[] { Color.Red,  Color.Green,  Color.Red,  Color.Green  },
-                new Color[] { Color.Blue, Color.Yellow, Color.Blue, Color.Yellow },
-                new Color[] { Color.Red,  Color.Green,  Color.Red,  Color.Green  },
-                new Color[] { Color.Blue, Color.Yellow, Color.Blue, Color.Yellow }
-            });
+            VerifyFillRect(
+                WrapMode.Tile,
+                new Color[][]
+                {
+                    new Color[] { Color.Red, Color.Green, Color.Red, Color.Green },
+                    new Color[] { Color.Blue, Color.Yellow, Color.Blue, Color.Yellow },
+                    new Color[] { Color.Red, Color.Green, Color.Red, Color.Green },
+                    new Color[] { Color.Blue, Color.Yellow, Color.Blue, Color.Yellow }
+                }
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -849,13 +1119,16 @@ namespace System.Drawing.Tests
             // B|Y|Y|B
             // R|G|G|R
             // B|Y|Y|B
-            VerifyFillRect(WrapMode.TileFlipX, new Color[][]
-            {
-                new Color[] { Color.Red,    Color.Green,    Color.Green,    Color.Red  },
-                new Color[] { Color.Blue,   Color.Yellow,   Color.Yellow,   Color.Blue },
-                new Color[] { Color.Red,    Color.Green,    Color.Green,    Color.Red  },
-                new Color[] { Color.Blue,   Color.Yellow,   Color.Yellow,   Color.Blue }
-            });
+            VerifyFillRect(
+                WrapMode.TileFlipX,
+                new Color[][]
+                {
+                    new Color[] { Color.Red, Color.Green, Color.Green, Color.Red },
+                    new Color[] { Color.Blue, Color.Yellow, Color.Yellow, Color.Blue },
+                    new Color[] { Color.Red, Color.Green, Color.Green, Color.Red },
+                    new Color[] { Color.Blue, Color.Yellow, Color.Yellow, Color.Blue }
+                }
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -866,13 +1139,16 @@ namespace System.Drawing.Tests
             // B|Y|B|Y
             // B|Y|B|Y
             // R|G|R|G
-            VerifyFillRect(WrapMode.TileFlipY, new Color[][]
-            {
-                new Color[] { Color.Red,    Color.Green,    Color.Red,    Color.Green  },
-                new Color[] { Color.Blue,   Color.Yellow,   Color.Blue,   Color.Yellow },
-                new Color[] { Color.Blue,   Color.Yellow,   Color.Blue,   Color.Yellow },
-                new Color[] { Color.Red,    Color.Green,    Color.Red,    Color.Green  }
-            });
+            VerifyFillRect(
+                WrapMode.TileFlipY,
+                new Color[][]
+                {
+                    new Color[] { Color.Red, Color.Green, Color.Red, Color.Green },
+                    new Color[] { Color.Blue, Color.Yellow, Color.Blue, Color.Yellow },
+                    new Color[] { Color.Blue, Color.Yellow, Color.Blue, Color.Yellow },
+                    new Color[] { Color.Red, Color.Green, Color.Red, Color.Green }
+                }
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/22221", TestPlatforms.AnyUnix)]
@@ -883,13 +1159,16 @@ namespace System.Drawing.Tests
             // B|Y|Y|B
             // B|Y|Y|B
             // R|G|G|R
-            VerifyFillRect(WrapMode.TileFlipXY, new Color[][]
-            {
-                new Color[] { Color.Red,    Color.Green,    Color.Green,    Color.Red  },
-                new Color[] { Color.Blue,   Color.Yellow,   Color.Yellow,   Color.Blue },
-                new Color[] { Color.Blue,   Color.Yellow,   Color.Yellow,   Color.Blue },
-                new Color[] { Color.Red,    Color.Green,    Color.Green,    Color.Red  }
-            });
+            VerifyFillRect(
+                WrapMode.TileFlipXY,
+                new Color[][]
+                {
+                    new Color[] { Color.Red, Color.Green, Color.Green, Color.Red },
+                    new Color[] { Color.Blue, Color.Yellow, Color.Yellow, Color.Blue },
+                    new Color[] { Color.Blue, Color.Yellow, Color.Yellow, Color.Blue },
+                    new Color[] { Color.Red, Color.Green, Color.Green, Color.Red }
+                }
+            );
         }
 
         private static void VerifyFillRect(WrapMode wrapMode, Color[][] expectedColors)

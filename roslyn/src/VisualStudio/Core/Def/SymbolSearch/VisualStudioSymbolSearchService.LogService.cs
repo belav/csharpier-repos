@@ -27,11 +27,14 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
                 _activityLog = activityLog;
             }
 
-            public ValueTask LogInfoAsync(string text, CancellationToken cancellationToken)
-                => LogAsync(text, __ACTIVITYLOG_ENTRYTYPE.ALE_INFORMATION);
+            public ValueTask LogInfoAsync(string text, CancellationToken cancellationToken) =>
+                LogAsync(text, __ACTIVITYLOG_ENTRYTYPE.ALE_INFORMATION);
 
-            public ValueTask LogExceptionAsync(string exception, string text, CancellationToken cancellationToken)
-                => LogAsync(text + ". " + exception, __ACTIVITYLOG_ENTRYTYPE.ALE_ERROR);
+            public ValueTask LogExceptionAsync(
+                string exception,
+                string text,
+                CancellationToken cancellationToken
+            ) => LogAsync(text + ". " + exception, __ACTIVITYLOG_ENTRYTYPE.ALE_ERROR);
 
             private ValueTask LogAsync(string text, __ACTIVITYLOG_ENTRYTYPE type)
             {

@@ -32,15 +32,16 @@ namespace Microsoft.AspNetCore.JsonPatch.Test.Adapters
             AdapterFactory factory = new AdapterFactory();
 
             //Act:
-            IAdapter adapter = factory.Create(new Dictionary<string, string>(), new DefaultContractResolver());
+            IAdapter adapter = factory.Create(
+                new Dictionary<string, string>(),
+                new DefaultContractResolver()
+            );
 
             // Assert
             Assert.Equal(typeof(DictionaryAdapter<string, string>), adapter.GetType());
         }
 
-        private class PocoModel
-        {}
-
+        private class PocoModel { }
 
         [Fact]
         public void GetPocoAdapterForGenericObjects()
@@ -55,8 +56,6 @@ namespace Microsoft.AspNetCore.JsonPatch.Test.Adapters
             Assert.Equal(typeof(PocoAdapter), adapter.GetType());
         }
 
-        
-
         [Fact]
         public void GetDynamicAdapterForGenericObjects()
         {
@@ -64,7 +63,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Test.Adapters
             AdapterFactory factory = new AdapterFactory();
 
             //Act:
-            IAdapter adapter = factory.Create(new TestDynamicObject(), new DefaultContractResolver());
+            IAdapter adapter = factory.Create(
+                new TestDynamicObject(),
+                new DefaultContractResolver()
+            );
 
             // Assert
             Assert.Equal(typeof(DynamicObjectAdapter), adapter.GetType());

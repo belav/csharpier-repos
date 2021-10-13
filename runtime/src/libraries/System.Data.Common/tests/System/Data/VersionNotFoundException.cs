@@ -26,7 +26,6 @@
 
 using Xunit;
 
-
 namespace System.Data.Tests
 {
     public class VersionNotFoundExceptionTest
@@ -39,10 +38,12 @@ namespace System.Data.Tests
             drParent.Delete();
             tbl.AcceptChanges();
 
-            Assert.Throws<VersionNotFoundException>(() =>
-            {
-                object obj = drParent[0, DataRowVersion.Proposed];
-            });
+            Assert.Throws<VersionNotFoundException>(
+                () =>
+                {
+                    object obj = drParent[0, DataRowVersion.Proposed];
+                }
+            );
         }
 
         [Fact]
@@ -53,10 +54,12 @@ namespace System.Data.Tests
             drParent.Delete();
             tbl.AcceptChanges();
 
-            Assert.Throws<VersionNotFoundException>(() =>
-            {
-                object obj = drParent[0, DataRowVersion.Current];
-            });
+            Assert.Throws<VersionNotFoundException>(
+                () =>
+                {
+                    object obj = drParent[0, DataRowVersion.Current];
+                }
+            );
         }
 
         [Fact]
@@ -67,10 +70,12 @@ namespace System.Data.Tests
             drParent.Delete();
             tbl.AcceptChanges();
 
-            Assert.Throws<VersionNotFoundException>(() =>
-            {
-                object obj = drParent[0, DataRowVersion.Original];
-            });
+            Assert.Throws<VersionNotFoundException>(
+                () =>
+                {
+                    object obj = drParent[0, DataRowVersion.Original];
+                }
+            );
         }
     }
 }

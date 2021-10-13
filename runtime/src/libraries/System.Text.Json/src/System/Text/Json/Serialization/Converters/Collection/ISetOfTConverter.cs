@@ -7,8 +7,7 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class ISetOfTConverter<TCollection, TElement>
-        : IEnumerableDefaultConverter<TCollection, TElement>
-        where TCollection : ISet<TElement>
+        : IEnumerableDefaultConverter<TCollection, TElement> where TCollection : ISet<TElement>
     {
         protected override void Add(in TElement value, ref ReadStack state)
         {
@@ -17,10 +16,15 @@ namespace System.Text.Json.Serialization.Converters
             if (IsValueType)
             {
                 state.Current.ReturnValue = collection;
-            };
+            }
+            ;
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
@@ -28,7 +32,11 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (!TypeToConvert.IsAssignableFrom(RuntimeType))
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = new HashSet<TElement>();
@@ -37,21 +45,34 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (typeInfo.CreateObject == null)
                 {
-                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 TCollection returnValue = (TCollection)typeInfo.CreateObject()!;
 
                 if (returnValue.IsReadOnly)
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = returnValue;
             }
         }
 
-        protected override bool OnWriteResume(Utf8JsonWriter writer, TCollection value, JsonSerializerOptions options, ref WriteStack state)
+        protected override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TCollection value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             IEnumerator<TElement> enumerator;
             if (state.Current.CollectionEnumerator == null)

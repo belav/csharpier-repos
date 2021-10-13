@@ -24,7 +24,9 @@ namespace Microsoft.AspNetCore.WebUtilities
         {
             if (_accumulator == null)
             {
-                _accumulator = new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
+                _accumulator = new Dictionary<string, StringValues>(
+                    StringComparer.OrdinalIgnoreCase
+                );
             }
 
             StringValues values;
@@ -48,7 +50,9 @@ namespace Microsoft.AspNetCore.WebUtilities
 
                     if (_expandingAccumulator == null)
                     {
-                        _expandingAccumulator = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+                        _expandingAccumulator = new Dictionary<string, List<string>>(
+                            StringComparer.OrdinalIgnoreCase
+                        );
                     }
 
                     // Already 3 entries so use starting allocated as 8; then use List's expansion mechanism for more
@@ -104,7 +108,8 @@ namespace Microsoft.AspNetCore.WebUtilities
                 }
             }
 
-            return _accumulator ?? new Dictionary<string, StringValues>(0, StringComparer.OrdinalIgnoreCase);
+            return _accumulator
+                ?? new Dictionary<string, StringValues>(0, StringComparer.OrdinalIgnoreCase);
         }
     }
 }

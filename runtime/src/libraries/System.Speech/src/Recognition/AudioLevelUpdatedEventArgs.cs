@@ -27,7 +27,6 @@ namespace System.Speech.Recognition
         #region Private Fields
 
         private int _audioLevel;
-
         #endregion
     }
 }

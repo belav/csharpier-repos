@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 
         public IReadOnlyDictionary<string, object> Data { get; }
 
-        public LanguageServiceMetadata(IDictionary<string, object> data)
-            : base(data)
+        public LanguageServiceMetadata(IDictionary<string, object> data) : base(data)
         {
             this.ServiceType = (string)data.GetValueOrDefault("ServiceType");
             this.Layer = (string)data.GetValueOrDefault("Layer");

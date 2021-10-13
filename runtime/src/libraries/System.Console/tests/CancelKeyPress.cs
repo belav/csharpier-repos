@@ -16,8 +16,7 @@ public partial class CancelKeyPressTests
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]
     public static void CanAddAndRemoveHandler()
     {
-        ConsoleCancelEventHandler handler = (sender, e) =>
-        {
+        ConsoleCancelEventHandler handler = (sender, e) => {
             // We don't actually want to do anything here.  This will only get called on the off chance
             // that someone CTRL+C's the test run while the handler is hooked up.  This is just used to
             // validate that we can add and remove a handler, we don't care about exercising it.
@@ -31,10 +30,13 @@ public partial class CancelKeyPressTests
     {
         // xunit registers a CancelKeyPress handler at the beginning of the test run and never
         // unregisters it, thus we can't execute all of the removal code in the same process.
-        RemoteExecutor.Invoke(() =>
-        {
-            CanAddAndRemoveHandler();
-            CanAddAndRemoveHandler(); // add and remove again
-        }).Dispose();
+        RemoteExecutor.Invoke(
+                () =>
+                {
+                    CanAddAndRemoveHandler();
+                    CanAddAndRemoveHandler(); // add and remove again
+                }
+            )
+            .Dispose();
     }
 }

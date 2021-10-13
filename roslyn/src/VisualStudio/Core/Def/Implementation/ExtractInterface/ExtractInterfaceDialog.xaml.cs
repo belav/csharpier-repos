@@ -22,13 +22,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
         public ExtractInterfaceDialogViewModel ViewModel { get; }
 
         // Expose localized strings for binding
-        public string ExtractInterfaceDialogTitle { get { return ServicesVSResources.Extract_Interface; } }
-        public string NewInterfaceName { get { return ServicesVSResources.New_interface_name_colon; } }
-        public string SelectPublicMembersToFormInterface { get { return ServicesVSResources.Select_public_members_to_form_interface; } }
-        public string SelectAll { get { return ServicesVSResources.Select_All; } }
-        public string DeselectAll { get { return ServicesVSResources.Deselect_All; } }
-        public string OK { get { return ServicesVSResources.OK; } }
-        public string Cancel { get { return ServicesVSResources.Cancel; } }
+        public string ExtractInterfaceDialogTitle
+        {
+            get { return ServicesVSResources.Extract_Interface; }
+        }
+        public string NewInterfaceName
+        {
+            get { return ServicesVSResources.New_interface_name_colon; }
+        }
+        public string SelectPublicMembersToFormInterface
+        {
+            get { return ServicesVSResources.Select_public_members_to_form_interface; }
+        }
+        public string SelectAll
+        {
+            get { return ServicesVSResources.Select_All; }
+        }
+        public string DeselectAll
+        {
+            get { return ServicesVSResources.Deselect_All; }
+        }
+        public string OK
+        {
+            get { return ServicesVSResources.OK; }
+        }
+        public string Cancel
+        {
+            get { return ServicesVSResources.Cancel; }
+        }
 
         // Use C# Extract Interface helpTopic for C# and VB.
         internal ExtractInterfaceDialog(ExtractInterfaceDialogViewModel viewModel)
@@ -45,19 +66,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
         private void SetCommandBindings()
         {
-            CommandBindings.Add(new CommandBinding(
-                new RoutedCommand(
-                    "SelectAllClickCommand",
-                    typeof(ExtractInterfaceDialog),
-                    new InputGestureCollection(new List<InputGesture> { new KeyGesture(Key.S, ModifierKeys.Alt) })),
-                Select_All_Click));
+            CommandBindings.Add(
+                new CommandBinding(
+                    new RoutedCommand(
+                        "SelectAllClickCommand",
+                        typeof(ExtractInterfaceDialog),
+                        new InputGestureCollection(
+                            new List<InputGesture> { new KeyGesture(Key.S, ModifierKeys.Alt) }
+                        )
+                    ),
+                    Select_All_Click
+                )
+            );
 
-            CommandBindings.Add(new CommandBinding(
-                new RoutedCommand(
-                    "DeselectAllClickCommand",
-                    typeof(ExtractInterfaceDialog),
-                    new InputGestureCollection(new List<InputGesture> { new KeyGesture(Key.D, ModifierKeys.Alt) })),
-                Deselect_All_Click));
+            CommandBindings.Add(
+                new CommandBinding(
+                    new RoutedCommand(
+                        "DeselectAllClickCommand",
+                        typeof(ExtractInterfaceDialog),
+                        new InputGestureCollection(
+                            new List<InputGesture> { new KeyGesture(Key.D, ModifierKeys.Alt) }
+                        )
+                    ),
+                    Deselect_All_Click
+                )
+            );
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
@@ -68,14 +101,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             }
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;
+        private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 
-        private void Select_All_Click(object sender, RoutedEventArgs e)
-            => ViewModel.SelectAll();
+        private void Select_All_Click(object sender, RoutedEventArgs e) => ViewModel.SelectAll();
 
-        private void Deselect_All_Click(object sender, RoutedEventArgs e)
-            => ViewModel.DeselectAll();
+        private void Deselect_All_Click(object sender, RoutedEventArgs e) =>
+            ViewModel.DeselectAll();
 
         private void OnListViewPreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -97,7 +128,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
         private void ToggleCheckSelection()
         {
-            var selectedItems = Members.SelectedItems.OfType<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>().ToArray();
+            var selectedItems =
+                Members.SelectedItems.OfType<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
+                    .ToArray();
             var allChecked = selectedItems.All(m => m.IsChecked);
             foreach (var item in selectedItems)
             {
@@ -105,15 +138,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
             }
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly ExtractInterfaceDialog _dialog;
 
-            public TestAccessor(ExtractInterfaceDialog dialog)
-                => _dialog = dialog;
+            public TestAccessor(ExtractInterfaceDialog dialog) => _dialog = dialog;
 
             public Button OKButton => _dialog.OKButton;
 
@@ -123,9 +154,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
 
             public Button DeselectAllButton => _dialog.DeselectAllButton;
 
-            public RadioButton DestinationCurrentFileSelectionRadioButton => _dialog.DestinationControl.DestinationCurrentFileSelectionRadioButton;
+            public RadioButton DestinationCurrentFileSelectionRadioButton =>
+                _dialog.DestinationControl.DestinationCurrentFileSelectionRadioButton;
 
-            public RadioButton DestinationNewFileSelectionRadioButton => _dialog.DestinationControl.DestinationNewFileSelectionRadioButton;
+            public RadioButton DestinationNewFileSelectionRadioButton =>
+                _dialog.DestinationControl.DestinationNewFileSelectionRadioButton;
 
             public TextBox FileNameTextBox => _dialog.DestinationControl.fileNameTextBox;
 

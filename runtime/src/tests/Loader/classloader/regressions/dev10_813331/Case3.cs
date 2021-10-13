@@ -7,7 +7,10 @@ public class HelloWorld
 {
     public static int Main()
     {
-        try { B b = new B(GetName()); }
+        try
+        {
+            B b = new B(GetName());
+        }
         catch (System.Exception)
         {
             System.Console.WriteLine("PASS");
@@ -16,7 +19,10 @@ public class HelloWorld
         System.Console.WriteLine("FAIL");
         return -1;
     }
-    public static string GetName() { throw new System.Exception(); }
+    public static string GetName()
+    {
+        throw new System.Exception();
+    }
 }
 
 public class B : A<string>

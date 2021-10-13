@@ -14,7 +14,6 @@ namespace System.Net.Sockets
 
         private SocketAddress CreateSocketAddressForSerialize() =>
             new SocketAddress(AddressFamily.Unix, s_nativeAddressSize);
-
         // from afunix.h:
         //#define UNIX_PATH_MAX 108
         //typedef struct sockaddr_un

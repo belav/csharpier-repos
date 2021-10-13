@@ -15,14 +15,14 @@ namespace Microsoft.AspNetCore.Razor.Language
         // Any letter/number followed by an uppercase letter then lowercase letter: 1(Aa), a(Aa), A(Aa)
         // Any lowercase letter followed by an uppercase letter: a(A)
         // Each match is then prefixed by a "-" via the ToHtmlCase method.
-        private static readonly Regex HtmlCaseRegex =
-            new Regex(
-                "(?<!^)((?<=[a-zA-Z0-9])[A-Z][a-z])|((?<=[a-z])[A-Z])",
-                RegexOptions.None,
-                TimeSpan.FromMilliseconds(500));
+        private static readonly Regex HtmlCaseRegex = new Regex(
+            "(?<!^)((?<=[a-zA-Z0-9])[A-Z][a-z])|((?<=[a-z])[A-Z])",
+            RegexOptions.None,
+            TimeSpan.FromMilliseconds(500)
+        );
 
-        internal static IReadOnlyCollection<char> InvalidNonWhitespaceHtmlCharacters { get; } = new List<char>(
-            new[] { '@', '!', '<', '/', '?', '[', '>', ']', '=', '"', '\'', '*' });
+        internal static IReadOnlyCollection<char> InvalidNonWhitespaceHtmlCharacters { get; } =
+            new List<char>(new[] { '@', '!', '<', '/', '?', '[', '>', ']', '=', '"', '\'', '*' });
 
         /// <summary>
         /// Converts from pascal/camel case to lower kebab-case.

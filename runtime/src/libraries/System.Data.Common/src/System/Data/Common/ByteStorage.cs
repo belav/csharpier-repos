@@ -13,9 +13,8 @@ namespace System.Data.Common
 
         private byte[] _values = default!; // Late-initialized
 
-        internal ByteStorage(DataColumn column) : base(column, typeof(byte), defaultValue, StorageType.Byte)
-        {
-        }
+        internal ByteStorage(DataColumn column)
+            : base(column, typeof(byte), defaultValue, StorageType.Byte) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -30,7 +29,10 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { sum += _values[record]; }
+                            checked
+                            {
+                                sum += _values[record];
+                            }
                             hasData = true;
                         }
                         if (hasData)
@@ -46,14 +48,20 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { meanSum += _values[record]; }
+                            checked
+                            {
+                                meanSum += _values[record];
+                            }
                             meanCount++;
                             hasData = true;
                         }
                         if (hasData)
                         {
                             byte mean;
-                            checked { mean = (byte)(meanSum / meanCount); }
+                            checked
+                            {
+                                mean = (byte)(meanSum / meanCount);
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -256,7 +264,12 @@ namespace System.Data.Common
             return new byte[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             byte[] typedStore = (byte[])store;
             typedStore[storeIndex] = _values[record];

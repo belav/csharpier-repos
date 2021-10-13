@@ -30,7 +30,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string testProjectName,
             RepoDirectoriesProvider repoDirectoriesProvider,
             string framework = null,
-            string assemblyName = null)
+            string assemblyName = null
+        )
         {
             ValidateRequiredDirectories(repoDirectoriesProvider);
 
@@ -45,10 +46,15 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
             _assemblyName = assemblyName;
 
-            var sourceTestProjectPath = Path.Combine(repoDirectoriesProvider.TestAssetsFolder, "TestProjects", testProjectName);
+            var sourceTestProjectPath = Path.Combine(
+                repoDirectoriesProvider.TestAssetsFolder,
+                "TestProjects",
+                testProjectName
+            );
             _sourceTestProject = new TestProject(
                 sourceTestProjectPath,
-                assemblyName: _assemblyName);
+                assemblyName: _assemblyName
+            );
 
             TestProject = CopyTestProject(_sourceTestProject);
         }
@@ -91,37 +97,43 @@ namespace Microsoft.DotNet.CoreSetup.Test
             EnsureTestProjectsFileContent(testArtifactDirectory, "targets");
         }
 
-        private void EnsureTestProjectsFileContent(string dir, string type) => EnsureFileWithContent(
-            Path.Combine(dir, $"Directory.Build.{type}"),
-            string.Join(
-                Environment.NewLine,
-                "<Project>",
-                $"  <Import Project=\"{RepoDirProvider.TestAssetsFolder}/TestUtils/TestProjects.{type}\" />",
-                "</Project>"));
+        private void EnsureTestProjectsFileContent(string dir, string type) =>
+            EnsureFileWithContent(
+                Path.Combine(dir, $"Directory.Build.{type}"),
+                string.Join(
+                    Environment.NewLine,
+                    "<Project>",
+                    $"  <Import Project=\"{RepoDirProvider.TestAssetsFolder}/TestUtils/TestProjects.{type}\" />",
+                    "</Project>"
+                )
+            );
 
         private void EnsureFileWithContent(string path, string content)
         {
-            for(int i = 0; i < 3 && !File.Exists(path); i++)
+            for (int i = 0; i < 3 && !File.Exists(path); i++)
             {
                 try
                 {
                     File.WriteAllText(path, content);
                 }
-                catch (IOException)
-                {}
+                catch (IOException) { }
             }
         }
 
         private void ValidateRequiredDirectories(RepoDirectoriesProvider repoDirectoriesProvider)
         {
-            if ( ! Directory.Exists(repoDirectoriesProvider.BuiltDotnet))
+            if (!Directory.Exists(repoDirectoriesProvider.BuiltDotnet))
             {
-                throw new Exception($"Unable to find built host and sharedfx, please ensure the build has been run: {repoDirectoriesProvider.BuiltDotnet}");
+                throw new Exception(
+                    $"Unable to find built host and sharedfx, please ensure the build has been run: {repoDirectoriesProvider.BuiltDotnet}"
+                );
             }
 
-            if ( ! Directory.Exists(repoDirectoriesProvider.HostArtifacts))
+            if (!Directory.Exists(repoDirectoriesProvider.HostArtifacts))
             {
-                throw new Exception($"Unable to find host artifacts directory, please ensure the build has been run: {repoDirectoriesProvider.HostArtifacts}");
+                throw new Exception(
+                    $"Unable to find host artifacts directory, please ensure the build has been run: {repoDirectoriesProvider.HostArtifacts}"
+                );
             }
         }
 
@@ -130,7 +142,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string runtime = null,
             string framework = null,
             string outputDirectory = null,
-            bool restore = false)
+            bool restore = false
+        )
         {
             dotnet = dotnet ?? SdkDotnet;
             outputDirectory = outputDirectory ?? TestProject.OutputDirectory;
@@ -138,10 +151,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             framework = framework ?? Framework;
             Framework = framework;
 
-            var buildArgs = new List<string>
-            {
-                "/bl:BuildProject.binlog"
-            };
+            var buildArgs = new List<string> { "/bl:BuildProject.binlog" };
 
             if (restore != true)
             {
@@ -188,17 +198,15 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string runtime = null,
             string framework = null,
             string manifest = null,
-            string outputDirectory = null)
+            string outputDirectory = null
+        )
         {
             dotnet = dotnet ?? SdkDotnet;
             outputDirectory = outputDirectory ?? TestProject.OutputDirectory;
             framework = framework ?? Framework;
             Framework = framework;
 
-            var storeArgs = new List<string>
-            {
-                "--runtime"
-            };
+            var storeArgs = new List<string> { "--runtime" };
 
             if (runtime != null)
             {
@@ -206,7 +214,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             }
             else
             {
-               storeArgs.Add(CurrentRid);
+                storeArgs.Add(CurrentRid);
             }
 
             if (framework != null)
@@ -215,7 +223,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 storeArgs.Add(framework);
             }
 
-                storeArgs.Add("--manifest");
+            storeArgs.Add("--manifest");
             if (manifest != null)
             {
                 storeArgs.Add(manifest);
@@ -258,7 +266,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string outputDirectory = null,
             bool singleFile = false,
             bool restore = false,
-            params string[] extraArgs)
+            params string[] extraArgs
+        )
         {
             dotnet = dotnet ?? SdkDotnet;
             outputDirectory = outputDirectory ?? TestProject.OutputDirectory;
@@ -266,10 +275,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             framework = framework ?? Framework;
             Framework = framework;
 
-            var publishArgs = new List<string>
-            {
-                "/bl:PublishProject.binlog"
-            };
+            var publishArgs = new List<string> { "/bl:PublishProject.binlog" };
 
             if (restore != true)
             {
@@ -327,7 +333,10 @@ namespace Microsoft.DotNet.CoreSetup.Test
             return this;
         }
 
-        public TestProjectFixture RestoreProject(string[] fallbackSources, string extraMSBuildProperties = null)
+        public TestProjectFixture RestoreProject(
+            string[] fallbackSources,
+            string extraMSBuildProperties = null
+        )
         {
             var restoreArgs = new List<string>();
             foreach (var fallbackSource in fallbackSources)
@@ -358,7 +367,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public TestProjectFixture EnsureRestored(params string[] fallbackSources)
         {
-            if ( ! TestProject.IsRestored())
+            if (!TestProject.IsRestored())
             {
                 RestoreProject(fallbackSources);
             }
@@ -368,7 +377,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public TestProjectFixture EnsureRestoredForRid(string rid, params string[] fallbackSources)
         {
-            if ( ! TestProject.IsRestored())
+            if (!TestProject.IsRestored())
             {
                 string extraMSBuildProperties = $"/p:TestTargetRid={rid}";
                 RestoreProject(fallbackSources, extraMSBuildProperties);

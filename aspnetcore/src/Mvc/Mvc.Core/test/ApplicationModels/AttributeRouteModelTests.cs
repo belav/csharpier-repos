@@ -40,8 +40,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     // Ensure non-default value
                     Assert.NotEmpty((IEnumerable<object>)value1);
                 }
-                else if (property.PropertyType.IsValueType ||
-                    Nullable.GetUnderlyingType(property.PropertyType) != null)
+                else if (
+                    property.PropertyType.IsValueType
+                    || Nullable.GetUnderlyingType(property.PropertyType) != null
+                )
                 {
                     Assert.Equal(value1, value2);
 
@@ -150,7 +152,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         [Theory]
         [MemberData(nameof(ReplaceTokens_ValueValuesData))]
-        public void ReplaceTokens_ValidValues(string template, Dictionary<string, string> values, string expected)
+        public void ReplaceTokens_ValidValues(
+            string template,
+            Dictionary<string, string> values,
+            string expected
+        )
         {
             // Arrange
             // Act
@@ -162,25 +168,37 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
         [Theory]
         [MemberData(nameof(ReplaceTokens_InvalidFormatValuesData))]
-        public void ReplaceTokens_InvalidFormat(string template, Dictionary<string, string> values, string reason)
+        public void ReplaceTokens_InvalidFormat(
+            string template,
+            Dictionary<string, string> values,
+            string reason
+        )
         {
             // Arrange
             var expected = string.Format(
                 CultureInfo.InvariantCulture,
                 "The route template '{0}' has invalid syntax. {1}",
                 template,
-                reason);
+                reason
+            );
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
-                () => { AttributeRouteModel.ReplaceTokens(template, values); });
+                () =>
+                {
+                    AttributeRouteModel.ReplaceTokens(template, values);
+                }
+            );
 
             // Assert
             Assert.Equal(expected, ex.Message);
         }
 
         [Theory]
-        [InlineData("[area]/[controller]/[action]/{deptName:regex(^[a-zA-Z]{1}[a-zA-Z0-9_]*$)}", "a-zA-Z")]
+        [InlineData(
+            "[area]/[controller]/[action]/{deptName:regex(^[a-zA-Z]{1}[a-zA-Z0-9_]*$)}",
+            "a-zA-Z"
+        )]
         [InlineData("[area]/[controller]/[action2]", "action2")]
         public void ReplaceTokens_UnknownValue(string template, string token)
         {
@@ -193,14 +211,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             };
 
             var expected =
-                $"While processing template '{template}', " +
-                $"a replacement value for the token '{token}' could not be found. " +
-                "Available tokens: 'action, area, controller'. To use a '[' or ']' as a literal string in a " +
-                "route or within a constraint, use '[[' or ']]' instead.";
+                $"While processing template '{template}', "
+                + $"a replacement value for the token '{token}' could not be found. "
+                + "Available tokens: 'action, area, controller'. To use a '[' or ']' as a literal string in a "
+                + "route or within a constraint, use '[[' or ']]' instead.";
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
-                () => { AttributeRouteModel.ReplaceTokens(template, values); });
+                () =>
+                {
+                    AttributeRouteModel.ReplaceTokens(template, values);
+                }
+            );
 
             // Assert
             Assert.Equal(expected, ex.Message);
@@ -211,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_Orders(
             AttributeRouteModel left,
             AttributeRouteModel right,
-            int? expected)
+            int? expected
+        )
         {
             // Arrange & Act
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
@@ -226,7 +249,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_ValidReflectedAttributeRouteModels(
             AttributeRouteModel left,
             AttributeRouteModel right,
-            AttributeRouteModel expectedResult)
+            AttributeRouteModel expectedResult
+        )
         {
             // Arrange & Act
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
@@ -240,7 +264,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [MemberData(nameof(NullOrNullTemplateReflectedAttributeRouteModelTestData))]
         public void Combine_NullOrNullTemplateReflectedAttributeRouteModels(
             AttributeRouteModel left,
-            AttributeRouteModel right)
+            AttributeRouteModel right
+        )
         {
             // Arrange & Act
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
@@ -253,7 +278,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [MemberData(nameof(RightOverridesReflectedAttributeRouteModelTestData))]
         public void Combine_RightOverridesReflectedAttributeRouteModel(
             AttributeRouteModel left,
-            AttributeRouteModel right)
+            AttributeRouteModel right
+        )
         {
             // Arrange
             var expectedTemplate = AttributeRouteModel.CombineTemplates(null, right.Template);
@@ -272,7 +298,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_Names(
             AttributeRouteModel left,
             AttributeRouteModel right,
-            string expectedName)
+            string expectedName
+        )
         {
             // Arrange & Act
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
@@ -286,10 +313,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_SetsSuppressLinkGenerationToFalse_IfNeitherIsTrue()
         {
             // Arrange
-            var left = new AttributeRouteModel
-            {
-                Template = "Template"
-            };
+            var left = new AttributeRouteModel { Template = "Template" };
             var right = new AttributeRouteModel();
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
@@ -301,7 +325,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Combine_SetsSuppressLinkGenerationToTrue_IfEitherIsTrue(bool leftSuppress, bool rightSuppress)
+        public void Combine_SetsSuppressLinkGenerationToTrue_IfEitherIsTrue(
+            bool leftSuppress,
+            bool rightSuppress
+        )
         {
             // Arrange
             var left = new AttributeRouteModel
@@ -309,10 +336,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 Template = "Template",
                 SuppressLinkGeneration = leftSuppress,
             };
-            var right = new AttributeRouteModel
-            {
-                SuppressLinkGeneration = rightSuppress,
-            };
+            var right = new AttributeRouteModel { SuppressLinkGeneration = rightSuppress, };
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
             // Assert
@@ -323,10 +347,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void Combine_SetsSuppressPathGenerationToFalse_IfNeitherIsTrue()
         {
             // Arrange
-            var left = new AttributeRouteModel
-            {
-                Template = "Template",
-            };
+            var left = new AttributeRouteModel { Template = "Template", };
             var right = new AttributeRouteModel();
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
@@ -338,7 +359,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void Combine_SetsSuppressPathGenerationToTrue_IfEitherIsTrue(bool leftSuppress, bool rightSuppress)
+        public void Combine_SetsSuppressPathGenerationToTrue_IfEitherIsTrue(
+            bool leftSuppress,
+            bool rightSuppress
+        )
         {
             // Arrange
             var left = new AttributeRouteModel
@@ -346,10 +370,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 Template = "Template",
                 SuppressPathMatching = leftSuppress,
             };
-            var right = new AttributeRouteModel
-            {
-                SuppressPathMatching = rightSuppress,
-            };
+            var right = new AttributeRouteModel { SuppressPathMatching = rightSuppress, };
             var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
             // Assert
@@ -378,32 +399,120 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                 data.Add(Create(template: "~/", order: null, name: "Named"), null, "Named");
                 data.Add(Create(template: "", order: null, name: "Named"), null, "Named");
                 data.Add(Create(template: "home", order: null, name: "Named"), null, "Named");
-                data.Add(Create(template: "home", order: null, name: "Named"), Create(null, null, null), "Named");
-                data.Add(Create(template: "", order: null, name: "Named"), Create("", null, null), "Named");
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create(null, null, null),
+                    "Named"
+                );
+                data.Add(
+                    Create(template: "", order: null, name: "Named"),
+                    Create("", null, null),
+                    "Named"
+                );
 
                 // Order doesn't matter for combining the name.
-                data.Add(Create(template: "", order: null, name: "Named"), Create("", 1, null), "Named");
-                data.Add(Create(template: "", order: 1, name: "Named"), Create("", 1, null), "Named");
-                data.Add(Create(template: "", order: 2, name: "Named"), Create("", 1, null), "Named");
-                data.Add(Create(template: "", order: null, name: "Named"), Create("index", 1, null), null);
-                data.Add(Create(template: "", order: 1, name: "Named"), Create("index", 1, null), null);
-                data.Add(Create(template: "", order: 2, name: "Named"), Create("index", 1, null), null);
-                data.Add(Create(template: "", order: null, name: "Named"), Create("", 1, "right"), "right");
-                data.Add(Create(template: "", order: 1, name: "Named"), Create("", 1, "right"), "right");
-                data.Add(Create(template: "", order: 2, name: "Named"), Create("", 1, "right"), "right");
+                data.Add(
+                    Create(template: "", order: null, name: "Named"),
+                    Create("", 1, null),
+                    "Named"
+                );
+                data.Add(
+                    Create(template: "", order: 1, name: "Named"),
+                    Create("", 1, null),
+                    "Named"
+                );
+                data.Add(
+                    Create(template: "", order: 2, name: "Named"),
+                    Create("", 1, null),
+                    "Named"
+                );
+                data.Add(
+                    Create(template: "", order: null, name: "Named"),
+                    Create("index", 1, null),
+                    null
+                );
+                data.Add(
+                    Create(template: "", order: 1, name: "Named"),
+                    Create("index", 1, null),
+                    null
+                );
+                data.Add(
+                    Create(template: "", order: 2, name: "Named"),
+                    Create("index", 1, null),
+                    null
+                );
+                data.Add(
+                    Create(template: "", order: null, name: "Named"),
+                    Create("", 1, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "", order: 1, name: "Named"),
+                    Create("", 1, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "", order: 2, name: "Named"),
+                    Create("", 1, "right"),
+                    "right"
+                );
 
                 // Combined name is not inherited if right name is provided or the template is not empty.
-                data.Add(Create(template: "/", order: null, name: "Named"), Create(null, null, "right"), "right");
-                data.Add(Create(template: "~/", order: null, name: "Named"), Create(null, null, "right"), "right");
-                data.Add(Create(template: "", order: null, name: "Named"), Create(null, null, "right"), "right");
-                data.Add(Create(template: "home", order: null, name: "Named"), Create(null, null, "right"), "right");
-                data.Add(Create(template: "home", order: null, name: "Named"), Create("index", null, null), null);
-                data.Add(Create(template: "home", order: null, name: "Named"), Create("/", null, null), null);
-                data.Add(Create(template: "home", order: null, name: "Named"), Create("~/", null, null), null);
-                data.Add(Create(template: "home", order: null, name: "Named"), Create("index", null, "right"), "right");
-                data.Add(Create(template: "home", order: null, name: "Named"), Create("/", null, "right"), "right");
-                data.Add(Create(template: "home", order: null, name: "Named"), Create("~/", null, "right"), "right");
-                data.Add(Create(template: "home", order: null, name: "Named"), Create("index", null, ""), "");
+                data.Add(
+                    Create(template: "/", order: null, name: "Named"),
+                    Create(null, null, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "~/", order: null, name: "Named"),
+                    Create(null, null, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "", order: null, name: "Named"),
+                    Create(null, null, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create(null, null, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create("index", null, null),
+                    null
+                );
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create("/", null, null),
+                    null
+                );
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create("~/", null, null),
+                    null
+                );
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create("index", null, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create("/", null, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create("~/", null, "right"),
+                    "right"
+                );
+                data.Add(
+                    Create(template: "home", order: null, name: "Named"),
+                    Create("index", null, ""),
+                    ""
+                );
 
                 return data;
             }
@@ -478,7 +587,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             get
             {
                 // AttributeRoute on the controller, attribute route on the action, expected combined attribute route.
-                var data = new TheoryData<AttributeRouteModel, AttributeRouteModel, AttributeRouteModel>();
+                var data = new TheoryData<
+                    AttributeRouteModel,
+                    AttributeRouteModel,
+                    AttributeRouteModel
+                >();
                 data.Add(null, Create("Index"), Create("Index"));
                 data.Add(Create(null), Create("Index"), Create("Index"));
                 data.Add(Create("Home"), null, Create("Home"));
@@ -792,14 +905,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             }
         }
 
-        private static AttributeRouteModel Create(string template, int? order = null, string name = null)
+        private static AttributeRouteModel Create(
+            string template,
+            int? order = null,
+            string name = null
+        )
         {
-            return new AttributeRouteModel
-            {
-                Template = template,
-                Order = order,
-                Name = name
-            };
+            return new AttributeRouteModel { Template = template, Order = order, Name = name };
         }
     }
 }

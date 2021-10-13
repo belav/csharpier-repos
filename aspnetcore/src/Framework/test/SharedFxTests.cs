@@ -29,10 +29,19 @@ namespace Microsoft.AspNetCore
             _output = output;
             _expectedTfm = TestData.GetDefaultNetCoreTargetFramework();
             _expectedRid = TestData.GetSharedFxRuntimeIdentifier();
-            _sharedFxRoot = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH"))
-                ? Path.Combine(TestData.GetTestDataValue("SharedFrameworkLayoutRoot"), "shared", "Microsoft.AspNetCore.App", TestData.GetTestDataValue("RuntimePackageVersion"))
+            _sharedFxRoot = string.IsNullOrEmpty(
+                Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH")
+            )
+                ? Path.Combine(
+                      TestData.GetTestDataValue("SharedFrameworkLayoutRoot"),
+                      "shared",
+                      "Microsoft.AspNetCore.App",
+                      TestData.GetTestDataValue("RuntimePackageVersion")
+                  )
                 : Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH");
-            _expectedVersionFileName = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH"))
+            _expectedVersionFileName = string.IsNullOrEmpty(
+                Environment.GetEnvironmentVariable("ASPNET_RUNTIME_PATH")
+            )
                 ? ".version"
                 : "Microsoft.AspNetCore.App.versions.txt";
         }
@@ -91,18 +100,29 @@ namespace Microsoft.AspNetCore
         [Fact]
         public void SharedFrameworkContainsValidRuntimeConfigFile()
         {
-            var runtimeConfigFilePath = Path.Combine(_sharedFxRoot, "Microsoft.AspNetCore.App.runtimeconfig.json");
+            var runtimeConfigFilePath = Path.Combine(
+                _sharedFxRoot,
+                "Microsoft.AspNetCore.App.runtimeconfig.json"
+            );
 
             AssertEx.FileExists(runtimeConfigFilePath);
-            AssertEx.FileDoesNotExists(Path.Combine(_sharedFxRoot, "Microsoft.AspNetCore.App.runtimeconfig.dev.json"));
+            AssertEx.FileDoesNotExists(
+                Path.Combine(_sharedFxRoot, "Microsoft.AspNetCore.App.runtimeconfig.dev.json")
+            );
 
             var runtimeConfig = JObject.Parse(File.ReadAllText(runtimeConfigFilePath));
 
-            Assert.Equal("Microsoft.NETCore.App", (string)runtimeConfig["runtimeOptions"]["framework"]["name"]);
+            Assert.Equal(
+                "Microsoft.NETCore.App",
+                (string)runtimeConfig["runtimeOptions"]["framework"]["name"]
+            );
             Assert.Equal(_expectedTfm, (string)runtimeConfig["runtimeOptions"]["tfm"]);
             Assert.Equal("LatestPatch", (string)runtimeConfig["runtimeOptions"]["rollForward"]);
 
-            Assert.Equal(TestData.GetMicrosoftNETCoreAppPackageVersion(), (string)runtimeConfig["runtimeOptions"]["framework"]["version"]);
+            Assert.Equal(
+                TestData.GetMicrosoftNETCoreAppPackageVersion(),
+                (string)runtimeConfig["runtimeOptions"]["framework"]["version"]
+            );
         }
 
         [Fact]
@@ -121,13 +141,16 @@ namespace Microsoft.AspNetCore
             Assert.Equal(target, (string)depsFile["runtimeTarget"]["name"]);
             Assert.NotNull(depsFile["compilationOptions"]);
             Assert.Empty(depsFile["compilationOptions"]);
-            Assert.All(depsFile["libraries"], item =>
-            {
-                var prop = Assert.IsType<JProperty>(item);
-                var lib = Assert.IsType<JObject>(prop.Value);
-                Assert.Equal("package", lib["type"].Value<string>());
-                Assert.Empty(lib["sha512"].Value<string>());
-            });
+            Assert.All(
+                depsFile["libraries"],
+                item =>
+                {
+                    var prop = Assert.IsType<JProperty>(item);
+                    var lib = Assert.IsType<JObject>(prop.Value);
+                    Assert.Equal("package", lib["type"].Value<string>());
+                    Assert.Empty(lib["sha512"].Value<string>());
+                }
+            );
 
             Assert.NotNull(depsFile["libraries"][libraryId]);
             Assert.Single(depsFile["libraries"].Values());
@@ -136,26 +159,44 @@ namespace Microsoft.AspNetCore
             Assert.Single(targetLibraries.Values());
             var runtimeLibrary = targetLibraries[libraryId];
             Assert.Null(runtimeLibrary["dependencies"]);
-            Assert.All(runtimeLibrary["runtime"], item =>
-            {
-                var obj = Assert.IsType<JProperty>(item);
-                var assemblyVersion = obj.Value["assemblyVersion"].Value<string>();
-                Assert.NotEmpty(assemblyVersion);
-                Assert.True(Version.TryParse(assemblyVersion, out _), $"{assemblyVersion} should deserialize to System.Version");
-                var fileVersion = obj.Value["fileVersion"].Value<string>();
-                Assert.NotEmpty(fileVersion);
-                Assert.True(Version.TryParse(fileVersion, out _), $"{fileVersion} should deserialize to System.Version");
-            });
-
-            if (_expectedRid.StartsWith("win", StringComparison.Ordinal) && !_expectedRid.Contains("arm"))
-            {
-                Assert.All(runtimeLibrary["native"], item =>
+            Assert.All(
+                runtimeLibrary["runtime"],
+                item =>
                 {
                     var obj = Assert.IsType<JProperty>(item);
+                    var assemblyVersion = obj.Value["assemblyVersion"].Value<string>();
+                    Assert.NotEmpty(assemblyVersion);
+                    Assert.True(
+                        Version.TryParse(assemblyVersion, out _),
+                        $"{assemblyVersion} should deserialize to System.Version"
+                    );
                     var fileVersion = obj.Value["fileVersion"].Value<string>();
                     Assert.NotEmpty(fileVersion);
-                    Assert.True(Version.TryParse(fileVersion, out _), $"{fileVersion} should deserialize to System.Version");
-                });
+                    Assert.True(
+                        Version.TryParse(fileVersion, out _),
+                        $"{fileVersion} should deserialize to System.Version"
+                    );
+                }
+            );
+
+            if (
+                _expectedRid.StartsWith("win", StringComparison.Ordinal)
+                && !_expectedRid.Contains("arm")
+            )
+            {
+                Assert.All(
+                    runtimeLibrary["native"],
+                    item =>
+                    {
+                        var obj = Assert.IsType<JProperty>(item);
+                        var fileVersion = obj.Value["fileVersion"].Value<string>();
+                        Assert.NotEmpty(fileVersion);
+                        Assert.True(
+                            Version.TryParse(fileVersion, out _),
+                            $"{fileVersion} should deserialize to System.Version"
+                        );
+                    }
+                );
             }
             else
             {
@@ -171,30 +212,34 @@ namespace Microsoft.AspNetCore
                 .Split(';', StringSplitOptions.RemoveEmptyEntries)
                 .ToHashSet();
 
-            var versionStringWithoutPrereleaseTag = TestData.GetMicrosoftNETCoreAppPackageVersion().Split('-', 2)[0];
+            var versionStringWithoutPrereleaseTag = TestData.GetMicrosoftNETCoreAppPackageVersion()
+                .Split('-', 2)[0];
             var version = Version.Parse(versionStringWithoutPrereleaseTag);
             var dlls = Directory.GetFiles(_sharedFxRoot, "*.dll", SearchOption.AllDirectories);
             Assert.NotEmpty(dlls);
 
-            Assert.All(dlls, path =>
-            {
-                // Unlike dotnet/aspnetcore, dotnet/runtime varies the assembly version while in servicing.
-                if (!repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
+            Assert.All(
+                dlls,
+                path =>
                 {
-                    return;
+                    // Unlike dotnet/aspnetcore, dotnet/runtime varies the assembly version while in servicing.
+                    if (!repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
+                    {
+                        return;
+                    }
+
+                    using var fileStream = File.OpenRead(path);
+                    using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+                    var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+                    var assemblyDefinition = reader.GetAssemblyDefinition();
+
+                    // Assembly versions should all match Major.Minor.0.0
+                    Assert.Equal(version.Major, assemblyDefinition.Version.Major);
+                    Assert.Equal(version.Minor, assemblyDefinition.Version.Minor);
+                    Assert.Equal(0, assemblyDefinition.Version.Build);
+                    Assert.Equal(0, assemblyDefinition.Version.Revision);
                 }
-
-                using var fileStream = File.OpenRead(path);
-                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-                var assemblyDefinition = reader.GetAssemblyDefinition();
-
-                // Assembly versions should all match Major.Minor.0.0
-                Assert.Equal(version.Major, assemblyDefinition.Version.Major);
-                Assert.Equal(version.Minor, assemblyDefinition.Version.Minor);
-                Assert.Equal(0, assemblyDefinition.Version.Build);
-                Assert.Equal(0, assemblyDefinition.Version.Revision);
-            });
+            );
         }
 
         // ASP.NET Core shared Fx assemblies should reference only ASP.NET Core assemblies with Revsion == 0.
@@ -206,29 +251,39 @@ namespace Microsoft.AspNetCore
                 .Split(';', StringSplitOptions.RemoveEmptyEntries)
                 .ToHashSet();
 
-            IEnumerable<string> dlls = Directory.GetFiles(_sharedFxRoot, "*.dll", SearchOption.AllDirectories);
+            IEnumerable<string> dlls = Directory.GetFiles(
+                _sharedFxRoot,
+                "*.dll",
+                SearchOption.AllDirectories
+            );
             Assert.NotEmpty(dlls);
 
-            Assert.All(dlls, path =>
-            {
-                // Unlike dotnet/aspnetcore, dotnet/runtime varies the assembly version while in servicing.
-                // dotnet/aspnetcore assemblies build against RTM targeting pack from dotnet/runtime.
-                if (!repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
+            Assert.All(
+                dlls,
+                path =>
                 {
-                    return;
+                    // Unlike dotnet/aspnetcore, dotnet/runtime varies the assembly version while in servicing.
+                    // dotnet/aspnetcore assemblies build against RTM targeting pack from dotnet/runtime.
+                    if (!repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
+                    {
+                        return;
+                    }
+
+                    using var fileStream = File.OpenRead(path);
+                    using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+                    var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+
+                    Assert.All(
+                        reader.AssemblyReferences,
+                        handle =>
+                        {
+                            var reference = reader.GetAssemblyReference(handle);
+                            Assert.Equal(0, reference.Version.Build);
+                            Assert.Equal(0, reference.Version.Revision);
+                        }
+                    );
                 }
-
-                using var fileStream = File.OpenRead(path);
-                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-
-                Assert.All(reader.AssemblyReferences, handle =>
-                {
-                    var reference = reader.GetAssemblyReference(handle);
-                    Assert.Equal(0, reference.Version.Build);
-                    Assert.Equal(0, reference.Version.Revision);
-                });
-            });
+            );
         }
 
         [Fact]
@@ -256,20 +311,26 @@ namespace Microsoft.AspNetCore
             var runtimeListEntries = runtimeListDoc.Root.Descendants();
 
             _output.WriteLine("==== file contents ====");
-            _output.WriteLine(string.Join('\n', runtimeListEntries.Select(i => i.Attribute("Path").Value).OrderBy(i => i)));
+            _output.WriteLine(
+                string.Join(
+                    '\n',
+                    runtimeListEntries.Select(i => i.Attribute("Path").Value).OrderBy(i => i)
+                )
+            );
             _output.WriteLine("==== expected assemblies ====");
             _output.WriteLine(string.Join('\n', expectedAssemblies.OrderBy(i => i)));
 
-             var actualAssemblies = runtimeListEntries
-                .Select(i =>
-                {
-                    var filePath = i.Attribute("Path").Value;
-                    var fileParts = filePath.Split('/');
-                    var fileName = fileParts[fileParts.Length - 1];
-                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                        ? fileName.Substring(0, fileName.Length - 4)
-                        : fileName;
-                })
+            var actualAssemblies = runtimeListEntries.Select(
+                    i =>
+                    {
+                        var filePath = i.Attribute("Path").Value;
+                        var fileParts = filePath.Split('/');
+                        var fileName = fileParts[fileParts.Length - 1];
+                        return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                          ? fileName.Substring(0, fileName.Length - 4)
+                          : fileName;
+                    }
+                )
                 .ToHashSet();
 
             var missing = expectedAssemblies.Except(actualAssemblies);
@@ -283,20 +344,29 @@ namespace Microsoft.AspNetCore
             Assert.Empty(missing);
             Assert.Empty(unexpected);
 
-            Assert.All(runtimeListEntries, i =>
-            {
-                var assemblyType = i.Attribute("Type").Value;
-                var assemblyPath = i.Attribute("Path").Value;
-                var fileVersion = i.Attribute("FileVersion").Value;
-
-                if (assemblyType.Equals("Managed"))
+            Assert.All(
+                runtimeListEntries,
+                i =>
                 {
-                    var assemblyVersion = i.Attribute("AssemblyVersion").Value;
-                    Assert.True(Version.TryParse(assemblyVersion, out _), $"{assemblyPath} has assembly version {assemblyVersion}. Assembly version must be convertable to System.Version");
-                }
+                    var assemblyType = i.Attribute("Type").Value;
+                    var assemblyPath = i.Attribute("Path").Value;
+                    var fileVersion = i.Attribute("FileVersion").Value;
 
-                Assert.True(Version.TryParse(fileVersion, out _), $"{assemblyPath} has file version {fileVersion}. File version must be convertable to System.Version");
-            });
+                    if (assemblyType.Equals("Managed"))
+                    {
+                        var assemblyVersion = i.Attribute("AssemblyVersion").Value;
+                        Assert.True(
+                            Version.TryParse(assemblyVersion, out _),
+                            $"{assemblyPath} has assembly version {assemblyVersion}. Assembly version must be convertable to System.Version"
+                        );
+                    }
+
+                    Assert.True(
+                        Version.TryParse(fileVersion, out _),
+                        $"{assemblyPath} has file version {fileVersion}. File version must be convertable to System.Version"
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -315,15 +385,25 @@ namespace Microsoft.AspNetCore
             var runtimeListDoc = XDocument.Load(runtimeListPath);
             var runtimeListEntries = runtimeListDoc.Root.Descendants();
 
-            var sharedFxPath = Path.Combine(Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT"), ("Microsoft.AspNetCore.App.Runtime.win-x64." + TestData.GetSharedFxVersion() + ".nupkg"));
+            var sharedFxPath = Path.Combine(
+                Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT"),
+                (
+                    "Microsoft.AspNetCore.App.Runtime.win-x64."
+                    + TestData.GetSharedFxVersion()
+                    + ".nupkg"
+                )
+            );
 
             ZipArchive archive = ZipFile.OpenRead(sharedFxPath);
 
-            var actualPaths = archive.Entries
-                .Where(i => i.FullName.EndsWith(".dll", StringComparison.Ordinal))
-                .Select(i => i.FullName).ToHashSet();
+            var actualPaths = archive.Entries.Where(
+                    i => i.FullName.EndsWith(".dll", StringComparison.Ordinal)
+                )
+                .Select(i => i.FullName)
+                .ToHashSet();
 
-            var expectedPaths = runtimeListEntries.Select(i => i.Attribute("Path").Value).ToHashSet();
+            var expectedPaths = runtimeListEntries.Select(i => i.Attribute("Path").Value)
+                .ToHashSet();
 
             _output.WriteLine("==== package contents ====");
             _output.WriteLine(string.Join('\n', actualPaths.OrderBy(i => i)));

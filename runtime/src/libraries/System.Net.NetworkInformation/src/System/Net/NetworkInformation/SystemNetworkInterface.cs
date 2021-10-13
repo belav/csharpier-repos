@@ -28,18 +28,12 @@ namespace System.Net.NetworkInformation
 
         internal static int InternalLoopbackInterfaceIndex
         {
-            get
-            {
-                return GetBestInterfaceForAddress(IPAddress.Loopback);
-            }
+            get { return GetBestInterfaceForAddress(IPAddress.Loopback); }
         }
 
         internal static int InternalIPv6LoopbackInterfaceIndex
         {
-            get
-            {
-                return GetBestInterfaceForAddress(IPAddress.IPv6Loopback);
-            }
+            get { return GetBestInterfaceForAddress(IPAddress.IPv6Loopback); }
         }
 
         private static int GetBestInterfaceForAddress(IPAddress addr)
@@ -62,8 +56,11 @@ namespace System.Net.NetworkInformation
                 NetworkInterface[] networkInterfaces = GetNetworkInterfaces();
                 foreach (NetworkInterface netInterface in networkInterfaces)
                 {
-                    if (netInterface.OperationalStatus == OperationalStatus.Up && netInterface.NetworkInterfaceType != NetworkInterfaceType.Tunnel
-                        && netInterface.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+                    if (
+                        netInterface.OperationalStatus == OperationalStatus.Up
+                        && netInterface.NetworkInterfaceType != NetworkInterfaceType.Tunnel
+                        && netInterface.NetworkInterfaceType != NetworkInterfaceType.Loopback
+                    )
                     {
                         return true;
                     }
@@ -71,7 +68,8 @@ namespace System.Net.NetworkInformation
             }
             catch (NetworkInformationException nie)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, nie);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(null, nie);
             }
 
             return false;
@@ -91,17 +89,26 @@ namespace System.Net.NetworkInformation
 
             // Figure out the right buffer size for the adapter information.
             uint result = Interop.IpHlpApi.GetAdaptersAddresses(
-                family, (uint)flags, IntPtr.Zero, IntPtr.Zero, ref bufferSize);
+                family,
+                (uint)flags,
+                IntPtr.Zero,
+                IntPtr.Zero,
+                ref bufferSize
+            );
 
             while (result == Interop.IpHlpApi.ERROR_BUFFER_OVERFLOW)
             {
-
                 // Allocate the buffer and get the adapter info.
                 IntPtr buffer = Marshal.AllocHGlobal((int)bufferSize);
                 try
                 {
                     result = Interop.IpHlpApi.GetAdaptersAddresses(
-                        family, (uint)flags, IntPtr.Zero, buffer, ref bufferSize);
+                        family,
+                        (uint)flags,
+                        IntPtr.Zero,
+                        buffer,
+                        ref bufferSize
+                    );
 
                     // If succeeded, we're going to add each new interface.
                     if (result == Interop.IpHlpApi.ERROR_SUCCESS)
@@ -111,13 +118,17 @@ namespace System.Net.NetworkInformation
                         while (ptr != IntPtr.Zero)
                         {
                             // Traverse the list, marshal in the native structures, and create new NetworkInterfaces.
-                            Interop.IpHlpApi.IpAdapterAddresses adapterAddresses = Marshal.PtrToStructure<Interop.IpHlpApi.IpAdapterAddresses>(ptr);
-                            interfaceList.Add(new SystemNetworkInterface(in fixedInfo, in adapterAddresses));
+                            Interop.IpHlpApi.IpAdapterAddresses adapterAddresses =
+                                Marshal.PtrToStructure<Interop.IpHlpApi.IpAdapterAddresses>(ptr);
+                            interfaceList.Add(
+                                new SystemNetworkInterface(in fixedInfo, in adapterAddresses)
+                            );
 
                             ptr = adapterAddresses.next;
                         }
                     }
                 }
+
                 finally
                 {
                     Marshal.FreeHGlobal(buffer);
@@ -125,7 +136,10 @@ namespace System.Net.NetworkInformation
             }
 
             // If we don't have any interfaces detected, return empty.
-            if (result == Interop.IpHlpApi.ERROR_NO_DATA || result == Interop.IpHlpApi.ERROR_INVALID_PARAMETER)
+            if (
+                result == Interop.IpHlpApi.ERROR_NO_DATA
+                || result == Interop.IpHlpApi.ERROR_INVALID_PARAMETER
+            )
             {
                 return Array.Empty<SystemNetworkInterface>();
             }
@@ -139,7 +153,10 @@ namespace System.Net.NetworkInformation
             return interfaceList.ToArray();
         }
 
-        internal SystemNetworkInterface(in Interop.IpHlpApi.FIXED_INFO fixedInfo, in Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses)
+        internal SystemNetworkInterface(
+            in Interop.IpHlpApi.FIXED_INFO fixedInfo,
+            in Interop.IpHlpApi.IpAdapterAddresses ipAdapterAddresses
+        )
         {
             // Store the common API information.
             _id = ipAdapterAddresses.AdapterName;
@@ -161,11 +178,20 @@ namespace System.Net.NetworkInformation
             _interfaceProperties = new SystemIPInterfaceProperties(fixedInfo, ipAdapterAddresses);
         }
 
-        public override string Id { get { return _id; } }
+        public override string Id
+        {
+            get { return _id; }
+        }
 
-        public override string Name { get { return _name; } }
+        public override string Name
+        {
+            get { return _name; }
+        }
 
-        public override string Description { get { return _description; } }
+        public override string Description
+        {
+            get { return _description; }
+        }
 
         public override PhysicalAddress GetPhysicalAddress()
         {
@@ -177,7 +203,10 @@ namespace System.Net.NetworkInformation
             return new PhysicalAddress(newAddr);
         }
 
-        public override NetworkInterfaceType NetworkInterfaceType { get { return _type; } }
+        public override NetworkInterfaceType NetworkInterfaceType
+        {
+            get { return _type; }
+        }
 
         public override IPInterfaceProperties GetIPProperties()
         {
@@ -196,14 +225,18 @@ namespace System.Net.NetworkInformation
 
         public override bool Supports(NetworkInterfaceComponent networkInterfaceComponent)
         {
-            if (networkInterfaceComponent == NetworkInterfaceComponent.IPv6
-                && ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.IPv6Enabled) != 0))
+            if (
+                networkInterfaceComponent == NetworkInterfaceComponent.IPv6
+                && ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.IPv6Enabled) != 0)
+            )
             {
                 return true;
             }
 
-            if (networkInterfaceComponent == NetworkInterfaceComponent.IPv4
-                && ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.IPv4Enabled) != 0))
+            if (
+                networkInterfaceComponent == NetworkInterfaceComponent.IPv4
+                && ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.IPv4Enabled) != 0)
+            )
             {
                 return true;
             }
@@ -214,35 +247,23 @@ namespace System.Net.NetworkInformation
         // We cache this to be consistent across all platforms.
         public override OperationalStatus OperationalStatus
         {
-            get
-            {
-                return _operStatus;
-            }
+            get { return _operStatus; }
         }
 
         public override long Speed
         {
-            get
-            {
-                return _speed;
-            }
+            get { return _speed; }
         }
 
         public override bool IsReceiveOnly
         {
-            get
-            {
-                return ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.ReceiveOnly) > 0);
-            }
+            get { return ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.ReceiveOnly) > 0); }
         }
 
         /// <summary>The interface doesn't allow multicast.</summary>
         public override bool SupportsMulticast
         {
-            get
-            {
-                return ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.NoMulticast) == 0);
-            }
+            get { return ((_adapterFlags & Interop.IpHlpApi.AdapterFlags.NoMulticast) == 0); }
         }
     }
 }

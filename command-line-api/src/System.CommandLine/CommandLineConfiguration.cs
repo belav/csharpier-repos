@@ -36,10 +36,12 @@ namespace System.CommandLine
             bool enablePosixBundling = true,
             bool enableDirectives = true,
             Resources? validationMessages = null,
-            ResponseFileHandling responseFileHandling = ResponseFileHandling.ParseArgsAsLineSeparated,
+            ResponseFileHandling responseFileHandling =
+                ResponseFileHandling.ParseArgsAsLineSeparated,
             IReadOnlyCollection<InvocationMiddleware>? middlewarePipeline = null,
             Func<BindingContext, IHelpBuilder>? helpBuilderFactory = null,
-            Action<IHelpBuilder>? configureHelp = null)
+            Action<IHelpBuilder>? configureHelp = null
+        )
         {
             if (symbols is null)
             {
@@ -50,19 +52,17 @@ namespace System.CommandLine
             {
                 throw new ArgumentException("You must specify at least one option or command.");
             }
-          
-            if (symbols.Count == 1 &&
-                symbols[0] is Command rootCommand)
+
+            if (symbols.Count == 1 && symbols[0] is Command rootCommand)
             {
                 RootCommand = rootCommand;
             }
             else
             {
                 // Reuse existing auto-generated root command, if one is present, to prevent repeated mutations
-                RootCommand? parentRootCommand = 
-                    symbols.SelectMany(s => s.Parents)
-                           .OfType<RootCommand>()
-                           .FirstOrDefault();
+                RootCommand? parentRootCommand = symbols.SelectMany(s => s.Parents)
+                    .OfType<RootCommand>()
+                    .FirstOrDefault();
 
                 if (parentRootCommand is null)
                 {
@@ -86,15 +86,19 @@ namespace System.CommandLine
             ValidationMessages = validationMessages ?? Resources.Instance;
             ResponseFileHandling = responseFileHandling;
             Middleware = middlewarePipeline ?? new List<InvocationMiddleware>();
-            HelpBuilderFactory = helpBuilderFactory ?? (context => 
-            {
-                int maxWidth = int.MaxValue;
-                if (context.Console is SystemConsole systemConsole)
-                {
-                    maxWidth = systemConsole.GetWindowWidth();
-                }
-                return new HelpBuilder(context.Console, maxWidth);
-            });
+            HelpBuilderFactory =
+                helpBuilderFactory
+                ?? (
+                    context =>
+                    {
+                        int maxWidth = int.MaxValue;
+                        if (context.Console is SystemConsole systemConsole)
+                        {
+                            maxWidth = systemConsole.GetWindowWidth();
+                        }
+                        return new HelpBuilder(context.Console, maxWidth);
+                    }
+                );
             if (configureHelp != null)
             {
                 var factory = HelpBuilderFactory;
@@ -117,7 +121,11 @@ namespace System.CommandLine
                 {
                     var globalOptions = parentCommand.GlobalOptions;
 
-                    for (var globalOptionIndex = 0; globalOptionIndex < globalOptions.Count; globalOptionIndex++)
+                    for (
+                        var globalOptionIndex = 0;
+                        globalOptionIndex < globalOptions.Count;
+                        globalOptionIndex++
+                    )
                     {
                         childCommand.TryAddGlobalOption(globalOptions[globalOptionIndex]);
                     }

@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 {
     public sealed class CSharpCodeIntermediateNode : IntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public override void Accept(IntermediateNodeVisitor visitor)
         {

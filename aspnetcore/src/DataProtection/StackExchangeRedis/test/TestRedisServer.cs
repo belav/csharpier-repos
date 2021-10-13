@@ -13,8 +13,7 @@ namespace Microsoft.AspNetCore.DataProtection
 
         static TestRedisServer()
         {
-            _config = new ConfigurationBuilder()
-                .SetBasePath(AppContext.BaseDirectory)
+            _config = new ConfigurationBuilder().SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("testconfig.json")
                 .AddEnvironmentVariables()
                 .Build();

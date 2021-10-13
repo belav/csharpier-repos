@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
 
             // Assert
             Assert.False(addStatus);
-            Assert.Equal($"The type '{targetObject.GetType().FullName}' which is an array is not supported for json patch operations as it has a fixed size.", message);
+            Assert.Equal(
+                $"The type '{targetObject.GetType().FullName}' which is an array is not supported for json patch operations as it has a fixed size.",
+                message
+            );
         }
 
         [Fact]
@@ -42,7 +45,10 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
 
             // Assert
             Assert.False(addStatus);
-            Assert.Equal($"The type '{targetObject.GetType().FullName}' which is a non generic list is not supported for json patch operations. Only generic list types are supported.", message);
+            Assert.Equal(
+                $"The type '{targetObject.GetType().FullName}' which is a non generic list is not supported for json patch operations. Only generic list types are supported.",
+                message
+            );
         }
 
         [Fact]
@@ -55,7 +61,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var position = targetObject.Count.ToString(CultureInfo.InvariantCulture);
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver, "Rob", out var message);
+            var addStatus = listAdapter.TryAdd(
+                targetObject,
+                position,
+                resolver,
+                "Rob",
+                out var message
+            );
 
             // Assert
             Assert.Null(message);
@@ -76,11 +88,20 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver, "40", out var message);
+            var addStatus = listAdapter.TryAdd(
+                targetObject,
+                position,
+                resolver,
+                "40",
+                out var message
+            );
 
             // Assert
             Assert.False(addStatus);
-            Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
+            Assert.Equal(
+                $"The index value provided by path segment '{position}' is out of bounds of the array size.",
+                message
+            );
         }
 
         [Theory]
@@ -94,7 +115,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver, "40", out var message);
+            var addStatus = listAdapter.TryAdd(
+                targetObject,
+                position,
+                resolver,
+                "40",
+                out var message
+            );
 
             // Assert
             Assert.False(addStatus);
@@ -107,14 +134,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             {
                 return new TheoryData<List<int>, List<int>>()
                 {
-                    {
-                        new List<int>() {  },
-                        new List<int>() { 20 }
-                    },
-                    {
-                        new List<int>() { 5, 10 },
-                        new List<int>() { 5, 10, 20 }
-                    }
+                    { new List<int>() {  }, new List<int>() { 20 } },
+                    { new List<int>() { 5, 10 }, new List<int>() { 5, 10, 20 } }
                 };
             }
         }
@@ -146,7 +167,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var targetObject = new List<string>() { "James", "Mike" };
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver, value: null, errorMessage: out var message);
+            var addStatus = listAdapter.TryAdd(
+                targetObject,
+                "-",
+                resolver,
+                value: null,
+                errorMessage: out var message
+            );
 
             // Assert
             Assert.True(addStatus);
@@ -184,7 +211,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, "-", resolver, "James", out var message);
+            var addStatus = listAdapter.TryAdd(
+                targetObject,
+                "-",
+                resolver,
+                "James",
+                out var message
+            );
 
             // Assert
             Assert.False(addStatus);
@@ -197,12 +230,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             {
                 return new TheoryData<IList, object, string, IList>()
                 {
-                    {
-                        new List<string>() { },
-                        "a",
-                        "-",
-                        new List<string>() { "a" }
-                    },
+                    { new List<string>() {  }, "a", "-", new List<string>() { "a" } },
                     {
                         new List<string>() { "a", "b" },
                         "c",
@@ -227,14 +255,25 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
 
         [Theory]
         [MemberData(nameof(AddingDifferentComplexTypeWorksData))]
-        public void Add_DifferentComplexTypeWorks(IList targetObject, object value, string position, IList expected)
+        public void Add_DifferentComplexTypeWorks(
+            IList targetObject,
+            object value,
+            string position,
+            IList expected
+        )
         {
             // Arrange
             var resolver = new DefaultContractResolver();
             var listAdapter = new ListAdapter();
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver, value, out var message);
+            var addStatus = listAdapter.TryAdd(
+                targetObject,
+                position,
+                resolver,
+                value,
+                out var message
+            );
 
             // Assert
             Assert.True(addStatus);
@@ -253,7 +292,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 return new TheoryData<IList, object, string, IList>()
                 {
                     {
-                        new List<SimpleObject>() { },
+                        new List<SimpleObject>() {  },
                         sDto1,
                         "-",
                         new List<SimpleObject>() { sDto1 }
@@ -271,7 +310,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                         new List<SimpleObject>() { sDto3, sDto1, sDto2 }
                     },
                     {
-                        new List<SimpleObject>() {  sDto1, sDto2 },
+                        new List<SimpleObject>() { sDto1, sDto2 },
                         sDto3,
                         "1",
                         new List<SimpleObject>() { sDto1, sDto3, sDto2 }
@@ -282,14 +321,25 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
 
         [Theory]
         [MemberData(nameof(AddingKeepsObjectReferenceData))]
-        public void Add_KeepsObjectReference(IList targetObject, object value, string position, IList expected)
+        public void Add_KeepsObjectReference(
+            IList targetObject,
+            object value,
+            string position,
+            IList expected
+        )
         {
             // Arrange
             var resolver = new DefaultContractResolver();
             var listAdapter = new ListAdapter();
 
             // Act
-            var addStatus = listAdapter.TryAdd(targetObject, position, resolver, value, out var message);
+            var addStatus = listAdapter.TryAdd(
+                targetObject,
+                position,
+                resolver,
+                value,
+                out var message
+            );
 
             // Assert
             Assert.True(addStatus);
@@ -299,7 +349,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         }
 
         [Theory]
-        [InlineData(new int[] { }, "0")]
+        [InlineData(new int[] {  }, "0")]
         [InlineData(new[] { 10, 20 }, "-1")]
         [InlineData(new[] { 10, 20 }, "2")]
         public void Get_IndexOutOfBounds(int[] input, string position)
@@ -310,11 +360,20 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var getStatus = listAdapter.TryGet(targetObject, position, resolver, out var value, out var message);
+            var getStatus = listAdapter.TryGet(
+                targetObject,
+                position,
+                resolver,
+                out var value,
+                out var message
+            );
 
             // Assert
             Assert.False(getStatus);
-            Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
+            Assert.Equal(
+                $"The index value provided by path segment '{position}' is out of bounds of the array size.",
+                message
+            );
         }
 
         [Theory]
@@ -329,7 +388,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var getStatus = listAdapter.TryGet(targetObject, position, resolver, out var value, out var message);
+            var getStatus = listAdapter.TryGet(
+                targetObject,
+                position,
+                resolver,
+                out var value,
+                out var message
+            );
 
             // Assert
             Assert.True(getStatus);
@@ -338,7 +403,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         }
 
         [Theory]
-        [InlineData(new int[] { }, "0")]
+        [InlineData(new int[] {  }, "0")]
         [InlineData(new[] { 10, 20 }, "-1")]
         [InlineData(new[] { 10, 20 }, "2")]
         public void Remove_IndexOutOfBounds(int[] input, string position)
@@ -349,17 +414,25 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var removeStatus = listAdapter.TryRemove(targetObject, position, resolver, out var message);
+            var removeStatus = listAdapter.TryRemove(
+                targetObject,
+                position,
+                resolver,
+                out var message
+            );
 
             // Assert
             Assert.False(removeStatus);
-            Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
+            Assert.Equal(
+                $"The index value provided by path segment '{position}' is out of bounds of the array size.",
+                message
+            );
         }
 
         [Theory]
         [InlineData(new[] { 10, 20 }, "0", new[] { 20 })]
         [InlineData(new[] { 10, 20 }, "1", new[] { 10 })]
-        [InlineData(new[] { 10 }, "0", new int[] { })]
+        [InlineData(new[] { 10 }, "0", new int[] {  })]
         public void Remove(int[] input, string position, int[] expected)
         {
             // Arrange
@@ -368,7 +441,12 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var removeStatus = listAdapter.TryRemove(targetObject, position, resolver, out var message);
+            var removeStatus = listAdapter.TryRemove(
+                targetObject,
+                position,
+                resolver,
+                out var message
+            );
 
             // Assert
             Assert.True(removeStatus);
@@ -384,7 +462,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var replaceStatus = listAdapter.TryReplace(targetObject, "-", resolver, "James", out var message);
+            var replaceStatus = listAdapter.TryReplace(
+                targetObject,
+                "-",
+                resolver,
+                "James",
+                out var message
+            );
 
             // Assert
             Assert.False(replaceStatus);
@@ -400,7 +484,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var replaceStatus = listAdapter.TryReplace(targetObject, "-", resolver, "30", out var message);
+            var replaceStatus = listAdapter.TryReplace(
+                targetObject,
+                "-",
+                resolver,
+                "30",
+                out var message
+            );
 
             // Assert
             Assert.True(replaceStatus);
@@ -414,14 +504,8 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             {
                 return new TheoryData<string, List<int>>()
                 {
-                    {
-                        "0",
-                        new List<int>() { 30, 20 }
-                    },
-                    {
-                        "1",
-                        new List<int>() { 10, 30 }
-                    }
+                    { "0", new List<int>() { 30, 20 } },
+                    { "1", new List<int>() { 10, 30 } }
                 };
             }
         }
@@ -436,7 +520,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var replaceStatus = listAdapter.TryReplace(targetObject, position, resolver, "30", out var message);
+            var replaceStatus = listAdapter.TryReplace(
+                targetObject,
+                position,
+                resolver,
+                "30",
+                out var message
+            );
 
             // Assert
             Assert.True(replaceStatus);
@@ -453,7 +543,13 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var listAdapter = new ListAdapter();
 
             // Act
-            var testStatus = listAdapter.TryTest(targetObject, "0", resolver, "10", out var message);
+            var testStatus = listAdapter.TryTest(
+                targetObject,
+                "0",
+                resolver,
+                "10",
+                out var message
+            );
 
             //Assert
             Assert.True(testStatus);
@@ -467,10 +563,17 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
             var targetObject = new List<int>() { 10, 20 };
             var listAdapter = new ListAdapter();
-            var expectedErrorMessage = "The current value '20' at position '1' is not equal to the test value '10'.";
+            var expectedErrorMessage =
+                "The current value '20' at position '1' is not equal to the test value '10'.";
 
             // Act
-            var testStatus = listAdapter.TryTest(targetObject, "1", resolver, "10", out var errorMessage);
+            var testStatus = listAdapter.TryTest(
+                targetObject,
+                "1",
+                resolver,
+                "10",
+                out var errorMessage
+            );
 
             //Assert
             Assert.False(testStatus);
@@ -484,10 +587,17 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             var resolver = new DefaultContractResolver();
             var targetObject = new List<int>() { 10, 20 };
             var listAdapter = new ListAdapter();
-            var expectedErrorMessage = "The index value provided by path segment '2' is out of bounds of the array size.";
+            var expectedErrorMessage =
+                "The index value provided by path segment '2' is out of bounds of the array size.";
 
             // Act
-            var testStatus = listAdapter.TryTest(targetObject, "2", resolver, "10", out var errorMessage);
+            var testStatus = listAdapter.TryTest(
+                targetObject,
+                "2",
+                resolver,
+                "10",
+                out var errorMessage
+            );
 
             //Assert
             Assert.False(testStatus);

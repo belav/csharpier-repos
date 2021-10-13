@@ -6,36 +6,34 @@ using System.Threading;
 
 public class Test
 {
+    public static int Main()
+    {
+        Console.WriteLine("Start");
+        int retVal = 100;
+        string STORAGE = "OLD";
+        string NOW = "NOW";
+        string ret = "";
 
-	public static int Main()
-	{
-                Console.WriteLine("Start");
-		int retVal = 100;
-		string STORAGE = "OLD";
-		string NOW = "NOW";
-                string ret = "";
+        Console.WriteLine("ref loc: " + STORAGE);
+        Console.WriteLine("Return: " + ret);
 
-		Console.WriteLine("ref loc: " + STORAGE);
-		Console.WriteLine("Return: " + ret);
-		                
-		Console.WriteLine("Echanging in:" + NOW);
-                
-		string OLDSTORAGE = STORAGE;
-		ret = Interlocked.Exchange<string>(ref STORAGE,NOW); 
+        Console.WriteLine("Echanging in:" + NOW);
 
-		Console.WriteLine("ref loc: " + STORAGE);
-		Console.WriteLine("Return: " + ret);
-		
-		//if(ret == "" || STORAGE != NOW)
-		if(ret != OLDSTORAGE || STORAGE != NOW)
-			retVal = -1;
+        string OLDSTORAGE = STORAGE;
+        ret = Interlocked.Exchange<string>(ref STORAGE, NOW);
 
-		if (retVal == 100)
-			Console.WriteLine("Test passed");
-		else
-			Console.WriteLine("Test failed");
+        Console.WriteLine("ref loc: " + STORAGE);
+        Console.WriteLine("Return: " + ret);
 
-		return retVal;
-		
-	}
+        //if(ret == "" || STORAGE != NOW)
+        if (ret != OLDSTORAGE || STORAGE != NOW)
+            retVal = -1;
+
+        if (retVal == 100)
+            Console.WriteLine("Test passed");
+        else
+            Console.WriteLine("Test failed");
+
+        return retVal;
+    }
 }

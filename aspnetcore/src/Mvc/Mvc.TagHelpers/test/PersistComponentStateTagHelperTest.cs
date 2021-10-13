@@ -26,17 +26,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
     {
         private static readonly IDataProtectionProvider _ephemeralProvider =
             new EphemeralDataProtectionProvider();
-        private static readonly IDataProtector _protector =
-            _ephemeralProvider.CreateProtector("Microsoft.AspNetCore.Components.Server.State");
+        private static readonly IDataProtector _protector = _ephemeralProvider.CreateProtector(
+            "Microsoft.AspNetCore.Components.Server.State"
+        );
 
         [Fact]
         public async Task ExecuteAsync_DoesNotPersistDataWhenNoPrerenderHappened()
         {
             // Arrange
-            var tagHelper = new PersistComponentStateTagHelper
-            {
-                ViewContext = GetViewContext()
-            };
+            var tagHelper = new PersistComponentStateTagHelper { ViewContext = GetViewContext() };
 
             var context = GetTagHelperContext();
             var output = GetTagHelperOutput();
@@ -76,12 +74,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ExecuteAsync_RendersWebAssemblyStateImplicitlyWhenAWebAssemblyComponentWasPrerendered()
         {
             // Arrange
-            var tagHelper = new PersistComponentStateTagHelper
-            {
-                ViewContext = GetViewContext()
-            };
+            var tagHelper = new PersistComponentStateTagHelper { ViewContext = GetViewContext() };
 
-            ComponentRenderer.UpdateSaveStateRenderMode(tagHelper.ViewContext, RenderMode.WebAssemblyPrerendered);
+            ComponentRenderer.UpdateSaveStateRenderMode(
+                tagHelper.ViewContext,
+                RenderMode.WebAssemblyPrerendered
+            );
 
             var context = GetTagHelperContext();
             var output = GetTagHelperOutput();
@@ -124,12 +122,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ExecuteAsync_RendersServerStateImplicitlyWhenAServerComponentWasPrerendered()
         {
             // Arrange
-            var tagHelper = new PersistComponentStateTagHelper
-            {
-                ViewContext = GetViewContext()
-            };
+            var tagHelper = new PersistComponentStateTagHelper { ViewContext = GetViewContext() };
 
-            ComponentRenderer.UpdateSaveStateRenderMode(tagHelper.ViewContext, RenderMode.ServerPrerendered);
+            ComponentRenderer.UpdateSaveStateRenderMode(
+                tagHelper.ViewContext,
+                RenderMode.ServerPrerendered
+            );
 
             var context = GetTagHelperContext();
             var output = GetTagHelperOutput();
@@ -149,19 +147,24 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public async Task ExecuteAsync_ThrowsIfItCantInferThePersistMode()
         {
             // Arrange
-            var tagHelper = new PersistComponentStateTagHelper
-            {
-                ViewContext = GetViewContext()
-            };
+            var tagHelper = new PersistComponentStateTagHelper { ViewContext = GetViewContext() };
 
-            ComponentRenderer.UpdateSaveStateRenderMode(tagHelper.ViewContext, RenderMode.ServerPrerendered);
-            ComponentRenderer.UpdateSaveStateRenderMode(tagHelper.ViewContext, RenderMode.WebAssemblyPrerendered);
+            ComponentRenderer.UpdateSaveStateRenderMode(
+                tagHelper.ViewContext,
+                RenderMode.ServerPrerendered
+            );
+            ComponentRenderer.UpdateSaveStateRenderMode(
+                tagHelper.ViewContext,
+                RenderMode.WebAssemblyPrerendered
+            );
 
             var context = GetTagHelperContext();
             var output = GetTagHelperOutput();
 
             // Act & Assert
-            await Assert.ThrowsAsync<InvalidOperationException>(() => tagHelper.ProcessAsync(context, output));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                () => tagHelper.ProcessAsync(context, output)
+            );
         }
 
         private static TagHelperContext GetTagHelperContext()
@@ -170,7 +173,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 "persist-component-state",
                 new TagHelperAttributeList(),
                 new Dictionary<object, object>(),
-                Guid.NewGuid().ToString("N"));
+                Guid.NewGuid().ToString("N")
+            );
         }
 
         private static TagHelperOutput GetTagHelperOutput()
@@ -178,20 +182,31 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             return new TagHelperOutput(
                 "persist-component-state",
                 new TagHelperAttributeList(),
-                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+                (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+            );
         }
 
         private ViewContext GetViewContext()
         {
             var htmlContent = new HtmlContentBuilder().AppendHtml("Hello world");
-            var renderer = Mock.Of<IComponentRenderer>(c =>
-                c.RenderComponentAsync(It.IsAny<ViewContext>(), It.IsAny<Type>(), It.IsAny<RenderMode>(), It.IsAny<object>()) == Task.FromResult<IHtmlContent>(htmlContent));
+            var renderer = Mock.Of<IComponentRenderer>(
+                c =>
+                    c.RenderComponentAsync(
+                        It.IsAny<ViewContext>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<RenderMode>(),
+                        It.IsAny<object>()
+                    ) == Task.FromResult<IHtmlContent>(htmlContent)
+            );
 
             var httpContext = new DefaultHttpContext
             {
-                RequestServices = new ServiceCollection()
-                    .AddSingleton(renderer)
-                    .AddSingleton(new ComponentApplicationLifetime(NullLogger<ComponentApplicationLifetime>.Instance))
+                RequestServices = new ServiceCollection().AddSingleton(renderer)
+                    .AddSingleton(
+                        new ComponentApplicationLifetime(
+                            NullLogger<ComponentApplicationLifetime>.Instance
+                        )
+                    )
                     .AddSingleton<HtmlRenderer>()
                     .AddSingleton(_ephemeralProvider)
                     .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
@@ -199,10 +214,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                     .BuildServiceProvider(),
             };
 
-            return new ViewContext
-            {
-                HttpContext = httpContext,
-            };
+            return new ViewContext { HttpContext = httpContext, };
         }
     }
 }

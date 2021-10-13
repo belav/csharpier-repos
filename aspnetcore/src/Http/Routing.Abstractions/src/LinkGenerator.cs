@@ -42,7 +42,11 @@ namespace Microsoft.AspNetCore.Routing
         /// names from <c>RouteOptions</c>.
         /// </param>
         /// <returns>A URI with an absolute path, or <c>null</c>.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public abstract string? GetPathByAddress<TAddress>(
             HttpContext httpContext,
             TAddress address,
@@ -50,7 +54,8 @@ namespace Microsoft.AspNetCore.Routing
             RouteValueDictionary? ambientValues = default,
             PathString? pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default);
+            LinkOptions? options = default
+        );
 
         /// <summary>
         /// Generates a URI with an absolute path based on the provided values.
@@ -65,13 +70,18 @@ namespace Microsoft.AspNetCore.Routing
         /// names from <c>RouteOptions</c>.
         /// </param>
         /// <returns>A URI with an absolute path, or <c>null</c>.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public abstract string? GetPathByAddress<TAddress>(
             TAddress address,
             RouteValueDictionary values,
             PathString pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default);
+            LinkOptions? options = default
+        );
 
         /// <summary>
         /// Generates an absolute URI based on the provided values and <see cref="HttpContext"/>.
@@ -105,7 +115,11 @@ namespace Microsoft.AspNetCore.Routing
         /// your deployment environment.
         /// </para>
         /// </remarks>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public abstract string? GetUriByAddress<TAddress>(
             HttpContext httpContext,
             TAddress address,
@@ -115,7 +129,8 @@ namespace Microsoft.AspNetCore.Routing
             HostString? host = default,
             PathString? pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default);
+            LinkOptions? options = default
+        );
 
         /// <summary>
         /// Generates an absolute URI based on the provided values.
@@ -143,7 +158,11 @@ namespace Microsoft.AspNetCore.Routing
         /// your deployment environment.
         /// </para>
         /// </remarks>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
         public abstract string? GetUriByAddress<TAddress>(
             TAddress address,
             RouteValueDictionary values,
@@ -151,6 +170,7 @@ namespace Microsoft.AspNetCore.Routing
             HostString host,
             PathString pathBase = default,
             FragmentString fragment = default,
-            LinkOptions? options = default);
+            LinkOptions? options = default
+        );
     }
 }

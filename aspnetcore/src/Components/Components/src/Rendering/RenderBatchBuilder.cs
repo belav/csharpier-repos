@@ -21,16 +21,20 @@ namespace Microsoft.AspNetCore.Components.Rendering
         private int _parameterViewValidityStamp;
 
         // Primary result data
-        public ArrayBuilder<RenderTreeDiff> UpdatedComponentDiffs { get; } = new ArrayBuilder<RenderTreeDiff>();
+        public ArrayBuilder<RenderTreeDiff> UpdatedComponentDiffs { get; } =
+            new ArrayBuilder<RenderTreeDiff>();
         public ArrayBuilder<int> DisposedComponentIds { get; } = new ArrayBuilder<int>();
         public ArrayBuilder<ulong> DisposedEventHandlerIds { get; } = new ArrayBuilder<ulong>();
 
         // Buffers referenced by UpdatedComponentDiffs
-        public ArrayBuilder<RenderTreeEdit> EditsBuffer { get; } = new ArrayBuilder<RenderTreeEdit>(64);
-        public ArrayBuilder<RenderTreeFrame> ReferenceFramesBuffer { get; } = new ArrayBuilder<RenderTreeFrame>(64);
+        public ArrayBuilder<RenderTreeEdit> EditsBuffer { get; } =
+            new ArrayBuilder<RenderTreeEdit>(64);
+        public ArrayBuilder<RenderTreeFrame> ReferenceFramesBuffer { get; } =
+            new ArrayBuilder<RenderTreeFrame>(64);
 
         // State of render pipeline
-        public Queue<RenderQueueEntry> ComponentRenderQueue { get; } = new Queue<RenderQueueEntry>();
+        public Queue<RenderQueueEntry> ComponentRenderQueue { get; } =
+            new Queue<RenderQueueEntry>();
         public Queue<int> ComponentDisposalQueue { get; } = new Queue<int>();
 
         // Scratch data structure for understanding attribute diffs.
@@ -38,8 +42,13 @@ namespace Microsoft.AspNetCore.Components.Rendering
 
         public int ParameterViewValidityStamp => _parameterViewValidityStamp;
 
-        internal StackObjectPool<Dictionary<object, KeyedItemInfo>> KeyedItemInfoDictionaryPool { get; }
-            = new StackObjectPool<Dictionary<object, KeyedItemInfo>>(maxPreservedItems: 10, () => new Dictionary<object, KeyedItemInfo>());
+        internal StackObjectPool<
+            Dictionary<object, KeyedItemInfo>
+        > KeyedItemInfoDictionaryPool { get; } =
+            new StackObjectPool<Dictionary<object, KeyedItemInfo>>(
+                maxPreservedItems: 10,
+                () => new Dictionary<object, KeyedItemInfo>()
+            );
 
         public void ClearStateForCurrentBatch()
         {
@@ -58,12 +67,13 @@ namespace Microsoft.AspNetCore.Components.Rendering
             AttributeDiffSet.Clear();
         }
 
-        public RenderBatch ToBatch()
-            => new RenderBatch(
+        public RenderBatch ToBatch() =>
+            new RenderBatch(
                 UpdatedComponentDiffs.ToRange(),
                 ReferenceFramesBuffer.ToRange(),
                 DisposedComponentIds.ToRange(),
-                DisposedEventHandlerIds.ToRange());
+                DisposedEventHandlerIds.ToRange()
+            );
 
         public void InvalidateParameterViews()
         {

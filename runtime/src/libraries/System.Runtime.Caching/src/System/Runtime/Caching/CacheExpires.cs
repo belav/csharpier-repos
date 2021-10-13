@@ -24,8 +24,14 @@ namespace System.Runtime.Caching
 
         internal ExpiresEntryRef(int pageIndex, int entryIndex)
         {
-            Debug.Assert((pageIndex & 0x00ffffff) == pageIndex, "(pageIndex & 0x00ffffff) == pageIndex");
-            Debug.Assert((entryIndex & ENTRY_MASK) == entryIndex, "(entryIndex & ENTRY_MASK) == entryIndex");
+            Debug.Assert(
+                (pageIndex & 0x00ffffff) == pageIndex,
+                "(pageIndex & 0x00ffffff) == pageIndex"
+            );
+            Debug.Assert(
+                (entryIndex & ENTRY_MASK) == entryIndex,
+                "(entryIndex & ENTRY_MASK) == entryIndex"
+            );
             Debug.Assert(entryIndex != 0 || pageIndex == 0, "entryIndex != 0 || pageIndex == 0");
 
             _ref = ((((uint)pageIndex) << PAGE_SHIFT) | (((uint)(entryIndex)) & ENTRY_MASK));
@@ -75,10 +81,7 @@ namespace System.Runtime.Caching
 
         internal bool IsInvalid
         {
-            get
-            {
-                return _ref == 0;
-            }
+            get { return _ref == 0; }
         }
     }
 
@@ -122,7 +125,9 @@ namespace System.Runtime.Caching
 
         private const int COUNTS_LENGTH = 4;
 
-        private static readonly TimeSpan s_COUNT_INTERVAL = new TimeSpan(CacheExpires._tsPerBucket.Ticks / COUNTS_LENGTH);
+        private static readonly TimeSpan s_COUNT_INTERVAL = new TimeSpan(
+            CacheExpires._tsPerBucket.Ticks / COUNTS_LENGTH
+        );
 
         private readonly CacheExpires _cacheExpires;
         private readonly byte _bucket;
@@ -176,7 +181,10 @@ namespace System.Runtime.Caching
 
         private int GetCountIndex(DateTime utcExpires)
         {
-            return Math.Max(0, (int)((utcExpires - _utcLastCountReset).Ticks / s_COUNT_INTERVAL.Ticks));
+            return Math.Max(
+                0,
+                (int)((utcExpires - _utcLastCountReset).Ticks / s_COUNT_INTERVAL.Ticks)
+            );
         }
 
         private void AddCount(DateTime utcExpires)
@@ -216,7 +224,10 @@ namespace System.Runtime.Caching
 
         private void AddToListHead(int pageIndex, ref ExpiresPageList list)
         {
-            Debug.Assert((list._head == -1) == (list._tail == -1), "(list._head == -1) == (list._tail == -1)");
+            Debug.Assert(
+                (list._head == -1) == (list._tail == -1),
+                "(list._head == -1) == (list._tail == -1)"
+            );
 
             (_pages[(pageIndex)]._pagePrev) = -1;
             (_pages[(pageIndex)]._pageNext) = list._head;
@@ -235,7 +246,10 @@ namespace System.Runtime.Caching
 
         private void AddToListTail(int pageIndex, ref ExpiresPageList list)
         {
-            Debug.Assert((list._head == -1) == (list._tail == -1), "(list._head == -1) == (list._tail == -1)");
+            Debug.Assert(
+                (list._head == -1) == (list._tail == -1),
+                "(list._head == -1) == (list._tail == -1)"
+            );
 
             (_pages[(pageIndex)]._pageNext) = -1;
             (_pages[(pageIndex)]._pagePrev) = list._tail;
@@ -263,12 +277,20 @@ namespace System.Runtime.Caching
 
         private void RemoveFromList(int pageIndex, ref ExpiresPageList list)
         {
-            Debug.Assert((list._head == -1) == (list._tail == -1), "(list._head == -1) == (list._tail == -1)");
+            Debug.Assert(
+                (list._head == -1) == (list._tail == -1),
+                "(list._head == -1) == (list._tail == -1)"
+            );
 
             if ((_pages[(pageIndex)]._pagePrev) != -1)
             {
-                Debug.Assert((_pages[((_pages[(pageIndex)]._pagePrev))]._pageNext) == pageIndex, "PageNext(PagePrev(pageIndex)) == pageIndex");
-                (_pages[((_pages[(pageIndex)]._pagePrev))]._pageNext) = (_pages[(pageIndex)]._pageNext);
+                Debug.Assert(
+                    (_pages[((_pages[(pageIndex)]._pagePrev))]._pageNext) == pageIndex,
+                    "PageNext(PagePrev(pageIndex)) == pageIndex"
+                );
+                (_pages[((_pages[(pageIndex)]._pagePrev))]._pageNext) = (
+                    _pages[(pageIndex)]._pageNext
+                );
             }
             else
             {
@@ -278,8 +300,13 @@ namespace System.Runtime.Caching
 
             if ((_pages[(pageIndex)]._pageNext) != -1)
             {
-                Debug.Assert((_pages[((_pages[(pageIndex)]._pageNext))]._pagePrev) == pageIndex, "PagePrev(PageNext(pageIndex)) == pageIndex");
-                (_pages[((_pages[(pageIndex)]._pageNext))]._pagePrev) = (_pages[(pageIndex)]._pagePrev);
+                Debug.Assert(
+                    (_pages[((_pages[(pageIndex)]._pageNext))]._pagePrev) == pageIndex,
+                    "PagePrev(PageNext(pageIndex)) == pageIndex"
+                );
+                (_pages[((_pages[(pageIndex)]._pageNext))]._pagePrev) = (
+                    _pages[(pageIndex)]._pagePrev
+                );
             }
             else
             {
@@ -341,7 +368,10 @@ namespace System.Runtime.Caching
 
         private void RemovePage(int pageIndex)
         {
-            Debug.Assert((((_pages[(pageIndex)]._entries))[0]._cFree) == NUM_ENTRIES, "FreeEntryCount(EntriesI(pageIndex)) == NUM_ENTRIES");
+            Debug.Assert(
+                (((_pages[(pageIndex)]._entries))[0]._cFree) == NUM_ENTRIES,
+                "FreeEntryCount(EntriesI(pageIndex)) == NUM_ENTRIES"
+            );
 
             RemoveFromList(pageIndex, ref _freeEntryList);
             AddToListHead(pageIndex, ref _freePageList);
@@ -383,7 +413,10 @@ namespace System.Runtime.Caching
             ExpiresEntry[] entries = (_pages[(entryRef.PageIndex)]._entries);
             int entryIndex = entryRef.Index;
 
-            Debug.Assert(entries[entryIndex]._cacheEntry == null, "entries[entryIndex]._cacheEntry == null");
+            Debug.Assert(
+                entries[entryIndex]._cacheEntry == null,
+                "entries[entryIndex]._cacheEntry == null"
+            );
             entries[entryIndex]._cFree = 0;
 
             entries[entryIndex]._next = ((entries)[0]._next);
@@ -404,7 +437,10 @@ namespace System.Runtime.Caching
 
         private void Expand()
         {
-            Debug.Assert(_cPagesInUse * NUM_ENTRIES == _cEntriesInUse, "_cPagesInUse * NUM_ENTRIES == _cEntriesInUse");
+            Debug.Assert(
+                _cPagesInUse * NUM_ENTRIES == _cEntriesInUse,
+                "_cPagesInUse * NUM_ENTRIES == _cEntriesInUse"
+            );
             Debug.Assert(_freeEntryList._head == -1, "_freeEntryList._head == -1");
             Debug.Assert(_freeEntryList._tail == -1, "_freeEntryList._tail == -1");
 
@@ -421,7 +457,10 @@ namespace System.Runtime.Caching
                 }
 
                 Debug.Assert(_cPagesInUse == oldLength, "_cPagesInUse == oldLength");
-                Debug.Assert(_cEntriesInUse == oldLength * NUM_ENTRIES, "_cEntriesInUse == oldLength * ExpiresEntryRef.NUM_ENTRIES");
+                Debug.Assert(
+                    _cEntriesInUse == oldLength * NUM_ENTRIES,
+                    "_cEntriesInUse == oldLength * ExpiresEntryRef.NUM_ENTRIES"
+                );
 
                 int newLength = oldLength * 2;
                 newLength = Math.Max(oldLength + MIN_PAGES_INCREMENT, newLength);
@@ -475,7 +514,10 @@ namespace System.Runtime.Caching
 
             Debug.Assert(_freeEntryList._head != -1, "_freeEntryList._head != -1");
             Debug.Assert(_freeEntryList._tail != -1, "_freeEntryList._tail != -1");
-            Debug.Assert(_freeEntryList._head != _freeEntryList._tail, "_freeEntryList._head != _freeEntryList._tail");
+            Debug.Assert(
+                _freeEntryList._head != _freeEntryList._tail,
+                "_freeEntryList._head != _freeEntryList._tail"
+            );
 
             int meanFree = (int)(NUM_ENTRIES - (NUM_ENTRIES * MIN_LOAD_FACTOR));
             int pageIndexLast = _freeEntryList._tail;
@@ -511,7 +553,8 @@ namespace System.Runtime.Caching
 
                 entries = (_pages[(_freeEntryList._tail)]._entries);
                 Debug.Assert(((entries)[0]._cFree) > 0, "FreeEntryCount(entries) > 0");
-                int availableFreeEntries = (_cPagesInUse * NUM_ENTRIES) - ((entries)[0]._cFree) - _cEntriesInUse;
+                int availableFreeEntries =
+                    (_cPagesInUse * NUM_ENTRIES) - ((entries)[0]._cFree) - _cEntriesInUse;
                 if (availableFreeEntries < (NUM_ENTRIES - ((entries)[0]._cFree)))
                     break;
 
@@ -520,9 +563,15 @@ namespace System.Runtime.Caching
                     if (entries[i]._cacheEntry == null)
                         continue;
 
-                    Debug.Assert(_freeEntryList._head != _freeEntryList._tail, "_freeEntryList._head != _freeEntryList._tail");
+                    Debug.Assert(
+                        _freeEntryList._head != _freeEntryList._tail,
+                        "_freeEntryList._head != _freeEntryList._tail"
+                    );
                     ExpiresEntryRef newRef = GetFreeExpiresEntry();
-                    Debug.Assert(newRef.PageIndex != _freeEntryList._tail, "newRef.PageIndex != _freeEntryList._tail");
+                    Debug.Assert(
+                        newRef.PageIndex != _freeEntryList._tail,
+                        "newRef.PageIndex != _freeEntryList._tail"
+                    );
 
                     MemoryCacheEntry cacheEntry = entries[i]._cacheEntry;
 
@@ -546,7 +595,10 @@ namespace System.Runtime.Caching
                     return;
 
                 ExpiresEntryRef entryRef = cacheEntry.ExpiresEntryRef;
-                Debug.Assert((cacheEntry.ExpiresBucket == 0xff) == entryRef.IsInvalid, "(cacheEntry.ExpiresBucket == 0xff) == entryRef.IsInvalid");
+                Debug.Assert(
+                    (cacheEntry.ExpiresBucket == 0xff) == entryRef.IsInvalid,
+                    "(cacheEntry.ExpiresBucket == 0xff) == entryRef.IsInvalid"
+                );
                 if (cacheEntry.ExpiresBucket != 0xff || !entryRef.IsInvalid)
                     return;
 
@@ -557,7 +609,10 @@ namespace System.Runtime.Caching
 
                 ExpiresEntryRef freeRef = GetFreeExpiresEntry();
                 Debug.Assert(cacheEntry.ExpiresBucket == 0xff, "cacheEntry.ExpiresBucket == 0xff");
-                Debug.Assert(cacheEntry.ExpiresEntryRef.IsInvalid, "cacheEntry.ExpiresEntryRef.IsInvalid");
+                Debug.Assert(
+                    cacheEntry.ExpiresEntryRef.IsInvalid,
+                    "cacheEntry.ExpiresEntryRef.IsInvalid"
+                );
                 cacheEntry.ExpiresBucket = _bucket;
                 cacheEntry.ExpiresEntryRef = freeRef;
 
@@ -601,12 +656,19 @@ namespace System.Runtime.Caching
 
             Reduce();
 
-            Debug.WriteLine("CacheExpiresRemove",
-                        "Removed item=" + cacheEntry.Key +
-                        ",_bucket=" + _bucket +
-                        ",ref=" + entryRef +
-                        ",now=" + DateTime.Now.ToString("o", CultureInfo.InvariantCulture) +
-                        ",expires=" + cacheEntry.UtcAbsExp.ToLocalTime());
+            Debug.WriteLine(
+                "CacheExpiresRemove",
+                "Removed item="
+                    + cacheEntry.Key
+                    + ",_bucket="
+                    + _bucket
+                    + ",ref="
+                    + entryRef
+                    + ",now="
+                    + DateTime.Now.ToString("o", CultureInfo.InvariantCulture)
+                    + ",expires="
+                    + cacheEntry.UtcAbsExp.ToLocalTime()
+            );
         }
 
         internal void RemoveCacheEntry(MemoryCacheEntry cacheEntry)
@@ -712,8 +774,15 @@ namespace System.Runtime.Caching
 
                     if (flushed == 0)
                     {
-                        Dbg.Trace("CacheExpiresFlushTotal", "FlushExpiredItems flushed " + flushed +
-                                    " expired items, bucket=" + _bucket + "; Time=" + DateTime.Now.ToString("o", CultureInfo.InvariantCulture));
+                        Dbg.Trace(
+                            "CacheExpiresFlushTotal",
+                            "FlushExpiredItems flushed "
+                                + flushed
+                                + " expired items, bucket="
+                                + _bucket
+                                + "; Time="
+                                + DateTime.Now.ToString("o", CultureInfo.InvariantCulture)
+                        );
 
                         return 0;
                     }
@@ -721,6 +790,7 @@ namespace System.Runtime.Caching
                     _blockReduce = true;
                 }
             }
+
             finally
             {
                 if (useInsertBlock)
@@ -743,7 +813,10 @@ namespace System.Runtime.Caching
 
                 cacheEntry = entries[entryIndex]._cacheEntry;
                 entries[entryIndex]._cacheEntry = null;
-                Debug.Assert(cacheEntry.ExpiresEntryRef.IsInvalid, "cacheEntry.ExpiresEntryRef.IsInvalid");
+                Debug.Assert(
+                    cacheEntry.ExpiresEntryRef.IsInvalid,
+                    "cacheEntry.ExpiresEntryRef.IsInvalid"
+                );
                 cacheStore.Remove(cacheEntry, cacheEntry, CacheEntryRemovedReason.Expired);
 
                 current = next;
@@ -776,10 +849,18 @@ namespace System.Runtime.Caching
                     _blockReduce = false;
                     Reduce();
 
-                    Dbg.Trace("CacheExpiresFlushTotal", "FlushExpiredItems flushed " + flushed +
-                                " expired items, bucket=" + _bucket + "; Time=" + DateTime.Now.ToString("o", CultureInfo.InvariantCulture));
+                    Dbg.Trace(
+                        "CacheExpiresFlushTotal",
+                        "FlushExpiredItems flushed "
+                            + flushed
+                            + " expired items, bucket="
+                            + _bucket
+                            + "; Time="
+                            + DateTime.Now.ToString("o", CultureInfo.InvariantCulture)
+                    );
                 }
             }
+
             finally
             {
                 if (useInsertBlock)
@@ -799,7 +880,9 @@ namespace System.Runtime.Caching
         internal static readonly TimeSpan _tsPerBucket = new TimeSpan(0, 0, 20);
 
         private const int NUMBUCKETS = 30;
-        private static readonly TimeSpan s_tsPerCycle = new TimeSpan(NUMBUCKETS * _tsPerBucket.Ticks);
+        private static readonly TimeSpan s_tsPerCycle = new TimeSpan(
+            NUMBUCKETS * _tsPerBucket.Ticks
+        );
 
         private readonly MemoryCacheStore _cacheStore;
         private readonly ExpiresBucket[] _buckets;
@@ -842,7 +925,11 @@ namespace System.Runtime.Caching
                         return 0;
                     }
                     DateTime utcNow = DateTime.UtcNow;
-                    if (!checkDelta || utcNow - _utcLastFlush >= MIN_FLUSH_INTERVAL || utcNow < _utcLastFlush)
+                    if (
+                        !checkDelta
+                        || utcNow - _utcLastFlush >= MIN_FLUSH_INTERVAL
+                        || utcNow < _utcLastFlush
+                    )
                     {
                         _utcLastFlush = utcNow;
                         foreach (ExpiresBucket bucket in _buckets)
@@ -850,9 +937,16 @@ namespace System.Runtime.Caching
                             flushed += bucket.FlushExpiredItems(utcNow, useInsertBlock);
                         }
 
-                        Dbg.Trace("CacheExpiresFlushTotal", "FlushExpiredItems flushed a total of " + flushed + " items; Time=" + DateTime.Now.ToString("o", CultureInfo.InvariantCulture));
+                        Dbg.Trace(
+                            "CacheExpiresFlushTotal",
+                            "FlushExpiredItems flushed a total of "
+                                + flushed
+                                + " items; Time="
+                                + DateTime.Now.ToString("o", CultureInfo.InvariantCulture)
+                        );
                     }
                 }
+
                 finally
                 {
                     Interlocked.Exchange(ref _inFlush, 0);
@@ -891,9 +985,14 @@ namespace System.Runtime.Caching
                             restoreFlow = true;
                         }
 
-                        timer = new Timer(new TimerCallback(this.TimerCallback), null,
-                            due.Ticks / TimeSpan.TicksPerMillisecond, _tsPerBucket.Ticks / TimeSpan.TicksPerMillisecond);
+                        timer = new Timer(
+                            new TimerCallback(this.TimerCallback),
+                            null,
+                            due.Ticks / TimeSpan.TicksPerMillisecond,
+                            _tsPerBucket.Ticks / TimeSpan.TicksPerMillisecond
+                        );
                     }
+
                     finally
                     {
                         // Restore the current ExecutionContext
@@ -908,7 +1007,11 @@ namespace System.Runtime.Caching
             else
             {
                 GCHandleRef<Timer> timerHandleRef = _timerHandleRef;
-                if (timerHandleRef != null && Interlocked.CompareExchange(ref _timerHandleRef, null, timerHandleRef) == timerHandleRef)
+                if (
+                    timerHandleRef != null
+                    && Interlocked.CompareExchange(ref _timerHandleRef, null, timerHandleRef)
+                        == timerHandleRef
+                )
                 {
                     timerHandleRef.Dispose();
 
@@ -923,10 +1026,7 @@ namespace System.Runtime.Caching
 
         internal MemoryCacheStore MemoryCacheStore
         {
-            get
-            {
-                return _cacheStore;
-            }
+            get { return _cacheStore; }
         }
 
         internal void Add(MemoryCacheEntry cacheEntry)
@@ -957,8 +1057,15 @@ namespace System.Runtime.Caching
 
             if (oldBucket != newBucket)
             {
-                Dbg.Trace("CacheExpiresUpdate",
-                            "Updating item " + cacheEntry.Key + " from bucket " + oldBucket + " to new bucket " + newBucket);
+                Dbg.Trace(
+                    "CacheExpiresUpdate",
+                    "Updating item "
+                        + cacheEntry.Key
+                        + " from bucket "
+                        + oldBucket
+                        + " to new bucket "
+                        + newBucket
+                );
 
                 if (oldBucket != 0xff)
                 {

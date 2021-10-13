@@ -30,15 +30,21 @@ namespace AuthSamples.Cookies
             services.AddMvc();
 
             services.AddAuthentication(CookieScheme) // Sets the default scheme to cookies
-                .AddCookie(CookieScheme, options =>
-                {
-                    options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/account/login";
-                });
+                .AddCookie(
+                    CookieScheme,
+                    options =>
+                    {
+                        options.AccessDeniedPath = "/account/denied";
+                        options.LoginPath = "/account/login";
+                    }
+                );
 
             // Example of how to customize a particular instance of cookie options and
             // is able to also use other services.
-            services.AddSingleton<IConfigureOptions<CookieAuthenticationOptions>, ConfigureMyCookie>();
+            services.AddSingleton<
+                IConfigureOptions<CookieAuthenticationOptions>,
+                ConfigureMyCookie
+            >();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,10 +66,12 @@ namespace AuthSamples.Cookies
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                }
+            );
         }
     }
 }

@@ -5,7 +5,11 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
 {
     internal static class ConditionEvaluator
     {
-        public static MatchResults Evaluate(ConditionCollection conditions, RewriteContext context, BackReferenceCollection? backReferences)
+        public static MatchResults Evaluate(
+            ConditionCollection conditions,
+            RewriteContext context,
+            BackReferenceCollection? backReferences
+        )
         {
             BackReferenceCollection? prevBackReferences = null;
             MatchResults? condResult = null;
@@ -34,7 +38,7 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
                     return condResult;
                 }
 
-                if (condResult.Success && conditions.TrackAllCaptures && prevBackReferences!= null)
+                if (condResult.Success && conditions.TrackAllCaptures && prevBackReferences != null)
                 {
                     prevBackReferences.Add(currentBackReferences!);
                     currentBackReferences = prevBackReferences;

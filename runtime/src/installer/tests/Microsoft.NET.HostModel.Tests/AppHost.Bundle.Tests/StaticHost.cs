@@ -30,8 +30,7 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -47,8 +46,7 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And
-                .HaveStdOutContaining("Hello World");
+                .And.HaveStdOutContaining("Hello World");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

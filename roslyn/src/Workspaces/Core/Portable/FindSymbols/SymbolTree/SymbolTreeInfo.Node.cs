@@ -30,9 +30,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             public readonly string Name;
             public readonly int ParentIndex;
-            public readonly MultiDictionary<MetadataNode, ParameterTypeInfo>.ValueSet ParameterTypeInfos;
+            public readonly MultiDictionary<
+                MetadataNode,
+                ParameterTypeInfo
+            >.ValueSet ParameterTypeInfos;
 
-            public BuilderNode(string name, int parentIndex, MultiDictionary<MetadataNode, ParameterTypeInfo>.ValueSet parameterTypeInfos = default)
+            public BuilderNode(
+                string name,
+                int parentIndex,
+                MultiDictionary<MetadataNode, ParameterTypeInfo>.ValueSet parameterTypeInfos =
+                    default
+            )
             {
                 Name = name;
                 ParentIndex = parentIndex;
@@ -41,8 +49,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
             public bool IsRoot => ParentIndex == RootNodeParentIndex;
 
-            private string GetDebuggerDisplay()
-                => Name + ", " + ParentIndex;
+            private string GetDebuggerDisplay() => Name + ", " + ParentIndex;
         }
 
         [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
@@ -74,8 +81,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 Debug.Assert(node.ParentIndex == this.ParentIndex);
             }
 
-            private string GetDebuggerDisplay()
-                => Name + ", " + ParentIndex;
+            private string GetDebuggerDisplay() => Name + ", " + ParentIndex;
         }
 
         private readonly struct ParameterTypeInfo
@@ -138,60 +144,93 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
         }
 
-        private sealed class ParameterTypeInfoProvider : ISignatureTypeProvider<ParameterTypeInfo, object>
+        private sealed class ParameterTypeInfoProvider
+            : ISignatureTypeProvider<ParameterTypeInfo, object>
         {
             public static readonly ParameterTypeInfoProvider Instance = new();
 
-            private static ParameterTypeInfo ComplexInfo
-                => new(string.Empty, isComplex: true, isArray: false);
+            private static ParameterTypeInfo ComplexInfo =>
+                new(string.Empty, isComplex: true, isArray: false);
 
-            public ParameterTypeInfo GetPrimitiveType(PrimitiveTypeCode typeCode)
-                => new(typeCode.ToString(), isComplex: false, isArray: false);
+            public ParameterTypeInfo GetPrimitiveType(PrimitiveTypeCode typeCode) =>
+                new(typeCode.ToString(), isComplex: false, isArray: false);
 
-            public ParameterTypeInfo GetGenericInstantiation(ParameterTypeInfo genericType, ImmutableArray<ParameterTypeInfo> typeArguments)
-                => genericType.IsComplexType
+            public ParameterTypeInfo GetGenericInstantiation(
+                ParameterTypeInfo genericType,
+                ImmutableArray<ParameterTypeInfo> typeArguments
+            ) =>
+                genericType.IsComplexType
                     ? ComplexInfo
                     : new ParameterTypeInfo(genericType.Name, isComplex: false, isArray: false);
 
-            public ParameterTypeInfo GetByReferenceType(ParameterTypeInfo elementType)
-                => elementType;
+            public ParameterTypeInfo GetByReferenceType(ParameterTypeInfo elementType) =>
+                elementType;
 
-            public ParameterTypeInfo GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+            public ParameterTypeInfo GetTypeFromDefinition(
+                MetadataReader reader,
+                TypeDefinitionHandle handle,
+                byte rawTypeKind
+            )
             {
                 var type = reader.GetTypeDefinition(handle);
                 var name = reader.GetString(type.Name);
                 return new ParameterTypeInfo(name, isComplex: false, isArray: false);
             }
 
-            public ParameterTypeInfo GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+            public ParameterTypeInfo GetTypeFromReference(
+                MetadataReader reader,
+                TypeReferenceHandle handle,
+                byte rawTypeKind
+            )
             {
                 var type = reader.GetTypeReference(handle);
                 var name = reader.GetString(type.Name);
                 return new ParameterTypeInfo(name, isComplex: false, isArray: false);
             }
 
-            public ParameterTypeInfo GetTypeFromSpecification(MetadataReader reader, object genericContext, TypeSpecificationHandle handle, byte rawTypeKind)
+            public ParameterTypeInfo GetTypeFromSpecification(
+                MetadataReader reader,
+                object genericContext,
+                TypeSpecificationHandle handle,
+                byte rawTypeKind
+            )
             {
                 var sigReader = reader.GetBlobReader(reader.GetTypeSpecification(handle).Signature);
-                return new SignatureDecoder<ParameterTypeInfo, object>(Instance, reader, genericContext).DecodeType(ref sigReader);
+                return new SignatureDecoder<ParameterTypeInfo, object>(
+                    Instance,
+                    reader,
+                    genericContext
+                ).DecodeType(ref sigReader);
             }
 
-            public ParameterTypeInfo GetArrayType(ParameterTypeInfo elementType, ArrayShape shape) => GetArrayTypeInfo(elementType);
+            public ParameterTypeInfo GetArrayType(
+                ParameterTypeInfo elementType,
+                ArrayShape shape
+            ) => GetArrayTypeInfo(elementType);
 
-            public ParameterTypeInfo GetSZArrayType(ParameterTypeInfo elementType) => GetArrayTypeInfo(elementType);
+            public ParameterTypeInfo GetSZArrayType(ParameterTypeInfo elementType) =>
+                GetArrayTypeInfo(elementType);
 
-            private static ParameterTypeInfo GetArrayTypeInfo(ParameterTypeInfo elementType)
-                => elementType.IsComplexType
+            private static ParameterTypeInfo GetArrayTypeInfo(ParameterTypeInfo elementType) =>
+                elementType.IsComplexType
                     ? new ParameterTypeInfo(string.Empty, isComplex: true, isArray: true)
                     : new ParameterTypeInfo(elementType.Name, isComplex: false, isArray: true);
 
-            public ParameterTypeInfo GetFunctionPointerType(MethodSignature<ParameterTypeInfo> signature) => ComplexInfo;
+            public ParameterTypeInfo GetFunctionPointerType(
+                MethodSignature<ParameterTypeInfo> signature
+            ) => ComplexInfo;
 
-            public ParameterTypeInfo GetGenericMethodParameter(object genericContext, int index) => ComplexInfo;
+            public ParameterTypeInfo GetGenericMethodParameter(object genericContext, int index) =>
+                ComplexInfo;
 
-            public ParameterTypeInfo GetGenericTypeParameter(object genericContext, int index) => ComplexInfo;
+            public ParameterTypeInfo GetGenericTypeParameter(object genericContext, int index) =>
+                ComplexInfo;
 
-            public ParameterTypeInfo GetModifiedType(ParameterTypeInfo modifier, ParameterTypeInfo unmodifiedType, bool isRequired) => ComplexInfo;
+            public ParameterTypeInfo GetModifiedType(
+                ParameterTypeInfo modifier,
+                ParameterTypeInfo unmodifiedType,
+                bool isRequired
+            ) => ComplexInfo;
 
             public ParameterTypeInfo GetPinnedType(ParameterTypeInfo elementType) => ComplexInfo;
 

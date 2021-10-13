@@ -48,8 +48,10 @@ namespace JIT.HardwareIntrinsics.X86
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Single>>() / sizeof(Single);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector256<Single>>() / sizeof(Single);
 
         private static Single[] _data = new Single[Op1ElementCount];
 
@@ -59,8 +61,15 @@ namespace JIT.HardwareIntrinsics.X86
         {
             Succeeded = true;
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = TestLibrary.Generator.GetSingle(); }
-            _dataTable = new SimpleUnaryOpTest__DataTable<Single, Single>(_data, new Single[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = TestLibrary.Generator.GetSingle();
+            }
+            _dataTable = new SimpleUnaryOpTest__DataTable<Single, Single>(
+                _data,
+                new Single[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Avx.IsSupported;
@@ -71,9 +80,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Avx.BroadcastVector128ToVector256(
-                (Single*)(_dataTable.inArrayPtr)
-            );
+            var result = Avx.BroadcastVector128ToVector256((Single*)(_dataTable.inArrayPtr));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -83,10 +90,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Avx).GetMethod(nameof(Avx.BroadcastVector128ToVector256), new Type[] { typeof(Single*) })
-                                     .Invoke(null, new object[] {
-                                        Pointer.Box(_dataTable.inArrayPtr, typeof(Single*))
-                                     });
+            var result = typeof(Avx).GetMethod(
+                    nameof(Avx.BroadcastVector128ToVector256),
+                    new Type[] { typeof(Single*) }
+                )
+                .Invoke(null, new object[] { Pointer.Box(_dataTable.inArrayPtr, typeof(Single*)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector256<Single>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -108,33 +116,60 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-        private void ValidateResult(Vector128<Single> firstOp, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Single> firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Single[] inArray = new Single[Op1ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Single, byte>(ref inArray[0]), firstOp);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector256<Single>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(void* firstOp, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Single[] inArray = new Single[Op1ElementCount];
             Single[] outArray = new Single[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector128<Single>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Single, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector256<Single>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector128<Single>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Single, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector256<Single>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(Single[] firstOp, Single[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Single[] firstOp,
+            Single[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
-            if (BitConverter.SingleToInt32Bits(firstOp[0]) != BitConverter.SingleToInt32Bits(result[0]))
+            if (
+                BitConverter.SingleToInt32Bits(firstOp[0])
+                != BitConverter.SingleToInt32Bits(result[0])
+            )
             {
                 succeeded = false;
             }
@@ -142,7 +177,14 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 for (var i = 1; i < RetElementCount; i++)
                 {
-                    if (BitConverter.SingleToInt32Bits(result[i]) != (i < 4 ? BitConverter.SingleToInt32Bits(firstOp[i]) : BitConverter.SingleToInt32Bits(firstOp[i-4])))
+                    if (
+                        BitConverter.SingleToInt32Bits(result[i])
+                        != (
+                            i < 4
+                                ? BitConverter.SingleToInt32Bits(firstOp[i])
+                                : BitConverter.SingleToInt32Bits(firstOp[i - 4])
+                        )
+                    )
                     {
                         succeeded = false;
                         break;
@@ -152,9 +194,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Avx)}.{nameof(Avx.BroadcastVector128ToVector256)}<Single>(Vector128<Single>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  firstOp: ({string.Join(", ", firstOp)})");
-                TestLibrary.TestFramework.LogInformation($"   result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Avx)}.{nameof(Avx.BroadcastVector128ToVector256)}<Single>(Vector128<Single>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  firstOp: ({string.Join(", ", firstOp)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -7,13 +7,18 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components
 {
-    internal sealed class ComponentMarkupDiagnosticPass : ComponentIntermediateNodePassBase, IRazorOptimizationPass
+    internal sealed class ComponentMarkupDiagnosticPass
+        : ComponentIntermediateNodePassBase,
+          IRazorOptimizationPass
     {
         public static readonly int DefaultOrder = 10000;
 
         public override int Order => DefaultOrder;
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             var visitor = new Visitor();
             visitor.Visit(documentNode);
@@ -21,13 +26,19 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         private class Visitor : IntermediateNodeWalker
         {
-            private Dictionary<string, (string name, IntermediateNode node)> _attributes = new Dictionary<string, (string, IntermediateNode)>(StringComparer.OrdinalIgnoreCase);
+            private Dictionary<string, (string name, IntermediateNode node)> _attributes =
+                new Dictionary<string, (string, IntermediateNode)>(
+                    StringComparer.OrdinalIgnoreCase
+                );
 
             public override void VisitMarkupElement(MarkupElementIntermediateNode node)
             {
                 for (var i = 0; i < node.Children.Count; i++)
                 {
-                    if (node.Children[i] is HtmlAttributeIntermediateNode attribute && attribute.AttributeName != null)
+                    if (
+                        node.Children[i] is HtmlAttributeIntermediateNode attribute
+                        && attribute.AttributeName != null
+                    )
                     {
                         if (_attributes.TryGetValue(attribute.AttributeName, out var other))
                         {
@@ -38,21 +49,31 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             // Example: `bind-value` will set `value` and `onchange`.
 
                             var originalAttributeName =
-                                attribute.Annotations[ComponentMetadata.Common.OriginalAttributeName] as string ??
-                                other.node.Annotations[ComponentMetadata.Common.OriginalAttributeName] as string;
+                                attribute.Annotations[
+                                    ComponentMetadata.Common.OriginalAttributeName
+                                ] as string
+                                ?? other.node.Annotations[
+                                    ComponentMetadata.Common.OriginalAttributeName
+                                ] as string;
                             if (originalAttributeName != null)
                             {
-                                other.node.Diagnostics.Add(ComponentDiagnosticFactory.Create_DuplicateMarkupAttributeDirective(
-                                    other.name,
-                                    originalAttributeName,
-                                    other.node.Source ?? node.Source));
+                                other.node.Diagnostics.Add(
+                                    ComponentDiagnosticFactory.Create_DuplicateMarkupAttributeDirective(
+                                        other.name,
+                                        originalAttributeName,
+                                        other.node.Source ?? node.Source
+                                    )
+                                );
                             }
                             else
                             {
-                                // This is a conflict in the code the user wrote. 
-                                other.node.Diagnostics.Add(ComponentDiagnosticFactory.Create_DuplicateMarkupAttribute(
-                                    other.name,
-                                    other.node.Source ?? node.Source));
+                                // This is a conflict in the code the user wrote.
+                                other.node.Diagnostics.Add(
+                                    ComponentDiagnosticFactory.Create_DuplicateMarkupAttribute(
+                                        other.name,
+                                        other.node.Source ?? node.Source
+                                    )
+                                );
                             }
                         }
 
@@ -71,7 +92,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 for (var i = 0; i < node.Children.Count; i++)
                 {
                     // Note that we don't handle ChildContent cases here. Those have their own pass for diagnostics.
-                    if (node.Children[i] is ComponentAttributeIntermediateNode attribute && attribute.AttributeName != null)
+                    if (
+                        node.Children[i] is ComponentAttributeIntermediateNode attribute
+                        && attribute.AttributeName != null
+                    )
                     {
                         if (_attributes.TryGetValue(attribute.AttributeName, out var other))
                         {
@@ -81,21 +105,31 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                             //
                             // Example: `bind-Value` will set `Value` and `ValueChanged`.
                             var originalAttributeName =
-                                attribute.Annotations[ComponentMetadata.Common.OriginalAttributeName] as string ??
-                                other.node.Annotations[ComponentMetadata.Common.OriginalAttributeName] as string;
+                                attribute.Annotations[
+                                    ComponentMetadata.Common.OriginalAttributeName
+                                ] as string
+                                ?? other.node.Annotations[
+                                    ComponentMetadata.Common.OriginalAttributeName
+                                ] as string;
                             if (originalAttributeName != null)
                             {
-                                other.node.Diagnostics.Add(ComponentDiagnosticFactory.Create_DuplicateComponentParameterDirective(
-                                    other.name,
-                                    originalAttributeName,
-                                    other.node.Source ?? node.Source));
+                                other.node.Diagnostics.Add(
+                                    ComponentDiagnosticFactory.Create_DuplicateComponentParameterDirective(
+                                        other.name,
+                                        originalAttributeName,
+                                        other.node.Source ?? node.Source
+                                    )
+                                );
                             }
                             else
                             {
-                                // This is a conflict in the code the user wrote. 
-                                other.node.Diagnostics.Add(ComponentDiagnosticFactory.Create_DuplicateComponentParameter(
-                                    other.name,
-                                    other.node.Source ?? node.Source));
+                                // This is a conflict in the code the user wrote.
+                                other.node.Diagnostics.Add(
+                                    ComponentDiagnosticFactory.Create_DuplicateComponentParameter(
+                                        other.name,
+                                        other.node.Source ?? node.Source
+                                    )
+                                );
                             }
                         }
 

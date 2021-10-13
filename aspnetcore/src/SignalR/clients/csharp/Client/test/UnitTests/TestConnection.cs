@@ -45,14 +45,23 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
         bool IConnectionInherentKeepAliveFeature.HasInherentKeepAlive => _hasInherentKeepAlive;
 
-        public TestConnection(Func<Task> onStart = null, Func<Task> onDispose = null, bool autoHandshake = true, bool hasInherentKeepAlive = false)
+        public TestConnection(
+            Func<Task> onStart = null,
+            Func<Task> onDispose = null,
+            bool autoHandshake = true,
+            bool hasInherentKeepAlive = false
+        )
         {
             _autoHandshake = autoHandshake;
             _onStart = onStart ?? (() => Task.CompletedTask);
             _onDispose = onDispose ?? (() => Task.CompletedTask);
             _hasInherentKeepAlive = hasInherentKeepAlive;
 
-            var options = new PipeOptions(readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+            var options = new PipeOptions(
+                readerScheduler: PipeScheduler.Inline,
+                writerScheduler: PipeScheduler.Inline,
+                useSynchronizationContext: false
+            );
 
             var pair = DuplexPipe.CreateConnectionPair(options, options);
             Application = pair.Application;
@@ -91,6 +100,7 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 HandshakeProtocol.WriteResponseMessage(HandshakeResponseMessage.Empty, output);
                 response = output.ToArray();
             }
+
             finally
             {
                 MemoryBufferWriter.Return(output);
@@ -162,6 +172,7 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         return null;
                     }
                 }
+
                 finally
                 {
                     Application.Input.AdvanceTo(consumed);
@@ -178,7 +189,9 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
         {
             if (!Disposed.IsCompleted)
             {
-                throw new InvalidOperationException("The connection must be stopped before this method can be used.");
+                throw new InvalidOperationException(
+                    "The connection must be stopped before this method can be used."
+                );
             }
 
             var results = new List<string>();

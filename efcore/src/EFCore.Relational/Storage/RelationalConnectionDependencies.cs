@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             INamedConnectionStringResolver connectionStringResolver,
             IRelationalTransactionFactory relationalTransactionFactory,
             ICurrentDbContext currentContext,
-            IRelationalCommandBuilderFactory relationalCommandBuilderFactory)
+            IRelationalCommandBuilderFactory relationalCommandBuilderFactory
+        )
         {
             Check.NotNull(contextOptions, nameof(contextOptions));
             Check.NotNull(transactionLogger, nameof(transactionLogger));

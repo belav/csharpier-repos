@@ -14,7 +14,10 @@ namespace FunctionalTests
         {
             var context = connection.GetHttpContext();
             // The 'withCredentials' tests wont send a cookie for cross-site requests
-            if (!context.WebSockets.IsWebSocketRequest && !context.Request.Cookies.ContainsKey("testCookie"))
+            if (
+                !context.WebSockets.IsWebSocketRequest
+                && !context.Request.Cookies.ContainsKey("testCookie")
+            )
             {
                 return;
             }
@@ -35,6 +38,7 @@ namespace FunctionalTests
                         break;
                     }
                 }
+
                 finally
                 {
                     connection.Transport.Input.AdvanceTo(result.Buffer.End);

@@ -11,23 +11,33 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessarySuppressions
     internal sealed class CSharpRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer
         : AbstractRemoveUnnecessaryAttributeSuppressionsDiagnosticAnalyzer
     {
-        protected override void RegisterAttributeSyntaxAction(CompilationStartAnalysisContext context, CompilationAnalyzer compilationAnalyzer)
+        protected override void RegisterAttributeSyntaxAction(
+            CompilationStartAnalysisContext context,
+            CompilationAnalyzer compilationAnalyzer
+        )
         {
-            context.RegisterSyntaxNodeAction(context =>
-            {
-                var attributeList = (AttributeListSyntax)context.Node;
-                switch (attributeList.Target?.Identifier.Kind())
+            context.RegisterSyntaxNodeAction(
+                context =>
                 {
-                    case SyntaxKind.AssemblyKeyword:
-                    case SyntaxKind.ModuleKeyword:
-                        foreach (var attribute in attributeList.Attributes)
-                        {
-                            compilationAnalyzer.AnalyzeAssemblyOrModuleAttribute(attribute, context.SemanticModel, context.ReportDiagnostic, context.CancellationToken);
-                        }
-
-                        break;
-                }
-            }, SyntaxKind.AttributeList);
+                    var attributeList = (AttributeListSyntax)context.Node;
+                    switch (attributeList.Target?.Identifier.Kind())
+                    {
+                        case SyntaxKind.AssemblyKeyword:
+                        case SyntaxKind.ModuleKeyword:
+                            foreach (var attribute in attributeList.Attributes)
+                            {
+                                compilationAnalyzer.AnalyzeAssemblyOrModuleAttribute(
+                                    attribute,
+                                    context.SemanticModel,
+                                    context.ReportDiagnostic,
+                                    context.CancellationToken
+                                );
+                            }
+                            break;
+                    }
+                },
+                SyntaxKind.AttributeList
+            );
         }
     }
 }

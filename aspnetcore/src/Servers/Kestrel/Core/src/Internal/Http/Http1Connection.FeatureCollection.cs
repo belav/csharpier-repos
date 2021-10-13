@@ -5,8 +5,9 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 {
-    internal partial class Http1Connection : IHttpMinRequestBodyDataRateFeature,
-                                             IHttpMinResponseDataRateFeature
+    internal partial class Http1Connection
+        : IHttpMinRequestBodyDataRateFeature,
+          IHttpMinResponseDataRateFeature
     {
         MinDataRate? IHttpMinRequestBodyDataRateFeature.MinDataRate
         {

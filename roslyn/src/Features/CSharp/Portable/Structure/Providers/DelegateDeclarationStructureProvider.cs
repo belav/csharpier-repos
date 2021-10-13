@@ -9,15 +9,21 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class DelegateDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<DelegateDeclarationSyntax>
+    internal class DelegateDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<DelegateDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             DelegateDeclarationSyntax delegateDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            CSharpStructureHelpers.CollectCommentBlockSpans(delegateDeclaration, ref spans, optionProvider);
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                delegateDeclaration,
+                ref spans,
+                optionProvider
+            );
         }
     }
 }

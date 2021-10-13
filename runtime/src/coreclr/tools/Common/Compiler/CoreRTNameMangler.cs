@@ -20,7 +20,8 @@ namespace ILCompiler
 #if !READYTORUN
         private readonly bool _mangleForCplusPlus;
 
-        public CoreRTNameMangler(NodeMangler nodeMangler, bool mangleForCplusPlus) : base(nodeMangler)
+        public CoreRTNameMangler(NodeMangler nodeMangler, bool mangleForCplusPlus)
+            : base(nodeMangler)
         {
             _mangleForCplusPlus = mangleForCplusPlus;
         }
@@ -89,11 +90,12 @@ namespace ILCompiler
             string sanitizedName = (sb != null) ? sb.ToString() : s;
 
             // The character sequences denoting generic instantiations, arrays, byrefs, or pointers must be
-            // restricted to that use only. Replace them if they happened to be used in any identifiers in 
+            // restricted to that use only. Replace them if they happened to be used in any identifiers in
             // the compilation input.
             return _mangleForCplusPlus
-                ? sanitizedName.Replace(EnterNameScopeSequence, "_AA_").Replace(ExitNameScopeSequence, "_VV_")
-                : sanitizedName;
+              ? sanitizedName.Replace(EnterNameScopeSequence, "_AA_")
+                    .Replace(ExitNameScopeSequence, "_VV_")
+              : sanitizedName;
         }
 
         private static byte[] GetBytesFromString(string literal)
@@ -132,7 +134,7 @@ namespace ILCompiler
 
                     hash = _sha256.ComputeHash(GetBytesFromString(literal));
                 }
-                                
+
                 mangledName += "_" + BitConverter.ToString(hash).Replace("-", "");
             }
 
@@ -176,7 +178,7 @@ namespace ILCompiler
 
         private string EnterNameScopeSequence => _mangleForCplusPlus ? "_A_" : "<";
         private string ExitNameScopeSequence => _mangleForCplusPlus ? "_V_" : ">";
-        private string DelimitNameScopeSequence => _mangleForCplusPlus? "_C_" : ",";
+        private string DelimitNameScopeSequence => _mangleForCplusPlus ? "_C_" : ",";
 
         protected string NestMangledName(string name)
         {
@@ -199,7 +201,7 @@ namespace ILCompiler
 
                 string assemblyName = ((EcmaAssembly)ecmaType.EcmaModule).GetName().Name;
                 bool isSystemPrivate = assemblyName.StartsWith("System.Private.");
-                
+
                 // Abbreviate System.Private to S.P. This might conflict with user defined assembly names,
                 // but we already have a problem due to running SanitizeName without disambiguating the result
                 // This problem needs a better fix.
@@ -247,20 +249,48 @@ namespace ILCompiler
                                 {
                                     switch (t.Category)
                                     {
-                                        case TypeFlags.Boolean: name = "Bool"; break;
-                                        case TypeFlags.Byte: name = "UInt8"; break;
-                                        case TypeFlags.SByte: name = "Int8"; break;
-                                        case TypeFlags.UInt16: name = "UInt16"; break;
-                                        case TypeFlags.Int16: name = "Int16"; break;
-                                        case TypeFlags.UInt32: name = "UInt32"; break;
-                                        case TypeFlags.Int32: name = "Int32"; break;
-                                        case TypeFlags.UInt64: name = "UInt64"; break;
-                                        case TypeFlags.Int64: name = "Int64"; break;
-                                        case TypeFlags.Char: name = "Char"; break;
-                                        case TypeFlags.Double: name = "Double"; break;
-                                        case TypeFlags.Single: name = "Single"; break;
-                                        case TypeFlags.IntPtr: name = "IntPtr"; break;
-                                        case TypeFlags.UIntPtr: name = "UIntPtr"; break;
+                                        case TypeFlags.Boolean:
+                                            name = "Bool";
+                                            break;
+                                        case TypeFlags.Byte:
+                                            name = "UInt8";
+                                            break;
+                                        case TypeFlags.SByte:
+                                            name = "Int8";
+                                            break;
+                                        case TypeFlags.UInt16:
+                                            name = "UInt16";
+                                            break;
+                                        case TypeFlags.Int16:
+                                            name = "Int16";
+                                            break;
+                                        case TypeFlags.UInt32:
+                                            name = "UInt32";
+                                            break;
+                                        case TypeFlags.Int32:
+                                            name = "Int32";
+                                            break;
+                                        case TypeFlags.UInt64:
+                                            name = "UInt64";
+                                            break;
+                                        case TypeFlags.Int64:
+                                            name = "Int64";
+                                            break;
+                                        case TypeFlags.Char:
+                                            name = "Char";
+                                            break;
+                                        case TypeFlags.Double:
+                                            name = "Double";
+                                            break;
+                                        case TypeFlags.Single:
+                                            name = "Single";
+                                            break;
+                                        case TypeFlags.IntPtr:
+                                            name = "IntPtr";
+                                            break;
+                                        case TypeFlags.UIntPtr:
+                                            name = "UIntPtr";
+                                            break;
                                         default:
                                             if (t.IsObject)
                                                 name = "Object";
@@ -286,21 +316,28 @@ namespace ILCompiler
             switch (type.Category)
             {
                 case TypeFlags.Array:
-                    mangledName = "__MDArray" + 
-                                  EnterNameScopeSequence + 
-                                  GetMangledTypeName(((ArrayType)type).ElementType) + 
-                                  DelimitNameScopeSequence + 
-                                  ((ArrayType)type).Rank.ToStringInvariant() + 
-                                  ExitNameScopeSequence;
+                    mangledName =
+                        "__MDArray"
+                        + EnterNameScopeSequence
+                        + GetMangledTypeName(((ArrayType)type).ElementType)
+                        + DelimitNameScopeSequence
+                        + ((ArrayType)type).Rank.ToStringInvariant()
+                        + ExitNameScopeSequence;
                     break;
                 case TypeFlags.SzArray:
-                    mangledName = "__Array" + NestMangledName(GetMangledTypeName(((ArrayType)type).ElementType));
+                    mangledName =
+                        "__Array"
+                        + NestMangledName(GetMangledTypeName(((ArrayType)type).ElementType));
                     break;
                 case TypeFlags.ByRef:
-                    mangledName = GetMangledTypeName(((ByRefType)type).ParameterType) + NestMangledName("ByRef");
+                    mangledName =
+                        GetMangledTypeName(((ByRefType)type).ParameterType)
+                        + NestMangledName("ByRef");
                     break;
                 case TypeFlags.Pointer:
-                    mangledName = GetMangledTypeName(((PointerType)type).ParameterType) + NestMangledName("Pointer");
+                    mangledName =
+                        GetMangledTypeName(((PointerType)type).ParameterType)
+                        + NestMangledName("Pointer");
                     break;
                 default:
                     // Case of a generic type. If `type' is a type definition we use the type name
@@ -328,7 +365,8 @@ namespace ILCompiler
                     }
                     else if (type is IPrefixMangledMethod)
                     {
-                        mangledName = GetPrefixMangledMethodName((IPrefixMangledMethod)type).ToString();
+                        mangledName = GetPrefixMangledMethodName((IPrefixMangledMethod)type)
+                            .ToString();
                     }
                     else if (type is IPrefixMangledType)
                     {
@@ -357,8 +395,14 @@ namespace ILCompiler
             return mangledName;
         }
 
-        private Dictionary<MethodDesc, Utf8String> _mangledMethodNames = new Dictionary<MethodDesc, Utf8String>();
-        private Dictionary<MethodDesc, Utf8String> _unqualifiedMangledMethodNames = new Dictionary<MethodDesc, Utf8String>();
+        private Dictionary<MethodDesc, Utf8String> _mangledMethodNames = new Dictionary<
+            MethodDesc,
+            Utf8String
+        >();
+        private Dictionary<MethodDesc, Utf8String> _unqualifiedMangledMethodNames = new Dictionary<
+            MethodDesc,
+            Utf8String
+        >();
 
         public override Utf8String GetMangledMethodName(MethodDesc method)
         {
@@ -406,11 +450,15 @@ namespace ILCompiler
         private Utf8String GetPrefixMangledTypeName(IPrefixMangledType prefixMangledType)
         {
             Utf8StringBuilder sb = new Utf8StringBuilder();
-            sb.Append(EnterNameScopeSequence).Append(prefixMangledType.Prefix).Append(ExitNameScopeSequence);
+            sb.Append(EnterNameScopeSequence)
+                .Append(prefixMangledType.Prefix)
+                .Append(ExitNameScopeSequence);
 
             if (_mangleForCplusPlus)
             {
-                string name = GetMangledTypeName(prefixMangledType.BaseType).ToString().Replace("::", "_");
+                string name = GetMangledTypeName(prefixMangledType.BaseType)
+                    .ToString()
+                    .Replace("::", "_");
                 sb.Append(name);
             }
             else
@@ -421,10 +469,14 @@ namespace ILCompiler
             return sb.ToUtf8String();
         }
 
-        private Utf8String GetPrefixMangledSignatureName(IPrefixMangledSignature prefixMangledSignature)
+        private Utf8String GetPrefixMangledSignatureName(
+            IPrefixMangledSignature prefixMangledSignature
+        )
         {
             Utf8StringBuilder sb = new Utf8StringBuilder();
-            sb.Append(EnterNameScopeSequence).Append(prefixMangledSignature.Prefix).Append(ExitNameScopeSequence);
+            sb.Append(EnterNameScopeSequence)
+                .Append(prefixMangledSignature.Prefix)
+                .Append(ExitNameScopeSequence);
 
             var signature = prefixMangledSignature.BaseSignature;
             sb.Append(signature.Flags.ToStringInvariant());
@@ -453,11 +505,15 @@ namespace ILCompiler
         private Utf8String GetPrefixMangledMethodName(IPrefixMangledMethod prefixMangledMetod)
         {
             Utf8StringBuilder sb = new Utf8StringBuilder();
-            sb.Append(EnterNameScopeSequence).Append(prefixMangledMetod.Prefix).Append(ExitNameScopeSequence);
+            sb.Append(EnterNameScopeSequence)
+                .Append(prefixMangledMetod.Prefix)
+                .Append(ExitNameScopeSequence);
 
             if (_mangleForCplusPlus)
             {
-                string name = GetMangledMethodName(prefixMangledMetod.BaseMethod).ToString().Replace("::", "_");
+                string name = GetMangledMethodName(prefixMangledMetod.BaseMethod)
+                    .ToString()
+                    .Replace("::", "_");
                 sb.Append(name);
             }
             else
@@ -501,7 +557,9 @@ namespace ILCompiler
             {
                 // Instantiated generic method
                 Utf8StringBuilder sb = new Utf8StringBuilder();
-                sb.Append(GetUnqualifiedMangledMethodName(methodDefinition.GetTypicalMethodDefinition()));
+                sb.Append(
+                    GetUnqualifiedMangledMethodName(methodDefinition.GetTypicalMethodDefinition())
+                );
 
                 sb.Append(EnterNameScopeSequence);
 
@@ -538,7 +596,9 @@ namespace ILCompiler
                 }
                 else if (method is IPrefixMangledSignature)
                 {
-                    utf8MangledName = GetPrefixMangledSignatureName((IPrefixMangledSignature)method);
+                    utf8MangledName = GetPrefixMangledSignatureName(
+                        (IPrefixMangledSignature)method
+                    );
                 }
                 else
                 {
@@ -562,7 +622,10 @@ namespace ILCompiler
             return utf8MangledName;
         }
 
-        private Dictionary<FieldDesc, Utf8String> _mangledFieldNames = new Dictionary<FieldDesc, Utf8String>();
+        private Dictionary<FieldDesc, Utf8String> _mangledFieldNames = new Dictionary<
+            FieldDesc,
+            Utf8String
+        >();
 
         public override Utf8String GetMangledFieldName(FieldDesc field)
         {
@@ -609,7 +672,6 @@ namespace ILCompiler
                 }
             }
 
-
             string mangledName = SanitizeName(field.Name);
 
             if (prependTypeName != null)
@@ -626,7 +688,10 @@ namespace ILCompiler
             return utf8MangledName;
         }
 
-        private Dictionary<string, string> _mangledStringLiterals = new Dictionary<string, string>();
+        private Dictionary<string, string> _mangledStringLiterals = new Dictionary<
+            string,
+            string
+        >();
 
         public override string GetMangledStringName(string literal)
         {

@@ -137,7 +137,11 @@ namespace SerializationTestTypes
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersioned", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersioned",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersioned1 : IExtensibleDataObject
     {
         [DataMember]
@@ -156,18 +160,16 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersioned2", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersioned2",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersioned2 : IExtensibleDataObject
     {
         [DataMember]
@@ -183,18 +185,16 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersionedContainer", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersionedContainer",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersionedContainer1 : IExtensibleDataObject
     {
         [DataMember]
@@ -210,18 +210,16 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersionedContainerV1", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersionedContainerV1",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersionedContainerVersion1 : IExtensibleDataObject
     {
         [DataMember]
@@ -235,7 +233,6 @@ namespace SerializationTestTypes
 
         [DataMember]
         public DCVersioned2 RefDataVersion2;
-
 
         public DCVersionedContainerVersion1() { }
         public DCVersionedContainerVersion1(bool init)
@@ -251,18 +248,16 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersionedContainerV2", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersionedContainerV2",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersionedContainerVersion2 : IExtensibleDataObject
     {
         [DataMember]
@@ -282,18 +277,16 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersionedContainerV3", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersionedContainerV3",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     [KnownType(typeof(DCVersioned1))]
     public class DCVersionedContainerVersion3 : IExtensibleDataObject
     {
@@ -320,14 +313,8 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 

@@ -18,11 +18,6 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public DateTimeToTicksConverter(ConverterMappingHints? mappingHints = null)
-            : base(
-                v => v.Ticks,
-                v => new DateTime(v),
-                mappingHints)
-        {
-        }
+            : base(v => v.Ticks, v => new DateTime(v), mappingHints) { }
     }
 }

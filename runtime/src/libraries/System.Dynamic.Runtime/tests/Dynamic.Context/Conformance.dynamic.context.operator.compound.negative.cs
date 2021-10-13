@@ -43,8 +43,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.field02.field02
 {
     // <Title> Compound operator non-delegate += delegate.</Title>
@@ -73,7 +71,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "+=", "int", "Test.MyDel"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "+=",
+                        "int",
+                        "Test.MyDel"
+                    )
+                )
                     return 0;
             }
 
@@ -88,8 +94,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.property01.property01
 {
@@ -128,16 +132,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public string Field
         {
-            get
-            {
-                return "A";
-            }
+            get { return "A"; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.property02.property02
 {
@@ -167,7 +166,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, e.Message, "Test.Field"))
+                if (
+                    ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, e.Message, "Test.Field")
+                )
                     return 0;
             }
 
@@ -179,20 +180,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     {
         public string Field
         {
-            get
-            {
-                return "A";
-            }
-
-            private set
-            {
-            }
+            get { return "A"; }
+            private set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.property03.property03
 {
@@ -231,15 +224,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public string Field
         {
-            set
-            {
-            }
+            set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.property04.property04
 {
@@ -271,7 +260,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "-=", "int", "Test.MyDel"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "-=",
+                        "int",
+                        "Test.MyDel"
+                    )
+                )
                     return 0;
             }
 
@@ -280,26 +277,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public string Field
         {
-            get
-            {
-                return "A";
-            }
-
-            set
-            {
-            }
+            get { return "A"; }
+            set { }
         }
 
         public int FieldInt
         {
-            get
-            {
-                return 10;
-            }
-
-            set
-            {
-            }
+            get { return 10; }
+            set { }
         }
 
         public int Method(int i)
@@ -309,8 +294,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.indexer01.indexer01
 {
@@ -340,7 +323,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.AssgReadonlyProp, e.Message, "Test.this[long]"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.AssgReadonlyProp,
+                        e.Message,
+                        "Test.this[long]"
+                    )
+                )
                     return 0;
             }
 
@@ -349,16 +338,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public string this[long s]
         {
-            get
-            {
-                return "A";
-            }
+            get { return "A"; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.indexer02.indexer02
 {
@@ -388,7 +372,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.InaccessibleSetter, e.Message, "Test.this[long]"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.InaccessibleSetter,
+                        e.Message,
+                        "Test.this[long]"
+                    )
+                )
                     return 0;
             }
 
@@ -400,20 +390,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     {
         public string this[long s]
         {
-            get
-            {
-                return "A";
-            }
-
-            private set
-            {
-            }
+            get { return "A"; }
+            private set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.indexer03.indexer03
 {
@@ -443,7 +425,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.PropertyLacksGet, e.Message, "Test.this[long]"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.PropertyLacksGet,
+                        e.Message,
+                        "Test.this[long]"
+                    )
+                )
                     return 0;
             }
 
@@ -452,15 +440,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public string this[long s]
         {
-            set
-            {
-            }
+            set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.negative.indexer04.indexer04
 {
@@ -487,16 +471,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             dynamic d = t;
             try
             {
-                d[10] += new MyDel(delegate (int x)
-                {
-                    return x;
-                }
-
+                d[10] += new MyDel(
+                    delegate(int x)
+                    {
+                        return x;
+                    }
                 );
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                if (ErrorVerifier.Verify(ErrorMessageId.BadBinaryOps, e.Message, "+=", "int", "Test.MyDel"))
+                if (
+                    ErrorVerifier.Verify(
+                        ErrorMessageId.BadBinaryOps,
+                        e.Message,
+                        "+=",
+                        "int",
+                        "Test.MyDel"
+                    )
+                )
                     return 0;
             }
 
@@ -505,14 +497,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public int this[long s]
         {
-            get
-            {
-                return 10;
-            }
-
-            set
-            {
-            }
+            get { return 10; }
+            set { }
         }
     }
     //</Code>

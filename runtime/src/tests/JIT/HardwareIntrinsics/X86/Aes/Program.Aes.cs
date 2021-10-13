@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Decrypt.Byte"] = DecryptByte,
                 ["DecryptLast.Byte"] = DecryptLastByte,
                 ["Encrypt.Byte"] = EncryptByte,

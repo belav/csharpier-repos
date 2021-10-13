@@ -15,18 +15,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <summary>
         ///     Initializes a new instance of the <see cref="RetryLimitExceededException" /> class.
         /// </summary>
-        public RetryLimitExceededException()
-        {
-        }
+        public RetryLimitExceededException() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RetryLimitExceededException" /> class with a specified error message.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public RetryLimitExceededException(string message)
-            : base(message)
-        {
-        }
+        public RetryLimitExceededException(string message) : base(message) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RetryLimitExceededException" /> class.
@@ -34,9 +29,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="message">The message that describes the error.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public RetryLimitExceededException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized form.
@@ -44,8 +37,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="info"> The serialization info. </param>
         /// <param name="context"> The streaming context being used. </param>
         public RetryLimitExceededException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

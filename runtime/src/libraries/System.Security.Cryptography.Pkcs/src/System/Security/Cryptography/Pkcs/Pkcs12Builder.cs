@@ -20,19 +20,22 @@ namespace System.Security.Cryptography.Pkcs
         public void AddSafeContentsEncrypted(
             Pkcs12SafeContents safeContents,
             byte[]? passwordBytes,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             AddSafeContentsEncrypted(
                 safeContents,
                 // Allows null.
                 new ReadOnlySpan<byte>(passwordBytes),
-                pbeParameters);
+                pbeParameters
+            );
         }
 
         public void AddSafeContentsEncrypted(
             Pkcs12SafeContents safeContents,
             ReadOnlySpan<byte> passwordBytes,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             if (safeContents == null)
                 throw new ArgumentNullException(nameof(safeContents));
@@ -41,16 +44,24 @@ namespace System.Security.Cryptography.Pkcs
             if (pbeParameters.IterationCount < 1)
                 throw new ArgumentOutOfRangeException(nameof(pbeParameters));
             if (safeContents.ConfidentialityMode != Pkcs12ConfidentialityMode.None)
-                throw new ArgumentException(SR.Cryptography_Pkcs12_CannotProcessEncryptedSafeContents, nameof(safeContents));
+                throw new ArgumentException(
+                    SR.Cryptography_Pkcs12_CannotProcessEncryptedSafeContents,
+                    nameof(safeContents)
+                );
             if (IsSealed)
                 throw new InvalidOperationException(SR.Cryptography_Pkcs12_PfxIsSealed);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 ReadOnlySpan<char>.Empty,
-                passwordBytes);
+                passwordBytes
+            );
 
-            byte[] encrypted = safeContents.Encrypt(ReadOnlySpan<char>.Empty, passwordBytes, pbeParameters);
+            byte[] encrypted = safeContents.Encrypt(
+                ReadOnlySpan<char>.Empty,
+                passwordBytes,
+                pbeParameters
+            );
 
             if (_contents == null)
             {
@@ -58,29 +69,29 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             _contents.Add(
-                new ContentInfoAsn
-                {
-                    ContentType = Oids.Pkcs7Encrypted,
-                    Content = encrypted,
-                });
+                new ContentInfoAsn { ContentType = Oids.Pkcs7Encrypted, Content = encrypted, }
+            );
         }
 
         public void AddSafeContentsEncrypted(
             Pkcs12SafeContents safeContents,
             string? password,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             AddSafeContentsEncrypted(
                 safeContents,
                 // This extension invoke allows null
                 password.AsSpan(),
-                pbeParameters);
+                pbeParameters
+            );
         }
 
         public void AddSafeContentsEncrypted(
             Pkcs12SafeContents safeContents,
             ReadOnlySpan<char> password,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             if (safeContents == null)
                 throw new ArgumentNullException(nameof(safeContents));
@@ -89,16 +100,24 @@ namespace System.Security.Cryptography.Pkcs
             if (pbeParameters.IterationCount < 1)
                 throw new ArgumentOutOfRangeException(nameof(pbeParameters));
             if (safeContents.ConfidentialityMode != Pkcs12ConfidentialityMode.None)
-                throw new ArgumentException(SR.Cryptography_Pkcs12_CannotProcessEncryptedSafeContents, nameof(safeContents));
+                throw new ArgumentException(
+                    SR.Cryptography_Pkcs12_CannotProcessEncryptedSafeContents,
+                    nameof(safeContents)
+                );
             if (IsSealed)
                 throw new InvalidOperationException(SR.Cryptography_Pkcs12_PfxIsSealed);
 
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 password,
-                ReadOnlySpan<byte>.Empty);
+                ReadOnlySpan<byte>.Empty
+            );
 
-            byte[] encrypted = safeContents.Encrypt(password, ReadOnlySpan<byte>.Empty, pbeParameters);
+            byte[] encrypted = safeContents.Encrypt(
+                password,
+                ReadOnlySpan<byte>.Empty,
+                pbeParameters
+            );
 
             if (_contents == null)
             {
@@ -106,11 +125,8 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             _contents.Add(
-                new ContentInfoAsn
-                {
-                    ContentType = Oids.Pkcs7Encrypted,
-                    Content = encrypted,
-                });
+                new ContentInfoAsn { ContentType = Oids.Pkcs7Encrypted, Content = encrypted, }
+            );
         }
 
         public void AddSafeContentsUnencrypted(Pkcs12SafeContents safeContents)
@@ -141,19 +157,22 @@ namespace System.Security.Cryptography.Pkcs
         public void SealWithMac(
             string? password,
             HashAlgorithmName hashAlgorithm,
-            int iterationCount)
+            int iterationCount
+        )
         {
             SealWithMac(
                 // This extension invoke allows null
                 password.AsSpan(),
                 hashAlgorithm,
-                iterationCount);
+                iterationCount
+            );
         }
 
         public void SealWithMac(
             ReadOnlySpan<char> password,
             HashAlgorithmName hashAlgorithm,
-            int iterationCount)
+            int iterationCount
+        )
         {
             if (iterationCount < 1)
                 throw new ArgumentOutOfRangeException(nameof(iterationCount));
@@ -203,20 +222,20 @@ namespace System.Security.Cryptography.Pkcs
                     salt = stackalloc byte[Math.Min(macKey.Length, 128)];
                     RandomNumberGenerator.Fill(salt);
 
-                    Pkcs12Kdf.DeriveMacKey(
-                        password,
-                        hashAlgorithm,
-                        iterationCount,
-                        salt,
-                        macKey);
+                    Pkcs12Kdf.DeriveMacKey(password, hashAlgorithm, iterationCount, salt, macKey);
 
                     using (IncrementalHash mac = IncrementalHash.CreateHMAC(hashAlgorithm, macKey))
                     {
                         mac.AppendData(authSafeSpan);
 
-                        if (!mac.TryGetHashAndReset(macSpan, out int bytesWritten) || bytesWritten != macSpan.Length)
+                        if (
+                            !mac.TryGetHashAndReset(macSpan, out int bytesWritten)
+                            || bytesWritten != macSpan.Length
+                        )
                         {
-                            Debug.Fail($"TryGetHashAndReset wrote {bytesWritten} of {macSpan.Length} bytes");
+                            Debug.Fail(
+                                $"TryGetHashAndReset wrote {bytesWritten} of {macSpan.Length} bytes"
+                            );
                             throw new CryptographicException();
                         }
                     }
@@ -265,7 +284,9 @@ namespace System.Security.Cryptography.Pkcs
                         {
                             writer.PushSequence();
                             {
-                                writer.WriteObjectIdentifierForCrypto(PkcsHelpers.GetOidFromHashAlgorithm(hashAlgorithm));
+                                writer.WriteObjectIdentifierForCrypto(
+                                    PkcsHelpers.GetOidFromHashAlgorithm(hashAlgorithm)
+                                );
                                 writer.PopSequence();
                             }
 
@@ -287,6 +308,7 @@ namespace System.Security.Cryptography.Pkcs
                     _sealedData = writer.Encode();
                 }
             }
+
             finally
             {
                 CryptographicOperations.ZeroMemory(macSpan);

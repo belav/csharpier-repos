@@ -20,7 +20,11 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
         /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
         /// <param name="jsonKey">The top level key to look for in the json user data.</param>
-        public static void MapJsonKey(this ClaimActionCollection collection, string claimType, string jsonKey)
+        public static void MapJsonKey(
+            this ClaimActionCollection collection,
+            string claimType,
+            string jsonKey
+        )
         {
             if (collection == null)
             {
@@ -38,7 +42,12 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
         /// <param name="jsonKey">The top level key to look for in the json user data.</param>
         /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
-        public static void MapJsonKey(this ClaimActionCollection collection, string claimType, string jsonKey, string valueType)
+        public static void MapJsonKey(
+            this ClaimActionCollection collection,
+            string claimType,
+            string jsonKey,
+            string valueType
+        )
         {
             if (collection == null)
             {
@@ -56,7 +65,12 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
         /// <param name="jsonKey">The top level key to look for in the json user data.</param>
         /// <param name="subKey">The second level key to look for in the json user data.</param>
-        public static void MapJsonSubKey(this ClaimActionCollection collection, string claimType, string jsonKey, string subKey)
+        public static void MapJsonSubKey(
+            this ClaimActionCollection collection,
+            string claimType,
+            string jsonKey,
+            string subKey
+        )
         {
             if (collection == null)
             {
@@ -75,7 +89,13 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="jsonKey">The top level key to look for in the json user data.</param>
         /// <param name="subKey">The second level key to look for in the json user data.</param>
         /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
-        public static void MapJsonSubKey(this ClaimActionCollection collection, string claimType, string jsonKey, string subKey, string valueType)
+        public static void MapJsonSubKey(
+            this ClaimActionCollection collection,
+            string claimType,
+            string jsonKey,
+            string subKey,
+            string valueType
+        )
         {
             if (collection == null)
             {
@@ -92,7 +112,11 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
         /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
         /// <param name="resolver">The Func that will be called to select value from the given json user data.</param>
-        public static void MapCustomJson(this ClaimActionCollection collection, string claimType, Func<JsonElement, string?> resolver)
+        public static void MapCustomJson(
+            this ClaimActionCollection collection,
+            string claimType,
+            Func<JsonElement, string?> resolver
+        )
         {
             if (collection == null)
             {
@@ -110,7 +134,12 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
         /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
         /// <param name="resolver">The Func that will be called to select value from the given json user data.</param>
-        public static void MapCustomJson(this ClaimActionCollection collection, string claimType, string valueType, Func<JsonElement, string?> resolver)
+        public static void MapCustomJson(
+            this ClaimActionCollection collection,
+            string claimType,
+            string valueType,
+            Func<JsonElement, string?> resolver
+        )
         {
             if (collection == null)
             {
@@ -140,7 +169,10 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
         /// <param name="exclusions">The types to exclude.</param>
-        public static void MapAllExcept(this ClaimActionCollection collection, params string[] exclusions)
+        public static void MapAllExcept(
+            this ClaimActionCollection collection,
+            params string[] exclusions
+        )
         {
             if (collection == null)
             {
@@ -171,7 +203,10 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         /// <param name="collection">The <see cref="ClaimActionCollection"/>.</param>
         /// <param name="claimTypes">The claim types to delete.</param>
-        public static void DeleteClaims(this ClaimActionCollection collection, params string[] claimTypes)
+        public static void DeleteClaims(
+            this ClaimActionCollection collection,
+            params string[] claimTypes
+        )
         {
             if (collection == null)
             {

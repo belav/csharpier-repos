@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomPolicyProvider.Controllers
 {
-    public class AccountController: Controller
+    public class AccountController : Controller
     {
         [HttpGet]
         public IActionResult Signin(string returnUrl = null)
@@ -17,9 +17,14 @@ namespace CustomPolicyProvider.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Signin(string userName, DateTime? birthDate, string returnUrl = null)
+        public async Task<IActionResult> Signin(
+            string userName,
+            DateTime? birthDate,
+            string returnUrl = null
+        )
         {
-            if (string.IsNullOrEmpty(userName)) return BadRequest("A user name is required");
+            if (string.IsNullOrEmpty(userName))
+                return BadRequest("A user name is required");
 
             // In a real-world application, user credentials would need validated before signing in
             var claims = new List<Claim>();

@@ -27,7 +27,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             var filePath = fileNode.Path;
             if (!filePath.StartsWith(Path, StringComparison.OrdinalIgnoreCase))
             {
-                throw new InvalidOperationException($"File {fileNode.Path} does not belong to {Path}.");
+                throw new InvalidOperationException(
+                    $"File {fileNode.Path} does not belong to {Path}."
+                );
             }
 
             // Look for the first / that appears in the path after the current directory path.
@@ -86,7 +88,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                 // path, filePath -> /Views/Home/Index.cshtml
                 // directory.Path -> /Views/Home/
                 // We only need to match the file name portion since we've already matched the directory segment.
-                if (string.Compare(path, directoryLength, filePath, directoryLength, path.Length - directoryLength, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        path,
+                        directoryLength,
+                        filePath,
+                        directoryLength,
+                        path.Length - directoryLength,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return file.ProjectItem;
                 }
@@ -110,7 +121,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         private static DirectoryNode GetOrAddDirectory(
             DirectoryNode directory,
             string path,
-            bool createIfNotExists = false)
+            bool createIfNotExists = false
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(path));
             if (path[path.Length - 1] != '/')
@@ -156,7 +168,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                 var directoryPath = currentDirectory.Path;
                 var startIndex = parentDirectory.Path.Length;
 
-                if (string.Compare(path, startIndex, directoryPath, startIndex, directoryPath.Length - startIndex, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        path,
+                        startIndex,
+                        directoryPath,
+                        startIndex,
+                        directoryPath.Length - startIndex,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return currentDirectory;
                 }

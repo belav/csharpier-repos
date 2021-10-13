@@ -37,8 +37,8 @@ namespace Microsoft.AspNetCore.Identity
             builder.Services.AddMvc();
 
             builder.Services.ConfigureOptions(
-                typeof(IdentityDefaultUIConfigureOptions<>)
-                    .MakeGenericType(builder.UserType));
+                typeof(IdentityDefaultUIConfigureOptions<>).MakeGenericType(builder.UserType)
+            );
             builder.Services.TryAddTransient<IEmailSender, EmailSender>();
 
             return builder;
@@ -47,9 +47,14 @@ namespace Microsoft.AspNetCore.Identity
         private static Assembly GetApplicationAssembly(IdentityBuilder builder)
         {
             // Whis is the same logic that MVC follows to find the application assembly.
-            var environment = builder.Services.Where(d => d.ServiceType == typeof(IWebHostEnvironment)).ToArray();
-            var applicationName = ((IWebHostEnvironment)environment.LastOrDefault()?.ImplementationInstance)
-                .ApplicationName;
+            var environment = builder.Services.Where(
+                    d => d.ServiceType == typeof(IWebHostEnvironment)
+                )
+                .ToArray();
+            var applicationName =
+                (
+                    (IWebHostEnvironment)environment.LastOrDefault()?.ImplementationInstance
+                ).ApplicationName;
 
             var appAssembly = Assembly.Load(applicationName);
             return appAssembly;
@@ -69,9 +74,13 @@ namespace Microsoft.AspNetCore.Identity
             // If we find the metadata there must be a valid framework here.
             if (!Enum.TryParse<UIFramework>(metadata, ignoreCase: true, out uiFramework))
             {
-                var enumValues = string.Join(", ", Enum.GetNames(typeof(UIFramework)).Select(v => $"'{v}'"));
+                var enumValues = string.Join(
+                    ", ",
+                    Enum.GetNames(typeof(UIFramework)).Select(v => $"'{v}'")
+                );
                 throw new InvalidOperationException(
-                    $"Found an invalid value for the 'IdentityUIFrameworkVersion'. Valid values are {enumValues}");
+                    $"Found an invalid value for the 'IdentityUIFrameworkVersion'. Valid values are {enumValues}"
+                );
             }
 
             return true;

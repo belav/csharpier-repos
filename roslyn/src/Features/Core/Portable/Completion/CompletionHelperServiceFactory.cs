@@ -18,12 +18,10 @@ namespace Microsoft.CodeAnalysis.Completion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionHelperServiceFactory()
-        {
-        }
+        public CompletionHelperServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new Service(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new Service(workspaceServices.Workspace);
 
         private class Service : ICompletionHelperService, IWorkspaceService
         {
@@ -32,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Completion
             private CompletionHelper _caseSensitiveInstance;
             private CompletionHelper _caseInsensitiveInstance;
 
-            public Service(Workspace workspace)
-                => workspace.WorkspaceChanged += OnWorkspaceChanged;
+            public Service(Workspace workspace) => workspace.WorkspaceChanged += OnWorkspaceChanged;
 
             public CompletionHelper GetCompletionHelper(Document document)
             {
@@ -48,9 +45,7 @@ namespace Microsoft.CodeAnalysis.Completion
                     var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
                     var caseSensitive = syntaxFacts?.IsCaseSensitive ?? true;
 
-                    return caseSensitive
-                        ? _caseSensitiveInstance
-                        : _caseInsensitiveInstance;
+                    return caseSensitive ? _caseSensitiveInstance : _caseInsensitiveInstance;
                 }
             }
 

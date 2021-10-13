@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<UInt32>>() / sizeof(UInt32);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<UInt32>>() / sizeof(UInt32);
 
         public bool Succeeded { get; set; } = true;
 
@@ -53,7 +54,16 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetUInt32();
             }
 
-            Vector256<UInt32> result = Vector256.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]);
+            Vector256<UInt32> result = Vector256.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7]
+            );
 
             ValidateResult(result, values);
         }
@@ -71,21 +81,41 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetUInt32();
             }
 
-            object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7] });
+            object result = typeof(Vector256).GetMethod(nameof(Vector256.Create), operandTypes)
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        values[0],
+                        values[1],
+                        values[2],
+                        values[3],
+                        values[4],
+                        values[5],
+                        values[6],
+                        values[7]
+                    }
+                );
 
             ValidateResult((Vector256<UInt32>)(result), values);
         }
 
-        private void ValidateResult(Vector256<UInt32> result, UInt32[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<UInt32> result,
+            UInt32[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt32[] resultElements = new UInt32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(UInt32[] resultElements, UInt32[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt32[] resultElements,
+            UInt32[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -100,9 +130,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.Create(UInt32): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.Create(UInt32): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

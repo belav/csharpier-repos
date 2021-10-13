@@ -44,8 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             IThreadingContext threadingContext,
             Workspace workspace,
             Option2<bool> onOffOption,
-            params PerLanguageOption2<bool>[] perLanguageOptions)
-            : base(threadingContext)
+            params PerLanguageOption2<bool>[] perLanguageOptions
+        ) : base(threadingContext)
         {
             Workspace = workspace;
             _serviceOnOffOption = onOffOption;
@@ -90,21 +90,29 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
                 return;
             }
 
-            var listenerProvider = Workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
-            var asyncToken = listenerProvider.GetListener().BeginAsyncOperation(nameof(AbstractDelayStartedService.EnableServiceAsync), tag: GetType());
-            var enableAsync = ThreadingContext.JoinableTaskFactory.RunAsync(async () =>
-            {
-                // The first time we see that we're registered for a language, enable the
-                // service.
-                if (!_enabled)
+            var listenerProvider =
+                Workspace.Services.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+            var asyncToken = listenerProvider.GetListener()
+                .BeginAsyncOperation(
+                    nameof(AbstractDelayStartedService.EnableServiceAsync),
+                    tag: GetType()
+                );
+            var enableAsync = ThreadingContext.JoinableTaskFactory.RunAsync(
+                async () =>
                 {
-                    _enabled = true;
-                    await EnableServiceAsync(ThreadingContext.DisposalToken).ConfigureAwait(true);
-                }
+                    // The first time we see that we're registered for a language, enable the
+                    // service.
+                    if (!_enabled)
+                    {
+                        _enabled = true;
+                        await EnableServiceAsync(ThreadingContext.DisposalToken)
+                            .ConfigureAwait(true);
+                    }
 
-                // Then tell it to start work.
-                StartWorking();
-            });
+                    // Then tell it to start work.
+                    StartWorking();
+                }
+            );
 
             enableAsync.Task.CompletesAsyncOperation(asyncToken);
         }

@@ -13,15 +13,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
 {
     public class CodeGenerationIntegrationTest : IntegrationTestBase
     {
-        private readonly static CSharpCompilation DefaultBaseCompilation = MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+        private readonly static CSharpCompilation DefaultBaseCompilation =
+            MvcShim.BaseCompilation.WithAssemblyName("AppCode");
 
         public CodeGenerationIntegrationTest()
-            : base(generateBaselines: null, projectDirectoryHint: "Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X")
+            : base(
+                generateBaselines: null,
+                projectDirectoryHint: "Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X"
+            )
         {
             Configuration = RazorConfiguration.Create(
                 RazorLanguageVersion.Version_2_0,
                 "MVC-2.1",
-                new[] { new AssemblyExtension("MVC-2.1", typeof(ExtensionInitializer).Assembly) });
+                new[] { new AssemblyExtension("MVC-2.1", typeof(ExtensionInitializer).Assembly) }
+            );
         }
 
         protected override CSharpCompilation BaseCompilation => DefaultBaseCompilation;
@@ -43,8 +48,12 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
             AssertDocumentNodeMatchesBaseline(compiled.CodeDocument.GetDocumentIntermediateNode());
             AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
 
-            var diagnostics = compiled.Compilation.GetDiagnostics().Where(d => d.Severity >= DiagnosticSeverity.Warning);
-            Assert.Equal("The using directive for 'System' appeared previously in this namespace", Assert.Single(diagnostics).GetMessage());
+            var diagnostics = compiled.Compilation.GetDiagnostics()
+                .Where(d => d.Severity >= DiagnosticSeverity.Warning);
+            Assert.Equal(
+                "The using directive for 'System' appeared previously in this namespace",
+                Assert.Single(diagnostics).GetMessage()
+            );
         }
 
         [Fact]
@@ -68,11 +77,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
         public void IncompleteDirectives_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class MyService<TModel>
 {
     public string Html { get; set; }
-}");
+}"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -91,7 +102,8 @@ public class MyService<TModel>
         public void InheritsViewModel_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -106,7 +118,8 @@ public class MyModel
 {
 
 }
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -122,7 +135,8 @@ public class MyModel
         public void InheritsWithViewImports_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -137,7 +151,8 @@ public abstract class MyPageModel<T> : Page
 public class MyModel
 {
 
-}");
+}"
+            );
             AddProjectItemFromText(@"@inherits MyPageModel<TModel>");
 
             var projectItem = CreateProjectItemFromFile();
@@ -185,14 +200,16 @@ public class MyModel
         public void Sections_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class InputTestTagHelper : {typeof(TagHelper).FullName}
 {{
     public ModelExpression For {{ get; set; }}
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -222,12 +239,14 @@ public class InputTestTagHelper : {typeof(TagHelper).FullName}
         public void Inject_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class MyApp
 {
     public string MyProperty { get; set; }
 }
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -243,7 +262,8 @@ public class MyApp
         public void InjectWithModel_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class MyModel
 {
 
@@ -257,7 +277,8 @@ public class MyService<TModel>
 public class MyApp
 {
     public string MyProperty { get; set; }
-}");
+}"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -273,7 +294,8 @@ public class MyApp
         public void InjectWithSemicolon_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class MyModel
 {
 
@@ -288,7 +310,8 @@ public class MyService<TModel>
 {
     public string Html { get; set; }
 }
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -319,14 +342,16 @@ public class MyService<TModel>
         public void ModelExpressionTagHelper_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class InputTestTagHelper : {typeof(TagHelper).FullName}
 {{
     public ModelExpression For {{ get; set; }}
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -342,12 +367,14 @@ public class InputTestTagHelper : {typeof(TagHelper).FullName}
         public void RazorPages_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 public class DivTagHelper : {typeof(TagHelper).FullName}
 {{
 
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -377,12 +404,14 @@ public class DivTagHelper : {typeof(TagHelper).FullName}
         public void RazorPagesWithoutModel_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 public class DivTagHelper : {typeof(TagHelper).FullName}
 {{
 
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -426,7 +455,8 @@ public class DivTagHelper : {typeof(TagHelper).FullName}
         public void ViewComponentTagHelper_Runtime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 public class TestViewComponent
 {{
     public string Invoke(string firstName)
@@ -440,7 +470,8 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
 {{
     public string Bar {{ get; set; }}
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -486,8 +517,12 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
             AssertCSharpDocumentMatchesBaseline(compiled.CodeDocument.GetCSharpDocument());
             AssertSourceMappingsMatchBaseline(compiled.CodeDocument);
 
-            var diagnostics = compiled.Compilation.GetDiagnostics().Where(d => d.Severity >= DiagnosticSeverity.Warning);
-            Assert.Equal("The using directive for 'System' appeared previously in this namespace", Assert.Single(diagnostics).GetMessage());
+            var diagnostics = compiled.Compilation.GetDiagnostics()
+                .Where(d => d.Severity >= DiagnosticSeverity.Warning);
+            Assert.Equal(
+                "The using directive for 'System' appeared previously in this namespace",
+                Assert.Single(diagnostics).GetMessage()
+            );
         }
 
         [Fact]
@@ -512,11 +547,13 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
         public void IncompleteDirectives_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class MyService<TModel>
 {
     public string Html { get; set; }
-}");
+}"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -536,7 +573,8 @@ public class MyService<TModel>
         public void InheritsViewModel_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Razor;
 
@@ -551,7 +589,8 @@ public class MyModel
 {
 
 }
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -568,7 +607,8 @@ public class MyModel
         public void InheritsWithViewImports_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -583,7 +623,8 @@ public abstract class MyPageModel<T> : Page
 public class MyModel
 {
 
-}");
+}"
+            );
 
             AddProjectItemFromText(@"@inherits MyPageModel<TModel>");
 
@@ -635,14 +676,16 @@ public class MyModel
         public void Sections_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class InputTestTagHelper : {typeof(TagHelper).FullName}
 {{
     public ModelExpression For {{ get; set; }}
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -674,12 +717,14 @@ public class InputTestTagHelper : {typeof(TagHelper).FullName}
         public void Inject_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class MyApp
 {
     public string MyProperty { get; set; }
 }
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -696,7 +741,8 @@ public class MyApp
         public void InjectWithModel_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class MyModel
 {
 
@@ -710,7 +756,8 @@ public class MyService<TModel>
 public class MyApp
 {
     public string MyProperty { get; set; }
-}");
+}"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -727,7 +774,8 @@ public class MyApp
         public void InjectWithSemicolon_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class MyModel
 {
 
@@ -742,7 +790,8 @@ public class MyService<TModel>
 {
     public string Html { get; set; }
 }
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -774,11 +823,13 @@ public class MyService<TModel>
         public void MultipleModels_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree(@"
+            AddCSharpSyntaxTree(
+                @"
 public class ThisShouldBeGenerated
 {
 
-}");
+}"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -798,14 +849,16 @@ public class ThisShouldBeGenerated
         public void ModelExpressionTagHelper_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 public class InputTestTagHelper : {typeof(TagHelper).FullName}
 {{
     public ModelExpression For {{ get; set; }}
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -822,12 +875,14 @@ public class InputTestTagHelper : {typeof(TagHelper).FullName}
         public void RazorPages_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 public class DivTagHelper : {typeof(TagHelper).FullName}
 {{
 
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -859,12 +914,14 @@ public class DivTagHelper : {typeof(TagHelper).FullName}
         public void RazorPagesWithoutModel_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 public class DivTagHelper : {typeof(TagHelper).FullName}
 {{
 
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -911,7 +968,8 @@ public class DivTagHelper : {typeof(TagHelper).FullName}
         public void ViewComponentTagHelper_DesignTime()
         {
             // Arrange
-            AddCSharpSyntaxTree($@"
+            AddCSharpSyntaxTree(
+                $@"
 public class TestViewComponent
 {{
     public string Invoke(string firstName)
@@ -925,7 +983,8 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
 {{
     public string Bar {{ get; set; }}
 }}
-");
+"
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -955,7 +1014,6 @@ public class AllTagHelper : {typeof(TagHelper).FullName}
             var diagnotics = compiled.CodeDocument.GetCSharpDocument().Diagnostics;
             Assert.Equal("RZ3906", Assert.Single(diagnotics).Id);
         }
-
         #endregion
     }
 }

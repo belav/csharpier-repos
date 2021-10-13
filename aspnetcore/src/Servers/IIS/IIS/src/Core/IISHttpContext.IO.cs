@@ -22,7 +22,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         /// <param name="memory"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        internal async ValueTask<int> ReadAsync(Memory<byte> memory, CancellationToken cancellationToken)
+        internal async ValueTask<int> ReadAsync(
+            Memory<byte> memory,
+            CancellationToken cancellationToken
+        )
         {
             if (!HasStartedConsumingRequestBody)
             {
@@ -47,6 +50,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                         return 0;
                     }
                 }
+
                 finally
                 {
                     _bodyInputPipe.Reader.AdvanceTo(readableBuffer.End, readableBuffer.End);
@@ -70,7 +74,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
         /// <param name="memory"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        internal Task WriteAsync(ReadOnlyMemory<byte> memory, CancellationToken cancellationToken = default(CancellationToken))
+        internal Task WriteAsync(
+            ReadOnlyMemory<byte> memory,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             async Task WriteFirstAsync()
             {
@@ -78,7 +85,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 await _bodyOutput.WriteAsync(memory, cancellationToken);
             }
 
-            return !HasResponseStarted ? WriteFirstAsync() : _bodyOutput.WriteAsync(memory, cancellationToken);
+            return !HasResponseStarted
+              ? WriteFirstAsync()
+              : _bodyOutput.WriteAsync(memory, cancellationToken);
         }
 
         /// <summary>
@@ -94,7 +103,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                 await _bodyOutput.FlushAsync(cancellationToken);
             }
 
-            return !HasResponseStarted ? FlushFirstAsync() : _bodyOutput.FlushAsync(cancellationToken);
+            return !HasResponseStarted
+              ? FlushFirstAsync()
+              : _bodyOutput.FlushAsync(cancellationToken);
         }
 
         private async Task ReadBody()
@@ -123,7 +134,9 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
                     if (_consumedBytes > MaxRequestBodySize)
                     {
-                        IISBadHttpRequestException.Throw(RequestRejectionReason.RequestBodyTooLarge);
+                        IISBadHttpRequestException.Throw(
+                            RequestRejectionReason.RequestBodyTooLarge
+                        );
                     }
 
                     var result = await _bodyInputPipe.Writer.FlushAsync();
@@ -178,7 +191,6 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
                             // Done with response, say there is no more data after writing trailers.
                             await AsyncIO!.FlushAsync(moreData: false);
-
                             break;
                         }
 
@@ -190,6 +202,7 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                             flush = false;
                         }
                     }
+
                     finally
                     {
                         _bodyOutput.Reader.AdvanceTo(buffer.End);
@@ -248,7 +261,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
 
         private void CancelRequestAbortedToken()
         {
-            ThreadPool.UnsafeQueueUserWorkItem(ctx =>
+            ThreadPool.UnsafeQueueUserWorkItem(
+                ctx =>
                 {
                     try
                     {
@@ -269,9 +283,17 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                     }
                     catch (Exception ex)
                     {
-                        Log.ApplicationError(_logger, ((IHttpConnectionFeature)this).ConnectionId, TraceIdentifier!, ex); // TODO: Can TraceIdentifier be null?
+                        Log.ApplicationError(
+                            _logger,
+                            ((IHttpConnectionFeature)this).ConnectionId,
+                            TraceIdentifier!,
+                            ex
+                        ); // TODO: Can TraceIdentifier be null?
                     }
-                }, this, preferLocal: false);
+                },
+                this,
+                preferLocal: false
+            );
         }
 
         public void Abort(Exception reason)

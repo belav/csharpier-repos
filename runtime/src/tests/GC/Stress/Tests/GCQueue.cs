@@ -5,7 +5,6 @@
 using System;
 using System.Collections;
 
-
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
 
@@ -82,7 +81,6 @@ namespace DefaultNamespace
             return 1;
         }
 
-
         public bool runTest(int iRep, int iObj)
         {
             try
@@ -107,7 +105,6 @@ namespace DefaultNamespace
 
             return true;
         }
-
 
         public void MakeLeak(int iRep, int iObj)
         {

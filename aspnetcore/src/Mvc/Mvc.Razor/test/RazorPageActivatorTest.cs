@@ -53,7 +53,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var activator = CreateActivator();
 
             var instance = new TestRazorPage();
-            var viewData = new ViewDataDictionary<MyModel>(MetadataProvider, new ModelStateDictionary());
+            var viewData = new ViewDataDictionary<MyModel>(
+                MetadataProvider,
+                new ModelStateDictionary()
+            );
             var viewContext = CreateViewContext();
 
             var urlHelper = UrlHelperFactory.GetUrlHelper(viewContext);
@@ -86,7 +89,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var activator = CreateActivator();
 
-            var viewData = new ViewDataDictionary<object>(MetadataProvider, new ModelStateDictionary());
+            var viewData = new ViewDataDictionary<object>(
+                MetadataProvider,
+                new ModelStateDictionary()
+            );
             var viewContext = CreateViewContext(viewData);
 
             var urlHelper = UrlHelperFactory.GetUrlHelper(viewContext);
@@ -110,8 +116,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var activator = CreateActivator();
 
-            var viewData = new ViewDataDictionary<object>(MetadataProvider, new ModelStateDictionary())
-            {
+            var viewData = new ViewDataDictionary<object>(
+                MetadataProvider,
+                new ModelStateDictionary()
+            ) {
                 { "key", "value" },
             };
             var viewContext = CreateViewContext(viewData);
@@ -155,7 +163,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var activator = CreateActivator();
 
-            var viewData = new ViewDataDictionary<MyModel>(MetadataProvider, new ModelStateDictionary());
+            var viewData = new ViewDataDictionary<MyModel>(
+                MetadataProvider,
+                new ModelStateDictionary()
+            );
             var viewContext = CreateViewContext(viewData);
 
             var instance = new HasIncorrectViewDataPropertyType();
@@ -170,8 +181,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             // Arrange
             var activator = CreateActivator();
 
-            var viewData = new ViewDataDictionary<object>(MetadataProvider, new ModelStateDictionary())
-            {
+            var viewData = new ViewDataDictionary<object>(
+                MetadataProvider,
+                new ModelStateDictionary()
+            ) {
                 { "key", "value" },
             };
             var viewContext = CreateViewContext(viewData);
@@ -229,7 +242,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor
 
         private RazorPageActivator CreateActivator()
         {
-            return new RazorPageActivator(MetadataProvider, UrlHelperFactory, JsonHelper, DiagnosticListener, HtmlEncoder, ModelExpressionProvider);
+            return new RazorPageActivator(
+                MetadataProvider,
+                UrlHelperFactory,
+                JsonHelper,
+                DiagnosticListener,
+                HtmlEncoder,
+                ModelExpressionProvider
+            );
         }
 
         private ViewContext CreateViewContext(ViewDataDictionary viewData = null)
@@ -242,23 +262,24 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             var myService = new MyService();
             var htmlHelper = Mock.Of<IHtmlHelper<object>>();
 
-            var serviceProvider = new ServiceCollection()
-                .AddSingleton(myService)
+            var serviceProvider = new ServiceCollection().AddSingleton(myService)
                 .AddSingleton(htmlHelper)
                 .BuildServiceProvider();
 
-            var httpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider
-            };
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
             return new ViewContext(
                 actionContext,
                 Mock.Of<IView>(),
                 viewData,
                 Mock.Of<ITempDataDictionary>(),
                 TextWriter.Null,
-                new HtmlHelperOptions());
+                new HtmlHelperOptions()
+            );
         }
 
         private abstract class TestPageBase<TModel> : RazorPage<TModel>

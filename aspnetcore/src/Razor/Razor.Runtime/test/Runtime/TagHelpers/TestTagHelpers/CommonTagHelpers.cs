@@ -21,8 +21,14 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers
     public class MissingAccessorTagHelper : TagHelper
     {
         public string ValidAttribute { get; set; }
-        public string InvalidNoGetAttribute { set { } }
-        public string InvalidNoSetAttribute { get { return string.Empty; } }
+        public string InvalidNoGetAttribute
+        {
+            set { }
+        }
+        public string InvalidNoSetAttribute
+        {
+            get { return string.Empty; }
+        }
     }
 
     public class NonPublicAccessorTagHelper : TagHelper

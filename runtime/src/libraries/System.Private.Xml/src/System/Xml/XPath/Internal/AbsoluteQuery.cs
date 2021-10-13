@@ -29,6 +29,9 @@ namespace MS.Internal.Xml.XPath
             return null;
         }
 
-        public override XPathNodeIterator Clone() { return new AbsoluteQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new AbsoluteQuery(this);
+        }
     }
 }

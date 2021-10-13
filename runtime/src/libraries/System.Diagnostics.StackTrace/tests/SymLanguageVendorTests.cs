@@ -16,7 +16,10 @@ namespace System.Diagnostics.SymbolStore.Tests
         [Fact]
         public void Microsoft_Get_ReturnsExpected()
         {
-            Assert.Equal(new Guid("994b45c4-e6e9-11d2-903f-00c04fa302a1"), SymLanguageVendor.Microsoft);
+            Assert.Equal(
+                new Guid("994b45c4-e6e9-11d2-903f-00c04fa302a1"),
+                SymLanguageVendor.Microsoft
+            );
         }
     }
 }

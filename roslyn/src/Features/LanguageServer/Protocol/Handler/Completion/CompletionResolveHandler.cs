@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// <summary>
     /// Handle a completion resolve request to add description.
     /// </summary>
-    internal class CompletionResolveHandler : IRequestHandler<LSP.CompletionItem, LSP.CompletionItem>
+    internal class CompletionResolveHandler
+        : IRequestHandler<LSP.CompletionItem, LSP.CompletionItem>
     {
         private readonly CompletionListCache _completionListCache;
 
@@ -33,42 +34,62 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             _completionListCache = completionListCache;
         }
 
-        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.CompletionItem request)
-            => GetCompletionListCacheEntry(request)?.TextDocument;
+        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.CompletionItem request) =>
+            GetCompletionListCacheEntry(request)?.TextDocument;
 
-        public async Task<LSP.CompletionItem> HandleRequestAsync(LSP.CompletionItem completionItem, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.CompletionItem> HandleRequestAsync(
+            LSP.CompletionItem completionItem,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document == null)
             {
-                context.TraceInformation("No associated document found for the provided completion item.");
+                context.TraceInformation(
+                    "No associated document found for the provided completion item."
+                );
                 return completionItem;
             }
 
-            var completionService = document.Project.LanguageServices.GetRequiredService<CompletionService>();
+            var completionService =
+                document.Project.LanguageServices.GetRequiredService<CompletionService>();
             var cacheEntry = GetCompletionListCacheEntry(completionItem);
             if (cacheEntry == null)
             {
                 // Don't have a cache associated with this completion item, cannot resolve.
-                context.TraceInformation("No cache entry found for the provided completion item at resolve time.");
+                context.TraceInformation(
+                    "No cache entry found for the provided completion item at resolve time."
+                );
                 return completionItem;
             }
 
             var list = cacheEntry.CompletionList;
 
             // Find the matching completion item in the completion list
-            var selectedItem = list.Items.FirstOrDefault(cachedCompletionItem => MatchesLSPCompletionItem(completionItem, cachedCompletionItem));
+            var selectedItem = list.Items.FirstOrDefault(
+                cachedCompletionItem =>
+                    MatchesLSPCompletionItem(completionItem, cachedCompletionItem)
+            );
             if (selectedItem == null)
             {
                 return completionItem;
             }
 
-            var description = await completionService.GetDescriptionAsync(document, selectedItem, cancellationToken).ConfigureAwait(false);
+            var description = await completionService.GetDescriptionAsync(
+                    document,
+                    selectedItem,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (completionItem is LSP.VSCompletionItem vsCompletionItem)
             {
-                vsCompletionItem.Description = new ClassifiedTextElement(description.TaggedParts
-                    .Select(tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)));
+                vsCompletionItem.Description = new ClassifiedTextElement(
+                    description.TaggedParts.Select(
+                        tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)
+                    )
+                );
             }
 
             // We compute the TextEdit resolves for complex text edits (e.g. override and partial
@@ -81,29 +102,59 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Contract.ThrowIfTrue(completionItem.InsertText != null);
                 Contract.ThrowIfTrue(completionItem.TextEdit != null);
 
-                var snippetsSupported = context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport ?? false;
+                var snippetsSupported =
+                    context.ClientCapabilities.TextDocument?.Completion?.CompletionItem?.SnippetSupport
+                    ?? false;
 
                 completionItem.TextEdit = await GenerateTextEditAsync(
-                    document, completionService, selectedItem, snippetsSupported, cancellationToken).ConfigureAwait(false);
+                        document,
+                        completionService,
+                        selectedItem,
+                        snippetsSupported,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             completionItem.Detail = description.TaggedParts.GetFullText();
             return completionItem;
         }
 
-        private static bool MatchesLSPCompletionItem(LSP.CompletionItem lspCompletionItem, CompletionItem completionItem)
+        private static bool MatchesLSPCompletionItem(
+            LSP.CompletionItem lspCompletionItem,
+            CompletionItem completionItem
+        )
         {
-            if (!lspCompletionItem.Label.StartsWith(completionItem.DisplayTextPrefix, StringComparison.Ordinal))
+            if (
+                !lspCompletionItem.Label.StartsWith(
+                    completionItem.DisplayTextPrefix,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return false;
             }
 
-            if (!lspCompletionItem.Label.EndsWith(completionItem.DisplayTextSuffix, StringComparison.Ordinal))
+            if (
+                !lspCompletionItem.Label.EndsWith(
+                    completionItem.DisplayTextSuffix,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return false;
             }
 
-            if (string.Compare(lspCompletionItem.Label, completionItem.DisplayTextPrefix.Length, completionItem.DisplayText, 0, completionItem.DisplayText.Length, StringComparison.Ordinal) != 0)
+            if (
+                string.Compare(
+                    lspCompletionItem.Label,
+                    completionItem.DisplayTextPrefix.Length,
+                    completionItem.DisplayText,
+                    0,
+                    completionItem.DisplayText.Length,
+                    StringComparison.Ordinal
+                ) != 0
+            )
             {
                 return false;
             }
@@ -118,12 +169,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CompletionService completionService,
             CompletionItem selectedItem,
             bool snippetsSupported,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var documentText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
             var completionChange = await completionService.GetChangeAsync(
-                document, selectedItem, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    document,
+                    selectedItem,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
             var completionChangeSpan = completionChange.TextChange.Span;
             var newText = completionChange.TextChange.NewText;
             Contract.ThrowIfNull(newText);
@@ -158,17 +214,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             return textEdit;
         }
 
-        private CompletionListCache.CacheEntry? GetCompletionListCacheEntry(LSP.CompletionItem request)
+        private CompletionListCache.CacheEntry? GetCompletionListCacheEntry(
+            LSP.CompletionItem request
+        )
         {
             Contract.ThrowIfNull(request.Data);
             var resolveData = ((JToken)request.Data).ToObject<CompletionResolveData>();
             if (resolveData?.ResultId == null)
             {
-                Contract.Fail("Result id should always be provided when resolving a completion item we returned.");
+                Contract.Fail(
+                    "Result id should always be provided when resolving a completion item we returned."
+                );
                 return null;
             }
 
-            var cacheEntry = _completionListCache.GetCachedCompletionList(resolveData.ResultId.Value);
+            var cacheEntry = _completionListCache.GetCachedCompletionList(
+                resolveData.ResultId.Value
+            );
             if (cacheEntry == null)
             {
                 // No cache for associated completion item. Log some telemetry so we can understand how frequently this actually happens.

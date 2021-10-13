@@ -15,7 +15,12 @@ namespace Microsoft.AspNetCore.Mvc
         public void ApplyTo_JsonPatchDocument_ModelState()
         {
             // Arrange
-            var operation = new Operation<Customer>("add", "CustomerId", from: null, value: "TestName");
+            var operation = new Operation<Customer>(
+                "add",
+                "CustomerId",
+                from: null,
+                value: "TestName"
+            );
             var patchDoc = new JsonPatchDocument<Customer>();
             patchDoc.Operations.Add(operation);
 
@@ -26,14 +31,22 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             var error = Assert.Single(modelState["Customer"].Errors);
-            Assert.Equal("The target location specified by path segment 'CustomerId' was not found.", error.ErrorMessage);
+            Assert.Equal(
+                "The target location specified by path segment 'CustomerId' was not found.",
+                error.ErrorMessage
+            );
         }
 
         [Fact]
         public void ApplyTo_JsonPatchDocument_PrefixModelState()
         {
             // Arrange
-            var operation = new Operation<Customer>("add", "CustomerId", from: null, value: "TestName");
+            var operation = new Operation<Customer>(
+                "add",
+                "CustomerId",
+                from: null,
+                value: "TestName"
+            );
             var patchDoc = new JsonPatchDocument<Customer>();
             patchDoc.Operations.Add(operation);
 
@@ -44,7 +57,10 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             var error = Assert.Single(modelState["jsonpatch.Customer"].Errors);
-            Assert.Equal("The target location specified by path segment 'CustomerId' was not found.", error.ErrorMessage);
+            Assert.Equal(
+                "The target location specified by path segment 'CustomerId' was not found.",
+                error.ErrorMessage
+            );
         }
 
         [Fact]
@@ -52,7 +68,9 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var patch = new JsonPatchDocument<Customer>();
-            patch.Operations.Add(new Operation<Customer>("replace", "/CustomerName", null, "James"));
+            patch.Operations.Add(
+                new Operation<Customer>("replace", "/CustomerName", null, "James")
+            );
             var model = new Customer();
             var modelState = new ModelStateDictionary();
 
@@ -65,15 +83,28 @@ namespace Microsoft.AspNetCore.Mvc
         }
 
         [Theory]
-        [InlineData("test", "/CustomerName", null, "James", "The current value '' at path 'CustomerName' is not equal to the test value 'James'.")]
-        [InlineData("invalid", "/CustomerName", null, "James", "Invalid JsonPatch operation 'invalid'.")]
+        [InlineData(
+            "test",
+            "/CustomerName",
+            null,
+            "James",
+            "The current value '' at path 'CustomerName' is not equal to the test value 'James'."
+        )]
+        [InlineData(
+            "invalid",
+            "/CustomerName",
+            null,
+            "James",
+            "Invalid JsonPatch operation 'invalid'."
+        )]
         [InlineData("", "/CustomerName", null, "James", "Invalid JsonPatch operation ''.")]
         public void ApplyTo_InvalidPatchOperations_AddsModelStateError(
             string op,
             string path,
             string from,
             string value,
-            string error)
+            string error
+        )
         {
             // Arrange
             var patch = new JsonPatchDocument<Customer>();

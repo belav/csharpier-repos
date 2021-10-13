@@ -12,9 +12,8 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
         public int FaultedCount { get; set; }
         public int TargetConnectionCount { get; set; }
 
-
         // Set by agent.
-        public int PeakConnections { get; set;}
+        public int PeakConnections { get; set; }
 
         public StatusInformation Add(StatusInformation value)
         {

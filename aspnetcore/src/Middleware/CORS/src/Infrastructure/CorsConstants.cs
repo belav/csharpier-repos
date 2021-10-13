@@ -29,37 +29,44 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
         /// <summary>
         /// The Access-Control-Request-Method request header.
         /// </summary>
-        public static readonly string AccessControlRequestMethod = HeaderNames.AccessControlRequestMethod;
+        public static readonly string AccessControlRequestMethod =
+            HeaderNames.AccessControlRequestMethod;
 
         /// <summary>
         /// The Access-Control-Request-Headers request header.
         /// </summary>
-        public static readonly string AccessControlRequestHeaders = HeaderNames.AccessControlRequestHeaders;
+        public static readonly string AccessControlRequestHeaders =
+            HeaderNames.AccessControlRequestHeaders;
 
         /// <summary>
         /// The Access-Control-Allow-Origin response header.
         /// </summary>
-        public static readonly string AccessControlAllowOrigin = HeaderNames.AccessControlAllowOrigin;
+        public static readonly string AccessControlAllowOrigin =
+            HeaderNames.AccessControlAllowOrigin;
 
         /// <summary>
         /// The Access-Control-Allow-Headers response header.
         /// </summary>
-        public static readonly string AccessControlAllowHeaders = HeaderNames.AccessControlAllowHeaders;
+        public static readonly string AccessControlAllowHeaders =
+            HeaderNames.AccessControlAllowHeaders;
 
         /// <summary>
         /// The Access-Control-Expose-Headers response header.
         /// </summary>
-        public static readonly string AccessControlExposeHeaders = HeaderNames.AccessControlExposeHeaders;
+        public static readonly string AccessControlExposeHeaders =
+            HeaderNames.AccessControlExposeHeaders;
 
         /// <summary>
         /// The Access-Control-Allow-Methods response header.
         /// </summary>
-        public static readonly string AccessControlAllowMethods = HeaderNames.AccessControlAllowMethods;
+        public static readonly string AccessControlAllowMethods =
+            HeaderNames.AccessControlAllowMethods;
 
         /// <summary>
         /// The Access-Control-Allow-Credentials response header.
         /// </summary>
-        public static readonly string AccessControlAllowCredentials = HeaderNames.AccessControlAllowCredentials;
+        public static readonly string AccessControlAllowCredentials =
+            HeaderNames.AccessControlAllowCredentials;
 
         /// <summary>
         /// The Access-Control-Max-Age response header.

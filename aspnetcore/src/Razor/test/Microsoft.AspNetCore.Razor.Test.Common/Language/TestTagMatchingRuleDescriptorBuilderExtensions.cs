@@ -7,7 +7,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     public static class TestTagMatchingRuleDescriptorBuilderExtensions
     {
-        public static TagMatchingRuleDescriptorBuilder RequireTagName(this TagMatchingRuleDescriptorBuilder builder, string tagName)
+        public static TagMatchingRuleDescriptorBuilder RequireTagName(
+            this TagMatchingRuleDescriptorBuilder builder,
+            string tagName
+        )
         {
             if (builder == null)
             {
@@ -19,7 +22,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return builder;
         }
 
-        public static TagMatchingRuleDescriptorBuilder RequireParentTag(this TagMatchingRuleDescriptorBuilder builder, string parentTag)
+        public static TagMatchingRuleDescriptorBuilder RequireParentTag(
+            this TagMatchingRuleDescriptorBuilder builder,
+            string parentTag
+        )
         {
             if (builder == null)
             {
@@ -31,7 +37,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return builder;
         }
 
-        public static TagMatchingRuleDescriptorBuilder RequireTagStructure(this TagMatchingRuleDescriptorBuilder builder, TagStructure tagStructure)
+        public static TagMatchingRuleDescriptorBuilder RequireTagStructure(
+            this TagMatchingRuleDescriptorBuilder builder,
+            TagStructure tagStructure
+        )
         {
             if (builder == null)
             {
@@ -43,7 +52,10 @@ namespace Microsoft.AspNetCore.Razor.Language
             return builder;
         }
 
-        public static TagMatchingRuleDescriptorBuilder AddDiagnostic(this TagMatchingRuleDescriptorBuilder builder, RazorDiagnostic diagnostic)
+        public static TagMatchingRuleDescriptorBuilder AddDiagnostic(
+            this TagMatchingRuleDescriptorBuilder builder,
+            RazorDiagnostic diagnostic
+        )
         {
             if (builder == null)
             {
@@ -57,7 +69,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public static TagMatchingRuleDescriptorBuilder RequireAttributeDescriptor(
             this TagMatchingRuleDescriptorBuilder builder,
-            Action<RequiredAttributeDescriptorBuilder> configure)
+            Action<RequiredAttributeDescriptorBuilder> configure
+        )
         {
             if (builder == null)
             {

@@ -22,10 +22,7 @@ namespace System.CommandLine.Tests.Invocation
 
             await command.InvokeAsync("-h", console);
 
-            console.Out
-                   .ToString()
-                   .Should()
-                   .Contain(theHelpText);
+            console.Out.ToString().Should().Contain(theHelpText);
         }
 
         [Fact]
@@ -39,10 +36,7 @@ namespace System.CommandLine.Tests.Invocation
 
             command.Invoke("-h", console);
 
-            console.Out
-                   .ToString()
-                   .Should()
-                   .Contain(theHelpText);
+            console.Out.ToString().Should().Contain(theHelpText);
         }
 
         [Fact]
@@ -79,16 +73,18 @@ namespace System.CommandLine.Tests.Invocation
             var wasCalled = false;
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create(() =>
-            {
-                wasCalled = true;
-                throw new Exception("oops!");
+            rootCommand.Handler = CommandHandler.Create(
+                () =>
+                {
+                    wasCalled = true;
+                    throw new Exception("oops!");
 
-                // Help the compiler pick a CommandHandler.Create overload.
+                    // Help the compiler pick a CommandHandler.Create overload.
 #pragma warning disable CS0162 // Unreachable code detected
-                return 0;
+                    return 0;
 #pragma warning restore CS0162
-            });
+                }
+            );
 
             var resultCode = await rootCommand.InvokeAsync("");
 
@@ -102,16 +98,18 @@ namespace System.CommandLine.Tests.Invocation
             var wasCalled = false;
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create(() =>
-            {
-                wasCalled = true;
-                throw new Exception("oops!");
+            rootCommand.Handler = CommandHandler.Create(
+                () =>
+                {
+                    wasCalled = true;
+                    throw new Exception("oops!");
 
-                // Help the compiler pick a CommandHandler.Create overload.
+                    // Help the compiler pick a CommandHandler.Create overload.
 #pragma warning disable CS0162 // Unreachable code detected
-                return 0;
+                    return 0;
 #pragma warning restore CS0162
-            });
+                }
+            );
 
             var resultCode = rootCommand.Invoke("");
 
@@ -124,10 +122,12 @@ namespace System.CommandLine.Tests.Invocation
         {
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create<InvocationContext>(context =>
-            {
-                context.ExitCode = 123;
-            });
+            rootCommand.Handler = CommandHandler.Create<InvocationContext>(
+                context =>
+                {
+                    context.ExitCode = 123;
+                }
+            );
 
             var resultCode = await rootCommand.InvokeAsync("");
 
@@ -139,10 +139,12 @@ namespace System.CommandLine.Tests.Invocation
         {
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create<InvocationContext>(context =>
-            {
-                context.ExitCode = 123;
-            });
+            rootCommand.Handler = CommandHandler.Create<InvocationContext>(
+                context =>
+                {
+                    context.ExitCode = 123;
+                }
+            );
 
             int resultCode = rootCommand.Invoke("");
 

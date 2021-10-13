@@ -13,7 +13,6 @@ namespace System.Data
     [Serializable]
     public abstract class TypedTableBase<T> : DataTable, IEnumerable<T> where T : DataRow
     {
-
         /// <summary>
         /// Default constructor for generic TypedTableBase.
         /// Will be called by generated Typed DataSet classes and is not for public use.
@@ -27,8 +26,10 @@ namespace System.Data
         /// </summary>
         /// <param name="info">SerializationInfo containing data to construct the object.</param>
         /// <param name="context">The streaming context for the object being deserialized.</param>
-        protected TypedTableBase(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
-            : base(info, context) { }
+        protected TypedTableBase(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        ) : base(info, context) { }
 
         /// <summary>
         /// This property returns an enumerator of T for the TypedTable.  Note, this could
@@ -53,6 +54,5 @@ namespace System.Data
             EnumerableRowCollection<T> erc = new EnumerableRowCollection<T>(this);
             return erc.Cast<TResult>();
         }
-
     }
 }

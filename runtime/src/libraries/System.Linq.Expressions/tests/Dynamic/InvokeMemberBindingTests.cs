@@ -14,19 +14,26 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideInvokeMemberBinding : InvokeMemberBinder
         {
-            public MinimumOverrideInvokeMemberBinding(string name, bool ignoreCase, CallInfo callInfo)
-                : base(name, ignoreCase, callInfo)
-            {
-            }
+            public MinimumOverrideInvokeMemberBinding(
+                string name,
+                bool ignoreCase,
+                CallInfo callInfo
+            ) : base(name, ignoreCase, callInfo) { }
 
             public override DynamicMetaObject FallbackInvokeMember(
-                DynamicMetaObject target, DynamicMetaObject[] args, DynamicMetaObject errorSuggestion)
+                DynamicMetaObject target,
+                DynamicMetaObject[] args,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
 
             public override DynamicMetaObject FallbackInvoke(
-                DynamicMetaObject target, DynamicMetaObject[] args, DynamicMetaObject errorSuggestion)
+                DynamicMetaObject target,
+                DynamicMetaObject[] args,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
@@ -38,7 +45,8 @@ namespace System.Dynamic.Tests
 
             public string TellType<T>(T item) => typeof(T).Name;
 
-            public bool TryParseInt(string value, out int result) => int.TryParse(value, out result);
+            public bool TryParseInt(string value, out int result) =>
+                int.TryParse(value, out result);
         }
 
         private class TestDerivedClass : TestBaseClass
@@ -48,10 +56,10 @@ namespace System.Dynamic.Tests
 
         public static IEnumerable<object[]> ObjectArguments()
         {
-            yield return new object[] {0};
-            yield return new object[] {""};
-            yield return new object[] {new Uri("http://example.net/")};
-            yield return new[] {new object()};
+            yield return new object[] { 0 };
+            yield return new object[] { "" };
+            yield return new object[] { new Uri("http://example.net/") };
+            yield return new[] { new object() };
         }
 
         [Theory, MemberData(nameof(ObjectArguments))]
@@ -146,20 +154,28 @@ namespace System.Dynamic.Tests
         {
             CallInfo info = new CallInfo(0);
             AssertExtensions.Throws<ArgumentNullException>(
-                "name", () => new MinimumOverrideInvokeMemberBinding(null, false, info));
+                "name",
+                () => new MinimumOverrideInvokeMemberBinding(null, false, info)
+            );
         }
 
         [Fact]
         public void NullCallInfo()
         {
             AssertExtensions.Throws<ArgumentNullException>(
-                "callInfo", () => new MinimumOverrideInvokeMemberBinding("Name", false, null));
+                "callInfo",
+                () => new MinimumOverrideInvokeMemberBinding("Name", false, null)
+            );
         }
 
         [Fact]
         public void NameStored()
         {
-            var binding = new MinimumOverrideInvokeMemberBinding("My test name", false, new CallInfo(0));
+            var binding = new MinimumOverrideInvokeMemberBinding(
+                "My test name",
+                false,
+                new CallInfo(0)
+            );
             Assert.Equal("My test name", binding.Name);
         }
 
@@ -167,7 +183,9 @@ namespace System.Dynamic.Tests
         public void TypeIsObject()
         {
             Assert.Equal(
-                typeof(object), new MinimumOverrideInvokeMemberBinding("name", true, new CallInfo(0)).ReturnType);
+                typeof(object),
+                new MinimumOverrideInvokeMemberBinding("name", true, new CallInfo(0)).ReturnType
+            );
         }
 
         [Fact]
@@ -187,22 +205,41 @@ namespace System.Dynamic.Tests
 
 #if FEATURE_COMPILE // We're not testing compilation, but we do need Reflection.Emit for the test
 
-        private static dynamic GetObjectWithNonIndexerParameterProperty(bool hasGetter, bool hasSetter)
+        private static dynamic GetObjectWithNonIndexerParameterProperty(
+            bool hasGetter,
+            bool hasSetter
+        )
         {
-            TypeBuilder typeBuild = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("TestAssembly"), AssemblyBuilderAccess.RunAndCollect)
+            TypeBuilder typeBuild = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("TestAssembly"),
+                    AssemblyBuilderAccess.RunAndCollect
+                )
                 .DefineDynamicModule("TestModule")
                 .DefineType("TestType", TypeAttributes.Public);
-            FieldBuilder field = typeBuild.DefineField("_value", typeof(int), FieldAttributes.Private);
+            FieldBuilder field = typeBuild.DefineField(
+                "_value",
+                typeof(int),
+                FieldAttributes.Private
+            );
 
             PropertyBuilder property = typeBuild.DefineProperty(
-                "ItemProp", PropertyAttributes.None, typeof(int), new[] { typeof(int) });
+                "ItemProp",
+                PropertyAttributes.None,
+                typeof(int),
+                new[] { typeof(int) }
+            );
 
             if (hasGetter)
             {
                 MethodBuilder getter = typeBuild.DefineMethod(
                     "get_ItemProp",
-                    MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                    | MethodAttributes.PrivateScope, typeof(int), new[] { typeof(int) });
+                    MethodAttributes.Public
+                        | MethodAttributes.SpecialName
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.PrivateScope,
+                    typeof(int),
+                    new[] { typeof(int) }
+                );
 
                 ILGenerator ilGen = getter.GetILGenerator();
                 ilGen.Emit(OpCodes.Ldarg_0);
@@ -214,11 +251,15 @@ namespace System.Dynamic.Tests
 
             if (hasSetter)
             {
-
                 MethodBuilder setter = typeBuild.DefineMethod(
                     "set_ItemProp",
-                    MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig
-                    | MethodAttributes.PrivateScope, typeof(void), new[] { typeof(int), typeof(int) });
+                    MethodAttributes.Public
+                        | MethodAttributes.SpecialName
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.PrivateScope,
+                    typeof(void),
+                    new[] { typeof(int), typeof(int) }
+                );
 
                 ILGenerator ilGen = setter.GetILGenerator();
                 ilGen.Emit(OpCodes.Ldarg_0);
@@ -247,7 +288,9 @@ namespace System.Dynamic.Tests
         public void NonIndexerParameterizedGetterAndSetterIndexAccess()
         {
             dynamic d = GetObjectWithNonIndexerParameterProperty(true, true);
-            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() => d.ItemProp[2] = 3);
+            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(
+                () => d.ItemProp[2] = 3
+            );
             // Similar message to CS1545 advises about getter and setter methods.
             Assert.Contains("get_ItemProp", ex.Message);
             Assert.Contains("set_ItemProp", ex.Message);
@@ -258,7 +301,9 @@ namespace System.Dynamic.Tests
         {
             dynamic d = GetObjectWithNonIndexerParameterProperty(true, false);
             int dump;
-            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() => dump = d.ItemProp[2]);
+            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(
+                () => dump = d.ItemProp[2]
+            );
             // Similar message to CS1546 advises about getter method.
             Assert.Contains("get_ItemProp", ex.Message);
         }
@@ -267,7 +312,9 @@ namespace System.Dynamic.Tests
         public void NonIndexerParameterizedSetterOnlyIndexAccess()
         {
             dynamic d = GetObjectWithNonIndexerParameterProperty(false, true);
-            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() => d.ItemProp[2] = 9);
+            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(
+                () => d.ItemProp[2] = 9
+            );
             // Similar message to CS1546 advises about setter method.
             Assert.Contains("set_ItemProp", ex.Message);
         }
@@ -288,20 +335,65 @@ namespace System.Dynamic.Tests
 
             public int GetValue(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) => 6;
 
-            public int GetValue(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) => 7;
-
-            public int GetValue(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) => 8;
+            public int GetValue(
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6
+            ) => 7;
 
             public int GetValue(
-                int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) => 9;
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6,
+                int arg7
+            ) => 8;
 
             public int GetValue(
-                int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) =>
-                10;
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6,
+                int arg7,
+                int arg8
+            ) => 9;
 
             public int GetValue(
-                int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9,
-                int arg10) => 11;
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6,
+                int arg7,
+                int arg8,
+                int arg9
+            ) => 10;
+
+            public int GetValue(
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6,
+                int arg7,
+                int arg8,
+                int arg9,
+                int arg10
+            ) => 11;
             public int GetValue2() => 0;
 
             public int GetValue2(int arg0) => 1;
@@ -316,20 +408,65 @@ namespace System.Dynamic.Tests
 
             public int GetValue2(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) => 6;
 
-            public int GetValue2(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) => 7;
-
-            public int GetValue2(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7) => 8;
+            public int GetValue2(
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6
+            ) => 7;
 
             public int GetValue2(
-                int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8) => 9;
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6,
+                int arg7
+            ) => 8;
 
             public int GetValue2(
-                int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9) =>
-                10;
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6,
+                int arg7,
+                int arg8
+            ) => 9;
 
             public int GetValue2(
-                int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9,
-                int arg10) => 11;
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6,
+                int arg7,
+                int arg8,
+                int arg9
+            ) => 10;
+
+            public int GetValue2(
+                int arg0,
+                int arg1,
+                int arg2,
+                int arg3,
+                int arg4,
+                int arg5,
+                int arg6,
+                int arg7,
+                int arg8,
+                int arg9,
+                int arg10
+            ) => 11;
         }
 
         [Fact]
@@ -366,12 +503,17 @@ namespace System.Dynamic.Tests
         {
             object[] testObjects = Enumerable.Range(0, 4)
                 .Select(
-                    _ => Activator.CreateInstance(
-                        AssemblyBuilder
-                            .DefineDynamicAssembly(new AssemblyName("TestAssembly"), AssemblyBuilderAccess.RunAndCollect)
-                            .DefineDynamicModule("TestModule")
-                            .DefineType("TestType", TypeAttributes.Public)
-                            .CreateType()))
+                    _ =>
+                        Activator.CreateInstance(
+                            AssemblyBuilder.DefineDynamicAssembly(
+                                    new AssemblyName("TestAssembly"),
+                                    AssemblyBuilderAccess.RunAndCollect
+                                )
+                                .DefineDynamicModule("TestModule")
+                                .DefineType("TestType", TypeAttributes.Public)
+                                .CreateType()
+                        )
+                )
                 .ToArray();
             return testObjects.SelectMany(i => testObjects.Select(j => new[] { i, j }));
         }
@@ -398,10 +540,13 @@ namespace System.Dynamic.Tests
                 set
                 {
                     _delegate = value;
-                    OutDelegate = value == null ? default(OutAction) : (out TResult arg) =>
-                    {
-                        arg = value();
-                    };
+                    OutDelegate =
+                        value == null
+                            ? default(OutAction)
+                            : (out TResult arg) =>
+                              {
+                                  arg = value();
+                              };
                 }
             }
 
@@ -411,10 +556,7 @@ namespace System.Dynamic.Tests
         [Fact]
         public void InvokeFuncMember()
         {
-            dynamic d = new FuncWrapper<int>
-            {
-                Delegate = () => 2
-            };
+            dynamic d = new FuncWrapper<int> { Delegate = () => 2 };
             int result = d.Delegate();
             Assert.Equal(2, result);
             result = 0;

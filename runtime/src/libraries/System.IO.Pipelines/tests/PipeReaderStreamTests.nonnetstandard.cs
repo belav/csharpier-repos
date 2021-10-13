@@ -15,7 +15,10 @@ namespace System.IO.Pipelines.Tests
     {
         public delegate Task<int> ReadAsyncDelegate(Stream stream, byte[] data);
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public async Task DisposingPipeReaderStreamCompletesPipeReader(bool dataInPipe)
@@ -31,7 +34,13 @@ namespace System.IO.Pipelines.Tests
 
             var readerCompletedTask = new TaskCompletionSource<bool>();
 #pragma warning disable CS0618 // Type or member is obsolete
-            pipe.Writer.OnReaderCompleted(delegate { readerCompletedTask.SetResult(true); }, null);
+            pipe.Writer.OnReaderCompleted(
+                delegate
+                {
+                    readerCompletedTask.SetResult(true);
+                },
+                null
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             // Call Dispose{Async} multiple times; all should succeed.
@@ -45,7 +54,9 @@ namespace System.IO.Pipelines.Tests
             await readerCompletedTask.Task;
 
             // Unable to read after disposing.
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await s.ReadAsync(new byte[1]));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await s.ReadAsync(new byte[1])
+            );
 
             // Writes still work.
             await pipe.Writer.WriteAsync(new byte[1]);
@@ -53,7 +64,9 @@ namespace System.IO.Pipelines.Tests
 
         [Theory]
         [MemberData(nameof(ReadCalls))]
-        public async Task ReadingFromPipeReaderStreamReadsFromUnderlyingPipeReader(ReadAsyncDelegate readAsync)
+        public async Task ReadingFromPipeReaderStreamReadsFromUnderlyingPipeReader(
+            ReadAsyncDelegate readAsync
+        )
         {
             byte[] helloBytes = Encoding.ASCII.GetBytes("Hello World");
             var pipe = new Pipe();
@@ -147,7 +160,9 @@ namespace System.IO.Pipelines.Tests
 
             Stream stream = pipeReader.AsStream();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await stream.ReadAsync(new byte[5]));
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await stream.ReadAsync(new byte[5])
+            );
         }
 
         [Fact]
@@ -159,12 +174,26 @@ namespace System.IO.Pipelines.Tests
             Assert.False(stream.CanWrite);
             Assert.False(stream.CanSeek);
             Assert.True(stream.CanRead);
-            Assert.Throws<NotSupportedException>(() => { long length = stream.Length; });
-            Assert.Throws<NotSupportedException>(() => { long position = stream.Position; });
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    long length = stream.Length;
+                }
+            );
+            Assert.Throws<NotSupportedException>(
+                () =>
+                {
+                    long position = stream.Position;
+                }
+            );
             Assert.Throws<NotSupportedException>(() => stream.Seek(0, SeekOrigin.Begin));
             Assert.Throws<NotSupportedException>(() => stream.Write(new byte[10], 0, 10));
-            await Assert.ThrowsAsync<NotSupportedException>(() => stream.WriteAsync(new byte[10], 0, 10));
-            await Assert.ThrowsAsync<NotSupportedException>(() => stream.WriteAsync(new byte[10]).AsTask());
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => stream.WriteAsync(new byte[10], 0, 10)
+            );
+            await Assert.ThrowsAsync<NotSupportedException>(
+                () => stream.WriteAsync(new byte[10]).AsTask()
+            );
 
             pipe.Reader.Complete();
             pipe.Writer.Complete();
@@ -249,20 +278,23 @@ namespace System.IO.Pipelines.Tests
         {
             var pipe = new Pipe();
 
-            int consumedSum = 0, producedSum = 0;
-            Task consumer = Task.Run(() =>
-            {
-                using (Stream reader = pipe.Reader.AsStream())
+            int consumedSum = 0,
+                producedSum = 0;
+            Task consumer = Task.Run(
+                () =>
                 {
-                    int b;
-                    while ((b = reader.ReadByte()) != -1)
+                    using (Stream reader = pipe.Reader.AsStream())
                     {
-                        consumedSum += b;
-                    }
+                        int b;
+                        while ((b = reader.ReadByte()) != -1)
+                        {
+                            consumedSum += b;
+                        }
 
-                    Assert.Equal(-1, reader.ReadByte());
+                        Assert.Equal(-1, reader.ReadByte());
+                    }
                 }
-            });
+            );
 
             var rand = new Random();
             using (Stream writer = pipe.Writer.AsStream())
@@ -290,15 +322,9 @@ namespace System.IO.Pipelines.Tests
 
         public class BuggyPipeReader : PipeReader
         {
-            public override void AdvanceTo(SequencePosition consumed)
-            {
+            public override void AdvanceTo(SequencePosition consumed) { }
 
-            }
-
-            public override void AdvanceTo(SequencePosition consumed, SequencePosition examined)
-            {
-
-            }
+            public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) { }
 
             public override void CancelPendingRead()
             {
@@ -310,7 +336,9 @@ namespace System.IO.Pipelines.Tests
                 throw new NotImplementedException();
             }
 
-            public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+            public override ValueTask<ReadResult> ReadAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 // Returns a ReadResult with no buffer and with IsCompleted and IsCancelled false
                 return default;
@@ -324,12 +352,18 @@ namespace System.IO.Pipelines.Tests
 
         public class NotImplementedPipeReader : PipeReader
         {
-            public override void AdvanceTo(SequencePosition consumed) => throw new NotImplementedException();
-            public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) => throw new NotImplementedException();
+            public override void AdvanceTo(SequencePosition consumed) =>
+                throw new NotImplementedException();
+            public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) =>
+                throw new NotImplementedException();
             public override void CancelPendingRead() => throw new NotImplementedException();
-            public override void Complete(Exception exception = null) => throw new NotImplementedException();
-            public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
-            public override bool TryRead(out ReadResult result) => throw new NotImplementedException();
+            public override void Complete(Exception exception = null) =>
+                throw new NotImplementedException();
+            public override ValueTask<ReadResult> ReadAsync(
+                CancellationToken cancellationToken = default
+            ) => throw new NotImplementedException();
+            public override bool TryRead(out ReadResult result) =>
+                throw new NotImplementedException();
         }
 
         public class TestPipeReader : PipeReader
@@ -357,10 +391,14 @@ namespace System.IO.Pipelines.Tests
                 throw new NotImplementedException();
             }
 
-            public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+            public override ValueTask<ReadResult> ReadAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 ReadCalled = true;
-                return new ValueTask<ReadResult>(new ReadResult(default, isCanceled: false, isCompleted: true));
+                return new ValueTask<ReadResult>(
+                    new ReadResult(default, isCanceled: false, isCompleted: true)
+                );
             }
 
             public override bool TryRead(out ReadResult result)

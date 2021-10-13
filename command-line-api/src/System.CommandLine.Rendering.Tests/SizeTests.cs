@@ -12,14 +12,18 @@ namespace System.CommandLine.Rendering.Tests
         public void Width_cannot_be_negative()
         {
             Action createSize = () => new Size(-1, 0);
-            createSize.Should().Throw<ArgumentOutOfRangeException>().Where(exception => exception.ParamName == "width");
+            createSize.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .Where(exception => exception.ParamName == "width");
         }
 
         [Fact]
         public void Height_cannot_be_negative()
         {
             Action createSize = () => new Size(0, -1);
-            createSize.Should().Throw<ArgumentOutOfRangeException>().Where(exception => exception.ParamName == "height");
+            createSize.Should()
+                .Throw<ArgumentOutOfRangeException>()
+                .Where(exception => exception.ParamName == "height");
         }
 
         [Fact]

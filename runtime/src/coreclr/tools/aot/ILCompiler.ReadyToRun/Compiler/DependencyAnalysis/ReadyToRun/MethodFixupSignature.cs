@@ -24,16 +24,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly bool _isInstantiatingStub;
 
         public MethodFixupSignature(
-            ReadyToRunFixupKind fixupKind, 
+            ReadyToRunFixupKind fixupKind,
             MethodWithToken method,
-            bool isInstantiatingStub)
+            bool isInstantiatingStub
+        )
         {
             _fixupKind = fixupKind;
             _method = method;
             _isInstantiatingStub = isInstantiatingStub;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)method.Method.Context;
+            CompilerTypeSystemContext compilerContext =
+                (CompilerTypeSystemContext)method.Method.Context;
             compilerContext.EnsureLoadableMethod(method.Method);
             compilerContext.EnsureLoadableType(_method.OwningType);
 
@@ -52,7 +54,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (relocsOnly)
             {
                 // Method fixup signature doesn't contain any direct relocs
-                return new ObjectData(data: Array.Empty<byte>(), relocs: null, alignment: 0, definedSymbols: null);
+                return new ObjectData(
+                    data: Array.Empty<byte>(),
+                    relocs: null,
+                    alignment: 0,
+                    definedSymbols: null
+                );
             }
 
             ObjectDataSignatureBuilder dataBuilder = new ObjectDataSignatureBuilder();
@@ -61,10 +68,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Optimize some of the fixups into a more compact form
             ReadyToRunFixupKind fixupKind = _fixupKind;
             bool optimized = false;
-            if (!_method.Unboxing && !_isInstantiatingStub && _method.ConstrainedType == null &&
-                fixupKind == ReadyToRunFixupKind.MethodEntry)
+            if (
+                !_method.Unboxing
+                && !_isInstantiatingStub
+                && _method.ConstrainedType == null
+                && fixupKind == ReadyToRunFixupKind.MethodEntry
+            )
             {
-                if (!_method.Method.HasInstantiation && !_method.Method.OwningType.HasInstantiation && !_method.Method.OwningType.IsArray)
+                if (
+                    !_method.Method.HasInstantiation
+                    && !_method.Method.OwningType.HasInstantiation
+                    && !_method.Method.OwningType.IsArray
+                )
                 {
                     if (_method.Token.TokenType == CorTokenType.mdtMethodDef)
                     {
@@ -83,23 +98,46 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
 
             MethodWithToken method = _method;
-            
+
             if (factory.CompilationModuleGroup.VersionsWithMethodBody(method.Method))
             {
                 if (method.Token.TokenType == CorTokenType.mdtMethodSpec)
                 {
-                    method = new MethodWithToken(method.Method, factory.SignatureContext.GetModuleTokenForMethod(method.Method, throwIfNotFound: false), method.ConstrainedType, unboxing: _method.Unboxing, null);
+                    method = new MethodWithToken(
+                        method.Method,
+                        factory.SignatureContext.GetModuleTokenForMethod(
+                            method.Method,
+                            throwIfNotFound: false
+                        ),
+                        method.ConstrainedType,
+                        unboxing: _method.Unboxing,
+                        null
+                    );
                 }
                 else if (!optimized && (method.Token.TokenType == CorTokenType.mdtMemberRef))
                 {
                     if (method.Method.OwningType.GetTypeDefinition() is EcmaType)
                     {
-                        method = new MethodWithToken(method.Method, factory.SignatureContext.GetModuleTokenForMethod(method.Method, throwIfNotFound: false), method.ConstrainedType, unboxing: _method.Unboxing, null);
+                        method = new MethodWithToken(
+                            method.Method,
+                            factory.SignatureContext.GetModuleTokenForMethod(
+                                method.Method,
+                                throwIfNotFound: false
+                            ),
+                            method.ConstrainedType,
+                            unboxing: _method.Unboxing,
+                            null
+                        );
                     }
                 }
             }
 
-            SignatureContext innerContext = dataBuilder.EmitFixup(factory, fixupKind, method.Token.Module, factory.SignatureContext);
+            SignatureContext innerContext = dataBuilder.EmitFixup(
+                factory,
+                fixupKind,
+                method.Token.Module,
+                factory.SignatureContext
+            );
 
             if (optimized && method.Token.TokenType == CorTokenType.mdtMethodDef)
             {
@@ -111,7 +149,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
             else
             {
-                dataBuilder.EmitMethodSignature(method, enforceDefEncoding: false, enforceOwningType: false, innerContext, _isInstantiatingStub);
+                dataBuilder.EmitMethodSignature(
+                    method,
+                    enforceDefEncoding: false,
+                    enforceOwningType: false,
+                    innerContext,
+                    _isInstantiatingStub
+                );
             }
 
             return dataBuilder.ToObjectData();

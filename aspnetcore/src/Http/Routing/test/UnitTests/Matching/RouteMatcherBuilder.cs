@@ -20,7 +20,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
         public RouteMatcherBuilder()
         {
-            _constraintResolver = new DefaultInlineConstraintResolver(Options.Create(new RouteOptions()), new TestServiceProvider());
+            _constraintResolver = new DefaultInlineConstraintResolver(
+                Options.Create(new RouteOptions()),
+                new TestServiceProvider()
+            );
             _endpoints = new List<RouteEndpoint>();
         }
 
@@ -33,8 +36,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             var selector = new DefaultEndpointSelector();
 
-            var groups = _endpoints
-                .GroupBy(e => (e.Order, e.RoutePattern.InboundPrecedence, e.RoutePattern.RawText))
+            var groups = _endpoints.GroupBy(
+                    e => (e.Order, e.RoutePattern.InboundPrecedence, e.RoutePattern.RawText)
+                )
                 .OrderBy(g => g.Key.Order)
                 .ThenBy(g => g.Key.InboundPrecedence);
 
@@ -61,13 +65,16 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     }
                 }
 
-                routes.Add(new Route(
-                    new SelectorRouter(selector, candidates),
-                    endpoint.RoutePattern.RawText,
-                    defaults,
-                    new Dictionary<string, object>(),
-                    new RouteValueDictionary(),
-                    _constraintResolver));
+                routes.Add(
+                    new Route(
+                        new SelectorRouter(selector, candidates),
+                        endpoint.RoutePattern.RawText,
+                        defaults,
+                        new Dictionary<string, object>(),
+                        new RouteValueDictionary(),
+                        _constraintResolver
+                    )
+                );
             }
 
             return new RouteMatcher(routes);
@@ -99,7 +106,10 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 // This is needed due to a quirk of our tests - they reuse the endpoint feature.
                 routeContext.HttpContext.SetEndpoint(null);
 
-                await _selector.SelectAsync(routeContext.HttpContext, new CandidateSet(_candidates, _values, _scores));
+                await _selector.SelectAsync(
+                    routeContext.HttpContext,
+                    new CandidateSet(_candidates, _values, _scores)
+                );
                 if (routeContext.HttpContext.GetEndpoint() != null)
                 {
                     routeContext.Handler = (_) => Task.CompletedTask;

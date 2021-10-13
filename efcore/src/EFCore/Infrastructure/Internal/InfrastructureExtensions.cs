@@ -28,16 +28,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure.Internal
         {
             var internalServiceProvider = accessor.Instance;
 
-            var service = internalServiceProvider.GetService(typeof(TService))
-                ?? internalServiceProvider.GetService<IDbContextOptions>()
-                    ?.Extensions.OfType<CoreOptionsExtension>().FirstOrDefault()
-                    ?.ApplicationServiceProvider
-                    ?.GetService(typeof(TService));
+            var service =
+                internalServiceProvider.GetService(typeof(TService))
+                ?? internalServiceProvider.GetService<IDbContextOptions>()?.Extensions.OfType<CoreOptionsExtension>()
+                    .FirstOrDefault()?.ApplicationServiceProvider?.GetService(typeof(TService));
 
             if (service == null)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.NoProviderConfiguredFailedToResolveService(typeof(TService).DisplayName()));
+                    CoreStrings.NoProviderConfiguredFailedToResolveService(
+                        typeof(TService).DisplayName()
+                    )
+                );
             }
 
             return (TService)service;

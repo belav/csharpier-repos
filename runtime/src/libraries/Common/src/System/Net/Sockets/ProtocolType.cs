@@ -14,12 +14,10 @@ namespace System.Net.Internals
     enum ProtocolType
     {
         IP = 0, // dummy for IP
-
         IPv6HopByHopOptions = 0,
         Icmp = 1, // control message protocol
         Igmp = 2, // group management protocol
         Ggp = 3, // gateway^2 (deprecated)
-
         IPv4 = 4,
         Tcp = 6, // tcp
         Pup = 12, // pup
@@ -34,13 +32,11 @@ namespace System.Net.Internals
         IPv6NoNextHeader = 59, // IPv6NoNextHeader
         IPv6DestinationOptions = 60, // IPv6DestinationOptions
         ND = 77, // UNOFFICIAL net disk proto
-        Raw = 255,  // raw IP packet
-
+        Raw = 255, // raw IP packet
         Unspecified = 0,
         Ipx = 1000,
         Spx = 1256,
         SpxII = 1257,
-
         Unknown = -1, // unknown protocol type
     }
 }

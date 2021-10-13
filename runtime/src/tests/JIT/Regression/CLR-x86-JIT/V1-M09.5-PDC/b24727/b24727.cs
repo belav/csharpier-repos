@@ -28,9 +28,18 @@ interface Inter3
 
 struct Struct1 : Inter1, Inter2, Inter3
 {
-    int Inter1.Return42() { return (42); }
-    int Inter2.Return42() { return (42); }
-    int Inter3.Return0() { return (0); }
+    int Inter1.Return42()
+    {
+        return (42);
+    }
+    int Inter2.Return42()
+    {
+        return (42);
+    }
+    int Inter3.Return0()
+    {
+        return (0);
+    }
 }
 
 public class Test
@@ -41,6 +50,5 @@ public class Test
 
         return (i1.Return42() - ((Inter2)i1).Return42() - ((Inter3)i1).Return0()) + 100;
     }
-
 }
 

@@ -23,36 +23,49 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
         {
             var context = new DefaultHttpContext();
             var auth = MockAuth(context);
-            auth.Setup(a => a.SignInAsync(context, IdentityConstants.ApplicationScheme,
-                It.IsAny<ClaimsPrincipal>(),
-                It.IsAny<AuthenticationProperties>())).Returns(Task.FromResult(0)).Verifiable();
+            auth.Setup(
+                    a =>
+                        a.SignInAsync(
+                            context,
+                            IdentityConstants.ApplicationScheme,
+                            It.IsAny<ClaimsPrincipal>(),
+                            It.IsAny<AuthenticationProperties>()
+                        )
+                )
+                .Returns(Task.FromResult(0))
+                .Verifiable();
             // REVIEW: is persistant mocking broken
             //It.Is<AuthenticationProperties>(v => v.IsPersistent == isPersistent))).Returns(Task.FromResult(0)).Verifiable();
             var contextAccessor = new Mock<IHttpContextAccessor>();
             contextAccessor.Setup(a => a.HttpContext).Returns(context);
-            var services = new ServiceCollection()
-                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
+            var services = new ServiceCollection().AddSingleton<IConfiguration>(
+                    new ConfigurationBuilder().Build()
+                )
                 .AddLogging()
                 .AddSingleton(contextAccessor.Object);
 
             services.AddIdentity<PocoUser, PocoRole>();
             services.AddSingleton<IUserStore<PocoUser>, InMemoryStore<PocoUser, PocoRole>>();
             services.AddSingleton<IRoleStore<PocoRole>, InMemoryStore<PocoUser, PocoRole>>();
-            
+
             var app = new ApplicationBuilder(services.BuildServiceProvider());
 
             // Act
-            var user = new PocoUser
-            {
-                UserName = "Yolo"
-            };
+            var user = new PocoUser { UserName = "Yolo" };
             const string password = "[PLACEHOLDER]-1a";
             var userManager = app.ApplicationServices.GetRequiredService<UserManager<PocoUser>>();
-            var signInManager = app.ApplicationServices.GetRequiredService<SignInManager<PocoUser>>();
+            var signInManager = app.ApplicationServices.GetRequiredService<
+                SignInManager<PocoUser>
+            >();
 
             IdentityResultAssert.IsSuccess(await userManager.CreateAsync(user, password));
 
-            var result = await signInManager.PasswordSignInAsync(user, password, isPersistent, false);
+            var result = await signInManager.PasswordSignInAsync(
+                user,
+                password,
+                isPersistent,
+                false
+            );
 
             // Assert
             Assert.True(result.Succeeded);
@@ -69,9 +82,14 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             var externalIdentity = new ClaimsIdentity();
             externalIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, externalId));
             var externalPrincipal = new ClaimsPrincipal(externalIdentity);
-            var externalLogin = new ExternalLoginInfo(externalPrincipal, authScheme, externalId, "displayname")
-            {
-                AuthenticationTokens = new[] {
+            var externalLogin = new ExternalLoginInfo(
+                externalPrincipal,
+                authScheme,
+                externalId,
+                "displayname"
+            ) {
+                AuthenticationTokens = new[]
+                {
                     new AuthenticationToken { Name = "refresh_token", Value = "refresh" },
                     new AuthenticationToken { Name = "access_token", Value = "access" }
                 }
@@ -79,11 +97,13 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
 
             var context = new DefaultHttpContext();
             var auth = MockAuth(context);
-            auth.Setup(a => a.AuthenticateAsync(context, It.IsAny<string>())).Returns(Task.FromResult(AuthenticateResult.NoResult()));
+            auth.Setup(a => a.AuthenticateAsync(context, It.IsAny<string>()))
+                .Returns(Task.FromResult(AuthenticateResult.NoResult()));
             var contextAccessor = new Mock<IHttpContextAccessor>();
             contextAccessor.Setup(a => a.HttpContext).Returns(context);
-            var services = new ServiceCollection()
-                .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
+            var services = new ServiceCollection().AddSingleton<IConfiguration>(
+                    new ConfigurationBuilder().Build()
+                )
                 .AddLogging()
                 .AddSingleton(contextAccessor.Object);
             services.AddIdentity<PocoUser, PocoRole>();
@@ -93,24 +113,37 @@ namespace Microsoft.AspNetCore.Identity.InMemory.Test
             var app = new ApplicationBuilder(services.BuildServiceProvider());
 
             // Act
-            var user = new PocoUser
-            {
-                UserName = "Yolo"
-            };
+            var user = new PocoUser { UserName = "Yolo" };
             var userManager = app.ApplicationServices.GetRequiredService<UserManager<PocoUser>>();
-            var signInManager = app.ApplicationServices.GetRequiredService<SignInManager<PocoUser>>();
+            var signInManager = app.ApplicationServices.GetRequiredService<
+                SignInManager<PocoUser>
+            >();
 
             IdentityResultAssert.IsSuccess(await userManager.CreateAsync(user));
-            IdentityResultAssert.IsSuccess(await userManager.AddLoginAsync(user, new UserLoginInfo(authScheme, externalId, "whatever")));
-            IdentityResultAssert.IsSuccess(await signInManager.UpdateExternalAuthenticationTokensAsync(externalLogin));
-            Assert.Equal("refresh", await userManager.GetAuthenticationTokenAsync(user, authScheme, "refresh_token"));
-            Assert.Equal("access", await userManager.GetAuthenticationTokenAsync(user, authScheme, "access_token"));
+            IdentityResultAssert.IsSuccess(
+                await userManager.AddLoginAsync(
+                    user,
+                    new UserLoginInfo(authScheme, externalId, "whatever")
+                )
+            );
+            IdentityResultAssert.IsSuccess(
+                await signInManager.UpdateExternalAuthenticationTokensAsync(externalLogin)
+            );
+            Assert.Equal(
+                "refresh",
+                await userManager.GetAuthenticationTokenAsync(user, authScheme, "refresh_token")
+            );
+            Assert.Equal(
+                "access",
+                await userManager.GetAuthenticationTokenAsync(user, authScheme, "access_token")
+            );
         }
 
         private Mock<IAuthenticationService> MockAuth(HttpContext context)
         {
             var auth = new Mock<IAuthenticationService>();
-            context.RequestServices = new ServiceCollection().AddSingleton(auth.Object).BuildServiceProvider();
+            context.RequestServices = new ServiceCollection().AddSingleton(auth.Object)
+                .BuildServiceProvider();
             return auth;
         }
     }

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         [Fact, WorkItem(846042, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/846042")]
         public void MovedOutsideOfMethod1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -34,7 +35,8 @@ class C
         <AS:0>Goo(1);</AS:0>
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -57,7 +59,8 @@ class C
         [Fact]
         public void MovedOutsideOfMethod2()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -65,7 +68,8 @@ class C
         <AS:0>Goo(1);</AS:0>
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -88,7 +92,8 @@ class C
         [Fact]
         public void MovedOutsideOfLambda1()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -96,7 +101,8 @@ class C
         Action a = () => { <AS:0>Goo(1);</AS:0> };
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -115,7 +121,8 @@ class C
         [Fact]
         public void MovedOutsideOfLambda2()
         {
-            var src1 = @"
+            var src1 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -124,7 +131,8 @@ class C
         Action b = () => { Goo(2); };
     }
 }";
-            var src2 = @"
+            var src2 =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -142,9 +150,12 @@ class C
 
         [Theory]
         [CombinatorialData]
-        public async Task TrackingService_GetLatestSpansAsync(bool scheduleInitialTrackingBeforeOpenDoc)
+        public async Task TrackingService_GetLatestSpansAsync(
+            bool scheduleInitialTrackingBeforeOpenDoc
+        )
         {
-            var source1 = "class C { void F() => G(1); void G(int a) => System.Console.WriteLine(1); }";
+            var source1 =
+                "class C { void F() => G(1); void G(int a) => System.Console.WriteLine(1); }";
             var source2 = "class D { }";
 
             using var workspace = new TestWorkspace();
@@ -156,24 +167,40 @@ class C
 
             var encService = new MockEditAndContinueWorkspaceService();
 
-            encService.GetBaseActiveStatementSpansImpl = (_, documentIds) => ImmutableArray.Create(
+            encService.GetBaseActiveStatementSpansImpl = (_, documentIds) =>
                 ImmutableArray.Create(
-                    (span11, ActiveStatementFlags.IsNonLeafFrame),
-                    (span12, ActiveStatementFlags.IsLeafFrame)),
-                ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>.Empty);
+                    ImmutableArray.Create(
+                        (span11, ActiveStatementFlags.IsNonLeafFrame),
+                        (span12, ActiveStatementFlags.IsLeafFrame)
+                    ),
+                    ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>.Empty
+                );
 
-            encService.GetAdjustedActiveStatementSpansImpl = (document, _) => document.Name switch
-            {
-                "1.cs" => ImmutableArray.Create(
-                    (span21, ActiveStatementFlags.IsNonLeafFrame),
-                    (span22, ActiveStatementFlags.IsLeafFrame)),
-                "2.cs" => ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>.Empty,
-                _ => throw ExceptionUtilities.Unreachable
-            };
+            encService.GetAdjustedActiveStatementSpansImpl = (document, _) =>
+                document.Name switch
+                {
+                    "1.cs"
+                      => ImmutableArray.Create(
+                          (span21, ActiveStatementFlags.IsNonLeafFrame),
+                          (span22, ActiveStatementFlags.IsLeafFrame)
+                      ),
+                    "2.cs" => ImmutableArray<(LinePositionSpan, ActiveStatementFlags)>.Empty,
+                    _ => throw ExceptionUtilities.Unreachable
+                };
 
-            var testDocument1 = new TestHostDocument(text: source1, displayName: "1.cs", exportProvider: workspace.ExportProvider);
-            var testDocument2 = new TestHostDocument(text: source2, displayName: "2.cs", exportProvider: workspace.ExportProvider);
-            workspace.AddTestProject(new TestHostProject(workspace, documents: new[] { testDocument1, testDocument2 }));
+            var testDocument1 = new TestHostDocument(
+                text: source1,
+                displayName: "1.cs",
+                exportProvider: workspace.ExportProvider
+            );
+            var testDocument2 = new TestHostDocument(
+                text: source2,
+                displayName: "2.cs",
+                exportProvider: workspace.ExportProvider
+            );
+            workspace.AddTestProject(
+                new TestHostProject(workspace, documents: new[] { testDocument1, testDocument2 })
+            );
 
             // opens the documents
             var textBuffer1 = testDocument1.GetTextBuffer();
@@ -185,21 +212,31 @@ class C
             var document2 = project.Documents.Single(d => d.Name == "2.cs");
             var snapshot1 = textBuffer1.CurrentSnapshot;
             var snapshot2 = textBuffer2.CurrentSnapshot;
-            Assert.Same(snapshot1, document1.GetTextSynchronously(CancellationToken.None).FindCorrespondingEditorTextSnapshot());
-            Assert.Same(snapshot2, document2.GetTextSynchronously(CancellationToken.None).FindCorrespondingEditorTextSnapshot());
+            Assert.Same(
+                snapshot1,
+                document1.GetTextSynchronously(CancellationToken.None)
+                    .FindCorrespondingEditorTextSnapshot()
+            );
+            Assert.Same(
+                snapshot2,
+                document2.GetTextSynchronously(CancellationToken.None)
+                    .FindCorrespondingEditorTextSnapshot()
+            );
 
-            var trackingSession = new ActiveStatementTrackingService.TrackingSession(workspace, encService);
+            var trackingSession = new ActiveStatementTrackingService.TrackingSession(
+                workspace,
+                encService
+            );
 
             if (scheduleInitialTrackingBeforeOpenDoc)
             {
                 await trackingSession.TrackActiveSpansAsync(solution, CancellationToken.None);
 
                 var spans1 = trackingSession.Test_GetTrackingSpans();
-                AssertEx.Equal(new[]
-                {
-                    $"V0 →←@[10..15): IsNonLeafFrame",
-                    $"V0 →←@[20..25): IsLeafFrame"
-                }, spans1[document1.Id].Select(s => $"{s.Span}: {s.Flags}"));
+                AssertEx.Equal(
+                    new[] { $"V0 →←@[10..15): IsNonLeafFrame", $"V0 →←@[20..25): IsLeafFrame" },
+                    spans1[document1.Id].Select(s => $"{s.Span}: {s.Flags}")
+                );
 
                 var spans2 = await trackingSession.GetSpansAsync(document1, CancellationToken.None);
                 AssertEx.Equal(new[] { "[10..15)", "[20..25)" }, spans2.Select(s => s.ToString()));
@@ -208,36 +245,47 @@ class C
                 Assert.Empty(spans3);
             }
 
-            var spans4 = await trackingSession.GetAdjustedTrackingSpansAsync(document1, snapshot1, CancellationToken.None);
-            AssertEx.Equal(new[]
-            {
-                $"V0 →←@[11..16): IsNonLeafFrame",
-                $"V0 →←@[21..26): IsLeafFrame"
-            }, spans4.Select(s => $"{s.Span}: {s.Flags}"));
+            var spans4 = await trackingSession.GetAdjustedTrackingSpansAsync(
+                document1,
+                snapshot1,
+                CancellationToken.None
+            );
+            AssertEx.Equal(
+                new[] { $"V0 →←@[11..16): IsNonLeafFrame", $"V0 →←@[21..26): IsLeafFrame" },
+                spans4.Select(s => $"{s.Span}: {s.Flags}")
+            );
 
-            AssertEx.Empty(await trackingSession.GetAdjustedTrackingSpansAsync(document2, snapshot2, CancellationToken.None));
+            AssertEx.Empty(
+                await trackingSession.GetAdjustedTrackingSpansAsync(
+                    document2,
+                    snapshot2,
+                    CancellationToken.None
+                )
+            );
 
             if (!scheduleInitialTrackingBeforeOpenDoc)
             {
                 await trackingSession.TrackActiveSpansAsync(solution, CancellationToken.None);
 
                 var spans5 = trackingSession.Test_GetTrackingSpans();
-                AssertEx.Equal(new[]
-                {
-                    $"V0 →←@[11..16): IsNonLeafFrame",
-                    $"V0 →←@[21..26): IsLeafFrame"
-                }, spans5[document1.Id].Select(s => $"{s.Span}: {s.Flags}"));
+                AssertEx.Equal(
+                    new[] { $"V0 →←@[11..16): IsNonLeafFrame", $"V0 →←@[21..26): IsLeafFrame" },
+                    spans5[document1.Id].Select(s => $"{s.Span}: {s.Flags}")
+                );
             }
 
             // we are not able to determine active statements in a document:
             encService.GetAdjustedActiveStatementSpansImpl = (_, _) => default;
 
-            var spans6 = await trackingSession.GetAdjustedTrackingSpansAsync(document1, snapshot1, CancellationToken.None);
-            AssertEx.Equal(new[]
-            {
-                $"V0 →←@[11..16): IsNonLeafFrame",
-                $"V0 →←@[21..26): IsLeafFrame"
-            }, spans6.Select(s => $"{s.Span}: {s.Flags}"));
+            var spans6 = await trackingSession.GetAdjustedTrackingSpansAsync(
+                document1,
+                snapshot1,
+                CancellationToken.None
+            );
+            AssertEx.Equal(
+                new[] { $"V0 →←@[11..16): IsNonLeafFrame", $"V0 →←@[21..26): IsLeafFrame" },
+                spans6.Select(s => $"{s.Span}: {s.Flags}")
+            );
         }
     }
 }

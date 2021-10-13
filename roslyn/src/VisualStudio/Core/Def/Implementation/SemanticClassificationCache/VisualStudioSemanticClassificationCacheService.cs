@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
 {
     [ExportWorkspaceService(typeof(ISemanticClassificationCacheService), ServiceLayer.Host), Shared]
     internal class VisualStudioSemanticClassificationCacheService
-        : ForegroundThreadAffinitizedObject, ISemanticClassificationCacheService
+        : ForegroundThreadAffinitizedObject,
+          ISemanticClassificationCacheService
     {
         private readonly VisualStudioWorkspaceImpl _workspace;
 
@@ -29,8 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioSemanticClassificationCacheService(
             VisualStudioWorkspaceImpl workspace,
-            IThreadingContext threadingContext)
-            : base(threadingContext)
+            IThreadingContext threadingContext
+        ) : base(threadingContext)
         {
             _workspace = workspace;
         }
@@ -39,9 +40,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
             DocumentKey documentKey,
             TextSpan textSpan,
             Checksum checksum,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 // We don't do anything if we fail to get the external process.  That's the case when something has gone
@@ -50,9 +53,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
                 return default;
             }
 
-            var classifiedSpans = await client.TryInvokeAsync<IRemoteSemanticClassificationCacheService, SerializableClassifiedSpans?>(
-                (service, cancellationToken) => service.GetCachedSemanticClassificationsAsync(documentKey, textSpan, checksum, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            var classifiedSpans = await client.TryInvokeAsync<
+                IRemoteSemanticClassificationCacheService,
+                SerializableClassifiedSpans?
+            >(
+                    (service, cancellationToken) =>
+                        service.GetCachedSemanticClassificationsAsync(
+                            documentKey,
+                            textSpan,
+                            checksum,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!classifiedSpans.HasValue || classifiedSpans.Value == null)
                 return default;

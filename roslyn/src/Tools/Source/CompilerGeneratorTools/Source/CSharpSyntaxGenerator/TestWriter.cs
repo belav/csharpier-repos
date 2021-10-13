@@ -12,9 +12,11 @@ namespace CSharpSyntaxGenerator
 {
     internal class TestWriter : AbstractFileWriter
     {
-        private TestWriter(TextWriter writer, Tree tree, CancellationToken cancellationToken = default) : base(writer, tree, cancellationToken)
-        {
-        }
+        private TestWriter(
+            TextWriter writer,
+            Tree tree,
+            CancellationToken cancellationToken = default
+        ) : base(writer, tree, cancellationToken) { }
 
         public static void Write(TextWriter writer, Tree tree)
         {
@@ -28,7 +30,9 @@ namespace CSharpSyntaxGenerator
             WriteLine("using Microsoft.CodeAnalysis.CSharp.Syntax;");
             WriteLine("using Roslyn.Utilities;");
             WriteLine("using Xunit;");
-            WriteLine("using InternalSyntaxFactory = Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax.SyntaxFactory;");
+            WriteLine(
+                "using InternalSyntaxFactory = Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax.SyntaxFactory;"
+            );
             WriteLine();
 
             WriteLine("namespace Microsoft.CodeAnalysis.CSharp.UnitTests");
@@ -140,11 +144,15 @@ namespace CSharpSyntaxGenerator
                     string typeName;
                     if (isGreen)
                     {
-                        typeName = internalNamespace + field.Type.Replace("<", "<" + csharpNamespace);
+                        typeName =
+                            internalNamespace + field.Type.Replace("<", "<" + csharpNamespace);
                     }
                     else
                     {
-                        typeName = (field.Type == "SyntaxList<SyntaxToken>") ? "SyntaxTokenList" : field.Type;
+                        typeName =
+                            (field.Type == "SyntaxList<SyntaxToken>")
+                                ? "SyntaxTokenList"
+                                : field.Type;
                     }
                     Write($"new {typeName}()");
                 }
@@ -159,11 +167,15 @@ namespace CSharpSyntaxGenerator
                     }
                     else if (kind == "StringLiteralToken")
                     {
-                        Write($"{syntaxFactory}.Literal({leadingTrivia}\"string\", \"string\"{trailingTrivia})");
+                        Write(
+                            $"{syntaxFactory}.Literal({leadingTrivia}\"string\", \"string\"{trailingTrivia})"
+                        );
                     }
                     else if (kind == "CharacterLiteralToken")
                     {
-                        Write($"{syntaxFactory}.Literal({leadingTrivia}\"a\", 'a'{trailingTrivia})");
+                        Write(
+                            $"{syntaxFactory}.Literal({leadingTrivia}\"a\", 'a'{trailingTrivia})"
+                        );
                     }
                     else if (kind == "NumericLiteralToken")
                     {
@@ -176,7 +188,9 @@ namespace CSharpSyntaxGenerator
                 }
                 else if (field.Type == "CSharpSyntaxNode")
                 {
-                    Write($"{syntaxFactory}.IdentifierName({syntaxFactory}.Identifier(\"{field.Name}\"))");
+                    Write(
+                        $"{syntaxFactory}.IdentifierName({syntaxFactory}.Identifier(\"{field.Name}\"))"
+                    );
                 }
                 else
                 {
@@ -259,11 +273,15 @@ namespace CSharpSyntaxGenerator
                     {
                         if (!isGreen)
                         {
-                            WriteLine($"Assert.Equal(SyntaxKind.{ChooseValidKind(field)}, node.{field.Name}.Kind());");
+                            WriteLine(
+                                $"Assert.Equal(SyntaxKind.{ChooseValidKind(field)}, node.{field.Name}.Kind());"
+                            );
                         }
                         else
                         {
-                            WriteLine($"Assert.Equal(SyntaxKind.{ChooseValidKind(field)}, node.{field.Name}.Kind);");
+                            WriteLine(
+                                $"Assert.Equal(SyntaxKind.{ChooseValidKind(field)}, node.{field.Name}.Kind);"
+                            );
                         }
                     }
                     else
@@ -273,9 +291,10 @@ namespace CSharpSyntaxGenerator
                             WriteLine($"Assert.NotEqual(default, node.{field.Name});");
                         }
                         else if (
-                            field.Type == "SyntaxTokenList" ||
-                            field.Type.StartsWith("SyntaxList<") ||
-                            field.Type.StartsWith("SeparatedSyntaxList<"))
+                            field.Type == "SyntaxTokenList"
+                            || field.Type.StartsWith("SyntaxList<")
+                            || field.Type.StartsWith("SeparatedSyntaxList<")
+                        )
                         {
                             WriteLine($"Assert.Equal(default, node.{field.Name});");
                         }

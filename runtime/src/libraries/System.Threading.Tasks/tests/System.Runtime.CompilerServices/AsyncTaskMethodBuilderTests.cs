@@ -47,6 +47,7 @@ namespace System.Threading.Tasks.Tests
                 avmb2.SetResult();
                 Assert.Equal(0, trackedContext.TrackedCount);
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -65,6 +66,7 @@ namespace System.Threading.Tasks.Tests
                 var avmb = AsyncVoidMethodBuilder.Create();
                 avmb.SetResult();
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -100,6 +102,7 @@ namespace System.Threading.Tasks.Tests
                 atmb.SetResult();
                 Assert.Equal(0, trackedContext.TrackedCount);
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -135,6 +138,7 @@ namespace System.Threading.Tasks.Tests
                 atmb.SetResult("async");
                 Assert.Equal(0, trackedContext.TrackedCount);
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -146,7 +150,12 @@ namespace System.Threading.Tasks.Tests
         public static void TaskMethodBuilder_IncorrectUsage()
         {
             var atmb = new AsyncTaskMethodBuilder();
-            Assert.Throws<ArgumentNullException>(() => { atmb.SetException(null); });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    atmb.SetException(null);
+                }
+            );
         }
 
         // Incorrect usage for AsyncVoidMethodBuilder
@@ -154,7 +163,12 @@ namespace System.Threading.Tasks.Tests
         public static void VoidMethodBuilder_IncorrectUsage()
         {
             var avmb = AsyncVoidMethodBuilder.Create();
-            Assert.Throws<ArgumentNullException>(() => { avmb.SetException(null); });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    avmb.SetException(null);
+                }
+            );
             avmb.SetResult();
         }
 
@@ -164,8 +178,18 @@ namespace System.Threading.Tasks.Tests
         {
             var atmb = AsyncTaskMethodBuilder.Create();
             atmb.SetResult();
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetResult(); });
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetException(new Exception()); });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetResult();
+                }
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetException(new Exception());
+                }
+            );
         }
 
         // Incorrect usage for AsyncTaskMethodBuilder<T>
@@ -173,7 +197,12 @@ namespace System.Threading.Tasks.Tests
         public static void TaskMethodBuilderT_IncorrectUsage()
         {
             var atmb = new AsyncTaskMethodBuilder<int>();
-            Assert.Throws<ArgumentNullException>(() => { atmb.SetException(null); });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    atmb.SetException(null);
+                }
+            );
         }
 
         // Creating a task builder <T>, building it, completing it successfully, and making sure it can't be reset
@@ -182,8 +211,18 @@ namespace System.Threading.Tasks.Tests
         {
             var atmb = AsyncTaskMethodBuilder<int>.Create();
             atmb.SetResult(43);
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetResult(44); });
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetException(new Exception()); });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetResult(44);
+                }
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetException(new Exception());
+                }
+            );
         }
 
         // Creating a task builder, building it, completing it faulted, and making sure it can't be reset
@@ -195,9 +234,22 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal(TaskStatus.WaitingForActivation, t.Status);
             atmb.SetException(new InvalidCastException());
             Assert.Equal(TaskStatus.Faulted, t.Status);
-            Assert.True(t.Exception.InnerException is InvalidCastException, "Wrong exception found in builder (ATMB, build then fault)");
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetResult(); });
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetException(new Exception()); });
+            Assert.True(
+                t.Exception.InnerException is InvalidCastException,
+                "Wrong exception found in builder (ATMB, build then fault)"
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetResult();
+                }
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetException(new Exception());
+                }
+            );
         }
 
         // Creating a task builder, completing it faulted, building it, and making sure it can't be reset
@@ -208,9 +260,22 @@ namespace System.Threading.Tasks.Tests
             atmb.SetException(new InvalidCastException());
             var t = atmb.Task;
             Assert.Equal(TaskStatus.Faulted, t.Status);
-            Assert.True(t.Exception.InnerException is InvalidCastException, "Wrong exception found in builder (ATMB, fault then build)");
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetResult(); });
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetException(new Exception()); });
+            Assert.True(
+                t.Exception.InnerException is InvalidCastException,
+                "Wrong exception found in builder (ATMB, fault then build)"
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetResult();
+                }
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetException(new Exception());
+                }
+            );
         }
 
         // Test cancellation
@@ -223,13 +288,25 @@ namespace System.Threading.Tasks.Tests
             var t = atmb.Task;
             Assert.Equal(TaskStatus.Canceled, t.Status);
 
-            OperationCanceledException caught = Assert.Throws<OperationCanceledException>(() =>
-            {
-                t.GetAwaiter().GetResult();
-            });
+            OperationCanceledException caught = Assert.Throws<OperationCanceledException>(
+                () =>
+                {
+                    t.GetAwaiter().GetResult();
+                }
+            );
             Assert.Same(oce, caught);
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetResult(); });
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetException(new Exception()); });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetResult();
+                }
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetException(new Exception());
+                }
+            );
         }
 
         [Fact]
@@ -271,6 +348,7 @@ namespace System.Threading.Tasks.Tests
                 Assert.IsType<InvalidOperationException>(trackedContext.PostExceptions[2]);
                 Assert.IsType<InvalidCastException>(trackedContext.PostExceptions[3]);
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -287,8 +365,18 @@ namespace System.Threading.Tasks.Tests
             atmb.SetException(new InvalidCastException());
             Assert.Equal(TaskStatus.Faulted, t.Status);
             Assert.IsType<InvalidCastException>(t.Exception.InnerException);
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetResult(44); });
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetException(new Exception()); });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetResult(44);
+                }
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetException(new Exception());
+                }
+            );
         }
 
         // Creating a task builder, completing it faulted, building it, and making sure it can't be reset
@@ -300,8 +388,18 @@ namespace System.Threading.Tasks.Tests
             var t = atmb.Task;
             Assert.Equal(TaskStatus.Faulted, t.Status);
             Assert.IsType<InvalidCastException>(t.Exception.InnerException);
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetResult(44); });
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetException(new Exception()); });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetResult(44);
+                }
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetException(new Exception());
+                }
+            );
         }
 
         // Test cancellation
@@ -314,13 +412,25 @@ namespace System.Threading.Tasks.Tests
             var t = atmb.Task;
             Assert.Equal(TaskStatus.Canceled, t.Status);
 
-            OperationCanceledException e = Assert.Throws<OperationCanceledException>(() =>
-            {
-                t.GetAwaiter().GetResult();
-            });
+            OperationCanceledException e = Assert.Throws<OperationCanceledException>(
+                () =>
+                {
+                    t.GetAwaiter().GetResult();
+                }
+            );
             Assert.Same(oce, e);
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetResult(44); });
-            Assert.Throws<InvalidOperationException>(() => { atmb.SetException(new Exception()); });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetResult(44);
+                }
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    atmb.SetException(new Exception());
+                }
+            );
         }
 
         [Fact]
@@ -368,7 +478,10 @@ namespace System.Threading.Tasks.Tests
         [InlineData(5, true)]
         [InlineData(-5, false)]
         [InlineData(42, false)]
-        public static void TaskMethodBuilderInt32_UsesCompletedCache(int result, bool shouldBeCached)
+        public static void TaskMethodBuilderInt32_UsesCompletedCache(
+            int result,
+            bool shouldBeCached
+        )
         {
             TaskMethodBuilderT_UsesCompletedCache(result, shouldBeCached);
         }
@@ -384,7 +497,10 @@ namespace System.Threading.Tasks.Tests
         [Theory]
         [InlineData((string)null, true)]
         [InlineData("test", false)]
-        public static void TaskMethodBuilderRef_UsesCompletedCache(string result, bool shouldBeCached)
+        public static void TaskMethodBuilderRef_UsesCompletedCache(
+            string result,
+            bool shouldBeCached
+        )
         {
             TaskMethodBuilderT_UsesCompletedCache(result, shouldBeCached);
         }
@@ -409,8 +525,14 @@ namespace System.Threading.Tasks.Tests
         public static void Tcs_ValidateFaultedTask()
         {
             var tcs = new TaskCompletionSource<int>();
-            try { throw new InvalidOperationException(); }
-            catch (Exception e) { tcs.SetException(e); }
+            try
+            {
+                throw new InvalidOperationException();
+            }
+            catch (Exception e)
+            {
+                tcs.SetException(e);
+            }
             ValidateFaultedTask(tcs.Task);
         }
 
@@ -418,8 +540,14 @@ namespace System.Threading.Tasks.Tests
         public static void TaskMethodBuilder_ValidateFaultedTask()
         {
             var atmb = AsyncTaskMethodBuilder.Create();
-            try { throw new InvalidOperationException(); }
-            catch (Exception e) { atmb.SetException(e); }
+            try
+            {
+                throw new InvalidOperationException();
+            }
+            catch (Exception e)
+            {
+                atmb.SetException(e);
+            }
             ValidateFaultedTask(atmb.Task);
         }
 
@@ -427,8 +555,14 @@ namespace System.Threading.Tasks.Tests
         public static void TaskMethodBuilderT_ValidateFaultedTask()
         {
             var atmbtr = AsyncTaskMethodBuilder<object>.Create();
-            try { throw new InvalidOperationException(); }
-            catch (Exception e) { atmbtr.SetException(e); }
+            try
+            {
+                throw new InvalidOperationException();
+            }
+            catch (Exception e)
+            {
+                atmbtr.SetException(e);
+            }
             ValidateFaultedTask(atmbtr.Task);
         }
 
@@ -441,11 +575,18 @@ namespace System.Threading.Tasks.Tests
                 var tosc = new TrackOperationsSynchronizationContext();
                 SynchronizationContext.SetSynchronizationContext(tosc);
                 var avmb = AsyncVoidMethodBuilder.Create();
-                try { throw new InvalidOperationException(); }
-                catch (Exception exc) { avmb.SetException(exc); }
+                try
+                {
+                    throw new InvalidOperationException();
+                }
+                catch (Exception exc)
+                {
+                    avmb.SetException(exc);
+                }
                 Assert.NotEmpty(tosc.PostExceptions);
                 ValidateException(tosc.PostExceptions[0]);
             }
+
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -456,22 +597,132 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void FaultedTaskExceptions()
         {
-            var twa1 = Task.Run(() => { throw new Exception("uh oh"); });
-            var twa2 = Task.Factory.StartNew(() => { throw new Exception("uh oh"); });
+            var twa1 = Task.Run(
+                () =>
+                {
+                    throw new Exception("uh oh");
+                }
+            );
+            var twa2 = Task.Factory.StartNew(
+                () =>
+                {
+                    throw new Exception("uh oh");
+                }
+            );
             var tasks = new Task[]
             {
-                Task.Run(() => { throw new Exception("uh oh"); }),
-                Task.Factory.StartNew<int>(() => { throw new Exception("uh oh"); }),
-                Task.WhenAll(Task.Run(() => { throw new Exception("uh oh"); }), Task.Run(() => { throw new Exception("uh oh"); })),
-                Task.WhenAll<int>(Task.Run(new Func<int>(() => { throw new Exception("uh oh"); })), Task.Run(new Func<int>(() => { throw new Exception("uh oh"); }))),
+                Task.Run(
+                    () =>
+                    {
+                        throw new Exception("uh oh");
+                    }
+                ),
+                Task.Factory.StartNew<int>(
+                    () =>
+                    {
+                        throw new Exception("uh oh");
+                    }
+                ),
+                Task.WhenAll(
+                    Task.Run(
+                        () =>
+                        {
+                            throw new Exception("uh oh");
+                        }
+                    ),
+                    Task.Run(
+                        () =>
+                        {
+                            throw new Exception("uh oh");
+                        }
+                    )
+                ),
+                Task.WhenAll<int>(
+                    Task.Run(
+                        new Func<int>(
+                            () =>
+                            {
+                                throw new Exception("uh oh");
+                            }
+                        )
+                    ),
+                    Task.Run(
+                        new Func<int>(
+                            () =>
+                            {
+                                throw new Exception("uh oh");
+                            }
+                        )
+                    )
+                ),
                 Task.WhenAny(twa1, twa2).Unwrap(),
-                Task.WhenAny<int>(Task.Run(new Func<Task<int>>(() => { throw new Exception("uh oh"); }))).Unwrap(),
-                Task.Factory.StartNew(() => Task.Factory.StartNew(() => { throw new Exception("uh oh"); })).Unwrap(),
-                Task.Factory.StartNew<Task<int>>(() => Task.Factory.StartNew<int>(() => { throw new Exception("uh oh"); })).Unwrap(),
-                Task.Run(() => Task.Run(() => { throw new Exception("uh oh"); })),
-                Task.Run(() => Task.Run(new Func<int>(() => { throw new Exception("uh oh"); }))),
-                Task.Run(new Func<Task>(() => { throw new Exception("uh oh"); })),
-                Task.Run(new Func<Task<int>>(() => { throw new Exception("uh oh"); }))
+                Task.WhenAny<int>(
+                        Task.Run(
+                            new Func<Task<int>>(
+                                () =>
+                                {
+                                    throw new Exception("uh oh");
+                                }
+                            )
+                        )
+                    )
+                    .Unwrap(),
+                Task.Factory.StartNew(
+                        () =>
+                            Task.Factory.StartNew(
+                                () =>
+                                {
+                                    throw new Exception("uh oh");
+                                }
+                            )
+                    )
+                    .Unwrap(),
+                Task.Factory.StartNew<Task<int>>(
+                        () =>
+                            Task.Factory.StartNew<int>(
+                                () =>
+                                {
+                                    throw new Exception("uh oh");
+                                }
+                            )
+                    )
+                    .Unwrap(),
+                Task.Run(
+                    () =>
+                        Task.Run(
+                            () =>
+                            {
+                                throw new Exception("uh oh");
+                            }
+                        )
+                ),
+                Task.Run(
+                    () =>
+                        Task.Run(
+                            new Func<int>(
+                                () =>
+                                {
+                                    throw new Exception("uh oh");
+                                }
+                            )
+                        )
+                ),
+                Task.Run(
+                    new Func<Task>(
+                        () =>
+                        {
+                            throw new Exception("uh oh");
+                        }
+                    )
+                ),
+                Task.Run(
+                    new Func<Task<int>>(
+                        () =>
+                        {
+                            throw new Exception("uh oh");
+                        }
+                    )
+                )
             };
 
             for (int i = 0; i < tasks.Length; i++)
@@ -494,12 +745,15 @@ namespace System.Threading.Tasks.Tests
 
             // A Task that throws an exception to cancel
             var b = new Barrier(2);
-            Task t1 = Task.Factory.StartNew(() =>
-            {
-                b.SignalAndWait();
-                b.SignalAndWait();
-                throw oce;
-            }, cts.Token);
+            Task t1 = Task.Factory.StartNew(
+                () =>
+                {
+                    b.SignalAndWait();
+                    b.SignalAndWait();
+                    throw oce;
+                },
+                cts.Token
+            );
             b.SignalAndWait(); // make sure task is started before we cancel
             cts.Cancel();
             b.SignalAndWait(); // release task to complete
@@ -509,8 +763,8 @@ namespace System.Threading.Tasks.Tests
             // is global state.  The handler is carefully written to be non-problematic
             // if it happens to be set during the execution of another test that has
             // an unobserved exception.
-            EventHandler<UnobservedTaskExceptionEventArgs> handler =
-                (s, e) => Assert.DoesNotContain(oce, e.Exception.InnerExceptions);
+            EventHandler<UnobservedTaskExceptionEventArgs> handler = (s, e) =>
+                Assert.DoesNotContain(oce, e.Exception.InnerExceptions);
             TaskScheduler.UnobservedTaskException += handler;
             ((IAsyncResult)t1).AsyncWaitHandle.WaitOne();
             t1 = null;
@@ -536,19 +790,23 @@ namespace System.Threading.Tasks.Tests
 
             Task t = null;
 
-            Thread runner = new Thread(() =>
-            {
-                async Task YieldOnceAsync(object s)
+            Thread runner = new Thread(
+                () =>
                 {
-                    await Task.Yield();
-                    GC.KeepAlive(s); // keep s referenced by the state machine
-                }
+                    async Task YieldOnceAsync(object s)
+                    {
+                        await Task.Yield();
+                        GC.KeepAlive(s); // keep s referenced by the state machine
+                    }
 
-                var state = new InvokeActionOnFinalization { Action = () => tcs.SetResult() };
-                var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
-                t = YieldOnceAsync(state); // ensure the object is stored in the state machine
-                al.Value = null;
-            }) { IsBackground = true };
+                    var state = new InvokeActionOnFinalization { Action = () => tcs.SetResult() };
+                    var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
+                    t = YieldOnceAsync(state); // ensure the object is stored in the state machine
+                    al.Value = null;
+                }
+            ) {
+                IsBackground = true
+            };
 
             runner.Start();
             runner.Join();
@@ -578,72 +836,92 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void DroppedIncompleteStateMachine_RaisesIncompleteAsyncMethodEvent()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                using (var listener = new TestEventListener("System.Threading.Tasks.TplEventSource", EventLevel.Verbose))
-                {
-                    var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                    listener.RunWithCallback(events.Enqueue, () =>
+            RemoteExecutor.Invoke(
+                    () =>
                     {
-                        NeverCompletes();
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
-                        GC.WaitForPendingFinalizers();
-                    });
-
-                    // To help diagnose https://github.com/dotnet/runtime/issues/2198
-                    // Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
-                    var sb = new StringBuilder();
-                    foreach (EventWrittenEventArgs ev in events)
-                    {
-                        if (ev.EventId == 0)
+                        using (
+                            var listener = new TestEventListener(
+                                "System.Threading.Tasks.TplEventSource",
+                                EventLevel.Verbose
+                            )
+                        )
                         {
-                            sb.AppendLine("Events contained unexpected event:")
-                              .AppendLine($"ActivityId: {ev.ActivityId}")
-                              .AppendLine($"Channel: {ev.Channel}")
-                              .AppendLine($"EventId: {ev.EventId}")
-                              .AppendLine($"EventName: {ev.EventName}")
-                              .AppendLine($"EventSource: {ev.EventSource}")
-                              .AppendLine($"Keywords: {ev.Keywords}")
-                              .AppendLine($"Level: {ev.Level}")
-                              .AppendLine($"Message: {ev.Message}")
-                              .AppendLine($"Opcode: {ev.Opcode}")
-                              .AppendLine($"OSThreadId: {ev.OSThreadId}")
-                              .AppendLine($"Payload: {(ev.Payload != null ? string.Join(", ", ev.Payload) : "(null)")}")
-                              .AppendLine($"PayloadNames: {(ev.PayloadNames != null ? string.Join(", ", ev.PayloadNames) : "(null)")}")
-                              .AppendLine($"RelatedActivityId: {ev.RelatedActivityId}")
-                              .AppendLine($"Tags: {ev.Tags}")
-                              .AppendLine($"Task: {ev.Task}")
-                              .AppendLine($"TimeStamp: {ev.TimeStamp}")
-                              .AppendLine($"Version: {ev.Version}")
-                              .AppendLine();
+                            var events = new ConcurrentQueue<EventWrittenEventArgs>();
+                            listener.RunWithCallback(
+                                events.Enqueue,
+                                () =>
+                                {
+                                    NeverCompletes();
+                                    GC.Collect();
+                                    GC.WaitForPendingFinalizers();
+                                    GC.WaitForPendingFinalizers();
+                                }
+                            );
+
+                            // To help diagnose https://github.com/dotnet/runtime/issues/2198
+                            // Assert.DoesNotContain(events, ev => ev.EventId == 0); // errors from the EventSource itself
+                            var sb = new StringBuilder();
+                            foreach (EventWrittenEventArgs ev in events)
+                            {
+                                if (ev.EventId == 0)
+                                {
+                                    sb.AppendLine("Events contained unexpected event:")
+                                        .AppendLine($"ActivityId: {ev.ActivityId}")
+                                        .AppendLine($"Channel: {ev.Channel}")
+                                        .AppendLine($"EventId: {ev.EventId}")
+                                        .AppendLine($"EventName: {ev.EventName}")
+                                        .AppendLine($"EventSource: {ev.EventSource}")
+                                        .AppendLine($"Keywords: {ev.Keywords}")
+                                        .AppendLine($"Level: {ev.Level}")
+                                        .AppendLine($"Message: {ev.Message}")
+                                        .AppendLine($"Opcode: {ev.Opcode}")
+                                        .AppendLine($"OSThreadId: {ev.OSThreadId}")
+                                        .AppendLine(
+                                            $"Payload: {(ev.Payload != null ? string.Join(", ", ev.Payload) : "(null)")}"
+                                        )
+                                        .AppendLine(
+                                            $"PayloadNames: {(ev.PayloadNames != null ? string.Join(", ", ev.PayloadNames) : "(null)")}"
+                                        )
+                                        .AppendLine($"RelatedActivityId: {ev.RelatedActivityId}")
+                                        .AppendLine($"Tags: {ev.Tags}")
+                                        .AppendLine($"Task: {ev.Task}")
+                                        .AppendLine($"TimeStamp: {ev.TimeStamp}")
+                                        .AppendLine($"Version: {ev.Version}")
+                                        .AppendLine();
+                                }
+                            }
+                            if (sb.Length > 0)
+                            {
+                                throw new XunitException(sb.ToString());
+                            }
+
+                            EventWrittenEventArgs iam = events.SingleOrDefault(
+                                e => e.EventName == "IncompleteAsyncMethod"
+                            );
+                            Assert.NotNull(iam);
+                            Assert.NotNull(iam.Payload);
+
+                            string description = iam.Payload[0] as string;
+                            Assert.NotNull(description);
+                            Assert.Contains(nameof(NeverCompletesAsync), description);
+                            Assert.Contains("__state", description);
+                            Assert.Contains("local1", description);
+                            Assert.Contains("local2", description);
+                            Assert.Contains("42", description);
+                            Assert.Contains("stored data", description);
                         }
                     }
-                    if (sb.Length > 0)
-                    {
-                        throw new XunitException(sb.ToString());
-                    }
-
-                    EventWrittenEventArgs iam = events.SingleOrDefault(e => e.EventName == "IncompleteAsyncMethod");
-                    Assert.NotNull(iam);
-                    Assert.NotNull(iam.Payload);
-
-                    string description = iam.Payload[0] as string;
-                    Assert.NotNull(description);
-                    Assert.Contains(nameof(NeverCompletesAsync), description);
-                    Assert.Contains("__state", description);
-                    Assert.Contains("local1", description);
-                    Assert.Contains("local2", description);
-                    Assert.Contains("42", description);
-                    Assert.Contains("stored data", description);
-                }
-            }).Dispose();
+                )
+                .Dispose();
         }
 
         #region Helper Methods / Classes
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void NeverCompletes() { var ignored = NeverCompletesAsync(); }
+        private static void NeverCompletes()
+        {
+            var ignored = NeverCompletesAsync();
+        }
 
         private static async Task NeverCompletesAsync()
         {
@@ -658,10 +936,12 @@ namespace System.Threading.Tasks.Tests
         {
             ((IAsyncResult)t).AsyncWaitHandle.WaitOne();
             Assert.True(t.IsFaulted);
-            Exception e = Assert.ThrowsAny<Exception>(() =>
-            {
-                t.GetAwaiter().GetResult();
-            });
+            Exception e = Assert.ThrowsAny<Exception>(
+                () =>
+                {
+                    t.GetAwaiter().GetResult();
+                }
+            );
             ValidateException(e);
         }
 
@@ -679,7 +959,10 @@ namespace System.Threading.Tasks.Tests
             //ConcurrentQueue
             private List<Exception> _postExceptions = new List<Exception>();
 
-            public int TrackedCount { get { return _trackedCount; } }
+            public int TrackedCount
+            {
+                get { return _trackedCount; }
+            }
             public List<Exception> PostExceptions
             {
                 get
@@ -692,10 +975,19 @@ namespace System.Threading.Tasks.Tests
                     }
                 }
             }
-            public int PostCount { get { return _postCount; } }
+            public int PostCount
+            {
+                get { return _postCount; }
+            }
 
-            public override void OperationStarted() { Interlocked.Increment(ref _trackedCount); }
-            public override void OperationCompleted() { Interlocked.Decrement(ref _trackedCount); }
+            public override void OperationStarted()
+            {
+                Interlocked.Increment(ref _trackedCount);
+            }
+            public override void OperationCompleted()
+            {
+                Interlocked.Decrement(ref _trackedCount);
+            }
 
             public override void Post(SendOrPostCallback callback, object state)
             {
@@ -713,7 +1005,6 @@ namespace System.Threading.Tasks.Tests
                 }
             }
         }
-
         #endregion
     }
 }

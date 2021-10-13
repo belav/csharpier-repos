@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace Marshalling
 {
-
     #region Simple classes
 
     public class SimpleEmptyClass
@@ -178,6 +177,5 @@ namespace Marshalling
     {
         public int i;
     }
-
     #endregion
 }

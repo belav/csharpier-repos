@@ -23,15 +23,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptEditorInlineRenameService(Lazy<IVSTypeScriptEditorInlineRenameService> service)
+        public VSTypeScriptEditorInlineRenameService(
+            Lazy<IVSTypeScriptEditorInlineRenameService> service
+        )
         {
             Contract.ThrowIfNull(service);
             _service = service;
         }
 
-        public async Task<IInlineRenameInfo> GetRenameInfoAsync(Document document, int position, CancellationToken cancellationToken)
+        public async Task<IInlineRenameInfo> GetRenameInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var info = await _service.Value.GetRenameInfoAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var info = await _service.Value.GetRenameInfoAsync(
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (info != null)
             {
                 return new VSTypeScriptInlineRenameInfo(info);

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument1()
         {
-            var input = @"
+            var input =
+                @"
 class Program1
 {
     static void Main()
@@ -27,7 +28,8 @@ class Program1
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 class Program1
 {
     static void Main()
@@ -50,7 +52,8 @@ class Program1
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument2()
         {
-            var input = @"
+            var input =
+                @"
 class Program1
 {
     static void Main()
@@ -60,7 +63,8 @@ class Program1
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 class Program1
 {
     static void Main()
@@ -84,7 +88,8 @@ class Program1
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInDocument()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -120,7 +125,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -171,7 +177,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInProject()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -206,7 +213,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -255,7 +263,8 @@ class Program3
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task TestFixAllInSolution()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -290,7 +299,8 @@ class Program3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>

@@ -118,12 +118,19 @@ namespace Legacy.Support
                 int bufferSize = MeasureTransmitBufferSize(portName, probeLength);
                 if (bufferSize < probeLength)
                 {
-                    Debug.WriteLine("{0}: Found blocking packet of length {1}, hardware buffer {2}", portName, probeLength, bufferSize);
+                    Debug.WriteLine(
+                        "{0}: Found blocking packet of length {1}, hardware buffer {2}",
+                        portName,
+                        probeLength,
+                        bufferSize
+                    );
                     return new FlowControlCapabilities(probeLength, bufferSize, true);
                 }
             }
 
-            Debug.WriteLine("Failed to achieve write blocking on serial port - no hardware flow-control available");
+            Debug.WriteLine(
+                "Failed to achieve write blocking on serial port - no hardware flow-control available"
+            );
             return new FlowControlCapabilities(0, -1, false);
         }
 
@@ -143,35 +150,35 @@ namespace Legacy.Support
 
                 var testBlock = new byte[probeLength];
 
-                Task t = Task.Run(() =>
-                {
-                    int lastHardwareCapacity = -1;
-                    for (int i = 0; i < 10; i++)
+                Task t = Task.Run(
+                    () =>
                     {
-                        int queuedLength = com.BytesToWrite;
-                        int hardwareCapacity = testBlock.Length - queuedLength;
-
-                        if (hardwareCapacity == lastHardwareCapacity)
+                        int lastHardwareCapacity = -1;
+                        for (int i = 0; i < 10; i++)
                         {
-                            // We've had two readings the same
-                            measuredHardwareCapacity = hardwareCapacity;
-                            break;
+                            int queuedLength = com.BytesToWrite;
+                            int hardwareCapacity = testBlock.Length - queuedLength;
+
+                            if (hardwareCapacity == lastHardwareCapacity)
+                            {
+                                // We've had two readings the same
+                                measuredHardwareCapacity = hardwareCapacity;
+                                break;
+                            }
+                            // We're still pushing stuff out - wait for two readings the same
+                            lastHardwareCapacity = hardwareCapacity;
+                            Thread.Sleep(10);
                         }
-                        // We're still pushing stuff out - wait for two readings the same
-                        lastHardwareCapacity = hardwareCapacity;
-                        Thread.Sleep(10);
+                        com.Handshake = Handshake.None;
+                        com.DiscardOutBuffer();
                     }
-                    com.Handshake = Handshake.None;
-                    com.DiscardOutBuffer();
-                });
+                );
 
                 try
                 {
                     com.Write(testBlock, 0, testBlock.Length);
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
                 catch (IOException)
                 {
                     // We may see hardware exceptions when the task calls Discard

@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
     /// </summary>
     internal abstract partial class AbstractChainedExpressionWrapper<
         TNameSyntax,
-        TBaseArgumentListSyntax> : AbstractSyntaxWrapper
+        TBaseArgumentListSyntax
+    > : AbstractSyntaxWrapper
         where TNameSyntax : SyntaxNode
         where TBaseArgumentListSyntax : SyntaxNode
     {
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
 
         protected AbstractChainedExpressionWrapper(
             Indentation.IIndentationService indentationService,
-            ISyntaxFacts syntaxFacts) : base(indentationService)
+            ISyntaxFacts syntaxFacts
+        ) : base(indentationService)
         {
             _syntaxFacts = syntaxFacts;
             _dotToken = syntaxFacts.SyntaxKinds.DotToken;
@@ -69,10 +71,16 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
         /// user wants to wrap the operator to the next line.  For C# this is a simple newline-trivia.
         /// For VB, this will be a line-continuation char (<c>_</c>), followed by a newline.
         /// </summary>
-        protected abstract SyntaxTriviaList GetNewLineBeforeOperatorTrivia(SyntaxTriviaList newLine);
+        protected abstract SyntaxTriviaList GetNewLineBeforeOperatorTrivia(
+            SyntaxTriviaList newLine
+        );
 
         public sealed override async Task<ICodeActionComputer> TryCreateComputerAsync(
-            Document document, int position, SyntaxNode node, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             // We have to be on a chain part.  If not, there's nothing to do here at all.
             if (!IsDecomposableChainPart(node))
@@ -81,7 +89,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             }
 
             // Has to be the topmost chain part.  If we're not on the topmost, then just
-            // bail out here.  Our caller will continue walking upwards until it hits the 
+            // bail out here.  Our caller will continue walking upwards until it hits the
             // topmost node.
             if (IsDecomposableChainPart(node.Parent))
             {
@@ -105,7 +113,11 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             foreach (var chunk in chunks)
             {
                 var unformattable = await ContainsUnformattableContentAsync(
-                    document, chunk, cancellationToken).ConfigureAwait(false);
+                        document,
+                        chunk,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (unformattable)
                 {
                     return null;
@@ -117,15 +129,21 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var options = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
             return new CallExpressionCodeActionComputer(
-                this, document, sourceText, options, chunks, cancellationToken);
+                this,
+                document,
+                sourceText,
+                options,
+                chunks,
+                cancellationToken
+            );
         }
 
         private ImmutableArray<ImmutableArray<SyntaxNodeOrToken>> GetChainChunks(SyntaxNode node)
         {
             // First, just take the topmost chain node and break into the individual
-            // nodes and tokens we want to treat as individual elements.  i.e. an 
+            // nodes and tokens we want to treat as individual elements.  i.e. an
             // element that would be kept together.  For example, the arg-list of an
-            // invocation is an element we do not want to ever break-up/wrap. 
+            // invocation is an element we do not want to ever break-up/wrap.
             using var _1 = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(out var pieces);
             Decompose(node, pieces);
 
@@ -134,23 +152,26 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             //      . Name (...) Remainder...
             //
             // These will be the chunks that are wrapped and aligned on that dot.
-            // 
+            //
             // Here 'remainder' is everything up to the next <c>. Name (...)</c> chunk.
 
-            using var _2 = ArrayBuilder<ImmutableArray<SyntaxNodeOrToken>>.GetInstance(out var chunks);
+            using var _2 = ArrayBuilder<ImmutableArray<SyntaxNodeOrToken>>.GetInstance(
+                out var chunks
+            );
             BreakPiecesIntoChunks(pieces, chunks);
             return chunks.ToImmutable();
         }
 
         private void BreakPiecesIntoChunks(
             ArrayBuilder<SyntaxNodeOrToken> pieces,
-            ArrayBuilder<ImmutableArray<SyntaxNodeOrToken>> chunks)
+            ArrayBuilder<ImmutableArray<SyntaxNodeOrToken>> chunks
+        )
         {
             // Have to look for the first chunk after the first piece.  i.e. if the pieces
-            // starts with <c>.Foo().Bar().Baz()</c> then the chunks would be <c>.Bar()</c> 
+            // starts with <c>.Foo().Bar().Baz()</c> then the chunks would be <c>.Bar()</c>
             // and <c>.Baz()</c>.
             //
-            // However, if we had <c>this.Foo().Bar().Baz()</c> then the chunks would be 
+            // However, if we had <c>this.Foo().Bar().Baz()</c> then the chunks would be
             // <c>.Foo()</c> <c>.Bar()</c> and <c>.Baz()</c>.
             //
             // Note: the only way to get the <c>.Foo().Bar().Baz()</c> case today is in VB in
@@ -179,7 +200,11 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             while (true)
             {
                 // Look for the next chunk starting after the current chunk we're on.
-                var nextChunkStart = FindNextChunkStart(pieces, firstChunk: false, index: currentChunkStart + 1);
+                var nextChunkStart = FindNextChunkStart(
+                    pieces,
+                    firstChunk: false,
+                    index: currentChunkStart + 1
+                );
                 if (nextChunkStart < 0)
                 {
                     // No next chunk after the current one.  The current chunk just
@@ -202,16 +227,20 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
         /// we won't be wrapping that one.
         /// </summary>
         private int FindNextChunkStart(
-            ArrayBuilder<SyntaxNodeOrToken> pieces, bool firstChunk, int index)
+            ArrayBuilder<SyntaxNodeOrToken> pieces,
+            bool firstChunk,
+            int index
+        )
         {
             for (var i = index; i < pieces.Count; i++)
             {
-                if (IsToken(_dotToken, pieces, i) &&
-                    IsNode<TNameSyntax>(pieces, i + 1) &&
-                    IsNode<TBaseArgumentListSyntax>(pieces, i + 2))
+                if (
+                    IsToken(_dotToken, pieces, i)
+                    && IsNode<TNameSyntax>(pieces, i + 1)
+                    && IsNode<TBaseArgumentListSyntax>(pieces, i + 2)
+                )
                 {
-                    if (firstChunk ||
-                        !IsToken(_questionToken, pieces, i - 1))
+                    if (firstChunk || !IsToken(_questionToken, pieces, i - 1))
                     {
                         return i;
                     }
@@ -222,22 +251,32 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             return -1;
         }
 
-        private static bool IsNode<TNode>(ArrayBuilder<SyntaxNodeOrToken> pieces, int index)
-            => index < pieces.Count &&
-               pieces[index] is var piece &&
-               piece.IsNode &&
-               piece.AsNode() is TNode;
+        private static bool IsNode<TNode>(ArrayBuilder<SyntaxNodeOrToken> pieces, int index) =>
+            index < pieces.Count
+            && pieces[index] is var piece
+            && piece.IsNode
+            && piece.AsNode() is TNode;
 
-        private static bool IsToken(int tokenKind, ArrayBuilder<SyntaxNodeOrToken> pieces, int index)
-            => index < pieces.Count &&
-               pieces[index] is var piece &&
-               piece.IsToken &&
-               piece.AsToken().RawKind == tokenKind;
+        private static bool IsToken(
+            int tokenKind,
+            ArrayBuilder<SyntaxNodeOrToken> pieces,
+            int index
+        ) =>
+            index < pieces.Count
+            && pieces[index] is var piece
+            && piece.IsToken
+            && piece.AsToken().RawKind == tokenKind;
 
         private static ImmutableArray<SyntaxNodeOrToken> GetSubRange(
-            ArrayBuilder<SyntaxNodeOrToken> pieces, int start, int end)
+            ArrayBuilder<SyntaxNodeOrToken> pieces,
+            int start,
+            int end
+        )
         {
-            using var resultDisposer = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(end - start, out var result);
+            using var resultDisposer = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(
+                end - start,
+                out var result
+            );
             for (var i = start; i < end; i++)
             {
                 result.Add(pieces[i]);
@@ -248,7 +287,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
 
         private bool IsDecomposableChainPart(SyntaxNode node)
         {
-            // This is the effective set of language constructs that can 'chain' 
+            // This is the effective set of language constructs that can 'chain'
             // off of a call <c>.M(...)</c>.  They are:
             //
             // 1. <c>.Name</c> or <c>->Name</c>.        i.e. <c>.M(...).Name</c>
@@ -261,11 +300,11 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
             if (node != null)
             {
                 return _syntaxFacts.IsAnyMemberAccessExpression(node)
-                       || _syntaxFacts.IsInvocationExpression(node)
-                       || _syntaxFacts.IsElementAccessExpression(node)
-                       || _syntaxFacts.IsPostfixUnaryExpression(node)
-                       || _syntaxFacts.IsConditionalAccessExpression(node)
-                       || _syntaxFacts.IsMemberBindingExpression(node);
+                    || _syntaxFacts.IsInvocationExpression(node)
+                    || _syntaxFacts.IsElementAccessExpression(node)
+                    || _syntaxFacts.IsPostfixUnaryExpression(node)
+                    || _syntaxFacts.IsConditionalAccessExpression(node)
+                    || _syntaxFacts.IsMemberBindingExpression(node);
             }
 
             return false;
@@ -310,6 +349,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
                         stack.Push(child);
                 }
             }
+
             finally
             {
                 SharedPools.Default<Stack<SyntaxNodeOrToken>>().Free(stack);

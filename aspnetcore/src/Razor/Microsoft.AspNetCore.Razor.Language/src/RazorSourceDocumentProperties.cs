@@ -11,14 +11,13 @@ namespace Microsoft.AspNetCore.Razor.Language
         /// <summary>
         /// A <see cref="RazorSourceDocumentProperties"/> with default values.
         /// </summary>
-        internal static readonly RazorSourceDocumentProperties Default = new RazorSourceDocumentProperties();
+        internal static readonly RazorSourceDocumentProperties Default =
+            new RazorSourceDocumentProperties();
 
         /// <summary>
         /// Creates a new <see cref="RazorSourceDocumentProperties"/>.
         /// </summary>
-        public RazorSourceDocumentProperties()
-        {
-        }
+        public RazorSourceDocumentProperties() { }
 
         /// <summary>
         /// Creates a new <see cref="RazorSourceDocumentProperties"/>.

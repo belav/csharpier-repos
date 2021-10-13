@@ -39,8 +39,7 @@ namespace System.CommandLine.Rendering
         {
             if (IsAnsiTerminal)
             {
-                if (_ansiCodeBuffer.Length == 0 &&
-                    c != Ansi.Esc[0])
+                if (_ansiCodeBuffer.Length == 0 && c != Ansi.Esc[0])
                 {
                     _outBuffer.Append(c);
                 }
@@ -56,9 +55,8 @@ namespace System.CommandLine.Rendering
                         _ansiCodeBuffer.Clear();
 
                         RecordEvent(
-                            new AnsiControlCodeWritten(
-                                new AnsiControlCode(
-                                    escapeSequence)));
+                            new AnsiControlCodeWritten(new AnsiControlCode(escapeSequence))
+                        );
                     }
                 }
             }
@@ -77,11 +75,7 @@ namespace System.CommandLine.Rendering
             RecordEvent(new ColorReset());
         }
 
-        public Region GetRegion() =>
-            new Region(0,
-                       0,
-                       Width,
-                       Height);
+        public Region GetRegion() => new Region(0, 0, Width, Height);
 
         public void Clear()
         {
@@ -125,7 +119,8 @@ namespace System.CommandLine.Rendering
                 throw new ArgumentOutOfRangeException(
                     nameof(left),
                     left,
-                    "The value must be greater than or equal to zero and less than the console's buffer size in that dimension.");
+                    "The value must be greater than or equal to zero and less than the console's buffer size in that dimension."
+                );
             }
 
             if (top < 0)
@@ -133,7 +128,8 @@ namespace System.CommandLine.Rendering
                 throw new ArgumentOutOfRangeException(
                     nameof(top),
                     top,
-                    "The value must be greater than or equal to zero and less than the console's buffer size in that dimension.");
+                    "The value must be greater than or equal to zero and less than the console's buffer size in that dimension."
+                );
             }
 
             _cursorLeft = left;
@@ -146,7 +142,9 @@ namespace System.CommandLine.Rendering
         {
             if (@event is ContentWritten)
             {
-                throw new ArgumentException($"{nameof(ContentWritten)} events should be recorded by calling {nameof(TryFlushTextWrittenEvent)}");
+                throw new ArgumentException(
+                    $"{nameof(ContentWritten)} events should be recorded by calling {nameof(TryFlushTextWrittenEvent)}"
+                );
             }
 
             TryFlushTextWrittenEvent();
@@ -161,9 +159,7 @@ namespace System.CommandLine.Rendering
                     var match = positionFinder.Match(escapeSequence);
                     var column = int.Parse(match.Groups["column"].Value);
                     var line = int.Parse(match.Groups["line"].Value);
-                    RecordEvent(
-                        new CursorPositionChanged(
-                            new Point(column - 1, line - 1)));
+                    RecordEvent(new CursorPositionChanged(new Point(column - 1, line - 1)));
                     return;
                 }
             }
@@ -238,7 +234,6 @@ namespace System.CommandLine.Rendering
 
                             position = cursorPositionChanged.Position;
                         }
-
                         break;
                 }
             }
@@ -323,12 +318,10 @@ namespace System.CommandLine.Rendering
 
         public class CursorHidden : ConsoleEvent
         {
-
         }
 
         public class CursorShown : ConsoleEvent
         {
-
         }
     }
 

@@ -9,11 +9,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     internal sealed class PreallocatedTagHelperPropertyIntermediateNode : ExtensionIntermediateNode
     {
-        public PreallocatedTagHelperPropertyIntermediateNode()
-        {
-        }
+        public PreallocatedTagHelperPropertyIntermediateNode() { }
 
-        public PreallocatedTagHelperPropertyIntermediateNode(DefaultTagHelperPropertyIntermediateNode propertyNode)
+        public PreallocatedTagHelperPropertyIntermediateNode(
+            DefaultTagHelperPropertyIntermediateNode propertyNode
+        )
         {
             if (propertyNode == null)
             {

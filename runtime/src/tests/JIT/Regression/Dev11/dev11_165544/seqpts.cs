@@ -12,7 +12,9 @@ using System;
 
 struct BigCopy
 {
-    public long l1, l2, l3;
+    public long l1,
+        l2,
+        l3;
     public object gc;
     public override string ToString()
     {
@@ -31,7 +33,9 @@ static class Repro
 {
     static int Main(string[] args)
     {
-        BigCopy b1, b2, b3;
+        BigCopy b1,
+            b2,
+            b3;
         b1.gc = "me";
         b1.l1 = 1;
         b1.l2 = 2;
@@ -43,9 +47,18 @@ static class Repro
         Console.WriteLine("b1 = {0}", b1);
         Console.WriteLine("b2 = {0}", b2);
         Console.WriteLine("b3 = {0}", b3);
-        if (b1.l1 == 1 && b1.l2 == 2 && b1.l3 == 3 &&
-           b2.l1 == 4 && b2.l2 == 5 && b2.l3 == 6 &&
-           b3.l1 == 7 && b3.l2 == 8 && b3.l3 == 9) return 100;
+        if (
+            b1.l1 == 1
+            && b1.l2 == 2
+            && b1.l3 == 3
+            && b2.l1 == 4
+            && b2.l2 == 5
+            && b2.l3 == 6
+            && b3.l1 == 7
+            && b3.l2 == 8
+            && b3.l3 == 9
+        )
+            return 100;
         return 101;
     }
 }

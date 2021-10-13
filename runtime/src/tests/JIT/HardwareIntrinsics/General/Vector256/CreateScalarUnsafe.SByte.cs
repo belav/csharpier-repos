@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 32;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector256<SByte>>() / sizeof(SByte);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector256<SByte>>() / sizeof(SByte);
 
         public bool Succeeded { get; set; } = true;
 
@@ -57,21 +58,31 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             SByte value = TestLibrary.Generator.GetSByte();
-            object result = typeof(Vector256)
-                                .GetMethod(nameof(Vector256.CreateScalarUnsafe), new Type[] { typeof(SByte) })
-                                .Invoke(null, new object[] { value });
+            object result = typeof(Vector256).GetMethod(
+                    nameof(Vector256.CreateScalarUnsafe),
+                    new Type[] { typeof(SByte) }
+                )
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector256<SByte>)(result), value);
         }
 
-        private void ValidateResult(Vector256<SByte> result, SByte expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<SByte> result,
+            SByte expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             SByte[] resultElements = new SByte[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<SByte, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(SByte[] resultElements, SByte expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            SByte[] resultElements,
+            SByte expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -83,7 +94,9 @@ namespace JIT.HardwareIntrinsics.General
             {
                 for (var i = 1; i < ElementCount; i++)
                 {
-                    if (false /* value is uninitialized */)
+                    if (
+                        false /* value is uninitialized */
+                    )
                     {
                         succeeded = false;
                         break;
@@ -93,9 +106,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector256.CreateScalarUnsafe(SByte): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector256.CreateScalarUnsafe(SByte): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

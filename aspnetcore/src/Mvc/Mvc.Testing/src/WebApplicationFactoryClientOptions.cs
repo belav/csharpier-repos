@@ -19,12 +19,12 @@ namespace Microsoft.AspNetCore.Mvc.Testing
         /// <summary>
         /// Initializes a new instance of <see cref="WebApplicationFactoryClientOptions"/>.
         /// </summary>
-        public WebApplicationFactoryClientOptions()
-        {
-        }
+        public WebApplicationFactoryClientOptions() { }
 
         // Copy constructor
-        internal WebApplicationFactoryClientOptions(WebApplicationFactoryClientOptions clientOptions)
+        internal WebApplicationFactoryClientOptions(
+            WebApplicationFactoryClientOptions clientOptions
+        )
         {
             BaseAddress = clientOptions.BaseAddress;
             AllowAutoRedirect = clientOptions.AllowAutoRedirect;

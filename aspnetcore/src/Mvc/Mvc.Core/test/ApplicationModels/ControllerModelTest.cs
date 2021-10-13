@@ -17,17 +17,24 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         public void CopyConstructor_DoesDeepCopyOfOtherModels()
         {
             // Arrange
-            var controller = new ControllerModel(typeof(TestController).GetTypeInfo(),
-                                                 new List<object>());
+            var controller = new ControllerModel(
+                typeof(TestController).GetTypeInfo(),
+                new List<object>()
+            );
 
-            var action = new ActionModel(typeof(TestController).GetMethod("Edit"),
-                                         new List<object>());
+            var action = new ActionModel(
+                typeof(TestController).GetMethod("Edit"),
+                new List<object>()
+            );
             controller.Actions.Add(action);
             action.Controller = controller;
 
-            controller.ControllerProperties.Add(new PropertyModel(
-                controller.ControllerType.AsType().GetProperty("TestProperty"),
-                new List<object>() { }));
+            controller.ControllerProperties.Add(
+                new PropertyModel(
+                    controller.ControllerType.AsType().GetProperty("TestProperty"),
+                    new List<object>() {  }
+                )
+            );
 
             var route = new AttributeRouteModel(new HttpGetAttribute("api/Products"));
             controller.Selectors.Add(new SelectorModel() { AttributeRouteModel = route });
@@ -48,7 +55,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             Assert.NotSame(route, controller2.Selectors[0].AttributeRouteModel);
             Assert.NotSame(apiExplorer, controller2.ApiExplorer);
 
-            Assert.NotSame(controller.Selectors[0].ActionConstraints, controller2.Selectors[0].ActionConstraints);
+            Assert.NotSame(
+                controller.Selectors[0].ActionConstraints,
+                controller2.Selectors[0].ActionConstraints
+            );
             Assert.NotSame(controller.Actions, controller2.Actions);
             Assert.NotSame(controller.Attributes, controller2.Attributes);
             Assert.NotSame(controller.Filters, controller2.Filters);
@@ -66,14 +76,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Arrange
             var controller = new ControllerModel(
                 typeof(TestController).GetTypeInfo(),
-                new List<object>()
-                {
-                    new HttpGetAttribute(),
-                    new MyFilterAttribute(),
-                });
+                new List<object>() { new HttpGetAttribute(), new MyFilterAttribute(), }
+            );
 
             var selectorModel = new SelectorModel();
-            selectorModel.ActionConstraints.Add(new HttpMethodActionConstraint(new string[] { "GET" }));
+            selectorModel.ActionConstraints.Add(
+                new HttpMethodActionConstraint(new string[] { "GET" })
+            );
             controller.Selectors.Add(selectorModel);
             controller.Application = new ApplicationModel();
             controller.ControllerName = "cool";
@@ -81,7 +90,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             controller.RouteValues.Add("key", "value");
             controller.Properties.Add(new KeyValuePair<object, object>("test key", "test value"));
             controller.ControllerProperties.Add(
-                new PropertyModel(typeof(TestController).GetProperty("TestProperty"), new List<object>()));
+                new PropertyModel(
+                    typeof(TestController).GetProperty("TestProperty"),
+                    new List<object>()
+                )
+            );
 
             // Act
             var controller2 = new ControllerModel(controller);
@@ -89,10 +102,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             // Assert
             foreach (var property in typeof(ControllerModel).GetProperties())
             {
-                if (property.Name.Equals("Actions") ||
-                    property.Name.Equals("Selectors") ||
-                    property.Name.Equals("ApiExplorer") ||
-                    property.Name.Equals("ControllerProperties"))
+                if (
+                    property.Name.Equals("Actions")
+                    || property.Name.Equals("Selectors")
+                    || property.Name.Equals("ApiExplorer")
+                    || property.Name.Equals("ControllerProperties")
+                )
                 {
                     // This test excludes other ApplicationModel objects on purpose because we deep copy them.
                     continue;
@@ -108,22 +123,28 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
                     // Ensure non-default value
                     Assert.NotEmpty((IEnumerable<object>)value1);
                 }
-                else if (typeof(IDictionary<string, string>).IsAssignableFrom(property.PropertyType))
+                else if (
+                    typeof(IDictionary<string, string>).IsAssignableFrom(property.PropertyType)
+                )
                 {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
                     Assert.NotEmpty((IDictionary<string, string>)value1);
                 }
-                else if (typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType))
+                else if (
+                    typeof(IDictionary<object, object>).IsAssignableFrom(property.PropertyType)
+                )
                 {
                     Assert.Equal(value1, value2);
 
                     // Ensure non-default value
                     Assert.NotEmpty((IDictionary<object, object>)value1);
                 }
-                else if (property.PropertyType.IsValueType ||
-                    Nullable.GetUnderlyingType(property.PropertyType) != null)
+                else if (
+                    property.PropertyType.IsValueType
+                    || Nullable.GetUnderlyingType(property.PropertyType) != null
+                )
                 {
                     Assert.Equal(value1, value2);
 
@@ -149,9 +170,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
         {
             public string TestProperty { get; set; }
 
-            public void Edit()
-            {
-            }
+            public void Edit() { }
         }
 
         private class MyFilterAttribute : Attribute, IFilterMetadata

@@ -20,7 +20,11 @@ namespace Microsoft.AspNetCore.SpaServices.Extensions.Util
             }
         }
 
-        public static async Task<T> WithTimeout<T>(this Task<T> task, TimeSpan timeoutDelay, string message)
+        public static async Task<T> WithTimeout<T>(
+            this Task<T> task,
+            TimeSpan timeoutDelay,
+            string message
+        )
         {
             if (task == await Task.WhenAny(task, Task.Delay(timeoutDelay)))
             {

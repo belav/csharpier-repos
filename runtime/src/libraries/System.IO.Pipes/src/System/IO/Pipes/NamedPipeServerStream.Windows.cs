@@ -28,45 +28,114 @@ namespace System.IO.Pipes
             int outBufferSize,
             PipeSecurity? pipeSecurity,
             HandleInheritability inheritability = HandleInheritability.None,
-            PipeAccessRights additionalAccessRights = default)
-            : base(direction, transmissionMode, outBufferSize)
+            PipeAccessRights additionalAccessRights = default
+        ) : base(direction, transmissionMode, outBufferSize)
         {
-            ValidateParameters(pipeName, direction, maxNumberOfServerInstances, transmissionMode, options, inBufferSize, outBufferSize, inheritability);
+            ValidateParameters(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                inBufferSize,
+                outBufferSize,
+                inheritability
+            );
 
             if (pipeSecurity != null && IsCurrentUserOnly)
             {
-                throw new ArgumentException(SR.NotSupported_PipeSecurityIsCurrentUserOnly, nameof(pipeSecurity));
+                throw new ArgumentException(
+                    SR.NotSupported_PipeSecurityIsCurrentUserOnly,
+                    nameof(pipeSecurity)
+                );
             }
 
-            Create(pipeName, direction, maxNumberOfServerInstances, transmissionMode, options, inBufferSize, outBufferSize, pipeSecurity, inheritability, additionalAccessRights);
+            Create(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                inBufferSize,
+                outBufferSize,
+                pipeSecurity,
+                inheritability,
+                additionalAccessRights
+            );
         }
 
-        private void Create(string pipeName, PipeDirection direction, int maxNumberOfServerInstances,
-                PipeTransmissionMode transmissionMode, PipeOptions options, int inBufferSize, int outBufferSize,
-                HandleInheritability inheritability)
+        private void Create(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options,
+            int inBufferSize,
+            int outBufferSize,
+            HandleInheritability inheritability
+        )
         {
-            Create(pipeName, direction, maxNumberOfServerInstances, transmissionMode, options, inBufferSize,
-                outBufferSize, null, inheritability, 0);
+            Create(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                inBufferSize,
+                outBufferSize,
+                null,
+                inheritability,
+                0
+            );
         }
 
         // This overload is used in Mono to implement public constructors.
-        private void Create(string pipeName, PipeDirection direction, int maxNumberOfServerInstances,
-                PipeTransmissionMode transmissionMode, PipeOptions options, int inBufferSize, int outBufferSize,
-                PipeSecurity? pipeSecurity, HandleInheritability inheritability, PipeAccessRights additionalAccessRights)
+        private void Create(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options,
+            int inBufferSize,
+            int outBufferSize,
+            PipeSecurity? pipeSecurity,
+            HandleInheritability inheritability,
+            PipeAccessRights additionalAccessRights
+        )
         {
             Debug.Assert(pipeName != null && pipeName.Length != 0, "fullPipeName is null or empty");
-            Debug.Assert(direction >= PipeDirection.In && direction <= PipeDirection.InOut, "invalid pipe direction");
+            Debug.Assert(
+                direction >= PipeDirection.In && direction <= PipeDirection.InOut,
+                "invalid pipe direction"
+            );
             Debug.Assert(inBufferSize >= 0, "inBufferSize is negative");
             Debug.Assert(outBufferSize >= 0, "outBufferSize is negative");
-            Debug.Assert((maxNumberOfServerInstances >= 1 && maxNumberOfServerInstances <= 254) || (maxNumberOfServerInstances == MaxAllowedServerInstances), "maxNumberOfServerInstances is invalid");
-            Debug.Assert(transmissionMode >= PipeTransmissionMode.Byte && transmissionMode <= PipeTransmissionMode.Message, "transmissionMode is out of range");
+            Debug.Assert(
+                (maxNumberOfServerInstances >= 1 && maxNumberOfServerInstances <= 254)
+                    || (maxNumberOfServerInstances == MaxAllowedServerInstances),
+                "maxNumberOfServerInstances is invalid"
+            );
+            Debug.Assert(
+                transmissionMode >= PipeTransmissionMode.Byte
+                    && transmissionMode <= PipeTransmissionMode.Message,
+                "transmissionMode is out of range"
+            );
 
             string fullPipeName = Path.GetFullPath(@"\\.\pipe\" + pipeName);
 
             // Make sure the pipe name isn't one of our reserved names for anonymous pipes.
-            if (string.Equals(fullPipeName, @"\\.\pipe\anonymous", StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    fullPipeName,
+                    @"\\.\pipe\anonymous",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(pipeName), SR.ArgumentOutOfRange_AnonymousReserved);
+                throw new ArgumentOutOfRangeException(
+                    nameof(pipeName),
+                    SR.ArgumentOutOfRange_AnonymousReserved
+                );
             }
 
             if (IsCurrentUserOnly)
@@ -79,7 +148,11 @@ namespace System.IO.Pipes
 
                     // Grant full control to the owner so multiple servers can be opened.
                     // Full control is the default per MSDN docs for CreateNamedPipe.
-                    PipeAccessRule rule = new PipeAccessRule(identifier, PipeAccessRights.FullControl, AccessControlType.Allow);
+                    PipeAccessRule rule = new PipeAccessRule(
+                        identifier,
+                        PipeAccessRights.FullControl,
+                        AccessControlType.Allow
+                    );
                     pipeSecurity = new PipeSecurity();
 
                     pipeSecurity.AddAccessRule(rule);
@@ -92,10 +165,15 @@ namespace System.IO.Pipes
                 options &= ~PipeOptions.CurrentUserOnly;
             }
 
-            int openMode = ((int)direction) |
-                           (maxNumberOfServerInstances == 1 ? Interop.Kernel32.FileOperations.FILE_FLAG_FIRST_PIPE_INSTANCE : 0) |
-                           (int)options |
-                           (int)additionalAccessRights;
+            int openMode =
+                ((int)direction)
+                | (
+                    maxNumberOfServerInstances == 1
+                        ? Interop.Kernel32.FileOperations.FILE_FLAG_FIRST_PIPE_INSTANCE
+                        : 0
+                )
+                | (int)options
+                | (int)additionalAccessRights;
 
             // We automatically set the ReadMode to match the TransmissionMode.
             int pipeModes = (int)transmissionMode << 2 | (int)transmissionMode << 1;
@@ -109,9 +187,21 @@ namespace System.IO.Pipes
             GCHandle pinningHandle = default;
             try
             {
-                Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = GetSecAttrs(inheritability, pipeSecurity, ref pinningHandle);
-                SafePipeHandle handle = Interop.Kernel32.CreateNamedPipe(fullPipeName, openMode, pipeModes,
-                    maxNumberOfServerInstances, outBufferSize, inBufferSize, 0, ref secAttrs);
+                Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = GetSecAttrs(
+                    inheritability,
+                    pipeSecurity,
+                    ref pinningHandle
+                );
+                SafePipeHandle handle = Interop.Kernel32.CreateNamedPipe(
+                    fullPipeName,
+                    openMode,
+                    pipeModes,
+                    maxNumberOfServerInstances,
+                    outBufferSize,
+                    inBufferSize,
+                    0,
+                    ref secAttrs
+                );
 
                 if (handle.IsInvalid)
                 {
@@ -120,6 +210,7 @@ namespace System.IO.Pipes
 
                 InitializeHandle(handle, false, (options & PipeOptions.Asynchronous) != 0);
             }
+
             finally
             {
                 if (pinningHandle.IsAllocated)
@@ -154,9 +245,14 @@ namespace System.IO.Pipes
                     }
 
                     // pipe already connected
-                    if (errorCode == Interop.Errors.ERROR_PIPE_CONNECTED && State == PipeState.Connected)
+                    if (
+                        errorCode == Interop.Errors.ERROR_PIPE_CONNECTED
+                        && State == PipeState.Connected
+                    )
                     {
-                        throw new InvalidOperationException(SR.InvalidOperation_PipeAlreadyConnected);
+                        throw new InvalidOperationException(
+                            SR.InvalidOperation_PipeAlreadyConnected
+                        );
                     }
                     // If we reach here then a connection has been established.  This can happen if a client
                     // connects in the interval between the call to CreateNamedPipe and the call to ConnectNamedPipe.
@@ -176,8 +272,13 @@ namespace System.IO.Pipes
 
             if (!IsAsync)
             {
-                return Task.Factory.StartNew(s => ((NamedPipeServerStream)s!).WaitForConnection(),
-                    this, cancellationToken, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                return Task.Factory.StartNew(
+                    s => ((NamedPipeServerStream)s!).WaitForConnection(),
+                    this,
+                    cancellationToken,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
             }
 
             return WaitForConnectionCoreAsync(cancellationToken);
@@ -206,12 +307,26 @@ namespace System.IO.Pipes
             const uint UserNameMaxLength = Interop.Kernel32.CREDUI_MAX_USERNAME_LENGTH + 1;
             char* userName = stackalloc char[(int)UserNameMaxLength]; // ~1K
 
-            if (Interop.Kernel32.GetNamedPipeHandleStateW(InternalHandle!, null, null, null, null, userName, UserNameMaxLength))
+            if (
+                Interop.Kernel32.GetNamedPipeHandleStateW(
+                    InternalHandle!,
+                    null,
+                    null,
+                    null,
+                    null,
+                    userName,
+                    UserNameMaxLength
+                )
+            )
             {
                 return new string(userName);
             }
 
-            return HandleGetImpersonationUserNameError(Marshal.GetLastWin32Error(), UserNameMaxLength, userName);
+            return HandleGetImpersonationUserNameError(
+                Marshal.GetLastWin32Error(),
+                UserNameMaxLength,
+                userName
+            );
         }
 
         // This method calls a delegate while impersonating the client. Note that we will not have
@@ -228,6 +343,7 @@ namespace System.IO.Pipes
                 ImpersonateAndTryCode(execHelper);
                 exceptionThrown = false;
             }
+
             finally
             {
                 RevertImpersonationOnBackout(execHelper, exceptionThrown);
@@ -320,7 +436,9 @@ namespace System.IO.Pipes
                         completionSource.ReleaseResources();
                         if (State == PipeState.Connected)
                         {
-                            throw new InvalidOperationException(SR.InvalidOperation_PipeAlreadyConnected);
+                            throw new InvalidOperationException(
+                                SR.InvalidOperation_PipeAlreadyConnected
+                            );
                         }
                         completionSource.SetCompletedSynchronously();
 

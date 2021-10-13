@@ -32,7 +32,11 @@ namespace ILCompiler
             {
                 if (!type.IsArrayTypeWithoutGenericInterfaces())
                 {
-                    MetadataType arrayShadowType = type.Context.SystemModule.GetType("System", "Array`1", NotFoundBehavior.ReturnNull);
+                    MetadataType arrayShadowType = type.Context.SystemModule.GetType(
+                        "System",
+                        "Array`1",
+                        NotFoundBehavior.ReturnNull
+                    );
                     if (arrayShadowType != null)
                     {
                         return arrayShadowType.MakeInstantiatedType(((ArrayType)type).ElementType);
@@ -52,8 +56,13 @@ namespace ILCompiler
         /// </summary>
         public static bool RequiresInstArg(this MethodDesc method)
         {
-            return method.IsSharedByGenericInstantiations &&
-                (method.HasInstantiation || method.Signature.IsStatic || method.ImplementationType.IsValueType || (method.ImplementationType.IsInterface && !method.IsAbstract));
+            return method.IsSharedByGenericInstantiations
+                && (
+                    method.HasInstantiation
+                    || method.Signature.IsStatic
+                    || method.ImplementationType.IsValueType
+                    || (method.ImplementationType.IsInterface && !method.IsAbstract)
+                );
         }
 
         /// <summary>
@@ -71,9 +80,13 @@ namespace ILCompiler
         /// </summary>
         public static bool RequiresInstMethodTableArg(this MethodDesc method)
         {
-            return (method.Signature.IsStatic || method.ImplementationType.IsValueType || (method.ImplementationType.IsInterface && !method.IsAbstract)) &&
-                method.IsSharedByGenericInstantiations &&
-                !method.HasInstantiation;
+            return (
+                    method.Signature.IsStatic
+                    || method.ImplementationType.IsValueType
+                    || (method.ImplementationType.IsInterface && !method.IsAbstract)
+                )
+                && method.IsSharedByGenericInstantiations
+                && !method.HasInstantiation;
         }
 
         /// <summary>
@@ -81,11 +94,11 @@ namespace ILCompiler
         /// </summary>
         public static bool AcquiresInstMethodTableFromThis(this MethodDesc method)
         {
-            return method.IsSharedByGenericInstantiations &&
-                !method.HasInstantiation &&
-                !method.Signature.IsStatic &&
-                !method.ImplementationType.IsValueType &&
-                !(method.ImplementationType.IsInterface && !method.IsAbstract);
+            return method.IsSharedByGenericInstantiations
+                && !method.HasInstantiation
+                && !method.Signature.IsStatic
+                && !method.ImplementationType.IsValueType
+                && !(method.ImplementationType.IsInterface && !method.IsAbstract);
         }
 
         /// <summary>
@@ -97,17 +110,19 @@ namespace ILCompiler
             return arrayMethod != null && arrayMethod.Kind == ArrayMethodKind.Address;
         }
 
-
         /// <summary>
         /// Returns true if '<paramref name="method"/>' is one of the special methods on multidimensional array types (set, get, address).
         /// </summary>
         public static bool IsArrayMethod(this MethodDesc method)
         {
             var arrayMethod = method as ArrayMethod;
-            return arrayMethod != null && (arrayMethod.Kind == ArrayMethodKind.Address || 
-                                           arrayMethod.Kind == ArrayMethodKind.Get || 
-                                           arrayMethod.Kind == ArrayMethodKind.Set || 
-                                           arrayMethod.Kind == ArrayMethodKind.Ctor);
+            return arrayMethod != null
+                && (
+                    arrayMethod.Kind == ArrayMethodKind.Address
+                    || arrayMethod.Kind == ArrayMethodKind.Get
+                    || arrayMethod.Kind == ArrayMethodKind.Set
+                    || arrayMethod.Kind == ArrayMethodKind.Ctor
+                );
         }
 
         /// <summary>
@@ -173,7 +188,10 @@ namespace ILCompiler
                 int maxGenericDepthInInstantiation = 0;
                 foreach (TypeDesc instantiationType in type.Instantiation)
                 {
-                    maxGenericDepthInInstantiation = Math.Max(instantiationType.GetGenericDepth(), maxGenericDepthInInstantiation);
+                    maxGenericDepthInInstantiation = Math.Max(
+                        instantiationType.GetGenericDepth(),
+                        maxGenericDepthInInstantiation
+                    );
                 }
 
                 return maxGenericDepthInInstantiation + 1;
@@ -256,7 +274,7 @@ namespace ILCompiler
                 if (ta.IsInterface)
                 {
                     //
-                    // Both classes are interfaces.  Check that if one 
+                    // Both classes are interfaces.  Check that if one
                     // interface extends the other.
                     //
                     // Does tb extend ta ?
@@ -376,7 +394,10 @@ namespace ILCompiler
             return mergeElem.MakeArrayType();
         }
 
-        private static bool ImplementsEquivalentInterface(this TypeDesc type, TypeDesc interfaceType)
+        private static bool ImplementsEquivalentInterface(
+            this TypeDesc type,
+            TypeDesc interfaceType
+        )
         {
             foreach (DefType implementedInterface in type.RuntimeInterfaces)
             {
@@ -425,12 +446,18 @@ namespace ILCompiler
             return thisType;
         }
 
-        public static Instantiation GetInstantiationThatMeetsConstraints(Instantiation inst, bool allowCanon)
+        public static Instantiation GetInstantiationThatMeetsConstraints(
+            Instantiation inst,
+            bool allowCanon
+        )
         {
             TypeDesc[] resultArray = new TypeDesc[inst.Length];
             for (int i = 0; i < inst.Length; i++)
             {
-                TypeDesc instArg = GetTypeThatMeetsConstraints((GenericParameterDesc)inst[i], allowCanon);
+                TypeDesc instArg = GetTypeThatMeetsConstraints(
+                    (GenericParameterDesc)inst[i],
+                    allowCanon
+                );
                 if (instArg == null)
                     return default(Instantiation);
                 resultArray[i] = instArg;
@@ -439,7 +466,10 @@ namespace ILCompiler
             return new Instantiation(resultArray);
         }
 
-        private static TypeDesc GetTypeThatMeetsConstraints(GenericParameterDesc genericParam, bool allowCanon)
+        private static TypeDesc GetTypeThatMeetsConstraints(
+            GenericParameterDesc genericParam,
+            bool allowCanon
+        )
         {
             TypeSystemContext context = genericParam.Context;
 
@@ -488,7 +518,10 @@ namespace ILCompiler
             return constrainedType ?? genericParam.Context.GetWellKnownType(WellKnownType.Object);
         }
 
-        public static bool ContainsSignatureVariables(this Instantiation instantiation, bool treatGenericParameterLikeSignatureVariable = false)
+        public static bool ContainsSignatureVariables(
+            this Instantiation instantiation,
+            bool treatGenericParameterLikeSignatureVariable = false
+        )
         {
             foreach (var arg in instantiation)
             {

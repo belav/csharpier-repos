@@ -12,7 +12,8 @@ namespace TagHelpersWebSite.TagHelpers
     public class DictionaryPrefixTestTagHelper : TagHelper
     {
         [HtmlAttributeName(DictionaryAttributePrefix = "prefix-")]
-        public IDictionary<string, ModelExpression> PrefixValues { get; set; } = new Dictionary<string, ModelExpression>();
+        public IDictionary<string, ModelExpression> PrefixValues { get; set; } =
+            new Dictionary<string, ModelExpression>();
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
@@ -21,7 +22,7 @@ namespace TagHelpersWebSite.TagHelpers
             foreach (var item in PrefixValues)
             {
                 var liTag = new TagBuilder("li");
-                
+
                 liTag.InnerHtml.Append(item.Value.Name);
 
                 ulTag.InnerHtml.AppendHtml(liTag);

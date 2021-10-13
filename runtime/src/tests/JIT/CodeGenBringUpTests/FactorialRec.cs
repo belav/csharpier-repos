@@ -27,7 +27,8 @@ public class BringUpTest
     public static int Main()
     {
         int s = FactorialRec(5);
-        if (s != 120) return Fail;
+        if (s != 120)
+            return Fail;
         return Pass;
     }
 }

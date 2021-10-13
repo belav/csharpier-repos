@@ -11,14 +11,18 @@ namespace BasicTestApp.InteropTest
 {
     public class JavaScriptInterop
     {
-        public static ConcurrentDictionary<string, object[]> Invocations = new ConcurrentDictionary<string, object[]>();
+        public static ConcurrentDictionary<string, object[]> Invocations = new ConcurrentDictionary<
+            string,
+            object[]
+        >();
 
         [JSInvokable]
-        public static void ThrowException() => throw new InvalidOperationException("Threw an exception!");
+        public static void ThrowException() =>
+            throw new InvalidOperationException("Threw an exception!");
 
         [JSInvokable]
-        public static Task AsyncThrowSyncException()
-            => throw new InvalidOperationException("Threw a sync exception!");
+        public static Task AsyncThrowSyncException() =>
+            throw new InvalidOperationException("Threw a sync exception!");
 
         [JSInvokable]
         public static async Task AsyncThrowAsyncException()
@@ -40,9 +44,7 @@ namespace BasicTestApp.InteropTest
         }
 
         [JSInvokable]
-        public static void VoidWithTwoParameters(
-            ComplexParameter parameter1,
-            byte parameter2)
+        public static void VoidWithTwoParameters(ComplexParameter parameter1, byte parameter2)
         {
             Invocations[nameof(VoidWithTwoParameters)] = new object[] { parameter1, parameter2 };
         }
@@ -51,9 +53,15 @@ namespace BasicTestApp.InteropTest
         public static void VoidWithThreeParameters(
             ComplexParameter parameter1,
             byte parameter2,
-            DotNetObjectReference<TestDTO> parameter3)
+            DotNetObjectReference<TestDTO> parameter3
+        )
         {
-            Invocations[nameof(VoidWithThreeParameters)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue() };
+            Invocations[nameof(VoidWithThreeParameters)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue()
+            };
         }
 
         [JSInvokable]
@@ -61,9 +69,16 @@ namespace BasicTestApp.InteropTest
             ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
-            int parameter4)
+            int parameter4
+        )
         {
-            Invocations[nameof(VoidWithFourParameters)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4 };
+            Invocations[nameof(VoidWithFourParameters)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4
+            };
         }
 
         [JSInvokable]
@@ -72,9 +87,17 @@ namespace BasicTestApp.InteropTest
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
-            long parameter5)
+            long parameter5
+        )
         {
-            Invocations[nameof(VoidWithFiveParameters)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5 };
+            Invocations[nameof(VoidWithFiveParameters)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5
+            };
         }
 
         [JSInvokable]
@@ -84,9 +107,18 @@ namespace BasicTestApp.InteropTest
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5,
-            float parameter6)
+            float parameter6
+        )
         {
-            Invocations[nameof(VoidWithSixParameters)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6 };
+            Invocations[nameof(VoidWithSixParameters)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6
+            };
         }
 
         [JSInvokable]
@@ -97,9 +129,19 @@ namespace BasicTestApp.InteropTest
             int parameter4,
             long parameter5,
             float parameter6,
-            List<double> parameter7)
+            List<double> parameter7
+        )
         {
-            Invocations[nameof(VoidWithSevenParameters)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6, parameter7 };
+            Invocations[nameof(VoidWithSevenParameters)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6,
+                parameter7
+            };
         }
 
         [JSInvokable]
@@ -111,9 +153,20 @@ namespace BasicTestApp.InteropTest
             long parameter5,
             float parameter6,
             List<double> parameter7,
-            Segment parameter8)
+            Segment parameter8
+        )
         {
-            Invocations[nameof(VoidWithEightParameters)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6, parameter7, parameter8 };
+            Invocations[nameof(VoidWithEightParameters)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6,
+                parameter7,
+                parameter8
+            };
         }
 
         [JSInvokable]
@@ -129,9 +182,7 @@ namespace BasicTestApp.InteropTest
         }
 
         [JSInvokable]
-        public static object[] EchoTwoParameters(
-            ComplexParameter parameter1,
-            byte parameter2)
+        public static object[] EchoTwoParameters(ComplexParameter parameter1, byte parameter2)
         {
             return new object[] { parameter1, parameter2 };
         }
@@ -140,9 +191,15 @@ namespace BasicTestApp.InteropTest
         public static object[] EchoThreeParameters(
             ComplexParameter parameter1,
             byte parameter2,
-            DotNetObjectReference<TestDTO> parameter3)
+            DotNetObjectReference<TestDTO> parameter3
+        )
         {
-            return new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue() };
+            return new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue()
+            };
         }
 
         [JSInvokable]
@@ -150,9 +207,16 @@ namespace BasicTestApp.InteropTest
             ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
-            int parameter4)
+            int parameter4
+        )
         {
-            return new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4 };
+            return new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4
+            };
         }
 
         [JSInvokable]
@@ -161,32 +225,61 @@ namespace BasicTestApp.InteropTest
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
-            long parameter5)
+            long parameter5
+        )
         {
-            return new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5 };
+            return new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5
+            };
         }
 
         [JSInvokable]
-        public static object[] EchoSixParameters(ComplexParameter parameter1,
+        public static object[] EchoSixParameters(
+            ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5,
-            float parameter6)
+            float parameter6
+        )
         {
-            return new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6 };
+            return new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6
+            };
         }
 
         [JSInvokable]
-        public static object[] EchoSevenParameters(ComplexParameter parameter1,
+        public static object[] EchoSevenParameters(
+            ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5,
             float parameter6,
-            List<double> parameter7)
+            List<double> parameter7
+        )
         {
-            return new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6, parameter7 };
+            return new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6,
+                parameter7
+            };
         }
 
         [JSInvokable]
@@ -198,9 +291,20 @@ namespace BasicTestApp.InteropTest
             long parameter5,
             float parameter6,
             List<double> parameter7,
-            Segment parameter8)
+            Segment parameter8
+        )
         {
-            return new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6, parameter7, parameter8 };
+            return new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6,
+                parameter7,
+                parameter8
+            };
         }
 
         [JSInvokable]
@@ -218,11 +322,13 @@ namespace BasicTestApp.InteropTest
         }
 
         [JSInvokable]
-        public static Task VoidWithTwoParametersAsync(
-            ComplexParameter parameter1,
-            byte parameter2)
+        public static Task VoidWithTwoParametersAsync(ComplexParameter parameter1, byte parameter2)
         {
-            Invocations[nameof(VoidWithTwoParametersAsync)] = new object[] { parameter1, parameter2 };
+            Invocations[nameof(VoidWithTwoParametersAsync)] = new object[]
+            {
+                parameter1,
+                parameter2
+            };
             return Task.CompletedTask;
         }
 
@@ -230,9 +336,15 @@ namespace BasicTestApp.InteropTest
         public static Task VoidWithThreeParametersAsync(
             ComplexParameter parameter1,
             byte parameter2,
-            DotNetObjectReference<TestDTO> parameter3)
+            DotNetObjectReference<TestDTO> parameter3
+        )
         {
-            Invocations[nameof(VoidWithThreeParametersAsync)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue() };
+            Invocations[nameof(VoidWithThreeParametersAsync)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue()
+            };
             return Task.CompletedTask;
         }
 
@@ -241,9 +353,16 @@ namespace BasicTestApp.InteropTest
             ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
-            int parameter4)
+            int parameter4
+        )
         {
-            Invocations[nameof(VoidWithFourParametersAsync)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4 };
+            Invocations[nameof(VoidWithFourParametersAsync)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4
+            };
             return Task.CompletedTask;
         }
 
@@ -253,9 +372,17 @@ namespace BasicTestApp.InteropTest
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
-            long parameter5)
+            long parameter5
+        )
         {
-            Invocations[nameof(VoidWithFiveParametersAsync)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5 };
+            Invocations[nameof(VoidWithFiveParametersAsync)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5
+            };
             return Task.CompletedTask;
         }
 
@@ -266,9 +393,18 @@ namespace BasicTestApp.InteropTest
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5,
-            float parameter6)
+            float parameter6
+        )
         {
-            Invocations[nameof(VoidWithSixParametersAsync)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6 };
+            Invocations[nameof(VoidWithSixParametersAsync)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6
+            };
             return Task.CompletedTask;
         }
 
@@ -280,9 +416,19 @@ namespace BasicTestApp.InteropTest
             int parameter4,
             long parameter5,
             float parameter6,
-            List<double> parameter7)
+            List<double> parameter7
+        )
         {
-            Invocations[nameof(VoidWithSevenParametersAsync)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6, parameter7 };
+            Invocations[nameof(VoidWithSevenParametersAsync)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6,
+                parameter7
+            };
             return Task.CompletedTask;
         }
 
@@ -295,9 +441,20 @@ namespace BasicTestApp.InteropTest
             long parameter5,
             float parameter6,
             List<double> parameter7,
-            Segment parameter8)
+            Segment parameter8
+        )
         {
-            Invocations[nameof(VoidWithEightParametersAsync)] = new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6, parameter7, parameter8 };
+            Invocations[nameof(VoidWithEightParametersAsync)] = new object[]
+            {
+                parameter1,
+                parameter2,
+                parameter3.Value.GetNonSerializedValue(),
+                parameter4,
+                parameter5,
+                parameter6,
+                parameter7,
+                parameter8
+            };
             return Task.CompletedTask;
         }
 
@@ -316,7 +473,8 @@ namespace BasicTestApp.InteropTest
         [JSInvokable]
         public static Task<object[]> EchoTwoParametersAsync(
             ComplexParameter parameter1,
-            byte parameter2)
+            byte parameter2
+        )
         {
             return Task.FromResult(new object[] { parameter1, parameter2 });
         }
@@ -325,9 +483,12 @@ namespace BasicTestApp.InteropTest
         public static Task<object[]> EchoThreeParametersAsync(
             ComplexParameter parameter1,
             byte parameter2,
-            DotNetObjectReference<TestDTO> parameter3)
+            DotNetObjectReference<TestDTO> parameter3
+        )
         {
-            return Task.FromResult(new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue() });
+            return Task.FromResult(
+                new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue() }
+            );
         }
 
         [JSInvokable]
@@ -335,9 +496,18 @@ namespace BasicTestApp.InteropTest
             ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
-            int parameter4)
+            int parameter4
+        )
         {
-            return Task.FromResult(new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4 });
+            return Task.FromResult(
+                new object[]
+                {
+                    parameter1,
+                    parameter2,
+                    parameter3.Value.GetNonSerializedValue(),
+                    parameter4
+                }
+            );
         }
 
         [JSInvokable]
@@ -346,20 +516,42 @@ namespace BasicTestApp.InteropTest
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
-            long parameter5)
+            long parameter5
+        )
         {
-            return Task.FromResult(new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5 });
+            return Task.FromResult(
+                new object[]
+                {
+                    parameter1,
+                    parameter2,
+                    parameter3.Value.GetNonSerializedValue(),
+                    parameter4,
+                    parameter5
+                }
+            );
         }
 
         [JSInvokable]
-        public static Task<object[]> EchoSixParametersAsync(ComplexParameter parameter1,
+        public static Task<object[]> EchoSixParametersAsync(
+            ComplexParameter parameter1,
             byte parameter2,
             DotNetObjectReference<TestDTO> parameter3,
             int parameter4,
             long parameter5,
-            float parameter6)
+            float parameter6
+        )
         {
-            return Task.FromResult(new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6 });
+            return Task.FromResult(
+                new object[]
+                {
+                    parameter1,
+                    parameter2,
+                    parameter3.Value.GetNonSerializedValue(),
+                    parameter4,
+                    parameter5,
+                    parameter6
+                }
+            );
         }
 
         [JSInvokable]
@@ -370,9 +562,21 @@ namespace BasicTestApp.InteropTest
             int parameter4,
             long parameter5,
             float parameter6,
-            List<double> parameter7)
+            List<double> parameter7
+        )
         {
-            return Task.FromResult(new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6, parameter7 });
+            return Task.FromResult(
+                new object[]
+                {
+                    parameter1,
+                    parameter2,
+                    parameter3.Value.GetNonSerializedValue(),
+                    parameter4,
+                    parameter5,
+                    parameter6,
+                    parameter7
+                }
+            );
         }
 
         [JSInvokable]
@@ -384,9 +588,22 @@ namespace BasicTestApp.InteropTest
             long parameter5,
             float parameter6,
             List<double> parameter7,
-            Segment parameter8)
+            Segment parameter8
+        )
         {
-            return Task.FromResult(new object[] { parameter1, parameter2, parameter3.Value.GetNonSerializedValue(), parameter4, parameter5, parameter6, parameter7, parameter8 });
+            return Task.FromResult(
+                new object[]
+                {
+                    parameter1,
+                    parameter2,
+                    parameter3.Value.GetNonSerializedValue(),
+                    parameter4,
+                    parameter5,
+                    parameter6,
+                    parameter7,
+                    parameter8
+                }
+            );
         }
 
         [JSInvokable]
@@ -399,7 +616,9 @@ namespace BasicTestApp.InteropTest
         }
 
         [JSInvokable]
-        public static async Task<Dictionary<string, DotNetObjectReference<TestDTO>>> ReturnDotNetObjectByRefAsync()
+        public static async Task<
+            Dictionary<string, DotNetObjectReference<TestDTO>>
+        > ReturnDotNetObjectByRefAsync()
         {
             await Task.Yield();
             return new Dictionary<string, DotNetObjectReference<TestDTO>>
@@ -415,26 +634,32 @@ namespace BasicTestApp.InteropTest
         }
 
         [JSInvokable]
-        public static IJSObjectReference RoundTripJSObjectReference(IJSObjectReference jsObjectReference)
+        public static IJSObjectReference RoundTripJSObjectReference(
+            IJSObjectReference jsObjectReference
+        )
         {
             return jsObjectReference;
         }
 
         [JSInvokable]
-        public static async Task<IJSObjectReference> RoundTripJSObjectReferenceAsync(IJSObjectReference jSObjectReference)
+        public static async Task<IJSObjectReference> RoundTripJSObjectReferenceAsync(
+            IJSObjectReference jSObjectReference
+        )
         {
             await Task.Yield();
             return jSObjectReference;
         }
 
         [JSInvokable]
-        public static string InvokeDisposedJSObjectReferenceException(IJSInProcessObjectReference jsObjectReference)
+        public static string InvokeDisposedJSObjectReferenceException(
+            IJSInProcessObjectReference jsObjectReference
+        )
         {
             try
             {
                 jsObjectReference.Invoke<object>("noop");
                 return "No exception thrown";
-            } 
+            }
             catch (JSException e)
             {
                 return e.Message;
@@ -442,13 +667,15 @@ namespace BasicTestApp.InteropTest
         }
 
         [JSInvokable]
-        public static async Task<string> InvokeDisposedJSObjectReferenceExceptionAsync(IJSObjectReference jsObjectReference)
+        public static async Task<string> InvokeDisposedJSObjectReferenceExceptionAsync(
+            IJSObjectReference jsObjectReference
+        )
         {
             try
             {
                 await jsObjectReference.InvokeVoidAsync("noop");
                 return "No exception thrown";
-            } 
+            }
             catch (JSException e)
             {
                 return e.Message;

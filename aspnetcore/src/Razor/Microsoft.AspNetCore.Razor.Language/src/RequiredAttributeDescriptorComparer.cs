@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language
     /// An <see cref="IEqualityComparer{TagHelperRequiredAttributeDescriptor}"/> used to check equality between
     /// two <see cref="RequiredAttributeDescriptor"/>s.
     /// </summary>
-    internal class RequiredAttributeDescriptorComparer : IEqualityComparer<RequiredAttributeDescriptor>
+    internal class RequiredAttributeDescriptorComparer
+        : IEqualityComparer<RequiredAttributeDescriptor>
     {
         /// <summary>
         /// A default instance of the <see cref="RequiredAttributeDescriptorComparer"/>.
@@ -19,14 +20,13 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static readonly RequiredAttributeDescriptorComparer Default =
             new RequiredAttributeDescriptorComparer();
 
-        private RequiredAttributeDescriptorComparer()
-        {
-        }
+        private RequiredAttributeDescriptorComparer() { }
 
         /// <inheritdoc />
         public virtual bool Equals(
             RequiredAttributeDescriptor descriptorX,
-            RequiredAttributeDescriptor descriptorY)
+            RequiredAttributeDescriptor descriptorY
+        )
         {
             if (object.ReferenceEquals(descriptorX, descriptorY))
             {
@@ -38,13 +38,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                 return false;
             }
 
-            return
-                descriptorX.CaseSensitive == descriptorY.CaseSensitive &&
-                descriptorX.NameComparison == descriptorY.NameComparison &&
-                descriptorX.ValueComparison == descriptorY.ValueComparison &&
-                string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal) &&
-                string.Equals(descriptorX.Value, descriptorY.Value, StringComparison.Ordinal) &&
-                string.Equals(descriptorX.DisplayName, descriptorY.DisplayName, StringComparison.Ordinal);
+            return descriptorX.CaseSensitive == descriptorY.CaseSensitive
+                && descriptorX.NameComparison == descriptorY.NameComparison
+                && descriptorX.ValueComparison == descriptorY.ValueComparison
+                && string.Equals(descriptorX.Name, descriptorY.Name, StringComparison.Ordinal)
+                && string.Equals(descriptorX.Value, descriptorY.Value, StringComparison.Ordinal)
+                && string.Equals(
+                    descriptorX.DisplayName,
+                    descriptorY.DisplayName,
+                    StringComparison.Ordinal
+                );
         }
 
         /// <inheritdoc />

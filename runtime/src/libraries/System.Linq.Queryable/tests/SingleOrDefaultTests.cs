@@ -25,7 +25,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyDefault()
         {
-            int[] source = { };
+            int[] source = {  };
             int defaultValue = 5;
             Assert.Equal(defaultValue, source.AsQueryable().SingleOrDefault(5));
         }
@@ -39,7 +39,10 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithPredicateDefault()
         {
-            Assert.Equal(5, Enumerable.Empty<int?>().AsQueryable().SingleOrDefault(i => i % 2 == 0, 5));
+            Assert.Equal(
+                5,
+                Enumerable.Empty<int?>().AsQueryable().SingleOrDefault(i => i % 2 == 0, 5)
+            );
         }
 
         [Theory]
@@ -47,23 +50,35 @@ namespace System.Linq.Tests
         [InlineData(42, 100)]
         public void FindSingleMatch(int target, int range)
         {
-            Assert.Equal(target, Enumerable.Range(0, range).AsQueryable().SingleOrDefault(i => i == target));
+            Assert.Equal(
+                target,
+                Enumerable.Range(0, range).AsQueryable().SingleOrDefault(i => i == target)
+            );
         }
 
         [Fact]
         public void ThrowsOnNullSource()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SingleOrDefault());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.SingleOrDefault(i => i % 2 == 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SingleOrDefault()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.SingleOrDefault(i => i % 2 == 0)
+            );
         }
 
         [Fact]
         public void ThrowsOnNullPredicate()
         {
-            int[] source = { };
+            int[] source = {  };
             Expression<Func<int, bool>> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.AsQueryable().SingleOrDefault(nullPredicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.AsQueryable().SingleOrDefault(nullPredicate)
+            );
         }
 
         [Fact]

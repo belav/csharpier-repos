@@ -22,20 +22,33 @@ namespace Internal.Cryptography
             return new AppleHmacProvider(algorithm, key);
         }
 
-        private static Interop.AppleCrypto.PAL_HashAlgorithm HashAlgorithmToPal(string hashAlgorithmId) => hashAlgorithmId switch {
-            HashAlgorithmNames.MD5 => Interop.AppleCrypto.PAL_HashAlgorithm.Md5,
-            HashAlgorithmNames.SHA1 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha1,
-            HashAlgorithmNames.SHA256 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha256,
-            HashAlgorithmNames.SHA384 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha384,
-            HashAlgorithmNames.SHA512 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha512,
-            _ => throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId))
-        };
+        private static Interop.AppleCrypto.PAL_HashAlgorithm HashAlgorithmToPal(
+            string hashAlgorithmId
+        ) =>
+            hashAlgorithmId switch
+            {
+                HashAlgorithmNames.MD5 => Interop.AppleCrypto.PAL_HashAlgorithm.Md5,
+                HashAlgorithmNames.SHA1 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha1,
+                HashAlgorithmNames.SHA256 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha256,
+                HashAlgorithmNames.SHA384 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha384,
+                HashAlgorithmNames.SHA512 => Interop.AppleCrypto.PAL_HashAlgorithm.Sha512,
+                _
+                  => throw new CryptographicException(
+                      SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+                  )
+            };
 
         internal static class OneShotHashProvider
         {
-            public static unsafe int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
+            public static unsafe int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            )
             {
-                Interop.AppleCrypto.PAL_HashAlgorithm algorithm = HashAlgorithmToPal(hashAlgorithmId);
+                Interop.AppleCrypto.PAL_HashAlgorithm algorithm = HashAlgorithmToPal(
+                    hashAlgorithmId
+                );
 
                 fixed (byte* pSource = source)
                 fixed (byte* pDestination = destination)
@@ -46,7 +59,8 @@ namespace Internal.Cryptography
                         source.Length,
                         pDestination,
                         destination.Length,
-                        out int digestSize);
+                        out int digestSize
+                    );
 
                     if (ret != 1)
                     {
@@ -70,7 +84,10 @@ namespace Internal.Cryptography
 
             public override int HashSizeInBytes { get; }
 
-            internal AppleHmacProvider(Interop.AppleCrypto.PAL_HashAlgorithm algorithm, ReadOnlySpan<byte> key)
+            internal AppleHmacProvider(
+                Interop.AppleCrypto.PAL_HashAlgorithm algorithm,
+                ReadOnlySpan<byte> key
+            )
             {
                 _key = key.ToArray();
                 int hashSizeInBytes = 0;
@@ -82,7 +99,9 @@ namespace Internal.Cryptography
                     throw new PlatformNotSupportedException(
                         SR.Format(
                             SR.Cryptography_UnknownHashAlgorithm,
-                            Enum.GetName(typeof(Interop.AppleCrypto.PAL_HashAlgorithm), algorithm)));
+                            Enum.GetName(typeof(Interop.AppleCrypto.PAL_HashAlgorithm), algorithm)
+                        )
+                    );
                 }
 
                 if (_ctx.IsInvalid)
@@ -179,7 +198,9 @@ namespace Internal.Cryptography
                     throw new PlatformNotSupportedException(
                         SR.Format(
                             SR.Cryptography_UnknownHashAlgorithm,
-                            Enum.GetName(typeof(Interop.AppleCrypto.PAL_HashAlgorithm), algorithm)));
+                            Enum.GetName(typeof(Interop.AppleCrypto.PAL_HashAlgorithm), algorithm)
+                        )
+                    );
                 }
 
                 if (_ctx.IsInvalid)

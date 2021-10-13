@@ -128,7 +128,11 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 var testStruct = new TestStruct();
 
-                Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+                Unsafe.CopyBlockUnaligned(
+                    ref Unsafe.As<Vector128<Byte>, byte>(ref testStruct._fld),
+                    ref Unsafe.As<Byte, byte>(ref _data[0]),
+                    (uint)Unsafe.SizeOf<Vector128<Byte>>()
+                );
 
                 return testStruct;
             }
@@ -145,9 +149,7 @@ namespace JIT.HardwareIntrinsics.X86
             {
                 fixed (Vector128<Byte>* pFld = &_fld)
                 {
-                    var result = Aes.InverseMixColumns(
-                        Aes.LoadVector128((Byte*)(pFld))
-                    );
+                    var result = Aes.InverseMixColumns(Aes.LoadVector128((Byte*)(pFld)));
 
                     Unsafe.Write(testClass._dataTable.outArrayPtr, result);
                     testClass.ValidateResult(testClass._dataTable.outArrayPtr);
@@ -157,11 +159,48 @@ namespace JIT.HardwareIntrinsics.X86
 
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
 
-        private static Byte[] _data = new Byte[16] {0xef, 0xcd, 0xab, 0x89, 0x67, 0x45, 0x23, 0x01, 0xff, 0xee, 0xdd, 0xcc, 0xbb, 0xaa, 0x99, 0x88};
-        private static Byte[] _expectedRet = new Byte[16] {0xa0, 0x0a, 0xe4, 0x4e, 0x28, 0x82, 0x6c, 0xc6, 0x55, 0x00, 0x77, 0x22, 0x11, 0x44, 0x33, 0x66};
-        
+        private static Byte[] _data = new Byte[16]
+        {
+            0xef,
+            0xcd,
+            0xab,
+            0x89,
+            0x67,
+            0x45,
+            0x23,
+            0x01,
+            0xff,
+            0xee,
+            0xdd,
+            0xcc,
+            0xbb,
+            0xaa,
+            0x99,
+            0x88
+        };
+        private static Byte[] _expectedRet = new Byte[16]
+        {
+            0xa0,
+            0x0a,
+            0xe4,
+            0x4e,
+            0x28,
+            0x82,
+            0x6c,
+            0xc6,
+            0x55,
+            0x00,
+            0x77,
+            0x22,
+            0x11,
+            0x44,
+            0x33,
+            0x66
+        };
+
         private static Vector128<Byte> _clsVar;
 
         private Vector128<Byte> _fld;
@@ -170,18 +209,28 @@ namespace JIT.HardwareIntrinsics.X86
 
         static AesUnaryOpTest__InverseMixColumnsByte()
         {
-
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
         }
 
         public AesUnaryOpTest__InverseMixColumnsByte()
         {
             Succeeded = true;
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _fld), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _fld),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
-
-            _dataTable = new SimpleUnaryOpTest__DataTable<Byte, Byte>(_data, new Byte[RetElementCount], LargestVectorSize);
+            _dataTable = new SimpleUnaryOpTest__DataTable<Byte, Byte>(
+                _data,
+                new Byte[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Aes.IsSupported;
@@ -192,21 +241,17 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_UnsafeRead));
 
-            var result = Aes.InverseMixColumns(
-                Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr)
-            );
+            var result = Aes.InverseMixColumns(Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
-            ValidateResult( _dataTable.outArrayPtr);
+            ValidateResult(_dataTable.outArrayPtr);
         }
 
         public void RunBasicScenario_Load()
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunBasicScenario_Load));
 
-            var result = Aes.InverseMixColumns(
-                Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr))
-            );
+            var result = Aes.InverseMixColumns(Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -228,10 +273,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.InverseMixColumns), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr)
-                                     });
+            var result = typeof(Aes).GetMethod(
+                    nameof(Aes.InverseMixColumns),
+                    new Type[] { typeof(Vector128<Byte>) }
+                )
+                .Invoke(null, new object[] { Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -241,10 +287,11 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_Load));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.InverseMixColumns), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Aes).GetMethod(
+                    nameof(Aes.InverseMixColumns),
+                    new Type[] { typeof(Vector128<Byte>) }
+                )
+                .Invoke(null, new object[] { Aes.LoadVector128((Byte*)(_dataTable.inArrayPtr)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -254,10 +301,14 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_LoadAligned));
 
-            var result = typeof(Aes).GetMethod(nameof(Aes.InverseMixColumns), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Aes.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Aes).GetMethod(
+                    nameof(Aes.InverseMixColumns),
+                    new Type[] { typeof(Vector128<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Aes.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr)) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Byte>)(result));
             ValidateResult(_dataTable.outArrayPtr);
@@ -267,9 +318,7 @@ namespace JIT.HardwareIntrinsics.X86
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = Aes.InverseMixColumns(
-                _clsVar
-            );
+            var result = Aes.InverseMixColumns(_clsVar);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -281,9 +330,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pClsVar = &_clsVar)
             {
-                var result = Aes.InverseMixColumns(
-                    Aes.LoadVector128((Byte*)(pClsVar))
-                );
+                var result = Aes.InverseMixColumns(Aes.LoadVector128((Byte*)(pClsVar)));
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_dataTable.outArrayPtr);
@@ -342,9 +389,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pFld = &test._fld)
             {
-                var result = Aes.InverseMixColumns(
-                    Aes.LoadVector128((Byte*)(pFld))
-                );
+                var result = Aes.InverseMixColumns(Aes.LoadVector128((Byte*)(pFld)));
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_dataTable.outArrayPtr);
@@ -367,9 +412,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             fixed (Vector128<Byte>* pFld = &_fld)
             {
-                var result = Aes.InverseMixColumns(
-                    Aes.LoadVector128((Byte*)(pFld))
-                );
+                var result = Aes.InverseMixColumns(Aes.LoadVector128((Byte*)(pFld)));
 
                 Unsafe.Write(_dataTable.outArrayPtr, result);
                 ValidateResult(_dataTable.outArrayPtr);
@@ -392,9 +435,7 @@ namespace JIT.HardwareIntrinsics.X86
             TestLibrary.TestFramework.BeginScenario(nameof(RunStructLclFldScenario_Load));
 
             var test = TestStruct.Create();
-            var result = Aes.InverseMixColumns(
-                Aes.LoadVector128((Byte*)(&test._fld))
-            );
+            var result = Aes.InverseMixColumns(Aes.LoadVector128((Byte*)(&test._fld)));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.outArrayPtr);
@@ -437,13 +478,15 @@ namespace JIT.HardwareIntrinsics.X86
             }
         }
 
-
         private void ValidateResult(void* result, [CallerMemberName] string method = "")
         {
-
             Byte[] outArray = new Byte[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
             ValidateResult(outArray, method);
         }
@@ -454,7 +497,7 @@ namespace JIT.HardwareIntrinsics.X86
 
             for (int i = 0; i < result.Length; i++)
             {
-                if (result[i] != _expectedRet[i] )
+                if (result[i] != _expectedRet[i])
                 {
                     succeeded = false;
                     break;
@@ -463,9 +506,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(Aes)}.{nameof(Aes.InverseMixColumns)}<Byte>(Vector128<Byte>): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"  expectedRet: ({string.Join(", ", _expectedRet)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(Aes)}.{nameof(Aes.InverseMixColumns)}<Byte>(Vector128<Byte>): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  expectedRet: ({string.Join(", ", _expectedRet)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

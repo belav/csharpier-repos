@@ -9,12 +9,18 @@ internal class NullableTest
 {
     private static bool BoxUnboxToNQ<T>(T o)
     {
-        return Helper.Compare((WithMultipleGCHandleStruct)(ValueType)(object)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+        return Helper.Compare(
+            (WithMultipleGCHandleStruct)(ValueType)(object)o,
+            Helper.Create(default(WithMultipleGCHandleStruct))
+        );
     }
 
     private static bool BoxUnboxToQ<T>(T o)
     {
-        return Helper.Compare((WithMultipleGCHandleStruct?)(ValueType)(object)o, Helper.Create(default(WithMultipleGCHandleStruct)));
+        return Helper.Compare(
+            (WithMultipleGCHandleStruct?)(ValueType)(object)o,
+            Helper.Create(default(WithMultipleGCHandleStruct))
+        );
     }
 
     private static int Main()

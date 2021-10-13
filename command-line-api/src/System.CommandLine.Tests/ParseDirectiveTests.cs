@@ -29,9 +29,7 @@ namespace System.CommandLine.Tests
             var option = new Option<int>(new[] { "-c", "--count" });
             subcommand.AddOption(option);
 
-            var parser = new CommandLineBuilder(rootCommand)
-                         .UseParseDirective()
-                         .Build();
+            var parser = new CommandLineBuilder(rootCommand).UseParseDirective().Build();
 
             var result = parser.Parse("[parse] subcommand -c 34 --nonexistent wat");
 
@@ -41,19 +39,18 @@ namespace System.CommandLine.Tests
 
             await result.InvokeAsync(console);
 
-            console.Out
-                   .ToString()
-                   .Should()
-                   .Be($"[ {RootCommand.ExecutableName} [ subcommand [ -c <34> ] ] ]   ???--> --nonexistent wat" + Environment.NewLine);
+            console.Out.ToString()
+                .Should()
+                .Be(
+                    $"[ {RootCommand.ExecutableName} [ subcommand [ -c <34> ] ] ]   ???--> --nonexistent wat"
+                        + Environment.NewLine
+                );
         }
 
         [Fact]
         public async Task When_there_are_no_errors_then_parse_directive_sets_exit_code_0()
         {
-            var command = new RootCommand
-            {
-                new Option<int>("-x")
-            };
+            var command = new RootCommand { new Option<int>("-x") };
 
             var exitCode = await command.InvokeAsync("[parse] -x 123");
 
@@ -63,10 +60,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_there_are_errors_then_parse_directive_sets_exit_code_1()
         {
-            var command = new RootCommand
-            {
-                new Option<int>("-x")
-            };
+            var command = new RootCommand { new Option<int>("-x") };
 
             var exitCode = await command.InvokeAsync("[parse] -x not-an-int");
 
@@ -76,13 +70,9 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_there_are_errors_then_parse_directive_sets_exit_code_to_custom_value()
         {
-            var command = new RootCommand
-            {
-                new Option<int>("-x")
-            };
+            var command = new RootCommand { new Option<int>("-x") };
 
-            int exitCode = await new CommandLineBuilder()
-                .AddCommand(command)
+            int exitCode = await new CommandLineBuilder().AddCommand(command)
                 .UseParseDirective(errorExitCode: 42)
                 .Build()
                 .InvokeAsync("[parse] -x not-an-int");

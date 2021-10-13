@@ -18,21 +18,32 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpRemoveUnnecessaryDiscardDesignationDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.RemoveUnnecessaryDiscardDesignationDiagnosticId,
-                   EnforceOnBuildValues.RemoveUnnecessaryDiscardDesignation,
-                   option: null,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Remove_unnessary_discard), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Discard_can_be_removed), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   isUnnecessary: true)
-        {
-        }
+            : base(
+                IDEDiagnosticIds.RemoveUnnecessaryDiscardDesignationDiagnosticId,
+                EnforceOnBuildValues.RemoveUnnecessaryDiscardDesignation,
+                option: null,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Remove_unnessary_discard),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Discard_can_be_removed),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                isUnnecessary: true
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterSyntaxNodeAction(AnalyzeDiscardDesignation, SyntaxKind.DiscardDesignation);
+            context.RegisterSyntaxNodeAction(
+                AnalyzeDiscardDesignation,
+                SyntaxKind.DiscardDesignation
+            );
         }
 
         private void AnalyzeDiscardDesignation(SyntaxNodeAnalysisContext context)
@@ -49,8 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
             else if (discard.Parent is RecursivePatternSyntax recursivePattern)
             {
                 // can't remove from `(int i) _` as `(int i)` is not a legal pattern itself.
-                if (recursivePattern.PositionalPatternClause != null &&
-                    recursivePattern.PositionalPatternClause.Subpatterns.Count == 1)
+                if (
+                    recursivePattern.PositionalPatternClause != null
+                    && recursivePattern.PositionalPatternClause.Subpatterns.Count == 1
+                )
                 {
                     return;
                 }
@@ -62,9 +75,7 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
 
             void Report(DiscardDesignationSyntax discard)
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    this.Descriptor,
-                    discard.GetLocation()));
+                context.ReportDiagnostic(Diagnostic.Create(this.Descriptor, discard.GetLocation()));
             }
         }
     }

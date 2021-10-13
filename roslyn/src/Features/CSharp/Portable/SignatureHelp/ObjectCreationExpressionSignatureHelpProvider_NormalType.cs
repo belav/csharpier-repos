@@ -25,18 +25,37 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IDocumentationCommentFormattingService documentationCommentFormattingService,
             INamedTypeSymbol normalType,
             ISymbol within,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var accessibleConstructors = normalType.InstanceConstructors
-                                                   .WhereAsArray(c => c.IsAccessibleWithin(within))
-                                                   .WhereAsArray(s => s.IsEditorBrowsable(document.ShouldHideAdvancedMembers(), semanticModel.Compilation))
-                                                   .Sort(semanticModel, objectCreationExpression.SpanStart);
+            var accessibleConstructors = normalType.InstanceConstructors.WhereAsArray(
+                    c => c.IsAccessibleWithin(within)
+                )
+                .WhereAsArray(
+                    s =>
+                        s.IsEditorBrowsable(
+                            document.ShouldHideAdvancedMembers(),
+                            semanticModel.Compilation
+                        )
+                )
+                .Sort(semanticModel, objectCreationExpression.SpanStart);
 
-            var symbolInfo = semanticModel.GetSymbolInfo(objectCreationExpression, cancellationToken);
+            var symbolInfo = semanticModel.GetSymbolInfo(
+                objectCreationExpression,
+                cancellationToken
+            );
             var selectedItem = TryGetSelectedIndex(accessibleConstructors, symbolInfo.Symbol);
 
-            var items = accessibleConstructors.SelectAsArray(c =>
-                ConvertNormalTypeConstructor(c, objectCreationExpression, semanticModel, anonymousTypeDisplayService, documentationCommentFormattingService));
+            var items = accessibleConstructors.SelectAsArray(
+                c =>
+                    ConvertNormalTypeConstructor(
+                        c,
+                        objectCreationExpression,
+                        semanticModel,
+                        anonymousTypeDisplayService,
+                        documentationCommentFormattingService
+                    )
+            );
 
             return (items, selectedItem);
         }
@@ -46,18 +65,35 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             BaseObjectCreationExpressionSyntax objectCreationExpression,
             SemanticModel semanticModel,
             IAnonymousTypeDisplayService anonymousTypeDisplayService,
-            IDocumentationCommentFormattingService documentationCommentFormattingService)
+            IDocumentationCommentFormattingService documentationCommentFormattingService
+        )
         {
             var position = objectCreationExpression.SpanStart;
             var item = CreateItem(
-                constructor, semanticModel, position,
+                constructor,
+                semanticModel,
+                position,
                 anonymousTypeDisplayService,
                 constructor.IsParams(),
-                constructor.GetDocumentationPartsFactory(semanticModel, position, documentationCommentFormattingService),
+                constructor.GetDocumentationPartsFactory(
+                    semanticModel,
+                    position,
+                    documentationCommentFormattingService
+                ),
                 GetNormalTypePreambleParts(constructor, semanticModel, position),
                 GetSeparatorParts(),
                 GetNormalTypePostambleParts(),
-                constructor.Parameters.Select(p => Convert(p, semanticModel, position, documentationCommentFormattingService)).ToList());
+                constructor.Parameters.Select(
+                        p =>
+                            Convert(
+                                p,
+                                semanticModel,
+                                position,
+                                documentationCommentFormattingService
+                            )
+                    )
+                    .ToList()
+            );
 
             return item;
         }
@@ -65,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static IList<SymbolDisplayPart> GetNormalTypePreambleParts(
             IMethodSymbol method,
             SemanticModel semanticModel,
-            int position)
+            int position
+        )
         {
             var result = new List<SymbolDisplayPart>();
 
@@ -77,8 +114,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
         private static IList<SymbolDisplayPart> GetNormalTypePostambleParts()
         {
-            return SpecializedCollections.SingletonList(
-                Punctuation(SyntaxKind.CloseParenToken));
+            return SpecializedCollections.SingletonList(Punctuation(SyntaxKind.CloseParenToken));
         }
     }
 }

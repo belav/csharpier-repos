@@ -25,15 +25,21 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             // Arrange
             var localApiDescriptor = new Mock<IIdentityServerJwtDescriptor>();
             localApiDescriptor.Setup(lad => lad.GetResourceDefinitions())
-                .Returns(new Dictionary<string, ResourceDefinition>
-                {
-                    ["TestAPI"] = new ResourceDefinition { Profile = ApplicationProfiles.IdentityServerJwt }
-                });
+                .Returns(
+                    new Dictionary<string, ResourceDefinition>
+                    {
+                        ["TestAPI"] = new ResourceDefinition
+                        {
+                            Profile = ApplicationProfiles.IdentityServerJwt
+                        }
+                    }
+                );
 
             var bearerConfiguration = new IdentityServerJwtBearerOptionsConfiguration(
                 "authScheme",
                 "TestAPI",
-                localApiDescriptor.Object);
+                localApiDescriptor.Object
+            );
 
             var options = new JwtBearerOptions();
 
@@ -52,27 +58,41 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             // Arrange
             var localApiDescriptor = new Mock<IIdentityServerJwtDescriptor>();
             localApiDescriptor.Setup(lad => lad.GetResourceDefinitions())
-                .Returns(new Dictionary<string, ResourceDefinition>
-                {
-                    ["TestAPI"] = new ResourceDefinition { Profile = ApplicationProfiles.IdentityServerJwt }
-                });
+                .Returns(
+                    new Dictionary<string, ResourceDefinition>
+                    {
+                        ["TestAPI"] = new ResourceDefinition
+                        {
+                            Profile = ApplicationProfiles.IdentityServerJwt
+                        }
+                    }
+                );
 
             var credentialsStore = new Mock<ISigningCredentialStore>();
             var key = new RsaSecurityKey(RSA.Create());
             credentialsStore.Setup(cs => cs.GetSigningCredentialsAsync())
-                            .ReturnsAsync(new SigningCredentials(key, "RS256"));
+                .ReturnsAsync(new SigningCredentials(key, "RS256"));
 
             var context = new DefaultHttpContext();
             context.Request.Scheme = "https";
             context.Request.Host = new HostString("localhost");
-            context.RequestServices = new ServiceCollection()
-                            .AddSingleton(new IdentityServerOptions())
-                            .AddSingleton(credentialsStore.Object)
-                            .BuildServiceProvider();
+            context.RequestServices = new ServiceCollection().AddSingleton(
+                    new IdentityServerOptions()
+                )
+                .AddSingleton(credentialsStore.Object)
+                .BuildServiceProvider();
 
             var options = new JwtBearerOptions();
-            var args = new MessageReceivedContext(context, new AuthenticationScheme("TestAPI",null, Mock.Of<IAuthenticationHandler>().GetType()), options);
-            
+            var args = new MessageReceivedContext(
+                context,
+                new AuthenticationScheme(
+                    "TestAPI",
+                    null,
+                    Mock.Of<IAuthenticationHandler>().GetType()
+                ),
+                options
+            );
+
             // Act
             await IdentityServerJwtBearerOptionsConfiguration.ResolveAuthorityAndKeysAsync(args);
 
@@ -87,15 +107,21 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             // Arrange
             var localApiDescriptor = new Mock<IIdentityServerJwtDescriptor>();
             localApiDescriptor.Setup(lad => lad.GetResourceDefinitions())
-                .Returns(new Dictionary<string, ResourceDefinition>
-                {
-                    ["TestAPI"] = new ResourceDefinition { Profile = ApplicationProfiles.IdentityServerJwt }
-                });
+                .Returns(
+                    new Dictionary<string, ResourceDefinition>
+                    {
+                        ["TestAPI"] = new ResourceDefinition
+                        {
+                            Profile = ApplicationProfiles.IdentityServerJwt
+                        }
+                    }
+                );
 
             var bearerConfiguration = new IdentityServerJwtBearerOptionsConfiguration(
                 "authScheme",
                 "TestAPI",
-                localApiDescriptor.Object);
+                localApiDescriptor.Object
+            );
 
             var options = new JwtBearerOptions();
 
@@ -117,18 +143,23 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var context = new DefaultHttpContext();
             context.Request.Scheme = "https";
             context.Request.Host = new HostString("localhost");
-            context.RequestServices = new ServiceCollection()
-                .AddSingleton(new IdentityServerOptions())
+            context.RequestServices = new ServiceCollection().AddSingleton(
+                    new IdentityServerOptions()
+                )
                 .BuildServiceProvider();
-            contextAccessor.SetupGet(ca => ca.HttpContext).Returns(
-                context);
+            contextAccessor.SetupGet(ca => ca.HttpContext).Returns(context);
 
             var localApiDescriptor = new Mock<IIdentityServerJwtDescriptor>();
             localApiDescriptor.Setup(lad => lad.GetResourceDefinitions())
-                .Returns(new Dictionary<string, ResourceDefinition>
-                {
-                    ["TestAPI"] = new ResourceDefinition { Profile = ApplicationProfiles.IdentityServerJwt }
-                });
+                .Returns(
+                    new Dictionary<string, ResourceDefinition>
+                    {
+                        ["TestAPI"] = new ResourceDefinition
+                        {
+                            Profile = ApplicationProfiles.IdentityServerJwt
+                        }
+                    }
+                );
 
             var credentialsStore = new Mock<ISigningCredentialStore>();
             var key = new RsaSecurityKey(RSA.Create());
@@ -138,7 +169,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var bearerConfiguration = new IdentityServerJwtBearerOptionsConfiguration(
                 "authScheme",
                 "NonExistingApi",
-                localApiDescriptor.Object);
+                localApiDescriptor.Object
+            );
 
             var options = new JwtBearerOptions();
 

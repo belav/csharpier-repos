@@ -29,8 +29,7 @@ namespace Internal.Cryptography
         }
 
         // Encode a byte array as an upper case hex string.
-        public static string ToHexStringUpper(this byte[] bytes) =>
-            Convert.ToHexString(bytes);
+        public static string ToHexStringUpper(this byte[] bytes) => Convert.ToHexString(bytes);
 
         // Decode a hex string-encoded byte array passed to various X509 crypto api.
         // The parsing rules are overly forgiving but for compat reasons, they cannot be tightened.
@@ -127,17 +126,28 @@ namespace Internal.Cryptography
         //
         public static bool IsValidDay(this Calendar calendar, int year, int month, int day, int era)
         {
-            return (calendar.IsValidMonth(year, month, era) && day >= 1 && day <= calendar.GetDaysInMonth(year, month, era));
+            return (
+                calendar.IsValidMonth(year, month, era)
+                && day >= 1
+                && day <= calendar.GetDaysInMonth(year, month, era)
+            );
         }
 
         private static bool IsValidMonth(this Calendar calendar, int year, int month, int era)
         {
-            return (calendar.IsValidYear(year, era) && month >= 1 && month <= calendar.GetMonthsInYear(year, era));
+            return (
+                calendar.IsValidYear(year, era)
+                && month >= 1
+                && month <= calendar.GetMonthsInYear(year, era)
+            );
         }
 
         private static bool IsValidYear(this Calendar calendar, int year, int era)
         {
-            return (year >= calendar.GetYear(calendar.MinSupportedDateTime) && year <= calendar.GetYear(calendar.MaxSupportedDateTime));
+            return (
+                year >= calendar.GetYear(calendar.MinSupportedDateTime)
+                && year <= calendar.GetYear(calendar.MaxSupportedDateTime)
+            );
         }
 
         internal static void DisposeAll(this IEnumerable<IDisposable> disposables)
@@ -174,16 +184,18 @@ namespace Internal.Cryptography
                             case UniversalTagNumber.UnrestrictedCharacterString:
                                 if (!tag.IsConstructed)
                                 {
-                                    throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
+                                    throw new CryptographicException(
+                                        SR.Cryptography_Der_Invalid_Encoding
+                                    );
                                 }
-
                                 break;
                             default:
                                 if (tag.IsConstructed)
                                 {
-                                    throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
+                                    throw new CryptographicException(
+                                        SR.Cryptography_Der_Invalid_Encoding
+                                    );
                                 }
-
                                 break;
                         }
                     }
@@ -203,17 +215,22 @@ namespace Internal.Cryptography
             }
         }
 
-        public static ReadOnlyMemory<byte> DecodeOctetStringAsMemory(ReadOnlyMemory<byte> encodedOctetString)
+        public static ReadOnlyMemory<byte> DecodeOctetStringAsMemory(
+            ReadOnlyMemory<byte> encodedOctetString
+        )
         {
             try
             {
                 ReadOnlySpan<byte> input = encodedOctetString.Span;
 
-                if (AsnDecoder.TryReadPrimitiveOctetString(
-                    input,
-                    AsnEncodingRules.BER,
-                    out ReadOnlySpan<byte> primitive,
-                    out int consumed))
+                if (
+                    AsnDecoder.TryReadPrimitiveOctetString(
+                        input,
+                        AsnEncodingRules.BER,
+                        out ReadOnlySpan<byte> primitive,
+                        out int consumed
+                    )
+                )
                 {
                     if (consumed != input.Length)
                     {
@@ -225,7 +242,9 @@ namespace Internal.Cryptography
                         return encodedOctetString.Slice(offset, primitive.Length);
                     }
 
-                    Debug.Fail("input.Overlaps(primitive) failed after TryReadPrimitiveOctetString succeeded");
+                    Debug.Fail(
+                        "input.Overlaps(primitive) failed after TryReadPrimitiveOctetString succeeded"
+                    );
                 }
 
                 byte[] ret = AsnDecoder.ReadOctetString(input, AsnEncodingRules.BER, out consumed);
@@ -243,13 +262,18 @@ namespace Internal.Cryptography
             }
         }
 
-        public static bool AreSamePublicECParameters(ECParameters aParameters, ECParameters bParameters)
+        public static bool AreSamePublicECParameters(
+            ECParameters aParameters,
+            ECParameters bParameters
+        )
         {
             if (aParameters.Curve.CurveType != bParameters.Curve.CurveType)
                 return false;
 
-            if (!aParameters.Q.X!.ContentsEqual(bParameters.Q.X!) ||
-                !aParameters.Q.Y!.ContentsEqual(bParameters.Q.Y!))
+            if (
+                !aParameters.Q.X!.ContentsEqual(bParameters.Q.X!)
+                || !aParameters.Q.Y!.ContentsEqual(bParameters.Q.Y!)
+            )
             {
                 return false;
             }
@@ -260,7 +284,10 @@ namespace Internal.Cryptography
             if (aCurve.IsNamed)
             {
                 // On Windows we care about FriendlyName, on Unix we care about Value
-                return (aCurve.Oid.Value == bCurve.Oid.Value && aCurve.Oid.FriendlyName == bCurve.Oid.FriendlyName);
+                return (
+                    aCurve.Oid.Value == bCurve.Oid.Value
+                    && aCurve.Oid.FriendlyName == bCurve.Oid.FriendlyName
+                );
             }
 
             if (!aCurve.IsExplicit)
@@ -271,11 +298,13 @@ namespace Internal.Cryptography
 
             // Ignore Cofactor (which is derivable from the prime or polynomial and Order)
             // Ignore Seed and Hash (which are entirely optional, and about how A and B were built)
-            if (!aCurve.G.X!.ContentsEqual(bCurve.G.X!) ||
-                !aCurve.G.Y!.ContentsEqual(bCurve.G.Y!) ||
-                !aCurve.Order.ContentsEqual(bCurve.Order) ||
-                !aCurve.A.ContentsEqual(bCurve.A) ||
-                !aCurve.B.ContentsEqual(bCurve.B))
+            if (
+                !aCurve.G.X!.ContentsEqual(bCurve.G.X!)
+                || !aCurve.G.Y!.ContentsEqual(bCurve.G.Y!)
+                || !aCurve.Order.ContentsEqual(bCurve.Order)
+                || !aCurve.A.ContentsEqual(bCurve.A)
+                || !aCurve.B.ContentsEqual(bCurve.B)
+            )
             {
                 return false;
             }
@@ -317,7 +346,8 @@ namespace Internal.Cryptography
                     // .NET's string comparisons start by checking the length, so a trailing
                     // NULL character which was literally embedded in the DER would cause a
                     // failure in .NET whereas it wouldn't have with strcmp.
-                    return tavReader.ReadCharacterString((UniversalTagNumber)tag.TagValue).TrimEnd('\0');
+                    return tavReader.ReadCharacterString((UniversalTagNumber)tag.TagValue)
+                        .TrimEnd('\0');
 
                 default:
                     throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
@@ -336,7 +366,8 @@ namespace Internal.Cryptography
             {
                 _gcHandle = System.Runtime.InteropServices.GCHandle.Alloc(
                     data,
-                    System.Runtime.InteropServices.GCHandleType.Pinned),
+                    System.Runtime.InteropServices.GCHandleType.Pinned
+                ),
                 _data = data,
             };
         }

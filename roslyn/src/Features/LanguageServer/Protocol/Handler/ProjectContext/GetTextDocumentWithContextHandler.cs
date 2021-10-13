@@ -17,27 +17,35 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider, Shared]
     [ProvidesMethod(MSLSPMethods.ProjectContextsName)]
-    internal class GetTextDocumentWithContextHandler : AbstractStatelessRequestHandler<GetTextDocumentWithContextParams, ActiveProjectContexts?>
+    internal class GetTextDocumentWithContextHandler
+        : AbstractStatelessRequestHandler<GetTextDocumentWithContextParams, ActiveProjectContexts?>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GetTextDocumentWithContextHandler()
-        {
-        }
+        public GetTextDocumentWithContextHandler() { }
 
         public override string Method => MSLSPMethods.ProjectContextsName;
 
         public override bool MutatesSolutionState => false;
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(GetTextDocumentWithContextParams request) => new TextDocumentIdentifier { Uri = request.TextDocument.Uri };
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            GetTextDocumentWithContextParams request
+        ) => new TextDocumentIdentifier { Uri = request.TextDocument.Uri };
 
-        public override Task<ActiveProjectContexts?> HandleRequestAsync(GetTextDocumentWithContextParams request, RequestContext context, CancellationToken cancellationToken)
+        public override Task<ActiveProjectContexts?> HandleRequestAsync(
+            GetTextDocumentWithContextParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
             // We specifically don't use context.Document here because we want multiple
-            var documents = context.Solution.GetDocuments(request.TextDocument.Uri, context.ClientName);
+            var documents = context.Solution.GetDocuments(
+                request.TextDocument.Uri,
+                context.ClientName
+            );
 
             if (!documents.Any())
             {
@@ -73,13 +81,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // ID in GetDocumentIdsWithFilePath, but there's really nothing we can do since we don't have contexts for
             // close documents anyways.
             var openDocument = documents.First();
-            var currentContextDocumentId = openDocument.Project.Solution.Workspace.GetDocumentIdInCurrentContext(openDocument.Id);
+            var currentContextDocumentId =
+                openDocument.Project.Solution.Workspace.GetDocumentIdInCurrentContext(
+                    openDocument.Id
+                );
 
-            return Task.FromResult<ActiveProjectContexts?>(new ActiveProjectContexts
-            {
-                ProjectContexts = contexts.ToArray(),
-                DefaultIndex = documents.IndexOf(d => d.Id == currentContextDocumentId)
-            });
+            return Task.FromResult<ActiveProjectContexts?>(
+                new ActiveProjectContexts
+                {
+                    ProjectContexts = contexts.ToArray(),
+                    DefaultIndex = documents.IndexOf(d => d.Id == currentContextDocumentId)
+                }
+            );
         }
     }
 }

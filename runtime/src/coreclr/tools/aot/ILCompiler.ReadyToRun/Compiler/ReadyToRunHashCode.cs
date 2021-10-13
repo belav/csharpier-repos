@@ -75,8 +75,7 @@ namespace ILCompiler
             {
                 hashcode ^= NameHashCode(type.Namespace, type.Name);
                 type = type.ContainingType;
-            }
-            while (type != null);
+            } while (type != null);
             return hashcode;
         }
 
@@ -129,7 +128,8 @@ namespace ILCompiler
         /// <param name="nestedTypeNameHash">Hash code of the nested type name</param>
         private static int NestedTypeHashCode(int enclosingTypeHashcode, int nestedTypeNameHash)
         {
-            return unchecked(enclosingTypeHashcode + RotateLeft(enclosingTypeHashcode, 11)) ^ nestedTypeNameHash;
+            return unchecked(enclosingTypeHashcode + RotateLeft(enclosingTypeHashcode, 11))
+                ^ nestedTypeNameHash;
         }
 
         /// <summary>
@@ -231,15 +231,28 @@ namespace ILCompiler
 
         private static uint XXHash32_QueueRound(uint hash, uint queuedValue)
         {
-            return ((uint)RotateLeft((int)(hash + queuedValue * 3266489917U/*Prime3*/), 17)) * 668265263U/*Prime4*/;
+            return (
+                    (uint)RotateLeft(
+                        (int)(
+                            hash + queuedValue * 3266489917U /*Prime3*/
+                        ),
+                        17
+                    )
+                )
+                * 668265263U /*Prime4*/
+            ;
         }
 
         private static uint XXHash32_MixFinal(uint hash)
         {
             hash ^= hash >> 15;
-            hash *= 2246822519U/*Prime2*/;
+            hash *=
+                2246822519U /*Prime2*/
+            ;
             hash ^= hash >> 13;
-            hash *= 3266489917U/*Prime3*/;
+            hash *=
+                3266489917U /*Prime3*/
+            ;
             hash ^= hash >> 16;
             return hash;
         }

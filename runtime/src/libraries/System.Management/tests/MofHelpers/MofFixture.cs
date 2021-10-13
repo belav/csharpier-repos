@@ -11,7 +11,10 @@ namespace System.Management.Tests
     public class MofFixture : IDisposable
     {
         private Assembly _assembly = typeof(MofFixture).GetTypeInfo().Assembly;
-        private string _mofCompilerPath = Path.Combine(Environment.SystemDirectory, @"wbem\mofcomp.exe");
+        private string _mofCompilerPath = Path.Combine(
+            Environment.SystemDirectory,
+            @"wbem\mofcomp.exe"
+        );
 
         public MofFixture()
         {
@@ -33,6 +36,7 @@ namespace System.Management.Tests
                 mofFilePath = ExtractMofFromResourcesToFile(mofResourceName);
                 CompileMof(mofFilePath);
             }
+
             finally
             {
                 if (mofFilePath != null)
@@ -43,7 +47,11 @@ namespace System.Management.Tests
         private string ExtractMofFromResourcesToFile(string mofResourceName)
         {
             var mofFilePath = Path.Combine(Path.GetTempPath(), mofResourceName);
-            using (var mofStream = new StreamReader(_assembly.GetManifestResourceStream(mofResourceName)))
+            using (
+                var mofStream = new StreamReader(
+                    _assembly.GetManifestResourceStream(mofResourceName)
+                )
+            )
             {
                 string mofContent = mofStream.ReadToEnd();
                 File.WriteAllText(mofFilePath, mofContent);
@@ -60,7 +68,10 @@ namespace System.Management.Tests
             Process p = Process.Start(psi);
             p.WaitForExit();
             string output = p.StandardOutput.ReadToEnd();
-            Assert.True(p.ExitCode == 0, $"Failed to compile mof file {mofFilePath} output: {output}");
+            Assert.True(
+                p.ExitCode == 0,
+                $"Failed to compile mof file {mofFilePath} output: {output}"
+            );
         }
     }
 }

@@ -56,8 +56,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalModelValidatorDependencies(
-            IRelationalTypeMappingSource typeMappingSource)
+        public RelationalModelValidatorDependencies(IRelationalTypeMappingSource typeMappingSource)
         {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
 

@@ -61,7 +61,12 @@ namespace Roslyn.Test.Utilities
         public string FullName => Id.FullName;
         public Guid Mvid => Id.Mvid;
 
-        public ModuleData(string netModuleName, ImmutableArray<byte> image, ImmutableArray<byte> pdb, bool inMemoryModule)
+        public ModuleData(
+            string netModuleName,
+            ImmutableArray<byte> image,
+            ImmutableArray<byte> pdb,
+            bool inMemoryModule
+        )
         {
             this.Id = new ModuleDataId(netModuleName, netModuleName, GetMvid(image));
             this.Kind = OutputKind.NetModule;
@@ -70,7 +75,13 @@ namespace Roslyn.Test.Utilities
             this.InMemoryModule = inMemoryModule;
         }
 
-        public ModuleData(AssemblyIdentity identity, OutputKind kind, ImmutableArray<byte> image, ImmutableArray<byte> pdb, bool inMemoryModule)
+        public ModuleData(
+            AssemblyIdentity identity,
+            OutputKind kind,
+            ImmutableArray<byte> image,
+            ImmutableArray<byte> pdb,
+            bool inMemoryModule
+        )
         {
             this.Id = new ModuleDataId(identity.Name, identity.GetDisplayName(), GetMvid(image));
             this.Kind = kind;
@@ -79,7 +90,13 @@ namespace Roslyn.Test.Utilities
             this.InMemoryModule = inMemoryModule;
         }
 
-        public ModuleData(ModuleDataId id, OutputKind kind, ImmutableArray<byte> image, ImmutableArray<byte> pdb, bool inMemoryModule)
+        public ModuleData(
+            ModuleDataId id,
+            OutputKind kind,
+            ImmutableArray<byte> image,
+            ImmutableArray<byte> pdb,
+            bool inMemoryModule
+        )
         {
             this.Id = id;
             this.Kind = kind;

@@ -50,8 +50,7 @@ namespace System.Numerics
             return result.GetBits();
         }
 
-        private static int PowBound(uint power, int valueLength,
-                                    int resultLength)
+        private static int PowBound(uint power, int valueLength, int resultLength)
         {
             // The basic pow algorithm, but instead of squaring
             // and multiplying we just sum up the lengths.
@@ -71,8 +70,12 @@ namespace System.Numerics
             return resultLength;
         }
 
-        private static void PowCore(uint power, ref BitsBuffer value,
-                                    ref BitsBuffer result, ref BitsBuffer temp)
+        private static void PowCore(
+            uint power,
+            ref BitsBuffer value,
+            ref BitsBuffer result,
+            ref BitsBuffer temp
+        )
         {
             // The basic pow algorithm using square-and-multiply.
 
@@ -127,8 +130,7 @@ namespace System.Numerics
             return PowCore(power, modulus, v, 1);
         }
 
-        private static uint PowCore(uint[] power, uint modulus,
-                                    ulong value, ulong result)
+        private static uint PowCore(uint[] power, uint modulus, ulong value, ulong result)
         {
             // The 32-bit modulus pow algorithm for all but
             // the last power limb using square-and-multiply.
@@ -148,8 +150,7 @@ namespace System.Numerics
             return PowCore(power[power.Length - 1], modulus, value, result);
         }
 
-        private static uint PowCore(uint power, uint modulus,
-                                    ulong value, ulong result)
+        private static uint PowCore(uint power, uint modulus, ulong value, ulong result)
         {
             // The 32-bit modulus pow algorithm for the last or
             // the only power limb using square-and-multiply.
@@ -227,8 +228,7 @@ namespace System.Numerics
         // Mutable for unit testing...
         private static int ReducerThreshold = 32;
 
-        private static uint[] PowCore(uint[] power, uint[] modulus,
-                                      ref BitsBuffer value)
+        private static uint[] PowCore(uint[] power, uint[] modulus, ref BitsBuffer value)
         {
             // Executes the big pow algorithm.
 
@@ -250,8 +250,7 @@ namespace System.Numerics
             return result.GetBits();
         }
 
-        private static uint[] PowCore(uint power, uint[] modulus,
-                                      ref BitsBuffer value)
+        private static uint[] PowCore(uint power, uint[] modulus, ref BitsBuffer value)
         {
             // Executes the big pow algorithm.
 
@@ -273,9 +272,13 @@ namespace System.Numerics
             return result.GetBits();
         }
 
-        private static void PowCore(uint[] power, uint[] modulus,
-                                    ref BitsBuffer value, ref BitsBuffer result,
-                                    ref BitsBuffer temp)
+        private static void PowCore(
+            uint[] power,
+            uint[] modulus,
+            ref BitsBuffer value,
+            ref BitsBuffer result,
+            ref BitsBuffer temp
+        )
         {
             // The big modulus pow algorithm for all but
             // the last power limb using square-and-multiply.
@@ -299,13 +302,16 @@ namespace System.Numerics
                 }
             }
 
-            PowCore(power[power.Length - 1], modulus, ref value, ref result,
-                ref temp);
+            PowCore(power[power.Length - 1], modulus, ref value, ref result, ref temp);
         }
 
-        private static void PowCore(uint power, uint[] modulus,
-                                    ref BitsBuffer value, ref BitsBuffer result,
-                                    ref BitsBuffer temp)
+        private static void PowCore(
+            uint power,
+            uint[] modulus,
+            ref BitsBuffer value,
+            ref BitsBuffer result,
+            ref BitsBuffer temp
+        )
         {
             // The big modulus pow algorithm for the last or
             // the only power limb using square-and-multiply.
@@ -329,9 +335,13 @@ namespace System.Numerics
             }
         }
 
-        private static void PowCore(uint[] power, ref FastReducer reducer,
-                                    ref BitsBuffer value, ref BitsBuffer result,
-                                    ref BitsBuffer temp)
+        private static void PowCore(
+            uint[] power,
+            ref FastReducer reducer,
+            ref BitsBuffer value,
+            ref BitsBuffer result,
+            ref BitsBuffer temp
+        )
         {
             // The big modulus pow algorithm for all but
             // the last power limb using square-and-multiply.
@@ -355,13 +365,16 @@ namespace System.Numerics
                 }
             }
 
-            PowCore(power[power.Length - 1], ref reducer, ref value, ref result,
-                ref temp);
+            PowCore(power[power.Length - 1], ref reducer, ref value, ref result, ref temp);
         }
 
-        private static void PowCore(uint power, ref FastReducer reducer,
-                                    ref BitsBuffer value, ref BitsBuffer result,
-                                    ref BitsBuffer temp)
+        private static void PowCore(
+            uint power,
+            ref FastReducer reducer,
+            ref BitsBuffer value,
+            ref BitsBuffer result,
+            ref BitsBuffer temp
+        )
         {
             // The big modulus pow algorithm for the last or
             // the only power limb using square-and-multiply.

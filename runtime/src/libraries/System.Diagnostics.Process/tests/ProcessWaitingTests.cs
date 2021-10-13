@@ -11,28 +11,41 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49568",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public class ProcessWaitingTests : ProcessTestBase
     {
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void MultipleProcesses_StartAllKillAllWaitAll()
         {
             const int Iters = 10;
-            Process[] processes = Enumerable.Range(0, Iters).Select(_ => CreateProcessLong()).ToArray();
+            Process[] processes = Enumerable.Range(0, Iters)
+                .Select(_ => CreateProcessLong())
+                .ToArray();
 
-            foreach (Process p in processes) p.Start();
-            foreach (Process p in processes) p.Kill();
-            foreach (Process p in processes) Assert.True(p.WaitForExit(WaitInMS));
+            foreach (Process p in processes)
+                p.Start();
+            foreach (Process p in processes)
+                p.Kill();
+            foreach (Process p in processes)
+                Assert.True(p.WaitForExit(WaitInMS));
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public async Task MultipleProcesses_StartAllKillAllWaitAllAsync()
         {
             const int Iters = 10;
-            Process[] processes = Enumerable.Range(0, Iters).Select(_ => CreateProcessLong()).ToArray();
+            Process[] processes = Enumerable.Range(0, Iters)
+                .Select(_ => CreateProcessLong())
+                .ToArray();
 
-            foreach (Process p in processes) p.Start();
-            foreach (Process p in processes) p.Kill();
+            foreach (Process p in processes)
+                p.Start();
+            foreach (Process p in processes)
+                p.Kill();
             foreach (Process p in processes)
             {
                 using (var cts = new CancellationTokenSource(WaitInMS))
@@ -76,7 +89,8 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void MultipleProcesses_ParallelStartKillWait()
         {
-            const int Tasks = 4, ItersPerTask = 10;
+            const int Tasks = 4,
+                ItersPerTask = 10;
             Action work = () =>
             {
                 for (int i = 0; i < ItersPerTask; i++)
@@ -93,7 +107,8 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public async Task MultipleProcesses_ParallelStartKillWaitAsync()
         {
-            const int Tasks = 4, ItersPerTask = 10;
+            const int Tasks = 4,
+                ItersPerTask = 10;
             Func<Task> work = async () =>
             {
                 for (int i = 0; i < ItersPerTask; i++)
@@ -113,7 +128,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Theory]
-        [InlineData(0)]  // poll
+        [InlineData(0)] // poll
         [InlineData(10)] // real timeout
         public void CurrentProcess_WaitNeverCompletes(int milliseconds)
         {
@@ -121,7 +136,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Theory]
-        [InlineData(0)]  // poll
+        [InlineData(0)] // poll
         [InlineData(10)] // real timeout
         public async Task CurrentProcess_WaitAsyncNeverCompletes(int milliseconds)
         {
@@ -129,7 +144,10 @@ namespace System.Diagnostics.Tests
             {
                 CancellationToken token = cts.Token;
                 Process process = Process.GetCurrentProcess();
-                OperationCanceledException ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => process.WaitForExitAsync(token));
+                OperationCanceledException ex =
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        () => process.WaitForExitAsync(token)
+                    );
                 Assert.Equal(token, ex.CancellationToken);
                 Assert.False(process.HasExited);
             }
@@ -172,7 +190,8 @@ namespace System.Diagnostics.Tests
 
                 Assert.Equal(TaskStatus.Canceled, t.Status);
 
-                OperationCanceledException ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
+                OperationCanceledException ex =
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
                 Assert.Equal(token, ex.CancellationToken);
                 Assert.False(p.HasExited);
             }
@@ -185,7 +204,8 @@ namespace System.Diagnostics.Tests
                 Task t = p.WaitForExitAsync(token);
                 cts.Cancel();
 
-                OperationCanceledException ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
+                OperationCanceledException ex =
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
                 Assert.Equal(token, ex.CancellationToken);
                 Assert.False(p.HasExited);
             }
@@ -221,12 +241,18 @@ namespace System.Diagnostics.Tests
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             if (addHandlerBeforeStart)
             {
-                p.Exited += delegate { tcs.SetResult(); };
+                p.Exited += delegate
+                {
+                    tcs.SetResult();
+                };
             }
             p.Start();
             if (!addHandlerBeforeStart)
             {
-                p.Exited += delegate { tcs.SetResult(); };
+                p.Exited += delegate
+                {
+                    tcs.SetResult();
+                };
             }
 
             p.Kill();
@@ -247,12 +273,18 @@ namespace System.Diagnostics.Tests
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             if (addHandlerBeforeStart)
             {
-                p.Exited += delegate { tcs.SetResult(); };
+                p.Exited += delegate
+                {
+                    tcs.SetResult();
+                };
             }
             p.Start();
             if (!addHandlerBeforeStart)
             {
-                p.Exited += delegate { tcs.SetResult(); };
+                p.Exited += delegate
+                {
+                    tcs.SetResult();
+                };
             }
 
             p.Kill();
@@ -272,11 +304,21 @@ namespace System.Diagnostics.Tests
         [InlineData(127)]
         public async Task SingleProcess_EnableRaisingEvents_CorrectExitCode(int exitCode)
         {
-            using (Process p = CreateProcessPortable(RemotelyInvokable.ExitWithCode, exitCode.ToString()))
+            using (
+                Process p = CreateProcessPortable(
+                    RemotelyInvokable.ExitWithCode,
+                    exitCode.ToString()
+                )
+            )
             {
-                var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 p.EnableRaisingEvents = true;
-                p.Exited += delegate { tcs.SetResult(); };
+                p.Exited += delegate
+                {
+                    tcs.SetResult();
+                };
                 p.Start();
                 await tcs.Task;
                 Assert.Equal(exitCode, p.ExitCode);
@@ -289,7 +331,9 @@ namespace System.Diagnostics.Tests
             Process p = CreateProcessLong();
             p.Start();
 
-            Process[] copies = Enumerable.Range(0, 3).Select(_ => Process.GetProcessById(p.Id)).ToArray();
+            Process[] copies = Enumerable.Range(0, 3)
+                .Select(_ => Process.GetProcessById(p.Id))
+                .ToArray();
 
             Assert.False(p.WaitForExit(0));
             p.Kill();
@@ -307,12 +351,17 @@ namespace System.Diagnostics.Tests
             using Process p = CreateProcessLong();
             p.Start();
 
-            Process[] copies = Enumerable.Range(0, 3).Select(_ => Process.GetProcessById(p.Id)).ToArray();
+            Process[] copies = Enumerable.Range(0, 3)
+                .Select(_ => Process.GetProcessById(p.Id))
+                .ToArray();
 
             using (var cts = new CancellationTokenSource(millisecondsDelay: 0))
             {
                 CancellationToken token = cts.Token;
-                OperationCanceledException ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => p.WaitForExitAsync(token));
+                OperationCanceledException ex =
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                        () => p.WaitForExitAsync(token)
+                    );
                 Assert.Equal(token, ex.CancellationToken);
                 Assert.False(p.HasExited);
             }
@@ -341,13 +390,16 @@ namespace System.Diagnostics.Tests
             Process child1 = CreateProcessLong();
             child1.Start();
 
-            Process child2 = CreateProcess(peerId =>
-            {
-                Process peer = Process.GetProcessById(int.Parse(peerId));
-                Console.WriteLine("Signal");
-                Assert.True(peer.WaitForExit(WaitInMS));
-                return RemoteExecutor.SuccessExitCode;
-            }, child1.Id.ToString());
+            Process child2 = CreateProcess(
+                peerId =>
+                {
+                    Process peer = Process.GetProcessById(int.Parse(peerId));
+                    Console.WriteLine("Signal");
+                    Assert.True(peer.WaitForExit(WaitInMS));
+                    return RemoteExecutor.SuccessExitCode;
+                },
+                child1.Id.ToString()
+            );
             child2.StartInfo.RedirectStandardOutput = true;
             child2.Start();
             char[] output = new char[6];
@@ -367,17 +419,20 @@ namespace System.Diagnostics.Tests
             using Process child1 = CreateProcessLong();
             child1.Start();
 
-            using Process child2 = CreateProcess(async peerId =>
-            {
-                Process peer = Process.GetProcessById(int.Parse(peerId));
-                Console.WriteLine("Signal");
-                using (var cts = new CancellationTokenSource(WaitInMS))
+            using Process child2 = CreateProcess(
+                async peerId =>
                 {
-                    await peer.WaitForExitAsync(cts.Token);
-                    Assert.True(peer.HasExited);
-                }
-                return RemoteExecutor.SuccessExitCode;
-            }, child1.Id.ToString());
+                    Process peer = Process.GetProcessById(int.Parse(peerId));
+                    Console.WriteLine("Signal");
+                    using (var cts = new CancellationTokenSource(WaitInMS))
+                    {
+                        await peer.WaitForExitAsync(cts.Token);
+                        Assert.True(peer.HasExited);
+                    }
+                    return RemoteExecutor.SuccessExitCode;
+                },
+                child1.Id.ToString()
+            );
             child2.StartInfo.RedirectStandardOutput = true;
             child2.Start();
             char[] output = new char[6];
@@ -501,7 +556,11 @@ namespace System.Diagnostics.Tests
             using Process p = CreateProcessPortable(RemotelyInvokable.Echo, message);
 
             int linesReceived = 0;
-            p.OutputDataReceived += (_, e) => { if (e.Data is not null) linesReceived++; };
+            p.OutputDataReceived += (_, e) =>
+            {
+                if (e.Data is not null)
+                    linesReceived++;
+            };
             p.StartInfo.RedirectStandardOutput = true;
 
             Assert.True(p.Start());
@@ -525,7 +584,11 @@ namespace System.Diagnostics.Tests
             using Process p = CreateProcessPortable(RemotelyInvokable.Echo, message);
 
             int linesReceived = 0;
-            p.OutputDataReceived += (_, e) => { if (e.Data is not null) linesReceived++; };
+            p.OutputDataReceived += (_, e) =>
+            {
+                if (e.Data is not null)
+                    linesReceived++;
+            };
             p.StartInfo.RedirectStandardOutput = true;
 
             Assert.True(p.Start());
@@ -545,25 +608,33 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void WaitChain()
         {
-            Process root = CreateProcess(() =>
-            {
-                Process child1 = CreateProcess(() =>
+            Process root = CreateProcess(
+                () =>
                 {
-                    Process child2 = CreateProcess(() =>
-                    {
-                        Process child3 = CreateProcess(() => RemoteExecutor.SuccessExitCode);
-                        child3.Start();
-                        Assert.True(child3.WaitForExit(WaitInMS));
-                        return child3.ExitCode;
-                    });
-                    child2.Start();
-                    Assert.True(child2.WaitForExit(WaitInMS));
-                    return child2.ExitCode;
-                });
-                child1.Start();
-                Assert.True(child1.WaitForExit(WaitInMS));
-                return child1.ExitCode;
-            });
+                    Process child1 = CreateProcess(
+                        () =>
+                        {
+                            Process child2 = CreateProcess(
+                                () =>
+                                {
+                                    Process child3 = CreateProcess(
+                                        () => RemoteExecutor.SuccessExitCode
+                                    );
+                                    child3.Start();
+                                    Assert.True(child3.WaitForExit(WaitInMS));
+                                    return child3.ExitCode;
+                                }
+                            );
+                            child2.Start();
+                            Assert.True(child2.WaitForExit(WaitInMS));
+                            return child2.ExitCode;
+                        }
+                    );
+                    child1.Start();
+                    Assert.True(child1.WaitForExit(WaitInMS));
+                    return child1.ExitCode;
+                }
+            );
             root.Start();
             Assert.True(root.WaitForExit(WaitInMS));
             Assert.Equal(RemoteExecutor.SuccessExitCode, root.ExitCode);
@@ -572,40 +643,48 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public async Task WaitAsyncChain()
         {
-            Process root = CreateProcess(async () =>
-            {
-                Process child1 = CreateProcess(async () =>
+            Process root = CreateProcess(
+                async () =>
                 {
-                    Process child2 = CreateProcess(async () =>
-                    {
-                        Process child3 = CreateProcess(() => RemoteExecutor.SuccessExitCode);
-                        child3.Start();
-                        using (var cts = new CancellationTokenSource(WaitInMS))
+                    Process child1 = CreateProcess(
+                        async () =>
                         {
-                            await child3.WaitForExitAsync(cts.Token);
-                            Assert.True(child3.HasExited);
-                        }
+                            Process child2 = CreateProcess(
+                                async () =>
+                                {
+                                    Process child3 = CreateProcess(
+                                        () => RemoteExecutor.SuccessExitCode
+                                    );
+                                    child3.Start();
+                                    using (var cts = new CancellationTokenSource(WaitInMS))
+                                    {
+                                        await child3.WaitForExitAsync(cts.Token);
+                                        Assert.True(child3.HasExited);
+                                    }
 
-                        return child3.ExitCode;
-                    });
-                    child2.Start();
+                                    return child3.ExitCode;
+                                }
+                            );
+                            child2.Start();
+                            using (var cts = new CancellationTokenSource(WaitInMS))
+                            {
+                                await child2.WaitForExitAsync(cts.Token);
+                                Assert.True(child2.HasExited);
+                            }
+
+                            return child2.ExitCode;
+                        }
+                    );
+                    child1.Start();
                     using (var cts = new CancellationTokenSource(WaitInMS))
                     {
-                        await child2.WaitForExitAsync(cts.Token);
-                        Assert.True(child2.HasExited);
+                        await child1.WaitForExitAsync(cts.Token);
+                        Assert.True(child1.HasExited);
                     }
 
-                    return child2.ExitCode;
-                });
-                child1.Start();
-                using (var cts = new CancellationTokenSource(WaitInMS))
-                {
-                    await child1.WaitForExitAsync(cts.Token);
-                    Assert.True(child1.HasExited);
+                    return child1.ExitCode;
                 }
-
-                return child1.ExitCode;
-            });
+            );
             root.Start();
             using (var cts = new CancellationTokenSource(WaitInMS))
             {
