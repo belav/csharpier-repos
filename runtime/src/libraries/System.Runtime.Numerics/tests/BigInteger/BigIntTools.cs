@@ -67,7 +67,6 @@ namespace BigIntTools
             {
                 action();
             }
-
             finally
             {
                 field.SetValue(null, lastValue);

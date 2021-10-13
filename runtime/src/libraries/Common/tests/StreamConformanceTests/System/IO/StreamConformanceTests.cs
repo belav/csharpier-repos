@@ -1197,7 +1197,6 @@ namespace System.IO.Tests
                         {
                             d(state);
                         }
-
                         finally
                         {
                             SetSynchronizationContext(null);
@@ -3070,7 +3069,6 @@ namespace System.IO.Tests
 
                     Assert.True(writeBuffer.Memory.Span.SequenceEqual(readBuffer.Memory.Span));
                 }
-
                 finally
                 {
                     await write;

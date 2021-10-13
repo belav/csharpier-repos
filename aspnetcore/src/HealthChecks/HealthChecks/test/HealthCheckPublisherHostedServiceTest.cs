@@ -36,7 +36,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 Assert.False(service.IsTimerRunning);
                 Assert.False(service.IsStopping);
             }
-
             finally
             {
                 await service.StopAsync();
@@ -62,7 +61,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 Assert.True(service.IsTimerRunning);
                 Assert.False(service.IsStopping);
             }
-
             finally
             {
                 await service.StopAsync();
@@ -117,7 +115,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 Assert.True(service.IsTimerRunning);
                 Assert.False(service.IsStopping);
             }
-
             finally
             {
                 await service.StopAsync();
@@ -161,7 +158,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
 
                 await running.TimeoutAfter(TimeSpan.FromSeconds(10));
             }
-
             finally
             {
                 await service.StopAsync();
@@ -207,7 +203,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                     Assert.Equal(new[] { "one", "two", }, report.Entries.Keys.OrderBy(k => k));
                 }
             }
-
             finally
             {
                 await service.StopAsync();
@@ -346,7 +341,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                     Assert.Equal(new[] { "one", "two", }, report.Entries.Keys.OrderBy(k => k));
                 }
             }
-
             finally
             {
                 await service.StopAsync();
@@ -389,7 +383,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 Assert.True(service.IsTimerRunning);
                 Assert.False(service.IsStopping);
             }
-
             finally
             {
                 await service.StopAsync();
@@ -505,7 +498,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                     Assert.Equal(new[] { "one", }, report.Entries.Keys.OrderBy(k => k));
                 }
             }
-
             finally
             {
                 await service.StopAsync();
@@ -533,7 +525,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 // Act
                 await service.RunAsync().TimeoutAfter(TimeSpan.FromSeconds(10));
             }
-
             finally
             {
                 await service.StopAsync();
@@ -643,7 +634,6 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
                 // Act
                 await service.RunAsync().TimeoutAfter(TimeSpan.FromSeconds(10));
             }
-
             finally
             {
                 await service.StopAsync();

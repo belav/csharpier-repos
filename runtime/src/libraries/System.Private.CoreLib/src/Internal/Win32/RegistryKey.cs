@@ -158,7 +158,6 @@ namespace Internal.Win32
                     }
                 }
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(name);
@@ -228,7 +227,6 @@ namespace Internal.Win32
                     nameLength = name.Length;
                 }
             }
-
             finally
             {
                 if (name != null)

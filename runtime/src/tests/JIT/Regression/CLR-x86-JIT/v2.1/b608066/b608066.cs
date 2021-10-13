@@ -58,7 +58,6 @@ class ReproTwo
         {
             result_int = o33.value;
         }
-
         finally
         {
             result_obj.value = result_int;
@@ -110,7 +109,6 @@ class ReproTwo
         {
             result_int = o3.value;
         }
-
         finally
         {
             result_obj.value = result_int;
@@ -127,7 +125,6 @@ class ReproTwo
             if (i == 0)
                 throw new Exception();
         }
-
         finally
         {
             result = i;
@@ -143,7 +140,6 @@ class ReproTwo
             if (i == 0)
                 throw new Exception();
         }
-
         finally
         {
             result = i;

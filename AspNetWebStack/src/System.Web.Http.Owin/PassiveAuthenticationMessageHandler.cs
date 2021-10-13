@@ -45,7 +45,6 @@ namespace System.Web.Http.Owin
             {
                 response = await base.SendAsync(request, cancellationToken);
             }
-
             finally
             {
                 SetCurrentPrincipal(request, previousPrincipal);

@@ -72,7 +72,6 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
 
                 return memoryBufferWriter.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);
@@ -104,7 +103,6 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
 
                 return memoryBufferWriter.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);
@@ -128,7 +126,6 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
 
                 return memoryBufferWriter.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);

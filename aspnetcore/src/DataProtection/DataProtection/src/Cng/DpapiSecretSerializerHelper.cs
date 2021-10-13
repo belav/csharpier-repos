@@ -63,7 +63,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                         );
                     }
                 }
-
                 finally
                 {
                     // To limit exposure to the GC.
@@ -121,7 +120,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                 Marshal.Copy((IntPtr)dataOut.pbData, retVal, 0, dataLength);
                 return retVal;
             }
-
             finally
             {
                 // Free memory so that we don't leak.
@@ -155,7 +153,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                         cbData: (uint)plaintextSecret.Length
                     );
                 }
-
                 finally
                 {
                     // Limits secret exposure to garbage collector.
@@ -212,7 +209,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                                 byteCount: cbProtectedData
                             );
                         }
-
                         finally
                         {
                             if (handleAcquired)
@@ -288,7 +284,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
 
                 return new Secret(dataOut.pbData, checked((int)dataOut.cbData));
             }
-
             finally
             {
                 // Zero and free memory so that we don't leak secrets.
@@ -356,7 +351,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                         checked((int)cbUnencryptedPayload)
                     );
                 }
-
                 finally
                 {
                     if (handleAcquired)

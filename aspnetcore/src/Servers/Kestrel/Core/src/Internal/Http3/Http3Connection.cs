@@ -352,7 +352,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3
                             ThreadPool.UnsafeQueueUserWorkItem(stream, preferLocal: false);
                         }
                     }
-
                     finally
                     {
                         UpdateConnectionState();

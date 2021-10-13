@@ -94,7 +94,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 return Visit(expression);
             }
-
             finally
             {
                 _evaluatableExpressions = oldEvaluatableExpressions;

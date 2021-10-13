@@ -332,7 +332,6 @@ namespace System.Diagnostics.Tests
                 Trace.Fail("short", "long");
                 Assert.Equal(expectedDialog + expectedDialog, myListener.OutputString);
             }
-
             finally
             {
                 Trace.Listeners.Clear();

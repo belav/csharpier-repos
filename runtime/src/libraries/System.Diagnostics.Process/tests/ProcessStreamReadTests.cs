@@ -494,7 +494,6 @@ namespace System.Diagnostics.Tests
                     await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
                 }
             }
-
             finally
             {
                 p.Kill();
@@ -564,7 +563,6 @@ namespace System.Diagnostics.Tests
                 Assert.True(p1.WaitForExit(WaitInMS));
                 p1.WaitForExit(); // wait for event handlers to complete
             }
-
             finally
             {
                 // Cleanup: kill the second child process

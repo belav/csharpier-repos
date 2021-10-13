@@ -53,7 +53,6 @@ namespace System.Data.Odbc
                         break;
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -110,7 +109,6 @@ namespace System.Data.Odbc
                     out cbActual
                 );
             }
-
             finally
             {
                 if (mustRelease)

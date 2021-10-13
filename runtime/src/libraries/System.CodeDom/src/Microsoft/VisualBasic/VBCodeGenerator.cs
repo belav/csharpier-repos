@@ -2707,7 +2707,6 @@ namespace Microsoft.VisualBasic
             {
                 GenerateStatements(stms);
             }
-
             finally
             {
                 _statementDepth--;

@@ -870,7 +870,6 @@ namespace System.Management
 
                     wbemObject = tempObj;
                 }
-
                 finally
                 {
                     if (securityHandler != null)
@@ -1137,7 +1136,6 @@ namespace System.Management
                         Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
                 }
             }
-
             finally
             {
                 if (securityHandler != null)
@@ -1376,7 +1374,6 @@ namespace System.Management
                         Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
                 }
             }
-
             finally
             {
                 if (securityHandler != null)
@@ -1601,7 +1598,6 @@ namespace System.Management
 
                 newPath = GetPath(wbemCallResult);
             }
-
             finally
             {
                 if (securityHandler != null)
@@ -1909,7 +1905,6 @@ namespace System.Management
                     (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
                 );
             }
-
             finally
             {
                 if (securityHandler != null)
@@ -2080,7 +2075,6 @@ namespace System.Management
                         Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
                 }
             }
-
             finally
             {
                 if (securityHandler != null)
@@ -2427,7 +2421,6 @@ namespace System.Management
                     if (outParams != null)
                         outParameters = new ManagementBaseObject(outParams);
                 }
-
                 finally
                 {
                     if (securityHandler != null)
@@ -2820,7 +2813,6 @@ namespace System.Management
                                     );
                             }
                         }
-
                         finally
                         {
                             if (securityHandler != null)
@@ -2897,7 +2889,6 @@ namespace System.Management
                                         if ((0 <= idIndex) && (topId >= idIndex))
                                             inParams[propertyName] = args[minIndex + idIndex];
                                     }
-
                                     finally
                                     {
                                         // Dispose for next iteration.
@@ -3008,7 +2999,6 @@ namespace System.Management
                                         if ((0 <= idIndex) && (topId >= idIndex))
                                             args[minIndex + idIndex] = outParams[propertyName];
                                     }
-
                                     finally
                                     {
                                         // Dispose for next iteration.

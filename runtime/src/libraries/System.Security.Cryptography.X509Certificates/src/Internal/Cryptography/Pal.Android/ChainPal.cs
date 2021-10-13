@@ -194,7 +194,6 @@ namespace Internal.Cryptography.Pal
                         }
                     }
                 }
-
                 finally
                 {
                     for (extraIdx -= 1; extraIdx >= 0; extraIdx--)

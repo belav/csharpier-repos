@@ -547,7 +547,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 return IsEventComplete(compilationEvent, analyzer, analysisState);
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -654,7 +653,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 return IsSymbolComplete(symbol, analyzer, analysisState);
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -872,7 +870,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 return true;
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -1000,7 +997,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 return IsEventComplete(compilationUnitCompletedEvent, analyzer, analysisState);
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -1111,7 +1107,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return analysisState == null
                     || !analysisState.HasPendingSyntaxAnalysis(analysisScope);
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -1223,7 +1218,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return analysisState == null
                     || !analysisState.HasPendingSyntaxAnalysis(analysisScope);
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -1441,7 +1435,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     analysisState
                 );
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -1517,7 +1510,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     analysisState
                 );
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -1700,7 +1692,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     }
                 }
             }
-
             finally
             {
                 if (analyzerState != null)
@@ -1957,7 +1948,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     analysisState
                 );
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();
@@ -2187,7 +2177,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     analysisState
                 );
             }
-
             finally
             {
                 analyzerState?.ResetToReadyState();

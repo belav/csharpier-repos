@@ -594,7 +594,6 @@ namespace System.Diagnostics
                     }
                 }
             }
-
             finally
             {
                 if (tookLock)

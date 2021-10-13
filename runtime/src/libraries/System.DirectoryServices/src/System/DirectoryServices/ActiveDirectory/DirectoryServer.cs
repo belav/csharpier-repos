@@ -512,7 +512,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             break;
                         }
                     }
-
                     finally
                     {
                         FreeReplicaInfo(
@@ -547,7 +546,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         collection.AddHelper(partition, cursors, advanced, info);
                     }
                 }
-
                 finally
                 {
                     FreeReplicaInfo(DS_REPL_INFO_TYPE.DS_REPL_INFO_CURSORS_FOR_NC, info, libHandle);
@@ -585,7 +583,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                 }
             }
-
             finally
             {
                 FreeReplicaInfo(DS_REPL_INFO_TYPE.DS_REPL_INFO_PENDING_OPS, info, libHandle);
@@ -614,7 +611,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         collection.AddHelper(neighbors, info);
                 }
             }
-
             finally
             {
                 FreeReplicaInfo(DS_REPL_INFO_TYPE.DS_REPL_INFO_NEIGHBORS, info, libHandle);
@@ -642,7 +638,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         collection.AddHelper(failures, info);
                 }
             }
-
             finally
             {
                 FreeReplicaInfo(
@@ -682,7 +677,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                     }
                 }
-
                 finally
                 {
                     FreeReplicaInfo(
@@ -705,7 +699,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         collection.AddHelper(count, info, false);
                     }
                 }
-
                 finally
                 {
                     FreeReplicaInfo(
@@ -830,7 +823,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         );
                 }
             }
-
             finally
             {
                 // release the memory
@@ -939,7 +931,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw ExceptionHelper.GetExceptionFromErrorCode(result, serverDownName);
                 }
             }
-
             finally
             {
                 if (unmanagedGuid != (IntPtr)0)

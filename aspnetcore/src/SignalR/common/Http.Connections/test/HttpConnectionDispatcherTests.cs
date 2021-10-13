@@ -815,7 +815,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
 
                     await base.CopyToAsync(destination, bufferSize, cancellationToken);
                 }
-
                 finally
                 {
                     _callerTracker.Release();
@@ -3128,7 +3127,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     // Echo the results
                     await connection.Transport.Output.WriteAsync(result.Buffer.ToArray());
                 }
-
                 finally
                 {
                     connection.Transport.Input.AdvanceTo(result.Buffer.End);
@@ -3158,7 +3156,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                         break;
                     }
                 }
-
                 finally
                 {
                     connection.Transport.Input.AdvanceTo(result.Buffer.End);
@@ -3188,7 +3185,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                     // Echo the results
                     await connection.Transport.Output.WriteAsync(message.Buffer.ToArray());
                 }
-
                 finally
                 {
                     connection.Transport.Input.AdvanceTo(result.Buffer.End);

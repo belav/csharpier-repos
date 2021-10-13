@@ -50,7 +50,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 {
                     initializeDatabase?.Invoke();
                 }
-
                 finally
                 {
                     Monitor.Exit(creationLock);

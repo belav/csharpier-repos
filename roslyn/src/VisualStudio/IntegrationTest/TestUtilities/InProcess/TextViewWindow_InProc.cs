@@ -154,7 +154,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         return classifiedSpans.Select(x => x.ClassificationType.Classification)
                             .ToArray();
                     }
-
                     finally
                     {
                         if (classifier is IDisposable classifierDispose)

@@ -165,7 +165,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
                     }
                 );
             }
-
             finally
             {
                 Thread.CurrentThread.CurrentUICulture = previousUICulture;

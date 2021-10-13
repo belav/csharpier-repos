@@ -243,7 +243,6 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 var path = builder.ToString();
                 return path;
             }
-
             finally
             {
                 // Clear the StringBuilder so that it can reused for the next call.
@@ -307,7 +306,6 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
                 return builder.ToString();
             }
-
             finally
             {
                 // Clear the StringBuilder so that it can reused for the next call.

@@ -1373,7 +1373,6 @@ namespace System.Xml
                 XmlLoader loader = new XmlLoader();
                 node = loader.ReadCurrentNode(this, reader);
             }
-
             finally
             {
                 IsLoading = false;
@@ -1460,7 +1459,6 @@ namespace System.Xml
             {
                 Load(reader);
             }
-
             finally
             {
                 reader.Close();
@@ -1474,7 +1472,6 @@ namespace System.Xml
             {
                 Load(reader);
             }
-
             finally
             {
                 reader.Impl.Close(false);
@@ -1489,7 +1486,6 @@ namespace System.Xml
             {
                 Load(reader);
             }
-
             finally
             {
                 reader.Impl.Close(false);
@@ -1511,7 +1507,6 @@ namespace System.Xml
                 XmlLoader loader = new XmlLoader();
                 loader.Load(this, reader, _preserveWhitespace);
             }
-
             finally
             {
                 IsLoading = false;
@@ -1530,7 +1525,6 @@ namespace System.Xml
             {
                 Load(reader);
             }
-
             finally
             {
                 reader.Close();
@@ -1580,7 +1574,6 @@ namespace System.Xml
                 WriteTo(xw);
                 xw.Flush();
             }
-
             finally
             {
                 xw.Close();

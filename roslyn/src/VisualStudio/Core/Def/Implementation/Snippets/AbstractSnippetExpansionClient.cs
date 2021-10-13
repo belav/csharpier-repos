@@ -399,7 +399,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 snippetNode = XElement.Parse(xmlNode.xml);
                 return true;
             }
-
             finally
             {
                 if (xmlNode != null && Marshal.IsComObject(xmlNode))

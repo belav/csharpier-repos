@@ -174,7 +174,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     );
                 }
             }
-
             finally
             {
                 _items.EndBulkOperation();

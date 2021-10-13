@@ -100,7 +100,6 @@ namespace CseTest
 #endif
 #if TRY
             }
-
             finally { }
 #endif
             int v19 = (class_s.a + (class_s.b + class_s.d));
@@ -328,7 +327,6 @@ namespace CseTest
             {
                 ans = input;
             }
-
             finally
             {
                 if (verbose)

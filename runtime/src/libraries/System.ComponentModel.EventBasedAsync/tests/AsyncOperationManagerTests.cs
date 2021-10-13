@@ -23,7 +23,6 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 Assert.NotNull(newContext);
                 Assert.NotSame(oldContext, newContext);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(originalContext);
@@ -43,7 +42,6 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                 AsyncOperationManager.SynchronizationContext = testContext;
                 Assert.Same(testContext, AsyncOperationManager.SynchronizationContext);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(originalContext);

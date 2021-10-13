@@ -382,7 +382,6 @@ namespace System.Text
                     _readBufferOffset = 0;
                     _readBufferCount = pendingReadDataPopulatedJustNow;
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(rentedBytes);
@@ -491,7 +490,6 @@ namespace System.Text
                         _readBufferOffset = 0;
                         _readBufferCount = pendingReadDataPopulatedJustNow;
                     }
-
                     finally
                     {
                         ArrayPool<byte>.Shared.Return(rentedBytes);
@@ -611,7 +609,6 @@ namespace System.Text
                     } while (!encoderFinished);
                 } while (!decoderFinished);
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(scratchChars);
@@ -713,7 +710,6 @@ namespace System.Text
                         } while (!encoderFinished);
                     } while (!decoderFinished);
                 }
-
                 finally
                 {
                     ArrayPool<char>.Shared.Return(scratchChars);

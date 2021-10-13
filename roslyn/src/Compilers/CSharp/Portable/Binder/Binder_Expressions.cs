@@ -3761,7 +3761,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics: diagnostics
                 );
             }
-
             finally
             {
                 bag.DiagnosticBag.Free();
@@ -5854,7 +5853,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return result;
                 }
             }
-
             finally
             {
                 analyzedArguments.Free();
@@ -6290,7 +6288,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                     }
                 }
-
                 finally
                 {
                     methodGroup.Free();
@@ -6367,7 +6364,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     initializerType
                 );
             }
-
             finally
             {
                 analyzedArguments.Free();
@@ -8990,7 +8986,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     lookupResult.Kind
                 );
             }
-
             finally
             {
                 lookupResult.Free();
@@ -9199,7 +9194,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     lookupResult.Kind
                 );
             }
-
             finally
             {
                 lookupResult.Free();
@@ -10416,7 +10410,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return BindElementOrIndexerAccess(node, receiver, analyzedArguments, diagnostics);
             }
-
             finally
             {
                 analyzedArguments.Free();

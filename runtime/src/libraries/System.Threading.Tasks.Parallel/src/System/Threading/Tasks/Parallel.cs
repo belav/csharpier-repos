@@ -402,7 +402,6 @@ namespace System.Threading.Tasks
                     }
                 }
             }
-
             finally
             {
                 // ETW event for Parallel Invoke End
@@ -1449,7 +1448,6 @@ namespace System.Threading.Tasks
                         stopOnFirstFailure: true
                     );
                 }
-
                 finally
                 {
                     // Dispose the cancellation token registration before checking for a cancellation exception
@@ -1795,7 +1793,6 @@ namespace System.Threading.Tasks
                         stopOnFirstFailure: true
                     );
                 }
-
                 finally
                 {
                     // Dispose the cancellation token registration before checking for a cancellation exception
@@ -4076,7 +4073,6 @@ namespace System.Threading.Tasks
                         stopOnFirstFailure: true
                     );
                 }
-
                 finally
                 {
                     // Dispose the cancellation token registration before checking for a cancellation exception

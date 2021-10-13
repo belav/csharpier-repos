@@ -108,7 +108,6 @@ namespace System.Net.NetworkInformation
                                     Timeout.Infinite
                                 );
                             }
-
                             finally
                             {
                                 // Restore the current ExecutionContext

@@ -125,7 +125,6 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 // Set the subsystem to GUI
                 subsystem[0] = WindowsGUISubsystem;
             }
-
             finally
             {
                 if (pointer != null)

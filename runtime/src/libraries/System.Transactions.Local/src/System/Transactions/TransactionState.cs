@@ -2136,7 +2136,6 @@ namespace System.Transactions
                 );
                 return en;
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -2169,7 +2168,6 @@ namespace System.Transactions
                 );
                 return en;
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -2212,7 +2210,6 @@ namespace System.Transactions
                 );
                 return en;
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -2255,7 +2252,6 @@ namespace System.Transactions
                 );
                 return en;
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -2281,7 +2277,6 @@ namespace System.Transactions
             {
                 tx.PromotedTransaction.Rollback();
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -2386,13 +2381,11 @@ namespace System.Transactions
                         {
                             dtx.Complete();
                         }
-
                         finally
                         {
                             dtx.Dispose();
                         }
                     }
-
                     finally
                     {
                         Monitor.Enter(tx);
@@ -2431,13 +2424,11 @@ namespace System.Transactions
                         {
                             dtx.Complete();
                         }
-
                         finally
                         {
                             dtx.Dispose();
                         }
                     }
-
                     finally
                     {
                         Monitor.Enter(tx);
@@ -3065,7 +3056,6 @@ namespace System.Transactions
                 // Tell the distributed TM that the volatile enlistments are prepared
                 tx._phase0Volatiles.VolatileDemux._promotedEnlistment.Prepared();
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -3185,7 +3175,6 @@ namespace System.Transactions
                 // Tell the distributed TM that the volatile enlistments are prepared
                 tx._phase1Volatiles.VolatileDemux._promotedEnlistment.Prepared();
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -3336,7 +3325,6 @@ namespace System.Transactions
                     // Tell the distributed TM that the tx aborted.
                     tx._phase0Volatiles.VolatileDemux._promotedEnlistment.ForceRollback();
                 }
-
                 finally
                 {
                     Monitor.Enter(tx);
@@ -3377,7 +3365,6 @@ namespace System.Transactions
                 // Tell the distributed TM that the tx aborted.
                 tx._phase1Volatiles.VolatileDemux._promotedEnlistment.ForceRollback();
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -5211,7 +5198,6 @@ namespace System.Transactions
                 // Set the PromoterType for the transaction.
                 tx._promoterType = promoterType;
             }
-
             finally
             {
                 TransactionStateActive.CommonEnterState(tx);
@@ -5243,7 +5229,6 @@ namespace System.Transactions
                 // Set the PromoterType for the transaction.
                 tx._promoterType = promoterType;
             }
-
             finally
             {
                 TransactionStatePhase0.CommonEnterState(tx);
@@ -5361,7 +5346,6 @@ namespace System.Transactions
                     }
                 }
             }
-
             finally
             {
                 tx._attemptingPSPEPromote = false;
@@ -5502,7 +5486,6 @@ namespace System.Transactions
                     tx._durableEnlistment.SinglePhaseEnlistment
                 );
             }
-
             finally
             {
                 Monitor.Enter(tx);
@@ -5538,7 +5521,6 @@ namespace System.Transactions
                     tx._durableEnlistment.SinglePhaseEnlistment
                 );
             }
-
             finally
             {
                 Monitor.Enter(tx);

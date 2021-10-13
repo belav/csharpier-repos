@@ -87,7 +87,6 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 // Using awaiter here to propagate original exception
                 return task.GetAwaiter().GetResult();
             }
-
             finally
             {
                 _executionStackCount--;

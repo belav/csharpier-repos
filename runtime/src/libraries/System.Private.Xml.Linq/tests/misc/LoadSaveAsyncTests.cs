@@ -705,7 +705,6 @@ namespace CoreXml.Test.XLinq
                 _isAsyncInProgress = true;
                 return _stream.FlushAsync(cancellationToken);
             }
-
             finally
             {
                 _isAsyncInProgress = false;
@@ -738,7 +737,6 @@ namespace CoreXml.Test.XLinq
                 _isAsyncInProgress = true;
                 return _stream.WriteAsync(buffer, offset, count, cancellationToken);
             }
-
             finally
             {
                 _isAsyncInProgress = false;
@@ -771,7 +769,6 @@ namespace CoreXml.Test.XLinq
                 _isAsyncInProgress = true;
                 return _stream.ReadAsync(buffer, offset, count, cancellationToken);
             }
-
             finally
             {
                 _isAsyncInProgress = false;

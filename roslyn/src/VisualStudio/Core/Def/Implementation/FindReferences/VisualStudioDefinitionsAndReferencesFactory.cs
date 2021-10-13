@@ -215,7 +215,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
                             _charOffset
                         ) == VSConstants.S_OK;
                 }
-
                 finally
                 {
                     if (bufferPtr != IntPtr.Zero)

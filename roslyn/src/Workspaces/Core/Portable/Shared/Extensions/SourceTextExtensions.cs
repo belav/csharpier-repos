@@ -269,7 +269,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 Contract.ThrowIfFalse(offset == length);
             }
-
             finally
             {
                 SharedPools.CharArray.Free(buffer);

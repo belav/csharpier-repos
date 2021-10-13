@@ -92,7 +92,6 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                         throw CryptoUtil.Fail("Unrecognized PRF.");
                 }
             }
-
             finally
             {
                 // The HMAC ctor makes a duplicate of this key; we clear original buffer to limit exposure to the GC.

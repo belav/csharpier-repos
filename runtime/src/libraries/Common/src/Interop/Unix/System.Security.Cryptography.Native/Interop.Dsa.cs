@@ -186,7 +186,6 @@ internal static partial class Interop
 
                 return dsaParameters;
             }
-
             finally
             {
                 if (refAdded)

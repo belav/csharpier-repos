@@ -110,14 +110,12 @@ namespace System.Net
             {
                 _response?.Close();
             }
-
             finally
             {
                 try
                 {
                     Request.Close();
                 }
-
                 finally
                 {
                     IDisposable? user = _user == null ? null : _user.Identity as IDisposable;
@@ -142,7 +140,6 @@ namespace System.Net
             {
                 Request.Close();
             }
-
             finally
             {
                 (_user?.Identity as IDisposable)?.Dispose();

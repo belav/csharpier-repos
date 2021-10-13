@@ -86,7 +86,6 @@ namespace Microsoft.Web.Mvc
                 {
                     endDelegate(asyncResult); // call on same thread
                 }
-
                 finally
                 {
                     asyncManager.OutstandingOperations.Decrement();

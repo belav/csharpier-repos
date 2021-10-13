@@ -468,7 +468,6 @@ namespace System.IO.MemoryMappedFiles.Tests
             {
                 mmfs.ForEach(mmf => ValidateMemoryMappedFile(mmf, Capacity));
             }
-
             finally
             {
                 mmfs.ForEach(mmf => mmf.Dispose());

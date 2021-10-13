@@ -84,7 +84,6 @@ public class My
                 {
                     DoStuff();
                 }
-
                 finally
                 {
                     Console.WriteLine("Sleeping");

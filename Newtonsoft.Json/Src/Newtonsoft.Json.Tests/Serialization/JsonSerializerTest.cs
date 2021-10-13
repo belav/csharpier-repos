@@ -4839,7 +4839,6 @@ Path '', line 1, position 1."
                 Assert.IsNotNull(value);
                 Assert.AreEqual(false, value._booleanValue);
             }
-
             finally
             {
                 JsonTypeReflector.SetFullyTrusted(null);
@@ -4867,7 +4866,6 @@ Path '', line 1, position 1."
                         + @"Path 'booleanValue', line 1, position 14."
                 );
             }
-
             finally
             {
                 JsonTypeReflector.SetFullyTrusted(null);
@@ -4899,7 +4897,6 @@ Path '', line 1, position 1."
                         + @"Path ''."
                 );
             }
-
             finally
             {
                 JsonTypeReflector.SetFullyTrusted(null);
@@ -6745,7 +6742,6 @@ Path '', line 1, position 1."
                 Assert.AreEqual(1.5m, c.Quantity);
                 Assert.AreEqual(2.2d, c.OptionalQuantity);
             }
-
             finally
             {
                 Thread.CurrentThread.CurrentCulture = initialCulture;
@@ -8257,7 +8253,6 @@ This is just junk, though.";
                     "Unable to find a constructor to use for type Newtonsoft.Json.Tests.TestObjects.MyTuplePartial`1[System.Int32]. A class should either have a default constructor, one constructor with arguments or a constructor marked with the JsonConstructor attribute. Path 'm_Item1', line 1, position 11."
                 );
             }
-
             finally
             {
                 JsonTypeReflector.SetFullyTrusted(true);

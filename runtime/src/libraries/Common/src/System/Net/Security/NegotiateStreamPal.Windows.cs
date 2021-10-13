@@ -77,7 +77,6 @@ namespace System.Net.Security
                     ref authData
                 );
             }
-
             finally
             {
                 authData?.Dispose();

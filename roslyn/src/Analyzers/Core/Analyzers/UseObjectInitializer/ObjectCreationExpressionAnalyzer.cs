@@ -86,7 +86,6 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
             {
                 return analyzer.AnalyzeWorker();
             }
-
             finally
             {
                 analyzer.Clear();

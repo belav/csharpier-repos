@@ -584,7 +584,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         )
                         .ConfigureAwait(false);
                 }
-
                 finally
                 {
                     await context.OnCompletedAsync().ConfigureAwait(false);

@@ -123,13 +123,11 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                         await hub.OnConnectedAsync();
                     }
                 }
-
                 finally
                 {
                     hubActivator.Release(hub);
                 }
             }
-
             finally
             {
                 await scope.DisposeAsync();
@@ -165,13 +163,11 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                         await hub.OnDisconnectedAsync(exception);
                     }
                 }
-
                 finally
                 {
                     hubActivator.Release(hub);
                 }
             }
-
             finally
             {
                 await scope.DisposeAsync();
@@ -612,7 +608,6 @@ namespace Microsoft.AspNetCore.SignalR.Internal
                     );
                 }
             }
-
             finally
             {
                 if (disposeScope)

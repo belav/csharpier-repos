@@ -143,7 +143,6 @@ namespace System.Xml.Tests
                     );
                     testAction();
                 }
-
                 finally
                 {
                     if (File.Exists(s_temporaryResolverDocumentFullName))

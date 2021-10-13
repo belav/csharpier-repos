@@ -473,7 +473,6 @@ namespace System.Data.ProviderBase
                 );
                 bool timerIsNotDisposed;
                 try { }
-
                 finally
                 {
                     _waitHandles.ErrorEvent.Set();
@@ -626,7 +625,6 @@ namespace System.Data.ProviderBase
                 try
                 {
                     try { }
-
                     finally
                     {
                         started = Interlocked.CompareExchange(ref _pendingOpensWaiting, 1, 0) == 0;
@@ -700,7 +698,6 @@ namespace System.Data.ProviderBase
                         }
                     }
                 }
-
                 finally
                 {
                     if (started)
@@ -800,7 +797,6 @@ namespace System.Data.ProviderBase
                     try
                     {
                         try { }
-
                         finally
                         {
                             waitResult = WaitHandle.WaitAny(
@@ -896,7 +892,6 @@ namespace System.Data.ProviderBase
                                             {
                                                 obj = UserCreateRequest(owningObject, userOptions);
                                             }
-
                                             finally
                                             {
                                                 _waitHandles.CreationSemaphore.Release(1);
@@ -918,7 +913,6 @@ namespace System.Data.ProviderBase
                                 );
                         }
                     }
-
                     finally
                     {
                         if (CREATION_HANDLE == waitResult)
@@ -1057,7 +1051,6 @@ namespace System.Data.ProviderBase
                         try
                         {
                             try { }
-
                             finally
                             {
                                 waitResult = WaitHandle.WaitAny(
@@ -1101,7 +1094,6 @@ namespace System.Data.ProviderBase
                                 QueuePoolCreateRequest();
                             }
                         }
-
                         finally
                         {
                             if (CREATION_HANDLE == waitResult)
@@ -1195,7 +1187,6 @@ namespace System.Data.ProviderBase
                                 }
                             }
                         }
-
                         finally
                         {
                             if (locked)

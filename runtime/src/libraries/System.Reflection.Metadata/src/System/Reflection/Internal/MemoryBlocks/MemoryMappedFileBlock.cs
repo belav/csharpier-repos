@@ -23,7 +23,6 @@ namespace System.Reflection.Internal
                 try
                 { /* intentionally left blank */
                 }
-
                 finally
 #endif
                 {
@@ -45,7 +44,6 @@ namespace System.Reflection.Internal
                 try
                 { /* intentionally left blank */
                 }
-
                 finally
 #endif
                 {

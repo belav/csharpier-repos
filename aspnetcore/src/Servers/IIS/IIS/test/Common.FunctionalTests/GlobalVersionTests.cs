@@ -72,7 +72,6 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                 Assert.Equal(_helloWorldResponse, responseText);
                 StopServer();
             }
-
             finally
             {
                 File.Delete(temporaryFile);

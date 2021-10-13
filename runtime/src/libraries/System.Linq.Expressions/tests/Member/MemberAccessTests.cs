@@ -46,7 +46,6 @@ namespace System.Linq.Expressions.Tests
 
                 Assert.Equal(42, f());
             }
-
             finally
             {
                 FS.SI = 0;
@@ -107,7 +106,6 @@ namespace System.Linq.Expressions.Tests
 
                 Assert.Equal(42, f());
             }
-
             finally
             {
                 PS.SI = 0;
@@ -163,7 +161,6 @@ namespace System.Linq.Expressions.Tests
 
                 Assert.Equal(42, f());
             }
-
             finally
             {
                 FC.SI = 0;
@@ -380,7 +377,6 @@ namespace System.Linq.Expressions.Tests
 
                 Assert.Equal(42, f());
             }
-
             finally
             {
                 PC.SI = 0;

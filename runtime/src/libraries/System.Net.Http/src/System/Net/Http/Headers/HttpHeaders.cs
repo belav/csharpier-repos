@@ -115,7 +115,6 @@ namespace System.Net.Http.Headers
                     ParseAndAddValue(descriptor, info, value);
                 }
             }
-
             finally
             {
                 // Even if one of the values was invalid, make sure we add the header for the valid ones. We need to be

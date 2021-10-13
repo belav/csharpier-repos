@@ -13,7 +13,6 @@ public class Program
             {
                 throw new Exception();
             }
-
             finally
             {
                 finallys++;

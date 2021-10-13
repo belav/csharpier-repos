@@ -92,7 +92,6 @@ namespace System.Xml.Xsl.IlGen
             {
                 WriteQil(qil, w);
             }
-
             finally
             {
                 w.Close();

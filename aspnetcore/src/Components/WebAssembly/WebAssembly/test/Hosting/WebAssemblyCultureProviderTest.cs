@@ -141,7 +141,6 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
                     ex.Message
                 );
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable("__BLAZOR_SHARDED_ICU", null);

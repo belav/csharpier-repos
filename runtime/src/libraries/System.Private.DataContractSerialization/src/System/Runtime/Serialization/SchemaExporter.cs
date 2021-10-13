@@ -59,7 +59,6 @@ namespace System.Runtime.Serialization
                     }
                 }
             }
-
             finally
             {
                 _xmlDoc = null;

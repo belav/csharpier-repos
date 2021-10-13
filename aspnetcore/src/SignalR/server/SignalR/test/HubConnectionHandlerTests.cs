@@ -3835,7 +3835,6 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 {
                     return await _originalPipeReader.ReadAsync(cancellationToken);
                 }
-
                 finally
                 {
                     lock (_lock)

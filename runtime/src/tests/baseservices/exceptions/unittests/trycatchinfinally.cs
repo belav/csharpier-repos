@@ -54,7 +54,6 @@ class TryCatchInFinallyTest
         {
             _trace.Write("1");
         }
-
         finally
         {
             _trace.Write("2");

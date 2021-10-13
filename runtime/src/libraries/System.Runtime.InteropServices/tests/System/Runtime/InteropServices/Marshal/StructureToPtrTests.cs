@@ -27,7 +27,6 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.StructureToPtr(structure1, memory, true);
                 Assert.Equal(0xFF, Marshal.ReadInt32(memory, size));
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -55,7 +54,6 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.StructureToPtr(structure, memory, false);
                 Marshal.StructureToPtr(structure, memory, true);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -85,7 +83,6 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.StructureToPtr(structure, memory, false);
                 Marshal.StructureToPtr(structure, memory, true);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -118,7 +115,6 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.StructureToPtr(structure, memory, false);
                 Marshal.StructureToPtr(structure, memory, true);
             }
-
             finally
             {
                 Marshal.DestroyStructure(memory, structure.GetType());
@@ -237,7 +233,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.StructureToPtr(structure, memory, true)
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -267,7 +262,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(original->buffer[0], bufferStructPtr->buffer[0]);
                 Assert.Equal(original->buffer[1], bufferStructPtr->buffer[1]);
             }
-
             finally
             {
                 Marshal.DestroyStructure<NonBlittableContainingBuffer>(parentStructIntPtr);

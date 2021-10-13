@@ -102,7 +102,6 @@ namespace Microsoft.CodeAnalysis
                 Parser.ParseDeclaredSymbolId(id, compilation, results);
                 return results.ToImmutableArray();
             }
-
             finally
             {
                 s_symbolListPool.ClearAndFree(results);
@@ -158,7 +157,6 @@ namespace Microsoft.CodeAnalysis
                 Parser.ParseDeclaredSymbolId(id, compilation, results);
                 return results.Count == 0 ? null : results[0];
             }
-
             finally
             {
                 s_symbolListPool.ClearAndFree(results);
@@ -189,7 +187,6 @@ namespace Microsoft.CodeAnalysis
                 TryGetSymbolsForReferenceId(id, compilation, results);
                 return results.ToImmutableArray();
             }
-
             finally
             {
                 s_symbolListPool.ClearAndFree(results);
@@ -255,7 +252,6 @@ namespace Microsoft.CodeAnalysis
                 Parser.ParseReferencedSymbolId(id, compilation, results);
                 return results.Count == 0 ? null : results[0];
             }
-
             finally
             {
                 s_symbolListPool.ClearAndFree(results);
@@ -872,7 +868,6 @@ namespace Microsoft.CodeAnalysis
                             break;
                     }
                 }
-
                 finally
                 {
                     s_namespaceOrTypeListPool.ClearAndFree(containers);
@@ -899,7 +894,6 @@ namespace Microsoft.CodeAnalysis
                         return (ITypeSymbol)results[0];
                     }
                 }
-
                 finally
                 {
                     s_symbolListPool.ClearAndFree(results);
@@ -948,7 +942,6 @@ namespace Microsoft.CodeAnalysis
                             results.AddRange(contexts.OfType<ITypeSymbol>());
                         }
                     }
-
                     finally
                     {
                         s_symbolListPool.ClearAndFree(contexts);
@@ -1127,7 +1120,6 @@ namespace Microsoft.CodeAnalysis
                         break;
                     }
                 }
-
                 finally
                 {
                     s_namespaceOrTypeListPool.ClearAndFree(containers);
@@ -1401,7 +1393,6 @@ namespace Microsoft.CodeAnalysis
 
                     index = endIndex;
                 }
-
                 finally
                 {
                     s_parameterListPool.ClearAndFree(parameters);
@@ -1472,7 +1463,6 @@ namespace Microsoft.CodeAnalysis
 
                     index = endIndex;
                 }
-
                 finally
                 {
                     if (parameters != null)

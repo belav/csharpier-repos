@@ -117,7 +117,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 await ProcessDocumentWorkerAsync(document).ConfigureAwait(false);
             }
-
             finally
             {
                 await _progressTracker.ItemCompletedAsync().ConfigureAwait(false);

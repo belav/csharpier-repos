@@ -92,7 +92,6 @@ namespace System.CommandLine.Parsing
 
                 return builder.ToString();
             }
-
             finally
             {
                 StringBuilderPool.Default.ReturnToPool(builder);

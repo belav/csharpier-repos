@@ -250,7 +250,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 succeeded = true;
                 return returnValue;
             }
-
             finally
             {
                 if (!succeeded)
@@ -318,7 +317,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 return peReader;
             }
-
             finally
             {
                 if (accessor != null)
@@ -388,7 +386,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                 return module;
             }
-
             finally
             {
                 if (mappedViewAccessor != null)

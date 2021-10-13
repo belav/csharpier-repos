@@ -71,7 +71,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                 Assert.NotNull(databaseModel);
                 asserter(databaseModel);
             }
-
             finally
             {
                 if (!string.IsNullOrEmpty(cleanupSql))

@@ -935,7 +935,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
                 Assert.Equal(3, collection.Count);
             }
-
             finally
             {
                 foreach (X509Certificate2 cert in collection)
@@ -981,7 +980,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     Assert.Equal(originalPrivateKeyCount, importedPrivateKeyCount);
                 }
             }
-
             finally
             {
                 foreach (X509Certificate2 cert in collection)

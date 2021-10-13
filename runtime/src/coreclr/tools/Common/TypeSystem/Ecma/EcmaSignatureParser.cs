@@ -349,7 +349,6 @@ namespace Internal.TypeSystem.Ecma
                 _embeddedSignatureDataList = new List<EmbeddedSignatureData>();
                 return ParseMethodSignatureInternal(skipEmbeddedSignatureData: false);
             }
-
             finally
             {
                 _indexStack = null;

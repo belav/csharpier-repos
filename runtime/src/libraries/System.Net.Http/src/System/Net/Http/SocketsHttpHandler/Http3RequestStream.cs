@@ -406,7 +406,6 @@ namespace System.Net.Http
                         return;
                     }
                 }
-
                 finally
                 {
                     if (timer != null)

@@ -300,7 +300,6 @@ namespace System.Net.Http
                         }
                     }
                 }
-
                 finally
                 {
                     ctr.Dispose();

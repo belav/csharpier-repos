@@ -106,7 +106,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return SyntaxFactory.DocumentationCommentTrivia(kind, nodes.ToList(), eoc);
             }
-
             finally
             {
                 _pool.Free(nodes);
@@ -142,7 +141,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 nodes.Add(allRemainderText);
             }
-
             finally
             {
                 _pool.Free(textTokens);
@@ -328,7 +326,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         this.ResetMode(saveMode);
                         return SyntaxFactory.XmlElement(startTag, nodes.ToList(), endTag);
                     }
-
                     finally
                     {
                         _pool.Free(nodes);
@@ -350,7 +347,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     return SyntaxFactory.XmlEmptyElement(lessThan, name, attrs, slashGreater);
                 }
             }
-
             finally
             {
                 _pool.Free(attrs);
@@ -503,7 +499,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     return SkipResult.Abort;
                 }
             }
-
             finally
             {
                 if (!badTokens.IsNull)
@@ -601,7 +596,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         endQuote
                     );
                 }
-
                 finally
                 {
                     _pool.Free(textTokens);
@@ -1453,7 +1447,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     )
                   : SyntaxFactory.CrefParameterList(open, list, close);
             }
-
             finally
             {
                 _pool.Free(list);
@@ -1568,7 +1561,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     SyntaxFactory.TypeArgumentList(open, list, close)
                 );
             }
-
             finally
             {
                 _pool.Free(list);
@@ -1764,7 +1756,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 SyntaxFactory.ArrayRankSpecifier(open, dimensionList, close)
                             );
                         }
-
                         finally
                         {
                             _pool.Free(dimensionList);
@@ -1773,7 +1764,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                     type = SyntaxFactory.ArrayType(type, rankList);
                 }
-
                 finally
                 {
                     _pool.Free(rankList);

@@ -160,7 +160,6 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
                     ex.Message
                 );
             }
-
             finally
             {
                 File.SetAttributes(contextPath, originalAttributes);

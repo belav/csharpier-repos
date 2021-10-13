@@ -339,7 +339,6 @@ namespace BasicEventSourceTests
                     Assert.True(esName2Hit);
                 }
             }
-
             finally
             {
                 if (log != null)
@@ -402,7 +401,6 @@ namespace BasicEventSourceTests
                     Assert.True(esName2Hit);
                 }
             }
-
             finally
             {
                 if (log != null)

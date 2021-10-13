@@ -805,7 +805,6 @@ namespace Newtonsoft.Json.Tests.Converters
                 {
                     return base.ReadJson(reader, objectType, existingValue, serializer);
                 }
-
                 finally
                 {
                     serializer.Error -= OnError;

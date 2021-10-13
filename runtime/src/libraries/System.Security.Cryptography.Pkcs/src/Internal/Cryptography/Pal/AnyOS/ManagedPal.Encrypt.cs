@@ -46,7 +46,6 @@ namespace Internal.Cryptography.Pal.AnyOS
                         parameterBytes
                     );
                 }
-
                 finally
                 {
                     Array.Clear(cek, 0, cek.Length);

@@ -30,7 +30,6 @@ namespace AppDomainUnloadAsmLoad
                 );
                 driver.Test();
             }
-
             finally
             {
                 AppDomain.Unload(appDomain);

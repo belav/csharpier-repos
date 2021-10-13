@@ -6103,7 +6103,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 {
                     await connectionTask;
                 }
-
                 finally
                 {
                     _pair.Transport.Input.Complete();
@@ -6206,7 +6205,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 {
                     await connectionTask;
                 }
-
                 finally
                 {
                     _pair.Transport.Input.Complete();

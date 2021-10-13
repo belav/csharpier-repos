@@ -301,7 +301,6 @@ namespace System.Threading.Tasks.Sources
                             preferLocal: true
                         );
                     }
-
                     finally
                     {
                         // Restore the current ExecutionContext.
@@ -344,7 +343,6 @@ namespace System.Threading.Tasks.Sources
             {
                 InvokeSchedulerContinuation();
             }
-
             finally
             {
                 // Restore the current ExecutionContext.

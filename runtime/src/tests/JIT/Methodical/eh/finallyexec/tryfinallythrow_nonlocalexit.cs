@@ -42,7 +42,6 @@ namespace hello
                     goto done;
                 Console.WriteLine("in try");
             }
-
             finally
             {
                 Console.WriteLine("in finally");

@@ -68,7 +68,6 @@ namespace Microsoft.AspNetCore.Builder.Extensions
                 {
                     await _next(context);
                 }
-
                 finally
                 {
                     context.Request.Path = originalPath;

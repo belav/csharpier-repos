@@ -167,7 +167,6 @@ namespace System.DirectoryServices.AccountManagement
                     return null;
                 }
             }
-
             finally
             {
                 if (pSid != IntPtr.Zero)
@@ -225,7 +224,6 @@ namespace System.DirectoryServices.AccountManagement
 
                 return ClassifySID(pSid);
             }
-
             finally
             {
                 if (pSid != IntPtr.Zero)
@@ -297,7 +295,6 @@ namespace System.DirectoryServices.AccountManagement
 
                 return rid;
             }
-
             finally
             {
                 if (pSid != IntPtr.Zero)
@@ -366,7 +363,6 @@ namespace System.DirectoryServices.AccountManagement
                     return true;
                 }
             }
-
             finally
             {
                 if (pCopyOfUserSid != IntPtr.Zero)
@@ -527,7 +523,6 @@ namespace System.DirectoryServices.AccountManagement
 
                 return pCopyOfUserSid;
             }
-
             finally
             {
                 if (pTokenHandle != IntPtr.Zero)
@@ -630,7 +625,6 @@ namespace System.DirectoryServices.AccountManagement
 
                 return pCopyOfSid;
             }
-
             finally
             {
                 if (pPolicyHandle != IntPtr.Zero)
@@ -712,7 +706,6 @@ namespace System.DirectoryServices.AccountManagement
 
                 return domainControllerInfo;
             }
-
             finally
             {
                 if (domainControllerInfoPtr != IntPtr.Zero)
@@ -809,7 +802,6 @@ namespace System.DirectoryServices.AccountManagement
 
                 return 0;
             }
-
             finally
             {
                 if (hUser != IntPtr.Zero)
@@ -1039,7 +1031,6 @@ namespace System.DirectoryServices.AccountManagement
                         == UnsafeNativeMethods.DSROLE_MACHINE_ROLE.DsRole_RolePrimaryDomainController
                 );
             }
-
             finally
             {
                 if (dsRoleInfoPtr != IntPtr.Zero)

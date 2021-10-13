@@ -147,7 +147,6 @@ namespace System.ServiceProcess.Tests
                 testServiceInstaller.ServiceName = TestServiceName;
                 testServiceInstaller.RemoveService();
             }
-
             finally
             {
                 // Lets be sure to try and clean up dependenct services even if something goes

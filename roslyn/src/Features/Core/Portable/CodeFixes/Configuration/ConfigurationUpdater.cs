@@ -464,7 +464,6 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 
                     return builder.ToImmutable();
                 }
-
                 finally
                 {
                     builder.Free();

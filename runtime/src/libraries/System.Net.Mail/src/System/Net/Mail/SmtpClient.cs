@@ -92,7 +92,6 @@ namespace System.Net.Mail
                 _port = port;
                 Initialize();
             }
-
             finally { }
         }
 
@@ -904,7 +903,6 @@ namespace System.Net.Mail
                     }
                 }
             }
-
             finally
             {
                 operationCompletedResult.InvokeCallback(exception);

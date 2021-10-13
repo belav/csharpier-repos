@@ -221,7 +221,6 @@ namespace System.IO.Strategies
                     }
                 }
             }
-
             finally
             {
                 if (_fileHandle != null && !_fileHandle.IsClosed)
@@ -286,7 +285,6 @@ namespace System.IO.Strategies
             {
                 FlushWriteBuffer();
             }
-
             finally
             {
                 _asyncState?.Release();
@@ -500,7 +498,6 @@ namespace System.IO.Strategies
                         thisRef._asyncState.Memory = default;
                         return thisRef.ReadSpan(memory.Span);
                     }
-
                     finally
                     {
                         thisRef._asyncState.Release();
@@ -523,7 +520,6 @@ namespace System.IO.Strategies
             {
                 return ReadNative(_buffer);
             }
-
             finally
             {
                 _asyncState?.Release();
@@ -685,7 +681,6 @@ namespace System.IO.Strategies
                             thisRef._asyncState.ReadOnlyMemory = default;
                             thisRef.WriteSpan(readOnlyMemory.Span);
                         }
-
                         finally
                         {
                             thisRef._asyncState.Release();

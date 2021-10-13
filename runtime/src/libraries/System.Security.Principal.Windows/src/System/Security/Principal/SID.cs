@@ -1207,7 +1207,6 @@ namespace System.Security.Principal
 
                 return Result;
             }
-
             finally
             {
                 for (int i = 0; i < sourceSids.Count; i++)

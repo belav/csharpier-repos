@@ -164,7 +164,6 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                             componentState.SetDirectParameters(initialParameters);
                         }
                     }
-
                     finally
                     {
                         IsHotReloading = false;
@@ -261,7 +260,6 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 await ProcessAsynchronousWork();
                 Debug.Assert(_pendingTasks.Count == 0);
             }
-
             finally
             {
                 _pendingTasks = null;

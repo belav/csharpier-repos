@@ -2150,7 +2150,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             localsDefined.Add(l);
                     return base.VisitSequence(node);
                 }
-
                 finally
                 {
                     if (!node.Locals.IsNullOrEmpty)
@@ -2167,7 +2166,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         localsDefined.Add(node.LocalOpt);
                     return base.VisitCatchBlock(node);
                 }
-
                 finally
                 {
                     if ((object)node.LocalOpt != null)
@@ -2184,7 +2182,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             localsDefined.Add(l);
                     return base.VisitSwitchStatement(node);
                 }
-
                 finally
                 {
                     if (!node.LocalsOpt.IsNullOrEmpty)
@@ -2202,7 +2199,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             localsDefined.Add(l);
                     return base.VisitBlock(node);
                 }
-
                 finally
                 {
                     if (!node.LocalsOpt.IsNullOrEmpty)

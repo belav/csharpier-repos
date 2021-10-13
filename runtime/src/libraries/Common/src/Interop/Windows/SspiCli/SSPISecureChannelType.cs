@@ -143,7 +143,6 @@ namespace System.Net
                     sequenceNumber
                 );
             }
-
             finally
             {
                 context.DangerousRelease();
@@ -167,7 +166,6 @@ namespace System.Net
                     null
                 );
             }
-
             finally
             {
                 context.DangerousRelease();

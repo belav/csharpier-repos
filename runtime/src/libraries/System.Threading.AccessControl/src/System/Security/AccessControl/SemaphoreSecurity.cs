@@ -227,7 +227,6 @@ namespace System.Security.AccessControl
                 base.Persist(handle, persistSections);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-
             finally
             {
                 WriteUnlock();

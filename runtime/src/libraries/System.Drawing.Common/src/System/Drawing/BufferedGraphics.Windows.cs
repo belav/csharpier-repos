@@ -70,7 +70,6 @@ namespace System.Drawing
                 {
                     RenderInternal(new HandleRef(target, targetDC));
                 }
-
                 finally
                 {
                     target.ReleaseHdcInternal(targetDC);
@@ -99,7 +98,6 @@ namespace System.Drawing
                     Interop.Gdi32.RasterOp.SRCCOPY
                 );
             }
-
             finally
             {
                 Graphics.ReleaseHdcInternal(sourceDC);

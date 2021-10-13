@@ -64,7 +64,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     }
                 }
             }
-
             finally
             {
                 await FireOnCompletedAsync();

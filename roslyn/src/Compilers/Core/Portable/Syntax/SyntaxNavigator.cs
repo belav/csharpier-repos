@@ -191,7 +191,6 @@ namespace Microsoft.CodeAnalysis
 
                 return default;
             }
-
             finally
             {
                 stack.Clear();
@@ -248,7 +247,6 @@ namespace Microsoft.CodeAnalysis
 
                 return default;
             }
-
             finally
             {
                 stack.Clear();

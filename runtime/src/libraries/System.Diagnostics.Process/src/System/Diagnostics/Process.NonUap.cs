@@ -59,7 +59,6 @@ namespace System.Diagnostics
                     }
                 } while (descendantProcesses.TryDequeue(out current));
             }
-
             finally
             {
                 foreach (Process process in allProcesses)
@@ -94,7 +93,6 @@ namespace System.Diagnostics
                         dispose = false;
                     }
                 }
-
                 finally
                 {
                     if (dispose)

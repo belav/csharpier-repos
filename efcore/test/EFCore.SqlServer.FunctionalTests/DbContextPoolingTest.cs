@@ -352,7 +352,6 @@ namespace Microsoft.EntityFrameworkCore
                             : scopedProvider.GetService<PooledContext>()
                 );
             }
-
             finally
             {
                 PooledContext.ModifyOptions = false;
@@ -372,7 +371,6 @@ namespace Microsoft.EntityFrameworkCore
                 var factory = scopedProvider.GetService<IDbContextFactory<PooledContext>>();
                 Assert.Throws<InvalidOperationException>(() => factory.CreateDbContext());
             }
-
             finally
             {
                 PooledContext.ModifyOptions = false;

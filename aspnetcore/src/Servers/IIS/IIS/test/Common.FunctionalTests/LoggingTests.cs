@@ -194,7 +194,6 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
                 AssertLogs(secondTempFile);
             }
-
             finally
             {
                 File.Delete(firstTempFile);

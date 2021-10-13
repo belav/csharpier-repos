@@ -126,7 +126,6 @@ namespace System.Formats.Asn1
                 AsnWriter.Reverse(new Span<byte>(tmp, 0, contents.Length));
                 value = new BigInteger(tmp);
             }
-
             finally
             {
                 // Let CryptoPool.Return clear the whole tmp so that not even the sign bit

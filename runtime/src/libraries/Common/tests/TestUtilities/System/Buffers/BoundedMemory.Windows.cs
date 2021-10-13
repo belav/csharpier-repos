@@ -120,7 +120,6 @@ namespace System.Buffers
                         }
                         return memoryInfo.Protect;
                     }
-
                     finally
                     {
                         if (refAdded)
@@ -152,7 +151,6 @@ namespace System.Buffers
                                 );
                             }
                         }
-
                         finally
                         {
                             if (refAdded)
@@ -179,7 +177,6 @@ namespace System.Buffers
                             _elementCount
                         );
                     }
-
                     finally
                     {
                         if (refAdded)
@@ -242,7 +239,6 @@ namespace System.Buffers
                                 + elementIndex
                         );
                     }
-
                     finally
                     {
                         if (refAdded)

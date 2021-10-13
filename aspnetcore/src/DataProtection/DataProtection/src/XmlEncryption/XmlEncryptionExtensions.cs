@@ -163,7 +163,6 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                         )
                     );
                 }
-
                 finally
                 {
                     Array.Clear(underlyingBuffer, 0, underlyingBuffer.Length);
@@ -185,7 +184,6 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption
                     var memoryStream = new MemoryStream(plaintextSecret, writable: false);
                     return XElement.Load(memoryStream);
                 }
-
                 finally
                 {
                     Array.Clear(plaintextSecret, 0, plaintextSecret.Length);

@@ -27,7 +27,6 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 Console.OutputEncoding = s_utf8Encoding;
                 return func(Console.Out);
             }
-
             finally
             {
                 try

@@ -45,7 +45,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(WrapMode.Tile, brush.WrapMode);
                 }
             }
-
             finally
             {
                 bitmap.Dispose();
@@ -128,7 +127,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(wrapMode, brush.WrapMode);
                 }
             }
-
             finally
             {
                 image.Dispose();
@@ -159,7 +157,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(WrapMode.Tile, brush.WrapMode);
                 }
             }
-
             finally
             {
                 image.Dispose();
@@ -184,7 +181,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(WrapMode.Tile, brush.WrapMode);
                 }
             }
-
             finally
             {
                 image.Dispose();
@@ -230,7 +226,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(wrapMode, brush.WrapMode);
                 }
             }
-
             finally
             {
                 image.Dispose();
@@ -259,7 +254,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(wrapMode, brush.WrapMode);
                 }
             }
-
             finally
             {
                 image.Dispose();
@@ -320,7 +314,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(expectedWrapMode, brush.WrapMode);
                 }
             }
-
             finally
             {
                 image.Dispose();
@@ -351,7 +344,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(expectedWrapMode, brush.WrapMode);
                 }
             }
-
             finally
             {
                 image.Dispose();
@@ -577,7 +569,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(expected, brush.Transform);
                 }
             }
-
             finally
             {
                 originalTransform.Dispose();
@@ -746,7 +737,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(expected, brush.Transform);
                 }
             }
-
             finally
             {
                 originalTransform.Dispose();
@@ -840,7 +830,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(expected, brush.Transform);
                 }
             }
-
             finally
             {
                 originalTransform.Dispose();
@@ -986,7 +975,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(expected, brush.Transform);
                 }
             }
-
             finally
             {
                 originalTransform.Dispose();

@@ -267,7 +267,6 @@ namespace System.Web.Razor.Parser
                                 return true;
                             }
                         }
-
                         finally
                         {
                             Output(SpanKind.Code);

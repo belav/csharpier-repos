@@ -186,7 +186,6 @@ namespace Microsoft.AspNetCore.Diagnostics
                                             {
                                                 await next();
                                             }
-
                                             finally
                                             {
                                                 response.Body = originalResponseBody;

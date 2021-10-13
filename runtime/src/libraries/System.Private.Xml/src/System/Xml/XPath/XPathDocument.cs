@@ -87,7 +87,6 @@ namespace System.Xml.XPath
             {
                 LoadFromReader(reader, XmlSpace.Default);
             }
-
             finally
             {
                 reader.Close();
@@ -105,7 +104,6 @@ namespace System.Xml.XPath
             {
                 LoadFromReader(reader, XmlSpace.Default);
             }
-
             finally
             {
                 reader.Close();
@@ -128,7 +126,6 @@ namespace System.Xml.XPath
             {
                 LoadFromReader(reader, space);
             }
-
             finally
             {
                 reader.Close();
@@ -312,7 +309,6 @@ namespace System.Xml.XPath
                     }
                 } while (reader.Read());
             }
-
             finally
             {
                 builder.Close();

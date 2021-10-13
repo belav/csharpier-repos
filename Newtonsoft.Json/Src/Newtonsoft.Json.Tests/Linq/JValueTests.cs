@@ -122,7 +122,6 @@ namespace Newtonsoft.Json.Tests.Linq
 
                 Assert.AreEqual("string", s);
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;

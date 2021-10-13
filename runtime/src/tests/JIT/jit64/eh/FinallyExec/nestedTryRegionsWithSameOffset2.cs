@@ -36,14 +36,12 @@ class Program
                     if (count-- == 0)
                         return;
                 }
-
                 finally
                 {
                     Console.WriteLine("  in finally");
                 }
                 goto L1;
             }
-
             finally
             {
                 Console.WriteLine("in finally");

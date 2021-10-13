@@ -251,7 +251,6 @@ namespace System.IO.Pipes.Tests
                 ).ToArray();
                 await serverSends.Concat(clientReceives).ToArray().WhenAllOrAnyFailed();
             }
-
             finally
             {
                 for (int i = 0; i < clients.Length; i++)

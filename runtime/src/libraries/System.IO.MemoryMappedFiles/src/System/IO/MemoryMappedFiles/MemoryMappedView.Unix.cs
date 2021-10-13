@@ -179,7 +179,6 @@ namespace System.IO.MemoryMappedFiles
                     throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo());
                 }
             }
-
             finally
             {
                 if (ptr != null)

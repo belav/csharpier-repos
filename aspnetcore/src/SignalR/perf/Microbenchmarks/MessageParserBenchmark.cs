@@ -33,7 +33,6 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 writer.Write(buffer);
                 _binaryInput = writer.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -49,7 +48,6 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
 
                 _textInput = writer.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);

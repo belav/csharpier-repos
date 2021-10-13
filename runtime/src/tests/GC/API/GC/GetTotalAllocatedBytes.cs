@@ -157,7 +157,6 @@ public class Test
                 Thread.Sleep(1);
             }
         }
-
         finally
         {
             running = false;

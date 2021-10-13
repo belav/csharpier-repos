@@ -274,7 +274,6 @@ namespace System.Web.Http
 
                 return response;
             }
-
             finally
             {
                 Thread.CurrentPrincipal = originalPrincipal;

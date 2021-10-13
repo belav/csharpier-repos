@@ -36,7 +36,6 @@ namespace System.Xml.Xsl.Xslt
                 result = this.ParsePattern();
                 _scanner.CheckToken(LexKind.Eof);
             }
-
             finally
             {
                 result = ptrnBuilder.EndBuild(result);

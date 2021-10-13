@@ -183,7 +183,6 @@ namespace System.Diagnostics
                 // AdjustTokenPrivileges can return true even if it didn't succeed (when ERROR_NOT_ALL_ASSIGNED is returned).
                 Interop.Advapi32.AdjustTokenPrivileges(tokenHandle, false, &tp, 0, null, null);
             }
-
             finally
             {
                 if (tokenHandle != null)

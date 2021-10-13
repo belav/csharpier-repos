@@ -648,7 +648,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                         out closeQuoteMissing
                                     );
                                 }
-
                                 finally
                                 {
                                     this.isVerbatim = wasVerbatim;
@@ -732,7 +731,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                         out closeQuoteMissing
                                     );
                                 }
-
                                 finally
                                 {
                                     this.isVerbatim = wasVerbatim;

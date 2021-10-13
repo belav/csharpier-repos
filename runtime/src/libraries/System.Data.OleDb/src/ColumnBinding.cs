@@ -659,7 +659,6 @@ namespace System.Data.OleDb
                     value = Marshal.PtrToStringBSTR(ptr);
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -696,7 +695,6 @@ namespace System.Data.OleDb
                     Marshal.Copy(ptr, value, 0, value.Length);
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -750,7 +748,6 @@ namespace System.Data.OleDb
                     value = Marshal.PtrToStringUni(ptr, charCount);
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -1063,7 +1060,6 @@ namespace System.Data.OleDb
                 IntPtr ptr = bindings.ReadIntPtr(ValueOffset);
                 value = Marshal.GetObjectForIUnknown(ptr);
             }
-
             finally
             {
                 if (mustRelease)
@@ -1117,7 +1113,6 @@ namespace System.Data.OleDb
                 IntPtr ptr = bindings.ReadIntPtr(ValueOffset);
                 value = Marshal.GetObjectForIUnknown(ptr);
             }
-
             finally
             {
                 if (mustRelease)

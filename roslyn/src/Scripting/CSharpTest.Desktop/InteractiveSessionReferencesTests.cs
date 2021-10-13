@@ -657,7 +657,6 @@ c1 = c2;
                     () => script.EvaluateAsync().GetAwaiter().GetResult()
                 );
             }
-
             finally
             {
                 AppDomain.CurrentDomain.AssemblyResolve -= handler;

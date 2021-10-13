@@ -116,7 +116,6 @@ namespace GCTest
                 GCSettings.LatencyMode = gcMode;
                 LoadData(count);
             }
-
             finally
             {
                 GCSettings.LatencyMode = oldMode;

@@ -36,7 +36,6 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                     false
                 );
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);

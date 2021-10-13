@@ -607,7 +607,6 @@ namespace Microsoft.VisualBasic.Tests
                 FileSystem.Lock(fileNumber);
                 remoteWrite(fileName, "123");
             }
-
             finally
             {
                 FileSystem.Unlock(fileNumber);

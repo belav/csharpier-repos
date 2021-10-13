@@ -227,7 +227,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         return hasNext;
                     }
-
                     finally
                     {
                         _concurrencyDetector?.ExitCriticalSection();
@@ -398,7 +397,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                         return hasNext;
                     }
-
                     finally
                     {
                         _concurrencyDetector?.ExitCriticalSection();

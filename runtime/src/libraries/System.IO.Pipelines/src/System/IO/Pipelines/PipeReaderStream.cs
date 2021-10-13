@@ -131,7 +131,6 @@ namespace System.IO.Pipelines
                     return 0;
                 }
             }
-
             finally
             {
                 _pipeReader.AdvanceTo(consumed);

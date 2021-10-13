@@ -1075,7 +1075,6 @@ namespace System.DirectoryServices.AccountManagement
                     "DoLDAPDirectoryInitNoContainer: adsPathBase is " + adsPathBase
                 );
             }
-
             finally
             {
                 // Don't allow the DE to leak
@@ -1495,7 +1494,6 @@ namespace System.DirectoryServices.AccountManagement
                     "portLDAP :" + properties.portLDAP.ToString(CultureInfo.InvariantCulture)
                 );
             }
-
             finally
             {
                 if (ldapConnection != null)

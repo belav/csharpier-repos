@@ -343,7 +343,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => GetObjectForNativeVariant(variant)
                 );
             }
-
             finally
             {
                 Marshal.DestroyStructure<int>(pRecord);
@@ -470,7 +469,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => GetObjectForNativeVariant(variant)
                 );
             }
-
             finally
             {
                 Marshal.DestroyStructure<Variant>(ptr);
@@ -494,7 +492,6 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.StructureToPtr(variant, ptr, fDeleteOld: false);
                 return Marshal.GetObjectForNativeVariant(ptr);
             }
-
             finally
             {
                 Marshal.DestroyStructure<Variant>(ptr);

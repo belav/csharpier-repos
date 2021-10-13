@@ -66,7 +66,6 @@ namespace System.Speech.Synthesis
                                 _text = reader.ReadToEnd();
                             }
                         }
-
                         finally
                         {
                             s_resourceLoader.UnloadFile(localPath);

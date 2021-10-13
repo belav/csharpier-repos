@@ -269,7 +269,6 @@ namespace System.Web.Razor.Text
                     return builder.ToString();
                 }
             }
-
             finally
             {
                 buffer.Position = oldPosition;

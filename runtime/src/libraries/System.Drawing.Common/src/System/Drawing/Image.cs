@@ -528,7 +528,6 @@ namespace System.Drawing
 
                 p = EncoderParameters.ConvertFromMemory(buffer);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(buffer);
@@ -714,7 +713,6 @@ namespace System.Drawing
                             image._rawData = new byte[(int)dataStream.Length];
                             dataStream.Read(image._rawData, 0, (int)dataStream.Length);
                         }
-
                         finally
                         {
                             if (created != null)

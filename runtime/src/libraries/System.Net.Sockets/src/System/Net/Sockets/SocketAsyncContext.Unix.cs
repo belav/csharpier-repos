@@ -1505,7 +1505,6 @@ namespace System.Net.Sockets
                             return false;
                         }
                     }
-
                     finally
                     {
                         if (addedRef)

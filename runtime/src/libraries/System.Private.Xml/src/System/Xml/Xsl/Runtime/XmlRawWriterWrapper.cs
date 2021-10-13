@@ -170,7 +170,6 @@ namespace System.Xml.Xsl.Runtime
                     ((IDisposable)_wrapped).Dispose();
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

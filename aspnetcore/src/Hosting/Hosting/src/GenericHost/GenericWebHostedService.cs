@@ -168,7 +168,6 @@ namespace Microsoft.AspNetCore.Hosting
             {
                 await Server.StopAsync(cancellationToken);
             }
-
             finally
             {
                 HostingEventSource.Log.HostStop();

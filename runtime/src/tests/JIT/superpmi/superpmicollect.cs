@@ -251,7 +251,6 @@ namespace SuperPMICollection
             {
                 RunProgram(testName, "");
             }
-
             finally
             {
                 // Restore the original current directory from before the test run.

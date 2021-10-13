@@ -207,7 +207,6 @@ namespace System.Security.Cryptography.Pkcs
                     }
                 }
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(I);

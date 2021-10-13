@@ -440,7 +440,6 @@ namespace System.Security.AccessControl
                 this.AccessRulesModified = false;
                 this.AuditRulesModified = false;
             }
-
             finally
             {
                 WriteUnlock();

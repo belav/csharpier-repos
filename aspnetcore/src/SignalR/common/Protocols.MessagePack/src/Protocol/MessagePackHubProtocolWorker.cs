@@ -341,7 +341,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 BinaryMessageFormatter.WriteLengthPrefix(memoryBufferWriter.Length, output);
                 memoryBufferWriter.CopyTo(output);
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);
@@ -378,7 +377,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
 
                 return array;
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);

@@ -290,7 +290,6 @@ namespace System.Web.Http.Owin
                     }
                 }
             }
-
             finally
             {
                 request.DisposeRequestResources();

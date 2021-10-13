@@ -148,7 +148,6 @@ namespace System.Speech.Internal.SapiInterop
                         }
                         Marshal.FreeCoTaskMem(sapiTokenId);
                     }
-
                     finally
                     {
                         Marshal.ReleaseComObject(sapiObjectToken);

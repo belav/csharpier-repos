@@ -228,7 +228,6 @@ namespace System.Reflection.Tests
                 fieldInfo.SetValue(obj, value);
                 Assert.Equal(expected, fieldInfo.GetValue(obj));
             }
-
             finally
             {
                 fieldInfo.SetValue(obj, original);

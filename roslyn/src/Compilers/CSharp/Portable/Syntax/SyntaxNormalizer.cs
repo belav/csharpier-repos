@@ -167,7 +167,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
                 return tk;
             }
-
             finally
             {
                 // to help debugging
@@ -1021,7 +1020,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                     return SyntaxFactory.TriviaList(currentTriviaList);
                 }
             }
-
             finally
             {
                 currentTriviaList.Free();
@@ -1279,7 +1277,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 {
                     return base.VisitInterpolatedStringExpression(node);
                 }
-
                 finally
                 {
                     _inSingleLineInterpolation = old;

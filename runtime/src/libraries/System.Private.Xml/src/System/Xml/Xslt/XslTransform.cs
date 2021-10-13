@@ -333,7 +333,6 @@ namespace System.Xml.Xsl
                     resolver
                 );
             }
-
             finally
             {
                 if (fs != null)

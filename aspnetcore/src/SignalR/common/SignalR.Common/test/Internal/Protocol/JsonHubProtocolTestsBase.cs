@@ -560,7 +560,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
 
                 Assert.Equal(expectedOutput, json);
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -880,7 +879,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
 
                 Assert.Equal(expectedOutput, json);
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -971,7 +969,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                 JsonHubProtocol.WriteMessage(testData.Message, writer);
                 Assert.Equal(testData.Size, writer.Length);
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);

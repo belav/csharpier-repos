@@ -836,7 +836,6 @@ namespace System.Net.Http
                     }
                 }
             }
-
             finally
             {
                 _http2ConnectionCreateLock.Release();
@@ -1100,7 +1099,6 @@ namespace System.Net.Http
 
                 return (http3Connection, true);
             }
-
             finally
             {
                 _http3ConnectionCreateLock.Release();
@@ -1152,7 +1150,6 @@ namespace System.Net.Http
                                       )
                             ).ConfigureAwait(false);
                         }
-
                         finally
                         {
                             ((HttpConnection)connection).Release();
@@ -1356,7 +1353,6 @@ namespace System.Net.Http
                                 Timeout.InfiniteTimeSpan
                             );
                         }
-
                         finally
                         {
                             if (restoreFlow)
@@ -1534,7 +1530,6 @@ namespace System.Net.Http
                 return await SendWithNtProxyAuthAsync(connection, request, async, cancellationToken)
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 connection.Release();
@@ -1697,7 +1692,6 @@ namespace System.Net.Http
 
                 return (socket, stream, transportContext);
             }
-
             finally
             {
                 cancellationWithConnectTimeout?.Dispose();
@@ -2434,7 +2428,6 @@ namespace System.Net.Http
                 // will be purged next time around.
                 _usedSinceLastCleanup = false;
             }
-
             finally
             {
                 if (tookLock)

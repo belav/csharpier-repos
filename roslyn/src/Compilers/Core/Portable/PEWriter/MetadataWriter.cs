@@ -1420,7 +1420,6 @@ namespace Microsoft.Cci
                 this.SerializePermissionSet(permissionSet, writer);
                 result = metadata.GetOrAddBlob(writer);
             }
-
             finally
             {
                 writer.Free();

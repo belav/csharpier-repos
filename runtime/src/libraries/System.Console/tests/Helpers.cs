@@ -45,7 +45,6 @@ class Helpers
                 }
             }
         }
-
         finally
         {
             setHelper(oldWriterToRestore);
@@ -67,7 +66,6 @@ class Helpers
             );
             command(data);
         }
-
         finally
         {
             Console.SetOut(savedOut);
@@ -98,7 +96,6 @@ class Helpers
             );
             command(data);
         }
-
         finally
         {
             Console.SetOut(savedOut);

@@ -251,7 +251,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                             }
                         }
                     }
-
                     finally
                     {
                         output.Writer.TryComplete();
@@ -278,7 +277,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                             }
                         }
                     }
-
                     finally
                     {
                         output.Writer.TryComplete();

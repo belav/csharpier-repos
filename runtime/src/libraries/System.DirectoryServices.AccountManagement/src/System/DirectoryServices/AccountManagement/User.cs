@@ -275,7 +275,6 @@ namespace System.DirectoryServices.AccountManagement
                         sidObj.ToString()
                     );
                 }
-
                 finally
                 {
                     if (pSid != IntPtr.Zero)

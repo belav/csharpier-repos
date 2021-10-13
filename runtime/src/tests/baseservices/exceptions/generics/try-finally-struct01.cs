@@ -34,7 +34,6 @@ public struct Gen<T>
             }
             Test.Eval(!throwException);
         }
-
         finally
         {
             hit = true;

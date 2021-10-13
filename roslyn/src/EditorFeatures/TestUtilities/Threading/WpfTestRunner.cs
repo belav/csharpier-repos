@@ -112,7 +112,6 @@ namespace Roslyn.Test.Utilities
                                     .JoinUsingDispatcher(CancellationTokenSource.Token);
                             }
                         }
-
                         finally
                         {
                             // Cleanup the synchronization context even if the test is failing exceptionally

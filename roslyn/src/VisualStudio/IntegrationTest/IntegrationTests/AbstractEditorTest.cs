@@ -86,7 +86,6 @@ namespace Roslyn.VisualStudio.IntegrationTests
                 VisualStudio.Editor.MoveCaret(caretPosition);
                 VisualStudio.Editor.Activate();
             }
-
             finally
             {
                 VisualStudio.Workspace.SetPrettyListing(LanguageName, originalValue);

@@ -6627,7 +6627,6 @@ namespace Microsoft.EntityFrameworkCore
                     }
                 }
             }
-
             finally
             {
                 context.ChangeTracker.AutoDetectChangesEnabled = detectChanges;

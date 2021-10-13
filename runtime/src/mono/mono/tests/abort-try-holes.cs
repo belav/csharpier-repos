@@ -51,14 +51,12 @@ public class Program
                 try
                 {
                     try { }
-
                     finally
                     {
                         rwl.EnterReadLock();
                         locked = true;
                     }
                 }
-
                 finally
                 {
                     if (locked)
@@ -87,14 +85,12 @@ public class Program
                 try
                 {
                     try { }
-
                     finally
                     {
                         rwl.EnterWriteLock();
                         locked = true;
                     }
                 }
-
                 finally
                 {
                     if (locked)

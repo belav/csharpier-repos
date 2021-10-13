@@ -26,7 +26,6 @@ namespace System.Data.OleDb
             {
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }
-
                 finally
                 {
                     // store the QI result for IID_IDataInitialize
@@ -77,7 +76,6 @@ namespace System.Data.OleDb
                     ref datasrcWrapper
                 );
             }
-
             finally
             {
                 if (mustRelease)
@@ -248,7 +246,6 @@ namespace System.Data.OleDb
                     }
                 }
             }
-
             finally
             {
                 if (IntPtr.Zero != idbCreateSession)
@@ -350,7 +347,6 @@ namespace System.Data.OleDb
                     // caching the fact that we have queried for IDBCreateCommand
                     constr.HaveQueriedForCreateCommand = true;
                 }
-
                 finally
                 {
                     if (IntPtr.Zero != idbCreateCommand)
@@ -429,7 +425,6 @@ namespace System.Data.OleDb
                         ref icommandText
                     );
                 }
-
                 finally
                 {
                     if (mustRelease)

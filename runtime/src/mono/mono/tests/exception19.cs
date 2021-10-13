@@ -7,13 +7,11 @@ public class TestFinallyException
         int ret = -1;
 
         try { }
-
         finally
         {
             try
             {
                 try { }
-
                 finally
                 {
                     throw new Exception();

@@ -6,7 +6,6 @@ public class Test
     public int func(int type)
     {
         try { }
-
         finally
         {
             switch (type)
@@ -22,7 +21,6 @@ public class Test
                 case -115:
                 case 576:
                     try { }
-
                     finally
                     {
                         switch (type)

@@ -612,7 +612,6 @@ namespace Castle.DynamicProxy.Tests
                     }
                 );
             }
-
             finally
             {
                 AppDomain.Unload(newDomain);

@@ -725,7 +725,6 @@ namespace System.Speech.Recognition
                     }
                 }
             }
-
             finally
             {
                 RecognizeCompletedSync -= eventHandler;
@@ -2109,7 +2108,6 @@ namespace System.Speech.Recognition
                     _asyncWorkerUI.ConsumeQueue();
                 } while (!completed && !_disposed);
             }
-
             finally
             {
                 EmulateRecognizeCompletedSync -= eventHandler;
@@ -2172,7 +2170,6 @@ namespace System.Speech.Recognition
                         EmulateRecognizedFailReportError(hr);
                     }
                 }
-
                 finally
                 {
                     foreach (GCHandle memHandle in memHandles)
@@ -2684,7 +2681,6 @@ namespace System.Speech.Recognition
                 // else Grammar has already been unloaded or disabled - so don't fire result
 
             }
-
             finally // Even if event handler throws we should call this
             {
                 if (_recognizeMode == RecognizeMode.Single)
@@ -2888,7 +2884,6 @@ namespace System.Speech.Recognition
                 serializedBlob = new byte[sizeOfSerializedBlob];
                 Marshal.Copy(coMemSerializeBlob, serializedBlob, 0, (int)sizeOfSerializedBlob);
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(coMemSerializeBlob);
@@ -2959,7 +2954,6 @@ namespace System.Speech.Recognition
                     );
                 }
             }
-
             finally
             {
                 if (waveFormatPtr != IntPtr.Zero)

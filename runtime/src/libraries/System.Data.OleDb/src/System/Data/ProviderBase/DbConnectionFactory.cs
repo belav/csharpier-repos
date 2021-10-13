@@ -255,7 +255,6 @@ namespace System.Data.ProviderBase
                                         }
                                         return newConnection;
                                     }
-
                                     finally
                                     {
                                         ADP.SetCurrentTransaction(originalTransaction);

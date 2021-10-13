@@ -300,7 +300,6 @@ namespace BinderTracingTests
                     () => AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
                 );
             }
-
             finally
             {
                 File.Delete(assemblyPath);

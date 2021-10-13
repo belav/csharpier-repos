@@ -42,7 +42,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                   ? SpecializedCollections.EmptyEnumerable<Symbol>()
                   : walker._variablesDeclared;
             }
-
             finally
             {
                 walker.Free();

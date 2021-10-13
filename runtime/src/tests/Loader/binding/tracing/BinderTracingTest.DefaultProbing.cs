@@ -309,7 +309,6 @@ namespace BinderTracingTests
                 Directory.Move(cultureSubdirectory, cultureSubdirectoryLower);
                 asm = alc.LoadFromAssemblyName(assemblyName);
             }
-
             finally
             {
                 Directory.Move(cultureSubdirectoryLower, cultureSubdirectory);

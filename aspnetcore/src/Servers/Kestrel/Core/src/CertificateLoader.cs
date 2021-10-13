@@ -66,7 +66,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https
 
                     return foundCertificate;
                 }
-
                 finally
                 {
                     DisposeCertificates(storeCertificates, except: foundCertificate);

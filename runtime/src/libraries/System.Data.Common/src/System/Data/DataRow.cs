@@ -589,7 +589,6 @@ namespace System.Data
                 }
                 _table.CommitRow(this);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -720,7 +719,6 @@ namespace System.Data
                     // suppressing the ensure property changed because it's possible that no values have been modified
                     _table.SetNewRecord(this, _tempRecord, suppressEnsurePropertyChanged: true);
                 }
-
                 finally
                 {
                     // a constraint violation may be thrown during SetNewRecord
@@ -774,7 +772,6 @@ namespace System.Data
                     RowErrorChanged();
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1297,7 +1294,6 @@ namespace System.Data
                 }
                 _table.RollbackRow(this);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);

@@ -83,7 +83,6 @@ namespace Roslyn.Utilities
 
                 return result.ToImmutableAndFree();
             }
-
             finally
             {
                 builders.Free();

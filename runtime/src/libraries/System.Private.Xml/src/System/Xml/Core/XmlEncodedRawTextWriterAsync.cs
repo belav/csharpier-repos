@@ -83,7 +83,6 @@ namespace System.Xml
             {
                 await FlushBufferAsync().ConfigureAwait(false);
             }
-
             finally
             {
                 // Future calls to Close or Flush shouldn't write to Stream or Writer
@@ -95,7 +94,6 @@ namespace System.Xml
                     {
                         await _stream.FlushAsync().ConfigureAwait(false);
                     }
-
                     finally
                     {
                         try
@@ -105,7 +103,6 @@ namespace System.Xml
                                 await _stream.DisposeAsync().ConfigureAwait(false);
                             }
                         }
-
                         finally
                         {
                             _stream = null;
@@ -118,7 +115,6 @@ namespace System.Xml
                     {
                         await _writer.FlushAsync().ConfigureAwait(false);
                     }
-
                     finally
                     {
                         try
@@ -128,7 +124,6 @@ namespace System.Xml
                                 await _writer.DisposeAsync().ConfigureAwait(false);
                             }
                         }
-
                         finally
                         {
                             _writer = null;

@@ -368,7 +368,6 @@ namespace System.Net
                         NetEventSource.Info(this, "No callback to invoke");
                 }
             }
-
             finally
             {
                 --threadContext._nestedIOCount;
@@ -391,7 +390,6 @@ namespace System.Net
             {
                 thisPtr._asyncCallback!(thisPtr);
             }
-
             finally
             {
                 thisPtr.Cleanup();

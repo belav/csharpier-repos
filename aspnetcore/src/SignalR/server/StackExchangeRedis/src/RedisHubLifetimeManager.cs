@@ -715,7 +715,6 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis
                         await SubscribeToAckChannel();
                     }
                 }
-
                 finally
                 {
                     _connectionLock.Release();

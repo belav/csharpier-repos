@@ -435,7 +435,6 @@ namespace System.Data.Tests
                             new ForeignKeyConstraint(parent.Columns[0], child.Columns[0])
                         );
                     }
-
                     finally
                     {
                         // clear the rows for further testing
@@ -461,7 +460,6 @@ namespace System.Data.Tests
                     new ForeignKeyConstraint(parent.Columns[0], child.Columns[0])
                 );
             }
-
             finally
             {
                 // clear the rows for further testing

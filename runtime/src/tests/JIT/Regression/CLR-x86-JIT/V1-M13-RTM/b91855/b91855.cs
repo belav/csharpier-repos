@@ -26,7 +26,6 @@ struct AA
                 (bool)((b ? b : (b ? (b ? (object)new AA() : (object)new CC()) : (object)new CC())))
             );
         }
-
         finally { }
     }
 }

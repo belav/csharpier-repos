@@ -24,7 +24,6 @@ public class ReadAndWrite
                 }
             }
         }
-
         finally
         {
             Console.SetOut(savedStandardOutput);
@@ -60,7 +59,6 @@ public class ReadAndWrite
                 }
             }
         }
-
         finally
         {
             Console.SetOut(savedStandardOutput);
@@ -190,7 +188,6 @@ public class ReadAndWrite
                 await writer.FlushAsync();
             }
         }
-
         finally
         {
             Console.SetOut(savedStandardOutput);
@@ -283,7 +280,6 @@ public class ReadAndWrite
             // The primary purpose of ConsoleEncoding is to return an empty preamble.
             Assert.Equal(Array.Empty<byte>(), Console.Out.Encoding.GetPreamble());
         }
-
         finally
         {
             Console.OutputEncoding = curEncoding;
@@ -310,7 +306,6 @@ public class ReadAndWrite
             Assert.Equal(Console.OutputEncoding.CodePage, Encoding.Unicode.CodePage);
             ValidateConsoleEncoding(Console.Out.Encoding);
         }
-
         finally
         {
             Console.OutputEncoding = curEncoding;
@@ -401,7 +396,6 @@ public class ReadAndWrite
                 }
             }
         }
-
         finally
         {
             Console.SetOut(savedStandardOutput);

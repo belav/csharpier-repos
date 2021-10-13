@@ -501,7 +501,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                             edit.Apply();
                         }
                     }
-
                     finally
                     {
                         _updatingBuffer = false;

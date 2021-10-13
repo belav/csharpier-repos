@@ -497,7 +497,6 @@ namespace System.Data
                         );
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -745,7 +744,6 @@ namespace System.Data
                         }
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -913,7 +911,6 @@ namespace System.Data
                 _relationName = (relationName == null ? "" : relationName);
                 _createConstraints = createConstraints;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);

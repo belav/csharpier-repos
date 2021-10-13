@@ -14,7 +14,6 @@ namespace Test
             {
                 //do anything here...
             }
-
             finally
             {
                 do

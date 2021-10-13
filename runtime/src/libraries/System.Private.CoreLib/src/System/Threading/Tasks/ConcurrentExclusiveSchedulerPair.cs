@@ -454,7 +454,6 @@ namespace System.Threading.Tasks
                         m_exclusiveTaskScheduler.ExecuteTask(exclusiveTask);
                 }
             }
-
             finally
             {
                 // We're no longer processing exclusive tasks on the current thread
@@ -526,7 +525,6 @@ namespace System.Threading.Tasks
                         break;
                 }
             }
-
             finally
             {
                 // We're no longer processing concurrent tasks on the current thread

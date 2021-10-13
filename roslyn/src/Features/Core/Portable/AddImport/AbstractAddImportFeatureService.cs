@@ -607,7 +607,6 @@ namespace Microsoft.CodeAnalysis.AddImport
                     }
                 }
             }
-
             finally
             {
                 // Cancel any nested work that's still happening.

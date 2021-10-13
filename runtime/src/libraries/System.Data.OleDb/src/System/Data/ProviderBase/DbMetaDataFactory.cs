@@ -225,7 +225,6 @@ namespace System.Data.ProviderBase
                     resultTable.Rows.Add(values);
                 }
             }
-
             finally
             {
                 if (reader != null)

@@ -79,7 +79,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     );
                 }
             }
-
             finally
             {
                 this.CurrentlyExecutingCommand = default;

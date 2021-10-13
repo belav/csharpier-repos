@@ -473,7 +473,6 @@ namespace Microsoft.AspNetCore.WebUtilities
                 {
                     FlushInternal(flushEncoder: true);
                 }
-
                 finally
                 {
                     _bytePool.Return(_byteBuffer);
@@ -494,7 +493,6 @@ namespace Microsoft.AspNetCore.WebUtilities
                 {
                     await FlushInternalAsync(flushEncoder: true);
                 }
-
                 finally
                 {
                     _bytePool.Return(_byteBuffer);

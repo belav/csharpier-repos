@@ -214,7 +214,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         }
                     }
                 }
-
                 finally
                 {
                     _inCollectionChanged = false;
@@ -240,7 +239,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     _changingObservableCollection = true;
                     _observableCollection.Add(item);
                 }
-
                 finally
                 {
                     _changingObservableCollection = false;
@@ -266,7 +264,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     _changingObservableCollection = true;
                     _observableCollection.Remove(item);
                 }
-
                 finally
                 {
                     _changingObservableCollection = false;

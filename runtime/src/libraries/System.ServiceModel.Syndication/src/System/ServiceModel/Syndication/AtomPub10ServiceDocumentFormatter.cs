@@ -307,7 +307,6 @@ namespace System.ServiceModel.Syndication
                     }
                     LoadElementExtensions(buffer, extWriter, inlineCategories);
                 }
-
                 finally
                 {
                     extWriter?.Close();
@@ -399,7 +398,6 @@ namespace System.ServiceModel.Syndication
                     }
                     LoadElementExtensions(buffer, extWriter, referencedCategories);
                 }
-
                 finally
                 {
                     extWriter?.Close();
@@ -574,7 +572,6 @@ namespace System.ServiceModel.Syndication
                 }
                 LoadElementExtensions(buffer, extWriter, result);
             }
-
             finally
             {
                 extWriter?.Close();
@@ -660,7 +657,6 @@ namespace System.ServiceModel.Syndication
                         }
                         LoadElementExtensions(buffer, extWriter, result);
                     }
-
                     finally
                     {
                         extWriter?.Close();
@@ -756,7 +752,6 @@ namespace System.ServiceModel.Syndication
                 }
                 LoadElementExtensions(buffer, extWriter, result);
             }
-
             finally
             {
                 extWriter?.Close();

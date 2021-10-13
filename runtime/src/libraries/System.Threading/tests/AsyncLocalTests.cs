@@ -117,7 +117,6 @@ namespace System.Threading.Tests
                     () => ExecutionContext.Run(ec, _ => { }, null)
                 );
             }
-
             finally
             {
                 ExecutionContext.RestoreFlow();
@@ -644,7 +643,6 @@ namespace System.Threading.Tests
                 // Re-check restoring, but starting with a suppressed flow
                 TestCapturedExecutionContexts();
             }
-
             finally
             {
                 ExecutionContext.RestoreFlow();

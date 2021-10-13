@@ -21,7 +21,6 @@ class GitHub_10621
         {
             // empty
         }
-
         finally
         {
             try
@@ -31,7 +30,6 @@ class GitHub_10621
                     x += F(i);
                 }
             }
-
             finally
             {
                 x -= 81;
@@ -40,7 +38,6 @@ class GitHub_10621
                 {
                     // empty
                 }
-
                 finally
                 {
                     x -= 64;
@@ -48,14 +45,12 @@ class GitHub_10621
                     {
                         x -= 49;
                     }
-
                     finally
                     {
                         try
                         {
                             // empty
                         }
-
                         finally
                         {
                             x -= 36;
@@ -63,14 +58,12 @@ class GitHub_10621
                             {
                                 x -= 25;
                             }
-
                             finally
                             {
                                 try
                                 {
                                     // empty
                                 }
-
                                 finally
                                 {
                                     x -= 16;
@@ -78,14 +71,12 @@ class GitHub_10621
                                     {
                                         x -= 9;
                                     }
-
                                     finally
                                     {
                                         try
                                         {
                                             // empty
                                         }
-
                                         finally
                                         {
                                             x -= 4;

@@ -310,7 +310,6 @@ namespace Microsoft.AspNetCore.WebUtilities
                             copyRead = oldBuffer.Read(rentedBuffer);
                         }
                     }
-
                     finally
                     {
                         _bytePool.Return(rentedBuffer);
@@ -403,7 +402,6 @@ namespace Microsoft.AspNetCore.WebUtilities
                             copyRead = oldBuffer.Read(rentedBuffer);
                         }
                     }
-
                     finally
                     {
                         _bytePool.Return(rentedBuffer);
@@ -498,7 +496,6 @@ namespace Microsoft.AspNetCore.WebUtilities
                         );
                     }
                 }
-
                 finally
                 {
                     _bytePool.Return(buffer);

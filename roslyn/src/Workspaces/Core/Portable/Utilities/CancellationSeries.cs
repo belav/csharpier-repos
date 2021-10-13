@@ -109,7 +109,6 @@ namespace Roslyn.Utilities
             {
                 priorSource.Cancel();
             }
-
             finally
             {
                 // A registered action on the token may throw, which would surface here.
@@ -138,7 +137,6 @@ namespace Roslyn.Utilities
             {
                 source.Cancel();
             }
-
             finally
             {
                 source.Dispose();

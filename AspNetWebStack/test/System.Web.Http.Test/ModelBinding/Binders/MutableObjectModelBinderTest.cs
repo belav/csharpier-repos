@@ -367,7 +367,6 @@ namespace System.Web.Http.ModelBinding.Binders
                     );
                 handler(validationNode, e);
             }
-
             finally
             {
                 ModelBinderConfig.ValueRequiredErrorMessageProvider = originalProvider;

@@ -133,7 +133,6 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                     out configurationHandle
                 );
             }
-
             finally
             {
                 MsQuicAlpnHelper.Return(ref handles, ref buffers);

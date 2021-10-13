@@ -188,7 +188,6 @@ namespace System.Security.AccessControl
 
                 return result;
             }
-
             finally
             {
                 ReadUnlock();
@@ -463,7 +462,6 @@ namespace System.Security.AccessControl
                 AccessRulesModified |= modified;
                 return result;
             }
-
             finally
             {
                 WriteUnlock();
@@ -592,7 +590,6 @@ namespace System.Security.AccessControl
                 AuditRulesModified |= modified;
                 return result;
             }
-
             finally
             {
                 WriteUnlock();
@@ -621,7 +618,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAccess(AccessControlModification.Add, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -642,7 +638,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAccess(AccessControlModification.Set, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -663,7 +658,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAccess(AccessControlModification.Reset, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -691,7 +685,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 return ModifyAccess(AccessControlModification.Remove, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -717,7 +710,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAccess(AccessControlModification.RemoveAll, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -745,7 +737,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAccess(AccessControlModification.RemoveSpecific, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -766,7 +757,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAudit(AccessControlModification.Add, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -787,7 +777,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAudit(AccessControlModification.Set, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -808,7 +797,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 return ModifyAudit(AccessControlModification.Remove, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -829,7 +817,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAudit(AccessControlModification.RemoveAll, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -850,7 +837,6 @@ namespace System.Security.AccessControl
                 bool modified;
                 ModifyAudit(AccessControlModification.RemoveSpecific, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();

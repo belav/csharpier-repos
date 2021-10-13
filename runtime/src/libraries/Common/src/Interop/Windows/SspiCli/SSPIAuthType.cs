@@ -145,7 +145,6 @@ namespace System.Net
                     sequenceNumber
                 );
             }
-
             finally
             {
                 context.DangerousRelease();
@@ -172,7 +171,6 @@ namespace System.Net
                     &qop
                 );
             }
-
             finally
             {
                 context.DangerousRelease();
@@ -206,7 +204,6 @@ namespace System.Net
                     sequenceNumber
                 );
             }
-
             finally
             {
                 context.DangerousRelease();
@@ -232,7 +229,6 @@ namespace System.Net
                     &qop
                 );
             }
-
             finally
             {
                 context.DangerousRelease();
@@ -318,7 +314,6 @@ namespace System.Net
                     out safeHandle
                 );
             }
-
             finally
             {
                 phContext.DangerousRelease();

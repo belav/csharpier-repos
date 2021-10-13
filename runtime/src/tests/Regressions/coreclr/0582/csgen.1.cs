@@ -91,7 +91,6 @@ public class AA<TA, TB> where TA : IComparable
                             {
                                 BB[,,][,,][][] local14 = (new BB[76u, 111u, 60u][,,][][]);
                             }
-
                             finally { }
                             while (App.m_bFwd1) { }
                         }
@@ -181,7 +180,6 @@ public class AA<TA, TB> where TA : IComparable
                                         (new Array[102u, 56u, 82u, 63u])
                                     };
                                 }
-
                                 finally { }
                                 local22 = local22;
                                 try { }
@@ -295,7 +293,6 @@ public struct BB
                                             {
                                                 param2 = param2;
                                             }
-
                                             finally { }
                                         }
                                         while (param2) { }

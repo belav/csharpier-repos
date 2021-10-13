@@ -873,7 +873,6 @@ namespace System.Net.Sockets.Tests
                     }
                 }
             }
-
             finally
             {
                 listener.Stop();

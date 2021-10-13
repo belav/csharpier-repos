@@ -746,7 +746,6 @@ namespace System.Tests
                         {
                             Assembly.LoadFile(typeof(AppDomainTests).Assembly.Location);
                         }
-
                         finally
                         {
                             AppDomain.CurrentDomain.AssemblyLoad -= handler;
@@ -893,7 +892,6 @@ namespace System.Tests
                             );
                             Assert.False(assemblyResolveHandlerCalled);
                         }
-
                         finally
                         {
                             CultureInfo.CurrentUICulture = previousUICulture;
@@ -968,7 +966,6 @@ namespace System.Tests
                         {
                             t = Type.GetType("Program", true);
                         }
-
                         finally
                         {
                             AppDomain.CurrentDomain.TypeResolve -= handler;
@@ -1006,7 +1003,6 @@ namespace System.Tests
                         {
                             s = res.GetString("Message");
                         }
-
                         finally
                         {
                             AppDomain.CurrentDomain.ResourceResolve -= handler;

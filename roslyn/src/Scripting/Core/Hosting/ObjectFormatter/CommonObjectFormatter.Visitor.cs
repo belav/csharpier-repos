@@ -788,7 +788,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                             i++;
                         }
                     }
-
                     finally
                     {
                         if (disposable != null)

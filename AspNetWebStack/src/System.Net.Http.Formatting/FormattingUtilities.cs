@@ -148,7 +148,6 @@ namespace System.Net.Http
                 contentHeaders = tempContent.Headers;
                 contentHeaders.Clear();
             }
-
             finally
             {
                 // We can dispose the content without touching the headers

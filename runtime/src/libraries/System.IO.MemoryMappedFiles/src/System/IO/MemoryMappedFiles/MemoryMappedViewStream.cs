@@ -49,14 +49,12 @@ namespace System.IO.MemoryMappedFiles
                     Flush();
                 }
             }
-
             finally
             {
                 try
                 {
                     _view.Dispose();
                 }
-
                 finally
                 {
                     base.Dispose(disposing);

@@ -362,7 +362,6 @@ namespace System.Net.Security
                 await ForceAuthenticationAsync(adapter, receiveFirst: false, buffer)
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 _handshakeWaiter!.SetResult(true);
@@ -556,7 +555,6 @@ namespace System.Net.Security
                     }
                 }
             }
-
             finally
             {
                 _handshakeBuffer.Dispose();
@@ -919,7 +917,6 @@ namespace System.Net.Security
                         throw new IOException(SR.net_io_encrypt, SslStreamPal.GetException(status));
                     }
                 }
-
                 finally
                 {
                     if (bufferToReturn != null)
@@ -935,7 +932,6 @@ namespace System.Net.Security
                 {
                     await writeTask.ConfigureAwait(false);
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(bufferToReturn);

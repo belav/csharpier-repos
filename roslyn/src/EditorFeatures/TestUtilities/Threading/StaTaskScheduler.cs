@@ -97,7 +97,6 @@ namespace Roslyn.Test.Utilities
 
                             Dispatcher.Run();
                         }
-
                         finally
                         {
                             SynchronizationContext.SetSynchronizationContext(oldContext);

@@ -130,7 +130,6 @@ namespace ClientSample
                     }
                 }
             }
-
             finally
             {
                 await connection.StopAsync();

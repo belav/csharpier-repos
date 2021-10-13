@@ -486,7 +486,6 @@ namespace System.Drawing
                     );
                     return matrix;
                 }
-
                 finally
                 {
                     if (nativeMatrix != IntPtr.Zero)
@@ -508,7 +507,6 @@ namespace System.Drawing
                         )
                     );
                 }
-
                 finally
                 {
                     if (nativeMatrix != IntPtr.Zero)
@@ -3313,7 +3311,6 @@ namespace System.Drawing
                 regionHandle = IntPtr.Zero;
                 return region;
             }
-
             finally
             {
                 if (regionHandle != IntPtr.Zero)

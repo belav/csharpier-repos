@@ -1791,7 +1791,6 @@ namespace Newtonsoft.Json.Serialization
                     }
                 }
             }
-
             finally
             {
                 (e as IDisposable)?.Dispose();

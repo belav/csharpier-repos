@@ -1996,7 +1996,6 @@ class C { }";
                     }
                 );
             }
-
             finally
             {
                 TestWorkspace.CreateCSharp("")

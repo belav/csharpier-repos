@@ -113,7 +113,6 @@ namespace R3Contention
                     this.disableWordWrapping = true;
                     textSize = Size.Add(this.GetTextSize(proposedSize), textImageInsetSize);
                 }
-
                 finally
                 {
                     this.disableWordWrapping = false;

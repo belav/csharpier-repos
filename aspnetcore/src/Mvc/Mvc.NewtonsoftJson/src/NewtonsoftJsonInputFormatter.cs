@@ -181,7 +181,6 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 {
                     model = jsonSerializer.Deserialize(jsonReader, type);
                 }
-
                 finally
                 {
                     // Clean up the error handler since CreateJsonSerializer() pools instances.

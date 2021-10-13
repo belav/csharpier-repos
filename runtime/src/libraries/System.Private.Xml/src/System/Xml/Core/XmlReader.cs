@@ -1364,7 +1364,6 @@ namespace System.Xml
                     this.WriteNode(xtw, false);
                 }
             }
-
             finally
             {
                 xtw.Close();
@@ -1476,7 +1475,6 @@ namespace System.Xml
                     xtw.WriteNode(this, false);
                 }
             }
-
             finally
             {
                 xtw.Close();

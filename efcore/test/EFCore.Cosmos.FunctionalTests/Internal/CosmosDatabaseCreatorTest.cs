@@ -30,7 +30,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
                 Assert.True(async ? await creator.EnsureCreatedAsync() : creator.EnsureCreated());
             }
-
             finally
             {
                 testDatabase.Initialize(
@@ -54,7 +53,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal
 
                 Assert.True(async ? await creator.EnsureCreatedAsync() : creator.EnsureCreated());
             }
-
             finally
             {
                 testDatabase.Initialize(

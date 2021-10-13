@@ -57,7 +57,6 @@ namespace BasicEventSourceTests
                     Assert.Matches("Unsupported type", message);
                 }
             }
-
             finally
             {
                 source.Dispose();

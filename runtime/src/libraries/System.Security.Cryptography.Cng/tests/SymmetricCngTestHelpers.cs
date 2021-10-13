@@ -49,7 +49,6 @@ namespace System.Security.Cryptography.Cng.Tests
                     paddingMode
                 );
             }
-
             finally
             {
                 // Delete also Disposes the key, no using should be added here.
@@ -138,7 +137,6 @@ namespace System.Security.Cryptography.Cng.Tests
                     Assert.ThrowsAny<CryptographicException>(() => persisted.Key);
                 }
             }
-
             finally
             {
                 // Delete also Disposes the key, no using should be added here.
@@ -259,7 +257,6 @@ namespace System.Security.Cryptography.Cng.Tests
                     }
                 }
             }
-
             finally
             {
                 // Delete also Disposes the key, no using should be added here.
@@ -295,7 +292,6 @@ namespace System.Security.Cryptography.Cng.Tests
                     PaddingMode.PKCS7
                 );
             }
-
             finally
             {
                 // Delete also Disposes the key, no using should be added here.

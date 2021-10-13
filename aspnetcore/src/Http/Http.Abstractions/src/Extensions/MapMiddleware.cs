@@ -75,7 +75,6 @@ namespace Microsoft.AspNetCore.Builder.Extensions
                 {
                     await _options.Branch!(context);
                 }
-
                 finally
                 {
                     if (!_options.PreserveMatchedPathSegment)

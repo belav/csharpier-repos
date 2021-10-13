@@ -82,7 +82,6 @@ namespace Microsoft.CodeAnalysis.Classification
                     worker._pendingNodes.Push(worker._syntaxTree.GetRoot(cancellationToken));
                     worker.ProcessNodes();
                 }
-
                 finally
                 {
                     // release collections to the pool

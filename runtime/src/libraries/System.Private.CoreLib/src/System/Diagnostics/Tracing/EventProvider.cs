@@ -580,7 +580,6 @@ namespace System.Diagnostics.Tracing
                     ];
                 }
             }
-
             finally
             {
                 if (buffer != null && buffer != stackSpace)

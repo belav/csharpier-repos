@@ -85,7 +85,6 @@ namespace System.Configuration.Internal
                 // Don't delete, since we just moved it.
                 _tempFiles.KeepFiles = true;
             }
-
             finally
             {
                 ((IDisposable)_tempFiles).Dispose();

@@ -210,7 +210,6 @@ namespace System.IO.Pipes
 
                 InitializeHandle(handle, false, (options & PipeOptions.Asynchronous) != 0);
             }
-
             finally
             {
                 if (pinningHandle.IsAllocated)
@@ -343,7 +342,6 @@ namespace System.IO.Pipes
                 ImpersonateAndTryCode(execHelper);
                 exceptionThrown = false;
             }
-
             finally
             {
                 RevertImpersonationOnBackout(execHelper, exceptionThrown);

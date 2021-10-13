@@ -44,7 +44,6 @@ namespace Microsoft.AspNetCore.Testing
             {
                 return new X509Certificate2(GetCertPath(certName), "testPassword");
             }
-
             finally
             {
                 importPfxMutex?.ReleaseMutex();

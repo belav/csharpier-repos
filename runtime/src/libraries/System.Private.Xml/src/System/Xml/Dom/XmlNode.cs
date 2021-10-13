@@ -994,7 +994,6 @@ namespace System.Xml
                 {
                     WriteTo(xw);
                 }
-
                 finally
                 {
                     xw.Close();
@@ -1014,7 +1013,6 @@ namespace System.Xml
                 {
                     WriteContentTo(xw);
                 }
-
                 finally
                 {
                     xw.Close();

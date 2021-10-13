@@ -23,7 +23,6 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.AddRef(iUnknown);
                 Assert.Equal(1, Marshal.Release(iUnknown));
             }
-
             finally
             {
                 Assert.Equal(0, Marshal.Release(iUnknown));

@@ -403,7 +403,6 @@ namespace System.Data.OleDb
                         }
                     }
                 }
-
                 finally
                 {
                     if (null != dataReader)
@@ -461,7 +460,6 @@ namespace System.Data.OleDb
                         return base.Fill((DataSet)data, srcTable, dataReader, 0, 0);
                     }
                 }
-
                 finally
                 {
                     if (null != dataReader)

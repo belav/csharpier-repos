@@ -54,7 +54,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                                 Marshal.GetObjectForIUnknown(service) as IWebFileCtxService;
                             webFileCtxService.GetIntellisenseProjectName(out projectName);
                         }
-
                         finally
                         {
                             if (service != IntPtr.Zero)

@@ -56,7 +56,6 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
                         );
                         return CreateProvider(pbPlaintextSecret, secretLengthInBytes);
                     }
-
                     finally
                     {
                         UnsafeBufferUtil.SecureZeroMemory(pbPlaintextSecret, secretLengthInBytes);

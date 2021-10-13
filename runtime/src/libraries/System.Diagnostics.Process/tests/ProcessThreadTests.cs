@@ -75,7 +75,6 @@ namespace System.Diagnostics.Tests
             {
                 Assert.True(Process.GetCurrentProcess().Threads.Count >= numOfThreads);
             }
-
             finally
             {
                 mre.Set();

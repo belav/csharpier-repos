@@ -262,7 +262,6 @@ namespace System.Data
                 }
                 _refCount++;
             }
-
             finally
             {
                 _table._indexesLock.ExitWriteLock();
@@ -283,7 +282,6 @@ namespace System.Data
                     _table._indexes.Remove(this);
                 }
             }
-
             finally
             {
                 _table._indexesLock.ExitWriteLock();
@@ -504,7 +502,6 @@ namespace System.Data
 
                 index = _records.GetIndexByKey(record);
             }
-
             finally
             {
                 switch (changeRecord)
@@ -1305,7 +1302,6 @@ namespace System.Data
                         }
                     }
                 }
-
                 finally
                 {
                     _listenerReaderCount--;

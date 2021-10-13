@@ -569,7 +569,6 @@ namespace System.Security.Cryptography
                         0
                     );
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(descPtr);

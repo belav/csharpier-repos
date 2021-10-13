@@ -439,7 +439,6 @@ namespace System.DirectoryServices.AccountManagement
                         return ConstructFakePrincipalFromSID(sid);
                     }
                 }
-
                 finally
                 {
                     if (pSid != IntPtr.Zero)
@@ -514,7 +513,6 @@ namespace System.DirectoryServices.AccountManagement
                                 return ConstructFakePrincipalFromSID(sid);
                             }
                         }
-
                         finally
                         {
                             if (pSid != IntPtr.Zero)

@@ -151,7 +151,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                         return 0;
                     }
                 }
-
                 finally
                 {
                     _input.AdvanceTo(readableBuffer.End, readableBuffer.End);

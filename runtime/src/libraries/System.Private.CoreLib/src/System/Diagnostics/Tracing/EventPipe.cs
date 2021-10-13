@@ -163,7 +163,6 @@ namespace System.Diagnostics.Tracing
                     );
                 }
             }
-
             finally
             {
                 for (int i = 0; i < providers.Length; i++)

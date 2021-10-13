@@ -54,7 +54,6 @@ public class main
         {
             throw new Exception();
         }
-
         finally
         {
             Console.WriteLine("before");

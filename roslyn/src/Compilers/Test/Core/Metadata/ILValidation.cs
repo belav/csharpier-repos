@@ -149,7 +149,6 @@ namespace Roslyn.Test.Utilities
                     return true;
                 }
             }
-
             finally
             {
                 moduleContents.Position = savedPosition;

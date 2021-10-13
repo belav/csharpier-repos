@@ -127,7 +127,6 @@ namespace CoreclrTestLib
                         success = Kernel32.Process32NextW(snapshot, ref processEntry);
                     }
                 }
-
                 finally
                 {
                     Kernel32.CloseHandle(snapshot);

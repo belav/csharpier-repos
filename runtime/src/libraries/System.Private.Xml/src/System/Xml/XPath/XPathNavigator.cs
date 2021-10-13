@@ -1493,7 +1493,6 @@ namespace System.Xml.XPath
                 {
                     xmlWriter.WriteNode(this, true);
                 }
-
                 finally
                 {
                     xmlWriter.Close();
@@ -1538,7 +1537,6 @@ namespace System.Xml.XPath
                                 MoveToParent();
                             }
                         }
-
                         finally
                         {
                             xmlWriter.Close();

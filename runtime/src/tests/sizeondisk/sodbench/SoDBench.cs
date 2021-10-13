@@ -275,7 +275,6 @@ namespace SoDBench
                 if (options.Verbose)
                     Console.WriteLine($"** CSV Output:\n{formattedStr}");
             }
-
             finally
             {
                 if (!s_keepArtifacts && s_sandboxDir != null)

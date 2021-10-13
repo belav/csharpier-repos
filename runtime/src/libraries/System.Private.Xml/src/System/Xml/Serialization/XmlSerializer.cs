@@ -458,7 +458,6 @@ namespace System.Xml.Serialization
                     {
                         Serialize(o, writer);
                     }
-
                     finally
                     {
                         writer.Dispose();
@@ -588,7 +587,6 @@ namespace System.Xml.Serialization
                     {
                         return Deserialize(reader);
                     }
-
                     finally
                     {
                         reader.Dispose();

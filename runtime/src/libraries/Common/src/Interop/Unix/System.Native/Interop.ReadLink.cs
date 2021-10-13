@@ -53,7 +53,6 @@ internal static partial class Interop
                         return Encoding.UTF8.GetString(buffer, 0, resultLength);
                     }
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(buffer);

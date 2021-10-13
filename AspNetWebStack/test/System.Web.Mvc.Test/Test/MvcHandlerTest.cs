@@ -145,7 +145,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 controllerMock.Verify();
             }
-
             finally
             {
                 MvcHandler.DisableMvcResponseHeader = oldResponseHeaderValue;

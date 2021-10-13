@@ -609,7 +609,6 @@ namespace System.Net.Http
                         await _connection.FillAsync(async: true).ConfigureAwait(false);
                     }
                 }
-
                 finally
                 {
                     ctr.Dispose();

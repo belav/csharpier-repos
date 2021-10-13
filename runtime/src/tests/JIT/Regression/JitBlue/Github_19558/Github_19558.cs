@@ -30,7 +30,6 @@ public class Program
         {
             System.GC.KeepAlive(var0);
         }
-
         finally
         {
             var vr12 = new ulong[] { 0, 2271009908085114245UL };

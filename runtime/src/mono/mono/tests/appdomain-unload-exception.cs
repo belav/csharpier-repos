@@ -16,7 +16,6 @@ class Driver
                 {
                     throw new AppDomainUnloadedException();
                 }
-
                 finally
                 {
                     mre.Set();

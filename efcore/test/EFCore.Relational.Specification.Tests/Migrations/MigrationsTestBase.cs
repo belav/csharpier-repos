@@ -2048,7 +2048,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
                 asserter?.Invoke(scaffoldedModel);
             }
-
             finally
             {
                 using var _ = Fixture.TestSqlLoggerFactory.SuspendRecordingEvents();

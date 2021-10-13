@@ -81,7 +81,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     return await completionSource.Task.WithCancellation(cancellationToken)
                         .ConfigureAwaitRunInline();
                 }
-
                 finally
                 {
                     _diffViewer.DifferenceBuffer.SnapshotDifferenceChanged -=

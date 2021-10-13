@@ -66,7 +66,6 @@ namespace Microsoft.AspNetCore.E2ETesting
                     await InitializeInstance(output);
                 }
             }
-
             finally
             {
                 _semaphore.Release();

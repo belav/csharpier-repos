@@ -69,7 +69,6 @@ namespace System.Threading.Channels.Tests
                     Assert.Equal(i, e.Current);
                 }
             }
-
             finally
             {
                 ValueTask vt = e.DisposeAsync();
@@ -96,7 +95,6 @@ namespace System.Threading.Channels.Tests
                     Assert.Equal(i, e.Current);
                 }
             }
-
             finally
             {
                 ValueTask vt = e.DisposeAsync();
@@ -138,7 +136,6 @@ namespace System.Threading.Channels.Tests
                                 consumedTotal += e.Current;
                             }
                         }
-
                         finally
                         {
                             await e.DisposeAsync();

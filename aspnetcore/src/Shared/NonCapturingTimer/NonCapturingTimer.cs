@@ -36,7 +36,6 @@ namespace Microsoft.Extensions.Internal
 
                 return new Timer(callback, state, dueTime, period);
             }
-
             finally
             {
                 // Restore the current ExecutionContext

@@ -63,7 +63,6 @@ namespace System.Tests
                 Environment.SetEnvironmentVariable(longVar, val);
                 Assert.Equal(val, Environment.GetEnvironmentVariable(longVar));
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable(longVar, null);
@@ -82,7 +81,6 @@ namespace System.Tests
                 Environment.SetEnvironmentVariable(var, longVal);
                 Assert.Equal(longVal, Environment.GetEnvironmentVariable(var));
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable(var, null);
@@ -355,7 +353,6 @@ namespace System.Tests
                 Assert.Null(Environment.GetEnvironmentVariable(varName));
                 Assert.Null(Environment.GetEnvironmentVariable(varNamePrefix));
             }
-
             finally
             {
                 // Clear the test variable
@@ -374,7 +371,6 @@ namespace System.Tests
                 Environment.SetEnvironmentVariable(varName, value);
                 Assert.Null(Environment.GetEnvironmentVariable(varName));
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable(varName, string.Empty);
@@ -395,7 +391,6 @@ namespace System.Tests
                 Assert.Equal(value, Environment.GetEnvironmentVariable(varName));
                 Assert.Equal(value, Environment.GetEnvironmentVariable(varNamePrefix));
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable(varName, string.Empty);
@@ -416,7 +411,6 @@ namespace System.Tests
                 Environment.SetEnvironmentVariable(varName, value);
                 Assert.Equal(valuePrefix, Environment.GetEnvironmentVariable(varName));
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable(varName, string.Empty);

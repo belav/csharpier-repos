@@ -124,7 +124,6 @@ class StrSwitchFinalTest
                                 {
                                     _trace.WriteLine("s == two");
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("After two");
@@ -143,7 +142,6 @@ class StrSwitchFinalTest
                                         goto continueloop;
                                     }
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("After three");
@@ -171,7 +169,6 @@ class StrSwitchFinalTest
                                         _trace.WriteLine("Unreached");
                                         throw new Exception();
                                     }
-
                                     finally
                                     {
                                         _trace.WriteLine("After after three");
@@ -188,7 +185,6 @@ class StrSwitchFinalTest
                                     {
                                         _trace.WriteLine("s == " + s[s.Length]);
                                         try { }
-
                                         finally
                                         {
                                             _trace.WriteLine("Unreached");
@@ -207,7 +203,6 @@ class StrSwitchFinalTest
                                                 _trace.WriteLine("unreached ");
                                                 goto finishfour;
                                             }
-
                                             finally
                                             {
                                                 _trace.WriteLine("also unreached");
@@ -219,7 +214,6 @@ class StrSwitchFinalTest
                                         }
                                     }
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("In four's finally");
@@ -235,7 +229,6 @@ class StrSwitchFinalTest
                                         {
                                             _trace.WriteLine("s == five");
                                         }
-
                                         finally
                                         {
                                             _trace.WriteLine("Five's finally 0");
@@ -251,7 +244,6 @@ class StrSwitchFinalTest
                                     }
                                     break;
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("Five's finally 2");
@@ -262,7 +254,6 @@ class StrSwitchFinalTest
                                     _trace.WriteLine("Greater than five");
                                     goto finish;
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("in six's finally");
@@ -271,7 +262,6 @@ class StrSwitchFinalTest
                         ;
                         continue;
                     }
-
                     finally
                     {
                         _trace.WriteLine("In inner finally");
@@ -309,7 +299,6 @@ class StrSwitchFinalTest
 
                 _trace.WriteLine("Unreached");
             }
-
             finally
             {
                 _trace.WriteLine("In outer finally\r\n");

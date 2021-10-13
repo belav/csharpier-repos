@@ -131,7 +131,6 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
                             break;
                     }
                 }
-
                 finally
                 {
                     _logBuilder.Clear();

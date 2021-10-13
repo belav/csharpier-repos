@@ -333,7 +333,6 @@ namespace Microsoft.AspNetCore.Components.RenderTree
                 }
                 #endregion
             }
-
             finally
             {
                 if (keyedItemInfos != null)

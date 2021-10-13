@@ -449,7 +449,6 @@ namespace Roslyn.Test.Utilities.Desktop
                     Console.SetError(errorOutputWriter);
                     action();
                 }
-
                 finally
                 {
                     Console.SetOut(originalOut);

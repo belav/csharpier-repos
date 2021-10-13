@@ -773,7 +773,6 @@ namespace System.Data.OleDb
                             }
                         }
                     }
-
                     finally
                     {
                         if (null != multipleResults)
@@ -1918,7 +1917,6 @@ namespace System.Data.OleDb
                     throw ODB.ThreadApartmentState(e);
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -1966,7 +1964,6 @@ namespace System.Data.OleDb
                 IntPtr dataPtr = rowBinding.DangerousGetDataPtr();
                 hr = irowset.GetData(rowHandle, accessorHandle, dataPtr);
             }
-
             finally
             {
                 if (mustRelease)
@@ -2092,7 +2089,6 @@ namespace System.Data.OleDb
                 UnsafeNativeMethods.IRow irow = IRow();
                 hr = irow.GetColumns((IntPtr)access.Length, access);
             }
-
             finally
             {
                 if (mustReleaseBinding)

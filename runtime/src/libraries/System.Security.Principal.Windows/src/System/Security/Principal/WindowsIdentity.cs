@@ -104,7 +104,6 @@ namespace System.Security.Principal
                     _isAuthenticated = identity._isAuthenticated;
                 }
             }
-
             finally
             {
                 if (mustDecrement)
@@ -342,7 +341,6 @@ namespace System.Security.Principal
                 accessToken.DangerousAddRef(ref refAdded);
                 return DuplicateAccessToken(accessToken.DangerousGetHandle());
             }
-
             finally
             {
                 if (refAdded)
@@ -441,7 +439,6 @@ namespace System.Security.Principal
                             logonSessionData.AuthenticationPackage.Buffer
                         );
                     }
-
                     finally
                     {
                         pLogonSessionData?.Dispose();
@@ -552,7 +549,6 @@ namespace System.Security.Principal
                 )
                     throw new SecurityException(new Win32Exception().Message);
             }
-
             finally
             {
                 if (token != SafeAccessTokenHandle.InvalidHandle)
@@ -1372,7 +1368,6 @@ namespace System.Security.Principal
                     );
                 }
             }
-
             finally
             {
                 safeAllocHandle?.Dispose();
@@ -1439,7 +1434,6 @@ namespace System.Security.Principal
                     instanceClaims.Add(claim);
                 }
             }
-
             finally
             {
                 safeAllocHandle?.Dispose();
@@ -1541,7 +1535,6 @@ namespace System.Security.Principal
                     );
                 }
             }
-
             finally
             {
                 safeAllocHandle?.Dispose();
@@ -1693,7 +1686,6 @@ namespace System.Security.Principal
                     offset += Marshal.SizeOf(windowsClaim);
                 }
             }
-
             finally
             {
                 safeAllocHandle?.Dispose();

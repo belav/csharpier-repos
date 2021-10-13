@@ -71,7 +71,6 @@ namespace System.IO.Tests
                     Flush(fs, flushToDisk);
                 }
             }
-
             finally
             {
                 File.SetAttributes(fileName, FileAttributes.Normal);

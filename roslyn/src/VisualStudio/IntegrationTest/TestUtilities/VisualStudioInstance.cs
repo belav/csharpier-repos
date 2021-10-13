@@ -322,7 +322,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                     StopRemoteIntegrationService();
                 }
             }
-
             finally
             {
                 if (

@@ -35,7 +35,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(!badRegion);
                 return result;
             }
-
             finally
             {
                 walker.Free();

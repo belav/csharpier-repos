@@ -116,7 +116,6 @@ public class FromNativePaths
             );
             return false;
         }
-
         finally
         {
             // Copy the native library back to the test folder. Don't move it, since it is loaded and the move may fail.

@@ -54,7 +54,6 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 Assert.False(File.Exists(expectedKeyPath));
                 Assert.Null(options.SigningCredential);
             }
-
             finally
             {
                 if (File.Exists(expectedKeyPath))
@@ -98,7 +97,6 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 Assert.Equal("Development", options.SigningCredential.Kid);
                 Assert.IsType<RsaSecurityKey>(options.SigningCredential.Key);
             }
-
             finally
             {
                 if (File.Exists(expectedKeyPath))
@@ -182,7 +180,6 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     key.Certificate.Thumbprint
                 );
             }
-
             finally
             {
                 CleanupTestCertificate();

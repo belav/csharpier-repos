@@ -460,7 +460,6 @@ internal static partial class Interop
                     throw CreateExceptionForOSStatus(osStatus);
                 }
             }
-
             finally
             {
                 if (cfProtocolsArrayRef != null)
@@ -489,7 +488,6 @@ internal static partial class Interop
                 byte[] result = Interop.CoreFoundation.CFGetData(protocol);
                 return result;
             }
-
             finally
             {
                 protocol.Dispose();

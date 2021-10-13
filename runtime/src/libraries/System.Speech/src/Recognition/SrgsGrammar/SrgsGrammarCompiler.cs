@@ -110,7 +110,6 @@ namespace System.Speech.Recognition.SrgsGrammar
                     keyFile
                 );
             }
-
             finally
             {
                 for (int iReader = 0; iReader < readers.Length; iReader++)

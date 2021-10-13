@@ -232,7 +232,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetNativeVariantForObject<object>(obj, pNative)
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);

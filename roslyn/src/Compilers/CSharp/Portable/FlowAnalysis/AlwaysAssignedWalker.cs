@@ -53,7 +53,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var result = walker.Analyze(ref badRegion);
                 return badRegion ? SpecializedCollections.EmptyEnumerable<Symbol>() : result;
             }
-
             finally
             {
                 walker.Free();

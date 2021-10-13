@@ -158,7 +158,6 @@ namespace System.Net
                 ptr = Marshal.SecureStringToGlobalAllocUnicode(sstr);
                 result = Marshal.PtrToStringUni(ptr)!;
             }
-
             finally
             {
                 if (ptr != IntPtr.Zero)

@@ -1283,7 +1283,6 @@ namespace System.Data.Tests
             {
                 dataSet1.WriteXml(file, XmlWriteMode.WriteSchema);
             }
-
             finally
             {
                 File.Delete(file);

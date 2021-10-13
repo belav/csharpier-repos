@@ -223,7 +223,6 @@ namespace System.Text.Json
 
                 return value;
             }
-
             finally
             {
                 if (tempArray != null)

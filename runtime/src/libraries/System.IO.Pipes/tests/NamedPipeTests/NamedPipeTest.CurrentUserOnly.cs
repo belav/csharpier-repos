@@ -271,7 +271,6 @@ namespace System.IO.Pipes.Tests
                     pipeClients[i].Connect(15_000);
                 }
             }
-
             finally
             {
                 for (var i = 0; i < pipeServers.Length; i++)

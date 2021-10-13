@@ -416,7 +416,6 @@ namespace System.IO.Ports.Tests
                     );
                 }
             }
-
             finally
             {
                 com2.RtsEnable = origRtsEnable;
@@ -564,7 +563,6 @@ namespace System.IO.Ports.Tests
                     }
                 }
             }
-
             finally
             {
                 com2.RtsEnable = origRtsEnable;
@@ -714,7 +712,6 @@ namespace System.IO.Ports.Tests
                     );
                 }
             }
-
             finally
             {
                 com2.RtsEnable = origRtsEnable;
@@ -813,7 +810,6 @@ namespace System.IO.Ports.Tests
                     }
                 }
             }
-
             finally
             {
                 //Rollback any changed that were made to the SerialPort
@@ -942,7 +938,6 @@ namespace System.IO.Ports.Tests
                     }
                 }
             }
-
             finally
             {
                 //Rollback any changed that were made to the SerialPort

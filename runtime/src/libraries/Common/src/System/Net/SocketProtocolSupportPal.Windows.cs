@@ -35,7 +35,6 @@ namespace System.Net
                     || (SocketError)Marshal.GetLastWin32Error()
                         != SocketError.AddressFamilyNotSupported;
             }
-
             finally
             {
                 if (socket != INVALID_SOCKET)

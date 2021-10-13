@@ -76,7 +76,6 @@ namespace Internal.Cryptography.Pal.Windows
                             )
                                 throw Marshal.GetLastWin32Error().ToCryptographicException();
                         }
-
                         finally
                         {
                             if (!object.ReferenceEquals(encodedContent, contentInfo.Content))

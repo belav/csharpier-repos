@@ -219,7 +219,6 @@ internal static partial class Interop
                     parameters.D = d_cb == 0 ? null : Crypto.ExtractBignum(d_bn, cbKey);
                 }
             }
-
             finally
             {
                 if (refAdded)
@@ -396,7 +395,6 @@ internal static partial class Interop
                     return parameters;
                 }
             }
-
             finally
             {
                 if (refAdded)

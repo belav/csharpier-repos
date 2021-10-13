@@ -924,7 +924,6 @@ namespace System.Drawing
                     );
                     Gdip.CheckStatus(status);
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(buf);

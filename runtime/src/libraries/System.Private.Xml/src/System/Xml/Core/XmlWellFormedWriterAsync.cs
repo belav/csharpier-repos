@@ -1705,7 +1705,6 @@ namespace System.Xml
 
                     await _writer.FlushAsync().ConfigureAwait(false);
                 }
-
                 finally
                 {
                     try
@@ -1719,7 +1718,6 @@ namespace System.Xml
                             await _writer.DisposeAsync().ConfigureAwait(false);
                         }
                     }
-
                     finally
                     {
                         _currentState = State.Closed;

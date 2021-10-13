@@ -29,7 +29,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(10, result.i);
                 Assert.Equal("hello", result.s);
             }
-
             finally
             {
                 Marshal.DestroyStructure(ptr, structure.GetType());
@@ -52,7 +51,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(10, result.i);
                 Assert.Equal("hello", result.s);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(ptr);
@@ -75,7 +73,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(10, result.i);
                 Assert.Equal("hello", result.s);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(ptr);
@@ -98,7 +95,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(10, result.i);
                 Assert.Equal("hello", result.s);
             }
-
             finally
             {
                 Marshal.DestroyStructure(ptr, structure.GetType());

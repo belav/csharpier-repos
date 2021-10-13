@@ -182,7 +182,6 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Rendering
                     isDispatchingEvent = true;
                     return base.DispatchEventAsync(eventHandlerId, eventFieldInfo, eventArgs);
                 }
-
                 finally
                 {
                     isDispatchingEvent = false;

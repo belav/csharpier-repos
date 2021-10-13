@@ -128,7 +128,6 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         .ConfigureAwait(false);
                     diagnostics.TryAdd(projectToFix.Id, projectDiagnostics);
                 }
-
                 finally
                 {
                     progressTracker.ItemCompleted();

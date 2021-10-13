@@ -586,7 +586,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             null
                         );
                     }
-
                     finally
                     {
                         t_assemblyForWhichCurrentThreadIsComputingKeys = null;

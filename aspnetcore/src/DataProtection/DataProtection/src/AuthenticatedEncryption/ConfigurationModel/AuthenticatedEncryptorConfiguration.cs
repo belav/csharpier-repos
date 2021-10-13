@@ -62,7 +62,6 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
             {
                 encryptor.PerformSelfTest();
             }
-
             finally
             {
                 (encryptor as IDisposable)?.Dispose();

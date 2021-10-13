@@ -44,7 +44,6 @@ public class Gen<T>
                 throw;
             }
         }
-
         finally
         {
             hitFinally = true;

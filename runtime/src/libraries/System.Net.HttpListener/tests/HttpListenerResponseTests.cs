@@ -435,7 +435,6 @@ namespace System.Net.Tests
                 string clientResponse = GetClientResponse(110);
                 Assert.EndsWith("Hell", clientResponse);
             }
-
             finally
             {
                 if (willBlock)

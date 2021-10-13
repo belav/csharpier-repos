@@ -166,7 +166,6 @@ namespace System.Drawing
                 );
                 return new Bitmap(bitmap);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(name);

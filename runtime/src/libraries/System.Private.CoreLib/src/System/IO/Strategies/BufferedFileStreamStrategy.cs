@@ -123,14 +123,12 @@ namespace System.IO.Strategies
                     {
                         await FlushAsync().ConfigureAwait(false);
                     }
-
                     finally
                     {
                         await _strategy.DisposeAsync().ConfigureAwait(false);
                     }
                 }
             }
-
             finally
             {
                 // Don't set the buffer to null, to avoid a NullReferenceException
@@ -153,14 +151,12 @@ namespace System.IO.Strategies
                     {
                         Flush();
                     }
-
                     finally
                     {
                         _strategy.Dispose();
                     }
                 }
             }
-
             finally
             {
                 // Don't set the buffer to null, to avoid a NullReferenceException
@@ -408,7 +404,6 @@ namespace System.IO.Strategies
 
                     releaseTheLock = false;
                 }
-
                 finally
                 {
                     if (releaseTheLock)
@@ -465,7 +460,6 @@ namespace System.IO.Strategies
                         .ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();
@@ -547,7 +541,6 @@ namespace System.IO.Strategies
                 _readPos += bytesFromBuffer;
                 return bytesAlreadySatisfied + bytesFromBuffer;
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();
@@ -762,7 +755,6 @@ namespace System.IO.Strategies
 
                     releaseTheLock = false;
                 }
-
                 finally
                 {
                     if (releaseTheLock)
@@ -790,7 +782,6 @@ namespace System.IO.Strategies
             {
                 await _strategy.WriteAsync(source, cancellationToken).ConfigureAwait(false);
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();
@@ -869,7 +860,6 @@ namespace System.IO.Strategies
                 source.Span.CopyTo(_buffer!.AsSpan(_writePos));
                 _writePos = source.Length;
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();
@@ -993,7 +983,6 @@ namespace System.IO.Strategies
                 // There was nothing in the buffer:
                 Debug.Assert(_writePos == 0 && _readPos == _readLen);
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();
@@ -1062,7 +1051,6 @@ namespace System.IO.Strategies
                 await _strategy.CopyToAsync(destination, bufferSize, cancellationToken)
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();

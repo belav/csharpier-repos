@@ -162,7 +162,6 @@ namespace Microsoft.Win32.SafeHandles
 
                             return holderValid && !IsInvalid && !IsClosed;
                         }
-
                         finally
                         {
                             if (acquiredHolder)

@@ -115,7 +115,6 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
                 }
                 return id;
             }
-
             finally
             {
                 TryDelete(outputFile);

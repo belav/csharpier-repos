@@ -226,7 +226,6 @@ namespace System.IO.Compression
                     // Always flush on the underlying stream
                     await _stream.FlushAsync(cancellationToken).ConfigureAwait(false);
                 }
-
                 finally
                 {
                     AsyncOperationCompleting();
@@ -481,7 +480,6 @@ namespace System.IO.Compression
 
                     return totalRead;
                 }
-
                 finally
                 {
                     AsyncOperationCompleting();
@@ -677,7 +675,6 @@ namespace System.IO.Compression
             {
                 PurgeBuffers(disposing);
             }
-
             finally
             {
                 // Close the underlying stream even if PurgeBuffers threw.
@@ -688,7 +685,6 @@ namespace System.IO.Compression
                     if (disposing && !_leaveOpen)
                         _stream?.Dispose();
                 }
-
                 finally
                 {
                     _stream = null!;
@@ -698,7 +694,6 @@ namespace System.IO.Compression
                         _deflater?.Dispose();
                         _inflater?.Dispose();
                     }
-
                     finally
                     {
                         _deflater = null;
@@ -731,7 +726,6 @@ namespace System.IO.Compression
                 {
                     await PurgeBuffersAsync().ConfigureAwait(false);
                 }
-
                 finally
                 {
                     // Close the underlying stream even if PurgeBuffers threw.
@@ -744,7 +738,6 @@ namespace System.IO.Compression
                         if (!_leaveOpen && stream != null)
                             await stream.DisposeAsync().ConfigureAwait(false);
                     }
-
                     finally
                     {
                         try
@@ -752,7 +745,6 @@ namespace System.IO.Compression
                             _deflater?.Dispose();
                             _inflater?.Dispose();
                         }
-
                         finally
                         {
                             _deflater = null;
@@ -853,7 +845,6 @@ namespace System.IO.Compression
 
                     _wroteBytes = true;
                 }
-
                 finally
                 {
                     AsyncOperationCompleting();
@@ -984,7 +975,6 @@ namespace System.IO.Compression
                         )
                         .ConfigureAwait(false);
                 }
-
                 finally
                 {
                     _deflateStream.AsyncOperationCompleting();
@@ -1021,7 +1011,6 @@ namespace System.IO.Compression
                     // Now, use the source stream's CopyToAsync to push directly to our inflater via this helper stream
                     _deflateStream._stream.CopyTo(this, _arrayPoolBuffer.Length);
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(_arrayPoolBuffer);

@@ -375,7 +375,6 @@ namespace System.Net.Sockets
                     sent = checked((int)bytesSent);
                 }
             }
-
             finally
             {
                 // Free GC handles.
@@ -519,7 +518,6 @@ namespace System.Net.Sockets
                     sockAddrLen = messageHeader.SocketAddressLen;
                 }
             }
-
             finally
             {
                 // Free GC handles.
@@ -679,7 +677,6 @@ namespace System.Net.Sockets
                     }
                 }
             }
-
             finally
             {
                 // Free GC handles.
@@ -2713,7 +2710,6 @@ namespace System.Net.Sockets
 
                 return SocketError.Success;
             }
-
             finally
             {
                 // This order matches with the AddToPollArray calls

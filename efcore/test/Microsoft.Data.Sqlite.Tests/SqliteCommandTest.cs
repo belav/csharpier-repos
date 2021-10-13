@@ -957,7 +957,6 @@ namespace Microsoft.Data.Sqlite
                     )
                 );
             }
-
             finally
             {
                 File.Delete("busy.db");

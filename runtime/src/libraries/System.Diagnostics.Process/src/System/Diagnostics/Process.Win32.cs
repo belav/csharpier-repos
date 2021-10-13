@@ -465,7 +465,6 @@ namespace System.Diagnostics
                     }
                 }
             }
-
             finally
             {
                 foreach ((Process Process, SafeProcessHandle Handle) child in children)

@@ -117,7 +117,6 @@ public class NotRedundantInitsAreRemoved_Github_48394
                 }
             }
         }
-
         finally
         {
             if (c != 0)

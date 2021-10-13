@@ -59,7 +59,6 @@ namespace JitTest
                     Console.WriteLine("--- throwing exception ---");
                     throw new Exception();
                 }
-
                 finally
                 {
                     Console.WriteLine("--- finally ---");

@@ -118,7 +118,6 @@ public partial class CancelKeyPressTests
                             tcs.Task.Result
                         );
                     }
-
                     finally
                     {
                         Console.CancelKeyPress -= handler;

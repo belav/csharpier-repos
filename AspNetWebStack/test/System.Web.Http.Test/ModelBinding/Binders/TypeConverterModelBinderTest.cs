@@ -58,7 +58,6 @@ namespace System.Web.Http.ModelBinding.Binders
                 };
                 retVal = binder.BindModel(null, bindingContext);
             }
-
             finally
             {
                 ModelBinderConfig.TypeConversionErrorMessageProvider = originalProvider;

@@ -56,7 +56,6 @@ namespace System.Runtime.InteropServices.CustomMarshalers
                     )
                     .MarshalNativeToManaged(enumVariantPtr);
             }
-
             finally
             {
                 result.Clear();

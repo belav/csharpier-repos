@@ -88,7 +88,6 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     serviceProviderEngine: context.Scope.Engine.Root
                 );
             }
-
             finally
             {
                 if (lockTaken)
@@ -133,7 +132,6 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             {
                 return ResolveService(callSite, context, lockType, serviceProviderEngine);
             }
-
             finally
             {
                 if (lockTaken)

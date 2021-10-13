@@ -107,7 +107,6 @@ namespace Microsoft.Extensions.Configuration
                 var jsonConfigSrc = LoadProvider(json);
                 Assert.Equal("3.14", jsonConfigSrc.Get("number"));
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = previousCulture;

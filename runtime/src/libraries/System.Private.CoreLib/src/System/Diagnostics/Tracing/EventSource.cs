@@ -2064,7 +2064,6 @@ namespace System.Diagnostics.Tracing
 
                     return new string((char*)dataPointer);
                 }
-
                 finally
                 {
                     m_EventSourceInDecodeObject = false;
@@ -2826,7 +2825,6 @@ namespace System.Diagnostics.Tracing
                         break;
                 }
             }
-
             finally
             {
                 m_EventSourceExceptionRecurenceCount--;
@@ -5045,7 +5043,6 @@ namespace System.Diagnostics.Tracing
                     newEventSource.AddListener(listener);
 #if DEBUG
                 }
-
                 finally
                 {
                     s_ConnectingEventSourcesAndListener = previousValue;
@@ -5275,7 +5272,6 @@ namespace System.Diagnostics.Tracing
                         }
 #if DEBUG
                         }
-
                         finally
                         {
                             s_ConnectingEventSourcesAndListener = previousValue;
@@ -5285,7 +5281,6 @@ namespace System.Diagnostics.Tracing
 
                     Validate();
                 }
-
                 finally
                 {
                     s_CreatingListener = false;

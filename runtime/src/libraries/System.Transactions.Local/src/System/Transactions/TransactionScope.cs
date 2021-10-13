@@ -782,7 +782,6 @@ namespace System.Transactions
                 }
                 successful = true;
             }
-
             finally
             {
                 if (!successful)
@@ -871,7 +870,6 @@ namespace System.Transactions
                     }
                 }
             }
-
             finally
             {
                 if (null != _scopeTimer)

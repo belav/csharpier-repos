@@ -119,7 +119,6 @@ namespace System.IO.Tests
                     }
                 }
             }
-
             finally
             {
                 foreach (string dirPath in dirPaths)
@@ -165,7 +164,6 @@ namespace System.IO.Tests
                         Enumerate(_enumerator);
                     }
                 }
-
                 finally
                 {
                     source.Cancel();

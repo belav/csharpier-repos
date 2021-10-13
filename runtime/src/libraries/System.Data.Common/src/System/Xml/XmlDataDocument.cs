@@ -455,7 +455,6 @@ namespace System.Xml
 
                 rowElem.ElementState = ElementState.Defoliated;
             }
-
             finally
             {
                 IgnoreXmlEvents = saveIgnore;
@@ -645,7 +644,6 @@ namespace System.Xml
                 {
                     Foliate(rowElement);
                 }
-
                 finally
                 {
                     IsFoliationEnabled = wasFoliationEnabled;
@@ -766,7 +764,6 @@ namespace System.Xml
                         }
                     }
                 }
-
                 finally
                 {
                     IgnoreXmlEvents = saveIgnore;
@@ -1017,7 +1014,6 @@ namespace System.Xml
                 LoadRows(null, newNode);
                 SyncRows(null, newNode, false);
             }
-
             finally
             {
                 _ignoreDataSetEvents = oldIgnoreDataSetEvents;
@@ -1059,7 +1055,6 @@ namespace System.Xml
                 for (bool fMore = dp.MoveToFirstChild(); fMore; fMore = dp.MoveToNextSibling())
                     newNode.AppendChild(CloneTreeInternal(dp));
             }
-
             finally
             {
                 dp.SetNoLongerUse();
@@ -1091,7 +1086,6 @@ namespace System.Xml
                         clone.AppendChild(cloneNode);
                     }
                 }
-
                 finally
                 {
                     dp.SetNoLongerUse();
@@ -1228,7 +1222,6 @@ namespace System.Xml
                 base.Load(reader);
                 BindForLoad();
             }
-
             finally
             {
                 _ignoreXmlEvents = false;
@@ -1255,7 +1248,6 @@ namespace System.Xml
 
                 _dataSet.EnforceConstraints = saveEnforce;
             }
-
             finally
             {
                 _ignoreDataSetEvents = false;
@@ -1310,7 +1302,6 @@ namespace System.Xml
                     }
                 }
             }
-
             finally
             {
                 _ignoreDataSetEvents = false;
@@ -1665,7 +1656,6 @@ namespace System.Xml
                     }
                 }
             }
-
             finally
             {
                 IsFoliationEnabled = wasFoliationEnabled;
@@ -1730,7 +1720,6 @@ namespace System.Xml
             {
                 Foliate(rowElement);
             }
-
             finally
             {
                 IsFoliationEnabled = wasFoliationEnabled;
@@ -1865,7 +1854,6 @@ namespace System.Xml
                     SynchronizeRowFromRowElement(rowElement);
                 }
             }
-
             finally
             {
                 _ignoreDataSetEvents = wasIgnoreDataSetEvents;
@@ -1920,7 +1908,6 @@ namespace System.Xml
                     OnNodeInsertedInFragment(node);
                 }
             }
-
             finally
             {
                 _ignoreDataSetEvents = wasIgnoreDataSetEvents;
@@ -1972,7 +1959,6 @@ namespace System.Xml
                     OnNodeRemovedFromFragment(node, oldParent);
                 }
             }
-
             finally
             {
                 _ignoreDataSetEvents = wasIgnoreDataSetEvents;
@@ -2109,7 +2095,6 @@ namespace System.Xml
                         break;
                 }
             }
-
             finally
             {
                 IsFoliationEnabled = wasFoliationEnabled;
@@ -2224,7 +2209,6 @@ namespace System.Xml
                     }
                 }
             }
-
             finally
             {
                 _ignoreXmlEvents = false;
@@ -3140,7 +3124,6 @@ namespace System.Xml
                     Debug.Assert(IsRowLive(rowElement.Row));
                 }
             }
-
             finally
             {
                 IsFoliationEnabled = wasFoliationEnabled;
@@ -3164,7 +3147,6 @@ namespace System.Xml
                     Debug.Assert(!IsRowLive(rowElement.Row));
                 }
             }
-
             finally
             {
                 IsFoliationEnabled = wasFoliationEnabled;

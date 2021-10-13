@@ -91,7 +91,6 @@ namespace System.IO.Tests
                     Assert.Equal("ABCD", sr2.ReadToEnd());
                 }
             }
-
             finally
             {
                 File.Delete(testfile);

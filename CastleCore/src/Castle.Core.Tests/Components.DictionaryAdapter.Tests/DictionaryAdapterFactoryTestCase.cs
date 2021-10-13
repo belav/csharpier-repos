@@ -1571,7 +1571,6 @@ namespace Castle.Components.DictionaryAdapter.Tests
             {
                 action.Invoke();
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = originalCulture;

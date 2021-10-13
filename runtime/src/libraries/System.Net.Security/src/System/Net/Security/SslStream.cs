@@ -1033,7 +1033,6 @@ namespace System.Net.Security
             {
                 CloseInternal();
             }
-
             finally
             {
                 base.Dispose(disposing);
@@ -1046,7 +1045,6 @@ namespace System.Net.Security
             {
                 CloseInternal();
             }
-
             finally
             {
                 await base.DisposeAsync().ConfigureAwait(false);
@@ -1074,7 +1072,6 @@ namespace System.Net.Security
                     return b;
                 }
             }
-
             finally
             {
                 // Regardless of whether we were able to read a byte from the buffer,

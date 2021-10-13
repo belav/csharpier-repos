@@ -265,7 +265,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 _table._indexesLock.ExitUpgradeableReadLock();
@@ -327,7 +326,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 _table._indexesLock.ExitUpgradeableReadLock();

@@ -30,7 +30,6 @@ namespace JitTest
             {
                 GetSystemInfo(ref si);
             }
-
             finally
             {
                 Console.WriteLine(si._dwNumberOfProcessors.ToString() + " processor(s) found");

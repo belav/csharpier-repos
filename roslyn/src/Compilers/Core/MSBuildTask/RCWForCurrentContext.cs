@@ -42,7 +42,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             {
                 objInCurrentCtx = Marshal.GetObjectForIUnknown(iunknownPtr);
             }
-
             finally
             {
                 Marshal.Release(iunknownPtr);
@@ -122,7 +121,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                     Marshal.ReleaseComObject(_rcwForCurrentCtx);
                 }
             }
-
             finally
             {
                 _rcwForCurrentCtx = null;

@@ -304,7 +304,6 @@ namespace System.Net.Http
                         return MultiProxy.Empty;
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(proxyInfo.Proxy);

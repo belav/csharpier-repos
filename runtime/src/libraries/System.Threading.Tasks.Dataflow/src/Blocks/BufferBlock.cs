@@ -488,7 +488,6 @@ namespace System.Threading.Tasks.Dataflow
                         return true;
                     }
                 }
-
                 finally
                 {
                     // We didn't get the item, so decrement the count to counteract our optimistic assumption.

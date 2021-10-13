@@ -486,7 +486,6 @@ namespace Microsoft.CodeAnalysis.CodeLens
 
                     return actualBuilder.ToString();
                 }
-
                 finally
                 {
                     pool.Free();

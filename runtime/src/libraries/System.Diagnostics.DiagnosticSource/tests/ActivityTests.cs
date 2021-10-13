@@ -106,13 +106,11 @@ namespace System.Diagnostics.Tests
                         anotherActivity.Baggage.Skip(3).First()
                     );
                 }
-
                 finally
                 {
                     anotherActivity.Stop();
                 }
             }
-
             finally
             {
                 activity.Stop();

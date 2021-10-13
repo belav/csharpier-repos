@@ -54,7 +54,6 @@ namespace Roslyn.Test.Utilities.CoreClr
                 s_currentError.Value = errorOutputWriter;
                 action();
             }
-
             finally
             {
                 s_currentOut.Value = savedOutput;

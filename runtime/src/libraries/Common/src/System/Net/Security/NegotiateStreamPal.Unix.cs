@@ -64,7 +64,6 @@ namespace System.Net.Security
 
                 return encryptedBuffer.ToByteArray();
             }
-
             finally
             {
                 encryptedBuffer.Dispose();
@@ -111,7 +110,6 @@ namespace System.Net.Security
 
                 return decryptedBuffer.Copy(buffer, offset);
             }
-
             finally
             {
                 decryptedBuffer.Dispose();
@@ -208,7 +206,6 @@ namespace System.Net.Security
 
                 outputBuffer = token.ToByteArray();
             }
-
             finally
             {
                 token.Dispose();
@@ -268,7 +265,6 @@ namespace System.Net.Security
 
                 outputBuffer = token.ToByteArray();
             }
-
             finally
             {
                 token.Dispose();
@@ -309,7 +305,6 @@ namespace System.Net.Security
                 return Encoding.UTF8.GetString(tokenBytes);
 #endif
             }
-
             finally
             {
                 token.Dispose();

@@ -110,7 +110,6 @@ namespace System.Drawing.Tests
             {
                 Assert.Equal(expected, fontFamily.Equals(other));
             }
-
             finally
             {
                 fontFamily.Dispose();

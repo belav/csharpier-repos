@@ -102,13 +102,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         }
                     }
                 }
-
                 finally
                 {
                     Marshal.Release(docDataPtr);
                 }
             }
-
             finally
             {
                 // We need to clean up the extra reference we have, now that we have an RCW holding onto the object.

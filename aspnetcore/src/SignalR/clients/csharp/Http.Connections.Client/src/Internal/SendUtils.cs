@@ -77,7 +77,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                             Log.NoMessages(logger);
                         }
                     }
-
                     finally
                     {
                         application.Input.AdvanceTo(buffer.End);

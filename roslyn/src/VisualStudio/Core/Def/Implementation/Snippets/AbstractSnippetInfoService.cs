@@ -228,7 +228,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     }
                 }
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(pSnippetInfo[0]);

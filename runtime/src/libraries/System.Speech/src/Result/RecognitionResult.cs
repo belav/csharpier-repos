@@ -237,7 +237,6 @@ namespace System.Speech.Recognition
                             AudioDuration
                         );
                     }
-
                     finally
                     {
                         gc.Free();
@@ -411,7 +410,6 @@ namespace System.Speech.Recognition
                     recoResult.Discard(SapiConstants.SPDF_ALL);
                 }
             }
-
             finally
             {
                 gc.Free();
@@ -509,7 +507,6 @@ namespace System.Speech.Recognition
                         alternates.Add(phrase);
                     }
                 }
-
                 finally
                 {
                     gc.Free();
@@ -588,13 +585,11 @@ namespace System.Speech.Recognition
                                 );
                                 _alternates.Add(phrase);
                             }
-
                             finally
                             {
                                 Marshal.FreeCoTaskMem(coMemSerializedPhrase);
                             }
                         }
-
                         finally
                         {
                             Marshal.Release(sapiAlternates[i]);
@@ -627,7 +622,6 @@ namespace System.Speech.Recognition
                             _hasIPAPronunciation
                         );
                     }
-
                     finally
                     {
                         gc.Free();

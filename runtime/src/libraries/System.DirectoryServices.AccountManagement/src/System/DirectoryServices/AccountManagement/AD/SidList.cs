@@ -51,7 +51,6 @@ namespace System.DirectoryServices.AccountManagement
 
                 TranslateSids(target, pSids);
             }
-
             finally
             {
                 if (hUser != IntPtr.Zero)
@@ -156,7 +155,6 @@ namespace System.DirectoryServices.AccountManagement
                             ref pPolicyHandle
                         );
                     }
-
                     finally
                     {
                         if (lsaTargetPr != IntPtr.Zero)
@@ -323,7 +321,6 @@ namespace System.DirectoryServices.AccountManagement
                 // Sort the list so they are oriented by the issuer name.
                 // this.entries.Sort( new SidListComparer());
             }
-
             finally
             {
                 if (pDomains != IntPtr.Zero)

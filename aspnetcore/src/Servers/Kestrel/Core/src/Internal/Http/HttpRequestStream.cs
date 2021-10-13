@@ -169,7 +169,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                         return 0;
                     }
                 }
-
                 finally
                 {
                     _pipeReader.AdvanceTo(consumed);

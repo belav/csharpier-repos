@@ -439,7 +439,6 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     )
                     .Execute();
             }
-
             finally
             {
                 File.Delete(frameworkCompatConfig);
@@ -600,7 +599,6 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     )
                     .Execute();
             }
-
             finally
             {
                 File.Delete(propertyCompatConfig);

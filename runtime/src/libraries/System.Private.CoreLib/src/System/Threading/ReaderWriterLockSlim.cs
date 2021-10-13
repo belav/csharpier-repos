@@ -1089,7 +1089,6 @@ namespace System.Threading
             {
                 waitSuccessful = waitEvent.WaitOne(timeout.RemainingMilliseconds);
             }
-
             finally
             {
                 _spinLock.Enter(enterMyLockReason);

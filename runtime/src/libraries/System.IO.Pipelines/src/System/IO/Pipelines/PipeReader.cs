@@ -248,7 +248,6 @@ namespace System.IO.Pipelines
                         break;
                     }
                 }
-
                 finally
                 {
                     // Advance even if WriteAsync throws so the PipeReader is not left in the

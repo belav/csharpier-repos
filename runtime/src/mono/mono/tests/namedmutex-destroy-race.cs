@@ -28,7 +28,6 @@ namespace Crasher
                                 {
                                     owner = mutex.WaitOne(TimeSpan.FromMinutes(1));
                                 }
-
                                 finally
                                 {
                                     if (owner)

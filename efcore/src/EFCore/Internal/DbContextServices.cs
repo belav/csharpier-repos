@@ -100,7 +100,6 @@ namespace Microsoft.EntityFrameworkCore.Internal
                         dependencies.ValidationLogger
                     );
             }
-
             finally
             {
                 _inOnModelCreating = false;

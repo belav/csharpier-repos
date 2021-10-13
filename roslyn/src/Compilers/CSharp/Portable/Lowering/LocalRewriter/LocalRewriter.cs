@@ -308,7 +308,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _factory.CurrentFunction = node.Symbol;
                 return base.VisitLambda(node)!;
             }
-
             finally
             {
                 _factory.CurrentFunction = oldContainingSymbol;
@@ -398,7 +397,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return base.VisitLocalFunctionStatement(node)!;
             }
-
             finally
             {
                 _factory.CurrentFunction = oldContainingSymbol;

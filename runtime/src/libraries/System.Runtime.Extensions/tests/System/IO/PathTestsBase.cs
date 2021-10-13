@@ -226,7 +226,6 @@ namespace System.IO.Tests
                 Environment.SetEnvironmentVariable(envVar, newTempPath);
                 Assert.Equal(Path.GetFullPath(expected), Path.GetFullPath(Path.GetTempPath()));
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable(envVar, original);

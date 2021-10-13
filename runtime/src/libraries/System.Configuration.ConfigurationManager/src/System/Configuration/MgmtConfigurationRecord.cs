@@ -771,7 +771,6 @@ namespace System.Configuration
                         );
                 }
             }
-
             finally
             {
                 reader?.Close();

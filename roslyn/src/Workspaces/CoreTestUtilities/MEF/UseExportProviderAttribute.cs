@@ -100,7 +100,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 DisposeExportProvider(ExportProviderCache.LocalExportProviderForCleanup);
                 DisposeExportProvider(ExportProviderCache.RemoteExportProviderForCleanup);
             }
-
             finally
             {
                 // Need to clear cached MefHostServices between test runs.

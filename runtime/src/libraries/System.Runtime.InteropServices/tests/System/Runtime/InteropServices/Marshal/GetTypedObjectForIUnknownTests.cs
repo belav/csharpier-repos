@@ -84,7 +84,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.Equal(o, Marshal.GetTypedObjectForIUnknown(ptr, type));
             }
-
             finally
             {
                 Marshal.Release(ptr);
@@ -122,7 +121,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetTypedObjectForIUnknown(iUnknown, null)
                 );
             }
-
             finally
             {
                 Marshal.Release(iUnknown);
@@ -159,7 +157,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetTypedObjectForIUnknown(ptr, type)
                 );
             }
-
             finally
             {
                 Marshal.Release(ptr);
@@ -204,7 +201,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetTypedObjectForIUnknown(ptr, type)
                 );
             }
-
             finally
             {
                 Marshal.Release(ptr);
@@ -230,7 +226,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetTypedObjectForIUnknown(ptr, o.GetType())
                 );
             }
-
             finally
             {
                 Marshal.Release(ptr);

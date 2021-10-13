@@ -40,7 +40,6 @@ namespace System.Web.Http
             {
                 return await base.SendAsync(request, cancellationToken);
             }
-
             finally
             {
                 Thread.CurrentPrincipal = originalPrincipal;

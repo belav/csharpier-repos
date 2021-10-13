@@ -61,7 +61,6 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             {
                 return _valueTaskSource.GetResult(token);
             }
-
             finally
             {
                 if (isValid)
@@ -78,7 +77,6 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             {
                 _valueTaskSource.GetResult(token);
             }
-
             finally
             {
                 if (isValid)

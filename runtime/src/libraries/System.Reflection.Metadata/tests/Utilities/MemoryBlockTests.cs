@@ -89,7 +89,6 @@ namespace System.Reflection.Metadata.Tests
                 DecoderIsUsedCorrectly();
                 LightUpTrickFromDifferentAssemblyWorks();
             }
-
             finally
             {
                 EncodingHelper.TestOnly_LightUpEnabled = true;

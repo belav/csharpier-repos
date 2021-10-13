@@ -39,7 +39,6 @@ namespace System.Reflection
                         FillName(&nativeName, null, isVersionDefined, false, isTokenDefined);
                     }
                 }
-
                 finally
                 {
                     RuntimeMarshal.FreeAssemblyName(ref nativeName, false);
@@ -154,7 +153,6 @@ namespace System.Reflection
                     aname.FillName(&nativeName, codebase, true, false, true);
                     return aname;
                 }
-
                 finally
                 {
                     RuntimeMarshal.FreeAssemblyName(ref nativeName, false);

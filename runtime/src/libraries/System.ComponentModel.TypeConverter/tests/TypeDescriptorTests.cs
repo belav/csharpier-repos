@@ -79,7 +79,6 @@ namespace System.ComponentModel.Tests
                 mockProvider1.Verify(p => p.GetCache(instance), Times.Once());
                 mockProvider2.Verify(p => p.GetCache(instance), Times.Once());
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -155,7 +154,6 @@ namespace System.ComponentModel.Tests
                 mockProvider1.Verify(p => p.GetCache(type), Times.Never());
                 mockProvider2.Verify(p => p.GetCache(type), Times.Never());
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -264,7 +262,6 @@ namespace System.ComponentModel.Tests
                 mockProvider1.Verify(p => p.GetCache(instance), Times.Once());
                 mockProvider2.Verify(p => p.GetCache(instance), Times.Once());
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -340,7 +337,6 @@ namespace System.ComponentModel.Tests
                 mockProvider1.Verify(p => p.GetCache(type), Times.Never());
                 mockProvider2.Verify(p => p.GetCache(type), Times.Never());
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -617,7 +613,6 @@ namespace System.ComponentModel.Tests
                 TypeDescriptor.RemoveProvider(mockProvider2.Object, instance);
                 Assert.Equal(3, callCount);
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -643,7 +638,6 @@ namespace System.ComponentModel.Tests
                 TypeDescriptor.RemoveProvider(mockProvider.Object, instance);
                 Assert.Equal(1, callCount);
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -723,7 +717,6 @@ namespace System.ComponentModel.Tests
                 TypeDescriptor.RemoveProvider(mockProvider2.Object, type);
                 Assert.Equal(4, callCount);
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -751,7 +744,6 @@ namespace System.ComponentModel.Tests
                 TypeDescriptor.RemoveProvider(mockProvider.Object, type);
                 Assert.Equal(1, callCount);
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -864,7 +856,6 @@ namespace System.ComponentModel.Tests
                 TypeDescriptor.RemoveProviderTransparent(mockProvider2.Object, instance);
                 Assert.Equal(3, callCount);
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -890,7 +881,6 @@ namespace System.ComponentModel.Tests
                 TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, instance);
                 Assert.Equal(1, callCount);
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -970,7 +960,6 @@ namespace System.ComponentModel.Tests
                 TypeDescriptor.RemoveProviderTransparent(mockProvider2.Object, type);
                 Assert.Equal(4, callCount);
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;
@@ -998,7 +987,6 @@ namespace System.ComponentModel.Tests
                 TypeDescriptor.RemoveProviderTransparent(mockProvider.Object, type);
                 Assert.Equal(1, callCount);
             }
-
             finally
             {
                 TypeDescriptor.Refreshed -= handler;

@@ -1399,7 +1399,6 @@ class C1
                 var text = await getTextTask;
                 Assert.NotEmpty(text.ToString());
             }
-
             finally
             {
                 file.Close();
@@ -1430,7 +1429,6 @@ class C1
                 var text = await doc.GetTextAsync();
                 Assert.Empty(text.ToString());
             }
-
             finally
             {
                 file.Close();

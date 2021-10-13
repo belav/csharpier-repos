@@ -44,7 +44,6 @@ namespace System.Threading
                 WaitSubsystem.ResetEvent(waitHandle.DangerousGetHandle());
                 return true;
             }
-
             finally
             {
                 waitHandle.DangerousRelease();
@@ -59,7 +58,6 @@ namespace System.Threading
                 WaitSubsystem.SetEvent(waitHandle.DangerousGetHandle());
                 return true;
             }
-
             finally
             {
                 waitHandle.DangerousRelease();
@@ -74,7 +72,6 @@ namespace System.Threading
                 WaitSubsystem.SetEvent(waitHandle.DangerousGetHandle());
                 return true;
             }
-
             finally
             {
                 waitHandle.DangerousRelease();

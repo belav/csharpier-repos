@@ -158,7 +158,6 @@ namespace System.Net
                     }
                 }
             }
-
             finally
             {
                 // free unmanaged buffer

@@ -613,7 +613,6 @@ namespace System.ServiceProcess
                     }
                 }
             }
-
             finally
             {
                 // Free the pointer to the name of the service on the unmanaged heap.

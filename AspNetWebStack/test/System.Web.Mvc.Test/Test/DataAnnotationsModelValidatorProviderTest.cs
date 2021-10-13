@@ -95,7 +95,6 @@ namespace System.Web.Mvc.Test
                 var validator = factory(metadata, context, attribute);
                 Assert.IsType<MyValidationAttributeAdapter>(validator);
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.AttributeFactories = oldFactories;
@@ -187,7 +186,6 @@ namespace System.Web.Mvc.Test
                     DataAnnotationsModelValidatorProvider.AttributeFactories.Values.Single()
                 );
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.AttributeFactories = oldFactories;
@@ -253,7 +251,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 Assert.IsType<MyDefaultValidationAttributeAdapter>(result);
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.DefaultAttributeFactory = oldFactory;
@@ -315,7 +312,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 Assert.Same(validator, result);
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.DefaultAttributeFactory = oldFactory;
@@ -401,7 +397,6 @@ namespace System.Web.Mvc.Test
                 var validator = factory(metadata, context);
                 Assert.IsType<MyValidatableAdapter>(validator);
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.ValidatableFactories = oldFactories;
@@ -493,7 +488,6 @@ namespace System.Web.Mvc.Test
                     DataAnnotationsModelValidatorProvider.ValidatableFactories.Values.Single()
                 );
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.ValidatableFactories = oldFactories;
@@ -563,7 +557,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 Assert.IsType<MyValidatableAdapter>(result);
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.DefaultValidatableFactory = oldFactory;
@@ -633,7 +626,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 Assert.Same(validator, result);
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.DefaultValidatableFactory = oldFactory;
@@ -910,7 +902,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 Assert.Empty(validators);
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes =

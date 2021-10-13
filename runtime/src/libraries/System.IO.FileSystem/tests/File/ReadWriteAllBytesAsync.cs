@@ -162,7 +162,6 @@ namespace System.IO.Tests
                             await File.WriteAllBytesAsync(path, Encoding.UTF8.GetBytes("text"))
                     );
             }
-
             finally
             {
                 File.SetAttributes(path, FileAttributes.Normal);

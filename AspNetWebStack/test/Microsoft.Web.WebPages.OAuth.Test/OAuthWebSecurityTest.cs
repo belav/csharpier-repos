@@ -237,7 +237,6 @@ namespace Microsoft.Web.WebPages.OAuth.Test
                 Assert.Equal("OAuth", ticket.UserData);
                 Assert.False(ticket.IsPersistent);
             }
-
             finally
             {
                 OAuthWebSecurity.OAuthDataProvider = originalProvider;
@@ -270,7 +269,6 @@ namespace Microsoft.Web.WebPages.OAuth.Test
                 // Assert
                 Assert.False(successful);
             }
-
             finally
             {
                 OAuthWebSecurity.OAuthDataProvider = originalProvider;

@@ -294,7 +294,6 @@ namespace System.IO.MemoryMappedFiles.Tests
                                 Assert.Equal((byte)i, acc.ReadByte(i));
                             }
                         }
-
                         finally
                         {
                             acc.SafeMemoryMappedViewHandle.ReleasePointer();

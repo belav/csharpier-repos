@@ -221,7 +221,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     Generate(operation, model, builder);
                 }
             }
-
             finally
             {
                 Options = MigrationsSqlGenerationOptions.Default;

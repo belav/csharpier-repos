@@ -313,7 +313,6 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                     .ConfigureAwait(false);
                 return (project, location);
             }
-
             finally
             {
                 await _progress.ItemCompletedAsync().ConfigureAwait(false);

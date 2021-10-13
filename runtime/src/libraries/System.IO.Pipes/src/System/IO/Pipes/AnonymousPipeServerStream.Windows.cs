@@ -93,7 +93,6 @@ namespace System.IO.Pipes
                     );
                 }
             }
-
             finally
             {
                 if (pinningHandle.IsAllocated)

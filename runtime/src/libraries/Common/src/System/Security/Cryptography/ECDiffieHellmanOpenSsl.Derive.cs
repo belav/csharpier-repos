@@ -215,7 +215,6 @@ namespace System.Security.Cryptography
                         }
                     }
                 }
-
                 finally
                 {
                     theirKey?.Dispose();

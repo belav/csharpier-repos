@@ -488,7 +488,6 @@ namespace System.Net.WebSockets
                 }
                 CleanUp();
             }
-
             finally
             {
                 ReleaseLocks(ref thisLockTaken, ref sessionHandleLockTaken);
@@ -1050,7 +1049,6 @@ namespace System.Net.WebSockets
                             FinishOnCloseCompleted();
                         }
                     }
-
                     finally
                     {
                         _sendOutstandingOperationHelper.CompleteOperation(
@@ -1111,7 +1109,6 @@ namespace System.Net.WebSockets
 
                 _isDisposed = true;
             }
-
             finally
             {
                 ReleaseLocks(ref thisLockTaken, ref sessionHandleLockTaken);
@@ -1646,7 +1643,6 @@ namespace System.Net.WebSockets
                             await thisPtr._keepAliveTask!.SuppressContextFlow();
                         }
                     }
-
                     finally
                     {
                         if (!lockTaken)
@@ -1834,7 +1830,6 @@ namespace System.Net.WebSockets
                                                 ReceiveResult.CloseStatusDescription
                                             );
                                         }
-
                                         finally
                                         {
                                             if (thisLockTaken)
@@ -1915,7 +1910,6 @@ namespace System.Net.WebSockets
                                             );
                                         }
                                     }
-
                                     finally
                                     {
                                         WebSocketProtocolComponent.WebSocketCompleteAction(
@@ -2035,7 +2029,6 @@ namespace System.Net.WebSockets
                                             _webSocket._keepAliveTracker.OnDataSent();
                                         }
                                     }
-
                                     finally
                                     {
                                         WebSocketProtocolComponent.WebSocketCompleteAction(
@@ -2072,7 +2065,6 @@ namespace System.Net.WebSockets
                         Monitor.Enter(_webSocket.SessionHandle, ref sessionHandleLockTaken);
                     }
                 }
-
                 finally
                 {
                     Cleanup();
@@ -2284,7 +2276,6 @@ namespace System.Net.WebSockets
 
                         _webSocket.UpdateReceiveState(newReceiveState, _receiveState);
                     }
-
                     finally
                     {
                         WebSocketProtocolComponent.WebSocketCompleteAction(

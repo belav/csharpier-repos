@@ -144,7 +144,6 @@ namespace System.Text.Json
                                 ref state
                             );
                         }
-
                         finally
                         {
                             if (state.PendingAsyncDisposables?.Count > 0)

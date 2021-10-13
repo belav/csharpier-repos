@@ -97,7 +97,6 @@ namespace System.Net.NetworkInformation
                             _autoConfigActive = ipPerAdapterInfo.autoconfigActive;
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(buffer);

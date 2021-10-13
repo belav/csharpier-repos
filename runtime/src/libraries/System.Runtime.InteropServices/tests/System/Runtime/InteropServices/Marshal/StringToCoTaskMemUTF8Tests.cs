@@ -45,7 +45,6 @@ namespace System.Runtime.InteropServices.Tests
                 // Make sure the native memory roundtrips.
                 Assert.Equal(s, Marshal.PtrToStringUTF8(ptr));
             }
-
             finally
             {
                 Marshal.ZeroFreeCoTaskMemUTF8(ptr);

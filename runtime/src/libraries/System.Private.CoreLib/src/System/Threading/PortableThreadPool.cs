@@ -167,7 +167,6 @@ namespace System.Threading
 
                 return true;
             }
-
             finally
             {
                 _maxMinThreadLock.Release();
@@ -224,7 +223,6 @@ namespace System.Threading
 
                 return true;
             }
-
             finally
             {
                 _maxMinThreadLock.Release();
@@ -372,7 +370,6 @@ namespace System.Threading
                     _currentSampleStartTime = endTime;
                 }
             }
-
             finally
             {
                 hillClimbingThreadAdjustmentLock.Release();

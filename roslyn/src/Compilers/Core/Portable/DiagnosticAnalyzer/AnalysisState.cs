@@ -513,7 +513,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             return pendingEvents.ToImmutableArray();
                         }
                     }
-
                     finally
                     {
                         Free(pendingEvents);
@@ -588,7 +587,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 uniqueEvents.IntersectWith(pendingEvents);
                 return uniqueEvents.ToImmutableArray();
             }
-
             finally
             {
                 Free(pendingEvents);

@@ -490,7 +490,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         : sig.ParameterTypesWithAnnotations;
                     madeChanges |= paramsTransformed;
                 }
-
                 finally
                 {
                     paramsBuilder.Free();

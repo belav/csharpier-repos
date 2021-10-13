@@ -195,7 +195,6 @@ namespace Microsoft.AspNetCore.Antiforgery
 
                 return new string(chars, startIndex: 0, length: outputLength);
             }
-
             finally
             {
                 _pool.Return(serializationContext);

@@ -92,7 +92,6 @@ namespace Microsoft.AspNetCore.Routing
                         break;
                     }
                 }
-
                 finally
                 {
                     if (context.Handler == null)

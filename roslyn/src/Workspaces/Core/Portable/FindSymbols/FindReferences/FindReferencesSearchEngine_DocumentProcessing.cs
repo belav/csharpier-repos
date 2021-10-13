@@ -33,7 +33,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     await ProcessDocumentAsync(document, model, group, symbol, finder)
                         .ConfigureAwait(false);
             }
-
             finally
             {
                 FindReferenceCache.Stop(model);
@@ -82,7 +81,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         await HandleLocationAsync(group, symbol, location).ConfigureAwait(false);
                     }
                 }
-
                 finally
                 {
                     await _progressTracker.ItemCompletedAsync().ConfigureAwait(false);

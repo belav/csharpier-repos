@@ -67,7 +67,6 @@ namespace System.Runtime.Loader
                         }
                     );
                 }
-
                 finally
                 {
                     // Reset the error write to the one used before

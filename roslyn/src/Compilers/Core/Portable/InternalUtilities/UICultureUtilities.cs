@@ -166,7 +166,6 @@ namespace Roslyn.Utilities
                     {
                         action();
                     }
-
                     finally
                     {
                         s_setCurrentUICulture(currentCulture);
@@ -197,7 +196,6 @@ namespace Roslyn.Utilities
                     {
                         action(param);
                     }
-
                     finally
                     {
                         s_setCurrentUICulture(currentCulture);
@@ -228,7 +226,6 @@ namespace Roslyn.Utilities
                     {
                         return func();
                     }
-
                     finally
                     {
                         s_setCurrentUICulture(currentCulture);

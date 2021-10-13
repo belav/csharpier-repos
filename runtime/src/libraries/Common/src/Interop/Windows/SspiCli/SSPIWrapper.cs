@@ -53,7 +53,6 @@ namespace System.Net
 
                             secModule.SecurityPackages = securityPackages;
                         }
-
                         finally
                         {
                             arrayBaseHandle?.Dispose();

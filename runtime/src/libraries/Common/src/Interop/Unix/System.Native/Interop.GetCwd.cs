@@ -44,7 +44,6 @@ internal static partial class Interop
                         }
                     }
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(buf);

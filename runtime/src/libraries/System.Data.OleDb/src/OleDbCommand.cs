@@ -715,7 +715,6 @@ namespace System.Data.OleDb
                         // has a datareader to track for it being closed
                         state = ODB.InternalStateOpen;
                     }
-
                     finally
                     {
                         if (ODB.InternalStateOpen != state)
@@ -751,7 +750,6 @@ namespace System.Data.OleDb
                             );
                         }
                     }
-
                     finally
                     {
                         try
@@ -782,7 +780,6 @@ namespace System.Data.OleDb
                     }
                 }
             }
-
             finally
             { // finally clear executing state
                 try
@@ -876,7 +873,6 @@ namespace System.Data.OleDb
                     retcode = ExecuteCommandTextForSingleRow(dbParams!, out executeResult);
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -1081,7 +1077,6 @@ namespace System.Data.OleDb
                                         out executeResult
                                     );
                                 }
-
                                 finally
                                 {
                                     if (mustRelease)
@@ -1119,7 +1114,6 @@ namespace System.Data.OleDb
                     }
                 }
             }
-
             finally
             {
                 if (mustReleaseStringHandle)

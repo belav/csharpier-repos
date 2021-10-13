@@ -68,7 +68,6 @@ namespace JitTest
                             throw new Exception();
                         }
                     }
-
                     finally
                     {
                         if (runHandler)

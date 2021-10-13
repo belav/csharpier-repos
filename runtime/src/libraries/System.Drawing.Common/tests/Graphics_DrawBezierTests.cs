@@ -309,7 +309,6 @@ namespace System.Drawing.Tests
                             )
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -438,7 +437,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawBeziers(pen, new PointF[2])
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();

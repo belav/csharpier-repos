@@ -185,7 +185,6 @@ namespace System.IO
                 buffer.CopyTo(new Span<char>(array));
                 Write(array, 0, buffer.Length);
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(array);
@@ -380,7 +379,6 @@ namespace System.IO
                 buffer.CopyTo(new Span<char>(array));
                 WriteLine(array, 0, buffer.Length);
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(array);

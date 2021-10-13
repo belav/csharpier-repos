@@ -39,7 +39,6 @@ namespace System.IO.Tests
                 Assert.Equal(4, bs.Position);
                 Assert.Equal(0, ms.Position);
             }
-
             finally
             {
                 await bw.DisposeAsync();
@@ -57,7 +56,6 @@ namespace System.IO.Tests
             {
                 bw.Write(42);
             }
-
             finally
             {
                 await bw.DisposeAsync();
@@ -74,7 +72,6 @@ namespace System.IO.Tests
             {
                 bw.Write(42);
             }
-
             finally
             {
                 Assert.False(bw.DisposeInvoked);
@@ -92,7 +89,6 @@ namespace System.IO.Tests
             {
                 bw.Write(42);
             }
-
             finally
             {
                 Assert.False(bw.DisposeInvoked);

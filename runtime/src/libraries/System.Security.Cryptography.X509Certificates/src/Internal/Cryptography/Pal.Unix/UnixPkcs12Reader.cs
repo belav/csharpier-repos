@@ -803,7 +803,6 @@ namespace Internal.Cryptography.Pal
 
                     return LoadKey(decrypted.AsMemory());
                 }
-
                 finally
                 {
                     CryptoPool.Return(decrypted.Array!, clearSize: decrypted.Count);

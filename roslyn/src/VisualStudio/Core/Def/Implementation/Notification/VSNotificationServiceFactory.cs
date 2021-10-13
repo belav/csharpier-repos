@@ -85,7 +85,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
                             pnResult: out var dialogResult
                         );
                     }
-
                     finally
                     {
                         // if ShowMessageBox() throws we need to ensure that the UI isn't forever stuck in a modal state
@@ -121,7 +120,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
                     // The dialogResult is 6 when the Yes button is clicked.
                     return dialogResult == 6;
                 }
-
                 finally
                 {
                     // if ShowMessageBox() throws we need to ensure that the UI isn't forever stuck in a modal state

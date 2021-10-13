@@ -223,7 +223,6 @@ namespace System.ComponentModel.Composition
 
                 Assert.Equal<object>(scheduler, importer.TaskScheduler);
             }
-
             finally
             {
                 Marshal.ReleaseComObject(scheduler);
@@ -250,7 +249,6 @@ namespace System.ComponentModel.Composition
 
                 Assert.Equal<object>(scheduler, importer.TaskScheduler.Value);
             }
-
             finally
             {
                 Marshal.ReleaseComObject(scheduler);

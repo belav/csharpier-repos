@@ -59,21 +59,18 @@ class ThrowInFinallyTest
                     _trace.Write("5");
                     throw new Exception("A");
                 }
-
                 finally
                 {
                     _trace.Write("6");
                     throw new Exception("B");
                 }
             }
-
             finally
             {
                 _trace.Write("7");
                 throw new Exception("C");
             }
         }
-
         finally
         {
             _trace.Write("8");

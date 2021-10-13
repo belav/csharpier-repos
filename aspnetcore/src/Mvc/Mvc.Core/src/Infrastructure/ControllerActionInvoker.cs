@@ -508,7 +508,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         stopwatch.GetElapsedTime()
                     );
                 }
-
                 finally
                 {
                     diagnosticListener.AfterControllerActionMethod(

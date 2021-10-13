@@ -565,7 +565,6 @@ namespace System.Diagnostics.Tracing
                         (IntPtr)descriptors
                     );
                 }
-
                 finally
                 {
                     WriteCleanup(pins, pinCount);

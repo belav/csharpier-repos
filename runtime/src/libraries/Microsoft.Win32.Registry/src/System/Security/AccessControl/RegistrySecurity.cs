@@ -222,7 +222,6 @@ namespace System.Security.AccessControl
                 Persist(hKey, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-
             finally
             {
                 WriteUnlock();

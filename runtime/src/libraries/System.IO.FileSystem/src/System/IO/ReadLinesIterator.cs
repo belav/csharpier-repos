@@ -82,7 +82,6 @@ namespace System.IO
                     }
                 }
             }
-
             finally
             {
                 _reader = null!;

@@ -429,7 +429,6 @@ namespace Microsoft.CodeAnalysis
 
                 return builder.ToImmutable();
             }
-
             finally
             {
                 builder.Free();

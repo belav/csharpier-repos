@@ -267,7 +267,6 @@ namespace System.Drawing
                 // to avoid the object being collected and therefore the delegates would be collected as well.
                 GC.KeepAlive(sh);
             }
-
             finally
             {
                 if (nativeEncoderParams != IntPtr.Zero)
@@ -319,7 +318,6 @@ namespace System.Drawing
                 ret.ConvertFromMemory(palette_data);
                 return ret;
             }
-
             finally
             {
                 Marshal.FreeHGlobal(palette_data);
@@ -343,7 +341,6 @@ namespace System.Drawing
                 int st = Gdip.GdipSetImagePalette(nativeImage, palette_data);
                 Gdip.CheckStatus(st);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(palette_data);

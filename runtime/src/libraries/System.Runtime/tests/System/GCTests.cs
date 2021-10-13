@@ -462,7 +462,6 @@ namespace System.Tests
                 GCSettings.LargeObjectHeapCompactionMode = value;
                 Assert.Equal(value, GCSettings.LargeObjectHeapCompactionMode);
             }
-
             finally
             {
                 GCSettings.LargeObjectHeapCompactionMode = orig;
@@ -482,7 +481,6 @@ namespace System.Tests
                 GCSettings.LatencyMode = value;
                 Assert.Equal(value, GCSettings.LatencyMode);
             }
-
             finally
             {
                 GCSettings.LatencyMode = orig;
@@ -1057,7 +1055,6 @@ namespace System.Tests
 
                             scenario = null;
                         }
-
                         finally
                         {
                             if (scenario != null)

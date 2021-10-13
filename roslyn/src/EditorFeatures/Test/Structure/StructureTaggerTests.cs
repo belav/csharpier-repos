@@ -194,7 +194,6 @@ End Module";
             {
                 return view.TextSnapshot.LineCount;
             }
-
             finally
             {
                 view.Close();

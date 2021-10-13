@@ -614,7 +614,6 @@ namespace System.Security.Cryptography.Xml
                 hashInputStream = SignedXmlDebugLog.LogReferenceData(this, hashInputStream);
                 hashval = _hashAlgorithm.ComputeHash(hashInputStream);
             }
-
             finally
             {
                 if (hashInputStream != null)

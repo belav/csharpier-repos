@@ -339,7 +339,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     hasSuggestedItemOptions
                 );
             }
-
             finally
             {
                 // Don't call ClearAndFree, which resets the capacity to a default value.

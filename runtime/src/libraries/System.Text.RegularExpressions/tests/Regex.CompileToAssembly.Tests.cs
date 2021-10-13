@@ -231,7 +231,6 @@ namespace System.Text.RegularExpressions.Tests
                     new AssemblyName(assemblyName)
                 );
             }
-
             finally
             {
                 Environment.CurrentDirectory = cwd;

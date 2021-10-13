@@ -38,7 +38,6 @@ public class AA
                     {
                         bool local3 = false;
                     }
-
                     finally
                     {
                         char local4 = '\x5d';

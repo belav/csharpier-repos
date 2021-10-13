@@ -93,7 +93,6 @@ namespace System.IO
                         throw new ArgumentException(SR.Argument_UnmanagedMemAccessorWrapAround);
                     }
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -149,7 +148,6 @@ namespace System.IO
                     _buffer.AcquirePointer(ref pointer);
                     result = *((byte*)(pointer + _offset + position));
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -177,7 +175,6 @@ namespace System.IO
                     _buffer.AcquirePointer(ref pointer);
                     result = Unsafe.ReadUnaligned<short>(pointer + _offset + position);
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -203,7 +200,6 @@ namespace System.IO
                     _buffer.AcquirePointer(ref pointer);
                     result = Unsafe.ReadUnaligned<int>(pointer + _offset + position);
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -229,7 +225,6 @@ namespace System.IO
                     _buffer.AcquirePointer(ref pointer);
                     result = Unsafe.ReadUnaligned<long>(pointer + _offset + position);
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -265,7 +260,6 @@ namespace System.IO
                     hi = Unsafe.ReadUnaligned<int>(pointer + 8);
                     flags = Unsafe.ReadUnaligned<int>(pointer + 12);
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -449,7 +443,6 @@ namespace System.IO
                     _buffer.AcquirePointer(ref pointer);
                     *((byte*)(pointer + _offset + position)) = value;
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -474,7 +467,6 @@ namespace System.IO
                     _buffer.AcquirePointer(ref pointer);
                     Unsafe.WriteUnaligned<short>(pointer + _offset + position, value);
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -497,7 +489,6 @@ namespace System.IO
                     _buffer.AcquirePointer(ref pointer);
                     Unsafe.WriteUnaligned<int>(pointer + _offset + position, value);
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -520,7 +511,6 @@ namespace System.IO
                     _buffer.AcquirePointer(ref pointer);
                     Unsafe.WriteUnaligned<long>(pointer + _offset + position, value);
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -551,7 +541,6 @@ namespace System.IO
                     Unsafe.WriteUnaligned<int>(pointer + 8, bits[2]);
                     Unsafe.WriteUnaligned<int>(pointer + 12, bits[3]);
                 }
-
                 finally
                 {
                     if (pointer != null)

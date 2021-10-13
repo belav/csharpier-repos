@@ -207,7 +207,6 @@ namespace Microsoft.CodeAnalysis.SymbolDisplay
                     preferNumericValueOrExpandedFlags
                 );
             }
-
             finally
             {
                 allFieldsAndValues.Free();

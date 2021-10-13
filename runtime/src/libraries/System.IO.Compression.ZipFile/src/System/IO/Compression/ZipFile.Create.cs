@@ -504,7 +504,6 @@ namespace System.IO.Compression
                             )
                         );
                 }
-
                 finally
                 {
                     ArrayPool<char>.Shared.Return(entryNameBuffer);

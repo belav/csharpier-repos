@@ -108,7 +108,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
 
                 ScreenshotService.TakeScreenshot(Path.Combine(logDir, $"{baseFileName}.png"));
             }
-
             finally
             {
                 s_inHandler = false;

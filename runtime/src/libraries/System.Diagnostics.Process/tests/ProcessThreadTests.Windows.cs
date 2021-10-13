@@ -52,7 +52,6 @@ namespace System.Diagnostics.Tests
                         Assert.Equal(ThreadPriorityLevel.AboveNormal, targetThread.PriorityLevel);
                     }
                 }
-
                 finally
                 {
                     // Allow the thread to exit

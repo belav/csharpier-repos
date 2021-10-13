@@ -178,7 +178,6 @@ namespace System.Data
                     new CollectionChangeEventArgs(CollectionChangeAction.Add, table)
                 );
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -210,7 +209,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -505,7 +503,6 @@ namespace System.Data
 
                 return true;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -539,7 +536,6 @@ namespace System.Data
 
                 OnCollectionChanged(s_refreshEventArgs);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -864,7 +860,6 @@ namespace System.Data
                     new CollectionChangeEventArgs(CollectionChangeAction.Remove, table)
                 );
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -890,7 +885,6 @@ namespace System.Data
                 }
                 Remove(dt);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -916,7 +910,6 @@ namespace System.Data
                 }
                 Remove(dt);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);

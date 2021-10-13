@@ -692,7 +692,6 @@ namespace System.DirectoryServices.AccountManagement
                             }
                         }
                     }
-
                     finally
                     {
                         if (disposeMemberDE && memberDE != null)
@@ -1614,7 +1613,6 @@ namespace System.DirectoryServices.AccountManagement
                     _disposed = true;
                 }
             }
-
             finally
             {
                 base.Dispose();

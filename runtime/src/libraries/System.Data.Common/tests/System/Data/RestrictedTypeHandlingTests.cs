@@ -236,7 +236,6 @@ namespace System.Data.Tests
                 Assert.Equal("MyColumn", table.Columns[0].ColumnName);
                 Assert.Equal(typeof(MyCustomClass), table.Columns[0].DataType);
             }
-
             finally
             {
                 AppDomain.CurrentDomain.SetData(AppDomainDataSetDefaultAllowedTypesKey, null);

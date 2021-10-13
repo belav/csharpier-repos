@@ -47,7 +47,6 @@ namespace System.Threading
                     }
                 }
             }
-
             finally
             {
                 Interlocked.Decrement(ref _spinningThreadCount);

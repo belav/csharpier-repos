@@ -1109,7 +1109,6 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         this
                     );
                 }
-
                 finally
                 {
                     ClearReservation();

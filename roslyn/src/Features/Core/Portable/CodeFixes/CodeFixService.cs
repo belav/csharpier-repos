@@ -704,7 +704,6 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                         return;
                 }
             }
-
             finally
             {
                 foreach (var pooledSet in uniqueDiagosticToEquivalenceKeysMap.Values)

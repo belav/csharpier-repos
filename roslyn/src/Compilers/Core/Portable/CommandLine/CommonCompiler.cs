@@ -1326,7 +1326,6 @@ namespace Microsoft.CodeAnalysis
                             );
                         }
                     }
-
                     finally
                     {
                         analyzerOptionsBuilder?.Free();
@@ -1585,7 +1584,6 @@ namespace Microsoft.CodeAnalysis
                             }
                         }
                     }
-
                     finally
                     {
                         moduleBeingBuilt.CompilationFinished();
@@ -1665,7 +1663,6 @@ namespace Microsoft.CodeAnalysis
                     return;
                 }
             }
-
             finally
             {
                 sourceLinkStreamDisposerOpt?.Dispose();

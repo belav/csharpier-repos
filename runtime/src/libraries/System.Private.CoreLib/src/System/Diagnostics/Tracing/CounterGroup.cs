@@ -193,7 +193,6 @@ namespace System.Diagnostics.Tracing
                 s_pollingThreadSleepEvent!.Set();
 #if ES_BUILD_STANDALONE
                 }
-
                 finally
                 {
                     // Restore the current ExecutionContext

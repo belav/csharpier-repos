@@ -23,7 +23,6 @@ namespace Test
             {
                 //.....
             }
-
             finally
             {
                 long local8 = 230l;

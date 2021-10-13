@@ -122,7 +122,6 @@ namespace System.IO.Tests
                         () => Write(path, new string[] { "text" })
                     );
             }
-
             finally
             {
                 File.SetAttributes(path, FileAttributes.Normal);
@@ -317,7 +316,6 @@ namespace System.IO.Tests
                         () => Write(path, new string[] { "text" })
                     );
             }
-
             finally
             {
                 File.SetAttributes(path, FileAttributes.Normal);

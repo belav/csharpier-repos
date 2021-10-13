@@ -90,7 +90,6 @@ namespace Microsoft.CodeAnalysis
                     {
                         tempStream.Dispose();
                     }
-
                     finally
                     {
                         try
@@ -228,7 +227,6 @@ namespace Microsoft.CodeAnalysis
                         }
                     }
                 }
-
                 finally
                 {
                     Close();

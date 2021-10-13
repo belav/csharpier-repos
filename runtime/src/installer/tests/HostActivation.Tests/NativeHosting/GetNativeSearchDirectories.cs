@@ -149,7 +149,6 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         $"Error initializing the dependency resolver: An error occurred while parsing: {depsJsonFile}"
                     );
             }
-
             finally
             {
                 FileUtils.DeleteFileIfPossible(depsJsonFile);

@@ -100,7 +100,6 @@ namespace Microsoft.AspNetCore.DataProtection.StackExchangeRedis
                     Assert.Contains(elements, e => e.Name == "HelloRedis" && e.Value == guid);
                 }
             }
-
             finally
             {
                 // cleanup

@@ -326,7 +326,6 @@ public class ReliabilityFramework
                     Environment.FailFast(err, e);
             }
         }
-
         finally
         {
             rf._logger.WriteToInstrumentationLog(
@@ -793,7 +792,6 @@ public class ReliabilityFramework
                     "A fatal error has occurred, will not continue starting tests..."
                 );
             }
-
             finally
             {
                 Thread.CurrentThread.Join();
@@ -833,7 +831,6 @@ public class ReliabilityFramework
             {
                 Console.WriteLine("MyDebugBreak called, stopping process... {0}", extraData);
             }
-
             finally
             {
                 s_fNoExit = true;
@@ -2071,7 +2068,6 @@ public class ReliabilityFramework
                             }
                         }
                     }
-
 #else
                         if (
                             _curTestSet.AppDomainLoaderMode == AppDomainLoaderMode.FullIsolation

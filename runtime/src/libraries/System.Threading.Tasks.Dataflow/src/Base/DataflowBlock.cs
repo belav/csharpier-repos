@@ -2748,7 +2748,6 @@ namespace System.Threading.Tasks.Dataflow
                         }
                         return -1;
                     }
-
                     finally
                     {
                         // Unlink from the source.  This could throw if the block is faulty,

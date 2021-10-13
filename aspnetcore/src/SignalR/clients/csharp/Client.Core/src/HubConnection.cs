@@ -593,7 +593,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
                     }
                 }
             }
-
             finally
             {
                 _state.ReleaseConnectionLock();
@@ -678,7 +677,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
                         Log.UnableToSendCancellation(_logger, irq.InvocationId);
                     }
                 }
-
                 finally
                 {
                     _state.ReleaseConnectionLock();
@@ -732,7 +730,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
                 LaunchStreams(connectionState, readers, cancellationToken);
             }
-
             finally
             {
                 _state.ReleaseConnectionLock();
@@ -988,7 +985,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
                 LaunchStreams(connectionState, readers, cancellationToken);
             }
-
             finally
             {
                 _state.ReleaseConnectionLock();
@@ -1147,7 +1143,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
                 LaunchStreams(connectionState, readers, cancellationToken);
             }
-
             finally
             {
                 _state.ReleaseConnectionLock();
@@ -1177,7 +1172,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
 
                 await SendHubMessage(connectionState, message, cancellationToken);
             }
-
             finally
             {
                 _state.ReleaseConnectionLock();
@@ -1410,7 +1404,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
                                 );
                             }
                         }
-
                         finally
                         {
                             input.AdvanceTo(consumed, examined);
@@ -1559,7 +1552,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
                             break;
                         }
                     }
-
                     finally
                     {
                         // The buffer was sliced up to where it was consumed, so we can just advance to the start.
@@ -1638,7 +1630,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
                     _state.ReconnectTask = ReconnectAsync(connectionState.CloseException);
                 }
             }
-
             finally
             {
                 _state.ReleaseConnectionLock();
@@ -1749,7 +1740,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
                             )
                         );
                     }
-
                     finally
                     {
                         _state.ReleaseConnectionLock();
@@ -1839,7 +1829,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
                     $"Reconnect retries have been exhausted after {previousReconnectAttempts} failed attempts and {elapsedTime} elapsed. Disconnecting.";
                 CompleteClose(new OperationCanceledException(message));
             }
-
             finally
             {
                 _state.ReleaseConnectionLock();
@@ -2307,7 +2296,6 @@ namespace Microsoft.AspNetCore.SignalR.Client
                             await _hubConnection.SendHubMessage(this, PingMessage.Instance);
                         }
                     }
-
                     finally
                     {
                         _hubConnection._state.ReleaseConnectionLock();

@@ -65,7 +65,6 @@ namespace Internal.Cryptography.Pal.Windows
                             out exception
                         );
                     }
-
                     finally
                     {
                         if (cek != null)

@@ -376,7 +376,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     }
                 }
             }
-
             finally
             {
                 SharedPools.Default<StringBuilder>().ClearAndFree(builder);

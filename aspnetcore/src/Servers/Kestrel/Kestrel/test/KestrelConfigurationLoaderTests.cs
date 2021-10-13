@@ -306,7 +306,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
                 Assert.True(ran1);
                 Assert.NotNull(serverOptions.DefaultCertificate);
             }
-
             finally
             {
                 if (File.Exists(GetCertificatePath()))
@@ -576,7 +575,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
 
                 Assert.Null(serverOptions.DefaultCertificate);
             }
-
             finally
             {
                 if (File.Exists(GetCertificatePath()))
@@ -612,7 +610,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Tests
 
                 Assert.Null(serverOptions.DefaultCertificate);
             }
-
             finally
             {
                 if (File.Exists(GetCertificatePath()))

@@ -1765,7 +1765,6 @@ namespace System.Xml
 
                     _writer.Flush();
                 }
-
                 finally
                 {
                     try
@@ -1779,7 +1778,6 @@ namespace System.Xml
                             _writer.Close();
                         }
                     }
-
                     finally
                     {
                         _currentState = State.Closed;

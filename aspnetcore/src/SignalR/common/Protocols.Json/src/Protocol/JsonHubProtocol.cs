@@ -610,7 +610,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 writer.Flush();
                 Debug.Assert(writer.CurrentDepth == 0);
             }
-
             finally
             {
                 ReusableUtf8JsonWriter.Return(reusableWriter);

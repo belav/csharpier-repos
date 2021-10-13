@@ -202,7 +202,6 @@ namespace Microsoft.DotNet.Cli.CommandLine
                     }
                 }
             }
-
             finally
             {
                 arguments?.Dispose();

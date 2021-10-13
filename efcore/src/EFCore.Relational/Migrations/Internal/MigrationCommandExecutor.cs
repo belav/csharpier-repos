@@ -74,13 +74,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
 
                         transaction?.Commit();
                     }
-
                     finally
                     {
                         transaction?.Dispose();
                     }
                 }
-
                 finally
                 {
                     connection.Close();
@@ -147,7 +145,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                             await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
                         }
                     }
-
                     finally
                     {
                         if (transaction != null)
@@ -156,13 +153,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         }
                     }
                 }
-
                 finally
                 {
                     await connection.CloseAsync().ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 await transactionScope.DisposeAsyncIfAvailable().ConfigureAwait(false);

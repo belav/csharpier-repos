@@ -38,7 +38,6 @@ namespace System.IO.Ports.Tests
                             com.Close();
                         }
                     }
-
                     finally
                     {
                         cts.Cancel();

@@ -55,7 +55,6 @@ class GoryNativePastTest
         {
             bar();
         }
-
         finally
         {
             _trace.Write("3");

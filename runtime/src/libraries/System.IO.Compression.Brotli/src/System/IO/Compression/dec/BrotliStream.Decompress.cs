@@ -291,7 +291,6 @@ namespace System.IO.Compression
 
                 return totalWritten;
             }
-
             finally
             {
                 AsyncOperationCompleting();

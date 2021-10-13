@@ -304,7 +304,6 @@ namespace System.Drawing
                     throw new Win32Exception();
                 }
             }
-
             finally
             {
                 Interop.User32.ReleaseDC(IntPtr.Zero, screenDC);

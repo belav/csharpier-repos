@@ -152,7 +152,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     await host.StopAsync().DefaultTimeout();
                 }
             }
-
             finally
             {
                 Delete(path);
@@ -259,7 +258,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     await host.StopAsync().DefaultTimeout();
                 }
             }
-
             finally
             {
                 Delete(path);

@@ -102,13 +102,11 @@ namespace System.DirectoryServices.Interop
 #pragma warning restore 612, 618
                         }
                     }
-
                     finally
                     {
                         VariantClear(addr);
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeCoTaskMem(addr);

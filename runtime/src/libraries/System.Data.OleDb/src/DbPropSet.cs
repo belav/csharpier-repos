@@ -27,7 +27,6 @@ namespace System.Data.OleDb
             IntPtr countOfBytes = (IntPtr)(propertysetCount * ODB.SizeOf_tagDBPROPSET);
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 base.handle = SafeNativeMethods.CoTaskMemAlloc(countOfBytes);
@@ -222,7 +221,6 @@ namespace System.Data.OleDb
                     Marshal.PtrToStructure(ptr, properties[i]);
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -270,7 +268,6 @@ namespace System.Data.OleDb
 
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }
-
                 finally
                 {
                     // must allocate and clear the memory without interruption
@@ -311,7 +308,6 @@ namespace System.Data.OleDb
                     );
                 }
             }
-
             finally
             {
                 if (mustRelease)

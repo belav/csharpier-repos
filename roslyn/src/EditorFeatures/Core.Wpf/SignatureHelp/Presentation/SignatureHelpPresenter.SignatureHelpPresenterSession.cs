@@ -115,7 +115,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                         _editorSessionOpt.SelectedSignature = defaultValue;
                     }
                 }
-
                 finally
                 {
                     _ignoreSelectionStatusChangedEvent = false;

@@ -113,7 +113,6 @@ namespace System.Web.Mvc
             {
                 base.Render(writer);
             }
-
             finally
             {
                 Writer = null;
@@ -157,7 +156,6 @@ namespace System.Web.Mvc
                                 true /* preserveForm */
                             );
                         }
-
                         finally
                         {
                             // Restore the original _nextId in case this isn't actually the outermost view, since resetting
@@ -171,7 +169,6 @@ namespace System.Web.Mvc
                     }
                 }
             }
-
             finally
             {
                 if (createdSwitchWriter)

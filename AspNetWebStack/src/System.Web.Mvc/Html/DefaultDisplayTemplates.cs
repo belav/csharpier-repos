@@ -145,7 +145,6 @@ namespace System.Web.Mvc.Html
 
                 return result.ToString();
             }
-
             finally
             {
                 html.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = oldPrefix;

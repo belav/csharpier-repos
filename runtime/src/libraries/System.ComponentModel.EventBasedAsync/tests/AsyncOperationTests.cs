@@ -150,7 +150,6 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                     () => operation.PostOperationCompleted(null, state)
                 );
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(orignal);

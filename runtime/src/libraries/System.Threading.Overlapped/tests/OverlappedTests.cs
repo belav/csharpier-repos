@@ -94,7 +94,6 @@ public static partial class OverlappedTests
                 () => ov.Pack(new IOCompletionCallback(callback), null)
             );
         }
-
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -119,7 +118,6 @@ public static partial class OverlappedTests
                 () => ov.Pack(new IOCompletionCallback(callback))
             );
         }
-
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -143,7 +141,6 @@ public static partial class OverlappedTests
             Overlapped ov1 = Overlapped.Unpack(nativeOverlapped);
             Assert.Same(ov, ov1);
         }
-
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -168,7 +165,6 @@ public static partial class OverlappedTests
 
             Assert.True(helper.Wait());
         }
-
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -193,7 +189,6 @@ public static partial class OverlappedTests
 
             Assert.True(helper.Wait());
         }
-
         finally
         {
             Overlapped.Free(nativeOverlapped);
@@ -232,7 +227,6 @@ internal class AsyncHelper
         {
             this._event.Set();
         }
-
         finally
         {
             Overlapped.Free(_overlapped);

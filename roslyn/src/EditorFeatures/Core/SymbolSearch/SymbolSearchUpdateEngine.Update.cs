@@ -471,7 +471,6 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                                         .ConfigureAwait(false);
                                 }
                             }
-
                             finally
                             {
                                 // Try to delete the temp file if it is still around.

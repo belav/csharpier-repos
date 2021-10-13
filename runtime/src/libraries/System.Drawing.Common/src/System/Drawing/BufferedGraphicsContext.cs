@@ -99,7 +99,6 @@ namespace System.Drawing
                 tempBuffer = tempContext.AllocBuffer(targetGraphics, targetDC, targetRectangle);
                 tempBuffer.DisposeContext = true;
             }
-
             finally
             {
                 if (

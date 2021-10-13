@@ -139,7 +139,6 @@ namespace Internal.Cryptography
                 Reset();
                 return unpaddedLength;
             }
-
             finally
             {
                 if (rentedCiphertext != null)
@@ -170,7 +169,6 @@ namespace Internal.Cryptography
                         );
                         return rented.AsSpan(0, written).ToArray();
                     }
-
                     finally
                     {
                         CryptoPool.Return(rented, clearSize: written);

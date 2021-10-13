@@ -108,7 +108,6 @@ namespace System.Drawing.Printing
                     ? PrintLoopOptimized(document)
                     : PrintLoop(document);
             }
-
             finally
             {
                 try
@@ -116,7 +115,6 @@ namespace System.Drawing.Printing
                     document.OnEndPrint(printEvent);
                     printEvent.Cancel = canceled | printEvent.Cancel;
                 }
-
                 finally
                 {
                     OnEndPrint(document, printEvent);
@@ -153,7 +151,6 @@ namespace System.Drawing.Printing
                     document.OnPrintPage(pageEvent);
                     OnEndPage(document, pageEvent);
                 }
-
                 finally
                 {
                     pageEvent.Dispose();
@@ -217,7 +214,6 @@ namespace System.Drawing.Printing
                     document.OnPrintPage(pageEvent);
                     OnEndPage(document, pageEvent);
                 }
-
                 finally
                 {
                     pageEvent.Graphics!.Dispose();

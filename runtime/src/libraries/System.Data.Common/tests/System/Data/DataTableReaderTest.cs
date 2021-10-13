@@ -62,7 +62,6 @@ namespace System.Data.Tests
 
                 Assert.Equal(2, i);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -84,7 +83,6 @@ namespace System.Data.Tests
                         _dt.Rows[1].Delete();
                         string value = reader[1].ToString();
                     }
-
                     finally
                     {
                         if (reader != null && !reader.IsClosed)
@@ -106,7 +104,6 @@ namespace System.Data.Tests
                 string value = reader[0].ToString();
                 Assert.Equal("3", value);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -126,7 +123,6 @@ namespace System.Data.Tests
                 string value = reader[1].ToString();
                 Assert.Equal("mono changed", value);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -164,7 +160,6 @@ namespace System.Data.Tests
                     schema.Rows[0]["DataType"].ToString()
                 );
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -195,7 +190,6 @@ namespace System.Data.Tests
 
                 Assert.Equal(5, i);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -220,7 +214,6 @@ namespace System.Data.Tests
                 Assert.Equal(333, reader.GetInt32(ordinal));
                 Assert.Equal("Int32", reader.GetDataTypeName(ordinal));
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -243,7 +236,6 @@ namespace System.Data.Tests
                         reader.Close();
                         reader.Read();
                     }
-
                     finally
                     {
                         if (reader != null && !reader.IsClosed)
@@ -261,7 +253,6 @@ namespace System.Data.Tests
             {
                 Assert.Equal(1, reader.GetOrdinal("name"));
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -284,7 +275,6 @@ namespace System.Data.Tests
                 Assert.False(reader.Read());
                 Assert.False(reader.NextResult());
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -304,7 +294,6 @@ namespace System.Data.Tests
                     {
                         reader.Read();
                     }
-
                     finally
                     {
                         if (reader != null && !reader.IsClosed)
@@ -327,7 +316,6 @@ namespace System.Data.Tests
                         reader.Close();
                         reader.Read();
                     }
-
                     finally
                     {
                         if (reader != null && !reader.IsClosed)
@@ -350,7 +338,6 @@ namespace System.Data.Tests
                         reader.Close();
                         _ = (int)reader[0];
                     }
-
                     finally
                     {
                         if (reader != null && !reader.IsClosed)
@@ -371,7 +358,6 @@ namespace System.Data.Tests
                     {
                         _ = (int)reader[0];
                     }
-
                     finally
                     {
                         if (reader != null && !reader.IsClosed)
@@ -393,7 +379,6 @@ namespace System.Data.Tests
                         reader.Read();
                         _ = (int)reader[90]; // kidding, ;-)
                     }
-
                     finally
                     {
                         if (reader != null && !reader.IsClosed)
@@ -420,7 +405,6 @@ namespace System.Data.Tests
 
                 Assert.Equal(2, reader.GetInt32(0));
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -443,7 +427,6 @@ namespace System.Data.Tests
                 _dt.Rows.Add(new object[] { 4, "mono 4" }); // should not affect the counter
                 Assert.Equal(2, (int)reader[0]);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -466,7 +449,6 @@ namespace System.Data.Tests
                 _dt.Rows.Add(new object[] { 4, "mono 4" }); // should not affect the counter
                 Assert.Equal(2, (int)reader[0]);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -486,7 +468,6 @@ namespace System.Data.Tests
                 _dt.AcceptChanges();
                 Assert.Equal(2, (int)reader[0]);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -506,7 +487,6 @@ namespace System.Data.Tests
                 _dt.AcceptChanges(); // accept the action
                 Assert.Equal(1, (int)reader[0]);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -528,7 +508,6 @@ namespace System.Data.Tests
                         _dt.AcceptChanges(); // accept the action
                         Assert.Equal(2, (int)reader[0]);
                     }
-
                     finally
                     {
                         if (reader != null && !reader.IsClosed)
@@ -551,7 +530,6 @@ namespace System.Data.Tests
                 _dt.AcceptChanges(); // accept the action
                 Assert.Equal(2, (int)reader[0]);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -592,7 +570,6 @@ namespace System.Data.Tests
                 success = reader.Read();
                 Assert.True(success);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)
@@ -628,7 +605,6 @@ namespace System.Data.Tests
 
                 Assert.Equal(5, (int)reader[0]);
             }
-
             finally
             {
                 if (reader != null && !reader.IsClosed)

@@ -84,7 +84,6 @@ namespace System.Net.Http.Functional.Tests
                             await ValidateClientCancellationAsync(() => resp);
                         }
                     }
-
                     finally
                     {
                         serverRelease.SetResult(true);

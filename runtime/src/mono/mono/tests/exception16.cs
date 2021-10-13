@@ -15,7 +15,6 @@ public class TestTryFinally
             // Illegal conversion; o contains a string not an int
             i = (int)o;
         }
-
         finally
         {
             Console.WriteLine("i = {0}", i);
@@ -31,7 +30,6 @@ public class TestTryFinally
             {
                 TrivialMain();
             }
-
             finally
             {
                 Console.WriteLine("cleaning up");

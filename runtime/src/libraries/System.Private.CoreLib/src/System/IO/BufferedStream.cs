@@ -223,14 +223,12 @@ namespace System.IO
                     {
                         Flush();
                     }
-
                     finally
                     {
                         _stream.Dispose();
                     }
                 }
             }
-
             finally
             {
                 _stream = null;
@@ -252,14 +250,12 @@ namespace System.IO
                     {
                         await FlushAsync().ConfigureAwait(false);
                     }
-
                     finally
                     {
                         await _stream.DisposeAsync().ConfigureAwait(false);
                     }
                 }
             }
-
             finally
             {
                 _stream = null;
@@ -367,7 +363,6 @@ namespace System.IO
                 // There was nothing in the buffer:
                 Debug.Assert(_writePos == 0 && _readPos == _readLen);
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();
@@ -664,7 +659,6 @@ namespace System.IO
                           : Task.FromException<int>(error);
                     }
                 }
-
                 finally
                 {
                     if (completeSynchronously) // if this is FALSE, we will be entering ReadFromUnderlyingStreamAsync and releasing there.
@@ -711,7 +705,6 @@ namespace System.IO
                         return new ValueTask<int>(bytesFromBuffer);
                     }
                 }
-
                 finally
                 {
                     if (completeSynchronously) // if this is FALSE, we will be entering ReadFromUnderlyingStreamAsync and releasing there.
@@ -793,7 +786,6 @@ namespace System.IO
                 bytesFromBuffer = ReadFromBuffer(buffer.Span);
                 return bytesAlreadySatisfied + bytesFromBuffer;
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();
@@ -1133,7 +1125,6 @@ namespace System.IO
                         return default;
                     }
                 }
-
                 finally
                 {
                     if (completeSynchronously) // if this is FALSE, we will be entering WriteToUnderlyingStreamAsync and releasing there.
@@ -1246,7 +1237,6 @@ namespace System.IO
                     await _stream.WriteAsync(buffer, cancellationToken).ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();
@@ -1462,7 +1452,6 @@ namespace System.IO
                 await _stream.CopyToAsync(destination, bufferSize, cancellationToken)
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 _asyncActiveSemaphore.Release();

@@ -304,7 +304,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.False(HasEphemeralKey(foundCert2));
             }
-
             finally
             {
                 if (createdCert != null)

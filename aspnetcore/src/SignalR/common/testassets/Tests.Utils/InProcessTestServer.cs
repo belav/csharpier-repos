@@ -174,7 +174,6 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 _extraDisposable?.Dispose();
                 _logger.LogInformation("Start shutting down test server");
             }
-
             finally
             {
                 await _host.StopAsync();

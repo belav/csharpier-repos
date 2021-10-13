@@ -544,7 +544,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                         events.Add(name, eventDesc);
                     }
                 }
-
                 finally
                 {
                     if (funcDescHandleToRelease != IntPtr.Zero)
@@ -574,7 +573,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                         return Marshal.GetObjectForIUnknown(typeInfoPtr) as ComTypes.ITypeInfo;
                     }
                 }
-
                 finally
                 {
                     if (typeInfoPtr != IntPtr.Zero)
@@ -708,7 +706,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                         getItem = method;
                     }
                 }
-
                 finally
                 {
                     if (funcDescHandleToRelease != IntPtr.Zero)

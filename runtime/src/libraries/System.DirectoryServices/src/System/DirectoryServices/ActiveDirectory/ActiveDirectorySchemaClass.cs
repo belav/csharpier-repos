@@ -452,7 +452,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             _schema = schemaObject;
                         }
                     }
-
                     finally
                     {
                         if (schemaRoleOwner != null)

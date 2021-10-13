@@ -448,7 +448,6 @@ namespace System.Security.Cryptography.Pkcs
 
                 return writer.Encode();
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(encryptedSpan);

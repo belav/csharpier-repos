@@ -778,7 +778,6 @@ namespace System.Web.Http.WebHost
                 // return a non-faulted task.
                 SetEmptyErrorResponse(httpResponseBase);
             }
-
             finally
             {
                 // Dispose the temporary HttpResponseMessage carrying the error response

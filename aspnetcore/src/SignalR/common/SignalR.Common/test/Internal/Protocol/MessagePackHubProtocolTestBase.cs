@@ -919,7 +919,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                 stream.Write(input);
                 return stream.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(stream);
@@ -934,7 +933,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                 HubProtocol.WriteMessage(message, writer);
                 return writer.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);

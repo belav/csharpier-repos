@@ -122,7 +122,6 @@ namespace System.Security.Cryptography
                             }
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(namePtr);
@@ -196,7 +195,6 @@ namespace System.Security.Cryptography
                                 );
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(namePtr);
@@ -294,7 +292,6 @@ namespace System.Security.Cryptography
                                 );
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(namePtr);

@@ -118,7 +118,6 @@ namespace CseTest
                 }
 #if TRY
             }
-
             finally
             {
 #endif
@@ -205,7 +204,6 @@ namespace CseTest
             {
                 ans = input;
             }
-
             finally
             {
                 if (verbose)

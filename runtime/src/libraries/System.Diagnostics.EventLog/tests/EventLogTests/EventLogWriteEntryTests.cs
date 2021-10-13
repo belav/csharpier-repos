@@ -219,7 +219,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(eventLogEntry.TimeWritten, eventLogEntry.TimeGenerated);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -250,7 +249,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(EventLogEntryType.Warning, eventLogEntry.EntryType);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -281,7 +279,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal((int)eventInstance.InstanceId, eventLogEntry.InstanceId);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -328,7 +325,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal("(" + eventLogEntry.CategoryNumber + ")", eventLogEntry.Category);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -371,7 +367,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(rawData, eventLogEntry.Data);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -428,7 +423,6 @@ namespace System.Diagnostics.Tests
                 if (eventLogEntry != null)
                     Assert.All(insertStrings, message => eventLogEntry.Message.Contains(message));
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -457,7 +451,6 @@ namespace System.Diagnostics.Tests
                 if (eventLogEntry != null)
                     Assert.Equal(rawData, eventLogEntry.Data);
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -500,7 +493,6 @@ namespace System.Diagnostics.Tests
                 Helpers.Retry(() => EventLog.WriteEvent(source, eventInstance, rawData, null));
                 Assert.Equal("Application", EventLog.LogNameFromSourceName(source, "."));
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);

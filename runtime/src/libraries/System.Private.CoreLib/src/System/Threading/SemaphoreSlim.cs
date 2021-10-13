@@ -425,7 +425,6 @@ namespace System.Threading
                     }
                 }
             }
-
             finally
             {
                 // Release the lock

@@ -55,7 +55,6 @@ namespace System.Net
                 else
                     ((ICloseEx)this).CloseEx(CloseExState.Abort | CloseExState.Silent);
             }
-
             finally
             {
                 base.Dispose(disposing);
@@ -86,7 +85,6 @@ namespace System.Net
                     else
                         _networkStream.Close(0);
                 }
-
                 finally
                 {
                     _request.DataStreamClosed(closeState);
@@ -261,7 +259,6 @@ namespace System.Net
 
                 return (int)result;
             }
-
             finally
             {
                 CheckError();
@@ -294,7 +291,6 @@ namespace System.Net
             {
                 _networkStream.EndWrite(asyncResult);
             }
-
             finally
             {
                 CheckError();

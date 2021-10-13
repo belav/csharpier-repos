@@ -254,7 +254,6 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     }
                 }
             }
-
             finally
             {
                 localVariableNames = localVariableNamesBuilder.ToImmutableAndFree();

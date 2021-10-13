@@ -100,7 +100,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 HandshakeProtocol.WriteResponseMessage(HandshakeResponseMessage.Empty, output);
                 response = output.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(output);
@@ -172,7 +171,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         return null;
                     }
                 }
-
                 finally
                 {
                     Application.Input.AdvanceTo(consumed);

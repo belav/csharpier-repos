@@ -231,7 +231,6 @@ namespace Systen.Net.Mail.Tests
                 {
                     socket.Shutdown(SocketShutdown.Both);
                 }
-
                 finally
                 {
                     socket?.Close();

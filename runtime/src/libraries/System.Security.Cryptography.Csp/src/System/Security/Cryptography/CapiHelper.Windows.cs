@@ -478,7 +478,6 @@ namespace Internal.NativeCrypto
                         throw GetErrorCode().ToCryptographicException();
                     }
                 }
-
                 finally
                 {
                     if (password != IntPtr.Zero)
@@ -662,7 +661,6 @@ namespace Internal.NativeCrypto
                     }
                 }
             }
-
             finally
             {
                 safeKeyHandle.Dispose();
@@ -1800,7 +1798,6 @@ namespace Internal.NativeCrypto
                 pbKey = new byte[cbKey];
                 Buffer.BlockCopy(rgbKey, 0, pbKey, 0, cbKey);
             }
-
             finally
             {
                 hKey?.Dispose();
@@ -1881,7 +1878,6 @@ namespace Internal.NativeCrypto
                 Array.Reverse(key_out);
                 cb_out = i;
             }
-
             finally
             {
                 hPubKey?.Dispose();
@@ -1952,7 +1948,6 @@ namespace Internal.NativeCrypto
                 hHash = null;
                 return hHashPermanent;
             }
-
             finally
             {
                 if (hHash != null)

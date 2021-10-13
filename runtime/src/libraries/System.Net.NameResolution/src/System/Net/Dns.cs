@@ -905,7 +905,6 @@ namespace System.Net
                     result = await ((Task<T>)task).ConfigureAwait(false);
                     return result;
                 }
-
                 finally
                 {
                     NameResolutionTelemetry.Log.AfterResolution(
@@ -988,7 +987,6 @@ namespace System.Net
                         {
                             return func(key);
                         }
-
                         finally
                         {
                             // When the work is done, remove this key/task pair from the dictionary if this is still the current task.

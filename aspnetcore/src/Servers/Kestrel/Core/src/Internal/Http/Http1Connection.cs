@@ -244,7 +244,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                 return result;
             }
-
             finally
             {
                 _remainingRequestHeadersBytesAllowed -= reader.Consumed - alreadyConsumed;
@@ -278,7 +277,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
                     return true;
                 }
-
                 finally
                 {
                     _remainingRequestHeadersBytesAllowed -= trimmedReader.Consumed;

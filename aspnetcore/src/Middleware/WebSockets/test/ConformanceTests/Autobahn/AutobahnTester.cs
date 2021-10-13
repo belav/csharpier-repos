@@ -69,7 +69,6 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
 
                 pingCts.Cancel();
             }
-
             finally
             {
                 if (File.Exists(specFile))

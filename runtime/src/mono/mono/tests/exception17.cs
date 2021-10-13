@@ -10,7 +10,6 @@ public class main
         {
             throw exc;
         }
-
         finally
         {
             throw exc;
@@ -34,7 +33,6 @@ public class main
             {
                 throw exc;
             }
-
             finally
             {
                 catcher1();

@@ -367,7 +367,6 @@ namespace Microsoft.Web.Helpers.Test
                 // Assert
                 Assert.Equal(@"/WebSite1/world/test.aspx", builder.Path);
             }
-
             finally
             {
                 RestoreHttpRuntime();

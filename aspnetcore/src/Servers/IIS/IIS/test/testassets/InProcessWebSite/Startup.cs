@@ -141,7 +141,6 @@ namespace TestSite
                 context.RequestAborted.WaitHandle.WaitOne();
                 return Task.CompletedTask;
             }
-
             finally
             {
                 Interlocked.Decrement(ref _waitingRequestCount);

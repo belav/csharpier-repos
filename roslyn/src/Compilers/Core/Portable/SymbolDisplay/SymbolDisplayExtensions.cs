@@ -46,7 +46,6 @@ namespace Microsoft.CodeAnalysis
 
                 return actualBuilder.ToString();
             }
-
             finally
             {
                 pool.Free();

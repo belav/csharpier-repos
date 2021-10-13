@@ -53,7 +53,6 @@ namespace System.Threading
                     releaseCount
                 );
             }
-
             finally
             {
                 waitHandle.DangerousRelease();

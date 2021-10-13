@@ -220,7 +220,6 @@ namespace System.Security.Cryptography
                                 destination
                             );
                         }
-
                         finally
                         {
                             CryptographicOperations.ZeroMemory(buf);
@@ -454,7 +453,6 @@ namespace System.Security.Cryptography
                             lastBlock.AsSpan().CopyTo(destination.AsSpan(written));
                             return written + lastBlock.Length;
                         }
-
                         finally
                         {
                             CryptoPool.Return(sourceRent, sourceLength);
@@ -516,7 +514,6 @@ namespace System.Security.Cryptography
                         destination
                     );
                 }
-
                 finally
                 {
                     if (rented != null)
@@ -581,7 +578,6 @@ namespace System.Security.Cryptography
                         {
                             return Decrypt(cipher, key, iv, encryptedData, destination);
                         }
-
                         finally
                         {
                             CryptographicOperations.ZeroMemory(key);
@@ -894,7 +890,6 @@ namespace System.Security.Cryptography
                 // 4 & 5 together are "use CBC with what eventually became called PKCS7 padding"
                 return Decrypt(cipher, k, iv, encryptedData, destination);
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(dk);
@@ -949,7 +944,6 @@ namespace System.Security.Cryptography
 
                 return Decrypt(cipher, key, iv, encryptedData, destination);
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(key);
@@ -1010,7 +1004,6 @@ namespace System.Security.Cryptography
                         return writeOffset + tmpEnd.Length;
                     }
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(tmpKey);

@@ -513,7 +513,6 @@ class C
 
             TestValidate(configDir, silent, CrasherClass.Crashers[testNum].Validator);
         }
-
         finally
         {
             Cleanup(configDir);

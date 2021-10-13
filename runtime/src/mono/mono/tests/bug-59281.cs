@@ -23,7 +23,6 @@ class Driver
                         idx = WaitHandle.WaitAny(mutexes);
                         Console.WriteLine($"Thread 1 iter: {i} with mutex: {idx}");
                     }
-
                     finally
                     {
                         if (idx != -1)
@@ -49,7 +48,6 @@ class Driver
                         idx = WaitHandle.WaitAny(mutexes);
                         Console.WriteLine($"Thread 2 iter: {i} with mutex: {idx}");
                     }
-
                     finally
                     {
                         if (idx != -1)

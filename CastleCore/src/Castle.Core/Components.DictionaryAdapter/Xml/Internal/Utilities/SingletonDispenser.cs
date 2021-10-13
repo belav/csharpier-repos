@@ -58,7 +58,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     return true;
                 }
             }
-
             finally
             {
                 locker.ExitReadLock();
@@ -79,14 +78,12 @@ namespace Castle.Components.DictionaryAdapter.Xml
                         items[key] = item = new ManualResetEvent(false);
                         return false;
                     }
-
                     finally
                     {
                         locker.ExitWriteLock();
                     }
                 }
             }
-
             finally
             {
                 locker.ExitUpgradeableReadLock();
@@ -104,7 +101,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
             {
                 return (TItem)items[key];
             }
-
             finally
             {
                 locker.ExitReadLock();
@@ -122,7 +118,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
             {
                 items[key] = result;
             }
-
             finally
             {
                 locker.ExitWriteLock();

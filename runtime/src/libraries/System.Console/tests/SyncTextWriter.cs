@@ -31,7 +31,6 @@ public class SyncTextWriter
             Console.Write("{0}", 32);
             Assert.True(newWriter.WriteFormatCalled);
         }
-
         finally
         {
             Console.SetOut(oldWriter);

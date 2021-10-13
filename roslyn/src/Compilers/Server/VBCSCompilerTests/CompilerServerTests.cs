@@ -178,7 +178,6 @@ End Module"
 
                 return func();
             }
-
             finally
             {
                 foreach (var variable in resetVariables)
@@ -318,7 +317,6 @@ End Module"
 
                 return (bytes, finalFlags);
             }
-
             finally
             {
                 File.Delete(srcFile);

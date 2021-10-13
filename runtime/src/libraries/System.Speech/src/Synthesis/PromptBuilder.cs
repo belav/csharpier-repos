@@ -790,7 +790,6 @@ namespace System.Speech.Synthesis
                 {
                     AppendSsml(new XmlTextReader(stream));
                 }
-
                 finally
                 {
                     s_resourceLoader.UnloadFile(localFile);

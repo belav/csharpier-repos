@@ -1117,7 +1117,6 @@ namespace System.Web.Mvc.Test
                 HttpContext.Current = context;
                 cache = engine.ViewLocationCache;
             }
-
             finally
             {
                 HttpContext.Current = savedContext;

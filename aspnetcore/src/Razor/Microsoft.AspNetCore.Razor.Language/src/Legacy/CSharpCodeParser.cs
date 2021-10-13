@@ -340,7 +340,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     var codeBlock = SyntaxFactory.CSharpCodeBlock(builder.ToList());
                     return codeBlock;
                 }
-
                 finally
                 {
                     // Always put current character back in the buffer for the next parser.
@@ -1403,7 +1402,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         directiveValue = rawValue;
                     }
                 }
-
                 finally
                 {
                     SpanContext.ChunkGenerator = chunkGeneratorFactory(
@@ -2009,7 +2007,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                             break;
                     }
                 }
-
                 finally
                 {
                     Context.ErrorSink = savedErrorSink;

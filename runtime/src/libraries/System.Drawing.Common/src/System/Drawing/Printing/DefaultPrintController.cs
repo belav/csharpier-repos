@@ -79,7 +79,6 @@ namespace System.Drawing.Printing
                 );
                 Debug.Assert(result == _dc.Hdc, "ResetDC didn't return the same handle I gave it");
             }
-
             finally
             {
                 Interop.Kernel32.GlobalUnlock(new HandleRef(this, _modeHandle));
@@ -140,7 +139,6 @@ namespace System.Drawing.Printing
                 if (result <= 0)
                     throw new Win32Exception();
             }
-
             finally
             {
                 _graphics.Dispose(); // Dispose of GDI+ Graphics; keep the DC
@@ -170,7 +168,6 @@ namespace System.Drawing.Printing
                     if (result <= 0)
                         throw new Win32Exception();
                 }
-
                 finally
                 {
                     _dc.Dispose();

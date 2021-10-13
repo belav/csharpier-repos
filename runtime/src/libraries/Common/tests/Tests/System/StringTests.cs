@@ -448,7 +448,6 @@ namespace System.Tests
                                     Volatile.Write(ref inputs[1], "def");
                                 }
                             }
-
                             finally
                             {
                                 cts.Cancel();

@@ -173,7 +173,6 @@ namespace System.Xml.Schema
                     }
                 }
             }
-
             finally
             { //Releasing locks in finally block
                 if (schemaIndex == _lockList.Count)

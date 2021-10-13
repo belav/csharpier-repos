@@ -92,7 +92,6 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                         return retVal;
                     }
                 }
-
                 finally
                 {
                     UnsafeBufferUtil.SecureZeroMemory(pbPasswordBuffer, cbPasswordBuffer);

@@ -52,7 +52,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             {
                 nextHandler();
             }
-
             finally
             {
                 this.TextView.TextBuffer.PostChanged += OnTextViewBufferPostChanged;

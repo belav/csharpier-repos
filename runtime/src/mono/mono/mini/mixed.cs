@@ -307,7 +307,6 @@ class Tests
         {
             JitClass.throw_ex();
         }
-
         finally
         {
             finally_called = true;
@@ -375,7 +374,6 @@ class Tests
                 JitClass.throw_ex();
                 return 3;
             }
-
             finally
             {
                 called_finally = true;

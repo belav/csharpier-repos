@@ -614,7 +614,6 @@ namespace System.Data.Common
                 }
                 schemaTable = GetSchemaTable(srcCommand);
             }
-
             finally
             {
                 if (closeConnection)

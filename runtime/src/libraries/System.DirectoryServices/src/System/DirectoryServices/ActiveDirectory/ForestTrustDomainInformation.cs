@@ -46,7 +46,6 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 DomainSid = Marshal.PtrToStringUni(ptr)!;
             }
-
             finally
             {
                 UnsafeNativeMethods.LocalFree(ptr);

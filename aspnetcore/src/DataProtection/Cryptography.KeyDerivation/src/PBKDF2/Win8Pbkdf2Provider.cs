@@ -127,7 +127,6 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                         prf
                     );
                 }
-
                 finally
                 {
                     UnsafeBufferUtil.SecureZeroMemory(pbPasswordBuffer, cbPasswordBuffer);
@@ -199,7 +198,6 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2
                             cbPasswordDigest
                         );
                     }
-
                     finally
                     {
                         UnsafeBufferUtil.SecureZeroMemory(pbPasswordDigest, cbPasswordDigest);

@@ -120,7 +120,6 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                     StorageDatabaseLogger.LogException(e);
                 }
             }
-
             finally
             {
                 _connectionPool.Dispose();

@@ -209,7 +209,6 @@ namespace System.Diagnostics
                                 logDisplayName = GetLogName(currentMachineName);
                         }
                     }
-
                     finally
                     {
                         logkey?.Close();
@@ -643,7 +642,6 @@ namespace System.Diagnostics
                     }
                 }
             }
-
             finally
             {
                 messageLibraries = null;
@@ -713,7 +711,6 @@ namespace System.Diagnostics
                 {
                     msg = EventLog.TryFormatMessage(hModule, messageNum, insertionStrings);
                 }
-
                 finally
                 {
                     if (!IsOpen)
@@ -1022,7 +1019,6 @@ namespace System.Diagnostics
                 if (lmkey != null)
                     return lmkey.OpenSubKey(EventLogKey, writable);
             }
-
             finally
             {
                 lmkey?.Close();
@@ -1054,7 +1050,6 @@ namespace System.Diagnostics
                         SR.Format(SR.MissingLog, logname, currentMachineName)
                     );
             }
-
             finally
             {
                 eventkey?.Close();
@@ -1078,7 +1073,6 @@ namespace System.Diagnostics
                 object val = logkey.GetValue(valuename);
                 return val;
             }
-
             finally
             {
                 logkey?.Close();
@@ -1414,7 +1408,6 @@ namespace System.Diagnostics
                             );
                     }
                 }
-
                 finally
                 {
                     if (mutex != null)
@@ -1597,7 +1590,6 @@ namespace System.Diagnostics
                     throw new Win32Exception();
                 }
             }
-
             finally
             {
                 // now free the pinned strings

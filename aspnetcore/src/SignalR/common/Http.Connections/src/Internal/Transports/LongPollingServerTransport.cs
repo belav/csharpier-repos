@@ -73,7 +73,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
                         _connection?.SendingToken ?? default
                     );
                 }
-
                 finally
                 {
                     _connection?.StopSendCancellation();

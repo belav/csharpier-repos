@@ -518,7 +518,6 @@ namespace Microsoft.CodeAnalysis.Host
                                 viewStream.Write(buffer, 0, count);
                             }
                         }
-
                         finally
                         {
                             SharedPools.ByteArray.Free(buffer);

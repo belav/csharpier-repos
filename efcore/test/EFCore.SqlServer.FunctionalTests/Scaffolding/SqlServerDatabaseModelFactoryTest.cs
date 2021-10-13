@@ -2841,7 +2841,6 @@ DROP TABLE PrincipalTable;"
                 Assert.NotNull(databaseModel);
                 asserter(databaseModel);
             }
-
             finally
             {
                 if (!string.IsNullOrEmpty(cleanupSql))

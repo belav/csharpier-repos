@@ -163,7 +163,6 @@ public class WindowsIdentityTests
                     () => WindowsIdentity.RunImpersonated(handle, () => { })
                 );
             }
-
             finally
             {
                 handle?.SetHandleAsInvalid();
@@ -256,7 +255,6 @@ public class WindowsIdentityTests
             IntPtr logonToken = token.DangerousGetHandle();
             ctorOrPropertyTest(logonToken);
         }
-
         finally
         {
             if (gotRef)

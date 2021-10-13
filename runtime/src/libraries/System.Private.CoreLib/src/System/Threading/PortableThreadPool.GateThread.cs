@@ -121,7 +121,6 @@ namespace System.Threading
                                     counts = oldCounts;
                                 }
                             }
-
                             finally
                             {
                                 hillClimbingThreadAdjustmentLock.Release();
@@ -218,7 +217,6 @@ namespace System.Threading
                     gateThread.UnsafeStart();
                     created = true;
                 }
-
                 finally
                 {
                     if (!created)

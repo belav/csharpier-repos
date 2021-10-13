@@ -323,7 +323,6 @@ namespace Microsoft.CSharp
                 _currentClass = dummyClass;
                 GenerateTypeMember(member, dummyClass);
             }
-
             finally
             {
                 _currentClass = null;
@@ -3033,7 +3032,6 @@ namespace Microsoft.CSharp
             {
                 return FromDom(options, e);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -3054,7 +3052,6 @@ namespace Microsoft.CSharp
             {
                 return FromFile(options, fileName);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -3075,7 +3072,6 @@ namespace Microsoft.CSharp
             {
                 return FromSource(options, source);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -3096,7 +3092,6 @@ namespace Microsoft.CSharp
             {
                 return FromSourceBatch(options, sources);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -3128,7 +3123,6 @@ namespace Microsoft.CSharp
 
                 return FromFileBatch(options, fileNames);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -3149,7 +3143,6 @@ namespace Microsoft.CSharp
             {
                 return FromDomBatch(options, ea);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -3327,7 +3320,6 @@ namespace Microsoft.CSharp
             {
                 GenerateType(e);
             }
-
             finally
             {
                 if (setLocal)
@@ -3360,7 +3352,6 @@ namespace Microsoft.CSharp
             {
                 GenerateExpression(e);
             }
-
             finally
             {
                 if (setLocal)
@@ -3400,7 +3391,6 @@ namespace Microsoft.CSharp
                     GenerateCompileUnit(e);
                 }
             }
-
             finally
             {
                 if (setLocal)
@@ -3433,7 +3423,6 @@ namespace Microsoft.CSharp
             {
                 GenerateNamespace(e);
             }
-
             finally
             {
                 if (setLocal)
@@ -3466,7 +3455,6 @@ namespace Microsoft.CSharp
             {
                 GenerateStatement(e);
             }
-
             finally
             {
                 if (setLocal)

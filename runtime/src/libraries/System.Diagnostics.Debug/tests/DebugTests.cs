@@ -54,7 +54,6 @@ namespace System.Diagnostics.Tests
                 test();
                 Assert.Equal(expectedOutput, WriteLogger.s_instance.LoggedOutput);
             }
-
             finally
             {
                 writeCoreHook.SetValue(null, originalWriteCoreHook);
@@ -97,7 +96,6 @@ namespace System.Diagnostics.Tests
                     );
                 }
             }
-
             finally
             {
                 writeCoreHook.SetValue(null, originalWriteCoreHook);

@@ -81,13 +81,11 @@ namespace System.Runtime.InteropServices.Tests
                 {
                     Assert.Equal(new Guid(guid), iidString);
                 }
-
                 finally
                 {
                     Marshal.Release(ppv);
                 }
             }
-
             finally
             {
                 Marshal.Release(ptr);
@@ -122,7 +120,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(IntPtr.Zero, ppv);
                 Assert.Equal(new Guid(iidString), iid);
             }
-
             finally
             {
                 Marshal.Release(ptr);

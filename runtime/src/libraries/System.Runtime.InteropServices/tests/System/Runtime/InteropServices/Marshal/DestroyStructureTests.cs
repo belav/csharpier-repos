@@ -23,7 +23,6 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.StructureToPtr(structure, ptr, fDeleteOld: false);
                 Marshal.DestroyStructure<TestStruct>(ptr);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(ptr);
@@ -42,7 +41,6 @@ namespace System.Runtime.InteropServices.Tests
                 Marshal.StructureToPtr(structure, ptr, fDeleteOld: false);
                 Marshal.DestroyStructure(ptr, typeof(TestStruct));
             }
-
             finally
             {
                 Marshal.FreeHGlobal(ptr);

@@ -177,7 +177,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.EnlistmentNotification != null);
                 enlistment.EnlistmentNotification.Prepare(enlistment.PreparingEnlistment);
             }
-
             finally
             {
                 Monitor.Enter(enlistment.Transaction);
@@ -256,7 +255,6 @@ namespace System.Transactions
                 );
                 spcCommitted = true;
             }
-
             finally
             {
                 if (!spcCommitted)
@@ -408,7 +406,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.EnlistmentNotification != null);
                 enlistment.EnlistmentNotification.Rollback(enlistment.SinglePhaseEnlistment);
             }
-
             finally
             {
                 Monitor.Enter(enlistment.Transaction);
@@ -453,7 +450,6 @@ namespace System.Transactions
                 // Forward the notification to the enlistment
                 enlistment.EnlistmentNotification.Commit(enlistment.Enlistment);
             }
-
             finally
             {
                 Monitor.Enter(enlistment.Transaction);
@@ -488,7 +484,6 @@ namespace System.Transactions
                 // Forward the notification to the enlistment
                 enlistment.EnlistmentNotification.InDoubt(enlistment.PreparingEnlistment);
             }
-
             finally
             {
                 Monitor.Enter(enlistment.Transaction);

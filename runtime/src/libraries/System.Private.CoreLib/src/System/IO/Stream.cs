@@ -73,7 +73,6 @@ namespace System.IO
                     destination.Write(buffer, 0, bytesRead);
                 }
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(buffer);
@@ -136,7 +135,6 @@ namespace System.IO
                             .ConfigureAwait(false);
                     }
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(buffer);
@@ -308,7 +306,6 @@ namespace System.IO
                             thisTask._count
                         );
                     }
-
                     finally
                     {
                         // If this implementation is part of Begin/EndXx, then the EndXx method will handle
@@ -369,7 +366,6 @@ namespace System.IO
             {
                 return readTask.GetAwaiter().GetResult(); // block until completion, then get result / propagate any exception
             }
-
             finally
             {
                 FinishTrackingAsyncOperation(readTask);
@@ -420,7 +416,6 @@ namespace System.IO
                     new ReadOnlySpan<byte>(localBuffer, 0, result).CopyTo(localDestination.Span);
                     return result;
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(localBuffer);
@@ -540,7 +535,6 @@ namespace System.IO
                         );
                         return 0; // not used, but signature requires a value be returned
                     }
-
                     finally
                     {
                         // If this implementation is part of Begin/EndXx, then the EndXx method will handle
@@ -661,7 +655,6 @@ namespace System.IO
                 writeTask.GetAwaiter().GetResult(); // block until completion, then propagate any exceptions
                 Debug.Assert(writeTask.Status == TaskStatus.RanToCompletion);
             }
-
             finally
             {
                 FinishTrackingAsyncOperation(writeTask);
@@ -820,7 +813,6 @@ namespace System.IO
             {
                 await writeTask.ConfigureAwait(false);
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(localBuffer);
@@ -878,7 +870,6 @@ namespace System.IO
                 new ReadOnlySpan<byte>(sharedBuffer, 0, numRead).CopyTo(buffer);
                 return numRead;
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(sharedBuffer);
@@ -902,7 +893,6 @@ namespace System.IO
                 buffer.CopyTo(sharedBuffer);
                 Write(sharedBuffer, 0, buffer.Length);
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(sharedBuffer);
@@ -1164,7 +1154,6 @@ namespace System.IO
                     {
                         _stream.Close();
                     }
-
                     finally
                     {
                         base.Dispose(true);
@@ -1184,7 +1173,6 @@ namespace System.IO
                             ((IDisposable)_stream).Dispose();
                         }
                     }
-
                     finally
                     {
                         base.Dispose(disposing);

@@ -1540,7 +1540,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         context
                     );
                 }
-
                 finally
                 {
                     parentCrossRef.Dispose();
@@ -1675,7 +1674,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         out count
                     );
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -1895,7 +1893,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 return tmpTrustList;
             }
-
             finally
             {
                 if (domains != (IntPtr)0)

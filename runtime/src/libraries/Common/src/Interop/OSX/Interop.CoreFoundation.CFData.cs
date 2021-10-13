@@ -35,7 +35,6 @@ internal static partial class Interop
                 cfData.DangerousAddRef(ref addedRef);
                 return CFDataDangerousGetSpan(cfData).ToArray();
             }
-
             finally
             {
                 if (addedRef)
@@ -76,7 +75,6 @@ internal static partial class Interop
                 bytesWritten = (int)length;
                 return true;
             }
-
             finally
             {
                 if (addedRef)

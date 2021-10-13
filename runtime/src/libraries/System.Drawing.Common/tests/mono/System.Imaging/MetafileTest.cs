@@ -251,7 +251,6 @@ namespace MonoTests.System.Drawing.Imaging
                         Metafile mf = new Metafile(hdc, type);
                         CheckEmptyHeader(mf, type);
                     }
-
                     finally
                     {
                         g.ReleaseHdc(hdc);
@@ -272,7 +271,6 @@ namespace MonoTests.System.Drawing.Imaging
                     Metafile mf = new Metafile(hdc, new Rectangle());
                     CheckEmptyHeader(mf, EmfType.EmfPlusDual);
                 }
-
                 finally
                 {
                     g.ReleaseHdc(hdc);
@@ -292,7 +290,6 @@ namespace MonoTests.System.Drawing.Imaging
                     Metafile mf = new Metafile(hdc, new RectangleF());
                     CheckEmptyHeader(mf, EmfType.EmfPlusDual);
                 }
-
                 finally
                 {
                     g.ReleaseHdc(hdc);
@@ -311,7 +308,6 @@ namespace MonoTests.System.Drawing.Imaging
                     Metafile mf = new Metafile(stream, hdc, type);
                     CheckEmptyHeader(mf, type);
                 }
-
                 finally
                 {
                     g.ReleaseHdc(hdc);
@@ -362,7 +358,6 @@ namespace MonoTests.System.Drawing.Imaging
                         mf = new Metafile(filename, hdc, type);
                         Assert.Equal(0, new FileInfo(filename).Length);
                     }
-
                     finally
                     {
                         g.ReleaseHdc(hdc);
@@ -402,7 +397,6 @@ namespace MonoTests.System.Drawing.Imaging
                 {
                     mf = new Metafile(hdc, EmfType.EmfPlusOnly);
                 }
-
                 finally
                 {
                     g.ReleaseHdc(hdc);
@@ -442,7 +436,6 @@ namespace MonoTests.System.Drawing.Imaging
                     {
                         mf = new Metafile(hdc, EmfType.EmfPlusOnly);
                     }
-
                     finally
                     {
                         g.ReleaseHdc(hdc);

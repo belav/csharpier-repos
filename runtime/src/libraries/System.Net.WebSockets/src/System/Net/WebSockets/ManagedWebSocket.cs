@@ -1597,7 +1597,6 @@ namespace System.Net.WebSockets
                         }
                     }
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(closeBuffer);
@@ -1660,7 +1659,6 @@ namespace System.Net.WebSockets
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 if (buffer != null)

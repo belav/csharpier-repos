@@ -65,7 +65,6 @@ public class Finally
                 stage++; //3
             }
         }
-
         finally
         {
             if (3 != stage)

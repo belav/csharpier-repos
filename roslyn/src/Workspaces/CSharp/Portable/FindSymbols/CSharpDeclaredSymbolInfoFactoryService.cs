@@ -73,7 +73,6 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                 Intern(stringTable, builder);
                 return builder.ToImmutableAndFree();
             }
-
             finally
             {
                 FreeAliasMapList(aliasMaps);

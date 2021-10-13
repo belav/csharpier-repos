@@ -130,7 +130,6 @@ namespace System.Runtime.InteropServices
                 pNativeHome = marshaler.ConvertToNative(ptr, Flags);
                 return readValueHelper(pNativeHome, ofs);
             }
-
             finally
             {
                 marshaler.ClearNative(pNativeHome);
@@ -215,7 +214,6 @@ namespace System.Runtime.InteropServices
                 writeValueHelper(pNativeHome, ofs, val);
                 marshaler.ConvertToManaged(ptr, pNativeHome);
             }
-
             finally
             {
                 marshaler.ClearNative(pNativeHome);

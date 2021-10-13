@@ -777,7 +777,6 @@ namespace System.Collections.Concurrent
                 _tables = newTables;
                 _budget = Math.Max(1, newTables._buckets.Length / newTables._locks.Length);
             }
-
             finally
             {
                 ReleaseLocks(0, locksAcquired);
@@ -837,7 +836,6 @@ namespace System.Collections.Concurrent
 
                 CopyToPairs(array, index);
             }
-
             finally
             {
                 ReleaseLocks(0, locksAcquired);
@@ -876,7 +874,6 @@ namespace System.Collections.Concurrent
                 CopyToPairs(array, 0);
                 return array;
             }
-
             finally
             {
                 ReleaseLocks(0, locksAcquired);
@@ -1134,7 +1131,6 @@ namespace System.Collections.Concurrent
                         resizeDesired = true;
                     }
                 }
-
                 finally
                 {
                     if (lockTaken)
@@ -1240,7 +1236,6 @@ namespace System.Collections.Concurrent
 
                     return GetCountInternal();
                 }
-
                 finally
                 {
                     // Release locks that have been acquired earlier
@@ -1652,7 +1647,6 @@ namespace System.Collections.Concurrent
 
                     return AreAllBucketsEmpty();
                 }
-
                 finally
                 {
                     // Release locks that have been acquired earlier
@@ -2083,7 +2077,6 @@ namespace System.Collections.Concurrent
                     nameof(array)
                 );
             }
-
             finally
             {
                 ReleaseLocks(0, locksAcquired);
@@ -2265,7 +2258,6 @@ namespace System.Collections.Concurrent
                 // Replace tables with the new versions
                 _tables = newTables;
             }
-
             finally
             {
                 // Release all locks that we took earlier
@@ -2316,7 +2308,6 @@ namespace System.Collections.Concurrent
                 {
                     Monitor.Enter(locks[i], ref lockTaken);
                 }
-
                 finally
                 {
                     if (lockTaken)
@@ -2369,7 +2360,6 @@ namespace System.Collections.Concurrent
 
                 return new ReadOnlyCollection<TKey>(keys);
             }
-
             finally
             {
                 ReleaseLocks(0, locksAcquired);
@@ -2404,7 +2394,6 @@ namespace System.Collections.Concurrent
 
                 return new ReadOnlyCollection<TValue>(values);
             }
-
             finally
             {
                 ReleaseLocks(0, locksAcquired);

@@ -364,7 +364,6 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
                 return null;
             }
-
             finally
             {
                 candidateHumpsOpt?.Free();

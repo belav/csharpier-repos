@@ -29,7 +29,6 @@ namespace System.Drawing.Tests
                         VerifyGraphics(graphicsCopy, graphicsCopy.VisibleClipBounds);
                     }
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -49,7 +48,6 @@ namespace System.Drawing.Tests
                 {
                     Assert.Equal(graphics1.GetHdc(), graphics2.GetHdc());
                 }
-
                 finally
                 {
                     graphics1.ReleaseHdc();
@@ -70,7 +68,6 @@ namespace System.Drawing.Tests
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.GetHdc());
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -478,7 +475,6 @@ namespace System.Drawing.Tests
                         () => graphics.CompositingMode = CompositingMode.SourceCopy
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -606,7 +602,6 @@ namespace System.Drawing.Tests
                         () => graphics.CompositingQuality = CompositingQuality.AssumeLinear
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -672,7 +667,6 @@ namespace System.Drawing.Tests
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.DpiX);
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -704,7 +698,6 @@ namespace System.Drawing.Tests
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.DpiX);
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -760,7 +753,6 @@ namespace System.Drawing.Tests
                         () => graphics.Flush(FlushIntention.Sync)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -851,7 +843,6 @@ namespace System.Drawing.Tests
                         () => graphics.InterpolationMode = InterpolationMode.HighQualityBilinear
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -920,7 +911,6 @@ namespace System.Drawing.Tests
                     Assert.Throws<InvalidOperationException>(() => graphics.PageScale);
                     Assert.Throws<InvalidOperationException>(() => graphics.PageScale = 10);
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1001,7 +991,6 @@ namespace System.Drawing.Tests
                         () => graphics.PageUnit = GraphicsUnit.Document
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1086,7 +1075,6 @@ namespace System.Drawing.Tests
                         () => graphics.PixelOffsetMode = PixelOffsetMode.Default
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1185,7 +1173,6 @@ namespace System.Drawing.Tests
                         () => graphics.RenderingOrigin = Point.Empty
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1273,7 +1260,6 @@ namespace System.Drawing.Tests
                         () => graphics.SmoothingMode = SmoothingMode.AntiAlias
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1339,7 +1325,6 @@ namespace System.Drawing.Tests
                     Assert.Throws<InvalidOperationException>(() => graphics.TextContrast);
                     Assert.Throws<InvalidOperationException>(() => graphics.TextContrast = 5);
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1412,7 +1397,6 @@ namespace System.Drawing.Tests
                             graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1516,7 +1500,6 @@ namespace System.Drawing.Tests
                     Assert.Throws<InvalidOperationException>(() => graphics.Transform);
                     Assert.Throws<InvalidOperationException>(() => graphics.Transform = matrix);
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1565,7 +1548,6 @@ namespace System.Drawing.Tests
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.ResetTransform());
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1711,7 +1693,6 @@ namespace System.Drawing.Tests
                         () => graphics.MultiplyTransform(matrix, MatrixOrder.Append)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1812,7 +1793,6 @@ namespace System.Drawing.Tests
                         () => graphics.TranslateTransform(0, 0, MatrixOrder.Append)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1924,7 +1904,6 @@ namespace System.Drawing.Tests
                         () => graphics.ScaleTransform(0, 0, MatrixOrder.Append)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -2023,7 +2002,6 @@ namespace System.Drawing.Tests
                         () => graphics.RotateTransform(0, MatrixOrder.Append)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -2268,7 +2246,6 @@ namespace System.Drawing.Tests
                             )
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -2649,7 +2626,6 @@ namespace System.Drawing.Tests
                             )
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -2733,7 +2709,6 @@ namespace System.Drawing.Tests
                         () => graphics.GetNearestColor(Color.Red)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -2890,7 +2865,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -2993,7 +2967,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -3116,7 +3089,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawRectangles(pen, new RectangleF[2])
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -3221,7 +3193,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -3388,7 +3359,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -3517,7 +3487,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawPolygon(pen, new PointF[2])
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -3623,7 +3592,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawPath(pen, graphicsPath)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -3868,7 +3836,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawCurve(pen, new PointF[2], 0, 2, 1)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -4048,7 +4015,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Winding)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -4116,7 +4082,6 @@ namespace System.Drawing.Tests
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.Clear(Color.Red));
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();

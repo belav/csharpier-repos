@@ -82,7 +82,6 @@ namespace System.CodeDom.Compiler.Tests
                 );
 #pragma warning restore 0618
             }
-
             finally
             {
                 File.Delete(tempPath);

@@ -154,7 +154,6 @@ namespace System.ComponentModel
                         throw e.InnerException;
                     }
                 }
-
                 finally
                 {
                     UnlockContext(s_selfLock);

@@ -109,7 +109,6 @@ namespace Microsoft.CodeAnalysis.Text
 
                 return ToSourceText(newSegments, this, adjustSegments: false);
             }
-
             finally
             {
                 newSegments.Free();

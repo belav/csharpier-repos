@@ -343,7 +343,6 @@ namespace System.Web.Http.SelfHost.Channels
                             }
                         }
                     }
-
                     finally
                     {
                         base.Dispose(disposing);

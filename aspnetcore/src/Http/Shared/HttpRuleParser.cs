@@ -373,7 +373,6 @@ namespace Microsoft.Net.Http.Headers
                                 break;
                         }
                     }
-
                     finally
                     {
                         nestedCount--;

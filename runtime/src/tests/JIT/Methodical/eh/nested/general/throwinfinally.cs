@@ -31,7 +31,6 @@ public class a
         {
             Console.WriteLine("In outer try");
         }
-
         finally
         {
             Console.WriteLine("In outer finally");
@@ -41,7 +40,6 @@ public class a
                 throw new System.ArgumentException();
                 Console.WriteLine("Unreached");
             }
-
             finally
             {
                 Console.WriteLine("In inner finally");

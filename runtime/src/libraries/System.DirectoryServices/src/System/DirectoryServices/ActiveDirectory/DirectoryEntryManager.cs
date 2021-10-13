@@ -347,7 +347,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             PropertyManager.RootDomainNamingContext
                         )!;
                     }
-
                     finally
                     {
                         rootDSE.Dispose();
@@ -365,7 +364,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             PropertyManager.DefaultNamingContext
                         )!;
                     }
-
                     finally
                     {
                         rootDSE.Dispose();
@@ -383,7 +381,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             PropertyManager.SchemaNamingContext
                         )!;
                     }
-
                     finally
                     {
                         rootDSE.Dispose();
@@ -401,7 +398,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             PropertyManager.ConfigurationNamingContext
                         )!;
                     }
-
                     finally
                     {
                         rootDSE.Dispose();

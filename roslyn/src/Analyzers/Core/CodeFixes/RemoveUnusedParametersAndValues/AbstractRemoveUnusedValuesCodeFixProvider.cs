@@ -447,7 +447,6 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     editor.ReplaceNode(root, newRoot);
                 }
             }
-
             finally
             {
                 originalEditor.ReplaceNode(originalEditor.OriginalRoot, editor.GetChangedRoot());

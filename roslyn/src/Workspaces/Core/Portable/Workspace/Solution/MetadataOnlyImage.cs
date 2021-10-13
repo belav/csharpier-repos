@@ -104,7 +104,6 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-
             finally
             {
                 workspace.LogTestMessage(

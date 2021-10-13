@@ -43,7 +43,6 @@ namespace Microsoft.AspNetCore.Cryptography
                 from.DangerousAddRef(ref refAdded);
                 BlockCopy((void*)from.DangerousGetHandle(), to, byteCount);
             }
-
             finally
             {
                 if (refAdded)
@@ -64,7 +63,6 @@ namespace Microsoft.AspNetCore.Cryptography
                 to.DangerousAddRef(ref refAdded);
                 BlockCopy(from, (void*)to.DangerousGetHandle(), byteCount);
             }
-
             finally
             {
                 if (refAdded)
@@ -107,7 +105,6 @@ namespace Microsoft.AspNetCore.Cryptography
                     );
                 }
             }
-
             finally
             {
                 if (fromRefAdded)

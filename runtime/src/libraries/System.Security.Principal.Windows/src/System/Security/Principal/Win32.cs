@@ -138,7 +138,6 @@ namespace System.Security.Principal
 
                 resultSid = ConvertIntPtrSidToByteArraySid(ByteArray);
             }
-
             finally
             {
                 //
@@ -266,7 +265,6 @@ namespace System.Security.Principal
                         referencedDomains.Initialize((ulong)bufferSize);
                     }
                 }
-
                 finally
                 {
                     if (pRdl != null)

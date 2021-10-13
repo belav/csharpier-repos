@@ -339,7 +339,6 @@ namespace System.Drawing.Internal
 
                 SetClip(wr);
             }
-
             finally
             {
                 clip.Dispose();

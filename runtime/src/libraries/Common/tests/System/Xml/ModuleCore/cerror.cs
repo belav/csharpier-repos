@@ -370,7 +370,6 @@ namespace OLEDB.Test.ModuleCore
                     Console.WriteLine("Details:" + CError.NewLine + details);
                 }
             }
-
             finally
             {
                 //Restore the error level

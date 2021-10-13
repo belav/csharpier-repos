@@ -582,7 +582,6 @@ namespace System.Net.WebSockets.Client.Tests
                             );
                         }
                     }
-
                     finally
                     {
                         tcs.SetResult();

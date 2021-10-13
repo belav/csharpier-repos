@@ -42,7 +42,6 @@ namespace test
                 {
                     Console.WriteLine("\t try 1.1");
                 }
-
                 finally
                 {
                     Console.WriteLine("\t finally 1.1");
@@ -52,7 +51,6 @@ namespace test
                         Console.WriteLine("\t\t Throwing an exception here!");
                         z = x / y;
                     }
-
                     finally
                     {
                         Console.WriteLine("\t\t finally 1.1.1");

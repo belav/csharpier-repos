@@ -45,7 +45,6 @@ public class Runtime_36468
                 var0 -= 0;
             }
         }
-
         finally
         {
             int var1 = s_3.F9;

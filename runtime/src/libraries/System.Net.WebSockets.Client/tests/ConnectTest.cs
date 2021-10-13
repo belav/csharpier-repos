@@ -400,7 +400,6 @@ namespace System.Net.WebSockets.Client.Tests
                         cts.Cancel();
                         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t);
                     }
-
                     finally
                     {
                         releaseServer.SetResult();

@@ -232,7 +232,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
                     new InitializeResult { Capabilities = _languageClient.GetCapabilities(), }
                 );
             }
-
             finally
             {
                 _logger?.TraceStop("Initialize");
@@ -254,7 +253,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
                 return Task.CompletedTask;
             }
-
             finally
             {
                 _logger?.TraceStop("Initialized");
@@ -272,7 +270,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
                 return Task.CompletedTask;
             }
-
             finally
             {
                 _logger?.TraceStop("Shutdown");
@@ -302,7 +299,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
                 return Task.CompletedTask;
             }
-
             finally
             {
                 _logger?.TraceStop("Exit");

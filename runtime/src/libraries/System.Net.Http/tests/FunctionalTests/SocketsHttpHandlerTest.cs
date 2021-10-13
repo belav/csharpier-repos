@@ -79,7 +79,6 @@ namespace System.Net.Http.Functional.Tests
                             await completedWhenFinalized.WaitAsync(TestHelper.PassingTestTimeout);
                         }
                     }
-
                     finally
                     {
                         clientCompleted.SetResult();
@@ -689,7 +688,6 @@ namespace System.Net.Http.Functional.Tests
                             );
                         }
                     }
-
                     finally
                     {
                         tcs.SetResult();

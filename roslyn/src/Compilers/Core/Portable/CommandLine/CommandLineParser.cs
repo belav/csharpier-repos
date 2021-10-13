@@ -1354,7 +1354,6 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
             }
-
             finally
             {
                 if (enumerator != null)

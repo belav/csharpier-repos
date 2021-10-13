@@ -87,7 +87,6 @@ internal static partial class Interop
                 var handle = SecKeychainItemCopyKeychain(item.DangerousGetHandle());
                 return handle;
             }
-
             finally
             {
                 if (addedRef)

@@ -71,7 +71,6 @@ namespace System.Threading
                 prev.Next.Thread.RegisterWaitHandle(handle);
                 return;
             }
-
             finally
             {
                 _waitThreadLock.Release();
@@ -104,7 +103,6 @@ namespace System.Threading
                 }
                 RemoveWaitThread(thread);
             }
-
             finally
             {
                 _waitThreadLock.Release();
@@ -405,7 +403,6 @@ namespace System.Threading
                     );
                     return _numUserWaits; // return the value taken inside the lock for the caller
                 }
-
                 finally
                 {
                     threadPoolInstance._waitThreadLock.Release();
@@ -502,7 +499,6 @@ namespace System.Threading
                         pendingRemoval = true;
                     }
                 }
-
                 finally
                 {
                     threadPoolInstance._waitThreadLock.Release();

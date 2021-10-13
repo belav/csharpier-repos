@@ -84,7 +84,6 @@ namespace Internal.Cryptography.Pal
                             throw Interop.AppleCrypto.CreateExceptionForOSStatus(error);
                         }
                     }
-
                     finally
                     {
                         if (customCertsArray != s_emptyArray)
@@ -246,7 +245,6 @@ namespace Internal.Cryptography.Pal
                 _extraHandles.Push(certsArray);
                 return certsArray;
             }
-
             finally
             {
                 for (idx--; idx >= 0; idx--)

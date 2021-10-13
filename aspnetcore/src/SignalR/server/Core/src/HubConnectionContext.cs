@@ -472,7 +472,6 @@ namespace Microsoft.AspNetCore.SignalR
 
                 await _connectionContext.Transport.Output.FlushAsync();
             }
-
             finally
             {
                 _writeLock.Release();
@@ -678,7 +677,6 @@ namespace Microsoft.AspNetCore.SignalR
                                 return false;
                             }
                         }
-
                         finally
                         {
                             input.AdvanceTo(consumed, examined);
@@ -815,7 +813,6 @@ namespace Microsoft.AspNetCore.SignalR
                     // HubOnDisconnectedAsync is waiting on this to complete the Pipe
                     connection._abortCompletedTcs.TrySetResult();
                 }
-
                 finally
                 {
                     connection._writeLock.Release();

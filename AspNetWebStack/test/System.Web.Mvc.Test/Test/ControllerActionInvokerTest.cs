@@ -185,7 +185,6 @@ namespace System.Web.Mvc.Test
                     ActionDescriptor ad = helper.PublicFindAction(context, cd, method.Name);
                     wasFound = (ad != null);
                 }
-
                 finally
                 {
                     Assert.False(

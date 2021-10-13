@@ -111,7 +111,6 @@ namespace System.Globalization
                     nameof(strInput)
                 );
             }
-
             finally
             {
                 if (toReturn != null)

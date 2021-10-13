@@ -87,7 +87,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                 await ProcessAsync(projectToDocumentMap).ConfigureAwait(false);
             }
-
             finally
             {
                 await _progress.OnCompletedAsync().ConfigureAwait(false);

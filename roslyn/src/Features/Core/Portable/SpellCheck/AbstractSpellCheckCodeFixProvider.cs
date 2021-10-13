@@ -187,7 +187,6 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 similarityChecker.Free();

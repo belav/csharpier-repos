@@ -120,7 +120,6 @@ namespace Internal.Cryptography.Pal
                     return pal;
                 }
             }
-
             finally
             {
                 if (hCertStore != null)
@@ -274,7 +273,6 @@ namespace Internal.Cryptography.Pal
 
                 return pCertContext;
             }
-
             finally
             {
                 hStore.Dispose();

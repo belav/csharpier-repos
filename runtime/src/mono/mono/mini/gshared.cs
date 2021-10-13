@@ -2797,7 +2797,6 @@ public class Tests
         {
             disposable.Dispose();
         }
-
         finally
         {
             disposable = null;

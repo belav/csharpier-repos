@@ -1476,7 +1476,6 @@ namespace System.Net.Tests
                         await download;
                         Assert.Equal(ExpectedText, File.ReadAllText(tempPath));
                     }
-
                     finally
                     {
                         File.Delete(tempPath);
@@ -1578,7 +1577,6 @@ namespace System.Net.Tests
                 byte[] result = await UploadFileAsync(wc, echoServer.ToString(), tempPath);
                 Assert.Contains(ExpectedText, Encoding.UTF8.GetString(result));
             }
-
             finally
             {
                 File.Delete(tempPath);

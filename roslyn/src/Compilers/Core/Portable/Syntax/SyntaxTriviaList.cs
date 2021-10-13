@@ -341,7 +341,6 @@ namespace Microsoft.CodeAnalysis
 
                 return builder.Count == thisCount ? this : builder.ToList();
             }
-
             finally
             {
                 ClearAndFreeBuilder(builder);

@@ -130,7 +130,6 @@ namespace System.IO.Tests
                 else
                     Assert.Throws<UnauthorizedAccessException>(() => Write(path, "text"));
             }
-
             finally
             {
                 File.SetAttributes(path, FileAttributes.Normal);

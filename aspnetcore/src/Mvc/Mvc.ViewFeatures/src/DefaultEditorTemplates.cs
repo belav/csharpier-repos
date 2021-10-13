@@ -141,7 +141,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                 return result;
             }
-
             finally
             {
                 viewData.TemplateInfo.HtmlFieldPrefix = oldPrefix;

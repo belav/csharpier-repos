@@ -140,7 +140,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
                     return true;
                 }
-
                 finally
                 {
                     uniqueSymbols.Free();

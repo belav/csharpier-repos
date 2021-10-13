@@ -138,7 +138,6 @@ namespace System.Net.Http
                     provider.FileData[1].Headers.ContentDisposition
                 );
             }
-
             finally
             {
                 if (stream0 != null)

@@ -193,7 +193,6 @@ namespace System.IO.Compression
                 ReadDeflateOutput(outputBuffer, ZFlushCode.NoFlush, out bytesRead);
                 return bytesRead;
             }
-
             finally
             {
                 // Before returning, make sure to release input buffer if necessary:

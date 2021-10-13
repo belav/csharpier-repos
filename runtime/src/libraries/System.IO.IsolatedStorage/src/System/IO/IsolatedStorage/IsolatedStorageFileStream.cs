@@ -261,7 +261,6 @@ namespace System.IO.IsolatedStorage
                         _fs.Dispose();
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

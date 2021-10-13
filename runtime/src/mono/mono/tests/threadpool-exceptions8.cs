@@ -152,7 +152,6 @@ public class Tests
                         return;
                     }
                 }
-
                 finally
                 {
                     coord.Set();

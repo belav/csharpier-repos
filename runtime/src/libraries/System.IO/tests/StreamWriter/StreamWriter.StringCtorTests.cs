@@ -94,7 +94,6 @@ namespace System.IO.Tests
                     Assert.Equal(testString, reader.ReadToEnd());
                 }
             }
-
             finally
             {
                 File.Delete(testfile);
@@ -129,7 +128,6 @@ namespace System.IO.Tests
                     Assert.Equal(testString, reader.ReadToEnd());
                 }
             }
-
             finally
             {
                 File.Delete(testfile);

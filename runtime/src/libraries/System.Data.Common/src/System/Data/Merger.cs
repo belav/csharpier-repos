@@ -245,7 +245,6 @@ namespace System.Data
                         dst.MergeRow(sourceRow, targetRow, _preserveChanges, ndxSearch);
                     }
                 }
-
                 finally
                 {
                     dst.RestoreIndexEvents(true);
@@ -550,7 +549,6 @@ namespace System.Data
             {
                 MergeTable(src, dest);
             }
-
             finally
             {
                 dest.MergingData = false;

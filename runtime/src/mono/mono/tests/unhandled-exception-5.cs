@@ -17,7 +17,6 @@ class Driver
             {
                 throw new CustomException();
             }
-
             finally
             {
                 mre.Set();

@@ -43,7 +43,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 SendMessage();
                 Assert.True(signal.WaitOne(PostMessageWait));
             }
-
             finally
             {
                 Event -= signaledHandler;
@@ -71,7 +70,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 SendReflectedMessage();
                 Assert.True(signal);
             }
-
             finally
             {
                 Event -= signaledHandler;

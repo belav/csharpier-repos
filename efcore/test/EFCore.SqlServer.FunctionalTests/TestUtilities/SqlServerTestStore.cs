@@ -451,7 +451,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                 return result;
             }
-
             finally
             {
                 if (connection.State != ConnectionState.Closed)
@@ -512,7 +511,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 
                 return result;
             }
-
             finally
             {
                 if (connection.State != ConnectionState.Closed)

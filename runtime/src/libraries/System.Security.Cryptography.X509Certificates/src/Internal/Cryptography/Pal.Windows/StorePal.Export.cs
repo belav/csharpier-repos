@@ -46,7 +46,6 @@ namespace Internal.Cryptography.Pal
                             return rawData;
                         }
                     }
-
                     finally
                     {
                         pCertContext.Dispose();
@@ -85,7 +84,6 @@ namespace Internal.Cryptography.Pal
 
                         return pbEncoded;
                     }
-
                     finally
                     {
                         pCertContext.Dispose();

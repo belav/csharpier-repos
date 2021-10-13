@@ -238,7 +238,6 @@ namespace System.Speech.Recognition
                         }
                         _words = new ReadOnlyCollection<RecognizedWordUnit>(wordList);
                     }
-
                     finally
                     {
                         gc.Free();
@@ -364,7 +363,6 @@ namespace System.Speech.Recognition
                             );
                         }
                     }
-
                     finally
                     {
                         gc.Free();
@@ -521,7 +519,6 @@ namespace System.Speech.Recognition
                         );
                     }
                 }
-
                 finally
                 {
                     gc.Free();
@@ -1084,7 +1081,6 @@ namespace System.Speech.Recognition
                 );
                 throw new InvalidOperationException(error);
             }
-
             finally
             {
                 gc.Free();

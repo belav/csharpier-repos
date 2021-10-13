@@ -3721,7 +3721,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
             }
-
             finally
             {
                 typeParameters.Free();

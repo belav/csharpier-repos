@@ -61,7 +61,6 @@ class InnerFinallyAndCatchTest
                 _trace.Write("b");
                 count++;
             }
-
             finally // 1
             {
                 try
@@ -69,7 +68,6 @@ class InnerFinallyAndCatchTest
                     _trace.Write("c");
                     count++;
                 }
-
                 finally // 2
                 {
                     try
@@ -79,7 +77,6 @@ class InnerFinallyAndCatchTest
                             _trace.Write("d");
                             count++;
                         }
-
                         finally // 3
                         {
                             _trace.Write("e");
@@ -89,7 +86,6 @@ class InnerFinallyAndCatchTest
                                 _trace.Write("f");
                                 count++;
                             }
-
                             finally // 4
                             {
                                 _trace.Write("g");

@@ -148,7 +148,6 @@ namespace System.Security.Cryptography.Cng.Tests
                     );
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(fakeKeyPtr);
@@ -180,7 +179,6 @@ namespace System.Security.Cryptography.Cng.Tests
                     );
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(fakeKeyPtr);

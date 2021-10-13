@@ -207,7 +207,6 @@ namespace System.ComponentModel.Composition.Hosting
                         isThrowing = false;
                     }
                 }
-
                 finally
                 {
                     if (isThrowing)
@@ -275,7 +274,6 @@ namespace System.ComponentModel.Composition.Hosting
                             }
                         }
                     }
-
                     finally
                     {
                         if (catalogToUnsubscribeFrom != null)

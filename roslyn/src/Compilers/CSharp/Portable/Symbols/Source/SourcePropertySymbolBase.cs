@@ -376,7 +376,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             EnsureSignatureGuarded(diagnostics);
                             this.AddDeclarationDiagnostics(diagnostics);
                         }
-
                         finally
                         {
                             _state.NotePartComplete(CompletionPart.FinishPropertyEnsureSignature);

@@ -60,7 +60,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 var exception = remoteTest.LoadAnalyzer(analyzerFile.Path);
                 Assert.Null(exception);
             }
-
             finally
             {
                 AppDomain.Unload(loadDomain);
@@ -131,7 +130,6 @@ public class TestAnalyzer : DiagnosticAnalyzer
                 var exception = remoteTest.LoadAnalyzer(analyzerFile.Path);
                 Assert.NotNull(exception as TypeLoadException);
             }
-
             finally
             {
                 AppDomain.Unload(loadDomain);

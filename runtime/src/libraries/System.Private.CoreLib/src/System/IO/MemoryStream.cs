@@ -135,7 +135,6 @@ namespace System.IO
                     _lastReadTask = null;
                 }
             }
-
             finally
             {
                 // Call base.Close() to cleanup async IO resources

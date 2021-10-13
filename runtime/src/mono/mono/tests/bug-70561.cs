@@ -14,7 +14,6 @@ class T
         {
             Thread.CurrentThread.Abort();
         }
-
         finally
         {
             //LABEL1

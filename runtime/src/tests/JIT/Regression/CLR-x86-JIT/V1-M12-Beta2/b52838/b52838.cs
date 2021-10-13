@@ -26,7 +26,6 @@ namespace Test
                     return;
                 }
             }
-
             finally
             {
                 Finally();

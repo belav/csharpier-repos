@@ -2376,7 +2376,6 @@ namespace Microsoft.EntityFrameworkCore
 
                     context.SaveChanges();
                 }
-
                 finally
                 {
                     _isSeeding.Value = true;

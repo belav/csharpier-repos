@@ -65,7 +65,6 @@ internal class Repro
             {
                 mb = MakeAndUseMB8(mb);
             }
-
             finally
             {
                 Console.WriteLine(s_counter);

@@ -111,7 +111,6 @@ namespace System.Drawing.Tests
                         bufferedGraphics.Render();
                     }
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();

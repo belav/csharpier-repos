@@ -326,7 +326,6 @@ namespace Newtonsoft.Json.Utilities
                         );
                     }
                 }
-
                 finally
                 {
                     (e as IDisposable)?.Dispose();

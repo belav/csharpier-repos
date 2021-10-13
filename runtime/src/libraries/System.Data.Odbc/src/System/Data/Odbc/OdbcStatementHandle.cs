@@ -410,7 +410,6 @@ namespace System.Data.Odbc
                     accuracy
                 );
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(pwszTableName);

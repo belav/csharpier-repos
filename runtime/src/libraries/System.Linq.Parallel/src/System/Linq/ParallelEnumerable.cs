@@ -5031,7 +5031,6 @@ namespace System.Linq
                     DisposeEnumerator<TSource>(e2, settings.CancellationState);
                 }
             }
-
             finally
             {
                 DisposeEnumerator<TSource>(e1, settings.CancellationState);

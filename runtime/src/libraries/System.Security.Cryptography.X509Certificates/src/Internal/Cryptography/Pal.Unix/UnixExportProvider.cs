@@ -166,7 +166,6 @@ namespace Internal.Cryptography.Pal
 
                 return MacAndEncode(tmpWriter, encodedAuthSafe, passwordSpan);
             }
-
             finally
             {
                 password.DangerousRelease();
@@ -287,7 +286,6 @@ namespace Internal.Cryptography.Pal
                     certContentsIv
                 );
             }
-
             finally
             {
                 if (encodedCertContents.Array != null)

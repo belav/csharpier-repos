@@ -272,7 +272,6 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                                 break;
                         }
                     }
-
                     finally
                     {
                         nestedCount--;

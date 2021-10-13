@@ -467,7 +467,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     _console.Error.Write(_objectFormatter.FormatException(e));
                 }
             }
-
             finally
             {
                 _console.ResetColor();
@@ -523,7 +522,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     );
                 }
             }
-
             finally
             {
                 _console.ResetColor();

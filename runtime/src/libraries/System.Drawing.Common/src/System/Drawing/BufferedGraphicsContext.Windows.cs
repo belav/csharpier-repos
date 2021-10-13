@@ -64,7 +64,6 @@ namespace System.Drawing
                             targetRectangle.Height
                         );
                     }
-
                     finally
                     {
                         targetGraphics.ReleaseHdcInternal(destDc);
@@ -166,7 +165,6 @@ namespace System.Drawing
                     bRet = true;
                 }
             }
-
             finally
             {
                 if (hbm != IntPtr.Zero)

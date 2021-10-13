@@ -44,7 +44,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.NotEqual(o, uniqueObject);
                 Assert.NotEqual(o, Marshal.GetUniqueObjectForIUnknown(ptr));
             }
-
             finally
             {
                 Marshal.Release(ptr);

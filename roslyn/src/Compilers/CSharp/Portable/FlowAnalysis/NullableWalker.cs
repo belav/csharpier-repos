@@ -1636,7 +1636,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     snapshotBuilderOpt: newSnapshotBuilder
                 );
             }
-
             finally
             {
                 walker.Free();
@@ -1781,7 +1780,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     .CreateNestedMethodState(variables);
                 Analyze(walker, symbol, diagnostics, localState, snapshotBuilderOpt: null);
             }
-
             finally
             {
                 walker.Free();
@@ -1845,7 +1843,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     finalNullableState = GetVariableState(walker._variables, walker.State);
                 }
             }
-
             finally
             {
                 walker.Free();
@@ -3501,7 +3498,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<PendingBranch> pendingReturns = RemoveReturns();
                 RestorePending(oldPending);
             }
-
             finally
             {
                 _snapshotBuilderOpt?.ExitWalker(this.SaveSharedState(), previousSlot);
@@ -5149,7 +5145,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return;
                 }
             }
-
             finally
             {
                 _lastConditionalAccessSlot = previousConditionalAccessSlot;

@@ -54,7 +54,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                   ? (new HashSet<Symbol>(), new HashSet<Symbol>())
                   : (walker._definitelyAssignedOnEntry, walker._definitelyAssignedOnExit);
             }
-
             finally
             {
                 walker.Free();

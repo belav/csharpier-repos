@@ -304,7 +304,6 @@ namespace System.Data.Common
                 )!;
                 return (DataTable[])value;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -340,7 +339,6 @@ namespace System.Data.Common
                 object? value = FillSchemaFromReader(null, dataTable, schemaType, null, dataReader);
                 return (DataTable?)value;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -474,7 +472,6 @@ namespace System.Data.Common
                     null
                 );
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -592,7 +589,6 @@ namespace System.Data.Common
                 }
                 return result;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -663,7 +659,6 @@ namespace System.Data.Common
                         }
                     }
                 }
-
                 finally
                 {
                     mapping.DataTable.EndLoadData();

@@ -379,7 +379,6 @@ namespace System.Runtime.CompilerServices
                     callTarget = newFrame.NextCall;
                 } while (callTarget != null);
             }
-
             finally
             {
                 tls->Frame = prevFrame;

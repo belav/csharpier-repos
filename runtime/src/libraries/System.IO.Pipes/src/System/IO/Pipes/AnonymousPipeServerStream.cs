@@ -146,7 +146,6 @@ namespace System.IO.Pipes
                     _clientHandle.Dispose();
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

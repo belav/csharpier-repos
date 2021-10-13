@@ -596,7 +596,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                     }
                 }
-
                 finally
                 {
                     if (diagnose)

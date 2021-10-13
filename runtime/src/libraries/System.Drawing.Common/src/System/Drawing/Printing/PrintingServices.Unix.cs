@@ -134,7 +134,6 @@ namespace System.Drawing.Printing
                 if (handle != IntPtr.Zero)
                     LibcupsNative.ppdClose(handle);
             }
-
             finally
             {
                 handle = IntPtr.Zero;
@@ -161,7 +160,6 @@ namespace System.Drawing.Printing
                 if (ptr != IntPtr.Zero)
                     LibcupsNative.cupsFreeDests(count, ptr);
             }
-
             finally
             {
                 ptr = IntPtr.Zero;
@@ -303,7 +301,6 @@ namespace System.Drawing.Printing
 
                 p.Settings = settings;
             }
-
             finally
             {
                 CloseDests(ref dests, ret);
@@ -692,7 +689,6 @@ namespace System.Drawing.Printing
                                 );
                             }
                         }
-
                         finally
                         {
                             CloseDests(ref dests, n_printers);
@@ -780,7 +776,6 @@ namespace System.Drawing.Printing
                         break;
                 }
             }
-
             finally
             {
                 CloseDests(ref dests, count);

@@ -292,7 +292,6 @@ namespace CoreXml.Test.XLinq
                     } while (_undos.Count > 0 && _undos.Peek().Group == unit.Group);
                 }
             }
-
             finally
             {
                 _undoing = false;
@@ -315,7 +314,6 @@ namespace CoreXml.Test.XLinq
                     } while (_redos.Count > 0 && _redos.Peek().Group == unit.Group);
                 }
             }
-
             finally
             {
                 _redoing = false;

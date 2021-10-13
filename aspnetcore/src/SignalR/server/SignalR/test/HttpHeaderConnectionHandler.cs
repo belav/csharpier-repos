@@ -33,7 +33,6 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
                 await connection.Transport.Output.WriteAsync(data);
             }
-
             finally
             {
                 connection.Transport.Input.AdvanceTo(buffer.End);

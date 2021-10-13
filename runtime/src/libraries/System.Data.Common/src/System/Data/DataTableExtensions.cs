@@ -216,7 +216,6 @@ namespace System.Data
                         }
                     } while (rows.MoveNext());
                 }
-
                 finally
                 {
                     table.EndLoadData();

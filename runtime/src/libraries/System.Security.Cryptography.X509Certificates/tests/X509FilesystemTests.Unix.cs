@@ -794,7 +794,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     testAction(store, storeDirectory);
                 }
             }
-
             finally
             {
                 try

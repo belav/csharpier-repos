@@ -64,7 +64,6 @@ namespace System.Security.Cryptography
                 GetBytes(array, 0, data.Length);
                 new ReadOnlySpan<byte>(array, 0, data.Length).CopyTo(data);
             }
-
             finally
             {
                 Array.Clear(array, 0, data.Length);
@@ -91,7 +90,6 @@ namespace System.Security.Cryptography
                 GetNonZeroBytes(array);
                 new ReadOnlySpan<byte>(array, 0, data.Length).CopyTo(data);
             }
-
             finally
             {
                 Array.Clear(array, 0, data.Length);

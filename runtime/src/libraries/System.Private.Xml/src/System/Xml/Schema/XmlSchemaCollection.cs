@@ -104,7 +104,6 @@ namespace System.Xml.Schema
                 while (reader.Read())
                     ; // wellformness check
             }
-
             finally
             {
                 reader.Close();

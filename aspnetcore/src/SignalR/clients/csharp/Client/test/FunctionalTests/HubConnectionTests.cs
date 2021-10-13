@@ -2153,7 +2153,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests
                         ex.Message
                     );
                 }
-
                 finally
                 {
                     await hubConnection.DisposeAsync().DefaultTimeout();

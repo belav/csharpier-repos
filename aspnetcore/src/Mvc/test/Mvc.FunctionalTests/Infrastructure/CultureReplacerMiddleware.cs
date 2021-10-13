@@ -44,7 +44,6 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
                 await _next(context);
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = _originalCulture;

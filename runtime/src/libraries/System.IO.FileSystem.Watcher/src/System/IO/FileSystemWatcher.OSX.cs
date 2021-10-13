@@ -303,7 +303,6 @@ namespace System.IO
                         // Start the OS X RunLoop (a blocking call) that will pump file system changes into the callback function
                         Interop.RunLoop.CFRunLoopRun();
                     }
-
                     finally
                     {
                         lock (s_lockObject)
@@ -325,7 +324,6 @@ namespace System.IO
                         // When we get here, we've requested to stop so cleanup the EventStream and unschedule from the RunLoop
                         Interop.EventStream.FSEventStreamStop(eventStream);
                     }
-
                     finally
                     {
                         StaticWatcherRunLoopManager.UnscheduleFromRunLoop(eventStream);

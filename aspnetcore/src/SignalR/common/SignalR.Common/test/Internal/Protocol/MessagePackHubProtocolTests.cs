@@ -79,7 +79,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
 
                 Assert.Equal(expectedUtcDateTime, resultDateTime);
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -113,7 +112,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
                 var resultDateTimeOffset = (DateTimeOffset)completionMessage.Result;
                 Assert.Equal(dateTimeOffset, resultDateTimeOffset);
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);

@@ -111,7 +111,6 @@ internal static partial class Interop
                     }
                 }
             }
-
             finally
             {
                 if (hashAlgorithmString != IntPtr.Zero)

@@ -65,7 +65,6 @@ namespace System.Management.Tests
 
                 passed = true;
             }
-
             finally
             {
                 if (passed && tempFilePath != null)
@@ -103,7 +102,6 @@ namespace System.Management.Tests
                         )
                 );
             }
-
             finally
             {
                 managementClass = null;

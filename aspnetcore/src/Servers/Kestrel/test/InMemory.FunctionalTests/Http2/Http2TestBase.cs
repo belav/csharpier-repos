@@ -568,7 +568,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 {
                     await connectionTask;
                 }
-
                 finally
                 {
                     _pair.Transport.Input.Complete();
@@ -1402,7 +1401,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                         throw new IOException("The reader completed without returning a frame.");
                     }
                 }
-
                 finally
                 {
                     _bytesReceived += copyBuffer.Slice(copyBuffer.Start, consumed).Length;

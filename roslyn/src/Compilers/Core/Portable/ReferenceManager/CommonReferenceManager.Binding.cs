@@ -213,7 +213,6 @@ namespace Microsoft.CodeAnalysis
 
                 return boundInputs;
             }
-
             finally
             {
                 referenceBindings.Free();
@@ -432,7 +431,6 @@ namespace Microsoft.CodeAnalysis
                     explicitAssemblyCount
                 );
             }
-
             finally
             {
                 implicitAssemblies.Free();

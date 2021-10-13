@@ -60,7 +60,6 @@ internal static partial class Interop
                 }
                 return result == 0 ? 0 : Marshal.GetLastWin32Error();
             }
-
             finally
             {
                 FreeArray(envpPtr, envp.Length);

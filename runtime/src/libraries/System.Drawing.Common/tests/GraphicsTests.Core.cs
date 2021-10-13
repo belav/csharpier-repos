@@ -43,7 +43,6 @@ namespace System.Drawing.Tests
                         () => graphics.TransformElements = Matrix3x2.Identity
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();

@@ -65,7 +65,6 @@ namespace System.Diagnostics
             bool ret;
 
             try { }
-
             finally
             {
                 // Wait for the mutex for half a second (long enough to gain the mutex in most scenarios and short enough to avoid
@@ -157,7 +156,6 @@ namespace System.Diagnostics
                                             + "."
                                             + GetLargestBuildNumberFromKey(bestKey);
                                     }
-
                                     finally
                                     {
                                         bestKey.Close();
@@ -225,7 +223,6 @@ namespace System.Diagnostics
                                                     largestVersion = currentVersion;
                                                 }
                                             }
-
                                             finally
                                             {
                                                 k.Close();
@@ -242,7 +239,6 @@ namespace System.Diagnostics
                                         + largestVersion[2];
                                 }
                             }
-
                             finally
                             {
                                 policyKey.Close();

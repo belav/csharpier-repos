@@ -109,7 +109,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.Throws<InvalidOperationException>(() => handle.AddrOfPinnedObject());
             }
-
             finally
             {
                 handle.Free();
@@ -151,7 +150,6 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.Equal(!expected, handle != otherHandle);
                 }
             }
-
             finally
             {
                 handle.Free();
@@ -185,7 +183,6 @@ namespace System.Runtime.InteropServices.Tests
                     }
                 }
             }
-
             finally
             {
                 handle.Free();

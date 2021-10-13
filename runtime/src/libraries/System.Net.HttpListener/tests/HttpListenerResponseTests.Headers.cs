@@ -560,7 +560,6 @@ namespace System.Net.Tests
                 Assert.Equal(sendChunked ? -1 : 0, response.ContentLength64);
                 Assert.Null(response.Headers[HttpResponseHeader.TransferEncoding]);
             }
-
             finally
             {
                 response.Close();
@@ -648,7 +647,6 @@ namespace System.Net.Tests
                 Assert.Null(response.Headers[HttpResponseHeader.Connection]);
                 Assert.Null(response.Headers[HttpResponseHeader.KeepAlive]);
             }
-
             finally
             {
                 response.Close();
@@ -757,7 +755,6 @@ namespace System.Net.Tests
 
                 response.OutputStream.Write(new byte[contentLength64], 0, contentLength64);
             }
-
             finally
             {
                 response.Close();

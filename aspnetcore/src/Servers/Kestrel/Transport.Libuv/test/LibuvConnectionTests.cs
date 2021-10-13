@@ -48,7 +48,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 var readAwaitable = connection.Transport.Input.ReadAsync();
                 Assert.False(readAwaitable.IsCompleted);
             }
-
             finally
             {
                 await thread.StopAsync(TimeSpan.FromSeconds(5));
@@ -114,7 +113,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 Assert.Null(mockLibuv.AllocCallback);
                 Assert.Null(mockLibuv.ReadCallback);
             }
-
             finally
             {
                 await thread.StopAsync(TimeSpan.FromSeconds(5));
@@ -205,7 +203,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 Assert.Null(mockLibuv.AllocCallback);
                 Assert.Null(mockLibuv.ReadCallback);
             }
-
             finally
             {
                 await thread.StopAsync(TimeSpan.FromSeconds(5));
@@ -248,7 +245,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
                 var readAwaitable = await connection.Transport.Input.ReadAsync();
                 Assert.True(readAwaitable.IsCompleted);
             }
-
             finally
             {
                 await thread.StopAsync(TimeSpan.FromSeconds(5));

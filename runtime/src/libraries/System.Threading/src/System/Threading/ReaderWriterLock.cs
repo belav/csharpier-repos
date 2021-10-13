@@ -238,7 +238,6 @@ namespace System.Threading
                             modifyState += LockStates.Reader;
                         }
                     }
-
                     finally
                     {
                         // Make the state changes determined above
@@ -426,7 +425,6 @@ namespace System.Threading
                             modifyState += LockStates.Writer - LockStates.WriterSignaled;
                         }
                     }
-
                     finally
                     {
                         // Make the state changes determined above
@@ -809,7 +807,6 @@ namespace System.Threading
                 acquired = true;
                 return lockCookie;
             }
-
             finally
             {
                 if (!acquired)

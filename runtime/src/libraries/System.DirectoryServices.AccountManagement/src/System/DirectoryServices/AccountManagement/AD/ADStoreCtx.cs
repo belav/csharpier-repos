@@ -371,7 +371,6 @@ namespace System.DirectoryServices.AccountManagement
                     _disposed = true;
                 }
             }
-
             finally
             {
                 base.Dispose();
@@ -2010,7 +2009,6 @@ namespace System.DirectoryServices.AccountManagement
                     }
                 }
             }
-
             finally
             {
                 if (pGroupSid != IntPtr.Zero)

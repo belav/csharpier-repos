@@ -8,7 +8,6 @@ class AA
     static void f(ref Array param)
     {
         try { }
-
         finally
         {
             for (int i = 0; i < 3; i++) { }

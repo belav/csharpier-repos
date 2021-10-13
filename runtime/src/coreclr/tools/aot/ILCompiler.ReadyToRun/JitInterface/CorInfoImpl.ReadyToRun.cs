@@ -551,7 +551,6 @@ namespace Internal.JitInterface
                     }
                 }
             }
-
             finally
             {
                 if (!codeGotPublished)

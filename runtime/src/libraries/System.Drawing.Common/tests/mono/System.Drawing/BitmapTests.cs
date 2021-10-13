@@ -122,7 +122,6 @@ namespace MonoTests.System.Drawing
                     Assert.Equal(PixelFormat.Format24bppRgb, data.PixelFormat);
                     Assert.False(IntPtr.Zero.Equals(data.Scan0));
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -147,7 +146,6 @@ namespace MonoTests.System.Drawing
                         () => bmp.LockBits(r, ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb)
                     );
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -313,7 +311,6 @@ namespace MonoTests.System.Drawing
                             Assert.Equal(d.A, data[n++]);
                     }
                 }
-
                 finally
                 {
                     bmp.UnlockBits(bd);
@@ -511,7 +508,6 @@ namespace MonoTests.System.Drawing
                             pixel_data[dest_offset + x] = Marshal.ReadByte(src_ptr, x);
                     }
                 }
-
                 finally
                 {
                     if (test != null && data != null)
@@ -706,7 +702,6 @@ namespace MonoTests.System.Drawing
                 for (int i = index; i < len; i++)
                     pixels[index] = 0;
             }
-
             finally
             {
                 bmp.UnlockBits(bd);
@@ -1148,7 +1143,6 @@ namespace MonoTests.System.Drawing
                     Marshal.WriteByte(data.Scan0, 2, blue.R);
                     Marshal.WriteByte(data.Scan0, 3, blue.A);
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -1177,7 +1171,6 @@ namespace MonoTests.System.Drawing
                     Marshal.WriteByte(data.Scan0, 2, blue.R);
                     Marshal.WriteByte(data.Scan0, 3, blue.A);
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -1215,7 +1208,6 @@ namespace MonoTests.System.Drawing
                     Marshal.WriteByte(data.Scan0, 1, blue.G);
                     Marshal.WriteByte(data.Scan0, 2, blue.R);
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -1235,7 +1227,6 @@ namespace MonoTests.System.Drawing
                     Marshal.WriteByte(data.Scan0, 1, blue.G);
                     Marshal.WriteByte(data.Scan0, 2, blue.R);
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -1282,7 +1273,6 @@ namespace MonoTests.System.Drawing
             {
                 Assert.Equal(24, data.Stride);
             }
-
             finally
             {
                 bmp.UnlockBits(data);

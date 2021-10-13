@@ -160,7 +160,6 @@ namespace System.Data.ProviderBase
                     }
                 }
             }
-
             finally
             {
                 ExitItemLockIfNeeded(lockObtained);
@@ -208,14 +207,12 @@ namespace System.Data.ProviderBase
                             _items = new CollectionEntry[DefaultCollectionSize];
                         }
                     }
-
                     finally
                     {
                         _isNotifying = false;
                     }
                 }
             }
-
             finally
             {
                 ExitItemLockIfNeeded(lockObtained);
@@ -252,7 +249,6 @@ namespace System.Data.ProviderBase
                     }
                 }
             }
-
             finally
             {
                 ExitItemLockIfNeeded(lockObtained);

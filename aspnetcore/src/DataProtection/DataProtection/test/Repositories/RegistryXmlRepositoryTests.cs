@@ -153,7 +153,6 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
             {
                 testCode(uniqueSubkey);
             }
-
             finally
             {
                 // clean up when test is done

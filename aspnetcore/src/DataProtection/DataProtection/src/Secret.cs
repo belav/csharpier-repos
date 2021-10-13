@@ -96,7 +96,6 @@ namespace Microsoft.AspNetCore.DataProtection
                         );
                         _plaintextLength = (uint)tempPlaintextBuffer.Length;
                     }
-
                     finally
                     {
                         UnsafeBufferUtil.SecureZeroMemory(
@@ -218,7 +217,6 @@ namespace Microsoft.AspNetCore.DataProtection
                         BCryptUtil.GenRandom(pbBytes, (uint)numBytes);
                         return new Secret(pbBytes, numBytes);
                     }
-
                     finally
                     {
                         UnsafeBufferUtil.SecureZeroMemory(pbBytes, numBytes);

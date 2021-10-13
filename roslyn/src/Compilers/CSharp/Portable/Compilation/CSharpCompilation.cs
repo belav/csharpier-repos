@@ -2201,7 +2201,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 noMainFoundDiagnostics.Free();
                 return entryPoint;
             }
-
             finally
             {
                 entryPointCandidates.Free();

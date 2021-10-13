@@ -792,7 +792,6 @@ namespace System.Net.Http
                 int written = encoding.GetBytes(content, buffer);
                 stream.Write(buffer.Slice(0, written));
             }
-
             finally
             {
                 if (rentedBuffer != null)

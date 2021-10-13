@@ -100,7 +100,6 @@ namespace System.Drawing.Tests
 
                     context.Invalidate();
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -135,7 +134,6 @@ namespace System.Drawing.Tests
 
                     context.Invalidate();
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -170,7 +168,6 @@ namespace System.Drawing.Tests
 
                     context.Invalidate();
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -268,7 +265,6 @@ namespace System.Drawing.Tests
                         () => context.Allocate(graphics, Rectangle.Empty)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();

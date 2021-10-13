@@ -138,7 +138,6 @@ public class Directory_ReparsePoints_MountVolume
                             }
                         }
                     }
-
                     finally
                     {
                         MountHelper.Unmount(mountedDirName);
@@ -258,7 +257,6 @@ public class Directory_ReparsePoints_MountVolume
                             }
                         }
                     }
-
                     finally
                     {
                         MountHelper.Unmount(mountedDirName);
@@ -376,7 +374,6 @@ public class Directory_ReparsePoints_MountVolume
                             }
                         }
                     }
-
                     finally
                     {
                         MountHelper.Unmount(mountedDirName);
@@ -492,7 +489,6 @@ public class Directory_ReparsePoints_MountVolume
                             }
                         }
                     }
-
                     finally
                     {
                         MountHelper.Unmount(mountedDirName);

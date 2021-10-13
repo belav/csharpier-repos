@@ -267,7 +267,6 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                         aes.Decrypt(nonce, encrypted, tag, plaintext);
                         return plaintext;
                     }
-
                     finally
                     {
                         // delete since these contain secret material
@@ -370,7 +369,6 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                         // And we're done!
                         return retVal;
                     }
-
                     finally
                     {
                         // delete since these contain secret material

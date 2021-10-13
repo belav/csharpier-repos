@@ -149,7 +149,6 @@ namespace System.Diagnostics.Tests
                         Assert.Equal(0, Helpers.Retry((() => eventLog.Entries.Count)));
                     }
                 }
-
                 finally
                 {
                     EventLog.DeleteEventSource(source);

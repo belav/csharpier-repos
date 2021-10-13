@@ -220,7 +220,6 @@ namespace Microsoft.AspNetCore.DataProtection
                             );
                             Assert.Contains("X509Certificate", fileText, StringComparison.Ordinal);
                         }
-
                         finally
                         {
                             certificateStore.Remove(certificate);
@@ -291,7 +290,6 @@ namespace Microsoft.AspNetCore.DataProtection
                                 .CreateProtector("purpose");
                             Assert.Equal("payload", unprotector.Unprotect(data));
                         }
-
                         finally
                         {
                             certificateStore.Remove(certInStore);
@@ -416,7 +414,6 @@ namespace Microsoft.AspNetCore.DataProtection
             {
                 testCode(dirInfo);
             }
-
             finally
             {
                 // clean up when test is done

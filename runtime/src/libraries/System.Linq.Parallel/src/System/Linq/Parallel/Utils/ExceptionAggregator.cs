@@ -84,7 +84,6 @@ namespace System.Linq.Parallel
                     yield return elem;
                 }
             }
-
             finally
             {
                 source.Dispose();

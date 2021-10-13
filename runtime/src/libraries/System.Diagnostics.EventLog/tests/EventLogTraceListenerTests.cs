@@ -111,7 +111,6 @@ namespace System.Diagnostics.Tests
                     ValidateLastEntryMessage(listener, message, source);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -169,7 +168,6 @@ namespace System.Diagnostics.Tests
                     }
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -206,7 +204,6 @@ namespace System.Diagnostics.Tests
                     ValidateLastEntryMessage(listener, expectedMessage, source);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -317,7 +314,6 @@ namespace System.Diagnostics.Tests
                     }
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -391,7 +387,6 @@ namespace System.Diagnostics.Tests
                         Assert.DoesNotContain("i shouldn't be here", eventLogEntry.Message);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);

@@ -201,7 +201,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                         throw new IOException("The reader completed without returning a frame.");
                     }
                 }
-
                 finally
                 {
                     pipeReader.AdvanceTo(consumed, examined);

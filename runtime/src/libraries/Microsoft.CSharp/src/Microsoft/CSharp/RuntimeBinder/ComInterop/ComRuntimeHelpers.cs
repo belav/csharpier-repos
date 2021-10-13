@@ -166,7 +166,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 typeInfo = Marshal.GetObjectForIUnknown(typeInfoPtr) as ComTypes.ITypeInfo;
             }
-
             finally
             {
                 Marshal.Release(typeInfoPtr);
@@ -190,7 +189,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 return (ComTypes.TYPEATTR)Marshal.PtrToStructure(pAttrs, typeof(ComTypes.TYPEATTR));
             }
-
             finally
             {
                 typeInfo.ReleaseTypeAttr(pAttrs);
@@ -215,7 +213,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     typeof(ComTypes.TYPELIBATTR)
                 );
             }
-
             finally
             {
                 typeLib.ReleaseTLibAttr(pAttrs);

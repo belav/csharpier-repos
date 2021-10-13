@@ -55,7 +55,6 @@ namespace System.Net
                       : string.Equals(name, NTLM, StringComparison.OrdinalIgnoreCase) ? NTLM : name;
                 }
             }
-
             finally
             {
                 if (gotRef)

@@ -50,7 +50,6 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                         return 0;
                     }
                 }
-
                 finally
                 {
                     _bodyInputPipe.Reader.AdvanceTo(readableBuffer.End, readableBuffer.End);
@@ -202,7 +201,6 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                             flush = false;
                         }
                     }
-
                     finally
                     {
                         _bodyOutput.Reader.AdvanceTo(buffer.End);

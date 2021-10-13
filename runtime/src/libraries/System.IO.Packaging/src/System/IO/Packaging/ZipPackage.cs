@@ -269,7 +269,6 @@ namespace System.IO.Packaging
                     _containerStream = null!;
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

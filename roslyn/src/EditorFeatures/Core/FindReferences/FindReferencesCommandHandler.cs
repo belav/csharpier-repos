@@ -158,7 +158,6 @@ namespace Microsoft.CodeAnalysis.Editor.FindReferences
                             )
                             .ConfigureAwait(false);
                     }
-
                     finally
                     {
                         await context.OnCompletedAsync().ConfigureAwait(false);

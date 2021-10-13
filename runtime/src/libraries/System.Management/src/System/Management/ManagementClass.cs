@@ -475,7 +475,6 @@ namespace System.Management
                 status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
                     .CreateInstanceEnum_(ClassName, o.Flags, o.GetContext(), ref enumWbem);
             }
-
             finally
             {
                 if (securityHandler != null)
@@ -695,7 +694,6 @@ namespace System.Management
                 status = scope.GetSecuredIWbemServicesHandler(Scope.GetIWbemServices())
                     .CreateClassEnum_(ClassName, o.Flags, o.GetContext(), ref enumWbem);
             }
-
             finally
             {
                 if (securityHandler != null)
@@ -1056,7 +1054,6 @@ namespace System.Management
                         ref enumWbem
                     );
             }
-
             finally
             {
                 if (securityHandler != null)
@@ -1271,7 +1268,6 @@ namespace System.Management
                         ref enumWbem
                     );
             }
-
             finally
             {
                 if (securityHandler != null)

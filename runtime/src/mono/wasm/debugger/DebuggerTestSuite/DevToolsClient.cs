@@ -183,7 +183,6 @@ namespace Microsoft.WebAssembly.Diagnostics
                             );
                         }
                     }
-
                     finally
                     {
                         logger.LogDebug($"Loop ended with socket: {socket.State}");

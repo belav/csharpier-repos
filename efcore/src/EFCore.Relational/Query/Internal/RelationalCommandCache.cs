@@ -106,7 +106,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     return relationalCommand;
                 }
             }
-
             finally
             {
                 _locks.TryRemove(cacheKey, out _);

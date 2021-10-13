@@ -127,7 +127,6 @@ namespace System.IO
                         );
                     }
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -441,7 +440,6 @@ namespace System.IO
                             (nuint)nInt
                         );
                     }
-
                     finally
                     {
                         if (pointer != null)
@@ -567,7 +565,6 @@ namespace System.IO
                         _buffer.AcquirePointer(ref pointer);
                         result = *(pointer + pos + _offset);
                     }
-
                     finally
                     {
                         if (pointer != null)
@@ -745,7 +742,6 @@ namespace System.IO
                         (nuint)buffer.Length
                     );
                 }
-
                 finally
                 {
                     if (pointer != null)
@@ -883,7 +879,6 @@ namespace System.IO
                         _buffer.AcquirePointer(ref pointer);
                         *(pointer + pos + _offset) = value;
                     }
-
                     finally
                     {
                         if (pointer != null)

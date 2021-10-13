@@ -190,7 +190,6 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[5], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.Add, _rowAction_Changed);
             }
-
             finally
             {
                 UnsubscribeEvents(dt);
@@ -313,7 +312,6 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[4], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.ChangeCurrentAndOriginal, _rowAction_Changed);
             }
-
             finally
             {
                 UnsubscribeEvents(dt);
@@ -404,7 +402,6 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[1], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.ChangeOriginal, _rowAction_Changed);
             }
-
             finally
             {
                 UnsubscribeEvents(dt);

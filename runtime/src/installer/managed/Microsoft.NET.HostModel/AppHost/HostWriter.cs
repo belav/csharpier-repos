@@ -149,7 +149,6 @@ namespace Microsoft.NET.HostModel.AppHost
                                 }
                             }
                         }
-
                         finally
                         {
                             memoryMappedViewAccessor?.Dispose();

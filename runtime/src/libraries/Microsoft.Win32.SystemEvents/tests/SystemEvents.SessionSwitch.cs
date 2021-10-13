@@ -45,7 +45,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(args);
                 Assert.Equal(reason, args.Reason);
             }
-
             finally
             {
                 SystemEvents.SessionSwitch -= switchHandler;

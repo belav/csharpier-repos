@@ -819,7 +819,6 @@ namespace System.DirectoryServices.Protocols
                     Marshal.Copy(value.bv_val, _directoryControlValue, 0, value.bv_len);
                 }
             }
-
             finally
             {
                 if (control != IntPtr.Zero)

@@ -55,7 +55,6 @@ namespace strswitch
                     goto beginloop;
                 }
             }
-
             finally
             {
                 Console.WriteLine("In outer finally");

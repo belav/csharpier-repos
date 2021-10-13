@@ -192,7 +192,6 @@ namespace System.Composition.Convention
                 {
                     _memberInfos.TryGetValue(memberInfo, out cachedAttributes);
                 }
-
                 finally
                 {
                     _lock.ExitReadLock();
@@ -268,7 +267,6 @@ namespace System.Composition.Convention
                         // We will have updated all of the MemberInfos by now so lets reload cachedAttributes with the current store
                         _memberInfos.TryGetValue(memberInfo, out cachedAttributes);
                     }
-
                     finally
                     {
                         _lock.ExitWriteLock();
@@ -321,7 +319,6 @@ namespace System.Composition.Convention
                     cachedAttributes = null;
                 }
             }
-
             finally
             {
                 _lock.ExitReadLock();
@@ -337,7 +334,6 @@ namespace System.Composition.Convention
                 {
                     _memberInfos.TryGetValue(member, out cachedAttributes);
                 }
-
                 finally
                 {
                     _lock.ExitReadLock();
@@ -401,7 +397,6 @@ namespace System.Composition.Convention
                     cachedAttributes = null;
                 }
             }
-
             finally
             {
                 _lock.ExitReadLock();
@@ -417,7 +412,6 @@ namespace System.Composition.Convention
                 {
                     _parameters.TryGetValue(parameter, out cachedAttributes);
                 }
-
                 finally
                 {
                     _lock.ExitReadLock();

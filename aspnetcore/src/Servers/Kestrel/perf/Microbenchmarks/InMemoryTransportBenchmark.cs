@@ -265,7 +265,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
                             return response.ToArray();
                         }
                     }
-
                     finally
                     {
                         Output.AdvanceTo(consumed, examined);

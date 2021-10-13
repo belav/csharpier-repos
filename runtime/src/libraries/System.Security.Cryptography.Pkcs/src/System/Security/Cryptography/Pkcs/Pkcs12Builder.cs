@@ -308,7 +308,6 @@ namespace System.Security.Cryptography.Pkcs
                     _sealedData = writer.Encode();
                 }
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(macSpan);

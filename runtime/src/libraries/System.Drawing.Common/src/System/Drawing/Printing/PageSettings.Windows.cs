@@ -90,7 +90,6 @@ namespace System.Drawing.Printing
                     );
                     hardMarginX = hardMarginX_DU * 100 / dpiX;
                 }
-
                 finally
                 {
                     dc.Dispose();
@@ -121,7 +120,6 @@ namespace System.Drawing.Printing
                     );
                     hardMarginY = hardMarginY_DU * 100 / dpiY;
                 }
-
                 finally
                 {
                     dc.Dispose();
@@ -277,7 +275,6 @@ namespace System.Drawing.Printing
                             / dpiY;
                     }
                 }
-
                 finally
                 {
                     dc.Dispose();

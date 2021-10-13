@@ -489,7 +489,6 @@ namespace System.Threading.Threads.Tests
                         Assert.Equal(originalCulture, CultureInfo.CurrentCulture);
                         Assert.Equal(originalUICulture, CultureInfo.CurrentUICulture);
                     }
-
                     finally
                     {
                         CultureInfo.CurrentCulture = originalCulture;
@@ -1032,7 +1031,6 @@ namespace System.Threading.Threads.Tests
                 VerifyLocalDataSlot(slot);
                 VerifyLocalDataSlot(slot2);
             }
-
             finally
             {
                 Thread.FreeNamedDataSlot(slotName);
@@ -1050,7 +1048,6 @@ namespace System.Threading.Threads.Tests
                 VerifyLocalDataSlot(slot);
                 VerifyLocalDataSlot(slot2);
             }
-
             finally
             {
                 Thread.FreeNamedDataSlot(slotName);
@@ -1142,7 +1139,6 @@ namespace System.Threading.Threads.Tests
                 () =>
                 {
                     try { }
-
                     finally
                     {
                         Assert.Throws<ThreadInterruptedException>(

@@ -216,7 +216,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawLine(pen, 0f, 0f, 0f, 0f)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -345,7 +344,6 @@ namespace System.Drawing.Tests
                         () => graphics.DrawLines(pen, new PointF[2])
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();

@@ -381,7 +381,6 @@ namespace System.Reflection
                     }
                     return result;
                 }
-
                 finally
                 {
                     for (int i = 0; i < numAssemblies; i++)

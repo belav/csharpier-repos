@@ -43,7 +43,6 @@ namespace System.Buffers.Text.Tests
             {
                 TwoGiBOverflowHelper<int>(TwoGiBOverflowInt32TestData, pMemory);
             }
-
             finally
             {
                 AllocationHelper.ReleaseNative(ref pMemory);

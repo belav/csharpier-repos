@@ -232,7 +232,6 @@ namespace System.Buffers
                         allocateBuffer = buffer == null;
                     }
                 }
-
                 finally
                 {
                     if (lockTaken)
@@ -295,7 +294,6 @@ namespace System.Buffers
                         _buffers[--_index] = array;
                     }
                 }
-
                 finally
                 {
                     if (lockTaken)

@@ -353,7 +353,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         await _next(context);
                     }
                 }
-
                 finally
                 {
                     context.Transport = old;
@@ -390,7 +389,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
                         await _next(context);
                     }
                 }
-
                 finally
                 {
                     context.Transport = old;

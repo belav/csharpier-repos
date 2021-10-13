@@ -623,7 +623,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         {
                             serverName = adamInst.Name;
                         }
-
                         finally
                         {
                             adamInst.Dispose();
@@ -770,7 +769,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                     }
                 }
-
                 finally
                 {
                     if (pResponseBuffer != IntPtr.Zero)

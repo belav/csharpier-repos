@@ -57,7 +57,6 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
                 Assert.Equal("test value", config["key"]);
                 Assert.Equal("USEFUL_VALUE", config["RANDOM_ENVIRONMENT_VARIABLE"]);
             }
-
             finally
             {
                 if (Directory.Exists(tempFolder))

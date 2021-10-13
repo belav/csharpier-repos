@@ -93,7 +93,6 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
                     }
                 }
             }
-
             finally
             {
                 (e as IDisposable)?.Dispose();

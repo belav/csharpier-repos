@@ -53,7 +53,6 @@ namespace System.Net.Sockets.Tests
                 {
                     Assert.True(listener.AcceptAsync(saea));
                 }
-
                 finally
                 {
                     if (suppressContext)
@@ -107,7 +106,6 @@ namespace System.Net.Sockets.Tests
                         null
                     );
                 }
-
                 finally
                 {
                     if (suppressContext)
@@ -160,7 +158,6 @@ namespace System.Net.Sockets.Tests
                 {
                     pending = client.ConnectAsync(saea);
                 }
-
                 finally
                 {
                     if (suppressContext)
@@ -217,7 +214,6 @@ namespace System.Net.Sockets.Tests
                         null
                     ).CompletedSynchronously;
                 }
-
                 finally
                 {
                     if (suppressContext)
@@ -273,7 +269,6 @@ namespace System.Net.Sockets.Tests
                     {
                         pending = client.DisconnectAsync(saea);
                     }
-
                     finally
                     {
                         if (suppressContext)
@@ -336,7 +331,6 @@ namespace System.Net.Sockets.Tests
                             null
                         ).CompletedSynchronously;
                     }
-
                     finally
                     {
                         if (suppressContext)
@@ -399,7 +393,6 @@ namespace System.Net.Sockets.Tests
                             receiveFrom ? client.ReceiveFromAsync(saea) : client.ReceiveAsync(saea)
                         );
                     }
-
                     finally
                     {
                         if (suppressContext)
@@ -482,7 +475,6 @@ namespace System.Net.Sockets.Tests
                                 ).CompletedSynchronously
                         );
                     }
-
                     finally
                     {
                         if (suppressContext)
@@ -555,7 +547,6 @@ namespace System.Net.Sockets.Tests
                                     ? client.SendToAsync(saea)
                                     : client.SendPacketsAsync(saea);
                     }
-
                     finally
                     {
                         if (suppressContext)
@@ -646,7 +637,6 @@ namespace System.Net.Sockets.Tests
                                   null
                               ).CompletedSynchronously;
                     }
-
                     finally
                     {
                         if (suppressContext)
@@ -721,7 +711,6 @@ namespace System.Net.Sockets.Tests
                             null
                         ).CompletedSynchronously;
                     }
-
                     finally
                     {
                         if (suppressContext)

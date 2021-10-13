@@ -695,7 +695,6 @@ namespace System.Diagnostics
                     throw new Win32Exception(errno);
                 }
             }
-
             finally
             {
                 s_processStartLock.ExitReadLock();
@@ -1212,7 +1211,6 @@ namespace System.Diagnostics
             {
                 ProcessWaitState.CheckChildren(reapAll != 0);
             }
-
             finally
             {
                 s_processStartLock.ExitWriteLock();

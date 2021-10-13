@@ -304,7 +304,6 @@ namespace CseTest
 #endif
 #if TRY
             }
-
             finally { }
 #endif
 #if LOOP
@@ -323,7 +322,6 @@ namespace CseTest
             {
                 ans = input;
             }
-
             finally
             {
                 if (verbose)

@@ -105,7 +105,6 @@ namespace Microsoft.Extensions.Primitives
                 {
                     _changeTokenConsumer(_state);
                 }
-
                 finally
                 {
                     // We always want to ensure the callback is registered

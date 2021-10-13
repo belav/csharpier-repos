@@ -1242,7 +1242,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 return _database.SaveChanges(entriesToSave);
             }
-
             finally
             {
                 _concurrencyDetector?.ExitCriticalSection();
@@ -1269,7 +1268,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 return await _database.SaveChangesAsync(entriesToSave, cancellationToken)
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 _concurrencyDetector?.ExitCriticalSection();

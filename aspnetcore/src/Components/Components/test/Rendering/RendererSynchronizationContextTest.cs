@@ -169,7 +169,6 @@ namespace Microsoft.AspNetCore.Components.Rendering
                     null
                 );
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(original);

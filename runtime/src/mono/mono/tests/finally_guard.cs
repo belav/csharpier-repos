@@ -72,7 +72,6 @@ class Driver
             {
                 throw new ArgumentException();
             }
-
             finally
             {
                 handle.Set();
@@ -147,7 +146,6 @@ class Driver
             {
                 throw new ArgumentException();
             }
-
             finally
             {
                 handle.Set();
@@ -221,7 +219,6 @@ class Driver
             {
                 Console.WriteLine("try block");
             }
-
             finally
             {
                 handle.Set();

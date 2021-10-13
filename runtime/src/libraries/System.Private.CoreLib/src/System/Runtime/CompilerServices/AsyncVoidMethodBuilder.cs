@@ -122,7 +122,6 @@ namespace System.Runtime.CompilerServices
                         targetContext: _synchronizationContext
                     );
                 }
-
                 finally
                 {
                     NotifySynchronizationContextOfCompletion();

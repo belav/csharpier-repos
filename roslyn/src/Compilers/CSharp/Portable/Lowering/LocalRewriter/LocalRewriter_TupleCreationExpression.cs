@@ -137,7 +137,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return currentCreation;
             }
-
             finally
             {
                 underlyingTupleTypeChain.Free();

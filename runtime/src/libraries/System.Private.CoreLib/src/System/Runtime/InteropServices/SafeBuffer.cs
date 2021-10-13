@@ -201,7 +201,6 @@ namespace System.Runtime.InteropServices
 
                 Buffer.Memmove(ref Unsafe.As<T, byte>(ref value), ref *ptr, sizeofT);
             }
-
             finally
             {
                 if (mustCallRelease)
@@ -254,7 +253,6 @@ namespace System.Runtime.InteropServices
                         1
                     );
             }
-
             finally
             {
                 if (mustCallRelease)
@@ -288,7 +286,6 @@ namespace System.Runtime.InteropServices
 
                 Buffer.Memmove(ref *ptr, ref Unsafe.As<T, byte>(ref value), sizeofT);
             }
-
             finally
             {
                 if (mustCallRelease)
@@ -341,7 +338,6 @@ namespace System.Runtime.InteropServices
                         1
                     );
             }
-
             finally
             {
                 if (mustCallRelease)

@@ -117,7 +117,6 @@ namespace System.Xml.Tests
 
                 Assert.Equal(expectedLength, writerStream.Length);
             }
-
             finally
             {
                 w.Dispose();

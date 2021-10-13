@@ -144,7 +144,6 @@ class C
         {
             JsonValidateMerp(configDir);
         }
-
         finally
         {
             Directory.Delete(configDir, true);

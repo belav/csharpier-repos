@@ -6,7 +6,6 @@ class Class1
     {
         Class1 o = new Class1();
         try { }
-
         finally
         {
             // this allocates space on the stack and

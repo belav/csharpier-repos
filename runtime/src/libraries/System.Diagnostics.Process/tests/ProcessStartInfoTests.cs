@@ -356,7 +356,6 @@ namespace System.Diagnostics.Tests
                     )
                 );
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable(ExtraEnvVar, null);
@@ -593,7 +592,6 @@ namespace System.Diagnostics.Tests
 
                 Assert.Equal(value, testProcess.StartInfo.CreateNoWindow);
             }
-
             finally
             {
                 testProcess.Kill();
@@ -686,7 +684,6 @@ namespace System.Diagnostics.Tests
                     }
                 }
             }
-
             finally
             {
                 if (handle != null)
@@ -1332,7 +1329,6 @@ namespace System.Diagnostics.Tests
                 {
                     VerifyNotepadMainWindowTitle(process, tempFile);
                 }
-
                 finally
                 {
                     process?.Kill();
@@ -1382,7 +1378,6 @@ namespace System.Diagnostics.Tests
                 {
                     VerifyNotepadMainWindowTitle(process, tempFile);
                 }
-
                 finally
                 {
                     process?.Kill();
@@ -1601,7 +1596,6 @@ namespace System.Diagnostics.Tests
                 {
                     VerifyNotepadMainWindowTitle(process, tempFile);
                 }
-
                 finally
                 {
                     process?.Kill();

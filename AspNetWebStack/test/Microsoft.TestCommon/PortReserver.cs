@@ -92,7 +92,6 @@ namespace Microsoft.TestCommon
                     PortNumber = port;
                     _appDomainOwnedPorts.Add(port);
                 }
-
                 finally
                 {
                     mutex.ReleaseMutex();
@@ -137,7 +136,6 @@ namespace Microsoft.TestCommon
                     _appDomainOwnedPorts.Remove(PortNumber);
                     PortNumber = -1;
                 }
-
                 finally
                 {
                     mutex.ReleaseMutex();

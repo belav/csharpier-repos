@@ -128,7 +128,6 @@ namespace System.Net.NetworkInformation
                         }
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(buffer);

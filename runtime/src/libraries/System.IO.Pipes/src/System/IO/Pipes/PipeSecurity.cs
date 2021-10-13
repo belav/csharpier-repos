@@ -256,7 +256,6 @@ namespace System.IO.Pipes
                 base.Persist(handle, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-
             finally
             {
                 WriteUnlock();
@@ -273,7 +272,6 @@ namespace System.IO.Pipes
                 base.Persist(name, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-
             finally
             {
                 WriteUnlock();

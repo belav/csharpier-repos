@@ -655,7 +655,6 @@ namespace System.Security.Tests
             {
                 return Marshal.PtrToStringUni(ptr);
             }
-
             finally
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(ptr);

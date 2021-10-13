@@ -744,7 +744,6 @@ namespace System
                                 }
                             }
                         }
-
                         finally
                         {
                             if (dirHandle != IntPtr.Zero)
@@ -759,7 +758,6 @@ namespace System
                     }
                 }
             }
-
             finally
             {
                 if (dirBuffer != null)

@@ -268,7 +268,6 @@ namespace System.IO
                     );
                 }
             }
-
             finally
             {
                 // Call Monitor again to either start the next iteration or clean up the whole operation.

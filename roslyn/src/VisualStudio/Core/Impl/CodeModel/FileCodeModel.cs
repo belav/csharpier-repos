@@ -331,7 +331,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 action();
             }
-
             finally
             {
                 ReleaseEditor();
@@ -345,7 +344,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 return action();
             }
-
             finally
             {
                 ReleaseEditor();

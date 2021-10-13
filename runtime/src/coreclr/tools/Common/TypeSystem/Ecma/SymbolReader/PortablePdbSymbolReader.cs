@@ -79,7 +79,6 @@ namespace Internal.TypeSystem.Ecma
 
                 return metadataReader;
             }
-
             finally
             {
                 if (accessor != null)

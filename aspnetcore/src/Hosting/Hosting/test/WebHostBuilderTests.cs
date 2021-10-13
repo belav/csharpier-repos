@@ -1471,7 +1471,6 @@ namespace Microsoft.AspNetCore.Hosting
                     {
                         await host.StartAsync();
                     }
-
                     finally
                     {
                         Assert.False(filter.Executed);

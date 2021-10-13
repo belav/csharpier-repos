@@ -82,7 +82,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
                         Visit(child);
                     }
                 }
-
                 finally
                 {
                     _ancestors.RemoveAt(0);

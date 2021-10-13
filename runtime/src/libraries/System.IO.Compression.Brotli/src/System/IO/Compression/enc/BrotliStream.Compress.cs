@@ -199,7 +199,6 @@ namespace System.IO.Compression
                             .ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 AsyncOperationCompleting();
@@ -275,7 +274,6 @@ namespace System.IO.Compression
 
                 await _stream.FlushAsync(cancellationToken).ConfigureAwait(false);
             }
-
             finally
             {
                 AsyncOperationCompleting();

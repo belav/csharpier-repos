@@ -124,7 +124,6 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal
                     column.IsNullable = false;
                 }
             }
-
             finally
             {
                 if (!connectionStartedOpen)

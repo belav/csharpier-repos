@@ -94,7 +94,6 @@ namespace System.Threading
                     _releaseHandle = false;
                 }
             }
-
             finally
             {
                 s_callbackLock.Release();
@@ -128,7 +127,6 @@ namespace System.Threading
                     _releaseHandle = false;
                 }
             }
-
             finally
             {
                 s_callbackLock.Release();
@@ -610,7 +608,6 @@ namespace System.Threading
                 osHandle.DangerousAddRef(ref mustReleaseSafeHandle);
                 ret = BindIOCompletionCallbackNative(osHandle.DangerousGetHandle());
             }
-
             finally
             {
                 if (mustReleaseSafeHandle)

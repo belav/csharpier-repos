@@ -107,7 +107,6 @@ namespace Microsoft.AspNetCore.TestHost
                 {
                     await callback(state);
                 }
-
                 finally
                 {
                     await prior();
@@ -123,7 +122,6 @@ namespace Microsoft.AspNetCore.TestHost
                 {
                     await _responseStartingAsync();
                 }
-
                 finally
                 {
                     HasStarted = true;

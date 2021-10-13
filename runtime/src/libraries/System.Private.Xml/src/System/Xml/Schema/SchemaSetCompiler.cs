@@ -592,7 +592,6 @@ namespace System.Xml.Schema
 
                 substitutionGroup.Members.Add(examplar); // Compiled mark
             }
-
             finally
             {
                 substitutionGroup.IsProcessing = false;
@@ -1014,7 +1013,6 @@ namespace System.Xml.Schema
                 }
                 complexType.ElementDecl = decl;
             }
-
             finally
             {
                 complexType.IsProcessing = false;
@@ -2709,7 +2707,6 @@ namespace System.Xml.Schema
                 }
                 attributeGroup.AttributeWildcard = anyAttribute;
             }
-
             finally
             {
                 attributeGroup.IsProcessing = false;
@@ -3890,7 +3887,6 @@ namespace System.Xml.Schema
                     CompileParticleElements(complexType, complexType.ContentTypeParticle);
                 }
             }
-
             finally
             {
                 complexType.IsProcessing = false;

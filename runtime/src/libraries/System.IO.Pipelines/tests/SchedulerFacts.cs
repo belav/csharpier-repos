@@ -82,7 +82,6 @@ namespace System.IO.Pipelines.Tests
                 // Don't run code on our sync context
                 await reading.ConfigureAwait(false);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previous);
@@ -127,7 +126,6 @@ namespace System.IO.Pipelines.Tests
                 // Don't run code on our sync context
                 await reading.ConfigureAwait(false);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previous);
@@ -175,7 +173,6 @@ namespace System.IO.Pipelines.Tests
                 // We don't want to run any code on our fake sync context
                 await reading.ConfigureAwait(false);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previous);
@@ -307,7 +304,6 @@ namespace System.IO.Pipelines.Tests
                     await writing.ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previous);
@@ -359,7 +355,6 @@ namespace System.IO.Pipelines.Tests
                     await writing.ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previous);
@@ -410,7 +405,6 @@ namespace System.IO.Pipelines.Tests
                     await writing.ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previous);

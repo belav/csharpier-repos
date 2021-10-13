@@ -275,7 +275,6 @@ namespace System.Data.OleDb
                 }
                 transaction.BeginInternal(value);
             }
-
             finally
             {
                 if (null != unknown)

@@ -197,7 +197,6 @@ namespace System.Xml.Xsl.Runtime
                         XmlSpace.Preserve
                     ).CreateNavigator();
                 }
-
                 finally
                 {
                     // Always close reader that was opened here

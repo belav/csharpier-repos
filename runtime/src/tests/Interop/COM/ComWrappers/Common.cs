@@ -114,7 +114,6 @@ namespace ComWrappersTests.Common
             {
                 return CreateTrackerObject_Unsafe(outer, out inner);
             }
-
             finally
             {
                 AllocLock.ExitReadLock();

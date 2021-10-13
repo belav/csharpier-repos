@@ -379,7 +379,6 @@ namespace System.Security.AccessControl
 
                 return _securityDescriptor.Owner.Translate(targetType);
             }
-
             finally
             {
                 ReadUnlock();
@@ -401,7 +400,6 @@ namespace System.Security.AccessControl
                     identity.Translate(typeof(SecurityIdentifier)) as SecurityIdentifier;
                 _ownerModified = true;
             }
-
             finally
             {
                 WriteUnlock();
@@ -425,7 +423,6 @@ namespace System.Security.AccessControl
 
                 return _securityDescriptor.Group.Translate(targetType);
             }
-
             finally
             {
                 ReadUnlock();
@@ -447,7 +444,6 @@ namespace System.Security.AccessControl
                     identity.Translate(typeof(SecurityIdentifier)) as SecurityIdentifier;
                 _groupModified = true;
             }
-
             finally
             {
                 WriteUnlock();
@@ -470,7 +466,6 @@ namespace System.Security.AccessControl
                 );
                 _daclModified = true;
             }
-
             finally
             {
                 WriteUnlock();
@@ -493,7 +488,6 @@ namespace System.Security.AccessControl
                 );
                 _saclModified = true;
             }
-
             finally
             {
                 WriteUnlock();
@@ -513,7 +507,6 @@ namespace System.Security.AccessControl
                         != 0
                     );
                 }
-
                 finally
                 {
                     ReadUnlock();
@@ -530,7 +523,6 @@ namespace System.Security.AccessControl
                 _securityDescriptor.SetDiscretionaryAclProtection(isProtected, preserveInheritance);
                 _daclModified = true;
             }
-
             finally
             {
                 WriteUnlock();
@@ -549,7 +541,6 @@ namespace System.Security.AccessControl
                         (_securityDescriptor.ControlFlags & ControlFlags.SystemAclProtected) != 0
                     );
                 }
-
                 finally
                 {
                     ReadUnlock();
@@ -566,7 +557,6 @@ namespace System.Security.AccessControl
                 _securityDescriptor.SetSystemAclProtection(isProtected, preserveInheritance);
                 _saclModified = true;
             }
-
             finally
             {
                 WriteUnlock();
@@ -583,7 +573,6 @@ namespace System.Security.AccessControl
                 {
                     return _securityDescriptor.IsDiscretionaryAclCanonical;
                 }
-
                 finally
                 {
                     ReadUnlock();
@@ -601,7 +590,6 @@ namespace System.Security.AccessControl
                 {
                     return _securityDescriptor.IsSystemAclCanonical;
                 }
-
                 finally
                 {
                     ReadUnlock();
@@ -622,7 +610,6 @@ namespace System.Security.AccessControl
             {
                 return _securityDescriptor.GetSddlForm(includeSections);
             }
-
             finally
             {
                 ReadUnlock();
@@ -658,7 +645,6 @@ namespace System.Security.AccessControl
                     includeSections
                 );
             }
-
             finally
             {
                 WriteUnlock();
@@ -677,7 +663,6 @@ namespace System.Security.AccessControl
 
                 return result;
             }
-
             finally
             {
                 ReadUnlock();
@@ -713,7 +698,6 @@ namespace System.Security.AccessControl
                     includeSections
                 );
             }
-
             finally
             {
                 WriteUnlock();
@@ -757,7 +741,6 @@ namespace System.Security.AccessControl
             {
                 return ModifyAccess(modification, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();
@@ -786,7 +769,6 @@ namespace System.Security.AccessControl
             {
                 return ModifyAudit(modification, rule, out modified);
             }
-
             finally
             {
                 WriteUnlock();

@@ -37,7 +37,6 @@ internal class LocallocTest
                 Global.initializeStack(intArray2, size, 2000);
                 throw new Exception("Test Exception");
             }
-
             finally
             {
                 if (!Global.verifyStack("intArray1", intArray1, size, 1000))

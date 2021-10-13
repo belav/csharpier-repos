@@ -30,7 +30,6 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                         unprotectedSecretRawBytes
                     );
                 }
-
                 finally
                 {
                     Array.Clear(unprotectedSecretRawBytes, 0, unprotectedSecretRawBytes.Length);
@@ -59,7 +58,6 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
                 {
                     return new Secret(unprotectedSecret);
                 }
-
                 finally
                 {
                     Array.Clear(unprotectedSecret, 0, unprotectedSecret.Length);

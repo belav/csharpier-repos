@@ -353,7 +353,6 @@ namespace Microsoft.Extensions.Http
                     _expiredHandlers.Count
                 );
             }
-
             finally
             {
                 Monitor.Exit(_cleanupActiveLock);

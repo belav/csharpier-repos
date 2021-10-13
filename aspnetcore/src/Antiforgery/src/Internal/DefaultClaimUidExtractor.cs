@@ -149,7 +149,6 @@ namespace Microsoft.AspNetCore.Antiforgery
 
                 return bytes;
             }
-
             finally
             {
                 _pool.Return(serializationContext);

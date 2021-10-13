@@ -65,7 +65,6 @@ namespace System.IO.Strategies
                 {
                     return _source.GetResult(token);
                 }
-
                 finally
                 {
                     // The instance is ready to be reused

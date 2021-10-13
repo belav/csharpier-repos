@@ -39,7 +39,6 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 CultureInfo.CurrentUICulture = new CultureInfo("en-US");
                 return base.CreateServer(builder);
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = originalCulture;
@@ -57,7 +56,6 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                 CultureInfo.CurrentUICulture = new CultureInfo("en-US");
                 return base.CreateHost(builder);
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = originalCulture;

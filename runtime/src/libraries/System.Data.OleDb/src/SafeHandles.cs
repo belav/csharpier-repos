@@ -166,7 +166,6 @@ namespace System.Data.OleDb
         {
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 _chapterHandle = binding.InterlockedExchangePointer(valueOffset);
@@ -695,7 +694,6 @@ namespace System.Data.OleDb
             System.Data.Common.UnsafeNativeMethods.IChapteredRowset? chapteredRowset = null;
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 Guid IID_IChapteredRowset =
@@ -725,7 +723,6 @@ namespace System.Data.OleDb
             ITransactionLocal? transactionLocal = null;
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 Guid IID_ITransactionLocal = typeof(ITransactionLocal).GUID;
@@ -753,7 +750,6 @@ namespace System.Data.OleDb
             ITransactionLocal? transactionLocal = null;
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 Guid IID_ITransactionLocal = typeof(ITransactionLocal).GUID;

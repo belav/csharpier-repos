@@ -46,13 +46,11 @@ namespace hello
                         goto begintry1;
                     }
                 }
-
                 finally
                 {
                     Console.WriteLine("in finally 2");
                 }
             }
-
             finally
             {
                 Console.WriteLine("in finally 1");

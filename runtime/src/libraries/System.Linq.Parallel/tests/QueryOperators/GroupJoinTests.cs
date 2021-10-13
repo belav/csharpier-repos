@@ -580,7 +580,6 @@ namespace System.Linq.Parallel.Tests
                         {
                             Assert.Equal(KeyFactor, seenEmpty + seenNonEmpty);
                         }
-
                         finally
                         {
                             seenEmpty = 0;
@@ -595,7 +594,6 @@ namespace System.Linq.Parallel.Tests
                         {
                             Assert.Equal((seenLeftGroup * KeyFactor) + seenNonEmpty, p.Key);
                         }
-
                         finally
                         {
                             seenNonEmpty++;
@@ -613,7 +611,6 @@ namespace System.Linq.Parallel.Tests
                                 {
                                     Assert.Equal(expectedInner, y);
                                 }
-
                                 finally
                                 {
                                     expectedInner += ElementFactor;

@@ -45,7 +45,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 WriteResponseMessage(HandshakeResponseMessage.Empty, memoryBufferWriter);
                 _successHandshakeData = memoryBufferWriter.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);
@@ -83,7 +82,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 writer.Flush();
                 Debug.Assert(writer.CurrentDepth == 0);
             }
-
             finally
             {
                 ReusableUtf8JsonWriter.Return(reusableWriter);
@@ -118,7 +116,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                 writer.Flush();
                 Debug.Assert(writer.CurrentDepth == 0);
             }
-
             finally
             {
                 ReusableUtf8JsonWriter.Return(reusableWriter);

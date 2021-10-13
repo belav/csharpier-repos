@@ -1028,7 +1028,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
             }
-
             finally
             {
                 compilationState.CurrentImportChain = oldImportChain;
@@ -1151,7 +1150,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Definition is already in the symbol table, so don't call moduleBeingBuilt.AddCompilerGeneratedDefinition
                 }
             }
-
             finally
             {
                 _diagnostics.AddRange(diagnosticsThisMethod);
@@ -1739,14 +1737,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     _diagnostics.AddRange(diagsForCurrentMethod);
                 }
-
                 finally
                 {
                     lambdaDebugInfoBuilder.Free();
                     closureDebugInfoBuilder.Free();
                 }
             }
-
             finally
             {
                 diagsForCurrentMethod.Free();
@@ -2117,7 +2113,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     dynamicAnalysisDataOpt
                 );
             }
-
             finally
             {
                 // Basic blocks contain poolable builders for IL and sequence points. Free those back

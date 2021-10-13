@@ -171,7 +171,6 @@ namespace System.IO.Compression
                 }
                 _deflateStream = null!;
             }
-
             finally
             {
                 base.Dispose(disposing);

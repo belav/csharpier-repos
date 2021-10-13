@@ -48,7 +48,6 @@ namespace AssemblyDependencyResolverTests
                 runner.RunTestsForInstance(runner);
                 return runner._retValue;
             }
-
             finally
             {
                 runner.Cleanup();

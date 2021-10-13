@@ -139,7 +139,6 @@ namespace System.UnitTesting
                         return true;
                 }
             }
-
             finally
             {
                 (eA as IDisposable)?.Dispose();

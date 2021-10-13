@@ -407,7 +407,6 @@ namespace System.Drawing
                     SafeNativeMethods.DI_NORMAL
                 );
             }
-
             finally
             {
                 Interop.Gdi32.SelectClipRgn(dc, hSaveRgn);
@@ -754,7 +753,6 @@ namespace System.Drawing
                             out int temp
                         );
                     }
-
                     finally
                     {
                         Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
@@ -873,7 +871,6 @@ namespace System.Drawing
                         }
                         // note: we ignore the mask that's available after the pixel table
                     }
-
                     finally
                     {
                         bitmap.UnlockBits(bmpdata);
@@ -932,7 +929,6 @@ namespace System.Drawing
                                     CopyBitmapData(bmpData, targetData);
                                 }
                             }
-
                             finally
                             {
                                 if (tmpBitmap != null && bmpData != null)
@@ -948,7 +944,6 @@ namespace System.Drawing
                         }
                     }
                 }
-
                 finally
                 {
                     if (info.hbmColor != IntPtr.Zero)

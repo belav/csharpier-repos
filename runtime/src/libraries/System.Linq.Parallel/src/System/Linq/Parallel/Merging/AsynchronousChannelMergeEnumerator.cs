@@ -262,7 +262,6 @@ namespace System.Linq.Parallel
                             firstChannelIndex = currChannelIndex;
                             doneChannels = 0;
                         }
-
                         finally
                         {
                             // We have to guarantee that any waits we said we would perform are undone.

@@ -131,7 +131,6 @@ namespace System.Net.NetworkInformation
                             }
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(buffer);
@@ -206,7 +205,6 @@ namespace System.Net.NetworkInformation
                             }
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(buffer);
@@ -276,7 +274,6 @@ namespace System.Net.NetworkInformation
                             }
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(buffer);
@@ -361,7 +358,6 @@ namespace System.Net.NetworkInformation
                             }
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(buffer);

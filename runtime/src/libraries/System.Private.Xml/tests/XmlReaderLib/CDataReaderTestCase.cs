@@ -106,7 +106,6 @@ namespace System.Xml.Tests
             {
                 result = base.ExecuteVariation(index, param);
             }
-
             finally
             {
                 PostExecuteVariation(index, param);

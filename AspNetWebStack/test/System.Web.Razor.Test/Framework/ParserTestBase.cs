@@ -317,7 +317,6 @@ namespace System.Web.Razor.Test.Framework
                     parserActionSelector(parserSelector(context))();
                     results = context.CompleteParse();
                 }
-
                 finally
                 {
                     if (results != null && results.Document != null)

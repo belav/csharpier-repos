@@ -71,13 +71,11 @@ namespace System.Net.Security
                             }
                             Debug.Assert(!e2.MoveNext(), $"{pi.Name}. Cloned enumerator too long.");
                         }
-
                         finally
                         {
                             (e2 as IDisposable)?.Dispose();
                         }
                     }
-
                     finally
                     {
                         (e1 as IDisposable)?.Dispose();

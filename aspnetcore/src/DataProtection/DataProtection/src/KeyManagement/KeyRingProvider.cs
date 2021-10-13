@@ -286,7 +286,6 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                     return existingCacheableKeyRing.KeyRing;
                 }
             }
-
             finally
             {
                 if (acquiredLock)

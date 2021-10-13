@@ -232,7 +232,6 @@ namespace System.ServiceProcess
                             _dependentServices[i] = new ServiceController(_machineName, status);
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(enumBuffer);
@@ -407,7 +406,6 @@ namespace System.ServiceProcess
 
                     return _servicesDependedOn;
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(bufPtr);
@@ -456,7 +454,6 @@ namespace System.ServiceProcess
                     _startType = (ServiceStartMode)config.dwStartType;
                     _startTypeInitialized = true;
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(bufPtr);
@@ -932,7 +929,6 @@ namespace System.ServiceProcess
                     services[i] = selector(status);
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -1078,7 +1074,6 @@ namespace System.ServiceProcess
                     );
                 }
             }
-
             finally
             {
                 for (i = 0; i < args.Length; i++)

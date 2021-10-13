@@ -13,7 +13,6 @@ class Driver
         {
             res = 3;
         }
-
         finally
         {
             res = 4;

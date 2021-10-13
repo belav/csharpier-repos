@@ -49,7 +49,6 @@ namespace System.Diagnostics.Tests
                     }
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);

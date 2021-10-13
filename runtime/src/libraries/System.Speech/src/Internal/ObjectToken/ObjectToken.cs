@@ -82,7 +82,6 @@ namespace System.Speech.Internal.ObjectTokens
                     }
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

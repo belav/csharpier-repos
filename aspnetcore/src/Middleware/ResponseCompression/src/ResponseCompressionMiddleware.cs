@@ -72,7 +72,6 @@ namespace Microsoft.AspNetCore.ResponseCompression
                 await _next(context);
                 await compressionBody.FinishCompressionAsync();
             }
-
             finally
             {
                 context.Features.Set(originalBodyFeature);

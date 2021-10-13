@@ -277,7 +277,6 @@ namespace System.Linq.Parallel
                     } while (_source.MoveNext(ref current!, ref currentKey));
                 }
             }
-
             finally
             {
                 _source.Dispose();

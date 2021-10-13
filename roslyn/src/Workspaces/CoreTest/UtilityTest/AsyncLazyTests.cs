@@ -92,7 +92,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         synchronousRequestThread = Thread.CurrentThread;
                         lazy.GetValue(requestCancellationTokenSource.Token);
                     }
-
                     finally // we do test GetValue in exceptional scenarios, so we should deal with this
                     {
                         synchronousRequestThread = null;

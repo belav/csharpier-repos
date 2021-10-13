@@ -44,7 +44,6 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             {
                 await callback(state);
             }
-
             finally
             {
                 semaphoreSlim.Release();

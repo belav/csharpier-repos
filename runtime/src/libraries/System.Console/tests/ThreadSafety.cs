@@ -98,7 +98,6 @@ public class ThreadSafety
                 }
             }
         }
-
         finally
         {
             Console.SetIn(savedStandardInput);
@@ -148,7 +147,6 @@ public class ThreadSafety
                 }
             }
         }
-
         finally
         {
             Console.SetIn(savedStandardInput);

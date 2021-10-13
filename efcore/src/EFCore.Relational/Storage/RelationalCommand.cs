@@ -582,7 +582,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                 return _relationalReader;
             }
-
             finally
             {
                 if (!readerOpen)
@@ -718,7 +717,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                 return _relationalReader;
             }
-
             finally
             {
                 if (!readerOpen)

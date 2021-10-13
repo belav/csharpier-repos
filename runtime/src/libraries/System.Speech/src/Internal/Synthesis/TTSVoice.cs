@@ -103,7 +103,6 @@ namespace System.Speech.Internal.Synthesis
                         targetWaveFormat != null ? targetFormat.AddrOfPinnedObject() : IntPtr.Zero
                     );
                 }
-
                 finally
                 {
                     if (targetWaveFormat != null)

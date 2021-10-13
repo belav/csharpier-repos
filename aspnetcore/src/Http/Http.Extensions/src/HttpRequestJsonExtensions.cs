@@ -88,7 +88,6 @@ namespace Microsoft.AspNetCore.Http
                     cancellationToken
                 );
             }
-
             finally
             {
                 if (usesTranscodingStream)
@@ -172,7 +171,6 @@ namespace Microsoft.AspNetCore.Http
                     cancellationToken
                 );
             }
-
             finally
             {
                 if (usesTranscodingStream)

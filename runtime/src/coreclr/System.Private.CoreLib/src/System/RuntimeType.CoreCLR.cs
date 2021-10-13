@@ -555,7 +555,6 @@ namespace System
                                 break;
                         }
                     }
-
                     finally
                     {
                         if (lockTaken)
@@ -1990,7 +1989,6 @@ namespace System
                         s_methodInstantiations[rmi] = rmi;
                     }
                 }
-
                 finally
                 {
                     if (lockTaken)

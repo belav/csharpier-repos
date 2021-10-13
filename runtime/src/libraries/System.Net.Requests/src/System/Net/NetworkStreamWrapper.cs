@@ -108,7 +108,6 @@ namespace System.Net
                     CloseSocket();
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

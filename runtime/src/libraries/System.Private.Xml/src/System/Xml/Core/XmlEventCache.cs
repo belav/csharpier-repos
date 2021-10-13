@@ -481,7 +481,6 @@ namespace System.Xml
                     AddEvent(XmlEventType.Dispose);
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

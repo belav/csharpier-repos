@@ -61,7 +61,6 @@ class BindHandle1
                 return (98);
             }
         }
-
         finally
         {
             if (File.Exists("test.txt"))

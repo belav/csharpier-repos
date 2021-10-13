@@ -449,7 +449,6 @@ namespace System.IO.Strategies
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 // Make sure the stream's current position reflects where we ended up

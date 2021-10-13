@@ -60,7 +60,6 @@ class SmallRepro
             Rethrows1();
             Console.WriteLine("Unreached");
         }
-
         finally
         {
             Console.WriteLine("In Finally funclet (1), Exception1 should be in-flight");

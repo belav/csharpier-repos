@@ -283,7 +283,6 @@ namespace System.Drawing.Drawing2D
                         )
                     );
                 }
-
                 finally
                 {
                     if (factors != IntPtr.Zero)

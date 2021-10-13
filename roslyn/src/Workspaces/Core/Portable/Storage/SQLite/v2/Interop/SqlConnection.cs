@@ -387,7 +387,6 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                 // Copy those bytes into a pooled stream
                 return SerializableBytes.CreateReadableStream(bytes, length);
             }
-
             finally
             {
                 // Return our small array back to the pool.

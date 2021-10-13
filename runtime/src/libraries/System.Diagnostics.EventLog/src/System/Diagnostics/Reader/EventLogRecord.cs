@@ -450,7 +450,6 @@ namespace System.Diagnostics.Eventing.Reader
                 if (Handle != null && !Handle.IsInvalid)
                     Handle.Dispose();
             }
-
             finally
             {
                 base.Dispose(disposing);

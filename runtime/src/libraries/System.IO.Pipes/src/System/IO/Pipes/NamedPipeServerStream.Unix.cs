@@ -242,7 +242,6 @@ namespace System.IO.Pipes
             {
                 impersonationWorker();
             }
-
             finally
             {
                 // set the userid of the current (server) process back to its original value

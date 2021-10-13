@@ -332,7 +332,6 @@ namespace System.Drawing.Imaging
                     )!;
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -383,7 +382,6 @@ namespace System.Drawing.Imaging
                     )!;
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -434,7 +432,6 @@ namespace System.Drawing.Imaging
                     )!;
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);

@@ -243,7 +243,6 @@ namespace System.Data.Common
                 CommandBehavior cmdBehavior = FillCommandBehavior;
                 return FillSchema(dataTable, schemaType, selectCmd!, cmdBehavior);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -280,7 +279,6 @@ namespace System.Data.Common
                     cmdBehavior
                 );
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -301,7 +299,6 @@ namespace System.Data.Common
                 CommandBehavior cmdBehavior = FillCommandBehavior;
                 return FillSchema(dataSet, schemaType, selectCmd!, srcTable, cmdBehavior);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -349,7 +346,6 @@ namespace System.Data.Common
                     behavior
                 )!;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -397,7 +393,6 @@ namespace System.Data.Common
                     behavior | CommandBehavior.SingleResult
                 );
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -443,13 +438,11 @@ namespace System.Data.Common
                         }
                     }
                 }
-
                 finally
                 {
                     QuietClose(activeConnection, originalState);
                 }
             }
-
             finally
             {
                 if (restoreNullConnection)
@@ -481,7 +474,6 @@ namespace System.Data.Common
                     cmdBehavior
                 );
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -502,7 +494,6 @@ namespace System.Data.Common
                 CommandBehavior cmdBehavior = FillCommandBehavior;
                 return Fill(dataSet, 0, 0, srcTable, selectCmd!, cmdBehavior);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -525,7 +516,6 @@ namespace System.Data.Common
                 CommandBehavior cmdBehavior = FillCommandBehavior;
                 return Fill(dataSet, startRecord, maxRecords, srcTable, selectCmd!, cmdBehavior);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -578,7 +568,6 @@ namespace System.Data.Common
                     behavior
                 );
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -599,7 +588,6 @@ namespace System.Data.Common
                 CommandBehavior cmdBehavior = FillCommandBehavior;
                 return Fill(dataTables, 0, 0, selectCmd!, cmdBehavior);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -621,7 +609,6 @@ namespace System.Data.Common
                 CommandBehavior cmdBehavior = FillCommandBehavior;
                 return Fill(dataTables, startRecord, maxRecords, selectCmd!, cmdBehavior);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -645,7 +632,6 @@ namespace System.Data.Common
                 DataTable[] dataTables = new DataTable[1] { dataTable };
                 return Fill(dataTables, 0, 0, command, behavior);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -701,7 +687,6 @@ namespace System.Data.Common
                     behavior
                 );
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -761,7 +746,6 @@ namespace System.Data.Common
                             );
                         }
                     }
-
                     finally
                     {
                         if (null != dataReader)
@@ -770,13 +754,11 @@ namespace System.Data.Common
                         }
                     }
                 }
-
                 finally
                 {
                     QuietClose(activeConnection, originalState);
                 }
             }
-
             finally
             {
                 if (restoreNullConnection)
@@ -954,7 +936,6 @@ namespace System.Data.Common
                                     dataColumn.ReadOnly = false;
                                     row[dataColumn] = value;
                                 }
-
                                 finally
                                 {
                                     dataColumn.ReadOnly = true;
@@ -1036,7 +1017,6 @@ namespace System.Data.Common
                 }
                 return rowsAffected;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1075,7 +1055,6 @@ namespace System.Data.Common
                 }
                 return UpdateFromDataTable(dataTable, tableMapping);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1130,7 +1109,6 @@ namespace System.Data.Common
                 }
                 return rowsAffected;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1624,7 +1602,6 @@ namespace System.Data.Common
                             );
                         }
                     }
-
                     finally
                     {
                         if (1 != maxBatchCommands)
@@ -1633,7 +1610,6 @@ namespace System.Data.Common
                         }
                     }
                 }
-
                 finally
                 { // try/finally for connection cleanup
                     for (int i = 0; i < connections.Length; ++i)
@@ -1643,7 +1619,6 @@ namespace System.Data.Common
                 }
                 return cumulativeDataRowsAffected;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1914,7 +1889,6 @@ namespace System.Data.Common
                             }
                         }
                     }
-
                     finally
                     {
                         // using Close which can optimize its { while(dataReader.NextResult()); } loop

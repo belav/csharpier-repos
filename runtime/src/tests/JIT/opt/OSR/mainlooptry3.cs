@@ -32,7 +32,6 @@ class MainLoopCloselyNestedTry
             }
             catch (Exception) { }
         }
-
         finally
         {
             Console.WriteLine($"done, sum is {result}");

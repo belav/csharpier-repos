@@ -100,7 +100,6 @@ namespace System.Diagnostics.Tests
                 SetAndCheckBasePriority(ProcessPriorityClass.Idle, 4);
                 SetAndCheckBasePriority(ProcessPriorityClass.Normal, 8);
             }
-
             finally
             {
                 _process.PriorityClass = originalPriority;
@@ -571,7 +570,6 @@ namespace System.Diagnostics.Tests
                 {
                     Assert.False(p.HasExited, "TestHasExited002 failed");
                 }
-
                 finally
                 {
                     p.Kill();
@@ -667,7 +665,6 @@ namespace System.Diagnostics.Tests
                     _process.Refresh();
                     Assert.Equal(curValue, (int)_process.MaxWorkingSet);
                 }
-
                 finally
                 {
                     _process.MaxWorkingSet = (IntPtr)curValue;
@@ -733,7 +730,6 @@ namespace System.Diagnostics.Tests
                     _process.Refresh();
                     Assert.Equal(curValue, (int)_process.MinWorkingSet);
                 }
-
                 finally
                 {
                     _process.MinWorkingSet = (IntPtr)curValue;
@@ -1073,7 +1069,6 @@ namespace System.Diagnostics.Tests
                 _process.ProcessorAffinity = new IntPtr(0x1);
                 Assert.Equal(new IntPtr(0x1), _process.ProcessorAffinity);
             }
-
             finally
             {
                 _process.ProcessorAffinity = curProcessorAffinity;
@@ -1095,7 +1090,6 @@ namespace System.Diagnostics.Tests
                 _process.PriorityBoostEnabled = false;
                 Assert.False(_process.PriorityBoostEnabled, "TestPriorityBoostEnabled002 failed");
             }
-
             finally
             {
                 _process.PriorityBoostEnabled = isPriorityBoostEnabled;
@@ -1128,7 +1122,6 @@ namespace System.Diagnostics.Tests
                 _process.PriorityClass = ProcessPriorityClass.Normal;
                 Assert.Equal(ProcessPriorityClass.Normal, _process.PriorityClass);
             }
-
             finally
             {
                 _process.PriorityClass = priorityClass;
@@ -1837,7 +1830,6 @@ namespace System.Diagnostics.Tests
                                             p.Refresh();
                                             handleCountAfterOpens = p.HandleCount;
                                         }
-
                                         finally
                                         {
                                             files.ForEach(f => f.Dispose());
@@ -1921,7 +1913,6 @@ namespace System.Diagnostics.Tests
 
                     Assert.NotEqual(IntPtr.Zero, process.MainWindowHandle);
                 }
-
                 finally
                 {
                     process.Kill();
@@ -1959,7 +1950,6 @@ namespace System.Diagnostics.Tests
 
                     Assert.NotEqual(string.Empty, process.MainWindowTitle);
                 }
-
                 finally
                 {
                     process.Kill();
@@ -2480,7 +2470,6 @@ namespace System.Diagnostics.Tests
                 {
                     Assert.Contains(runningProcesses, p => p.ProcessName == LongProcessName);
                 }
-
                 finally
                 {
                     px.Kill();
@@ -2533,7 +2522,6 @@ namespace System.Diagnostics.Tests
                 testProcess.Start();
                 Assert.Equal(string.Empty, testProcess.StartInfo.Arguments);
             }
-
             finally
             {
                 testProcess.Kill();
@@ -2561,7 +2549,6 @@ namespace System.Diagnostics.Tests
                 secondTestProcess.Start();
                 Assert.Equal(string.Empty, secondTestProcess.StartInfo.Arguments);
             }
-
             finally
             {
                 testProcess.Kill();
@@ -2725,7 +2712,6 @@ namespace System.Diagnostics.Tests
                     }
                 );
             }
-
             finally
             {
                 foreach (Process process in tree)
@@ -2761,7 +2747,6 @@ namespace System.Diagnostics.Tests
                     }
                 );
             }
-
             finally
             {
                 foreach (Process process in tree)

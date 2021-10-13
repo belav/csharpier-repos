@@ -948,7 +948,6 @@ namespace System.Threading.Tasks.Tests
 
                         t.GetAwaiter().OnCompleted(() => tcs.SetResult());
                     }
-
                     finally
                     {
                         SynchronizationContext.SetSynchronizationContext(null);
@@ -997,7 +996,6 @@ namespace System.Threading.Tasks.Tests
 
                         t.GetAwaiter().OnCompleted(() => tcs.SetResult());
                     }
-
                     finally
                     {
                         SynchronizationContext.SetSynchronizationContext(null);
@@ -1053,7 +1051,6 @@ namespace System.Threading.Tasks.Tests
                             .GetAwaiter()
                             .OnCompleted(() => tcs.SetResult());
                     }
-
                     finally
                     {
                         SynchronizationContext.SetSynchronizationContext(null);
@@ -1113,7 +1110,6 @@ namespace System.Threading.Tasks.Tests
                             .GetAwaiter()
                             .OnCompleted(() => tcs.SetResult());
                     }
-
                     finally
                     {
                         SynchronizationContext.SetSynchronizationContext(null);

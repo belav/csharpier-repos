@@ -82,7 +82,6 @@ namespace System.Web.Http
                     // Assert
                     assert(response);
                 }
-
                 finally
                 {
                     if (response != null)

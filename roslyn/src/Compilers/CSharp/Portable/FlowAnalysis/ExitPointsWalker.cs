@@ -71,7 +71,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                   ? SpecializedCollections.EmptyEnumerable<StatementSyntax>()
                   : result;
             }
-
             finally
             {
                 walker.Free();

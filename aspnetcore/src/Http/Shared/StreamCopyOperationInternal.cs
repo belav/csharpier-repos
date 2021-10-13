@@ -92,7 +92,6 @@ namespace Microsoft.AspNetCore.Http
                     await destination.WriteAsync(buffer, 0, read, cancel);
                 }
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(buffer);

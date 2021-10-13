@@ -1174,7 +1174,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                         Assert.Equal(_expected, actual);
                     }
                 }
-
                 finally
                 {
                     Workspace.Dispose();

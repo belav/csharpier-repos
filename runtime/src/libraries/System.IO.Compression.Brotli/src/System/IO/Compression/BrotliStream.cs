@@ -76,7 +76,6 @@ namespace System.IO.Compression
                     }
                 }
             }
-
             finally
             {
                 ReleaseStateForDispose();
@@ -111,7 +110,6 @@ namespace System.IO.Compression
                     }
                 }
             }
-
             finally
             {
                 ReleaseStateForDispose();

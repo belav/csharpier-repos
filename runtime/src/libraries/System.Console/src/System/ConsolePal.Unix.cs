@@ -617,7 +617,6 @@ namespace System
                     // Mark that we've successfully received a CPR response at least once.
                     s_everReceivedCursorPositionResponse = true;
                 }
-
                 finally
                 {
                     if (reinitializeForRead)

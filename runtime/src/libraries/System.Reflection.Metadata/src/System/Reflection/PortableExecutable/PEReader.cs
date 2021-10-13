@@ -222,7 +222,6 @@ namespace System.Reflection.PortableExecutable
                     // We read all we need, the stream is going to be closed.
                 }
             }
-
             finally
             {
                 if (closeStream && (options & PEStreamOptions.LeaveOpen) == 0)

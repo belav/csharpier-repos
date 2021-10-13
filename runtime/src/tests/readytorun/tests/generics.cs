@@ -139,7 +139,6 @@ class Program
                 "System.String[]"
             );
         }
-
         finally
         {
             CultureInfo.CurrentCulture = originalCultureInfo;

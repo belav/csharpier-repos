@@ -65,7 +65,6 @@ namespace System.Runtime.Caching
                 InitHistory();
                 dispose = false;
             }
-
             finally
             {
                 if (dispose)

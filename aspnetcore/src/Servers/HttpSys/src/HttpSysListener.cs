@@ -446,7 +446,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     HttpApi.HttpCancelHttpRequest(_requestQueue.Handle, requestId, IntPtr.Zero);
                 }
             }
-
             finally
             {
                 if (pinnedHeaders != null)

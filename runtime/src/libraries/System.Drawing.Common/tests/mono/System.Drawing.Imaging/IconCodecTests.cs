@@ -272,7 +272,6 @@ namespace MonoTests.System.Drawing.Imaging
                         Assert.Equal(0, *(scan + 767));
                     }
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -524,7 +523,6 @@ namespace MonoTests.System.Drawing.Imaging
                         Assert.Equal(0, *(scan + 884));
                     }
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -778,7 +776,6 @@ namespace MonoTests.System.Drawing.Imaging
                         Assert.Equal(0, *(scan + 936));
                     }
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -1066,7 +1063,6 @@ namespace MonoTests.System.Drawing.Imaging
                         Assert.Equal(153, *(scan + 12222));
                     }
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -2030,7 +2026,6 @@ namespace MonoTests.System.Drawing.Imaging
                         Assert.Equal(0, *(scan + 27645));
                     }
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -2103,7 +2098,6 @@ namespace MonoTests.System.Drawing.Imaging
                     }
                 }
             }
-
             finally
             {
                 gr.Dispose();

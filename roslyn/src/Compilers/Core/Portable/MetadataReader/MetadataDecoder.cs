@@ -1019,7 +1019,6 @@ namespace Microsoft.CodeAnalysis
 
                 return locals.ToImmutable();
             }
-
             finally
             {
                 offsets.Free();

@@ -273,7 +273,6 @@ internal class DblArray
             GC.TryStartNoGCRegion(500_000);
             f();
         }
-
         finally
         {
             GC.EndNoGCRegion();

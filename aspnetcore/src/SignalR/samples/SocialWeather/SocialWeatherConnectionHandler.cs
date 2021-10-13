@@ -59,7 +59,6 @@ namespace SocialWeather
                         break;
                     }
                 }
-
                 finally
                 {
                     connection.Transport.Input.AdvanceTo(buffer.End);

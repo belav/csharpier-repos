@@ -110,7 +110,6 @@ namespace System.Net.Http.Formatting
                     roundTripTestValue: 125
                 );
             }
-
             finally
             {
                 MediaTypeFormatter.MaxHttpCollectionKeys = defaultMaxKeys;

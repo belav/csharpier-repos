@@ -135,7 +135,6 @@ namespace System.Net.Http
                     }
                 }
             }
-
             finally
             {
                 if (lockTaken)

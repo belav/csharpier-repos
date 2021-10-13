@@ -224,7 +224,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                                 break;
                             }
                         }
-
                         finally
                         {
                             reader.AdvanceTo(consumed, examined);

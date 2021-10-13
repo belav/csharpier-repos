@@ -18,7 +18,6 @@ class MainLoopTry
                 result += i;
             }
         }
-
         finally
         {
             Console.WriteLine($"done, sum is {result}");

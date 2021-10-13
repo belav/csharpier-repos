@@ -34,7 +34,6 @@ namespace System.Threading
                 }
 #pragma warning restore CS0162
             }
-
             finally
             {
                 Interop.Sys.DrainAutoreleasePool(autoreleasePool);

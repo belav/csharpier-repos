@@ -979,7 +979,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         await currentTestConnection.Application.Output.WriteAsync(output.ToArray())
                             .DefaultTimeout();
                     }
-
                     finally
                     {
                         MemoryBufferWriter.Return(output);
@@ -1041,7 +1040,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         {
                             await connectionStartTcs.Task;
                         }
-
                         finally
                         {
                             connectionStartTcs = new TaskCompletionSource(

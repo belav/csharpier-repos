@@ -122,7 +122,6 @@ namespace System.Speech.Internal.Synthesis
                         audio._stream.Read(data, 0, data.Length);
                         Play(data);
                     }
-
                     finally
                     {
                         WaitUntilDone();
@@ -176,21 +175,18 @@ namespace System.Speech.Internal.Synthesis
                                 }
                             }
                         }
-
                         finally
                         {
                             WaitUntilDone();
                             End();
                         }
                     }
-
                     finally
                     {
                         ((IDisposable)br).Dispose();
                     }
                 }
             }
-
             finally
             {
                 audio.Dispose();
@@ -284,7 +280,6 @@ namespace System.Speech.Internal.Synthesis
                     stream.Seek(position, SeekOrigin.Begin);
                     stream.Write(memStream.GetBuffer(), 0, (int)memStream.Length);
                 }
-
                 finally
                 {
                     ((IDisposable)bw).Dispose();

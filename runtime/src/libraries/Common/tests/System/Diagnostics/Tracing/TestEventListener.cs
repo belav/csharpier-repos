@@ -128,7 +128,6 @@ namespace System.Diagnostics.Tracing
             {
                 body();
             }
-
             finally
             {
                 _eventWritten = null;
@@ -145,7 +144,6 @@ namespace System.Diagnostics.Tracing
             {
                 await body().ConfigureAwait(false);
             }
-
             finally
             {
                 _eventWritten = null;

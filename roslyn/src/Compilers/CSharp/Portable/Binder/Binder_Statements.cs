@@ -4966,7 +4966,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 result = patternMethodSymbol;
                 return PatternLookupResult.Success;
             }
-
             finally
             {
                 bindingDiagnostics.Free();

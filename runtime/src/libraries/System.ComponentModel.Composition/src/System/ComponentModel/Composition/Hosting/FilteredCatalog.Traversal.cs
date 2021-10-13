@@ -74,7 +74,6 @@ namespace System.ComponentModel.Composition.Hosting
                 var traversalClosure = GetTraversalClosure(_innerCatalog.Where(_filter), traversal);
                 return new FilteredCatalog(_innerCatalog, p => traversalClosure.Contains(p));
             }
-
             finally
             {
                 UnfreezeInnerCatalog();

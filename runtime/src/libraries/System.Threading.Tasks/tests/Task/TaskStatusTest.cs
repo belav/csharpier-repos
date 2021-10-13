@@ -471,7 +471,6 @@ namespace System.Threading.Tasks.Tests.Status
                         throw new StatusTestException();
                 }
             }
-
             finally
             {
                 _mre.Set();

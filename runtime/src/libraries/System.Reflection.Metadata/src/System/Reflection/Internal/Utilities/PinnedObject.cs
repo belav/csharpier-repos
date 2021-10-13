@@ -23,7 +23,6 @@ namespace System.Reflection.Internal
             try
             { /* intentionally left blank */
             }
-
             finally
 #endif
             {
@@ -39,7 +38,6 @@ namespace System.Reflection.Internal
             RuntimeHelpers.PrepareConstrainedRegions();
 #endif
             try { }
-
             finally
             {
                 if (Interlocked.Exchange(ref _isValid, 0) != 0)

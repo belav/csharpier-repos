@@ -30,7 +30,6 @@ namespace System.DirectoryServices.Tests
                 {
                     SearchOUByName(de, ouName);
                 }
-
                 finally
                 {
                     // Clean up the added ou
@@ -97,7 +96,6 @@ namespace System.DirectoryServices.Tests
                         SearchOrganizationalRole(child2OU, "user.ou2.1");
                         SearchOrganizationalRole(child2OU, "user.ou2.2");
                     }
-
                     finally
                     {
                         // rootOU.DeleteTree(); doesn't work as getting "A protocol error occurred. (Exception from HRESULT: 0x80072021)"
@@ -182,7 +180,6 @@ namespace System.DirectoryServices.Tests
                             }
                         }
                     }
-
                     finally
                     {
                         DeleteOU(de, "CachingOU");
@@ -240,7 +237,6 @@ namespace System.DirectoryServices.Tests
                         }
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "MoveingOU");
@@ -284,7 +280,6 @@ namespace System.DirectoryServices.Tests
                         }
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "CopyingOU");
@@ -325,7 +320,6 @@ namespace System.DirectoryServices.Tests
                         );
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "RenamingOU");
@@ -355,7 +349,6 @@ namespace System.DirectoryServices.Tests
                         Assert.Equal(parentOU.Name, childOU.Parent.Name);
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "GrandParent");
@@ -438,7 +431,6 @@ namespace System.DirectoryServices.Tests
                         }
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "RootToDelete");
@@ -573,7 +565,6 @@ namespace System.DirectoryServices.Tests
                         Assert.Throws<DirectoryServicesCOMException>(() => entry.CommitChanges());
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "NegativeRoot");
@@ -691,7 +682,6 @@ namespace System.DirectoryServices.Tests
                         }
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "SearchRoot");
@@ -748,7 +738,6 @@ namespace System.DirectoryServices.Tests
                         }
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "AttributesRoot");

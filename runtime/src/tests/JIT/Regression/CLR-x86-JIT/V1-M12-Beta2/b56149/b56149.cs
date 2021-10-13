@@ -16,7 +16,6 @@ namespace Test
             {
                 throw new Exception();
             }
-
             finally
             {
                 while (param1)

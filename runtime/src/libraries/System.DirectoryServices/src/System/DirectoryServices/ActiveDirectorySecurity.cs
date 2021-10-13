@@ -366,7 +366,6 @@ namespace System.DirectoryServices
                     OwnerModified || GroupModified || AccessRulesModified || AuditRulesModified
                 );
             }
-
             finally
             {
                 ReadUnlock();

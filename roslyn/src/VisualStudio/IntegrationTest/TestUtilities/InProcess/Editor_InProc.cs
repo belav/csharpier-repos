@@ -715,7 +715,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     );
                     waitHandle.WaitOne();
                 }
-
                 finally
                 {
                     componentChangeService.ComponentAdded -= ComponentAdded;
@@ -752,7 +751,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     );
                     waitHandle.WaitOne();
                 }
-
                 finally
                 {
                     componentChangeService.ComponentRemoved -= ComponentRemoved;
@@ -829,7 +827,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     );
                     waitHandle.WaitOne();
                 }
-
                 finally
                 {
                     componentChangeService.ComponentChanged -= ComponentChanged;
@@ -875,7 +872,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     );
                     waitHandle.WaitOne();
                 }
-
                 finally
                 {
                     componentChangeService.ComponentChanged -= ComponentChanged;

@@ -163,7 +163,6 @@ namespace Newtonsoft.Json.Tests
                     json
                 );
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -297,7 +296,6 @@ namespace Newtonsoft.Json.Tests
                     json
                 );
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -319,7 +317,6 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.AreEqual(@"{""test"":[1,2,3]}", json);
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -354,7 +351,6 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.AreEqual(@"[new Date(976593724000)]", json);
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -402,7 +398,6 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.AreEqual(@"[1,2,3]", sw.ToString());
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;
@@ -462,7 +457,6 @@ namespace Newtonsoft.Json.Tests
                     sw.ToString()
                 );
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;

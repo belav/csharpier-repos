@@ -16,7 +16,6 @@ namespace Test
                 if (local2)
                     return;
             }
-
             finally
             {
                 throw new Exception();

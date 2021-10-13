@@ -487,7 +487,6 @@ namespace System.Linq.Expressions.Interpreter
                     frame.StackIndex = first;
                 }
             }
-
             finally
             {
                 if (args != null)

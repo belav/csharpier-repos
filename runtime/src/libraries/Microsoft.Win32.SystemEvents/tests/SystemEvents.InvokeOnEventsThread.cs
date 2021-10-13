@@ -61,7 +61,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.True(invoked.WaitOne(PostMessageWait));
                 Assert.Equal(expectedThreadId, actualThreadId);
             }
-
             finally
             {
                 SystemEvents.TimeChanged -= handler;

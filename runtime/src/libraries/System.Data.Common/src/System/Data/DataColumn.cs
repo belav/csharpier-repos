@@ -203,7 +203,6 @@ namespace System.Data
                         _allowNull = value;
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -431,7 +430,6 @@ namespace System.Data
                         }
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -944,7 +942,6 @@ namespace System.Data
                         _expression = newExpression;
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1070,7 +1067,6 @@ namespace System.Data
                         SetMaxLengthSimpleType();
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1427,7 +1423,6 @@ namespace System.Data
                         }
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);

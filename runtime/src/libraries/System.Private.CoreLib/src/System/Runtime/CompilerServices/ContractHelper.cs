@@ -90,7 +90,6 @@ namespace System.Runtime.CompilerServices
                     }
                 }
             }
-
             finally
             {
                 if (eventArgs != null && eventArgs.Handled)

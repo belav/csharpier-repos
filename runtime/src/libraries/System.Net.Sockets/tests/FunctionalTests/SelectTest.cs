@@ -78,7 +78,6 @@ namespace System.Net.Sockets.Tests
                 Assert.Equal(readListCountBefore, readList.Count);
                 Assert.Equal(writeListCountBefore, writeList.Count);
             }
-
             finally
             {
                 DisposeSockets(readPairs);
@@ -124,7 +123,6 @@ namespace System.Net.Sockets.Tests
                     Assert.Equal(i == indexToDispose, socketPairs[i].Key.SafeHandle.IsClosed);
                 }
             }
-
             finally
             {
                 DisposeSockets(socketPairs);
@@ -163,7 +161,6 @@ namespace System.Net.Sockets.Tests
                 Assert.Empty(readList);
                 Assert.Empty(errorList);
             }
-
             finally
             {
                 DisposeSockets(readPairs);
@@ -205,7 +202,6 @@ namespace System.Net.Sockets.Tests
                     readPairs.RemoveAt(next);
                 }
             }
-
             finally
             {
                 DisposeSockets(readPairs);
@@ -243,7 +239,6 @@ namespace System.Net.Sockets.Tests
                     errorPairs.RemoveAt(next);
                 }
             }
-
             finally
             {
                 DisposeSockets(errorPairs);
@@ -260,7 +255,6 @@ namespace System.Net.Sockets.Tests
             {
                 Assert.False(pair.Key.Poll(SmallTimeoutMicroseconds, mode));
             }
-
             finally
             {
                 pair.Key.Dispose();
@@ -286,7 +280,6 @@ namespace System.Net.Sockets.Tests
 
                 Assert.True(pair.Key.Poll(microsecondsTimeout, SelectMode.SelectRead));
             }
-
             finally
             {
                 pair.Key.Dispose();

@@ -164,7 +164,6 @@ namespace Internal.Cryptography.Pal
                     toDispose = null;
                     return dsa;
                 }
-
                 finally
                 {
                     toDispose?.Dispose();

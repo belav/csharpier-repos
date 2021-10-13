@@ -154,7 +154,6 @@ internal static partial class Interop
                     throw new SslException();
                 }
             }
-
             finally
             {
                 foreach (MemoryHandle memHandle in memHandles)

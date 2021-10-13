@@ -48,7 +48,6 @@ namespace System.Reflection.TypeLoading
                 _container.Add(hashCode, type);
                 return type;
             }
-
             finally
             {
                 Monitor.Exit(_lock);

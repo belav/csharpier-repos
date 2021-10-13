@@ -806,7 +806,6 @@ namespace System.DirectoryServices.AccountManagement
                         return false;
                 }
             }
-
             finally
             {
                 if (IntPtr.Zero != pBytePtr)

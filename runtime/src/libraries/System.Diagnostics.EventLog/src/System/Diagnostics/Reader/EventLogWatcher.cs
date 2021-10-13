@@ -213,7 +213,6 @@ namespace System.Diagnostics.Eventing.Reader
             {
                 RequestEvents();
             }
-
             finally
             {
                 _callbackThreadId = -1;

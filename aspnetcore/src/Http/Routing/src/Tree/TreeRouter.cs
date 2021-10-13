@@ -250,7 +250,6 @@ namespace Microsoft.AspNetCore.Routing.Tree
                                 return;
                             }
                         }
-
                         finally
                         {
                             if (context.Handler == null)

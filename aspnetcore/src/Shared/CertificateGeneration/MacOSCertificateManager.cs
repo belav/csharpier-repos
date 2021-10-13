@@ -87,7 +87,6 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 }
                 Log.MacOSTrustCommandEnd();
             }
-
             finally
             {
                 try
@@ -260,7 +259,6 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 }
                 Log.MacOSRemoveCertificateTrustRuleEnd();
             }
-
             finally
             {
                 try

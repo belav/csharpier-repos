@@ -64,7 +64,6 @@ namespace Roslyn.Compilers.Extension
                         RoslynHive
                     );
                 }
-
                 finally
                 {
                     Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.DisableMarkDirty =

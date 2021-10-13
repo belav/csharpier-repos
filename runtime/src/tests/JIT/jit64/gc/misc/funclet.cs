@@ -10,7 +10,6 @@ class test
     public static int Main()
     {
         try { }
-
         finally
         {
             System.Console.WriteLine("just before call");

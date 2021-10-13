@@ -471,7 +471,6 @@ namespace System.Threading.Channels
                         return true;
                     }
                 }
-
                 finally
                 {
                     if (releaseLock)
@@ -682,7 +681,6 @@ namespace System.Threading.Channels
                         return default;
                     }
                 }
-
                 finally
                 {
                     if (releaseLock)

@@ -23,7 +23,6 @@ namespace System.Runtime.InteropServices.Tests
                 IntPtr v2 = Marshal.UnsafeAddrOfPinnedArrayElement(array, 2);
                 Assert.Equal(3, Marshal.ReadInt32(v2));
             }
-
             finally
             {
                 handle.Free();
@@ -58,7 +57,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(0, p2.x);
                 Assert.Equal(0, p2.y);
             }
-
             finally
             {
                 handle.Free();
@@ -81,7 +79,6 @@ namespace System.Runtime.InteropServices.Tests
                 IntPtr v2 = Marshal.UnsafeAddrOfPinnedArrayElement(array, 2);
                 Assert.Equal(3, Marshal.ReadInt32(v2));
             }
-
             finally
             {
                 handle.Free();
@@ -116,7 +113,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(0, p2.x);
                 Assert.Equal(0, p2.y);
             }
-
             finally
             {
                 handle.Free();

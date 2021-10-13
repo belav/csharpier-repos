@@ -160,7 +160,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 oleServiceProvider = Marshal.GetObjectForIUnknown(ppvSite) as IOleServiceProvider;
             }
-
             finally
             {
                 Marshal.Release(ppvSite);
@@ -188,7 +187,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 frame = Marshal.GetObjectForIUnknown(ppvObject) as IVsWindowFrame;
             }
-
             finally
             {
                 Marshal.Release(ppvObject);
@@ -207,7 +205,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 return Marshal.GetObjectForIUnknown(ppvObject) as IVsCodeWindow;
             }
-
             finally
             {
                 Marshal.Release(ppvObject);

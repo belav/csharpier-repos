@@ -107,7 +107,6 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                 Assert.NotNull(certificate);
                 Assert.Equal("C54CD513088C23EC2AFD256874CC6C0F81EA9D5E", certificate.Thumbprint);
             }
-
             finally
             {
                 CleanupCertificates();
@@ -136,7 +135,6 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                 Assert.NotNull(certificate);
                 Assert.Equal("C54CD513088C23EC2AFD256874CC6C0F81EA9D5E", certificate.Thumbprint);
             }
-
             finally
             {
                 CleanupCertificates();
@@ -165,7 +163,6 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
                 Assert.NotNull(certificate);
                 Assert.Equal("35840DD366107B89D2885A6B4F42CCBBAE6BA8E3", certificate.Thumbprint);
             }
-
             finally
             {
                 CleanupCertificates();

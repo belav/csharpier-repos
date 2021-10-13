@@ -438,7 +438,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             {
                 _closed = true;
             }
-
             finally
             {
                 base.Dispose(disposing);

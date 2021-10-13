@@ -194,7 +194,6 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 
                 return hashSet;
             }
-
             finally
             {
                 enumerator.Dispose();

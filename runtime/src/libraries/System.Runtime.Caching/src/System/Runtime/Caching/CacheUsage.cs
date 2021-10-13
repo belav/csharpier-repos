@@ -1155,7 +1155,6 @@ namespace System.Runtime.Caching
                     _blockReduce = true;
                 }
             }
-
             finally
             {
                 _cacheUsage.MemoryCacheStore.UnblockInsert();
@@ -1222,7 +1221,6 @@ namespace System.Runtime.Caching
                     );
                 }
             }
-
             finally
             {
                 _cacheUsage.MemoryCacheStore.UnblockInsert();
@@ -1313,7 +1311,6 @@ namespace System.Runtime.Caching
                         }
                     }
                 }
-
                 finally
                 {
                     Interlocked.Exchange(ref _inFlush, 0);

@@ -590,7 +590,6 @@ namespace Internal.Runtime.InteropServices
                     IntPtr innerPtr = Marshal.CreateAggregatedObject(outerPtr, comObject);
                     return Marshal.GetObjectForIUnknown(innerPtr);
                 }
-
                 finally
                 {
                     // Decrement the above 'Marshal.GetIUnknownForObject()'

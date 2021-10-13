@@ -165,7 +165,6 @@ namespace System.Runtime.CompilerServices.Tests
                     sum += e.Current;
                 }
             }
-
             finally
             {
                 await e.DisposeAsync();

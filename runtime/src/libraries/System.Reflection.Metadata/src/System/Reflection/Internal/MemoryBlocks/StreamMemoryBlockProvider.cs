@@ -97,7 +97,6 @@ namespace System.Reflection.Internal
 
                 fault = false;
             }
-
             finally
             {
                 if (fault)

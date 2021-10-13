@@ -31,7 +31,6 @@ namespace Test
                     throw new DivideByZeroException();
                 }
             }
-
             finally
             {
                 while (m_bFwd2) { }

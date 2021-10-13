@@ -143,7 +143,6 @@ namespace System.Security.Cryptography
                         return key;
                     }
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(keyBlob);
@@ -388,7 +387,6 @@ namespace System.Security.Cryptography
                         out bytesWritten
                     );
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(tmp);
@@ -441,7 +439,6 @@ namespace System.Security.Cryptography
                     Span<byte> contentsSpan = new Span<byte>(rented, 0, bytesWritten);
                     return contentsSpan.ToArray();
                 }
-
                 finally
                 {
                     CryptoPool.Return(rented, bytesWritten);
@@ -538,7 +535,6 @@ namespace System.Security.Cryptography
                     unpaddedData = new Span<byte>(rented, 0, paddedSize);
                     return processor.DepadOaep(unpaddedData, destination, out bytesWritten);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(unpaddedData);
@@ -704,7 +700,6 @@ namespace System.Security.Cryptography
                         out bytesWritten
                     );
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(buf);
@@ -808,7 +803,6 @@ namespace System.Security.Cryptography
                         Debug.Assert(bytesWritten == rsaSize);
                         return processor.VerifyPss(hash, unwrapped, keySize);
                     }
-
                     finally
                     {
                         CryptographicOperations.ZeroMemory(unwrapped);
@@ -971,7 +965,6 @@ namespace System.Security.Cryptography
                         hasPrivateKey
                     );
                 }
-
                 finally
                 {
                     CryptoPool.Return(rented, written);

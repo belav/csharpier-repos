@@ -355,7 +355,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                     )
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal(newTextPtr);

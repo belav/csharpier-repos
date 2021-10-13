@@ -138,7 +138,6 @@ namespace System.Buffers
                     }
                 }
             }
-
             finally
             {
                 if (allBlocksReturned)

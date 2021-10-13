@@ -108,7 +108,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                         ExecuteScript(connection, sqlBuilder, customSql);
                     }
                 }
-
                 finally
                 {
                     connection.Close();

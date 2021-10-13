@@ -79,7 +79,6 @@ class TestHelper
         {
             DoWork();
         }
-
         finally
         {
             Monitor.Exit(monitor);

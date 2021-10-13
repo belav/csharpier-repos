@@ -597,7 +597,6 @@ namespace XLinqTests
                         TestLog.Skip("ReEnable this when FileIO is OK");
                     }
                 }
-
                 finally
                 {
                     for (int i = 0; i < xmlWriters.Count; ++i)

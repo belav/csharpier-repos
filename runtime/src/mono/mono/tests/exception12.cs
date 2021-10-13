@@ -20,7 +20,6 @@ public class Test
                 Console.WriteLine("Finally... {0}", c++);
             }
         }
-
         finally
         {
             c++;

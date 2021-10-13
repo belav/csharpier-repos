@@ -175,7 +175,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                 // This ensures Http2OutputProducer.ProcessDataWrites is in the correct state to be reused.
                 CanReuse = !_connectionAborted && HasResponseCompleted;
             }
-
             finally
             {
                 _context.StreamLifetimeHandler.OnStreamCompleted(this);

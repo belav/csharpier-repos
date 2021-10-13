@@ -1880,7 +1880,6 @@ namespace System.Threading.Tasks.Tests
                                 reg = default;
                             }
                         }
-
                         finally
                         {
                             Volatile.Write(ref run, false);
@@ -1897,7 +1896,6 @@ namespace System.Threading.Tasks.Tests
                                 reg.Unregister();
                             }
                         }
-
                         finally
                         {
                             Volatile.Write(ref run, false);

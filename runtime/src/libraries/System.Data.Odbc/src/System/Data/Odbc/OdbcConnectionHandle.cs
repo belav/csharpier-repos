@@ -70,7 +70,6 @@ namespace System.Data.Odbc
 
             // must call SQLSetConnectAttrW and set _handleState
             try { }
-
             finally
             {
                 retcode = Interop.Odbc.SQLSetConnectAttrW(
@@ -167,7 +166,6 @@ namespace System.Data.Odbc
                 ODBC32.RetCode retcode = CompleteTransaction(transactionOperation, base.handle);
                 return retcode;
             }
-
             finally
             {
                 if (mustRelease)
@@ -184,7 +182,6 @@ namespace System.Data.Odbc
             ODBC32.RetCode retcode = ODBC32.RetCode.SUCCESS;
 
             try { }
-
             finally
             {
                 if (HandleState.TransactionInProgress == _handleState)
@@ -225,7 +222,6 @@ namespace System.Data.Odbc
             ODBC32.RetCode retcode;
 
             try { }
-
             finally
             {
                 short cbActualSize;

@@ -870,7 +870,6 @@ namespace System.Net
                         isSocketReady = true; // for active mode we end up creating a stream before advancing the pipeline
                         result = PipelineInstruction.Pause;
                     }
-
                     finally
                     {
                         listenSocket.Close();

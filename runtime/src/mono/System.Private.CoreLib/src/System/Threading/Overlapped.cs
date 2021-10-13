@@ -179,7 +179,6 @@ namespace System.Threading
                 success = true;
                 return _pNativeOverlapped;
             }
-
             finally
             {
                 if (!success)

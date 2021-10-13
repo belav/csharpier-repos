@@ -279,7 +279,6 @@ namespace Microsoft.AspNetCore.Components.Rendering
 
                 d(state);
             }
-
             finally
             {
                 _state.IsBusy = false;

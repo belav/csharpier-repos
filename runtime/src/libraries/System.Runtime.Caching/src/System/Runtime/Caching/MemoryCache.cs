@@ -239,7 +239,6 @@ namespace System.Runtime.Caching
                 _onUnhandledException = onUnhandledException;
                 dispose = false;
             }
-
             finally
             {
                 if (dispose)

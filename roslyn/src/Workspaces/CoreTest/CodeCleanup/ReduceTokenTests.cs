@@ -1834,7 +1834,6 @@ Module Program
 End Module";
                 await VerifyAsync(code, expected);
             }
-
             finally
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = savedCulture;
@@ -1872,7 +1871,6 @@ Module Program
 End Module";
                 await VerifyAsync(code, expected);
             }
-
             finally
             {
                 Thread.CurrentThread.CurrentCulture = oldCulture;

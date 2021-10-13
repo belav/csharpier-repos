@@ -65,7 +65,6 @@ namespace System.Web.Mvc.Html.Test
                     formContext.FieldValidators["baz"].ValidationRules.ToArray()
                 );
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();
@@ -182,7 +181,6 @@ namespace System.Web.Mvc.Html.Test
                     formContext.FieldValidators["baz"].ValidationRules.ToArray()
                 );
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();
@@ -565,7 +563,6 @@ namespace System.Web.Mvc.Html.Test
                     formContext.FieldValidators["baz"].ValidationRules.ToArray()
                 );
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();
@@ -625,7 +622,6 @@ namespace System.Web.Mvc.Html.Test
                     html.ToHtmlString()
                 );
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();
@@ -694,7 +690,6 @@ namespace System.Web.Mvc.Html.Test
                     formContext.FieldValidators["baz"].ValidationRules.ToArray()
                 );
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();
@@ -754,7 +749,6 @@ namespace System.Web.Mvc.Html.Test
                     html.ToHtmlString()
                 );
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();
@@ -1502,7 +1496,6 @@ namespace System.Web.Mvc.Html.Test
                     formContext.FieldValidators["baz"].ValidationRules.ToArray()
                 );
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();
@@ -1564,7 +1557,6 @@ namespace System.Web.Mvc.Html.Test
                     html.ToHtmlString()
                 );
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();

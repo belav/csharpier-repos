@@ -48,7 +48,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 if (managed)
                     DisposeReader();
             }
-
             finally
             {
                 base.Dispose(managed);

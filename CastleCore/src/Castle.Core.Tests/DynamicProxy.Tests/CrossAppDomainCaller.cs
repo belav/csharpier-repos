@@ -35,7 +35,6 @@ namespace Castle.DynamicProxy.Tests
             {
                 newDomain.DoCallBack(callbackObject.Run);
             }
-
             finally
             {
                 AppDomain.Unload(newDomain);

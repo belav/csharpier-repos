@@ -711,7 +711,6 @@ END"
                     Assert.Equal("JeffUnicorn", blog2.FullName);
                 }
             }
-
             finally
             {
                 using var context = new BlogContextComputedColumn(testStore.Name);

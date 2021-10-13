@@ -96,7 +96,6 @@ namespace System.Security.Cryptography.Xml
 
                         encryptedGrantList[i].ParentNode.InnerXml = clearContent;
                     }
-
                     finally
                     {
                         if (toDecrypt != null)

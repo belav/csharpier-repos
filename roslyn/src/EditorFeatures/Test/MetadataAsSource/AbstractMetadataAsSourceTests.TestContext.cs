@@ -153,7 +153,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 {
                     _metadataAsSourceService.CleanupGeneratedFiles();
                 }
-
                 finally
                 {
                     _workspace.Dispose();

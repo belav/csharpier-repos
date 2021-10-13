@@ -108,7 +108,6 @@ namespace Microsoft.AspNetCore.DataProtection.SP800_108
                         SHA512_DIGEST_SIZE_IN_BYTES
                     );
                 }
-
                 finally
                 {
                     UnsafeBufferUtil.SecureZeroMemory(pbHashedKey, SHA512_DIGEST_SIZE_IN_BYTES);

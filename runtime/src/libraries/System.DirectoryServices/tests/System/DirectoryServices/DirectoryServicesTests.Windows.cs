@@ -56,7 +56,6 @@ namespace System.DirectoryServices.Tests
                         );
                     }
                 }
-
                 finally
                 {
                     DeleteOU(de, "dateRoot");

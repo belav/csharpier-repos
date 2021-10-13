@@ -26,7 +26,6 @@ public struct AA
             return 100;
         }
         try { }
-
         finally
         {
             if (local9)

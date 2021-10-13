@@ -276,7 +276,6 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 
                 return null;
             }
-
             finally
             {
                 callSiteChain.Remove(serviceType);
@@ -501,7 +500,6 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     );
                 }
             }
-
             finally
             {
                 callSiteChain.Remove(serviceType);

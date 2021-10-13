@@ -108,7 +108,6 @@ namespace System.CommandLine.Builder
                     {
                         await next(context);
                     }
-
                     finally
                     {
                         if (cancellationHandlingAdded)

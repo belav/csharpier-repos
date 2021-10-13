@@ -343,7 +343,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                     this
                 );
             }
-
             finally
             {
                 _bindSemaphore.Release();

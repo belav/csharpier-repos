@@ -110,7 +110,6 @@ namespace System.Transactions
                 _writerPresent = false;
                 WriterFinishedEvent.Set();
             }
-
             finally
             {
                 Monitor.Exit(SyncRoot);
@@ -254,7 +253,6 @@ namespace System.Transactions
 
                 AddIter(txNew);
             }
-
             finally
             {
                 _rwLock.ExitReadLock();
@@ -463,7 +461,6 @@ namespace System.Transactions
                         return;
                     }
                 }
-
                 finally
                 {
                     _rwLock.ExitWriteLock();

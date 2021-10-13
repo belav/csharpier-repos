@@ -86,7 +86,6 @@ namespace Microsoft.AspNetCore.WebUtilities
                     read = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken);
                 }
             }
-
             finally
             {
                 bytePool.Return(buffer);

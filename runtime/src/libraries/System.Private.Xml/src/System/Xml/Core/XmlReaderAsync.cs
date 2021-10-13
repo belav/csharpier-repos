@@ -265,7 +265,6 @@ namespace System.Xml
                     await this.WriteNodeAsync(xtw, false).ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 xtw.Close();
@@ -359,7 +358,6 @@ namespace System.Xml
                     xtw.WriteNode(this, false);
                 }
             }
-
             finally
             {
                 xtw.Close();

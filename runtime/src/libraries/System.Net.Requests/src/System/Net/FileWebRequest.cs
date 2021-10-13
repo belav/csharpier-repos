@@ -403,7 +403,6 @@ namespace System.Net
                     _request?.UnblockReader();
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

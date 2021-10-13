@@ -94,7 +94,6 @@ namespace System.Security.Cryptography
                     int bytesWritten = Decrypt(key, data, destination, padding);
                     return destination.Slice(0, bytesWritten).ToArray();
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(destination);
@@ -310,7 +309,6 @@ namespace System.Security.Cryptography
                             rsaPadding
                         );
                     }
-
                     finally
                     {
                         CryptographicOperations.ZeroMemory(tmp);
@@ -426,7 +424,6 @@ namespace System.Security.Cryptography
 
                     imported = true;
                 }
-
                 finally
                 {
                     if (!imported)
@@ -862,7 +859,6 @@ namespace System.Security.Cryptography
 
                         return processor.VerifyPss(hash, unwrapped, KeySize);
                     }
-
                     finally
                     {
                         CryptoPool.Return(rented, requiredBytes);

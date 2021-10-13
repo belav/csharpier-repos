@@ -96,7 +96,6 @@ namespace System.IO.Tests
                 testDir.Attributes = attributes;
                 Assert.Equal(testDir.FullName, Create(testDir.FullName).FullName);
             }
-
             finally
             {
                 testDir.Attributes = original;

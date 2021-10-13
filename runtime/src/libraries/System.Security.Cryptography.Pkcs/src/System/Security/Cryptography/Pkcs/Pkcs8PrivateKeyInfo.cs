@@ -215,7 +215,6 @@ namespace System.Security.Cryptography.Pkcs
                 bytesRead = localRead;
                 return ret;
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(decryptedMemory.Span);
@@ -250,7 +249,6 @@ namespace System.Security.Cryptography.Pkcs
                 bytesRead = localRead;
                 return ret;
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(decryptedMemory.Span);

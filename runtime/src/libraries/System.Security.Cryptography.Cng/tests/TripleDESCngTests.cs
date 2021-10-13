@@ -91,7 +91,6 @@ namespace System.Security.Cryptography.Cng.Tests
             {
                 Assert.Throws<CryptographicException>(() => new TripleDESCng(keyName));
             }
-
             finally
             {
                 cngKey.Delete();

@@ -43,7 +43,6 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.Equal(values[i], value);
                 }
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);

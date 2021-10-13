@@ -551,7 +551,6 @@ public class WindowAndCursorProps
                 Console.CursorSize = 50;
                 Assert.Equal(50, Console.CursorSize);
             }
-
             finally
             {
                 Console.CursorSize = orig;
@@ -631,7 +630,6 @@ public class WindowAndCursorProps
                 Assert.Equal(0, Console.WindowTop);
                 Assert.Equal(0, Console.WindowLeft);
             }
-
             finally
             {
                 Console.WindowTop = origTop;
@@ -682,7 +680,6 @@ public class WindowAndCursorProps
                 Assert.Equal(10, Console.WindowWidth);
                 Assert.Equal(10, Console.WindowHeight);
             }
-
             finally
             {
                 Console.WindowWidth = origWidth;

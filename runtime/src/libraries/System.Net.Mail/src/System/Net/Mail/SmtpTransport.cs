@@ -102,7 +102,6 @@ namespace System.Net.Mail
 
                 _connection.GetConnection(host, port);
             }
-
             finally { }
         }
 
@@ -207,7 +206,6 @@ namespace System.Net.Mail
             {
                 return SendMailAsyncResult.End(result);
             }
-
             finally { }
         }
 

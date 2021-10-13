@@ -219,7 +219,6 @@ internal static partial class Interop
 
                 count = (int)bytesLength / sizeof(kinfo_proc);
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)pBuffer);

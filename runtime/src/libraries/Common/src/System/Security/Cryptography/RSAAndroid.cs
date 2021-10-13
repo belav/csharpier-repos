@@ -108,7 +108,6 @@ namespace System.Security.Cryptography
 
                     return destination.Slice(0, bytesWritten).ToArray();
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(destination);
@@ -271,7 +270,6 @@ namespace System.Security.Cryptography
 
                     return true;
                 }
-
                 finally
                 {
                     if (paddingBuf != null)
@@ -383,7 +381,6 @@ namespace System.Security.Cryptography
                             rsaPadding
                         );
                     }
-
                     finally
                     {
                         CryptographicOperations.ZeroMemory(tmp);
@@ -502,7 +499,6 @@ namespace System.Security.Cryptography
 
                     imported = true;
                 }
-
                 finally
                 {
                     if (!imported)
@@ -717,7 +713,6 @@ namespace System.Security.Cryptography
                     CheckBoolReturn(response);
                     generated = true;
                 }
-
                 finally
                 {
                     if (!generated)
@@ -986,7 +981,6 @@ namespace System.Security.Cryptography
                         throw PaddingModeNotSupported();
                     }
                 }
-
                 finally
                 {
                     CryptoPool.Return(rented, requiredBytes);

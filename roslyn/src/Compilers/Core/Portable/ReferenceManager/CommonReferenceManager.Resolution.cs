@@ -1085,7 +1085,6 @@ namespace Microsoft.CodeAnalysis
                     referenceDirectiveLocationsBuilder?.ToImmutableAndFree()
                     ?? ImmutableArray<Location>.Empty;
             }
-
             finally
             {
                 // Put this in a finally because we have tests that (intentionally) cause ResolveReferenceDirective to throw and

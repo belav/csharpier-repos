@@ -311,7 +311,6 @@ namespace System.Diagnostics.Eventing.Reader
 
                     return _channelReferences;
                 }
-
                 finally
                 {
                     elHandle.Dispose();
@@ -600,7 +599,6 @@ namespace System.Diagnostics.Eventing.Reader
                     _ => null,
                 };
             }
-
             finally
             {
                 elHandle.Dispose();

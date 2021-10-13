@@ -150,7 +150,6 @@ namespace ILCompiler.Diagnostics
                     {
                         WritePDBDataHelper(dllPath, methods);
                     }
-
                     finally
                     {
                         if ((_ngenWriter != null) && (_pdbMod != UIntPtr.Zero))
@@ -159,7 +158,6 @@ namespace ILCompiler.Diagnostics
                         }
                     }
                 }
-
                 finally
                 {
                     if (_ngenWriter != null)
@@ -170,7 +168,6 @@ namespace ILCompiler.Diagnostics
 
                 failed = false;
             }
-
             finally
             {
                 if (_tempSourceDllName != null)

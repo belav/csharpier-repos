@@ -167,7 +167,6 @@ namespace System.Globalization
                     }
                 }
             }
-
             finally
             {
                 if (toReturn != null)

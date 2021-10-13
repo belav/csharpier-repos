@@ -66,7 +66,6 @@ namespace System.IO.Tests
                     new DirectoryInfo(TestDirectory).CreateSubdirectory(path).FullName
                 );
             }
-
             finally
             {
                 testDir.Attributes = original;

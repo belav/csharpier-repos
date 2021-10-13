@@ -41,7 +41,6 @@ namespace Microsoft.NET.HostModel.AppHost
                     Pad0(searchPattern, patternToReplace, bytes, position);
                 }
             }
-
             finally
             {
                 if (pointer != null)

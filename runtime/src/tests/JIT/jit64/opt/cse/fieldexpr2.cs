@@ -2784,7 +2784,6 @@ namespace CseTest
             {
                 ans = input;
             }
-
             finally
             {
                 if (verbose)

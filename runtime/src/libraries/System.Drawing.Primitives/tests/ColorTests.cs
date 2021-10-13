@@ -602,7 +602,6 @@ namespace System.Drawing.Primitives.Tests
                 Assert.Equal(1, SetSysColors(1, new int[] { element }, new int[] { newColorAbgr }));
                 Assert.Equal(newColorArgb, oldColor.ToArgb());
             }
-
             finally
             {
                 Assert.Equal(1, SetSysColors(1, new int[] { element }, new int[] { oldColorAbgr }));

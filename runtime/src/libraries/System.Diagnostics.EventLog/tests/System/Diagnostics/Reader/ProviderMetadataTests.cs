@@ -101,7 +101,6 @@ namespace System.Diagnostics.Tests
                         Assert.Null(providerMetadata.ParameterFilePath);
                     }
                 }
-
                 finally
                 {
                     EventLog.DeleteEventSource(source);

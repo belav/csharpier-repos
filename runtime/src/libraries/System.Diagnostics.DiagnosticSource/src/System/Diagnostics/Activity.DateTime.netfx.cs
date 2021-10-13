@@ -71,7 +71,6 @@ namespace System.Diagnostics
                     7200000
                 );
             }
-
             finally
             {
                 // Restore the current ExecutionContext

@@ -2744,7 +2744,6 @@ namespace Microsoft.CodeAnalysis
                     cancellationToken: cancellationToken
                 );
             }
-
             finally
             {
                 moduleBuilder.CompilationFinished();
@@ -3183,7 +3182,6 @@ namespace Microsoft.CodeAnalysis
                         }
                     }
                 }
-
                 finally
                 {
                     moduleBeingBuilt.CompilationFinished();
@@ -3611,7 +3609,6 @@ namespace Microsoft.CodeAnalysis
                         ?? true
                     );
             }
-
             finally
             {
                 nativePdbWriter?.Dispose();

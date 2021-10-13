@@ -123,7 +123,6 @@ namespace System.Net.Tests
                     }
                 }
             }
-
             finally
             {
                 File.Delete(path);
@@ -150,7 +149,6 @@ namespace System.Net.Tests
 
                 Assert.Equal(data, File.ReadAllBytes(path));
             }
-
             finally
             {
                 File.Delete(path);
@@ -181,7 +179,6 @@ namespace System.Net.Tests
                     Assert.Equal(0, s.Length);
                 }
             }
-
             finally
             {
                 File.Delete(path);
@@ -205,7 +202,6 @@ namespace System.Net.Tests
                     );
                 }
             }
-
             finally
             {
                 File.Delete(path);
@@ -265,7 +261,6 @@ namespace System.Net.Tests
                     Assert.Equal(0, s.Length);
                 }
             }
-
             finally
             {
                 File.Delete(path);

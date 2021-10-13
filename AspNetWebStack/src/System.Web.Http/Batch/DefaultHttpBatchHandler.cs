@@ -127,7 +127,6 @@ namespace System.Web.Http.Batch
                 );
                 return await CreateResponseMessageAsync(responses, request, cancellationToken);
             }
-
             finally
             {
                 foreach (HttpRequestMessage subRequest in subRequests)

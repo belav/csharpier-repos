@@ -264,7 +264,6 @@ namespace System.Security.Cryptography
                 return await ReadAsyncCore(buffer, cancellationToken, useAsync: true)
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 _lazyAsyncActiveSemaphore.Release();
@@ -676,7 +675,6 @@ namespace System.Security.Cryptography
                 await WriteAsyncCore(buffer, cancellationToken, useAsync: true)
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 _lazyAsyncActiveSemaphore.Release();
@@ -916,7 +914,6 @@ namespace System.Security.Cryptography
                                 outputOffset
                             );
                         }
-
                         finally
                         {
                             CryptographicOperations.ZeroMemory(
@@ -951,7 +948,6 @@ namespace System.Security.Cryptography
                         destination.Write(rentedBuffer, 0, bytesRead);
                     } while (bytesRead > 0);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(rentedBuffer.AsSpan(0, bufferSize));
@@ -999,7 +995,6 @@ namespace System.Security.Cryptography
                         .ConfigureAwait(false);
                 } while (bytesRead > 0);
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(rentedBuffer.AsSpan(0, bufferSize));
@@ -1054,7 +1049,6 @@ namespace System.Security.Cryptography
                     }
                 }
             }
-
             finally
             {
                 try
@@ -1073,7 +1067,6 @@ namespace System.Security.Cryptography
                     _canRead = false;
                     _canWrite = false;
                 }
-
                 finally
                 {
                     base.Dispose(disposing);
@@ -1101,7 +1094,6 @@ namespace System.Security.Cryptography
                     await _stream.DisposeAsync().ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 // Ensure we don't try to transform the final block again if we get disposed twice

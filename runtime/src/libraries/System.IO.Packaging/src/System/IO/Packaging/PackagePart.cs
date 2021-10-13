@@ -613,7 +613,6 @@ namespace System.IO.Packaging
                     }
                     // Relationships for this part should have been flushed/closed earlier in the Package.Close method.
                 }
-
                 finally
                 {
                     _requestedStreams = null;

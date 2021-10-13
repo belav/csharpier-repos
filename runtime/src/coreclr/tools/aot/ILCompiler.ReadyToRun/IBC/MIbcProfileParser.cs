@@ -111,7 +111,6 @@ namespace ILCompiler.IBC
                         }
                     }
                 }
-
                 finally
                 {
                     if (disposeOnException)

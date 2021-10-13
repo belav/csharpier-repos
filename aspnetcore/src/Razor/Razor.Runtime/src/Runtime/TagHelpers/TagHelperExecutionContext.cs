@@ -261,7 +261,6 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 {
                     await _executeChildContentAsync();
                 }
-
                 finally
                 {
                     childContent = _endTagHelperWritingScope();
@@ -305,7 +304,6 @@ namespace Microsoft.AspNetCore.Razor.Runtime.TagHelpers
                 {
                     await _executeChildContentAsync();
                 }
-
                 finally
                 {
                     childContent = _endTagHelperWritingScope();

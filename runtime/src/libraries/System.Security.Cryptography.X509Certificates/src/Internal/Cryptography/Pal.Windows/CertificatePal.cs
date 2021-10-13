@@ -227,7 +227,6 @@ namespace Internal.Cryptography.Pal
 
                     return keyAlgorithmParameters;
                 }
-
                 finally
                 {
                     if (certChainContext != null)
@@ -431,7 +430,6 @@ namespace Internal.Cryptography.Pal
                         )
                             throw Marshal.GetLastWin32Error().ToCryptographicException();
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(pFriendlyName);

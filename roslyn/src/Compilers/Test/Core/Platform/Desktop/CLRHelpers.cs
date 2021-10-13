@@ -162,7 +162,6 @@ namespace Roslyn.Test.Utilities.Desktop
 
                     return errorHandler.GetOutput();
                 }
-
                 finally
                 {
                     pinned.Free();

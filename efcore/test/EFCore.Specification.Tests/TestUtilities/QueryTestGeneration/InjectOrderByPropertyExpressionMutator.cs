@@ -143,7 +143,6 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration
                 {
                     return base.Visit(expression);
                 }
-
                 finally
                 {
                     _insideThenInclude = insideThenInclude ?? _insideThenInclude;

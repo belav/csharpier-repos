@@ -282,7 +282,6 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                             return null;
                         }
                     }
-
                     finally
                     {
                         Connection.Application.Input.AdvanceTo(buffer.Start);
@@ -327,7 +326,6 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     }
                 }
             }
-
             finally
             {
                 Connection.Application.Input.AdvanceTo(buffer.Start);
@@ -387,7 +385,6 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 );
                 return memoryBufferWriter.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);

@@ -405,7 +405,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     }
                 }
             }
-
             finally
             {
                 FreePinnedHeaders(pinnedHeaders);

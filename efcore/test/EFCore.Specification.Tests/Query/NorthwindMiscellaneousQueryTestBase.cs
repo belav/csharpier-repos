@@ -4240,7 +4240,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                             )
                             .ToList();
                     }
-
                     finally
                     {
                         synchronizationEvent.Set();
@@ -4293,7 +4292,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                             )
                             .ToList();
                     }
-
                     finally
                     {
                         synchronizationEvent.Set();

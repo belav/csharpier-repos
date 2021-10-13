@@ -612,7 +612,6 @@ namespace System.Media
                     throw new InvalidOperationException(SR.SoundAPIFormatNotSupported);
                 }
             }
-
             finally
             {
                 if (hMIO != IntPtr.Zero)

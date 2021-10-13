@@ -1923,7 +1923,6 @@ namespace System.Web.Mvc.Html.Test
                 {
                     return testCode();
                 }
-
                 finally
                 {
                     foreach (var engine in viewEngines)

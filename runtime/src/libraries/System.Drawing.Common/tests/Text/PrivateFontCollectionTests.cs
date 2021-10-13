@@ -199,7 +199,6 @@ namespace System.Drawing.Text.Tests
                     FontFamily font = Assert.Single(fontCollection.Families);
                     Assert.Equal("Code New Roman", font.Name);
                 }
-
                 finally
                 {
                     Marshal.FreeCoTaskMem(fontBuffer);
@@ -244,7 +243,6 @@ namespace System.Drawing.Text.Tests
                         () => fontCollection.AddMemoryFont(fontBuffer, length)
                     );
                 }
-
                 finally
                 {
                     Marshal.FreeCoTaskMem(fontBuffer);

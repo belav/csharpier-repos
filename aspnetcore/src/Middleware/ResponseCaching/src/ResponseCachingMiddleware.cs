@@ -143,7 +143,6 @@ namespace Microsoft.AspNetCore.ResponseCaching
                         // Finalize the cache entry
                         FinalizeCacheBody(context);
                     }
-
                     finally
                     {
                         UnshimResponseStream(context);
@@ -160,7 +159,6 @@ namespace Microsoft.AspNetCore.ResponseCaching
             {
                 await _next(httpContext);
             }
-
             finally
             {
                 RemoveResponseCachingFeature(httpContext);

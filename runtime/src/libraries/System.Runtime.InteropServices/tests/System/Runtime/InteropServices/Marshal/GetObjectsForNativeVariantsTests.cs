@@ -94,7 +94,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(99, actual[0]);
                 Assert.Equal(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -117,7 +116,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(99, actual[0]);
                 Assert.Equal(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -140,7 +138,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(99, actual[0]);
                 Assert.Equal(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -163,7 +160,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(99, actual[0]);
                 Assert.Equal(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -186,7 +182,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(99, actual[0]);
                 Assert.Equal(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -209,7 +204,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(99, actual[0]);
                 Assert.Equal(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -232,7 +226,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal<uint>(99, actual[0]);
                 Assert.Equal<uint>(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -255,7 +248,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(99, actual[0]);
                 Assert.Equal(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -278,7 +270,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal<ulong>(99, actual[0]);
                 Assert.Equal<ulong>(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -301,7 +292,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(99, actual[0]);
                 Assert.Equal(100, actual[1]);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);

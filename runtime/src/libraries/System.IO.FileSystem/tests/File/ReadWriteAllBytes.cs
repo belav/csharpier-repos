@@ -117,7 +117,6 @@ namespace System.IO.Tests
                         () => File.WriteAllBytes(path, Encoding.UTF8.GetBytes("text"))
                     );
             }
-
             finally
             {
                 File.SetAttributes(path, FileAttributes.Normal);

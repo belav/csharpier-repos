@@ -170,7 +170,6 @@ namespace Microsoft.CodeAnalysis.Remote
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 ClassificationUtilities.ReturnClassifiedSpanList(classifiedSpans);

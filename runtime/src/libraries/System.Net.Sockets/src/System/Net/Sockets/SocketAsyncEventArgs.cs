@@ -189,7 +189,6 @@ namespace System.Net.Sockets
 
                     SetupMultipleBuffers();
                 }
-
                 finally
                 {
                     Complete();
@@ -264,7 +263,6 @@ namespace System.Net.Sockets
                 {
                     _sendPacketsElements = value;
                 }
-
                 finally
                 {
                     Complete();
@@ -327,7 +325,6 @@ namespace System.Net.Sockets
                     _count = count;
                 }
             }
-
             finally
             {
                 Complete();
@@ -344,7 +341,6 @@ namespace System.Net.Sockets
                 _count = source._count;
                 _bufferIsExplicitArray = source._bufferIsExplicitArray;
             }
-
             finally
             {
                 Complete();
@@ -391,7 +387,6 @@ namespace System.Net.Sockets
                     _bufferIsExplicitArray = true;
                 }
             }
-
             finally
             {
                 Complete();
@@ -415,7 +410,6 @@ namespace System.Net.Sockets
                 _count = buffer.Length;
                 _bufferIsExplicitArray = false;
             }
-
             finally
             {
                 Complete();

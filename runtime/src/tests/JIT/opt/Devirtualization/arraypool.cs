@@ -32,7 +32,6 @@ class X
             buffer[J] = 100;
             r = (int)buffer[K];
         }
-
         finally
         {
             if (buffer != null)

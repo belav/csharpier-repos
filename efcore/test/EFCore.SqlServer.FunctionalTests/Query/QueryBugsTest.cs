@@ -9811,7 +9811,6 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'"
                 context.Add(observableThing);
                 await context.SaveChangesAsync();
             }
-
             finally
             {
                 observableThing.Event -= callback;

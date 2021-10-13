@@ -170,7 +170,6 @@ namespace Microsoft.Extensions.ApiDescription.Tool.Commands
 
                 return Exe.Run(executable, args, Reporter);
             }
-
             finally
             {
                 if (cleanupExecutable && !string.IsNullOrEmpty(executable))

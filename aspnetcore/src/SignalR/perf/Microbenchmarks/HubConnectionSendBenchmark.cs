@@ -41,7 +41,6 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 _pipe = new TestDuplexPipe();
                 _pipe.AddReadResult(new ValueTask<ReadResult>(handshakeResponseResult));
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);

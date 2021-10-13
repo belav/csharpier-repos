@@ -281,7 +281,6 @@ namespace System.Security.Cryptography
 
                     return null;
                 }
-
                 finally
                 {
                     if (!ReferenceEquals(otherPartyPublicKey, secTransPubKey))

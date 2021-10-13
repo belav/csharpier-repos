@@ -225,7 +225,6 @@ namespace System.Security.Cryptography
 
                     return writer.TryEncode(destination, out bytesWritten);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -267,7 +266,6 @@ namespace System.Security.Cryptography
 
                     return writer.TryEncode(destination, out bytesWritten);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -289,7 +287,6 @@ namespace System.Security.Cryptography
                     AsnWriter writer = EccKeyFormatHelper.WritePkcs8PrivateKey(ecParameters);
                     return writer.TryEncode(destination, out bytesWritten);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -330,7 +327,6 @@ namespace System.Security.Cryptography
                     ImportParameters(ret);
                     bytesRead = localRead;
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ret.D);
@@ -360,7 +356,6 @@ namespace System.Security.Cryptography
                     ImportParameters(ret);
                     bytesRead = localRead;
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ret.D);
@@ -388,7 +383,6 @@ namespace System.Security.Cryptography
                     ImportParameters(key);
                     bytesRead = localRead;
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(key.D);
@@ -427,7 +421,6 @@ namespace System.Security.Cryptography
                     ImportParameters(ecParameters);
                     bytesRead = localRead;
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -446,7 +439,6 @@ namespace System.Security.Cryptography
                     AsnWriter writer = EccKeyFormatHelper.WriteECPrivateKey(ecParameters);
                     return writer.Encode();
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);
@@ -468,7 +460,6 @@ namespace System.Security.Cryptography
                     AsnWriter writer = EccKeyFormatHelper.WriteECPrivateKey(ecParameters);
                     return writer.TryEncode(destination, out bytesWritten);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ecParameters.D);

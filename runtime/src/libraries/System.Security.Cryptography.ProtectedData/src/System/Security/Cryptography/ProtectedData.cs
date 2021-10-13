@@ -119,7 +119,6 @@ namespace System.Security.Cryptography
                         Marshal.Copy(outputBlob.pbData, outputBytes, 0, length);
                         return outputBytes;
                     }
-
                     finally
                     {
                         if (outputBlob.pbData != IntPtr.Zero)

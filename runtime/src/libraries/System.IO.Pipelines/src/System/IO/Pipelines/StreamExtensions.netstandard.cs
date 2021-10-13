@@ -47,7 +47,6 @@ namespace System.IO.Pipelines
                         new Span<byte>(localBuffer, 0, result).CopyTo(localDestination.Span);
                         return result;
                     }
-
                     finally
                     {
                         ArrayPool<byte>.Shared.Return(localBuffer);
@@ -70,7 +69,6 @@ namespace System.IO.Pipelines
                     buffer.Span.CopyTo(sharedBuffer);
                     stream.Write(sharedBuffer, 0, buffer.Length);
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(sharedBuffer);
@@ -109,7 +107,6 @@ namespace System.IO.Pipelines
             {
                 await writeTask.ConfigureAwait(false);
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(localBuffer);

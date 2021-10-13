@@ -67,7 +67,6 @@ namespace PInvokeTest
                 result1 = (PInvokeExampleNative.GetConstant() == AsNormalInline());
                 result2 = (PInvokeExampleNative.GetConstant() == AsNormalInline());
             }
-
             finally
             {
                 result = result1 && result2;
@@ -86,7 +85,6 @@ namespace PInvokeTest
                 // These two pinvokes should be inline, except on x64
                 result1 = (PInvokeExampleNative.GetConstant() == AsNormalInline());
             }
-
             finally
             {
                 // These two pinvokes should *not* be inline (finally)
@@ -108,7 +106,6 @@ namespace PInvokeTest
                 // These two pinvokes should be inline, except on x64
                 result1 = (PInvokeExampleNative.GetConstant() == AsNormalInline());
             }
-
             finally
             {
                 try

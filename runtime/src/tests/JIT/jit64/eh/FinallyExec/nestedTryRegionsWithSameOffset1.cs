@@ -37,14 +37,12 @@ class Program
                         if (count-- == 0)
                             break;
                     }
-
                     finally
                     {
                         Console.WriteLine("  in finally");
                     }
                 }
             }
-
             finally
             {
                 Console.WriteLine("in finally");

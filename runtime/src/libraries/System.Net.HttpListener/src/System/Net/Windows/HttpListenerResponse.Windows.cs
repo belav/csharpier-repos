@@ -119,7 +119,6 @@ namespace System.Net
                     NetEventSource.Info(this);
                 ((IDisposable)this).Dispose();
             }
-
             finally { }
         }
 
@@ -373,7 +372,6 @@ namespace System.Net
                         "Call to Interop.HttpApi.HttpSendHttpResponse returned:" + statusCode
                     );
             }
-
             finally
             {
                 FreePinnedHeaders(pinnedHeaders);

@@ -162,7 +162,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     }
                 }
             }
-
             finally
             {
                 FreeDataBuffers(pinnedBuffers);
@@ -820,7 +819,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     _disposed = true;
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

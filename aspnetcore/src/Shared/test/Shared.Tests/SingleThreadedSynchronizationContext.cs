@@ -40,7 +40,6 @@ namespace Microsoft.Extensions.Internal
                     item.Callback(item.State);
                 }
             }
-
             finally
             {
                 context._queue.CompleteAdding();

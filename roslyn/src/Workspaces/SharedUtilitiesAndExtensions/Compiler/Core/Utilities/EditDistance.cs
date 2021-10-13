@@ -104,7 +104,6 @@ namespace Roslyn.Utilities
                     threshold
                 );
             }
-
             finally
             {
                 ArrayPool<char>.ReleaseArray(targetLowerCaseCharacters);

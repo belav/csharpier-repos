@@ -40,7 +40,6 @@ namespace Dynamic
                     Assert.IsTrue(obj.EqualByCCW(obj));
                     Assert.IsTrue(obj.NotEqualByRCW(obj));
                 }
-
                 finally
                 {
                     obj.ReleaseResources();

@@ -597,7 +597,6 @@ namespace System.ServiceModel.Syndication
                         }
                         LoadElementExtensions(buffer, extWriter, result);
                     }
-
                     finally
                     {
                         extWriter?.Dispose();
@@ -1036,7 +1035,6 @@ namespace System.ServiceModel.Syndication
 
                     LoadElementExtensions(buffer, extWriter, result);
                 }
-
                 finally
                 {
                     extWriter?.Dispose();

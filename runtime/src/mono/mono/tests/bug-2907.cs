@@ -19,7 +19,6 @@ class Program
             XmlSerializer serializer = new XmlSerializer(typeof(T));
             deserializedObject = serializer.Deserialize(reader) as T;
         }
-
         finally
         {
             if (null != reader)

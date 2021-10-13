@@ -325,7 +325,6 @@ namespace System.Net.Http.Formatting
                 {
                     return jsonSerializer.Deserialize(jsonReader, type);
                 }
-
                 finally
                 {
                     if (errorHandler != null)

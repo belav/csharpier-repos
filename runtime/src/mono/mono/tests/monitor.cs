@@ -76,7 +76,6 @@ public class Tests
             {
                 Thread.Sleep(thread_count * 1000);
             }
-
             finally
             {
                 unlocked = true;

@@ -27,13 +27,11 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.NotEqual(IntPtr.Zero, aggregatedObject2);
                     Assert.NotEqual(aggregatedObject1, aggregatedObject2);
                 }
-
                 finally
                 {
                     Marshal.Release(aggregatedObject1);
                 }
             }
-
             finally
             {
                 Marshal.Release(ptr);
@@ -61,13 +59,11 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.NotEqual(IntPtr.Zero, aggregatedObject2);
                     Assert.NotEqual(aggregatedObject1, aggregatedObject2);
                 }
-
                 finally
                 {
                     Marshal.Release(aggregatedObject1);
                 }
             }
-
             finally
             {
                 Marshal.Release(ptr);
@@ -124,13 +120,11 @@ namespace System.Runtime.InteropServices.Tests
                         () => Marshal.CreateAggregatedObject(ptr1, o2)
                     );
                 }
-
                 finally
                 {
                     Marshal.Release(ptr2);
                 }
             }
-
             finally
             {
                 Marshal.Release(ptr1);

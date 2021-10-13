@@ -120,7 +120,6 @@ namespace System.Web.Mvc
 
                 return results;
             }
-
             finally
             {
                 _adaptersLock.ExitReadLock();
@@ -147,7 +146,6 @@ namespace System.Web.Mvc
                         new object[] { metadata, context, attribute }
                     );
             }
-
             finally
             {
                 _adaptersLock.ExitWriteLock();
@@ -168,7 +166,6 @@ namespace System.Web.Mvc
             {
                 AttributeFactories[attributeType] = factory;
             }
-
             finally
             {
                 _adaptersLock.ExitWriteLock();
@@ -296,7 +293,6 @@ namespace System.Web.Mvc
                 ValidatableFactories[modelType] = (metadata, context) =>
                     (ModelValidator)constructor.Invoke(new object[] { metadata, context });
             }
-
             finally
             {
                 _adaptersLock.ExitWriteLock();
@@ -321,7 +317,6 @@ namespace System.Web.Mvc
             {
                 ValidatableFactories[modelType] = factory;
             }
-
             finally
             {
                 _adaptersLock.ExitWriteLock();

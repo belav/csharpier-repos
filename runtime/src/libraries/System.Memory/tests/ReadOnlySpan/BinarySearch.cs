@@ -157,7 +157,6 @@ namespace System.SpanTests
                     Assert.Equal(int.MaxValue - 1, span.BinarySearch((byte)3));
                     Assert.Equal(int.MinValue, span.BinarySearch((byte)4));
                 }
-
                 finally
                 {
                     AllocationHelper.ReleaseNative(ref memory);

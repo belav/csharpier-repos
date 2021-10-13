@@ -246,7 +246,6 @@ namespace System.Threading.Tests
                 {
                     threadReady.CheckedWait();
                 }
-
                 finally
                 {
                     checkForThreadErrors();
@@ -1093,7 +1092,6 @@ namespace System.Threading.Tests
                             VerifyState();
                         }
                     }
-
                     finally
                     {
                         if (isBlockingOperation)
@@ -1102,7 +1100,6 @@ namespace System.Threading.Tests
                         }
                     }
                 }
-
                 finally
                 {
                     if (!isBlockingOperation)

@@ -22,7 +22,6 @@ namespace System.Data.ProviderBase
             {
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }
-
                 finally
                 {
                     base.handle = Marshal.GetIUnknownForObject(unknown);
@@ -49,7 +48,6 @@ namespace System.Data.ProviderBase
                 IntPtr handle = DangerousGetHandle();
                 value = Marshal.GetObjectForIUnknown(handle);
             }
-
             finally
             {
                 if (mustRelease)

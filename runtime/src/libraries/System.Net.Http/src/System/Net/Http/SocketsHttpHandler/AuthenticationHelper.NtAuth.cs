@@ -251,13 +251,11 @@ namespace System.Net.Http
                                 needDrain = true;
                             }
                         }
-
                         finally
                         {
                             authContext.CloseContext();
                         }
                     }
-
                     finally
                     {
                         if (isNewConnection)

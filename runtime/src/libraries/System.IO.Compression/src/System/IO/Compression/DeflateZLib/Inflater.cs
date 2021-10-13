@@ -108,7 +108,6 @@ namespace System.IO.Compression
                 }
                 return bytesRead;
             }
-
             finally
             {
                 // Before returning, make sure to release input buffer if necessary:

@@ -35,7 +35,6 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             {
                 return await filter.InvokeMethodAsync(invocationContext, next);
             }
-
             finally
             {
                 if (owned)
@@ -56,7 +55,6 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             {
                 await filter.OnConnectedAsync(context, next);
             }
-
             finally
             {
                 if (owned)
@@ -78,7 +76,6 @@ namespace Microsoft.AspNetCore.SignalR.Internal
             {
                 await filter.OnDisconnectedAsync(context, exception, next);
             }
-
             finally
             {
                 if (owned)

@@ -84,7 +84,6 @@ namespace Microsoft.AspNetCore.StaticFiles
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
                 Assert.Null(response.Headers.ETag);
             }
-
             finally
             {
                 File.Delete(badLink);

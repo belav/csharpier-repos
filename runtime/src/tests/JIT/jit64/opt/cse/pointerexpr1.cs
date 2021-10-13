@@ -110,7 +110,6 @@ namespace CseTest
             {
                 ans = 34;
             }
-
             finally
             {
                 if (verbose)
@@ -128,7 +127,6 @@ namespace CseTest
             {
                 ans = 35;
             }
-
             finally
             {
                 if (verbose)
@@ -146,7 +144,6 @@ namespace CseTest
             {
                 ans = 33;
             }
-
             finally
             {
                 if (verbose)

@@ -128,7 +128,6 @@ namespace System.DirectoryServices
 
                 return value;
             }
-
             finally
             {
                 try
@@ -156,7 +155,6 @@ namespace System.DirectoryServices
                 ).GetVlvValue();
                 return value;
             }
-
             finally
             {
                 try
@@ -319,7 +317,6 @@ namespace System.DirectoryServices
                                 new ResultPropertyValueCollection(values)
                             );
                         }
-
                         finally
                         {
                             try
@@ -329,7 +326,6 @@ namespace System.DirectoryServices
                             catch (COMException) { }
                         }
                     }
-
                     finally
                     {
                         SafeNativeMethods.FreeADsMem(pszColumnName);

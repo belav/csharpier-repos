@@ -77,7 +77,6 @@ namespace System.ComponentModel.Composition.Hosting
                                 }
                             }
                         }
-
                         finally
                         {
                             if (notifyCatalog != null)
@@ -89,7 +88,6 @@ namespace System.ComponentModel.Composition.Hosting
                     }
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

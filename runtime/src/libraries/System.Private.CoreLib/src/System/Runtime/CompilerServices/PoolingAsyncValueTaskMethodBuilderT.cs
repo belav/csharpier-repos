@@ -482,7 +482,6 @@ namespace System.Runtime.CompilerServices
                 {
                     return _valueTaskSource.GetResult(token);
                 }
-
                 finally
                 {
                     // Reuse this instance if possible, otherwise clear and drop it.
@@ -497,7 +496,6 @@ namespace System.Runtime.CompilerServices
                 {
                     _valueTaskSource.GetResult(token);
                 }
-
                 finally
                 {
                     // Reuse this instance if possible, otherwise clear and drop it.

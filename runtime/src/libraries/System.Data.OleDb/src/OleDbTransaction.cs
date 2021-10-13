@@ -32,7 +32,6 @@ namespace System.Data.OleDb
                 int transactionLevel = 0;
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }
-
                 finally
                 {
                     hr = transaction.StartTransaction(
@@ -64,7 +63,6 @@ namespace System.Data.OleDb
                     DangerousAddRef(ref mustRelease);
                     RuntimeHelpers.PrepareConstrainedRegions();
                     try { }
-
                     finally
                     {
                         hr = (OleDbHResult)NativeOledbWrapper.ITransactionAbort(
@@ -73,7 +71,6 @@ namespace System.Data.OleDb
                         _mustComplete = false;
                     }
                 }
-
                 finally
                 {
                     if (mustRelease)
@@ -95,7 +92,6 @@ namespace System.Data.OleDb
                     DangerousAddRef(ref mustRelease);
                     RuntimeHelpers.PrepareConstrainedRegions();
                     try { }
-
                     finally
                     {
                         hr = (OleDbHResult)NativeOledbWrapper.ITransactionCommit(
@@ -107,7 +103,6 @@ namespace System.Data.OleDb
                         }
                     }
                 }
-
                 finally
                 {
                     if (mustRelease)
@@ -204,7 +199,6 @@ namespace System.Data.OleDb
                 wrapper = (UnsafeNativeMethods.ITransactionLocal)_transaction.ComWrapper();
                 transaction.BeginInternal(wrapper);
             }
-
             finally
             {
                 if (null != wrapper)

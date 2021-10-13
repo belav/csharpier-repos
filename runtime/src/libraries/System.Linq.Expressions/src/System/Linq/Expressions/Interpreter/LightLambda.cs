@@ -451,7 +451,6 @@ namespace System.Linq.Expressions.Interpreter
             {
                 _interpreter.Run(frame);
             }
-
             finally
             {
                 frame.Leave(currentFrame);
@@ -473,7 +472,6 @@ namespace System.Linq.Expressions.Interpreter
             {
                 _interpreter.Run(frame);
             }
-
             finally
             {
                 for (int i = 0; i < arguments.Length; i++)
@@ -498,7 +496,6 @@ namespace System.Linq.Expressions.Interpreter
             {
                 _interpreter.Run(frame);
             }
-
             finally
             {
                 for (int i = 0; i < arguments.Length; i++)

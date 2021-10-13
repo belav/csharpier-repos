@@ -37,7 +37,6 @@ public unsafe class T
         {
             ans = input;
         }
-
         finally
         {
             if (verbose)

@@ -45,7 +45,6 @@ namespace System.Net.NetworkInformation
                         fixedInfo = Marshal.PtrToStructure<Interop.IpHlpApi.FIXED_INFO>(buffer);
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(buffer);

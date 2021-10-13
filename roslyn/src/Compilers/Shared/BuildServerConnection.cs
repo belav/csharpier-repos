@@ -251,7 +251,6 @@ namespace Microsoft.CodeAnalysis.CommandLine
 
                     return pipeTask;
                 }
-
                 finally
                 {
                     try
@@ -618,7 +617,6 @@ namespace Microsoft.CodeAnalysis.CommandLine
                         mutex = new ServerFileMutexPair(mutexName, false, out createdNew);
                         return !createdNew;
                     }
-
                     finally
                     {
                         mutex?.Dispose();
@@ -853,7 +851,6 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 if (IsLocked)
                     Mutex.ReleaseMutex();
             }
-
             finally
             {
                 Mutex.Dispose();
@@ -905,7 +902,6 @@ namespace Microsoft.CodeAnalysis.CommandLine
                 HeldMutex.Unlock();
                 AliveMutex.Unlock();
             }
-
             finally
             {
                 AliveMutex.Dispose();

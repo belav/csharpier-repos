@@ -73,13 +73,11 @@ namespace System.Data
                         new CollectionChangeEventArgs(CollectionChangeAction.Add, relation)
                     );
                 }
-
                 finally
                 {
                     _inTransition = null;
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -321,7 +319,6 @@ namespace System.Data
                 OnCollectionChanged(s_refreshEventArgs);
                 _inTransition = null;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -514,7 +511,6 @@ namespace System.Data
                     new CollectionChangeEventArgs(CollectionChangeAction.Remove, relation)
                 );
             }
-
             finally
             {
                 _inTransition = null;

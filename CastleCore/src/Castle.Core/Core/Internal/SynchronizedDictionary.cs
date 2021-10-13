@@ -51,7 +51,6 @@ namespace Castle.Core.Internal
                     return value;
                 }
             }
-
             finally
             {
                 itemsLock.ExitReadLock();
@@ -74,14 +73,12 @@ namespace Castle.Core.Internal
                         items.Add(key, value);
                         return value;
                     }
-
                     finally
                     {
                         itemsLock.ExitWriteLock();
                     }
                 }
             }
-
             finally
             {
                 itemsLock.ExitUpgradeableReadLock();
@@ -114,7 +111,6 @@ namespace Castle.Core.Internal
                     action.Invoke(item.Key, item.Value);
                 }
             }
-
             finally
             {
                 itemsLock.ExitReadLock();

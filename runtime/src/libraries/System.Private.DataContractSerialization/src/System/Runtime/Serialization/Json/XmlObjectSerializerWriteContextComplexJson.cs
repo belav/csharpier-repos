@@ -324,7 +324,6 @@ namespace System.Runtime.Serialization.Json
                             genericDictionaryObj.Add(entry.Key, entry.Value);
                         }
                     }
-
                     finally
                     {
                         (e as IDisposable)?.Dispose();

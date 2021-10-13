@@ -72,7 +72,6 @@ namespace System.Speech.Internal.ObjectTokens
                     objectTokenList.Add(objectToken);
                 }
             }
-
             finally
             {
                 if (enumTokens != null)

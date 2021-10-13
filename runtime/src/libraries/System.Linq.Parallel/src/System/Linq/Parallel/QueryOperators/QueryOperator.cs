@@ -285,7 +285,6 @@ namespace System.Linq.Parallel
                     return output;
                 }
             }
-
             finally
             {
                 QueryLifecycle.LogicalQueryExecutionEnd(querySettings.QueryId);

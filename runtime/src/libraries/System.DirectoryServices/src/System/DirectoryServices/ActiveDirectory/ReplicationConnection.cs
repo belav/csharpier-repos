@@ -106,7 +106,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     return new ReplicationConnection(context, connectionEntry, name);
                 }
             }
-
             finally
             {
                 de.Dispose();

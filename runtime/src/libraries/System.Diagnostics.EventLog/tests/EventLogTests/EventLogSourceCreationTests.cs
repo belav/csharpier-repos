@@ -19,7 +19,6 @@ namespace System.Diagnostics.Tests
                 EventLog.CreateEventSource(source, log);
                 Assert.True(EventLog.SourceExists(source));
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -47,7 +46,6 @@ namespace System.Diagnostics.Tests
                 EventLog.CreateEventSource(secondSource, secondLog);
                 Assert.True(EventLog.SourceExists(secondSource));
             }
-
             finally
             {
                 EventLog.DeleteEventSource(firstSource);
@@ -75,7 +73,6 @@ namespace System.Diagnostics.Tests
                     () => EventLog.CreateEventSource(secondSource, secondLog)
                 );
             }
-
             finally
             {
                 EventLog.DeleteEventSource(firstSource);
@@ -119,7 +116,6 @@ namespace System.Diagnostics.Tests
                 Assert.True(EventLog.SourceExists(source));
                 Assert.Equal("Application", EventLog.LogNameFromSourceName(source, "."));
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -164,7 +160,6 @@ namespace System.Diagnostics.Tests
                 Assert.True(EventLog.SourceExists(source));
                 Assert.Throws<ArgumentException>(() => EventLog.CreateEventSource(source, log));
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);

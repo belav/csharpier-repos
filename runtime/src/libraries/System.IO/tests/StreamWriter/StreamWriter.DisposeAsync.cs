@@ -37,7 +37,6 @@ namespace System.IO.Tests
                 sw.Write("hello");
                 Assert.Equal(0, ms.Position);
             }
-
             finally
             {
                 await sw.DisposeAsync();
@@ -55,7 +54,6 @@ namespace System.IO.Tests
             {
                 sw.Write("hello");
             }
-
             finally
             {
                 await sw.DisposeAsync();
@@ -72,7 +70,6 @@ namespace System.IO.Tests
             {
                 sw.Write("hello");
             }
-
             finally
             {
                 Assert.False(sw.DisposeInvoked);
@@ -90,7 +87,6 @@ namespace System.IO.Tests
             {
                 sw.Write("hello");
             }
-
             finally
             {
                 Assert.False(sw.DisposeInvoked);

@@ -297,7 +297,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var value = this.ParseSubExpression(precedence);
                 return _syntaxFactory.ConstantPattern(value);
             }
-
             finally
             {
                 this.Release(ref resetPoint);
@@ -616,7 +615,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 return ScanType(forPattern: true) != ScanTypeFlags.NotType;
             }
-
             finally
             {
                 this.Reset(ref resetPoint);
@@ -726,7 +724,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 closeToken = this.EatToken(closeKind);
                 subPatterns = list.ToList();
             }
-
             finally
             {
                 _pool.Free(list);

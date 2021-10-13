@@ -64,7 +64,6 @@ public class SyncTextReader
                 }
             }
         }
-
         finally
         {
             TextWriter oldWriter = Console.Out;

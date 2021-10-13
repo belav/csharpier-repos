@@ -239,7 +239,6 @@ namespace System.Web.WebPages.Razor.Test
                 Assert.Same(expected, provider.Host);
                 Assert.True(called);
             }
-
             finally
             {
                 RazorBuildProvider.CompilingPath -= handler;

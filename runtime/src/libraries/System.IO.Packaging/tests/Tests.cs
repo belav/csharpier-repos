@@ -2630,7 +2630,6 @@ namespace System.IO.Packaging.Tests
                     );
                 }
             }
-
             finally
             {
                 if (packagePath2 != null && packagePath2.Exists)

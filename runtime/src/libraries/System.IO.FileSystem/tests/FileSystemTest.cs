@@ -167,7 +167,6 @@ namespace System.IO.Tests
                 );
                 testAction(readOnlyDirectory);
             }
-
             finally
             {
                 // Clean up test environment

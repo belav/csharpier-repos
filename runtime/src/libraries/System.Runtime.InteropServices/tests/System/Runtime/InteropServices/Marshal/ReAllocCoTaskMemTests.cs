@@ -32,7 +32,6 @@ namespace System.Runtime.InteropServices.Tests
                     add++;
                 } while (p2 == p1); // stop once we've validated moved case
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(p2);

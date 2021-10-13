@@ -74,7 +74,6 @@ namespace Test
                         byte[] local13 = App.m_abFwd9;
                         throw new IndexOutOfRangeException();
                     }
-
                     finally
                     {
                         Array[] local7 = App.m_axFwd10;

@@ -78,7 +78,6 @@ namespace System.Net.Security
                 _exception = s_disposedSentinel;
                 _context?.CloseContext();
             }
-
             finally
             {
                 base.Dispose(disposing);
@@ -92,7 +91,6 @@ namespace System.Net.Security
                 _exception = s_disposedSentinel;
                 _context?.CloseContext();
             }
-
             finally
             {
                 await base.DisposeAsync().ConfigureAwait(false);

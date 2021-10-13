@@ -242,7 +242,6 @@ namespace System.Security.AccessControl
 
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-
             finally
             {
                 WriteUnlock();

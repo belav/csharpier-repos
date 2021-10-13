@@ -4514,7 +4514,6 @@ namespace System.Net.Http.Functional.Tests
                             );
                         }
                     }
-
                     finally
                     {
                         // Shut down client.

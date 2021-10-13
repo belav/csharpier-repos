@@ -145,7 +145,6 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
                 {
                     return LoadProjectAsync(path, projectCollection, cancellationToken);
                 }
-
                 finally
                 {
                     // unload project so collection will release global strings

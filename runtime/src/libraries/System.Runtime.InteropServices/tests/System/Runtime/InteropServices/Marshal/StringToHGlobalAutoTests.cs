@@ -19,7 +19,6 @@ namespace System.Runtime.InteropServices.Tests
                 // Make sure the memory roundtrips.
                 Assert.Equal(s, Marshal.PtrToStringAuto(ptr));
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);

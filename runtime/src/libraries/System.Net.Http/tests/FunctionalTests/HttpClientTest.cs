@@ -719,7 +719,6 @@ namespace System.Net.Http.Functional.Tests
                             Assert.IsNotType<TimeoutException>(e.InnerException);
                         }
                     }
-
                     finally
                     {
                         tcs.SetResult();
@@ -1364,7 +1363,6 @@ namespace System.Net.Http.Functional.Tests
                             Assert.Equal(content, sr.ReadToEnd());
                         }
                     }
-
                     finally
                     {
                         mres.Set();

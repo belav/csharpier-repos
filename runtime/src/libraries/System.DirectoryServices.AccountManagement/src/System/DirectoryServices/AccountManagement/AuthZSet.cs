@@ -654,7 +654,6 @@ namespace System.DirectoryServices.AccountManagement
                     _disposed = true;
                 }
             }
-
             finally
             {
                 base.Dispose();

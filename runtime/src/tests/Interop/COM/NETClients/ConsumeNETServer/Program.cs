@@ -54,7 +54,6 @@ namespace NetClient
                 object inst = test.GetRCW();
                 Assert.AreEqual(rcw, inst);
             }
-
             finally
             {
                 test.ReleaseResources();
@@ -72,7 +71,6 @@ namespace NetClient
                 Assert.IsTrue(test.EqualByCCW(test));
                 Assert.IsTrue(test.NotEqualByRCW(test));
             }
-
             finally
             {
                 test.ReleaseResources();

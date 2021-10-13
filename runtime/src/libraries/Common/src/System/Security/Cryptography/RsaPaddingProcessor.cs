@@ -446,7 +446,6 @@ namespace System.Security.Cryptography
                         return false;
                     }
                 }
-
                 finally
                 {
                     CryptoPool.Return(tmp, source.Length);
@@ -642,7 +641,6 @@ namespace System.Security.Cryptography
                     return h.SequenceEqual(hPrime);
                 }
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(dbMask);

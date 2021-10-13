@@ -519,7 +519,6 @@ namespace XmlCoreTest.Common
                     cBytesRead = fs.Read(rgBuffer, 0, 4096);
                 }
             }
-
             finally
             {
                 if (fs != null)

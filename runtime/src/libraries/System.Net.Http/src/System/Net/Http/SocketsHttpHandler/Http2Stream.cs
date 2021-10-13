@@ -1362,7 +1362,6 @@ namespace System.Net.Http
                         }
                     }
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(buffer);
@@ -1408,7 +1407,6 @@ namespace System.Net.Http
                         }
                     }
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(buffer);
@@ -1485,7 +1483,6 @@ namespace System.Net.Http
                             .ConfigureAwait(false);
                     }
                 }
-
                 finally
                 {
                     linkedRegistration.Dispose();

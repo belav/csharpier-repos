@@ -606,7 +606,6 @@ namespace System.Security.Cryptography.X509Certificates
                     serialNumber
                 );
             }
-
             finally
             {
                 key?.Dispose();

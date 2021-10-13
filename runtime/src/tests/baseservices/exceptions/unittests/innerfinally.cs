@@ -72,7 +72,6 @@ class InnerFinallyTest
             {
                 _trace.WriteLine("\t try 1.1");
             }
-
             finally
             {
                 _trace.WriteLine("\t finally 1.1");
@@ -82,7 +81,6 @@ class InnerFinallyTest
                     _trace.WriteLine("\t\t Throwing an exception here!");
                     z = x / y;
                 }
-
                 finally
                 {
                     _trace.WriteLine("\t\t finally 1.1.1");

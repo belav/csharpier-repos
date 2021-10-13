@@ -276,7 +276,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
                 _started = true;
                 Log.Started(_logger);
             }
-
             finally
             {
                 _connectionLock.Release();
@@ -333,7 +332,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
 
                 _httpClient?.Dispose();
             }
-
             finally
             {
                 // We want to do these things even if the WaitForWriterToComplete/WaitForReaderToComplete fails

@@ -148,7 +148,6 @@ namespace System.SpanTests
                     Assert.Equal(fill, actual);
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(new IntPtr(ptr));

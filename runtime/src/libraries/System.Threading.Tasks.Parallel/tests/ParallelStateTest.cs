@@ -796,7 +796,6 @@ namespace System.Threading.Tasks.Test
                     "Throws test exception to verify it got handled properly"
                 );
             }
-
             finally
             {
                 _isExceptional = true;
@@ -831,7 +830,6 @@ namespace System.Threading.Tasks.Test
                         "Throws test exception to verify it got handled properly"
                     );
                 }
-
                 finally
                 {
                     _isExceptional = true;

@@ -271,7 +271,6 @@ namespace System.Security.Cryptography
                             return writtenSpan.ToArray();
                         }
                     }
-
                     finally
                     {
                         CryptoPool.Return(buf, bytesWritten);
@@ -302,7 +301,6 @@ namespace System.Security.Cryptography
                             return writtenSpan.ToArray();
                         }
                     }
-
                     finally
                     {
                         CryptoPool.Return(buf, bytesWritten);

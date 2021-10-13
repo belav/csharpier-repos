@@ -549,7 +549,6 @@ namespace System.Threading.Tasks.Dataflow
                         itemCopy = item.ToList(); // itemCopy will remain null in the case of exception
                         itemCount = itemCopy.Count;
                     }
-
                     finally
                     {
                         // If we're here successfully, then itemCount is the number of output items
@@ -563,7 +562,6 @@ namespace System.Threading.Tasks.Dataflow
                 }
                 // else if the item isn't valid, the finally block will see itemCopy as null and output invalid
             }
-
             finally
             {
                 // Tell the base reordering buffer that we're done.  If we already output
@@ -651,7 +649,6 @@ namespace System.Threading.Tasks.Dataflow
                         }
                     }
                 }
-
                 finally
                 {
                     if (!outputFirstItem)

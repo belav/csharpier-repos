@@ -1185,7 +1185,6 @@ namespace System.Xml
                 }
                 return objects;
             }
-
             finally
             {
                 this.Offset = bufferOffset;

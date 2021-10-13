@@ -174,7 +174,6 @@ namespace System.Drawing.Tests
                 brush.Color = Color.Red;
                 Assert.Equal(Color.Red, brush.Color);
             }
-
             finally
             {
                 brush.Color = color;

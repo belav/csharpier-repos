@@ -283,7 +283,6 @@ namespace System.Drawing.Drawing2D
 
                     return blend;
                 }
-
                 finally
                 {
                     if (factors != IntPtr.Zero)
@@ -344,7 +343,6 @@ namespace System.Drawing.Drawing2D
                         )
                     );
                 }
-
                 finally
                 {
                     if (factors != IntPtr.Zero)
@@ -455,7 +453,6 @@ namespace System.Drawing.Drawing2D
 
                     return blend;
                 }
-
                 finally
                 {
                     if (colors != IntPtr.Zero)
@@ -553,7 +550,6 @@ namespace System.Drawing.Drawing2D
                         )
                     );
                 }
-
                 finally
                 {
                     if (colors != IntPtr.Zero)

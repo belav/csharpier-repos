@@ -3365,7 +3365,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 // we are parsing with the invariant culture.
                 AssertGoodDecimalLiteral("1.1E-1M", "0000000b000000000000000000020000");
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = oldCulture;

@@ -227,7 +227,6 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
                     _cache = _connection.GetDatabase();
                 }
             }
-
             finally
             {
                 _connectionLock.Release();
@@ -268,7 +267,6 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis
                     _cache = _connection.GetDatabase();
                 }
             }
-
             finally
             {
                 _connectionLock.Release();

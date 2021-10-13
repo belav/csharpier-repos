@@ -95,7 +95,6 @@ namespace System.Net.Test.Common
                                 X509KeyStorageFlags.Exportable
                             );
                         }
-
                         finally
                         {
                             mutex?.ReleaseMutex();

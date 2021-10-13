@@ -65,13 +65,11 @@ namespace System.Text
 
                     _encodings.Add(codepage, result);
                 }
-
                 finally
                 {
                     _cacheLock.ExitWriteLock();
                 }
             }
-
             finally
             {
                 _cacheLock.ExitUpgradeableReadLock();

@@ -42,7 +42,6 @@ namespace Test
                 {
                     test();
                 }
-
                 finally
                 {
                     test();
@@ -65,14 +64,12 @@ namespace Test
                 {
                     Console.WriteLine("\ttry 1.1");
                 }
-
                 finally
                 {
                     Console.WriteLine("\tfinally 1.1");
                     throw new Exception();
                 }
             }
-
             finally
             {
                 Console.WriteLine("finally 1");

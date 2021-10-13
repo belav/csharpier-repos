@@ -15,7 +15,6 @@ public class a
             temp *= 2;
             throw new System.ArgumentException();
         }
-
         finally
         {
             temp += 5;

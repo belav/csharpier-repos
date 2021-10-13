@@ -64,7 +64,6 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 NegotiateProtocol.WriteResponse(_negotiateResponse, writer);
                 return writer.CopyToAsync(_stream);
             }
-
             finally
             {
                 writer.Reset();

@@ -547,7 +547,6 @@ namespace System.Threading.Tasks.Sources.Tests
                     }
                     Assert.Equal(190, total);
                 }
-
                 finally
                 {
                     await enumerator.DisposeAsync();

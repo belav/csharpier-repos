@@ -81,7 +81,6 @@ namespace Microsoft.Win32.SystemEventsTests
                     elapsed.WaitOne(TimerInterval * SystemEventsTest.UnexpectedEventMultiplier)
                 );
             }
-
             finally
             {
                 SystemEvents.TimerElapsed -= handler;
@@ -140,7 +139,6 @@ namespace Microsoft.Win32.SystemEventsTests
                     SystemEvents.KillTimer(timer);
                 }
             }
-
             finally
             {
                 SystemEvents.TimerElapsed -= handler;
@@ -190,7 +188,6 @@ namespace Microsoft.Win32.SystemEventsTests
                     $"Timer should fire less than {permittedProportionUnder * 100.0}% before and less than {permittedProportionOver * 100.0}% after expected interval {interval}, actual: {stopwatch.ElapsedMilliseconds}, difference: {proportionDifference * 100.0}%"
                 );
             }
-
             finally
             {
                 SystemEvents.TimerElapsed -= handler;

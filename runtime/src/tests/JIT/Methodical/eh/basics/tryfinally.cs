@@ -43,7 +43,6 @@ namespace hello
             {
                 inTry();
             }
-
             finally
             {
                 inFinally();

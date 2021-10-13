@@ -194,7 +194,6 @@ namespace System.Configuration
 
                         _isInitInProgress = false;
                     }
-
                     finally
                     {
                         // Wake up all threads waiting for initialization to complete.

@@ -539,7 +539,6 @@ namespace System.Collections.Concurrent
                         throw new InvalidOperationException(SR.BlockingCollection_Add_Failed);
                     }
                 }
-
                 finally
                 {
                     // decrement the adders count
@@ -790,7 +789,6 @@ namespace System.Collections.Concurrent
                         );
                     }
                 }
-
                 finally
                 {
                     // removeFaulted implies !removeSucceeded, but the reverse is not true.
@@ -1874,7 +1872,6 @@ namespace System.Collections.Concurrent
                     }
                 }
             }
-
             finally
             {
                 if (linkedTokenSource != null)

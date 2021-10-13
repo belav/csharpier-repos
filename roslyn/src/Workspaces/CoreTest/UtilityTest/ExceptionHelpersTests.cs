@@ -28,7 +28,6 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 {
                     throw new OperationCanceledException();
                 }
-
                 finally
                 {
                     finallyExecuted = true;

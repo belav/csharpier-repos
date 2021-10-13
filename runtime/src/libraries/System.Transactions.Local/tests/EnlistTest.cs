@@ -517,7 +517,6 @@ namespace System.Transactions.Tests
             {
                 ct.Dispose();
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -540,7 +539,6 @@ namespace System.Transactions.Tests
                 ct.Commit();
                 ct.Dispose();
             }
-
             finally
             {
                 Transaction.Current = null;

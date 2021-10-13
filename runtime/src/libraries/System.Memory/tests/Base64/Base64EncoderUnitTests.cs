@@ -376,7 +376,6 @@ namespace System.Buffers.Text.Tests
                     }
                 }
             }
-
             finally
             {
                 if (allocatedFirst)

@@ -259,7 +259,6 @@ namespace System.IO
                         _stream.Close();
                     }
                 }
-
                 finally
                 {
                     _charPos = 0;

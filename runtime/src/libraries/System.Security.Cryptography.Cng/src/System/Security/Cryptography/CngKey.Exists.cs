@@ -54,7 +54,6 @@ namespace System.Security.Cryptography
                         throw errorCode.ToCryptographicException();
                     return true;
                 }
-
                 finally
                 {
                     if (keyHandle != null)

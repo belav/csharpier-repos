@@ -1128,7 +1128,6 @@ namespace System.Net
 
                 return response;
             }
-
             finally
             {
                 if (disposeRequired)

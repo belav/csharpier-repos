@@ -66,7 +66,6 @@ namespace System.SpanTests
                             )
                         );
                     }
-
                     finally
                     {
                         AllocationHelper.ReleaseNative(ref memBlock);

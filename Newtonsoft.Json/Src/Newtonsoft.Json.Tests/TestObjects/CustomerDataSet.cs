@@ -403,7 +403,6 @@ namespace Newtonsoft.Json.Tests.TestObjects
                         }
                     }
                 }
-
                 finally
                 {
                     if ((s1 != null))
@@ -818,7 +817,6 @@ namespace Newtonsoft.Json.Tests.TestObjects
                             }
                         }
                     }
-
                     finally
                     {
                         if ((s1 != null))

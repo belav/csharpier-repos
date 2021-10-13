@@ -125,7 +125,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
 #pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
                         }
                     }
-
                     finally
                     {
                         await context.OnCompletedAsync().ConfigureAwait(false);

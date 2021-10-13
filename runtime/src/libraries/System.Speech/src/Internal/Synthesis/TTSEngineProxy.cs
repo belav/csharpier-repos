@@ -66,7 +66,6 @@ namespace System.Speech.Internal.Synthesis
                 IntPtr waveFormat = gc.AddrOfPinnedObject();
                 _ssmlEngine.Speak(frags.ToArray(), waveFormat, _site);
             }
-
             finally
             {
                 gc.Free();
@@ -160,14 +159,12 @@ namespace System.Speech.Internal.Synthesis
                             _iSite
                         );
                     }
-
                     finally
                     {
                         ConvertTextFrag.FreeTextSegment(ref spvTextFragment);
                     }
                 }
             }
-
             finally
             {
                 gc.Free();

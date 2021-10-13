@@ -527,7 +527,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                     Assert.Equal(10, (await response.Content.ReadAsByteArrayAsync()).Length);
                 }
             }
-
             finally
             {
                 File.Delete(emptyFilePath);

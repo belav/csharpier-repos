@@ -23,14 +23,12 @@ class MainLoopTry2
                         temp += 1000 * i + j;
                     }
                 }
-
                 finally
                 {
                     result = temp;
                 }
             }
         }
-
         finally
         {
             Console.WriteLine($"done, sum is {result}");

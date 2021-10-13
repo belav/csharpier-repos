@@ -38,7 +38,6 @@ namespace System.Threading.Tests
                         SetSynchronizationContext(this);
                         d(state);
                     }
-
                     finally
                     {
                         SetSynchronizationContext(orig);

@@ -1620,7 +1620,6 @@ namespace System.Web.Mvc.Html.Test
                     result
                 );
             }
-
             finally
             {
                 Thread.CurrentThread.CurrentCulture = existingCulture;

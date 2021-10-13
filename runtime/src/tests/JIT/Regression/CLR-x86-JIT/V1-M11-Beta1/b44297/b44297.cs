@@ -16,7 +16,6 @@ namespace Test
         public int Method1()
         {
             try { }
-
             finally
             {
 #pragma warning disable 1718

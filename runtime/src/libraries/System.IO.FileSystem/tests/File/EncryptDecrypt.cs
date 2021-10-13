@@ -71,7 +71,6 @@ namespace System.IO.Tests
                     (FileAttributes.Encrypted & File.GetAttributes(tmpFileName))
                 );
             }
-
             finally
             {
                 File.Delete(tmpFileName);

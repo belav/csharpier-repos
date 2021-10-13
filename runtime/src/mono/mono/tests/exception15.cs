@@ -11,7 +11,6 @@ class Tests
             {
                 throw new NotImplementedException();
             }
-
             finally
             {
                 i++;

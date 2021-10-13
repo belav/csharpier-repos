@@ -638,7 +638,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             .DefaultTimeout();
                         Assert.Equal(HubConnectionState.Disconnected, hubConnection.State);
                     }
-
                     finally
                     {
                         await hubConnection.DisposeAsync().DefaultTimeout();
@@ -675,7 +674,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                             .DefaultTimeout();
                         Assert.False(onStartCalled);
                     }
-
                     finally
                     {
                         await hubConnection.DisposeAsync().DefaultTimeout();
@@ -730,7 +728,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => startTask)
                             .DefaultTimeout();
                     }
-
                     finally
                     {
                         await hubConnection.DisposeAsync().DefaultTimeout();
@@ -800,7 +797,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     // Using OrTimeout here will hide any timeout issues in the test :(.
                     await action(connection);
                 }
-
                 finally
                 {
                     // Dispose isn't under test here, so fire and forget so that errors/timeouts here don't cause

@@ -61,7 +61,6 @@ namespace System.Net
             {
                 base.Close(0);
             }
-
             finally
             {
                 if (e != null)

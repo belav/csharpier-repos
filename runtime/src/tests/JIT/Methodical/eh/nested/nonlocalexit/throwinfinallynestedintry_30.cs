@@ -355,7 +355,6 @@ class Class1
                                                                                                                                 );
                                                                                                                                 goto L30;
                                                                                                                             }
-
                                                                                                                             finally
                                                                                                                             {
                                                                                                                                 Console.WriteLine(
@@ -368,7 +367,6 @@ class Class1
                                                                                                                             );
                                                                                                                             goto L29;
                                                                                                                         }
-
                                                                                                                         finally
                                                                                                                         {
                                                                                                                             Console.WriteLine(
@@ -432,7 +430,6 @@ class Class1
                                                                                                                         );
                                                                                                                         goto L28;
                                                                                                                     }
-
                                                                                                                     finally
                                                                                                                     {
                                                                                                                         Console.WriteLine(
@@ -496,7 +493,6 @@ class Class1
                                                                                                                     );
                                                                                                                     goto L27;
                                                                                                                 }
-
                                                                                                                 finally
                                                                                                                 {
                                                                                                                     Console.WriteLine(
@@ -560,7 +556,6 @@ class Class1
                                                                                                                 );
                                                                                                                 goto L26;
                                                                                                             }
-
                                                                                                             finally
                                                                                                             {
                                                                                                                 Console.WriteLine(
@@ -624,7 +619,6 @@ class Class1
                                                                                                             );
                                                                                                             goto L25;
                                                                                                         }
-
                                                                                                         finally
                                                                                                         {
                                                                                                             Console.WriteLine(
@@ -688,7 +682,6 @@ class Class1
                                                                                                         );
                                                                                                         goto L24;
                                                                                                     }
-
                                                                                                     finally
                                                                                                     {
                                                                                                         Console.WriteLine(
@@ -752,7 +745,6 @@ class Class1
                                                                                                     );
                                                                                                     goto L23;
                                                                                                 }
-
                                                                                                 finally
                                                                                                 {
                                                                                                     Console.WriteLine(
@@ -816,7 +808,6 @@ class Class1
                                                                                                 );
                                                                                                 goto L22;
                                                                                             }
-
                                                                                             finally
                                                                                             {
                                                                                                 Console.WriteLine(
@@ -880,7 +871,6 @@ class Class1
                                                                                             );
                                                                                             goto L21;
                                                                                         }
-
                                                                                         finally
                                                                                         {
                                                                                             Console.WriteLine(
@@ -944,7 +934,6 @@ class Class1
                                                                                         );
                                                                                         goto L20;
                                                                                     }
-
                                                                                     finally
                                                                                     {
                                                                                         Console.WriteLine(
@@ -1008,7 +997,6 @@ class Class1
                                                                                     );
                                                                                     goto L19;
                                                                                 }
-
                                                                                 finally
                                                                                 {
                                                                                     Console.WriteLine(
@@ -1070,7 +1058,6 @@ class Class1
                                                                                 );
                                                                                 goto L18;
                                                                             }
-
                                                                             finally
                                                                             {
                                                                                 Console.WriteLine(
@@ -1126,7 +1113,6 @@ class Class1
                                                                             );
                                                                             goto L17;
                                                                         }
-
                                                                         finally
                                                                         {
                                                                             Console.WriteLine(
@@ -1182,7 +1168,6 @@ class Class1
                                                                         );
                                                                         goto L16;
                                                                     }
-
                                                                     finally
                                                                     {
                                                                         Console.WriteLine(
@@ -1238,7 +1223,6 @@ class Class1
                                                                     );
                                                                     goto L15;
                                                                 }
-
                                                                 finally
                                                                 {
                                                                     Console.WriteLine(
@@ -1294,7 +1278,6 @@ class Class1
                                                                 );
                                                                 goto L14;
                                                             }
-
                                                             finally
                                                             {
                                                                 Console.WriteLine(
@@ -1350,7 +1333,6 @@ class Class1
                                                             );
                                                             goto L13;
                                                         }
-
                                                         finally
                                                         {
                                                             Console.WriteLine(
@@ -1404,7 +1386,6 @@ class Class1
                                                         Console.WriteLine("-------------foo L13");
                                                         goto L12;
                                                     }
-
                                                     finally
                                                     {
                                                         Console.WriteLine(
@@ -1456,7 +1437,6 @@ class Class1
                                                     Console.WriteLine("------------foo L12");
                                                     goto L11;
                                                 }
-
                                                 finally
                                                 {
                                                     Console.WriteLine("-----------in foo finally");
@@ -1504,7 +1484,6 @@ class Class1
                                                 Console.WriteLine("-----------foo L11");
                                                 goto L10;
                                             }
-
                                             finally
                                             {
                                                 Console.WriteLine("----------in foo finally");
@@ -1548,7 +1527,6 @@ class Class1
                                             Console.WriteLine("----------foo L10");
                                             goto L9;
                                         }
-
                                         finally
                                         {
                                             Console.WriteLine("---------in foo finally");
@@ -1592,7 +1570,6 @@ class Class1
                                         Console.WriteLine("---------foo L9");
                                         goto L8;
                                     }
-
                                     finally
                                     {
                                         Console.WriteLine("--------in foo finally");
@@ -1636,7 +1613,6 @@ class Class1
                                     Console.WriteLine("--------foo L8");
                                     goto L7;
                                 }
-
                                 finally
                                 {
                                     Console.WriteLine("-------in foo finally");
@@ -1680,7 +1656,6 @@ class Class1
                                 Console.WriteLine("-------foo L7");
                                 goto L6;
                             }
-
                             finally
                             {
                                 Console.WriteLine("------in foo finally");
@@ -1724,7 +1699,6 @@ class Class1
                             Console.WriteLine("------foo L6");
                             goto L5;
                         }
-
                         finally
                         {
                             Console.WriteLine("-----in foo finally");
@@ -1762,7 +1736,6 @@ class Class1
                         Console.WriteLine("-----foo L5");
                         goto L4;
                     }
-
                     finally
                     {
                         Console.WriteLine("----in foo finally");
@@ -1800,7 +1773,6 @@ class Class1
                     Console.WriteLine("----foo L4");
                     goto L3;
                 }
-
                 finally
                 {
                     Console.WriteLine("---in foo finally");
@@ -1838,7 +1810,6 @@ class Class1
                 Console.WriteLine("---foo L3");
                 goto L2;
             }
-
             finally
             {
                 Console.WriteLine("--in foo finally");
@@ -1876,7 +1847,6 @@ class Class1
             Console.WriteLine("--foo L2");
             goto L1;
         }
-
         finally
         {
             Console.WriteLine("-in foo finally");

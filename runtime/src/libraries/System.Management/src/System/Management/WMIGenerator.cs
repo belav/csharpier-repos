@@ -572,7 +572,6 @@ namespace System.Management
             {
                 cp.GenerateCodeFromNamespace(cn, tw, new CodeGeneratorOptions());
             }
-
             finally
             {
                 tw.Close();

@@ -49,7 +49,6 @@ namespace System.Web.WebPages.Deployment
                         assemblyPath => instance.GetReferences(assemblyPath)
                     );
             }
-
             finally
             {
                 if (appDomain != null)

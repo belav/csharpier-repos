@@ -735,7 +735,6 @@ namespace Microsoft.Data.Sqlite
                 rc = sqlite3_backup_step(backup, -1);
                 SqliteException.ThrowExceptionForRC(rc, destination._db);
             }
-
             finally
             {
                 if (close)

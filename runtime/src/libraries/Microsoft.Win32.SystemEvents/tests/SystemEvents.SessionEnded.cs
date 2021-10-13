@@ -57,7 +57,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(args);
                 Assert.Equal(reason, args.Reason);
             }
-
             finally
             {
                 SystemEvents.SessionEnded -= endedHandler;
@@ -83,7 +82,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 SendMessage(false, 0);
                 Assert.False(signaled);
             }
-
             finally
             {
                 SystemEvents.SessionEnded -= endedHandler;

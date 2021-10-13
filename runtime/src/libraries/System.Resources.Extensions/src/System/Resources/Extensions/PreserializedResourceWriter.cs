@@ -298,7 +298,6 @@ namespace System.Resources.Extensions
                         throw new ArgumentException(nameof(ResourceDataRecord.Format));
                 }
             }
-
             finally
             {
                 if (record.Data is IDisposable disposable && record.CloseAfterWrite)

@@ -110,7 +110,6 @@ namespace Microsoft.CodeAnalysis
 
                 return (TNode)node.SetAnnotations(newAnnotations.ToArrayAndFree());
             }
-
             finally
             {
                 removalAnnotations.Free();

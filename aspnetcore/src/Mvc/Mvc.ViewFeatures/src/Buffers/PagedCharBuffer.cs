@@ -103,7 +103,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
                 {
                     pages.RemoveAt(i);
                 }
-
                 finally
                 {
                     BufferSource.Return(page);

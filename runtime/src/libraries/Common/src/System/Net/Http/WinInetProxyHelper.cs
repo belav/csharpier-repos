@@ -55,7 +55,6 @@ namespace System.Net.Http
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this, $"_useProxy={_useProxy}");
             }
-
             finally
             {
                 // FreeHGlobal already checks for null pointer before freeing the memory.

@@ -114,7 +114,6 @@ namespace System.Xml
                 AutoComplete(WriteState.Closed);
                 _writer.Flush();
             }
-
             finally
             {
                 _nsMgr.Close();
@@ -476,7 +475,6 @@ namespace System.Xml
                     _writer.WriteEndAttribute();
                 }
             }
-
             finally
             {
                 _writeState = WriteState.Element;
@@ -553,7 +551,6 @@ namespace System.Xml
                     await _writer.WriteEndAttributeAsync().ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 _writeState = WriteState.Element;

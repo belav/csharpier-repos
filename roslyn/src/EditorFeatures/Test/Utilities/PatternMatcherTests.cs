@@ -553,7 +553,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
                 Assert.Equal(PatternMatchKind.Exact, match.Value.Kind);
                 Assert.False(match.Value.IsCaseSensitive);
             }
-
             finally
             {
                 Thread.CurrentThread.CurrentCulture = previousCulture;

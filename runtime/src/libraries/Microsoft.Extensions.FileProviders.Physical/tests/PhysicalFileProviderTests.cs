@@ -139,7 +139,6 @@ namespace Microsoft.Extensions.FileProviders
                     // wait for at least one event.
                     Assert.True(are.WaitOne(WaitTimeForTokenCallback));
                 }
-
                 finally
                 {
                     PhysicalFilesWatcher.DefaultPollingInterval = oldPollingInterval;

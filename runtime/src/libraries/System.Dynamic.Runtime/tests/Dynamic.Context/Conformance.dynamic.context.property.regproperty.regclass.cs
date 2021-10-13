@@ -955,7 +955,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
                     (MyStruct)dy.Property_MyStruct
                 );
             }
-
             finally
             {
                 result += (int)dy.Property_MyStruct.Number;

@@ -191,7 +191,6 @@ End Module"
 "
                 );
             }
-
             finally
             {
                 VisualStudio.Workspace.SetPerLanguageOption(

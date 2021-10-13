@@ -666,7 +666,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     return true;
                 }
-
                 finally
                 {
                     resolutionDiagnostics.Free();

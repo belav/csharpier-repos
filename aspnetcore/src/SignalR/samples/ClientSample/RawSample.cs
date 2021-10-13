@@ -94,7 +94,6 @@ namespace ClientSample
                         break;
                     }
                 }
-
                 finally
                 {
                     input.AdvanceTo(buffer.End);

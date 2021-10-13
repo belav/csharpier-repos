@@ -312,7 +312,6 @@ namespace System.Net.Http.Headers
                     return true;
                 }
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(rented);

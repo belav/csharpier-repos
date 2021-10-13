@@ -252,7 +252,6 @@ namespace System.Data.ProviderBase
                         }
                     }
                 }
-
                 finally
                 {
                     // ReadOnly
@@ -266,7 +265,6 @@ namespace System.Data.ProviderBase
                     }
                 }
             }
-
             finally
             { // FreeDataRowChapters
                 if (null != _chapterMap)
@@ -480,7 +478,6 @@ namespace System.Data.ProviderBase
                     LoadDataRowChapters(dataRow);
                 }
             }
-
             finally
             {
                 if (null != _chapterMap)

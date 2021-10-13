@@ -164,7 +164,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2
                         throw new IOException("The reader completed without returning a frame.");
                     }
                 }
-
                 finally
                 {
                     reader.AdvanceTo(consumed, examined);

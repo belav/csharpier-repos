@@ -42,7 +42,6 @@ class LCIDTest
                 CultureInfo.CurrentCulture = spanishCulture;
                 Assert.IsTrue(LCIDNative.VerifyValidLCIDPassed(CultureInfo.CurrentCulture.LCID));
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = originalCulture;

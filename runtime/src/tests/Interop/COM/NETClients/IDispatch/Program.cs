@@ -183,7 +183,6 @@ namespace NetClient
                 int lcid = dispatchTesting.PassThroughLCID();
                 Assert.AreEqual(englishCulture.LCID, lcid); // CLR->Dispatch LCID marshalling is explicitly hardcoded to en-US instead of passing the current culture.
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = oldCulture;

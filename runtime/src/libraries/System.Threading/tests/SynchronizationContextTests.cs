@@ -115,7 +115,6 @@ namespace System.Threading.Tests
                                 lockAcquiredFromBackground.Set();
                                 e.CheckedWait();
                             }
-
                             finally
                             {
                                 m.ReleaseMutex();

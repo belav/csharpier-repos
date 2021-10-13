@@ -195,7 +195,6 @@ namespace ILCompiler
 
                 return peReader;
             }
-
             finally
             {
                 if (accessor != null)
@@ -270,7 +269,6 @@ namespace ILCompiler
 
                 return module;
             }
-
             finally
             {
                 if (mappedViewAccessor != null)

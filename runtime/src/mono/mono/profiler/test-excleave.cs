@@ -10,7 +10,6 @@ class T
         {
             throw new Exception();
         }
-
         finally
         {
             f++;

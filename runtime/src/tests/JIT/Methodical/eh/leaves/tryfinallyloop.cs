@@ -55,7 +55,6 @@ namespace hello
                     goto finish;
                 goto L;
             }
-
             finally
             {
                 inFinally();

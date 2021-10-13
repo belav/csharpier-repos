@@ -36,7 +36,6 @@ namespace System.Management.Tests
                 mofFilePath = ExtractMofFromResourcesToFile(mofResourceName);
                 CompileMof(mofFilePath);
             }
-
             finally
             {
                 if (mofFilePath != null)

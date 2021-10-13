@@ -186,7 +186,6 @@ namespace System.Drawing
                     );
                 }
             }
-
             finally
             {
                 if (encoderParamsMemory != IntPtr.Zero)
@@ -266,7 +265,6 @@ namespace System.Drawing
                     );
                 }
             }
-
             finally
             {
                 if (encoderParamsMemory != IntPtr.Zero)
@@ -296,7 +294,6 @@ namespace System.Drawing
                     )
                 );
             }
-
             finally
             {
                 if (encoder != IntPtr.Zero)
@@ -330,7 +327,6 @@ namespace System.Drawing
                     )
                 );
             }
-
             finally
             {
                 if (encoder != IntPtr.Zero)
@@ -385,7 +381,6 @@ namespace System.Drawing
                     );
                     palette.ConvertFromMemory(memory);
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(memory);
@@ -403,7 +398,6 @@ namespace System.Drawing
                         Gdip.GdipSetImagePalette(new HandleRef(this, nativeImage), memory)
                     );
                 }
-
                 finally
                 {
                     if (memory != IntPtr.Zero)

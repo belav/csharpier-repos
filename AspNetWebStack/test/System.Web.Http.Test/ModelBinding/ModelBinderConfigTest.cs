@@ -67,7 +67,6 @@ namespace System.Web.Http.ModelBinding
                     (ModelBinderErrorMessageProvider)DummyErrorSelector
                 );
             }
-
             finally
             {
                 wrapper.Reset();
@@ -112,7 +111,6 @@ namespace System.Web.Http.ModelBinding
                     (ModelBinderErrorMessageProvider)DummyErrorSelector
                 );
             }
-
             finally
             {
                 wrapper.Reset();

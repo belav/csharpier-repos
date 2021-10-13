@@ -360,7 +360,6 @@ namespace Microsoft.CodeAnalysis
                     createdModulesUsed =
                         Interlocked.CompareExchange(ref _lazyData, newData, null) == null;
                 }
-
                 finally
                 {
                     if (moduleBuilder != null && !createdModulesUsed)

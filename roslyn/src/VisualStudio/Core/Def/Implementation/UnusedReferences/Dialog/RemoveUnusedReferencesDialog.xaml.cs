@@ -54,7 +54,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
                 TablePanel.Child = null;
             }
-
             finally
             {
                 // Ensure we clear out the table data to prevent leaks.

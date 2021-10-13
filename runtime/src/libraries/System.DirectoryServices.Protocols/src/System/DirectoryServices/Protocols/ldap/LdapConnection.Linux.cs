@@ -68,7 +68,6 @@ namespace System.DirectoryServices.Protocols
                     ptrToDefaults
                 );
             }
-
             finally
             {
                 GC.KeepAlive(defaults); //Making sure we keep it in scope as we will still use ptrToDefaults

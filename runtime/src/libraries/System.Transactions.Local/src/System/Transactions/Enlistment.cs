@@ -310,7 +310,6 @@ namespace System.Transactions
                 _singlePhaseNotifications.SinglePhaseCommit(SinglePhaseEnlistment);
                 spcCommitted = true;
             }
-
             finally
             {
                 if (!spcCommitted)

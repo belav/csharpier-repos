@@ -95,7 +95,6 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 _disposed = true;
                 _closed = true;
             }
-
             finally
             {
                 base.Dispose(disposing);

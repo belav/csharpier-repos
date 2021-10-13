@@ -42,7 +42,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     badRegion
                     || walker._regionEndPointIsReachable.GetValueOrDefault(walker.State.Alive);
             }
-
             finally
             {
                 diagnostics.Free();

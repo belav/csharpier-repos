@@ -57,7 +57,6 @@ class BindHandleInvalid3
                 }
             }
         }
-
         finally
         {
             if (File.Exists("test.txt"))

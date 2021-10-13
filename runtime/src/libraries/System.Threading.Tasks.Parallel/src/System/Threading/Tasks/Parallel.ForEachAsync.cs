@@ -378,7 +378,6 @@ namespace System.Threading.Tasks
 
                             element = state.Enumerator.Current;
                         }
-
                         finally
                         {
                             state.Lock.Release();

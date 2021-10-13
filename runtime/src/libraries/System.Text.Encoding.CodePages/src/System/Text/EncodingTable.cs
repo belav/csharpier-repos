@@ -53,14 +53,12 @@ namespace System.Text
                         }
                         s_nameToCodePageCache.Add(name, codePage);
                     }
-
                     finally
                     {
                         s_cacheLock.ExitWriteLock();
                     }
                 }
             }
-
             finally
             {
                 s_cacheLock.ExitUpgradeableReadLock();
@@ -210,14 +208,12 @@ namespace System.Text
 
                                 cache.Add(codePage, name);
                             }
-
                             finally
                             {
                                 s_cacheLock.ExitWriteLock();
                             }
                         }
                     }
-
                     finally
                     {
                         s_cacheLock.ExitUpgradeableReadLock();

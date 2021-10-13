@@ -70,7 +70,6 @@ namespace Microsoft.Extensions.Hosting
                 // Signal cancellation to the executing method
                 _stoppingCts.Cancel();
             }
-
             finally
             {
                 // Wait until the task completes or the stop token triggers

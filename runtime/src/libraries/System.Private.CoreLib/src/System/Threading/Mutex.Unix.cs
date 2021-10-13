@@ -46,7 +46,6 @@ namespace System.Threading
             {
                 WaitSubsystem.ReleaseMutex(waitHandle.DangerousGetHandle());
             }
-
             finally
             {
                 waitHandle.DangerousRelease();

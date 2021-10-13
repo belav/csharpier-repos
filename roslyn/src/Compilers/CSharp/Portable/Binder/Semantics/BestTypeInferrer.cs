@@ -169,7 +169,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return GetBestType(candidateTypes, conversions, ref useSiteInfo);
             }
-
             finally
             {
                 candidateTypes.Free();

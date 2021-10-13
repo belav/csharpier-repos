@@ -170,7 +170,6 @@ namespace MonoTests.System.Drawing.Imaging
                         Assert.Equal(142, *(scan + 32288));
                     }
                 }
-
                 finally
                 {
                     bmp.UnlockBits(data);
@@ -234,7 +233,6 @@ namespace MonoTests.System.Drawing.Imaging
                     }
                 }
             }
-
             finally
             {
                 gr.Dispose();

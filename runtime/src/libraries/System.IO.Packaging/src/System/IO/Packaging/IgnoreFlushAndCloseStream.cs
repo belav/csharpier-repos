@@ -165,7 +165,6 @@ namespace System.IO.Packaging
                     _disposed = true;
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

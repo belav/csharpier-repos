@@ -166,7 +166,6 @@ namespace System.Net.Mail
                                     QuitCommand.Send(this);
                                 }
                             }
-
                             finally
                             {
                                 //free cbt buffer

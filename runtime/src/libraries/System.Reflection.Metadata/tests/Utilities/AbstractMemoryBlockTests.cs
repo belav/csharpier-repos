@@ -208,7 +208,6 @@ namespace System.Reflection.Internal.Tests
                     }
                 }
             }
-
             finally
             {
                 File.Delete(filePath);

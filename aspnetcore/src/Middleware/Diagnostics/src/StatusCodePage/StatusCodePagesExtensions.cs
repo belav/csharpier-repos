@@ -258,7 +258,6 @@ namespace Microsoft.AspNetCore.Builder
                     {
                         await context.Next(context.HttpContext);
                     }
-
                     finally
                     {
                         context.HttpContext.Request.QueryString = originalQueryString;

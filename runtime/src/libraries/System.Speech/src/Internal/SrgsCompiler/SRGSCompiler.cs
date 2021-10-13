@@ -228,7 +228,6 @@ namespace System.Speech.Internal.SrgsCompiler
                         backend.Commit(streamHelper);
                     }
                 }
-
                 finally
                 {
                     if (!string.IsNullOrEmpty(filename))

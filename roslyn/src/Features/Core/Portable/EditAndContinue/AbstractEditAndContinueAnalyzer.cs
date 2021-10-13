@@ -3912,7 +3912,6 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     );
                 }
             }
-
             finally
             {
                 instanceConstructorEdits?.Free();

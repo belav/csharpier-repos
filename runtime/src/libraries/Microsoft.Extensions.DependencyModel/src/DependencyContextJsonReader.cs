@@ -30,7 +30,6 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 return Read(new Utf8JsonReader(buffer, isFinalBlock: true, state: default));
             }
-
             finally
             {
                 // Holds document content, clear it before returning it.

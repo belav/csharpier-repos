@@ -372,7 +372,6 @@ namespace Microsoft.AspNetCore.WebUtilities
                     ros.CopyTo(buffer);
                     return GetDecodedString(buffer);
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(byteArray);

@@ -641,7 +641,6 @@ namespace System.Transactions.Tests
                 Assert.Equal(1, irm.Value);
                 Assert.Equal(TransactionStatus.Aborted, ct.TransactionInformation.Status);
             }
-
             finally
             {
                 Transaction.Current = oldTransaction;
@@ -683,7 +682,6 @@ namespace System.Transactions.Tests
                     Transaction.Current.TransactionInformation.Status
                 );
             }
-
             finally
             {
                 Transaction.Current = oldTransaction;
@@ -716,7 +714,6 @@ namespace System.Transactions.Tests
                 Assert.Equal(1, irm.NumRollback);
                 irm.Check(0, 0, 1, 0, "irm");
             }
-
             finally
             {
                 Transaction.Current = oldTransaction;
@@ -759,7 +756,6 @@ namespace System.Transactions.Tests
                 ct.Commit();
                 Assert.Equal(2, irm.Actual);
             }
-
             finally
             {
                 Transaction.Current = oldTransaction;
@@ -885,7 +881,6 @@ namespace System.Transactions.Tests
 
                 scope1.Dispose();
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -911,7 +906,6 @@ namespace System.Transactions.Tests
                 irm.Check(0, 0, 1, 0, "irm");
                 scope2.Dispose();
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -936,7 +930,6 @@ namespace System.Transactions.Tests
                 Assert.Throws<InvalidOperationException>(() => scope1.Dispose());
                 scope2.Dispose();
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -961,7 +954,6 @@ namespace System.Transactions.Tests
                 Assert.Throws<InvalidOperationException>(() => scope1.Dispose());
                 scope2.Dispose();
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -1045,7 +1037,6 @@ namespace System.Transactions.Tests
                 Assert.Throws<TransactionAbortedException>(() => ct.Commit());
                 irm.Check(0, 0, 1, 0, "irm");
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -1071,7 +1062,6 @@ namespace System.Transactions.Tests
                 Assert.Throws<TransactionAbortedException>(() => ct.Commit());
                 irm.Check(0, 0, 1, 0, "irm");
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -1096,7 +1086,6 @@ namespace System.Transactions.Tests
                 Assert.Throws<TransactionAbortedException>(() => ct.EndCommit(ar));
                 irm.Check(0, 0, 1, 0, "irm");
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -1137,7 +1126,6 @@ namespace System.Transactions.Tests
                 Assert.Equal(TransactionStatus.Aborted, ct.TransactionInformation.Status);
                 Assert.Throws<InvalidOperationException>(() => ct.BeginCommit(null, null));
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -1161,7 +1149,6 @@ namespace System.Transactions.Tests
                 Assert.Equal(TransactionStatus.Committed, ct.TransactionInformation.Status);
                 Assert.Throws<InvalidOperationException>(() => ct.BeginCommit(null, null));
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -1193,7 +1180,6 @@ namespace System.Transactions.Tests
                 irm.Check(0, 0, 1, 0, "irm");
                 irm2.Check(0, 0, 1, 0, "irm2");
             }
-
             finally
             {
                 Transaction.Current = null;
@@ -1223,7 +1209,6 @@ namespace System.Transactions.Tests
                 irm.Check(1, 0, 0, 0, "irm");
                 irm0.Check(0, 0, 1, 0, "irm0");
             }
-
             finally
             {
                 Transaction.Current = null;

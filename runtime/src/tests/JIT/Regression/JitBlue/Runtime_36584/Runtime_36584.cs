@@ -35,7 +35,6 @@ class Runtime_36584
             {
                 x++;
             }
-
             // This finally will be cloned
             finally
             {

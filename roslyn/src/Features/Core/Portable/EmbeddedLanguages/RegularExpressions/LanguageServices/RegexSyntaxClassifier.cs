@@ -78,7 +78,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions.LanguageSe
                 visitor.Result = result;
                 AddClassifications(tree.Root, visitor, result);
             }
-
             finally
             {
                 visitor.Result = null;

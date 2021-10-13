@@ -8,7 +8,6 @@ public class a
     public static int Main(string[] args)
     {
         try { }
-
         finally { }
         return 100;
     }

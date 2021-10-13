@@ -76,7 +76,6 @@ namespace Microsoft.CodeAnalysis.UseCollectionInitializer
             {
                 return analyzer.AnalyzeWorker();
             }
-
             finally
             {
                 analyzer.Clear();

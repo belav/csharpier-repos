@@ -112,7 +112,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     _disposed = true;
                 }
-
                 finally
                 {
                     base.Dispose();
@@ -1238,7 +1237,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         // mark this as uncommitted
                         _committed = false;
                     }
-
                     finally
                     {
                         // dispose all resources
@@ -1397,7 +1395,6 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 _crossRefEntry = Utils.GetCrossRefEntry(context, partitionsEntry, Name);
             }
-
             finally
             {
                 partitionsEntry.Dispose();
@@ -1437,7 +1434,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                 }
             }
-
             finally
             {
                 partitionsEntry.Dispose();

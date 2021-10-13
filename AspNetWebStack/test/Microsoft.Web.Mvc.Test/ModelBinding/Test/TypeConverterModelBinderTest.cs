@@ -59,7 +59,6 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 };
                 retVal = binder.BindModel(null, bindingContext);
             }
-
             finally
             {
                 ModelBinderConfig.TypeConversionErrorMessageProvider = originalProvider;

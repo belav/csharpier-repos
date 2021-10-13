@@ -922,7 +922,6 @@ namespace System.Diagnostics
                         _standardInput.Close();
                     }
                 }
-
                 finally
                 {
                     _standardOutput = null;
@@ -1538,7 +1537,6 @@ namespace System.Diagnostics
                 // Wait until output streams have been drained
                 await WaitUntilOutputEOF(cancellationToken).ConfigureAwait(false);
             }
-
             finally
             {
                 Exited -= handler;

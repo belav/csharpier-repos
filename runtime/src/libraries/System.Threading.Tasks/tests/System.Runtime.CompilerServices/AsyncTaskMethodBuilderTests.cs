@@ -47,7 +47,6 @@ namespace System.Threading.Tasks.Tests
                 avmb2.SetResult();
                 Assert.Equal(0, trackedContext.TrackedCount);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -66,7 +65,6 @@ namespace System.Threading.Tasks.Tests
                 var avmb = AsyncVoidMethodBuilder.Create();
                 avmb.SetResult();
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -102,7 +100,6 @@ namespace System.Threading.Tasks.Tests
                 atmb.SetResult();
                 Assert.Equal(0, trackedContext.TrackedCount);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -138,7 +135,6 @@ namespace System.Threading.Tasks.Tests
                 atmb.SetResult("async");
                 Assert.Equal(0, trackedContext.TrackedCount);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -348,7 +344,6 @@ namespace System.Threading.Tasks.Tests
                 Assert.IsType<InvalidOperationException>(trackedContext.PostExceptions[2]);
                 Assert.IsType<InvalidCastException>(trackedContext.PostExceptions[3]);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);
@@ -586,7 +581,6 @@ namespace System.Threading.Tasks.Tests
                 Assert.NotEmpty(tosc.PostExceptions);
                 ValidateException(tosc.PostExceptions[0]);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(previousContext);

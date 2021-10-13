@@ -106,7 +106,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 sow.Serialize(graph, binaryWriter);
                 _crossAppDomainArray = sow._crossAppDomainArray;
             }
-
             finally
             {
                 BinaryFormatterEventSource.Log.SerializationStop();

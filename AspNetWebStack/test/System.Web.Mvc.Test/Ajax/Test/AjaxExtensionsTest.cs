@@ -142,7 +142,6 @@ namespace System.Web.Mvc.Ajax.Test
                     globalizationScript.ToHtmlString()
                 );
             }
-
             finally
             {
                 Thread.CurrentThread.CurrentCulture = currentCulture;
@@ -172,7 +171,6 @@ namespace System.Web.Mvc.Ajax.Test
                     globalizationScript.ToHtmlString()
                 );
             }
-
             finally
             {
                 Thread.CurrentThread.CurrentCulture = currentCulture;

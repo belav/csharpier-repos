@@ -56,7 +56,6 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     throw new Win32Exception();
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(extendedInfoPtr);

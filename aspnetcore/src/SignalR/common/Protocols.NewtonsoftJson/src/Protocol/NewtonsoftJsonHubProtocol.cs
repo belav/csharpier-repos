@@ -91,7 +91,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
             {
                 message = ParseMessage(textReader, binder);
             }
-
             finally
             {
                 Utf8BufferTextReader.Return(textReader);
@@ -592,7 +591,6 @@ namespace Microsoft.AspNetCore.SignalR.Protocol
                     writer.Flush();
                 }
             }
-
             finally
             {
                 Utf8BufferTextWriter.Return(textWriter);

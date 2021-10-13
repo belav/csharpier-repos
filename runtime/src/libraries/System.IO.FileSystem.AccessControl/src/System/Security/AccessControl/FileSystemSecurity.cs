@@ -151,7 +151,6 @@ namespace System.Security.AccessControl
                 base.Persist(fullPath, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-
             finally
             {
                 WriteUnlock();
@@ -168,7 +167,6 @@ namespace System.Security.AccessControl
                 Persist(handle, persistRules);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;
             }
-
             finally
             {
                 WriteUnlock();

@@ -414,7 +414,6 @@ class InactiveForeignException
             Console.WriteLine("Throwing from Scenario9Helper...");
             s_EDI.Throw();
         }
-
         finally
         {
             ;

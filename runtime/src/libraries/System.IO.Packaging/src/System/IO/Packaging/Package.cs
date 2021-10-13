@@ -489,7 +489,6 @@ namespace System.IO.Packaging
 
                     Dispose(true);
                 }
-
                 finally
                 {
                     // do this no matter what (handles case of poorly behaving subclass that doesn't call back into Dispose(bool)

@@ -922,7 +922,6 @@ namespace System.IO.Ports
                         _eventRunner.waitCommEventWaitHandle.Close();
                     }
                 }
-
                 finally
                 {
                     // If we are disposing synchronize closing with raising SerialPort events
@@ -971,7 +970,6 @@ namespace System.IO.Ports
                 else
                     result = BeginReadCore(array, offset, numBytes, userCallback, stateObject);
             }
-
             finally
             {
                 ReadTimeout = oldtimeout;
@@ -1002,7 +1000,6 @@ namespace System.IO.Ports
                 else
                     result = BeginWriteCore(array, offset, numBytes, userCallback, stateObject);
             }
-
             finally
             {
                 WriteTimeout = oldtimeout;
@@ -1092,7 +1089,6 @@ namespace System.IO.Ports
                     )
                         failed = true;
                 }
-
                 finally
                 {
                     wh.Close();
@@ -1160,7 +1156,6 @@ namespace System.IO.Ports
                         "SerialStream::EndWrite - AsyncFSCallback didn't set _isComplete to true!"
                     );
                 }
-
                 finally
                 {
                     wh.Close();

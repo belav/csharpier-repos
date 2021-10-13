@@ -80,7 +80,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 Position = 0;
                 _workspace?.Dispose();
             }
-
             finally
             {
                 _workspace = null;

@@ -40,7 +40,6 @@ namespace System.IO
                 if (disposing)
                     _unmanagedStream.Dispose();
             }
-
             finally
             {
                 base.Dispose(disposing);

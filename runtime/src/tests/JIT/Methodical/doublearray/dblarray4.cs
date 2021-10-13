@@ -44,7 +44,6 @@ internal class DblArray4
             Console.WriteLine("PASSED");
             return 100;
         }
-
         finally
         {
             GC.EndNoGCRegion();

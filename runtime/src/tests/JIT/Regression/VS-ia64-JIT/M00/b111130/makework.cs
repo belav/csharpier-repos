@@ -34,7 +34,6 @@ class test
                     goto L;
                 }
             }
-
             finally
             {
                 Console.WriteLine("In finally2");

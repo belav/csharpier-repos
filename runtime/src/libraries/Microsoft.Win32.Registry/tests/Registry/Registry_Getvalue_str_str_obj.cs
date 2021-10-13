@@ -115,7 +115,6 @@ namespace Microsoft.Win32.RegistryTests
                         (int)Registry.GetValue(keyName, valueName, defaultValue)
                     );
                 }
-
                 finally
                 {
                     key.DeleteValue(valueName);

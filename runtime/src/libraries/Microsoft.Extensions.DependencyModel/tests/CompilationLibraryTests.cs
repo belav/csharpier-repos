@@ -86,7 +86,6 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 var result = library.ResolveReferencePaths(null);
                 result.ShouldBeEquivalentTo(new[] { assemblyPath });
             }
-
             finally
             {
                 File.Delete(assemblyPath);

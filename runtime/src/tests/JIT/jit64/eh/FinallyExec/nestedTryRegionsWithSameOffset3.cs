@@ -48,14 +48,12 @@ class Program
                             if (count < 0)
                                 throw new Exception();
                         }
-
                         finally
                         {
                             Console.WriteLine("   in finally");
                         }
                         goto L2;
                     }
-
                     finally
                     {
                         Console.WriteLine("  in finally");
@@ -68,7 +66,6 @@ class Program
                 G1:
                 goto L1;
             }
-
             finally
             {
                 Console.WriteLine(" in finally");

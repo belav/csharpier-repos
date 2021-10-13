@@ -171,7 +171,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         throw new ArgumentException(nameof(attribute));
                     }
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -341,7 +340,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     return;
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -446,14 +444,12 @@ namespace System.DirectoryServices.ActiveDirectory
                             throw ExceptionHelper.GetExceptionFromErrorCode(win32Error, serverName);
                         }
                     }
-
                     finally
                     {
                         if (buffer != (IntPtr)0)
                             UnsafeNativeMethods.LsaFreeMemory(buffer);
                     }
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -590,7 +586,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             throw ExceptionHelper.GetExceptionFromErrorCode(win32Error);
                     }
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -738,7 +733,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             throw ExceptionHelper.GetExceptionFromErrorCode(result, serverName);
                     }
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -910,7 +904,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     return serverName;
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -1097,7 +1090,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     return;
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -1210,7 +1202,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                 }
             }
-
             finally
             {
                 if (buffer != (IntPtr)0)
@@ -1359,7 +1350,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     return buffer;
                 }
-
                 finally
                 {
                     if (impersonated)

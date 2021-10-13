@@ -1078,7 +1078,6 @@ namespace System.Net.Tests
                                 HttpWebRequest.DefaultMaximumResponseHeadersLength
                             );
                         }
-
                         finally
                         {
                             HttpWebRequest.DefaultMaximumResponseHeadersLength =
@@ -1108,7 +1107,6 @@ namespace System.Net.Tests
                                 HttpWebRequest.DefaultMaximumErrorResponseLength
                             );
                         }
-
                         finally
                         {
                             HttpWebRequest.DefaultMaximumErrorResponseLength =
@@ -1138,7 +1136,6 @@ namespace System.Net.Tests
                                 HttpWebRequest.DefaultCachePolicy.Level
                             );
                         }
-
                         finally
                         {
                             HttpWebRequest.DefaultCachePolicy = requestCachePolicy;
@@ -1468,7 +1465,6 @@ namespace System.Net.Tests
                                     e.ToString()
                                 );
                             }
-
                             finally
                             {
                                 tcs.SetResult();

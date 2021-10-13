@@ -182,7 +182,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                     }
                 }
-
                 finally
                 {
                     if (ptr != (IntPtr)0)
@@ -275,7 +274,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         dn = dsNameResultItem.name;
                     }
                 }
-
                 finally
                 {
                     if (ptr != (IntPtr)0)
@@ -346,7 +344,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     PropertyManager.DnsHostName
                 )!;
             }
-
             finally
             {
                 de.Dispose();
@@ -445,7 +442,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                 }
             }
-
             finally
             {
                 resCol.Dispose();
@@ -559,7 +555,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                 }
             }
-
             finally
             {
                 resCol.Dispose();
@@ -1148,7 +1143,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         stringGuid = Marshal.PtrToStringUni(ptr);
                     }
-
                     finally
                     {
                         if (ptr != (IntPtr)0)
@@ -1270,7 +1264,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw ExceptionHelper.GetExceptionFromErrorCode(result);
                 }
             }
-
             finally
             {
                 if (hToken != (IntPtr)0)
@@ -1297,7 +1290,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (result == 0)
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
             }
-
             finally
             {
                 if (hThread != (IntPtr)0)
@@ -1433,7 +1425,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 return handle;
             }
-
             finally
             {
                 if (target != (IntPtr)0)
@@ -2266,7 +2257,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             }
                         }
                     }
-
                     finally
                     {
                         if (resCol != null)
@@ -2451,7 +2441,6 @@ namespace System.DirectoryServices.ActiveDirectory
                                     }
                                 }
                             }
-
                             finally
                             {
                                 resCol2.Dispose();
@@ -2472,7 +2461,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                 }
             }
-
             finally
             {
                 if (searchRootEntry != null)
@@ -2646,7 +2634,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastWin32Error());
                 }
             }
-
             finally
             {
                 if (lpString1 != IntPtr.Zero)
@@ -2846,7 +2833,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     return true;
                 }
             }
-
             finally
             {
                 if (pCopyOfUserSid != IntPtr.Zero)
@@ -2970,7 +2956,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 return pCopyOfUserSid;
             }
-
             finally
             {
                 if (pTokenHandle != IntPtr.Zero)
@@ -3050,7 +3035,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 return pCopyOfSid;
             }
-
             finally
             {
                 if (pPolicyHandle != IntPtr.Zero)
@@ -3104,7 +3088,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         == DSROLE_MACHINE_ROLE.DsRole_RolePrimaryDomainController
                 );
             }
-
             finally
             {
                 if (dsRoleInfoPtr != IntPtr.Zero)
@@ -3175,7 +3158,6 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 return rid;
             }
-
             finally
             {
                 if (pSid != IntPtr.Zero)

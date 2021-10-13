@@ -45,7 +45,6 @@ namespace System.Net.Tests
                 listener.Stop();
                 listener.Close();
             }
-
             finally
             {
                 listener.Close();
@@ -62,7 +61,6 @@ namespace System.Net.Tests
                 listener.Close();
                 listener.Abort();
             }
-
             finally
             {
                 listener.Close();
@@ -79,7 +77,6 @@ namespace System.Net.Tests
                 listener.Abort();
                 listener.Close();
             }
-
             finally
             {
                 listener.Close();
@@ -118,7 +115,6 @@ namespace System.Net.Tests
             {
                 Assert.Throws<HttpListenerException>(() => listener.Start());
             }
-
             finally
             {
                 // even though listener wasn't started (state is 'Closed'), Abort() must not throw.

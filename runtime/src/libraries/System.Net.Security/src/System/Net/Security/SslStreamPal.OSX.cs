@@ -149,7 +149,6 @@ namespace System.Net.Security
                                 );
                         }
                     }
-
                     finally
                     {
                         memHandle.Dispose();

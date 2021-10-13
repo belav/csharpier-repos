@@ -418,7 +418,6 @@ namespace System.Xml
                         break;
                 }
             }
-
             finally
             {
                 _fragment.Clear();

@@ -42,7 +42,6 @@ public abstract class TypeTwo
         {
             new TypeOne();
         }
-
         finally { }
     }
     [DllImport("bla.dll")]
@@ -72,7 +71,6 @@ public abstract class AbsClass
             z = typeof(int).GetHashCode();
             z = typeof(int).GetHashCode();
         }
-
         finally { }
     }
     public abstract void AbsBla();

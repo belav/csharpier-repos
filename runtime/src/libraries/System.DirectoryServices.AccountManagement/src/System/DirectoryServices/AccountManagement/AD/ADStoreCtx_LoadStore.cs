@@ -674,7 +674,6 @@ namespace System.DirectoryServices.AccountManagement
                                 return ConstructFakePrincipalFromSID(sidb);
                             }
                         }
-
                         finally
                         {
                             if (pSid != IntPtr.Zero)
@@ -743,7 +742,6 @@ namespace System.DirectoryServices.AccountManagement
                                     return ConstructFakePrincipalFromSID(sidb);
                                 }
                             }
-
                             finally
                             {
                                 if (pSid != IntPtr.Zero)
@@ -2155,7 +2153,6 @@ namespace System.DirectoryServices.AccountManagement
                         copyOfDe.Properties["member"].Clear();
                         copyOfDe.CommitChanges();
                     }
-
                     finally
                     {
                         if (copyOfDe != null)

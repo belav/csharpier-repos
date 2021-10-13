@@ -289,7 +289,6 @@ namespace System.DirectoryServices.AccountManagement
                     GC.SuppressFinalize(this);
                 }
             }
-
             finally
             {
                 base.Dispose();

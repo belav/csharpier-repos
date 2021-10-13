@@ -42,7 +42,6 @@ namespace BlazorServerWeb_CSharp.Areas.Identity
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TUser>>();
                 return await ValidateSecurityStampAsync(userManager, authenticationState.User);
             }
-
             finally
             {
                 if (scope is IAsyncDisposable asyncDisposable)

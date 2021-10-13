@@ -451,7 +451,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     commandLineOptions.Uncompressed
                 );
             }
-
             finally
             {
                 foreach (var peReader in mibcReaders)

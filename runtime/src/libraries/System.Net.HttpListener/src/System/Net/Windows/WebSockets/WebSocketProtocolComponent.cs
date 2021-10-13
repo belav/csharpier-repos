@@ -209,7 +209,6 @@ namespace System.Net.WebSockets
 
                 return version;
             }
-
             finally
             {
                 if (webSocketHandle != null)

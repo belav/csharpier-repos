@@ -50,7 +50,6 @@ namespace System.Diagnostics.Tests
 
                 RunWithExpectedCodePage(ConsoleEncoding);
             }
-
             finally
             {
                 Interop.SetConsoleCP(inputEncoding);

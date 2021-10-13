@@ -206,7 +206,6 @@ namespace Microsoft.AspNetCore.Tests
                     Assert.True(logWritten);
                 }
             }
-
             finally
             {
                 File.Delete("appsettings.json");

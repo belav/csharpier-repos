@@ -673,7 +673,6 @@ namespace System.Data
                 OnListChanged(new ListChangedEventArgs(ListChangedType.ItemAdded, IndexOf(drv)));
                 return drv;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -818,7 +817,6 @@ namespace System.Data
                     }
                     row.Delete();
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -876,7 +874,6 @@ namespace System.Data
                 Range range = _index!.FindRecords(key);
                 return GetDataRowViewFromRange(range);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1173,7 +1170,6 @@ namespace System.Data
                         return _index!.GetIndex(findIndex.GetRecord(recordRange.Min));
                     }
                 }
-
                 finally
                 {
                     if (created && (null != findIndex))
@@ -1850,7 +1846,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);

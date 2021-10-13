@@ -74,7 +74,6 @@ namespace System.Net.Tests
                 proxy.Credentials = _explicitCredentials;
                 Assert.Equal(_explicitCredentials, proxy.Credentials);
             }
-
             finally
             {
                 // Reset the credentials so as not to interfere with any subsequent tests,

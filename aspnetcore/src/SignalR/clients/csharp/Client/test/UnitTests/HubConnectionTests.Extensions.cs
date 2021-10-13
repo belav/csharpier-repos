@@ -300,7 +300,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     await handlerTcs.Task.DefaultTimeout();
                 }
-
                 finally
                 {
                     await hubConnection.DisposeAsync().DefaultTimeout();
@@ -349,7 +348,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     Assert.Equal(42, await receiveTcs.Task.DefaultTimeout());
                 }
-
                 finally
                 {
                     await hubConnection.DisposeAsync().DefaultTimeout();
@@ -399,7 +397,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     Assert.Equal(42, await receiveTcs.Task.DefaultTimeout());
                 }
-
                 finally
                 {
                     await hubConnection.DisposeAsync().DefaultTimeout();
@@ -448,7 +445,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     Assert.Equal(42, await receiveTcs.Task.DefaultTimeout());
                 }
-
                 finally
                 {
                     await hubConnection.DisposeAsync().DefaultTimeout();
@@ -498,7 +494,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     Assert.Equal(42, await receiveTcs.Task.DefaultTimeout());
                 }
-
                 finally
                 {
                     await hubConnection.DisposeAsync().DefaultTimeout();

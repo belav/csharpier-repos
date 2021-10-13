@@ -269,7 +269,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
                     DiagnosticListener.AfterView(view, viewContext);
                 }
-
                 finally
                 {
                     viewContext.Writer = oldWriter;

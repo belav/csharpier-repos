@@ -476,7 +476,6 @@ namespace System.Data.Odbc
                         _connection.RemoveWeakReference(this);
                     }
                 }
-
                 finally
                 {
                     _cmdWrapper = null;
@@ -850,7 +849,6 @@ namespace System.Data.Odbc
                         }
                     } // end SchemaOnly
                 }
-
                 finally
                 {
                     if (mustRelease)
@@ -870,7 +868,6 @@ namespace System.Data.Odbc
                 }
                 _cmdState = ConnectionState.Fetching;
             }
-
             finally
             {
                 if (ConnectionState.Fetching != _cmdState)

@@ -417,7 +417,6 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     }
                 }
             }
-
             finally
             {
                 _applyChangesProjectFile = null;

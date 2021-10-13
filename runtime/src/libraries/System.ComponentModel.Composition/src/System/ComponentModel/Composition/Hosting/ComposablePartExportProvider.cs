@@ -87,7 +87,6 @@ namespace System.ComponentModel.Composition.Hosting
                             }
                         }
                     }
-
                     finally
                     {
                         if (importEngine != null)
@@ -311,7 +310,6 @@ namespace System.ComponentModel.Composition.Hosting
 
                     atomicComposition.Complete();
                 }
-
                 finally
                 {
                     _currentlyComposing = false;

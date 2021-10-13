@@ -35,7 +35,6 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
             {
                 return _valueTaskSource.GetResult(token);
             }
-
             finally
             {
                 if (isValid)

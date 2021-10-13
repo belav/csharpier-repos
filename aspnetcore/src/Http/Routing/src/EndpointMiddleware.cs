@@ -85,7 +85,6 @@ namespace Microsoft.AspNetCore.Routing
                 {
                     await requestTask;
                 }
-
                 finally
                 {
                     Log.ExecutedEndpoint(logger, endpoint);

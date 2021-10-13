@@ -184,7 +184,6 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 progressTracker.ItemCompleted();

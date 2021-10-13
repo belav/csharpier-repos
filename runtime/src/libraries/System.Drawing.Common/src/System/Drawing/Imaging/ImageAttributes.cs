@@ -516,7 +516,6 @@ namespace System.Drawing.Imaging
                     )
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -589,7 +588,6 @@ namespace System.Drawing.Imaging
                 );
                 palette.ConvertFromMemory(memory);
             }
-
             finally
             {
                 if (memory != IntPtr.Zero)

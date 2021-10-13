@@ -209,7 +209,6 @@ namespace System.Web.Razor.Tokenizer
                 }
                 return Char.IsDigit(CurrentCharacter);
             }
-
             finally
             {
                 Source.Position = start;

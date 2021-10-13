@@ -255,7 +255,6 @@ namespace MonoTests.System.Configuration
                         label.EnterScope("config");
                         func(config, label);
                     }
-
                     finally
                     {
                         label.LeaveScope();
@@ -273,7 +272,6 @@ namespace MonoTests.System.Configuration
                         label.EnterScope("xml");
                         check(nav, label);
                     }
-
                     finally
                     {
                         label.LeaveScope();

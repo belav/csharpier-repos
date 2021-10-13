@@ -65,7 +65,6 @@ namespace Templates.Test.Helpers
                     _haveReinstalledTemplatePackages = true;
                 }
             }
-
             finally
             {
                 ProcessLock.DotNetNewLock.Release();
@@ -219,7 +218,6 @@ namespace Templates.Test.Helpers
                     );
                 }
             }
-
             finally
             {
                 Directory.Delete(tempDir, recursive: true);

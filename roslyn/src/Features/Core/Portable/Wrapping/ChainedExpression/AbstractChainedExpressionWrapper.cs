@@ -349,7 +349,6 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
                         stack.Push(child);
                 }
             }
-
             finally
             {
                 SharedPools.Default<Stack<SyntaxNodeOrToken>>().Free(stack);

@@ -359,7 +359,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     // now next time property is invoked, we need to go to the server
                     retrieved = false;
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -533,7 +532,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             }
                         }
                     }
-
                     finally
                     {
                         UnsafeNativeMethods.LsaFreeMemory(forestTrustInfo);
@@ -550,7 +548,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     // mark it as retrieved
                     retrieved = true;
                 }
-
                 finally
                 {
                     if (impersonated)

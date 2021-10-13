@@ -187,7 +187,6 @@ namespace System.Net.Http
 #endif
                 }
             }
-
             finally
             {
                 _state.AsyncReadInProgress = false;
@@ -321,7 +320,6 @@ namespace System.Net.Http
 
                 return bytesRead;
             }
-
             finally
             {
                 _state.AsyncReadInProgress = false;
@@ -362,7 +360,6 @@ namespace System.Net.Http
                         trailersBuffer
                     );
                 }
-
                 finally
                 {
                     ArrayPool<char>.Shared.Return(trailersBuffer);

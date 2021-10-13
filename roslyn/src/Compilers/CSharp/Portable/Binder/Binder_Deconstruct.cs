@@ -981,7 +981,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return result;
             }
-
             finally
             {
                 analyzedArguments.Free();

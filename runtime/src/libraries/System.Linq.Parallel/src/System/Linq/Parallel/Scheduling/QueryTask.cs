@@ -125,7 +125,6 @@ namespace System.Linq.Parallel
             {
                 Work();
             }
-
             finally
             {
                 PlinqEtwProvider.Log.ParallelQueryJoin(_groupState.QueryId);

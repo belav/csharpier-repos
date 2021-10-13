@@ -100,7 +100,6 @@ namespace System.Web.Http.Tracing.Tracers
             {
                 return await _innerController.ExecuteAsync(controllerContext, cancellationToken);
             }
-
             finally
             {
                 IDisposable disposable = _innerController as IDisposable;

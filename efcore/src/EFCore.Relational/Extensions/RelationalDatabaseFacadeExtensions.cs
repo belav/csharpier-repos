@@ -259,7 +259,6 @@ namespace Microsoft.EntityFrameworkCore
                     )
                 );
             }
-
             finally
             {
                 concurrencyDetector?.ExitCriticalSection();
@@ -442,7 +441,6 @@ namespace Microsoft.EntityFrameworkCore
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 concurrencyDetector?.ExitCriticalSection();

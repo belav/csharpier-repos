@@ -584,7 +584,6 @@ namespace System.Threading
                             }
                         }
                     }
-
                     finally
                     {
                         registrations.ExitLock();
@@ -616,7 +615,6 @@ namespace System.Threading
                         }
                         registrations.Callbacks = node;
                     }
-
                     finally
                     {
                         registrations.ExitLock();
@@ -734,7 +732,6 @@ namespace System.Threading
                         // to code unregistering that the node is no longer associated with a callback.
                         node.Id = 0;
                     }
-
                     finally
                     {
                         registrations.ExitLock();
@@ -777,7 +774,6 @@ namespace System.Threading
                     // there wasn't another free node available).
                 }
             }
-
             finally
             {
                 _state = NotifyingCompleteState;
@@ -1080,7 +1076,6 @@ namespace System.Threading
 
                     return true;
                 }
-
                 finally
                 {
                     ExitLock();
@@ -1105,7 +1100,6 @@ namespace System.Threading
                         node = next;
                     }
                 }
-
                 finally
                 {
                     ExitLock();

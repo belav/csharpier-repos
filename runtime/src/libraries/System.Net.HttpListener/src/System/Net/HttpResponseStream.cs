@@ -116,7 +116,6 @@ namespace System.Net
                     DisposeCore();
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

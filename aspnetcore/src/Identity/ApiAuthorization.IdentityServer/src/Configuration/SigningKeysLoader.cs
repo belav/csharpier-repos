@@ -85,7 +85,6 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
 
                     return foundCertificate;
                 }
-
                 finally
                 {
                     DisposeCertificates(storeCertificates, except: foundCertificate);

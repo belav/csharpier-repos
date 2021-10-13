@@ -291,7 +291,6 @@ namespace System.Data.Odbc.Tests
                 dbAccessUtil.commit();
                 dbAccessUtil.disconnect();
             }
-
             finally
             {
                 DataTestUtility.RunNonQuery(

@@ -188,7 +188,6 @@ namespace System.Net.Primitives.Functional.Tests
                 ptr = Marshal.SecureStringToGlobalAllocUnicode(sstr);
                 result = Marshal.PtrToStringUni(ptr);
             }
-
             finally
             {
                 if (ptr != IntPtr.Zero)

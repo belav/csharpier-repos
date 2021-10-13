@@ -129,7 +129,6 @@ namespace System.IO.Pipes.Tests
                 {
                     readablePipe?.Dispose();
                 }
-
                 finally
                 {
                     writeablePipe.Dispose();

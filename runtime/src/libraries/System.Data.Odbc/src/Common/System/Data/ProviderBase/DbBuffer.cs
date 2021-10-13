@@ -21,7 +21,6 @@ namespace System.Data.ProviderBase
                 _bufferLength = initialSize;
 
                 try { }
-
                 finally
                 {
                     base.handle = SafeNativeMethods.LocalAlloc((IntPtr)initialSize);
@@ -68,7 +67,6 @@ namespace System.Data.ProviderBase
                 value = Marshal.PtrToStringUni(ptr);
                 Validate(offset, (2 * (value!.Length + 1)));
             }
-
             finally
             {
                 if (mustRelease)
@@ -96,7 +94,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 value = Marshal.PtrToStringUni(ptr, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -123,7 +120,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 value = Marshal.ReadByte(ptr, offset);
             }
-
             finally
             {
                 if (mustRelease)
@@ -157,7 +153,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 Marshal.Copy(ptr, destination, startIndex, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -191,7 +186,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 Marshal.Copy(ptr, destination, startIndex, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -224,7 +218,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 value = Marshal.ReadInt16(ptr, offset);
             }
-
             finally
             {
                 if (mustRelease)
@@ -252,7 +245,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 Marshal.Copy(ptr, destination, startIndex, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -278,7 +270,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 value = Marshal.ReadInt32(ptr, offset);
             }
-
             finally
             {
                 if (mustRelease)
@@ -306,7 +297,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 Marshal.Copy(ptr, destination, startIndex, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -332,7 +322,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 value = Marshal.ReadInt64(ptr, offset);
             }
-
             finally
             {
                 if (mustRelease)
@@ -359,7 +348,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 value = Marshal.ReadIntPtr(ptr, offset);
             }
-
             finally
             {
                 if (mustRelease)
@@ -408,7 +396,6 @@ namespace System.Data.ProviderBase
                     false /*fDeleteOld*/
                 );
             }
-
             finally
             {
                 if (mustRelease)
@@ -433,7 +420,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 Marshal.WriteByte(ptr, offset, value);
             }
-
             finally
             {
                 if (mustRelease)
@@ -460,7 +446,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 Marshal.Copy(source, startIndex, ptr, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -487,7 +472,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 Marshal.Copy(source, startIndex, ptr, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -517,7 +501,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 Marshal.WriteInt16(ptr, offset, value);
             }
-
             finally
             {
                 if (mustRelease)
@@ -544,7 +527,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 Marshal.Copy(source, startIndex, ptr, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -569,7 +551,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 Marshal.WriteInt32(ptr, offset, value);
             }
-
             finally
             {
                 if (mustRelease)
@@ -596,7 +577,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 Marshal.Copy(source, startIndex, ptr, length);
             }
-
             finally
             {
                 if (mustRelease)
@@ -621,7 +601,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 Marshal.WriteInt64(ptr, offset, value);
             }
-
             finally
             {
                 if (mustRelease)
@@ -646,7 +625,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 Marshal.WriteIntPtr(ptr, offset, value);
             }
-
             finally
             {
                 if (mustRelease)
@@ -672,7 +650,6 @@ namespace System.Data.ProviderBase
                 IntPtr ptr = DangerousGetHandle();
                 SafeNativeMethods.ZeroMemory(ptr, Length);
             }
-
             finally
             {
                 if (mustRelease)

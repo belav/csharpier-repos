@@ -1184,7 +1184,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -1300,7 +1299,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -1413,7 +1411,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -1526,7 +1523,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -1639,7 +1635,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -1752,7 +1747,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -1865,7 +1859,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -1923,7 +1916,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -1992,7 +1984,6 @@ namespace System.Xml
                     return value;
                 }
             }
-
             finally
             {
                 _pos = origPos;
@@ -2526,7 +2517,6 @@ namespace System.Xml
                 cch = ScanText(out pos);
                 return GetString(pos, cch);
             }
-
             finally
             {
                 if (oldmark < 0)
@@ -2598,7 +2588,6 @@ namespace System.Xml
                     ReScanOverValue(token);
                     return ValueAsString(token);
                 }
-
                 finally
                 {
                     _pos = origPos;

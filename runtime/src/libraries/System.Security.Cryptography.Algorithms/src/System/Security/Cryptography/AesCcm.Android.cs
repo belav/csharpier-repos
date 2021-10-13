@@ -113,7 +113,6 @@ namespace System.Security.Cryptography
                     ciphertextAndTag[..ciphertext.Length].CopyTo(ciphertext);
                     ciphertextAndTag[ciphertext.Length..].CopyTo(tag);
                 }
-
                 finally
                 {
                     if (rented != null)

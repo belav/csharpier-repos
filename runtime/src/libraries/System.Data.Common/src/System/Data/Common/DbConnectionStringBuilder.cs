@@ -445,7 +445,6 @@ namespace System.Data.Common
                     propertyDescriptors = new PropertyDescriptorCollection(properties);
                     _propertyDescriptors = propertyDescriptors;
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -573,7 +572,6 @@ namespace System.Data.Common
                     }
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);

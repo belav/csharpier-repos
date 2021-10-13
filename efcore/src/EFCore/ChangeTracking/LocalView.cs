@@ -128,7 +128,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     _observable!.Add((TEntity)args.NewItems[0]!);
                 }
             }
-
             finally
             {
                 _triggeringObservableChange = false;
@@ -175,7 +174,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     }
                 }
             }
-
             finally
             {
                 _triggeringLocalViewChange = false;
@@ -236,7 +234,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
                     OnCountPropertyChanged();
                 }
-
                 finally
                 {
                     _triggeringStateManagerChange = false;
@@ -330,7 +327,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
                     OnCountPropertyChanged();
                 }
-
                 finally
                 {
                     _triggeringStateManagerChange = false;

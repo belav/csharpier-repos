@@ -19,7 +19,6 @@ namespace Test
                     throw new Exception();
                 }
                 try { }
-
                 finally { }
             }
             catch (DivideByZeroException) { }

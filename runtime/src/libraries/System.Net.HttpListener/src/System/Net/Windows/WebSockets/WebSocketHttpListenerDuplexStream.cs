@@ -687,7 +687,6 @@ namespace System.Net.WebSockets
                 {
                     _inputStream.Close();
                 }
-
                 finally
                 {
                     _outputStream.Close();

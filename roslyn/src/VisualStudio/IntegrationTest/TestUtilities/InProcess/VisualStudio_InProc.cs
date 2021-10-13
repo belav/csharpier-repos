@@ -43,7 +43,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                         result.Add(commandName);
                     }
                 }
-
                 finally { }
             }
 

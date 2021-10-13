@@ -465,7 +465,6 @@ namespace System.Collections.Immutable
                         }
                     }
                 }
-
                 finally
                 {
                     enumerator.Dispose();

@@ -142,7 +142,6 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     CheckEquals(eA.Current, eB.Current, isSamePlatform);
                 }
             }
-
             finally
             {
                 (eA as IDisposable)?.Dispose();

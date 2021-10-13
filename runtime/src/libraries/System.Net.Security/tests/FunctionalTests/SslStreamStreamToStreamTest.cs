@@ -45,7 +45,6 @@ namespace System.Net.Security.Tests
 
                 await func(certificate, name).ConfigureAwait(false);
             }
-
             finally
             {
                 if (certificate != serverCertificate)

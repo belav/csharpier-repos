@@ -443,7 +443,6 @@ namespace System.IO
                     bytesRead += n;
                 }
             }
-
             finally
             {
                 if (rentedArray != null)
@@ -839,7 +838,6 @@ namespace System.IO
                     sb.Append(buffer, 0, read);
                 }
             }
-
             finally
             {
                 sr.Dispose();
@@ -925,7 +923,6 @@ namespace System.IO
                   ? InternalReadAllBytesAsync(fs, (int)fileLength, cancellationToken)
                   : InternalReadAllBytesUnknownLengthAsync(fs, cancellationToken);
             }
-
             finally
             {
                 if (!returningInternalTask)
@@ -1014,7 +1011,6 @@ namespace System.IO
                     bytesRead += n;
                 }
             }
-
             finally
             {
                 fs.Dispose();
@@ -1202,7 +1198,6 @@ namespace System.IO
                 cancellationToken.ThrowIfCancellationRequested();
                 await sw.FlushAsync().ConfigureAwait(false);
             }
-
             finally
             {
                 sw.Dispose();

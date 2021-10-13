@@ -375,7 +375,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                             );
                         }
                     }
-
                     finally
                     {
                         _bytesReceived += copyBuffer.Slice(copyBuffer.Start, consumed).Length;
@@ -683,7 +682,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                             return -1;
                         }
                     }
-
                     finally
                     {
                         _pair.Application.Input.AdvanceTo(consumed, examined);

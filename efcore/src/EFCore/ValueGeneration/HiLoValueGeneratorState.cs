@@ -75,7 +75,6 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                         newValue = GetNextValue();
                     }
                 }
-
                 finally
                 {
                     _semaphoreSlim.Release();
@@ -126,7 +125,6 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration
                         newValue = GetNextValue();
                     }
                 }
-
                 finally
                 {
                     _semaphoreSlim.Release();

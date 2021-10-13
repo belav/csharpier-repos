@@ -103,7 +103,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
                     return true;
                 }
             }
-
             finally
             {
                 SafeRelease(hierarchyPointer);

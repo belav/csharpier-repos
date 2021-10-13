@@ -329,7 +329,6 @@ namespace System.Xml.Tests
                                 );
                                 xslt.Load(trTemp, XsltSettings.TrustedXslt, xr);
                             }
-
                             finally
                             {
                                 if (trTemp != null)
@@ -348,7 +347,6 @@ namespace System.Xml.Tests
                                 );
                                 xslt.Load(nrTemp);
                             }
-
                             finally
                             {
                                 if (nrTemp != null)
@@ -371,7 +369,6 @@ namespace System.Xml.Tests
                                 );
                                 xslt.Load(xvr, XsltSettings.TrustedXslt, xr);
                             }
-
                             finally
                             {
                                 if (xvr != null)
@@ -430,7 +427,6 @@ namespace System.Xml.Tests
                                 );
                                 xslt.Load(trTemp, XsltSettings.TrustedXslt, xr);
                             }
-
                             finally
                             {
                                 if (trTemp != null)
@@ -449,7 +445,6 @@ namespace System.Xml.Tests
                                 );
                                 xslt.Load(nrTemp, XsltSettings.TrustedXslt, xr);
                             }
-
                             finally
                             {
                                 if (nrTemp != null)
@@ -471,7 +466,6 @@ namespace System.Xml.Tests
                                 );
                                 xslt.Load(vrTemp, XsltSettings.TrustedXslt, xr);
                             }
-
                             finally
                             {
                                 if (vrTemp != null)
@@ -652,7 +646,6 @@ namespace System.Xml.Tests
                         );
                         xslt.Transform(xd, null, strmTemp);
                     }
-
                     finally
                     {
                         if (strmTemp != null)
@@ -670,7 +663,6 @@ namespace System.Xml.Tests
                         xw.WriteStartDocument();
                         xslt.Transform(xd, null, xw);
                     }
-
                     finally
                     {
                         if (xw != null)
@@ -688,7 +680,6 @@ namespace System.Xml.Tests
                         );
                         xslt.Transform(xd, null, tw);
                     }
-
                     finally
                     {
                         if (tw != null)
@@ -736,7 +727,6 @@ namespace System.Xml.Tests
                         );
                         xslt.Transform(xd, m_xsltArg, strmTemp);
                     }
-
                     finally
                     {
                         if (strmTemp != null)
@@ -752,7 +742,6 @@ namespace System.Xml.Tests
                         xw.WriteStartDocument();
                         xslt.Transform(xd, m_xsltArg, xw);
                     }
-
                     finally
                     {
                         if (xw != null)
@@ -770,7 +759,6 @@ namespace System.Xml.Tests
                         );
                         xslt.Transform(xd, m_xsltArg, tw);
                     }
-
                     finally
                     {
                         if (tw != null)
@@ -827,7 +815,6 @@ namespace System.Xml.Tests
                         );
                         xslt.Transform(xd, null, strmTemp);
                     }
-
                     finally
                     {
                         if (strmTemp != null)
@@ -843,7 +830,6 @@ namespace System.Xml.Tests
                         xw.WriteStartDocument();
                         xslt.Transform(xd, null, xw);
                     }
-
                     finally
                     {
                         if (xw != null)
@@ -861,7 +847,6 @@ namespace System.Xml.Tests
                         );
                         xslt.Transform(xd, null, tw);
                     }
-
                     finally
                     {
                         if (tw != null)

@@ -164,7 +164,6 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                 await RenderPageCoreAsync(page, context);
                 return writer;
             }
-
             finally
             {
                 context.Writer = oldWriter;
@@ -185,7 +184,6 @@ namespace Microsoft.AspNetCore.Mvc.Razor
             {
                 await page.ExecuteAsync();
             }
-
             finally
             {
                 _diagnosticListener.AfterViewPage(page, context);
@@ -217,7 +215,6 @@ namespace Microsoft.AspNetCore.Mvc.Razor
                     layout = _viewEngine.GetAbsolutePath(viewStart.Path, viewStart.Layout);
                 }
             }
-
             finally
             {
                 context.ExecutingFilePath = oldFilePath;

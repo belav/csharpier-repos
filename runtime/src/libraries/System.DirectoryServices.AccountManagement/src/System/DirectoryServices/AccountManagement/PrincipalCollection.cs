@@ -89,7 +89,6 @@ namespace System.DirectoryServices.AccountManagement
                         }
                     }
                 }
-
                 finally
                 {
                     if (bookmark != null)
@@ -202,7 +201,6 @@ namespace System.DirectoryServices.AccountManagement
 
                         return count;
                     }
-
                     finally
                     {
                         if (bookmark != null)
@@ -558,7 +556,6 @@ namespace System.DirectoryServices.AccountManagement
                             return true;
                     }
                 }
-
                 finally
                 {
                     if (bookmark != null)

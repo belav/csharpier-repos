@@ -88,7 +88,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
                             break;
                         }
                     }
-
                     finally
                     {
                         _connection?.StopSendCancellation();

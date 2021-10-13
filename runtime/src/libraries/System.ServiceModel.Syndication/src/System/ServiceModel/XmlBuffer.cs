@@ -127,7 +127,6 @@ namespace System.ServiceModel
             {
                 writer.WriteNode(reader, false);
             }
-
             finally
             {
                 reader.Close();

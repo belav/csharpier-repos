@@ -289,7 +289,6 @@ namespace System.Xml.Schema
                         while (reader.Read())
                             ; // wellformness check;
                     }
-
                     finally
                     {
                         reader.Close();
@@ -414,7 +413,6 @@ namespace System.Xml.Schema
                     }
                 }
             }
-
             finally
             { //release locks on sets
                 if (thisLockObtained)
@@ -630,7 +628,6 @@ namespace System.Xml.Schema
                             _cachedCompiledInfo = newCompiledInfo; //Replace the compiled info in the set after successful compilation
                         }
                     }
-
                     finally
                     {
                         //Release locks on all schemas

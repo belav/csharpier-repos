@@ -96,7 +96,6 @@ class Test
         {
             Console.WriteLine("t:");
         }
-
         finally
         {
             Console.WriteLine(s1.str + s2.str + s3.str + s4.str + s5.str, a1, a2);

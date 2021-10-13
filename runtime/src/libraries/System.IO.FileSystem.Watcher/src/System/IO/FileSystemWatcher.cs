@@ -336,7 +336,6 @@ namespace System.IO
                     FinalizeDispose();
                 }
             }
-
             finally
             {
                 _disposed = true;
@@ -628,7 +627,6 @@ namespace System.IO
                 // Reset the enabled state to what it was.
                 EnableRaisingEvents = wasEnabled;
             }
-
             finally
             {
                 // Unregister the event handlers.

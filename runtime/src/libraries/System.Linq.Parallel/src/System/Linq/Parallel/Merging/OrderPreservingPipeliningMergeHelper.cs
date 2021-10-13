@@ -392,7 +392,6 @@ namespace System.Linq.Parallel
 
                         Debug.Fail("QueryEnd() should have thrown an exception.");
                     }
-
                     finally
                     {
                         // Clear the producer heap so that future calls to MoveNext simply return false.

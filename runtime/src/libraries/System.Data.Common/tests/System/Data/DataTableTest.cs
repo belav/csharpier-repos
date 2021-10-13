@@ -2034,7 +2034,6 @@ Assert.False(true);
                 Assert.Equal(DataRowAction.Commit, _rowActionChanging);
                 Assert.Equal(DataRowAction.Commit, _rowActionChanged);
             }
-
             finally
             {
                 dt.RowChanged -= new DataRowChangeEventHandler(OnRowChanged);

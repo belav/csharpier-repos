@@ -919,7 +919,6 @@ namespace System.Web.Http.SelfHost
                             return true;
                         }
                     }
-
                     finally
                     {
                         Monitor.Exit(_windowSizeLock);
@@ -947,7 +946,6 @@ namespace System.Web.Http.SelfHost
                             return true;
                         }
                     }
-
                     finally
                     {
                         Monitor.Exit(_windowSizeLock);

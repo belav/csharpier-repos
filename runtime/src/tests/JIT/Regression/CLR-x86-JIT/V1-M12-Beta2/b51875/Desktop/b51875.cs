@@ -15,7 +15,6 @@ namespace Test
             {
                 goto EOM;
             }
-
             finally
             {
                 throw new Exception();

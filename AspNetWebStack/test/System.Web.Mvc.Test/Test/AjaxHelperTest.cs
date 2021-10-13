@@ -129,7 +129,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 Assert.Equal("~/Scripts/Globalization", AjaxHelper.GlobalizationScriptPath);
             }
-
             finally
             {
                 AjaxHelper.GlobalizationScriptPath = null;
@@ -147,7 +146,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 Assert.Equal("/Foo/Bar", AjaxHelper.GlobalizationScriptPath);
             }
-
             finally
             {
                 AjaxHelper.GlobalizationScriptPath = null;

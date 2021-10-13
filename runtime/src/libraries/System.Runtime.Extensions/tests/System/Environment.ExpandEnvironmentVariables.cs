@@ -41,7 +41,6 @@ namespace System.Tests
 
                 Assert.Equal(expectedValue, result);
             }
-
             finally
             {
                 // Clear the variables we just set

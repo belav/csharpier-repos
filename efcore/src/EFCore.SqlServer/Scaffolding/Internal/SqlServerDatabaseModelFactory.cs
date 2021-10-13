@@ -186,7 +186,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal
 
                 return databaseModel;
             }
-
             finally
             {
                 _compatibilityLevel = null;

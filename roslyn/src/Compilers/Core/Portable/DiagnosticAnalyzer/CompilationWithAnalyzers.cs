@@ -651,7 +651,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     fullAnalysisResultForAnalyzersInScope: true
                 );
             }
-
             finally
             {
                 driver?.Dispose();
@@ -708,7 +707,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 var reportedDiagnostics = compDiags.AddRange(analyzerDiags);
                 return driver.ApplyProgrammaticSuppressions(reportedDiagnostics, compilation);
             }
-
             finally
             {
                 driver?.Dispose();
@@ -1299,7 +1297,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                                             )
                                                             .ConfigureAwait(false);
                                                     }
-
                                                     finally
                                                     {
                                                         FreeEventQueue(eventQueue, _eventQueuePool);
@@ -1356,7 +1353,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             ?? false
                     );
                 }
-
                 finally
                 {
                     FreeDriver(driver);
@@ -1417,7 +1413,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         )
                         .ConfigureAwait(false);
                 }
-
                 finally
                 {
                     FreeDriver(driver);
@@ -1482,7 +1477,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     success = true;
                     return driver;
                 }
-
                 finally
                 {
                     if (!success)
@@ -1543,7 +1537,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                             )
                             .ConfigureAwait(false);
                     }
-
                     finally
                     {
                         // Update the diagnostic results based on the diagnostics reported on the driver.
@@ -2029,7 +2022,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 FreeDriver(driver);

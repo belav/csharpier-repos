@@ -61,7 +61,6 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 _shutdownTokenSource.Cancel();
                 CloseWorker();
             }
-
             finally
             {
                 // let the lock go

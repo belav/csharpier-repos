@@ -22,7 +22,6 @@ namespace System.CodeDom.Compiler
             {
                 return FromDom(options, e);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -43,7 +42,6 @@ namespace System.CodeDom.Compiler
             {
                 return FromFile(options, fileName);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -64,7 +62,6 @@ namespace System.CodeDom.Compiler
             {
                 return FromSource(options, source);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -85,7 +82,6 @@ namespace System.CodeDom.Compiler
             {
                 return FromSourceBatch(options, sources);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -116,7 +112,6 @@ namespace System.CodeDom.Compiler
 
                 return FromFileBatch(options, fileNames);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();
@@ -137,7 +132,6 @@ namespace System.CodeDom.Compiler
             {
                 return FromDomBatch(options, ea);
             }
-
             finally
             {
                 options.TempFiles.SafeDelete();

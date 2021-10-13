@@ -30,7 +30,6 @@ public class a
         {
             Console.WriteLine("In try");
         }
-
         finally
         {
             Console.WriteLine("In finally");

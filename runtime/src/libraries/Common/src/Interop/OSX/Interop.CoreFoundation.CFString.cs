@@ -73,7 +73,6 @@ internal static partial class Interop
                         );
                     }
                 }
-
                 finally
                 {
                     if (addedRef)

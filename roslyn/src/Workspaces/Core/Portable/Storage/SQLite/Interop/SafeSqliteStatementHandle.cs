@@ -47,7 +47,6 @@ namespace Microsoft.CodeAnalysis.SQLite.Interop
                 SetHandle(IntPtr.Zero);
                 return true;
             }
-
             finally
             {
                 _sqliteLease.Dispose();

@@ -25,7 +25,6 @@ namespace System.Net.Tests
                 ServicePointManager.CheckCertificateRevocationList = true;
                 Assert.True(ServicePointManager.CheckCertificateRevocationList);
             }
-
             finally
             {
                 ServicePointManager.CheckCertificateRevocationList = false;
@@ -42,7 +41,6 @@ namespace System.Net.Tests
                 ServicePointManager.DefaultConnectionLimit = 20;
                 Assert.Equal(20, ServicePointManager.DefaultConnectionLimit);
             }
-
             finally
             {
                 ServicePointManager.DefaultConnectionLimit = 2;
@@ -59,7 +57,6 @@ namespace System.Net.Tests
                 ServicePointManager.DnsRefreshTimeout = 42;
                 Assert.Equal(42, ServicePointManager.DnsRefreshTimeout);
             }
-
             finally
             {
                 ServicePointManager.DnsRefreshTimeout = 120_000;
@@ -76,7 +73,6 @@ namespace System.Net.Tests
                 ServicePointManager.EnableDnsRoundRobin = true;
                 Assert.True(ServicePointManager.EnableDnsRoundRobin);
             }
-
             finally
             {
                 ServicePointManager.EnableDnsRoundRobin = false;
@@ -93,7 +89,6 @@ namespace System.Net.Tests
                 ServicePointManager.Expect100Continue = false;
                 Assert.False(ServicePointManager.Expect100Continue);
             }
-
             finally
             {
                 ServicePointManager.Expect100Continue = true;
@@ -110,7 +105,6 @@ namespace System.Net.Tests
                 ServicePointManager.MaxServicePointIdleTime = 42;
                 Assert.Equal(42, ServicePointManager.MaxServicePointIdleTime);
             }
-
             finally
             {
                 ServicePointManager.MaxServicePointIdleTime = 100_000;
@@ -127,7 +121,6 @@ namespace System.Net.Tests
                 ServicePointManager.MaxServicePoints = 42;
                 Assert.Equal(42, ServicePointManager.MaxServicePoints);
             }
-
             finally
             {
                 ServicePointManager.MaxServicePoints = 0;
@@ -144,7 +137,6 @@ namespace System.Net.Tests
                 ServicePointManager.ReusePort = true;
                 Assert.True(ServicePointManager.ReusePort);
             }
-
             finally
             {
                 ServicePointManager.ReusePort = false;
@@ -162,7 +154,6 @@ namespace System.Net.Tests
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
                 Assert.Equal(SecurityProtocolType.Tls11, ServicePointManager.SecurityProtocol);
             }
-
             finally
             {
                 ServicePointManager.SecurityProtocol = orig;
@@ -183,7 +174,6 @@ namespace System.Net.Tests
                 ServicePointManager.ServerCertificateValidationCallback = callback;
                 Assert.Same(callback, ServicePointManager.ServerCertificateValidationCallback);
             }
-
             finally
             {
                 ServicePointManager.ServerCertificateValidationCallback = null;
@@ -200,7 +190,6 @@ namespace System.Net.Tests
                 ServicePointManager.UseNagleAlgorithm = false;
                 Assert.False(ServicePointManager.UseNagleAlgorithm);
             }
-
             finally
             {
                 ServicePointManager.UseNagleAlgorithm = true;
@@ -319,7 +308,6 @@ namespace System.Net.Tests
                 );
 #pragma warning restore
             }
-
             finally
             {
                 ServicePointManager.SecurityProtocol = orig;

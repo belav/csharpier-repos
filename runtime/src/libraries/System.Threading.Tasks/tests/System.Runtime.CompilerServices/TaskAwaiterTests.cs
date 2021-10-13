@@ -75,7 +75,6 @@ namespace System.Threading.Tasks.Tests
                 Assert.Equal(shouldHavePosted ? 1 : 0, validateCtx.PostCount);
                 Assert.Equal(shouldHavePosted, postedInContext);
             }
-
             finally
             {
                 // Reset back to the original context
@@ -160,7 +159,6 @@ namespace System.Threading.Tasks.Tests
                     }
                 );
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(origCtx);
@@ -188,7 +186,6 @@ namespace System.Threading.Tasks.Tests
                                 {
                                     tcs.SetResult();
                                 }
-
                                 finally
                                 {
                                     SynchronizationContext.SetSynchronizationContext(orig);
@@ -891,7 +888,6 @@ namespace System.Threading.Tasks.Tests
                     }
                 );
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(origCtx);
@@ -1038,7 +1034,6 @@ namespace System.Threading.Tasks.Tests
                             t_isPostedInContext = true;
                             d(state);
                         }
-
                         finally
                         {
                             t_isPostedInContext = false;

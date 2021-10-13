@@ -668,7 +668,6 @@ namespace System.Data.Odbc
                     OdbcMetaDataCollectionNames.Columns
                 );
             }
-
             finally
             {
                 if (dataReader != null)
@@ -975,7 +974,6 @@ namespace System.Data.Odbc
 
                 DataTableFromDataReaderDataTypes(dataTypesTable, dataReader, connection);
             }
-
             finally
             {
                 if (dataReader != null)
@@ -1042,7 +1040,6 @@ namespace System.Data.Odbc
                     indexName
                 );
             }
-
             finally
             {
                 if (dataReader != null)
@@ -1101,7 +1098,6 @@ namespace System.Data.Odbc
                     isColumns
                 );
             }
-
             finally
             {
                 if (dataReader != null)
@@ -1198,7 +1194,6 @@ namespace System.Data.Odbc
                     );
                 }
             }
-
             finally
             {
                 if (dataReader != null)
@@ -1312,7 +1307,6 @@ namespace System.Data.Odbc
 
                 resultTable = DataTableFromDataReader(dataReader, dataTableName);
             }
-
             finally
             {
                 if (dataReader != null)

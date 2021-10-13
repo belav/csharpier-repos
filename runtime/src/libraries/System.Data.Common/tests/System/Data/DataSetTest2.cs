@@ -3452,7 +3452,6 @@ namespace System.Data.Tests
                 oDataset.ReadXml(sr);
                 Assert.Equal(0, oDataset.Tables.Count);
             }
-
             finally
             {
                 sw.Close();

@@ -335,7 +335,6 @@ class Driver
                 try
                 {
                     try { }
-
                     finally
                     {
                         StaticConstructor4.Init();
@@ -447,7 +446,6 @@ class Driver
             {
                 Setup6();
             }
-
             finally
             {
                 Driver.got_to_the_end_of_outer_finally = true;
@@ -458,7 +456,6 @@ class Driver
         public static void Setup6()
         {
             try { }
-
             finally
             {
                 Driver.sema1.Release();

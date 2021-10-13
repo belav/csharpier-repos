@@ -177,7 +177,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                             }
                         }
                     }
-
                     finally
                     {
                         builder.Free();

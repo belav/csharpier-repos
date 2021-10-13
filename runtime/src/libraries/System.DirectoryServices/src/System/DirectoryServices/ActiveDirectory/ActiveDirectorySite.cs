@@ -307,7 +307,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                     return site;
                 }
-
                 finally
                 {
                     if (ptr != (IntPtr)0)
@@ -976,7 +975,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             tmpEntry.CommitChanges();
                         }
                     }
-
                     finally
                     {
                         // entry is created on the backend store successfully
@@ -1182,13 +1180,11 @@ namespace System.DirectoryServices.ActiveDirectory
                             }
                         }
                     }
-
                     finally
                     {
                         conResults.Dispose();
                     }
                 }
-
                 finally
                 {
                     de.Dispose();
@@ -1284,7 +1280,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             }
                         }
                     }
-
                     finally
                     {
                         conResults.Dispose();
@@ -1469,7 +1464,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     _subnets.Add(subnet);
                 }
             }
-
             finally
             {
                 results.Dispose();
@@ -1559,14 +1553,12 @@ namespace System.DirectoryServices.ActiveDirectory
                                 _adjacentSites.Add(tmpSite);
                         }
                     }
-
                     finally
                     {
                         link!.Dispose();
                     }
                 }
             }
-
             finally
             {
                 results.Dispose();
@@ -1655,7 +1647,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     _links.Add(link);
                 }
             }
-
             finally
             {
                 results.Dispose();
@@ -1749,7 +1740,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                     }
                 }
-
                 finally
                 {
                     // call DsFreeNameResultW
@@ -1851,7 +1841,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     _servers.Add(replica);
                 }
             }
-
             finally
             {
                 results.Dispose();
@@ -1951,7 +1940,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         _RPCBridgeheadServers.Add(replica);
                 }
             }
-
             finally
             {
                 de.Dispose();

@@ -143,7 +143,6 @@ namespace Microsoft.Extensions.Http
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 if (cleanUpContext)

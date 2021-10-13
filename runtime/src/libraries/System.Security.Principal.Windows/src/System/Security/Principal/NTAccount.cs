@@ -426,7 +426,6 @@ namespace System.Security.Principal
 
                 return Result;
             }
-
             finally
             {
                 LsaHandle?.Dispose();

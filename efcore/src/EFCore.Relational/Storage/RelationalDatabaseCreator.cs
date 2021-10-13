@@ -309,7 +309,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
                     return true;
                 }
             }
-
             finally
             {
                 await transactionScope.DisposeAsyncIfAvailable().ConfigureAwait(false);

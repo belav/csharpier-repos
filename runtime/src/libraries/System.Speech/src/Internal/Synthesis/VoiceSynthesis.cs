@@ -131,7 +131,6 @@ namespace System.Speech.Internal.Synthesis
                     ExceptionDispatchInfo.Throw(prompt.Exception);
                 }
             }
-
             finally
             {
                 _asyncWorkerUI.AsyncMode = true;
@@ -985,7 +984,6 @@ namespace System.Speech.Internal.Synthesis
                             _site.LastException = null;
                             engineProxy.Speak(speechSeg.FragmentList, outputWaveFormat);
                         }
-
                         finally
                         {
                             _waveOut.WaitUntilDone();

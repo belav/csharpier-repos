@@ -155,7 +155,6 @@ namespace System.Threading
                         Volatile.Write(ref m_array[tail & m_mask], obj);
                         m_tailIndex = tail + 1;
                     }
-
                     finally
                     {
                         if (lockTaken)
@@ -192,7 +191,6 @@ namespace System.Threading
 
                     return tail;
                 }
-
                 finally
                 {
                     if (lockTaken)
@@ -245,7 +243,6 @@ namespace System.Threading
 
                             return true;
                         }
-
                         finally
                         {
                             if (lockTaken)
@@ -314,7 +311,6 @@ namespace System.Threading
                                 return null;
                             }
                         }
-
                         finally
                         {
                             if (lockTaken)
@@ -361,7 +357,6 @@ namespace System.Threading
                                 }
                             }
                         }
-
                         finally
                         {
                             if (taken)
@@ -385,7 +380,6 @@ namespace System.Threading
                         m_foreignLock.Enter(ref lockTaken);
                         return Math.Max(0, m_tailIndex - m_headIndex);
                     }
-
                     finally
                     {
                         if (lockTaken)
@@ -792,7 +786,6 @@ namespace System.Threading
 #pragma warning restore CS0162
                 }
             }
-
             finally
             {
                 //
@@ -820,7 +813,6 @@ namespace System.Threading
                 reportedStatus = true;
                 DispatchWorkItem(workItem, currentThread);
             }
-
             finally
             {
                 if (reportedStatus)

@@ -104,7 +104,6 @@ namespace SslStress
                     Console.WriteLine("server stopped");
                 }
             }
-
             finally
             {
                 client?.PrintFinalReport();

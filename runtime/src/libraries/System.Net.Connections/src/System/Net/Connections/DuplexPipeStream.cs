@@ -114,7 +114,6 @@ namespace System.Net.Connections
                     return 0;
                 }
             }
-
             finally
             {
                 _reader.AdvanceTo(consumed);

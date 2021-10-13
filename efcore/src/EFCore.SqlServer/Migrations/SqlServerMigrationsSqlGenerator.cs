@@ -66,7 +66,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             {
                 return base.Generate(operations, model, options);
             }
-
             finally
             {
                 _operations = null!;

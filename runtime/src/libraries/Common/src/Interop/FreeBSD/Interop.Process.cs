@@ -63,7 +63,6 @@ internal static partial class Interop
                 Array.Resize<int>(ref pids, numProcesses);
                 return pids;
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)entries);
@@ -86,7 +85,6 @@ internal static partial class Interop
                 Interop.Sys.Sysctl(sysctlName, ref pBuffer, ref bytesLength);
                 return System.Text.Encoding.UTF8.GetString(pBuffer, (int)bytesLength - 1);
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)pBuffer);
@@ -142,7 +140,6 @@ internal static partial class Interop
                     info._threadInfoList.Add(ti);
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)kinfo);
@@ -203,7 +200,6 @@ internal static partial class Interop
                     }
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)info);

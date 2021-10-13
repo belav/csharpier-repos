@@ -50,7 +50,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     DisposeWriter(ref childWriter);
                 }
             }
-
             finally
             {
                 base.Dispose(managed);

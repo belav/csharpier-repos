@@ -97,7 +97,6 @@ namespace Microsoft.CodeAnalysis.Scripting
                         await precedingExecutors[executorIndex++](_submissionStates)
                             .ConfigureAwait(continueOnCapturedContext: false);
                     }
-
                     finally
                     {
                         // The submission constructor always runs into completion (unless we emitted bad code).
@@ -118,7 +117,6 @@ namespace Microsoft.CodeAnalysis.Scripting
                         (Task<TResult>)currentExecutor(_submissionStates)
                     ).ConfigureAwait(continueOnCapturedContext: false);
                 }
-
                 finally
                 {
                     // The submission constructor always runs into completion (unless we emitted bad code).

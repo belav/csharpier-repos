@@ -44,7 +44,6 @@ namespace System.Web.Http
                 // Assert
                 await assert(response);
             }
-
             finally
             {
                 request.Dispose();

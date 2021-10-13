@@ -227,7 +227,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     DisposeChainCerts(chain);
                 }
             }
-
             finally
             {
                 leafCert?.Dispose();
@@ -533,7 +532,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         Assert.Equal(Intermed2DN, chain.ChainElements[1].Certificate.Subject);
                         Assert.Equal(RootDN, chain.ChainElements[2].Certificate.Subject);
                     }
-
                     finally
                     {
                         DisposeChainCerts(chain);
@@ -550,7 +548,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     DisposeChainCerts(chain);
                 }
             }
-
             finally
             {
                 leafCert?.Dispose();
@@ -638,7 +635,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         DisposeChainCerts(chain);
                     }
                 }
-
                 finally
                 {
                     leafCert?.Dispose();

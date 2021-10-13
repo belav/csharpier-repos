@@ -78,7 +78,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     _disposed = true;
                 }
-
                 finally
                 {
                     base.Dispose();

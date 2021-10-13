@@ -172,7 +172,6 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
                 DbUtil.VerifyIndex(sqlConn, "AspNetUsers", "UserNameIndex", isUnique: true);
                 DbUtil.VerifyIndex(sqlConn, "AspNetUsers", "EmailIndex");
             }
-
             finally
             {
                 sqlConn.Close();

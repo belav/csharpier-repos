@@ -79,7 +79,6 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 // }
                 #endregion
             }
-
             finally
             {
                 JsonConvert.DefaultSettings = null;

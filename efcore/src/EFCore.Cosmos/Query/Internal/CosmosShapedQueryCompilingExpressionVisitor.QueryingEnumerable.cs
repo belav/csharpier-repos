@@ -185,7 +185,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                             return hasNext;
                         }
-
                         finally
                         {
                             _concurrencyDetector?.ExitCriticalSection();
@@ -277,7 +276,6 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
 
                             return hasNext;
                         }
-
                         finally
                         {
                             _concurrencyDetector?.ExitCriticalSection();

@@ -235,7 +235,6 @@ namespace System.Web.Razor.Parser
                     Context.OnError(optionLoc, RazorResources.ParseError_UnknownOption, option);
                 }
             }
-
             finally
             {
                 if (Span.Symbols.Count > 0)

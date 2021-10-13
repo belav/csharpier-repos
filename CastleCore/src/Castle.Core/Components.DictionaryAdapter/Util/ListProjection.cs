@@ -254,7 +254,6 @@ namespace Castle.Components.DictionaryAdapter
                 foreach (T item in items)
                     Add(item);
             }
-
             finally
             {
                 ResumeEvents();

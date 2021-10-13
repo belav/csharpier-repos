@@ -3165,7 +3165,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 validator.Verify(v => v.Validate(null));
             }
-
             finally
             {
                 if (provider != null)
@@ -3401,7 +3400,6 @@ namespace System.Web.Mvc.Test
                 ModelError modelStateError = modelState.Errors.Single();
                 Assert.Equal("A value is required.", modelStateError.ErrorMessage);
             }
-
             finally
             {
                 DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes =

@@ -155,7 +155,6 @@ namespace System.Threading
 
                 return waitResult != WaitTimeout;
             }
-
             finally
             {
                 if (success)
@@ -338,7 +337,6 @@ namespace System.Threading
 
                 return waitResult;
             }
-
             finally
             {
                 for (int i = 0; i < waitHandles.Length; ++i)
@@ -452,7 +450,6 @@ namespace System.Threading
 
                 return ret != WaitTimeout;
             }
-
             finally
             {
                 if (successWait)

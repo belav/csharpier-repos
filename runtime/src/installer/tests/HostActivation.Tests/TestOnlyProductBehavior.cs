@@ -61,7 +61,6 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 returnDisposable = backup;
                 backup = null;
             }
-
             finally
             {
                 if (backup != null)

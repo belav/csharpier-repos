@@ -141,7 +141,6 @@ namespace System.Net.Quic.Implementations.MsQuic
                     ref address
                 );
             }
-
             finally
             {
                 MsQuicAlpnHelper.Return(ref handles, ref buffers);

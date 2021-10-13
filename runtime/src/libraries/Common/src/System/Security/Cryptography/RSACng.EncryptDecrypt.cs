@@ -132,7 +132,6 @@ namespace System.Security.Cryptography
                                 encrypt
                             );
                         }
-
                         finally
                         {
                             CryptographicOperations.ZeroMemory(paddedMessage);
@@ -172,7 +171,6 @@ namespace System.Security.Cryptography
                                     encrypt
                                 );
                             }
-
                             finally
                             {
                                 Marshal.FreeHGlobal(namePtr);
@@ -260,7 +258,6 @@ namespace System.Security.Cryptography
                                 out bytesWritten
                             );
                         }
-
                         finally
                         {
                             CryptographicOperations.ZeroMemory(paddedMessage);
@@ -303,7 +300,6 @@ namespace System.Security.Cryptography
                                     out bytesWritten
                                 );
                             }
-
                             finally
                             {
                                 Marshal.FreeHGlobal(namePtr);

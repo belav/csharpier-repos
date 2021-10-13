@@ -565,7 +565,6 @@ namespace System.Linq.Expressions.Interpreter
                 frame.RemoveContinuation();
                 frame.InstructionIndex += instructions[index].Run(frame);
             }
-
             finally
             {
                 if (!ranWithoutFault)

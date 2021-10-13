@@ -242,7 +242,6 @@ namespace System.Web.WebPages.Administration.PackageManager
             {
                 action();
             }
-
             finally
             {
                 _projectManager.Logger = null;

@@ -40,7 +40,6 @@ namespace System.ServiceModel.Syndication.Tests
                 // *** VALIDATE *** \\
                 Assert.True(File.Exists(filePath));
             }
-
             finally
             {
                 // *** CLEANUP *** \\
@@ -74,7 +73,6 @@ namespace System.ServiceModel.Syndication.Tests
                 // *** VALIDATE *** \\
                 Assert.True(File.Exists(path));
             }
-
             finally
             {
                 // *** CLEANUP *** \\
@@ -109,7 +107,6 @@ namespace System.ServiceModel.Syndication.Tests
                 // *** VALIDATE *** \\
                 Assert.True(File.Exists(path));
             }
-
             finally
             {
                 // *** CLEANUP *** \\
@@ -143,7 +140,6 @@ namespace System.ServiceModel.Syndication.Tests
                 // *** VALIDATE *** \\
                 Assert.True(File.Exists(path));
             }
-
             finally
             {
                 // *** CLEANUP *** \\
@@ -177,7 +173,6 @@ namespace System.ServiceModel.Syndication.Tests
                 // *** VALIDATE *** \\
                 Assert.True(File.Exists(path));
             }
-
             finally
             {
                 // *** CLEANUP *** \\
@@ -244,7 +239,6 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.True(File.Exists(RssPath));
                 Assert.True(File.Exists(AtomPath));
             }
-
             finally
             {
                 // *** CLEANUP *** \\
@@ -408,7 +402,6 @@ namespace System.ServiceModel.Syndication.Tests
                     Assert.True(false, errorMessage);
                 }
             }
-
             finally
             {
                 if (toDeletedFile)

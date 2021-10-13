@@ -111,7 +111,6 @@ namespace Microsoft.CodeAnalysis.Scripting
 
                 return executor;
             }
-
             finally
             {
                 diagnostics.Free();

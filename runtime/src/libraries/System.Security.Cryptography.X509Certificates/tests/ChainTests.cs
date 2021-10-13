@@ -947,7 +947,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             )
                         );
                     }
-
                     finally
                     {
                         if (installedCertToUserStore)

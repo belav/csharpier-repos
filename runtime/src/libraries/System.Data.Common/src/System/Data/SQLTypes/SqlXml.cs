@@ -524,7 +524,6 @@ namespace System.Data.SqlTypes
                 // does not close the underline stream but mark itself as closed
                 _isClosed = true;
             }
-
             finally
             {
                 base.Dispose(disposing);

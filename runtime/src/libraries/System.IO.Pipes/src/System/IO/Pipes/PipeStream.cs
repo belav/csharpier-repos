@@ -193,7 +193,6 @@ namespace System.IO.Pipes
 
                 DisposeCore(disposing);
             }
-
             finally
             {
                 base.Dispose(disposing);

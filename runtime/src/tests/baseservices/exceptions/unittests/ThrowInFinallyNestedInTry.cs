@@ -56,7 +56,6 @@ public class ThrowInFinallyNestedInTryTest
             {
                 _trace.Write("4");
             }
-
             finally
             {
                 _trace.Write("5");
@@ -65,14 +64,12 @@ public class ThrowInFinallyNestedInTryTest
                     _trace.Write("6");
                     throw new System.ArgumentException();
                 }
-
                 finally
                 {
                     _trace.Write("7");
                 }
             }
         }
-
         finally
         {
             _trace.Write("8");

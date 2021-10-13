@@ -161,7 +161,6 @@ Newtonsoft.Json Error: 0 : Error!
                     sw.ToString()
                 );
             }
-
             finally
             {
                 Trace.Listeners.Remove(listener);

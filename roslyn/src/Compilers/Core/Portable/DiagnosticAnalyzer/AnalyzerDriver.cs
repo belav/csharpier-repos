@@ -529,7 +529,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 _initializeSucceeded = true;
             }
-
             finally
             {
                 if (_lazyInitializeTask == null)
@@ -825,7 +824,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     _lazyPrimaryTask = Task.FromResult(true);
                 }
             }
-
             finally
             {
                 if (_lazyPrimaryTask == null)
@@ -876,7 +874,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         );
                 }
             }
-
             finally
             {
                 if (_lazyPrimaryTask == null)
@@ -1008,7 +1005,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         processedAnalyzers!
                     );
                 }
-
                 finally
                 {
                     processedAnalyzers?.Free();
@@ -1063,7 +1059,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         processedAnalyzers!
                     );
                 }
-
                 finally
                 {
                     processedAnalyzers?.Free();
@@ -1321,7 +1316,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 return builder.ToImmutableAndFree();
             }
-
             finally
             {
                 // Mark the reported diagnostics as processed for programmatic suppressions to avoid duplicate callbacks to suppressors for same diagnostics.
@@ -1357,7 +1351,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                         Task.WaitAll(tasks.ToArray(), AnalyzerExecutor.CancellationToken);
                     }
-
                     finally
                     {
                         tasks.Free();
@@ -2400,7 +2393,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
                 return success;
             }
-
             finally
             {
                 processedAnalyzers?.Free();
@@ -2489,7 +2481,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     return true;
                 }
             }
-
             finally
             {
                 processedAnalyzers.Free();
@@ -2592,7 +2583,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
                 return success;
             }
-
             finally
             {
                 processedAnalyzers?.Free();
@@ -2695,7 +2685,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
                 return success;
             }
-
             finally
             {
                 processedAnalyzers?.Free();
@@ -2904,7 +2893,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 return false;
             }
-
             finally
             {
                 symbolStartAnalyzers.Free();
@@ -3874,7 +3862,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                                 executableCodeBlockActionsBuilder
                                             );
                                         }
-
                                         finally
                                         {
                                             AnalyzerExecutor.OnOperationBlockActionsExecuted(
@@ -3893,7 +3880,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         executableCodeBlockActionsBuilder
                     );
                 }
-
                 finally
                 {
                     executableCodeBlockActionsBuilder.Free();

@@ -176,7 +176,6 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                         source.CopyTo(target);
                         source.CopyTo(target);
                     }
-
                     finally
                     {
                         copying = false;

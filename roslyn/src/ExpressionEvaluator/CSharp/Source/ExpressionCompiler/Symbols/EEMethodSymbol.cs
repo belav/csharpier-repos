@@ -572,7 +572,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         return;
                     }
                 }
-
                 finally
                 {
                     declaredLocals.Free();
@@ -723,7 +722,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         lambdaDebugInfoBuilder.Free();
                     }
                 }
-
                 finally
                 {
                     localsSet.Free();

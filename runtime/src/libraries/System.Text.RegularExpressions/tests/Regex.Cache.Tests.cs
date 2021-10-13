@@ -24,7 +24,6 @@ namespace System.Text.RegularExpressions.Tests
                 Regex.CacheSize = newCacheSize;
                 Assert.Equal(newCacheSize, Regex.CacheSize);
             }
-
             finally
             {
                 Regex.CacheSize = originalCacheSize;

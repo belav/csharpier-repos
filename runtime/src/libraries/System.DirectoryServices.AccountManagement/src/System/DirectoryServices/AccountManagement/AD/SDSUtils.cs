@@ -207,7 +207,6 @@ namespace System.DirectoryServices.AccountManagement
             {
                 deParent.Children.Remove(deToDelete);
             }
-
             finally
             {
                 deParent.Dispose();

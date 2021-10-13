@@ -484,7 +484,6 @@ namespace System.ComponentModel.Composition.Hosting
                                 }
                             }
                         }
-
                         finally
                         {
                             if (catalogs != null)
@@ -500,7 +499,6 @@ namespace System.ComponentModel.Composition.Hosting
                     }
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

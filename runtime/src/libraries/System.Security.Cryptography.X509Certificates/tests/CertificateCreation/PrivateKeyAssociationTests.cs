@@ -277,7 +277,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     Assert.Equal(signature, signature2);
                 }
             }
-
             finally
             {
                 cngKey?.Delete();
@@ -535,7 +534,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     dsaCng.SignData(Array.Empty<byte>(), hashAlgorithm);
                 }
             }
-
             finally
             {
                 cngKey?.Delete();
@@ -647,7 +645,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     ecdsaCng.SignData(Array.Empty<byte>(), hashAlgorithm);
                 }
             }
-
             finally
             {
                 cngKey?.Delete();

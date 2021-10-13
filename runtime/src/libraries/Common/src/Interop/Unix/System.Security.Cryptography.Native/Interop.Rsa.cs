@@ -179,7 +179,6 @@ internal static partial class Interop
 
                 return rsaParameters;
             }
-
             finally
             {
                 if (addedRef)

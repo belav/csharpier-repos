@@ -33,7 +33,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.PtrToStringAuto(ptr, -1)
                 );
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);

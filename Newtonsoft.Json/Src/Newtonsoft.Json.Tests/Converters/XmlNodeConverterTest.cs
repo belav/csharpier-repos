@@ -2797,7 +2797,6 @@ namespace Newtonsoft.Json.Tests.Converters
                     );
                 }
             }
-
             finally
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = originalCulture;

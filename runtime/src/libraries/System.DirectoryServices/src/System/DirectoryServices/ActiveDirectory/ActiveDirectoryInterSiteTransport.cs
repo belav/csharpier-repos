@@ -290,7 +290,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             _siteLinkCollection.Add(link);
                         }
                     }
-
                     finally
                     {
                         results.Dispose();
@@ -346,7 +345,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             _bridgeCollection.Add(bridge);
                         }
                     }
-
                     finally
                     {
                         results.Dispose();

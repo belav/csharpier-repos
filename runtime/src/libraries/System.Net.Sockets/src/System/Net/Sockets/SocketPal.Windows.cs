@@ -346,7 +346,6 @@ namespace System.Net.Sockets
                     return errorCode;
                 }
             }
-
             finally
             {
                 for (int i = 0; i < count; ++i)
@@ -536,7 +535,6 @@ namespace System.Net.Sockets
                     return errorCode;
                 }
             }
-
             finally
             {
                 for (int i = 0; i < count; ++i)
@@ -1256,7 +1254,6 @@ namespace System.Net.Sockets
                 status = (int)fileDescriptorSet[0] != 0 && fileDescriptorSet[1] == rawHandle;
                 return SocketError.Success;
             }
-
             finally
             {
                 if (refAdded)
@@ -1395,7 +1392,6 @@ namespace System.Net.Sockets
 
                 return SocketError.Success;
             }
-
             finally
             {
                 if (leaseRead != null)
@@ -1483,7 +1479,6 @@ namespace System.Net.Sockets
                     flags
                 );
             }
-
             finally
             {
                 if (releaseRef)

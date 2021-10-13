@@ -101,7 +101,6 @@ internal static partial class Interop
                       ? null
                       : Marshal.PtrToStringAnsi(displayBuffer._data);
                 }
-
                 finally
                 {
                     displayBuffer.Dispose();

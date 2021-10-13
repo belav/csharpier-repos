@@ -365,7 +365,6 @@ namespace System.Net.Security
                         issuers
                     );
                 }
-
                 finally
                 {
                     remoteCert?.Dispose();
@@ -496,7 +495,6 @@ namespace System.Net.Security
                                 continue;
                             }
                         }
-
                         finally
                         {
                             if (chain != null)
@@ -663,7 +661,6 @@ namespace System.Net.Security
                     _selectedClientCertificate = clientCertificate;
                 }
             }
-
             finally
             {
                 if (selectedCert != null && _sslAuthenticationOptions.CertificateContext != null)
@@ -903,7 +900,6 @@ namespace System.Net.Security
                     }
                 } while (cachedCreds && _credentialsHandle == null);
             }
-
             finally
             {
                 if (_refreshCredentialNeeded)
@@ -1176,7 +1172,6 @@ namespace System.Net.Security
                     }
                 }
             }
-
             finally
             {
                 // At least on Win2k server the chain is found to have dependencies on the original cert context.

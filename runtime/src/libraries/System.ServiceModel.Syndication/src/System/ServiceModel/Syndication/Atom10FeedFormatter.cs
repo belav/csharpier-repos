@@ -243,7 +243,6 @@ namespace System.ServiceModel.Syndication
                     }
                     LoadElementExtensions(buffer, extWriter, category);
                 }
-
                 finally
                 {
                     extWriter?.Dispose();
@@ -1063,7 +1062,6 @@ namespace System.ServiceModel.Syndication
 
                         LoadElementExtensions(buffer, extWriter, result);
                     }
-
                     finally
                     {
                         if (extWriter != null)
@@ -1159,7 +1157,6 @@ namespace System.ServiceModel.Syndication
                         }
                         LoadElementExtensions(buffer, extWriter, result);
                     }
-
                     finally
                     {
                         extWriter?.Dispose();
@@ -1276,7 +1273,6 @@ namespace System.ServiceModel.Syndication
                     }
                     LoadElementExtensions(buffer, extWriter, link);
                 }
-
                 finally
                 {
                     extWriter?.Dispose();
@@ -1411,7 +1407,6 @@ namespace System.ServiceModel.Syndication
                     }
                     LoadElementExtensions(buffer, extWriter, result);
                 }
-
                 finally
                 {
                     extWriter?.Dispose();

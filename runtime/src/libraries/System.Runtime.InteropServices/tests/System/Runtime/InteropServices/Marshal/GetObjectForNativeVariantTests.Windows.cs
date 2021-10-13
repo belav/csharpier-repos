@@ -460,7 +460,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.Equal(expected, GetObjectForNativeVariant(variant));
             }
-
             finally
             {
                 DeleteVariant(variant);
@@ -499,7 +498,6 @@ namespace System.Runtime.InteropServices.Tests
                 );
                 Assert.Equal(expected, GetObjectForNativeVariant(variant));
             }
-
             finally
             {
                 DeleteVariant(source);
@@ -531,7 +529,6 @@ namespace System.Runtime.InteropServices.Tests
 
                 Assert.Throws<ArgumentException>(() => GetObjectForNativeVariant(variant));
             }
-
             finally
             {
                 Marshal.DestroyStructure<int>(pRecord);
@@ -560,7 +557,6 @@ namespace System.Runtime.InteropServices.Tests
 
                 Assert.Equal(value, GetObjectForNativeVariant(variant));
             }
-
             finally
             {
                 DeleteVariant(source);

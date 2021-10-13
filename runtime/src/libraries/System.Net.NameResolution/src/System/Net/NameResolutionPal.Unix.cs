@@ -127,7 +127,6 @@ namespace System.Net
                 aliases = localAliases;
                 addresses = localAddresses;
             }
-
             finally
             {
                 Interop.Sys.FreeHostEntry(&hostEntry);

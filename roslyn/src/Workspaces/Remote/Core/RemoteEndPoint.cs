@@ -309,7 +309,6 @@ namespace Microsoft.CodeAnalysis.Remote
                     await ConnectPipeAsync(pipe, cancellationToken).ConfigureAwait(false);
                     success = true;
                 }
-
                 finally
                 {
                     if (!success)

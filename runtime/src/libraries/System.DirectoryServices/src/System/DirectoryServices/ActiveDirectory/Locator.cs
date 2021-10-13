@@ -75,7 +75,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     domainControllerInfo = new DomainControllerInfo();
                     Marshal.PtrToStructure(pDomainControllerInfo, domainControllerInfo);
                 }
-
                 finally
                 {
                     // free the buffer
@@ -231,7 +230,6 @@ namespace System.DirectoryServices.ActiveDirectory
                                     domainControllers.Add(key, null);
                                 }
                             }
-
                             finally
                             {
                                 // what to do with the error?
@@ -259,7 +257,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                     }
                 }
-
                 finally
                 {
                     NativeMethods.DsGetDcClose(retGetDcContext);
@@ -349,7 +346,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         currentDnsRecord = partialDnsRecord.next;
                     }
                 }
-
                 finally
                 {
                     // release the dns results buffer

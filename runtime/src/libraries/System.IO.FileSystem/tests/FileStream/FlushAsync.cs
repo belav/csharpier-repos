@@ -21,7 +21,6 @@ namespace System.IO.Tests
                     await fs.FlushAsync();
                 }
             }
-
             finally
             {
                 File.SetAttributes(fileName, FileAttributes.Normal);

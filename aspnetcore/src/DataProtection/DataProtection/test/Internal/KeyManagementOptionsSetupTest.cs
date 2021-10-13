@@ -123,7 +123,6 @@ namespace Microsoft.AspNetCore.DataProtection.Internal
             {
                 testCode(uniqueSubkey);
             }
-
             finally
             {
                 // clean up when test is done

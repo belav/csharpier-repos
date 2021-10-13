@@ -790,7 +790,6 @@ namespace System.Runtime.Caching
                     _blockReduce = true;
                 }
             }
-
             finally
             {
                 if (useInsertBlock)
@@ -860,7 +859,6 @@ namespace System.Runtime.Caching
                     );
                 }
             }
-
             finally
             {
                 if (useInsertBlock)
@@ -946,7 +944,6 @@ namespace System.Runtime.Caching
                         );
                     }
                 }
-
                 finally
                 {
                     Interlocked.Exchange(ref _inFlush, 0);
@@ -992,7 +989,6 @@ namespace System.Runtime.Caching
                             _tsPerBucket.Ticks / TimeSpan.TicksPerMillisecond
                         );
                     }
-
                     finally
                     {
                         // Restore the current ExecutionContext

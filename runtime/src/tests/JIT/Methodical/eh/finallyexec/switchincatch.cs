@@ -57,7 +57,6 @@ namespace strswitch
                         {
                             continue;
                         }
-
                         finally
                         {
                             Console.WriteLine("In inner finally");
@@ -78,7 +77,6 @@ namespace strswitch
 
                     Console.WriteLine("Unreached");
                 }
-
                 finally
                 {
                     Console.WriteLine("In outer finally\n");

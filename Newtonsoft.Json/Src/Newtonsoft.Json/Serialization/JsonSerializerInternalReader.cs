@@ -3332,7 +3332,6 @@ namespace Newtonsoft.Json.Serialization
                                         targetDictionary[entry.Key] = entry.Value;
                                     }
                                 }
-
                                 finally
                                 {
                                     (e as IDisposable)?.Dispose();

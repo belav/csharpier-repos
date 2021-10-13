@@ -816,7 +816,6 @@ namespace Microsoft.VisualBasic.Tests
                     () => DateAndTime.MonthName(int.MaxValue, Abbreviate: true)
                 );
             }
-
             finally
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = culture;
@@ -883,7 +882,6 @@ namespace Microsoft.VisualBasic.Tests
                     () => DateAndTime.WeekdayName(int.MaxValue, Abbreviate: true)
                 );
             }
-
             finally
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = culture;

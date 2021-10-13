@@ -1430,7 +1430,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                   ? symbols.ToDictionary(s => s.Name, StringOrdinalComparer.Instance)
                   : s_emptyTypeMembers;
             }
-
             finally
             {
                 symbols.Free();
@@ -2774,7 +2773,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     return false;
                 }
-
                 finally
                 {
                     instanceMap.Remove(tOriginal);

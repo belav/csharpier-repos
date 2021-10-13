@@ -202,7 +202,6 @@ namespace System.ComponentModel.Design.Tests
                 handle.Process.WaitForExit();
                 handle.Dispose();
             }
-
             finally
             {
                 File.Delete(

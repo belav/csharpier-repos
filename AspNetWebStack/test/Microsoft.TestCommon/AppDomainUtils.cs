@@ -39,7 +39,6 @@ namespace System.Web.WebPages.TestUtils
                     ) as AppDomainHelper;
                 helper.Run(action);
             }
-
             finally
             {
                 if (appDomain != null)

@@ -144,7 +144,6 @@ namespace System.Drawing
 
                 s_anyFrameDirty = foundDirty;
             }
-
             finally
             {
                 s_rwImgListLock.ReleaseReaderLock();
@@ -180,7 +179,6 @@ namespace System.Drawing
                 }
                 s_anyFrameDirty = false;
             }
-
             finally
             {
                 s_rwImgListLock.ReleaseReaderLock();
@@ -231,7 +229,6 @@ namespace System.Drawing
                     s_rwImgListLock.AcquireWriterLock(Timeout.Infinite);
                 }
             }
-
             finally
             {
                 t_threadWriterLockWaitCount--;
@@ -268,7 +265,6 @@ namespace System.Drawing
                     }
                 }
             }
-
             finally
             {
                 if (readerLockHeld)
@@ -339,7 +335,6 @@ namespace System.Drawing
                     s_rwImgListLock.AcquireWriterLock(Timeout.Infinite);
                 }
             }
-
             finally
             {
                 t_threadWriterLockWaitCount--;
@@ -372,7 +367,6 @@ namespace System.Drawing
                     }
                 }
             }
-
             finally
             {
                 if (readerLockHeld)
@@ -435,7 +429,6 @@ namespace System.Drawing
                         }
                     }
                 }
-
                 finally
                 {
                     s_rwImgListLock.ReleaseReaderLock();

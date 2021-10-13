@@ -79,7 +79,6 @@ class Program
                 this.QueueCurrentBufferForUploadAndSetNewBuffer();
             }
         }
-
         finally
         {
             // Always transition back to the idle state.

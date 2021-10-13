@@ -117,7 +117,6 @@ namespace Microsoft.EntityFrameworkCore.Tools
                     .Select(l => l.Split(new[] { ':' }, 2))
                     .ToDictionary(s => s[0], s => s[1].TrimStart());
             }
-
             finally
             {
                 File.Delete(metadataFile);

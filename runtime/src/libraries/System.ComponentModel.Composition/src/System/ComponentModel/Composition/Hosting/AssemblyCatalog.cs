@@ -542,7 +542,6 @@ namespace System.ComponentModel.Composition.Hosting
                     }
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

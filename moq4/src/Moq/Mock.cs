@@ -649,7 +649,6 @@ namespace Moq
                     {
                         propertyToSet.SetValue(targetMock.Object, value, null);
                     }
-
                     finally
                     {
                         if (temporaryAutoSetupProperties)

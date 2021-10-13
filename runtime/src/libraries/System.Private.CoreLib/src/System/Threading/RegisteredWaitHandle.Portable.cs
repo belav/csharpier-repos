@@ -198,7 +198,6 @@ namespace System.Threading
                     EventWaitHandle.Set(handle);
                 }
             }
-
             finally
             {
                 handle?.DangerousRelease();
@@ -219,7 +218,6 @@ namespace System.Threading
             {
                 Debug.Assert(_numRequestedCallbacks != 0);
             }
-
             finally
             {
                 s_callbackLock.Release();
@@ -240,7 +238,6 @@ namespace System.Threading
             {
                 _numRequestedCallbacks++;
             }
-
             finally
             {
                 s_callbackLock.Release();
@@ -266,7 +263,6 @@ namespace System.Threading
                     _signalAfterCallbacksComplete = true;
                 }
             }
-
             finally
             {
                 s_callbackLock.Release();
@@ -287,7 +283,6 @@ namespace System.Threading
                     SignalUserWaitHandle();
                 }
             }
-
             finally
             {
                 s_callbackLock.Release();

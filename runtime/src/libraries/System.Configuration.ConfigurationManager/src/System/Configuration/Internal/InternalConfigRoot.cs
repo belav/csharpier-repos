@@ -120,7 +120,6 @@ namespace System.Configuration.Internal
                 if ((index == parts.Length) || !currentRecord.HlNeedsChildFor(parts[index]))
                     return currentRecord;
             }
-
             finally
             {
                 ReleaseHierarchyLockForRead();
@@ -175,7 +174,6 @@ namespace System.Configuration.Internal
 
                 return currentRecord;
             }
-
             finally
             {
                 ReleaseHierarchyLockForWrite();
@@ -290,7 +288,6 @@ namespace System.Configuration.Internal
                 // Remove it from the hierarchy.
                 currentRecord.Parent.HlRemoveChild(parts[parts.Length - 1]);
             }
-
             finally
             {
                 ReleaseHierarchyLockForWrite();
@@ -329,7 +326,6 @@ namespace System.Configuration.Internal
                 if ((index == parts.Length) && ReferenceEquals(configRecord, currentRecord))
                     currentRecord.HlClearResultRecursive(configKey, forceEvaluation);
             }
-
             finally
             {
                 ReleaseHierarchyLockForRead();

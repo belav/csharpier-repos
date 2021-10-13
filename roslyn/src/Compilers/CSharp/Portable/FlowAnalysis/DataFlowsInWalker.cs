@@ -70,7 +70,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 succeeded = !badRegion;
                 return badRegion ? new HashSet<Symbol>() : result;
             }
-
             finally
             {
                 walker.Free();

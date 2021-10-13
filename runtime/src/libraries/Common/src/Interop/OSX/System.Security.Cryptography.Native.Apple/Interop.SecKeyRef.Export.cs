@@ -47,7 +47,6 @@ internal static partial class Interop
                     out osStatus
                 );
             }
-
             finally
             {
                 if (exportPassword != s_nullExportString)

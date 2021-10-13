@@ -128,7 +128,6 @@ namespace Castle.DynamicProxy
                     interceptors[currentInterceptorIndex].Intercept(this);
                 }
             }
-
             finally
             {
                 currentInterceptorIndex--;
@@ -212,7 +211,6 @@ namespace Castle.DynamicProxy
                     invocation.currentInterceptorIndex = interceptorIndex;
                     invocation.Proceed();
                 }
-
                 finally
                 {
                     invocation.currentInterceptorIndex = previousInterceptorIndex;

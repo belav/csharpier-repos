@@ -164,7 +164,6 @@ namespace System.CodeDom.Tests
 
                 Assert.Equal(fileExists && keepFile, File.Exists(filePath));
             }
-
             finally
             {
                 if (File.Exists(filePath))
@@ -197,7 +196,6 @@ namespace System.CodeDom.Tests
                 Assert.Equal(keepFiles, File.Exists(filePath1));
                 Assert.Equal(keepFiles, File.Exists(filePath2));
             }
-
             finally
             {
                 if (File.Exists(filePath1))
@@ -290,7 +288,6 @@ namespace System.CodeDom.Tests
                     Assert.Equal(0, collection.Count);
                 }
             }
-
             finally
             {
                 File.Delete(filePath1);

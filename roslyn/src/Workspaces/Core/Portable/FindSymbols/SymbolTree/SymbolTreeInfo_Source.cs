@@ -208,7 +208,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         lookup
                     );
             }
-
             finally
             {
                 FreeSymbolMap(symbolMap);
@@ -243,7 +242,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 foreach (var (symbolName, symbols) in symbolMap)
                     GenerateSourceNodes(symbolName, nodeIndex, symbols, list, lookup);
             }
-
             finally
             {
                 FreeSymbolMap(symbolMap);

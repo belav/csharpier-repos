@@ -33,7 +33,6 @@ namespace System.Management.Tests
                     $"Unexpected TimerID value {evt["TimerID"]}"
                 );
             }
-
             finally
             {
                 if (watcher != null)
@@ -75,7 +74,6 @@ namespace System.Management.Tests
                     "Timeout waiting for receive event."
                 );
             }
-
             finally
             {
                 if (watcher != null)

@@ -468,7 +468,6 @@ namespace System.IO.Pipelines.Tests
                 int value = await tcs.Task.ConfigureAwait(false);
                 Assert.Equal(10, value);
             }
-
             finally
             {
                 if (useSynchronizationContext)
@@ -538,7 +537,6 @@ namespace System.IO.Pipelines.Tests
                 int value = await tcs.Task.ConfigureAwait(false);
                 Assert.Equal(10, value);
             }
-
             finally
             {
                 if (useSynchronizationContext)

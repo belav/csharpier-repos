@@ -19,7 +19,6 @@ namespace Microsoft.Win32.SystemEventsTests
             {
                 SendMessage((int)message, (IntPtr)uiAction, areaPtr);
             }
-
             finally
             {
                 if (freeMemory)
@@ -604,7 +603,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(changingDuringChanged);
                 Assert.Equal(expectedCategory, changingDuringChanged.Category);
             }
-
             finally
             {
                 SystemEvents.UserPreferenceChanging -= changingHandler;
@@ -665,7 +663,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(changingDuringChanged);
                 Assert.Equal(UserPreferenceCategory.VisualStyle, changingDuringChanged.Category);
             }
-
             finally
             {
                 SystemEvents.UserPreferenceChanging -= changingHandler;
@@ -724,7 +721,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(changingDuringChanged);
                 Assert.Equal(expectedCategory, changingDuringChanged.Category);
             }
-
             finally
             {
                 SystemEvents.UserPreferenceChanging -= changingHandler;
@@ -779,7 +775,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(changingDuringChanged);
                 Assert.Equal(UserPreferenceCategory.VisualStyle, changingDuringChanged.Category);
             }
-
             finally
             {
                 SystemEvents.UserPreferenceChanging -= changingHandler;

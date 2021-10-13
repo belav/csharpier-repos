@@ -108,7 +108,6 @@ public class AA
 #pragma warning restore 1717
                 }
             }
-
             finally
             {
                 do { } while ((local11 || true));
@@ -196,7 +195,6 @@ public class AA
             }
             goto label3;
         }
-
         finally
         {
             ushort local27 = ((ushort)(17.0));

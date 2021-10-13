@@ -122,7 +122,6 @@ namespace hello
                                         {
                                             Console.WriteLine(args[ii]);
                                         }
-
                                         finally
                                         {
                                             Console.WriteLine("Unreached finally\n");
@@ -149,13 +148,11 @@ namespace hello
                         }
                     }
                 }
-
                 finally
                 {
                     inFinally();
                 }
             }
-
             finally
             {
                 inFinally();

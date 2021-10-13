@@ -1576,7 +1576,6 @@ namespace System.Management
                     );
                     System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
                 }
-
                 finally
                 {
                     if (needToReset)

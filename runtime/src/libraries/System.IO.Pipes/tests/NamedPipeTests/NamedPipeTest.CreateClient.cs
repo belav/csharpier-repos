@@ -299,7 +299,6 @@ namespace System.IO.Pipes.Tests
                         () => new NamedPipeClientStream(direction, false, true, fakePipeHandle)
                     );
                 }
-
                 finally
                 {
                     if (gotRef)

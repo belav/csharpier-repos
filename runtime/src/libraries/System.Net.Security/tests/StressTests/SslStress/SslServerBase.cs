@@ -101,7 +101,6 @@ namespace SslStress
             {
                 await Task.WhenAll(workers);
             }
-
             finally
             {
                 _listener.Stop();
@@ -152,7 +151,6 @@ namespace SslStress
                             if (_listener.Pending())
                                 return await _listener.AcceptTcpClientAsync();
                         }
-
                         finally
                         {
                             _acceptConnectionLatch.Release();

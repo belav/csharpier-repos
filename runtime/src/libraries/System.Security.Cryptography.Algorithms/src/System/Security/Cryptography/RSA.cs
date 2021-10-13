@@ -135,7 +135,6 @@ namespace System.Security.Cryptography
                 data.CopyTo(array);
                 result = HashData(array, 0, data.Length, hashAlgorithm);
             }
-
             finally
             {
                 Array.Clear(array, 0, data.Length);
@@ -370,7 +369,6 @@ namespace System.Security.Cryptography
                         );
                     }
                 }
-
                 finally
                 {
                     CryptoPool.Return(hash, hashLength);
@@ -435,7 +433,6 @@ namespace System.Security.Cryptography
                         );
                         return writer.TryEncode(destination, out bytesWritten);
                     }
-
                     finally
                     {
                         CryptoPool.Return(rented, pkcs1Size);
@@ -480,7 +477,6 @@ namespace System.Security.Cryptography
                             new ReadOnlySpan<byte>(rented, 0, pkcs1Size)
                         );
                     }
-
                     finally
                     {
                         CryptoPool.Return(rented, pkcs1Size);
@@ -564,7 +560,6 @@ namespace System.Security.Cryptography
                 {
                     return RSAKeyFormatHelper.WritePkcs1PrivateKey(rsaParameters);
                 }
-
                 finally
                 {
                     ClearPrivateParameters(rsaParameters);
@@ -673,7 +668,6 @@ namespace System.Security.Cryptography
                             {
                                 ImportParameters(rsaParameters);
                             }
-
                             finally
                             {
                                 ClearPrivateParameters(rsaParameters);
@@ -736,7 +730,6 @@ namespace System.Security.Cryptography
                 {
                     ImportParameters(ret);
                 }
-
                 finally
                 {
                     ClearPrivateParameters(ret);
@@ -770,7 +763,6 @@ namespace System.Security.Cryptography
                 {
                     ImportParameters(ret);
                 }
-
                 finally
                 {
                     ClearPrivateParameters(ret);

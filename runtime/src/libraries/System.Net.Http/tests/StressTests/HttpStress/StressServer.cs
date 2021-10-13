@@ -341,7 +341,6 @@ namespace HttpStress
                             await context.Response.Body.WriteAsync(buffer, 0, read);
                         }
                     }
-
                     finally
                     {
                         bufferPool.Return(buffer);

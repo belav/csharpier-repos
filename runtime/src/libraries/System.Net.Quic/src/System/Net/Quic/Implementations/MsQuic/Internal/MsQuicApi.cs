@@ -180,7 +180,6 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
                         }
                     }
                 }
-
                 finally
                 {
                     if (!IsQuicSupported)

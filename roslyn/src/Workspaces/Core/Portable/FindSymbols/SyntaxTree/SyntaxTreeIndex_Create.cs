@@ -350,7 +350,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     )
                 );
             }
-
             finally
             {
                 Free(ignoreCase, identifiers, escapedIdentifiers);

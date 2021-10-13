@@ -131,7 +131,6 @@ namespace System.Data.ProviderBase
                             }
                         }
                     }
-
                     finally
                     {
                         ReleaseAdditionalLocksForClose(lockToken);

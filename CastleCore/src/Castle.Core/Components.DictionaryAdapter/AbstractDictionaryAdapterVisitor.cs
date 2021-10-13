@@ -89,7 +89,6 @@ namespace Castle.Components.DictionaryAdapter
                     }
                 }
             }
-
             finally
             {
                 PopScope(dictionaryAdapter);

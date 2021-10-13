@@ -48,7 +48,6 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             {
                 instance.ParseInternal(xmlFragment, callback, arg);
             }
-
             finally
             {
                 s_pool.Free(instance);

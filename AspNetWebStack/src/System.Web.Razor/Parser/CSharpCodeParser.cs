@@ -303,7 +303,6 @@ namespace System.Web.Razor.Parser
                         );
                     }
                 }
-
                 finally
                 {
                     // Always put current character back in the buffer for the next parser.

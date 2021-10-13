@@ -107,7 +107,6 @@ namespace System.Diagnostics
                 {
                     s_configSection = GetConfigSection();
                 }
-
                 finally
                 {
                     s_initState = InitState.Initialized;

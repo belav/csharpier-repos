@@ -102,7 +102,6 @@ namespace Microsoft.CodeAnalysis
 
                 return result.ToImmutable();
             }
-
             finally
             {
                 result.Free();

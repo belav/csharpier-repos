@@ -34,7 +34,6 @@ public class CC
                 while (a) { }
             } while (a);
         }
-
         finally
         {
             try

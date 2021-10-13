@@ -43,7 +43,6 @@ namespace System.Diagnostics.Tests
                     }
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -72,7 +71,6 @@ namespace System.Diagnostics.Tests
                     Assert.False(entry.Equals(null));
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -108,7 +106,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(entry.Index + 1, secondEntry.Index);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -141,7 +138,6 @@ namespace System.Diagnostics.Tests
                     Assert.False(entry.Equals(secondEntry));
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);

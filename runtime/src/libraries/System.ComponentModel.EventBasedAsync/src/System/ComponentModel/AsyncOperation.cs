@@ -79,7 +79,6 @@ namespace System.ComponentModel
             {
                 _syncContext.OperationCompleted();
             }
-
             finally
             {
                 GC.SuppressFinalize(this);

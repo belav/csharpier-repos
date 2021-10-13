@@ -266,7 +266,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal
                     // as the duplex pipe can hit an ODE as it still may be writing.
                 }
             }
-
             finally
             {
                 // Restore the original so that it gets closed appropriately

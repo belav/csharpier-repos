@@ -445,7 +445,6 @@ namespace System.IO.Tests
                     Assert.Equal(invalidShortName, Path.GetFullPath(shortLongName.ToString()));
                 }
             }
-
             finally
             {
                 File.Delete(tempFilePath);

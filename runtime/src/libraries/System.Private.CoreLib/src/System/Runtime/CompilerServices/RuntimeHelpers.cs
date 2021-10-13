@@ -91,7 +91,6 @@ namespace System.Runtime.CompilerServices
                 code(userData);
                 exceptionThrown = false;
             }
-
             finally
             {
                 backoutCode(userData, exceptionThrown);

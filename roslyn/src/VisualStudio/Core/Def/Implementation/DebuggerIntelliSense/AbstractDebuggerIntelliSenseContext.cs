@@ -399,7 +399,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
                             Marshal.GetObjectForIUnknown(frameTextView) as IVsTextView;
                         return textView == immediateWindowTextView;
                     }
-
                     finally
                     {
                         Marshal.Release(frameTextView);

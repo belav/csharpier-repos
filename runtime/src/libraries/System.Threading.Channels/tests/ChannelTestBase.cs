@@ -1438,7 +1438,6 @@ namespace System.Threading.Channels.Tests
                         {
                             d(state);
                         }
-
                         finally
                         {
                             SetSynchronizationContext(null);

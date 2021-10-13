@@ -283,7 +283,6 @@ namespace System.IO.Tests
 
                 Assert.Equal(3_000_000_000, outStream.Position);
             }
-
             finally
             {
                 unmanagedInputBuffer?.Dispose();

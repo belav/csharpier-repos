@@ -405,7 +405,6 @@ namespace System.Buffers.Tests
 
                 Assert.Equal(span.Length, output.GetSpan().Length);
             }
-
             finally
             {
                 pinnedArray.Free();

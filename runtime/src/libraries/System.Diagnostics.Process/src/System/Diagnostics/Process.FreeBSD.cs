@@ -86,7 +86,6 @@ namespace System.Diagnostics
 
                     return processInfo->ki_ppid;
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal((IntPtr)processInfo);

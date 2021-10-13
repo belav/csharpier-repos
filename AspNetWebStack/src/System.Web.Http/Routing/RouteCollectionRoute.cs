@@ -52,7 +52,6 @@ namespace System.Web.Http.Routing
                 _subRoutes = initializer();
                 Contract.Assert(_subRoutes != null);
             }
-
             finally
             {
                 _beingInitialized = false;

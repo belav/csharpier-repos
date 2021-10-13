@@ -113,7 +113,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     FreeDSHandle();
                     _disposed = true;
                 }
-
                 finally
                 {
                     base.Dispose();
@@ -786,7 +785,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         PropertyManager.CurrentTime
                     )!;
                 }
-
                 finally
                 {
                     rootDSE.Dispose();
@@ -815,7 +813,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         PropertyManager.HighestCommittedUSN
                     )!;
                 }
-
                 finally
                 {
                     rootDSE.Dispose();
@@ -1466,7 +1463,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         }
                     }
                 }
-
                 finally
                 {
                     // free the domain controller info structure
@@ -1621,7 +1617,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         currentItem = IntPtr.Add(currentItem, Marshal.SizeOf(dsNameResultItem));
                     }
                 }
-
                 finally
                 {
                     // free the DsNameResult structure

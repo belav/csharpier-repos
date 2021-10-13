@@ -419,7 +419,6 @@ namespace System.IO
                     buffer.CopyTo(array);
                     Write(array, 0, buffer.Length);
                 }
-
                 finally
                 {
                     ArrayPool<byte>.Shared.Return(array);

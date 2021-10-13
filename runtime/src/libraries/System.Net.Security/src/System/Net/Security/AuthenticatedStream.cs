@@ -54,7 +54,6 @@ namespace System.Net.Security
                     }
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

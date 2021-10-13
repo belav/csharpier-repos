@@ -104,7 +104,6 @@ namespace NetClient
                     )
                 );
             }
-
             finally
             {
                 LicenseManager.CurrentContext = prev;
@@ -133,7 +132,6 @@ namespace NetClient
                 // During runtime the IClassFactory::CreateInstance2 will be called with license from context
                 Assert.AreEqual(licKey, licenseTesting.GetLicense());
             }
-
             finally
             {
                 LicenseManager.CurrentContext = prev;

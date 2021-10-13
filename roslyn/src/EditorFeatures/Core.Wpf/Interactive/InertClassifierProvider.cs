@@ -55,7 +55,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
                 );
                 textBuffer.Properties.AddProperty(s_classificationsKey, classifications);
             }
-
             finally
             {
                 if (classifier is IDisposable disposable)

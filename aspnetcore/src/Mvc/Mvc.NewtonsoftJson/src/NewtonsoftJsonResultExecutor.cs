@@ -160,7 +160,6 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                     await fileBufferingWriteStream.DrainBufferAsync(response.Body);
                 }
             }
-
             finally
             {
                 if (fileBufferingWriteStream != null)

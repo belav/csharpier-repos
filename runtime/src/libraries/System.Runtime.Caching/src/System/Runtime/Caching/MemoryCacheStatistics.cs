@@ -218,7 +218,6 @@ namespace System.Runtime.Caching
                         _configPollingInterval
                     );
                 }
-
                 finally
                 {
                     // Restore the current ExecutionContext
@@ -229,7 +228,6 @@ namespace System.Runtime.Caching
                 _timerHandleRef = new GCHandleRef<Timer>(timer);
                 dispose = false;
             }
-
             finally
             {
                 if (dispose)
@@ -362,7 +360,6 @@ namespace System.Runtime.Caching
 #endif
                 return trimmedOrExpired;
             }
-
             finally
             {
                 Interlocked.Exchange(ref _inCacheManagerThread, 0);
@@ -439,7 +436,6 @@ namespace System.Runtime.Caching
             try
             {
                 try { }
-
                 finally
                 {
                     // prevent ThreadAbortEx from interrupting
@@ -462,7 +458,6 @@ namespace System.Runtime.Caching
                     }
                 }
             }
-
             finally
             {
                 Interlocked.Exchange(ref _inCacheManagerThread, 0);

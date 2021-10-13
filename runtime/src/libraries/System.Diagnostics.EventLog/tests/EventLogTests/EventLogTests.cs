@@ -42,7 +42,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(1, Helpers.Retry((() => eventLog.Entries.Count)));
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -71,7 +70,6 @@ namespace System.Diagnostics.Tests
                 EventLog.CreateEventSource(source, log);
                 Assert.True(EventLog.Exists(log));
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -149,7 +147,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(0x400, eventLog.MaximumKilobytes);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -192,7 +189,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(-1, eventLog.MinimumRetentionDays);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -221,7 +217,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(retentionDays, eventLog.MinimumRetentionDays);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -257,7 +252,6 @@ namespace System.Diagnostics.Tests
                         EventLog.SourceExists(source, Environment.MachineName.ToLowerInvariant())
                     );
                 }
-
                 finally
                 {
                     EventLog.DeleteEventSource(source);
@@ -288,7 +282,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(log, eventLog.LogDisplayName);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);
@@ -348,7 +341,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(log, eventlog.LogDisplayName);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(source);

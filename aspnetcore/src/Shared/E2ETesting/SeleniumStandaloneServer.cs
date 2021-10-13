@@ -79,7 +79,6 @@ namespace Microsoft.AspNetCore.E2ETesting
                     await InitializeInstance(output);
                 }
             }
-
             finally
             {
                 _semaphore.Release();
@@ -305,7 +304,6 @@ Captured output lines:
                 listener.Start();
                 return ((IPEndPoint)listener.LocalEndpoint).Port;
             }
-
             finally
             {
                 listener.Stop();

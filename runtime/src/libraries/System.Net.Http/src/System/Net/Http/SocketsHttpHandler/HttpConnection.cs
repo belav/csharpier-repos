@@ -1641,7 +1641,6 @@ namespace System.Net.Http
                 int written = encoding.GetBytes(s, rentedBuffer);
                 await WriteBytesSlowAsync(rentedBuffer, written, async).ConfigureAwait(false);
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(rentedBuffer);
@@ -2267,7 +2266,6 @@ namespace System.Net.Http
                     }
                 }
             }
-
             finally
             {
                 if (origReadBuffer != null)

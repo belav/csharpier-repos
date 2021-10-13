@@ -33,7 +33,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 (JoinableTaskContext, SynchronizationContext) = CreateJoinableTaskContext();
                 ResetThreadAffinity(JoinableTaskContext.Factory);
             }
-
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(synchronizationContext);

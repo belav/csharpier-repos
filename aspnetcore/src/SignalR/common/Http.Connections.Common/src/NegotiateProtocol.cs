@@ -164,7 +164,6 @@ namespace Microsoft.AspNetCore.Http.Connections
                 writer.Flush();
                 Debug.Assert(writer.CurrentDepth == 0);
             }
-
             finally
             {
                 ReusableUtf8JsonWriter.Return(reusableWriter);

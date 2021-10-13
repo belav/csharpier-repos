@@ -24,7 +24,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
-
             finally
             {
                 Marshal.Release(iUnknown);
@@ -44,7 +43,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
-
             finally
             {
                 Marshal.Release(iUnknown);
@@ -61,7 +59,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
-
             finally
             {
                 Marshal.Release(iUnknown);
@@ -78,7 +75,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
-
             finally
             {
                 Marshal.Release(iUnknown);
@@ -105,7 +101,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
-
             finally
             {
                 Marshal.Release(iUnknown);
@@ -132,7 +127,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, iUnknown);
             }
-
             finally
             {
                 Marshal.Release(iUnknown);

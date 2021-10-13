@@ -63,7 +63,6 @@ internal class Test
                 }
             }
         }
-
         finally
         {
             switch (args.Length)
@@ -93,7 +92,6 @@ internal class Test
             }
             return null;
         }
-
         finally { }
     }
 }

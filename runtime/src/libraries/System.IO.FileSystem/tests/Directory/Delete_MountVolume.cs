@@ -111,7 +111,6 @@ public class Directory_Delete_MountVolume
                             );
                         }
                     }
-
                     finally
                     {
                         MountHelper.Unmount(mountedDirName);
@@ -208,7 +207,6 @@ public class Directory_Delete_MountVolume
                             );
                         }
                     }
-
                     finally
                     {
                         MountHelper.Unmount(mountedDirName);
@@ -296,7 +294,6 @@ public class Directory_Delete_MountVolume
                             );
                         }
                     }
-
                     finally
                     {
                         MountHelper.Unmount(mountedDirName);
@@ -384,7 +381,6 @@ public class Directory_Delete_MountVolume
                             );
                         }
                     }
-
                     finally
                     {
                         MountHelper.Unmount(mountedDirName);
@@ -441,7 +437,6 @@ public class Directory_Delete_MountVolume
                         Directory.Delete(mountedDirName, true);
                         Task.Delay(300).Wait();
                     }
-
                     finally
                     {
                         if (
@@ -552,7 +547,6 @@ public class Directory_Delete_MountVolume
                             }
                         }
                     }
-
                     finally
                     {
                         if (
@@ -669,7 +663,6 @@ public class Directory_Delete_MountVolume
                             }
                         }
                     }
-
                     finally
                     {
                         if (

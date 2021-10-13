@@ -99,7 +99,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                         bitmapData.Stride
                     );
                 }
-
                 finally
                 {
                     bitmap.UnlockBits(bitmapData);

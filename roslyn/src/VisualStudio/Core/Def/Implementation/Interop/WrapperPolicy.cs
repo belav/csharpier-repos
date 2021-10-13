@@ -43,7 +43,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
                 // The aggregator (if there is one) implement IComWrapperFixed!
                 return wrapper as IComWrapperFixed;
             }
-
             finally
             {
                 Marshal.Release(ptr);

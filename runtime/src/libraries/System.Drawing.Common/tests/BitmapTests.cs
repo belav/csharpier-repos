@@ -620,7 +620,6 @@ namespace System.Drawing.Tests
                     }
                 }
             }
-
             finally
             {
                 bitmap.Dispose();
@@ -647,7 +646,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(format, clone.PixelFormat);
                 }
             }
-
             finally
             {
                 bitmap.Dispose();
@@ -866,7 +864,6 @@ namespace System.Drawing.Tests
             {
                 Assert.Equal(color, bitmap.GetPixel(x, y));
             }
-
             finally
             {
                 bitmap.Dispose();
@@ -950,7 +947,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(ImageFormat.MemoryBmp, result.RawFormat);
                 }
             }
-
             finally
             {
                 bitmap.Dispose();
@@ -1047,7 +1043,6 @@ namespace System.Drawing.Tests
                     handle = bitmap.GetHicon();
                 }
             }
-
             finally
             {
                 icon.Dispose();
@@ -1884,7 +1879,6 @@ namespace System.Drawing.Tests
                     bitmap.UnlockBits(data);
                 }
             }
-
             finally
             {
                 bitmap.Dispose();
@@ -2409,7 +2403,6 @@ namespace System.Drawing.Tests
                         }
                     }
                 }
-
                 finally
                 {
                     bitmap.UnlockBits(bitmapData);
@@ -2783,7 +2776,6 @@ namespace System.Drawing.Tests
                     Marshal.WriteByte(data.Scan0, 2, blue.R);
                     Marshal.WriteByte(data.Scan0, 3, blue.A);
                 }
-
                 finally
                 {
                     bitmap.UnlockBits(data);
@@ -2807,7 +2799,6 @@ namespace System.Drawing.Tests
                     Marshal.WriteByte(data.Scan0, 2, blue.R);
                     Marshal.WriteByte(data.Scan0, 3, blue.A);
                 }
-
                 finally
                 {
                     bitmap.UnlockBits(data);
@@ -2839,7 +2830,6 @@ namespace System.Drawing.Tests
                     Marshal.WriteByte(data.Scan0, 1, blue.G);
                     Marshal.WriteByte(data.Scan0, 2, blue.R);
                 }
-
                 finally
                 {
                     bitmap.UnlockBits(data);
@@ -2859,7 +2849,6 @@ namespace System.Drawing.Tests
                     Marshal.WriteByte(data.Scan0, 1, blue.G);
                     Marshal.WriteByte(data.Scan0, 2, blue.R);
                 }
-
                 finally
                 {
                     bitmap.UnlockBits(data);

@@ -170,7 +170,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.PromotedEnlistment != null);
                 enlistment.PromotedEnlistment.EnlistmentDone();
             }
-
             finally
             {
                 Monitor.Enter(enlistment.SyncRoot);
@@ -185,7 +184,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.PromotedEnlistment != null);
                 enlistment.PromotedEnlistment.Prepared();
             }
-
             finally
             {
                 Monitor.Enter(enlistment.SyncRoot);
@@ -200,7 +198,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.PromotedEnlistment != null);
                 enlistment.PromotedEnlistment.ForceRollback(e);
             }
-
             finally
             {
                 Monitor.Enter(enlistment.SyncRoot);
@@ -215,7 +212,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.PromotedEnlistment != null);
                 enlistment.PromotedEnlistment.Committed();
             }
-
             finally
             {
                 Monitor.Enter(enlistment.SyncRoot);
@@ -230,7 +226,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.PromotedEnlistment != null);
                 enlistment.PromotedEnlistment.Aborted(e);
             }
-
             finally
             {
                 Monitor.Enter(enlistment.SyncRoot);
@@ -245,7 +240,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.PromotedEnlistment != null);
                 enlistment.PromotedEnlistment.InDoubt(e);
             }
-
             finally
             {
                 Monitor.Enter(enlistment.SyncRoot);
@@ -260,7 +254,6 @@ namespace System.Transactions
                 Debug.Assert(enlistment.PromotedEnlistment != null);
                 return enlistment.PromotedEnlistment.GetRecoveryInformation();
             }
-
             finally
             {
                 Monitor.Enter(enlistment.SyncRoot);

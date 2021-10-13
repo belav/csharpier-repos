@@ -210,7 +210,6 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
             {
                 testCode(dirInfo);
             }
-
             finally
             {
                 // clean up when test is done

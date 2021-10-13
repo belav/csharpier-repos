@@ -85,7 +85,6 @@ namespace System.Net.Http
                       ? await base.SendAsync(request, cancellationToken).ConfigureAwait(false)
                       : base.Send(request, cancellationToken);
                 }
-
                 finally
                 {
                     activity.Stop();

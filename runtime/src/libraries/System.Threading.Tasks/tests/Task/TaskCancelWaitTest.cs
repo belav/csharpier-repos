@@ -172,7 +172,6 @@ namespace System.Threading.Tasks.Tests.CancelWait
                                 child.CancellationTokenSource.Cancel();
                             }
                         }
-
                         finally
                         {
                             lock (_countdownEvent)

@@ -68,7 +68,6 @@ public class RethrowAndFinallysTest
                                 _trace.Write("f");
                                 throw new Exception("ex1");
                             }
-
                             finally
                             {
                                 _trace.Write("F");
@@ -85,7 +84,6 @@ public class RethrowAndFinallysTest
                             _trace.Write("E");
                         }
                     }
-
                     finally
                     {
                         _trace.Write("D");
@@ -102,7 +100,6 @@ public class RethrowAndFinallysTest
                     _trace.Write("C");
                 }
             }
-
             finally
             {
                 _trace.Write("B");

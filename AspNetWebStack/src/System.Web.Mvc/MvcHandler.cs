@@ -118,7 +118,6 @@ namespace System.Web.Mvc
                     {
                         innerState.AsyncController.EndExecute(asyncResult);
                     }
-
                     finally
                     {
                         innerState.ReleaseController();
@@ -152,7 +151,6 @@ namespace System.Web.Mvc
                     {
                         controller.Execute(RequestContext);
                     }
-
                     finally
                     {
                         factory.ReleaseController(controller);
@@ -197,7 +195,6 @@ namespace System.Web.Mvc
             {
                 controller.Execute(RequestContext);
             }
-
             finally
             {
                 factory.ReleaseController(controller);

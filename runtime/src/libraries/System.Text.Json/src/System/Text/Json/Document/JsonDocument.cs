@@ -955,7 +955,6 @@ namespace System.Text.Json
             {
                 writer.WritePropertyName(UnescapeString(row, out rented));
             }
-
             finally
             {
                 ClearAndReturn(rented);
@@ -970,7 +969,6 @@ namespace System.Text.Json
             {
                 writer.WriteStringValue(UnescapeString(row, out rented));
             }
-
             finally
             {
                 ClearAndReturn(rented);

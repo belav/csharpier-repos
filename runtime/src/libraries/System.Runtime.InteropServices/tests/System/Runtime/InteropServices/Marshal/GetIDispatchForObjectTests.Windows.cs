@@ -39,7 +39,6 @@ namespace System.Runtime.InteropServices.Tests
             {
                 Assert.NotEqual(IntPtr.Zero, ptr);
             }
-
             finally
             {
                 Marshal.Release(ptr);

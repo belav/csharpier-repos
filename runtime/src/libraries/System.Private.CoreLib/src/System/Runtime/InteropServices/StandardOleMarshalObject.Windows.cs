@@ -63,7 +63,6 @@ namespace System.Runtime.InteropServices
                         return pStandardMarshal;
                     }
                 }
-
                 finally
                 {
                     Marshal.Release(pUnknown);
@@ -125,7 +124,6 @@ namespace System.Runtime.InteropServices
                     out pSize
                 );
             }
-
             finally
             {
                 Debug.Assert(OperatingSystem.IsWindows());
@@ -168,7 +166,6 @@ namespace System.Runtime.InteropServices
                     mshlflags
                 );
             }
-
             finally
             {
                 Debug.Assert(OperatingSystem.IsWindows());

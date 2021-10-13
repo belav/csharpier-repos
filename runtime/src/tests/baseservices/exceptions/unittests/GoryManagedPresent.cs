@@ -57,13 +57,11 @@ class GoryManagedPresentTest
                 }
                 _trace.Write("....");
             }
-
             finally
             {
                 _trace.Write("4");
             }
         }
-
         finally
         {
             _trace.Write("5");

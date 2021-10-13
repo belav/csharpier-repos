@@ -22,13 +22,11 @@ public class FinallyTest
                 Console.WriteLine("Second try block");
                 throw new Exception();
             }
-
             finally
             {
                 Console.WriteLine("Second finally block");
             }
         }
-
         finally
         {
             Console.WriteLine("First finally block");

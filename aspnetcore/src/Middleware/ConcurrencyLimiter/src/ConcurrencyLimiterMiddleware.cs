@@ -78,7 +78,6 @@ namespace Microsoft.AspNetCore.ConcurrencyLimiter
                 {
                     await _next(context);
                 }
-
                 finally
                 {
                     _queuePolicy.OnExit();

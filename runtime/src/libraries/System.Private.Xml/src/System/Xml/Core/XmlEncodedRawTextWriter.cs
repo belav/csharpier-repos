@@ -771,7 +771,6 @@ namespace System.Xml
                 FlushBuffer();
                 FlushEncoder();
             }
-
             finally
             {
                 // Future calls to Close or Flush shouldn't write to Stream or Writer
@@ -783,7 +782,6 @@ namespace System.Xml
                     {
                         _stream.Flush();
                     }
-
                     finally
                     {
                         try
@@ -793,7 +791,6 @@ namespace System.Xml
                                 _stream.Dispose();
                             }
                         }
-
                         finally
                         {
                             _stream = null;
@@ -806,7 +803,6 @@ namespace System.Xml
                     {
                         _writer.Flush();
                     }
-
                     finally
                     {
                         try
@@ -816,7 +812,6 @@ namespace System.Xml
                                 _writer.Dispose();
                             }
                         }
-
                         finally
                         {
                             _writer = null;

@@ -138,7 +138,6 @@ namespace System.Data.ProviderBase
                             valueClone = null; // we've stored it, don't dispose it.
                         }
                     }
-
                     finally
                     {
                         // we really need to dispose our clones; they may have

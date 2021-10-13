@@ -70,7 +70,6 @@ namespace System.Net
                                 );
                             }
                         }
-
                         finally
                         {
                             if (stoleBlob)

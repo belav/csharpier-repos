@@ -222,7 +222,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                         return retVal;
                     }
                 }
-
                 finally
                 {
                     // The buffer contains key material, so delete it.
@@ -349,7 +348,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                     // And we're done!
                     return retVal;
                 }
-
                 finally
                 {
                     // The buffer contains key material, so delete it.

@@ -78,7 +78,6 @@ namespace Internal.Cryptography
                 // on an input which is already a parsed subset of the input.
                 importAction(password, decodedBase64, out _);
             }
-
             finally
             {
                 CryptoPool.Return(decodeBuffer, clearSize: bytesWritten);
@@ -171,7 +170,6 @@ namespace Internal.Cryptography
                 // on an input which is already a parsed subset of the input.
                 importAction(decodedBase64, out _);
             }
-
             finally
             {
                 CryptoPool.Return(decodeBuffer, clearSize: bytesWritten);

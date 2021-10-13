@@ -81,7 +81,6 @@ public class Maine
                 IntPtr mftRsrc = Win32Res.GetResource(lib, "#1", "#24", out mftSize);
                 mftData = Win32Res.ManifestResourceToXml(mftRsrc, mftSize);
             }
-
             finally
             {
                 if (lib != IntPtr.Zero)
@@ -190,7 +189,6 @@ class C
                 IntPtr wevtRsrc = Win32Res.GetResource(lib, "#1", "WEVT_TEMPLATE", out wevtSize);
                 Assert.NotEqual(default, wevtRsrc);
             }
-
             finally
             {
                 if (lib != IntPtr.Zero)
@@ -1114,7 +1112,6 @@ public class Maine
                 IntPtr versionRsrc = Win32Res.GetResource(lib, "#1", "#16", out size);
                 versionData = Win32Res.VersionResourceToXml(versionRsrc);
             }
-
             finally
             {
                 if (lib != IntPtr.Zero)

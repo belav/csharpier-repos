@@ -34,7 +34,6 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
                     await subscribeMethod(id, subscription);
                 }
             }
-
             finally
             {
                 _lock.Release();
@@ -64,7 +63,6 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
                     await unsubscribeMethod(id);
                 }
             }
-
             finally
             {
                 _lock.Release();

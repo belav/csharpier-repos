@@ -101,7 +101,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                   ? lvalueFlowCaptureIdBuilder.ToImmutable()
                   : ImmutableDictionary<CaptureId, FlowCaptureKind>.Empty;
             }
-
             finally
             {
                 rvalueFlowCaptureIds.Free();

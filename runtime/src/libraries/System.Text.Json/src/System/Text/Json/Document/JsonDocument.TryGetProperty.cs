@@ -89,7 +89,6 @@ namespace System.Text.Json
                             out value
                         );
                     }
-
                     finally
                     {
                         // While property names aren't usually a secret, they also usually
@@ -217,7 +216,6 @@ namespace System.Text.Json
                                     return true;
                                 }
                             }
-
                             finally
                             {
                                 if (rented != null)

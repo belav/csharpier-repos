@@ -74,7 +74,6 @@ namespace Internal.Cryptography.Pal.AnyOS
                                 out exception
                             );
                         }
-
                         finally
                         {
                             if (cek != null)

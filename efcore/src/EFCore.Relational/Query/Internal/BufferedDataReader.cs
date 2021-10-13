@@ -184,7 +184,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 return this;
             }
-
             finally
             {
                 _underlyingReader.Dispose();
@@ -229,7 +228,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                 return this;
             }
-
             finally
             {
                 await _underlyingReader.DisposeAsync().ConfigureAwait(false);

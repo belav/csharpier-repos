@@ -1375,7 +1375,6 @@ public class B
                             .WithLocation(1, 1)
                     );
             }
-
             finally
             {
                 AppDomain.CurrentDomain.FirstChanceException -= firstChanceException;
@@ -1430,7 +1429,6 @@ public class B
                             .WithLocation(1, 1)
                     );
             }
-
             finally
             {
                 AppDomain.CurrentDomain.FirstChanceException -= firstChanceException;
@@ -1586,7 +1584,6 @@ SyntaxTree: ";
                         .WithLocation(1, 1)
                 );
             }
-
             finally
             {
                 AppDomain.CurrentDomain.FirstChanceException -= firstChanceException;

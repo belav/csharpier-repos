@@ -132,7 +132,6 @@ namespace System.Security.AccessControl
                     privilegeLock.EnterWriteLock();
                 }
             }
-
             finally
             {
                 if (privilegeLock.IsReadLockHeld)
@@ -284,7 +283,6 @@ namespace System.Security.AccessControl
                         success = true;
                     }
                 }
-
                 finally
                 {
                     if (!success)
@@ -532,7 +530,6 @@ namespace System.Security.AccessControl
                     this.needToRevert = this.tlsContents.IsImpersonating || this.stateWasChanged;
                 }
             }
-
             finally
             {
                 if (!this.needToRevert)
@@ -621,7 +618,6 @@ namespace System.Security.AccessControl
                     }
                 }
             }
-
             finally
             {
                 if (success)

@@ -149,7 +149,6 @@ namespace System.Net.Http
                         );
                     }
                 }
-
                 finally
                 {
                     // Restore the current ExecutionContext

@@ -756,7 +756,6 @@ namespace System.IO.Tests
                 action();
                 eventsOccured.WaitOne(new TimeSpan(0, 0, 5));
             }
-
             finally
             {
                 watcher.Changed -= fileWatcherEvent;

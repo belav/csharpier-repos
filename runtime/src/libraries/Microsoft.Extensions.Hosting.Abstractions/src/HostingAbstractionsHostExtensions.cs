@@ -64,7 +64,6 @@ namespace Microsoft.Extensions.Hosting
 
                 await host.WaitForShutdownAsync(token).ConfigureAwait(false);
             }
-
             finally
             {
                 if (host is IAsyncDisposable asyncDisposable)

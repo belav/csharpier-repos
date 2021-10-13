@@ -96,7 +96,6 @@ namespace Internal.Cryptography.Pal.Windows
                     }
                 }
             }
-
             finally
             {
                 if (mustRelease)

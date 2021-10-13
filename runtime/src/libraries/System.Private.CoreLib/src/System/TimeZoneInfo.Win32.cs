@@ -1038,7 +1038,6 @@ namespace System
                     }
                 }
             }
-
             finally
             {
                 if (handle != IntPtr.Zero)

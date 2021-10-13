@@ -102,7 +102,6 @@ internal static partial class Interop
                 // Otherwise the lookup failed.
                 return new CRYPT_OID_INFO() { AlgId = -1 };
             }
-
             finally
             {
                 if (rawKey != IntPtr.Zero)

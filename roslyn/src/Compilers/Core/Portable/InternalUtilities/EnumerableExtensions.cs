@@ -551,7 +551,6 @@ namespace Roslyn.Utilities
                     yield return line;
                 }
             }
-
             finally
             {
                 foreach (var enumerator in enumerators)

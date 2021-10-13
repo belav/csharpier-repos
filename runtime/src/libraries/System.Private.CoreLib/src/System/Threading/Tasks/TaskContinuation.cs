@@ -544,7 +544,6 @@ namespace System.Threading.Tasks
                 {
                     action();
                 }
-
                 finally
                 {
                     System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
@@ -794,7 +793,6 @@ namespace System.Threading.Tasks
                 }
                 // ThreadPoolWorkQueue.Dispatch handles notifications and reset context back to default
             }
-
             finally
             {
                 if (log.IsEnabled() && log.TasksSetActivityIds && m_continuationId != 0)

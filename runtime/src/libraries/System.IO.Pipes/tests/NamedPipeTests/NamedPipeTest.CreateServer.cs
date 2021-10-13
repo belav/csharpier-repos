@@ -508,7 +508,6 @@ namespace System.IO.Pipes.Tests
                         () => new NamedPipeServerStream(direction, false, true, fakePipeHandle)
                     );
                 }
-
                 finally
                 {
                     if (gotRef)

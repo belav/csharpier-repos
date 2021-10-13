@@ -76,7 +76,6 @@ namespace System.Diagnostics
                         }
                         s_procData = new ProcessData(pid, startTime);
                     }
-
                     finally { }
                 }
                 return s_procData;
@@ -630,7 +629,6 @@ namespace System.Diagnostics
 
             // Must be able to assign to the out param.
             try { }
-
             finally
             {
                 int r = Interlocked.CompareExchange(ref *spinLockPointer, 1, 0);
@@ -837,7 +835,6 @@ namespace System.Diagnostics
                             );
                             s_categoryDataTable[_categoryName] = data;
                         }
-
                         finally
                         {
                             if (categoryKey != null)
@@ -917,7 +914,6 @@ namespace System.Diagnostics
                                 lifetime
                             );
                         }
-
                         finally
                         {
                             if (!_categoryData.UseUniqueSharedMemory)
@@ -1014,7 +1010,6 @@ namespace System.Diagnostics
                                 return counterPointer;
                             }
                         }
-
                         finally
                         {
                             if (!_categoryData.UseUniqueSharedMemory)
@@ -1067,7 +1062,6 @@ namespace System.Diagnostics
                                     ResolveOffset(newCounterOffset, s_counterEntrySize)
                                 );
                             }
-
                             finally
                             {
                                 ExitCriticalSection(&(counterPointer->SpinLock));
@@ -1078,7 +1072,6 @@ namespace System.Diagnostics
                     return counterPointer;
                 }
             }
-
             finally
             {
                 // cache this instance for reuse
@@ -1351,7 +1344,6 @@ namespace System.Diagnostics
                                     currentInstancePointer->RefCount = 1;
                                     return true;
                                 }
-
                                 finally
                                 {
                                     if (mutex != null)
@@ -1386,7 +1378,6 @@ namespace System.Diagnostics
                     }
                 }
             }
-
             finally
             {
                 if (verifyLifeTime)
@@ -1490,7 +1481,6 @@ namespace System.Diagnostics
                                 (*returnInstancePointerReference)->RefCount = 1;
                                 return true;
                             }
-
                             finally
                             {
                                 if (!noSpinLock)
@@ -1527,7 +1517,6 @@ namespace System.Diagnostics
                 NetFrameworkUtils.EnterMutexWithoutGlobal(_categoryData.MutexName, ref mutex);
                 VerifyCategory(currentCategoryPointer);
             }
-
             finally
             {
                 if (mutex != null)
@@ -1798,7 +1787,6 @@ namespace System.Diagnostics
                     }
                 }
             }
-
             finally
             {
                 if (mutex != null)
@@ -1914,7 +1902,6 @@ namespace System.Diagnostics
                 if (instancePointer != null)
                     RemoveOneInstance(instancePointer, false);
             }
-
             finally
             {
                 if (mutex != null)
@@ -1947,7 +1934,6 @@ namespace System.Diagnostics
                 if (clearValue)
                     ClearCounterValues(instancePointer);
             }
-
             finally
             {
                 if (sectionEntered)
@@ -2227,7 +2213,6 @@ namespace System.Diagnostics
 
                     _fileMappingSize = (int)meminfo.RegionSize;
                 }
-
                 finally
                 {
                     if (securityDescriptorPointer != null)

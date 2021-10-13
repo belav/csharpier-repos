@@ -608,7 +608,6 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     await connection.StartAsync().DefaultTimeout();
                     logger.LogInformation("Connected to {url}", url);
                 }
-
                 finally
                 {
                     logger.LogInformation("Disposing Connection");
@@ -796,7 +795,6 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                     await connection.StartAsync().DefaultTimeout();
                     logger.LogInformation("Connected to {url}", url);
                 }
-
                 finally
                 {
                     logger.LogInformation("Disposing Connection");

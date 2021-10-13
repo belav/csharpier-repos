@@ -297,7 +297,6 @@ namespace System.Text.Json
                 owned = new byte[actualByteCount];
                 Buffer.BlockCopy(utf8Bytes, 0, owned, 0, actualByteCount);
             }
-
             finally
             {
                 // Holds document content, clear it before returning it.
@@ -763,7 +762,6 @@ namespace System.Text.Json
                 {
                     Parse(utf8JsonSpan, readerOptions, ref database, ref stack);
                 }
-
                 finally
                 {
                     stack.Dispose();

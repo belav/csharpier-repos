@@ -47,7 +47,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.True(changing.WaitOne(PostMessageWait));
                 Assert.True(changed.WaitOne(PostMessageWait));
             }
-
             finally
             {
                 SystemEvents.DisplaySettingsChanged -= changedHandler;
@@ -85,7 +84,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.True(changing);
                 Assert.True(changed);
             }
-
             finally
             {
                 SystemEvents.DisplaySettingsChanged -= changedHandler;

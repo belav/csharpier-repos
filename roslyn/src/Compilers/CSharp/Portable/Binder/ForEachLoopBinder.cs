@@ -2101,7 +2101,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return true;
             }
-
             finally
             {
                 lookupResult.Free();

@@ -107,7 +107,6 @@ namespace System.Composition.Hosting.Core
                 }
                 return relay;
             }
-
             finally
             {
                 _creating = false;

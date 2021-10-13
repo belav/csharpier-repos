@@ -317,7 +317,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
 
                 return builder.Count == thisCount ? this : builder.ToList();
             }
-
             finally
             {
                 ClearAndFreeBuilder(builder);

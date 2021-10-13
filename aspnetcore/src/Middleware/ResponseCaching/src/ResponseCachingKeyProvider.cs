@@ -75,7 +75,6 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
                 return builder.ToString();
             }
-
             finally
             {
                 _builderPool.Return(builder);
@@ -200,7 +199,6 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
                 return builder.ToString();
             }
-
             finally
             {
                 _builderPool.Return(builder);

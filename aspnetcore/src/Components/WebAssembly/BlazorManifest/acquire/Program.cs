@@ -78,7 +78,6 @@ namespace acquire
 
                 File.WriteAllBytes(sentinelPath, Array.Empty<byte>());
             }
-
             finally
             {
                 Directory.Delete(tempDirectory, recursive: true);

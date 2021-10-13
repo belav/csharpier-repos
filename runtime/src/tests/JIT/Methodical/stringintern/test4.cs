@@ -108,7 +108,6 @@ class Test4
                 Console.WriteLine("FAILED, (object) teststr3 == (object)C.teststr3() is expected");
             }
             try { }
-
             finally
             {
                 if ((object)teststr4 != (object)C.teststr4)
@@ -221,7 +220,6 @@ class Test4
                 );
             }
             try { }
-
             finally
             {
                 if ((object)testgenstr4 != (object)GenC<string>.teststr4)
@@ -350,7 +348,6 @@ class Test4
                 );
             }
             try { }
-
             finally
             {
                 // Special case for const literal teststr4
@@ -470,7 +467,6 @@ class Test4
                 );
             }
             try { }
-
             finally
             {
                 // Special case for const literal teststr4

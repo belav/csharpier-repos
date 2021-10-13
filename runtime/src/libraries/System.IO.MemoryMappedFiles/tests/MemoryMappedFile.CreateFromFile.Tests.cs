@@ -1407,7 +1407,6 @@ namespace System.IO.MemoryMappedFiles.Tests
                                 )
                         );
                 }
-
                 finally
                 {
                     File.SetAttributes(file.Path, original);

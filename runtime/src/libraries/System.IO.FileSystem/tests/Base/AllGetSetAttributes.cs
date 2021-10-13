@@ -82,7 +82,6 @@ namespace System.IO.Tests
                     FileAttributes.ReadOnly & GetAttributes(linkPath)
                 );
             }
-
             finally
             {
                 SetAttributes(path, GetAttributes(path) & ~FileAttributes.ReadOnly);

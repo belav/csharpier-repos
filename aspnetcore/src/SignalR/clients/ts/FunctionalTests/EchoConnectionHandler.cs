@@ -38,7 +38,6 @@ namespace FunctionalTests
                         break;
                     }
                 }
-
                 finally
                 {
                     connection.Transport.Input.AdvanceTo(result.Buffer.End);

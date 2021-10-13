@@ -502,7 +502,6 @@ namespace System.Security.Cryptography.Xml
                             return DecryptEncryptedKey(ek);
                         }
                     }
-
                     finally
                     {
                         _xmlDsigSearchDepthCounter--;
@@ -729,7 +728,6 @@ namespace System.Security.Cryptography.Xml
                 ICryptoTransform enc = symmetricAlgorithm.CreateEncryptor();
                 cipher = enc.TransformFinalBlock(plaintext, 0, plaintext.Length);
             }
-
             finally
             {
                 // now restore the original symmetric algorithm
@@ -815,7 +813,6 @@ namespace System.Security.Cryptography.Xml
                     cipherValue.Length - lengthIV
                 );
             }
-
             finally
             {
                 // now restore the original symmetric algorithm
@@ -894,7 +891,6 @@ namespace System.Security.Cryptography.Xml
                         child = nextChild;
                     }
                 }
-
                 finally
                 {
                     // Remove the dummy element.

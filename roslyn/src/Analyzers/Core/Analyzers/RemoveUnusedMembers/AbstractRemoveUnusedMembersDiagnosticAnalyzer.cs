@@ -604,7 +604,6 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
                         }
                     }
                 }
-
                 finally
                 {
                     symbolsReferencedInDocComments?.Free();

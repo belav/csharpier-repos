@@ -22,7 +22,6 @@ namespace System.Net
                 return Interop.Sys.Socket(af, SocketType.Dgram, 0, &socket)
                     != Interop.Error.EAFNOSUPPORT;
             }
-
             finally
             {
                 if (socket == invalid)

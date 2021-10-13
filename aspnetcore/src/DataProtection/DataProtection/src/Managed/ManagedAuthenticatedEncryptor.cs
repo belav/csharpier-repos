@@ -357,7 +357,6 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                             }
                         }
                     }
-
                     finally
                     {
                         // delete since these contain secret material
@@ -497,7 +496,6 @@ namespace Microsoft.AspNetCore.DataProtection.Managed
                             }
                         }
                     }
-
                     finally
                     {
                         // delete since these contain secret material

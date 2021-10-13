@@ -200,7 +200,6 @@ namespace System.Threading
                     waitedListNodes = GetWaitedListNodeArray(waitedCount);
                     success = true;
                 }
-
                 finally
                 {
                     if (!success)
@@ -372,7 +371,6 @@ namespace System.Threading
                         break;
                     }
                 }
-
                 finally
                 {
                     _waitSignalState = WaitSignalState.NotWaiting;
@@ -602,7 +600,6 @@ namespace System.Threading
                         Debug.Assert(LockedMutexesHead != waitableObject);
                     }
                 }
-
                 finally
                 {
                     s_lock.Release();

@@ -121,7 +121,6 @@ namespace System.Web.Razor.Parser
                     }
                     return true;
                 }
-
                 finally
                 {
                     Context.Source.Position = bookmark;

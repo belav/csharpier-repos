@@ -63,7 +63,6 @@ namespace System.Net.WebSockets
                 new Span<byte>(array, 0, r.Count).CopyTo(buffer.Span);
                 return new ValueWebSocketReceiveResult(r.Count, r.MessageType, r.EndOfMessage);
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(array);
@@ -101,7 +100,6 @@ namespace System.Net.WebSockets
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(array);

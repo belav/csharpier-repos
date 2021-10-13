@@ -60,7 +60,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     out pgrfCDW
                 );
             }
-
             finally
             {
                 _editorFactory.SetEncoding(false);

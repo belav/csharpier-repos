@@ -203,7 +203,6 @@ namespace System.Xml.Tests
                     pstate = TestState.Pass;
                 }
             }
-
             finally
             {
                 if (_factoryReader != null)

@@ -73,7 +73,6 @@ namespace Internal.Cryptography
                         }
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(oidValuePtr);

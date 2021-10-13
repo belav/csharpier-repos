@@ -352,7 +352,6 @@ namespace System.Collections.Concurrent
                     throw new InvalidCastException(e.Message, e);
                 }
             }
-
             finally
             {
                 UnfreezeBag(lockTaken);
@@ -447,7 +446,6 @@ namespace System.Collections.Concurrent
                         return arr;
                     }
                 }
-
                 finally
                 {
                     UnfreezeBag(lockTaken);
@@ -501,7 +499,6 @@ namespace System.Collections.Concurrent
                         ;
                 }
             }
-
             finally
             {
                 UnfreezeBag(lockTaken);
@@ -560,7 +557,6 @@ namespace System.Collections.Concurrent
                     FreezeBag(ref lockTaken);
                     return DangerousCount;
                 }
-
                 finally
                 {
                     UnfreezeBag(lockTaken);
@@ -641,7 +637,6 @@ namespace System.Collections.Concurrent
                         }
                     }
                 }
-
                 finally
                 {
                     UnfreezeBag(lockTaken);
@@ -913,7 +908,6 @@ namespace System.Collections.Concurrent
                         _addTakeCount++;
                     }
                 }
-
                 finally
                 {
                     _currentOp = (int)Operation.None;
@@ -998,7 +992,6 @@ namespace System.Collections.Concurrent
                         }
                     }
                 }
-
                 finally
                 {
                     _currentOp = (int)Operation.None;

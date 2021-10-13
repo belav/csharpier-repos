@@ -1003,7 +1003,6 @@ namespace System.Linq.Parallel.Tests
                                         );
                                     }
                                 }
-
                                 finally
                                 {
                                     currentLeft = p.Key;

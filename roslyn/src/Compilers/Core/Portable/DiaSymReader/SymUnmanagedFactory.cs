@@ -164,7 +164,6 @@ namespace Microsoft.DiaSymReader
 #endif
                 creator(ref clsid, out instance);
             }
-
             finally
             {
                 if (instance == null && !FreeLibrary(moduleHandle))

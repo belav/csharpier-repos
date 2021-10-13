@@ -88,7 +88,6 @@ namespace System.IO.Tests
                 {
                     watcher1.EnableRaisingEvents = true;
                 }
-
                 finally
                 {
                     ExecutionContext.RestoreFlow();
@@ -259,7 +258,6 @@ namespace System.IO.Tests
                     );
                 }
             }
-
             finally
             {
                 for (var i = 0; i < watchers.Length; i++)

@@ -318,7 +318,6 @@ namespace System.Diagnostics
                 );
                 return new PerformanceCounterCategory(categoryName, machineName);
             }
-
             finally
             {
                 if (mutex != null)
@@ -537,7 +536,6 @@ namespace System.Diagnostics
                 PerformanceCounterLib.UnregisterCategory(categoryName);
                 PerformanceCounterLib.CloseAllLibraries();
             }
-
             finally
             {
                 if (mutex != null)

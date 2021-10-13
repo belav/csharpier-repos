@@ -271,7 +271,6 @@ namespace System.Reflection.Tests
                     PropertyInfo.SetValue(obj, value);
                     Assert.Equal(expected, PropertyInfo.GetValue(obj));
                 }
-
                 finally
                 {
                     PropertyInfo.SetValue(obj, originalValue);
@@ -284,7 +283,6 @@ namespace System.Reflection.Tests
                 PropertyInfo.SetValue(obj, value, index);
                 Assert.Equal(expected, PropertyInfo.GetValue(obj, index));
             }
-
             finally
             {
                 PropertyInfo.SetValue(obj, originalValue, index);

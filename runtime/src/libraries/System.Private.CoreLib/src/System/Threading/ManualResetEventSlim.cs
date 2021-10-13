@@ -621,7 +621,6 @@ namespace System.Threading
                                 if (!Monitor.Wait(m_lock, realMillisecondsTimeout))
                                     return false; // return immediately if the timeout has expired.
                             }
-
                             finally
                             {
                                 // Clean up: we're done waiting.

@@ -212,7 +212,6 @@ namespace System.Text.Tests
                     _staticInstance = instance;
                     action();
                 }
-
                 finally
                 {
                     _staticInstance = oldInstance;

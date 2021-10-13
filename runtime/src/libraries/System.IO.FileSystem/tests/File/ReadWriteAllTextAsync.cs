@@ -150,7 +150,6 @@ namespace System.IO.Tests
                         async () => await WriteAsync(path, "text")
                     );
             }
-
             finally
             {
                 File.SetAttributes(path, FileAttributes.Normal);

@@ -311,7 +311,6 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 // Throws InvalidOperationException if the object graph is too deep
                 result = VisitImplementation(ref metadata, ref key, model);
             }
-
             finally
             {
                 _currentPath.Pop(model);

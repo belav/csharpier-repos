@@ -29,7 +29,6 @@ namespace hello
             testLog.StartRecording();
             a = new int[2];
             try { }
-
             finally
             {
                 a[0] = 1234;

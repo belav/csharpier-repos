@@ -33,7 +33,6 @@ public class Gen<T>
             }
             Test.Eval(!throwException);
         }
-
         finally
         {
             Test.Eval(true);

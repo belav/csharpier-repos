@@ -536,7 +536,6 @@ namespace System.Speech.Internal.SapiInterop
                     Marshal.StructureToPtr(elements[i], new IntPtr((long)coMem + size * i), false);
                 }
             }
-
             finally
             {
                 memHandles = handles.ToArray();

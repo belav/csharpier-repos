@@ -113,7 +113,6 @@ namespace System.Diagnostics.Tests
                     Assert.NotNull(px);
                 }
             }
-
             finally
             {
                 if (shouldDelete)
@@ -212,7 +211,6 @@ namespace System.Diagnostics.Tests
 
                     Assert.Equal(scriptName, process.ProcessName);
                 }
-
                 finally
                 {
                     process.Kill();
@@ -384,7 +382,6 @@ namespace System.Diagnostics.Tests
                 {
                     Assert.Equal(Program, px.ProcessName);
                 }
-
                 finally
                 {
                     px.Kill();
@@ -408,7 +405,6 @@ namespace System.Diagnostics.Tests
                 {
                     Assert.Equal(Program, px.ProcessName);
                 }
-
                 finally
                 {
                     px.Kill();

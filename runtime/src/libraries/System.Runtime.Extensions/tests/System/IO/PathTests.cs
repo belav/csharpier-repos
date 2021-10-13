@@ -200,7 +200,6 @@ namespace System.IO.Tests
                 }
                 Assert.Equal(Path.Combine(Path.GetTempPath(), Path.GetFileName(tmpFile)), tmpFile);
             }
-
             finally
             {
                 File.Delete(tmpFile);

@@ -49,7 +49,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
                 pUnk = Marshal.GetIUnknownForObject(managedObject);
                 _pUnkOfInnerUnknownWhenAlive = pUnk;
             }
-
             finally
             {
                 if (pUnk != IntPtr.Zero)
@@ -69,7 +68,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
                 pUnk = Marshal.GetIUnknownForObject(handle.Object);
                 _pUnkOfInnerUnknownWhenAlive = pUnk;
             }
-
             finally
             {
                 if (pUnk != IntPtr.Zero)
@@ -113,7 +111,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
                         return null;
                     }
                 }
-
                 finally
                 {
                     if (pUnk != IntPtr.Zero)

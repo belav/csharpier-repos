@@ -2742,7 +2742,6 @@ namespace ns1
                         Console.WriteLine("    s2.s1.ToString()");
                         return base.ToString();
                     }
-
                     finally
                     {
                         Console.WriteLine("    First");

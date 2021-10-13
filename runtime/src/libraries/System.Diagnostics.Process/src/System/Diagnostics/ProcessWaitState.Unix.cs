@@ -577,7 +577,6 @@ namespace System.Diagnostics
                             catch (OperationCanceledException) { }
                         }
                     }
-
                     finally
                     {
                         // Task is no longer active

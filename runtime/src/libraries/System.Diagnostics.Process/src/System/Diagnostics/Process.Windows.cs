@@ -220,7 +220,6 @@ namespace System.Diagnostics
                     return _signaled = processWaitHandle.WaitOne(milliseconds);
                 }
             }
-
             finally
             {
                 // If we have a hard timeout, we cannot wait for the streams
@@ -739,7 +738,6 @@ namespace System.Diagnostics
                                 if (!retVal)
                                     errorCode = Marshal.GetLastWin32Error();
                             }
-
                             finally
                             {
                                 if (passwordPtr != IntPtr.Zero)
@@ -793,7 +791,6 @@ namespace System.Diagnostics
                         throw new Win32Exception(errorCode);
                     }
                 }
-
                 finally
                 {
                     childInputPipeHandle?.Dispose();
@@ -965,7 +962,6 @@ namespace System.Diagnostics
                     throw new Win32Exception();
                 }
             }
-
             finally
             {
                 if (hToken != null)
@@ -1118,7 +1114,6 @@ namespace System.Diagnostics
                     throw new Win32Exception();
                 }
             }
-
             finally
             {
                 if (hTmp != null && !hTmp.IsInvalid)

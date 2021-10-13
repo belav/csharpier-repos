@@ -131,7 +131,6 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 {
                     result = await doFunc().ConfigureAwait(false);
                 }
-
                 finally
                 {
                     if (_progress != null && watch != null)
@@ -213,7 +212,6 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
                     return results.ToImmutable();
                 }
-
                 finally
                 {
                     _buildManager.EndBatchBuild();

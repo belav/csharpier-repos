@@ -476,7 +476,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     }
                 }
             }
-
             finally
             {
                 s_nodeStackPool.ClearAndFree(stack);

@@ -303,7 +303,6 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
             {
                 action(tempDir);
             }
-
             finally
             {
                 if (Directory.Exists(tempDir))

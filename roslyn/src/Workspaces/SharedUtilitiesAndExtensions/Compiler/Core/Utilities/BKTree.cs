@@ -97,7 +97,6 @@ namespace Roslyn.Utilities
                 );
                 return result;
             }
-
             finally
             {
                 ArrayPool<char>.ReleaseArray(lowerCaseCharacters);

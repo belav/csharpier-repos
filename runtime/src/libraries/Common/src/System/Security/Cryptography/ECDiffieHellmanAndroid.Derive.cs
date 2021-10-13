@@ -209,7 +209,6 @@ namespace System.Security.Cryptography
                         return null;
                     }
                 }
-
                 finally
                 {
                     theirKey?.Dispose();

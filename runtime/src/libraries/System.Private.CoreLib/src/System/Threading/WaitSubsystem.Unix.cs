@@ -129,7 +129,6 @@ namespace System.Threading
                 safeWaitHandle = new SafeWaitHandle(handle, ownsHandle: true);
                 return safeWaitHandle;
             }
-
             finally
             {
                 if (safeWaitHandle == null)
@@ -192,7 +191,6 @@ namespace System.Threading
             {
                 waitableObject.SignalEvent();
             }
-
             finally
             {
                 s_lock.Release();
@@ -213,7 +211,6 @@ namespace System.Threading
             {
                 waitableObject.UnsignalEvent();
             }
-
             finally
             {
                 s_lock.Release();
@@ -236,7 +233,6 @@ namespace System.Threading
             {
                 return waitableObject.SignalSemaphore(count);
             }
-
             finally
             {
                 s_lock.Release();
@@ -257,7 +253,6 @@ namespace System.Threading
             {
                 waitableObject.SignalMutex();
             }
-
             finally
             {
                 s_lock.Release();
@@ -323,7 +318,6 @@ namespace System.Threading
                 }
                 success = true;
             }
-
             finally
             {
                 if (!success)
@@ -412,7 +406,6 @@ namespace System.Threading
                     prioritize
                 );
             }
-
             finally
             {
                 // Once the wait function is called, it will release the lock
@@ -446,7 +439,6 @@ namespace System.Threading
             {
                 thread.WaitInfo.TrySignalToInterruptWaitOrRecordPendingInterrupt();
             }
-
             finally
             {
                 s_lock.Release();

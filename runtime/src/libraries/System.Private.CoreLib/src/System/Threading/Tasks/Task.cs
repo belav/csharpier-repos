@@ -2699,7 +2699,6 @@ namespace System.Threading.Tasks
 
                 Finish(true);
             }
-
             finally
             {
                 currentTaskSlot = previousTask;
@@ -3432,7 +3431,6 @@ namespace System.Threading.Tasks
                     }
 #pragma warning restore CA1416
                 }
-
                 finally
                 {
                     if (!IsCompleted)
@@ -5722,7 +5720,6 @@ namespace System.Threading.Tasks
                 }
                 waitCompleted = mres.Wait(millisecondsTimeout, cancellationToken);
             }
-
             finally
             {
                 if (!waitCompleted)

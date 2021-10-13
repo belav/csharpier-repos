@@ -69,7 +69,6 @@ internal class LocallocTest
             LocallocTest testObj = new LocallocTest();
             testObj.unwindTest2(1, 2, 3, 4, 5, 6, 7, 8, 9);
         }
-
         finally
         {
             Console.WriteLine("finally block in unwindTest1.\n");
@@ -105,7 +104,6 @@ internal class LocallocTest
         {
             throw new Exception("Test Exception");
         }
-
         finally
         {
             Console.WriteLine("finally block in unwindTest2.\n");

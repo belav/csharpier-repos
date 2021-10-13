@@ -753,7 +753,6 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Marshal.Copy((IntPtr)data, result, 0, result.Length);
                 return result;
             }
-
             finally
             {
                 symReader.Dispose();

@@ -52,7 +52,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Formatters
 
                 Assert.Equal(expectedEncoding, writer.ToArray());
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -341,7 +340,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Formatters
 
                 Assert.Equal(encoded, writer.ToArray());
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -366,7 +364,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Formatters
 
                 Assert.Equal(encoded, writer.ToArray());
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -386,7 +383,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Formatters
                 Assert.True(BinaryMessageParser.TryParseMessage(ref buffer, out var roundtripped));
                 Assert.Equal(payload, roundtripped.ToArray());
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);

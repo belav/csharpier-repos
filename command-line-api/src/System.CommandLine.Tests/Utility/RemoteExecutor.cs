@@ -230,7 +230,6 @@ namespace System.CommandLine.Tests.Utility
 
                 return args;
             }
-
             finally
             {
                 Marshal.FreeHGlobal(argv);

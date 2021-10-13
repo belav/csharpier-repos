@@ -175,7 +175,6 @@ namespace System.Data.OleDb
                     );
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -232,7 +231,6 @@ namespace System.Data.OleDb
                 IntPtr buffer = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 value = Marshal.GetObjectForNativeVariant(buffer);
             }
-
             finally
             {
                 if (mustRelease)
@@ -268,7 +266,6 @@ namespace System.Data.OleDb
                     // GetNativeVariantForObject must be in try block since it has no reliability contract
                     Marshal.GetNativeVariantForObject(value, buffer);
                 }
-
                 finally
                 {
                     // safe to copy memory(dst,src,count), even if GetNativeVariantForObject failed
@@ -279,7 +276,6 @@ namespace System.Data.OleDb
                     );
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -309,7 +305,6 @@ namespace System.Data.OleDb
 
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }
-
                 finally
                 {
                     ptr = SafeNativeMethods.SysAllocStringLen(value, value.Length);
@@ -319,7 +314,6 @@ namespace System.Data.OleDb
                     Marshal.WriteIntPtr(base.handle, offset + ADP.PtrSize, ptr);
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -352,14 +346,12 @@ namespace System.Data.OleDb
 
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }
-
                 finally
                 {
                     Marshal.WriteIntPtr(base.handle, offset, pinnedValue); // parameter input value
                     Marshal.WriteIntPtr(base.handle, offset + ADP.PtrSize, pinnedValue); // original parameter value
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -413,7 +405,6 @@ namespace System.Data.OleDb
 
                         ResetValues(DangerousGetHandle(), _iaccessor);
                     }
-
                     finally
                     {
                         if (mustRelease)
@@ -563,7 +554,6 @@ namespace System.Data.OleDb
             // the second should only be freed if different from the first
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 IntPtr currentValue = Marshal.ReadIntPtr(buffer, valueOffset);
@@ -592,7 +582,6 @@ namespace System.Data.OleDb
             // the first should only be freed if different from the first
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 IntPtr currentValue = Marshal.ReadIntPtr(buffer, valueOffset);
@@ -628,7 +617,6 @@ namespace System.Data.OleDb
 
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 // always clear the first structure
@@ -663,7 +651,6 @@ namespace System.Data.OleDb
 
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-
             finally
             {
                 // always clear the first structure
@@ -696,7 +683,6 @@ namespace System.Data.OleDb
                 IntPtr ptr = ADP.IntPtrOffset(DangerousGetHandle(), offset);
                 value = SafeNativeMethods.InterlockedExchangePointer(ptr, IntPtr.Zero);
             }
-
             finally
             {
                 if (mustRelease)

@@ -360,7 +360,6 @@ namespace Microsoft.CodeAnalysis.Interactive
                     sourcePaths.Clear();
                     sourcePaths.AddRange(sourceSearchPaths);
                 }
-
                 finally
                 {
                     state = CompleteExecution(state, completionSource, success: true);

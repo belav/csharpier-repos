@@ -592,7 +592,6 @@ class Tests
         {
             o = alloc_obj();
         }
-
         finally
         {
             GC.Collect(1);

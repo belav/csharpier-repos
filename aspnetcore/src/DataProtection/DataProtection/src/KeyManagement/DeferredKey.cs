@@ -53,7 +53,6 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
                         encryptedKeyElement.ToXElement()
                     );
             }
-
             finally
             {
                 // It's important that the lambda above doesn't capture 'descriptorElement'. Clearing the reference here

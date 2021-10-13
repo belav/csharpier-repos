@@ -632,7 +632,6 @@ namespace Microsoft.CodeAnalysis.Text
                     offset += count;
                 }
             }
-
             finally
             {
                 s_charArrayPool.Free(buffer);
@@ -826,7 +825,6 @@ namespace Microsoft.CodeAnalysis.Text
                     return this;
                 }
             }
-
             finally
             {
                 segments.Free();
@@ -1202,7 +1200,6 @@ namespace Microsoft.CodeAnalysis.Text
 
                 return true;
             }
-
             finally
             {
                 s_charArrayPool.Free(buffer2);

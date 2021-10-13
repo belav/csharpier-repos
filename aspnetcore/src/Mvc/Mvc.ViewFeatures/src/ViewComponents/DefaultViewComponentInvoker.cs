@@ -97,7 +97,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                     result = InvokeSyncCore(executor, component, context);
                 }
             }
-
             finally
             {
                 if (component != null)

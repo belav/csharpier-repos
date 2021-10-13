@@ -112,7 +112,6 @@ namespace System.Web.Mvc.Test
                 // Assert
                 Assert.False(model.PropertyWasRead());
             }
-
             finally
             {
                 ModelValidatorProviders.Providers.Clear();

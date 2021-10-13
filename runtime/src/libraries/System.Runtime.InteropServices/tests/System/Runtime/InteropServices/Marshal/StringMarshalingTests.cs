@@ -34,7 +34,6 @@ namespace System.Runtime.InteropServices.Tests
                     String str = Marshal.PtrToStringBSTR(ptr);
                     Assert.Equal(ts, str);
                 }
-
                 finally
                 {
                     Marshal.FreeBSTR(ptr);
@@ -62,7 +61,6 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(ts.Substring(0, ts.Length - 1), str2);
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeCoTaskMem(AnsiStr);
@@ -90,7 +88,6 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(ts.Substring(0, ts.Length - 1), str2);
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeCoTaskMem(UniStr);
@@ -118,7 +115,6 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(ts.Substring(0, ts.Length - 1), str2);
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(AnsiStr);
@@ -146,7 +142,6 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(ts.Substring(0, ts.Length - 1), str2);
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(UniStr);
@@ -179,7 +174,6 @@ namespace System.Runtime.InteropServices.Tests
                         Assert.Equal(srcString.Substring(0, srcString.Length - 1), retString2);
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeCoTaskMem(ptrString);

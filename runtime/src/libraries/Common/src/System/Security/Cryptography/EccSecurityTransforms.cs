@@ -181,7 +181,6 @@ namespace System.Security.Cryptography
                     return key;
                 }
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(keyBlob);
@@ -283,7 +282,6 @@ namespace System.Security.Cryptography
                     hasPrivateKey
                 );
             }
-
             finally
             {
                 CryptoPool.Return(rented, written);

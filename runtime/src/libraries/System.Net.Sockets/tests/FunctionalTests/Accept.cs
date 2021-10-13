@@ -92,7 +92,6 @@ namespace System.Net.Sockets.Tests
                     Assert.All(servers, s => Assert.NotNull(s.Result));
                     Assert.All(servers, s => Assert.True(s.Result.Connected));
                 }
-
                 finally
                 {
                     foreach (Socket client in clients)
@@ -160,7 +159,6 @@ namespace System.Net.Sockets.Tests
                     Assert.All(servers, s => Assert.NotNull(s.Result));
                     Assert.All(servers, s => Assert.True(s.Result.Connected));
                 }
-
                 finally
                 {
                     foreach (Socket client in clients)

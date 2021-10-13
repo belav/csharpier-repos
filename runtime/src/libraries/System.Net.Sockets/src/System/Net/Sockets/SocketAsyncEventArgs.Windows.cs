@@ -104,7 +104,6 @@ namespace System.Net.Sockets
                     null
                 );
             }
-
             finally
             {
                 if (suppressFlow)

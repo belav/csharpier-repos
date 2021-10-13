@@ -928,7 +928,6 @@ namespace System.IO.Pipelines
                     GetReadResult(out result);
                 }
             }
-
             finally
             {
                 cancellationTokenRegistration.Dispose();
@@ -1013,7 +1012,6 @@ namespace System.IO.Pipelines
                         );
                 }
             }
-
             finally
             {
                 cancellationTokenRegistration.Dispose();

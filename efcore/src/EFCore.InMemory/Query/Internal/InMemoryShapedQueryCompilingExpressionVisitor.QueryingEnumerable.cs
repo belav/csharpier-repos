@@ -110,7 +110,6 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         {
                             return MoveNextHelper();
                         }
-
                         finally
                         {
                             _concurrencyDetector?.ExitCriticalSection();
@@ -136,7 +135,6 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                             return new ValueTask<bool>(MoveNextHelper());
                         }
-
                         finally
                         {
                             _concurrencyDetector?.ExitCriticalSection();

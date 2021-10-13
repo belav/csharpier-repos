@@ -25,7 +25,6 @@ namespace System.Xml.Tests
                 XmlReader.Create(path).Dispose();
                 XmlReader.Create(Path.Combine(".", path)).Dispose();
             }
-
             finally
             {
                 if (shouldDelete)
@@ -45,7 +44,6 @@ namespace System.Xml.Tests
             {
                 XmlReader.Create(path).Dispose();
             }
-
             finally
             {
                 File.Delete(path);

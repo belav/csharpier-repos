@@ -187,7 +187,6 @@ internal static partial class Interop
                     out identityHandle
                 );
             }
-
             finally
             {
                 if (releasePassword)
@@ -296,7 +295,6 @@ internal static partial class Interop
                     return collectionHandle;
                 }
             }
-
             finally
             {
                 if (releasePassword)
@@ -591,7 +589,6 @@ internal static partial class Interop
 
                 return X509Export(X509ContentType.Pkcs12, cfPassphrase, certHandles);
             }
-
             finally
             {
                 if (releasePassword)

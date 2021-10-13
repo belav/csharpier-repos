@@ -10,7 +10,6 @@ public class Test
         int rc;
 
         try { }
-
         finally
         {
             switch (type)

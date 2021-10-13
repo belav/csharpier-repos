@@ -294,7 +294,6 @@ namespace NetClient
                 this.server.Pass_Through_LCID(out int lcid);
                 Assert.AreEqual(englishCulture.LCID, lcid); // CLR->COM LCID marshalling is explicitly hardcoded to en-US as requested by VSTO instead of passing the current culture.
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = oldCulture;

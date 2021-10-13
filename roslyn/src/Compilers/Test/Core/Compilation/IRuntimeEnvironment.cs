@@ -318,7 +318,6 @@ namespace Roslyn.Test.Utilities
                     cancellationToken: default
                 );
             }
-
             finally
             {
                 if (pdbStream != null)

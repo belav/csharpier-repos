@@ -142,7 +142,6 @@ namespace Microsoft.AspNetCore.Http2Cat
                     }
                 }
             }
-
             finally
             {
                 HostApplicationLifetime.StopApplication();

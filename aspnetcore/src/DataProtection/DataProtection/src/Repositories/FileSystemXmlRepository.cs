@@ -168,7 +168,6 @@ namespace Microsoft.AspNetCore.DataProtection.Repositories
                     File.Copy(tempFilename, finalFilename);
                 }
             }
-
             finally
             {
                 File.Delete(tempFilename); // won't throw if the file doesn't exist

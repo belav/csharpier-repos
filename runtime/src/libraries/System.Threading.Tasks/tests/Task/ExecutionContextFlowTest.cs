@@ -30,7 +30,6 @@ namespace System.Threading.Tasks.Tests
                     .Wait();
                 Assert.Equal(suppressFlow ? 42 : 0, asyncLocal.Value);
             }
-
             finally
             {
                 if (suppressFlow)

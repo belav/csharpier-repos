@@ -381,7 +381,6 @@ namespace System.Diagnostics
                         SetSpecialSourceRegValues(sourceKey, sourceData);
                     }
                 }
-
                 finally
                 {
                     baseKey?.Close();
@@ -391,7 +390,6 @@ namespace System.Diagnostics
                     sourceKey?.Close();
                 }
             }
-
             finally
             {
                 mutex?.ReleaseMutex();
@@ -449,7 +447,6 @@ namespace System.Diagnostics
                         {
                             logToClear.Clear();
                         }
-
                         finally
                         {
                             logToClear.Close();
@@ -474,13 +471,11 @@ namespace System.Diagnostics
                     // now delete the registry entry
                     eventlogkey.DeleteSubKeyTree(logName);
                 }
-
                 finally
                 {
                     eventlogkey?.Close();
                 }
             }
-
             finally
             {
                 mutex?.ReleaseMutex();
@@ -550,13 +545,11 @@ namespace System.Diagnostics
                     key = FindSourceRegistration(source, machineName, false);
                     key.DeleteSubKeyTree(source);
                 }
-
                 finally
                 {
                     key?.Close();
                 }
             }
-
             finally
             {
                 mutex?.ReleaseMutex();
@@ -601,7 +594,6 @@ namespace System.Diagnostics
                 logKey = eventkey.OpenSubKey(logName, false); // try to find log file key immediately.
                 return (logKey != null);
             }
-
             finally
             {
                 eventkey?.Close();
@@ -711,7 +703,6 @@ namespace System.Diagnostics
                             )
                         );
                 }
-
                 finally
                 {
                     eventkey?.Close();
@@ -752,7 +743,6 @@ namespace System.Diagnostics
                 // but you can create your own if you want.
                 logNames = eventkey.GetSubKeyNames();
             }
-
             finally
             {
                 eventkey?.Close();
@@ -800,7 +790,6 @@ namespace System.Diagnostics
                 if (lmkey != null)
                     return lmkey.OpenSubKey(EventLogKey, writable);
             }
-
             finally
             {
                 lmkey?.Close();

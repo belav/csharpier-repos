@@ -4941,7 +4941,6 @@ namespace System.Tests
                     )
                     .Dispose();
             }
-
             finally
             {
                 try
@@ -5230,7 +5229,6 @@ namespace System.Tests
                 Assert.Equal(tz.StandardName, localtz.StandardName);
                 Assert.Equal(tz.DisplayName, localtz.DisplayName);
             }
-
             finally
             {
                 TimeZoneInfo.ClearCachedData();

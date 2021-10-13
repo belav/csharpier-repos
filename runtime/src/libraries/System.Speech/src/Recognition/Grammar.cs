@@ -501,7 +501,6 @@ namespace System.Speech.Recognition
                     {
                         return new Grammar(onInitParameter, stream, ruleName);
                     }
-
                     finally
                     {
                         s_resourceLoader.UnloadFile(localPath);

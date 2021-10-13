@@ -311,7 +311,6 @@ namespace Microsoft.NET.HostModel.AppHost
                             linkEdit->vmsize = linkEdit->filesize;
                         }
                     }
-
                     finally
                     {
                         if (file != null)
@@ -446,7 +445,6 @@ namespace Microsoft.NET.HostModel.AppHost
                         linkEdit->filesize = fileLength - linkEdit->fileoff;
                         linkEdit->vmsize = linkEdit->filesize;
                     }
-
                     finally
                     {
                         if (file != null)

@@ -932,7 +932,6 @@ namespace System.DirectoryServices.Protocols
                             ref messageID
                         );
                     }
-
                     finally
                     {
                         // Revert back.
@@ -955,7 +954,6 @@ namespace System.DirectoryServices.Protocols
 
                 return error;
             }
-
             finally
             {
                 GC.KeepAlive(modifications);
@@ -1903,7 +1901,6 @@ namespace System.DirectoryServices.Protocols
                         error = resultError;
                     }
                 }
-
                 finally
                 {
                     if (requestName != IntPtr.Zero)
@@ -2055,7 +2052,6 @@ namespace System.DirectoryServices.Protocols
 
                 return resultError;
             }
-
             finally
             {
                 if (dn != IntPtr.Zero)
@@ -2131,7 +2127,6 @@ namespace System.DirectoryServices.Protocols
 
                 return resultEntry;
             }
-
             finally
             {
                 if (dn != IntPtr.Zero)
@@ -2181,7 +2176,6 @@ namespace System.DirectoryServices.Protocols
                     }
                 }
             }
-
             finally
             {
                 if (valuesArray != IntPtr.Zero)
@@ -2233,7 +2227,6 @@ namespace System.DirectoryServices.Protocols
                     }
                 }
             }
-
             finally
             {
                 if (referenceArray != IntPtr.Zero)

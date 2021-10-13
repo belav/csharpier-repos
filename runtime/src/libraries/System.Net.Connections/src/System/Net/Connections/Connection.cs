@@ -75,7 +75,6 @@ namespace System.Net.Connections
 
                 return new DuplexPipeStream(pipe);
             }
-
             finally
             {
                 _initializing = false;
@@ -105,7 +104,6 @@ namespace System.Net.Connections
 
                 return new DuplexStreamPipe(stream);
             }
-
             finally
             {
                 _initializing = false;

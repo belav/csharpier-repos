@@ -862,7 +862,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 DocumentationCommentIDVisitor.Instance.Visit(this, builder);
                 return builder.Length == 0 ? null : builder.ToString();
             }
-
             finally
             {
                 pool.Free();

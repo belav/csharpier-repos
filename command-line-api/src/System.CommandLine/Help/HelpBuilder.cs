@@ -274,7 +274,6 @@ namespace System.CommandLine.Help
 
                 return sb.ToString();
             }
-
             finally
             {
                 StringBuilderPool.Default.ReturnToPool(sb);

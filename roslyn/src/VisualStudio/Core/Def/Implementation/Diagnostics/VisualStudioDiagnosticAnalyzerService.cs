@@ -266,7 +266,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                             // We explicitly fetch diagnostics for such projects and report these as "Host" diagnostics.
                             HandleProjectsWithDisabledAnalysis();
                         }
-
                         finally
                         {
                             statusBarUpdater?.Dispose();

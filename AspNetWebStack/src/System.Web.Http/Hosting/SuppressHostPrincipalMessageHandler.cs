@@ -42,7 +42,6 @@ namespace System.Web.Http.Hosting
             {
                 return await base.SendAsync(request, cancellationToken);
             }
-
             finally
             {
                 SetCurrentPrincipal(request, previousPrincipal);

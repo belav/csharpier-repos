@@ -154,7 +154,6 @@ namespace System.Net.Http
 
                 return response;
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(buffer);

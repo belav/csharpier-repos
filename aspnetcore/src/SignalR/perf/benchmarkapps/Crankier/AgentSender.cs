@@ -53,7 +53,6 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                 );
                 await _outputStreamWriter.FlushAsync();
             }
-
             finally
             {
                 _lock.Release();

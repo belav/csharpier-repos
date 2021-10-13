@@ -81,7 +81,6 @@ namespace System.Threading.Tasks
             {
                 task.ExecuteEntryUnsafe(threadPoolThread: null); // handles switching Task.Current etc.
             }
-
             finally
             {
                 // Only call NWIP() if task was previously queued

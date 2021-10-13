@@ -622,7 +622,6 @@ namespace System.Data
                     Debug.Fail("attempt to cascade unknown action: " + action.ToString());
                 }
             }
-
             finally
             {
                 row._inCascade = false;

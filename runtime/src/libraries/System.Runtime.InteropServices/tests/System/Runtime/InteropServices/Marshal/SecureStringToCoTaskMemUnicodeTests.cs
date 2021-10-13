@@ -41,7 +41,6 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.Equal(expected, Marshal.PtrToStringUni(ptr));
                     Assert.Equal(s, Marshal.PtrToStringUni(ptr, s.Length));
                 }
-
                 finally
                 {
                     Marshal.ZeroFreeCoTaskMemUnicode(ptr);

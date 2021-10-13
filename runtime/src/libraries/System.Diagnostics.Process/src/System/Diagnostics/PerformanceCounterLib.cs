@@ -207,7 +207,6 @@ namespace System.Diagnostics
                     }
                 }
             }
-
             finally
             {
                 libraryKey.Dispose();

@@ -275,7 +275,6 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                     await fileBufferingWriteStream.DrainBufferAsync(response.BodyWriter);
                 }
             }
-
             finally
             {
                 if (fileBufferingWriteStream != null)

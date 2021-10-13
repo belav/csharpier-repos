@@ -149,7 +149,6 @@ namespace System.Net.NetworkInformation
 
                 return interfaces;
             }
-
             finally
             {
                 Marshal.FreeHGlobal(globalMemory);

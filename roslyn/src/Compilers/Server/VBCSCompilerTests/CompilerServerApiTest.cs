@@ -149,7 +149,6 @@ class Hello
                     );
                     Assert.Equal(CommonCompiler.Failed, result);
                 }
-
                 finally
                 {
                     mutex.ReleaseMutex();

@@ -318,7 +318,6 @@ namespace System.Net
                 WebRequest request;
                 return DownloadDataInternal(address, out request);
             }
-
             finally
             {
                 EndOperation();
@@ -473,7 +472,6 @@ namespace System.Net
                 WebRequest request;
                 return UploadDataInternal(address, method, data, out request);
             }
-
             finally
             {
                 EndOperation();
@@ -748,7 +746,6 @@ namespace System.Net
                 byte[] responseData = UploadDataInternal(address, method, requestData, out request);
                 return GetStringUsingEncoding(request, responseData);
             }
-
             finally
             {
                 EndOperation();
@@ -768,7 +765,6 @@ namespace System.Net
                 byte[] data = DownloadDataInternal(address, out request);
                 return GetStringUsingEncoding(request, data);
             }
-
             finally
             {
                 EndOperation();
@@ -2324,7 +2320,6 @@ namespace System.Net
                 {
                     unregisterHandler(this, handler);
                 }
-
                 finally
                 {
                     if (e.Error != null)
@@ -2448,7 +2443,6 @@ namespace System.Net
                         _webClient.GetWebResponse(_request).Dispose();
                     }
                 }
-
                 finally
                 {
                     base.Dispose(disposing);

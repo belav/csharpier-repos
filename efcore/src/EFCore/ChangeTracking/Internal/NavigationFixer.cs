@@ -78,7 +78,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     }
                 }
             }
-
             finally
             {
                 _danglingJoinEntities?.Clear();
@@ -303,7 +302,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 entry.SetIsLoaded(navigation, loaded: newValue != null);
             }
-
             finally
             {
                 _inFixup = false;
@@ -400,7 +398,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                         entry.RemoveFromCollectionSnapshot(navigationBase, oldValue);
                     }
-
                     finally
                     {
                         _inFixup = false;
@@ -474,7 +471,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                             SetNavigation(newTargetEntry, inverse, entry, fromQuery: false);
                         }
                     }
-
                     finally
                     {
                         _inFixup = false;
@@ -730,7 +726,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 entry.SetRelationshipSnapshotValue(property, newValue);
             }
-
             finally
             {
                 _inFixup = false;
@@ -759,7 +754,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
                 InitialFixup(entry, fromQuery: true);
             }
-
             finally
             {
                 _inFixup = false;
@@ -798,7 +792,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     DeleteFixup(entry);
                 }
             }
-
             finally
             {
                 _inFixup = false;
@@ -1783,7 +1776,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                 {
                     entry.SetProperty(navigation, entity, fromQuery);
                 }
-
                 finally
                 {
                     _changeDetector.Resume();
@@ -1810,7 +1802,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                         entry.AddToCollectionSnapshot(navigation, value.Entity);
                     }
                 }
-
                 finally
                 {
                     _changeDetector.Resume();
@@ -1832,7 +1823,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     entry.RemoveFromCollectionSnapshot(navigation, value.Entity);
                 }
             }
-
             finally
             {
                 _changeDetector.Resume();

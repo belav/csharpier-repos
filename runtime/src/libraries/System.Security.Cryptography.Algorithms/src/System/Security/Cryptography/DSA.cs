@@ -1012,7 +1012,6 @@ namespace System.Security.Cryptography
                 returnArray = true;
                 return ret;
             }
-
             finally
             {
                 Array.Clear(array, 0, data.Length);
@@ -1108,7 +1107,6 @@ namespace System.Security.Cryptography
                 {
                     return DSAKeyFormatHelper.WritePkcs8(dsaParameters);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(dsaParameters.X);
@@ -1141,7 +1139,6 @@ namespace System.Security.Cryptography
                 {
                     ImportParameters(ret);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ret.X);
@@ -1170,7 +1167,6 @@ namespace System.Security.Cryptography
                 {
                     ImportParameters(ret);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(ret.X);
@@ -1193,7 +1189,6 @@ namespace System.Security.Cryptography
                 {
                     ImportParameters(key);
                 }
-
                 finally
                 {
                     CryptographicOperations.ZeroMemory(key.X);

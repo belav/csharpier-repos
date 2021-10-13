@@ -104,7 +104,6 @@ namespace Test
                     uint local9 = 1u;
                     throw new InvalidOperationException();
                 }
-
                 finally
                 {
                     double local6 = 61.0;

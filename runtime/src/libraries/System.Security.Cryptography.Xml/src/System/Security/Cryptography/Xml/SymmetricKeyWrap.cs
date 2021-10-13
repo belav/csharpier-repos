@@ -83,7 +83,6 @@ namespace System.Security.Cryptography.Xml
 
                 return enc2.TransformFinalBlock(temp2, 0, temp2.Length);
             }
-
             finally
             {
                 enc2?.Dispose();
@@ -152,7 +151,6 @@ namespace System.Security.Cryptography.Xml
                     return rgbWrappedKeyData;
                 }
             }
-
             finally
             {
                 dec2?.Dispose();
@@ -223,7 +221,6 @@ namespace System.Security.Cryptography.Xml
                 Buffer.BlockCopy(rgbA, 0, rgbOutput, 0, 8);
                 return rgbOutput;
             }
-
             finally
             {
                 enc?.Dispose();
@@ -297,7 +294,6 @@ namespace System.Security.Cryptography.Xml
                         throw new CryptographicException(SR.Cryptography_Xml_BadWrappedKeySize);
                 return rgbOutput;
             }
-
             finally
             {
                 dec?.Dispose();

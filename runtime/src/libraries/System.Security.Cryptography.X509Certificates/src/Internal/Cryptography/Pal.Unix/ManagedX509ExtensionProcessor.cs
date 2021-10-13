@@ -264,7 +264,6 @@ namespace Internal.Cryptography.Pal
 
                 return SHA1.HashData(rented.AsSpan(0, bytesWritten));
             }
-
             finally
             {
                 CryptoPool.Return(rented, clearSize: 0); // SubjectPublicKeyInfo is not sensitive.

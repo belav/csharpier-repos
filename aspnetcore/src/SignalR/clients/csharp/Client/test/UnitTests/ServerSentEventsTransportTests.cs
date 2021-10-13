@@ -79,7 +79,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await sseTransport.Running.DefaultTimeout();
                 }
             }
-
             finally
             {
                 copyToAsyncTcs.SetResult();
@@ -153,7 +152,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     var message = await sseTransport.Input.ReadSingleAsync().DefaultTimeout();
                     Assert.StartsWith("3:abc", Encoding.ASCII.GetString(message));
                 }
-
                 finally
                 {
                     await sseTransport.StopAsync().DefaultTimeout();

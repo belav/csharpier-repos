@@ -86,7 +86,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 // Using OrTimeout here will hide any timeout issues in the test :(.
                 await body(connection);
             }
-
             finally
             {
                 await connection.DisposeAsync().DefaultTimeout();

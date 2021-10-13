@@ -723,7 +723,6 @@ namespace System.Data
                         _enforceConstraints = value;
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -775,7 +774,6 @@ namespace System.Data
                     FailedEnableConstraints();
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -954,7 +952,6 @@ namespace System.Data
                         _cultureUserSet = true;
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1136,7 +1133,6 @@ namespace System.Data
                     Tables[i].AcceptChanges();
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1199,7 +1195,6 @@ namespace System.Data
                 }
                 EnforceConstraints = fEnforce;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1310,7 +1305,6 @@ namespace System.Data
 
                 return ds;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1345,7 +1339,6 @@ namespace System.Data
 
                 return dsNew;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1476,7 +1469,6 @@ namespace System.Data
                 }
                 return dsNew;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1579,7 +1571,6 @@ namespace System.Data
                 new XmlDataTreeWriter(this).Save(w, false);
                 return strWriter.ToString();
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1601,7 +1592,6 @@ namespace System.Data
 
                 return strWriter.ToString();
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1680,7 +1670,6 @@ namespace System.Data
                 }
                 return false;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1721,7 +1710,6 @@ namespace System.Data
 
                 InferSchema(xdoc, nsArray, XmlReadMode.InferSchema);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -1764,7 +1752,6 @@ namespace System.Data
             {
                 InferXmlSchema(xr, nsArray);
             }
-
             finally
             {
                 xr.Close();
@@ -1917,7 +1904,6 @@ namespace System.Data
                     InferSchema(xdoc, null, XmlReadMode.Auto);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -2054,7 +2040,6 @@ namespace System.Data
             {
                 ReadXmlSchema(xr, false);
             }
-
             finally
             {
                 xr.Close();
@@ -2138,7 +2123,6 @@ namespace System.Data
                 WriteXmlSchema(xw, schemaFormat, multipleTargetConverter);
                 xw.WriteEndDocument();
             }
-
             finally
             {
                 xw.Close();
@@ -2212,7 +2196,6 @@ namespace System.Data
                     treeGen.Save(this, null, writer, false, multipleTargetConverter);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -2517,7 +2500,6 @@ namespace System.Data
                                 {
                                     xmlload.LoadData(xdoc);
                                 }
-
                                 finally
                                 {
                                     _fTopLevelTable = initfTopLevelTable; // this is not for inference, we have schema and we were skipping
@@ -2540,7 +2522,6 @@ namespace System.Data
                                 {
                                     xmlload.LoadData(xdoc);
                                 }
-
                                 finally
                                 {
                                     xmlload.FromInference = false;
@@ -2554,13 +2535,11 @@ namespace System.Data
 
                     return ret;
                 }
-
                 finally
                 {
                     rowDiffIdUsage.Cleanup();
                 }
             }
-
             finally
             {
                 restrictedScope?.Dispose();
@@ -2609,7 +2588,6 @@ namespace System.Data
             {
                 return ReadXml(xr, false);
             }
-
             finally
             {
                 xr.Close();
@@ -2649,13 +2627,11 @@ namespace System.Data
                 {
                     schema.LoadSchema(schemaSet, this);
                 }
-
                 finally
                 {
                     schema.FromInference = false; // this is always false if you are not calling fron inference
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -2829,7 +2805,6 @@ namespace System.Data
                 }
                 EnforceConstraints = fEnforce;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3146,7 +3121,6 @@ namespace System.Data
                             {
                                 xmlload.LoadData(xdoc);
                             }
-
                             finally
                             {
                                 xmlload.FromInference = false;
@@ -3156,14 +3130,12 @@ namespace System.Data
 
                     return ret;
                 }
-
                 finally
                 {
                     // prepare and cleanup rowDiffId hashtable
                     rowDiffIdUsage.Cleanup();
                 }
             }
-
             finally
             {
                 restictedScope?.Dispose();
@@ -3223,7 +3195,6 @@ namespace System.Data
             {
                 return ReadXml(xr, mode, false);
             }
-
             finally
             {
                 xr.Close();
@@ -3287,7 +3258,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3319,7 +3289,6 @@ namespace System.Data
                 }
                 xw.WriteEndDocument();
             }
-
             finally
             {
                 xw.Close();
@@ -3349,7 +3318,6 @@ namespace System.Data
             {
                 Merge(dataSet, false, MissingSchemaAction.Add);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3373,7 +3341,6 @@ namespace System.Data
             {
                 Merge(dataSet, preserveChanges, MissingSchemaAction.Add);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3419,7 +3386,6 @@ namespace System.Data
                         throw ADP.InvalidMissingSchemaAction(missingSchemaAction);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3441,7 +3407,6 @@ namespace System.Data
             {
                 Merge(table, false, MissingSchemaAction.Add);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3486,7 +3451,6 @@ namespace System.Data
                         throw ADP.InvalidMissingSchemaAction(missingSchemaAction);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3503,7 +3467,6 @@ namespace System.Data
             {
                 Merge(rows, false, MissingSchemaAction.Add);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3543,7 +3506,6 @@ namespace System.Data
                         throw ADP.InvalidMissingSchemaAction(missingSchemaAction);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3671,7 +3633,6 @@ namespace System.Data
                 }
                 EnforceConstraints = fEnforce;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3710,7 +3671,6 @@ namespace System.Data
                 Relations.Clear();
                 Tables.Clear();
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3757,7 +3717,6 @@ namespace System.Data
                 }
                 return true;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3803,7 +3762,6 @@ namespace System.Data
                 }
                 return true;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -4050,7 +4008,6 @@ namespace System.Data
                     reader.Close();
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -4115,7 +4072,6 @@ namespace System.Data
 
                 return new DataTableReader(dataTables);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);

@@ -1315,7 +1315,6 @@ namespace System.ComponentModel
                             }
                         }
                     }
-
                     finally
                     {
                         // Now notify the change service that the change was successful.

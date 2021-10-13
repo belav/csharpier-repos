@@ -78,7 +78,6 @@ namespace Internal.Cryptography
                     }
                 }
             }
-
             finally
             {
                 // All of the return null paths might have errors that we are ignoring.

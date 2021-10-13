@@ -262,7 +262,6 @@ namespace System.DirectoryServices.Protocols
                     Marshal.Copy(binaryValue.bv_val, encodingResult, 0, binaryValue.bv_len);
                 }
             }
-
             finally
             {
                 if (flattenptr != IntPtr.Zero)
@@ -313,7 +312,6 @@ namespace System.DirectoryServices.Protocols
             {
                 berElement = new SafeBerHandle(berValue);
             }
-
             finally
             {
                 if (berValue.bv_val != IntPtr.Zero)
@@ -507,7 +505,6 @@ namespace System.DirectoryServices.Protocols
                 else
                     Debug.WriteLine("ber_scanf for format character 'O' failed");
             }
-
             finally
             {
                 if (result != IntPtr.Zero)
@@ -570,7 +567,6 @@ namespace System.DirectoryServices.Protocols
 
                 error = BerPal.PrintBerArray(berElement, new string(fmt, 1), berValArray);
             }
-
             finally
             {
                 if (berValArray != IntPtr.Zero)
@@ -645,7 +641,6 @@ namespace System.DirectoryServices.Protocols
                 else
                     Debug.WriteLine("ber_scanf for format character 'V' failed");
             }
-
             finally
             {
                 if (ptrResult != IntPtr.Zero)

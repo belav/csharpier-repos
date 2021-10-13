@@ -95,7 +95,6 @@ namespace System.Net
                 nativeErrorCode = 0;
                 return SocketError.Success;
             }
-
             finally
             {
                 if (result != null)
@@ -290,7 +289,6 @@ namespace System.Net
                     state.SetResult(ExceptionDispatchInfo.SetCurrentStackTrace(ex));
                 }
             }
-
             finally
             {
                 GetAddrInfoExContext.FreeContext(context);

@@ -146,7 +146,6 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     (ModelBinderErrorMessageProvider)DummyErrorSelector
                 );
             }
-
             finally
             {
                 wrapper.Reset();
@@ -191,7 +190,6 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     (ModelBinderErrorMessageProvider)DummyErrorSelector
                 );
             }
-
             finally
             {
                 wrapper.Reset();

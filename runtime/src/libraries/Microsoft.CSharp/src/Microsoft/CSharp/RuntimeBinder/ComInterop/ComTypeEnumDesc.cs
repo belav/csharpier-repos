@@ -45,7 +45,6 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                         );
                     }
                 }
-
                 finally
                 {
                     typeInfo.ReleaseVarDesc(p);

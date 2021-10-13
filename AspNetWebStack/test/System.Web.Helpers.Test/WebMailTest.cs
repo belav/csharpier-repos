@@ -243,7 +243,6 @@ namespace System.Web.Helpers.Test
                 Assert.Contains("header1", message.Headers.AllKeys);
                 Assert.Single(message.Attachments);
             }
-
             finally
             {
                 try

@@ -2282,7 +2282,6 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return null;
             }
-
             finally
             {
                 inParametersMatchedWithArgs?.Free();

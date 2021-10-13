@@ -75,7 +75,6 @@ class BindHandle1
                 }
             }
         }
-
         finally
         {
             if (File.Exists("test.txt"))

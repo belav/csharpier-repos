@@ -377,7 +377,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                         // Mark build as complete.
                         OnBuildProgressChanged(inProgressState, BuildProgress.Done);
                     }
-
                     finally
                     {
                         await _postBuildAndErrorListRefreshTaskQueue.LastScheduledTask.ConfigureAwait(

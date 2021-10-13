@@ -48,7 +48,6 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                         await application.ProcessRequestAsync(context);
                         await CompleteAsync();
                     }
-
                     finally
                     {
                         await OnCompleted();

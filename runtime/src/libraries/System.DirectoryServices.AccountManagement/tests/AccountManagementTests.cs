@@ -112,7 +112,6 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     ValidateUserUsingPrincipal(context, p3);
                 }
             }
-
             finally
             {
                 DeleteUser(u1.Name);
@@ -152,7 +151,6 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     ValidateGroupUsingPrincipal(context, p3);
                 }
             }
-
             finally
             {
                 DeleteGroup(gd1.Name);
@@ -202,7 +200,6 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     Assert.False(group.Members.Contains(user));
                 }
             }
-
             finally
             {
                 DeleteUser(u1.Name);
@@ -257,7 +254,6 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     }
                 }
             }
-
             finally
             {
                 DeleteUser(u1.Name);
@@ -329,7 +325,6 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     }
                 }
             }
-
             finally
             {
                 DeleteUser(u1.Name);
@@ -406,7 +401,6 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     }
                 }
             }
-
             finally
             {
                 DeleteUser(u1.Name);
@@ -439,7 +433,6 @@ namespace System.DirectoryServices.AccountManagement.Tests
                     );
                 }
             }
-
             finally
             {
                 DeleteUser(u1.Name);

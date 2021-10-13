@@ -55,7 +55,6 @@ namespace System.Reflection.Internal.Tests
 
                 Assert.Throws<IOException>(() => s.CopyTo(buffer, 6));
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)buffer);
@@ -87,7 +86,6 @@ namespace System.Reflection.Internal.Tests
 
                 Assert.Equal(a, ReadBuffer(buffer, bufferSize));
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)buffer);
@@ -170,7 +168,6 @@ namespace System.Reflection.Internal.Tests
 
                 Assert.Equal(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7 }, ReadBuffer(buffer, bufferSize));
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)buffer);

@@ -223,7 +223,6 @@ namespace System.Reflection.Metadata
                     // We read all we need, the stream is going to be closed.
                 }
             }
-
             finally
             {
                 if (closeStream && (options & MetadataStreamOptions.LeaveOpen) == 0)

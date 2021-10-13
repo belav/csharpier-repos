@@ -119,7 +119,6 @@ namespace System.Drawing.Imaging
 
                 imageCodecs = ImageCodecInfo.ConvertFromMemory(memory, numDecoders);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);
@@ -154,7 +153,6 @@ namespace System.Drawing.Imaging
 
                 imageCodecs = ImageCodecInfo.ConvertFromMemory(memory, numEncoders);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(memory);

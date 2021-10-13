@@ -468,7 +468,6 @@ namespace System.Text.RegularExpressions
 #endif
                 return match;
             }
-
             finally
             {
                 ReturnRunner(runner);
@@ -497,7 +496,6 @@ namespace System.Text.RegularExpressions
                     internalMatchTimeout
                 );
             }
-
             finally
             {
                 ReturnRunner(runner);

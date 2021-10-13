@@ -230,7 +230,6 @@ public class AA<TA, TB, TC, TD, TE, TF>
                 }
                 param1 = (param1 = param1);
             }
-
             finally { }
             local8 = local8;
         } while (((bool)(((object)(local7)))));
@@ -303,10 +302,8 @@ public class AA<TA, TB, TC, TD, TE, TF>
                     new sbyte[((uint)(param2)), (param3 += param3), 67u, 116u][]
                 );
                 try { }
-
                 finally { }
             }
-
             finally { }
             for (App.m_lFwd10 = (60 * param3); ((bool)(((object)(local10)))); local11--) { }
             local12 = (local12 = (local12 = local12));
@@ -527,7 +524,6 @@ public struct BB
                             try { }
                             catch (Exception) { }
                         }
-
                         finally { }
                     }
                 }

@@ -131,7 +131,6 @@ namespace System.Diagnostics.Tests
                 // FileDescription should be null in the local kernelbase.dll
                 Assert.Null(fvi.FileDescription);
             }
-
             finally
             {
                 File.Delete("kernelbase.dll");

@@ -401,7 +401,6 @@ namespace Microsoft.EntityFrameworkCore
 
                     DbContextDependencies.InfrastructureLogger.ContextInitialized(this, options);
                 }
-
                 finally
                 {
                     _initializing = false;

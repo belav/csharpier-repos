@@ -2065,7 +2065,6 @@ namespace System.Runtime.CompilerServices
                         filterSpanWithinTree
                     );
                 }
-
                 finally
                 {
                     if (ensureEnglishUICulture)

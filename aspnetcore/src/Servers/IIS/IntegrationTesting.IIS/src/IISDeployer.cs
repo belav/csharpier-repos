@@ -230,7 +230,6 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     }
                 }
             }
-
             finally
             {
                 if (File.Exists(_debugLogFile))
@@ -488,7 +487,6 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
                     }
                 );
             }
-
             finally
             {
                 // Undo redirection.config changes unconditionally

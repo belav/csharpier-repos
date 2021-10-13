@@ -127,7 +127,6 @@ namespace System.ComponentModel.Composition.Hosting
                     atomicComposition.AddCompleteAction(() => compositionLockHolder!.Dispose());
                 }
             }
-
             finally
             {
                 // We haven't updated the queues, so we can release the lock now
@@ -460,7 +459,6 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 result = result.MergeResult(TrySatisfyImportsStateMachine(partManager, part));
             }
-
             finally
             {
                 _recursionStateStack.Pop();

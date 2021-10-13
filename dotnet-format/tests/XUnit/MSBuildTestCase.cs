@@ -68,7 +68,6 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
                 );
                 return await runner.RunAsync();
             }
-
             finally
             {
                 MSBuildWorkspaceLoader.Guard.Release();

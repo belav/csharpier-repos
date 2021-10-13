@@ -273,7 +273,6 @@ namespace System.IO.Compression
                     return true;
                 }
             }
-
             finally
             {
                 if (ms != null)

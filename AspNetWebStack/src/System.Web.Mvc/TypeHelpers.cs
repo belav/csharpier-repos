@@ -90,7 +90,6 @@ namespace System.Web.Mvc
                     return result;
                 }
             }
-
             finally
             {
                 _tryGetValueDelegateCacheLock.ExitReadLock();
@@ -129,7 +128,6 @@ namespace System.Web.Mvc
             {
                 _tryGetValueDelegateCache[targetType] = result;
             }
-
             finally
             {
                 _tryGetValueDelegateCacheLock.ExitWriteLock();

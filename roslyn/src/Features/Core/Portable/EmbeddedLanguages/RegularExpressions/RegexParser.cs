@@ -253,7 +253,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 StackGuard.EnsureSufficientExecutionStack(_recursionDepth);
                 return ParseAlternatingSequencesWorker(consumeCloseParen);
             }
-
             finally
             {
                 _recursionDepth--;

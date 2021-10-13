@@ -86,7 +86,6 @@ namespace Example
                     return writer.ToString();
                 }
             }
-
             finally
             {
                 Console.SetOut(existingOut);

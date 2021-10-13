@@ -65,7 +65,6 @@ namespace System.SpanTests
                             )
                         );
                     }
-
                     finally
                     {
                         AllocationHelper.ReleaseNative(ref memBlock);
@@ -111,7 +110,6 @@ namespace System.SpanTests
                         slice = span.Slice(GuidOneGiBLimit).Slice(1).Slice(GuidOneGiBLimit);
                         Assert.Equal(guid, slice[0]);
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(memory);
@@ -163,7 +161,6 @@ namespace System.SpanTests
                         slice = span.Slice(GuidOneGiBLimit).Slice(1).Slice(GuidOneGiBLimit);
                         Assert.Equal(guid, slice[0]);
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(memory);

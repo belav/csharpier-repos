@@ -661,7 +661,6 @@ namespace System.DirectoryServices
                     break;
                 }
             }
-
             finally
             {
                 searchResult = null;
@@ -947,7 +946,6 @@ namespace System.DirectoryServices
                         Marshal.StructureToPtr(vlvValue, vlvPtr, false);
                         Marshal.Copy(vlvPtr, vlvBytes, 0, vlvBytes.Length);
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(vlvPtr);
@@ -979,7 +977,6 @@ namespace System.DirectoryServices
 
                 DoSetSearchPrefs(adsSearch, prefs);
             }
-
             finally
             {
                 if (ptrToFree != (IntPtr)0)
@@ -1050,7 +1047,6 @@ namespace System.DirectoryServices
                     tempPtr = IntPtr.Add(tempPtr, structSize);
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(ptr);

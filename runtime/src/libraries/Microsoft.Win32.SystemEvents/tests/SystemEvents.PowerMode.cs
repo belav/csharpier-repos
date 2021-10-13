@@ -45,7 +45,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 Assert.NotNull(args);
                 Assert.Equal(powerMode, args.Mode);
             }
-
             finally
             {
                 SystemEvents.PowerModeChanged -= changedHandler;
@@ -77,7 +76,6 @@ namespace Microsoft.Win32.SystemEventsTests
                 SendMessage(pmEvent);
                 Assert.False(changed);
             }
-
             finally
             {
                 SystemEvents.PowerModeChanged -= changedHandler;

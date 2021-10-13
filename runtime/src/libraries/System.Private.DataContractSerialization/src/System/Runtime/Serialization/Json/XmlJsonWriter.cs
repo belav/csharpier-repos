@@ -211,7 +211,6 @@ namespace System.Runtime.Serialization.Json
                 {
                     WriteEndDocument();
                 }
-
                 finally
                 {
                     try
@@ -219,7 +218,6 @@ namespace System.Runtime.Serialization.Json
                         _nodeWriter.Flush();
                         _nodeWriter.Close();
                     }
-
                     finally
                     {
                         _writeState = WriteState.Closed;

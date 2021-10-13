@@ -1768,7 +1768,6 @@ namespace System
                         }
                     }
                 }
-
                 finally { }
             }
             catch (Exception)

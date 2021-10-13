@@ -310,7 +310,6 @@ namespace System.Web.WebPages
                 // Execute the developer-written code of the WebPage
                 Execute();
             }
-
             finally
             {
                 TemplateStack.Pop(Context);
@@ -479,7 +478,6 @@ namespace System.Web.WebPages
 
                             body();
                         }
-
                         finally
                         {
                             if (pushed)

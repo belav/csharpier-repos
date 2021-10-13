@@ -115,7 +115,6 @@ namespace System.Tests
 
                 Assert.Equal(value, Environment.GetEnvironmentVariable(variable));
             }
-
             finally
             {
                 SetEnvironmentVariableWithPInvoke(variable, null);
@@ -161,7 +160,6 @@ namespace System.Tests
                     Environment.GetEnvironmentVariable("ThISISATeSTENVIRoNMEnTVaRIABLE")
                 );
             }
-
             finally
             {
                 Environment.SetEnvironmentVariable("ThisIsATestEnvironmentVariable", null);
@@ -195,7 +193,6 @@ namespace System.Tests
                 Assert.Equal(envVar1, Environment.GetEnvironmentVariable(envVar1));
                 Assert.Equal(envVar2, Environment.GetEnvironmentVariable(envVar2));
             }
-
             finally
             {
                 // Clear the variables we just set
@@ -349,7 +346,6 @@ namespace System.Tests
                     Assert.Equal(value, results[key]);
                 }
             }
-
             finally
             {
                 if (lookForSetValue)

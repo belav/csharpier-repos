@@ -1746,7 +1746,6 @@ namespace System.Tests
                     gcHandle.AddrOfPinnedObject()
                 );
             }
-
             finally
             {
                 gcHandle.Free();
@@ -2649,7 +2648,6 @@ namespace System.Tests
                     pAnsiStr = Marshal.StringToHGlobalAnsi(" ");
                     return ((byte*)pAnsiStr)[0] == (byte)' ' && ((byte*)pAnsiStr)[1] == (byte)'\0';
                 }
-
                 finally
                 {
                     if (pAnsiStr != IntPtr.Zero)

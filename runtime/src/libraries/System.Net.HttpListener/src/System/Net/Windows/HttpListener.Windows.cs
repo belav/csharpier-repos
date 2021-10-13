@@ -1316,7 +1316,6 @@ namespace System.Net
                                             }
                                         }
                                     }
-
                                     finally
                                     {
                                         if (userContext != null)
@@ -1590,7 +1589,6 @@ namespace System.Net
                         context.CloseContext();
                     }
                 }
-
                 finally
                 {
                     // Check if the connection got deleted while in this method, and clear out the hashtables if it did.
@@ -2117,7 +2115,6 @@ namespace System.Net
                             null
                         );
                     }
-
                     finally
                     {
                         if (headersArrayHandle.IsAllocated)

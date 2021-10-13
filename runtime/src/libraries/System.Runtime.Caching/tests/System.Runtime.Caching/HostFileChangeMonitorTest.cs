@@ -261,7 +261,6 @@ namespace MonoTests.System.Runtime.Caching
                 Assert.Equal(sb.ToString(), monitor.UniqueId);
                 monitor.Dispose();
             }
-
             finally
             {
                 CleanupMonitoring(setup);

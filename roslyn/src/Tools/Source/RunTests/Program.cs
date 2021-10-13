@@ -93,7 +93,6 @@ namespace RunTests
                 CheckTotalDumpFilesSize();
                 return result;
             }
-
             finally
             {
                 DisableRegistryDumpCollection();

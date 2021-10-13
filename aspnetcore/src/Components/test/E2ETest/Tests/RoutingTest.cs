@@ -178,7 +178,6 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
                 Browser.Equal(2, () => Browser.WindowHandles.Count);
             }
-
             finally
             {
                 // Leaving the ctrl key up
@@ -210,7 +209,6 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
 
                 Browser.Equal(2, () => Browser.WindowHandles.Count);
             }
-
             finally
             {
                 // Closing newly opened windows if a new one was opened

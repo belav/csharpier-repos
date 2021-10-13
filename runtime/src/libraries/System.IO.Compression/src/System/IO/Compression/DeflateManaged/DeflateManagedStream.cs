@@ -211,7 +211,6 @@ namespace System.IO.Compression
 
                 return ReadAsyncCore(readTask, buffer, cancellationToken);
             }
-
             finally
             {
                 // if we haven't started any async work, decrement the counter to end the transaction
@@ -265,7 +264,6 @@ namespace System.IO.Compression
                     }
                 }
             }
-
             finally
             {
                 Interlocked.Decrement(ref _asyncOperations);
@@ -326,7 +324,6 @@ namespace System.IO.Compression
             {
                 PurgeBuffers(disposing);
             }
-
             finally
             {
                 // Close the underlying stream even if PurgeBuffers threw.
@@ -337,7 +334,6 @@ namespace System.IO.Compression
                     if (disposing && _stream != null)
                         _stream.Dispose();
                 }
-
                 finally
                 {
                     _stream = null!;
@@ -346,7 +342,6 @@ namespace System.IO.Compression
                     {
                         _inflater?.Dispose();
                     }
-
                     finally
                     {
                         _inflater = null!;

@@ -292,7 +292,6 @@ namespace System.CodeDom.Compiler
             {
                 GenerateType(e);
             }
-
             finally
             {
                 if (setLocal)
@@ -325,7 +324,6 @@ namespace System.CodeDom.Compiler
             {
                 GenerateExpression(e);
             }
-
             finally
             {
                 if (setLocal)
@@ -365,7 +363,6 @@ namespace System.CodeDom.Compiler
                     GenerateCompileUnit(e);
                 }
             }
-
             finally
             {
                 if (setLocal)
@@ -398,7 +395,6 @@ namespace System.CodeDom.Compiler
             {
                 GenerateNamespace(e);
             }
-
             finally
             {
                 if (setLocal)
@@ -431,7 +427,6 @@ namespace System.CodeDom.Compiler
             {
                 GenerateStatement(e);
             }
-
             finally
             {
                 if (setLocal)
@@ -465,7 +460,6 @@ namespace System.CodeDom.Compiler
                 _currentClass = dummyClass;
                 GenerateTypeMember(member, dummyClass);
             }
-
             finally
             {
                 _currentClass = null;

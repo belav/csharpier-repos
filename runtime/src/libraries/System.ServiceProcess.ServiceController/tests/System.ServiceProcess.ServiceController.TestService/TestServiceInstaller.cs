@@ -150,7 +150,6 @@ namespace System.ServiceProcess.Tests
             {
                 StopService();
             }
-
             finally
             {
                 // If the service didn't stop promptly, we will get a TimeoutException.

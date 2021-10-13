@@ -411,7 +411,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                             break;
                         }
                     }
-
                     finally
                     {
                         _application.Input.AdvanceTo(buffer.End);

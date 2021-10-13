@@ -288,7 +288,6 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                     _result = await executor(_instance, arguments);
                     _logger.ExecutedHandlerMethod(_pageContext, handler, _result);
                 }
-
                 finally
                 {
                     _diagnosticListener.AfterHandlerMethod(

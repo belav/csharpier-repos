@@ -110,7 +110,6 @@ namespace System.Transactions.Tests
             {
                 body();
             }
-
             finally
             {
                 _eventWritten = null;
@@ -127,7 +126,6 @@ namespace System.Transactions.Tests
             {
                 await body().ConfigureAwait(false);
             }
-
             finally
             {
                 _eventWritten = null;

@@ -89,7 +89,6 @@ namespace System.SpanTests
                     () => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem)
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)mem);
@@ -120,7 +119,6 @@ namespace System.SpanTests
                     () => MemoryMarshal.CreateReadOnlySpanFromNullTerminated(mem)
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal((IntPtr)mem);

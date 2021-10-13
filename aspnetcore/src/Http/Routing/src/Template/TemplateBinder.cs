@@ -520,7 +520,6 @@ namespace Microsoft.AspNetCore.Routing.Template
             {
                 return TryBindValuesCore(context, acceptedValues) ? context.ToString() : null;
             }
-
             finally
             {
                 _pool.Return(context);
@@ -554,7 +553,6 @@ namespace Microsoft.AspNetCore.Routing.Template
                 result = default;
                 return false;
             }
-
             finally
             {
                 _pool.Return(context);

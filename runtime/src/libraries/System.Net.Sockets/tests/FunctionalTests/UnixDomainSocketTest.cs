@@ -84,7 +84,6 @@ namespace System.Net.Sockets.Tests
                     Assert.Null(args.ConnectByNameError);
                 }
             }
-
             finally
             {
                 server.Dispose();
@@ -133,7 +132,6 @@ namespace System.Net.Sockets.Tests
                     );
                 }
             }
-
             finally
             {
                 try
@@ -186,7 +184,6 @@ namespace System.Net.Sockets.Tests
                     }
                 }
             }
-
             finally
             {
                 try
@@ -264,7 +261,6 @@ namespace System.Net.Sockets.Tests
                     }
                 }
             }
-
             finally
             {
                 try
@@ -326,7 +322,6 @@ namespace System.Net.Sockets.Tests
                     }
                 }
             }
-
             finally
             {
                 try
@@ -421,7 +416,6 @@ namespace System.Net.Sockets.Tests
                 Assert.Equal(writeBuffer.Length, readData.Length);
                 Assert.Equal(writeBuffer, readData.ToArray());
             }
-
             finally
             {
                 try
@@ -641,7 +635,6 @@ namespace System.Net.Sockets.Tests
                     }
                 }
             }
-
             finally
             {
                 if (!abstractAddress)

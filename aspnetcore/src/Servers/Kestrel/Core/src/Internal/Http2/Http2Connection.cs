@@ -339,7 +339,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                             }
                         }
                     }
-
                     finally
                     {
                         Input.AdvanceTo(buffer.Start, buffer.End);
@@ -492,7 +491,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
                         return false;
                     }
                 }
-
                 finally
                 {
                     Input.AdvanceTo(consumed, examined);

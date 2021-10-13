@@ -25,7 +25,6 @@ public class My
         {
             throw new Exception("Hello world");
         }
-
         finally
         {
             foo(false);

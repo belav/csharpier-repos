@@ -1489,7 +1489,6 @@ namespace System.Net
                             connection.Abort(_exception);
                         }
                     }
-
                     finally
                     {
                         if (NetEventSource.Log.IsEnabled())
@@ -1502,7 +1501,6 @@ namespace System.Net
                 }
                 return prev;
             }
-
             finally
             {
                 try
@@ -1524,7 +1522,6 @@ namespace System.Net
                             writeResult.InvokeCallback();
                     }
                 }
-
                 finally
                 {
                     // The response is ready either with or without a stream

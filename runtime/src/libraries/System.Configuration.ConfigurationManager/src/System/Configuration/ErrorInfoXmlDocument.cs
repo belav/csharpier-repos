@@ -45,7 +45,6 @@ namespace System.Configuration
                 _reader = new XmlTextReader(filename) { XmlResolver = null };
                 Load(_reader);
             }
-
             finally
             {
                 if (_reader != null)
@@ -67,7 +66,6 @@ namespace System.Configuration
                 _reader = reader;
                 Load(_reader);
             }
-
             finally
             {
                 if (_reader != null)

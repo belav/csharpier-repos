@@ -68,7 +68,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
                 {
                     await ProcessSocketAsync(ws);
                 }
-
                 finally
                 {
                     Log.SocketClosed(_logger);
@@ -281,7 +280,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal.Transports
                             break;
                         }
                     }
-
                     finally
                     {
                         _connection.StopSendCancellation();

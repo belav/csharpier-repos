@@ -236,7 +236,6 @@ namespace SslStress
                         Interlocked.Increment(ref messagesInFlight);
                         lastWrite = DateTime.Now;
                     }
-
                     finally
                     {
                         chunk.Return();

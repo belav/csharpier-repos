@@ -381,7 +381,6 @@ namespace System.Security.Cryptography
                     pbeParameters
                 );
             }
-
             finally
             {
                 randomString.Clear();
@@ -424,7 +423,6 @@ namespace System.Security.Cryptography
                     pbeParameters
                 );
             }
-
             finally
             {
                 CryptoPool.Return(rented, rentWritten);
@@ -493,7 +491,6 @@ namespace System.Security.Cryptography
                                 privateKeyInfo.Attributes
                             );
                         }
-
                         finally
                         {
                             Array.Clear(ecParameters.D!, 0, ecParameters.D!.Length);

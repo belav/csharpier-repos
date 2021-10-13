@@ -164,7 +164,6 @@ namespace System.IO.MemoryMappedFiles
                 // We got to here, so there was no success:
                 throw Win32Marshal.GetExceptionForWin32Error(error);
             }
-
             finally
             {
                 if (firstPagePtr != null)

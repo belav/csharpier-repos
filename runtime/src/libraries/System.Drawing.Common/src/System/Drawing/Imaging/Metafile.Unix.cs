@@ -343,7 +343,6 @@ namespace System.Drawing.Imaging
                 Gdip.CheckStatus(status);
                 return new MetafileHeader(header);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(header);
@@ -359,7 +358,6 @@ namespace System.Drawing.Imaging
                 Gdip.CheckStatus(status);
                 return new MetafileHeader(header);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(header);
@@ -393,7 +391,6 @@ namespace System.Drawing.Imaging
                 Gdip.CheckStatus(status);
                 return new MetafileHeader(header);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(header);
@@ -412,7 +409,6 @@ namespace System.Drawing.Imaging
                 Gdip.CheckStatus(status);
                 return new MetafileHeader(header);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(header);
@@ -431,7 +427,6 @@ namespace System.Drawing.Imaging
                 Gdip.CheckStatus(status);
                 return new MetafileHeader(header);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(header);

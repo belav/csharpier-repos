@@ -119,7 +119,6 @@ namespace System.Formats.Asn1
                 Buffer.BlockCopy(tmp, 0, _buffer, _offset, tmpOffset);
                 _offset += tmpOffset;
             }
-
             finally
             {
                 CryptoPool.Return(tmp, tmpOffset);

@@ -133,7 +133,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
                     "TransportConnection"
                 );
             }
-
             finally
             {
                 File.Delete(testHttpHeadersGeneratedPath);

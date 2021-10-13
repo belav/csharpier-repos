@@ -812,7 +812,6 @@ End Module
                 var expected = @"'’ｆｕｌｌｗｉｄｔｈ 1";
                 await VerifyAsync(code, expected);
             }
-
             finally
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = savedCulture;

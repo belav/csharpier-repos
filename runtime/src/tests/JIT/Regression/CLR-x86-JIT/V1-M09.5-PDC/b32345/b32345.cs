@@ -15,7 +15,6 @@ namespace Test
             {
                 GC.Collect();
             }
-
             finally
             {
 #pragma warning disable 1718

@@ -76,7 +76,6 @@ namespace System.Reflection
 
                 return winner;
             }
-
             finally
             {
                 peReaderToDispose?.Dispose();

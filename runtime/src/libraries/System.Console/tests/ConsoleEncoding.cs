@@ -80,7 +80,6 @@ public partial class ConsoleEncoding
                 $"Encoding: {Console.InputEncoding}, Codepage: {Console.InputEncoding.CodePage}, Expected: {inString}, Actual: {outString} "
             );
         }
-
         finally
         {
             Console.SetOut(outConsoleStream);

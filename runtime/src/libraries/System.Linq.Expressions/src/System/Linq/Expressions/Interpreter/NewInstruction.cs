@@ -105,7 +105,6 @@ namespace System.Linq.Expressions.Interpreter
                 frame.Data[first] = ret;
                 frame.StackIndex = first + 1;
             }
-
             finally
             {
                 foreach (ByRefUpdater arg in _byrefArgs)

@@ -75,7 +75,6 @@ namespace System.Runtime.Caching
                 }
                 dispose = false;
             }
-
             finally
             {
                 InitializationComplete();

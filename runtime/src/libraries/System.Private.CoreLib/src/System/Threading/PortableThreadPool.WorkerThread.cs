@@ -159,7 +159,6 @@ namespace System.Threading
                             counts = oldCounts;
                         }
                     }
-
                     finally
                     {
                         hillClimbingThreadAdjustmentLock.Release();

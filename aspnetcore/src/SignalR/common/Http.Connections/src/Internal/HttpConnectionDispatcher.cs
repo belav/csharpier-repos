@@ -327,7 +327,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                         connection.MarkInactive();
                     }
                 }
-
                 finally
                 {
                     // Artificial task queue
@@ -431,7 +430,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                 context.Response.ContentLength = writer.Length;
                 await writer.CopyToAsync(context.Response.Body);
             }
-
             finally
             {
                 writer.Reset();
@@ -581,14 +579,12 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
 
                     Log.ReceivedBytes(_logger, connection.ApplicationStream.Length);
                 }
-
                 finally
                 {
                     // Clear the amount of read bytes so logging is accurate
                     connection.ApplicationStream.Reset();
                 }
             }
-
             finally
             {
                 connection.WriteLock.Release();

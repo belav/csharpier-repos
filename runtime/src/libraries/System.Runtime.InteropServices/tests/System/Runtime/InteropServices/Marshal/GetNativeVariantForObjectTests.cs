@@ -311,7 +311,6 @@ namespace System.Runtime.InteropServices.Tests
                 // Make sure it roundtrips.
                 Assert.Equal(expectedRoundtripValue, Marshal.GetObjectForNativeVariant(pNative));
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -339,13 +338,11 @@ namespace System.Runtime.InteropServices.Tests
                     object o = Marshal.GetObjectForNativeVariant(pNative);
                     Assert.Equal(obj, o);
                 }
-
                 finally
                 {
                     Marshal.FreeBSTR(result.bstrVal);
                 }
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -370,7 +367,6 @@ namespace System.Runtime.InteropServices.Tests
                 object o = Marshal.GetObjectForNativeVariant(pNative);
                 Assert.Equal(obj, o);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -395,7 +391,6 @@ namespace System.Runtime.InteropServices.Tests
                 object o = Marshal.GetObjectForNativeVariant(pNative);
                 Assert.Equal(obj, o);
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -464,7 +459,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetNativeVariantForObject<object>(new int[][] {  }, pNative)
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -495,7 +489,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetNativeVariantForObject<object>(obj, pNative)
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -529,7 +522,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetNativeVariantForObject<object>(obj, pNative)
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);
@@ -552,7 +544,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.GetObjectForNativeVariant<char>(pNative)
                 );
             }
-
             finally
             {
                 Marshal.FreeHGlobal(pNative);

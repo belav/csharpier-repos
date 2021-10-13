@@ -1068,7 +1068,6 @@ namespace System.Data
                             xw.WriteEndDocument();
                         }
                     }
-
                     finally
                     {
                         if (genSecondary)

@@ -124,7 +124,6 @@ namespace System.Diagnostics
                     _writer.Dispose();
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

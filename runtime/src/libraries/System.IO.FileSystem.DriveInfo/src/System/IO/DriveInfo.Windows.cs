@@ -77,7 +77,6 @@ namespace System.IO
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
-
                 finally
                 {
                     if (success)
@@ -110,7 +109,6 @@ namespace System.IO
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
-
                 finally
                 {
                     if (success)
@@ -145,7 +143,6 @@ namespace System.IO
                     if (!r)
                         throw Error.GetExceptionForLastWin32DriveError(Name);
                 }
-
                 finally
                 {
                     Interop.Kernel32.SetThreadErrorMode(oldMode, out _);
@@ -216,7 +213,6 @@ namespace System.IO
                         throw Error.GetExceptionForWin32DriveError(errorCode, Name);
                     }
                 }
-
                 finally
                 {
                     if (success)

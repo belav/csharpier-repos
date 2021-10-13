@@ -234,7 +234,6 @@ namespace System.Net.Sockets
                     }
                 }
             }
-
             finally
             {
                 if (!_active)
@@ -411,7 +410,6 @@ namespace System.Net.Sockets
                             {
                                 chkClientSocket.InternalShutdown(SocketShutdown.Both);
                             }
-
                             finally
                             {
                                 chkClientSocket.Close();

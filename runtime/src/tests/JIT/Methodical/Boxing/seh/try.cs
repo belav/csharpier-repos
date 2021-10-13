@@ -92,7 +92,6 @@ namespace SinCalc
                             );
                         Console.WriteLine("OK");
                     }
-
                     finally
                     {
                         Console.WriteLine(

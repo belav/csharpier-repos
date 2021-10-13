@@ -57,7 +57,6 @@ namespace System.Diagnostics
                     EventLog = null;
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

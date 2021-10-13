@@ -367,7 +367,6 @@ namespace System.Net.Http
                                     nextResult = (JSObject)entriesIterator.Invoke("next");
                                 }
                             }
-
                             finally
                             {
                                 nextResult?.Dispose();

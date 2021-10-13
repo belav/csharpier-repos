@@ -1098,7 +1098,6 @@ namespace System.Resources
                     _store.BaseStream.Position = _typeNamePositions[typeIndex];
                     return _store.ReadString();
                 }
-
                 finally
                 {
                     _store.BaseStream.Position = oldPos;

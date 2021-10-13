@@ -94,7 +94,6 @@ namespace System.Threading
                         AbandonMutex();
                     }
                 }
-
                 finally
                 {
                     s_lock.Release();
@@ -319,7 +318,6 @@ namespace System.Threading
                     waitInfo.RegisterWait(1, prioritize, isWaitForAll: false);
                     needToWait = true;
                 }
-
                 finally
                 {
                     // Once the wait function is called, it will release the lock
@@ -468,7 +466,6 @@ namespace System.Threading
                     waitInfo.RegisterWait(count, prioritize, waitForAll);
                     needToWait = true;
                 }
-
                 finally
                 {
                     if (waitableObjects != null)

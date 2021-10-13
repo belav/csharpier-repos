@@ -15,7 +15,6 @@ public class SetError
         {
             Assert.Throws<ArgumentNullException>(() => Console.SetError(null));
         }
-
         finally
         {
             Console.SetError(savedError);

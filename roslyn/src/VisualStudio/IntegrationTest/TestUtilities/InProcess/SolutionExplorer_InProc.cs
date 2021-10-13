@@ -588,7 +588,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     );
                     semaphore.Wait();
                 }
-
                 finally
                 {
                     solutionEvents.AfterCloseSolution -= HandleAfterCloseSolution;
@@ -905,7 +904,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 {
                     semaphore.Wait(Helper.HangMitigatingTimeout);
                 }
-
                 finally
                 {
                     solutionEvents.OnUpdateSolutionDone -= @event;

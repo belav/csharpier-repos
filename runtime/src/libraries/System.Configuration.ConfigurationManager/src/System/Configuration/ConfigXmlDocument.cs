@@ -62,7 +62,6 @@ namespace System.Configuration
                 _reader.XmlResolver = null;
                 base.Load(_reader);
             }
-
             finally
             {
                 if (_reader != null)
@@ -84,7 +83,6 @@ namespace System.Configuration
                 _reader = new XmlTextReader(new StringReader(outerXml), sourceReader.NameTable);
                 base.Load(_reader);
             }
-
             finally
             {
                 if (_reader != null)

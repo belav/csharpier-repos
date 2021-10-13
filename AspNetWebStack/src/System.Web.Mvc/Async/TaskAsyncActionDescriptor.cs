@@ -264,7 +264,6 @@ namespace System.Web.Mvc.Async
             {
                 wrapperResult.Task.ThrowIfFaulted();
             }
-
             finally
             {
                 if (wrapperResult.CleanupThunk != null)

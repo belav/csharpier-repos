@@ -152,7 +152,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                             ThrowUnexpectedEndOfRequestContent();
                         }
                     }
-
                     finally
                     {
                         _context.Input.AdvanceTo(consumed, examined);

@@ -1211,14 +1211,12 @@ namespace System.Net.Http
                                 (uint)Marshal.SizeOf(proxyInfo)
                             );
                         }
-
                         finally
                         {
                             pinnedHandle.Free();
                         }
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(proxyInfo.Proxy);

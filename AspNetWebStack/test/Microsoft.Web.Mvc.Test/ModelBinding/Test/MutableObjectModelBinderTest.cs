@@ -395,7 +395,6 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     );
                 handler(validationNode, e);
             }
-
             finally
             {
                 ModelBinderConfig.ValueRequiredErrorMessageProvider = originalProvider;

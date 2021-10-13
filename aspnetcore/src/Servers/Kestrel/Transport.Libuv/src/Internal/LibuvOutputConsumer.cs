@@ -70,7 +70,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                                 throw writeResult.Error;
                             }
                         }
-
                         finally
                         {
                             // Make sure we return the writeReq to the pool
@@ -88,7 +87,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                         break;
                     }
                 }
-
                 finally
                 {
                     _pipe.AdvanceTo(consumed);

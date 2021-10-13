@@ -115,7 +115,6 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                     {
                         textBuffer = Marshal.GetObjectForIUnknown(ptr) as IVsTextLines;
                     }
-
                     finally
                     {
                         _ = Marshal.Release(ptr); // Release RefCount from CreateInstance call

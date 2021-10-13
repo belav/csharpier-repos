@@ -46,7 +46,6 @@ namespace Test
                 {
                     Console.WriteLine("\t try");
                 }
-
                 finally
                 {
                     Console.WriteLine("\t finally");

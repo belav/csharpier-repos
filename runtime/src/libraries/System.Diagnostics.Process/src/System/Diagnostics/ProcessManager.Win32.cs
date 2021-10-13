@@ -232,7 +232,6 @@ namespace System.Diagnostics
                         modules.Add(module);
                     }
                 }
-
                 finally
                 {
                     ArrayPool<char>.Shared.Return(chars);
@@ -240,7 +239,6 @@ namespace System.Diagnostics
 
                 return modules;
             }
-
             finally
             {
                 if (!processHandle.IsInvalid)
@@ -365,7 +363,6 @@ namespace System.Diagnostics
                     bufferSize = GetNewBufferSize(bufferSize, (int)requiredSize);
                 }
             }
-
             finally
             {
                 // Cache the final buffer for use on the next call.

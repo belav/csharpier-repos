@@ -9,7 +9,6 @@ public struct AA
     {
         label1:
         try { }
-
         finally { }
         label2:
         return (new int[1, 1]);

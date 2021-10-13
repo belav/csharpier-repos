@@ -19,7 +19,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     command(stringWriter);
                 }
             }
-
             finally
             {
                 Console.SetOut(savedOut);

@@ -35,7 +35,6 @@ internal class TEST
             }
             goto LB13;
         }
-
         finally { }
         LB13:
         System.Console.WriteLine("TEST SUCCESS");

@@ -375,7 +375,6 @@ namespace Microsoft.CodeAnalysis.Scripting
 
                 return references.ToImmutable();
             }
-
             finally
             {
                 references.Free();

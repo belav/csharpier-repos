@@ -57,7 +57,6 @@ namespace System.Net.Tests
                     {
                         await outputStream.WriteAsync(responseBuffer, 0, responseBuffer.Length);
                     }
-
                     finally
                     {
                         outputStream.Close();
@@ -100,7 +99,6 @@ namespace System.Net.Tests
                     {
                         outputStream.Write(responseBuffer, 0, responseBuffer.Length);
                     }
-
                     finally
                     {
                         outputStream.Close();
@@ -350,7 +348,6 @@ namespace System.Net.Tests
                             () => output.WriteAsync(responseBuffer, 0, responseBuffer.Length)
                         );
                     }
-
                     finally
                     {
                         // Write the remaining bytes to guarantee a successful shutdown.

@@ -54,7 +54,6 @@ namespace System.Security
                 Span<char> span = AcquireSpan(ref bufferToRelease);
                 value.CopyTo(span);
             }
-
             finally
             {
                 ProtectMemory();
@@ -131,7 +130,6 @@ namespace System.Security
                     span[_decryptedLength] = c;
                     _decryptedLength++;
                 }
-
                 finally
                 {
                     ProtectMemory();
@@ -158,7 +156,6 @@ namespace System.Security
                     Span<char> span = AcquireSpan(ref bufferToRelease);
                     span.Clear();
                 }
-
                 finally
                 {
                     bufferToRelease?.DangerousRelease();
@@ -218,7 +215,6 @@ namespace System.Security
                     span[index] = c;
                     _decryptedLength++;
                 }
-
                 finally
                 {
                     ProtectMemory();
@@ -266,7 +262,6 @@ namespace System.Security
                     span.Slice(index + 1, _decryptedLength - (index + 1)).CopyTo(span.Slice(index));
                     _decryptedLength--;
                 }
-
                 finally
                 {
                     ProtectMemory();
@@ -301,7 +296,6 @@ namespace System.Security
                     Span<char> span = AcquireSpan(ref bufferToRelease);
                     span[index] = c;
                 }
-
                 finally
                 {
                     ProtectMemory();
@@ -361,7 +355,6 @@ namespace System.Security
                     ptr = IntPtr.Zero;
                     return result;
                 }
-
                 finally
                 {
                     // If we failed for any reason, free the new buffer
@@ -428,7 +421,6 @@ namespace System.Security
                     ptr = IntPtr.Zero;
                     return result;
                 }
-
                 finally
                 {
                     // If we failed for any reason, free the new buffer
@@ -489,7 +481,6 @@ namespace System.Security
                     destination.AcquirePointer(ref dstPtr);
                     Buffer.MemoryCopy(srcPtr, dstPtr, destination.ByteLength, bytesLength);
                 }
-
                 finally
                 {
                     if (dstPtr != null)

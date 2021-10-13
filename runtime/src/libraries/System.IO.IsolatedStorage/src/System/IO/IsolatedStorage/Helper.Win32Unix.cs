@@ -106,7 +106,6 @@ namespace System.IO.IsolatedStorage
                             CreateDirectory(randomDirectory, scope);
                         }
                     }
-
                     finally
                     {
                         m.ReleaseMutex();

@@ -68,7 +68,6 @@ namespace System.Web.WebPages
                     RunPage();
                 }
             }
-
             finally
             {
                 TemplateStack.Pop(Context);

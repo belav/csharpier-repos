@@ -938,7 +938,6 @@ namespace System.Web.Helpers
                 _height = image.Size.Height;
                 _width = image.Size.Width;
             }
-
             finally
             {
                 if (image != null)

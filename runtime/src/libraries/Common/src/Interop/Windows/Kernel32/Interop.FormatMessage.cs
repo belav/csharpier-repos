@@ -90,7 +90,6 @@ internal static partial class Interop
                         return GetAndTrimString(new Span<char>((char*)nativeMsgPtr, length));
                     }
                 }
-
                 finally
                 {
                     Marshal.FreeHGlobal(nativeMsgPtr);

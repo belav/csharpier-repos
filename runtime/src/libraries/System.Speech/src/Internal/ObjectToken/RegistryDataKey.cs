@@ -134,7 +134,6 @@ namespace System.Speech.Internal.ObjectTokens
                 sapiToken.GetId(out sapiTokenId);
                 tokenId = Marshal.PtrToStringUni(sapiTokenId);
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(sapiTokenId);

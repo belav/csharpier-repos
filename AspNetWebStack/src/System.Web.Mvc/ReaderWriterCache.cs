@@ -51,7 +51,6 @@ namespace System.Web.Mvc
                     return existingEntry;
                 }
             }
-
             finally
             {
                 _readerWriterLock.ExitReadLock();
@@ -72,7 +71,6 @@ namespace System.Web.Mvc
                 _cache[key] = newEntry;
                 return newEntry;
             }
-
             finally
             {
                 _readerWriterLock.ExitWriteLock();

@@ -749,7 +749,6 @@ namespace System.IO.Strategies
                             readAwaitable._position += numBytesRead;
                         }
                     }
-
                     finally
                     {
                         // Free the resources for this read operation
@@ -776,7 +775,6 @@ namespace System.IO.Strategies
                         .ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 // Cleanup from the whole copy operation

@@ -217,7 +217,6 @@ namespace Microsoft.AspNetCore.Builder
                         {
                             await middleware.InvokeAsync(context, next);
                         }
-
                         finally
                         {
                             middlewareFactory.Release(middleware);

@@ -38,7 +38,6 @@ namespace System.Runtime.CompilerServices
             {
                 stateMachine.MoveNext();
             }
-
             finally
             {
                 // The common case is that these have not changed, so avoid the cost of a write barrier if not needed.

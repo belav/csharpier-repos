@@ -244,7 +244,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                         Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
                     }
                 }
-
                 finally
                 {
                     if (!NativeMethods.FreeConsole())

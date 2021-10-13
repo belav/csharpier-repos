@@ -100,7 +100,6 @@ namespace System.Security.Cryptography.Pkcs
                     return dsa.VerifySignature(valueHash, ieee);
 #if NETCOREAPP || NETSTANDARD2_1
                 }
-
                 finally
                 {
                     CryptoPool.Return(rented, bufSize);
@@ -180,7 +179,6 @@ namespace System.Security.Cryptography.Pkcs
                         return true;
                     }
                 }
-
                 finally
                 {
                     CryptoPool.Return(rented, bytesWritten);

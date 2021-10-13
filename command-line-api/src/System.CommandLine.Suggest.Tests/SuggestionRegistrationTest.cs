@@ -47,7 +47,6 @@ namespace System.CommandLine.Suggest.Tests
 
                 foundRegistration.Should().BeNull();
             }
-
             finally
             {
                 Directory.Delete(path, true);
@@ -73,7 +72,6 @@ namespace System.CommandLine.Suggest.Tests
 
                 foundRegistration.Should().NotBeNull();
             }
-
             finally
             {
                 Directory.Delete(path, true);

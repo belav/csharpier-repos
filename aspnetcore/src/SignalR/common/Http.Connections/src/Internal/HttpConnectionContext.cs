@@ -250,7 +250,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                     }
                 }
             }
-
             finally
             {
                 Cancellation?.Dispose();
@@ -307,7 +306,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                             // Complete the applications read loop
                             Application?.Output.Complete();
                         }
-
                         finally
                         {
                             WriteLock.Release();
@@ -333,7 +331,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
                         // Transports are written by us and are well behaved, wait for them to drain
                         await transportTask;
                     }
-
                     finally
                     {
                         Log.TransportComplete(_logger, TransportType);
@@ -368,7 +365,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Internal
 
                         await applicationTask;
                     }
-
                     finally
                     {
                         Log.ApplicationComplete(_logger);

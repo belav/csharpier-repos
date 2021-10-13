@@ -76,7 +76,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     usedLocalFunctions = walker.GetUsedLocalFunctions();
                 }
             }
-
             finally
             {
                 walker.Free();

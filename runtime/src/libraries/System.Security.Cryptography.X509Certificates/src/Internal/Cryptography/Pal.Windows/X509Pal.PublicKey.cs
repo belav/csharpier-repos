@@ -172,7 +172,6 @@ namespace Internal.Cryptography.Pal
                         return bCryptKeyHandle;
                     }
                 }
-
                 finally
                 {
                     if (mustRelease)

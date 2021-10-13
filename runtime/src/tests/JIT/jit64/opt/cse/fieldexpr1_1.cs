@@ -100,7 +100,6 @@ namespace CseTest
 #endif
 #if TRY
             }
-
             finally
             {
 #endif
@@ -148,7 +147,6 @@ namespace CseTest
                     }
 #if TRY
                 }
-
                 finally { }
 #endif
                 if (v7 != 348)
@@ -242,7 +240,6 @@ namespace CseTest
             {
                 ans = 115;
             }
-
             finally
             {
                 if (verbose)
@@ -260,7 +257,6 @@ namespace CseTest
             {
                 ans = 116;
             }
-
             finally
             {
                 if (verbose)
@@ -278,7 +274,6 @@ namespace CseTest
             {
                 ans = 117;
             }
-
             finally
             {
                 if (verbose)

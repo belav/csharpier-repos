@@ -505,7 +505,6 @@ namespace Microsoft.Win32
                     }
                 }
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(name);
@@ -615,7 +614,6 @@ namespace Microsoft.Win32
                     nameLength = name.Length;
                 }
             }
-
             finally
             {
                 if (name != null)

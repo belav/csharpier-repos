@@ -48,7 +48,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     return result;
                 }
             }
-
             finally
             {
                 _tryGetValueDelegateCacheLock.ExitReadLock();
@@ -90,7 +89,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             {
                 _tryGetValueDelegateCache[targetType] = result;
             }
-
             finally
             {
                 _tryGetValueDelegateCacheLock.ExitWriteLock();

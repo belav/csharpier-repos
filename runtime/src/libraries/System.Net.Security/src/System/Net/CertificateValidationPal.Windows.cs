@@ -127,7 +127,6 @@ namespace System.Net
                     result = new X509Certificate2(remoteContext.DangerousGetHandle());
                 }
             }
-
             finally
             {
                 if (remoteContext != null && !remoteContext.IsInvalid)
@@ -198,7 +197,6 @@ namespace System.Net
                     }
                 }
             }
-
             finally
             {
                 sspiHandle?.Dispose();

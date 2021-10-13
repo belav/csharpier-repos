@@ -431,7 +431,6 @@ namespace System.Diagnostics.Eventing.Reader
                     Marshal.PtrToStructure<UnsafeNativeMethods.EvtVariant>(buffer);
                 return ConvertToObject(varVal);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -477,7 +476,6 @@ namespace System.Diagnostics.Eventing.Reader
                     Marshal.PtrToStructure<UnsafeNativeMethods.EvtVariant>(buffer);
                 return ConvertToObject(varVal);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -526,7 +524,6 @@ namespace System.Diagnostics.Eventing.Reader
                     Marshal.PtrToStructure<UnsafeNativeMethods.EvtVariant>(buffer);
                 return ConvertToObject(varVal);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -581,7 +578,6 @@ namespace System.Diagnostics.Eventing.Reader
                     Marshal.PtrToStructure<UnsafeNativeMethods.EvtVariant>(buffer);
                 return ConvertToSafeHandle(varVal);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -713,7 +709,6 @@ namespace System.Diagnostics.Eventing.Reader
                     Marshal.PtrToStructure<UnsafeNativeMethods.EvtVariant>(buffer);
                 return ConvertToObject(varVal);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -762,7 +757,6 @@ namespace System.Diagnostics.Eventing.Reader
                     Marshal.PtrToStructure<UnsafeNativeMethods.EvtVariant>(buffer);
                 return ConvertToObject(varVal);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -818,7 +812,6 @@ namespace System.Diagnostics.Eventing.Reader
                     Marshal.PtrToStructure<UnsafeNativeMethods.EvtVariant>(buffer);
                 return ConvertToObject(varVal);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -1052,7 +1045,6 @@ namespace System.Diagnostics.Eventing.Reader
                     Marshal.PtrToStructure<UnsafeNativeMethods.EvtVariant>(buffer);
                 return ConvertToObject(varVal);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -1232,7 +1224,6 @@ namespace System.Diagnostics.Eventing.Reader
                     pointer = new IntPtr(((long)pointer + Marshal.SizeOf(varVal)));
                 }
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -1300,7 +1291,6 @@ namespace System.Diagnostics.Eventing.Reader
                 }
                 return valuesList;
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -1463,7 +1453,6 @@ namespace System.Diagnostics.Eventing.Reader
 
                 return keywordsList.AsReadOnly();
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)
@@ -1513,7 +1502,6 @@ namespace System.Diagnostics.Eventing.Reader
 
                 return Marshal.PtrToStringUni(buffer);
             }
-
             finally
             {
                 if (buffer != IntPtr.Zero)

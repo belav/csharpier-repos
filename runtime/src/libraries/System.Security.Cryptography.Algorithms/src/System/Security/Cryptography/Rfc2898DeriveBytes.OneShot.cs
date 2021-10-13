@@ -342,7 +342,6 @@ namespace System.Security.Cryptography
                     destination
                 );
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(passwordBytes);

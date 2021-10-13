@@ -526,7 +526,6 @@ namespace Microsoft.CodeAnalysis.CodeActions
 
                     return equivalenceKey.Length > 0 ? equivalenceKey.ToString() : null;
                 }
-
                 finally
                 {
                     StringBuilderPool.ReturnAndFree(equivalenceKey);

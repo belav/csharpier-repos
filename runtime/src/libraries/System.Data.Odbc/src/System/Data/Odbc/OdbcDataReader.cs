@@ -2833,7 +2833,6 @@ namespace System.Data.Odbc
                     */
                 }
             }
-
             finally
             {
                 if (mustRelease)
@@ -3043,7 +3042,6 @@ namespace System.Data.Odbc
                 // Unbind the columns
                 _cmdWrapper!.FreeKeyInfoStatementHandle(ODBC32.STMT.UNBIND);
             }
-
             finally
             {
                 if (mustRelease)

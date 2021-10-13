@@ -75,7 +75,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Razor
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 if (session == null)

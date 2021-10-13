@@ -520,7 +520,6 @@ namespace System.Xml.Serialization
                 stream.Flush();
                 return true;
             }
-
             finally
             {
                 compiler.Close();

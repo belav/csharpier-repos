@@ -97,7 +97,6 @@ namespace System.Security.Cryptography
                     ECCng.ExportPrimeCurveParameters(ref ecparams, blob, includePrivateParameters);
                     return ecparams;
                 }
-
                 finally
                 {
                     Array.Clear(blob, 0, blob.Length);
@@ -135,7 +134,6 @@ namespace System.Security.Cryptography
 
                     return ecparams;
                 }
-
                 finally
                 {
                     if (blob != null)

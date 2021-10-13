@@ -829,7 +829,6 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
                     return base.VisitLambda(lambdaExpression);
                 }
-
                 finally
                 {
                     foreach (var parameter in lambdaExpression.Parameters)

@@ -213,7 +213,6 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                     return CompletionData.RequestError;
                 }
             }
-
             finally
             {
                 buildCancellationTokenSource.Cancel();

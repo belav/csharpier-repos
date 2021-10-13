@@ -93,7 +93,6 @@ namespace Microsoft.Win32.SafeHandles
                         socket = null;
                     }
                 }
-
                 finally
                 {
                     if (refAdded)

@@ -889,7 +889,6 @@ namespace System.Xml
 
                 _doc.IsLoading = bOrigLoading;
             }
-
             finally
             {
                 _reader.Close();
@@ -1127,7 +1126,6 @@ namespace System.Xml
                 if (tempreader.MoveToAttribute(nameof(standalone)))
                     standalone = tempreader.Value;
             }
-
             finally
             {
                 tempreader.Close();

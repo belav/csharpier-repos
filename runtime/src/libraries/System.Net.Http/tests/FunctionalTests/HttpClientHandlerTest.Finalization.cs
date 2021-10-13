@@ -61,7 +61,6 @@ namespace System.Net.Http.Functional.Tests
                                     );
                                     await connection.WaitForCancellationAsync();
                                 }
-
                                 finally
                                 {
                                     Volatile.Write(ref stopGCs, true);

@@ -113,7 +113,6 @@ public class CallbackStressTest
             NativeSum(10, 10);
             s_WrongPInvokesExecuted++;
         }
-
         finally
         {
             s_FinallyCalled++;

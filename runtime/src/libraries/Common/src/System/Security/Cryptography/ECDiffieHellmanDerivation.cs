@@ -96,7 +96,6 @@ namespace System.Security.Cryptography
                         return hash.GetHashAndReset();
                     }
                 }
-
                 finally
                 {
                     // If useSecretAsKey is false then hmacKey is owned by the caller, not ours to clear.
@@ -178,7 +177,6 @@ namespace System.Security.Cryptography
 
                     return ret;
                 }
-
                 finally
                 {
                     Array.Clear(secretAgreement, 0, secretAgreement.Length);
@@ -283,7 +281,6 @@ namespace System.Security.Cryptography
                     }
 #if NETFRAMEWORK || NETCOREAPP3_0
                 }
-
                 finally
                 {
                     Array.Clear(secretTmp, 0, secretTmp.Length);

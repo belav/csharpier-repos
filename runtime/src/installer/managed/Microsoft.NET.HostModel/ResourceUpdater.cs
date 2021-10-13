@@ -297,7 +297,6 @@ namespace Microsoft.NET.HostModel
                     }
                 }
             }
-
             finally
             {
                 errorInfoHandle.Free();
@@ -410,7 +409,6 @@ namespace Microsoft.NET.HostModel
                     ThrowExceptionForLastWin32Error();
                 }
             }
-
             finally
             {
                 hUpdate.SetHandleAsInvalid();

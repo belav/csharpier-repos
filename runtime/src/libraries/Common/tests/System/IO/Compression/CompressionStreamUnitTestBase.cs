@@ -40,7 +40,6 @@ namespace System.IO.Compression
                         }
                     ); // "overlapping flushes"
                 }
-
                 finally
                 {
                     // Unblock Async operations
@@ -82,7 +81,6 @@ namespace System.IO.Compression
                         }
                     ); // "overlapping read"
                 }
-
                 finally
                 {
                     // Unblock Async operations
@@ -130,7 +128,6 @@ namespace System.IO.Compression
                         }
                     ); // "overlapping flushes"
                 }
-
                 finally
                 {
                     // Unblock Async operations

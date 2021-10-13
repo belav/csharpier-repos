@@ -51,7 +51,6 @@ namespace System.Reflection.Metadata.Ecma335
             try
             { /* intentionally left blank */
             }
-
             finally
 #endif
             {
@@ -100,7 +99,6 @@ namespace System.Reflection.Metadata.Ecma335
             try
             { /* intentionally left blank */
             }
-
             finally
 #endif
             {

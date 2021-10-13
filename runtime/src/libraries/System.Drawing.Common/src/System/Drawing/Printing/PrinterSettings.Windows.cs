@@ -481,7 +481,6 @@ namespace System.Drawing.Printing
                             out outData
                         ) > 0;
                 }
-
                 finally
                 {
                     dc.Dispose();
@@ -542,13 +541,11 @@ namespace System.Drawing.Printing
                                 ) && (outData == 1);
                         }
                     }
-
                     finally
                     {
                         dc.Dispose();
                     }
                 }
-
                 finally
                 {
                     stream.Close();
@@ -616,7 +613,6 @@ namespace System.Drawing.Printing
                 pageSettings.CopyToHdevmode(modeHandle);
                 dc = CreateDeviceContext(modeHandle);
             }
-
             finally
             {
                 Interop.Kernel32.GlobalFree(modeHandle);
@@ -650,7 +646,6 @@ namespace System.Drawing.Printing
                 pageSettings.CopyToHdevmode(modeHandle);
                 dc = CreateInformationContext(modeHandle);
             }
-
             finally
             {
                 Interop.Kernel32.GlobalFree(modeHandle);
@@ -1166,7 +1161,6 @@ namespace System.Drawing.Printing
                 }
                 Interop.Kernel32.GlobalUnlock(new HandleRef(this, modeHandle));
             }
-
             finally
             {
                 if (ownHandle)

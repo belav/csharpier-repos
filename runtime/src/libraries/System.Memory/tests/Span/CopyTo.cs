@@ -255,7 +255,6 @@ namespace System.SpanTests
                         }
                     }
                 }
-
                 finally
                 {
                     if (allocatedFirst)

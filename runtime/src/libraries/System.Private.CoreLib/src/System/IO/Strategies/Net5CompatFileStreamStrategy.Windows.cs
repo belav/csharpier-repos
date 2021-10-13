@@ -206,7 +206,6 @@ namespace System.IO.Strategies
                     }
                 }
             }
-
             finally
             {
                 if (_fileHandle != null && !_fileHandle.IsClosed)
@@ -234,7 +233,6 @@ namespace System.IO.Strategies
                     await FlushAsync(default).ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 if (_fileHandle != null && !_fileHandle.IsClosed)
@@ -1327,7 +1325,6 @@ namespace System.IO.Strategies
                     )
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 // Make sure the stream's current position reflects where we ended up

@@ -50,7 +50,6 @@ public class Test
                 System.Console.WriteLine("\t try");
                 i = Foo.x;
             }
-
             finally
             {
                 System.Console.WriteLine("\t finally");

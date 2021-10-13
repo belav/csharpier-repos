@@ -269,7 +269,6 @@ namespace System.IO
                     }
                 }
             }
-
             finally
             {
                 Interop.Sys.UninitializeConsoleAfterRead();
@@ -523,7 +522,6 @@ namespace System.IO
                 MapBufferToConsoleKey(out key, out ch, out isShift, out isAlt, out isCtrl);
                 return new ConsoleKeyInfo(ch, key, isShift, isAlt, isCtrl);
             }
-
             finally
             {
                 Interop.Sys.UninitializeConsoleAfterRead();

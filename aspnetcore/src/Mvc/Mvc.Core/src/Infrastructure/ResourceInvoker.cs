@@ -97,7 +97,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     await task;
                 }
-
                 finally
                 {
                     await invoker.ReleaseResourcesCore(scope);
@@ -135,7 +134,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     {
                         await invoker.InvokeFilterPipelineAsync();
                     }
-
                     finally
                     {
                         await invoker.ReleaseResourcesCore(actionScope);
@@ -145,7 +143,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                         );
                     }
                 }
-
                 finally
                 {
                     invoker._diagnosticListener.AfterAction(
@@ -308,7 +305,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     await result.ExecuteResultAsync(actionContext);
                 }
-
                 finally
                 {
                     invoker._diagnosticListener.AfterActionResult(actionContext, result);

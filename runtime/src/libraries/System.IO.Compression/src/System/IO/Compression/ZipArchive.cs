@@ -309,7 +309,6 @@ namespace System.IO.Compression
                             break;
                     }
                 }
-
                 finally
                 {
                     CloseStreams();

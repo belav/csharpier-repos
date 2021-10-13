@@ -84,7 +84,6 @@ namespace strswitch
                                     {
                                         Console.WriteLine("s == two");
                                     }
-
                                     finally
                                     {
                                         Console.WriteLine("After two");
@@ -103,7 +102,6 @@ namespace strswitch
                                             goto continueloop;
                                         }
                                     }
-
                                     finally
                                     {
                                         Console.WriteLine("After three");
@@ -131,7 +129,6 @@ namespace strswitch
                                             Console.WriteLine("Unreached");
                                             throw new Exception();
                                         }
-
                                         finally
                                         {
                                             Console.WriteLine("After after three");
@@ -148,7 +145,6 @@ namespace strswitch
                                         {
                                             Console.WriteLine("s == " + s[s.Length]);
                                             try { }
-
                                             finally
                                             {
                                                 Console.WriteLine("Unreached");
@@ -167,7 +163,6 @@ namespace strswitch
                                                     Console.WriteLine("unreached ");
                                                     goto finishfour;
                                                 }
-
                                                 finally
                                                 {
                                                     Console.WriteLine("also unreached");
@@ -179,7 +174,6 @@ namespace strswitch
                                             }
                                         }
                                     }
-
                                     finally
                                     {
                                         Console.WriteLine("In four's finally");
@@ -195,7 +189,6 @@ namespace strswitch
                                             {
                                                 Console.WriteLine("s == five");
                                             }
-
                                             finally
                                             {
                                                 Console.WriteLine("Five's finally 0");
@@ -211,7 +204,6 @@ namespace strswitch
                                         }
                                         break;
                                     }
-
                                     finally
                                     {
                                         Console.WriteLine("Five's finally 2");
@@ -222,7 +214,6 @@ namespace strswitch
                                         Console.WriteLine("Greater than five");
                                         goto finish;
                                     }
-
                                     finally
                                     {
                                         Console.WriteLine("in six's finally");
@@ -231,7 +222,6 @@ namespace strswitch
                             ;
                             continue;
                         }
-
                         finally
                         {
                             Console.WriteLine("In inner finally");
@@ -269,7 +259,6 @@ namespace strswitch
 
                     Console.WriteLine("Unreached");
                 }
-
                 finally
                 {
                     Console.WriteLine("In outer finally\n");

@@ -135,7 +135,6 @@ namespace System.Net
                 {
                     OutputStream.Write(responseEntity, 0, responseEntity.Length);
                 }
-
                 finally
                 {
                     Close(false);
@@ -154,7 +153,6 @@ namespace System.Net
                         {
                             thisRef.OutputStream.EndWrite(iar);
                         }
-
                         finally
                         {
                             thisRef.Close(false);

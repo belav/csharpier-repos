@@ -51,7 +51,6 @@ namespace TestCS
             {
                 ThrowException();
             }
-
             finally
             {
                 Foobar();

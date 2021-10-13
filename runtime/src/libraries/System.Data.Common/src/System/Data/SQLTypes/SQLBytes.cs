@@ -737,7 +737,6 @@ namespace System.Data.SqlTypes
             {
                 _sb = null!;
             }
-
             finally
             {
                 base.Dispose(disposing);

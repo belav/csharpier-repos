@@ -70,7 +70,6 @@ namespace Microsoft.CodeAnalysis.Classification
                 var classifiedSpans = MergeClassifiedSpans(syntaxSpans, semanticSpans, span);
                 return classifiedSpans;
             }
-
             finally
             {
                 ListPool<ClassifiedSpan>.Free(syntaxSpans);

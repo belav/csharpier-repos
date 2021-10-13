@@ -424,7 +424,6 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     return Compare(a.Body, b.Body);
                 }
-
                 finally
                 {
                     for (var i = 0; i < n; i++)

@@ -81,7 +81,6 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
 
                 Assert.Equal(expectedOutput, json);
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);

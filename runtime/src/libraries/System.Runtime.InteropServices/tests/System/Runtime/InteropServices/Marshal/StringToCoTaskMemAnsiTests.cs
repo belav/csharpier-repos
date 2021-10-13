@@ -51,7 +51,6 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.Equal(expectedFullString, Marshal.PtrToStringAnsi(ptr, s.Length));
                 }
             }
-
             finally
             {
                 Marshal.ZeroFreeCoTaskMemAnsi(ptr);

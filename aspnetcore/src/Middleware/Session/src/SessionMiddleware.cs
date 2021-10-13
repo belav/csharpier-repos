@@ -113,7 +113,6 @@ namespace Microsoft.AspNetCore.Session
             {
                 await _next(context);
             }
-
             finally
             {
                 context.Features.Set<ISessionFeature?>(null);

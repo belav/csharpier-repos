@@ -199,7 +199,6 @@ namespace Microsoft.AspNetCore.Owin
                     await ReceiveAsync(new ArraySegment<byte>(buffer), cancellationToken);
                 }
             }
-
             finally
             {
                 ArrayPool<byte>.Shared.Return(buffer);

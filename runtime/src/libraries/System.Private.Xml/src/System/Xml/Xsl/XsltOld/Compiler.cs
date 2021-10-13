@@ -225,7 +225,6 @@ namespace System.Xml.Xsl.XsltOld
                     _rootAction.ReplaceNamespaceAlias(this);
                 }
             }
-
             finally
             {
                 PopInputDocument();
@@ -581,7 +580,6 @@ namespace System.Xml.Xsl.XsltOld
             {
                 return new XPathDocument(reader, XmlSpace.Preserve);
             }
-
             finally
             {
                 reader.Close();

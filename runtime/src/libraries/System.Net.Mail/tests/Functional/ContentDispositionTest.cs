@@ -242,7 +242,6 @@ namespace System.Net.Mime.Tests
                     contentDisposition2.ModificationDate
                 );
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = origCulture;
@@ -387,7 +386,6 @@ namespace System.Net.Mime.Tests
                     cd.ToString()
                 );
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = origCulture;

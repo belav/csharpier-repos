@@ -110,7 +110,6 @@ namespace System.Transactions
                     }
                 }
             }
-
             finally
             {
                 if (tookLock)
@@ -155,7 +154,6 @@ namespace System.Transactions
                     }
                 }
             }
-
             finally
             {
                 if (tookLock)
@@ -200,7 +198,6 @@ namespace System.Transactions
                     }
                 }
             }
-
             finally
             {
                 if (tookLock)
@@ -245,7 +242,6 @@ namespace System.Transactions
                     }
                 }
             }
-
             finally
             {
                 if (tookLock)

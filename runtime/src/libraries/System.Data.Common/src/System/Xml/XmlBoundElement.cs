@@ -234,7 +234,6 @@ namespace System.Xml
                 // Clone should create a XmlBoundElement node
                 Debug.Assert(element is XmlBoundElement);
             }
-
             finally
             {
                 doc.AutoFoliationState = oldAutoFoliationState;
@@ -251,7 +250,6 @@ namespace System.Xml
                 dp.AddPointer();
                 WriteBoundElementContentTo(dp, w);
             }
-
             finally
             {
                 dp.SetNoLongerUse();
@@ -266,7 +264,6 @@ namespace System.Xml
                 dp.AddPointer();
                 WriteRootBoundElementTo(dp, w);
             }
-
             finally
             {
                 dp.SetNoLongerUse();

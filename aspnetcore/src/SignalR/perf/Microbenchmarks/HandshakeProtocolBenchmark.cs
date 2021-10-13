@@ -71,7 +71,6 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             {
                 HandshakeProtocol.WriteResponseMessage(HandshakeResponseMessage.Empty, writer);
             }
-
             finally
             {
                 MemoryBufferWriter.Return(writer);
@@ -91,7 +90,6 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 );
                 result = memoryBufferWriter.ToArray();
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);
@@ -109,7 +107,6 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                     memoryBufferWriter
                 );
             }
-
             finally
             {
                 MemoryBufferWriter.Return(memoryBufferWriter);

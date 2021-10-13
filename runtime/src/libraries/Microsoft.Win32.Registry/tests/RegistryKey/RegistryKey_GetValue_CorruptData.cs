@@ -42,7 +42,6 @@ namespace Microsoft.Win32.RegistryTests
                 string[] expected = { "str1", "str2", "str3" };
                 Assert.Equal(expected, strings);
             }
-
             finally
             {
                 TestRegistryKey.DeleteValue(TestValueName);
@@ -89,7 +88,6 @@ namespace Microsoft.Win32.RegistryTests
                 Assert.Equal(0x506, s[0]);
                 Assert.Equal(0x6, s[1]);
             }
-
             finally
             {
                 TestRegistryKey.DeleteValue(TestValueName);

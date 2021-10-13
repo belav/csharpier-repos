@@ -100,7 +100,6 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(message, logMessage);
                 }
             }
-
             finally
             {
                 EventLog.DeleteEventSource(log.Source);

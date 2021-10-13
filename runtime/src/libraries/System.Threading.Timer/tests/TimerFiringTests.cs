@@ -279,7 +279,6 @@ namespace System.Threading.Tests
                     )
                 );
             }
-
             finally
             {
                 foreach (Timer t in timers)

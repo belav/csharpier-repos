@@ -127,7 +127,6 @@ namespace Templates.Test.Helpers
                 await execution.Exited;
                 return new ProcessResult(execution);
             }
-
             finally
             {
                 DotNetNewLock.Release();
@@ -291,7 +290,6 @@ namespace Templates.Test.Helpers
                 await result.Exited;
                 return new ProcessResult(result);
             }
-
             finally
             {
                 DotNetNewLock.Release();
@@ -325,7 +323,6 @@ namespace Templates.Test.Helpers
                 await result.Exited;
                 return new ProcessResult(result);
             }
-
             finally
             {
                 DotNetNewLock.Release();
@@ -402,7 +399,6 @@ namespace Templates.Test.Helpers
                 await result.Exited;
                 return result;
             }
-
             finally
             {
                 DotNetNewLock.Release();
@@ -506,7 +502,6 @@ namespace Templates.Test.Helpers
                         _dotNetLockTaken = false;
                     }
                 }
-
                 finally
                 {
                     if (_nodeLockTaken)

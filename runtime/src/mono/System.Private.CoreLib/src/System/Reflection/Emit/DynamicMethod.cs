@@ -258,7 +258,6 @@ namespace System.Reflection.Emit
                             }
                         }
                     }
-
                     finally
                     {
                         creating = false;

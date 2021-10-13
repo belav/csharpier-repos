@@ -82,7 +82,6 @@ namespace System.Net.NetworkInformation
 
                 return true;
             }
-
             finally
             {
                 helper?.Dispose();

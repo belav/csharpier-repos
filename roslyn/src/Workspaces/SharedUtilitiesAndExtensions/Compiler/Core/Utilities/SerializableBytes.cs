@@ -75,7 +75,6 @@ namespace Microsoft.CodeAnalysis
                 chunks = null;
                 return result;
             }
-
             finally
             {
                 BlowChunks(chunks);

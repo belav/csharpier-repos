@@ -1232,7 +1232,6 @@ namespace Microsoft.Win32
                         OnUserPreferenceChanging(msg - Interop.User32.WM_REFLECT, wParam, lParam);
                         OnUserPreferenceChanged(msg - Interop.User32.WM_REFLECT, wParam, lParam);
                     }
-
                     finally
                     {
                         try

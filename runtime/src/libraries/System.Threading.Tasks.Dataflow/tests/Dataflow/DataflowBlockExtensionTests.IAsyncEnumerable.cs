@@ -64,7 +64,6 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     Assert.Equal(i, e.Current);
                 }
             }
-
             finally
             {
                 ValueTask vt = e.DisposeAsync();
@@ -91,7 +90,6 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     Assert.Equal(i, e.Current);
                 }
             }
-
             finally
             {
                 ValueTask vt = e.DisposeAsync();
@@ -133,7 +131,6 @@ namespace System.Threading.Tasks.Dataflow.Tests
                                 consumedTotal += e.Current;
                             }
                         }
-
                         finally
                         {
                             await e.DisposeAsync();

@@ -94,7 +94,6 @@ namespace System.Runtime.Caching
                 _uniqueId = uniqueId;
                 dispose = false;
             }
-
             finally
             {
                 InitializationComplete();

@@ -112,7 +112,6 @@ namespace System.Net.Http.Json
                         JsonSerializer.Serialize(writer, Value, ObjectType, _jsonSerializerOptions);
                     }
                 }
-
                 finally
                 {
                     // Dispose/DisposeAsync will flush any partial write buffers. In practice our partial write

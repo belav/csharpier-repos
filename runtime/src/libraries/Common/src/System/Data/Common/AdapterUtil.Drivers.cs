@@ -27,7 +27,6 @@ namespace System.Data.Common
 
                 return new Timer(callback, state, dueTime, period);
             }
-
             finally
             {
                 // Restore the current ExecutionContext

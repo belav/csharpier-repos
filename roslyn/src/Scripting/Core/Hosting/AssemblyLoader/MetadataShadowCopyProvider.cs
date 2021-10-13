@@ -334,7 +334,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 );
                 fault = false;
             }
-
             finally
             {
                 if (fault)
@@ -546,7 +545,6 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 fault = false;
                 return AssemblyMetadata.Create(modules);
             }
-
             finally
             {
                 if (fault)

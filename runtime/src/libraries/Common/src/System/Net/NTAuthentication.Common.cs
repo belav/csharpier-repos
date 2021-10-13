@@ -313,7 +313,6 @@ namespace System.Net
                         );
                 }
             }
-
             finally
             {
                 //

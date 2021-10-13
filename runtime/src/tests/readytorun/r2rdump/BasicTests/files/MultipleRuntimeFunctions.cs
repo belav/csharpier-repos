@@ -8,7 +8,6 @@ namespace MultipleRuntimeFunctions
         static void MethodWithMultipleRuntimeFunctions()
         {
             try { }
-
             finally { }
         }
 

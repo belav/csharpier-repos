@@ -36,7 +36,6 @@ namespace System.Runtime.InteropServices.Tests
                     array2.AsSpan(2, values.Length - 4).ToArray()
                 );
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -85,7 +84,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.Copy(ptr, array, -1, 10)
                 );
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -108,7 +106,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.Copy(ptr, array, 0, -1)
                 );
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);
@@ -137,7 +134,6 @@ namespace System.Runtime.InteropServices.Tests
                     () => Marshal.Copy(ptr, array, startIndex, length)
                 );
             }
-
             finally
             {
                 Marshal.FreeCoTaskMem(ptr);

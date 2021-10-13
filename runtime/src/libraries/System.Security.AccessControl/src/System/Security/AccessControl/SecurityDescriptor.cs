@@ -717,7 +717,6 @@ namespace System.Security.AccessControl
 
                 Marshal.Copy(byteArray, binaryForm, 0, (int)byteArraySize);
             }
-
             finally
             {
                 //

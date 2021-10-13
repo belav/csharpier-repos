@@ -897,7 +897,6 @@ namespace System.Drawing.Tests
                     Assert.Equal(2, bitmap.Flags);
                 }
             }
-
             finally
             {
                 icon.Dispose();

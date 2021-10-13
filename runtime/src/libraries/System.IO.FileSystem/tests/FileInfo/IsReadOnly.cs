@@ -40,7 +40,6 @@ namespace System.IO.Tests
                 info = new FileInfo(path);
                 Assert.True(info.IsReadOnly);
             }
-
             finally
             {
                 File.SetAttributes(trimmedPath, attributes);

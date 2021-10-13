@@ -78,7 +78,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         state.NotePartComplete(CompletionPart.SynthesizedExplicitImplementations);
                     }
                 }
-
                 finally
                 {
                     diagnostics.Free();

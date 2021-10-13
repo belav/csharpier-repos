@@ -62,7 +62,6 @@ namespace System.Linq.Expressions.Tests
 
                 return sw.ToString();
             }
-
             finally
             {
                 CultureInfo.CurrentCulture = oldCulture;

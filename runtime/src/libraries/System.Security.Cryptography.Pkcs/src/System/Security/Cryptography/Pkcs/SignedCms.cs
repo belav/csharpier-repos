@@ -487,7 +487,6 @@ namespace System.Security.Cryptography.Pkcs
                 Decode(encoded);
                 Debug.Assert(_heldContent != null);
             }
-
             finally
             {
                 ContentInfo = save;

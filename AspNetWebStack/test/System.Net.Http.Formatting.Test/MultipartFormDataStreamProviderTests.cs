@@ -84,7 +84,6 @@ namespace System.Net.Http
                     fileData.Headers.ContentDisposition
                 );
             }
-
             finally
             {
                 if (stream0 != null)

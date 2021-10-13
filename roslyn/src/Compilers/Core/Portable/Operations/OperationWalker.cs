@@ -30,7 +30,6 @@ namespace Microsoft.CodeAnalysis.Operations
                     StackGuard.EnsureSufficientExecutionStack(_recursionDepth);
                     operation.Accept(this);
                 }
-
                 finally
                 {
                     _recursionDepth--;
@@ -75,7 +74,6 @@ namespace Microsoft.CodeAnalysis.Operations
                     StackGuard.EnsureSufficientExecutionStack(_recursionDepth);
                     operation.Accept(this, argument);
                 }
-
                 finally
                 {
                     _recursionDepth--;

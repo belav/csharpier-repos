@@ -119,7 +119,6 @@ namespace System.IO
                 new Span<char>(array, 0, numRead).CopyTo(buffer);
                 return numRead;
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(array);
@@ -171,7 +170,6 @@ namespace System.IO
                 new Span<char>(array, 0, numRead).CopyTo(buffer);
                 return numRead;
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(array);
@@ -233,7 +231,6 @@ namespace System.IO
                     sb.Append(chars, 0, len);
                 }
             }
-
             finally
             {
                 ArrayPool<char>.Shared.Return(chars);

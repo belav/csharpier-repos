@@ -276,7 +276,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                     );
                 }
             }
-
             finally
             {
                 // Buffer contains sensitive key material; delete.
@@ -536,7 +535,6 @@ namespace Microsoft.AspNetCore.DataProtection.Cng
                     }
                 }
             }
-
             finally
             {
                 // Buffer contains sensitive material; delete it.

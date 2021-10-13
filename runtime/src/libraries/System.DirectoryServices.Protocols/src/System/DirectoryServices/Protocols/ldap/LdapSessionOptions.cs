@@ -768,7 +768,6 @@ namespace System.DirectoryServices.Protocols
                     }
                 }
             }
-
             finally
             {
                 if (serverControlArray != IntPtr.Zero)
@@ -927,7 +926,6 @@ namespace System.DirectoryServices.Protocols
                 int error = LdapPal.SetPtrOption(_connection._ldapHandle, option, ref inValue);
                 ErrorChecking.CheckAndSetLdapError(error);
             }
-
             finally
             {
                 if (inValue != IntPtr.Zero)
@@ -1267,7 +1265,6 @@ namespace System.DirectoryServices.Protocols
                     certPtr = Marshal.ReadIntPtr(serverCert);
                     certificate = new X509Certificate(certPtr);
                 }
-
                 finally
                 {
                     PALCertFreeCRLContext(certPtr);

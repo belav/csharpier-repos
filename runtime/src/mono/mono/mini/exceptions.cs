@@ -100,14 +100,12 @@ class Tests
         {
             a = 1;
         }
-
         finally
         {
             try
             {
                 a = 2;
             }
-
             finally
             {
                 a = 0;
@@ -2297,13 +2295,11 @@ class Tests
             {
                 return;
             }
-
             finally
             {
                 a = 1;
             }
         }
-
         finally
         {
             finally_level++;
@@ -3046,7 +3042,6 @@ class Tests
             {
                 throw new Exception();
             }
-
             finally
             {
                 k = 5;
@@ -3373,7 +3368,6 @@ class Tests
 
                 string s = files[2];
             }
-
             finally
             {
                 i++;
@@ -3704,7 +3698,6 @@ class Tests
             {
                 int sum = a + b;
             }
-
             finally
             {
                 finally_called = true;

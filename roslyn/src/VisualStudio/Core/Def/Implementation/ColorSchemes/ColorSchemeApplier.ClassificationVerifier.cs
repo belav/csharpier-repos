@@ -181,7 +181,6 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                         }
                     }
                 }
-
                 finally
                 {
                     _fontAndColorStorage.CloseCategory();

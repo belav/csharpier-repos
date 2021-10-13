@@ -47,7 +47,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 {
                     visitor.Visit(containingSymbol, operations, analysisData, cancellationToken);
                 }
-
                 finally
                 {
                     s_visitorPool.Free(visitor);
@@ -84,7 +83,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         Visit(operation);
                     }
                 }
-
                 finally
                 {
                     _currentContainingSymbol = null;

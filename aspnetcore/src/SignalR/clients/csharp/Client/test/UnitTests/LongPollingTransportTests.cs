@@ -57,7 +57,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     Assert.False(transportActiveTask.IsCompleted);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -98,7 +97,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     Assert.True(result.IsCompleted);
                     longPollingTransport.Input.AdvanceTo(result.Buffer.End);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -160,7 +158,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     await longPollingTransport.Running.DefaultTimeout();
                     Assert.Equal(Encoding.UTF8.GetBytes("HelloWorld"), data);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -196,7 +193,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     );
                     Assert.Contains(" 500 ", exception.Message);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -248,7 +244,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     );
                     Assert.Contains(" 500 ", exception.Message);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -364,7 +359,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     Assert.True(stopped);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -414,7 +408,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     await longPollingTransport.Input.ReadAllAsync().DefaultTimeout();
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -454,7 +447,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                     await longPollingTransport.Input.ReadAllAsync().DefaultTimeout();
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -518,7 +510,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     // Check the messages received
                     Assert.Equal(message1Payload, message);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -606,7 +597,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         sentRequests[0]
                     );
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -709,7 +699,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 {
                     await longPollingTransport.StartAsync(TestUri, transferFormat);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();
@@ -803,7 +792,6 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         .DefaultTimeout();
                     Assert.Equal(completionTcs.Task, completedTask);
                 }
-
                 finally
                 {
                     await longPollingTransport.StopAsync();

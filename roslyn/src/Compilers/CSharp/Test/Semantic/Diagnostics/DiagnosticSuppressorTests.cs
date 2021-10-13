@@ -450,7 +450,6 @@ class C { }";
 
                 VerifySuppressedDiagnostics(compilation, analyzersAndSuppresors);
             }
-
             finally
             {
                 AppDomain.CurrentDomain.FirstChanceException -= firstChanceException;
@@ -511,7 +510,6 @@ class C { }";
 
                 VerifySuppressedDiagnostics(compilation, analyzersAndSuppresors);
             }
-
             finally
             {
                 AppDomain.CurrentDomain.FirstChanceException -= firstChanceException;
@@ -583,7 +581,6 @@ class C { }";
 
                 VerifySuppressedDiagnostics(compilation, analyzersAndSuppresors);
             }
-
             finally
             {
                 AppDomain.CurrentDomain.FirstChanceException -= firstChanceException;
@@ -653,7 +650,6 @@ class C { }";
 
                 VerifySuppressedDiagnostics(compilation, analyzersAndSuppresors);
             }
-
             finally
             {
                 AppDomain.CurrentDomain.FirstChanceException -= firstChanceException;
@@ -722,7 +718,6 @@ class C { }";
 
                 VerifySuppressedDiagnostics(compilation, analyzersAndSuppressors);
             }
-
             finally
             {
                 AppDomain.CurrentDomain.FirstChanceException -= firstChanceException;

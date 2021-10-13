@@ -82,7 +82,6 @@ namespace System.Transactions
                     return _internalEnlistment.State.RecoveryInformation(_internalEnlistment);
                 }
             }
-
             finally
             {
                 if (etwLog.IsEnabled())

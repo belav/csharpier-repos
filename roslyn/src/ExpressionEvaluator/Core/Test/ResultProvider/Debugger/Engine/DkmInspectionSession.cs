@@ -106,7 +106,6 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 {
                     return f(item);
                 }
-
                 finally
                 {
                     _calls.Pop();

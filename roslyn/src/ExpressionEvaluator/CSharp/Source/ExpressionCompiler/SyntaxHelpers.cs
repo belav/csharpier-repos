@@ -348,7 +348,6 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
                 return true;
             }
-
             finally
             {
                 pooled.Free();

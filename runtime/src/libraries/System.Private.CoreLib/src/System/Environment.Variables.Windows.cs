@@ -123,7 +123,6 @@ namespace System
 
                 return results;
             }
-
             finally
             {
                 Interop.BOOL success = Interop.Kernel32.FreeEnvironmentStringsW(stringPtr);

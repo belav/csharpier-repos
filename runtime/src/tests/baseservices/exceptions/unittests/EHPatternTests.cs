@@ -365,7 +365,6 @@ public class CollidedUnwindTest
             _trace.Write("2");
             FnBBB();
         }
-
         finally
         {
             _trace.Write("D");
@@ -379,7 +378,6 @@ public class CollidedUnwindTest
             _trace.Write("3");
             Bar();
         }
-
         finally
         {
             _trace.Write("C");
@@ -393,7 +391,6 @@ public class CollidedUnwindTest
             _trace.Write("4");
             FnCCC();
         }
-
         finally
         {
             _trace.Write("B");
@@ -408,7 +405,6 @@ public class CollidedUnwindTest
             _trace.Write("5");
             FnDDD();
         }
-
         finally
         {
             _trace.Write("A");
@@ -422,7 +418,6 @@ public class CollidedUnwindTest
             _trace.Write("6");
             Fubar();
         }
-
         finally
         {
             _trace.Write("9");
@@ -436,7 +431,6 @@ public class CollidedUnwindTest
             _trace.Write("7");
             throw new ExType1();
         }
-
         finally
         {
             _trace.Write("8");
@@ -458,7 +452,6 @@ public class ThrowInFinallyNestedInTryTest
             {
                 _trace.Write("4");
             }
-
             finally
             {
                 _trace.Write("5");
@@ -467,14 +460,12 @@ public class ThrowInFinallyNestedInTryTest
                     _trace.Write("6");
                     throw new System.ArgumentException();
                 }
-
                 finally
                 {
                     _trace.Write("7");
                 }
             }
         }
-
         finally
         {
             _trace.Write("8");
@@ -520,21 +511,18 @@ class ThrowInFinallyTest
                     _trace.Write("5");
                     throw new Exception("A");
                 }
-
                 finally
                 {
                     _trace.Write("6");
                     throw new Exception("B");
                 }
             }
-
             finally
             {
                 _trace.Write("7");
                 throw new Exception("C");
             }
         }
-
         finally
         {
             _trace.Write("8");
@@ -721,7 +709,6 @@ class GoryNativePastTest
         {
             bar();
         }
-
         finally
         {
             _trace.Write("3");
@@ -774,13 +761,11 @@ class GoryManagedPresentTest
                 }
                 _trace.Write("....");
             }
-
             finally
             {
                 _trace.Write("4");
             }
         }
-
         finally
         {
             _trace.Write("5");
@@ -829,7 +814,6 @@ class TryCatchInFinallyTest
         {
             _trace.Write("1");
         }
-
         finally
         {
             _trace.Write("2");
@@ -933,7 +917,6 @@ class StrSwitchFinalTest
                                 {
                                     _trace.WriteLine("s == two");
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("After two");
@@ -952,7 +935,6 @@ class StrSwitchFinalTest
                                         goto continueloop;
                                     }
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("After three");
@@ -980,7 +962,6 @@ class StrSwitchFinalTest
                                         _trace.WriteLine("Unreached");
                                         throw new Exception();
                                     }
-
                                     finally
                                     {
                                         _trace.WriteLine("After after three");
@@ -997,7 +978,6 @@ class StrSwitchFinalTest
                                     {
                                         _trace.WriteLine("s == " + s[s.Length]);
                                         try { }
-
                                         finally
                                         {
                                             _trace.WriteLine("Unreached");
@@ -1016,7 +996,6 @@ class StrSwitchFinalTest
                                                 _trace.WriteLine("unreached ");
                                                 goto finishfour;
                                             }
-
                                             finally
                                             {
                                                 _trace.WriteLine("also unreached");
@@ -1028,7 +1007,6 @@ class StrSwitchFinalTest
                                         }
                                     }
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("In four's finally");
@@ -1044,7 +1022,6 @@ class StrSwitchFinalTest
                                         {
                                             _trace.WriteLine("s == five");
                                         }
-
                                         finally
                                         {
                                             _trace.WriteLine("Five's finally 0");
@@ -1060,7 +1037,6 @@ class StrSwitchFinalTest
                                     }
                                     break;
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("Five's finally 2");
@@ -1071,7 +1047,6 @@ class StrSwitchFinalTest
                                     _trace.WriteLine("Greater than five");
                                     goto finish;
                                 }
-
                                 finally
                                 {
                                     _trace.WriteLine("in six's finally");
@@ -1080,7 +1055,6 @@ class StrSwitchFinalTest
                         ;
                         continue;
                     }
-
                     finally
                     {
                         _trace.WriteLine("In inner finally");
@@ -1118,7 +1092,6 @@ class StrSwitchFinalTest
 
                 _trace.WriteLine("Unreached");
             }
-
             finally
             {
                 _trace.WriteLine("In outer finally\r\n");
@@ -1160,7 +1133,6 @@ public class RethrowAndFinallysTest
                                 _trace.Write("f");
                                 throw new Exception("ex1");
                             }
-
                             finally
                             {
                                 _trace.Write("F");
@@ -1177,7 +1149,6 @@ public class RethrowAndFinallysTest
                             _trace.Write("E");
                         }
                     }
-
                     finally
                     {
                         _trace.Write("D");
@@ -1194,7 +1165,6 @@ public class RethrowAndFinallysTest
                     _trace.Write("C");
                 }
             }
-
             finally
             {
                 _trace.Write("B");
@@ -1251,7 +1221,6 @@ class InnerFinallyTest
             {
                 _trace.WriteLine("\t try 1.1");
             }
-
             finally
             {
                 _trace.WriteLine("\t finally 1.1");
@@ -1261,7 +1230,6 @@ class InnerFinallyTest
                     _trace.WriteLine("\t\t Throwing an exception here!");
                     z = x / y;
                 }
-
                 finally
                 {
                     _trace.WriteLine("\t\t finally 1.1.1");
@@ -1304,7 +1272,6 @@ class InnerFinallyAndCatchTest
                 _trace.Write("b");
                 count++;
             }
-
             finally // 1
             {
                 try
@@ -1312,7 +1279,6 @@ class InnerFinallyAndCatchTest
                     _trace.Write("c");
                     count++;
                 }
-
                 finally // 2
                 {
                     try
@@ -1322,7 +1288,6 @@ class InnerFinallyAndCatchTest
                             _trace.Write("d");
                             count++;
                         }
-
                         finally // 3
                         {
                             _trace.Write("e");
@@ -1332,7 +1297,6 @@ class InnerFinallyAndCatchTest
                                 _trace.Write("f");
                                 count++;
                             }
-
                             finally // 4
                             {
                                 _trace.Write("g");

@@ -166,7 +166,6 @@ namespace Microsoft.Data.Sqlite
                     Assert.Equal(Path.Combine(dataSubDirectory, "local.db"), connection.DataSource);
                 }
             }
-
             finally
             {
                 AppDomain.CurrentDomain.SetData("DataDirectory", null);
@@ -223,7 +222,6 @@ namespace Microsoft.Data.Sqlite
                     Assert.True(raised);
                     Assert.Equal(ConnectionState.Open, connection.State);
                 }
-
                 finally
                 {
                     connection.StateChange -= handler;
@@ -382,7 +380,6 @@ namespace Microsoft.Data.Sqlite
 
                 Assert.Equal(1L, value);
             }
-
             finally
             {
                 File.Delete("encrypted2.db");
@@ -542,7 +539,6 @@ namespace Microsoft.Data.Sqlite
                     Assert.True(raised);
                     Assert.Equal(ConnectionState.Closed, connection.State);
                 }
-
                 finally
                 {
                     connection.StateChange -= handler;

@@ -35,7 +35,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
                     await _next(context);
                 }
             }
-
             finally
             {
                 context.Transport = oldTransport;

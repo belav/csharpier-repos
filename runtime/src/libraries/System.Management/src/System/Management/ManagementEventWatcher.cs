@@ -475,7 +475,6 @@ namespace System.Management
                         }
                     }
                 }
-
                 finally
                 {
                     securityHandler.Reset();
@@ -545,7 +544,6 @@ namespace System.Management
                         Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
                 }
             }
-
             finally
             {
                 securityHandler.Reset();

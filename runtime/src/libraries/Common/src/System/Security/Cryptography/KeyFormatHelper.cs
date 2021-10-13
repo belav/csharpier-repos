@@ -481,7 +481,6 @@ namespace System.Security.Cryptography
 
                 return writer;
             }
-
             finally
             {
                 CryptographicOperations.ZeroMemory(encryptedSpan);

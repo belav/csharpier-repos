@@ -245,7 +245,6 @@ namespace System.Diagnostics
                             {
                                 s_iniFilePath = Path.GetTempFileName();
                             }
-
                             finally { }
                         }
                     }
@@ -291,7 +290,6 @@ namespace System.Diagnostics
                             {
                                 s_symbolFilePath = Path.GetTempFileName();
                             }
-
                             finally { }
                         }
                     }
@@ -530,13 +528,11 @@ namespace System.Diagnostics
 
                     iniWriter.WriteLine("");
                 }
-
                 finally
                 {
                     iniWriter.Close();
                 }
             }
-
             finally { }
         }
 
@@ -591,7 +587,6 @@ namespace System.Diagnostics
                 else
                     iniRegistered = false;
             }
-
             finally
             {
                 if (serviceKey != null)
@@ -632,13 +627,11 @@ namespace System.Diagnostics
 
                     symbolWriter.WriteLine("");
                 }
-
                 finally
                 {
                     symbolWriter.Close();
                 }
             }
-
             finally { }
         }
 
@@ -669,7 +662,6 @@ namespace System.Diagnostics
                 if (deleteCategoryKey)
                     serviceKey.DeleteSubKeyTree(categoryName);
             }
-
             finally
             {
                 if (serviceKey != null)
@@ -813,7 +805,6 @@ namespace System.Diagnostics
                         }
                     }
                 }
-
                 finally
                 {
                     if (key != null)
@@ -1074,7 +1065,6 @@ namespace System.Diagnostics
                 if (libraryParentKey != null)
                     ids = libraryParentKey.GetSubKeyNames();
             }
-
             finally
             {
                 if (libraryParentKey != null)
@@ -1241,7 +1231,6 @@ namespace System.Diagnostics
                     }
                 }
             }
-
             finally
             {
                 libraryKey.Close();
@@ -1341,7 +1330,6 @@ namespace System.Diagnostics
                 CloseAllTables();
                 CloseAllLibraries();
             }
-
             finally
             {
                 DeleteTemporaryFiles();
@@ -1372,7 +1360,6 @@ namespace System.Diagnostics
 
                 res = p.ExitCode;
             }
-
             finally { }
 
             if (res == Interop.Errors.ERROR_ACCESS_DENIED)

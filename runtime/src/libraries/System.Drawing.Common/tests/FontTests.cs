@@ -80,7 +80,6 @@ namespace System.Drawing.Tests
                     );
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -106,7 +105,6 @@ namespace System.Drawing.Tests
                     );
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -141,7 +139,6 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, GraphicsUnit.Point, 1, false);
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -159,7 +156,6 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, GraphicsUnit.Point, 1, false);
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -192,7 +188,6 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, FontStyle.Regular, unit, 1, false);
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -214,7 +209,6 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, FontStyle.Regular, unit, 1, false);
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -297,7 +291,6 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, unit, 1, false);
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -320,7 +313,6 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, unit, 1, false);
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -412,7 +404,6 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, unit, gdiCharSet, false);
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -436,7 +427,6 @@ namespace System.Drawing.Tests
                     VerifyFont(font, fontFamily.Name, emSize, style, unit, gdiCharSet, false);
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -554,7 +544,6 @@ namespace System.Drawing.Tests
                     );
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -596,7 +585,6 @@ namespace System.Drawing.Tests
                     );
                 }
             }
-
             finally
             {
                 fontFamily.Dispose();
@@ -951,7 +939,6 @@ namespace System.Drawing.Tests
                 Assert.Equal(expected, font.Equals(other));
                 Assert.Equal(font.GetHashCode(), font.GetHashCode());
             }
-
             finally
             {
                 font.Dispose();
@@ -981,7 +968,6 @@ namespace System.Drawing.Tests
                 {
                     AssertExtensions.Throws<ArgumentException>(null, () => Font.FromHdc(hdc));
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1173,7 +1159,6 @@ namespace System.Drawing.Tests
                         );
                     }
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1201,7 +1186,6 @@ namespace System.Drawing.Tests
                         () => Font.FromLogFont(logFont, hdc)
                     );
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();
@@ -1228,7 +1212,6 @@ namespace System.Drawing.Tests
                         Assert.NotEmpty(font.Name);
                     }
                 }
-
                 finally
                 {
                     graphics.ReleaseHdc();

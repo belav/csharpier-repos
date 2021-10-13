@@ -60,7 +60,6 @@ namespace Microsoft.AspNetCore.Hosting
                         await host.WaitForTokenShutdownAsync(cts.Token);
                         lifetime.SetExitedGracefully();
                     }
-
                     finally
                     {
                         done.Set();
@@ -112,7 +111,6 @@ namespace Microsoft.AspNetCore.Hosting
                         );
                         lifetime.SetExitedGracefully();
                     }
-
                     finally
                     {
                         done.Set();
@@ -159,7 +157,6 @@ namespace Microsoft.AspNetCore.Hosting
 
                 await host.WaitForTokenShutdownAsync(token);
             }
-
             finally
             {
                 if (host is IAsyncDisposable asyncDisposable)

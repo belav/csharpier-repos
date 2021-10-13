@@ -217,7 +217,6 @@ namespace System.IO.Packaging
                     ((IDisposable)_reader).Dispose();
                 }
             }
-
             finally
             {
                 base.Dispose(disposing);

@@ -1038,7 +1038,6 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 );
                 Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
             }
-
             finally
             {
                 _serviceContext.Log = previousLog;

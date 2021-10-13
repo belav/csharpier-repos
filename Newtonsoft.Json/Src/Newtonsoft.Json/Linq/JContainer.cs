@@ -169,7 +169,6 @@ namespace Newtonsoft.Json.Linq
                 {
                     handler(this, e);
                 }
-
                 finally
                 {
                     _busy = false;
@@ -193,7 +192,6 @@ namespace Newtonsoft.Json.Linq
                 {
                     handler(this, e);
                 }
-
                 finally
                 {
                     _busy = false;

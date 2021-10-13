@@ -208,7 +208,6 @@ namespace System.Collections.ObjectModel
                 {
                     handler(this, e);
                 }
-
                 finally
                 {
                     _blockReentrancyCount--;

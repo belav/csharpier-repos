@@ -2080,7 +2080,6 @@ public class C
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x").WithArguments("x")
                 );
             }
-
             finally
             {
                 Thread.CurrentThread.CurrentCulture = savedCurrentCulture;

@@ -119,7 +119,6 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 Assert.True(component.Called);
                 Assert.Null(SynchronizationContext.Current);
             }
-
             finally
             {
                 // Not sure if the line above messes up the xunit sync context, so just being cautious here.

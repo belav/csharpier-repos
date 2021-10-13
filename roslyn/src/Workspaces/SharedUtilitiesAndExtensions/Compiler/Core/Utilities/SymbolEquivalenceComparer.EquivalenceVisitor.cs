@@ -104,7 +104,6 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return AreEquivalentWorker(x, y, xKind, equivalentTypesWithDifferingAssemblies);
 #if TRACKDEPTH
                 }
-
                 finally
                 {
                     this.depth--;

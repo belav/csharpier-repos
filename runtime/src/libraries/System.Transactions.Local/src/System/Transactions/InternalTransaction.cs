@@ -393,7 +393,6 @@ namespace System.Transactions
                     Debug.Assert(_committableTransaction != null);
                     _asyncCallback(_committableTransaction);
                 }
-
                 finally
                 {
                     Monitor.Enter(this);

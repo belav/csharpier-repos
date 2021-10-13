@@ -125,7 +125,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                             overriddenSymbol = overriddenSymbol.GetOverriddenMember();
                         }
                     }
-
                     finally
                     {
                         await context.OnCompletedAsync().ConfigureAwait(false);

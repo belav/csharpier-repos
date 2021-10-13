@@ -66,7 +66,6 @@ namespace Internal.Cryptography
                     tmpSpan.Slice(0, written).CopyTo(output);
                     return written;
                 }
-
                 finally
                 {
                     CryptoPool.Return(tmp, written);
@@ -106,7 +105,6 @@ namespace Internal.Cryptography
                     rented.AsSpan(0, written).CopyTo(output);
                     return written;
                 }
-
                 finally
                 {
                     CryptoPool.Return(rented, clearSize: written);

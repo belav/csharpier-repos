@@ -205,7 +205,6 @@ namespace System.IO
                     Flush(flushStream: true, flushEncoder: true);
                 }
             }
-
             finally
             {
                 CloseStreamFromDispose(disposing);
@@ -228,7 +227,6 @@ namespace System.IO
                         _stream.Close();
                     }
                 }
-
                 finally
                 {
                     _disposed = true;
@@ -252,7 +250,6 @@ namespace System.IO
                     await FlushAsync().ConfigureAwait(false);
                 }
             }
-
             finally
             {
                 CloseStreamFromDispose(disposing: true);

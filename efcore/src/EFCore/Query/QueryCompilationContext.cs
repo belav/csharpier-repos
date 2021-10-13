@@ -205,7 +205,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 return queryExecutorExpression.Compile();
             }
-
             finally
             {
                 Logger.QueryExecutionPlanned(_expressionPrinter, queryExecutorExpression);

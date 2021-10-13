@@ -136,7 +136,6 @@ namespace System.Diagnostics.Eventing.Reader
                     0
                 );
             }
-
             finally
             {
                 erLogin.Password.Dispose();

@@ -295,7 +295,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                     tail.AddToList(list, 0, tailHigh);
                 }
             }
-
             finally
             {
                 // This Decrement must happen after copying is over.
@@ -525,7 +524,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                     }
                 }
             }
-
             finally
             {
                 // This Decrement must happen after the enumeration is over.
@@ -752,7 +750,6 @@ namespace System.Threading.Tasks.Dataflow.Internal.Collections
                 //without interruption. This is to prevent anything from happening between them, and another dequeue
                 //thread maybe spinning forever to wait for _state[] to be true;
                 try { }
-
                 finally
                 {
                     newhigh = Interlocked.Increment(ref _high);

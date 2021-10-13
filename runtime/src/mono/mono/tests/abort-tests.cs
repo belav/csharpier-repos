@@ -18,7 +18,6 @@ public class Tests
                     {
                         Thread.CurrentThread.Abort();
                     }
-
                     finally
                     {
                         called_finally = true;

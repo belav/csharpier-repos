@@ -367,7 +367,6 @@ namespace Common.Tests
                 Assert.Equal(expectedRss, result.rss);
                 Assert.Equal(expectedRsslim, result.rsslim);
             }
-
             finally
             {
                 File.Delete(path);

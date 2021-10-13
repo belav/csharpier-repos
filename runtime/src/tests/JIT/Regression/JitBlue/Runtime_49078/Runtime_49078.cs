@@ -84,7 +84,6 @@ namespace GitHub_49078
                     i += j;
                 }
             }
-
             finally
             {
                 i += 2;

@@ -41,7 +41,6 @@ namespace System.CommandLine.Suggest.Tests
                         GlobalToolsSuggestionRegistrationTests.FilesNameWithoutExtensionUnderDotnetProfileToolsExample
                     );
             }
-
             finally
             {
                 Directory.Delete(path, true);

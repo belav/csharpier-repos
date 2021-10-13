@@ -78,7 +78,6 @@ namespace System.Security.Cryptography.Cng.Tests
             {
                 Assert.Throws<CryptographicException>(() => new AesCng(keyName));
             }
-
             finally
             {
                 cngKey.Delete();

@@ -202,7 +202,6 @@ public sealed class WindowsTestAccount : IDisposable
                 IntPtr logonToken = _accountTokenHandle.DangerousGetHandle();
                 AccountName = new WindowsIdentity(logonToken).Name;
             }
-
             finally
             {
                 if (gotRef)

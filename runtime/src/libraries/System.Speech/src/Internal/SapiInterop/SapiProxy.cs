@@ -87,7 +87,6 @@ namespace System.Speech.Internal.SapiInterop
                 {
                     Dispose(true);
                 }
-
                 finally
                 {
                     base.Dispose();
@@ -168,7 +167,6 @@ namespace System.Speech.Internal.SapiInterop
                 {
                     Dispose(true);
                 }
-
                 finally
                 {
                     base.Dispose();

@@ -133,7 +133,6 @@ namespace System.Transactions
                     );
                 }
             }
-
             finally
             {
                 Monitor.Enter(enlistment.Transaction);
@@ -193,7 +192,6 @@ namespace System.Transactions
                 }
                 spcCommitted = true;
             }
-
             finally
             {
                 if (!spcCommitted)

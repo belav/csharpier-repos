@@ -237,7 +237,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return result;
             }
-
             finally
             {
                 body.Free(_pool);
@@ -356,7 +355,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 body.Free(_pool);
@@ -714,7 +712,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     }
                 }
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -1033,7 +1030,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return attributes.ToList();
             }
-
             finally
             {
                 _pool.Free(attributes);
@@ -1095,7 +1091,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return declaration;
             }
-
             finally
             {
                 _pool.Free(attributes);
@@ -1247,7 +1242,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     var closeParen = this.EatToken(SyntaxKind.CloseParenToken);
                     argList = _syntaxFactory.AttributeArgumentList(openParen, argNodes, closeParen);
                 }
-
                 finally
                 {
                     _pool.Free(argNodes);
@@ -1617,7 +1611,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     }
                 }
             }
-
             finally
             {
                 this.Reset(ref resetPoint);
@@ -1679,7 +1672,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return IsPossibleMemberName();
             }
-
             finally
             {
                 this.Reset(ref point);
@@ -1989,7 +1981,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         throw ExceptionUtilities.UnexpectedValue(keyword.Kind);
                 }
             }
-
             finally
             {
                 if (!members.IsNull)
@@ -2090,7 +2081,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     tokens.ToListNode()
                 );
             }
-
             finally
             {
                 _pool.Free(tokens);
@@ -2177,7 +2167,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.BaseList(colon, list);
             }
-
             finally
             {
                 _pool.Free(list);
@@ -2301,7 +2290,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.TypeParameterConstraintClause(where, name, colon, bounds);
             }
-
             finally
             {
                 _pool.Free(bounds);
@@ -2659,7 +2647,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 break;
                         }
                     }
-
                     finally
                     {
                         IsInAsync = wasInAsync;
@@ -2988,13 +2975,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         typeParameterListOpt
                     );
                 }
-
                 finally
                 {
                     this.Release(ref afterTypeResetPoint);
                 }
             }
-
             finally
             {
                 _pool.Free(modifiers);
@@ -3051,7 +3036,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     this.Reset(ref resetOnFailurePoint);
                     return false;
                 }
-
                 finally
                 {
                     this.Release(ref resetOnFailurePoint);
@@ -3488,13 +3472,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         typeParameterListOpt
                     );
                 }
-
                 finally
                 {
                     this.Release(ref afterTypeResetPoint);
                 }
             }
-
             finally
             {
                 _pool.Free(modifiers);
@@ -3628,7 +3610,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -3908,7 +3889,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 if (!constraints.IsNull)
@@ -4349,7 +4329,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                     accessors = builder.ToList();
                 }
-
                 finally
                 {
                     _pool.Free(builder);
@@ -4626,7 +4605,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 trailingTrivia = (nodes.Count > 0) ? nodes.ToListNode() : null;
                 return action;
             }
-
             finally
             {
                 _pool.Free(nodes);
@@ -4664,7 +4642,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 trailingTrivia = (nodes.Count > 0) ? nodes.ToListNode() : null;
                 return action;
             }
-
             finally
             {
                 _pool.Free(nodes);
@@ -4805,7 +4782,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 _pool.Free(accMods);
@@ -4861,7 +4837,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 this.ParseParameterList(out open, parameters, out close, openKind, closeKind);
                 return _syntaxFactory.ParameterList(open, parameters, close);
             }
-
             finally
             {
                 _pool.Free(parameters);
@@ -4892,7 +4867,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 this.ParseParameterList(out open, parameters, out close, openKind, closeKind);
                 return _syntaxFactory.BracketedParameterList(open, parameters, close);
             }
-
             finally
             {
                 _pool.Free(parameters);
@@ -5165,7 +5139,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.Parameter(attributes, modifiers.ToList(), type, name, def);
             }
-
             finally
             {
                 _pool.Free(modifiers);
@@ -5283,7 +5256,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -5487,7 +5459,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -5542,7 +5513,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -5884,7 +5854,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         }
                     }
                 }
-
                 finally
                 {
                     this.Reset(ref resetPoint);
@@ -6041,7 +6010,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             }
                         }
                     }
-
                     finally
                     {
                         _pool.Free(args);
@@ -6100,7 +6068,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return false;
             }
-
             finally
             {
                 Reset(ref resetPoint);
@@ -6160,7 +6127,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 _pool.Free(variables);
@@ -6205,7 +6171,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 if (!constraints.IsNull)
@@ -6256,7 +6221,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     this.ParseEnumMemberDeclarations(ref openBrace, builder);
                     members = builder.ToList();
                 }
-
                 finally
                 {
                     _pool.Free(builder);
@@ -6623,7 +6587,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.TypeParameterList(open, parameters, close);
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -7261,7 +7224,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         ScanNamedTypePart();
                         isMemberName = !IsDotOrColonColon();
                     }
-
                     finally
                     {
                         this.Reset(ref point);
@@ -7415,7 +7377,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     }
                 }
             }
-
             finally
             {
                 if (beforeIdentifierPointSet)
@@ -7932,7 +7893,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         lastTokenOfType =
                             TryEatToken(SyntaxKind.CloseBracketToken) ?? lastTokenOfType;
                     }
-
                     finally
                     {
                         _termState = saveTerm;
@@ -7975,7 +7935,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     _ = EatToken(SyntaxKind.CommaToken);
                 } while (true);
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -8188,7 +8147,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                             type = _syntaxFactory.ArrayType(type, ranks);
                         }
-
                         finally
                         {
                             _pool.Free(ranks);
@@ -8249,7 +8207,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     }
                 }
             }
-
             finally
             {
                 this.Release(ref resetPoint);
@@ -8349,7 +8306,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var close = this.EatToken(SyntaxKind.CloseBracketToken);
                 return _syntaxFactory.ArrayRankSpecifier(open, list, close);
             }
-
             finally
             {
                 _pool.Free(list);
@@ -8404,7 +8360,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return result;
             }
-
             finally
             {
                 _pool.Free(list);
@@ -8565,7 +8520,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         Debug.Assert(CurrentToken.Kind == SyntaxKind.CommaToken);
                         types.AddSeparator(EatToken(SyntaxKind.CommaToken));
                     }
-
                     finally
                     {
                         _pool.Free(modifiers);
@@ -8598,7 +8552,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 );
                 return funcPointer;
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -8691,7 +8644,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                     closeBracket
                                 );
                         }
-
                         finally
                         {
                             _termState = saveTerm;
@@ -8840,7 +8792,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return ParseStatementCoreRest(attributes, isGlobal, ref resetPointBeforeStatement);
             }
-
             finally
             {
                 _recursionDepth--;
@@ -9168,7 +9119,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return true;
             }
-
             finally
             {
                 this.Reset(ref resetPoint);
@@ -9218,7 +9168,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     isGlobalScriptLevel: false
                 );
             }
-
             finally
             {
                 this.Reset(ref resetPoint);
@@ -9494,7 +9443,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return !IsPossibleMemberName() || st == ScanTypeFlags.NotType;
             }
-
             finally
             {
                 this.Reset(ref resetPoint);
@@ -9961,7 +9909,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.TryStatement(attributes, @try, block, catches, @finally);
             }
-
             finally
             {
                 if (!catches.IsNull)
@@ -10161,7 +10108,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     return this.ParseForStatement(attributes);
                 }
             }
-
             finally
             {
                 this.Release(ref resetPoint);
@@ -10250,7 +10196,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     statement
                 );
             }
-
             finally
             {
                 _termState = saveTerm;
@@ -10553,7 +10498,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         return true;
                 }
             }
-
             finally
             {
                 this.Reset(ref resetPoint);
@@ -10823,7 +10767,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     closeBrace
                 );
             }
-
             finally
             {
                 _pool.Free(sections);
@@ -10925,7 +10868,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.SwitchSection(labels, statements);
             }
-
             finally
             {
                 _pool.Free(statements);
@@ -11228,7 +11170,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     semicolon
                 );
             }
-
             finally
             {
                 _pool.Free(variables);
@@ -12663,7 +12604,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     && ScanDesignator()
                     && this.CurrentToken.Kind == SyntaxKind.EqualsToken;
             }
-
             finally
             {
                 // Restore current token index
@@ -13146,7 +13086,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 arguments = list.ToList();
             }
-
             finally
             {
                 if (!list.IsNull)
@@ -13529,7 +13468,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     }
                 }
             }
-
             finally
             {
                 this.Reset(ref resetPoint);
@@ -13626,7 +13564,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     );
                 }
             }
-
             finally
             {
                 this.Release(ref resetPoint);
@@ -13709,7 +13646,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 result = CheckFeatureAvailability(result, MessageID.IDS_FeatureTuples);
                 return result;
             }
-
             finally
             {
                 _pool.Free(list);
@@ -14247,7 +14183,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
                 return true;
             }
-
             finally
             {
                 this.Reset(ref point);
@@ -14374,7 +14309,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     closeBrace
                 );
             }
-
             finally
             {
                 _pool.Free(initializers);
@@ -14567,7 +14501,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     closeBrace
                 );
             }
-
             finally
             {
                 _pool.Free(initializers);
@@ -14696,7 +14629,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     initializer
                 );
             }
-
             finally
             {
                 _pool.Free(commas);
@@ -14778,7 +14710,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     closeBrace
                 );
             }
-
             finally
             {
                 _pool.Free(list);
@@ -15105,7 +15036,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.ParameterList(openParen, nodes, closeParen);
             }
-
             finally
             {
                 _pool.Free(nodes);
@@ -15358,7 +15288,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     return true;
                 }
             }
-
             finally
             {
                 this.Reset(ref resetPoint);
@@ -15448,7 +15377,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.QueryBody(clauses, selectOrGroupBy, continuation);
             }
-
             finally
             {
                 _pool.Free(clauses);
@@ -15601,7 +15529,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 return _syntaxFactory.OrderByClause(@orderby, list);
             }
-
             finally
             {
                 _pool.Free(list);

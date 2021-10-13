@@ -105,7 +105,6 @@ namespace System.Linq.Expressions
                 // Using awaiter here to propagate original exception
                 return task.GetAwaiter().GetResult();
             }
-
             finally
             {
                 _executionStackCount--;

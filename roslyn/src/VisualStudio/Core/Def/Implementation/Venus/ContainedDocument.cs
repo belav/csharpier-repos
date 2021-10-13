@@ -263,7 +263,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 );
                 AdjustIndentation(subjectBuffer, affectedVisibleSpanIndices);
             }
-
             finally
             {
                 SharedPools.Default<HashSet<int>>()

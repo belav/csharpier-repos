@@ -1107,7 +1107,6 @@ namespace System.Data
                 _recordManager.SetRowCache(rowArr);
                 ResetIndexes();
             }
-
             finally
             {
                 _enforceConstraints = enforceConstraintsOrg;
@@ -1279,7 +1278,6 @@ namespace System.Data
                             throw first;
                         }
                     }
-
                     finally
                     {
                         RestoreShadowIndexes();
@@ -1736,7 +1734,6 @@ namespace System.Data
                     }
                     _cultureUserSet = userSet;
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -2135,7 +2132,6 @@ namespace System.Data
                         _encodedTableName = null;
                     }
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -2246,7 +2242,6 @@ namespace System.Data
                     }
                     _tableNamespace = value;
                 }
-
                 finally
                 {
                     DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -2655,7 +2650,6 @@ namespace System.Data
                         "oops, you change index record without noticing it"
                     );
                 }
-
                 finally
                 {
                     targetRow._tempRecord = proposedRecord;
@@ -2719,13 +2713,11 @@ namespace System.Data
                         }
                     }
                 }
-
                 finally
                 {
                     RestoreIndexEvents(false);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -2755,7 +2747,6 @@ namespace System.Data
                 }
                 return CloneTo(clone, cloneDS, false);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -2966,7 +2957,6 @@ namespace System.Data
 
                 return destTable;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3301,7 +3291,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 row.ResetLastChangedColumn(); // if expression is evaluated while adding, before  return, we want to clear it
@@ -3384,7 +3373,6 @@ namespace System.Data
                     EvaluateDependentExpressions(column);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3621,7 +3609,6 @@ namespace System.Data
 
                 return dtChanges;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3662,7 +3649,6 @@ namespace System.Data
 
                 return dtChanges;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3717,7 +3703,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 _indexesLock.ExitUpgradeableReadLock();
@@ -3806,7 +3791,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -3907,7 +3891,6 @@ namespace System.Data
 
                 RaiseRowChanged(drcevent, row, DataRowAction.Add);
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -4375,7 +4358,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 RestoreShadowIndexes();
@@ -4408,7 +4390,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 RestoreShadowIndexes();
@@ -4434,7 +4415,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 RestoreShadowIndexes();
@@ -4482,7 +4462,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 RestoreShadowIndexes();
@@ -4624,7 +4603,6 @@ namespace System.Data
                     RollbackRow(oldRows[i]);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -4712,7 +4690,6 @@ namespace System.Data
                 Columns.Clear();
                 _indexes.Clear();
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -4759,7 +4736,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 RestoreShadowIndexes();
@@ -4826,7 +4802,6 @@ namespace System.Data
                 {
                     args = OnRowChanging(args, eRow, eAction);
                 }
-
                 finally
                 {
                     eRow._inChangingEvent = false;
@@ -4849,7 +4824,6 @@ namespace System.Data
                     }
                     OnRowDeleting(args);
                 }
-
                 finally
                 {
                     eRow._inDeletingEvent = false;
@@ -5311,7 +5285,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 if (
@@ -5419,7 +5392,6 @@ namespace System.Data
                     EnforceConstraints = false;
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -5469,7 +5441,6 @@ namespace System.Data
                     EnforceConstraints = true;
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -5542,7 +5513,6 @@ namespace System.Data
                     return row;
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -5616,7 +5586,6 @@ namespace System.Data
 
                 return dataRow;
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -5814,7 +5783,6 @@ namespace System.Data
                         throw ADP.InvalidMissingSchemaAction(missingSchemaAction);
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -5861,7 +5829,6 @@ namespace System.Data
                     reader.Close();
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -6065,14 +6032,12 @@ namespace System.Data
                     {
                         drcevent = OnRowChanging(drcevent, dataRow, action);
                     }
-
                     finally
                     {
                         dataRow._inChangingEvent = false;
                     }
                 }
             }
-
             finally
             {
                 Debug.Assert(
@@ -6182,7 +6147,6 @@ namespace System.Data
                 {
                     OnRowChanged(drcevent, dataRow, action);
                 }
-
                 finally
                 {
                     dataRow._inChangingEvent = false;
@@ -6325,7 +6289,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -6354,7 +6317,6 @@ namespace System.Data
                     xw.WriteEndDocument();
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -6478,7 +6440,6 @@ namespace System.Data
                     _tableNamespace = tablenamespace;
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);
@@ -6497,7 +6458,6 @@ namespace System.Data
                 WriteXmlSchema(xw, writeHierarchy);
                 xw.WriteEndDocument();
             }
-
             finally
             {
                 xw.Close();
@@ -6545,7 +6505,6 @@ namespace System.Data
             {
                 return ReadXml(xr, false);
             }
-
             finally
             {
                 xr.Close();
@@ -6879,13 +6838,11 @@ namespace System.Data
                     RestoreConstraint(originalEnforceConstraint);
                     return ret;
                 }
-
                 finally
                 {
                     rowDiffIdUsage.Cleanup();
                 }
             }
-
             finally
             {
                 restrictedScope?.Dispose();
@@ -7243,7 +7200,6 @@ namespace System.Data
 
                 return ret;
             }
-
             finally
             {
                 restrictedScope?.Dispose();
@@ -7457,7 +7413,6 @@ namespace System.Data
             {
                 ReadXmlSchema(xr, false);
             }
-
             finally
             {
                 xr.Close();
@@ -7673,7 +7628,6 @@ namespace System.Data
                     }
                 }
             }
-
             finally
             {
                 DataCommonEventSource.Log.ExitScope(logScopeId);

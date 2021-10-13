@@ -555,7 +555,6 @@ namespace System.Threading.Tests
                                 {
                                     File.WriteAllText(f, "0");
                                 }
-
                                 finally
                                 {
                                     mutex.ReleaseMutex();
@@ -579,7 +578,6 @@ namespace System.Threading.Tests
                                         return File.Exists(fileName)
                                             && int.TryParse(File.ReadAllText(fileName), out _);
                                     }
-
                                     finally
                                     {
                                         mutex.ReleaseMutex();
@@ -612,7 +610,6 @@ namespace System.Threading.Tests
                     Thread.Sleep(10);
                     File.WriteAllText(fileName, (current + 1).ToString());
                 }
-
                 finally
                 {
                     mutex.ReleaseMutex();

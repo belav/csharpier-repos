@@ -135,7 +135,6 @@ namespace Microsoft.CodeAnalysis.Tools.Workspaces
                     cancellationToken
                 );
             }
-
             finally
             {
                 Guard.Release();

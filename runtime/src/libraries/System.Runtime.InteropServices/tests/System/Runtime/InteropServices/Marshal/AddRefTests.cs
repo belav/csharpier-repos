@@ -22,7 +22,6 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(2, Marshal.AddRef(iUnknown));
                 Marshal.Release(iUnknown);
             }
-
             finally
             {
                 Marshal.Release(iUnknown);

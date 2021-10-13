@@ -53,7 +53,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Debugger
                 await AbstractFindUsagesService.FindSymbolReferencesAsync(context, symbol, project)
                     .ConfigureAwait(false);
             }
-
             finally
             {
                 await context.OnCompletedAsync().ConfigureAwait(false);

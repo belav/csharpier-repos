@@ -398,7 +398,6 @@ namespace System.Xml
                 length = totalLength;
                 return true;
             }
-
             finally
             {
                 BufferReader.Offset = offset;

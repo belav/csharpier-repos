@@ -194,7 +194,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
                         }
                     }
                 }
-
                 finally
                 {
                     await context.OnCompletedAsync().ConfigureAwait(false);

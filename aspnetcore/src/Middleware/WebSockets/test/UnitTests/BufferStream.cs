@@ -153,7 +153,6 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                 // Keep reading while there is more data available and we have more space to put it in.
                 return totalRead;
             }
-
             finally
             {
                 _readLock.Release();
@@ -236,7 +235,6 @@ namespace Microsoft.AspNetCore.WebSockets.Test
                 // Keep reading while there is more data available and we have more space to put it in.
                 return totalRead;
             }
-
             finally
             {
                 registration.Dispose();
@@ -264,7 +262,6 @@ namespace Microsoft.AspNetCore.WebSockets.Test
 
                 SignalDataAvailable();
             }
-
             finally
             {
                 _writeLock.Release();

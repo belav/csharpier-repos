@@ -326,7 +326,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                         {
                             Assert.True(result.IsCompleted);
                         }
-
                         finally
                         {
                             connection.Transport.Input.AdvanceTo(result.Buffer.End);
@@ -342,7 +341,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests
                         {
                             Assert.True(result.IsCanceled);
                         }
-
                         finally
                         {
                             connection.Application.Input.AdvanceTo(result.Buffer.End);

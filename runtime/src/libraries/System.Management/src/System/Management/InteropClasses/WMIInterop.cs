@@ -2588,7 +2588,6 @@ namespace System.Management
                 )
                     return false;
             }
-
             finally
             {
                 if (pComThreadingInfo != IntPtr.Zero)

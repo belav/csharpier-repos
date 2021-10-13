@@ -158,7 +158,6 @@ namespace System.Text.Json
                         }
                     } while (!bufferState.IsFinalBlock);
                 }
-
                 finally
                 {
                     bufferState.Dispose();
@@ -200,7 +199,6 @@ namespace System.Text.Json
                     }
                 }
             }
-
             finally
             {
                 asyncState.Dispose();

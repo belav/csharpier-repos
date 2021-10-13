@@ -89,7 +89,6 @@ public class CollidedUnwindTest
             _trace.Write("2");
             FnBBB();
         }
-
         finally
         {
             _trace.Write("D");
@@ -103,7 +102,6 @@ public class CollidedUnwindTest
             _trace.Write("3");
             Bar();
         }
-
         finally
         {
             _trace.Write("C");
@@ -117,7 +115,6 @@ public class CollidedUnwindTest
             _trace.Write("4");
             FnCCC();
         }
-
         finally
         {
             _trace.Write("B");
@@ -132,7 +129,6 @@ public class CollidedUnwindTest
             _trace.Write("5");
             FnDDD();
         }
-
         finally
         {
             _trace.Write("A");
@@ -146,7 +142,6 @@ public class CollidedUnwindTest
             _trace.Write("6");
             Fubar();
         }
-
         finally
         {
             _trace.Write("9");
@@ -160,7 +155,6 @@ public class CollidedUnwindTest
             _trace.Write("7");
             throw new ExType1();
         }
-
         finally
         {
             _trace.Write("8");

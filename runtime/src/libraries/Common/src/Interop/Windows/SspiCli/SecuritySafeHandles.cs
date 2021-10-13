@@ -91,7 +91,6 @@ namespace System.Net.Security
                     buffer
                 );
             }
-
             finally
             {
                 phContext.DangerousRelease();
@@ -134,7 +133,6 @@ namespace System.Net.Security
                     buffer.Length
                 );
             }
-
             finally
             {
                 phContext.DangerousRelease();
@@ -652,7 +650,6 @@ namespace System.Net.Security
                     }
                 }
             }
-
             finally
             {
                 if (outoutBuffer != IntPtr.Zero)
@@ -718,7 +715,6 @@ namespace System.Net.Security
                     out timeStamp
                 );
             }
-
             finally
             {
                 //
@@ -1026,7 +1022,6 @@ namespace System.Net.Security
                     }
                 }
             }
-
             finally
             {
                 if (isSspiAllocated && outUnmanagedBuffer[0].pvBuffer != IntPtr.Zero)
@@ -1094,7 +1089,6 @@ namespace System.Net.Security
                     out timeStamp
                 );
             }
-
             finally
             {
                 //
@@ -1192,7 +1186,6 @@ namespace System.Net.Security
                         ref inSecurityBufferDescriptor
                     );
                 }
-
                 finally
                 {
                     if (gotRef)
@@ -1260,7 +1253,6 @@ namespace System.Net.Security
                         ref inSecurityBufferDescriptor
                     );
                 }
-
                 finally
                 {
                     if (gotRef)
@@ -1339,7 +1331,6 @@ namespace System.Net.Security
                     buffer
                 );
             }
-
             finally
             {
                 phContext.DangerousRelease();

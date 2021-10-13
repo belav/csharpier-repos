@@ -9307,7 +9307,6 @@ public class CS1698_a {}
                     output.Trim()
                 );
             }
-
             finally
             {
                 var output = ProcessUtilities.RunAndGetOutput(

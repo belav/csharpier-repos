@@ -119,7 +119,6 @@ namespace System.Data.ProviderBase
                             Dispose();
                         }
                     }
-
                     finally
                     {
                         ReleaseAdditionalLocksForClose(lockToken);

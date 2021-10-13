@@ -1196,7 +1196,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             currentItem = IntPtr.Add(currentItem, Marshal.SizeOf(dsNameResultItem));
                         }
                     }
-
                     finally
                     {
                         // free the DsNameResult structure
@@ -1230,7 +1229,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     );
                 }
             }
-
             finally
             {
                 // DsUnbind
@@ -1490,7 +1488,6 @@ namespace System.DirectoryServices.ActiveDirectory
                         out count
                     );
                 }
-
                 finally
                 {
                     if (impersonated)
@@ -1579,7 +1576,6 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 return collection;
             }
-
             finally
             {
                 if (domains != (IntPtr)0)

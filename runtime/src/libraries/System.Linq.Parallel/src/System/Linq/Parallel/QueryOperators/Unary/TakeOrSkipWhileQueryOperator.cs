@@ -374,7 +374,6 @@ namespace System.Linq.Parallel
                             }
                         }
                     }
-
                     finally
                     {
                         // No matter whether we exit due to an exception or normal completion, we must ensure

@@ -846,7 +846,6 @@ namespace System.Transactions.Tests
                                 txId4 = AssertAndGetCurrentTransactionId();
                             }
                         }
-
                         finally
                         {
                             dependentTx.Complete();

@@ -1126,7 +1126,6 @@ namespace Microsoft.AspNetCore.Http2Cat
                         throw new IOException("The reader completed without returning a frame.");
                     }
                 }
-
                 finally
                 {
                     _bytesReceived += buffer.Slice(buffer.Start, consumed).Length;

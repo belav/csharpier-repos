@@ -29,7 +29,6 @@ namespace System.Runtime.InteropServices.Tests
                     Assert.NotEqual(IntPtr.Zero, ptr);
                     Assert.Equal(data, Marshal.PtrToStringBSTR(ptr));
                 }
-
                 finally
                 {
                     Marshal.ZeroFreeBSTR(ptr);

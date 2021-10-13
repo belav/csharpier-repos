@@ -66,7 +66,6 @@ namespace Microsoft.AspNetCore.Hosting.WindowsServices
             {
                 _host.StopAsync().GetAwaiter().GetResult();
             }
-
             finally
             {
                 _host.Dispose();

@@ -97,7 +97,6 @@ namespace Microsoft.CodeAnalysis.CompilerServer
                 _clientConnectionHost.BeginListening();
                 ListenAndDispatchConnectionsCore(cancellationToken);
             }
-
             finally
             {
                 _state = State.Completed;

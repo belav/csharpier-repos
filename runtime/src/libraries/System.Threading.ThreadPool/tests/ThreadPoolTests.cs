@@ -194,7 +194,6 @@ namespace System.Threading.ThreadPools.Tests
                             Assert.True(ThreadPool.SetMinThreads(1, 1));
                             VerifyMinThreads(1, 1);
                         }
-
                         finally
                         {
                             Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
@@ -228,7 +227,6 @@ namespace System.Threading.ThreadPools.Tests
                             Assert.False(ThreadPool.SetMaxThreads(1, 0));
                             VerifyMaxThreads(maxw, maxc);
                         }
-
                         finally
                         {
                             Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
@@ -295,7 +293,6 @@ namespace System.Threading.ThreadPools.Tests
                             ThreadPool.QueueUserWorkItem(callback);
                             done.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
                         }
-
                         finally
                         {
                             Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
@@ -718,7 +715,6 @@ namespace System.Threading.ThreadPools.Tests
                                 () => ThreadPool.PendingWorkItemCount >= minExpectedPendingWorkCount
                             );
                         }
-
                         finally
                         {
                             // Complete the work
@@ -958,7 +954,6 @@ namespace System.Threading.ThreadPools.Tests
                             done.CheckedWait();
                             Assert.Equal(string.Empty, failureMessage);
                         }
-
                         finally
                         {
                             Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));

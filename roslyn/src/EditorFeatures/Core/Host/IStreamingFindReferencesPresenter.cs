@@ -137,7 +137,6 @@ namespace Microsoft.CodeAnalysis.Editor.Host
                     foreach (var definition in nonExternalItems)
                         await context.OnDefinitionFoundAsync(definition).ConfigureAwait(false);
                 }
-
                 finally
                 {
                     await context.OnCompletedAsync().ConfigureAwait(false);

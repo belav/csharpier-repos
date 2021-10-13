@@ -299,7 +299,6 @@ namespace System.Web.Mvc
                     HandleUnknownAction(actionName);
                 }
             }
-
             finally
             {
                 PossiblySaveTempData();
@@ -1367,7 +1366,6 @@ namespace System.Web.Mvc
             {
                 AsyncResultWrapper.End(asyncResult, _executeCoreTag);
             }
-
             finally
             {
                 PossiblySaveTempData();

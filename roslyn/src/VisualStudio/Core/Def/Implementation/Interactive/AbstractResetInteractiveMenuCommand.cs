@@ -146,7 +146,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                 project = extensibilityObject as EnvDTE.Project;
                 return true;
             }
-
             finally
             {
                 if (hierarchyPointer != IntPtr.Zero)

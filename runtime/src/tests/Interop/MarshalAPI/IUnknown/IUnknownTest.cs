@@ -58,7 +58,6 @@ public class IUnknownMarshalingTest
                     );
                 }
             }
-
             finally
             {
                 if (ptr != IntPtr.Zero)
@@ -89,7 +88,6 @@ public class IUnknownMarshalingTest
                     );
                 }
             }
-
             finally
             {
                 if (ptr != IntPtr.Zero)
@@ -125,7 +123,6 @@ public class IUnknownMarshalingTest
                     );
                 }
             }
-
             finally
             {
                 if (ptr != IntPtr.Zero)
@@ -162,7 +159,6 @@ public class IUnknownMarshalingTest
                             + tmpObj
                     );
             }
-
             finally
             {
                 if (ptr != IntPtr.Zero)
@@ -203,7 +199,6 @@ public class IUnknownMarshalingTest
                             + tmpObj
                     );
             }
-
             finally
             {
                 if (tmpObj != null)

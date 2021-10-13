@@ -96,7 +96,6 @@ namespace Legacy.Support
                             Marshal.ThrowExceptionForHR(GetLastError());
                         }
                     }
-
                     finally
                     {
                         Marshal.FreeHGlobal(mem);

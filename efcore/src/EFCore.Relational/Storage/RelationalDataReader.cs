@@ -137,7 +137,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         ); // can throw
                     }
                 }
-
                 finally
                 {
                     _disposed = true;
@@ -179,7 +178,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
                         ); // can throw
                     }
                 }
-
                 finally
                 {
                     _disposed = true;

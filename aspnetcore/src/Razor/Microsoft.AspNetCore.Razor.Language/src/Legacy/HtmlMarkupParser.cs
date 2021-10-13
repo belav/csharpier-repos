@@ -181,7 +181,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     return SyntaxFactory.MarkupBlock(markupBlock);
                 }
             }
-
             finally
             {
                 _tagTracker = oldTagTracker;
@@ -227,7 +226,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     return SyntaxFactory.MarkupBlock(builder.ToList());
                 }
             }
-
             finally
             {
                 _tagTracker = oldTagTracker;
@@ -2191,7 +2189,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                     return ParserState.Unknown;
                 }
             }
-
             finally
             {
                 if (whitespace.Count > 0)
@@ -2335,7 +2332,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
                 return isValidComment;
             }
-
             finally
             {
                 // Put back the consumed tokens for later parsing.

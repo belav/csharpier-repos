@@ -131,7 +131,6 @@ namespace System.DirectoryServices.Protocols.Tests
                     );
                     Assert.NotNull(sre);
                 }
-
                 finally
                 {
                     DeleteEntry(connection, dn);
@@ -165,7 +164,6 @@ namespace System.DirectoryServices.Protocols.Tests
                     );
                     Assert.Null(sre);
                 }
-
                 finally
                 {
                     DeleteEntry(connection, dn);
@@ -218,7 +216,6 @@ namespace System.DirectoryServices.Protocols.Tests
                     Assert.NotNull(sre);
                     Assert.Null(sre.Attributes["description"]);
                 }
-
                 finally
                 {
                     DeleteEntry(connection, dn);
@@ -257,7 +254,6 @@ namespace System.DirectoryServices.Protocols.Tests
                     );
                     Assert.NotNull(sre);
                 }
-
                 finally
                 {
                     DeleteEntry(connection, dnLevel2);
@@ -317,7 +313,6 @@ namespace System.DirectoryServices.Protocols.Tests
                     );
                     Assert.Null(sre);
                 }
-
                 finally
                 {
                     DeleteEntry(connection, user1Dn);
@@ -450,7 +445,6 @@ namespace System.DirectoryServices.Protocols.Tests
                     Assert.Null(sre.Attributes["description"]);
                     Assert.Null(sre.Attributes["postalAddress"]);
                 }
-
                 finally
                 {
                     DeleteEntry(connection, dn);
@@ -519,7 +513,6 @@ namespace System.DirectoryServices.Protocols.Tests
                     sre = SearchUser(connection, user2Root, "protocolUser7.2");
                     Assert.NotNull(sre);
                 }
-
                 finally
                 {
                     DeleteEntry(connection, userDn1);
@@ -581,7 +574,6 @@ namespace System.DirectoryServices.Protocols.Tests
                         state.Exception == null ? "" : state.Exception.ToString()
                     );
                 }
-
                 finally
                 {
                     for (int i = 0; i < 20; i++)
@@ -699,7 +691,6 @@ namespace System.DirectoryServices.Protocols.Tests
                         pageRequest.Cookie = pageResponse.Cookie;
                     }
                 }
-
                 finally
                 {
                     for (int i = 0; i < 20; i++)

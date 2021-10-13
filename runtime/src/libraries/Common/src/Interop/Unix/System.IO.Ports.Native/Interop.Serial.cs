@@ -107,7 +107,6 @@ internal static partial class Interop
                 triggered = pollEvent.TriggeredEvents;
                 return err;
             }
-
             finally
             {
                 if (gotRef)

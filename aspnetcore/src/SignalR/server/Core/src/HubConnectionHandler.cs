@@ -170,7 +170,6 @@ namespace Microsoft.AspNetCore.SignalR
                 await _lifetimeManager.OnConnectedAsync(connectionContext);
                 await RunHubAsync(connectionContext);
             }
-
             finally
             {
                 connectionContext.Cleanup();
@@ -372,7 +371,6 @@ namespace Microsoft.AspNetCore.SignalR
                         break;
                     }
                 }
-
                 finally
                 {
                     // The buffer was sliced up to where it was consumed, so we can just advance to the start.

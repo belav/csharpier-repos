@@ -104,7 +104,6 @@ namespace System.DirectoryServices.ActiveDirectory
                     FreeADAMHandle();
                     _disposed = true;
                 }
-
                 finally
                 {
                     base.Dispose();
@@ -875,7 +874,6 @@ namespace System.DirectoryServices.ActiveDirectory
                             PropertyManager.Cn
                         )!;
                     }
-
                     finally
                     {
                         siteEntry.Dispose();

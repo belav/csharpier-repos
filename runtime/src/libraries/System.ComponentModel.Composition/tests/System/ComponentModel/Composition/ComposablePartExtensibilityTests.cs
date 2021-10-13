@@ -281,7 +281,6 @@ namespace System.ComponentModel.Composition
 
                 return obj;
             }
-
             finally { }
         }
 

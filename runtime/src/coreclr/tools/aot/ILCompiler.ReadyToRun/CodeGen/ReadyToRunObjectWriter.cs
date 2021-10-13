@@ -423,7 +423,6 @@ namespace ILCompiler.DependencyAnalysis
 
                 succeeded = true;
             }
-
             finally
             {
                 if (!succeeded)

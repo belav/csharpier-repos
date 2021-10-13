@@ -417,7 +417,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     foreach (var (name, definitions) in definitionMap)
                         GenerateMetadataNodes(_rootNode, name, definitions);
                 }
-
                 finally
                 {
                     definitionMap.Free();
@@ -465,7 +464,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     foreach (var (name, definitions) in definitionMap)
                         GenerateMetadataNodes(childNode, name, definitions);
                 }
-
                 finally
                 {
                     definitionMap.Free();
@@ -665,7 +663,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                         EnsureParentsAndChildren(baseTypeNameParts);
                     }
                 }
-
                 finally
                 {
                     s_stringListPool.ClearAndFree(baseTypeNameParts);

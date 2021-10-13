@@ -828,7 +828,6 @@ namespace System.Net.Sockets.Tests
                 Assert.Equal(bytesSent, bytesReceived);
                 Assert.Equal(sentChecksum.Sum, receivedChecksum.Sum);
             }
-
             finally
             {
                 listener.Stop();
@@ -1588,7 +1587,6 @@ namespace System.Net.Sockets.Tests
                                 "Expected all receives to complete within timeout"
                             );
                         }
-
                         finally
                         {
                             foreach ((Socket, Socket) pair in socketPairs)

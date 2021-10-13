@@ -417,7 +417,6 @@ namespace System.Diagnostics
                     false
                 );
             }
-
             finally
             {
                 eventKey?.Close();
@@ -438,7 +437,6 @@ namespace System.Diagnostics
                     fileName = (string)regKey.GetValue(libRegKey);
                 }
             }
-
             finally
             {
                 regKey?.Close();
