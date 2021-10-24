@@ -57,9 +57,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 return (Verbosity)Enum.Parse(typeof(Verbosity), s);
             }
-            catch 
+            catch
             {
-                throw new FormatException("Must be one of minimal, normal, detailed, or diagnostic");
+                throw new FormatException(
+                    "Must be one of minimal, normal, detailed, or diagnostic"
+                );
             }
         }
 
@@ -87,37 +89,48 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     name: "t|trace",
                     value: ref traceFile,
                     help: "Specify the trace file to be parsed.",
-                    requireValue: true);
+                    requireValue: true
+                );
                 if (traceFile != null)
                     TraceFile = new FileInfo(traceFile);
 
                 OutputOption();
 
                 int pidLocal = 0;
-                if (syntax.DefineOption(
+                if (
+                    syntax.DefineOption(
                         name: "pid",
                         value: ref pidLocal,
                         help: "The pid within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified",
-                        requireValue: true).IsSpecified)
+                        requireValue: true
+                    ).IsSpecified
+                )
                     Pid = pidLocal;
 
                 syntax.DefineOption(
                     name: "process-name",
                     value: ref ProcessName,
                     help: "The process name within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified.",
-                    requireValue: false);
+                    requireValue: false
+                );
 
                 int clrInstanceIdLocal = 0;
-                if (syntax.DefineOption(
+                if (
+                    syntax.DefineOption(
                         name: "clr-instance-id",
                         value: ref clrInstanceIdLocal,
                         help: "If the process contains multiple .NET runtimes, the instance ID must be specified.",
-                        requireValue: true).IsSpecified)
+                        requireValue: true
+                    ).IsSpecified
+                )
                 {
                     ClrInstanceId = clrInstanceIdLocal;
                 }
 
-                Reference = DefineFileOptionList(name: "r|reference", help: "If a reference is not located on disk at the same location as used in the process, it may be specified with a --reference parameter. Multiple --reference parameters may be specified. The wild cards * and ? are supported by this option.");
+                Reference = DefineFileOptionList(
+                    name: "r|reference",
+                    help: "If a reference is not located on disk at the same location as used in the process, it may be specified with a --reference parameter. Multiple --reference parameters may be specified. The wild cards * and ? are supported by this option."
+                );
 
                 ExcludeEventsBefore = Double.MinValue;
                 syntax.DefineOption(
@@ -125,7 +138,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     value: ref ExcludeEventsBefore,
                     help: "Exclude data from events before specified time. Time is specified as milliseconds from the start of the trace.",
                     valueConverter: Convert.ToDouble,
-                    requireValue: true);
+                    requireValue: true
+                );
 
                 ExcludeEventsAfter = Double.MaxValue;
                 syntax.DefineOption(
@@ -133,7 +147,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     value: ref ExcludeEventsAfter,
                     help: "Exclude data from events after specified time. Time is specified as milliseconds from the start of the trace.",
                     valueConverter: Convert.ToDouble,
-                    requireValue: true);
+                    requireValue: true
+                );
 
                 VerbosityOption();
             }
@@ -145,7 +160,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     name: "o|output",
                     value: ref outputFile,
                     help: "Specify the output filename to be created.",
-                    requireValue: true);
+                    requireValue: true
+                );
                 if (outputFile != null)
                     OutputFileName = new FileInfo(outputFile);
             }
@@ -153,7 +169,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             void VerbosityOption()
             {
                 Verbosity verbosity = Verbosity.normal;
-                syntax.DefineOption(name: "v|verbosity", value: ref verbosity, help: "Adjust verbosity level. Supported levels are minimal, normal, detailed, and diagnostic.", valueConverter: VerbosityConverter, requireValue: true);
+                syntax.DefineOption(
+                    name: "v|verbosity",
+                    value: ref verbosity,
+                    help: "Adjust verbosity level. Supported levels are minimal, normal, detailed, and diagnostic.",
+                    valueConverter: VerbosityConverter,
+                    requireValue: true
+                );
                 BasicProgressMessages = (int)verbosity >= (int)Verbosity.normal;
                 Warnings = (int)verbosity >= (int)Verbosity.normal;
                 VerboseWarnings = (int)verbosity >= (int)Verbosity.detailed;
@@ -164,7 +186,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             void CompressedOption()
             {
                 bool compressed = false;
-                syntax.DefineOption(name: "compressed", value: ref compressed, help: "Generate compressed mibc", requireValue: false);
+                syntax.DefineOption(
+                    name: "compressed",
+                    value: ref compressed,
+                    help: "Generate compressed mibc",
+                    requireValue: false
+                );
                 Uncompressed = !compressed;
             }
 
@@ -173,11 +200,23 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 syntax.DefineOption("h|help", ref Help, "Display this usage message.");
             }
 
-            var mibcCommand = syntax.DefineCommand(name: "create-mibc", value: ref command, help: "Transform a trace file into a Mibc profile data file.");
+            var mibcCommand = syntax.DefineCommand(
+                name: "create-mibc",
+                value: ref command,
+                help: "Transform a trace file into a Mibc profile data file."
+            );
             if (mibcCommand.IsActive)
             {
                 activeCommandIsCommandAssociatedWithTraceProcessing = true;
-                HelpArgs = new string[] { "create-mibc", "--help", "--trace", "trace", "--output", "output" };
+                HelpArgs = new string[]
+                {
+                    "create-mibc",
+                    "--help",
+                    "--trace",
+                    "trace",
+                    "--output",
+                    "output"
+                };
                 FileType = PgoFileType.mibc;
                 GenerateCallGraph = true;
                 ProcessJitEvents = true;
@@ -196,11 +235,23 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 #if DEBUG
             // Usage of the jittrace format requires using logic embedded in the runtime repository and isn't suitable for general consumer use at this time
             // Build it in debug and check builds to ensure that it doesn't bitrot, and remains available for use by developers willing to build the repo
-            var jittraceCommand = syntax.DefineCommand(name: "create-jittrace", value: ref command, help: "Transform a trace file into a jittrace runtime file.");
+            var jittraceCommand = syntax.DefineCommand(
+                name: "create-jittrace",
+                value: ref command,
+                help: "Transform a trace file into a jittrace runtime file."
+            );
             if (jittraceCommand.IsActive)
             {
                 activeCommandIsCommandAssociatedWithTraceProcessing = true;
-                HelpArgs = new string[] { "create-jittrace", "--help", "--trace", "trace", "--output", "output" };
+                HelpArgs = new string[]
+                {
+                    "create-jittrace",
+                    "--help",
+                    "--trace",
+                    "trace",
+                    "--output",
+                    "output"
+                };
                 FileType = PgoFileType.jittrace;
                 ProcessJitEvents = true;
                 ProcessR2REvents = false;
@@ -208,34 +259,69 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 CommonOptions();
 
                 bool sorted = false;
-                syntax.DefineOption(name: "sorted", value: ref sorted, help: "Generate sorted output.", requireValue: false);
+                syntax.DefineOption(
+                    name: "sorted",
+                    value: ref sorted,
+                    help: "Generate sorted output.",
+                    requireValue: false
+                );
                 if (sorted)
                 {
                     JitTraceOptions |= jittraceoptions.sorted;
                 }
 
                 bool showtimestamp = false;
-                syntax.DefineOption(name: "showtimestamp", value: ref showtimestamp, help: "Show timestamps in output.", requireValue: false);
+                syntax.DefineOption(
+                    name: "showtimestamp",
+                    value: ref showtimestamp,
+                    help: "Show timestamps in output.",
+                    requireValue: false
+                );
                 if (showtimestamp)
                 {
                     JitTraceOptions |= jittraceoptions.showtimestamp;
                 }
 
-                syntax.DefineOption(name: "includeReadyToRun", value: ref ProcessR2REvents, help: "Include ReadyToRun methods in the trace file.", requireValue: false);
+                syntax.DefineOption(
+                    name: "includeReadyToRun",
+                    value: ref ProcessR2REvents,
+                    help: "Include ReadyToRun methods in the trace file.",
+                    requireValue: false
+                );
                 HelpOption();
             }
 #endif
 
-            var mergeCommand = syntax.DefineCommand(name: "merge", value: ref command, help: "Merge multiple Mibc profile data files into one file.");
+            var mergeCommand = syntax.DefineCommand(
+                name: "merge",
+                value: ref command,
+                help: "Merge multiple Mibc profile data files into one file."
+            );
             if (mergeCommand.IsActive)
             {
-                HelpArgs = new string[] { "merge", "--help", "--output", "output", "--input", "input"};
+                HelpArgs = new string[]
+                {
+                    "merge",
+                    "--help",
+                    "--output",
+                    "output",
+                    "--input",
+                    "input"
+                };
 
-                InputFilesToMerge = DefineFileOptionList(name: "i|input", help: "If a reference is not located on disk at the same location as used in the process, it may be specified with a --reference parameter. Multiple --reference parameters may be specified. The wild cards * and ? are supported by this option.");
+                InputFilesToMerge = DefineFileOptionList(
+                    name: "i|input",
+                    help: "If a reference is not located on disk at the same location as used in the process, it may be specified with a --reference parameter. Multiple --reference parameters may be specified. The wild cards * and ? are supported by this option."
+                );
                 OutputOption();
 
                 IReadOnlyList<string> assemblyNamesAsStrings = null;
-                syntax.DefineOptionList(name: "include-reference", value: ref assemblyNamesAsStrings, help: "If specified, include in Mibc file only references to the specified assemblies. Assemblies are specified as assembly names, not filenames. For instance, `System.Private.CoreLib` not `System.Private.CoreLib.dll`. Multiple --include-reference options may be specified.", requireValue: true);
+                syntax.DefineOptionList(
+                    name: "include-reference",
+                    value: ref assemblyNamesAsStrings,
+                    help: "If specified, include in Mibc file only references to the specified assemblies. Assemblies are specified as assembly names, not filenames. For instance, `System.Private.CoreLib` not `System.Private.CoreLib.dll`. Multiple --include-reference options may be specified.",
+                    requireValue: true
+                );
                 if (assemblyNamesAsStrings != null)
                 {
                     foreach (string asmName in assemblyNamesAsStrings)
@@ -246,7 +332,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         }
                         catch
                         {
-                            throw new FormatException($"Unable to parse '{asmName}' as an Assembly Name.");
+                            throw new FormatException(
+                                $"Unable to parse '{asmName}' as an Assembly Name."
+                            );
                         }
                     }
                 }
@@ -261,7 +349,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 #endif
             }
 
-            var dumpCommand = syntax.DefineCommand(name: "dump", value: ref command, help: "Dump the contents of a Mibc file.");
+            var dumpCommand = syntax.DefineCommand(
+                name: "dump",
+                value: ref command,
+                help: "Dump the contents of a Mibc file."
+            );
             if (dumpCommand.IsActive)
             {
                 DumpMibc = true;
@@ -271,16 +363,23 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 HelpOption();
 
                 string inputFileToDump = null;
-                syntax.DefineParameter(name: "input", ref inputFileToDump, "Name of the input mibc file to dump.");
+                syntax.DefineParameter(
+                    name: "input",
+                    ref inputFileToDump,
+                    "Name of the input mibc file to dump."
+                );
                 if (inputFileToDump != null)
                     InputFileToDump = new FileInfo(inputFileToDump);
 
                 string outputFile = null;
-                syntax.DefineParameter(name: "output", ref outputFile, "Name of the output dump file.");
+                syntax.DefineParameter(
+                    name: "output",
+                    ref outputFile,
+                    "Name of the output dump file."
+                );
                 if (outputFile != null)
                     OutputFileName = new FileInfo(outputFile);
             }
-
 
             if (syntax.ActiveCommand == null)
             {
@@ -291,7 +390,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             if (activeCommandIsCommandAssociatedWithTraceProcessing)
             {
                 HelpText =
-@$"{syntax.GetHelpText()}
+                    @$"{syntax.GetHelpText()}
 Example tracing commands used to generate the input to this tool:
 ""dotnet-trace collect -p 73060 --providers Microsoft-Windows-DotNETRuntime:0x1E000080018:4""
  - Capture events from process 73060 where we capture both JIT and R2R events using EventPipe tracing
@@ -311,13 +410,20 @@ Example tracing commands used to generate the input to this tool:
             List<FileInfo> DefineFileOptionList(string name, string help)
             {
                 IReadOnlyList<string> filesAsStrings = null;
-                syntax.DefineOptionList(name: name, value: ref filesAsStrings, help: help, requireValue: true);
+                syntax.DefineOptionList(
+                    name: name,
+                    value: ref filesAsStrings,
+                    help: help,
+                    requireValue: true
+                );
                 List<FileInfo> referenceList = new List<FileInfo>();
                 if (filesAsStrings != null)
                 {
                     foreach (string pattern in filesAsStrings)
                     {
-                        Dictionary<string, string> paths = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                        Dictionary<string, string> paths = new Dictionary<string, string>(
+                            StringComparer.OrdinalIgnoreCase
+                        );
                         Helpers.AppendExpandedPaths(paths, pattern, false);
                         foreach (string file in paths.Values)
                             referenceList.Add(new FileInfo(file));
@@ -339,7 +445,10 @@ Example tracing commands used to generate the input to this tool:
             {
                 ConsoleColor oldColor = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Error.WriteLine(Internal.CommandLine.Strings.ErrorWithMessageFmt, e.Message);
+                Console.Error.WriteLine(
+                    Internal.CommandLine.Strings.ErrorWithMessageFmt,
+                    e.Message
+                );
                 Console.ForegroundColor = oldColor;
 
                 CommandLineOptions helpParse = new CommandLineOptions();
@@ -356,9 +465,7 @@ Example tracing commands used to generate the input to this tool:
             }
         }
 
-        private CommandLineOptions()
-        {
-        }
+        private CommandLineOptions() { }
 
         private void ParseCommmandLineHelper(string[] args)
         {

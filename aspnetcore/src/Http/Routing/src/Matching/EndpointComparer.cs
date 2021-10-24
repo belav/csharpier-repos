@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
     // When we group endpoints we don't consider the route template, because we're trying
     // to group endpoints not separate them.
     //
-    // TLDR: 
+    // TLDR:
     //  IComparer implementation considers the template string as a tiebreaker.
     //  IEqualityComparer implementation does not.
     //  This is cool and good.
@@ -61,7 +61,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
             {
                 if (routeEndpointY != null)
                 {
-                    return string.Compare(routeEndpointX.RoutePattern.RawText, routeEndpointY.RoutePattern.RawText, StringComparison.OrdinalIgnoreCase);
+                    return string.Compare(
+                        routeEndpointX.RoutePattern.RawText,
+                        routeEndpointY.RoutePattern.RawText,
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
 
                 return 1;
@@ -83,7 +87,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
 
             return CompareCore(x, y) == 0;
         }
-        
+
         public int GetHashCode(Endpoint obj)
         {
             // This should not be possible to call publicly.
@@ -145,8 +149,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 {
                     if (routeEndpointY != null)
                     {
-                        return routeEndpointX.RoutePattern.InboundPrecedence
-                            .CompareTo(routeEndpointY.RoutePattern.InboundPrecedence);
+                        return routeEndpointX.RoutePattern.InboundPrecedence.CompareTo(
+                            routeEndpointY.RoutePattern.InboundPrecedence
+                        );
                     }
 
                     return 1;

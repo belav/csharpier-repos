@@ -4,7 +4,6 @@
 using System;
 using System.Security;
 
-
 internal class Foo
 {
     public virtual void callee()

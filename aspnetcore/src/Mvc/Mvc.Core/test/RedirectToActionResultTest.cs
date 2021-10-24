@@ -32,11 +32,13 @@ namespace Microsoft.AspNetCore.Mvc
                 .Returns(CreateServices().BuildServiceProvider());
 
             var httpResponse = new Mock<HttpResponse>();
-            httpContext
-                .Setup(o => o.Response)
-                .Returns(httpResponse.Object);
+            httpContext.Setup(o => o.Response).Returns(httpResponse.Object);
 
-            var actionContext = new ActionContext(httpContext.Object, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext.Object,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var urlHelper = GetMockUrlHelper(expectedUrl);
             var result = new RedirectToActionResult("SampleAction", null, null)
@@ -51,7 +53,10 @@ namespace Microsoft.AspNetCore.Mvc
             // Verifying if Redirect was called with the specific Url and parameter flag.
             // Thus we verify that the Url returned by UrlHelper is passed properly to
             // Redirect method and that the method is called exactly once.
-            httpResponse.Verify(r => r.Redirect(expectedUrl, expectedPermanentFlag), Times.Exactly(1));
+            httpResponse.Verify(
+                r => r.Redirect(expectedUrl, expectedPermanentFlag),
+                Times.Exactly(1)
+            );
         }
 
         [Fact]
@@ -59,20 +64,19 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var httpContext = new Mock<HttpContext>();
-            httpContext
-                .Setup(o => o.Response)
-                .Returns(new Mock<HttpResponse>().Object);
+            httpContext.Setup(o => o.Response).Returns(new Mock<HttpResponse>().Object);
             httpContext
                 .SetupGet(o => o.RequestServices)
                 .Returns(CreateServices().BuildServiceProvider());
 
-            var actionContext = new ActionContext(httpContext.Object, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext.Object,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var urlHelper = GetMockUrlHelper(returnValue: null);
-            var result = new RedirectToActionResult(null, null, null)
-            {
-                UrlHelper = urlHelper,
-            };
+            var result = new RedirectToActionResult(null, null, null) { UrlHelper = urlHelper, };
 
             // Act & Assert
             await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
@@ -80,7 +84,8 @@ namespace Microsoft.AspNetCore.Mvc
                 {
                     await result.ExecuteResultAsync(actionContext);
                 },
-                "No route matches the supplied values.");
+                "No route matches the supplied values."
+            );
         }
 
         [Fact]
@@ -95,7 +100,11 @@ namespace Microsoft.AspNetCore.Mvc
                 RequestServices = CreateServices().BuildServiceProvider(),
             };
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var urlHelper = GetMockUrlHelper(expectedUrl);
             var result = new RedirectToActionResult("SampleAction", "Home", null, false, "test")
@@ -123,11 +132,21 @@ namespace Microsoft.AspNetCore.Mvc
                 RequestServices = CreateServices().BuildServiceProvider(),
             };
 
-            var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                httpContext,
+                new RouteData(),
+                new ActionDescriptor()
+            );
 
             var urlHelper = GetMockUrlHelper(expectedUrl);
-            var result = new RedirectToActionResult("SampleAction", "Home", null, false, true, "test")
-            {
+            var result = new RedirectToActionResult(
+                "SampleAction",
+                "Home",
+                null,
+                false,
+                true,
+                "test"
+            ) {
                 UrlHelper = urlHelper,
             };
 
@@ -150,7 +169,10 @@ namespace Microsoft.AspNetCore.Mvc
         private static IServiceCollection CreateServices()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IActionResultExecutor<RedirectToActionResult>, RedirectToActionResultExecutor>();
+            services.AddSingleton<
+                IActionResultExecutor<RedirectToActionResult>,
+                RedirectToActionResultExecutor
+            >();
             services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
             services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
             return services;

@@ -8,10 +8,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class SpatialQueryInMemoryTest : SpatialQueryTestBase<SpatialQueryInMemoryFixture>
     {
-        public SpatialQueryInMemoryTest(SpatialQueryInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+        public SpatialQueryInMemoryTest(SpatialQueryInMemoryFixture fixture) : base(fixture) { }
 
         [ConditionalTheory(Skip = "issue #19661")]
         public override Task Distance_constant_lhs(bool async)

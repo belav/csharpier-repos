@@ -16,22 +16,30 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
         [Fact]
         public async Task LoggingConnectionMiddlewareCanBeAddedBeforeAndAfterHttps()
         {
-            await using (var server = new TestServer(context =>
-                {
-                    context.Response.ContentLength = 12;
-                    return context.Response.WriteAsync("Hello World!");
-                },
-                new TestServiceContext(LoggerFactory),
-                listenOptions =>
-                {
-                    listenOptions.UseConnectionLogging();
-                    listenOptions.UseHttps(TestResources.GetTestCertificate());
-                    listenOptions.UseConnectionLogging();
-                }))
+            await using (
+                var server = new TestServer(
+                    context =>
+                    {
+                        context.Response.ContentLength = 12;
+                        return context.Response.WriteAsync("Hello World!");
+                    },
+                    new TestServiceContext(LoggerFactory),
+                    listenOptions =>
+                    {
+                        listenOptions.UseConnectionLogging();
+                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                        listenOptions.UseConnectionLogging();
+                    }
+                )
+            )
             {
                 {
-                    var response = await server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false)
-                                                              .DefaultTimeout();
+                    var response = await server.HttpClientSlim
+                        .GetStringAsync(
+                            $"https://localhost:{server.Port}/",
+                            validateCertificate: false
+                        )
+                        .DefaultTimeout();
                     Assert.Equal("Hello World!", response);
                 }
             }

@@ -86,7 +86,15 @@ namespace System.Formats.Cbor
                 string dateString = ReadTextString();
 
                 // TODO determine if conformance modes should allow inexact date sting parsing
-                if (!DateTimeOffset.TryParseExact(dateString, CborWriter.Rfc3339FormatString, null, DateTimeStyles.RoundtripKind, out DateTimeOffset result))
+                if (
+                    !DateTimeOffset.TryParseExact(
+                        dateString,
+                        CborWriter.Rfc3339FormatString,
+                        null,
+                        DateTimeStyles.RoundtripKind,
+                        out DateTimeOffset result
+                    )
+                )
                 {
                     throw new CborContentException(SR.Cbor_Reader_InvalidDateTimeEncoding);
                 }
@@ -195,7 +203,11 @@ namespace System.Formats.Cbor
                 }
 
                 byte[] unsignedBigEndianEncoding = ReadByteString();
-                BigInteger unsignedValue = new BigInteger(unsignedBigEndianEncoding, isUnsigned: true, isBigEndian: true);
+                BigInteger unsignedValue = new BigInteger(
+                    unsignedBigEndianEncoding,
+                    isUnsigned: true,
+                    isBigEndian: true
+                );
                 return isNegative ? -1 - unsignedValue : unsignedValue;
             }
             catch
@@ -239,7 +251,7 @@ namespace System.Formats.Cbor
                 }
 
                 decimal mantissa; // signed integral component of the decimal value
-                long exponent;    // base-10 exponent
+                long exponent; // base-10 exponent
 
                 switch (PeekState())
                 {
@@ -271,9 +283,10 @@ namespace System.Formats.Cbor
                                 break;
 
                             default:
-                                throw new CborContentException(SR.Cbor_Reader_InvalidDecimalEncoding);
+                                throw new CborContentException(
+                                    SR.Cbor_Reader_InvalidDecimalEncoding
+                                );
                         }
-
                         break;
 
                     default:
@@ -307,11 +320,20 @@ namespace System.Formats.Cbor
         private CborTag PeekTagCore(out int bytesRead)
         {
             CborInitialByte header = PeekInitialByte(expectedType: CborMajorType.Tag);
-            CborTag result = (CborTag)DecodeUnsignedInteger(header, GetRemainingBytes(), out bytesRead);
+            CborTag result = (CborTag)DecodeUnsignedInteger(
+                header,
+                GetRemainingBytes(),
+                out bytesRead
+            );
 
-            if (_isConformanceModeCheckEnabled && !CborConformanceModeHelpers.AllowsTags(ConformanceMode))
+            if (
+                _isConformanceModeCheckEnabled
+                && !CborConformanceModeHelpers.AllowsTags(ConformanceMode)
+            )
             {
-                throw new CborContentException(SR.Format(SR.Cbor_ConformanceMode_TagsNotSupported, ConformanceMode));
+                throw new CborContentException(
+                    SR.Format(SR.Cbor_ConformanceMode_TagsNotSupported, ConformanceMode)
+                );
             }
 
             return result;

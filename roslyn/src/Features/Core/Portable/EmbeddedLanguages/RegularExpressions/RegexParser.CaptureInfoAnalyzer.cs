@@ -45,15 +45,19 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 _captureNumberToSpan.Add(0, text.IsEmpty ? default : GetSpan(text));
             }
 
-            public static (ImmutableDictionary<string, TextSpan>, ImmutableDictionary<int, TextSpan>) Analyze(
-                VirtualCharSequence text, RegexCompilationUnit root, RegexOptions options)
+            public static (ImmutableDictionary<string, TextSpan>, ImmutableDictionary<
+                int,
+                TextSpan
+            >) Analyze(VirtualCharSequence text, RegexCompilationUnit root, RegexOptions options)
             {
                 var analyzer = new CaptureInfoAnalyzer(text);
                 return analyzer.Analyze(root, options);
             }
 
-            private (ImmutableDictionary<string, TextSpan>, ImmutableDictionary<int, TextSpan>) Analyze(
-                RegexCompilationUnit root, RegexOptions options)
+            private (ImmutableDictionary<string, TextSpan>, ImmutableDictionary<
+                int,
+                TextSpan
+            >) Analyze(RegexCompilationUnit root, RegexOptions options)
             {
                 CollectCaptures(root, options);
                 AssignNumbersToCaptureNames();
@@ -68,12 +72,18 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 {
                     case RegexKind.CaptureGrouping:
                         var captureGrouping = (RegexCaptureGroupingNode)node;
-                        RecordCapture(captureGrouping.CaptureToken, GetGroupingSpan(captureGrouping));
+                        RecordCapture(
+                            captureGrouping.CaptureToken,
+                            GetGroupingSpan(captureGrouping)
+                        );
                         break;
 
                     case RegexKind.BalancingGrouping:
                         var balancingGroup = (RegexBalancingGroupingNode)node;
-                        RecordCapture(balancingGroup.FirstCaptureToken, GetGroupingSpan(balancingGroup));
+                        RecordCapture(
+                            balancingGroup.FirstCaptureToken,
+                            GetGroupingSpan(balancingGroup)
+                        );
                         break;
 
                     case RegexKind.ConditionalExpressionGrouping:
@@ -94,7 +104,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                         // Recurse explicitly, setting the new options as we process the inner expression.
                         // When this pops out we'll be back to these options we're currently at now.
                         var nestedOptions = (RegexNestedOptionsGroupingNode)node;
-                        CollectCaptures(nestedOptions.Expression, GetNewOptionsFromToken(options, nestedOptions.OptionsToken));
+                        CollectCaptures(
+                            nestedOptions.Expression,
+                            GetNewOptionsFromToken(options, nestedOptions.OptionsToken)
+                        );
                         return;
                 }
 
@@ -130,7 +143,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 return GetSpan(grouping.OpenParenToken.VirtualChars[0], lastChar);
             }
 
-            private void RecordSimpleGroupingCapture(RegexSimpleGroupingNode node, RegexOptions options)
+            private void RecordSimpleGroupingCapture(
+                RegexSimpleGroupingNode node,
+                RegexOptions options
+            )
             {
                 if (HasOption(options, RegexOptions.ExplicitCapture))
                 {
@@ -140,7 +156,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 }
 
                 // Don't count a bogus (? node as a capture node.  We only have this to keep our error
-                // messages in line with the native parser.  i.e. even though the bogus (? code would 
+                // messages in line with the native parser.  i.e. even though the bogus (? code would
                 // cause an exception, we might get an earlier exception if there's a reference to
                 // this grouping.  So if we note this grouping we'll end up not causing that error
                 // to happen, bringing out behavior out of sync with the native system.
@@ -150,18 +166,24 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                     expr = alternation.Left;
                 }
 
-                if (expr is RegexSequenceNode sequence &&
-                    sequence.ChildCount > 0)
+                if (expr is RegexSequenceNode sequence && sequence.ChildCount > 0)
                 {
                     var leftMost = sequence.ChildAt(0);
-                    if (leftMost.Node is RegexTextNode textNode &&
-                        IsTextChar(textNode.TextToken, '?'))
+                    if (
+                        leftMost.Node is RegexTextNode textNode
+                        && IsTextChar(textNode.TextToken, '?')
+                    )
                     {
                         return;
                     }
                 }
 
-                AddIfMissing(_captureNumberToSpan, list: null, _autoNumber++, GetGroupingSpan(node));
+                AddIfMissing(
+                    _captureNumberToSpan,
+                    list: null,
+                    _autoNumber++,
+                    GetGroupingSpan(node)
+                );
             }
 
             private void RecordCapture(RegexToken token, TextSpan span)
@@ -174,7 +196,12 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                     }
                     else
                     {
-                        AddIfMissing(_captureNameToSpan, list: _captureNames, (string)token.Value, span);
+                        AddIfMissing(
+                            _captureNameToSpan,
+                            list: _captureNames,
+                            (string)token.Value,
+                            span
+                        );
                     }
                 }
             }
@@ -182,7 +209,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             private static void AddIfMissing<T>(
                 ImmutableDictionary<T, TextSpan>.Builder mapping,
                 ArrayBuilder<T> list,
-                T val, TextSpan span)
+                T val,
+                TextSpan span
+            )
             {
                 if (!mapping.ContainsKey(val))
                 {

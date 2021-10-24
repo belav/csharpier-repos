@@ -18,10 +18,7 @@ namespace System.CommandLine
     /// <see cref="RootCommand"/> for simple applications that only have one action. For example, <c>dotnet run</c>
     /// uses <c>run</c> as the command.
     /// </remarks>
-    public class Command : 
-        IdentifierSymbol, 
-        ICommand, 
-        IEnumerable<Symbol>
+    public class Command : IdentifierSymbol, ICommand, IEnumerable<Symbol>
     {
         private readonly SymbolSet _globalOptions = new SymbolSet();
 
@@ -30,9 +27,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="name">The name of the command.</param>
         /// <param name="description">The description of the command, shown in help.</param>
-        public Command(string name, string? description = null) : base(name, description)
-        {
-        }
+        public Command(string name, string? description = null) : base(name, description) { }
 
         /// <summary>
         /// Represents all of the arguments for the command.
@@ -79,7 +74,7 @@ namespace System.CommandLine
             _globalOptions.Add(option);
             Children.AddWithoutAliasCollisionCheck(option);
         }
-        
+
         /// <summary>
         /// Adds a global <see cref="Option"/> to the command. A return value indicates whether the option alias is
         /// already in use.
@@ -134,7 +129,7 @@ namespace System.CommandLine
             {
                 _globalOptions.ThrowIfAnyAliasIsInUse(option);
             }
-            
+
             symbol.AddParent(this);
 
             base.AddSymbol(symbol);
@@ -142,14 +137,16 @@ namespace System.CommandLine
 
         private protected override string DefaultName => throw new NotImplementedException();
 
-        internal List<ValidateSymbol<CommandResult>> Validators { get; } = new List<ValidateSymbol<CommandResult>>();
+        internal List<ValidateSymbol<CommandResult>> Validators { get; } =
+            new List<ValidateSymbol<CommandResult>>();
 
         /// <summary>
         /// Adds a custom validator to the command. Validators can be used
         /// to create custom validation logic.
         /// </summary>
         /// <param name="validate">The delegate to validate the symbols during parsing.</param>
-        public void AddValidator(ValidateSymbol<CommandResult> validate) => Validators.Add(validate);
+        public void AddValidator(ValidateSymbol<CommandResult> validate) =>
+            Validators.Add(validate);
 
         /// <summary>
         /// Gets or sets a value that indicates whether unmatched tokens should be treated as errors. For example,

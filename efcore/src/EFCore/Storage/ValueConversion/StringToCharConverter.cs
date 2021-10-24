@@ -20,17 +20,17 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion
         ///     facets for the converted data.
         /// </param>
         public StringToCharConverter(ConverterMappingHints? mappingHints = null)
-            : base(
-                ToChar(),
-                ToString(),
-                _defaultHints.With(mappingHints))
-        {
-        }
+            : base(ToChar(), ToString(), _defaultHints.With(mappingHints)) { }
 
         /// <summary>
         ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
         /// </summary>
-        public static ValueConverterInfo DefaultInfo { get; }
-            = new(typeof(string), typeof(char), i => new StringToCharConverter(i.MappingHints), _defaultHints);
+        public static ValueConverterInfo DefaultInfo { get; } =
+            new(
+                typeof(string),
+                typeof(char),
+                i => new StringToCharConverter(i.MappingHints),
+                _defaultHints
+            );
     }
 }

@@ -26,24 +26,31 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             var assertsExecuted = false;
 
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            app.Run(context =>
-                            {
-                                var auth = context.Features.Get<IHttpAuthenticationFeature>();
-                                Assert.Null(auth);
-                                assertsExecuted = true;
-                                return Task.FromResult(0);
-                            });
-                        })
-                        .UseTestServer();
-                })
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(
+                                        context =>
+                                        {
+                                            var auth =
+                                                context.Features.Get<IHttpAuthenticationFeature>();
+                                            Assert.Null(auth);
+                                            assertsExecuted = true;
+                                            return Task.FromResult(0);
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -63,25 +70,32 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             var assertsExecuted = false;
 
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            app.Run(context =>
-                            {
-                                var auth = context.Features.Get<IHttpAuthenticationFeature>();
-                                Assert.Null(auth);
-                                assertsExecuted = true;
-                                return Task.FromResult(0);
-                            });
-                        })
-                        .UseTestServer();
-                })
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(
+                                        context =>
+                                        {
+                                            var auth =
+                                                context.Features.Get<IHttpAuthenticationFeature>();
+                                            Assert.Null(auth);
+                                            assertsExecuted = true;
+                                            return Task.FromResult(0);
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -99,31 +113,48 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         [InlineData("/", "/iisintegration", "Shutdown")]
         [InlineData("/pathBase", "/pathBase/iisintegration", "shutdown")]
         [InlineData("/pathBase", "/pathBase/iisintegration", "Shutdown")]
-        public async Task MiddlewareShutsdownGivenANCMShutdown(string pathBase, string requestPath, string shutdownEvent)
+        public async Task MiddlewareShutsdownGivenANCMShutdown(
+            string pathBase,
+            string requestPath,
+            string shutdownEvent
+        )
         {
-            var requestExecuted = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var applicationStoppingFired = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var requestExecuted = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var applicationStoppingFired = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", pathBase)
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                            appLifetime.ApplicationStopping.Register(() => applicationStoppingFired.SetResult(0));
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", pathBase)
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    var appLifetime =
+                                        app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+                                    appLifetime.ApplicationStopping.Register(
+                                        () => applicationStoppingFired.SetResult(0)
+                                    );
 
-                            app.Run(context =>
-                            {
-                                requestExecuted.SetResult(0);
-                                return Task.FromResult(0);
-                            });
-                        })
-                        .UseTestServer();
-                })
+                                    app.Run(
+                                        context =>
+                                        {
+                                            requestExecuted.SetResult(0);
+                                            return Task.FromResult(0);
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -160,29 +191,42 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         [MemberData(nameof(InvalidShutdownMethods))]
         public async Task MiddlewareIgnoresShutdownGivenWrongMethod(HttpMethod method)
         {
-            var requestExecuted = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var applicationStoppingFired = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var requestExecuted = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var applicationStoppingFired = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                            appLifetime.ApplicationStopping.Register(() => applicationStoppingFired.SetResult(0));
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    var appLifetime =
+                                        app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+                                    appLifetime.ApplicationStopping.Register(
+                                        () => applicationStoppingFired.SetResult(0)
+                                    );
 
-                            app.Run(context =>
-                            {
-                                requestExecuted.SetResult(0);
-                                return Task.FromResult(0);
-                            });
-                        })
-                        .UseTestServer();
-                })
+                                    app.Run(
+                                        context =>
+                                        {
+                                            requestExecuted.SetResult(0);
+                                            return Task.FromResult(0);
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -205,29 +249,42 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         [InlineData("/path/iisintegration")]
         public async Task MiddlewareIgnoresShutdownGivenWrongPath(string path)
         {
-            var requestExecuted = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var applicationStoppingFired = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var requestExecuted = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var applicationStoppingFired = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                            appLifetime.ApplicationStopping.Register(() => applicationStoppingFired.SetResult(0));
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    var appLifetime =
+                                        app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+                                    appLifetime.ApplicationStopping.Register(
+                                        () => applicationStoppingFired.SetResult(0)
+                                    );
 
-                            app.Run(context =>
-                            {
-                                requestExecuted.SetResult(0);
-                                return Task.FromResult(0);
-                            });
-                        })
-                        .UseTestServer();
-                })
+                                    app.Run(
+                                        context =>
+                                        {
+                                            requestExecuted.SetResult(0);
+                                            return Task.FromResult(0);
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -250,29 +307,42 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         [InlineData(null)]
         public async Task MiddlewareIgnoresShutdownGivenWrongEvent(string shutdownEvent)
         {
-            var requestExecuted = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var applicationStoppingFired = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var requestExecuted = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var applicationStoppingFired = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                            appLifetime.ApplicationStopping.Register(() => applicationStoppingFired.SetResult(0));
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    var appLifetime =
+                                        app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+                                    appLifetime.ApplicationStopping.Register(
+                                        () => applicationStoppingFired.SetResult(0)
+                                    );
 
-                            app.Run(context =>
-                            {
-                                requestExecuted.SetResult(0);
-                                return Task.FromResult(0);
-                            });
-                        })
-                        .UseTestServer();
-                })
+                                    app.Run(
+                                        context =>
+                                        {
+                                            requestExecuted.SetResult(0);
+                                            return Task.FromResult(0);
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -293,23 +363,29 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         public async Task UrlDelayRegisteredAndPreferHostingUrlsSet()
         {
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            app.Run(context => Task.FromResult(0));
-                        });
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(context => Task.FromResult(0));
+                                }
+                            );
 
-                    Assert.Null(webHostBuilder.GetSetting(WebHostDefaults.ServerUrlsKey));
-                    Assert.Null(webHostBuilder.GetSetting(WebHostDefaults.PreferHostingUrlsKey));
+                        Assert.Null(webHostBuilder.GetSetting(WebHostDefaults.ServerUrlsKey));
+                        Assert.Null(
+                            webHostBuilder.GetSetting(WebHostDefaults.PreferHostingUrlsKey)
+                        );
 
-                    webHostBuilder.UseTestServer();
-                })
+                        webHostBuilder.UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -326,19 +402,23 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
         public async Task PathBaseHiddenFromServer()
         {
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/pathBase")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            app.Run(context => Task.FromResult(0));
-                        })
-                        .UseTestServer();
-                })
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/pathBase")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(context => Task.FromResult(0));
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             host.GetTestServer();
@@ -355,24 +435,30 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             var requestPathBase = string.Empty;
             var requestPath = string.Empty;
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/pathbase")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            app.Run(context =>
-                            {
-                                requestPathBase = context.Request.PathBase.Value;
-                                requestPath = context.Request.Path.Value;
-                                return Task.FromResult(0);
-                            });
-                        })
-                        .UseTestServer();
-                })
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/pathbase")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(
+                                        context =>
+                                        {
+                                            requestPathBase = context.Request.PathBase.Value;
+                                            requestPath = context.Request.Path.Value;
+                                            return Task.FromResult(0);
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -393,27 +479,39 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             var assertsExecuted = false;
 
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            app.Run(async context =>
-                            {
-                                var auth = context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
-                                var windows = await auth.GetSchemeAsync(IISDefaults.AuthenticationScheme);
-                                Assert.NotNull(windows);
-                                Assert.Null(windows.DisplayName);
-                                Assert.Equal("Microsoft.AspNetCore.Server.IISIntegration.AuthenticationHandler", windows.HandlerType.FullName);
-                                assertsExecuted = true;
-                            });
-                        })
-                        .UseTestServer();
-                })
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(
+                                        async context =>
+                                        {
+                                            var auth =
+                                                context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                                            var windows = await auth.GetSchemeAsync(
+                                                IISDefaults.AuthenticationScheme
+                                            );
+                                            Assert.NotNull(windows);
+                                            Assert.Null(windows.DisplayName);
+                                            Assert.Equal(
+                                                "Microsoft.AspNetCore.Server.IISIntegration.AuthenticationHandler",
+                                                windows.HandlerType.FullName
+                                            );
+                                            assertsExecuted = true;
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -435,42 +533,58 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             var assertsExecuted = false;
 
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            app.Run(async context =>
-                            {
-                                var auth = context.RequestServices.GetService<IAuthenticationSchemeProvider>();
-                                Assert.NotNull(auth);
-                                var windowsAuth = await auth.GetSchemeAsync(IISDefaults.AuthenticationScheme);
-                                if (forward)
-                                {
-                                    Assert.NotNull(windowsAuth);
-                                    Assert.Null(windowsAuth.DisplayName);
-                                    Assert.Equal("AuthenticationHandler", windowsAuth.HandlerType.Name);
-                                }
-                                else
-                                {
-                                    Assert.Null(windowsAuth);
-                                }
-                                assertsExecuted = true;
-                            });
-                        })
-                        .UseTestServer();
-                })
-                .ConfigureServices(services =>
-                {
-                    services.Configure<IISOptions>(options =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        options.ForwardWindowsAuthentication = forward;
-                    });
-                })
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(
+                                        async context =>
+                                        {
+                                            var auth =
+                                                context.RequestServices.GetService<IAuthenticationSchemeProvider>();
+                                            Assert.NotNull(auth);
+                                            var windowsAuth = await auth.GetSchemeAsync(
+                                                IISDefaults.AuthenticationScheme
+                                            );
+                                            if (forward)
+                                            {
+                                                Assert.NotNull(windowsAuth);
+                                                Assert.Null(windowsAuth.DisplayName);
+                                                Assert.Equal(
+                                                    "AuthenticationHandler",
+                                                    windowsAuth.HandlerType.Name
+                                                );
+                                            }
+                                            else
+                                            {
+                                                Assert.Null(windowsAuth);
+                                            }
+                                            assertsExecuted = true;
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
+                .ConfigureServices(
+                    services =>
+                    {
+                        services.Configure<IISOptions>(
+                            options =>
+                            {
+                                options.ForwardWindowsAuthentication = forward;
+                            }
+                        );
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();
@@ -492,30 +606,40 @@ namespace Microsoft.AspNetCore.Server.IISIntegration
             var assertsExecuted = false;
 
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseSetting("TOKEN", "TestToken")
-                        .UseSetting("PORT", "12345")
-                        .UseSetting("APPL_PATH", "/")
-                        .UseIISIntegration()
-                        .Configure(app =>
-                        {
-                            app.Run(context =>
-                            {
-                                assertsExecuted = true;
-                                return Task.FromResult(0);
-                            });
-                        })
-                        .UseTestServer();
-                })
-                .ConfigureServices(services =>
-                {
-                    services.Configure<IISOptions>(options =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        options.ForwardWindowsAuthentication = forward;
-                    });
-                })
+                        webHostBuilder
+                            .UseSetting("TOKEN", "TestToken")
+                            .UseSetting("PORT", "12345")
+                            .UseSetting("APPL_PATH", "/")
+                            .UseIISIntegration()
+                            .Configure(
+                                app =>
+                                {
+                                    app.Run(
+                                        context =>
+                                        {
+                                            assertsExecuted = true;
+                                            return Task.FromResult(0);
+                                        }
+                                    );
+                                }
+                            )
+                            .UseTestServer();
+                    }
+                )
+                .ConfigureServices(
+                    services =>
+                    {
+                        services.Configure<IISOptions>(
+                            options =>
+                            {
+                                options.ForwardWindowsAuthentication = forward;
+                            }
+                        );
+                    }
+                )
                 .Build();
 
             var server = host.GetTestServer();

@@ -42,8 +42,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ICompositeViewEngine viewEngine,
             ITempDataDictionaryFactory tempDataFactory,
             DiagnosticListener diagnosticListener,
-            IModelMetadataProvider modelMetadataProvider)
-            : this(writerFactory, viewEngine, diagnosticListener)
+            IModelMetadataProvider modelMetadataProvider
+        ) : this(writerFactory, viewEngine, diagnosticListener)
         {
             if (viewOptions == null)
             {
@@ -74,7 +74,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         protected ViewExecutor(
             IHttpResponseStreamWriterFactory writerFactory,
             ICompositeViewEngine viewEngine,
-            DiagnosticListener diagnosticListener)
+            DiagnosticListener diagnosticListener
+        )
         {
             if (writerFactory == null)
             {
@@ -147,7 +148,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewDataDictionary viewData,
             ITempDataDictionary tempData,
             string? contentType,
-            int? statusCode)
+            int? statusCode
+        )
         {
             if (actionContext == null)
             {
@@ -161,17 +163,29 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             if (ViewOptions == null)
             {
-                throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(nameof(ViewOptions), GetType().Name));
+                throw new InvalidOperationException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(nameof(ViewOptions), GetType().Name)
+                );
             }
 
             if (TempDataFactory == null)
             {
-                throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(nameof(TempDataFactory), GetType().Name));
+                throw new InvalidOperationException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(TempDataFactory),
+                        GetType().Name
+                    )
+                );
             }
 
             if (ModelMetadataProvider == null)
             {
-                throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(nameof(ModelMetadataProvider), GetType().Name));
+                throw new InvalidOperationException(
+                    Resources.FormatPropertyOfTypeCannotBeNull(
+                        nameof(ModelMetadataProvider),
+                        GetType().Name
+                    )
+                );
             }
 
             if (viewData == null)
@@ -190,7 +204,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 viewData,
                 tempData,
                 TextWriter.Null,
-                ViewOptions.HtmlHelperOptions);
+                ViewOptions.HtmlHelperOptions
+            );
 
             await ExecuteAsync(viewContext, contentType, statusCode);
         }
@@ -210,7 +225,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         protected async Task ExecuteAsync(
             ViewContext viewContext,
             string? contentType,
-            int? statusCode)
+            int? statusCode
+        )
         {
             if (viewContext == null)
             {
@@ -224,7 +240,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 response.ContentType,
                 DefaultContentType,
                 out var resolvedContentType,
-                out var resolvedContentTypeEncoding);
+                out var resolvedContentTypeEncoding
+            );
 
             response.ContentType = resolvedContentType;
 
@@ -235,7 +252,9 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             OnExecuting(viewContext);
 
-            await using (var writer = WriterFactory.CreateWriter(response.Body, resolvedContentTypeEncoding))
+            await using (
+                var writer = WriterFactory.CreateWriter(response.Body, resolvedContentTypeEncoding)
+            )
             {
                 var view = viewContext.View;
 
@@ -264,7 +283,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
         private void OnExecuting(ViewContext viewContext)
         {
-            var viewDataValuesProvider = viewContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
+            var viewDataValuesProvider =
+                viewContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
             if (viewDataValuesProvider != null)
             {
                 viewDataValuesProvider.ProvideViewDataValues(viewContext.ViewData);

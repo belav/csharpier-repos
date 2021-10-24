@@ -17,28 +17,43 @@ namespace System.Net.Quic
         /// </summary>
         /// <param name="listenEndPoint">The local endpoint to listen on.</param>
         /// <param name="sslServerAuthenticationOptions">TLS options for the listener.</param>
-        public QuicListener(IPEndPoint listenEndPoint, SslServerAuthenticationOptions sslServerAuthenticationOptions)
-            : this(QuicImplementationProviders.Default, listenEndPoint, sslServerAuthenticationOptions)
-        {
-        }
+        public QuicListener(
+            IPEndPoint listenEndPoint,
+            SslServerAuthenticationOptions sslServerAuthenticationOptions
+        )
+            : this(
+                QuicImplementationProviders.Default,
+                listenEndPoint,
+                sslServerAuthenticationOptions
+            ) { }
 
         /// <summary>
         /// Create a QUIC listener.
         /// </summary>
         /// <param name="options">The listener options.</param>
         public QuicListener(QuicListenerOptions options)
-            : this(QuicImplementationProviders.Default, options)
-        {
-        }
+            : this(QuicImplementationProviders.Default, options) { }
 
         // !!! TEMPORARY: Remove or make internal before shipping
-        public QuicListener(QuicImplementationProvider implementationProvider, IPEndPoint listenEndPoint, SslServerAuthenticationOptions sslServerAuthenticationOptions)
-            : this(implementationProvider, new QuicListenerOptions() { ListenEndPoint = listenEndPoint, ServerAuthenticationOptions = sslServerAuthenticationOptions })
-        {
-        }
+        public QuicListener(
+            QuicImplementationProvider implementationProvider,
+            IPEndPoint listenEndPoint,
+            SslServerAuthenticationOptions sslServerAuthenticationOptions
+        )
+            : this(
+                implementationProvider,
+                new QuicListenerOptions()
+                {
+                    ListenEndPoint = listenEndPoint,
+                    ServerAuthenticationOptions = sslServerAuthenticationOptions
+                }
+            ) { }
 
         // !!! TEMPORARY: Remove or make internal before shipping
-        public QuicListener(QuicImplementationProvider implementationProvider, QuicListenerOptions options)
+        public QuicListener(
+            QuicImplementationProvider implementationProvider,
+            QuicListenerOptions options
+        )
         {
             _provider = implementationProvider.CreateListener(options);
         }
@@ -49,8 +64,12 @@ namespace System.Net.Quic
         /// Accept a connection.
         /// </summary>
         /// <returns></returns>
-        public async ValueTask<QuicConnection> AcceptConnectionAsync(CancellationToken cancellationToken = default) =>
-            new QuicConnection(await _provider.AcceptConnectionAsync(cancellationToken).ConfigureAwait(false));
+        public async ValueTask<QuicConnection> AcceptConnectionAsync(
+            CancellationToken cancellationToken = default
+        ) =>
+            new QuicConnection(
+                await _provider.AcceptConnectionAsync(cancellationToken).ConfigureAwait(false)
+            );
 
         public void Start() => _provider.Start();
 

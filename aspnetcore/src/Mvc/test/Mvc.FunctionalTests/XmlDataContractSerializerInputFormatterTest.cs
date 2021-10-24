@@ -16,17 +16,19 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class XmlDataContractSerializerInputFormatterTest : IClassFixture<MvcTestFixture<Startup>>
+    public class XmlDataContractSerializerInputFormatterTest
+        : IClassFixture<MvcTestFixture<Startup>>
     {
         private readonly string errorMessageFormat = string.Format(
             CultureInfo.CurrentCulture,
-            "{{1}}:{0} does not recognize '{1}', so instead use '{2}' with '{3}' set to '{4}' for value " +
-            "type property '{{0}}' on type '{{1}}'.",
+            "{{1}}:{0} does not recognize '{1}', so instead use '{2}' with '{3}' set to '{4}' for value "
+                + "type property '{{0}}' on type '{{1}}'.",
             typeof(DataContractSerializer).FullName,
             typeof(RequiredAttribute).FullName,
             typeof(DataMemberAttribute).FullName,
             nameof(DataMemberAttribute.IsRequired),
-            bool.TrueString);
+            bool.TrueString
+        );
 
         public XmlDataContractSerializerInputFormatterTest(MvcTestFixture<Startup> fixture)
         {
@@ -55,10 +57,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task RequiredDataIsProvided_AndModelIsBound_NoValidationErrors()
         {
             // Arrange
-            var input = "<Store xmlns=\"http://schemas.datacontract.org/2004/07/XmlFormattersWebSite\" " +
-                "xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Address><State>WA</State><Zipcode>" +
-                "98052</Zipcode></Address><Id>10</Id></Store>";
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Validation/CreateStore");
+            var input =
+                "<Store xmlns=\"http://schemas.datacontract.org/2004/07/XmlFormattersWebSite\" "
+                + "xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Address><State>WA</State><Zipcode>"
+                + "98052</Zipcode></Address><Id>10</Id></Store>";
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Validation/CreateStore"
+            );
             request.Content = new StringContent(input, Encoding.UTF8, "application/xml-dcs");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml-dcs"));
 
@@ -83,10 +89,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task DataMissingForReferenceTypeProperties_AndModelIsBound_AndHasMixedValidationErrors()
         {
             // Arrange
-            var input = "<Store xmlns=\"http://schemas.datacontract.org/2004/07/XmlFormattersWebSite\"" +
-                " xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                "<Address i:nil=\"true\"/><Id>10</Id></Store>";
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/Validation/CreateStore");
+            var input =
+                "<Store xmlns=\"http://schemas.datacontract.org/2004/07/XmlFormattersWebSite\""
+                + " xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\">"
+                + "<Address i:nil=\"true\"/><Id>10</Id></Store>";
+            var request = new HttpRequestMessage(
+                HttpMethod.Post,
+                "http://localhost/Validation/CreateStore"
+            );
             request.Content = new StringContent(input, Encoding.UTF8, "application/xml-dcs");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml-dcs"));
 
@@ -105,12 +115,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal(10, modelBindingInfo.Store.Id);
             Assert.NotNull(modelBindingInfo.ModelStateErrorMessages);
 
-            Assert.Equal(expectedErrorMessages.Count(), modelBindingInfo.ModelStateErrorMessages.Count);
+            Assert.Equal(
+                expectedErrorMessages.Count(),
+                modelBindingInfo.ModelStateErrorMessages.Count
+            );
             foreach (var expectedErrorMessage in expectedErrorMessages)
             {
                 Assert.Contains(
                     modelBindingInfo.ModelStateErrorMessages,
-                    (actualErrorMessage) => actualErrorMessage.Equals(expectedErrorMessage));
+                    (actualErrorMessage) => actualErrorMessage.Equals(expectedErrorMessage)
+                );
             }
         }
     }

@@ -25,20 +25,29 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IViewCompilerProvider viewCompilerProvider,
             ActionEndpointFactory endpointFactory,
             IOptions<RazorPagesOptions> pageOptions,
-            IOptions<MvcOptions> mvcOptions)
+            IOptions<MvcOptions> mvcOptions
+        )
         {
             _viewCompilerProvider = viewCompilerProvider;
             _endpointFactory = endpointFactory;
-            _compiledPageActionDescriptorFactory = new CompiledPageActionDescriptorFactory(applicationModelProviders, mvcOptions.Value, pageOptions.Value);
+            _compiledPageActionDescriptorFactory = new CompiledPageActionDescriptorFactory(
+                applicationModelProviders,
+                mvcOptions.Value,
+                pageOptions.Value
+            );
         }
 
         private IViewCompiler Compiler => _viewCompilerProvider.GetCompiler();
 
         [Obsolete]
-        public override Task<CompiledPageActionDescriptor> LoadAsync(PageActionDescriptor actionDescriptor)
-            => LoadAsync(actionDescriptor, EndpointMetadataCollection.Empty);
+        public override Task<CompiledPageActionDescriptor> LoadAsync(
+            PageActionDescriptor actionDescriptor
+        ) => LoadAsync(actionDescriptor, EndpointMetadataCollection.Empty);
 
-        public override Task<CompiledPageActionDescriptor> LoadAsync(PageActionDescriptor actionDescriptor, EndpointMetadataCollection endpointMetadata)
+        public override Task<CompiledPageActionDescriptor> LoadAsync(
+            PageActionDescriptor actionDescriptor,
+            EndpointMetadataCollection endpointMetadata
+        )
         {
             if (actionDescriptor == null)
             {
@@ -52,13 +61,22 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 return task;
             }
 
-            return actionDescriptor.CompiledPageActionDescriptorTask = LoadAsyncCore(actionDescriptor, endpointMetadata);
+            return actionDescriptor.CompiledPageActionDescriptorTask = LoadAsyncCore(
+                actionDescriptor,
+                endpointMetadata
+            );
         }
 
-        private async Task<CompiledPageActionDescriptor> LoadAsyncCore(PageActionDescriptor actionDescriptor, EndpointMetadataCollection endpointMetadata)
+        private async Task<CompiledPageActionDescriptor> LoadAsyncCore(
+            PageActionDescriptor actionDescriptor,
+            EndpointMetadataCollection endpointMetadata
+        )
         {
             var viewDescriptor = await Compiler.CompileAsync(actionDescriptor.RelativePath);
-            var compiled = _compiledPageActionDescriptorFactory.CreateCompiledDescriptor(actionDescriptor, viewDescriptor);
+            var compiled = _compiledPageActionDescriptorFactory.CreateCompiledDescriptor(
+                actionDescriptor,
+                viewDescriptor
+            );
 
             var endpoints = new List<Endpoint>();
             _endpointFactory.AddEndpoints(
@@ -76,13 +94,14 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                         // CompiledPageActionDescriptor as part of the one of the many matcher policies.
                         // Metadata from PageActionDescriptor is less significant than the one discovered from the compiled type.
                         // Consequently, we'll insert it at the beginning.
-                        for (var i = endpointMetadata.Count - 1; i >=0; i--)
+                        for (var i = endpointMetadata.Count - 1; i >= 0; i--)
                         {
                             b.Metadata.Insert(0, endpointMetadata[i]);
                         }
                     },
                 },
-                createInertEndpoints: false);
+                createInertEndpoints: false
+            );
 
             // In some test scenarios there's no route so the endpoint isn't created. This is fine because
             // it won't happen for real.

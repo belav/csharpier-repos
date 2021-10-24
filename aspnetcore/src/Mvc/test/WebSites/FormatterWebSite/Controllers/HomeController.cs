@@ -10,7 +10,7 @@ namespace FormatterWebSite.Controllers
     public class HomeController : Controller
     {
         [HttpPost]
-        public IActionResult Index([FromBody]DummyClass dummyObject)
+        public IActionResult Index([FromBody] DummyClass dummyObject)
         {
             return Content(dummyObject.SampleInt.ToString(CultureInfo.InvariantCulture));
         }
@@ -30,19 +30,16 @@ namespace FormatterWebSite.Controllers
         [HttpPost]
         public DummyClass GetDerivedDummyClass(int sampleInput)
         {
-            return new DerivedDummyClass
-            {
-                SampleInt = sampleInput,
-                SampleIntInDerived = 50
-            };
+            return new DerivedDummyClass { SampleInt = sampleInput, SampleIntInDerived = 50 };
         }
 
         [HttpPost]
-        public IActionResult DefaultBody([FromBody] DummyClass dummy)
-            => ModelState.IsValid ? Ok() : ValidationProblem();
+        public IActionResult DefaultBody([FromBody] DummyClass dummy) =>
+            ModelState.IsValid ? Ok() : ValidationProblem();
 
         [HttpPost]
-        public IActionResult OptionalBody([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] DummyClass dummy)
-            => ModelState.IsValid ? Ok() : ValidationProblem();
+        public IActionResult OptionalBody(
+            [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] DummyClass dummy
+        ) => ModelState.IsValid ? Ok() : ValidationProblem();
     }
 }

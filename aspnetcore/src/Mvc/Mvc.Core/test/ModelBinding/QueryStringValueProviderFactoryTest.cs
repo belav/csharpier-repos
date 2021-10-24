@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
         public async Task DoesNotCreateValueProvider_WhenQueryStringIsEmpty()
         {
             // Arrange
-            var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            var actionContext = new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
             var factoryContext = new ValueProviderFactoryContext(actionContext);
             var factory = new QueryStringValueProviderFactory();
 
@@ -45,7 +49,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Test
             await factory.CreateValueProviderAsync(factoryContext);
 
             // Assert
-            var valueProvider = Assert.IsType<QueryStringValueProvider>(Assert.Single(factoryContext.ValueProviders));
+            var valueProvider = Assert.IsType<QueryStringValueProvider>(
+                Assert.Single(factoryContext.ValueProviders)
+            );
             Assert.Equal(CultureInfo.InvariantCulture, valueProvider.Culture);
         }
     }

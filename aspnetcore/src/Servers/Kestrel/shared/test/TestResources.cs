@@ -11,15 +11,22 @@ namespace Microsoft.AspNetCore.Testing
 {
     public static class TestResources
     {
-        private static readonly string _baseDir = Path.Combine(Directory.GetCurrentDirectory(), "shared", "TestCertificates");
+        private static readonly string _baseDir = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "shared",
+            "TestCertificates"
+        );
 
         public static string TestCertificatePath { get; } = Path.Combine(_baseDir, "testCert.pfx");
         public static string GetCertPath(string name) => Path.Combine(_baseDir, name);
 
         private const int MutexTimeout = 120 * 1000;
-        private static readonly Mutex importPfxMutex = OperatingSystem.IsWindows() ?
-            new Mutex(initiallyOwned: false, "Global\\KestrelTests.Certificates.LoadPfxCertificate") :
-            null;
+        private static readonly Mutex importPfxMutex = OperatingSystem.IsWindows()
+            ? new Mutex(
+                  initiallyOwned: false,
+                  "Global\\KestrelTests.Certificates.LoadPfxCertificate"
+              )
+            : null;
 
         public static X509Certificate2 GetTestCertificate(string certName = "testCert.pfx")
         {
@@ -27,7 +34,10 @@ namespace Microsoft.AspNetCore.Testing
             // race condition bug in native code which can cause crashes/corruption of the certificate state.
             if (importPfxMutex != null)
             {
-                Assert.True(importPfxMutex.WaitOne(MutexTimeout), "Cannot acquire the global certificate mutex.");
+                Assert.True(
+                    importPfxMutex.WaitOne(MutexTimeout),
+                    "Cannot acquire the global certificate mutex."
+                );
             }
 
             try

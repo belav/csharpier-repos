@@ -44,7 +44,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             IServiceScope scope,
             IConfiguration configuration,
             RootComponentMapping[] rootComponents,
-            string? persistedState)
+            string? persistedState
+        )
         {
             // To ensure JS-invoked methods don't get linked out, have a reference to their enclosing types
             GC.KeepAlive(typeof(JSInteropMethods));
@@ -120,7 +121,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
         }
 
         // Internal for testing.
-        internal async Task RunAsyncCore(CancellationToken cancellationToken, WebAssemblyCultureProvider? cultureProvider = null)
+        internal async Task RunAsyncCore(
+            CancellationToken cancellationToken,
+            WebAssemblyCultureProvider? cultureProvider = null
+        )
         {
             if (_started)
             {
@@ -138,9 +142,9 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
             await cultureProvider.LoadCurrentCultureResourcesAsync();
 
             var manager = Services.GetRequiredService<ComponentApplicationLifetime>();
-            var store = !string.IsNullOrEmpty(_persistedState) ?
-                new PrerenderComponentApplicationStore(_persistedState) :
-                new PrerenderComponentApplicationStore();
+            var store = !string.IsNullOrEmpty(_persistedState)
+                ? new PrerenderComponentApplicationStore(_persistedState)
+                : new PrerenderComponentApplicationStore();
 
             await manager.RestoreStateAsync(store);
 
@@ -162,7 +166,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting
                 for (var i = 0; i < rootComponents.Length; i++)
                 {
                     var rootComponent = rootComponents[i];
-                    await _renderer.AddComponentAsync(rootComponent.ComponentType, rootComponent.Selector, rootComponent.Parameters);
+                    await _renderer.AddComponentAsync(
+                        rootComponent.ComponentType,
+                        rootComponent.Selector,
+                        rootComponent.Parameters
+                    );
                 }
 
                 store.ExistingState.Clear();

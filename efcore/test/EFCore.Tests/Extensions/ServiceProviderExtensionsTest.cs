@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = new ServiceCollection().BuildServiceProvider();
 
             Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService<IPilkington>());
+                () => serviceProvider.GetRequiredService<IPilkington>()
+            );
         }
 
         [ConditionalFact]
@@ -25,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore
             var serviceProvider = new ServiceCollection().BuildServiceProvider();
 
             Assert.Throws<InvalidOperationException>(
-                () => serviceProvider.GetRequiredService(typeof(IPilkington)));
+                () => serviceProvider.GetRequiredService(typeof(IPilkington))
+            );
         }
 
         [ConditionalFact]
@@ -38,7 +40,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 KarlQuote,
                 Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetRequiredService<IPilkington>()).Message);
+                    () => serviceProvider.GetRequiredService<IPilkington>()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -52,7 +56,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 KarlQuote,
                 Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetRequiredService(typeof(IPilkington))).Message);
+                    () => serviceProvider.GetRequiredService(typeof(IPilkington))
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -81,7 +87,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 KarlQuote,
                 Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetService<IPilkington>()).Message);
+                    () => serviceProvider.GetService<IPilkington>()
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -95,7 +103,9 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 KarlQuote,
                 Assert.Throws<NotSupportedException>(
-                    () => serviceProvider.GetService(typeof(IPilkington))).Message);
+                    () => serviceProvider.GetService(typeof(IPilkington))
+                ).Message
+            );
         }
 
         private const string KarlQuote = "You can only talk rubbish if you're aware of knowledge.";

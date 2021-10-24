@@ -9,20 +9,21 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class ManyToManyTrackingSqliteTest : ManyToManyTrackingTestBase<ManyToManyTrackingSqliteTest.ManyToManyTrackingSqliteFixture>
+    public class ManyToManyTrackingSqliteTest
+        : ManyToManyTrackingTestBase<ManyToManyTrackingSqliteTest.ManyToManyTrackingSqliteFixture>
     {
-        public ManyToManyTrackingSqliteTest(ManyToManyTrackingSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public ManyToManyTrackingSqliteTest(ManyToManyTrackingSqliteFixture fixture) : base(fixture)
+        { }
 
-        protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected override void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
         public class ManyToManyTrackingSqliteFixture : ManyToManyTrackingFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
             protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
             {

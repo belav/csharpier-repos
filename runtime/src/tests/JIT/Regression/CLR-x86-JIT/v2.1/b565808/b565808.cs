@@ -16,17 +16,15 @@ public class ContentType
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public ContentType()
     {
-        if (_semicolonSeparator != ';') Console.WriteLine("Error {0}", errorCount++);
+        if (_semicolonSeparator != ';')
+            Console.WriteLine("Error {0}", errorCount++);
     }
 }
 
-
 class My
 {
-
     static int Main()
     {
-
         new ContentType();
         new ContentType();
 
@@ -40,7 +38,5 @@ class My
             Console.WriteLine("TEsT FAILED");
             return 666;
         }
-
     }
-
 }

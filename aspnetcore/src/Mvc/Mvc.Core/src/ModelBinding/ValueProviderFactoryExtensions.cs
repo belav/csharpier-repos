@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         /// </summary>
         /// <param name="list">The list of <see cref="IValueProviderFactory"/>.</param>
         /// <typeparam name="TValueProviderFactory">The type to remove.</typeparam>
-        public static void RemoveType<TValueProviderFactory>(this IList<IValueProviderFactory> list) where TValueProviderFactory : IValueProviderFactory
+        public static void RemoveType<TValueProviderFactory>(this IList<IValueProviderFactory> list)
+            where TValueProviderFactory : IValueProviderFactory
         {
             if (list == null)
             {

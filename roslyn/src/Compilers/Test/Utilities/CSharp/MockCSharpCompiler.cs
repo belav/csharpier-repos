@@ -21,28 +21,64 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         internal Compilation Compilation;
         internal AnalyzerOptions AnalyzerOptions;
 
-        public MockCSharpCompiler(string responseFile, string workingDirectory, string[] args, ImmutableArray<DiagnosticAnalyzer> analyzers = default, ImmutableArray<ISourceGenerator> generators = default, AnalyzerAssemblyLoader loader = null)
-            : this(responseFile, CreateBuildPaths(workingDirectory), args, analyzers, generators, loader)
-        {
-        }
+        public MockCSharpCompiler(
+            string responseFile,
+            string workingDirectory,
+            string[] args,
+            ImmutableArray<DiagnosticAnalyzer> analyzers = default,
+            ImmutableArray<ISourceGenerator> generators = default,
+            AnalyzerAssemblyLoader loader = null
+        )
+            : this(
+                responseFile,
+                CreateBuildPaths(workingDirectory),
+                args,
+                analyzers,
+                generators,
+                loader
+            ) { }
 
-        public MockCSharpCompiler(string responseFile, BuildPaths buildPaths, string[] args, ImmutableArray<DiagnosticAnalyzer> analyzers = default, ImmutableArray<ISourceGenerator> generators = default, AnalyzerAssemblyLoader loader = null)
-            : base(CSharpCommandLineParser.Default, responseFile, args, buildPaths, Environment.GetEnvironmentVariable("LIB"), loader ?? new DefaultAnalyzerAssemblyLoader())
+        public MockCSharpCompiler(
+            string responseFile,
+            BuildPaths buildPaths,
+            string[] args,
+            ImmutableArray<DiagnosticAnalyzer> analyzers = default,
+            ImmutableArray<ISourceGenerator> generators = default,
+            AnalyzerAssemblyLoader loader = null
+        )
+            : base(
+                CSharpCommandLineParser.Default,
+                responseFile,
+                args,
+                buildPaths,
+                Environment.GetEnvironmentVariable("LIB"),
+                loader ?? new DefaultAnalyzerAssemblyLoader()
+            )
         {
             _analyzers = analyzers.NullToEmpty();
             _generators = generators.NullToEmpty();
         }
 
-        private static BuildPaths CreateBuildPaths(string workingDirectory, string sdkDirectory = null) => RuntimeUtilities.CreateBuildPaths(workingDirectory, sdkDirectory);
+        private static BuildPaths CreateBuildPaths(
+            string workingDirectory,
+            string sdkDirectory = null
+        ) => RuntimeUtilities.CreateBuildPaths(workingDirectory, sdkDirectory);
 
         protected override void ResolveAnalyzersFromArguments(
             List<DiagnosticInfo> diagnostics,
             CommonMessageProvider messageProvider,
             bool skipAnalyzers,
             out ImmutableArray<DiagnosticAnalyzer> analyzers,
-            out ImmutableArray<ISourceGenerator> generators)
+            out ImmutableArray<ISourceGenerator> generators
+        )
         {
-            base.ResolveAnalyzersFromArguments(diagnostics, messageProvider, skipAnalyzers, out analyzers, out generators);
+            base.ResolveAnalyzersFromArguments(
+                diagnostics,
+                messageProvider,
+                skipAnalyzers,
+                out analyzers,
+                out generators
+            );
             if (!_analyzers.IsDefaultOrEmpty)
             {
                 analyzers = analyzers.InsertRange(0, _analyzers);
@@ -56,25 +92,43 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         public Compilation CreateCompilation(
             TextWriter consoleOutput,
             TouchedFileLogger touchedFilesLogger,
-            ErrorLogger errorLogger)
-            => CreateCompilation(consoleOutput, touchedFilesLogger, errorLogger, syntaxDiagOptionsOpt: default, globalDiagnosticOptionsOpt: default);
+            ErrorLogger errorLogger
+        ) =>
+            CreateCompilation(
+                consoleOutput,
+                touchedFilesLogger,
+                errorLogger,
+                syntaxDiagOptionsOpt: default,
+                globalDiagnosticOptionsOpt: default
+            );
 
         public override Compilation CreateCompilation(
             TextWriter consoleOutput,
             TouchedFileLogger touchedFilesLogger,
             ErrorLogger errorLogger,
             ImmutableArray<AnalyzerConfigOptionsResult> syntaxDiagOptionsOpt,
-            AnalyzerConfigOptionsResult globalDiagnosticOptionsOpt)
+            AnalyzerConfigOptionsResult globalDiagnosticOptionsOpt
+        )
         {
-            Compilation = base.CreateCompilation(consoleOutput, touchedFilesLogger, errorLogger, syntaxDiagOptionsOpt, globalDiagnosticOptionsOpt);
+            Compilation = base.CreateCompilation(
+                consoleOutput,
+                touchedFilesLogger,
+                errorLogger,
+                syntaxDiagOptionsOpt,
+                globalDiagnosticOptionsOpt
+            );
             return Compilation;
         }
 
         protected override AnalyzerOptions CreateAnalyzerOptions(
             ImmutableArray<AdditionalText> additionalTextFiles,
-            AnalyzerConfigOptionsProvider analyzerConfigOptionsProvider)
+            AnalyzerConfigOptionsProvider analyzerConfigOptionsProvider
+        )
         {
-            AnalyzerOptions = base.CreateAnalyzerOptions(additionalTextFiles, analyzerConfigOptionsProvider);
+            AnalyzerOptions = base.CreateAnalyzerOptions(
+                additionalTextFiles,
+                analyzerConfigOptionsProvider
+            );
             return AnalyzerOptions;
         }
     }

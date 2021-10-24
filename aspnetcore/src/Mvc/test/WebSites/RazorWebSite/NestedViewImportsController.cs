@@ -9,10 +9,7 @@ namespace RazorWebSite.Controllers
     {
         public ViewResult Index()
         {
-            var model = new Person
-            {
-                Name = "Controller-Person"
-            };
+            var model = new Person { Name = "Controller-Person" };
 
             return View("~/Views/NestedViewImports/Nested/Index.cshtml", model);
         }

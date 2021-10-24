@@ -31,13 +31,13 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         public const int cmdidStartIntegrationTestService = 0x5201;
         public const int cmdidStopIntegrationTestService = 0x5204;
 
-        public static readonly Guid guidTestWindowCmdSet = new Guid("1E198C22-5980-4E7E-92F3-F73168D1FB63");
+        public static readonly Guid guidTestWindowCmdSet = new Guid(
+            "1E198C22-5980-4E7E-92F3-F73168D1FB63"
+        );
         #endregion
 
-        private static readonly BinaryServerFormatterSinkProvider DefaultSinkProvider = new BinaryServerFormatterSinkProvider()
-        {
-            TypeFilterLevel = TypeFilterLevel.Full
-        };
+        private static readonly BinaryServerFormatterSinkProvider DefaultSinkProvider =
+            new BinaryServerFormatterSinkProvider() { TypeFilterLevel = TypeFilterLevel.Full };
 
         private readonly Package _package;
 
@@ -55,9 +55,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         {
             _package = package ?? throw new ArgumentNullException(nameof(package));
 
-            if (ServiceProvider.GetService(typeof(IMenuCommandService)) is OleMenuCommandService menuCommandService)
+            if (
+                ServiceProvider.GetService(typeof(IMenuCommandService))
+                is OleMenuCommandService menuCommandService
+            )
             {
-                var startMenuCmdId = new CommandID(guidTestWindowCmdSet, cmdidStartIntegrationTestService);
+                var startMenuCmdId = new CommandID(
+                    guidTestWindowCmdSet,
+                    cmdidStartIntegrationTestService
+                );
                 _startMenuCmd = new MenuCommand(StartServiceCallback, startMenuCmdId)
                 {
                     Enabled = true,
@@ -65,7 +71,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
                 };
                 menuCommandService.AddCommand(_startMenuCmd);
 
-                var stopMenuCmdId = new CommandID(guidTestWindowCmdSet, cmdidStopIntegrationTestService);
+                var stopMenuCmdId = new CommandID(
+                    guidTestWindowCmdSet,
+                    cmdidStopIntegrationTestService
+                );
                 _stopMenuCmd = new MenuCommand(StopServiceCallback, stopMenuCmdId)
                 {
                     Enabled = false,
@@ -88,11 +97,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         /// Supports deserialization of types passed to APIs injected into the Visual Studio process by
         /// <see cref="IntegrationService.Execute"/>.
         /// </summary>
-        private static Assembly CurrentDomainAssemblyResolve(object sender, ResolveEventArgs args)
-            => AppDomain.CurrentDomain.GetAssemblies().SingleOrDefault(assembly => assembly.FullName == args.Name);
+        private static Assembly CurrentDomainAssemblyResolve(
+            object sender,
+            ResolveEventArgs args
+        ) =>
+            AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SingleOrDefault(assembly => assembly.FullName == args.Name);
 
-        public void Dispose()
-            => StopServiceCallback(this, EventArgs.Empty);
+        public void Dispose() => StopServiceCallback(this, EventArgs.Empty);
 
         /// <summary>
         /// Starts the IPC server for the Integration Test service.
@@ -114,7 +127,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
                 );
 
                 var serviceType = typeof(IntegrationService);
-                _marshalledService = RemotingServices.Marshal(_service, serviceType.FullName, serviceType);
+                _marshalledService = RemotingServices.Marshal(
+                    _service,
+                    serviceType.FullName,
+                    serviceType
+                );
 
                 _serviceChannel.StartListening(null);
 
@@ -150,7 +167,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             }
         }
 
-        private void SwapAvailableCommands(MenuCommand commandToDisable, MenuCommand commandToEnable)
+        private void SwapAvailableCommands(
+            MenuCommand commandToDisable,
+            MenuCommand commandToEnable
+        )
         {
             commandToDisable.Enabled = false;
             commandToDisable.Visible = false;

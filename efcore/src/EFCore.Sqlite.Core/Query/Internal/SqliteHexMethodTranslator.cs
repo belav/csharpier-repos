@@ -19,8 +19,12 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
     /// </summary>
     public class SqliteHexMethodTranslator : IMethodCallTranslator
     {
-        private static readonly MethodInfo _methodInfo = typeof(SqliteDbFunctionsExtensions)
-            .GetRequiredMethod(nameof(SqliteDbFunctionsExtensions.Hex), typeof(DbFunctions), typeof(byte[]));
+        private static readonly MethodInfo _methodInfo =
+            typeof(SqliteDbFunctionsExtensions).GetRequiredMethod(
+                nameof(SqliteDbFunctionsExtensions.Hex),
+                typeof(DbFunctions),
+                typeof(byte[])
+            );
 
         private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -30,8 +34,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public SqliteHexMethodTranslator(ISqlExpressionFactory sqlExpressionFactory)
-            => _sqlExpressionFactory = Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
+        public SqliteHexMethodTranslator(ISqlExpressionFactory sqlExpressionFactory) =>
+            _sqlExpressionFactory = Check.NotNull(
+                sqlExpressionFactory,
+                nameof(sqlExpressionFactory)
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
             SqlExpression? instance,
             MethodInfo method,
             IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(method, nameof(method));
             Check.NotNull(arguments, nameof(arguments));
@@ -56,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal
                     new[] { arguments[1] },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
-                    typeof(string));
+                    typeof(string)
+                );
             }
 
             return null;

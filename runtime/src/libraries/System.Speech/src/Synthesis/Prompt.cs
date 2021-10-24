@@ -11,10 +11,7 @@ namespace System.Speech.Synthesis
     public class Prompt
     {
         #region Constructors
-        public Prompt(string textToSpeak)
-            : this(textToSpeak, SynthesisTextFormat.Text)
-        {
-        }
+        public Prompt(string textToSpeak) : this(textToSpeak, SynthesisTextFormat.Text) { }
         public Prompt(PromptBuilder promptBuilder)
         {
             Helpers.ThrowIfNull(promptBuilder, nameof(promptBuilder));
@@ -36,7 +33,10 @@ namespace System.Speech.Synthesis
                     break;
 
                 default:
-                    throw new ArgumentException(SR.Get(SRID.SynthesizerUnknownMediaType), nameof(media));
+                    throw new ArgumentException(
+                        SR.Get(SRID.SynthesizerUnknownMediaType),
+                        nameof(media)
+                    );
             }
         }
         internal Prompt(Uri promptFile, SynthesisMediaType media)
@@ -50,7 +50,14 @@ namespace System.Speech.Synthesis
                     string localPath;
                     string mimeType;
                     Uri baseUri;
-                    using (Stream stream = s_resourceLoader.LoadFile(promptFile, out mimeType, out baseUri, out localPath))
+                    using (
+                        Stream stream = s_resourceLoader.LoadFile(
+                            promptFile,
+                            out mimeType,
+                            out baseUri,
+                            out localPath
+                        )
+                    )
                     {
                         try
                         {
@@ -64,7 +71,6 @@ namespace System.Speech.Synthesis
                             s_resourceLoader.UnloadFile(localPath);
                         }
                     }
-
                     break;
 
                 case SynthesisMediaType.WaveAudio:
@@ -73,7 +79,10 @@ namespace System.Speech.Synthesis
                     break;
 
                 default:
-                    throw new ArgumentException(SR.Get(SRID.SynthesizerUnknownMediaType), nameof(media));
+                    throw new ArgumentException(
+                        SR.Get(SRID.SynthesizerUnknownMediaType),
+                        nameof(media)
+                    );
             }
         }
 
@@ -82,14 +91,8 @@ namespace System.Speech.Synthesis
         #region public Properties
         public bool IsCompleted
         {
-            get
-            {
-                return _completed;
-            }
-            internal set
-            {
-                _completed = value;
-            }
+            get { return _completed; }
+            internal set { _completed = value; }
         }
 
         internal object Synthesizer
@@ -149,7 +152,6 @@ namespace System.Speech.Synthesis
         private object _synthesizer;
 
         private static ResourceLoader s_resourceLoader = new();
-
         #endregion
     }
 
@@ -165,6 +167,5 @@ namespace System.Speech.Synthesis
         Text = 0,
         Ssml = 1,
     }
-
     #endregion
 }

@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             ExceptionAssert.ThrowsArgument(
                 () => activatorProvider.CreateActivator(descriptor),
                 "descriptor",
-                "The 'ModelTypeInfo' property of 'descriptor' must not be null.");
+                "The 'ModelTypeInfo' property of 'descriptor' must not be null."
+            );
         }
 
         [Fact]
@@ -31,18 +32,16 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         {
             // Arrange
             var simpleModel = new DISimpleModel();
-            var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);  
-            serviceProvider.Setup(s => s.GetService(typeof(DISimpleModel)))
+            var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
+            serviceProvider
+                .Setup(s => s.GetService(typeof(DISimpleModel)))
                 .Returns(simpleModel)
-                .Verifiable();                         
+                .Verifiable();
 
             var activatorProvider = new ServiceBasedPageModelActivatorProvider();
             var pageContext = new PageContext
             {
-                HttpContext = new DefaultHttpContext
-                {
-                    RequestServices = serviceProvider.Object,
-                },
+                HttpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object, },
                 ActionDescriptor = new CompiledPageActionDescriptor
                 {
                     ModelTypeInfo = typeof(DISimpleModel).GetTypeInfo(),
@@ -64,17 +63,15 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             // Arrange
             var simpleModel = new DISimpleModel();
             var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
-            serviceProvider.Setup(s => s.GetService(typeof(DISimpleModel)))
+            serviceProvider
+                .Setup(s => s.GetService(typeof(DISimpleModel)))
                 .Returns(simpleModel)
                 .Verifiable();
 
             var activatorProvider = new ServiceBasedPageModelActivatorProvider();
             var pageContext = new PageContext
             {
-                HttpContext = new DefaultHttpContext
-                {
-                    RequestServices = serviceProvider.Object,
-                },
+                HttpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object, },
                 ActionDescriptor = new CompiledPageActionDescriptor
                 {
                     ModelTypeInfo = typeof(DISimpleModel).GetTypeInfo(),
@@ -94,7 +91,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
         public void Create_ThrowsIfModelIsNotRegisteredInServiceProvider()
         {
             // Arrange
-            var expected = "No service for type '" + typeof(DISimpleModel) + "' has been registered.";
+            var expected =
+                "No service for type '" + typeof(DISimpleModel) + "' has been registered.";
             var model = new DISimpleModel();
 
             var httpContext = new DefaultHttpContext
@@ -114,8 +112,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             // Act and Assert
             var activator = activatorProvider.CreateActivator(context.ActionDescriptor);
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => activator(context));
+            var ex = Assert.Throws<InvalidOperationException>(() => activator(context));
 
             Assert.Equal(expected, ex.Message);
         }

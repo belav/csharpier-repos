@@ -36,7 +36,6 @@ namespace Microsoft.AspNetCore.Http.Abstractions
             }
         }
 
-
         private void CanonicalizedValueTest(string method, string expectedMethod)
         {
             string inputMethod = CreateStringAtRuntime(method);

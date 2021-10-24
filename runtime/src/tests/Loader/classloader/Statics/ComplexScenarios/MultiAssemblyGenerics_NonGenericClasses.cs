@@ -11,7 +11,6 @@ public class CB
     {
         I = i;
         C = new CB_A(i);
-
     }
     public class CB_A
     {

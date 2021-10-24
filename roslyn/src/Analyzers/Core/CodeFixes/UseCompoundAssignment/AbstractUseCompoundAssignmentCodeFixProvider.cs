@@ -16,8 +16,10 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.UseCompoundAssignment
 {
     internal abstract class AbstractUseCompoundAssignmentCodeFixProvider<
-        TSyntaxKind, TAssignmentSyntax, TExpressionSyntax>
-        : SyntaxEditorBasedCodeFixProvider
+        TSyntaxKind,
+        TAssignmentSyntax,
+        TExpressionSyntax
+    > : SyntaxEditorBasedCodeFixProvider
         where TSyntaxKind : struct
         where TAssignmentSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
@@ -33,14 +35,23 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
         private readonly ImmutableDictionary<TSyntaxKind, TSyntaxKind> _assignmentToTokenMap;
 
         protected AbstractUseCompoundAssignmentCodeFixProvider(
-            ImmutableArray<(TSyntaxKind exprKind, TSyntaxKind assignmentKind, TSyntaxKind tokenKind)> kinds)
+            ImmutableArray<(TSyntaxKind exprKind, TSyntaxKind assignmentKind, TSyntaxKind tokenKind)> kinds
+        )
         {
-            UseCompoundAssignmentUtilities.GenerateMaps(kinds, out _binaryToAssignmentMap, out _assignmentToTokenMap);
+            UseCompoundAssignmentUtilities.GenerateMaps(
+                kinds,
+                out _binaryToAssignmentMap,
+                out _assignmentToTokenMap
+            );
         }
 
         protected abstract SyntaxToken Token(TSyntaxKind kind);
         protected abstract TAssignmentSyntax Assignment(
-            TSyntaxKind assignmentOpKind, TExpressionSyntax left, SyntaxToken syntaxToken, TExpressionSyntax right);
+            TSyntaxKind assignmentOpKind,
+            TExpressionSyntax left,
+            SyntaxToken syntaxToken,
+            TExpressionSyntax right
+        );
         protected abstract TExpressionSyntax Increment(TExpressionSyntax left);
         protected abstract TExpressionSyntax Decrement(TExpressionSyntax left);
 
@@ -49,54 +60,82 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             var document = context.Document;
             var diagnostic = context.Diagnostics[0];
 
-            context.RegisterCodeFix(new MyCodeAction(
-                c => FixAsync(document, diagnostic, c)),
-                context.Diagnostics);
+            context.RegisterCodeFix(
+                new MyCodeAction(c => FixAsync(document, diagnostic, c)),
+                context.Diagnostics
+            );
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var syntaxKinds = syntaxFacts.SyntaxKinds;
 
             foreach (var diagnostic in diagnostics)
             {
-                var assignment = diagnostic.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken);
+                var assignment = diagnostic.AdditionalLocations[0].FindNode(
+                    getInnermostNodeForTie: true,
+                    cancellationToken
+                );
 
-                editor.ReplaceNode(assignment,
+                editor.ReplaceNode(
+                    assignment,
                     (currentAssignment, generator) =>
                     {
-                        syntaxFacts.GetPartsOfAssignmentExpressionOrStatement(currentAssignment,
-                            out var leftOfAssign, out var equalsToken, out var rightOfAssign);
+                        syntaxFacts.GetPartsOfAssignmentExpressionOrStatement(
+                            currentAssignment,
+                            out var leftOfAssign,
+                            out var equalsToken,
+                            out var rightOfAssign
+                        );
 
                         while (syntaxFacts.IsParenthesizedExpression(rightOfAssign))
                             rightOfAssign = syntaxFacts.Unparenthesize(rightOfAssign);
 
-                        syntaxFacts.GetPartsOfBinaryExpression(rightOfAssign,
-                            out _, out var opToken, out var rightExpr);
+                        syntaxFacts.GetPartsOfBinaryExpression(
+                            rightOfAssign,
+                            out _,
+                            out var opToken,
+                            out var rightExpr
+                        );
 
-                        if (diagnostic.Properties.ContainsKey(UseCompoundAssignmentUtilities.Increment))
+                        if (
+                            diagnostic.Properties.ContainsKey(
+                                UseCompoundAssignmentUtilities.Increment
+                            )
+                        )
                         {
                             return Increment((TExpressionSyntax)leftOfAssign);
                         }
 
-                        if (diagnostic.Properties.ContainsKey(UseCompoundAssignmentUtilities.Decrement))
+                        if (
+                            diagnostic.Properties.ContainsKey(
+                                UseCompoundAssignmentUtilities.Decrement
+                            )
+                        )
                         {
                             return Decrement((TExpressionSyntax)leftOfAssign);
                         }
 
-                        var assignmentOpKind = _binaryToAssignmentMap[syntaxKinds.Convert<TSyntaxKind>(rightOfAssign.RawKind)];
+                        var assignmentOpKind = _binaryToAssignmentMap[
+                            syntaxKinds.Convert<TSyntaxKind>(rightOfAssign.RawKind)
+                        ];
                         var compoundOperator = Token(_assignmentToTokenMap[assignmentOpKind]);
                         return Assignment(
                             assignmentOpKind,
                             (TExpressionSyntax)leftOfAssign,
                             compoundOperator.WithTriviaFrom(equalsToken),
-                            (TExpressionSyntax)rightExpr);
-                    });
+                            (TExpressionSyntax)rightExpr
+                        );
+                    }
+                );
             }
 
             return Task.CompletedTask;
@@ -105,9 +144,11 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
         private class MyCodeAction : CustomCodeActions.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(AnalyzersResources.Use_compound_assignment, createChangedDocument, AnalyzersResources.Use_compound_assignment)
-            {
-            }
+                : base(
+                    AnalyzersResources.Use_compound_assignment,
+                    createChangedDocument,
+                    AnalyzersResources.Use_compound_assignment
+                ) { }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.Hosting.Server
         /// <summary>
         /// Indicates if integrated Windows authentication is enabled for the current application instance.
         /// </summary>
-        public bool IsEnabled { get; set;}
+        public bool IsEnabled { get; set; }
 
         /// <summary>
         /// The name of the authentication scheme for the server authentication handler.

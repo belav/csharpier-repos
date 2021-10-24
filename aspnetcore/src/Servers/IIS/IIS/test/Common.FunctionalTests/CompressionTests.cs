@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
     {
         private readonly IISCompressionSiteFixture _fixture;
 
-        public CompressionTests(IISCompressionSiteFixture fixture): base(fixture)
+        public CompressionTests(IISCompressionSiteFixture fixture) : base(fixture)
         {
             _fixture = fixture;
         }
@@ -45,11 +45,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     "Host: localhost",
                     "Connection: close",
                     "",
-                    "");
+                    ""
+                );
 
-                await connection.Receive(
-                    "HTTP/1.1 200 OK",
-                    "");
+                await connection.Receive("HTTP/1.1 200 OK", "");
                 await connection.ReceiveHeaders();
 
                 foreach (var message in messages)
@@ -87,11 +86,10 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
                     "Host: localhost",
                     "Connection: close",
                     "",
-                    "");
+                    ""
+                );
 
-                await connection.Receive(
-                    "HTTP/1.1 200 OK",
-                    "");
+                await connection.Receive("HTTP/1.1 200 OK", "");
                 await connection.ReceiveHeaders();
 
                 foreach (var message in messages)
@@ -114,23 +112,33 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             {
                 AutomaticDecompression = DecompressionMethods.GZip
             };
-            var client = new HttpClient(handler)
-            {
-                BaseAddress = _fixture.Client.BaseAddress,
-            };
-            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
-            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("identity", 0));
+            var client = new HttpClient(handler) { BaseAddress = _fixture.Client.BaseAddress, };
+            client.DefaultRequestHeaders.AcceptEncoding.Add(
+                new StringWithQualityHeaderValue("gzip")
+            );
+            client.DefaultRequestHeaders.AcceptEncoding.Add(
+                new StringWithQualityHeaderValue("identity", 0)
+            );
             client.DefaultRequestHeaders.Add("Response-Content-Type", "text/event-stream");
             var messages = "Message1\r\nMessage2\r\n\r\n";
 
             // Send messages with terminator
-            var response = await client.PostAsync("ReadAndWriteEchoLines", new StringContent(messages));
+            var response = await client.PostAsync(
+                "ReadAndWriteEchoLines",
+                new StringContent(messages)
+            );
             Assert.Equal(messages, await response.Content.ReadAsStringAsync());
-            Assert.True(response.Content.Headers.TryGetValues("Content-Type", out var contentTypes));
+            Assert.True(
+                response.Content.Headers.TryGetValues("Content-Type", out var contentTypes)
+            );
             Assert.Single(contentTypes, "text/event-stream");
             // Not the cleanest check but I wasn't able to figure out other way to check
             // that response was compressed
-            Assert.Contains("gzip", response.Content.GetType().FullName, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(
+                "gzip",
+                response.Content.GetType().FullName,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
     }
 }

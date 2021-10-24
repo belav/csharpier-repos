@@ -32,12 +32,41 @@ namespace System
         public override Type GetNestedType(string name, BindingFlags bindingAttr) => null;
         public override Type[] GetNestedTypes(BindingFlags bindingAttr) => null;
         public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) => null;
-        public override object InvokeMember(string name, BindingFlags invokeAttr, Binder binder, object target, object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParameters) => null;
+        public override object InvokeMember(
+            string name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object target,
+            object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            string[] namedParameters
+        ) => null;
         public override bool IsDefined(Type attributeType, bool inherit) => false;
         protected override TypeAttributes GetAttributeFlagsImpl() => TypeAttributes.NotPublic;
-        protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers) => null;
-        protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers) => null;
-        protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) => null;
+        protected override ConstructorInfo GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        ) => null;
+        protected override MethodInfo GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[] modifiers
+        ) => null;
+        protected override PropertyInfo GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder binder,
+            Type returnType,
+            Type[] types,
+            ParameterModifier[] modifiers
+        ) => null;
         protected override bool HasElementTypeImpl() => false;
         protected override bool IsArrayImpl() => false;
         protected override bool IsByRefImpl() => false;

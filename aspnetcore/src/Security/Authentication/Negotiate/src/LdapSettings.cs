@@ -85,12 +85,19 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
             {
                 if (string.IsNullOrEmpty(Domain))
                 {
-                    throw new ArgumentException($"{nameof(EnableLdapClaimResolution)} is set to true but {nameof(Domain)} is not set.");
+                    throw new ArgumentException(
+                        $"{nameof(EnableLdapClaimResolution)} is set to true but {nameof(Domain)} is not set."
+                    );
                 }
 
-                if (string.IsNullOrEmpty(MachineAccountName) && !string.IsNullOrEmpty(MachineAccountPassword))
+                if (
+                    string.IsNullOrEmpty(MachineAccountName)
+                    && !string.IsNullOrEmpty(MachineAccountPassword)
+                )
                 {
-                    throw new ArgumentException($"{nameof(MachineAccountPassword)} should only be specified when {nameof(MachineAccountName)} is configured.");
+                    throw new ArgumentException(
+                        $"{nameof(MachineAccountPassword)} should only be specified when {nameof(MachineAccountName)} is configured."
+                    );
                 }
             }
         }

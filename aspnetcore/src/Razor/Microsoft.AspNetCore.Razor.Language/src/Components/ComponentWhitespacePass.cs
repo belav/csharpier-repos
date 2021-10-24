@@ -7,9 +7,14 @@ using Microsoft.AspNetCore.Razor.Language.Intermediate;
 
 namespace Microsoft.AspNetCore.Razor.Language.Components
 {
-    internal class ComponentWhitespacePass : ComponentIntermediateNodePassBase, IRazorDirectiveClassifierPass
+    internal class ComponentWhitespacePass
+        : ComponentIntermediateNodePassBase,
+          IRazorDirectiveClassifierPass
     {
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             if (codeDocument == null)
             {
@@ -40,7 +45,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             }
 
             var razorLanguageVersion = codeDocument.GetParserOptions().Version;
-            var useLegacyBehavior = razorLanguageVersion.CompareTo(RazorLanguageVersion.Version_5_0) < 0;
+            var useLegacyBehavior =
+                razorLanguageVersion.CompareTo(RazorLanguageVersion.Version_5_0) < 0;
             if (useLegacyBehavior)
             {
                 // Prior to 5.0, the whitespace pass only applied to the BuildRenderTree method, and
@@ -79,22 +85,38 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             // If there's no @preservewhitespace attribute, the default is that we *don't* preserve whitespace
             var shouldPreserveWhitespace = false;
 
-            foreach (var preserveWhitespaceDirective in documentNode.FindDirectiveReferences(ComponentPreserveWhitespaceDirective.Directive))
+            foreach (
+                var preserveWhitespaceDirective in documentNode.FindDirectiveReferences(
+                    ComponentPreserveWhitespaceDirective.Directive
+                )
+            )
             {
-                var token = ((DirectiveIntermediateNode)preserveWhitespaceDirective.Node).Tokens.FirstOrDefault();
+                var token = (
+                    (DirectiveIntermediateNode)preserveWhitespaceDirective.Node
+                ).Tokens.FirstOrDefault();
                 var shouldPreserveWhitespaceContent = token?.Content;
                 if (shouldPreserveWhitespaceContent != null)
                 {
-                    shouldPreserveWhitespace = string.Equals(shouldPreserveWhitespaceContent, "true", StringComparison.Ordinal);
+                    shouldPreserveWhitespace = string.Equals(
+                        shouldPreserveWhitespaceContent,
+                        "true",
+                        StringComparison.Ordinal
+                    );
                 }
             }
 
             return shouldPreserveWhitespace;
         }
 
-        private static int RemoveContiguousWhitespace(IntermediateNodeCollection nodes, TraversalDirection direction, int? startIndex = null)
+        private static int RemoveContiguousWhitespace(
+            IntermediateNodeCollection nodes,
+            TraversalDirection direction,
+            int? startIndex = null
+        )
         {
-            var position = startIndex.GetValueOrDefault(direction == TraversalDirection.Forwards ? 0 : nodes.Count - 1);
+            var position = startIndex.GetValueOrDefault(
+                direction == TraversalDirection.Forwards ? 0 : nodes.Count - 1
+            );
             var countRemoved = 0;
             while (position >= 0 && position < nodes.Count)
             {
@@ -193,8 +215,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
                 {
                     if (node.Children[childIndex] is CSharpCodeIntermediateNode)
                     {
-                        childIndex -= RemoveContiguousWhitespace(node.Children, TraversalDirection.Backwards, childIndex - 1);
-                        RemoveContiguousWhitespace(node.Children, TraversalDirection.Forwards, childIndex + 1);
+                        childIndex -= RemoveContiguousWhitespace(
+                            node.Children,
+                            TraversalDirection.Backwards,
+                            childIndex - 1
+                        );
+                        RemoveContiguousWhitespace(
+                            node.Children,
+                            TraversalDirection.Forwards,
+                            childIndex + 1
+                        );
                     }
                 }
 

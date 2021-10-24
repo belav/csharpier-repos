@@ -16,7 +16,11 @@ namespace System.Net.WebSockets
         private const int InvalidCloseStatusCodesTo = 999;
         private const string Separators = "()<>@,;:\\\"/[]?={} ";
 
-        internal static void ThrowIfInvalidState(WebSocketState currentState, bool isDisposed, WebSocketState[] validStates)
+        internal static void ThrowIfInvalidState(
+            WebSocketState currentState,
+            bool isDisposed,
+            WebSocketState[] validStates
+        )
         {
             string validStatesText = string.Empty;
 
@@ -41,14 +45,18 @@ namespace System.Net.WebSockets
 
             throw new WebSocketException(
                 WebSocketError.InvalidState,
-                SR.Format(SR.net_WebSockets_InvalidState, currentState, validStatesText));
+                SR.Format(SR.net_WebSockets_InvalidState, currentState, validStatesText)
+            );
         }
 
         internal static void ValidateSubprotocol(string subProtocol)
         {
             if (string.IsNullOrWhiteSpace(subProtocol))
             {
-                throw new ArgumentException(SR.net_WebSockets_InvalidEmptySubProtocol, nameof(subProtocol));
+                throw new ArgumentException(
+                    SR.net_WebSockets_InvalidEmptySubProtocol,
+                    nameof(subProtocol)
+                );
             }
 
             string? invalidChar = null;
@@ -62,9 +70,12 @@ namespace System.Net.WebSockets
                     break;
                 }
 
-                if (!char.IsLetterOrDigit(ch) &&
+                if (
+                    !char.IsLetterOrDigit(ch)
+                    &&
 #pragma warning disable CA2249 // Consider using 'string.Contains' instead of 'string.IndexOf'.  This file is built into a project that doesn't have string.Contains(char).
-                    Separators.IndexOf(ch) >= 0)
+                    Separators.IndexOf(ch) >= 0
+                )
 #pragma warning restore CA2249
                 {
                     invalidChar = ch.ToString();
@@ -76,31 +87,53 @@ namespace System.Net.WebSockets
 
             if (invalidChar != null)
             {
-                throw new ArgumentException(SR.Format(SR.net_WebSockets_InvalidCharInProtocolString, subProtocol, invalidChar), nameof(subProtocol));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.net_WebSockets_InvalidCharInProtocolString,
+                        subProtocol,
+                        invalidChar
+                    ),
+                    nameof(subProtocol)
+                );
             }
         }
 
-        internal static void ValidateCloseStatus(WebSocketCloseStatus closeStatus, string? statusDescription)
+        internal static void ValidateCloseStatus(
+            WebSocketCloseStatus closeStatus,
+            string? statusDescription
+        )
         {
-            if (closeStatus == WebSocketCloseStatus.Empty && !string.IsNullOrEmpty(statusDescription))
+            if (
+                closeStatus == WebSocketCloseStatus.Empty
+                && !string.IsNullOrEmpty(statusDescription)
+            )
             {
-                throw new ArgumentException(SR.Format(SR.net_WebSockets_ReasonNotNull,
-                    statusDescription,
-                    WebSocketCloseStatus.Empty),
-                    nameof(statusDescription));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.net_WebSockets_ReasonNotNull,
+                        statusDescription,
+                        WebSocketCloseStatus.Empty
+                    ),
+                    nameof(statusDescription)
+                );
             }
 
             int closeStatusCode = (int)closeStatus;
 
-            if ((closeStatusCode >= InvalidCloseStatusCodesFrom &&
-                closeStatusCode <= InvalidCloseStatusCodesTo) ||
-                closeStatusCode == CloseStatusCodeAbort ||
-                closeStatusCode == CloseStatusCodeFailedTLSHandshake)
+            if (
+                (
+                    closeStatusCode >= InvalidCloseStatusCodesFrom
+                    && closeStatusCode <= InvalidCloseStatusCodesTo
+                )
+                || closeStatusCode == CloseStatusCodeAbort
+                || closeStatusCode == CloseStatusCodeFailedTLSHandshake
+            )
             {
                 // CloseStatus 1006 means Aborted - this will never appear on the wire and is reflected by calling WebSocket.Abort
-                throw new ArgumentException(SR.Format(SR.net_WebSockets_InvalidCloseStatusCode,
-                    closeStatusCode),
-                    nameof(closeStatus));
+                throw new ArgumentException(
+                    SR.Format(SR.net_WebSockets_InvalidCloseStatusCode, closeStatusCode),
+                    nameof(closeStatus)
+                );
             }
 
             int length = 0;
@@ -111,16 +144,26 @@ namespace System.Net.WebSockets
 
             if (length > MaxControlFramePayloadLength)
             {
-                throw new ArgumentException(SR.Format(SR.net_WebSockets_InvalidCloseStatusDescription,
-                    statusDescription,
-                    MaxControlFramePayloadLength),
-                    nameof(statusDescription));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.net_WebSockets_InvalidCloseStatusDescription,
+                        statusDescription,
+                        MaxControlFramePayloadLength
+                    ),
+                    nameof(statusDescription)
+                );
             }
         }
 
-        internal static void ValidateArraySegment(ArraySegment<byte> arraySegment, string parameterName)
+        internal static void ValidateArraySegment(
+            ArraySegment<byte> arraySegment,
+            string parameterName
+        )
         {
-            Debug.Assert(!string.IsNullOrEmpty(parameterName), "'parameterName' MUST NOT be NULL or string.Empty");
+            Debug.Assert(
+                !string.IsNullOrEmpty(parameterName),
+                "'parameterName' MUST NOT be NULL or string.Empty"
+            );
 
             if (arraySegment.Array == null)
             {
@@ -128,11 +171,18 @@ namespace System.Net.WebSockets
             }
             if (arraySegment.Offset < 0 || arraySegment.Offset > arraySegment.Array.Length)
             {
-                throw new ArgumentOutOfRangeException(parameterName + "." + nameof(arraySegment.Offset));
+                throw new ArgumentOutOfRangeException(
+                    parameterName + "." + nameof(arraySegment.Offset)
+                );
             }
-            if (arraySegment.Count < 0 || arraySegment.Count > (arraySegment.Array.Length - arraySegment.Offset))
+            if (
+                arraySegment.Count < 0
+                || arraySegment.Count > (arraySegment.Array.Length - arraySegment.Offset)
+            )
             {
-                throw new ArgumentOutOfRangeException(parameterName + "." + nameof(arraySegment.Count));
+                throw new ArgumentOutOfRangeException(
+                    parameterName + "." + nameof(arraySegment.Count)
+                );
             }
         }
 

@@ -24,8 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventDefinitionBase eventDefinition,
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             IEntityType firstEntityType,
-            IEntityType secondEntityType)
-            : base(eventDefinition, messageGenerator)
+            IEntityType secondEntityType
+        ) : base(eventDefinition, messageGenerator)
         {
             FirstEntityType = firstEntityType;
             SecondEntityType = secondEntityType;

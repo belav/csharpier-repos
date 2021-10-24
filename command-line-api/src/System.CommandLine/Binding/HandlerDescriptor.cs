@@ -17,15 +17,19 @@ namespace System.CommandLine.Binding
         public abstract ModelDescriptor? Parent { get; }
 
         public IReadOnlyList<ParameterDescriptor> ParameterDescriptors =>
-            _parameterDescriptors ??= new List<ParameterDescriptor>(InitializeParameterDescriptors());
+            _parameterDescriptors ??= new List<ParameterDescriptor>(
+                InitializeParameterDescriptors()
+            );
 
         protected abstract IEnumerable<ParameterDescriptor> InitializeParameterDescriptors();
 
         public override string ToString() =>
             $"{Parent} ({string.Join(", ", ParameterDescriptors)})";
 
-        public static HandlerDescriptor FromMethodInfo(MethodInfo methodInfo, object? target = null) =>
-            new MethodInfoHandlerDescriptor(methodInfo, target);
+        public static HandlerDescriptor FromMethodInfo(
+            MethodInfo methodInfo,
+            object? target = null
+        ) => new MethodInfoHandlerDescriptor(methodInfo, target);
 
         public static HandlerDescriptor FromDelegate(Delegate @delegate) =>
             new DelegateHandlerDescriptor(@delegate);

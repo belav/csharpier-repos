@@ -12,7 +12,6 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         /// The token was successfully acquired.
         /// </summary>
         Success,
-
         /// <summary>
         /// A redirect is needed in order to provision the token.
         /// </summary>

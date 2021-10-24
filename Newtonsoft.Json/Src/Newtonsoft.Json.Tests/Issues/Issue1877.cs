@@ -48,17 +48,20 @@ namespace Newtonsoft.Json.Tests.Issues
             f2.Version = new Version("3.0");
             (f2 as Fubar).Version = new Version("4.0");
 
-            var s = JsonConvert.SerializeObject(f2, new JsonSerializerSettings
-            {
-                Converters = { new VersionConverter() }
-            });
+            var s = JsonConvert.SerializeObject(
+                f2,
+                new JsonSerializerSettings { Converters = { new VersionConverter() } }
+            );
             Assert.AreEqual(@"{""Version"":""4.0""}", s);
 
-            var f3 = JsonConvert.DeserializeObject<Fubar2>(s, new JsonSerializerSettings
-            {
-                ObjectCreationHandling = ObjectCreationHandling.Replace,
-                Converters = { new VersionConverter() }
-            });
+            var f3 = JsonConvert.DeserializeObject<Fubar2>(
+                s,
+                new JsonSerializerSettings
+                {
+                    ObjectCreationHandling = ObjectCreationHandling.Replace,
+                    Converters = { new VersionConverter() }
+                }
+            );
 
             Assert.AreEqual(2, f3.Version.Major);
             Assert.AreEqual(4, (f3 as Fubar).Version.Major);
@@ -67,7 +70,6 @@ namespace Newtonsoft.Json.Tests.Issues
         class Fubar
         {
             public Version Version { get; set; } = new Version("1.0");
-
             // ...
         }
 
@@ -75,7 +77,6 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             [JsonIgnore]
             public new Version Version { get; set; } = new Version("2.0");
-
             // ...
         }
     }

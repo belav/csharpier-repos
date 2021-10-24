@@ -15,11 +15,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
 {
     public static class ScriptTestFixtures
     {
-        internal static MetadataReference HostRef = MetadataReference.CreateFromAssemblyInternal(typeof(ScriptTestFixtures).GetTypeInfo().Assembly);
+        internal static MetadataReference HostRef = MetadataReference.CreateFromAssemblyInternal(
+            typeof(ScriptTestFixtures).GetTypeInfo().Assembly
+        );
 
         public class B
         {
-            public int x = 1, w = 4;
+            public int x = 1,
+                w = 4;
         }
 
         public class C : B, I
@@ -45,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
 
         public class B2
         {
-            public int x = 1, w = 4;
+            public int x = 1,
+                w = 4;
         }
     }
 }

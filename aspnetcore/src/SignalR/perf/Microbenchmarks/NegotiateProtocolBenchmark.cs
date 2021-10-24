@@ -33,20 +33,22 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                     new AvailableTransport
                     {
                         Transport = "WebSockets",
-                        TransferFormats = new List<string>
-                        {
-                            "Text",
-                            "Binary"
-                        }
+                        TransferFormats = new List<string> { "Text", "Binary" }
                     }
                 }
             };
             _stream = Stream.Null;
 
-            _responseData1 = Encoding.UTF8.GetBytes("{\"connectionId\":\"123\",\"availableTransports\":[]}");
+            _responseData1 = Encoding.UTF8.GetBytes(
+                "{\"connectionId\":\"123\",\"availableTransports\":[]}"
+            );
             _responseData2 = Encoding.UTF8.GetBytes("{\"url\": \"http://foo.com/chat\"}");
-            _responseData3 = Encoding.UTF8.GetBytes("{\"url\": \"http://foo.com/chat\", \"accessToken\": \"token\"}");
-            _responseData4 = Encoding.UTF8.GetBytes("{\"connectionId\":\"123\",\"availableTransports\":[{\"transport\":\"test\",\"transferFormats\":[]}]}");
+            _responseData3 = Encoding.UTF8.GetBytes(
+                "{\"url\": \"http://foo.com/chat\", \"accessToken\": \"token\"}"
+            );
+            _responseData4 = Encoding.UTF8.GetBytes(
+                "{\"connectionId\":\"123\",\"availableTransports\":[{\"transport\":\"test\",\"transferFormats\":[]}]}"
+            );
 
             var writer = new MemoryBufferWriter();
             NegotiateProtocol.WriteResponse(_negotiateResponse, writer);
@@ -69,23 +71,23 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
         }
 
         [Benchmark]
-        public void ParsingNegotiateResponseMessageSuccessForValid1()
-            => NegotiateProtocol.ParseResponse(_responseData1);
+        public void ParsingNegotiateResponseMessageSuccessForValid1() =>
+            NegotiateProtocol.ParseResponse(_responseData1);
 
         [Benchmark]
-        public void ParsingNegotiateResponseMessageSuccessForValid2()
-            => NegotiateProtocol.ParseResponse(_responseData2);
+        public void ParsingNegotiateResponseMessageSuccessForValid2() =>
+            NegotiateProtocol.ParseResponse(_responseData2);
 
         [Benchmark]
-        public void ParsingNegotiateResponseMessageSuccessForValid3()
-            => NegotiateProtocol.ParseResponse(_responseData3);
+        public void ParsingNegotiateResponseMessageSuccessForValid3() =>
+            NegotiateProtocol.ParseResponse(_responseData3);
 
         [Benchmark]
-        public void ParsingNegotiateResponseMessageSuccessForValid4()
-            => NegotiateProtocol.ParseResponse(_responseData4);
+        public void ParsingNegotiateResponseMessageSuccessForValid4() =>
+            NegotiateProtocol.ParseResponse(_responseData4);
 
         [Benchmark]
-        public void ParsingNegotiateResponseMessageSuccessForValid5()
-            => NegotiateProtocol.ParseResponse(_responseData5);
+        public void ParsingNegotiateResponseMessageSuccessForValid5() =>
+            NegotiateProtocol.ParseResponse(_responseData5);
     }
 }

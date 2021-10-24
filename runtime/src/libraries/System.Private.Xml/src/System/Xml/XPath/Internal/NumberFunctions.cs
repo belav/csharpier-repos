@@ -115,8 +115,14 @@ namespace MS.Internal.Xml.XPath
             return XmlConvert.XPathRound(n);
         }
 
-        public override XPathResultType StaticType { get { return XPathResultType.Number; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.Number; }
+        }
 
-        public override XPathNodeIterator Clone() { return new NumberFunctions(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new NumberFunctions(this);
+        }
     }
 }

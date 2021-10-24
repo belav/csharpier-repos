@@ -32,7 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 // reasonable TLS protocol version for outgoing connections.
 #pragma warning disable CA5364 // Do Not Use Deprecated Security Protocols
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (ServicePointManager.SecurityProtocol == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls))
+                if (
+                    ServicePointManager.SecurityProtocol
+                    == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls)
+                )
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CA5364 // Do Not Use Deprecated Security Protocols
                 {
@@ -44,37 +47,63 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             {
                 MarkupOptions = Testing.MarkupOptions.UseFirstDescriptor;
 
-                SolutionTransforms.Add((solution, projectId) =>
-                {
-                    var parseOptions = (CSharpParseOptions)solution.GetProject(projectId)!.ParseOptions!;
-                    solution = solution.WithProjectParseOptions(projectId, parseOptions.WithLanguageVersion(LanguageVersion));
-
-                    var compilationOptions = solution.GetProject(projectId)!.CompilationOptions!;
-                    compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(compilationOptions.SpecificDiagnosticOptions.SetItems(CSharpVerifierHelper.NullableWarnings));
-                    solution = solution.WithProjectCompilationOptions(projectId, compilationOptions);
-
-                    var (analyzerConfigSource, remainingOptions) = CodeFixVerifierHelper.ConvertOptionsToAnalyzerConfig(DefaultFileExt, EditorConfig, Options);
-                    if (analyzerConfigSource is object)
+                SolutionTransforms.Add(
+                    (solution, projectId) =>
                     {
-                        foreach (var id in solution.ProjectIds)
+                        var parseOptions = (CSharpParseOptions)solution.GetProject(
+                            projectId
+                        )!.ParseOptions!;
+                        solution = solution.WithProjectParseOptions(
+                            projectId,
+                            parseOptions.WithLanguageVersion(LanguageVersion)
+                        );
+
+                        var compilationOptions = solution.GetProject(
+                            projectId
+                        )!.CompilationOptions!;
+                        compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
+                            compilationOptions.SpecificDiagnosticOptions.SetItems(
+                                CSharpVerifierHelper.NullableWarnings
+                            )
+                        );
+                        solution = solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions
+                        );
+
+                        var (analyzerConfigSource, remainingOptions) =
+                            CodeFixVerifierHelper.ConvertOptionsToAnalyzerConfig(
+                                DefaultFileExt,
+                                EditorConfig,
+                                Options
+                            );
+                        if (analyzerConfigSource is object)
                         {
-                            var documentId = DocumentId.CreateNewId(id, ".editorconfig");
-                            solution = solution.AddAnalyzerConfigDocument(documentId, ".editorconfig", analyzerConfigSource, filePath: "/.editorconfig");
+                            foreach (var id in solution.ProjectIds)
+                            {
+                                var documentId = DocumentId.CreateNewId(id, ".editorconfig");
+                                solution = solution.AddAnalyzerConfigDocument(
+                                    documentId,
+                                    ".editorconfig",
+                                    analyzerConfigSource,
+                                    filePath: "/.editorconfig"
+                                );
+                            }
                         }
-                    }
 
 #if !CODE_STYLE
-                    var options = solution.Options;
-                    foreach (var (key, value) in remainingOptions)
-                    {
-                        options = options.WithChangedOption(key, value);
-                    }
+                        var options = solution.Options;
+                        foreach (var (key, value) in remainingOptions)
+                        {
+                            options = options.WithChangedOption(key, value);
+                        }
 
-                    solution = solution.WithOptions(options);
+                        solution = solution.WithOptions(options);
 #endif
 
-                    return solution;
-                });
+                        return solution;
+                    }
+                );
             }
 
             /// <summary>
@@ -87,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             /// Gets a collection of options to apply to <see cref="Solution.Options"/> for testing. Values may be added
             /// using a collection initializer.
             /// </summary>
-            internal OptionsCollection Options { get; } = new OptionsCollection(LanguageNames.CSharp);
+            internal OptionsCollection Options { get; } =
+                new OptionsCollection(LanguageNames.CSharp);
 
             public string? EditorConfig { get; set; }
 
@@ -97,18 +127,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             {
                 if (DiagnosticSelector is object)
                 {
-                    Assert.True(CodeFixTestBehaviors.HasFlag(Testing.CodeFixTestBehaviors.FixOne), $"'{nameof(DiagnosticSelector)}' can only be used with '{nameof(Testing.CodeFixTestBehaviors)}.{nameof(Testing.CodeFixTestBehaviors.FixOne)}'");
+                    Assert.True(
+                        CodeFixTestBehaviors.HasFlag(Testing.CodeFixTestBehaviors.FixOne),
+                        $"'{nameof(DiagnosticSelector)}' can only be used with '{nameof(Testing.CodeFixTestBehaviors)}.{nameof(Testing.CodeFixTestBehaviors.FixOne)}'"
+                    );
                 }
 
                 await base.RunAsync(cancellationToken);
             }
 
 #if !CODE_STYLE
-            protected override AnalyzerOptions GetAnalyzerOptions(Project project)
-                => new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
+            protected override AnalyzerOptions GetAnalyzerOptions(Project project) =>
+                new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), project.Solution);
 #endif
 
-            protected override Diagnostic? TrySelectDiagnosticToFix(ImmutableArray<Diagnostic> fixableDiagnostics)
+            protected override Diagnostic? TrySelectDiagnosticToFix(
+                ImmutableArray<Diagnostic> fixableDiagnostics
+            )
             {
                 return DiagnosticSelector?.Invoke(fixableDiagnostics)
                     ?? base.TrySelectDiagnosticToFix(fixableDiagnostics);

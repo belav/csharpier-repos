@@ -16,10 +16,21 @@ namespace System.Data.Common
         private readonly FieldNameLookup _fieldNameLookup;
 
         // copy all runtime data information
-        internal DataRecordInternal(SchemaInfo[] schemaInfo, object[] values, PropertyDescriptorCollection descriptors, FieldNameLookup fieldNameLookup)
+        internal DataRecordInternal(
+            SchemaInfo[] schemaInfo,
+            object[] values,
+            PropertyDescriptorCollection descriptors,
+            FieldNameLookup fieldNameLookup
+        )
         {
-            Debug.Assert(null != schemaInfo, "invalid attempt to instantiate DataRecordInternal with null schema information");
-            Debug.Assert(null != values, "invalid attempt to instantiate DataRecordInternal with null value[]");
+            Debug.Assert(
+                null != schemaInfo,
+                "invalid attempt to instantiate DataRecordInternal with null schema information"
+            );
+            Debug.Assert(
+                null != values,
+                "invalid attempt to instantiate DataRecordInternal with null value[]"
+            );
             _schemaInfo = schemaInfo;
             _values = values;
             _propertyDescriptors = descriptors;
@@ -28,10 +39,7 @@ namespace System.Data.Common
 
         public override int FieldCount
         {
-            get
-            {
-                return _schemaInfo.Length;
-            }
+            get { return _schemaInfo.Length; }
         }
 
         public override int GetValues(object[] values)
@@ -53,7 +61,6 @@ namespace System.Data.Common
         {
             return _schemaInfo[i].name;
         }
-
 
         public override object GetValue(int i)
         {
@@ -77,18 +84,12 @@ namespace System.Data.Common
 
         public override object this[int i]
         {
-            get
-            {
-                return GetValue(i);
-            }
+            get { return GetValue(i); }
         }
 
         public override object this[string name]
         {
-            get
-            {
-                return GetValue(GetOrdinal(name));
-            }
+            get { return GetValue(GetOrdinal(name)); }
         }
 
         public override bool GetBoolean(int i)
@@ -101,7 +102,13 @@ namespace System.Data.Common
             return ((byte)_values[i]);
         }
 
-        public override long GetBytes(int i, long dataIndex, byte[]? buffer, int bufferIndex, int length)
+        public override long GetBytes(
+            int i,
+            long dataIndex,
+            byte[]? buffer,
+            int bufferIndex,
+            int length
+        )
         {
             int cbytes = 0;
             int ndataIndex;
@@ -150,7 +157,11 @@ namespace System.Data.Common
                 // if bad buffer index, throw
                 if (bufferIndex < 0 || bufferIndex >= buffer.Length)
                 {
-                    throw ADP.InvalidDestinationBufferIndex(length, bufferIndex, nameof(bufferIndex));
+                    throw ADP.InvalidDestinationBufferIndex(
+                        length,
+                        bufferIndex,
+                        nameof(bufferIndex)
+                    );
                 }
 
                 // if bad data index, throw
@@ -171,7 +182,13 @@ namespace System.Data.Common
 
         public override char GetChar(int i) => ((string)_values[i])[0];
 
-        public override long GetChars(int i, long dataIndex, char[]? buffer, int bufferIndex, int length)
+        public override long GetChars(
+            int i,
+            long dataIndex,
+            char[]? buffer,
+            int bufferIndex,
+            int length
+        )
         {
             // if the object doesn't contain a char[] then the user will get an exception
             string s = (string)_values[i];
@@ -189,7 +206,6 @@ namespace System.Data.Common
             }
 
             int ndataIndex = (int)dataIndex;
-
 
             // if no buffer is passed in, return the number of characters we have
             if (null == buffer)
@@ -226,7 +242,11 @@ namespace System.Data.Common
                 // if bad buffer index, throw
                 if (bufferIndex < 0 || bufferIndex >= buffer.Length)
                 {
-                    throw ADP.InvalidDestinationBufferIndex(buffer.Length, bufferIndex, nameof(bufferIndex));
+                    throw ADP.InvalidDestinationBufferIndex(
+                        buffer.Length,
+                        bufferIndex,
+                        nameof(bufferIndex)
+                    );
                 }
 
                 // if bad data index, throw
@@ -249,7 +269,6 @@ namespace System.Data.Common
         {
             return ((Guid)_values[i]);
         }
-
 
         public override short GetInt16(int i)
         {
@@ -306,7 +325,7 @@ namespace System.Data.Common
             return new AttributeCollection(null);
         }
 
-// TODO: Enable after System.ComponentModel.TypeConverter is annotated
+        // TODO: Enable after System.ComponentModel.TypeConverter is annotated
 #nullable disable
         string ICustomTypeDescriptor.GetClassName()
         {
@@ -318,25 +337,33 @@ namespace System.Data.Common
             return null;
         }
 
-        [RequiresUnreferencedCode("Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All.")]
+        [RequiresUnreferencedCode(
+            "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All."
+        )]
         TypeConverter ICustomTypeDescriptor.GetConverter()
         {
             return null;
         }
 
-        [RequiresUnreferencedCode("The built-in EventDescriptor implementation uses Reflection which requires unreferenced code.")]
+        [RequiresUnreferencedCode(
+            "The built-in EventDescriptor implementation uses Reflection which requires unreferenced code."
+        )]
         EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
         {
             return null;
         }
 
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered."
+        )]
         PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
         {
             return null;
         }
 
-        [RequiresUnreferencedCode("Editors registered in TypeDescriptor.AddEditorTable may be trimmed.")]
+        [RequiresUnreferencedCode(
+            "Editors registered in TypeDescriptor.AddEditorTable may be trimmed."
+        )]
         object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
         {
             return null;
@@ -348,19 +375,25 @@ namespace System.Data.Common
             return new EventDescriptorCollection(null);
         }
 
-        [RequiresUnreferencedCode("The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.")]
+        [RequiresUnreferencedCode(
+            "The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
+        )]
         EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
         {
             return new EventDescriptorCollection(null);
         }
 
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered."
+        )]
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
         {
             return ((ICustomTypeDescriptor)this).GetProperties(null);
         }
 
-        [RequiresUnreferencedCode("PropertyDescriptor's PropertyType cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.")]
+        [RequiresUnreferencedCode(
+            "PropertyDescriptor's PropertyType cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
+        )]
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
         {
             if (_propertyDescriptors == null)

@@ -19,9 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ProjectCacheHostServiceFactory()
-        {
-        }
+        public ProjectCacheHostServiceFactory() { }
 
         public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
         {
@@ -30,12 +28,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Workspaces
                 return new ProjectCacheService(workspaceServices.Workspace);
             }
 
-            var service = new ProjectCacheService(workspaceServices.Workspace, ImplicitCacheTimeoutInMS);
+            var service = new ProjectCacheService(
+                workspaceServices.Workspace,
+                ImplicitCacheTimeoutInMS
+            );
 
             // Also clear the cache when the solution is cleared or removed.
             workspaceServices.Workspace.WorkspaceChanged += (s, e) =>
             {
-                if (e.Kind == WorkspaceChangeKind.SolutionCleared || e.Kind == WorkspaceChangeKind.SolutionRemoved)
+                if (
+                    e.Kind == WorkspaceChangeKind.SolutionCleared
+                    || e.Kind == WorkspaceChangeKind.SolutionRemoved
+                )
                 {
                     service.ClearImplicitCache();
                 }

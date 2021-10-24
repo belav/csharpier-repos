@@ -49,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             ArrayPool<char> charPool,
             ObjectPoolProvider objectPoolProvider,
             MvcOptions options,
-            MvcNewtonsoftJsonOptions jsonOptions)
+            MvcNewtonsoftJsonOptions jsonOptions
+        )
         {
             if (logger == null)
             {
@@ -111,7 +112,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// <inheritdoc />
         public override async Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
-            Encoding encoding)
+            Encoding encoding
+        )
         {
             if (context == null)
             {
@@ -208,7 +210,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 }
             }
 
-            if (exception is not null && exception is not (JsonException or OverflowException or FormatException))
+            if (
+                exception is not null
+                && exception is not (JsonException or OverflowException or FormatException)
+            )
             {
                 // At this point we've already recorded all exceptions as an entry in the ModelStateDictionary.
                 // We only need to rethrow an exception if we believe it needs to be handled by something further up
@@ -223,7 +228,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             return InputFormatterResult.Failure();
 
-            void ErrorHandler(object? sender, Newtonsoft.Json.Serialization.ErrorEventArgs eventArgs)
+            void ErrorHandler(
+                object? sender,
+                Newtonsoft.Json.Serialization.ErrorEventArgs eventArgs
+            )
             {
                 successful = false;
 
@@ -248,7 +256,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                         }
                         else
                         {
-                            addMember = !path.EndsWith("." + member, StringComparison.Ordinal)
+                            addMember =
+                                !path.EndsWith("." + member, StringComparison.Ordinal)
                                 && !path.EndsWith("['" + member + "']", StringComparison.Ordinal)
                                 && !path.EndsWith("[" + member + "]", StringComparison.Ordinal);
                         }
@@ -291,7 +300,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         {
             if (_jsonSerializerPool == null)
             {
-                _jsonSerializerPool = _objectPoolProvider.Create(new JsonSerializerObjectPolicy(SerializerSettings));
+                _jsonSerializerPool = _objectPoolProvider.Create(
+                    new JsonSerializerObjectPolicy(SerializerSettings)
+                );
             }
 
             return _jsonSerializerPool.Get();
@@ -320,8 +331,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         /// This method works in tandem with <see cref="ReleaseJsonSerializer(JsonSerializer)"/> to
         /// manage the lifetimes of <see cref="JsonSerializer"/> instances.
         /// </remarks>
-        protected virtual void ReleaseJsonSerializer(JsonSerializer serializer)
-            => _jsonSerializerPool!.Return(serializer);
+        protected virtual void ReleaseJsonSerializer(JsonSerializer serializer) =>
+            _jsonSerializerPool!.Return(serializer);
 
         private ModelMetadata GetPathMetadata(ModelMetadata metadata, string path)
         {

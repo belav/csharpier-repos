@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             long? fileLength,
             bool enableRangeProcessing,
             DateTimeOffset? lastModified = null,
-            EntityTagHeaderValue? etag = null)
+            EntityTagHeaderValue? etag = null
+        )
         {
             if (context == null)
             {
@@ -76,7 +77,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 throw new ArgumentNullException(nameof(result));
             }
-            
+
             var request = context.HttpContext.Request;
             var httpRequestHeaders = request.GetTypedHeaders();
 
@@ -109,9 +110,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             if (fileLength.HasValue)
             {
-                // Assuming the request is not a range request, and the response body is not empty, the Content-Length header is set to 
-                // the length of the entire file. 
-                // If the request is a valid range request, this header is overwritten with the length of the range as part of the 
+                // Assuming the request is not a range request, and the response body is not empty, the Content-Length header is set to
+                // the length of the entire file.
+                // If the request is a valid range request, this header is overwritten with the length of the range as part of the
                 // range processing (see method SetContentLength).
 
                 response.ContentLength = fileLength.Value;
@@ -123,9 +124,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
                     // If the request method is HEAD or GET, PreconditionState is Unspecified or ShouldProcess, and IfRange header is valid,
                     // range should be processed and Range headers should be set
-                    if ((HttpMethods.IsHead(request.Method) || HttpMethods.IsGet(request.Method))
-                        && (preconditionState == PreconditionState.Unspecified || preconditionState == PreconditionState.ShouldProcess)
-                        && (IfRangeValid(httpRequestHeaders, lastModified, etag)))
+                    if (
+                        (HttpMethods.IsHead(request.Method) || HttpMethods.IsGet(request.Method))
+                        && (
+                            preconditionState == PreconditionState.Unspecified
+                            || preconditionState == PreconditionState.ShouldProcess
+                        )
+                        && (IfRangeValid(httpRequestHeaders, lastModified, etag))
+                    )
                     {
                         return SetRangeHeaders(context, httpRequestHeaders, fileLength.Value);
                     }
@@ -156,11 +162,16 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 // basis for the actual filename, where possible.
                 var contentDisposition = new ContentDispositionHeaderValue("attachment");
                 contentDisposition.SetHttpFileName(result.FileDownloadName);
-                context.HttpContext.Response.Headers[HeaderNames.ContentDisposition] = contentDisposition.ToString();
+                context.HttpContext.Response.Headers[HeaderNames.ContentDisposition] =
+                    contentDisposition.ToString();
             }
         }
 
-        private static void SetLastModifiedAndEtagHeaders(HttpResponse response, DateTimeOffset? lastModified, EntityTagHeaderValue? etag)
+        private static void SetLastModifiedAndEtagHeaders(
+            HttpResponse response,
+            DateTimeOffset? lastModified,
+            EntityTagHeaderValue? etag
+        )
         {
             var httpResponseHeaders = response.GetTypedHeaders();
             if (lastModified.HasValue)
@@ -181,7 +192,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         internal bool IfRangeValid(
             RequestHeaders httpRequestHeaders,
             DateTimeOffset? lastModified,
-            EntityTagHeaderValue? etag)
+            EntityTagHeaderValue? etag
+        )
         {
             // 14.27 If-Range
             var ifRange = httpRequestHeaders.IfRange;
@@ -196,11 +208,18 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     if (lastModified.HasValue && lastModified > ifRange.LastModified)
                     {
-                        Logger.IfRangeLastModifiedPreconditionFailed(lastModified, ifRange.LastModified);
+                        Logger.IfRangeLastModifiedPreconditionFailed(
+                            lastModified,
+                            ifRange.LastModified
+                        );
                         return false;
                     }
                 }
-                else if (etag != null && ifRange.EntityTag != null && !ifRange.EntityTag.Compare(etag, useStrongComparison: true))
+                else if (
+                    etag != null
+                    && ifRange.EntityTag != null
+                    && !ifRange.EntityTag.Compare(etag, useStrongComparison: true)
+                )
                 {
                     Logger.IfRangeETagPreconditionFailed(etag, ifRange.EntityTag);
                     return false;
@@ -214,7 +233,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         internal PreconditionState GetPreconditionState(
             RequestHeaders httpRequestHeaders,
             DateTimeOffset? lastModified,
-            EntityTagHeaderValue? etag)
+            EntityTagHeaderValue? etag
+        )
         {
             var ifMatchState = PreconditionState.Unspecified;
             var ifNoneMatchState = PreconditionState.Unspecified;
@@ -230,7 +250,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     etagHeader: ifMatch,
                     etag: etag,
                     matchFoundState: PreconditionState.ShouldProcess,
-                    matchNotFoundState: PreconditionState.PreconditionFailed);
+                    matchNotFoundState: PreconditionState.PreconditionFailed
+                );
 
                 if (ifMatchState == PreconditionState.PreconditionFailed)
                 {
@@ -247,7 +268,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     etagHeader: ifNoneMatch,
                     etag: etag,
                     matchFoundState: PreconditionState.NotModified,
-                    matchNotFoundState: PreconditionState.ShouldProcess);
+                    matchNotFoundState: PreconditionState.ShouldProcess
+                );
             }
 
             var now = RoundDownToWholeSeconds(DateTimeOffset.UtcNow);
@@ -257,7 +279,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (lastModified.HasValue && ifModifiedSince.HasValue && ifModifiedSince <= now)
             {
                 var modified = ifModifiedSince < lastModified;
-                ifModifiedSinceState = modified ? PreconditionState.ShouldProcess : PreconditionState.NotModified;
+                ifModifiedSinceState = modified
+                    ? PreconditionState.ShouldProcess
+                    : PreconditionState.NotModified;
             }
 
             // 14.28 If-Unmodified-Since
@@ -265,7 +289,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (lastModified.HasValue && ifUnmodifiedSince.HasValue && ifUnmodifiedSince <= now)
             {
                 var unmodified = ifUnmodifiedSince >= lastModified;
-                ifUnmodifiedSinceState = unmodified ? PreconditionState.ShouldProcess : PreconditionState.PreconditionFailed;
+                ifUnmodifiedSinceState = unmodified
+                    ? PreconditionState.ShouldProcess
+                    : PreconditionState.PreconditionFailed;
 
                 if (ifUnmodifiedSinceState == PreconditionState.PreconditionFailed)
                 {
@@ -273,7 +299,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 }
             }
 
-            var state = GetMaxPreconditionState(ifMatchState, ifNoneMatchState, ifModifiedSinceState, ifUnmodifiedSinceState);
+            var state = GetMaxPreconditionState(
+                ifMatchState,
+                ifNoneMatchState,
+                ifModifiedSinceState,
+                ifUnmodifiedSinceState
+            );
             return state;
         }
 
@@ -282,14 +313,18 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IList<EntityTagHeaderValue> etagHeader,
             EntityTagHeaderValue etag,
             PreconditionState matchFoundState,
-            PreconditionState matchNotFoundState)
+            PreconditionState matchNotFoundState
+        )
         {
             if (etagHeader?.Count > 0)
             {
                 var state = matchNotFoundState;
                 foreach (var entityTag in etagHeader)
                 {
-                    if (entityTag.Equals(EntityTagHeaderValue.Any) || entityTag.Compare(etag, useStrongComparison))
+                    if (
+                        entityTag.Equals(EntityTagHeaderValue.Any)
+                        || entityTag.Compare(etag, useStrongComparison)
+                    )
                     {
                         state = matchFoundState;
                         break;
@@ -319,19 +354,21 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         private (RangeItemHeaderValue? range, long rangeLength, bool serveBody) SetRangeHeaders(
             ActionContext context,
             RequestHeaders httpRequestHeaders,
-            long fileLength)
+            long fileLength
+        )
         {
             var response = context.HttpContext.Response;
             var httpResponseHeaders = response.GetTypedHeaders();
             var serveBody = !HttpMethods.IsHead(context.HttpContext.Request.Method);
 
-            // Range may be null for empty range header, invalid ranges, parsing errors, multiple ranges 
+            // Range may be null for empty range header, invalid ranges, parsing errors, multiple ranges
             // and when the file length is zero.
             var (isRangeRequest, range) = RangeHelper.ParseRange(
                 context.HttpContext,
                 httpRequestHeaders,
                 fileLength,
-                Logger);
+                Logger
+            );
 
             if (!isRangeRequest)
             {
@@ -355,7 +392,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             httpResponseHeaders.ContentRange = new ContentRangeHeaderValue(
                 range.From!.Value,
                 range.To!.Value,
-                fileLength);
+                fileLength
+            );
 
             // Overwrite the Content-Length header for valid range requests with the range length.
             var rangeLength = SetContentLength(response, range);
@@ -396,7 +434,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// <param name="range">The <see cref="RangeItemHeaderValue"/>.</param>
         /// <param name="rangeLength">The range length.</param>
         /// <returns>The async task.</returns>
-        protected static async Task WriteFileAsync(HttpContext context, Stream fileStream, RangeItemHeaderValue? range, long rangeLength)
+        protected static async Task WriteFileAsync(
+            HttpContext context,
+            Stream fileStream,
+            RangeItemHeaderValue? range,
+            long rangeLength
+        )
         {
             var outputStream = context.Response.Body;
             using (fileStream)
@@ -405,12 +448,24 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     if (range == null)
                     {
-                        await StreamCopyOperation.CopyToAsync(fileStream, outputStream, count: null, bufferSize: BufferSize, cancel: context.RequestAborted);
+                        await StreamCopyOperation.CopyToAsync(
+                            fileStream,
+                            outputStream,
+                            count: null,
+                            bufferSize: BufferSize,
+                            cancel: context.RequestAborted
+                        );
                     }
                     else
                     {
                         fileStream.Seek(range.From!.Value, SeekOrigin.Begin);
-                        await StreamCopyOperation.CopyToAsync(fileStream, outputStream, rangeLength, BufferSize, context.RequestAborted);
+                        await StreamCopyOperation.CopyToAsync(
+                            fileStream,
+                            outputStream,
+                            rangeLength,
+                            BufferSize,
+                            context.RequestAborted
+                        );
                     }
                 }
                 catch (OperationCanceledException)

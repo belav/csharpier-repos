@@ -18,34 +18,33 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             // public TextFieldParser(System.IO.Stream stream)
             using (var stream = new FileStream(path, FileMode.Open))
             {
-                using (var parser = new TextFieldParser(stream))
-                {
-                }
+                using (var parser = new TextFieldParser(stream)) { }
                 Assert.Throws<ObjectDisposedException>(() => stream.ReadByte());
             }
 
             // public TextFieldParser(System.IO.Stream stream, System.Text.Encoding defaultEncoding, bool detectEncoding, bool leaveOpen);
             using (var stream = new FileStream(path, FileMode.Open))
             {
-                using (var parser = new TextFieldParser(stream, defaultEncoding: System.Text.Encoding.Unicode, detectEncoding: true, leaveOpen: true))
-                {
-                }
+                using (
+                    var parser = new TextFieldParser(
+                        stream,
+                        defaultEncoding: System.Text.Encoding.Unicode,
+                        detectEncoding: true,
+                        leaveOpen: true
+                    )
+                ) { }
                 _ = stream.ReadByte();
             }
 
             // public TextFieldParser(System.IO.TextReader reader)
             using (var reader = new StreamReader(path))
             {
-                using (var parser = new TextFieldParser(reader))
-                {
-                }
+                using (var parser = new TextFieldParser(reader)) { }
                 Assert.Throws<ObjectDisposedException>(() => reader.ReadToEnd());
             }
 
             // public TextFieldParser(string path)
-            using (var parser = new TextFieldParser(path))
-            {
-            }
+            using (var parser = new TextFieldParser(path)) { }
 
             // public TextFieldParser(string path)
             Assert.Throws<FileNotFoundException>(() => new TextFieldParser(GetTestFilePath()));
@@ -78,9 +77,7 @@ namespace Microsoft.VisualBasic.FileIO.Tests
 
             {
                 TextFieldParser parser;
-                using (parser = new TextFieldParser(path))
-                {
-                }
+                using (parser = new TextFieldParser(path)) { }
                 parser.Close();
             }
         }
@@ -131,10 +128,12 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         public void ErrorLine()
         {
             var path = GetTestFilePath();
-            File.WriteAllText(path,
-@"abc 123
+            File.WriteAllText(
+                path,
+                @"abc 123
 def 45
-ghi 789");
+ghi 789"
+            );
 
             using (var parser = new TextFieldParser(path))
             {
@@ -181,7 +180,10 @@ ghi 789");
             {
                 parser.HasFieldsEnclosedInQuotes = false;
                 parser.Delimiters = new[] { "," };
-                Assert.Equal(new[] { @"""""", @""" """, @"""abc""", @""" 123 """, "" }, parser.ReadFields());
+                Assert.Equal(
+                    new[] { @"""""", @""" """, @"""abc""", @""" 123 """, "" },
+                    parser.ReadFields()
+                );
             }
 
             using (var parser = new TextFieldParser(path))
@@ -189,7 +191,10 @@ ghi 789");
                 parser.TrimWhiteSpace = false;
                 parser.HasFieldsEnclosedInQuotes = false;
                 parser.Delimiters = new[] { "," };
-                Assert.Equal(new[] { @"""""", @" "" "" ", @"""abc""", @" "" 123 "" ", "" }, parser.ReadFields());
+                Assert.Equal(
+                    new[] { @"""""", @" "" "" ", @"""abc""", @" "" 123 "" ", "" },
+                    parser.ReadFields()
+                );
             }
         }
 
@@ -197,10 +202,12 @@ ghi 789");
         public void PeekChars()
         {
             var path = GetTestFilePath();
-            File.WriteAllText(path,
-@"abc,123
+            File.WriteAllText(
+                path,
+                @"abc,123
 def,456
-ghi,789");
+ghi,789"
+            );
 
             using (var parser = new TextFieldParser(path))
             {
@@ -234,10 +241,12 @@ ghi,789");
         public void ReadFields_FieldWidths()
         {
             var path = GetTestFilePath();
-            File.WriteAllText(path,
-@"abc,123
+            File.WriteAllText(
+                path,
+                @"abc,123
 def,456
-ghi,789");
+ghi,789"
+            );
 
             using (var parser = new TextFieldParser(path))
             {
@@ -263,10 +272,12 @@ ghi,789");
         public void ReadFields_Delimiters_LineNumber()
         {
             var path = GetTestFilePath();
-            File.WriteAllText(path,
-@"abc,123
+            File.WriteAllText(
+                path,
+                @"abc,123
 def,456
-ghi,789");
+ghi,789"
+            );
 
             using (var parser = new TextFieldParser(path))
             {
@@ -288,11 +299,13 @@ ghi,789");
                 Assert.Equal(-1, parser.LineNumber);
             }
 
-            File.WriteAllText(path,
-@",,
+            File.WriteAllText(
+                path,
+                @",,
 
 ,
-");
+"
+            );
 
             using (var parser = new TextFieldParser(path))
             {
@@ -317,18 +330,21 @@ ghi,789");
         public void ReadLine_ReadToEnd()
         {
             var path = GetTestFilePath();
-            File.WriteAllText(path,
-@"abc
-123");
+            File.WriteAllText(
+                path,
+                @"abc
+123"
+            );
 
             using (var parser = new TextFieldParser(path))
             {
                 Assert.False(parser.EndOfData);
 
                 Assert.Equal(
-@"abc
+                    @"abc
 123",
-                    parser.ReadToEnd());
+                    parser.ReadToEnd()
+                );
                 Assert.Equal(-1, parser.LineNumber);
                 Assert.True(parser.EndOfData);
             }

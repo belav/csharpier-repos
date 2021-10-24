@@ -24,7 +24,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
         public XmlSerializerMvcOptionsSetup(ILoggerFactory loggerFactory)
         {
-            _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _loggerFactory =
+                loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         }
 
         /// <summary>
@@ -40,7 +41,8 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 options.FormatterMappings.SetMediaTypeMappingForFormat(
                     key,
-                    MediaTypeHeaderValues.ApplicationXml);
+                    MediaTypeHeaderValues.ApplicationXml
+                );
             }
 
             var inputFormatter = new XmlSerializerInputFormatter(options);
@@ -48,9 +50,10 @@ namespace Microsoft.Extensions.DependencyInjection
             options.InputFormatters.Add(inputFormatter);
 
             var outputFormatter = new XmlSerializerOutputFormatter(_loggerFactory);
-            outputFormatter.WrapperProviderFactories.Add(new ProblemDetailsWrapperProviderFactory());
+            outputFormatter.WrapperProviderFactories.Add(
+                new ProblemDetailsWrapperProviderFactory()
+            );
             options.OutputFormatters.Add(outputFormatter);
-
         }
     }
 }

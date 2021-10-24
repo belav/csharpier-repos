@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.DataProtection
         public RegistryPolicy(
             AlgorithmConfiguration? configuration,
             IEnumerable<IKeyEscrowSink> keyEscrowSinks,
-            int? defaultKeyLifetime)
+            int? defaultKeyLifetime
+        )
         {
             EncryptorConfiguration = configuration;
             KeyEscrowSinks = keyEscrowSinks;

@@ -20,14 +20,23 @@ namespace Internal.TypeSystem
         /// Resolves interface method '<paramref name="interfaceMethod"/>' to a method on '<paramref name="currentType"/>'
         /// that implements the the method.
         /// </summary>
-        public abstract MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(MethodDesc interfaceMethod, TypeDesc currentType);
+        public abstract MethodDesc ResolveInterfaceMethodToVirtualMethodOnType(
+            MethodDesc interfaceMethod,
+            TypeDesc currentType
+        );
 
-        public abstract MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(MethodDesc interfaceMethod, TypeDesc currentType);
+        public abstract MethodDesc ResolveVariantInterfaceMethodToVirtualMethodOnType(
+            MethodDesc interfaceMethod,
+            TypeDesc currentType
+        );
 
         /// <summary>
         /// Resolves a virtual method call.
         /// </summary>
-        public abstract MethodDesc FindVirtualFunctionTargetMethodOnObjectType(MethodDesc targetMethod, TypeDesc objectType);
+        public abstract MethodDesc FindVirtualFunctionTargetMethodOnObjectType(
+            MethodDesc targetMethod,
+            TypeDesc objectType
+        );
 
         /// <summary>
         /// Enumerates all virtual slots on '<paramref name="type"/>'.

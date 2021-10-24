@@ -45,7 +45,10 @@ namespace Microsoft.AspNetCore.Hosting
         /// <param name="host">The running <see cref="IWebHost"/>.</param>
         /// <param name="token">The token to trigger shutdown.</param>
         /// <returns>A <see cref="Task"/> that completes when shutdown is triggered via Ctrl+C or SIGTERM.</returns>
-        public static async Task WaitForShutdownAsync(this IWebHost host, CancellationToken token = default)
+        public static async Task WaitForShutdownAsync(
+            this IWebHost host,
+            CancellationToken token = default
+        )
         {
             var done = new ManualResetEventSlim(false);
             using (var cts = CancellationTokenSource.CreateLinkedTokenSource(token))
@@ -92,12 +95,20 @@ namespace Microsoft.AspNetCore.Hosting
             var done = new ManualResetEventSlim(false);
             using (var cts = new CancellationTokenSource())
             {
-                var shutdownMessage = host.Services.GetRequiredService<WebHostOptions>().SuppressStatusMessages ? string.Empty : "Application is shutting down...";
-                using (var lifetime = new WebHostLifetime(cts, done, shutdownMessage: shutdownMessage))
+                var shutdownMessage =
+                    host.Services.GetRequiredService<WebHostOptions>().SuppressStatusMessages
+                        ? string.Empty
+                        : "Application is shutting down...";
+                using (
+                    var lifetime = new WebHostLifetime(cts, done, shutdownMessage: shutdownMessage)
+                )
                 {
                     try
                     {
-                        await host.RunAsync(cts.Token, "Application started. Press Ctrl+C to shut down.");
+                        await host.RunAsync(
+                            cts.Token,
+                            "Application started. Press Ctrl+C to shut down."
+                        );
                         lifetime.SetExitedGracefully();
                     }
                     finally
@@ -108,7 +119,11 @@ namespace Microsoft.AspNetCore.Hosting
             }
         }
 
-        private static async Task RunAsync(this IWebHost host, CancellationToken token, string? startupMessage)
+        private static async Task RunAsync(
+            this IWebHost host,
+            CancellationToken token,
+            string? startupMessage
+        )
         {
             try
             {
@@ -119,11 +134,13 @@ namespace Microsoft.AspNetCore.Hosting
 
                 if (!options.SuppressStatusMessages)
                 {
-                    Console.WriteLine($"Hosting environment: {hostingEnvironment?.EnvironmentName}");
+                    Console.WriteLine(
+                        $"Hosting environment: {hostingEnvironment?.EnvironmentName}"
+                    );
                     Console.WriteLine($"Content root path: {hostingEnvironment?.ContentRootPath}");
 
-
-                    var serverAddresses = host.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
+                    var serverAddresses =
+                        host.ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
                     if (serverAddresses != null)
                     {
                         foreach (var address in serverAddresses)
@@ -153,22 +170,32 @@ namespace Microsoft.AspNetCore.Hosting
             }
         }
 
-        private static async Task WaitForTokenShutdownAsync(this IWebHost host, CancellationToken token)
+        private static async Task WaitForTokenShutdownAsync(
+            this IWebHost host,
+            CancellationToken token
+        )
         {
             var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
-            token.Register(state =>
-            {
-                ((IHostApplicationLifetime)state!).StopApplication();
-            },
-            applicationLifetime);
+            token.Register(
+                state =>
+                {
+                    ((IHostApplicationLifetime)state!).StopApplication();
+                },
+                applicationLifetime
+            );
 
-            var waitForStop = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            applicationLifetime.ApplicationStopping.Register(obj =>
-            {
-                var tcs = (TaskCompletionSource)obj!;
-                tcs.TrySetResult();
-            }, waitForStop);
+            var waitForStop = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            applicationLifetime.ApplicationStopping.Register(
+                obj =>
+                {
+                    var tcs = (TaskCompletionSource)obj!;
+                    tcs.TrySetResult();
+                },
+                waitForStop
+            );
 
             await waitForStop.Task;
 

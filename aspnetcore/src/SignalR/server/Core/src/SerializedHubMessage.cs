@@ -59,7 +59,8 @@ namespace Microsoft.AspNetCore.SignalR
                     if (Message == null)
                     {
                         throw new InvalidOperationException(
-                            "This message was received from another server that did not have the requested protocol available.");
+                            "This message was received from another server that did not have the requested protocol available."
+                        );
                     }
 
                     serialized = protocol.GetMessageBytes(Message);
@@ -132,7 +133,10 @@ namespace Microsoft.AspNetCore.SignalR
             }
         }
 
-        private bool TryGetCachedUnsynchronized(string protocolName, out ReadOnlyMemory<byte> result)
+        private bool TryGetCachedUnsynchronized(
+            string protocolName,
+            out ReadOnlyMemory<byte> result
+        )
         {
             if (string.Equals(_cachedItem1.ProtocolName, protocolName, StringComparison.Ordinal))
             {
@@ -150,7 +154,13 @@ namespace Microsoft.AspNetCore.SignalR
             {
                 foreach (var serializedMessage in _cachedItems)
                 {
-                    if (string.Equals(serializedMessage.ProtocolName, protocolName, StringComparison.Ordinal))
+                    if (
+                        string.Equals(
+                            serializedMessage.ProtocolName,
+                            protocolName,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         result = serializedMessage.Serialized;
                         return true;

@@ -4,11 +4,12 @@
 using System;
 using System.Diagnostics;
 
-namespace Microsoft.Extensions.Internal 
+namespace Microsoft.Extensions.Internal
 {
     internal struct ValueStopwatch
     {
-        private static readonly double TimestampToTicks = TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
+        private static readonly double TimestampToTicks =
+            TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
 
         private long _startTimestamp;
 
@@ -27,7 +28,9 @@ namespace Microsoft.Extensions.Internal
             // So it being 0 is a clear indication of default(ValueStopwatch)
             if (!IsActive)
             {
-                throw new InvalidOperationException("An uninitialized, or 'default', ValueStopwatch cannot be used to get elapsed time.");
+                throw new InvalidOperationException(
+                    "An uninitialized, or 'default', ValueStopwatch cannot be used to get elapsed time."
+                );
             }
 
             var end = Stopwatch.GetTimestamp();

@@ -9,11 +9,11 @@ namespace Microsoft.AspNetCore.Routing.Matching
     public class FastPathTokenizerLargeBenchmark : FastPathTokenizerBenchmarkBase
     {
         private static readonly int MaxCount = 32;
-        private static readonly string Input = 
-            "/heeeeeeeeeeyyyyyyyyyyy/this/is/a/string/with/lots/of/segments" +
-            "/hoooooooooooooooooooooooooooooooooow long/do you think it should be?/I think" +
-            "/like/32/segments/is /a/goood/number/dklfl/20303/dlflkf" +
-            "/Im/tired/of/thinking/of/more/things/to/so";
+        private static readonly string Input =
+            "/heeeeeeeeeeyyyyyyyyyyy/this/is/a/string/with/lots/of/segments"
+            + "/hoooooooooooooooooooooooooooooooooow long/do you think it should be?/I think"
+            + "/like/32/segments/is /a/goood/number/dklfl/20303/dlflkf"
+            + "/Im/tired/of/thinking/of/more/things/to/so";
 
         // This is a naive reference implementation. We expect to do better.
         [Benchmark(Baseline = true)]

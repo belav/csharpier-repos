@@ -15,13 +15,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that configures the filter for unique non-clustered indexes with nullable columns
     ///     to filter out null values.
     /// </summary>
-    public class SqlServerIndexConvention :
-        IEntityTypeBaseTypeChangedConvention,
-        IIndexAddedConvention,
-        IIndexUniquenessChangedConvention,
-        IIndexAnnotationChangedConvention,
-        IPropertyNullabilityChangedConvention,
-        IPropertyAnnotationChangedConvention
+    public class SqlServerIndexConvention
+        : IEntityTypeBaseTypeChangedConvention,
+          IIndexAddedConvention,
+          IIndexUniquenessChangedConvention,
+          IIndexAnnotationChangedConvention,
+          IPropertyNullabilityChangedConvention,
+          IPropertyAnnotationChangedConvention
     {
         private readonly ISqlGenerationHelper _sqlGenerationHelper;
 
@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public SqlServerIndexConvention(
             ProviderConventionSetBuilderDependencies dependencies,
             RelationalConventionSetBuilderDependencies relationalDependencies,
-            ISqlGenerationHelper sqlGenerationHelper)
+            ISqlGenerationHelper sqlGenerationHelper
+        )
         {
             _sqlGenerationHelper = sqlGenerationHelper;
             Dependencies = dependencies;
@@ -56,10 +57,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionEntityType? newBaseType,
             IConventionEntityType? oldBaseType,
-            IConventionContext<IConventionEntityType> context)
+            IConventionContext<IConventionEntityType> context
+        )
         {
-            if (oldBaseType == null
-                || newBaseType == null)
+            if (oldBaseType == null || newBaseType == null)
             {
                 foreach (var index in entityTypeBuilder.Metadata.GetDeclaredIndexes())
                 {
@@ -75,8 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessIndexAdded(
             IConventionIndexBuilder indexBuilder,
-            IConventionContext<IConventionIndexBuilder> context)
-            => SetIndexFilter(indexBuilder);
+            IConventionContext<IConventionIndexBuilder> context
+        ) => SetIndexFilter(indexBuilder);
 
         /// <summary>
         ///     Called after the uniqueness for an index is changed.
@@ -85,8 +86,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessIndexUniquenessChanged(
             IConventionIndexBuilder indexBuilder,
-            IConventionContext<bool?> context)
-            => SetIndexFilter(indexBuilder);
+            IConventionContext<bool?> context
+        ) => SetIndexFilter(indexBuilder);
 
         /// <summary>
         ///     Called after the nullability for a property is changed.
@@ -95,7 +96,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessPropertyNullabilityChanged(
             IConventionPropertyBuilder propertyBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
             foreach (var index in propertyBuilder.Metadata.GetContainingIndexes())
             {
@@ -116,7 +118,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             if (name == SqlServerAnnotationNames.Clustered)
             {
@@ -137,7 +140,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             if (name == RelationalAnnotationNames.ColumnName)
             {
@@ -148,16 +152,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
         }
 
-        private IConventionIndexBuilder SetIndexFilter(IConventionIndexBuilder indexBuilder, bool columnNameChanged = false)
+        private IConventionIndexBuilder SetIndexFilter(
+            IConventionIndexBuilder indexBuilder,
+            bool columnNameChanged = false
+        )
         {
             var index = indexBuilder.Metadata;
-            if (index.IsUnique
+            if (
+                index.IsUnique
                 && index.IsClustered() != true
                 && GetNullableColumns(index) is List<string> nullableColumns
-                && nullableColumns.Count > 0)
+                && nullableColumns.Count > 0
+            )
             {
-                if (columnNameChanged
-                    || index.GetFilter() == null)
+                if (columnNameChanged || index.GetFilter() == null)
                 {
                     indexBuilder.HasFilter(CreateIndexFilter(nullableColumns));
                 }
@@ -200,7 +208,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             }
 
             var nullableColumns = new List<string>();
-            var table = StoreObjectIdentifier.Table(tableName, index.DeclaringEntityType.GetSchema());
+            var table = StoreObjectIdentifier.Table(
+                tableName,
+                index.DeclaringEntityType.GetSchema()
+            );
             foreach (var property in index.Properties)
             {
                 var columnName = property.GetColumnName(table);

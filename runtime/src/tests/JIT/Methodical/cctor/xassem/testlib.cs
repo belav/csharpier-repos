@@ -12,9 +12,7 @@ namespace Precise
     {
         public static byte b1 = 0xC;
         public byte b2 = 0xC;
-        public static void f()
-        {
-        }
+        public static void f() { }
         public static void f(ref byte b)
         {
             return;
@@ -39,6 +37,5 @@ namespace Precise
             Console.WriteLine("in .cctor() after measure.a=8, measure.a is {0}", measure.a);
         }
     }
-
 }
 

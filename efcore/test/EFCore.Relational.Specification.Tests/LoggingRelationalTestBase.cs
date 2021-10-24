@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 ExpectedMessage("MaxBatchSize=10 " + DefaultOptions),
-                ActualMessage(s => CreateOptionsBuilder(s, b => b.MaxBatchSize(10))));
+                ActualMessage(s => CreateOptionsBuilder(s, b => b.MaxBatchSize(10)))
+            );
         }
 
         [ConditionalFact]
@@ -26,7 +27,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 ExpectedMessage("CommandTimeout=10 " + DefaultOptions),
-                ActualMessage(s => CreateOptionsBuilder(s, b => b.CommandTimeout(10))));
+                ActualMessage(s => CreateOptionsBuilder(s, b => b.CommandTimeout(10)))
+            );
         }
 
         [ConditionalFact]
@@ -34,7 +36,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 ExpectedMessage("UseRelationalNulls " + DefaultOptions),
-                ActualMessage(s => CreateOptionsBuilder(s, b => b.UseRelationalNulls())));
+                ActualMessage(s => CreateOptionsBuilder(s, b => b.UseRelationalNulls()))
+            );
         }
 
         [ConditionalFact]
@@ -42,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 ExpectedMessage("MigrationsAssembly=A.B.C " + DefaultOptions),
-                ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsAssembly("A.B.C"))));
+                ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsAssembly("A.B.C")))
+            );
         }
 
         [ConditionalFact]
@@ -50,7 +54,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 ExpectedMessage("MigrationsHistoryTable=MyHistory " + DefaultOptions),
-                ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory"))));
+                ActualMessage(
+                    s => CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory"))
+                )
+            );
         }
 
         [ConditionalFact]
@@ -58,14 +65,23 @@ namespace Microsoft.EntityFrameworkCore
         {
             Assert.Equal(
                 ExpectedMessage("MigrationsHistoryTable=mySchema.MyHistory " + DefaultOptions),
-                ActualMessage(s => CreateOptionsBuilder(s, b => b.MigrationsHistoryTable("MyHistory", "mySchema"))));
+                ActualMessage(
+                    s =>
+                        CreateOptionsBuilder(
+                            s,
+                            b => b.MigrationsHistoryTable("MyHistory", "mySchema")
+                        )
+                )
+            );
         }
 
         protected abstract DbContextOptionsBuilder CreateOptionsBuilder(
             IServiceCollection services,
-            Action<RelationalDbContextOptionsBuilder<TBuilder, TExtension>> relationalAction);
+            Action<RelationalDbContextOptionsBuilder<TBuilder, TExtension>> relationalAction
+        );
 
-        protected override DbContextOptionsBuilder CreateOptionsBuilder(IServiceCollection services)
-            => CreateOptionsBuilder(services, null);
+        protected override DbContextOptionsBuilder CreateOptionsBuilder(
+            IServiceCollection services
+        ) => CreateOptionsBuilder(services, null);
     }
 }

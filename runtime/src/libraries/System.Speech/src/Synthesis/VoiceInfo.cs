@@ -13,7 +13,9 @@ using System.Speech.Internal.Synthesis;
 
 namespace System.Speech.Synthesis
 {
-    [DebuggerDisplay("{(_name != null ? \"'\" + _name + \"' \" : \"\") +  (_culture != null ? \" '\" + _culture.ToString () + \"' \" : \"\") + (_gender != VoiceGender.NotSet ? \" '\" + _gender.ToString () + \"' \" : \"\") + (_age != VoiceAge.NotSet ? \" '\" + _age.ToString () + \"' \" : \"\") + (_variant > 0 ? \" \" + _variant.ToString () : \"\")}")]
+    [DebuggerDisplay(
+        "{(_name != null ? \"'\" + _name + \"' \" : \"\") +  (_culture != null ? \" '\" + _culture.ToString () + \"' \" : \"\") + (_gender != VoiceGender.NotSet ? \" '\" + _gender.ToString () + \"' \" : \"\") + (_age != VoiceAge.NotSet ? \" '\" + _age.ToString () + \"' \" : \"\") + (_variant > 0 ? \" \" + _variant.ToString () : \"\")}"
+    )]
     [Serializable]
     public class VoiceInfo
     {
@@ -84,13 +86,20 @@ namespace System.Speech.Synthesis
             }
 
             string audioFormats;
-            if (token.Attributes != null && token.Attributes.TryGetString("AudioFormats", out audioFormats))
+            if (
+                token.Attributes != null
+                && token.Attributes.TryGetString("AudioFormats", out audioFormats)
+            )
             {
-                _audioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(SapiAttributeParser.GetAudioFormatsFromString(audioFormats));
+                _audioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(
+                    SapiAttributeParser.GetAudioFormatsFromString(audioFormats)
+                );
             }
             else
             {
-                _audioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(new List<SpeechAudioFormatInfo>());
+                _audioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(
+                    new List<SpeechAudioFormatInfo>()
+                );
             }
         }
         internal VoiceInfo(VoiceGender gender)
@@ -106,7 +115,10 @@ namespace System.Speech.Synthesis
         {
             if (voiceAlternate < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(voiceAlternate), SR.Get(SRID.PromptBuilderInvalidVariant));
+                throw new ArgumentOutOfRangeException(
+                    nameof(voiceAlternate),
+                    SR.Get(SRID.PromptBuilderInvalidVariant)
+                );
             }
 
             _gender = gender;
@@ -128,7 +140,11 @@ namespace System.Speech.Synthesis
             return voice != null
                 && _name == voice._name
                 && (_age == voice._age || _age == VoiceAge.NotSet || voice._age == VoiceAge.NotSet)
-                && (_gender == voice._gender || _gender == VoiceGender.NotSet || voice._gender == VoiceGender.NotSet)
+                && (
+                    _gender == voice._gender
+                    || _gender == VoiceGender.NotSet
+                    || voice._gender == VoiceGender.NotSet
+                )
                 && (_culture == null || voice._culture == null || _culture.Equals(voice._culture));
 #pragma warning restore 6506
         }
@@ -146,24 +162,15 @@ namespace System.Speech.Synthesis
         #region public Properties
         public VoiceGender Gender
         {
-            get
-            {
-                return _gender;
-            }
+            get { return _gender; }
         }
         public VoiceAge Age
         {
-            get
-            {
-                return _age;
-            }
+            get { return _age; }
         }
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         /// <summary>
@@ -173,32 +180,20 @@ namespace System.Speech.Synthesis
         /// </summary>
         public CultureInfo Culture
         {
-            get
-            {
-                return _culture;
-            }
+            get { return _culture; }
         }
         public string Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
         }
         public string Description
         {
-            get
-            {
-                return _description != null ? _description : string.Empty;
-            }
+            get { return _description != null ? _description : string.Empty; }
         }
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public ReadOnlyCollection<SpeechAudioFormatInfo> SupportedAudioFormats
         {
-            get
-            {
-                return _audioFormats;
-            }
+            get { return _audioFormats; }
         }
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IDictionary<string, string> AdditionalInfo
@@ -206,7 +201,9 @@ namespace System.Speech.Synthesis
             get
             {
                 if (_attributes == null)
-                    _attributes = new ReadOnlyDictionary<string, string>(new Dictionary<string, string>(0));
+                    _attributes = new ReadOnlyDictionary<string, string>(
+                        new Dictionary<string, string>(0)
+                    );
                 return _attributes;
             }
         }
@@ -217,12 +214,19 @@ namespace System.Speech.Synthesis
 
         internal static bool ValidateGender(VoiceGender gender)
         {
-            return gender == VoiceGender.Female || gender == VoiceGender.Male || gender == VoiceGender.Neutral || gender == VoiceGender.NotSet;
+            return gender == VoiceGender.Female
+                || gender == VoiceGender.Male
+                || gender == VoiceGender.Neutral
+                || gender == VoiceGender.NotSet;
         }
 
         internal static bool ValidateAge(VoiceAge age)
         {
-            return age == VoiceAge.Adult || age == VoiceAge.Child || age == VoiceAge.NotSet || age == VoiceAge.Senior || age == VoiceAge.Teen;
+            return age == VoiceAge.Adult
+                || age == VoiceAge.Child
+                || age == VoiceAge.NotSet
+                || age == VoiceAge.Senior
+                || age == VoiceAge.Teen;
         }
 
         #endregion
@@ -230,31 +234,19 @@ namespace System.Speech.Synthesis
         #region Internal Property
         internal int Variant
         {
-            get
-            {
-                return _variant;
-            }
+            get { return _variant; }
         }
         internal string AssemblyName
         {
-            get
-            {
-                return _assemblyName;
-            }
+            get { return _assemblyName; }
         }
         internal string Clsid
         {
-            get
-            {
-                return _clsid;
-            }
+            get { return _clsid; }
         }
         internal string RegistryKeyPath
         {
-            get
-            {
-                return _registryKeyPath;
-            }
+            get { return _registryKeyPath; }
         }
 
         #endregion
@@ -291,7 +283,6 @@ namespace System.Speech.Synthesis
 
         [NonSerialized]
         private ReadOnlyCollection<SpeechAudioFormatInfo> _audioFormats;
-
         #endregion
     }
 }

@@ -21,10 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new instance of the <see cref="OuterApplyExpression" /> class.
         /// </summary>
         /// <param name="table"> A table source to OUTER APPLY with. </param>
-        public OuterApplyExpression(TableExpressionBase table)
-            : base(table)
-        {
-        }
+        public OuterApplyExpression(TableExpressionBase table) : base(table) { }
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -44,9 +41,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(table, nameof(table));
 
-            return table != Table
-                ? new OuterApplyExpression(table)
-                : this;
+            return table != Table ? new OuterApplyExpression(table) : this;
         }
 
         /// <inheritdoc />
@@ -59,17 +54,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is OuterApplyExpression outerApplyExpression
-                    && Equals(outerApplyExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is OuterApplyExpression outerApplyExpression && Equals(outerApplyExpression)
+            );
 
-        private bool Equals(OuterApplyExpression outerApplyExpression)
-            => base.Equals(outerApplyExpression);
+        private bool Equals(OuterApplyExpression outerApplyExpression) =>
+            base.Equals(outerApplyExpression);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

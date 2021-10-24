@@ -26,18 +26,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "Parameter1",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "CustomParameter",
-                },
-
+                BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
                 ParameterType = typeof(Person)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = QueryString.Create("CustomParameter.Address.Zip", "1");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = QueryString.Create("CustomParameter.Address.Zip", "1");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -78,10 +76,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Person)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = QueryString.Create("Address.Zip", "1");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = QueryString.Create("Address.Zip", "1");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -119,14 +119,15 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "Parameter1",
                 BindingInfo = new BindingInfo(),
-
                 ParameterType = typeof(string)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "someValue");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = QueryString.Create("Parameter1", "someValue");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -163,14 +164,15 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "Parameter1",
                 BindingInfo = new BindingInfo(),
-
                 ParameterType = typeof(string)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?=someValue");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?=someValue");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -200,10 +202,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(decimal),
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "32,000.99");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = QueryString.Create("Parameter1", "32,000.99");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -244,10 +248,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 BindingInfo = new BindingInfo(),
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "2020-02-01");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = QueryString.Create("Parameter1", "2020-02-01");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -286,17 +292,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "Parameter1",
                 ParameterType = typeof(DateTime),
-                BindingInfo = new BindingInfo
-                {
-                    BindingSource = BindingSource.Body,
-                }
+                BindingInfo = new BindingInfo { BindingSource = BindingSource.Body, }
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
-                request.ContentType = "application/json";
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
+                    request.ContentType = "application/json";
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -325,14 +330,17 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "Parameter1",
                 BindingInfo = new BindingInfo(),
-
                 ParameterType = typeof(string)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?Parameter1=someValue&Parameter1=otherValue");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?Parameter1=someValue&Parameter1=otherValue"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -369,14 +377,15 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "Parameter1",
                 BindingInfo = new BindingInfo(),
-
                 ParameterType = typeof(int)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "abcd");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = QueryString.Create("Parameter1", "abcd");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -417,22 +426,28 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider
                 .ForType(parameterType)
-                .BindingDetails(binding =>
-                {
-                    // A real details provider could customize message based on BindingMetadataProviderContext.
-                    binding.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
-                        (value) => $"Hmm, '{ value }' is not a valid value.");
-                });
+                .BindingDetails(
+                    binding =>
+                    {
+                        // A real details provider could customize message based on BindingMetadataProviderContext.
+                        binding.ModelBindingMessageProvider.SetNonPropertyAttemptedValueIsInvalidAccessor(
+                            (value) => $"Hmm, '{value}' is not a valid value."
+                        );
+                    }
+                );
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
                     request.QueryString = QueryString.Create("Parameter1", "abcd");
                 },
-                metadataProvider: metadataProvider);
+                metadataProvider: metadataProvider
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor()
             {
                 Name = "Parameter1",
@@ -480,13 +495,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "Parameter1",
                 BindingInfo = new BindingInfo(),
-
                 ParameterType = parameterType
             };
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", "");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = QueryString.Create("Parameter1", "");
+                }
+            );
             var modelState = testContext.ModelState;
 
             // Act
@@ -514,33 +530,40 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [Theory]
         [InlineData(typeof(int))]
         [InlineData(typeof(bool))]
-        public async Task BindParameter_WithEmptyData_AndPerTypeMessage_AddsGivenMessage(Type parameterType)
+        public async Task BindParameter_WithEmptyData_AndPerTypeMessage_AddsGivenMessage(
+            Type parameterType
+        )
         {
             // Arrange
             var metadataProvider = new TestModelMetadataProvider();
             metadataProvider
                 .ForType(parameterType)
-                .BindingDetails(binding =>
-                {
-                    // A real details provider could customize message based on BindingMetadataProviderContext.
-                    binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
-                        value => $"Hurts when '{ value }' is provided.");
-                });
+                .BindingDetails(
+                    binding =>
+                    {
+                        // A real details provider could customize message based on BindingMetadataProviderContext.
+                        binding.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+                            value => $"Hurts when '{value}' is provided."
+                        );
+                    }
+                );
 
             var testContext = ModelBindingTestHelper.GetTestContext(
                 request =>
                 {
                     request.QueryString = QueryString.Create("Parameter1", string.Empty);
                 },
-                metadataProvider: metadataProvider);
+                metadataProvider: metadataProvider
+            );
 
             var modelState = testContext.ModelState;
-            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+            var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+                testContext.HttpContext.RequestServices
+            );
             var parameter = new ParameterDescriptor
             {
                 Name = "Parameter1",
                 BindingInfo = new BindingInfo(),
-
                 ParameterType = parameterType
             };
 
@@ -569,7 +592,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
         [InlineData(typeof(int?))]
         [InlineData(typeof(bool?))]
         [InlineData(typeof(string))]
-        public async Task BindParameter_WithEmptyData_BindsReferenceAndNullableObjects(Type parameterType)
+        public async Task BindParameter_WithEmptyData_BindsReferenceAndNullableObjects(
+            Type parameterType
+        )
         {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -577,13 +602,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "Parameter1",
                 BindingInfo = new BindingInfo(),
-
                 ParameterType = parameterType
             };
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = QueryString.Create("Parameter1", string.Empty);
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = QueryString.Create("Parameter1", string.Empty);
+                }
+            );
             var modelState = testContext.ModelState;
 
             // Act
@@ -615,7 +641,6 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 Name = "Parameter1",
                 BindingInfo = new BindingInfo(),
-
                 ParameterType = typeof(string)
             };
 
@@ -661,7 +686,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         [Theory]
         [MemberData(nameof(PersonStoreData))]
-        public async Task BindParameter_FromFormData_BindsCorrectly(Dictionary<string, StringValues> personStore)
+        public async Task BindParameter_FromFormData_BindsCorrectly(
+            Dictionary<string, StringValues> personStore
+        )
         {
             // Arrange
             var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
@@ -672,10 +699,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Person),
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.Form = new FormCollection(personStore);
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.Form = new FormCollection(personStore);
+                }
+            );
             var modelState = testContext.ModelState;
 
             // Act
@@ -696,7 +725,10 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // ModelState
             Assert.True(modelState.IsValid);
 
-            Assert.Equal(new[] { "Address.Lines", "Address.Zip", "Name" }, modelState.Keys.OrderBy(p => p).ToArray());
+            Assert.Equal(
+                new[] { "Address.Lines", "Address.Zip", "Name" },
+                modelState.Keys.OrderBy(p => p).ToArray()
+            );
             var entry = modelState["Address.Lines"];
             Assert.NotNull(entry);
             Assert.Empty(entry.Errors);

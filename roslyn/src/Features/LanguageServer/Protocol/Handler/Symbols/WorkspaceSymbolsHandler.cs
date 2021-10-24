@@ -20,22 +20,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportLspRequestHandlerProvider, Shared]
     [ProvidesMethod(Methods.WorkspaceSymbolName)]
-    internal class WorkspaceSymbolsHandler : AbstractStatelessRequestHandler<WorkspaceSymbolParams, SymbolInformation[]?>
+    internal class WorkspaceSymbolsHandler
+        : AbstractStatelessRequestHandler<WorkspaceSymbolParams, SymbolInformation[]?>
     {
-        private static readonly IImmutableSet<string> s_supportedKinds =
-            ImmutableHashSet.Create(
-                NavigateToItemKind.Class,
-                NavigateToItemKind.Constant,
-                NavigateToItemKind.Delegate,
-                NavigateToItemKind.Enum,
-                NavigateToItemKind.EnumItem,
-                NavigateToItemKind.Event,
-                NavigateToItemKind.Field,
-                NavigateToItemKind.Interface,
-                NavigateToItemKind.Method,
-                NavigateToItemKind.Module,
-                NavigateToItemKind.Property,
-                NavigateToItemKind.Structure);
+        private static readonly IImmutableSet<string> s_supportedKinds = ImmutableHashSet.Create(
+            NavigateToItemKind.Class,
+            NavigateToItemKind.Constant,
+            NavigateToItemKind.Delegate,
+            NavigateToItemKind.Enum,
+            NavigateToItemKind.EnumItem,
+            NavigateToItemKind.Event,
+            NavigateToItemKind.Field,
+            NavigateToItemKind.Interface,
+            NavigateToItemKind.Method,
+            NavigateToItemKind.Module,
+            NavigateToItemKind.Property,
+            NavigateToItemKind.Structure
+        );
 
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly IThreadingContext _threadingContext;
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public WorkspaceSymbolsHandler(
             IAsynchronousOperationListenerProvider listenerProvider,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigateTo);
             _threadingContext = threadingContext;
@@ -55,9 +57,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public override bool MutatesSolutionState => false;
         public override bool RequiresLSPSolution => true;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(WorkspaceSymbolParams request) => null;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            WorkspaceSymbolParams request
+        ) => null;
 
-        public override async Task<SymbolInformation[]?> HandleRequestAsync(WorkspaceSymbolParams request, RequestContext context, CancellationToken cancellationToken)
+        public override async Task<SymbolInformation[]?> HandleRequestAsync(
+            WorkspaceSymbolParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -71,7 +79,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 request.Query,
                 searchCurrentDocument: false,
                 s_supportedKinds,
-                _threadingContext.DisposalToken);
+                _threadingContext.DisposalToken
+            );
 
             await searcher.SearchAsync(cancellationToken).ConfigureAwait(false);
             return progress.GetValues();
@@ -86,7 +95,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 _progress = progress;
             }
 
-            public Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+            public Task AddItemAsync(
+                Project project,
+                INavigateToSearchResult result,
+                CancellationToken cancellationToken
+            )
             {
                 return ReportSymbolInformationAsync(result, cancellationToken);
             }
@@ -103,18 +116,29 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // used by non-LSP editor API.
             }
 
-            private async Task ReportSymbolInformationAsync(INavigateToSearchResult result, CancellationToken cancellationToken)
+            private async Task ReportSymbolInformationAsync(
+                INavigateToSearchResult result,
+                CancellationToken cancellationToken
+            )
             {
-                var location = await ProtocolConversions.TextSpanToLocationAsync(result.NavigableItem.Document, result.NavigableItem.SourceSpan, cancellationToken).ConfigureAwait(false);
+                var location = await ProtocolConversions
+                    .TextSpanToLocationAsync(
+                        result.NavigableItem.Document,
+                        result.NavigableItem.SourceSpan,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 Contract.ThrowIfNull(location);
-                _progress.Report(new VSSymbolInformation
-                {
-                    Name = result.Name,
-                    ContainerName = result.AdditionalInformation,
-                    Kind = ProtocolConversions.NavigateToKindToSymbolKind(result.Kind),
-                    Location = location,
-                    Icon = new ImageElement(result.NavigableItem.Glyph.GetImageId())
-                });
+                _progress.Report(
+                    new VSSymbolInformation
+                    {
+                        Name = result.Name,
+                        ContainerName = result.AdditionalInformation,
+                        Kind = ProtocolConversions.NavigateToKindToSymbolKind(result.Kind),
+                        Location = location,
+                        Icon = new ImageElement(result.NavigableItem.Glyph.GetImageId())
+                    }
+                );
             }
         }
     }

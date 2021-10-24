@@ -9,13 +9,10 @@ namespace System.Xml.Schema
     {
         [XmlIgnore]
         None,
-
         [XmlEnum("skip")]
         Skip,
-
         [XmlEnum("lax")]
         Lax,
-
         [XmlEnum("strict")]
         Strict
     }

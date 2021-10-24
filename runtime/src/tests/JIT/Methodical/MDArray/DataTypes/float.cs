@@ -7,35 +7,33 @@ using System;
 public struct VT
 {
     public float[,] float2darr;
-    public float[, ,] float3darr;
+    public float[,,] float3darr;
     public float[,] float2darr_b;
-    public float[, ,] float3darr_b;
+    public float[,,] float3darr_b;
 }
 
 public class CL
 {
     public float[,] float2darr = { { 0, -1 }, { 0, 0 } };
-    public float[, ,] float3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    public float[,,] float3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     public float[,] float2darr_b = { { 0, 1 }, { 0, 0 } };
-    public float[, ,] float3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public float[,,] float3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
 }
 
 public class floatMDArrTest
 {
-
     static float[,] float2darr = { { 0, -1 }, { 0, 0 } };
-    static float[, ,] float3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
+    static float[,,] float3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
     static float[,] float2darr_b = { { 0, 1 }, { 0, 0 } };
-    static float[, ,] float3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static float[,,] float3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
 
     static float[][,] ja1 = new float[2][,];
-    static float[][, ,] ja2 = new float[2][, ,];
+    static float[][,,] ja2 = new float[2][,,];
     static float[][,] ja1_b = new float[2][,];
-    static float[][, ,] ja2_b = new float[2][, ,];
+    static float[][,,] ja2_b = new float[2][,,];
 
     public static int Main()
     {
-
         bool pass = true;
 
         VT vt1;
@@ -1080,8 +1078,5 @@ public class floatMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

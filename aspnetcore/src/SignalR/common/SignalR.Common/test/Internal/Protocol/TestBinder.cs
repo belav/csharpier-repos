@@ -18,10 +18,14 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol
             switch (expectedMessage)
             {
                 case StreamInvocationMessage i:
-                    _paramTypes = i.Arguments?.Select(a => a?.GetType() ?? typeof(object))?.ToArray();
+                    _paramTypes = i.Arguments?.Select(
+                        a => a?.GetType() ?? typeof(object)
+                    )?.ToArray();
                     break;
                 case InvocationMessage i:
-                    _paramTypes = i.Arguments?.Select(a => a?.GetType() ?? typeof(object))?.ToArray();
+                    _paramTypes = i.Arguments?.Select(
+                        a => a?.GetType() ?? typeof(object)
+                    )?.ToArray();
                     break;
                 case StreamItemMessage s:
                     _returnType = s.Item?.GetType() ?? typeof(object);

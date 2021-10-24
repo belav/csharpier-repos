@@ -83,7 +83,15 @@ namespace Microsoft.Win32
                     uint dummy = 0;
                     Interop.User32.USEROBJECTFLAGS flags = default;
 
-                    if (Interop.User32.GetUserObjectInformationW(hwinsta, Interop.User32.UOI_FLAGS, &flags, (uint)sizeof(Interop.User32.USEROBJECTFLAGS), ref dummy))
+                    if (
+                        Interop.User32.GetUserObjectInformationW(
+                            hwinsta,
+                            Interop.User32.UOI_FLAGS,
+                            &flags,
+                            (uint)sizeof(Interop.User32.USEROBJECTFLAGS),
+                            ref dummy
+                        )
+                    )
                     {
                         if ((flags.dwFlags & Interop.User32.WSF_VISIBLE) == 0)
                         {
@@ -102,14 +110,8 @@ namespace Microsoft.Win32
         /// </summary>
         public static event EventHandler? DisplaySettingsChanging
         {
-            add
-            {
-                AddEventHandler(s_onDisplaySettingsChangingEvent, value);
-            }
-            remove
-            {
-                RemoveEventHandler(s_onDisplaySettingsChangingEvent, value);
-            }
+            add { AddEventHandler(s_onDisplaySettingsChangingEvent, value); }
+            remove { RemoveEventHandler(s_onDisplaySettingsChangingEvent, value); }
         }
 
         /// <summary>
@@ -117,14 +119,8 @@ namespace Microsoft.Win32
         /// </summary>
         public static event EventHandler? DisplaySettingsChanged
         {
-            add
-            {
-                AddEventHandler(s_onDisplaySettingsChangedEvent, value);
-            }
-            remove
-            {
-                RemoveEventHandler(s_onDisplaySettingsChangedEvent, value);
-            }
+            add { AddEventHandler(s_onDisplaySettingsChangedEvent, value); }
+            remove { RemoveEventHandler(s_onDisplaySettingsChangedEvent, value); }
         }
 
         /// <summary>
@@ -134,14 +130,8 @@ namespace Microsoft.Win32
         public static event EventHandler? EventsThreadShutdown
         {
             // Really only here for GDI+ initialization and shut down
-            add
-            {
-                AddEventHandler(s_onEventsThreadShutdownEvent, value);
-            }
-            remove
-            {
-                RemoveEventHandler(s_onEventsThreadShutdownEvent, value);
-            }
+            add { AddEventHandler(s_onEventsThreadShutdownEvent, value); }
+            remove { RemoveEventHandler(s_onEventsThreadShutdownEvent, value); }
         }
 
         /// <summary>
@@ -149,14 +139,8 @@ namespace Microsoft.Win32
         /// </summary>
         public static event EventHandler? InstalledFontsChanged
         {
-            add
-            {
-                AddEventHandler(s_onInstalledFontsChangedEvent, value);
-            }
-            remove
-            {
-                RemoveEventHandler(s_onInstalledFontsChangedEvent, value);
-            }
+            add { AddEventHandler(s_onInstalledFontsChangedEvent, value); }
+            remove { RemoveEventHandler(s_onInstalledFontsChangedEvent, value); }
         }
 
         /// <summary>
@@ -171,10 +155,7 @@ namespace Microsoft.Win32
                 EnsureSystemEvents(requireHandle: true);
                 AddEventHandler(s_onLowMemoryEvent, value);
             }
-            remove
-            {
-                RemoveEventHandler(s_onLowMemoryEvent, value);
-            }
+            remove { RemoveEventHandler(s_onLowMemoryEvent, value); }
         }
 
         /// <summary>
@@ -183,16 +164,9 @@ namespace Microsoft.Win32
         /// </summary>
         public static event EventHandler? PaletteChanged
         {
-            add
-            {
-                AddEventHandler(s_onPaletteChangedEvent, value);
-            }
-            remove
-            {
-                RemoveEventHandler(s_onPaletteChangedEvent, value);
-            }
+            add { AddEventHandler(s_onPaletteChangedEvent, value); }
+            remove { RemoveEventHandler(s_onPaletteChangedEvent, value); }
         }
-
 
         /// <summary>
         ///  Occurs when the user suspends or resumes the system.
@@ -204,10 +178,7 @@ namespace Microsoft.Win32
                 EnsureSystemEvents(requireHandle: true);
                 AddEventHandler(s_onPowerModeChangedEvent, value);
             }
-            remove
-            {
-                RemoveEventHandler(s_onPowerModeChangedEvent, value);
-            }
+            remove { RemoveEventHandler(s_onPowerModeChangedEvent, value); }
         }
 
         /// <summary>
@@ -220,10 +191,7 @@ namespace Microsoft.Win32
                 EnsureSystemEvents(requireHandle: true);
                 AddEventHandler(s_onSessionEndedEvent, value);
             }
-            remove
-            {
-                RemoveEventHandler(s_onSessionEndedEvent, value);
-            }
+            remove { RemoveEventHandler(s_onSessionEndedEvent, value); }
         }
 
         /// <summary>
@@ -236,10 +204,7 @@ namespace Microsoft.Win32
                 EnsureSystemEvents(requireHandle: true);
                 AddEventHandler(s_onSessionEndingEvent, value);
             }
-            remove
-            {
-                RemoveEventHandler(s_onSessionEndingEvent, value);
-            }
+            remove { RemoveEventHandler(s_onSessionEndingEvent, value); }
         }
 
         /// <summary>
@@ -253,10 +218,7 @@ namespace Microsoft.Win32
                 EnsureRegisteredSessionNotification();
                 AddEventHandler(s_onSessionSwitchEvent, value);
             }
-            remove
-            {
-                RemoveEventHandler(s_onSessionSwitchEvent, value);
-            }
+            remove { RemoveEventHandler(s_onSessionSwitchEvent, value); }
         }
 
         /// <summary>
@@ -269,10 +231,7 @@ namespace Microsoft.Win32
                 EnsureSystemEvents(requireHandle: true);
                 AddEventHandler(s_onTimeChangedEvent, value);
             }
-            remove
-            {
-                RemoveEventHandler(s_onTimeChangedEvent, value);
-            }
+            remove { RemoveEventHandler(s_onTimeChangedEvent, value); }
         }
 
         /// <summary>
@@ -285,26 +244,16 @@ namespace Microsoft.Win32
                 EnsureSystemEvents(requireHandle: true);
                 AddEventHandler(s_onTimerElapsedEvent, value);
             }
-            remove
-            {
-                RemoveEventHandler(s_onTimerElapsedEvent, value);
-            }
+            remove { RemoveEventHandler(s_onTimerElapsedEvent, value); }
         }
-
 
         /// <summary>
         ///  Occurs when a user preference has changed.
         /// </summary>
         public static event UserPreferenceChangedEventHandler? UserPreferenceChanged
         {
-            add
-            {
-                AddEventHandler(s_onUserPreferenceChangedEvent, value);
-            }
-            remove
-            {
-                RemoveEventHandler(s_onUserPreferenceChangedEvent, value);
-            }
+            add { AddEventHandler(s_onUserPreferenceChangedEvent, value); }
+            remove { RemoveEventHandler(s_onUserPreferenceChangedEvent, value); }
         }
 
         /// <summary>
@@ -312,14 +261,8 @@ namespace Microsoft.Win32
         /// </summary>
         public static event UserPreferenceChangingEventHandler? UserPreferenceChanging
         {
-            add
-            {
-                AddEventHandler(s_onUserPreferenceChangingEvent, value);
-            }
-            remove
-            {
-                RemoveEventHandler(s_onUserPreferenceChangingEvent, value);
-            }
+            add { AddEventHandler(s_onUserPreferenceChangingEvent, value); }
+            remove { RemoveEventHandler(s_onUserPreferenceChangingEvent, value); }
         }
 
         private static void AddEventHandler(object key, Delegate? value)
@@ -377,7 +320,10 @@ namespace Microsoft.Win32
             {
                 if (s_defWindowProc == IntPtr.Zero)
                 {
-                    s_defWindowProc = Interop.Kernel32.GetProcAddress(Interop.Kernel32.GetModuleHandle("user32.dll"), "DefWindowProcW");
+                    s_defWindowProc = Interop.Kernel32.GetProcAddress(
+                        Interop.Kernel32.GetModuleHandle("user32.dll"),
+                        "DefWindowProcW"
+                    );
                 }
                 return s_defWindowProc;
             }
@@ -390,12 +336,23 @@ namespace Microsoft.Win32
         {
             if (interval <= 0)
             {
-                throw new ArgumentException(SR.Format(SR.InvalidLowBoundArgument, nameof(interval), interval.ToString(System.Threading.Thread.CurrentThread.CurrentCulture), "0"));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.InvalidLowBoundArgument,
+                        nameof(interval),
+                        interval.ToString(System.Threading.Thread.CurrentThread.CurrentCulture),
+                        "0"
+                    )
+                );
             }
 
             EnsureSystemEvents(requireHandle: true);
-            IntPtr timerId = Interop.User32.SendMessageW(new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
-                                                        Interop.User32.WM_CREATETIMER, (IntPtr)interval, IntPtr.Zero);
+            IntPtr timerId = Interop.User32.SendMessageW(
+                new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
+                Interop.User32.WM_CREATETIMER,
+                (IntPtr)interval,
+                IntPtr.Zero
+            );
 
             if (timerId == IntPtr.Zero)
             {
@@ -410,7 +367,9 @@ namespace Microsoft.Win32
             {
                 if (s_registeredSessionNotification)
                 {
-                    Interop.Wtsapi32.WTSUnRegisterSessionNotification(new HandleRef(s_systemEvents, s_systemEvents!._windowHandle));
+                    Interop.Wtsapi32.WTSUnRegisterSessionNotification(
+                        new HandleRef(s_systemEvents, s_systemEvents!._windowHandle)
+                    );
                 }
 
                 IntPtr handle = _windowHandle;
@@ -427,13 +386,29 @@ namespace Microsoft.Win32
                     if (IntPtr.Size == 4)
                     {
                         // In a 32-bit process we must call the non-'ptr' version of these APIs
-                        Interop.User32.SetWindowLongW(handle, Interop.User32.GWL_WNDPROC, DefWndProc);
-                        Interop.User32.SetClassLongW(handle, Interop.User32.GCL_WNDPROC, DefWndProc);
+                        Interop.User32.SetWindowLongW(
+                            handle,
+                            Interop.User32.GWL_WNDPROC,
+                            DefWndProc
+                        );
+                        Interop.User32.SetClassLongW(
+                            handle,
+                            Interop.User32.GCL_WNDPROC,
+                            DefWndProc
+                        );
                     }
                     else
                     {
-                        Interop.User32.SetWindowLongPtrW(handle, Interop.User32.GWL_WNDPROC, DefWndProc);
-                        Interop.User32.SetClassLongPtrW(handle, Interop.User32.GCL_WNDPROC, DefWndProc);
+                        Interop.User32.SetWindowLongPtrW(
+                            handle,
+                            Interop.User32.GWL_WNDPROC,
+                            DefWndProc
+                        );
+                        Interop.User32.SetClassLongPtrW(
+                            handle,
+                            Interop.User32.GCL_WNDPROC,
+                            DefWndProc
+                        );
                     }
                 }
 
@@ -442,7 +417,12 @@ namespace Microsoft.Win32
                     // We may not have been able to destroy the window if we're shutdown from another thread.
                     // Attempt to close the window by posting a WM_CLOSE message instead. (Messages always
                     // fire on the same thread.)
-                    Interop.User32.PostMessageW(handle, Interop.User32.WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                    Interop.User32.PostMessageW(
+                        handle,
+                        Interop.User32.WM_CLOSE,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
                 }
                 else
                 {
@@ -471,7 +451,10 @@ namespace Microsoft.Win32
                     {
                         // If we are creating system events on a thread declared as STA, then
                         // just share the thread.
-                        if (!UserInteractive || Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+                        if (
+                            !UserInteractive
+                            || Thread.CurrentThread.GetApartmentState() == ApartmentState.STA
+                        )
                         {
                             SystemEvents systemEvents = new SystemEvents();
                             systemEvents.Initialize();
@@ -484,8 +467,9 @@ namespace Microsoft.Win32
                         {
                             s_eventWindowReady = new ManualResetEvent(false);
                             SystemEvents systemEvents = new SystemEvents();
-                            s_windowThread = new Thread(new ThreadStart(systemEvents.WindowThreadProc))
-                            {
+                            s_windowThread = new Thread(
+                                new ThreadStart(systemEvents.WindowThreadProc)
+                            ) {
                                 IsBackground = true,
                                 Name = ".NET System Events"
                             };
@@ -518,14 +502,21 @@ namespace Microsoft.Win32
 
                 if (retval != IntPtr.Zero)
                 {
-                    Interop.Wtsapi32.WTSRegisterSessionNotification(new HandleRef(s_systemEvents, s_systemEvents!._windowHandle), Interop.Wtsapi32.NOTIFY_FOR_THIS_SESSION);
+                    Interop.Wtsapi32.WTSRegisterSessionNotification(
+                        new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
+                        Interop.Wtsapi32.NOTIFY_FOR_THIS_SESSION
+                    );
                     s_registeredSessionNotification = true;
                     Interop.Kernel32.FreeLibrary(retval);
                 }
             }
         }
 
-        private UserPreferenceCategory GetUserPreferenceCategory(int msg, IntPtr wParam, IntPtr lParam)
+        private UserPreferenceCategory GetUserPreferenceCategory(
+            int msg,
+            IntPtr wParam,
+            IntPtr lParam
+        )
         {
             UserPreferenceCategory pref = UserPreferenceCategory.General;
 
@@ -688,7 +679,10 @@ namespace Microsoft.Win32
                 if (Interop.User32.RegisterClassW(ref windowClass) == 0)
                 {
                     _windowProc = null;
-                    Debug.WriteLine("Unable to register broadcast window class: {0}", Marshal.GetLastWin32Error());
+                    Debug.WriteLine(
+                        "Unable to register broadcast window class: {0}",
+                        Marshal.GetLastWin32Error()
+                    );
                 }
                 else
                 {
@@ -698,8 +692,15 @@ namespace Microsoft.Win32
                         s_className,
                         s_className,
                         Interop.User32.WS_POPUP,
-                        0, 0, 0, 0, IntPtr.Zero, IntPtr.Zero,
-                        hInstance, IntPtr.Zero);
+                        0,
+                        0,
+                        0,
+                        0,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        hInstance,
+                        IntPtr.Zero
+                    );
                 }
             }
 
@@ -713,7 +714,10 @@ namespace Microsoft.Win32
         /// </summary>
         private void InvokeMarshaledCallbacks()
         {
-            Debug.Assert(s_threadCallbackList != null, "Invoking marshaled callbacks before there are any");
+            Debug.Assert(
+                s_threadCallbackList != null,
+                "Invoking marshaled callbacks before there are any"
+            );
 
             Delegate? current = null;
             lock (s_threadCallbackList!)
@@ -747,9 +751,8 @@ namespace Microsoft.Win32
 
                 lock (s_threadCallbackList)
                 {
-                    current = s_threadCallbackList.Count > 0 ?
-                        s_threadCallbackList.Dequeue() :
-                        null;
+                    current =
+                        s_threadCallbackList.Count > 0 ? s_threadCallbackList.Dequeue() : null;
                 }
             }
         }
@@ -764,8 +767,14 @@ namespace Microsoft.Win32
 
 #if DEBUG
             int pid;
-            int thread = Interop.User32.GetWindowThreadProcessId(new HandleRef(s_systemEvents, s_systemEvents!._windowHandle), out pid);
-            Debug.Assert(s_windowThread == null || thread != Interop.Kernel32.GetCurrentThreadId(), "Don't call MarshaledInvoke on the system events thread");
+            int thread = Interop.User32.GetWindowThreadProcessId(
+                new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
+                out pid
+            );
+            Debug.Assert(
+                s_windowThread == null || thread != Interop.Kernel32.GetCurrentThreadId(),
+                "Don't call MarshaledInvoke on the system events thread"
+            );
 #endif
 
             if (s_threadCallbackList == null)
@@ -774,20 +783,30 @@ namespace Microsoft.Win32
                 {
                     if (s_threadCallbackList == null)
                     {
-                        s_threadCallbackMessage = Interop.User32.RegisterWindowMessageW("SystemEventsThreadCallbackMessage");
+                        s_threadCallbackMessage = Interop.User32.RegisterWindowMessageW(
+                            "SystemEventsThreadCallbackMessage"
+                        );
                         s_threadCallbackList = new Queue<Delegate>();
                     }
                 }
             }
 
-            Debug.Assert(s_threadCallbackMessage != 0, "threadCallbackList initialized but threadCallbackMessage not?");
+            Debug.Assert(
+                s_threadCallbackMessage != 0,
+                "threadCallbackList initialized but threadCallbackMessage not?"
+            );
 
             lock (s_threadCallbackList)
             {
                 s_threadCallbackList.Enqueue(method);
             }
 
-            Interop.User32.PostMessageW(new HandleRef(s_systemEvents, s_systemEvents!._windowHandle), s_threadCallbackMessage, IntPtr.Zero, IntPtr.Zero);
+            Interop.User32.PostMessageW(
+                new HandleRef(s_systemEvents, s_systemEvents!._windowHandle),
+                s_threadCallbackMessage,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
         }
 
         /// <summary>
@@ -798,8 +817,12 @@ namespace Microsoft.Win32
             EnsureSystemEvents(requireHandle: true);
             if (s_systemEvents!._windowHandle != IntPtr.Zero)
             {
-                int res = (int)Interop.User32.SendMessageW(new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
-                                                                Interop.User32.WM_KILLTIMER, timerId, IntPtr.Zero);
+                int res = (int)Interop.User32.SendMessageW(
+                    new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
+                    Interop.User32.WM_KILLTIMER,
+                    timerId,
+                    IntPtr.Zero
+                );
 
                 if (res == 0)
                     throw new ExternalException(SR.ErrorKillTimer);
@@ -935,7 +958,9 @@ namespace Microsoft.Win32
 
         private void OnSessionSwitch(int wParam)
         {
-            SessionSwitchEventArgs switchEventArgs = new SessionSwitchEventArgs((SessionSwitchReason)wParam);
+            SessionSwitchEventArgs switchEventArgs = new SessionSwitchEventArgs(
+                (SessionSwitchReason)wParam
+            );
 
             RaiseEvent(s_onSessionSwitchEvent, this, switchEventArgs);
         }
@@ -951,15 +976,27 @@ namespace Microsoft.Win32
         {
             // we need to fire a changing event handler for Themes.
             // note that it needs to be documented that accessing theme information during the changing event is forbidden.
-            RaiseEvent(s_onUserPreferenceChangingEvent, this, new UserPreferenceChangingEventArgs(UserPreferenceCategory.VisualStyle));
+            RaiseEvent(
+                s_onUserPreferenceChangingEvent,
+                this,
+                new UserPreferenceChangingEventArgs(UserPreferenceCategory.VisualStyle)
+            );
 
             UserPreferenceCategory pref = UserPreferenceCategory.Window;
 
-            RaiseEvent(s_onUserPreferenceChangedEvent, this, new UserPreferenceChangedEventArgs(pref));
+            RaiseEvent(
+                s_onUserPreferenceChangedEvent,
+                this,
+                new UserPreferenceChangedEventArgs(pref)
+            );
 
             pref = UserPreferenceCategory.VisualStyle;
 
-            RaiseEvent(s_onUserPreferenceChangedEvent, this, new UserPreferenceChangedEventArgs(pref));
+            RaiseEvent(
+                s_onUserPreferenceChangedEvent,
+                this,
+                new UserPreferenceChangedEventArgs(pref)
+            );
         }
 
         /// <summary>
@@ -969,14 +1006,22 @@ namespace Microsoft.Win32
         {
             UserPreferenceCategory pref = GetUserPreferenceCategory(msg, wParam, lParam);
 
-            RaiseEvent(s_onUserPreferenceChangedEvent, this, new UserPreferenceChangedEventArgs(pref));
+            RaiseEvent(
+                s_onUserPreferenceChangedEvent,
+                this,
+                new UserPreferenceChangedEventArgs(pref)
+            );
         }
 
         private void OnUserPreferenceChanging(int msg, IntPtr wParam, IntPtr lParam)
         {
             UserPreferenceCategory pref = GetUserPreferenceCategory(msg, wParam, lParam);
 
-            RaiseEvent(s_onUserPreferenceChangingEvent, this, new UserPreferenceChangingEventArgs(pref));
+            RaiseEvent(
+                s_onUserPreferenceChangingEvent,
+                this,
+                new UserPreferenceChangingEventArgs(pref)
+            );
         }
 
         /// <summary>
@@ -1094,10 +1139,21 @@ namespace Microsoft.Win32
 
 #if DEBUG
                             int pid;
-                            int thread = Interop.User32.GetWindowThreadProcessId(new HandleRef(s_systemEvents, s_systemEvents._windowHandle), out pid);
-                            Debug.Assert(thread != Interop.Kernel32.GetCurrentThreadId(), "Don't call Shutdown on the system events thread");
+                            int thread = Interop.User32.GetWindowThreadProcessId(
+                                new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
+                                out pid
+                            );
+                            Debug.Assert(
+                                thread != Interop.Kernel32.GetCurrentThreadId(),
+                                "Don't call Shutdown on the system events thread"
+                            );
 #endif
-                            Interop.User32.PostMessageW(new HandleRef(s_systemEvents, s_systemEvents._windowHandle), Interop.User32.WM_QUIT, IntPtr.Zero, IntPtr.Zero);
+                            Interop.User32.PostMessageW(
+                                new HandleRef(s_systemEvents, s_systemEvents._windowHandle),
+                                Interop.User32.WM_QUIT,
+                                IntPtr.Zero,
+                                IntPtr.Zero
+                            );
 
                             s_eventThreadTerminated.WaitOne();
                             s_windowThread.Join(); // avoids an AppDomainUnloaded exception on our background thread.
@@ -1138,7 +1194,12 @@ namespace Microsoft.Win32
                             newStringPtr = Marshal.StringToHGlobalUni(newString);
                         }
                     }
-                    Interop.User32.PostMessageW(_windowHandle, Interop.User32.WM_REFLECT + msg, wParam, newStringPtr);
+                    Interop.User32.PostMessageW(
+                        _windowHandle,
+                        Interop.User32.WM_REFLECT + msg,
+                        wParam,
+                        newStringPtr
+                    );
                     break;
                 case Interop.User32.WM_WTSSESSION_CHANGE:
                     OnSessionSwitch((int)wParam);
@@ -1151,7 +1212,12 @@ namespace Microsoft.Win32
                 case Interop.User32.WM_TIMECHANGE:
                 case Interop.User32.WM_TIMER:
                 case Interop.User32.WM_THEMECHANGED:
-                    Interop.User32.PostMessageW(_windowHandle, Interop.User32.WM_REFLECT + msg, wParam, lParam);
+                    Interop.User32.PostMessageW(
+                        _windowHandle,
+                        Interop.User32.WM_REFLECT + msg,
+                        wParam,
+                        lParam
+                    );
                     break;
 
                 case Interop.User32.WM_CREATETIMER:
@@ -1265,7 +1331,13 @@ namespace Microsoft.Win32
                     // and sleep so we always block in managed code instead.
                     while (keepRunning)
                     {
-                        int ret = Interop.User32.MsgWaitForMultipleObjectsEx(0, IntPtr.Zero, 100, Interop.User32.QS_ALLINPUT, Interop.User32.MWMO_INPUTAVAILABLE);
+                        int ret = Interop.User32.MsgWaitForMultipleObjectsEx(
+                            0,
+                            IntPtr.Zero,
+                            100,
+                            Interop.User32.QS_ALLINPUT,
+                            Interop.User32.MWMO_INPUTAVAILABLE
+                        );
 
                         if (ret == Interop.User32.WAIT_TIMEOUT)
                         {
@@ -1273,7 +1345,15 @@ namespace Microsoft.Win32
                         }
                         else
                         {
-                            while (Interop.User32.PeekMessageW(ref msg, IntPtr.Zero, 0, 0, Interop.User32.PM_REMOVE))
+                            while (
+                                Interop.User32.PeekMessageW(
+                                    ref msg,
+                                    IntPtr.Zero,
+                                    0,
+                                    0,
+                                    Interop.User32.PM_REMOVE
+                                )
+                            )
                             {
                                 if (msg.message == Interop.User32.WM_QUIT)
                                 {
@@ -1298,7 +1378,10 @@ namespace Microsoft.Win32
 
                 if (!((e is ThreadInterruptedException) || (e is ThreadAbortException)))
                 {
-                    Debug.Fail("Unexpected thread exception in system events window thread proc", e.ToString());
+                    Debug.Fail(
+                        "Unexpected thread exception in system events window thread proc",
+                        e.ToString()
+                    );
                 }
             }
 
@@ -1313,7 +1396,7 @@ namespace Microsoft.Win32
         private sealed class SystemEventInvokeInfo
         {
             private readonly SynchronizationContext _syncContext; // the context that we'll use to fire against.
-            private readonly Delegate _delegate;     // the delegate we'll fire.  This is a weak ref so we don't hold object in memory.
+            private readonly Delegate _delegate; // the delegate we'll fire.  This is a weak ref so we don't hold object in memory.
             public SystemEventInvokeInfo(Delegate d)
             {
                 _delegate = d;
@@ -1355,7 +1438,8 @@ namespace Microsoft.Win32
 
             public override bool Equals(object? other)
             {
-                return other is SystemEventInvokeInfo otherInvoke && otherInvoke._delegate.Equals(_delegate);
+                return other is SystemEventInvokeInfo otherInvoke
+                    && otherInvoke._delegate.Equals(_delegate);
             }
 
             public override int GetHashCode()

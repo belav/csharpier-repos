@@ -18,22 +18,26 @@ namespace Microsoft.AspNetCore.HttpsPolicy
             _redirectingToHttps = LoggerMessage.Define<string>(
                 LogLevel.Debug,
                 new EventId(1, "RedirectingToHttps"),
-                "Redirecting to '{redirect}'.");
+                "Redirecting to '{redirect}'."
+            );
 
             _portLoadedFromConfig = LoggerMessage.Define<int>(
                 LogLevel.Debug,
                 new EventId(2, "PortLoadedFromConfig"),
-                "Https port '{port}' loaded from configuration.");
+                "Https port '{port}' loaded from configuration."
+            );
 
             _failedToDeterminePort = LoggerMessage.Define(
                 LogLevel.Warning,
                 new EventId(3, "FailedToDeterminePort"),
-                "Failed to determine the https port for redirect.");
+                "Failed to determine the https port for redirect."
+            );
 
             _portFromServer = LoggerMessage.Define<int>(
                 LogLevel.Debug,
                 new EventId(5, "PortFromServer"),
-                "Https port '{httpsPort}' discovered from server endpoints.");
+                "Https port '{httpsPort}' discovered from server endpoints."
+            );
         }
 
         public static void RedirectingToHttps(this ILogger logger, string redirect)

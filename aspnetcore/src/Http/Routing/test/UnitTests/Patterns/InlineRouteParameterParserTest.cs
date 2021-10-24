@@ -182,9 +182,11 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             // Assert
             Assert.Equal("param", templatePart.Name);
 
-            Assert.Collection(templatePart.ParameterPolicies,
+            Assert.Collection(
+                templatePart.ParameterPolicies,
                 constraint => Assert.Equal(@"test(d+)", constraint.Content),
-                constraint => Assert.Equal(@"test(w+)", constraint.Content));
+                constraint => Assert.Equal(@"test(w+)", constraint.Content)
+            );
         }
 
         [Fact]
@@ -199,7 +201,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             Assert.Collection(
                 templatePart.ParameterPolicies,
                 constraint => Assert.Equal(@"test(d+)", constraint.Content),
-                constraint => Assert.Equal(@"test(w+)", constraint.Content));
+                constraint => Assert.Equal(@"test(w+)", constraint.Content)
+            );
         }
 
         [Fact]
@@ -211,9 +214,11 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             // Assert
             Assert.Equal("param", templatePart.Name);
 
-            Assert.Collection(templatePart.ParameterPolicies,
+            Assert.Collection(
+                templatePart.ParameterPolicies,
                 constraint => Assert.Equal(@"test(\d+)", constraint.Content),
-                constraint => Assert.Equal(@"test(\w:+)", constraint.Content));
+                constraint => Assert.Equal(@"test(\w:+)", constraint.Content)
+            );
         }
 
         [Fact]
@@ -227,9 +232,11 @@ namespace Microsoft.AspNetCore.Routing.Patterns
 
             Assert.Equal("qwer", templatePart.Default);
 
-            Assert.Collection(templatePart.ParameterPolicies,
+            Assert.Collection(
+                templatePart.ParameterPolicies,
                 constraint => Assert.Equal(@"test(\d+)", constraint.Content),
-                constraint => Assert.Equal(@"test(\w+)", constraint.Content));
+                constraint => Assert.Equal(@"test(\w+)", constraint.Content)
+            );
         }
 
         [Fact]
@@ -246,7 +253,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             Assert.Collection(
                 templatePart.ParameterPolicies,
                 constraint => Assert.Equal(@"test(\d+)", constraint.Content),
-                constraint => Assert.Equal(@"test(\w+)", constraint.Content));
+                constraint => Assert.Equal(@"test(\w+)", constraint.Content)
+            );
         }
 
         [Theory]
@@ -270,7 +278,9 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         public void ParseRouteTemplate_ConstraintsDefaultsAndOptionalsInMultipleSections_ParsedCorrectly()
         {
             // Arrange & Act
-            var routePattern = RoutePatternFactory.Parse(@"some/url-{p1:int:test(3)=hello}/{p2=abc}/{p3?}");
+            var routePattern = RoutePatternFactory.Parse(
+                @"some/url-{p1:int:test(3)=hello}/{p2=abc}/{p3?}"
+            );
 
             // Assert
             var parameters = routePattern.Parameters.ToArray();
@@ -280,7 +290,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             Assert.Equal("hello", param1.Default);
             Assert.False(param1.IsOptional);
 
-            Assert.Collection(param1.ParameterPolicies,
+            Assert.Collection(
+                param1.ParameterPolicies,
                 constraint => Assert.Equal("int", constraint.Content),
                 constraint => Assert.Equal("test(3)", constraint.Content)
             );
@@ -441,7 +452,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
 
             Assert.Collection(
                 templatePart.ParameterPolicies,
-                constraint => Assert.Equal("test", constraint.Content));
+                constraint => Assert.Equal("test", constraint.Content)
+            );
         }
 
         [Fact]
@@ -455,7 +467,8 @@ namespace Microsoft.AspNetCore.Routing.Patterns
 
             Assert.Collection(
                 templatePart.ParameterPolicies,
-                constraint => Assert.Equal("test", constraint.Content));
+                constraint => Assert.Equal("test", constraint.Content)
+            );
         }
 
         [Fact]
@@ -715,25 +728,31 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             // Assert
             Assert.Equal("param", templatePart.Name);
 
-            Assert.Collection(templatePart.ParameterPolicies,
+            Assert.Collection(
+                templatePart.ParameterPolicies,
                 constraint => Assert.Equal(@"test(#", constraint.Content),
-                constraint => Assert.Equal(@"test1", constraint.Content));
+                constraint => Assert.Equal(@"test1", constraint.Content)
+            );
         }
 
         [Fact]
         public void ParseRouteParameter_ConstraintWithOpenParenAndColonWithDefaultValue_ParsedCorrectly()
         {
             // Arrange & Act
-            var templatePart = ParseParameter(@"param:test(abc:somevalue):name(test1:differentname=default-value");
+            var templatePart = ParseParameter(
+                @"param:test(abc:somevalue):name(test1:differentname=default-value"
+            );
 
             // Assert
             Assert.Equal("param", templatePart.Name);
             Assert.Equal("default-value", templatePart.Default);
 
-            Assert.Collection(templatePart.ParameterPolicies,
+            Assert.Collection(
+                templatePart.ParameterPolicies,
                 constraint => Assert.Equal(@"test(abc:somevalue)", constraint.Content),
                 constraint => Assert.Equal(@"name(test1", constraint.Content),
-                constraint => Assert.Equal(@"differentname", constraint.Content));
+                constraint => Assert.Equal(@"differentname", constraint.Content)
+            );
         }
 
         [Fact]
@@ -851,9 +870,11 @@ namespace Microsoft.AspNetCore.Routing.Patterns
             Assert.Null(templatePart.Default);
             Assert.False(templatePart.IsOptional);
 
-            Assert.Collection(templatePart.ParameterPolicies,
+            Assert.Collection(
+                templatePart.ParameterPolicies,
                 constraint => Assert.Equal(@"test(#)", constraint.Content),
-                constraint => Assert.Equal(@"$)", constraint.Content));
+                constraint => Assert.Equal(@"$)", constraint.Content)
+            );
         }
 
         [Fact]
@@ -926,8 +947,9 @@ namespace Microsoft.AspNetCore.Routing.Patterns
         [InlineData("#!@#$%Q@#@%", "#!@#$%Q@#@%")]
         [InlineData(",,,", ",,,")]
         public void ParseRouteParameter_ParameterWithoutInlineConstraint_ReturnsTemplatePartWithEmptyInlineValues(
-                                                                                        string parameter,
-                                                                                        string expectedParameterName)
+            string parameter,
+            string expectedParameterName
+        )
         {
             // Arrange & Act
             var templatePart = ParseParameter(parameter);

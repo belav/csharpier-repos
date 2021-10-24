@@ -13,18 +13,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that finds primary key property for the entity type based on the names
     ///     and adds the partition key to it if present.
     /// </summary>
-    public class CosmosKeyDiscoveryConvention :
-        KeyDiscoveryConvention,
-        IEntityTypeAnnotationChangedConvention
+    public class CosmosKeyDiscoveryConvention
+        : KeyDiscoveryConvention,
+          IEntityTypeAnnotationChangedConvention
     {
         /// <summary>
         ///     Creates a new instance of <see cref="KeyDiscoveryConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
         public CosmosKeyDiscoveryConvention(ProviderConventionSetBuilderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <summary>
         ///     Called after an annotation is changed on an entity type.
@@ -39,7 +37,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             string name,
             IConventionAnnotation? annotation,
             IConventionAnnotation? oldAnnotation,
-            IConventionContext<IConventionAnnotation> context)
+            IConventionContext<IConventionAnnotation> context
+        )
         {
             Check.NotNull(entityTypeBuilder, nameof(entityTypeBuilder));
             Check.NotEmpty(name, nameof(name));
@@ -52,7 +51,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         }
 
         /// <inheritdoc />
-        protected override void ProcessKeyProperties(IList<IConventionProperty> keyProperties, IConventionEntityType entityType)
+        protected override void ProcessKeyProperties(
+            IList<IConventionProperty> keyProperties,
+            IConventionEntityType entityType
+        )
         {
             if (keyProperties.Count == 0)
             {
@@ -63,8 +65,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             if (partitionKey != null)
             {
                 var partitionKeyProperty = entityType.FindProperty(partitionKey);
-                if (partitionKeyProperty != null
-                    && !keyProperties.Contains(partitionKeyProperty))
+                if (partitionKeyProperty != null && !keyProperties.Contains(partitionKeyProperty))
                 {
                     keyProperties.Add(partitionKeyProperty);
                 }

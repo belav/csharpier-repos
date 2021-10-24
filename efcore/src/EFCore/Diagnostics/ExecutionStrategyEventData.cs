@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             IReadOnlyList<Exception> exceptionsEncountered,
             TimeSpan delay,
-            bool async)
-            : base(eventDefinition, messageGenerator)
+            bool async
+        ) : base(eventDefinition, messageGenerator)
         {
             ExceptionsEncountered = exceptionsEncountered;
             Delay = delay;

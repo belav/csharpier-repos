@@ -23,9 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// </summary>
         /// <param name="toShortDebugString"> Delegate to create the short debug string. </param>
         /// <param name="toLongDebugString"> Delegate to create the long debug string. </param>
-        public DebugView(
-            Func<string> toShortDebugString,
-            Func<string> toLongDebugString)
+        public DebugView(Func<string> toShortDebugString, Func<string> toLongDebugString)
         {
             _toShortDebugString = toShortDebugString;
             _toLongDebugString = toLongDebugString;
@@ -34,13 +32,11 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <summary>
         ///     The long-form, detailed debug string.
         /// </summary>
-        public virtual string LongView
-            => _toLongDebugString();
+        public virtual string LongView => _toLongDebugString();
 
         /// <summary>
         ///     The short-form, less-detailed debug string.
         /// </summary>
-        public virtual string ShortView
-            => _toShortDebugString();
+        public virtual string ShortView => _toShortDebugString();
     }
 }

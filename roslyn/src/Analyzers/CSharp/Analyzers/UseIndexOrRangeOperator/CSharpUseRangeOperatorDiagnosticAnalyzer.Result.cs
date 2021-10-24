@@ -14,7 +14,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         {
             // like s.Substring(expr, s.Length - expr) or s.Substring(expr).  'expr' has to match on both sides.
             Computed,
-
             // like s.Substring(constant1, s.Length - constant2).  the constants don't have to match.
             Constant,
         }
@@ -35,10 +34,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             public readonly IOperation? Op2;
 
             public Result(
-                ResultKind kind, CodeStyleOption2<bool> option,
-                IInvocationOperation invocationOperation, InvocationExpressionSyntax invocation,
-                IMethodSymbol sliceLikeMethod, MemberInfo memberInfo,
-                IOperation op1, IOperation? op2)
+                ResultKind kind,
+                CodeStyleOption2<bool> option,
+                IInvocationOperation invocationOperation,
+                InvocationExpressionSyntax invocation,
+                IMethodSymbol sliceLikeMethod,
+                MemberInfo memberInfo,
+                IOperation op1,
+                IOperation? op2
+            )
             {
                 Kind = kind;
                 Option = option;

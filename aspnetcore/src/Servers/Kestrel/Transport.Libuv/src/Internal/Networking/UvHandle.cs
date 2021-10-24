@@ -9,18 +9,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 {
     internal abstract class UvHandle : UvMemory
     {
-        private static readonly LibuvFunctions.uv_close_cb _destroyMemory = (handle) => DestroyMemory(handle);
+        private static readonly LibuvFunctions.uv_close_cb _destroyMemory = (handle) =>
+            DestroyMemory(handle);
         private Action<Action<IntPtr>, IntPtr> _queueCloseHandle;
 
-        protected UvHandle(ILibuvTrace logger) : base (logger)
-        {
-        }
+        protected UvHandle(ILibuvTrace logger) : base(logger) { }
 
         protected void CreateHandle(
             LibuvFunctions uv,
             int threadId,
             int size,
-            Action<Action<IntPtr>, IntPtr> queueCloseHandle)
+            Action<Action<IntPtr>, IntPtr> queueCloseHandle
+        )
         {
             _queueCloseHandle = queueCloseHandle;
             CreateMemory(uv, threadId, size);

@@ -36,7 +36,10 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
             // Assert
             var written = GetWrittenBytes(context.HttpContext);
             Assert.Equal(expected, written);
-            Assert.Equal("application/json; charset=utf-8", context.HttpContext.Response.ContentType);
+            Assert.Equal(
+                "application/json; charset=utf-8",
+                context.HttpContext.Response.ContentType
+            );
         }
 
         private static HttpContext GetHttpContext()
@@ -49,7 +52,8 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
                 NullLogger<NewtonsoftJsonResultExecutor>.Instance,
                 Options.Create(new MvcOptions()),
                 Options.Create(new MvcNewtonsoftJsonOptions()),
-                ArrayPool<char>.Shared);
+                ArrayPool<char>.Shared
+            );
 
             var services = new ServiceCollection();
             services.AddSingleton<IActionResultExecutor<JsonResult>>(executor);

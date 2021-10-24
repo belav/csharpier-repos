@@ -14,8 +14,7 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
 {
-    internal abstract class AbstractAdornmentManagerProvider<TTag> :
-        IWpfTextViewCreationListener
+    internal abstract class AbstractAdornmentManagerProvider<TTag> : IWpfTextViewCreationListener
         where TTag : GraphicsTag
     {
         private readonly IThreadingContext _threadingContext;
@@ -25,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         protected AbstractAdornmentManagerProvider(
             IThreadingContext threadingContext,
             IViewTagAggregatorFactoryService tagAggregatorFactoryService,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _tagAggregatorFactoryService = tagAggregatorFactoryService;
@@ -48,7 +48,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
             }
 
             // the manager keeps itself alive by listening to text view events.
-            AdornmentManager<TTag>.Create(_threadingContext, textView, _tagAggregatorFactoryService, _asyncListener, AdornmentLayerName);
+            AdornmentManager<TTag>.Create(
+                _threadingContext,
+                textView,
+                _tagAggregatorFactoryService,
+                _asyncListener,
+                AdornmentLayerName
+            );
         }
     }
 }

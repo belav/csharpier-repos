@@ -24,31 +24,25 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
         /// <summary>
         /// Verifies that the Move To Namespace dialog is currently open.
         /// </summary>
-        public void VerifyOpen()
-            => _inProc.VerifyOpen();
+        public void VerifyOpen() => _inProc.VerifyOpen();
 
         /// <summary>
         /// Verifies that the Move To Namespace dialog is currently closed.
         /// </summary>
-        public void VerifyClosed()
-            => _inProc.VerifyClosed();
+        public void VerifyClosed() => _inProc.VerifyClosed();
 
-        public bool CloseWindow()
-            => _inProc.CloseWindow();
+        public bool CloseWindow() => _inProc.CloseWindow();
 
-        public void SetNamespace(string @namespace)
-            => _inProc.SetSetNamespace(@namespace);
+        public void SetNamespace(string @namespace) => _inProc.SetSetNamespace(@namespace);
 
         /// <summary>
         /// Clicks the "OK" button and waits for the Move To Namespace operation to complete.
         /// </summary>
-        public void ClickOK()
-            => _inProc.ClickOK();
+        public void ClickOK() => _inProc.ClickOK();
 
         /// <summary>
         /// Clicks the "Cancel" button and waits for the Move To Namespace operation to complete.
         /// </summary>
-        public void ClickCancel()
-            => _inProc.ClickCancel();
+        public void ClickCancel() => _inProc.ClickCancel();
     }
 }

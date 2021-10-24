@@ -22,7 +22,10 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             // Arrange
             var evaluator = BuildEvaluator();
             var context = new DefaultHttpContext();
-            var services = new ServiceCollection().AddSingleton<IAuthenticationService, SadAuthentication>();
+            var services = new ServiceCollection().AddSingleton<
+                IAuthenticationService,
+                SadAuthentication
+            >();
             context.RequestServices = services.BuildServiceProvider();
             var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
 
@@ -39,9 +42,15 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             // Arrange
             var evaluator = BuildEvaluator();
             var context = new DefaultHttpContext();
-            var services = new ServiceCollection().AddSingleton<IAuthenticationService, EchoAuthentication>();
+            var services = new ServiceCollection().AddSingleton<
+                IAuthenticationService,
+                EchoAuthentication
+            >();
             context.RequestServices = services.BuildServiceProvider();
-            var policy = new AuthorizationPolicyBuilder().AddAuthenticationSchemes("A","B","C").RequireAssertion(_ => true).Build();
+            var policy = new AuthorizationPolicyBuilder()
+                .AddAuthenticationSchemes("A", "B", "C")
+                .RequireAssertion(_ => true)
+                .Build();
 
             // Act
             var result = await evaluator.AuthenticateAsync(policy, context);
@@ -50,7 +59,6 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             Assert.True(result.Succeeded);
             Assert.Equal(3, result.Principal.Identities.Count());
         }
-
 
         [Fact]
         public async Task AuthorizeSucceedsEvenIfAuthenticationFails()
@@ -61,7 +69,12 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build();
 
             // Act
-            var result = await evaluator.AuthorizeAsync(policy, AuthenticateResult.Fail("Nooo"), context, resource: null);
+            var result = await evaluator.AuthorizeAsync(
+                policy,
+                AuthenticateResult.Fail("Nooo"),
+                context,
+                resource: null
+            );
 
             // Assert
             Assert.True(result.Succeeded);
@@ -75,12 +88,21 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             // Arrange
             var evaluator = BuildEvaluator();
             var context = new DefaultHttpContext();
-            var policy = new AuthorizationPolicyBuilder().RequireAssertion(c => c.Resource != null).Build();
-            var success = AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "whatever"));
+            var policy = new AuthorizationPolicyBuilder()
+                .RequireAssertion(c => c.Resource != null)
+                .Build();
+            var success = AuthenticateResult.Success(
+                new AuthenticationTicket(new ClaimsPrincipal(), "whatever")
+            );
 
             // Act
             var result = await evaluator.AuthorizeAsync(policy, success, context, resource: null);
-            var result2 = await evaluator.AuthorizeAsync(policy, success, context, resource: new object());
+            var result2 = await evaluator.AuthorizeAsync(
+                policy,
+                success,
+                context,
+                resource: new object()
+            );
 
             // Assert
             Assert.False(result.Succeeded);
@@ -96,7 +118,12 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => false).Build();
 
             // Act
-            var result = await evaluator.AuthorizeAsync(policy, AuthenticateResult.Fail("Nooo"), context, resource: null);
+            var result = await evaluator.AuthorizeAsync(
+                policy,
+                AuthenticateResult.Fail("Nooo"),
+                context,
+                resource: null
+            );
 
             // Assert
             Assert.False(result.Succeeded);
@@ -113,7 +140,14 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
             var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ => false).Build();
 
             // Act
-            var result = await evaluator.AuthorizeAsync(policy, AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "scheme")), context, resource: null);
+            var result = await evaluator.AuthorizeAsync(
+                policy,
+                AuthenticateResult.Success(
+                    new AuthenticationTicket(new ClaimsPrincipal(), "scheme")
+                ),
+                context,
+                resource: null
+            );
 
             // Assert
             Assert.False(result.Succeeded);
@@ -133,42 +167,61 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 .Build();
 
             // Act
-            var result = await evaluator.AuthorizeAsync(policy, AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(), "scheme")), context, resource: null);
+            var result = await evaluator.AuthorizeAsync(
+                policy,
+                AuthenticateResult.Success(
+                    new AuthenticationTicket(new ClaimsPrincipal(), "scheme")
+                ),
+                context,
+                resource: null
+            );
 
             // Assert
             Assert.False(result.Succeeded);
             Assert.False(result.Challenged);
             Assert.True(result.Forbidden);
             Assert.NotNull(result.AuthorizationFailure);
-            Assert.Contains(result.AuthorizationFailure.FailedRequirements, requirement => requirement is DummyRequirement);
+            Assert.Contains(
+                result.AuthorizationFailure.FailedRequirements,
+                requirement => requirement is DummyRequirement
+            );
         }
 
         private IPolicyEvaluator BuildEvaluator(Action<IServiceCollection> setupServices = null)
         {
-            var services = new ServiceCollection()
-                .AddAuthorization()
-                .AddLogging()
-                .AddOptions();
+            var services = new ServiceCollection().AddAuthorization().AddLogging().AddOptions();
             setupServices?.Invoke(services);
             return services.BuildServiceProvider().GetRequiredService<IPolicyEvaluator>();
         }
 
         public class HappyAuthorization : IAuthorizationService
         {
-            public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)
-                => Task.FromResult(AuthorizationResult.Success());
+            public Task<AuthorizationResult> AuthorizeAsync(
+                ClaimsPrincipal user,
+                object resource,
+                IEnumerable<IAuthorizationRequirement> requirements
+            ) => Task.FromResult(AuthorizationResult.Success());
 
-            public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, string policyName)
-                => Task.FromResult(AuthorizationResult.Success());
+            public Task<AuthorizationResult> AuthorizeAsync(
+                ClaimsPrincipal user,
+                object resource,
+                string policyName
+            ) => Task.FromResult(AuthorizationResult.Success());
         }
 
         public class SadAuthorization : IAuthorizationService
         {
-            public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, IEnumerable<IAuthorizationRequirement> requirements)
-                => Task.FromResult(AuthorizationResult.Failed());
+            public Task<AuthorizationResult> AuthorizeAsync(
+                ClaimsPrincipal user,
+                object resource,
+                IEnumerable<IAuthorizationRequirement> requirements
+            ) => Task.FromResult(AuthorizationResult.Failed());
 
-            public Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object resource, string policyName)
-                => Task.FromResult(AuthorizationResult.Failed());
+            public Task<AuthorizationResult> AuthorizeAsync(
+                ClaimsPrincipal user,
+                object resource,
+                string policyName
+            ) => Task.FromResult(AuthorizationResult.Failed());
         }
 
         public class SadAuthentication : IAuthenticationService
@@ -178,22 +231,39 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
                 return Task.FromResult(AuthenticateResult.Fail("Sad."));
             }
 
-            public Task ChallengeAsync(HttpContext context, string scheme, AuthenticationProperties properties)
+            public Task ChallengeAsync(
+                HttpContext context,
+                string scheme,
+                AuthenticationProperties properties
+            )
             {
                 throw new System.NotImplementedException();
             }
 
-            public Task ForbidAsync(HttpContext context, string scheme, AuthenticationProperties properties)
+            public Task ForbidAsync(
+                HttpContext context,
+                string scheme,
+                AuthenticationProperties properties
+            )
             {
                 throw new System.NotImplementedException();
             }
 
-            public Task SignInAsync(HttpContext context, string scheme, ClaimsPrincipal principal, AuthenticationProperties properties)
+            public Task SignInAsync(
+                HttpContext context,
+                string scheme,
+                ClaimsPrincipal principal,
+                AuthenticationProperties properties
+            )
             {
                 throw new System.NotImplementedException();
             }
 
-            public Task SignOutAsync(HttpContext context, string scheme, AuthenticationProperties properties)
+            public Task SignOutAsync(
+                HttpContext context,
+                string scheme,
+                AuthenticationProperties properties
+            )
             {
                 throw new System.NotImplementedException();
             }
@@ -203,30 +273,54 @@ namespace Microsoft.AspNetCore.Authorization.Policy.Test
         {
             public Task<AuthenticateResult> AuthenticateAsync(HttpContext context, string scheme)
             {
-                return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(new ClaimsPrincipal(new ClaimsIdentity(scheme)), scheme)));
+                return Task.FromResult(
+                    AuthenticateResult.Success(
+                        new AuthenticationTicket(
+                            new ClaimsPrincipal(new ClaimsIdentity(scheme)),
+                            scheme
+                        )
+                    )
+                );
             }
 
-            public Task ChallengeAsync(HttpContext context, string scheme, AuthenticationProperties properties)
+            public Task ChallengeAsync(
+                HttpContext context,
+                string scheme,
+                AuthenticationProperties properties
+            )
             {
                 throw new System.NotImplementedException();
             }
 
-            public Task ForbidAsync(HttpContext context, string scheme, AuthenticationProperties properties)
+            public Task ForbidAsync(
+                HttpContext context,
+                string scheme,
+                AuthenticationProperties properties
+            )
             {
                 throw new System.NotImplementedException();
             }
 
-            public Task SignInAsync(HttpContext context, string scheme, ClaimsPrincipal principal, AuthenticationProperties properties)
+            public Task SignInAsync(
+                HttpContext context,
+                string scheme,
+                ClaimsPrincipal principal,
+                AuthenticationProperties properties
+            )
             {
                 throw new System.NotImplementedException();
             }
 
-            public Task SignOutAsync(HttpContext context, string scheme, AuthenticationProperties properties)
+            public Task SignOutAsync(
+                HttpContext context,
+                string scheme,
+                AuthenticationProperties properties
+            )
             {
                 throw new System.NotImplementedException();
             }
         }
 
-        private class DummyRequirement : IAuthorizationRequirement {}
+        private class DummyRequirement : IAuthorizationRequirement { }
     }
 }

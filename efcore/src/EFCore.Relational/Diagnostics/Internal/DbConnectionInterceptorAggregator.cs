@@ -24,14 +24,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override IDbConnectionInterceptor CreateChain(IEnumerable<IDbConnectionInterceptor> interceptors)
-            => new CompositeDbConnectionInterceptor(interceptors);
+        protected override IDbConnectionInterceptor CreateChain(
+            IEnumerable<IDbConnectionInterceptor> interceptors
+        ) => new CompositeDbConnectionInterceptor(interceptors);
 
         private sealed class CompositeDbConnectionInterceptor : IDbConnectionInterceptor
         {
             private readonly IDbConnectionInterceptor[] _interceptors;
 
-            public CompositeDbConnectionInterceptor(IEnumerable<IDbConnectionInterceptor> interceptors)
+            public CompositeDbConnectionInterceptor(
+                IEnumerable<IDbConnectionInterceptor> interceptors
+            )
             {
                 _interceptors = interceptors.ToArray();
             }
@@ -39,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult ConnectionOpening(
                 DbConnection connection,
                 ConnectionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -53,20 +57,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 DbConnection connection,
                 ConnectionEventData eventData,
                 InterceptionResult result,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].ConnectionOpeningAsync(connection, eventData, result, cancellationToken)
+                    result = await _interceptors[i]
+                        .ConnectionOpeningAsync(connection, eventData, result, cancellationToken)
                         .ConfigureAwait(false);
                 }
 
                 return result;
             }
 
-            public void ConnectionOpened(
-                DbConnection connection,
-                ConnectionEndEventData eventData)
+            public void ConnectionOpened(DbConnection connection, ConnectionEndEventData eventData)
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -77,11 +81,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task ConnectionOpenedAsync(
                 DbConnection connection,
                 ConnectionEndEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].ConnectionOpenedAsync(connection, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .ConnectionOpenedAsync(connection, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }
@@ -89,7 +95,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public InterceptionResult ConnectionClosing(
                 DbConnection connection,
                 ConnectionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -102,20 +109,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async ValueTask<InterceptionResult> ConnectionClosingAsync(
                 DbConnection connection,
                 ConnectionEventData eventData,
-                InterceptionResult result)
+                InterceptionResult result
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    result = await _interceptors[i].ConnectionClosingAsync(connection, eventData, result)
+                    result = await _interceptors[i]
+                        .ConnectionClosingAsync(connection, eventData, result)
                         .ConfigureAwait(false);
                 }
 
                 return result;
             }
 
-            public void ConnectionClosed(
-                DbConnection connection,
-                ConnectionEndEventData eventData)
+            public void ConnectionClosed(DbConnection connection, ConnectionEndEventData eventData)
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -125,18 +132,21 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             public async Task ConnectionClosedAsync(
                 DbConnection connection,
-                ConnectionEndEventData eventData)
+                ConnectionEndEventData eventData
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].ConnectionClosedAsync(connection, eventData)
+                    await _interceptors[i]
+                        .ConnectionClosedAsync(connection, eventData)
                         .ConfigureAwait(false);
                 }
             }
 
             public void ConnectionFailed(
                 DbConnection connection,
-                ConnectionErrorEventData eventData)
+                ConnectionErrorEventData eventData
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
@@ -147,11 +157,13 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             public async Task ConnectionFailedAsync(
                 DbConnection connection,
                 ConnectionErrorEventData eventData,
-                CancellationToken cancellationToken = default)
+                CancellationToken cancellationToken = default
+            )
             {
                 for (var i = 0; i < _interceptors.Length; i++)
                 {
-                    await _interceptors[i].ConnectionFailedAsync(connection, eventData, cancellationToken)
+                    await _interceptors[i]
+                        .ConnectionFailedAsync(connection, eventData, cancellationToken)
                         .ConfigureAwait(false);
                 }
             }

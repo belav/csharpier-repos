@@ -72,10 +72,20 @@ namespace Microsoft.Net.Http.Headers
         [InlineData("directive1=;,directive2 = 42 ", "directive2", 42)]
         [InlineData("directive1;;,;;,directive2 = 42 ", "directive2", 42)]
         [InlineData("directive1=value;q=0.6,directive2 = 42 ", "directive2", 42)]
-        public void TryParseSeconds_Succeeds(string headerValues, string targetValue, int expectedValue)
+        public void TryParseSeconds_Succeeds(
+            string headerValues,
+            string targetValue,
+            int expectedValue
+        )
         {
             TimeSpan? value;
-            Assert.True(HeaderUtilities.TryParseSeconds(new StringValues(headerValues), targetValue, out value));
+            Assert.True(
+                HeaderUtilities.TryParseSeconds(
+                    new StringValues(headerValues),
+                    targetValue,
+                    out value
+                )
+            );
             Assert.Equal(TimeSpan.FromSeconds(expectedValue), value);
         }
 
@@ -95,7 +105,13 @@ namespace Microsoft.Net.Http.Headers
         public void TryParseSeconds_Fails(string headerValues, string targetValue)
         {
             TimeSpan? value;
-            Assert.False(HeaderUtilities.TryParseSeconds(new StringValues(headerValues), targetValue, out value));
+            Assert.False(
+                HeaderUtilities.TryParseSeconds(
+                    new StringValues(headerValues),
+                    targetValue,
+                    out value
+                )
+            );
         }
 
         [Theory]
@@ -105,7 +121,10 @@ namespace Microsoft.Net.Http.Headers
         [InlineData(long.MaxValue)]
         public void FormatNonNegativeInt64_MatchesToString(long value)
         {
-            Assert.Equal(value.ToString(CultureInfo.InvariantCulture), HeaderUtilities.FormatNonNegativeInt64(value));
+            Assert.Equal(
+                value.ToString(CultureInfo.InvariantCulture),
+                HeaderUtilities.FormatNonNegativeInt64(value)
+            );
         }
 
         [Theory]
@@ -114,7 +133,9 @@ namespace Microsoft.Net.Http.Headers
         [InlineData(long.MinValue)]
         public void FormatNonNegativeInt64_Throws_ForNegativeValues(long value)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => HeaderUtilities.FormatNonNegativeInt64(value));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => HeaderUtilities.FormatNonNegativeInt64(value)
+            );
         }
 
         [Theory]
@@ -157,9 +178,16 @@ namespace Microsoft.Net.Http.Headers
         [InlineData("directive1, directive2=80", "directive", false)]
         [InlineData("directive1;, directive2=80", "directive", false)]
         [InlineData("directive1=value;q=0.6;directive2 = 42 ", "directive2", false)]
-        public void ContainsCacheDirective_MatchesExactValue(string headerValues, string targetValue, bool contains)
+        public void ContainsCacheDirective_MatchesExactValue(
+            string headerValues,
+            string targetValue,
+            bool contains
+        )
         {
-            Assert.Equal(contains, HeaderUtilities.ContainsCacheDirective(new StringValues(headerValues), targetValue));
+            Assert.Equal(
+                contains,
+                HeaderUtilities.ContainsCacheDirective(new StringValues(headerValues), targetValue)
+            );
         }
 
         [Theory]
@@ -256,7 +284,10 @@ namespace Microsoft.Net.Http.Headers
         [InlineData(";;;", "\";;;\"")]
         [InlineData("\"value\"", "\"\\\"value\\\"\"")]
         [InlineData("unquoted \"value", "\"unquoted \\\"value\"")]
-        [InlineData("value\\morevalues\\evenmorevalues", "\"value\\\\morevalues\\\\evenmorevalues\"")]
+        [InlineData(
+            "value\\morevalues\\evenmorevalues",
+            "\"value\\\\morevalues\\\\evenmorevalues\""
+        )]
         // We have to assume that the input needs to be quoted here
         [InlineData("\"\"double quoted string\"\"", "\"\\\"\\\"double quoted string\\\"\\\"\"")]
         [InlineData("\t", "\"\t\"")]
@@ -273,13 +304,23 @@ namespace Microsoft.Net.Http.Headers
         [InlineData("\r")]
         public void SetAndEscapeValue_ControlCharactersThrowFormatException(string input)
         {
-            Assert.Throws<FormatException>(() => { var actual = HeaderUtilities.EscapeAsQuotedString(input); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    var actual = HeaderUtilities.EscapeAsQuotedString(input);
+                }
+            );
         }
 
         [Fact]
         public void SetAndEscapeValue_ThrowsFormatExceptionOnDelCharacter()
         {
-            Assert.Throws<FormatException>(() => { var actual = HeaderUtilities.EscapeAsQuotedString($"{(char)0x7F}"); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    var actual = HeaderUtilities.EscapeAsQuotedString($"{(char)0x7F}");
+                }
+            );
         }
     }
 }

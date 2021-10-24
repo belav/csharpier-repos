@@ -19,14 +19,20 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         [InlineData("Accept-Encoding", "Accept-Encoding")]
         [InlineData("accepT-encodinG", "accepT-encodinG")]
         [InlineData("accept-encoding,AnotherHeader", "accept-encoding,AnotherHeader")]
-        public void OnWrite_AppendsAcceptEncodingToVaryHeader_IfNotPresent(string providedVaryHeader, string expectedVaryHeader)
+        public void OnWrite_AppendsAcceptEncodingToVaryHeader_IfNotPresent(
+            string providedVaryHeader,
+            string expectedVaryHeader
+        )
         {
             var httpContext = new DefaultHttpContext();
             httpContext.Response.Headers[HeaderNames.Vary] = providedVaryHeader;
-            var stream = new ResponseCompressionBody(httpContext, new MockResponseCompressionProvider(flushable: true), new StreamResponseBodyFeature(new MemoryStream()));
+            var stream = new ResponseCompressionBody(
+                httpContext,
+                new MockResponseCompressionProvider(flushable: true),
+                new StreamResponseBodyFeature(new MemoryStream())
+            );
 
-            stream.Write(new byte[] { }, 0, 0);
-
+            stream.Write(new byte[] {  }, 0, 0);
 
             Assert.Equal(expectedVaryHeader, httpContext.Response.Headers[HeaderNames.Vary]);
         }
@@ -36,11 +42,14 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         [InlineData(false)]
         public void Write_IsPassedToUnderlyingStream_WhenDisableResponseBuffering(bool flushable)
         {
-
             var buffer = new byte[] { 1 };
 
             var memoryStream = new MemoryStream();
-            var stream = new ResponseCompressionBody(new DefaultHttpContext(), new MockResponseCompressionProvider(flushable), new StreamResponseBodyFeature(memoryStream));
+            var stream = new ResponseCompressionBody(
+                new DefaultHttpContext(),
+                new MockResponseCompressionProvider(flushable),
+                new StreamResponseBodyFeature(memoryStream)
+            );
 
             stream.DisableBuffering();
             stream.Write(buffer, 0, buffer.Length);
@@ -51,12 +60,18 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task WriteAsync_IsPassedToUnderlyingStream_WhenDisableResponseBuffering(bool flushable)
+        public async Task WriteAsync_IsPassedToUnderlyingStream_WhenDisableResponseBuffering(
+            bool flushable
+        )
         {
             var buffer = new byte[] { 1 };
 
             var memoryStream = new MemoryStream();
-            var stream = new ResponseCompressionBody(new DefaultHttpContext(), new MockResponseCompressionProvider(flushable), new StreamResponseBodyFeature(memoryStream));
+            var stream = new ResponseCompressionBody(
+                new DefaultHttpContext(),
+                new MockResponseCompressionProvider(flushable),
+                new StreamResponseBodyFeature(memoryStream)
+            );
 
             stream.DisableBuffering();
             await stream.WriteAsync(buffer, 0, buffer.Length);
@@ -69,7 +84,11 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         {
             var memoryStream = new MemoryStream();
 
-            var stream = new ResponseCompressionBody(new DefaultHttpContext(), new MockResponseCompressionProvider(true), new StreamResponseBodyFeature(memoryStream));
+            var stream = new ResponseCompressionBody(
+                new DefaultHttpContext(),
+                new MockResponseCompressionProvider(true),
+                new StreamResponseBodyFeature(memoryStream)
+            );
 
             stream.DisableBuffering();
 
@@ -82,21 +101,27 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void BeginWrite_IsPassedToUnderlyingStream_WhenDisableResponseBuffering(bool flushable)
+        public void BeginWrite_IsPassedToUnderlyingStream_WhenDisableResponseBuffering(
+            bool flushable
+        )
         {
             var buffer = new byte[] { 1 };
 
             var memoryStream = new MemoryStream();
 
-            var stream = new ResponseCompressionBody(new DefaultHttpContext(), new MockResponseCompressionProvider(flushable), new StreamResponseBodyFeature(memoryStream));
+            var stream = new ResponseCompressionBody(
+                new DefaultHttpContext(),
+                new MockResponseCompressionProvider(flushable),
+                new StreamResponseBodyFeature(memoryStream)
+            );
 
             stream.DisableBuffering();
-            stream.BeginWrite(buffer, 0, buffer.Length, (o) => {}, null);
+            stream.BeginWrite(buffer, 0, buffer.Length, (o) => { }, null);
 
             Assert.Equal(buffer, memoryStream.ToArray());
         }
 
-        private class MockResponseCompressionProvider: IResponseCompressionProvider
+        private class MockResponseCompressionProvider : IResponseCompressionProvider
         {
             private readonly bool _flushable;
 
@@ -121,7 +146,6 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
             }
         }
 
-
         private class MockCompressionProvider : ICompressionProvider
         {
             public MockCompressionProvider(bool flushable)
@@ -143,7 +167,6 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                 {
                     return new NoFlushBufferedStream(outputStream);
                 }
-
             }
         }
 
@@ -156,17 +179,18 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                 _bufferedStream = new BufferedStream(outputStream);
             }
 
-            public override void Flush()
-            {
-            }
+            public override void Flush() { }
 
-            public override int Read(byte[] buffer, int offset, int count) => _bufferedStream.Read(buffer, offset, count);
+            public override int Read(byte[] buffer, int offset, int count) =>
+                _bufferedStream.Read(buffer, offset, count);
 
-            public override long Seek(long offset, SeekOrigin origin) => _bufferedStream.Seek(offset, origin);
+            public override long Seek(long offset, SeekOrigin origin) =>
+                _bufferedStream.Seek(offset, origin);
 
             public override void SetLength(long value) => _bufferedStream.SetLength(value);
 
-            public override void Write(byte[] buffer, int offset, int count) => _bufferedStream.Write(buffer, offset, count);
+            public override void Write(byte[] buffer, int offset, int count) =>
+                _bufferedStream.Write(buffer, offset, count);
 
             public override bool CanRead => _bufferedStream.CanRead;
 

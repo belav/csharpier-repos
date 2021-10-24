@@ -22,25 +22,26 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Completion
 {
-    [ExportLanguageServiceFactory(typeof(CompletionService), InteractiveLanguageNames.InteractiveCommand), Shared]
+    [
+        ExportLanguageServiceFactory(
+            typeof(CompletionService),
+            InteractiveLanguageNames.InteractiveCommand
+        ),
+        Shared
+    ]
     internal class InteractiveCommandCompletionServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InteractiveCommandCompletionServiceFactory()
-        {
-        }
+        public InteractiveCommandCompletionServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => new InteractiveCommandCompletionService(languageServices.WorkspaceServices.Workspace);
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            new InteractiveCommandCompletionService(languageServices.WorkspaceServices.Workspace);
     }
 
     internal class InteractiveCommandCompletionService : CompletionServiceWithProviders
     {
-        public InteractiveCommandCompletionService(Workspace workspace)
-            : base(workspace)
-        {
-        }
+        public InteractiveCommandCompletionService(Workspace workspace) : base(workspace) { }
 
         public override string Language
         {

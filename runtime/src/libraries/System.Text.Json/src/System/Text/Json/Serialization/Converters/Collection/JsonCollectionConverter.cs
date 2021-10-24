@@ -6,9 +6,11 @@ namespace System.Text.Json.Serialization
     /// <summary>
     /// Base class for all collections. Collections are assumed to implement <cref>System.Collections.IEnumerable</cref>.
     /// </summary>
-    internal abstract class JsonCollectionConverter<TCollection, TElement> : JsonResumableConverter<TCollection>
+    internal abstract class JsonCollectionConverter<TCollection, TElement>
+        : JsonResumableConverter<TCollection>
     {
-        internal sealed override ConverterStrategy ConverterStrategy => ConverterStrategy.Enumerable;
+        internal sealed override ConverterStrategy ConverterStrategy =>
+            ConverterStrategy.Enumerable;
         internal override Type ElementType => typeof(TElement);
     }
 }

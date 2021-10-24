@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
         {
             var context = TestContextFactory.CreateHttp2StreamContext(
                 serviceContext: new TestServiceContext(),
-                timeoutControl: Mock.Of<ITimeoutControl>());
+                timeoutControl: Mock.Of<ITimeoutControl>()
+            );
 
             var http2Stream = new TestHttp2Stream(context);
             http2Stream.Reset();
@@ -52,7 +53,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
             Assert.NotNull(minRateFeature);
 
             Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate);
-            Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2)));
+            Assert.Throws<NotSupportedException>(
+                () => minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2))
+            );
 
             // You can set the MinDataRate to null though.
             minRateFeature.MinDataRate = null;
@@ -68,9 +71,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
                 Initialize(context);
             }
 
-            public override void Execute()
-            {
-            }
+            public override void Execute() { }
         }
     }
 }

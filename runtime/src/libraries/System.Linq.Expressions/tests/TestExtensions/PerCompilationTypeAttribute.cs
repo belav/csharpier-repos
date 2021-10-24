@@ -51,7 +51,6 @@ namespace System.Linq.Expressions.Tests
                 for (int i = 0; i != received.Length; ++i)
                 {
                     object arg = received[i];
-
 #if FEATURE_COMPILE
                     withFalse[i] = arg;
 #endif
@@ -60,7 +59,6 @@ namespace System.Linq.Expressions.Tests
                     withTrue[i] = arg;
 #endif
                 }
-
 #if FEATURE_COMPILE
                 yield return withFalse;
 #endif

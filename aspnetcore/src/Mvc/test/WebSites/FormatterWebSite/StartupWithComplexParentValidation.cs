@@ -12,17 +12,24 @@ namespace FormatterWebSite
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllers(options => options.ValidateComplexTypesIfChildValidationFails = true)
-                .AddNewtonsoftJson(options => options.SerializerSettings.Converters.Insert(0, new IModelConverter()));
+                .AddControllers(
+                    options => options.ValidateComplexTypesIfChildValidationFails = true
+                )
+                .AddNewtonsoftJson(
+                    options =>
+                        options.SerializerSettings.Converters.Insert(0, new IModelConverter())
+                );
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                }
+            );
         }
     }
 }

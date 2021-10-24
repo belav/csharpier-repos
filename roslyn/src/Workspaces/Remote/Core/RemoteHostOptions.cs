@@ -27,29 +27,51 @@ namespace Microsoft.CodeAnalysis.Remote
         // Even if primary workspace is not updated, other OOP queries will work as expected. Updating primary workspace
         // on OOP should let latest data to be synced pre-emptively rather than on demand, and will kick off
         // incremental analyzer tasks.
-        public static readonly Option<int> SolutionChecksumMonitorBackOffTimeSpanInMS = new Option<int>(
-            FeatureName, nameof(SolutionChecksumMonitorBackOffTimeSpanInMS), defaultValue: 1000,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(SolutionChecksumMonitorBackOffTimeSpanInMS)));
+        public static readonly Option<int> SolutionChecksumMonitorBackOffTimeSpanInMS =
+            new Option<int>(
+                FeatureName,
+                nameof(SolutionChecksumMonitorBackOffTimeSpanInMS),
+                defaultValue: 1000,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(SolutionChecksumMonitorBackOffTimeSpanInMS)
+                )
+            );
 
         // use 64bit OOP
         public static readonly Option2<bool> OOP64Bit = new Option2<bool>(
-            FeatureName, nameof(OOP64Bit), defaultValue: true,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(OOP64Bit)));
+            FeatureName,
+            nameof(OOP64Bit),
+            defaultValue: true,
+            storageLocations: new LocalUserProfileStorageLocation(
+                LocalRegistryPath + nameof(OOP64Bit)
+            )
+        );
 
         // use Server GC for 64-bit OOP
         public static readonly Option2<bool> OOPServerGC = new Option2<bool>(
-            FeatureName, nameof(OOPServerGC), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(OOPServerGC)));
+            FeatureName,
+            nameof(OOPServerGC),
+            defaultValue: false,
+            storageLocations: new LocalUserProfileStorageLocation(
+                LocalRegistryPath + nameof(OOPServerGC)
+            )
+        );
 
         // Override 64-bit OOP option to force use of a 32-bit process. This option exists as a registry-based
         // workaround for cases where the new 64-bit mode fails and 32-bit in-process fails to provide a viable
         // fallback.
         public static readonly Option2<bool> OOP32BitOverride = new Option2<bool>(
-            FeatureName, nameof(OOP32BitOverride), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(OOP32BitOverride)));
+            FeatureName,
+            nameof(OOP32BitOverride),
+            defaultValue: false,
+            storageLocations: new LocalUserProfileStorageLocation(
+                LocalRegistryPath + nameof(OOP32BitOverride)
+            )
+        );
 
-        public static bool IsServiceHubProcess64Bit(HostWorkspaceServices services)
-            => IsUsingServiceHubOutOfProcess(services) && !services.GetRequiredService<IOptionService>().GetOption(OOP32BitOverride);
+        public static bool IsServiceHubProcess64Bit(HostWorkspaceServices services) =>
+            IsUsingServiceHubOutOfProcess(services)
+            && !services.GetRequiredService<IOptionService>().GetOption(OOP32BitOverride);
 
         public static bool IsServiceHubProcessServerGC(HostWorkspaceServices services)
         {
@@ -57,7 +79,9 @@ namespace Microsoft.CodeAnalysis.Remote
                 return false;
 
             return services.GetRequiredService<IOptionService>().GetOption(OOPServerGC)
-                || services.GetService<IExperimentationService>()?.IsExperimentEnabled(WellKnownExperimentNames.OOPServerGC) == true;
+                || services.GetService<IExperimentationService>()?.IsExperimentEnabled(
+                    WellKnownExperimentNames.OOPServerGC
+                ) == true;
         }
 
         /// <summary>
@@ -87,12 +111,12 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteHostOptionsProvider()
-        {
-        }
+        public RemoteHostOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS,
-            RemoteHostOptions.OOP64Bit);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(
+                RemoteHostOptions.SolutionChecksumMonitorBackOffTimeSpanInMS,
+                RemoteHostOptions.OOP64Bit
+            );
     }
 }

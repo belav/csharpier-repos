@@ -23,28 +23,37 @@ namespace Benchmarks
         {
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                var endpointDataSource = new DefaultEndpointDataSource(new[]
+            app.UseEndpoints(
+                endpoints =>
                 {
-                    new RouteEndpoint(
-                        requestDelegate: (httpContext) =>
+                    var endpointDataSource = new DefaultEndpointDataSource(
+                        new[]
                         {
-                            var response = httpContext.Response;
-                            var payloadLength = _helloWorldPayload.Length;
-                            response.StatusCode = 200;
-                            response.ContentType = "text/plain";
-                            response.ContentLength = payloadLength;
-                            return response.Body.WriteAsync(_helloWorldPayload, 0, payloadLength);
-                        },
-                        routePattern: RoutePatternFactory.Parse("/plaintext"),
-                        order: 0,
-                        metadata: EndpointMetadataCollection.Empty,
-                        displayName: "Plaintext"),
-                });
+                            new RouteEndpoint(
+                                requestDelegate: (httpContext) =>
+                                {
+                                    var response = httpContext.Response;
+                                    var payloadLength = _helloWorldPayload.Length;
+                                    response.StatusCode = 200;
+                                    response.ContentType = "text/plain";
+                                    response.ContentLength = payloadLength;
+                                    return response.Body.WriteAsync(
+                                        _helloWorldPayload,
+                                        0,
+                                        payloadLength
+                                    );
+                                },
+                                routePattern: RoutePatternFactory.Parse("/plaintext"),
+                                order: 0,
+                                metadata: EndpointMetadataCollection.Empty,
+                                displayName: "Plaintext"
+                            ),
+                        }
+                    );
 
-                endpoints.DataSources.Add(endpointDataSource);
-            });
+                    endpoints.DataSources.Add(endpointDataSource);
+                }
+            );
         }
     }
 }

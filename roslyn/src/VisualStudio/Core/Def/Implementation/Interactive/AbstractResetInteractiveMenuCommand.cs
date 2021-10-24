@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
             string contentType,
             OleMenuCommandService menuCommandService,
             IVsMonitorSelection monitorSelection,
-            IComponentModel componentModel)
+            IComponentModel componentModel
+        )
         {
             _contentType = contentType;
             _menuCommandService = menuCommandService;
@@ -46,7 +47,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
             _componentModel = componentModel;
             _resetInteractiveCommand = _componentModel.DefaultExportProvider
                 .GetExports<IResetInteractiveCommand, ContentTypeMetadata>()
-                .Where(resetInteractiveService => resetInteractiveService.Metadata.ContentTypes.Contains(_contentType))
+                .Where(
+                    resetInteractiveService =>
+                        resetInteractiveService.Metadata.ContentTypes.Contains(_contentType)
+                )
                 .SingleOrDefault();
         }
 
@@ -57,16 +61,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                 {
                     ResetInteractiveCommand.Value.ExecuteResetInteractive();
                 },
-                GetResetInteractiveFromProjectCommandID());
+                GetResetInteractiveFromProjectCommandID()
+            );
 
             resetInteractiveFromProjectCommand.Supported = true;
 
             resetInteractiveFromProjectCommand.BeforeQueryStatus += (_, __) =>
             {
                 GetActiveProject(out var project, out var frameworkName);
-                var available = ResetInteractiveCommand != null
-                    && project != null && project.Kind == ProjectKind
-                    && frameworkName != null && frameworkName.Identifier == ".NETFramework";
+                var available =
+                    ResetInteractiveCommand != null
+                    && project != null
+                    && project.Kind == ProjectKind
+                    && frameworkName != null
+                    && frameworkName.Identifier == ".NETFramework";
 
                 resetInteractiveFromProjectCommand.Enabled = available;
                 resetInteractiveFromProjectCommand.Supported = available;
@@ -94,7 +102,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                         out hierarchyPointer,
                         out var itemid,
                         out var multiItemSelect,
-                        out selectionContainerPointer));
+                        out selectionContainerPointer
+                    )
+                );
 
                 if (itemid != (uint)VSConstants.VSITEMID.Root)
                 {
@@ -107,11 +117,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                 }
 
                 Marshal.ThrowExceptionForHR(
-                    hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID.VSHPROPID_ExtObject, out var extensibilityObject));
+                    hierarchy.GetProperty(
+                        (uint)VSConstants.VSITEMID.Root,
+                        (int)__VSHPROPID.VSHPROPID_ExtObject,
+                        out var extensibilityObject
+                    )
+                );
                 Marshal.ThrowExceptionForHR(
-                    hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID3.VSHPROPID_TargetFrameworkVersion, out var targetFrameworkVersion));
+                    hierarchy.GetProperty(
+                        (uint)VSConstants.VSITEMID.Root,
+                        (int)__VSHPROPID3.VSHPROPID_TargetFrameworkVersion,
+                        out var targetFrameworkVersion
+                    )
+                );
                 Marshal.ThrowExceptionForHR(
-                    hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID4.VSHPROPID_TargetFrameworkMoniker, out var targetFrameworkMonikerObject));
+                    hierarchy.GetProperty(
+                        (uint)VSConstants.VSITEMID.Root,
+                        (int)__VSHPROPID4.VSHPROPID_TargetFrameworkMoniker,
+                        out var targetFrameworkMonikerObject
+                    )
+                );
 
                 var targetFrameworkMoniker = targetFrameworkMonikerObject as string;
                 frameworkName = new System.Runtime.Versioning.FrameworkName(targetFrameworkMoniker);

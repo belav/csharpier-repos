@@ -26,18 +26,18 @@ namespace Microsoft.AspNetCore.Owin
     /// <summary>
     /// OWIN feature collection.
     /// </summary>
-    public class OwinFeatureCollection :
-        IFeatureCollection,
-        IHttpRequestFeature,
-        IHttpResponseFeature,
-        IHttpResponseBodyFeature,
-        IHttpConnectionFeature,
-        ITlsConnectionFeature,
-        IHttpRequestIdentifierFeature,
-        IHttpRequestLifetimeFeature,
-        IHttpAuthenticationFeature,
-        IHttpWebSocketFeature,
-        IOwinEnvironmentFeature
+    public class OwinFeatureCollection
+        : IFeatureCollection,
+          IHttpRequestFeature,
+          IHttpResponseFeature,
+          IHttpResponseBodyFeature,
+          IHttpConnectionFeature,
+          ITlsConnectionFeature,
+          IHttpRequestIdentifierFeature,
+          IHttpRequestLifetimeFeature,
+          IHttpAuthenticationFeature,
+          IHttpWebSocketFeature,
+          IOwinEnvironmentFeature
     {
         /// <summary>
         /// Gets or sets OWIN environment values.
@@ -55,12 +55,17 @@ namespace Microsoft.AspNetCore.Owin
             Environment = environment;
             SupportsWebSockets = true;
 
-            var register = Prop<Action<Action<object>, object>>(OwinConstants.CommonKeys.OnSendingHeaders);
-            register?.Invoke(state =>
-            {
-                var collection = (OwinFeatureCollection)state;
-                collection._headersSent = true;
-            }, this);
+            var register = Prop<Action<Action<object>, object>>(
+                OwinConstants.CommonKeys.OnSendingHeaders
+            );
+            register?.Invoke(
+                state =>
+                {
+                    var collection = (OwinFeatureCollection)state;
+                    collection._headersSent = true;
+                },
+                this
+            );
         }
 
         T Prop<T>(string key)
@@ -110,7 +115,10 @@ namespace Microsoft.AspNetCore.Owin
 
         string IHttpRequestFeature.QueryString
         {
-            get { return Utilities.AddQuestionMark(Prop<string>(OwinConstants.RequestQueryString)); }
+            get
+            {
+                return Utilities.AddQuestionMark(Prop<string>(OwinConstants.RequestQueryString));
+            }
             set { Prop(OwinConstants.RequestQueryString, Utilities.RemoveQuestionMark(value)); }
         }
 
@@ -122,7 +130,12 @@ namespace Microsoft.AspNetCore.Owin
 
         IHeaderDictionary IHttpRequestFeature.Headers
         {
-            get { return Utilities.MakeHeaderDictionary(Prop<IDictionary<string, string[]>>(OwinConstants.RequestHeaders)); }
+            get
+            {
+                return Utilities.MakeHeaderDictionary(
+                    Prop<IDictionary<string, string[]>>(OwinConstants.RequestHeaders)
+                );
+            }
             set { Prop(OwinConstants.RequestHeaders, Utilities.MakeDictionaryStringArray(value)); }
         }
 
@@ -152,7 +165,12 @@ namespace Microsoft.AspNetCore.Owin
 
         IHeaderDictionary IHttpResponseFeature.Headers
         {
-            get { return Utilities.MakeHeaderDictionary(Prop<IDictionary<string, string[]>>(OwinConstants.ResponseHeaders)); }
+            get
+            {
+                return Utilities.MakeHeaderDictionary(
+                    Prop<IDictionary<string, string[]>>(OwinConstants.ResponseHeaders)
+                );
+            }
             set { Prop(OwinConstants.ResponseHeaders, Utilities.MakeDictionaryStringArray(value)); }
         }
 
@@ -173,7 +191,10 @@ namespace Microsoft.AspNetCore.Owin
             {
                 if (_responseBodyWrapper == null)
                 {
-                    _responseBodyWrapper = PipeWriter.Create(Prop<Stream>(OwinConstants.ResponseBody), new StreamPipeWriterOptions(leaveOpen: true));
+                    _responseBodyWrapper = PipeWriter.Create(
+                        Prop<Stream>(OwinConstants.ResponseBody),
+                        new StreamPipeWriterOptions(leaveOpen: true)
+                    );
                 }
 
                 return _responseBodyWrapper;
@@ -187,7 +208,9 @@ namespace Microsoft.AspNetCore.Owin
 
         void IHttpResponseFeature.OnStarting(Func<object, Task> callback, object state)
         {
-            var register = Prop<Action<Action<object>, object>>(OwinConstants.CommonKeys.OnSendingHeaders);
+            var register = Prop<Action<Action<object>, object>>(
+                OwinConstants.CommonKeys.OnSendingHeaders
+            );
             if (register == null)
             {
                 throw new NotSupportedException(OwinConstants.CommonKeys.OnSendingHeaders);
@@ -216,14 +239,38 @@ namespace Microsoft.AspNetCore.Owin
 
         int IHttpConnectionFeature.RemotePort
         {
-            get { return int.Parse(Prop<string>(OwinConstants.CommonKeys.RemotePort), CultureInfo.InvariantCulture); }
-            set { Prop(OwinConstants.CommonKeys.RemotePort, value.ToString(CultureInfo.InvariantCulture)); }
+            get
+            {
+                return int.Parse(
+                    Prop<string>(OwinConstants.CommonKeys.RemotePort),
+                    CultureInfo.InvariantCulture
+                );
+            }
+            set
+            {
+                Prop(
+                    OwinConstants.CommonKeys.RemotePort,
+                    value.ToString(CultureInfo.InvariantCulture)
+                );
+            }
         }
 
         int IHttpConnectionFeature.LocalPort
         {
-            get { return int.Parse(Prop<string>(OwinConstants.CommonKeys.LocalPort), CultureInfo.InvariantCulture); }
-            set { Prop(OwinConstants.CommonKeys.LocalPort, value.ToString(CultureInfo.InvariantCulture)); }
+            get
+            {
+                return int.Parse(
+                    Prop<string>(OwinConstants.CommonKeys.LocalPort),
+                    CultureInfo.InvariantCulture
+                );
+            }
+            set
+            {
+                Prop(
+                    OwinConstants.CommonKeys.LocalPort,
+                    value.ToString(CultureInfo.InvariantCulture)
+                );
+            }
         }
 
         string IHttpConnectionFeature.ConnectionId
@@ -232,7 +279,12 @@ namespace Microsoft.AspNetCore.Owin
             set { Prop(OwinConstants.CommonKeys.ConnectionId, value); }
         }
 
-        Task IHttpResponseBodyFeature.SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
+        Task IHttpResponseBodyFeature.SendFileAsync(
+            string path,
+            long offset,
+            long? length,
+            CancellationToken cancellation
+        )
         {
             object obj;
             if (Environment.TryGetValue(OwinConstants.SendFiles.SendAsync, out obj))
@@ -248,10 +300,24 @@ namespace Microsoft.AspNetCore.Owin
             get
             {
                 object obj;
-                if (string.Equals("https", ((IHttpRequestFeature)this).Scheme, StringComparison.OrdinalIgnoreCase)
-                    && (Environment.TryGetValue(OwinConstants.CommonKeys.LoadClientCertAsync, out obj)
-                        || Environment.TryGetValue(OwinConstants.CommonKeys.ClientCertificate, out obj))
-                    && obj != null)
+                if (
+                    string.Equals(
+                        "https",
+                        ((IHttpRequestFeature)this).Scheme,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && (
+                        Environment.TryGetValue(
+                            OwinConstants.CommonKeys.LoadClientCertAsync,
+                            out obj
+                        )
+                        || Environment.TryGetValue(
+                            OwinConstants.CommonKeys.ClientCertificate,
+                            out obj
+                        )
+                    )
+                    && obj != null
+                )
                 {
                     return true;
                 }
@@ -265,7 +331,9 @@ namespace Microsoft.AspNetCore.Owin
             set { Prop(OwinConstants.CommonKeys.ClientCertificate, value); }
         }
 
-        async Task<X509Certificate2> ITlsConnectionFeature.GetClientCertificateAsync(CancellationToken cancellationToken)
+        async Task<X509Certificate2> ITlsConnectionFeature.GetClientCertificateAsync(
+            CancellationToken cancellationToken
+        )
         {
             var loadAsync = Prop<Func<Task>>(OwinConstants.CommonKeys.LoadClientCertAsync);
             if (loadAsync != null)
@@ -408,7 +476,10 @@ namespace Microsoft.AspNetCore.Owin
             yield return new KeyValuePair<Type, object>(typeof(IHttpResponseFeature), this);
             yield return new KeyValuePair<Type, object>(typeof(IHttpResponseBodyFeature), this);
             yield return new KeyValuePair<Type, object>(typeof(IHttpConnectionFeature), this);
-            yield return new KeyValuePair<Type, object>(typeof(IHttpRequestIdentifierFeature), this);
+            yield return new KeyValuePair<Type, object>(
+                typeof(IHttpRequestIdentifierFeature),
+                this
+            );
             yield return new KeyValuePair<Type, object>(typeof(IHttpRequestLifetimeFeature), this);
             yield return new KeyValuePair<Type, object>(typeof(IHttpAuthenticationFeature), this);
             yield return new KeyValuePair<Type, object>(typeof(IOwinEnvironmentFeature), this);
@@ -424,9 +495,7 @@ namespace Microsoft.AspNetCore.Owin
             }
         }
 
-        void IHttpResponseBodyFeature.DisableBuffering()
-        {
-        }
+        void IHttpResponseBodyFeature.DisableBuffering() { }
 
         async Task IHttpResponseBodyFeature.StartAsync(CancellationToken cancellationToken)
         {
@@ -450,9 +519,7 @@ namespace Microsoft.AspNetCore.Owin
         }
 
         /// <inheritdoc/>
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }
 

@@ -22,7 +22,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var expected =
-@"<div class=""validation-summary-errors""><validationSummaryElement>MySummary</validationSummaryElement>
+                @"<div class=""validation-summary-errors""><validationSummaryElement>MySummary</validationSummaryElement>
 <ul><li>A model error occurred.</li>
 </ul></div>
 <validationMessageElement class=""field-validation-error"">An error occurred.</validationMessageElement>
@@ -41,7 +41,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 False";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/HtmlHelperOptions/HtmlHelperOptionsDefaultsInView");
+            var body = await Client.GetStringAsync(
+                "http://localhost/HtmlHelperOptions/HtmlHelperOptionsDefaultsInView"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim(), ignoreLineEndingDifferences: true);
@@ -53,7 +55,7 @@ False";
         {
             // Arrange
             var expected =
-@"<div class=""validation-summary-errors""><ValidationSummaryInView>MySummary</ValidationSummaryInView>
+                @"<div class=""validation-summary-errors""><ValidationSummaryInView>MySummary</ValidationSummaryInView>
 <ul><li>A model error occurred.</li>
 </ul></div>
 <ValidationInView class=""field-validation-error"" data-valmsg-for=""Error"" data-valmsg-replace=""true"">An error occurred.</ValidationInView>
@@ -73,7 +75,9 @@ True
 True";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/HtmlHelperOptions/OverrideAppWideDefaultsInView");
+            var body = await Client.GetStringAsync(
+                "http://localhost/HtmlHelperOptions/OverrideAppWideDefaultsInView"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim(), ignoreLineEndingDifferences: true);

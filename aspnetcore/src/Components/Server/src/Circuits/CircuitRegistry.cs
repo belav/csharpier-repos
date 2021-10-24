@@ -47,17 +47,17 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         public CircuitRegistry(
             IOptions<CircuitOptions> options,
             ILogger<CircuitRegistry> logger,
-            CircuitIdFactory CircuitHostFactory)
+            CircuitIdFactory CircuitHostFactory
+        )
         {
             _options = options.Value;
             _logger = logger;
             _circuitIdFactory = CircuitHostFactory;
             ConnectedCircuits = new ConcurrentDictionary<CircuitId, CircuitHost>();
 
-            DisconnectedCircuits = new MemoryCache(new MemoryCacheOptions
-            {
-                SizeLimit = _options.DisconnectedCircuitMaxRetained,
-            });
+            DisconnectedCircuits = new MemoryCache(
+                new MemoryCacheOptions { SizeLimit = _options.DisconnectedCircuitMaxRetained, }
+            );
 
             _postEvictionCallback = new PostEvictionCallbackRegistration
             {
@@ -77,7 +77,9 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             if (!ConnectedCircuits.TryAdd(circuitHost.CircuitId, circuitHost))
             {
                 // This will likely never happen, except perhaps in unit tests, since CircuitIds are unique.
-                throw new ArgumentException($"Circuit with identity {circuitHost.CircuitId} is already registered.");
+                throw new ArgumentException(
+                    $"Circuit with identity {circuitHost.CircuitId} is already registered."
+                );
             }
 
             // Register for unhandled exceptions from the circuit. The registry is responsible for tearing
@@ -94,7 +96,9 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             {
                 if (DisconnectCore(circuitHost, connectionId))
                 {
-                    circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(() => circuitHost.OnConnectionDownAsync(default));
+                    circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(
+                        () => circuitHost.OnConnectionDownAsync(default)
+                    );
                 }
                 else
                 {
@@ -120,9 +124,19 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 return false;
             }
 
-            if (!string.Equals(circuitHost.Client.ConnectionId, connectionId, StringComparison.Ordinal))
+            if (
+                !string.Equals(
+                    circuitHost.Client.ConnectionId,
+                    connectionId,
+                    StringComparison.Ordinal
+                )
+            )
             {
-                Log.CircuitConnectedToDifferentConnection(_logger, circuitId, circuitHost.Client.ConnectionId);
+                Log.CircuitConnectedToDifferentConnection(
+                    _logger,
+                    circuitId,
+                    circuitHost.Client.ConnectionId
+                );
 
                 // The circuit is associated with a different connection. One way this could happen is when
                 // the client reconnects with a new connection before the OnDisconnect for the older
@@ -131,7 +145,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             }
 
             var result = ConnectedCircuits.TryRemove(circuitId, out circuitHost);
-            Debug.Assert(result, "This operation operates inside of a lock. We expect the previously inspected value to be still here.");
+            Debug.Assert(
+                result,
+                "This operation operates inside of a lock. We expect the previously inspected value to be still here."
+            );
 
             circuitHost.Client.SetDisconnected();
             RegisterDisconnectedCircuit(circuitHost);
@@ -143,15 +160,14 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 
         public void RegisterDisconnectedCircuit(CircuitHost circuitHost)
         {
-            var cancellationTokenSource = new CancellationTokenSource(_options.DisconnectedCircuitRetentionPeriod);
+            var cancellationTokenSource = new CancellationTokenSource(
+                _options.DisconnectedCircuitRetentionPeriod
+            );
             var entryOptions = new MemoryCacheEntryOptions
             {
                 Size = 1,
                 PostEvictionCallbacks = { _postEvictionCallback },
-                ExpirationTokens =
-                {
-                    new CancellationChangeToken(cancellationTokenSource.Token),
-                },
+                ExpirationTokens = { new CancellationChangeToken(cancellationTokenSource.Token), },
             };
 
             var entry = new DisconnectedCircuitEntry(circuitHost, cancellationTokenSource);
@@ -167,7 +183,12 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
         // 1. If the circuit is not found return null
         // 2. If the circuit is found, but fails to connect, we need to dispose it here and return null
         // 3. If everything goes well, return the circuit.
-        public virtual async Task<CircuitHost> ConnectAsync(CircuitId circuitId, IClientProxy clientProxy, string connectionId, CancellationToken cancellationToken)
+        public virtual async Task<CircuitHost> ConnectAsync(
+            CircuitId circuitId,
+            IClientProxy clientProxy,
+            string connectionId,
+            CancellationToken cancellationToken
+        )
         {
             Log.CircuitConnectStarted(_logger, circuitId);
 
@@ -182,7 +203,11 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 // Transition the host from disconnected to connected if it's available. In this critical section, we return
                 // an existing host if it's currently considered connected or transition a disconnected host to connected.
                 // Transferring also wires up the client to the new set.
-                (circuitHost, previouslyConnected) = ConnectCore(circuitId, clientProxy, connectionId);
+                (circuitHost, previouslyConnected) = ConnectCore(
+                    circuitId,
+                    clientProxy,
+                    connectionId
+                );
 
                 if (circuitHost == null)
                 {
@@ -197,17 +222,19 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 
                 // Dispatch the circuit handlers inside the sync context to ensure the order of execution. CircuitHost executes circuit handlers inside of
                 // the sync context.
-                circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(async () =>
-                {
-                    if (previouslyConnected)
+                circuitHandlerTask = circuitHost.Renderer.Dispatcher.InvokeAsync(
+                    async () =>
                     {
-                        // During reconnects, we may transition from Connect->Connect i.e.without ever having invoking OnConnectionDownAsync during
-                        // a formal client disconnect. To allow authors of CircuitHandlers to have reasonable expectations will pair the connection up with a connection down.
-                        await circuitHost.OnConnectionDownAsync(cancellationToken);
-                    }
+                        if (previouslyConnected)
+                        {
+                            // During reconnects, we may transition from Connect->Connect i.e.without ever having invoking OnConnectionDownAsync during
+                            // a formal client disconnect. To allow authors of CircuitHandlers to have reasonable expectations will pair the connection up with a connection down.
+                            await circuitHost.OnConnectionDownAsync(cancellationToken);
+                        }
 
-                    await circuitHost.OnConnectionUpAsync(cancellationToken);
-                });
+                        await circuitHost.OnConnectionUpAsync(cancellationToken);
+                    }
+                );
             }
 
             try
@@ -226,11 +253,19 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             }
         }
 
-        protected virtual (CircuitHost circuitHost, bool previouslyConnected) ConnectCore(CircuitId circuitId, IClientProxy clientProxy, string connectionId)
+        protected virtual (CircuitHost circuitHost, bool previouslyConnected) ConnectCore(
+            CircuitId circuitId,
+            IClientProxy clientProxy,
+            string connectionId
+        )
         {
             if (ConnectedCircuits.TryGetValue(circuitId, out var connectedCircuitHost))
             {
-                Log.ConnectingToActiveCircuit(_logger, connectedCircuitHost.CircuitId, connectionId);
+                Log.ConnectingToActiveCircuit(
+                    _logger,
+                    connectedCircuitHost.CircuitId,
+                    connectionId
+                );
 
                 // The host is still active i.e. the server hasn't detected the client disconnect.
                 // However the client reconnected establishing a new connection.
@@ -238,9 +273,18 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 return (connectedCircuitHost, true);
             }
 
-            if (DisconnectedCircuits.TryGetValue(circuitId.Secret, out DisconnectedCircuitEntry disconnectedEntry))
+            if (
+                DisconnectedCircuits.TryGetValue(
+                    circuitId.Secret,
+                    out DisconnectedCircuitEntry disconnectedEntry
+                )
+            )
             {
-                Log.ConnectingToDisconnectedCircuit(_logger, disconnectedEntry.CircuitHost.CircuitId, connectionId);
+                Log.ConnectingToDisconnectedCircuit(
+                    _logger,
+                    disconnectedEntry.CircuitHost.CircuitId,
+                    connectionId
+                );
 
                 // The host was in disconnected state. Transfer it to ConnectedCircuits so that it's no longer considered disconnected.
                 // First discard the CancellationTokenSource so that the cache entry does not expire.
@@ -256,7 +300,12 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             return default;
         }
 
-        protected virtual void OnEntryEvicted(object key, object value, EvictionReason reason, object state)
+        protected virtual void OnEntryEvicted(
+            object key,
+            object value,
+            EvictionReason reason,
+            object state
+        )
         {
             switch (reason)
             {
@@ -313,7 +362,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             DisconnectedCircuitEntry entry = default;
             lock (CircuitRegistryLock)
             {
-                if (ConnectedCircuits.TryGetValue(circuitId, out circuitHost) || DisconnectedCircuits.TryGetValue(circuitId.Secret, out entry))
+                if (
+                    ConnectedCircuits.TryGetValue(circuitId, out circuitHost)
+                    || DisconnectedCircuits.TryGetValue(circuitId.Secret, out entry)
+                )
                 {
                     circuitHost ??= entry.CircuitHost;
                     DisconnectedCircuits.Remove(circuitId.Secret);
@@ -334,7 +386,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 
         // We don't need to do anything with the exception here, logging and sending exceptions to the client
         // is done inside the circuit host.
-        private async void CircuitHost_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private async void CircuitHost_UnhandledException(
+            object sender,
+            UnhandledExceptionEventArgs e
+        )
         {
             var circuitHost = (CircuitHost)sender;
 
@@ -352,7 +407,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 
         private readonly struct DisconnectedCircuitEntry
         {
-            public DisconnectedCircuitEntry(CircuitHost circuitHost, CancellationTokenSource tokenSource)
+            public DisconnectedCircuitEntry(
+                CircuitHost circuitHost,
+                CancellationTokenSource tokenSource
+            )
             {
                 CircuitHost = circuitHost;
                 TokenSource = tokenSource;
@@ -364,38 +422,126 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 
         private static class Log
         {
-            private static readonly Action<ILogger, string, Exception> _exceptionDisposingCircuitHost;
-            private static readonly Action<ILogger, string, Exception> _unhandledExceptionDisposingTokenSource;
+            private static readonly Action<
+                ILogger,
+                string,
+                Exception
+            > _exceptionDisposingCircuitHost;
+            private static readonly Action<
+                ILogger,
+                string,
+                Exception
+            > _unhandledExceptionDisposingTokenSource;
             private static readonly Action<ILogger, CircuitId, Exception> _circuitReconnectStarted;
             private static readonly Action<ILogger, CircuitId, Exception> _failedToFindCircuit;
-            private static readonly Action<ILogger, CircuitId, string, Exception> _connectingToActiveCircuit;
-            private static readonly Action<ILogger, CircuitId, string, Exception> _connectingToDisconnectedCircuit;
-            private static readonly Action<ILogger, CircuitId, Exception> _failedToReconnectToCircuit;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                string,
+                Exception
+            > _connectingToActiveCircuit;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                string,
+                Exception
+            > _connectingToDisconnectedCircuit;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                Exception
+            > _failedToReconnectToCircuit;
             private static readonly Action<ILogger, CircuitId, Exception> _reconnectionSucceeded;
-            private static readonly Action<ILogger, CircuitId, string, Exception> _circuitDisconnectStarted;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                string,
+                Exception
+            > _circuitDisconnectStarted;
             private static readonly Action<ILogger, CircuitId, Exception> _circuitNotActive;
-            private static readonly Action<ILogger, CircuitId, string, Exception> _circuitConnectedToDifferentConnection;
-            private static readonly Action<ILogger, CircuitId, Exception> _circuitMarkedDisconnected;
-            private static readonly Action<ILogger, CircuitId, Exception> _circuitDisconnectedPermanently;
-            private static readonly Action<ILogger, CircuitId, EvictionReason, Exception> _circuitEvicted;
-            private static readonly Action<ILogger, CircuitId, Exception> _circuitExceptionHandlerFailed;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                string,
+                Exception
+            > _circuitConnectedToDifferentConnection;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                Exception
+            > _circuitMarkedDisconnected;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                Exception
+            > _circuitDisconnectedPermanently;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                EvictionReason,
+                Exception
+            > _circuitEvicted;
+            private static readonly Action<
+                ILogger,
+                CircuitId,
+                Exception
+            > _circuitExceptionHandlerFailed;
 
             private static class EventIds
             {
-                public static readonly EventId ExceptionDisposingCircuit = new EventId(100, "ExceptionDisposingCircuit");
-                public static readonly EventId ExceptionDisposingTokenSource = new EventId(101, "ExceptionDisposingTokenSource");
-                public static readonly EventId AttemptingToReconnect = new EventId(102, "AttemptingToReconnect");
-                public static readonly EventId FailedToFindCircuit = new EventId(104, "FailedToFindCircuit");
-                public static readonly EventId ConnectingToActiveCircuit = new EventId(105, "ConnectingToActiveCircuit");
-                public static readonly EventId ConnectingToDisconnectedCircuit = new EventId(106, "ConnectingToDisconnectedCircuit");
-                public static readonly EventId FailedToReconnectToCircuit = new EventId(107, "FailedToReconnectToCircuit");
-                public static readonly EventId CircuitDisconnectStarted = new EventId(108, "CircuitDisconnectStarted");
-                public static readonly EventId CircuitNotActive = new EventId(109, "CircuitNotActive");
-                public static readonly EventId CircuitConnectedToDifferentConnection = new EventId(110, "CircuitConnectedToDifferentConnection");
-                public static readonly EventId CircuitMarkedDisconnected = new EventId(111, "CircuitMarkedDisconnected");
+                public static readonly EventId ExceptionDisposingCircuit = new EventId(
+                    100,
+                    "ExceptionDisposingCircuit"
+                );
+                public static readonly EventId ExceptionDisposingTokenSource = new EventId(
+                    101,
+                    "ExceptionDisposingTokenSource"
+                );
+                public static readonly EventId AttemptingToReconnect = new EventId(
+                    102,
+                    "AttemptingToReconnect"
+                );
+                public static readonly EventId FailedToFindCircuit = new EventId(
+                    104,
+                    "FailedToFindCircuit"
+                );
+                public static readonly EventId ConnectingToActiveCircuit = new EventId(
+                    105,
+                    "ConnectingToActiveCircuit"
+                );
+                public static readonly EventId ConnectingToDisconnectedCircuit = new EventId(
+                    106,
+                    "ConnectingToDisconnectedCircuit"
+                );
+                public static readonly EventId FailedToReconnectToCircuit = new EventId(
+                    107,
+                    "FailedToReconnectToCircuit"
+                );
+                public static readonly EventId CircuitDisconnectStarted = new EventId(
+                    108,
+                    "CircuitDisconnectStarted"
+                );
+                public static readonly EventId CircuitNotActive = new EventId(
+                    109,
+                    "CircuitNotActive"
+                );
+                public static readonly EventId CircuitConnectedToDifferentConnection = new EventId(
+                    110,
+                    "CircuitConnectedToDifferentConnection"
+                );
+                public static readonly EventId CircuitMarkedDisconnected = new EventId(
+                    111,
+                    "CircuitMarkedDisconnected"
+                );
                 public static readonly EventId CircuitEvicted = new EventId(112, "CircuitEvicted");
-                public static readonly EventId CircuitDisconnectedPermanently = new EventId(113, "CircuitDisconnectedPermanently");
-                public static readonly EventId CircuitExceptionHandlerFailed = new EventId(114, "CircuitExceptionHandlerFailed");
+                public static readonly EventId CircuitDisconnectedPermanently = new EventId(
+                    113,
+                    "CircuitDisconnectedPermanently"
+                );
+                public static readonly EventId CircuitExceptionHandlerFailed = new EventId(
+                    114,
+                    "CircuitExceptionHandlerFailed"
+                );
             }
 
             static Log()
@@ -403,81 +549,98 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 _exceptionDisposingCircuitHost = LoggerMessage.Define<string>(
                     LogLevel.Error,
                     EventIds.ExceptionDisposingCircuit,
-                    "Unhandled exception disposing circuit host: {Message}");
+                    "Unhandled exception disposing circuit host: {Message}"
+                );
 
                 _unhandledExceptionDisposingTokenSource = LoggerMessage.Define<string>(
                     LogLevel.Debug,
                     EventIds.ExceptionDisposingTokenSource,
-                    "Exception thrown when disposing token source: {Message}");
+                    "Exception thrown when disposing token source: {Message}"
+                );
 
                 _circuitReconnectStarted = LoggerMessage.Define<CircuitId>(
                     LogLevel.Debug,
                     EventIds.AttemptingToReconnect,
-                    "Attempting to reconnect to Circuit with secret {CircuitHost}.");
+                    "Attempting to reconnect to Circuit with secret {CircuitHost}."
+                );
 
                 _failedToFindCircuit = LoggerMessage.Define<CircuitId>(
                     LogLevel.Debug,
                     EventIds.FailedToFindCircuit,
-                    "Failed to find a matching circuit for circuit secret {CircuitHost}.");
+                    "Failed to find a matching circuit for circuit secret {CircuitHost}."
+                );
 
                 _connectingToActiveCircuit = LoggerMessage.Define<CircuitId, string>(
                     LogLevel.Debug,
                     EventIds.ConnectingToActiveCircuit,
-                    "Transferring active circuit {CircuitId} to connection {ConnectionId}.");
+                    "Transferring active circuit {CircuitId} to connection {ConnectionId}."
+                );
 
                 _connectingToDisconnectedCircuit = LoggerMessage.Define<CircuitId, string>(
                     LogLevel.Debug,
                     EventIds.ConnectingToDisconnectedCircuit,
-                    "Transferring disconnected circuit {CircuitId} to connection {ConnectionId}.");
+                    "Transferring disconnected circuit {CircuitId} to connection {ConnectionId}."
+                );
 
                 _failedToReconnectToCircuit = LoggerMessage.Define<CircuitId>(
                     LogLevel.Debug,
                     EventIds.FailedToReconnectToCircuit,
-                    "Failed to reconnect to a circuit with id {CircuitId}.");
+                    "Failed to reconnect to a circuit with id {CircuitId}."
+                );
 
                 _reconnectionSucceeded = LoggerMessage.Define<CircuitId>(
                     LogLevel.Debug,
                     EventIds.FailedToReconnectToCircuit,
-                    "Reconnect to circuit with id {CircuitId} succeeded.");
+                    "Reconnect to circuit with id {CircuitId} succeeded."
+                );
 
                 _circuitDisconnectStarted = LoggerMessage.Define<CircuitId, string>(
                     LogLevel.Debug,
                     EventIds.CircuitDisconnectStarted,
-                    "Attempting to disconnect circuit with id {CircuitId} from connection {ConnectionId}.");
+                    "Attempting to disconnect circuit with id {CircuitId} from connection {ConnectionId}."
+                );
 
                 _circuitNotActive = LoggerMessage.Define<CircuitId>(
                     LogLevel.Debug,
                     EventIds.CircuitNotActive,
-                    "Failed to disconnect circuit with id {CircuitId}. The circuit is not active.");
+                    "Failed to disconnect circuit with id {CircuitId}. The circuit is not active."
+                );
 
                 _circuitConnectedToDifferentConnection = LoggerMessage.Define<CircuitId, string>(
                     LogLevel.Debug,
                     EventIds.CircuitConnectedToDifferentConnection,
-                    "Failed to disconnect circuit with id {CircuitId}. The circuit is connected to {ConnectionId}.");
+                    "Failed to disconnect circuit with id {CircuitId}. The circuit is connected to {ConnectionId}."
+                );
 
                 _circuitMarkedDisconnected = LoggerMessage.Define<CircuitId>(
                     LogLevel.Debug,
                     EventIds.CircuitMarkedDisconnected,
-                    "Circuit with id {CircuitId} is disconnected.");
+                    "Circuit with id {CircuitId} is disconnected."
+                );
 
                 _circuitDisconnectedPermanently = LoggerMessage.Define<CircuitId>(
                     LogLevel.Debug,
                     EventIds.CircuitDisconnectedPermanently,
-                    "Circuit with id {CircuitId} has been removed from the registry for permanent disconnection.");
+                    "Circuit with id {CircuitId} has been removed from the registry for permanent disconnection."
+                );
 
                 _circuitEvicted = LoggerMessage.Define<CircuitId, EvictionReason>(
                     LogLevel.Debug,
                     EventIds.CircuitEvicted,
-                    "Circuit with id {CircuitId} evicted due to {EvictionReason}.");
+                    "Circuit with id {CircuitId} evicted due to {EvictionReason}."
+                );
 
                 _circuitExceptionHandlerFailed = LoggerMessage.Define<CircuitId>(
                     LogLevel.Error,
                     EventIds.CircuitExceptionHandlerFailed,
-                    "Exception handler for {CircuitId} failed.");
+                    "Exception handler for {CircuitId} failed."
+                );
             }
 
-            public static void UnhandledExceptionDisposingCircuitHost(ILogger logger, Exception exception) =>
-                _exceptionDisposingCircuitHost(logger, exception.Message, exception);
+            public static void UnhandledExceptionDisposingCircuitHost(
+                ILogger logger,
+                Exception exception
+            ) => _exceptionDisposingCircuitHost(logger, exception.Message, exception);
 
             public static void ExceptionDisposingTokenSource(ILogger logger, Exception exception) =>
                 _unhandledExceptionDisposingTokenSource(logger, exception.Message, exception);
@@ -488,38 +651,61 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             public static void FailedToFindCircuit(ILogger logger, CircuitId circuitId) =>
                 _failedToFindCircuit(logger, circuitId, null);
 
-            public static void ConnectingToActiveCircuit(ILogger logger, CircuitId circuitId, string connectionId) =>
-                _connectingToActiveCircuit(logger, circuitId, connectionId, null);
+            public static void ConnectingToActiveCircuit(
+                ILogger logger,
+                CircuitId circuitId,
+                string connectionId
+            ) => _connectingToActiveCircuit(logger, circuitId, connectionId, null);
 
-            public static void ConnectingToDisconnectedCircuit(ILogger logger, CircuitId circuitId, string connectionId) =>
-                _connectingToDisconnectedCircuit(logger, circuitId, connectionId, null);
+            public static void ConnectingToDisconnectedCircuit(
+                ILogger logger,
+                CircuitId circuitId,
+                string connectionId
+            ) => _connectingToDisconnectedCircuit(logger, circuitId, connectionId, null);
 
-            public static void FailedToReconnectToCircuit(ILogger logger, CircuitId circuitId, Exception exception = null) =>
-                _failedToReconnectToCircuit(logger, circuitId, exception);
+            public static void FailedToReconnectToCircuit(
+                ILogger logger,
+                CircuitId circuitId,
+                Exception exception = null
+            ) => _failedToReconnectToCircuit(logger, circuitId, exception);
 
             public static void ReconnectionSucceeded(ILogger logger, CircuitId circuitId) =>
                 _reconnectionSucceeded(logger, circuitId, null);
 
-            public static void CircuitDisconnectStarted(ILogger logger, CircuitId circuitId, string connectionId) =>
-                _circuitDisconnectStarted(logger, circuitId, connectionId, null);
+            public static void CircuitDisconnectStarted(
+                ILogger logger,
+                CircuitId circuitId,
+                string connectionId
+            ) => _circuitDisconnectStarted(logger, circuitId, connectionId, null);
 
             public static void CircuitNotActive(ILogger logger, CircuitId circuitId) =>
                 _circuitNotActive(logger, circuitId, null);
 
-            public static void CircuitConnectedToDifferentConnection(ILogger logger, CircuitId circuitId, string connectionId) =>
-                _circuitConnectedToDifferentConnection(logger, circuitId, connectionId, null);
+            public static void CircuitConnectedToDifferentConnection(
+                ILogger logger,
+                CircuitId circuitId,
+                string connectionId
+            ) => _circuitConnectedToDifferentConnection(logger, circuitId, connectionId, null);
 
             public static void CircuitMarkedDisconnected(ILogger logger, CircuitId circuitId) =>
                 _circuitMarkedDisconnected(logger, circuitId, null);
 
-            public static void CircuitDisconnectedPermanently(ILogger logger, CircuitId circuitId) =>
-                _circuitDisconnectedPermanently(logger, circuitId, null);
+            public static void CircuitDisconnectedPermanently(
+                ILogger logger,
+                CircuitId circuitId
+            ) => _circuitDisconnectedPermanently(logger, circuitId, null);
 
-            public static void CircuitEvicted(ILogger logger, CircuitId circuitId, EvictionReason evictionReason) =>
-               _circuitEvicted(logger, circuitId, evictionReason, null);
+            public static void CircuitEvicted(
+                ILogger logger,
+                CircuitId circuitId,
+                EvictionReason evictionReason
+            ) => _circuitEvicted(logger, circuitId, evictionReason, null);
 
-            public static void CircuitExceptionHandlerFailed(ILogger logger, CircuitId circuitId, Exception exception) =>
-                _circuitExceptionHandlerFailed(logger, circuitId, exception);
+            public static void CircuitExceptionHandlerFailed(
+                ILogger logger,
+                CircuitId circuitId,
+                Exception exception
+            ) => _circuitExceptionHandlerFailed(logger, circuitId, exception);
         }
     }
 }

@@ -30,7 +30,7 @@ public class Test
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public void DestroyObj()
         {
-            obj = null;     // this will collect the obj even if we have KeepAlive()		
+            obj = null; // this will collect the obj even if we have KeepAlive()
         }
 
         public void RunTest()
@@ -41,7 +41,7 @@ public class Test
             GC.WaitForPendingFinalizers();
             GC.Collect();
 
-            GC.KeepAlive(obj);  // will keep alive 'obj' till this point
+            GC.KeepAlive(obj); // will keep alive 'obj' till this point
         }
     }
 

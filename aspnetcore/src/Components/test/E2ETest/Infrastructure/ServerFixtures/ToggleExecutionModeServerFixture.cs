@@ -8,8 +8,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 {
-    public class ToggleExecutionModeServerFixture<TClientProgram>
-        : ServerFixture
+    public class ToggleExecutionModeServerFixture<TClientProgram> : ServerFixture
     {
         public string PathBase { get; set; }
 
@@ -24,8 +23,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
 
         public void UseAspNetHost(AspNetSiteServerFixture.BuildWebHost buildWebHostMethod)
         {
-            _buildWebHostMethod = buildWebHostMethod
-                ?? throw new ArgumentNullException(nameof(buildWebHostMethod));
+            _buildWebHostMethod =
+                buildWebHostMethod ?? throw new ArgumentNullException(nameof(buildWebHostMethod));
         }
 
         protected override string StartAndGetRootUri()
@@ -62,12 +61,18 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures
             _serverToDispose?.Dispose();
         }
 
-        internal ToggleExecutionModeServerFixture<TClientProgram> WithAdditionalArguments(string [] additionalArguments)
+        internal ToggleExecutionModeServerFixture<TClientProgram> WithAdditionalArguments(
+            string[] additionalArguments
+        )
         {
             AspNetFixtureAdditionalArguments.AddRange(additionalArguments);
             return this;
         }
     }
 
-    public enum ExecutionMode { Client, Server }
+    public enum ExecutionMode
+    {
+        Client,
+        Server
+    }
 }

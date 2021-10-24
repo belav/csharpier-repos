@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,15 +19,21 @@ namespace HealthChecksSample
         public void ConfigureServices(IServiceCollection services)
         {
             // Registers required services for health checks
-            services.AddHealthChecks()
+            services
+                .AddHealthChecks()
                 // Add a health check for a SQL database
-                .AddCheck("MyDatabase", new SqlConnectionHealthCheck(Configuration["ConnectionStrings:DefaultConnection"]));
+                .AddCheck(
+                    "MyDatabase",
+                    new SqlConnectionHealthCheck(
+                        Configuration["ConnectionStrings:DefaultConnection"]
+                    )
+                );
         }
 
         public void Configure(IApplicationBuilder app)
         {
             // This will register the health checks middleware at the URL /health.
-            // 
+            //
             // By default health checks will return a 200 with 'Healthy' when the database is responsive
             // - We've registered a SqlConnectionHealthCheck
             // - The default response writer writes the HealthCheckStatus as text/plain content
@@ -37,10 +42,12 @@ namespace HealthChecksSample
             // that want to check for 'liveness' of an application with a database.
             app.UseHealthChecks("/health");
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Go to /health to see the health status");
-            });
+            app.Run(
+                async (context) =>
+                {
+                    await context.Response.WriteAsync("Go to /health to see the health status");
+                }
+            );
         }
     }
 }

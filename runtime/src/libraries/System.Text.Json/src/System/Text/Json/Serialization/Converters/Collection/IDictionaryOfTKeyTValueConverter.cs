@@ -15,14 +15,20 @@ namespace System.Text.Json.Serialization.Converters
         where TCollection : IDictionary<TKey, TValue>
         where TKey : notnull
     {
-        protected override void Add(TKey key, in TValue value, JsonSerializerOptions options, ref ReadStack state)
+        protected override void Add(
+            TKey key,
+            in TValue value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
             TCollection collection = (TCollection)state.Current.ReturnValue!;
             collection[key] = value;
             if (IsValueType)
             {
                 state.Current.ReturnValue = collection;
-            };
+            }
+            ;
         }
 
         protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state)
@@ -33,7 +39,11 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (!TypeToConvert.IsAssignableFrom(RuntimeType))
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = new Dictionary<TKey, TValue>();
@@ -42,14 +52,22 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (typeInfo.CreateObject == null)
                 {
-                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 TCollection returnValue = (TCollection)typeInfo.CreateObject()!;
 
                 if (returnValue.IsReadOnly)
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = returnValue;
@@ -60,7 +78,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             TCollection value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             IEnumerator<KeyValuePair<TKey, TValue>> enumerator;
             if (state.Current.CollectionEnumerator == null)
@@ -74,7 +93,8 @@ namespace System.Text.Json.Serialization.Converters
             }
             else
             {
-                enumerator = (IEnumerator<KeyValuePair<TKey, TValue>>)state.Current.CollectionEnumerator;
+                enumerator =
+                    (IEnumerator<KeyValuePair<TKey, TValue>>)state.Current.CollectionEnumerator;
             }
 
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;

@@ -39,7 +39,6 @@ namespace OLEDB.Test.ModuleCore
             public string DoubleQuote = "\"";
         };
 
-
         //Methods
         public static MyDict<string, string> ParseKeywords(string str)
         {
@@ -198,7 +197,8 @@ namespace OLEDB.Test.ModuleCore
                     default:
                         Common.Assert(false, "Unhandled State " + Common.ToString(state));
                         break;
-                };
+                }
+                ;
             }
             return keywords;
         }

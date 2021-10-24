@@ -16,14 +16,13 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         [InlineData("TodoCalendar", ".AspNetCore.Antiforgery.7mK1hBEBwYs")]
         public void AntiforgeryOptionsSetup_SetsDefaultCookieName_BasedOnApplicationId(
             string applicationId,
-            string expectedCookieName)
+            string expectedCookieName
+        )
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddAntiforgery();
-            serviceCollection
-                .AddDataProtection()
-                .SetApplicationName(applicationId);
+            serviceCollection.AddDataProtection().SetApplicationName(applicationId);
 
             var services = serviceCollection.BuildServiceProvider();
             var options = services.GetRequiredService<IOptions<AntiforgeryOptions>>();
@@ -40,15 +39,15 @@ namespace Microsoft.AspNetCore.Antiforgery.Internal
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
-            serviceCollection.Configure<AntiforgeryOptions>(o =>
-            {
-                Assert.Null(o.Cookie.Name);
-                o.Cookie.Name = "antiforgery";
-            });
+            serviceCollection.Configure<AntiforgeryOptions>(
+                o =>
+                {
+                    Assert.Null(o.Cookie.Name);
+                    o.Cookie.Name = "antiforgery";
+                }
+            );
             serviceCollection.AddAntiforgery();
-            serviceCollection
-                .AddDataProtection()
-                .SetApplicationName("HelloWorldApp");
+            serviceCollection.AddDataProtection().SetApplicationName("HelloWorldApp");
 
             var services = serviceCollection.BuildServiceProvider();
             var options = services.GetRequiredService<IOptions<AntiforgeryOptions>>();

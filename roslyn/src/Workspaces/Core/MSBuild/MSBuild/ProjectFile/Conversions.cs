@@ -11,10 +11,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
     /// </summary>
     internal static class Conversions
     {
-        public static bool ToBool(string? value)
-            => value != null
-            && (string.Equals(bool.TrueString, value, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals("On", value, StringComparison.OrdinalIgnoreCase));
+        public static bool ToBool(string? value) =>
+            value != null
+            && (
+                string.Equals(bool.TrueString, value, StringComparison.OrdinalIgnoreCase)
+                || string.Equals("On", value, StringComparison.OrdinalIgnoreCase)
+            );
 
         public static int ToInt(string? value)
         {
@@ -50,8 +52,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
         }
 
-        public static TEnum? ToEnum<TEnum>(string? value, bool ignoreCase)
-            where TEnum : struct
+        public static TEnum? ToEnum<TEnum>(string? value, bool ignoreCase) where TEnum : struct
         {
             if (value == null)
             {
@@ -60,8 +61,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             else
             {
                 return Enum.TryParse<TEnum>(value, ignoreCase, out var result)
-                    ? result
-                    : (TEnum?)null;
+                  ? result
+                  : (TEnum?)null;
             }
         }
     }

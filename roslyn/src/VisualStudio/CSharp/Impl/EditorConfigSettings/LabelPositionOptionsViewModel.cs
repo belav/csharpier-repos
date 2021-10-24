@@ -14,23 +14,19 @@ using Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings
 {
-
     [Export(typeof(IEnumSettingViewModelFactory)), Shared]
     internal class LabelPositionOptionsViewModelFactory : IEnumSettingViewModelFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LabelPositionOptionsViewModelFactory()
-        {
-        }
+        public LabelPositionOptionsViewModelFactory() { }
 
         public IEnumSettingViewModel CreateViewModel(FormattingSetting setting)
         {
             return new LabelPositionOptionsViewModel(setting);
         }
 
-        public bool IsSupported(OptionKey2 key)
-            => key.Option.Type == typeof(LabelPositionOptions);
+        public bool IsSupported(OptionKey2 key) => key.Option.Type == typeof(LabelPositionOptions);
     }
 
     internal class LabelPositionOptionsViewModel : EnumSettingViewModel<LabelPositionOptions>
@@ -52,15 +48,24 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings
             return (LabelPositionOptions)_setting.GetValue()!;
         }
 
-        protected override IReadOnlyDictionary<string, LabelPositionOptions> GetValuesAndDescriptions()
+        protected override IReadOnlyDictionary<
+            string,
+            LabelPositionOptions
+        > GetValuesAndDescriptions()
         {
             return EnumerateOptions().ToDictionary(x => x.description, x => x.value);
 
             static IEnumerable<(string description, LabelPositionOptions value)> EnumerateOptions()
             {
-                yield return ("place goto labels in leftmost column", LabelPositionOptions.LeftMost);
+                yield return (
+                    "place goto labels in leftmost column",
+                    LabelPositionOptions.LeftMost
+                );
                 yield return ("indent labels normally", LabelPositionOptions.NoIndent);
-                yield return ("place goto labels one indent less than current", LabelPositionOptions.OneLess);
+                yield return (
+                    "place goto labels one indent less than current",
+                    LabelPositionOptions.OneLess
+                );
             }
         }
     }

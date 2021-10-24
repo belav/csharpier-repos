@@ -59,17 +59,17 @@ namespace Microsoft.CodeAnalysis
             }
 
             // Selection doesn't intersect node -> can't be underselecting.
-            // RATIONALE: If there's no intersection then we got the node in some other way, e.g. 
-            // extracting it after user selected `;` at the end of an expression statement 
+            // RATIONALE: If there's no intersection then we got the node in some other way, e.g.
+            // extracting it after user selected `;` at the end of an expression statement
             // `foo()[|;|]` for `foo()` node.
             if (!node.FullSpan.OverlapsWith(selection))
             {
                 return false;
             }
 
-            // Only precisely one token of the node is selected -> treat is as empty selection -> not 
-            // underselected. The rationale is that if only one Token is selected then the selection 
-            // wasn't about precisely getting the one node and nothing else & therefore we should treat 
+            // Only precisely one token of the node is selected -> treat is as empty selection -> not
+            // underselected. The rationale is that if only one Token is selected then the selection
+            // wasn't about precisely getting the one node and nothing else & therefore we should treat
             // it as empty selection.
             if (node.FullSpan.Contains(selection.Start))
             {
@@ -90,7 +90,7 @@ namespace Microsoft.CodeAnalysis
 
             // Node is underselected if either the first (lowest) child ends before the selection has started
             // or the last child starts after the selection ends (i.e. one of them is completely on the outside of selection).
-            // It's a crude heuristic but it allows omitting parts of nodes or trivial tokens from the beginning/end 
+            // It's a crude heuristic but it allows omitting parts of nodes or trivial tokens from the beginning/end
             // but fires up e.g.: `1 + [|2 + 3|]`.
             return beginningNode.Span.End <= selection.Start || endNode.Span.Start >= selection.End;
         }
@@ -102,7 +102,11 @@ namespace Microsoft.CodeAnalysis
         /// Returns unchanged <paramref name="span"/> in case <see cref="TextSpan.IsEmpty"/>.
         /// Returns empty Span with original <see cref="TextSpan.Start"/> in case it contains only whitespace.
         /// </remarks>
-        public static async Task<TextSpan> GetTrimmedTextSpanAsync(Document document, TextSpan span, CancellationToken cancellationToken)
+        public static async Task<TextSpan> GetTrimmedTextSpanAsync(
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
             if (span.IsEmpty)
             {

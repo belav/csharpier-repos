@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     InternalEntityEntry.PropertyFlag.Modified,
                     InternalEntityEntry.PropertyFlag.Null,
                     InternalEntityEntry.PropertyFlag.Unknown,
-                    InternalEntityEntry.PropertyFlag.IsLoaded);
+                    InternalEntityEntry.PropertyFlag.IsLoaded
+                );
             }
         }
 
@@ -31,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     InternalEntityEntry.PropertyFlag.Null,
                     InternalEntityEntry.PropertyFlag.Modified,
                     InternalEntityEntry.PropertyFlag.Unknown,
-                    InternalEntityEntry.PropertyFlag.IsLoaded);
+                    InternalEntityEntry.PropertyFlag.IsLoaded
+                );
             }
         }
 
@@ -45,7 +47,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     InternalEntityEntry.PropertyFlag.Unknown,
                     InternalEntityEntry.PropertyFlag.Modified,
                     InternalEntityEntry.PropertyFlag.Null,
-                    InternalEntityEntry.PropertyFlag.IsLoaded);
+                    InternalEntityEntry.PropertyFlag.IsLoaded
+                );
             }
         }
 
@@ -59,7 +62,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     InternalEntityEntry.PropertyFlag.IsLoaded,
                     InternalEntityEntry.PropertyFlag.Modified,
                     InternalEntityEntry.PropertyFlag.Null,
-                    InternalEntityEntry.PropertyFlag.Unknown);
+                    InternalEntityEntry.PropertyFlag.Unknown
+                );
             }
         }
 
@@ -68,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             InternalEntityEntry.PropertyFlag propertyFlag,
             InternalEntityEntry.PropertyFlag unusedFlag1,
             InternalEntityEntry.PropertyFlag unusedFlag2,
-            InternalEntityEntry.PropertyFlag unusedFlag3)
+            InternalEntityEntry.PropertyFlag unusedFlag3
+        )
         {
             var data = new InternalEntityEntry.StateData(propertyCount, propertyCount);
 

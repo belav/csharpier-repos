@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     {
         internal static readonly IActionContextAccessor Null = new NullActionContextAccessor();
 
-        private static readonly AsyncLocal<ActionContext> _storage = new AsyncLocal<ActionContext>();
+        private static readonly AsyncLocal<ActionContext> _storage =
+            new AsyncLocal<ActionContext>();
 
         /// <inheritdoc/>
         [DisallowNull]

@@ -26,10 +26,7 @@ internal static partial class Interop
             public bool IsZero
             {
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                get
-                {
-                    return dwLower == IntPtr.Zero && dwUpper == IntPtr.Zero;
-                }
+                get { return dwLower == IntPtr.Zero && dwUpper == IntPtr.Zero; }
             }
 
             internal void SetToInvalid()
@@ -40,7 +37,9 @@ internal static partial class Interop
 
             public override string ToString()
             {
-                { return dwLower.ToString("x") + ":" + dwUpper.ToString("x"); }
+                {
+                    return dwLower.ToString("x") + ":" + dwUpper.ToString("x");
+                }
             }
         }
 
@@ -59,14 +58,13 @@ internal static partial class Interop
             SECPKG_ATTR_ENDPOINT_BINDINGS = 26,
             SECPKG_ATTR_CLIENT_SPECIFIED_TARGET = 27,
             SECPKG_ATTR_APPLICATION_PROTOCOL = 35,
-
             // minschannel.h
-            SECPKG_ATTR_REMOTE_CERT_CONTEXT = 0x53,    // returns PCCERT_CONTEXT
-            SECPKG_ATTR_LOCAL_CERT_CONTEXT = 0x54,     // returns PCCERT_CONTEXT
-            SECPKG_ATTR_ROOT_STORE = 0x55,             // returns HCERTCONTEXT to the root store
-            SECPKG_ATTR_ISSUER_LIST_EX = 0x59,         // returns SecPkgContext_IssuerListInfoEx
-            SECPKG_ATTR_CONNECTION_INFO = 0x5A,        // returns SecPkgContext_ConnectionInfo
-            SECPKG_ATTR_CIPHER_INFO = 0x64,            // returns SecPkgContext_CipherInfo
+            SECPKG_ATTR_REMOTE_CERT_CONTEXT = 0x53, // returns PCCERT_CONTEXT
+            SECPKG_ATTR_LOCAL_CERT_CONTEXT = 0x54, // returns PCCERT_CONTEXT
+            SECPKG_ATTR_ROOT_STORE = 0x55, // returns HCERTCONTEXT to the root store
+            SECPKG_ATTR_ISSUER_LIST_EX = 0x59, // returns SecPkgContext_IssuerListInfoEx
+            SECPKG_ATTR_CONNECTION_INFO = 0x5A, // returns SecPkgContext_ConnectionInfo
+            SECPKG_ATTR_CIPHER_INFO = 0x64, // returns SecPkgContext_CipherInfo
             SECPKG_ATTR_UI_INFO = 0x68, // sets SEcPkgContext_UiInfo
         }
 
@@ -103,10 +101,8 @@ internal static partial class Interop
             Confidentiality = 0x00000010,
             UseSessionKey = 0x00000020,
             AllocateMemory = 0x00000100,
-
             // Connection semantics must be used.
             Connection = 0x00000800,
-
             // Client applications requiring extended error messages specify the
             // ISC_REQ_EXTENDED_ERROR flag when calling the InitializeSecurityContext
             // Server applications requiring extended error messages set
@@ -121,18 +117,15 @@ internal static partial class Interop
             AcceptStream = 0x00010000,
             // Buffer integrity can be verified; however, replayed
             // and out-of-sequence messages will not be detected
-            InitIntegrity = 0x00010000,       // ISC_REQ_INTEGRITY
-            AcceptIntegrity = 0x00020000,       // ASC_REQ_INTEGRITY
-
-            InitManualCredValidation = 0x00080000,   // ISC_REQ_MANUAL_CRED_VALIDATION
-            InitUseSuppliedCreds = 0x00000080,   // ISC_REQ_USE_SUPPLIED_CREDS
-            InitIdentify = 0x00020000,   // ISC_REQ_IDENTIFY
-            AcceptIdentify = 0x00080000,   // ASC_REQ_IDENTIFY
-
-            ProxyBindings = 0x04000000,   // ASC_REQ_PROXY_BINDINGS
-            AllowMissingBindings = 0x10000000,   // ASC_REQ_ALLOW_MISSING_BINDINGS
-
-            UnverifiedTargetName = 0x20000000,   // ISC_REQ_UNVERIFIED_TARGET_NAME
+            InitIntegrity = 0x00010000, // ISC_REQ_INTEGRITY
+            AcceptIntegrity = 0x00020000, // ASC_REQ_INTEGRITY
+            InitManualCredValidation = 0x00080000, // ISC_REQ_MANUAL_CRED_VALIDATION
+            InitUseSuppliedCreds = 0x00000080, // ISC_REQ_USE_SUPPLIED_CREDS
+            InitIdentify = 0x00020000, // ISC_REQ_IDENTIFY
+            AcceptIdentify = 0x00080000, // ASC_REQ_IDENTIFY
+            ProxyBindings = 0x04000000, // ASC_REQ_PROXY_BINDINGS
+            AllowMissingBindings = 0x10000000, // ASC_REQ_ALLOW_MISSING_BINDINGS
+            UnverifiedTargetName = 0x20000000, // ISC_REQ_UNVERIFIED_TARGET_NAME
         }
 
         internal enum Endianness
@@ -180,11 +173,11 @@ internal static partial class Interop
 
             public Crypt32.CERT_CONTEXT** paCred;
 
-            public IntPtr hRootStore;               // == always null, OTHERWISE NOT RELIABLE
+            public IntPtr hRootStore; // == always null, OTHERWISE NOT RELIABLE
             public int cMappers;
-            public IntPtr aphMappers;               // == always null, OTHERWISE NOT RELIABLE
+            public IntPtr aphMappers; // == always null, OTHERWISE NOT RELIABLE
             public int cSupportedAlgs;
-            public IntPtr palgSupportedAlgs;       // == always null, OTHERWISE NOT RELIABLE
+            public IntPtr palgSupportedAlgs; // == always null, OTHERWISE NOT RELIABLE
             public int grbitEnabledProtocols;
             public int dwMinimumCipherStrength;
             public int dwMaximumCipherStrength;
@@ -217,9 +210,9 @@ internal static partial class Interop
 
             public Crypt32.CERT_CONTEXT** paCred;
 
-            public IntPtr hRootStore;               // == always null, OTHERWISE NOT RELIABLE
+            public IntPtr hRootStore; // == always null, OTHERWISE NOT RELIABLE
             public int cMappers;
-            public IntPtr aphMappers;               // == always null, OTHERWISE NOT RELIABLE
+            public IntPtr aphMappers; // == always null, OTHERWISE NOT RELIABLE
 
             public int dwSessionLifespan;
             public SCH_CREDENTIALS.Flags dwFlags;
@@ -244,7 +237,7 @@ internal static partial class Interop
                 SCH_CRED_IGNORE_REVOCATION_OFFLINE = 0x1000,
                 SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE = 0x2000,
                 SCH_SEND_ROOT_CERT = 0x40000,
-                SCH_SEND_AUX_RECORD =   0x00200000,
+                SCH_SEND_AUX_RECORD = 0x00200000,
                 SCH_USE_STRONG_CRYPTO = 0x00400000,
                 SCH_USE_PRESHAREDKEY_ONLY = 0x800000,
                 SCH_ALLOW_NULL_ENCRYPTION = 0x02000000,
@@ -254,39 +247,39 @@ internal static partial class Interop
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct TLS_PARAMETERS
         {
-            public int cAlpnIds;                        // Valid for server applications only. Must be zero otherwise. Number of ALPN IDs in rgstrAlpnIds; set to 0 if applies to all.
-            public IntPtr rgstrAlpnIds;                 // Valid for server applications only. Must be NULL otherwise. Array of ALPN IDs that the following settings apply to; set to NULL if applies to all.
-            public uint grbitDisabledProtocols;         // List protocols you DO NOT want negotiated.
-            public int cDisabledCrypto;                 // Number of CRYPTO_SETTINGS structures; set to 0 if there are none.
-            public CRYPTO_SETTINGS* pDisabledCrypto;    // Array of CRYPTO_SETTINGS structures; set to NULL if there are none;
-            public TLS_PARAMETERS.Flags dwFlags;        // Optional flags to pass; set to 0 if there are none.
+            public int cAlpnIds; // Valid for server applications only. Must be zero otherwise. Number of ALPN IDs in rgstrAlpnIds; set to 0 if applies to all.
+            public IntPtr rgstrAlpnIds; // Valid for server applications only. Must be NULL otherwise. Array of ALPN IDs that the following settings apply to; set to NULL if applies to all.
+            public uint grbitDisabledProtocols; // List protocols you DO NOT want negotiated.
+            public int cDisabledCrypto; // Number of CRYPTO_SETTINGS structures; set to 0 if there are none.
+            public CRYPTO_SETTINGS* pDisabledCrypto; // Array of CRYPTO_SETTINGS structures; set to NULL if there are none;
+            public TLS_PARAMETERS.Flags dwFlags; // Optional flags to pass; set to 0 if there are none.
 
             [Flags]
             public enum Flags
             {
                 Zero = 0,
-                TLS_PARAMS_OPTIONAL = 0x01,     // Valid for server applications only. Must be zero otherwise.
-                                                // TLS_PARAMETERS that will only be honored if they do not cause this server to terminate the handshake.
+                TLS_PARAMS_OPTIONAL = 0x01, // Valid for server applications only. Must be zero otherwise.
+                // TLS_PARAMETERS that will only be honored if they do not cause this server to terminate the handshake.
             }
         }
 
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct CRYPTO_SETTINGS
         {
-            public TlsAlgorithmUsage eAlgorithmUsage;   // How this algorithm is being used.
-            public UNICODE_STRING* strCngAlgId;         // CNG algorithm identifier.
-            public int cChainingModes;                  // Set to 0 if CNG algorithm does not have a chaining mode.
-            public UNICODE_STRING* rgstrChainingModes;  // Set to NULL if CNG algorithm does not have a chaining mode.
-            public int dwMinBitLength;                  // Minimum bit length for the specified CNG algorithm. Set to 0 if not defined or CNG algorithm implies bit length.
-            public int dwMaxBitLength;                  // Maximum bit length for the specified CNG algorithm. Set to 0 if not defined or CNG algorithm implies bit length.
+            public TlsAlgorithmUsage eAlgorithmUsage; // How this algorithm is being used.
+            public UNICODE_STRING* strCngAlgId; // CNG algorithm identifier.
+            public int cChainingModes; // Set to 0 if CNG algorithm does not have a chaining mode.
+            public UNICODE_STRING* rgstrChainingModes; // Set to NULL if CNG algorithm does not have a chaining mode.
+            public int dwMinBitLength; // Minimum bit length for the specified CNG algorithm. Set to 0 if not defined or CNG algorithm implies bit length.
+            public int dwMaxBitLength; // Maximum bit length for the specified CNG algorithm. Set to 0 if not defined or CNG algorithm implies bit length.
 
             public enum TlsAlgorithmUsage
             {
-                TlsParametersCngAlgUsageKeyExchange,    // Key exchange algorithm. RSA, ECHDE, DHE, etc.
-                TlsParametersCngAlgUsageSignature,      // Signature algorithm. RSA, DSA, ECDSA, etc.
-                TlsParametersCngAlgUsageCipher,         // Encryption algorithm. AES, DES, RC4, etc.
-                TlsParametersCngAlgUsageDigest,         // Digest of cipher suite. SHA1, SHA256, SHA384, etc.
-                TlsParametersCngAlgUsageCertSig         // Signature and/or hash used to sign certificate. RSA, DSA, ECDSA, SHA1, SHA256, etc.
+                TlsParametersCngAlgUsageKeyExchange, // Key exchange algorithm. RSA, ECHDE, DHE, etc.
+                TlsParametersCngAlgUsageSignature, // Signature algorithm. RSA, DSA, ECDSA, etc.
+                TlsParametersCngAlgUsageCipher, // Encryption algorithm. AES, DES, RC4, etc.
+                TlsParametersCngAlgUsageDigest, // Digest of cipher suite. SHA1, SHA256, SHA384, etc.
+                TlsParametersCngAlgUsageCertSig // Signature and/or hash used to sign certificate. RSA, DSA, ECDSA, SHA1, SHA256, etc.
             }
         }
 
@@ -317,160 +310,183 @@ internal static partial class Interop
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern int EncryptMessage(
-              ref CredHandle contextHandle,
-              [In] uint qualityOfProtection,
-              [In, Out] ref SecBufferDesc inputOutput,
-              [In] uint sequenceNumber
-              );
+            ref CredHandle contextHandle,
+            [In] uint qualityOfProtection,
+            [In, Out] ref SecBufferDesc inputOutput,
+            [In] uint sequenceNumber
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern unsafe int DecryptMessage(
-              [In] ref CredHandle contextHandle,
-              [In, Out] ref SecBufferDesc inputOutput,
-              [In] uint sequenceNumber,
-                   uint* qualityOfProtection
-              );
+            [In] ref CredHandle contextHandle,
+            [In, Out] ref SecBufferDesc inputOutput,
+            [In] uint sequenceNumber,
+            uint* qualityOfProtection
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern int QuerySecurityContextToken(
             ref CredHandle phContext,
-            [Out] out SecurityContextTokenHandle handle);
+            [Out] out SecurityContextTokenHandle handle
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
-        internal static extern int FreeContextBuffer(
-            [In] IntPtr contextBuffer);
+        internal static extern int FreeContextBuffer([In] IntPtr contextBuffer);
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
-        internal static extern int FreeCredentialsHandle(
-              ref CredHandle handlePtr
-              );
+        internal static extern int FreeCredentialsHandle(ref CredHandle handlePtr);
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
-        internal static extern int DeleteSecurityContext(
-              ref CredHandle handlePtr
-              );
+        internal static extern int DeleteSecurityContext(ref CredHandle handlePtr);
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern unsafe int AcceptSecurityContext(
-                  ref CredHandle credentialHandle,
-                  [In] void* inContextPtr,
-                  [In] SecBufferDesc* inputBuffer,
-                  [In] ContextFlags inFlags,
-                  [In] Endianness endianness,
-                  ref CredHandle outContextPtr,
-                  [In, Out] ref SecBufferDesc outputBuffer,
-                  [In, Out] ref ContextFlags attributes,
-                  out long timeStamp
-                  );
+            ref CredHandle credentialHandle,
+            [In] void* inContextPtr,
+            [In] SecBufferDesc* inputBuffer,
+            [In] ContextFlags inFlags,
+            [In] Endianness endianness,
+            ref CredHandle outContextPtr,
+            [In, Out] ref SecBufferDesc outputBuffer,
+            [In, Out] ref ContextFlags attributes,
+            out long timeStamp
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern unsafe int QueryContextAttributesW(
             ref CredHandle contextHandle,
             [In] ContextAttribute attribute,
-            [In] void* buffer);
+            [In] void* buffer
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern int SetContextAttributesW(
             ref CredHandle contextHandle,
             [In] ContextAttribute attribute,
             [In] byte[] buffer,
-            [In] int bufferSize);
+            [In] int bufferSize
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern int EnumerateSecurityPackagesW(
             [Out] out int pkgnum,
-            [Out] out SafeFreeContextBuffer_SECURITY handle);
+            [Out] out SafeFreeContextBuffer_SECURITY handle
+        );
 
-        [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            Interop.Libraries.SspiCli,
+            ExactSpelling = true,
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static extern unsafe int AcquireCredentialsHandleW(
-                  [In] string? principal,
-                  [In] string moduleName,
-                  [In] int usage,
-                  [In] void* logonID,
-                  [In] IntPtr zero,
-                  [In] void* keyCallback,
-                  [In] void* keyArgument,
-                  ref CredHandle handlePtr,
-                  [Out] out long timeStamp
-                  );
+            [In] string? principal,
+            [In] string moduleName,
+            [In] int usage,
+            [In] void* logonID,
+            [In] IntPtr zero,
+            [In] void* keyCallback,
+            [In] void* keyArgument,
+            ref CredHandle handlePtr,
+            [Out] out long timeStamp
+        );
 
-        [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            Interop.Libraries.SspiCli,
+            ExactSpelling = true,
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static extern unsafe int AcquireCredentialsHandleW(
-                  [In] string? principal,
-                  [In] string moduleName,
-                  [In] int usage,
-                  [In] void* logonID,
-                  [In] SafeSspiAuthDataHandle authdata,
-                  [In] void* keyCallback,
-                  [In] void* keyArgument,
-                  ref CredHandle handlePtr,
-                  [Out] out long timeStamp
-                  );
+            [In] string? principal,
+            [In] string moduleName,
+            [In] int usage,
+            [In] void* logonID,
+            [In] SafeSspiAuthDataHandle authdata,
+            [In] void* keyCallback,
+            [In] void* keyArgument,
+            ref CredHandle handlePtr,
+            [Out] out long timeStamp
+        );
 
-        [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            Interop.Libraries.SspiCli,
+            ExactSpelling = true,
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static extern unsafe int AcquireCredentialsHandleW(
-                  [In] string? principal,
-                  [In] string moduleName,
-                  [In] int usage,
-                  [In] void* logonID,
-                  [In] SCHANNEL_CRED* authData,
-                  [In] void* keyCallback,
-                  [In] void* keyArgument,
-                  ref CredHandle handlePtr,
-                  [Out] out long timeStamp
-                  );
+            [In] string? principal,
+            [In] string moduleName,
+            [In] int usage,
+            [In] void* logonID,
+            [In] SCHANNEL_CRED* authData,
+            [In] void* keyCallback,
+            [In] void* keyArgument,
+            ref CredHandle handlePtr,
+            [Out] out long timeStamp
+        );
 
-        [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            Interop.Libraries.SspiCli,
+            ExactSpelling = true,
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static extern unsafe int AcquireCredentialsHandleW(
-          [In] string? principal,
-          [In] string moduleName,
-          [In] int usage,
-          [In] void* logonID,
-          [In] SCH_CREDENTIALS* authData,
-          [In] void* keyCallback,
-          [In] void* keyArgument,
-          ref CredHandle handlePtr,
-          [Out] out long timeStamp
-          );
-
+            [In] string? principal,
+            [In] string moduleName,
+            [In] int usage,
+            [In] void* logonID,
+            [In] SCH_CREDENTIALS* authData,
+            [In] void* keyCallback,
+            [In] void* keyArgument,
+            ref CredHandle handlePtr,
+            [Out] out long timeStamp
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern unsafe int InitializeSecurityContextW(
-                  ref CredHandle credentialHandle,
-                  [In] void* inContextPtr,
-                  [In] byte* targetName,
-                  [In] ContextFlags inFlags,
-                  [In] int reservedI,
-                  [In] Endianness endianness,
-                  [In] SecBufferDesc* inputBuffer,
-                  [In] int reservedII,
-                  ref CredHandle outContextPtr,
-                  [In, Out] ref SecBufferDesc outputBuffer,
-                  [In, Out] ref ContextFlags attributes,
-                  out long timeStamp
-                  );
+            ref CredHandle credentialHandle,
+            [In] void* inContextPtr,
+            [In] byte* targetName,
+            [In] ContextFlags inFlags,
+            [In] int reservedI,
+            [In] Endianness endianness,
+            [In] SecBufferDesc* inputBuffer,
+            [In] int reservedII,
+            ref CredHandle outContextPtr,
+            [In, Out] ref SecBufferDesc outputBuffer,
+            [In, Out] ref ContextFlags attributes,
+            out long timeStamp
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern unsafe int CompleteAuthToken(
-                  [In] void* inContextPtr,
-                  [In, Out] ref SecBufferDesc inputBuffers
-                  );
+            [In] void* inContextPtr,
+            [In, Out] ref SecBufferDesc inputBuffers
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
         internal static extern unsafe int ApplyControlToken(
-          [In] void* inContextPtr,
-          [In, Out] ref SecBufferDesc inputBuffers
-          );
+            [In] void* inContextPtr,
+            [In, Out] ref SecBufferDesc inputBuffers
+        );
 
         [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, SetLastError = true)]
-        internal static extern SECURITY_STATUS SspiFreeAuthIdentity(
-            [In] IntPtr authData);
+        internal static extern SECURITY_STATUS SspiFreeAuthIdentity([In] IntPtr authData);
 
-        [DllImport(Interop.Libraries.SspiCli, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(
+            Interop.Libraries.SspiCli,
+            ExactSpelling = true,
+            CharSet = CharSet.Unicode,
+            SetLastError = true
+        )]
         internal static extern SECURITY_STATUS SspiEncodeStringsAsAuthIdentity(
             [In] string userName,
             [In] string domainName,
             [In] string password,
-            [Out] out SafeSspiAuthDataHandle authData);
+            [Out] out SafeSspiAuthDataHandle authData
+        );
     }
 }

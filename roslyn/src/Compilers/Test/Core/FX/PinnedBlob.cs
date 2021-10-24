@@ -18,10 +18,7 @@ namespace Roslyn.Test.Utilities
         public readonly IntPtr Pointer;
         public readonly int Size;
 
-        public PinnedBlob(ImmutableArray<byte> blob)
-            : this(blob.DangerousGetUnderlyingArray())
-        {
-        }
+        public PinnedBlob(ImmutableArray<byte> blob) : this(blob.DangerousGetUnderlyingArray()) { }
 
         public unsafe PinnedBlob(byte[] blob)
         {

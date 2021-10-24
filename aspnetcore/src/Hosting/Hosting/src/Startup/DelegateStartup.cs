@@ -21,7 +21,10 @@ namespace Microsoft.AspNetCore.Hosting
         /// </summary>
         /// <param name="factory">A factory for creating <see cref="IServiceProvider"/> instances.</param>
         /// <param name="configureApp">An <see cref="Action"/> for configuring the application.</param>
-        public DelegateStartup(IServiceProviderFactory<IServiceCollection> factory, Action<IApplicationBuilder> configureApp) : base(factory)
+        public DelegateStartup(
+            IServiceProviderFactory<IServiceCollection> factory,
+            Action<IApplicationBuilder> configureApp
+        ) : base(factory)
         {
             _configureApp = configureApp;
         }

@@ -21,7 +21,9 @@ namespace ILCompiler.Reflection.ReadyToRun
                     return X86TransitionBlock.Instance;
 
                 case Architecture.X64:
-                    return reader.OperatingSystem == OperatingSystem.Windows ? X64WindowsTransitionBlock.Instance : X64UnixTransitionBlock.Instance;
+                    return reader.OperatingSystem == OperatingSystem.Windows
+                      ? X64WindowsTransitionBlock.Instance
+                      : X64UnixTransitionBlock.Instance;
 
                 case Architecture.Arm:
                     return ArmTransitionBlock.Instance;
@@ -76,14 +78,16 @@ namespace ILCompiler.Reflection.ReadyToRun
             public override int NumArgumentRegisters => 2;
             public override int NumCalleeSavedRegisters => 4;
             // Argument registers, callee-save registers, return address
-            public override int SizeOfTransitionBlock => SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
+            public override int SizeOfTransitionBlock =>
+                SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
             public override int OffsetOfArgumentRegisters => 0;
 
             public override int OffsetFromGCRefMapPos(int pos)
             {
                 if (pos < NumArgumentRegisters)
                 {
-                    return OffsetOfArgumentRegisters + SizeOfArgumentRegisters - (pos + 1) * PointerSize;
+                    return OffsetOfArgumentRegisters + SizeOfArgumentRegisters
+                        - (pos + 1) * PointerSize;
                 }
                 else
                 {
@@ -116,7 +120,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             // R12, R13, R14, R15, RBX, RBP
             public override int NumCalleeSavedRegisters => 6;
             // Argument registers, callee-saved registers, return address
-            public override int SizeOfTransitionBlock => SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
+            public override int SizeOfTransitionBlock =>
+                SizeOfArgumentRegisters + SizeOfCalleeSavedRegisters + PointerSize;
             public override int OffsetOfArgumentRegisters => 0;
         }
 
@@ -130,7 +135,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             // R4, R5, R6, R7, R8, R9, R10, R11, R14
             public override int NumCalleeSavedRegisters => 9;
             // Callee-saves, argument registers
-            public override int SizeOfTransitionBlock => SizeOfCalleeSavedRegisters + SizeOfArgumentRegisters;
+            public override int SizeOfTransitionBlock =>
+                SizeOfCalleeSavedRegisters + SizeOfArgumentRegisters;
             public override int OffsetOfArgumentRegisters => SizeOfCalleeSavedRegisters;
         }
 
@@ -144,8 +150,10 @@ namespace ILCompiler.Reflection.ReadyToRun
             // X29, X30, X19, X20, X21, X22, X23, X24, X25, X26, X27, X28
             public override int NumCalleeSavedRegisters => 12;
             // Callee-saves, padding, m_x8RetBuffReg, argument registers
-            public override int SizeOfTransitionBlock => SizeOfCalleeSavedRegisters + 2 * PointerSize + SizeOfArgumentRegisters;
-            public override int OffsetOfArgumentRegisters => SizeOfCalleeSavedRegisters + 2 * PointerSize;
+            public override int SizeOfTransitionBlock =>
+                SizeOfCalleeSavedRegisters + 2 * PointerSize + SizeOfArgumentRegisters;
+            public override int OffsetOfArgumentRegisters =>
+                SizeOfCalleeSavedRegisters + 2 * PointerSize;
             private int OffsetOfX8Register => OffsetOfArgumentRegisters - PointerSize;
             public override int OffsetOfFirstGCRefMapSlot => OffsetOfX8Register;
         }

@@ -22,7 +22,11 @@ namespace System.IO.Strategies
         private long _length = -1; // When the file is locked for writes (_share <= FileShare.Read) cache file length in-memory, negative means that hasn't been fetched.
         private bool _exposedHandle; // created from handle, or SafeFileHandle was used and the handle got exposed
 
-        internal WindowsFileStreamStrategy(SafeFileHandle handle, FileAccess access, FileShare share)
+        internal WindowsFileStreamStrategy(
+            SafeFileHandle handle,
+            FileAccess access,
+            FileShare share
+        )
         {
             InitFromHandle(handle, access, out _canSeek, out _isPipe);
 
@@ -37,7 +41,13 @@ namespace System.IO.Strategies
             _fileHandle = handle;
         }
 
-        internal WindowsFileStreamStrategy(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+        internal WindowsFileStreamStrategy(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options
+        )
         {
             string fullPath = Path.GetFullPath(path);
 
@@ -65,9 +75,11 @@ namespace System.IO.Strategies
 
         public sealed override bool CanSeek => _canSeek;
 
-        public sealed override bool CanRead => !_fileHandle.IsClosed && (_access & FileAccess.Read) != 0;
+        public sealed override bool CanRead =>
+            !_fileHandle.IsClosed && (_access & FileAccess.Read) != 0;
 
-        public sealed override bool CanWrite => !_fileHandle.IsClosed && (_access & FileAccess.Write) != 0;
+        public sealed override bool CanWrite =>
+            !_fileHandle.IsClosed && (_access & FileAccess.Write) != 0;
 
         // When the file is locked for writes we can cache file length in memory
         // and avoid subsequent native calls which are expensive.
@@ -191,8 +203,10 @@ namespace System.IO.Strategies
         {
             if (origin < SeekOrigin.Begin || origin > SeekOrigin.End)
                 throw new ArgumentException(SR.Argument_InvalidSeekOrigin, nameof(origin));
-            if (_fileHandle.IsClosed) ThrowHelper.ThrowObjectDisposedException_FileClosed();
-            if (!CanSeek) ThrowHelper.ThrowNotSupportedException_UnseekableStream();
+            if (_fileHandle.IsClosed)
+                ThrowHelper.ThrowObjectDisposedException_FileClosed();
+            if (!CanSeek)
+                ThrowHelper.ThrowNotSupportedException_UnseekableStream();
 
             long oldPos = _filePosition;
             long pos = origin switch
@@ -209,7 +223,9 @@ namespace System.IO.Strategies
             else
             {
                 // keep throwing the same exception we did when seek was causing actual offset change
-                throw Win32Marshal.GetExceptionForWin32Error(Interop.Errors.ERROR_INVALID_PARAMETER);
+                throw Win32Marshal.GetExceptionForWin32Error(
+                    Interop.Errors.ERROR_INVALID_PARAMETER
+                );
             }
 
             // Prevent users from overwriting data in a file that was opened in append mode.
@@ -222,9 +238,11 @@ namespace System.IO.Strategies
             return pos;
         }
 
-        internal sealed override void Lock(long position, long length) => FileStreamHelpers.Lock(_fileHandle, _path, position, length);
+        internal sealed override void Lock(long position, long length) =>
+            FileStreamHelpers.Lock(_fileHandle, _path, position, length);
 
-        internal sealed override void Unlock(long position, long length) => FileStreamHelpers.Unlock(_fileHandle, _path, position, length);
+        internal sealed override void Unlock(long position, long length) =>
+            FileStreamHelpers.Unlock(_fileHandle, _path, position, length);
 
         protected abstract void OnInitFromHandle(SafeFileHandle handle);
 
@@ -247,7 +265,12 @@ namespace System.IO.Strategies
             }
         }
 
-        private void InitFromHandle(SafeFileHandle handle, FileAccess access, out bool canSeek, out bool isPipe)
+        private void InitFromHandle(
+            SafeFileHandle handle,
+            FileAccess access,
+            out bool canSeek,
+            out bool isPipe
+        )
         {
 #if DEBUG
             bool hadBinding = handle.ThreadPoolBinding != null;
@@ -260,7 +283,10 @@ namespace System.IO.Strategies
             }
             catch
             {
-                Debug.Assert(hadBinding || handle.ThreadPoolBinding == null, "We should never error out with a ThreadPoolBinding we've added");
+                Debug.Assert(
+                    hadBinding || handle.ThreadPoolBinding == null,
+                    "We should never error out with a ThreadPoolBinding we've added"
+                );
                 throw;
             }
 #endif

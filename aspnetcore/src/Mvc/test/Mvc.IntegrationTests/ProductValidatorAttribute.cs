@@ -7,14 +7,19 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 {
     public class ProductValidatorAttribute : ValidationAttribute
     {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult IsValid(
+            object value,
+            ValidationContext validationContext
+        )
         {
             var product = value as ProductViewModel;
             if (product != null)
             {
                 if (!product.Country.Equals("USA") || string.IsNullOrEmpty(product.Name))
                 {
-                    return new ValidationResult("Product must be made in the USA if it is not named.");
+                    return new ValidationResult(
+                        "Product must be made in the USA if it is not named."
+                    );
                 }
                 else
                 {
@@ -26,7 +31,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             {
                 if (!software.Country.Equals("USA") || string.IsNullOrEmpty(software.Name))
                 {
-                    return new ValidationResult("Product must be made in the USA if it is not named.");
+                    return new ValidationResult(
+                        "Product must be made in the USA if it is not named."
+                    );
                 }
                 else
                 {
@@ -34,8 +41,11 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 }
             }
 
-            return new ValidationResult("Expected either ProductViewModel or SoftwareViewModel instance but got "
-                + value.GetType() + " instance");
+            return new ValidationResult(
+                "Expected either ProductViewModel or SoftwareViewModel instance but got "
+                    + value.GetType()
+                    + " instance"
+            );
         }
     }
 }

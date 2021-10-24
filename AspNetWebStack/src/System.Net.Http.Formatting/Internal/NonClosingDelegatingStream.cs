@@ -15,13 +15,8 @@ namespace System.Net.Http.Internal
     /// </summary>
     internal class NonClosingDelegatingStream : DelegatingStream
     {
-        public NonClosingDelegatingStream(Stream innerStream)
-            : base(innerStream)
-        {
-        }
+        public NonClosingDelegatingStream(Stream innerStream) : base(innerStream) { }
 
-        public override void Close()
-        {
-        }
+        public override void Close() { }
     }
 }

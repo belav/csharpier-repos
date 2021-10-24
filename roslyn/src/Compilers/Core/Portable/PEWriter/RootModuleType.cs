@@ -24,7 +24,8 @@ namespace Microsoft.Cci
             Debug.Assert(_methods is null);
 
             _methods = SpecializedCollections.SingletonReadOnlyList(
-                new RootModuleStaticConstructor(containingTypeDefinition: this, il));
+                new RootModuleStaticConstructor(containingTypeDefinition: this, il)
+            );
         }
 
         public IEnumerable<IMethodDefinition> GetMethods(EmitContext context)
@@ -72,7 +73,9 @@ namespace Microsoft.Cci
             return SpecializedCollections.EmptyEnumerable<IEventDefinition>();
         }
 
-        public IEnumerable<MethodImplementation> GetExplicitImplementationOverrides(EmitContext context)
+        public IEnumerable<MethodImplementation> GetExplicitImplementationOverrides(
+            EmitContext context
+        )
         {
             return SpecializedCollections.EmptyEnumerable<MethodImplementation>();
         }
@@ -189,10 +192,7 @@ namespace Microsoft.Cci
 
         ushort ITypeDefinition.GenericParameterCount
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         IEnumerable<SecurityAttribute> ITypeDefinition.SecurityAttributes
@@ -237,34 +237,22 @@ namespace Microsoft.Cci
 
         string INamespaceTypeReference.NamespaceName
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         IGenericMethodParameterReference? ITypeReference.AsGenericMethodParameterReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         IGenericTypeInstanceReference? ITypeReference.AsGenericTypeInstanceReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         IGenericTypeParameterReference? ITypeReference.AsGenericTypeParameterReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         INamespaceTypeDefinition ITypeReference.AsNamespaceTypeDefinition(EmitContext context)
@@ -274,10 +262,7 @@ namespace Microsoft.Cci
 
         INamespaceTypeReference ITypeReference.AsNamespaceTypeReference
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         INestedTypeDefinition? ITypeReference.AsNestedTypeDefinition(EmitContext context)
@@ -287,18 +272,12 @@ namespace Microsoft.Cci
 
         INestedTypeReference? ITypeReference.AsNestedTypeReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         ISpecializedNestedTypeReference? ITypeReference.AsSpecializedNestedTypeReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         ITypeDefinition ITypeReference.AsTypeDefinition(EmitContext context)

@@ -16,38 +16,52 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
         TSyntaxKind,
         TExpressionSyntax,
         TConditionalExpressionSyntax,
-        TBinaryExpressionSyntax> : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TBinaryExpressionSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
         where TConditionalExpressionSyntax : TExpressionSyntax
         where TBinaryExpressionSyntax : TExpressionSyntax
     {
         protected AbstractUseCoalesceExpressionDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseCoalesceExpressionDiagnosticId,
-                   EnforceOnBuildValues.UseCoalesceExpression,
-                   CodeStyleOptions2.PreferCoalesceExpression,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Use_coalesce_expression), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Null_check_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseCoalesceExpressionDiagnosticId,
+                EnforceOnBuildValues.UseCoalesceExpression,
+                CodeStyleOptions2.PreferCoalesceExpression,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_coalesce_expression),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Null_check_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
 
         protected override void InitializeWorker(AnalysisContext context)
         {
             var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
-            context.RegisterSyntaxNodeAction(AnalyzeSyntax,
-                syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.TernaryConditionalExpression));
+            context.RegisterSyntaxNodeAction(
+                AnalyzeSyntax,
+                syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.TernaryConditionalExpression)
+            );
         }
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
             var conditionalExpression = (TConditionalExpressionSyntax)context.Node;
 
-            var option = context.GetOption(CodeStyleOptions2.PreferCoalesceExpression, conditionalExpression.Language);
+            var option = context.GetOption(
+                CodeStyleOptions2.PreferCoalesceExpression,
+                conditionalExpression.Language
+            );
             if (!option.Value)
             {
                 return;
@@ -55,7 +69,11 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
 
             var syntaxFacts = GetSyntaxFacts();
             syntaxFacts.GetPartsOfConditionalExpression(
-                conditionalExpression, out var conditionNode, out var whenTrueNodeHigh, out var whenFalseNodeHigh);
+                conditionalExpression,
+                out var conditionNode,
+                out var whenTrueNodeHigh,
+                out var whenFalseNodeHigh
+            );
 
             conditionNode = syntaxFacts.WalkDownParentheses(conditionNode);
             var whenTrueNodeLow = syntaxFacts.WalkDownParentheses(whenTrueNodeHigh);
@@ -74,7 +92,11 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
                 return;
             }
 
-            syntaxFacts.GetPartsOfBinaryExpression(condition, out var conditionLeftHigh, out var conditionRightHigh);
+            syntaxFacts.GetPartsOfBinaryExpression(
+                condition,
+                out var conditionLeftHigh,
+                out var conditionRightHigh
+            );
 
             var conditionLeftLow = syntaxFacts.WalkDownParentheses(conditionLeftHigh);
             var conditionRightLow = syntaxFacts.WalkDownParentheses(conditionRightHigh);
@@ -93,44 +115,55 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
                 return;
             }
 
-            if (!syntaxFacts.AreEquivalent(
+            if (
+                !syntaxFacts.AreEquivalent(
                     conditionRightIsNull ? conditionLeftLow : conditionRightLow,
-                    isEquals ? whenFalseNodeLow : whenTrueNodeLow))
+                    isEquals ? whenFalseNodeLow : whenTrueNodeLow
+                )
+            )
             {
                 return;
             }
 
             var semanticModel = context.SemanticModel;
-            var conditionType = semanticModel.GetTypeInfo(
-                conditionLeftIsNull ? conditionRightLow : conditionLeftLow, context.CancellationToken).Type;
-            if (conditionType != null &&
-                !conditionType.IsReferenceType)
+            var conditionType =
+                semanticModel.GetTypeInfo(
+                    conditionLeftIsNull ? conditionRightLow : conditionLeftLow,
+                    context.CancellationToken
+                ).Type;
+            if (conditionType != null && !conditionType.IsReferenceType)
             {
                 // Note: it is intentional that we do not support nullable types here.  If you have:
                 //
                 //  int? x;
                 //  var z = x == null ? y : x;
-                //  
-                // then that's not the same as:   x ?? y.   ?? will unwrap the nullable, producing a 
-                // int and not an int? like we have in the above code.  
+                //
+                // then that's not the same as:   x ?? y.   ?? will unwrap the nullable, producing a
+                // int and not an int? like we have in the above code.
                 //
                 // Note: we could look for:  x == null ? y : x.Value, and simplify that in the future.
                 return;
             }
 
-            var conditionPartToCheck = conditionRightIsNull ? conditionLeftHigh : conditionRightHigh;
+            var conditionPartToCheck = conditionRightIsNull
+                ? conditionLeftHigh
+                : conditionRightHigh;
             var whenPartToCheck = isEquals ? whenTrueNodeHigh : whenFalseNodeHigh;
             var locations = ImmutableArray.Create(
                 conditionalExpression.GetLocation(),
                 conditionPartToCheck.GetLocation(),
-                whenPartToCheck.GetLocation());
+                whenPartToCheck.GetLocation()
+            );
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                conditionalExpression.GetLocation(),
-                option.Notification.Severity,
-                locations,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    conditionalExpression.GetLocation(),
+                    option.Notification.Severity,
+                    locations,
+                    properties: null
+                )
+            );
         }
     }
 }

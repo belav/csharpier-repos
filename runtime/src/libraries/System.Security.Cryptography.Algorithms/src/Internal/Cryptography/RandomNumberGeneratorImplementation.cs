@@ -13,13 +13,15 @@ namespace System.Security.Cryptography
         {
             if (data.Length > 0)
             {
-                fixed (byte* ptr = data) GetBytes(ptr, data.Length);
+                fixed (byte* ptr = data)
+                    GetBytes(ptr, data.Length);
             }
         }
 
         public override void GetBytes(byte[] data)
         {
-            if (data == null) throw new ArgumentNullException(nameof(data));
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
             GetBytes(new Span<byte>(data));
         }
 
@@ -33,13 +35,15 @@ namespace System.Security.Cryptography
         {
             if (data.Length > 0)
             {
-                fixed (byte* ptr = data) GetBytes(ptr, data.Length);
+                fixed (byte* ptr = data)
+                    GetBytes(ptr, data.Length);
             }
         }
 
         public override void GetNonZeroBytes(byte[] data)
         {
-            if (data == null) throw new ArgumentNullException(nameof(data));
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
             GetNonZeroBytes(new Span<byte>(data));
         }
 

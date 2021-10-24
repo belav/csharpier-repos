@@ -29,17 +29,18 @@ namespace Microsoft.AspNetCore.Components.Server
             var bytes = Serialize(new RenderBatch());
 
             // Assert
-            AssertBinaryContents(bytes, /* startIndex */ 0,
-                0,  // Length of UpdatedComponents
-                0,  // Length of ReferenceFrames
-                0,  // Length of DisposedComponentIds
-                0,  // Length of DisposedEventHandlerIds
-
-                0,  // Index of UpdatedComponents
-                4,  // Index of ReferenceFrames
-                8,  // Index of DisposedComponentIds
+            AssertBinaryContents(
+                bytes, /* startIndex */
+                0,
+                0, // Length of UpdatedComponents
+                0, // Length of ReferenceFrames
+                0, // Length of DisposedComponentIds
+                0, // Length of DisposedEventHandlerIds
+                0, // Index of UpdatedComponents
+                4, // Index of ReferenceFrames
+                8, // Index of DisposedComponentIds
                 12, // Index of DisposedEventHandlerIds
-                16  // Index of Strings
+                16 // Index of Strings
             );
             Assert.Equal(36, bytes.Length); // No other data
         }
@@ -48,24 +49,31 @@ namespace Microsoft.AspNetCore.Components.Server
         public void CanIncludeDisposedComponentIds()
         {
             // Arrange/Act
-            var bytes = Serialize(new RenderBatch(
-                default,
-                default,
-                new ArrayRange<int>(new[] { 123, int.MaxValue, int.MinValue, 456 }, 3), // Only use first 3 to show that param is respected
-                default));
+            var bytes = Serialize(
+                new RenderBatch(
+                    default,
+                    default,
+                    new ArrayRange<int>(new[] { 123, int.MaxValue, int.MinValue, 456 }, 3), // Only use first 3 to show that param is respected
+                    default
+                )
+            );
 
             // Assert
-            AssertBinaryContents(bytes, /* startIndex */ 0,
-                0,  // Length of UpdatedComponents
-                0,  // Length of ReferenceFrames
-                3, 123, int.MaxValue, int.MinValue, // DisposedComponentIds as length-prefixed array
-                0,  // Length of DisposedEventHandlerIds
-
-                0,  // Index of UpdatedComponents
-                4,  // Index of ReferenceFrames
-                8,  // Index of DisposedComponentIds
+            AssertBinaryContents(
+                bytes, /* startIndex */
+                0,
+                0, // Length of UpdatedComponents
+                0, // Length of ReferenceFrames
+                3,
+                123,
+                int.MaxValue,
+                int.MinValue, // DisposedComponentIds as length-prefixed array
+                0, // Length of DisposedEventHandlerIds
+                0, // Index of UpdatedComponents
+                4, // Index of ReferenceFrames
+                8, // Index of DisposedComponentIds
                 24, // Index of DisposedEventHandlerIds
-                28  // Index of strings
+                28 // Index of strings
             );
             Assert.Equal(48, bytes.Length); // No other data
         }
@@ -74,25 +82,34 @@ namespace Microsoft.AspNetCore.Components.Server
         public void CanIncludeDisposedEventHandlerIds()
         {
             // Arrange/Act
-            var bytes = Serialize(new RenderBatch(
-                new ArrayRange<RenderTreeDiff>(),
-                new ArrayRange<RenderTreeFrame>(),
-                new ArrayRange<int>(),
-                new ArrayRange<ulong>(new ulong[] { 123, ulong.MaxValue, ulong.MinValue, 456 }, 3) // Only use first 3 to show that param is respected
-                ));
+            var bytes = Serialize(
+                new RenderBatch(
+                    new ArrayRange<RenderTreeDiff>(),
+                    new ArrayRange<RenderTreeFrame>(),
+                    new ArrayRange<int>(),
+                    new ArrayRange<ulong>(
+                        new ulong[] { 123, ulong.MaxValue, ulong.MinValue, 456 },
+                        3
+                    ) // Only use first 3 to show that param is respected
+                )
+            );
 
             // Assert
-            AssertBinaryContents(bytes, /* startIndex */ 0,
-                0,  // Length of UpdatedComponents
-                0,  // Length of ReferenceFrames
-                0,  // Length of DisposedComponentIds
-                3, (ulong)123, ulong.MaxValue, ulong.MinValue, // DisposedEventHandlerIds as length-prefixed array
-
-                0,  // Index of UpdatedComponents
-                4,  // Index of ReferenceFrames
-                8,  // Index of DisposedComponentIds
+            AssertBinaryContents(
+                bytes, /* startIndex */
+                0,
+                0, // Length of UpdatedComponents
+                0, // Length of ReferenceFrames
+                0, // Length of DisposedComponentIds
+                3,
+                (ulong)123,
+                ulong.MaxValue,
+                ulong.MinValue, // DisposedEventHandlerIds as length-prefixed array
+                0, // Index of UpdatedComponents
+                4, // Index of ReferenceFrames
+                8, // Index of DisposedComponentIds
                 12, // Index of DisposedEventHandlerIds
-                40  // Index of strings
+                40 // Index of strings
             );
             Assert.Equal(60, bytes.Length); // No other data
         }
@@ -101,39 +118,43 @@ namespace Microsoft.AspNetCore.Components.Server
         public void CanIncludeUpdatedComponentsWithEmptyEdits()
         {
             // Arrange/Act
-            var bytes = Serialize(new RenderBatch(
-                new ArrayRange<RenderTreeDiff>(new[]
-                {
-                    new RenderTreeDiff(123, default),
-                    new RenderTreeDiff(int.MaxValue, default),
-                }, 2),
-                default,
-                default,
-                default));
+            var bytes = Serialize(
+                new RenderBatch(
+                    new ArrayRange<RenderTreeDiff>(
+                        new[]
+                        {
+                            new RenderTreeDiff(123, default),
+                            new RenderTreeDiff(int.MaxValue, default),
+                        },
+                        2
+                    ),
+                    default,
+                    default,
+                    default
+                )
+            );
 
             // Assert
-            AssertBinaryContents(bytes, /* startIndex */ 0,
+            AssertBinaryContents(
+                bytes, /* startIndex */
+                0,
                 // UpdatedComponents[0]
                 123, // ComponentId
-                0,   // Edits length
-
+                0, // Edits length
                 // UpdatedComponents[1]
                 int.MaxValue, // ComponentId
-                0,   // Edits length
-
-                2,   // Length of UpdatedComponents
-                0,   // Index of UpdatedComponents[0]
-                8,   // Index of UpdatedComponents[1]
-
-                0,   // Length of ReferenceFrames
-                0,   // Length of DisposedComponentIds
-                0,   // Length of DisposedEventHandlerIds
-
-                16,  // Index of UpdatedComponents
-                28,  // Index of ReferenceFrames
-                32,  // Index of DisposedComponentIds
-                36,  // Index of DisposedEventHandlerIds
-                40   // Index of strings
+                0, // Edits length
+                2, // Length of UpdatedComponents
+                0, // Index of UpdatedComponents[0]
+                8, // Index of UpdatedComponents[1]
+                0, // Length of ReferenceFrames
+                0, // Length of DisposedComponentIds
+                0, // Length of DisposedEventHandlerIds
+                16, // Index of UpdatedComponents
+                28, // Index of ReferenceFrames
+                32, // Index of DisposedComponentIds
+                36, // Index of DisposedEventHandlerIds
+                40 // Index of strings
             );
             Assert.Equal(60, bytes.Length); // No other data
         }
@@ -158,33 +179,68 @@ namespace Microsoft.AspNetCore.Components.Server
             var editsBuilder = new RenderTree.ArrayBuilder<RenderTreeEdit>();
             editsBuilder.Append(edits, 0, edits.Length);
             var editsSegment = editsBuilder.ToSegment(1, edits.Length); // Skip first to show offset is respected
-            var bytes = Serialize(new RenderBatch(
-                new ArrayRange<RenderTreeDiff>(new[]
-                {
-                    new RenderTreeDiff(123, editsSegment)
-                }, 1),
-                default,
-                default,
-                default));
+            var bytes = Serialize(
+                new RenderBatch(
+                    new ArrayRange<RenderTreeDiff>(
+                        new[] { new RenderTreeDiff(123, editsSegment) },
+                        1
+                    ),
+                    default,
+                    default,
+                    default
+                )
+            );
 
             // Assert
             var diffsStartIndex = ReadInt(bytes, bytes.Length - 20);
-            AssertBinaryContents(bytes, diffsStartIndex,
-                1,  // Number of diffs
-                0); // Index of diffs[0]
+            AssertBinaryContents(
+                bytes,
+                diffsStartIndex,
+                1, // Number of diffs
+                0
+            ); // Index of diffs[0]
 
-            AssertBinaryContents(bytes, 0,
+            AssertBinaryContents(
+                bytes,
+                0,
                 123, // Component ID for diff 0
-                9,  // diff[0].Edits.Count
-                RenderTreeEditType.PrependFrame, 456, 789, NullStringMarker,
-                RenderTreeEditType.RemoveFrame, 101, 0, NullStringMarker,
-                RenderTreeEditType.SetAttribute, 102, 103, NullStringMarker,
-                RenderTreeEditType.RemoveAttribute, 104, 0, "Some removed attribute",
-                RenderTreeEditType.UpdateText, 105, 106, NullStringMarker,
-                RenderTreeEditType.StepIn, 107, 0, NullStringMarker,
-                RenderTreeEditType.StepOut, 0, 0, NullStringMarker,
-                RenderTreeEditType.UpdateMarkup, 108, 109, NullStringMarker,
-                RenderTreeEditType.RemoveAttribute, 110, 0, "Some removed attribute"
+                9, // diff[0].Edits.Count
+                RenderTreeEditType.PrependFrame,
+                456,
+                789,
+                NullStringMarker,
+                RenderTreeEditType.RemoveFrame,
+                101,
+                0,
+                NullStringMarker,
+                RenderTreeEditType.SetAttribute,
+                102,
+                103,
+                NullStringMarker,
+                RenderTreeEditType.RemoveAttribute,
+                104,
+                0,
+                "Some removed attribute",
+                RenderTreeEditType.UpdateText,
+                105,
+                106,
+                NullStringMarker,
+                RenderTreeEditType.StepIn,
+                107,
+                0,
+                NullStringMarker,
+                RenderTreeEditType.StepOut,
+                0,
+                0,
+                NullStringMarker,
+                RenderTreeEditType.UpdateMarkup,
+                108,
+                109,
+                NullStringMarker,
+                RenderTreeEditType.RemoveAttribute,
+                110,
+                0,
+                "Some removed attribute"
             );
 
             // We can deduplicate attribute names
@@ -196,75 +252,167 @@ namespace Microsoft.AspNetCore.Components.Server
         {
             // Arrange/Act
             var renderer = new FakeRenderer();
-            var bytes = Serialize(new RenderBatch(
-                default,
-                new ArrayRange<RenderTreeFrame>(new[] {
-                    RenderTreeFrame.Attribute(123, "Attribute with string value", "String value"),
-                    RenderTreeFrame.Attribute(124, "Attribute with nonstring value", 1),
-                    RenderTreeFrame.Attribute(125, "Attribute with delegate value", new Action(() => { }))
-                        .WithAttributeEventHandlerId(((ulong)uint.MaxValue) + 1),
-                    RenderTreeFrame.ChildComponent(126, typeof(object))
-                        .WithComponentSubtreeLength(5678)
-                        .WithComponent(new ComponentState(renderer, 2000, new FakeComponent(), null)),
-                    RenderTreeFrame.ComponentReferenceCapture(127, value => { }, 1001),
-                    RenderTreeFrame.Element(128, "Some element")
-                        .WithElementSubtreeLength(1234),
-                    RenderTreeFrame.ElementReferenceCapture(129, value => { })
-                        .WithElementReferenceCaptureId("my unique ID"),
-                    RenderTreeFrame.Region(130)
-                        .WithRegionSubtreeLength(1234),
-                    RenderTreeFrame.Text(131, "Some text"),
-                    RenderTreeFrame.Markup(132, "Some markup"),
-                    RenderTreeFrame.Text(133, "\n\t  "),
-
-                    // Testing deduplication
-                    RenderTreeFrame.Attribute(134, "Attribute with string value", "String value"),
-                    RenderTreeFrame.Element(135, "Some element") // Will be deduplicated
-                        .WithElementSubtreeLength(999),
-                    RenderTreeFrame.Text(136, "Some text"), // Will not be deduplicated
-                    RenderTreeFrame.Markup(137, "Some markup"), // Will not be deduplicated
-                    RenderTreeFrame.Text(138, "\n\t  "), // Will be deduplicated
-                }, 16),
-                default,
-                default));
+            var bytes = Serialize(
+                new RenderBatch(
+                    default,
+                    new ArrayRange<RenderTreeFrame>(
+                        new[]
+                        {
+                            RenderTreeFrame.Attribute(
+                                123,
+                                "Attribute with string value",
+                                "String value"
+                            ),
+                            RenderTreeFrame.Attribute(124, "Attribute with nonstring value", 1),
+                            RenderTreeFrame
+                                .Attribute(
+                                    125,
+                                    "Attribute with delegate value",
+                                    new Action(() => { })
+                                )
+                                .WithAttributeEventHandlerId(((ulong)uint.MaxValue) + 1),
+                            RenderTreeFrame
+                                .ChildComponent(126, typeof(object))
+                                .WithComponentSubtreeLength(5678)
+                                .WithComponent(
+                                    new ComponentState(renderer, 2000, new FakeComponent(), null)
+                                ),
+                            RenderTreeFrame.ComponentReferenceCapture(127, value => { }, 1001),
+                            RenderTreeFrame
+                                .Element(128, "Some element")
+                                .WithElementSubtreeLength(1234),
+                            RenderTreeFrame
+                                .ElementReferenceCapture(129, value => { })
+                                .WithElementReferenceCaptureId("my unique ID"),
+                            RenderTreeFrame.Region(130).WithRegionSubtreeLength(1234),
+                            RenderTreeFrame.Text(131, "Some text"),
+                            RenderTreeFrame.Markup(132, "Some markup"),
+                            RenderTreeFrame.Text(133, "\n\t  "),
+                            // Testing deduplication
+                            RenderTreeFrame.Attribute(
+                                134,
+                                "Attribute with string value",
+                                "String value"
+                            ),
+                            RenderTreeFrame
+                                .Element(135, "Some element") // Will be deduplicated
+                                .WithElementSubtreeLength(999),
+                            RenderTreeFrame.Text(136, "Some text"), // Will not be deduplicated
+                            RenderTreeFrame.Markup(137, "Some markup"), // Will not be deduplicated
+                            RenderTreeFrame.Text(138, "\n\t  "), // Will be deduplicated
+                        },
+                        16
+                    ),
+                    default,
+                    default
+                )
+            );
 
             // Assert
             var referenceFramesStartIndex = ReadInt(bytes, bytes.Length - 16);
-            AssertBinaryContents(bytes, referenceFramesStartIndex,
+            AssertBinaryContents(
+                bytes,
+                referenceFramesStartIndex,
                 16, // Number of frames
-                RenderTreeFrameType.Attribute, "Attribute with string value", "String value", 0, 0,
-                RenderTreeFrameType.Attribute, "Attribute with nonstring value", NullStringMarker, 0, 0,
-                RenderTreeFrameType.Attribute, "Attribute with delegate value", NullStringMarker, ((ulong)uint.MaxValue) + 1,
-                RenderTreeFrameType.Component, 5678, 2000, 0, 0,
-                RenderTreeFrameType.ComponentReferenceCapture, 0, 0, 0, 0,
-                RenderTreeFrameType.Element, 1234, "Some element", 0, 0,
-                RenderTreeFrameType.ElementReferenceCapture, "my unique ID", 0, 0, 0,
-                RenderTreeFrameType.Region, 1234, 0, 0, 0,
-                RenderTreeFrameType.Text, "Some text", 0, 0, 0,
-                RenderTreeFrameType.Markup, "Some markup", 0, 0, 0,
-                RenderTreeFrameType.Text, "\n\t  ", 0, 0, 0,
-                RenderTreeFrameType.Attribute, "Attribute with string value", "String value", 0, 0,
-                RenderTreeFrameType.Element, 999, "Some element", 0, 0,
-                RenderTreeFrameType.Text, "Some text", 0, 0, 0,
-                RenderTreeFrameType.Markup, "Some markup", 0, 0, 0,
-                RenderTreeFrameType.Text, "\n\t  ", 0, 0, 0
-            );
-
-            Assert.Equal(new[]
-            {
+                RenderTreeFrameType.Attribute,
                 "Attribute with string value",
                 "String value",
+                0,
+                0,
+                RenderTreeFrameType.Attribute,
                 "Attribute with nonstring value",
+                NullStringMarker,
+                0,
+                0,
+                RenderTreeFrameType.Attribute,
                 "Attribute with delegate value",
+                NullStringMarker,
+                ((ulong)uint.MaxValue) + 1,
+                RenderTreeFrameType.Component,
+                5678,
+                2000,
+                0,
+                0,
+                RenderTreeFrameType.ComponentReferenceCapture,
+                0,
+                0,
+                0,
+                0,
+                RenderTreeFrameType.Element,
+                1234,
                 "Some element",
+                0,
+                0,
+                RenderTreeFrameType.ElementReferenceCapture,
                 "my unique ID",
+                0,
+                0,
+                0,
+                RenderTreeFrameType.Region,
+                1234,
+                0,
+                0,
+                0,
+                RenderTreeFrameType.Text,
                 "Some text",
+                0,
+                0,
+                0,
+                RenderTreeFrameType.Markup,
                 "Some markup",
+                0,
+                0,
+                0,
+                RenderTreeFrameType.Text,
                 "\n\t  ",
+                0,
+                0,
+                0,
+                RenderTreeFrameType.Attribute,
+                "Attribute with string value",
                 "String value",
+                0,
+                0,
+                RenderTreeFrameType.Element,
+                999,
+                "Some element",
+                0,
+                0,
+                RenderTreeFrameType.Text,
                 "Some text",
+                0,
+                0,
+                0,
+                RenderTreeFrameType.Markup,
                 "Some markup",
-            }, ReadStringTable(bytes));
+                0,
+                0,
+                0,
+                RenderTreeFrameType.Text,
+                "\n\t  ",
+                0,
+                0,
+                0
+            );
+
+            Assert.Equal(
+                new[]
+                {
+                    "Attribute with string value",
+                    "String value",
+                    "Attribute with nonstring value",
+                    "Attribute with delegate value",
+                    "Some element",
+                    "my unique ID",
+                    "Some text",
+                    "Some markup",
+                    "\n\t  ",
+                    "String value",
+                    "Some text",
+                    "Some markup",
+                },
+                ReadStringTable(bytes)
+            );
         }
 
         private Span<byte> Serialize(RenderBatch renderBatch)
@@ -287,9 +435,11 @@ namespace Microsoft.AspNetCore.Components.Server
             var stringTableEndPositionExcl = bytes.Length - 20;
 
             var result = new List<string>();
-            for (var entryPosition = stringTableStartPosition;
+            for (
+                var entryPosition = stringTableStartPosition;
                 entryPosition < stringTableEndPositionExcl;
-                entryPosition += 4)
+                entryPosition += 4
+            )
             {
                 // The string table entries are all length-prefixed UTF8 blobs
                 var tableEntryPos = BitConverter.ToInt32(bytes, entryPosition);
@@ -343,14 +493,16 @@ namespace Microsoft.AspNetCore.Components.Server
                     }
                     else
                     {
-                        throw new InvalidOperationException($"Unsupported type: {expectedEntry.GetType().FullName}");
+                        throw new InvalidOperationException(
+                            $"Unsupported type: {expectedEntry.GetType().FullName}"
+                        );
                     }
                 }
             }
         }
 
-        static int ReadInt(Span<byte> bytes, int startOffset)
-            => BitConverter.ToInt32(bytes.Slice(startOffset, 4).ToArray(), 0);
+        static int ReadInt(Span<byte> bytes, int startOffset) =>
+            BitConverter.ToInt32(bytes.Slice(startOffset, 4).ToArray(), 0);
 
         public static uint ReadUnsignedLEB128(byte[] bytes, int startOffset, out int numBytesRead)
         {
@@ -372,19 +524,17 @@ namespace Microsoft.AspNetCore.Components.Server
 
         class FakeComponent : IComponent
         {
-            public void Attach(RenderHandle renderHandle)
-                => throw new NotImplementedException();
+            public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();
 
-            public Task SetParametersAsync(ParameterView parameters)
-                => throw new NotImplementedException();
+            public Task SetParametersAsync(ParameterView parameters) =>
+                throw new NotImplementedException();
         }
 
         class FakeRenderer : Renderer
         {
             public FakeRenderer()
                 : base(new ServiceCollection().BuildServiceProvider(), NullLoggerFactory.Instance)
-            {
-            }
+            { }
 
             public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 
@@ -393,8 +543,8 @@ namespace Microsoft.AspNetCore.Components.Server
                 throw new NotImplementedException();
             }
 
-            protected override Task UpdateDisplayAsync(in RenderBatch renderBatch)
-                => throw new NotImplementedException();
+            protected override Task UpdateDisplayAsync(in RenderBatch renderBatch) =>
+                throw new NotImplementedException();
         }
     }
 }

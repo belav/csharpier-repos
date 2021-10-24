@@ -11,7 +11,6 @@ public class Dummy
     }
 }
 
-
 public class CreateObj
 {
     private Dummy _obj;
@@ -22,7 +21,6 @@ public class CreateObj
         _obj = new Dummy();
         _weak = new WeakReference(_obj);
     }
-
 
     public bool RunTest()
     {
@@ -46,7 +44,6 @@ public class CreateObj
         Console.WriteLine("Expected exception not thrown!");
         return false;
     }
-
 
     public static int Main()
     {

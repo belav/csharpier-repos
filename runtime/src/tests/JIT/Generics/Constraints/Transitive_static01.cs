@@ -39,16 +39,32 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-        Eval(GenClass<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(GenClass<FooStruct>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            GenClass<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            GenClass<FooStruct>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
-        Eval(GenStruct<FooClass>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooClass>)));
-        Eval(GenStruct<FooStruct>.TransitiveConstraint().GetType().Equals(typeof(Transition<FooStruct>)));
+        Eval(
+            GenStruct<FooClass>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooClass>))
+        );
+        Eval(
+            GenStruct<FooStruct>
+                .TransitiveConstraint()
+                .GetType()
+                .Equals(typeof(Transition<FooStruct>))
+        );
 
         if (result)
         {
@@ -61,6 +77,5 @@ public class Test
             return 1;
         }
     }
-
 }
 

@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
     {
         public static FilterFactoryResult GetAllFilters(
             IFilterProvider[] filterProviders,
-            ActionContext actionContext)
+            ActionContext actionContext
+        )
         {
             if (filterProviders == null)
             {
@@ -28,9 +29,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             var staticFilterItems = new FilterItem[actionDescriptor.FilterDescriptors.Count];
 
             var orderedFilters = actionDescriptor.FilterDescriptors
-                .OrderBy(
-                    filter => filter,
-                    FilterDescriptorOrderComparer.Comparer)
+                .OrderBy(filter => filter, FilterDescriptorOrderComparer.Comparer)
                 .ToList();
 
             for (var i = 0; i < orderedFilters.Count; i++)
@@ -57,7 +56,11 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                 }
             }
 
-            if (allFiltersAreReusable && filterProviders.Length == 1 && filterProviders[0] is DefaultFilterProvider defaultFilterProvider)
+            if (
+                allFiltersAreReusable
+                && filterProviders.Length == 1
+                && filterProviders[0] is DefaultFilterProvider defaultFilterProvider
+            )
             {
                 // If we know we can safely cache all filters and only the default filter provider is registered, we can
                 // probably re-use filters between requests.
@@ -70,7 +73,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         public static IFilterMetadata[] CreateUncachedFilters(
             IFilterProvider[] filterProviders,
             ActionContext actionContext,
-            FilterItem[] cachedFilterItems)
+            FilterItem[] cachedFilterItems
+        )
         {
             if (filterProviders == null)
             {
@@ -102,7 +106,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
                     {
                         Filter = filterItem.Filter,
                         IsReusable = filterItem.IsReusable
-                    });
+                    }
+                );
             }
 
             return CreateUncachedFiltersCore(filterProviders, actionContext, filterItems);
@@ -111,7 +116,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
         private static IFilterMetadata[] CreateUncachedFiltersCore(
             IFilterProvider[] filterProviders,
             ActionContext actionContext,
-            List<FilterItem> filterItems)
+            List<FilterItem> filterItems
+        )
         {
             // Execute providers
             var context = new FilterProviderContext(actionContext, filterItems);

@@ -54,9 +54,14 @@ internal static partial class Interop
         }
 
         [DllImport(Interop.Libraries.CryptUI, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern bool CryptUIDlgViewCertificateW([MarshalAs(UnmanagedType.LPStruct)] CRYPTUI_VIEWCERTIFICATE_STRUCTW ViewInfo, IntPtr pfPropertiesChanged);
+        internal static extern bool CryptUIDlgViewCertificateW(
+            [MarshalAs(UnmanagedType.LPStruct)] CRYPTUI_VIEWCERTIFICATE_STRUCTW ViewInfo,
+            IntPtr pfPropertiesChanged
+        );
 
         [DllImport(Interop.Libraries.CryptUI, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal static extern SafeCertContextHandle CryptUIDlgSelectCertificateW([In, Out, MarshalAs(UnmanagedType.LPStruct)] CRYPTUI_SELECTCERTIFICATE_STRUCTW csc);
+        internal static extern SafeCertContextHandle CryptUIDlgSelectCertificateW(
+            [In, Out, MarshalAs(UnmanagedType.LPStruct)] CRYPTUI_SELECTCERTIFICATE_STRUCTW csc
+        );
     }
 }

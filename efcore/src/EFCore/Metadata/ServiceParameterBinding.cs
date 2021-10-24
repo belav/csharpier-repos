@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         protected ServiceParameterBinding(
             Type parameterType,
             Type serviceType,
-            IPropertyBase[]? serviceProperties = null)
-            : base(parameterType, serviceProperties)
+            IPropertyBase[]? serviceProperties = null
+        ) : base(parameterType, serviceProperties)
         {
             Check.NotNull(serviceType, nameof(serviceType));
 
@@ -47,10 +47,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="bindingInfo"> The binding information. </param>
         /// <returns> The expression tree. </returns>
-        public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
-            => BindToParameter(
+        public override Expression BindToParameter(ParameterBindingInfo bindingInfo) =>
+            BindToParameter(
                 bindingInfo.MaterializationContextExpression,
-                Expression.Constant(bindingInfo.EntityType));
+                Expression.Constant(bindingInfo.EntityType)
+            );
 
         /// <summary>
         ///     Creates an expression tree representing the binding of the value of a property from a
@@ -61,24 +62,33 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns> The expression tree. </returns>
         public abstract Expression BindToParameter(
             Expression materializationExpression,
-            Expression entityTypeExpression);
+            Expression entityTypeExpression
+        );
 
         /// <summary>
         ///     A delegate to set a CLR service property on an entity instance.
         /// </summary>
-        public virtual Func<MaterializationContext, IEntityType, object, object> ServiceDelegate
-            => NonCapturingLazyInitializer.EnsureInitialized(
-                ref _serviceDelegate, this, static b =>
+        public virtual Func<MaterializationContext, IEntityType, object, object> ServiceDelegate =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _serviceDelegate,
+                this,
+                static b =>
                 {
-                    var materializationContextParam = Expression.Parameter(typeof(MaterializationContext));
+                    var materializationContextParam = Expression.Parameter(
+                        typeof(MaterializationContext)
+                    );
                     var entityTypeParam = Expression.Parameter(typeof(IEntityType));
                     var entityParam = Expression.Parameter(typeof(object));
 
-                    return Expression.Lambda<Func<MaterializationContext, IEntityType, object, object>>(
-                        b.BindToParameter(materializationContextParam, entityTypeParam),
-                        materializationContextParam,
-                        entityTypeParam,
-                        entityParam).Compile();
-                });
+                    return Expression
+                        .Lambda<Func<MaterializationContext, IEntityType, object, object>>(
+                            b.BindToParameter(materializationContextParam, entityTypeParam),
+                            materializationContextParam,
+                            entityTypeParam,
+                            entityParam
+                        )
+                        .Compile();
+                }
+            );
     }
 }

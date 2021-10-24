@@ -15,7 +15,6 @@ namespace Microsoft.TestCommon
         /// A special value used to indicate that the test is valid on all known platforms.
         /// </summary>
         All = 0xFFFFFF,
-
         /// <summary>
         /// Indicates that the test wants to run on .NET 4 (when used with
         /// <see cref="FactAttribute.Platforms"/> and/or <see cref="TheoryAttribute.Platforms"/>),
@@ -24,7 +23,6 @@ namespace Microsoft.TestCommon
         /// <see cref="TheoryDiscoverer.Platform"/>).
         /// </summary>
         Net40 = 0x01,
-
         /// <summary>
         /// Indicates that the test wants to run on .NET 4.5 (when used with
         /// <see cref="FactAttribute.Platforms"/> and/or <see cref="TheoryAttribute.Platforms"/>),

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Routing.Template
 
         public DefaultTemplateBinderFactory(
             ParameterPolicyFactory policyFactory,
-            ObjectPool<UriBuildingContext> pool)
+            ObjectPool<UriBuildingContext> pool
+        )
         {
             if (policyFactory == null)
             {
@@ -30,7 +31,6 @@ namespace Microsoft.AspNetCore.Routing.Template
 
             _policyFactory = policyFactory;
             _pool = pool;
-
         }
 
         public override TemplateBinder Create(RouteTemplate template, RouteValueDictionary defaults)
@@ -69,7 +69,10 @@ namespace Microsoft.AspNetCore.Routing.Template
                 for (var i = 0; i < kvp.Value.Count; i++)
                 {
                     var parameterPolicy = _policyFactory.Create(parameter, kvp.Value[i]);
-                    if (!foundTransformer && parameterPolicy is IOutboundParameterTransformer parameterTransformer)
+                    if (
+                        !foundTransformer
+                        && parameterPolicy is IOutboundParameterTransformer parameterTransformer
+                    )
                     {
                         policies.Add((parameterName, parameterTransformer));
                         foundTransformer = true;

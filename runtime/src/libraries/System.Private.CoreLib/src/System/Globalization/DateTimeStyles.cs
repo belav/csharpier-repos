@@ -22,13 +22,9 @@ namespace System.Globalization
 
 
         None = 0x00000000,
-
         AllowLeadingWhite = 0x00000001,
-
         AllowTrailingWhite = 0x00000002, // Bitflag indicating trailing whitespace is allowed.
-
         AllowInnerWhite = 0x00000004,
-
         AllowWhiteSpaces = AllowLeadingWhite | AllowInnerWhite | AllowTrailingWhite,
         // When parsing a date/time string, if all year/month/day are missing, set the default date
         // to 0001/1/1, instead of the current year/month/day.
@@ -38,9 +34,7 @@ namespace System.Globalization
         // adjust the parsed time based to GMT.
 
         AdjustToUniversal = 0x00000010,
-
         AssumeLocal = 0x00000020,
-
         AssumeUniversal = 0x00000040,
         // Attempt to preserve whether the input is unspecified, local or UTC
         RoundtripKind = 0x00000080,

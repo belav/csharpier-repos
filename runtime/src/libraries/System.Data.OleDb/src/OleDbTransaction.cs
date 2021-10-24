@@ -23,15 +23,23 @@ namespace System.Data.OleDb
         {
             private bool _mustComplete;
 
-            internal WrappedTransaction(UnsafeNativeMethods.ITransactionLocal transaction, int isolevel, out OleDbHResult hr) : base(transaction)
+            internal WrappedTransaction(
+                UnsafeNativeMethods.ITransactionLocal transaction,
+                int isolevel,
+                out OleDbHResult hr
+            ) : base(transaction)
             {
                 int transactionLevel = 0;
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try
-                { }
+                try { }
                 finally
                 {
-                    hr = transaction.StartTransaction(isolevel, 0, IntPtr.Zero, out transactionLevel);
+                    hr = transaction.StartTransaction(
+                        isolevel,
+                        0,
+                        IntPtr.Zero,
+                        out transactionLevel
+                    );
                     if (0 <= hr)
                     {
                         _mustComplete = true;
@@ -54,11 +62,12 @@ namespace System.Data.OleDb
                 {
                     DangerousAddRef(ref mustRelease);
                     RuntimeHelpers.PrepareConstrainedRegions();
-                    try
-                    { }
+                    try { }
                     finally
                     {
-                        hr = (OleDbHResult)NativeOledbWrapper.ITransactionAbort(DangerousGetHandle());
+                        hr = (OleDbHResult)NativeOledbWrapper.ITransactionAbort(
+                            DangerousGetHandle()
+                        );
                         _mustComplete = false;
                     }
                 }
@@ -82,11 +91,12 @@ namespace System.Data.OleDb
                 {
                     DangerousAddRef(ref mustRelease);
                     RuntimeHelpers.PrepareConstrainedRegions();
-                    try
-                    { }
+                    try { }
                     finally
                     {
-                        hr = (OleDbHResult)NativeOledbWrapper.ITransactionCommit(DangerousGetHandle());
+                        hr = (OleDbHResult)NativeOledbWrapper.ITransactionCommit(
+                            DangerousGetHandle()
+                        );
                         if ((0 <= (int)hr) || (OleDbHResult.XACT_E_NOTRANSACTION == hr))
                         {
                             _mustComplete = false;
@@ -114,7 +124,11 @@ namespace System.Data.OleDb
             }
         }
 
-        internal OleDbTransaction(OleDbConnection connection, OleDbTransaction? transaction, IsolationLevel isolevel)
+        internal OleDbTransaction(
+            OleDbConnection connection,
+            OleDbTransaction? transaction,
+            IsolationLevel isolevel
+        )
         {
             _parentConnection = connection;
             _parentTransaction = transaction;
@@ -139,18 +153,12 @@ namespace System.Data.OleDb
 
         public new OleDbConnection? Connection
         {
-            get
-            {
-                return _parentConnection;
-            }
+            get { return _parentConnection; }
         }
 
         protected override DbConnection? DbConnection
         {
-            get
-            {
-                return Connection;
-            }
+            get { return Connection; }
         }
 
         public override IsolationLevel IsolationLevel
@@ -167,10 +175,7 @@ namespace System.Data.OleDb
 
         internal OleDbTransaction? Parent
         {
-            get
-            {
-                return _parentTransaction;
-            }
+            get { return _parentTransaction; }
         }
 
         public OleDbTransaction Begin(IsolationLevel isolevel)
@@ -298,7 +303,9 @@ namespace System.Data.OleDb
         {
             Exception? e = OleDbConnection.ProcessResults(hr, _parentConnection, this);
             if (null != e)
-            { throw e; }
+            {
+                throw e;
+            }
         }
 
         public override void Rollback()

@@ -31,8 +31,13 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task WebHostThrowsWithNoServer()
         {
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => CreateBuilder().Build().StartAsync());
-            Assert.Equal("No service for type 'Microsoft.AspNetCore.Hosting.Server.IServer' has been registered.", ex.Message);
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => CreateBuilder().Build().StartAsync()
+            );
+            Assert.Equal(
+                "No service for type 'Microsoft.AspNetCore.Hosting.Server.IServer' has been registered.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -75,10 +80,7 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public void UsesConfigurationForAddressesAndDoNotPreferHostingUrlsIfNotConfigured()
         {
-            var data = new Dictionary<string, string>
-            {
-                { "urls", "http://localhost:5003" }
-            };
+            var data = new Dictionary<string, string> { { "urls", "http://localhost:5003" } };
 
             var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
 
@@ -126,10 +128,7 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task PreferHostingUrlsWhenAddressIsConfigured()
         {
-            var data = new Dictionary<string, string>
-            {
-                { "urls", "http://localhost:5003" }
-            };
+            var data = new Dictionary<string, string> { { "urls", "http://localhost:5003" } };
 
             var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
 
@@ -143,10 +142,12 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public void WebHostCanBeStarted()
         {
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .Start())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Start()
+            )
             {
                 var server = (FakeServer)host.Services.GetRequiredService<IServer>();
                 Assert.NotNull(host);
@@ -162,14 +163,17 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task WebHostShutsDownWhenTokenTriggers()
         {
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
-                var lifetime2 = host.Services.GetRequiredService<AspNetCore.Hosting.IApplicationLifetime>();
+                var lifetime2 =
+                    host.Services.GetRequiredService<AspNetCore.Hosting.IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
                 var server = (FakeServer)host.Services.GetRequiredService<IServer>();
 
@@ -208,22 +212,31 @@ namespace Microsoft.AspNetCore.Hosting
             var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
 
             var server = new Mock<IServer>();
-            server.Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-                .Returns<CancellationToken>(token =>
-                {
-                    return Task.Run(() =>
+            server
+                .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
+                .Returns<CancellationToken>(
+                    token =>
                     {
-                        token.WaitHandle.WaitOne();
-                    });
-                });
+                        return Task.Run(
+                            () =>
+                            {
+                                token.WaitHandle.WaitOne();
+                            }
+                        );
+                    }
+                );
 
-            using (var host = CreateBuilder(config)
-                .ConfigureServices(services =>
-                {
-                    services.AddSingleton(server.Object);
-                })
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .Build())
+            using (
+                var host = CreateBuilder(config)
+                    .ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(server.Object);
+                        }
+                    )
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 await host.StartAsync();
 
@@ -247,22 +260,31 @@ namespace Microsoft.AspNetCore.Hosting
             var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
 
             var server = new Mock<IServer>();
-            server.Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-                .Returns<CancellationToken>(token =>
-                {
-                    return Task.Run(() =>
+            server
+                .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
+                .Returns<CancellationToken>(
+                    token =>
                     {
-                        token.WaitHandle.WaitOne();
-                    });
-                });
+                        return Task.Run(
+                            () =>
+                            {
+                                token.WaitHandle.WaitOne();
+                            }
+                        );
+                    }
+                );
 
-            using (var host = CreateBuilder(config)
-                .ConfigureServices(services =>
-                {
-                    services.AddSingleton(server.Object);
-                })
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .Build())
+            using (
+                var host = CreateBuilder(config)
+                    .ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(server.Object);
+                        }
+                    )
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 await host.StartAsync();
 
@@ -283,22 +305,31 @@ namespace Microsoft.AspNetCore.Hosting
             var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();
 
             var server = new Mock<IServer>();
-            server.Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-                .Returns<CancellationToken>(token =>
-                {
-                    return Task.Run(() =>
+            server
+                .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
+                .Returns<CancellationToken>(
+                    token =>
                     {
-                        token.WaitHandle.WaitOne();
-                    });
-                });
+                        return Task.Run(
+                            () =>
+                            {
+                                token.WaitHandle.WaitOne();
+                            }
+                        );
+                    }
+                );
 
-            using (var host = CreateBuilder(config)
-                .ConfigureServices(services =>
-                {
-                    services.AddSingleton(server.Object);
-                })
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .Build())
+            using (
+                var host = CreateBuilder(config)
+                    .ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(server.Object);
+                        }
+                    )
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 await host.StartAsync();
 
@@ -314,10 +345,12 @@ namespace Microsoft.AspNetCore.Hosting
         [ConditionalFact]
         public void WebHostApplicationLifetimeEventsOrderedCorrectlyDuringShutdown()
         {
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
                 var applicationStartedEvent = new ManualResetEventSlim(false);
@@ -327,35 +360,46 @@ namespace Microsoft.AspNetCore.Hosting
                 var applicationStoppingCompletedBeforeApplicationStopped = false;
                 var applicationStoppedCompletedBeforeRunCompleted = false;
 
-                lifetime.ApplicationStarted.Register(() =>
-                {
-                    applicationStartedEvent.Set();
-                });
+                lifetime.ApplicationStarted.Register(
+                    () =>
+                    {
+                        applicationStartedEvent.Set();
+                    }
+                );
 
-                lifetime.ApplicationStopping.Register(() =>
-                {
-                    // Check whether the applicationStartedEvent has been set
-                    applicationStartedCompletedBeforeApplicationStopping = applicationStartedEvent.IsSet;
+                lifetime.ApplicationStopping.Register(
+                    () =>
+                    {
+                        // Check whether the applicationStartedEvent has been set
+                        applicationStartedCompletedBeforeApplicationStopping =
+                            applicationStartedEvent.IsSet;
 
-                    // Simulate work.
-                    Thread.Sleep(1000);
+                        // Simulate work.
+                        Thread.Sleep(1000);
 
-                    applicationStoppingEvent.Set();
-                });
+                        applicationStoppingEvent.Set();
+                    }
+                );
 
-                lifetime.ApplicationStopped.Register(() =>
-                {
-                    // Check whether the applicationStoppingEvent has been set
-                    applicationStoppingCompletedBeforeApplicationStopped = applicationStoppingEvent.IsSet;
-                    applicationStoppedEvent.Set();
-                });
+                lifetime.ApplicationStopped.Register(
+                    () =>
+                    {
+                        // Check whether the applicationStoppingEvent has been set
+                        applicationStoppingCompletedBeforeApplicationStopped =
+                            applicationStoppingEvent.IsSet;
+                        applicationStoppedEvent.Set();
+                    }
+                );
 
-                var runHostAndVerifyApplicationStopped = Task.Run(async () =>
-                {
-                    await host.RunAsync();
-                    // Check whether the applicationStoppingEvent has been set
-                    applicationStoppedCompletedBeforeRunCompleted = applicationStoppedEvent.IsSet;
-                });
+                var runHostAndVerifyApplicationStopped = Task.Run(
+                    async () =>
+                    {
+                        await host.RunAsync();
+                        // Check whether the applicationStoppingEvent has been set
+                        applicationStoppedCompletedBeforeRunCompleted =
+                            applicationStoppedEvent.IsSet;
+                    }
+                );
 
                 // Wait until application has started to shut down the host
                 Assert.True(applicationStartedEvent.Wait(5000));
@@ -376,15 +420,19 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task WebHostDisposesServiceProvider()
         {
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .ConfigureServices(s =>
-                {
-                    s.AddTransient<IFakeService, FakeService>();
-                    s.AddSingleton<IFakeSingletonService, FakeService>();
-                })
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        s =>
+                        {
+                            s.AddTransient<IFakeService, FakeService>();
+                            s.AddSingleton<IFakeSingletonService, FakeService>();
+                        }
+                    )
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 await host.StartAsync();
 
@@ -409,13 +457,12 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task WebHostNotifiesApplicationStarted()
         {
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .Build())
+            using (var host = CreateBuilder().UseFakeServer().Build())
             {
                 var applicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
-                var applicationLifetime2 = host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
+                var applicationLifetime2 =
+                    host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
                 Assert.False(applicationLifetime.ApplicationStarted.IsCancellationRequested);
@@ -430,13 +477,12 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task WebHostNotifiesAllIApplicationLifetimeCallbacksEvenIfTheyThrow()
         {
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .Build())
+            using (var host = CreateBuilder().UseFakeServer().Build())
             {
                 var applicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
-                var applicationLifetime2 = host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
+                var applicationLifetime2 =
+                    host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
                 var started = RegisterCallbacksThatThrow(applicationLifetime.ApplicationStarted);
@@ -444,7 +490,9 @@ namespace Microsoft.AspNetCore.Hosting
                 var stopped = RegisterCallbacksThatThrow(applicationLifetime.ApplicationStopped);
 
                 var started2 = RegisterCallbacksThatThrow(applicationLifetime2.ApplicationStarted);
-                var stopping2 = RegisterCallbacksThatThrow(applicationLifetime2.ApplicationStopping);
+                var stopping2 = RegisterCallbacksThatThrow(
+                    applicationLifetime2.ApplicationStopping
+                );
                 var stopped2 = RegisterCallbacksThatThrow(applicationLifetime2.ApplicationStopped);
 
                 await host.StartAsync();
@@ -466,14 +514,18 @@ namespace Microsoft.AspNetCore.Hosting
             bool[] hostedSeviceCalls1 = null;
             bool[] hostedServiceCalls2 = null;
 
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .ConfigureServices(services =>
-                {
-                    hostedSeviceCalls1 = RegisterCallbacksThatThrow(services);
-                    hostedServiceCalls2 = RegisterCallbacksThatThrow(services);
-                })
-                .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            hostedSeviceCalls1 = RegisterCallbacksThatThrow(services);
+                            hostedServiceCalls2 = RegisterCallbacksThatThrow(services);
+                        }
+                    )
+                    .Build()
+            )
             {
                 await Assert.ThrowsAsync<InvalidOperationException>(() => host.StartAsync());
                 Assert.True(hostedSeviceCalls1[0]);
@@ -490,27 +542,31 @@ namespace Microsoft.AspNetCore.Hosting
             var stoppingCalls = 0;
             var disposingCalls = 0;
 
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .ConfigureServices(services =>
-                {
-                    Action started = () =>
-                    {
-                    };
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            Action started = () => { };
 
-                    Action stopping = () =>
-                    {
-                        stoppingCalls++;
-                    };
+                            Action stopping = () =>
+                            {
+                                stoppingCalls++;
+                            };
 
-                    Action disposing = () =>
-                    {
-                        disposingCalls++;
-                    };
+                            Action disposing = () =>
+                            {
+                                disposingCalls++;
+                            };
 
-                    services.AddSingleton<IHostedService>(_ => new DelegateHostedService(started, stopping, disposing));
-                })
-                .Build())
+                            services.AddSingleton<IHostedService>(
+                                _ => new DelegateHostedService(started, stopping, disposing)
+                            );
+                        }
+                    )
+                    .Build()
+            )
             {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
                 lifetime.StopApplication();
@@ -527,13 +583,17 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task HostedServiceCanInjectApplicationLifetime()
         {
-            using (var host = CreateBuilder()
-                   .UseFakeServer()
-                   .ConfigureServices(services =>
-                   {
-                       services.AddSingleton<IHostedService, TestHostedService>();
-                   })
-                   .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton<IHostedService, TestHostedService>();
+                        }
+                    )
+                    .Build()
+            )
             {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
                 lifetime.StopApplication();
@@ -551,13 +611,17 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task HostedServiceStartNotCalledIfWebHostNotStarted()
         {
-            using (var host = CreateBuilder()
-                   .UseFakeServer()
-                   .ConfigureServices(services =>
-                   {
-                       services.AddHostedService<TestHostedService>();
-                   })
-                   .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            services.AddHostedService<TestHostedService>();
+                        }
+                    )
+                    .Build()
+            )
             {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
                 lifetime.StopApplication();
@@ -579,28 +643,34 @@ namespace Microsoft.AspNetCore.Hosting
             var startedCalls = 0;
             var disposingCalls = 0;
 
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .ConfigureServices(services =>
-                {
-                    Action started = () =>
-                    {
-                        startedCalls++;
-                    };
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            Action started = () =>
+                            {
+                                startedCalls++;
+                            };
 
-                    Action stopping = () =>
-                    {
-                        stoppingCalls++;
-                    };
+                            Action stopping = () =>
+                            {
+                                stoppingCalls++;
+                            };
 
-                    Action disposing = () =>
-                    {
-                        disposingCalls++;
-                    };
+                            Action disposing = () =>
+                            {
+                                disposingCalls++;
+                            };
 
-                    services.AddSingleton<IHostedService>(_ => new DelegateHostedService(started, stopping, disposing));
-                })
-                .Build())
+                            services.AddSingleton<IHostedService>(
+                                _ => new DelegateHostedService(started, stopping, disposing)
+                            );
+                        }
+                    )
+                    .Build()
+            )
             {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
@@ -632,28 +702,34 @@ namespace Microsoft.AspNetCore.Hosting
             var startedCalls = 0;
             var disposingCalls = 0;
 
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .ConfigureServices(services =>
-                {
-                    Action started = () =>
-                    {
-                        startedCalls++;
-                    };
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            Action started = () =>
+                            {
+                                startedCalls++;
+                            };
 
-                    Action stopping = () =>
-                    {
-                        stoppingCalls++;
-                    };
+                            Action stopping = () =>
+                            {
+                                stoppingCalls++;
+                            };
 
-                    Action disposing = () =>
-                    {
-                        disposingCalls++;
-                    };
+                            Action disposing = () =>
+                            {
+                                disposingCalls++;
+                            };
 
-                    services.AddSingleton<IHostedService>(_ => new DelegateHostedService(started, stopping, disposing));
-                })
-                .Build())
+                            services.AddSingleton<IHostedService>(
+                                _ => new DelegateHostedService(started, stopping, disposing)
+                            );
+                        }
+                    )
+                    .Build()
+            )
             {
                 var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
@@ -675,25 +751,32 @@ namespace Microsoft.AspNetCore.Hosting
             bool[] hostedServiceCalls1 = null;
             bool[] hostedServiceCalls2 = null;
 
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .ConfigureServices(services =>
-                {
-                    hostedServiceCalls1 = RegisterCallbacksThatThrow(services);
-                    hostedServiceCalls2 = RegisterCallbacksThatThrow(services);
-                })
-                .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            hostedServiceCalls1 = RegisterCallbacksThatThrow(services);
+                            hostedServiceCalls2 = RegisterCallbacksThatThrow(services);
+                        }
+                    )
+                    .Build()
+            )
             {
                 var applicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
-                var applicationLifetime2 = host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
+                var applicationLifetime2 =
+                    host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
                 var started = RegisterCallbacksThatThrow(applicationLifetime.ApplicationStarted);
                 var stopping = RegisterCallbacksThatThrow(applicationLifetime.ApplicationStopping);
 
                 var started2 = RegisterCallbacksThatThrow(applicationLifetime2.ApplicationStarted);
-                var stopping2 = RegisterCallbacksThatThrow(applicationLifetime2.ApplicationStopping);
+                var stopping2 = RegisterCallbacksThatThrow(
+                    applicationLifetime2.ApplicationStopping
+                );
 
                 await Assert.ThrowsAsync<InvalidOperationException>(() => host.StartAsync());
                 Assert.True(hostedServiceCalls1[0]);
@@ -711,11 +794,13 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task WebHostInjectsHostingEnvironment()
         {
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .UseEnvironment("WithHostingEnvironment")
-                .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .UseEnvironment("WithHostingEnvironment")
+                    .Build()
+            )
             {
                 await host.StartAsync();
                 var env = host.Services.GetService<IHostEnvironment>();
@@ -731,10 +816,12 @@ namespace Microsoft.AspNetCore.Hosting
         public void CanReplaceStartupLoader()
         {
             var builder = CreateBuilder()
-                .ConfigureServices(services =>
-                {
-                    services.AddTransient<IStartup, TestStartup>();
-                })
+                .ConfigureServices(
+                    services =>
+                    {
+                        services.AddTransient<IStartup, TestStartup>();
+                    }
+                )
                 .UseFakeServer()
                 .UseStartup("Microsoft.AspNetCore.Hosting.Tests");
 
@@ -744,7 +831,12 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public void CanCreateApplicationServicesWithAddedServices()
         {
-            using (var host = CreateBuilder().UseFakeServer().ConfigureServices(services => services.AddOptions()).Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(services => services.AddOptions())
+                    .Build()
+            )
             {
                 Assert.NotNull(host.Services.GetRequiredService<IOptions<object>>());
             }
@@ -755,20 +847,32 @@ namespace Microsoft.AspNetCore.Hosting
         {
             // Verify ordering
             var configureOrder = 0;
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddTransient<IStartupFilter>(serviceProvider => new TestFilter(
-                        () => Assert.Equal(1, configureOrder++),
-                        () => Assert.Equal(2, configureOrder++),
-                        () => Assert.Equal(5, configureOrder++)));
-                    services.AddTransient<IStartupFilter>(serviceProvider => new TestFilter(
-                        () => Assert.Equal(0, configureOrder++),
-                        () => Assert.Equal(3, configureOrder++),
-                        () => Assert.Equal(4, configureOrder++)));
-                })
-                .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            services.AddTransient<IStartupFilter>(
+                                serviceProvider =>
+                                    new TestFilter(
+                                        () => Assert.Equal(1, configureOrder++),
+                                        () => Assert.Equal(2, configureOrder++),
+                                        () => Assert.Equal(5, configureOrder++)
+                                    )
+                            );
+                            services.AddTransient<IStartupFilter>(
+                                serviceProvider =>
+                                    new TestFilter(
+                                        () => Assert.Equal(0, configureOrder++),
+                                        () => Assert.Equal(3, configureOrder++),
+                                        () => Assert.Equal(4, configureOrder++)
+                                    )
+                            );
+                        }
+                    )
+                    .Build()
+            )
             {
                 host.Start();
                 Assert.Equal(6, configureOrder);
@@ -781,7 +885,11 @@ namespace Microsoft.AspNetCore.Hosting
             private readonly Action _verifyBuildBeforeOrder;
             private readonly Action _verifyBuildAfterOrder;
 
-            public TestFilter(Action verifyConfigureOrder, Action verifyBuildBeforeOrder, Action verifyBuildAfterOrder)
+            public TestFilter(
+                Action verifyConfigureOrder,
+                Action verifyBuildBeforeOrder,
+                Action verifyBuildAfterOrder
+            )
             {
                 _verifyConfigureOrder = verifyConfigureOrder;
                 _verifyBuildBeforeOrder = verifyBuildBeforeOrder;
@@ -817,13 +925,9 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public void EnvDefaultsToConfigValueIfSpecified()
         {
-            var vals = new Dictionary<string, string>
-            {
-                { "Environment", Environments.Staging }
-            };
+            var vals = new Dictionary<string, string> { { "Environment", Environments.Staging } };
 
-            var builder = new ConfigurationBuilder()
-                .AddInMemoryCollection(vals);
+            var builder = new ConfigurationBuilder().AddInMemoryCollection(vals);
             var config = builder.Build();
 
             using (var host = CreateBuilder(config).UseFakeServer().Build())
@@ -840,13 +944,9 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public void WebRootCanBeResolvedFromTheConfig()
         {
-            var vals = new Dictionary<string, string>
-            {
-                { "webroot", "testroot" }
-            };
+            var vals = new Dictionary<string, string> { { "webroot", "testroot" } };
 
-            var builder = new ConfigurationBuilder()
-                .AddInMemoryCollection(vals);
+            var builder = new ConfigurationBuilder().AddInMemoryCollection(vals);
             var config = builder.Build();
 
             using (var host = CreateBuilder(config).UseFakeServer().Build())
@@ -879,16 +979,19 @@ namespace Microsoft.AspNetCore.Hosting
         public async Task WebHost_CreatesDefaultRequestIdentifierFeature_IfNotPresent()
         {
             // Arrange
-            var requestDelegate = new RequestDelegate(httpContext =>
-            {
-                // Assert
-                Assert.NotNull(httpContext);
-                var featuresTraceIdentifier = httpContext.Features.Get<IHttpRequestIdentifierFeature>().TraceIdentifier;
-                Assert.False(string.IsNullOrWhiteSpace(httpContext.TraceIdentifier));
-                Assert.Same(httpContext.TraceIdentifier, featuresTraceIdentifier);
+            var requestDelegate = new RequestDelegate(
+                httpContext =>
+                {
+                    // Assert
+                    Assert.NotNull(httpContext);
+                    var featuresTraceIdentifier =
+                        httpContext.Features.Get<IHttpRequestIdentifierFeature>().TraceIdentifier;
+                    Assert.False(string.IsNullOrWhiteSpace(httpContext.TraceIdentifier));
+                    Assert.Same(httpContext.TraceIdentifier, featuresTraceIdentifier);
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                }
+            );
 
             using (var host = CreateHost(requestDelegate))
             {
@@ -902,14 +1005,19 @@ namespace Microsoft.AspNetCore.Hosting
         {
             // Arrange
             var requestIdentifierFeature = new StubHttpRequestIdentifierFeature();
-            var requestDelegate = new RequestDelegate(httpContext =>
-            {
-                // Assert
-                Assert.NotNull(httpContext);
-                Assert.Same(requestIdentifierFeature, httpContext.Features.Get<IHttpRequestIdentifierFeature>());
+            var requestDelegate = new RequestDelegate(
+                httpContext =>
+                {
+                    // Assert
+                    Assert.NotNull(httpContext);
+                    Assert.Same(
+                        requestIdentifierFeature,
+                        httpContext.Features.Get<IHttpRequestIdentifierFeature>()
+                    );
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                }
+            );
 
             using (var host = CreateHost(requestDelegate))
             {
@@ -928,10 +1036,7 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public async Task WebHost_InvokesConfigureMethodsOnlyOnce()
         {
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .UseStartup<CountStartup>()
-                .Build())
+            using (var host = CreateBuilder().UseFakeServer().UseStartup<CountStartup>().Build())
             {
                 await host.StartAsync();
                 var services = host.Services;
@@ -947,13 +1052,15 @@ namespace Microsoft.AspNetCore.Hosting
             // Arrange
             HttpContext capturedContext = null;
             HttpRequest capturedRequest = null;
-            var requestDelegate = new RequestDelegate(httpContext =>
-            {
-                capturedContext = httpContext;
-                capturedRequest = httpContext.Request;
+            var requestDelegate = new RequestDelegate(
+                httpContext =>
+                {
+                    capturedContext = httpContext;
+                    capturedRequest = httpContext.Request;
 
-                return Task.CompletedTask;
-            });
+                    return Task.CompletedTask;
+                }
+            );
 
             using (var host = CreateHost(requestDelegate))
             {
@@ -965,7 +1072,9 @@ namespace Microsoft.AspNetCore.Hosting
                 Assert.NotNull(capturedRequest);
 
                 Assert.Throws<ObjectDisposedException>(() => capturedContext.TraceIdentifier);
-                Assert.Throws<ObjectDisposedException>(() => capturedContext.Features.Get<IHttpRequestIdentifierFeature>());
+                Assert.Throws<ObjectDisposedException>(
+                    () => capturedContext.Features.Get<IHttpRequestIdentifierFeature>()
+                );
 
                 Assert.Throws<ObjectDisposedException>(() => capturedRequest.Scheme);
             }
@@ -990,9 +1099,7 @@ namespace Microsoft.AspNetCore.Hosting
         [Fact]
         public void WebHost_ThrowsForBadConfigureServiceSignature()
         {
-            var builder = CreateBuilder()
-                .UseFakeServer()
-                .UseStartup<BadConfigureServicesStartup>();
+            var builder = CreateBuilder().UseFakeServer().UseStartup<BadConfigureServicesStartup>();
 
             var ex = Assert.Throws<InvalidOperationException>(() => builder.Build());
             Assert.Contains("ConfigureServices", ex.Message);
@@ -1005,14 +1112,17 @@ namespace Microsoft.AspNetCore.Hosting
             providerMock.Setup(d => d.Dispose());
 
             var sourceMock = new Mock<IConfigurationSource>();
-            sourceMock.Setup(s => s.Build(It.IsAny<IConfigurationBuilder>()))
+            sourceMock
+                .Setup(s => s.Build(It.IsAny<IConfigurationBuilder>()))
                 .Returns((ConfigurationProvider)providerMock.Object);
 
             var host = CreateBuilder()
-                .ConfigureAppConfiguration(configuration =>
-                {
-                    configuration.Add(sourceMock.Object);
-                })
+                .ConfigureAppConfiguration(
+                    configuration =>
+                    {
+                        configuration.Add(sourceMock.Object);
+                    }
+                )
                 .Build();
 
             providerMock.Verify(c => c.Dispose(), Times.Never);
@@ -1029,14 +1139,17 @@ namespace Microsoft.AspNetCore.Hosting
             providerMock.Setup(d => d.Dispose());
 
             var sourceMock = new Mock<IConfigurationSource>();
-            sourceMock.Setup(s => s.Build(It.IsAny<IConfigurationBuilder>()))
+            sourceMock
+                .Setup(s => s.Build(It.IsAny<IConfigurationBuilder>()))
                 .Returns((ConfigurationProvider)providerMock.Object);
 
             var host = CreateBuilder()
-                .ConfigureAppConfiguration(configuration =>
-                {
-                    configuration.Add(sourceMock.Object);
-                })
+                .ConfigureAppConfiguration(
+                    configuration =>
+                    {
+                        configuration.Add(sourceMock.Object);
+                    }
+                )
                 .Build();
 
             providerMock.Verify(c => c.Dispose(), Times.Never);
@@ -1051,13 +1164,17 @@ namespace Microsoft.AspNetCore.Hosting
         {
             var server = new Mock<IServer>();
 
-            using (var host = CreateBuilder()
-               .ConfigureServices(services =>
-               {
-                   services.AddSingleton(server.Object);
-               })
-               .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-               .Build())
+            using (
+                var host = CreateBuilder()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(server.Object);
+                        }
+                    )
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 await host.StopAsync();
             }
@@ -1070,14 +1187,18 @@ namespace Microsoft.AspNetCore.Hosting
         {
             var server = new Mock<IServer>();
 
-            using (var host = CreateBuilder()
-               .ConfigureServices(services =>
-               {
-                   services.AddSingleton(server.Object);
-                   services.AddSingleton<IHostedService, TestHostedService>();
-               })
-               .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-               .Build())
+            using (
+                var host = CreateBuilder()
+                    .ConfigureServices(
+                        services =>
+                        {
+                            services.AddSingleton(server.Object);
+                            services.AddSingleton<IHostedService, TestHostedService>();
+                        }
+                    )
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 var svc = (TestHostedService)host.Services.GetRequiredService<IHostedService>();
                 await svc.StopAsync(default);
@@ -1096,21 +1217,26 @@ namespace Microsoft.AspNetCore.Hosting
         {
             var builder = CreateBuilder()
                 .UseFakeServer()
-                .ConfigureLogging((_, factory) =>
-                {
-                    factory.AddProvider(new AllMessagesAreNeeded());
-                })
+                .ConfigureLogging(
+                    (_, factory) =>
+                    {
+                        factory.AddProvider(new AllMessagesAreNeeded());
+                    }
+                )
                 .Configure(
                     appBuilder =>
                     {
                         appBuilder.Run(requestDelegate);
-                    });
+                    }
+                );
             return builder.Build();
         }
 
         private IWebHostBuilder CreateBuilder(IConfiguration config = null)
         {
-            return new WebHostBuilder().UseConfiguration(config ?? new ConfigurationBuilder().Build()).UseStartup("Microsoft.AspNetCore.Hosting.Tests");
+            return new WebHostBuilder()
+                .UseConfiguration(config ?? new ConfigurationBuilder().Build())
+                .UseStartup("Microsoft.AspNetCore.Hosting.Tests");
         }
 
         private static bool[] RegisterCallbacksThatThrow(IServiceCollection services)
@@ -1129,7 +1255,9 @@ namespace Microsoft.AspNetCore.Hosting
                 throw new InvalidOperationException();
             };
 
-            services.AddSingleton<IHostedService>(new DelegateHostedService(started, stopping, () => { }));
+            services.AddSingleton<IHostedService>(
+                new DelegateHostedService(started, stopping, () => { })
+            );
 
             return events;
         }
@@ -1139,11 +1267,14 @@ namespace Microsoft.AspNetCore.Hosting
             var signals = new bool[3];
             for (int i = 0; i < signals.Length; i++)
             {
-                token.Register(state =>
-                {
-                    signals[(int)state] = true;
-                    throw new InvalidOperationException();
-                }, i);
+                token.Register(
+                    state =>
+                    {
+                        signals[(int)state] = true;
+                        throw new InvalidOperationException();
+                    },
+                    i
+                );
             }
 
             return signals;
@@ -1154,9 +1285,11 @@ namespace Microsoft.AspNetCore.Hosting
             private readonly IHostApplicationLifetime _lifetime;
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            public TestHostedService(IHostApplicationLifetime lifetime,
+            public TestHostedService(
+                IHostApplicationLifetime lifetime,
                 AspNetCore.Hosting.IApplicationLifetime lifetime1,
-                Extensions.Hosting.IApplicationLifetime lifetime2)
+                Extensions.Hosting.IApplicationLifetime lifetime2
+            )
 #pragma warning restore CS0618 // Type or member is obsolete
             {
                 _lifetime = lifetime;
@@ -1238,7 +1371,8 @@ namespace Microsoft.AspNetCore.Hosting
 
             public IList<StartInstance> StartInstances { get; } = new List<StartInstance>();
 
-            public Func<IFeatureCollection> CreateRequestFeatures { get; set; } = NewFeatureCollection;
+            public Func<IFeatureCollection> CreateRequestFeatures { get; set; } =
+                NewFeatureCollection;
 
             public IFeatureCollection Features { get; }
 
@@ -1251,7 +1385,10 @@ namespace Microsoft.AspNetCore.Hosting
                 return features;
             }
 
-            public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+            public Task StartAsync<TContext>(
+                IHttpApplication<TContext> application,
+                CancellationToken cancellationToken
+            )
             {
                 var startInstance = new StartInstance();
                 StartInstances.Add(startInstance);
@@ -1326,9 +1463,7 @@ namespace Microsoft.AspNetCore.Hosting
                 get { return 0; }
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public TFeature Get<TFeature>()
             {
@@ -1362,14 +1497,18 @@ namespace Microsoft.AspNetCore.Hosting
                 var stringified = state.ToString();
                 return this;
             }
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            )
             {
                 var stringified = formatter(state, exception);
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         private class StubFeatures : IHttpRequestFeature, IHttpResponseFeature, IHeaderDictionary
@@ -1461,7 +1600,9 @@ namespace Microsoft.AspNetCore.Hosting
     {
         public static IWebHostBuilder UseFakeServer(this IWebHostBuilder builder)
         {
-            return builder.ConfigureServices(services => services.AddSingleton<IServer, WebHostTests.FakeServer>());
+            return builder.ConfigureServices(
+                services => services.AddSingleton<IServer, WebHostTests.FakeServer>()
+            );
         }
     }
 }

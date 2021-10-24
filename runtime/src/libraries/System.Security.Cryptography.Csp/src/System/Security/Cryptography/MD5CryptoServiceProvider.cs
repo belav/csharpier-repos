@@ -29,8 +29,7 @@ namespace System.Security.Cryptography
         protected override void HashCore(ReadOnlySpan<byte> source) =>
             _incrementalHash.AppendData(source);
 
-        protected override byte[] HashFinal() =>
-            _incrementalHash.GetHashAndReset();
+        protected override byte[] HashFinal() => _incrementalHash.GetHashAndReset();
 
         protected override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
             _incrementalHash.TryGetHashAndReset(destination, out bytesWritten);

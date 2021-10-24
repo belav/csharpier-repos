@@ -3,7 +3,10 @@
     public class NoDiagnosticsAreReturnedIfParameterIsRenamedUsingBindingAttribute : Controller
     {
         [HttpPost]
-        public IActionResult EditPerson([FromForm(Name = "")] NoDiagnosticsAreReturnedIfParameterIsRenamedUsingBindingAttributeModel model) => null;
+        public IActionResult EditPerson(
+            [FromForm(Name = "")]
+                NoDiagnosticsAreReturnedIfParameterIsRenamedUsingBindingAttributeModel model
+        ) => null;
     }
 
     public class NoDiagnosticsAreReturnedIfParameterIsRenamedUsingBindingAttributeModel

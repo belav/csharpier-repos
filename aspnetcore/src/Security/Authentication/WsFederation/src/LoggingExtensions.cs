@@ -20,31 +20,38 @@ namespace Microsoft.Extensions.Logging
             _signInWithoutWResult = LoggerMessage.Define(
                 eventId: new EventId(1, "SignInWithoutWResult"),
                 logLevel: LogLevel.Debug,
-                formatString: "Received a sign-in message without a WResult.");
+                formatString: "Received a sign-in message without a WResult."
+            );
             _signInWithoutToken = LoggerMessage.Define(
                 eventId: new EventId(2, "SignInWithoutToken"),
                 logLevel: LogLevel.Debug,
-                formatString: "Received a sign-in message without a token.");
+                formatString: "Received a sign-in message without a token."
+            );
             _exceptionProcessingMessage = LoggerMessage.Define(
                 eventId: new EventId(3, "ExceptionProcessingMessage"),
                 logLevel: LogLevel.Error,
-                formatString: "Exception occurred while processing message.");
+                formatString: "Exception occurred while processing message."
+            );
             _malformedRedirectUri = LoggerMessage.Define<string>(
                 eventId: new EventId(4, "MalformedRedirectUri"),
                 logLevel: LogLevel.Warning,
-                formatString: "The sign-out redirect URI '{0}' is malformed.");
+                formatString: "The sign-out redirect URI '{0}' is malformed."
+            );
             _remoteSignOutHandledResponse = LoggerMessage.Define(
                 eventId: new EventId(5, "RemoteSignOutHandledResponse"),
-               logLevel: LogLevel.Debug,
-               formatString: "RemoteSignOutContext.HandledResponse");
+                logLevel: LogLevel.Debug,
+                formatString: "RemoteSignOutContext.HandledResponse"
+            );
             _remoteSignOutSkipped = LoggerMessage.Define(
                 eventId: new EventId(6, "RemoteSignOutSkipped"),
-               logLevel: LogLevel.Debug,
-               formatString: "RemoteSignOutContext.Skipped");
+                logLevel: LogLevel.Debug,
+                formatString: "RemoteSignOutContext.Skipped"
+            );
             _remoteSignOut = LoggerMessage.Define(
                 eventId: new EventId(7, "RemoteSignOut"),
-               logLevel: LogLevel.Information,
-               formatString: "Remote signout request processed.");
+                logLevel: LogLevel.Information,
+                formatString: "Remote signout request processed."
+            );
         }
 
         public static void SignInWithoutWResult(this ILogger logger)

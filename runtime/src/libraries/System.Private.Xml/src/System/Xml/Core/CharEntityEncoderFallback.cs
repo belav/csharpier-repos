@@ -19,9 +19,7 @@ namespace System.Xml
         private int _curMarkPos;
         private int _startOffset;
 
-        internal CharEntityEncoderFallback()
-        {
-        }
+        internal CharEntityEncoderFallback() { }
 
         public override EncoderFallbackBuffer CreateFallbackBuffer()
         {
@@ -34,22 +32,13 @@ namespace System.Xml
 
         public override int MaxCharCount
         {
-            get
-            {
-                return 12;
-            }
+            get { return 12; }
         }
 
         internal int StartOffset
         {
-            get
-            {
-                return _startOffset;
-            }
-            set
-            {
-                _startOffset = value;
-            }
+            get { return _startOffset; }
+            set { _startOffset = value; }
         }
 
         internal void Reset(int[] textContentMarks, int endMarkPos)
@@ -95,20 +84,28 @@ namespace System.Xml
             // If we are already in fallback, throw, it's probably at the suspect character in charEntity
             if (_charEntityIndex >= 0)
             {
-                (new EncoderExceptionFallback()).CreateFallbackBuffer().Fallback(charUnknown, index);
+                (new EncoderExceptionFallback())
+                    .CreateFallbackBuffer()
+                    .Fallback(charUnknown, index);
             }
 
             // find out if we can replace the character with entity
             if (_parent.CanReplaceAt(index))
             {
                 // Create the replacement character entity
-                _charEntity = string.Format(CultureInfo.InvariantCulture, "&#x{0:X};", new object[] { (int)charUnknown });
+                _charEntity = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "&#x{0:X};",
+                    new object[] { (int)charUnknown }
+                );
                 _charEntityIndex = 0;
                 return true;
             }
             else
             {
-                EncoderFallbackBuffer errorFallbackBuffer = (new EncoderExceptionFallback()).CreateFallbackBuffer();
+                EncoderFallbackBuffer errorFallbackBuffer = (
+                    new EncoderExceptionFallback()
+                ).CreateFallbackBuffer();
                 errorFallbackBuffer.Fallback(charUnknown, index);
                 return false;
             }
@@ -119,25 +116,36 @@ namespace System.Xml
             // check input surrogate pair
             if (!char.IsSurrogatePair(charUnknownHigh, charUnknownLow))
             {
-                throw XmlConvert.CreateInvalidSurrogatePairException(charUnknownHigh, charUnknownLow);
+                throw XmlConvert.CreateInvalidSurrogatePairException(
+                    charUnknownHigh,
+                    charUnknownLow
+                );
             }
 
             // If we are already in fallback, throw, it's probably at the suspect character in charEntity
             if (_charEntityIndex >= 0)
             {
-                (new EncoderExceptionFallback()).CreateFallbackBuffer().Fallback(charUnknownHigh, charUnknownLow, index);
+                (new EncoderExceptionFallback())
+                    .CreateFallbackBuffer()
+                    .Fallback(charUnknownHigh, charUnknownLow, index);
             }
 
             if (_parent.CanReplaceAt(index))
             {
                 // Create the replacement character entity
-                _charEntity = string.Format(CultureInfo.InvariantCulture, "&#x{0:X};", new object[] { SurrogateCharToUtf32(charUnknownHigh, charUnknownLow) });
+                _charEntity = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "&#x{0:X};",
+                    new object[] { SurrogateCharToUtf32(charUnknownHigh, charUnknownLow) }
+                );
                 _charEntityIndex = 0;
                 return true;
             }
             else
             {
-                EncoderFallbackBuffer errorFallbackBuffer = (new EncoderExceptionFallback()).CreateFallbackBuffer();
+                EncoderFallbackBuffer errorFallbackBuffer = (
+                    new EncoderExceptionFallback()
+                ).CreateFallbackBuffer();
                 errorFallbackBuffer.Fallback(charUnknownHigh, charUnknownLow, index);
                 return false;
             }
@@ -186,7 +194,6 @@ namespace System.Xml
                 }
             }
         }
-
 
         public override int Remaining
         {

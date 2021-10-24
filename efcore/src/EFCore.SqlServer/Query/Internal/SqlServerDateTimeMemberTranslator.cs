@@ -20,8 +20,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
     /// </summary>
     public class SqlServerDateTimeMemberTranslator : IMemberTranslator
     {
-        private static readonly Dictionary<string, string> _datePartMapping
-            = new()
+        private static readonly Dictionary<string, string> _datePartMapping =
+            new()
             {
                 { nameof(DateTime.Year), "year" },
                 { nameof(DateTime.Month), "month" },
@@ -44,7 +44,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         /// </summary>
         public SqlServerDateTimeMemberTranslator(
             ISqlExpressionFactory sqlExpressionFactory,
-            IRelationalTypeMappingSource typeMappingSource)
+            IRelationalTypeMappingSource typeMappingSource
+        )
         {
             Check.NotNull(sqlExpressionFactory, nameof(sqlExpressionFactory));
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
@@ -63,7 +64,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             SqlExpression? instance,
             MemberInfo member,
             Type returnType,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+            IDiagnosticsLogger<DbLoggerCategory.Query> logger
+        )
         {
             Check.NotNull(member, nameof(member));
             Check.NotNull(returnType, nameof(returnType));
@@ -71,8 +73,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
 
             var declaringType = member.DeclaringType;
 
-            if (declaringType == typeof(DateTime)
-                || declaringType == typeof(DateTimeOffset))
+            if (declaringType == typeof(DateTime) || declaringType == typeof(DateTimeOffset))
             {
                 var memberName = member.Name;
 
@@ -83,7 +84,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                         new[] { _sqlExpressionFactory.Fragment(datePart), instance! },
                         nullable: true,
                         argumentsPropagateNullability: new[] { false, true },
-                        returnType);
+                        returnType
+                    );
                 }
 
                 switch (memberName)
@@ -96,8 +98,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             argumentsPropagateNullability: new[] { false, true },
                             returnType,
                             declaringType == typeof(DateTime)
-                                ? instance!.TypeMapping
-                                : _typeMappingSource.FindMapping(typeof(DateTime)));
+                              ? instance!.TypeMapping
+                              : _typeMappingSource.FindMapping(typeof(DateTime))
+                        );
 
                     case nameof(DateTime.TimeOfDay):
                         return _sqlExpressionFactory.Function(
@@ -105,7 +108,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             new[] { _sqlExpressionFactory.Fragment("time"), instance! },
                             nullable: true,
                             argumentsPropagateNullability: new[] { false, true },
-                            returnType);
+                            returnType
+                        );
 
                     case nameof(DateTime.Now):
                         return _sqlExpressionFactory.Function(
@@ -113,7 +117,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             Array.Empty<SqlExpression>(),
                             nullable: false,
                             argumentsPropagateNullability: Array.Empty<bool>(),
-                            returnType);
+                            returnType
+                        );
 
                     case nameof(DateTime.UtcNow):
                         var serverTranslation = _sqlExpressionFactory.Function(
@@ -121,11 +126,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                             Array.Empty<SqlExpression>(),
                             nullable: false,
                             argumentsPropagateNullability: Array.Empty<bool>(),
-                            returnType);
+                            returnType
+                        );
 
                         return declaringType == typeof(DateTime)
-                            ? (SqlExpression)serverTranslation
-                            : _sqlExpressionFactory.Convert(serverTranslation, returnType);
+                          ? (SqlExpression)serverTranslation
+                          : _sqlExpressionFactory.Convert(serverTranslation, returnType);
 
                     case nameof(DateTime.Today):
                         return _sqlExpressionFactory.Function(
@@ -138,11 +144,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
                                     Array.Empty<SqlExpression>(),
                                     nullable: false,
                                     argumentsPropagateNullability: Array.Empty<bool>(),
-                                    typeof(DateTime))
+                                    typeof(DateTime)
+                                )
                             },
                             nullable: true,
                             argumentsPropagateNullability: new[] { false, true },
-                            returnType);
+                            returnType
+                        );
                 }
             }
 

@@ -14,25 +14,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class MethodKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public MethodKeywordRecommender()
-            : base(SyntaxKind.MethodKeyword)
-        {
-        }
+        public MethodKeywordRecommender() : base(SyntaxKind.MethodKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            if (context.IsMemberAttributeContext(SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations, cancellationToken))
+            if (
+                context.IsMemberAttributeContext(
+                    SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
+                    cancellationToken
+                )
+            )
             {
                 return true;
             }
 
             var token = context.TargetToken;
 
-            if (token.Kind() == SyntaxKind.OpenBracketToken &&
-                token.Parent.IsKind(SyntaxKind.AttributeList))
+            if (
+                token.Kind() == SyntaxKind.OpenBracketToken
+                && token.Parent.IsKind(SyntaxKind.AttributeList)
+            )
             {
-                if (token.GetAncestor<PropertyDeclarationSyntax>() != null ||
-                    token.GetAncestor<EventDeclarationSyntax>() != null)
+                if (
+                    token.GetAncestor<PropertyDeclarationSyntax>() != null
+                    || token.GetAncestor<EventDeclarationSyntax>() != null
+                )
                 {
                     return true;
                 }

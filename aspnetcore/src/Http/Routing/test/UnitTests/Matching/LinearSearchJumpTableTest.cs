@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         internal override JumpTable CreateTable(
             int defaultDestination,
             int existDestination,
-            params (string text, int destination)[] entries)
+            params (string text, int destination)[] entries
+        )
         {
             return new LinearSearchJumpTable(defaultDestination, existDestination, entries);
         }

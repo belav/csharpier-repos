@@ -19,12 +19,10 @@ namespace Internal.TypeSystem
         /// Optimized for a particular set of instantiations (such as reference types)
         /// </summary>
         Specific,
-
         /// <summary>
         /// Canonicalization that works for any type
         /// </summary>
         Universal,
-
         /// <summary>
         /// Value used for lookup for Specific or Universal. Must not be used for canonicalizing.
         /// </summary>
@@ -45,10 +43,7 @@ namespace Internal.TypeSystem
 
         public sealed override TypeSystemContext Context
         {
-            get
-            {
-                return _context;
-            }
+            get { return _context; }
         }
 
         protected override MethodImplRecord[] ComputeVirtualMethodImplsForType()
@@ -113,24 +108,17 @@ namespace Internal.TypeSystem
 
         public override string Namespace
         {
-            get
-            {
-                return _Namespace;
-            }
+            get { return _Namespace; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _Name;
-            }
+            get { return _Name; }
         }
 
         public override bool IsSealed => false;
 
-        public CanonType(TypeSystemContext context)
-            : base(context)
+        public CanonType(TypeSystemContext context) : base(context)
         {
             Initialize();
         }
@@ -141,16 +129,12 @@ namespace Internal.TypeSystem
 
         public override DefType BaseType
         {
-            get
-            {
-                return Context.GetWellKnownType(WellKnownType.Object);
-            }
+            get { return Context.GetWellKnownType(WellKnownType.Object); }
         }
 
         public override bool IsCanonicalSubtype(CanonicalFormKind policy)
         {
-            return policy == CanonicalFormKind.Specific ||
-                policy == CanonicalFormKind.Any;
+            return policy == CanonicalFormKind.Specific || policy == CanonicalFormKind.Any;
         }
 
         protected override TypeDesc ConvertToCanonFormImpl(CanonicalFormKind kind)
@@ -203,24 +187,17 @@ namespace Internal.TypeSystem
 
         public override string Namespace
         {
-            get
-            {
-                return _Namespace;
-            }
+            get { return _Namespace; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _Name;
-            }
+            get { return _Name; }
         }
 
         public override bool IsSealed => true;
 
-        public UniversalCanonType(TypeSystemContext context)
-            : base(context)
+        public UniversalCanonType(TypeSystemContext context) : base(context)
         {
             Initialize();
         }
@@ -240,8 +217,7 @@ namespace Internal.TypeSystem
 
         public override bool IsCanonicalSubtype(CanonicalFormKind policy)
         {
-            return policy == CanonicalFormKind.Universal ||
-                policy == CanonicalFormKind.Any;
+            return policy == CanonicalFormKind.Universal || policy == CanonicalFormKind.Any;
         }
 
         protected override TypeDesc ConvertToCanonFormImpl(CanonicalFormKind kind)

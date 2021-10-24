@@ -27,8 +27,15 @@ namespace System.Globalization.Tests
             Type = ConvertStringToType(split[0].Trim());
             Source = EscapedToLiteralString(split[1], lineNumber);
             bool validDomainName = (split.Length != 5 || split[4].Trim() != "NV8");
-            UnicodeResult = new ConformanceIdnaUnicodeTestResult(EscapedToLiteralString(split[2], lineNumber), Source, validDomainName);
-            ASCIIResult = new ConformanceIdnaTestResult(EscapedToLiteralString(split[3], lineNumber), UnicodeResult.Value);
+            UnicodeResult = new ConformanceIdnaUnicodeTestResult(
+                EscapedToLiteralString(split[2], lineNumber),
+                Source,
+                validDomainName
+            );
+            ASCIIResult = new ConformanceIdnaTestResult(
+                EscapedToLiteralString(split[3], lineNumber),
+                UnicodeResult.Value
+            );
             LineNumber = lineNumber;
         }
 

@@ -13,19 +13,20 @@ public class BringUpTest
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void Swap(ref int a, ref int b)
     {
-      int t = a;
-      a = b;
-      b = t;
+        int t = a;
+        a = b;
+        b = t;
     }
-
 
     public static int Main()
     {
-        int a = 10, b= 20;
+        int a = 10,
+            b = 20;
         Console.WriteLine("Before swap: " + a + "," + b);
         Swap(ref a, ref b);
         Console.WriteLine("After swap: " + a + "," + b);
-        if (a==20 && b== 10) return Pass;
-        return Fail;        
+        if (a == 20 && b == 10)
+            return Pass;
+        return Fail;
     }
 }

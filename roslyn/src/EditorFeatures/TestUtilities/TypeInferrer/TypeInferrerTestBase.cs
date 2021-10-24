@@ -21,10 +21,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TypeInferrer
     {
         private readonly TestFixtureHelper<TWorkspaceFixture> _fixtureHelper = new();
 
-        private protected ReferenceCountedDisposable<TWorkspaceFixture> GetOrCreateWorkspaceFixture()
-            => _fixtureHelper.GetOrCreateFixture();
+        private protected ReferenceCountedDisposable<TWorkspaceFixture> GetOrCreateWorkspaceFixture() =>
+            _fixtureHelper.GetOrCreateFixture();
 
-        private static async Task<bool> CanUseSpeculativeSemanticModelAsync(Document document, int position)
+        private static async Task<bool> CanUseSpeculativeSemanticModelAsync(
+            Document document,
+            int position
+        )
         {
             var service = document.GetLanguageService<ISyntaxFactsService>();
             var node = (await document.GetSyntaxRootAsync()).FindToken(position).Parent;
@@ -41,15 +44,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TypeInferrer
             /// Specifies the test is going to call into <see cref="ITypeInferenceService.InferTypes(SemanticModel, SyntaxNode, string, System.Threading.CancellationToken)"/>.
             /// </summary>
             Node,
-
             /// <summary>
             /// Specifies the test is going to call into <see cref="ITypeInferenceService.InferTypes(SemanticModel, int, string, System.Threading.CancellationToken)"/>.
             /// </summary>
             Position
         }
 
-        protected async Task TestAsync(string text, string expectedType, TestMode mode,
-            SourceCodeKind sourceCodeKind = SourceCodeKind.Regular)
+        protected async Task TestAsync(
+            string text,
+            string expectedType,
+            TestMode mode,
+            SourceCodeKind sourceCodeKind = SourceCodeKind.Regular
+        )
         {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 
@@ -60,11 +66,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TypeInferrer
 
             if (await CanUseSpeculativeSemanticModelAsync(document, textSpan.Start))
             {
-                var document2 = workspaceFixture.Target.UpdateDocument(text, sourceCodeKind, cleanBeforeUpdate: false);
+                var document2 = workspaceFixture.Target.UpdateDocument(
+                    text,
+                    sourceCodeKind,
+                    cleanBeforeUpdate: false
+                );
                 await TestWorkerAsync(document2, textSpan, expectedType, mode);
             }
         }
 
-        protected abstract Task TestWorkerAsync(Document document, TextSpan textSpan, string expectedType, TestMode mode);
+        protected abstract Task TestWorkerAsync(
+            Document document,
+            TextSpan textSpan,
+            string expectedType,
+            TestMode mode
+        );
     }
 }

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
     {
         public DefaultClientRequestParametersProvider(
             IAbsoluteUrlFactory urlFactory,
-            IOptions<ApiAuthorizationOptions> options)
+            IOptions<ApiAuthorizationOptions> options
+        )
         {
             UrlFactory = urlFactory;
             Options = options;
@@ -29,9 +30,16 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             var client = Options.Value.Clients[clientId];
             var authority = context.GetIdentityServerIssuerUri();
             var responseType = "";
-            if (!client.Properties.TryGetValue(ApplicationProfilesPropertyNames.Profile, out var type))
+            if (
+                !client.Properties.TryGetValue(
+                    ApplicationProfilesPropertyNames.Profile,
+                    out var type
+                )
+            )
             {
-                throw new InvalidOperationException($"Can't determine the type for the client '{clientId}'");
+                throw new InvalidOperationException(
+                    $"Can't determine the type for the client '{clientId}'"
+                );
             }
 
             switch (type)
@@ -42,7 +50,9 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                     responseType = "code";
                     break;
                 default:
-                    throw new InvalidOperationException($"Invalid application type '{type}' for '{clientId}'.");
+                    throw new InvalidOperationException(
+                        $"Invalid application type '{type}' for '{clientId}'."
+                    );
             }
 
             return new Dictionary<string, string>
@@ -50,11 +60,13 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
                 ["authority"] = authority,
                 ["client_id"] = client.ClientId,
                 ["redirect_uri"] = UrlFactory.GetAbsoluteUrl(context, client.RedirectUris.First()),
-                ["post_logout_redirect_uri"] = UrlFactory.GetAbsoluteUrl(context, client.PostLogoutRedirectUris.First()),
+                ["post_logout_redirect_uri"] = UrlFactory.GetAbsoluteUrl(
+                    context,
+                    client.PostLogoutRedirectUris.First()
+                ),
                 ["response_type"] = responseType,
                 ["scope"] = string.Join(" ", client.AllowedScopes)
             };
         }
     }
-
 }

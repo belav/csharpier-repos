@@ -8,13 +8,20 @@ using Xunit;
 
 namespace System.Diagnostics.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49568",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public class ProcessCollectionTests : ProcessTestBase
     {
         [Fact]
         public void TestModuleCollectionBehavior()
         {
-            ProcessModule[] mArray = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().ToArray();
+            ProcessModule[] mArray = Process
+                .GetCurrentProcess()
+                .Modules.Cast<ProcessModule>()
+                .ToArray();
 
             // Constructor
             ProcessModuleCollection moduleCollection = new ProcessModuleCollection(mArray);
@@ -38,7 +45,9 @@ namespace System.Diagnostics.Tests
                 Assert.Equal(mArray[i], moduleArray[i + 1]);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => moduleCollection.CopyTo(moduleArray, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => moduleCollection.CopyTo(moduleArray, -1)
+            );
 
             // Explicit interface implementations
             Assert.False(((ICollection)moduleCollection).IsSynchronized);
@@ -89,7 +98,9 @@ namespace System.Diagnostics.Tests
                 Assert.Equal(tArray[i], threadArray[i + 1]);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => threadCollection.CopyTo(threadArray, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => threadCollection.CopyTo(threadArray, -1)
+            );
 
             // Remove
             threadCollection.Remove(tArray[0]);
@@ -102,10 +113,16 @@ namespace System.Diagnostics.Tests
 
             // Add
             threadCollection.Add(default(ProcessThread));
-            Assert.Equal(threadCollection.Count - 1, threadCollection.IndexOf(default(ProcessThread)));
+            Assert.Equal(
+                threadCollection.Count - 1,
+                threadCollection.IndexOf(default(ProcessThread))
+            );
             // Add same member again
             threadCollection.Add(default(ProcessThread));
-            Assert.Equal(threadCollection.Count - 2, threadCollection.IndexOf(default(ProcessThread)));
+            Assert.Equal(
+                threadCollection.Count - 2,
+                threadCollection.IndexOf(default(ProcessThread))
+            );
             Assert.Equal(default(ProcessThread), threadCollection[threadCollection.Count - 1]);
             // Cleanup after Add.
             threadCollection.Remove(default(ProcessThread));
@@ -119,7 +136,9 @@ namespace System.Diagnostics.Tests
             Assert.Equal(index, threadCollection.IndexOf(null));
             Assert.Equal(initialCount + 1, threadCollection.Count);
             // Insert at invalid index
-            Assert.Throws<ArgumentOutOfRangeException>(() => threadCollection.Insert(-1, tArray[0]));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => threadCollection.Insert(-1, tArray[0])
+            );
 
             // Explicit interface implementations
             Assert.False(((ICollection)threadCollection).IsSynchronized);

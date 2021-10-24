@@ -15,7 +15,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     No SQL Server-specific strategy
         /// </summary>
         None,
-
         /// <summary>
         ///     <para>
         ///         A sequence-based hi-lo pattern where blocks of IDs are allocated from the server and
@@ -26,7 +25,6 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     </para>
         /// </summary>
         SequenceHiLo,
-
         /// <summary>
         ///     A pattern that uses a normal SQL Server <c>Identity</c> column in the same way as EF6 and earlier.
         /// </summary>

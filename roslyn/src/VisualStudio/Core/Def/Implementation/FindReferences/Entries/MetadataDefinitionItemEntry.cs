@@ -17,10 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         {
             public MetadataDefinitionItemEntry(
                 AbstractTableDataSourceFindUsagesContext context,
-                RoslynDefinitionBucket definitionBucket)
-                : base(definitionBucket, context.Presenter)
-            {
-            }
+                RoslynDefinitionBucket definitionBucket
+            ) : base(definitionBucket, context.Presenter) { }
 
             protected override object? GetValueWorker(string keyName)
             {
@@ -33,13 +31,22 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 return null;
             }
 
-            bool ISupportsNavigation.TryNavigateTo(bool isPreview, CancellationToken cancellationToken)
-                => DefinitionBucket.DefinitionItem.TryNavigateTo(
-                    Presenter._workspace, showInPreviewTab: isPreview, activateTab: !isPreview, cancellationToken); // Only activate the tab if not opening in preview
+            bool ISupportsNavigation.TryNavigateTo(
+                bool isPreview,
+                CancellationToken cancellationToken
+            ) =>
+                DefinitionBucket.DefinitionItem.TryNavigateTo(
+                    Presenter._workspace,
+                    showInPreviewTab: isPreview,
+                    activateTab: !isPreview,
+                    cancellationToken
+                ); // Only activate the tab if not opening in preview
 
-            protected override IList<Inline> CreateLineTextInlines()
-                => DefinitionBucket.DefinitionItem.DisplayParts
-                .ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
+            protected override IList<Inline> CreateLineTextInlines() =>
+                DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(
+                    Presenter.ClassificationFormatMap,
+                    Presenter.TypeMap
+                );
         }
     }
 }

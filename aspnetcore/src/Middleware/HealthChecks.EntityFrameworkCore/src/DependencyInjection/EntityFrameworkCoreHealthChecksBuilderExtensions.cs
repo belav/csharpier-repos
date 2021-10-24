@@ -55,11 +55,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHealthChecksBuilder AddDbContextCheck<TContext>(
             this IHealthChecksBuilder builder,
-            string? name  = null,
+            string? name = null,
             HealthStatus? failureStatus = default,
             IEnumerable<string>? tags = default,
-            Func<TContext, CancellationToken, Task<bool>>? customTestQuery = default)
-            where TContext : DbContext
+            Func<TContext, CancellationToken, Task<bool>>? customTestQuery = default
+        ) where TContext : DbContext
         {
             if (builder == null)
             {
@@ -73,10 +73,17 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (customTestQuery != null)
             {
-                builder.Services.Configure<DbContextHealthCheckOptions<TContext>>(name, options => options.CustomTestQuery = customTestQuery);
+                builder.Services.Configure<DbContextHealthCheckOptions<TContext>>(
+                    name,
+                    options => options.CustomTestQuery = customTestQuery
+                );
             }
 
-            return builder.AddCheck<DbContextHealthCheck<TContext>>(name, failureStatus, tags ?? Enumerable.Empty<string>());
+            return builder.AddCheck<DbContextHealthCheck<TContext>>(
+                name,
+                failureStatus,
+                tags ?? Enumerable.Empty<string>()
+            );
         }
     }
 }

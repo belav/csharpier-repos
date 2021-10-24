@@ -30,17 +30,13 @@ namespace System.Numerics
         /// <summary>Creates a new <see cref="System.Numerics.Vector3" /> object whose three elements have the same value.</summary>
         /// <param name="value">The value to assign to all three elements.</param>
         [Intrinsic]
-        public Vector3(float value) : this(value, value, value)
-        {
-        }
+        public Vector3(float value) : this(value, value, value) { }
 
         /// <summary>Creates a   new <see cref="System.Numerics.Vector3" /> object from the specified <see cref="System.Numerics.Vector2" /> object and the specified value.</summary>
         /// <param name="value">The vector with two elements.</param>
         /// <param name="z">The additional value to assign to the <see cref="System.Numerics.Vector3.Z" /> field.</param>
         [Intrinsic]
-        public Vector3(Vector2 value, float z) : this(value.X, value.Y, z)
-        {
-        }
+        public Vector3(Vector2 value, float z) : this(value.X, value.Y, z) { }
 
         /// <summary>Creates a vector whose elements have the specified values.</summary>
         /// <param name="x">The value to assign to the <see cref="System.Numerics.Vector3.X" /> field.</param>
@@ -63,7 +59,9 @@ namespace System.Numerics
                 Vector.ThrowInsufficientNumberOfElementsException(3);
             }
 
-            this = Unsafe.ReadUnaligned<Vector3>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
+            this = Unsafe.ReadUnaligned<Vector3>(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values))
+            );
         }
 
         /// <summary>Gets a vector whose 3 elements are equal to zero.</summary>
@@ -112,11 +110,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator +(Vector3 left, Vector3 right)
         {
-            return new Vector3(
-                left.X + right.X,
-                left.Y + right.Y,
-                left.Z + right.Z
-            );
+            return new Vector3(left.X + right.X, left.Y + right.Y, left.Z + right.Z);
         }
 
         /// <summary>Divides the first vector by the second.</summary>
@@ -128,11 +122,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator /(Vector3 left, Vector3 right)
         {
-            return new Vector3(
-                left.X / right.X,
-                left.Y / right.Y,
-                left.Z / right.Z
-            );
+            return new Vector3(left.X / right.X, left.Y / right.Y, left.Z / right.Z);
         }
 
         /// <summary>Divides the specified vector by a specified scalar value.</summary>
@@ -155,9 +145,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(Vector3 left, Vector3 right)
         {
-            return (left.X == right.X)
-                && (left.Y == right.Y)
-                && (left.Z == right.Z);
+            return (left.X == right.X) && (left.Y == right.Y) && (left.Z == right.Z);
         }
 
         /// <summary>Returns a value that indicates whether two specified vectors are not equal.</summary>
@@ -180,11 +168,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator *(Vector3 left, Vector3 right)
         {
-            return new Vector3(
-                left.X * right.X,
-                left.Y * right.Y,
-                left.Z * right.Z
-            );
+            return new Vector3(left.X * right.X, left.Y * right.Y, left.Z * right.Z);
         }
 
         /// <summary>Multiplies the specified vector by the specified scalar value.</summary>
@@ -218,11 +202,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator -(Vector3 left, Vector3 right)
         {
-            return new Vector3(
-                left.X - right.X,
-                left.Y - right.Y,
-                left.Z - right.Z
-            );
+            return new Vector3(left.X - right.X, left.Y - right.Y, left.Z - right.Z);
         }
 
         /// <summary>Negates the specified vector.</summary>
@@ -242,11 +222,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Abs(Vector3 value)
         {
-            return new Vector3(
-                MathF.Abs(value.X),
-                MathF.Abs(value.Y),
-                MathF.Abs(value.Z)
-            );
+            return new Vector3(MathF.Abs(value.X), MathF.Abs(value.Y), MathF.Abs(value.Z));
         }
 
         /// <summary>Adds two vectors together.</summary>
@@ -335,9 +311,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Vector3 vector1, Vector3 vector2)
         {
-            return (vector1.X * vector2.X)
-                 + (vector1.Y * vector2.Y)
-                 + (vector1.Z * vector2.Z);
+            return (vector1.X * vector2.X) + (vector1.Y * vector2.Y) + (vector1.Z * vector2.Z);
         }
 
         /// <summary>Performs a linear interpolation between two vectors based on the given weighting.</summary>
@@ -446,11 +420,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 SquareRoot(Vector3 value)
         {
-            return new Vector3(
-                MathF.Sqrt(value.X),
-                MathF.Sqrt(value.Y),
-                MathF.Sqrt(value.Z)
-            );
+            return new Vector3(MathF.Sqrt(value.X), MathF.Sqrt(value.Y), MathF.Sqrt(value.Z));
         }
 
         /// <summary>Subtracts the second vector from the first.</summary>
@@ -471,9 +441,18 @@ namespace System.Numerics
         public static Vector3 Transform(Vector3 position, Matrix4x4 matrix)
         {
             return new Vector3(
-                (position.X * matrix.M11) + (position.Y * matrix.M21) + (position.Z * matrix.M31) + matrix.M41,
-                (position.X * matrix.M12) + (position.Y * matrix.M22) + (position.Z * matrix.M32) + matrix.M42,
-                (position.X * matrix.M13) + (position.Y * matrix.M23) + (position.Z * matrix.M33) + matrix.M43
+                (position.X * matrix.M11)
+                    + (position.Y * matrix.M21)
+                    + (position.Z * matrix.M31)
+                    + matrix.M41,
+                (position.X * matrix.M12)
+                    + (position.Y * matrix.M22)
+                    + (position.Z * matrix.M32)
+                    + matrix.M42,
+                (position.X * matrix.M13)
+                    + (position.Y * matrix.M23)
+                    + (position.Z * matrix.M33)
+                    + matrix.M43
             );
         }
 
@@ -554,12 +533,17 @@ namespace System.Numerics
 
             if ((index < 0) || (index >= array.Length))
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.Format(SR.Arg_ArgumentOutOfRangeException, index));
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.Format(SR.Arg_ArgumentOutOfRangeException, index)
+                );
             }
 
             if ((array.Length - index) < 3)
             {
-                throw new ArgumentException(SR.Format(SR.Arg_ElementsInSourceIsGreaterThanDestination, index));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_ElementsInSourceIsGreaterThanDestination, index)
+                );
             }
 
             array[index] = X;
@@ -577,7 +561,10 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
         }
 
         /// <summary>Attempts to copy the vector to the given <see cref="Span{Single}" />. The length of the destination span must be at least 3.</summary>
@@ -590,7 +577,10 @@ namespace System.Numerics
                 return false;
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
 
             return true;
         }

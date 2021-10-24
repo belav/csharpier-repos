@@ -30,13 +30,16 @@ namespace Microsoft.VisualStudio.LanguageServices
     /// low on available virtual memory.
     /// </summary>
     [Export, Shared]
-    internal sealed class VirtualMemoryNotificationListener : ForegroundThreadAffinitizedObject, IVsBroadcastMessageEvents
+    internal sealed class VirtualMemoryNotificationListener
+        : ForegroundThreadAffinitizedObject,
+          IVsBroadcastMessageEvents
     {
         // memory threshold to turn off full solution analysis - 200MB
         private const long MemoryThreshold = 200 * 1024 * 1024;
 
         // low vm more info page link
-        private const string LowVMMoreInfoLink = "https://go.microsoft.com/fwlink/?LinkID=799402&clcid=0x409";
+        private const string LowVMMoreInfoLink =
+            "https://go.microsoft.com/fwlink/?LinkID=799402&clcid=0x409";
 
         private readonly VisualStudioWorkspace _workspace;
         private readonly WorkspaceCacheService _workspaceCacheService;
@@ -48,11 +51,12 @@ namespace Microsoft.VisualStudio.LanguageServices
         public VirtualMemoryNotificationListener(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider,
-            VisualStudioWorkspace workspace)
-            : base(threadingContext, assertIsForeground: true)
+            VisualStudioWorkspace workspace
+        ) : base(threadingContext, assertIsForeground: true)
         {
             _workspace = workspace;
-            _workspaceCacheService = workspace.Services.GetService<IWorkspaceCacheService>() as WorkspaceCacheService;
+            _workspaceCacheService =
+                workspace.Services.GetService<IWorkspaceCacheService>() as WorkspaceCacheService;
 
             if (GCSettings.IsServerGC)
             {
@@ -81,36 +85,40 @@ namespace Microsoft.VisualStudio.LanguageServices
             {
                 case VSConstants.VSM_VIRTUALMEMORYLOW:
                 case VSConstants.VSM_VIRTUALMEMORYCRITICAL:
+                {
+                    if (!_alreadyLogged)
                     {
-                        if (!_alreadyLogged)
-                        {
-                            // record that we had hit critical memory barrier
-                            Logger.Log(FunctionId.VirtualMemory_MemoryLow, KeyValueLogMessage.Create(m =>
-                            {
-                                // which message we are logging and memory left in bytes when this is called.
-                                m["MSG"] = msg;
-                                m["MemoryLeft"] = (long)wParam;
-                            }));
+                        // record that we had hit critical memory barrier
+                        Logger.Log(
+                            FunctionId.VirtualMemory_MemoryLow,
+                            KeyValueLogMessage.Create(
+                                m =>
+                                {
+                                    // which message we are logging and memory left in bytes when this is called.
+                                    m["MSG"] = msg;
+                                    m["MemoryLeft"] = (long)wParam;
+                                }
+                            )
+                        );
 
-                            _alreadyLogged = true;
-                        }
-
-                        _workspaceCacheService?.FlushCaches();
-
-                        if (ShouldDisableBackgroundAnalysis((long)wParam))
-                        {
-                            DisableBackgroundAnalysis();
-                            ShowInfoBarIfRequired();
-                        }
-
-                        // turn off low latency GC mode.
-                        // once we hit this, not hitting "Out of memory" exception is more important than typing being smooth all the time.
-                        // once it is turned off, user will hit time to time keystroke which responsive time is more than 50ms. in our own perf lab,
-                        // about 1-2% was over 50ms with this off when we first introduced this GC mode.
-                        GCManager.TurnOffLowLatencyMode();
-
-                        break;
+                        _alreadyLogged = true;
                     }
+
+                    _workspaceCacheService?.FlushCaches();
+
+                    if (ShouldDisableBackgroundAnalysis((long)wParam))
+                    {
+                        DisableBackgroundAnalysis();
+                        ShowInfoBarIfRequired();
+                    }
+
+                    // turn off low latency GC mode.
+                    // once we hit this, not hitting "Out of memory" exception is more important than typing being smooth all the time.
+                    // once it is turned off, user will hit time to time keystroke which responsive time is more than 50ms. in our own perf lab,
+                    // about 1-2% was over 50ms with this off when we first introduced this GC mode.
+                    GCManager.TurnOffLowLatencyMode();
+                    break;
+                }
             }
 
             return VSConstants.S_OK;
@@ -119,13 +127,15 @@ namespace Microsoft.VisualStudio.LanguageServices
         private bool ShouldDisableBackgroundAnalysis(long availableMemory)
         {
             // conditions
-            // 1. Available memory is less than the threshold and 
+            // 1. Available memory is less than the threshold and
             // 2. Background analysis is not already minimal and
             // 3. Background analysis memory monitor is on (user can set it off using registry to prevent turning off background analysis)
 
-            return availableMemory < MemoryThreshold &&
-                !SolutionCrawlerOptions.LowMemoryForcedMinimalBackgroundAnalysis &&
-                _workspace.Options.GetOption(InternalFeatureOnOffOptions.BackgroundAnalysisMemoryMonitor);
+            return availableMemory < MemoryThreshold
+                && !SolutionCrawlerOptions.LowMemoryForcedMinimalBackgroundAnalysis
+                && _workspace.Options.GetOption(
+                    InternalFeatureOnOffOptions.BackgroundAnalysisMemoryMonitor
+                );
         }
 
         private void DisableBackgroundAnalysis()
@@ -142,22 +152,44 @@ namespace Microsoft.VisualStudio.LanguageServices
 
         private void ShowInfoBarIfRequired()
         {
-            if (_workspace.Options.GetOption(RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown))
+            if (
+                _workspace.Options.GetOption(RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown)
+            )
             {
                 // Info bar already shown.
                 return;
             }
 
             // Show info bar.
-            _workspace.Services.GetService<IErrorReportingService>()
-                .ShowGlobalErrorInfo(ServicesVSResources.Visual_Studio_has_suspended_some_advanced_features_to_improve_performance,
-                    new InfoBarUI(ServicesVSResources.Re_enable, InfoBarUI.UIKind.Button, RenableBackgroundAnalysis),
-                    new InfoBarUI(ServicesVSResources.Learn_more, InfoBarUI.UIKind.HyperLink,
-                        () => VisualStudioNavigateToLinkService.StartBrowser(new Uri(LowVMMoreInfoLink)), closeAfterAction: false));
+            _workspace.Services
+                .GetService<IErrorReportingService>()
+                .ShowGlobalErrorInfo(
+                    ServicesVSResources.Visual_Studio_has_suspended_some_advanced_features_to_improve_performance,
+                    new InfoBarUI(
+                        ServicesVSResources.Re_enable,
+                        InfoBarUI.UIKind.Button,
+                        RenableBackgroundAnalysis
+                    ),
+                    new InfoBarUI(
+                        ServicesVSResources.Learn_more,
+                        InfoBarUI.UIKind.HyperLink,
+                        () =>
+                            VisualStudioNavigateToLinkService.StartBrowser(
+                                new Uri(LowVMMoreInfoLink)
+                            ),
+                        closeAfterAction: false
+                    )
+                );
 
             // Update info bar shown state.
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown, true)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options.WithChangedOption(
+                        RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown,
+                        true
+                    )
+                )
+            );
         }
 
         private void OnWorkspaceChanged(object sender, WorkspaceChangeEventArgs e)
@@ -168,8 +200,14 @@ namespace Microsoft.VisualStudio.LanguageServices
             }
 
             // For newly opened solution, reset the info bar state.
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown, false)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options.WithChangedOption(
+                        RuntimeOptions.BackgroundAnalysisSuspendedInfoBarShown,
+                        false
+                    )
+                )
+            );
         }
     }
 }

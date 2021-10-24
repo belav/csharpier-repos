@@ -38,7 +38,6 @@ internal class Buffer
     }
 }
 
-
 internal class Test
 {
     private static int Main()

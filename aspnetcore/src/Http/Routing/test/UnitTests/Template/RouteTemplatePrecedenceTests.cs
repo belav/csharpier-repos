@@ -17,7 +17,10 @@ namespace Microsoft.AspNetCore.Routing.Template
             return ComputeRouteTemplate(template, RoutePrecedence.ComputeOutbound);
         }
 
-        private static decimal ComputeRouteTemplate(string template, Func<RouteTemplate, decimal> func)
+        private static decimal ComputeRouteTemplate(
+            string template,
+            Func<RouteTemplate, decimal> func
+        )
         {
             var parsed = TemplateParser.Parse(template);
             return func(parsed);

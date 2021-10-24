@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EventId eventId,
             LogLevel level,
             string eventIdCode,
-            Func<LogLevel, Action<ILogger, TParam1, TParam2, TParam3, Exception?>> logActionFunc)
-            : base(loggingOptions, eventId, level, eventIdCode)
+            Func<LogLevel, Action<ILogger, TParam1, TParam2, TParam3, Exception?>> logActionFunc
+        ) : base(loggingOptions, eventId, level, eventIdCode)
         {
             Check.NotNull(logActionFunc, nameof(logActionFunc));
 
@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             TParam1 arg1,
             TParam2 arg2,
             TParam3 arg3,
-            Exception? exception = null)
+            Exception? exception = null
+        )
         {
             var extractor = new MessageExtractingLogger();
             _logAction(extractor, arg1, arg2, arg3, exception);
@@ -72,8 +73,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             TParam1 arg1,
             TParam2 arg2,
             TParam3 arg3,
-            Exception? exception = null)
-            where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+            Exception? exception = null
+        ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
         {
             switch (WarningBehavior)
             {

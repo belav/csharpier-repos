@@ -9,27 +9,31 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal sealed class InterpolatedStringExpressionStructureProvider : AbstractSyntaxNodeStructureProvider<InterpolatedStringExpressionSyntax>
+    internal sealed class InterpolatedStringExpressionStructureProvider
+        : AbstractSyntaxNodeStructureProvider<InterpolatedStringExpressionSyntax>
     {
         protected override void CollectBlockSpans(
             InterpolatedStringExpressionSyntax node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            if (node.StringStartToken.IsMissing ||
-                node.StringEndToken.IsMissing)
+            if (node.StringStartToken.IsMissing || node.StringEndToken.IsMissing)
             {
                 return;
             }
 
-            spans.Add(new BlockSpan(
-                isCollapsible: true,
-                textSpan: node.Span,
-                hintSpan: node.Span,
-                type: BlockTypes.Expression,
-                autoCollapse: true,
-                isDefaultCollapsed: false));
+            spans.Add(
+                new BlockSpan(
+                    isCollapsible: true,
+                    textSpan: node.Span,
+                    hintSpan: node.Span,
+                    type: BlockTypes.Expression,
+                    autoCollapse: true,
+                    isDefaultCollapsed: false
+                )
+            );
         }
     }
 }

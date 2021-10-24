@@ -19,14 +19,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.Extrac
 {
     public class ExtractLocalFunctionTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ExtractMethodCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ExtractMethodCodeRefactoringProvider();
 
         private static int CodeActionIndexWhenExtractMethodMissing => 0;
 
         private static int CodeActionIndex => 1;
 
-        private const string EditorConfigNaming_CamelCase = @"[*]
+        private const string EditorConfigNaming_CamelCase =
+            @"[*]
 # Naming rules
 
 dotnet_naming_rule.local_functions_should_be_camel_case.severity = suggestion
@@ -42,7 +45,8 @@ dotnet_naming_symbols.local_functions.applicable_accessibilities = *
 
 dotnet_naming_style.camel_case.capitalization = camel_case";
 
-        private const string EditorConfigNaming_PascalCase = @"[*]
+        private const string EditorConfigNaming_PascalCase =
+            @"[*]
 # Naming rules
 
 dotnet_naming_rule.local_functions_should_be_pascal_case.severity = suggestion
@@ -63,7 +67,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
         public async Task TestPartialSelection_StaticOptionTrue()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -71,7 +75,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -83,14 +87,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
             return b != true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestPartialSelection_StaticOptionFalse()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -98,7 +110,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -110,14 +122,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
             return b != true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.FalseWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.FalseWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestPartialSelection_StaticOptionDefault()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -125,7 +145,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -137,14 +157,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
             return b != true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CSharpCodeStyleOptions.PreferStaticLocalFunction.DefaultValue)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction.DefaultValue
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestUseExpressionBodyWhenPossible()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -152,7 +180,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -161,14 +189,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
 
         static bool NewMethod(bool b) => b != true;
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestUseExpressionWhenOnSingleLine_AndIsOnSingleLine()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -176,7 +212,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -185,14 +221,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
 
         static bool NewMethod(bool b) => b != true;
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestUseExpressionWhenOnSingleLine_AndIsOnSingleLine2()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -203,7 +247,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
                 ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -215,14 +259,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
 
         static bool NewMethod(bool b) => b != true;
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestUseExpressionWhenOnSingleLine_AndNotIsOnSingleLine()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -231,7 +283,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
             true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -244,14 +296,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
                         true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestUseExpressionWhenOnSingleLine_AndNotIsOnSingleLine2()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -260,7 +320,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
 */true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -273,14 +333,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
 */true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestUseExpressionWhenOnSingleLine_AndNotIsOnSingleLine3()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -289,7 +357,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
 ""|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -302,14 +370,22 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
 "";
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        CSharpCodeStyleOptions.WhenOnSingleLineWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestReadOfDataThatDoesNotFlowIn()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -323,7 +399,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
         return t;
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -341,14 +417,16 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case";
     {
         return t;
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnStatementAfterUnconditionalGoto()
         {
             await TestInRegularAndScript1Async(
-@"delegate int del(int i);
+                @"delegate int del(int i);
 
 class C
 {
@@ -362,7 +440,7 @@ class C
         return;
     }
 }",
-@"delegate int del(int i);
+                @"delegate int del(int i);
 
 class C
 {
@@ -381,21 +459,23 @@ class C
             return x * x;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnNamespace()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|System|].Console.WriteLine(4);
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -406,21 +486,23 @@ class C
             System.Console.WriteLine(4);
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnType()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|System.Console|].WriteLine(4);
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -431,21 +513,23 @@ class C
             System.Console.WriteLine(4);
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnBase()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     void Main()
     {
         [|base|].ToString();
     }
 }",
-@"class Program
+                @"class Program
 {
     void Main()
     {
@@ -456,14 +540,16 @@ class C
             base.ToString();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnActionInvocation()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -477,7 +563,7 @@ class Program
         [|C.X|]();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -495,14 +581,16 @@ class Program
             return C.X;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task DisambiguateCallSiteIfNecessary1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -515,8 +603,7 @@ class Program
     static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
     static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
 }",
-
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -533,14 +620,16 @@ class Program
 
     static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
     static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task DisambiguateCallSiteIfNecessary2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -553,8 +642,7 @@ class Program
     static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
     static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
 }",
-
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -571,14 +659,16 @@ class Program
 
     static void Goo<T, S>(Func<S, T> p, Func<T, S> q, T r, S s) { Console.WriteLine(1); }
     static void Goo(Func<byte, byte> p, Func<byte, byte> q, int r, int s) { Console.WriteLine(2); }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task DontOverparenthesize()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 static class C
 {
@@ -620,8 +710,7 @@ static class E
     {
     }
 }",
-
-@"using System;
+                @"using System;
 
 static class C
 {
@@ -668,15 +757,16 @@ static class E
     {
     }
 }",
-
-parseOptions: Options.Regular, index: CodeActionIndex);
+                parseOptions: Options.Regular,
+                index: CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task DontOverparenthesizeGenerics()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 
 static class C
 {
@@ -718,8 +808,7 @@ static class E
     {
     }
 }",
-
-@"using System;
+                @"using System;
 
 static class C
 {
@@ -766,15 +855,16 @@ static class E
     {
     }
 }",
-
-parseOptions: Options.Regular, index: CodeActionIndex);
+                parseOptions: Options.Regular,
+                index: CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task PreserveCommentsBeforeDeclaration_1()
         {
             await TestInRegularAndScript1Async(
-@"class Construct
+                @"class Construct
 {
     public void Do() { }
     static void Main(string[] args)
@@ -788,8 +878,7 @@ parseOptions: Options.Regular, index: CodeActionIndex);
         obj2.Do();
     }
 }",
-
-@"class Construct
+                @"class Construct
 {
     public void Do() { }
     static void Main(string[] args)
@@ -808,14 +897,16 @@ parseOptions: Options.Regular, index: CodeActionIndex);
             obj2.Do();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task PreserveCommentsBeforeDeclaration_2()
         {
             await TestInRegularAndScript1Async(
-@"class Construct
+                @"class Construct
 {
     public void Do() { }
     static void Main(string[] args)
@@ -833,8 +924,7 @@ parseOptions: Options.Regular, index: CodeActionIndex);
         obj3.Do();
     }
 }",
-
-@"class Construct
+                @"class Construct
 {
     public void Do() { }
     static void Main(string[] args)
@@ -857,14 +947,16 @@ parseOptions: Options.Regular, index: CodeActionIndex);
             obj3.Do();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task PreserveCommentsBeforeDeclaration_3()
         {
             await TestInRegularAndScript1Async(
-@"class Construct
+                @"class Construct
 {
     public void Do() { }
     static void Main(string[] args)
@@ -880,8 +972,7 @@ parseOptions: Options.Regular, index: CodeActionIndex);
         obj3.Do();
     }
 }",
-
-@"class Construct
+                @"class Construct
 {
     public void Do() { }
     static void Main(string[] args)
@@ -903,14 +994,20 @@ parseOptions: Options.Regular, index: CodeActionIndex);
             obj3.Do();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestTuple()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -918,7 +1015,7 @@ parseOptions: Options.Regular, index: CodeActionIndex);
         System.Console.WriteLine(x.Item1);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -930,14 +1027,20 @@ parseOptions: Options.Regular, index: CodeActionIndex);
             return (1, 2);
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestTupleDeclarationWithNames()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -945,7 +1048,7 @@ parseOptions: Options.Regular, index: CodeActionIndex);
         System.Console.WriteLine(x.a);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -957,14 +1060,20 @@ parseOptions: Options.Regular, index: CodeActionIndex);
             return (1, 2);
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestTupleDeclarationWithSomeNames()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -972,7 +1081,7 @@ parseOptions: Options.Regular, index: CodeActionIndex);
         System.Console.WriteLine(x.a);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -984,14 +1093,20 @@ parseOptions: Options.Regular, index: CodeActionIndex);
             return (1, 2);
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestTupleWith1Arity()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -1000,7 +1115,7 @@ class Program
         [|y.Item1.ToString();|]
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"using System;
+                @"using System;
 class Program
 {
     static void Main(string[] args)
@@ -1013,14 +1128,20 @@ class Program
             y.Item1.ToString();
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestTupleLiteralWithNames()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1028,7 +1149,7 @@ class Program
         System.Console.WriteLine(x.Item1);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1040,14 +1161,20 @@ class Program
             return (a: 1, b: 2);
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestTupleDeclarationAndLiteralWithNames()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1055,7 +1182,7 @@ class Program
         System.Console.WriteLine(x.a);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1067,14 +1194,20 @@ class Program
             return (c: 1, d: 2);
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestTupleIntoVar()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1082,7 +1215,7 @@ class Program
         System.Console.WriteLine(x.c);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1094,14 +1227,20 @@ class Program
             return (c: 1, d: 2);
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task RefactorWithoutSystemValueTuple()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1109,7 +1248,7 @@ class Program
         System.Console.WriteLine(x.c);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1121,15 +1260,21 @@ class Program
             return (c: 1, d: 2);
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestTupleWithNestedNamedTuple()
         {
             // This is not the best refactoring, but this is an edge case
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1137,7 +1282,7 @@ class Program
         System.Console.WriteLine(x.c);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1149,14 +1294,20 @@ class Program
             return new System.ValueTuple<int, int, int, int, int, int, int, (string a, string b)>(1, 2, 3, 4, 5, 6, 7, (a: ""hello"", b: ""world""));
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestDeconstruction()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1164,7 +1315,7 @@ class Program
         System.Console.WriteLine(x);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1176,14 +1327,20 @@ class Program
             return (1, 2);
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
-        [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction), CompilerTrait(CompilerFeature.Tuples)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction),
+            CompilerTrait(CompilerFeature.Tuples)
+        ]
         public async Task TestDeconstruction2()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1192,7 +1349,7 @@ class Program
         System.Console.WriteLine(z);
     }
 }" + TestResources.NetFX.ValueTuple.tuplelib_cs,
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -1205,7 +1362,9 @@ class Program
             return 3;
         }
     }
-}" + TestResources.NetFX.ValueTuple.tuplelib_cs, CodeActionIndex);
+}" + TestResources.NetFX.ValueTuple.tuplelib_cs,
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
@@ -1213,7 +1372,7 @@ class Program
         public async Task TestOutVar()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     static void M(int i)
     {
@@ -1222,7 +1381,7 @@ class Program
         System.Console.WriteLine(r + y);
     }
 }",
-@"class C
+                @"class C
 {
     static void M(int i)
     {
@@ -1236,7 +1395,9 @@ class Program
             r = M1(out y, i);
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
@@ -1244,7 +1405,7 @@ class Program
         public async Task TestIsPattern()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     static void M(int i)
     {
@@ -1253,7 +1414,7 @@ class Program
         System.Console.WriteLine(r + y);
     }
 }",
-@"class C
+                @"class C
 {
     static void M(int i)
     {
@@ -1267,7 +1428,9 @@ class Program
             r = M1(3 is int {|Conflict:y|}, i);
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
@@ -1275,7 +1438,7 @@ class Program
         public async Task TestOutVarAndIsPattern()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1284,7 +1447,7 @@ class Program
         System.Console.WriteLine(r + y + z);
     }
 } ",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1298,7 +1461,9 @@ class Program
             r = M1(out /*out*/  /*int*/ y /*y*/) + M2(3 is int {|Conflict:z|});
         }
     }
-} ", CodeActionIndex);
+} ",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
@@ -1306,7 +1471,7 @@ class Program
         public async Task ConflictingOutVarLocals()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1320,7 +1485,7 @@ class Program
         System.Console.WriteLine(r + y);
     }
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1339,7 +1504,9 @@ class Program
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
@@ -1347,7 +1514,7 @@ class Program
         public async Task ConflictingPatternLocals()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1361,7 +1528,7 @@ class Program
         System.Console.WriteLine(r + y);
     }
 }",
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -1380,14 +1547,16 @@ class Program
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestCancellationTokenGoesLast()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 using System.Threading;
 
 class C
@@ -1403,7 +1572,7 @@ class C
         }|]
     }
 }",
-@"using System;
+                @"using System;
 using System.Threading;
 
 class C
@@ -1422,14 +1591,16 @@ class C
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestUseVar1()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1446,7 +1617,7 @@ class C
         Console.WriteLine(v);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1469,14 +1640,22 @@ class C
             return v;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.VarForBuiltInTypes, CodeStyleOptions2.TrueWithSuggestionEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.VarForBuiltInTypes,
+                        CodeStyleOptions2.TrueWithSuggestionEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestUseVar2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1493,7 +1672,7 @@ class C
         Console.WriteLine(v);
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1516,13 +1695,22 @@ class C
             return v;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOptions2.TrueWithSuggestionEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                        CodeStyleOptions2.TrueWithSuggestionEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ExtractLocalFunctionCall()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     public static void Main()
@@ -1531,7 +1719,8 @@ class C
         [|Local();|]
     }
 }";
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     public static void Main()
@@ -1545,14 +1734,22 @@ class C
         }
     }
 }";
-            await TestExactActionSetOfferedAsync(code, new[] { FeaturesResources.Extract_local_function });
-            await TestInRegularAndScript1Async(code, expectedCode, CodeActionIndexWhenExtractMethodMissing);
+            await TestExactActionSetOfferedAsync(
+                code,
+                new[] { FeaturesResources.Extract_local_function }
+            );
+            await TestInRegularAndScript1Async(
+                code,
+                expectedCode,
+                CodeActionIndexWhenExtractMethodMissing
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ExtractLocalFunctionCall_2()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class C
 {
     public static void Main()
@@ -1560,7 +1757,8 @@ class C
         [|void Local() { }
         Local();|]
     }
-}", @"
+}",
+                @"
 class C
 {
     public static void Main()
@@ -1573,13 +1771,20 @@ class C
             Local();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
-        [Fact, WorkItem(39946, "https://github.com/dotnet/roslyn/issues/39946"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(39946, "https://github.com/dotnet/roslyn/issues/39946"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task ExtractLocalFunctionCall_3()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class C
 {
     public static void Main()
@@ -1590,7 +1795,8 @@ class C
             Local();|]
         }
     }
-}", @"
+}",
+                @"
 class C
 {
     public static void Main()
@@ -1606,13 +1812,20 @@ class C
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
-        [Fact, WorkItem(39946, "https://github.com/dotnet/roslyn/issues/39946"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(39946, "https://github.com/dotnet/roslyn/issues/39946"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task ExtractFunctionUnderLocalFunctionCall()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     int Testing;
@@ -1633,7 +1846,8 @@ class Test
     {
 
     }
-}", @"
+}",
+                @"
 class Test
 {
     int Testing;
@@ -1659,13 +1873,16 @@ class Test
     {
 
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ExtractLocalFunctionCallWithCapture()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     public static void Main(string[] args)
@@ -1674,7 +1891,8 @@ class C
         [|Local();|]
     }
 }";
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     public static void Main(string[] args)
@@ -1688,14 +1906,22 @@ class C
         }
     }
 }";
-            await TestExactActionSetOfferedAsync(code, new[] { FeaturesResources.Extract_local_function });
-            await TestInRegularAndScript1Async(code, expectedCode, CodeActionIndexWhenExtractMethodMissing);
+            await TestExactActionSetOfferedAsync(
+                code,
+                new[] { FeaturesResources.Extract_local_function }
+            );
+            await TestInRegularAndScript1Async(
+                code,
+                expectedCode,
+                CodeActionIndexWhenExtractMethodMissing
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ExtractLocalFunctionInterior()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class C
 {
     public static void Main()
@@ -1707,7 +1933,8 @@ class C
         }
         Local();
     }
-}", @"
+}",
+                @"
 class C
 {
     public static void Main()
@@ -1724,13 +1951,16 @@ class C
         }
         Local();
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ExtractLocalFunctionWithinForLoop()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void method()
@@ -1744,7 +1974,8 @@ class Test
             }
         }
     }
-}", @"
+}",
+                @"
 class Test
 {
     void method()
@@ -1764,13 +1995,16 @@ class Test
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ExtractLocalFunctionWithinForLoop2()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void method()
@@ -1784,7 +2018,8 @@ class Test
             }
         }
     }
-}", @"
+}",
+                @"
 class Test
 {
     void method()
@@ -1803,13 +2038,16 @@ class Test
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ExtractLocalFunctionWithinForLoop3()
         {
-            await TestInRegularAndScript1Async(@"
+            await TestInRegularAndScript1Async(
+                @"
 class Test
 {
     void method()
@@ -1823,7 +2061,8 @@ class Test
             }
         }
     }
-}", @"
+}",
+                @"
 class Test
 {
     void method()
@@ -1842,13 +2081,16 @@ class Test
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestTupleWithInferredNames()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class Program
 {
     void M()
@@ -1858,7 +2100,7 @@ class Program
         System.Console.Write(t.a);
     }
 }",
-@"
+                @"
 class Program
 {
     void M()
@@ -1872,13 +2114,17 @@ class Program
             return (a, b: 2);
         }
     }
-}", TestOptions.Regular7_1, index: CodeActionIndex);
+}",
+                TestOptions.Regular7_1,
+                index: CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestDeconstruction4()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class Program
 {
     void M()
@@ -1887,7 +2133,7 @@ class Program
         System.Console.Write(x + y);
     }
 }",
-@"
+                @"
 class Program
 {
     void M()
@@ -1901,13 +2147,17 @@ class Program
             var (x, y) = (1, 2);
         }
     }
-}", TestOptions.Regular7_1, index: CodeActionIndex);
+}",
+                TestOptions.Regular7_1,
+                index: CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestDeconstruction5()
         {
-            await TestAsync(@"
+            await TestAsync(
+                @"
 class Program
 {
     void M()
@@ -1916,7 +2166,7 @@ class Program
         System.Console.Write(x + y);
     }
 }",
-@"
+                @"
 class Program
 {
     void M()
@@ -1930,13 +2180,18 @@ class Program
             (x, y) = (1, 2);
         }
     }
-}", TestOptions.Regular7_1, index: CodeActionIndex);
+}",
+                TestOptions.Regular7_1,
+                index: CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestIndexExpression()
         {
-            await TestInRegularAndScript1Async(TestSources.Index + @"
+            await TestInRegularAndScript1Async(
+                TestSources.Index
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -1944,8 +2199,8 @@ class Program
         System.Console.WriteLine([|^1|]);
     }
 }",
-TestSources.Index +
-@"
+                TestSources.Index
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -1957,13 +2212,18 @@ class Program
             return ^1;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestRangeExpression_Empty()
         {
-            await TestInRegularAndScript1Async(TestSources.Index + TestSources.Range + @"
+            await TestInRegularAndScript1Async(
+                TestSources.Index
+                    + TestSources.Range
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -1971,8 +2231,9 @@ class Program
         System.Console.WriteLine([|..|]);
     }
 }",
-TestSources.Index +
-TestSources.Range + @"
+                TestSources.Index
+                    + TestSources.Range
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -1984,13 +2245,18 @@ class Program
             return ..;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestRangeExpression_Left()
         {
-            await TestInRegularAndScript1Async(TestSources.Index + TestSources.Range + @"
+            await TestInRegularAndScript1Async(
+                TestSources.Index
+                    + TestSources.Range
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -1998,8 +2264,9 @@ class Program
         System.Console.WriteLine([|..1|]);
     }
 }",
-TestSources.Index +
-TestSources.Range + @"
+                TestSources.Index
+                    + TestSources.Range
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -2011,13 +2278,18 @@ class Program
             return ..1;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestRangeExpression_Right()
         {
-            await TestInRegularAndScript1Async(TestSources.Index + TestSources.Range + @"
+            await TestInRegularAndScript1Async(
+                TestSources.Index
+                    + TestSources.Range
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -2025,8 +2297,9 @@ class Program
         System.Console.WriteLine([|1..|]);
     }
 }",
-TestSources.Index +
-TestSources.Range + @"
+                TestSources.Index
+                    + TestSources.Range
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -2038,13 +2311,18 @@ class Program
             return 1..;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestRangeExpression_Both()
         {
-            await TestInRegularAndScript1Async(TestSources.Index + TestSources.Range + @"
+            await TestInRegularAndScript1Async(
+                TestSources.Index
+                    + TestSources.Range
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -2052,8 +2330,9 @@ class Program
         System.Console.WriteLine([|1..2|]);
     }
 }",
-TestSources.Index +
-TestSources.Range + @"
+                TestSources.Index
+                    + TestSources.Range
+                    + @"
 class Program
 {
     static void Main(string[] args)
@@ -2065,13 +2344,15 @@ class Program
             return 1..2;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestAnnotatedNullableReturn()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestAnnotatedNullableReturn() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2083,7 +2364,7 @@ class C
         return x;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2100,12 +2381,14 @@ class C
             return x;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestAnnotatedNullableParameters1()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestAnnotatedNullableParameters1() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2118,7 +2401,7 @@ class C
         return x;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2135,12 +2418,14 @@ class C
             return a?.Contains(b).ToString();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestAnnotatedNullableParameters2()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestAnnotatedNullableParameters2() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2154,7 +2439,7 @@ class C
         return x;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2172,12 +2457,14 @@ class C
             return (a + b + c).ToString();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestAnnotatedNullableParameters3()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestAnnotatedNullableParameters3() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2189,7 +2476,7 @@ class C
         return [|(a + b + c).ToString()|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2205,12 +2492,14 @@ class C
             return (a + b + c).ToString();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestAnnotatedNullableParameters4()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestAnnotatedNullableParameters4() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2221,7 +2510,7 @@ class C
         return [|a?.Contains(b).ToString()|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2236,12 +2525,14 @@ class C
             return a?.Contains(b).ToString();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowStateNullableParameters1()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowStateNullableParameters1() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2252,7 +2543,7 @@ class C
         return [|(a + b + a).ToString()|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2267,12 +2558,14 @@ class C
             return (a + b + a).ToString();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowStateNullableParameters2()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowStateNullableParameters2() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2283,7 +2576,7 @@ class C
         return [|(a + b + a).ToString()|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2298,12 +2591,14 @@ class C
             return (a + b + a).ToString();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowStateNullableParameters3()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowStateNullableParameters3() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2314,7 +2609,7 @@ class C
         return [|(a + b + a)?.ToString()|] ?? string.Empty;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2329,12 +2624,14 @@ class C
             return (a + b + a)?.ToString();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowStateNullableParameters_MultipleStates()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowStateNullableParameters_MultipleStates() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2352,7 +2649,7 @@ class C
         return c ?? string.Empty;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2375,12 +2672,14 @@ class C
             return c;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowStateNullableParameters_MultipleStatesNonNullReturn()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowStateNullableParameters_MultipleStatesNonNullReturn() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2398,7 +2697,7 @@ class C
         return c ?? string.Empty;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2421,12 +2720,14 @@ class C
             return c;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowStateNullableParameters_MultipleStatesNullReturn()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowStateNullableParameters_MultipleStatesNullReturn() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2443,7 +2744,7 @@ class C
         return c ?? string.Empty;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2465,12 +2766,14 @@ class C
             return c;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowStateNullableParameters_RefNotNull()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowStateNullableParameters_RefNotNull() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2486,7 +2789,7 @@ class C
         return c;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2507,18 +2810,20 @@ class C
             return c;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         // There's a case below where flow state correctly asseses that the variable
-        // 'x' is non-null when returned. It's wasn't obvious when writing, but that's 
+        // 'x' is non-null when returned. It's wasn't obvious when writing, but that's
         // due to the fact the line above it being executed as 'x.ToString()' would throw
         // an exception and the return statement would never be hit. The only way the return
-        // statement gets executed is if the `x.ToString()` call succeeds, thus suggesting 
+        // statement gets executed is if the `x.ToString()` call succeeds, thus suggesting
         // that the value is indeed not null.
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowNullableReturn_NotNull1()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowNullableReturn_NotNull1() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2530,7 +2835,7 @@ class C
         return x;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2547,12 +2852,14 @@ class C
             return x;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowNullableReturn_NotNull2()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowNullableReturn_NotNull2() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 class C
 {
@@ -2565,7 +2872,7 @@ class C
         return x;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
@@ -2583,11 +2890,13 @@ class C
             return x;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowNullable_Lambda()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowNullable_Lambda() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -2606,7 +2915,7 @@ class C
         return x;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -2630,12 +2939,14 @@ class C
             return x;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestFlowNullable_LambdaWithReturn()
-            => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestFlowNullable_LambdaWithReturn() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -2654,7 +2965,7 @@ class C
         return x;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -2678,13 +2989,15 @@ class C
             return x;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestExtractReadOnlyMethod()
         {
             await TestInRegularAndScript1Async(
-@"struct S1
+                @"struct S1
 {
     readonly int M1() => 42;
     void Main()
@@ -2692,7 +3005,7 @@ class C
         [|int i = M1() + M1()|];
     }
 }",
-@"struct S1
+                @"struct S1
 {
     readonly int M1() => 42;
     void Main()
@@ -2704,14 +3017,16 @@ class C
             int i = M1() + M1();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestExtractReadOnlyMethodInReadOnlyStruct()
         {
             await TestInRegularAndScript1Async(
-@"readonly struct S1
+                @"readonly struct S1
 {
     int M1() => 42;
     void Main()
@@ -2719,7 +3034,7 @@ class C
         [|int i = M1() + M1()|];
     }
 }",
-@"readonly struct S1
+                @"readonly struct S1
 {
     int M1() => 42;
     void Main()
@@ -2731,14 +3046,16 @@ class C
             int i = M1() + M1();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestExtractNonReadOnlyMethodInReadOnlyMethod()
         {
             await TestInRegularAndScript1Async(
-@"struct S1
+                @"struct S1
 {
     int M1() => 42;
     readonly void Main()
@@ -2746,7 +3063,7 @@ class C
         [|int i = M1() + M1()|];
     }
 }",
-@"struct S1
+                @"struct S1
 {
     int M1() => 42;
     readonly void Main()
@@ -2758,13 +3075,15 @@ class C
             int i = M1() + M1();
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestExtractNullableObjectWithExplicitCast()
-        => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestExtractNullableObjectWithExplicitCast() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -2777,7 +3096,7 @@ class C
         Console.WriteLine(s);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -2794,12 +3113,14 @@ class C
             return o;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestExtractNotNullableObjectWithExplicitCast()
-        => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestExtractNotNullableObjectWithExplicitCast() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -2812,7 +3133,7 @@ class C
         Console.WriteLine(s);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -2829,12 +3150,14 @@ class C
             return o;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestExtractNotNullableWithExplicitCast()
-        => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestExtractNotNullableWithExplicitCast() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -2854,7 +3177,7 @@ class C
         var s = (A)[|b|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -2878,12 +3201,14 @@ class C
             return b;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestExtractNullableWithExplicitCast()
-        => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestExtractNullableWithExplicitCast() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -2903,7 +3228,7 @@ class C
         var s = (A)[|b|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -2927,12 +3252,14 @@ class C
             return b;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestExtractNotNullableWithExplicitCastSelected()
-        => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestExtractNotNullableWithExplicitCastSelected() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -2945,7 +3272,7 @@ class C
         Console.WriteLine(s);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -2962,12 +3289,14 @@ class C
             return (string)o;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestExtractNullableWithExplicitCastSelected()
-        => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestExtractNullableWithExplicitCastSelected() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -2980,7 +3309,7 @@ class C
         Console.WriteLine(s);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -2997,11 +3326,13 @@ class C
             return (string?)o;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestExtractNullableNonNullFlowWithExplicitCastSelected()
-        => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestExtractNullableNonNullFlowWithExplicitCastSelected() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -3014,7 +3345,7 @@ class C
         Console.WriteLine(s);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -3031,12 +3362,14 @@ class C
             return (string?)o;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
-        public Task TestExtractNullableToNonNullableWithExplicitCastSelected()
-        => TestInRegularAndScript1Async(
-@"#nullable enable
+        public Task TestExtractNullableToNonNullableWithExplicitCastSelected() =>
+            TestInRegularAndScript1Async(
+                @"#nullable enable
 
 using System;
 
@@ -3049,7 +3382,7 @@ class C
         Console.WriteLine(s);
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 using System;
 
@@ -3066,13 +3399,15 @@ class C
             return (string)o;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestExtractLocalFunction_EnsureUniqueFunctionName()
         {
             await TestInRegularAndScript1Async(
-@"class Test
+                @"class Test
 {
     static void Main(string[] args)
     {
@@ -3084,7 +3419,7 @@ class C
         }
     }
 }",
-@"class Test
+                @"class Test
 {
     static void Main(string[] args)
     {
@@ -3100,14 +3435,16 @@ class C
             var test = 1;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestExtractLocalFunctionWithinLocalFunction_EnsureUniqueFunctionName()
         {
             await TestInRegularAndScript1Async(
-@"class Test
+                @"class Test
 {
     static void Main(string[] args)
     {
@@ -3123,7 +3460,7 @@ class C
         }
     }
 }",
-@"class Test
+                @"class Test
 {
     static void Main(string[] args)
     {
@@ -3143,14 +3480,16 @@ class C
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestExtractNonStaticLocalMethod_WithDeclaration()
         {
             await TestInRegularAndScript1Async(
-@"class Test
+                @"class Test
 {
     static void Main(string[] args)
     {
@@ -3161,7 +3500,7 @@ class C
         }|]
     }
 }",
-@"class Test
+                @"class Test
 {
     static void Main(string[] args)
     {
@@ -3176,14 +3515,16 @@ class C
             }
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ArgumentlessReturnWithConstIfExpression()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3195,7 +3536,7 @@ class Program
         Console.WriteLine();
     }
 }",
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -3214,14 +3555,16 @@ class Program
                 return;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestPartialSelection_StaticOptionTrue_EarlierCSharpVersionShouldBeNonStatic()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3229,7 +3572,7 @@ class Program
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3241,14 +3584,23 @@ class Program
             return b != true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement), parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    ),
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7_3)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestPartialSelection_StaticOptionTrue_EarlierCSharpVersionShouldBeNonStatic2()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3256,7 +3608,7 @@ class Program
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3268,14 +3620,23 @@ class Program
             return b != true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement), parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    ),
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestPartialSelection_StaticOptionTrue_CSharp8AndLaterStaticSupported()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3283,7 +3644,7 @@ class Program
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3295,14 +3656,23 @@ class Program
             return b != true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement), parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp8)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    ),
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestPartialSelection_StaticOptionTrue_CSharp8AndLaterStaticSupported2()
         {
             await TestInRegularAndScript1Async(
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3310,7 +3680,7 @@ class Program
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }",
-@"class Program
+                @"class Program
 {
     static void Main(string[] args)
     {
@@ -3322,14 +3692,23 @@ class Program
             return b != true;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement), parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    ),
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInPropertyInitializer_Get()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -3346,7 +3725,7 @@ class TimePeriod
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -3370,14 +3749,22 @@ class TimePeriod
             _seconds = value * 3600;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInPropertyInitializer_Get2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -3394,7 +3781,7 @@ class TimePeriod
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -3418,14 +3805,22 @@ class TimePeriod
             _seconds = value * 3600;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInPropertyInitializer_Set()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -3442,7 +3837,7 @@ class TimePeriod
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -3463,14 +3858,22 @@ class TimePeriod
             }
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInPropertyInitializer_Set2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -3487,7 +3890,7 @@ class TimePeriod
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class TimePeriod
 {
@@ -3508,14 +3911,22 @@ class TimePeriod
             }
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInIndexer_Get()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Indexer
 {
@@ -3537,7 +3948,7 @@ class Indexer
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Indexer
 {
@@ -3563,14 +3974,22 @@ class Indexer
             testArr[index] = value;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInIndexer_Get2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Indexer
 {
@@ -3592,7 +4011,7 @@ class Indexer
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Indexer
 {
@@ -3618,14 +4037,22 @@ class Indexer
             testArr[index] = value;
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInIndexer_Set()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Indexer
 {
@@ -3647,7 +4074,7 @@ class Indexer
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Indexer
 {
@@ -3673,14 +4100,22 @@ class Indexer
             }
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInIndexer_Set2()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class Indexer
 {
@@ -3702,7 +4137,7 @@ class Indexer
         }
     }
 }",
-@"using System;
+                @"using System;
 
 class Indexer
 {
@@ -3728,13 +4163,22 @@ class Indexer
             }
         }
     }
-}", CodeActionIndex, new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.TrueWithSilentEnforcement)));
+}",
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestPartialSelection_CSharp5NotApplicable()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3743,13 +4187,20 @@ class Program
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }";
-            await TestExactActionSetOfferedAsync(code, new[] { FeaturesResources.Extract_method }, new TestParameters(parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)));
+            await TestExactActionSetOfferedAsync(
+                code,
+                new[] { FeaturesResources.Extract_method },
+                new TestParameters(
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestPartialSelection_CSharp6NotApplicable()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -3758,21 +4209,27 @@ class Program
         System.Console.WriteLine([|b != true|] ? b = true : b = false);
     }
 }";
-            await TestExactActionSetOfferedAsync(code, new[] { FeaturesResources.Extract_method }, new TestParameters(parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)));
+            await TestExactActionSetOfferedAsync(
+                code,
+                new[] { FeaturesResources.Extract_method },
+                new TestParameters(
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInIntegerExpression()
         {
             await TestInRegularAndScript1Async(
-@"class MethodExtraction
+                @"class MethodExtraction
 {
     void TestMethod()
     {
         int a = [|1 + 1|];
     }
 }",
-@"class MethodExtraction
+                @"class MethodExtraction
 {
     void TestMethod()
     {
@@ -3783,14 +4240,16 @@ class Program
             return 1 + 1;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestInBaseIntegerParameter()
         {
             await TestInRegularAndScript1Async(
-@"class B
+                @"class B
 {
     protected B(int test)
     {
@@ -3805,7 +4264,7 @@ class C : B
 
     }
 }",
-@"class B
+                @"class B
 {
     protected B(int test)
     {
@@ -3822,13 +4281,20 @@ class C : B
             return 1 + 1;
         }
     }
-}", CodeActionIndex);
+}",
+                CodeActionIndex
+            );
         }
 
-        [Fact, WorkItem(40188, "https://github.com/dotnet/roslyn/issues/40188"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40188, "https://github.com/dotnet/roslyn/issues/40188"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestEditorconfigSetting_StaticLocalFunction_True()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -3847,7 +4313,8 @@ csharp_prefer_static_local_function = true:silent
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -3874,10 +4341,15 @@ csharp_prefer_static_local_function = true:silent
             await TestInRegularAndScript1Async(input, expected, CodeActionIndex);
         }
 
-        [Fact, WorkItem(40188, "https://github.com/dotnet/roslyn/issues/40188"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40188, "https://github.com/dotnet/roslyn/issues/40188"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestEditorconfigSetting_StaticLocalFunction_False()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -3896,7 +4368,8 @@ csharp_prefer_static_local_function = false:silent
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -3923,10 +4396,15 @@ csharp_prefer_static_local_function = false:silent
             await TestInRegularAndScript1Async(input, expected, CodeActionIndex);
         }
 
-        [Fact, WorkItem(40188, "https://github.com/dotnet/roslyn/issues/40188"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40188, "https://github.com/dotnet/roslyn/issues/40188"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestEditorconfigSetting_ExpressionBodiedLocalFunction_True()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -3945,7 +4423,8 @@ csharp_style_expression_bodied_local_functions = true:silent
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -3969,10 +4448,15 @@ csharp_style_expression_bodied_local_functions = true:silent
             await TestInRegularAndScript1Async(input, expected, CodeActionIndex);
         }
 
-        [Fact, WorkItem(40188, "https://github.com/dotnet/roslyn/issues/40188"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40188, "https://github.com/dotnet/roslyn/issues/40188"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestEditorconfigSetting_ExpressionBodiedLocalFunction_False()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -3991,7 +4475,8 @@ csharp_style_expression_bodied_local_functions = false:silent
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -4018,10 +4503,15 @@ csharp_style_expression_bodied_local_functions = false:silent
             await TestInRegularAndScript1Async(input, expected, CodeActionIndex);
         }
 
-        [Fact, WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestNaming_CamelCase()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -4034,12 +4524,15 @@ class Program1
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_CamelCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_CamelCase
+                + @"
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -4057,7 +4550,9 @@ class Program1
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_CamelCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_CamelCase
+                + @"
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
@@ -4065,10 +4560,15 @@ class Program1
             await TestInRegularAndScript1Async(input, expected, CodeActionIndex);
         }
 
-        [Fact, WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestNaming_CamelCase_GetName()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -4080,12 +4580,15 @@ class MethodExtraction
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_CamelCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_CamelCase
+                + @"
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -4102,7 +4605,9 @@ class MethodExtraction
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_CamelCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_CamelCase
+                + @"
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
@@ -4110,10 +4615,15 @@ class MethodExtraction
             await TestInRegularAndScript1Async(input, expected, CodeActionIndex);
         }
 
-        [Fact, WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestNaming_PascalCase()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -4126,12 +4636,15 @@ class Program1
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_PascalCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_PascalCase
+                + @"
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -4149,7 +4662,9 @@ class Program1
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_PascalCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_PascalCase
+                + @"
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
@@ -4157,10 +4672,15 @@ class Program1
             await TestInRegularAndScript1Async(input, expected, CodeActionIndex);
         }
 
-        [Fact, WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestNaming_PascalCase_GetName()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -4172,12 +4692,15 @@ class MethodExtraction
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_PascalCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_PascalCase
+                + @"
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -4194,7 +4717,9 @@ class MethodExtraction
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_PascalCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_PascalCase
+                + @"
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
@@ -4202,10 +4727,15 @@ class MethodExtraction
             await TestInRegularAndScript1Async(input, expected, CodeActionIndex);
         }
 
-        [Fact, WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"), Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
+        [
+            Fact,
+            WorkItem(40209, "https://github.com/dotnet/roslyn/issues/40209"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)
+        ]
         public async Task TestNaming_CamelCase_DoesntApply()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
@@ -4218,13 +4748,16 @@ class Program1
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_CamelCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_CamelCase
+                + @"
 dotnet_naming_symbols.local_functions.required_modifiers = static
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -4242,21 +4775,33 @@ class Program1
     }
 }
         </Document>
-        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">" + EditorConfigNaming_CamelCase + @"
+        <AnalyzerConfigDocument FilePath = ""z:\\.editorconfig"">"
+                + EditorConfigNaming_CamelCase
+                + @"
 dotnet_naming_symbols.local_functions.required_modifiers = static
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>";
 
-            await TestInRegularAndScript1Async(input, expected, CodeActionIndex,
-                new TestParameters(options: Option(CSharpCodeStyleOptions.PreferStaticLocalFunction, CodeStyleOptions2.FalseWithSilentEnforcement)));
+            await TestInRegularAndScript1Async(
+                input,
+                expected,
+                CodeActionIndex,
+                new TestParameters(
+                    options: Option(
+                        CSharpCodeStyleOptions.PreferStaticLocalFunction,
+                        CodeStyleOptions2.FalseWithSilentEnforcement
+                    )
+                )
+            );
         }
 
         [WorkItem(40654, "https://github.com/dotnet/roslyn/issues/40654")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnInvalidUsingStatement_MultipleStatements()
         {
-            var input = @"
+            var input =
+                @"
 class C
 {
     void M()
@@ -4265,7 +4810,8 @@ class C
         using System;|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M()
@@ -4286,7 +4832,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnLocalFunctionHeader_Parameter()
         {
-            var input = @"
+            var input =
+                @"
 using System;
 class C
 {
@@ -4300,7 +4847,8 @@ class C
         });
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -4326,7 +4874,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnLocalFunctionHeader_Parameter_ExpressionBody()
         {
-            var input = @"
+            var input =
+                @"
 using System;
 class C
 {
@@ -4338,7 +4887,8 @@ class C
         });
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -4362,7 +4912,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnLocalFunctionHeader_Identifier()
         {
-            var input = @"
+            var input =
+                @"
 using System;
 class C
 {
@@ -4376,7 +4927,8 @@ class C
         });
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -4402,7 +4954,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestOnLocalFunctionHeader_Identifier_ExpressionBody()
         {
-            var input = @"
+            var input =
+                @"
 using System;
 class C
 {
@@ -4414,7 +4967,8 @@ class C
         });
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 class C
 {
@@ -4439,7 +4993,7 @@ class C
         public async Task TestMissingOnUsingStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
@@ -4448,13 +5002,15 @@ class C
             [|using System;|]
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInLocalFunctionDeclaration_ExpressionBody()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class C
 {
     public static void Main(string[] args)
@@ -4462,13 +5018,16 @@ class C
         [|bool Local() => args == null;|]
         Local();
     }
-}", new TestParameters(index: CodeActionIndex));
+}",
+                new TestParameters(index: CodeActionIndex)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInLocalFunctionDeclaration()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class C
 {
     public static void Main(string[] args)
@@ -4479,14 +5038,16 @@ class C
         }|]
         Local();
     }
-}", new TestParameters(index: CodeActionIndex));
+}",
+                new TestParameters(index: CodeActionIndex)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInGoto()
         {
             await TestMissingInRegularAndScriptAsync(
-@"delegate int del(int i);
+                @"delegate int del(int i);
 
 class C
 {
@@ -4499,14 +5060,16 @@ class C
     label2:
         return;
     }
-}", new TestParameters(index: CodeActionIndex));
+}",
+                new TestParameters(index: CodeActionIndex)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInFieldInitializer()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     [|int a = 10;|]
     int b = 5;
@@ -4514,14 +5077,16 @@ class C
     static void Main(string[] args)
     {
     }
-}", new TestParameters(index: CodeActionIndex));
+}",
+                new TestParameters(index: CodeActionIndex)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInFieldInitializer_2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int [|a = 10;|]
     int b = 5;
@@ -4529,13 +5094,16 @@ class C
     static void Main(string[] args)
     {
     }
-}", new TestParameters(index: CodeActionIndex));
+}",
+                new TestParameters(index: CodeActionIndex)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInExpressionBodyProperty()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     int field;
@@ -4548,7 +5116,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInExpressionBodyIndexer()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     int field;
@@ -4561,7 +5130,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInExpressionBodyPropertyGetAccessor()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     int field;
@@ -4578,7 +5148,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInExpressionBodyPropertySetAccessor()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     int field;
@@ -4595,7 +5166,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInExpressionBodyIndexerGetAccessor()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     int field;
@@ -4612,7 +5184,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInExpressionBodyIndexerSetAccessor()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     int field;
@@ -4629,7 +5202,8 @@ class Program
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInAttributeInitializer()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 using System;
 
 class C
@@ -4639,13 +5213,15 @@ class C
     {
         // Objects of this type can be serialized.
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInAttributeInitializerParameter()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 using System.Runtime.InteropServices;
 
 class C
@@ -4654,13 +5230,15 @@ class C
     public class SampleClass
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInThisConstructorCall()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class B
 {
     protected B(string message)
@@ -4680,13 +5258,15 @@ class C : B
     {
 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingInBaseConstructorCall()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class B
 {
     protected B(string message)
@@ -4706,14 +5286,16 @@ class C : B
     {
 
     }
-}");
+}"
+            );
         }
 
         [WorkItem(22150, "https://github.com/dotnet/roslyn/issues/22150")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task ExtractLocalFunctionToLocalFunction()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -4724,7 +5306,8 @@ class C
 
     static void Local() => System.Console.WriteLine();
 }";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -4748,10 +5331,12 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TopLevelStatement_ArgumentInInvocation()
         {
-            var code = @"
+            var code =
+                @"
 System.Console.WriteLine([|""string""|]);
 ";
-            var expected = @"
+            var expected =
+                @"
 System.Console.WriteLine({|Rename:NewMethod|}());
 
 static string NewMethod()
@@ -4759,19 +5344,26 @@ static string NewMethod()
     return ""string"";
 }";
 
-            await TestAsync(code, expected, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9), index: CodeActionIndex);
+            await TestAsync(
+                code,
+                expected,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9),
+                index: CodeActionIndex
+            );
         }
 
         [WorkItem(44260, "https://github.com/dotnet/roslyn/issues/44260")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TopLevelStatement_InBlock_ArgumentInInvocation()
         {
-            var code = @"
+            var code =
+                @"
 {
     System.Console.WriteLine([|""string""|]);
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 {
     System.Console.WriteLine({|Rename:NewMethod|}());
 
@@ -4782,18 +5374,24 @@ static string NewMethod()
 }
 ";
 
-            await TestInRegularAndScriptAsync(code, expected, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9), index: CodeActionIndex);
+            await TestInRegularAndScriptAsync(
+                code,
+                expected,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9),
+                index: CodeActionIndex
+            );
         }
 
         [WorkItem(44260, "https://github.com/dotnet/roslyn/issues/44260")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TopLevelStatement_ArgumentInInvocation_InInteractive()
         {
-            var code = @"
+            var code =
+                @"
 System.Console.WriteLine([|""string""|]);
 ";
             var expected =
-@"{
+                @"{
     System.Console.WriteLine({|Rename:NewMethod|}());
 
     static string NewMethod()
@@ -4802,14 +5400,20 @@ System.Console.WriteLine([|""string""|]);
     }
 }";
 
-            await TestAsync(code, expected, TestOptions.Script.WithLanguageVersion(LanguageVersion.CSharp9), index: CodeActionIndex);
+            await TestAsync(
+                code,
+                expected,
+                TestOptions.Script.WithLanguageVersion(LanguageVersion.CSharp9),
+                index: CodeActionIndex
+            );
         }
 
         [WorkItem(45422, "https://github.com/dotnet/roslyn/issues/45422")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingOnExtractLocalFunction()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class C
 {
     static void M()
@@ -4826,14 +5430,17 @@ class C
             }
         }
     }
-}", codeActionIndex: 1);
+}",
+                codeActionIndex: 1
+            );
         }
 
         [WorkItem(45422, "https://github.com/dotnet/roslyn/issues/45422")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsExtractLocalFunction)]
         public async Task TestMissingOnExtractLocalFunctionWithExtraBrace()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 class C
 {
     static void M()
@@ -4849,7 +5456,9 @@ class C
             }|]
         }
     }
-}", codeActionIndex: 1);
+}",
+                codeActionIndex: 1
+            );
         }
     }
 }

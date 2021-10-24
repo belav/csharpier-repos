@@ -19,28 +19,37 @@ namespace Microsoft.CodeAnalysis.Razor
         /// <param name="builder">The <see cref="RazorProjectEngineBuilder"/>.</param>
         /// <param name="csharpLanguageVersion">The C# <see cref="LanguageVersion"/>.</param>
         /// <returns>The <see cref="RazorProjectEngineBuilder"/>.</returns>
-        public static RazorProjectEngineBuilder SetCSharpLanguageVersion(this RazorProjectEngineBuilder builder, LanguageVersion csharpLanguageVersion)
+        public static RazorProjectEngineBuilder SetCSharpLanguageVersion(
+            this RazorProjectEngineBuilder builder,
+            LanguageVersion csharpLanguageVersion
+        )
         {
             if (builder == null)
             {
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            var existingFeature = builder.Features.OfType<ConfigureParserForCSharpVersionFeature>().FirstOrDefault();
+            var existingFeature = builder.Features
+                .OfType<ConfigureParserForCSharpVersionFeature>()
+                .FirstOrDefault();
             if (existingFeature != null)
             {
                 builder.Features.Remove(existingFeature);
             }
 
             // This will convert any "latest", "default" or "LatestMajor" LanguageVersions into their numerical equivalent.
-            var effectiveCSharpLanguageVersion = LanguageVersionFacts.MapSpecifiedToEffectiveVersion(csharpLanguageVersion);
-            builder.Features.Add(new ConfigureParserForCSharpVersionFeature(effectiveCSharpLanguageVersion));
+            var effectiveCSharpLanguageVersion =
+                LanguageVersionFacts.MapSpecifiedToEffectiveVersion(csharpLanguageVersion);
+            builder.Features.Add(
+                new ConfigureParserForCSharpVersionFeature(effectiveCSharpLanguageVersion)
+            );
 
             return builder;
         }
 
         // Internal for testing
-        internal class ConfigureParserForCSharpVersionFeature : IConfigureRazorCodeGenerationOptionsFeature
+        internal class ConfigureParserForCSharpVersionFeature
+            : IConfigureRazorCodeGenerationOptionsFeature
         {
             public ConfigureParserForCSharpVersionFeature(LanguageVersion csharpLanguageVersion)
             {
@@ -60,7 +69,9 @@ namespace Microsoft.CodeAnalysis.Razor
                     throw new ArgumentNullException(nameof(options));
                 }
 
-                if (options.Configuration != null && options.Configuration.LanguageVersion.Major < 3)
+                if (
+                    options.Configuration != null && options.Configuration.LanguageVersion.Major < 3
+                )
                 {
                     // Prior to 3.0 there were no C# version specific controlled features. Suppress nullability enforcement.
                     options.SuppressNullabilityEnforcement = true;
@@ -78,7 +89,7 @@ namespace Microsoft.CodeAnalysis.Razor
                     // to act in a safe manner to not cause unneeded errors for older compilers. Therefore if the version isn't
                     // >= 8.0 (Latest has a higher value) then nullability enforcement is suppressed.
                     //
-                    // Once the project finishes configuration the C# language version will be updated to reflect the effective 
+                    // Once the project finishes configuration the C# language version will be updated to reflect the effective
                     // language version for the project by our workspace change detectors. That mechanism extracts the correlated
                     // Roslyn project and acquires the effective C# version at that point.
                     options.SuppressNullabilityEnforcement = false;

@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Hosting
     internal interface ISupportsStartup
     {
         IWebHostBuilder Configure(Action<WebHostBuilderContext, IApplicationBuilder> configure);
-        IWebHostBuilder UseStartup([DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType);
-        IWebHostBuilder UseStartup<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]TStartup>(Func<WebHostBuilderContext, TStartup> startupFactory);
+        IWebHostBuilder UseStartup(
+            [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] Type startupType
+        );
+        IWebHostBuilder UseStartup<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TStartup
+        >(Func<WebHostBuilderContext, TStartup> startupFactory);
     }
 }

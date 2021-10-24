@@ -61,9 +61,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(operand, nameof(operand));
 
-            return operand != Operand
-                ? new CollateExpression(operand, Collation)
-                : this;
+            return operand != Operand ? new CollateExpression(operand, Collation) : this;
         }
 
         /// <inheritdoc />
@@ -72,25 +70,24 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
             Check.NotNull(expressionPrinter, nameof(expressionPrinter));
 
             expressionPrinter.Visit(Operand);
-            expressionPrinter
-                .Append(" COLLATE ")
-                .Append(Collation);
+            expressionPrinter.Append(" COLLATE ").Append(Collation);
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is CollateExpression collateExpression
-                    && Equals(collateExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is CollateExpression collateExpression && Equals(collateExpression)
+            );
 
-        private bool Equals(CollateExpression collateExpression)
-            => base.Equals(collateExpression)
-                && Operand.Equals(collateExpression.Operand)
-                && Collation.Equals(collateExpression.Collation, StringComparison.Ordinal);
+        private bool Equals(CollateExpression collateExpression) =>
+            base.Equals(collateExpression)
+            && Operand.Equals(collateExpression.Operand)
+            && Collation.Equals(collateExpression.Collation, StringComparison.Ordinal);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Operand, Collation);
+        public override int GetHashCode() =>
+            HashCode.Combine(base.GetHashCode(), Operand, Collation);
     }
 }

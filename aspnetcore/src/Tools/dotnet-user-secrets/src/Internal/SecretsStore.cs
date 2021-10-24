@@ -38,10 +38,7 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
 
         public string this[string key]
         {
-            get
-            {
-                return _secrets[key];
-            }
+            get { return _secrets[key]; }
         }
 
         public int Count => _secrets.Count;

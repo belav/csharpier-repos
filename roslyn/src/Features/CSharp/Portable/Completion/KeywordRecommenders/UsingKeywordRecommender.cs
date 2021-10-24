@@ -11,26 +11,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class UsingKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public UsingKeywordRecommender()
-            : base(SyntaxKind.UsingKeyword)
-        {
-        }
+        public UsingKeywordRecommender() : base(SyntaxKind.UsingKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // cases:
             //  using (goo) { }
             //  using Goo;
             //  using Goo = Bar;
             //  await using (goo) { }
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                IsUsingDirectiveContext(context, cancellationToken) ||
-                context.IsAwaitStatementContext(position, cancellationToken);
+            return context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || IsUsingDirectiveContext(context, cancellationToken)
+                || context.IsAwaitStatementContext(position, cancellationToken);
         }
 
-        private static bool IsUsingDirectiveContext(CSharpSyntaxContext context, CancellationToken cancellationToken)
+        private static bool IsUsingDirectiveContext(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // cases:
             // root: |
@@ -97,8 +100,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 
                 // a using can't come before externs
                 var nextToken = originalToken.GetNextToken(includeSkipped: true);
-                if (nextToken.Kind() == SyntaxKind.ExternKeyword ||
-                    ((CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken)).Externs.Count > 0)
+                if (
+                    nextToken.Kind() == SyntaxKind.ExternKeyword
+                    || (
+                        (CompilationUnitSyntax)context.SyntaxTree.GetRoot(cancellationToken)
+                    ).Externs.Count > 0
+                )
                 {
                     return false;
                 }
@@ -106,8 +113,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 return true;
             }
 
-            if (token.Kind() == SyntaxKind.OpenBraceToken &&
-                token.Parent.IsKind(SyntaxKind.NamespaceDeclaration, out NamespaceDeclarationSyntax _))
+            if (
+                token.Kind() == SyntaxKind.OpenBraceToken
+                && token.Parent.IsKind(
+                    SyntaxKind.NamespaceDeclaration,
+                    out NamespaceDeclarationSyntax _
+                )
+            )
             {
                 // a child using can't come before externs
                 var nextToken = originalToken.GetNextToken(includeSkipped: true);
@@ -126,8 +138,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             // |
             if (token.Kind() == SyntaxKind.SemicolonToken)
             {
-                if (token.Parent.IsKind(SyntaxKind.ExternAliasDirective) ||
-                    token.Parent.IsKind(SyntaxKind.UsingDirective))
+                if (
+                    token.Parent.IsKind(SyntaxKind.ExternAliasDirective)
+                    || token.Parent.IsKind(SyntaxKind.UsingDirective)
+                )
                 {
                     return true;
                 }

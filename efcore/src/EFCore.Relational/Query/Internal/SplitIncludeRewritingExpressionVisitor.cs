@@ -19,46 +19,62 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         /// <inheritdoc />
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
         {
-            if (methodCallExpression.Method.DeclaringType == typeof(Queryable)
-                && methodCallExpression.Method.IsGenericMethod)
+            if (
+                methodCallExpression.Method.DeclaringType == typeof(Queryable)
+                && methodCallExpression.Method.IsGenericMethod
+            )
             {
                 var genericMethod = methodCallExpression.Method.GetGenericMethodDefinition();
                 Expression source = methodCallExpression;
                 var singleResult = false;
                 var reverseOrdering = false;
-                if (genericMethod == QueryableMethods.FirstOrDefaultWithoutPredicate
+                if (
+                    genericMethod == QueryableMethods.FirstOrDefaultWithoutPredicate
                     || genericMethod == QueryableMethods.FirstWithoutPredicate
                     || genericMethod == QueryableMethods.SingleOrDefaultWithoutPredicate
-                    || genericMethod == QueryableMethods.SingleWithoutPredicate)
+                    || genericMethod == QueryableMethods.SingleWithoutPredicate
+                )
                 {
                     singleResult = true;
                     source = methodCallExpression.Arguments[0];
                 }
 
-                if (genericMethod == QueryableMethods.LastOrDefaultWithoutPredicate
-                    || genericMethod == QueryableMethods.LastWithoutPredicate)
+                if (
+                    genericMethod == QueryableMethods.LastOrDefaultWithoutPredicate
+                    || genericMethod == QueryableMethods.LastWithoutPredicate
+                )
                 {
                     singleResult = true;
                     reverseOrdering = true;
                     source = methodCallExpression.Arguments[0];
                 }
 
-                if (source is MethodCallExpression selectMethodCall
+                if (
+                    source is MethodCallExpression selectMethodCall
                     && selectMethodCall.Method.DeclaringType == typeof(Queryable)
                     && selectMethodCall.Method.IsGenericMethod
-                    && selectMethodCall.Method.GetGenericMethodDefinition() == QueryableMethods.Select)
+                    && selectMethodCall.Method.GetGenericMethodDefinition()
+                        == QueryableMethods.Select
+                )
                 {
                     var selector = RewriteCollectionInclude(
-                        selectMethodCall.Arguments[0], selectMethodCall.Arguments[1].UnwrapLambdaFromQuote(), singleResult,
-                        reverseOrdering);
+                        selectMethodCall.Arguments[0],
+                        selectMethodCall.Arguments[1].UnwrapLambdaFromQuote(),
+                        singleResult,
+                        reverseOrdering
+                    );
 
                     source = selectMethodCall.Update(
                         selectMethodCall.Object!,
-                        new[] { selectMethodCall.Arguments[0], Expression.Quote(selector) });
+                        new[] { selectMethodCall.Arguments[0], Expression.Quote(selector) }
+                    );
 
                     if (singleResult)
                     {
-                        source = methodCallExpression.Update(methodCallExpression.Object!, new[] { source });
+                        source = methodCallExpression.Update(
+                            methodCallExpression.Object!,
+                            new[] { source }
+                        );
                     }
 
                     return source;
@@ -72,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             Expression source,
             LambdaExpression selector,
             bool singleResult,
-            bool reverseOrdering)
+            bool reverseOrdering
+        )
         {
             var selectorParameter = selector.Parameters[0];
             var selectorBody = selector.Body;
@@ -82,7 +99,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             {
                 source = Expression.Call(
                     QueryableMethods.Reverse.MakeGenericMethod(sourceElementType),
-                    source);
+                    source
+                );
             }
 
             if (singleResult)
@@ -90,11 +108,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 source = Expression.Call(
                     QueryableMethods.Take.MakeGenericMethod(sourceElementType),
                     source,
-                    Expression.Constant(1));
+                    Expression.Constant(1)
+                );
             }
 
             selectorBody = new CollectionSelectManyInjectingExpressionVisitor(
-                this, source, sourceElementType, selectorParameter).Visit(selectorBody);
+                this,
+                source,
+                sourceElementType,
+                selectorParameter
+            ).Visit(selectorBody);
 
             return Expression.Lambda(selectorBody, selectorParameter);
         }
@@ -110,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 SplitIncludeRewritingExpressionVisitor parentVisitor,
                 Expression parentQuery,
                 Type sourceElementType,
-                ParameterExpression parameterExpression)
+                ParameterExpression parameterExpression
+            )
             {
                 _parentQuery = new CloningExpressionVisitor().Visit(parentQuery);
                 _parentVisitor = parentVisitor;
@@ -120,17 +144,28 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
 
             protected override Expression VisitExtension(Expression extensionExpression)
             {
-                if (extensionExpression is MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression
-                    && materializeCollectionNavigationExpression.Navigation.IsCollection)
+                if (
+                    extensionExpression
+                        is MaterializeCollectionNavigationExpression materializeCollectionNavigationExpression
+                    && materializeCollectionNavigationExpression.Navigation.IsCollection
+                )
                 {
                     var subquery = materializeCollectionNavigationExpression.Subquery;
                     // Extract last select from subquery
-                    if (subquery is MethodCallExpression subqueryMethodCallExpression
+                    if (
+                        subquery is MethodCallExpression subqueryMethodCallExpression
                         && subqueryMethodCallExpression.Method.IsGenericMethod
-                        && subqueryMethodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.Select)
+                        && subqueryMethodCallExpression.Method.GetGenericMethodDefinition()
+                            == QueryableMethods.Select
+                    )
                     {
-                        subquery = RewriteSubqueryToSelectMany(subqueryMethodCallExpression.Arguments[0]);
-                        subquery = subqueryMethodCallExpression.Update(null!, new[] { subquery, subqueryMethodCallExpression.Arguments[1] });
+                        subquery = RewriteSubqueryToSelectMany(
+                            subqueryMethodCallExpression.Arguments[0]
+                        );
+                        subquery = subqueryMethodCallExpression.Update(
+                            null!,
+                            new[] { subquery, subqueryMethodCallExpression.Arguments[1] }
+                        );
                         subquery = _parentVisitor.Visit(subquery);
                     }
                     else
@@ -152,22 +187,34 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     subquery = Expression.Call(
                         QueryableMethods.Skip.MakeGenericMethod(collectionElementType),
                         subquery,
-                        Expression.Constant(0));
+                        Expression.Constant(0)
+                    );
                 }
 
                 var newParameter = Expression.Parameter(_parameterExpression.Type);
-                subquery = ReplacingExpressionVisitor.Replace(_parameterExpression, newParameter, subquery);
+                subquery = ReplacingExpressionVisitor.Replace(
+                    _parameterExpression,
+                    newParameter,
+                    subquery
+                );
 
                 // Collection selector body is IQueryable, we need to adjust the type to IEnumerable, to match the SelectMany signature
                 // therefore the delegate type is specified explicitly
-                var collectionSelectorLambdaType = typeof(Func<,>).MakeGenericType(
+                var collectionSelectorLambdaType = typeof(Func<, >).MakeGenericType(
                     _sourceElementType,
-                    typeof(IEnumerable<>).MakeGenericType(collectionElementType));
+                    typeof(IEnumerable<>).MakeGenericType(collectionElementType)
+                );
 
                 return Expression.Call(
-                    QueryableMethods.SelectManyWithoutCollectionSelector.MakeGenericMethod(_sourceElementType, collectionElementType),
+                    QueryableMethods.SelectManyWithoutCollectionSelector.MakeGenericMethod(
+                        _sourceElementType,
+                        collectionElementType
+                    ),
                     _parentQuery,
-                    Expression.Quote(Expression.Lambda(collectionSelectorLambdaType, subquery, newParameter)));
+                    Expression.Quote(
+                        Expression.Lambda(collectionSelectorLambdaType, subquery, newParameter)
+                    )
+                );
             }
 
             private sealed class CloningExpressionVisitor : ExpressionVisitor
@@ -176,13 +223,18 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 {
                     var body = Visit(lambdaExpression.Body);
                     var newParameters = CopyParameters(lambdaExpression.Parameters);
-                    body = new ReplacingExpressionVisitor(lambdaExpression.Parameters, newParameters).Visit(body);
+                    body = new ReplacingExpressionVisitor(
+                        lambdaExpression.Parameters,
+                        newParameters
+                    ).Visit(body);
 
                     // TODO-Nullable bug
                     return lambdaExpression.Update(body, newParameters)!;
                 }
 
-                private static IReadOnlyList<ParameterExpression> CopyParameters(IReadOnlyList<ParameterExpression> parameters)
+                private static IReadOnlyList<ParameterExpression> CopyParameters(
+                    IReadOnlyList<ParameterExpression> parameters
+                )
                 {
                     var newParameters = new List<ParameterExpression>();
                     foreach (var parameter in parameters)

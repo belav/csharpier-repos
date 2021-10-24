@@ -16,7 +16,11 @@ namespace Microsoft.AspNetCore.SignalR
         /// <param name="context">Context for the active Hub connection and caller.</param>
         /// <param name="serviceProvider">The <see cref="IServiceProvider"/> specific to the scope of this Hub method invocation.</param>
         /// <param name="hub">The instance of the Hub.</param>
-        public HubLifetimeContext(HubCallerContext context, IServiceProvider serviceProvider, Hub hub)
+        public HubLifetimeContext(
+            HubCallerContext context,
+            IServiceProvider serviceProvider,
+            Hub hub
+        )
         {
             Hub = hub;
             ServiceProvider = serviceProvider;

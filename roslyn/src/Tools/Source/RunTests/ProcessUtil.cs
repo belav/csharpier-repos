@@ -37,9 +37,13 @@ namespace RunTests
         /// This is a best effort API.  It can be thwarted by process instances starting / stopping during
         /// the building of this list.
         /// </remarks>
-        internal static List<Process> GetProcessChildren(Process process) => GetProcessChildrenCore(process, Process.GetProcesses());
+        internal static List<Process> GetProcessChildren(Process process) =>
+            GetProcessChildrenCore(process, Process.GetProcesses());
 
-        private static List<Process> GetProcessChildrenCore(Process parentProcess, IEnumerable<Process> processes)
+        private static List<Process> GetProcessChildrenCore(
+            Process parentProcess,
+            IEnumerable<Process> processes
+        )
         {
             var list = new List<Process>();
             foreach (var process in processes)

@@ -18,7 +18,12 @@ namespace Microsoft.AspNetCore.CookiePolicy
         /// <param name="options">The <see cref="Http.CookieOptions"/> passed to the cookie policy.</param>
         /// <param name="name">The cookie name.</param>
         /// <param name="value">The cookie value.</param>
-        public AppendCookieContext(HttpContext context, CookieOptions options, string name, string value)
+        public AppendCookieContext(
+            HttpContext context,
+            CookieOptions options,
+            string name,
+            string value
+        )
         {
             Context = context;
             CookieOptions = options;

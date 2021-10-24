@@ -13,10 +13,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
             DirectiveKind.SingleLine,
             builder =>
             {
-                builder.AddStringToken(ComponentResources.PageDirective_RouteToken_Name, ComponentResources.PageDirective_RouteToken_Description);
+                builder.AddStringToken(
+                    ComponentResources.PageDirective_RouteToken_Name,
+                    ComponentResources.PageDirective_RouteToken_Description
+                );
                 builder.Usage = DirectiveUsage.FileScopedMultipleOccurring;
                 builder.Description = ComponentResources.PageDirective_Description;
-            });
+            }
+        );
 
         private ComponentPageDirective(string routeTemplate, IntermediateNode directiveNode)
         {

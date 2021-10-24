@@ -33,7 +33,7 @@ class GitHub_1133
     {
         s_dt = dt;
     }
-    
+
     public static int Main()
     {
         int result = 100;

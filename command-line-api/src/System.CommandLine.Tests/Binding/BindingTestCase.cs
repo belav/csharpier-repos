@@ -6,12 +6,13 @@ namespace System.CommandLine.Tests.Binding
     public class BindingTestCase
     {
         private readonly Action<object> _assertBoundValue;
-        
+
         private BindingTestCase(
             string commandLine,
             Type parameterType,
             Action<object> assertBoundValue,
-            string variationName)
+            string variationName
+        )
         {
             _assertBoundValue = assertBoundValue;
             VariationName = variationName;
@@ -32,12 +33,9 @@ namespace System.CommandLine.Tests.Binding
 
         public static BindingTestCase Create<T>(
             string commandLine,
-            Action<T> assertBoundValue, 
-            string variationName = null) =>
-            new BindingTestCase(
-                commandLine,
-                typeof(T),
-                o => assertBoundValue((T) o),
-                variationName);
+            Action<T> assertBoundValue,
+            string variationName = null
+        ) =>
+            new BindingTestCase(commandLine, typeof(T), o => assertBoundValue((T)o), variationName);
     }
 }

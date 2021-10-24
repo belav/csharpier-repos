@@ -53,7 +53,24 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector128<Byte> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15]);
+            Vector128<Byte> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15]
+            );
 
             Vector256<Byte> result = value.ToVector256();
             ValidateResult(result, values, isUnsafe: false);
@@ -73,22 +90,44 @@ namespace JIT.HardwareIntrinsics.General
                 values[i] = TestLibrary.Generator.GetByte();
             }
 
-            Vector128<Byte> value = Vector128.Create(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15]);
+            Vector128<Byte> value = Vector128.Create(
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                values[6],
+                values[7],
+                values[8],
+                values[9],
+                values[10],
+                values[11],
+                values[12],
+                values[13],
+                values[14],
+                values[15]
+            );
 
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.ToVector256))
-                                .MakeGenericMethod(typeof(Byte))
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.ToVector256))
+                .MakeGenericMethod(typeof(Byte))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector256<Byte>)(result), values, isUnsafe: false);
 
             object unsafeResult = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.ToVector256))
-                                    .MakeGenericMethod(typeof(Byte))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector128.ToVector256))
+                .MakeGenericMethod(typeof(Byte))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector256<Byte>)(unsafeResult), values, isUnsafe: true);
         }
 
-        private void ValidateResult(Vector256<Byte> result, Byte[] values, bool isUnsafe, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector256<Byte> result,
+            Byte[] values,
+            bool isUnsafe,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] resultElements = new Byte[ElementCount * 2];
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref resultElements[0]), result);
@@ -96,7 +135,12 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, values, isUnsafe, method);
         }
 
-        private void ValidateResult(Byte[] result, Byte[] values, bool isUnsafe, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Byte[] result,
+            Byte[] values,
+            bool isUnsafe,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -123,9 +167,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Byte>.ToVector256{(isUnsafe ? "Unsafe" : "")}(): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Byte>.ToVector256{(isUnsafe ? "Unsafe" : "")}(): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

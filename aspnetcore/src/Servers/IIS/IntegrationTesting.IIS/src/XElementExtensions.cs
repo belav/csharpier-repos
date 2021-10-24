@@ -14,7 +14,9 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             var existing = element.Element(name);
             if (existing == null)
             {
-                throw new InvalidOperationException($"Element with name {name} not found in {element}");
+                throw new InvalidOperationException(
+                    $"Element with name {name} not found in {element}"
+                );
             }
 
             return existing;
@@ -32,9 +34,16 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             return existing;
         }
 
-        public static XElement GetOrAdd(this XElement element, string name, string attribute, string attributeValue)
+        public static XElement GetOrAdd(
+            this XElement element,
+            string name,
+            string attribute,
+            string attributeValue
+        )
         {
-            var existing = element.Elements(name).FirstOrDefault(e => e.Attribute(attribute)?.Value == attributeValue);
+            var existing = element
+                .Elements(name)
+                .FirstOrDefault(e => e.Attribute(attribute)?.Value == attributeValue);
             if (existing == null)
             {
                 existing = new XElement(name, new XAttribute(attribute, attributeValue));
@@ -44,7 +53,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
             return existing;
         }
 
-        public static XElement AddAndGetInnerElement(this XElement element, string name, string attribute, string attributeValue)
+        public static XElement AddAndGetInnerElement(
+            this XElement element,
+            string name,
+            string attribute,
+            string attributeValue
+        )
         {
             var innerElement = new XElement(name, new XAttribute(attribute, attributeValue));
             element.Add(innerElement);

@@ -45,10 +45,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public DefaultModelMetadata(
             IModelMetadataProvider provider,
             ICompositeMetadataDetailsProvider detailsProvider,
-            DefaultMetadataDetails details)
-            : this(provider, detailsProvider, details, new DefaultModelBindingMessageProvider())
-        {
-        }
+            DefaultMetadataDetails details
+        ) : this(provider, detailsProvider, details, new DefaultModelBindingMessageProvider()) { }
 
         /// <summary>
         /// Creates a new <see cref="DefaultModelMetadata"/>.
@@ -61,8 +59,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             IModelMetadataProvider provider,
             ICompositeMetadataDetailsProvider detailsProvider,
             DefaultMetadataDetails details,
-            DefaultModelBindingMessageProvider modelBindingMessageProvider)
-            : base(details.Key)
+            DefaultModelBindingMessageProvider modelBindingMessageProvider
+        ) : base(details.Key)
         {
             if (provider == null)
             {
@@ -110,7 +108,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             {
                 if (_details.BindingMetadata == null)
                 {
-                    var context = new BindingMetadataProviderContext(Identity, _details.ModelAttributes);
+                    var context = new BindingMetadataProviderContext(
+                        Identity,
+                        _details.ModelAttributes
+                    );
 
                     // Provide a unique ModelBindingMessageProvider instance so providers' customizations are per-type.
                     context.BindingMetadata.ModelBindingMessageProvider =
@@ -136,7 +137,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             {
                 if (_details.DisplayMetadata == null)
                 {
-                    var context = new DisplayMetadataProviderContext(Identity, _details.ModelAttributes);
+                    var context = new DisplayMetadataProviderContext(
+                        Identity,
+                        _details.ModelAttributes
+                    );
                     _detailsProvider.CreateDisplayMetadata(context);
                     _details.DisplayMetadata = context.DisplayMetadata;
                 }
@@ -157,7 +161,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             {
                 if (_details.ValidationMetadata == null)
                 {
-                    var context = new ValidationMetadataProviderContext(Identity, _details.ModelAttributes);
+                    var context = new ValidationMetadataProviderContext(
+                        Identity,
+                        _details.ModelAttributes
+                    );
                     _detailsProvider.CreateValidationMetadata(context);
                     _details.ValidationMetadata = context.ValidationMetadata;
                 }
@@ -173,7 +180,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             {
                 if (_additionalValues == null)
                 {
-                    _additionalValues = new ReadOnlyDictionary<object, object>(DisplayMetadata.AdditionalValues);
+                    _additionalValues = new ReadOnlyDictionary<object, object>(
+                        DisplayMetadata.AdditionalValues
+                    );
                 }
 
                 return _additionalValues;
@@ -210,7 +219,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         }
 
         /// <inheritdoc />
-        public override string? DisplayFormatString => DisplayMetadata.DisplayFormatStringProvider();
+        public override string? DisplayFormatString =>
+            DisplayMetadata.DisplayFormatStringProvider();
 
         /// <inheritdoc />
         public override string? DisplayName
@@ -244,11 +254,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         }
 
         /// <inheritdoc />
-        public override IEnumerable<KeyValuePair<EnumGroupAndName, string>>? EnumGroupedDisplayNamesAndValues
-            => DisplayMetadata.EnumGroupedDisplayNamesAndValues;
+        public override IEnumerable<
+            KeyValuePair<EnumGroupAndName, string>
+        >? EnumGroupedDisplayNamesAndValues => DisplayMetadata.EnumGroupedDisplayNamesAndValues;
 
         /// <inheritdoc />
-        public override IReadOnlyDictionary<string, string>? EnumNamesAndValues => DisplayMetadata.EnumNamesAndValues;
+        public override IReadOnlyDictionary<string, string>? EnumNamesAndValues =>
+            DisplayMetadata.EnumNamesAndValues;
 
         /// <inheritdoc />
         public override bool HasNonDefaultEditFormat => DisplayMetadata.HasNonDefaultEditFormat;
@@ -402,7 +414,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
                 if (_constructorMetadata == null)
                 {
                     var modelMetadataProvider = (ModelMetadataProvider)_provider;
-                    _constructorMetadata = modelMetadataProvider.GetMetadataForConstructor(BindingMetadata.BoundConstructor, ModelType);
+                    _constructorMetadata = modelMetadataProvider.GetMetadataForConstructor(
+                        BindingMetadata.BoundConstructor,
+                        ModelType
+                    );
                 }
 
                 return _constructorMetadata;
@@ -410,10 +425,12 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         }
 
         /// <inheritdoc/>
-        public override IReadOnlyList<ModelMetadata>? BoundConstructorParameters => _details.BoundConstructorParameters;
+        public override IReadOnlyList<ModelMetadata>? BoundConstructorParameters =>
+            _details.BoundConstructorParameters;
 
         /// <inheritdoc />
-        public override IPropertyFilterProvider? PropertyFilterProvider => BindingMetadata.PropertyFilterProvider;
+        public override IPropertyFilterProvider? PropertyFilterProvider =>
+            BindingMetadata.PropertyFilterProvider;
 
         /// <inheritdoc />
         public override bool ShowForDisplay => DisplayMetadata.ShowForDisplay;
@@ -428,7 +445,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public override string? TemplateHint => DisplayMetadata.TemplateHint;
 
         /// <inheritdoc />
-        public override IPropertyValidationFilter? PropertyValidationFilter => ValidationMetadata.PropertyValidationFilter;
+        public override IPropertyValidationFilter? PropertyValidationFilter =>
+            ValidationMetadata.PropertyValidationFilter;
 
         /// <inheritdoc />
         public override bool ValidateChildren
@@ -473,7 +491,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
 
         internal override bool PropertyHasValidators => ValidationMetadata.PropertyHasValidators;
 
-        internal static bool CalculateHasValidators(HashSet<DefaultModelMetadata> visited, ModelMetadata metadata)
+        internal static bool CalculateHasValidators(
+            HashSet<DefaultModelMetadata> visited,
+            ModelMetadata metadata
+        )
         {
             RuntimeHelpers.EnsureSufficientExecutionStack();
 
@@ -522,7 +543,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             }
             else if (defaultModelMetadata.IsComplexType)
             {
-                var parameters = defaultModelMetadata.BoundConstructor?.BoundConstructorParameters ?? Array.Empty<ModelMetadata>();
+                var parameters =
+                    defaultModelMetadata.BoundConstructor?.BoundConstructorParameters
+                    ?? Array.Empty<ModelMetadata>();
                 foreach (var parameter in parameters)
                 {
                     if (CalculateHasValidators(visited, parameter))
@@ -551,7 +574,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             {
                 if (_validatorMetadata == null)
                 {
-                    _validatorMetadata = new ReadOnlyCollection<object>(ValidationMetadata.ValidatorMetadata);
+                    _validatorMetadata = new ReadOnlyCollection<object>(
+                        ValidationMetadata.ValidatorMetadata
+                    );
                 }
 
                 return _validatorMetadata;
@@ -565,7 +590,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         public override Action<object, object?>? PropertySetter => _details.PropertySetter;
 
         /// <inheritdoc/>
-        public override Func<object?[], object>? BoundConstructorInvoker => _details.BoundConstructorInvoker;
+        public override Func<object?[], object>? BoundConstructorInvoker =>
+            _details.BoundConstructorInvoker;
 
         internal DefaultMetadataDetails Details => _details;
 

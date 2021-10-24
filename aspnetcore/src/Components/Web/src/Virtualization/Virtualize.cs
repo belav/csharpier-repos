@@ -119,7 +119,8 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             if (ItemSize <= 0)
             {
                 throw new InvalidOperationException(
-                    $"{GetType()} requires a positive value for parameter '{nameof(ItemSize)}'.");
+                    $"{GetType()} requires a positive value for parameter '{nameof(ItemSize)}'."
+                );
             }
 
             if (_itemSize <= 0)
@@ -132,8 +133,9 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
                 if (Items != null)
                 {
                     throw new InvalidOperationException(
-                        $"{GetType()} can only accept one item source from its parameters. " +
-                        $"Do not supply both '{nameof(Items)}' and '{nameof(ItemsProvider)}'.");
+                        $"{GetType()} can only accept one item source from its parameters. "
+                            + $"Do not supply both '{nameof(Items)}' and '{nameof(ItemsProvider)}'."
+                    );
                 }
 
                 _itemsProvider = ItemsProvider;
@@ -153,8 +155,9 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             else
             {
                 throw new InvalidOperationException(
-                    $"{GetType()} requires either the '{nameof(Items)}' or '{nameof(ItemsProvider)}' parameters to be specified " +
-                    $"and non-null.");
+                    $"{GetType()} requires either the '{nameof(Items)}' or '{nameof(ItemsProvider)}' parameters to be specified "
+                        + $"and non-null."
+                );
             }
 
             _itemTemplate = ItemContent ?? ChildContent;
@@ -184,7 +187,10 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
 
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "style", GetSpacerStyle(_itemsBefore));
-            builder.AddElementReferenceCapture(2, elementReference => _spacerBefore = elementReference);
+            builder.AddElementReferenceCapture(
+                2,
+                elementReference => _spacerBefore = elementReference
+            );
             builder.CloseElement();
 
             var lastItemIndex = Math.Min(_itemsBefore + _visibleItemCapacity, _itemCount);
@@ -198,7 +204,11 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             {
                 // This is a rare case where it's valid for the sequence number to be programmatically incremented.
                 // This is only true because we know for certain that no other content will be alongside it.
-                builder.AddContent(renderIndex, _placeholder, new PlaceholderContext(renderIndex, _itemSize));
+                builder.AddContent(
+                    renderIndex,
+                    _placeholder,
+                    new PlaceholderContext(renderIndex, _itemSize)
+                );
             }
 
             builder.CloseRegion();
@@ -225,14 +235,21 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
                 builder.CloseRegion();
             }
 
-            _lastRenderedPlaceholderCount = Math.Max(0, lastItemIndex - _itemsBefore - _lastRenderedItemCount);
+            _lastRenderedPlaceholderCount = Math.Max(
+                0,
+                lastItemIndex - _itemsBefore - _lastRenderedItemCount
+            );
 
             builder.OpenRegion(5);
 
             // Render the placeholders after the loaded items.
             for (; renderIndex < lastItemIndex; renderIndex++)
             {
-                builder.AddContent(renderIndex, _placeholder, new PlaceholderContext(renderIndex, _itemSize));
+                builder.AddContent(
+                    renderIndex,
+                    _placeholder,
+                    new PlaceholderContext(renderIndex, _itemSize)
+                );
             }
 
             builder.CloseRegion();
@@ -241,17 +258,30 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
 
             builder.OpenElement(6, "div");
             builder.AddAttribute(7, "style", GetSpacerStyle(itemsAfter));
-            builder.AddElementReferenceCapture(8, elementReference => _spacerAfter = elementReference);
+            builder.AddElementReferenceCapture(
+                8,
+                elementReference => _spacerAfter = elementReference
+            );
 
             builder.CloseElement();
         }
 
-        private string GetSpacerStyle(int itemsInSpacer)
-            => $"height: {(itemsInSpacer * _itemSize).ToString(CultureInfo.InvariantCulture)}px;";
+        private string GetSpacerStyle(int itemsInSpacer) =>
+            $"height: {(itemsInSpacer * _itemSize).ToString(CultureInfo.InvariantCulture)}px;";
 
-        void IVirtualizeJsCallbacks.OnBeforeSpacerVisible(float spacerSize, float spacerSeparation, float containerSize)
+        void IVirtualizeJsCallbacks.OnBeforeSpacerVisible(
+            float spacerSize,
+            float spacerSeparation,
+            float containerSize
+        )
         {
-            CalcualteItemDistribution(spacerSize, spacerSeparation, containerSize, out var itemsBefore, out var visibleItemCapacity);
+            CalcualteItemDistribution(
+                spacerSize,
+                spacerSeparation,
+                containerSize,
+                out var itemsBefore,
+                out var visibleItemCapacity
+            );
 
             // Since we know the before spacer is now visible, we absolutely have to slide the window up
             // by at least one element. If we're not doing that, the previous item size info we had must
@@ -265,9 +295,19 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             UpdateItemDistribution(itemsBefore, visibleItemCapacity);
         }
 
-        void IVirtualizeJsCallbacks.OnAfterSpacerVisible(float spacerSize, float spacerSeparation, float containerSize)
+        void IVirtualizeJsCallbacks.OnAfterSpacerVisible(
+            float spacerSize,
+            float spacerSeparation,
+            float containerSize
+        )
         {
-            CalcualteItemDistribution(spacerSize, spacerSeparation, containerSize, out var itemsAfter, out var visibleItemCapacity);
+            CalcualteItemDistribution(
+                spacerSize,
+                spacerSeparation,
+                containerSize,
+                out var itemsAfter,
+                out var visibleItemCapacity
+            );
 
             var itemsBefore = Math.Max(0, _itemCount - itemsAfter - visibleItemCapacity);
 
@@ -288,11 +328,14 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             float spacerSeparation,
             float containerSize,
             out int itemsInSpacer,
-            out int visibleItemCapacity)
+            out int visibleItemCapacity
+        )
         {
             if (_lastRenderedItemCount > 0)
             {
-                _itemSize = (spacerSeparation - (_lastRenderedPlaceholderCount * _itemSize)) / _lastRenderedItemCount;
+                _itemSize =
+                    (spacerSeparation - (_lastRenderedPlaceholderCount * _itemSize))
+                    / _lastRenderedItemCount;
             }
 
             if (_itemSize <= 0)
@@ -340,7 +383,11 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
                 cancellationToken = _refreshCts.Token;
             }
 
-            var request = new ItemsProviderRequest(_itemsBefore, _visibleItemCapacity, cancellationToken);
+            var request = new ItemsProviderRequest(
+                _itemsBefore,
+                _visibleItemCapacity,
+                cancellationToken
+            );
 
             try
             {
@@ -361,7 +408,10 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             }
             catch (Exception e)
             {
-                if (e is OperationCanceledException oce && oce.CancellationToken == cancellationToken)
+                if (
+                    e is OperationCanceledException oce
+                    && oce.CancellationToken == cancellationToken
+                )
                 {
                     // No-op; we canceled the operation, so it's fine to suppress this exception.
                 }
@@ -376,19 +426,29 @@ namespace Microsoft.AspNetCore.Components.Web.Virtualization
             }
         }
 
-        private ValueTask<ItemsProviderResult<TItem>> DefaultItemsProvider(ItemsProviderRequest request)
+        private ValueTask<ItemsProviderResult<TItem>> DefaultItemsProvider(
+            ItemsProviderRequest request
+        )
         {
-            return ValueTask.FromResult(new ItemsProviderResult<TItem>(
-                Items!.Skip(request.StartIndex).Take(request.Count),
-                Items!.Count));
+            return ValueTask.FromResult(
+                new ItemsProviderResult<TItem>(
+                    Items!.Skip(request.StartIndex).Take(request.Count),
+                    Items!.Count
+                )
+            );
         }
 
-        private RenderFragment DefaultPlaceholder(PlaceholderContext context) => (builder) =>
-        {
-            builder.OpenElement(0, "div");
-            builder.AddAttribute(1, "style", $"height: {_itemSize.ToString(CultureInfo.InvariantCulture)}px;");
-            builder.CloseElement();
-        };
+        private RenderFragment DefaultPlaceholder(PlaceholderContext context) =>
+            (builder) =>
+            {
+                builder.OpenElement(0, "div");
+                builder.AddAttribute(
+                    1,
+                    "style",
+                    $"height: {_itemSize.ToString(CultureInfo.InvariantCulture)}px;"
+                );
+                builder.CloseElement();
+            };
 
         /// <inheritdoc />
         public async ValueTask DisposeAsync()

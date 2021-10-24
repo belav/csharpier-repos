@@ -39,7 +39,6 @@ internal unsafe class testout1
     private static double s_a87_0 = 0.0001220703125;
     private static float s_a93_0 = 64.0F;
 
-
     public static double Func_0()
     {
         float[,,] arr3d_0 = new float[5, 201, 4];
@@ -178,7 +177,26 @@ internal unsafe class testout1
         double asgop81 = 2048.0;
         asgop81 -= ((-63488.0));
         asgop81 -= (61440.0);
-        return Convert.ToDouble(((((((asgop50 / asgop78) - ((asgop39 / (asgop79 * 33.032258064516128)))) + ((*a24_0))) + (asgop20 * (((asgop68 / 0.25) + 0.0) - (*a36_0)))) * ((asgop51 / asgop66) + ((((asgop5 / asgop81) + s_a75_0) + s_a25_0) * s_a87_0))) + ((asgop26 * asgop49) + (s_a58_0 * ((arr3d_0[4, 47, 3] / ((asgop73 * s_a71_0) - (s_a45_0))) - asgop37)))));
+        return Convert.ToDouble(
+            (
+                (
+                    (
+                        (
+                            ((asgop50 / asgop78) - ((asgop39 / (asgop79 * 33.032258064516128))))
+                            + ((*a24_0))
+                        ) + (asgop20 * (((asgop68 / 0.25) + 0.0) - (*a36_0)))
+                    )
+                    * ((asgop51 / asgop66) + ((((asgop5 / asgop81) + s_a75_0) + s_a25_0) * s_a87_0))
+                )
+                + (
+                    (asgop26 * asgop49)
+                    + (
+                        s_a58_0
+                        * ((arr3d_0[4, 47, 3] / ((asgop73 * s_a71_0) - (s_a45_0))) - asgop37)
+                    )
+                )
+            )
+        );
     }
 
     public static int Main()

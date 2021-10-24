@@ -11,14 +11,24 @@ namespace Microsoft.AspNetCore.SignalR.Client
     /// </summary>
     public static partial class HubConnectionExtensions
     {
-        private static IDisposable On(this HubConnection hubConnection, string methodName, Type[] parameterTypes, Action<object?[]> handler)
+        private static IDisposable On(
+            this HubConnection hubConnection,
+            string methodName,
+            Type[] parameterTypes,
+            Action<object?[]> handler
+        )
         {
-            return hubConnection.On(methodName, parameterTypes, (parameters, state) =>
-            {
-                var currentHandler = (Action<object?[]>)state;
-                currentHandler(parameters);
-                return Task.CompletedTask;
-            }, handler);
+            return hubConnection.On(
+                methodName,
+                parameterTypes,
+                (parameters, state) =>
+                {
+                    var currentHandler = (Action<object?[]>)state;
+                    currentHandler(parameters);
+                    return Task.CompletedTask;
+                },
+                handler
+            );
         }
 
         /// <summary>
@@ -28,7 +38,11 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On(this HubConnection hubConnection, string methodName, Action handler)
+        public static IDisposable On(
+            this HubConnection hubConnection,
+            string methodName,
+            Action handler
+        )
         {
             if (hubConnection == null)
             {
@@ -46,16 +60,22 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1>(this HubConnection hubConnection, string methodName, Action<T1> handler)
+        public static IDisposable On<T1>(
+            this HubConnection hubConnection,
+            string methodName,
+            Action<T1> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1) },
-                args => handler((T1)args[0]!));
+                args => handler((T1)args[0]!)
+            );
         }
 
         /// <summary>
@@ -67,16 +87,22 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2>(this HubConnection hubConnection, string methodName, Action<T1, T2> handler)
+        public static IDisposable On<T1, T2>(
+            this HubConnection hubConnection,
+            string methodName,
+            Action<T1, T2> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2) },
-                args => handler((T1)args[0]!, (T2)args[1]!));
+                args => handler((T1)args[0]!, (T2)args[1]!)
+            );
         }
 
         /// <summary>
@@ -89,16 +115,22 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3>(this HubConnection hubConnection, string methodName, Action<T1, T2, T3> handler)
+        public static IDisposable On<T1, T2, T3>(
+            this HubConnection hubConnection,
+            string methodName,
+            Action<T1, T2, T3> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2), typeof(T3) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!));
+                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!)
+            );
         }
 
         /// <summary>
@@ -112,16 +144,22 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4>(this HubConnection hubConnection, string methodName, Action<T1, T2, T3, T4> handler)
+        public static IDisposable On<T1, T2, T3, T4>(
+            this HubConnection hubConnection,
+            string methodName,
+            Action<T1, T2, T3, T4> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!));
+                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!)
+            );
         }
 
         /// <summary>
@@ -136,16 +174,23 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4, T5>(this HubConnection hubConnection, string methodName, Action<T1, T2, T3, T4, T5> handler)
+        public static IDisposable On<T1, T2, T3, T4, T5>(
+            this HubConnection hubConnection,
+            string methodName,
+            Action<T1, T2, T3, T4, T5> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!));
+                args =>
+                    handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!)
+            );
         }
 
         /// <summary>
@@ -161,16 +206,30 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4, T5, T6>(this HubConnection hubConnection, string methodName, Action<T1, T2, T3, T4, T5, T6> handler)
+        public static IDisposable On<T1, T2, T3, T4, T5, T6>(
+            this HubConnection hubConnection,
+            string methodName,
+            Action<T1, T2, T3, T4, T5, T6> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!));
+                args =>
+                    handler(
+                        (T1)args[0]!,
+                        (T2)args[1]!,
+                        (T3)args[2]!,
+                        (T4)args[3]!,
+                        (T5)args[4]!,
+                        (T6)args[5]!
+                    )
+            );
         }
 
         /// <summary>
@@ -187,16 +246,40 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4, T5, T6, T7>(this HubConnection hubConnection, string methodName, Action<T1, T2, T3, T4, T5, T6, T7> handler)
+        public static IDisposable On<T1, T2, T3, T4, T5, T6, T7>(
+            this HubConnection hubConnection,
+            string methodName,
+            Action<T1, T2, T3, T4, T5, T6, T7> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
-                new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!, (T7)args[6]!));
+            return hubConnection.On(
+                methodName,
+                new[]
+                {
+                    typeof(T1),
+                    typeof(T2),
+                    typeof(T3),
+                    typeof(T4),
+                    typeof(T5),
+                    typeof(T6),
+                    typeof(T7)
+                },
+                args =>
+                    handler(
+                        (T1)args[0]!,
+                        (T2)args[1]!,
+                        (T3)args[2]!,
+                        (T4)args[3]!,
+                        (T5)args[4]!,
+                        (T6)args[5]!,
+                        (T7)args[6]!
+                    )
+            );
         }
 
         /// <summary>
@@ -214,16 +297,42 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, T8>(this HubConnection hubConnection, string methodName, Action<T1, T2, T3, T4, T5, T6, T7, T8> handler)
+        public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, T8>(
+            this HubConnection hubConnection,
+            string methodName,
+            Action<T1, T2, T3, T4, T5, T6, T7, T8> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
-                new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!, (T7)args[6]!, (T8)args[7]!));
+            return hubConnection.On(
+                methodName,
+                new[]
+                {
+                    typeof(T1),
+                    typeof(T2),
+                    typeof(T3),
+                    typeof(T4),
+                    typeof(T5),
+                    typeof(T6),
+                    typeof(T7),
+                    typeof(T8)
+                },
+                args =>
+                    handler(
+                        (T1)args[0]!,
+                        (T2)args[1]!,
+                        (T3)args[2]!,
+                        (T4)args[3]!,
+                        (T5)args[4]!,
+                        (T6)args[5]!,
+                        (T7)args[6]!,
+                        (T8)args[7]!
+                    )
+            );
         }
 
         /// <summary>
@@ -234,13 +343,23 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="parameterTypes">The parameters types expected by the hub method.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On(this HubConnection hubConnection, string methodName, Type[] parameterTypes, Func<object?[], Task> handler)
+        public static IDisposable On(
+            this HubConnection hubConnection,
+            string methodName,
+            Type[] parameterTypes,
+            Func<object?[], Task> handler
+        )
         {
-            return hubConnection.On(methodName, parameterTypes, (parameters, state) =>
-            {
-                var currentHandler = (Func<object?[], Task>)state;
-                return currentHandler(parameters);
-            }, handler);
+            return hubConnection.On(
+                methodName,
+                parameterTypes,
+                (parameters, state) =>
+                {
+                    var currentHandler = (Func<object?[], Task>)state;
+                    return currentHandler(parameters);
+                },
+                handler
+            );
         }
 
         /// <summary>
@@ -250,7 +369,11 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On(this HubConnection hubConnection, string methodName, Func<Task> handler)
+        public static IDisposable On(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<Task> handler
+        )
         {
             if (hubConnection == null)
             {
@@ -268,16 +391,22 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1>(this HubConnection hubConnection, string methodName, Func<T1, Task> handler)
+        public static IDisposable On<T1>(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<T1, Task> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1) },
-                args => handler((T1)args[0]!));
+                args => handler((T1)args[0]!)
+            );
         }
 
         /// <summary>
@@ -289,16 +418,22 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2>(this HubConnection hubConnection, string methodName, Func<T1, T2, Task> handler)
+        public static IDisposable On<T1, T2>(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<T1, T2, Task> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2) },
-                args => handler((T1)args[0]!, (T2)args[1]!));
+                args => handler((T1)args[0]!, (T2)args[1]!)
+            );
         }
 
         /// <summary>
@@ -311,16 +446,22 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, Task> handler)
+        public static IDisposable On<T1, T2, T3>(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<T1, T2, T3, Task> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2), typeof(T3) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!));
+                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!)
+            );
         }
 
         /// <summary>
@@ -334,16 +475,22 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, Task> handler)
+        public static IDisposable On<T1, T2, T3, T4>(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<T1, T2, T3, T4, Task> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!));
+                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!)
+            );
         }
 
         /// <summary>
@@ -358,16 +505,23 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4, T5>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, Task> handler)
+        public static IDisposable On<T1, T2, T3, T4, T5>(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<T1, T2, T3, T4, T5, Task> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!));
+                args =>
+                    handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!)
+            );
         }
 
         /// <summary>
@@ -383,16 +537,30 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4, T5, T6>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, Task> handler)
+        public static IDisposable On<T1, T2, T3, T4, T5, T6>(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<T1, T2, T3, T4, T5, T6, Task> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
+            return hubConnection.On(
+                methodName,
                 new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!));
+                args =>
+                    handler(
+                        (T1)args[0]!,
+                        (T2)args[1]!,
+                        (T3)args[2]!,
+                        (T4)args[3]!,
+                        (T5)args[4]!,
+                        (T6)args[5]!
+                    )
+            );
         }
 
         /// <summary>
@@ -409,16 +577,40 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4, T5, T6, T7>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, T7, Task> handler)
+        public static IDisposable On<T1, T2, T3, T4, T5, T6, T7>(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<T1, T2, T3, T4, T5, T6, T7, Task> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
-                new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!, (T7)args[6]!));
+            return hubConnection.On(
+                methodName,
+                new[]
+                {
+                    typeof(T1),
+                    typeof(T2),
+                    typeof(T3),
+                    typeof(T4),
+                    typeof(T5),
+                    typeof(T6),
+                    typeof(T7)
+                },
+                args =>
+                    handler(
+                        (T1)args[0]!,
+                        (T2)args[1]!,
+                        (T3)args[2]!,
+                        (T4)args[3]!,
+                        (T5)args[4]!,
+                        (T6)args[5]!,
+                        (T7)args[6]!
+                    )
+            );
         }
 
         /// <summary>
@@ -436,16 +628,42 @@ namespace Microsoft.AspNetCore.SignalR.Client
         /// <param name="methodName">The name of the hub method to define.</param>
         /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
         /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-        public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, T8>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> handler)
+        public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, T8>(
+            this HubConnection hubConnection,
+            string methodName,
+            Func<T1, T2, T3, T4, T5, T6, T7, T8, Task> handler
+        )
         {
             if (hubConnection == null)
             {
                 throw new ArgumentNullException(nameof(hubConnection));
             }
 
-            return hubConnection.On(methodName,
-                new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8) },
-                args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!, (T7)args[6]!, (T8)args[7]!));
+            return hubConnection.On(
+                methodName,
+                new[]
+                {
+                    typeof(T1),
+                    typeof(T2),
+                    typeof(T3),
+                    typeof(T4),
+                    typeof(T5),
+                    typeof(T6),
+                    typeof(T7),
+                    typeof(T8)
+                },
+                args =>
+                    handler(
+                        (T1)args[0]!,
+                        (T2)args[1]!,
+                        (T3)args[2]!,
+                        (T4)args[3]!,
+                        (T5)args[4]!,
+                        (T6)args[5]!,
+                        (T7)args[6]!,
+                        (T8)args[7]!
+                    )
+            );
         }
     }
 }

@@ -8,7 +8,14 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 {
     internal static class QuickInfoOptions
     {
-        public static readonly PerLanguageOption2<bool> ShowRemarksInQuickInfo = new(nameof(QuickInfoOptions), nameof(ShowRemarksInQuickInfo), defaultValue: true,
-            storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ShowRemarks"));
+        public static readonly PerLanguageOption2<bool> ShowRemarksInQuickInfo =
+            new(
+                nameof(QuickInfoOptions),
+                nameof(ShowRemarksInQuickInfo),
+                defaultValue: true,
+                storageLocations: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.ShowRemarks"
+                )
+            );
     }
 }

@@ -43,14 +43,18 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
 
             Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 
-            return CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, descriptor.Configuration);
+            return CreateAuthenticatedEncryptorInstance(
+                descriptor.MasterKey,
+                descriptor.Configuration
+            );
         }
 
         [SupportedOSPlatform("windows")]
         [return: NotNullIfNotNull("configuration")]
         internal CngGcmAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
             ISecret secret,
-            CngGcmAuthenticatedEncryptorConfiguration configuration)
+            CngGcmAuthenticatedEncryptorConfiguration configuration
+        )
         {
             if (configuration == null)
             {
@@ -60,11 +64,16 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             return new CngGcmAuthenticatedEncryptor(
                 keyDerivationKey: new Secret(secret),
                 symmetricAlgorithmHandle: GetSymmetricBlockCipherAlgorithmHandle(configuration),
-                symmetricAlgorithmKeySizeInBytes: (uint)(configuration.EncryptionAlgorithmKeySize / 8));
+                symmetricAlgorithmKeySizeInBytes: (uint)(
+                    configuration.EncryptionAlgorithmKeySize / 8
+                )
+            );
         }
 
         [SupportedOSPlatform("windows")]
-        private BCryptAlgorithmHandle GetSymmetricBlockCipherAlgorithmHandle(CngGcmAuthenticatedEncryptorConfiguration configuration)
+        private BCryptAlgorithmHandle GetSymmetricBlockCipherAlgorithmHandle(
+            CngGcmAuthenticatedEncryptorConfiguration configuration
+        )
         {
             // basic argument checking
             if (String.IsNullOrEmpty(configuration.EncryptionAlgorithm))
@@ -73,31 +82,49 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             }
             if (configuration.EncryptionAlgorithmKeySize < 0)
             {
-                throw Error.Common_PropertyMustBeNonNegative(nameof(configuration.EncryptionAlgorithmKeySize));
+                throw Error.Common_PropertyMustBeNonNegative(
+                    nameof(configuration.EncryptionAlgorithmKeySize)
+                );
             }
 
             BCryptAlgorithmHandle? algorithmHandle = null;
 
-            _logger.OpeningCNGAlgorithmFromProviderWithChainingModeGCM(configuration.EncryptionAlgorithm, configuration.EncryptionAlgorithmProvider);
+            _logger.OpeningCNGAlgorithmFromProviderWithChainingModeGCM(
+                configuration.EncryptionAlgorithm,
+                configuration.EncryptionAlgorithmProvider
+            );
             // Special-case cached providers
             if (configuration.EncryptionAlgorithmProvider == null)
             {
-                if (configuration.EncryptionAlgorithm == Constants.BCRYPT_AES_ALGORITHM) { algorithmHandle = CachedAlgorithmHandles.AES_GCM; }
+                if (configuration.EncryptionAlgorithm == Constants.BCRYPT_AES_ALGORITHM)
+                {
+                    algorithmHandle = CachedAlgorithmHandles.AES_GCM;
+                }
             }
 
             // Look up the provider dynamically if we couldn't fetch a cached instance
             if (algorithmHandle == null)
             {
-                algorithmHandle = BCryptAlgorithmHandle.OpenAlgorithmHandle(configuration.EncryptionAlgorithm, configuration.EncryptionAlgorithmProvider);
+                algorithmHandle = BCryptAlgorithmHandle.OpenAlgorithmHandle(
+                    configuration.EncryptionAlgorithm,
+                    configuration.EncryptionAlgorithmProvider
+                );
                 algorithmHandle.SetChainingMode(Constants.BCRYPT_CHAIN_MODE_GCM);
             }
 
             // make sure we're using a block cipher with an appropriate key size & block size
-            CryptoUtil.Assert(algorithmHandle.GetCipherBlockLength() == 128 / 8, "GCM requires a block cipher algorithm with a 128-bit block size.");
-            AlgorithmAssert.IsAllowableSymmetricAlgorithmKeySize(checked((uint)configuration.EncryptionAlgorithmKeySize));
+            CryptoUtil.Assert(
+                algorithmHandle.GetCipherBlockLength() == 128 / 8,
+                "GCM requires a block cipher algorithm with a 128-bit block size."
+            );
+            AlgorithmAssert.IsAllowableSymmetricAlgorithmKeySize(
+                checked((uint)configuration.EncryptionAlgorithmKeySize)
+            );
 
             // make sure the provided key length is valid
-            algorithmHandle.GetSupportedKeyLengths().EnsureValidKeyLength((uint)configuration.EncryptionAlgorithmKeySize);
+            algorithmHandle
+                .GetSupportedKeyLengths()
+                .EnsureValidKeyLength((uint)configuration.EncryptionAlgorithmKeySize);
 
             // all good!
             return algorithmHandle;

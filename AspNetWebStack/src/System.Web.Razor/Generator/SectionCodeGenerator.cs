@@ -17,41 +17,44 @@ namespace System.Web.Razor.Generator
 
         public override void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
         {
-            string startBlock = context.BuildCodeString(cw =>
-            {
-                cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.DefineSectionMethodName);
-                cw.WriteStringLiteral(SectionName);
-                cw.WriteParameterSeparator();
-                cw.WriteStartLambdaDelegate();
-            });
+            string startBlock = context.BuildCodeString(
+                cw =>
+                {
+                    cw.WriteStartMethodInvoke(
+                        context.Host.GeneratedClassContext.DefineSectionMethodName
+                    );
+                    cw.WriteStringLiteral(SectionName);
+                    cw.WriteParameterSeparator();
+                    cw.WriteStartLambdaDelegate();
+                }
+            );
             context.AddStatement(startBlock);
         }
 
         public override void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
         {
-            string startBlock = context.BuildCodeString(cw =>
-            {
-                cw.WriteEndLambdaDelegate();
-                cw.WriteEndMethodInvoke();
-                cw.WriteEndStatement();
-            });
+            string startBlock = context.BuildCodeString(
+                cw =>
+                {
+                    cw.WriteEndLambdaDelegate();
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteEndStatement();
+                }
+            );
             context.AddStatement(startBlock);
         }
 
         public override bool Equals(object obj)
         {
             SectionCodeGenerator other = obj as SectionCodeGenerator;
-            return other != null &&
-                   base.Equals(other) &&
-                   String.Equals(SectionName, other.SectionName, StringComparison.Ordinal);
+            return other != null
+                && base.Equals(other)
+                && String.Equals(SectionName, other.SectionName, StringComparison.Ordinal);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(base.GetHashCode())
-                .Add(SectionName)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(base.GetHashCode()).Add(SectionName).CombinedHash;
         }
 
         public override string ToString()

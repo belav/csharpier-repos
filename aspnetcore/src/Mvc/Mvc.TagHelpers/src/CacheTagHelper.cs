@@ -42,9 +42,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         /// <param name="factory">The factory containing the private <see cref="IMemoryCache"/> instance
         /// used by the <see cref="CacheTagHelper"/>.</param>
         /// <param name="htmlEncoder">The <see cref="HtmlEncoder"/> to use.</param>
-        public CacheTagHelper(
-            CacheTagHelperMemoryCacheFactory factory,
-            HtmlEncoder htmlEncoder)
+        public CacheTagHelper(CacheTagHelperMemoryCacheFactory factory, HtmlEncoder htmlEncoder)
             : base(htmlEncoder)
         {
             MemoryCache = factory.Cache;
@@ -98,14 +96,19 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             output.Content.SetHtmlContent(content);
         }
 
-        private async Task<IHtmlContent> CreateCacheEntry(CacheTagKey cacheKey, TagHelperOutput output)
+        private async Task<IHtmlContent> CreateCacheEntry(
+            CacheTagKey cacheKey,
+            TagHelperOutput output
+        )
         {
             var tokenSource = new CancellationTokenSource();
 
             var options = GetMemoryCacheEntryOptions();
             options.AddExpirationToken(new CancellationChangeToken(tokenSource.Token));
             options.SetSize(PlaceholderSize);
-            var tcs = new TaskCompletionSource<IHtmlContent>(creationOptions: TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<IHtmlContent>(
+                creationOptions: TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             // The returned value is ignored, we only do this so that
             // the compiler doesn't complain about the returned task

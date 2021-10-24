@@ -20,18 +20,12 @@ namespace Microsoft.AspNetCore.Testing
 
         public bool IsMet
         {
-            get
-            {
-                return !OnCI();
-            }
+            get { return !OnCI(); }
         }
 
         public string SkipReason
         {
-            get
-            {
-                return $"This test is skipped on CI";
-            }
+            get { return $"This test is skipped on CI"; }
         }
 
         public static bool OnCI() => OnHelix() || OnAzdo();

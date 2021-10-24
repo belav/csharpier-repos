@@ -31,11 +31,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     date = date.AddDays(3);
                 }
 
-                var week = calendar.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+                var week = calendar.GetWeekOfYear(
+                    date,
+                    CalendarWeekRule.FirstFourDayWeek,
+                    DayOfWeek.Monday
+                );
                 var year = calendar.GetYear(date);
                 var month = calendar.GetMonth(date);
 
-                // Last week (either 52 or 53) includes January dates (1st, 2nd, 3rd) 
+                // Last week (either 52 or 53) includes January dates (1st, 2nd, 3rd)
                 if (week >= 52 && month == 1)
                 {
                     year--;

@@ -10,10 +10,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         {
             public override string Title => FeaturesResources.Move_contents_to_namespace;
 
-            public MoveItemsToNamespaceCodeAction(IMoveToNamespaceService changeNamespaceService, MoveToNamespaceAnalysisResult analysisResult)
-                : base(changeNamespaceService, analysisResult)
-            {
-            }
+            public MoveItemsToNamespaceCodeAction(
+                IMoveToNamespaceService changeNamespaceService,
+                MoveToNamespaceAnalysisResult analysisResult
+            ) : base(changeNamespaceService, analysisResult) { }
         }
     }
 }

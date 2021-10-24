@@ -29,7 +29,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(type, nameof(type));
 
-            Check.DebugAssert(!type.IsNullableValueType(), "SqlExpression.Type must be reference type or non-nullable value type");
+            Check.DebugAssert(
+                !type.IsNullableValueType(),
+                "SqlExpression.Type must be reference type or non-nullable value type"
+            );
 
             Type = type;
             TypeMapping = typeMapping;
@@ -44,12 +47,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         public virtual RelationalTypeMapping? TypeMapping { get; }
 
         /// <inheritdoc />
-        protected override Expression VisitChildren(ExpressionVisitor visitor)
-            => throw new InvalidOperationException(RelationalStrings.VisitChildrenMustBeOverridden);
+        protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+            throw new InvalidOperationException(RelationalStrings.VisitChildrenMustBeOverridden);
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <summary>
         ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
@@ -58,23 +60,25 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         protected abstract void Print(ExpressionPrinter expressionPrinter);
 
         /// <inheritdoc />
-        void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-            => Print(expressionPrinter);
+        void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+            Print(expressionPrinter);
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is SqlExpression sqlExpression
-                    && Equals(sqlExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is SqlExpression sqlExpression && Equals(sqlExpression)
+            );
 
-        private bool Equals(SqlExpression sqlExpression)
-            => Type == sqlExpression.Type
-                && ((TypeMapping == null && sqlExpression.TypeMapping == null)
-                    || TypeMapping?.Equals(sqlExpression.TypeMapping) == true);
+        private bool Equals(SqlExpression sqlExpression) =>
+            Type == sqlExpression.Type
+            && (
+                (TypeMapping == null && sqlExpression.TypeMapping == null)
+                || TypeMapping?.Equals(sqlExpression.TypeMapping) == true
+            );
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(Type, TypeMapping);
+        public override int GetHashCode() => HashCode.Combine(Type, TypeMapping);
     }
 }

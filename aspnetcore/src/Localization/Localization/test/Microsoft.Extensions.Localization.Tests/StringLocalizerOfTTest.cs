@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Localization
         {
             // Arrange, act and assert
             var exception = Assert.Throws<ArgumentNullException>(
-                () => new StringLocalizer<object>(factory: null!));
+                () => new StringLocalizer<object>(factory: null!)
+            );
 
             Assert.Equal("factory", exception.ParamName);
         }
@@ -38,8 +39,7 @@ namespace Microsoft.Extensions.Localization
             // Arrange
             var factory = new Mock<IStringLocalizerFactory>();
             var innerLocalizer = new Mock<IStringLocalizer>();
-            factory.Setup(mock => mock.Create(typeof(object)))
-                .Returns(innerLocalizer.Object);
+            factory.Setup(mock => mock.Create(typeof(object))).Returns(innerLocalizer.Object);
 
             var localizer = new StringLocalizer<object>(factory.Object);
 
@@ -55,8 +55,7 @@ namespace Microsoft.Extensions.Localization
             // Arrange
             var factory = new Mock<IStringLocalizerFactory>();
             var innerLocalizer = new Mock<IStringLocalizer>();
-            factory.Setup(mock => mock.Create(typeof(object)))
-                .Returns(innerLocalizer.Object);
+            factory.Setup(mock => mock.Create(typeof(object))).Returns(innerLocalizer.Object);
 
             var localizer = new StringLocalizer<object>(factory.Object);
 
@@ -73,8 +72,7 @@ namespace Microsoft.Extensions.Localization
             // Arrange
             var factory = new Mock<IStringLocalizerFactory>();
             var innerLocalizer = new Mock<IStringLocalizer>();
-            factory.Setup(mock => mock.Create(typeof(object)))
-                .Returns(innerLocalizer.Object);
+            factory.Setup(mock => mock.Create(typeof(object))).Returns(innerLocalizer.Object);
 
             var localizer = new StringLocalizer<object>(factory.Object);
 
@@ -90,8 +88,7 @@ namespace Microsoft.Extensions.Localization
             // Arrange
             var factory = new Mock<IStringLocalizerFactory>();
             var innerLocalizer = new Mock<IStringLocalizer>();
-            factory.Setup(mock => mock.Create(typeof(object)))
-                .Returns(innerLocalizer.Object);
+            factory.Setup(mock => mock.Create(typeof(object))).Returns(innerLocalizer.Object);
 
             var localizer = new StringLocalizer<object>(factory.Object);
 
@@ -108,8 +105,7 @@ namespace Microsoft.Extensions.Localization
             // Arrange
             var factory = new Mock<IStringLocalizerFactory>();
             var innerLocalizer = new Mock<IStringLocalizer>();
-            factory.Setup(mock => mock.Create(typeof(object)))
-                .Returns(innerLocalizer.Object);
+            factory.Setup(mock => mock.Create(typeof(object))).Returns(innerLocalizer.Object);
 
             var localizer = new StringLocalizer<object>(factory.Object);
 
@@ -124,7 +120,9 @@ namespace Microsoft.Extensions.Localization
         public void StringLocalizer_CanBeCastToBaseType()
         {
             // Arrange and act
-            IStringLocalizer<BaseType> localizer = new StringLocalizer<DerivedType>(Mock.Of<IStringLocalizerFactory>());
+            IStringLocalizer<BaseType> localizer = new StringLocalizer<DerivedType>(
+                Mock.Of<IStringLocalizerFactory>()
+            );
 
             // Assert
             Assert.NotNull(localizer);

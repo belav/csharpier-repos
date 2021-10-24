@@ -11,7 +11,11 @@ namespace System
         public static bool AllowArbitraryTypeInstantiation
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => GetCachedSwitchValue("Switch.System.Data.AllowArbitraryDataSetTypeInstantiation", ref s_allowArbitraryTypeInstantiation);
+            get =>
+                GetCachedSwitchValue(
+                    "Switch.System.Data.AllowArbitraryDataSetTypeInstantiation",
+                    ref s_allowArbitraryTypeInstantiation
+                );
         }
     }
 }

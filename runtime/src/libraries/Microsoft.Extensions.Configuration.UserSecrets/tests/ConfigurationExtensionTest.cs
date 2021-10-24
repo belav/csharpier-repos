@@ -52,7 +52,12 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void AddUserSecrets_FindsAssemblyAttribute()
         {
             var randValue = Guid.NewGuid().ToString();
@@ -67,7 +72,12 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void AddUserSecrets_FindsAssemblyAttributeFromType()
         {
             var randValue = Guid.NewGuid().ToString();
@@ -84,17 +94,28 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         [Fact]
         public void AddUserSecrets_ThrowsIfAssemblyAttributeFromType()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                new ConfigurationBuilder().AddUserSecrets<string>());
-            Assert.Equal(SR.Format(SR.Error_Missing_UserSecretsIdAttribute, typeof(string).Assembly.GetName().Name),
-                ex.Message);
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => new ConfigurationBuilder().AddUserSecrets<string>()
+            );
+            Assert.Equal(
+                SR.Format(
+                    SR.Error_Missing_UserSecretsIdAttribute,
+                    typeof(string).Assembly.GetName().Name
+                ),
+                ex.Message
+            );
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                new ConfigurationBuilder().AddUserSecrets(typeof(JObject).Assembly));
-            Assert.Equal(SR.Format(SR.Error_Missing_UserSecretsIdAttribute, typeof(JObject).Assembly.GetName().Name),
-                ex.Message);
+            ex = Assert.Throws<InvalidOperationException>(
+                () => new ConfigurationBuilder().AddUserSecrets(typeof(JObject).Assembly)
+            );
+            Assert.Equal(
+                SR.Format(
+                    SR.Error_Missing_UserSecretsIdAttribute,
+                    typeof(JObject).Assembly.GetName().Name
+                ),
+                ex.Message
+            );
         }
-
 
         [Fact]
         public void AddUserSecrets_DoesNotThrowsIfOptional()
@@ -117,11 +138,21 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
                 File.Delete(secretPath);
             }
 
-            Assert.Throws<FileNotFoundException>(() => new ConfigurationBuilder().AddUserSecrets(Assembly.GetExecutingAssembly(), false).Build());
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    new ConfigurationBuilder()
+                        .AddUserSecrets(Assembly.GetExecutingAssembly(), false)
+                        .Build()
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34582", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34582",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void AddUserSecrets_With_SecretsId_Passed_Explicitly()
         {
             var userSecretsId = Guid.NewGuid().ToString();

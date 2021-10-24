@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
     public class SignOutSessionStateManager
     {
         private readonly IJSRuntime _jsRuntime;
-        private static readonly JsonSerializerOptions _serializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        private static readonly JsonSerializerOptions _serializationOptions =
+            new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
         /// <summary>
         /// Initialize a new instance of <see cref="SignOutSessionStateManager"/>.
@@ -30,7 +31,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
             return _jsRuntime.InvokeVoidAsync(
                 "sessionStorage.setItem",
                 "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState",
-                JsonSerializer.Serialize(SignOutState.Instance, _serializationOptions));
+                JsonSerializer.Serialize(SignOutState.Instance, _serializationOptions)
+            );
         }
 
         /// <summary>
@@ -54,7 +56,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             var result = await _jsRuntime.InvokeAsync<string>(
                 "sessionStorage.getItem",
-                "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState");
+                "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState"
+            );
             if (result == null)
             {
                 return default;
@@ -67,7 +70,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         {
             return _jsRuntime.InvokeVoidAsync(
                 "sessionStorage.removeItem",
-                "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState");
+                "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState"
+            );
         }
 
         private struct SignOutState

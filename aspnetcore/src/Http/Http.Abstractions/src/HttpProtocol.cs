@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Http
         /// </returns>
         public static bool IsHttp10(string protocol)
         {
-            return object.ReferenceEquals(Http10, protocol) || StringComparer.OrdinalIgnoreCase.Equals(Http10, protocol);
+            return object.ReferenceEquals(Http10, protocol)
+                || StringComparer.OrdinalIgnoreCase.Equals(Http10, protocol);
         }
 
         /// <summary>
@@ -57,7 +58,8 @@ namespace Microsoft.AspNetCore.Http
         /// </returns>
         public static bool IsHttp11(string protocol)
         {
-            return object.ReferenceEquals(Http11, protocol) || StringComparer.OrdinalIgnoreCase.Equals(Http11, protocol);
+            return object.ReferenceEquals(Http11, protocol)
+                || StringComparer.OrdinalIgnoreCase.Equals(Http11, protocol);
         }
 
         /// <summary>
@@ -69,7 +71,8 @@ namespace Microsoft.AspNetCore.Http
         /// </returns>
         public static bool IsHttp2(string protocol)
         {
-            return object.ReferenceEquals(Http2, protocol) || StringComparer.OrdinalIgnoreCase.Equals(Http2, protocol);
+            return object.ReferenceEquals(Http2, protocol)
+                || StringComparer.OrdinalIgnoreCase.Equals(Http2, protocol);
         }
 
         /// <summary>
@@ -81,7 +84,8 @@ namespace Microsoft.AspNetCore.Http
         /// </returns>
         public static bool IsHttp3(string protocol)
         {
-            return object.ReferenceEquals(Http3, protocol) || StringComparer.OrdinalIgnoreCase.Equals(Http3, protocol);
+            return object.ReferenceEquals(Http3, protocol)
+                || StringComparer.OrdinalIgnoreCase.Equals(Http3, protocol);
         }
 
         /// <summary>
@@ -102,7 +106,11 @@ namespace Microsoft.AspNetCore.Http
                 { Major: 2, Minor: 0 } => Http2,
                 { Major: 1, Minor: 1 } => Http11,
                 { Major: 1, Minor: 0 } => Http10,
-                _ => throw new ArgumentOutOfRangeException(nameof(version), "Version doesn't map to a known HTTP protocol.")
+                _
+                  => throw new ArgumentOutOfRangeException(
+                      nameof(version),
+                      "Version doesn't map to a known HTTP protocol."
+                  )
             };
         }
     }

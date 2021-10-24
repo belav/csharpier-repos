@@ -50,21 +50,35 @@ namespace Microsoft.CodeAnalysis.Options
         public ImmutableArray<OptionStorageLocation2> StorageLocations { get; }
 
         public PerLanguageOption2(string feature, string name, T defaultValue)
-            : this(feature, name, defaultValue, storageLocations: Array.Empty<OptionStorageLocation2>())
-        {
-        }
+            : this(
+                feature,
+                name,
+                defaultValue,
+                storageLocations: Array.Empty<OptionStorageLocation2>()
+            ) { }
 
-        public PerLanguageOption2(string feature, string name, T defaultValue, params OptionStorageLocation2[] storageLocations)
-            : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations)
-        {
-        }
+        public PerLanguageOption2(
+            string feature,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation2[] storageLocations
+        ) : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations) { }
 
-        internal PerLanguageOption2(string feature, OptionGroup group, string name, T defaultValue, params OptionStorageLocation2[] storageLocations)
-            : this(feature, group, name, defaultValue, storageLocations.ToImmutableArray())
-        {
-        }
+        internal PerLanguageOption2(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation2[] storageLocations
+        ) : this(feature, group, name, defaultValue, storageLocations.ToImmutableArray()) { }
 
-        internal PerLanguageOption2(string feature, OptionGroup group, string name, T defaultValue, ImmutableArray<OptionStorageLocation2> storageLocations)
+        internal PerLanguageOption2(
+            string feature,
+            OptionGroup group,
+            string name,
+            T defaultValue,
+            ImmutableArray<OptionStorageLocation2> storageLocations
+        )
         {
             if (string.IsNullOrWhiteSpace(feature))
             {
@@ -76,7 +90,14 @@ namespace Microsoft.CodeAnalysis.Options
                 throw new ArgumentException(nameof(name));
             }
 
-            OptionDefinition = new OptionDefinition(feature, group, name, defaultValue, typeof(T), isPerLanguage: true);
+            OptionDefinition = new OptionDefinition(
+                feature,
+                group,
+                name,
+                defaultValue,
+                typeof(T),
+                isPerLanguage: true
+            );
             this.StorageLocations = storageLocations;
         }
 
@@ -93,8 +114,8 @@ namespace Microsoft.CodeAnalysis.Options
 
         bool IOption.IsPerLanguage => true;
 
-        ImmutableArray<OptionStorageLocation> IOption.StorageLocations
-            => this.StorageLocations.As<OptionStorageLocation>();
+        ImmutableArray<OptionStorageLocation> IOption.StorageLocations =>
+            this.StorageLocations.As<OptionStorageLocation>();
 #endif
         public override string ToString() => OptionDefinition.ToString();
 

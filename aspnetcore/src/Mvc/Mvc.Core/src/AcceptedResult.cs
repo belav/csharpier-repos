@@ -19,9 +19,8 @@ namespace Microsoft.AspNetCore.Mvc
         /// <summary>
         /// Initializes a new instance of the <see cref="AcceptedResult"/> class with the values
         /// provided.
-        /// </summary>      
-        public AcceptedResult()
-            : base(value: null)
+        /// </summary>
+        public AcceptedResult() : base(value: null)
         {
             StatusCode = DefaultStatusCode;
         }
@@ -59,7 +58,10 @@ namespace Microsoft.AspNetCore.Mvc
             }
             else
             {
-                Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                Location = locationUri.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped
+                );
             }
 
             StatusCode = DefaultStatusCode;

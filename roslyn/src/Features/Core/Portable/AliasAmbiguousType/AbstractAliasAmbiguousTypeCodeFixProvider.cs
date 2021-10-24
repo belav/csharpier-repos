@@ -39,49 +39,84 @@ namespace Microsoft.CodeAnalysis.AliasAmbiguousType
                 return;
             }
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var symbolInfo = semanticModel.GetSymbolInfo(diagnosticNode, cancellationToken);
             if (SymbolCandidatesContainsSupportedSymbols(symbolInfo))
             {
                 var addImportService = document.GetLanguageService<IAddImportsService>();
                 var syntaxGenerator = document.GetLanguageService<SyntaxGenerator>();
                 var compilation = semanticModel.Compilation;
-                var optionSet = await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-                var placeSystemNamespaceFirst = optionSet.GetOption(GenerationOptions.PlaceSystemNamespaceFirst, document.Project.Language);
+                var optionSet = await document
+                    .GetOptionsAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var placeSystemNamespaceFirst = optionSet.GetOption(
+                    GenerationOptions.PlaceSystemNamespaceFirst,
+                    document.Project.Language
+                );
                 var allowInHiddenRegions = document.CanAddImportsInHiddenRegions();
-                var codeActionsBuilder = ImmutableArray.CreateBuilder<CodeAction>(symbolInfo.CandidateSymbols.Length);
+                var codeActionsBuilder = ImmutableArray.CreateBuilder<CodeAction>(
+                    symbolInfo.CandidateSymbols.Length
+                );
                 foreach (var symbol in symbolInfo.CandidateSymbols.Cast<ITypeSymbol>())
                 {
                     var typeName = symbol.Name;
                     var codeActionPreviewText = GetTextPreviewOfChange(typeName, symbol);
-                    codeActionsBuilder.Add(new MyCodeAction(codeActionPreviewText, c =>
-                        {
-                            var aliasDirective = syntaxGenerator.AliasImportDeclaration(typeName, symbol);
-                            var newRoot = addImportService.AddImport(compilation, root, diagnosticNode, aliasDirective, syntaxGenerator, placeSystemNamespaceFirst, allowInHiddenRegions, cancellationToken);
-                            return Task.FromResult(document.WithSyntaxRoot(newRoot));
-                        }));
+                    codeActionsBuilder.Add(
+                        new MyCodeAction(
+                            codeActionPreviewText,
+                            c =>
+                            {
+                                var aliasDirective = syntaxGenerator.AliasImportDeclaration(
+                                    typeName,
+                                    symbol
+                                );
+                                var newRoot = addImportService.AddImport(
+                                    compilation,
+                                    root,
+                                    diagnosticNode,
+                                    aliasDirective,
+                                    syntaxGenerator,
+                                    placeSystemNamespaceFirst,
+                                    allowInHiddenRegions,
+                                    cancellationToken
+                                );
+                                return Task.FromResult(document.WithSyntaxRoot(newRoot));
+                            }
+                        )
+                    );
                 }
 
-                var groupingTitle = string.Format(FeaturesResources.Alias_ambiguous_type_0, diagnosticNode.ToString());
-                var groupingCodeAction = new CodeActionWithNestedActions(groupingTitle, codeActionsBuilder.ToImmutable(), isInlinable: true);
+                var groupingTitle = string.Format(
+                    FeaturesResources.Alias_ambiguous_type_0,
+                    diagnosticNode.ToString()
+                );
+                var groupingCodeAction = new CodeActionWithNestedActions(
+                    groupingTitle,
+                    codeActionsBuilder.ToImmutable(),
+                    isInlinable: true
+                );
                 context.RegisterCodeFix(groupingCodeAction, context.Diagnostics.First());
             }
         }
 
-        private static bool SymbolCandidatesContainsSupportedSymbols(SymbolInfo symbolInfo)
-            => symbolInfo.CandidateReason == CandidateReason.Ambiguous &&
-               // Arity: Aliases can only name closed constructed types. (See also proposal https://github.com/dotnet/csharplang/issues/1239)
-               // Aliasing as a closed constructed type is possible but would require to remove the type arguments from the diagnosed node.
-               // It is unlikely that the user wants that and so generic types are not supported.
-               symbolInfo.CandidateSymbols.All(symbol => symbol.IsKind(SymbolKind.NamedType) &&
-                                                         symbol.GetArity() == 0);
+        private static bool SymbolCandidatesContainsSupportedSymbols(SymbolInfo symbolInfo) =>
+            symbolInfo.CandidateReason == CandidateReason.Ambiguous
+            &&
+            // Arity: Aliases can only name closed constructed types. (See also proposal https://github.com/dotnet/csharplang/issues/1239)
+            // Aliasing as a closed constructed type is possible but would require to remove the type arguments from the diagnosed node.
+            // It is unlikely that the user wants that and so generic types are not supported.
+            symbolInfo.CandidateSymbols.All(
+                symbol => symbol.IsKind(SymbolKind.NamedType) && symbol.GetArity() == 0
+            );
 
         private class MyCodeAction : DocumentChangeAction
         {
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument, equivalenceKey: title)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument, equivalenceKey: title) { }
         }
     }
 }

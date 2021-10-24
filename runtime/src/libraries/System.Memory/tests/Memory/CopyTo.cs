@@ -47,7 +47,7 @@ namespace System.MemoryTests
         [Fact]
         public static void TryCopyToEmpty()
         {
-            int[] src = { };
+            int[] src = {  };
             int[] dst = { 99, 100, 101 };
 
             Memory<int> srcMemory = src;
@@ -80,7 +80,7 @@ namespace System.MemoryTests
             bool success = srcMemory.TryCopyTo(dst);
             Assert.False(success);
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // TryCopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // TryCopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace System.MemoryTests
             Memory<int> srcMemory = src;
             Assert.Throws<ArgumentException>(() => srcMemory.CopyTo(dst));
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // CopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // CopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -144,17 +144,17 @@ namespace System.MemoryTests
         [Fact]
         public static void CopyToEmptyArray()
         {
-            int[] src = { };
+            int[] src = {  };
             Memory<int> dst = new int[3] { 99, 100, 101 };
 
             src.CopyTo(dst);
             int[] expected = { 99, 100, 101 };
             Assert.Equal<int>(expected, dst.ToArray());
 
-            Memory<int> dstEmpty = new int[0] { };
+            Memory<int> dstEmpty = new int[0] {  };
 
             src.CopyTo(dstEmpty);
-            int[] expectedEmpty = { };
+            int[] expectedEmpty = {  };
             Assert.Equal<int>(expectedEmpty, dstEmpty.ToArray());
         }
 
@@ -177,7 +177,7 @@ namespace System.MemoryTests
 
             Assert.Throws<ArgumentException>(() => src.CopyTo(dst));
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst.ToArray());  // CopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst.ToArray()); // CopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]

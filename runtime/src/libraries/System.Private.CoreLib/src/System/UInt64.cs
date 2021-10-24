@@ -12,8 +12,15 @@ namespace System
     [Serializable]
     [CLSCompliant(false)]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public readonly struct UInt64 : IComparable, IConvertible, ISpanFormattable, IComparable<ulong>, IEquatable<ulong>
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public readonly struct UInt64
+        : IComparable,
+          IConvertible,
+          ISpanFormattable,
+          IComparable<ulong>,
+          IEquatable<ulong>
     {
         private readonly ulong m_value; // Do not rename (binary serialization)
 
@@ -37,8 +44,10 @@ namespace System
             // to positive for very large neg numbers, etc.
             if (value is ulong i)
             {
-                if (m_value < i) return -1;
-                if (m_value > i) return 1;
+                if (m_value < i)
+                    return -1;
+                if (m_value > i)
+                    return 1;
                 return 0;
             }
 
@@ -49,8 +58,10 @@ namespace System
         {
             // Need to use compare because subtraction will wrap
             // to positive for very large neg numbers, etc.
-            if (m_value < value) return -1;
-            if (m_value > value) return 1;
+            if (m_value < value)
+                return -1;
+            if (m_value > value)
+                return 1;
             return 0;
         }
 
@@ -95,38 +106,55 @@ namespace System
             return Number.FormatUInt64(m_value, format, provider);
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
             return Number.TryFormatUInt64(m_value, format, provider, destination, out charsWritten);
         }
 
         public static ulong Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseUInt64(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         public static ulong Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseUInt64(s, style, NumberFormatInfo.CurrentInfo);
         }
 
         public static ulong Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseUInt64(s, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseUInt64(
+                s,
+                NumberStyles.Integer,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         public static ulong Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseUInt64(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static ulong Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        public static ulong Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.ParseUInt64(s, style, NumberFormatInfo.GetInstance(provider));
@@ -140,15 +168,30 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseUInt64IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseUInt64IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out ulong result)
         {
-            return Number.TryParseUInt64IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseUInt64IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out ulong result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out ulong result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
@@ -158,13 +201,28 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseUInt64(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseUInt64(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out ulong result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out ulong result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            return Number.TryParseUInt64(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseUInt64(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         //

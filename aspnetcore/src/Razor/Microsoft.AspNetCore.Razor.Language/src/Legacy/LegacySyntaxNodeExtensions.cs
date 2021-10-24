@@ -58,7 +58,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             return context is SpanContext ? (SpanContext)context : null;
         }
 
-        public static TNode WithSpanContext<TNode>(this TNode node, SpanContext spanContext) where TNode : SyntaxNode
+        public static TNode WithSpanContext<TNode>(this TNode node, SpanContext spanContext)
+            where TNode : SyntaxNode
         {
             if (node == null)
             {
@@ -87,7 +88,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 }
             }
 
-            var newAnnotationsArray = newAnnotations == null ? new[] { newAnnotation } : newAnnotations.ToArray();
+            var newAnnotationsArray =
+                newAnnotations == null ? new[] { newAnnotation } : newAnnotations.ToArray();
 
             return node.WithAnnotations(newAnnotationsArray);
         }
@@ -115,7 +117,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
             if (IsSpanKind(node))
             {
-                var editHandler = node.GetSpanContext()?.EditHandler ?? SpanEditHandler.CreateDefault();
+                var editHandler =
+                    node.GetSpanContext()?.EditHandler ?? SpanEditHandler.CreateDefault();
                 return editHandler.OwnsChange(node, change) ? node : null;
             }
 
@@ -217,12 +220,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         public static bool IsSpanKind(this SyntaxNode node)
         {
-            return IsTransitionSpanKind(node) ||
-                IsMetaCodeSpanKind(node) ||
-                IsCommentSpanKind(node) ||
-                IsCodeSpanKind(node) ||
-                IsMarkupSpanKind(node) ||
-                IsNoneSpanKind(node);
+            return IsTransitionSpanKind(node)
+                || IsMetaCodeSpanKind(node)
+                || IsCommentSpanKind(node)
+                || IsCodeSpanKind(node)
+                || IsMarkupSpanKind(node)
+                || IsNoneSpanKind(node);
         }
 
         public static IEnumerable<SyntaxNode> FlattenSpans(this SyntaxNode node)
@@ -272,7 +275,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             while (parent != null)
             {
                 var flattenedSpans = parent.FlattenSpans();
-                var prevSpan = flattenedSpans.LastOrDefault(n => n.EndPosition <= node.Position && n != node);
+                var prevSpan = flattenedSpans.LastOrDefault(
+                    n => n.EndPosition <= node.Position && n != node
+                );
                 if (prevSpan != null)
                 {
                     return prevSpan;
@@ -295,7 +300,9 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             while (parent != null)
             {
                 var flattenedSpans = parent.FlattenSpans();
-                var nextSpan = flattenedSpans.FirstOrDefault(n => n.Position >= node.EndPosition && n != node);
+                var nextSpan = flattenedSpans.FirstOrDefault(
+                    n => n.Position >= node.EndPosition && n != node
+                );
                 if (nextSpan != null)
                 {
                     return nextSpan;

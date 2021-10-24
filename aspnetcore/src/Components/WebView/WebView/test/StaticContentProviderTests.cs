@@ -21,21 +21,26 @@ namespace Microsoft.AspNetCore.Components.WebView
             const string cssFilePath = "folder/file.css";
             const string cssFileContent = "this is css";
             var inMemoryFileProvider = new InMemoryFileProvider(
-                new Dictionary<string, string>
-                {
-                    { cssFilePath, cssFileContent },
-                });
+                new Dictionary<string, string> { { cssFilePath, cssFileContent }, }
+            );
             var appBase = "fake://0.0.0.0/";
-            var scp = new StaticContentProvider(inMemoryFileProvider, new Uri(appBase), "fakehost.html");
+            var scp = new StaticContentProvider(
+                inMemoryFileProvider,
+                new Uri(appBase),
+                "fakehost.html"
+            );
 
             // Act
-            Assert.True(scp.TryGetResponseContent(
-                requestUri: appBase + cssFilePath,
-                allowFallbackOnHostPage: false,
-                out var statusCode,
-                out var statusMessage,
-                out var content,
-                out var headers));
+            Assert.True(
+                scp.TryGetResponseContent(
+                    requestUri: appBase + cssFilePath,
+                    allowFallbackOnHostPage: false,
+                    out var statusCode,
+                    out var statusMessage,
+                    out var content,
+                    out var headers
+                )
+            );
 
             // Assert
             var contentString = new StreamReader(content).ReadToEnd();
@@ -83,22 +88,26 @@ namespace Microsoft.AspNetCore.Components.WebView
                 private readonly InMemoryFileProvider _inMemoryFileProvider;
                 private readonly string _subPath;
 
-                public InMemoryDirectoryContents(InMemoryFileProvider inMemoryFileProvider, string subPath)
+                public InMemoryDirectoryContents(
+                    InMemoryFileProvider inMemoryFileProvider,
+                    string subPath
+                )
                 {
-                    _inMemoryFileProvider = inMemoryFileProvider ?? throw new ArgumentNullException(nameof(inMemoryFileProvider));
-                    _subPath = subPath ?? throw new ArgumentNullException(nameof(inMemoryFileProvider));
+                    _inMemoryFileProvider =
+                        inMemoryFileProvider
+                        ?? throw new ArgumentNullException(nameof(inMemoryFileProvider));
+                    _subPath =
+                        subPath ?? throw new ArgumentNullException(nameof(inMemoryFileProvider));
                 }
 
                 public bool Exists => true;
 
                 public IEnumerator<IFileInfo> GetEnumerator()
                 {
-                    return
-                        _inMemoryFileProvider
-                            .FilePathsAndContents
-                            .Where(kvp => kvp.Key.StartsWith(_subPath, StringComparison.Ordinal))
-                            .Select(x => new InMemoryFileInfo(x.Key, x.Value))
-                            .GetEnumerator();
+                    return _inMemoryFileProvider.FilePathsAndContents
+                        .Where(kvp => kvp.Key.StartsWith(_subPath, StringComparison.Ordinal))
+                        .Select(x => new InMemoryFileInfo(x.Key, x.Value))
+                        .GetEnumerator();
                 }
 
                 System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()

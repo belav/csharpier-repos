@@ -99,8 +99,18 @@ namespace System.Collections.Generic.Tests
 
             foreach (var testCase in testCases)
             {
-                yield return new object[] { (UInt64Enum)testCase.Item1, (UInt64Enum)testCase.Item2, testCase.Item3 };
-                yield return new object[] { (UInt64Enum)testCase.Item2, (UInt64Enum)testCase.Item1, -testCase.Item3 };
+                yield return new object[]
+                {
+                    (UInt64Enum)testCase.Item1,
+                    (UInt64Enum)testCase.Item2,
+                    testCase.Item3
+                };
+                yield return new object[]
+                {
+                    (UInt64Enum)testCase.Item2,
+                    (UInt64Enum)testCase.Item1,
+                    -testCase.Item3
+                };
             }
         }
 
@@ -118,8 +128,18 @@ namespace System.Collections.Generic.Tests
 
             foreach (var testCase in testCases)
             {
-                yield return new object[] { (Int32Enum)testCase.Item1, (Int32Enum)testCase.Item2, testCase.Item3 };
-                yield return new object[] { (Int32Enum)testCase.Item2, (Int32Enum)testCase.Item1, -testCase.Item3 };
+                yield return new object[]
+                {
+                    (Int32Enum)testCase.Item1,
+                    (Int32Enum)testCase.Item2,
+                    testCase.Item3
+                };
+                yield return new object[]
+                {
+                    (Int32Enum)testCase.Item2,
+                    (Int32Enum)testCase.Item1,
+                    -testCase.Item3
+                };
             }
         }
 
@@ -134,8 +154,18 @@ namespace System.Collections.Generic.Tests
 
             foreach (var testCase in testCases)
             {
-                yield return new object[] { (UInt32Enum)testCase.Item1, (UInt32Enum)testCase.Item2, testCase.Item3 };
-                yield return new object[] { (UInt32Enum)testCase.Item2, (UInt32Enum)testCase.Item1, -testCase.Item3 };
+                yield return new object[]
+                {
+                    (UInt32Enum)testCase.Item1,
+                    (UInt32Enum)testCase.Item2,
+                    testCase.Item3
+                };
+                yield return new object[]
+                {
+                    (UInt32Enum)testCase.Item2,
+                    (UInt32Enum)testCase.Item1,
+                    -testCase.Item3
+                };
             }
         }
 
@@ -150,8 +180,18 @@ namespace System.Collections.Generic.Tests
 
             foreach (var testCase in testCases)
             {
-                yield return new object[] { (Int64Enum)testCase.Item1, (Int64Enum)testCase.Item2, testCase.Item3 };
-                yield return new object[] { (Int64Enum)testCase.Item2, (Int64Enum)testCase.Item1, -testCase.Item3 };
+                yield return new object[]
+                {
+                    (Int64Enum)testCase.Item1,
+                    (Int64Enum)testCase.Item2,
+                    testCase.Item3
+                };
+                yield return new object[]
+                {
+                    (Int64Enum)testCase.Item2,
+                    (Int64Enum)testCase.Item1,
+                    -testCase.Item3
+                };
             }
         }
 
@@ -235,7 +275,13 @@ namespace System.Collections.Generic.Tests
         [Theory]
         [MemberData(nameof(NullableOfInt32ComparisonsData))]
         [MemberData(nameof(NullableOfInt32EnumComparisonsData))]
-        public void NullableComparisons<T>(T leftValue, bool leftHasValue, T rightValue, bool rightHasValue, int expected) where T : struct
+        public void NullableComparisons<T>(
+            T leftValue,
+            bool leftHasValue,
+            T rightValue,
+            bool rightHasValue,
+            int expected
+        ) where T : struct
         {
             // Comparer<T> is specialized (for perf reasons) when T : U? where U : IComparable<U>
             T? left = leftHasValue ? new T?(leftValue) : null;
@@ -295,8 +341,22 @@ namespace System.Collections.Generic.Tests
 
             foreach (var testCase in testCases)
             {
-                yield return new object[] { testCase.Item1, testCase.Item2, testCase.Item3, testCase.Item4, testCase.Item5 };
-                yield return new object[] { testCase.Item3, testCase.Item4, testCase.Item1, testCase.Item2, -testCase.Item5 };
+                yield return new object[]
+                {
+                    testCase.Item1,
+                    testCase.Item2,
+                    testCase.Item3,
+                    testCase.Item4,
+                    testCase.Item5
+                };
+                yield return new object[]
+                {
+                    testCase.Item3,
+                    testCase.Item4,
+                    testCase.Item1,
+                    testCase.Item2,
+                    -testCase.Item5
+                };
             }
         }
 
@@ -315,8 +375,22 @@ namespace System.Collections.Generic.Tests
 
             foreach (var testCase in testCases)
             {
-                yield return new object[] { testCase.Item1, testCase.Item2, testCase.Item3, testCase.Item4, testCase.Item5 };
-                yield return new object[] { testCase.Item3, testCase.Item4, testCase.Item1, testCase.Item2, -testCase.Item5 };
+                yield return new object[]
+                {
+                    testCase.Item1,
+                    testCase.Item2,
+                    testCase.Item3,
+                    testCase.Item4,
+                    testCase.Item5
+                };
+                yield return new object[]
+                {
+                    testCase.Item3,
+                    testCase.Item4,
+                    testCase.Item1,
+                    testCase.Item2,
+                    -testCase.Item5
+                };
             }
         }
 
@@ -334,7 +408,9 @@ namespace System.Collections.Generic.Tests
             var rightValue = new MutatingComparable(0);
 
             var left = new ValueComparable<MutatingComparable>?(ValueComparable.Create(leftValue));
-            var right = new ValueComparable<MutatingComparable>?(ValueComparable.Create(rightValue));
+            var right = new ValueComparable<MutatingComparable>?(
+                ValueComparable.Create(rightValue)
+            );
 
             var comparer = Comparer<ValueComparable<MutatingComparable>?>.Default;
             Assert.Equal(0, comparer.Compare(left, right));

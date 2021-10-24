@@ -10,6 +10,6 @@ namespace System.CommandLine
     {
         bool Contains(string name);
 
-        bool TryGetValues(string name,  [NotNullWhen(true)] out IEnumerable<string>? values);
+        bool TryGetValues(string name, [NotNullWhen(true)] out IEnumerable<string>? values);
     }
 }

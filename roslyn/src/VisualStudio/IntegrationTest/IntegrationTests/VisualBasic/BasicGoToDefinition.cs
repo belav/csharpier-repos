@@ -18,9 +18,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGoToDefinition(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicGoToDefinition))
-        {
-        }
+            : base(instanceFactory, nameof(BasicGoToDefinition)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.GoToDefinition)]
         public void GoToClassDeclaration()
@@ -29,17 +27,22 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
             VisualStudio.SolutionExplorer.AddFile(project, "FileDef.vb");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileDef.vb");
             VisualStudio.Editor.SetText(
-@"Class SomeClass
-End Class");
+                @"Class SomeClass
+End Class"
+            );
             VisualStudio.SolutionExplorer.AddFile(project, "FileConsumer.vb");
             VisualStudio.SolutionExplorer.OpenFile(project, "FileConsumer.vb");
             VisualStudio.Editor.SetText(
-@"Class SomeOtherClass
+                @"Class SomeOtherClass
     Dim gibberish As SomeClass
-End Class");
+End Class"
+            );
             VisualStudio.Editor.PlaceCaret("SomeClass");
             VisualStudio.Editor.GoToDefinition("FileDef.vb");
-            VisualStudio.Editor.Verify.TextContains(@"Class SomeClass$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.TextContains(
+                @"Class SomeClass$$",
+                assertCaretPosition: true
+            );
             Assert.False(VisualStudio.Shell.IsActiveTabProvisional());
         }
 
@@ -47,17 +50,31 @@ End Class");
         public void ObjectBrowserNavigation()
         {
             SetUpEditor(
-@"Class C
+                @"Class C
     Dim i As Integer$$
-End Class");
-            VisualStudio.Workspace.SetFeatureOption(feature: "VisualStudioNavigationOptions", optionName: "NavigateToObjectBrowser", language: LanguageName, valueString: "True");
+End Class"
+            );
+            VisualStudio.Workspace.SetFeatureOption(
+                feature: "VisualStudioNavigationOptions",
+                optionName: "NavigateToObjectBrowser",
+                language: LanguageName,
+                valueString: "True"
+            );
 
             VisualStudio.Editor.GoToDefinition("Object Browser");
             Assert.Equal("Object Browser", VisualStudio.Shell.GetActiveWindowCaption());
 
-            VisualStudio.Workspace.SetFeatureOption(feature: "VisualStudioNavigationOptions", optionName: "NavigateToObjectBrowser", language: LanguageName, valueString: "False");
+            VisualStudio.Workspace.SetFeatureOption(
+                feature: "VisualStudioNavigationOptions",
+                optionName: "NavigateToObjectBrowser",
+                language: LanguageName,
+                valueString: "False"
+            );
 
-            VisualStudio.SolutionExplorer.OpenFile(new ProjectUtils.Project(ProjectName), "Class1.vb");
+            VisualStudio.SolutionExplorer.OpenFile(
+                new ProjectUtils.Project(ProjectName),
+                "Class1.vb"
+            );
             VisualStudio.Editor.GoToDefinition("Int32 [from metadata]");
             VisualStudio.Editor.Verify.TextContains("Public Structure Int32");
         }

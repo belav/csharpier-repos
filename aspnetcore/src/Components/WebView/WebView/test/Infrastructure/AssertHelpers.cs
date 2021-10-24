@@ -9,9 +9,15 @@ namespace Microsoft.AspNetCore.Components.WebView
 {
     public class AssertHelpers
     {
-        internal static void IsAttachToDocumentMessage(string message, int componentId, string selector)
+        internal static void IsAttachToDocumentMessage(
+            string message,
+            int componentId,
+            string selector
+        )
         {
-            Assert.True(IpcCommon.TryDeserializeOutgoing(message, out var messageType, out var args));
+            Assert.True(
+                IpcCommon.TryDeserializeOutgoing(message, out var messageType, out var args)
+            );
             Assert.Equal(IpcCommon.OutgoingMessageType.AttachToDocument, messageType);
             Assert.Equal(2, args.Count);
             Assert.Equal(componentId, args[0].GetInt32());
@@ -20,7 +26,9 @@ namespace Microsoft.AspNetCore.Components.WebView
 
         internal static RenderBatch IsRenderBatch(string message)
         {
-            Assert.True(IpcCommon.TryDeserializeOutgoing(message, out var messageType, out var args));
+            Assert.True(
+                IpcCommon.TryDeserializeOutgoing(message, out var messageType, out var args)
+            );
             Assert.Equal(IpcCommon.OutgoingMessageType.RenderBatch, messageType);
             Assert.Equal(2, args.Count);
             Assert.Equal(1, args[0].GetInt64()); // Batch ID

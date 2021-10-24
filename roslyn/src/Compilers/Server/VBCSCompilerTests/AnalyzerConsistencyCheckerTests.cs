@@ -33,10 +33,19 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public void MissingReference()
         {
             var directory = Temp.CreateDirectory();
-            var alphaDll = directory.CreateFile("Alpha.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
+            var alphaDll = directory
+                .CreateFile("Alpha.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
 
-            var analyzerReferences = ImmutableArray.Create(new CommandLineAnalyzerReference("Alpha.dll"));
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, new InMemoryAssemblyLoader(), Logger);
+            var analyzerReferences = ImmutableArray.Create(
+                new CommandLineAnalyzerReference("Alpha.dll")
+            );
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                new InMemoryAssemblyLoader(),
+                Logger
+            );
 
             Assert.True(result);
         }
@@ -45,18 +54,32 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public void AllChecksPassed()
         {
             var directory = Temp.CreateDirectory();
-            var alphaDll = directory.CreateFile("Alpha.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
-            var betaDll = directory.CreateFile("Beta.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Beta);
-            var gammaDll = directory.CreateFile("Gamma.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Gamma);
-            var deltaDll = directory.CreateFile("Delta.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Delta);
+            var alphaDll = directory
+                .CreateFile("Alpha.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
+            var betaDll = directory
+                .CreateFile("Beta.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Beta);
+            var gammaDll = directory
+                .CreateFile("Gamma.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Gamma);
+            var deltaDll = directory
+                .CreateFile("Delta.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Delta);
 
             var analyzerReferences = ImmutableArray.Create(
                 new CommandLineAnalyzerReference("Alpha.dll"),
                 new CommandLineAnalyzerReference("Beta.dll"),
                 new CommandLineAnalyzerReference("Gamma.dll"),
-                new CommandLineAnalyzerReference("Delta.dll"));
+                new CommandLineAnalyzerReference("Delta.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, new InMemoryAssemblyLoader(), Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                new InMemoryAssemblyLoader(),
+                Logger
+            );
 
             Assert.True(result);
         }
@@ -67,21 +90,33 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var directory = Temp.CreateDirectory();
 
             // Load Beta.dll from the future Alpha.dll path to prime the assembly loader
-            var alphaDll = directory.CreateFile("Alpha.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Beta);
+            var alphaDll = directory
+                .CreateFile("Alpha.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Beta);
 
             var assemblyLoader = new InMemoryAssemblyLoader();
             var betaAssembly = assemblyLoader.LoadFromPath(alphaDll.Path);
 
             alphaDll.WriteAllBytes(TestResources.AssemblyLoadTests.Alpha);
-            var gammaDll = directory.CreateFile("Gamma.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Gamma);
-            var deltaDll = directory.CreateFile("Delta.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Delta);
+            var gammaDll = directory
+                .CreateFile("Gamma.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Gamma);
+            var deltaDll = directory
+                .CreateFile("Delta.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Delta);
 
             var analyzerReferences = ImmutableArray.Create(
                 new CommandLineAnalyzerReference("Alpha.dll"),
                 new CommandLineAnalyzerReference("Gamma.dll"),
-                new CommandLineAnalyzerReference("Delta.dll"));
+                new CommandLineAnalyzerReference("Delta.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, assemblyLoader, Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                assemblyLoader,
+                Logger
+            );
 
             Assert.False(result);
         }
@@ -90,12 +125,20 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public void AssemblyLoadException()
         {
             var directory = Temp.CreateDirectory();
-            var deltaDll = directory.CreateFile("Delta.dll").WriteAllBytes(TestResources.AssemblyLoadTests.Delta);
+            var deltaDll = directory
+                .CreateFile("Delta.dll")
+                .WriteAllBytes(TestResources.AssemblyLoadTests.Delta);
 
             var analyzerReferences = ImmutableArray.Create(
-                new CommandLineAnalyzerReference("Delta.dll"));
+                new CommandLineAnalyzerReference("Delta.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, TestAnalyzerAssemblyLoader.LoadNotImplemented, Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                TestAnalyzerAssemblyLoader.LoadNotImplemented,
+                Logger
+            );
 
             Assert.False(result);
         }
@@ -108,26 +151,40 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var comp = CSharpCompilation.Create(
                 name,
                 new[] { SyntaxFactory.ParseSyntaxTree(@"class C {}") },
-                references: new MetadataReference[] { MetadataReference.CreateFromImage(TestMetadata.ResourcesNetStandard20.netstandard) },
-                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, warningLevel: Diagnostic.MaxWarningLevel));
+                references: new MetadataReference[]
+                {
+                    MetadataReference.CreateFromImage(
+                        TestMetadata.ResourcesNetStandard20.netstandard
+                    )
+                },
+                options: new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    warningLevel: Diagnostic.MaxWarningLevel
+                )
+            );
             var compFile = directory.CreateFile(name);
             comp.Emit(compFile.Path);
 
-
             var analyzerReferences = ImmutableArray.Create(new CommandLineAnalyzerReference(name));
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, new InMemoryAssemblyLoader(), Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                new InMemoryAssemblyLoader(),
+                Logger
+            );
 
             Assert.True(result);
         }
 
         private class InMemoryAssemblyLoader : IAnalyzerAssemblyLoader
         {
-            private readonly Dictionary<string, Assembly> _assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
+            private readonly Dictionary<string, Assembly> _assemblies = new Dictionary<
+                string,
+                Assembly
+            >(StringComparer.OrdinalIgnoreCase);
 
-            public void AddDependencyLocation(string fullPath)
-            {
-            }
+            public void AddDependencyLocation(string fullPath) { }
 
             public Assembly LoadFromPath(string fullPath)
             {

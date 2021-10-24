@@ -19,18 +19,24 @@ namespace Microsoft.AspNetCore.E2ETesting
         {
             // Capture all the attributes that start with Microsoft.AspNetCore.E2ETesting and add them as a memory collection
             // to the list of settings. We use GetExecutingAssembly, this works because E2ETestOptions is shared source.
-            var metadataAttributes = Assembly.GetExecutingAssembly()
+            var metadataAttributes = Assembly
+                .GetExecutingAssembly()
                 .GetCustomAttributes<AssemblyMetadataAttribute>()
                 .Where(ama => ama.Key.StartsWith(TestingOptionsPrefix, StringComparison.Ordinal))
-                .ToDictionary(kvp => kvp.Key.Substring(TestingOptionsPrefix.Length + 1), kvp => kvp.Value);
+                .ToDictionary(
+                    kvp => kvp.Key.Substring(TestingOptionsPrefix.Length + 1),
+                    kvp => kvp.Value
+                );
 
             try
             {
                 // We save the configuration just to make resolved values easier to debug.
-                var builder = new ConfigurationBuilder()
-                    .AddInMemoryCollection(metadataAttributes);
+                var builder = new ConfigurationBuilder().AddInMemoryCollection(metadataAttributes);
 
-                if (!metadataAttributes.TryGetValue("CI", out var value) || string.IsNullOrEmpty(value))
+                if (
+                    !metadataAttributes.TryGetValue("CI", out var value)
+                    || string.IsNullOrEmpty(value)
+                )
                 {
                     builder.AddJsonFile("e2eTestSettings.json", optional: true);
                 }
@@ -39,17 +45,13 @@ namespace Microsoft.AspNetCore.E2ETesting
                     builder.AddJsonFile("e2eTestSettings.ci.json", optional: true);
                 }
 
-                Configuration = builder
-                    .AddEnvironmentVariables("E2ETESTS_")
-                    .Build();
+                Configuration = builder.AddEnvironmentVariables("E2ETESTS_").Build();
 
                 var instance = new E2ETestOptions();
                 Configuration.Bind(instance);
                 Instance = instance;
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         public int DefaultWaitTimeoutInSeconds { get; set; } = 15;

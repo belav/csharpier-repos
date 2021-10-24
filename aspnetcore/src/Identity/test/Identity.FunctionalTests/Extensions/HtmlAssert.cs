@@ -24,12 +24,12 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             return Assert.IsAssignableFrom<IHtmlAnchorElement>(element);
         }
 
-        internal static IEnumerable<IHtmlElement> HasElements(string selector, IHtmlDocument document)
+        internal static IEnumerable<IHtmlElement> HasElements(
+            string selector,
+            IHtmlDocument document
+        )
         {
-            var elements = document
-                .QuerySelectorAll(selector)
-                .OfType<IHtmlElement>()
-                .ToArray();
+            var elements = document.QuerySelectorAll(selector).OfType<IHtmlElement>().ToArray();
 
             Assert.NotEmpty(elements);
 
@@ -51,7 +51,9 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
         internal static IHtmlHtmlElement IsHtmlFragment(string htmlMessage)
         {
             var synteticNode = $"<div>{htmlMessage}</div>";
-            var fragment = Assert.Single(new HtmlParser().ParseFragment(htmlMessage, context: null));
+            var fragment = Assert.Single(
+                new HtmlParser().ParseFragment(htmlMessage, context: null)
+            );
             return Assert.IsAssignableFrom<IHtmlHtmlElement>(fragment);
         }
     }

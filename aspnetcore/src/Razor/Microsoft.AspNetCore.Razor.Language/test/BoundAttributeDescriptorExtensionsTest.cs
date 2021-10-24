@@ -13,14 +13,18 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Arrange
             var expectedPropertyName = "IntProperty";
 
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("test")
-                .PropertyName(expectedPropertyName)
-                .TypeName(typeof(int).FullName);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("test").PropertyName(expectedPropertyName).TypeName(typeof(int).FullName);
 
             var descriptor = builder.Build();
 
@@ -35,13 +39,18 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void GetPropertyName_ReturnsNullIfNoPropertyName()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("test")
-                .TypeName(typeof(int).FullName);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("test").TypeName(typeof(int).FullName);
 
             var descriptor = builder.Build();
 
@@ -56,14 +65,18 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void IsDefaultKind_ReturnsTrue_IfKindIsDefault()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("test")
-                .PropertyName("IntProperty")
-                .TypeName(typeof(int).FullName);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("test").PropertyName("IntProperty").TypeName(typeof(int).FullName);
 
             var descriptor = builder.Build();
 
@@ -78,14 +91,18 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void IsDefaultKind_ReturnsFalse_IfKindIsNotDefault()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder("other-kind", "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                "other-kind",
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, "other-kind");
-            builder
-                .Name("test")
-                .PropertyName("IntProperty")
-                .TypeName(typeof(int).FullName);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                "other-kind"
+            );
+            builder.Name("test").PropertyName("IntProperty").TypeName(typeof(int).FullName);
 
             var descriptor = builder.Build();
 
@@ -100,14 +117,18 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ExpectsStringValue_ReturnsTrue_ForStringProperty()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("test")
-                .PropertyName("BoundProp")
-                .TypeName(typeof(string).FullName);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("test").PropertyName("BoundProp").TypeName(typeof(string).FullName);
 
             var descriptor = builder.Build();
 
@@ -122,14 +143,18 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ExpectsStringValue_ReturnsFalse_ForNonStringProperty()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("test")
-                .PropertyName("BoundProp")
-                .TypeName(typeof(bool).FullName);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("test").PropertyName("BoundProp").TypeName(typeof(bool).FullName);
 
             var descriptor = builder.Build();
 
@@ -144,10 +169,17 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ExpectsStringValue_ReturnsTrue_StringIndexerAndNameMatch()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
             builder
                 .Name("test")
                 .PropertyName("BoundProp")
@@ -167,10 +199,17 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ExpectsStringValue_ReturnsFalse_StringIndexerAndNameMismatch()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
             builder
                 .Name("test")
                 .PropertyName("BoundProp")
@@ -190,14 +229,18 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ExpectsBooleanValue_ReturnsTrue_ForBooleanProperty()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("test")
-                .PropertyName("BoundProp")
-                .TypeName(typeof(bool).FullName);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("test").PropertyName("BoundProp").TypeName(typeof(bool).FullName);
 
             var descriptor = builder.Build();
 
@@ -212,14 +255,18 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ExpectsBooleanValue_ReturnsFalse_ForNonBooleanProperty()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
-            builder
-                .Name("test")
-                .PropertyName("BoundProp")
-                .TypeName(typeof(int).FullName);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
+            builder.Name("test").PropertyName("BoundProp").TypeName(typeof(int).FullName);
 
             var descriptor = builder.Build();
 
@@ -234,10 +281,17 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ExpectsBooleanValue_ReturnsTrue_BooleanIndexerAndNameMatch()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
             builder
                 .Name("test")
                 .PropertyName("BoundProp")
@@ -257,10 +311,17 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void ExpectsBooleanValue_ReturnsFalse_BooleanIndexerAndNameMismatch()
         {
             // Arrange
-            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, "TestTagHelper", "Test");
+            var tagHelperBuilder = new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                "TestTagHelper",
+                "Test"
+            );
             tagHelperBuilder.TypeName("TestTagHelper");
 
-            var builder = new DefaultBoundAttributeDescriptorBuilder(tagHelperBuilder, TagHelperConventions.DefaultKind);
+            var builder = new DefaultBoundAttributeDescriptorBuilder(
+                tagHelperBuilder,
+                TagHelperConventions.DefaultKind
+            );
             builder
                 .Name("test")
                 .PropertyName("BoundProp")

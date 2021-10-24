@@ -43,9 +43,16 @@ namespace System.Net.Security
             get => _checkCertificateRevocation;
             set
             {
-                if (value != X509RevocationMode.NoCheck && value != X509RevocationMode.Offline && value != X509RevocationMode.Online)
+                if (
+                    value != X509RevocationMode.NoCheck
+                    && value != X509RevocationMode.Offline
+                    && value != X509RevocationMode.Online
+                )
                 {
-                    throw new ArgumentException(SR.Format(SR.net_invalid_enum, nameof(X509RevocationMode)), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_invalid_enum, nameof(X509RevocationMode)),
+                        nameof(value)
+                    );
                 }
 
                 _checkCertificateRevocation = value;
@@ -57,9 +64,16 @@ namespace System.Net.Security
             get => _encryptionPolicy;
             set
             {
-                if (value != EncryptionPolicy.RequireEncryption && value != EncryptionPolicy.AllowNoEncryption && value != EncryptionPolicy.NoEncryption)
+                if (
+                    value != EncryptionPolicy.RequireEncryption
+                    && value != EncryptionPolicy.AllowNoEncryption
+                    && value != EncryptionPolicy.NoEncryption
+                )
                 {
-                    throw new ArgumentException(SR.Format(SR.net_invalid_enum, nameof(EncryptionPolicy)), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.net_invalid_enum, nameof(EncryptionPolicy)),
+                        nameof(value)
+                    );
                 }
 
                 _encryptionPolicy = value;

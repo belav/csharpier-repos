@@ -10,32 +10,57 @@ using Xunit.Abstractions;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class NorthwindGroupByQuerySqliteTest : NorthwindGroupByQueryRelationalTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+    public class NorthwindGroupByQuerySqliteTest
+        : NorthwindGroupByQueryRelationalTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
     {
         // ReSharper disable once UnusedParameter.Local
-        public NorthwindGroupByQuerySqliteTest(NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public NorthwindGroupByQuerySqliteTest(
+            NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             Fixture.TestSqlLoggerFactory.Clear();
             //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
-        public override async Task Select_uncorrelated_collection_with_groupby_multiple_collections_work(bool async)
-            => Assert.Equal(
+        public override async Task Select_uncorrelated_collection_with_groupby_multiple_collections_work(
+            bool async
+        ) =>
+            Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(async))).Message);
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            base.Select_uncorrelated_collection_with_groupby_multiple_collections_work(
+                                async
+                            )
+                    )
+                ).Message
+            );
 
-        public override async Task Select_uncorrelated_collection_with_groupby_works(bool async)
-            => Assert.Equal(
+        public override async Task Select_uncorrelated_collection_with_groupby_works(bool async) =>
+            Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Select_uncorrelated_collection_with_groupby_works(async))).Message);
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => base.Select_uncorrelated_collection_with_groupby_works(async)
+                    )
+                ).Message
+            );
 
-        public override async Task Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(bool async)
-            => Assert.Equal(
+        public override async Task Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
+            bool async
+        ) =>
+            Assert.Equal(
                 SqliteStrings.ApplyNotSupported,
-                (await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(async))).Message);
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () =>
+                            base.Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
+                                async
+                            )
+                    )
+                ).Message
+            );
     }
 }

@@ -48,7 +48,7 @@ namespace System.SpanTests
         [Fact]
         public static void TryCopyToEmpty()
         {
-            int[] src = { };
+            int[] src = {  };
             int[] dst = { 99, 100, 101 };
 
             Span<int> srcSpan = new Span<int>(src);
@@ -81,7 +81,7 @@ namespace System.SpanTests
             bool success = srcSpan.TryCopyTo(dst);
             Assert.False(success);
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // TryCopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // TryCopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -91,9 +91,12 @@ namespace System.SpanTests
             int[] dst = { 99, 100 };
 
             Span<int> srcSpan = new Span<int>(src);
-            TestHelpers.AssertThrows<ArgumentException, int>(srcSpan, (_srcSpan) => _srcSpan.CopyTo(dst));
+            TestHelpers.AssertThrows<ArgumentException, int>(
+                srcSpan,
+                (_srcSpan) => _srcSpan.CopyTo(dst)
+            );
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // CopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // CopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -145,17 +148,17 @@ namespace System.SpanTests
         [Fact]
         public static void CopyToEmptyArray()
         {
-            int[] src = { };
+            int[] src = {  };
             Span<int> dst = new int[3] { 99, 100, 101 };
 
             src.CopyTo(dst);
             int[] expected = { 99, 100, 101 };
             Assert.Equal<int>(expected, dst.ToArray());
 
-            Span<int> dstEmpty = new int[0] { };
+            Span<int> dstEmpty = new int[0] {  };
 
             src.CopyTo(dstEmpty);
-            int[] expectedEmpty = { };
+            int[] expectedEmpty = {  };
             Assert.Equal<int>(expectedEmpty, dstEmpty.ToArray());
         }
 
@@ -178,7 +181,7 @@ namespace System.SpanTests
 
             TestHelpers.AssertThrows<ArgumentException, int>(src, (_src) => _src.CopyTo(dst));
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // CopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // CopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -215,13 +218,18 @@ namespace System.SpanTests
             bool allocatedSecond = false;
             IntPtr memBlockFirst = IntPtr.Zero;
             IntPtr memBlockSecond = IntPtr.Zero;
-
             unsafe
             {
                 try
                 {
-                    allocatedFirst = AllocationHelper.TryAllocNative((IntPtr)bufferSize, out memBlockFirst);
-                    allocatedSecond = AllocationHelper.TryAllocNative((IntPtr)bufferSize, out memBlockSecond);
+                    allocatedFirst = AllocationHelper.TryAllocNative(
+                        (IntPtr)bufferSize,
+                        out memBlockFirst
+                    );
+                    allocatedSecond = AllocationHelper.TryAllocNative(
+                        (IntPtr)bufferSize,
+                        out memBlockSecond
+                    );
 
                     if (allocatedFirst && allocatedSecond)
                     {

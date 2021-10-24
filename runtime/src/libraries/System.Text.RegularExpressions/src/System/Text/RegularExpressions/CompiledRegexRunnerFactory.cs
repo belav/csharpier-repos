@@ -15,7 +15,11 @@ namespace System.Text.RegularExpressions
         private Action<RegexRunner>? _go;
         private Func<RegexRunner, bool>? _findFirstChar;
 
-        public CompiledRegexRunnerFactory(DynamicMethod goMethod, DynamicMethod findFirstCharMethod, int trackcount)
+        public CompiledRegexRunnerFactory(
+            DynamicMethod goMethod,
+            DynamicMethod findFirstCharMethod,
+            int trackcount
+        )
         {
             _goMethod = goMethod;
             _findFirstCharMethod = findFirstCharMethod;
@@ -26,6 +30,7 @@ namespace System.Text.RegularExpressions
             new CompiledRegexRunner(
                 _go ??= _goMethod.CreateDelegate<Action<RegexRunner>>(),
                 _findFirstChar ??= _findFirstCharMethod.CreateDelegate<Func<RegexRunner, bool>>(),
-                _trackcount);
+                _trackcount
+            );
     }
 }

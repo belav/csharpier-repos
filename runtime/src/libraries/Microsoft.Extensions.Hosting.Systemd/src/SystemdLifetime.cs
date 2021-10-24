@@ -14,11 +14,18 @@ namespace Microsoft.Extensions.Hosting.Systemd
         private CancellationTokenRegistration _applicationStartedRegistration;
         private CancellationTokenRegistration _applicationStoppingRegistration;
 
-        public SystemdLifetime(IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, ISystemdNotifier systemdNotifier, ILoggerFactory loggerFactory)
+        public SystemdLifetime(
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            ISystemdNotifier systemdNotifier,
+            ILoggerFactory loggerFactory
+        )
         {
             Environment = environment ?? throw new ArgumentNullException(nameof(environment));
-            ApplicationLifetime = applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
-            SystemdNotifier = systemdNotifier ?? throw new ArgumentNullException(nameof(systemdNotifier));
+            ApplicationLifetime =
+                applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
+            SystemdNotifier =
+                systemdNotifier ?? throw new ArgumentNullException(nameof(systemdNotifier));
             Logger = loggerFactory.CreateLogger("Microsoft.Hosting.Lifetime");
         }
 
@@ -34,16 +41,20 @@ namespace Microsoft.Extensions.Hosting.Systemd
 
         public Task WaitForStartAsync(CancellationToken cancellationToken)
         {
-            _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(state =>
-            {
-                ((SystemdLifetime)state).OnApplicationStarted();
-            },
-            this);
-            _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(state =>
-            {
-                ((SystemdLifetime)state).OnApplicationStopping();
-            },
-            this);
+            _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(
+                state =>
+                {
+                    ((SystemdLifetime)state).OnApplicationStarted();
+                },
+                this
+            );
+            _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(
+                state =>
+                {
+                    ((SystemdLifetime)state).OnApplicationStopping();
+                },
+                this
+            );
 
             // systemd sends SIGTERM to stop the service.
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
@@ -53,8 +64,11 @@ namespace Microsoft.Extensions.Hosting.Systemd
 
         private void OnApplicationStarted()
         {
-            Logger.LogInformation("Application started. Hosting environment: {EnvironmentName}; Content root path: {ContentRoot}",
-                Environment.EnvironmentName, Environment.ContentRootPath);
+            Logger.LogInformation(
+                "Application started. Hosting environment: {EnvironmentName}; Content root path: {ContentRoot}",
+                Environment.EnvironmentName,
+                Environment.ContentRootPath
+            );
 
             SystemdNotifier.Notify(ServiceState.Ready);
         }

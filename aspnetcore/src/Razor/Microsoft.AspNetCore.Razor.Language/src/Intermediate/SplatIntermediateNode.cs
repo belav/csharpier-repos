@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 {
     public sealed class SplatIntermediateNode : IntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public override void Accept(IntermediateNodeVisitor visitor)
         {
@@ -25,7 +26,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
             {
                 throw new ArgumentNullException(nameof(formatter));
             }
-
             // No properties => do nothing
         }
     }

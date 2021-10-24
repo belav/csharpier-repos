@@ -17,8 +17,8 @@ namespace Microsoft.EntityFrameworkCore
     /// </summary>
     public static class CosmosQueryableExtensions
     {
-        internal static readonly MethodInfo WithPartitionKeyMethodInfo
-            = typeof(CosmosQueryableExtensions).GetRequiredDeclaredMethod(nameof(WithPartitionKey));
+        internal static readonly MethodInfo WithPartitionKeyMethodInfo =
+            typeof(CosmosQueryableExtensions).GetRequiredDeclaredMethod(nameof(WithPartitionKey));
 
         /// <summary>
         ///     Specify the partition key for partition used for the query. Required when using
@@ -30,21 +30,22 @@ namespace Microsoft.EntityFrameworkCore
         /// <returns> A new query with the set partition key. </returns>
         public static IQueryable<TEntity> WithPartitionKey<TEntity>(
             this IQueryable<TEntity> source,
-            [NotParameterized] string partitionKey)
-            where TEntity : class
+            [NotParameterized] string partitionKey
+        ) where TEntity : class
         {
             Check.NotNull(source, nameof(source));
             Check.NotNull(partitionKey, nameof(partitionKey));
 
-            return
-                source.Provider is EntityQueryProvider
-                    ? source.Provider.CreateQuery<TEntity>(
-                        Expression.Call(
-                            instance: null,
-                            method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                            source.Expression,
-                            Expression.Constant(partitionKey)))
-                    : source;
+            return source.Provider is EntityQueryProvider
+              ? source.Provider.CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: WithPartitionKeyMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        source.Expression,
+                        Expression.Constant(partitionKey)
+                    )
+                )
+              : source;
         }
     }
 }

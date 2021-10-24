@@ -32,7 +32,10 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
             var services = TestIdentityFactory.CreateTestServices();
             services.AddEntityFrameworkSqlite();
             services.AddSingleton(InMemoryContext.Create(_fixture.Connection));
-            services.AddTransient<IRoleStore<IdentityRole>, RoleStore<IdentityRole, InMemoryContext>>();
+            services.AddTransient<
+                IRoleStore<IdentityRole>,
+                RoleStore<IdentityRole, InMemoryContext>
+            >();
             services.AddSingleton<RoleManager<IdentityRole>>();
             var provider = services.BuildServiceProvider();
             var manager = provider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -45,27 +48,64 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
         {
             var store = new RoleStore<IdentityRole>(InMemoryContext.Create(_fixture.Connection));
             store.Dispose();
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.FindByIdAsync(null));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.FindByNameAsync(null));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.GetRoleIdAsync(null));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.GetRoleNameAsync(null));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.SetRoleNameAsync(null, null));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.CreateAsync(null));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.UpdateAsync(null));
-            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.DeleteAsync(null));
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await store.FindByIdAsync(null)
+            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await store.FindByNameAsync(null)
+            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await store.GetRoleIdAsync(null)
+            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await store.GetRoleNameAsync(null)
+            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await store.SetRoleNameAsync(null, null)
+            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await store.CreateAsync(null)
+            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await store.UpdateAsync(null)
+            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                async () => await store.DeleteAsync(null)
+            );
         }
 
         [Fact]
         public async Task RoleStorePublicNullCheckTest()
         {
-            Assert.Throws<ArgumentNullException>("context", () => new RoleStore<IdentityRole>(null));
+            Assert.Throws<ArgumentNullException>(
+                "context",
+                () => new RoleStore<IdentityRole>(null)
+            );
             var store = new RoleStore<IdentityRole>(InMemoryContext.Create(_fixture.Connection));
-            await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await store.GetRoleIdAsync(null));
-            await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await store.GetRoleNameAsync(null));
-            await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await store.SetRoleNameAsync(null, null));
-            await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await store.CreateAsync(null));
-            await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await store.UpdateAsync(null));
-            await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await store.DeleteAsync(null));
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "role",
+                async () => await store.GetRoleIdAsync(null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "role",
+                async () => await store.GetRoleNameAsync(null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "role",
+                async () => await store.SetRoleNameAsync(null, null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "role",
+                async () => await store.CreateAsync(null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "role",
+                async () => await store.UpdateAsync(null)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                "role",
+                async () => await store.DeleteAsync(null)
+            );
         }
 
         [Fact]

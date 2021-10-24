@@ -30,14 +30,20 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
         /// Creates a new instance of <see cref="BlobLoggerProvider"/>
         /// </summary>
         /// <param name="options">The options to use when creating a provider.</param>
-        [SuppressMessage("ApiDesign", "RS0022:Constructor make noninheritable base class inheritable", Justification = "Required for backwards compatibility")]
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0022:Constructor make noninheritable base class inheritable",
+            Justification = "Required for backwards compatibility"
+        )]
         public BlobLoggerProvider(IOptionsMonitor<AzureBlobLoggerOptions> options)
             : this(options, null)
         {
-            _blobReferenceFactory = name => new BlobAppendReferenceWrapper(
-                options.CurrentValue.ContainerUrl,
-                name,
-                _httpClient);
+            _blobReferenceFactory = name =>
+                new BlobAppendReferenceWrapper(
+                    options.CurrentValue.ContainerUrl,
+                    name,
+                    _httpClient
+                );
         }
 
         /// <summary>
@@ -47,8 +53,8 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
         /// <param name="options">Options to be used in creating a logger.</param>
         internal BlobLoggerProvider(
             IOptionsMonitor<AzureBlobLoggerOptions> options,
-            Func<string, ICloudAppendBlob> blobReferenceFactory) :
-            base(options)
+            Func<string, ICloudAppendBlob> blobReferenceFactory
+        ) : base(options)
         {
             var value = options.CurrentValue;
             _appName = value.ApplicationName;
@@ -57,13 +63,17 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
             _httpClient = new HttpClient();
         }
 
-        internal override async Task WriteMessagesAsync(IEnumerable<LogMessage> messages, CancellationToken cancellationToken)
+        internal override async Task WriteMessagesAsync(
+            IEnumerable<LogMessage> messages,
+            CancellationToken cancellationToken
+        )
         {
             var eventGroups = messages.GroupBy(GetBlobKey);
             foreach (var eventGroup in eventGroups)
             {
                 var key = eventGroup.Key;
-                var blobName = $"{_appName}/{key.Year}/{key.Month:00}/{key.Day:00}/{key.Hour:00}/{_fileName}";
+                var blobName =
+                    $"{_appName}/{key.Year}/{key.Month:00}/{key.Day:00}/{key.Hour:00}/{_fileName}";
 
                 var blob = _blobReferenceFactory(blobName);
 
@@ -85,10 +95,7 @@ namespace Microsoft.Extensions.Logging.AzureAppServices
 
         private (int Year, int Month, int Day, int Hour) GetBlobKey(LogMessage e)
         {
-            return (e.Timestamp.Year,
-                e.Timestamp.Month,
-                e.Timestamp.Day,
-                e.Timestamp.Hour);
+            return (e.Timestamp.Year, e.Timestamp.Month, e.Timestamp.Day, e.Timestamp.Hour);
         }
     }
 }

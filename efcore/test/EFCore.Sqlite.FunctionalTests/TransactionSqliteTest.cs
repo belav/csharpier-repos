@@ -6,21 +6,21 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class TransactionSqliteTest : TransactionTestBase<TransactionSqliteTest.TransactionSqliteFixture>
+    public class TransactionSqliteTest
+        : TransactionTestBase<TransactionSqliteTest.TransactionSqliteFixture>
     {
-        public TransactionSqliteTest(TransactionSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public TransactionSqliteTest(TransactionSqliteFixture fixture) : base(fixture) { }
 
-        protected override bool SnapshotSupported
-            => false;
+        protected override bool SnapshotSupported => false;
 
         protected override DbContext CreateContextWithConnectionString()
         {
-            var options = Fixture.AddOptions(
-                    new DbContextOptionsBuilder().UseSqlite(TestStore.ConnectionString)
-                        .ConfigureWarnings(w => w.Log(RelationalEventId.AmbientTransactionWarning)))
+            var options = Fixture
+                .AddOptions(
+                    new DbContextOptionsBuilder()
+                        .UseSqlite(TestStore.ConnectionString)
+                        .ConfigureWarnings(w => w.Log(RelationalEventId.AmbientTransactionWarning))
+                )
                 .UseInternalServiceProvider(Fixture.ServiceProvider);
 
             return new DbContext(options.Options);
@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore
 
         public class TransactionSqliteFixture : TransactionFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqliteTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqliteTestStoreFactory.Instance;
 
             public override void Reseed()
             {
@@ -41,8 +41,9 @@ namespace Microsoft.EntityFrameworkCore
                 Seed(context);
             }
 
-            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-                => base.AddOptions(builder)
+            public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+                base
+                    .AddOptions(builder)
                     .ConfigureWarnings(w => w.Log(RelationalEventId.AmbientTransactionWarning));
         }
     }

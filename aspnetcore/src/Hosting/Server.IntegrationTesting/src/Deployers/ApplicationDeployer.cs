@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
         private PublishedApplication _publishedApplication;
 
-        public ApplicationDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
+        public ApplicationDeployer(
+            DeploymentParameters deploymentParameters,
+            ILoggerFactory loggerFactory
+        )
         {
             DeploymentParameters = deploymentParameters;
             LoggerFactory = loggerFactory;
@@ -37,12 +40,19 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         {
             if (DeploymentParameters.ServerType == ServerType.None)
             {
-                throw new ArgumentException($"Invalid ServerType '{DeploymentParameters.ServerType}'.");
+                throw new ArgumentException(
+                    $"Invalid ServerType '{DeploymentParameters.ServerType}'."
+                );
             }
 
-            if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.None && !string.IsNullOrEmpty(DeploymentParameters.TargetFramework))
+            if (
+                DeploymentParameters.RuntimeFlavor == RuntimeFlavor.None
+                && !string.IsNullOrEmpty(DeploymentParameters.TargetFramework)
+            )
             {
-                DeploymentParameters.RuntimeFlavor = GetRuntimeFlavor(DeploymentParameters.TargetFramework);
+                DeploymentParameters.RuntimeFlavor = GetRuntimeFlavor(
+                    DeploymentParameters.TargetFramework
+                );
             }
 
             if (DeploymentParameters.ApplicationPublisher == null)
@@ -54,12 +64,15 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
                 if (!Directory.Exists(DeploymentParameters.ApplicationPath))
                 {
-                    throw new DirectoryNotFoundException($"Application path {DeploymentParameters.ApplicationPath} does not exist.");
+                    throw new DirectoryNotFoundException(
+                        $"Application path {DeploymentParameters.ApplicationPath} does not exist."
+                    );
                 }
 
                 if (string.IsNullOrEmpty(DeploymentParameters.ApplicationName))
                 {
-                    DeploymentParameters.ApplicationName = new DirectoryInfo(DeploymentParameters.ApplicationPath).Name;
+                    DeploymentParameters.ApplicationName =
+                        new DirectoryInfo(DeploymentParameters.ApplicationPath).Name;
                 }
             }
         }
@@ -83,8 +96,13 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
 
         protected void DotnetPublish(string publishRoot = null)
         {
-            var publisher = DeploymentParameters.ApplicationPublisher ?? new ApplicationPublisher(DeploymentParameters.ApplicationPath);
-            _publishedApplication = publisher.Publish(DeploymentParameters, Logger).GetAwaiter().GetResult();
+            var publisher =
+                DeploymentParameters.ApplicationPublisher
+                ?? new ApplicationPublisher(DeploymentParameters.ApplicationPath);
+            _publishedApplication = publisher
+                .Publish(DeploymentParameters, Logger)
+                .GetAwaiter()
+                .GetResult();
             DeploymentParameters.PublishedApplicationRootPath = _publishedApplication.Path;
         }
 
@@ -95,8 +113,9 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 if (DeploymentParameters.PreservePublishedApplicationForDebugging)
                 {
                     Logger.LogWarning(
-                        "Skipping deleting the locally published folder as property " +
-                        $"'{nameof(DeploymentParameters.PreservePublishedApplicationForDebugging)}' is set to 'true'.");
+                        "Skipping deleting the locally published folder as property "
+                            + $"'{nameof(DeploymentParameters.PreservePublishedApplicationForDebugging)}' is set to 'true'."
+                    );
                 }
                 else
                 {
@@ -111,7 +130,9 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             // We expect x64 dotnet.exe to be on the path but we have to go searching for the x86 version.
             if (DotNetCommands.IsRunningX86OnX64(DeploymentParameters.RuntimeArchitecture))
             {
-                executableName = DotNetCommands.GetDotNetExecutable(DeploymentParameters.RuntimeArchitecture);
+                executableName = DotNetCommands.GetDotNetExecutable(
+                    DeploymentParameters.RuntimeArchitecture
+                );
                 if (!File.Exists(executableName))
                 {
                     throw new Exception($"Unable to find '{executableName}'.'");
@@ -131,11 +152,17 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 hostProcess.KillTree();
                 if (!hostProcess.HasExited)
                 {
-                    Logger.LogWarning("Unable to terminate the host process with process Id '{processId}", hostProcess.Id);
+                    Logger.LogWarning(
+                        "Unable to terminate the host process with process Id '{processId}",
+                        hostProcess.Id
+                    );
                 }
                 else
                 {
-                    Logger.LogInformation("Successfully terminated host process with process Id '{processId}'", hostProcess.Id);
+                    Logger.LogInformation(
+                        "Successfully terminated host process with process Id '{processId}'",
+                        hostProcess.Id
+                    );
                 }
             }
             else
@@ -144,11 +171,23 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             }
         }
 
-        protected void AddEnvironmentVariablesToProcess(ProcessStartInfo startInfo, IDictionary<string, string> environmentVariables)
+        protected void AddEnvironmentVariablesToProcess(
+            ProcessStartInfo startInfo,
+            IDictionary<string, string> environmentVariables
+        )
         {
             var environment = startInfo.Environment;
-            ProcessHelpers.SetEnvironmentVariable(environment, "ASPNETCORE_ENVIRONMENT", DeploymentParameters.EnvironmentName, Logger);
-            ProcessHelpers.AddEnvironmentVariablesToProcess(startInfo, environmentVariables, Logger);
+            ProcessHelpers.SetEnvironmentVariable(
+                environment,
+                "ASPNETCORE_ENVIRONMENT",
+                DeploymentParameters.EnvironmentName,
+                Logger
+            );
+            ProcessHelpers.AddEnvironmentVariablesToProcess(
+                startInfo,
+                environmentVariables,
+                Logger
+            );
         }
 
         protected void InvokeUserApplicationCleanup()
@@ -164,7 +203,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     }
                     catch (Exception exception)
                     {
-                        Logger.LogWarning("User cleanup code failed with exception : {exception}", exception.Message);
+                        Logger.LogWarning(
+                            "User cleanup code failed with exception : {exception}",
+                            exception.Message
+                        );
                     }
                 }
             }
@@ -192,7 +234,10 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         protected void StopTimer()
         {
             _stopwatch.Stop();
-            Logger.LogInformation("[Time]: Total time taken for this test variation '{t}' seconds", _stopwatch.Elapsed.TotalSeconds);
+            Logger.LogInformation(
+                "[Time]: Total time taken for this test variation '{t}' seconds",
+                _stopwatch.Elapsed.TotalSeconds
+            );
         }
 
         public abstract void Dispose();

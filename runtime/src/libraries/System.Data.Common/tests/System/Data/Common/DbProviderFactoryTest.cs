@@ -25,7 +25,8 @@ namespace System.Data.Tests.Common
 
         public sealed class ProviderFactoryWithExtras : DbProviderFactory
         {
-            public static readonly ProviderFactoryWithExtras Instance = new ProviderFactoryWithExtras();
+            public static readonly ProviderFactoryWithExtras Instance =
+                new ProviderFactoryWithExtras();
             private ProviderFactoryWithExtras() { }
 
             public override DbDataAdapter CreateDataAdapter() => new MyAdapter();
@@ -34,19 +35,25 @@ namespace System.Data.Tests.Common
 
         public sealed class ProviderFactoryWithoutExtras : DbProviderFactory
         {
-            public static readonly ProviderFactoryWithoutExtras Instance = new ProviderFactoryWithoutExtras();
+            public static readonly ProviderFactoryWithoutExtras Instance =
+                new ProviderFactoryWithoutExtras();
             private ProviderFactoryWithoutExtras() { }
         }
 
-        private class MyAdapter : DbDataAdapter {}
+        private class MyAdapter : DbDataAdapter { }
 
         private class MyCommandBuilder : DbCommandBuilder
         {
             protected override string GetParameterPlaceholder(int parameterOrdinal) => null;
             protected override string GetParameterName(string parameterName) => null;
             protected override string GetParameterName(int parameterOrdinal) => null;
-            protected override void ApplyParameterInfo(DbParameter parameter, DataRow row, StatementType statementType, bool whereClause) {}
-            protected override void SetRowUpdatingHandler(DbDataAdapter adapter) {}
+            protected override void ApplyParameterInfo(
+                DbParameter parameter,
+                DataRow row,
+                StatementType statementType,
+                bool whereClause
+            ) { }
+            protected override void SetRowUpdatingHandler(DbDataAdapter adapter) { }
         }
     }
 }

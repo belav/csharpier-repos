@@ -42,8 +42,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ITempDataDictionaryFactory tempDataFactory,
             DiagnosticListener diagnosticListener,
             ILoggerFactory loggerFactory,
-            IModelMetadataProvider modelMetadataProvider)
-            : base(viewOptions, writerFactory, viewEngine, tempDataFactory, diagnosticListener, modelMetadataProvider)
+            IModelMetadataProvider modelMetadataProvider
+        )
+            : base(
+                viewOptions,
+                writerFactory,
+                viewEngine,
+                tempDataFactory,
+                diagnosticListener,
+                modelMetadataProvider
+            )
         {
             if (loggerFactory == null)
             {
@@ -82,7 +90,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var stopwatch = ValueStopwatch.StartNew();
 
-            var result = viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
+            var result = viewEngine.GetView(
+                executingFilePath: null,
+                viewPath: viewName,
+                isMainPage: true
+            );
             var originalResult = result;
             if (!result.Success)
             {
@@ -126,7 +138,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             return result;
         }
 
-        private void OutputDiagnostics(ActionContext actionContext, ViewResult viewResult, string viewName, ViewEngineResult result)
+        private void OutputDiagnostics(
+            ActionContext actionContext,
+            ViewResult viewResult,
+            string viewName,
+            ViewEngineResult result
+        )
         {
             if (result.Success)
             {
@@ -135,7 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     isMainPage: true,
                     viewResult,
                     viewName,
-                    view: result.View);
+                    view: result.View
+                );
             }
             else
             {
@@ -144,7 +162,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     isMainPage: true,
                     viewResult,
                     viewName,
-                    searchedLocations: result.SearchedLocations);
+                    searchedLocations: result.SearchedLocations
+                );
             }
         }
 
@@ -175,7 +194,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     result.ViewData,
                     result.TempData,
                     result.ContentType,
-                    result.StatusCode);
+                    result.StatusCode
+                );
             }
 
             Logger.ViewResultExecuted(viewEngineResult.ViewName, stopwatch.GetElapsedTime());
@@ -195,14 +215,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             var actionDescriptor = context.ActionDescriptor;
             string? normalizedValue = null;
-            if (actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value) &&
-                !string.IsNullOrEmpty(value))
+            if (
+                actionDescriptor.RouteValues.TryGetValue(ActionNameKey, out var value)
+                && !string.IsNullOrEmpty(value)
+            )
             {
                 normalizedValue = value;
             }
 
             var stringRouteValue = Convert.ToString(routeValue, CultureInfo.InvariantCulture);
-            if (string.Equals(normalizedValue, stringRouteValue, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(normalizedValue, stringRouteValue, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return normalizedValue;
             }

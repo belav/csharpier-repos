@@ -16,22 +16,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 {
     [ExportLspRequestHandlerProvider(StringConstants.XamlLanguageName), Shared]
     [ProvidesMethod(MSLSPMethods.DocumentPullDiagnosticName)]
-    internal class DocumentPullDiagnosticHandler : AbstractPullDiagnosticHandler<DocumentDiagnosticsParams, DiagnosticReport>
+    internal class DocumentPullDiagnosticHandler
+        : AbstractPullDiagnosticHandler<DocumentDiagnosticsParams, DiagnosticReport>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DocumentPullDiagnosticHandler(
-            IXamlPullDiagnosticService xamlPullDiagnosticService)
-            : base(xamlPullDiagnosticService)
-        { }
+        public DocumentPullDiagnosticHandler(IXamlPullDiagnosticService xamlPullDiagnosticService)
+            : base(xamlPullDiagnosticService) { }
 
         public override string Method => MSLSPMethods.DocumentPullDiagnosticName;
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(DocumentDiagnosticsParams request)
-            => request.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            DocumentDiagnosticsParams request
+        ) => request.TextDocument;
 
-        protected override DiagnosticReport CreateReport(TextDocumentIdentifier? identifier, VSDiagnostic[]? diagnostics, string? resultId)
-            => new DiagnosticReport { Diagnostics = diagnostics, ResultId = resultId };
+        protected override DiagnosticReport CreateReport(
+            TextDocumentIdentifier? identifier,
+            VSDiagnostic[]? diagnostics,
+            string? resultId
+        ) => new DiagnosticReport { Diagnostics = diagnostics, ResultId = resultId };
 
         protected override ImmutableArray<Document> GetDocuments(RequestContext context)
         {
@@ -40,13 +43,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             // Note: context.Document may be null in the case where the client is asking about a document that we have
             // since removed from the workspace.  In this case, we don't really have anything to process.
             // GetPreviousResults will be used to properly realize this and notify the client that the doc is gone.
-            return context.Document == null ? ImmutableArray<Document>.Empty : ImmutableArray.Create(context.Document);
+            return context.Document == null
+              ? ImmutableArray<Document>.Empty
+              : ImmutableArray.Create(context.Document);
         }
 
-        protected override DiagnosticParams[]? GetPreviousResults(DocumentDiagnosticsParams diagnosticsParams)
-           => new[] { diagnosticsParams };
+        protected override DiagnosticParams[]? GetPreviousResults(
+            DocumentDiagnosticsParams diagnosticsParams
+        ) => new[] { diagnosticsParams };
 
-        protected override IProgress<DiagnosticReport[]>? GetProgress(DocumentDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PartialResultToken;
+        protected override IProgress<DiagnosticReport[]>? GetProgress(
+            DocumentDiagnosticsParams diagnosticsParams
+        ) => diagnosticsParams.PartialResultToken;
     }
 }

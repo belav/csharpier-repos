@@ -16,10 +16,17 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
         // When running both inner and outer loop together, dump only once
         private static bool s_dumpedRuntimeInfo = false;
 
-        private static readonly bool s_isInHelix = Environment.GetEnvironmentVariables().Keys.Cast<string>().Where(key => key.StartsWith("HELIX")).Any();
+        private static readonly bool s_isInHelix = Environment
+            .GetEnvironmentVariables()
+            .Keys.Cast<string>()
+            .Where(key => key.StartsWith("HELIX"))
+            .Any();
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "throws PNSE when binariesLocation is not an empty string.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "throws PNSE when binariesLocation is not an empty string."
+        )]
         public void DumpRuntimeInformationToConsole()
         {
             if (s_dumpedRuntimeInfo || !s_isInHelix)
@@ -35,21 +42,33 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             string osv = Environment.OSVersion.ToString();
             string osa = RuntimeInformation.OSArchitecture.ToString();
             string rid = RuntimeInformation.RuntimeIdentifier;
-            Console.WriteLine($"### OS: Distro={dvs} Description={osd} Version={osv} Arch={osa} Rid={rid}");
+            Console.WriteLine(
+                $"### OS: Distro={dvs} Description={osd} Version={osv} Arch={osa} Rid={rid}"
+            );
 
             string lcr = PlatformDetection.LibcRelease;
             string lcv = PlatformDetection.LibcVersion;
             Console.WriteLine($"### LIBC: Release={lcr} Version={lcv}");
 
-            Console.WriteLine($"### FRAMEWORK: Version={Environment.Version} Description={RuntimeInformation.FrameworkDescription.Trim()}");
+            Console.WriteLine(
+                $"### FRAMEWORK: Version={Environment.Version} Description={RuntimeInformation.FrameworkDescription.Trim()}"
+            );
 
             string binariesLocation = Path.GetDirectoryName(typeof(object).Assembly.Location);
-            string binariesLocationFormat = PlatformDetection.IsInAppContainer ? "Unknown" : new DriveInfo(binariesLocation).DriveFormat;
-            Console.WriteLine($"### BINARIES: {binariesLocation} (drive format {binariesLocationFormat})");
+            string binariesLocationFormat = PlatformDetection.IsInAppContainer
+                ? "Unknown"
+                : new DriveInfo(binariesLocation).DriveFormat;
+            Console.WriteLine(
+                $"### BINARIES: {binariesLocation} (drive format {binariesLocationFormat})"
+            );
 
             string tempPathLocation = Path.GetTempPath();
-            string tempPathLocationFormat = PlatformDetection.IsInAppContainer ? "Unknown" : new DriveInfo(tempPathLocation).DriveFormat;
-            Console.WriteLine($"### TEMP PATH: {tempPathLocation} (drive format {tempPathLocationFormat})");
+            string tempPathLocationFormat = PlatformDetection.IsInAppContainer
+                ? "Unknown"
+                : new DriveInfo(tempPathLocation).DriveFormat;
+            Console.WriteLine(
+                $"### TEMP PATH: {tempPathLocation} (drive format {tempPathLocationFormat})"
+            );
 
             Console.WriteLine($"### CURRENT DIRECTORY: {Environment.CurrentDirectory}");
 
@@ -70,9 +89,13 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             {
                 var sb = new StringBuilder();
                 sb.AppendLine("### PROCESS INFORMATION:");
-                sb.AppendFormat($"###\tArchitecture: {RuntimeInformation.ProcessArchitecture.ToString()}").AppendLine();
-                foreach (string prop in new string[]
-                {
+                sb.AppendFormat(
+                        $"###\tArchitecture: {RuntimeInformation.ProcessArchitecture.ToString()}"
+                    )
+                    .AppendLine();
+                foreach (
+                    string prop in new string[]
+                    {
                         nameof(p.BasePriority),
                         nameof(p.HandleCount),
                         nameof(p.Id),
@@ -101,7 +124,8 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                         nameof(p.UserProcessorTime),
                         nameof(p.VirtualMemorySize64),
                         nameof(p.WorkingSet64),
-                })
+                    }
+                )
                 {
                     sb.Append($"###\t{prop}: ");
                     try
@@ -120,18 +144,21 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             if (osd.Contains("Linux"))
             {
                 // Dump several procfs files and /etc/os-release
-                foreach (string path in new string[] {
-                    "/proc/self/mountinfo",
-                    "/proc/self/cgroup",
-                    "/proc/self/limits",
-                    "/etc/os-release",
-                    "/etc/sysctl.conf",
-                    "/proc/meminfo",
-                    "/proc/sys/vm/oom_kill_allocating_task",
-                    "/proc/sys/kernel/core_pattern",
-                    "/proc/sys/kernel/core_uses_pid",
-                    "/proc/sys/kernel/coredump_filter"
-                })
+                foreach (
+                    string path in new string[]
+                    {
+                        "/proc/self/mountinfo",
+                        "/proc/self/cgroup",
+                        "/proc/self/limits",
+                        "/etc/os-release",
+                        "/etc/sysctl.conf",
+                        "/proc/meminfo",
+                        "/proc/sys/vm/oom_kill_allocating_task",
+                        "/proc/sys/kernel/core_pattern",
+                        "/proc/sys/kernel/core_uses_pid",
+                        "/proc/sys/kernel/coredump_filter"
+                    }
+                )
                 {
                     Console.WriteLine($"### CONTENTS OF \"{path}\":");
                     try
@@ -164,7 +191,10 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
 
         [Fact]
         [OuterLoop]
-        [SkipOnPlatform(TestPlatforms.Browser, "throws PNSE when binariesLocation is not an empty string.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "throws PNSE when binariesLocation is not an empty string."
+        )]
         public void DumpRuntimeInformationToConsoleOuter()
         {
             // Outer loop runs don't run inner loop tests.
@@ -176,8 +206,14 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
         [SkipOnTargetFramework(~TargetFrameworkMonikers.Netcoreapp)]
         public void VerifyRuntimeNameOnNetCoreApp()
         {
-            Assert.True(RuntimeInformation.FrameworkDescription.StartsWith(".NET"), RuntimeInformation.FrameworkDescription);
-            Assert.Same(RuntimeInformation.FrameworkDescription, RuntimeInformation.FrameworkDescription);
+            Assert.True(
+                RuntimeInformation.FrameworkDescription.StartsWith(".NET"),
+                RuntimeInformation.FrameworkDescription
+            );
+            Assert.Same(
+                RuntimeInformation.FrameworkDescription,
+                RuntimeInformation.FrameworkDescription
+            );
         }
 
         [Fact]
@@ -194,34 +230,54 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
             Assert.False(RuntimeInformation.OSDescription.EndsWith(" "));
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.Windows)]  // Checks Windows name in RuntimeInformation
+        [Fact, PlatformSpecific(TestPlatforms.Windows)] // Checks Windows name in RuntimeInformation
         public void VerifyWindowsName()
         {
-            Assert.Contains("windows", RuntimeInformation.OSDescription, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(
+                "windows",
+                RuntimeInformation.OSDescription,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.Linux)]  // Checks Linux name in RuntimeInformation
+        [Fact, PlatformSpecific(TestPlatforms.Linux)] // Checks Linux name in RuntimeInformation
         public void VerifyLinuxName()
         {
-            Assert.Contains("linux", RuntimeInformation.OSDescription, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(
+                "linux",
+                RuntimeInformation.OSDescription,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.NetBSD)]  // Checks NetBSD name in RuntimeInformation
+        [Fact, PlatformSpecific(TestPlatforms.NetBSD)] // Checks NetBSD name in RuntimeInformation
         public void VerifyNetBSDName()
         {
-            Assert.Contains("netbsd", RuntimeInformation.OSDescription, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(
+                "netbsd",
+                RuntimeInformation.OSDescription,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.FreeBSD)]  // Checks FreeBSD name in RuntimeInformation
+        [Fact, PlatformSpecific(TestPlatforms.FreeBSD)] // Checks FreeBSD name in RuntimeInformation
         public void VerifyFreeBSDName()
         {
-            Assert.Contains("FreeBSD", RuntimeInformation.OSDescription, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(
+                "FreeBSD",
+                RuntimeInformation.OSDescription,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
-        [Fact, PlatformSpecific(TestPlatforms.OSX)]  // Checks OSX name in RuntimeInformation
+        [Fact, PlatformSpecific(TestPlatforms.OSX)] // Checks OSX name in RuntimeInformation
         public void VerifyOSXName()
         {
-            Assert.Contains("darwin", RuntimeInformation.OSDescription, StringComparison.OrdinalIgnoreCase);
+            Assert.Contains(
+                "darwin",
+                RuntimeInformation.OSDescription,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
     }
 }

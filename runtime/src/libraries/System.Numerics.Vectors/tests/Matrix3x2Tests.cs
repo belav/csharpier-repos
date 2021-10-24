@@ -34,7 +34,10 @@ namespace System.Numerics.Tests
             Matrix3x2 val = new Matrix3x2();
             val.M11 = val.M22 = 1.0f;
 
-            Assert.True(MathHelper.Equal(val, Matrix3x2.Identity), "Matrix3x2.Indentity was not set correctly.");
+            Assert.True(
+                MathHelper.Equal(val, Matrix3x2.Identity),
+                "Matrix3x2.Indentity was not set correctly."
+            );
         }
 
         // A test for Determinant
@@ -69,7 +72,10 @@ namespace System.Numerics.Tests
             float t = 1.0f / detI;
 
             // only accurate to 3 precision
-            Assert.True(System.Math.Abs(detA - t) < 1e-3, "Matrix3x2.Determinant was not set correctly.");
+            Assert.True(
+                System.Math.Abs(detA - t) < 1e-3,
+                "Matrix3x2.Determinant was not set correctly."
+            );
 
             // sanity check against 4x4 version
             Assert.Equal(new Matrix4x4(a).GetDeterminant(), detA);
@@ -95,10 +101,16 @@ namespace System.Numerics.Tests
             Matrix3x2 actual;
 
             Assert.True(Matrix3x2.Invert(mtx, out actual));
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.Invert did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Matrix3x2.Invert did not return the expected value."
+            );
 
             Matrix3x2 i = mtx * actual;
-            Assert.True(MathHelper.Equal(i, Matrix3x2.Identity), "Matrix3x2.Invert did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(i, Matrix3x2.Identity),
+                "Matrix3x2.Invert did not return the expected value."
+            );
         }
 
         // A test for Invert (Matrix3x2)
@@ -156,9 +168,10 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix3x2InvertAffineTest()
         {
-            Matrix3x2 mtx = Matrix3x2.CreateRotation(2) *
-                            Matrix3x2.CreateScale(23, -42) *
-                            Matrix3x2.CreateTranslation(17, 53);
+            Matrix3x2 mtx =
+                Matrix3x2.CreateRotation(2)
+                * Matrix3x2.CreateScale(23, -42)
+                * Matrix3x2.CreateTranslation(17, 53);
 
             Matrix3x2 actual;
             Assert.True(Matrix3x2.Invert(mtx, out actual));
@@ -181,7 +194,10 @@ namespace System.Numerics.Tests
 
             Matrix3x2 actual;
             actual = Matrix3x2.CreateRotation(radians);
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.CreateRotation did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Matrix3x2.CreateRotation did not return the expected value."
+            );
         }
 
         // A test for CreateRotation (float, Vector2f)
@@ -196,7 +212,10 @@ namespace System.Numerics.Tests
             Assert.True(MathHelper.Equal(rotateAroundZero, rotateAroundZeroExpected));
 
             Matrix3x2 rotateAroundCenter = Matrix3x2.CreateRotation(radians, center);
-            Matrix3x2 rotateAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateRotation(radians) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2 rotateAroundCenterExpected =
+                Matrix3x2.CreateTranslation(-center)
+                * Matrix3x2.CreateRotation(radians)
+                * Matrix3x2.CreateTranslation(center);
             Assert.True(MathHelper.Equal(rotateAroundCenter, rotateAroundCenterExpected));
         }
 
@@ -288,17 +307,24 @@ namespace System.Numerics.Tests
             a.M32 = 6.0f;
 
             float detA = a.GetDeterminant();
-            Assert.True(MathHelper.Equal(detA, 0.0f), "Matrix3x2.Invert did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(detA, 0.0f),
+                "Matrix3x2.Invert did not return the expected value."
+            );
 
             Matrix3x2 actual;
             Assert.False(Matrix3x2.Invert(a, out actual));
 
             // all the elements in Actual is NaN
             Assert.True(
-                float.IsNaN(actual.M11) && float.IsNaN(actual.M12) &&
-                float.IsNaN(actual.M21) && float.IsNaN(actual.M22) &&
-                float.IsNaN(actual.M31) && float.IsNaN(actual.M32)
-                , "Matrix3x2.Invert did not return the expected value.");
+                float.IsNaN(actual.M11)
+                    && float.IsNaN(actual.M12)
+                    && float.IsNaN(actual.M21)
+                    && float.IsNaN(actual.M22)
+                    && float.IsNaN(actual.M31)
+                    && float.IsNaN(actual.M32),
+                "Matrix3x2.Invert did not return the expected value."
+            );
         }
 
         // A test for Lerp (Matrix3x2, Matrix3x2, float)
@@ -329,7 +355,10 @@ namespace System.Numerics.Tests
 
             Matrix3x2 actual;
             actual = Matrix3x2.Lerp(a, b, t);
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.Lerp did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Matrix3x2.Lerp did not return the expected value."
+            );
         }
 
         // A test for operator - (Matrix3x2)
@@ -347,7 +376,10 @@ namespace System.Numerics.Tests
             expected.M32 = -6.0f;
 
             Matrix3x2 actual = -a;
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator - did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Matrix3x2.operator - did not return the expected value."
+            );
         }
 
         // A test for operator - (Matrix3x2, Matrix3x2)
@@ -365,7 +397,10 @@ namespace System.Numerics.Tests
             expected.M32 = a.M32 - b.M32;
 
             Matrix3x2 actual = a - b;
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator - did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Matrix3x2.operator - did not return the expected value."
+            );
         }
 
         // A test for operator * (Matrix3x2, Matrix3x2)
@@ -386,10 +421,15 @@ namespace System.Numerics.Tests
             expected.M32 = a.M31 * b.M12 + a.M32 * b.M22 + b.M32;
 
             Matrix3x2 actual = a * b;
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Matrix3x2.operator * did not return the expected value."
+            );
 
             // Sanity check by comparison with 4x4 multiply.
-            a = Matrix3x2.CreateRotation(MathHelper.ToRadians(30)) * Matrix3x2.CreateTranslation(23, 42);
+            a =
+                Matrix3x2.CreateRotation(MathHelper.ToRadians(30))
+                * Matrix3x2.CreateTranslation(23, 42);
             b = Matrix3x2.CreateScale(3, 7) * Matrix3x2.CreateTranslation(666, -1);
 
             actual = a * b;
@@ -399,7 +439,10 @@ namespace System.Numerics.Tests
             Matrix4x4 expected44 = a44 * b44;
             Matrix4x4 actual44 = new Matrix4x4(actual);
 
-            Assert.True(MathHelper.Equal(expected44, actual44), "Matrix3x2.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected44, actual44),
+                "Matrix3x2.operator * did not return the expected value."
+            );
         }
 
         // A test for operator * (Matrix3x2, Matrix3x2)
@@ -421,7 +464,10 @@ namespace System.Numerics.Tests
             Matrix3x2 expected = a;
             Matrix3x2 actual = a * b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator * did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Matrix3x2.operator * did not return the expected value."
+            );
         }
 
         // A test for operator + (Matrix3x2, Matrix3x2)
@@ -443,7 +489,10 @@ namespace System.Numerics.Tests
 
             actual = a + b;
 
-            Assert.True(MathHelper.Equal(expected, actual), "Matrix3x2.operator + did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected, actual),
+                "Matrix3x2.operator + did not return the expected value."
+            );
         }
 
         // A test for ToString ()
@@ -458,9 +507,7 @@ namespace System.Numerics.Tests
             a.M31 = 31.0f;
             a.M32 = 32.0f;
 
-            string expected = "{ {M11:11 M12:-12} " +
-                                "{M21:21 M22:22} " +
-                                "{M31:31 M32:32} }";
+            string expected = "{ {M11:11 M12:-12} " + "{M21:21 M22:22} " + "{M31:31 M32:32} }";
             string actual;
 
             actual = a.ToString();
@@ -527,9 +574,14 @@ namespace System.Numerics.Tests
         public void Matrix3x2GetHashCodeTest()
         {
             Matrix3x2 target = GenerateIncrementalMatrixNumber();
-            int expected = HashCode.Combine(target.M11, target.M12,
-                                     target.M21, target.M22,
-                                     target.M31, target.M32);
+            int expected = HashCode.Combine(
+                target.M11,
+                target.M12,
+                target.M21,
+                target.M22,
+                target.M31,
+                target.M32
+            );
             int actual;
 
             actual = target.GetHashCode();
@@ -558,7 +610,9 @@ namespace System.Numerics.Tests
             Assert.Equal(expected, actual);
 
             // Sanity check by comparison with 4x4 multiply.
-            a = Matrix3x2.CreateRotation(MathHelper.ToRadians(30)) * Matrix3x2.CreateTranslation(23, 42);
+            a =
+                Matrix3x2.CreateRotation(MathHelper.ToRadians(30))
+                * Matrix3x2.CreateTranslation(23, 42);
             b = Matrix3x2.CreateScale(3, 7) * Matrix3x2.CreateTranslation(666, -1);
 
             actual = Matrix3x2.Multiply(a, b);
@@ -568,7 +622,10 @@ namespace System.Numerics.Tests
             Matrix4x4 expected44 = Matrix4x4.Multiply(a44, b44);
             Matrix4x4 actual44 = new Matrix4x4(actual);
 
-            Assert.True(MathHelper.Equal(expected44, actual44), "Matrix3x2.Multiply did not return the expected value.");
+            Assert.True(
+                MathHelper.Equal(expected44, actual44),
+                "Matrix3x2.Multiply did not return the expected value."
+            );
         }
 
         // A test for Multiply (Matrix3x2, float)
@@ -674,10 +731,7 @@ namespace System.Numerics.Tests
         public void Matrix3x2CreateScaleTest1()
         {
             Vector2 scales = new Vector2(2.0f, 3.0f);
-            Matrix3x2 expected = new Matrix3x2(
-                2.0f, 0.0f,
-                0.0f, 3.0f,
-                0.0f, 0.0f);
+            Matrix3x2 expected = new Matrix3x2(2.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f);
             Matrix3x2 actual = Matrix3x2.CreateScale(scales);
             Assert.Equal(expected, actual);
         }
@@ -694,7 +748,10 @@ namespace System.Numerics.Tests
             Assert.True(MathHelper.Equal(scaleAroundZero, scaleAroundZeroExpected));
 
             Matrix3x2 scaleAroundCenter = Matrix3x2.CreateScale(scale, center);
-            Matrix3x2 scaleAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateScale(scale) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2 scaleAroundCenterExpected =
+                Matrix3x2.CreateTranslation(-center)
+                * Matrix3x2.CreateScale(scale)
+                * Matrix3x2.CreateTranslation(center);
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
@@ -703,10 +760,7 @@ namespace System.Numerics.Tests
         public void Matrix3x2CreateScaleTest2()
         {
             float scale = 2.0f;
-            Matrix3x2 expected = new Matrix3x2(
-                2.0f, 0.0f,
-                0.0f, 2.0f,
-                0.0f, 0.0f);
+            Matrix3x2 expected = new Matrix3x2(2.0f, 0.0f, 0.0f, 2.0f, 0.0f, 0.0f);
             Matrix3x2 actual = Matrix3x2.CreateScale(scale);
             Assert.Equal(expected, actual);
         }
@@ -723,7 +777,10 @@ namespace System.Numerics.Tests
             Assert.True(MathHelper.Equal(scaleAroundZero, scaleAroundZeroExpected));
 
             Matrix3x2 scaleAroundCenter = Matrix3x2.CreateScale(scale, center);
-            Matrix3x2 scaleAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateScale(scale) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2 scaleAroundCenterExpected =
+                Matrix3x2.CreateTranslation(-center)
+                * Matrix3x2.CreateScale(scale)
+                * Matrix3x2.CreateTranslation(center);
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
@@ -733,10 +790,7 @@ namespace System.Numerics.Tests
         {
             float xScale = 2.0f;
             float yScale = 3.0f;
-            Matrix3x2 expected = new Matrix3x2(
-                2.0f, 0.0f,
-                0.0f, 3.0f,
-                0.0f, 0.0f);
+            Matrix3x2 expected = new Matrix3x2(2.0f, 0.0f, 0.0f, 3.0f, 0.0f, 0.0f);
             Matrix3x2 actual = Matrix3x2.CreateScale(xScale, yScale);
             Assert.Equal(expected, actual);
         }
@@ -753,7 +807,10 @@ namespace System.Numerics.Tests
             Assert.True(MathHelper.Equal(scaleAroundZero, scaleAroundZeroExpected));
 
             Matrix3x2 scaleAroundCenter = Matrix3x2.CreateScale(scale.X, scale.Y, center);
-            Matrix3x2 scaleAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateScale(scale.X, scale.Y) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2 scaleAroundCenterExpected =
+                Matrix3x2.CreateTranslation(-center)
+                * Matrix3x2.CreateScale(scale.X, scale.Y)
+                * Matrix3x2.CreateTranslation(center);
             Assert.True(MathHelper.Equal(scaleAroundCenter, scaleAroundCenterExpected));
         }
 
@@ -762,10 +819,7 @@ namespace System.Numerics.Tests
         public void Matrix3x2CreateTranslationTest1()
         {
             Vector2 position = new Vector2(2.0f, 3.0f);
-            Matrix3x2 expected = new Matrix3x2(
-                1.0f, 0.0f,
-                0.0f, 1.0f,
-                2.0f, 3.0f);
+            Matrix3x2 expected = new Matrix3x2(1.0f, 0.0f, 0.0f, 1.0f, 2.0f, 3.0f);
 
             Matrix3x2 actual = Matrix3x2.CreateTranslation(position);
             Assert.Equal(expected, actual);
@@ -778,10 +832,7 @@ namespace System.Numerics.Tests
             float xPosition = 2.0f;
             float yPosition = 3.0f;
 
-            Matrix3x2 expected = new Matrix3x2(
-                1.0f, 0.0f,
-                0.0f, 1.0f,
-                2.0f, 3.0f);
+            Matrix3x2 expected = new Matrix3x2(1.0f, 0.0f, 0.0f, 1.0f, 2.0f, 3.0f);
 
             Matrix3x2 actual = Matrix3x2.CreateTranslation(xPosition, yPosition);
             Assert.Equal(expected, actual);
@@ -805,10 +856,14 @@ namespace System.Numerics.Tests
 
             // Make sure it only modifies expected value of matrix.
             Assert.True(
-                a.M11 == b.M11 && a.M12 == b.M12 &&
-                a.M21 == b.M21 && a.M22 == b.M22 &&
-                a.M31 != b.M31 && a.M32 != b.M32,
-                "Matrix3x2.Translation modified unexpected value of matrix.");
+                a.M11 == b.M11
+                    && a.M12 == b.M12
+                    && a.M21 == b.M21
+                    && a.M22 == b.M22
+                    && a.M31 != b.M31
+                    && a.M32 != b.M32,
+                "Matrix3x2.Translation modified unexpected value of matrix."
+            );
         }
 
         // A test for Equals (Matrix3x2)
@@ -914,7 +969,8 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix3x2CreateSkewCenterTest()
         {
-            float skewX = 1, skewY = 2;
+            float skewX = 1,
+                skewY = 2;
             Vector2 center = new Vector2(23, 42);
 
             Matrix3x2 skewAroundZero = Matrix3x2.CreateSkew(skewX, skewY, Vector2.Zero);
@@ -922,7 +978,10 @@ namespace System.Numerics.Tests
             Assert.True(MathHelper.Equal(skewAroundZero, skewAroundZeroExpected));
 
             Matrix3x2 skewAroundCenter = Matrix3x2.CreateSkew(skewX, skewY, center);
-            Matrix3x2 skewAroundCenterExpected = Matrix3x2.CreateTranslation(-center) * Matrix3x2.CreateSkew(skewX, skewY) * Matrix3x2.CreateTranslation(center);
+            Matrix3x2 skewAroundCenterExpected =
+                Matrix3x2.CreateTranslation(-center)
+                * Matrix3x2.CreateSkew(skewX, skewY)
+                * Matrix3x2.CreateTranslation(center);
             Assert.True(MathHelper.Equal(skewAroundCenter, skewAroundCenterExpected));
         }
 

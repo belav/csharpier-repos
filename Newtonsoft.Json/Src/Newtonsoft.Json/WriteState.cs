@@ -38,32 +38,26 @@ namespace Newtonsoft.Json
         /// Any other <see cref="JsonWriter"/> method calls result in an <see cref="InvalidOperationException"/> being thrown.
         /// </summary>
         Error = 0,
-
         /// <summary>
         /// The <see cref="JsonWriter.Close()"/> method has been called.
         /// </summary>
         Closed = 1,
-
         /// <summary>
         /// An object is being written. 
         /// </summary>
         Object = 2,
-
         /// <summary>
         /// An array is being written.
         /// </summary>
         Array = 3,
-
         /// <summary>
         /// A constructor is being written.
         /// </summary>
         Constructor = 4,
-
         /// <summary>
         /// A property is being written.
         /// </summary>
         Property = 5,
-
         /// <summary>
         /// A <see cref="JsonWriter"/> write method has not been called.
         /// </summary>

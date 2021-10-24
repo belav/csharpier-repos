@@ -29,9 +29,8 @@ namespace System.Collections.Generic
         internal bool IsMarked(int bitPosition)
         {
             int bitArrayIndex = bitPosition / IntSize;
-            return
-                (uint)bitArrayIndex < (uint)_span.Length &&
-                (_span[bitArrayIndex] & (1 << (bitPosition % IntSize))) != 0;
+            return (uint)bitArrayIndex < (uint)_span.Length
+                && (_span[bitArrayIndex] & (1 << (bitPosition % IntSize))) != 0;
         }
 
         /// <summary>How many ints must be allocated to represent n bits. Returns (n+31)/32, but avoids overflow.</summary>

@@ -47,11 +47,7 @@ namespace Microsoft.AspNetCore.Razor.Language
                 Options = RazorCodeGenerationOptions.CreateDefault(),
             };
 
-            var pass = new TestDocumentClassifierPass()
-            {
-                Engine = Engine,
-                ShouldMatch = false,
-            };
+            var pass = new TestDocumentClassifierPass() { Engine = Engine, ShouldMatch = false, };
 
             // Act
             pass.Execute(TestRazorCodeDocument.CreateEmpty(), documentNode);
@@ -70,20 +66,19 @@ namespace Microsoft.AspNetCore.Razor.Language
                 Options = RazorCodeGenerationOptions.CreateDefault(),
             };
 
-            var expected = new ICodeTargetExtension[]
-            {
-                new MyExtension1(),
-                new MyExtension2(),
-            };
+            var expected = new ICodeTargetExtension[] { new MyExtension1(), new MyExtension2(), };
 
             var pass = new TestDocumentClassifierPass();
-            pass.Engine = RazorProjectEngine.CreateEmpty(b =>
-            {
-                for (var i = 0; i < expected.Length; i++)
-                {
-                    b.AddTargetExtension(expected[i]);
-                }
-            }).Engine;
+            pass.Engine =
+                RazorProjectEngine.CreateEmpty(
+                    b =>
+                    {
+                        for (var i = 0; i < expected.Length; i++)
+                        {
+                            b.AddTargetExtension(expected[i]);
+                        }
+                    }
+                ).Engine;
 
             ICodeTargetExtension[] extensions = null;
 
@@ -144,7 +139,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Children(
                 @namespace,
                 n => Assert.IsType<UsingDirectiveIntermediateNode>(n),
-                n => Assert.IsType<ClassDeclarationIntermediateNode>(n));
+                n => Assert.IsType<ClassDeclarationIntermediateNode>(n)
+            );
         }
 
         [Fact]
@@ -173,7 +169,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Children(
                 method,
                 n => Assert.IsType<HtmlContentIntermediateNode>(n),
-                n => Assert.IsType<CSharpCodeIntermediateNode>(n));
+                n => Assert.IsType<CSharpCodeIntermediateNode>(n)
+            );
         }
 
         [Fact]
@@ -254,7 +251,7 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             public Action<CodeTargetBuilder> CodeTargetCallback { get; set; }
 
-            public string Namespace { get; set;  }
+            public string Namespace { get; set; }
 
             public string Class { get; set; }
 
@@ -262,7 +259,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             protected override string DocumentKind => "test";
 
-            protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+            protected override bool IsMatch(
+                RazorCodeDocument codeDocument,
+                DocumentIntermediateNode documentNode
+            )
             {
                 return ShouldMatch;
             }
@@ -271,7 +271,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 RazorCodeDocument codeDocument,
                 NamespaceDeclarationIntermediateNode @namespace,
                 ClassDeclarationIntermediateNode @class,
-                MethodDeclarationIntermediateNode method)
+                MethodDeclarationIntermediateNode method
+            )
             {
                 @namespace.Content = Namespace;
                 @class.ClassName = Class;

@@ -22,18 +22,30 @@ namespace BenchmarkDotNet.Attributes
             AddDiagnoser(MemoryDiagnoser.Default);
             AddColumn(StatisticColumn.OperationsPerSecond);
             AddColumn(new ParamsSummaryColumn());
-            AddColumnProvider(DefaultColumnProviders.Statistics, DefaultColumnProviders.Metrics, DefaultColumnProviders.Descriptor);
+            AddColumnProvider(
+                DefaultColumnProviders.Statistics,
+                DefaultColumnProviders.Metrics,
+                DefaultColumnProviders.Descriptor
+            );
 
             AddValidator(JitOptimizationsValidator.FailOnError);
 
-            AddJob(Job.InProcess
-                .WithStrategy(RunStrategy.Throughput));
+            AddJob(Job.InProcess.WithStrategy(RunStrategy.Throughput));
 
             AddExporter(MarkdownExporter.GitHub);
 
-            AddExporter(new CsvExporter(
-                CsvSeparator.Comma,
-                new Reports.SummaryStyle(cultureInfo: null, printUnitsInHeader: true, printUnitsInContent: false, timeUnit: Perfolizer.Horology.TimeUnit.Microsecond, sizeUnit: SizeUnit.KB)));
+            AddExporter(
+                new CsvExporter(
+                    CsvSeparator.Comma,
+                    new Reports.SummaryStyle(
+                        cultureInfo: null,
+                        printUnitsInHeader: true,
+                        printUnitsInContent: false,
+                        timeUnit: Perfolizer.Horology.TimeUnit.Microsecond,
+                        sizeUnit: SizeUnit.KB
+                    )
+                )
+            );
         }
     }
 }

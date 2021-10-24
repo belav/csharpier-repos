@@ -23,7 +23,9 @@ namespace System.Xml
                 _wfWriter = wfWriter;
             }
 
-            IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+            IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+                XmlNamespaceScope scope
+            )
             {
                 throw new NotImplementedException();
             }
@@ -132,8 +134,10 @@ namespace System.Xml
 
             internal bool IsDuplicate(string prefix, string localName, string namespaceUri)
             {
-                return ((this.localName == localName)
-                    && ((this.prefix == prefix) || (this.namespaceUri == namespaceUri)));
+                return (
+                    (this.localName == localName)
+                    && ((this.prefix == prefix) || (this.namespaceUri == namespaceUri))
+                );
             }
         }
 
@@ -433,7 +437,10 @@ namespace System.Xml
                         case ItemType.RawChars:
                             BufferChunk bufChunk = (BufferChunk)item.data;
                             int endIndex = bufChunk.index + bufChunk.count;
-                            while (bufChunk.index < endIndex && XmlCharType.IsWhiteSpace(bufChunk.buffer[bufChunk.index]))
+                            while (
+                                bufChunk.index < endIndex
+                                && XmlCharType.IsWhiteSpace(bufChunk.buffer[bufChunk.index])
+                            )
                             {
                                 bufChunk.index++;
                                 bufChunk.count--;
@@ -444,7 +451,6 @@ namespace System.Xml
                                 // no characters left -> move the firstItem index to exclude it from the Replay
                                 _firstItem++;
                             }
-
                             break;
                     }
                     i++;
@@ -473,7 +479,12 @@ namespace System.Xml
                         case ItemType.StringChars:
                         case ItemType.RawChars:
                             BufferChunk bufChunk = (BufferChunk)item.data;
-                            while (bufChunk.count > 0 && XmlCharType.IsWhiteSpace(bufChunk.buffer[bufChunk.index + bufChunk.count - 1]))
+                            while (
+                                bufChunk.count > 0
+                                && XmlCharType.IsWhiteSpace(
+                                    bufChunk.buffer[bufChunk.index + bufChunk.count - 1]
+                                )
+                            )
                             {
                                 bufChunk.count--;
                             }
@@ -483,7 +494,6 @@ namespace System.Xml
                                 // no characters left -> move the lastItem index to exclude it from the Replay
                                 _lastItem--;
                             }
-
                             break;
                     }
 

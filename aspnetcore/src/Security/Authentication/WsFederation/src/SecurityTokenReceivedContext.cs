@@ -15,10 +15,12 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// <summary>
         /// Creates a <see cref="SecurityTokenReceivedContext"/>
         /// </summary>
-        public SecurityTokenReceivedContext(HttpContext context, AuthenticationScheme scheme, WsFederationOptions options, AuthenticationProperties properties)
-            : base(context, scheme, options, properties)
-        {
-        }
+        public SecurityTokenReceivedContext(
+            HttpContext context,
+            AuthenticationScheme scheme,
+            WsFederationOptions options,
+            AuthenticationProperties properties
+        ) : base(context, scheme, options, properties) { }
 
         /// <summary>
         /// The <see cref="WsFederationMessage"/> received on this request.

@@ -44,7 +44,10 @@ namespace System.Net.Quic.Tests
                 ClientAuthenticationOptions = GetSslClientAuthenticationOptions()
             };
 
-            using QuicConnection clientConnection = new QuicConnection(QuicImplementationProviders.MsQuic, options);
+            using QuicConnection clientConnection = new QuicConnection(
+                QuicImplementationProviders.MsQuic,
+                options
+            );
 
             ValueTask clientTask = clientConnection.ConnectAsync();
             using QuicConnection serverConnection = await listener.AcceptConnectionAsync();
@@ -64,7 +67,10 @@ namespace System.Net.Quic.Tests
             quicOptions.ServerAuthenticationOptions = GetSslServerAuthenticationOptions();
             quicOptions.ListenEndPoint = new IPEndPoint(IPAddress.Loopback, 0);
 
-            using QuicListener listener = new QuicListener(QuicImplementationProviders.MsQuic, quicOptions);
+            using QuicListener listener = new QuicListener(
+                QuicImplementationProviders.MsQuic,
+                quicOptions
+            );
             listener.Start();
 
             QuicClientConnectionOptions options = new QuicClientConnectionOptions()
@@ -73,12 +79,21 @@ namespace System.Net.Quic.Tests
                 ClientAuthenticationOptions = GetSslClientAuthenticationOptions(),
             };
 
-            using QuicConnection clientConnection = new QuicConnection(QuicImplementationProviders.MsQuic, options);
+            using QuicConnection clientConnection = new QuicConnection(
+                QuicImplementationProviders.MsQuic,
+                options
+            );
             ValueTask clientTask = clientConnection.ConnectAsync();
             using QuicConnection serverConnection = await listener.AcceptConnectionAsync();
             await clientTask;
 
-            await Assert.ThrowsAsync<QuicOperationAbortedException>(async () => await serverConnection.AcceptStreamAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(100)));
+            await Assert.ThrowsAsync<QuicOperationAbortedException>(
+                async () =>
+                    await serverConnection
+                        .AcceptStreamAsync()
+                        .AsTask()
+                        .WaitAsync(TimeSpan.FromSeconds(100))
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/49157")]
@@ -103,7 +118,10 @@ namespace System.Net.Quic.Tests
                                 break;
                             case WriteType.GatheredBuffers:
                                 var buffers = bufferLengths
-                                    .Select(bufferLength => new ReadOnlyMemory<byte>(new byte[bufferLength]))
+                                    .Select(
+                                        bufferLength =>
+                                            new ReadOnlyMemory<byte>(new byte[bufferLength])
+                                    )
                                     .ToArray();
                                 await stream.WriteAsync(buffers);
                                 break;
@@ -116,7 +134,12 @@ namespace System.Net.Quic.Tests
                                     lastSegment = lastSegment.Append(new byte[bufferLength]);
                                 }
 
-                                var buffer = new ReadOnlySequence<byte>(firstSegment, 0, lastSegment, lastSegment.Memory.Length);
+                                var buffer = new ReadOnlySequence<byte>(
+                                    firstSegment,
+                                    0,
+                                    lastSegment,
+                                    lastSegment.Memory.Length
+                                );
                                 await stream.WriteAsync(buffer);
                                 break;
                             default:
@@ -133,7 +156,8 @@ namespace System.Net.Quic.Tests
                     await using QuicStream stream = await serverConnection.AcceptStreamAsync();
 
                     var buffer = new byte[4096];
-                    int receivedBytes = 0, totalBytes = 0;
+                    int receivedBytes = 0,
+                        totalBytes = 0;
 
                     while ((receivedBytes = await stream.ReadAsync(buffer)) != 0)
                     {
@@ -145,7 +169,8 @@ namespace System.Net.Quic.Tests
 
                     stream.Shutdown();
                     await stream.ShutdownWriteCompleted();
-                });
+                }
+            );
         }
 
         public static IEnumerable<object[]> WriteData()
@@ -153,17 +178,19 @@ namespace System.Net.Quic.Tests
             var bufferSizes = new[] { 1, 502, 15_003, 1_000_004 };
             var r = new Random();
 
-            return
-                from bufferCount in new[] { 1, 2, 3, 10 }
-                from writeType in Enum.GetValues<WriteType>()
-                let writes =
-                    Enumerable.Range(0, 5)
-                    .Select(_ =>
-                        Enumerable.Range(0, bufferCount)
-                        .Select(_ => bufferSizes[r.Next(bufferSizes.Length)])
-                        .ToArray())
-                    .ToArray()
-                select new object[] { writes, writeType };
+            return from bufferCount in new[] { 1, 2, 3, 10 }
+            from writeType in Enum.GetValues<WriteType>()
+            let writes = Enumerable
+                .Range(0, 5)
+                .Select(
+                    _ =>
+                        Enumerable
+                            .Range(0, bufferCount)
+                            .Select(_ => bufferSizes[r.Next(bufferSizes.Length)])
+                            .ToArray()
+                )
+                .ToArray()
+            select new object[] { writes, writeType };
         }
 
         public enum WriteType
@@ -195,8 +222,10 @@ namespace System.Net.Quic.Tests
             byte[] memory = new byte[24];
             int res = await serverStream.ReadAsync(memory);
             Assert.Equal(12, res);
-            ReadOnlyMemory<ReadOnlyMemory<byte>> romrom = new ReadOnlyMemory<ReadOnlyMemory<byte>>(new ReadOnlyMemory<byte>[] { helloWorld, helloWorld });
-            
+            ReadOnlyMemory<ReadOnlyMemory<byte>> romrom = new ReadOnlyMemory<ReadOnlyMemory<byte>>(
+                new ReadOnlyMemory<byte>[] { helloWorld, helloWorld }
+            );
+
             await clientStream.WriteAsync(romrom);
 
             res = await serverStream.ReadAsync(memory);
@@ -216,17 +245,17 @@ namespace System.Net.Quic.Tests
                 {
                     var acceptTask = serverConnection.AcceptStreamAsync();
                     await serverConnection.CloseAsync(errorCode: 0);
-                    // make sure 
-                    await Assert.ThrowsAsync<QuicOperationAbortedException>(() => acceptTask.AsTask());
-                });
+                    // make sure
+                    await Assert.ThrowsAsync<QuicOperationAbortedException>(
+                        () => acceptTask.AsTask()
+                    );
+                }
+            );
         }
 
         private static ReadOnlySequence<byte> CreateReadOnlySequenceFromBytes(byte[] data)
         {
-            List<byte[]> segments = new List<byte[]>
-            {
-                Array.Empty<byte>()
-            };
+            List<byte[]> segments = new List<byte[]> { Array.Empty<byte>() };
 
             foreach (var b in data)
             {

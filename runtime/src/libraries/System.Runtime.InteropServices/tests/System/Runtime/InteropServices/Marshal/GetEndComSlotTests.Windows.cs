@@ -17,15 +17,22 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IComImportObject), 6 };
             yield return new object[] { typeof(ManagedInterfaceSupportIUnknown), 2 };
             yield return new object[] { typeof(ManagedInterfaceSupportIUnknownWithMethods), 4 };
-            yield return new object[] { typeof(ManagedInterfaceSupportDualInterfaceWithMethods), 8 };
+            yield return new object[]
+            {
+                typeof(ManagedInterfaceSupportDualInterfaceWithMethods),
+                8
+            };
             yield return new object[] { typeof(ManagedInterfaceSupportIDispatch), 6 };
             yield return new object[] { typeof(ManagedInterfaceSupportIDispatchWithMethods), 8 };
-            yield return new object[] { typeof(ManagedAutoDispatchClass), -1};
+            yield return new object[] { typeof(ManagedAutoDispatchClass), -1 };
             yield return new object[] { typeof(ManagedAutoDualClass), 10 };
         }
 
         [MemberData(nameof(GetEndComSlot_TestData))]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         public void GetEndComSlot_Windows_ReturnsExpected(Type type, int expected)
         {
             Assert.Equal(expected, Marshal.GetEndComSlot(type));

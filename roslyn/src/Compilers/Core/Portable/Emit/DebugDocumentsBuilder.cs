@@ -23,14 +23,18 @@ namespace Microsoft.CodeAnalysis.Emit
         private readonly ConcurrentCache<(string, string), string> _normalizedPathsCache;
         private readonly SourceReferenceResolver _resolverOpt;
 
-        public DebugDocumentsBuilder(SourceReferenceResolver resolverOpt, bool isDocumentNameCaseSensitive)
+        public DebugDocumentsBuilder(
+            SourceReferenceResolver resolverOpt,
+            bool isDocumentNameCaseSensitive
+        )
         {
             _resolverOpt = resolverOpt;
 
             _debugDocuments = new ConcurrentDictionary<string, Cci.DebugSourceDocument>(
-                    isDocumentNameCaseSensitive ?
-                    StringComparer.Ordinal :
-                    StringComparer.OrdinalIgnoreCase);
+                isDocumentNameCaseSensitive
+                  ? StringComparer.Ordinal
+                  : StringComparer.OrdinalIgnoreCase
+            );
 
             _normalizedPathsCache = new ConcurrentCache<(string, string), string>(16);
         }
@@ -42,8 +46,8 @@ namespace Microsoft.CodeAnalysis.Emit
             _debugDocuments.Add(document.Location, document);
         }
 
-        internal IReadOnlyDictionary<string, Cci.DebugSourceDocument> DebugDocuments
-            => _debugDocuments;
+        internal IReadOnlyDictionary<string, Cci.DebugSourceDocument> DebugDocuments =>
+            _debugDocuments;
 
         internal Cci.DebugSourceDocument TryGetDebugDocument(string path, string basePath)
         {
@@ -57,7 +61,11 @@ namespace Microsoft.CodeAnalysis.Emit
             return document;
         }
 
-        internal Cci.DebugSourceDocument GetOrAddDebugDocument(string path, string basePath, Func<string, Cci.DebugSourceDocument> factory)
+        internal Cci.DebugSourceDocument GetOrAddDebugDocument(
+            string path,
+            string basePath,
+            Func<string, Cci.DebugSourceDocument> factory
+        )
         {
             return _debugDocuments.GetOrAdd(NormalizeDebugDocumentPath(path, basePath), factory);
         }

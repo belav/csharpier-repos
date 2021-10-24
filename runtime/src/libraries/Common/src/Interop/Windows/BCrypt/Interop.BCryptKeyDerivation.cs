@@ -18,6 +18,7 @@ internal static partial class Interop
             byte* pbDerivedKey,
             int cbDerivedKey,
             out uint pcbResult,
-            int dwFlags);
+            int dwFlags
+        );
     }
 }

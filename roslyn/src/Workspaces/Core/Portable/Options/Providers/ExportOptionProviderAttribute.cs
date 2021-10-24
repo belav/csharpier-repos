@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.Options.Providers
         /// Constructor for language agnostic option providers.
         /// Use <see cref="ExportOptionProviderAttribute(string)"/> overload for language specific option providers.
         /// </summary>
-        public ExportOptionProviderAttribute()
-            : base(typeof(IOptionProvider))
+        public ExportOptionProviderAttribute() : base(typeof(IOptionProvider))
         {
             this.Language = string.Empty;
         }
@@ -31,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Options.Providers
         /// Constructor for language specific option providers.
         /// Use <see cref="ExportOptionProviderAttribute()"/> overload for language agnostic option providers.
         /// </summary>
-        public ExportOptionProviderAttribute(string language)
-            : base(typeof(IOptionProvider))
+        public ExportOptionProviderAttribute(string language) : base(typeof(IOptionProvider))
         {
             this.Language = language ?? throw new ArgumentNullException(nameof(language));
         }

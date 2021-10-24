@@ -13,9 +13,11 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions
 
         public const string ViewComponentSuffix = "ViewComponent";
 
-        public const string ViewComponentAttribute = "Microsoft.AspNetCore.Mvc.ViewComponentAttribute";
+        public const string ViewComponentAttribute =
+            "Microsoft.AspNetCore.Mvc.ViewComponentAttribute";
 
-        public const string NonViewComponentAttribute = "Microsoft.AspNetCore.Mvc.NonViewComponentAttribute";
+        public const string NonViewComponentAttribute =
+            "Microsoft.AspNetCore.Mvc.NonViewComponentAttribute";
 
         public const string GenericTask = "System.Threading.Tasks.Task`1";
 

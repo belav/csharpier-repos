@@ -39,7 +39,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -49,8 +54,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext01a.ext01a
 {
@@ -87,8 +90,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext02.ext02
 {
@@ -128,7 +129,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -138,8 +144,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext02a.ext02a
 {
@@ -178,8 +182,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext04.ext04
 {
@@ -224,7 +226,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -234,8 +241,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext04a.ext04a
 {
@@ -280,8 +285,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext05.ext05
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -325,7 +328,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -335,8 +343,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext06.ext06
 {
@@ -379,7 +385,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -389,8 +400,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext07.ext07
 {
@@ -433,7 +442,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -443,8 +457,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext07a.ext07a
 {
@@ -487,8 +499,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext09.ext09
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -526,16 +536,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             dynamic p = new Parent();
             try
             {
-                p.Foo(arr: new int[]
-                {
-                1, 2, 3
-                }
-
-                );
+                p.Foo(arr: new int[] { 1, 2, 3 });
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -545,8 +555,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext09a.ext09a
 {
@@ -583,18 +591,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             Parent p = new Parent();
-            return p.Foo(arr: new dynamic[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(arr: new dynamic[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext10.ext10
 {
@@ -640,7 +641,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -650,8 +656,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext11.ext11
 {
@@ -697,7 +701,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -707,8 +716,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext12.ext12
 {
@@ -754,7 +761,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -764,8 +776,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext13.ext13
 {
@@ -805,7 +815,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -815,8 +830,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext14.ext14
 {
@@ -856,8 +869,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext14a.ext14a
 {
     // <Area> of Methods with Optional Parameters and named arguments</Area>
@@ -895,8 +906,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext15.ext15
 {
@@ -939,7 +948,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Parent", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Parent",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -949,8 +963,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.extension.ext15a.ext15a
 {

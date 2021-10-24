@@ -10,11 +10,19 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
 {
     internal partial class FormattingViewModel
     {
-        internal sealed class SettingsEntriesSnapshot : SettingsEntriesSnapshotBase<FormattingSetting>
+        internal sealed class SettingsEntriesSnapshot
+            : SettingsEntriesSnapshotBase<FormattingSetting>
         {
-            public SettingsEntriesSnapshot(ImmutableArray<FormattingSetting> data, int currentVersionNumber) : base(data, currentVersionNumber) { }
+            public SettingsEntriesSnapshot(
+                ImmutableArray<FormattingSetting> data,
+                int currentVersionNumber
+            ) : base(data, currentVersionNumber) { }
 
-            protected override bool TryGetValue(FormattingSetting result, string keyName, out object? content)
+            protected override bool TryGetValue(
+                FormattingSetting result,
+                string keyName,
+                out object? content
+            )
             {
                 content = keyName switch
                 {

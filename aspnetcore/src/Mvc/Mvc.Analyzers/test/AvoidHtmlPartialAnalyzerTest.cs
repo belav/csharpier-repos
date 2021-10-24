@@ -11,49 +11,50 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
 {
     public class AvoidHtmlPartialAnalyzerTest
     {
-        private static DiagnosticDescriptor DiagnosticDescriptor = DiagnosticDescriptors.MVC1000_HtmlHelperPartialShouldBeAvoided;
+        private static DiagnosticDescriptor DiagnosticDescriptor =
+            DiagnosticDescriptors.MVC1000_HtmlHelperPartialShouldBeAvoided;
 
-        private MvcDiagnosticAnalyzerRunner Executor { get; } = new MvcDiagnosticAnalyzerRunner(new AvoidHtmlPartialAnalyzer());
-
-        [Fact]
-        public Task NoDiagnosticsAreReturned_FoEmptyScenarios()
-            => VerifyNoDiagnosticsAreReturned(source: string.Empty);
+        private MvcDiagnosticAnalyzerRunner Executor { get; } =
+            new MvcDiagnosticAnalyzerRunner(new AvoidHtmlPartialAnalyzer());
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_ForNonUseOfHtmlPartial()
-            => VerifyNoDiagnosticsAreReturned(ReadTestSource().Source);
+        public Task NoDiagnosticsAreReturned_FoEmptyScenarios() =>
+            VerifyNoDiagnosticsAreReturned(source: string.Empty);
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_ForUseOfHtmlPartialAsync()
-            => VerifyNoDiagnosticsAreReturned(ReadTestSource().Source);
+        public Task NoDiagnosticsAreReturned_ForNonUseOfHtmlPartial() =>
+            VerifyNoDiagnosticsAreReturned(ReadTestSource().Source);
 
         [Fact]
-        public Task DiagnosticsAreReturned_ForUseOfHtmlPartial()
-            => VerifyDefault(ReadTestSource());
+        public Task NoDiagnosticsAreReturned_ForUseOfHtmlPartialAsync() =>
+            VerifyNoDiagnosticsAreReturned(ReadTestSource().Source);
 
         [Fact]
-        public Task DiagnosticsAreReturned_ForUseOfHtmlPartial_WithAdditionalParameters()
-            => VerifyDefault(ReadTestSource());
+        public Task DiagnosticsAreReturned_ForUseOfHtmlPartial() => VerifyDefault(ReadTestSource());
 
         [Fact]
-        public Task DiagnosticsAreReturned_ForUseOfHtmlPartial_InSections()
-            => VerifyDefault(ReadTestSource());
+        public Task DiagnosticsAreReturned_ForUseOfHtmlPartial_WithAdditionalParameters() =>
+            VerifyDefault(ReadTestSource());
 
         [Fact]
-        public Task NoDiagnosticsAreReturned_ForUseOfRenderPartialAsync()
-            => VerifyNoDiagnosticsAreReturned(ReadTestSource().Source);
+        public Task DiagnosticsAreReturned_ForUseOfHtmlPartial_InSections() =>
+            VerifyDefault(ReadTestSource());
 
         [Fact]
-        public Task DiagnosticsAreReturned_ForUseOfRenderPartial()
-            => VerifyDefault(ReadTestSource());
+        public Task NoDiagnosticsAreReturned_ForUseOfRenderPartialAsync() =>
+            VerifyNoDiagnosticsAreReturned(ReadTestSource().Source);
 
         [Fact]
-        public Task DiagnosticsAreReturned_ForUseOfRenderPartial_WithAdditionalParameters()
-            => VerifyDefault(ReadTestSource());
+        public Task DiagnosticsAreReturned_ForUseOfRenderPartial() =>
+            VerifyDefault(ReadTestSource());
 
         [Fact]
-        public Task DiagnosticsAreReturned_ForUseOfRenderPartial_InSections()
-            => VerifyDefault(ReadTestSource());
+        public Task DiagnosticsAreReturned_ForUseOfRenderPartial_WithAdditionalParameters() =>
+            VerifyDefault(ReadTestSource());
+
+        [Fact]
+        public Task DiagnosticsAreReturned_ForUseOfRenderPartial_InSections() =>
+            VerifyDefault(ReadTestSource());
 
         private async Task VerifyNoDiagnosticsAreReturned(string source)
         {
@@ -77,11 +78,11 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers
                 result,
                 diagnostic =>
                 {
-
                     Assert.Equal(DiagnosticDescriptor.Id, diagnostic.Id);
                     Assert.Same(DiagnosticDescriptor, diagnostic.Descriptor);
                     AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
-                });
+                }
+            );
         }
 
         private static TestSource ReadTestSource([CallerMemberName] string testMethod = "") =>

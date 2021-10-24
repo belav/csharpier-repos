@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     public static class BoundAttributeDescriptorBuilderExtensions
     {
-        public static void SetPropertyName(this BoundAttributeDescriptorBuilder builder, string propertyName)
+        public static void SetPropertyName(
+            this BoundAttributeDescriptorBuilder builder,
+            string propertyName
+        )
         {
             if (builder == null)
             {
@@ -41,7 +44,8 @@ namespace Microsoft.AspNetCore.Razor.Language
         public static void AsDictionary(
             this BoundAttributeDescriptorBuilder builder,
             string attributeNamePrefix,
-            string valueTypeName)
+            string valueTypeName
+        )
         {
             if (builder == null)
             {
@@ -60,12 +64,16 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            return
-                builder.Metadata.TryGetValue(ComponentMetadata.Common.DirectiveAttribute, out var value) &&
-                string.Equals(bool.TrueString, value);
+            return builder.Metadata.TryGetValue(
+                    ComponentMetadata.Common.DirectiveAttribute,
+                    out var value
+                ) && string.Equals(bool.TrueString, value);
         }
 
-        public static void SetPropertyName(this BoundAttributeParameterDescriptorBuilder builder, string propertyName)
+        public static void SetPropertyName(
+            this BoundAttributeParameterDescriptorBuilder builder,
+            string propertyName
+        )
         {
             if (builder == null)
             {

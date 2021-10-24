@@ -46,7 +46,8 @@ namespace HtmlGenerationWebSite.Controllers
         [HttpGet("/catalog/{region}/{section}/confirm-payment")]
         public IActionResult ConfirmPayment(string region, string section, int confirmationId)
         {
-            var message = "Welcome " + section + " member. Your confirmation id is " + confirmationId;
+            var message =
+                "Welcome " + section + " member. Your confirmation id is " + confirmationId;
             ViewData["Message"] = message;
             ViewData["Region"] = region;
 
@@ -77,7 +78,8 @@ namespace HtmlGenerationWebSite.Controllers
         public IActionResult UpdateProducts(
             [FromServices] ProductsService productService,
             string category,
-            [FromBody] List<Product> products)
+            [FromBody] List<Product> products
+        )
         {
             productService.UpdateProducts(category, products);
             return Ok();

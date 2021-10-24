@@ -15,8 +15,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
     {
         [Fact]
         [Trait(Traits.Feature, Traits.Features.Workspace)]
-        public void TestArgumentValidation()
-            => Assert.Throws<ArgumentNullException>("instance", () => new ReferenceCountedDisposable<IDisposable>(null));
+        public void TestArgumentValidation() =>
+            Assert.Throws<ArgumentNullException>(
+                "instance",
+                () => new ReferenceCountedDisposable<IDisposable>(null)
+            );
 
         [Theory]
         [InlineData(1)]
@@ -101,7 +104,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var target = new DisposableObject();
 
             var reference = new ReferenceCountedDisposable<DisposableObject>(target);
-            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(reference);
+            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(
+                reference
+            );
 
             var reference2 = reference.TryAddReference();
             Assert.NotNull(reference2);
@@ -126,27 +131,24 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.Workspace)]
-        public void TestWeakReferenceArgumentValidation()
-            => Assert.Throws<ArgumentNullException>("reference", () => new ReferenceCountedDisposable<IDisposable>.WeakReference(null));
+        public void TestWeakReferenceArgumentValidation() =>
+            Assert.Throws<ArgumentNullException>(
+                "reference",
+                () => new ReferenceCountedDisposable<IDisposable>.WeakReference(null)
+            );
 
         [Fact]
         [Trait(Traits.Feature, Traits.Features.Workspace)]
-        public void TestDefaultWeakReference()
-            => Assert.Null(default(ReferenceCountedDisposable<IDisposable>.WeakReference).TryAddReference());
+        public void TestDefaultWeakReference() =>
+            Assert.Null(
+                default(ReferenceCountedDisposable<IDisposable>.WeakReference).TryAddReference()
+            );
 
         private sealed class DisposableObject : IDisposable
         {
-            public bool IsDisposed
-            {
-                get;
-                private set;
-            }
+            public bool IsDisposed { get; private set; }
 
-            public int DisposeCount
-            {
-                get;
-                private set;
-            }
+            public int DisposeCount { get; private set; }
 
             public void Dispose()
             {

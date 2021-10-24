@@ -14,12 +14,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
 {
     internal sealed class AnyIPListenOptions : ListenOptions
     {
-        internal AnyIPListenOptions(int port)
-            : base(new IPEndPoint(IPAddress.IPv6Any, port))
-        {
-        }
+        internal AnyIPListenOptions(int port) : base(new IPEndPoint(IPAddress.IPv6Any, port)) { }
 
-        internal override async Task BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+        internal override async Task BindAsync(
+            AddressBindContext context,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(IPEndPoint != null);
 

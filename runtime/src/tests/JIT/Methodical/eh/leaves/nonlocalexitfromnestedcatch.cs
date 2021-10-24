@@ -69,7 +69,5 @@ class test
         testLog.StopRecording();
 
         return testLog.VerifyOutput();
-
-
     }
 }

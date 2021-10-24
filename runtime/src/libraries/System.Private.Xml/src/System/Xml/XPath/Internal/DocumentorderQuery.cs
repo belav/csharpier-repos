@@ -28,6 +28,9 @@ namespace MS.Internal.Xml.XPath
             return input.MatchNode(context);
         }
 
-        public override XPathNodeIterator Clone() { return new DocumentOrderQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new DocumentOrderQuery(this);
+        }
     }
 }

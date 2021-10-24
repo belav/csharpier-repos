@@ -14,19 +14,20 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
         public UrlAction Action { get; }
         public bool Global { get; }
 
-        public IISUrlRewriteRule(string? name,
+        public IISUrlRewriteRule(
+            string? name,
             UrlMatch initialMatch,
             ConditionCollection? conditions,
-            UrlAction action)
-            : this(name, initialMatch, conditions, action, false)
-        {
-        }
+            UrlAction action
+        ) : this(name, initialMatch, conditions, action, false) { }
 
-        public IISUrlRewriteRule(string? name,
+        public IISUrlRewriteRule(
+            string? name,
             UrlMatch initialMatch,
             ConditionCollection? conditions,
             UrlAction action,
-            bool global)
+            bool global
+        )
         {
             Name = name;
             InitialMatch = initialMatch;
@@ -59,7 +60,11 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
             MatchResults? condResult = null;
             if (Conditions != null)
             {
-                condResult = ConditionEvaluator.Evaluate(Conditions, context, initMatchResults.BackReferences);
+                condResult = ConditionEvaluator.Evaluate(
+                    Conditions,
+                    context,
+                    initMatchResults.BackReferences
+                );
                 if (!condResult.Success)
                 {
                     context.Logger.UrlRewriteNotMatchedRule(Name);
@@ -69,7 +74,11 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite
 
             context.Logger.UrlRewriteMatchedRule(Name);
             // at this point we know the rule passed, evaluate the replacement.
-            Action.ApplyAction(context, initMatchResults?.BackReferences, condResult?.BackReferences);
+            Action.ApplyAction(
+                context,
+                initMatchResults?.BackReferences,
+                condResult?.BackReferences
+            );
         }
     }
 }

@@ -47,7 +47,13 @@ namespace Microsoft.AspNetCore.Routing.Internal
             var endpoints = dataSource.Endpoints;
             for (var i = 0; i < endpoints.Count; i++)
             {
-                if (endpoints[i] is RouteEndpoint endpoint && (endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching ?? false) == false)
+                if (
+                    endpoints[i] is RouteEndpoint endpoint
+                    && (
+                        endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching
+                        ?? false
+                    ) == false
+                )
                 {
                     builder.AddEndpoint(endpoint);
                 }
@@ -77,7 +83,9 @@ namespace Microsoft.AspNetCore.Routing.Internal
                 {
                     foreach (var literal in node.Literals)
                     {
-                        writer.WriteLine($"{label} -> {visited[literal.Value]} [label=\"/{literal.Key}\"]");
+                        writer.WriteLine(
+                            $"{label} -> {visited[literal.Value]} [label=\"/{literal.Key}\"]"
+                        );
                     }
                 }
 
@@ -95,7 +103,9 @@ namespace Microsoft.AspNetCore.Routing.Internal
                 {
                     foreach (var policy in node.PolicyEdges)
                     {
-                        writer.WriteLine($"{label} -> {visited[policy.Value]} [label=\"{policy.Key}\"]");
+                        writer.WriteLine(
+                            $"{label} -> {visited[policy.Value]} [label=\"{policy.Key}\"]"
+                        );
                     }
                 }
 

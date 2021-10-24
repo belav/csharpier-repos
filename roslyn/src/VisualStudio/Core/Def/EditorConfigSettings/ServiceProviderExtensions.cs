@@ -10,15 +10,19 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
 {
     internal static class ServiceProviderExtensions
     {
-        public static bool TryGetService<TService, TInterface>(this IServiceProvider sp, [NotNullWhen(true)] out TInterface? @interface)
-            where TInterface : class
+        public static bool TryGetService<TService, TInterface>(
+            this IServiceProvider sp,
+            [NotNullWhen(true)] out TInterface? @interface
+        ) where TInterface : class
         {
             @interface = sp.GetService<TService, TInterface>(throwOnFailure: false);
             return @interface is not null;
         }
 
-        public static bool TryGetService<TInterface>(this IServiceProvider sp, [NotNullWhen(true)] out TInterface? @interface)
-                where TInterface : class
+        public static bool TryGetService<TInterface>(
+            this IServiceProvider sp,
+            [NotNullWhen(true)] out TInterface? @interface
+        ) where TInterface : class
         {
             @interface = sp.GetService<TInterface>();
             return @interface is not null;

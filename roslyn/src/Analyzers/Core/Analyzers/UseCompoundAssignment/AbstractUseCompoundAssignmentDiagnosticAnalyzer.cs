@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
     internal abstract class AbstractUseCompoundAssignmentDiagnosticAnalyzer<
         TSyntaxKind,
         TAssignmentSyntax,
-        TBinaryExpressionSyntax>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TBinaryExpressionSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TAssignmentSyntax : SyntaxNode
         where TBinaryExpressionSyntax : SyntaxNode
@@ -32,40 +32,56 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
 
         protected AbstractUseCompoundAssignmentDiagnosticAnalyzer(
             ISyntaxFacts syntaxFacts,
-            ImmutableArray<(TSyntaxKind exprKind, TSyntaxKind assignmentKind, TSyntaxKind tokenKind)> kinds)
-            : base(IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId,
-                   EnforceOnBuildValues.UseCompoundAssignment,
-                   CodeStyleOptions2.PreferCompoundAssignment,
-                   new LocalizableResourceString(
-                       nameof(AnalyzersResources.Use_compound_assignment), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
+            ImmutableArray<(TSyntaxKind exprKind, TSyntaxKind assignmentKind, TSyntaxKind tokenKind)> kinds
+        )
+            : base(
+                IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId,
+                EnforceOnBuildValues.UseCompoundAssignment,
+                CodeStyleOptions2.PreferCompoundAssignment,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_compound_assignment),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            )
         {
             _syntaxFacts = syntaxFacts;
             UseCompoundAssignmentUtilities.GenerateMaps(kinds, out _binaryToAssignmentMap, out _);
 
             var useIncrementMessage = new LocalizableResourceString(
-                nameof(AnalyzersResources.Use_increment_operator), AnalyzersResources.ResourceManager, typeof(AnalyzersResources));
+                nameof(AnalyzersResources.Use_increment_operator),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            );
             _incrementDescriptor = CreateDescriptorWithId(
                 IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId,
                 EnforceOnBuildValues.UseCompoundAssignment,
-                useIncrementMessage, useIncrementMessage);
+                useIncrementMessage,
+                useIncrementMessage
+            );
 
             var useDecrementMessage = new LocalizableResourceString(
-                nameof(AnalyzersResources.Use_decrement_operator), AnalyzersResources.ResourceManager, typeof(AnalyzersResources));
+                nameof(AnalyzersResources.Use_decrement_operator),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            );
             _decrementDescriptor = CreateDescriptorWithId(
                 IDEDiagnosticIds.UseCompoundAssignmentDiagnosticId,
                 EnforceOnBuildValues.UseCompoundAssignment,
-                useDecrementMessage, useDecrementMessage);
+                useDecrementMessage,
+                useDecrementMessage
+            );
         }
 
         protected abstract TSyntaxKind GetAnalysisKind();
         protected abstract bool IsSupported(TSyntaxKind assignmentKind, ParseOptions options);
         protected abstract int TryGetIncrementOrDecrement(TSyntaxKind opKind, object constantValue);
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeAssignment, GetAnalysisKind());
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeAssignment, GetAnalysisKind());
 
         private void AnalyzeAssignment(SyntaxNodeAnalysisContext context)
         {
@@ -73,15 +89,22 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             var cancellationToken = context.CancellationToken;
 
             var syntaxTree = assignment.SyntaxTree;
-            var option = context.GetOption(CodeStyleOptions2.PreferCompoundAssignment, assignment.Language);
+            var option = context.GetOption(
+                CodeStyleOptions2.PreferCompoundAssignment,
+                assignment.Language
+            );
             if (!option.Value)
             {
                 // Bail immediately if the user has disabled this feature.
                 return;
             }
 
-            _syntaxFacts.GetPartsOfAssignmentExpressionOrStatement(assignment,
-                out var assignmentLeft, out var assignmentToken, out var assignmentRight);
+            _syntaxFacts.GetPartsOfAssignmentExpressionOrStatement(
+                assignment,
+                out var assignmentLeft,
+                out var assignmentToken,
+                out var assignmentRight
+            );
 
             assignmentRight = _syntaxFacts.WalkDownParentheses(assignmentRight);
 
@@ -92,7 +115,9 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                 return;
             }
 
-            var binaryKind = _syntaxFacts.SyntaxKinds.Convert<TSyntaxKind>(binaryExpression.RawKind);
+            var binaryKind = _syntaxFacts.SyntaxKinds.Convert<TSyntaxKind>(
+                binaryExpression.RawKind
+            );
             if (!_binaryToAssignmentMap.ContainsKey(binaryKind))
             {
                 return;
@@ -104,8 +129,11 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                 return;
             }
 
-            _syntaxFacts.GetPartsOfBinaryExpression(binaryExpression,
-                out var binaryLeft, out var binaryRight);
+            _syntaxFacts.GetPartsOfBinaryExpression(
+                binaryExpression,
+                out var binaryLeft,
+                out var binaryRight
+            );
 
             // has to be of the form:   expr = expr op ...
             if (!_syntaxFacts.AreEquivalent(assignmentLeft, binaryLeft))
@@ -132,8 +160,14 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             // is side-effect-free since we will be changing the number of times it is
             // executed from twice to once.
             var semanticModel = context.SemanticModel;
-            if (!UseCompoundAssignmentUtilities.IsSideEffectFree(
-                    _syntaxFacts, assignmentLeft, semanticModel, cancellationToken))
+            if (
+                !UseCompoundAssignmentUtilities.IsSideEffectFree(
+                    _syntaxFacts,
+                    assignmentLeft,
+                    semanticModel,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
@@ -144,34 +178,51 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                 var incrementOrDecrement = TryGetIncrementOrDecrement(binaryKind, constant);
                 if (incrementOrDecrement == 1)
                 {
-                    context.ReportDiagnostic(DiagnosticHelper.Create(
-                        _incrementDescriptor,
-                        assignmentToken.GetLocation(),
-                        option.Notification.Severity,
-                        additionalLocations: ImmutableArray.Create(assignment.GetLocation()),
-                        properties: ImmutableDictionary.Create<string, string>()
-                            .Add(UseCompoundAssignmentUtilities.Increment, UseCompoundAssignmentUtilities.Increment)));
+                    context.ReportDiagnostic(
+                        DiagnosticHelper.Create(
+                            _incrementDescriptor,
+                            assignmentToken.GetLocation(),
+                            option.Notification.Severity,
+                            additionalLocations: ImmutableArray.Create(assignment.GetLocation()),
+                            properties: ImmutableDictionary
+                                .Create<string, string>()
+                                .Add(
+                                    UseCompoundAssignmentUtilities.Increment,
+                                    UseCompoundAssignmentUtilities.Increment
+                                )
+                        )
+                    );
                     return;
                 }
                 else if (incrementOrDecrement == -1)
                 {
-                    context.ReportDiagnostic(DiagnosticHelper.Create(
-                        _decrementDescriptor,
-                        assignmentToken.GetLocation(),
-                        option.Notification.Severity,
-                        additionalLocations: ImmutableArray.Create(assignment.GetLocation()),
-                        properties: ImmutableDictionary.Create<string, string>()
-                            .Add(UseCompoundAssignmentUtilities.Decrement, UseCompoundAssignmentUtilities.Decrement)));
+                    context.ReportDiagnostic(
+                        DiagnosticHelper.Create(
+                            _decrementDescriptor,
+                            assignmentToken.GetLocation(),
+                            option.Notification.Severity,
+                            additionalLocations: ImmutableArray.Create(assignment.GetLocation()),
+                            properties: ImmutableDictionary
+                                .Create<string, string>()
+                                .Add(
+                                    UseCompoundAssignmentUtilities.Decrement,
+                                    UseCompoundAssignmentUtilities.Decrement
+                                )
+                        )
+                    );
                     return;
                 }
             }
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                assignmentToken.GetLocation(),
-                option.Notification.Severity,
-                additionalLocations: ImmutableArray.Create(assignment.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    assignmentToken.GetLocation(),
+                    option.Notification.Severity,
+                    additionalLocations: ImmutableArray.Create(assignment.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 }

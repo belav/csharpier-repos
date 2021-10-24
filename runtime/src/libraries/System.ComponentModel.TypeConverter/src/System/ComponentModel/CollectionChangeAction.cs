@@ -12,12 +12,10 @@ namespace System.ComponentModel
         /// Specifies that an element is added to the collection.
         /// </summary>
         Add = 1,
-
         /// <summary>
         /// Specifies that an element is removed from the collection.
         /// </summary>
         Remove = 2,
-
         /// <summary>
         /// Specifies that the entire collection has changed.
         /// </summary>

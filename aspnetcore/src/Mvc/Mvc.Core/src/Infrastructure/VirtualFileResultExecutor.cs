@@ -17,7 +17,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     /// <summary>
     /// A <see cref="IActionResultExecutor{VirtualFileResult}"/> for <see cref="VirtualFileResult"/>.
     /// </summary>
-    public class VirtualFileResultExecutor : FileResultExecutorBase, IActionResultExecutor<VirtualFileResult>
+    public class VirtualFileResultExecutor
+        : FileResultExecutorBase,
+          IActionResultExecutor<VirtualFileResult>
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
 
@@ -26,8 +28,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// </summary>
         /// <param name="loggerFactory">The factory used to create loggers.</param>
         /// <param name="hostingEnvironment">The hosting enviornment</param>
-        public VirtualFileResultExecutor(ILoggerFactory loggerFactory, IWebHostEnvironment hostingEnvironment)
-            : base(CreateLogger<VirtualFileResultExecutor>(loggerFactory))
+        public VirtualFileResultExecutor(
+            ILoggerFactory loggerFactory,
+            IWebHostEnvironment hostingEnvironment
+        ) : base(CreateLogger<VirtualFileResultExecutor>(loggerFactory))
         {
             if (hostingEnvironment == null)
             {
@@ -54,7 +58,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             if (!fileInfo.Exists)
             {
                 throw new FileNotFoundException(
-                    Resources.FormatFileResult_InvalidPath(result.FileName), result.FileName);
+                    Resources.FormatFileResult_InvalidPath(result.FileName),
+                    result.FileName
+                );
             }
 
             Logger.ExecutingFileResult(result, result.FileName);
@@ -66,7 +72,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 fileInfo.Length,
                 result.EnableRangeProcessing,
                 lastModified,
-                result.EntityTag);
+                result.EntityTag
+            );
 
             if (serveBody)
             {
@@ -77,7 +84,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         }
 
         /// <inheritdoc/>
-        protected virtual Task WriteFileAsync(ActionContext context, VirtualFileResult result, IFileInfo fileInfo, RangeItemHeaderValue? range, long rangeLength)
+        protected virtual Task WriteFileAsync(
+            ActionContext context,
+            VirtualFileResult result,
+            IFileInfo fileInfo,
+            RangeItemHeaderValue? range,
+            long rangeLength
+        )
         {
             if (context == null)
             {
@@ -103,14 +116,14 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             if (range != null)
             {
-                return response.SendFileAsync(fileInfo,
+                return response.SendFileAsync(
+                    fileInfo,
                     offset: range.From ?? 0L,
-                    count: rangeLength);
+                    count: rangeLength
+                );
             }
 
-            return response.SendFileAsync(fileInfo,
-                offset: 0,
-                count: null);
+            return response.SendFileAsync(fileInfo, offset: 0, count: null);
         }
 
         private IFileInfo GetFileInformation(VirtualFileResult result)
@@ -118,7 +131,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             var fileProvider = GetFileProvider(result);
             if (fileProvider is NullFileProvider)
             {
-                throw new InvalidOperationException(Resources.VirtualFileResultExecutor_NoFileProviderConfigured);
+                throw new InvalidOperationException(
+                    Resources.VirtualFileResultExecutor_NoFileProviderConfigured
+                );
             }
 
             var normalizedPath = result.FileName;

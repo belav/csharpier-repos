@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.CompilerServices;
 
-
 // The jit should correctly import get struct address as a first statement during the importation phase.
 
 namespace GitHub_24114
@@ -16,7 +15,7 @@ namespace GitHub_24114
             Test();
             return 100;
         }
-        
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Test()
         {
@@ -26,8 +25,6 @@ namespace GitHub_24114
 
     public struct SimpleStruct
     {
-        public static readonly SimpleStruct Default = new SimpleStruct()
-        {
-        };
+        public static readonly SimpleStruct Default = new SimpleStruct() {  };
     }
 }

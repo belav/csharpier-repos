@@ -14,9 +14,7 @@ sealed class C
     extern static double GetDouble();
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void UseDouble(double d)
-    {
-    }
+    static void UseDouble(double d) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test(bool condition)
@@ -28,7 +26,7 @@ sealed class C
 
         return 100;
     }
-    
+
     static int Main(string[] args)
     {
         return Test(false);

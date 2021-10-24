@@ -25,26 +25,39 @@ namespace System.Runtime.CompilerServices.Tests
             var tcs = new TaskCompletionSource<int>();
             var vt = new ValueTask(tcs.Task);
 
-            var d = new CustomAsyncDisposable(() =>
-            {
-                invokeCount++;
-                return vt;
-            });
+            var d = new CustomAsyncDisposable(
+                () =>
+                {
+                    invokeCount++;
+                    return vt;
+                }
+            );
 
-            Assert.Equal(vt.ConfigureAwait(continueOnCapturedContext), d.ConfigureAwait(continueOnCapturedContext).DisposeAsync());
+            Assert.Equal(
+                vt.ConfigureAwait(continueOnCapturedContext),
+                d.ConfigureAwait(continueOnCapturedContext).DisposeAsync()
+            );
             Assert.Equal(1, invokeCount);
         }
 
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public void DisposeAsync_ContinuesOnCapturedContextIfExpected(bool continueOnCapturedContext)
+        public void DisposeAsync_ContinuesOnCapturedContextIfExpected(
+            bool continueOnCapturedContext
+        )
         {
             var d = new TrackingAsyncDisposable();
-            d.ConfigureAwait(continueOnCapturedContext).DisposeAsync().GetAwaiter().UnsafeOnCompleted(() => { });
+            d.ConfigureAwait(continueOnCapturedContext)
+                .DisposeAsync()
+                .GetAwaiter()
+                .UnsafeOnCompleted(() => { });
             Assert.Equal(
-                continueOnCapturedContext ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext : ValueTaskSourceOnCompletedFlags.None,
-                d.Flags);
+                continueOnCapturedContext
+                  ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                  : ValueTaskSourceOnCompletedFlags.None,
+                d.Flags
+            );
         }
 
         private sealed class CustomAsyncDisposable : IAsyncDisposable
@@ -62,7 +75,12 @@ namespace System.Runtime.CompilerServices.Tests
 
             public ValueTask DisposeAsync() => new ValueTask(this, 0);
 
-            public void OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags) => Flags = flags;
+            public void OnCompleted(
+                Action<object> continuation,
+                object state,
+                short token,
+                ValueTaskSourceOnCompletedFlags flags
+            ) => Flags = flags;
             public ValueTaskSourceStatus GetStatus(short token) => ValueTaskSourceStatus.Pending;
             public bool GetResult(short token) => throw new NotImplementedException();
             void IValueTaskSource.GetResult(short token) => throw new NotImplementedException();

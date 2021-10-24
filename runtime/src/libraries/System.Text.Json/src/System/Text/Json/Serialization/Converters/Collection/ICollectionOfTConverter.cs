@@ -20,10 +20,15 @@ namespace System.Text.Json.Serialization.Converters
             if (IsValueType)
             {
                 state.Current.ReturnValue = collection;
-            };
+            }
+            ;
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, ref ReadStack state, JsonSerializerOptions options)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 
@@ -31,7 +36,11 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (!TypeToConvert.IsAssignableFrom(RuntimeType))
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = new List<TElement>();
@@ -40,14 +49,22 @@ namespace System.Text.Json.Serialization.Converters
             {
                 if (typeInfo.CreateObject == null)
                 {
-                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_DeserializeNoConstructor(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 TCollection returnValue = (TCollection)typeInfo.CreateObject()!;
 
                 if (returnValue.IsReadOnly)
                 {
-                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                    ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                        TypeToConvert,
+                        ref reader,
+                        ref state
+                    );
                 }
 
                 state.Current.ReturnValue = returnValue;
@@ -58,7 +75,8 @@ namespace System.Text.Json.Serialization.Converters
             Utf8JsonWriter writer,
             TCollection value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             IEnumerator<TElement> enumerator;
             if (state.Current.CollectionEnumerator == null)

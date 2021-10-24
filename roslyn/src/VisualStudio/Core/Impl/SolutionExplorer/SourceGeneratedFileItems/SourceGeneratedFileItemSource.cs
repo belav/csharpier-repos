@@ -18,7 +18,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplorer
 {
-    internal class SourceGeneratedFileItemSource : Shell.IAttachedCollectionSource, ISupportExpansionEvents
+    internal class SourceGeneratedFileItemSource
+        : Shell.IAttachedCollectionSource,
+          ISupportExpansionEvents
     {
         private readonly SourceGeneratorItem _parentGeneratorItem;
         private readonly Workspace _workspace;
@@ -39,7 +41,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         private CancellationTokenSource? _cancellationTokenSource;
         private ResettableDelay? _resettableDelay;
 
-        public SourceGeneratedFileItemSource(SourceGeneratorItem parentGeneratorItem, Workspace workspace, IAsynchronousOperationListener asyncListener, IThreadingContext threadingContext)
+        public SourceGeneratedFileItemSource(
+            SourceGeneratorItem parentGeneratorItem,
+            Workspace workspace,
+            IAsynchronousOperationListener asyncListener,
+            IThreadingContext threadingContext
+        )
         {
             _parentGeneratorItem = parentGeneratorItem;
             _workspace = workspace;
@@ -60,7 +67,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public IEnumerable Items => _items;
 
-        private async Task UpdateSourceGeneratedFileItemsAsync(Solution solution, CancellationToken cancellationToken)
+        private async Task UpdateSourceGeneratedFileItemsAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             var project = solution.GetProject(_parentGeneratorItem.ProjectId);
 
@@ -69,8 +79,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 return;
             }
 
-            var sourceGeneratedDocuments = await project.GetSourceGeneratedDocumentsAsync(cancellationToken).ConfigureAwait(false);
-            var sourceGeneratedDocumentsForGeneratorById = sourceGeneratedDocuments.Where(d => d.SourceGenerator == _parentGeneratorItem.Generator).ToDictionary(d => d.Id);
+            var sourceGeneratedDocuments = await project
+                .GetSourceGeneratedDocumentsAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var sourceGeneratedDocumentsForGeneratorById = sourceGeneratedDocuments
+                .Where(d => d.SourceGenerator == _parentGeneratorItem.Generator)
+                .ToDictionary(d => d.Id);
 
             // We must update the list on the UI thread, since the WPF elements bound to our list expect that
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -102,7 +116,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 {
                     // If this item that we already have is still a generated document, we'll remove it from our list; the list when we're
                     // done is going to have the new items remaining. If it no longer exists, remove it from list.
-                    if (!sourceGeneratedDocumentsForGeneratorById.Remove(((SourceGeneratedFileItem)_items[i]).DocumentId))
+                    if (
+                        !sourceGeneratedDocumentsForGeneratorById.Remove(
+                            ((SourceGeneratedFileItem)_items[i]).DocumentId
+                        )
+                    )
                     {
                         _items.RemoveAt(i);
                         i--;
@@ -128,7 +146,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     {
                         var mid = (low + high) / 2;
 
-                        if (StringComparer.OrdinalIgnoreCase.Compare(document.HintName, ((SourceGeneratedFileItem)_items[mid]).HintName) < 0)
+                        if (
+                            StringComparer.OrdinalIgnoreCase.Compare(
+                                document.HintName,
+                                ((SourceGeneratedFileItem)_items[mid]).HintName
+                            ) < 0
+                        )
                         {
                             high = mid;
                         }
@@ -138,7 +161,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                         }
                     }
 
-                    _items.Insert(low, new SourceGeneratedFileItem(document.Id, document.HintName, document.Project.Language, _workspace));
+                    _items.Insert(
+                        low,
+                        new SourceGeneratedFileItem(
+                            document.Id,
+                            document.HintName,
+                            document.Project.Language,
+                            _workspace
+                        )
+                    );
                 }
             }
             finally
@@ -157,36 +188,47 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
                 _cancellationTokenSource = new CancellationTokenSource();
                 var cancellationToken = _cancellationTokenSource.Token;
-                var asyncToken = _asyncListener.BeginAsyncOperation(nameof(SourceGeneratedFileItemSource) + "." + nameof(BeforeExpand));
+                var asyncToken = _asyncListener.BeginAsyncOperation(
+                    nameof(SourceGeneratedFileItemSource) + "." + nameof(BeforeExpand)
+                );
 
                 Task.Run(
-                    async () =>
-                    {
-                        // Since the user just expanded this, we want to do a single population aggressively,
-                        // where the only reason we'd cancel is if the user collapsed it again.
-                        var solution = _workspace.CurrentSolution;
-                        await UpdateSourceGeneratedFileItemsAsync(solution, cancellationToken).ConfigureAwait(false);
-
-                        // Now that we've done it the first time, we'll subscribe for future changes
-                        lock (_gate)
+                        async () =>
                         {
-                            // It's important we check for cancellation inside our lock: if the user were to collapse
-                            // right at this point, we don't want to have a case where we cancelled the work, unsubscribed
-                            // in AfterCollapse, and _then_ subscribed here again.
+                            // Since the user just expanded this, we want to do a single population aggressively,
+                            // where the only reason we'd cancel is if the user collapsed it again.
+                            var solution = _workspace.CurrentSolution;
+                            await UpdateSourceGeneratedFileItemsAsync(solution, cancellationToken)
+                                .ConfigureAwait(false);
 
-                            cancellationToken.ThrowIfCancellationRequested();
-                            _workspace.WorkspaceChanged += OnWorkpaceChanged;
-                            if (_workspace.CurrentSolution != solution)
+                            // Now that we've done it the first time, we'll subscribe for future changes
+                            lock (_gate)
                             {
-                                // The workspace changed while we were doing our initial population, so
-                                // refresh it. We'll just call our OnWorkspaceChanged event handler
-                                // so this looks like any other change.
-                                OnWorkpaceChanged(this,
-                                    new WorkspaceChangeEventArgs(WorkspaceChangeKind.SolutionChanged, solution, _workspace.CurrentSolution));
+                                // It's important we check for cancellation inside our lock: if the user were to collapse
+                                // right at this point, we don't want to have a case where we cancelled the work, unsubscribed
+                                // in AfterCollapse, and _then_ subscribed here again.
+
+                                cancellationToken.ThrowIfCancellationRequested();
+                                _workspace.WorkspaceChanged += OnWorkpaceChanged;
+                                if (_workspace.CurrentSolution != solution)
+                                {
+                                    // The workspace changed while we were doing our initial population, so
+                                    // refresh it. We'll just call our OnWorkspaceChanged event handler
+                                    // so this looks like any other change.
+                                    OnWorkpaceChanged(
+                                        this,
+                                        new WorkspaceChangeEventArgs(
+                                            WorkspaceChangeKind.SolutionChanged,
+                                            solution,
+                                            _workspace.CurrentSolution
+                                        )
+                                    );
+                                }
                             }
-                        }
-                    },
-                    cancellationToken).CompletesAsyncOperation(asyncToken);
+                        },
+                        cancellationToken
+                    )
+                    .CompletesAsyncOperation(asyncToken);
             }
         }
 
@@ -224,29 +266,48 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 else
                 {
                     // Time to start the work all over again. We'll ensure any previous work is cancelled
-                    Contract.ThrowIfNull(_cancellationTokenSource, "We created a token when we expanded, how do we not have one when processing an update?");
+                    Contract.ThrowIfNull(
+                        _cancellationTokenSource,
+                        "We created a token when we expanded, how do we not have one when processing an update?"
+                    );
 
                     _cancellationTokenSource.Cancel();
                     _cancellationTokenSource = new CancellationTokenSource();
 
                     var cancellationToken = _cancellationTokenSource.Token;
-                    var asyncToken = _asyncListener.BeginAsyncOperation(nameof(SourceGeneratedFileItemSource) + "." + nameof(OnWorkpaceChanged));
+                    var asyncToken = _asyncListener.BeginAsyncOperation(
+                        nameof(SourceGeneratedFileItemSource) + "." + nameof(OnWorkpaceChanged)
+                    );
 
                     // We're going to go with a really long delay: once the user expands this we will keep it updated, but it's fairly
                     // unlikely to change in a lot of cases if a generator only produces a stable set of names.
-                    _resettableDelay = new ResettableDelay(delayInMilliseconds: 5000, _asyncListener, _cancellationTokenSource.Token);
-                    _resettableDelay.Task.ContinueWith(_ =>
-                    {
-                        lock (_gate)
-                        {
-                            // We've started off this work, so if another change comes in we need to start a delay all over again
-                            _resettableDelay = null;
-                        }
+                    _resettableDelay = new ResettableDelay(
+                        delayInMilliseconds: 5000,
+                        _asyncListener,
+                        _cancellationTokenSource.Token
+                    );
+                    _resettableDelay.Task
+                        .ContinueWith(
+                            _ =>
+                            {
+                                lock (_gate)
+                                {
+                                    // We've started off this work, so if another change comes in we need to start a delay all over again
+                                    _resettableDelay = null;
+                                }
 
-                        cancellationToken.ThrowIfCancellationRequested();
+                                cancellationToken.ThrowIfCancellationRequested();
 
-                        return UpdateSourceGeneratedFileItemsAsync(_workspace.CurrentSolution, cancellationToken);
-                    }, cancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.Default).CompletesAsyncOperation(asyncToken);
+                                return UpdateSourceGeneratedFileItemsAsync(
+                                    _workspace.CurrentSolution,
+                                    cancellationToken
+                                );
+                            },
+                            cancellationToken,
+                            TaskContinuationOptions.OnlyOnRanToCompletion,
+                            TaskScheduler.Default
+                        )
+                        .CompletesAsyncOperation(asyncToken);
                 }
             }
         }
@@ -256,19 +317,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         /// <see cref="ISupportInitializeNotification"/>. This is used to show the spinning icon in the solution explorer
         /// the first time you expand it.
         /// </summary>
-        private sealed class BulkObservableCollectionWithInit<T> : BulkObservableCollection<T>, ISupportInitializeNotification
+        private sealed class BulkObservableCollectionWithInit<T>
+            : BulkObservableCollection<T>,
+              ISupportInitializeNotification
         {
             public bool IsInitialized { get; private set; } = false;
 
             public event EventHandler? Initialized;
 
-            void ISupportInitialize.BeginInit()
-            {
-            }
+            void ISupportInitialize.BeginInit() { }
 
-            void ISupportInitialize.EndInit()
-            {
-            }
+            void ISupportInitialize.EndInit() { }
 
             public void MarkAsInitialized()
             {

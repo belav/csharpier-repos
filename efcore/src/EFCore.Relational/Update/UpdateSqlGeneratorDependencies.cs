@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         [EntityFrameworkInternal]
         public UpdateSqlGeneratorDependencies(
             ISqlGenerationHelper sqlGenerationHelper,
-            IRelationalTypeMappingSource typeMappingSource)
+            IRelationalTypeMappingSource typeMappingSource
+        )
         {
             Check.NotNull(sqlGenerationHelper, nameof(sqlGenerationHelper));
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));

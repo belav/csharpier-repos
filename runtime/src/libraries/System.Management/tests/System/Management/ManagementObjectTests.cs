@@ -15,20 +15,37 @@ namespace System.Management.Tests
         {
             // The underlying delegate usage can cause some cases to have the PNSE as the inner exception but there is a best effort
             // to throw PNSE for such case.
-            Assert.Throws<PlatformNotSupportedException>(() => new ManagementObject($"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""));
+            Assert.Throws<PlatformNotSupportedException>(
+                () =>
+                    new ManagementObject(
+                        $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
+                    )
+            );
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Get_Win32_LogicalDisk()
         {
-            using (ManagementObject obj = new ManagementObject($"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""))
+            using (
+                ManagementObject obj = new ManagementObject(
+                    $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
+                )
+            )
             {
                 obj.Get();
                 Assert.True(obj.Properties.Count > 0);
                 Assert.True(ulong.Parse(obj["Size"].ToString()) > 0);
                 var classPath = obj.ClassPath.Path;
-                Assert.Equal($@"\\{Environment.MachineName}\root\cimv2:Win32_LogicalDisk", classPath);
+                Assert.Equal(
+                    $@"\\{Environment.MachineName}\root\cimv2:Win32_LogicalDisk",
+                    classPath
+                );
 
                 var clone = obj.Clone();
                 Assert.False(ReferenceEquals(clone, obj));
@@ -40,7 +57,11 @@ namespace System.Management.Tests
         [OuterLoop]
         public void GetRelated_For_Win32_LogicalDisk()
         {
-            using (ManagementObject obj = new ManagementObject($"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""))
+            using (
+                ManagementObject obj = new ManagementObject(
+                    $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
+                )
+            )
             using (ManagementObjectCollection relatedCollection = obj.GetRelated())
             {
                 Assert.True(relatedCollection.Count > 0);
@@ -50,10 +71,19 @@ namespace System.Management.Tests
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Set_Property_Win32_ComputerSystem()
         {
-            using (ManagementObject obj = new ManagementObject($"Win32_ComputerSystem.Name=\"{Environment.MachineName}\""))
+            using (
+                ManagementObject obj = new ManagementObject(
+                    $"Win32_ComputerSystem.Name=\"{Environment.MachineName}\""
+                )
+            )
             {
                 obj.Get();
                 obj.SetPropertyValue("Workgroup", "WmiTests");

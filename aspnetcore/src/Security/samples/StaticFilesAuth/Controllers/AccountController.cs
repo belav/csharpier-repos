@@ -22,7 +22,11 @@ namespace StaticFilesAuth.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password, string returnUrl = null)
+        public async Task<IActionResult> Login(
+            string userName,
+            string password,
+            string returnUrl = null
+        )
         {
             ViewData["ReturnUrl"] = returnUrl;
 
@@ -35,7 +39,9 @@ namespace StaticFilesAuth.Controllers
                     new Claim("role", "Member")
                 };
 
-                await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role")));
+                await HttpContext.SignInAsync(
+                    new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies", "user", "role"))
+                );
 
                 if (Url.IsLocalUrl(returnUrl))
                 {

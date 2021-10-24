@@ -15,8 +15,9 @@ internal static class Utils
 
     public static string GetEmbeddedResource(string file)
     {
-        using Stream stream = typeof(Utils).Assembly
-            .GetManifestResourceStream($"{typeof(Utils).Assembly.GetName().Name}.Templates.{file}")!;
+        using Stream stream = typeof(Utils).Assembly.GetManifestResourceStream(
+            $"{typeof(Utils).Assembly.GetName().Name}.Templates.{file}"
+        )!;
         using var reader = new StreamReader(stream);
         return reader.ReadToEnd();
     }
@@ -28,8 +29,9 @@ internal static class Utils
         string? workingDir = null,
         bool ignoreErrors = false,
         bool silent = true,
-        MessageImportance outputMessageImportance=MessageImportance.High,
-        MessageImportance debugMessageImportance=MessageImportance.High)
+        MessageImportance outputMessageImportance = MessageImportance.High,
+        MessageImportance debugMessageImportance = MessageImportance.High
+    )
     {
         LogInfo($"Running: {path} {args}", debugMessageImportance);
         var outputBuilder = new StringBuilder();
@@ -47,12 +49,18 @@ internal static class Utils
         if (workingDir != null)
             processStartInfo.WorkingDirectory = workingDir;
 
-        LogInfo($"Using working directory: {workingDir ?? Environment.CurrentDirectory}", debugMessageImportance);
+        LogInfo(
+            $"Using working directory: {workingDir ?? Environment.CurrentDirectory}",
+            debugMessageImportance
+        );
 
         if (envVars != null)
         {
             if (envVars.Count > 0)
-                Logger?.LogMessage(MessageImportance.Low, "Setting environment variables for execution:");
+                Logger?.LogMessage(
+                    MessageImportance.Low,
+                    "Setting environment variables for execution:"
+                );
 
             foreach (KeyValuePair<string, string> envVar in envVars)
             {
@@ -121,7 +129,7 @@ internal static class Utils
 
     public static TaskLoggingHelper? Logger { get; set; }
 
-    public static void LogInfo(string? msg, MessageImportance importance=MessageImportance.High)
+    public static void LogInfo(string? msg, MessageImportance importance = MessageImportance.High)
     {
         if (msg != null)
             Logger?.LogMessage(importance, msg);

@@ -36,7 +36,9 @@ namespace Microsoft.AspNetCore.Authentication.Cookies
         /// The default value used by CookieAuthenticationMiddleware for the
         /// CookieAuthenticationOptions.AccessDeniedPath
         /// </summary>
-        public static readonly PathString AccessDeniedPath = new PathString("/Account/AccessDenied");
+        public static readonly PathString AccessDeniedPath = new PathString(
+            "/Account/AccessDenied"
+        );
 
         /// <summary>
         /// The default value of the CookieAuthenticationOptions.ReturnUrlParameter

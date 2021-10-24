@@ -19,10 +19,14 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [InlineData(null)]
         public void InitializesIsEnabled(bool? enabled)
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(new[]
-            {
-                new KeyValuePair<string, string>("IsEnabledKey", Convert.ToString(enabled))
-            }).Build();
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>("IsEnabledKey", Convert.ToString(enabled))
+                    }
+                )
+                .Build();
 
             var options = new BatchingLoggerOptions();
             new BatchLoggerConfigureOptions(configuration, "IsEnabledKey").Configure(options);
@@ -33,10 +37,17 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [Fact]
         public void InitializesLogDirectory()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(new[]
-            {
-                new KeyValuePair<string, string>("APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL", "http://container/url")
-            }).Build();
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>(
+                            "APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL",
+                            "http://container/url"
+                        )
+                    }
+                )
+                .Build();
 
             var contextMock = new Mock<IWebAppContext>();
             contextMock.SetupGet(c => c.HomeFolder).Returns("Home");
@@ -50,10 +61,17 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [Fact]
         public void InitializesBlobUriSiteInstanceAndName()
         {
-            var configuration = new ConfigurationBuilder().AddInMemoryCollection(new []
-            {
-                new KeyValuePair<string, string>("APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL", "http://container/url")
-            }).Build();
+            var configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>(
+                            "APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL",
+                            "http://container/url"
+                        )
+                    }
+                )
+                .Build();
 
             var contextMock = new Mock<IWebAppContext>();
             contextMock.SetupGet(c => c.HomeFolder).Returns("Home");

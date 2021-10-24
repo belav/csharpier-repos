@@ -17,7 +17,11 @@ namespace System
         {
             if (s_specialFolders == null)
             {
-                Interlocked.CompareExchange(ref s_specialFolders, new Dictionary<SpecialFolder, string>(), null);
+                Interlocked.CompareExchange(
+                    ref s_specialFolders,
+                    new Dictionary<SpecialFolder, string>(),
+                    null
+                );
             }
 
             string? path;
@@ -54,19 +58,34 @@ namespace System
 
                 case SpecialFolder.Desktop:
                 case SpecialFolder.DesktopDirectory:
-                    return Path.Combine(GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None), "Desktop");
+                    return Path.Combine(
+                        GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None),
+                        "Desktop"
+                    );
 
                 case SpecialFolder.MyMusic:
-                    return Path.Combine(GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None), "Music");
+                    return Path.Combine(
+                        GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None),
+                        "Music"
+                    );
 
                 case SpecialFolder.MyPictures:
-                    return Path.Combine(GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None), "Pictures");
+                    return Path.Combine(
+                        GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None),
+                        "Pictures"
+                    );
 
                 case SpecialFolder.Templates:
-                    return CombineSearchPath(NSSearchPathDirectory.NSDocumentDirectory, "Templates");
+                    return CombineSearchPath(
+                        NSSearchPathDirectory.NSDocumentDirectory,
+                        "Templates"
+                    );
 
                 case SpecialFolder.MyVideos:
-                    return Path.Combine(GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None), "Videos");
+                    return Path.Combine(
+                        GetFolderPathCore(SpecialFolder.Personal, SpecialFolderOption.None),
+                        "Videos"
+                    );
 
                 case SpecialFolder.CommonTemplates:
                     return "/usr/share/templates";
@@ -96,9 +115,7 @@ namespace System
             static string CombineSearchPath(NSSearchPathDirectory searchPath, string subdirectory)
             {
                 string? path = Interop.Sys.SearchPath(searchPath);
-                return path != null ?
-                    Path.Combine(path, subdirectory) :
-                    string.Empty;
+                return path != null ? Path.Combine(path, subdirectory) : string.Empty;
             }
         }
     }

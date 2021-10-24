@@ -78,9 +78,7 @@ namespace System.Drawing
             {
                 stream = assembly.GetManifestResourceStream(type, name);
             }
-            catch (FileNotFoundException)
-            {
-            }
+            catch (FileNotFoundException) { }
             return stream;
         }
 
@@ -106,26 +104,42 @@ namespace System.Drawing
         internal static bool SatelliteAssemblyOptIn(Assembly assembly)
         {
             // Try 4.5 public attribute type first
-            if (DoesAssemblyHaveCustomAttribute(assembly, typeof(BitmapSuffixInSatelliteAssemblyAttribute)))
+            if (
+                DoesAssemblyHaveCustomAttribute(
+                    assembly,
+                    typeof(BitmapSuffixInSatelliteAssemblyAttribute)
+                )
+            )
             {
                 return true;
             }
 
             // Also load attribute type by name for dlls compiled against older frameworks
-            return DoesAssemblyHaveCustomAttribute(assembly, "System.Drawing.BitmapSuffixInSatelliteAssemblyAttribute");
+            return DoesAssemblyHaveCustomAttribute(
+                assembly,
+                "System.Drawing.BitmapSuffixInSatelliteAssemblyAttribute"
+            );
         }
 
         // internal for unit tests
         internal static bool SameAssemblyOptIn(Assembly assembly)
         {
             // Try 4.5 public attribute type first
-            if (DoesAssemblyHaveCustomAttribute(assembly, typeof(BitmapSuffixInSameAssemblyAttribute)))
+            if (
+                DoesAssemblyHaveCustomAttribute(
+                    assembly,
+                    typeof(BitmapSuffixInSameAssemblyAttribute)
+                )
+            )
             {
                 return true;
             }
 
             // Also load attribute type by name for dlls compiled against older frameworks
-            return DoesAssemblyHaveCustomAttribute(assembly, "System.Drawing.BitmapSuffixInSameAssemblyAttribute");
+            return DoesAssemblyHaveCustomAttribute(
+                assembly,
+                "System.Drawing.BitmapSuffixInSameAssemblyAttribute"
+            );
         }
 
         /// <summary>

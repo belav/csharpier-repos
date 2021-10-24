@@ -32,10 +32,7 @@ namespace Interop.FunctionalTests
         const int S_IWOTH = 0x2;
         const int S_IXOTH = 0x1;
 
-        const int _0755 =
-            S_IRUSR | S_IXUSR | S_IWUSR
-            | S_IRGRP | S_IXGRP
-            | S_IROTH | S_IXOTH;
+        const int _0755 = S_IRUSR | S_IXUSR | S_IWUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
 
         [DllImport("libc", SetLastError = true)]
         private static extern int chmod(string pathname, int mode);
@@ -118,7 +115,12 @@ namespace Interop.FunctionalTests
 
                     if (IsTestLine(line, out var testNumber, out var description))
                     {
-                        testCases.Add(new Tuple<string, string>($"{groupName}/{sectionId}/{testNumber}", description));
+                        testCases.Add(
+                            new Tuple<string, string>(
+                                $"{groupName}/{sectionId}/{testNumber}",
+                                description
+                            )
+                        );
                         continue;
                     }
 
@@ -209,7 +211,8 @@ namespace Interop.FunctionalTests
                 process.StartInfo.FileName = GetToolLocation();
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.Arguments = $"{testId} -p {port.ToString(CultureInfo.InvariantCulture)} --strict -v -j {tempFile} --timeout {TimeoutSeconds}"
+                process.StartInfo.Arguments =
+                    $"{testId} -p {port.ToString(CultureInfo.InvariantCulture)} --strict -v -j {tempFile} --timeout {TimeoutSeconds}"
                     + (https ? " --tls --insecure" : "");
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 process.StartInfo.CreateNoWindow = true;
@@ -228,7 +231,9 @@ namespace Interop.FunctionalTests
                         logger.LogError(args.Data);
                     }
                 };
-                var exitedTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                var exitedTcs = new TaskCompletionSource<int>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 process.EnableRaisingEvents = true; // Enables Exited
                 process.Exited += (_, args) =>
                 {
@@ -240,7 +245,12 @@ namespace Interop.FunctionalTests
                 process.BeginOutputReadLine(); // Starts OutputDataReceived
                 process.BeginErrorReadLine(); // Starts ErrorDataReceived
 
-                if (await Task.WhenAny(exitedTcs.Task, Task.Delay(TimeSpan.FromSeconds(TimeoutSeconds * 2))) != exitedTcs.Task)
+                if (
+                    await Task.WhenAny(
+                        exitedTcs.Task,
+                        Task.Delay(TimeSpan.FromSeconds(TimeoutSeconds * 2))
+                    ) != exitedTcs.Task
+                )
                 {
                     try
                     {
@@ -248,9 +258,14 @@ namespace Interop.FunctionalTests
                     }
                     catch (Exception ex)
                     {
-                        throw new TimeoutException($"h2spec didn't exit within {TimeoutSeconds * 2} seconds.", ex);
+                        throw new TimeoutException(
+                            $"h2spec didn't exit within {TimeoutSeconds * 2} seconds.",
+                            ex
+                        );
                     }
-                    throw new TimeoutException($"h2spec didn't exit within {TimeoutSeconds * 2} seconds.");
+                    throw new TimeoutException(
+                        $"h2spec didn't exit within {TimeoutSeconds * 2} seconds."
+                    );
                 }
 
                 var results = File.ReadAllText(tempFile);
@@ -267,7 +282,12 @@ namespace Interop.FunctionalTests
                     if (node.Attributes["errors"].Value != "0")
                     {
                         // This does not list the individual sub-tests in each section
-                        failures.Add("Test failed: " + node.Attributes["package"].Value + "; " + node.Attributes["name"].Value);
+                        failures.Add(
+                            "Test failed: "
+                                + node.Attributes["package"].Value
+                                + "; "
+                                + node.Attributes["name"].Value
+                        );
                     }
                     if (node.Attributes["tests"].Value != "0")
                     {

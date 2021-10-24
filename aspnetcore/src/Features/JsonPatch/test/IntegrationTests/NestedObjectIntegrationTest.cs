@@ -16,10 +16,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             // Arrange
             var targetObject = new SimpleObjectWithNestedObjectWithNullCheck()
             {
-                SimpleObjectWithNullCheck = new SimpleObjectWithNullCheck()
-                {
-                    StringProperty = "A"
-                }
+                SimpleObjectWithNullCheck = new SimpleObjectWithNullCheck() { StringProperty = "A" }
             };
 
             var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObjectWithNullCheck>();
@@ -36,17 +33,16 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
         public void ReplaceNestedObject_WithSerialization()
         {
             // Arrange
-            var targetObject = new SimpleObjectWithNestedObject()
-            {
-                IntegerValue = 1
-            };
+            var targetObject = new SimpleObjectWithNestedObject() { IntegerValue = 1 };
 
             var newNested = new NestedObject() { StringProperty = "B" };
             var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
             patchDocument.Replace(o => o.NestedObject, newNested);
 
             var serialized = JsonConvert.SerializeObject(patchDocument);
-            var deserialized = JsonConvert.DeserializeObject<JsonPatchDocument<SimpleObjectWithNestedObject>>(serialized);
+            var deserialized = JsonConvert.DeserializeObject<
+                JsonPatchDocument<SimpleObjectWithNestedObject>
+            >(serialized);
 
             // Act
             deserialized.ApplyTo(targetObject);
@@ -61,7 +57,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             // Arrange
             var targetObject = new SimpleObjectWithNestedObject()
             {
-                NestedObject = new NestedObject() { StringProperty = "A"}
+                NestedObject = new NestedObject() { StringProperty = "A" }
             };
 
             var patchDocument = new JsonPatchDocument<NestedObject>();
@@ -80,7 +76,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             // Arrange
             var targetObject = new SimpleObjectWithNestedObject()
             {
-                NestedObject = new NestedObject() { StringProperty = "B"}
+                NestedObject = new NestedObject() { StringProperty = "B" }
             };
 
             var testNested = new NestedObject() { StringProperty = "B" };
@@ -100,10 +96,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             // Arrange
             var targetObject = new SimpleObjectWithNestedObject()
             {
-                SimpleObject = new SimpleObject()
-                {
-                    StringProperty = "A"
-                }
+                SimpleObject = new SimpleObject() { StringProperty = "A" }
             };
 
             var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -119,10 +112,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
         [Fact]
         public void AddNewProperty_ToExpandoOject_InTypedObject()
         {
-            var targetObject = new NestedObject()
-            {
-                DynamicProperty = new ExpandoObject()
-            };
+            var targetObject = new NestedObject() { DynamicProperty = new ExpandoObject() };
 
             var patchDocument = new JsonPatchDocument();
             patchDocument.Add("DynamicProperty/NewInt", 1);
@@ -138,10 +128,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             // Arrange
             var targetObject = new SimpleObjectWithNestedObject()
             {
-                SimpleObject = new SimpleObject()
-                {
-                    StringProperty = "A"
-                }
+                SimpleObject = new SimpleObject() { StringProperty = "A" }
             };
 
             var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
@@ -152,7 +139,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
 
             // Assert
             Assert.Null(targetObject.SimpleObject.StringProperty);
-        }     
+        }
 
         [Fact]
         public void CopyStringProperty_ToAnotherStringProperty()
@@ -168,7 +155,10 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             };
 
             var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
-            patchDocument.Copy(o => o.SimpleObject.StringProperty, o => o.SimpleObject.AnotherStringProperty);
+            patchDocument.Copy(
+                o => o.SimpleObject.StringProperty,
+                o => o.SimpleObject.AnotherStringProperty
+            );
 
             // Act
             patchDocument.ApplyTo(targetObject);
@@ -191,7 +181,10 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             };
 
             var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
-            patchDocument.Copy(o => o.SimpleObject.StringProperty, o => o.SimpleObject.AnotherStringProperty);
+            patchDocument.Copy(
+                o => o.SimpleObject.StringProperty,
+                o => o.SimpleObject.AnotherStringProperty
+            );
 
             // Act
             patchDocument.ApplyTo(targetObject);
@@ -229,7 +222,10 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             Assert.Equal("D", targetObject.SimpleObject.AnotherStringProperty);
             Assert.Equal("C", targetObject.InheritedObject.StringProperty);
             Assert.Equal("D", targetObject.InheritedObject.AnotherStringProperty);
-            Assert.NotSame(targetObject.SimpleObject.StringProperty, targetObject.InheritedObject.StringProperty);
+            Assert.NotSame(
+                targetObject.SimpleObject.StringProperty,
+                targetObject.InheritedObject.StringProperty
+            );
         }
 
         [Fact]
@@ -278,15 +274,14 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
             // Arrange
             var targetObject = new SimpleObjectWithNestedObject()
             {
-                SimpleObject = new SimpleObject()
-                {
-                    IntegerValue = 2,
-                    AnotherIntegerValue = 3
-                }
+                SimpleObject = new SimpleObject() { IntegerValue = 2, AnotherIntegerValue = 3 }
             };
 
             var patchDocument = new JsonPatchDocument<SimpleObjectWithNestedObject>();
-            patchDocument.Move(o => o.SimpleObject.IntegerValue, o => o.SimpleObject.AnotherIntegerValue);
+            patchDocument.Move(
+                o => o.SimpleObject.IntegerValue,
+                o => o.SimpleObject.AnotherIntegerValue
+            );
 
             // Act
             patchDocument.ApplyTo(targetObject);
@@ -300,16 +295,8 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
         public void Move_KeepsObjectReference()
         {
             // Arrange
-            var sDto = new SimpleObject()
-            {
-                StringProperty = "A",
-                AnotherStringProperty = "B"
-            };
-            var iDto = new InheritedObject()
-            {
-                StringProperty = "C",
-                AnotherStringProperty = "D"
-            };
+            var sDto = new SimpleObject() { StringProperty = "A", AnotherStringProperty = "B" };
+            var iDto = new InheritedObject() { StringProperty = "C", AnotherStringProperty = "D" };
             var targetObject = new SimpleObjectWithNestedObject()
             {
                 SimpleObject = sDto,
@@ -335,11 +322,7 @@ namespace Microsoft.AspNetCore.JsonPatch.IntegrationTests
 
             public string StringProperty
             {
-                get
-                {
-                    return stringProperty;
-                }
-
+                get { return stringProperty; }
                 set
                 {
                     if (value == null)

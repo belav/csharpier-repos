@@ -24,12 +24,16 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
 
                 Assert.False(context.AllowSynchronousIO);
 
                 Assert.Throws<InvalidOperationException>(() => context.Response.Body.Flush());
-                Assert.Throws<InvalidOperationException>(() => context.Response.Body.Write(new byte[10], 0, 10));
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Response.Body.Write(new byte[10], 0, 10)
+                );
                 Assert.Throws<InvalidOperationException>(() => context.Response.Body.Flush());
 
                 context.AllowSynchronousIO = true;
@@ -43,7 +47,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
                 IEnumerable<string> ignored;
-                Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+                Assert.False(
+                    response.Content.Headers.TryGetValues("content-length", out ignored),
+                    "Content-Length"
+                );
                 Assert.True(response.Headers.TransferEncodingChunked.Value, "Chunked");
                 Assert.Equal(new byte[10], await response.Content.ReadAsByteArrayAsync());
             }
@@ -58,7 +65,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 server.Options.AllowSynchronousIO = true;
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 context.Response.Body.Write(new byte[10], 0, 10);
                 context.Response.Body.Flush();
                 await context.Response.Body.WriteAsync(new byte[10], 0, 10);
@@ -67,7 +76,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var response = await responseTask;
                 Assert.Equal(200, (int)response.StatusCode);
                 IEnumerable<string> contentLength;
-                Assert.False(response.Content.Headers.TryGetValues("content-length", out contentLength), "Content-Length");
+                Assert.False(
+                    response.Content.Headers.TryGetValues("content-length", out contentLength),
+                    "Content-Length"
+                );
                 Assert.True(response.Headers.TransferEncodingChunked.HasValue);
                 Assert.Equal(20, (await response.Content.ReadAsByteArrayAsync()).Length);
             }
@@ -82,7 +94,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var responseTask = SendRequestAsync(address);
 
                 server.Options.AllowSynchronousIO = true;
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 context.Response.Body.Write(new byte[10], 0, 0);
                 Assert.True(context.Response.HasStarted);
                 await context.Response.Body.WriteAsync(new byte[10], 0, 0);
@@ -92,7 +106,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 Assert.Equal(200, (int)response.StatusCode);
                 Assert.Equal(new Version(1, 1), response.Version);
                 IEnumerable<string> ignored;
-                Assert.False(response.Content.Headers.TryGetValues("content-length", out ignored), "Content-Length");
+                Assert.False(
+                    response.Content.Headers.TryGetValues("content-length", out ignored),
+                    "Content-Length"
+                );
                 Assert.True(response.Headers.TransferEncodingChunked.HasValue, "Chunked");
                 Assert.Equal(new byte[0], await response.Content.ReadAsByteArrayAsync());
             }
@@ -106,7 +123,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 var cts = new CancellationTokenSource();
                 // First write sends headers
                 await context.Response.Body.WriteAsync(new byte[10], 0, 10, cts.Token);
@@ -127,7 +146,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 var cts = new CancellationTokenSource();
                 cts.CancelAfter(TimeSpan.FromSeconds(10));
                 // First write sends headers
@@ -150,7 +171,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 server.Options.ThrowWriteExceptions = true;
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
                 // First write sends headers
@@ -170,7 +193,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
                 // First write sends headers
@@ -191,7 +216,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 server.Options.ThrowWriteExceptions = true;
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 var cts = new CancellationTokenSource();
                 // First write sends headers
                 await context.Response.Body.WriteAsync(new byte[10], 0, 10, cts.Token);
@@ -201,7 +228,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 Assert.True(writeTask.IsCanceled);
                 context.Dispose();
 
-                await Assert.ThrowsAsync<HttpRequestException>(() => response.Content.LoadIntoBufferAsync());
+                await Assert.ThrowsAsync<HttpRequestException>(
+                    () => response.Content.LoadIntoBufferAsync()
+                );
             }
         }
 
@@ -213,7 +242,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 var cts = new CancellationTokenSource();
                 // First write sends headers
                 await context.Response.Body.WriteAsync(new byte[10], 0, 10, cts.Token);
@@ -223,7 +254,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 Assert.True(writeTask.IsCanceled);
                 context.Dispose();
 
-                await Assert.ThrowsAsync<HttpRequestException>(() => response.Content.LoadIntoBufferAsync());
+                await Assert.ThrowsAsync<HttpRequestException>(
+                    () => response.Content.LoadIntoBufferAsync()
+                );
             }
         }
 
@@ -238,9 +271,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var cts = new CancellationTokenSource();
                 var responseTask = SendRequestAsync(address, cts.Token);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
 
-                var disconnectCts = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                var disconnectCts = new TaskCompletionSource<int>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 context.DisconnectToken.Register(() => disconnectCts.SetResult(0));
 
                 // Make sure the client is aborted
@@ -248,17 +285,30 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => responseTask);
                 await disconnectCts.Task.DefaultTimeout();
 
-                await Assert.ThrowsAsync<IOException>(async () =>
-                {
-                    // It can take several tries before Write notices the disconnect.
-                    for (int i = 0; i < Utilities.WriteRetryLimit; i++)
+                await Assert.ThrowsAsync<IOException>(
+                    async () =>
                     {
-                        context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        // It can take several tries before Write notices the disconnect.
+                        for (int i = 0; i < Utilities.WriteRetryLimit; i++)
+                        {
+                            context.Response.Body.Write(
+                                Utilities.WriteBuffer,
+                                0,
+                                Utilities.WriteBuffer.Length
+                            );
+                            await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        }
                     }
-                });
+                );
 
-                Assert.Throws<ObjectDisposedException>(() => context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length));
+                Assert.Throws<ObjectDisposedException>(
+                    () =>
+                        context.Response.Body.Write(
+                            Utilities.WriteBuffer,
+                            0,
+                            Utilities.WriteBuffer.Length
+                        )
+                );
 
                 context.Dispose();
             }
@@ -274,9 +324,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var cts = new CancellationTokenSource();
                 var responseTask = SendRequestAsync(address, cts.Token);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
 
-                var disconnectCts = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                var disconnectCts = new TaskCompletionSource<int>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 context.DisconnectToken.Register(() => disconnectCts.SetResult(0));
 
                 // First write sends headers
@@ -284,17 +338,30 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => responseTask);
                 await disconnectCts.Task.DefaultTimeout();
 
-                await Assert.ThrowsAsync<IOException>(async () =>
-                {
-                    // It can take several tries before Write notices the disconnect.
-                    for (int i = 0; i < Utilities.WriteRetryLimit; i++)
+                await Assert.ThrowsAsync<IOException>(
+                    async () =>
                     {
-                        await context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        // It can take several tries before Write notices the disconnect.
+                        for (int i = 0; i < Utilities.WriteRetryLimit; i++)
+                        {
+                            await context.Response.Body.WriteAsync(
+                                Utilities.WriteBuffer,
+                                0,
+                                Utilities.WriteBuffer.Length
+                            );
+                            await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        }
                     }
-                });
+                );
 
-                await Assert.ThrowsAsync<ObjectDisposedException>(() => context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length));
+                await Assert.ThrowsAsync<ObjectDisposedException>(
+                    () =>
+                        context.Response.Body.WriteAsync(
+                            Utilities.WriteBuffer,
+                            0,
+                            Utilities.WriteBuffer.Length
+                        )
+                );
 
                 context.Dispose();
             }
@@ -310,9 +377,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var responseTask = SendRequestAsync(address, cts.Token);
 
                 server.Options.AllowSynchronousIO = true;
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
 
-                var disconnectCts = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                var disconnectCts = new TaskCompletionSource<int>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 context.DisconnectToken.Register(() => disconnectCts.SetResult(0));
 
                 cts.Cancel();
@@ -322,7 +393,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 // It can take several tries before Write notices the disconnect.
                 for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
+                    context.Response.Body.Write(
+                        Utilities.WriteBuffer,
+                        0,
+                        Utilities.WriteBuffer.Length
+                    );
                 }
                 context.Dispose();
             }
@@ -337,9 +412,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var cts = new CancellationTokenSource();
                 var responseTask = SendRequestAsync(address, cts.Token);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
 
-                var disconnectCts = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                var disconnectCts = new TaskCompletionSource<int>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
                 context.DisconnectToken.Register(() => disconnectCts.SetResult(0));
 
                 cts.Cancel();
@@ -349,7 +428,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 // It can take several tries before Write notices the disconnect.
                 for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    await context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
+                    await context.Response.Body.WriteAsync(
+                        Utilities.WriteBuffer,
+                        0,
+                        Utilities.WriteBuffer.Length
+                    );
                 }
                 context.Dispose();
             }
@@ -365,11 +448,18 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 RequestContext context;
                 using (var client = new HttpClient())
                 {
-                    var responseTask = client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
+                    var responseTask = client.GetAsync(
+                        address,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
-                    context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                    context = await server
+                        .AcceptAsync(Utilities.DefaultTimeout)
+                        .Before(responseTask);
 
-                    var disconnectCts = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                    var disconnectCts = new TaskCompletionSource<int>(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
                     context.DisconnectToken.Register(() => disconnectCts.SetResult(0));
 
                     // First write sends headers
@@ -382,15 +472,21 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                     await disconnectCts.Task.DefaultTimeout();
                 }
 
-                await Assert.ThrowsAsync<IOException>(async () =>
-                {
-                    // It can take several tries before Write notices the disconnect.
-                    for (int i = 0; i < Utilities.WriteRetryLimit; i++)
+                await Assert.ThrowsAsync<IOException>(
+                    async () =>
                     {
-                        context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        // It can take several tries before Write notices the disconnect.
+                        for (int i = 0; i < Utilities.WriteRetryLimit; i++)
+                        {
+                            context.Response.Body.Write(
+                                Utilities.WriteBuffer,
+                                0,
+                                Utilities.WriteBuffer.Length
+                            );
+                            await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        }
                     }
-                });
+                );
                 context.Dispose();
             }
         }
@@ -405,11 +501,18 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 RequestContext context;
                 using (var client = new HttpClient())
                 {
-                    var responseTask = client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
+                    var responseTask = client.GetAsync(
+                        address,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
-                    context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                    context = await server
+                        .AcceptAsync(Utilities.DefaultTimeout)
+                        .Before(responseTask);
 
-                    var disconnectCts = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                    var disconnectCts = new TaskCompletionSource<int>(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
                     context.DisconnectToken.Register(() => disconnectCts.SetResult(0));
 
                     // First write sends headers
@@ -421,15 +524,21 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                     await disconnectCts.Task.DefaultTimeout();
                 }
 
-                await Assert.ThrowsAsync<IOException>(async () =>
-                {
-                    // It can take several tries before Write notices the disconnect.
-                    for (int i = 0; i < Utilities.WriteRetryLimit; i++)
+                await Assert.ThrowsAsync<IOException>(
+                    async () =>
                     {
-                        await context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        // It can take several tries before Write notices the disconnect.
+                        for (int i = 0; i < Utilities.WriteRetryLimit; i++)
+                        {
+                            await context.Response.Body.WriteAsync(
+                                Utilities.WriteBuffer,
+                                0,
+                                Utilities.WriteBuffer.Length
+                            );
+                            await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        }
                     }
-                });
+                );
                 context.Dispose();
             }
         }
@@ -444,11 +553,18 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 RequestContext context;
                 using (var client = new HttpClient())
                 {
-                    var responseTask = client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
+                    var responseTask = client.GetAsync(
+                        address,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
-                    context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                    context = await server
+                        .AcceptAsync(Utilities.DefaultTimeout)
+                        .Before(responseTask);
 
-                    var disconnectCts = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                    var disconnectCts = new TaskCompletionSource<int>(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
                     context.DisconnectToken.Register(() => disconnectCts.SetResult(0));
 
                     // First write sends headers
@@ -463,7 +579,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 // It can take several tries before Write notices the disconnect.
                 for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    context.Response.Body.Write(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
+                    context.Response.Body.Write(
+                        Utilities.WriteBuffer,
+                        0,
+                        Utilities.WriteBuffer.Length
+                    );
                 }
                 context.Dispose();
             }
@@ -478,11 +598,18 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 RequestContext context;
                 using (var client = new HttpClient())
                 {
-                    var responseTask = client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
+                    var responseTask = client.GetAsync(
+                        address,
+                        HttpCompletionOption.ResponseHeadersRead
+                    );
 
-                    context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                    context = await server
+                        .AcceptAsync(Utilities.DefaultTimeout)
+                        .Before(responseTask);
 
-                    var disconnectCts = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+                    var disconnectCts = new TaskCompletionSource<int>(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
                     context.DisconnectToken.Register(() => disconnectCts.SetResult(0));
 
                     // First write sends headers
@@ -497,17 +624,28 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 // It can take several tries before Write notices the disconnect.
                 for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                 {
-                    await context.Response.Body.WriteAsync(Utilities.WriteBuffer, 0, Utilities.WriteBuffer.Length);
+                    await context.Response.Body.WriteAsync(
+                        Utilities.WriteBuffer,
+                        0,
+                        Utilities.WriteBuffer.Length
+                    );
                 }
                 context.Dispose();
             }
         }
 
-        private async Task<HttpResponseMessage> SendRequestAsync(string uri, CancellationToken cancellationToken = new CancellationToken())
+        private async Task<HttpResponseMessage> SendRequestAsync(
+            string uri,
+            CancellationToken cancellationToken = new CancellationToken()
+        )
         {
             using (HttpClient client = new HttpClient() { Timeout = Utilities.DefaultTimeout })
             {
-                return await client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+                return await client.GetAsync(
+                    uri,
+                    HttpCompletionOption.ResponseHeadersRead,
+                    cancellationToken
+                );
             }
         }
     }

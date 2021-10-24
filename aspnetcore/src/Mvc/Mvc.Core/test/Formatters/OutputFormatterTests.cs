@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 objectType: null,
-                @object: null);
+                @object: null
+            );
 
             var formatter = new TestOutputFormatter();
 
@@ -31,7 +32,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // Assert
             Assert.True(result);
-            Assert.Equal(formatter.SupportedMediaTypes[0].ToString(), context.ContentType.ToString());
+            Assert.Equal(
+                formatter.SupportedMediaTypes[0].ToString(),
+                context.ContentType.ToString()
+            );
         }
 
         [Fact]
@@ -45,7 +49,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Act
             var contentTypes = formatter.GetSupportedContentTypes(
                 contentType: null,
-                objectType: typeof(string));
+                objectType: typeof(string)
+            );
 
             // Assert
             Assert.Null(contentTypes);
@@ -63,8 +68,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                "Hello, world!")
-            {
+                "Hello, world!"
+            ) {
                 ContentType = new StringSegment(formatter.SupportedMediaTypes[0].ToString()),
             };
 
@@ -79,7 +84,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData(true, true)]
         [InlineData(false, false)]
         public void CanWriteResult_MatchesWildcardsOnlyWhenContentTypeProvidedByServer(
-            bool contentTypeProvidedByServer, bool shouldMatchWildcards)
+            bool contentTypeProvidedByServer,
+            bool shouldMatchWildcards
+        )
         {
             // Arrange
             var formatter = new TypeSpecificFormatter();
@@ -92,8 +99,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 new TestHttpResponseStreamWriterFactory().CreateWriter,
                 typeof(string),
-                "Hello, world!")
-            {
+                "Hello, world!"
+            ) {
                 ContentType = new StringSegment(requestedContentType),
                 ContentTypeIsServerDefined = contentTypeProvidedByServer,
             };
@@ -121,7 +128,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Act
             var contentTypes = formatter.GetSupportedContentTypes(
                 contentType: null,
-                objectType: typeof(string));
+                objectType: typeof(string)
+            );
 
             // Assert
             Assert.Equal(2, contentTypes.Count);
@@ -140,9 +148,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             formatter.SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/xml"));
 
             // Act
-            var contentTypes = formatter.GetSupportedContentTypes(
-                "application/*",
-                typeof(int));
+            var contentTypes = formatter.GetSupportedContentTypes("application/*", typeof(int));
 
             // Assert
             var contentType = Assert.Single(contentTypes);
@@ -163,7 +169,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Act
             var contentTypes = formatter.GetSupportedContentTypes(
                 "application/vnd.test+json;v=2",
-                typeof(int));
+                typeof(int)
+            );
 
             // Assert
             var contentType = Assert.Single(contentTypes);
@@ -183,7 +190,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Act
             var contentTypes = formatter.GetSupportedContentTypes(
                 "application/vnd.test+bson",
-                typeof(int));
+                typeof(int)
+            );
 
             // Assert
             Assert.Null(contentTypes);
@@ -215,7 +223,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 new DefaultHttpContext(),
                 (s, e) => new StreamWriter(s, e),
                 typeof(object),
-                new object());
+                new object()
+            );
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => formatter.CanWriteResult(context));
@@ -230,7 +239,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                () => formatter.GetSupportedContentTypes("application/json", typeof(object)));
+                () => formatter.GetSupportedContentTypes("application/json", typeof(object))
+            );
         }
 
         private class TestOutputFormatter : OutputFormatter

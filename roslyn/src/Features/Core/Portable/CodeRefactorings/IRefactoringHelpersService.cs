@@ -36,6 +36,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// of tokens gracefully. Over-selection containing leading comments is also handled correctly. 
         /// </para>
         /// </summary>
-        Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(Document document, TextSpan selection, CancellationToken cancellationToken) where TSyntaxNode : SyntaxNode;
+        Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
+            Document document,
+            TextSpan selection,
+            CancellationToken cancellationToken
+        ) where TSyntaxNode : SyntaxNode;
     }
 }

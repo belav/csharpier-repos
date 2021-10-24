@@ -17,7 +17,11 @@ namespace System.Security.Cryptography
             FeedbackSizeValue = 8;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override void GenerateKey()
         {
             var key = new byte[8];
@@ -35,31 +39,59 @@ namespace System.Security.Cryptography
             IVValue = RandomNumberGenerator.GetBytes(8);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override ICryptoTransform CreateDecryptor()
         {
             return CreateTransform(Key, IV, encrypting: false);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV)
         {
-            return CreateTransform(rgbKey, rgbIV == null ? null : rgbIV.CloneByteArray(), encrypting: false);
+            return CreateTransform(
+                rgbKey,
+                rgbIV == null ? null : rgbIV.CloneByteArray(),
+                encrypting: false
+            );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override ICryptoTransform CreateEncryptor()
         {
             return CreateTransform(Key, IV, encrypting: true);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV)
         {
-            return CreateTransform(rgbKey, rgbIV == null ? null : rgbIV.CloneByteArray(), encrypting: true);
+            return CreateTransform(
+                rgbKey,
+                rgbIV == null ? null : rgbIV.CloneByteArray(),
+                encrypting: true
+            );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         private ICryptoTransform CreateTransform(byte[] rgbKey, byte[]? rgbIV, bool encrypting)
         {
             // note: rgbIV is guaranteed to be cloned before this method, so no need to clone it again
@@ -85,7 +117,6 @@ namespace System.Security.Cryptography
             }
             else
             {
-
                 // We truncate IV's that are longer than the block size to 8 bytes : this is
                 // done to maintain backward .NET Framework compatibility with the behavior shipped in V1.x.
                 // The call to set the IV in CryptoAPI will ignore any bytes after the first 8
@@ -94,7 +125,18 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_InvalidIVSize);
             }
 
-            BasicSymmetricCipher cipher = new BasicSymmetricCipherCsp(CapiHelper.CALG_DES, Mode, BlockSize / BitsPerByte, rgbKey, 0, false, rgbIV, encrypting, FeedbackSize, this.GetPaddingSize());
+            BasicSymmetricCipher cipher = new BasicSymmetricCipherCsp(
+                CapiHelper.CALG_DES,
+                Mode,
+                BlockSize / BitsPerByte,
+                rgbKey,
+                0,
+                false,
+                rgbIV,
+                encrypting,
+                FeedbackSize,
+                this.GetPaddingSize()
+            );
             return UniversalCryptoTransform.Create(Padding, cipher, encrypting);
         }
     }

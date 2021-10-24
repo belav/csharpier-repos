@@ -34,17 +34,19 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="requestPath">The relative request path.</param>
         /// <returns></returns>
-        public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app, string requestPath)
+        public static IApplicationBuilder UseStaticFiles(
+            this IApplicationBuilder app,
+            string requestPath
+        )
         {
             if (app == null)
             {
                 throw new ArgumentNullException(nameof(app));
             }
 
-            return app.UseStaticFiles(new StaticFileOptions
-            {
-                RequestPath = new PathString(requestPath)
-            });
+            return app.UseStaticFiles(
+                new StaticFileOptions { RequestPath = new PathString(requestPath) }
+            );
         }
 
         /// <summary>
@@ -53,7 +55,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app, StaticFileOptions options)
+        public static IApplicationBuilder UseStaticFiles(
+            this IApplicationBuilder app,
+            StaticFileOptions options
+        )
         {
             if (app == null)
             {

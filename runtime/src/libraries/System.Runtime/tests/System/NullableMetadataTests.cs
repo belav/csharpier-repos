@@ -12,16 +12,31 @@ namespace System.Runtime.Tests
 {
     public static class NullableMetadataTests
     {
-        private const string NullableAttributeFullName = "System.Runtime.CompilerServices.NullableAttribute";
-        private const string NullableContextAttributeFullName = "System.Runtime.CompilerServices.NullableContextAttribute";
-        private const string NullablePublicOnlyAttributeFullName = "System.Runtime.CompilerServices.NullablePublicOnlyAttribute";
+        private const string NullableAttributeFullName =
+            "System.Runtime.CompilerServices.NullableAttribute";
+        private const string NullableContextAttributeFullName =
+            "System.Runtime.CompilerServices.NullableContextAttribute";
+        private const string NullablePublicOnlyAttributeFullName =
+            "System.Runtime.CompilerServices.NullablePublicOnlyAttribute";
 
-        private static IEnumerable<CustomAttributeData> GetNullableAttributes(this IEnumerable<CustomAttributeData> attributes) =>
-            attributes.Where(attribute => attribute.AttributeType.FullName.Equals(NullableAttributeFullName) ||
-                                          attribute.AttributeType.FullName.Equals(NullableContextAttributeFullName));
+        private static IEnumerable<CustomAttributeData> GetNullableAttributes(
+            this IEnumerable<CustomAttributeData> attributes
+        ) =>
+            attributes.Where(
+                attribute =>
+                    attribute.AttributeType.FullName.Equals(NullableAttributeFullName)
+                    || attribute.AttributeType.FullName.Equals(NullableContextAttributeFullName)
+            );
 
-        private static CustomAttributeData GetNullablePublicOnlyAttribute(this IEnumerable<CustomAttributeData> attributes) =>
-            attributes.Where(attribute => attribute.AttributeType.FullName.Equals(NullablePublicOnlyAttributeFullName)).FirstOrDefault();
+        private static CustomAttributeData GetNullablePublicOnlyAttribute(
+            this IEnumerable<CustomAttributeData> attributes
+        ) =>
+            attributes
+                .Where(
+                    attribute =>
+                        attribute.AttributeType.FullName.Equals(NullablePublicOnlyAttributeFullName)
+                )
+                .FirstOrDefault();
 
         private static bool IsProtected(this MemberInfo info)
         {
@@ -35,8 +50,20 @@ namespace System.Runtime.Tests
             }
             else if (info is PropertyInfo propertyInfo)
             {
-                return (propertyInfo.GetMethod != null && (propertyInfo.GetMethod.IsFamily || propertyInfo.GetMethod.IsFamilyOrAssembly)) ||
-                       (propertyInfo.SetMethod != null && (propertyInfo.SetMethod.IsFamily || propertyInfo.SetMethod.IsFamilyOrAssembly));
+                return (
+                        propertyInfo.GetMethod != null
+                        && (
+                            propertyInfo.GetMethod.IsFamily
+                            || propertyInfo.GetMethod.IsFamilyOrAssembly
+                        )
+                    )
+                    || (
+                        propertyInfo.SetMethod != null
+                        && (
+                            propertyInfo.SetMethod.IsFamily
+                            || propertyInfo.SetMethod.IsFamilyOrAssembly
+                        )
+                    );
             }
             else if (info is TypeInfo typeInfo)
             {
@@ -49,9 +76,9 @@ namespace System.Runtime.Tests
         public static IEnumerable<object[]> NullableMetadataTypesTestData()
         {
             yield return new object[] { typeof(string) };
-            yield return new object[] { typeof(Dictionary<,>) };
+            yield return new object[] { typeof(Dictionary<, >) };
             yield return new object[] { typeof(Uri) };
-            yield return new object[] { typeof(ConcurrentDictionary<,>) };
+            yield return new object[] { typeof(ConcurrentDictionary<, >) };
             yield return new object[] { typeof(ArrayPool<>) };
         }
 
@@ -59,7 +86,9 @@ namespace System.Runtime.Tests
         [MemberData(nameof(NullableMetadataTypesTestData))]
         public static void NullableAttributesOnPublicApiOnly(Type type)
         {
-            MemberInfo[] internalMembers = type.GetMembers(BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
+            MemberInfo[] internalMembers = type.GetMembers(
+                BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance
+            );
 
             foreach (MemberInfo internalMember in internalMembers)
             {
@@ -72,7 +101,9 @@ namespace System.Runtime.Tests
 
                 if (internalMember is MethodInfo methodInfo)
                 {
-                    Assert.Empty(methodInfo.ReturnParameter.CustomAttributes.GetNullableAttributes());
+                    Assert.Empty(
+                        methodInfo.ReturnParameter.CustomAttributes.GetNullableAttributes()
+                    );
 
                     foreach (ParameterInfo param in methodInfo.GetParameters())
                     {
@@ -83,14 +114,18 @@ namespace System.Runtime.Tests
 
             Assert.True(type.CustomAttributes.GetNullableAttributes().Any());
 
-            bool foundAtLeastOneNullableAttribute = type.CustomAttributes.Where(a => a.AttributeType.Name.Equals(NullableContextAttributeFullName)).Any();
+            bool foundAtLeastOneNullableAttribute = type.CustomAttributes
+                .Where(a => a.AttributeType.Name.Equals(NullableContextAttributeFullName))
+                .Any();
 
             // If there is a NullableContextAttribute there is no guarantee that its members will have
             // nullable attributes, if a class declare all reference types with the same nullability
             // none will contain an attribute and will take the type's NullableContextAttribute value.
             if (!foundAtLeastOneNullableAttribute)
             {
-                MemberInfo[] publicMembers = type.GetMembers(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance);
+                MemberInfo[] publicMembers = type.GetMembers(
+                    BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance
+                );
                 foreach (MemberInfo publicMember in publicMembers)
                 {
                     if (publicMember.CustomAttributes.GetNullableAttributes().Any())
@@ -101,7 +136,11 @@ namespace System.Runtime.Tests
 
                     if (publicMember is MethodInfo methodInfo)
                     {
-                        if (methodInfo.ReturnParameter.CustomAttributes.GetNullableAttributes().Any())
+                        if (
+                            methodInfo.ReturnParameter.CustomAttributes
+                                .GetNullableAttributes()
+                                .Any()
+                        )
                         {
                             foundAtLeastOneNullableAttribute = true;
                             break;
@@ -152,7 +191,8 @@ namespace System.Runtime.Tests
         [MemberData(nameof(NullableMetadataTypesTestData))]
         public static void NullablePublicOnlyAttributePresent(Type type)
         {
-            CustomAttributeData nullablePublicOnlyAttribute = type.Module.CustomAttributes.GetNullablePublicOnlyAttribute();
+            CustomAttributeData nullablePublicOnlyAttribute =
+                type.Module.CustomAttributes.GetNullablePublicOnlyAttribute();
             Assert.NotNull(nullablePublicOnlyAttribute);
 
             Assert.False((bool)nullablePublicOnlyAttribute.ConstructorArguments.First().Value);

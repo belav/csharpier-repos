@@ -7,7 +7,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class File_Delete_Tests : FileSystemWatcherTest
     {
         [Fact]
@@ -73,7 +78,11 @@ namespace System.IO.Tests
         public void FileSystemWatcher_File_Delete_DeepDirectoryStructure()
         {
             using (var dir = new TempDirectory(GetTestFilePath()))
-            using (var deepDir = new TempDirectory(Path.Combine(dir.Path, "dir", "dir", "dir", "dir", "dir", "dir", "dir")))
+            using (
+                var deepDir = new TempDirectory(
+                    Path.Combine(dir.Path, "dir", "dir", "dir", "dir", "dir", "dir", "dir")
+                )
+            )
             using (var watcher = new FileSystemWatcher(dir.Path, "*"))
             {
                 watcher.IncludeSubdirectories = true;
@@ -85,7 +94,14 @@ namespace System.IO.Tests
                 Action cleanup = () => File.Create(fileName).Dispose();
                 cleanup();
 
-                ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, fileName, LongWaitTimeout);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Deleted,
+                    action,
+                    cleanup,
+                    fileName,
+                    LongWaitTimeout
+                );
             }
         }
 

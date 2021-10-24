@@ -36,14 +36,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DeclarationNameCompletionProvider()
-        {
-        }
+        public DeclarationNameCompletionProvider() { }
 
-        public override bool IsInsertionTrigger(SourceText text, int insertedCharacterPosition, OptionSet options)
-            => CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(text, insertedCharacterPosition, options);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int insertedCharacterPosition,
+            OptionSet options
+        ) =>
+            CompletionUtilities.IsTriggerAfterSpaceOrStartOfWordCharacter(
+                text,
+                insertedCharacterPosition,
+                options
+            );
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.SpaceTriggerCharacter;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.SpaceTriggerCharacter;
 
         public override async Task ProvideCompletionsAsync(CompletionContext completionContext)
         {
@@ -52,37 +59,67 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var position = completionContext.Position;
                 var document = completionContext.Document;
                 var cancellationToken = completionContext.CancellationToken;
-                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                    .ConfigureAwait(false);
 
-                if (!completionContext.Options.GetOption(CompletionOptions.ShowNameSuggestions, LanguageNames.CSharp))
+                if (
+                    !completionContext.Options.GetOption(
+                        CompletionOptions.ShowNameSuggestions,
+                        LanguageNames.CSharp
+                    )
+                )
                 {
                     return;
                 }
 
-                var context = CSharpSyntaxContext.CreateContext(document.Project.Solution.Workspace, semanticModel, position, cancellationToken);
+                var context = CSharpSyntaxContext.CreateContext(
+                    document.Project.Solution.Workspace,
+                    semanticModel,
+                    position,
+                    cancellationToken
+                );
                 if (context.IsInNonUserCode)
                 {
                     return;
                 }
 
-                var nameInfo = await NameDeclarationInfo.GetDeclarationInfoAsync(document, position, cancellationToken).ConfigureAwait(false);
+                var nameInfo = await NameDeclarationInfo
+                    .GetDeclarationInfoAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
                 var baseNames = GetBaseNames(semanticModel, nameInfo);
                 if (baseNames == default)
                 {
                     return;
                 }
 
-                var recommendedNames = await GetRecommendedNamesAsync(baseNames, nameInfo, context, document, cancellationToken).ConfigureAwait(false);
+                var recommendedNames = await GetRecommendedNamesAsync(
+                        baseNames,
+                        nameInfo,
+                        context,
+                        document,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 var sortValue = 0;
                 foreach (var (name, kind) in recommendedNames)
                 {
                     // We've produced items in the desired order, add a sort text to each item to prevent alphabetization
-                    completionContext.AddItem(CreateCompletionItem(name, GetGlyph(kind, nameInfo.DeclaredAccessibility), sortValue.ToString("D8")));
+                    completionContext.AddItem(
+                        CreateCompletionItem(
+                            name,
+                            GetGlyph(kind, nameInfo.DeclaredAccessibility),
+                            sortValue.ToString("D8")
+                        )
+                    );
                     sortValue++;
                 }
 
                 completionContext.SuggestionModeItem = CommonCompletionItem.Create(
-                    CSharpFeaturesResources.Name, displayTextSuffix: "", CompletionItemRules.Default);
+                    CSharpFeaturesResources.Name,
+                    displayTextSuffix: "",
+                    CompletionItemRules.Default
+                );
             }
             catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e))
             {
@@ -90,7 +127,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             }
         }
 
-        private ImmutableArray<ImmutableArray<string>> GetBaseNames(SemanticModel semanticModel, NameDeclarationInfo nameInfo)
+        private ImmutableArray<ImmutableArray<string>> GetBaseNames(
+            SemanticModel semanticModel,
+            NameDeclarationInfo nameInfo
+        )
         {
             if (nameInfo.Alias != null)
             {
@@ -102,7 +142,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 return default;
             }
 
-            var (type, plural) = UnwrapType(nameInfo.Type, semanticModel.Compilation, wasPlural: false, seenTypes: new HashSet<ITypeSymbol>());
+            var (type, plural) = UnwrapType(
+                nameInfo.Type,
+                semanticModel.Compilation,
+                wasPlural: false,
+                seenTypes: new HashSet<ITypeSymbol>()
+            );
 
             var baseNames = NameGenerator.GetBaseNames(type, plural);
             return baseNames;
@@ -162,7 +207,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return publicIcon;
         }
 
-        private (ITypeSymbol, bool plural) UnwrapType(ITypeSymbol type, Compilation compilation, bool wasPlural, HashSet<ITypeSymbol> seenTypes)
+        private (ITypeSymbol, bool plural) UnwrapType(
+            ITypeSymbol type,
+            Compilation compilation,
+            bool wasPlural,
+            HashSet<ITypeSymbol> seenTypes
+        )
         {
             // Consider C : Task<C>
             // Visiting the C in Task<C> will stackoverflow
@@ -175,7 +225,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             if (type is IArrayTypeSymbol arrayType)
             {
-                return UnwrapType(arrayType.ElementType, compilation, wasPlural: true, seenTypes: seenTypes);
+                return UnwrapType(
+                    arrayType.ElementType,
+                    compilation,
+                    wasPlural: true,
+                    seenTypes: seenTypes
+                );
             }
 
             if (type is INamedTypeSymbol namedType && namedType.OriginalDefinition != null)
@@ -183,16 +238,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // if namedType contains a valid GetEnumerator method, we want collectionType to be the type of
                 // the "Current" property of this enumerator. For example:
                 // if namedType is a Span<Person>, collectionType should be Person.
-                var collectionType = namedType.GetMembers()
+                var collectionType = namedType
+                    .GetMembers()
                     .OfType<IMethodSymbol>()
-                    .FirstOrDefault(m => m.IsValidGetEnumerator() || m.IsValidGetAsyncEnumerator())
-                    ?.ReturnType?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
-                    .OfType<IPropertySymbol>().FirstOrDefault(p => p.GetMethod != null)?.Type;
+                    .FirstOrDefault(
+                        m => m.IsValidGetEnumerator() || m.IsValidGetAsyncEnumerator()
+                    )?.ReturnType?.GetMembers(WellKnownMemberNames.CurrentPropertyName)
+                    .OfType<IPropertySymbol>()
+                    .FirstOrDefault(p => p.GetMethod != null)?.Type;
 
                 // This can happen for an un-implemented IEnumerable or IAsyncEnumerable.
                 collectionType ??= namedType.AllInterfaces.FirstOrDefault(
-                        t => t.OriginalDefinition.SpecialType == SpecialType.System_Collections_Generic_IEnumerable_T ||
-                             Equals(t.OriginalDefinition, compilation.IAsyncEnumerableOfTType()))?.TypeArguments[0];
+                    t =>
+                        t.OriginalDefinition.SpecialType
+                            == SpecialType.System_Collections_Generic_IEnumerable_T
+                        || Equals(t.OriginalDefinition, compilation.IAsyncEnumerableOfTType())
+                )?.TypeArguments[0];
 
                 if (collectionType is not null)
                 {
@@ -204,7 +265,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         return (type, wasPlural);
                     }
 
-                    return UnwrapType(collectionType, compilation, wasPlural: true, seenTypes: seenTypes);
+                    return UnwrapType(
+                        collectionType,
+                        compilation,
+                        wasPlural: true,
+                        seenTypes: seenTypes
+                    );
                 }
 
                 var originalDefinition = namedType.OriginalDefinition;
@@ -212,26 +278,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 var valueTaskType = compilation.ValueTaskOfTType();
                 var lazyOfTType = compilation.LazyOfTType();
 
-                if (Equals(originalDefinition, taskOfTType) ||
-                    Equals(originalDefinition, valueTaskType) ||
-                    Equals(originalDefinition, lazyOfTType) ||
-                    originalDefinition.SpecialType == SpecialType.System_Nullable_T)
+                if (
+                    Equals(originalDefinition, taskOfTType)
+                    || Equals(originalDefinition, valueTaskType)
+                    || Equals(originalDefinition, lazyOfTType)
+                    || originalDefinition.SpecialType == SpecialType.System_Nullable_T
+                )
                 {
-                    return UnwrapType(namedType.TypeArguments[0], compilation, wasPlural: wasPlural, seenTypes: seenTypes);
+                    return UnwrapType(
+                        namedType.TypeArguments[0],
+                        compilation,
+                        wasPlural: wasPlural,
+                        seenTypes: seenTypes
+                    );
                 }
             }
 
             return (type, wasPlural);
         }
 
-        private static async Task<ImmutableArray<(string name, SymbolKind kind)>> GetRecommendedNamesAsync(
+        private static async Task<
+            ImmutableArray<(string name, SymbolKind kind)>
+        > GetRecommendedNamesAsync(
             ImmutableArray<ImmutableArray<string>> baseNames,
             NameDeclarationInfo declarationInfo,
             CSharpSyntaxContext context,
             Document document,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var rules = await document.GetNamingRulesAsync(FallbackNamingRules.CompletionOfferingRules, cancellationToken).ConfigureAwait(false);
+            var rules = await document
+                .GetNamingRulesAsync(FallbackNamingRules.CompletionOfferingRules, cancellationToken)
+                .ConfigureAwait(false);
             var semanticFactsService = context.GetLanguageService<ISemanticFactsService>();
 
             using var _1 = PooledHashSet<string>.GetInstance(out var seenBaseNames);
@@ -242,24 +320,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             {
                 // There's no special glyph for local functions.
                 // We don't need to differentiate them at this point.
-                var symbolKind =
-                    kind.SymbolKind.HasValue ? kind.SymbolKind.Value :
-                    kind.MethodKind.HasValue ? SymbolKind.Method :
-                    throw ExceptionUtilities.Unreachable;
+                var symbolKind = kind.SymbolKind.HasValue
+                    ? kind.SymbolKind.Value
+                    : kind.MethodKind.HasValue
+                        ? SymbolKind.Method
+                        : throw ExceptionUtilities.Unreachable;
 
                 var modifiers = declarationInfo.Modifiers;
                 foreach (var rule in rules)
                 {
-                    if (rule.SymbolSpecification.AppliesTo(kind, declarationInfo.Modifiers, declarationInfo.DeclaredAccessibility))
+                    if (
+                        rule.SymbolSpecification.AppliesTo(
+                            kind,
+                            declarationInfo.Modifiers,
+                            declarationInfo.DeclaredAccessibility
+                        )
+                    )
                     {
                         foreach (var baseName in baseNames)
                         {
-                            var name = rule.NamingStyle.CreateName(baseName).EscapeIdentifier(context.IsInQuery);
+                            var name = rule.NamingStyle
+                                .CreateName(baseName)
+                                .EscapeIdentifier(context.IsInQuery);
 
                             // Don't add multiple items for the same name and only add valid identifiers
-                            if (name.Length > 1 &&
-                                CSharpSyntaxFacts.Instance.IsValidIdentifier(name) &&
-                                seenBaseNames.Add(name))
+                            if (
+                                name.Length > 1
+                                && CSharpSyntaxFacts.Instance.IsValidIdentifier(name)
+                                && seenBaseNames.Add(name)
+                            )
                             {
                                 var uniqueName = semanticFactsService.GenerateUniqueName(
                                     context.SemanticModel,
@@ -268,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                                     baseName: name,
                                     filter: s => IsRelevantSymbolKind(s),
                                     usedNames: Enumerable.Empty<string>(),
-                                    cancellationToken: cancellationToken);
+                                    cancellationToken: cancellationToken
+                                );
                                 if (seenUniqueNames.Add(uniqueName.Text))
                                     result.Add((uniqueName.Text, symbolKind));
                             }
@@ -286,12 +376,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         /// </summary>
         private static bool IsRelevantSymbolKind(ISymbol symbol)
         {
-            return symbol.Kind == SymbolKind.Local ||
-                symbol.Kind == SymbolKind.Parameter ||
-                symbol.Kind == SymbolKind.RangeVariable;
+            return symbol.Kind == SymbolKind.Local
+                || symbol.Kind == SymbolKind.Parameter
+                || symbol.Kind == SymbolKind.RangeVariable;
         }
 
-        private static CompletionItem CreateCompletionItem(string name, Glyph glyph, string sortText)
+        private static CompletionItem CreateCompletionItem(
+            string name,
+            Glyph glyph,
+            string sortText
+        )
         {
             return CommonCompletionItem.Create(
                 name,
@@ -299,7 +393,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 CompletionItemRules.Default,
                 glyph: glyph,
                 sortText: sortText,
-                description: CSharpFeaturesResources.Suggested_name.ToSymbolDisplayParts());
+                description: CSharpFeaturesResources.Suggested_name.ToSymbolDisplayParts()
+            );
         }
     }
 }

@@ -8,7 +8,6 @@
 #pragma warning disable 0649
 using System;
 
-
 interface BaseInter { }
 interface GenInter<T> { }
 
@@ -24,9 +23,10 @@ class NullableTest1
     static int? i = new int?(1);
     static Struct? s = new Struct?(new Struct());
     static ImplStruct? imps = new ImplStruct?(new ImplStruct());
-    static OpenGenImplStruct<Foo>? genfoo = new OpenGenImplStruct<Foo>?(new OpenGenImplStruct<Foo>());
+    static OpenGenImplStruct<Foo>? genfoo = new OpenGenImplStruct<Foo>?(
+        new OpenGenImplStruct<Foo>()
+    );
     static CloseGenImplStruct? genint = new CloseGenImplStruct?(new CloseGenImplStruct());
-
 
     public static void Run()
     {
@@ -45,7 +45,6 @@ class NullableTest2
     static ImplStruct? imps;
     static OpenGenImplStruct<Foo>? genfoo;
     static CloseGenImplStruct? genint;
-
 
     public static void Run()
     {

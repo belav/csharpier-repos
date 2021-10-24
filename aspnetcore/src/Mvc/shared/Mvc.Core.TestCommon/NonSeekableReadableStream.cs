@@ -14,9 +14,7 @@ namespace Microsoft.AspNetCore.Mvc
         private readonly bool _allowSyncReads;
 
         public NonSeekableReadStream(byte[] data, bool allowSyncReads = true)
-            : this(new MemoryStream(data), allowSyncReads)
-        {
-        }
+            : this(new MemoryStream(data), allowSyncReads) { }
 
         public NonSeekableReadStream(Stream inner, bool allowSyncReads)
         {
@@ -72,7 +70,12 @@ namespace Microsoft.AspNetCore.Mvc
             return _inner.Read(buffer, offset, count);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             count = Math.Max(count, 1);
             return _inner.ReadAsync(buffer, offset, count, cancellationToken);

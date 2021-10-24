@@ -15,15 +15,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             public static readonly DirectiveSyntaxEqualityComparer Instance = new();
 
-            private DirectiveSyntaxEqualityComparer()
-            {
-            }
+            private DirectiveSyntaxEqualityComparer() { }
 
-            public bool Equals(DirectiveTriviaSyntax x, DirectiveTriviaSyntax y)
-                => x.SpanStart == y.SpanStart;
+            public bool Equals(DirectiveTriviaSyntax x, DirectiveTriviaSyntax y) =>
+                x.SpanStart == y.SpanStart;
 
-            public int GetHashCode(DirectiveTriviaSyntax obj)
-                => obj.SpanStart;
+            public int GetHashCode(DirectiveTriviaSyntax obj) => obj.SpanStart;
         }
     }
 }

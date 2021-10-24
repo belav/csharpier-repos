@@ -73,13 +73,20 @@ namespace Microsoft.AspNetCore.Razor.Language
         ///
         /// Project items returned by this method have inferred FileKinds from their corresponding file paths.
         /// </remarks>
-        public virtual IEnumerable<RazorProjectItem> FindHierarchicalItems(string basePath, string path, string fileName)
+        public virtual IEnumerable<RazorProjectItem> FindHierarchicalItems(
+            string basePath,
+            string path,
+            string fileName
+        )
         {
             basePath = NormalizeAndEnsureValidPath(basePath);
             path = NormalizeAndEnsureValidPath(path);
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(fileName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(fileName)
+                );
             }
 
             Debug.Assert(!string.IsNullOrEmpty(path));
@@ -97,11 +104,25 @@ namespace Microsoft.AspNetCore.Razor.Language
             var fileNameIndex = path.LastIndexOf('/');
             var length = path.Length;
             Debug.Assert(fileNameIndex != -1);
-            if (string.Compare(path, fileNameIndex + 1, fileName, 0, fileName.Length, StringComparison.Ordinal) == 0)
+            if (
+                string.Compare(
+                    path,
+                    fileNameIndex + 1,
+                    fileName,
+                    0,
+                    fileName.Length,
+                    StringComparison.Ordinal
+                ) == 0
+            )
             {
                 // If the specified path is for the file hierarchy being constructed, then the first file that applies
                 // to it is in a parent directory.
-                builder = new StringBuilder(path, 0, fileNameIndex, fileNameIndex + fileName.Length);
+                builder = new StringBuilder(
+                    path,
+                    0,
+                    fileNameIndex,
+                    fileNameIndex + fileName.Length
+                );
                 length = fileNameIndex;
             }
             else
@@ -111,7 +132,11 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             var maxDepth = 255;
             var index = length;
-            while (maxDepth-- > 0 && index > basePath.Length && (index = path.LastIndexOf('/', index - 1)) != -1)
+            while (
+                maxDepth-- > 0
+                && index > basePath.Length
+                && (index = path.LastIndexOf('/', index - 1)) != -1
+            )
             {
                 builder.Length = index + 1;
                 builder.Append(fileName);
@@ -134,7 +159,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
             if (path[0] != '/')
             {
-                throw new ArgumentException(Resources.RazorProject_PathMustStartWithForwardSlash, nameof(path));
+                throw new ArgumentException(
+                    Resources.RazorProject_PathMustStartWithForwardSlash,
+                    nameof(path)
+                );
             }
 
             return path;

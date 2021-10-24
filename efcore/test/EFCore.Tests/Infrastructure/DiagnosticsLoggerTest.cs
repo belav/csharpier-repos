@@ -24,20 +24,43 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         [ConditionalFact]
         public void Can_filter_for_messages_of_one_subcategory()
         {
-            FilterTest(c => c.StartsWith(DbLoggerCategory.Database.Name, StringComparison.Ordinal), "DB1", "SQL1", "DB2", "SQL2");
+            FilterTest(
+                c => c.StartsWith(DbLoggerCategory.Database.Name, StringComparison.Ordinal),
+                "DB1",
+                "SQL1",
+                "DB2",
+                "SQL2"
+            );
         }
 
         [ConditionalFact]
         public void Can_filter_for_all_EF_messages()
         {
             FilterTest(
-                c => c.StartsWith(DbLoggerCategory.Name, StringComparison.Ordinal), "DB1", "SQL1", "Query1", "DB2", "SQL2", "Query2");
+                c => c.StartsWith(DbLoggerCategory.Name, StringComparison.Ordinal),
+                "DB1",
+                "SQL1",
+                "Query1",
+                "DB2",
+                "SQL2",
+                "Query2"
+            );
         }
 
         [ConditionalFact]
         public void Can_get_all_messages()
         {
-            FilterTest(c => true, "DB1", "SQL1", "Query1", "Random1", "DB2", "SQL2", "Query2", "Random2");
+            FilterTest(
+                c => true,
+                "DB1",
+                "SQL1",
+                "Query1",
+                "Random1",
+                "DB2",
+                "SQL2",
+                "Query2",
+                "Random2"
+            );
         }
 
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
@@ -46,14 +69,26 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
             var loggerFactory = new ListLoggerFactory(filter);
 
             var dbLogger = new DiagnosticsLogger<DbLoggerCategory.Database>(
-                loggerFactory, new LoggingOptions(), new DiagnosticListener("Fake"), new TestLoggingDefinitions(),
-                new NullDbContextLogger());
+                loggerFactory,
+                new LoggingOptions(),
+                new DiagnosticListener("Fake"),
+                new TestLoggingDefinitions(),
+                new NullDbContextLogger()
+            );
             var sqlLogger = new DiagnosticsLogger<DbLoggerCategory.Database.Command>(
-                loggerFactory, new LoggingOptions(), new DiagnosticListener("Fake"), new TestLoggingDefinitions(),
-                new NullDbContextLogger());
+                loggerFactory,
+                new LoggingOptions(),
+                new DiagnosticListener("Fake"),
+                new TestLoggingDefinitions(),
+                new NullDbContextLogger()
+            );
             var queryLogger = new DiagnosticsLogger<DbLoggerCategory.Query>(
-                loggerFactory, new LoggingOptions(), new DiagnosticListener("Fake"), new TestLoggingDefinitions(),
-                new NullDbContextLogger());
+                loggerFactory,
+                new LoggingOptions(),
+                new DiagnosticListener("Fake"),
+                new TestLoggingDefinitions(),
+                new NullDbContextLogger()
+            );
             var randomLogger = loggerFactory.CreateLogger("Random");
 
             dbLogger.Logger.LogInformation(1, "DB1");

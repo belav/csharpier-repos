@@ -13,9 +13,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     [Shared]
     public class AddResponseTypeAttributeCodeFixProvider : CodeFixProvider
     {
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(
-            ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id,
-            ApiDiagnosticDescriptors.API1001_ActionReturnsUndocumentedSuccessResult.Id);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(
+                ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id,
+                ApiDiagnosticDescriptors.API1001_ActionReturnsUndocumentedSuccessResult.Id
+            );
 
         public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
@@ -27,8 +29,16 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             }
 
             var diagnostic = context.Diagnostics[0];
-            if ((diagnostic.Descriptor.Id != ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id) &&
-                (diagnostic.Descriptor.Id != ApiDiagnosticDescriptors.API1001_ActionReturnsUndocumentedSuccessResult.Id))
+            if (
+                (
+                    diagnostic.Descriptor.Id
+                    != ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
+                )
+                && (
+                    diagnostic.Descriptor.Id
+                    != ApiDiagnosticDescriptors.API1001_ActionReturnsUndocumentedSuccessResult.Id
+                )
+            )
             {
                 return Task.CompletedTask;
             }

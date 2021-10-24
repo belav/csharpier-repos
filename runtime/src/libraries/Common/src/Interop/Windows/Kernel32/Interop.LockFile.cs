@@ -9,9 +9,21 @@ internal static partial class Interop
     internal static partial class Kernel32
     {
         [DllImport(Libraries.Kernel32, SetLastError = true)]
-        internal static extern bool LockFile(SafeFileHandle handle, int offsetLow, int offsetHigh, int countLow, int countHigh);
+        internal static extern bool LockFile(
+            SafeFileHandle handle,
+            int offsetLow,
+            int offsetHigh,
+            int countLow,
+            int countHigh
+        );
 
         [DllImport(Libraries.Kernel32, SetLastError = true)]
-        internal static extern bool UnlockFile(SafeFileHandle handle, int offsetLow, int offsetHigh, int countLow, int countHigh);
+        internal static extern bool UnlockFile(
+            SafeFileHandle handle,
+            int offsetLow,
+            int offsetHigh,
+            int countLow,
+            int countHigh
+        );
     }
 }

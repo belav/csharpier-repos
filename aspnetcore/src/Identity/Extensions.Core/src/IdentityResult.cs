@@ -60,9 +60,14 @@ namespace Microsoft.AspNetCore.Identity
         /// </remarks>
         public override string ToString()
         {
-            return Succeeded ?
-                   "Succeeded" :
-                   string.Format(CultureInfo.InvariantCulture, "{0} : {1}", "Failed", string.Join(",", Errors.Select(x => x.Code).ToList()));
+            return Succeeded
+              ? "Succeeded"
+              : string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0} : {1}",
+                    "Failed",
+                    string.Join(",", Errors.Select(x => x.Code).ToList())
+                );
         }
     }
 }

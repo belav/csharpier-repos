@@ -6,7 +6,10 @@ using System.Runtime.CompilerServices;
 public class RefX1<T>
 {
     T _val;
-    public RefX1(T t) { _val = t; }
+    public RefX1(T t)
+    {
+        _val = t;
+    }
 
     public override bool Equals(object obj)
     {
@@ -22,7 +25,6 @@ public class RefX1<T>
     {
         return this._val.GetHashCode();
     }
-
 }
 
 public class Test

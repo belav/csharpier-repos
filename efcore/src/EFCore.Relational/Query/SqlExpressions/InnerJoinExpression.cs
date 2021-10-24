@@ -23,9 +23,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="table"> A table source to INNER JOIN with. </param>
         /// <param name="joinPredicate"> A predicate to use for the join. </param>
         public InnerJoinExpression(TableExpressionBase table, SqlExpression joinPredicate)
-            : base(table, joinPredicate)
-        {
-        }
+            : base(table, joinPredicate) { }
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -45,14 +43,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// <param name="table"> The <see cref="P:Table" /> property of the result. </param>
         /// <param name="joinPredicate"> The <see cref="P:JoinPredicate" /> property of the result. </param>
         /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
-        public virtual InnerJoinExpression Update(TableExpressionBase table, SqlExpression joinPredicate)
+        public virtual InnerJoinExpression Update(
+            TableExpressionBase table,
+            SqlExpression joinPredicate
+        )
         {
             Check.NotNull(table, nameof(table));
             Check.NotNull(joinPredicate, nameof(joinPredicate));
 
             return table != Table || joinPredicate != JoinPredicate
-                ? new InnerJoinExpression(table, joinPredicate)
-                : this;
+              ? new InnerJoinExpression(table, joinPredicate)
+              : this;
         }
 
         /// <inheritdoc />
@@ -67,17 +68,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is InnerJoinExpression innerJoinExpression
-                    && Equals(innerJoinExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is InnerJoinExpression innerJoinExpression && Equals(innerJoinExpression)
+            );
 
-        private bool Equals(InnerJoinExpression innerJoinExpression)
-            => base.Equals(innerJoinExpression);
+        private bool Equals(InnerJoinExpression innerJoinExpression) =>
+            base.Equals(innerJoinExpression);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

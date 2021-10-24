@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         /// <param name="factoryType">The factory type.</param>
         public ProvideApplicationPartFactoryAttribute(Type factoryType)
         {
-            _applicationPartFactoryType = factoryType ?? throw new ArgumentNullException(nameof(factoryType));
+            _applicationPartFactoryType =
+                factoryType ?? throw new ArgumentNullException(nameof(factoryType));
         }
 
         /// <summary>
@@ -32,7 +33,10 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         {
             if (string.IsNullOrEmpty(factoryTypeName))
             {
-                throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(factoryTypeName));
+                throw new ArgumentException(
+                    Resources.ArgumentCannotBeNullOrEmpty,
+                    nameof(factoryTypeName)
+                );
             }
 
             _applicationPartFactoryTypeName = factoryTypeName;
@@ -44,8 +48,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
         /// <returns></returns>
         public Type GetFactoryType()
         {
-            return _applicationPartFactoryType ??
-                Type.GetType(_applicationPartFactoryTypeName!, throwOnError: true)!;
+            return _applicationPartFactoryType
+                ?? Type.GetType(_applicationPartFactoryTypeName!, throwOnError: true)!;
         }
     }
 }

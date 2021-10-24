@@ -15,10 +15,7 @@ namespace GenUnicodeProp
     /// </summary>
     internal sealed class NumericGraphemeInfo : IEquatable<NumericGraphemeInfo>
     {
-        public readonly (int decimalDigitValue,
-            int digitValue,
-            double numericValue,
-            GraphemeClusterBreakProperty graphemeClusterBreakProperty) _data;
+        public readonly (int decimalDigitValue, int digitValue, double numericValue, GraphemeClusterBreakProperty graphemeClusterBreakProperty) _data;
 
         public NumericGraphemeInfo(CodePoint codePoint)
         {

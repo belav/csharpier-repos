@@ -30,7 +30,12 @@ namespace IntelHardwareIntrinsicTest
                         ulongTable.SetOutArray(result, i);
                     }
 
-                    CheckMethodEight<ulong, ulong> checkUlong = (Span<ulong> x, Span<ulong> y, Span<ulong> z, Span<ulong> a) =>
+                    CheckMethodEight<ulong, ulong> checkUlong = (
+                        Span<ulong> x,
+                        Span<ulong> y,
+                        Span<ulong> z,
+                        Span<ulong> a
+                    ) =>
                     {
                         a[0] = x[0];
                         a[1] = 0;
@@ -39,14 +44,21 @@ namespace IntelHardwareIntrinsicTest
 
                     if (!ulongTable.CheckResult(checkUlong))
                     {
-                        PrintError(ulongTable, methodUnderTestName, "(Span<ulong> x, Span<ulong> y, Span<ulong> z, Span<ulong> a) => MoveScalar", checkUlong);
+                        PrintError(
+                            ulongTable,
+                            methodUnderTestName,
+                            "(Span<ulong> x, Span<ulong> y, Span<ulong> z, Span<ulong> a) => MoveScalar",
+                            checkUlong
+                        );
                         testResult = Fail;
                     }
                 }
             }
             else
             {
-                Console.WriteLine($"Sse2.IsSupported: {Sse2.IsSupported}, skipped tests of {typeof(Sse2)}.{methodUnderTestName}");
+                Console.WriteLine(
+                    $"Sse2.IsSupported: {Sse2.IsSupported}, skipped tests of {typeof(Sse2)}.{methodUnderTestName}"
+                );
             }
 
             return testResult;

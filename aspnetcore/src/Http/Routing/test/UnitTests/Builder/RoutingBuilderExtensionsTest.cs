@@ -23,16 +23,18 @@ namespace Microsoft.AspNetCore.Builder
                 .Returns(Mock.Of<IServiceProvider>());
 
             var router = Mock.Of<IRouter>();
-            
+
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(
-                () => applicationBuilderMock.Object.UseRouter(router));
+                () => applicationBuilderMock.Object.UseRouter(router)
+            );
 
             Assert.Equal(
-                "Unable to find the required services. Please add all the required services by calling " +
-                "'IServiceCollection.AddRouting' inside the call to 'ConfigureServices(...)'" +
-                " in the application startup code.",
-                exception.Message);
+                "Unable to find the required services. Please add all the required services by calling "
+                    + "'IServiceCollection.AddRouting' inside the call to 'ConfigureServices(...)'"
+                    + " in the application startup code.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -42,14 +44,17 @@ namespace Microsoft.AspNetCore.Builder
             var app = new ApplicationBuilder(Mock.Of<IServiceProvider>());
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => app.UseRouter(Mock.Of<IRouter>()));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => app.UseRouter(Mock.Of<IRouter>())
+            );
 
             // Assert
             Assert.Equal(
-                "Unable to find the required services. " +
-                "Please add all the required services by calling 'IServiceCollection.AddRouting' " +
-                "inside the call to 'ConfigureServices(...)' in the application startup code.",
-                ex.Message);
+                "Unable to find the required services. "
+                    + "Please add all the required services by calling 'IServiceCollection.AddRouting' "
+                    + "inside the call to 'ConfigureServices(...)' in the application startup code.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -63,10 +68,11 @@ namespace Microsoft.AspNetCore.Builder
 
             // Assert
             Assert.Equal(
-                "Unable to find the required services. " +
-                "Please add all the required services by calling 'IServiceCollection.AddRouting' " +
-                "inside the call to 'ConfigureServices(...)' in the application startup code.",
-                ex.Message);
+                "Unable to find the required services. "
+                    + "Please add all the required services by calling 'IServiceCollection.AddRouting' "
+                    + "inside the call to 'ConfigureServices(...)' in the application startup code.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -108,10 +114,12 @@ namespace Microsoft.AspNetCore.Builder
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
-            app.UseRouter(b =>
-            {
-                b.Routes.Add(router.Object);
-            });
+            app.UseRouter(
+                b =>
+                {
+                    b.Routes.Add(router.Object);
+                }
+            );
 
             var appFunc = app.Build();
 

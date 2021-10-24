@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 {
     internal class DefaultRazorProjectEngineBuilder : RazorProjectEngineBuilder
     {
-        public DefaultRazorProjectEngineBuilder(RazorConfiguration configuration, RazorProjectFileSystem fileSystem)
+        public DefaultRazorProjectEngineBuilder(
+            RazorConfiguration configuration,
+            RazorProjectFileSystem fileSystem
+        )
         {
             if (fileSystem == null)
             {
@@ -29,14 +32,19 @@ namespace Microsoft.AspNetCore.Razor.Language
         public override ICollection<IRazorFeature> Features { get; }
 
         public override IList<IRazorEnginePhase> Phases { get; }
-        
+
         public override RazorProjectEngine Build()
         {
 #pragma warning disable CS0618 // Type or member is obsolete
             var engine = RazorEngine.CreateEmpty(ConfigureRazorEngine);
 #pragma warning restore CS0618 // Type or member is obsolete
             var projectFeatures = Features.OfType<IRazorProjectEngineFeature>().ToArray();
-            var projectEngine = new DefaultRazorProjectEngine(Configuration, engine, FileSystem, projectFeatures);
+            var projectEngine = new DefaultRazorProjectEngine(
+                Configuration,
+                engine,
+                FileSystem,
+                projectFeatures
+            );
 
             return projectEngine;
         }

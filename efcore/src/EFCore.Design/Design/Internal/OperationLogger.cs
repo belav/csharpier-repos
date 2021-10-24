@@ -37,8 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool IsEnabled(LogLevel logLevel)
-            => true;
+        public virtual bool IsEnabled(LogLevel logLevel) => true;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,8 +45,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IDisposable BeginScope<TState>(TState state)
-            => NullScope.Instance;
+        public virtual IDisposable BeginScope<TState>(TState state) => NullScope.Instance;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,11 +58,14 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             EventId eventId,
             TState state,
             Exception? exception,
-            Func<TState, Exception?, string> formatter)
+            Func<TState, Exception?, string> formatter
+        )
         {
             // Only show SQL when verbose
-            if (_categoryName == DbLoggerCategory.Database.Command.Name
-                && eventId.Id == RelationalEventId.CommandExecuted.Id)
+            if (
+                _categoryName == DbLoggerCategory.Database.Command.Name
+                && eventId.Id == RelationalEventId.CommandExecuted.Id
+            )
             {
                 logLevel = LogLevel.Debug;
             }
@@ -91,7 +92,11 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
             }
         }
 
-        private static string GetMessage<TState>(TState state, Exception? exception, Func<TState, Exception?, string>? formatter)
+        private static string GetMessage<TState>(
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string>? formatter
+        )
         {
             var builder = new StringBuilder();
             if (formatter != null)
@@ -104,9 +109,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
                 if (exception != null)
                 {
-                    builder
-                        .AppendLine()
-                        .Append(exception);
+                    builder.AppendLine().Append(exception);
                 }
             }
 
@@ -117,13 +120,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         {
             public static NullScope Instance { get; } = new NullScope();
 
-            private NullScope()
-            {
-            }
+            private NullScope() { }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

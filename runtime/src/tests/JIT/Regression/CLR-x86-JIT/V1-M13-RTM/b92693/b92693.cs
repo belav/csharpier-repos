@@ -13,5 +13,9 @@ struct AA
     {
         return new TestEnum[(long)(m_shStatic1 * 11u - m_shStatic1 * 11u)];
     }
-    static int Main() { Static2(null); return 100; }
+    static int Main()
+    {
+        Static2(null);
+        return 100;
+    }
 }

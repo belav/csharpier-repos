@@ -10,11 +10,14 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
 {
-    [Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
+    [Obsolete(
+        "This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web."
+    )]
     internal class AzureADB2COpenIDConnectEventHandlers
     {
-        private IDictionary<string, string> _policyToIssuerAddress =
-            new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private IDictionary<string, string> _policyToIssuerAddress = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public AzureADB2COpenIDConnectEventHandlers(string schemeName, AzureADB2COptions options)
         {
@@ -29,25 +32,39 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
         public Task OnRedirectToIdentityProvider(RedirectContext context)
         {
             var defaultPolicy = Options.DefaultPolicy;
-            if (context.Properties.Items.TryGetValue(AzureADB2CDefaults.PolicyKey, out var policy) &&
-                !string.IsNullOrEmpty(policy) &&
-                !string.Equals(policy, defaultPolicy, StringComparison.OrdinalIgnoreCase))
+            if (
+                context.Properties.Items.TryGetValue(AzureADB2CDefaults.PolicyKey, out var policy)
+                && !string.IsNullOrEmpty(policy)
+                && !string.Equals(policy, defaultPolicy, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 context.ProtocolMessage.Scope = OpenIdConnectScope.OpenIdProfile;
                 context.ProtocolMessage.ResponseType = OpenIdConnectResponseType.IdToken;
-                context.ProtocolMessage.IssuerAddress = BuildIssuerAddress(context, defaultPolicy, policy);
+                context.ProtocolMessage.IssuerAddress = BuildIssuerAddress(
+                    context,
+                    defaultPolicy,
+                    policy
+                );
                 context.Properties.Items.Remove(AzureADB2CDefaults.PolicyKey);
             }
 
             return Task.CompletedTask;
         }
 
-        private string BuildIssuerAddress(RedirectContext context, string defaultPolicy, string policy)
+        private string BuildIssuerAddress(
+            RedirectContext context,
+            string defaultPolicy,
+            string policy
+        )
         {
             if (!_policyToIssuerAddress.TryGetValue(policy, out var issuerAddress))
             {
-                _policyToIssuerAddress[policy] = context.ProtocolMessage.IssuerAddress.ToLowerInvariant()
-                    .Replace($"/{defaultPolicy.ToLowerInvariant()}/", $"/{policy.ToLowerInvariant()}/");
+                _policyToIssuerAddress[policy] = context.ProtocolMessage.IssuerAddress
+                    .ToLowerInvariant()
+                    .Replace(
+                        $"/{defaultPolicy.ToLowerInvariant()}/",
+                        $"/{policy.ToLowerInvariant()}/"
+                    );
             }
 
             return _policyToIssuerAddress[policy];
@@ -63,10 +80,15 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
             // Correlation ID: f99deff4-f43b-43cc-b4e7-36141dbaf0a0
             // Timestamp: 2018-03-05 02:49:35Z
             //', error_uri: 'error_uri is null'.
-            if (context.Failure is OpenIdConnectProtocolException && context.Failure.Message.Contains("AADB2C90118"))
+            if (
+                context.Failure is OpenIdConnectProtocolException
+                && context.Failure.Message.Contains("AADB2C90118")
+            )
             {
                 // If the user clicked the reset password link, redirect to the reset password route
-                context.Response.Redirect($"{context.Request.PathBase}/AzureADB2C/Account/ResetPassword/{SchemeName}");
+                context.Response.Redirect(
+                    $"{context.Request.PathBase}/AzureADB2C/Account/ResetPassword/{SchemeName}"
+                );
             }
             // Access denied errors happen when a user cancels an action on the Azure Active Directory B2C UI. We just redirect back to
             // the main page in that case.
@@ -74,7 +96,10 @@ namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI
             // Correlation ID: d01c8878-0732-4eb2-beb8-da82a57432e0
             // Timestamp: 2018-03-05 02:56:49Z
             // ', error_uri: 'error_uri is null'.
-            else if (context.Failure is OpenIdConnectProtocolException && context.Failure.Message.Contains("access_denied"))
+            else if (
+                context.Failure is OpenIdConnectProtocolException
+                && context.Failure.Message.Contains("access_denied")
+            )
             {
                 context.Response.Redirect($"{context.Request.PathBase}/");
             }

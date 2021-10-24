@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             DbContext? context,
             Guid connectionId,
             bool async,
-            DateTimeOffset startTime)
-            : base(eventDefinition, messageGenerator, context)
+            DateTimeOffset startTime
+        ) : base(eventDefinition, messageGenerator, context)
         {
             Connection = connection;
             ConnectionId = connectionId;

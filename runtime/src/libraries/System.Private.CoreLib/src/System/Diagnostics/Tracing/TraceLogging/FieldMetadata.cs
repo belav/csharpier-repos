@@ -46,16 +46,16 @@ namespace System.Diagnostics.Tracing
             string name,
             TraceLoggingDataType type,
             EventFieldTags tags,
-            bool variableCount)
+            bool variableCount
+        )
             : this(
                 name,
                 type,
                 tags,
                 variableCount ? Statics.InTypeVariableCountFlag : (byte)0,
                 0,
-                null)
-        {
-        }
+                null
+            ) { }
 
         /// <summary>
         /// Fixed-length array.
@@ -64,16 +64,8 @@ namespace System.Diagnostics.Tracing
             string name,
             TraceLoggingDataType type,
             EventFieldTags tags,
-            ushort fixedCount)
-            : this(
-                name,
-                type,
-                tags,
-                Statics.InTypeFixedCountFlag,
-                fixedCount,
-                null)
-        {
-        }
+            ushort fixedCount
+        ) : this(name, type, tags, Statics.InTypeFixedCountFlag, fixedCount, null) { }
 
         /// <summary>
         /// Custom serializer
@@ -82,16 +74,16 @@ namespace System.Diagnostics.Tracing
             string name,
             TraceLoggingDataType type,
             EventFieldTags tags,
-            byte[]? custom)
+            byte[]? custom
+        )
             : this(
                 name,
                 type,
                 tags,
                 Statics.InTypeCustomCountFlag,
                 checked((ushort)(custom == null ? 0 : custom.Length)),
-                custom)
-        {
-        }
+                custom
+            ) { }
 
         private FieldMetadata(
             string name,
@@ -99,15 +91,17 @@ namespace System.Diagnostics.Tracing
             EventFieldTags tags,
             byte countFlags,
             ushort fixedCount = 0,
-            byte[]? custom = null)
+            byte[]? custom = null
+        )
         {
             if (name == null)
             {
                 throw new ArgumentNullException(
                     nameof(name),
                     "This usually means that the object passed to Write is of a type that"
-                    + " does not support being used as the top-level object in an event,"
-                    + " e.g. a primitive or built-in type.");
+                        + " does not support being used as the top-level object in an event,"
+                        + " e.g. a primitive or built-in type."
+                );
             }
 
             Statics.CheckName(name);
@@ -130,10 +124,14 @@ namespace System.Diagnostics.Tracing
                 {
                     throw new NotSupportedException(SR.EventSource_NotSupportedArrayOfBinary);
                 }
-                if (coreType == (int)TraceLoggingDataType.Utf16String ||
-                    coreType == (int)TraceLoggingDataType.MbcsString)
+                if (
+                    coreType == (int)TraceLoggingDataType.Utf16String
+                    || coreType == (int)TraceLoggingDataType.MbcsString
+                )
                 {
-                    throw new NotSupportedException(SR.EventSource_NotSupportedArrayOfNullTerminatedString);
+                    throw new NotSupportedException(
+                        SR.EventSource_NotSupportedArrayOfNullTerminatedString
+                    );
                 }
             }
 
@@ -210,8 +208,10 @@ namespace System.Diagnostics.Tracing
                 pos += 2;
 
                 // If InTypeCustomCountFlag set, write out the blob of custom meta-data.
-                if (Statics.InTypeCustomCountFlag == (this.inType & Statics.InTypeCountMask) &&
-                    this.fixedCount != 0)
+                if (
+                    Statics.InTypeCustomCountFlag == (this.inType & Statics.InTypeCountMask)
+                    && this.fixedCount != 0
+                )
                 {
                     if (metadata != null)
                     {

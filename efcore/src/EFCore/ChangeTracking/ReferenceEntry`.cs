@@ -32,9 +32,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         [EntityFrameworkInternal]
         public ReferenceEntry(InternalEntityEntry internalEntry, string name)
-            : base(internalEntry, name)
-        {
-        }
+            : base(internalEntry, name) { }
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,16 +42,13 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// </summary>
         [EntityFrameworkInternal]
         public ReferenceEntry(InternalEntityEntry internalEntry, INavigation navigation)
-            : base(internalEntry, navigation)
-        {
-        }
+            : base(internalEntry, navigation) { }
 
         /// <summary>
         ///     The <see cref="EntityEntry{TEntity}" /> to which this member belongs.
         /// </summary>
         /// <value> An entry for the entity that owns this member. </value>
-        public new virtual EntityEntry<TEntity> EntityEntry
-            => new(InternalEntry);
+        public new virtual EntityEntry<TEntity> EntityEntry => new(InternalEntry);
 
         /// <summary>
         ///     The <see cref="EntityEntry{TEntity}" /> of the entity this navigation targets.
@@ -89,7 +84,6 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///         actually loading the entity from the database.
         ///     </para>
         /// </summary>
-        public new virtual IQueryable<TProperty> Query()
-            => (IQueryable<TProperty>)base.Query();
+        public new virtual IQueryable<TProperty> Query() => (IQueryable<TProperty>)base.Query();
     }
 }

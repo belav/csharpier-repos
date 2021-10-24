@@ -33,7 +33,11 @@ namespace System.Diagnostics
     public partial class StackTrace
     {
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern MonoStackFrame[] get_trace(Exception e, int skipFrames, bool needFileInfo);
+        internal static extern MonoStackFrame[] get_trace(
+            Exception e,
+            int skipFrames,
+            bool needFileInfo
+        );
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         private void InitializeForCurrentThread(int skipFrames, bool needFileInfo)

@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 {
     internal static class CodeFixVerifierHelper
     {
-        public static void VerifyStandardProperty(DiagnosticAnalyzer analyzer, AnalyzerProperty property)
+        public static void VerifyStandardProperty(
+            DiagnosticAnalyzer analyzer,
+            AnalyzerProperty property
+        )
         {
             switch (property)
             {
@@ -71,7 +74,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             {
                 if (descriptor.CustomTags.Contains(WellKnownDiagnosticTags.NotConfigurable))
                 {
-                    if (!descriptor.IsEnabledByDefault || descriptor.DefaultSeverity == DiagnosticSeverity.Hidden)
+                    if (
+                        !descriptor.IsEnabledByDefault
+                        || descriptor.DefaultSeverity == DiagnosticSeverity.Hidden
+                    )
                     {
                         // The message only displayed if either enabled and not hidden, or configurable
                         return true;
@@ -92,15 +98,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         public static string? GetEditorConfigText(this OptionsCollection options)
         {
-            var (text, _) = ConvertOptionsToAnalyzerConfig(options.DefaultExtension, explicitEditorConfig: string.Empty, options);
+            var (text, _) = ConvertOptionsToAnalyzerConfig(
+                options.DefaultExtension,
+                explicitEditorConfig: string.Empty,
+                options
+            );
             return text?.ToString();
         }
 
-        public static (SourceText? analyzerConfig, IEnumerable<KeyValuePair<OptionKey2, object?>> options) ConvertOptionsToAnalyzerConfig(string defaultFileExtension, string? explicitEditorConfig, OptionsCollection options)
+        public static (SourceText? analyzerConfig, IEnumerable<
+            KeyValuePair<OptionKey2, object?>
+        > options) ConvertOptionsToAnalyzerConfig(
+            string defaultFileExtension,
+            string? explicitEditorConfig,
+            OptionsCollection options
+        )
         {
             if (options.Count == 0)
             {
-                var result = explicitEditorConfig is object ? SourceText.From(explicitEditorConfig, Encoding.UTF8) : null;
+                var result =
+                    explicitEditorConfig is object
+                        ? SourceText.From(explicitEditorConfig, Encoding.UTF8)
+                        : null;
                 return (result, options);
             }
 
@@ -122,18 +141,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             {
                 if (value is NamingStylePreferences namingStylePreferences)
                 {
-                    EditorConfigFileGenerator.AppendNamingStylePreferencesToEditorConfig(namingStylePreferences, key.Language!, analyzerConfig);
+                    EditorConfigFileGenerator.AppendNamingStylePreferencesToEditorConfig(
+                        namingStylePreferences,
+                        key.Language!,
+                        analyzerConfig
+                    );
                     continue;
                 }
 
-                var editorConfigStorageLocation = key.Option.StorageLocations.OfType<IEditorConfigStorageLocation2>().FirstOrDefault();
+                var editorConfigStorageLocation = key.Option.StorageLocations
+                    .OfType<IEditorConfigStorageLocation2>()
+                    .FirstOrDefault();
                 if (editorConfigStorageLocation is null)
                 {
                     remainingOptions.Add(KeyValuePairUtil.Create<OptionKey2, object?>(key, value));
                     continue;
                 }
 
-                analyzerConfig.AppendLine(editorConfigStorageLocation.GetEditorConfigString(value, null!));
+                analyzerConfig.AppendLine(
+                    editorConfigStorageLocation.GetEditorConfigString(value, null!)
+                );
             }
 
             return (SourceText.From(analyzerConfig.ToString(), Encoding.UTF8), remainingOptions);

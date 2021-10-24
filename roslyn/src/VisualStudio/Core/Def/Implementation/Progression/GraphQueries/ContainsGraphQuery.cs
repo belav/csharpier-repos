@@ -19,9 +19,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal sealed class ContainsGraphQuery : IGraphQuery
     {
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        )
         {
-            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+            var graphBuilder = await GraphBuilder
+                .CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken)
+                .ConfigureAwait(false);
             var nodesToProcess = context.InputNodes;
 
             for (var depth = 0; depth < context.LinkDepth; depth++)
@@ -41,7 +47,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         {
                             cancellationToken.ThrowIfCancellationRequested();
 
-                            var newNode = await graphBuilder.AddNodeAsync(newSymbol, relatedNode: node).ConfigureAwait(false);
+                            var newNode = await graphBuilder
+                                .AddNodeAsync(newSymbol, relatedNode: node)
+                                .ConfigureAwait(false);
                             graphBuilder.AddLink(node, GraphCommonSchema.Contains, newNode);
                         }
                     }
@@ -51,11 +59,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
                         if (document != null)
                         {
-                            foreach (var newSymbol in await SymbolContainment.GetContainedSymbolsAsync(document, cancellationToken).ConfigureAwait(false))
+                            foreach (
+                                var newSymbol in await SymbolContainment
+                                    .GetContainedSymbolsAsync(document, cancellationToken)
+                                    .ConfigureAwait(false)
+                            )
                             {
                                 cancellationToken.ThrowIfCancellationRequested();
 
-                                var newNode = await graphBuilder.AddNodeAsync(newSymbol, relatedNode: node).ConfigureAwait(false);
+                                var newNode = await graphBuilder
+                                    .AddNodeAsync(newSymbol, relatedNode: node)
+                                    .ConfigureAwait(false);
                                 graphBuilder.AddLink(node, GraphCommonSchema.Contains, newNode);
                             }
                         }

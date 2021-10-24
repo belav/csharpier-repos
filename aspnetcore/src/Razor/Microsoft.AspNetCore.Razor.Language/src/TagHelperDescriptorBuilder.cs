@@ -19,10 +19,18 @@ namespace Microsoft.AspNetCore.Razor.Language
                 throw new ArgumentNullException(nameof(assemblyName));
             }
 
-            return new DefaultTagHelperDescriptorBuilder(TagHelperConventions.DefaultKind, name, assemblyName);
+            return new DefaultTagHelperDescriptorBuilder(
+                TagHelperConventions.DefaultKind,
+                name,
+                assemblyName
+            );
         }
 
-        public static TagHelperDescriptorBuilder Create(string kind, string name, string assemblyName)
+        public static TagHelperDescriptorBuilder Create(
+            string kind,
+            string name,
+            string assemblyName
+        )
         {
             if (kind == null)
             {

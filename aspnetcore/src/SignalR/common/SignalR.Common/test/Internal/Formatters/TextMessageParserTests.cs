@@ -41,7 +41,9 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Formatters
         [Fact]
         public void IncompleteTrailingMessage()
         {
-            var message = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("ABC\u001eXYZ\u001e123"));
+            var message = new ReadOnlySequence<byte>(
+                Encoding.UTF8.GetBytes("ABC\u001eXYZ\u001e123")
+            );
             Assert.True(TextMessageParser.TryParseMessage(ref message, out var payload));
             Assert.Equal("ABC", Encoding.UTF8.GetString(payload.ToArray()));
             Assert.True(TextMessageParser.TryParseMessage(ref message, out payload));

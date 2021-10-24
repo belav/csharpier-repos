@@ -13,20 +13,14 @@ namespace System.Xml.Xsl
     internal class XslTransformException : XsltException
     {
         public XslTransformException(Exception? inner, string res, params string?[]? args)
-            : base(CreateMessage(res, args), inner)
-        { }
+            : base(CreateMessage(res, args), inner) { }
 
         public XslTransformException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
-        public XslTransformException(string message)
-            : base(CreateMessage(message, null), null)
-        { }
+        public XslTransformException(string message) : base(CreateMessage(message, null), null) { }
 
-        internal XslTransformException(string res, params string?[]? args)
-            : this(null, res, args)
+        internal XslTransformException(string res, params string?[]? args) : this(null, res, args)
         { }
 
         internal static string CreateMessage(string res, params string?[]? args)
@@ -44,9 +38,7 @@ namespace System.Xml.Xsl
                     message = string.Format(res, args);
                 }
             }
-            catch (MissingManifestResourceException)
-            {
-            }
+            catch (MissingManifestResourceException) { }
 
             if (message != null)
             {
@@ -85,7 +77,12 @@ namespace System.Xml.Xsl
             }
             if (InnerException != null)
             {
-                result += " ---> " + InnerException.ToString() + Environment.NewLine + "   " + CreateMessage(SR.Xml_EndOfInnerExceptionStack);
+                result +=
+                    " ---> "
+                    + InnerException.ToString()
+                    + Environment.NewLine
+                    + "   "
+                    + CreateMessage(SR.Xml_EndOfInnerExceptionStack);
             }
             if (StackTrace != null)
             {
@@ -100,9 +97,7 @@ namespace System.Xml.Xsl
     {
         private ISourceLineInfo? _lineInfo;
 
-        internal XslLoadException(string res, params string?[]? args)
-            : base(null, res, args)
-        { }
+        internal XslLoadException(string res, params string?[]? args) : base(null, res, args) { }
 
         internal XslLoadException(Exception? inner, ISourceLineInfo? lineInfo)
             : base(inner, SR.Xslt_CompileError2, null)
@@ -152,7 +147,9 @@ namespace System.Xml.Xsl
                 }
             }
 
-            SetSourceLineInfo(new SourceLineInfo(error.FileName, errorLine, errorColumn, errorLine, errorColumn));
+            SetSourceLineInfo(
+                new SourceLineInfo(error.FileName, errorLine, errorColumn, errorLine, errorColumn)
+            );
         }
 
         internal void SetSourceLineInfo(ISourceLineInfo? lineInfo)
@@ -196,10 +193,17 @@ namespace System.Xml.Xsl
             if (lineInfo != null)
             {
                 string fileName = SourceLineInfo.GetFileName(lineInfo.Uri!);
-                string lineInfoMessage = CreateMessage(SR.Xml_ErrorFilePosition, fileName, lineInfo.Start.Line.ToString(CultureInfo.InvariantCulture), lineInfo.Start.Pos.ToString(CultureInfo.InvariantCulture));
+                string lineInfoMessage = CreateMessage(
+                    SR.Xml_ErrorFilePosition,
+                    fileName,
+                    lineInfo.Start.Line.ToString(CultureInfo.InvariantCulture),
+                    lineInfo.Start.Pos.ToString(CultureInfo.InvariantCulture)
+                );
                 if (lineInfoMessage != null && lineInfoMessage.Length > 0)
                 {
-                    if (message.Length > 0 && !XmlCharType.IsWhiteSpace(message[message.Length - 1]))
+                    if (
+                        message.Length > 0 && !XmlCharType.IsWhiteSpace(message[message.Length - 1])
+                    )
                     {
                         message += " ";
                     }
@@ -209,7 +213,11 @@ namespace System.Xml.Xsl
             return message;
         }
 
-        internal static string CreateMessage(ISourceLineInfo? lineInfo, string res, params string?[]? args)
+        internal static string CreateMessage(
+            ISourceLineInfo? lineInfo,
+            string res,
+            params string?[]? args
+        )
         {
             return AppendLineInfoMessage(CreateMessage(res, args), lineInfo);
         }

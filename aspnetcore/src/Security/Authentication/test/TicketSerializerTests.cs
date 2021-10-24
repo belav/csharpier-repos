@@ -41,7 +41,9 @@ namespace Microsoft.AspNetCore.Authentication
             var properties = new AuthenticationProperties();
 
             var ticket = new AuthenticationTicket(new ClaimsPrincipal(), properties, "Hello");
-            ticket.Principal.AddIdentity(new ClaimsIdentity("misc") { BootstrapContext = "bootstrap" });
+            ticket.Principal.AddIdentity(
+                new ClaimsIdentity("misc") { BootstrapContext = "bootstrap" }
+            );
 
             using (var stream = new MemoryStream())
             using (var writer = new BinaryWriter(stream))
@@ -76,7 +78,7 @@ namespace Microsoft.AspNetCore.Authentication
                 Assert.Single(readTicket.Principal.Identities);
                 Assert.Equal("misc", readTicket.Principal.Identity.AuthenticationType);
 
-                var identity = (ClaimsIdentity) readTicket.Principal.Identity;
+                var identity = (ClaimsIdentity)readTicket.Principal.Identity;
                 Assert.NotNull(identity.Actor);
                 Assert.Equal("actor", identity.Actor.AuthenticationType);
             }
@@ -85,7 +87,8 @@ namespace Microsoft.AspNetCore.Authentication
         [ConditionalFact]
         [FrameworkSkipCondition(
             RuntimeFrameworks.Mono,
-            SkipReason = "Test fails with Mono 4.0.4. Build rarely reaches testing with Mono 4.2.1")]
+            SkipReason = "Test fails with Mono 4.0.4. Build rarely reaches testing with Mono 4.2.1"
+        )]
         public void CanRoundTripClaimProperties()
         {
             var serializer = new TicketSerializer();

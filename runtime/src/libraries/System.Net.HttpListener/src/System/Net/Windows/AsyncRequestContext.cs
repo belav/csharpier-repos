@@ -19,13 +19,19 @@ namespace System.Net
 
         private void DebugRefCountReleaseNativeOverlapped()
         {
-            Debug.Assert(Interlocked.Decrement(ref _nativeOverlappedCounter) == 0, "NativeOverlapped released too many times.");
+            Debug.Assert(
+                Interlocked.Decrement(ref _nativeOverlappedCounter) == 0,
+                "NativeOverlapped released too many times."
+            );
             Interlocked.Decrement(ref _nativeOverlappedUsed);
         }
 
         private void DebugRefCountAllocNativeOverlapped()
         {
-            Debug.Assert(Interlocked.Increment(ref _nativeOverlappedCounter) == 1, "NativeOverlapped allocated without release.");
+            Debug.Assert(
+                Interlocked.Increment(ref _nativeOverlappedCounter) == 1,
+                "NativeOverlapped allocated without release."
+            );
         }
 #endif
 
@@ -54,7 +60,11 @@ namespace System.Net
 #endif
             SetBuffer(checked((int)newSize));
             _boundHandle = boundHandle;
-            _nativeOverlapped = boundHandle.AllocateNativeOverlapped(ListenerAsyncResult.IOCallback, state: _result, pinData: RequestBuffer);
+            _nativeOverlapped = boundHandle.AllocateNativeOverlapped(
+                ListenerAsyncResult.IOCallback,
+                state: _result,
+                pinData: RequestBuffer
+            );
 
             return (Interop.HttpApi.HTTP_REQUEST*)RequestBuffer.ToPointer();
         }
@@ -83,7 +93,10 @@ namespace System.Net
         {
             if (_nativeOverlapped != null)
             {
-                Debug.Assert(!disposing, "AsyncRequestContext::Dispose()|Must call ReleasePins() before calling Dispose().");
+                Debug.Assert(
+                    !disposing,
+                    "AsyncRequestContext::Dispose()|Must call ReleasePins() before calling Dispose()."
+                );
                 if (!Environment.HasShutdownStarted || disposing)
                 {
 #if DEBUG
@@ -101,7 +114,10 @@ namespace System.Net
             get
             {
 #if DEBUG
-                Debug.Assert(Interlocked.Increment(ref _nativeOverlappedUsed) == 1, "NativeOverlapped reused.");
+                Debug.Assert(
+                    Interlocked.Increment(ref _nativeOverlappedUsed) == 1,
+                    "NativeOverlapped reused."
+                );
 #endif
 
                 return _nativeOverlapped;

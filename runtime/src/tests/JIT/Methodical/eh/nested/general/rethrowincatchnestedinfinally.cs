@@ -8,10 +8,8 @@ using System;
 
 namespace Test
 {
-
     class Class1
     {
-
         private static TestUtil.TestLog testLog;
 
         static Class1()

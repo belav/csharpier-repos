@@ -14,22 +14,17 @@ namespace System.CommandLine.Tests
         public void Parse_result_diagram_helps_explain_parse_operation()
         {
             var parser = new Parser(
-                new Command(
-                    "the-command")
-                  {
-                        new Option("-x", arity: ArgumentArity.ExactlyOne),
-                        new Option("-y"),
-                        new Argument
-                        {
-                            Arity = ArgumentArity.ZeroOrMore
-                        }
-                    });
+                new Command("the-command")
+                {
+                    new Option("-x", arity: ArgumentArity.ExactlyOne),
+                    new Option("-y"),
+                    new Argument { Arity = ArgumentArity.ZeroOrMore }
+                }
+            );
 
             var result = parser.Parse("the-command -x one -y two three");
 
-            result.Diagram()
-                  .Should()
-                  .Be("[ the-command [ -x <one> ] [ -y ] <two> <three> ]");
+            result.Diagram().Should().Be("[ the-command [ -x <one> ] [ -y ] <two> <three> ]");
         }
 
         [Fact]
@@ -42,24 +37,17 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("command -x ar");
 
-            result.Diagram()
-                  .Should()
-                  .Be("[ command ![ -x <ar> ] ]");
+            result.Diagram().Should().Be("[ command ![ -x <ar> ] ]");
         }
 
         [Fact]
         public void Parse_diagram_shows_type_conversion_errors()
         {
-            var command = new RootCommand
-            {
-                new Option<int>("-f")
-            };
+            var command = new RootCommand { new Option<int>("-f") };
 
             var result = command.Parse("-f not-an-int");
 
-            result.Diagram()
-                  .Should()
-                  .Be($"[ {RootCommand.ExecutableName} [ -f !<not-an-int> ] ]");
+            result.Diagram().Should().Be($"[ {RootCommand.ExecutableName} [ -f !<not-an-int> ] ]");
         }
 
         [Fact]
@@ -76,8 +64,11 @@ namespace System.CommandLine.Tests
 
             var diagram = result.Diagram();
 
-            diagram.Should()
-                   .Be($"[ {RootCommand.ExecutableName} [ -w <9000> ] *[ --height <10> ] *[ --color <Cyan> ] ]");
+            diagram
+                .Should()
+                .Be(
+                    $"[ {RootCommand.ExecutableName} [ -w <9000> ] *[ --height <10> ] *[ --color <Cyan> ] ]"
+                );
         }
 
         [Fact]
@@ -92,11 +83,14 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("one two three four five");
 
-            result.Diagram()
-                  .Should()
-                  .Be("[ the-command [ first <one> ] [ second <two> ] [ third <three> <four> <five> ] ]");
+            result
+                .Diagram()
+                .Should()
+                .Be(
+                    "[ the-command [ first <one> ] [ second <two> ] [ third <three> <four> <five> ] ]"
+                );
         }
-        
+
         [Fact]
         public void Parse_diagram_indicates_which_tokens_were_applied_to_which_command_argument_for_sequences_of_complex_types()
         {
@@ -109,9 +103,12 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("one two three four five");
 
-            result.Diagram()
-                  .Should()
-                  .Be("[ the-command [ first <one> ] [ second <two> ] [ third <three> <four> <five> ] ]");
+            result
+                .Diagram()
+                .Should()
+                .Be(
+                    "[ the-command [ first <one> ] [ second <two> ] [ third <three> <four> <five> ] ]"
+                );
         }
     }
 }

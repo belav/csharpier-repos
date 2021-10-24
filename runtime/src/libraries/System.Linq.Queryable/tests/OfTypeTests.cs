@@ -10,7 +10,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            object[] source = { };
+            object[] source = {  };
             Assert.Empty(source.AsQueryable().OfType<int>());
         }
 
@@ -26,7 +26,10 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<object>)null).OfType<string>());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<object>)null).OfType<string>()
+            );
         }
 
         [Fact]

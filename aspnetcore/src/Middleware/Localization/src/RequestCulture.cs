@@ -1,5 +1,5 @@
-// Copyright (c) .NET Foundation. All rights reserved. 
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information. 
+// Copyright (c) .NET Foundation. All rights reserved.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
 using System.Globalization;
@@ -16,20 +16,14 @@ namespace Microsoft.AspNetCore.Localization
         /// properties set to the same <see cref="CultureInfo"/> value.
         /// </summary>
         /// <param name="culture">The <see cref="CultureInfo"/> for the request.</param>
-        public RequestCulture(CultureInfo culture)
-            : this(culture, culture)
-        {
-        }
+        public RequestCulture(CultureInfo culture) : this(culture, culture) { }
 
         /// <summary>
         /// Creates a new <see cref="RequestCulture"/> object with its <see cref="Culture"/> and <see cref="UICulture"/>
         /// properties set to the same <see cref="CultureInfo"/> value.
         /// </summary>
         /// <param name="culture">The culture for the request.</param>
-        public RequestCulture(string culture)
-            : this(culture, culture)
-        {
-        }
+        public RequestCulture(string culture) : this(culture, culture) { }
 
         /// <summary>
         /// Creates a new <see cref="RequestCulture"/> object with its <see cref="Culture"/> and <see cref="UICulture"/>
@@ -38,9 +32,7 @@ namespace Microsoft.AspNetCore.Localization
         /// <param name="culture">The culture for the request to be used for formatting.</param>
         /// <param name="uiCulture">The culture for the request to be used for text, i.e. language.</param>
         public RequestCulture(string culture, string uiCulture)
-            : this (new CultureInfo(culture), new CultureInfo(uiCulture))
-        {
-        }
+            : this(new CultureInfo(culture), new CultureInfo(uiCulture)) { }
 
         /// <summary>
         /// Creates a new <see cref="RequestCulture"/> object with its <see cref="Culture"/> and <see cref="UICulture"/>

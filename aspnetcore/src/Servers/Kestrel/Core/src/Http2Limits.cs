@@ -35,7 +35,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanZeroRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        CoreStrings.GreaterThanZeroRequired
+                    );
                 }
 
                 _maxStreamsPerConnection = value;
@@ -55,7 +59,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanOrEqualToZeroRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        CoreStrings.GreaterThanOrEqualToZeroRequired
+                    );
                 }
 
                 _headerTableSize = value;
@@ -73,9 +81,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             get => _maxFrameSize;
             set
             {
-                if (value < Http2PeerSettings.MinAllowedMaxFrameSize || value > Http2PeerSettings.MaxAllowedMaxFrameSize)
+                if (
+                    value < Http2PeerSettings.MinAllowedMaxFrameSize
+                    || value > Http2PeerSettings.MaxAllowedMaxFrameSize
+                )
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.FormatArgumentOutOfRange(Http2PeerSettings.MinAllowedMaxFrameSize, Http2PeerSettings.MaxAllowedMaxFrameSize));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        CoreStrings.FormatArgumentOutOfRange(
+                            Http2PeerSettings.MinAllowedMaxFrameSize,
+                            Http2PeerSettings.MaxAllowedMaxFrameSize
+                        )
+                    );
                 }
 
                 _maxFrameSize = value;
@@ -95,7 +113,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, CoreStrings.GreaterThanZeroRequired);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        CoreStrings.GreaterThanZeroRequired
+                    );
                 }
 
                 _maxRequestHeaderFieldSize = value;
@@ -114,10 +136,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             get => _initialConnectionWindowSize;
             set
             {
-                if (value < Http2PeerSettings.DefaultInitialWindowSize || value > Http2PeerSettings.MaxWindowSize)
+                if (
+                    value < Http2PeerSettings.DefaultInitialWindowSize
+                    || value > Http2PeerSettings.MaxWindowSize
+                )
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value,
-                        CoreStrings.FormatArgumentOutOfRange(Http2PeerSettings.DefaultInitialWindowSize, Http2PeerSettings.MaxWindowSize));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        CoreStrings.FormatArgumentOutOfRange(
+                            Http2PeerSettings.DefaultInitialWindowSize,
+                            Http2PeerSettings.MaxWindowSize
+                        )
+                    );
                 }
 
                 _initialConnectionWindowSize = value;
@@ -136,10 +167,19 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
             get => _initialStreamWindowSize;
             set
             {
-                if (value < Http2PeerSettings.DefaultInitialWindowSize || value > Http2PeerSettings.MaxWindowSize)
+                if (
+                    value < Http2PeerSettings.DefaultInitialWindowSize
+                    || value > Http2PeerSettings.MaxWindowSize
+                )
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value,
-                        CoreStrings.FormatArgumentOutOfRange(Http2PeerSettings.DefaultInitialWindowSize, Http2PeerSettings.MaxWindowSize));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        CoreStrings.FormatArgumentOutOfRange(
+                            Http2PeerSettings.DefaultInitialWindowSize,
+                            Http2PeerSettings.MaxWindowSize
+                        )
+                    );
                 }
 
                 _initialStreamWindowSize = value;
@@ -164,7 +204,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 // Keep alive uses Kestrel's system clock which has a 1 second resolution. Time is greater or equal to clock resolution.
                 if (value < Heartbeat.Interval && value != Timeout.InfiniteTimeSpan)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.FormatArgumentTimeSpanGreaterOrEqual(Heartbeat.Interval));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.FormatArgumentTimeSpanGreaterOrEqual(Heartbeat.Interval)
+                    );
                 }
 
                 _keepAlivePingDelay = value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
@@ -189,10 +232,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core
                 // Keep alive uses Kestrel's system clock which has a 1 second resolution. Time is greater or equal to clock resolution.
                 if (value < Heartbeat.Interval && value != Timeout.InfiniteTimeSpan)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), CoreStrings.FormatArgumentTimeSpanGreaterOrEqual(Heartbeat.Interval));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        CoreStrings.FormatArgumentTimeSpanGreaterOrEqual(Heartbeat.Interval)
+                    );
                 }
 
-                _keepAlivePingTimeout = value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
+                _keepAlivePingTimeout =
+                    value != Timeout.InfiniteTimeSpan ? value : TimeSpan.MaxValue;
             }
         }
     }

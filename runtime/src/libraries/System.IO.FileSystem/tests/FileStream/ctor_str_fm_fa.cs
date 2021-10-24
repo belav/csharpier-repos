@@ -12,7 +12,11 @@ namespace System.IO.Tests
         protected override FileStream CreateFileStream(string path, FileMode mode)
         {
             // Run the path/mode tests against this constructor
-            return CreateFileStream(path, mode, mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite);
+            return CreateFileStream(
+                path,
+                mode,
+                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite
+            );
         }
 
         protected virtual FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
@@ -23,16 +27,27 @@ namespace System.IO.Tests
         [Fact]
         public void InvalidAccessThrows()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () => CreateFileStream(GetTestFilePath(), FileMode.Create, ~FileAccess.Read));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "access",
+                () => CreateFileStream(GetTestFilePath(), FileMode.Create, ~FileAccess.Read)
+            );
         }
 
         [Fact]
         public void InvalidFileModeAccessReadThrows()
         {
-            FileMode[] invalidModes = { FileMode.Append, FileMode.Create, FileMode.CreateNew, FileMode.Truncate };
+            FileMode[] invalidModes =
+            {
+                FileMode.Append,
+                FileMode.Create,
+                FileMode.CreateNew,
+                FileMode.Truncate
+            };
             foreach (FileMode invalidMode in invalidModes)
             {
-                Assert.Throws<ArgumentException>(() => CreateFileStream(GetTestFilePath(), invalidMode, FileAccess.Read));
+                Assert.Throws<ArgumentException>(
+                    () => CreateFileStream(GetTestFilePath(), invalidMode, FileAccess.Read)
+                );
                 // ArgumentException.ParamName is not set since two parameters disagree.
             }
         }
@@ -40,18 +55,23 @@ namespace System.IO.Tests
         [Fact]
         public void InvalidFileModeAppendWithWriteThrows()
         {
-            Assert.Throws<ArgumentException>(() => CreateFileStream(GetTestFilePath(), FileMode.Append, FileAccess.Read));
-            Assert.Throws<ArgumentException>(() => CreateFileStream(GetTestFilePath(), FileMode.Append, FileAccess.ReadWrite));
+            Assert.Throws<ArgumentException>(
+                () => CreateFileStream(GetTestFilePath(), FileMode.Append, FileAccess.Read)
+            );
+            Assert.Throws<ArgumentException>(
+                () => CreateFileStream(GetTestFilePath(), FileMode.Append, FileAccess.ReadWrite)
+            );
             // ArgumentException.ParamName is not set since two parameters disagree.
         }
-
 
         [Fact]
         public void FileAccessRead()
         {
             // create the file first since we can't create with only read permissions
             string fileName = GetTestFilePath();
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite))
+            using (
+                FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite)
+            )
             {
                 fs.WriteByte(0);
             }
@@ -68,7 +88,13 @@ namespace System.IO.Tests
         [Fact]
         public void FileAccessWrite()
         {
-            using (FileStream fs = CreateFileStream(GetTestFilePath(), FileMode.Create, FileAccess.Write))
+            using (
+                FileStream fs = CreateFileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.Write
+                )
+            )
             {
                 Assert.True(fs.CanWrite);
                 fs.WriteByte(0); // should not throw
@@ -81,7 +107,9 @@ namespace System.IO.Tests
         public void FileAccessReadWrite()
         {
             string fileName = GetTestFilePath();
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite))
+            using (
+                FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite)
+            )
             {
                 fs.WriteByte(0); // should not throw
             }

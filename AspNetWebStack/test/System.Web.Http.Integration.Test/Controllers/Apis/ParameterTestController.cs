@@ -5,9 +5,7 @@ namespace System.Web.Http
 {
     public class ParameterTestController : ApiController
     {
-        public void Delete(int id)
-        {
-        }
+        public void Delete(int id) { }
 
         public string Get(int id = -1)
         {

@@ -157,9 +157,10 @@ namespace System.Runtime.InteropServices
         {
             get
             {
-                return Marshal.GetObjectForNativeVariant(UnsafeMethods.ConvertVariantByrefToPtr(ref this));
+                return Marshal.GetObjectForNativeVariant(
+                    UnsafeMethods.ConvertVariantByrefToPtr(ref this)
+                );
             }
-
             set
             {
                 Debug.Assert(IsEmpty); // The setter can only be called once as VariantClear might be needed otherwise
@@ -197,7 +198,9 @@ namespace System.Runtime.InteropServices
                     _typeUnion._unionTypes._byref = (IntPtr)Unsafe.AsPointer(ref value._decimal);
                     break;
                 default:
-                    _typeUnion._unionTypes._byref = (IntPtr)Unsafe.AsPointer(ref value._typeUnion._unionTypes._byref);
+                    _typeUnion._unionTypes._byref = (IntPtr)Unsafe.AsPointer(
+                        ref value._typeUnion._unionTypes._byref
+                    );
                     break;
             }
             VariantType = (value.VariantType | VarEnum.VT_BYREF);
@@ -214,26 +217,46 @@ namespace System.Runtime.InteropServices
         {
             switch (varType)
             {
-                case VarEnum.VT_I1: return typeof(Variant).GetProperty(nameof(AsI1));
-                case VarEnum.VT_I2: return typeof(Variant).GetProperty(nameof(AsI2));
-                case VarEnum.VT_I4: return typeof(Variant).GetProperty(nameof(AsI4));
-                case VarEnum.VT_I8: return typeof(Variant).GetProperty(nameof(AsI8));
-                case VarEnum.VT_UI1: return typeof(Variant).GetProperty(nameof(AsUi1));
-                case VarEnum.VT_UI2: return typeof(Variant).GetProperty(nameof(AsUi2));
-                case VarEnum.VT_UI4: return typeof(Variant).GetProperty(nameof(AsUi4));
-                case VarEnum.VT_UI8: return typeof(Variant).GetProperty(nameof(AsUi8));
-                case VarEnum.VT_INT: return typeof(Variant).GetProperty(nameof(AsInt));
-                case VarEnum.VT_UINT: return typeof(Variant).GetProperty(nameof(AsUint));
-                case VarEnum.VT_BOOL: return typeof(Variant).GetProperty(nameof(AsBool));
-                case VarEnum.VT_ERROR: return typeof(Variant).GetProperty(nameof(AsError));
-                case VarEnum.VT_R4: return typeof(Variant).GetProperty(nameof(AsR4));
-                case VarEnum.VT_R8: return typeof(Variant).GetProperty(nameof(AsR8));
-                case VarEnum.VT_DECIMAL: return typeof(Variant).GetProperty(nameof(AsDecimal));
-                case VarEnum.VT_CY: return typeof(Variant).GetProperty(nameof(AsCy));
-                case VarEnum.VT_DATE: return typeof(Variant).GetProperty(nameof(AsDate));
-                case VarEnum.VT_BSTR: return typeof(Variant).GetProperty(nameof(AsBstr));
-                case VarEnum.VT_UNKNOWN: return typeof(Variant).GetProperty(nameof(AsUnknown));
-                case VarEnum.VT_DISPATCH: return typeof(Variant).GetProperty(nameof(AsDispatch));
+                case VarEnum.VT_I1:
+                    return typeof(Variant).GetProperty(nameof(AsI1));
+                case VarEnum.VT_I2:
+                    return typeof(Variant).GetProperty(nameof(AsI2));
+                case VarEnum.VT_I4:
+                    return typeof(Variant).GetProperty(nameof(AsI4));
+                case VarEnum.VT_I8:
+                    return typeof(Variant).GetProperty(nameof(AsI8));
+                case VarEnum.VT_UI1:
+                    return typeof(Variant).GetProperty(nameof(AsUi1));
+                case VarEnum.VT_UI2:
+                    return typeof(Variant).GetProperty(nameof(AsUi2));
+                case VarEnum.VT_UI4:
+                    return typeof(Variant).GetProperty(nameof(AsUi4));
+                case VarEnum.VT_UI8:
+                    return typeof(Variant).GetProperty(nameof(AsUi8));
+                case VarEnum.VT_INT:
+                    return typeof(Variant).GetProperty(nameof(AsInt));
+                case VarEnum.VT_UINT:
+                    return typeof(Variant).GetProperty(nameof(AsUint));
+                case VarEnum.VT_BOOL:
+                    return typeof(Variant).GetProperty(nameof(AsBool));
+                case VarEnum.VT_ERROR:
+                    return typeof(Variant).GetProperty(nameof(AsError));
+                case VarEnum.VT_R4:
+                    return typeof(Variant).GetProperty(nameof(AsR4));
+                case VarEnum.VT_R8:
+                    return typeof(Variant).GetProperty(nameof(AsR8));
+                case VarEnum.VT_DECIMAL:
+                    return typeof(Variant).GetProperty(nameof(AsDecimal));
+                case VarEnum.VT_CY:
+                    return typeof(Variant).GetProperty(nameof(AsCy));
+                case VarEnum.VT_DATE:
+                    return typeof(Variant).GetProperty(nameof(AsDate));
+                case VarEnum.VT_BSTR:
+                    return typeof(Variant).GetProperty(nameof(AsBstr));
+                case VarEnum.VT_UNKNOWN:
+                    return typeof(Variant).GetProperty(nameof(AsUnknown));
+                case VarEnum.VT_DISPATCH:
+                    return typeof(Variant).GetProperty(nameof(AsDispatch));
 
                 case VarEnum.VT_VARIANT:
                 case VarEnum.VT_RECORD:
@@ -249,26 +272,46 @@ namespace System.Runtime.InteropServices
         {
             switch (varType)
             {
-                case VarEnum.VT_I1: return typeof(Variant).GetMethod(nameof(SetAsByrefI1));
-                case VarEnum.VT_I2: return typeof(Variant).GetMethod(nameof(SetAsByrefI2));
-                case VarEnum.VT_I4: return typeof(Variant).GetMethod(nameof(SetAsByrefI4));
-                case VarEnum.VT_I8: return typeof(Variant).GetMethod(nameof(SetAsByrefI8));
-                case VarEnum.VT_UI1: return typeof(Variant).GetMethod(nameof(SetAsByrefUi1));
-                case VarEnum.VT_UI2: return typeof(Variant).GetMethod(nameof(SetAsByrefUi2));
-                case VarEnum.VT_UI4: return typeof(Variant).GetMethod(nameof(SetAsByrefUi4));
-                case VarEnum.VT_UI8: return typeof(Variant).GetMethod(nameof(SetAsByrefUi8));
-                case VarEnum.VT_INT: return typeof(Variant).GetMethod(nameof(SetAsByrefInt));
-                case VarEnum.VT_UINT: return typeof(Variant).GetMethod(nameof(SetAsByrefUint));
-                case VarEnum.VT_BOOL: return typeof(Variant).GetMethod(nameof(SetAsByrefBool));
-                case VarEnum.VT_ERROR: return typeof(Variant).GetMethod(nameof(SetAsByrefError));
-                case VarEnum.VT_R4: return typeof(Variant).GetMethod(nameof(SetAsByrefR4));
-                case VarEnum.VT_R8: return typeof(Variant).GetMethod(nameof(SetAsByrefR8));
-                case VarEnum.VT_DECIMAL: return typeof(Variant).GetMethod(nameof(SetAsByrefDecimal));
-                case VarEnum.VT_CY: return typeof(Variant).GetMethod(nameof(SetAsByrefCy));
-                case VarEnum.VT_DATE: return typeof(Variant).GetMethod(nameof(SetAsByrefDate));
-                case VarEnum.VT_BSTR: return typeof(Variant).GetMethod(nameof(SetAsByrefBstr));
-                case VarEnum.VT_UNKNOWN: return typeof(Variant).GetMethod(nameof(SetAsByrefUnknown));
-                case VarEnum.VT_DISPATCH: return typeof(Variant).GetMethod(nameof(SetAsByrefDispatch));
+                case VarEnum.VT_I1:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefI1));
+                case VarEnum.VT_I2:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefI2));
+                case VarEnum.VT_I4:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefI4));
+                case VarEnum.VT_I8:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefI8));
+                case VarEnum.VT_UI1:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefUi1));
+                case VarEnum.VT_UI2:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefUi2));
+                case VarEnum.VT_UI4:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefUi4));
+                case VarEnum.VT_UI8:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefUi8));
+                case VarEnum.VT_INT:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefInt));
+                case VarEnum.VT_UINT:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefUint));
+                case VarEnum.VT_BOOL:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefBool));
+                case VarEnum.VT_ERROR:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefError));
+                case VarEnum.VT_R4:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefR4));
+                case VarEnum.VT_R8:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefR8));
+                case VarEnum.VT_DECIMAL:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefDecimal));
+                case VarEnum.VT_CY:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefCy));
+                case VarEnum.VT_DATE:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefDate));
+                case VarEnum.VT_BSTR:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefBstr));
+                case VarEnum.VT_UNKNOWN:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefUnknown));
+                case VarEnum.VT_DISPATCH:
+                    return typeof(Variant).GetMethod(nameof(SetAsByrefDispatch));
 
                 case VarEnum.VT_VARIANT:
                     return typeof(Variant).GetMethod(nameof(SetAsByrefVariant));
@@ -292,24 +335,59 @@ namespace System.Runtime.InteropServices
 
             switch (tc)
             {
-                case TypeCode.Empty: break;
-                case TypeCode.Object: AsUnknown = value; break;
-                case TypeCode.DBNull: SetAsNULL(); break;
-                case TypeCode.Boolean: AsBool = value.ToBoolean(ci); break;
-                case TypeCode.Char: AsUi2 = value.ToChar(ci); break;
-                case TypeCode.SByte: AsI1 = value.ToSByte(ci); break;
-                case TypeCode.Byte: AsUi1 = value.ToByte(ci); break;
-                case TypeCode.Int16: AsI2 = value.ToInt16(ci); break;
-                case TypeCode.UInt16: AsUi2 = value.ToUInt16(ci); break;
-                case TypeCode.Int32: AsI4 = value.ToInt32(ci); break;
-                case TypeCode.UInt32: AsUi4 = value.ToUInt32(ci); break;
-                case TypeCode.Int64: AsI8 = value.ToInt64(ci); break;
-                case TypeCode.UInt64: AsI8 = value.ToInt64(ci); break;
-                case TypeCode.Single: AsR4 = value.ToSingle(ci); break;
-                case TypeCode.Double: AsR8 = value.ToDouble(ci); break;
-                case TypeCode.Decimal: AsDecimal = value.ToDecimal(ci); break;
-                case TypeCode.DateTime: AsDate = value.ToDateTime(ci); break;
-                case TypeCode.String: AsBstr = value.ToString(ci); break;
+                case TypeCode.Empty:
+                    break;
+                case TypeCode.Object:
+                    AsUnknown = value;
+                    break;
+                case TypeCode.DBNull:
+                    SetAsNULL();
+                    break;
+                case TypeCode.Boolean:
+                    AsBool = value.ToBoolean(ci);
+                    break;
+                case TypeCode.Char:
+                    AsUi2 = value.ToChar(ci);
+                    break;
+                case TypeCode.SByte:
+                    AsI1 = value.ToSByte(ci);
+                    break;
+                case TypeCode.Byte:
+                    AsUi1 = value.ToByte(ci);
+                    break;
+                case TypeCode.Int16:
+                    AsI2 = value.ToInt16(ci);
+                    break;
+                case TypeCode.UInt16:
+                    AsUi2 = value.ToUInt16(ci);
+                    break;
+                case TypeCode.Int32:
+                    AsI4 = value.ToInt32(ci);
+                    break;
+                case TypeCode.UInt32:
+                    AsUi4 = value.ToUInt32(ci);
+                    break;
+                case TypeCode.Int64:
+                    AsI8 = value.ToInt64(ci);
+                    break;
+                case TypeCode.UInt64:
+                    AsI8 = value.ToInt64(ci);
+                    break;
+                case TypeCode.Single:
+                    AsR4 = value.ToSingle(ci);
+                    break;
+                case TypeCode.Double:
+                    AsR8 = value.ToDouble(ci);
+                    break;
+                case TypeCode.Decimal:
+                    AsDecimal = value.ToDecimal(ci);
+                    break;
+                case TypeCode.DateTime:
+                    AsDate = value.ToDateTime(ci);
+                    break;
+                case TypeCode.String:
+                    AsBstr = value.ToString(ci);
+                    break;
 
                 default:
                     throw new NotSupportedException();

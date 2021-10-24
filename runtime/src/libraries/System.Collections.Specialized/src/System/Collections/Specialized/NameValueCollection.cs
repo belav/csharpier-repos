@@ -31,9 +31,7 @@ namespace System.Collections.Specialized
         ///    and using the default case-insensitive hash code provider and the default
         ///    case-insensitive comparer.</para>
         /// </devdoc>
-        public NameValueCollection() : base()
-        {
-        }
+        public NameValueCollection() : base() { }
 
         /// <devdoc>
         /// <para>Copies the entries from the specified <see cref='System.Collections.Specialized.NameValueCollection'/> to a new <see cref='System.Collections.Specialized.NameValueCollection'/> with the same initial capacity as
@@ -48,27 +46,19 @@ namespace System.Collections.Specialized
 
         [Obsolete("Please use NameValueCollection(IEqualityComparer) instead.")]
         public NameValueCollection(IHashCodeProvider? hashProvider, IComparer? comparer)
-            : base(hashProvider, comparer)
-        {
-        }
+            : base(hashProvider, comparer) { }
 
         /// <devdoc>
         /// <para>Creates an empty <see cref='System.Collections.Specialized.NameValueCollection'/> with
         ///    the specified initial capacity and using the default case-insensitive hash code
         ///    provider and the default case-insensitive comparer.</para>
         /// </devdoc>
-        public NameValueCollection(int capacity) : base(capacity)
-        {
-        }
+        public NameValueCollection(int capacity) : base(capacity) { }
 
-        public NameValueCollection(IEqualityComparer? equalityComparer) : base(equalityComparer)
-        {
-        }
+        public NameValueCollection(IEqualityComparer? equalityComparer) : base(equalityComparer) { }
 
         public NameValueCollection(int capacity, IEqualityComparer? equalityComparer)
-            : base(capacity, equalityComparer)
-        {
-        }
+            : base(capacity, equalityComparer) { }
 
         /// <devdoc>
         /// <para>Copies the entries from the specified <see cref='System.Collections.Specialized.NameValueCollection'/> to a new <see cref='System.Collections.Specialized.NameValueCollection'/> with the specified initial capacity or the
@@ -89,14 +79,14 @@ namespace System.Collections.Specialized
         }
 
         [Obsolete("Please use NameValueCollection(Int32, IEqualityComparer) instead.")]
-        public NameValueCollection(int capacity, IHashCodeProvider? hashProvider, IComparer? comparer)
-            : base(capacity, hashProvider, comparer)
-        {
-        }
+        public NameValueCollection(
+            int capacity,
+            IHashCodeProvider? hashProvider,
+            IComparer? comparer
+        ) : base(capacity, hashProvider, comparer) { }
 
-        protected NameValueCollection(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected NameValueCollection(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         //
         //  Helper methods
@@ -212,7 +202,11 @@ namespace System.Collections.Specialized
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_NeedNonNegNum_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    index,
+                    SR.ArgumentOutOfRange_NeedNonNegNum_Index
+                );
             }
 
             if (dest.Length - index < Count)
@@ -337,15 +331,8 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public string? this[string? name]
         {
-            get
-            {
-                return Get(name);
-            }
-
-            set
-            {
-                Set(name, value);
-            }
+            get { return Get(name); }
+            set { Set(name, value); }
         }
 
         //
@@ -385,10 +372,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public string? this[int index]
         {
-            get
-            {
-                return Get(index);
-            }
+            get { return Get(index); }
         }
 
         //

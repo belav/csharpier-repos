@@ -14,15 +14,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = base.CreateConventionalModelBuilder();
             var context = new DbContext(new DbContextOptions<DbContext>());
-            modelBuilder.Entity<Abstract>().HasNoKey().ToInMemoryQuery(() => context.Set<Abstract>());
+            modelBuilder
+                .Entity<Abstract>()
+                .HasNoKey()
+                .ToInMemoryQuery(() => context.Set<Abstract>());
             modelBuilder.Entity<Generic<int>>().ToInMemoryQuery(() => context.Set<Generic<int>>());
 
             VerifyError(
                 CoreStrings.DerivedTypeDefiningQuery("Generic<int>", nameof(Abstract)),
-                modelBuilder.Model);
+                modelBuilder.Model
+            );
         }
 
-        protected override TestHelpers TestHelpers
-            => InMemoryTestHelpers.Instance;
+        protected override TestHelpers TestHelpers => InMemoryTestHelpers.Instance;
     }
 }

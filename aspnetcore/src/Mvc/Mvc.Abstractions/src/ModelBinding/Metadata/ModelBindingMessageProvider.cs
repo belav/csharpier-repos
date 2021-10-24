@@ -46,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// with a property.
         /// </summary>
         /// <value>Default <see cref="string"/> is "The value '{0}' is not valid for {1}.".</value>
-        public virtual Func<string, string, string> AttemptedValueIsInvalidAccessor { get; } = default!;
+        public virtual Func<string, string, string> AttemptedValueIsInvalidAccessor { get; } =
+            default!;
 
         /// <summary>
         /// Error message the model binding system adds when <see cref="ModelError.Exception"/> is of type
@@ -54,7 +55,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
         /// with a collection element or parameter.
         /// </summary>
         /// <value>Default <see cref="string"/> is "The value '{0}' is not valid.".</value>
-        public virtual Func<string, string> NonPropertyAttemptedValueIsInvalidAccessor { get; } = default!;
+        public virtual Func<string, string> NonPropertyAttemptedValueIsInvalidAccessor { get; } =
+            default!;
 
         /// <summary>
         /// Error message the model binding system adds when <see cref="ModelError.Exception"/> is of type

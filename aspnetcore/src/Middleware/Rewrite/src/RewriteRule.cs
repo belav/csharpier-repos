@@ -27,7 +27,11 @@ namespace Microsoft.AspNetCore.Rewrite
                 throw new ArgumentException(nameof(replacement));
             }
 
-            InitialMatch = new Regex(regex, RegexOptions.Compiled | RegexOptions.CultureInvariant, _regexTimeout);
+            InitialMatch = new Regex(
+                regex,
+                RegexOptions.Compiled | RegexOptions.CultureInvariant,
+                _regexTimeout
+            );
             Replacement = replacement;
             StopProcessing = stopProcessing;
         }
@@ -67,7 +71,14 @@ namespace Microsoft.AspNetCore.Rewrite
                     PathString pathString;
                     QueryString query;
                     FragmentString fragment;
-                    UriHelper.FromAbsolute(result, out scheme, out host, out pathString, out query, out fragment);
+                    UriHelper.FromAbsolute(
+                        result,
+                        out scheme,
+                        out host,
+                        out pathString,
+                        out query,
+                        out fragment
+                    );
 
                     request.Scheme = scheme;
                     request.Host = host;
@@ -89,8 +100,8 @@ namespace Microsoft.AspNetCore.Rewrite
                             request.Path = PathString.FromUriComponent('/' + newPath);
                         }
                         request.QueryString = request.QueryString.Add(
-                            QueryString.FromUriComponent(
-                                result.Substring(split)));
+                            QueryString.FromUriComponent(result.Substring(split))
+                        );
                     }
                     else
                     {

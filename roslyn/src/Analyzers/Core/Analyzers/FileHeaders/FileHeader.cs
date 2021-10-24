@@ -37,8 +37,12 @@ namespace Microsoft.CodeAnalysis.FileHeaders
         /// <param name="copyrightText">The copyright string, as parsed from the header.</param>
         /// <param name="fileHeaderStart">The offset within the file at which the header started.</param>
         /// <param name="fileHeaderEnd">The offset within the file at which the header ended.</param>
-        internal FileHeader(string copyrightText, int fileHeaderStart, int fileHeaderEnd, int commentPrefixLength)
-            : this(fileHeaderStart, isMissing: false)
+        internal FileHeader(
+            string copyrightText,
+            int fileHeaderStart,
+            int fileHeaderEnd,
+            int commentPrefixLength
+        ) : this(fileHeaderStart, isMissing: false)
         {
             // Currently unused
             _ = fileHeaderEnd;
@@ -87,8 +91,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
         /// <returns>
         /// A <see cref="FileHeader"/> instance representing a missing file header.
         /// </returns>
-        internal static FileHeader MissingFileHeader(int fileHeaderStart)
-            => new(fileHeaderStart, isMissing: true);
+        internal static FileHeader MissingFileHeader(int fileHeaderStart) =>
+            new(fileHeaderStart, isMissing: true);
 
         /// <summary>
         /// Gets the location representing the start of the file header.
@@ -102,7 +106,10 @@ namespace Microsoft.CodeAnalysis.FileHeaders
                 return Location.Create(syntaxTree, new TextSpan(_fileHeaderStart, 0));
             }
 
-            return Location.Create(syntaxTree, new TextSpan(_fileHeaderStart, _commentPrefixLength));
+            return Location.Create(
+                syntaxTree,
+                new TextSpan(_fileHeaderStart, _commentPrefixLength)
+            );
         }
     }
 }

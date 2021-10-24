@@ -16,9 +16,13 @@ namespace System.Reflection.TypeLoading.Ecma
         {
             get
             {
-                return _lazyTypeDefTable ??
-                    Interlocked.CompareExchange(ref _lazyTypeDefTable, CreateTable<EcmaDefinitionType>(TableIndex.TypeDef), null) ??
-                    _lazyTypeDefTable;
+                return _lazyTypeDefTable
+                    ?? Interlocked.CompareExchange(
+                        ref _lazyTypeDefTable,
+                        CreateTable<EcmaDefinitionType>(TableIndex.TypeDef),
+                        null
+                    )
+                    ?? _lazyTypeDefTable;
             }
         }
         private volatile MetadataTable<EcmaDefinitionType, EcmaModule>? _lazyTypeDefTable;
@@ -40,9 +44,13 @@ namespace System.Reflection.TypeLoading.Ecma
         {
             get
             {
-                return _lazyTypeRefTable ??
-                    Interlocked.CompareExchange(ref _lazyTypeRefTable, CreateTable<RoDefinitionType>(TableIndex.TypeRef), null) ??
-                    _lazyTypeRefTable;
+                return _lazyTypeRefTable
+                    ?? Interlocked.CompareExchange(
+                        ref _lazyTypeRefTable,
+                        CreateTable<RoDefinitionType>(TableIndex.TypeRef),
+                        null
+                    )
+                    ?? _lazyTypeRefTable;
             }
         }
         private volatile MetadataTable<RoDefinitionType, EcmaModule>? _lazyTypeRefTable;
@@ -51,20 +59,31 @@ namespace System.Reflection.TypeLoading.Ecma
         {
             get
             {
-                return _lazyGenericParamTable ??
-                    Interlocked.CompareExchange(ref _lazyGenericParamTable, CreateTable<EcmaGenericParameterType>(TableIndex.GenericParam), null) ??
-                    _lazyGenericParamTable;
+                return _lazyGenericParamTable
+                    ?? Interlocked.CompareExchange(
+                        ref _lazyGenericParamTable,
+                        CreateTable<EcmaGenericParameterType>(TableIndex.GenericParam),
+                        null
+                    )
+                    ?? _lazyGenericParamTable;
             }
         }
-        private volatile MetadataTable<EcmaGenericParameterType, EcmaModule>? _lazyGenericParamTable;
+        private volatile MetadataTable<
+            EcmaGenericParameterType,
+            EcmaModule
+        >? _lazyGenericParamTable;
 
         internal MetadataTable<RoAssembly, EcmaModule> AssemblyRefTable
         {
             get
             {
-                return _lazyAssemblyRefTable ??
-                    Interlocked.CompareExchange(ref _lazyAssemblyRefTable, CreateTable<RoAssembly>(TableIndex.AssemblyRef), null) ??
-                    _lazyAssemblyRefTable;
+                return _lazyAssemblyRefTable
+                    ?? Interlocked.CompareExchange(
+                        ref _lazyAssemblyRefTable,
+                        CreateTable<RoAssembly>(TableIndex.AssemblyRef),
+                        null
+                    )
+                    ?? _lazyAssemblyRefTable;
             }
         }
         private volatile MetadataTable<RoAssembly, EcmaModule>? _lazyAssemblyRefTable;

@@ -103,20 +103,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             base.OnSaveOptions(key, stream);
         }
 
-        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        protected override async Task InitializeAsync(
+            CancellationToken cancellationToken,
+            IProgress<ServiceProgressData> progress
+        )
         {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            _componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel)).ConfigureAwait(true);
+            _componentModel = (IComponentModel)await GetServiceAsync(typeof(SComponentModel))
+                .ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(_componentModel);
 
             // Ensure the options persisters are loaded since we have to fetch options from the shell
-            foreach (var provider in await GetOptionPersistersAsync(_componentModel, cancellationToken).ConfigureAwait(true))
+            foreach (
+                var provider in await GetOptionPersistersAsync(_componentModel, cancellationToken)
+                    .ConfigureAwait(true)
+            )
             {
-                _ = await provider.GetOrCreatePersisterAsync(cancellationToken).ConfigureAwait(true);
+                _ = await provider
+                    .GetOrCreatePersisterAsync(cancellationToken)
+                    .ConfigureAwait(true);
             }
 
             _workspace = _componentModel.GetService<VisualStudioWorkspace>();
@@ -126,11 +135,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // the background thread then we will experience hangs like we see in this bug:
             // https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=190808 or
             // https://devdiv.visualstudio.com/DevDiv/_workitems?id=296981&_a=edit
-            var telemetryService = (VisualStudioWorkspaceTelemetryService)_workspace.Services.GetRequiredService<IWorkspaceTelemetryService>();
+            var telemetryService =
+                (VisualStudioWorkspaceTelemetryService)_workspace.Services.GetRequiredService<IWorkspaceTelemetryService>();
             telemetryService.InitializeTelemetrySession(TelemetryService.DefaultSession);
 
-            Logger.Log(FunctionId.Run_Environment,
-                KeyValueLogMessage.Create(m => m["Version"] = FileVersionInfo.GetVersionInfo(typeof(VisualStudioWorkspace).Assembly.Location).FileVersion));
+            Logger.Log(
+                FunctionId.Run_Environment,
+                KeyValueLogMessage.Create(
+                    m =>
+                        m["Version"] =
+                            FileVersionInfo.GetVersionInfo(
+                                typeof(VisualStudioWorkspace).Assembly.Location
+                            ).FileVersion
+                )
+            );
 
             InitializeColors();
 
@@ -144,7 +162,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             var settingsEditorFactory = _componentModel.GetService<SettingsEditorFactory>();
             RegisterEditorFactory(settingsEditorFactory);
 
-            static async Task<ImmutableArray<IOptionPersisterProvider>> GetOptionPersistersAsync(IComponentModel componentModel, CancellationToken cancellationToken)
+            static async Task<ImmutableArray<IOptionPersisterProvider>> GetOptionPersistersAsync(
+                IComponentModel componentModel,
+                CancellationToken cancellationToken
+            )
             {
                 // Switch to a background thread to ensure assembly loads don't show up as UI delays attributed to
                 // InitializeAsync.
@@ -157,12 +178,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         private void InitializeColors()
         {
             // Use VS color keys in order to support theming.
-            CodeAnalysisColors.SystemCaptionTextColorKey = EnvironmentColors.SystemWindowTextColorKey;
-            CodeAnalysisColors.SystemCaptionTextBrushKey = EnvironmentColors.SystemWindowTextBrushKey;
+            CodeAnalysisColors.SystemCaptionTextColorKey =
+                EnvironmentColors.SystemWindowTextColorKey;
+            CodeAnalysisColors.SystemCaptionTextBrushKey =
+                EnvironmentColors.SystemWindowTextBrushKey;
             CodeAnalysisColors.CheckBoxTextBrushKey = EnvironmentColors.SystemWindowTextBrushKey;
             CodeAnalysisColors.BackgroundBrushKey = VsBrushes.CommandBarGradientBeginKey;
             CodeAnalysisColors.ButtonStyleKey = VsResourceKeys.ButtonStyleKey;
-            CodeAnalysisColors.AccentBarColorKey = EnvironmentColors.FileTabInactiveDocumentBorderEdgeBrushKey;
+            CodeAnalysisColors.AccentBarColorKey =
+                EnvironmentColors.FileTabInactiveDocumentBorderEdgeBrushKey;
 
             // Initialize ColorScheme support
             _colorSchemeApplier = ComponentModel.GetService<ColorSchemeApplier>();
@@ -183,7 +207,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // we need to load it as early as possible since we can have errors from
             // package from each language very early
             this.ComponentModel.GetService<TaskCenterSolutionAnalysisProgressReporter>();
-            this.ComponentModel.GetService<VisualStudioDiagnosticListTableCommandHandler>().Initialize(this);
+            this.ComponentModel
+                .GetService<VisualStudioDiagnosticListTableCommandHandler>()
+                .Initialize(this);
 
             this.ComponentModel.GetService<VisualStudioMetadataAsSourceFileSupportService>();
             this.ComponentModel.GetService<VirtualMemoryNotificationListener>();
@@ -193,10 +219,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             this.ComponentModel.GetService<MiscellaneousFilesWorkspace>();
 
             // Load and initialize the services detecting and adding new analyzer config documents as solution item.
-            this.ComponentModel.GetService<AnalyzerConfigDocumentAsSolutionItemHandler>().Initialize(this);
+            this.ComponentModel
+                .GetService<AnalyzerConfigDocumentAsSolutionItemHandler>()
+                .Initialize(this);
             this.ComponentModel.GetService<VisualStudioAddSolutionItemService>().Initialize(this);
 
-            this.ComponentModel.GetService<IVisualStudioDiagnosticAnalyzerService>().Initialize(this);
+            this.ComponentModel
+                .GetService<IVisualStudioDiagnosticAnalyzerService>()
+                .Initialize(this);
             this.ComponentModel.GetService<RemoveUnusedReferencesCommandHandler>().Initialize(this);
 
             LoadAnalyzerNodeComponents();
@@ -211,7 +241,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             await LoadInteractiveMenusAsync(cancellationToken).ConfigureAwait(true);
 
             // Initialize any experiments async
-            var experiments = this.ComponentModel.DefaultExportProvider.GetExportedValues<IExperiment>();
+            var experiments =
+                this.ComponentModel.DefaultExportProvider.GetExportedValues<IExperiment>();
             foreach (var experiment in experiments)
             {
                 await experiment.InitializeAsync().ConfigureAwait(true);
@@ -223,17 +254,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // Obtain services and QueryInterface from the main thread
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var menuCommandService = (OleMenuCommandService)await GetServiceAsync(typeof(IMenuCommandService)).ConfigureAwait(true);
-            var monitorSelectionService = (IVsMonitorSelection)await GetServiceAsync(typeof(SVsShellMonitorSelection)).ConfigureAwait(true);
+            var menuCommandService = (OleMenuCommandService)await GetServiceAsync(
+                    typeof(IMenuCommandService)
+                )
+                .ConfigureAwait(true);
+            var monitorSelectionService = (IVsMonitorSelection)await GetServiceAsync(
+                    typeof(SVsShellMonitorSelection)
+                )
+                .ConfigureAwait(true);
 
             // Switch to the background object for constructing commands
             await TaskScheduler.Default;
 
-            await new CSharpResetInteractiveMenuCommand(menuCommandService, monitorSelectionService, ComponentModel)
+            await new CSharpResetInteractiveMenuCommand(
+                menuCommandService,
+                monitorSelectionService,
+                ComponentModel
+            )
                 .InitializeResetInteractiveFromProjectCommandAsync()
                 .ConfigureAwait(true);
 
-            await new VisualBasicResetInteractiveMenuCommand(menuCommandService, monitorSelectionService, ComponentModel)
+            await new VisualBasicResetInteractiveMenuCommand(
+                menuCommandService,
+                monitorSelectionService,
+                ComponentModel
+            )
                 .InitializeResetInteractiveFromProjectCommandAsync()
                 .ConfigureAwait(true);
         }
@@ -242,7 +287,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         {
             get
             {
-                return _componentModel ?? throw new InvalidOperationException($"Cannot use {nameof(RoslynPackage)}.{nameof(ComponentModel)} prior to initialization.");
+                return _componentModel
+                    ?? throw new InvalidOperationException(
+                        $"Cannot use {nameof(RoslynPackage)}.{nameof(ComponentModel)} prior to initialization."
+                    );
             }
         }
 
@@ -276,7 +324,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
         {
             if (_workspace != null)
             {
-                _workspace.Services.GetRequiredService<VisualStudioMetadataReferenceManager>().DisconnectFromVisualStudioNativeServices();
+                _workspace.Services
+                    .GetRequiredService<VisualStudioMetadataReferenceManager>()
+                    .DisconnectFromVisualStudioNativeServices();
             }
         }
 
@@ -291,8 +341,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             }
         }
 
-        private void UnregisterAnalyzerTracker()
-            => this.ComponentModel.GetService<IAnalyzerNodeSetup>().Unregister();
+        private void UnregisterAnalyzerTracker() =>
+            this.ComponentModel.GetService<IAnalyzerNodeSetup>().Unregister();
 
         private void UnregisterRuleSetEventHandler()
         {
@@ -311,9 +361,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // such as solution crawler, pre-emptive remote host synchronization and etc. any background work users didn't
             // explicitly asked for.
             //
-            // this should give all resources to BulkFileOperation. we do same for things like build, 
+            // this should give all resources to BulkFileOperation. we do same for things like build,
             // debugging, wait dialog and etc. BulkFileOperation is used for things like git branch switching and etc.
-            var globalNotificationService = _workspace.Services.GetRequiredService<IGlobalOperationNotificationService>();
+            var globalNotificationService =
+                _workspace.Services.GetRequiredService<IGlobalOperationNotificationService>();
 
             // BulkFileOperation can't have nested events. there will be ever only 1 events (Begin/End)
             // so we only need simple tracking.
@@ -341,7 +392,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
                     // so guarding us from them
                     if (localRegistration != null)
                     {
-                        FatalError.ReportAndCatch(new InvalidOperationException("BulkFileOperation already exist"));
+                        FatalError.ReportAndCatch(
+                            new InvalidOperationException("BulkFileOperation already exist")
+                        );
                         return;
                     }
 

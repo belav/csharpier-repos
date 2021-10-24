@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             AbstractCodeMember parent,
             string namespaceName,
-            int ordinal)
+            int ordinal
+        )
         {
             var element = new CodeImplementsStatement(state, parent, namespaceName, ordinal);
             var result = (EnvDTE80.CodeElement2)ComAggregate.CreateAggregatedObject(element);
@@ -32,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
+            string name
+        )
         {
             var element = new CodeImplementsStatement(state, fileCodeModel, nodeKind, name);
             return (EnvDTE80.CodeElement2)ComAggregate.CreateAggregatedObject(element);
@@ -46,8 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             AbstractCodeMember parent,
             string namespaceName,
-            int ordinal)
-            : base(state, parent.FileCodeModel)
+            int ordinal
+        ) : base(state, parent.FileCodeModel)
         {
             _parentHandle = new ParentHandle<AbstractCodeMember>(parent);
             _namespaceName = namespaceName;
@@ -58,8 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind)
+            string name
+        ) : base(state, fileCodeModel, nodeKind)
         {
             _namespaceName = name;
         }
@@ -74,7 +76,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 return false;
             }
 
-            if (!CodeModelService.TryGetImplementsNode(parentNode, _namespaceName, _ordinal, out var implementsNode))
+            if (
+                !CodeModelService.TryGetImplementsNode(
+                    parentNode,
+                    _namespaceName,
+                    _ordinal,
+                    out var implementsNode
+                )
+            )
             {
                 return false;
             }
@@ -98,10 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { return EmptyCollection.Create(this.State, this); }
         }
 
-        protected override void SetName(string value)
-            => throw Exceptions.ThrowENotImpl();
+        protected override void SetName(string value) => throw Exceptions.ThrowENotImpl();
 
-        public override void RenameSymbol(string newName)
-            => throw Exceptions.ThrowENotImpl();
+        public override void RenameSymbol(string newName) => throw Exceptions.ThrowENotImpl();
     }
 }

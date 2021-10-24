@@ -9,11 +9,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     public sealed class DefaultTagHelperPropertyIntermediateNode : ExtensionIntermediateNode
     {
-        public DefaultTagHelperPropertyIntermediateNode()
-        {
-        }
+        public DefaultTagHelperPropertyIntermediateNode() { }
 
-        public DefaultTagHelperPropertyIntermediateNode(TagHelperPropertyIntermediateNode propertyNode)
+        public DefaultTagHelperPropertyIntermediateNode(
+            TagHelperPropertyIntermediateNode propertyNode
+        )
         {
             if (propertyNode == null)
             {
@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             }
         }
 
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public string AttributeName { get; set; }
 

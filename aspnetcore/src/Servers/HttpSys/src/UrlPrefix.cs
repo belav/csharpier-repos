@@ -12,7 +12,14 @@ namespace Microsoft.AspNetCore.Server.HttpSys
     /// </summary>
     public class UrlPrefix
     {
-        private UrlPrefix(bool isHttps, string scheme, string host, string port, int portValue, string path)
+        private UrlPrefix(
+            bool isHttps,
+            string scheme,
+            string host,
+            string port,
+            int portValue,
+            string path
+        )
         {
             IsHttps = isHttps;
             Scheme = scheme;
@@ -22,7 +29,14 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             PortValue = portValue;
             Path = path;
             PathWithoutTrailingSlash = Path.Length > 1 ? Path[0..^1] : string.Empty;
-            FullPrefix = string.Format(CultureInfo.InvariantCulture, "{0}://{1}:{2}{3}", Scheme, Host, Port, Path);
+            FullPrefix = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}://{1}:{2}{3}",
+                Scheme,
+                Host,
+                Port,
+                Path
+            );
         }
 
         /// <summary>
@@ -58,14 +72,20 @@ namespace Microsoft.AspNetCore.Server.HttpSys
                 scheme = Constants.HttpScheme; // Always use a lower case scheme
                 isHttps = false;
             }
-            else if (string.Equals(Constants.HttpsScheme, scheme, StringComparison.OrdinalIgnoreCase))
+            else if (
+                string.Equals(Constants.HttpsScheme, scheme, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 scheme = Constants.HttpsScheme; // Always use a lower case scheme
                 isHttps = true;
             }
             else
             {
-                throw new ArgumentOutOfRangeException("scheme", scheme, Resources.Exception_UnsupportedScheme);
+                throw new ArgumentOutOfRangeException(
+                    "scheme",
+                    scheme,
+                    Resources.Exception_UnsupportedScheme
+                );
             }
 
             if (string.IsNullOrWhiteSpace(host))
@@ -116,26 +136,48 @@ namespace Microsoft.AspNetCore.Server.HttpSys
             }
             var hostDelimiterStart = schemeDelimiterEnd + Uri.SchemeDelimiter.Length;
 
-            var pathDelimiterStart = whole.IndexOf("/", hostDelimiterStart, StringComparison.Ordinal);
+            var pathDelimiterStart = whole.IndexOf(
+                "/",
+                hostDelimiterStart,
+                StringComparison.Ordinal
+            );
             if (pathDelimiterStart < 0)
             {
                 pathDelimiterStart = whole.Length;
             }
-            var hostDelimiterEnd = whole.LastIndexOf(":", pathDelimiterStart - 1, pathDelimiterStart - hostDelimiterStart, StringComparison.Ordinal);
+            var hostDelimiterEnd = whole.LastIndexOf(
+                ":",
+                pathDelimiterStart - 1,
+                pathDelimiterStart - hostDelimiterStart,
+                StringComparison.Ordinal
+            );
             if (hostDelimiterEnd < 0)
             {
                 hostDelimiterEnd = pathDelimiterStart;
             }
 
             scheme = whole.Substring(0, schemeDelimiterEnd);
-            var portString = whole.Substring(hostDelimiterEnd, pathDelimiterStart - hostDelimiterEnd); // The leading ":" is included
+            var portString = whole.Substring(
+                hostDelimiterEnd,
+                pathDelimiterStart - hostDelimiterEnd
+            ); // The leading ":" is included
             int portValue;
             if (!string.IsNullOrEmpty(portString))
             {
                 var portValueString = portString.Substring(1); // Trim the leading ":"
-                if (int.TryParse(portValueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out portValue))
+                if (
+                    int.TryParse(
+                        portValueString,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out portValue
+                    )
+                )
                 {
-                    host = whole.Substring(hostDelimiterStart, hostDelimiterEnd - hostDelimiterStart);
+                    host = whole.Substring(
+                        hostDelimiterStart,
+                        hostDelimiterEnd - hostDelimiterStart
+                    );
                     port = portValue;
                 }
                 else
@@ -195,7 +237,11 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         /// <inheritdoc />
         public override bool Equals(object? obj)
         {
-            return string.Equals(FullPrefix, Convert.ToString(obj, CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase);
+            return string.Equals(
+                FullPrefix,
+                Convert.ToString(obj, CultureInfo.InvariantCulture),
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         /// <inheritdoc />

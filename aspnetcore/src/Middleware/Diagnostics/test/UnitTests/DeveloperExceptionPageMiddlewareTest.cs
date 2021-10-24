@@ -24,20 +24,28 @@ namespace Microsoft.AspNetCore.Diagnostics
             // Arrange
             DiagnosticListener diagnosticListener = null;
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        diagnosticListener = app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                        app.UseDeveloperExceptionPage();
-                        app.Run(context =>
-                        {
-                            throw new Exception("Test exception");
-                        });
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    diagnosticListener =
+                                        app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                                    app.UseDeveloperExceptionPage();
+                                    app.Run(
+                                        context =>
+                                        {
+                                            throw new Exception("Test exception");
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -60,19 +68,26 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.UseDeveloperExceptionPage();
-                        app.Run(context =>
-                        {
-                            throw new Exception("Test exception");
-                        });
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseDeveloperExceptionPage();
+                                    app.Run(
+                                        context =>
+                                        {
+                                            throw new Exception("Test exception");
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -80,7 +95,9 @@ namespace Microsoft.AspNetCore.Diagnostics
 
             // Act
             var client = server.CreateClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("text/html")
+            );
             var response = await client.GetAsync("/path");
 
             // Assert
@@ -95,19 +112,26 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        app.UseDeveloperExceptionPage();
-                        app.Run(context =>
-                        {
-                            throw new Exception("Test exception");
-                        });
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseDeveloperExceptionPage();
+                                    app.Run(
+                                        context =>
+                                        {
+                                            throw new Exception("Test exception");
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -128,23 +152,35 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .ConfigureServices(services =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        services.AddSingleton<IDeveloperPageExceptionFilter, ExceptionMessageFilter>();
-                    })
-                    .Configure(app =>
-                    {
-                        app.UseDeveloperExceptionPage();
-                        app.Run(context =>
-                        {
-                            throw new Exception("Test exception");
-                        });
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddSingleton<
+                                        IDeveloperPageExceptionFilter,
+                                        ExceptionMessageFilter
+                                    >();
+                                }
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseDeveloperExceptionPage();
+                                    app.Run(
+                                        context =>
+                                        {
+                                            throw new Exception("Test exception");
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -162,25 +198,43 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .ConfigureServices(services =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        services.AddSingleton<IDeveloperPageExceptionFilter, PassThroughExceptionFilter>();
-                        services.AddSingleton<IDeveloperPageExceptionFilter, AlwaysBadFormatExceptionFilter>();
-                        services.AddSingleton<IDeveloperPageExceptionFilter, ExceptionMessageFilter>();
-                    })
-                    .Configure(app =>
-                    {
-                        app.UseDeveloperExceptionPage();
-                        app.Run(context =>
-                        {
-                            throw new Exception("Test exception");
-                        });
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddSingleton<
+                                        IDeveloperPageExceptionFilter,
+                                        PassThroughExceptionFilter
+                                    >();
+                                    services.AddSingleton<
+                                        IDeveloperPageExceptionFilter,
+                                        AlwaysBadFormatExceptionFilter
+                                    >();
+                                    services.AddSingleton<
+                                        IDeveloperPageExceptionFilter,
+                                        ExceptionMessageFilter
+                                    >();
+                                }
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseDeveloperExceptionPage();
+                                    app.Run(
+                                        context =>
+                                        {
+                                            throw new Exception("Test exception");
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -200,25 +254,43 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             // Arrange
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .ConfigureServices(services =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        services.AddSingleton<IDeveloperPageExceptionFilter, AlwaysThrowSameMessageFilter>();
-                        services.AddSingleton<IDeveloperPageExceptionFilter, ExceptionMessageFilter>();
-                        services.AddSingleton<IDeveloperPageExceptionFilter, ExceptionToStringFilter>();
-                    })
-                    .Configure(app =>
-                    {
-                        app.UseDeveloperExceptionPage();
-                        app.Run(context =>
-                        {
-                            throw new Exception("Test exception");
-                        });
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .ConfigureServices(
+                                services =>
+                                {
+                                    services.AddSingleton<
+                                        IDeveloperPageExceptionFilter,
+                                        AlwaysThrowSameMessageFilter
+                                    >();
+                                    services.AddSingleton<
+                                        IDeveloperPageExceptionFilter,
+                                        ExceptionMessageFilter
+                                    >();
+                                    services.AddSingleton<
+                                        IDeveloperPageExceptionFilter,
+                                        ExceptionToStringFilter
+                                    >();
+                                }
+                            )
+                            .Configure(
+                                app =>
+                                {
+                                    app.UseDeveloperExceptionPage();
+                                    app.Run(
+                                        context =>
+                                        {
+                                            throw new Exception("Test exception");
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -238,49 +310,109 @@ namespace Microsoft.AspNetCore.Diagnostics
                 var variations = new TheoryData<List<CompilationFailure>>();
                 var failures = new List<CompilationFailure>();
                 var diagnosticMessages = new List<DiagnosticMessage>();
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", diagnosticMessages)
-                });
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(null, "source file content", "compiled content", diagnosticMessages)
-                });
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", null, "compiled content", diagnosticMessages)
-                });
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", null, diagnosticMessages)
-                });
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(null, null, null, diagnosticMessages)
-                });
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", diagnosticMessages),
-                    new CompilationFailure(@"c:\sourcefilepath.cs", null, "compiled content", diagnosticMessages)
-                });
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(
+                            @"c:\sourcefilepath.cs",
+                            "source file content",
+                            "compiled content",
+                            diagnosticMessages
+                        )
+                    }
+                );
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(
+                            null,
+                            "source file content",
+                            "compiled content",
+                            diagnosticMessages
+                        )
+                    }
+                );
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(
+                            @"c:\sourcefilepath.cs",
+                            null,
+                            "compiled content",
+                            diagnosticMessages
+                        )
+                    }
+                );
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(
+                            @"c:\sourcefilepath.cs",
+                            "source file content",
+                            null,
+                            diagnosticMessages
+                        )
+                    }
+                );
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(null, null, null, diagnosticMessages)
+                    }
+                );
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(
+                            @"c:\sourcefilepath.cs",
+                            "source file content",
+                            "compiled content",
+                            diagnosticMessages
+                        ),
+                        new CompilationFailure(
+                            @"c:\sourcefilepath.cs",
+                            null,
+                            "compiled content",
+                            diagnosticMessages
+                        )
+                    }
+                );
                 variations.Add(null);
-                variations.Add(new List<CompilationFailure>()
-                {
-                    null
-                });
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", diagnosticMessages),
-                    null
-                });
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", null)
-                });
-                variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", new List<DiagnosticMessage>(){ null })
-                });
+                variations.Add(new List<CompilationFailure>() { null });
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(
+                            @"c:\sourcefilepath.cs",
+                            "source file content",
+                            "compiled content",
+                            diagnosticMessages
+                        ),
+                        null
+                    }
+                );
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(
+                            @"c:\sourcefilepath.cs",
+                            "source file content",
+                            "compiled content",
+                            null
+                        )
+                    }
+                );
+                variations.Add(
+                    new List<CompilationFailure>()
+                    {
+                        new CompilationFailure(
+                            @"c:\sourcefilepath.cs",
+                            "source file content",
+                            "compiled content",
+                            new List<DiagnosticMessage>() { null }
+                        )
+                    }
+                );
                 return variations;
             }
         }
@@ -288,25 +420,34 @@ namespace Microsoft.AspNetCore.Diagnostics
         [Theory]
         [MemberData(nameof(CompilationExceptionData))]
         public async Task NullInfoInCompilationException_ShouldNotThrowExceptionGeneratingExceptionPage(
-            List<CompilationFailure> failures)
+            List<CompilationFailure> failures
+        )
         {
             // Arrange
             DiagnosticListener diagnosticListener = null;
             using var host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                    .UseTestServer()
-                    .Configure(app =>
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        diagnosticListener = app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                        app.UseDeveloperExceptionPage();
-                        app.Run(context =>
-                        {
-                            throw new CustomCompilationException(failures);
-                        });
-                    });
-                }).Build();
+                        webHostBuilder
+                            .UseTestServer()
+                            .Configure(
+                                app =>
+                                {
+                                    diagnosticListener =
+                                        app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                                    app.UseDeveloperExceptionPage();
+                                    app.Run(
+                                        context =>
+                                        {
+                                            throw new CustomCompilationException(failures);
+                                        }
+                                    );
+                                }
+                            );
+                    }
+                )
+                .Build();
 
             await host.StartAsync();
 
@@ -362,7 +503,12 @@ namespace Microsoft.AspNetCore.Diagnostics
         {
             public Task HandleExceptionAsync(ErrorContext context, Func<ErrorContext, Task> next)
             {
-                return next(new ErrorContext(context.HttpContext, new FormatException("Bad format exception!")));
+                return next(
+                    new ErrorContext(
+                        context.HttpContext,
+                        new FormatException("Bad format exception!")
+                    )
+                );
             }
         }
 

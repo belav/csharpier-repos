@@ -21,8 +21,19 @@ namespace Microsoft.Data.Sqlite
         {
             _connection.Open();
             _connection.ExecuteNonQuery(
-                "CREATE TABLE " + Table + " (" + Column + " BLOB);" +
-                "INSERT INTO " + Table + " (rowid, " + Column + ") VALUES (" + Rowid + ", X'0102');");
+                "CREATE TABLE "
+                    + Table
+                    + " ("
+                    + Column
+                    + " BLOB);"
+                    + "INSERT INTO "
+                    + Table
+                    + " (rowid, "
+                    + Column
+                    + ") VALUES ("
+                    + Rowid
+                    + ", X'0102');"
+            );
         }
 
         [Fact]
@@ -31,7 +42,8 @@ namespace Microsoft.Data.Sqlite
             var connection = new SqliteConnection();
 
             var ex = Assert.Throws<InvalidOperationException>(
-                () => new SqliteBlob(connection, Table, Column, Rowid));
+                () => new SqliteBlob(connection, Table, Column, Rowid)
+            );
             Assert.Equal(Resources.SqlBlobRequiresOpenConnection, ex.Message);
         }
 
@@ -39,7 +51,8 @@ namespace Microsoft.Data.Sqlite
         public void Ctor_throws_when_error()
         {
             var ex = Assert.Throws<SqliteException>(
-                () => new SqliteBlob(_connection, "UnknownTable", Column, Rowid));
+                () => new SqliteBlob(_connection, "UnknownTable", Column, Rowid)
+            );
             Assert.Equal(SQLITE_ERROR, ex.SqliteErrorCode);
         }
 
@@ -47,7 +60,8 @@ namespace Microsoft.Data.Sqlite
         public void Ctor_throws_when_table_null()
         {
             var ex = Assert.Throws<ArgumentNullException>(
-                () => new SqliteBlob(_connection, null!, Column, Rowid));
+                () => new SqliteBlob(_connection, null!, Column, Rowid)
+            );
             Assert.Equal("tableName", ex.ParamName);
         }
 
@@ -55,7 +69,8 @@ namespace Microsoft.Data.Sqlite
         public void Ctor_throws_when_column_null()
         {
             var ex = Assert.Throws<ArgumentNullException>(
-                () => new SqliteBlob(_connection, Table, null!, Rowid));
+                () => new SqliteBlob(_connection, Table, null!, Rowid)
+            );
             Assert.Equal("columnName", ex.ParamName);
         }
 
@@ -102,8 +117,7 @@ namespace Microsoft.Data.Sqlite
         {
             using (var stream = CreateStream())
             {
-                var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Position = -1);
+                var ex = Assert.Throws<ArgumentOutOfRangeException>(() => stream.Position = -1);
                 Assert.Equal("value", ex.ParamName);
                 Assert.Equal(-1L, ex.ActualValue);
             }
@@ -119,7 +133,7 @@ namespace Microsoft.Data.Sqlite
         }
 
         [Theory]
-        [InlineData(0, new byte[] { }, 0, 0, 0)]
+        [InlineData(0, new byte[] {  }, 0, 0, 0)]
         [InlineData(0, new byte[] { 0 }, 0, 0, 0)]
         [InlineData(0, new byte[] { 0 }, 2, 0, 1)]
         [InlineData(0, new byte[] { 0 }, 3, 0, 1)]
@@ -133,7 +147,8 @@ namespace Microsoft.Data.Sqlite
             byte[] expectedBuffer,
             long initialPosition,
             int offset,
-            int count)
+            int count
+        )
         {
             using (var stream = CreateStream())
             {
@@ -153,8 +168,7 @@ namespace Microsoft.Data.Sqlite
         {
             using (var stream = CreateStream())
             {
-                var ex = Assert.Throws<ArgumentNullException>(
-                    () => stream.Read(null!, 0, 1));
+                var ex = Assert.Throws<ArgumentNullException>(() => stream.Read(null!, 0, 1));
 
                 Assert.Equal("buffer", ex.ParamName);
             }
@@ -168,7 +182,8 @@ namespace Microsoft.Data.Sqlite
                 var buffer = new byte[1];
 
                 var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Read(buffer, -1, 1));
+                    () => stream.Read(buffer, -1, 1)
+                );
                 Assert.Equal("offset", ex.ParamName);
                 Assert.Equal(-1, ex.ActualValue);
             }
@@ -181,8 +196,7 @@ namespace Microsoft.Data.Sqlite
             {
                 var buffer = new byte[1];
 
-                var ex = Assert.Throws<ArgumentException>(
-                    () => stream.Read(buffer, 1, 1));
+                var ex = Assert.Throws<ArgumentException>(() => stream.Read(buffer, 1, 1));
                 Assert.Null(ex.ParamName);
                 Assert.Equal(Resources.InvalidOffsetAndCount, ex.Message);
             }
@@ -196,7 +210,8 @@ namespace Microsoft.Data.Sqlite
                 var buffer = new byte[1];
 
                 var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Read(buffer, 0, -1));
+                    () => stream.Read(buffer, 0, -1)
+                );
                 Assert.Equal("count", ex.ParamName);
                 Assert.Equal(-1, ex.ActualValue);
             }
@@ -209,8 +224,7 @@ namespace Microsoft.Data.Sqlite
             {
                 var buffer = new byte[1];
 
-                var ex = Assert.Throws<ArgumentException>(
-                    () => stream.Read(buffer, 0, 2));
+                var ex = Assert.Throws<ArgumentException>(() => stream.Read(buffer, 0, 2));
 
                 Assert.Null(ex.ParamName);
                 Assert.Equal(Resources.InvalidOffsetAndCount, ex.Message);
@@ -225,8 +239,7 @@ namespace Microsoft.Data.Sqlite
             var stream = CreateStream();
             stream.Dispose();
 
-            var ex = Assert.Throws<ObjectDisposedException>(
-                () => stream.Read(buffer, 0, 1));
+            var ex = Assert.Throws<ObjectDisposedException>(() => stream.Read(buffer, 0, 1));
         }
 
         [Theory]
@@ -240,11 +253,7 @@ namespace Microsoft.Data.Sqlite
         [InlineData(1, 1, -1, SeekOrigin.End)]
         [InlineData(2, 1, 0, SeekOrigin.End)]
         [InlineData(3, 1, 1, SeekOrigin.End)]
-        public void Seek_works(
-            long expected,
-            long initialPosition,
-            long offset,
-            SeekOrigin origin)
+        public void Seek_works(long expected, long initialPosition, long offset, SeekOrigin origin)
         {
             using (var stream = CreateStream())
             {
@@ -261,17 +270,13 @@ namespace Microsoft.Data.Sqlite
         [InlineData(1, -1, SeekOrigin.Begin)]
         [InlineData(1, -2, SeekOrigin.Current)]
         [InlineData(1, -3, SeekOrigin.End)]
-        public void Seek_throws_when_negative(
-            long initialPosition,
-            long offset,
-            SeekOrigin origin)
+        public void Seek_throws_when_negative(long initialPosition, long offset, SeekOrigin origin)
         {
             using (var stream = CreateStream())
             {
                 stream.Position = initialPosition;
 
-                var ex = Assert.Throws<IOException>(
-                    () => stream.Seek(offset, origin));
+                var ex = Assert.Throws<IOException>(() => stream.Seek(offset, origin));
                 Assert.Equal(Resources.SeekBeforeBegin, ex.Message);
             }
         }
@@ -281,8 +286,7 @@ namespace Microsoft.Data.Sqlite
         {
             using (var stream = CreateStream())
             {
-                var ex = Assert.Throws<ArgumentException>(
-                    () => stream.Seek(0, (SeekOrigin)(-1)));
+                var ex = Assert.Throws<ArgumentException>(() => stream.Seek(0, (SeekOrigin)(-1)));
                 Assert.Equal("origin", ex.ParamName);
                 Assert.Contains(Resources.InvalidEnumValue(typeof(SeekOrigin), -1), ex.Message);
             }
@@ -293,8 +297,7 @@ namespace Microsoft.Data.Sqlite
         {
             using (var stream = CreateStream())
             {
-                var ex = Assert.Throws<NotSupportedException>(
-                    () => stream.SetLength(1));
+                var ex = Assert.Throws<NotSupportedException>(() => stream.SetLength(1));
                 Assert.Equal(Resources.ResizeNotSupported, ex.Message);
             }
         }
@@ -304,16 +307,17 @@ namespace Microsoft.Data.Sqlite
         [InlineData(new byte[] { 3, 2 }, 0, new byte[] { 3, 4 }, 0, 1)]
         [InlineData(new byte[] { 4, 2 }, 0, new byte[] { 3, 4 }, 1, 1)]
         [InlineData(new byte[] { 1, 3 }, 1, new byte[] { 3 }, 0, 1)]
-        [InlineData(new byte[] { 1, 2 }, 0, new byte[] { }, 0, 0)]
-        [InlineData(new byte[] { 1, 2 }, 2, new byte[] { }, 0, 0)]
-        [InlineData(new byte[] { 1, 2 }, 3, new byte[] { }, 0, 0)]
+        [InlineData(new byte[] { 1, 2 }, 0, new byte[] {  }, 0, 0)]
+        [InlineData(new byte[] { 1, 2 }, 2, new byte[] {  }, 0, 0)]
+        [InlineData(new byte[] { 1, 2 }, 3, new byte[] {  }, 0, 0)]
         [InlineData(new byte[] { 1, 2 }, 0, new byte[] { 3 }, 1, 0)]
         public void Write_works(
             byte[] expected,
             long initialPosition,
             byte[] buffer,
             int offset,
-            int count)
+            int count
+        )
         {
             using (var stream = CreateStream())
             {
@@ -326,7 +330,9 @@ namespace Microsoft.Data.Sqlite
             Assert.Equal(
                 expected,
                 _connection.ExecuteScalar<byte[]>(
-                    $"SELECT {Column} FROM {Table} WHERE rowid = {Rowid}"));
+                    $"SELECT {Column} FROM {Table} WHERE rowid = {Rowid}"
+                )
+            );
         }
 
         [Fact]
@@ -334,8 +340,7 @@ namespace Microsoft.Data.Sqlite
         {
             using (var stream = CreateStream())
             {
-                var ex = Assert.Throws<ArgumentNullException>(
-                    () => stream.Write(null!, 0, 0));
+                var ex = Assert.Throws<ArgumentNullException>(() => stream.Write(null!, 0, 0));
                 Assert.Equal("buffer", ex.ParamName);
             }
         }
@@ -346,7 +351,8 @@ namespace Microsoft.Data.Sqlite
             using (var stream = CreateStream())
             {
                 var ex = Assert.Throws<ArgumentException>(
-                    () => stream.Write(new byte[] { 3 }, 0, 2));
+                    () => stream.Write(new byte[] { 3 }, 0, 2)
+                );
                 Assert.Null(ex.ParamName);
                 Assert.Equal(Resources.InvalidOffsetAndCount, ex.Message);
             }
@@ -358,7 +364,8 @@ namespace Microsoft.Data.Sqlite
             using (var stream = CreateStream())
             {
                 var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Write(Array.Empty<byte>(), 0, -1));
+                    () => stream.Write(Array.Empty<byte>(), 0, -1)
+                );
                 Assert.Equal("count", ex.ParamName);
                 Assert.Equal(-1, ex.ActualValue);
             }
@@ -370,7 +377,8 @@ namespace Microsoft.Data.Sqlite
             using (var stream = CreateStream())
             {
                 var ex = Assert.Throws<ArgumentException>(
-                    () => stream.Write(new byte[] { 3 }, 1, 1));
+                    () => stream.Write(new byte[] { 3 }, 1, 1)
+                );
                 Assert.Null(ex.ParamName);
                 Assert.Equal(Resources.InvalidOffsetAndCount, ex.Message);
             }
@@ -382,7 +390,8 @@ namespace Microsoft.Data.Sqlite
             using (var stream = CreateStream())
             {
                 var ex = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => stream.Write(new byte[] { 3, 4 }, -1, 2));
+                    () => stream.Write(new byte[] { 3, 4 }, -1, 2)
+                );
                 Assert.Equal("offset", ex.ParamName);
             }
         }
@@ -394,7 +403,8 @@ namespace Microsoft.Data.Sqlite
             {
                 stream.Position = 2;
                 var ex = Assert.Throws<NotSupportedException>(
-                    () => stream.Write(new byte[] { 3 }, 0, 1));
+                    () => stream.Write(new byte[] { 3 }, 0, 1)
+                );
                 Assert.Equal(Resources.ResizeNotSupported, ex.Message);
             }
         }
@@ -405,7 +415,8 @@ namespace Microsoft.Data.Sqlite
             using (var stream = CreateStream(readOnly: true))
             {
                 var ex = Assert.Throws<NotSupportedException>(
-                    () => stream.Write(new byte[] { 1 }, 0, 1));
+                    () => stream.Write(new byte[] { 1 }, 0, 1)
+                );
 
                 Assert.Equal(Resources.WriteNotSupported, ex.Message);
             }
@@ -418,7 +429,8 @@ namespace Microsoft.Data.Sqlite
             stream.Dispose();
 
             var ex = Assert.Throws<ObjectDisposedException>(
-                () => stream.Write(new byte[] { 3 }, 0, 1));
+                () => stream.Write(new byte[] { 3 }, 0, 1)
+            );
         }
 
         [Fact]
@@ -428,19 +440,19 @@ namespace Microsoft.Data.Sqlite
             connection.Open();
 
             connection.ExecuteNonQuery(
-            @"
+                @"
                 CREATE TABLE """" ("""" BLOB);
                 INSERT INTO """" (rowid, """") VALUES(1, X'02');
-            ");
+            "
+            );
 
             using var stream = new SqliteBlob(connection, "", "", 1);
             Assert.Equal(2, stream.ReadByte());
         }
 
-        protected Stream CreateStream(bool readOnly = false)
-            => new SqliteBlob(_connection, Table, Column, Rowid, readOnly);
+        protected Stream CreateStream(bool readOnly = false) =>
+            new SqliteBlob(_connection, Table, Column, Rowid, readOnly);
 
-        public void Dispose()
-            => _connection.Dispose();
+        public void Dispose() => _connection.Dispose();
     }
 }

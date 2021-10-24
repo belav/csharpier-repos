@@ -87,7 +87,10 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             var instance2b = stackObjectPool.Get();
             Assert.Same(instance1, instance1b);
             Assert.NotSame(instance2b, instance2);
-            Assert.Equal(4, new[] { instance1, instance2, instance3, instance2b }.Distinct().Count());
+            Assert.Equal(
+                4,
+                new[] { instance1, instance2, instance3, instance2b }.Distinct().Count()
+            );
         }
 
         [Fact]
@@ -97,10 +100,12 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             var stackObjectPool = new StackObjectPool<object>(10, () => new object());
 
             // Act/Assert
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-            {
-                stackObjectPool.Return(new object());
-            });
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    stackObjectPool.Return(new object());
+                }
+            );
             Assert.Equal("There are no outstanding instances to return.", ex.Message);
         }
 
@@ -113,11 +118,16 @@ namespace Microsoft.AspNetCore.Components.RenderTree
             var instance2 = stackObjectPool.Get();
 
             // Act/Assert
-            var ex = Assert.Throws<ArgumentException>(() =>
-            {
-                stackObjectPool.Return(instance1);
-            });
-            Assert.Equal("Attempting to return wrong pooled instance. Get/Return calls must form a stack.", ex.Message);
+            var ex = Assert.Throws<ArgumentException>(
+                () =>
+                {
+                    stackObjectPool.Return(instance1);
+                }
+            );
+            Assert.Equal(
+                "Attempting to return wrong pooled instance. Get/Return calls must form a stack.",
+                ex.Message
+            );
         }
     }
 }

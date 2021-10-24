@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public class RelationalCommandDiagnosticsLogger
-        : DiagnosticsLogger<DbLoggerCategory.Database.Command>, IRelationalCommandDiagnosticsLogger
+        : DiagnosticsLogger<DbLoggerCategory.Database.Command>,
+          IRelationalCommandDiagnosticsLogger
     {
         private DateTimeOffset _suppressCommandCreateExpiration;
         private DateTimeOffset _suppressCommandExecuteExpiration;
@@ -45,11 +46,20 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             LoggingDefinitions loggingDefinitions,
             IDbContextLogger contextLogger,
             IDbContextOptions contextOptions,
-            IInterceptors? interceptors = null)
-            : base(loggerFactory, loggingOptions, diagnosticSource, loggingDefinitions, contextLogger, interceptors)
+            IInterceptors? interceptors = null
+        )
+            : base(
+                loggerFactory,
+                loggingOptions,
+                diagnosticSource,
+                loggingDefinitions,
+                contextLogger,
+                interceptors
+            )
         {
-            _loggingConfigCacheTime = contextOptions.FindExtension<CoreOptionsExtension>()?.LoggingConfigCacheTime ??
-                                      CoreOptionsExtension.DefaultLoggingConfigCacheTime;
+            _loggingConfigCacheTime =
+                contextOptions.FindExtension<CoreOptionsExtension>()?.LoggingConfigCacheTime
+                ?? CoreOptionsExtension.DefaultLoggingConfigCacheTime;
         }
 
         #region CommandCreating
@@ -66,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime
+        )
         {
             _suppressCommandCreateExpiration = startTime + _loggingConfigCacheTime;
 
@@ -79,8 +90,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 definition.Log(this, commandMethod.ToString());
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandCreateExpiration = default;
 
@@ -94,7 +111,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     startTime,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -115,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DateTimeOffset startTime,
             EventDefinition<string> definition,
             bool diagnosticSourceEnabled,
-            bool simpleLogEnabled)
+            bool simpleLogEnabled
+        )
         {
             var eventData = new CommandCorrelatedEventData(
                 definition,
@@ -126,7 +145,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 commandId,
                 connectionId,
                 async,
-                startTime);
+                startTime
+            );
 
             DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -158,7 +178,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
         {
             var definition = RelationalResources.LogCommandCreated(this);
 
@@ -169,8 +190,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 definition.Log(this, commandMethod.ToString(), (int)duration.TotalMilliseconds);
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandCreateExpiration = default;
 
@@ -186,7 +213,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -209,7 +237,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             TimeSpan duration,
             EventDefinition<string, int> definition,
             bool diagnosticSourceEnabled,
-            bool simpleLogEnabled)
+            bool simpleLogEnabled
+        )
         {
             var eventData = new CommandEndEventData(
                 definition,
@@ -223,7 +252,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 async,
                 false,
                 startTime,
-                duration);
+                duration
+            );
 
             DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -233,7 +263,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             {
                 var d = (EventDefinition<string, int>)definition;
                 var p = (CommandEndEventData)payload;
-                return d.GenerateMessage(p.ExecuteMethod.ToString(), (int)p.Duration.TotalMilliseconds);
+                return d.GenerateMessage(
+                    p.ExecuteMethod.ToString(),
+                    (int)p.Duration.TotalMilliseconds
+                );
             }
         }
 
@@ -253,7 +286,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime
+        )
         {
             _suppressCommandExecuteExpiration = startTime + _loggingConfigCacheTime;
 
@@ -269,11 +303,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -288,7 +329,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     startTime,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -311,7 +353,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime
+        )
         {
             _suppressCommandExecuteExpiration = startTime + _loggingConfigCacheTime;
 
@@ -327,11 +370,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -346,7 +396,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     startTime,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -369,7 +420,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DbContext? context,
             Guid commandId,
             Guid connectionId,
-            DateTimeOffset startTime)
+            DateTimeOffset startTime
+        )
         {
             _suppressCommandExecuteExpiration = startTime + _loggingConfigCacheTime;
 
@@ -385,11 +437,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -404,7 +463,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     startTime,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -428,7 +488,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             _suppressCommandExecuteExpiration = startTime + _loggingConfigCacheTime;
 
@@ -444,11 +505,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -463,11 +531,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     startTime,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
-                    return interceptor.ReaderExecutingAsync(command, eventData, default, cancellationToken);
+                    return interceptor.ReaderExecutingAsync(
+                        command,
+                        eventData,
+                        default,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -487,7 +561,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             _suppressCommandExecuteExpiration = startTime + _loggingConfigCacheTime;
 
@@ -503,11 +578,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -522,11 +604,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     startTime,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
-                    return interceptor.ScalarExecutingAsync(command, eventData, default, cancellationToken);
+                    return interceptor.ScalarExecutingAsync(
+                        command,
+                        eventData,
+                        default,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -546,7 +634,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Guid commandId,
             Guid connectionId,
             DateTimeOffset startTime,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             _suppressCommandExecuteExpiration = startTime + _loggingConfigCacheTime;
 
@@ -562,11 +651,18 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -581,11 +677,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     startTime,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
-                    return interceptor.NonQueryExecutingAsync(command, eventData, default, cancellationToken);
+                    return interceptor.NonQueryExecutingAsync(
+                        command,
+                        eventData,
+                        default,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -603,7 +705,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DateTimeOffset startTime,
             EventDefinition<string, CommandType, int, string, string> definition,
             bool diagnosticSourceEnabled,
-            bool simpleLogEnabled)
+            bool simpleLogEnabled
+        )
         {
             var eventData = new CommandEventData(
                 definition,
@@ -616,7 +719,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 connectionId,
                 async,
                 ShouldLogParameterValues(command),
-                startTime);
+                startTime
+            );
 
             DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -631,7 +735,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     p.Command.CommandType,
                     p.Command.CommandTimeout,
                     Environment.NewLine,
-                    p.Command.CommandText.TrimEnd());
+                    p.Command.CommandText.TrimEnd()
+                );
             }
         }
 
@@ -653,7 +758,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Guid connectionId,
             DbDataReader methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
         {
             var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -663,16 +769,27 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        duration.TotalMilliseconds
+                    ),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -689,7 +806,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -714,7 +832,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Guid connectionId,
             object? methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
         {
             var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -724,16 +843,27 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        duration.TotalMilliseconds
+                    ),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -750,7 +880,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -775,7 +906,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Guid connectionId,
             int methodResult,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
         {
             var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -785,16 +917,27 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        duration.TotalMilliseconds
+                    ),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -811,7 +954,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -837,7 +981,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             DbDataReader methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -847,16 +992,27 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        duration.TotalMilliseconds
+                    ),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -873,11 +1029,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
-                    return interceptor.ReaderExecutedAsync(command, eventData, methodResult, cancellationToken);
+                    return interceptor.ReaderExecutedAsync(
+                        command,
+                        eventData,
+                        methodResult,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -899,7 +1061,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             object? methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -909,16 +1072,27 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        duration.TotalMilliseconds
+                    ),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -935,11 +1109,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
-                    return interceptor.ScalarExecutedAsync(command, eventData, methodResult, cancellationToken);
+                    return interceptor.ScalarExecutedAsync(
+                        command,
+                        eventData,
+                        methodResult,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -961,7 +1141,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             int methodResult,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -971,16 +1152,27 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
                 definition.Log(
                     this,
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        duration.TotalMilliseconds
+                    ),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressCommandExecuteExpiration = default;
 
@@ -997,11 +1189,17 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
-                    return interceptor.NonQueryExecutedAsync(command, eventData, methodResult, cancellationToken);
+                    return interceptor.NonQueryExecutedAsync(
+                        command,
+                        eventData,
+                        methodResult,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -1021,7 +1219,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             TimeSpan duration,
             EventDefinition<string, string, CommandType, int, string, string> definition,
             bool diagnosticSourceEnabled,
-            bool simpleLogEnabled)
+            bool simpleLogEnabled
+        )
         {
             var eventData = new CommandExecutedEventData(
                 definition,
@@ -1036,7 +1235,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 async,
                 ShouldLogParameterValues(command),
                 startTime,
-                duration);
+                duration
+            );
 
             DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -1044,15 +1244,21 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             static string CommandExecuted(EventDefinitionBase definition, EventData payload)
             {
-                var d = (EventDefinition<string, string, CommandType, int, string, string>)definition;
+                var d =
+                    (EventDefinition<string, string, CommandType, int, string, string>)definition;
                 var p = (CommandExecutedEventData)payload;
                 return d.GenerateMessage(
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", p.Duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        p.Duration.TotalMilliseconds
+                    ),
                     p.Command.Parameters.FormatParameters(p.LogParameterValues),
                     p.Command.CommandType,
                     p.Command.CommandTimeout,
                     Environment.NewLine,
-                    p.Command.CommandText.TrimEnd());
+                    p.Command.CommandText.TrimEnd()
+                );
             }
         }
 
@@ -1075,14 +1281,21 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Guid connectionId,
             Exception exception,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
         {
             var definition = RelationalResources.LogCommandFailed(this);
 
             LogCommandError(command, duration, definition);
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = BroadcastCommandError(
                     connection.DbConnection,
@@ -1097,7 +1310,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 interceptor?.CommandFailed(command, eventData);
             }
@@ -1106,18 +1320,24 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         private void LogCommandError(
             DbCommand command,
             TimeSpan duration,
-            EventDefinition<string, string, CommandType, int, string, string> definition)
+            EventDefinition<string, string, CommandType, int, string, string> definition
+        )
         {
             if (ShouldLog(definition))
             {
                 definition.Log(
                     this,
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        duration.TotalMilliseconds
+                    ),
                     command.Parameters.FormatParameters(ShouldLogParameterValues(command)),
                     command.CommandType,
                     command.CommandTimeout,
                     Environment.NewLine,
-                    command.CommandText.TrimEnd());
+                    command.CommandText.TrimEnd()
+                );
             }
         }
 
@@ -1137,14 +1357,21 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             Exception exception,
             DateTimeOffset startTime,
             TimeSpan duration,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var definition = RelationalResources.LogCommandFailed(this);
 
             LogCommandError(command, duration, definition);
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 var eventData = BroadcastCommandError(
                     connection.DbConnection,
@@ -1159,7 +1386,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     duration,
                     definition,
                     diagnosticSourceEnabled,
-                    simpleLogEnabled);
+                    simpleLogEnabled
+                );
 
                 if (interceptor != null)
                 {
@@ -1183,7 +1411,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             TimeSpan duration,
             EventDefinition<string, string, CommandType, int, string, string> definition,
             bool diagnosticSourceEnabled,
-            bool simpleLogEnabled)
+            bool simpleLogEnabled
+        )
         {
             var eventData = new CommandErrorEventData(
                 definition,
@@ -1198,7 +1427,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 async,
                 ShouldLogParameterValues(command),
                 startTime,
-                duration);
+                duration
+            );
 
             DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -1206,15 +1436,21 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
 
             static string CommandError(EventDefinitionBase definition, EventData payload)
             {
-                var d = (EventDefinition<string, string, CommandType, int, string, string>)definition;
+                var d =
+                    (EventDefinition<string, string, CommandType, int, string, string>)definition;
                 var p = (CommandErrorEventData)payload;
                 return d.GenerateMessage(
-                    string.Format(CultureInfo.InvariantCulture, "{0:N0}", p.Duration.TotalMilliseconds),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0:N0}",
+                        p.Duration.TotalMilliseconds
+                    ),
                     p.Command.Parameters.FormatParameters(p.LogParameterValues),
                     p.Command.CommandType,
                     p.Command.CommandTimeout,
                     Environment.NewLine,
-                    p.Command.CommandText.TrimEnd());
+                    p.Command.CommandText.TrimEnd()
+                );
             }
         }
 
@@ -1236,7 +1472,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
             int recordsAffected,
             int readCount,
             DateTimeOffset startTime,
-            TimeSpan duration)
+            TimeSpan duration
+        )
         {
             _suppressDataReaderDisposingExpiration = startTime + _loggingConfigCacheTime;
 
@@ -1249,8 +1486,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                 definition.Log(this);
             }
 
-            if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+            if (
+                NeedsEventData<IDbCommandInterceptor>(
+                    definition,
+                    out var interceptor,
+                    out var diagnosticSourceEnabled,
+                    out var simpleLogEnabled
+                )
+            )
             {
                 _suppressDataReaderDisposingExpiration = default;
 
@@ -1265,7 +1508,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
                     recordsAffected,
                     readCount,
                     startTime,
-                    duration);
+                    duration
+                );
 
                 DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -1288,8 +1532,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool ShouldLogCommandCreate(DateTimeOffset now)
-            => now > _suppressCommandCreateExpiration;
+        public virtual bool ShouldLogCommandCreate(DateTimeOffset now) =>
+            now > _suppressCommandCreateExpiration;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1297,8 +1541,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool ShouldLogCommandExecute(DateTimeOffset now)
-            => now > _suppressCommandExecuteExpiration;
+        public virtual bool ShouldLogCommandExecute(DateTimeOffset now) =>
+            now > _suppressCommandExecuteExpiration;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1306,12 +1550,11 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool ShouldLogDataReaderDispose(DateTimeOffset now)
-            => now > _suppressDataReaderDisposingExpiration;
+        public virtual bool ShouldLogDataReaderDispose(DateTimeOffset now) =>
+            now > _suppressDataReaderDisposingExpiration;
 
-        private bool ShouldLogParameterValues(DbCommand command)
-            => command.Parameters.Count > 0 && ShouldLogSensitiveData();
-
+        private bool ShouldLogParameterValues(DbCommand command) =>
+            command.Parameters.Count > 0 && ShouldLogSensitiveData();
         #endregion ShouldLog checks
     }
 }

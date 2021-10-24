@@ -52,7 +52,11 @@ internal static partial class Interop
         internal static extern bool SslSetTlsExtHostName(SafeSslHandle ssl, string host);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslGet0AlpnSelected")]
-        internal static extern void SslGetAlpnSelected(SafeSslHandle ssl, out IntPtr protocol, out int len);
+        internal static extern void SslGetAlpnSelected(
+            SafeSslHandle ssl,
+            out IntPtr protocol,
+            out int len
+        );
 
         internal static byte[]? SslGetAlpnSelected(SafeSslHandle ssl)
         {
@@ -68,10 +72,18 @@ internal static partial class Interop
             return result;
         }
 
-        [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslWrite", SetLastError = true)]
+        [DllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslWrite",
+            SetLastError = true
+        )]
         internal static extern int SslWrite(SafeSslHandle ssl, ref byte buf, int num);
 
-        [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslRead", SetLastError = true)]
+        [DllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslRead",
+            SetLastError = true
+        )]
         internal static extern unsafe int SslRead(SafeSslHandle ssl, byte* buf, int num);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_IsSslRenegotiatePending")]
@@ -85,9 +97,17 @@ internal static partial class Interop
         internal static extern int SslShutdown(SafeSslHandle ssl);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslSetBio")]
-        internal static extern void SslSetBio(SafeSslHandle ssl, SafeBioHandle rbio, SafeBioHandle wbio);
+        internal static extern void SslSetBio(
+            SafeSslHandle ssl,
+            SafeBioHandle rbio,
+            SafeBioHandle wbio
+        );
 
-        [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslDoHandshake", SetLastError = true)]
+        [DllImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_SslDoHandshake",
+            SetLastError = true
+        )]
         internal static extern int SslDoHandshake(SafeSslHandle ssl);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_IsSslStateOK")]
@@ -121,18 +141,30 @@ internal static partial class Interop
         internal static extern bool SslAddExtraChainCert(SafeSslHandle ssl, SafeX509Handle x509);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslGetClientCAList")]
-        private static extern SafeSharedX509NameStackHandle SslGetClientCAList_private(SafeSslHandle ssl);
+        private static extern SafeSharedX509NameStackHandle SslGetClientCAList_private(
+            SafeSslHandle ssl
+        );
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_SslGetCurrentCipherId")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SslGetCurrentCipherId(SafeSslHandle ssl, out int cipherId);
 
         [DllImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_GetOpenSslCipherSuiteName")]
-        private static extern IntPtr GetOpenSslCipherSuiteName(SafeSslHandle ssl, int cipherSuite, out int isTls12OrLower);
+        private static extern IntPtr GetOpenSslCipherSuiteName(
+            SafeSslHandle ssl,
+            int cipherSuite,
+            out int isTls12OrLower
+        );
 
-        internal static string? GetOpenSslCipherSuiteName(SafeSslHandle ssl, TlsCipherSuite cipherSuite, out bool isTls12OrLower)
+        internal static string? GetOpenSslCipherSuiteName(
+            SafeSslHandle ssl,
+            TlsCipherSuite cipherSuite,
+            out bool isTls12OrLower
+        )
         {
-            string? ret = Marshal.PtrToStringAnsi(GetOpenSslCipherSuiteName(ssl, (int)cipherSuite, out int isTls12OrLowerInt));
+            string? ret = Marshal.PtrToStringAnsi(
+                GetOpenSslCipherSuiteName(ssl, (int)cipherSuite, out int isTls12OrLowerInt)
+            );
             isTls12OrLower = isTls12OrLowerInt != 0;
             return ret;
         }
@@ -159,7 +191,10 @@ internal static partial class Interop
         internal static bool AddExtraChainCertificates(SafeSslHandle sslContext, X509Chain chain)
         {
             Debug.Assert(chain != null, "X509Chain should not be null");
-            Debug.Assert(chain.ChainElements.Count > 0, "chain.Build should have already been called");
+            Debug.Assert(
+                chain.ChainElements.Count > 0,
+                "chain.Build should have already been called"
+            );
 
             // If the last certificate is a root certificate, don't send it. PartialChain means the last cert wasn't a root.
             int stop = chain.ChainElements.Count - 1;
@@ -175,7 +210,9 @@ internal static partial class Interop
             // Don't include the first item (the cert whose private key we have)
             for (int i = 1; i < stop; i++)
             {
-                SafeX509Handle dupCertHandle = Crypto.X509UpRef(chain.ChainElements[i].Certificate!.Handle);
+                SafeX509Handle dupCertHandle = Crypto.X509UpRef(
+                    chain.ChainElements[i].Certificate!.Handle
+                );
                 Crypto.CheckValidOpenSslHandle(dupCertHandle);
                 if (!SslAddExtraChainCert(sslContext, dupCertHandle))
                 {
@@ -189,7 +226,10 @@ internal static partial class Interop
             return true;
         }
 
-        internal static bool AddExtraChainCertificates(SafeSslHandle sslContext, X509Certificate2[] chain)
+        internal static bool AddExtraChainCertificates(
+            SafeSslHandle sslContext,
+            X509Certificate2[] chain
+        )
         {
             // send pre-computed list of intermediates.
             for (int i = 0; i < chain.Length; i++)
@@ -221,7 +261,6 @@ internal static partial class Interop
             SSL_ERROR_WANT_WRITE = 3,
             SSL_ERROR_SYSCALL = 5,
             SSL_ERROR_ZERO_RETURN = 6,
-
             // NOTE: this SslErrorCode value doesn't exist in OpenSSL, but
             // we use it to distinguish when a renegotiation is pending.
             // Choosing an arbitrarily large value that shouldn't conflict
@@ -249,18 +288,12 @@ namespace Microsoft.Win32.SafeHandles
 
         public SafeBioHandle? InputBio
         {
-            get
-            {
-                return _readBio;
-            }
+            get { return _readBio; }
         }
 
         public SafeBioHandle? OutputBio
         {
-            get
-            {
-                return _writeBio;
-            }
+            get { return _writeBio; }
         }
 
         internal void MarkHandshakeCompleted()
@@ -295,7 +328,10 @@ namespace Microsoft.Win32.SafeHandles
             {
                 // The only way this should be able to happen without thread aborts is if we hit OOMs while
                 // manipulating the safe handles, in which case we may leak the bio handles.
-                Debug.Fail("Unexpected exception while transferring SafeBioHandle ownership to SafeSslHandle", exc.ToString());
+                Debug.Fail(
+                    "Unexpected exception while transferring SafeBioHandle ownership to SafeSslHandle",
+                    exc.ToString()
+                );
                 throw;
             }
 
@@ -367,11 +403,10 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        public SafeSslHandle() : base(IntPtr.Zero, true)
-        {
-        }
+        public SafeSslHandle() : base(IntPtr.Zero, true) { }
 
-        internal SafeSslHandle(IntPtr validSslPointer, bool ownsHandle) : base(IntPtr.Zero, ownsHandle)
+        internal SafeSslHandle(IntPtr validSslPointer, bool ownsHandle)
+            : base(IntPtr.Zero, ownsHandle)
         {
             handle = validSslPointer;
         }

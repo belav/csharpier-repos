@@ -15,14 +15,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     {
         private readonly object _guard = new object();
         private TaskCompletionSource<IClientConnection>? _finalTaskCompletionSource;
-        private readonly Queue<Func<Task<IClientConnection>>> _waitingTasks = new Queue<Func<Task<IClientConnection>>>();
+        private readonly Queue<Func<Task<IClientConnection>>> _waitingTasks = new Queue<
+            Func<Task<IClientConnection>>
+        >();
 
         public bool IsListening { get; set; }
 
-        public TestableClientConnectionHost()
-        {
-
-        }
+        public TestableClientConnectionHost() { }
 
         public void BeginListening()
         {
@@ -69,7 +68,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             {
                 if (_finalTaskCompletionSource is object)
                 {
-                    throw new InvalidOperationException("All Adds must be called before they are exhausted");
+                    throw new InvalidOperationException(
+                        "All Adds must be called before they are exhausted"
+                    );
                 }
 
                 _waitingTasks.Enqueue(func);

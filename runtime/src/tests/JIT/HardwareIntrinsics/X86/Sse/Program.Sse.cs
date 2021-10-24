@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Add.Single"] = AddSingle,
                 ["AddScalar.Single"] = AddScalarSingle,
                 ["And.Single"] = AndSingle,
@@ -21,20 +22,26 @@ namespace JIT.HardwareIntrinsics.X86
                 ["CompareScalarUnorderedEqual.Boolean"] = CompareScalarUnorderedEqualBoolean,
                 ["CompareGreaterThan.Single"] = CompareGreaterThanSingle,
                 ["CompareScalarGreaterThan.Single"] = CompareScalarGreaterThanSingle,
-                ["CompareScalarOrderedGreaterThan.Boolean"] = CompareScalarOrderedGreaterThanBoolean,
-                ["CompareScalarUnorderedGreaterThan.Boolean"] = CompareScalarUnorderedGreaterThanBoolean,
+                ["CompareScalarOrderedGreaterThan.Boolean"] =
+                    CompareScalarOrderedGreaterThanBoolean,
+                ["CompareScalarUnorderedGreaterThan.Boolean"] =
+                    CompareScalarUnorderedGreaterThanBoolean,
                 ["CompareGreaterThanOrEqual.Single"] = CompareGreaterThanOrEqualSingle,
                 ["CompareScalarGreaterThanOrEqual.Single"] = CompareScalarGreaterThanOrEqualSingle,
-                ["CompareScalarOrderedGreaterThanOrEqual.Boolean"] = CompareScalarOrderedGreaterThanOrEqualBoolean,
-                ["CompareScalarUnorderedGreaterThanOrEqual.Boolean"] = CompareScalarUnorderedGreaterThanOrEqualBoolean,
+                ["CompareScalarOrderedGreaterThanOrEqual.Boolean"] =
+                    CompareScalarOrderedGreaterThanOrEqualBoolean,
+                ["CompareScalarUnorderedGreaterThanOrEqual.Boolean"] =
+                    CompareScalarUnorderedGreaterThanOrEqualBoolean,
                 ["CompareLessThan.Single"] = CompareLessThanSingle,
                 ["CompareScalarLessThan.Single"] = CompareScalarLessThanSingle,
                 ["CompareScalarOrderedLessThan.Boolean"] = CompareScalarOrderedLessThanBoolean,
                 ["CompareScalarUnorderedLessThan.Boolean"] = CompareScalarUnorderedLessThanBoolean,
                 ["CompareLessThanOrEqual.Single"] = CompareLessThanOrEqualSingle,
                 ["CompareScalarLessThanOrEqual.Single"] = CompareScalarLessThanOrEqualSingle,
-                ["CompareScalarOrderedLessThanOrEqual.Boolean"] = CompareScalarOrderedLessThanOrEqualBoolean,
-                ["CompareScalarUnorderedLessThanOrEqual.Boolean"] = CompareScalarUnorderedLessThanOrEqualBoolean,
+                ["CompareScalarOrderedLessThanOrEqual.Boolean"] =
+                    CompareScalarOrderedLessThanOrEqualBoolean,
+                ["CompareScalarUnorderedLessThanOrEqual.Boolean"] =
+                    CompareScalarUnorderedLessThanOrEqualBoolean,
                 ["CompareNotEqual.Single"] = CompareNotEqualSingle,
                 ["CompareScalarNotEqual.Single"] = CompareScalarNotEqualSingle,
                 ["CompareScalarOrderedNotEqual.Boolean"] = CompareScalarOrderedNotEqualBoolean,
@@ -42,7 +49,8 @@ namespace JIT.HardwareIntrinsics.X86
                 ["CompareNotGreaterThan.Single"] = CompareNotGreaterThanSingle,
                 ["CompareScalarNotGreaterThan.Single"] = CompareScalarNotGreaterThanSingle,
                 ["CompareNotGreaterThanOrEqual.Single"] = CompareNotGreaterThanOrEqualSingle,
-                ["CompareScalarNotGreaterThanOrEqual.Single"] = CompareScalarNotGreaterThanOrEqualSingle,
+                ["CompareScalarNotGreaterThanOrEqual.Single"] =
+                    CompareScalarNotGreaterThanOrEqualSingle,
                 ["CompareNotLessThan.Single"] = CompareNotLessThanSingle,
                 ["CompareScalarNotLessThan.Single"] = CompareScalarNotLessThanSingle,
                 ["CompareNotLessThanOrEqual.Single"] = CompareNotLessThanOrEqualSingle,

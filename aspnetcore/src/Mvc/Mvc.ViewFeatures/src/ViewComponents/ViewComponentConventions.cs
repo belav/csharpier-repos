@@ -79,9 +79,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
         private static string GetShortNameByConvention(TypeInfo componentType)
         {
-            if (componentType.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase))
+            if (
+                componentType.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase)
+            )
             {
-                return componentType.Name.Substring(0, componentType.Name.Length - ViewComponentSuffix.Length);
+                return componentType.Name.Substring(
+                    0,
+                    componentType.Name.Length - ViewComponentSuffix.Length
+                );
             }
             else
             {
@@ -103,18 +108,19 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
                 throw new ArgumentNullException(nameof(typeInfo));
             }
 
-            if (!typeInfo.IsClass ||
-                !typeInfo.IsPublic ||
-                typeInfo.IsAbstract ||
-                typeInfo.ContainsGenericParameters ||
-                typeInfo.IsDefined(typeof(NonViewComponentAttribute)))
+            if (
+                !typeInfo.IsClass
+                || !typeInfo.IsPublic
+                || typeInfo.IsAbstract
+                || typeInfo.ContainsGenericParameters
+                || typeInfo.IsDefined(typeof(NonViewComponentAttribute))
+            )
             {
                 return false;
             }
 
-            return
-                typeInfo.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase) ||
-                typeInfo.IsDefined(typeof(ViewComponentAttribute));
+            return typeInfo.Name.EndsWith(ViewComponentSuffix, StringComparison.OrdinalIgnoreCase)
+                || typeInfo.IsDefined(typeof(ViewComponentAttribute));
         }
     }
 }

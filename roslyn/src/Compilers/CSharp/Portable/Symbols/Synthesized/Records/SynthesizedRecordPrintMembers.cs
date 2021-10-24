@@ -22,16 +22,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public SynthesizedRecordPrintMembers(
             SourceMemberContainerTypeSymbol containingType,
             int memberOffset,
-            BindingDiagnosticBag diagnostics)
-            : base(containingType, WellKnownMemberNames.PrintMembersMethodName, hasBody: true, memberOffset, diagnostics)
-        {
-        }
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.PrintMembersMethodName,
+                hasBody: true,
+                memberOffset,
+                diagnostics
+            ) { }
 
-        protected override DeclarationModifiers MakeDeclarationModifiers(DeclarationModifiers allowedModifiers, BindingDiagnosticBag diagnostics)
+        protected override DeclarationModifiers MakeDeclarationModifiers(
+            DeclarationModifiers allowedModifiers,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var result = (ContainingType.BaseTypeNoUseSiteDiagnostics.IsObjectType() && ContainingType.IsSealed) ?
-                DeclarationModifiers.Private :
-                DeclarationModifiers.Protected;
+            var result =
+                (
+                    ContainingType.BaseTypeNoUseSiteDiagnostics.IsObjectType()
+                    && ContainingType.IsSealed
+                )
+                    ? DeclarationModifiers.Private
+                    : DeclarationModifiers.Protected;
 
             if (virtualPrintInBase() is object)
             {
@@ -39,7 +51,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                result |= ContainingType.IsSealed ? DeclarationModifiers.None : DeclarationModifiers.Virtual;
+                result |= ContainingType.IsSealed
+                    ? DeclarationModifiers.None
+                    : DeclarationModifiers.Virtual;
             }
 
             Debug.Assert((result & ~allowedModifiers) == 0);
@@ -54,17 +68,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (!baseType.IsObjectType())
                 {
-                    return FindValidPrintMembersMethod(baseType, ContainingType.DeclaringCompilation);
+                    return FindValidPrintMembersMethod(
+                        baseType,
+                        ContainingType.DeclaringCompilation
+                    );
                 }
 
                 return null;
             }
-
 #if DEBUG
             static bool modifiersAreValid(DeclarationModifiers modifiers)
             {
-                if ((modifiers & DeclarationModifiers.AccessibilityMask) != DeclarationModifiers.Private &&
-                    (modifiers & DeclarationModifiers.AccessibilityMask) != DeclarationModifiers.Protected)
+                if (
+                    (modifiers & DeclarationModifiers.AccessibilityMask)
+                        != DeclarationModifiers.Private
+                    && (modifiers & DeclarationModifiers.AccessibilityMask)
+                        != DeclarationModifiers.Protected
+                )
                 {
                     return false;
                 }
@@ -84,36 +104,76 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #endif
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters, bool IsVararg, ImmutableArray<TypeParameterConstraintClause> DeclaredConstraintsForOverrideOrImplementation) MakeParametersAndBindReturnType(
+            BindingDiagnosticBag diagnostics
+        )
         {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Boolean, location, diagnostics)),
-                    Parameters: ImmutableArray.Create<ParameterSymbol>(
-                        new SourceSimpleParameterSymbol(owner: this,
-                            TypeWithAnnotations.Create(Binder.GetWellKnownType(compilation, WellKnownType.System_Text_StringBuilder, diagnostics, location), NullableAnnotation.NotAnnotated),
-                            ordinal: 0, RefKind.None, "builder", isDiscard: false, Locations)),
-                    IsVararg: false,
-                    DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty);
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Boolean,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: ImmutableArray.Create<ParameterSymbol>(
+                    new SourceSimpleParameterSymbol(
+                        owner: this,
+                        TypeWithAnnotations.Create(
+                            Binder.GetWellKnownType(
+                                compilation,
+                                WellKnownType.System_Text_StringBuilder,
+                                diagnostics,
+                                location
+                            ),
+                            NullableAnnotation.NotAnnotated
+                        ),
+                        ordinal: 0,
+                        RefKind.None,
+                        "builder",
+                        isDiscard: false,
+                        Locations
+                    )
+                ),
+                IsVararg: false,
+                DeclaredConstraintsForOverrideOrImplementation: ImmutableArray<TypeParameterConstraintClause>.Empty
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 1;
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var F = new SyntheticBoundNodeFactory(this, ContainingType.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                ContainingType.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
             try
             {
-                ImmutableArray<Symbol> printableMembers = ContainingType.GetMembers().WhereAsArray(m => isPrintable(m));
+                ImmutableArray<Symbol> printableMembers = ContainingType
+                    .GetMembers()
+                    .WhereAsArray(m => isPrintable(m));
 
-                if (ReturnType.IsErrorType() ||
-                    printableMembers.Any(m => m.GetTypeOrReturnType().Type.IsErrorType()))
+                if (
+                    ReturnType.IsErrorType()
+                    || printableMembers.Any(m => m.GetTypeOrReturnType().Type.IsErrorType())
+                )
                 {
                     F.CloseMethod(F.ThrowNull());
                     return;
                 }
 
-                ArrayBuilder<BoundStatement>? block = printableMembers.IsEmpty ? null : ArrayBuilder<BoundStatement>.GetInstance();
+                ArrayBuilder<BoundStatement>? block = printableMembers.IsEmpty
+                    ? null
+                    : ArrayBuilder<BoundStatement>.GetInstance();
                 BoundParameter builder = F.Parameter(this.Parameters[0]);
                 if (ContainingType.BaseTypeNoUseSiteDiagnostics.IsObjectType())
                 {
@@ -126,14 +186,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    MethodSymbol? printMethod = FindValidPrintMembersMethod(ContainingType.BaseTypeNoUseSiteDiagnostics, DeclaringCompilation);
+                    MethodSymbol? printMethod = FindValidPrintMembersMethod(
+                        ContainingType.BaseTypeNoUseSiteDiagnostics,
+                        DeclaringCompilation
+                    );
                     if (printMethod is null)
                     {
                         F.CloseMethod(F.ThrowNull()); // an error was reported in base checks already
                         return;
                     }
 
-                    var basePrintCall = F.Call(receiver: F.Base(ContainingType.BaseTypeNoUseSiteDiagnostics), printMethod, builder);
+                    var basePrintCall = F.Call(
+                        receiver: F.Base(ContainingType.BaseTypeNoUseSiteDiagnostics),
+                        printMethod,
+                        builder
+                    );
                     if (printableMembers.IsEmpty)
                     {
                         // return base.PrintMembers(builder);
@@ -171,17 +238,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Debug.Assert(value.Type is not null);
                     if (value.Type.IsValueType)
                     {
-                        block.Add(F.ExpressionStatement(
-                            F.Call(receiver: builder,
-                                F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__AppendString),
-                                F.Call(value, F.SpecialMethod(SpecialMember.System_Object__ToString)))));
+                        block.Add(
+                            F.ExpressionStatement(
+                                F.Call(
+                                    receiver: builder,
+                                    F.WellKnownMethod(
+                                        WellKnownMember.System_Text_StringBuilder__AppendString
+                                    ),
+                                    F.Call(
+                                        value,
+                                        F.SpecialMethod(SpecialMember.System_Object__ToString)
+                                    )
+                                )
+                            )
+                        );
                     }
                     else
                     {
-                        block.Add(F.ExpressionStatement(
-                            F.Call(receiver: builder,
-                                F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__AppendObject),
-                                F.Convert(F.SpecialType(SpecialType.System_Object), value))));
+                        block.Add(
+                            F.ExpressionStatement(
+                                F.Call(
+                                    receiver: builder,
+                                    F.WellKnownMethod(
+                                        WellKnownMember.System_Text_StringBuilder__AppendObject
+                                    ),
+                                    F.Convert(F.SpecialType(SpecialType.System_Object), value)
+                                )
+                            )
+                        );
                     }
 
                     if (i < printableMembers.Length - 1)
@@ -200,9 +284,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 F.CloseMethod(F.ThrowNull());
             }
 
-            static BoundStatement makeAppendString(SyntheticBoundNodeFactory F, BoundParameter builder, string value)
+            static BoundStatement makeAppendString(
+                SyntheticBoundNodeFactory F,
+                BoundParameter builder,
+                string value
+            )
             {
-                return F.ExpressionStatement(F.Call(receiver: builder, F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__AppendString), F.StringLiteral(value)));
+                return F.ExpressionStatement(
+                    F.Call(
+                        receiver: builder,
+                        F.WellKnownMethod(WellKnownMember.System_Text_StringBuilder__AppendString),
+                        F.StringLiteral(value)
+                    )
+                );
             }
 
             static bool isPrintable(Symbol m)
@@ -220,14 +314,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (m.Kind is SymbolKind.Property)
                 {
                     var property = (PropertySymbol)m;
-                    return !property.IsIndexer && !property.IsOverride && property.GetMethod is not null;
+                    return !property.IsIndexer
+                        && !property.IsOverride
+                        && property.GetMethod is not null;
                 }
 
                 return false;
             }
         }
 
-        internal static MethodSymbol? FindValidPrintMembersMethod(TypeSymbol containingType, CSharpCompilation compilation)
+        internal static MethodSymbol? FindValidPrintMembersMethod(
+            TypeSymbol containingType,
+            CSharpCompilation compilation
+        )
         {
             if (containingType.IsObjectType())
             {
@@ -235,12 +334,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             MethodSymbol? candidate = null;
-            var stringBuilder = TypeWithAnnotations.Create(compilation.GetWellKnownType(WellKnownType.System_Text_StringBuilder));
+            var stringBuilder = TypeWithAnnotations.Create(
+                compilation.GetWellKnownType(WellKnownType.System_Text_StringBuilder)
+            );
 
-            foreach (var member in containingType.GetMembers(WellKnownMemberNames.PrintMembersMethodName))
+            foreach (
+                var member in containingType.GetMembers(WellKnownMemberNames.PrintMembersMethodName)
+            )
             {
-                if (member is MethodSymbol { DeclaredAccessibility: Accessibility.Protected, IsStatic: false, ParameterCount: 1, Arity: 0 } method &&
-                    method.ParameterTypesWithAnnotations[0].Equals(stringBuilder, TypeCompareKind.AllIgnoreOptions))
+                if (
+                    member
+                        is MethodSymbol
+                        {
+                            DeclaredAccessibility: Accessibility.Protected,
+                            IsStatic: false,
+                            ParameterCount: 1,
+                            Arity: 0
+                        } method
+                    && method.ParameterTypesWithAnnotations[0].Equals(
+                        stringBuilder,
+                        TypeCompareKind.AllIgnoreOptions
+                    )
+                )
                 {
                     if (candidate is object)
                     {
@@ -252,9 +367,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            if (candidate is null ||
-                !(containingType.IsSealed || candidate.IsOverride || candidate.IsVirtual) ||
-                candidate.ReturnType.SpecialType != SpecialType.System_Boolean)
+            if (
+                candidate is null
+                || !(containingType.IsSealed || candidate.IsOverride || candidate.IsVirtual)
+                || candidate.ReturnType.SpecialType != SpecialType.System_Boolean
+            )
             {
                 return null;
             }
@@ -262,7 +379,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return candidate;
         }
 
-        internal static void VerifyOverridesPrintMembersFromBase(MethodSymbol overriding, BindingDiagnosticBag diagnostics)
+        internal static void VerifyOverridesPrintMembersFromBase(
+            MethodSymbol overriding,
+            BindingDiagnosticBag diagnostics
+        )
         {
             NamedTypeSymbol baseType = overriding.ContainingType.BaseTypeNoUseSiteDiagnostics;
             if (baseType.IsObjectType())
@@ -280,8 +400,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var overridden = overriding.OverriddenMethod;
 
-                if (overridden is object &&
-                    !overridden.ContainingType.Equals(baseType, TypeCompareKind.AllIgnoreOptions))
+                if (
+                    overridden is object
+                    && !overridden.ContainingType.Equals(baseType, TypeCompareKind.AllIgnoreOptions)
+                )
                 {
                     reportAnError = true;
                 }
@@ -289,7 +411,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (reportAnError)
             {
-                diagnostics.Add(ErrorCode.ERR_DoesNotOverrideBaseMethod, overriding.Locations[0], overriding, baseType);
+                diagnostics.Add(
+                    ErrorCode.ERR_DoesNotOverrideBaseMethod,
+                    overriding.Locations[0],
+                    overriding,
+                    baseType
+                );
             }
         }
     }

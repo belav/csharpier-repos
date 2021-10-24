@@ -12,8 +12,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys
         internal unsafe ServerSession()
         {
             ulong serverSessionId = 0;
-            var statusCode = HttpApi.HttpCreateServerSession(
-                HttpApi.Version, &serverSessionId, 0);
+            var statusCode = HttpApi.HttpCreateServerSession(HttpApi.Version, &serverSessionId, 0);
 
             if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
             {

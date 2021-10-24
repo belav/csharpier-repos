@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 {
     public class DefaultViewComponentSelectorTest
     {
-        private static readonly string Namespace = typeof(DefaultViewComponentSelectorTest).Namespace;
+        private static readonly string Namespace =
+            typeof(DefaultViewComponentSelectorTest).Namespace;
 
         [Fact]
         public void SelectComponent_ByShortNameWithSuffix()
@@ -24,7 +25,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var result = selector.SelectComponent("Suffix");
 
             // Assert
-            Assert.Same(typeof(ViewComponentContainer.SuffixViewComponent).GetTypeInfo(), result.TypeInfo);
+            Assert.Same(
+                typeof(ViewComponentContainer.SuffixViewComponent).GetTypeInfo(),
+                result.TypeInfo
+            );
         }
 
         [Fact]
@@ -37,7 +41,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var result = selector.SelectComponent($"{Namespace}.Suffix");
 
             // Assert
-            Assert.Same(typeof(ViewComponentContainer.SuffixViewComponent).GetTypeInfo(), result.TypeInfo);
+            Assert.Same(
+                typeof(ViewComponentContainer.SuffixViewComponent).GetTypeInfo(),
+                result.TypeInfo
+            );
         }
 
         [Fact]
@@ -50,7 +57,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var result = selector.SelectComponent("WithoutSuffix");
 
             // Assert
-            Assert.Same(typeof(ViewComponentContainer.WithoutSuffix).GetTypeInfo(), result.TypeInfo);
+            Assert.Same(
+                typeof(ViewComponentContainer.WithoutSuffix).GetTypeInfo(),
+                result.TypeInfo
+            );
         }
 
         [Fact]
@@ -63,7 +73,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var result = selector.SelectComponent($"{Namespace}.WithoutSuffix");
 
             // Assert
-            Assert.Same(typeof(ViewComponentContainer.WithoutSuffix).GetTypeInfo(), result.TypeInfo);
+            Assert.Same(
+                typeof(ViewComponentContainer.WithoutSuffix).GetTypeInfo(),
+                result.TypeInfo
+            );
         }
 
         [Fact]
@@ -89,7 +102,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var result = selector.SelectComponent("ByNamingConvention");
 
             // Assert
-            Assert.Same(typeof(ViewComponentContainer.ByNamingConventionViewComponent).GetTypeInfo(), result.TypeInfo);
+            Assert.Same(
+                typeof(ViewComponentContainer.ByNamingConventionViewComponent).GetTypeInfo(),
+                result.TypeInfo
+            );
         }
 
         [Fact]
@@ -98,14 +114,18 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             // Arrange
             var selector = CreateSelector();
             var expected =
-                "The view component name 'Ambiguous' matched multiple types:" + Environment.NewLine +
-                $"Type: '{typeof(ViewComponentContainer.Ambiguous1)}' - " +
-                "Name: 'Namespace1.Ambiguous'" + Environment.NewLine +
-                $"Type: '{typeof(ViewComponentContainer.Ambiguous2)}' - " +
-                "Name: 'Namespace2.Ambiguous'";
+                "The view component name 'Ambiguous' matched multiple types:"
+                + Environment.NewLine
+                + $"Type: '{typeof(ViewComponentContainer.Ambiguous1)}' - "
+                + "Name: 'Namespace1.Ambiguous'"
+                + Environment.NewLine
+                + $"Type: '{typeof(ViewComponentContainer.Ambiguous2)}' - "
+                + "Name: 'Namespace2.Ambiguous'";
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(() => selector.SelectComponent("Ambiguous"));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => selector.SelectComponent("Ambiguous")
+            );
 
             // Assert
             Assert.Equal(expected, ex.Message);
@@ -119,11 +139,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             // Arrange
             var selector = CreateSelector();
             var expected =
-                $"The view component name '{name}' matched multiple types:" + Environment.NewLine +
-                $"Type: '{typeof(ViewComponentContainer.AmbiguousBase)}' - " +
-                "Name: 'Ambiguous.Name'" + Environment.NewLine +
-                $"Type: '{typeof(ViewComponentContainer.DerivedAmbiguous)}' - " +
-                "Name: 'Ambiguous.Name'";
+                $"The view component name '{name}' matched multiple types:"
+                + Environment.NewLine
+                + $"Type: '{typeof(ViewComponentContainer.AmbiguousBase)}' - "
+                + "Name: 'Ambiguous.Name'"
+                + Environment.NewLine
+                + $"Type: '{typeof(ViewComponentContainer.DerivedAmbiguous)}' - "
+                + "Name: 'Ambiguous.Name'";
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(() => selector.SelectComponent(name));
@@ -155,7 +177,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var result = selector.SelectComponent("NonAmbiguousName");
 
             // Assert
-            Assert.Same(typeof(ViewComponentContainer.DerivedAmbiguousWithOverriddenName).GetTypeInfo(), result.TypeInfo);
+            Assert.Same(
+                typeof(ViewComponentContainer.DerivedAmbiguousWithOverriddenName).GetTypeInfo(),
+                result.TypeInfo
+            );
         }
 
         [Theory]
@@ -170,13 +195,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             var result = selector.SelectComponent(name);
 
             // Assert
-            Assert.Same(typeof(ViewComponentContainer.FullNameInAttribute).GetTypeInfo(), result.TypeInfo);
+            Assert.Same(
+                typeof(ViewComponentContainer.FullNameInAttribute).GetTypeInfo(),
+                result.TypeInfo
+            );
         }
 
         private IViewComponentSelector CreateSelector()
         {
             var provider = new DefaultViewComponentDescriptorCollectionProvider(
-                new FilteredViewComponentDescriptorProvider());
+                new FilteredViewComponentDescriptorProvider()
+            );
 
             return new DefaultViewComponentSelector(provider);
         }
@@ -238,18 +267,21 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
             }
         }
         // This will only consider types nested inside this class as ViewComponent classes
-        private class FilteredViewComponentDescriptorProvider : DefaultViewComponentDescriptorProvider
+        private class FilteredViewComponentDescriptorProvider
+            : DefaultViewComponentDescriptorProvider
         {
             public FilteredViewComponentDescriptorProvider()
-                : this(typeof(ViewComponentContainer).GetNestedTypes(bindingAttr: BindingFlags.Public))
-            {
-            }
+                : this(
+                    typeof(ViewComponentContainer).GetNestedTypes(bindingAttr: BindingFlags.Public)
+                ) { }
 
             // For error messages in tests above, ensure the TestApplicationPart returns types in a consistent order.
             public FilteredViewComponentDescriptorProvider(params Type[] allowedTypes)
-                : base(GetApplicationPartManager(allowedTypes.OrderBy(type => type.Name, StringComparer.Ordinal)))
-            {
-            }
+                : base(
+                    GetApplicationPartManager(
+                        allowedTypes.OrderBy(type => type.Name, StringComparer.Ordinal)
+                    )
+                ) { }
 
             private static ApplicationPartManager GetApplicationPartManager(IEnumerable<Type> types)
             {
@@ -261,9 +293,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
             private class TestFeatureProvider : IApplicationFeatureProvider<ViewComponentFeature>
             {
-                public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentFeature feature)
+                public void PopulateFeature(
+                    IEnumerable<ApplicationPart> parts,
+                    ViewComponentFeature feature
+                )
                 {
-                    foreach (var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types))
+                    foreach (
+                        var type in parts
+                            .OfType<IApplicationPartTypeProvider>()
+                            .SelectMany(p => p.Types)
+                    )
                     {
                         feature.ViewComponents.Add(type);
                     }

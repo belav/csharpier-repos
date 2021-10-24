@@ -17,33 +17,24 @@ namespace Microsoft.Extensions.Internal
             var values = new List<object>();
             var enumerator = Mock.Of<IEnumerator<KeyValuePair<string, object>>>();
             var sourceDictionary = new Mock<IDictionary<string, object>>(MockBehavior.Strict);
-            sourceDictionary
-                .SetupGet(d => d.Count)
-                .Returns(100)
-                .Verifiable();
-            sourceDictionary
-                .SetupGet(d => d.Values)
-                .Returns(values)
-                .Verifiable();
+            sourceDictionary.SetupGet(d => d.Count).Returns(100).Verifiable();
+            sourceDictionary.SetupGet(d => d.Values).Returns(values).Verifiable();
             sourceDictionary
                 .Setup(d => d.ContainsKey("test-key"))
                 .Returns(value: true)
                 .Verifiable();
-            sourceDictionary
-                .Setup(d => d.GetEnumerator())
-                .Returns(enumerator)
-                .Verifiable();
-            sourceDictionary
-                .Setup(d => d["key2"])
-                .Returns("key2-value")
-                .Verifiable();
+            sourceDictionary.Setup(d => d.GetEnumerator()).Returns(enumerator).Verifiable();
+            sourceDictionary.Setup(d => d["key2"]).Returns("key2-value").Verifiable();
             object value;
-            sourceDictionary.Setup(d => d.TryGetValue("different-key", out value))
-                            .Returns(false)
-                            .Verifiable();
+            sourceDictionary
+                .Setup(d => d.TryGetValue("different-key", out value))
+                .Returns(false)
+                .Verifiable();
 
-            var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(sourceDictionary.Object,
-                                                                                  StringComparer.OrdinalIgnoreCase);
+            var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(
+                sourceDictionary.Object,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Act and Assert
             Assert.Equal("key2-value", copyOnWriteDictionary["key2"]);
@@ -67,7 +58,8 @@ namespace Microsoft.Extensions.Internal
             };
             var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(
                 sourceDictionary,
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Act
             copyOnWriteDictionary["key2"] = "value3";
@@ -91,12 +83,12 @@ namespace Microsoft.Extensions.Internal
             };
             var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(
                 sourceDictionary,
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Act
             copyOnWriteDictionary.Add("key3", "value3");
             copyOnWriteDictionary.Remove("key1");
-
 
             // Assert
             Assert.Equal(2, sourceDictionary.Count);

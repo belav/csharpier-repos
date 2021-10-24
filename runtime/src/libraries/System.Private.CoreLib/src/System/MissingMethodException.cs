@@ -15,23 +15,22 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MissingMethodException : MissingMemberException
     {
-        public MissingMethodException()
-            : base(SR.Arg_MissingMethodException)
+        public MissingMethodException() : base(SR.Arg_MissingMethodException)
         {
             HResult = HResults.COR_E_MISSINGMETHOD;
         }
 
-        public MissingMethodException(string? message)
-            : base(message)
+        public MissingMethodException(string? message) : base(message)
         {
             HResult = HResults.COR_E_MISSINGMETHOD;
         }
 
-        public MissingMethodException(string? message, Exception? inner)
-            : base(message, inner)
+        public MissingMethodException(string? message, Exception? inner) : base(message, inner)
         {
             HResult = HResults.COR_E_MISSINGMETHOD;
         }
@@ -43,14 +42,17 @@ namespace System
         }
 
         protected MissingMethodException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public override string Message =>
-            ClassName == null ?
-                base.Message :
-                SR.Format(SR.MissingMethod_Name, ClassName + "." + MemberName +
-                    (Signature != null ? " " + FormatSignature(Signature) : string.Empty));
+            ClassName == null
+                ? base.Message
+                : SR.Format(
+                      SR.MissingMethod_Name,
+                      ClassName
+                          + "."
+                          + MemberName
+                          + (Signature != null ? " " + FormatSignature(Signature) : string.Empty)
+                  );
     }
 }

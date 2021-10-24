@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             VisualStudioProjectFactory projectFactory,
             VisualStudioWorkspaceImpl workspace,
             IProjectCodeModelFactory projectCodeModelFactory,
-            SVsServiceProvider serviceProvider)
+            SVsServiceProvider serviceProvider
+        )
         {
             _threadingContext = threadingContext;
             _projectFactory = projectFactory;
@@ -43,10 +44,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             _serviceProvider = (Shell.IAsyncServiceProvider)serviceProvider;
         }
 
-        IWorkspaceProjectContext IWorkspaceProjectContextFactory.CreateProjectContext(string languageName, string projectUniqueName, string projectFilePath, Guid projectGuid, object hierarchy, string binOutputPath)
+        IWorkspaceProjectContext IWorkspaceProjectContextFactory.CreateProjectContext(
+            string languageName,
+            string projectUniqueName,
+            string projectFilePath,
+            Guid projectGuid,
+            object hierarchy,
+            string binOutputPath
+        )
         {
-            return _threadingContext.JoinableTaskFactory.Run(() =>
-                this.CreateProjectContextAsync(languageName, projectUniqueName, projectFilePath, projectGuid, hierarchy, binOutputPath, CancellationToken.None));
+            return _threadingContext.JoinableTaskFactory.Run(
+                () =>
+                    this.CreateProjectContextAsync(
+                        languageName,
+                        projectUniqueName,
+                        projectFilePath,
+                        projectGuid,
+                        hierarchy,
+                        binOutputPath,
+                        CancellationToken.None
+                    )
+            );
         }
 
         public async Task<IWorkspaceProjectContext> CreateProjectContextAsync(
@@ -56,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             Guid projectGuid,
             object hierarchy,
             string binOutputPath,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -67,8 +86,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                 ProjectGuid = projectGuid,
             };
 
-            var visualStudioProject = await _projectFactory.CreateAndAddToWorkspaceAsync(
-                projectUniqueName, languageName, creationInfo, cancellationToken).ConfigureAwait(true);
+            var visualStudioProject = await _projectFactory
+                .CreateAndAddToWorkspaceAsync(
+                    projectUniqueName,
+                    languageName,
+                    creationInfo,
+                    cancellationToken
+                )
+                .ConfigureAwait(true);
 
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
             // At this point we've mutated the workspace.  So we're no longer cancellable.
@@ -77,9 +102,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 
             if (languageName == LanguageNames.FSharp)
             {
-                var shell = await _serviceProvider.GetServiceAsync<SVsShell, IVsShell7>().ConfigureAwait(true);
+                var shell = await _serviceProvider
+                    .GetServiceAsync<SVsShell, IVsShell7>()
+                    .ConfigureAwait(true);
 
-                // Force the F# package to load; this is necessary because the F# package listens to WorkspaceChanged to 
+                // Force the F# package to load; this is necessary because the F# package listens to WorkspaceChanged to
                 // set up some items, and the F# project system doesn't guarantee that the F# package has been loaded itself
                 // so we're caught in the middle doing this.
                 var packageId = Guids.FSharpPackageId;
@@ -87,7 +114,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             }
 
             // CPSProject constructor has a UI thread dependencies currently, so switch back to the UI thread before proceeding.
-            return new CPSProject(visualStudioProject, _workspace, _projectCodeModelFactory, projectGuid, binOutputPath);
+            return new CPSProject(
+                visualStudioProject,
+                _workspace,
+                _projectCodeModelFactory,
+                projectGuid,
+                binOutputPath
+            );
         }
     }
 }

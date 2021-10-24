@@ -17,11 +17,13 @@ namespace GitHub_16065b
         }
 
         public int GetIndex(int row, int column)
-        { 
+        {
             return this.Offset + row + this.LeadingDimension * column;
         }
 
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public ArraySlice Diagonal(int index)
         {
             int offset = (index > 0) ? GetIndex(0, index) : GetIndex(-index, 0);

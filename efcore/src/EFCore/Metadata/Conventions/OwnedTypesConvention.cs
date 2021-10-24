@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
     ///     A convention that configures owned entity types with defining navigation as owned entity types
     ///     without defining navigation if there's only one navigation of this type.
     /// </summary>
-    [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
+    [Obsolete(
+        "Entity types with defining navigations have been replaced by shared-type entity types"
+    )]
     public class OwnedTypesConvention : IEntityTypeRemovedConvention
     {
         /// <summary>
@@ -37,8 +39,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         public virtual void ProcessEntityTypeRemoved(
             IConventionModelBuilder modelBuilder,
             IConventionEntityType entityType,
-            IConventionContext<IConventionEntityType> context)
-        {
-        }
+            IConventionContext<IConventionEntityType> context
+        ) { }
     }
 }

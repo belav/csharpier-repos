@@ -11,10 +11,7 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate.Test
         [Fact]
         public void EnabledWithoutDomainThrows()
         {
-            var settings = new LdapSettings
-            {
-                EnableLdapClaimResolution = true
-            };
+            var settings = new LdapSettings { EnableLdapClaimResolution = true };
 
             Assert.Throws<ArgumentException>(() => settings.Validate());
         }

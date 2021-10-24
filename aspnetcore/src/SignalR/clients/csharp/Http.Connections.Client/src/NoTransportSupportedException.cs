@@ -14,9 +14,6 @@ namespace Microsoft.AspNetCore.Http.Connections.Client
         /// Constructs the <see cref="NoTransportSupportedException"/> exception with the provided <paramref name="message"/>.
         /// </summary>
         /// <param name="message">Message of the exception.</param>
-        public NoTransportSupportedException(string message)
-            : base(message)
-        {
-        }
+        public NoTransportSupportedException(string message) : base(message) { }
     }
 }

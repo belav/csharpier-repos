@@ -18,7 +18,12 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void CreatePartDefinition_TypeWithExports_ShouldHaveMultipleExports()
         {
             var definition = CreateDefinition(typeof(PublicComponentWithPublicExports));
-            EnumerableAssert.AreEqual(definition.ExportDefinitions.Select(e => e.ContractName), "PublicField", "PublicProperty", "PublicDelegate");
+            EnumerableAssert.AreEqual(
+                definition.ExportDefinitions.Select(e => e.ContractName),
+                "PublicField",
+                "PublicProperty",
+                "PublicDelegate"
+            );
         }
 
         public abstract class BaseClassWithPropertyExports
@@ -36,13 +41,19 @@ namespace System.ComponentModel.Composition.AttributedModel
         public void CreatePartDefinition_TypeWithImports_ShouldHaveMultipleImports()
         {
             var definition = CreateDefinition(typeof(PublicImportsExpectingPublicExports));
-            EnumerableAssert.AreEqual(definition.ImportDefinitions.Cast<ContractBasedImportDefinition>()
-                                                           .Select(i => i.ContractName), "PublicField", "PublicProperty", "PublicDelegate", "PublicIGetString");
+            EnumerableAssert.AreEqual(
+                definition.ImportDefinitions
+                    .Cast<ContractBasedImportDefinition>()
+                    .Select(i => i.ContractName),
+                "PublicField",
+                "PublicProperty",
+                "PublicDelegate",
+                "PublicIGetString"
+            );
         }
 
         public class AnyImplicitExport
         {
-
         }
 
         [Fact]
@@ -50,13 +61,17 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var definition = CreateDefinition(typeof(AnyImplicitExport));
 
-            Assert.Equal(CreationPolicy.Any, definition.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName));
+            Assert.Equal(
+                CreationPolicy.Any,
+                definition.Metadata.GetValue<CreationPolicy>(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                )
+            );
         }
 
         [PartCreationPolicy(CreationPolicy.Any)]
         public class AnyExport
         {
-
         }
 
         [Fact]
@@ -64,13 +79,17 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var definition = CreateDefinition(typeof(AnyExport));
 
-            Assert.Equal(CreationPolicy.Any, definition.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName));
+            Assert.Equal(
+                CreationPolicy.Any,
+                definition.Metadata.GetValue<CreationPolicy>(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                )
+            );
         }
 
         [PartCreationPolicy(CreationPolicy.Shared)]
         public class SharedExport
         {
-
         }
 
         [Fact]
@@ -78,13 +97,17 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var definition = CreateDefinition(typeof(SharedExport));
 
-            Assert.Equal(CreationPolicy.Shared, definition.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName));
+            Assert.Equal(
+                CreationPolicy.Shared,
+                definition.Metadata.GetValue<CreationPolicy>(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                )
+            );
         }
 
         [PartCreationPolicy(CreationPolicy.NonShared)]
         public class NonSharedExport
         {
-
         }
 
         [Fact]
@@ -92,10 +115,18 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var definition = CreateDefinition(typeof(NonSharedExport));
 
-            Assert.Equal(CreationPolicy.NonShared, definition.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName));
+            Assert.Equal(
+                CreationPolicy.NonShared,
+                definition.Metadata.GetValue<CreationPolicy>(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                )
+            );
         }
 
-        [PartMetadata(CompositionConstants.PartCreationPolicyMetadataName, CreationPolicy.NonShared)]
+        [PartMetadata(
+            CompositionConstants.PartCreationPolicyMetadataName,
+            CreationPolicy.NonShared
+        )]
         [PartMetadata("ShouldNotBeIgnored", "Value")]
         public class PartWithIgnoredMetadata
         {
@@ -108,7 +139,12 @@ namespace System.ComponentModel.Composition.AttributedModel
             var definition = CreateDefinition(typeof(PartWithIgnoredMetadata));
 
             // CompositionConstants.PartCreationPolicyMetadataName should be ignored
-            Assert.NotEqual(CreationPolicy.NonShared, definition.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName));
+            Assert.NotEqual(
+                CreationPolicy.NonShared,
+                definition.Metadata.GetValue<CreationPolicy>(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                )
+            );
 
             // Key ShouldNotBeIgnored should actually be in the dictionary
             Assert.Equal("Value", definition.Metadata["ShouldNotBeIgnored"]);
@@ -118,14 +154,12 @@ namespace System.ComponentModel.Composition.AttributedModel
         [PartMetadata("OverrideName", 2)]
         public class BasePartWithMetdata
         {
-
         }
 
         [PartMetadata("DerivedOnlyName", 3)]
         [PartMetadata("OverrideName", 4)]
         public class DerivedPartWithMetadata : BasePartWithMetdata
         {
-
         }
 
         [Fact]
@@ -133,7 +167,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var definition = CreateDefinition(typeof(DerivedPartWithMetadata));
 
-            Assert.False(definition.Metadata.ContainsKey("BaseOnlyName"), "Should not inherit part metadata from base.");
+            Assert.False(
+                definition.Metadata.ContainsKey("BaseOnlyName"),
+                "Should not inherit part metadata from base."
+            );
             Assert.Equal(3, definition.Metadata["DerivedOnlyName"]);
             Assert.Equal(4, definition.Metadata["OverrideName"]);
         }
@@ -162,7 +199,10 @@ namespace System.ComponentModel.Composition.AttributedModel
             ConstructorInfo constructor = definition.GetConstructor();
             Assert.NotNull(constructor);
             Assert.Equal(typeof(SimpleConstructorInjectedObject).GetConstructors()[0], constructor);
-            Assert.Equal(constructor.GetParameters().Length, definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>().Count());
+            Assert.Equal(
+                constructor.GetParameters().Length,
+                definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>().Count()
+            );
         }
 
         [Fact]
@@ -174,7 +214,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assert.NotNull(constructor);
 
             Assert.Empty(constructor.GetParameters());
-            Assert.Empty(definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>());
+            Assert.Empty(
+                definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>()
+            );
         }
 
         [Fact]
@@ -188,7 +230,10 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assert.NotNull(constructor);
 
             Assert.Equal(marked, constructor);
-            Assert.Equal(marked.GetParameters().Length, definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>().Count());
+            Assert.Equal(
+                marked.GetParameters().Length,
+                definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>().Count()
+            );
         }
 
         [Fact]
@@ -199,7 +244,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             ConstructorInfo constructor = definition.GetConstructor();
             Assert.Null(constructor);
 
-            Assert.Empty(definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>());
+            Assert.Empty(
+                definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>()
+            );
         }
 
         [Fact]
@@ -211,7 +258,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assert.NotNull(constructor);
             Assert.False(constructor.IsStatic);
 
-            Assert.Empty(definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>());
+            Assert.Empty(
+                definition.ImportDefinitions.OfType<ReflectionParameterImportDefinition>()
+            );
         }
 
         [Fact]
@@ -231,7 +280,10 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             foreach (var e in expectations)
             {
-                var definition = AttributedModelDiscovery.CreatePartDefinitionIfDiscoverable(e.Input, (ICompositionElement)null);
+                var definition = AttributedModelDiscovery.CreatePartDefinitionIfDiscoverable(
+                    e.Input,
+                    (ICompositionElement)null
+                );
 
                 bool result = (definition != null);
 
@@ -290,12 +342,22 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var part = AttributedModelServices.CreatePart(typeof(MyExport));
 
-            Assert.Equal(CreationPolicy.Shared, part.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName));
+            Assert.Equal(
+                CreationPolicy.Shared,
+                part.Metadata.GetValue<CreationPolicy>(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                )
+            );
         }
 
         private ReflectionComposablePartDefinition CreateDefinition(Type type)
         {
-            var definition = AttributedModelDiscovery.CreatePartDefinition(type, null, false, ElementFactory.Create());
+            var definition = AttributedModelDiscovery.CreatePartDefinition(
+                type,
+                null,
+                false,
+                ElementFactory.Create()
+            );
 
             Assert.Equal(type, definition.GetPartType());
 

@@ -30,20 +30,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets the name of the defining navigation.
         /// </summary>
-        [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
+        [Obsolete(
+            "Entity types with defining navigations have been replaced by shared-type entity types"
+        )]
         string? DefiningNavigationName => null;
 
         /// <summary>
         ///     Gets the defining entity type.
         /// </summary>
-        [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
+        [Obsolete(
+            "Entity types with defining navigations have been replaced by shared-type entity types"
+        )]
         IReadOnlyEntityType? DefiningEntityType => null;
 
         /// <summary>
         ///     Gets a value indicating whether this entity type has a defining navigation.
         /// </summary>
         /// <returns> <see langword="true" /> if this entity type has a defining navigation. </returns>
-        [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
+        [Obsolete(
+            "Entity types with defining navigations have been replaced by shared-type entity types"
+        )]
         bool HasDefiningNavigation() => HasSharedClrType;
 
         /// <summary>
@@ -87,16 +93,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Returns the value indicating whether the discriminator mapping is complete for this entity type.
         /// </summary>
-        bool GetIsDiscriminatorMappingComplete()
-            => (bool?)this[CoreAnnotationNames.DiscriminatorMappingComplete]
-                ?? true;
+        bool GetIsDiscriminatorMappingComplete() =>
+            (bool?)this[CoreAnnotationNames.DiscriminatorMappingComplete] ?? true;
 
         /// <summary>
         ///     Returns the discriminator value for this entity type.
         /// </summary>
         /// <returns> The discriminator value for this entity type. </returns>
-        object? GetDiscriminatorValue()
-            => this[CoreAnnotationNames.DiscriminatorValue];
+        object? GetDiscriminatorValue() => this[CoreAnnotationNames.DiscriminatorValue];
 
         /// <summary>
         ///     Gets all types in the model from which a given entity type derives, starting with the root.
@@ -104,8 +108,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     The base types.
         /// </returns>
-        IEnumerable<IReadOnlyEntityType> GetAllBaseTypes()
-            => GetAllBaseTypesAscending().Reverse();
+        IEnumerable<IReadOnlyEntityType> GetAllBaseTypes() => GetAllBaseTypesAscending().Reverse();
 
         /// <summary>
         ///     Gets all types in the model from which a given entity type derives, starting with the closest one.
@@ -113,15 +116,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     The base types.
         /// </returns>
-        IEnumerable<IReadOnlyEntityType> GetAllBaseTypesAscending()
-            => GetAllBaseTypesInclusiveAscending().Skip(1);
+        IEnumerable<IReadOnlyEntityType> GetAllBaseTypesAscending() =>
+            GetAllBaseTypesInclusiveAscending().Skip(1);
 
         /// <summary>
         ///     Returns all base types of this entity type, including the type itself, top to bottom.
         /// </summary>
         /// <returns> Base types. </returns>
-        IEnumerable<IReadOnlyEntityType> GetAllBaseTypesInclusive()
-            => GetAllBaseTypesInclusiveAscending().Reverse();
+        IEnumerable<IReadOnlyEntityType> GetAllBaseTypesInclusive() =>
+            GetAllBaseTypesInclusiveAscending().Reverse();
 
         /// <summary>
         ///     Returns all base types of this entity type, including the type itself, bottom to top.
@@ -147,8 +150,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     Returns all derived types of this entity type, including the type itself.
         /// </summary>
         /// <returns> Derived types. </returns>
-        IEnumerable<IReadOnlyEntityType> GetDerivedTypesInclusive()
-            => new[] { this }.Concat(GetDerivedTypes());
+        IEnumerable<IReadOnlyEntityType> GetDerivedTypesInclusive() =>
+            new[] { this }.Concat(GetDerivedTypes());
 
         /// <summary>
         ///     Gets all types in the model that directly derive from a given entity type.
@@ -161,8 +164,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     which are not <see langword="abstract" />.
         /// </summary>
         /// <returns> Non-abstract, derived types. </returns>
-        IEnumerable<IReadOnlyEntityType> GetConcreteDerivedTypesInclusive()
-            => GetDerivedTypesInclusive().Where(et => !et.IsAbstract());
+        IEnumerable<IReadOnlyEntityType> GetConcreteDerivedTypesInclusive() =>
+            GetDerivedTypesInclusive().Where(et => !et.IsAbstract());
 
         /// <summary>
         ///     Gets the root base type for a given entity type.
@@ -206,8 +209,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     <see langword="true" /> if this entity type derives from (but is not the same as) <paramref name="baseType" />,
         ///     otherwise <see langword="false" />.
         /// </returns>
-        bool IsStrictlyDerivedFrom(IReadOnlyEntityType baseType)
-            => this != Check.NotNull(baseType, nameof(baseType)) && baseType.IsAssignableFrom(this);
+        bool IsStrictlyDerivedFrom(IReadOnlyEntityType baseType) =>
+            this != Check.NotNull(baseType, nameof(baseType)) && baseType.IsAssignableFrom(this);
 
         /// <summary>
         ///     Returns the closest entity type that is a parent of both given entity types. If one of the given entities is
@@ -224,7 +227,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             Check.NotNull(otherEntityType, nameof(otherEntityType));
 
             return GetAllBaseTypesInclusiveAscending()
-                .FirstOrDefault(i => otherEntityType.GetAllBaseTypesInclusiveAscending().Any(j => j == i));
+                .FirstOrDefault(
+                    i => otherEntityType.GetAllBaseTypesInclusiveAscending().Any(j => j == i)
+                );
         }
 
         /// <summary>
@@ -235,12 +240,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     The least derived type between the specified two.
         ///     If the given entity types are not related, then <see langword="null" /> is returned.
         /// </returns>
-        IReadOnlyEntityType? LeastDerivedType(IReadOnlyEntityType otherEntityType)
-            => IsAssignableFrom(Check.NotNull(otherEntityType, nameof(otherEntityType)))
+        IReadOnlyEntityType? LeastDerivedType(IReadOnlyEntityType otherEntityType) =>
+            IsAssignableFrom(Check.NotNull(otherEntityType, nameof(otherEntityType)))
                 ? this
-                : otherEntityType.IsAssignableFrom(this)
-                    ? otherEntityType
-                    : null;
+                : otherEntityType.IsAssignableFrom(this) ? otherEntityType : null;
 
         /// <summary>
         ///     Gets primary key for this entity type. Returns <see langword="null" /> if no primary key is defined.
@@ -262,8 +265,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The property that the key is defined on. </param>
         /// <returns> The key, or null if none is defined. </returns>
-        IReadOnlyKey? FindKey(IReadOnlyProperty property)
-            => FindKey(new[] { property });
+        IReadOnlyKey? FindKey(IReadOnlyProperty property) => FindKey(new[] { property });
 
         /// <summary>
         ///     Gets the primary and alternate keys for this entity type.
@@ -299,7 +301,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IReadOnlyForeignKey? FindForeignKey(
             IReadOnlyList<IReadOnlyProperty> properties,
             IReadOnlyKey principalKey,
-            IReadOnlyEntityType principalEntityType);
+            IReadOnlyEntityType principalEntityType
+        );
 
         /// <summary>
         ///     Gets the foreign keys defined on the given property. Only foreign keys that are defined on exactly the specified
@@ -307,8 +310,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="property"> The property to find the foreign keys on. </param>
         /// <returns> The foreign keys. </returns>
-        IEnumerable<IReadOnlyForeignKey> FindForeignKeys(IReadOnlyProperty property)
-            => FindForeignKeys(new[] { property });
+        IEnumerable<IReadOnlyForeignKey> FindForeignKeys(IReadOnlyProperty property) =>
+            FindForeignKeys(new[] { property });
 
         /// <summary>
         ///     Gets the foreign keys defined on the given properties. Only foreign keys that are defined on exactly the specified
@@ -316,7 +319,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="properties"> The properties to find the foreign keys on. </param>
         /// <returns> The foreign keys. </returns>
-        IEnumerable<IReadOnlyForeignKey> FindForeignKeys(IReadOnlyList<IReadOnlyProperty> properties);
+        IEnumerable<IReadOnlyForeignKey> FindForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        );
 
         /// <summary>
         ///     Gets the foreign key for the given properties that points to a given primary or alternate key. Returns <see langword="null" />
@@ -333,15 +338,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         IReadOnlyForeignKey? FindForeignKey(
             IReadOnlyProperty property,
             IReadOnlyKey principalKey,
-            IReadOnlyEntityType principalEntityType)
-            => FindForeignKey(new[] { property }, principalKey, principalEntityType);
+            IReadOnlyEntityType principalEntityType
+        ) => FindForeignKey(new[] { property }, principalKey, principalEntityType);
 
         /// <summary>
         ///     Gets the foreign keys declared on this entity type using the given properties.
         /// </summary>
         /// <param name="properties"> The properties to find the foreign keys on. </param>
         /// <returns> Declared foreign keys. </returns>
-        IEnumerable<IReadOnlyForeignKey> FindDeclaredForeignKeys(IReadOnlyList<IReadOnlyProperty> properties);
+        IEnumerable<IReadOnlyForeignKey> FindDeclaredForeignKeys(
+            IReadOnlyList<IReadOnlyProperty> properties
+        );
 
         /// <summary>
         ///     <para>
@@ -445,16 +452,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="memberInfo"> The navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        IReadOnlyNavigation? FindNavigation(MemberInfo memberInfo)
-            => FindNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
+        IReadOnlyNavigation? FindNavigation(MemberInfo memberInfo) =>
+            FindNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
 
         /// <summary>
         ///     Gets a navigation property on the given entity type. Returns <see langword="null" /> if no navigation property is found.
         /// </summary>
         /// <param name="name"> The name of the navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        IReadOnlyNavigation? FindNavigation(string name)
-            => FindDeclaredNavigation(Check.NotEmpty(name, nameof(name))) ?? BaseType?.FindNavigation(name);
+        IReadOnlyNavigation? FindNavigation(string name) =>
+            FindDeclaredNavigation(Check.NotEmpty(name, nameof(name)))
+            ?? BaseType?.FindNavigation(name);
 
         /// <summary>
         ///     Gets a navigation property on the given entity type. Does not return navigation properties defined on a base type.
@@ -501,8 +509,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="memberInfo"> The navigation property on the entity class. </param>
         /// <returns> The navigation property, or <see langword="null" /> if none is found. </returns>
-        IReadOnlySkipNavigation? FindSkipNavigation(MemberInfo memberInfo)
-            => FindSkipNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
+        IReadOnlySkipNavigation? FindSkipNavigation(MemberInfo memberInfo) =>
+            FindSkipNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
 
         /// <summary>
         ///     Gets a skip navigation property on this entity type. Returns <see langword="null" /> if no skip navigation property is found.
@@ -642,8 +650,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="memberInfo"> The member on the entity class. </param>
         /// <returns> The property, or <see langword="null" /> if none is found. </returns>
-        IReadOnlyProperty? FindProperty(MemberInfo memberInfo)
-            => (Check.NotNull(memberInfo, nameof(memberInfo)) as PropertyInfo)?.IsIndexerProperty() == true
+        IReadOnlyProperty? FindProperty(MemberInfo memberInfo) =>
+            (Check.NotNull(memberInfo, nameof(memberInfo)) as PropertyInfo)?.IsIndexerProperty()
+            == true
                 ? null
                 : FindProperty(memberInfo.GetSimpleMemberName());
 
@@ -685,16 +694,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var property = FindProperty(name);
             if (property == null)
             {
-                if (FindNavigation(name) != null
-                    || FindSkipNavigation(name) != null)
+                if (FindNavigation(name) != null || FindSkipNavigation(name) != null)
                 {
                     throw new InvalidOperationException(
                         CoreStrings.PropertyIsNavigation(
-                            name, DisplayName(),
-                            nameof(EntityEntry.Property), nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)));
+                            name,
+                            DisplayName(),
+                            nameof(EntityEntry.Property),
+                            nameof(EntityEntry.Reference),
+                            nameof(EntityEntry.Collection)
+                        )
+                    );
                 }
 
-                throw new InvalidOperationException(CoreStrings.PropertyNotFound(name, DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.PropertyNotFound(name, DisplayName())
+                );
             }
 
             return property;
@@ -800,15 +815,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options"> Options for generating the string. </param>
         /// <param name="indent"> The number of indent spaces to use before each new line. </param>
         /// <returns> A human-readable representation. </returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        )
         {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
 
-            builder
-                .Append(indentString)
-                .Append("EntityType: ")
-                .Append(DisplayName());
+            builder.Append(indentString).Append("EntityType: ").Append(DisplayName());
 
             if (BaseType != null)
             {
@@ -863,7 +878,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     builder.AppendLine().Append(indentString).Append("  Skip navigations: ");
                     foreach (var skipNavigation in skipNavigations)
                     {
-                        builder.AppendLine().Append(skipNavigation.ToDebugString(options, indent + 4));
+                        builder
+                            .AppendLine()
+                            .Append(skipNavigation.ToDebugString(options, indent + 4));
                     }
                 }
 
@@ -873,7 +890,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     builder.AppendLine().Append(indentString).Append("  Service properties: ");
                     foreach (var serviceProperty in serviceProperties)
                     {
-                        builder.AppendLine().Append(serviceProperty.ToDebugString(options, indent + 4));
+                        builder
+                            .AppendLine()
+                            .Append(serviceProperty.ToDebugString(options, indent + 4));
                     }
                 }
 

@@ -7,9 +7,6 @@ namespace Microsoft.Win32.SafeHandles
 {
     public sealed partial class SafeMemoryMappedFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeMemoryMappedFileHandle()
-            : base(true)
-        {
-        }
+        public SafeMemoryMappedFileHandle() : base(true) { }
     }
 }

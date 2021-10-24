@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
                 var lastOrder = int.MinValue;
                 foreach (var modifier in modifiers)
                 {
-                    var currentOrder = preferredOrder.TryGetValue(modifier.RawKind, out var value) ? value : int.MaxValue;
+                    var currentOrder = preferredOrder.TryGetValue(modifier.RawKind, out var value)
+                        ? value
+                        : int.MaxValue;
                     if (currentOrder < lastOrder)
                     {
                         return false;
@@ -41,7 +43,10 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             return true;
         }
 
-        public bool TryGetOrComputePreferredOrder(string value, out Dictionary<int, int> preferredOrder)
+        public bool TryGetOrComputePreferredOrder(
+            string value,
+            out Dictionary<int, int> preferredOrder
+        )
         {
             if (string.IsNullOrWhiteSpace(value))
             {

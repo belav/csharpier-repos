@@ -14,7 +14,11 @@ namespace Microsoft.AspNetCore.Routing.Tests
         [InlineData(3, "12", true)]
         [InlineData(3, "123", true)]
         [InlineData(3, "1234", false)]
-        public void MaxLengthRouteConstraint_ApplyConstraint(int min, string parameterValue, bool expected)
+        public void MaxLengthRouteConstraint_ApplyConstraint(
+            int min,
+            string parameterValue,
+            bool expected
+        )
         {
             // Arrange
             var constraint = new MaxLengthRouteConstraint(min);
@@ -37,7 +41,8 @@ namespace Microsoft.AspNetCore.Routing.Tests
                 () => new MaxLengthRouteConstraint(-1),
                 "maxLength",
                 expectedMessage,
-                -1);
+                -1
+            );
         }
     }
 }

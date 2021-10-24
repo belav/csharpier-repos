@@ -8,6 +8,9 @@ internal abstract class SceneObject
     public abstract ISect Intersect(Ray ray);
     public abstract Vector Normal(Vector pos);
 
-    public SceneObject(Surface surface) { Surface = surface; }
+    public SceneObject(Surface surface)
+    {
+        Surface = surface;
+    }
 }
 

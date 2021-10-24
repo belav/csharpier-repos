@@ -29,16 +29,17 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public async Task<IEnumerable<string>> PrerenderComponentAsync(
             ParameterView parameters,
             HttpContext httpContext,
-            Type componentType)
+            Type componentType
+        )
         {
             await InitializeStandardComponentServicesAsync(httpContext);
 
             ComponentRenderedText result = default;
             try
             {
-                result = await _renderer.Dispatcher.InvokeAsync(() => _renderer.RenderComponentAsync(
-                    componentType,
-                    parameters));
+                result = await _renderer.Dispatcher.InvokeAsync(
+                    () => _renderer.RenderComponentAsync(componentType, parameters)
+                );
             }
             catch (NavigationException navigationException)
             {
@@ -48,9 +49,12 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                     // We can't perform a redirect as the server already started sending the response.
                     // This is considered an application error as the developer should buffer the response until
                     // all components have rendered.
-                    throw new InvalidOperationException("A navigation command was attempted during prerendering after the server already started sending the response. " +
-                        "Navigation commands can not be issued during server-side prerendering after the response from the server has started. Applications must buffer the" +
-                        "response and avoid using features like FlushAsync() before all components on the page have been rendered to prevent failed navigation commands.", navigationException);
+                    throw new InvalidOperationException(
+                        "A navigation command was attempted during prerendering after the server already started sending the response. "
+                            + "Navigation commands can not be issued during server-side prerendering after the response from the server has started. Applications must buffer the"
+                            + "response and avoid using features like FlushAsync() before all components on the page have been rendered to prevent failed navigation commands.",
+                        navigationException
+                    );
                 }
 
                 httpContext.Response.Redirect(navigationException.Location);
@@ -76,20 +80,31 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             async Task InitializeCore(HttpContext httpContext)
             {
-                var navigationManager = (IHostEnvironmentNavigationManager)httpContext.RequestServices.GetRequiredService<NavigationManager>();
-                navigationManager?.Initialize(GetContextBaseUri(httpContext.Request), GetFullUri(httpContext.Request));
+                var navigationManager =
+                    (IHostEnvironmentNavigationManager)httpContext.RequestServices.GetRequiredService<NavigationManager>();
+                navigationManager?.Initialize(
+                    GetContextBaseUri(httpContext.Request),
+                    GetFullUri(httpContext.Request)
+                );
 
-                var authenticationStateProvider = httpContext.RequestServices.GetService<AuthenticationStateProvider>() as IHostEnvironmentAuthenticationStateProvider;
+                var authenticationStateProvider =
+                    httpContext.RequestServices.GetService<AuthenticationStateProvider>()
+                    as IHostEnvironmentAuthenticationStateProvider;
                 if (authenticationStateProvider != null)
                 {
                     var authenticationState = new AuthenticationState(httpContext.User);
-                    authenticationStateProvider.SetAuthenticationState(Task.FromResult(authenticationState));
+                    authenticationStateProvider.SetAuthenticationState(
+                        Task.FromResult(authenticationState)
+                    );
                 }
 
                 // It's important that this is initialized since a component might try to restore state during prerendering
                 // (which will obviously not work, but should not fail)
-                var componentApplicationLifetime = httpContext.RequestServices.GetRequiredService<ComponentApplicationLifetime>();
-                await componentApplicationLifetime.RestoreStateAsync(new PrerenderComponentApplicationStore());
+                var componentApplicationLifetime =
+                    httpContext.RequestServices.GetRequiredService<ComponentApplicationLifetime>();
+                await componentApplicationLifetime.RestoreStateAsync(
+                    new PrerenderComponentApplicationStore()
+                );
             }
         }
 
@@ -100,7 +115,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 request.Host,
                 request.PathBase,
                 request.Path,
-                request.QueryString);
+                request.QueryString
+            );
         }
 
         private string GetContextBaseUri(HttpRequest request)

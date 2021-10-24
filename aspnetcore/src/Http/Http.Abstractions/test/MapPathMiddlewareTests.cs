@@ -11,7 +11,13 @@ namespace Microsoft.AspNetCore.Builder.Extensions
 {
     public class MapPathMiddlewareTests
     {
-        private static readonly Action<IApplicationBuilder> ActionNotImplemented = new Action<IApplicationBuilder>(_ => { throw new NotImplementedException(); });
+        private static readonly Action<IApplicationBuilder> ActionNotImplemented =
+            new Action<IApplicationBuilder>(
+                _ =>
+                {
+                    throw new NotImplementedException();
+                }
+            );
 
         private static Task Success(HttpContext context)
         {
@@ -54,7 +60,11 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/foo", "/Bar", "/foo/cho/")]
         [InlineData("/foo/cho", "/Bar", "/foo/cho")]
         [InlineData("/foo/cho", "/Bar", "/foo/cho/do")]
-        public async Task PathMatchFunc_BranchTaken(string matchPath, string basePath, string requestPath)
+        public async Task PathMatchFunc_BranchTaken(
+            string matchPath,
+            string basePath,
+            string requestPath
+        )
         {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -82,7 +92,11 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/foo", "/Bar", "/Foo/Cho/")]
         [InlineData("/foo/cho", "/Bar", "/Foo/Cho")]
         [InlineData("/foo/cho", "/Bar", "/Foo/Cho/do")]
-        public async Task PathMatchAction_BranchTaken(string matchPath, string basePath, string requestPath)
+        public async Task PathMatchAction_BranchTaken(
+            string matchPath,
+            string basePath,
+            string requestPath
+        )
         {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -91,7 +105,10 @@ namespace Microsoft.AspNetCore.Builder.Extensions
             await app.Invoke(context);
 
             Assert.Equal(200, context.Response.StatusCode);
-            Assert.Equal(basePath + requestPath.Substring(0, matchPath.Length), (string)context.Items["test.PathBase"]!);
+            Assert.Equal(
+                basePath + requestPath.Substring(0, matchPath.Length),
+                (string)context.Items["test.PathBase"]!
+            );
             Assert.Equal(requestPath.Substring(matchPath.Length), context.Items["test.Path"]);
         }
 
@@ -110,7 +127,11 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/foo", "/Bar", "/Foo/Cho/")]
         [InlineData("/foo/cho", "/Bar", "/Foo/Cho")]
         [InlineData("/foo/cho", "/Bar", "/Foo/Cho/do")]
-        public async Task PathMatchAction_BranchTaken_WithPreserveMatchedPathSegment(string matchPath, string basePath, string requestPath)
+        public async Task PathMatchAction_BranchTaken_WithPreserveMatchedPathSegment(
+            string matchPath,
+            string basePath,
+            string requestPath
+        )
         {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -129,7 +150,12 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/foo/cho/")]
         public void MatchPathWithTrailingSlashThrowsException(string matchPath)
         {
-            Assert.Throws<ArgumentException>(() => new ApplicationBuilder(serviceProvider: null!).Map(matchPath, map => { }).Build());
+            Assert.Throws<ArgumentException>(
+                () =>
+                    new ApplicationBuilder(serviceProvider: null!)
+                        .Map(matchPath, map => { })
+                        .Build()
+            );
         }
 
         [Theory]
@@ -140,7 +166,11 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/foo", "/foo", "/bar")]
         [InlineData("/foo", "", "/bar/foo")]
         [InlineData("/foo/bar", "/foo", "/bar")]
-        public async Task PathMismatchFunc_PassedThrough(string matchPath, string basePath, string requestPath)
+        public async Task PathMismatchFunc_PassedThrough(
+            string matchPath,
+            string basePath,
+            string requestPath
+        )
         {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -162,7 +192,11 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         [InlineData("/foo", "/foo", "/bar")]
         [InlineData("/foo", "", "/bar/foo")]
         [InlineData("/foo/bar", "/foo", "/bar")]
-        public async Task PathMismatchAction_PassedThrough(string matchPath, string basePath, string requestPath)
+        public async Task PathMismatchAction_PassedThrough(
+            string matchPath,
+            string basePath,
+            string requestPath
+        )
         {
             HttpContext context = CreateRequest(basePath, requestPath);
             var builder = new ApplicationBuilder(serviceProvider: null!);
@@ -180,11 +214,14 @@ namespace Microsoft.AspNetCore.Builder.Extensions
         public async Task ChainedRoutes_Success()
         {
             var builder = new ApplicationBuilder(serviceProvider: null!);
-            builder.Map("/route1", map =>
-            {
-                map.Map("/subroute1", UseSuccess);
-                map.Run(NotImplemented);
-            });
+            builder.Map(
+                "/route1",
+                map =>
+                {
+                    map.Map("/subroute1", UseSuccess);
+                    map.Run(NotImplemented);
+                }
+            );
             builder.Map("/route2/subroute2", UseSuccess);
             var app = builder.Build();
 

@@ -79,9 +79,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
             // Ensure Generator does not throw due to empty "fullName" if user provided a name attribute.
             IDictionary<string, object> htmlAttributes = null;
-            if (string.IsNullOrEmpty(For.Name) &&
-                string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix) &&
-                !string.IsNullOrEmpty(Name))
+            if (
+                string.IsNullOrEmpty(For.Name)
+                && string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix)
+                && !string.IsNullOrEmpty(Name)
+            )
             {
                 htmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
                 {
@@ -95,7 +97,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 For.Name,
                 rows: 0,
                 columns: 0,
-                htmlAttributes: htmlAttributes);
+                htmlAttributes: htmlAttributes
+            );
 
             if (tagBuilder != null)
             {

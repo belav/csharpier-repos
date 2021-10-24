@@ -21,7 +21,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
         public PipelineExtensionTests()
         {
-            _pipe = new Pipe(new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false));
+            _pipe = new Pipe(
+                new PipeOptions(
+                    _memoryPool,
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.Inline,
+                    useSynchronizationContext: false
+                )
+            );
         }
 
         public void Dispose()
@@ -97,9 +104,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests
 
             if (expected.Length > 0)
             {
-                AssertExtensions.Equal(
-                    expected,
-                    reader.Buffer.ToArray());
+                AssertExtensions.Equal(expected, reader.Buffer.ToArray());
             }
             else
             {

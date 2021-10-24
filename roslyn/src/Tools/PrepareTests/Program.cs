@@ -20,7 +20,11 @@ internal static class Program
         {
             { "source=", "Path to binaries", (string s) => source = s },
             { "destination=", "Output path", (string s) => destination = s },
-            { "unix", "If true, prepares tests for unix environment instead of Windows", o => isUnix = o is object }
+            {
+                "unix",
+                "If true, prepares tests for unix environment instead of Windows",
+                o => isUnix = o is object
+            }
         };
         options.Parse(args);
 

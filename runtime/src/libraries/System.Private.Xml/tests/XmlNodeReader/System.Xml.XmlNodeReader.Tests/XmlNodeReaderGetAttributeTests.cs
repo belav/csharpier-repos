@@ -14,10 +14,12 @@ namespace System.Xml.Tests
             var nodeReader = new XmlNodeReader(xmlDocument);
             Assert.Null(nodeReader.GetAttribute(string.Empty));
             Assert.Null(nodeReader.GetAttribute(string.Empty, string.Empty));
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
-            {
-                nodeReader.GetAttribute(2);
-            });
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                {
+                    nodeReader.GetAttribute(2);
+                }
+            );
         }
 
         [Fact]

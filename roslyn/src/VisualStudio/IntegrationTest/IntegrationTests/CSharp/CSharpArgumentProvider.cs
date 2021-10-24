@@ -18,9 +18,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpArgumentProvider(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpArgumentProvider))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpArgumentProvider)) { }
 
         public override async Task InitializeAsync()
         {
@@ -32,7 +30,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact]
         public void SimpleTabTabCompletion()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     private object f;
@@ -41,7 +40,8 @@ public class Test
     {$$
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Enter);
             VisualStudio.Editor.SendKeys("f.ToSt");
@@ -50,7 +50,10 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
@@ -60,7 +63,8 @@ public class Test
         [WpfFact]
         public void TabTabCompleteObjectEquals()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     public void Method()
@@ -68,22 +72,33 @@ public class Test
         $$
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys("object.Equ");
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Editor.Verify.CurrentLineText("object.Equals$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
-            VisualStudio.Editor.Verify.CurrentLineText("object.Equals(null$$)", assertCaretPosition: true);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "object.Equals(null$$)",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
         public void TabTabCompleteNewObject()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     public void Method()
@@ -91,25 +106,39 @@ public class Test
         var value = $$
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys("new obje");
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Editor.Verify.CurrentLineText("var value = new object$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "var value = new object$$",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
-            VisualStudio.Editor.Verify.CurrentLineText("var value = new object($$)", assertCaretPosition: true);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "var value = new object($$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Editor.Verify.CurrentLineText("var value = new object()$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "var value = new object()$$",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
         public void TabTabBeforeSemicolon()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     private object f;
@@ -119,7 +148,8 @@ public class Test
         $$;
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys("f.ToSt");
 
@@ -127,17 +157,27 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$;", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$);", assertCaretPosition: true);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString($$);",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString()$$;", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString()$$;",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
         public void TabTabCompletionWithArguments()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 using System;
 public class Test
 {
@@ -147,7 +187,8 @@ public class Test
     {$$
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Enter);
             VisualStudio.Editor.SendKeys("f.ToSt");
@@ -156,38 +197,66 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString(provider$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(provider$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString(null$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(null$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString(null$$, provider)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(null$$, provider)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys("\"format\"");
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString(\"format\"$$, provider)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(\"format\"$$, provider)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString(\"format\", provider$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(\"format\", provider$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Up);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString(\"format\"$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(\"format\"$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Up);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString(provider$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(provider$$)",
+                assertCaretPosition: true
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString(\"format\"$$)", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString(\"format\"$$)",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
         public void FullCycle()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 using System;
 public class TestClass
 {
@@ -199,7 +268,8 @@ public class TestClass
     void Test(int x) { }
     void Test(int x, int y) { }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Enter);
             VisualStudio.Editor.SendKeys("Test");
@@ -208,7 +278,10 @@ public class TestClass
             VisualStudio.Editor.Verify.CurrentLineText("Test$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("Test($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
@@ -230,7 +303,8 @@ public class TestClass
         [WpfFact]
         public void ImplicitArgumentSwitching()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 using System;
 public class TestClass
 {
@@ -242,7 +316,8 @@ public class TestClass
     void Test(int x) { }
     void Test(int x, int y) { }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Enter);
             VisualStudio.Editor.SendKeys("Tes");
@@ -251,7 +326,10 @@ public class TestClass
             VisualStudio.Editor.SendKeys(VirtualKey.Tab, VirtualKey.Tab, '0');
             VisualStudio.Editor.Verify.CurrentLineText("Test(0$$)", assertCaretPosition: true);
 
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("Test(0$$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Down);
@@ -264,7 +342,8 @@ public class TestClass
         [WpfFact]
         public void SemicolonWithTabTabCompletion()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     private object f;
@@ -273,7 +352,8 @@ public class Test
     {$$
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Enter);
             VisualStudio.Editor.SendKeys("f.ToSt");
@@ -282,17 +362,24 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(';');
-            VisualStudio.Editor.Verify.CurrentLineText("f.ToString();$$", assertCaretPosition: true);
+            VisualStudio.Editor.Verify.CurrentLineText(
+                "f.ToString();$$",
+                assertCaretPosition: true
+            );
         }
 
         [WpfFact]
         public void SmartBreakLineWithTabTabCompletion()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     private object f;
@@ -301,7 +388,8 @@ public class Test
     {$$
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Enter);
             VisualStudio.Editor.SendKeys("f.ToSt");
@@ -310,11 +398,15 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("f.ToString($$)", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(Shift(VirtualKey.Enter));
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 public class Test
 {
     private object f;
@@ -325,7 +417,9 @@ public class Test
 $$
     }
 }
-", assertCaretPosition: true);
+",
+                assertCaretPosition: true
+            );
         }
 
         [WpfTheory]
@@ -337,7 +431,8 @@ $$
         [InlineData("\"$end$\"")]
         public void EnsureParameterContentPreserved(string parameterText)
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     public void Method()
@@ -352,7 +447,8 @@ public class Test
     {
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(VirtualKey.Enter);
             VisualStudio.Editor.SendKeys("M");
@@ -361,7 +457,10 @@ public class Test
             VisualStudio.Editor.Verify.CurrentLineText("M$$", assertCaretPosition: true);
 
             VisualStudio.Editor.SendKeys(VirtualKey.Tab);
-            VisualStudio.Workspace.WaitForAllAsyncOperations(Helper.HangMitigatingTimeout, FeatureAttribute.SignatureHelp);
+            VisualStudio.Workspace.WaitForAllAsyncOperations(
+                Helper.HangMitigatingTimeout,
+                FeatureAttribute.SignatureHelp
+            );
             VisualStudio.Editor.Verify.CurrentLineText("M(null, 0)");
 
             VisualStudio.Editor.SendKeys(parameterText);

@@ -16,8 +16,7 @@ namespace BasicWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddNewtonsoftJson();
+            services.AddMvc().AddNewtonsoftJson();
             services.ConfigureBaseWebSiteAuthPolicies();
         }
 
@@ -25,25 +24,31 @@ namespace BasicWebSite
         {
             app.UseDeveloperExceptionPage();
 
-            app.Use((httpContext, next) =>
-            {
-                var testHttpMaxRequestBodySizeFeature = new TestHttpMaxRequestBodySizeFeature();
-                httpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                    testHttpMaxRequestBodySizeFeature);
+            app.Use(
+                (httpContext, next) =>
+                {
+                    var testHttpMaxRequestBodySizeFeature = new TestHttpMaxRequestBodySizeFeature();
+                    httpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                        testHttpMaxRequestBodySizeFeature
+                    );
 
-                httpContext.Request.Body = new RequestBodySizeCheckingStream(
-                    httpContext.Request.Body,
-                    testHttpMaxRequestBodySizeFeature);
+                    httpContext.Request.Body = new RequestBodySizeCheckingStream(
+                        httpContext.Request.Body,
+                        testHttpMaxRequestBodySizeFeature
+                    );
 
-                return next();
-            });
+                    return next();
+                }
+            );
 
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapDefaultControllerRoute();
+                    endpoints.MapRazorPages();
+                }
+            );
         }
 
         private class RequestBodySizeCheckingStream : Stream
@@ -54,7 +59,8 @@ namespace BasicWebSite
 
             public RequestBodySizeCheckingStream(
                 Stream innerStream,
-                IHttpMaxRequestBodySizeFeature maxRequestBodySizeFeature)
+                IHttpMaxRequestBodySizeFeature maxRequestBodySizeFeature
+            )
             {
                 _innerStream = innerStream;
                 _maxRequestBodySizeFeature = maxRequestBodySizeFeature;
@@ -80,38 +86,61 @@ namespace BasicWebSite
 
             public override int Read(byte[] buffer, int offset, int count)
             {
-                if (_maxRequestBodySizeFeature.MaxRequestBodySize != null
-                    && _innerStream.CanSeek && _innerStream.Length > _maxRequestBodySizeFeature.MaxRequestBodySize)
+                if (
+                    _maxRequestBodySizeFeature.MaxRequestBodySize != null
+                    && _innerStream.CanSeek
+                    && _innerStream.Length > _maxRequestBodySizeFeature.MaxRequestBodySize
+                )
                 {
-                    throw new InvalidOperationException("Request content size is greater than the limit size");
+                    throw new InvalidOperationException(
+                        "Request content size is greater than the limit size"
+                    );
                 }
 
                 var read = _innerStream.Read(buffer, offset, count);
                 _totalRead += read;
 
-                if (_maxRequestBodySizeFeature.MaxRequestBodySize != null
-                    && _totalRead > _maxRequestBodySizeFeature.MaxRequestBodySize)
+                if (
+                    _maxRequestBodySizeFeature.MaxRequestBodySize != null
+                    && _totalRead > _maxRequestBodySizeFeature.MaxRequestBodySize
+                )
                 {
-                    throw new InvalidOperationException("Request content size is greater than the limit size");
+                    throw new InvalidOperationException(
+                        "Request content size is greater than the limit size"
+                    );
                 }
                 return read;
             }
 
-            public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override async Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
-                if (_maxRequestBodySizeFeature.MaxRequestBodySize != null
-                    && _innerStream.CanSeek && _innerStream.Length > _maxRequestBodySizeFeature.MaxRequestBodySize)
+                if (
+                    _maxRequestBodySizeFeature.MaxRequestBodySize != null
+                    && _innerStream.CanSeek
+                    && _innerStream.Length > _maxRequestBodySizeFeature.MaxRequestBodySize
+                )
                 {
-                    throw new InvalidOperationException("Request content size is greater than the limit size");
+                    throw new InvalidOperationException(
+                        "Request content size is greater than the limit size"
+                    );
                 }
 
                 var read = await _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
                 _totalRead += read;
 
-                if (_maxRequestBodySizeFeature.MaxRequestBodySize != null
-                    && _totalRead > _maxRequestBodySizeFeature.MaxRequestBodySize)
+                if (
+                    _maxRequestBodySizeFeature.MaxRequestBodySize != null
+                    && _totalRead > _maxRequestBodySizeFeature.MaxRequestBodySize
+                )
                 {
-                    throw new InvalidOperationException("Request content size is greater than the limit size");
+                    throw new InvalidOperationException(
+                        "Request content size is greater than the limit size"
+                    );
                 }
                 return read;
             }

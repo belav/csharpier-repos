@@ -20,7 +20,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="enabled">A flag indicating whether the specified <paramref name="user"/> has two factor authentication enabled.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        Task SetTwoFactorEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken);
+        Task SetTwoFactorEnabledAsync(
+            TUser user,
+            bool enabled,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns a flag indicating whether the specified <paramref name="user"/> has two factor authentication enabled or not,

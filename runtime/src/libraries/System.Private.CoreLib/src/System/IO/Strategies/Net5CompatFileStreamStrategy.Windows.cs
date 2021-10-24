@@ -39,11 +39,11 @@ namespace System.IO.Strategies
     internal sealed partial class Net5CompatFileStreamStrategy : FileStreamStrategy
     {
         private bool _canSeek;
-        private bool _isPipe;      // Whether to disable async buffering code.
+        private bool _isPipe; // Whether to disable async buffering code.
         private long _appendStart; // When appending, prevent overwriting file.
 
-        private Task _activeBufferOperation = Task.CompletedTask;    // tracks in-progress async ops using the buffer
-        private PreAllocatedOverlapped? _preallocatedOverlapped;     // optimization for async ops to avoid per-op allocations
+        private Task _activeBufferOperation = Task.CompletedTask; // tracks in-progress async ops using the buffer
+        private PreAllocatedOverlapped? _preallocatedOverlapped; // optimization for async ops to avoid per-op allocations
         private CompletionSource? _currentOverlappedOwner; // async op currently using the preallocated overlapped
 
         private void Init(FileMode mode, FileShare share, string originalPath, FileOptions options)
@@ -73,7 +73,10 @@ namespace System.IO.Strategies
                     if (_fileHandle.ThreadPoolBinding == null)
                     {
                         // We should close the handle so that the handle is not open until SafeFileHandle GC
-                        Debug.Assert(!_exposedHandle, "Are we closing handle that we exposed/not own, how?");
+                        Debug.Assert(
+                            !_exposedHandle,
+                            "Are we closing handle that we exposed/not own, how?"
+                        );
                         _fileHandle.Dispose();
                     }
                 }
@@ -105,7 +108,10 @@ namespace System.IO.Strategies
             }
             catch
             {
-                Debug.Assert(hadBinding || handle.ThreadPoolBinding == null, "We should never error out with a ThreadPoolBinding we've added");
+                Debug.Assert(
+                    hadBinding || handle.ThreadPoolBinding == null,
+                    "We should never error out with a ThreadPoolBinding we've added"
+                );
                 throw;
             }
 #endif
@@ -192,7 +198,8 @@ namespace System.IO.Strategies
                     {
                         FlushWriteBuffer(!disposing);
                     }
-                    catch (Exception e) when (!disposing && FileStreamHelpers.IsIoRelatedException(e))
+                    catch (Exception e)
+                        when (!disposing && FileStreamHelpers.IsIoRelatedException(e))
                     {
                         // On finalization, ignore failures from trying to flush the write buffer,
                         // e.g. if this stream is wrapping a pipe and the pipe is now broken.
@@ -209,7 +216,6 @@ namespace System.IO.Strategies
 
                 _preallocatedOverlapped?.Dispose();
                 _canSeek = false;
-
                 // Don't set the buffer to null, to avoid a NullReferenceException
                 // when users have a race condition in their code (i.e. they call
                 // Close when calling another method on Stream like Read).
@@ -247,18 +253,25 @@ namespace System.IO.Strategies
         private Task FlushWriteAsync(CancellationToken cancellationToken)
         {
             Debug.Assert(_useAsyncIO);
-            Debug.Assert(_readPos == 0 && _readLength == 0, "FileStream: Read buffer must be empty in FlushWriteAsync!");
+            Debug.Assert(
+                _readPos == 0 && _readLength == 0,
+                "FileStream: Read buffer must be empty in FlushWriteAsync!"
+            );
 
             // If the buffer is already flushed, don't spin up the OS write
-            if (_writePos == 0) return Task.CompletedTask;
+            if (_writePos == 0)
+                return Task.CompletedTask;
 
-            Task flushTask = WriteAsyncInternalCore(new ReadOnlyMemory<byte>(GetBuffer(), 0, _writePos), cancellationToken);
+            Task flushTask = WriteAsyncInternalCore(
+                new ReadOnlyMemory<byte>(GetBuffer(), 0, _writePos),
+                cancellationToken
+            );
             _writePos = 0;
 
             // Update the active buffer operation
-            _activeBufferOperation = HasActiveBufferOperation ?
-                Task.WhenAll(_activeBufferOperation, flushTask) :
-                flushTask;
+            _activeBufferOperation = HasActiveBufferOperation
+                ? Task.WhenAll(_activeBufferOperation, flushTask)
+                : flushTask;
 
             return flushTask;
         }
@@ -270,8 +283,12 @@ namespace System.IO.Strategies
         // and there is left over data (_writePos > 0), this function must be called.
         private void FlushWriteBuffer(bool calledFromFinalizer = false)
         {
-            if (_writePos == 0) return;
-            Debug.Assert(_readPos == 0 && _readLength == 0, "FileStream: Read buffer must be empty in FlushWrite!");
+            if (_writePos == 0)
+                return;
+            Debug.Assert(
+                _readPos == 0 && _readLength == 0,
+                "FileStream: Read buffer must be empty in FlushWrite!"
+            );
 
             if (_useAsyncIO)
             {
@@ -339,8 +356,11 @@ namespace System.IO.Strategies
         private int ReadSpan(Span<byte> destination)
         {
             Debug.Assert(!_useAsyncIO, "Must only be used when in synchronous mode");
-            Debug.Assert((_readPos == 0 && _readLength == 0 && _writePos >= 0) || (_writePos == 0 && _readPos <= _readLength),
-                "We're either reading or writing, but not both.");
+            Debug.Assert(
+                (_readPos == 0 && _readLength == 0 && _writePos >= 0)
+                    || (_writePos == 0 && _readPos <= _readLength),
+                "We're either reading or writing, but not both."
+            );
 
             bool isBlocked = false;
             int n = _readLength - _readPos;
@@ -348,8 +368,10 @@ namespace System.IO.Strategies
             // buffer, depending on number of bytes user asked for and buffer size.
             if (n == 0)
             {
-                if (!CanRead) ThrowHelper.ThrowNotSupportedException_UnreadableStream();
-                if (_writePos > 0) FlushWriteBuffer();
+                if (!CanRead)
+                    ThrowHelper.ThrowNotSupportedException_UnreadableStream();
+                if (_writePos > 0)
+                    FlushWriteBuffer();
                 if (!CanSeek || (destination.Length >= _bufferLength))
                 {
                     n = ReadNative(destination);
@@ -359,13 +381,15 @@ namespace System.IO.Strategies
                     return n;
                 }
                 n = ReadNative(GetBuffer());
-                if (n == 0) return 0;
+                if (n == 0)
+                    return 0;
                 isBlocked = n < _bufferLength;
                 _readPos = 0;
                 _readLength = n;
             }
             // Now copy min of count or numBytesAvailable (i.e. near EOF) to array.
-            if (n > destination.Length) n = destination.Length;
+            if (n > destination.Length)
+                n = destination.Length;
             new ReadOnlySpan<byte>(GetBuffer(), _readPos, n).CopyTo(destination);
             _readPos += n;
 
@@ -410,13 +434,18 @@ namespace System.IO.Strategies
 
         /// <summary>Reads from the file handle into the buffer, overwriting anything in it.</summary>
         private int FillReadBufferForReadByte() =>
-            _useAsyncIO ?
-                ReadNativeAsync(new Memory<byte>(_buffer), 0, CancellationToken.None).GetAwaiter().GetResult() :
-                ReadNative(_buffer);
+            _useAsyncIO
+                ? ReadNativeAsync(new Memory<byte>(_buffer), 0, CancellationToken.None)
+                  .GetAwaiter()
+                  .GetResult()
+                : ReadNative(_buffer);
 
         private unsafe int ReadNative(Span<byte> buffer)
         {
-            Debug.Assert(!_useAsyncIO, $"{nameof(ReadNative)} doesn't work on asynchronous file streams.");
+            Debug.Assert(
+                !_useAsyncIO,
+                $"{nameof(ReadNative)} doesn't work on asynchronous file streams."
+            );
             AssertCanRead();
 
             // Make sure we are reading from the right spot
@@ -449,10 +478,16 @@ namespace System.IO.Strategies
         {
             if (origin < SeekOrigin.Begin || origin > SeekOrigin.End)
                 throw new ArgumentException(SR.Argument_InvalidSeekOrigin, nameof(origin));
-            if (_fileHandle.IsClosed) ThrowHelper.ThrowObjectDisposedException_FileClosed();
-            if (!CanSeek) ThrowHelper.ThrowNotSupportedException_UnseekableStream();
+            if (_fileHandle.IsClosed)
+                ThrowHelper.ThrowObjectDisposedException_FileClosed();
+            if (!CanSeek)
+                ThrowHelper.ThrowNotSupportedException_UnseekableStream();
 
-            Debug.Assert((_readPos == 0 && _readLength == 0 && _writePos >= 0) || (_writePos == 0 && _readPos <= _readLength), "We're either reading or writing, but not both.");
+            Debug.Assert(
+                (_readPos == 0 && _readLength == 0 && _writePos >= 0)
+                    || (_writePos == 0 && _readPos <= _readLength),
+                "We're either reading or writing, but not both."
+            );
 
             // If we've got bytes in our buffer to write, write them out.
             // If we've read in and consumed some bytes, we'll have to adjust
@@ -498,7 +533,13 @@ namespace System.IO.Strategies
                 {
                     if (_readPos > 0)
                     {
-                        Buffer.BlockCopy(GetBuffer(), _readPos, GetBuffer(), 0, _readLength - _readPos);
+                        Buffer.BlockCopy(
+                            GetBuffer(),
+                            _readPos,
+                            GetBuffer(),
+                            0,
+                            _readLength - _readPos
+                        );
                         _readLength -= _readPos;
                         _readPos = 0;
                     }
@@ -510,7 +551,13 @@ namespace System.IO.Strategies
                 else if (oldPos - _readPos < pos && pos < oldPos + _readLength - _readPos)
                 {
                     int diff = (int)(pos - oldPos);
-                    Buffer.BlockCopy(GetBuffer(), _readPos + diff, GetBuffer(), 0, _readLength - (_readPos + diff));
+                    Buffer.BlockCopy(
+                        GetBuffer(),
+                        _readPos + diff,
+                        GetBuffer(),
+                        0,
+                        _readLength - (_readPos + diff)
+                    );
                     _readLength -= (_readPos + diff);
                     _readPos = 0;
                     if (_readLength > 0)
@@ -522,8 +569,14 @@ namespace System.IO.Strategies
                     _readPos = 0;
                     _readLength = 0;
                 }
-                Debug.Assert(_readLength >= 0 && _readPos <= _readLength, "_readLen should be nonnegative, and _readPos should be less than or equal _readLen");
-                Debug.Assert(pos == Position, "Seek optimization: pos != Position!  Buffer math was mangled.");
+                Debug.Assert(
+                    _readLength >= 0 && _readPos <= _readLength,
+                    "_readLen should be nonnegative, and _readPos should be less than or equal _readLen"
+                );
+                Debug.Assert(
+                    pos == Position,
+                    "Seek optimization: pos != Position!  Buffer math was mangled."
+                );
             }
             return pos;
         }
@@ -531,11 +584,22 @@ namespace System.IO.Strategies
         // This doesn't do argument checking.  Necessary for SetLength, which must
         // set the file pointer beyond the end of the file. This will update the
         // internal position
-        private long SeekCore(SafeFileHandle fileHandle, long offset, SeekOrigin origin, bool closeInvalidHandle = false)
+        private long SeekCore(
+            SafeFileHandle fileHandle,
+            long offset,
+            SeekOrigin origin,
+            bool closeInvalidHandle = false
+        )
         {
             Debug.Assert(!fileHandle.IsClosed && _canSeek, "!fileHandle.IsClosed && _canSeek");
 
-            return _filePosition = FileStreamHelpers.Seek(fileHandle, _path, offset, origin, closeInvalidHandle);
+            return _filePosition = FileStreamHelpers.Seek(
+                fileHandle,
+                _path,
+                offset,
+                origin,
+                closeInvalidHandle
+            );
         }
 
         partial void OnBufferAllocated()
@@ -544,11 +608,17 @@ namespace System.IO.Strategies
             Debug.Assert(_preallocatedOverlapped == null);
 
             if (_useAsyncIO)
-                _preallocatedOverlapped = new PreAllocatedOverlapped(CompletionSource.s_ioCallback, this, _buffer);
+                _preallocatedOverlapped = new PreAllocatedOverlapped(
+                    CompletionSource.s_ioCallback,
+                    this,
+                    _buffer
+                );
         }
 
-        private CompletionSource? CompareExchangeCurrentOverlappedOwner(CompletionSource? newSource, CompletionSource? existingSource)
-            => Interlocked.CompareExchange(ref _currentOverlappedOwner, newSource, existingSource);
+        private CompletionSource? CompareExchangeCurrentOverlappedOwner(
+            CompletionSource? newSource,
+            CompletionSource? existingSource
+        ) => Interlocked.CompareExchange(ref _currentOverlappedOwner, newSource, existingSource);
 
         private void WriteSpan(ReadOnlySpan<byte> source)
         {
@@ -557,8 +627,10 @@ namespace System.IO.Strategies
             if (_writePos == 0)
             {
                 // Ensure we can write to the stream, and ready buffer for writing.
-                if (!CanWrite) ThrowHelper.ThrowNotSupportedException_UnwritableStream();
-                if (_readPos < _readLength) FlushReadBuffer();
+                if (!CanWrite)
+                    ThrowHelper.ThrowNotSupportedException_UnwritableStream();
+                if (_readPos < _readLength)
+                    FlushReadBuffer();
                 _readPos = 0;
                 _readLength = 0;
             }
@@ -573,7 +645,7 @@ namespace System.IO.Strategies
             // size repeatedly)
             if (_writePos > 0)
             {
-                int numBytes = _bufferLength - _writePos;   // space left in buffer
+                int numBytes = _bufferLength - _writePos; // space left in buffer
                 if (numBytes > 0)
                 {
                     if (numBytes >= source.Length)
@@ -599,13 +671,16 @@ namespace System.IO.Strategies
             // If the buffer would slow writes down, avoid buffer completely.
             if (source.Length >= _bufferLength)
             {
-                Debug.Assert(_writePos == 0, "FileStream cannot have buffered data to write here!  Your stream will be corrupted.");
+                Debug.Assert(
+                    _writePos == 0,
+                    "FileStream cannot have buffered data to write here!  Your stream will be corrupted."
+                );
                 WriteCore(source);
                 return;
             }
             else if (source.Length == 0)
             {
-                return;  // Don't allocate a buffer then call memcpy for 0 bytes.
+                return; // Don't allocate a buffer then call memcpy for 0 bytes.
             }
 
             // Copy remaining bytes into buffer, to write at a later date.
@@ -648,12 +723,21 @@ namespace System.IO.Strategies
             return;
         }
 
-        private Task<int>? ReadAsyncInternal(Memory<byte> destination, CancellationToken cancellationToken, out int synchronousResult)
+        private Task<int>? ReadAsyncInternal(
+            Memory<byte> destination,
+            CancellationToken cancellationToken,
+            out int synchronousResult
+        )
         {
             Debug.Assert(_useAsyncIO);
-            if (!CanRead) ThrowHelper.ThrowNotSupportedException_UnreadableStream();
+            if (!CanRead)
+                ThrowHelper.ThrowNotSupportedException_UnreadableStream();
 
-            Debug.Assert((_readPos == 0 && _readLength == 0 && _writePos >= 0) || (_writePos == 0 && _readPos <= _readLength), "We're either reading or writing, but not both.");
+            Debug.Assert(
+                (_readPos == 0 && _readLength == 0 && _writePos >= 0)
+                    || (_writePos == 0 && _readPos <= _readLength),
+                "We're either reading or writing, but not both."
+            );
 
             if (_isPipe)
             {
@@ -680,7 +764,10 @@ namespace System.IO.Strategies
                 }
                 else
                 {
-                    Debug.Assert(_writePos == 0, "Win32FileStream must not have buffered write data here!  Pipes should be unidirectional.");
+                    Debug.Assert(
+                        _writePos == 0,
+                        "Win32FileStream must not have buffered write data here!  Pipes should be unidirectional."
+                    );
                     synchronousResult = 0;
                     return ReadNativeAsync(destination, 0, cancellationToken);
                 }
@@ -689,7 +776,8 @@ namespace System.IO.Strategies
             Debug.Assert(!_isPipe, "Should not be a pipe.");
 
             // Handle buffering.
-            if (_writePos > 0) FlushWriteBuffer();
+            if (_writePos > 0)
+                FlushWriteBuffer();
             if (_readPos == _readLength)
             {
                 // I can't see how to handle buffering of async requests when
@@ -705,7 +793,11 @@ namespace System.IO.Strategies
 
                 if (destination.Length < _bufferLength)
                 {
-                    Task<int> readTask = ReadNativeAsync(new Memory<byte>(GetBuffer()), 0, cancellationToken);
+                    Task<int> readTask = ReadNativeAsync(
+                        new Memory<byte>(GetBuffer()),
+                        0,
+                        cancellationToken
+                    );
                     _readLength = readTask.GetAwaiter().GetResult();
                     int n = Math.Min(_readLength, destination.Length);
                     new Span<byte>(GetBuffer(), 0, n).CopyTo(destination.Span);
@@ -751,13 +843,22 @@ namespace System.IO.Strategies
             }
         }
 
-        private unsafe Task<int> ReadNativeAsync(Memory<byte> destination, int numBufferedBytesRead, CancellationToken cancellationToken)
+        private unsafe Task<int> ReadNativeAsync(
+            Memory<byte> destination,
+            int numBufferedBytesRead,
+            CancellationToken cancellationToken
+        )
         {
             AssertCanRead();
             Debug.Assert(_useAsyncIO, "ReadNativeAsync doesn't work on synchronous file streams!");
 
             // Create and store async stream class library specific data in the async result
-            CompletionSource completionSource = CompletionSource.Create(this, _preallocatedOverlapped, numBufferedBytesRead, destination);
+            CompletionSource completionSource = CompletionSource.Create(
+                this,
+                _preallocatedOverlapped,
+                numBufferedBytesRead,
+                destination
+            );
             NativeOverlapped* intOverlapped = completionSource.Overlapped;
 
             // Calculate position in the file we should be at after the read is done
@@ -825,7 +926,7 @@ namespace System.IO.Strategies
                 }
                 else if (errorCode != Interop.Errors.ERROR_IO_PENDING)
                 {
-                    if (!_fileHandle.IsClosed && CanSeek)  // Update Position - It could be anywhere.
+                    if (!_fileHandle.IsClosed && CanSeek) // Update Position - It could be anywhere.
                     {
                         SeekCore(_fileHandle, 0, SeekOrigin.Current);
                     }
@@ -861,13 +962,24 @@ namespace System.IO.Strategies
             return completionSource.Task;
         }
 
-        private ValueTask WriteAsyncInternal(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+        private ValueTask WriteAsyncInternal(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(_useAsyncIO);
-            Debug.Assert((_readPos == 0 && _readLength == 0 && _writePos >= 0) || (_writePos == 0 && _readPos <= _readLength), "We're either reading or writing, but not both.");
-            Debug.Assert(!_isPipe || (_readPos == 0 && _readLength == 0), "Win32FileStream must not have buffered data here!  Pipes should be unidirectional.");
+            Debug.Assert(
+                (_readPos == 0 && _readLength == 0 && _writePos >= 0)
+                    || (_writePos == 0 && _readPos <= _readLength),
+                "We're either reading or writing, but not both."
+            );
+            Debug.Assert(
+                !_isPipe || (_readPos == 0 && _readLength == 0),
+                "Win32FileStream must not have buffered data here!  Pipes should be unidirectional."
+            );
 
-            if (!CanWrite) ThrowHelper.ThrowNotSupportedException_UnwritableStream();
+            if (!CanWrite)
+                ThrowHelper.ThrowNotSupportedException_UnwritableStream();
 
             bool writeDataStoredInBuffer = false;
             if (!_isPipe) // avoid async buffering with pipes, as doing so can lead to deadlocks (see comments in ReadInternalAsyncCore)
@@ -892,7 +1004,11 @@ namespace System.IO.Strategies
                 // - There's no active flush operation, such that we don't have to worry about the existing buffer being in use.
                 // - And the data we're trying to write fits in the buffer, meaning it wasn't already filled by previous writes.
                 // In that case, just store it in the buffer.
-                if (source.Length < _bufferLength && !HasActiveBufferOperation && source.Length <= remainingBuffer)
+                if (
+                    source.Length < _bufferLength
+                    && !HasActiveBufferOperation
+                    && source.Length <= remainingBuffer
+                )
                 {
                     source.Span.CopyTo(new Span<byte>(GetBuffer(), _writePos, source.Length));
                     _writePos += source.Length;
@@ -947,9 +1063,7 @@ namespace System.IO.Strategies
                 // If we already copied all of the data into the buffer,
                 // simply return the flush task here.  Same goes for if the task has
                 // already completed and was unsuccessful.
-                if (writeDataStoredInBuffer ||
-                    flushTask.IsFaulted ||
-                    flushTask.IsCanceled)
+                if (writeDataStoredInBuffer || flushTask.IsFaulted || flushTask.IsCanceled)
                 {
                     return new ValueTask(flushTask);
                 }
@@ -962,20 +1076,34 @@ namespace System.IO.Strategies
             // represents the write operation, including any flushing done.
             Task writeTask = WriteAsyncInternalCore(source, cancellationToken);
             return new ValueTask(
-                (flushTask == null || flushTask.Status == TaskStatus.RanToCompletion) ? writeTask :
-                (writeTask.Status == TaskStatus.RanToCompletion) ? flushTask :
-                Task.WhenAll(flushTask, writeTask));
+                (flushTask == null || flushTask.Status == TaskStatus.RanToCompletion)
+                  ? writeTask
+                  : (writeTask.Status == TaskStatus.RanToCompletion)
+                      ? flushTask
+                      : Task.WhenAll(flushTask, writeTask)
+            );
         }
 
-        private unsafe Task WriteAsyncInternalCore(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+        private unsafe Task WriteAsyncInternalCore(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
             Debug.Assert(CanWrite, "_parent.CanWrite");
             Debug.Assert(_readPos == _readLength, "_readPos == _readLen");
-            Debug.Assert(_useAsyncIO, "WriteInternalCoreAsync doesn't work on synchronous file streams!");
+            Debug.Assert(
+                _useAsyncIO,
+                "WriteInternalCoreAsync doesn't work on synchronous file streams!"
+            );
 
             // Create and store async stream class library specific data in the async result
-            CompletionSource completionSource = CompletionSource.Create(this, _preallocatedOverlapped, 0, source);
+            CompletionSource completionSource = CompletionSource.Create(
+                this,
+                _preallocatedOverlapped,
+                0,
+                source
+            );
             NativeOverlapped* intOverlapped = completionSource.Overlapped;
 
             if (CanSeek)
@@ -1027,7 +1155,7 @@ namespace System.IO.Strategies
                 }
                 else if (errorCode != Interop.Errors.ERROR_IO_PENDING)
                 {
-                    if (!_fileHandle.IsClosed && CanSeek)  // Update Position - It could be anywhere.
+                    if (!_fileHandle.IsClosed && CanSeek) // Update Position - It could be anywhere.
                     {
                         SeekCore(_fileHandle, 0, SeekOrigin.Current);
                     }
@@ -1064,21 +1192,53 @@ namespace System.IO.Strategies
         }
 
         // __ConsoleStream also uses this code.
-        private unsafe int ReadFileNative(SafeFileHandle handle, Span<byte> bytes, NativeOverlapped* overlapped, out int errorCode)
+        private unsafe int ReadFileNative(
+            SafeFileHandle handle,
+            Span<byte> bytes,
+            NativeOverlapped* overlapped,
+            out int errorCode
+        )
         {
-            Debug.Assert((_useAsyncIO && overlapped != null) || (!_useAsyncIO && overlapped == null), "Async IO and overlapped parameters inconsistent in call to ReadFileNative.");
+            Debug.Assert(
+                (_useAsyncIO && overlapped != null) || (!_useAsyncIO && overlapped == null),
+                "Async IO and overlapped parameters inconsistent in call to ReadFileNative."
+            );
 
-            return FileStreamHelpers.ReadFileNative(handle, bytes, false, overlapped, out errorCode);
+            return FileStreamHelpers.ReadFileNative(
+                handle,
+                bytes,
+                false,
+                overlapped,
+                out errorCode
+            );
         }
 
-        private unsafe int WriteFileNative(SafeFileHandle handle, ReadOnlySpan<byte> buffer, NativeOverlapped* overlapped, out int errorCode)
+        private unsafe int WriteFileNative(
+            SafeFileHandle handle,
+            ReadOnlySpan<byte> buffer,
+            NativeOverlapped* overlapped,
+            out int errorCode
+        )
         {
-            Debug.Assert((_useAsyncIO && overlapped != null) || (!_useAsyncIO && overlapped == null), "Async IO and overlapped parameters inconsistent in call to WriteFileNative.");
+            Debug.Assert(
+                (_useAsyncIO && overlapped != null) || (!_useAsyncIO && overlapped == null),
+                "Async IO and overlapped parameters inconsistent in call to WriteFileNative."
+            );
 
-            return FileStreamHelpers.WriteFileNative(handle, buffer, false, overlapped, out errorCode);
+            return FileStreamHelpers.WriteFileNative(
+                handle,
+                buffer,
+                false,
+                overlapped,
+                out errorCode
+            );
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             // If we're in sync mode, just use the shared CopyToAsync implementation that does
             // typical read/write looping.
@@ -1106,11 +1266,19 @@ namespace System.IO.Strategies
             }
 
             // Do the async copy, with differing implementations based on whether the FileStream was opened as async or sync
-            Debug.Assert((_readPos == 0 && _readLength == 0 && _writePos >= 0) || (_writePos == 0 && _readPos <= _readLength), "We're either reading or writing, but not both.");
+            Debug.Assert(
+                (_readPos == 0 && _readLength == 0 && _writePos >= 0)
+                    || (_writePos == 0 && _readPos <= _readLength),
+                "We're either reading or writing, but not both."
+            );
             return AsyncModeCopyToAsync(destination, bufferSize, cancellationToken);
         }
 
-        private async Task AsyncModeCopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        private async Task AsyncModeCopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(_useAsyncIO, "This implementation is for async mode only");
             Debug.Assert(!_fileHandle.IsClosed, "!_handle.IsClosed");
@@ -1129,7 +1297,12 @@ namespace System.IO.Strategies
                 int bufferedBytes = _readLength - _readPos;
                 if (bufferedBytes > 0)
                 {
-                    await destination.WriteAsync(new ReadOnlyMemory<byte>(GetBuffer(), _readPos, bufferedBytes), cancellationToken).ConfigureAwait(false);
+                    await destination
+                        .WriteAsync(
+                            new ReadOnlyMemory<byte>(GetBuffer(), _readPos, bufferedBytes),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     _readPos = _readLength = 0;
                 }
             }
@@ -1143,7 +1316,15 @@ namespace System.IO.Strategies
             try
             {
                 await FileStreamHelpers
-                    .AsyncModeCopyToAsync(_fileHandle, _path, canSeek, _filePosition, destination, bufferSize, cancellationToken)
+                    .AsyncModeCopyToAsync(
+                        _fileHandle,
+                        _path,
+                        canSeek,
+                        _filePosition,
+                        destination,
+                        bufferSize,
+                        cancellationToken
+                    )
                     .ConfigureAwait(false);
             }
             finally
@@ -1156,8 +1337,10 @@ namespace System.IO.Strategies
             }
         }
 
-        internal override void Lock(long position, long length) => FileStreamHelpers.Lock(_fileHandle, _path, position, length);
+        internal override void Lock(long position, long length) =>
+            FileStreamHelpers.Lock(_fileHandle, _path, position, length);
 
-        internal override void Unlock(long position, long length) => FileStreamHelpers.Unlock(_fileHandle, _path, position, length);
+        internal override void Unlock(long position, long length) =>
+            FileStreamHelpers.Unlock(_fileHandle, _path, position, length);
     }
 }

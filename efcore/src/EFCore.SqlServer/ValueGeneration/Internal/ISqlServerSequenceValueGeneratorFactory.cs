@@ -28,6 +28,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.ValueGeneration.Internal
             SqlServerSequenceValueGeneratorState generatorState,
             ISqlServerConnection connection,
             IRawSqlCommandBuilder rawSqlCommandBuilder,
-            IRelationalCommandDiagnosticsLogger commandLogger);
+            IRelationalCommandDiagnosticsLogger commandLogger
+        );
     }
 }

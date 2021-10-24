@@ -16,7 +16,10 @@ namespace System.Collections.ObjectModel.Tests
             yield return new object[] { new TestCollection() { "hello", "world" } };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         [MemberData(nameof(SerializeDeserialize_Roundtrips_MemberData))]
         public void SerializeDeserialize_Roundtrips(TestCollection c)
         {

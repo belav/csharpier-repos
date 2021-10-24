@@ -21,7 +21,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void BindAttribute_Include(string property, bool isIncluded)
         {
             // Arrange
-            var bind = new BindAttribute(new string[] { "UserName", "FirstName", "LastName, MiddleName,  ,foo,bar " });
+            var bind = new BindAttribute(
+                new string[] { "UserName", "FirstName", "LastName, MiddleName,  ,foo,bar " }
+            );
 
             var context = new DefaultModelBindingContext();
 

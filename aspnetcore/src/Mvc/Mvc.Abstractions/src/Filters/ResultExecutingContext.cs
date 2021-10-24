@@ -22,8 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             ActionContext actionContext,
             IList<IFilterMetadata> filters,
             IActionResult result,
-            object controller)
-            : base(actionContext, filters)
+            object controller
+        ) : base(actionContext, filters)
         {
             Result = result;
             Controller = controller;

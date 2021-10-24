@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             var syntaxTree = codeDocument.GetSyntaxTree();
             ThrowForMissingDocumentDependency(syntaxTree);
-            
+
             foreach (var pass in Passes)
             {
                 syntaxTree = pass.Execute(codeDocument, syntaxTree);

@@ -14,24 +14,24 @@ namespace ErrorPageMiddlewareWebSite
         // Set up application services
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews()
-                .AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                }
+            );
         }
 
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args)
-                .Build();
+            var host = CreateWebHostBuilder(args).Build();
 
             host.Run();
         }

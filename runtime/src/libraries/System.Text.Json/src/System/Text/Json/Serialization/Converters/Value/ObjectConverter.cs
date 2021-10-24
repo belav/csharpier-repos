@@ -10,35 +10,57 @@ namespace System.Text.Json.Serialization.Converters
             IsInternalConverterForNumberType = true;
         }
 
-        public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override object Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return JsonElement.ParseValue(ref reader);
         }
 
-        public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            object value,
+            JsonSerializerOptions options
+        )
         {
             throw new InvalidOperationException();
         }
 
         internal override object ReadWithQuotes(ref Utf8JsonReader reader)
         {
-            ThrowHelper.ThrowNotSupportedException_DictionaryKeyTypeNotSupported(TypeToConvert, this);
+            ThrowHelper.ThrowNotSupportedException_DictionaryKeyTypeNotSupported(
+                TypeToConvert,
+                this
+            );
             return null!;
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, object value, JsonSerializerOptions options, ref WriteStack state)
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            object value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             Type runtimeType = value.GetType();
             JsonConverter runtimeConverter = options.GetConverter(runtimeType);
             if (runtimeConverter == this)
             {
-                ThrowHelper.ThrowNotSupportedException_DictionaryKeyTypeNotSupported(runtimeType, this);
+                ThrowHelper.ThrowNotSupportedException_DictionaryKeyTypeNotSupported(
+                    runtimeType,
+                    this
+                );
             }
 
             runtimeConverter.WriteWithQuotesAsObject(writer, value, options, ref state);
         }
 
-        internal override object ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling handling)
+        internal override object ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling handling
+        )
         {
             return JsonElement.ParseValue(ref reader);
         }

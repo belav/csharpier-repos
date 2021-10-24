@@ -21,8 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
 
             public readonly IList<TextChange> TextChanges = new List<TextChange>();
 
-            public Rewriter(bool placeSystemNamespaceFirst,
-                            bool separateGroups)
+            public Rewriter(bool placeSystemNamespaceFirst, bool separateGroups)
             {
                 _placeSystemNamespaceFirst = placeSystemNamespaceFirst;
                 _separateGroups = separateGroups;
@@ -32,11 +31,16 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
             {
                 node = (CompilationUnitSyntax)base.VisitCompilationUnit(node);
                 UsingsAndExternAliasesOrganizer.Organize(
-                    node.Externs, node.Usings,
-                    _placeSystemNamespaceFirst, _separateGroups,
-                    out var organizedExternAliasList, out var organizedUsingList);
+                    node.Externs,
+                    node.Usings,
+                    _placeSystemNamespaceFirst,
+                    _separateGroups,
+                    out var organizedExternAliasList,
+                    out var organizedUsingList
+                );
 
-                var result = node.WithExterns(organizedExternAliasList).WithUsings(organizedUsingList);
+                var result = node.WithExterns(organizedExternAliasList)
+                    .WithUsings(organizedUsingList);
                 if (node != result)
                 {
                     AddTextChange(node.Externs, organizedExternAliasList);
@@ -50,11 +54,16 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
             {
                 node = (NamespaceDeclarationSyntax)base.VisitNamespaceDeclaration(node);
                 UsingsAndExternAliasesOrganizer.Organize(
-                    node.Externs, node.Usings,
-                    _placeSystemNamespaceFirst, _separateGroups,
-                    out var organizedExternAliasList, out var organizedUsingList);
+                    node.Externs,
+                    node.Usings,
+                    _placeSystemNamespaceFirst,
+                    _separateGroups,
+                    out var organizedExternAliasList,
+                    out var organizedUsingList
+                );
 
-                var result = node.WithExterns(organizedExternAliasList).WithUsings(organizedUsingList);
+                var result = node.WithExterns(organizedExternAliasList)
+                    .WithUsings(organizedUsingList);
                 if (node != result)
                 {
                     AddTextChange(node.Externs, organizedExternAliasList);
@@ -64,12 +73,16 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
                 return result;
             }
 
-            private void AddTextChange<TSyntax>(SyntaxList<TSyntax> list, SyntaxList<TSyntax> organizedList)
-                where TSyntax : SyntaxNode
+            private void AddTextChange<TSyntax>(
+                SyntaxList<TSyntax> list,
+                SyntaxList<TSyntax> organizedList
+            ) where TSyntax : SyntaxNode
             {
                 if (list.Count > 0)
                 {
-                    this.TextChanges.Add(new TextChange(GetTextSpan(list), GetNewText(organizedList)));
+                    this.TextChanges.Add(
+                        new TextChange(GetTextSpan(list), GetNewText(organizedList))
+                    );
                 }
             }
 

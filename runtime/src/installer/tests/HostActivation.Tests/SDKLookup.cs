@@ -11,12 +11,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 {
     public class SDKLookup : IDisposable
     {
-        private static readonly IDictionary<string, string> s_DefaultEnvironment = new Dictionary<string, string>()
+        private static readonly IDictionary<string, string> s_DefaultEnvironment = new Dictionary<
+            string,
+            string
+        >()
         {
-            {"COREHOST_TRACE", "1" },
+            { "COREHOST_TRACE", "1" },
             // The SDK being used may be crossgen'd for a different architecture than we are building for.
             // Turn off ready to run, so an x64 crossgen'd SDK can be loaded in an x86 process.
-            {"COMPlus_ReadyToRun", "0" },
+            { "COMPlus_ReadyToRun", "0" },
         };
 
         private readonly RepoDirectoriesProvider RepoDirectories;
@@ -46,7 +49,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             _userDir = Path.Combine(_baseDir, "user");
             _executableDir = Path.Combine(_baseDir, "exe");
 
-            DotNet = new DotNetBuilder(_baseDir, Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"), "exe")
+            DotNet = new DotNetBuilder(
+                _baseDir,
+                Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
+                "exe"
+            )
                 .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("9999.0.0")
                 .Build();
 
@@ -54,7 +61,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             // SdkBaseDirs contain all available version folders
             _cwdSdkBaseDir = Path.Combine(_currentWorkingDir, "sdk");
-            _userSdkBaseDir = Path.Combine(_userDir, ".dotnet", RepoDirectories.BuildArchitecture, "sdk");
+            _userSdkBaseDir = Path.Combine(
+                _userDir,
+                ".dotnet",
+                RepoDirectories.BuildArchitecture,
+                "sdk"
+            );
             _exeSdkBaseDir = Path.Combine(_executableDir, "sdk");
 
             // Create directories
@@ -83,7 +95,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.4-global-dummy
             // Exe: empty
             // Expected: no compatible version and a specific error messages
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -91,7 +104,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version")
                 .And.HaveStdErrContaining("It was not possible to find any installed .NET SDKs")
                 .And.HaveStdErrContaining("aka.ms/dotnet-download")
@@ -103,7 +117,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.4-global-dummy
             // Exe: 9999.4.1, 9999.3.4-dummy
             // Expected: no compatible version and a specific error message
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -111,7 +126,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version")
                 .And.NotHaveStdErrContaining("It was not possible to find any installed .NET SDKs");
 
@@ -121,7 +137,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.4-global-dummy
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3
             // Expected: no compatible version and a specific error message
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -129,7 +146,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version")
                 .And.NotHaveStdErrContaining("It was not possible to find any installed .NET SDKs");
 
@@ -139,7 +157,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.4-global-dummy
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3, 9999.3.4
             // Expected: 9999.3.4 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -147,8 +166,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.5-dummy");
@@ -156,7 +178,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.4-global-dummy
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3, 9999.3.4, 9999.3.5-dummy
             // Expected: 9999.3.5-dummy from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -164,8 +187,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.5-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.3.5-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.600");
@@ -173,7 +203,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.4-global-dummy
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3, 9999.3.4, 9999.3.5-dummy, 9999.3.600
             // Expected: 9999.3.5-dummy from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -181,8 +212,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.5-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.3.5-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.4-global-dummy");
@@ -190,7 +228,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.4-global-dummy
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3, 9999.3.4, 9999.3.5-dummy, 9999.3.600, 9999.3.4-global-dummy
             // Expected: 9999.3.4-global-dummy from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -198,18 +237,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.4-global-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.3.4-global-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Verify we have the expected SDK versions
-            DotNet.Exec("--list-sdks")
+            DotNet
+                .Exec("--list-sdks")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("9999.3.4-dummy")
                 .And.HaveStdOutContaining("9999.3.4-global-dummy")
                 .And.HaveStdOutContaining("9999.4.1")
@@ -228,7 +276,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.304-global-dummy
             // Exe: empty
             // Expected: no compatible version and a specific error messages
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -236,7 +285,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version")
                 .And.HaveStdErrContaining("It was not possible to find any installed .NET SDKs");
 
@@ -246,7 +296,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.304-global-dummy
             // Exe: 9999.3.57, 9999.3.4-dummy
             // Expected: no compatible version and a specific error message
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -254,7 +305,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version")
                 .And.NotHaveStdErrContaining("It was not possible to find any installed .NET SDKs");
 
@@ -264,7 +316,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.304-global-dummy
             // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy
             // Expected: no compatible version and a specific error message
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -272,7 +325,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version")
                 .And.NotHaveStdErrContaining("It was not possible to find any installed .NET SDKs");
 
@@ -282,7 +336,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.304-global-dummy
             // Exe: 99999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304
             // Expected: 9999.3.304 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -290,8 +345,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.304", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.304", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.399", "9999.3.399-dummy", "9999.3.400");
@@ -299,7 +357,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.304-global-dummy
             // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399, 9999.3.399-dummy, 9999.3.400
             // Expected: 9999.3.399 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -307,8 +366,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.2400", "9999.3.3004");
@@ -316,7 +378,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.304-global-dummy
             // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399, 9999.3.399-dummy, 9999.3.400, 9999.3.2400, 9999.3.3004
             // Expected: 9999.3.399 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -324,8 +387,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.304-global-dummy");
@@ -333,7 +399,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: 9999.3.304-global-dummy
             // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399, 9999.3.399-dummy, 9999.3.400, 9999.3.2400, 9999.3.3004, 9999.3.304-global-dummy
             // Expected: 9999.3.304-global-dummy from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -341,18 +408,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.304-global-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.3.304-global-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Verify we have the expected SDK versions
-            DotNet.Exec("--list-sdks")
+            DotNet
+                .Exec("--list-sdks")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("9999.3.57")
                 .And.HaveStdOutContaining("9999.3.4-dummy")
                 .And.HaveStdOutContaining("9999.3.300")
@@ -377,7 +453,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: none
             // Exe: -1.-1.-1
             // Expected: no compatible version and a specific error messages
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -385,7 +462,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining("It was not possible to find any installed .NET SDKs")
                 .And.HaveStdErrContaining("Install a .NET SDK from");
 
@@ -395,7 +473,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Specified SDK version: none
             // Exe: -1.-1.-1, 9999.0.4
             // Expected: 9999.0.4 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -403,18 +482,23 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator)
+                );
 
             // Verify we have the expected SDK versions
-            DotNet.Exec("--list-sdks")
+            DotNet
+                .Exec("--list-sdks")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("9999.0.4");
         }
 
@@ -424,14 +508,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             WriteEmptyGlobalJson();
 
             // Add SDK versions
-            AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.0", "9999.0.3-dummy.9", "9999.0.3-dummy.10");
+            AddAvailableSdkVersions(
+                _exeSdkBaseDir,
+                "9999.0.0",
+                "9999.0.3-dummy.9",
+                "9999.0.3-dummy.10"
+            );
 
             // Specified SDK version: none
             // Cwd: empty
             // User: empty
             // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10
             // Expected: 9999.0.3-dummy.10 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -439,8 +529,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.3-dummy.10", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.0.3-dummy.10",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.3");
@@ -450,7 +547,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // User: empty
             // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3
             // Expected: 9999.0.3 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -458,8 +556,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_userSdkBaseDir, "9999.0.200");
@@ -471,7 +572,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // User: 9999.0.200               --> should not be picked
             // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3, 9999.0.100
             // Expected: 9999.0.100 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -479,8 +581,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.80");
@@ -490,7 +595,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // User: 9999.0.200               --> should not be picked
             // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3, 9999.0.100, 9999.0.80
             // Expected: 9999.0.100 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -498,8 +604,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.5500000");
@@ -509,7 +618,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // User: 9999.0.200               --> should not be picked
             // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3, 9999.0.100, 9999.0.80, 9999.0.5500000
             // Expected: 9999.0.5500000 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -517,8 +627,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.5500000", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.0.5500000",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.52000000");
@@ -528,7 +645,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // User: 9999.0.200               --> should not be picked
             // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3, 9999.0.100, 9999.0.80, 9999.0.5500000, 9999.0.52000000
             // Expected: 9999.0.52000000 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -536,18 +654,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.52000000", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.0.52000000",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Verify we have the expected SDK versions
-            DotNet.Exec("--list-sdks")
+            DotNet
+                .Exec("--list-sdks")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "0")
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("9999.0.0")
                 .And.HaveStdOutContaining("9999.0.3-dummy.9")
                 .And.HaveStdOutContaining("9999.0.3-dummy.10")
@@ -578,7 +705,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             WriteGlobalJson(FormatGlobalJson(policy: rollForward, version: Requested));
 
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -588,18 +716,29 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, Requested, _dotnetSdkDllMessageTerminator));
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, Requested, _dotnetSdkDllMessageTerminator)
+                );
         }
 
         [Theory]
         [MemberData(nameof(InvalidGlobalJsonData))]
-        public void It_falls_back_to_latest_sdk_for_invalid_global_json(string globalJsonContents, string[] messages)
+        public void It_falls_back_to_latest_sdk_for_invalid_global_json(
+            string globalJsonContents,
+            string[] messages
+        )
         {
-            AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.100", "9999.0.300-dummy.9", "9999.1.402");
+            AddAvailableSdkVersions(
+                _exeSdkBaseDir,
+                "9999.0.100",
+                "9999.0.300-dummy.9",
+                "9999.1.402"
+            );
 
             WriteGlobalJson(globalJsonContents);
 
-            var expectation = DotNet.Exec("help")
+            var expectation = DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -609,7 +748,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.1.402", _dotnetSdkDllMessageTerminator));
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.1.402", _dotnetSdkDllMessageTerminator)
+                );
 
             foreach (var message in messages)
             {
@@ -619,13 +760,26 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
         [Theory]
         [MemberData(nameof(SdkRollForwardData))]
-        public void It_rolls_forward_as_expected(string policy, string requested, bool allowPrerelease, string expected, string[] installed)
+        public void It_rolls_forward_as_expected(
+            string policy,
+            string requested,
+            bool allowPrerelease,
+            string expected,
+            string[] installed
+        )
         {
             AddAvailableSdkVersions(_exeSdkBaseDir, installed);
 
-            WriteGlobalJson(FormatGlobalJson(policy: policy, version: requested, allowPrerelease: allowPrerelease));
+            WriteGlobalJson(
+                FormatGlobalJson(
+                    policy: policy,
+                    version: requested,
+                    allowPrerelease: allowPrerelease
+                )
+            );
 
-            var result = DotNet.Exec("help")
+            var result = DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -641,35 +795,42 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 result
                     .Should()
                     .Fail()
-                    .And.HaveStdErrContaining($"A compatible installed .NET SDK for global.json version [{requested}] from [{globalJson}] was not found")
-                    .And.HaveStdErrContaining($"Install the [{requested}] .NET SDK or update [{globalJson}] with an installed .NET SDK:");
+                    .And.HaveStdErrContaining(
+                        $"A compatible installed .NET SDK for global.json version [{requested}] from [{globalJson}] was not found"
+                    )
+                    .And.HaveStdErrContaining(
+                        $"Install the [{requested}] .NET SDK or update [{globalJson}] with an installed .NET SDK:"
+                    );
             }
             else
             {
                 result
                     .Should()
                     .Pass()
-                    .And.HaveStdErrContaining($"SDK path resolved to [{Path.Combine(_exeSdkBaseDir, expected)}]");
+                    .And.HaveStdErrContaining(
+                        $"SDK path resolved to [{Path.Combine(_exeSdkBaseDir, expected)}]"
+                    );
             }
         }
 
         [Fact]
         public void It_uses_latest_stable_sdk_if_allow_prerelease_is_false()
         {
-            var installed = new string[] {
-                    "9999.1.702",
-                    "9999.2.101",
-                    "9999.2.203",
-                    "9999.2.204-preview1",
-                    "10000.0.100-preview3",
-                    "10000.0.100-preview7",
-                    "10000.0.100",
-                    "10000.1.102",
-                    "10000.1.106",
-                    "10000.0.200-preview5",
-                    "10000.1.100-preview3",
-                    "10001.0.100-preview3",
-                };
+            var installed = new string[]
+            {
+                "9999.1.702",
+                "9999.2.101",
+                "9999.2.203",
+                "9999.2.204-preview1",
+                "10000.0.100-preview3",
+                "10000.0.100-preview7",
+                "10000.0.100",
+                "10000.1.102",
+                "10000.1.106",
+                "10000.0.200-preview5",
+                "10000.1.100-preview3",
+                "10001.0.100-preview3",
+            };
 
             const string ExpectedVersion = "10000.1.106";
 
@@ -677,7 +838,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             WriteGlobalJson(FormatGlobalJson(allowPrerelease: false));
 
-            var result = DotNet.Exec("help")
+            var result = DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
@@ -687,89 +849,97 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining($"SDK path resolved to [{Path.Combine(_exeSdkBaseDir, ExpectedVersion)}]");
+                .And.HaveStdErrContaining(
+                    $"SDK path resolved to [{Path.Combine(_exeSdkBaseDir, ExpectedVersion)}]"
+                );
         }
 
         public static IEnumerable<object[]> InvalidGlobalJsonData
         {
             get
             {
-                const string IgnoringSDKSettings = "Ignoring SDK settings in global.json: the latest installed .NET SDK (including prereleases) will be used";
+                const string IgnoringSDKSettings =
+                    "Ignoring SDK settings in global.json: the latest installed .NET SDK (including prereleases) will be used";
 
                 // Use invalid JSON
-                yield return new object[] {
+                yield return new object[]
+                {
                     "{ sdk: { \"version\": \"9999.0.100\" } }",
-                    new[] {
-                        "A JSON parsing exception occurred",
-                        IgnoringSDKSettings
-                    }
+                    new[] { "A JSON parsing exception occurred", IgnoringSDKSettings }
                 };
 
                 // Use something other than a JSON object
-                yield return new object[] {
+                yield return new object[]
+                {
                     "true",
-                    new[] {
-                        "Expected a JSON object",
-                        IgnoringSDKSettings
-                    }
+                    new[] { "Expected a JSON object", IgnoringSDKSettings }
                 };
 
                 // Use a non-string version
-                yield return new object[] {
+                yield return new object[]
+                {
                     "{ \"sdk\": { \"version\": 1 } }",
-                    new[] {
-                        "Expected a string for the 'sdk/version' value",
-                        IgnoringSDKSettings
-                    }
+                    new[] { "Expected a string for the 'sdk/version' value", IgnoringSDKSettings }
                 };
 
                 // Use an invalid version value
-                yield return new object[] {
+                yield return new object[]
+                {
                     FormatGlobalJson(version: "invalid"),
-                    new[] {
+                    new[]
+                    {
                         "Version 'invalid' is not valid for the 'sdk/version' value",
                         IgnoringSDKSettings
                     }
                 };
 
                 // Use a non-string policy
-                yield return new object[] {
+                yield return new object[]
+                {
                     "{ \"sdk\": { \"rollForward\": true } }",
-                    new[] {
+                    new[]
+                    {
                         "Expected a string for the 'sdk/rollForward' value",
                         IgnoringSDKSettings
                     }
                 };
 
                 // Use a policy but no version
-                yield return new object[] {
+                yield return new object[]
+                {
                     FormatGlobalJson(policy: "latestPatch"),
-                    new[] {
+                    new[]
+                    {
                         "The roll-forward policy 'latestPatch' requires a 'sdk/version' value",
                         IgnoringSDKSettings
                     }
                 };
 
                 // Use an invalid policy value
-                yield return new object[] {
+                yield return new object[]
+                {
                     FormatGlobalJson(policy: "invalid"),
-                    new[] {
+                    new[]
+                    {
                         "The roll-forward policy 'invalid' is not supported for the 'sdk/rollForward' value",
                         IgnoringSDKSettings
                     }
                 };
 
                 // Use a non-boolean allow prerelease
-                yield return new object[] {
+                yield return new object[]
+                {
                     "{ \"sdk\": { \"allowPrerelease\": \"true\" } }",
-                    new[] {
+                    new[]
+                    {
                         "Expected a boolean for the 'sdk/allowPrerelease' value",
                         IgnoringSDKSettings
                     }
                 };
 
                 // Use a prerelease version and allowPrerelease = false
-                yield return new object[] {
+                yield return new object[]
+                {
                     FormatGlobalJson(version: "9999.1.402-preview1", allowPrerelease: false),
                     new[] { "Ignoring the 'sdk/allowPrerelease' value" }
                 };
@@ -782,68 +952,68 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             {
                 const string Requested = "9999.1.501";
 
-                var installed = new string[] {
-                    "9999.1.500",
-                };
+                var installed = new string[] { "9999.1.500", };
 
                 // Array of (policy, expected) tuples
-                var policies = new[] {
-                    ((string)null,    (string)null),
-                    ("patch",         (string)null),
-                    ("feature",       (string)null),
-                    ("minor",         (string)null),
-                    ("major",         (string)null),
-                    ("latestPatch",   (string)null),
+                var policies = new[]
+                {
+                    ((string)null, (string)null),
+                    ("patch", (string)null),
+                    ("feature", (string)null),
+                    ("minor", (string)null),
+                    ("major", (string)null),
+                    ("latestPatch", (string)null),
                     ("latestFeature", (string)null),
-                    ("latestMinor",   (string)null),
-                    ("latestMajor",   (string)null),
-                    ("disable",       (string)null),
-                    ("invalid",       "9999.1.500"),
+                    ("latestMinor", (string)null),
+                    ("latestMajor", (string)null),
+                    ("disable", (string)null),
+                    ("invalid", "9999.1.500"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        true,         // allow prerelease
+                        Requested, // requested
+                        true, // allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
-                    "9999.1.500",
-                    "9999.2.100-preview1",
-                };
+                installed = new string[] { "9999.1.500", "9999.2.100-preview1", };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    (string)null),
-                    ("patch",         (string)null),
-                    ("feature",       (string)null),
-                    ("minor",         (string)null),
-                    ("major",         (string)null),
-                    ("latestPatch",   (string)null),
+                policies = new[]
+                {
+                    ((string)null, (string)null),
+                    ("patch", (string)null),
+                    ("feature", (string)null),
+                    ("minor", (string)null),
+                    ("major", (string)null),
+                    ("latestPatch", (string)null),
                     ("latestFeature", (string)null),
-                    ("latestMinor",   (string)null),
-                    ("latestMajor",   (string)null),
-                    ("disable",       (string)null),
-                    ("invalid",       "9999.2.100-preview1"),
+                    ("latestMinor", (string)null),
+                    ("latestMajor", (string)null),
+                    ("disable", (string)null),
+                    ("invalid", "9999.2.100-preview1"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        false,        // do not allow prerelease
+                        Requested, // requested
+                        false, // do not allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "9999.1.501",
@@ -854,32 +1024,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    "9999.1.501"),
-                    ("patch",         "9999.1.501"),
-                    ("feature",       "9999.1.504-preview2"),
-                    ("minor",         "9999.1.504-preview2"),
-                    ("major",         "9999.1.504-preview2"),
-                    ("latestPatch",   "9999.1.504-preview2"),
+                policies = new[]
+                {
+                    ((string)null, "9999.1.501"),
+                    ("patch", "9999.1.501"),
+                    ("feature", "9999.1.504-preview2"),
+                    ("minor", "9999.1.504-preview2"),
+                    ("major", "9999.1.504-preview2"),
+                    ("latestPatch", "9999.1.504-preview2"),
                     ("latestFeature", "9999.1.504-preview2"),
-                    ("latestMinor",   "9999.1.504-preview2"),
-                    ("latestMajor",   "9999.1.504-preview2"),
-                    ("disable",       "9999.1.501"),
-                    ("invalid",       "9999.1.504-preview2"),
+                    ("latestMinor", "9999.1.504-preview2"),
+                    ("latestMajor", "9999.1.504-preview2"),
+                    ("disable", "9999.1.501"),
+                    ("invalid", "9999.1.504-preview2"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        true,         // allow prerelease
+                        Requested, // requested
+                        true, // allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "9999.1.501",
@@ -890,32 +1063,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    "9999.1.501"),
-                    ("patch",         "9999.1.501"),
-                    ("feature",       "9999.1.503"),
-                    ("minor",         "9999.1.503"),
-                    ("major",         "9999.1.503"),
-                    ("latestPatch",   "9999.1.503"),
+                policies = new[]
+                {
+                    ((string)null, "9999.1.501"),
+                    ("patch", "9999.1.501"),
+                    ("feature", "9999.1.503"),
+                    ("minor", "9999.1.503"),
+                    ("major", "9999.1.503"),
+                    ("latestPatch", "9999.1.503"),
                     ("latestFeature", "9999.1.503"),
-                    ("latestMinor",   "9999.1.503"),
-                    ("latestMajor",   "9999.1.503"),
-                    ("disable",       "9999.1.501"),
-                    ("invalid",       "9999.1.504-preview2"),
+                    ("latestMinor", "9999.1.503"),
+                    ("latestMajor", "9999.1.503"),
+                    ("disable", "9999.1.501"),
+                    ("invalid", "9999.1.504-preview2"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        false,        // don't allow prerelease
+                        Requested, // requested
+                        false, // don't allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "9999.1.503",
@@ -933,32 +1109,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    (null,            "9999.1.506-preview1"),
-                    ("patch",         "9999.1.506-preview1"),
-                    ("feature",       "9999.1.506-preview1"),
-                    ("minor",         "9999.1.506-preview1"),
-                    ("major",         "9999.1.506-preview1"),
-                    ("latestPatch",   "9999.1.506-preview1"),
+                policies = new[]
+                {
+                    (null, "9999.1.506-preview1"),
+                    ("patch", "9999.1.506-preview1"),
+                    ("feature", "9999.1.506-preview1"),
+                    ("minor", "9999.1.506-preview1"),
+                    ("major", "9999.1.506-preview1"),
+                    ("latestPatch", "9999.1.506-preview1"),
                     ("latestFeature", "9999.1.609"),
-                    ("latestMinor",   "9999.2.203"),
-                    ("latestMajor",   "10000.1.100-preview1"),
-                    ("disable",       (string)null),
-                    ("invalid",       "10000.1.100-preview1"),
+                    ("latestMinor", "9999.2.203"),
+                    ("latestMajor", "10000.1.100-preview1"),
+                    ("disable", (string)null),
+                    ("invalid", "10000.1.100-preview1"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        true,         // allow prerelease
+                        Requested, // requested
+                        true, // allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "9999.1.503",
@@ -976,32 +1155,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    (null,            "9999.1.505"),
-                    ("patch",         "9999.1.505"),
-                    ("feature",       "9999.1.505"),
-                    ("minor",         "9999.1.505"),
-                    ("major",         "9999.1.505"),
-                    ("latestPatch",   "9999.1.505"),
+                policies = new[]
+                {
+                    (null, "9999.1.505"),
+                    ("patch", "9999.1.505"),
+                    ("feature", "9999.1.505"),
+                    ("minor", "9999.1.505"),
+                    ("major", "9999.1.505"),
+                    ("latestPatch", "9999.1.505"),
                     ("latestFeature", "9999.1.609"),
-                    ("latestMinor",   "9999.2.203"),
-                    ("latestMajor",   "10000.0.100"),
-                    ("disable",       (string)null),
-                    ("invalid",       "10000.1.100-preview1"),
+                    ("latestMinor", "9999.2.203"),
+                    ("latestMajor", "10000.0.100"),
+                    ("disable", (string)null),
+                    ("invalid", "10000.1.100-preview1"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        false,        // don't allow prerelease
+                        Requested, // requested
+                        false, // don't allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "9999.1.601",
@@ -1019,32 +1201,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    (string)null),
-                    ("patch",         (string)null),
-                    ("feature",       "9999.1.605-preview4"),
-                    ("minor",         "9999.1.605-preview4"),
-                    ("major",         "9999.1.605-preview4"),
-                    ("latestPatch",   (string)null),
+                policies = new[]
+                {
+                    ((string)null, (string)null),
+                    ("patch", (string)null),
+                    ("feature", "9999.1.605-preview4"),
+                    ("minor", "9999.1.605-preview4"),
+                    ("major", "9999.1.605-preview4"),
+                    ("latestPatch", (string)null),
                     ("latestFeature", "9999.1.702"),
-                    ("latestMinor",   "9999.2.204-preview1"),
-                    ("latestMajor",   "10000.0.100"),
-                    ("disable",       (string)null),
-                    ("invalid",       "10000.0.100"),
+                    ("latestMinor", "9999.2.204-preview1"),
+                    ("latestMajor", "10000.0.100"),
+                    ("disable", (string)null),
+                    ("invalid", "10000.0.100"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        true,         // allow prerelease
+                        Requested, // requested
+                        true, // allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "9999.1.601",
@@ -1062,32 +1247,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    (string)null),
-                    ("patch",         (string)null),
-                    ("feature",       "9999.1.604"),
-                    ("minor",         "9999.1.604"),
-                    ("major",         "9999.1.604"),
-                    ("latestPatch",   (string)null),
+                policies = new[]
+                {
+                    ((string)null, (string)null),
+                    ("patch", (string)null),
+                    ("feature", "9999.1.604"),
+                    ("minor", "9999.1.604"),
+                    ("major", "9999.1.604"),
+                    ("latestPatch", (string)null),
                     ("latestFeature", "9999.1.702"),
-                    ("latestMinor",   "9999.2.203"),
-                    ("latestMajor",   "10000.0.100"),
-                    ("disable",       (string)null),
-                    ("invalid",       "10000.0.100"),
+                    ("latestMinor", "9999.2.203"),
+                    ("latestMajor", "10000.0.100"),
+                    ("disable", (string)null),
+                    ("invalid", "10000.0.100"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        false,        // don't allow prerelease
+                        Requested, // requested
+                        false, // don't allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "9999.2.101-preview4",
@@ -1101,32 +1289,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    (string)null),
-                    ("patch",         (string)null),
-                    ("feature",       (string)null),
-                    ("minor",         "9999.2.102-preview1"),
-                    ("major",         "9999.2.102-preview1"),
-                    ("latestPatch",   (string)null),
+                policies = new[]
+                {
+                    ((string)null, (string)null),
+                    ("patch", (string)null),
+                    ("feature", (string)null),
+                    ("minor", "9999.2.102-preview1"),
+                    ("major", "9999.2.102-preview1"),
+                    ("latestPatch", (string)null),
                     ("latestFeature", (string)null),
-                    ("latestMinor",   "9999.4.205-preview3"),
-                    ("latestMajor",   "10000.1.100-preview1"),
-                    ("disable",       (string)null),
-                    ("invalid",       "10000.1.100-preview1"),
+                    ("latestMinor", "9999.4.205-preview3"),
+                    ("latestMajor", "10000.1.100-preview1"),
+                    ("disable", (string)null),
+                    ("invalid", "10000.1.100-preview1"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        true,         // allow prerelease
+                        Requested, // requested
+                        true, // allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "9999.2.101-preview4",
@@ -1140,32 +1331,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    (string)null),
-                    ("patch",         (string)null),
-                    ("feature",       (string)null),
-                    ("minor",         "9999.2.101"),
-                    ("major",         "9999.2.101"),
-                    ("latestPatch",   (string)null),
+                policies = new[]
+                {
+                    ((string)null, (string)null),
+                    ("patch", (string)null),
+                    ("feature", (string)null),
+                    ("minor", "9999.2.101"),
+                    ("major", "9999.2.101"),
+                    ("latestPatch", (string)null),
                     ("latestFeature", (string)null),
-                    ("latestMinor",   "9999.3.501"),
-                    ("latestMajor",   "10000.0.100"),
-                    ("disable",       (string)null),
-                    ("invalid",       "10000.1.100-preview1"),
+                    ("latestMinor", "9999.3.501"),
+                    ("latestMajor", "10000.0.100"),
+                    ("disable", (string)null),
+                    ("invalid", "10000.1.100-preview1"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        false,        // don't allow prerelease
+                        Requested, // requested
+                        false, // don't allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "10000.0.100",
@@ -1179,32 +1373,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    (string)null),
-                    ("patch",         (string)null),
-                    ("feature",       (string)null),
-                    ("minor",         (string)null),
-                    ("major",         "10000.0.106-preview1"),
-                    ("latestPatch",   (string)null),
+                policies = new[]
+                {
+                    ((string)null, (string)null),
+                    ("patch", (string)null),
+                    ("feature", (string)null),
+                    ("minor", (string)null),
+                    ("major", "10000.0.106-preview1"),
+                    ("latestPatch", (string)null),
                     ("latestFeature", (string)null),
-                    ("latestMinor",   (string)null),
-                    ("latestMajor",   "10000.3.102-preview3"),
-                    ("disable",       (string)null),
-                    ("invalid",       "10000.3.102-preview3"),
+                    ("latestMinor", (string)null),
+                    ("latestMajor", "10000.3.102-preview3"),
+                    ("disable", (string)null),
+                    ("invalid", "10000.3.102-preview3"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        true,         // allow prerelease
+                        Requested, // requested
+                        true, // allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
 
-                installed = new string[] {
+                installed = new string[]
+                {
                     "9998.0.300",
                     "9999.1.500",
                     "10000.0.100",
@@ -1218,28 +1415,30 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 };
 
                 // Array of (policy, expected) tuples
-                policies = new[] {
-                    ((string)null,    (string)null),
-                    ("patch",         (string)null),
-                    ("feature",       (string)null),
-                    ("minor",         (string)null),
-                    ("major",         "10000.0.105"),
-                    ("latestPatch",   (string)null),
+                policies = new[]
+                {
+                    ((string)null, (string)null),
+                    ("patch", (string)null),
+                    ("feature", (string)null),
+                    ("minor", (string)null),
+                    ("major", "10000.0.105"),
+                    ("latestPatch", (string)null),
                     ("latestFeature", (string)null),
-                    ("latestMinor",   (string)null),
-                    ("latestMajor",   "10000.3.100"),
-                    ("disable",       (string)null),
-                    ("invalid",       "10000.3.102-preview3"),
+                    ("latestMinor", (string)null),
+                    ("latestMajor", "10000.3.100"),
+                    ("disable", (string)null),
+                    ("invalid", "10000.3.102-preview3"),
                 };
 
                 foreach (var policy in policies)
                 {
-                    yield return new object[] {
+                    yield return new object[]
+                    {
                         policy.Item1, // policy
-                        Requested,    // requested
-                        false,        // don't allow prerelease
+                        Requested, // requested
+                        false, // don't allow prerelease
                         policy.Item2, // expected
-                        installed     // installed
+                        installed // installed
                     };
                 }
             }
@@ -1250,8 +1449,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         // The dotnet.runtimeconfig.json created uses a dummy framework version (9999.0.0)
         private void AddAvailableSdkVersions(string sdkBaseDir, params string[] availableVersions)
         {
-            string dummyRuntimeConfig = Path.Combine(RepoDirectories.TestAssetsFolder, "TestUtils",
-                "SDKLookup", "dotnet.runtimeconfig.json");
+            string dummyRuntimeConfig = Path.Combine(
+                RepoDirectories.TestAssetsFolder,
+                "TestUtils",
+                "SDKLookup",
+                "dotnet.runtimeconfig.json"
+            );
 
             foreach (string version in availableVersions)
             {
@@ -1271,17 +1474,27 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         private void CopyGlobalJson(string globalJsonFileName)
         {
             string destFile = Path.Combine(_currentWorkingDir, "global.json");
-            string srcFile = Path.Combine(RepoDirectories.TestAssetsFolder, "TestUtils",
-                "SDKLookup", globalJsonFileName);
+            string srcFile = Path.Combine(
+                RepoDirectories.TestAssetsFolder,
+                "TestUtils",
+                "SDKLookup",
+                globalJsonFileName
+            );
 
             File.Copy(srcFile, destFile, true);
         }
 
-        private static string FormatGlobalJson(string version = null, string policy = null, bool? allowPrerelease = null)
+        private static string FormatGlobalJson(
+            string version = null,
+            string policy = null,
+            bool? allowPrerelease = null
+        )
         {
             version = version == null ? "null" : string.Format("\"{0}\"", version);
             policy = policy == null ? "null" : string.Format("\"{0}\"", policy);
-            string allow = allowPrerelease.HasValue ? (allowPrerelease.Value ? "true" : "false") : "null";
+            string allow = allowPrerelease.HasValue
+                ? (allowPrerelease.Value ? "true" : "false")
+                : "null";
 
             return $@"{{ ""sdk"": {{ ""version"": {version}, ""rollForward"": {policy}, ""allowPrerelease"": {allow} }} }}";
         }

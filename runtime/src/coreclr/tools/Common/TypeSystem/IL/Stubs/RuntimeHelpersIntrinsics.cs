@@ -24,7 +24,14 @@ namespace Internal.IL.Stubs
                 ILEmitter emit = new ILEmitter();
                 ILCodeStream codeStream = emit.NewCodeStream();
                 codeStream.EmitLdArg(0);
-                codeStream.Emit(ILOpcode.ldflda, emit.NewToken(method.Context.SystemModule.GetKnownType("System.Runtime.CompilerServices", "RawData").GetField("Data")));
+                codeStream.Emit(
+                    ILOpcode.ldflda,
+                    emit.NewToken(
+                        method.Context.SystemModule
+                            .GetKnownType("System.Runtime.CompilerServices", "RawData")
+                            .GetField("Data")
+                    )
+                );
                 codeStream.EmitLdc(-method.Context.Target.PointerSize);
                 codeStream.Emit(ILOpcode.add);
                 codeStream.Emit(ILOpcode.ldind_i);
@@ -45,7 +52,9 @@ namespace Internal.IL.Stubs
             bool result;
             if (methodName == "IsReferenceOrContainsReferences")
             {
-                result = elementType.IsGCPointer || (elementType is DefType defType && defType.ContainsGCPointers);
+                result =
+                    elementType.IsGCPointer
+                    || (elementType is DefType defType && defType.ContainsGCPointers);
             }
             else if (methodName == "IsReference")
             {
@@ -76,9 +85,15 @@ namespace Internal.IL.Stubs
                         break;
                     default:
                         var mdType = elementType as MetadataType;
-                        if (mdType != null && mdType.Name == "Rune" && mdType.Namespace == "System.Text")
+                        if (
+                            mdType != null
+                            && mdType.Name == "Rune"
+                            && mdType.Namespace == "System.Text"
+                        )
                             result = true;
-                        else if (mdType != null && mdType.Name == "Char8" && mdType.Namespace == "System")
+                        else if (
+                            mdType != null && mdType.Name == "Char8" && mdType.Namespace == "System"
+                        )
                             result = true;
                         else
                             result = false;
@@ -92,7 +107,12 @@ namespace Internal.IL.Stubs
 
             ILOpcode opcode = result ? ILOpcode.ldc_i4_1 : ILOpcode.ldc_i4_0;
 
-            return new ILStubMethodIL(method, new byte[] { (byte)opcode, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), Array.Empty<object>());
+            return new ILStubMethodIL(
+                method,
+                new byte[] { (byte)opcode, (byte)ILOpcode.ret },
+                Array.Empty<LocalVariableDefinition>(),
+                Array.Empty<object>()
+            );
         }
     }
 }

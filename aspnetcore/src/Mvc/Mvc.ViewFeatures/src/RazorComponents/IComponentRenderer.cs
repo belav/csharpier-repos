@@ -14,6 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             ViewContext viewContext,
             Type componentType,
             RenderMode renderMode,
-            object parameters);
+            object parameters
+        );
     }
 }

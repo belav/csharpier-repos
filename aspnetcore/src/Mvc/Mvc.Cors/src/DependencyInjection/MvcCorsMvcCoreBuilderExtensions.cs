@@ -38,7 +38,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder AddCors(
             this IMvcCoreBuilder builder,
-            Action<CorsOptions> setupAction)
+            Action<CorsOptions> setupAction
+        )
         {
             if (builder == null)
             {
@@ -52,7 +53,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             AddCorsServices(builder.Services);
             builder.Services.Configure(setupAction);
-            
+
             return builder;
         }
 
@@ -64,7 +65,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
         public static IMvcCoreBuilder ConfigureCors(
             this IMvcCoreBuilder builder,
-            Action<CorsOptions> setupAction)
+            Action<CorsOptions> setupAction
+        )
         {
             if (builder == null)
             {
@@ -86,7 +88,11 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddCors();
 
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IApplicationModelProvider, CorsApplicationModelProvider>());
+                ServiceDescriptor.Transient<
+                    IApplicationModelProvider,
+                    CorsApplicationModelProvider
+                >()
+            );
             services.TryAddTransient<CorsAuthorizationFilter, CorsAuthorizationFilter>();
         }
     }

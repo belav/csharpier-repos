@@ -67,7 +67,6 @@ public class Test
             ret = 1;
         }
 
-
         Gen<String>.Field = "Field";
         if (Gen<String>.Field != "Field")
         {
@@ -108,6 +107,5 @@ public class Test
         }
 
         return ret;
-
     }
 }

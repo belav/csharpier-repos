@@ -15,7 +15,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         // netcoreapp-other: EphemeralKeySet
         internal static readonly X509KeyStorageFlags EphemeralIfPossible =
 #if !NO_EPHEMERALKEYSET_AVAILABLE
-            !OperatingSystem.IsMacOS() ? X509KeyStorageFlags.EphemeralKeySet :
+        !OperatingSystem.IsMacOS()
+            ? X509KeyStorageFlags.EphemeralKeySet
+            :
 #endif
             X509KeyStorageFlags.DefaultKeySet;
         //
@@ -38,14 +40,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             return new ImportedCollection(collection);
         }
 
-        public static ImportedCollection Import(byte[] rawData, string password, X509KeyStorageFlags keyStorageFlags)
+        public static ImportedCollection Import(
+            byte[] rawData,
+            string password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             collection.Import(rawData, password, keyStorageFlags);
             return new ImportedCollection(collection);
         }
 
-        public static ImportedCollection Import(ReadOnlySpan<byte> rawData, ReadOnlySpan<char> password, X509KeyStorageFlags keyStorageFlags)
+        public static ImportedCollection Import(
+            ReadOnlySpan<byte> rawData,
+            ReadOnlySpan<char> password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             collection.Import(rawData, password, keyStorageFlags);
@@ -61,14 +71,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             return new ImportedCollection(collection);
         }
 
-        public static ImportedCollection Import(string fileName, string password, X509KeyStorageFlags keyStorageFlags)
+        public static ImportedCollection Import(
+            string fileName,
+            string password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             collection.Import(fileName, password, keyStorageFlags);
             return new ImportedCollection(collection);
         }
 
-        public static ImportedCollection Import(string fileName, ReadOnlySpan<char> password, X509KeyStorageFlags keyStorageFlags)
+        public static ImportedCollection Import(
+            string fileName,
+            ReadOnlySpan<char> password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             X509Certificate2Collection collection = new X509Certificate2Collection();
             collection.Import(fileName, password, keyStorageFlags);

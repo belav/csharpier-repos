@@ -16,7 +16,6 @@ using System.Runtime.CompilerServices;
 
 namespace BigFrames
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct Struct12288 // Three pages
     {

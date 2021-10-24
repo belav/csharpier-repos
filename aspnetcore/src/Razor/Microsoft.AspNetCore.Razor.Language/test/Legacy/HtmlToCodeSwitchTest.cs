@@ -37,8 +37,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void ParsesCodeWithinSingleLineMarkup()
         {
             // TODO: Fix at a later date, HTML should be a tag block: https://github.com/aspnet/Razor/issues/101
-            ParseDocumentTest("@{@:<li>Foo @Bar Baz" + Environment.NewLine
-                         + "bork}");
+            ParseDocumentTest("@{@:<li>Foo @Bar Baz" + Environment.NewLine + "bork}");
         }
 
         [Fact]
@@ -80,45 +79,71 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         [Fact]
         public void GivesWhitespacePreceedingToCodeIfThereIsNoMarkupOnThatLine()
         {
-            ParseDocumentTest("@{   <ul>" + Environment.NewLine
-                         + "    @foreach(var p in Products) {" + Environment.NewLine
-                         + "        <li>Product: @p.Name</li>" + Environment.NewLine
-                         + "    }" + Environment.NewLine
-                         + "    </ul>}");
+            ParseDocumentTest(
+                "@{   <ul>"
+                    + Environment.NewLine
+                    + "    @foreach(var p in Products) {"
+                    + Environment.NewLine
+                    + "        <li>Product: @p.Name</li>"
+                    + Environment.NewLine
+                    + "    }"
+                    + Environment.NewLine
+                    + "    </ul>}"
+            );
         }
 
         [Fact]
         public void ParseDocumentGivesWhitespacePreceedingToCodeIfThereIsNoMarkupOnThatLine()
         {
-            ParseDocumentTest("   <ul>" + Environment.NewLine
-                            + "    @foreach(var p in Products) {" + Environment.NewLine
-                            + "        <li>Product: @p.Name</li>" + Environment.NewLine
-                            + "    }" + Environment.NewLine
-                            + "    </ul>");
+            ParseDocumentTest(
+                "   <ul>"
+                    + Environment.NewLine
+                    + "    @foreach(var p in Products) {"
+                    + Environment.NewLine
+                    + "        <li>Product: @p.Name</li>"
+                    + Environment.NewLine
+                    + "    }"
+                    + Environment.NewLine
+                    + "    </ul>"
+            );
         }
 
         [Fact]
         public void SectionContextGivesWhitespacePreceedingToCodeIfThereIsNoMarkupOnThatLine()
         {
-            ParseDocumentTest("@{@section foo {" + Environment.NewLine
-                            + "    <ul>" + Environment.NewLine
-                            + "        @foreach(var p in Products) {" + Environment.NewLine
-                            + "            <li>Product: @p.Name</li>" + Environment.NewLine
-                            + "        }" + Environment.NewLine
-                            + "    </ul>" + Environment.NewLine
-                            + "}}",
-                new[] { SectionDirective.Directive, });
+            ParseDocumentTest(
+                "@{@section foo {"
+                    + Environment.NewLine
+                    + "    <ul>"
+                    + Environment.NewLine
+                    + "        @foreach(var p in Products) {"
+                    + Environment.NewLine
+                    + "            <li>Product: @p.Name</li>"
+                    + Environment.NewLine
+                    + "        }"
+                    + Environment.NewLine
+                    + "    </ul>"
+                    + Environment.NewLine
+                    + "}}",
+                new[] { SectionDirective.Directive, }
+            );
         }
 
         [Fact]
         public void CSharpCodeParserDoesNotAcceptLeadingOrTrailingWhitespaceInDesignMode()
         {
-            ParseDocumentTest("@{   <ul>" + Environment.NewLine
-                         + "    @foreach(var p in Products) {" + Environment.NewLine
-                         + "        <li>Product: @p.Name</li>" + Environment.NewLine
-                         + "    }" + Environment.NewLine
-                         + "    </ul>}",
-                designTime: true);
+            ParseDocumentTest(
+                "@{   <ul>"
+                    + Environment.NewLine
+                    + "    @foreach(var p in Products) {"
+                    + Environment.NewLine
+                    + "        <li>Product: @p.Name</li>"
+                    + Environment.NewLine
+                    + "    }"
+                    + Environment.NewLine
+                    + "    </ul>}",
+                designTime: true
+            );
         }
 
         // Tests for "@@" escape sequence:
@@ -151,7 +176,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             ParseDocumentTest(
                 "@section Foo { <foo>@@bar</foo> }",
-                new[] { SectionDirective.Directive, });
+                new[] { SectionDirective.Directive, }
+            );
         }
 
         [Fact]
@@ -159,7 +185,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         {
             ParseDocumentTest(
                 "@section Foo { <foo>@@@@@bar</foo> }",
-                new[] { SectionDirective.Directive, });
+                new[] { SectionDirective.Directive, }
+            );
         }
     }
 }

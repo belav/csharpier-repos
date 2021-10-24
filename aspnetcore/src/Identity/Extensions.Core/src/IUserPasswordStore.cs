@@ -19,7 +19,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="passwordHash">The password hash to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        Task SetPasswordHashAsync(TUser user, string passwordHash, CancellationToken cancellationToken);
+        Task SetPasswordHashAsync(
+            TUser user,
+            string passwordHash,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Gets the password hash for the specified <paramref name="user"/>.

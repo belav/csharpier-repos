@@ -33,16 +33,23 @@ namespace System.Transactions
         /// </summary>
         public int CloneIdentifier => _cloneIdentifier;
 
-        public override int GetHashCode() => base.GetHashCode();  // Don't have anything better to do.
+        public override int GetHashCode() => base.GetHashCode(); // Don't have anything better to do.
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is TransactionTraceIdentifier transactionTraceId && Equals(transactionTraceId);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is TransactionTraceIdentifier transactionTraceId && Equals(transactionTraceId);
 
         public bool Equals(TransactionTraceIdentifier other) =>
-            _cloneIdentifier == other._cloneIdentifier &&
-            _transactionIdentifier == other._transactionIdentifier;
+            _cloneIdentifier == other._cloneIdentifier
+            && _transactionIdentifier == other._transactionIdentifier;
 
-        public static bool operator ==(TransactionTraceIdentifier left, TransactionTraceIdentifier right) => left.Equals(right);
+        public static bool operator ==(
+            TransactionTraceIdentifier left,
+            TransactionTraceIdentifier right
+        ) => left.Equals(right);
 
-        public static bool operator !=(TransactionTraceIdentifier left, TransactionTraceIdentifier right) => !left.Equals(right);
+        public static bool operator !=(
+            TransactionTraceIdentifier left,
+            TransactionTraceIdentifier right
+        ) => !left.Equals(right);
     }
 }

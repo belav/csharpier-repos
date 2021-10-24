@@ -19,14 +19,17 @@ namespace System.IO
         {
             get
             {
-                return s_isCaseSensitive ?
-                    StringComparison.Ordinal :
-                    StringComparison.OrdinalIgnoreCase;
+                return s_isCaseSensitive
+                  ? StringComparison.Ordinal
+                  : StringComparison.OrdinalIgnoreCase;
             }
         }
 
         /// <summary>Gets whether the system is case-sensitive.</summary>
-        internal static bool IsCaseSensitive { get { return s_isCaseSensitive; } }
+        internal static bool IsCaseSensitive
+        {
+            get { return s_isCaseSensitive; }
+        }
 
         /// <summary>
         /// Determines whether the file system is case sensitive.
@@ -41,8 +44,20 @@ namespace System.IO
         {
             try
             {
-                string pathWithUpperCase = Path.Combine(Path.GetTempPath(), "CASESENSITIVETEST" + Guid.NewGuid().ToString("N"));
-                using (new FileStream(pathWithUpperCase, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None, 0x1000, FileOptions.DeleteOnClose))
+                string pathWithUpperCase = Path.Combine(
+                    Path.GetTempPath(),
+                    "CASESENSITIVETEST" + Guid.NewGuid().ToString("N")
+                );
+                using (
+                    new FileStream(
+                        pathWithUpperCase,
+                        FileMode.CreateNew,
+                        FileAccess.ReadWrite,
+                        FileShare.None,
+                        0x1000,
+                        FileOptions.DeleteOnClose
+                    )
+                )
                 {
                     string lowerCased = pathWithUpperCase.ToLowerInvariant();
                     return !File.Exists(lowerCased);

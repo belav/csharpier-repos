@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 
 class ExchangeClass
-{   
+{
     static int Main(string[] args)
     {
         int rValue = 0;
@@ -44,7 +44,7 @@ public class ThreadSafe
     private KrisClass newValueA = new KrisClass(12345);
     private KrisClass newValueB = new KrisClass(67890);
     private bool success;
-    public ThreadSafe(): this(10000) { }
+    public ThreadSafe() : this(10000) { }
     public ThreadSafe(int loops)
     {
         success = true;
@@ -66,16 +66,18 @@ public class ThreadSafe
             ret = Interlocked.Exchange<KrisClass>(ref totalValue, newValueA);
 
             // Check return value
-            if (ret.ClassVal != newValueA.ClassVal && 
-                ret.ClassVal != newValueB.ClassVal &&
-                ret.ClassVal != 1)
+            if (
+                ret.ClassVal != newValueA.ClassVal
+                && ret.ClassVal != newValueB.ClassVal
+                && ret.ClassVal != 1
+            )
             {
-                Console.WriteLine(ret.ClassVal + "," + 
-                    newValueB.ClassVal + "," + newValueA.ClassVal);
+                Console.WriteLine(
+                    ret.ClassVal + "," + newValueB.ClassVal + "," + newValueA.ClassVal
+                );
                 success = false;
             }
         }
-
     }
 
     public void ThreadWorkerB()
@@ -87,12 +89,15 @@ public class ThreadSafe
             ret = Interlocked.Exchange<KrisClass>(ref totalValue, newValueB);
 
             // Check return value
-            if (ret.ClassVal != newValueA.ClassVal && 
-                ret.ClassVal != newValueB.ClassVal &&
-                ret.ClassVal != 1)
+            if (
+                ret.ClassVal != newValueA.ClassVal
+                && ret.ClassVal != newValueB.ClassVal
+                && ret.ClassVal != 1
+            )
             {
-                Console.WriteLine(ret.ClassVal + "," + 
-                    newValueB.ClassVal + "," + newValueA.ClassVal);
+                Console.WriteLine(
+                    ret.ClassVal + "," + newValueB.ClassVal + "," + newValueA.ClassVal
+                );
                 success = false;
             }
         }
@@ -105,12 +110,15 @@ public class ThreadSafe
         for (int i = 0; i < numberOfIterations; i++)
         {
             tmpVal = totalValue;
-            if (tmpVal.ClassVal != newValueB.ClassVal && 
-                tmpVal.ClassVal != newValueA.ClassVal &&
-                tmpVal.ClassVal != 1)
+            if (
+                tmpVal.ClassVal != newValueB.ClassVal
+                && tmpVal.ClassVal != newValueA.ClassVal
+                && tmpVal.ClassVal != 1
+            )
             {
-                Console.WriteLine(tmpVal.ClassVal + "," + newValueB.ClassVal + "," + 
-                    newValueA.ClassVal);
+                Console.WriteLine(
+                    tmpVal.ClassVal + "," + newValueB.ClassVal + "," + newValueA.ClassVal
+                );
                 success = false;
             }
             Thread.Sleep(0);
@@ -119,10 +127,7 @@ public class ThreadSafe
 
     public bool Pass
     {
-        get
-        {
-            return (success);
-        }
+        get { return (success); }
     }
 }
 
@@ -136,9 +141,6 @@ public class KrisClass
 
     public int ClassVal
     {
-        get
-        {
-            return retVal;
-        }
+        get { return retVal; }
     }
 }

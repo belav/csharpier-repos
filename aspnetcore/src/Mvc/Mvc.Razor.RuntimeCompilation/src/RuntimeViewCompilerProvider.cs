@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
             RazorProjectEngine razorProjectEngine,
             RuntimeCompilationFileProvider fileProvider,
             CSharpCompiler csharpCompiler,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory
+        )
         {
             _applicationPartManager = applicationPartManager;
             _razorProjectEngine = razorProjectEngine;
@@ -45,7 +46,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 ref _compiler,
                 ref _initialized,
                 ref _initializeLock,
-                _createCompiler);
+                _createCompiler
+            );
         }
 
         private IViewCompiler CreateCompiler()
@@ -58,7 +60,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 _razorProjectEngine,
                 _csharpCompiler,
                 feature.ViewDescriptors,
-                _logger);
+                _logger
+            );
         }
     }
 }

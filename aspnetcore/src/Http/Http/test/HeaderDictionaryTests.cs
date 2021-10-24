@@ -11,15 +11,16 @@ namespace Microsoft.AspNetCore.Http
 {
     public class HeaderDictionaryTests
     {
-        public static TheoryData HeaderSegmentData => new TheoryData<IEnumerable<string>>
-        {
-          new[] { "Value1", "Value2", "Value3", "Value4" },
-          new[] { "Value1", "", "Value3", "Value4" },
-          new[] { "Value1", "", "", "Value4" },
-          new[] { "Value1", "", null, "Value4" },
-          new[] { "", "", "", "" },
-          new[] { "", null, "", null },
-        };
+        public static TheoryData HeaderSegmentData =>
+            new TheoryData<IEnumerable<string>>
+            {
+                new[] { "Value1", "Value2", "Value3", "Value4" },
+                new[] { "Value1", "", "Value3", "Value4" },
+                new[] { "Value1", "", "", "Value4" },
+                new[] { "Value1", "", null, "Value4" },
+                new[] { "", "", "", "" },
+                new[] { "", null, "", null },
+            };
 
         [Fact]
         public void PropertiesAreAccessible()
@@ -28,7 +29,8 @@ namespace Microsoft.AspNetCore.Http
                 new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "Header1", "Value1" }
-                });
+                }
+            );
 
             Assert.Single(headers);
             Assert.Equal<string>(new[] { "Header1" }, headers.Keys);
@@ -45,10 +47,11 @@ namespace Microsoft.AspNetCore.Http
             var header = string.Join(",", segments);
 
             var headers = new HeaderDictionary(
-               new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
-               {
-                    { "Header1",  header},
-               });
+                new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "Header1", header },
+                }
+            );
 
             var result = headers.GetCommaSeparatedValues("Header1");
             var expectedResult = segments.Where(s => !string.IsNullOrEmpty(s));
@@ -60,10 +63,11 @@ namespace Microsoft.AspNetCore.Http
         public void EmptyQuotedHeaderSegmentsAreIgnored()
         {
             var headers = new HeaderDictionary(
-               new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
-               {
-                    { "Header1",  "Value1,\"\",,Value2" },
-               });
+                new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "Header1", "Value1,\"\",,Value2" },
+                }
+            );
 
             var result = headers.GetCommaSeparatedValues("Header1");
             Assert.Equal(new[] { "Value1", "Value2" }, result);
@@ -76,7 +80,8 @@ namespace Microsoft.AspNetCore.Http
                 new Dictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "Header1", "Value1" }
-                });
+                }
+            );
 
             headers.IsReadOnly = true;
 
@@ -95,26 +100,29 @@ namespace Microsoft.AspNetCore.Http
             headers.IsReadOnly = true;
 
             Assert.Throws<InvalidOperationException>(() => headers["header1"] = "value1");
-            Assert.Throws<InvalidOperationException>(() => ((IDictionary<string, StringValues>)headers)["header1"] = "value1");
+            Assert.Throws<InvalidOperationException>(
+                () => ((IDictionary<string, StringValues>)headers)["header1"] = "value1"
+            );
             Assert.Throws<InvalidOperationException>(() => headers.ContentLength = 12);
-            Assert.Throws<InvalidOperationException>(() => headers.Add(new KeyValuePair<string, StringValues>("header1", "value1")));
+            Assert.Throws<InvalidOperationException>(
+                () => headers.Add(new KeyValuePair<string, StringValues>("header1", "value1"))
+            );
             Assert.Throws<InvalidOperationException>(() => headers.Add("header1", "value1"));
             Assert.Throws<InvalidOperationException>(() => headers.Clear());
-            Assert.Throws<InvalidOperationException>(() => headers.Remove(new KeyValuePair<string, StringValues>("header1", "value1")));
+            Assert.Throws<InvalidOperationException>(
+                () => headers.Remove(new KeyValuePair<string, StringValues>("header1", "value1"))
+            );
             Assert.Throws<InvalidOperationException>(() => headers.Remove("header1"));
         }
 
         [Fact]
         public void GetCommaSeparatedValues_WorksForUnquotedHeaderValuesEndingWithSpace()
         {
-            var headers = new HeaderDictionary
-            {
-                { "Via", "value " },
-            };
+            var headers = new HeaderDictionary { { "Via", "value " }, };
 
             var result = headers.GetCommaSeparatedValues("Via");
 
-            Assert.Equal(new[]{"value "}, result);
+            Assert.Equal(new[] { "value " }, result);
         }
     }
 }

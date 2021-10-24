@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol intPtrType,
             TypeSymbol voidReturnTypeOpt,
             int parameterCount,
-            BitVector byRefParameters)
-            : base(name, parameterCount, returnsVoid: (object)voidReturnTypeOpt != null)
+            BitVector byRefParameters
+        ) : base(name, parameterCount, returnsVoid: (object)voidReturnTypeOpt != null)
         {
             _containingSymbol = containingSymbol;
             _constructor = new DelegateConstructor(this, objectType, intPtrType);
@@ -64,10 +64,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
-            return
-                (name == _constructor.Name) ? ImmutableArray.Create<Symbol>(_constructor) :
-                (name == _invoke.Name) ? ImmutableArray.Create<Symbol>(_invoke) :
-                ImmutableArray<Symbol>.Empty;
+            return (name == _constructor.Name)
+              ? ImmutableArray.Create<Symbol>(_constructor)
+              : (name == _invoke.Name)
+                  ? ImmutableArray.Create<Symbol>(_invoke)
+                  : ImmutableArray<Symbol>.Empty;
         }
 
         public override Accessibility DeclaredAccessibility
@@ -80,8 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return true; }
         }
 
-        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics
-            => ContainingAssembly.GetSpecialType(SpecialType.System_MulticastDelegate);
+        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+            ContainingAssembly.GetSpecialType(SpecialType.System_MulticastDelegate);
 
         public sealed override bool AreLocalsZeroed
         {
@@ -95,12 +96,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             private readonly ImmutableArray<ParameterSymbol> _parameters;
 
-            public DelegateConstructor(NamedTypeSymbol containingType, TypeSymbol objectType, TypeSymbol intPtrType)
-                : base(containingType)
+            public DelegateConstructor(
+                NamedTypeSymbol containingType,
+                TypeSymbol objectType,
+                TypeSymbol intPtrType
+            ) : base(containingType)
             {
                 _parameters = ImmutableArray.Create<ParameterSymbol>(
-                   SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(objectType), 0, RefKind.None, "object"),
-                   SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(intPtrType), 1, RefKind.None, "method"));
+                    SynthesizedParameterSymbol.Create(
+                        this,
+                        TypeWithAnnotations.Create(objectType),
+                        0,
+                        RefKind.None,
+                        "object"
+                    ),
+                    SynthesizedParameterSymbol.Create(
+                        this,
+                        TypeWithAnnotations.Create(intPtrType),
+                        1,
+                        RefKind.None,
+                        "method"
+                    )
+                );
             }
 
             public override ImmutableArray<ParameterSymbol> Parameters
@@ -115,7 +132,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             private readonly TypeSymbol _containingType;
             private readonly TypeSymbol _returnType;
 
-            internal InvokeMethod(SynthesizedDelegateSymbol containingType, BitVector byRefParameters, TypeSymbol voidReturnTypeOpt)
+            internal InvokeMethod(
+                SynthesizedDelegateSymbol containingType,
+                BitVector byRefParameters,
+                TypeSymbol voidReturnTypeOpt
+            )
             {
                 var typeParams = containingType.TypeParameters;
 
@@ -124,13 +145,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // if we are given Void type the method returns Void, otherwise its return type is the last type parameter of the delegate:
                 _returnType = voidReturnTypeOpt ?? typeParams.Last();
 
-                var parameters = new ParameterSymbol[typeParams.Length - ((object)voidReturnTypeOpt != null ? 0 : 1)];
+                var parameters = new ParameterSymbol[
+                    typeParams.Length - ((object)voidReturnTypeOpt != null ? 0 : 1)
+                ];
                 for (int i = 0; i < parameters.Length; i++)
                 {
                     // we don't need to distinguish between out and ref since this is an internal synthesized symbol:
-                    var refKind = !byRefParameters.IsNull && byRefParameters[i] ? RefKind.Ref : RefKind.None;
+                    var refKind =
+                        !byRefParameters.IsNull && byRefParameters[i] ? RefKind.Ref : RefKind.None;
 
-                    parameters[i] = SynthesizedParameterSymbol.Create(this, TypeWithAnnotations.Create(typeParams[i]), i, refKind);
+                    parameters[i] = SynthesizedParameterSymbol.Create(
+                        this,
+                        TypeWithAnnotations.Create(typeParams[i]),
+                        i,
+                        refKind
+                    );
                 }
 
                 _parameters = parameters.AsImmutableOrNull();
@@ -141,22 +170,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return WellKnownMemberNames.DelegateInvokeName; }
             }
 
-            internal override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
+            internal override bool IsMetadataNewSlot(
+                bool ignoreInterfaceImplementationChanges = false
+            )
             {
                 return true;
             }
 
-            internal override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+            internal override bool IsMetadataVirtual(
+                bool ignoreInterfaceImplementationChanges = false
+            )
             {
                 return true;
             }
 
             internal override bool IsMetadataFinal
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override MethodKind MethodKind
@@ -239,9 +269,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { return TypeWithAnnotations.Create(_returnType); }
             }
 
-            public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+            public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+                FlowAnalysisAnnotations.None;
 
-            public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+            public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+                ImmutableHashSet<string>.Empty;
 
             public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations
             {
@@ -302,7 +334,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 get
                 {
-                    // Invoke method of a delegate used in a dynamic call-site must be public 
+                    // Invoke method of a delegate used in a dynamic call-site must be public
                     // since the DLR looks only for public Invoke methods:
                     return Accessibility.Public;
                 }

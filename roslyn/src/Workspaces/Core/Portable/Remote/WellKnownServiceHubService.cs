@@ -16,7 +16,6 @@ namespace Microsoft.CodeAnalysis.Remote
         // obsolete: RemoteLanguageServer = 7,
         IntelliCode = 8,
         Razor = 9,
-
         // owned by Unit Testing team:
         UnitTestingAnalysisService = 10,
         LiveUnitTestingBuildService = 11,

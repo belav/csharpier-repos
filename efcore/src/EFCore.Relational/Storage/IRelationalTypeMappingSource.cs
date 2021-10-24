@@ -107,6 +107,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? rowVersion = null,
             bool? fixedLength = null,
             int? precision = null,
-            int? scale = null);
+            int? scale = null
+        );
     }
 }

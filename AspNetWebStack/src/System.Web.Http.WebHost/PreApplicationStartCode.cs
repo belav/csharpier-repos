@@ -19,7 +19,6 @@ namespace System.Web.Http.WebHost
                 return;
             }
             _startWasCalled = true;
-
             // We need to keep this for App-Compat reasons. Prior to 4.5 we registered a module here.
         }
     }

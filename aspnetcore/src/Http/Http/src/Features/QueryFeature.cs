@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Http.Features
     public class QueryFeature : IQueryFeature
     {
         // Lambda hoisted to static readonly field to improve inlining https://github.com/dotnet/roslyn/issues/13624
-        private readonly static Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature = f => null;
+        private readonly static Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature =
+            f => null;
 
         private FeatureReferences<IHttpRequestFeature> _features;
 
@@ -65,7 +66,10 @@ namespace Microsoft.AspNetCore.Http.Features
                 }
 
                 var current = HttpRequestFeature.QueryString;
-                if (_parsedValues == null || !string.Equals(_original, current, StringComparison.Ordinal))
+                if (
+                    _parsedValues == null
+                    || !string.Equals(_original, current, StringComparison.Ordinal)
+                )
                 {
                     _original = current;
 

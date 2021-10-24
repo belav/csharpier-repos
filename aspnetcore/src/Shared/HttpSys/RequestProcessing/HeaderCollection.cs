@@ -14,30 +14,49 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
     internal class HeaderCollection : IHeaderDictionary
     {
         // https://tools.ietf.org/html/rfc7230#section-4.1.2
-        internal static readonly HashSet<string> DisallowedTrailers = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
+        internal static readonly HashSet<string> DisallowedTrailers = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        ) {
             // Message framing headers.
-            HeaderNames.TransferEncoding, HeaderNames.ContentLength,
-
+            HeaderNames.TransferEncoding,
+            HeaderNames.ContentLength,
             // Routing headers.
             HeaderNames.Host,
-
             // Request modifiers: controls and conditionals.
             // rfc7231#section-5.1: Controls.
-            HeaderNames.CacheControl, HeaderNames.Expect, HeaderNames.MaxForwards, HeaderNames.Pragma, HeaderNames.Range, HeaderNames.TE,
-
+            HeaderNames.CacheControl,
+            HeaderNames.Expect,
+            HeaderNames.MaxForwards,
+            HeaderNames.Pragma,
+            HeaderNames.Range,
+            HeaderNames.TE,
             // rfc7231#section-5.2: Conditionals.
-            HeaderNames.IfMatch, HeaderNames.IfNoneMatch, HeaderNames.IfModifiedSince, HeaderNames.IfUnmodifiedSince, HeaderNames.IfRange,
-
+            HeaderNames.IfMatch,
+            HeaderNames.IfNoneMatch,
+            HeaderNames.IfModifiedSince,
+            HeaderNames.IfUnmodifiedSince,
+            HeaderNames.IfRange,
             // Authentication headers.
-            HeaderNames.WWWAuthenticate, HeaderNames.Authorization, HeaderNames.ProxyAuthenticate, HeaderNames.ProxyAuthorization, HeaderNames.SetCookie, HeaderNames.Cookie,
-
+            HeaderNames.WWWAuthenticate,
+            HeaderNames.Authorization,
+            HeaderNames.ProxyAuthenticate,
+            HeaderNames.ProxyAuthorization,
+            HeaderNames.SetCookie,
+            HeaderNames.Cookie,
             // Response control data.
             // rfc7231#section-7.1: Control Data.
-            HeaderNames.Age, HeaderNames.Expires, HeaderNames.Date, HeaderNames.Location, HeaderNames.RetryAfter, HeaderNames.Vary, HeaderNames.Warning,
-
+            HeaderNames.Age,
+            HeaderNames.Expires,
+            HeaderNames.Date,
+            HeaderNames.Location,
+            HeaderNames.RetryAfter,
+            HeaderNames.Vary,
+            HeaderNames.Warning,
             // Content-Encoding, Content-Type, Content-Range, and Trailer itself.
-            HeaderNames.ContentEncoding, HeaderNames.ContentType, HeaderNames.ContentRange, HeaderNames.Trailer
+            HeaderNames.ContentEncoding,
+            HeaderNames.ContentType,
+            HeaderNames.ContentRange,
+            HeaderNames.Trailer
         };
 
         // Should this instance check for prohibited trailers?
@@ -125,9 +144,14 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                     return _contentLength;
                 }
 
-                if (rawValue.Count == 1 &&
-                    !string.IsNullOrWhiteSpace(rawValue[0]) &&
-                    HeaderUtilities.TryParseNonNegativeInt64(new StringSegment(rawValue[0]).Trim(), out value))
+                if (
+                    rawValue.Count == 1
+                    && !string.IsNullOrWhiteSpace(rawValue[0])
+                    && HeaderUtilities.TryParseNonNegativeInt64(
+                        new StringSegment(rawValue[0]).Trim(),
+                        out value
+                    )
+                )
                 {
                     _contentLengthText = rawValue;
                     _contentLength = value;
@@ -145,7 +169,11 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 {
                     if (value.Value < 0)
                     {
-                        throw new ArgumentOutOfRangeException("value", value.Value, "Cannot be negative.");
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            value.Value,
+                            "Cannot be negative."
+                        );
                     }
                     _contentLengthText = HeaderUtilities.FormatNonNegativeInt64(value.Value);
                     this[HttpKnownHeaderNames.ContentLength] = _contentLengthText;
@@ -253,10 +281,14 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
             {
                 if (_checkTrailers)
                 {
-                    throw new InvalidOperationException("The response trailers cannot be modified because the response has already completed. "
-                        + "If this is a Content-Length response then you need to call HttpResponse.DeclareTrailer before starting the body.");
+                    throw new InvalidOperationException(
+                        "The response trailers cannot be modified because the response has already completed. "
+                            + "If this is a Content-Length response then you need to call HttpResponse.DeclareTrailer before starting the body."
+                    );
                 }
-                throw new InvalidOperationException("The response headers cannot be modified because the response has already started.");
+                throw new InvalidOperationException(
+                    "The response headers cannot be modified because the response has already started."
+                );
             }
         }
 
@@ -276,7 +308,13 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
                 {
                     if (ch < 0x20)
                     {
-                        throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "Invalid control character in header: 0x{0:X2}", (byte)ch));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                "Invalid control character in header: 0x{0:X2}",
+                                (byte)ch
+                            )
+                        );
                     }
                 }
             }
@@ -286,7 +324,9 @@ namespace Microsoft.AspNetCore.HttpSys.Internal
         {
             if (_checkTrailers && DisallowedTrailers.Contains(key))
             {
-                throw new InvalidOperationException($"The '{key}' header is not allowed in HTTP trailers.");
+                throw new InvalidOperationException(
+                    $"The '{key}' header is not allowed in HTTP trailers."
+                );
             }
         }
     }

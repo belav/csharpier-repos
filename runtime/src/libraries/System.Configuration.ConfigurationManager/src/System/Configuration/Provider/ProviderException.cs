@@ -6,22 +6,19 @@ using System.Runtime.Serialization;
 namespace System.Configuration.Provider
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class ProviderException : Exception
     {
         public ProviderException() { }
 
-        public ProviderException(string message)
-            : base(message)
-        { }
+        public ProviderException(string message) : base(message) { }
 
         public ProviderException(string message, Exception innerException)
-            : base(message, innerException)
-        { }
+            : base(message, innerException) { }
 
         protected ProviderException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

@@ -89,7 +89,11 @@ namespace System
         {
             if (s_environment == null)
             {
-                Interlocked.CompareExchange(ref s_environment, GetSystemEnvironmentVariables(), null);
+                Interlocked.CompareExchange(
+                    ref s_environment,
+                    GetSystemEnvironmentVariables(),
+                    null
+                );
             }
         }
 
@@ -107,7 +111,6 @@ namespace System
 
             return results;
         }
-
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern string internalGetEnvironmentVariable_native(IntPtr variable);

@@ -19,8 +19,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             BoundAttributeDescriptor[] attributeDescriptors,
             AllowedChildTagDescriptor[] allowedChildTags,
             Dictionary<string, string> metadata,
-            RazorDiagnostic[] diagnostics) 
-            : base(kind)
+            RazorDiagnostic[] diagnostics
+        ) : base(kind)
         {
             Name = name;
             AssemblyName = assemblyName;

@@ -31,7 +31,11 @@ namespace System.Xml.Xsl.XsltOld
             switch (mainNode.NodeType)
             {
                 case XmlNodeType.Element:
-                    _writer.WriteStartElement(mainNode.Prefix, mainNode.LocalName, mainNode.NamespaceURI);
+                    _writer.WriteStartElement(
+                        mainNode.Prefix,
+                        mainNode.LocalName,
+                        mainNode.NamespaceURI
+                    );
 
                     WriteAttributes(record.AttributeList, record.AttributeCount);
 
@@ -96,7 +100,12 @@ namespace System.Xml.Xsl.XsltOld
             {
                 Debug.Assert(list[attrib] is BuilderInfo);
                 BuilderInfo attribute = (BuilderInfo)list[attrib]!;
-                _writer.WriteAttributeString(attribute.Prefix, attribute.LocalName, attribute.NamespaceURI, attribute.Value);
+                _writer.WriteAttributeString(
+                    attribute.Prefix,
+                    attribute.LocalName,
+                    attribute.NamespaceURI,
+                    attribute.Value
+                );
             }
         }
     }

@@ -2823,7 +2823,6 @@ public class Test
     }
     static int Main()
     {
-
         (new Test()).RunTest0_Inline();
 
         (new Test()).RunTest1_Inline();
@@ -3626,11 +3625,7 @@ public class Test
 
         (new Test()).RunTest400_Inline();
         return 100;
-
     }
-
-
-
 }
 
 

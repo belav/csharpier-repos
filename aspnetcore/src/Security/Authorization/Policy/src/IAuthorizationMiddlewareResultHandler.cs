@@ -18,6 +18,11 @@ namespace Microsoft.AspNetCore.Authorization
         /// <param name="context">The <see cref="HttpContext"/>.</param>
         /// <param name="policy">The <see cref="AuthorizationPolicy"/> for the resource.</param>
         /// <param name="authorizeResult">The result of authorization.</param>
-        Task HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult);
+        Task HandleAsync(
+            RequestDelegate next,
+            HttpContext context,
+            AuthorizationPolicy policy,
+            PolicyAuthorizationResult authorizeResult
+        );
     }
 }

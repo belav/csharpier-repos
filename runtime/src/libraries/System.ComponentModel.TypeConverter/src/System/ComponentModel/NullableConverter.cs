@@ -53,7 +53,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value to the converter's underlying simple type or a null.
         /// </summary>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value == null || value.GetType() == UnderlyingType)
             {
@@ -95,14 +99,23 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value object to the destination type.
         /// </summary>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
             }
 
-            if (destinationType == UnderlyingType && value != null && NullableType.IsInstanceOfType(value))
+            if (
+                destinationType == UnderlyingType
+                && value != null
+                && NullableType.IsInstanceOfType(value)
+            )
             {
                 return value;
             }
@@ -129,8 +142,11 @@ namespace System.ComponentModel
         }
 
         [DynamicDependency(DynamicallyAccessedMemberTypes.PublicConstructors, typeof(Nullable<>))]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "The Nullable<T> ctor will be preserved by the DynamicDependency.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "The Nullable<T> ctor will be preserved by the DynamicDependency."
+        )]
         private ConstructorInfo GetNullableConstructor()
         {
             return NullableType.GetConstructor(new Type[] { UnderlyingType })!;
@@ -138,7 +154,10 @@ namespace System.ComponentModel
 
         /// <summary>
         /// </summary>
-        public override object CreateInstance(ITypeDescriptorContext context, IDictionary propertyValues)
+        public override object CreateInstance(
+            ITypeDescriptorContext context,
+            IDictionary propertyValues
+        )
         {
             if (UnderlyingTypeConverter != null)
             {
@@ -168,8 +187,15 @@ namespace System.ComponentModel
         /// Gets a collection of properties for the type of array specified by the value
         /// parameter using the specified context and attributes.
         /// </summary>
-        [RequiresUnreferencedCode("The Type of value cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+        [RequiresUnreferencedCode(
+            "The Type of value cannot be statically discovered. "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
             if (UnderlyingTypeConverter != null)
             {
@@ -200,7 +226,9 @@ namespace System.ComponentModel
         {
             if (UnderlyingTypeConverter != null)
             {
-                StandardValuesCollection values = UnderlyingTypeConverter.GetStandardValues(context);
+                StandardValuesCollection values = UnderlyingTypeConverter.GetStandardValues(
+                    context
+                );
                 if (GetStandardValuesSupported(context) && values != null)
                 {
                     // Create a set of standard values around nullable instances.

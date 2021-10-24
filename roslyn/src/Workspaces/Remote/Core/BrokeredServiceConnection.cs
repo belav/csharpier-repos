@@ -36,8 +36,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 Service = service;
             }
 
-            public void Dispose()
-                => _proxyRental.Dispose();
+            public void Dispose() => _proxyRental.Dispose();
         }
 
         private readonly IErrorReportingService? _errorReportingService;
@@ -56,9 +55,12 @@ namespace Microsoft.CodeAnalysis.Remote
             ServiceBrokerClient serviceBrokerClient,
             SolutionAssetStorage solutionAssetStorage,
             IErrorReportingService? errorReportingService,
-            IRemoteHostClientShutdownCancellationService? shutdownCancellationService)
+            IRemoteHostClientShutdownCancellationService? shutdownCancellationService
+        )
         {
-            Contract.ThrowIfFalse((callbackDispatcher == null) == (serviceDescriptor.ClientInterface == null));
+            Contract.ThrowIfFalse(
+                (callbackDispatcher == null) == (serviceDescriptor.ClientInterface == null)
+            );
 
             _serviceDescriptor = serviceDescriptor;
             _serviceBrokerClient = serviceBrokerClient;
@@ -79,12 +81,11 @@ namespace Microsoft.CodeAnalysis.Remote
             // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses ConfigureAwait(true)
             await TaskScheduler.Default;
 
-            var options = new ServiceActivationOptions
-            {
-                ClientRpcTarget = _callbackDispatcher
-            };
+            var options = new ServiceActivationOptions { ClientRpcTarget = _callbackDispatcher };
 
-            var proxyRental = await _serviceBrokerClient.GetProxyAsync<TService>(_serviceDescriptor, options, cancellationToken).ConfigureAwait(false);
+            var proxyRental = await _serviceBrokerClient
+                .GetProxyAsync<TService>(_serviceDescriptor, options, cancellationToken)
+                .ConfigureAwait(false);
             var service = proxyRental.Proxy;
             Contract.ThrowIfNull(service);
             return new Rental(proxyRental, service);
@@ -92,7 +93,10 @@ namespace Microsoft.CodeAnalysis.Remote
 
         // no solution, no callback
 
-        public override async ValueTask<bool> TryInvokeAsync(Func<TService, CancellationToken, ValueTask> invocation, CancellationToken cancellationToken)
+        public override async ValueTask<bool> TryInvokeAsync(
+            Func<TService, CancellationToken, ValueTask> invocation,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -100,21 +104,26 @@ namespace Microsoft.CodeAnalysis.Remote
                 await invocation(rental.Service, cancellationToken).ConfigureAwait(false);
                 return true;
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return false;
             }
         }
 
-        public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(Func<TService, CancellationToken, ValueTask<TResult>> invocation, CancellationToken cancellationToken)
+        public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(
+            Func<TService, CancellationToken, ValueTask<TResult>> invocation,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
                 return await invocation(rental.Service, cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return default;
@@ -124,14 +133,22 @@ namespace Microsoft.CodeAnalysis.Remote
         public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(
             Func<TService, PipeWriter, CancellationToken, ValueTask> invocation,
             Func<PipeReader, CancellationToken, ValueTask<TResult>> reader,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
-                return await InvokeStreamingServiceAsync(rental.Service, invocation, reader, cancellationToken).ConfigureAwait(false);
+                return await InvokeStreamingServiceAsync(
+                        rental.Service,
+                        invocation,
+                        reader,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return default;
@@ -140,33 +157,48 @@ namespace Microsoft.CodeAnalysis.Remote
 
         // no solution, callback
 
-        public override async ValueTask<bool> TryInvokeAsync(Func<TService, RemoteServiceCallbackId, CancellationToken, ValueTask> invocation, CancellationToken cancellationToken)
+        public override async ValueTask<bool> TryInvokeAsync(
+            Func<TService, RemoteServiceCallbackId, CancellationToken, ValueTask> invocation,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(_callbackDispatcher is not null);
 
             try
             {
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
-                await invocation(rental.Service, _callbackHandle.Id, cancellationToken).ConfigureAwait(false);
+                await invocation(rental.Service, _callbackHandle.Id, cancellationToken)
+                    .ConfigureAwait(false);
                 return true;
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return false;
             }
         }
 
-        public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(Func<TService, RemoteServiceCallbackId, CancellationToken, ValueTask<TResult>> invocation, CancellationToken cancellationToken)
+        public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(
+            Func<
+                TService,
+                RemoteServiceCallbackId,
+                CancellationToken,
+                ValueTask<TResult>
+            > invocation,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(_callbackDispatcher is not null);
 
             try
             {
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
-                return await invocation(rental.Service, _callbackHandle.Id, cancellationToken).ConfigureAwait(false);
+                return await invocation(rental.Service, _callbackHandle.Id, cancellationToken)
+                    .ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return default;
@@ -175,31 +207,47 @@ namespace Microsoft.CodeAnalysis.Remote
 
         // solution, no callback
 
-        public override async ValueTask<bool> TryInvokeAsync(Solution solution, Func<TService, PinnedSolutionInfo, CancellationToken, ValueTask> invocation, CancellationToken cancellationToken)
+        public override async ValueTask<bool> TryInvokeAsync(
+            Solution solution,
+            Func<TService, PinnedSolutionInfo, CancellationToken, ValueTask> invocation,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                using var scope = await _solutionAssetStorage.StoreAssetsAsync(solution, cancellationToken).ConfigureAwait(false);
+                using var scope = await _solutionAssetStorage
+                    .StoreAssetsAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
-                await invocation(rental.Service, scope.SolutionInfo, cancellationToken).ConfigureAwait(false);
+                await invocation(rental.Service, scope.SolutionInfo, cancellationToken)
+                    .ConfigureAwait(false);
                 return true;
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return false;
             }
         }
 
-        public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(Solution solution, Func<TService, PinnedSolutionInfo, CancellationToken, ValueTask<TResult>> invocation, CancellationToken cancellationToken)
+        public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(
+            Solution solution,
+            Func<TService, PinnedSolutionInfo, CancellationToken, ValueTask<TResult>> invocation,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                using var scope = await _solutionAssetStorage.StoreAssetsAsync(solution, cancellationToken).ConfigureAwait(false);
+                using var scope = await _solutionAssetStorage
+                    .StoreAssetsAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
-                return await invocation(rental.Service, scope.SolutionInfo, cancellationToken).ConfigureAwait(false);
+                return await invocation(rental.Service, scope.SolutionInfo, cancellationToken)
+                    .ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return default;
@@ -210,19 +258,26 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             Func<TService, PinnedSolutionInfo, PipeWriter, CancellationToken, ValueTask> invocation,
             Func<PipeReader, CancellationToken, ValueTask<TResult>> reader,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                using var scope = await _solutionAssetStorage.StoreAssetsAsync(solution, cancellationToken).ConfigureAwait(false);
+                using var scope = await _solutionAssetStorage
+                    .StoreAssetsAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
                 return await InvokeStreamingServiceAsync(
-                    rental.Service,
-                    (service, pipeWriter, cancellationToken) => invocation(service, scope.SolutionInfo, pipeWriter, cancellationToken),
-                    reader,
-                    cancellationToken).ConfigureAwait(false);
+                        rental.Service,
+                        (service, pipeWriter, cancellationToken) =>
+                            invocation(service, scope.SolutionInfo, pipeWriter, cancellationToken),
+                        reader,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return default;
@@ -231,36 +286,74 @@ namespace Microsoft.CodeAnalysis.Remote
 
         // solution, callback
 
-        public override async ValueTask<bool> TryInvokeAsync(Solution solution, Func<TService, PinnedSolutionInfo, RemoteServiceCallbackId, CancellationToken, ValueTask> invocation, CancellationToken cancellationToken)
+        public override async ValueTask<bool> TryInvokeAsync(
+            Solution solution,
+            Func<
+                TService,
+                PinnedSolutionInfo,
+                RemoteServiceCallbackId,
+                CancellationToken,
+                ValueTask
+            > invocation,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(_callbackDispatcher is not null);
 
             try
             {
-                using var scope = await _solutionAssetStorage.StoreAssetsAsync(solution, cancellationToken).ConfigureAwait(false);
+                using var scope = await _solutionAssetStorage
+                    .StoreAssetsAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
-                await invocation(rental.Service, scope.SolutionInfo, _callbackHandle.Id, cancellationToken).ConfigureAwait(false);
+                await invocation(
+                        rental.Service,
+                        scope.SolutionInfo,
+                        _callbackHandle.Id,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return true;
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return false;
             }
         }
 
-        public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(Solution solution, Func<TService, PinnedSolutionInfo, RemoteServiceCallbackId, CancellationToken, ValueTask<TResult>> invocation, CancellationToken cancellationToken)
+        public override async ValueTask<Optional<TResult>> TryInvokeAsync<TResult>(
+            Solution solution,
+            Func<
+                TService,
+                PinnedSolutionInfo,
+                RemoteServiceCallbackId,
+                CancellationToken,
+                ValueTask<TResult>
+            > invocation,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(_callbackDispatcher is not null);
 
             try
             {
-                using var scope = await _solutionAssetStorage.StoreAssetsAsync(solution, cancellationToken).ConfigureAwait(false);
+                using var scope = await _solutionAssetStorage
+                    .StoreAssetsAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
                 using var rental = await RentServiceAsync(cancellationToken).ConfigureAwait(false);
-                return await invocation(rental.Service, scope.SolutionInfo, _callbackHandle.Id, cancellationToken).ConfigureAwait(false);
+                return await invocation(
+                        rental.Service,
+                        scope.SolutionInfo,
+                        _callbackHandle.Id,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
-            catch (Exception exception) when (ReportUnexpectedException(exception, cancellationToken))
+            catch (Exception exception)
+                when (ReportUnexpectedException(exception, cancellationToken))
             {
                 OnUnexpectedException(exception, cancellationToken);
                 return default;
@@ -277,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Remote
             TService service,
             Func<TService, PipeWriter, CancellationToken, ValueTask> invocation,
             Func<PipeReader, CancellationToken, ValueTask<TResult>> reader,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We can cancel at entry, but once the pipe operations are scheduled we rely on both operations running to
             // avoid deadlocks (the exception handler in 'writerTask' ensures progress is made in 'readerTask').
@@ -304,27 +398,31 @@ namespace Microsoft.CodeAnalysis.Remote
             // Create new tasks that both start executing, rather than invoking the delegates directly
             // to make sure both invocation and reader start executing and transfering data.
 
-            var writerTask = Task.Run(async () =>
-            {
-                try
+            var writerTask = Task.Run(
+                async () =>
                 {
-                    await invocation(service, pipe.Writer, cancellationToken).ConfigureAwait(false);
-                }
-                catch (Exception e)
-                {
-                    // Make sure the reader is aware of a cancellation request before completing the writer. Otherwise,
-                    // the reader could attempt to read past the end of a completed stream without realizing that
-                    // cancellation is expected.
-                    readerCancellationSource.Cancel();
+                    try
+                    {
+                        await invocation(service, pipe.Writer, cancellationToken)
+                            .ConfigureAwait(false);
+                    }
+                    catch (Exception e)
+                    {
+                        // Make sure the reader is aware of a cancellation request before completing the writer. Otherwise,
+                        // the reader could attempt to read past the end of a completed stream without realizing that
+                        // cancellation is expected.
+                        readerCancellationSource.Cancel();
 
-                    // Ensure that the writer is complete if an exception is thrown
-                    // before the writer is passed to the RPC proxy. Once it's passed to the proxy 
-                    // the proxy should complete it as soon as the remote side completes it.
-                    await pipe.Writer.CompleteAsync(e).ConfigureAwait(false);
+                        // Ensure that the writer is complete if an exception is thrown
+                        // before the writer is passed to the RPC proxy. Once it's passed to the proxy
+                        // the proxy should complete it as soon as the remote side completes it.
+                        await pipe.Writer.CompleteAsync(e).ConfigureAwait(false);
 
-                    throw;
-                }
-            }, mustNotCancelToken);
+                        throw;
+                    }
+                },
+                mustNotCancelToken
+            );
 
             var readerTask = Task.Run(
                 async () =>
@@ -333,7 +431,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     try
                     {
-                        return await reader(pipe.Reader, readerCancellationSource.Token).ConfigureAwait(false);
+                        return await reader(pipe.Reader, readerCancellationSource.Token)
+                            .ConfigureAwait(false);
                     }
                     catch (Exception e) when ((exception = e) == null)
                     {
@@ -343,14 +442,19 @@ namespace Microsoft.CodeAnalysis.Remote
                     {
                         await pipe.Reader.CompleteAsync(exception).ConfigureAwait(false);
                     }
-                }, readerCancellationSource.Token);
+                },
+                readerCancellationSource.Token
+            );
 
             await Task.WhenAll(writerTask, readerTask).ConfigureAwait(false);
 
             return readerTask.Result;
         }
 
-        private bool ReportUnexpectedException(Exception exception, CancellationToken cancellationToken)
+        private bool ReportUnexpectedException(
+            Exception exception,
+            CancellationToken cancellationToken
+        )
         {
             if (exception is OperationCanceledException)
             {
@@ -369,17 +473,24 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             // report telemetry event:
-            Logger.Log(FunctionId.FeatureNotAvailable, $"{_serviceDescriptor.Moniker}: {exception.GetType()}: {exception.Message}");
+            Logger.Log(
+                FunctionId.FeatureNotAvailable,
+                $"{_serviceDescriptor.Moniker}: {exception.GetType()}: {exception.Message}"
+            );
 
             return FatalError.ReportAndCatch(exception);
         }
 
-        private bool IsHostShuttingDown
-            => _shutdownCancellationService?.ShutdownToken.IsCancellationRequested == true;
+        private bool IsHostShuttingDown =>
+            _shutdownCancellationService?.ShutdownToken.IsCancellationRequested == true;
 
         // TODO: we need https://github.com/microsoft/vs-streamjsonrpc/issues/468 to be implemented in order to check for IOException subtypes.
-        private static bool IsRemoteIOException(Exception exception)
-            => exception is RemoteInvocationException { ErrorData: CommonErrorData { TypeName: "System.IO.IOException" } };
+        private static bool IsRemoteIOException(Exception exception) =>
+            exception
+                is RemoteInvocationException
+                {
+                    ErrorData: CommonErrorData { TypeName: "System.IO.IOException" }
+                };
 
         private void OnUnexpectedException(Exception exception, CancellationToken cancellationToken)
         {
@@ -402,7 +513,7 @@ namespace Microsoft.CodeAnalysis.Remote
 
             // We expect all RPC calls to complete and not drop the connection.
             // ConnectionLostException indicates a bug that is likely thrown because the remote process crashed.
-            // Currently, ConnectionLostException is also throw when the result of the RPC method fails to serialize 
+            // Currently, ConnectionLostException is also throw when the result of the RPC method fails to serialize
             // (see https://github.com/microsoft/vs-streamjsonrpc/issues/549)
 
             string message;
@@ -411,15 +522,26 @@ namespace Microsoft.CodeAnalysis.Remote
 
             if (IsRemoteIOException(exception))
             {
-                message = string.Format(RemoteWorkspacesResources.Feature_0_is_currently_unavailable_due_to_an_intermittent_error, featureName, exception.Message);
+                message = string.Format(
+                    RemoteWorkspacesResources.Feature_0_is_currently_unavailable_due_to_an_intermittent_error,
+                    featureName,
+                    exception.Message
+                );
             }
             else if (IsHostShuttingDown)
             {
-                message = string.Format(RemoteWorkspacesResources.Feature_0_is_currently_unavailable_host_shutting_down, featureName, _errorReportingService.HostDisplayName);
+                message = string.Format(
+                    RemoteWorkspacesResources.Feature_0_is_currently_unavailable_host_shutting_down,
+                    featureName,
+                    _errorReportingService.HostDisplayName
+                );
             }
             else
             {
-                message = string.Format(RemoteWorkspacesResources.Feature_0_is_currently_unavailable_due_to_an_internal_error, featureName);
+                message = string.Format(
+                    RemoteWorkspacesResources.Feature_0_is_currently_unavailable_due_to_an_internal_error,
+                    featureName
+                );
                 internalException = exception;
             }
 

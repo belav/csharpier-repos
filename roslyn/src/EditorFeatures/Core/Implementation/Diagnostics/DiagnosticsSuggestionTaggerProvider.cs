@@ -24,11 +24,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
     [ContentType(ContentTypeNames.RoslynContentType)]
     [ContentType(ContentTypeNames.XamlContentType)]
     [TagType(typeof(IErrorTag))]
-    internal partial class DiagnosticsSuggestionTaggerProvider :
-        AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>
+    internal partial class DiagnosticsSuggestionTaggerProvider
+        : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>
     {
         private static readonly IEnumerable<Option2<bool>> s_tagSourceOptions =
-            ImmutableArray.Create(EditorComponentOnOffOptions.Tagger, InternalFeatureOnOffOptions.Squiggles, ServiceComponentOnOffOptions.DiagnosticProvider);
+            ImmutableArray.Create(
+                EditorComponentOnOffOptions.Tagger,
+                InternalFeatureOnOffOptions.Squiggles,
+                ServiceComponentOnOffOptions.DiagnosticProvider
+            );
 
         protected override IEnumerable<Option2<bool>> Options => s_tagSourceOptions;
 
@@ -38,20 +42,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             IThreadingContext threadingContext,
             IDiagnosticService diagnosticService,
             IForegroundNotificationService notificationService,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, diagnosticService, notificationService, listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        ) : base(threadingContext, diagnosticService, notificationService, listenerProvider) { }
 
-        protected internal override bool IncludeDiagnostic(DiagnosticData diagnostic)
-            => diagnostic.Severity == DiagnosticSeverity.Info;
+        protected internal override bool IncludeDiagnostic(DiagnosticData diagnostic) =>
+            diagnostic.Severity == DiagnosticSeverity.Info;
 
-        protected override IErrorTag CreateTag(Workspace workspace, DiagnosticData diagnostic)
-            => new ErrorTag(
+        protected override IErrorTag CreateTag(Workspace workspace, DiagnosticData diagnostic) =>
+            new ErrorTag(
                 PredefinedErrorTypeNames.HintedSuggestion,
-                CreateToolTipContent(workspace, diagnostic));
+                CreateToolTipContent(workspace, diagnostic)
+            );
 
-        protected override SnapshotSpan AdjustSnapshotSpan(SnapshotSpan snapshotSpan, int minimumLength)
+        protected override SnapshotSpan AdjustSnapshotSpan(
+            SnapshotSpan snapshotSpan,
+            int minimumLength
+        )
         {
             // We always want suggestion tags to be two characters long.
             return AdjustSnapshotSpan(snapshotSpan, minimumLength: 2, maximumLength: 2);

@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             var cache = new ValidatorCache();
-            var metadata = new TestModelMetadataProvider().GetMetadataForProperty(typeof(TypeWithProperty), "Property1");
+            var metadata = new TestModelMetadataProvider().GetMetadataForProperty(
+                typeof(TypeWithProperty),
+                "Property1"
+            );
             var validatorProvider = TestModelValidatorProvider.CreateDefaultProvider();
 
             // Act - 1
@@ -42,7 +45,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             var cache = new ValidatorCache();
-            var metadata = new TestModelMetadataProvider().GetMetadataForProperty(typeof(TypeWithProperty), "Property1");
+            var metadata = new TestModelMetadataProvider().GetMetadataForProperty(
+                typeof(TypeWithProperty),
+                "Property1"
+            );
             var validatorProvider = new ProviderWithNonReusableValidators();
 
             // Act - 1
@@ -60,9 +66,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             // Assert - 2
             Assert.NotSame(validators1, validators2);
 
-            var requiredValidator = Assert.Single(validators2.Where(v => (v as DataAnnotationsModelValidator).Attribute is RequiredAttribute));
+            var requiredValidator = Assert.Single(
+                validators2.Where(
+                    v => (v as DataAnnotationsModelValidator).Attribute is RequiredAttribute
+                )
+            );
             Assert.Contains(requiredValidator, validators1); // cached
-            var stringLengthValidator = Assert.Single(validators2.Where(v => (v as DataAnnotationsModelValidator).Attribute is StringLengthAttribute));
+            var stringLengthValidator = Assert.Single(
+                validators2.Where(
+                    v => (v as DataAnnotationsModelValidator).Attribute is StringLengthAttribute
+                )
+            );
             Assert.DoesNotContain(stringLengthValidator, validators1); // not cached
         }
 
@@ -94,7 +108,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     var validator = new DataAnnotationsModelValidator(
                         new ValidationAttributeAdapterProvider(),
                         attribute,
-                        stringLocalizer: null);
+                        stringLocalizer: null
+                    );
 
                     validatorItem.Validator = validator;
 

@@ -6,17 +6,17 @@ using System.Runtime.Serialization;
 namespace System.Resources
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class MissingManifestResourceException : SystemException
     {
-        public MissingManifestResourceException()
-            : base(SR.Arg_MissingManifestResourceException)
+        public MissingManifestResourceException() : base(SR.Arg_MissingManifestResourceException)
         {
             HResult = System.HResults.COR_E_MISSINGMANIFESTRESOURCE;
         }
 
-        public MissingManifestResourceException(string? message)
-            : base(message)
+        public MissingManifestResourceException(string? message) : base(message)
         {
             HResult = System.HResults.COR_E_MISSINGMANIFESTRESOURCE;
         }
@@ -28,8 +28,6 @@ namespace System.Resources
         }
 
         protected MissingManifestResourceException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

@@ -29,7 +29,10 @@ namespace Microsoft.CodeAnalysis
         public RelativePathResolver(ImmutableArray<string> searchPaths, string baseDirectory)
         {
             Debug.Assert(searchPaths.All(PathUtilities.IsAbsolute));
-            Debug.Assert(baseDirectory == null || PathUtilities.GetPathKind(baseDirectory) == PathKind.Absolute);
+            Debug.Assert(
+                baseDirectory == null
+                    || PathUtilities.GetPathKind(baseDirectory) == PathKind.Absolute
+            );
 
             SearchPaths = searchPaths;
             BaseDirectory = baseDirectory;
@@ -37,7 +40,13 @@ namespace Microsoft.CodeAnalysis
 
         public string ResolvePath(string reference, string baseFilePath)
         {
-            string resolvedPath = FileUtilities.ResolveRelativePath(reference, baseFilePath, BaseDirectory, SearchPaths, FileExists);
+            string resolvedPath = FileUtilities.ResolveRelativePath(
+                reference,
+                baseFilePath,
+                BaseDirectory,
+                SearchPaths,
+                FileExists
+            );
             if (resolvedPath == null)
             {
                 return null;

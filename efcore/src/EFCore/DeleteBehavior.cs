@@ -41,7 +41,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         ClientSetNull,
-
         /// <summary>
         ///     <para>
         ///         For entities being tracked by the <see cref="DbContext" />, the values of foreign key properties in
@@ -57,7 +56,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         Restrict,
-
         /// <summary>
         ///     <para>
         ///         For entities being tracked by the <see cref="DbContext" />, the values of foreign key properties in
@@ -76,7 +74,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         SetNull,
-
         /// <summary>
         ///     <para>
         ///         For entities being tracked by the <see cref="DbContext" />, dependent entities
@@ -96,7 +93,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         Cascade,
-
         /// <summary>
         ///     <para>
         ///         For entities being tracked by the <see cref="DbContext" />, dependent entities
@@ -109,7 +105,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         ClientCascade,
-
         /// <summary>
         ///     <para>
         ///         For entities being tracked by the <see cref="DbContext" />, the values of foreign key properties in
@@ -125,7 +120,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         NoAction,
-
         /// <summary>
         ///     <para>
         ///         Note: it is unusual to use this value. Consider using <see cref="ClientSetNull" /> instead to match

@@ -10,11 +10,14 @@ namespace System.Linq.Tests
         [Fact]
         public void InvalidArguments()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<string>)null).Reverse());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<string>)null).Reverse()
+            );
         }
 
         [Theory]
-        [InlineData(new int[] { })]
+        [InlineData(new int[] {  })]
         [InlineData(new int[] { 1 })]
         [InlineData(new int[] { 5 })]
         [InlineData(new int[] { 1, 3, 5 })]

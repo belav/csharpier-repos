@@ -42,7 +42,8 @@ namespace Microsoft.AspNetCore.WebUtilities
         public FileBufferingWriteStream(
             int memoryThreshold = DefaultMemoryThreshold,
             long? bufferLimit = null,
-            Func<string>? tempFileDirectoryAccessor = null)
+            Func<string>? tempFileDirectoryAccessor = null
+        )
         {
             if (memoryThreshold < 0)
             {
@@ -52,12 +53,16 @@ namespace Microsoft.AspNetCore.WebUtilities
             if (bufferLimit != null && bufferLimit < memoryThreshold)
             {
                 // We would expect a limit at least as much as memoryThreshold
-                throw new ArgumentOutOfRangeException(nameof(bufferLimit), $"{nameof(bufferLimit)} must be larger than {nameof(memoryThreshold)}.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferLimit),
+                    $"{nameof(bufferLimit)} must be larger than {nameof(memoryThreshold)}."
+                );
             }
 
             _memoryThreshold = memoryThreshold;
             _bufferLimit = bufferLimit;
-            _tempFileDirectoryAccessor = tempFileDirectoryAccessor ?? AspNetCoreTempDirectory.TempDirectoryFactory;
+            _tempFileDirectoryAccessor =
+                tempFileDirectoryAccessor ?? AspNetCoreTempDirectory.TempDirectoryFactory;
             PagedByteBuffer = new PagedByteBuffer(ArrayPool<byte>.Shared);
         }
 
@@ -87,15 +92,20 @@ namespace Microsoft.AspNetCore.WebUtilities
         internal bool Disposed { get; private set; }
 
         /// <inheritdoc />
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
-        public override int Read(byte[] buffer, int offset, int count)
-            => throw new NotSupportedException();
+        public override int Read(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-            => throw new NotSupportedException();
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => throw new NotSupportedException();
 
         /// <inheritdoc />
         public override void Write(byte[] buffer, int offset, int count)
@@ -131,7 +141,12 @@ namespace Microsoft.AspNetCore.WebUtilities
         }
 
         /// <inheritdoc />
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowArgumentException(buffer, offset, count);
             ThrowIfDisposed();
@@ -180,15 +195,29 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <param name="destination">The <see cref="Stream" /> to drain buffered contents to.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken" />.</param>
         /// <returns>A <see cref="Task" /> that represents the asynchronous drain operation.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-        public async Task DrainBufferAsync(Stream destination, CancellationToken cancellationToken = default)
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
+        public async Task DrainBufferAsync(
+            Stream destination,
+            CancellationToken cancellationToken = default
+        )
         {
             // When not null, FileStream always has "older" spooled content. The PagedByteBuffer always has "newer"
             // unspooled content. Copy the FileStream content first when available.
             if (FileStream != null)
             {
                 // We make a new stream for async reads from disk and async writes to the destination
-                await using var readStream = new FileStream(FileStream.Name, FileMode.Open, FileAccess.Read, FileShare.Delete | FileShare.ReadWrite, bufferSize: 1, useAsync: true);
+                await using var readStream = new FileStream(
+                    FileStream.Name,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Delete | FileShare.ReadWrite,
+                    bufferSize: 1,
+                    useAsync: true
+                );
 
                 await readStream.CopyToAsync(destination, cancellationToken);
 
@@ -206,15 +235,29 @@ namespace Microsoft.AspNetCore.WebUtilities
         /// <param name="destination">The <see cref="PipeWriter" /> to drain buffered contents to.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken" />.</param>
         /// <returns>A <see cref="Task" /> that represents the asynchronous drain operation.</returns>
-        [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-        public async Task DrainBufferAsync(PipeWriter destination, CancellationToken cancellationToken = default)
+        [SuppressMessage(
+            "ApiDesign",
+            "RS0026:Do not add multiple public overloads with optional parameters",
+            Justification = "Required to maintain compatibility"
+        )]
+        public async Task DrainBufferAsync(
+            PipeWriter destination,
+            CancellationToken cancellationToken = default
+        )
         {
             // When not null, FileStream always has "older" spooled content. The PagedByteBuffer always has "newer"
             // unspooled content. Copy the FileStream content first when available.
             if (FileStream != null)
             {
                 // We make a new stream for async reads from disk and async writes to the destination
-                await using var readStream = new FileStream(FileStream.Name, FileMode.Open, FileAccess.Read, FileShare.Delete | FileShare.ReadWrite, bufferSize: 1, useAsync: true);
+                await using var readStream = new FileStream(
+                    FileStream.Name,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Delete | FileShare.ReadWrite,
+                    bufferSize: 1,
+                    useAsync: true
+                );
 
                 await readStream.CopyToAsync(destination, cancellationToken);
 
@@ -256,14 +299,18 @@ namespace Microsoft.AspNetCore.WebUtilities
             if (FileStream == null)
             {
                 var tempFileDirectory = _tempFileDirectoryAccessor();
-                var tempFileName = Path.Combine(tempFileDirectory, "ASPNETCORE_" + Guid.NewGuid() + ".tmp");
+                var tempFileName = Path.Combine(
+                    tempFileDirectory,
+                    "ASPNETCORE_" + Guid.NewGuid() + ".tmp"
+                );
                 FileStream = new FileStream(
                     tempFileName,
                     FileMode.Create,
                     FileAccess.Write,
                     FileShare.Delete | FileShare.ReadWrite,
                     bufferSize: 1,
-                    FileOptions.SequentialScan | FileOptions.DeleteOnClose);
+                    FileOptions.SequentialScan | FileOptions.DeleteOnClose
+                );
             }
         }
 

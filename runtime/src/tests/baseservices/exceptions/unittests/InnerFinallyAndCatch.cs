@@ -23,8 +23,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new InnerFinallyAndCatchTest().Run(),      ref nSuccesses, ref nFailures);
-        
+        CountResults(new InnerFinallyAndCatchTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -42,15 +42,17 @@ class InnerFinallyAndCatchTest
 {
     Trace _trace;
 
-    public int Run() 
+    public int Run()
     {
         _trace = new Trace("InnerFinallyAndCatchTest", "abcdefghijklm13");
 
-        int x = 7, y = 0, z;
+        int x = 7,
+            y = 0,
+            z;
 
-        int count = 0; 
+        int count = 0;
 
-        try 
+        try
         {
             _trace.Write("a");
             count++;
@@ -70,21 +72,21 @@ class InnerFinallyAndCatchTest
                 {
                     try
                     {
-                        try 
+                        try
                         {
                             _trace.Write("d");
                             count++;
-                        } 
+                        }
                         finally // 3
                         {
                             _trace.Write("e");
                             count++;
-                            try  
-                            { 
+                            try
+                            {
                                 _trace.Write("f");
                                 count++;
-                            } 
-                            finally  // 4
+                            }
+                            finally // 4
                             {
                                 _trace.Write("g");
                                 count++;
@@ -107,18 +109,18 @@ class InnerFinallyAndCatchTest
             }
             _trace.Write("k");
             count++;
-        } 
+        }
         catch (Exception) // C1
         {
             _trace.Write("!!");
             count++;
-        } 
-        finally  // 0
+        }
+        finally // 0
         {
             _trace.Write("l");
             count++;
         }
-        
+
         _trace.Write("m");
         count++;
 

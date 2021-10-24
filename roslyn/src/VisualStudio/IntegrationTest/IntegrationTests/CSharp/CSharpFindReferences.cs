@@ -23,23 +23,24 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpFindReferences(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpFindReferences))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpFindReferences)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.FindReferences)]
         public void FindReferencesToCtor()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 class Program
 {
 }$$
-");
+"
+            );
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(project, "File2.cs");
             VisualStudio.SolutionExplorer.OpenFile(project, "File2.cs");
 
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 class SomeOtherClass
 {
     void M()
@@ -47,7 +48,8 @@ class SomeOtherClass
         Program p = new Progr$$am();
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(Shift(VirtualKey.F12));
 
@@ -69,18 +71,23 @@ class SomeOtherClass
                     },
                     reference =>
                     {
-                        Assert.Equal(expected: "Program p = new Program();", actual: reference.Code);
+                        Assert.Equal(
+                            expected: "Program p = new Program();",
+                            actual: reference.Code
+                        );
                         Assert.Equal(expected: 5, actual: reference.Line);
                         Assert.Equal(expected: 24, actual: reference.Column);
                     }
-                });
+                }
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.FindReferences)]
         public void FindReferencesToLocals()
         {
             using var telemetry = VisualStudio.EnableTestTelemetryChannel();
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 class Program
 {
     static void Main()
@@ -89,7 +96,8 @@ class Program
         Console.WriteLine(local$$);
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(Shift(VirtualKey.F12));
 
@@ -115,15 +123,20 @@ class Program
                         Assert.Equal(expected: 6, actual: reference.Line);
                         Assert.Equal(expected: 26, actual: reference.Column);
                     }
-                });
+                }
+            );
 
-            telemetry.VerifyFired("vs/platform/findallreferences/search", "vs/ide/vbcs/commandhandler/findallreference");
+            telemetry.VerifyFired(
+                "vs/platform/findallreferences/search",
+                "vs/ide/vbcs/commandhandler/findallreference"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.FindReferences)]
         public void FindReferencesToString()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 class Program
 {
     static void Main()
@@ -131,7 +144,8 @@ class Program
          string local = ""1""$$;
     }
 }
-");
+"
+            );
 
             VisualStudio.Editor.SendKeys(Shift(VirtualKey.F12));
 
@@ -151,7 +165,8 @@ class Program
                         Assert.Equal(expected: 5, actual: reference.Line);
                         Assert.Equal(expected: 24, actual: reference.Column);
                     }
-                });
+                }
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.FindReferences)]
@@ -164,7 +179,7 @@ class Program
 
             VisualStudio.SolutionExplorer.CloseSolution();
 
-            // because the solution cache directory is stored in the user temp folder, 
+            // because the solution cache directory is stored in the user temp folder,
             // closing the solution has no effect on what is returned.
             Assert.NotNull(VisualStudio.Workspace.GetWorkingFolder());
         }

@@ -39,7 +39,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             E += C.Foo2;
         }
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -66,8 +65,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dlgate002.dlgate002
 {
@@ -133,8 +130,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dlgate003.dlgate003
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -171,7 +166,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             E += C.Foo2;
         }
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -185,11 +179,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             var result = c.DoEvent(9);
             if (result != 11 && length != 2)
                 return 1;
-            c.E -= new Dele(delegate (int i)
-            {
-                return i + 2;
-            }
-
+            c.E -= new Dele(
+                delegate(int i)
+                {
+                    return i + 2;
+                }
             );
             length = c.E.GetInvocationList().Length;
             result = c.DoEvent(9);
@@ -205,8 +199,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dlgate004.dlgate004
 {
@@ -274,8 +266,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dynamic001.dynamic001
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -300,7 +290,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         {
             return i + 2;
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -329,8 +318,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dynamic002.dynamic002
 {
@@ -386,8 +373,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dynamic003.dynamic003
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -418,7 +403,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             return i + 2;
         }
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -446,8 +430,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dynamic004.dynamic004
 {
@@ -508,8 +490,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dynamic005.dynamic005
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -541,7 +521,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public event Dele E;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -569,8 +548,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dynamic006.dynamic006
 {
@@ -632,8 +609,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dynamic007.dynamic007
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -665,7 +640,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public event Dele E;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -693,8 +667,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.dynamic008.dynamic008
 {
@@ -755,8 +727,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.fieldproperty001.fieldproperty001
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -774,15 +744,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public Dele field;
         public Dele Field
         {
-            get
-            {
-                return field;
-            }
-
-            set
-            {
-                field = value;
-            }
+            get { return field; }
+            set { field = value; }
         }
 
         public event Dele E;
@@ -813,7 +776,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             return i;
         }
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -842,8 +804,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.fieldproperty002.fieldproperty002
 {
@@ -862,15 +822,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public Dele field;
         public Dele Field
         {
-            get
-            {
-                return field;
-            }
-
-            set
-            {
-                field = value;
-            }
+            get { return field; }
+            set { field = value; }
         }
 
         public Dele E;
@@ -931,8 +884,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.fieldproperty003.fieldproperty003
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -950,15 +901,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public Dele field;
         public Dele Field
         {
-            get
-            {
-                return field;
-            }
-
-            set
-            {
-                field = value;
-            }
+            get { return field; }
+            set { field = value; }
         }
 
         public event Dele E;
@@ -988,7 +932,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         {
             return i;
         }
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -1020,8 +963,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.fieldproperty004.fieldproperty004
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -1039,15 +980,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public Dele field;
         public Dele Field
         {
-            get
-            {
-                return field;
-            }
-
-            set
-            {
-                field = value;
-            }
+            get { return field; }
+            set { field = value; }
         }
 
         public Dele E;
@@ -1108,8 +1042,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.null001.null001
 {
@@ -1162,8 +1094,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.null002.null002
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -1214,8 +1144,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.return001.return001
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -1258,7 +1186,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public event Dele E;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1282,8 +1209,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.return002.return002
 {
@@ -1352,8 +1277,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.return003.return003
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -1396,7 +1319,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public event Dele E;
 
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -1420,8 +1342,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.return004.return004
 {
@@ -1490,8 +1410,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.evnt.minuseql.return005.return005
 {
     // <Area> Dynamic -- compound operator</Area>
@@ -1533,7 +1451,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public event Dele E;
-
 
         public static void DynamicCSharpRunTest()
         {

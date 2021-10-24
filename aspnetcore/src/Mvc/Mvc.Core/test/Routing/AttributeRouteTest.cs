@@ -37,10 +37,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             {
                 new ActionDescriptor()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{key1}"
-                    },
+                    AttributeRouteInfo = new AttributeRouteInfo() { Template = "api/Blog/{key1}" },
                 },
                 new ActionDescriptor()
                 {
@@ -51,28 +48,28 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 },
             };
 
-
             Func<ActionDescriptor[], IRouter> handlerFactory = (_) =>
             {
                 var handler = new Mock<IRouter>();
                 handler
                     .Setup(r => r.RouteAsync(It.IsAny<RouteContext>()))
-                    .Returns<RouteContext>(routeContext =>
-                    {
-                        if (routeContext.RouteData.Values.ContainsKey("key1"))
+                    .Returns<RouteContext>(
+                        routeContext =>
                         {
-                            selected = actions[0];
+                            if (routeContext.RouteData.Values.ContainsKey("key1"))
+                            {
+                                selected = actions[0];
+                            }
+                            else if (routeContext.RouteData.Values.ContainsKey("key2"))
+                            {
+                                selected = actions[1];
+                            }
+
+                            routeContext.Handler = (c) => Task.CompletedTask;
+
+                            return Task.CompletedTask;
                         }
-                        else if (routeContext.RouteData.Values.ContainsKey("key2"))
-                        {
-                            selected = actions[1];
-                        }
-
-                        routeContext.Handler = (c) => Task.CompletedTask;
-
-                        return Task.CompletedTask;
-
-                    });
+                    );
                 return handler.Object;
             };
 
@@ -155,9 +152,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
                     Assert.Equal("BLOG_INDEX", e.RouteName);
                     Assert.Equal(17, e.Order);
-                    Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
+                    Assert.Equal(
+                        ToRouteValueDictionary(actions[0].RouteValues),
+                        e.RequiredLinkValues
+                    );
                     Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -199,9 +200,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
                     Assert.Equal("BLOG_INDEX", e.RouteName);
                     Assert.Equal(17, e.Order);
-                    Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
+                    Assert.Equal(
+                        ToRouteValueDictionary(actions[0].RouteValues),
+                        e.RequiredLinkValues
+                    );
                     Assert.Equal("api/Blog/{id:int}", e.RouteTemplate.TemplateText);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -243,9 +248,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
                     Assert.Equal("BLOG_INDEX", e.RouteName);
                     Assert.Equal(17, e.Order);
-                    Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
+                    Assert.Equal(
+                        ToRouteValueDictionary(actions[0].RouteValues),
+                        e.RequiredLinkValues
+                    );
                     Assert.Equal("api/Blog/{*slug=hello}", e.RouteTemplate.TemplateText);
-                });
+                }
+            );
         }
 
         // These actions seem like duplicates, but this is a real case that can happen where two different
@@ -304,7 +313,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
                     Assert.Equal("BLOG_INDEX", e.RouteName);
                     Assert.Equal(17, e.Order);
-                    Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
+                    Assert.Equal(
+                        ToRouteValueDictionary(actions[0].RouteValues),
+                        e.RequiredLinkValues
+                    );
                     Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
                 },
                 e =>
@@ -314,9 +326,13 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal(RoutePrecedence.ComputeOutbound(e.RouteTemplate), e.Precedence);
                     Assert.Equal("BLOG_INDEX", e.RouteName);
                     Assert.Equal(17, e.Order);
-                    Assert.Equal(ToRouteValueDictionary(actions[1].RouteValues), e.RequiredLinkValues);
+                    Assert.Equal(
+                        ToRouteValueDictionary(actions[1].RouteValues),
+                        e.RequiredLinkValues
+                    );
                     Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -359,7 +375,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal("BLOG_INDEX", e.RouteName);
                     Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
                     Assert.Empty(e.Defaults);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -402,7 +419,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal("BLOG_INDEX", e.RouteName);
                     Assert.Equal("api/Blog/{id:int}", e.RouteTemplate.TemplateText);
                     Assert.Empty(e.Defaults);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -446,8 +464,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal("api/Blog/{*slug=hello}", e.RouteTemplate.TemplateText);
                     Assert.Collection(
                         e.Defaults.OrderBy(kvp => kvp.Key),
-                        kvp => Assert.Equal(new KeyValuePair<string, object>("slug", "hello"), kvp));
-                });
+                        kvp => Assert.Equal(new KeyValuePair<string, object>("slug", "hello"), kvp)
+                    );
+                }
+            );
         }
 
         // These actions seem like duplicates, but this is a real case that can happen where two different
@@ -507,13 +527,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     Assert.Equal("BLOG_INDEX", e.RouteName);
                     Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
                     Assert.Empty(e.Defaults);
-                });
+                }
+            );
         }
 
         [Theory]
         [InlineData("")]
         [InlineData("GetBlogById")]
-        public void AttributeRoute_ThrowsRouteCreationException_ForConstraintsNotTakingArguments(string routeName)
+        public void AttributeRoute_ThrowsRouteCreationException_ForConstraintsNotTakingArguments(
+            string routeName
+        )
         {
             // Arrange
             var routeTemplate = "api/Blog/{id:int(10)}";
@@ -528,18 +551,21 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                     }
                 },
             };
-            var expectedErrorMessage = "An error occurred while adding a route to the route builder. " +
-                        $"Route name '{routeName}' and template '{routeTemplate}'.";
+            var expectedErrorMessage =
+                "An error occurred while adding a route to the route builder. "
+                + $"Route name '{routeName}' and template '{routeTemplate}'.";
 
             var builder = CreateBuilder();
             var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
             var route = CreateRoute(CreateHandler().Object, actionDescriptorProvider.Object);
 
             // Act & Assert
-            var exception = Assert.Throws<RouteCreationException>(() =>
-            {
-                route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
-            });
+            var exception = Assert.Throws<RouteCreationException>(
+                () =>
+                {
+                    route.AddEntries(builder, actionDescriptorProvider.Object.ActionDescriptors);
+                }
+            );
             Assert.Equal(expectedErrorMessage, exception.Message);
             Assert.IsType<RouteCreationException>(exception.InnerException);
         }
@@ -597,7 +623,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     Assert.Equal("BLOG_HOME", e.RouteName);
                     Assert.Equal("blog/", e.RouteTemplate.TemplateText);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -653,9 +680,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     Assert.Equal("BLOG_HOME", e.RouteName);
                     Assert.Equal("blog/", e.RouteTemplate.TemplateText);
-                });
+                }
+            );
         }
-
 
         [Fact]
         public void GetEntries_DoesNotCreateInboundEntriesForAttributesWithSuppressForPathMatchingSetToTrue()
@@ -710,7 +737,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     Assert.Equal("BLOG_LINK2", e.RouteName);
                     Assert.Equal("blog/{snake-cased-name}", e.RouteTemplate.TemplateText);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -766,7 +794,8 @@ namespace Microsoft.AspNetCore.Mvc.Routing
                 {
                     Assert.Equal("BLOG_HOME", e.RouteName);
                     Assert.Equal("blog/", e.RouteTemplate.TemplateText);
-                });
+                }
+            );
         }
 
         private static TreeRouteBuilder CreateBuilder()
@@ -792,9 +821,12 @@ namespace Microsoft.AspNetCore.Mvc.Routing
         }
 
         private static Mock<IActionDescriptorCollectionProvider> CreateActionDescriptorProvider(
-            IReadOnlyList<ActionDescriptor> actions)
+            IReadOnlyList<ActionDescriptor> actions
+        )
         {
-            var actionDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>(MockBehavior.Strict);
+            var actionDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>(
+                MockBehavior.Strict
+            );
             actionDescriptorProvider
                 .SetupGet(ad => ad.ActionDescriptors)
                 .Returns(new ActionDescriptorCollection(actions, version: 1));
@@ -804,14 +836,16 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         private static AttributeRoute CreateRoute(
             IRouter handler,
-            IActionDescriptorCollectionProvider actionDescriptorProvider)
+            IActionDescriptorCollectionProvider actionDescriptorProvider
+        )
         {
             return CreateRoute((_) => handler, actionDescriptorProvider);
         }
 
         private static AttributeRoute CreateRoute(
             Func<ActionDescriptor[], IRouter> handlerFactory,
-            IActionDescriptorCollectionProvider actionDescriptorProvider)
+            IActionDescriptorCollectionProvider actionDescriptorProvider
+        )
         {
             var services = new ServiceCollection()
                 .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)
@@ -824,7 +858,9 @@ namespace Microsoft.AspNetCore.Mvc.Routing
 
         // Needed because new RouteValueDictionary(values) would give us all the properties of
         // the Dictionary class.
-        private static RouteValueDictionary ToRouteValueDictionary(IDictionary<string, string> values)
+        private static RouteValueDictionary ToRouteValueDictionary(
+            IDictionary<string, string> values
+        )
         {
             var result = new RouteValueDictionary();
             foreach (var kvp in values)

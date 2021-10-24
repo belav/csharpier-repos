@@ -32,9 +32,15 @@ namespace MS.Internal.Xml.XPath
             NextLex();
         }
 
-        public string SourceText { get { return _xpathExpr; } }
+        public string SourceText
+        {
+            get { return _xpathExpr; }
+        }
 
-        private char CurrentChar { get { return _currentChar; } }
+        private char CurrentChar
+        {
+            get { return _currentChar; }
+        }
 
         private bool NextChar()
         {
@@ -51,7 +57,10 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public LexKind Kind { get { return _kind; } }
+        public LexKind Kind
+        {
+            get { return _kind; }
+        }
 
         public string Name
         {
@@ -106,7 +115,8 @@ namespace MS.Internal.Xml.XPath
 
         private void SkipSpace()
         {
-            while (XmlCharType.IsWhiteSpace(CurrentChar) && NextChar()) ;
+            while (XmlCharType.IsWhiteSpace(CurrentChar) && NextChar())
+                ;
         }
 
         public bool NextLex()
@@ -206,12 +216,12 @@ namespace MS.Internal.Xml.XPath
                             NextChar();
                             // can be "foo:bar" or "foo::"
                             if (CurrentChar == ':')
-                            {   // "foo::"
+                            { // "foo::"
                                 NextChar();
                                 _kind = LexKind.Axe;
                             }
                             else
-                            {                          // "foo:*", "foo:bar" or "foo: "
+                            { // "foo:*", "foo:bar" or "foo: "
                                 _prefix = _name;
                                 if (CurrentChar == '*')
                                 {
@@ -265,14 +275,17 @@ namespace MS.Internal.Xml.XPath
             int len = 0;
             while (XmlCharType.IsDigit(CurrentChar))
             {
-                NextChar(); len++;
+                NextChar();
+                len++;
             }
             if (CurrentChar == '.')
             {
-                NextChar(); len++;
+                NextChar();
+                len++;
                 while (XmlCharType.IsDigit(CurrentChar))
                 {
-                    NextChar(); len++;
+                    NextChar();
+                    len++;
                 }
             }
             return XmlConvert.ToXPathDouble(_xpathExpr.Substring(start, len));
@@ -286,7 +299,8 @@ namespace MS.Internal.Xml.XPath
             int len = 1; // '.'
             while (XmlCharType.IsDigit(CurrentChar))
             {
-                NextChar(); len++;
+                NextChar();
+                len++;
             }
             return XmlConvert.ToXPathDouble(_xpathExpr.Substring(start, len));
         }
@@ -352,17 +366,17 @@ namespace MS.Internal.Xml.XPath
             Apos = '\'',
             Quote = '"',
             Union = '|',
-            Ne = 'N',   // !=
-            Le = 'L',   // <=
-            Ge = 'G',   // >=
-            And = 'A',   // &&
-            Or = 'O',   // ||
-            DotDot = 'D',   // ..
-            SlashSlash = 'S',   // //
-            Name = 'n',   // XML _Name
-            String = 's',   // Quoted string constant
-            Number = 'd',   // _Number constant
-            Axe = 'a',   // Axe (like child::)
+            Ne = 'N', // !=
+            Le = 'L', // <=
+            Ge = 'G', // >=
+            And = 'A', // &&
+            Or = 'O', // ||
+            DotDot = 'D', // ..
+            SlashSlash = 'S', // //
+            Name = 'n', // XML _Name
+            String = 's', // Quoted string constant
+            Number = 'd', // _Number constant
+            Axe = 'a', // Axe (like child::)
             Eof = 'E',
         };
     }

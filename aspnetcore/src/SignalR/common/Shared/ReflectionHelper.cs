@@ -25,7 +25,10 @@ namespace Microsoft.AspNetCore.SignalR
 
             do
             {
-                if (nullableType.IsGenericType && nullableType.GetGenericTypeDefinition() == typeof(ChannelReader<>))
+                if (
+                    nullableType.IsGenericType
+                    && nullableType.GetGenericTypeDefinition() == typeof(ChannelReader<>)
+                )
                 {
                     return true;
                 }
@@ -46,17 +49,20 @@ namespace Microsoft.AspNetCore.SignalR
                 }
             }
 
-            return type.GetInterfaces().Any(t =>
-            {
-                if (t.IsGenericType)
-                {
-                    return t.GetGenericTypeDefinition() == typeof(IAsyncEnumerable<>);
-                }
-                else
-                {
-                    return false;
-                }
-            });
+            return type.GetInterfaces()
+                .Any(
+                    t =>
+                    {
+                        if (t.IsGenericType)
+                        {
+                            return t.GetGenericTypeDefinition() == typeof(IAsyncEnumerable<>);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                );
         }
     }
 }

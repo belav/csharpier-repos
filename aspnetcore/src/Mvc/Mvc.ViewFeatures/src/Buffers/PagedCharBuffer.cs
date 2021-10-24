@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
         public ICharBufferSource BufferSource { get; }
 
         // Strongly typed rather than IList for performance
-        public List<char[]> Pages { get; } = new List<char[]>(); 
+        public List<char[]> Pages { get; } = new List<char[]>();
 
         public int Length
         {
@@ -62,11 +62,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
                 var copyLength = Math.Min(count, page.Length - _charIndex);
                 Debug.Assert(copyLength > 0);
 
-                value.CopyTo(
-                    index,
-                    page,
-                    _charIndex,
-                    copyLength);
+                value.CopyTo(index, page, _charIndex, copyLength);
 
                 _charIndex += copyLength;
                 index += copyLength;
@@ -83,12 +79,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers
                 var copyLength = Math.Min(count, page.Length - _charIndex);
                 Debug.Assert(copyLength > 0);
 
-                Array.Copy(
-                    buffer,
-                    index,
-                    page,
-                    _charIndex,
-                    copyLength);
+                Array.Copy(buffer, index, page, _charIndex, copyLength);
 
                 _charIndex += copyLength;
                 index += copyLength;

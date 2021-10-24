@@ -14,7 +14,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddsFormatterMapping()
         {
             // Arrange
-            var optionsSetup = new XmlDataContractSerializerMvcOptionsSetup(NullLoggerFactory.Instance);
+            var optionsSetup = new XmlDataContractSerializerMvcOptionsSetup(
+                NullLoggerFactory.Instance
+            );
             var options = new MvcOptions();
 
             // Act
@@ -29,7 +31,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public void DoesNotOverrideExistingMapping()
         {
             // Arrange
-            var optionsSetup = new XmlDataContractSerializerMvcOptionsSetup(NullLoggerFactory.Instance);
+            var optionsSetup = new XmlDataContractSerializerMvcOptionsSetup(
+                NullLoggerFactory.Instance
+            );
             var options = new MvcOptions();
             options.FormatterMappings.SetMediaTypeMappingForFormat("xml", "text/xml");
 
@@ -45,28 +49,36 @@ namespace Microsoft.Extensions.DependencyInjection
         public void AddsInputFormatter()
         {
             // Arrange
-            var optionsSetup = new XmlDataContractSerializerMvcOptionsSetup(NullLoggerFactory.Instance);
+            var optionsSetup = new XmlDataContractSerializerMvcOptionsSetup(
+                NullLoggerFactory.Instance
+            );
             var options = new MvcOptions();
 
             // Act
             optionsSetup.Configure(options);
 
             // Assert
-            Assert.IsType<XmlDataContractSerializerInputFormatter>(Assert.Single(options.InputFormatters));
+            Assert.IsType<XmlDataContractSerializerInputFormatter>(
+                Assert.Single(options.InputFormatters)
+            );
         }
 
         [Fact]
         public void AddsOutputFormatter()
         {
             // Arrange
-            var optionsSetup = new XmlDataContractSerializerMvcOptionsSetup(NullLoggerFactory.Instance);
+            var optionsSetup = new XmlDataContractSerializerMvcOptionsSetup(
+                NullLoggerFactory.Instance
+            );
             var options = new MvcOptions();
 
             // Act
             optionsSetup.Configure(options);
 
             // Assert
-            Assert.IsType<XmlDataContractSerializerOutputFormatter>(Assert.Single(options.OutputFormatters));
+            Assert.IsType<XmlDataContractSerializerOutputFormatter>(
+                Assert.Single(options.OutputFormatters)
+            );
         }
     }
 }

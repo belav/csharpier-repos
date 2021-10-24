@@ -10,7 +10,11 @@ namespace System.Text.Json.Serialization.Converters
             IsInternalConverterForNumberType = true;
         }
 
-        public override long Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override long Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetInt64();
         }
@@ -25,15 +29,25 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetInt64WithQuotes();
         }
 
-        internal override void WriteWithQuotes(Utf8JsonWriter writer, long value, JsonSerializerOptions options, ref WriteStack state)
+        internal override void WriteWithQuotes(
+            Utf8JsonWriter writer,
+            long value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             writer.WritePropertyName(value);
         }
 
-        internal override long ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling handling)
+        internal override long ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling handling
+        )
         {
-            if (reader.TokenType == JsonTokenType.String &&
-                (JsonNumberHandling.AllowReadingFromString & handling) != 0)
+            if (
+                reader.TokenType == JsonTokenType.String
+                && (JsonNumberHandling.AllowReadingFromString & handling) != 0
+            )
             {
                 return reader.GetInt64WithQuotes();
             }
@@ -41,7 +55,11 @@ namespace System.Text.Json.Serialization.Converters
             return reader.GetInt64();
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, long value, JsonNumberHandling handling)
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            long value,
+            JsonNumberHandling handling
+        )
         {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {

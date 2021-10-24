@@ -13,11 +13,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [DiagnosticAnalyzer(InternalLanguageNames.TypeScript)]
     internal sealed class VSTypeScriptDocumentDiagnosticAnalyzer : DocumentDiagnosticAnalyzer
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray<DiagnosticDescriptor>.Empty;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray<DiagnosticDescriptor>.Empty;
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var analyzer = document.Project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
+            var analyzer =
+                document.Project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
             if (analyzer == null)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();
@@ -26,9 +31,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             return analyzer.AnalyzeDocumentSyntaxAsync(document, cancellationToken);
         }
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var analyzer = document.Project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
+            var analyzer =
+                document.Project.LanguageServices.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>().Implementation;
             if (analyzer == null)
             {
                 return SpecializedTasks.EmptyImmutableArray<Diagnostic>();

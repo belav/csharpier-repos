@@ -26,10 +26,7 @@ namespace System.Drawing.Printing.Tests
         [InlineData(int.MinValue)]
         public void X_Value_ReturnsExpected(int value)
         {
-            var resolution = new PrinterResolution
-            {
-                X = value
-            };
+            var resolution = new PrinterResolution { X = value };
             Assert.Equal(value, resolution.X);
 
             // Set same.
@@ -45,10 +42,7 @@ namespace System.Drawing.Printing.Tests
         [InlineData(int.MinValue)]
         public void Y_Value_ReturnsExpected(int value)
         {
-            var resolution = new PrinterResolution
-            {
-                Y = value
-            };
+            var resolution = new PrinterResolution { Y = value };
             Assert.Equal(value, resolution.Y);
 
             // Set same.
@@ -64,10 +58,7 @@ namespace System.Drawing.Printing.Tests
         [InlineData(PrinterResolutionKind.Medium)]
         public void Kind_Set_GetReturnsExpected(PrinterResolutionKind value)
         {
-            var resolution = new PrinterResolution
-            {
-                Kind = value
-            };
+            var resolution = new PrinterResolution { Kind = value };
             Assert.Equal(value, resolution.Kind);
 
             // Set same.
@@ -87,9 +78,21 @@ namespace System.Drawing.Printing.Tests
         public static IEnumerable<object[]> ToString_TestData()
         {
             yield return new object[] { new PrinterResolution(), "[PrinterResolution X=0 Y=0]" };
-            yield return new object[] { new PrinterResolution { X = -1, Y = -2}, "[PrinterResolution X=-1 Y=-2]" };
-            yield return new object[] { new PrinterResolution { Kind = PrinterResolutionKind.High }, "[PrinterResolution High]" };
-            yield return new object[] { new PrinterResolution { X = 1, Y = 2, Kind = PrinterResolutionKind.High }, "[PrinterResolution High]" };
+            yield return new object[]
+            {
+                new PrinterResolution { X = -1, Y = -2 },
+                "[PrinterResolution X=-1 Y=-2]"
+            };
+            yield return new object[]
+            {
+                new PrinterResolution { Kind = PrinterResolutionKind.High },
+                "[PrinterResolution High]"
+            };
+            yield return new object[]
+            {
+                new PrinterResolution { X = 1, Y = 2, Kind = PrinterResolutionKind.High },
+                "[PrinterResolution High]"
+            };
         }
 
         [Theory]

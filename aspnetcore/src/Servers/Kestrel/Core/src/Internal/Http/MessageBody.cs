@@ -12,8 +12,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 {
     internal abstract class MessageBody
     {
-        private static readonly MessageBody _zeroContentLengthClose = new ZeroContentLengthMessageBody(keepAlive: false);
-        private static readonly MessageBody _zeroContentLengthKeepAlive = new ZeroContentLengthMessageBody(keepAlive: true);
+        private static readonly MessageBody _zeroContentLengthClose =
+            new ZeroContentLengthMessageBody(keepAlive: false);
+        private static readonly MessageBody _zeroContentLengthKeepAlive =
+            new ZeroContentLengthMessageBody(keepAlive: true);
 
         private readonly HttpProtocol _context;
 
@@ -43,7 +45,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
         protected IKestrelTrace Log => _context.ServiceContext.Log;
 
-        public abstract ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default);
+        public abstract ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        );
 
         public abstract bool TryRead(out ReadResult readResult);
 
@@ -70,7 +74,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             if (!startTask.IsCompletedSuccessfully)
             {
                 return ConsumeAwaited(startTask);
-            }    
+            }
 
             return OnConsumeAsync();
         }
@@ -173,9 +177,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
         }
 
-        protected virtual void OnReadStarting()
-        {
-        }
+        protected virtual void OnReadStarting() { }
 
         protected virtual Task OnReadStartedAsync()
         {
@@ -192,7 +194,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
         }
 
-        protected ValueTask<ReadResult> StartTimingReadAsync(ValueTask<ReadResult> readAwaitable, CancellationToken cancellationToken)
+        protected ValueTask<ReadResult> StartTimingReadAsync(
+            ValueTask<ReadResult> readAwaitable,
+            CancellationToken cancellationToken
+        )
         {
             if (!readAwaitable.IsCompleted)
             {
@@ -216,7 +221,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             return readAwaitable;
         }
 
-        protected async ValueTask<ReadResult> StartTimingReadAwaited(ValueTask<FlushResult> continueTask, ValueTask<ReadResult> readAwaitable, CancellationToken cancellationToken)
+        protected async ValueTask<ReadResult> StartTimingReadAwaited(
+            ValueTask<FlushResult> continueTask,
+            ValueTask<ReadResult> readAwaitable,
+            CancellationToken cancellationToken
+        )
         {
             await continueTask;
 
@@ -250,7 +259,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }
         }
 
-        protected long TrackConsumedAndExaminedBytes(ReadResult readResult, SequencePosition consumed, SequencePosition examined)
+        protected long TrackConsumedAndExaminedBytes(
+            ReadResult readResult,
+            SequencePosition consumed,
+            SequencePosition examined
+        )
         {
             // This code path is fairly hard to understand so let's break it down with an example
             // ReadAsync returns a ReadResult of length 50.
@@ -271,7 +284,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             // _totalExaminedInPreviousReadResult is now 50
             // _totalExaminedInPreviousReadResult is finally 0 after subtracting consumedLength.
 
-            long examinedLength, consumedLength, totalLength;
+            long examinedLength,
+                consumedLength,
+                totalLength;
 
             if (consumed.Equals(examined))
             {
@@ -281,7 +296,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             else
             {
                 consumedLength = readResult.Buffer.Slice(readResult.Buffer.Start, consumed).Length;
-                examinedLength = consumedLength + readResult.Buffer.Slice(consumed, examined).Length;
+                examinedLength =
+                    consumedLength + readResult.Buffer.Slice(consumed, examined).Length;
             }
 
             if (examined.Equals(readResult.Buffer.End))

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             Pattern pattern,
             bool queryStringAppend,
             bool queryStringDelete,
-            bool escapeBackReferences)
+            bool escapeBackReferences
+        )
         {
             StatusCode = statusCode;
             Url = pattern;
@@ -28,7 +29,11 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             EscapeBackReferences = escapeBackReferences;
         }
 
-        public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+        public override void ApplyAction(
+            RewriteContext context,
+            BackReferenceCollection? ruleBackReferences,
+            BackReferenceCollection? conditionBackReferences
+        )
         {
             var pattern = Url!.Evaluate(context, ruleBackReferences, conditionBackReferences);
             var response = context.HttpContext.Response;
@@ -45,7 +50,10 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
                 return;
             }
 
-            if (pattern.IndexOf(Uri.SchemeDelimiter, StringComparison.Ordinal) == -1 && pattern[0] != '/')
+            if (
+                pattern.IndexOf(Uri.SchemeDelimiter, StringComparison.Ordinal) == -1
+                && pattern[0] != '/'
+            )
             {
                 pattern = '/' + pattern;
             }
@@ -58,11 +66,12 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
             if (split >= 0 && QueryStringAppend)
             {
                 var query = context.HttpContext.Request.QueryString.Add(
-                    QueryString.FromUriComponent(
-                        pattern.Substring(split)));
+                    QueryString.FromUriComponent(pattern.Substring(split))
+                );
 
                 // not using the response.redirect here because status codes may be 301, 302, 307, 308
-                response.Headers[HeaderNames.Location] = pathBase + pattern.Substring(0, split) + query;
+                response.Headers[HeaderNames.Location] =
+                    pathBase + pattern.Substring(0, split) + query;
             }
             else
             {
@@ -74,7 +83,8 @@ namespace Microsoft.AspNetCore.Rewrite.UrlActions
                 }
                 else
                 {
-                    response.Headers[HeaderNames.Location] = pathBase + pattern + context.HttpContext.Request.QueryString;
+                    response.Headers[HeaderNames.Location] =
+                        pathBase + pattern + context.HttpContext.Request.QueryString;
                 }
             }
             context.Result = RuleResult.EndResponse;

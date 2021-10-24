@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.QuickInfo
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public QuickInfoSourceProvider(
             IThreadingContext threadingContext,
-            Lazy<IStreamingFindUsagesPresenter> streamingPresenter)
+            Lazy<IStreamingFindUsagesPresenter> streamingPresenter
+        )
         {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;

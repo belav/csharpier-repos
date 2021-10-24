@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             IWpfTextView innerTextView,
             IBufferGraph bufferGraph,
             IVsTextLines debuggerTextLinesOpt,
-            bool isImmediateWindow)
+            bool isImmediateWindow
+        )
         {
             _innerTextView = innerTextView;
             _debuggerTextLinesOpt = debuggerTextLinesOpt;
@@ -66,15 +67,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
         /// (6) The context buffer which is typically a source file
         /// 
         /// </summary>
-        public IBufferGraph BufferGraph
-        {
-            get;
-        }
+        public IBufferGraph BufferGraph { get; }
 
-        public bool IsImmediateWindow
-        {
-            get;
-        }
+        public bool IsImmediateWindow { get; }
 
         public uint StartBufferUpdate()
         {
@@ -85,7 +80,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             }
 
             _debuggerTextLinesOpt.GetStateFlags(out var bufferFlags);
-            _debuggerTextLinesOpt.SetStateFlags((uint)((BUFFERSTATEFLAGS)bufferFlags & ~BUFFERSTATEFLAGS.BSF_USER_READONLY));
+            _debuggerTextLinesOpt.SetStateFlags(
+                (uint)((BUFFERSTATEFLAGS)bufferFlags & ~BUFFERSTATEFLAGS.BSF_USER_READONLY)
+            );
             return bufferFlags;
         }
 
@@ -142,15 +139,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
 
         public ITrackingSpan ProvisionalTextHighlight
         {
-            get
-            {
-                return _innerTextView.ProvisionalTextHighlight;
-            }
-
-            set
-            {
-                _innerTextView.ProvisionalTextHighlight = value;
-            }
+            get { return _innerTextView.ProvisionalTextHighlight; }
+            set { _innerTextView.ProvisionalTextHighlight = value; }
         }
 
         public ITextViewRoleSet Roles
@@ -190,15 +180,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
 
         public double ViewportLeft
         {
-            get
-            {
-                return _innerTextView.ViewportLeft;
-            }
-
-            set
-            {
-                _innerTextView.ViewportLeft = value;
-            }
+            get { return _innerTextView.ViewportLeft; }
+            set { _innerTextView.ViewportLeft = value; }
         }
 
         public double ViewportRight
@@ -223,84 +206,49 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
 
         public ITextDataModel TextDataModel
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         public ITextBuffer TextBuffer
         {
-            get
-            {
-                return _innerTextView.TextBuffer;
-            }
+            get { return _innerTextView.TextBuffer; }
         }
 
         public ITextSnapshot TextSnapshot
         {
-            get
-            {
-                return _innerTextView.TextSnapshot;
-            }
+            get { return _innerTextView.TextSnapshot; }
         }
 
         public FrameworkElement VisualElement
         {
-            get
-            {
-                return _innerTextView.VisualElement;
-            }
+            get { return _innerTextView.VisualElement; }
         }
 
         public Brush Background
         {
-            get
-            {
-                return _innerTextView.Background;
-            }
-
-            set
-            {
-                _innerTextView.Background = value;
-            }
+            get { return _innerTextView.Background; }
+            set { _innerTextView.Background = value; }
         }
 
         IWpfTextViewLineCollection IWpfTextView.TextViewLines
         {
-            get
-            {
-                return _innerTextView.TextViewLines;
-            }
+            get { return _innerTextView.TextViewLines; }
         }
 
         public IFormattedLineSource FormattedLineSource
         {
-            get
-            {
-                return _innerTextView.FormattedLineSource;
-            }
+            get { return _innerTextView.FormattedLineSource; }
         }
 
         public ILineTransformSource LineTransformSource
         {
-            get
-            {
-                return _innerTextView.LineTransformSource;
-            }
+            get { return _innerTextView.LineTransformSource; }
         }
 
         public double ZoomLevel
         {
-            get
-            {
-                return _innerTextView.ZoomLevel;
-            }
-
-            set
-            {
-                _innerTextView.ZoomLevel = value;
-            }
+            get { return _innerTextView.ZoomLevel; }
+            set { _innerTextView.ZoomLevel = value; }
         }
 
         public bool InOuterLayout => throw new NotImplementedException();
@@ -318,32 +266,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             }
         }
 
-        public void Close()
-            => throw new NotSupportedException();
+        public void Close() => throw new NotSupportedException();
 
-        public void DisplayTextLineContainingBufferPosition(SnapshotPoint bufferPosition, double verticalDistance, ViewRelativePosition relativeTo, double? viewportWidthOverride, double? viewportHeightOverride)
-            => throw new NotSupportedException();
+        public void DisplayTextLineContainingBufferPosition(
+            SnapshotPoint bufferPosition,
+            double verticalDistance,
+            ViewRelativePosition relativeTo,
+            double? viewportWidthOverride,
+            double? viewportHeightOverride
+        ) => throw new NotSupportedException();
 
-        public void DisplayTextLineContainingBufferPosition(SnapshotPoint bufferPosition, double verticalDistance, ViewRelativePosition relativeTo)
-            => throw new NotSupportedException();
+        public void DisplayTextLineContainingBufferPosition(
+            SnapshotPoint bufferPosition,
+            double verticalDistance,
+            ViewRelativePosition relativeTo
+        ) => throw new NotSupportedException();
 
-        public SnapshotSpan GetTextElementSpan(SnapshotPoint point)
-            => throw new NotSupportedException();
+        public SnapshotSpan GetTextElementSpan(SnapshotPoint point) =>
+            throw new NotSupportedException();
 
-        public ITextViewLine GetTextViewLineContainingBufferPosition(SnapshotPoint bufferPosition)
-            => _innerTextView.GetTextViewLineContainingBufferPosition(bufferPosition);
+        public ITextViewLine GetTextViewLineContainingBufferPosition(
+            SnapshotPoint bufferPosition
+        ) => _innerTextView.GetTextViewLineContainingBufferPosition(bufferPosition);
 
-        public void QueueSpaceReservationStackRefresh()
-            => throw new NotSupportedException();
+        public void QueueSpaceReservationStackRefresh() => throw new NotSupportedException();
 
-        public IAdornmentLayer GetAdornmentLayer(string name)
-            => _innerTextView.GetAdornmentLayer(name);
+        public IAdornmentLayer GetAdornmentLayer(string name) =>
+            _innerTextView.GetAdornmentLayer(name);
 
-        public ISpaceReservationManager GetSpaceReservationManager(string name)
-            => _innerTextView.GetSpaceReservationManager(name);
+        public ISpaceReservationManager GetSpaceReservationManager(string name) =>
+            _innerTextView.GetSpaceReservationManager(name);
 
-        IWpfTextViewLine IWpfTextView.GetTextViewLineContainingBufferPosition(SnapshotPoint bufferPosition)
-            => _innerTextView.GetTextViewLineContainingBufferPosition(bufferPosition);
+        IWpfTextViewLine IWpfTextView.GetTextViewLineContainingBufferPosition(
+            SnapshotPoint bufferPosition
+        ) => _innerTextView.GetTextViewLineContainingBufferPosition(bufferPosition);
 
         public void Cleanup()
         {
@@ -358,12 +314,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             _innerTextView.Properties.RemoveProperty(CompletionRoot);
         }
 
-        public void QueuePostLayoutAction(Action action) => _innerTextView.QueuePostLayoutAction(action);
+        public void QueuePostLayoutAction(Action action) =>
+            _innerTextView.QueuePostLayoutAction(action);
 
-        public bool TryGetTextViewLines(out ITextViewLineCollection textViewLines) => _innerTextView.TryGetTextViewLines(out textViewLines);
+        public bool TryGetTextViewLines(out ITextViewLineCollection textViewLines) =>
+            _innerTextView.TryGetTextViewLines(out textViewLines);
 
-        public bool TryGetTextViewLineContainingBufferPosition(SnapshotPoint bufferPosition, out ITextViewLine textViewLine)
-            => _innerTextView.TryGetTextViewLineContainingBufferPosition(bufferPosition, out textViewLine);
+        public bool TryGetTextViewLineContainingBufferPosition(
+            SnapshotPoint bufferPosition,
+            out ITextViewLine textViewLine
+        ) =>
+            _innerTextView.TryGetTextViewLineContainingBufferPosition(
+                bufferPosition,
+                out textViewLine
+            );
 
         private event EventHandler ClosedInternal;
 
@@ -384,7 +348,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
                     _innerTextView.Closed += value;
                 }
             }
-
             remove
             {
                 if (this.IsImmediateWindow)

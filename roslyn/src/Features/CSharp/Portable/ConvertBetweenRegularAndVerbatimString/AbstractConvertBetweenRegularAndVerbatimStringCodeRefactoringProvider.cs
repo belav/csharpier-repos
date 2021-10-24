@@ -16,10 +16,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
 {
-    internal abstract class AbstractConvertBetweenRegularAndVerbatimStringCodeRefactoringProvider<
-        TStringExpressionSyntax>
-        : CodeRefactoringProvider
-        where TStringExpressionSyntax : ExpressionSyntax
+    internal abstract class AbstractConvertBetweenRegularAndVerbatimStringCodeRefactoringProvider<TStringExpressionSyntax>
+        : CodeRefactoringProvider where TStringExpressionSyntax : ExpressionSyntax
     {
         private const char OpenBrace = '{';
         private const char CloseBrace = '}';
@@ -27,14 +25,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
 
         protected abstract bool IsInterpolation { get; }
         protected abstract bool IsAppropriateLiteralKind(TStringExpressionSyntax literalExpression);
-        protected abstract void AddSubStringTokens(TStringExpressionSyntax literalExpression, ArrayBuilder<SyntaxToken> subTokens);
+        protected abstract void AddSubStringTokens(
+            TStringExpressionSyntax literalExpression,
+            ArrayBuilder<SyntaxToken> subTokens
+        );
         protected abstract bool IsVerbatim(TStringExpressionSyntax literalExpression);
-        protected abstract TStringExpressionSyntax CreateVerbatimStringExpression(IVirtualCharService charService, StringBuilder sb, TStringExpressionSyntax stringExpression);
-        protected abstract TStringExpressionSyntax CreateRegularStringExpression(IVirtualCharService charService, StringBuilder sb, TStringExpressionSyntax stringExpression);
+        protected abstract TStringExpressionSyntax CreateVerbatimStringExpression(
+            IVirtualCharService charService,
+            StringBuilder sb,
+            TStringExpressionSyntax stringExpression
+        );
+        protected abstract TStringExpressionSyntax CreateRegularStringExpression(
+            IVirtualCharService charService,
+            StringBuilder sb,
+            TStringExpressionSyntax stringExpression
+        );
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
-            var literalExpression = await context.TryGetRelevantNodeAsync<TStringExpressionSyntax>().ConfigureAwait(false);
+            var literalExpression = await context
+                .TryGetRelevantNodeAsync<TStringExpressionSyntax>()
+                .ConfigureAwait(false);
             if (literalExpression == null || !IsAppropriateLiteralKind(literalExpression))
                 return;
 
@@ -56,41 +67,79 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             if (IsVerbatim(literalExpression))
             {
                 // always offer to convert from verbatim string to normal string.
-                context.RegisterRefactoring(new MyCodeAction(
-                    CSharpFeaturesResources.Convert_to_regular_string,
-                    c => ConvertToRegularStringAsync(document, literalExpression, c)));
+                context.RegisterRefactoring(
+                    new MyCodeAction(
+                        CSharpFeaturesResources.Convert_to_regular_string,
+                        c => ConvertToRegularStringAsync(document, literalExpression, c)
+                    )
+                );
             }
             else if (ContainsSimpleEscape(charService, subStringTokens))
             {
                 // Offer to convert to a verbatim string if the normal string contains simple
                 // escapes that can be directly embedded in the verbatim string.
-                context.RegisterRefactoring(new MyCodeAction(
-                    CSharpFeaturesResources.Convert_to_verbatim_string,
-                    c => ConvertToVerbatimStringAsync(document, literalExpression, c)));
+                context.RegisterRefactoring(
+                    new MyCodeAction(
+                        CSharpFeaturesResources.Convert_to_verbatim_string,
+                        c => ConvertToVerbatimStringAsync(document, literalExpression, c)
+                    )
+                );
             }
         }
 
         private static async Task<Document> ConvertAsync(
-            Func<IVirtualCharService, StringBuilder, TStringExpressionSyntax, TStringExpressionSyntax> convert,
-            Document document, TStringExpressionSyntax stringExpression, CancellationToken cancellationToken)
+            Func<
+                IVirtualCharService,
+                StringBuilder,
+                TStringExpressionSyntax,
+                TStringExpressionSyntax
+            > convert,
+            Document document,
+            TStringExpressionSyntax stringExpression,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = PooledStringBuilder.GetInstance(out var sb);
 
             var charService = document.GetRequiredLanguageService<IVirtualCharLanguageService>();
-            var newStringExpression = convert(charService, sb, stringExpression).WithTriviaFrom(stringExpression);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var newStringExpression = convert(charService, sb, stringExpression)
+                .WithTriviaFrom(stringExpression);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             return document.WithSyntaxRoot(root.ReplaceNode(stringExpression, newStringExpression));
         }
 
-        private Task<Document> ConvertToVerbatimStringAsync(Document document, TStringExpressionSyntax stringExpression, CancellationToken cancellationToken)
-            => ConvertAsync(CreateVerbatimStringExpression, document, stringExpression, cancellationToken);
+        private Task<Document> ConvertToVerbatimStringAsync(
+            Document document,
+            TStringExpressionSyntax stringExpression,
+            CancellationToken cancellationToken
+        ) =>
+            ConvertAsync(
+                CreateVerbatimStringExpression,
+                document,
+                stringExpression,
+                cancellationToken
+            );
 
-        private Task<Document> ConvertToRegularStringAsync(Document document, TStringExpressionSyntax stringExpression, CancellationToken cancellationToken)
-            => ConvertAsync(CreateRegularStringExpression, document, stringExpression, cancellationToken);
+        private Task<Document> ConvertToRegularStringAsync(
+            Document document,
+            TStringExpressionSyntax stringExpression,
+            CancellationToken cancellationToken
+        ) =>
+            ConvertAsync(
+                CreateRegularStringExpression,
+                document,
+                stringExpression,
+                cancellationToken
+            );
 
         protected void AddVerbatimStringText(
-            IVirtualCharService charService, StringBuilder sb, SyntaxToken stringToken)
+            IVirtualCharService charService,
+            StringBuilder sb,
+            SyntaxToken stringToken
+        )
         {
             var isInterpolation = IsInterpolation;
             var chars = charService.TryConvertToVirtualChars(stringToken);
@@ -118,11 +167,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             }
         }
 
-        private static bool IsOpenOrCloseBrace(VirtualChar ch)
-            => ch == OpenBrace || ch == CloseBrace;
+        private static bool IsOpenOrCloseBrace(VirtualChar ch) =>
+            ch == OpenBrace || ch == CloseBrace;
 
         protected void AddRegularStringText(
-            IVirtualCharService charService, StringBuilder sb, SyntaxToken stringToken)
+            IVirtualCharService charService,
+            StringBuilder sb,
+            SyntaxToken stringToken
+        )
         {
             var isInterpolation = IsInterpolation;
             var chars = charService.TryConvertToVirtualChars(stringToken);
@@ -146,7 +198,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
         }
 
         private static bool ContainsSimpleEscape(
-            IVirtualCharService charService, ArrayBuilder<SyntaxToken> subTokens)
+            IVirtualCharService charService,
+            ArrayBuilder<SyntaxToken> subTokens
+        )
         {
             foreach (var subToken in subTokens)
             {
@@ -186,10 +240,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
             /// </summary>
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
 
-            public MyCodeAction(string title, Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(title, createChangedDocument)
-            {
-            }
+            public MyCodeAction(
+                string title,
+                Func<CancellationToken, Task<Document>> createChangedDocument
+            ) : base(title, createChangedDocument) { }
         }
     }
 }

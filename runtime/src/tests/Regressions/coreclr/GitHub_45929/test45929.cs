@@ -37,7 +37,9 @@ namespace test45929
                 methodInfo = GetMethod("ExceptionDispatchInfoCaptureThrow");
                 if (methodInfo is null)
                 {
-                    throw new InvalidOperationException("The methodInfo object is missing or empty.");
+                    throw new InvalidOperationException(
+                        "The methodInfo object is missing or empty."
+                    );
                 }
             }
 
@@ -54,10 +56,13 @@ namespace test45929
                     {
                         if (Interlocked.Increment(ref progress) % 10000 == 0)
                         {
-                            Console.WriteLine($"{DateTime.Now} : {progress * 100D / MaxCount:000.0}%");
+                            Console.WriteLine(
+                                $"{DateTime.Now} : {progress * 100D / MaxCount:000.0}%"
+                            );
                         }
                         test.Invoke();
-                    });
+                    }
+                );
             }
 
             public void Invoke()
@@ -74,7 +79,11 @@ namespace test45929
 
             static MethodInfo GetMethod(string methodName)
             {
-                foreach (MethodInfo method in typeof(TestCore).GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                foreach (
+                    MethodInfo method in typeof(TestCore).GetMethods(
+                        BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                    )
+                )
                 {
                     if (methodName == method.Name)
                     {

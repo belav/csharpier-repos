@@ -34,34 +34,45 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
             var mockTrace = new Mock<KestrelTrace>(Logger) { CallBase = true };
             mockTrace
                 .Setup(trace => trace.ApplicationNeverCompleted(It.IsAny<string>()))
-                .Callback(() =>
-                {
-                    logWh.Release();
-                });
+                .Callback(
+                    () =>
+                    {
+                        logWh.Release();
+                    }
+                );
 
             var testContext = new TestServiceContext(new LoggerFactory(), mockTrace.Object);
             testContext.InitializeHeartbeat();
 
-            await using (var server = new TestServer(context =>
-                {
-                    appStartedWh.Release();
-                    var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-                    return tcs.Task;
-                },
-                testContext))
+            await using (
+                var server = new TestServer(
+                    context =>
+                    {
+                        appStartedWh.Release();
+                        var tcs = new TaskCompletionSource(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
+                        return tcs.Task;
+                    },
+                    testContext
+                )
+            )
             {
                 using (var connection = server.CreateConnection())
                 {
                     await connection.SendEmptyGet();
 
                     Assert.True(await appStartedWh.WaitAsync(TestConstants.DefaultTimeout));
-
                     // Close connection without waiting for a response
                 }
 
                 var logWaitAttempts = 0;
 
-                for (; !await logWh.WaitAsync(TimeSpan.FromSeconds(1)) && logWaitAttempts < 30; logWaitAttempts++)
+                for (
+                    ;
+                    !await logWh.WaitAsync(TimeSpan.FromSeconds(1)) && logWaitAttempts < 30;
+                    logWaitAttempts++
+                )
                 {
                     GC.Collect();
                     GC.WaitForPendingFinalizers();

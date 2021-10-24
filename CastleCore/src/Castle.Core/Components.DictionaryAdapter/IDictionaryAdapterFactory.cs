@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,16 +15,16 @@
 
 namespace Castle.Components.DictionaryAdapter
 {
-	using System;
-	using System.Collections;
-	using System.Collections.Specialized;
+    using System;
+    using System.Collections;
+    using System.Collections.Specialized;
 
-	/// <summary>
+    /// <summary>
 	/// Defines the contract for building typed dictionary adapters.
 	/// </summary>
-	public interface IDictionaryAdapterFactory
-	{
-		/// <summary>
+    public interface IDictionaryAdapterFactory
+    {
+        /// <summary>
 		/// Gets a typed adapter bound to the <see cref="IDictionary"/>.
 		/// </summary>
 		/// <typeparam name="T">The typed interface.</typeparam>
@@ -33,9 +33,9 @@ namespace Castle.Components.DictionaryAdapter
 		/// <remarks>
 		/// The type represented by T must be an interface with properties.
 		/// </remarks>
-		T GetAdapter<T>(IDictionary dictionary);
+        T GetAdapter<T>(IDictionary dictionary);
 
-		/// <summary>
+        /// <summary>
 		/// Gets a typed adapter bound to the <see cref="IDictionary"/>.
 		/// </summary>
 		/// <param name="type">The typed interface.</param>
@@ -44,9 +44,9 @@ namespace Castle.Components.DictionaryAdapter
 		/// <remarks>
 		/// The type represented by T must be an interface with properties.
 		/// </remarks>
-		object GetAdapter(Type type, IDictionary dictionary);
+        object GetAdapter(Type type, IDictionary dictionary);
 
-		/// <summary>
+        /// <summary>
 		/// Gets a typed adapter bound to the <see cref="IDictionary"/>.
 		/// </summary>
 		/// <param name="type">The typed interface.</param>
@@ -56,9 +56,9 @@ namespace Castle.Components.DictionaryAdapter
 		/// <remarks>
 		/// The type represented by T must be an interface with properties.
 		/// </remarks>
-		object GetAdapter(Type type, IDictionary dictionary, PropertyDescriptor descriptor);
+        object GetAdapter(Type type, IDictionary dictionary, PropertyDescriptor descriptor);
 
-		/// <summary>
+        /// <summary>
 		/// Gets a typed adapter bound to the <see cref="NameValueCollection"/>.
 		/// </summary>
 		/// <typeparam name="T">The typed interface.</typeparam>
@@ -67,9 +67,9 @@ namespace Castle.Components.DictionaryAdapter
 		/// <remarks>
 		/// The type represented by T must be an interface with properties.
 		/// </remarks>
-		T GetAdapter<T>(NameValueCollection nameValues);
+        T GetAdapter<T>(NameValueCollection nameValues);
 
-		/// <summary>
+        /// <summary>
 		/// Gets a typed adapter bound to the <see cref="NameValueCollection"/>.
 		/// </summary>
 		/// <param name="type">The typed interface.</param>
@@ -78,9 +78,9 @@ namespace Castle.Components.DictionaryAdapter
 		/// <remarks>
 		/// The type represented by T must be an interface with properties.
 		/// </remarks>
-		object GetAdapter(Type type, NameValueCollection nameValues);
+        object GetAdapter(Type type, NameValueCollection nameValues);
 
-		/// <summary>
+        /// <summary>
 		/// Gets a typed adapter bound to the <see cref="System.Xml.XmlNode"/>.
 		/// </summary>
 		/// <typeparam name="T">The typed interface.</typeparam>
@@ -89,9 +89,9 @@ namespace Castle.Components.DictionaryAdapter
 		/// <remarks>
 		/// The type represented by T must be an interface with properties.
 		/// </remarks>
-		T GetAdapter<T>(System.Xml.XmlNode xmlNode);
+        T GetAdapter<T>(System.Xml.XmlNode xmlNode);
 
-		/// <summary>
+        /// <summary>
 		/// Gets a typed adapter bound to the <see cref="System.Xml.XmlNode"/>.
 		/// </summary>
 		/// <param name="type">The typed interface.</param>
@@ -100,29 +100,29 @@ namespace Castle.Components.DictionaryAdapter
 		/// <remarks>
 		/// The type represented by T must be an interface with properties.
 		/// </remarks>
-		object GetAdapter(Type type, System.Xml.XmlNode xmlNode);
+        object GetAdapter(Type type, System.Xml.XmlNode xmlNode);
 
-		/// <summary>
+        /// <summary>
 		/// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
 		/// </summary>
 		/// <param name="type">The typed interface.</param>
 		/// <returns>The adapter meta-data.</returns>
-		DictionaryAdapterMeta GetAdapterMeta(Type type);
+        DictionaryAdapterMeta GetAdapterMeta(Type type);
 
-		/// <summary>
+        /// <summary>
 		/// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
 		/// </summary>
 		/// <param name="type">The typed interface.</param>
 		/// <param name="descriptor">The property descriptor.</param>
 		/// <returns>The adapter meta-data.</returns>
-		DictionaryAdapterMeta GetAdapterMeta(Type type, PropertyDescriptor descriptor);
+        DictionaryAdapterMeta GetAdapterMeta(Type type, PropertyDescriptor descriptor);
 
-		/// <summary>
+        /// <summary>
 		/// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
 		/// </summary>
 		/// <param name="type">The typed interface.</param>
 		/// <param name="other">Another <see cref="DictionaryAdapterMeta"/> from which to copy behaviors.</param>
 		/// <returns>The adapter meta-data.</returns>
-		DictionaryAdapterMeta GetAdapterMeta(Type type, DictionaryAdapterMeta other);
-	}
+        DictionaryAdapterMeta GetAdapterMeta(Type type, DictionaryAdapterMeta other);
+    }
 }

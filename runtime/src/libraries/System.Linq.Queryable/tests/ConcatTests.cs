@@ -10,8 +10,8 @@ namespace System.Linq.Tests
         [Fact]
         public void BothEmpty()
         {
-            int[] first = { };
-            int[] second = { };
+            int[] first = {  };
+            int[] second = {  };
             Assert.Empty(first.AsQueryable().Concat(second.AsQueryable()));
         }
 
@@ -28,19 +28,28 @@ namespace System.Linq.Tests
         [Fact]
         public void FirstNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source1", () => ((IQueryable<int>)null).Concat(Enumerable.Range(0, 0).AsQueryable()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source1",
+                () => ((IQueryable<int>)null).Concat(Enumerable.Range(0, 0).AsQueryable())
+            );
         }
 
         [Fact]
         public void SecondNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source2", () => Enumerable.Range(0, 0).AsQueryable().Concat(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source2",
+                () => Enumerable.Range(0, 0).AsQueryable().Concat(null)
+            );
         }
 
         [Fact]
         public void Concat()
         {
-            var count = (new int[] { 0, 1, 2 }).AsQueryable().Concat((new int[] { 10, 11, 12 }).AsQueryable()).Count();
+            var count = (new int[] { 0, 1, 2 })
+                .AsQueryable()
+                .Concat((new int[] { 10, 11, 12 }).AsQueryable())
+                .Count();
             Assert.Equal(6, count);
         }
     }

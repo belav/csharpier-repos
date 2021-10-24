@@ -23,7 +23,13 @@ namespace Microsoft.AspNetCore.SignalR
         /// <param name="hub">The instance of the Hub.</param>
         /// <param name="hubMethod">The <see cref="MethodInfo"/> for the Hub method being invoked.</param>
         /// <param name="hubMethodArguments">The arguments provided by the client.</param>
-        public HubInvocationContext(HubCallerContext context, IServiceProvider serviceProvider, Hub hub, MethodInfo hubMethod, IReadOnlyList<object?> hubMethodArguments)
+        public HubInvocationContext(
+            HubCallerContext context,
+            IServiceProvider serviceProvider,
+            Hub hub,
+            MethodInfo hubMethod,
+            IReadOnlyList<object?> hubMethodArguments
+        )
         {
             Hub = hub;
             ServiceProvider = serviceProvider;
@@ -32,8 +38,13 @@ namespace Microsoft.AspNetCore.SignalR
             Context = context;
         }
 
-        internal HubInvocationContext(ObjectMethodExecutor objectMethodExecutor, HubCallerContext context, IServiceProvider serviceProvider, Hub hub, object?[] hubMethodArguments)
-            : this(context, serviceProvider, hub, objectMethodExecutor.MethodInfo, hubMethodArguments)
+        internal HubInvocationContext(
+            ObjectMethodExecutor objectMethodExecutor,
+            HubCallerContext context,
+            IServiceProvider serviceProvider,
+            Hub hub,
+            object?[] hubMethodArguments
+        ) : this(context, serviceProvider, hub, objectMethodExecutor.MethodInfo, hubMethodArguments)
         {
             ObjectMethodExecutor = objectMethodExecutor;
         }

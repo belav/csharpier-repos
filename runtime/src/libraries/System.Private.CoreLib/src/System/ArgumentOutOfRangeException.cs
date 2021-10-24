@@ -17,15 +17,16 @@ namespace System
     // The ArgumentOutOfRangeException is thrown when an argument
     // is outside the legal range for that argument.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ArgumentOutOfRangeException : ArgumentException
     {
         private readonly object? _actualValue;
 
         // Creates a new ArgumentOutOfRangeException with its message
         // string set to a default message explaining an argument was out of range.
-        public ArgumentOutOfRangeException()
-            : base(SR.Arg_ArgumentOutOfRangeException)
+        public ArgumentOutOfRangeException() : base(SR.Arg_ArgumentOutOfRangeException)
         {
             HResult = HResults.COR_E_ARGUMENTOUTOFRANGE;
         }
@@ -77,7 +78,10 @@ namespace System
                 string s = base.Message;
                 if (_actualValue != null)
                 {
-                    string valueMessage = SR.Format(SR.ArgumentOutOfRange_ActualValue, _actualValue);
+                    string valueMessage = SR.Format(
+                        SR.ArgumentOutOfRange_ActualValue,
+                        _actualValue
+                    );
                     if (s == null)
                         return valueMessage;
                     return s + Environment.NewLineConst + valueMessage;

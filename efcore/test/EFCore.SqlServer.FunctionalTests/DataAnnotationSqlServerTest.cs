@@ -15,18 +15,23 @@ using Xunit.Abstractions;
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore
 {
-    public class DataAnnotationSqlServerTest : DataAnnotationRelationalTestBase<DataAnnotationSqlServerTest.DataAnnotationSqlServerFixture>
+    public class DataAnnotationSqlServerTest
+        : DataAnnotationRelationalTestBase<DataAnnotationSqlServerTest.DataAnnotationSqlServerFixture>
     {
         // ReSharper disable once UnusedParameter.Local
-        public DataAnnotationSqlServerTest(DataAnnotationSqlServerFixture fixture, ITestOutputHelper testOutputHelper)
-            : base(fixture)
+        public DataAnnotationSqlServerTest(
+            DataAnnotationSqlServerFixture fixture,
+            ITestOutputHelper testOutputHelper
+        ) : base(fixture)
         {
             fixture.TestSqlLoggerFactory.Clear();
             //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
         }
 
-        protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected override void UseTransaction(
+            DatabaseFacade facade,
+            IDbContextTransaction transaction
+        ) => facade.UseTransaction(transaction.GetDbTransaction());
 
         [ConditionalFact]
         public virtual ModelBuilder Default_for_key_string_column_throws()
@@ -39,10 +44,13 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.WarningAsErrorTemplate(
                     RelationalEventId.ModelValidationKeyDefaultValueWarning,
-                    RelationalResources.LogKeyHasDefaultValue(new TestLogger<SqlServerLoggingDefinitions>())
+                    RelationalResources
+                        .LogKeyHasDefaultValue(new TestLogger<SqlServerLoggingDefinitions>())
                         .GenerateMessage(nameof(Login1.UserName), nameof(Login1)),
-                    "RelationalEventId.ModelValidationKeyDefaultValueWarning"),
-                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message);
+                    "RelationalEventId.ModelValidationKeyDefaultValueWarning"
+                ),
+                Assert.Throws<InvalidOperationException>(() => Validate(modelBuilder)).Message
+            );
 
             return modelBuilder;
         }
@@ -51,7 +59,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             var modelBuilder = base.Non_public_annotations_are_enabled();
 
-            var property = GetProperty<PrivateMemberAnnotationClass>(modelBuilder, "PersonFirstName");
+            var property = GetProperty<PrivateMemberAnnotationClass>(
+                modelBuilder,
+                "PersonFirstName"
+            );
             Assert.Equal("dsdsd", property.GetColumnBaseName());
             Assert.Equal("nvarchar(128)", property.GetColumnType());
 
@@ -73,7 +84,10 @@ namespace Microsoft.EntityFrameworkCore
         {
             var modelBuilder = base.Key_and_column_work_together();
 
-            var relational = GetProperty<ColumnKeyAnnotationClass1>(modelBuilder, "PersonFirstName");
+            var relational = GetProperty<ColumnKeyAnnotationClass1>(
+                modelBuilder,
+                "PersonFirstName"
+            );
             Assert.Equal("dsdsd", relational.GetColumnBaseName());
             Assert.Equal("nvarchar(128)", relational.GetColumnType());
 
@@ -119,8 +133,13 @@ namespace Microsoft.EntityFrameworkCore
         {
             var modelBuilder = base.DatabaseGeneratedOption_configures_the_property_correctly();
 
-            var identity = modelBuilder.Model.FindEntityType(typeof(GeneratedEntity)).FindProperty(nameof(GeneratedEntity.Identity));
-            Assert.Equal(SqlServerValueGenerationStrategy.IdentityColumn, identity.GetValueGenerationStrategy());
+            var identity = modelBuilder.Model
+                .FindEntityType(typeof(GeneratedEntity))
+                .FindProperty(nameof(GeneratedEntity.Identity));
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.IdentityColumn,
+                identity.GetValueGenerationStrategy()
+            );
 
             return modelBuilder;
         }
@@ -133,23 +152,37 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "Unique_No",
-                modelBuilder.Model.FindEntityType(typeof(One)).FindProperty(nameof(One.UniqueNo)).GetColumnBaseName());
+                modelBuilder.Model
+                    .FindEntityType(typeof(One))
+                    .FindProperty(nameof(One.UniqueNo))
+                    .GetColumnBaseName()
+            );
         }
 
         public override ModelBuilder DatabaseGeneratedOption_Identity_does_not_throw_on_noninteger_properties()
         {
-            var modelBuilder = base.DatabaseGeneratedOption_Identity_does_not_throw_on_noninteger_properties();
+            var modelBuilder =
+                base.DatabaseGeneratedOption_Identity_does_not_throw_on_noninteger_properties();
 
             var entity = modelBuilder.Model.FindEntityType(typeof(GeneratedEntityNonInteger));
 
             var stringProperty = entity.FindProperty(nameof(GeneratedEntityNonInteger.String));
-            Assert.Equal(SqlServerValueGenerationStrategy.None, stringProperty.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.None,
+                stringProperty.GetValueGenerationStrategy()
+            );
 
             var dateTimeProperty = entity.FindProperty(nameof(GeneratedEntityNonInteger.DateTime));
-            Assert.Equal(SqlServerValueGenerationStrategy.None, dateTimeProperty.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.None,
+                dateTimeProperty.GetValueGenerationStrategy()
+            );
 
             var guidProperty = entity.FindProperty(nameof(GeneratedEntityNonInteger.Guid));
-            Assert.Equal(SqlServerValueGenerationStrategy.None, guidProperty.GetValueGenerationStrategy());
+            Assert.Equal(
+                SqlServerValueGenerationStrategy.None,
+                guidProperty.GetValueGenerationStrategy()
+            );
 
             return modelBuilder;
         }
@@ -185,7 +218,8 @@ SELECT @@ROWCOUNT;",
 SET NOCOUNT ON;
 UPDATE [Sample] SET [Name] = @p0, [RowVersion] = @p1
 WHERE [Unique_No] = @p2 AND [RowVersion] = @p3;
-SELECT @@ROWCOUNT;");
+SELECT @@ROWCOUNT;"
+            );
         }
 
         public override void DatabaseGeneratedAttribute_autogenerates_values_when_set_to_identity()
@@ -206,7 +240,8 @@ INSERT INTO [Sample] ([MaxLengthProperty], [Name], [RowVersion], [AdditionalDeta
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
 SELECT [Unique_No]
 FROM [Sample]
-WHERE @@ROWCOUNT = 1 AND [Unique_No] = scope_identity();");
+WHERE @@ROWCOUNT = 1 AND [Unique_No] = scope_identity();"
+            );
         }
 
         public override void MaxLengthAttribute_throws_while_inserting_value_longer_than_max_length()
@@ -242,7 +277,8 @@ INSERT INTO [Sample] ([MaxLengthProperty], [Name], [RowVersion], [AdditionalDeta
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
 SELECT [Unique_No]
 FROM [Sample]
-WHERE @@ROWCOUNT = 1 AND [Unique_No] = scope_identity();");
+WHERE @@ROWCOUNT = 1 AND [Unique_No] = scope_identity();"
+            );
         }
 
         public override void StringLengthAttribute_throws_while_inserting_value_longer_than_max_length()
@@ -266,29 +302,29 @@ INSERT INTO [Two] ([Data])
 VALUES (@p0);
 SELECT [Id], [Timestamp]
 FROM [Two]
-WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();");
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();"
+            );
         }
 
         public override void TimestampAttribute_throws_if_value_in_database_changed()
         {
             base.TimestampAttribute_throws_if_value_in_database_changed();
-
             // Not validating SQL because not significantly different from other tests and
             // row version value is not stable.
         }
 
         private static readonly string _eol = Environment.NewLine;
 
-        private void AssertSql(params string[] expected)
-            => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+        private void AssertSql(params string[] expected) =>
+            Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
         public class DataAnnotationSqlServerFixture : DataAnnotationRelationalFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
         }
     }
 }

@@ -25,7 +25,12 @@ namespace Microsoft.AspNetCore.CookiePolicy
             {
                 if (SetCookie != null && SetCookie.Count > 0)
                 {
-                    var authCookie = SetCookie.SingleOrDefault(c => c.Contains(".AspNetCore." + TestExtensions.CookieAuthenticationScheme + "="));
+                    var authCookie = SetCookie.SingleOrDefault(
+                        c =>
+                            c.Contains(
+                                ".AspNetCore." + TestExtensions.CookieAuthenticationScheme + "="
+                            )
+                    );
                     if (authCookie != null)
                     {
                         return authCookie.Substring(0, authCookie.IndexOf(';'));
@@ -38,9 +43,13 @@ namespace Microsoft.AspNetCore.CookiePolicy
 
         public string FindClaimValue(string claimType, string issuer = null)
         {
-            var claim = ResponseElement.Elements("claim")
-                .SingleOrDefault(elt => elt.Attribute("type").Value == claimType &&
-                    (issuer == null || elt.Attribute("issuer").Value == issuer));
+            var claim = ResponseElement
+                .Elements("claim")
+                .SingleOrDefault(
+                    elt =>
+                        elt.Attribute("type").Value == claimType
+                        && (issuer == null || elt.Attribute("issuer").Value == issuer)
+                );
             if (claim == null)
             {
                 return null;

@@ -13,35 +13,66 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         /// <summary>
         /// The currently supported set of XAML LSP Server capabilities
         /// </summary>
-        public static VSServerCapabilities Current => new()
-        {
-            CompletionProvider = new CompletionOptions { ResolveProvider = true, TriggerCharacters = new string[] { "<", " ", ":", ".", "=", "\"", "'", "{", ",", "(" } },
-            HoverProvider = true,
-            FoldingRangeProvider = new FoldingRangeOptions { },
-            DocumentFormattingProvider = true,
-            DocumentRangeFormattingProvider = true,
-            DocumentOnTypeFormattingProvider = new DocumentOnTypeFormattingOptions { FirstTriggerCharacter = ">", MoreTriggerCharacter = new string[] { "\n" } },
-            OnAutoInsertProvider = new DocumentOnAutoInsertOptions { TriggerCharacters = new[] { "=", "/", ">" } },
-            TextDocumentSync = new TextDocumentSyncOptions
+        public static VSServerCapabilities Current =>
+            new()
             {
-                Change = TextDocumentSyncKind.None,
-                OpenClose = false
-            },
-            SupportsDiagnosticRequests = true,
-            OnTypeRenameProvider = new DocumentOnTypeRenameOptions { WordPattern = OnTypeRenameHandler.NamePattern },
-            ExecuteCommandProvider = new ExecuteCommandOptions { Commands = new[] { StringConstants.CreateEventHandlerCommand } },
-        };
+                CompletionProvider = new CompletionOptions
+                {
+                    ResolveProvider = true,
+                    TriggerCharacters = new string[]
+                    {
+                        "<",
+                        " ",
+                        ":",
+                        ".",
+                        "=",
+                        "\"",
+                        "'",
+                        "{",
+                        ",",
+                        "("
+                    }
+                },
+                HoverProvider = true,
+                FoldingRangeProvider = new FoldingRangeOptions {  },
+                DocumentFormattingProvider = true,
+                DocumentRangeFormattingProvider = true,
+                DocumentOnTypeFormattingProvider = new DocumentOnTypeFormattingOptions
+                {
+                    FirstTriggerCharacter = ">",
+                    MoreTriggerCharacter = new string[] { "\n" }
+                },
+                OnAutoInsertProvider = new DocumentOnAutoInsertOptions
+                {
+                    TriggerCharacters = new[] { "=", "/", ">" }
+                },
+                TextDocumentSync = new TextDocumentSyncOptions
+                {
+                    Change = TextDocumentSyncKind.None,
+                    OpenClose = false
+                },
+                SupportsDiagnosticRequests = true,
+                OnTypeRenameProvider = new DocumentOnTypeRenameOptions
+                {
+                    WordPattern = OnTypeRenameHandler.NamePattern
+                },
+                ExecuteCommandProvider = new ExecuteCommandOptions
+                {
+                    Commands = new[] { StringConstants.CreateEventHandlerCommand }
+                },
+            };
 
         /// <summary>
         /// An empty set of capabilities used to disable the XAML LSP Server
         /// </summary>
-        public static VSServerCapabilities None => new()
-        {
-            TextDocumentSync = new TextDocumentSyncOptions
+        public static VSServerCapabilities None =>
+            new()
             {
-                Change = TextDocumentSyncKind.None,
-                OpenClose = false
-            },
-        };
+                TextDocumentSync = new TextDocumentSyncOptions
+                {
+                    Change = TextDocumentSyncKind.None,
+                    OpenClose = false
+                },
+            };
     }
 }

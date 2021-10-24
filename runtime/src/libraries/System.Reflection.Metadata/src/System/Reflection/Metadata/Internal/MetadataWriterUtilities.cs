@@ -86,7 +86,10 @@ namespace System.Reflection.Metadata.Ecma335
                 return SignatureTypeCode.Single;
             }
 
-            throw new ArgumentException(SR.Format(SR.InvalidConstantValueOfType, value.GetType()), nameof(value));
+            throw new ArgumentException(
+                SR.Format(SR.InvalidConstantValueOfType, value.GetType()),
+                nameof(value)
+            );
         }
 
         internal static void SerializeRowCounts(BlobBuilder writer, ImmutableArray<int> rowCounts)

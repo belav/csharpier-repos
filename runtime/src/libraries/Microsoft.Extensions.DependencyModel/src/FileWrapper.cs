@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Microsoft.Extensions.DependencyModel
 {
-    internal sealed class FileWrapper: IFile
+    internal sealed class FileWrapper : IFile
     {
         public bool Exists(string path)
         {
@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.DependencyModel
             FileAccess fileAccess,
             FileShare fileShare,
             int bufferSize,
-            FileOptions fileOptions)
+            FileOptions fileOptions
+        )
         {
             return new FileStream(path, fileMode, fileAccess, fileShare, bufferSize, fileOptions);
         }

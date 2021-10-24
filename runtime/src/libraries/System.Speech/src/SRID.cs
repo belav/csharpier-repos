@@ -352,9 +352,9 @@ namespace System.Speech
         SapiErrorNoRuleActive,
         SapiErrorLexRequiresCookie,
         SapiErrorStreamUninitialized, // 0x80045057
-        SapiErrorUnused0,             // 0x80045058 is not used by SAPI, but it keeps counting
-        SapiErrorNotSupportedLang,    // 0x80045059
-        SapiErrorVoicePaused,         // 0x8004505a
+        SapiErrorUnused0, // 0x80045058 is not used by SAPI, but it keeps counting
+        SapiErrorNotSupportedLang, // 0x80045059
+        SapiErrorVoicePaused, // 0x8004505a
         SapiErrorAudioBufferUnderflow,
         SapiErrorAudioStoppedUnexpectedly,
         SapiErrorNoWordPronunciation,
@@ -368,7 +368,7 @@ namespace System.Speech
         SapiErrorAudioStopped,
         SapiErrorRecoXMLGenerationFail,
         SapiErrorSMLGenerationFail,
-        SapiErrorNotPromptVoice,         // 0x80045068
+        SapiErrorNotPromptVoice, // 0x80045068
         SapiErrorRootRuleAlreadyDefined, // 0x80045069 == SPERR_ROOTRULE_ALREADY_DEFINED, then it skips 6
         SapiErrorUnused1, // skipped
         SapiErrorUnused2, // skipped
@@ -376,8 +376,8 @@ namespace System.Speech
         SapiErrorUnused4, // skipped
         SapiErrorUnused5, // skipped
         SapiErrorUnused6, // skipped
-        SapiErrorScriptDisallowed,          // 0x80045070 == SPERR_SCRIPT_DISALLOWED
-        SapiErrorRemoteCallTimedOutStart,   // 0x80045071
+        SapiErrorScriptDisallowed, // 0x80045070 == SPERR_SCRIPT_DISALLOWED
+        SapiErrorRemoteCallTimedOutStart, // 0x80045071
         SapiErrorRemoteCallTimedOutConnect,
         SapiErrorSecMgrChangeNotAllowed,
         SapiErrorCompleteButExtendable,
@@ -400,17 +400,17 @@ namespace System.Speech
         SapiLexInvalidData,
         SapiConfigInvalidData,
         SapiLexUnexpectedFormat,
-        SapiStringTooLong,   // 0x80045088
-        SapiStringEmpty,     // 0x80045089 == SPERR_STRING_EMPTY, then it skips 6
-        SapiErrorUnused7,    // skipped
-        SapiErrorUnused8,    // skipped
-        SapiErrorUnused9,    // skipped
-        SapiErrorUnused10,   // skipped
-        SapiErrorUnused11,   // skipped
-        SapiErrorUnused12,   // skipped
-        SapiNonWordTransition,        // 0x80045090 == SPERR_NON_WORD_TRANSITION
+        SapiStringTooLong, // 0x80045088
+        SapiStringEmpty, // 0x80045089 == SPERR_STRING_EMPTY, then it skips 6
+        SapiErrorUnused7, // skipped
+        SapiErrorUnused8, // skipped
+        SapiErrorUnused9, // skipped
+        SapiErrorUnused10, // skipped
+        SapiErrorUnused11, // skipped
+        SapiErrorUnused12, // skipped
+        SapiNonWordTransition, // 0x80045090 == SPERR_NON_WORD_TRANSITION
         SapiSisrAttributesNotAllowed, // 0x80045091
-        SapiSisrMixedNotAllowed,      // 0x80045092
-        SapiVoiceNotFound             // 0x80045093 == SPERR_VOICE_NOT_FOUND == SPERR_LAST
+        SapiSisrMixedNotAllowed, // 0x80045092
+        SapiVoiceNotFound // 0x80045093 == SPERR_VOICE_NOT_FOUND == SPERR_LAST
     }
 }

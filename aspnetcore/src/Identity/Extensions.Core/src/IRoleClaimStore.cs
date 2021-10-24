@@ -22,7 +22,10 @@ namespace Microsoft.AspNetCore.Identity
         /// <returns>
         /// A <see cref="Task{TResult}"/> that represents the result of the asynchronous query, a list of <see cref="Claim"/>s.
         /// </returns>
-        Task<IList<Claim>> GetClaimsAsync(TRole role,  CancellationToken cancellationToken = default(CancellationToken));
+        Task<IList<Claim>> GetClaimsAsync(
+            TRole role,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         /// <summary>
         /// Add a new claim to a role as an asynchronous operation.
@@ -31,7 +34,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="claim">The <see cref="Claim"/> to add.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task AddClaimAsync(TRole role, Claim claim, CancellationToken cancellationToken = default(CancellationToken));
+        Task AddClaimAsync(
+            TRole role,
+            Claim claim,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         /// <summary>
         /// Remove a claim from a role as an asynchronous operation.
@@ -40,6 +47,10 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="claim">The <see cref="Claim"/> to remove.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task RemoveClaimAsync(TRole role, Claim claim, CancellationToken cancellationToken = default(CancellationToken));
+        Task RemoveClaimAsync(
+            TRole role,
+            Claim claim,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
     }
 }

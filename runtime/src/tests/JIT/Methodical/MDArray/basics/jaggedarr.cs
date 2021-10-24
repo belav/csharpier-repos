@@ -23,7 +23,8 @@ public class double1
 
     public static void Init2DMatrix(out double[,] m, out double[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -77,7 +78,8 @@ public class double1
 
     public static void Init3DMatrix(double[,,] m, double[][] refm)
     {
-        int i, j;
+        int i,
+            j;
         i = 0;
         double temp;
 
@@ -133,7 +135,10 @@ public class double1
 
         Console.WriteLine();
         Console.WriteLine("2D Array");
-        Console.WriteLine("Element manipulation of {0} by {0} matrices with different arithmatic operations", size);
+        Console.WriteLine(
+            "Element manipulation of {0} by {0} matrices with different arithmatic operations",
+            size
+        );
         Console.WriteLine("Matrix is member of a Jagged array, element stores random double");
         Console.WriteLine("array set/get, ref/out param are used");
 
@@ -166,7 +171,13 @@ public class double1
                 if (ima2d[2][i, j] != refa2d[i][j])
                     if (!Double.IsNaN(ima2d[2][i, j]) || !Double.IsNaN(refa2d[i][j]))
                     {
-                        Console.WriteLine("i={0}, j={1}, ima2d[2][i,j] {2}!=refa2d[i][j] {3}", i, j, ima2d[2][i, j], refa2d[i][j]);
+                        Console.WriteLine(
+                            "i={0}, j={1}, ima2d[2][i,j] {2}!=refa2d[i][j] {3}",
+                            i,
+                            j,
+                            ima2d[2][i, j],
+                            refa2d[i][j]
+                        );
                         pass = false;
                     }
         }
@@ -178,13 +189,17 @@ public class double1
                 ima2d[2][Int32.MinValue, 0] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException)
-            { }
+            catch (IndexOutOfRangeException) { }
         }
 
         Console.WriteLine();
         Console.WriteLine("3D Array");
-        Console.WriteLine("Element manipulation of {0} by {1} by {2} matrices with different arithmatic operations", size, size + 1, size + 2);
+        Console.WriteLine(
+            "Element manipulation of {0} by {1} by {2} matrices with different arithmatic operations",
+            size,
+            size + 1,
+            size + 2
+        );
         Console.WriteLine("Matrix is member of a Jagged array, element stores random double");
 
         double[][,,] ima3d = new double[3][,,];
@@ -217,7 +232,14 @@ public class double1
                 if (ima3d[2][i, size, j] != refa3d[i][j])
                     if (!Double.IsNaN(ima3d[2][i, size, j]) || !Double.IsNaN(refa3d[i][j]))
                     {
-                        Console.WriteLine("i={0}, j={1}, ima3d[2][i,{3},j] {4}!=refa3d[i][j] {5}", i, j, size, ima3d[2][i, size, j], refa3d[i][j]);
+                        Console.WriteLine(
+                            "i={0}, j={1}, ima3d[2][i,{3},j] {4}!=refa3d[i][j] {5}",
+                            i,
+                            j,
+                            size,
+                            ima3d[2][i, size, j],
+                            refa3d[i][j]
+                        );
                         pass = false;
                     }
         }
@@ -229,8 +251,7 @@ public class double1
                 ima3d[2][size, -1, size] = 5;
                 pass = false;
             }
-            catch (IndexOutOfRangeException)
-            { }
+            catch (IndexOutOfRangeException) { }
         }
 
         Console.WriteLine();

@@ -19,9 +19,7 @@ namespace Microsoft.AspNetCore.Routing.Template
         /// <summary>
         /// Constructs a new <see cref="TemplatePart"/> instance.
         /// </summary>
-        public TemplatePart()
-        {
-        }
+        public TemplatePart() { }
 
         /// <summary>
         /// Constructs a new <see cref="TemplatePart"/> instance given a <paramref name="other"/>.
@@ -43,7 +41,9 @@ namespace Microsoft.AspNetCore.Routing.Template
                 IsCatchAll = parameter.IsCatchAll;
                 IsOptional = parameter.IsOptional;
                 DefaultValue = parameter.Default;
-                InlineConstraints = parameter.ParameterPolicies?.Select(p => new InlineConstraint(p)) ?? Enumerable.Empty<InlineConstraint>();
+                InlineConstraints =
+                    parameter.ParameterPolicies?.Select(p => new InlineConstraint(p))
+                    ?? Enumerable.Empty<InlineConstraint>();
             }
             else if (other.IsSeparator && other is RoutePatternSeparatorPart separator)
             {
@@ -64,11 +64,7 @@ namespace Microsoft.AspNetCore.Routing.Template
         /// <returns>A <see cref="TemplatePart"/> instance.</returns>
         public static TemplatePart CreateLiteral(string text)
         {
-            return new TemplatePart()
-            {
-                IsLiteral = true,
-                Text = text,
-            };
+            return new TemplatePart() { IsLiteral = true, Text = text, };
         }
 
         /// <summary>
@@ -85,7 +81,8 @@ namespace Microsoft.AspNetCore.Routing.Template
             bool isCatchAll,
             bool isOptional,
             object? defaultValue,
-            IEnumerable<InlineConstraint>? inlineConstraints)
+            IEnumerable<InlineConstraint>? inlineConstraints
+        )
         {
             if (name == null)
             {
@@ -138,13 +135,18 @@ namespace Microsoft.AspNetCore.Routing.Template
         /// <summary>
         /// The constraints associates with a route paramter.
         /// </summary>
-        public IEnumerable<InlineConstraint> InlineConstraints { get; private set; } = Enumerable.Empty<InlineConstraint>();
+        public IEnumerable<InlineConstraint> InlineConstraints { get; private set; } =
+            Enumerable.Empty<InlineConstraint>();
 
         internal string? DebuggerToString()
         {
             if (IsParameter)
             {
-                return "{" + (IsCatchAll ? "*" : string.Empty) + Name + (IsOptional ? "?" : string.Empty) + "}";
+                return "{"
+                    + (IsCatchAll ? "*" : string.Empty)
+                    + Name
+                    + (IsOptional ? "?" : string.Empty)
+                    + "}";
             }
             else
             {
@@ -168,13 +170,15 @@ namespace Microsoft.AspNetCore.Routing.Template
             }
             else
             {
-                var kind = IsCatchAll ?
-                    RoutePatternParameterKind.CatchAll :
-                    IsOptional ?
-                        RoutePatternParameterKind.Optional :
-                        RoutePatternParameterKind.Standard;
+                var kind = IsCatchAll
+                    ? RoutePatternParameterKind.CatchAll
+                    : IsOptional
+                        ? RoutePatternParameterKind.Optional
+                        : RoutePatternParameterKind.Standard;
 
-                var constraints = InlineConstraints.Select(c => new RoutePatternParameterPolicyReference(c.Constraint));
+                var constraints = InlineConstraints.Select(
+                    c => new RoutePatternParameterPolicyReference(c.Constraint)
+                );
                 return RoutePatternFactory.ParameterPart(Name!, DefaultValue, kind, constraints);
             }
         }

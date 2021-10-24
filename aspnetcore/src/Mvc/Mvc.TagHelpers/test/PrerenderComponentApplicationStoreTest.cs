@@ -19,7 +19,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var store = new PrerenderComponentApplicationStore();
             var state = new Dictionary<string, byte[]>()
             {
-                ["MyValue"] = new byte[] {1,2,3,4}
+                ["MyValue"] = new byte[] { 1, 2, 3, 4 }
             };
 
             // Act

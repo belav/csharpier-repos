@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
@@ -16,11 +15,8 @@ namespace BasicLinkedApp
 
     public class HelloWorldMiddleware
     {
-        public HelloWorldMiddleware(RequestDelegate next)
-        {
+        public HelloWorldMiddleware(RequestDelegate next) { }
 
-        }
-        
         public Task InvokeAsync(HttpContext context)
         {
             return context.Response.WriteAsync("Hello World");

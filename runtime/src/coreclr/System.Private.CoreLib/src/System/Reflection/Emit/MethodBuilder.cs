@@ -23,11 +23,11 @@ namespace System.Reflection.Emit
         internal TypeBuilder m_containingType;
 
         // IL
-        private int[]? m_mdMethodFixups;              // The location of all of the token fixups. Null means no fixups.
-        private byte[]? m_localSignature;             // Local signature if set explicitly via DefineBody. Null otherwise.
-        internal LocalSymInfo? m_localSymInfo;        // keep track debugging local information
-        internal ILGenerator? m_ilGenerator;          // Null if not used.
-        private byte[]? m_ubBody;                     // The IL for the method
+        private int[]? m_mdMethodFixups; // The location of all of the token fixups. Null means no fixups.
+        private byte[]? m_localSignature; // Local signature if set explicitly via DefineBody. Null otherwise.
+        internal LocalSymInfo? m_localSymInfo; // keep track debugging local information
+        internal ILGenerator? m_ilGenerator; // Null if not used.
+        private byte[]? m_ubBody; // The IL for the method
         private ExceptionHandler[]? m_exceptions; // Exception handlers or null if there are none.
         private const int DefaultMaxStack = 16;
 
@@ -56,10 +56,19 @@ namespace System.Reflection.Emit
 
         #region Constructor
 
-        internal MethodBuilder(string name, MethodAttributes attributes, CallingConventions callingConvention,
-            Type? returnType, Type[]? returnTypeRequiredCustomModifiers, Type[]? returnTypeOptionalCustomModifiers,
-            Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers,
-            ModuleBuilder mod, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TypeBuilder type)
+        internal MethodBuilder(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers,
+            ModuleBuilder mod,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TypeBuilder type
+        )
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -152,7 +161,8 @@ namespace System.Reflection.Emit
             Type[] catchClass;
             int[] type;
             int numCatch;
-            int start, end;
+            int start,
+                end;
             ModuleBuilder dynMod = (ModuleBuilder)m_module;
 
             m_containingType.ThrowIfCreated();
@@ -214,11 +224,27 @@ namespace System.Reflection.Emit
                             case __ExceptionInfo.None:
                             case __ExceptionInfo.Fault:
                             case __ExceptionInfo.Filter:
-                                m_exceptions[counter++] = new ExceptionHandler(start, end, filterAddrs[j], catchAddrs[j], catchEndAddrs[j], type[j], tkExceptionClass);
+                                m_exceptions[counter++] = new ExceptionHandler(
+                                    start,
+                                    end,
+                                    filterAddrs[j],
+                                    catchAddrs[j],
+                                    catchEndAddrs[j],
+                                    type[j],
+                                    tkExceptionClass
+                                );
                                 break;
 
                             case __ExceptionInfo.Finally:
-                                m_exceptions[counter++] = new ExceptionHandler(start, excp[i].GetFinallyEndAddress(), filterAddrs[j], catchAddrs[j], catchEndAddrs[j], type[j], tkExceptionClass);
+                                m_exceptions[counter++] = new ExceptionHandler(
+                                    start,
+                                    excp[i].GetFinallyEndAddress(),
+                                    filterAddrs[j],
+                                    catchAddrs[j],
+                                    catchEndAddrs[j],
+                                    type[j],
+                                    tkExceptionClass
+                                );
                                 break;
                         }
                     }
@@ -308,9 +334,17 @@ namespace System.Reflection.Emit
         {
             m_parameterTypes ??= Type.EmptyTypes;
 
-            m_signature = SignatureHelper.GetMethodSigHelper(m_module, m_callingConvention, m_inst != null ? m_inst.Length : 0,
-                m_returnType, m_returnTypeRequiredCustomModifiers, m_returnTypeOptionalCustomModifiers,
-                m_parameterTypes, m_parameterTypeRequiredCustomModifiers, m_parameterTypeOptionalCustomModifiers);
+            m_signature = SignatureHelper.GetMethodSigHelper(
+                m_module,
+                m_callingConvention,
+                m_inst != null ? m_inst.Length : 0,
+                m_returnType,
+                m_returnTypeRequiredCustomModifiers,
+                m_returnTypeOptionalCustomModifiers,
+                m_parameterTypes,
+                m_parameterTypeRequiredCustomModifiers,
+                m_parameterTypeOptionalCustomModifiers
+            );
 
             return m_signature;
         }
@@ -333,7 +367,9 @@ namespace System.Reflection.Emit
                 }
             }
 
-            return SignatureHelper.GetLocalVarSigHelper(m_module).InternalGetSignature(out signatureLength);
+            return SignatureHelper
+                .GetLocalVarSigHelper(m_module)
+                .InternalGetSignature(out signatureLength);
         }
 
         internal int GetMaxStack()
@@ -456,7 +492,13 @@ namespace System.Reflection.Emit
         #endregion
 
         #region MethodBase Overrides
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException(SR.NotSupported_DynamicModule);
         }
@@ -470,7 +512,8 @@ namespace System.Reflection.Emit
 
         public override CallingConventions CallingConvention => m_callingConvention;
 
-        public override RuntimeMethodHandle MethodHandle => throw new NotSupportedException(SR.NotSupported_DynamicModule);
+        public override RuntimeMethodHandle MethodHandle =>
+            throw new NotSupportedException(SR.NotSupported_DynamicModule);
 
         public override bool IsSecurityCritical => true;
 
@@ -489,7 +532,9 @@ namespace System.Reflection.Emit
 
         public override ParameterInfo[] GetParameters()
         {
-            if (!m_bIsBaked || m_containingType == null || m_containingType.BakedRuntimeType == null)
+            if (
+                !m_bIsBaked || m_containingType == null || m_containingType.BakedRuntimeType == null
+            )
                 throw new NotSupportedException(SR.InvalidOperation_TypeNotCreated);
 
             MethodInfo rmi = m_containingType.GetMethod(m_strName, m_parameterTypes!)!;
@@ -501,7 +546,11 @@ namespace System.Reflection.Emit
         {
             get
             {
-                if (!m_bIsBaked || m_containingType == null || m_containingType.BakedRuntimeType == null)
+                if (
+                    !m_bIsBaked
+                    || m_containingType == null
+                    || m_containingType.BakedRuntimeType == null
+                )
                     throw new InvalidOperationException(SR.InvalidOperation_TypeNotCreated);
 
                 MethodInfo rmi = m_containingType.GetMethod(m_strName, m_parameterTypes!)!;
@@ -534,7 +583,12 @@ namespace System.Reflection.Emit
 
         public override bool ContainsGenericParameters => throw new NotSupportedException();
 
-        public override MethodInfo GetGenericMethodDefinition() { if (!IsGenericMethod) throw new InvalidOperationException(); return this; }
+        public override MethodInfo GetGenericMethodDefinition()
+        {
+            if (!IsGenericMethod)
+                throw new InvalidOperationException();
+            return this;
+        }
 
         public override bool IsGenericMethod => m_inst != null;
 
@@ -554,7 +608,9 @@ namespace System.Reflection.Emit
                 throw new ArgumentException(SR.Arg_EmptyArray, nameof(names));
 
             if (m_inst != null)
-                throw new InvalidOperationException(SR.InvalidOperation_GenericParametersAlreadySet);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_GenericParametersAlreadySet
+                );
 
             for (int i = 0; i < names.Length; i++)
                 if (names[i] == null)
@@ -571,7 +627,11 @@ namespace System.Reflection.Emit
             return m_inst;
         }
 
-        internal void ThrowIfGeneric() { if (IsGenericMethod && !IsGenericMethodDefinition) throw new InvalidOperationException(); }
+        internal void ThrowIfGeneric()
+        {
+            if (IsGenericMethod && !IsGenericMethodDefinition)
+                throw new InvalidOperationException();
+        }
         #endregion
 
         #region Public Members
@@ -608,7 +668,11 @@ namespace System.Reflection.Emit
 
                 // If m_tkMethod is still 0 when we obtain the lock, m_lastTokenizedMethod must be smaller
                 // than the index of the current method.
-                for (i = m_containingType.m_lastTokenizedMethod + 1; i < m_containingType.m_listMethods.Count; ++i)
+                for (
+                    i = m_containingType.m_lastTokenizedMethod + 1;
+                    i < m_containingType.m_listMethods.Count;
+                    ++i
+                )
                 {
                     currentMethod = m_containingType.m_listMethods[i];
                     currentToken = currentMethod.GetTokenNoLock();
@@ -620,7 +684,10 @@ namespace System.Reflection.Emit
                 m_containingType.m_lastTokenizedMethod = i;
             }
 
-            Debug.Assert(currentMethod == this, "We should have found this method in m_containingType.m_listMethods");
+            Debug.Assert(
+                currentMethod == this,
+                "We should have found this method in m_containingType.m_listMethods"
+            );
             Debug.Assert(currentToken != 0, "The token should not be 0");
 
             return currentToken;
@@ -633,12 +700,20 @@ namespace System.Reflection.Emit
             byte[] sigBytes = GetMethodSignature().InternalGetSignature(out int sigLength);
             ModuleBuilder module = m_module;
 
-            int token = TypeBuilder.DefineMethod(new QCallModule(ref module), m_containingType.MetadataToken, m_strName, sigBytes, sigLength, Attributes);
+            int token = TypeBuilder.DefineMethod(
+                new QCallModule(ref module),
+                m_containingType.MetadataToken,
+                m_strName,
+                sigBytes,
+                sigLength,
+                Attributes
+            );
             m_token = token;
 
             if (m_inst != null)
                 foreach (GenericTypeParameterBuilder tb in m_inst)
-                    if (!tb.m_type.IsCreated()) tb.m_type.CreateType();
+                    if (!tb.m_type.IsCreated())
+                        tb.m_type.CreateType();
 
             TypeBuilder.SetMethodImpl(new QCallModule(ref module), token, m_dwMethodImplFlags);
 
@@ -660,8 +735,13 @@ namespace System.Reflection.Emit
         }
 
         public void SetSignature(
-            Type? returnType, Type[]? returnTypeRequiredCustomModifiers, Type[]? returnTypeOptionalCustomModifiers,
-            Type[]? parameterTypes, Type[][]? parameterTypeRequiredCustomModifiers, Type[][]? parameterTypeOptionalCustomModifiers)
+            Type? returnType,
+            Type[]? returnTypeRequiredCustomModifiers,
+            Type[]? returnTypeOptionalCustomModifiers,
+            Type[]? parameterTypes,
+            Type[][]? parameterTypeRequiredCustomModifiers,
+            Type[][]? parameterTypeOptionalCustomModifiers
+        )
         {
             // We should throw InvalidOperation_MethodBuilderBaked here if the method signature has been baked.
             // But we cannot because that would be a breaking change from V2.
@@ -669,7 +749,11 @@ namespace System.Reflection.Emit
                 return;
 
             AssemblyBuilder.CheckContext(returnType);
-            AssemblyBuilder.CheckContext(returnTypeRequiredCustomModifiers, returnTypeOptionalCustomModifiers, parameterTypes);
+            AssemblyBuilder.CheckContext(
+                returnTypeRequiredCustomModifiers,
+                returnTypeOptionalCustomModifiers,
+                parameterTypes
+            );
             AssemblyBuilder.CheckContext(parameterTypeRequiredCustomModifiers);
             AssemblyBuilder.CheckContext(parameterTypeOptionalCustomModifiers);
 
@@ -692,7 +776,11 @@ namespace System.Reflection.Emit
             m_parameterTypeOptionalCustomModifiers = parameterTypeOptionalCustomModifiers;
         }
 
-        public ParameterBuilder DefineParameter(int position, ParameterAttributes attributes, string? strParamName)
+        public ParameterBuilder DefineParameter(
+            int position,
+            ParameterAttributes attributes,
+            string? strParamName
+        )
         {
             if (position < 0)
                 throw new ArgumentOutOfRangeException(SR.ArgumentOutOfRange_ParamSequence);
@@ -739,10 +827,12 @@ namespace System.Reflection.Emit
 
         private void ThrowIfShouldNotHaveBody()
         {
-            if ((m_dwMethodImplFlags & MethodImplAttributes.CodeTypeMask) != MethodImplAttributes.IL ||
-                (m_dwMethodImplFlags & MethodImplAttributes.Unmanaged) != 0 ||
-                (m_iAttributes & MethodAttributes.PinvokeImpl) != 0 ||
-                m_isDllImport)
+            if (
+                (m_dwMethodImplFlags & MethodImplAttributes.CodeTypeMask) != MethodImplAttributes.IL
+                || (m_dwMethodImplFlags & MethodImplAttributes.Unmanaged) != 0
+                || (m_iAttributes & MethodAttributes.PinvokeImpl) != 0
+                || m_isDllImport
+            )
             {
                 // cannot attach method body if methodimpl is marked not marked as managed IL
                 //
@@ -753,8 +843,16 @@ namespace System.Reflection.Emit
         public bool InitLocals
         {
             // Property is set to true if user wishes to have zero initialized stack frame for this method. Default to false.
-            get { ThrowIfGeneric(); return m_fInitLocals; }
-            set { ThrowIfGeneric(); m_fInitLocals = value; }
+            get
+            {
+                ThrowIfGeneric();
+                return m_fInitLocals;
+            }
+            set
+            {
+                ThrowIfGeneric();
+                m_fInitLocals = value;
+            }
         }
 
         public Module GetModule()
@@ -773,9 +871,12 @@ namespace System.Reflection.Emit
 
             ThrowIfGeneric();
 
-            TypeBuilder.DefineCustomAttribute(m_module, MetadataToken,
+            TypeBuilder.DefineCustomAttribute(
+                m_module,
+                MetadataToken,
                 ((ModuleBuilder)m_module).GetConstructorToken(con),
-                binaryAttribute);
+                binaryAttribute
+            );
 
             if (IsKnownCA(con))
                 ParseCA(con);
@@ -823,7 +924,6 @@ namespace System.Reflection.Emit
 
         internal bool m_canBeRuntimeImpl;
         internal bool m_isDllImport;
-
         #endregion
     }
 
@@ -833,12 +933,12 @@ namespace System.Reflection.Emit
         // and namespace information with a given active lexical scope.
 
         #region Internal Data Members
-        internal string[] m_strName = null!;  // All these arrys initialized in helper method
+        internal string[] m_strName = null!; // All these arrys initialized in helper method
         internal byte[][] m_ubSignature = null!;
         internal int[] m_iLocalSlot = null!;
         internal int[] m_iStartOffset = null!;
         internal int[] m_iEndOffset = null!;
-        internal int m_iLocalSymCount;         // how many entries in the arrays are occupied
+        internal int m_iLocalSymCount; // how many entries in the arrays are occupied
         internal string[] m_namespace = null!;
         internal int m_iNameSpaceCount;
         internal const int InitialSize = 16;
@@ -909,7 +1009,13 @@ namespace System.Reflection.Emit
         #endregion
 
         #region Internal Members
-        internal void AddLocalSymInfo(string strName, byte[] signature, int slot, int startOffset, int endOffset)
+        internal void AddLocalSymInfo(
+            string strName,
+            byte[] signature,
+            int slot,
+            int startOffset,
+            int endOffset
+        )
         {
             // make sure that arrays are large enough to hold addition info
             EnsureCapacity();
@@ -918,14 +1024,20 @@ namespace System.Reflection.Emit
             m_iLocalSlot[m_iLocalSymCount] = slot;
             m_strName[m_iLocalSymCount] = strName;
             m_ubSignature[m_iLocalSymCount] = signature;
-            checked { m_iLocalSymCount++; }
+            checked
+            {
+                m_iLocalSymCount++;
+            }
         }
 
         internal void AddUsingNamespace(string strNamespace)
         {
             EnsureCapacityNamespace();
             m_namespace[m_iNameSpaceCount] = strNamespace;
-            checked { m_iNameSpaceCount++; }
+            checked
+            {
+                m_iNameSpaceCount++;
+            }
         }
 
         internal void EmitLocalSymInfo(ISymbolWriter symWriter)
@@ -935,22 +1047,22 @@ namespace System.Reflection.Emit
             for (i = 0; i < m_iLocalSymCount; i++)
             {
                 symWriter.DefineLocalVariable(
-                            m_strName[i],
-                            FieldAttributes.PrivateScope,
-                            m_ubSignature[i],
-                            SymAddressKind.ILOffset,
-                            m_iLocalSlot[i],
-                            0,          // addr2 is not used yet
-                            0,          // addr3 is not used
-                            m_iStartOffset[i],
-                            m_iEndOffset[i]);
+                    m_strName[i],
+                    FieldAttributes.PrivateScope,
+                    m_ubSignature[i],
+                    SymAddressKind.ILOffset,
+                    m_iLocalSlot[i],
+                    0, // addr2 is not used yet
+                    0, // addr3 is not used
+                    m_iStartOffset[i],
+                    m_iEndOffset[i]
+                );
             }
             for (i = 0; i < m_iNameSpaceCount; i++)
             {
                 symWriter.UsingNamespace(m_namespace[i]);
             }
         }
-
         #endregion
     }
 
@@ -971,8 +1083,15 @@ namespace System.Reflection.Emit
 
         #region Constructors
 
-        internal ExceptionHandler(int tryStartOffset, int tryEndOffset, int filterOffset, int handlerStartOffset, int handlerEndOffset,
-            int kind, int exceptionTypeToken)
+        internal ExceptionHandler(
+            int tryStartOffset,
+            int tryEndOffset,
+            int filterOffset,
+            int handlerStartOffset,
+            int handlerEndOffset,
+            int kind,
+            int exceptionTypeToken
+        )
         {
             Debug.Assert(tryStartOffset >= 0);
             Debug.Assert(tryEndOffset >= 0);
@@ -980,7 +1099,10 @@ namespace System.Reflection.Emit
             Debug.Assert(handlerStartOffset >= 0);
             Debug.Assert(handlerEndOffset >= 0);
             Debug.Assert(IsValidKind((ExceptionHandlingClauseOptions)kind));
-            Debug.Assert(kind != (int)ExceptionHandlingClauseOptions.Clause || (exceptionTypeToken & 0x00FFFFFF) != 0);
+            Debug.Assert(
+                kind != (int)ExceptionHandlingClauseOptions.Clause
+                    || (exceptionTypeToken & 0x00FFFFFF) != 0
+            );
 
             m_tryStartOffset = tryStartOffset;
             m_tryEndOffset = tryEndOffset;
@@ -1012,7 +1134,13 @@ namespace System.Reflection.Emit
 
         public override int GetHashCode()
         {
-            return m_exceptionClass ^ m_tryStartOffset ^ m_tryEndOffset ^ m_filterOffset ^ m_handlerStartOffset ^ m_handlerEndOffset ^ (int)m_kind;
+            return m_exceptionClass
+                ^ m_tryStartOffset
+                ^ m_tryEndOffset
+                ^ m_filterOffset
+                ^ m_handlerStartOffset
+                ^ m_handlerEndOffset
+                ^ (int)m_kind;
         }
 
         public override bool Equals(object? obj)
@@ -1022,20 +1150,20 @@ namespace System.Reflection.Emit
 
         public bool Equals(ExceptionHandler other)
         {
-            return
-                other.m_exceptionClass == m_exceptionClass &&
-                other.m_tryStartOffset == m_tryStartOffset &&
-                other.m_tryEndOffset == m_tryEndOffset &&
-                other.m_filterOffset == m_filterOffset &&
-                other.m_handlerStartOffset == m_handlerStartOffset &&
-                other.m_handlerEndOffset == m_handlerEndOffset &&
-                other.m_kind == m_kind;
+            return other.m_exceptionClass == m_exceptionClass
+                && other.m_tryStartOffset == m_tryStartOffset
+                && other.m_tryEndOffset == m_tryEndOffset
+                && other.m_filterOffset == m_filterOffset
+                && other.m_handlerStartOffset == m_handlerStartOffset
+                && other.m_handlerEndOffset == m_handlerEndOffset
+                && other.m_kind == m_kind;
         }
 
-        public static bool operator ==(ExceptionHandler left, ExceptionHandler right) => left.Equals(right);
+        public static bool operator ==(ExceptionHandler left, ExceptionHandler right) =>
+            left.Equals(right);
 
-        public static bool operator !=(ExceptionHandler left, ExceptionHandler right) => !left.Equals(right);
-
+        public static bool operator !=(ExceptionHandler left, ExceptionHandler right) =>
+            !left.Equals(right);
         #endregion
     }
 }

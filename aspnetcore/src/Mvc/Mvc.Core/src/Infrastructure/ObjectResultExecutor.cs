@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             OutputFormatterSelector formatterSelector,
             IHttpResponseStreamWriterFactory writerFactory,
             ILoggerFactory loggerFactory,
-            IOptions<MvcOptions> mvcOptions)
+            IOptions<MvcOptions> mvcOptions
+        )
         {
             if (formatterSelector == null)
             {
@@ -104,7 +105,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
             var value = result.Value;
 
-            if (value != null && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader))
+            if (
+                value != null
+                && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
+            )
             {
                 return ExecuteAsyncEnumerable(context, result, value, reader);
             }
@@ -112,7 +116,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             return ExecuteAsyncCore(context, result, objectType, value);
         }
 
-        private async Task ExecuteAsyncEnumerable(ActionContext context, ObjectResult result, object asyncEnumerable, Func<object, Task<ICollection>> reader)
+        private async Task ExecuteAsyncEnumerable(
+            ActionContext context,
+            ObjectResult result,
+            object asyncEnumerable,
+            Func<object, Task<ICollection>> reader
+        )
         {
             Log.BufferingAsyncEnumerable(Logger, asyncEnumerable);
 
@@ -120,18 +129,25 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             await ExecuteAsyncCore(context, result, enumerated.GetType(), enumerated);
         }
 
-        private Task ExecuteAsyncCore(ActionContext context, ObjectResult result, Type? objectType, object? value)
+        private Task ExecuteAsyncCore(
+            ActionContext context,
+            ObjectResult result,
+            Type? objectType,
+            object? value
+        )
         {
             var formatterContext = new OutputFormatterWriteContext(
                 context.HttpContext,
                 WriterFactory,
                 objectType,
-                value);
+                value
+            );
 
             var selectedFormatter = FormatterSelector.SelectFormatter(
                 formatterContext,
                 (IList<IOutputFormatter>)result.Formatters ?? Array.Empty<IOutputFormatter>(),
-                result.ContentTypes);
+                result.ContentTypes
+            );
             if (selectedFormatter == null)
             {
                 // No formatter supports this.
@@ -168,11 +184,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
 
         private static class Log
         {
-            private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable = LoggerMessage.Define<string?>(
-                LogLevel.Debug,
-                new EventId(1, "BufferingAsyncEnumerable"),
-                "Buffering IAsyncEnumerable instance of type '{Type}'.",
-                skipEnabledCheck: true);
+            private static readonly Action<ILogger, string?, Exception?> _bufferingAsyncEnumerable =
+                LoggerMessage.Define<string?>(
+                    LogLevel.Debug,
+                    new EventId(1, "BufferingAsyncEnumerable"),
+                    "Buffering IAsyncEnumerable instance of type '{Type}'.",
+                    skipEnabledCheck: true
+                );
 
             public static void BufferingAsyncEnumerable(ILogger logger, object asyncEnumerable)
             {

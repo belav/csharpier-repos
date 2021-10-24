@@ -50,10 +50,15 @@ namespace System.IO.IsolatedStorage
             return s_userRootDirectory;
         }
 
-        internal static bool IsMachine(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Machine) != 0);
-        internal static bool IsAssembly(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Assembly) != 0);
-        internal static bool IsApplication(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Application) != 0);
-        internal static bool IsRoaming(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Roaming) != 0);
-        internal static bool IsDomain(IsolatedStorageScope scope) => ((scope & IsolatedStorageScope.Domain) != 0);
+        internal static bool IsMachine(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Machine) != 0);
+        internal static bool IsAssembly(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Assembly) != 0);
+        internal static bool IsApplication(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Application) != 0);
+        internal static bool IsRoaming(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Roaming) != 0);
+        internal static bool IsDomain(IsolatedStorageScope scope) =>
+            ((scope & IsolatedStorageScope.Domain) != 0);
     }
 }

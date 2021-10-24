@@ -44,9 +44,7 @@ namespace System.Drawing.Printing
         private GraphicsPrinter? graphics_context;
         private PrintAction action;
 
-        public PrintEventArgs()
-        {
-        }
+        public PrintEventArgs() { }
 
         internal PrintEventArgs(PrintAction action)
         {

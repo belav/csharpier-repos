@@ -25,14 +25,18 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         struct TraceMethodData
         {
-            public TraceMethodData(long loaderModuleID, long typeID, int methodToken, long[] typeParameters)
+            public TraceMethodData(
+                long loaderModuleID,
+                long typeID,
+                int methodToken,
+                long[] typeParameters
+            )
             {
                 LoaderModuleID = loaderModuleID;
                 MethodToken = methodToken;
                 TypeParameters = typeParameters;
                 TypeID = typeID;
             }
-
 
             public readonly long LoaderModuleID;
             public readonly int MethodToken;
@@ -55,7 +59,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         struct TraceTypeData
         {
-            public TraceTypeData(long moduleID, int typeNameID, Microsoft.Diagnostics.Tracing.Parsers.Clr.TypeFlags flags, byte corElementType, long[] typeParameters, string name)
+            public TraceTypeData(
+                long moduleID,
+                int typeNameID,
+                Microsoft.Diagnostics.Tracing.Parsers.Clr.TypeFlags flags,
+                byte corElementType,
+                long[] typeParameters,
+                string name
+            )
             {
                 ModuleID = moduleID;
                 TypeNameID = typeNameID;
@@ -104,37 +115,73 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             public readonly TraceManagedModule TraceManagedModule;
         }
 
-        private readonly Dictionary<long, MethodDescInfo> _methods = new Dictionary<long, MethodDescInfo>();
-        private readonly Dictionary<long, TypeHandleInfo> _types = new Dictionary<long, TypeHandleInfo>();
-        private readonly Dictionary<long, ModuleDescInfo> _modules = new Dictionary<long, ModuleDescInfo>();
+        private readonly Dictionary<long, MethodDescInfo> _methods = new Dictionary<
+            long,
+            MethodDescInfo
+        >();
+        private readonly Dictionary<long, TypeHandleInfo> _types = new Dictionary<
+            long,
+            TypeHandleInfo
+        >();
+        private readonly Dictionary<long, ModuleDescInfo> _modules = new Dictionary<
+            long,
+            ModuleDescInfo
+        >();
         private readonly object _lock = new object();
         private readonly int s_bulkTypeEvents = 0;
         private readonly int s_bulkTypeTypes = 0;
 
-        public TraceRuntimeDescToTypeSystemDesc(TraceProcess traceProcess, TypeSystemContext context, int clrInstanceID)
+        public TraceRuntimeDescToTypeSystemDesc(
+            TraceProcess traceProcess,
+            TypeSystemContext context,
+            int clrInstanceID
+        )
         {
             _traceProcess = traceProcess;
             _context = context;
             _clrInstanceID = clrInstanceID;
 
-            foreach (var methodIDDetailsData in traceProcess.EventsInProcess.ByEventType<MethodDetailsTraceData>())
+            foreach (
+                var methodIDDetailsData in traceProcess.EventsInProcess.ByEventType<MethodDetailsTraceData>()
+            )
             {
-
                 MethodDescInfo currentInfo;
                 if (_methods.TryGetValue(methodIDDetailsData.MethodID, out currentInfo))
                 {
-                    if (currentInfo.MethodDetailsTraceData.LoaderModuleID != methodIDDetailsData.LoaderModuleID)
-                        throw new Exception("Re-use of MethodID with different data. Unload scenario?)");
-                    if (currentInfo.MethodDetailsTraceData.MethodToken != methodIDDetailsData.MethodToken)
-                        throw new Exception("Re-use of MethodID with different data. Unload scenario?)");
+                    if (
+                        currentInfo.MethodDetailsTraceData.LoaderModuleID
+                        != methodIDDetailsData.LoaderModuleID
+                    )
+                        throw new Exception(
+                            "Re-use of MethodID with different data. Unload scenario?)"
+                        );
+                    if (
+                        currentInfo.MethodDetailsTraceData.MethodToken
+                        != methodIDDetailsData.MethodToken
+                    )
+                        throw new Exception(
+                            "Re-use of MethodID with different data. Unload scenario?)"
+                        );
                     if (currentInfo.MethodDetailsTraceData.TypeID != methodIDDetailsData.TypeID)
-                        throw new Exception("Re-use of MethodID with different data. Unload scenario?)");
-                    if (currentInfo.MethodDetailsTraceData.TypeParameters.Length != methodIDDetailsData.TypeParameterCount)
-                        throw new Exception("Re-use of MethodID with different data. Unload scenario?)");
+                        throw new Exception(
+                            "Re-use of MethodID with different data. Unload scenario?)"
+                        );
+                    if (
+                        currentInfo.MethodDetailsTraceData.TypeParameters.Length
+                        != methodIDDetailsData.TypeParameterCount
+                    )
+                        throw new Exception(
+                            "Re-use of MethodID with different data. Unload scenario?)"
+                        );
                     for (int ix = 0; ix < methodIDDetailsData.TypeParameterCount; ix++)
                     {
-                        if (currentInfo.MethodDetailsTraceData.TypeParameters[ix] != (long)methodIDDetailsData.TypeParameters(ix))
-                            throw new Exception("Re-use of MethodID with different data. Unload scenario?)");
+                        if (
+                            currentInfo.MethodDetailsTraceData.TypeParameters[ix]
+                            != (long)methodIDDetailsData.TypeParameters(ix)
+                        )
+                            throw new Exception(
+                                "Re-use of MethodID with different data. Unload scenario?)"
+                            );
                     }
                     continue;
                 }
@@ -153,16 +200,20 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     typeParameters = Array.Empty<long>();
                 }
 
-                TraceMethodData traceMethodData = new TraceMethodData(typeID: (long)methodIDDetailsData.TypeID,
+                TraceMethodData traceMethodData = new TraceMethodData(
+                    typeID: (long)methodIDDetailsData.TypeID,
                     loaderModuleID: methodIDDetailsData.LoaderModuleID,
                     methodToken: methodIDDetailsData.MethodToken,
-                    typeParameters: typeParameters);
+                    typeParameters: typeParameters
+                );
 
                 currentInfo = new MethodDescInfo(methodIDDetailsData.MethodID, traceMethodData);
                 _methods.Add(methodIDDetailsData.MethodID, currentInfo);
             }
 
-            foreach (var bulkTypeTrace in traceProcess.EventsInProcess.ByEventType<GCBulkTypeTraceData>())
+            foreach (
+                var bulkTypeTrace in traceProcess.EventsInProcess.ByEventType<GCBulkTypeTraceData>()
+            )
             {
                 s_bulkTypeEvents++;
 
@@ -178,20 +229,38 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (_types.TryGetValue((long)typeTrace.TypeID, out currentInfo))
                     {
                         if (currentInfo.TypeValue.ModuleID != (long)typeTrace.ModuleID)
-                            throw new Exception("Re-use of TypeID with different data. Unload scenario?)");
+                            throw new Exception(
+                                "Re-use of TypeID with different data. Unload scenario?)"
+                            );
                         if (currentInfo.TypeValue.TypeNameID != typeTrace.TypeNameID)
-                            throw new Exception("Re-use of TypeID with different data. Unload scenario?)");
+                            throw new Exception(
+                                "Re-use of TypeID with different data. Unload scenario?)"
+                            );
                         if (currentInfo.TypeValue.Flags != typeTrace.Flags)
-                            throw new Exception("Re-use of TypeID with different data. Unload scenario?)");
+                            throw new Exception(
+                                "Re-use of TypeID with different data. Unload scenario?)"
+                            );
                         if (currentInfo.TypeValue.CorElementType != typeTrace.CorElementType)
-                            throw new Exception("Re-use of TypeID with different data. Unload scenario?)");
-                        if (currentInfo.TypeValue.TypeParameters.Length != typeTrace.TypeParameterCount)
-                            throw new Exception("Re-use of TypeID with different data. Unload scenario?)");
+                            throw new Exception(
+                                "Re-use of TypeID with different data. Unload scenario?)"
+                            );
+                        if (
+                            currentInfo.TypeValue.TypeParameters.Length
+                            != typeTrace.TypeParameterCount
+                        )
+                            throw new Exception(
+                                "Re-use of TypeID with different data. Unload scenario?)"
+                            );
 
                         for (int ix = 0; ix < typeTrace.TypeParameterCount; ix++)
                         {
-                            if (currentInfo.TypeValue.TypeParameters[ix] != (long)typeTrace.TypeParameterID(ix))
-                                throw new Exception("Re-use of TypeID with different data. Unload scenario?)");
+                            if (
+                                currentInfo.TypeValue.TypeParameters[ix]
+                                != (long)typeTrace.TypeParameterID(ix)
+                            )
+                                throw new Exception(
+                                    "Re-use of TypeID with different data. Unload scenario?)"
+                                );
                         }
                         continue;
                     }
@@ -209,12 +278,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     {
                         typeParameters = Array.Empty<long>();
                     }
-                    TraceTypeData traceTypeData = new TraceTypeData(moduleID: (long)typeTrace.ModuleID,
+                    TraceTypeData traceTypeData = new TraceTypeData(
+                        moduleID: (long)typeTrace.ModuleID,
                         typeNameID: typeTrace.TypeNameID,
                         flags: typeTrace.Flags,
                         corElementType: typeTrace.CorElementType,
                         typeParameters: typeParameters,
-                        name: typeTrace.TypeName);
+                        name: typeTrace.TypeName
+                    );
 
                     currentInfo = new TypeHandleInfo((long)typeTrace.TypeID, traceTypeData);
                     _types.Add((long)typeTrace.TypeID, currentInfo);
@@ -222,9 +293,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
 
             Dictionary<long, int> assemblyToCLRInstanceIDMap = new Dictionary<long, int>();
-            foreach (var assemblyLoadTrace in _traceProcess.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>())
+            foreach (
+                var assemblyLoadTrace in _traceProcess.EventsInProcess.ByEventType<AssemblyLoadUnloadTraceData>()
+            )
             {
-                assemblyToCLRInstanceIDMap[assemblyLoadTrace.AssemblyID] = assemblyLoadTrace.ClrInstanceID;
+                assemblyToCLRInstanceIDMap[assemblyLoadTrace.AssemblyID] =
+                    assemblyLoadTrace.ClrInstanceID;
             }
 
             foreach (var moduleFile in _traceProcess.LoadedModules)
@@ -234,7 +308,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     var managedModule = moduleFile as TraceManagedModule;
 
                     int clrInstanceIDModule;
-                    if (!assemblyToCLRInstanceIDMap.TryGetValue(managedModule.AssemblyID, out clrInstanceIDModule))
+                    if (
+                        !assemblyToCLRInstanceIDMap.TryGetValue(
+                            managedModule.AssemblyID,
+                            out clrInstanceIDModule
+                        )
+                    )
                         continue;
 
                     if (clrInstanceIDModule != _clrInstanceID)
@@ -252,7 +331,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     }
                 }
             }
-
 
             // Fill in all the types
             foreach (var entry in _types)
@@ -273,12 +351,19 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                     string simpleName = minfo.TraceManagedModule.Name;
 
-                    if (!File.Exists(minfo.TraceManagedModule.FilePath) && minfo.TraceManagedModule.FilePath.EndsWith(".il.dll") && simpleName.EndsWith(".il"))
+                    if (
+                        !File.Exists(minfo.TraceManagedModule.FilePath)
+                        && minfo.TraceManagedModule.FilePath.EndsWith(".il.dll")
+                        && simpleName.EndsWith(".il")
+                    )
                     {
                         simpleName = simpleName.Substring(0, simpleName.Length - 3);
                     }
 
-                    minfo.Module = _context.ResolveAssembly(new AssemblyName(simpleName), throwIfNotFound);
+                    minfo.Module = _context.ResolveAssembly(
+                        new AssemblyName(simpleName),
+                        throwIfNotFound
+                    );
                     return minfo.Module;
                 }
                 else
@@ -292,7 +377,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         public TypeDesc ResolveTypeHandle(long handle, bool throwIfNotFound = true)
         {
-            lock(_lock)
+            lock (_lock)
             {
                 TypeHandleInfo tinfo;
                 if (_types.TryGetValue(handle, out tinfo))
@@ -300,14 +385,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (tinfo.Type != null)
                         return tinfo.Type;
 
-                    if ((tinfo.TypeValue.Flags & Microsoft.Diagnostics.Tracing.Parsers.Clr.TypeFlags.Array) != 0)
+                    if (
+                        (
+                            tinfo.TypeValue.Flags
+                            & Microsoft.Diagnostics.Tracing.Parsers.Clr.TypeFlags.Array
+                        ) != 0
+                    )
                     {
                         if (tinfo.TypeValue.TypeParameters.Length != 1)
                         {
                             throw new Exception("Bad format for BulkType");
                         }
 
-                        TypeDesc elementType = ResolveTypeHandle((long)tinfo.TypeValue.TypeParameters[0], throwIfNotFound);
+                        TypeDesc elementType = ResolveTypeHandle(
+                            (long)tinfo.TypeValue.TypeParameters[0],
+                            throwIfNotFound
+                        );
                         if (elementType == null)
                             return null;
 
@@ -328,7 +421,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             throw new Exception("Bad format for BulkType");
                         }
 
-                        TypeDesc elementType = ResolveTypeHandle((long)tinfo.TypeValue.TypeParameters[0], throwIfNotFound);
+                        TypeDesc elementType = ResolveTypeHandle(
+                            (long)tinfo.TypeValue.TypeParameters[0],
+                            throwIfNotFound
+                        );
                         if (elementType == null)
                             return null;
 
@@ -341,20 +437,28 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             throw new Exception("Bad format for BulkType");
                         }
 
-                        TypeDesc elementType = ResolveTypeHandle((long)tinfo.TypeValue.TypeParameters[0], throwIfNotFound);
+                        TypeDesc elementType = ResolveTypeHandle(
+                            (long)tinfo.TypeValue.TypeParameters[0],
+                            throwIfNotFound
+                        );
                         if (elementType == null)
                             return null;
 
                         tinfo.Type = elementType.MakePointerType();
                     }
-                    else if (tinfo.TypeValue.CorElementType == (byte)SignatureTypeCode.FunctionPointer)
+                    else if (
+                        tinfo.TypeValue.CorElementType == (byte)SignatureTypeCode.FunctionPointer
+                    )
                     {
                         tinfo.Type = null;
                     }
                     else
                     {
                         // Must be class type or instantiated type.
-                        ModuleDesc module = ResolveModuleID((long)tinfo.TypeValue.ModuleID, throwIfNotFound);
+                        ModuleDesc module = ResolveModuleID(
+                            (long)tinfo.TypeValue.ModuleID,
+                            throwIfNotFound
+                        );
                         if (module == null)
                             return null;
 
@@ -371,28 +475,53 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                             throw new Exception($"Invalid typedef {tinfo.TypeValue.TypeNameID:4x}");
                         }
 
-                        TypeDefinitionHandle typedef = MetadataTokens.TypeDefinitionHandle(tinfo.TypeValue.TypeNameID & 0xFFFFFF);
+                        TypeDefinitionHandle typedef = MetadataTokens.TypeDefinitionHandle(
+                            tinfo.TypeValue.TypeNameID & 0xFFFFFF
+                        );
                         MetadataType uninstantiatedType = (MetadataType)ecmaModule.GetType(typedef);
                         // Instantiate the type if requested
-                        if ((tinfo.TypeValue.TypeParameters.Length != 0) && uninstantiatedType != null)
+                        if (
+                            (tinfo.TypeValue.TypeParameters.Length != 0)
+                            && uninstantiatedType != null
+                        )
                         {
-                            if (uninstantiatedType.Instantiation.Length != tinfo.TypeValue.TypeParameters.Length)
+                            if (
+                                uninstantiatedType.Instantiation.Length
+                                != tinfo.TypeValue.TypeParameters.Length
+                            )
                             {
-                                throw new Exception($"Invalid TypeParameterCount {tinfo.TypeValue.TypeParameters.Length} expected {uninstantiatedType.Instantiation.Length} as needed by '{uninstantiatedType}'");
+                                throw new Exception(
+                                    $"Invalid TypeParameterCount {tinfo.TypeValue.TypeParameters.Length} expected {uninstantiatedType.Instantiation.Length} as needed by '{uninstantiatedType}'"
+                                );
                             }
 
-                            TypeDesc[] instantiation = new TypeDesc[tinfo.TypeValue.TypeParameters.Length];
+                            TypeDesc[] instantiation = new TypeDesc[
+                                tinfo.TypeValue.TypeParameters.Length
+                            ];
                             for (int i = 0; i < instantiation.Length; i++)
                             {
-                                instantiation[i] = ResolveTypeHandle((long)tinfo.TypeValue.TypeParameters[i], throwIfNotFound);
+                                instantiation[i] = ResolveTypeHandle(
+                                    (long)tinfo.TypeValue.TypeParameters[i],
+                                    throwIfNotFound
+                                );
                                 if (instantiation[i] == null)
                                     return null;
                             }
-                            tinfo.Type = uninstantiatedType.Context.GetInstantiatedType(uninstantiatedType, new Instantiation(instantiation));
+                            tinfo.Type = uninstantiatedType.Context.GetInstantiatedType(
+                                uninstantiatedType,
+                                new Instantiation(instantiation)
+                            );
                         }
                         else
                         {
-                            if ((uninstantiatedType.Name == "__Canon") && uninstantiatedType.Namespace == "System" && (uninstantiatedType.Module == uninstantiatedType.Context.SystemModule))
+                            if (
+                                (uninstantiatedType.Name == "__Canon")
+                                && uninstantiatedType.Namespace == "System"
+                                && (
+                                    uninstantiatedType.Module
+                                    == uninstantiatedType.Context.SystemModule
+                                )
+                            )
                             {
                                 tinfo.Type = uninstantiatedType.Context.CanonType;
                             }
@@ -429,7 +558,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     if (minfo.Method != null)
                         return minfo.Method;
 
-                    TypeDesc owningType = ResolveTypeHandle(minfo.MethodDetailsTraceData.TypeID, throwIfNotFound);
+                    TypeDesc owningType = ResolveTypeHandle(
+                        minfo.MethodDetailsTraceData.TypeID,
+                        throwIfNotFound
+                    );
                     if (owningType == null)
                         return null;
 
@@ -439,10 +571,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
                     if ((minfo.MethodDetailsTraceData.MethodToken & 0xFF000000) != 0x06000000)
                     {
-                        throw new Exception($"Invalid methoddef {minfo.MethodDetailsTraceData.MethodToken:4x}");
+                        throw new Exception(
+                            $"Invalid methoddef {minfo.MethodDetailsTraceData.MethodToken:4x}"
+                        );
                     }
 
-                    MethodDefinitionHandle methoddef = MetadataTokens.MethodDefinitionHandle(minfo.MethodDetailsTraceData.MethodToken & 0xFFFFFF);
+                    MethodDefinitionHandle methoddef = MetadataTokens.MethodDefinitionHandle(
+                        minfo.MethodDetailsTraceData.MethodToken & 0xFFFFFF
+                    );
 
                     MethodDesc uninstantiatedMethod = null;
                     foreach (MethodDesc m in owningMDType.GetMethods())
@@ -465,8 +601,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         if (throwIfNotFound)
                         {
                             EcmaType ecmaType = owningMDType.GetTypeDefinition() as EcmaType;
-                            
-                            throw new Exception($"Unknown MethodID value finding MethodDef {minfo.MethodDetailsTraceData.MethodToken:x} on type {owningMDType} from module {ecmaType.Module.Assembly.GetName().Name}");
+
+                            throw new Exception(
+                                $"Unknown MethodID value finding MethodDef {minfo.MethodDetailsTraceData.MethodToken:x} on type {owningMDType} from module {ecmaType.Module.Assembly.GetName().Name}"
+                            );
                         }
                         return null;
                     }
@@ -474,20 +612,33 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     // Instantiate the type if requested
                     if (minfo.MethodDetailsTraceData.TypeParameters.Length != 0)
                     {
-                        if (uninstantiatedMethod.Instantiation.Length != minfo.MethodDetailsTraceData.TypeParameters.Length)
+                        if (
+                            uninstantiatedMethod.Instantiation.Length
+                            != minfo.MethodDetailsTraceData.TypeParameters.Length
+                        )
                         {
-                            throw new Exception($"Invalid TypeParameterCount {minfo.MethodDetailsTraceData.TypeParameters.Length} expected {uninstantiatedMethod.Instantiation.Length} as needed by '{uninstantiatedMethod}'");
+                            throw new Exception(
+                                $"Invalid TypeParameterCount {minfo.MethodDetailsTraceData.TypeParameters.Length} expected {uninstantiatedMethod.Instantiation.Length} as needed by '{uninstantiatedMethod}'"
+                            );
                         }
 
-                        TypeDesc[] instantiation = new TypeDesc[minfo.MethodDetailsTraceData.TypeParameters.Length];
+                        TypeDesc[] instantiation = new TypeDesc[
+                            minfo.MethodDetailsTraceData.TypeParameters.Length
+                        ];
                         for (int i = 0; i < instantiation.Length; i++)
                         {
-                            instantiation[i] = ResolveTypeHandle((long)minfo.MethodDetailsTraceData.TypeParameters[i], throwIfNotFound);
+                            instantiation[i] = ResolveTypeHandle(
+                                (long)minfo.MethodDetailsTraceData.TypeParameters[i],
+                                throwIfNotFound
+                            );
                             if (instantiation[i] == null)
                                 return null;
                         }
 
-                        minfo.Method = _context.GetInstantiatedMethod(uninstantiatedMethod, new Instantiation(instantiation));
+                        minfo.Method = _context.GetInstantiatedMethod(
+                            uninstantiatedMethod,
+                            new Instantiation(instantiation)
+                        );
 
                         if (minfo.Method == null)
                         {
@@ -500,7 +651,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                         s.Append(',');
                                     s.Append(type);
                                 }
-                                throw new Exception("Unable to instantiate {uninstantiatedMethod} over <{s}>");
+                                throw new Exception(
+                                    "Unable to instantiate {uninstantiatedMethod} over <{s}>"
+                                );
                             }
                             return null;
                         }

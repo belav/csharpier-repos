@@ -43,7 +43,11 @@ namespace Microsoft.AspNetCore.Http.Extensions
         [InlineData(false, false, 302)]
         [InlineData(true, true, 308)]
         [InlineData(false, true, 307)]
-        public void Redirect_SetsResponseCorrectly(bool permanent, bool preserveMethod, int expectedStatusCode)
+        public void Redirect_SetsResponseCorrectly(
+            bool permanent,
+            bool preserveMethod,
+            int expectedStatusCode
+        )
         {
             var location = "http://localhost/redirect";
             var context = new DefaultHttpContext();
@@ -59,7 +63,10 @@ namespace Microsoft.AspNetCore.Http.Extensions
         {
             public Stream Body { get; set; }
 
-            public bool HasStarted { get { return true; } }
+            public bool HasStarted
+            {
+                get { return true; }
+            }
 
             public IHeaderDictionary Headers { get; set; }
 

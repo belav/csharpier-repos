@@ -20,9 +20,12 @@ namespace Microsoft.EntityFrameworkCore
         /// </summary>
         /// <param name="entityType"> The entity type. </param>
         /// <returns> The defining navigation if one exists or <see langword="null" /> otherwise. </returns>
-        [Obsolete("Entity types with defining navigations have been replaced by shared-type entity types")]
-        public static IConventionNavigation? FindDefiningNavigation(this IConventionEntityType entityType)
-            => (IConventionNavigation?)((IEntityType)entityType).FindDefiningNavigation();
+        [Obsolete(
+            "Entity types with defining navigations have been replaced by shared-type entity types"
+        )]
+        public static IConventionNavigation? FindDefiningNavigation(
+            this IConventionEntityType entityType
+        ) => (IConventionNavigation?)((IEntityType)entityType).FindDefiningNavigation();
 
         /// <summary>
         ///     Sets the LINQ query used as the default source for queries of this type.
@@ -34,10 +37,14 @@ namespace Microsoft.EntityFrameworkCore
         public static void SetDefiningQuery(
             this IConventionEntityType entityType,
             LambdaExpression? definingQuery,
-            bool fromDataAnnotation = false)
-            => ((EntityType)entityType).SetDefiningQuery(
-                    definingQuery,
-                    fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            bool fromDataAnnotation = false
+        ) =>
+            ((EntityType)entityType).SetDefiningQuery(
+                definingQuery,
+                fromDataAnnotation
+                  ? ConfigurationSource.DataAnnotation
+                  : ConfigurationSource.Convention
+            );
 
         /// <summary>
         ///     Returns the configuration source for <see cref="EntityTypeExtensions.GetDefiningQuery" />.
@@ -45,7 +52,8 @@ namespace Microsoft.EntityFrameworkCore
         /// <param name="entityType"> The entity type. </param>
         /// <returns> The configuration source for <see cref="EntityTypeExtensions.GetDefiningQuery" />. </returns>
         [Obsolete("Use InMemoryEntityTypeExtensions.GetInMemoryQueryConfigurationSource")]
-        public static ConfigurationSource? GetDefiningQueryConfigurationSource(this IConventionEntityType entityType)
-            => entityType.FindAnnotation(CoreAnnotationNames.DefiningQuery)?.GetConfigurationSource();
+        public static ConfigurationSource? GetDefiningQueryConfigurationSource(
+            this IConventionEntityType entityType
+        ) => entityType.FindAnnotation(CoreAnnotationNames.DefiningQuery)?.GetConfigurationSource();
     }
 }

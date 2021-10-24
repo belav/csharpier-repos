@@ -26,9 +26,12 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var formattedValue = requirement.ToString();
 
             // Assert
-            Assert.Equal("RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Custom1|Custom2)", formattedValue);
+            Assert.Equal(
+                "RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Custom1|Custom2)",
+                formattedValue
+            );
         }
-        
+
         [Fact]
         public void ToString_ShouldReturnUnSplitStringWhenOnlyOneAllowedRoles()
         {
@@ -39,7 +42,10 @@ namespace Microsoft.AspNetCore.Authorization.Test
             var formattedValue = requirement.ToString();
 
             // Assert
-            Assert.Equal("RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Custom1)",formattedValue);
+            Assert.Equal(
+                "RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Custom1)",
+                formattedValue
+            );
         }
     }
 }

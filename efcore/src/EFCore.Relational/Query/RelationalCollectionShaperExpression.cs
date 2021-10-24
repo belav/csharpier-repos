@@ -40,12 +40,20 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression selfIdentifier,
             Expression innerShaper,
             INavigation? navigation,
-            Type elementType)
+            Type elementType
+        )
             : this(
-                collectionId, parentIdentifier, outerIdentifier, selfIdentifier,
-                null, null, null, innerShaper, navigation, elementType)
-        {
-        }
+                collectionId,
+                parentIdentifier,
+                outerIdentifier,
+                selfIdentifier,
+                null,
+                null,
+                null,
+                innerShaper,
+                navigation,
+                elementType
+            ) { }
 
         /// <summary>
         ///     Creates a new instance of the <see cref="RelationalCollectionShaperExpression" /> class.
@@ -70,7 +78,8 @@ namespace Microsoft.EntityFrameworkCore.Query
             IReadOnlyList<ValueComparer>? selfIdentifierValueComparers,
             Expression innerShaper,
             INavigationBase? navigation,
-            Type elementType)
+            Type elementType
+        )
         {
             Check.NotNull(parentIdentifier, nameof(parentIdentifier));
             Check.NotNull(outerIdentifier, nameof(outerIdentifier));
@@ -141,12 +150,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual Type ElementType { get; }
 
         /// <inheritdoc />
-        public override Type Type
-            => Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
+        public override Type Type =>
+            Navigation?.ClrType ?? typeof(List<>).MakeGenericType(ElementType);
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -174,22 +182,32 @@ namespace Microsoft.EntityFrameworkCore.Query
             Expression parentIdentifier,
             Expression outerIdentifier,
             Expression selfIdentifier,
-            Expression innerShaper)
+            Expression innerShaper
+        )
         {
             Check.NotNull(parentIdentifier, nameof(parentIdentifier));
             Check.NotNull(outerIdentifier, nameof(outerIdentifier));
             Check.NotNull(selfIdentifier, nameof(selfIdentifier));
             Check.NotNull(innerShaper, nameof(innerShaper));
 
-            return parentIdentifier != ParentIdentifier
+            return
+                parentIdentifier != ParentIdentifier
                 || outerIdentifier != OuterIdentifier
                 || selfIdentifier != SelfIdentifier
                 || innerShaper != InnerShaper
-                    ? new RelationalCollectionShaperExpression(
-                        CollectionId, parentIdentifier, outerIdentifier, selfIdentifier,
-                        ParentIdentifierValueComparers, OuterIdentifierValueComparers, SelfIdentifierValueComparers,
-                        innerShaper, Navigation, ElementType)
-                    : this;
+              ? new RelationalCollectionShaperExpression(
+                    CollectionId,
+                    parentIdentifier,
+                    outerIdentifier,
+                    selfIdentifier,
+                    ParentIdentifierValueComparers,
+                    OuterIdentifierValueComparers,
+                    SelfIdentifierValueComparers,
+                    innerShaper,
+                    Navigation,
+                    ElementType
+                )
+              : this;
         }
 
         /// <inheritdoc />

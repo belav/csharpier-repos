@@ -25,23 +25,21 @@ namespace VersioningWebSite
         // [35-56]
         // Parses the above version formats and captures lb (lower bound), range, and hb (higher bound)
         // We filter out (5), (5], [5) manually after we do the parsing.
-        private static readonly Regex _versionParser = new Regex(@"^(?<lb>[\(\[])?(?<range>\d+(-\d+)?)(?<hb>[\)\]])?$");
+        private static readonly Regex _versionParser = new Regex(
+            @"^(?<lb>[\(\[])?(?<range>\d+(-\d+)?)(?<hb>[\)\]])?$"
+        );
 
         public bool IsReusable => true;
 
-        public VersionRouteAttribute(string template)
-            : base(template)
-        {
-        }
+        public VersionRouteAttribute(string template) : base(template) { }
 
-        public VersionRouteAttribute(string template, string versionRange)
-            : base(template)
+        public VersionRouteAttribute(string template, string versionRange) : base(template)
         {
             var constraint = CreateVersionConstraint(versionRange);
 
             if (constraint == null)
             {
-                var message =  $"Invalid version format: {versionRange}";
+                var message = $"Invalid version format: {versionRange}";
                 throw new ArgumentException(message, "versionRange");
             }
 
@@ -64,7 +62,11 @@ namespace VersioningWebSite
             var rangeValues = range.Split('-');
             if (rangeValues.Length == 1)
             {
-                return GetSingleVersionOrUnboundedHigherVersionConstraint(lowerBound, higherBound, rangeValues);
+                return GetSingleVersionOrUnboundedHigherVersionConstraint(
+                    lowerBound,
+                    higherBound,
+                    rangeValues
+                );
             }
             else
             {
@@ -75,7 +77,8 @@ namespace VersioningWebSite
         private static IActionConstraint GetBoundedRangeVersionConstraint(
             string lowerBound,
             string higherBound,
-            string[] rangeValues)
+            string[] rangeValues
+        )
         {
             // [3-5, (3-5, 3-5], 3-5), 3-5 are not valid
             if (string.IsNullOrEmpty(lowerBound) || string.IsNullOrEmpty(higherBound))
@@ -101,11 +104,15 @@ namespace VersioningWebSite
         private static IActionConstraint GetSingleVersionOrUnboundedHigherVersionConstraint(
             string lowerBound,
             string higherBound,
-            string[] rangeValues)
+            string[] rangeValues
+        )
         {
             // (5], [5), (5), [5, (5, 5], 5) are not valid
-            if (lowerBound == "(" || higherBound == ")" ||
-                (string.IsNullOrEmpty(lowerBound) ^ string.IsNullOrEmpty(higherBound)))
+            if (
+                lowerBound == "("
+                || higherBound == ")"
+                || (string.IsNullOrEmpty(lowerBound) ^ string.IsNullOrEmpty(higherBound))
+            )
             {
                 return null;
             }

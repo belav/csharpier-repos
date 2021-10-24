@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
     [Export(typeof(ITaggerProvider))]
     [TagType(typeof(IStructureTag))]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal partial class StructureTaggerProvider :
-        AbstractStructureTaggerProvider
+    internal partial class StructureTaggerProvider : AbstractStructureTaggerProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -27,10 +26,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             IForegroundNotificationService notificationService,
             IEditorOptionsFactoryService editorOptionsFactoryService,
             IProjectionBufferFactoryService projectionBufferFactoryService,
-            IAsynchronousOperationListenerProvider listenerProvider)
-                : base(threadingContext, notificationService, editorOptionsFactoryService, projectionBufferFactoryService, listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                notificationService,
+                editorOptionsFactoryService,
+                projectionBufferFactoryService,
+                listenerProvider
+            ) { }
 
         internal override object? GetCollapsedHintForm(StructureTag structureTag)
         {

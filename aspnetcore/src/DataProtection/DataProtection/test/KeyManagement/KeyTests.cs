@@ -23,7 +23,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             var encryptorFactory = Mock.Of<IAuthenticatedEncryptorFactory>();
 
             // Act
-            var key = new Key(keyId, creationDate, activationDate, expirationDate, descriptor, new[] { encryptorFactory });
+            var key = new Key(
+                keyId,
+                creationDate,
+                activationDate,
+                expirationDate,
+                descriptor,
+                new[] { encryptorFactory }
+            );
 
             // Assert
             Assert.Equal(keyId, key.KeyId);
@@ -39,7 +46,14 @@ namespace Microsoft.AspNetCore.DataProtection.KeyManagement
             // Arrange
             var now = DateTimeOffset.UtcNow;
             var encryptorFactory = Mock.Of<IAuthenticatedEncryptorFactory>();
-            var key = new Key(Guid.Empty, now, now, now, new Mock<IAuthenticatedEncryptorDescriptor>().Object, new[] { encryptorFactory });
+            var key = new Key(
+                Guid.Empty,
+                now,
+                now,
+                now,
+                new Mock<IAuthenticatedEncryptorDescriptor>().Object,
+                new[] { encryptorFactory }
+            );
 
             // Act & assert
             Assert.False(key.IsRevoked);

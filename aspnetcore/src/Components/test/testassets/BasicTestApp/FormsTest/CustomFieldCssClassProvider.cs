@@ -12,12 +12,17 @@ namespace BasicTestApp.FormsTest
     // and allocates on every invocation) but is sufficient for testing purposes.
     public class CustomFieldCssClassProvider : FieldCssClassProvider
     {
-        public override string GetFieldCssClass(EditContext editContext, in FieldIdentifier fieldIdentifier)
+        public override string GetFieldCssClass(
+            EditContext editContext,
+            in FieldIdentifier fieldIdentifier
+        )
         {
             var cssClassName = base.GetFieldCssClass(editContext, fieldIdentifier);
 
             // If we can find a [CustomValidationClassName], use it
-            var propertyInfo = fieldIdentifier.Model.GetType().GetProperty(fieldIdentifier.FieldName);
+            var propertyInfo = fieldIdentifier.Model
+                .GetType()
+                .GetProperty(fieldIdentifier.FieldName);
             if (propertyInfo != null)
             {
                 var customValidationClassName = (CustomValidationClassNameAttribute)propertyInfo
@@ -25,12 +30,20 @@ namespace BasicTestApp.FormsTest
                     .FirstOrDefault();
                 if (customValidationClassName != null)
                 {
-                    cssClassName = string.Join(' ', cssClassName.Split(' ').Select(token => token switch
-                    {
-                        "valid" => customValidationClassName.Valid ?? token,
-                        "invalid" => customValidationClassName.Invalid ?? token,
-                        _ => token,
-                    }));
+                    cssClassName = string.Join(
+                        ' ',
+                        cssClassName
+                            .Split(' ')
+                            .Select(
+                                token =>
+                                    token switch
+                                    {
+                                        "valid" => customValidationClassName.Valid ?? token,
+                                        "invalid" => customValidationClassName.Invalid ?? token,
+                                        _ => token,
+                                    }
+                            )
+                    );
                 }
             }
 

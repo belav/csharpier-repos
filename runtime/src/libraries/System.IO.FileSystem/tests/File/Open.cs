@@ -11,17 +11,24 @@ namespace System.IO.Tests
         {
             return File.Open(path, mode);
         }
-
     }
 
     public class File_Open_str_fm_fa : FileStream_ctor_str_fm_fa
     {
         protected override FileStream CreateFileStream(string path, FileMode mode)
         {
-            return File.Open(path, mode, mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite);
+            return File.Open(
+                path,
+                mode,
+                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite
+            );
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        )
         {
             return File.Open(path, mode, access);
         }
@@ -31,15 +38,29 @@ namespace System.IO.Tests
     {
         protected override FileStream CreateFileStream(string path, FileMode mode)
         {
-            return File.Open(path, mode, mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            return File.Open(
+                path,
+                mode,
+                mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite,
+                FileShare.ReadWrite | FileShare.Delete
+            );
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        )
         {
             return File.Open(path, mode, access, FileShare.ReadWrite | FileShare.Delete);
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share)
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        )
         {
             return File.Open(path, mode, access, share);
         }
@@ -47,7 +68,11 @@ namespace System.IO.Tests
 
     public class File_OpenSpecial : FileStream_ctor_str_fm_fa_fs
     {
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        )
         {
             if (mode == FileMode.Open && access == FileAccess.Read)
                 return File.OpenRead(path);
@@ -57,11 +82,20 @@ namespace System.IO.Tests
                 return File.Open(path, mode, access);
         }
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share)
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        )
         {
             if (mode == FileMode.Open && access == FileAccess.Read && share == FileShare.Read)
                 return File.OpenRead(path);
-            else if (mode == FileMode.OpenOrCreate && access == FileAccess.Write && share == FileShare.None)
+            else if (
+                mode == FileMode.OpenOrCreate
+                && access == FileAccess.Write
+                && share == FileShare.None
+            )
                 return File.OpenWrite(path);
             else
                 return File.Open(path, mode, access, share);
@@ -86,5 +120,4 @@ namespace System.IO.Tests
                 return reader.ReadToEnd();
         }
     }
-
 }

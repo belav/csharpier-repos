@@ -165,7 +165,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "WrappedReader")]
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "WrappedReader"
+    )]
     internal class TCMoveToAttributeReader : TCMoveToAttribute
     {
     }
@@ -175,7 +178,10 @@ namespace System.Xml.Tests
     {
     }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "WrappedReader")]
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "WrappedReader"
+    )]
     internal class TCGetAttributeNameReader : TCGetAttributeName
     {
     }

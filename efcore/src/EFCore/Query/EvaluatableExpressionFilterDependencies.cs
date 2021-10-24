@@ -52,7 +52,9 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public EvaluatableExpressionFilterDependencies(IEnumerable<IEvaluatableExpressionFilterPlugin> plugins)
+        public EvaluatableExpressionFilterDependencies(
+            IEnumerable<IEvaluatableExpressionFilterPlugin> plugins
+        )
         {
             Check.NotNull(plugins, nameof(plugins));
 

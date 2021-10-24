@@ -9,15 +9,21 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class EventFieldDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<EventFieldDeclarationSyntax>
+    internal class EventFieldDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<EventFieldDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             EventFieldDeclarationSyntax eventFieldDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            CSharpStructureHelpers.CollectCommentBlockSpans(eventFieldDeclaration, ref spans, optionProvider);
+            CSharpStructureHelpers.CollectCommentBlockSpans(
+                eventFieldDeclaration,
+                ref spans,
+                optionProvider
+            );
         }
     }
 }

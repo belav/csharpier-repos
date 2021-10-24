@@ -25,7 +25,10 @@ namespace Microsoft.AspNetCore.Mvc.Filters
             _middlewarePipeline = middlewarePipeline;
         }
 
-        public Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)
+        public Task OnResourceExecutionAsync(
+            ResourceExecutingContext context,
+            ResourceExecutionDelegate next
+        )
         {
             var httpContext = context.HttpContext;
 

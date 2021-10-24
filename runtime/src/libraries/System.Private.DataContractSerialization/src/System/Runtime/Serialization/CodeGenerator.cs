@@ -39,7 +39,10 @@ namespace System.Runtime.Serialization
             {
                 if (s_objectEquals == null)
                 {
-                    s_objectEquals = typeof(object).GetMethod("Equals", BindingFlags.Public | BindingFlags.Static);
+                    s_objectEquals = typeof(object).GetMethod(
+                        "Equals",
+                        BindingFlags.Public | BindingFlags.Static
+                    );
                     Debug.Assert(s_objectEquals != null);
                 }
                 return s_objectEquals;
@@ -53,7 +56,10 @@ namespace System.Runtime.Serialization
             {
                 if (s_arraySetValue == null)
                 {
-                    s_arraySetValue = typeof(Array).GetMethod("SetValue", new Type[] { typeof(object), typeof(int) });
+                    s_arraySetValue = typeof(Array).GetMethod(
+                        "SetValue",
+                        new Type[] { typeof(object), typeof(int) }
+                    );
                     Debug.Assert(s_arraySetValue != null);
                 }
                 return s_arraySetValue;
@@ -81,7 +87,10 @@ namespace System.Runtime.Serialization
             {
                 if (s_stringFormat == null)
                 {
-                    s_stringFormat = typeof(string).GetMethod("Format", new Type[] { typeof(string), typeof(object[]) });
+                    s_stringFormat = typeof(string).GetMethod(
+                        "Format",
+                        new Type[] { typeof(string), typeof(object[]) }
+                    );
                     Debug.Assert(s_stringFormat != null);
                 }
                 return s_stringFormat;
@@ -97,7 +106,7 @@ namespace System.Runtime.Serialization
             {
                 if (s_serializationModule == null)
                 {
-                    s_serializationModule = typeof(CodeGenerator).Module;   // could to be replaced by different dll that has SkipVerification set to false
+                    s_serializationModule = typeof(CodeGenerator).Module; // could to be replaced by different dll that has SkipVerification set to false
                 }
                 return s_serializationModule;
             }
@@ -109,9 +118,17 @@ namespace System.Runtime.Serialization
         private Stack<object> _blockStack = null!; // initialized in BeginMethod
         private Label _methodEndLabel;
 
-        private readonly Dictionary<LocalBuilder, string> _localNames = new Dictionary<LocalBuilder, string>();
+        private readonly Dictionary<LocalBuilder, string> _localNames = new Dictionary<
+            LocalBuilder,
+            string
+        >();
 
-        private enum CodeGenTrace { None, Save, Tron };
+        private enum CodeGenTrace
+        {
+            None,
+            Save,
+            Tron
+        };
         private readonly CodeGenTrace _codeGenTrace;
         private LocalBuilder? _stringFormatArray;
 
@@ -121,7 +138,13 @@ namespace System.Runtime.Serialization
             _codeGenTrace = CodeGenTrace.None;
         }
 
-        internal void BeginMethod(DynamicMethod dynamicMethod, Type delegateType, string methodName, Type[] argTypes, bool allowPrivateMemberAccess)
+        internal void BeginMethod(
+            DynamicMethod dynamicMethod,
+            Type delegateType,
+            string methodName,
+            Type[] argTypes,
+            bool allowPrivateMemberAccess
+        )
         {
             _dynamicMethod = dynamicMethod;
             _ilGen = _dynamicMethod.GetILGenerator();
@@ -130,7 +153,11 @@ namespace System.Runtime.Serialization
             InitILGeneration(methodName, argTypes);
         }
 
-        internal void BeginMethod(string methodName, Type delegateType, bool allowPrivateMemberAccess)
+        internal void BeginMethod(
+            string methodName,
+            Type delegateType,
+            bool allowPrivateMemberAccess
+        )
         {
             MethodInfo signature = JsonFormatWriterGenerator.GetInvokeMethod(delegateType);
             ParameterInfo[] parameters = signature.GetParameters();
@@ -141,9 +168,20 @@ namespace System.Runtime.Serialization
             _delegateType = delegateType;
         }
 
-        private void BeginMethod(Type returnType, string methodName, Type[] argTypes, bool allowPrivateMemberAccess)
+        private void BeginMethod(
+            Type returnType,
+            string methodName,
+            Type[] argTypes,
+            bool allowPrivateMemberAccess
+        )
         {
-            _dynamicMethod = new DynamicMethod(methodName, returnType, argTypes, SerializationModule, allowPrivateMemberAccess);
+            _dynamicMethod = new DynamicMethod(
+                methodName,
+                returnType,
+                argTypes,
+                SerializationModule,
+                allowPrivateMemberAccess
+            );
 
             _ilGen = _dynamicMethod.GetILGenerator();
 
@@ -181,10 +219,7 @@ namespace System.Runtime.Serialization
 
         internal MethodInfo CurrentMethod
         {
-            get
-            {
-                return _dynamicMethod;
-            }
+            get { return _dynamicMethod; }
         }
 
         internal ArgBuilder GetArg(int index)
@@ -295,15 +330,22 @@ namespace System.Runtime.Serialization
                         forState.RequiresEndLabel = true;
                     }
                     if (_codeGenTrace != CodeGenTrace.None)
-                        EmitSourceInstruction(branchInstruction + " " + forState.EndLabel.GetHashCode());
+                        EmitSourceInstruction(
+                            branchInstruction + " " + forState.EndLabel.GetHashCode()
+                        );
                     _ilGen.Emit(branchInstruction, forState.EndLabel);
                     break;
                 }
             }
         }
 
-        internal void ForEach(LocalBuilder local, Type elementType, Type enumeratorType,
-            LocalBuilder enumerator, MethodInfo getCurrentMethod)
+        internal void ForEach(
+            LocalBuilder local,
+            Type elementType,
+            Type enumeratorType,
+            LocalBuilder enumerator,
+            MethodInfo getCurrentMethod
+        )
         {
             ForState forState = new ForState(local, DefineLabel(), DefineLabel(), enumerator);
 
@@ -329,7 +371,6 @@ namespace System.Runtime.Serialization
             object? enumerator = forState.End;
             Call(enumerator, moveNextMethod);
 
-
             Brtrue(forState.BeginLabel);
             if (forState.RequiresEndLabel)
                 MarkLabel(forState.EndLabel);
@@ -339,8 +380,11 @@ namespace System.Runtime.Serialization
         {
             Type type = GetVariableType(value);
             TypeCode typeCode = type.GetTypeCode();
-            if ((typeCode == TypeCode.Object && type.IsValueType) ||
-                typeCode == TypeCode.DateTime || typeCode == TypeCode.Decimal)
+            if (
+                (typeCode == TypeCode.Object && type.IsValueType)
+                || typeCode == TypeCode.DateTime
+                || typeCode == TypeCode.Decimal
+            )
             {
                 LoadDefaultValue(type);
                 ConvertValue(type, Globals.TypeOfObject);
@@ -382,7 +426,10 @@ namespace System.Runtime.Serialization
                 case Cmp.NotEqualTo:
                     return OpCodes.Beq;
                 default:
-                    DiagnosticUtility.DebugAssert(cmp == Cmp.GreaterThanOrEqualTo, "Unexpected cmp");
+                    DiagnosticUtility.DebugAssert(
+                        cmp == Cmp.GreaterThanOrEqualTo,
+                        "Unexpected cmp"
+                    );
                     return OpCodes.Blt;
             }
         }
@@ -395,7 +442,6 @@ namespace System.Runtime.Serialization
             _ilGen.Emit(GetBranchCode(cmpOp), ifState.ElseBegin);
             _blockStack.Push(ifState);
         }
-
 
         internal void If(object value1, Cmp cmpOp, object? value2)
         {
@@ -427,7 +473,6 @@ namespace System.Runtime.Serialization
             _blockStack.Push(ifState);
         }
 
-
         internal void EndIf()
         {
             IfState ifState = PopIfState();
@@ -439,7 +484,16 @@ namespace System.Runtime.Serialization
         internal void VerifyParameterCount(MethodInfo methodInfo, int expectedCount)
         {
             if (methodInfo.GetParameters().Length != expectedCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ParameterCountMismatch, methodInfo.Name, methodInfo.GetParameters().Length, expectedCount)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.ParameterCountMismatch,
+                            methodInfo.Name,
+                            methodInfo.GetParameters().Length,
+                            expectedCount
+                        )
+                    )
+                );
         }
 
         internal void Call(object? thisObj, MethodInfo methodInfo)
@@ -466,7 +520,13 @@ namespace System.Runtime.Serialization
             Call(methodInfo);
         }
 
-        internal void Call(object? thisObj, MethodInfo methodInfo, object? param1, object? param2, object? param3)
+        internal void Call(
+            object? thisObj,
+            MethodInfo methodInfo,
+            object? param1,
+            object? param2,
+            object? param3
+        )
         {
             VerifyParameterCount(methodInfo, 3);
             LoadThis(thisObj, methodInfo);
@@ -476,7 +536,14 @@ namespace System.Runtime.Serialization
             Call(methodInfo);
         }
 
-        internal void Call(object? thisObj, MethodInfo methodInfo, object? param1, object? param2, object? param3, object? param4)
+        internal void Call(
+            object? thisObj,
+            MethodInfo methodInfo,
+            object? param1,
+            object? param2,
+            object? param3,
+            object? param4
+        )
         {
             VerifyParameterCount(methodInfo, 4);
             LoadThis(thisObj, methodInfo);
@@ -487,7 +554,15 @@ namespace System.Runtime.Serialization
             Call(methodInfo);
         }
 
-        internal void Call(object? thisObj, MethodInfo methodInfo, object? param1, object? param2, object? param3, object? param4, object? param5)
+        internal void Call(
+            object? thisObj,
+            MethodInfo methodInfo,
+            object? param1,
+            object? param2,
+            object? param3,
+            object? param4,
+            object? param5
+        )
         {
             VerifyParameterCount(methodInfo, 5);
             LoadThis(thisObj, methodInfo);
@@ -499,7 +574,16 @@ namespace System.Runtime.Serialization
             Call(methodInfo);
         }
 
-        internal void Call(object? thisObj, MethodInfo methodInfo, object? param1, object? param2, object? param3, object? param4, object? param5, object? param6)
+        internal void Call(
+            object? thisObj,
+            MethodInfo methodInfo,
+            object? param1,
+            object? param2,
+            object? param3,
+            object? param4,
+            object? param5,
+            object? param6
+        )
         {
             VerifyParameterCount(methodInfo, 6);
             LoadThis(thisObj, methodInfo);
@@ -517,19 +601,34 @@ namespace System.Runtime.Serialization
             if (methodInfo.IsVirtual && !methodInfo.DeclaringType!.IsValueType)
             {
                 if (_codeGenTrace != CodeGenTrace.None)
-                    EmitSourceInstruction("Callvirt " + methodInfo.ToString() + " on type " + methodInfo.DeclaringType.ToString());
+                    EmitSourceInstruction(
+                        "Callvirt "
+                            + methodInfo.ToString()
+                            + " on type "
+                            + methodInfo.DeclaringType.ToString()
+                    );
                 _ilGen.Emit(OpCodes.Callvirt, methodInfo);
             }
             else if (methodInfo.IsStatic)
             {
                 if (_codeGenTrace != CodeGenTrace.None)
-                    EmitSourceInstruction("Static Call " + methodInfo.ToString() + " on type " + methodInfo.DeclaringType!.ToString());
+                    EmitSourceInstruction(
+                        "Static Call "
+                            + methodInfo.ToString()
+                            + " on type "
+                            + methodInfo.DeclaringType!.ToString()
+                    );
                 _ilGen.Emit(OpCodes.Call, methodInfo);
             }
             else
             {
                 if (_codeGenTrace != CodeGenTrace.None)
-                    EmitSourceInstruction("Call " + methodInfo.ToString() + " on type " + methodInfo.DeclaringType!.ToString());
+                    EmitSourceInstruction(
+                        "Call "
+                            + methodInfo.ToString()
+                            + " on type "
+                            + methodInfo.DeclaringType!.ToString()
+                    );
                 _ilGen.Emit(OpCodes.Call, methodInfo);
             }
         }
@@ -537,17 +636,23 @@ namespace System.Runtime.Serialization
         internal void Call(ConstructorInfo ctor)
         {
             if (_codeGenTrace != CodeGenTrace.None)
-                EmitSourceInstruction("Call " + ctor.ToString() + " on type " + ctor.DeclaringType!.ToString());
+                EmitSourceInstruction(
+                    "Call " + ctor.ToString() + " on type " + ctor.DeclaringType!.ToString()
+                );
             _ilGen.Emit(OpCodes.Call, ctor);
         }
 
         internal void New(ConstructorInfo constructorInfo)
         {
             if (_codeGenTrace != CodeGenTrace.None)
-                EmitSourceInstruction("Newobj " + constructorInfo.ToString() + " on type " + constructorInfo.DeclaringType!.ToString());
+                EmitSourceInstruction(
+                    "Newobj "
+                        + constructorInfo.ToString()
+                        + " on type "
+                        + constructorInfo.DeclaringType!.ToString()
+                );
             _ilGen.Emit(OpCodes.Newobj, constructorInfo);
         }
-
 
         internal void InitObj(Type valueType)
         {
@@ -616,13 +721,17 @@ namespace System.Runtime.Serialization
                 if (fieldInfo.IsStatic)
                 {
                     if (_codeGenTrace != CodeGenTrace.None)
-                        EmitSourceInstruction("Ldsfld " + fieldInfo + " on type " + fieldInfo.DeclaringType);
+                        EmitSourceInstruction(
+                            "Ldsfld " + fieldInfo + " on type " + fieldInfo.DeclaringType
+                        );
                     _ilGen.Emit(OpCodes.Ldsfld, fieldInfo);
                 }
                 else
                 {
                     if (_codeGenTrace != CodeGenTrace.None)
-                        EmitSourceInstruction("Ldfld " + fieldInfo + " on type " + fieldInfo.DeclaringType);
+                        EmitSourceInstruction(
+                            "Ldfld " + fieldInfo + " on type " + fieldInfo.DeclaringType
+                        );
                     _ilGen.Emit(OpCodes.Ldfld, fieldInfo);
                 }
             }
@@ -633,7 +742,15 @@ namespace System.Runtime.Serialization
                 {
                     MethodInfo? getMethod = property.GetMethod;
                     if (getMethod == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.NoGetMethodForProperty, property.DeclaringType, property)));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.NoGetMethodForProperty,
+                                    property.DeclaringType,
+                                    property
+                                )
+                            )
+                        );
                     Call(getMethod);
                 }
             }
@@ -644,7 +761,16 @@ namespace System.Runtime.Serialization
                 Call(method);
             }
             else
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.CannotLoadMemberType, "Unknown", memberInfo.DeclaringType, memberInfo.Name)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.CannotLoadMemberType,
+                            "Unknown",
+                            memberInfo.DeclaringType,
+                            memberInfo.Name
+                        )
+                    )
+                );
 
             EmitStackTop(memberType);
             return memberType;
@@ -658,13 +784,17 @@ namespace System.Runtime.Serialization
                 if (fieldInfo.IsStatic)
                 {
                     if (_codeGenTrace != CodeGenTrace.None)
-                        EmitSourceInstruction("Stsfld " + fieldInfo + " on type " + fieldInfo.DeclaringType);
+                        EmitSourceInstruction(
+                            "Stsfld " + fieldInfo + " on type " + fieldInfo.DeclaringType
+                        );
                     _ilGen.Emit(OpCodes.Stsfld, fieldInfo);
                 }
                 else
                 {
                     if (_codeGenTrace != CodeGenTrace.None)
-                        EmitSourceInstruction("Stfld " + fieldInfo + " on type " + fieldInfo.DeclaringType);
+                        EmitSourceInstruction(
+                            "Stfld " + fieldInfo + " on type " + fieldInfo.DeclaringType
+                        );
                     _ilGen.Emit(OpCodes.Stfld, fieldInfo);
                 }
             }
@@ -675,14 +805,26 @@ namespace System.Runtime.Serialization
                 {
                     MethodInfo? setMethod = property.SetMethod;
                     if (setMethod == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.NoSetMethodForProperty, property.DeclaringType, property)));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.NoSetMethodForProperty,
+                                    property.DeclaringType,
+                                    property
+                                )
+                            )
+                        );
                     Call(setMethod);
                 }
             }
             else if (memberInfo is MethodInfo)
                 Call((MethodInfo)memberInfo);
             else
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.CannotLoadMemberType, "Unknown")));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(SR.CannotLoadMemberType, "Unknown")
+                    )
+                );
         }
 
         internal void LoadDefaultValue(Type type)
@@ -751,8 +893,17 @@ namespace System.Runtime.Serialization
                 Stloc((LocalBuilder)var);
             else
             {
-                DiagnosticUtility.DebugAssert("Data can only be stored into ArgBuilder or LocalBuilder.");
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.CanOnlyStoreIntoArgOrLocGot0, DataContract.GetClrTypeFullName(var.GetType()))));
+                DiagnosticUtility.DebugAssert(
+                    "Data can only be stored into ArgBuilder or LocalBuilder."
+                );
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.CanOnlyStoreIntoArgOrLocGot0,
+                            DataContract.GetClrTypeFullName(var.GetType())
+                        )
+                    )
+                );
             }
         }
 
@@ -774,7 +925,6 @@ namespace System.Runtime.Serialization
                 Load(obj);
         }
 
-
         internal void ConvertAddress(Type source, Type target)
         {
             InternalConvert(source, target, true);
@@ -784,7 +934,6 @@ namespace System.Runtime.Serialization
         {
             InternalConvert(source, target, false);
         }
-
 
         internal void Castclass(Type target)
         {
@@ -811,17 +960,17 @@ namespace System.Runtime.Serialization
             typeCode switch
             {
                 TypeCode.Boolean => OpCodes.Ldind_I1, // TypeCode.Boolean:
-                TypeCode.Char => OpCodes.Ldind_I2,    // TypeCode.Char:
-                TypeCode.SByte => OpCodes.Ldind_I1,   // TypeCode.SByte:
-                TypeCode.Byte => OpCodes.Ldind_U1,    // TypeCode.Byte:
-                TypeCode.Int16 => OpCodes.Ldind_I2,   // TypeCode.Int16:
-                TypeCode.UInt16 => OpCodes.Ldind_U2,  // TypeCode.UInt16:
-                TypeCode.Int32 => OpCodes.Ldind_I4,   // TypeCode.Int32:
-                TypeCode.UInt32 => OpCodes.Ldind_U4,  // TypeCode.UInt32:
-                TypeCode.Int64 => OpCodes.Ldind_I8,   // TypeCode.Int64:
-                TypeCode.UInt64 => OpCodes.Ldind_I8,  // TypeCode.UInt64:
-                TypeCode.Single => OpCodes.Ldind_R4,  // TypeCode.Single:
-                TypeCode.Double => OpCodes.Ldind_R8,  // TypeCode.Double:
+                TypeCode.Char => OpCodes.Ldind_I2, // TypeCode.Char:
+                TypeCode.SByte => OpCodes.Ldind_I1, // TypeCode.SByte:
+                TypeCode.Byte => OpCodes.Ldind_U1, // TypeCode.Byte:
+                TypeCode.Int16 => OpCodes.Ldind_I2, // TypeCode.Int16:
+                TypeCode.UInt16 => OpCodes.Ldind_U2, // TypeCode.UInt16:
+                TypeCode.Int32 => OpCodes.Ldind_I4, // TypeCode.Int32:
+                TypeCode.UInt32 => OpCodes.Ldind_U4, // TypeCode.UInt32:
+                TypeCode.Int64 => OpCodes.Ldind_I8, // TypeCode.Int64:
+                TypeCode.UInt64 => OpCodes.Ldind_I8, // TypeCode.UInt64:
+                TypeCode.Single => OpCodes.Ldind_R4, // TypeCode.Single:
+                TypeCode.Double => OpCodes.Ldind_R8, // TypeCode.Double:
                 TypeCode.String => OpCodes.Ldind_Ref, // TypeCode.String:
                 _ => OpCodes.Nop,
             };
@@ -849,7 +998,6 @@ namespace System.Runtime.Serialization
                 EmitSourceInstruction("Stobj " + type);
             _ilGen.Emit(OpCodes.Stobj, type);
         }
-
 
         internal void Ceq()
         {
@@ -894,8 +1042,12 @@ namespace System.Runtime.Serialization
                         Ldc((bool)o);
                         break;
                     case TypeCode.Char:
-                        DiagnosticUtility.DebugAssert("Char is not a valid schema primitive and should be treated as int in DataContract");
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.CharIsInvalidPrimitive));
+                        DiagnosticUtility.DebugAssert(
+                            "Char is not a valid schema primitive and should be treated as int in DataContract"
+                        );
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(SR.CharIsInvalidPrimitive)
+                        );
                     case TypeCode.SByte:
                     case TypeCode.Byte:
                     case TypeCode.Int16:
@@ -928,7 +1080,14 @@ namespace System.Runtime.Serialization
                     case TypeCode.DateTime:
                     case TypeCode.Empty:
                     default:
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.UnknownConstantType, DataContract.GetClrTypeFullName(valueType))));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.UnknownConstantType,
+                                    DataContract.GetClrTypeFullName(valueType)
+                                )
+                            )
+                        );
                 }
             }
         }
@@ -1008,7 +1167,6 @@ namespace System.Runtime.Serialization
             _ilGen.Emit(OpCodes.Stloc, local);
         }
 
-
         internal void Ldloca(LocalBuilder localBuilder)
         {
             if (_codeGenTrace != CodeGenTrace.None)
@@ -1079,17 +1237,17 @@ namespace System.Runtime.Serialization
             {
                 TypeCode.Object => OpCodes.Ldelem_Ref, // TypeCode.Object:
                 TypeCode.Boolean => OpCodes.Ldelem_I1, // TypeCode.Boolean:
-                TypeCode.Char => OpCodes.Ldelem_I2,    // TypeCode.Char:
-                TypeCode.SByte => OpCodes.Ldelem_I1,   // TypeCode.SByte:
-                TypeCode.Byte => OpCodes.Ldelem_U1,    // TypeCode.Byte:
-                TypeCode.Int16 => OpCodes.Ldelem_I2,   // TypeCode.Int16:
-                TypeCode.UInt16 => OpCodes.Ldelem_U2,  // TypeCode.UInt16:
-                TypeCode.Int32 => OpCodes.Ldelem_I4,   // TypeCode.Int32:
-                TypeCode.UInt32 => OpCodes.Ldelem_U4,  // TypeCode.UInt32:
-                TypeCode.Int64 => OpCodes.Ldelem_I8,   // TypeCode.Int64:
-                TypeCode.UInt64 => OpCodes.Ldelem_I8,  // TypeCode.UInt64:
-                TypeCode.Single => OpCodes.Ldelem_R4,  // TypeCode.Single:
-                TypeCode.Double => OpCodes.Ldelem_R8,  // TypeCode.Double:
+                TypeCode.Char => OpCodes.Ldelem_I2, // TypeCode.Char:
+                TypeCode.SByte => OpCodes.Ldelem_I1, // TypeCode.SByte:
+                TypeCode.Byte => OpCodes.Ldelem_U1, // TypeCode.Byte:
+                TypeCode.Int16 => OpCodes.Ldelem_I2, // TypeCode.Int16:
+                TypeCode.UInt16 => OpCodes.Ldelem_U2, // TypeCode.UInt16:
+                TypeCode.Int32 => OpCodes.Ldelem_I4, // TypeCode.Int32:
+                TypeCode.UInt32 => OpCodes.Ldelem_U4, // TypeCode.UInt32:
+                TypeCode.Int64 => OpCodes.Ldelem_I8, // TypeCode.Int64:
+                TypeCode.UInt64 => OpCodes.Ldelem_I8, // TypeCode.UInt64:
+                TypeCode.Single => OpCodes.Ldelem_R4, // TypeCode.Single:
+                TypeCode.Double => OpCodes.Ldelem_R8, // TypeCode.Double:
                 TypeCode.String => OpCodes.Ldelem_Ref, // TypeCode.String:
                 _ => OpCodes.Nop,
             };
@@ -1104,7 +1262,14 @@ namespace System.Runtime.Serialization
             {
                 OpCode opCode = GetLdelemOpCode(arrayElementType.GetTypeCode());
                 if (opCode.Equals(OpCodes.Nop))
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ArrayTypeIsNotSupported_GeneratingCode, DataContract.GetClrTypeFullName(arrayElementType))));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.ArrayTypeIsNotSupported_GeneratingCode,
+                                DataContract.GetClrTypeFullName(arrayElementType)
+                            )
+                        )
+                    );
                 if (_codeGenTrace != CodeGenTrace.None)
                     EmitSourceInstruction(opCode.ToString()!);
                 _ilGen.Emit(opCode);
@@ -1126,17 +1291,17 @@ namespace System.Runtime.Serialization
             {
                 TypeCode.Object => OpCodes.Stelem_Ref, // TypeCode.Object:
                 TypeCode.Boolean => OpCodes.Stelem_I1, // TypeCode.Boolean:
-                TypeCode.Char => OpCodes.Stelem_I2,    // TypeCode.Char:
-                TypeCode.SByte => OpCodes.Stelem_I1,   // TypeCode.SByte:
-                TypeCode.Byte => OpCodes.Stelem_I1,    // TypeCode.Byte:
-                TypeCode.Int16 => OpCodes.Stelem_I2,   // TypeCode.Int16:
-                TypeCode.UInt16 => OpCodes.Stelem_I2,  // TypeCode.UInt16:
-                TypeCode.Int32 => OpCodes.Stelem_I4,   // TypeCode.Int32:
-                TypeCode.UInt32 => OpCodes.Stelem_I4,  // TypeCode.UInt32:
-                TypeCode.Int64 => OpCodes.Stelem_I8,   // TypeCode.Int64:
-                TypeCode.UInt64 => OpCodes.Stelem_I8,  // TypeCode.UInt64:
-                TypeCode.Single => OpCodes.Stelem_R4,  // TypeCode.Single:
-                TypeCode.Double => OpCodes.Stelem_R8,  // TypeCode.Double:
+                TypeCode.Char => OpCodes.Stelem_I2, // TypeCode.Char:
+                TypeCode.SByte => OpCodes.Stelem_I1, // TypeCode.SByte:
+                TypeCode.Byte => OpCodes.Stelem_I1, // TypeCode.Byte:
+                TypeCode.Int16 => OpCodes.Stelem_I2, // TypeCode.Int16:
+                TypeCode.UInt16 => OpCodes.Stelem_I2, // TypeCode.UInt16:
+                TypeCode.Int32 => OpCodes.Stelem_I4, // TypeCode.Int32:
+                TypeCode.UInt32 => OpCodes.Stelem_I4, // TypeCode.UInt32:
+                TypeCode.Int64 => OpCodes.Stelem_I8, // TypeCode.Int64:
+                TypeCode.UInt64 => OpCodes.Stelem_I8, // TypeCode.UInt64:
+                TypeCode.Single => OpCodes.Stelem_R4, // TypeCode.Single:
+                TypeCode.Double => OpCodes.Stelem_R8, // TypeCode.Double:
                 TypeCode.String => OpCodes.Stelem_Ref, // TypeCode.String:
                 _ => OpCodes.Nop,
             };
@@ -1149,7 +1314,14 @@ namespace System.Runtime.Serialization
             {
                 OpCode opCode = GetStelemOpCode(arrayElementType.GetTypeCode());
                 if (opCode.Equals(OpCodes.Nop))
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ArrayTypeIsNotSupported_GeneratingCode, DataContract.GetClrTypeFullName(arrayElementType))));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.ArrayTypeIsNotSupported_GeneratingCode,
+                                DataContract.GetClrTypeFullName(arrayElementType)
+                            )
+                        )
+                    );
                 if (_codeGenTrace != CodeGenTrace.None)
                     EmitSourceInstruction(opCode.ToString()!);
                 EmitStackTop(arrayElementType);
@@ -1238,8 +1410,6 @@ namespace System.Runtime.Serialization
             _ilGen.Emit(OpCodes.Brtrue, label);
         }
 
-
-
         internal void Pop()
         {
             if (_codeGenTrace != CodeGenTrace.None)
@@ -1267,7 +1437,10 @@ namespace System.Runtime.Serialization
         {
             Load(arg);
             if (arg != null)
-                ConvertValue(GetVariableType(arg), methodInfo.GetParameters()[oneBasedArgIndex - 1].ParameterType);
+                ConvertValue(
+                    GetVariableType(arg),
+                    methodInfo.GetParameters()[oneBasedArgIndex - 1].ParameterType
+                );
         }
 
         private void InternalIf(bool negate)
@@ -1286,17 +1459,17 @@ namespace System.Runtime.Serialization
             typeCode switch
             {
                 TypeCode.Boolean => OpCodes.Conv_I1, // TypeCode.Boolean:
-                TypeCode.Char => OpCodes.Conv_I2,    // TypeCode.Char:
-                TypeCode.SByte => OpCodes.Conv_I1,   // TypeCode.SByte:
-                TypeCode.Byte => OpCodes.Conv_U1,    // TypeCode.Byte:
-                TypeCode.Int16 => OpCodes.Conv_I2,   // TypeCode.Int16:
-                TypeCode.UInt16 => OpCodes.Conv_U2,  // TypeCode.UInt16:
-                TypeCode.Int32 => OpCodes.Conv_I4,   // TypeCode.Int32:
-                TypeCode.UInt32 => OpCodes.Conv_U4,  // TypeCode.UInt32:
-                TypeCode.Int64 => OpCodes.Conv_I8,   // TypeCode.Int64:
-                TypeCode.UInt64 => OpCodes.Conv_I8,  // TypeCode.UInt64:
-                TypeCode.Single => OpCodes.Conv_R4,  // TypeCode.Single:
-                TypeCode.Double => OpCodes.Conv_R8,  // TypeCode.Double:
+                TypeCode.Char => OpCodes.Conv_I2, // TypeCode.Char:
+                TypeCode.SByte => OpCodes.Conv_I1, // TypeCode.SByte:
+                TypeCode.Byte => OpCodes.Conv_U1, // TypeCode.Byte:
+                TypeCode.Int16 => OpCodes.Conv_I2, // TypeCode.Int16:
+                TypeCode.UInt16 => OpCodes.Conv_U2, // TypeCode.UInt16:
+                TypeCode.Int32 => OpCodes.Conv_I4, // TypeCode.Int32:
+                TypeCode.UInt32 => OpCodes.Conv_U4, // TypeCode.UInt32:
+                TypeCode.Int64 => OpCodes.Conv_I8, // TypeCode.Int64:
+                TypeCode.UInt64 => OpCodes.Conv_I8, // TypeCode.UInt64:
+                TypeCode.Single => OpCodes.Conv_R4, // TypeCode.Single:
+                TypeCode.Double => OpCodes.Conv_R8, // TypeCode.Double:
                 _ => OpCodes.Nop,
             };
 
@@ -1310,7 +1483,14 @@ namespace System.Runtime.Serialization
                 {
                     OpCode opCode = GetConvOpCode(target.GetTypeCode());
                     if (opCode.Equals(OpCodes.Nop))
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.NoConversionPossibleTo, DataContract.GetClrTypeFullName(target))));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.Format(
+                                    SR.NoConversionPossibleTo,
+                                    DataContract.GetClrTypeFullName(target)
+                                )
+                            )
+                        );
                     else
                     {
                         if (_codeGenTrace != CodeGenTrace.None)
@@ -1325,7 +1505,15 @@ namespace System.Runtime.Serialization
                         Ldobj(target);
                 }
                 else
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.IsNotAssignableFrom, DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source))));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.Format(
+                                SR.IsNotAssignableFrom,
+                                DataContract.GetClrTypeFullName(target),
+                                DataContract.GetClrTypeFullName(source)
+                            )
+                        )
+                    );
             }
             else if (target.IsAssignableFrom(source))
             {
@@ -1345,7 +1533,15 @@ namespace System.Runtime.Serialization
                 Castclass(target);
             }
             else
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.IsNotAssignableFrom, DataContract.GetClrTypeFullName(target), DataContract.GetClrTypeFullName(source))));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(
+                            SR.IsNotAssignableFrom,
+                            DataContract.GetClrTypeFullName(target),
+                            DataContract.GetClrTypeFullName(source)
+                        )
+                    )
+                );
         }
 
         private IfState PopIfState()
@@ -1360,22 +1556,18 @@ namespace System.Runtime.Serialization
         [DoesNotReturn]
         private void ThrowMismatchException(object expected)
         {
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ExpectingEnd, expected.ToString())));
+            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(SR.ExpectingEnd, expected.ToString())
+                )
+            );
         }
 
+        internal void EmitSourceInstruction(string line) { }
 
-        internal void EmitSourceInstruction(string line)
-        {
-        }
+        internal void EmitSourceLabel(string line) { }
 
-        internal void EmitSourceLabel(string line)
-        {
-        }
-
-        internal void EmitSourceComment(string comment)
-        {
-        }
-
+        internal void EmitSourceComment(string comment) { }
 
         internal void EmitStackTop(Type stackTopType)
         {
@@ -1426,7 +1618,9 @@ namespace System.Runtime.Serialization
             MarkLabel(switchState.EndOfSwitchLabel);
         }
 
-        private static readonly MethodInfo s_stringLength = typeof(string).GetProperty("Length")!.GetMethod!;
+        private static readonly MethodInfo s_stringLength = typeof(string).GetProperty(
+            "Length"
+        )!.GetMethod!;
         internal void ElseIfIsEmptyString(LocalBuilder strLocal)
         {
             IfState ifState = (IfState)_blockStack.Pop();
@@ -1527,58 +1721,34 @@ namespace System.Runtime.Serialization
 
         internal LocalBuilder? Index
         {
-            get
-            {
-                return _indexVar;
-            }
+            get { return _indexVar; }
         }
 
         internal Label BeginLabel
         {
-            get
-            {
-                return _beginLabel;
-            }
+            get { return _beginLabel; }
         }
 
         internal Label TestLabel
         {
-            get
-            {
-                return _testLabel;
-            }
+            get { return _testLabel; }
         }
 
         internal Label EndLabel
         {
-            get
-            {
-                return _endLabel;
-            }
-            set
-            {
-                _endLabel = value;
-            }
+            get { return _endLabel; }
+            set { _endLabel = value; }
         }
 
         internal bool RequiresEndLabel
         {
-            get
-            {
-                return _requiresEndLabel;
-            }
-            set
-            {
-                _requiresEndLabel = value;
-            }
+            get { return _requiresEndLabel; }
+            set { _requiresEndLabel = value; }
         }
 
         internal object? End
         {
-            get
-            {
-                return _end;
-            }
+            get { return _end; }
         }
     }
 
@@ -1599,29 +1769,16 @@ namespace System.Runtime.Serialization
 
         internal Label EndIf
         {
-            get
-            {
-                return _endIf;
-            }
-            set
-            {
-                _endIf = value;
-            }
+            get { return _endIf; }
+            set { _endIf = value; }
         }
 
         internal Label ElseBegin
         {
-            get
-            {
-                return _elseBegin;
-            }
-            set
-            {
-                _elseBegin = value;
-            }
+            get { return _elseBegin; }
+            set { _elseBegin = value; }
         }
     }
-
 
     internal sealed class SwitchState
     {
@@ -1636,29 +1793,17 @@ namespace System.Runtime.Serialization
         }
         internal Label DefaultLabel
         {
-            get
-            {
-                return _defaultLabel;
-            }
+            get { return _defaultLabel; }
         }
 
         internal Label EndOfSwitchLabel
         {
-            get
-            {
-                return _endOfSwitchLabel;
-            }
+            get { return _endOfSwitchLabel; }
         }
         internal bool DefaultDefined
         {
-            get
-            {
-                return _defaultDefined;
-            }
-            set
-            {
-                _defaultDefined = value;
-            }
+            get { return _defaultDefined; }
+            set { _defaultDefined = value; }
         }
     }
 }

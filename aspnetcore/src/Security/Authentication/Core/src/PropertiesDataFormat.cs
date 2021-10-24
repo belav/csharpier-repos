@@ -16,8 +16,6 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         /// <param name="protector">The <see cref="IDataProtector"/>.</param>
         public PropertiesDataFormat(IDataProtector protector)
-            : base(new PropertiesSerializer(), protector)
-        {
-        }
+            : base(new PropertiesSerializer(), protector) { }
     }
 }

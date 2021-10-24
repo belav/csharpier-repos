@@ -7,7 +7,12 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class Directory_Delete_Tests : FileSystemWatcherTest
     {
         [Fact]
@@ -23,7 +28,13 @@ namespace System.IO.Tests
                 Action cleanup = () => Directory.CreateDirectory(dirName);
                 cleanup();
 
-                ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, expectedPath: dirName);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Deleted,
+                    action,
+                    cleanup,
+                    expectedPath: dirName
+                );
             }
         }
 
@@ -52,7 +63,11 @@ namespace System.IO.Tests
         public void FileSystemWatcher_Directory_Delete_DeepDirectoryStructure()
         {
             using (var dir = new TempDirectory(GetTestFilePath()))
-            using (var deepDir = new TempDirectory(Path.Combine(dir.Path, "dir", "dir", "dir", "dir", "dir", "dir", "dir")))
+            using (
+                var deepDir = new TempDirectory(
+                    Path.Combine(dir.Path, "dir", "dir", "dir", "dir", "dir", "dir", "dir")
+                )
+            )
             using (var watcher = new FileSystemWatcher(dir.Path, "*"))
             {
                 watcher.IncludeSubdirectories = true;
@@ -64,7 +79,14 @@ namespace System.IO.Tests
                 Action cleanup = () => Directory.CreateDirectory(dirPath);
                 cleanup();
 
-                ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, dirPath, LongWaitTimeout);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Deleted,
+                    action,
+                    cleanup,
+                    dirPath,
+                    LongWaitTimeout
+                );
             }
         }
 
@@ -82,7 +104,13 @@ namespace System.IO.Tests
                 Action cleanup = () => Assert.True(CreateSymLink(tempDir.Path, symLinkPath, true));
                 cleanup();
 
-                ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, expectedPath: symLinkPath);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Deleted,
+                    action,
+                    cleanup,
+                    expectedPath: symLinkPath
+                );
             }
         }
     }

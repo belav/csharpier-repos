@@ -21,6 +21,9 @@ internal class Foo
     }
     public static int Main()
     {
-        if (new Foo().Function() == 1) return 100; else return 101;
+        if (new Foo().Function() == 1)
+            return 100;
+        else
+            return 101;
     }
 }

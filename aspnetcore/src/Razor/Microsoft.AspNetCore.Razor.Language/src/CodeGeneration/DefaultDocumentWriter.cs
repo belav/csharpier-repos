@@ -19,7 +19,10 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
             _options = options;
         }
 
-        public override RazorCSharpDocument WriteDocument(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        public override RazorCSharpDocument WriteDocument(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             if (codeDocument == null)
             {
@@ -36,20 +39,24 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 _codeTarget.CreateNodeWriter(),
                 codeDocument,
                 documentNode,
-                _options);
+                _options
+            );
             context.Visitor = new Visitor(_codeTarget, context);
 
             context.Visitor.VisitDocument(documentNode);
 
             var cSharp = context.CodeWriter.GenerateCode();
 
-            var allOrderedDiagnostics = context.Diagnostics.OrderBy(diagnostic => diagnostic.Span.AbsoluteIndex);
+            var allOrderedDiagnostics = context.Diagnostics.OrderBy(
+                diagnostic => diagnostic.Span.AbsoluteIndex
+            );
             return new DefaultRazorCSharpDocument(
                 cSharp,
                 _options,
                 allOrderedDiagnostics.ToArray(),
                 context.SourceMappings.ToArray(),
-                context.LinePragmas.ToArray());
+                context.LinePragmas.ToArray()
+            );
         }
 
         private class Visitor : IntermediateNodeVisitor
@@ -76,31 +83,49 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
                     string algorithmId;
                     var algorithm = Context.SourceDocument.GetChecksumAlgorithm();
-                    if (string.Equals(algorithm, HashAlgorithmName.SHA256.Name, StringComparison.Ordinal))
+                    if (
+                        string.Equals(
+                            algorithm,
+                            HashAlgorithmName.SHA256.Name,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         algorithmId = "{8829d00f-11b8-4213-878b-770e8597ac16}";
                     }
-                    else if (string.Equals(algorithm, HashAlgorithmName.SHA1.Name, StringComparison.Ordinal) ||
-
+                    else if (
+                        string.Equals(
+                            algorithm,
+                            HashAlgorithmName.SHA1.Name,
+                            StringComparison.Ordinal
+                        )
+                        ||
                         // In 2.0, we didn't actually expose the name of the algorithm, so it's possible we could get null here.
                         // If that's the case, we just assume SHA1 since that's the only thing we supported in 2.0.
-                        algorithm == null)
+                        algorithm == null
+                    )
                     {
                         algorithmId = "{ff1816ec-aa5e-4d10-87f7-6f4963833460}";
                     }
                     else
                     {
-                        var supportedAlgorithms = string.Join(" ", new string[]
-                        {
-                            HashAlgorithmName.SHA1.Name,
-                            HashAlgorithmName.SHA256.Name
-                        });
+                        var supportedAlgorithms = string.Join(
+                            " ",
+                            new string[]
+                            {
+                                HashAlgorithmName.SHA1.Name,
+                                HashAlgorithmName.SHA256.Name
+                            }
+                        );
 
                         var message = Resources.FormatUnsupportedChecksumAlgorithm(
                             algorithm,
                             supportedAlgorithms,
-                            nameof(RazorCodeGenerationOptions) + "." + nameof(RazorCodeGenerationOptions.SuppressChecksum),
-                            bool.TrueString);
+                            nameof(RazorCodeGenerationOptions)
+                                + "."
+                                + nameof(RazorCodeGenerationOptions.SuppressChecksum),
+                            bool.TrueString
+                        );
                         throw new InvalidOperationException(message);
                     }
 
@@ -134,7 +159,9 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 Context.NodeWriter.WriteUsingDirective(Context, node);
             }
 
-            public override void VisitNamespaceDeclaration(NamespaceDeclarationIntermediateNode node)
+            public override void VisitNamespaceDeclaration(
+                NamespaceDeclarationIntermediateNode node
+            )
             {
                 using (Context.CodeWriter.BuildNamespace(node.Content))
                 {
@@ -145,12 +172,15 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             public override void VisitClassDeclaration(ClassDeclarationIntermediateNode node)
             {
-                using (Context.CodeWriter.BuildClassDeclaration(
-                    node.Modifiers,
-                    node.ClassName,
-                    node.BaseType,
-                    node.Interfaces,
-                    node.TypeParameters.Select(p => (p.ParameterName, p.Constraints)).ToArray()))
+                using (
+                    Context.CodeWriter.BuildClassDeclaration(
+                        node.Modifiers,
+                        node.ClassName,
+                        node.BaseType,
+                        node.Interfaces,
+                        node.TypeParameters.Select(p => (p.ParameterName, p.Constraints)).ToArray()
+                    )
+                )
                 {
                     VisitDefault(node);
                 }
@@ -206,12 +236,21 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
 
             public override void VisitFieldDeclaration(FieldDeclarationIntermediateNode node)
             {
-                Context.CodeWriter.WriteField(node.SuppressWarnings, node.Modifiers, node.FieldType, node.FieldName);
+                Context.CodeWriter.WriteField(
+                    node.SuppressWarnings,
+                    node.Modifiers,
+                    node.FieldType,
+                    node.FieldName
+                );
             }
 
             public override void VisitPropertyDeclaration(PropertyDeclarationIntermediateNode node)
             {
-                Context.CodeWriter.WriteAutoPropertyDeclaration(node.Modifiers, node.PropertyType, node.PropertyName);
+                Context.CodeWriter.WriteAutoPropertyDeclaration(
+                    node.Modifiers,
+                    node.PropertyType,
+                    node.PropertyName
+                );
             }
 
             public override void VisitExtension(ExtensionIntermediateNode node)
@@ -239,12 +278,16 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 Context.NodeWriter.WriteHtmlAttributeValue(Context, node);
             }
 
-            public override void VisitCSharpExpressionAttributeValue(CSharpExpressionAttributeValueIntermediateNode node)
+            public override void VisitCSharpExpressionAttributeValue(
+                CSharpExpressionAttributeValueIntermediateNode node
+            )
             {
                 Context.NodeWriter.WriteCSharpExpressionAttributeValue(Context, node);
             }
 
-            public override void VisitCSharpCodeAttributeValue(CSharpCodeAttributeValueIntermediateNode node)
+            public override void VisitCSharpCodeAttributeValue(
+                CSharpCodeAttributeValueIntermediateNode node
+            )
             {
                 Context.NodeWriter.WriteCSharpCodeAttributeValue(Context, node);
             }
@@ -269,17 +312,23 @@ namespace Microsoft.AspNetCore.Razor.Language.CodeGeneration
                 Context.NodeWriter.WriteComponentAttribute(Context, node);
             }
 
-            public override void VisitComponentChildContent(ComponentChildContentIntermediateNode node)
+            public override void VisitComponentChildContent(
+                ComponentChildContentIntermediateNode node
+            )
             {
                 Context.NodeWriter.WriteComponentChildContent(Context, node);
             }
 
-            public override void VisitComponentTypeArgument(ComponentTypeArgumentIntermediateNode node)
+            public override void VisitComponentTypeArgument(
+                ComponentTypeArgumentIntermediateNode node
+            )
             {
                 Context.NodeWriter.WriteComponentTypeArgument(Context, node);
             }
 
-            public override void VisitComponentTypeInferenceMethod(ComponentTypeInferenceMethodIntermediateNode node)
+            public override void VisitComponentTypeInferenceMethod(
+                ComponentTypeInferenceMethodIntermediateNode node
+            )
             {
                 Context.NodeWriter.WriteComponentTypeInferenceMethod(Context, node);
             }

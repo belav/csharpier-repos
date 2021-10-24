@@ -109,18 +109,28 @@ namespace System.Security.Cryptography.Xml.Tests
 
                 XmlNamespaceManager nm = new XmlNamespaceManager(doc.NameTable);
                 nm.AddNamespace("s", "http://www.w3.org/2003/05/soap-envelope");
-                nm.AddNamespace("o", "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd");
+                nm.AddNamespace(
+                    "o",
+                    "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+                );
                 nm.AddNamespace("e", EncryptedXml.XmlEncNamespaceUrl);
-                XmlElement el = doc.SelectSingleNode("/s:Envelope/s:Header/o:Security/e:EncryptedKey", nm) as XmlElement;
+                XmlElement el =
+                    doc.SelectSingleNode("/s:Envelope/s:Header/o:Security/e:EncryptedKey", nm)
+                    as XmlElement;
                 EncryptedKey ekey = new EncryptedKey();
                 ekey.LoadXml(el);
-                byte[] key = rsa.Decrypt(ekey.CipherData.CipherValue, RSAEncryptionPadding.OaepSHA1);
+                byte[] key = rsa.Decrypt(
+                    ekey.CipherData.CipherValue,
+                    RSAEncryptionPadding.OaepSHA1
+                );
                 using (Aes aes = Aes.Create())
                 {
                     aes.Key = key;
                     aes.Mode = CipherMode.CBC;
                     List<XmlElement> elements = new List<XmlElement>();
-                    foreach (XmlElement encryptedDataElement in doc.SelectNodes("//e:EncryptedData", nm))
+                    foreach (
+                        XmlElement encryptedDataElement in doc.SelectNodes("//e:EncryptedData", nm)
+                    )
                     {
                         elements.Add(encryptedDataElement);
                     }
@@ -139,7 +149,9 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (Aes aes = Aes.Create())
             {
-                byte[] keydata = Convert.FromBase64String("o/ilseZu+keLBBWGGPlUHweqxIPc4gzZEFWr2nBt640=");
+                byte[] keydata = Convert.FromBase64String(
+                    "o/ilseZu+keLBBWGGPlUHweqxIPc4gzZEFWr2nBt640="
+                );
                 aes.Mode = CipherMode.CBC;
                 aes.KeySize = 256;
                 aes.Key = keydata;
@@ -147,7 +159,11 @@ namespace System.Security.Cryptography.Xml.Tests
 
                 XmlDocument doc = new XmlDocument();
                 doc.PreserveWhitespace = true;
-                doc.Load(TestHelpers.LoadResourceStream("System.Security.Cryptography.Xml.Tests.EncryptedXmlSample2.xml"));
+                doc.Load(
+                    TestHelpers.LoadResourceStream(
+                        "System.Security.Cryptography.Xml.Tests.EncryptedXmlSample2.xml"
+                    )
+                );
                 EncryptedXml encxml = new EncryptedXml(doc);
                 EncryptedData edata = new EncryptedData();
                 edata.LoadXml(doc.DocumentElement);
@@ -160,7 +176,6 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (StringWriter sw = new StringWriter())
             {
-
                 // Encryption
                 {
                     XmlDocument doc = new XmlDocument();
@@ -171,7 +186,9 @@ namespace System.Security.Cryptography.Xml.Tests
 
                     using (Aes aes = Aes.Create())
                     {
-                        byte[] keydata = Convert.FromBase64String("o/ilseZu+keLBBWGGPlUHweqxIPc4gzZEFWr2nBt640=");
+                        byte[] keydata = Convert.FromBase64String(
+                            "o/ilseZu+keLBBWGGPlUHweqxIPc4gzZEFWr2nBt640="
+                        );
                         aes.Mode = CipherMode.CBC;
                         aes.KeySize = 256;
                         aes.IV = Convert.FromBase64String("pBUM5P03rZ6AE4ZK5EyBrw==");
@@ -203,7 +220,9 @@ namespace System.Security.Cryptography.Xml.Tests
                 {
                     using (Aes aes = Aes.Create())
                     {
-                        byte[] keydata = Convert.FromBase64String("o/ilseZu+keLBBWGGPlUHweqxIPc4gzZEFWr2nBt640=");
+                        byte[] keydata = Convert.FromBase64String(
+                            "o/ilseZu+keLBBWGGPlUHweqxIPc4gzZEFWr2nBt640="
+                        );
                         aes.Mode = CipherMode.CBC;
                         aes.KeySize = 256;
                         aes.Key = keydata;
@@ -285,7 +304,9 @@ namespace System.Security.Cryptography.Xml.Tests
             doc.LoadXml("<root />");
             EncryptedXml exml = new EncryptedXml();
             X509Certificate2 certificate = null;
-            Assert.Throws<ArgumentNullException>(() => exml.Encrypt(doc.DocumentElement, certificate));
+            Assert.Throws<ArgumentNullException>(
+                () => exml.Encrypt(doc.DocumentElement, certificate)
+            );
         }
 
         [Fact]
@@ -355,7 +376,13 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void Encrypt_NotSupportedAlgorithm()
         {
-            Assert.Throws<CryptographicException>(() => CheckEncryptionMethod(new NotSupportedSymmetricAlgorithm(), EncryptedXml.XmlEncAES192KeyWrapUrl));
+            Assert.Throws<CryptographicException>(
+                () =>
+                    CheckEncryptionMethod(
+                        new NotSupportedSymmetricAlgorithm(),
+                        EncryptedXml.XmlEncAES192KeyWrapUrl
+                    )
+            );
         }
 
         [Fact]
@@ -401,7 +428,9 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void ReplaceElement_XmlElementNull()
         {
-            Assert.Throws<ArgumentNullException>(() => EncryptedXml.ReplaceElement(null, new EncryptedData(), true));
+            Assert.Throws<ArgumentNullException>(
+                () => EncryptedXml.ReplaceElement(null, new EncryptedData(), true)
+            );
         }
 
         [Fact]
@@ -409,7 +438,9 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<root />");
-            Assert.Throws<ArgumentNullException>(() => EncryptedXml.ReplaceElement(doc.DocumentElement, null, false));
+            Assert.Throws<ArgumentNullException>(
+                () => EncryptedXml.ReplaceElement(doc.DocumentElement, null, false)
+            );
         }
 
         [Fact]
@@ -442,7 +473,9 @@ namespace System.Security.Cryptography.Xml.Tests
         public void GetDecryptionKey_EncryptedDataNull()
         {
             EncryptedXml ex = new EncryptedXml();
-            Assert.Throws<ArgumentNullException>(() => ex.GetDecryptionKey(null, EncryptedXml.XmlEncAES128Url));
+            Assert.Throws<ArgumentNullException>(
+                () => ex.GetDecryptionKey(null, EncryptedXml.XmlEncAES128Url)
+            );
         }
 
         [Fact]
@@ -504,7 +537,10 @@ namespace System.Security.Cryptography.Xml.Tests
 
                 EncryptedXml exml = new EncryptedXml(doc);
                 exml.AddKeyNameMapping("another_aes", aes);
-                SymmetricAlgorithm decryptedAlg = exml.GetDecryptionKey(edata, EncryptedXml.XmlEncAES256Url);
+                SymmetricAlgorithm decryptedAlg = exml.GetDecryptionKey(
+                    edata,
+                    EncryptedXml.XmlEncAES256Url
+                );
 
                 Assert.Equal(innerAes.Key, decryptedAlg.Key);
             }
@@ -514,7 +550,9 @@ namespace System.Security.Cryptography.Xml.Tests
         public void GetDecryptionIV_EncryptedDataNull()
         {
             EncryptedXml ex = new EncryptedXml();
-            Assert.Throws<ArgumentNullException>(() => ex.GetDecryptionIV(null, EncryptedXml.XmlEncAES128Url));
+            Assert.Throws<ArgumentNullException>(
+                () => ex.GetDecryptionIV(null, EncryptedXml.XmlEncAES128Url)
+            );
         }
 
         [Fact]
@@ -542,7 +580,9 @@ namespace System.Security.Cryptography.Xml.Tests
             EncryptedXml ex = new EncryptedXml();
             EncryptedData encryptedData = new EncryptedData();
             encryptedData.CipherData = new CipherData(new byte[16]);
-            Assert.Throws<CryptographicException>(() => ex.GetDecryptionIV(encryptedData, "invalid"));
+            Assert.Throws<CryptographicException>(
+                () => ex.GetDecryptionIV(encryptedData, "invalid")
+            );
         }
 
         [Fact]
@@ -551,7 +591,10 @@ namespace System.Security.Cryptography.Xml.Tests
             EncryptedXml ex = new EncryptedXml();
             EncryptedData encryptedData = new EncryptedData();
             encryptedData.CipherData = new CipherData(new byte[16]);
-            Assert.Equal(8, ex.GetDecryptionIV(encryptedData, EncryptedXml.XmlEncTripleDESUrl).Length);
+            Assert.Equal(
+                8,
+                ex.GetDecryptionIV(encryptedData, EncryptedXml.XmlEncTripleDESUrl).Length
+            );
         }
 
         [Fact]
@@ -587,7 +630,9 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void EncryptKey_WrongSymmetricAlgorithm()
         {
-            Assert.Throws<CryptographicException>(() => EncryptedXml.EncryptKey(new byte[16], new NotSupportedSymmetricAlgorithm()));
+            Assert.Throws<CryptographicException>(
+                () => EncryptedXml.EncryptKey(new byte[16], new NotSupportedSymmetricAlgorithm())
+            );
         }
 
         [Fact]
@@ -595,14 +640,18 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<ArgumentNullException>(() => EncryptedXml.EncryptKey(null, rsa, false));
+                Assert.Throws<ArgumentNullException>(
+                    () => EncryptedXml.EncryptKey(null, rsa, false)
+                );
             }
         }
 
         [Fact]
         public void EncryptKey_RSA_RSANull()
         {
-            Assert.Throws<ArgumentNullException>(() => EncryptedXml.EncryptKey(new byte[16], null, false));
+            Assert.Throws<ArgumentNullException>(
+                () => EncryptedXml.EncryptKey(new byte[16], null, false)
+            );
         }
 
         [Fact]
@@ -670,7 +719,9 @@ namespace System.Security.Cryptography.Xml.Tests
             using (Aes aes = Aes.Create())
             {
                 EncryptedXml exml = new EncryptedXml(doc);
-                string cipherValue = Convert.ToBase64String(exml.EncryptData(Encoding.UTF8.GetBytes(xml), aes));
+                string cipherValue = Convert.ToBase64String(
+                    exml.EncryptData(Encoding.UTF8.GetBytes(xml), aes)
+                );
 
                 EncryptedData ed = new EncryptedData();
                 ed.Type = EncryptedXml.XmlEncElementUrl;
@@ -678,7 +729,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 ed.CipherData = new CipherData();
                 // Create CipherReference: first extract node value, then convert from base64 using Transforms
                 ed.CipherData.CipherReference = new CipherReference("#ID_0");
-                string xslt = "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"><xsl:template match = \"/\"><xsl:value-of select=\".\" /></xsl:template></xsl:stylesheet>";
+                string xslt =
+                    "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"><xsl:template match = \"/\"><xsl:value-of select=\".\" /></xsl:template></xsl:stylesheet>";
                 XmlDsigXsltTransform xsltTransform = new XmlDsigXsltTransform();
                 XmlDocument xsltDoc = new XmlDocument();
                 xsltDoc.LoadXml(xslt);
@@ -726,7 +778,9 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<root />");
             EncryptedXml ex = new EncryptedXml();
-            Assert.Throws<ArgumentNullException>(() => ex.EncryptData(doc.DocumentElement, null, true));
+            Assert.Throws<ArgumentNullException>(
+                () => ex.EncryptData(doc.DocumentElement, null, true)
+            );
         }
 
         [Fact]
@@ -904,7 +958,9 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 byte[] key = Encoding.ASCII.GetBytes("123");
 
-                Assert.Throws<CryptographicException>(() => EncryptedXml.DecryptKey(key, tripleDES));
+                Assert.Throws<CryptographicException>(
+                    () => EncryptedXml.DecryptKey(key, tripleDES)
+                );
             }
         }
 
@@ -918,7 +974,9 @@ namespace System.Security.Cryptography.Xml.Tests
                 byte[] encryptedKey = EncryptedXml.EncryptKey(key, tripleDES);
                 encryptedKey[0] ^= 0xFF;
 
-                Assert.Throws<CryptographicException>(() => EncryptedXml.DecryptKey(encryptedKey, tripleDES));
+                Assert.Throws<CryptographicException>(
+                    () => EncryptedXml.DecryptKey(encryptedKey, tripleDES)
+                );
             }
         }
 
@@ -943,7 +1001,9 @@ namespace System.Security.Cryptography.Xml.Tests
                 byte[] encryptedKey = EncryptedXml.EncryptKey(key, aes);
                 encryptedKey[0] ^= 0xFF;
 
-                Assert.Throws<CryptographicException>(() => EncryptedXml.DecryptKey(encryptedKey, aes));
+                Assert.Throws<CryptographicException>(
+                    () => EncryptedXml.DecryptKey(encryptedKey, aes)
+                );
             }
         }
 
@@ -957,14 +1017,18 @@ namespace System.Security.Cryptography.Xml.Tests
                 byte[] encryptedKey = EncryptedXml.EncryptKey(key, aes);
                 encryptedKey[0] ^= 0xFF;
 
-                Assert.Throws<CryptographicException>(() => EncryptedXml.DecryptKey(encryptedKey, aes));
+                Assert.Throws<CryptographicException>(
+                    () => EncryptedXml.DecryptKey(encryptedKey, aes)
+                );
             }
         }
 
         [Fact]
         public void DecryptKey_NotSupportedAlgorithm()
         {
-            Assert.Throws<CryptographicException>(() => EncryptedXml.DecryptKey(new byte[16], new NotSupportedSymmetricAlgorithm()));
+            Assert.Throws<CryptographicException>(
+                () => EncryptedXml.DecryptKey(new byte[16], new NotSupportedSymmetricAlgorithm())
+            );
         }
 
         [Fact]
@@ -972,14 +1036,18 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<ArgumentNullException>(() => EncryptedXml.DecryptKey(null, rsa, false));
+                Assert.Throws<ArgumentNullException>(
+                    () => EncryptedXml.DecryptKey(null, rsa, false)
+                );
             }
         }
 
         [Fact]
         public void DecryptKey_RSA_RSANull()
         {
-            Assert.Throws<ArgumentNullException>(() => EncryptedXml.DecryptKey(new byte[16], null, false));
+            Assert.Throws<ArgumentNullException>(
+                () => EncryptedXml.DecryptKey(new byte[16], null, false)
+            );
         }
 
         [Fact]

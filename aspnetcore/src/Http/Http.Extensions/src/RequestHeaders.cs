@@ -37,14 +37,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public IList<MediaTypeHeaderValue> Accept
         {
-            get
-            {
-                return Headers.GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
-            }
-            set
-            {
-                Headers.SetList(HeaderNames.Accept, value);
-            }
+            get { return Headers.GetList<MediaTypeHeaderValue>(HeaderNames.Accept); }
+            set { Headers.SetList(HeaderNames.Accept, value); }
         }
 
         /// <summary>
@@ -52,14 +46,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public IList<StringWithQualityHeaderValue> AcceptCharset
         {
-            get
-            {
-                return Headers.GetList<StringWithQualityHeaderValue>(HeaderNames.AcceptCharset);
-            }
-            set
-            {
-                Headers.SetList(HeaderNames.AcceptCharset, value);
-            }
+            get { return Headers.GetList<StringWithQualityHeaderValue>(HeaderNames.AcceptCharset); }
+            set { Headers.SetList(HeaderNames.AcceptCharset, value); }
         }
 
         /// <summary>
@@ -71,10 +59,7 @@ namespace Microsoft.AspNetCore.Http.Headers
             {
                 return Headers.GetList<StringWithQualityHeaderValue>(HeaderNames.AcceptEncoding);
             }
-            set
-            {
-                Headers.SetList(HeaderNames.AcceptEncoding, value);
-            }
+            set { Headers.SetList(HeaderNames.AcceptEncoding, value); }
         }
 
         /// <summary>
@@ -86,10 +71,7 @@ namespace Microsoft.AspNetCore.Http.Headers
             {
                 return Headers.GetList<StringWithQualityHeaderValue>(HeaderNames.AcceptLanguage);
             }
-            set
-            {
-                Headers.SetList(HeaderNames.AcceptLanguage, value);
-            }
+            set { Headers.SetList(HeaderNames.AcceptLanguage, value); }
         }
 
         /// <summary>
@@ -97,14 +79,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public CacheControlHeaderValue? CacheControl
         {
-            get
-            {
-                return Headers.Get<CacheControlHeaderValue>(HeaderNames.CacheControl);
-            }
-            set
-            {
-                Headers.Set(HeaderNames.CacheControl, value);
-            }
+            get { return Headers.Get<CacheControlHeaderValue>(HeaderNames.CacheControl); }
+            set { Headers.Set(HeaderNames.CacheControl, value); }
         }
 
         /// <summary>
@@ -116,10 +92,7 @@ namespace Microsoft.AspNetCore.Http.Headers
             {
                 return Headers.Get<ContentDispositionHeaderValue>(HeaderNames.ContentDisposition);
             }
-            set
-            {
-                Headers.Set(HeaderNames.ContentDisposition, value);
-            }
+            set { Headers.Set(HeaderNames.ContentDisposition, value); }
         }
 
         /// <summary>
@@ -127,14 +100,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public long? ContentLength
         {
-            get
-            {
-                return Headers.ContentLength;
-            }
-            set
-            {
-                Headers.ContentLength = value;
-            }
+            get { return Headers.ContentLength; }
+            set { Headers.ContentLength = value; }
         }
 
         /// <summary>
@@ -142,14 +109,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public ContentRangeHeaderValue? ContentRange
         {
-            get
-            {
-                return Headers.Get<ContentRangeHeaderValue>(HeaderNames.ContentRange);
-            }
-            set
-            {
-                Headers.Set(HeaderNames.ContentRange, value);
-            }
+            get { return Headers.Get<ContentRangeHeaderValue>(HeaderNames.ContentRange); }
+            set { Headers.Set(HeaderNames.ContentRange, value); }
         }
 
         /// <summary>
@@ -157,14 +118,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public MediaTypeHeaderValue? ContentType
         {
-            get
-            {
-                return Headers.Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
-            }
-            set
-            {
-                Headers.Set(HeaderNames.ContentType, value);
-            }
+            get { return Headers.Get<MediaTypeHeaderValue>(HeaderNames.ContentType); }
+            set { Headers.Set(HeaderNames.ContentType, value); }
         }
 
         /// <summary>
@@ -172,14 +127,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public IList<CookieHeaderValue> Cookie
         {
-            get
-            {
-                return Headers.GetList<CookieHeaderValue>(HeaderNames.Cookie);
-            }
-            set
-            {
-                Headers.SetList(HeaderNames.Cookie, value);
-            }
+            get { return Headers.GetList<CookieHeaderValue>(HeaderNames.Cookie); }
+            set { Headers.SetList(HeaderNames.Cookie, value); }
         }
 
         /// <summary>
@@ -187,14 +136,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public DateTimeOffset? Date
         {
-            get
-            {
-                return Headers.GetDate(HeaderNames.Date);
-            }
-            set
-            {
-                Headers.SetDate(HeaderNames.Date, value);
-            }
+            get { return Headers.GetDate(HeaderNames.Date); }
+            set { Headers.SetDate(HeaderNames.Date, value); }
         }
 
         /// <summary>
@@ -202,14 +145,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public DateTimeOffset? Expires
         {
-            get
-            {
-                return Headers.GetDate(HeaderNames.Expires);
-            }
-            set
-            {
-                Headers.SetDate(HeaderNames.Expires, value);
-            }
+            get { return Headers.GetDate(HeaderNames.Expires); }
+            set { Headers.SetDate(HeaderNames.Expires, value); }
         }
 
         /// <summary>
@@ -217,14 +154,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public HostString Host
         {
-            get
-            {
-                return HostString.FromUriComponent(Headers[HeaderNames.Host]);
-            }
-            set
-            {
-                Headers[HeaderNames.Host] = value.ToUriComponent();
-            }
+            get { return HostString.FromUriComponent(Headers[HeaderNames.Host]); }
+            set { Headers[HeaderNames.Host] = value.ToUriComponent(); }
         }
 
         /// <summary>
@@ -232,14 +163,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public IList<EntityTagHeaderValue> IfMatch
         {
-            get
-            {
-                return Headers.GetList<EntityTagHeaderValue>(HeaderNames.IfMatch);
-            }
-            set
-            {
-                Headers.SetList(HeaderNames.IfMatch, value);
-            }
+            get { return Headers.GetList<EntityTagHeaderValue>(HeaderNames.IfMatch); }
+            set { Headers.SetList(HeaderNames.IfMatch, value); }
         }
 
         /// <summary>
@@ -247,14 +172,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public DateTimeOffset? IfModifiedSince
         {
-            get
-            {
-                return Headers.GetDate(HeaderNames.IfModifiedSince);
-            }
-            set
-            {
-                Headers.SetDate(HeaderNames.IfModifiedSince, value);
-            }
+            get { return Headers.GetDate(HeaderNames.IfModifiedSince); }
+            set { Headers.SetDate(HeaderNames.IfModifiedSince, value); }
         }
 
         /// <summary>
@@ -262,14 +181,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public IList<EntityTagHeaderValue> IfNoneMatch
         {
-            get
-            {
-                return Headers.GetList<EntityTagHeaderValue>(HeaderNames.IfNoneMatch);
-            }
-            set
-            {
-                Headers.SetList(HeaderNames.IfNoneMatch, value);
-            }
+            get { return Headers.GetList<EntityTagHeaderValue>(HeaderNames.IfNoneMatch); }
+            set { Headers.SetList(HeaderNames.IfNoneMatch, value); }
         }
 
         /// <summary>
@@ -277,14 +190,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public RangeConditionHeaderValue? IfRange
         {
-            get
-            {
-                return Headers.Get<RangeConditionHeaderValue>(HeaderNames.IfRange);
-            }
-            set
-            {
-                Headers.Set(HeaderNames.IfRange, value);
-            }
+            get { return Headers.Get<RangeConditionHeaderValue>(HeaderNames.IfRange); }
+            set { Headers.Set(HeaderNames.IfRange, value); }
         }
 
         /// <summary>
@@ -292,14 +199,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public DateTimeOffset? IfUnmodifiedSince
         {
-            get
-            {
-                return Headers.GetDate(HeaderNames.IfUnmodifiedSince);
-            }
-            set
-            {
-                Headers.SetDate(HeaderNames.IfUnmodifiedSince, value);
-            }
+            get { return Headers.GetDate(HeaderNames.IfUnmodifiedSince); }
+            set { Headers.SetDate(HeaderNames.IfUnmodifiedSince, value); }
         }
 
         /// <summary>
@@ -307,14 +208,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public DateTimeOffset? LastModified
         {
-            get
-            {
-                return Headers.GetDate(HeaderNames.LastModified);
-            }
-            set
-            {
-                Headers.SetDate(HeaderNames.LastModified, value);
-            }
+            get { return Headers.GetDate(HeaderNames.LastModified); }
+            set { Headers.SetDate(HeaderNames.LastModified, value); }
         }
 
         /// <summary>
@@ -322,14 +217,8 @@ namespace Microsoft.AspNetCore.Http.Headers
         /// </summary>
         public RangeHeaderValue? Range
         {
-            get
-            {
-                return Headers.Get<RangeHeaderValue>(HeaderNames.Range);
-            }
-            set
-            {
-                Headers.Set(HeaderNames.Range, value);
-            }
+            get { return Headers.Get<RangeHeaderValue>(HeaderNames.Range); }
+            set { Headers.Set(HeaderNames.Range, value); }
         }
 
         /// <summary>
@@ -339,7 +228,13 @@ namespace Microsoft.AspNetCore.Http.Headers
         {
             get
             {
-                if (Uri.TryCreate(Headers[HeaderNames.Referer], UriKind.RelativeOrAbsolute, out var uri))
+                if (
+                    Uri.TryCreate(
+                        Headers[HeaderNames.Referer],
+                        UriKind.RelativeOrAbsolute,
+                        out var uri
+                    )
+                )
                 {
                     return uri;
                 }

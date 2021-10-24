@@ -23,44 +23,78 @@ namespace Microsoft.AspNetCore.Testing
             object[] testMethodArguments,
             IReadOnlyList<BeforeAfterTestAttribute> beforeAfterAttributes,
             ExceptionAggregator aggregator,
-            CancellationTokenSource cancellationTokenSource)
-            : base(test, messageBus, testClass, constructorArguments, testMethod, testMethodArguments, beforeAfterAttributes, aggregator, cancellationTokenSource)
-        {
-        }
+            CancellationTokenSource cancellationTokenSource
+        )
+            : base(
+                test,
+                messageBus,
+                testClass,
+                constructorArguments,
+                testMethod,
+                testMethodArguments,
+                beforeAfterAttributes,
+                aggregator,
+                cancellationTokenSource
+            ) { }
 
         protected override async Task<decimal> InvokeTestMethodAsync(object testClassInstance)
         {
             var output = new TestOutputHelper();
             output.Initialize(MessageBus, Test);
 
-            var context = new TestContext(TestClass, ConstructorArguments, TestMethod, TestMethodArguments, output);
+            var context = new TestContext(
+                TestClass,
+                ConstructorArguments,
+                TestMethod,
+                TestMethodArguments,
+                output
+            );
             var lifecycleHooks = GetLifecycleHooks(testClassInstance, TestClass, TestMethod);
 
-            await Aggregator.RunAsync(async () =>
-            {
-                foreach (var lifecycleHook in lifecycleHooks)
+            await Aggregator.RunAsync(
+                async () =>
                 {
-                    await lifecycleHook.OnTestStartAsync(context, CancellationTokenSource.Token);
+                    foreach (var lifecycleHook in lifecycleHooks)
+                    {
+                        await lifecycleHook.OnTestStartAsync(
+                            context,
+                            CancellationTokenSource.Token
+                        );
+                    }
                 }
-            });
+            );
 
             var time = await base.InvokeTestMethodAsync(testClassInstance);
 
-            await Aggregator.RunAsync(async () =>
-            {
-                var exception = Aggregator.HasExceptions ? Aggregator.ToException() : null;
-                foreach (var lifecycleHook in lifecycleHooks)
+            await Aggregator.RunAsync(
+                async () =>
                 {
-                    await lifecycleHook.OnTestEndAsync(context, exception, CancellationTokenSource.Token);
+                    var exception = Aggregator.HasExceptions ? Aggregator.ToException() : null;
+                    foreach (var lifecycleHook in lifecycleHooks)
+                    {
+                        await lifecycleHook.OnTestEndAsync(
+                            context,
+                            exception,
+                            CancellationTokenSource.Token
+                        );
+                    }
                 }
-            });
+            );
 
             return time;
         }
 
-        private static IEnumerable<ITestMethodLifecycle> GetLifecycleHooks(object testClassInstance, Type testClass, MethodInfo testMethod)
+        private static IEnumerable<ITestMethodLifecycle> GetLifecycleHooks(
+            object testClassInstance,
+            Type testClass,
+            MethodInfo testMethod
+        )
         {
-            foreach (var attribute in testMethod.GetCustomAttributes(inherit: true).OfType<ITestMethodLifecycle>())
+            foreach (
+                var attribute in testMethod
+                    .GetCustomAttributes(inherit: true)
+                    .OfType<ITestMethodLifecycle>()
+            )
             {
                 yield return attribute;
             }
@@ -70,12 +104,20 @@ namespace Microsoft.AspNetCore.Testing
                 yield return instance;
             }
 
-            foreach (var attribute in testClass.GetCustomAttributes(inherit: true).OfType<ITestMethodLifecycle>())
+            foreach (
+                var attribute in testClass
+                    .GetCustomAttributes(inherit: true)
+                    .OfType<ITestMethodLifecycle>()
+            )
             {
                 yield return attribute;
             }
 
-            foreach (var attribute in testClass.Assembly.GetCustomAttributes(inherit: true).OfType<ITestMethodLifecycle>())
+            foreach (
+                var attribute in testClass.Assembly
+                    .GetCustomAttributes(inherit: true)
+                    .OfType<ITestMethodLifecycle>()
+            )
             {
                 yield return attribute;
             }

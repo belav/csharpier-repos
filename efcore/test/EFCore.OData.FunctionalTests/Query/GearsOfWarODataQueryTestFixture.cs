@@ -10,7 +10,9 @@ using Microsoft.OData.Edm;
 
 namespace Microsoft.EntityFrameworkCore.Query
 {
-    public class GearsOfWarODataQueryTestFixture : GearsOfWarQuerySqlServerFixture, IODataQueryTestFixture
+    public class GearsOfWarODataQueryTestFixture
+        : GearsOfWarQuerySqlServerFixture,
+          IODataQueryTestFixture
     {
         private IHost _selfHostServer;
 
@@ -18,8 +20,11 @@ namespace Microsoft.EntityFrameworkCore.Query
 
         public GearsOfWarODataQueryTestFixture()
         {
-            (BaseAddress, ClientFactory, _selfHostServer)
-                = ODataQueryTestFixtureInitializer.Initialize<GearsOfWarODataContext>(StoreName, GetEdmModel());
+            (BaseAddress, ClientFactory, _selfHostServer) =
+                ODataQueryTestFixtureInitializer.Initialize<GearsOfWarODataContext>(
+                    StoreName,
+                    GetEdmModel()
+                );
         }
 
         private static IEdmModel GetEdmModel()

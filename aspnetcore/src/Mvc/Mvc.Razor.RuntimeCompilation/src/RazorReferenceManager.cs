@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 
         public RazorReferenceManager(
             ApplicationPartManager partManager,
-            IOptions<MvcRazorRuntimeCompilationOptions> options)
+            IOptions<MvcRazorRuntimeCompilationOptions> options
+        )
         {
             _partManager = partManager;
             _options = options.Value;
@@ -36,7 +37,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                     ref _compilationReferences,
                     ref _compilationReferencesInitialized,
                     ref _compilationReferencesLock,
-                    GetCompilationReferences);
+                    GetCompilationReferences
+                );
             }
         }
 
@@ -44,9 +46,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         {
             var referencePaths = GetReferencePaths();
 
-            return referencePaths
-                .Select(CreateMetadataReference)
-                .ToList();
+            return referencePaths.Select(CreateMetadataReference).ToList();
         }
 
         // For unit testing
@@ -75,7 +75,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
         {
             using (var stream = File.OpenRead(path))
             {
-                var moduleMetadata = ModuleMetadata.CreateFromStream(stream, PEStreamOptions.PrefetchMetadata);
+                var moduleMetadata = ModuleMetadata.CreateFromStream(
+                    stream,
+                    PEStreamOptions.PrefetchMetadata
+                );
                 var assemblyMetadata = AssemblyMetadata.Create(moduleMetadata);
 
                 return assemblyMetadata.GetReference(filePath: path);
