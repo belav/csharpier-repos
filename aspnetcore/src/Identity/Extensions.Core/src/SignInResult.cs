@@ -87,7 +87,11 @@ namespace Microsoft.AspNetCore.Identity
               ? "Lockedout"
               : IsNotAllowed
                   ? "NotAllowed"
-                  : RequiresTwoFactor ? "RequiresTwoFactor" : Succeeded ? "Succeeded" : "Failed";
+                  : RequiresTwoFactor
+                      ? "RequiresTwoFactor"
+                      : Succeeded
+                          ? "Succeeded"
+                          : "Failed";
         }
     }
 }

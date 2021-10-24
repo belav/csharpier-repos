@@ -1070,7 +1070,9 @@ namespace System.Text
             GetType() != typeof(UTF8Encoding)
                 ? new ReadOnlySpan<byte>(GetPreamble())
                 : // in case a derived UTF8Encoding overrode GetPreamble
-                  _emitUTF8Identifier ? PreambleSpan : default;
+                  _emitUTF8Identifier
+                    ? PreambleSpan
+                    : default;
 
         public override bool Equals([NotNullWhen(true)] object? value)
         {

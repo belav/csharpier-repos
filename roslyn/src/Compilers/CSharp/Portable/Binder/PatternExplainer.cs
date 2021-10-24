@@ -247,11 +247,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                         case (test: BoundDagNonNullTest _, sense: var sense):
                             return !sense
                               ? "null"
-                              : requireExactType ? input.Type.ToDisplayString() : "not null";
+                              : requireExactType
+                                  ? input.Type.ToDisplayString()
+                                  : "not null";
                         case (test: BoundDagExplicitNullTest _, sense: var sense):
                             return sense
                               ? "null"
-                              : requireExactType ? input.Type.ToDisplayString() : "not null";
+                              : requireExactType
+                                  ? input.Type.ToDisplayString()
+                                  : "not null";
                         case (test: BoundDagTypeTest { Type: var testedType }, sense: var sense):
                             Debug.Assert(sense); // we have dropped failing type tests
                             return testedType.ToDisplayString();

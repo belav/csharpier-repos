@@ -576,7 +576,11 @@ namespace System.Reflection.Emit
                 // used by C# and emit a null typed as a string (it doesn't really matter what type we pick as long as it's a
                 // reference type).
                 Type ot =
-                    value == null ? typeof(string) : value is Type ? typeof(Type) : value.GetType();
+                    value == null
+                        ? typeof(string)
+                        : value is Type
+                            ? typeof(Type)
+                            : value.GetType();
 
                 // value cannot be a "System.Object" object.
                 // If we allow this we will get into an infinite recursion

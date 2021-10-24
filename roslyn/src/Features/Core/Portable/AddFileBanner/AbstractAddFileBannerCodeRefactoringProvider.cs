@@ -82,7 +82,11 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
                 )
                 .OrderBy(
                     (t1, t2) =>
-                        (t1.root != null) == (t2.root != null) ? 0 : t1.root != null ? -1 : 1
+                        (t1.root != null) == (t2.root != null)
+                            ? 0
+                            : t1.root != null
+                                ? -1
+                                : 1
                 );
 
             foreach (var (siblingDocument, siblingRoot) in siblingDocumentsAndRoots)

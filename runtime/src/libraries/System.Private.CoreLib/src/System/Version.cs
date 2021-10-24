@@ -275,7 +275,12 @@ namespace System
             // format and provider are ignored.
             TryFormat(destination, DefaultFormatFieldCount, out charsWritten);
 
-        private int DefaultFormatFieldCount => _Build == -1 ? 2 : _Revision == -1 ? 3 : 4;
+        private int DefaultFormatFieldCount =>
+            _Build == -1
+                ? 2
+                : _Revision == -1
+                    ? 3
+                    : 4;
 
         public static Version Parse(string input)
         {

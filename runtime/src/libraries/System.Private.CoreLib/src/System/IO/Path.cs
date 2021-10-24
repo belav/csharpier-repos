@@ -340,7 +340,9 @@ namespace System.IO
                 throw new ArgumentNullException(
                     (path1 == null)
                       ? nameof(path1)
-                      : (path2 == null) ? nameof(path2) : nameof(path3)
+                      : (path2 == null)
+                          ? nameof(path2)
+                          : nameof(path3)
                 );
 
             return CombineInternal(path1, path2, path3);
@@ -354,7 +356,9 @@ namespace System.IO
                       ? nameof(path1)
                       : (path2 == null)
                           ? nameof(path2)
-                          : (path3 == null) ? nameof(path3) : nameof(path4)
+                          : (path3 == null)
+                              ? nameof(path3)
+                              : nameof(path4)
                 );
 
             return CombineInternal(path1, path2, path3, path4);

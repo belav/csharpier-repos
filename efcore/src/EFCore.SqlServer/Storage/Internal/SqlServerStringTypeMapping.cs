@@ -54,7 +54,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             ) { }
 
         private static string GetStoreName(bool unicode, bool fixedLength) =>
-            unicode ? fixedLength ? "nchar" : "nvarchar" : fixedLength ? "char" : "varchar";
+            unicode
+                ? fixedLength
+                    ? "nchar"
+                    : "nvarchar"
+                : fixedLength
+                    ? "char"
+                    : "varchar";
 
         private static DbType? GetDbType(bool unicode, bool fixedLength) =>
             unicode

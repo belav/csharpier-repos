@@ -165,7 +165,9 @@ namespace CSharpSyntaxGenerator.Grammar
                           )
                         : field.Type.StartsWith("SyntaxList")
                             ? HandleList(field, field.Type[("SyntaxList".Length + 1)..^1])
-                            : field.IsToken ? HandleTokenField(field) : RuleReference(field.Type);
+                            : field.IsToken
+                                ? HandleTokenField(field)
+                                : RuleReference(field.Type);
 
         private static Production HandleSeparatedList(Field field, string elementType) =>
             RuleReference(elementType)

@@ -3754,7 +3754,9 @@ namespace System
                         (
                             ((syntaxFlags & UriSyntaxFlags.MayHaveQuery) != 0)
                                 ? '?'
-                                : _syntax.InFact(UriSyntaxFlags.MayHaveFragment) ? '#' : c_EOL
+                                : _syntax.InFact(UriSyntaxFlags.MayHaveFragment)
+                                    ? '#'
+                                    : c_EOL
                         )
                     );
                 }

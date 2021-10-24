@@ -152,7 +152,12 @@ namespace System.Numerics
 
                 _bits[0] = lo;
                 _bits[1] = hi;
-                _length = hi != 0 ? 2 : lo != 0 ? 1 : 0;
+                _length =
+                    hi != 0
+                        ? 2
+                        : lo != 0
+                            ? 1
+                            : 0;
             }
 
             public void Overwrite(uint value)

@@ -608,7 +608,9 @@ namespace Microsoft.CodeAnalysis
         public static string Inspect(this Diagnostic e) =>
             e.Location.IsInSource
                 ? $"{e.Severity} {e.Id}: {e.GetMessage(CultureInfo.CurrentCulture)}"
-                : e.Location.IsInMetadata ? "metadata: " : "no location: ";
+                : e.Location.IsInMetadata
+                    ? "metadata: "
+                    : "no location: ";
 
         public static string ToString(this Diagnostic d, IFormatProvider formatProvider)
         {

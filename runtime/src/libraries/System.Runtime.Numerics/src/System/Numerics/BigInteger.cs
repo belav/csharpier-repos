@@ -1258,7 +1258,11 @@ namespace System.Numerics
             if (_bits == null)
             {
                 if (other._bits == null)
-                    return _sign < other._sign ? -1 : _sign > other._sign ? +1 : 0;
+                    return _sign < other._sign
+                      ? -1
+                      : _sign > other._sign
+                          ? +1
+                          : 0;
                 return -other._sign;
             }
             int cuThis,

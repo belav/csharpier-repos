@@ -1502,7 +1502,9 @@ namespace System.Text.RegularExpressions
                     );
                     return !invert
                       ? set
-                      : set[0] == NullChar ? set.AsSpan(1) : NullCharString + set;
+                      : set[0] == NullChar
+                          ? set.AsSpan(1)
+                          : NullCharString + set;
                 }
             }
 

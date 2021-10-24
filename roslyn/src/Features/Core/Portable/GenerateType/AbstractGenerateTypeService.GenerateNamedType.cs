@@ -442,7 +442,9 @@ namespace Microsoft.CodeAnalysis.GenerateType
             {
                 return _state.IsStruct
                   ? TypeKind.Struct
-                  : _state.IsInterface ? TypeKind.Interface : TypeKind.Class;
+                  : _state.IsInterface
+                      ? TypeKind.Interface
+                      : TypeKind.Class;
             }
 
             protected IList<ITypeParameterSymbol> GetAvailableTypeParameters()

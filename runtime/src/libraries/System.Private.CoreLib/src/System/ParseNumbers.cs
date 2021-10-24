@@ -557,7 +557,9 @@ namespace System
                         ? 0xffffffffffffffff / 10
                         : radix == 16
                             ? 0xffffffffffffffff / 16
-                            : radix == 8 ? 0xffffffffffffffff / 8 : 0xffffffffffffffff / 2;
+                            : radix == 8
+                                ? 0xffffffffffffffff / 8
+                                : 0xffffffffffffffff / 2;
 
                 // Read all of the digits and convert to a number
                 while (i < s.Length && IsDigit(s[i], radix, out int value))
@@ -617,7 +619,9 @@ namespace System
                         ? 0xffffffff / 10
                         : radix == 16
                             ? 0xffffffff / 16
-                            : radix == 8 ? 0xffffffff / 8 : 0xffffffff / 2;
+                            : radix == 8
+                                ? 0xffffffff / 8
+                                : 0xffffffff / 2;
 
                 // Read all of the digits and convert to a number
                 while (i < s.Length && IsDigit(s[i], radix, out int value))

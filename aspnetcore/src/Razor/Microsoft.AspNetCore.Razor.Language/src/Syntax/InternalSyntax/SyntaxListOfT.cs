@@ -19,7 +19,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
 
         public int Count
         {
-            get { return (_node == null) ? 0 : _node.IsList ? _node.SlotCount : 1; }
+            get
+            {
+                return (_node == null)
+                  ? 0
+                  : _node.IsList
+                      ? _node.SlotCount
+                      : 1;
+            }
         }
 
         public TNode this[int index]

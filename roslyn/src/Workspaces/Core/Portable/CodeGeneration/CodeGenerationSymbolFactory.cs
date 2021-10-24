@@ -482,7 +482,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 hasDefaultValue ?? parameter.HasExplicitDefaultValue,
                 defaultValue.HasValue
                   ? defaultValue.Value
-                  : parameter.HasExplicitDefaultValue ? parameter.ExplicitDefaultValue : null
+                  : parameter.HasExplicitDefaultValue
+                      ? parameter.ExplicitDefaultValue
+                      : null
             );
         }
 

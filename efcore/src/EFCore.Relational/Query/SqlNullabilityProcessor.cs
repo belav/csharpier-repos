@@ -1641,8 +1641,12 @@ namespace Microsoft.EntityFrameworkCore.Query
             )
             {
                 return sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
-                  ? leftBoolValue ? sqlBinaryExpression.Right : newLeftConstant
-                  : leftBoolValue ? newLeftConstant : sqlBinaryExpression.Right;
+                  ? leftBoolValue
+                      ? sqlBinaryExpression.Right
+                      : newLeftConstant
+                  : leftBoolValue
+                      ? newLeftConstant
+                      : sqlBinaryExpression.Right;
             }
 
             if (
@@ -1655,8 +1659,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                 // a && false -> false
                 // a || false -> a
                 return sqlBinaryExpression.OperatorType == ExpressionType.AndAlso
-                  ? rightBoolValue ? sqlBinaryExpression.Left : newRightConstant
-                  : rightBoolValue ? newRightConstant : sqlBinaryExpression.Left;
+                  ? rightBoolValue
+                      ? sqlBinaryExpression.Left
+                      : newRightConstant
+                  : rightBoolValue
+                      ? newRightConstant
+                      : sqlBinaryExpression.Left;
             }
 
             return sqlBinaryExpression;

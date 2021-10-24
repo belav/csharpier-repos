@@ -241,7 +241,11 @@ namespace System.Collections.Generic
         {
             Debug.Assert(index >= 0 && index < _buffers.Count + 2);
 
-            return index == 0 ? _first : index <= _buffers.Count ? _buffers[index - 1] : _current;
+            return index == 0
+              ? _first
+              : index <= _buffers.Count
+                  ? _buffers[index - 1]
+                  : _current;
         }
 
         /// <summary>

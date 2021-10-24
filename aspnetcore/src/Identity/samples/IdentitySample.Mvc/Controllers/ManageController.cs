@@ -343,7 +343,9 @@ namespace IdentitySamples.Controllers
                     ? "The external login was removed."
                     : message == ManageMessageId.AddLoginSuccess
                         ? "The external login was added."
-                        : message == ManageMessageId.Error ? "An error has occurred." : "";
+                        : message == ManageMessageId.Error
+                            ? "An error has occurred."
+                            : "";
             var user = await GetCurrentUserAsync();
             if (user == null)
             {

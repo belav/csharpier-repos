@@ -105,7 +105,11 @@ namespace System.Linq.Parallel.Tests
         public int Compare(T x, T y)
         {
             int direction = _def.Compare(x, y);
-            return direction == 0 ? 0 : direction > 0 ? int.MaxValue : int.MinValue;
+            return direction == 0
+              ? 0
+              : direction > 0
+                  ? int.MaxValue
+                  : int.MinValue;
         }
     }
 

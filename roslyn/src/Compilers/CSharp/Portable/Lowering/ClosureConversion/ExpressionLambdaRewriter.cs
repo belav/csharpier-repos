@@ -938,7 +938,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             var nullObject = _bound.Null(_objectType);
             receiver = requiresInstanceReceiver
                 ? nullObject
-                : receiver.Type.IsReferenceType ? receiver : _bound.Convert(_objectType, receiver);
+                : receiver.Type.IsReferenceType
+                    ? receiver
+                    : _bound.Convert(_objectType, receiver);
 
             var createDelegate = _bound.WellKnownMethod(
                 WellKnownMember.System_Reflection_MethodInfo__CreateDelegate,

@@ -119,7 +119,11 @@ namespace RazorSyntaxGenerator
 
         protected static string OverrideOrNewModifier(Field field)
         {
-            return IsOverride(field) ? "override " : IsNew(field) ? "new " : "";
+            return IsOverride(field)
+              ? "override "
+              : IsNew(field)
+                  ? "new "
+                  : "";
         }
 
         protected static bool CanBeField(Field field)

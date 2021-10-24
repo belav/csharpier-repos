@@ -521,7 +521,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 return parameterBehavior == ParameterBehavior.Ref
                   ? RefKind.Ref
-                  : parameterBehavior == ParameterBehavior.Out ? RefKind.Out : RefKind.None;
+                  : parameterBehavior == ParameterBehavior.Out
+                      ? RefKind.Out
+                      : RefKind.None;
             }
         }
     }

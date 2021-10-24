@@ -5561,7 +5561,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                                     v =>
                                         v == "EUR"
                                             ? TestCurrency.EUR
-                                            : v == "USD" ? TestCurrency.USD : null
+                                            : v == "USD"
+                                                ? TestCurrency.USD
+                                                : null
                                 );
                         }
                     )

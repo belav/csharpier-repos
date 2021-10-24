@@ -278,7 +278,11 @@ namespace System.Text.RegularExpressions
         /// at match time, it's done at compile time, here.
         /// </summary>
         private int MapCapnum(int capnum) =>
-            capnum == -1 ? -1 : _caps != null ? (int)_caps[capnum]! : capnum;
+            capnum == -1
+                ? -1
+                : _caps != null
+                    ? (int)_caps[capnum]!
+                    : capnum;
 
         /// <summary>
         /// The main RegexCode generator. It does a depth-first walk

@@ -21,7 +21,9 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
 
             return xSystemNamespace && !ySystemNamespace
               ? -1
-              : !xSystemNamespace && ySystemNamespace ? 1 : string.CompareOrdinal(x, y);
+              : !xSystemNamespace && ySystemNamespace
+                  ? 1
+                  : string.CompareOrdinal(x, y);
         }
     }
 }

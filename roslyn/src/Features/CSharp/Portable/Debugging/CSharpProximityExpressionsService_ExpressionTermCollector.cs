@@ -513,7 +513,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             // expression if all arguments where.  Otherwise, we're just invalid.
             expressionType = validTerm
                 ? ExpressionType.ValidTerm
-                : validExpr ? ExpressionType.ValidExpression : ExpressionType.Invalid;
+                : validExpr
+                    ? ExpressionType.ValidExpression
+                    : ExpressionType.Invalid;
         }
     }
 }

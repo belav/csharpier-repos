@@ -365,7 +365,9 @@ namespace System.Net.Security
                     {
                         string protocol = isNtlmOnly
                             ? "NTLM"
-                            : isNtlmUsed ? "SPNEGO-NTLM" : "SPNEGO-Kerberos";
+                            : isNtlmUsed
+                                ? "SPNEGO-NTLM"
+                                : "SPNEGO-Kerberos";
                         NetEventSource.Info(context, $"actual protocol = {protocol}");
                     }
 

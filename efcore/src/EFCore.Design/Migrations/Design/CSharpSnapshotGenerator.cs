@@ -217,7 +217,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
                 .Append(builderName)
                 .Append(
                     ownerNavigation != null
-                      ? ownership!.IsUnique ? ".OwnsOne(" : ".OwnsMany("
+                      ? ownership!.IsUnique
+                          ? ".OwnsOne("
+                          : ".OwnsMany("
                       : ".Entity("
                 )
                 .Append(Code.Literal(entityTypeName));

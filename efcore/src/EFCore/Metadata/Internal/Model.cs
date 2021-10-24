@@ -496,7 +496,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         /// </summary>
         public virtual Type? FindClrType(string name) =>
             _entityTypes.TryGetValue(name, out var entityType)
-                ? entityType.HasSharedClrType ? null : entityType.ClrType
+                ? entityType.HasSharedClrType
+                    ? null
+                    : entityType.ClrType
                 : null;
 
         /// <summary>

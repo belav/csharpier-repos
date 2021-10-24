@@ -1523,7 +1523,9 @@ namespace RazorSyntaxGenerator
             string genericArgs =
                 (genericResult && genericArgument)
                     ? "<TArgument, TResult>"
-                    : genericResult ? "<TResult>" : "";
+                    : genericResult
+                        ? "<TResult>"
+                        : "";
             WriteLine();
             WriteLine(
                 "    public override "
@@ -1556,7 +1558,9 @@ namespace RazorSyntaxGenerator
             string genericArgs =
                 (genericResult && genericArgument)
                     ? "<TArgument, TResult>"
-                    : genericResult ? "<TResult>" : "";
+                    : genericResult
+                        ? "<TResult>"
+                        : "";
             var nodes = Tree.Types.Where(n => !(n is PredefinedNode)).ToList();
 
             WriteLine();
@@ -1779,7 +1783,9 @@ namespace RazorSyntaxGenerator
         private TreeType TryGetBaseType(TreeType node) =>
             node is AbstractNode an
                 ? GetTreeType(an.Base)
-                : node is Node n ? GetTreeType(n.Base) : null;
+                : node is Node n
+                    ? GetTreeType(n.Base)
+                    : null;
 
         private void WriteRedListHelperMethods(Node node)
         {

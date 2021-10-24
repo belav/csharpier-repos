@@ -5635,7 +5635,9 @@ False
                     int expectedSigned = skipNativeIntegerOperators ? 0 : 1;
                     int expectedUnsigned = skipNativeIntegerOperators
                         ? 0
-                        : (operatorKind == UnaryOperatorKind.UnaryMinus) ? 0 : 1;
+                        : (operatorKind == UnaryOperatorKind.UnaryMinus)
+                            ? 0
+                            : 1;
                     verifyOperators(
                         operators,
                         (op, signed) => isNativeInt(op.OperandType, signed),

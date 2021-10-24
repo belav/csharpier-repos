@@ -452,7 +452,12 @@ namespace System.Collections.Immutable.Tests
 
             public static CustomComparer Instance { get; } = new CustomComparer();
 
-            public int Compare(int x, int y) => x >> 1 == y >> 1 ? 0 : x < y ? -1 : 1;
+            public int Compare(int x, int y) =>
+                x >> 1 == y >> 1
+                    ? 0
+                    : x < y
+                        ? -1
+                        : 1;
         }
     }
 }

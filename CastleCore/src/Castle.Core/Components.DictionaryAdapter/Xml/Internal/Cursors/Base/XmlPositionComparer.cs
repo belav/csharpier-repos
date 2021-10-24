@@ -43,7 +43,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
             public bool MoveNext()
             {
-                return Step != null ? ConsumeStep() : Node != null ? ConsumeNode() : Stop();
+                return Step != null
+                  ? ConsumeStep()
+                  : Node != null
+                      ? ConsumeNode()
+                      : Stop();
             }
 
             private bool ConsumeNode()

@@ -264,7 +264,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.VirtualChars
 
         private static string ConvertRuneToString(VirtualChar c) =>
             PrintAsUnicodeEscape(c)
-                ? c <= char.MaxValue ? $"'\\u{(int)c.Value:X4}'" : $"'\\U{(int)c.Value:X8}'"
+                ? c <= char.MaxValue
+                    ? $"'\\u{(int)c.Value:X4}'"
+                    : $"'\\U{(int)c.Value:X8}'"
                 : $"'{(char)c.Value}'";
 
         private static bool PrintAsUnicodeEscape(VirtualChar c)

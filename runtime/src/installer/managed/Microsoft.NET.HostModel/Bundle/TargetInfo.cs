@@ -80,7 +80,9 @@ namespace Microsoft.NET.HostModel.Bundle
         {
             return IsLinux
               ? ElfUtils.IsElfImage(filePath)
-              : IsOSX ? MachOUtils.IsMachOImage(filePath) : PEUtils.IsPEImage(filePath);
+              : IsOSX
+                  ? MachOUtils.IsMachOImage(filePath)
+                  : PEUtils.IsPEImage(filePath);
         }
 
         public string GetAssemblyName(string hostName)
@@ -92,7 +94,11 @@ namespace Microsoft.NET.HostModel.Bundle
 
         public override string ToString()
         {
-            string os = IsWindows ? "win" : IsLinux ? "linux" : "osx";
+            string os = IsWindows
+                ? "win"
+                : IsLinux
+                    ? "linux"
+                    : "osx";
             string arch = Arch.ToString().ToLowerInvariant();
             return $"OS: {os} Arch: {arch} FrameworkVersion: {FrameworkVersion}";
         }
@@ -126,8 +132,16 @@ namespace Microsoft.NET.HostModel.Bundle
         private readonly Version net60 = new Version(6, 0);
         private readonly Version net50 = new Version(5, 0);
         private string HostFxr =>
-            IsWindows ? "hostfxr.dll" : IsLinux ? "libhostfxr.so" : "libhostfxr.dylib";
+            IsWindows
+                ? "hostfxr.dll"
+                : IsLinux
+                    ? "libhostfxr.so"
+                    : "libhostfxr.dylib";
         private string HostPolicy =>
-            IsWindows ? "hostpolicy.dll" : IsLinux ? "libhostpolicy.so" : "libhostpolicy.dylib";
+            IsWindows
+                ? "hostpolicy.dll"
+                : IsLinux
+                    ? "libhostpolicy.so"
+                    : "libhostpolicy.dylib";
     }
 }

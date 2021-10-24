@@ -613,7 +613,11 @@ namespace System.Numerics
                 // Insert leading zeros, e.g. user specified "X5" so we create "0ABCD" instead of "ABCD"
                 sb.Insert(
                     0,
-                    value._sign >= 0 ? '0' : (format == 'x') ? 'f' : 'F',
+                    value._sign >= 0
+                      ? '0'
+                      : (format == 'x')
+                          ? 'f'
+                          : 'F',
                     digits - sb.Length
                 );
             }

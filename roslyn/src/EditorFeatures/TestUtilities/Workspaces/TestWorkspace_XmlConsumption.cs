@@ -379,7 +379,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     + (
                         language == LanguageNames.CSharp
                             ? ".csproj"
-                            : language == LanguageNames.VisualBasic ? ".vbproj" : ("." + language)
+                            : language == LanguageNames.VisualBasic
+                                ? ".vbproj"
+                                : ("." + language)
                     );
             }
 

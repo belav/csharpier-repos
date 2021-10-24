@@ -187,7 +187,9 @@ namespace Microsoft.AspNetCore.Http
                             ? Attr.Whitespace
                             : ch == '\"'
                                 ? Attr.Quote
-                                : (ch == ',' || ch == (char)0) ? Attr.Delimiter : Attr.Value;
+                                : (ch == ',' || ch == (char)0)
+                                    ? Attr.Delimiter
+                                    : Attr.Value;
 
                         switch (_mode)
                         {

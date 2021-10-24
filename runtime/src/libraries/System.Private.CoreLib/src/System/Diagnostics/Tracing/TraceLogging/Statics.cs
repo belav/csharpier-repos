@@ -139,7 +139,9 @@ namespace System.Diagnostics.Tracing
             {
                 return (byte)settingValue1 == settingValue1
                   ? (byte)settingValue1
-                  : (byte)settingValue2 == settingValue2 ? (byte)settingValue2 : defaultValue;
+                  : (byte)settingValue2 == settingValue2
+                      ? (byte)settingValue2
+                      : defaultValue;
             }
         }
 

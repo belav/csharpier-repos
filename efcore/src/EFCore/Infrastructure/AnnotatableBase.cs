@@ -186,7 +186,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             return _annotations == null
               ? null
-              : _annotations.TryGetValue(name, out var annotation) ? annotation : null;
+              : _annotations.TryGetValue(name, out var annotation)
+                  ? annotation
+                  : null;
         }
 
         /// <summary>
@@ -414,7 +416,9 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
 
             return _runtimeAnnotations == null
               ? null
-              : _runtimeAnnotations.TryGetValue(name, out var annotation) ? annotation : null;
+              : _runtimeAnnotations.TryGetValue(name, out var annotation)
+                  ? annotation
+                  : null;
         }
 
         /// <summary>

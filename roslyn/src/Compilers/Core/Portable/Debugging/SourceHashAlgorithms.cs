@@ -65,6 +65,8 @@ namespace Microsoft.CodeAnalysis.Debugging
         public static SourceHashAlgorithm GetSourceHashAlgorithm(Guid guid) =>
             (guid == s_guidSha256)
                 ? SourceHashAlgorithm.Sha256
-                : (guid == s_guidSha1) ? SourceHashAlgorithm.Sha1 : SourceHashAlgorithm.None;
+                : (guid == s_guidSha1)
+                    ? SourceHashAlgorithm.Sha1
+                    : SourceHashAlgorithm.None;
     }
 }

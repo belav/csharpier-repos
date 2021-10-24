@@ -2277,7 +2277,14 @@ namespace System
             byte* dig = number.GetDigitsPointer();
             char ch;
 
-            section = FindSection(format, dig[0] == 0 ? 2 : number.IsNegative ? 1 : 0);
+            section = FindSection(
+                format,
+                dig[0] == 0
+                  ? 2
+                  : number.IsNegative
+                      ? 1
+                      : 0
+            );
 
             while (true)
             {
@@ -2517,7 +2524,12 @@ namespace System
                             }
                             else
                             {
-                                ch = *cur != 0 ? (char)(*cur++) : digPos > lastDigit ? '0' : '\0';
+                                ch =
+                                    *cur != 0
+                                        ? (char)(*cur++)
+                                        : digPos > lastDigit
+                                            ? '0'
+                                            : '\0';
                             }
                             if (ch != 0)
                             {

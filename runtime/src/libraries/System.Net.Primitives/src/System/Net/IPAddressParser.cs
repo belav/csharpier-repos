@@ -181,7 +181,12 @@ namespace System.Net
             // Math.DivRem has no overload for byte, assert here for safety
             Debug.Assert(number < 256);
 
-            offset += number > 99 ? 3 : number > 9 ? 2 : 1;
+            offset +=
+                number > 99
+                    ? 3
+                    : number > 9
+                        ? 2
+                        : 1;
 
             int i = offset;
             do

@@ -5224,7 +5224,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 {
                     var type =
                         referencedProperties == null
-                            ? useDefaultType ? typeof(int) : null
+                            ? useDefaultType
+                                ? typeof(int)
+                                : null
                             : referencedProperties[i].ClrType;
 
                     if (!configurationSource.HasValue)

@@ -381,7 +381,9 @@ internal static partial class Interop
                     "Content-Encoding: deflate"
                 )
                     ? "deflate"
-                    : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip") ? "gzip" : null;
+                    : TestServer.ResponseHeaders.Contains("Content-Encoding: gzip")
+                        ? "gzip"
+                        : null;
 
                 if (compression == null)
                 {

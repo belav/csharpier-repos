@@ -148,7 +148,9 @@ namespace AutoMapper.Execution
                           DefaultDestination(),
                           ClearDestinationCollection()
                       )
-                    : mustUseDestination ? ClearDestinationCollection() : DefaultDestination();
+                    : mustUseDestination
+                        ? ClearDestinationCollection()
+                        : DefaultDestination();
             return sourceParameter.IfNullElse(ifSourceNull, mapExpression);
             Expression ClearDestinationCollection()
             {

@@ -4162,7 +4162,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return (
                             layoutValue is int
                                 ? (int)layoutValue
-                                : layoutValue is short ? (short)layoutValue : (int)LayoutKind.Auto
+                                : layoutValue is short
+                                    ? (short)layoutValue
+                                    : (int)LayoutKind.Auto
                         ) != (int)LayoutKind.Auto;
                 }
             }

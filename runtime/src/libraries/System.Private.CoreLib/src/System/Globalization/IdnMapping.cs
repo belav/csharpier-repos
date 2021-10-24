@@ -527,7 +527,11 @@ namespace System.Globalization
                                 for (q = delta, k = c_punycodeBase;; k += c_punycodeBase)
                                 {
                                     int t =
-                                        k <= bias ? c_tmin : k >= bias + c_tmax ? c_tmax : k - bias;
+                                        k <= bias
+                                            ? c_tmin
+                                            : k >= bias + c_tmax
+                                                ? c_tmax
+                                                : k - bias;
                                     if (q < t)
                                         break;
                                     Debug.Assert(
@@ -808,7 +812,12 @@ namespace System.Globalization
                                 );
 
                             i += (int)(digit * w);
-                            int t = k <= bias ? c_tmin : k >= bias + c_tmax ? c_tmax : k - bias;
+                            int t =
+                                k <= bias
+                                    ? c_tmin
+                                    : k >= bias + c_tmax
+                                        ? c_tmax
+                                        : k - bias;
                             if (digit < t)
                                 break;
                             Debug.Assert(

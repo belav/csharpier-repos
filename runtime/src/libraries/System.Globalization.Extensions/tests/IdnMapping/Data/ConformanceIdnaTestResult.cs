@@ -67,7 +67,9 @@ namespace System.Globalization.Tests
             SetSuccess(
                 useValueForStatus
                   ? Value
-                  : string.IsNullOrEmpty(statusValue.Trim()) ? statusFallbackValue : statusValue
+                  : string.IsNullOrEmpty(statusValue.Trim())
+                      ? statusFallbackValue
+                      : statusValue
             );
         }
 

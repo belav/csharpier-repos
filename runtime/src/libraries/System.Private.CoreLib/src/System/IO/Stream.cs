@@ -903,7 +903,9 @@ namespace System.IO
         public static Stream Synchronized(Stream stream) =>
             stream is null
                 ? throw new ArgumentNullException(nameof(stream))
-                : stream is SyncStream ? stream : new SyncStream(stream);
+                : stream is SyncStream
+                    ? stream
+                    : new SyncStream(stream);
 
         [Obsolete("Do not call or override this method.")]
         protected virtual void ObjectInvariant() { }

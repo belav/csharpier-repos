@@ -977,7 +977,9 @@ namespace System.Net.WebSockets
                                     + (
                                         payloadLength <= 125
                                             ? 0
-                                            : payloadLength == 126 ? sizeof(ushort) : sizeof(ulong)
+                                            : payloadLength == 126
+                                                ? sizeof(ushort)
+                                                : sizeof(ulong)
                                     ); // additional 2 or 8 bytes for 16-bit or 64-bit length
                                 await EnsureBufferContainsAsync(minNeeded, cancellationToken)
                                     .ConfigureAwait(false);

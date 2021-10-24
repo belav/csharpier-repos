@@ -29,7 +29,9 @@ namespace System.Net.Mime.Tests
             Encoding encoding =
                 encodingName == "ASCII"
                     ? Encoding.ASCII
-                    : encodingName == "UTF8" ? Encoding.UTF8 : Encoding.Default;
+                    : encodingName == "UTF8"
+                        ? Encoding.UTF8
+                        : Encoding.Default;
 
             string expectedOutput = input;
             if (padLeadingDots && input.Length > 0 && input[0] == '.')

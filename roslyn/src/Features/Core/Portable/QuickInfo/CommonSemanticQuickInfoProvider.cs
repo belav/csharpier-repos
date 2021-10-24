@@ -221,7 +221,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                                 ? 0
                                 : s1.Kind == SymbolKind.NamedType
                                     ? -1
-                                    : s2.Kind == SymbolKind.NamedType ? 1 : 0
+                                    : s2.Kind == SymbolKind.NamedType
+                                        ? 1
+                                        : 0
                     )
                     .ToImmutableArray();
             }

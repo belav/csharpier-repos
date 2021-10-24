@@ -1007,7 +1007,9 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
 
             var expectedCount = !testMultiple
                 ? 1
-                : analysisScope == BackgroundAnalysisScope.FullSolution ? 4 : 2;
+                : analysisScope == BackgroundAnalysisScope.FullSolution
+                    ? 4
+                    : 2;
             Assert.Equal(expectedCount, diagnostics.Count);
 
             for (var i = 0; i < analyzers.Length; i++)

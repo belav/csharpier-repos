@@ -6204,7 +6204,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(
                             leftEntry.Entity.Id == existingLeftId
-                              ? useUpdate ? EntityState.Modified : EntityState.Unchanged
+                              ? useUpdate
+                                  ? EntityState.Modified
+                                  : EntityState.Unchanged
                               : EntityState.Added,
                             leftEntry.State
                         );
@@ -6214,7 +6216,9 @@ namespace Microsoft.EntityFrameworkCore
                     {
                         Assert.Equal(
                             rightEntry.Entity.Id == existingRightId
-                              ? useUpdate ? EntityState.Modified : EntityState.Unchanged
+                              ? useUpdate
+                                  ? EntityState.Modified
+                                  : EntityState.Unchanged
                               : EntityState.Added,
                             rightEntry.State
                         );

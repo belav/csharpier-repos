@@ -127,7 +127,9 @@ namespace Moq
 
             var handlerKey = type.IsGenericType
                 ? type.GetGenericTypeDefinition()
-                : type.IsArray ? typeof(Array) : type;
+                : type.IsArray
+                    ? typeof(Array)
+                    : type;
 
             Func<Type, Mock, object> factory;
             if (

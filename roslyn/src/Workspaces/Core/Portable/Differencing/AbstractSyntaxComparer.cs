@@ -132,7 +132,9 @@ namespace Microsoft.CodeAnalysis.Differencing
             var rootChildren =
                 (node == _oldRoot)
                     ? _oldRootChildren
-                    : (node == _newRoot) ? _newRootChildren : null;
+                    : (node == _newRoot)
+                        ? _newRootChildren
+                        : null;
             return (rootChildren != null)
               ? EnumerateDescendants(rootChildren)
               : EnumerateDescendants(node);

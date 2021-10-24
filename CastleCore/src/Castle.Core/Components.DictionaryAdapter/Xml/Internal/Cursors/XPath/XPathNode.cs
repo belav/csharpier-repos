@@ -173,7 +173,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             var target = root
                 ? node.GetRootElement()
-                : IsElement ? node : IsAttribute ? node.GetParent() : node.GetRootElement();
+                : IsElement
+                    ? node
+                    : IsAttribute
+                        ? node.GetParent()
+                        : node.GetRootElement();
 
             target.CreateAttribute(Xmlns.Prefix, prefix, Xmlns.NamespaceUri, namespaceUri);
         }

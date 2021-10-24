@@ -18765,7 +18765,9 @@ dotnet_diagnostic.{descriptor.Id}.severity = {analyzerConfigSeverity.ToAnalyzerC
                 var prefix =
                     analyzerConfigSeverity == ReportDiagnostic.Error
                         ? "error"
-                        : analyzerConfigSeverity == ReportDiagnostic.Warn ? "warning" : "info";
+                        : analyzerConfigSeverity == ReportDiagnostic.Warn
+                            ? "warning"
+                            : "info";
                 Assert.Contains(
                     $"{prefix} {descriptor.Id}: {descriptor.MessageFormat}",
                     outWriter.ToString()

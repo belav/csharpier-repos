@@ -90,7 +90,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             parameter.Value = value is null
                 ? DBNull.Value
-                : SpatialConverter is null ? value : SpatialConverter.ConvertToProvider(value);
+                : SpatialConverter is null
+                    ? value
+                    : SpatialConverter.ConvertToProvider(value);
 
             if (nullable.HasValue)
             {

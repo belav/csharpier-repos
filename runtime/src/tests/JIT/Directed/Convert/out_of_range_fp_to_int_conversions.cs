@@ -99,7 +99,9 @@ namespace FPBehaviorApp
                       ? 0
                       : (x < int.MinValue)
                           ? int.MinValue
-                          : (x > int.MaxValue) ? int.MaxValue : (int)x;
+                          : (x > int.MaxValue)
+                              ? int.MaxValue
+                              : (int)x;
             }
             return 0;
         }
@@ -129,7 +131,9 @@ namespace FPBehaviorApp
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32:
                     return (Double.IsNaN(x) || (x < 0))
                       ? 0
-                      : (x > uint.MaxValue) ? uint.MaxValue : (uint)x;
+                      : (x > uint.MaxValue)
+                          ? uint.MaxValue
+                          : (uint)x;
             }
 
             return 0;
@@ -169,7 +173,9 @@ namespace FPBehaviorApp
                       ? 0
                       : (x < long.MinValue)
                           ? long.MinValue
-                          : (x >= llong_max_plus_1) ? long.MaxValue : (long)x;
+                          : (x >= llong_max_plus_1)
+                              ? long.MaxValue
+                              : (long)x;
             }
 
             return 0;
@@ -205,7 +211,9 @@ namespace FPBehaviorApp
                 case FPtoIntegerConversionType.CONVERT_BACKWARD_COMPATIBLE:
                     return (Double.IsNaN(x) || (x < long.MinValue) || (x >= ullong_max_plus_1))
                       ? unchecked((ulong)long.MinValue)
-                      : (x < 0) ? (ulong)(long)x : (ulong)x;
+                      : (x < 0)
+                          ? (ulong)(long)x
+                          : (ulong)x;
 
                 case FPtoIntegerConversionType.CONVERT_SENTINEL:
                     return (Double.IsNaN(x) || (x < 0) || (x >= ullong_max_plus_1))
@@ -215,7 +223,9 @@ namespace FPBehaviorApp
                 case FPtoIntegerConversionType.CONVERT_SATURATING:
                     return (Double.IsNaN(x) || (x < 0))
                       ? 0
-                      : (x >= ullong_max_plus_1) ? ulong.MaxValue : (ulong)x;
+                      : (x >= ullong_max_plus_1)
+                          ? ulong.MaxValue
+                          : (ulong)x;
 
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32:
                 {

@@ -78,7 +78,9 @@ internal static partial class Interop
                                 ? 0
                                 : priority == ThreadPriorityLevel.BelowNormal
                                     ? 5
-                                    : priority == ThreadPriorityLevel.Lowest ? 10 : 20
+                                    : priority == ThreadPriorityLevel.Lowest
+                                        ? 10
+                                        : 20
             );
         }
     }

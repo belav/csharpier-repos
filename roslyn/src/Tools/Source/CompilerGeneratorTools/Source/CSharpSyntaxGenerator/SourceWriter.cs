@@ -1507,7 +1507,9 @@ namespace CSharpSyntaxGenerator
         private TreeType TryGetBaseType(TreeType node) =>
             node is AbstractNode an
                 ? GetTreeType(an.Base)
-                : node is Node n ? GetTreeType(n.Base) : null;
+                : node is Node n
+                    ? GetTreeType(n.Base)
+                    : null;
 
         private void WriteRedListHelperMethods(Node node)
         {

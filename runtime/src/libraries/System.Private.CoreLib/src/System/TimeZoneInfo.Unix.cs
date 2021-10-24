@@ -2168,7 +2168,11 @@ namespace System
 
                 byte version = data[index + 04];
                 Version =
-                    version == '2' ? TZVersion.V2 : version == '3' ? TZVersion.V3 : TZVersion.V1; // default/fallback to V1 to guard against future, unsupported version numbers
+                    version == '2'
+                        ? TZVersion.V2
+                        : version == '3'
+                            ? TZVersion.V3
+                            : TZVersion.V1; // default/fallback to V1 to guard against future, unsupported version numbers
 
                 // skip the 15 byte reserved field
 

@@ -1394,7 +1394,9 @@ class C
                 let hashAlgGuid = reader.GetGuid(d.HashAlgorithm)
                 let hashAlg = (hashAlgGuid == sha1)
                     ? " (SHA1)"
-                    : (hashAlgGuid == default(Guid)) ? "" : " " + hashAlgGuid.ToString()
+                    : (hashAlgGuid == default(Guid))
+                        ? ""
+                        : " " + hashAlgGuid.ToString()
                 select $"'{name}'{hash}{hashAlg}";
 
             AssertEx.Equal(expected, actual);

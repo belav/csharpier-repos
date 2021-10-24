@@ -335,7 +335,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
                     if (size == null && storeTypeName == null)
                     {
                         return isAnsi
-                          ? isFixedLength ? _fixedLengthAnsiString : _variableLengthMaxAnsiString
+                          ? isFixedLength
+                              ? _fixedLengthAnsiString
+                              : _variableLengthMaxAnsiString
                           : isFixedLength
                               ? _fixedLengthUnicodeString
                               : _variableLengthMaxUnicodeString;

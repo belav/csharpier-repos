@@ -1588,7 +1588,9 @@ namespace System.Runtime.Serialization
         internal bool CanObjectValueChange =>
             IsIncompleteObjectReference
                 ? true
-                : HasSurrogate ? CanSurrogatedObjectValueChange : false;
+                : HasSurrogate
+                    ? CanSurrogatedObjectValueChange
+                    : false;
 
         internal int DirectlyDependentObjects => _missingElementsRemaining;
 

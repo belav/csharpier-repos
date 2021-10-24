@@ -271,7 +271,9 @@ namespace System.IO.IsolatedStorage
         {
             return GetType() != typeof(IsolatedStorageFileStream)
               ? base.DisposeAsync()
-              : _fs != null ? _fs.DisposeAsync() : default;
+              : _fs != null
+                  ? _fs.DisposeAsync()
+                  : default;
         }
 
         public override void Flush()

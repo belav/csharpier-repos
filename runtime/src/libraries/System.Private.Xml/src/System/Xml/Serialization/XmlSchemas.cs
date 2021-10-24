@@ -649,7 +649,9 @@ namespace System.Xml.Serialization
                         ? "import"
                         : o is XmlSchemaInclude
                             ? "include"
-                            : o is XmlSchemaRedefine ? "redefine" : o.GetType().Name;
+                            : o is XmlSchemaRedefine
+                                ? "redefine"
+                                : o.GetType().Name;
                 item = SR.Format(SR.XmlSchemaItem, ns, itemType, details);
             }
             else if (o is XmlSchema)

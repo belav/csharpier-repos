@@ -1032,7 +1032,9 @@ namespace BoundTreeGenerator
                         (
                             IsNew(field)
                                 ? "Shadows "
-                                : IsPropertyOverrides(field) ? "Overrides " : ""
+                                : IsPropertyOverrides(field)
+                                    ? "Overrides "
+                                    : ""
                         ),
                         field.Type,
                         field.Name

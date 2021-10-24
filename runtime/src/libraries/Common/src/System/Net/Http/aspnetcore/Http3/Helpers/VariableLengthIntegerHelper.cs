@@ -232,7 +232,11 @@ namespace System.Net.Http
 
             return value < OneByteLimit
               ? 1
-              : value < TwoByteLimit ? 2 : value < FourByteLimit ? 4 : 8; // EightByteLimit
+              : value < TwoByteLimit
+                  ? 2
+                  : value < FourByteLimit
+                      ? 4
+                      : 8; // EightByteLimit
         }
     }
 }

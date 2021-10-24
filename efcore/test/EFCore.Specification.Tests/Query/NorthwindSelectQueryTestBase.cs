@@ -1015,7 +1015,9 @@ namespace Microsoft.EntityFrameworkCore.Query
                                                         ? "09"
                                                         : c.CustomerID == "10"
                                                             ? "10"
-                                                            : c.CustomerID == "11" ? "11" : null
+                                                            : c.CustomerID == "11"
+                                                                ? "11"
+                                                                : null
             );
         }
 

@@ -347,7 +347,11 @@ namespace System.Text.Tests
 
         private static int Clamp(int value, int min, int max)
         {
-            return (value < min) ? min : (value > max) ? max : value;
+            return (value < min)
+              ? min
+              : (value > max)
+                  ? max
+                  : value;
         }
     }
 }

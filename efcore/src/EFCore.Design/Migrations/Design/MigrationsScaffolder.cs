@@ -97,7 +97,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
             var migrationNamespace =
                 (!string.IsNullOrEmpty(rootNamespace) && !string.IsNullOrEmpty(subNamespace))
                     ? rootNamespace + "." + subNamespace
-                    : !string.IsNullOrEmpty(rootNamespace) ? rootNamespace : subNamespace;
+                    : !string.IsNullOrEmpty(rootNamespace)
+                        ? rootNamespace
+                        : subNamespace;
 
             if (subNamespaceDefaulted)
             {

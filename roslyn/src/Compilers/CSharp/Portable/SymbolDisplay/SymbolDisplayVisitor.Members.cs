@@ -500,7 +500,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AddKeyword(
                         symbol.MethodKind == MethodKind.PropertyGet
                           ? SyntaxKind.GetKeyword
-                          : IsInitOnly(symbol) ? SyntaxKind.InitKeyword : SyntaxKind.SetKeyword
+                          : IsInitOnly(symbol)
+                              ? SyntaxKind.InitKeyword
+                              : SyntaxKind.SetKeyword
                     );
                     break;
                 }

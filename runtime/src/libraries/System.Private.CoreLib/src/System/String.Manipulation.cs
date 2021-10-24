@@ -2189,7 +2189,11 @@ namespace System
         private string CreateTrimmedString(int start, int end)
         {
             int len = end - start + 1;
-            return len == Length ? this : len == 0 ? string.Empty : InternalSubString(start, len);
+            return len == Length
+              ? this
+              : len == 0
+                  ? string.Empty
+                  : InternalSubString(start, len);
         }
     }
 }

@@ -273,7 +273,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 ? overloadCount == 1
                     ? FeaturesResources.generic_overload
                     : FeaturesResources.generic_overloads
-                : overloadCount == 1 ? FeaturesResources.overload : FeaturesResources.overloads_;
+                : overloadCount == 1
+                    ? FeaturesResources.overload
+                    : FeaturesResources.overloads_;
 
             textContentBuilder.AddText(NonBreakingSpaceString + text);
         }

@@ -278,7 +278,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                         node =>
                             node.Entry.State = node.Entry.Metadata.IsOwned()
                                 ? node.SourceEntry.State
-                                : node.Entry.IsKeySet ? EntityState.Unchanged : EntityState.Added
+                                : node.Entry.IsKeySet
+                                    ? EntityState.Unchanged
+                                    : EntityState.Added
                     )
                 );
             }

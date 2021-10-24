@@ -646,8 +646,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             )
             {
                 return operatorType == ExpressionType.AndAlso
-                  ? leftBoolValue ? right : newLeftConstant
-                  : leftBoolValue ? newLeftConstant : right;
+                  ? leftBoolValue
+                      ? right
+                      : newLeftConstant
+                  : leftBoolValue
+                      ? newLeftConstant
+                      : right;
             }
 
             if (
@@ -660,8 +664,12 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                 // a && false -> false
                 // a || false -> a
                 return operatorType == ExpressionType.AndAlso
-                  ? rightBoolValue ? left : newRightConstant
-                  : rightBoolValue ? newRightConstant : left;
+                  ? rightBoolValue
+                      ? left
+                      : newRightConstant
+                  : rightBoolValue
+                      ? newRightConstant
+                      : left;
             }
 
             return _sqlExpressionFactory.MakeBinary(operatorType, left, right, typeMapping)!;

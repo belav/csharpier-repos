@@ -382,7 +382,9 @@ namespace System.Text.RegularExpressions
             {
                 return caps != null && !caps.TryGetValue(i, out i)
                   ? string.Empty
-                  : (uint)i < (uint)capslist.Length ? capslist[i] : string.Empty;
+                  : (uint)i < (uint)capslist.Length
+                      ? capslist[i]
+                      : string.Empty;
             }
         }
 

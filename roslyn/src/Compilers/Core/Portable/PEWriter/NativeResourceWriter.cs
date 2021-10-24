@@ -320,8 +320,18 @@ namespace Microsoft.Cci
                     //the end of .rsrc following all of the directory
                     //info and IMAGE_RESOURCE_DATA_ENTRYs
                     IWin32Resource r = (IWin32Resource)directory.Entries[i];
-                    id = level == 0 ? r.TypeId : level == 1 ? r.Id : (int)r.LanguageId;
-                    name = level == 0 ? r.TypeName : level == 1 ? r.Name : null;
+                    id =
+                        level == 0
+                            ? r.TypeId
+                            : level == 1
+                                ? r.Id
+                                : (int)r.LanguageId;
+                    name =
+                        level == 0
+                            ? r.TypeName
+                            : level == 1
+                                ? r.Name
+                                : null;
                     dataWriter.WriteUInt32(
                         (uint)(virtualAddressBase + sizeOfDirectoryTree + 16 + dataWriter.Count)
                     );

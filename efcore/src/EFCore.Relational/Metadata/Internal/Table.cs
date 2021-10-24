@@ -106,7 +106,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public virtual UniqueConstraint? FindUniqueConstraint(string name) =>
             PrimaryKey != null && PrimaryKey.Name == name
                 ? PrimaryKey
-                : UniqueConstraints.TryGetValue(name, out var constraint) ? constraint : null;
+                : UniqueConstraints.TryGetValue(name, out var constraint)
+                    ? constraint
+                    : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

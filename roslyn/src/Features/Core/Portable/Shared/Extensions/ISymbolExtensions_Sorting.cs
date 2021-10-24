@@ -69,7 +69,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 return xParameters.IsDefault && yParameters.IsDefault
                   ? 0
-                  : xParameters.IsDefault ? -1 : 1;
+                  : xParameters.IsDefault
+                      ? -1
+                      : 1;
             }
 
             var diff = xParameters.Length - yParameters.Length;
@@ -216,7 +218,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 return s1.Kind == s2.Kind
                   ? CompareNamedTypes((INamedTypeSymbol)s1, (INamedTypeSymbol)s2)
-                  : s1.Kind == SymbolKind.NamedType ? -1 : 1;
+                  : s1.Kind == SymbolKind.NamedType
+                      ? -1
+                      : 1;
             }
 
             if (s1.Kind == SymbolKind.Method || s2.Kind == SymbolKind.Method)
@@ -228,7 +232,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         (IMethodSymbol)s2,
                         symbol2ParameterTypeNames
                     )
-                  : s1.Kind == SymbolKind.Method ? -1 : 1;
+                  : s1.Kind == SymbolKind.Method
+                      ? -1
+                      : 1;
             }
 
             if (s1.Kind == SymbolKind.Property || s2.Kind == SymbolKind.Property)
@@ -240,7 +246,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         (IPropertySymbol)s2,
                         symbol2ParameterTypeNames
                     )
-                  : s1.Kind == SymbolKind.Property ? -1 : 1;
+                  : s1.Kind == SymbolKind.Property
+                      ? -1
+                      : 1;
             }
 
             if (s1.Kind == SymbolKind.Event || s2.Kind == SymbolKind.Event)
@@ -252,7 +260,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         (IEventSymbol)s2,
                         symbol2ParameterTypeNames
                     )
-                  : s1.Kind == SymbolKind.Event ? -1 : 1;
+                  : s1.Kind == SymbolKind.Event
+                      ? -1
+                      : 1;
             }
 
             throw ExceptionUtilities.UnexpectedValue((s1.Kind, s2.Kind));

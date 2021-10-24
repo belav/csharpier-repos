@@ -754,7 +754,9 @@ namespace System.Text.RegularExpressions
                         ? One
                         : Type == Setloop
                             ? Oneloop
-                            : Type == Setloopatomic ? Oneloopatomic : Onelazy;
+                            : Type == Setloopatomic
+                                ? Oneloopatomic
+                                : Onelazy;
             }
             else if (RegexCharClass.IsSingletonInverse(Str))
             {
@@ -765,7 +767,9 @@ namespace System.Text.RegularExpressions
                         ? Notone
                         : Type == Setloop
                             ? Notoneloop
-                            : Type == Setloopatomic ? Notoneloopatomic : Notonelazy;
+                            : Type == Setloopatomic
+                                ? Notoneloopatomic
+                                : Notonelazy;
             }
 
             return this;
@@ -2027,7 +2031,9 @@ namespace System.Text.RegularExpressions
                               ? "?"
                               : (M == 1 && N == int.MaxValue)
                                   ? "+"
-                                  : (N == int.MaxValue) ? $"{{{M}, *}}" : $"{{{M}, {N}}}"
+                                  : (N == int.MaxValue)
+                                      ? $"{{{M}, *}}"
+                                      : $"{{{M}, {N}}}"
                     );
                     break;
             }

@@ -458,7 +458,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Update.Internal
                     typeName.Equals("rowversion", StringComparison.OrdinalIgnoreCase)
                     || typeName.Equals("timestamp", StringComparison.OrdinalIgnoreCase)
                 )
-              ? property.IsNullable ? "varbinary(8)" : "binary(8)"
+              ? property.IsNullable
+                  ? "varbinary(8)"
+                  : "binary(8)"
               : typeName!;
         }
 

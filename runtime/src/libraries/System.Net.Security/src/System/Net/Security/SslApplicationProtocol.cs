@@ -97,7 +97,9 @@ namespace System.Net.Security
                   ? string.Empty
                   : ReferenceEquals(arr, s_http2Utf8)
                       ? "h2"
-                      : ReferenceEquals(arr, s_http11Utf8) ? "http/1.1" : s_utf8.GetString(arr);
+                      : ReferenceEquals(arr, s_http11Utf8)
+                          ? "http/1.1"
+                          : s_utf8.GetString(arr);
             }
             catch
             {

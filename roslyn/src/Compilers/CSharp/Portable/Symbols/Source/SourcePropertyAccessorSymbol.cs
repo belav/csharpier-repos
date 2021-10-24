@@ -734,7 +734,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isWinMdOutput
         )
         {
-            var prefix = getNotSet ? "get_" : isWinMdOutput ? "put_" : "set_";
+            var prefix = getNotSet
+                ? "get_"
+                : isWinMdOutput
+                    ? "put_"
+                    : "set_";
             return prefix + propertyName;
         }
 

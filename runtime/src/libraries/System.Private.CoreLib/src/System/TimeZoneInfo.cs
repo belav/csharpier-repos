@@ -1468,7 +1468,9 @@ namespace System
 
             return ticks > DateTime.MaxValue.Ticks
               ? DateTime.MaxValue
-              : ticks < DateTime.MinValue.Ticks ? DateTime.MinValue : new DateTime(ticks);
+              : ticks < DateTime.MinValue.Ticks
+                  ? DateTime.MinValue
+                  : new DateTime(ticks);
         }
 
         /// <summary>
@@ -1486,7 +1488,9 @@ namespace System
             DateTime utcConverted =
                 ticks > DateTime.MaxValue.Ticks
                     ? DateTime.MaxValue
-                    : ticks < DateTime.MinValue.Ticks ? DateTime.MinValue : new DateTime(ticks);
+                    : ticks < DateTime.MinValue.Ticks
+                        ? DateTime.MinValue
+                        : new DateTime(ticks);
 
             // verify the time is between MinValue and MaxValue in the new time zone
             TimeSpan offset = GetUtcOffsetFromUtc(
@@ -1498,7 +1502,9 @@ namespace System
 
             return ticks > DateTime.MaxValue.Ticks
               ? DateTime.MaxValue
-              : ticks < DateTime.MinValue.Ticks ? DateTime.MinValue : new DateTime(ticks);
+              : ticks < DateTime.MinValue.Ticks
+                  ? DateTime.MinValue
+                  : new DateTime(ticks);
         }
 
         /// <summary>

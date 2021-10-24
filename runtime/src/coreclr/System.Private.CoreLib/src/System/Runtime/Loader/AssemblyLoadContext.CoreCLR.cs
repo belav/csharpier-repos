@@ -282,7 +282,9 @@ namespace System.Runtime.Loader
               ? null
               : asm is RuntimeAssembly rtAssembly
                   ? rtAssembly
-                  : asm is System.Reflection.Emit.AssemblyBuilder ab ? ab.InternalAssembly : null;
+                  : asm is System.Reflection.Emit.AssemblyBuilder ab
+                      ? ab.InternalAssembly
+                      : null;
         }
 
         // Assembly load runtime activity name

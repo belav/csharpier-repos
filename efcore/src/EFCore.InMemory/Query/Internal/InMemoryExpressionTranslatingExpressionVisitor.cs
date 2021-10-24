@@ -1772,8 +1772,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                     throw new InvalidOperationException(
                         CoreStrings.EntityEqualityOnKeylessEntityNotSupported(
                             nodeType == ExpressionType.Equal
-                              ? equalsMethod ? nameof(object.Equals) : "=="
-                              : equalsMethod ? "!" + nameof(object.Equals) : "!=",
+                              ? equalsMethod
+                                  ? nameof(object.Equals)
+                                  : "=="
+                              : equalsMethod
+                                  ? "!" + nameof(object.Equals)
+                                  : "!=",
                             entityType1.DisplayName()
                         )
                     );
@@ -1825,8 +1829,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 throw new InvalidOperationException(
                     CoreStrings.EntityEqualityOnKeylessEntityNotSupported(
                         nodeType == ExpressionType.Equal
-                          ? equalsMethod ? nameof(object.Equals) : "=="
-                          : equalsMethod ? "!" + nameof(object.Equals) : "!=",
+                          ? equalsMethod
+                              ? nameof(object.Equals)
+                              : "=="
+                          : equalsMethod
+                              ? "!" + nameof(object.Equals)
+                              : "!=",
                         entityType.DisplayName()
                     )
                 );
@@ -1843,8 +1851,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 throw new InvalidOperationException(
                     CoreStrings.EntityEqualityOnCompositeKeyEntitySubqueryNotSupported(
                         nodeType == ExpressionType.Equal
-                          ? equalsMethod ? nameof(object.Equals) : "=="
-                          : equalsMethod ? "!" + nameof(object.Equals) : "!=",
+                          ? equalsMethod
+                              ? nameof(object.Equals)
+                              : "=="
+                          : equalsMethod
+                              ? "!" + nameof(object.Equals)
+                              : "!=",
                         entityType.DisplayName()
                     )
                 );

@@ -2289,7 +2289,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         ) =>
             (first.Length > 0 && second.Length > 0)
                 ? TextSpan.FromBounds(first.Start, second.End)
-                : (first.Length > 0) ? first : (second.Length > 0) ? second : defaultSpan;
+                : (first.Length > 0)
+                    ? first
+                    : (second.Length > 0)
+                        ? second
+                        : defaultSpan;
 
         internal override TextSpan GetLambdaParameterDiagnosticSpan(SyntaxNode lambda, int ordinal)
         {

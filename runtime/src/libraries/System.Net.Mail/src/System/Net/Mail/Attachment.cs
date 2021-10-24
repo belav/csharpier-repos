@@ -300,7 +300,9 @@ namespace System.Net.Mail
                 _part.ContentLocation =
                     value == null
                         ? null
-                        : value.IsAbsoluteUri ? value.AbsoluteUri : value.OriginalString;
+                        : value.IsAbsoluteUri
+                            ? value.AbsoluteUri
+                            : value.OriginalString;
             }
         }
 

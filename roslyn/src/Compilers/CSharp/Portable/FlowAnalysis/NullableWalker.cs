@@ -6764,7 +6764,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             int receiverSlot = method.IsStatic
                 ? 0
-                : receiverOpt is null ? -1 : MakeSlot(receiverOpt);
+                : receiverOpt is null
+                    ? -1
+                    : MakeSlot(receiverOpt);
 
             if (receiverSlot < 0)
             {

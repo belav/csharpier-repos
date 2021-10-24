@@ -210,7 +210,11 @@ namespace System.Xml.Serialization
                     isUnbounded = true;
 
                 // generate type name, make sure that it is backward compatible
-                string baseName = isMixed ? "any" : isUnbounded ? "anyElements" : "anyElement";
+                string baseName = isMixed
+                    ? "any"
+                    : isUnbounded
+                        ? "anyElements"
+                        : "anyElement";
                 string name = baseName;
                 int i = 0;
                 XmlSchema? schema = _schemas[ns];

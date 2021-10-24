@@ -52,7 +52,9 @@ namespace System.Reflection
             int sigArgCount = sig.Arguments.Length;
             ParameterInfo[] args = fetchReturnParameter
                 ? null!
-                : sigArgCount == 0 ? Array.Empty<ParameterInfo>() : new ParameterInfo[sigArgCount];
+                : sigArgCount == 0
+                    ? Array.Empty<ParameterInfo>()
+                    : new ParameterInfo[sigArgCount];
 
             int tkMethodDef = RuntimeMethodHandle.GetMethodDef(methodHandle);
             int cParamDefs = 0;

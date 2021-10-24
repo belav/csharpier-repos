@@ -1095,7 +1095,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     !(
                         isHex
                             ? SyntaxFacts.IsHexDigit(ch)
-                            : isBinary ? SyntaxFacts.IsBinaryDigit(ch) : SyntaxFacts.IsDecDigit(ch)
+                            : isBinary
+                                ? SyntaxFacts.IsBinaryDigit(ch)
+                                : SyntaxFacts.IsDecDigit(ch)
                     )
                 )
                 {

@@ -1198,7 +1198,9 @@ namespace System.Net.Security
 
                 ProtectionLevel result = _context.IsConfidentialityFlag
                     ? ProtectionLevel.EncryptAndSign
-                    : _context.IsIntegrityFlag ? ProtectionLevel.Sign : ProtectionLevel.None;
+                    : _context.IsIntegrityFlag
+                        ? ProtectionLevel.Sign
+                        : ProtectionLevel.None;
 
                 if (result < _expectedProtectionLevel)
                 {

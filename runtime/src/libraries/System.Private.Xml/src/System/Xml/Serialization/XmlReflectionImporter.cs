@@ -2373,7 +2373,9 @@ namespace System.Xml.Serialization
                         ElementAccessor element = new ElementAccessor();
                         element.Namespace = rpc
                             ? null
-                            : xmlElement.Namespace == null ? ns : xmlElement.Namespace;
+                            : xmlElement.Namespace == null
+                                ? ns
+                                : xmlElement.Namespace;
                         element.Mapping = ImportTypeMapping(
                             typeModel,
                             rpc ? ns : element.Namespace,
@@ -2539,7 +2541,9 @@ namespace System.Xml.Serialization
                     );
                     arrayElement.Namespace = rpc
                         ? null
-                        : a.XmlArray.Namespace == null ? ns : a.XmlArray.Namespace;
+                        : a.XmlArray.Namespace == null
+                            ? ns
+                            : a.XmlArray.Namespace;
                     _savedArrayItemAttributes = a.XmlArrayItems;
                     _savedArrayNamespace = arrayElement.Namespace;
                     ArrayMapping arrayMapping = ImportArrayLikeMapping(
@@ -2678,7 +2682,9 @@ namespace System.Xml.Serialization
                             );
                             element.Namespace = rpc
                                 ? null
-                                : xmlElement.Namespace == null ? ns : xmlElement.Namespace;
+                                : xmlElement.Namespace == null
+                                    ? ns
+                                    : xmlElement.Namespace;
                             TypeModel typeModel = _modelScope.GetTypeModel(accessorType);
                             element.Mapping = ImportTypeMapping(
                                 typeModel,
@@ -2790,7 +2796,9 @@ namespace System.Xml.Serialization
                         TypeModel typeModel = _modelScope.GetTypeModel(targetType);
                         element.Namespace = rpc
                             ? null
-                            : xmlElement.Namespace == null ? ns : xmlElement.Namespace;
+                            : xmlElement.Namespace == null
+                                ? ns
+                                : xmlElement.Namespace;
                         element.Mapping = ImportTypeMapping(
                             typeModel,
                             rpc ? ns : element.Namespace,

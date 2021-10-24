@@ -43,7 +43,12 @@ namespace System.Net
 
         private Interop.HttpApi.HTTP_REQUEST* Allocate(ThreadPoolBoundHandle boundHandle, uint size)
         {
-            uint newSize = size != 0 ? size : RequestBuffer == IntPtr.Zero ? 4096 : Size;
+            uint newSize =
+                size != 0
+                    ? size
+                    : RequestBuffer == IntPtr.Zero
+                        ? 4096
+                        : Size;
             if (_nativeOverlapped != null)
             {
 #if DEBUG

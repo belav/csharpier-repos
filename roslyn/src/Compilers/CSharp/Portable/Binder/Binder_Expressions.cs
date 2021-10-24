@@ -4314,7 +4314,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindValueKind valueKind =
                 refKind == RefKind.None
                     ? BindValueKind.RValue
-                    : refKind == RefKind.In ? BindValueKind.ReadonlyRef : BindValueKind.RefOrOut;
+                    : refKind == RefKind.In
+                        ? BindValueKind.ReadonlyRef
+                        : BindValueKind.RefOrOut;
 
             BoundExpression argument;
             if (allowArglist)

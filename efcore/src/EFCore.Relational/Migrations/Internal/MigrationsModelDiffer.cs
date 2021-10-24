@@ -3089,7 +3089,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             public virtual T? FindSource<T>(T? target) where T : class =>
                 target == null
                     ? null
-                    : _targetToSource.TryGetValue(target, out var source) ? (T)source : null;
+                    : _targetToSource.TryGetValue(target, out var source)
+                        ? (T)source
+                        : null;
 
             /// <summary>
             ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3100,7 +3102,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             public virtual T? FindTarget<T>(T? source) where T : class =>
                 source == null
                     ? null
-                    : _sourceToTarget.TryGetValue(source, out var target) ? (T)target : null;
+                    : _sourceToTarget.TryGetValue(source, out var target)
+                        ? (T)target
+                        : null;
 
             /// <summary>
             ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

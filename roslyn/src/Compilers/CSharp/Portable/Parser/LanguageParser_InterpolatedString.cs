@@ -98,7 +98,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 ? SyntaxKind.InterpolatedVerbatimStringStartToken // $@ or @$
                 : SyntaxKind.InterpolatedStringStartToken; // $
 
-            var openQuoteText = isAltInterpolatedVerbatim ? "@$\"" : isVerbatim ? "$@\"" : "$\"";
+            var openQuoteText = isAltInterpolatedVerbatim
+                ? "@$\""
+                : isVerbatim
+                    ? "$@\""
+                    : "$\"";
             var openQuote = SyntaxFactory.Token(
                 originalToken.GetLeadingTrivia(),
                 openQuoteKind,

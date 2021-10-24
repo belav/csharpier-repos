@@ -2230,7 +2230,9 @@ namespace Microsoft.CodeAnalysis
             return project.SupportsCompilation
               ? this.GetCompilationTracker(project.Id)
                 .HasSuccessfullyLoadedAsync(this, cancellationToken)
-              : project.HasAllInformation ? SpecializedTasks.True : SpecializedTasks.False;
+              : project.HasAllInformation
+                  ? SpecializedTasks.True
+                  : SpecializedTasks.False;
         }
 
         /// <summary>

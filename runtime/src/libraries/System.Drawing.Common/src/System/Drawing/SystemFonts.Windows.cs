@@ -270,7 +270,9 @@ namespace System.Drawing
 
             return font == null
               ? DefaultFont
-              : font.Unit != GraphicsUnit.Point ? FontInPoints(font) : font;
+              : font.Unit != GraphicsUnit.Point
+                  ? FontInPoints(font)
+                  : font;
         }
     }
 }

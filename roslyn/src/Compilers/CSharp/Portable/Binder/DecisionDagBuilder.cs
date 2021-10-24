@@ -2195,10 +2195,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                     whenTrue = trueDecisionImpliesTrueOther
                         ? Tests.True.Instance
-                        : trueDecisionPermitsTrueOther ? this : (Tests)Tests.False.Instance;
+                        : trueDecisionPermitsTrueOther
+                            ? this
+                            : (Tests)Tests.False.Instance;
                     whenFalse = falseDecisionImpliesTrueOther
                         ? Tests.True.Instance
-                        : falseDecisionPermitsTrueOther ? this : (Tests)Tests.False.Instance;
+                        : falseDecisionPermitsTrueOther
+                            ? this
+                            : (Tests)Tests.False.Instance;
                 }
                 public override BoundDagTest ComputeSelectedTest() => this.Test;
                 public override Tests RemoveEvaluation(BoundDagEvaluation e) =>

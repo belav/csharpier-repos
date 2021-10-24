@@ -1070,7 +1070,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Common.ContractAssertMonitorStatus(_sharedResources.IncomingLock, held: true);
             int messageCount = _sharedResources._dataflowBlockOptions.Greedy
                 ? _messages!.Count
-                : _nonGreedy!.ConsumedMessage.Key ? 1 : 0;
+                : _nonGreedy!.ConsumedMessage.Key
+                    ? 1
+                    : 0;
             if (
                 (_sharedResources._joinsCreated + messageCount)
                 >= _sharedResources._dataflowBlockOptions.ActualMaxNumberOfGroups
@@ -1365,7 +1367,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
             {
                 return _messages != null
                   ? _messages.Count
-                  : _nonGreedy!.ConsumedMessage.Key ? 1 : 0;
+                  : _nonGreedy!.ConsumedMessage.Key
+                      ? 1
+                      : 0;
             }
         }
 

@@ -100,7 +100,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
             return dataDictionary == null
               ? null
-              : dataDictionary.TryGetValue(name, out var checkConstraint) ? checkConstraint : null;
+              : dataDictionary.TryGetValue(name, out var checkConstraint)
+                  ? checkConstraint
+                  : null;
         }
 
         /// <summary>

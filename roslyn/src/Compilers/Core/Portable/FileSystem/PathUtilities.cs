@@ -736,7 +736,9 @@ namespace Roslyn.Utilities
                     bool hasBackslash = replacementPrefix.IndexOf('\\') >= 0;
                     return (hasSlash && !hasBackslash)
                       ? replacement.Replace('\\', '/')
-                      : (hasBackslash && !hasSlash) ? replacement.Replace('/', '\\') : replacement;
+                      : (hasBackslash && !hasSlash)
+                          ? replacement.Replace('/', '\\')
+                          : replacement;
                 }
             }
 

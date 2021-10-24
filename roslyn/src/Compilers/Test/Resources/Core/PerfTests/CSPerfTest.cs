@@ -2624,7 +2624,12 @@ namespace ns1
                             object o = s;
 
                             // Ternary Operator
-                            var str = o != null ? o.ToString() : o == null ? null : o.ToString();
+                            var str =
+                                o != null
+                                    ? o.ToString()
+                                    : o == null
+                                        ? null
+                                        : o.ToString();
 
                             // Unboxing
                             s = (s1)o;
@@ -2641,7 +2646,9 @@ namespace ns1
                                 var str =
                                     o != null
                                         ? o.ToString() == (i + j).ToString()
-                                        : o == null ? false : o.ToString() != j.ToString();
+                                        : o == null
+                                            ? false
+                                            : o.ToString() != j.ToString();
 
                                 // Unboxing
                                 s = (s1)o;

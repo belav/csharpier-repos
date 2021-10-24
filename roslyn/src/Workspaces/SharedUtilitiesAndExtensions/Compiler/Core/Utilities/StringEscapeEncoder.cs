@@ -25,7 +25,11 @@ namespace Roslyn.Utilities
                 var index =
                     prefixIndex >= 0 && prohibitIndex >= 0
                         ? Math.Min(prefixIndex, prohibitIndex)
-                        : prefixIndex >= 0 ? prefixIndex : prohibitIndex >= 0 ? prohibitIndex : -1;
+                        : prefixIndex >= 0
+                            ? prefixIndex
+                            : prohibitIndex >= 0
+                                ? prohibitIndex
+                                : -1;
 
                 if (index < 0)
                 {

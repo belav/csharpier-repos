@@ -255,7 +255,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             return variables != null
               ? ResolveVariableCore(prefix, name)
-              : parent != null ? parent.ResolveVariable(prefix, name) : null;
+              : parent != null
+                  ? parent.ResolveVariable(prefix, name)
+                  : null;
         }
 
         public override IXsltContextFunction ResolveFunction(
@@ -266,7 +268,9 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             return functions != null
               ? ResolveFunctionCore(prefix, name, argTypes)
-              : parent != null ? parent.ResolveFunction(prefix, name, argTypes) : null;
+              : parent != null
+                  ? parent.ResolveFunction(prefix, name, argTypes)
+                  : null;
         }
 
         private IXsltContextVariable ResolveVariableCore(string prefix, string name)

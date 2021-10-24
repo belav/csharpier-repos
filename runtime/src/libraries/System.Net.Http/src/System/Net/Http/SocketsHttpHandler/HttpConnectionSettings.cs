@@ -92,7 +92,9 @@ namespace System.Net.Http
             _maxHttpVersion =
                 AllowDraftHttp3 && allowHttp2
                     ? HttpVersion.Version30
-                    : allowHttp2 ? HttpVersion.Version20 : HttpVersion.Version11;
+                    : allowHttp2
+                        ? HttpVersion.Version20
+                        : HttpVersion.Version11;
             _defaultCredentialsUsedForProxy =
                 _proxy != null
                 && (

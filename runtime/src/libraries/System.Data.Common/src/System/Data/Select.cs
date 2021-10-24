@@ -799,7 +799,13 @@ namespace System.Data
             switch (expr._op)
             {
                 case Operators.EqualTo:
-                    c = (c == 0 ? 0 : c < 0 ? -1 : 1);
+                    c = (
+                        c == 0
+                            ? 0
+                            : c < 0
+                                ? -1
+                                : 1
+                    );
                     break;
                 case Operators.GreaterThen:
                     c = (c > 0 ? 0 : -1);

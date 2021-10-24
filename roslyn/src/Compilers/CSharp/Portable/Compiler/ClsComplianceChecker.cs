@@ -1689,7 +1689,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 : sawArrayRankDifference
                     ? ErrorCode.WRN_CLS_OverloadRefOut
                     : // Lumping rank difference with refkind is odd, but matches dev11.
-                      sawRefKindDifference ? ErrorCode.WRN_CLS_OverloadRefOut : ErrorCode.Void;
+                      sawRefKindDifference
+                        ? ErrorCode.WRN_CLS_OverloadRefOut
+                        : ErrorCode.Void;
 
             return code != ErrorCode.Void;
         }

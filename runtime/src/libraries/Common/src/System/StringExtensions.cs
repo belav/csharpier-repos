@@ -42,7 +42,9 @@ namespace System
 
             return newLength == 0
               ? string.Empty
-              : newLength == value.Length ? value : value.Substring(startIndex, newLength);
+              : newLength == value.Length
+                  ? value
+                  : value.Substring(startIndex, newLength);
         }
     }
 }

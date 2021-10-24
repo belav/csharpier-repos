@@ -928,7 +928,9 @@ namespace System.Xml.Xsl.Xslt
                         ? "text/xml"
                         : settings.OutputMethod == XmlOutputMethod.Html
                             ? "text/html"
-                            : settings.OutputMethod == XmlOutputMethod.Text ? "text/plain" : null;
+                            : settings.OutputMethod == XmlOutputMethod.Text
+                                ? "text/plain"
+                                : null;
             }
         }
 

@@ -573,7 +573,9 @@ namespace System.IO
         {
             return cancellationToken.IsCancellationRequested
               ? Task.FromCanceled(cancellationToken)
-              : value == null ? Task.CompletedTask : WriteAsyncCore(value, cancellationToken);
+              : value == null
+                  ? Task.CompletedTask
+                  : WriteAsyncCore(value, cancellationToken);
 
             async Task WriteAsyncCore(StringBuilder sb, CancellationToken ct)
             {

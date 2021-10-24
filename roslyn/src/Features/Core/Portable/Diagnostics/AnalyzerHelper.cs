@@ -273,7 +273,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ) =>
                 language == null
                     ? noLanguageId
-                    : (language == LanguageNames.CSharp) ? csharpId : vbId;
+                    : (language == LanguageNames.CSharp)
+                        ? csharpId
+                        : vbId;
 
             string id,
                 messageFormat,

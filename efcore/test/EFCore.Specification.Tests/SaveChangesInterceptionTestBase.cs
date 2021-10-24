@@ -63,7 +63,9 @@ namespace Microsoft.EntityFrameworkCore
             using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
 
             var savedCount = noAcceptChanges
-                ? async ? await context.SaveChangesAsync() : context.SaveChanges()
+                ? async
+                    ? await context.SaveChangesAsync()
+                    : context.SaveChanges()
                 : async
                     ? await context.SaveChangesAsync(acceptAllChangesOnSuccess: false)
                     : context.SaveChanges(acceptAllChangesOnSuccess: false);
@@ -136,7 +138,9 @@ namespace Microsoft.EntityFrameworkCore
             using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
 
             var savedCount = noAcceptChanges
-                ? async ? await context.SaveChangesAsync() : context.SaveChanges()
+                ? async
+                    ? await context.SaveChangesAsync()
+                    : context.SaveChanges()
                 : async
                     ? await context.SaveChangesAsync(acceptAllChangesOnSuccess: false)
                     : context.SaveChanges(acceptAllChangesOnSuccess: false);
@@ -231,7 +235,9 @@ namespace Microsoft.EntityFrameworkCore
             using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
 
             var savedCount = noAcceptChanges
-                ? async ? await context.SaveChangesAsync() : context.SaveChanges()
+                ? async
+                    ? await context.SaveChangesAsync()
+                    : context.SaveChanges()
                 : async
                     ? await context.SaveChangesAsync(acceptAllChangesOnSuccess: false)
                     : context.SaveChanges(acceptAllChangesOnSuccess: false);
@@ -348,7 +354,9 @@ namespace Microsoft.EntityFrameworkCore
             try
             {
                 var __ = noAcceptChanges
-                    ? async ? await context.SaveChangesAsync() : context.SaveChanges()
+                    ? async
+                        ? await context.SaveChangesAsync()
+                        : context.SaveChanges()
                     : async
                         ? await context.SaveChangesAsync(acceptAllChangesOnSuccess: false)
                         : context.SaveChanges(acceptAllChangesOnSuccess: false);
@@ -427,7 +435,9 @@ namespace Microsoft.EntityFrameworkCore
             using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
 
             var savedCount = noAcceptChanges
-                ? async ? await context.SaveChangesAsync() : context.SaveChanges()
+                ? async
+                    ? await context.SaveChangesAsync()
+                    : context.SaveChanges()
                 : async
                     ? await context.SaveChangesAsync(acceptAllChangesOnSuccess: false)
                     : context.SaveChanges(acceptAllChangesOnSuccess: false);
