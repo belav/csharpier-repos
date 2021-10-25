@@ -26,7 +26,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             var json = $"{{\"__jsObjectId\":{expectedId}}}";
 
             // Act
-            var deserialized = (JSInProcessObjectReference)JsonSerializer.Deserialize<IJSInProcessObjectReference>(json, JsonSerializerOptions)!;
+            var deserialized =
+                (JSInProcessObjectReference)JsonSerializer.Deserialize<IJSInProcessObjectReference>(
+                    json,
+                    JsonSerializerOptions
+                )!;
 
             // Assert
             Assert.Equal(expectedId, deserialized?.Id);
@@ -40,7 +44,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services
             var json = $"{{\"__jsObjectId\":{expectedId}}}";
 
             // Act
-            var deserialized = (WebAssemblyJSObjectReference)JsonSerializer.Deserialize<IJSUnmarshalledObjectReference>(json, JsonSerializerOptions)!;
+            var deserialized =
+                (WebAssemblyJSObjectReference)JsonSerializer.Deserialize<IJSUnmarshalledObjectReference>(
+                    json,
+                    JsonSerializerOptions
+                )!;
 
             // Assert
             Assert.Equal(expectedId, deserialized?.Id);

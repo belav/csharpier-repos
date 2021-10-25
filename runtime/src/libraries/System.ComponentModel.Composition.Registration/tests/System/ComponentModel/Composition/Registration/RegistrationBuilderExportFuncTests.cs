@@ -17,7 +17,10 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public class Factory
         {
             [Export]
-            public IFoo Create() { return null; }
+            public IFoo Create()
+            {
+                return null;
+            }
         }
 
         [Fact]

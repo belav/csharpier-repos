@@ -69,7 +69,9 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
         public async Task<ChangePassword> ClickChangePasswordLinkAsync()
         {
             var goToChangePassword = await Client.GetAsync(_changePasswordLink.Href);
-            var changePasswordDocument = await ResponseAssert.IsHtmlDocumentAsync(goToChangePassword);
+            var changePasswordDocument = await ResponseAssert.IsHtmlDocumentAsync(
+                goToChangePassword
+            );
             return new ChangePassword(Client, changePasswordDocument, Context);
         }
 

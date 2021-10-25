@@ -13,10 +13,7 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private readonly Dictionary<string, RazorProjectItem> _lookup;
 
-        public TestRazorProjectFileSystem()
-            : this(new RazorProjectItem[0])
-        {
-        }
+        public TestRazorProjectFileSystem() : this(new RazorProjectItem[0]) { }
 
         public TestRazorProjectFileSystem(IList<RazorProjectItem> items) : base("/")
         {
@@ -27,7 +24,6 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             throw new NotImplementedException();
         }
-
 
         public override RazorProjectItem GetItem(string path)
         {

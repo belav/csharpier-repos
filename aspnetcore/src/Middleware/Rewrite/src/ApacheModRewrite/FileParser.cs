@@ -38,7 +38,12 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                 if (tokens.Count > 4)
                 {
                     // This means the line didn't have an appropriate format, throw format exception
-                    throw new FormatException(Resources.FormatError_ModRewriteParseError("Too many tokens on line", lineNum));
+                    throw new FormatException(
+                        Resources.FormatError_ModRewriteParseError(
+                            "Too many tokens on line",
+                            lineNum
+                        )
+                    );
                 }
 
                 switch (tokens[0])
@@ -63,7 +68,10 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         }
                         catch (FormatException formatException)
                         {
-                            throw new FormatException(Resources.FormatError_ModRewriteGeneralParseError(lineNum), formatException);
+                            throw new FormatException(
+                                Resources.FormatError_ModRewriteGeneralParseError(lineNum),
+                                formatException
+                            );
                         }
                         break;
                     case "RewriteRule":
@@ -89,7 +97,10 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         }
                         catch (FormatException formatException)
                         {
-                            throw new FormatException(Resources.FormatError_ModRewriteGeneralParseError(lineNum), formatException);
+                            throw new FormatException(
+                                Resources.FormatError_ModRewriteGeneralParseError(lineNum),
+                                formatException
+                            );
                         }
                         break;
                     case "RewriteMap":
@@ -99,7 +110,12 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         // Explicitly do nothing here, no notion of turning on regex engine.
                         break;
                     default:
-                        throw new FormatException(Resources.FormatError_ModRewriteParseError("Unrecognized keyword: " + tokens[0], lineNum));
+                        throw new FormatException(
+                            Resources.FormatError_ModRewriteParseError(
+                                "Unrecognized keyword: " + tokens[0],
+                                lineNum
+                            )
+                        );
                 }
             }
             return rules;

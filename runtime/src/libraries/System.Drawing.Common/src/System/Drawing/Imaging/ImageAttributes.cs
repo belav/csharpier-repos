@@ -83,18 +83,28 @@ namespace System.Drawing.Imaging
         {
 #if FINALIZATION_WATCH
             if (!disposing && nativeImageAttributes != IntPtr.Zero)
-                Debug.WriteLine("**********************\nDisposed through finalization:\n" + allocationSite);
+                Debug.WriteLine(
+                    "**********************\nDisposed through finalization:\n" + allocationSite
+                );
 #endif
             if (nativeImageAttributes != IntPtr.Zero)
             {
                 try
                 {
 #if DEBUG
-                    int status = !Gdip.Initialized ? Gdip.Ok :
+                    int status = !Gdip.Initialized
+                        ? Gdip.Ok
+                        :
 #endif
-                    Gdip.GdipDisposeImageAttributes(new HandleRef(this, nativeImageAttributes));
+                          Gdip.GdipDisposeImageAttributes(
+                              new HandleRef(this, nativeImageAttributes)
+                          );
 #if DEBUG
-                    Debug.Assert(status == Gdip.Ok, "GDI+ returned an error status: " + status.ToString(CultureInfo.InvariantCulture));
+                    Debug.Assert(
+                        status == Gdip.Ok,
+                        "GDI+ returned an error status: "
+                            + status.ToString(CultureInfo.InvariantCulture)
+                    );
 #endif
                 }
                 catch (Exception ex)
@@ -129,8 +139,9 @@ namespace System.Drawing.Imaging
             IntPtr clone = IntPtr.Zero;
 
             int status = Gdip.GdipCloneImageAttributes(
-                                    new HandleRef(this, nativeImageAttributes),
-                                    out clone);
+                new HandleRef(this, nativeImageAttributes),
+                out clone
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -157,15 +168,20 @@ namespace System.Drawing.Imaging
         /// <summary>
         /// Sets the 5 X 5 color adjust matrix to the specified 'Matrix' with the  specified 'ColorMatrixFlags'.
         /// </summary>
-        public void SetColorMatrix(ColorMatrix newColorMatrix, ColorMatrixFlag mode, ColorAdjustType type)
+        public void SetColorMatrix(
+            ColorMatrix newColorMatrix,
+            ColorMatrixFlag mode,
+            ColorAdjustType type
+        )
         {
             int status = Gdip.GdipSetImageAttributesColorMatrix(
-                        new HandleRef(this, nativeImageAttributes),
-                        type,
-                        true,
-                        newColorMatrix,
-                        null,
-                        mode);
+                new HandleRef(this, nativeImageAttributes),
+                type,
+                true,
+                newColorMatrix,
+                null,
+                mode
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -190,7 +206,8 @@ namespace System.Drawing.Imaging
                 false,
                 null,
                 null,
-                ColorMatrixFlag.Default);
+                ColorMatrixFlag.Default
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -201,16 +218,29 @@ namespace System.Drawing.Imaging
         /// </summary>
         public void SetColorMatrices(ColorMatrix newColorMatrix, ColorMatrix? grayMatrix)
         {
-            SetColorMatrices(newColorMatrix, grayMatrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
+            SetColorMatrices(
+                newColorMatrix,
+                grayMatrix,
+                ColorMatrixFlag.Default,
+                ColorAdjustType.Default
+            );
         }
 
-        public void SetColorMatrices(ColorMatrix newColorMatrix, ColorMatrix? grayMatrix, ColorMatrixFlag flags)
+        public void SetColorMatrices(
+            ColorMatrix newColorMatrix,
+            ColorMatrix? grayMatrix,
+            ColorMatrixFlag flags
+        )
         {
             SetColorMatrices(newColorMatrix, grayMatrix, flags, ColorAdjustType.Default);
         }
 
-        public void SetColorMatrices(ColorMatrix newColorMatrix, ColorMatrix? grayMatrix, ColorMatrixFlag mode,
-                                     ColorAdjustType type)
+        public void SetColorMatrices(
+            ColorMatrix newColorMatrix,
+            ColorMatrix? grayMatrix,
+            ColorMatrixFlag mode,
+            ColorAdjustType type
+        )
         {
             int status = Gdip.GdipSetImageAttributesColorMatrix(
                 new HandleRef(this, nativeImageAttributes),
@@ -218,7 +248,8 @@ namespace System.Drawing.Imaging
                 true,
                 newColorMatrix,
                 grayMatrix,
-                mode);
+                mode
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -235,7 +266,8 @@ namespace System.Drawing.Imaging
                 new HandleRef(this, nativeImageAttributes),
                 type,
                 true,
-                threshold);
+                threshold
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -252,7 +284,8 @@ namespace System.Drawing.Imaging
                 new HandleRef(this, nativeImageAttributes),
                 type,
                 false,
-                0.0f);
+                0.0f
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -269,7 +302,8 @@ namespace System.Drawing.Imaging
                 new HandleRef(this, nativeImageAttributes),
                 type,
                 true,
-                gamma);
+                gamma
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -286,7 +320,8 @@ namespace System.Drawing.Imaging
                 new HandleRef(this, nativeImageAttributes),
                 type,
                 false,
-                0.0f);
+                0.0f
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -302,7 +337,8 @@ namespace System.Drawing.Imaging
             int status = Gdip.GdipSetImageAttributesNoOp(
                 new HandleRef(this, nativeImageAttributes),
                 type,
-                true);
+                true
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -318,7 +354,8 @@ namespace System.Drawing.Imaging
             int status = Gdip.GdipSetImageAttributesNoOp(
                 new HandleRef(this, nativeImageAttributes),
                 type,
-                false);
+                false
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -335,11 +372,12 @@ namespace System.Drawing.Imaging
             int highInt = colorHigh.ToArgb();
 
             int status = Gdip.GdipSetImageAttributesColorKeys(
-                                        new HandleRef(this, nativeImageAttributes),
-                                        type,
-                                        true,
-                                        lowInt,
-                                        highInt);
+                new HandleRef(this, nativeImageAttributes),
+                type,
+                true,
+                lowInt,
+                highInt
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -354,11 +392,12 @@ namespace System.Drawing.Imaging
         {
             int zero = 0;
             int status = Gdip.GdipSetImageAttributesColorKeys(
-                                        new HandleRef(this, nativeImageAttributes),
-                                        type,
-                                        false,
-                                        zero,
-                                        zero);
+                new HandleRef(this, nativeImageAttributes),
+                type,
+                false,
+                zero,
+                zero
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -375,7 +414,8 @@ namespace System.Drawing.Imaging
                 new HandleRef(this, nativeImageAttributes),
                 type,
                 true,
-                flags);
+                flags
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -392,7 +432,8 @@ namespace System.Drawing.Imaging
                 new HandleRef(this, nativeImageAttributes),
                 type,
                 false,
-                ColorChannelFlag.ColorChannelLast);
+                ColorChannelFlag.ColorChannelLast
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -403,17 +444,17 @@ namespace System.Drawing.Imaging
             SetOutputChannelColorProfile(colorProfileFilename, ColorAdjustType.Default);
         }
 
-        public void SetOutputChannelColorProfile(string colorProfileFilename,
-                                                 ColorAdjustType type)
+        public void SetOutputChannelColorProfile(string colorProfileFilename, ColorAdjustType type)
         {
             // Called in order to emulate exception behavior from .NET Framework related to invalid file paths.
             Path.GetFullPath(colorProfileFilename);
 
             int status = Gdip.GdipSetImageAttributesOutputChannelColorProfile(
-                                        new HandleRef(this, nativeImageAttributes),
-                                        type,
-                                        true,
-                                        colorProfileFilename);
+                new HandleRef(this, nativeImageAttributes),
+                type,
+                true,
+                colorProfileFilename
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -430,7 +471,8 @@ namespace System.Drawing.Imaging
                 new HandleRef(this, nativeImageAttributes),
                 type,
                 false,
-                ColorChannelFlag.ColorChannelLast);
+                ColorChannelFlag.ColorChannelLast
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -452,16 +494,27 @@ namespace System.Drawing.Imaging
             {
                 for (index = 0; index < mapSize; index++)
                 {
-                    Marshal.StructureToPtr(map[index].OldColor.ToArgb(), (IntPtr)((long)memory + index * size * 2), false);
-                    Marshal.StructureToPtr(map[index].NewColor.ToArgb(), (IntPtr)((long)memory + index * size * 2 + size), false);
+                    Marshal.StructureToPtr(
+                        map[index].OldColor.ToArgb(),
+                        (IntPtr)((long)memory + index * size * 2),
+                        false
+                    );
+                    Marshal.StructureToPtr(
+                        map[index].NewColor.ToArgb(),
+                        (IntPtr)((long)memory + index * size * 2 + size),
+                        false
+                    );
                 }
 
-                Gdip.CheckStatus(Gdip.GdipSetImageAttributesRemapTable(
-                    new HandleRef(this, nativeImageAttributes),
-                    type,
-                    true,
-                    mapSize,
-                    memory));
+                Gdip.CheckStatus(
+                    Gdip.GdipSetImageAttributesRemapTable(
+                        new HandleRef(this, nativeImageAttributes),
+                        type,
+                        true,
+                        mapSize,
+                        memory
+                    )
+                );
             }
             finally
             {
@@ -476,12 +529,15 @@ namespace System.Drawing.Imaging
 
         public void ClearRemapTable(ColorAdjustType type)
         {
-            Gdip.CheckStatus(Gdip.GdipSetImageAttributesRemapTable(
-                new HandleRef(this, nativeImageAttributes),
-                type,
-                false,
-                0,
-                IntPtr.Zero));
+            Gdip.CheckStatus(
+                Gdip.GdipSetImageAttributesRemapTable(
+                    new HandleRef(this, nativeImageAttributes),
+                    type,
+                    false,
+                    0,
+                    IntPtr.Zero
+                )
+            );
         }
 
         public void SetBrushRemapTable(ColorMap[] map)
@@ -507,10 +563,11 @@ namespace System.Drawing.Imaging
         public void SetWrapMode(WrapMode mode, Color color, bool clamp)
         {
             int status = Gdip.GdipSetImageAttributesWrapMode(
-                            new HandleRef(this, nativeImageAttributes),
-                            unchecked((int)mode),
-                            color.ToArgb(),
-                            clamp);
+                new HandleRef(this, nativeImageAttributes),
+                unchecked((int)mode),
+                color.ToArgb(),
+                clamp
+            );
 
             if (status != Gdip.Ok)
                 throw Gdip.StatusException(status);
@@ -522,10 +579,13 @@ namespace System.Drawing.Imaging
             IntPtr memory = palette.ConvertToMemory();
             try
             {
-                Gdip.CheckStatus(Gdip.GdipGetImageAttributesAdjustedPalette(
-                    new HandleRef(this, nativeImageAttributes),
-                    memory,
-                    type));
+                Gdip.CheckStatus(
+                    Gdip.GdipGetImageAttributesAdjustedPalette(
+                        new HandleRef(this, nativeImageAttributes),
+                        memory,
+                        type
+                    )
+                );
                 palette.ConvertFromMemory(memory);
             }
             finally

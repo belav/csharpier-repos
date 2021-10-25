@@ -22,7 +22,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         CharacterClassRange,
         CharacterClassSubtraction,
         PosixProperty,
-
         ZeroOrMoreQuantifier,
         OneOrMoreQuantifier,
         ZeroOrOneQuantifier,
@@ -30,7 +29,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         OpenRangeNumericQuantifier,
         ClosedRangeNumericQuantifier,
         LazyQuantifier,
-
         SimpleGrouping,
         SimpleOptionsGrouping,
         NestedOptionsGrouping,
@@ -44,7 +42,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         BalancingGrouping,
         ConditionalCaptureGrouping,
         ConditionalExpressionGrouping,
-
         SimpleEscape,
         AnchorEscape,
         CharacterClassEscape,
@@ -56,7 +53,6 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         CaptureEscape,
         KCaptureEscape,
         BackreferenceEscape,
-
         // Tokens
         DollarToken,
         OpenBraceToken,
@@ -81,13 +77,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         LessThanToken,
         MinusToken,
         SingleQuoteToken,
-
         // Special multi-character tokens that have to be explicitly requested.
         OptionsToken,
         NumberToken,
         CaptureNameToken,
         EscapeCategoryToken,
-
         // Trivia
         CommentTrivia,
         WhitespaceTrivia,

@@ -23,10 +23,20 @@ namespace Microsoft.AspNetCore.Testing
             string skipReason,
             IReadOnlyList<BeforeAfterTestAttribute> beforeAfterAttributes,
             ExceptionAggregator aggregator,
-            CancellationTokenSource cancellationTokenSource)
-            : base(test, messageBus, testClass, constructorArguments, testMethod, testMethodArguments, skipReason, beforeAfterAttributes, aggregator, cancellationTokenSource)
-        {
-        }
+            CancellationTokenSource cancellationTokenSource
+        )
+            : base(
+                test,
+                messageBus,
+                testClass,
+                constructorArguments,
+                testMethod,
+                testMethodArguments,
+                skipReason,
+                beforeAfterAttributes,
+                aggregator,
+                cancellationTokenSource
+            ) { }
 
         protected override async Task<decimal> InvokeTestMethodAsync(ExceptionAggregator aggregator)
         {
@@ -40,7 +50,11 @@ namespace Microsoft.AspNetCore.Testing
             RepeatContext.Current = repeatContext;
 
             var timeTaken = 0.0M;
-            for (repeatContext.CurrentIteration = 0; repeatContext.CurrentIteration < repeatContext.Limit; repeatContext.CurrentIteration++)
+            for (
+                repeatContext.CurrentIteration = 0;
+                repeatContext.CurrentIteration < repeatContext.Limit;
+                repeatContext.CurrentIteration++
+            )
             {
                 timeTaken = await InvokeTestMethodCoreAsync(aggregator);
                 if (aggregator.HasExceptions)
@@ -54,7 +68,17 @@ namespace Microsoft.AspNetCore.Testing
 
         private Task<decimal> InvokeTestMethodCoreAsync(ExceptionAggregator aggregator)
         {
-            var invoker = new AspNetTestInvoker(Test, MessageBus, TestClass, ConstructorArguments, TestMethod, TestMethodArguments, BeforeAfterAttributes, aggregator, CancellationTokenSource);
+            var invoker = new AspNetTestInvoker(
+                Test,
+                MessageBus,
+                TestClass,
+                ConstructorArguments,
+                TestMethod,
+                TestMethodArguments,
+                BeforeAfterAttributes,
+                aggregator,
+                CancellationTokenSource
+            );
             return invoker.RunAsync();
         }
 

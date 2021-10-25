@@ -21,7 +21,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// Given a document, and the name of a stream to read/write, gets the integral DB ID to 
         /// use to find the data inside the DocumentData table.
         /// </summary>
-        private bool TryGetDocumentDataId(SqlConnection connection, DocumentKey documentKey, string name, out long dataId)
+        private bool TryGetDocumentDataId(
+            SqlConnection connection,
+            DocumentKey documentKey,
+            string name,
+            out long dataId
+        )
         {
             dataId = 0;
 
@@ -77,7 +82,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             // Unique identify the document through the key:  projectId-documentPathId-documentNameId
             return TryGetStringId(
                 connection,
-                GetDocumentIdString(projectId.Value, documentPathId.Value, documentNameId.Value));
+                GetDocumentIdString(projectId.Value, documentPathId.Value, documentNameId.Value)
+            );
         }
     }
 }

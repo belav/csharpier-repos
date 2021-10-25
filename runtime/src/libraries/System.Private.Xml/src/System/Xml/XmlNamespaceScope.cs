@@ -12,12 +12,10 @@ namespace System.Xml
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         All,
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         ExcludeXml,
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

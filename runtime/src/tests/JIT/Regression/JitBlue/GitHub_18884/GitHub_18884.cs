@@ -25,7 +25,7 @@ static class GitHub_18884
 
     static void ReproWindows(byte arg0, long arg1, ushort arg2, ulong arg3)
     {
-        s_5 >>= 50 / arg2;  // the value shifted by here
+        s_5 >>= 50 / arg2; // the value shifted by here
         if (arg0 != 0)
         {
             s_3 = s_3;
@@ -40,7 +40,7 @@ static class GitHub_18884
     }
     static void ReproUx(ulong arg0, long arg1, ushort arg2, byte arg3)
     {
-        s_5 >>= 50 / arg2;  // the value shifted by here
+        s_5 >>= 50 / arg2; // the value shifted by here
         if (arg3 != 0)
         {
             s_3 = s_3;

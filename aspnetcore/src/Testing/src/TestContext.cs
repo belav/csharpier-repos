@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Testing
             object[] constructorArguments,
             MethodInfo testMethod,
             object[] methodArguments,
-            ITestOutputHelper output)
+            ITestOutputHelper output
+        )
         {
             TestClass = testClass;
             ConstructorArguments = constructorArguments;

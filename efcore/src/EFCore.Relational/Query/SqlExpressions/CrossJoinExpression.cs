@@ -21,10 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         ///     Creates a new instance of the <see cref="CrossJoinExpression" /> class.
         /// </summary>
         /// <param name="table"> A table source to CROSS JOIN with. </param>
-        public CrossJoinExpression(TableExpressionBase table)
-            : base(table)
-        {
-        }
+        public CrossJoinExpression(TableExpressionBase table) : base(table) { }
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -44,9 +41,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(table, nameof(table));
 
-            return table != Table
-                ? new CrossJoinExpression(table)
-                : this;
+            return table != Table ? new CrossJoinExpression(table) : this;
         }
 
         /// <inheritdoc />
@@ -59,17 +54,17 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is CrossJoinExpression crossJoinExpression
-                    && Equals(crossJoinExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is CrossJoinExpression crossJoinExpression && Equals(crossJoinExpression)
+            );
 
-        private bool Equals(CrossJoinExpression crossJoinExpression)
-            => base.Equals(crossJoinExpression);
+        private bool Equals(CrossJoinExpression crossJoinExpression) =>
+            base.Equals(crossJoinExpression);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => base.GetHashCode();
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

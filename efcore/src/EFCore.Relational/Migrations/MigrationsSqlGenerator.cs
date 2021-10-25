@@ -35,43 +35,127 @@ namespace Microsoft.EntityFrameworkCore.Migrations
     /// </summary>
     public class MigrationsSqlGenerator : IMigrationsSqlGenerator
     {
-        private static readonly
-            IReadOnlyDictionary<Type, Action<MigrationsSqlGenerator, MigrationOperation, IModel?, MigrationCommandListBuilder>>
-            _generateActions =
-                new Dictionary<Type, Action<MigrationsSqlGenerator, MigrationOperation, IModel?, MigrationCommandListBuilder>>
-                {
-                    { typeof(AddColumnOperation), (g, o, m, b) => g.Generate((AddColumnOperation)o, m, b) },
-                    { typeof(AddForeignKeyOperation), (g, o, m, b) => g.Generate((AddForeignKeyOperation)o, m, b) },
-                    { typeof(AddPrimaryKeyOperation), (g, o, m, b) => g.Generate((AddPrimaryKeyOperation)o, m, b) },
-                    { typeof(AddUniqueConstraintOperation), (g, o, m, b) => g.Generate((AddUniqueConstraintOperation)o, m, b) },
-                    { typeof(AlterColumnOperation), (g, o, m, b) => g.Generate((AlterColumnOperation)o, m, b) },
-                    { typeof(AlterDatabaseOperation), (g, o, m, b) => g.Generate((AlterDatabaseOperation)o, m, b) },
-                    { typeof(AlterSequenceOperation), (g, o, m, b) => g.Generate((AlterSequenceOperation)o, m, b) },
-                    { typeof(AlterTableOperation), (g, o, m, b) => g.Generate((AlterTableOperation)o, m, b) },
-                    { typeof(AddCheckConstraintOperation), (g, o, m, b) => g.Generate((AddCheckConstraintOperation)o, m, b) },
-                    { typeof(CreateIndexOperation), (g, o, m, b) => g.Generate((CreateIndexOperation)o, m, b) },
-                    { typeof(CreateSequenceOperation), (g, o, m, b) => g.Generate((CreateSequenceOperation)o, m, b) },
-                    { typeof(CreateTableOperation), (g, o, m, b) => g.Generate((CreateTableOperation)o, m, b) },
-                    { typeof(DropColumnOperation), (g, o, m, b) => g.Generate((DropColumnOperation)o, m, b) },
-                    { typeof(DropForeignKeyOperation), (g, o, m, b) => g.Generate((DropForeignKeyOperation)o, m, b) },
-                    { typeof(DropIndexOperation), (g, o, m, b) => g.Generate((DropIndexOperation)o, m, b) },
-                    { typeof(DropPrimaryKeyOperation), (g, o, m, b) => g.Generate((DropPrimaryKeyOperation)o, m, b) },
-                    { typeof(DropSchemaOperation), (g, o, m, b) => g.Generate((DropSchemaOperation)o, m, b) },
-                    { typeof(DropSequenceOperation), (g, o, m, b) => g.Generate((DropSequenceOperation)o, m, b) },
-                    { typeof(DropTableOperation), (g, o, m, b) => g.Generate((DropTableOperation)o, m, b) },
-                    { typeof(DropUniqueConstraintOperation), (g, o, m, b) => g.Generate((DropUniqueConstraintOperation)o, m, b) },
-                    { typeof(DropCheckConstraintOperation), (g, o, m, b) => g.Generate((DropCheckConstraintOperation)o, m, b) },
-                    { typeof(EnsureSchemaOperation), (g, o, m, b) => g.Generate((EnsureSchemaOperation)o, m, b) },
-                    { typeof(RenameColumnOperation), (g, o, m, b) => g.Generate((RenameColumnOperation)o, m, b) },
-                    { typeof(RenameIndexOperation), (g, o, m, b) => g.Generate((RenameIndexOperation)o, m, b) },
-                    { typeof(RenameSequenceOperation), (g, o, m, b) => g.Generate((RenameSequenceOperation)o, m, b) },
-                    { typeof(RenameTableOperation), (g, o, m, b) => g.Generate((RenameTableOperation)o, m, b) },
-                    { typeof(RestartSequenceOperation), (g, o, m, b) => g.Generate((RestartSequenceOperation)o, m, b) },
-                    { typeof(SqlOperation), (g, o, m, b) => g.Generate((SqlOperation)o, m, b) },
-                    { typeof(InsertDataOperation), (g, o, m, b) => g.Generate((InsertDataOperation)o, m, b) },
-                    { typeof(DeleteDataOperation), (g, o, m, b) => g.Generate((DeleteDataOperation)o, m, b) },
-                    { typeof(UpdateDataOperation), (g, o, m, b) => g.Generate((UpdateDataOperation)o, m, b) }
-                };
+        private static readonly IReadOnlyDictionary<
+            Type,
+            Action<MigrationsSqlGenerator, MigrationOperation, IModel?, MigrationCommandListBuilder>
+        > _generateActions = new Dictionary<
+            Type,
+            Action<MigrationsSqlGenerator, MigrationOperation, IModel?, MigrationCommandListBuilder>
+        >
+        {
+            { typeof(AddColumnOperation), (g, o, m, b) => g.Generate((AddColumnOperation)o, m, b) },
+            {
+                typeof(AddForeignKeyOperation),
+                (g, o, m, b) => g.Generate((AddForeignKeyOperation)o, m, b)
+            },
+            {
+                typeof(AddPrimaryKeyOperation),
+                (g, o, m, b) => g.Generate((AddPrimaryKeyOperation)o, m, b)
+            },
+            {
+                typeof(AddUniqueConstraintOperation),
+                (g, o, m, b) => g.Generate((AddUniqueConstraintOperation)o, m, b)
+            },
+            {
+                typeof(AlterColumnOperation),
+                (g, o, m, b) => g.Generate((AlterColumnOperation)o, m, b)
+            },
+            {
+                typeof(AlterDatabaseOperation),
+                (g, o, m, b) => g.Generate((AlterDatabaseOperation)o, m, b)
+            },
+            {
+                typeof(AlterSequenceOperation),
+                (g, o, m, b) => g.Generate((AlterSequenceOperation)o, m, b)
+            },
+            {
+                typeof(AlterTableOperation),
+                (g, o, m, b) => g.Generate((AlterTableOperation)o, m, b)
+            },
+            {
+                typeof(AddCheckConstraintOperation),
+                (g, o, m, b) => g.Generate((AddCheckConstraintOperation)o, m, b)
+            },
+            {
+                typeof(CreateIndexOperation),
+                (g, o, m, b) => g.Generate((CreateIndexOperation)o, m, b)
+            },
+            {
+                typeof(CreateSequenceOperation),
+                (g, o, m, b) => g.Generate((CreateSequenceOperation)o, m, b)
+            },
+            {
+                typeof(CreateTableOperation),
+                (g, o, m, b) => g.Generate((CreateTableOperation)o, m, b)
+            },
+            {
+                typeof(DropColumnOperation),
+                (g, o, m, b) => g.Generate((DropColumnOperation)o, m, b)
+            },
+            {
+                typeof(DropForeignKeyOperation),
+                (g, o, m, b) => g.Generate((DropForeignKeyOperation)o, m, b)
+            },
+            { typeof(DropIndexOperation), (g, o, m, b) => g.Generate((DropIndexOperation)o, m, b) },
+            {
+                typeof(DropPrimaryKeyOperation),
+                (g, o, m, b) => g.Generate((DropPrimaryKeyOperation)o, m, b)
+            },
+            {
+                typeof(DropSchemaOperation),
+                (g, o, m, b) => g.Generate((DropSchemaOperation)o, m, b)
+            },
+            {
+                typeof(DropSequenceOperation),
+                (g, o, m, b) => g.Generate((DropSequenceOperation)o, m, b)
+            },
+            { typeof(DropTableOperation), (g, o, m, b) => g.Generate((DropTableOperation)o, m, b) },
+            {
+                typeof(DropUniqueConstraintOperation),
+                (g, o, m, b) => g.Generate((DropUniqueConstraintOperation)o, m, b)
+            },
+            {
+                typeof(DropCheckConstraintOperation),
+                (g, o, m, b) => g.Generate((DropCheckConstraintOperation)o, m, b)
+            },
+            {
+                typeof(EnsureSchemaOperation),
+                (g, o, m, b) => g.Generate((EnsureSchemaOperation)o, m, b)
+            },
+            {
+                typeof(RenameColumnOperation),
+                (g, o, m, b) => g.Generate((RenameColumnOperation)o, m, b)
+            },
+            {
+                typeof(RenameIndexOperation),
+                (g, o, m, b) => g.Generate((RenameIndexOperation)o, m, b)
+            },
+            {
+                typeof(RenameSequenceOperation),
+                (g, o, m, b) => g.Generate((RenameSequenceOperation)o, m, b)
+            },
+            {
+                typeof(RenameTableOperation),
+                (g, o, m, b) => g.Generate((RenameTableOperation)o, m, b)
+            },
+            {
+                typeof(RestartSequenceOperation),
+                (g, o, m, b) => g.Generate((RestartSequenceOperation)o, m, b)
+            },
+            { typeof(SqlOperation), (g, o, m, b) => g.Generate((SqlOperation)o, m, b) },
+            {
+                typeof(InsertDataOperation),
+                (g, o, m, b) => g.Generate((InsertDataOperation)o, m, b)
+            },
+            {
+                typeof(DeleteDataOperation),
+                (g, o, m, b) => g.Generate((DeleteDataOperation)o, m, b)
+            },
+            {
+                typeof(UpdateDataOperation),
+                (g, o, m, b) => g.Generate((UpdateDataOperation)o, m, b)
+            }
+        };
 
         /// <summary>
         ///     Creates a new <see cref="MigrationsSqlGenerator" /> instance using the given dependencies.
@@ -99,13 +183,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <summary>
         ///     The <see cref="IUpdateSqlGenerator" />.
         /// </summary>
-        protected virtual IUpdateSqlGenerator SqlGenerator
-            => Dependencies.UpdateSqlGenerator;
+        protected virtual IUpdateSqlGenerator SqlGenerator => Dependencies.UpdateSqlGenerator;
 
         /// <summary>
         ///     Gets a comparer that can be used to compare two product versions.
         /// </summary>
-        protected virtual IComparer<string> VersionComparer { get; } = new SemanticVersionComparer();
+        protected virtual IComparer<string> VersionComparer { get; } =
+            new SemanticVersionComparer();
 
         /// <summary>
         ///     Gets or sets the options to use when generating commands.
@@ -122,7 +206,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         public virtual IReadOnlyList<MigrationCommand> Generate(
             IReadOnlyList<MigrationOperation> operations,
             IModel? model = null,
-            MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default)
+            MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default
+        )
         {
             Check.NotNull(operations, nameof(operations));
 
@@ -162,7 +247,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             MigrationOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -170,7 +256,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var operationType = operation.GetType();
             if (!_generateActions.TryGetValue(operationType, out var generateAction))
             {
-                throw new InvalidOperationException(RelationalStrings.UnknownOperation(GetType().ShortDisplayName(), operationType));
+                throw new InvalidOperationException(
+                    RelationalStrings.UnknownOperation(GetType().ShortDisplayName(), operationType)
+                );
             }
 
             generateAction(this, operation, model, builder);
@@ -188,14 +276,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             AddColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" ADD ");
 
             ColumnDefinition(operation, model, builder);
@@ -219,14 +313,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             AddForeignKeyOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" ADD ");
 
             ForeignKeyConstraint(operation, model, builder);
@@ -250,14 +350,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             AddPrimaryKeyOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" ADD ");
             PrimaryKeyConstraint(operation, model, builder);
 
@@ -278,14 +384,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             AddUniqueConstraintOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" ADD ");
             UniqueConstraint(operation, model, builder);
             builder.AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
@@ -302,14 +414,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             AddCheckConstraintOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" ADD ");
             CheckConstraint(operation, model, builder);
             builder.AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
@@ -332,8 +450,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             AlterColumnOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => throw new NotSupportedException(RelationalStrings.MigrationSqlGenerationMissing(nameof(AlterColumnOperation)));
+            MigrationCommandListBuilder builder
+        ) =>
+            throw new NotSupportedException(
+                RelationalStrings.MigrationSqlGenerationMissing(nameof(AlterColumnOperation))
+            );
 
         /// <summary>
         ///     <para>
@@ -351,9 +472,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             AlterDatabaseOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-        {
-        }
+            MigrationCommandListBuilder builder
+        ) { }
 
         /// <summary>
         ///     <para>
@@ -371,8 +491,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             RenameIndexOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => throw new NotSupportedException(RelationalStrings.MigrationSqlGenerationMissing(nameof(RenameIndexOperation)));
+            MigrationCommandListBuilder builder
+        ) =>
+            throw new NotSupportedException(
+                RelationalStrings.MigrationSqlGenerationMissing(nameof(RenameIndexOperation))
+            );
 
         /// <summary>
         ///     Builds commands for the given <see cref="AlterSequenceOperation" /> by making calls on the given
@@ -384,14 +507,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             AlterSequenceOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER SEQUENCE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name, operation.Schema));
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Name,
+                        operation.Schema
+                    )
+                );
 
             SequenceOptions(operation, model, builder);
 
@@ -417,9 +546,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             AlterTableOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-        {
-        }
+            MigrationCommandListBuilder builder
+        ) { }
 
         /// <summary>
         ///     <para>
@@ -437,8 +565,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             RenameTableOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => throw new NotSupportedException(RelationalStrings.MigrationSqlGenerationMissing(nameof(RenameTableOperation)));
+            MigrationCommandListBuilder builder
+        ) =>
+            throw new NotSupportedException(
+                RelationalStrings.MigrationSqlGenerationMissing(nameof(RenameTableOperation))
+            );
 
         /// <summary>
         ///     Builds commands for the given <see cref="CreateIndexOperation" /> by making calls on the given
@@ -452,7 +583,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             CreateIndexOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -470,7 +602,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 .Append("INDEX ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
                 .Append(" ON ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" (")
                 .Append(ColumnList(operation.Columns))
                 .Append(")");
@@ -500,8 +637,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             EnsureSchemaOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => throw new NotSupportedException(RelationalStrings.MigrationSqlGenerationMissing(nameof(EnsureSchemaOperation)));
+            MigrationCommandListBuilder builder
+        ) =>
+            throw new NotSupportedException(
+                RelationalStrings.MigrationSqlGenerationMissing(nameof(EnsureSchemaOperation))
+            );
 
         /// <summary>
         ///     Builds commands for the given <see cref="CreateSequenceOperation" /> by making calls on the given
@@ -513,22 +653,26 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             CreateSequenceOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("CREATE SEQUENCE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name, operation.Schema));
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Name,
+                        operation.Schema
+                    )
+                );
 
             var typeMapping = Dependencies.TypeMappingSource.GetMapping(operation.ClrType);
 
             if (operation.ClrType != typeof(long))
             {
-                builder
-                    .Append(" AS ")
-                    .Append(typeMapping.StoreType);
+                builder.Append(" AS ").Append(typeMapping.StoreType);
 
                 // set the typeMapping for use with operation.StartValue (i.e. a long) below
                 typeMapping = Dependencies.TypeMappingSource.GetMapping(typeof(long));
@@ -557,14 +701,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             CreateTableOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("CREATE TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Name,
+                        operation.Schema
+                    )
+                )
                 .AppendLine(" (");
 
             using (builder.Indent())
@@ -595,14 +745,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             DropColumnOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" DROP COLUMN ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name));
 
@@ -625,14 +781,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             DropForeignKeyOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" DROP CONSTRAINT ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name));
 
@@ -661,8 +823,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             DropIndexOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
-            => throw new NotSupportedException(RelationalStrings.MigrationSqlGenerationMissing(nameof(DropIndexOperation)));
+            bool terminate = true
+        ) =>
+            throw new NotSupportedException(
+                RelationalStrings.MigrationSqlGenerationMissing(nameof(DropIndexOperation))
+            );
 
         /// <summary>
         ///     Builds commands for the given <see cref="DropPrimaryKeyOperation" /> by making calls on the given
@@ -676,14 +841,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             DropPrimaryKeyOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" DROP CONSTRAINT ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name));
 
@@ -704,7 +875,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             DropSchemaOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -727,14 +899,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             DropSequenceOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("DROP SEQUENCE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Name,
+                        operation.Schema
+                    )
+                )
                 .AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
 
             EndStatement(builder);
@@ -752,14 +930,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             DropTableOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("DROP TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name, operation.Schema));
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Name,
+                        operation.Schema
+                    )
+                );
 
             if (terminate)
             {
@@ -778,14 +962,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             DropUniqueConstraintOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" DROP CONSTRAINT ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
                 .AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
@@ -803,14 +993,20 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             DropCheckConstraintOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
 
             builder
                 .Append("ALTER TABLE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Table, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Table,
+                        operation.Schema
+                    )
+                )
                 .Append(" DROP CONSTRAINT ")
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name))
                 .AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
@@ -834,8 +1030,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             RenameColumnOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => throw new NotSupportedException(RelationalStrings.MigrationSqlGenerationMissing(nameof(RenameColumnOperation)));
+            MigrationCommandListBuilder builder
+        ) =>
+            throw new NotSupportedException(
+                RelationalStrings.MigrationSqlGenerationMissing(nameof(RenameColumnOperation))
+            );
 
         /// <summary>
         ///     <para>
@@ -853,8 +1052,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             RenameSequenceOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => throw new NotSupportedException(RelationalStrings.MigrationSqlGenerationMissing(nameof(RenameSequenceOperation)));
+            MigrationCommandListBuilder builder
+        ) =>
+            throw new NotSupportedException(
+                RelationalStrings.MigrationSqlGenerationMissing(nameof(RenameSequenceOperation))
+            );
 
         /// <summary>
         ///     Builds commands for the given <see cref="RestartSequenceOperation" /> by making calls on the given
@@ -866,7 +1068,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             RestartSequenceOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -875,7 +1078,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             builder
                 .Append("ALTER SEQUENCE ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.Name, operation.Schema))
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.Name,
+                        operation.Schema
+                    )
+                )
                 .Append(" RESTART WITH ")
                 .Append(longTypeMapping.GenerateSqlLiteral(operation.StartValue))
                 .AppendLine(Dependencies.SqlGenerationHelper.StatementTerminator);
@@ -893,7 +1101,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             SqlOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -915,7 +1124,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             InsertDataOperation operation,
             IModel? model,
             MigrationCommandListBuilder builder,
-            bool terminate = true)
+            bool terminate = true
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -923,10 +1133,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var sqlBuilder = new StringBuilder();
             foreach (var modificationCommand in GenerateModificationCommands(operation, model))
             {
-                SqlGenerator.AppendInsertOperation(
-                    sqlBuilder,
-                    modificationCommand,
-                    0);
+                SqlGenerator.AppendInsertOperation(sqlBuilder, modificationCommand, 0);
             }
 
             builder.Append(sqlBuilder.ToString());
@@ -945,34 +1152,52 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <returns> The commands that correspond to the given operation. </returns>
         protected virtual IEnumerable<ModificationCommand> GenerateModificationCommands(
             InsertDataOperation operation,
-            IModel? model)
+            IModel? model
+        )
         {
             if (operation.Columns.Length != operation.Values.GetLength(1))
             {
                 throw new InvalidOperationException(
                     RelationalStrings.InsertDataOperationValuesCountMismatch(
-                        operation.Values.GetLength(1), operation.Columns.Length, FormatTable(operation.Table, operation.Schema)));
+                        operation.Values.GetLength(1),
+                        operation.Columns.Length,
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            if (operation.ColumnTypes != null
-                && operation.Columns.Length != operation.ColumnTypes.Length)
+            if (
+                operation.ColumnTypes != null
+                && operation.Columns.Length != operation.ColumnTypes.Length
+            )
             {
                 throw new InvalidOperationException(
                     RelationalStrings.InsertDataOperationTypesCountMismatch(
-                        operation.ColumnTypes.Length, operation.Columns.Length, FormatTable(operation.Table, operation.Schema)));
+                        operation.ColumnTypes.Length,
+                        operation.Columns.Length,
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            if (operation.ColumnTypes == null
-                && model == null)
+            if (operation.ColumnTypes == null && model == null)
             {
                 throw new InvalidOperationException(
                     RelationalStrings.InsertDataOperationNoModel(
-                        FormatTable(operation.Table, operation.Schema)));
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            var propertyMappings = operation.ColumnTypes == null
-                ? GetPropertyMappings(operation.Columns, operation.Table, operation.Schema, model)
-                : null;
+            var propertyMappings =
+                operation.ColumnTypes == null
+                    ? GetPropertyMappings(
+                          operation.Columns,
+                          operation.Table,
+                          operation.Schema,
+                          model
+                      )
+                    : null;
 
             for (var i = 0; i < operation.Values.GetLength(0); i++)
             {
@@ -983,20 +1208,38 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var value = operation.Values[i, j];
                     var propertyMapping = propertyMappings?[j];
                     var columnType = operation.ColumnTypes?[j];
-                    var typeMapping = propertyMapping != null
-                        ? propertyMapping.TypeMapping
-                        : value != null
-                            ? Dependencies.TypeMappingSource.FindMapping(value.GetType(), columnType)
-                            : Dependencies.TypeMappingSource.FindMapping(columnType!);
+                    var typeMapping =
+                        propertyMapping != null
+                            ? propertyMapping.TypeMapping
+                            : value != null
+                                ? Dependencies.TypeMappingSource.FindMapping(
+                                      value.GetType(),
+                                      columnType
+                                  )
+                                : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modifications[j] = new ColumnModification(
-                        name, originalValue: null, value, propertyMapping?.Property, columnType, typeMapping,
-                        isRead: false, isWrite: true, isKey: true, isCondition: false,
-                        SensitiveLoggingEnabled, propertyMapping?.Column.IsNullable);
+                        name,
+                        originalValue: null,
+                        value,
+                        propertyMapping?.Property,
+                        columnType,
+                        typeMapping,
+                        isRead: false,
+                        isWrite: true,
+                        isKey: true,
+                        isCondition: false,
+                        SensitiveLoggingEnabled,
+                        propertyMapping?.Column.IsNullable
+                    );
                 }
 
                 yield return new ModificationCommand(
-                    operation.Table, operation.Schema, modifications, sensitiveLoggingEnabled: SensitiveLoggingEnabled);
+                    operation.Table,
+                    operation.Schema,
+                    modifications,
+                    sensitiveLoggingEnabled: SensitiveLoggingEnabled
+                );
             }
         }
 
@@ -1010,7 +1253,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             DeleteDataOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1018,10 +1262,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var sqlBuilder = new StringBuilder();
             foreach (var modificationCommand in GenerateModificationCommands(operation, model))
             {
-                SqlGenerator.AppendDeleteOperation(
-                    sqlBuilder,
-                    modificationCommand,
-                    0);
+                SqlGenerator.AppendDeleteOperation(sqlBuilder, modificationCommand, 0);
             }
 
             builder.Append(sqlBuilder.ToString());
@@ -1036,34 +1277,52 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <returns> The commands that correspond to the given operation. </returns>
         protected virtual IEnumerable<ModificationCommand> GenerateModificationCommands(
             DeleteDataOperation operation,
-            IModel? model)
+            IModel? model
+        )
         {
             if (operation.KeyColumns.Length != operation.KeyValues.GetLength(1))
             {
                 throw new InvalidOperationException(
                     RelationalStrings.DeleteDataOperationValuesCountMismatch(
-                        operation.KeyValues.GetLength(1), operation.KeyColumns.Length, FormatTable(operation.Table, operation.Schema)));
+                        operation.KeyValues.GetLength(1),
+                        operation.KeyColumns.Length,
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            if (operation.KeyColumnTypes != null
-                && operation.KeyColumns.Length != operation.KeyColumnTypes.Length)
+            if (
+                operation.KeyColumnTypes != null
+                && operation.KeyColumns.Length != operation.KeyColumnTypes.Length
+            )
             {
                 throw new InvalidOperationException(
                     RelationalStrings.DeleteDataOperationTypesCountMismatch(
-                        operation.KeyColumnTypes.Length, operation.KeyColumns.Length, FormatTable(operation.Table, operation.Schema)));
+                        operation.KeyColumnTypes.Length,
+                        operation.KeyColumns.Length,
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            if (operation.KeyColumnTypes == null
-                && model == null)
+            if (operation.KeyColumnTypes == null && model == null)
             {
                 throw new InvalidOperationException(
                     RelationalStrings.DeleteDataOperationNoModel(
-                        FormatTable(operation.Table, operation.Schema)));
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            var keypropertyMappings = operation.KeyColumnTypes == null
-                ? GetPropertyMappings(operation.KeyColumns, operation.Table, operation.Schema, model)
-                : null;
+            var keypropertyMappings =
+                operation.KeyColumnTypes == null
+                    ? GetPropertyMappings(
+                          operation.KeyColumns,
+                          operation.Table,
+                          operation.Schema,
+                          model
+                      )
+                    : null;
 
             for (var i = 0; i < operation.KeyValues.GetLength(0); i++)
             {
@@ -1074,20 +1333,38 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var value = operation.KeyValues[i, j];
                     var propertyMapping = keypropertyMappings?[j];
                     var columnType = operation.KeyColumnTypes?[j];
-                    var typeMapping = propertyMapping != null
-                        ? propertyMapping.TypeMapping
-                        : value != null
-                            ? Dependencies.TypeMappingSource.FindMapping(value.GetType(), columnType)
-                            : Dependencies.TypeMappingSource.FindMapping(columnType!);
+                    var typeMapping =
+                        propertyMapping != null
+                            ? propertyMapping.TypeMapping
+                            : value != null
+                                ? Dependencies.TypeMappingSource.FindMapping(
+                                      value.GetType(),
+                                      columnType
+                                  )
+                                : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modifications[j] = new ColumnModification(
-                        name, originalValue: null, value, propertyMapping?.Property, columnType, typeMapping,
-                        isRead: false, isWrite: true, isKey: true, isCondition: true,
-                        SensitiveLoggingEnabled, propertyMapping?.Column.IsNullable);
+                        name,
+                        originalValue: null,
+                        value,
+                        propertyMapping?.Property,
+                        columnType,
+                        typeMapping,
+                        isRead: false,
+                        isWrite: true,
+                        isKey: true,
+                        isCondition: true,
+                        SensitiveLoggingEnabled,
+                        propertyMapping?.Column.IsNullable
+                    );
                 }
 
                 yield return new ModificationCommand(
-                    operation.Table, operation.Schema, modifications, sensitiveLoggingEnabled: SensitiveLoggingEnabled);
+                    operation.Table,
+                    operation.Schema,
+                    modifications,
+                    sensitiveLoggingEnabled: SensitiveLoggingEnabled
+                );
             }
         }
 
@@ -1101,7 +1378,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void Generate(
             UpdateDataOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1109,10 +1387,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var sqlBuilder = new StringBuilder();
             foreach (var modificationCommand in GenerateModificationCommands(operation, model))
             {
-                SqlGenerator.AppendUpdateOperation(
-                    sqlBuilder,
-                    modificationCommand,
-                    0);
+                SqlGenerator.AppendUpdateOperation(sqlBuilder, modificationCommand, 0);
             }
 
             builder.Append(sqlBuilder.ToString());
@@ -1127,59 +1402,97 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <returns> The commands that correspond to the given operation. </returns>
         protected virtual IEnumerable<ModificationCommand> GenerateModificationCommands(
             UpdateDataOperation operation,
-            IModel? model)
+            IModel? model
+        )
         {
             if (operation.KeyColumns.Length != operation.KeyValues.GetLength(1))
             {
                 throw new InvalidOperationException(
                     RelationalStrings.UpdateDataOperationKeyValuesCountMismatch(
-                        operation.KeyValues.GetLength(1), operation.KeyColumns.Length, FormatTable(operation.Table, operation.Schema)));
+                        operation.KeyValues.GetLength(1),
+                        operation.KeyColumns.Length,
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
             if (operation.Columns.Length != operation.Values.GetLength(1))
             {
                 throw new InvalidOperationException(
                     RelationalStrings.UpdateDataOperationValuesCountMismatch(
-                        operation.Values.GetLength(1), operation.Columns.Length, FormatTable(operation.Table, operation.Schema)));
+                        operation.Values.GetLength(1),
+                        operation.Columns.Length,
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
             if (operation.KeyValues.GetLength(0) != operation.Values.GetLength(0))
             {
                 throw new InvalidOperationException(
                     RelationalStrings.UpdateDataOperationRowCountMismatch(
-                        operation.Values.GetLength(0), operation.KeyValues.GetLength(0), FormatTable(operation.Table, operation.Schema)));
+                        operation.Values.GetLength(0),
+                        operation.KeyValues.GetLength(0),
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            if (operation.KeyColumnTypes != null
-                && operation.KeyColumns.Length != operation.KeyColumnTypes.Length)
+            if (
+                operation.KeyColumnTypes != null
+                && operation.KeyColumns.Length != operation.KeyColumnTypes.Length
+            )
             {
                 throw new InvalidOperationException(
                     RelationalStrings.UpdateDataOperationKeyTypesCountMismatch(
-                        operation.KeyColumnTypes.Length, operation.KeyColumns.Length, FormatTable(operation.Table, operation.Schema)));
+                        operation.KeyColumnTypes.Length,
+                        operation.KeyColumns.Length,
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            if (operation.ColumnTypes != null
-                && operation.Columns.Length != operation.ColumnTypes.Length)
+            if (
+                operation.ColumnTypes != null
+                && operation.Columns.Length != operation.ColumnTypes.Length
+            )
             {
                 throw new InvalidOperationException(
                     RelationalStrings.UpdateDataOperationTypesCountMismatch(
-                        operation.ColumnTypes.Length, operation.Columns.Length, FormatTable(operation.Table, operation.Schema)));
+                        operation.ColumnTypes.Length,
+                        operation.Columns.Length,
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            if (operation.KeyColumnTypes == null
-                && model == null)
+            if (operation.KeyColumnTypes == null && model == null)
             {
                 throw new InvalidOperationException(
                     RelationalStrings.UpdateDataOperationNoModel(
-                        FormatTable(operation.Table, operation.Schema)));
+                        FormatTable(operation.Table, operation.Schema)
+                    )
+                );
             }
 
-            var keyPropertyMappings = operation.KeyColumnTypes == null
-                ? GetPropertyMappings(operation.KeyColumns, operation.Table, operation.Schema, model)
-                : null;
-            var propertyMappings = operation.ColumnTypes == null
-                ? GetPropertyMappings(operation.Columns, operation.Table, operation.Schema, model)
-                : null;
+            var keyPropertyMappings =
+                operation.KeyColumnTypes == null
+                    ? GetPropertyMappings(
+                          operation.KeyColumns,
+                          operation.Table,
+                          operation.Schema,
+                          model
+                      )
+                    : null;
+            var propertyMappings =
+                operation.ColumnTypes == null
+                    ? GetPropertyMappings(
+                          operation.Columns,
+                          operation.Table,
+                          operation.Schema,
+                          model
+                      )
+                    : null;
 
             for (var i = 0; i < operation.KeyValues.GetLength(0); i++)
             {
@@ -1190,16 +1503,30 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var value = operation.KeyValues[i, j];
                     var propertyMapping = keyPropertyMappings?[j];
                     var columnType = operation.KeyColumnTypes?[j];
-                    var typeMapping = propertyMapping != null
-                        ? propertyMapping.TypeMapping
-                        : value != null
-                            ? Dependencies.TypeMappingSource.FindMapping(value.GetType(), columnType)
-                            : Dependencies.TypeMappingSource.FindMapping(columnType!);
+                    var typeMapping =
+                        propertyMapping != null
+                            ? propertyMapping.TypeMapping
+                            : value != null
+                                ? Dependencies.TypeMappingSource.FindMapping(
+                                      value.GetType(),
+                                      columnType
+                                  )
+                                : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     keys[j] = new ColumnModification(
-                        name, originalValue: null, value, propertyMapping?.Property, columnType, typeMapping,
-                        isRead: false, isWrite: false, isKey: true, isCondition: true,
-                        SensitiveLoggingEnabled, propertyMapping?.Column.IsNullable);
+                        name,
+                        originalValue: null,
+                        value,
+                        propertyMapping?.Property,
+                        columnType,
+                        typeMapping,
+                        isRead: false,
+                        isWrite: false,
+                        isKey: true,
+                        isCondition: true,
+                        SensitiveLoggingEnabled,
+                        propertyMapping?.Column.IsNullable
+                    );
                 }
 
                 var modifications = new ColumnModification[operation.Columns.Length];
@@ -1209,39 +1536,57 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     var value = operation.Values[i, j];
                     var propertyMapping = propertyMappings?[j];
                     var columnType = operation.ColumnTypes?[j];
-                    var typeMapping = propertyMapping != null
-                        ? propertyMapping.TypeMapping
-                        : value != null
-                            ? Dependencies.TypeMappingSource.FindMapping(value.GetType(), columnType)
-                            : Dependencies.TypeMappingSource.FindMapping(columnType!);
+                    var typeMapping =
+                        propertyMapping != null
+                            ? propertyMapping.TypeMapping
+                            : value != null
+                                ? Dependencies.TypeMappingSource.FindMapping(
+                                      value.GetType(),
+                                      columnType
+                                  )
+                                : Dependencies.TypeMappingSource.FindMapping(columnType!);
 
                     modifications[j] = new ColumnModification(
-                        name, originalValue: null, value, propertyMapping?.Property, columnType, typeMapping,
-                        isRead: false, isWrite: true, isKey: true, isCondition: false,
-                        SensitiveLoggingEnabled, propertyMapping?.Column.IsNullable);
+                        name,
+                        originalValue: null,
+                        value,
+                        propertyMapping?.Property,
+                        columnType,
+                        typeMapping,
+                        isRead: false,
+                        isWrite: true,
+                        isKey: true,
+                        isCondition: false,
+                        SensitiveLoggingEnabled,
+                        propertyMapping?.Column.IsNullable
+                    );
                 }
 
                 yield return new ModificationCommand(
-                    operation.Table, operation.Schema, keys.Concat(modifications).ToArray(),
-                    sensitiveLoggingEnabled: SensitiveLoggingEnabled);
+                    operation.Table,
+                    operation.Schema,
+                    keys.Concat(modifications).ToArray(),
+                    sensitiveLoggingEnabled: SensitiveLoggingEnabled
+                );
             }
         }
 
-        private static string FormatTable(string table, string? schema)
-            => schema == null ? table : schema + "." + table;
+        private static string FormatTable(string table, string? schema) =>
+            schema == null ? table : schema + "." + table;
 
         private static IColumnMapping[] GetPropertyMappings(
             string[] names,
             string tableName,
             string? schema,
-            IModel? model)
+            IModel? model
+        )
         {
             var table = model?.GetRelationalModel().FindTable(tableName, schema);
             if (table == null)
             {
                 throw new InvalidOperationException(
-                    RelationalStrings.DataOperationNoTable(
-                        FormatTable(tableName, schema)));
+                    RelationalStrings.DataOperationNoTable(FormatTable(tableName, schema))
+                );
             }
 
             var properties = new IColumnMapping[names.Length];
@@ -1253,7 +1598,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 {
                     throw new InvalidOperationException(
                         RelationalStrings.DataOperationNoProperty(
-                            FormatTable(tableName, schema), name));
+                            FormatTable(tableName, schema),
+                            name
+                        )
+                    );
                 }
 
                 properties[i] = column.PropertyMappings.First();
@@ -1271,13 +1619,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void SequenceOptions(
             AlterSequenceOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => SequenceOptions(
-                operation.Schema,
-                operation.Name,
-                operation,
-                model,
-                builder);
+            MigrationCommandListBuilder builder
+        ) => SequenceOptions(operation.Schema, operation.Name, operation, model, builder);
 
         /// <summary>
         ///     Generates a SQL fragment configuring a sequence in a <see cref="CreateSequenceOperation" />.
@@ -1288,13 +1631,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void SequenceOptions(
             CreateSequenceOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => SequenceOptions(
-                operation.Schema,
-                operation.Name,
-                operation,
-                model,
-                builder);
+            MigrationCommandListBuilder builder
+        ) => SequenceOptions(operation.Schema, operation.Name, operation, model, builder);
 
         /// <summary>
         ///     Generates a SQL fragment configuring a sequence with the given options.
@@ -1309,7 +1647,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             SequenceOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operation, nameof(operation));
@@ -1356,7 +1695,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void CreateTableColumns(
             CreateTableOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1381,14 +1721,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void ColumnDefinition(
             AddColumnOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => ColumnDefinition(
+            MigrationCommandListBuilder builder
+        ) =>
+            ColumnDefinition(
                 operation.Schema,
                 operation.Table,
                 operation.Name,
                 operation,
                 model,
-                builder);
+                builder
+            );
 
         /// <summary>
         ///     Generates a SQL fragment for a column definition for the given column metadata.
@@ -1405,7 +1747,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             ColumnOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotEmpty(name, nameof(name));
             Check.NotNull(operation, nameof(operation));
@@ -1418,7 +1761,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 return;
             }
 
-            var columnType = operation.ColumnType ?? GetColumnType(schema, table, name, operation, model)!;
+            var columnType =
+                operation.ColumnType ?? GetColumnType(schema, table, name, operation, model)!;
             builder
                 .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(name))
                 .Append(" ")
@@ -1426,9 +1770,7 @@ namespace Microsoft.EntityFrameworkCore.Migrations
 
             if (operation.Collation != null)
             {
-                builder
-                    .Append(" COLLATE ")
-                    .Append(operation.Collation);
+                builder.Append(" COLLATE ").Append(operation.Collation);
             }
 
             builder.Append(operation.IsNullable ? " NULL" : " NOT NULL");
@@ -1451,8 +1793,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string name,
             ColumnOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-            => throw new NotSupportedException(RelationalStrings.MigrationSqlGenerationMissing(nameof(ColumnOperation)));
+            MigrationCommandListBuilder builder
+        ) =>
+            throw new NotSupportedException(
+                RelationalStrings.MigrationSqlGenerationMissing(nameof(ColumnOperation))
+            );
 
         /// <summary>
         ///     Gets the store/database type of a column given the provided metadata.
@@ -1468,7 +1813,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             string tableName,
             string name,
             ColumnOperation operation,
-            IModel? model)
+            IModel? model
+        )
         {
             Check.NotEmpty(tableName, nameof(tableName));
             Check.NotEmpty(name, nameof(name));
@@ -1480,32 +1826,35 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             var column = table?.FindColumn(name);
             if (column != null)
             {
-                if (operation.IsUnicode == column.IsUnicode
+                if (
+                    operation.IsUnicode == column.IsUnicode
                     && operation.MaxLength == column.MaxLength
                     && operation.Precision == column.Precision
                     && operation.Scale == column.Scale
                     && operation.IsFixedLength == column.IsFixedLength
-                    && operation.IsRowVersion == column.IsRowVersion)
+                    && operation.IsRowVersion == column.IsRowVersion
+                )
                 {
                     return column.StoreType;
                 }
 
-                keyOrIndex = table!.UniqueConstraints.Any(u => u.Columns.Contains(column))
+                keyOrIndex =
+                    table!.UniqueConstraints.Any(u => u.Columns.Contains(column))
                     || table.ForeignKeyConstraints.Any(u => u.Columns.Contains(column))
                     || table.Indexes.Any(u => u.Columns.Contains(column));
             }
 
             return Dependencies.TypeMappingSource.FindMapping(
-                    operation.ClrType,
-                    null,
-                    keyOrIndex,
-                    operation.IsUnicode,
-                    operation.MaxLength,
-                    operation.IsRowVersion,
-                    operation.IsFixedLength,
-                    operation.Precision,
-                    operation.Scale)
-                ?.StoreType;
+                operation.ClrType,
+                null,
+                keyOrIndex,
+                operation.IsUnicode,
+                operation.MaxLength,
+                operation.IsRowVersion,
+                operation.IsFixedLength,
+                operation.Precision,
+                operation.Scale
+            )?.StoreType;
         }
 
         /// <summary>
@@ -1519,30 +1868,30 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             object? defaultValue,
             string? defaultValueSql,
             string? columnType,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(builder, nameof(builder));
 
             if (defaultValueSql != null)
             {
-                builder
-                    .Append(" DEFAULT (")
-                    .Append(defaultValueSql)
-                    .Append(")");
+                builder.Append(" DEFAULT (").Append(defaultValueSql).Append(")");
             }
             else if (defaultValue != null)
             {
-                var typeMapping = columnType != null
-                    ? Dependencies.TypeMappingSource.FindMapping(defaultValue.GetType(), columnType)
-                    : null;
+                var typeMapping =
+                    columnType != null
+                        ? Dependencies.TypeMappingSource.FindMapping(
+                              defaultValue.GetType(),
+                              columnType
+                          )
+                        : null;
                 if (typeMapping == null)
                 {
                     typeMapping = Dependencies.TypeMappingSource.GetMappingForValue(defaultValue);
                 }
 
-                builder
-                    .Append(" DEFAULT ")
-                    .Append(typeMapping.GenerateSqlLiteral(defaultValue));
+                builder.Append(" DEFAULT ").Append(typeMapping.GenerateSqlLiteral(defaultValue));
             }
         }
 
@@ -1555,7 +1904,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void CreateTableConstraints(
             CreateTableOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1575,7 +1925,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void CreateTableForeignKeys(
             CreateTableOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1596,7 +1947,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void ForeignKeyConstraint(
             AddForeignKeyOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1613,14 +1965,16 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 .Append("FOREIGN KEY (")
                 .Append(ColumnList(operation.Columns))
                 .Append(") REFERENCES ")
-                .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(operation.PrincipalTable, operation.PrincipalSchema));
+                .Append(
+                    Dependencies.SqlGenerationHelper.DelimitIdentifier(
+                        operation.PrincipalTable,
+                        operation.PrincipalSchema
+                    )
+                );
 
             if (operation.PrincipalColumns != null)
             {
-                builder
-                    .Append(" (")
-                    .Append(ColumnList(operation.PrincipalColumns))
-                    .Append(")");
+                builder.Append(" (").Append(ColumnList(operation.PrincipalColumns)).Append(")");
             }
 
             if (operation.OnUpdate != ReferentialAction.NoAction)
@@ -1645,7 +1999,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void CreateTablePrimaryKeyConstraint(
             CreateTableOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1666,7 +2021,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void PrimaryKeyConstraint(
             AddPrimaryKeyOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1679,14 +2035,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     .Append(" ");
             }
 
-            builder
-                .Append("PRIMARY KEY ");
+            builder.Append("PRIMARY KEY ");
 
             IndexTraits(operation, model, builder);
 
-            builder.Append("(")
-                .Append(ColumnList(operation.Columns))
-                .Append(")");
+            builder.Append("(").Append(ColumnList(operation.Columns)).Append(")");
         }
 
         /// <summary>
@@ -1698,7 +2051,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void CreateTableUniqueConstraints(
             CreateTableOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1719,7 +2073,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void UniqueConstraint(
             AddUniqueConstraintOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1732,14 +2087,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     .Append(" ");
             }
 
-            builder
-                .Append("UNIQUE ");
+            builder.Append("UNIQUE ");
 
             IndexTraits(operation, model, builder);
 
-            builder.Append("(")
-                .Append(ColumnList(operation.Columns))
-                .Append(")");
+            builder.Append("(").Append(ColumnList(operation.Columns)).Append(")");
         }
 
         /// <summary>
@@ -1751,7 +2103,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void CreateTableCheckConstraints(
             CreateTableOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1772,7 +2125,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void CheckConstraint(
             AddCheckConstraintOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(operation, nameof(operation));
             Check.NotNull(builder, nameof(builder));
@@ -1785,12 +2139,9 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                     .Append(" ");
             }
 
-            builder
-                .Append("CHECK ");
+            builder.Append("CHECK ");
 
-            builder.Append("(")
-                .Append(operation.Sql)
-                .Append(")");
+            builder.Append("(").Append(operation.Sql).Append(")");
         }
 
         /// <summary>
@@ -1803,9 +2154,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void IndexTraits(
             MigrationOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
-        {
-        }
+            MigrationCommandListBuilder builder
+        ) { }
 
         /// <summary>
         ///     Generates a SQL fragment for extras (filter, included columns, options) of an index from a <see cref="CreateIndexOperation" />.
@@ -1816,13 +2166,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual void IndexOptions(
             CreateIndexOperation operation,
             IModel? model,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             if (!string.IsNullOrEmpty(operation.Filter))
             {
-                builder
-                    .Append(" WHERE ")
-                    .Append(operation.Filter);
+                builder.Append(" WHERE ").Append(operation.Filter);
             }
         }
 
@@ -1833,7 +2182,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <param name="builder"> The command builder to use to add the SQL fragment. </param>
         protected virtual void ForeignKeyAction(
             ReferentialAction referentialAction,
-            MigrationCommandListBuilder builder)
+            MigrationCommandListBuilder builder
+        )
         {
             Check.NotNull(builder, nameof(builder));
 
@@ -1854,7 +2204,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
                 default:
                     Check.DebugAssert(
                         referentialAction == ReferentialAction.NoAction,
-                        "Unexpected value: " + referentialAction);
+                        "Unexpected value: " + referentialAction
+                    );
                     break;
             }
         }
@@ -1870,9 +2221,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         protected virtual IEnumerable<IEntityType>? FindEntityTypes(
             IModel? model,
             string? schema,
-            string tableName)
-            => model?.GetRelationalModel().FindTable(Check.NotEmpty(tableName, nameof(tableName)), schema)
-                ?.EntityTypeMappings.Select(m => m.EntityType);
+            string tableName
+        ) =>
+            model?.GetRelationalModel()
+                .FindTable(
+                    Check.NotEmpty(tableName, nameof(tableName)),
+                    schema
+                )?.EntityTypeMappings.Select(m => m.EntityType);
 
         /// <summary>
         ///     <para>
@@ -1894,9 +2249,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations
             IModel? model,
             string? schema,
             string tableName,
-            string columnName)
-            => model?.GetRelationalModel().FindTable(Check.NotEmpty(tableName, nameof(tableName)), schema)
-                ?.Columns.FirstOrDefault(c => c.Name == columnName)?.PropertyMappings.First().Property;
+            string columnName
+        ) =>
+            model?.GetRelationalModel()
+                .FindTable(Check.NotEmpty(tableName, nameof(tableName)), schema)?
+                .Columns.FirstOrDefault(c => c.Name == columnName)?.PropertyMappings.First()
+                .Property;
 
         /// <summary>
         ///     Generates a SQL fragment to terminate the SQL command.
@@ -1907,7 +2265,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// </param>
         protected virtual void EndStatement(
             MigrationCommandListBuilder builder,
-            bool suppressTransaction = false)
+            bool suppressTransaction = false
+        )
         {
             Check.NotNull(builder, nameof(builder));
 
@@ -1920,8 +2279,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// </summary>
         /// <param name="columns"> The column names. </param>
         /// <returns> The column list. </returns>
-        protected virtual string ColumnList(string[] columns)
-            => string.Join(", ", columns.Select(Dependencies.SqlGenerationHelper.DelimitIdentifier));
+        protected virtual string ColumnList(string[] columns) =>
+            string.Join(", ", columns.Select(Dependencies.SqlGenerationHelper.DelimitIdentifier));
 
         /// <summary>
         ///     Checks whether or not <see cref="AddColumnOperation" /> supports the passing in the
@@ -1933,8 +2292,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         ///     <see langword="null" />, has
         ///     no version specified, or was generated by an EF Core version prior to 1.1.
         /// </returns>
-        protected virtual bool IsOldColumnSupported(IModel? model)
-            => TryGetVersion(model, out var version) && VersionComparer.Compare(version, "1.1.0") >= 0;
+        protected virtual bool IsOldColumnSupported(IModel? model) =>
+            TryGetVersion(model, out var version) && VersionComparer.Compare(version, "1.1.0") >= 0;
 
         /// <summary>
         ///     Checks whether or not <see cref="RenameTableOperation" /> and <see cref="RenameSequenceOperation" /> use
@@ -1942,8 +2301,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// </summary>
         /// <param name="model"> The target model. </param>
         /// <returns> <see langword="true" /> if the legacy behavior is used. </returns>
-        protected virtual bool HasLegacyRenameOperations(IModel? model)
-            => !TryGetVersion(model, out var version) || VersionComparer.Compare(version, "2.1.0") < 0;
+        protected virtual bool HasLegacyRenameOperations(IModel? model) =>
+            !TryGetVersion(model, out var version) || VersionComparer.Compare(version, "2.1.0") < 0;
 
         /// <summary>
         ///     Gets the product version used to generate the current migration. Providers can use this to preserve
@@ -1952,7 +2311,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations
         /// <param name="model"> The target model. </param>
         /// <param name="version"> The version. </param>
         /// <returns> <see langword="true" /> if the version could be retrieved. </returns>
-        protected virtual bool TryGetVersion([NotNullWhen(true)] IModel? model, [NotNullWhen(true)] out string? version)
+        protected virtual bool TryGetVersion(
+            [NotNullWhen(true)] IModel? model,
+            [NotNullWhen(true)] out string? version
+        )
         {
             if (!(model?.GetProductVersion() is string versionString))
             {

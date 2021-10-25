@@ -12,15 +12,20 @@ namespace RazorPagesWebSite
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => options.LoginPath = "/Login");
 
-            services.AddRazorPages(options =>
+            services.AddRazorPages(
+                options =>
                 {
                     options.Conventions.AuthorizeFolder("/Admin");
-                });
+                }
+            );
 
-            services.Configure<MvcViewOptions>(o => o.HtmlHelperOptions.ClientValidationEnabled = false);
+            services.Configure<MvcViewOptions>(
+                o => o.HtmlHelperOptions.ClientValidationEnabled = false
+            );
         }
 
         public void Configure(IApplicationBuilder app)
@@ -30,11 +35,13 @@ namespace RazorPagesWebSite
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapRazorPages();
+                }
+            );
         }
     }
 }

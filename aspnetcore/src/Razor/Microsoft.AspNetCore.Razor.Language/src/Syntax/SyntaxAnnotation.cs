@@ -29,21 +29,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
             _id = System.Threading.Interlocked.Increment(ref s_nextId);
         }
 
-        public SyntaxAnnotation(string kind)
-            : this()
+        public SyntaxAnnotation(string kind) : this()
         {
             Kind = kind;
         }
 
-        public SyntaxAnnotation(string kind, object data)
-            : this(kind)
+        public SyntaxAnnotation(string kind, object data) : this(kind)
         {
             Data = data;
         }
 
         private string GetDebuggerDisplay()
         {
-            return string.Format(CultureInfo.InvariantCulture, "Annotation: Kind='{0}' Data='{1}'", this.Kind ?? "", this.Data ?? "");
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "Annotation: Kind='{0}' Data='{1}'",
+                this.Kind ?? "",
+                this.Data ?? ""
+            );
         }
 
         public bool Equals(SyntaxAnnotation other)

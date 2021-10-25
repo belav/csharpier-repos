@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
         internal TreeRouteBuilder(
             ILoggerFactory loggerFactory,
             ObjectPool<UriBuildingContext> objectPool,
-            IInlineConstraintResolver constraintResolver)
+            IInlineConstraintResolver constraintResolver
+        )
         {
             if (loggerFactory == null)
             {
@@ -70,7 +71,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             IRouter handler,
             RouteTemplate routeTemplate,
             string routeName,
-            int order)
+            int order
+        )
         {
             if (handler == null)
             {
@@ -91,7 +93,10 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 RouteTemplate = routeTemplate,
             };
 
-            var constraintBuilder = new RouteConstraintBuilder(_constraintResolver, routeTemplate.TemplateText);
+            var constraintBuilder = new RouteConstraintBuilder(
+                _constraintResolver,
+                routeTemplate.TemplateText
+            );
             foreach (var parameter in routeTemplate.Parameters)
             {
                 if (parameter.InlineConstraints != null)
@@ -103,7 +108,10 @@ namespace Microsoft.AspNetCore.Routing.Tree
 
                     foreach (var constraint in parameter.InlineConstraints)
                     {
-                        constraintBuilder.AddResolvedConstraint(parameter.Name, constraint.Constraint);
+                        constraintBuilder.AddResolvedConstraint(
+                            parameter.Name,
+                            constraint.Constraint
+                        );
                     }
                 }
             }
@@ -137,7 +145,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
             RouteTemplate routeTemplate,
             RouteValueDictionary requiredLinkValues,
             string routeName,
-            int order)
+            int order
+        )
         {
             if (handler == null)
             {
@@ -164,7 +173,10 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 RouteTemplate = routeTemplate,
             };
 
-            var constraintBuilder = new RouteConstraintBuilder(_constraintResolver, routeTemplate.TemplateText);
+            var constraintBuilder = new RouteConstraintBuilder(
+                _constraintResolver,
+                routeTemplate.TemplateText
+            );
             foreach (var parameter in routeTemplate.Parameters)
             {
                 if (parameter.InlineConstraints != null)
@@ -176,7 +188,10 @@ namespace Microsoft.AspNetCore.Routing.Tree
 
                     foreach (var constraint in parameter.InlineConstraints)
                     {
-                        constraintBuilder.AddResolvedConstraint(parameter.Name, constraint.Constraint);
+                        constraintBuilder.AddResolvedConstraint(
+                            parameter.Name,
+                            constraint.Constraint
+                        );
                     }
                 }
             }
@@ -247,7 +262,8 @@ namespace Microsoft.AspNetCore.Routing.Tree
                 _objectPool,
                 _logger,
                 _constraintLogger,
-                version);
+                version
+            );
         }
 
         /// <summary>

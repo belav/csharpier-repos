@@ -13,17 +13,26 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Interactive
 {
-    [ExportContentTypeLanguageService(PredefinedInteractiveCommandsContentTypes.InteractiveCommandContentTypeName, InteractiveLanguageNames.InteractiveCommand), Shared]
+    [
+        ExportContentTypeLanguageService(
+            PredefinedInteractiveCommandsContentTypes.InteractiveCommandContentTypeName,
+            InteractiveLanguageNames.InteractiveCommand
+        ),
+        Shared
+    ]
     internal class InteractiveCommandContentTypeLanguageService : IContentTypeLanguageService
     {
         private readonly IContentTypeRegistryService _contentTypeRegistry;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InteractiveCommandContentTypeLanguageService(IContentTypeRegistryService contentTypeRegistry)
-            => _contentTypeRegistry = contentTypeRegistry;
+        public InteractiveCommandContentTypeLanguageService(
+            IContentTypeRegistryService contentTypeRegistry
+        ) => _contentTypeRegistry = contentTypeRegistry;
 
-        public IContentType GetDefaultContentType()
-            => _contentTypeRegistry.GetContentType(PredefinedInteractiveCommandsContentTypes.InteractiveCommandContentTypeName);
+        public IContentType GetDefaultContentType() =>
+            _contentTypeRegistry.GetContentType(
+                PredefinedInteractiveCommandsContentTypes.InteractiveCommandContentTypeName
+            );
     }
 }

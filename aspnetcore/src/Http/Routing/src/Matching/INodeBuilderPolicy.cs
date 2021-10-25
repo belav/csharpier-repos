@@ -31,6 +31,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
         /// <param name="exitDestination">The default destination for lookups.</param>
         /// <param name="edges">A list of <see cref="PolicyJumpTableEdge"/>.</param>
         /// <returns>A <see cref="PolicyJumpTable"/> instance.</returns>
-        PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges);
+        PolicyJumpTable BuildJumpTable(
+            int exitDestination,
+            IReadOnlyList<PolicyJumpTableEdge> edges
+        );
     }
 }

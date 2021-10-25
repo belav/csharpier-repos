@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public LinearSearchJumpTable(
             int defaultDestination,
             int exitDestination,
-            (string text, int destination)[] entries)
+            (string text, int destination)[] entries
+        )
         {
             _defaultDestination = defaultDestination;
             _exitDestination = exitDestination;
@@ -34,14 +35,17 @@ namespace Microsoft.AspNetCore.Routing.Matching
             for (var i = 0; i < entries.Length; i++)
             {
                 var text = entries[i].text;
-                if (segment.Length == text.Length &&
-                    string.Compare(
+                if (
+                    segment.Length == text.Length
+                    && string.Compare(
                         path,
                         segment.Start,
                         text,
                         0,
                         segment.Length,
-                        StringComparison.OrdinalIgnoreCase) == 0)
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return entries[i].destination;
                 }

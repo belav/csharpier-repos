@@ -163,7 +163,8 @@ internal class loop6
 
         while (__refvalue(temp_ref, double) != __refvalue(one_ref, float))
         {
-            __refvalue(temp_ref, double) = __refvalue(one_ref, float) + __refvalue(delta_ref, double);
+            __refvalue(temp_ref, double) =
+                __refvalue(one_ref, float) + __refvalue(delta_ref, double);
             __refvalue(delta_ref, double) = __refvalue(delta_ref, double) / 2.0F;
         }
         if ((__refvalue(delta_ref, double) - 5.551115E-17) < 1.2E-10)

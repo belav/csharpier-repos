@@ -43,20 +43,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             if (Parent == null)
             {
-                throw new InvalidOperationException(Resources.IntermediateNodeReference_NotInitialized);
+                throw new InvalidOperationException(
+                    Resources.IntermediateNodeReference_NotInitialized
+                );
             }
 
             if (Parent.Children.IsReadOnly)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+                );
             }
 
             var index = Parent.Children.IndexOf(Node);
             if (index == -1)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                    Node,
-                    Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+                );
             }
 
             Parent.Children.Insert(index + 1, node);
@@ -72,20 +76,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             if (Parent == null)
             {
-                throw new InvalidOperationException(Resources.IntermediateNodeReference_NotInitialized);
+                throw new InvalidOperationException(
+                    Resources.IntermediateNodeReference_NotInitialized
+                );
             }
 
             if (Parent.Children.IsReadOnly)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+                );
             }
 
             var index = Parent.Children.IndexOf(Node);
             if (index == -1)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                    Node,
-                    Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+                );
             }
 
             foreach (var node in nodes)
@@ -103,20 +111,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             if (Parent == null)
             {
-                throw new InvalidOperationException(Resources.IntermediateNodeReference_NotInitialized);
+                throw new InvalidOperationException(
+                    Resources.IntermediateNodeReference_NotInitialized
+                );
             }
 
             if (Parent.Children.IsReadOnly)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+                );
             }
 
             var index = Parent.Children.IndexOf(Node);
             if (index == -1)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                    Node,
-                    Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+                );
             }
 
             Parent.Children.Insert(index, node);
@@ -132,20 +144,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             if (Parent == null)
             {
-                throw new InvalidOperationException(Resources.IntermediateNodeReference_NotInitialized);
+                throw new InvalidOperationException(
+                    Resources.IntermediateNodeReference_NotInitialized
+                );
             }
 
             if (Parent.Children.IsReadOnly)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+                );
             }
 
             var index = Parent.Children.IndexOf(Node);
             if (index == -1)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                    Node,
-                    Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+                );
             }
 
             foreach (var node in nodes)
@@ -158,20 +174,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
         {
             if (Parent == null)
             {
-                throw new InvalidOperationException(Resources.IntermediateNodeReference_NotInitialized);
+                throw new InvalidOperationException(
+                    Resources.IntermediateNodeReference_NotInitialized
+                );
             }
 
             if (Parent.Children.IsReadOnly)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+                );
             }
 
             var index = Parent.Children.IndexOf(Node);
             if (index == -1)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                    Node,
-                    Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+                );
             }
 
             Parent.Children.RemoveAt(index);
@@ -186,20 +206,24 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             if (Parent == null)
             {
-                throw new InvalidOperationException(Resources.IntermediateNodeReference_NotInitialized);
+                throw new InvalidOperationException(
+                    Resources.IntermediateNodeReference_NotInitialized
+                );
             }
 
             if (Parent.Children.IsReadOnly)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_CollectionIsReadOnly(Parent)
+                );
             }
 
             var index = Parent.Children.IndexOf(Node);
             if (index == -1)
             {
-                throw new InvalidOperationException(Resources.FormatIntermediateNodeReference_NodeNotFound(
-                    Node,
-                    Parent));
+                throw new InvalidOperationException(
+                    Resources.FormatIntermediateNodeReference_NodeNotFound(Node, Parent)
+                );
             }
 
             Parent.Children[index] = node;

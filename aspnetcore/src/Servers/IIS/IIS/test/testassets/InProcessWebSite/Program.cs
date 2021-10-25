@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -55,27 +55,25 @@ namespace TestSite
                 case "EarlyReturn":
                     return 12;
                 case "HangOnStop":
+
                     {
-                        var host = new WebHostBuilder()
-                            .UseIIS()
-                            .UseStartup<Startup>()
-                            .Build();
+                        var host = new WebHostBuilder().UseIIS().UseStartup<Startup>().Build();
                         host.Run();
 
                         Thread.Sleep(Timeout.Infinite);
                     }
                     break;
                 case "IncreaseShutdownLimit":
+
                     {
                         var host = new WebHostBuilder()
-                           .UseIIS()
-                           .UseShutdownTimeout(TimeSpan.FromSeconds(120))
-                           .UseStartup<Startup>()
-                           .Build();
+                            .UseIIS()
+                            .UseShutdownTimeout(TimeSpan.FromSeconds(120))
+                            .UseStartup<Startup>()
+                            .Build();
 
                         host.Run();
                     }
-
                     break;
                 case "CheckConsoleFunctions":
                     // Call a bunch of console functions and make sure none return invalid handle.
@@ -93,12 +91,23 @@ namespace TestSite
                     Console.WriteLine(new string('a', 40000));
                     return 0;
                 case "OverriddenServer":
+
                     {
                         var host = new WebHostBuilder()
-                             .UseIIS()
-                             .ConfigureServices(services => services.AddSingleton<IServer, DummyServer>())
-                             .Configure(builder => builder.Run(async context => { await context.Response.WriteAsync("I shouldn't work"); }))
-                             .Build();
+                            .UseIIS()
+                            .ConfigureServices(
+                                services => services.AddSingleton<IServer, DummyServer>()
+                            )
+                            .Configure(
+                                builder =>
+                                    builder.Run(
+                                        async context =>
+                                        {
+                                            await context.Response.WriteAsync("I shouldn't work");
+                                        }
+                                    )
+                            )
+                            .Build();
                         host.Run();
                     }
                     break;
@@ -110,36 +119,51 @@ namespace TestSite
                     return StartServer();
 #if !FORWARDCOMPAT
                 case "DecreaseRequestLimit":
-                    {
-                        var host = new WebHostBuilder()
-                            .ConfigureLogging((_, factory) =>
+                {
+                    var host = new WebHostBuilder()
+                        .ConfigureLogging(
+                            (_, factory) =>
                             {
                                 factory.AddConsole();
-                                factory.AddFilter("Console", level => level >= LogLevel.Information);
-                            })
-                            .UseIIS()
-                            .ConfigureServices(services =>
+                                factory.AddFilter(
+                                    "Console",
+                                    level => level >= LogLevel.Information
+                                );
+                            }
+                        )
+                        .UseIIS()
+                        .ConfigureServices(
+                            services =>
                             {
-                                services.Configure<IISServerOptions>(options => options.MaxRequestBodySize = 2);
-                            })
-                            .UseStartup<Startup>()
-                            .Build();
+                                services.Configure<IISServerOptions>(
+                                    options => options.MaxRequestBodySize = 2
+                                );
+                            }
+                        )
+                        .UseStartup<Startup>()
+                        .Build();
 
-                        host.Run();
-                        break;
-                    }
+                    host.Run();
+                    break;
+                }
 #endif
                 case "ThrowInStartup":
+
                     {
                         var host = new WebHostBuilder()
-                                       .ConfigureLogging((_, factory) =>
-                                       {
-                                           factory.AddConsole();
-                                           factory.AddFilter("Console", level => level >= LogLevel.Information);
-                                       })
-                                       .UseIIS()
-                                       .UseStartup<ThrowingStartup>()
-                                       .Build();
+                            .ConfigureLogging(
+                                (_, factory) =>
+                                {
+                                    factory.AddConsole();
+                                    factory.AddFilter(
+                                        "Console",
+                                        level => level >= LogLevel.Information
+                                    );
+                                }
+                            )
+                            .UseIIS()
+                            .UseStartup<ThrowingStartup>()
+                            .Build();
 
                         host.Run();
                     }
@@ -147,43 +171,58 @@ namespace TestSite
                     return 0;
 #if !FORWARDCOMPAT
                 case "ThrowInStartupGenericHost":
-                    {
-                        var host = new HostBuilder().ConfigureWebHost((c) =>
+                {
+                    var host = new HostBuilder().ConfigureWebHost(
+                        (c) =>
                         {
-                            c.ConfigureLogging((_, factory) =>
-                            {
-                                factory.AddConsole();
-                                factory.AddFilter("Console", level => level >= LogLevel.Information);
-                            })
-                            .UseIIS()
-                            .UseStartup<ThrowingStartup>();
-                        });
-                                   
+                            c.ConfigureLogging(
+                                    (_, factory) =>
+                                    {
+                                        factory.AddConsole();
+                                        factory.AddFilter(
+                                            "Console",
+                                            level => level >= LogLevel.Information
+                                        );
+                                    }
+                                )
+                                .UseIIS()
+                                .UseStartup<ThrowingStartup>();
+                        }
+                    );
 
-                        host.Build().Run();
-                        return 0;
-                    }
+                    host.Build().Run();
+                    return 0;
+                }
                 case "AddLatin1":
-                    {
-                        AppContext.SetSwitch("Microsoft.AspNetCore.Server.IIS.Latin1RequestHeaders", isEnabled: true);
-                        var host = new HostBuilder().ConfigureWebHost((c) =>
+                {
+                    AppContext.SetSwitch(
+                        "Microsoft.AspNetCore.Server.IIS.Latin1RequestHeaders",
+                        isEnabled: true
+                    );
+                    var host = new HostBuilder().ConfigureWebHost(
+                        (c) =>
                         {
-                            c.ConfigureLogging((_, factory) =>
-                            {
-                                factory.AddConsole();
-                                factory.AddFilter("Console", level => level >= LogLevel.Information);
-                            })
-                            .UseIIS()
-                            .UseStartup<Startup>();
-                        });
+                            c.ConfigureLogging(
+                                    (_, factory) =>
+                                    {
+                                        factory.AddConsole();
+                                        factory.AddFilter(
+                                            "Console",
+                                            level => level >= LogLevel.Information
+                                        );
+                                    }
+                                )
+                                .UseIIS()
+                                .UseStartup<Startup>();
+                        }
+                    );
 
-                        host.Build().Run();
-                        return 0;
-                    }
+                    host.Build().Run();
+                    return 0;
+                }
 #endif
                 default:
                     return StartServer();
-
             }
             return 12;
         }
@@ -191,11 +230,13 @@ namespace TestSite
         private static int StartServer()
         {
             var host = new WebHostBuilder()
-                .ConfigureLogging((_, factory) =>
-                {
-                    factory.AddConsole();
-                    factory.AddFilter("Console", level => level >= LogLevel.Information);
-                })
+                .ConfigureLogging(
+                    (_, factory) =>
+                    {
+                        factory.AddConsole();
+                        factory.AddFilter("Console", level => level >= LogLevel.Information);
+                    }
+                )
                 .UseKestrel()
                 .UseIIS()
                 .UseIISIntegration()

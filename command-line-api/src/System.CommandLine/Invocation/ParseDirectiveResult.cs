@@ -20,9 +20,7 @@ namespace System.CommandLine.Invocation
         {
             var parseResult = context.ParseResult;
             context.Console.Out.WriteLine(parseResult.Diagram());
-            context.ExitCode = parseResult.Errors.Count == 0
-                                     ? 0
-                                     : _errorExitCode ?? 1;
+            context.ExitCode = parseResult.Errors.Count == 0 ? 0 : _errorExitCode ?? 1;
         }
     }
 }

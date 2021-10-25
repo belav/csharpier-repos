@@ -8,7 +8,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     internal static class IReadOnlyListExtensions
     {
-        public static bool Any<T, TArg>(this IReadOnlyList<T> list, Func<T, TArg, bool> predicate, TArg arg)
+        public static bool Any<T, TArg>(
+            this IReadOnlyList<T> list,
+            Func<T, TArg, bool> predicate,
+            TArg arg
+        )
         {
             if (list is null)
             {
@@ -31,7 +35,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             return false;
         }
 
-        public static bool All<T, TArg>(this IReadOnlyList<T> list, Func<T, TArg, bool> predicate, TArg arg)
+        public static bool All<T, TArg>(
+            this IReadOnlyList<T> list,
+            Func<T, TArg, bool> predicate,
+            TArg arg
+        )
         {
             if (list is null)
             {

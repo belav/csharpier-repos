@@ -25,7 +25,11 @@ namespace BasicWebSite.Controllers.ContentNegotiation
 
         public NormalController(ArrayPool<char> charPool)
         {
-            _indentingFormatter = new NewtonsoftJsonOutputFormatter(_indentedSettings, charPool, new MvcOptions());
+            _indentingFormatter = new NewtonsoftJsonOutputFormatter(
+                _indentedSettings,
+                charPool,
+                new MvcOptions()
+            );
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
@@ -72,11 +76,7 @@ namespace BasicWebSite.Controllers.ContentNegotiation
         [NonAction]
         public User CreateUser()
         {
-            User user = new User()
-            {
-                Name = "My name",
-                Address = "My address",
-            };
+            User user = new User() { Name = "My name", Address = "My address", };
 
             return user;
         }

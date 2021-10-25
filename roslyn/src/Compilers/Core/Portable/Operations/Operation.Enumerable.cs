@@ -90,7 +90,10 @@ namespace Microsoft.CodeAnalysis
             public bool MoveNext()
             {
                 bool result;
-                (result, _currentSlot, _currentIndex) = _operation.MoveNext(_currentSlot, _currentIndex);
+                (result, _currentSlot, _currentIndex) = _operation.MoveNext(
+                    _currentSlot,
+                    _currentIndex
+                );
                 return result;
             }
 

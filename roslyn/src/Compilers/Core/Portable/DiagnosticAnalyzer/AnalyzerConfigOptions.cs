@@ -14,9 +14,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Comparer that should be used for all analyzer config keys. This is a case-insensitive comparison based
         /// on Unicode case sensitivity rules for identifiers.
         /// </summary>
-        public static StringComparer KeyComparer { get; } = AnalyzerConfig.Section.PropertiesKeyComparer;
+        public static StringComparer KeyComparer { get; } =
+            AnalyzerConfig.Section.PropertiesKeyComparer;
 
-        internal static ImmutableDictionary<string, string> EmptyDictionary = ImmutableDictionary.Create<string, string>(KeyComparer);
+        internal static ImmutableDictionary<string, string> EmptyDictionary =
+            ImmutableDictionary.Create<string, string>(KeyComparer);
 
         /// <summary>
         /// Get an analyzer config value for the given key, using the <see cref="KeyComparer"/>.
@@ -26,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
     internal sealed class CompilerAnalyzerConfigOptions : AnalyzerConfigOptions
     {
-        public static CompilerAnalyzerConfigOptions Empty { get; } = new CompilerAnalyzerConfigOptions(EmptyDictionary);
+        public static CompilerAnalyzerConfigOptions Empty { get; } =
+            new CompilerAnalyzerConfigOptions(EmptyDictionary);
 
         private readonly ImmutableDictionary<string, string> _backing;
 
@@ -35,6 +38,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _backing = properties;
         }
 
-        public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) => _backing.TryGetValue(key, out value);
+        public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
+            _backing.TryGetValue(key, out value);
     }
 }

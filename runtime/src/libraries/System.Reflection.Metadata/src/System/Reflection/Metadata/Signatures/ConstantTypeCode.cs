@@ -14,7 +14,6 @@ namespace System.Reflection.Metadata
         // ELEMENT_TYPE_R4, ELEMENT_TYPE_R8, or ELEMENT_TYPE_STRING; or
         // ELEMENT_TYPE_CLASS with a Value of zero (Section II.23.1.16)
         Invalid = 0,
-
         Boolean = CorElementType.ELEMENT_TYPE_BOOLEAN,
         Char = CorElementType.ELEMENT_TYPE_CHAR,
         SByte = CorElementType.ELEMENT_TYPE_I1,

@@ -33,7 +33,10 @@ namespace Microsoft.AspNetCore.WebSockets.ConformanceTest.Autobahn
         public static AutobahnServerResult FromJson(JProperty prop)
         {
             var valueObj = ((JObject)prop.Value);
-            return new AutobahnServerResult(prop.Name, valueObj.Properties().Select(AutobahnCaseResult.FromJson));
+            return new AutobahnServerResult(
+                prop.Name,
+                valueObj.Properties().Select(AutobahnCaseResult.FromJson)
+            );
         }
     }
 }

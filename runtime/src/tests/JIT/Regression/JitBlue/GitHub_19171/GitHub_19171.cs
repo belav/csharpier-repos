@@ -13,7 +13,7 @@ public class GitHub_19171
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool checkResult(long result)
     {
-        return(result == g_static);
+        return (result == g_static);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

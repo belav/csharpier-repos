@@ -61,7 +61,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'HourlyRate': 150,
               'Hours': 40,
               'TaxRate': 0.125

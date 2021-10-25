@@ -11,9 +11,7 @@ namespace System.Net.Http
     {
         private sealed class ContentLengthWriteStream : HttpContentWriteStream
         {
-            public ContentLengthWriteStream(HttpConnection connection) : base(connection)
-            {
-            }
+            public ContentLengthWriteStream(HttpConnection connection) : base(connection) { }
 
             public override void Write(ReadOnlySpan<byte> buffer)
             {
@@ -27,7 +25,10 @@ namespace System.Net.Http
                 connection.Write(buffer);
             }
 
-            public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken ignored) // token ignored as it comes from SendAsync
+            public override ValueTask WriteAsync(
+                ReadOnlyMemory<byte> buffer,
+                CancellationToken ignored
+            ) // token ignored as it comes from SendAsync
             {
                 BytesWritten += buffer.Length;
 

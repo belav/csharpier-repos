@@ -32,9 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <param name="conventionSetBuilder"> The convention set to use when creating the model. </param>
         /// <returns> The model to be used. </returns>
         [Obsolete("Use the overload with IModelCreationDependencies")]
-        IModel GetModel(
-            DbContext context,
-            IConventionSetBuilder conventionSetBuilder);
+        IModel GetModel(DbContext context, IConventionSetBuilder conventionSetBuilder);
 
         /// <summary>
         ///     Gets the model to be used.
@@ -47,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         IModel GetModel(
             DbContext context,
             IConventionSetBuilder conventionSetBuilder,
-            ModelDependencies modelDependencies);
+            ModelDependencies modelDependencies
+        );
 
         /// <summary>
         ///     Gets the model to be used.
@@ -59,6 +58,7 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         IModel GetModel(
             DbContext context,
             ModelCreationDependencies modelCreationDependencies,
-            bool designTime);
+            bool designTime
+        );
     }
 }

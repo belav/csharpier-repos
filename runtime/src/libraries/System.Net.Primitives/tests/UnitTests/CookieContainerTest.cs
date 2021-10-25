@@ -22,7 +22,10 @@ namespace System.Net.Primitives.Unit.Tests
 
         private static readonly Cookie c1 = new Cookie("name1", "value", "", u1);
         private static readonly Cookie c2 = new Cookie("name2", "value", "", u1) { Secure = true };
-        private static readonly Cookie c3 = new Cookie("name3", "value", "", u1) { Port = "\"80, 90, 100, 443\"" };
+        private static readonly Cookie c3 = new Cookie("name3", "value", "", u1)
+        {
+            Port = "\"80, 90, 100, 443\""
+        };
         private static readonly Cookie c4 = new Cookie("name4", "value", "", u2);
         private static readonly Cookie c5 = new Cookie("name5", "value", "/path", u2);
         private static readonly Cookie c6 = new Cookie("name6", "value", "", "." + u3);
@@ -30,7 +33,10 @@ namespace System.Net.Primitives.Unit.Tests
         private static readonly Cookie c8 = new Cookie("name8", "value");
         private static readonly Cookie c9 = new Cookie("name9", "value");
         private static readonly Cookie c10 = new Cookie("name10", "value");
-        private static readonly Cookie c11 = new Cookie("name11", "value") { Port = "\"80, 90, 100\"" };
+        private static readonly Cookie c11 = new Cookie("name11", "value")
+        {
+            Port = "\"80, 90, 100\""
+        };
 
         private const string CookieName1 = "CookieName1";
         private const string CookieName2 = "CookieName2";
@@ -94,13 +100,29 @@ namespace System.Net.Primitives.Unit.Tests
 
         public static IEnumerable<object[]> GetCookieHeaderData()
         {
-            yield return new object[] { new Uri("http://url1.com"), "name1=value; $Version=1; name3=value; $Domain=.url1.com; $Port=\"80, 90, 100, 443\"" };
-            yield return new object[] { new Uri("https://url1.com"), "name1=value; name2=value; $Version=1; name3=value; $Domain=.url1.com; $Port=\"80, 90, 100, 443\"" };
+            yield return new object[]
+            {
+                new Uri("http://url1.com"),
+                "name1=value; $Version=1; name3=value; $Domain=.url1.com; $Port=\"80, 90, 100, 443\""
+            };
+            yield return new object[]
+            {
+                new Uri("https://url1.com"),
+                "name1=value; name2=value; $Version=1; name3=value; $Domain=.url1.com; $Port=\"80, 90, 100, 443\""
+            };
             yield return new object[] { new Uri("http://127.0.0.1"), "name4=value" };
-            yield return new object[] { new Uri("http://127.0.0.1/path"), "name5=value; name4=value" };
+            yield return new object[]
+            {
+                new Uri("http://127.0.0.1/path"),
+                "name5=value; name4=value"
+            };
             yield return new object[] { new Uri("http://url3.com"), "name6=value; name7=value" };
             yield return new object[] { u4, "name8=value; name9=value" };
-            yield return new object[] { u5, "name10=value; $Version=1; name11=value; $Port=\"80, 90, 100\"" };
+            yield return new object[]
+            {
+                u5,
+                "name10=value; $Version=1; name11=value; $Port=\"80, 90, 100\""
+            };
             yield return new object[] { u6, string.Empty };
         }
 
@@ -129,7 +151,10 @@ namespace System.Net.Primitives.Unit.Tests
                 new Cookie[]
                 {
                     new Cookie("name99", "value99"),
-                    new Cookie("name98", "value98", "/", ".uri.com") { Expires = new DateTime(2021, 6, 9, 10, 18, 14) }
+                    new Cookie("name98", "value98", "/", ".uri.com")
+                    {
+                        Expires = new DateTime(2021, 6, 9, 10, 18, 14)
+                    }
                 }
             }; // Version0
 
@@ -140,7 +165,13 @@ namespace System.Net.Primitives.Unit.Tests
                 new Cookie[]
                 {
                     new Cookie("name99", "value99"),
-                    new Cookie("name98", "value98", "/", ".uri.com") { Port = "", Version = 100, Secure = true, Comment = "comment" }
+                    new Cookie("name98", "value98", "/", ".uri.com")
+                    {
+                        Port = "",
+                        Version = 100,
+                        Secure = true,
+                        Comment = "comment"
+                    }
                 }
             }; // RFC 2109
 
@@ -151,7 +182,16 @@ namespace System.Net.Primitives.Unit.Tests
                 new Cookie[]
                 {
                     new Cookie("name99", "value99"),
-                    new Cookie("name98", "value98", "/", ".uri.com") { Port = "\"80, 90, 443\"", Version = 100, Secure = true, HttpOnly = true, Discard = true, Comment = "comment", CommentUri = new Uri("http://url.com") },
+                    new Cookie("name98", "value98", "/", ".uri.com")
+                    {
+                        Port = "\"80, 90, 443\"",
+                        Version = 100,
+                        Secure = true,
+                        HttpOnly = true,
+                        Discard = true,
+                        Comment = "comment",
+                        CommentUri = new Uri("http://url.com")
+                    },
                 }
             }; // RFC 2965
 
@@ -173,7 +213,17 @@ namespace System.Net.Primitives.Unit.Tests
                 new Cookie[]
                 {
                     new Cookie("name99", "value99"),
-                    new Cookie("name98", "value98", "/", ".uri.com") { Port = "\"80, 90, 443\"", Version = 100, Secure = true, HttpOnly = true, Discard = true, Expires = new DateTime(2021, 6, 9, 10, 18, 14), Comment = "comment", CommentUri = new Uri("http://url.com") }
+                    new Cookie("name98", "value98", "/", ".uri.com")
+                    {
+                        Port = "\"80, 90, 443\"",
+                        Version = 100,
+                        Secure = true,
+                        HttpOnly = true,
+                        Discard = true,
+                        Expires = new DateTime(2021, 6, 9, 10, 18, 14),
+                        Comment = "comment",
+                        CommentUri = new Uri("http://url.com")
+                    }
                 }
             }; // Double entries
 
@@ -181,50 +231,35 @@ namespace System.Net.Primitives.Unit.Tests
             {
                 u,
                 "name98=value98; commentURL=invalidurl",
-                new Cookie[]
-                {
-                    new Cookie("name98", "value98")
-                }
+                new Cookie[] { new Cookie("name98", "value98") }
             }; // Ignore invalid comment url
 
             yield return new object[]
             {
                 u6,
                 "name98=value98; unknown1; unknown2=unknown",
-                new Cookie[]
-                {
-                    new Cookie("name98", "value98")
-                }
+                new Cookie[] { new Cookie("name98", "value98") }
             }; // Ignore unknown tokens
 
             yield return new object[]
             {
                 u6,
                 "name98=value98; =; token=",
-                new Cookie[]
-                {
-                    new Cookie("name98", "value98")
-                }
+                new Cookie[] { new Cookie("name98", "value98") }
             }; // Ignore invalid tokens
 
             yield return new object[]
             {
                 u6,
                 "name98=\"value; domain=\".domain\"; max-age=\"400\"",
-                new Cookie[]
-                {
-                    new Cookie("name98", "\"value; domain=\"")
-                }
+                new Cookie[] { new Cookie("name98", "\"value; domain=\"") }
             }; // Use escaped values (1)
 
             yield return new object[]
             {
                 u6,
                 "name98=\"\"",
-                new Cookie[]
-                {
-                    new Cookie("name98", "\"\"")
-                }
+                new Cookie[] { new Cookie("name98", "\"\"") }
             }; // Use escaped values (2)
 
             yield return new object[]
@@ -350,10 +385,7 @@ namespace System.Net.Primitives.Unit.Tests
                 {
                     uSecure,
                     "hello world=value",
-                    new Cookie[]
-                    {
-                        new Cookie("hello world", "value"),
-                    }
+                    new Cookie[] { new Cookie("hello world", "value"), }
                 }; // Name with space in it
             }
         }
@@ -382,7 +414,10 @@ namespace System.Net.Primitives.Unit.Tests
             // Expiry can be 9999-12-31 23:59:59 UTC, but if this is converted to Local time, it might exceed DateTime.MaxValue and become invalid
             // This test ensures that the DateTime in expiry has the correct kind, thereby ensuring it was interpreted as a UTC timezone
             CookieContainer cc = new CookieContainer();
-            cc.SetCookies(new Uri("http://contoso.com/"), "set-cookie: MyKey=MyValue; expires=Fri, 31-Dec-9999 23:59:59 GMT");
+            cc.SetCookies(
+                new Uri("http://contoso.com/"),
+                "set-cookie: MyKey=MyValue; expires=Fri, 31-Dec-9999 23:59:59 GMT"
+            );
 
             var cookie = cc.GetCookies(new Uri("http://contoso.com/")).First();
 
@@ -397,7 +432,11 @@ namespace System.Net.Primitives.Unit.Tests
             const string OriginalDomain = "contoso.com";
 
             var container = new CookieContainer();
-            var cookie = new Cookie(CookieName1, CookieValue1) { Version = 1, Domain = OriginalDomain };
+            var cookie = new Cookie(CookieName1, CookieValue1)
+            {
+                Version = 1,
+                Domain = OriginalDomain
+            };
             var uri = new Uri(SchemePrefix + OriginalDomain);
             container.Add(uri, cookie);
             Assert.Equal(1, container.GetCookies(uri).Count);
@@ -478,7 +517,11 @@ namespace System.Net.Primitives.Unit.Tests
             const string OriginalDomainWithLeadingDot = "." + OriginalDomain;
 
             var container = new CookieContainer();
-            var cookie1 = new Cookie(CookieName1, CookieValue1) { Domain = OriginalDomainWithLeadingDot, Version = 1 };
+            var cookie1 = new Cookie(CookieName1, CookieValue1)
+            {
+                Domain = OriginalDomainWithLeadingDot,
+                Version = 1
+            };
             container.Add(new Uri(SchemePrefix + OriginalDomain), cookie1);
 
             var uri = new Uri(SchemePrefix + OriginalDomain);
@@ -622,10 +665,15 @@ namespace System.Net.Primitives.Unit.Tests
         {
             CookieContainer cc = new CookieContainer();
             Assert.Throws<ArgumentNullException>(() => cc.Add((Cookie)null)); // Null cookie
-            AssertExtensions.Throws<ArgumentException>("cookie", () => cc.Add(new Cookie("name", "value", "", ""))); // Empty domain
+            AssertExtensions.Throws<ArgumentException>(
+                "cookie",
+                () => cc.Add(new Cookie("name", "value", "", ""))
+            ); // Empty domain
 
             cc.MaxCookieSize = 1;
-            Assert.Throws<CookieException>(() => cc.Add(new Cookie("name", "long-text", "", "contoso.com"))); // Value.Length > MaxCookieSize
+            Assert.Throws<CookieException>(
+                () => cc.Add(new Cookie("name", "long-text", "", "contoso.com"))
+            ); // Value.Length > MaxCookieSize
         }
 
         [Fact]
@@ -652,11 +700,17 @@ namespace System.Net.Primitives.Unit.Tests
         [Fact]
         public void Ctor_CapacityPerDomainCapacityMaxCookieSize_Invalid()
         {
-            AssertExtensions.Throws<ArgumentException>("capacity", () => new CookieContainer(0, 10, 5)); // Capacity <= 0
+            AssertExtensions.Throws<ArgumentException>(
+                "capacity",
+                () => new CookieContainer(0, 10, 5)
+            ); // Capacity <= 0
             Assert.Throws<ArgumentOutOfRangeException>(() => new CookieContainer(5, 0, 5)); // Per domain capacity <= 0
             Assert.Throws<ArgumentOutOfRangeException>(() => new CookieContainer(5, 10, 5)); // Per domain capacity > Capacity
 
-            AssertExtensions.Throws<ArgumentException>("maxCookieSize", () => new CookieContainer(15, 10, 0)); // Max cookie size <= 0
+            AssertExtensions.Throws<ArgumentException>(
+                "maxCookieSize",
+                () => new CookieContainer(15, 10, 0)
+            ); // Max cookie size <= 0
         }
 
         [Fact]
@@ -737,9 +791,15 @@ namespace System.Net.Primitives.Unit.Tests
             yield return new[] { new Cookie(DefaultName, DefaultValue, DefaultPath, "\u041F.com") }; // Invalid domain
 
             yield return new[] { new Cookie(DefaultName, DefaultValue, DefaultPath, "domain") }; // Plain cookie, explicit domain without version doesn't start with '.'
-            yield return new[] { new Cookie(DefaultName, DefaultValue, DefaultPath, "domain") { Version = 100 } }; // Rfc2965 cookie, explicit domain with version doesn't start with '.'
+            yield return new[]
+            {
+                new Cookie(DefaultName, DefaultValue, DefaultPath, "domain") { Version = 100 }
+            }; // Rfc2965 cookie, explicit domain with version doesn't start with '.'
 
-            yield return new[] { new Cookie(DefaultName, DefaultValue, DefaultPath, DefaultDomain) { Comment = ";" } }; // Comment contains reserved characters
+            yield return new[]
+            {
+                new Cookie(DefaultName, DefaultValue, DefaultPath, DefaultDomain) { Comment = ";" }
+            }; // Comment contains reserved characters
         }
 
         [Theory]
@@ -818,11 +878,17 @@ namespace System.Net.Primitives.Unit.Tests
 
         [Theory]
         [MemberData(nameof(DomainCheckIgnoresVersionData))]
-        public void SetCookies_DomainCheckSuccess_IgnoresVersion(string url, string domain, int? version)
+        public void SetCookies_DomainCheckSuccess_IgnoresVersion(
+            string url,
+            string domain,
+            int? version
+        )
         {
             var uri = new Uri(url);
 
-            string cookie = $"my_cookie=my_value; Domain={domain}" + (version != null ? $"; Version = {version}" : "");
+            string cookie =
+                $"my_cookie=my_value; Domain={domain}"
+                + (version != null ? $"; Version = {version}" : "");
             CookieContainer container = new CookieContainer();
 
             container.SetCookies(uri, cookie);
@@ -868,19 +934,25 @@ namespace System.Net.Primitives.Unit.Tests
 
         // Test default-path calculation as defined in
         // https://tools.ietf.org/html/rfc6265#section-5.1.4
-        public static readonly TheoryData<string, string> DefaultPathData = new TheoryData<string, string>()
+        public static readonly TheoryData<string, string> DefaultPathData = new TheoryData<
+            string,
+            string
+        >()
         {
-            {"http://url1.com", "/"},
-            {"http://url1.com/abc", "/"},
-            {"http://url1.com/abc/xy", "/abc"},
-            {"http://url1.com/abc/xy/foo", "/abc/xy"},
-            {"http://127.0.0.1", "/"},
-            {"http://127.0.0.1/a/s/d/f", "/a/s/d"},
+            { "http://url1.com", "/" },
+            { "http://url1.com/abc", "/" },
+            { "http://url1.com/abc/xy", "/abc" },
+            { "http://url1.com/abc/xy/foo", "/abc/xy" },
+            { "http://127.0.0.1", "/" },
+            { "http://127.0.0.1/a/s/d/f", "/a/s/d" },
         };
 
         [Theory]
         [MemberData(nameof(DefaultPathData))]
-        public void GetCookies_DefaultPathCalculationFollowsRfc6265(string uriString, string expectedPath)
+        public void GetCookies_DefaultPathCalculationFollowsRfc6265(
+            string uriString,
+            string expectedPath
+        )
         {
             Cookie cookie = new Cookie("n", "v");
             Uri uri = new Uri(uriString);
@@ -894,32 +966,41 @@ namespace System.Net.Primitives.Unit.Tests
 
         // Test path-match as defined in
         // https://tools.ietf.org/html/rfc6265#section-5.1.4
-        public static readonly TheoryData<bool, string[], string, int> PathMatchData = new TheoryData<bool, string[], string, int>
-        {
-            {false, new [] {"/"}, "/", 1},
-            {false, new [] {"/asd/fg/hjk/l", "/x"}, "/asd/fg/hjk/l", 1},
-            {false, new [] {"/a", "/x"}, "/a/hello", 1},
-            {false, new [] {"/a/foo", "/a/lol"}, "/a/foo/1/2/3", 1},
-            {false, new [] {"/a/", "/x"}, "/a/hello", 1},
-            {false, new [] {"", "/x"}, "/y", 1},
-            {false, new [] {"//"}, "/", 0},
-            {false, new [] {"//"}, "//", 1},
-            {false, new [] {"", "/", "//", "///"}, "///", 4},
-
-            // Should not match the second half of the criteria:
-            // "The cookie-path is a prefix of the request-path, and the first
-            // character of the request-path that is not included in the cookie-
-            // path is a %x2F ("/") character."
-            {false, new [] {"/a/foo", "/x"}, "/a/foo123", 0},
-
-            {true, new [] {"/"}, "/", 1},
-            {true, new [] {"/a/b", "/a/c", "/x/y"}, "/a/hello", 2},
-            {true, new [] {"/a/foo/b", "/a/foo/c", "/a/foo/42", "/a/lol/42"}, "/a/foo/hello", 3},
-        };
+        public static readonly TheoryData<bool, string[], string, int> PathMatchData =
+            new TheoryData<bool, string[], string, int>
+            {
+                { false, new[] { "/" }, "/", 1 },
+                { false, new[] { "/asd/fg/hjk/l", "/x" }, "/asd/fg/hjk/l", 1 },
+                { false, new[] { "/a", "/x" }, "/a/hello", 1 },
+                { false, new[] { "/a/foo", "/a/lol" }, "/a/foo/1/2/3", 1 },
+                { false, new[] { "/a/", "/x" }, "/a/hello", 1 },
+                { false, new[] { "", "/x" }, "/y", 1 },
+                { false, new[] { "//" }, "/", 0 },
+                { false, new[] { "//" }, "//", 1 },
+                { false, new[] { "", "/", "//", "///" }, "///", 4 },
+                // Should not match the second half of the criteria:
+                // "The cookie-path is a prefix of the request-path, and the first
+                // character of the request-path that is not included in the cookie-
+                // path is a %x2F ("/") character."
+                { false, new[] { "/a/foo", "/x" }, "/a/foo123", 0 },
+                { true, new[] { "/" }, "/", 1 },
+                { true, new[] { "/a/b", "/a/c", "/x/y" }, "/a/hello", 2 },
+                {
+                    true,
+                    new[] { "/a/foo/b", "/a/foo/c", "/a/foo/42", "/a/lol/42" },
+                    "/a/foo/hello",
+                    3
+                },
+            };
 
         [Theory]
         [MemberData(nameof(PathMatchData))]
-        public void GetCookies_PathMatchingFollowsRfc6265(bool useDefaultPath, string[] cookiePaths, string requestPath, int expectedMatches)
+        public void GetCookies_PathMatchingFollowsRfc6265(
+            bool useDefaultPath,
+            string[] cookiePaths,
+            string requestPath,
+            int expectedMatches
+        )
         {
             CookieContainer container = new CookieContainer();
 
@@ -928,11 +1009,17 @@ namespace System.Net.Primitives.Unit.Tests
             {
                 if (useDefaultPath)
                 {
-                    container.Add(new Uri("http://test.com" + cookiePath), new Cookie($"c{i}", "value"));
+                    container.Add(
+                        new Uri("http://test.com" + cookiePath),
+                        new Cookie($"c{i}", "value")
+                    );
                 }
                 else
                 {
-                    container.Add(new Uri("http://test.com"), new Cookie($"c{i}", "value", cookiePath));
+                    container.Add(
+                        new Uri("http://test.com"),
+                        new Cookie($"c{i}", "value", cookiePath)
+                    );
                 }
                 i++;
             }

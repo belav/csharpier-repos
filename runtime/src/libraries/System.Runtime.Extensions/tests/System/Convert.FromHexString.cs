@@ -13,7 +13,7 @@ namespace System.Tests
         [InlineData("000102FDfeFF")]
         public static void KnownByteSequence(string value)
         {
-            byte[] knownSequence = {0x00, 0x01, 0x02, 0xFD, 0xFE, 0xFF};
+            byte[] knownSequence = { 0x00, 0x01, 0x02, 0xFD, 0xFE, 0xFF };
             TestSequence(knownSequence, value);
         }
 

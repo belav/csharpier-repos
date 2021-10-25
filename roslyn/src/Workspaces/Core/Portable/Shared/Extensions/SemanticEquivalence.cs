@@ -13,15 +13,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class SemanticEquivalence
     {
-        public static bool AreEquivalent(SemanticModel semanticModel, SyntaxNode node1, SyntaxNode node2)
-            => AreEquivalent(semanticModel, semanticModel, node1, node2);
+        public static bool AreEquivalent(
+            SemanticModel semanticModel,
+            SyntaxNode node1,
+            SyntaxNode node2
+        ) => AreEquivalent(semanticModel, semanticModel, node1, node2);
 
         public static bool AreEquivalent(
             SemanticModel semanticModel1,
             SemanticModel semanticModel2,
             SyntaxNode node1,
             SyntaxNode node2,
-            Func<SyntaxNode, bool> predicate = null)
+            Func<SyntaxNode, bool> predicate = null
+        )
         {
             // First check for syntactic equivalency.  If two nodes aren't structurally equivalent,
             // then they're not semantically equivalent.
@@ -43,7 +47,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // From this point on we can assume the tree structure is the same.  So no need to check
             // kinds, child counts or token contents.
             return AreSemanticallyEquivalentWorker(
-                semanticModel1, semanticModel2, node1, node2, predicate);
+                semanticModel1,
+                semanticModel2,
+                node1,
+                node2,
+                predicate
+            );
         }
 
         private static bool AreSemanticallyEquivalentWorker(
@@ -51,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SemanticModel semanticModel2,
             SyntaxNode node1,
             SyntaxNode node2,
-            Func<SyntaxNode, bool> predicate)
+            Func<SyntaxNode, bool> predicate
+        )
         {
             if (node1 == node2)
             {
@@ -89,7 +99,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 if (c1.IsNode && c2.IsNode)
                 {
-                    if (!AreSemanticallyEquivalentWorker(semanticModel1, semanticModel2, c1.AsNode(), c2.AsNode(), predicate))
+                    if (
+                        !AreSemanticallyEquivalentWorker(
+                            semanticModel1,
+                            semanticModel2,
+                            c1.AsNode(),
+                            c2.AsNode(),
+                            predicate
+                        )
+                    )
                     {
                         return false;
                     }
@@ -101,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SemanticModel semanticModel1,
             SemanticModel semanticModel2,
             SymbolInfo info1,
-            SymbolInfo info2)
+            SymbolInfo info2
+        )
         {
             if (semanticModel1 == semanticModel2)
             {

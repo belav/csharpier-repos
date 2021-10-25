@@ -25,16 +25,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal partial class Editor_InProc
     {
-        public string GetSelectedNavBarItem(int comboBoxIndex)
-            => ExecuteOnActiveView(v => GetNavigationBarComboBoxes(v)[comboBoxIndex].SelectedItem?.ToString());
+        public string GetSelectedNavBarItem(int comboBoxIndex) =>
+            ExecuteOnActiveView(
+                v => GetNavigationBarComboBoxes(v)[comboBoxIndex].SelectedItem?.ToString()
+            );
 
-        public string[] GetNavBarItems(int comboBoxIndex)
-            => ExecuteOnActiveView(v =>
-                GetNavigationBarComboBoxes(v)[comboBoxIndex]
-                .Items
-                .OfType<object>()
-                .Select(i => i?.ToString() ?? "")
-                .ToArray());
+        public string[] GetNavBarItems(int comboBoxIndex) =>
+            ExecuteOnActiveView(
+                v =>
+                    GetNavigationBarComboBoxes(v)[comboBoxIndex].Items
+                        .OfType<object>()
+                        .Select(i => i?.ToString() ?? "")
+                        .ToArray()
+            );
 
         public int GetNavbarItemIndex(int index, string itemText)
         {
@@ -56,12 +59,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void ExpandNavigationBar(int index)
         {
-            ExecuteOnActiveView(v =>
-            {
-                var combobox = GetNavigationBarComboBoxes(v)[index];
-                FocusManager.SetFocusedElement(FocusManager.GetFocusScope(combobox), combobox);
-                combobox.IsDropDownOpen = true;
-            });
+            ExecuteOnActiveView(
+                v =>
+                {
+                    var combobox = GetNavigationBarComboBoxes(v)[index];
+                    FocusManager.SetFocusedElement(FocusManager.GetFocusScope(combobox), combobox);
+                    combobox.IsDropDownOpen = true;
+                }
+            );
         }
 
         public void SelectNavBarItem(int comboboxIndex, string selection)
@@ -82,8 +87,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             _sendKeys.Send(VirtualKey.Enter);
         }
 
-        public bool IsNavBarEnabled()
-            => ExecuteOnActiveView(v => GetNavbar(v) != null);
+        public bool IsNavBarEnabled() => ExecuteOnActiveView(v => GetNavbar(v) != null);
 
         private List<ComboBox> GetNavigationBarComboBoxes(IWpfTextView textView)
         {
@@ -95,7 +99,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private static UIElement GetNavbar(IWpfTextView textView)
         {
             // Visual Studio 2019
-            var editorAdaptersFactoryService = GetComponentModelService<IVsEditorAdaptersFactoryService>();
+            var editorAdaptersFactoryService =
+                GetComponentModelService<IVsEditorAdaptersFactoryService>();
             var viewAdapter = editorAdaptersFactoryService.GetViewAdapter(textView);
 
             // Make sure we have the top pane
@@ -168,7 +173,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             var guidService = typeof(SVsWindowFrame).GUID;
             riid = typeof(IVsWindowFrame).GUID;
-            if (ErrorHandler.Failed(oleServiceProvider.QueryService(ref guidService, ref riid, out var ppvObject)) || ppvObject == IntPtr.Zero)
+            if (
+                ErrorHandler.Failed(
+                    oleServiceProvider.QueryService(ref guidService, ref riid, out var ppvObject)
+                )
+                || ppvObject == IntPtr.Zero
+            )
             {
                 return null;
             }
@@ -184,7 +194,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
 
             riid = typeof(IVsCodeWindow).GUID;
-            if (ErrorHandler.Failed(frame.QueryViewInterface(ref riid, out ppvObject)) || ppvObject == IntPtr.Zero)
+            if (
+                ErrorHandler.Failed(frame.QueryViewInterface(ref riid, out ppvObject))
+                || ppvObject == IntPtr.Zero
+            )
             {
                 return null;
             }

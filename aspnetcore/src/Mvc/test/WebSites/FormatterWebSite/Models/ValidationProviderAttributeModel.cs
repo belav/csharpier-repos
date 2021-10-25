@@ -16,7 +16,7 @@ namespace FormatterWebSite
         [LastName]
         public string LastName { get; set; }
     }
-    
+
     public class FirstNameAttribute : ValidationProviderAttribute
     {
         public override IEnumerable<ValidationAttribute> GetValidationAttributes()
@@ -34,10 +34,7 @@ namespace FormatterWebSite
     {
         public override IEnumerable<ValidationAttribute> GetValidationAttributes()
         {
-            return new List<ValidationAttribute>
-            {
-                new RequiredAttribute()
-            };
+            return new List<ValidationAttribute> { new RequiredAttribute() };
         }
     }
 }

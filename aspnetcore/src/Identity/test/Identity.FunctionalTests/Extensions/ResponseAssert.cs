@@ -27,7 +27,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal("text/html", response.Content.Headers.ContentType.MediaType);
             var content = await response.Content.ReadAsStringAsync();
-            var document = await BrowsingContext.New()
+            var document = await BrowsingContext
+                .New()
                 .OpenAsync(ResponseFactory, CancellationToken.None);
             return Assert.IsAssignableFrom<IHtmlDocument>(document);
 
@@ -42,7 +43,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests
 
                 htmlResponse.Content(content);
 
-                void MapHeaders(HttpHeaders headers){
+                void MapHeaders(HttpHeaders headers)
+                {
                     foreach (var header in headers)
                     {
                         foreach (var value in header.Value)

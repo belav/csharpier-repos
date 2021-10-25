@@ -6,17 +6,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     internal enum MethodKindEnum
     {
         None = 0,
-        Constructor = 1,              // Ctor or static ctor
+        Constructor = 1, // Ctor or static ctor
         Destructor = 2,
         PropAccessor = 3,
         EventAccessor = 4,
-        ExplicitConv = 5,      // Explicit user defined conversion
-        ImplicitConv = 6,      // Implicit user defined conversion
+        ExplicitConv = 5, // Explicit user defined conversion
+        ImplicitConv = 6, // Implicit user defined conversion
         Anonymous = 7,
         // delegates
-        Invoke = 8,            // Invoke method of a delegate type
-        BeginInvoke = 9,       // BeginInvoke method of a delegate type
-        EndInvoke = 10,        // EndInvoke method of a delegate type
+        Invoke = 8, // Invoke method of a delegate type
+        BeginInvoke = 9, // BeginInvoke method of a delegate type
+        EndInvoke = 10, // EndInvoke method of a delegate type
         // AnonymousTypes
         AnonymousTypeToString = 11,
         AnonymousTypeEquals = 12,

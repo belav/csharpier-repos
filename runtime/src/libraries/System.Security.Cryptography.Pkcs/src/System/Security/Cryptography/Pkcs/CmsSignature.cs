@@ -12,8 +12,10 @@ namespace System.Security.Cryptography.Pkcs
 {
     internal abstract partial class CmsSignature
     {
-        private static readonly Dictionary<string, CmsSignature> s_lookup =
-            new Dictionary<string, CmsSignature>();
+        private static readonly Dictionary<string, CmsSignature> s_lookup = new Dictionary<
+            string,
+            CmsSignature
+        >();
 
         static CmsSignature()
         {
@@ -39,7 +41,8 @@ namespace System.Security.Cryptography.Pkcs
             string? digestAlgorithmOid,
             HashAlgorithmName digestAlgorithmName,
             ReadOnlyMemory<byte>? signatureParameters,
-            X509Certificate2 certificate);
+            X509Certificate2 certificate
+        );
 
         protected abstract bool Sign(
 #if NETCOREAPP || NETSTANDARD2_1
@@ -52,9 +55,13 @@ namespace System.Security.Cryptography.Pkcs
             AsymmetricAlgorithm? key,
             bool silent,
             [NotNullWhen(true)] out string? signatureAlgorithm,
-            [NotNullWhen(true)] out byte[]? signatureValue);
+            [NotNullWhen(true)] out byte[]? signatureValue
+        );
 
-        internal static CmsSignature? ResolveAndVerifyKeyType(string signatureAlgorithmOid, AsymmetricAlgorithm? key)
+        internal static CmsSignature? ResolveAndVerifyKeyType(
+            string signatureAlgorithmOid,
+            AsymmetricAlgorithm? key
+        )
         {
             if (s_lookup.TryGetValue(signatureAlgorithmOid, out CmsSignature? processor))
             {
@@ -80,7 +87,8 @@ namespace System.Security.Cryptography.Pkcs
             AsymmetricAlgorithm? key,
             bool silent,
             out string? oid,
-            out ReadOnlyMemory<byte> signatureValue)
+            out ReadOnlyMemory<byte> signatureValue
+        )
         {
             CmsSignature? processor = ResolveAndVerifyKeyType(certificate.GetKeyAlgorithm(), key);
 
@@ -91,7 +99,15 @@ namespace System.Security.Cryptography.Pkcs
                 return false;
             }
 
-            bool signed = processor.Sign(dataHash, hashAlgorithmName, certificate, key, silent, out oid, out byte[]? signature);
+            bool signed = processor.Sign(
+                dataHash,
+                hashAlgorithmName,
+                certificate,
+                key,
+                silent,
+                out oid,
+                out byte[]? signature
+            );
 
             signatureValue = signature;
             return signed;
@@ -99,13 +115,15 @@ namespace System.Security.Cryptography.Pkcs
 
         private static bool DsaDerToIeee(
             ReadOnlyMemory<byte> derSignature,
-            Span<byte> ieeeSignature)
+            Span<byte> ieeeSignature
+        )
         {
             int fieldSize = ieeeSignature.Length / 2;
 
             Debug.Assert(
                 fieldSize * 2 == ieeeSignature.Length,
-                $"ieeeSignature.Length ({ieeeSignature.Length}) must be even");
+                $"ieeeSignature.Length ({ieeeSignature.Length}) must be even"
+            );
 
             try
             {
@@ -164,7 +182,8 @@ namespace System.Security.Cryptography.Pkcs
 
             Debug.Assert(
                 fieldSize * 2 == ieeeSignature.Length,
-                $"ieeeSignature.Length ({ieeeSignature.Length}) must be even");
+                $"ieeeSignature.Length ({ieeeSignature.Length}) must be even"
+            );
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             {
@@ -175,7 +194,8 @@ namespace System.Security.Cryptography.Pkcs
                 BigInteger val = new BigInteger(
                     ieeeSignature.Slice(0, fieldSize),
                     isUnsigned: true,
-                    isBigEndian: true);
+                    isBigEndian: true
+                );
 
                 writer.WriteInteger(val);
 
@@ -183,7 +203,8 @@ namespace System.Security.Cryptography.Pkcs
                 val = new BigInteger(
                     ieeeSignature.Slice(fieldSize, fieldSize),
                     isUnsigned: true,
-                    isBigEndian: true);
+                    isBigEndian: true
+                );
 
                 writer.WriteInteger(val);
 #else

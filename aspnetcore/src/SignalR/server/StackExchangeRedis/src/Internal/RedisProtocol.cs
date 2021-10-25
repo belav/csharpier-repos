@@ -37,7 +37,11 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
         public byte[] WriteInvocation(string methodName, object?[] args) =>
             WriteInvocation(methodName, args, excludedConnectionIds: null);
 
-        public byte[] WriteInvocation(string methodName, object?[] args, IReadOnlyList<string>? excludedConnectionIds)
+        public byte[] WriteInvocation(
+            string methodName,
+            object?[] args,
+            IReadOnlyList<string>? excludedConnectionIds
+        )
         {
             // Written as a MessagePack 'arr' containing at least these items:
             // * A MessagePack 'arr' of 'str's representing the excluded ids
@@ -191,7 +195,10 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             {
                 writer.Write(serializedMessage.ProtocolName);
 
-                var isArray = MemoryMarshal.TryGetArray(serializedMessage.Serialized, out var array);
+                var isArray = MemoryMarshal.TryGetArray(
+                    serializedMessage.Serialized,
+                    out var array
+                );
                 Debug.Assert(isArray);
                 writer.Write(array);
             }
@@ -212,7 +219,11 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             return new SerializedHubMessage(serializations);
         }
 
-        private static void ValidateArraySize(ref MessagePackReader reader, int expectedLength, string messageType)
+        private static void ValidateArraySize(
+            ref MessagePackReader reader,
+            int expectedLength,
+            string messageType
+        )
         {
             var length = reader.ReadArrayHeader();
 

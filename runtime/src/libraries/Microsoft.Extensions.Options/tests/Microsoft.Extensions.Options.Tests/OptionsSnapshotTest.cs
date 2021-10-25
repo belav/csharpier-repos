@@ -10,7 +10,11 @@ using Xunit;
 
 namespace Microsoft.Extensions.Options.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/49568",
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsMacOsAppleSilicon)
+    )]
     public class OptionsSnapshotTest
     {
         [Fact]
@@ -44,7 +48,6 @@ namespace Microsoft.Extensions.Options.Tests
                 options.Message += _test.SetupInvokeCount;
             }
         }
-
 
         public class FakeSource : IOptionsChangeTokenSource<FakeOptions>
         {
@@ -95,7 +98,9 @@ namespace Microsoft.Extensions.Options.Tests
             // Snapshot only updated once per scope
             using (var scope = sp.CreateScope())
             {
-                var snapshot = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>();
+                var snapshot = scope.ServiceProvider.GetRequiredService<
+                    IOptionsSnapshot<FakeOptions>
+                >();
                 Assert.Equal("1", snapshot.Value.Message);
                 config.Reload();
                 Assert.Equal("1", snapshot.Value.Message);
@@ -103,7 +108,9 @@ namespace Microsoft.Extensions.Options.Tests
 
             using (var scope = sp.CreateScope())
             {
-                var snapshot = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>();
+                var snapshot = scope.ServiceProvider.GetRequiredService<
+                    IOptionsSnapshot<FakeOptions>
+                >();
                 Assert.Equal("2", snapshot.Value.Message);
                 config.Reload();
                 Assert.Equal("2", snapshot.Value.Message);
@@ -128,7 +135,6 @@ namespace Microsoft.Extensions.Options.Tests
             public void Configure(FakeOptions options) => Configure(Options.DefaultName, options);
         }
 
-
         [Fact]
         public void SnapshotOptionsAreCachedPerScope()
         {
@@ -143,20 +149,34 @@ namespace Microsoft.Extensions.Options.Tests
             FakeOptions namedOne = null;
             using (var scope = factory.CreateScope())
             {
-                options = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Value;
-                Assert.Equal(options, scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Value);
+                options =
+                    scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Value;
+                Assert.Equal(
+                    options,
+                    scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Value
+                );
                 Assert.Equal(1, TestConfigure.ConfigureCount);
-                namedOne = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Get("1");
-                Assert.Equal(namedOne, scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Get("1"));
+                namedOne = scope.ServiceProvider
+                    .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
+                    .Get("1");
+                Assert.Equal(
+                    namedOne,
+                    scope.ServiceProvider
+                        .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
+                        .Get("1")
+                );
                 Assert.Equal(2, TestConfigure.ConfigureCount);
             }
             Assert.Equal(1, TestConfigure.CtorCount);
             using (var scope = factory.CreateScope())
             {
-                var options2 = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Value;
+                var options2 =
+                    scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Value;
                 Assert.NotEqual(options, options2);
                 Assert.Equal(3, TestConfigure.ConfigureCount);
-                var namedOne2 = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<FakeOptions>>().Get("1");
+                var namedOne2 = scope.ServiceProvider
+                    .GetRequiredService<IOptionsSnapshot<FakeOptions>>()
+                    .Get("1");
                 Assert.NotEqual(namedOne2, namedOne);
                 Assert.Equal(4, TestConfigure.ConfigureCount);
             }
@@ -196,9 +216,17 @@ namespace Microsoft.Extensions.Options.Tests
             CheckLifetime(services, typeof(IOptionsFactory<>), ServiceLifetime.Transient);
         }
 
-        private void CheckLifetime(IServiceCollection services, Type serviceType, ServiceLifetime lifetime)
+        private void CheckLifetime(
+            IServiceCollection services,
+            Type serviceType,
+            ServiceLifetime lifetime
+        )
         {
-            Assert.NotNull(services.Where(s => s.ServiceType == serviceType && s.Lifetime == lifetime).SingleOrDefault());
+            Assert.NotNull(
+                services
+                    .Where(s => s.ServiceType == serviceType && s.Lifetime == lifetime)
+                    .SingleOrDefault()
+            );
         }
     }
 }

@@ -34,7 +34,10 @@ namespace Microsoft.AspNetCore.Builder
         /// <param name="app">The <see cref="IApplicationBuilder"/> to register the middleware with.</param>
         /// <param name="options">An action to set the options for the middleware.</param>
         /// <returns>The same <see cref="IApplicationBuilder"/> instance so that multiple calls can be chained.</returns>
-        public static IApplicationBuilder UseMigrationsEndPoint(this IApplicationBuilder app, MigrationsEndPointOptions options)
+        public static IApplicationBuilder UseMigrationsEndPoint(
+            this IApplicationBuilder app,
+            MigrationsEndPointOptions options
+        )
         {
             if (app == null)
             {

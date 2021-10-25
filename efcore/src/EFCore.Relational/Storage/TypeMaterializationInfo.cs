@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             Type modelClrType,
             IProperty? property,
             RelationalTypeMapping mapping,
-            bool? nullable = null)
+            bool? nullable = null
+        )
         {
             Check.NotNull(modelClrType, nameof(modelClrType));
 
@@ -78,27 +79,28 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="other"> The object to compare with the current object. </param>
         /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
-        protected virtual bool Equals(TypeMaterializationInfo other)
-            => ProviderClrType == other.ProviderClrType
-                && ModelClrType == other.ModelClrType
-                && Equals(Mapping, other.Mapping)
-                && Equals(Property, other.Property)
+        protected virtual bool Equals(TypeMaterializationInfo other) =>
+            ProviderClrType == other.ProviderClrType
+            && ModelClrType == other.ModelClrType
+            && Equals(Mapping, other.Mapping)
+            && Equals(Property, other.Property)
 #pragma warning disable CS0612 // Type or member is obsolete
-                && Index == other.Index
-                && IsFromLeftOuterJoin == other.IsFromLeftOuterJoin
+            && Index == other.Index
+            && IsFromLeftOuterJoin == other.IsFromLeftOuterJoin
 #pragma warning restore CS0612 // Type or member is obsolete
-                && IsNullable == other.IsNullable;
+            && IsNullable == other.IsNullable;
 
         /// <summary>
         ///     Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj"> The object to compare with the current object. </param>
         /// <returns> <see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />. </returns>
-        public override bool Equals(object? obj)
-            => !(obj is null)
-                && (ReferenceEquals(this, obj)
-                    || obj.GetType() == GetType()
-                    && Equals((TypeMaterializationInfo)obj));
+        public override bool Equals(object? obj) =>
+            !(obj is null)
+            && (
+                ReferenceEquals(this, obj)
+                || obj.GetType() == GetType() && Equals((TypeMaterializationInfo)obj)
+            );
 
         /// <summary>
         ///     Serves as the default hash function.
@@ -106,7 +108,16 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> A hash code for the current object. </returns>
         public override int GetHashCode()
 #pragma warning disable CS0612 // Type or member is obsolete
-            => HashCode.Combine(ProviderClrType, ModelClrType, Mapping, Property, Index, IsFromLeftOuterJoin, IsNullable);
+            =>
+            HashCode.Combine(
+                ProviderClrType,
+                ModelClrType,
+                Mapping,
+                Property,
+                Index,
+                IsFromLeftOuterJoin,
+                IsNullable
+            );
 #pragma warning restore CS0612 // Type or member is obsolete
     }
 }

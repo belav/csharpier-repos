@@ -16,13 +16,18 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
             command.Description = "Lists all the application secrets";
             command.HelpOption();
 
-            var optJson = command.Option("--json", "Use json output. JSON is wrapped by '//BEGIN' and '//END'",
-                CommandOptionType.NoValue);
+            var optJson = command.Option(
+                "--json",
+                "Use json output. JSON is wrapped by '//BEGIN' and '//END'",
+                CommandOptionType.NoValue
+            );
 
-            command.OnExecute(() =>
-            {
-                options.Command = new ListCommand(optJson.HasValue());
-            });
+            command.OnExecute(
+                () =>
+                {
+                    options.Command = new ListCommand(optJson.HasValue());
+                }
+            );
         }
 
         public ListCommand(bool jsonOutput)
@@ -46,7 +51,9 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
             {
                 foreach (var secret in context.SecretStore.AsEnumerable())
                 {
-                    context.Reporter.Output(Resources.FormatMessage_Secret_Value_Format(secret.Key, secret.Value));
+                    context.Reporter.Output(
+                        Resources.FormatMessage_Secret_Value_Format(secret.Key, secret.Value)
+                    );
                 }
             }
         }
@@ -54,7 +61,7 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal
         private void ReportJson(CommandContext context)
         {
             var jObject = new JObject();
-            foreach(var item in context.SecretStore.AsEnumerable())
+            foreach (var item in context.SecretStore.AsEnumerable())
             {
                 jObject[item.Key] = item.Value;
             }

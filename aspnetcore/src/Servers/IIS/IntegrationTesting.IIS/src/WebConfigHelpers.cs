@@ -9,9 +9,13 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS
 {
     public static class WebConfigHelpers
     {
-        public static Action<XElement, string> AddOrModifyAspNetCoreSection(string key, string value)
+        public static Action<XElement, string> AddOrModifyAspNetCoreSection(
+            string key,
+            string value
+        )
         {
-            return (element, _) => {
+            return (element, _) =>
+            {
                 element
                     .Descendants("system.webServer")
                     .Single()

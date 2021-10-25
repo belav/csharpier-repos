@@ -16,7 +16,8 @@ namespace Microsoft.Extensions.ApiDescription.Tool
             IReadOnlyList<string> args,
             IReporter reporter,
             string workingDirectory = null,
-            bool interceptOutput = false)
+            bool interceptOutput = false
+        )
         {
             var arguments = ArgumentEscaper.EscapeAndConcatenate(args);
 

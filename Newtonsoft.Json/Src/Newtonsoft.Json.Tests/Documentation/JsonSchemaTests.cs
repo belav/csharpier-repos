@@ -57,7 +57,8 @@ namespace Newtonsoft.Json.Tests.Documentation
         public void IsValidBasic()
         {
             #region IsValidBasic
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
               'description': 'A person',
               'type': 'object',
               'properties':
@@ -72,10 +73,12 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             JsonSchema schema = JsonSchema.Parse(schemaJson);
 
-            JObject person = JObject.Parse(@"{
+            JObject person = JObject.Parse(
+                @"{
               'name': 'James',
               'hobbies': ['.NET', 'Blogging', 'Reading', 'Xbox', 'LOLCATS']
-            }");
+            }"
+            );
 
             bool valid = person.IsValid(schema);
             // true
@@ -84,7 +87,8 @@ namespace Newtonsoft.Json.Tests.Documentation
 
         public void IsValidMessages()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
                'description': 'A person',
                'type': 'object',
                'properties':
@@ -100,10 +104,12 @@ namespace Newtonsoft.Json.Tests.Documentation
             #region IsValidMessages
             JsonSchema schema = JsonSchema.Parse(schemaJson);
 
-            JObject person = JObject.Parse(@"{
+            JObject person = JObject.Parse(
+                @"{
               'name': null,
               'hobbies': ['Invalid content', 0.123456789]
-            }");
+            }"
+            );
 
             IList<string> messages;
             bool valid = person.IsValid(schema, out messages);
@@ -118,7 +124,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             string schemaJson = "{}";
 
             #region JsonValidatingReader
-            string json = @"{
+            string json =
+                @"{
               'name': 'James',
               'hobbies': ['.NET', 'Blogging', 'Reading', 'Xbox', 'LOLCATS']
             }";
@@ -146,7 +153,6 @@ namespace Newtonsoft.Json.Tests.Documentation
             using (TextReader reader = File.OpenText(@"c:\schema\Person.json"))
             {
                 JsonSchema schema2 = JsonSchema.Read(new JsonTextReader(reader));
-
                 // do stuff
             }
             #endregion
@@ -161,18 +167,24 @@ namespace Newtonsoft.Json.Tests.Documentation
             {
                 { "name", new JsonSchema { Type = JsonSchemaType.String } },
                 {
-                    "hobbies", new JsonSchema
+                    "hobbies",
+                    new JsonSchema
                     {
                         Type = JsonSchemaType.Array,
-                        Items = new List<JsonSchema> { new JsonSchema { Type = JsonSchemaType.String } }
+                        Items = new List<JsonSchema>
+                        {
+                            new JsonSchema { Type = JsonSchemaType.String }
+                        }
                     }
                 },
             };
 
-            JObject person = JObject.Parse(@"{
+            JObject person = JObject.Parse(
+                @"{
               'name': 'James',
               'hobbies': ['.NET', 'Blogging', 'Reading', 'Xbox', 'LOLCATS']
-            }");
+            }"
+            );
 
             bool valid = person.IsValid(schema);
             // true

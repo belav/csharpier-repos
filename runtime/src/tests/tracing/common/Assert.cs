@@ -11,8 +11,7 @@ namespace Tracing.Tests.Common
         {
             if (!condition)
             {
-                throw new Exception(
-                    string.Format("Condition '{0}' is not true", name));
+                throw new Exception(string.Format("Condition '{0}' is not true", name));
             }
         }
 
@@ -21,17 +20,33 @@ namespace Tracing.Tests.Common
             if (left == null && right != null)
             {
                 throw new Exception(
-                    string.Format("Values for '{0}' are not equal!  Left=NULL Right='{1}'", name, right));
+                    string.Format(
+                        "Values for '{0}' are not equal!  Left=NULL Right='{1}'",
+                        name,
+                        right
+                    )
+                );
             }
             else if (left != null && right == null)
             {
                 throw new Exception(
-                    string.Format("Values for '{0}' are not equal!  Left='{1}' Right=NULL", name, left));
+                    string.Format(
+                        "Values for '{0}' are not equal!  Left='{1}' Right=NULL",
+                        name,
+                        left
+                    )
+                );
             }
             else if (!left.Equals(right))
             {
                 throw new Exception(
-                    string.Format("Values for '{0}' are not equal! Left='{1}' Right='{2}'", name, left, right));
+                    string.Format(
+                        "Values for '{0}' are not equal! Left='{1}' Right='{2}'",
+                        name,
+                        left,
+                        right
+                    )
+                );
             }
         }
 
@@ -40,12 +55,19 @@ namespace Tracing.Tests.Common
             if (left == null && right == null)
             {
                 throw new Exception(
-                    string.Format("Values for '{0}' are equal! Left=NULL Right=NULL", name));
+                    string.Format("Values for '{0}' are equal! Left=NULL Right=NULL", name)
+                );
             }
             else if (left != null && left.Equals(right))
             {
                 throw new Exception(
-                    string.Format("Values for '{0}' are equal! Left='{1}' Right='{2}'", name, left, right));
+                    string.Format(
+                        "Values for '{0}' are equal! Left='{1}' Right='{2}'",
+                        name,
+                        left,
+                        right
+                    )
+                );
             }
         }
     }

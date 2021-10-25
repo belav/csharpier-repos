@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var expectedTypeName = "TestTagHelper";
-            var descriptor = TagHelperDescriptorBuilder.Create(expectedTypeName, "TestAssembly").TypeName(expectedTypeName).Build();
+            var descriptor = TagHelperDescriptorBuilder
+                .Create(expectedTypeName, "TestAssembly")
+                .TypeName(expectedTypeName)
+                .Build();
 
             // Act
             var typeName = descriptor.GetTypeName();
@@ -39,7 +42,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void IsDefaultKind_ReturnsTrue_IfKindIsDefault()
         {
             // Arrange
-            var descriptor = TagHelperDescriptorBuilder.Create("TestTagHelper", "TestAssembly").Build();
+            var descriptor = TagHelperDescriptorBuilder
+                .Create("TestTagHelper", "TestAssembly")
+                .Build();
 
             // Act
             var isDefault = descriptor.IsDefaultKind();
@@ -52,7 +57,9 @@ namespace Microsoft.AspNetCore.Razor.Language
         public void IsDefaultKind_ReturnsFalse_IfKindIsNotDefault()
         {
             // Arrange
-            var descriptor = TagHelperDescriptorBuilder.Create("other-kind", "TestTagHelper", "TestAssembly").Build();
+            var descriptor = TagHelperDescriptorBuilder
+                .Create("other-kind", "TestTagHelper", "TestAssembly")
+                .Build();
 
             // Act
             var isDefault = descriptor.IsDefaultKind();

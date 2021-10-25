@@ -11,9 +11,6 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
     {
         public IInteractiveWindow? Window { get; set; }
 
-        public InteractiveWindowWorkspace(HostServices hostServices)
-            : base(hostServices)
-        {
-        }
+        public InteractiveWindowWorkspace(HostServices hostServices) : base(hostServices) { }
     }
 }

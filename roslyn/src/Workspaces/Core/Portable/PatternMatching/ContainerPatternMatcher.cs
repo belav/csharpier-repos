@@ -19,18 +19,23 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             private readonly char[] _containerSplitCharacters;
 
             public ContainerPatternMatcher(
-                string[] patternParts, char[] containerSplitCharacters,
+                string[] patternParts,
+                char[] containerSplitCharacters,
                 CultureInfo culture,
-                bool allowFuzzyMatching = false)
-                : base(false, culture, allowFuzzyMatching)
+                bool allowFuzzyMatching = false
+            ) : base(false, culture, allowFuzzyMatching)
             {
                 _containerSplitCharacters = containerSplitCharacters;
 
                 _patternSegments = patternParts
-                    .Select(text => new PatternSegment(text.Trim(), allowFuzzyMatching: allowFuzzyMatching))
+                    .Select(
+                        text =>
+                            new PatternSegment(text.Trim(), allowFuzzyMatching: allowFuzzyMatching)
+                    )
                     .ToArray();
 
-                _invalidPattern = _patternSegments.Length == 0 || _patternSegments.Any(s => s.IsInvalid);
+                _invalidPattern =
+                    _patternSegments.Length == 0 || _patternSegments.Any(s => s.IsInvalid);
             }
 
             public override void Dispose()
@@ -50,11 +55,15 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                     return false;
                 }
 
-                return AddMatches(container, matches, fuzzyMatch: false) ||
-                       AddMatches(container, matches, fuzzyMatch: true);
+                return AddMatches(container, matches, fuzzyMatch: false)
+                    || AddMatches(container, matches, fuzzyMatch: true);
             }
 
-            private bool AddMatches(string container, ArrayBuilder<PatternMatch> matches, bool fuzzyMatch)
+            private bool AddMatches(
+                string container,
+                ArrayBuilder<PatternMatch> matches,
+                bool fuzzyMatch
+            )
             {
                 if (fuzzyMatch && !_allowFuzzyMatching)
                 {
@@ -63,7 +72,10 @@ namespace Microsoft.CodeAnalysis.PatternMatching
 
                 using var _ = ArrayBuilder<PatternMatch>.GetInstance(out var tempContainerMatches);
 
-                var containerParts = container.Split(_containerSplitCharacters, StringSplitOptions.RemoveEmptyEntries);
+                var containerParts = container.Split(
+                    _containerSplitCharacters,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
 
                 var relevantDotSeparatedSegmentLength = _patternSegments.Length;
                 if (_patternSegments.Length > containerParts.Length)
@@ -76,13 +88,22 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 // So far so good.  Now break up the container for the candidate and check if all
                 // the dotted parts match up correctly.
 
-                for (int i = _patternSegments.Length - 1, j = containerParts.Length - 1;
-                        i >= 0;
-                        i--, j--)
+                for (
+                    int i = _patternSegments.Length - 1, j = containerParts.Length - 1;
+                    i >= 0;
+                    i--, j--
+                )
                 {
                     var segment = _patternSegments[i];
                     var containerName = containerParts[j];
-                    if (!MatchPatternSegment(containerName, segment, tempContainerMatches, fuzzyMatch))
+                    if (
+                        !MatchPatternSegment(
+                            containerName,
+                            segment,
+                            tempContainerMatches,
+                            fuzzyMatch
+                        )
+                    )
                     {
                         // This container didn't match the pattern piece.  So there's no match at all.
                         return false;

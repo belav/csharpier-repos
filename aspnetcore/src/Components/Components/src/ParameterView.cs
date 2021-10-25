@@ -22,19 +22,30 @@ namespace Microsoft.AspNetCore.Components
             RenderTreeFrame.Element(0, string.Empty).WithComponentSubtreeLength(1)
         };
 
-        private static readonly ParameterView _empty = new ParameterView(ParameterViewLifetime.Unbound, _emptyFrames, 0, Array.Empty<CascadingParameterState>());
+        private static readonly ParameterView _empty = new ParameterView(
+            ParameterViewLifetime.Unbound,
+            _emptyFrames,
+            0,
+            Array.Empty<CascadingParameterState>()
+        );
 
         private readonly ParameterViewLifetime _lifetime;
         private readonly RenderTreeFrame[] _frames;
         private readonly int _ownerIndex;
         private readonly IReadOnlyList<CascadingParameterState> _cascadingParameters;
 
-        internal ParameterView(in ParameterViewLifetime lifetime, RenderTreeFrame[] frames, int ownerIndex)
-            : this(lifetime, frames, ownerIndex, Array.Empty<CascadingParameterState>())
-        {
-        }
+        internal ParameterView(
+            in ParameterViewLifetime lifetime,
+            RenderTreeFrame[] frames,
+            int ownerIndex
+        ) : this(lifetime, frames, ownerIndex, Array.Empty<CascadingParameterState>()) { }
 
-        private ParameterView(in ParameterViewLifetime lifetime, RenderTreeFrame[] frames, int ownerIndex, IReadOnlyList<CascadingParameterState> cascadingParameters)
+        private ParameterView(
+            in ParameterViewLifetime lifetime,
+            RenderTreeFrame[] frames,
+            int ownerIndex,
+            IReadOnlyList<CascadingParameterState> cascadingParameters
+        )
         {
             _lifetime = lifetime;
             _frames = frames;
@@ -66,7 +77,10 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="result">Receives the result, if any.</param>
         /// <returns>True if a matching parameter was found; false otherwise.</returns>
-        public bool TryGetValue<TValue>(string parameterName, [MaybeNullWhen(false)] out TValue result)
+        public bool TryGetValue<TValue>(
+            string parameterName,
+            [MaybeNullWhen(false)] out TValue result
+        )
         {
             foreach (var entry in this)
             {
@@ -88,8 +102,8 @@ namespace Microsoft.AspNetCore.Components
         /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns>The parameter value if found; otherwise the default value for the specified type.</returns>
-        public TValue? GetValueOrDefault<TValue>(string parameterName)
-            => GetValueOrDefault<TValue?>(parameterName, default);
+        public TValue? GetValueOrDefault<TValue>(string parameterName) =>
+            GetValueOrDefault<TValue?>(parameterName, default);
 
         /// <summary>
         /// Gets the value of the parameter with the specified name, or a specified default value
@@ -99,8 +113,8 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="defaultValue">The default value to return if no such parameter exists in the collection.</param>
         /// <returns>The parameter value if found; otherwise <paramref name="defaultValue"/>.</returns>
-        public TValue GetValueOrDefault<TValue>(string parameterName, TValue defaultValue)
-            => TryGetValue<TValue>(parameterName, out TValue? result) ? result : defaultValue;
+        public TValue GetValueOrDefault<TValue>(string parameterName, TValue defaultValue) =>
+            TryGetValue<TValue>(parameterName, out TValue? result) ? result : defaultValue;
 
         /// <summary>
         /// Returns a dictionary populated with the contents of the <see cref="ParameterView"/>.
@@ -125,14 +139,17 @@ namespace Microsoft.AspNetCore.Components
 
             var numEntries = GetEntryCount();
             var cloneBuffer = new RenderTreeFrame[1 + numEntries];
-            cloneBuffer[0] = RenderTreeFrame.PlaceholderChildComponentWithSubtreeLength(1 + numEntries);
+            cloneBuffer[0] = RenderTreeFrame.PlaceholderChildComponentWithSubtreeLength(
+                1 + numEntries
+            );
             _frames.AsSpan(1, numEntries).CopyTo(cloneBuffer.AsSpan(1));
 
             return new ParameterView(Lifetime, cloneBuffer, _ownerIndex);
         }
 
-        internal ParameterView WithCascadingParameters(IReadOnlyList<CascadingParameterState> cascadingParameters)
-            => new ParameterView(_lifetime, _frames, _ownerIndex, cascadingParameters);
+        internal ParameterView WithCascadingParameters(
+            IReadOnlyList<CascadingParameterState> cascadingParameters
+        ) => new ParameterView(_lifetime, _frames, _ownerIndex, cascadingParameters);
 
         // It's internal because there isn't a known use case for user code comparing
         // ParameterView instances, and even if there was, it's unlikely it should
@@ -156,7 +173,8 @@ namespace Microsoft.AspNetCore.Components
 
             var oldIndex = oldParameters._ownerIndex;
             var newIndex = _ownerIndex;
-            var oldEndIndexExcl = oldIndex + oldParameters._frames[oldIndex].ComponentSubtreeLengthField;
+            var oldEndIndexExcl =
+                oldIndex + oldParameters._frames[oldIndex].ComponentSubtreeLengthField;
             var newEndIndexExcl = newIndex + _frames[newIndex].ComponentSubtreeLengthField;
             while (true)
             {
@@ -184,7 +202,13 @@ namespace Microsoft.AspNetCore.Components
                     }
                     else
                     {
-                        if (!string.Equals(oldFrame.AttributeNameField, newFrame.AttributeNameField, StringComparison.Ordinal))
+                        if (
+                            !string.Equals(
+                                oldFrame.AttributeNameField,
+                                newFrame.AttributeNameField,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             return false; // Different names
                         }
@@ -276,19 +300,29 @@ namespace Microsoft.AspNetCore.Components
             private CascadingParameterEnumerator _cascadingParameterEnumerator;
             private bool _isEnumeratingDirectParams;
 
-            internal Enumerator(RenderTreeFrame[] frames, int ownerIndex, IReadOnlyList<CascadingParameterState> cascadingParameters)
+            internal Enumerator(
+                RenderTreeFrame[] frames,
+                int ownerIndex,
+                IReadOnlyList<CascadingParameterState> cascadingParameters
+            )
             {
-                _directParamsEnumerator = new RenderTreeFrameParameterEnumerator(frames, ownerIndex);
-                _cascadingParameterEnumerator = new CascadingParameterEnumerator(cascadingParameters);
+                _directParamsEnumerator = new RenderTreeFrameParameterEnumerator(
+                    frames,
+                    ownerIndex
+                );
+                _cascadingParameterEnumerator = new CascadingParameterEnumerator(
+                    cascadingParameters
+                );
                 _isEnumeratingDirectParams = true;
             }
 
             /// <summary>
             /// Gets the current value of the enumerator.
             /// </summary>
-            public ParameterValue Current => _isEnumeratingDirectParams
-                ? _directParamsEnumerator.Current
-                : _cascadingParameterEnumerator.Current;
+            public ParameterValue Current =>
+                _isEnumeratingDirectParams
+                    ? _directParamsEnumerator.Current
+                    : _cascadingParameterEnumerator.Current;
 
             /// <summary>
             /// Instructs the enumerator to move to the next value in the sequence.
@@ -324,7 +358,8 @@ namespace Microsoft.AspNetCore.Components
             {
                 _frames = frames;
                 _ownerIndex = ownerIndex;
-                _ownerDescendantsEndIndexExcl = ownerIndex + _frames[ownerIndex].ElementSubtreeLengthField;
+                _ownerDescendantsEndIndexExcl =
+                    ownerIndex + _frames[ownerIndex].ElementSubtreeLengthField;
                 _currentIndex = ownerIndex;
                 _current = default;
             }
@@ -350,7 +385,11 @@ namespace Microsoft.AspNetCore.Components
                 _currentIndex = nextIndex;
 
                 ref var frame = ref _frames[_currentIndex];
-                _current = new ParameterValue(frame.AttributeNameField, frame.AttributeValueField, false);
+                _current = new ParameterValue(
+                    frame.AttributeNameField,
+                    frame.AttributeValueField,
+                    false
+                );
 
                 return true;
             }
@@ -362,7 +401,9 @@ namespace Microsoft.AspNetCore.Components
             private int _currentIndex;
             private ParameterValue _current;
 
-            public CascadingParameterEnumerator(IReadOnlyList<CascadingParameterState> cascadingParameters)
+            public CascadingParameterEnumerator(
+                IReadOnlyList<CascadingParameterState> cascadingParameters
+            )
             {
                 _cascadingParameters = cascadingParameters;
                 _currentIndex = -1;
@@ -379,7 +420,11 @@ namespace Microsoft.AspNetCore.Components
                     _currentIndex = nextIndex;
 
                     var state = _cascadingParameters[_currentIndex];
-                    _current = new ParameterValue(state.LocalValueName, state.ValueSupplier.CurrentValue!, true);
+                    _current = new ParameterValue(
+                        state.LocalValueName,
+                        state.ValueSupplier.CurrentValue!,
+                        true
+                    );
                     return true;
                 }
                 else

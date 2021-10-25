@@ -38,22 +38,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 Object = null;
             }
 
-            public override string ToString() => (Object is null) ? Int32.ToString() : Object.ToString();
+            public override string ToString() =>
+                (Object is null) ? Int32.ToString() : Object.ToString();
 
             public static implicit operator Arg(string value) => new(value);
             public static implicit operator Arg(int value) => new(value);
             public static implicit operator Arg(ProjectId value) => new(value.Id.GetHashCode());
-            public static implicit operator Arg(ProjectAnalysisSummary value) => new(ToString(value));
+            public static implicit operator Arg(ProjectAnalysisSummary value) =>
+                new(ToString(value));
             public static implicit operator Arg(Diagnostic value) => new(value);
 
-            private static string ToString(ProjectAnalysisSummary summary)
-                => summary switch
+            private static string ToString(ProjectAnalysisSummary summary) =>
+                summary switch
                 {
-                    ProjectAnalysisSummary.CompilationErrors => nameof(ProjectAnalysisSummary.CompilationErrors),
+                    ProjectAnalysisSummary.CompilationErrors
+                      => nameof(ProjectAnalysisSummary.CompilationErrors),
                     ProjectAnalysisSummary.NoChanges => nameof(ProjectAnalysisSummary.NoChanges),
                     ProjectAnalysisSummary.RudeEdits => nameof(ProjectAnalysisSummary.RudeEdits),
-                    ProjectAnalysisSummary.ValidChanges => nameof(ProjectAnalysisSummary.ValidChanges),
-                    ProjectAnalysisSummary.ValidInsignificantChanges => nameof(ProjectAnalysisSummary.ValidInsignificantChanges),
+                    ProjectAnalysisSummary.ValidChanges
+                      => nameof(ProjectAnalysisSummary.ValidChanges),
+                    ProjectAnalysisSummary.ValidInsignificantChanges
+                      => nameof(ProjectAnalysisSummary.ValidInsignificantChanges),
                     _ => null,
                 };
         }
@@ -71,7 +76,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             internal string GetDebuggerDisplay() =>
-                (MessageFormat == null) ? "" : string.Format(MessageFormat, ArgsOpt?.Select(a => (object)a).ToArray() ?? Array.Empty<object>());
+                (MessageFormat == null)
+                    ? ""
+                    : string.Format(
+                          MessageFormat,
+                          ArgsOpt?.Select(a => (object)a).ToArray() ?? Array.Empty<object>()
+                      );
         }
 
         private readonly Entry[] _log;
@@ -92,8 +102,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         public void Write(string str) => Write(str, null);
 
-        public void Write(string format, params Arg[] args)
-            => Append(new Entry(format, args));
+        public void Write(string format, params Arg[] args) => Append(new Entry(format, args));
 
         [Conditional("DEBUG")]
         public void DebugWrite(string str) => DebugWrite(str, null);
@@ -106,15 +115,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Debug.WriteLine(entry.ToString(), _id);
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly TraceLog _traceLog;
 
-            public TestAccessor(TraceLog traceLog)
-                => _traceLog = traceLog;
+            public TestAccessor(TraceLog traceLog) => _traceLog = traceLog;
 
             internal Entry[] Entries => _traceLog._log;
         }

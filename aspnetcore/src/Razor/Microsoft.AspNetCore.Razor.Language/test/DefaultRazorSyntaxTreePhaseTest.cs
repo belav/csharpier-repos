@@ -19,19 +19,22 @@ namespace Microsoft.AspNetCore.Razor.Language
             var first = Mock.Of<IRazorSyntaxTreePass>(p => p.Order == 15);
             var second = Mock.Of<IRazorSyntaxTreePass>(p => p.Order == 17);
 
-            var engine = RazorProjectEngine.CreateEmpty(b =>
-            {
-                b.Phases.Add(phase);
+            var engine = RazorProjectEngine.CreateEmpty(
+                b =>
+                {
+                    b.Phases.Add(phase);
 
-                b.Features.Add(second);
-                b.Features.Add(first);
-            });
+                    b.Features.Add(second);
+                    b.Features.Add(first);
+                }
+            );
 
             // Assert
             Assert.Collection(
                 phase.Passes,
                 p => Assert.Same(first, p),
-                p => Assert.Same(second, p));
+                p => Assert.Same(second, p)
+            );
         }
 
         [Fact]
@@ -47,8 +50,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Act & Assert
             ExceptionAssert.Throws<InvalidOperationException>(
                 () => phase.Execute(codeDocument),
-                $"The '{nameof(DefaultRazorSyntaxTreePhase)}' phase requires a '{nameof(RazorSyntaxTree)}' " + 
-                $"provided by the '{nameof(RazorCodeDocument)}'.");
+                $"The '{nameof(DefaultRazorSyntaxTreePhase)}' phase requires a '{nameof(RazorSyntaxTree)}' "
+                    + $"provided by the '{nameof(RazorCodeDocument)}'."
+            );
         }
 
         [Fact]
@@ -67,22 +71,28 @@ namespace Microsoft.AspNetCore.Razor.Language
             var firstPass = new Mock<IRazorSyntaxTreePass>(MockBehavior.Strict);
             firstPass.SetupGet(m => m.Order).Returns(0);
             firstPass.SetupProperty(m => m.Engine);
-            firstPass.Setup(m => m.Execute(codeDocument, originalSyntaxTree)).Returns(firstPassSyntaxTree);
+            firstPass
+                .Setup(m => m.Execute(codeDocument, originalSyntaxTree))
+                .Returns(firstPassSyntaxTree);
 
             var secondPass = new Mock<IRazorSyntaxTreePass>(MockBehavior.Strict);
             secondPass.SetupGet(m => m.Order).Returns(1);
             secondPass.SetupProperty(m => m.Engine);
-            secondPass.Setup(m => m.Execute(codeDocument, firstPassSyntaxTree)).Returns(secondPassSyntaxTree);
+            secondPass
+                .Setup(m => m.Execute(codeDocument, firstPassSyntaxTree))
+                .Returns(secondPassSyntaxTree);
 
             var phase = new DefaultRazorSyntaxTreePhase();
 
-            var engine = RazorProjectEngine.CreateEmpty(b =>
-            {
-                b.Phases.Add(phase);
+            var engine = RazorProjectEngine.CreateEmpty(
+                b =>
+                {
+                    b.Phases.Add(phase);
 
-                b.Features.Add(firstPass.Object);
-                b.Features.Add(secondPass.Object);
-            });
+                    b.Features.Add(firstPass.Object);
+                    b.Features.Add(secondPass.Object);
+                }
+            );
 
             // Act
             phase.Execute(codeDocument);

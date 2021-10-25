@@ -34,8 +34,8 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             OAuthOptions options,
             HttpClient backchannel,
             OAuthTokenResponse tokens,
-            JsonElement user)
-            : base(context, scheme, options)
+            JsonElement user
+        ) : base(context, scheme, options)
         {
             if (backchannel == null)
             {
@@ -88,7 +88,14 @@ namespace Microsoft.AspNetCore.Authentication.OAuth
             get
             {
                 int value;
-                if (int.TryParse(TokenResponse.ExpiresIn, NumberStyles.Integer, CultureInfo.InvariantCulture, out value))
+                if (
+                    int.TryParse(
+                        TokenResponse.ExpiresIn,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out value
+                    )
+                )
                 {
                     return TimeSpan.FromSeconds(value);
                 }

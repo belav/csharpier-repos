@@ -12,9 +12,7 @@ namespace Microsoft.Extensions.Hosting
         [Fact]
         public void DefaultsToOffOutsideOfService()
         {
-            var host = new HostBuilder()
-                .UseSystemd()
-                .Build();
+            var host = new HostBuilder().UseSystemd().Build();
 
             using (host)
             {

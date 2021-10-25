@@ -21,21 +21,21 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicFindReferences(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicFindReferences))
-        {
-        }
+            : base(instanceFactory, nameof(BasicFindReferences)) { }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.FindReferences)]
         public void FindReferencesToLocals()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class Program
   Sub Main()
       Dim local = 1
       Console.WriteLine(loca$$l)
   End Sub
 End Class
-");
+"
+            );
 
             VisualStudio.SendKeys.Send(Shift(VirtualKey.F12));
 
@@ -61,28 +61,33 @@ End Class
                         Assert.Equal(expected: 4, actual: reference.Line);
                         Assert.Equal(expected: 24, actual: reference.Column);
                     }
-                });
+                }
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.FindReferences)]
         public void FindReferencesToSharedField()
         {
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class Program
     Public Shared Alpha As Int32
 End Class$$
-");
+"
+            );
             var project = new ProjectUtils.Project(ProjectName);
             VisualStudio.SolutionExplorer.AddFile(project, "File2.vb");
             VisualStudio.SolutionExplorer.OpenFile(project, "File2.vb");
 
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 Class SomeOtherClass
     Sub M()
         Console.WriteLine(Program.$$Alpha)
     End Sub
 End Class
-");
+"
+            );
 
             VisualStudio.SendKeys.Send(Shift(VirtualKey.F12));
 
@@ -98,17 +103,24 @@ End Class
                 {
                     reference =>
                     {
-                        Assert.Equal(expected: "Public Shared Alpha As Int32", actual: reference.Code);
+                        Assert.Equal(
+                            expected: "Public Shared Alpha As Int32",
+                            actual: reference.Code
+                        );
                         Assert.Equal(expected: 2, actual: reference.Line);
                         Assert.Equal(expected: 18, actual: reference.Column);
                     },
                     reference =>
                     {
-                        Assert.Equal(expected: "Console.WriteLine(Program.Alpha)", actual: reference.Code);
+                        Assert.Equal(
+                            expected: "Console.WriteLine(Program.Alpha)",
+                            actual: reference.Code
+                        );
                         Assert.Equal(expected: 3, actual: reference.Line);
                         Assert.Equal(expected: 34, actual: reference.Column);
                     }
-                });
+                }
+            );
         }
     }
 }

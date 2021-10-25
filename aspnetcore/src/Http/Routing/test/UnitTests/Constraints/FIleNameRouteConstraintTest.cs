@@ -26,7 +26,6 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             }
         }
 
-
         [Theory]
         [MemberData(nameof(FileNameData))]
         public void Match_RouteValue_IsFileName(object value)
@@ -38,7 +37,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             values.Add("path", value);
 
             // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+            var result = constraint.Match(
+                httpContext: null,
+                route: null,
+                "path",
+                values,
+                RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.True(result);
@@ -76,7 +81,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             values.Add("path", value);
 
             // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+            var result = constraint.Match(
+                httpContext: null,
+                route: null,
+                "path",
+                values,
+                RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.False(result);
@@ -91,7 +102,13 @@ namespace Microsoft.AspNetCore.Routing.Constraints
             var values = new RouteValueDictionary();
 
             // Act
-            var result = constraint.Match(httpContext: null, route: null, "path", values, RouteDirection.IncomingRequest);
+            var result = constraint.Match(
+                httpContext: null,
+                route: null,
+                "path",
+                values,
+                RouteDirection.IncomingRequest
+            );
 
             // Assert
             Assert.False(result);

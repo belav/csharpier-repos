@@ -15,24 +15,36 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServices
 {
-    internal abstract class AbstractDeclaredSymbolInfoFactoryService : IDeclaredSymbolInfoFactoryService
+    internal abstract class AbstractDeclaredSymbolInfoFactoryService
+        : IDeclaredSymbolInfoFactoryService
     {
         private const string GenericTypeNameManglingString = "`";
-        private static readonly string[] s_aritySuffixesOneToNine = { "`1", "`2", "`3", "`4", "`5", "`6", "`7", "`8", "`9" };
+        private static readonly string[] s_aritySuffixesOneToNine =
+        {
+            "`1",
+            "`2",
+            "`3",
+            "`4",
+            "`5",
+            "`6",
+            "`7",
+            "`8",
+            "`9"
+        };
 
-        private static readonly ObjectPool<List<Dictionary<string, string>>> s_aliasMapListPool
-            = SharedPools.Default<List<Dictionary<string, string>>>();
+        private static readonly ObjectPool<List<Dictionary<string, string>>> s_aliasMapListPool =
+            SharedPools.Default<List<Dictionary<string, string>>>();
 
-        // Note: these names are stored case insensitively.  That way the alias mapping works 
+        // Note: these names are stored case insensitively.  That way the alias mapping works
         // properly for VB.  It will mean that our inheritance maps may store more links in them
         // for C#.  However, that's ok.  It will be rare in practice, and all it means is that
-        // we'll end up examining slightly more types (likely 0) when doing operations like 
+        // we'll end up examining slightly more types (likely 0) when doing operations like
         // Find all references.
-        private static readonly ObjectPool<Dictionary<string, string>> s_aliasMapPool
-            = SharedPools.StringIgnoreCaseDictionary<string>();
+        private static readonly ObjectPool<Dictionary<string, string>> s_aliasMapPool =
+            SharedPools.StringIgnoreCaseDictionary<string>();
 
-        protected static List<Dictionary<string, string>> AllocateAliasMapList()
-            => s_aliasMapListPool.Allocate();
+        protected static List<Dictionary<string, string>> AllocateAliasMapList() =>
+            s_aliasMapListPool.Allocate();
 
         // We do not differentiate arrays of different kinds for simplicity.
         // e.g. int[], int[][], int[,], etc. are all represented as int[] in the index.
@@ -41,14 +53,14 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             if (string.IsNullOrEmpty(typeName))
             {
                 return isArray
-                    ? FindSymbols.Extensions.ComplexArrayReceiverTypeName
-                    : FindSymbols.Extensions.ComplexReceiverTypeName;
+                  ? FindSymbols.Extensions.ComplexArrayReceiverTypeName
+                  : FindSymbols.Extensions.ComplexReceiverTypeName;
             }
             else
             {
                 return isArray
-                    ? typeName + FindSymbols.Extensions.ArrayReceiverTypeNameSuffix
-                    : typeName;
+                  ? typeName + FindSymbols.Extensions.ArrayReceiverTypeNameSuffix
+                  : typeName;
             }
         }
 
@@ -84,8 +96,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             }
         }
 
-        protected static Dictionary<string, string> AllocateAliasMap()
-            => s_aliasMapPool.Allocate();
+        protected static Dictionary<string, string> AllocateAliasMap() => s_aliasMapPool.Allocate();
 
         protected static void AppendTokens(SyntaxNode node, StringBuilder builder)
         {
@@ -114,11 +125,19 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         {
             Debug.Assert(arity > 0);
             return (arity <= s_aritySuffixesOneToNine.Length)
-                ? s_aritySuffixesOneToNine[arity - 1]
-                : string.Concat(GenericTypeNameManglingString, arity.ToString(CultureInfo.InvariantCulture));
+              ? s_aritySuffixesOneToNine[arity - 1]
+              : string.Concat(
+                    GenericTypeNameManglingString,
+                    arity.ToString(CultureInfo.InvariantCulture)
+                );
         }
 
-        public abstract bool TryGetDeclaredSymbolInfo(StringTable stringTable, SyntaxNode node, string rootNamespace, out DeclaredSymbolInfo declaredSymbolInfo);
+        public abstract bool TryGetDeclaredSymbolInfo(
+            StringTable stringTable,
+            SyntaxNode node,
+            string rootNamespace,
+            out DeclaredSymbolInfo declaredSymbolInfo
+        );
 
         /// <summary>
         /// Get the name of the target type of specified extension method declaration. 
@@ -128,7 +147,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// </summary>
         public abstract string GetReceiverTypeName(SyntaxNode node);
 
-        public abstract bool TryGetAliasesFromUsingDirective(SyntaxNode node, out ImmutableArray<(string aliasName, string name)> aliases);
+        public abstract bool TryGetAliasesFromUsingDirective(
+            SyntaxNode node,
+            out ImmutableArray<(string aliasName, string name)> aliases
+        );
 
         public abstract string GetRootNamespace(CompilationOptions compilationOptions);
     }

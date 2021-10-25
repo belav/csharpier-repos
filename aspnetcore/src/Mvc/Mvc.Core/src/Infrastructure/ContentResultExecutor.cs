@@ -24,7 +24,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// </summary>
         /// <param name="logger">The logger to use.</param>
         /// <param name="httpResponseStreamWriterFactory">The stream writer factory.</param>
-        public ContentResultExecutor(ILogger<ContentResultExecutor> logger, IHttpResponseStreamWriterFactory httpResponseStreamWriterFactory)
+        public ContentResultExecutor(
+            ILogger<ContentResultExecutor> logger,
+            IHttpResponseStreamWriterFactory httpResponseStreamWriterFactory
+        )
         {
             _logger = logger;
             _httpResponseStreamWriterFactory = httpResponseStreamWriterFactory;
@@ -50,7 +53,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 response.ContentType,
                 DefaultContentType,
                 out var resolvedContentType,
-                out var resolvedContentTypeEncoding);
+                out var resolvedContentTypeEncoding
+            );
 
             response.ContentType = resolvedContentType;
 
@@ -65,7 +69,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 response.ContentLength = resolvedContentTypeEncoding.GetByteCount(result.Content);
 
-                await using (var textWriter = _httpResponseStreamWriterFactory.CreateWriter(response.Body, resolvedContentTypeEncoding))
+                await using (
+                    var textWriter = _httpResponseStreamWriterFactory.CreateWriter(
+                        response.Body,
+                        resolvedContentTypeEncoding
+                    )
+                )
                 {
                     await textWriter.WriteAsync(result.Content);
 

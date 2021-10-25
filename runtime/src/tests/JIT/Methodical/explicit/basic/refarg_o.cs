@@ -10,7 +10,10 @@ namespace Test
         protected char pad1 = 'z';
         public int mm = 11;
 
-        public AA(AA aa) { m_aa = aa; }
+        public AA(AA aa)
+        {
+            m_aa = aa;
+        }
 
         public AA m_aa = null;
 

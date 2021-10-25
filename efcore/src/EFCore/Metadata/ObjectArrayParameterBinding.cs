@@ -25,7 +25,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public ObjectArrayParameterBinding(IReadOnlyList<ParameterBinding> bindings)
             : base(
                 typeof(object[]),
-                Check.NotNull(bindings, nameof(bindings)).SelectMany(b => b.ConsumedProperties).ToArray())
+                Check
+                    .NotNull(bindings, nameof(bindings))
+                    .SelectMany(b => b.ConsumedProperties)
+                    .ToArray()
+            )
         {
             _bindings = bindings;
         }
@@ -36,8 +40,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// </summary>
         /// <param name="bindingInfo"> The binding information. </param>
         /// <returns> The expression tree. </returns>
-        public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
-            => Expression.NewArrayInit(
+        public override Expression BindToParameter(ParameterBindingInfo bindingInfo) =>
+            Expression.NewArrayInit(
                 typeof(object),
                 _bindings.Select(
                     b =>
@@ -50,7 +54,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         }
 
                         return expression;
-                    }));
+                    }
+                )
+            );
 
         /// <summary>
         ///     Creates a copy that contains the given consumed properties.
@@ -63,7 +69,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var propertyCount = 0;
             foreach (var binding in _bindings)
             {
-                var newBinding = binding.With(consumedProperties.Skip(propertyCount).Take(binding.ConsumedProperties.Count).ToArray());
+                var newBinding = binding.With(
+                    consumedProperties
+                        .Skip(propertyCount)
+                        .Take(binding.ConsumedProperties.Count)
+                        .ToArray()
+                );
                 newBindings.Add(newBinding);
                 propertyCount += binding.ConsumedProperties.Count;
             }

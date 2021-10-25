@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         public Solution Solution => Document.Project.Solution;
 
         public ChangeSignatureAnalysisSucceededContext(
-            Document document, int positionForTypeBinding, ISymbol symbol, ParameterConfiguration parameterConfiguration)
+            Document document,
+            int positionForTypeBinding,
+            ISymbol symbol,
+            ParameterConfiguration parameterConfiguration
+        )
         {
             Document = document;
             Symbol = symbol;

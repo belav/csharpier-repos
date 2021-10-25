@@ -16,7 +16,11 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication
         /// <param name="status">The status of the result.</param>
         /// <param name="token">The <see cref="AccessToken"/> in case it was successful.</param>
         /// <param name="redirectUrl">The redirect uri to go to for provisioning the token.</param>
-        public AccessTokenResult(AccessTokenResultStatus status, AccessToken token, string redirectUrl)
+        public AccessTokenResult(
+            AccessTokenResultStatus status,
+            AccessToken token,
+            string redirectUrl
+        )
         {
             Status = status;
             _token = token;

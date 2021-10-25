@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime
                 nameof(DateAndTime),
                 nameof(ProvideDateAndTimeCompletions),
                 defaultValue: true,
-                storageLocations: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ProvideDateAndTimeCompletions"));
+                storageLocations: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.ProvideDateAndTimeCompletions"
+                )
+            );
     }
 
     [ExportOptionProvider, Shared]
@@ -26,11 +29,9 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.DateAndTime
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DateAndTimeOptionsProvider()
-        {
-        }
+        public DateAndTimeOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            DateAndTimeOptions.ProvideDateAndTimeCompletions);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(DateAndTimeOptions.ProvideDateAndTimeCompletions);
     }
 }

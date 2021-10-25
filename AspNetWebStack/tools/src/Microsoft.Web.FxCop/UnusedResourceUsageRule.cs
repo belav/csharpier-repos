@@ -11,13 +11,12 @@ namespace Microsoft.Web.FxCop
     public class UnusedResourceUsageRule : IntrospectionRule
     {
         private static readonly object _lock = new object();
-        private static readonly IDictionary<AssemblyNode, ISet<PropertyNode>> _availableResources = new ConcurrentDictionary<AssemblyNode, ISet<PropertyNode>>();
-        private static readonly IDictionary<AssemblyNode, ISet<PropertyNode>> _usedResources = new ConcurrentDictionary<AssemblyNode, ISet<PropertyNode>>();
+        private static readonly IDictionary<AssemblyNode, ISet<PropertyNode>> _availableResources =
+            new ConcurrentDictionary<AssemblyNode, ISet<PropertyNode>>();
+        private static readonly IDictionary<AssemblyNode, ISet<PropertyNode>> _usedResources =
+            new ConcurrentDictionary<AssemblyNode, ISet<PropertyNode>>();
 
-        public UnusedResourceUsageRule()
-            : base("UnusedResourceUsageRule")
-        {
-        }
+        public UnusedResourceUsageRule() : base("UnusedResourceUsageRule") { }
 
         public override TargetVisibilities TargetVisibility
         {
@@ -37,13 +36,19 @@ namespace Microsoft.Web.FxCop
 
                 VisitAssembly(assemblyNode);
 
-                IEnumerable<PropertyNode> unusedResources = from res in assemblyAvailableResources.Except(assemblyUsedResources)
-                                                            where !IsCommonResource(res)
-                                                            select res;
+                IEnumerable<PropertyNode> unusedResources =
+                    from res in assemblyAvailableResources.Except(assemblyUsedResources)
+                    where !IsCommonResource(res)
+                    select res;
 
                 foreach (PropertyNode item in unusedResources)
                 {
-                    Problems.Add(new Problem(this.GetResolution(item.Name.Name, item.DeclaringType.FullName), item.UniqueKey.ToString()));
+                    Problems.Add(
+                        new Problem(
+                            this.GetResolution(item.Name.Name, item.DeclaringType.FullName),
+                            item.UniqueKey.ToString()
+                        )
+                    );
                 }
             }
 
@@ -54,7 +59,10 @@ namespace Microsoft.Web.FxCop
         {
             if (IsResourceType(property.DeclaringType) && IsResource(property))
             {
-                AddItemWithLock(_availableResources[(AssemblyNode)property.DeclaringType.DeclaringModule], property);
+                AddItemWithLock(
+                    _availableResources[(AssemblyNode)property.DeclaringType.DeclaringModule],
+                    property
+                );
             }
 
             base.VisitProperty(property);
@@ -66,16 +74,22 @@ namespace Microsoft.Web.FxCop
             if (mb != null)
             {
                 Method methodBeingCalled = mb.BoundMember as Method;
-                if (methodBeingCalled != null
-                        && IsResourceType(methodBeingCalled.DeclaringType)
-                        && IsResource(methodBeingCalled.DeclaringMember as PropertyNode))
+                if (
+                    methodBeingCalled != null
+                    && IsResourceType(methodBeingCalled.DeclaringType)
+                    && IsResource(methodBeingCalled.DeclaringMember as PropertyNode)
+                )
                 {
-
                     var property = methodBeingCalled.DeclaringMember as PropertyNode;
 
                     ISet<PropertyNode> properties = null;
                     // Look up the assembly from the dictionary. If the assembly could not be looked up, the resource must have been declared outside the current assembly
-                    if (_usedResources.TryGetValue((AssemblyNode)property.DeclaringType.DeclaringModule, out properties))
+                    if (
+                        _usedResources.TryGetValue(
+                            (AssemblyNode)property.DeclaringType.DeclaringModule,
+                            out properties
+                        )
+                    )
                     {
                         AddItemWithLock(properties, property);
                     }
@@ -95,15 +109,23 @@ namespace Microsoft.Web.FxCop
 
         private static bool IsResource(PropertyNode property)
         {
-            return property != null && property.Type.FullName.Equals(typeof(System.String).FullName);
+            return property != null
+                && property.Type.FullName.Equals(typeof(System.String).FullName);
         }
 
         private static bool IsResourceType(TypeNode typeNode)
         {
             var classNode = typeNode as ClassNode;
-            return (classNode != null
-                && classNode.Attributes.Any(c => c.Type.FullName.Equals(typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute).FullName))
-                && classNode.Name.Name.Contains("Resource"));
+            return (
+                classNode != null
+                && classNode.Attributes.Any(
+                    c =>
+                        c.Type.FullName.Equals(
+                            typeof(System.Runtime.CompilerServices.CompilerGeneratedAttribute).FullName
+                        )
+                )
+                && classNode.Name.Name.Contains("Resource")
+            );
         }
 
         /// <summary>

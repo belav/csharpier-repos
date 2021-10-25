@@ -35,7 +35,6 @@ namespace Internal.Runtime.CompilerServices
         public static void* AsPointer<T>(ref T value)
         {
             throw new PlatformNotSupportedException();
-
             // ldarg.0
             // conv.u
             // ret
@@ -53,7 +52,6 @@ namespace Internal.Runtime.CompilerServices
             typeof(T).ToString(); // Type token used by the actual method body
 #endif
             throw new PlatformNotSupportedException();
-
             // sizeof !!0
             // ret
         }
@@ -68,7 +66,6 @@ namespace Internal.Runtime.CompilerServices
         public static T As<T>(object? value) where T : class?
         {
             throw new PlatformNotSupportedException();
-
             // ldarg.0
             // ret
         }
@@ -82,7 +79,6 @@ namespace Internal.Runtime.CompilerServices
         public static ref TTo As<TFrom, TTo>(ref TFrom source)
         {
             throw new PlatformNotSupportedException();
-
             // ldarg.0
             // ret
         }
@@ -155,7 +151,6 @@ namespace Internal.Runtime.CompilerServices
         public static bool AreSame<T>([AllowNull] ref T left, [AllowNull] ref T right)
         {
             throw new PlatformNotSupportedException();
-
             // ldarg.0
             // ldarg.1
             // ceq
@@ -175,7 +170,6 @@ namespace Internal.Runtime.CompilerServices
         public static bool IsAddressGreaterThan<T>([AllowNull] ref T left, [AllowNull] ref T right)
         {
             throw new PlatformNotSupportedException();
-
             // ldarg.0
             // ldarg.1
             // cgt.un
@@ -195,7 +189,6 @@ namespace Internal.Runtime.CompilerServices
         public static bool IsAddressLessThan<T>([AllowNull] ref T left, [AllowNull] ref T right)
         {
             throw new PlatformNotSupportedException();
-
             // ldarg.0
             // ldarg.1
             // clt.un
@@ -289,7 +282,6 @@ namespace Internal.Runtime.CompilerServices
         {
             // This method is implemented by the toolchain
             throw new PlatformNotSupportedException();
-
             // ldarg.0
             // ldarg.1
             // add
@@ -382,7 +374,6 @@ namespace Internal.Runtime.CompilerServices
         public static ref T NullRef<T>()
         {
             return ref Unsafe.AsRef<T>(null);
-
             // ldc.i4.0
             // conv.u
             // ret
@@ -400,7 +391,6 @@ namespace Internal.Runtime.CompilerServices
         public static bool IsNullRef<T>(ref T source)
         {
             return Unsafe.AsPointer(ref source) == null;
-
             // ldarg.0
             // ldc.i4.0
             // conv.u
@@ -417,7 +407,6 @@ namespace Internal.Runtime.CompilerServices
         public static void SkipInit<T>(out T value)
         {
             throw new PlatformNotSupportedException();
-
             // ret
         }
     }

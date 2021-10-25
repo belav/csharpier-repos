@@ -15,12 +15,26 @@ namespace Microsoft.EntityFrameworkCore.Query
         [ConditionalFact]
         public void UnaryExpression_printed_correctly()
         {
-            Assert.Equal("(decimal)42", _expressionPrinter.Print(Expression.Convert(Expression.Constant(42), typeof(decimal))));
-            Assert.Equal("throw \"Some exception\"", _expressionPrinter.Print(Expression.Throw(Expression.Constant("Some exception"))));
-            Assert.Equal("!(True)", _expressionPrinter.Print(Expression.Not(Expression.Constant(true))));
+            Assert.Equal(
+                "(decimal)42",
+                _expressionPrinter.Print(
+                    Expression.Convert(Expression.Constant(42), typeof(decimal))
+                )
+            );
+            Assert.Equal(
+                "throw \"Some exception\"",
+                _expressionPrinter.Print(Expression.Throw(Expression.Constant("Some exception")))
+            );
+            Assert.Equal(
+                "!(True)",
+                _expressionPrinter.Print(Expression.Not(Expression.Constant(true)))
+            );
             Assert.Equal(
                 "(BaseClass as DerivedClass)",
-                _expressionPrinter.Print(Expression.TypeAs(Expression.Constant(new BaseClass()), typeof(DerivedClass))));
+                _expressionPrinter.Print(
+                    Expression.TypeAs(Expression.Constant(new BaseClass()), typeof(DerivedClass))
+                )
+            );
         }
 
         private class BaseClass
@@ -36,58 +50,164 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Assert.Equal(
                 "7 == 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.Equal, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.Equal,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 != 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.NotEqual, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.NotEqual,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 > 42",
                 _expressionPrinter.Print(
-                    Expression.MakeBinary(ExpressionType.GreaterThan, Expression.Constant(7), Expression.Constant(42))));
+                    Expression.MakeBinary(
+                        ExpressionType.GreaterThan,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 >= 42",
                 _expressionPrinter.Print(
-                    Expression.MakeBinary(ExpressionType.GreaterThanOrEqual, Expression.Constant(7), Expression.Constant(42))));
+                    Expression.MakeBinary(
+                        ExpressionType.GreaterThanOrEqual,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 < 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.LessThan, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.LessThan,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 <= 42",
                 _expressionPrinter.Print(
-                    Expression.MakeBinary(ExpressionType.LessThanOrEqual, Expression.Constant(7), Expression.Constant(42))));
+                    Expression.MakeBinary(
+                        ExpressionType.LessThanOrEqual,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "True && True",
                 _expressionPrinter.Print(
-                    Expression.MakeBinary(ExpressionType.AndAlso, Expression.Constant(true), Expression.Constant(true))));
+                    Expression.MakeBinary(
+                        ExpressionType.AndAlso,
+                        Expression.Constant(true),
+                        Expression.Constant(true)
+                    )
+                )
+            );
             Assert.Equal(
                 "True || True",
                 _expressionPrinter.Print(
-                    Expression.MakeBinary(ExpressionType.OrElse, Expression.Constant(true), Expression.Constant(true))));
+                    Expression.MakeBinary(
+                        ExpressionType.OrElse,
+                        Expression.Constant(true),
+                        Expression.Constant(true)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 & 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.And, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.And,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 | 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.Or, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.Or,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 ^ 42",
                 _expressionPrinter.Print(
-                    Expression.MakeBinary(ExpressionType.ExclusiveOr, Expression.Constant(7), Expression.Constant(42))));
+                    Expression.MakeBinary(
+                        ExpressionType.ExclusiveOr,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 + 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.Add, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.Add,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 - 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.Subtract, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.Subtract,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 * 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.Multiply, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.Multiply,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 / 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.Divide, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.Divide,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
             Assert.Equal(
                 "7 % 42",
-                _expressionPrinter.Print(Expression.MakeBinary(ExpressionType.Modulo, Expression.Constant(7), Expression.Constant(42))));
+                _expressionPrinter.Print(
+                    Expression.MakeBinary(
+                        ExpressionType.Modulo,
+                        Expression.Constant(7),
+                        Expression.Constant(42)
+                    )
+                )
+            );
         }
 
         [ConditionalFact]
@@ -99,7 +219,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     Expression.Condition(
                         Expression.Constant(true),
                         Expression.Constant("Foo"),
-                        Expression.Constant("Bar"))));
+                        Expression.Constant("Bar")
+                    )
+                )
+            );
         }
 
         [ConditionalFact]
@@ -110,7 +233,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _expressionPrinter.Print(
                     Expression.Lambda(
                         Expression.Constant(42),
-                        Expression.Parameter(typeof(int), "prm"))));
+                        Expression.Parameter(typeof(int), "prm")
+                    )
+                )
+            );
         }
 
         [ConditionalFact]
@@ -122,7 +248,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                     Expression.Lambda(
                         Expression.Constant(42),
                         Expression.Parameter(typeof(int), "prm1"),
-                        Expression.Parameter(typeof(int), "prm2"))));
+                        Expression.Parameter(typeof(int), "prm2")
+                    )
+                )
+            );
         }
 
         [ConditionalFact]
@@ -133,7 +262,10 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _expressionPrinter.PrintDebug(
                     Expression.Lambda(
                         Expression.Parameter(typeof(int), "prm2"),
-                        Expression.Parameter(typeof(int), "prm1"))));
+                        Expression.Parameter(typeof(int), "prm1")
+                    )
+                )
+            );
         }
 
         [ConditionalFact]
@@ -145,8 +277,12 @@ namespace Microsoft.EntityFrameworkCore.Query
                     Expression.Property(
                         Expression.Add(
                             Expression.Constant(7, typeof(int?)),
-                            Expression.Constant(42, typeof(int?))),
-                        "Value")));
+                            Expression.Constant(42, typeof(int?))
+                        ),
+                        "Value"
+                    )
+                )
+            );
         }
 
         [ConditionalFact]
@@ -157,7 +293,16 @@ namespace Microsoft.EntityFrameworkCore.Query
                 _expressionPrinter.Print(
                     Expression.Call(
                         Expression.Constant("Foo"),
-                        typeof(string).GetMethods().Single(m => m.Name == nameof(string.ToUpper) && m.GetParameters().Count() == 0))));
+                        typeof(string)
+                            .GetMethods()
+                            .Single(
+                                m =>
+                                    m.Name == nameof(string.ToUpper)
+                                    && m.GetParameters().Count() == 0
+                            )
+                    )
+                )
+            );
         }
 
         [ConditionalFact]
@@ -165,23 +310,36 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Assert.Equal(
                 "\"Foobar\""
-                + @".Substring(
+                    + @".Substring(
     startIndex: 0, 
     length: 4)",
                 _expressionPrinter.Print(
                     Expression.Call(
                         Expression.Constant("Foobar"),
-                        typeof(string).GetMethods().Single(m => m.Name == nameof(string.Substring) && m.GetParameters().Count() == 2),
+                        typeof(string)
+                            .GetMethods()
+                            .Single(
+                                m =>
+                                    m.Name == nameof(string.Substring)
+                                    && m.GetParameters().Count() == 2
+                            ),
                         Expression.Constant(0),
-                        Expression.Constant(4))),
-                ignoreLineEndingDifferences: true);
+                        Expression.Constant(4)
+                    )
+                ),
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [ConditionalFact]
         public void Linq_methods_printed_as_extensions()
         {
-            Expression<Func<object, object>> expr =
-                _ => new[] { 1, 2, 3 }.AsQueryable().Select(x => x.ToString()).AsEnumerable().Where(x => x.Length > 1);
+            Expression<Func<object, object>> expr = _ =>
+                new[] { 1, 2, 3 }
+                    .AsQueryable()
+                    .Select(x => x.ToString())
+                    .AsEnumerable()
+                    .Where(x => x.Length > 1);
 
             Assert.Equal(
                 @"new int[]
@@ -195,7 +353,8 @@ namespace Microsoft.EntityFrameworkCore.Query
     .AsEnumerable()
     .Where(x => x.Length > 1)",
                 _expressionPrinter.Print(expr.Body),
-                ignoreLineEndingDifferences: true);
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [ConditionalFact]
@@ -203,9 +362,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             Assert.Equal(
                 @"int[] { 1, 2, 3 }",
-                _expressionPrinter.Print(
-                    Expression.Constant(
-                        new[] { 1, 2, 3 })));
+                _expressionPrinter.Print(Expression.Constant(new[] { 1, 2, 3 }))
+            );
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
     {
         public static IServiceCollection ConfigureDbServices<TContext>(
             DbConnection connection,
-            IServiceCollection services = null) where TContext : DbContext
+            IServiceCollection services = null
+        ) where TContext : DbContext
         {
             if (services == null)
             {
@@ -25,29 +26,56 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
 
             services.AddHttpContextAccessor();
 
-            services.AddDbContext<TContext>(options =>
-            {
-                options
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                    .UseSqlite(connection);
-            });
+            services.AddDbContext<TContext>(
+                options =>
+                {
+                    options
+                        .ConfigureWarnings(
+                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                        )
+                        .UseSqlite(connection);
+                }
+            );
 
             return services;
         }
 
-        public static TContext Create<TContext>(DbConnection connection, IServiceCollection services = null) where TContext : DbContext
+        public static TContext Create<TContext>(
+            DbConnection connection,
+            IServiceCollection services = null
+        ) where TContext : DbContext
         {
-            var serviceProvider = ConfigureDbServices<TContext>(connection, services).BuildServiceProvider();
+            var serviceProvider = ConfigureDbServices<TContext>(connection, services)
+                .BuildServiceProvider();
             return serviceProvider.GetRequiredService<TContext>();
         }
 
-        public static bool VerifyMaxLength(DbContext context, string table, int maxLength, params string[] columns)
+        public static bool VerifyMaxLength(
+            DbContext context,
+            string table,
+            int maxLength,
+            params string[] columns
+        )
         {
             var count = 0;
 
-            foreach (var property in context.Model.GetEntityTypes().Single(e => e.GetTableName() == table).GetProperties())
+            foreach (
+                var property in context.Model
+                    .GetEntityTypes()
+                    .Single(e => e.GetTableName() == table)
+                    .GetProperties()
+            )
             {
-                if (!columns.Contains(property.GetColumnName(StoreObjectIdentifier.Table(table, property.DeclaringEntityType.GetSchema()))))
+                if (
+                    !columns.Contains(
+                        property.GetColumnName(
+                            StoreObjectIdentifier.Table(
+                                table,
+                                property.DeclaringEntityType.GetSchema()
+                            )
+                        )
+                    )
+                )
                 {
                     continue;
                 }
@@ -61,10 +89,19 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             return count == columns.Length;
         }
 
-        public static bool VerifyColumns(SqliteConnection conn, string table, params string[] columns)
+        public static bool VerifyColumns(
+            SqliteConnection conn,
+            string table,
+            params string[] columns
+        )
         {
             var count = 0;
-            using (var command = new SqliteCommand("SELECT \"name\" FROM pragma_table_info(@table)", conn))
+            using (
+                var command = new SqliteCommand(
+                    "SELECT \"name\" FROM pragma_table_info(@table)",
+                    conn
+                )
+            )
             {
                 command.Parameters.Add(new SqliteParameter("table", table));
                 using (var reader = command.ExecuteReader())
@@ -82,11 +119,19 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test
             }
         }
 
-        public static void VerifyIndex(SqliteConnection conn, string table, string index, bool isUnique = false)
+        public static void VerifyIndex(
+            SqliteConnection conn,
+            string table,
+            string index,
+            bool isUnique = false
+        )
         {
-            using (var command =
-                new SqliteCommand(
-                    "SELECT COUNT(*) FROM pragma_index_list(@table) WHERE \"name\" = @index AND \"unique\" = @unique", conn))
+            using (
+                var command = new SqliteCommand(
+                    "SELECT COUNT(*) FROM pragma_index_list(@table) WHERE \"name\" = @index AND \"unique\" = @unique",
+                    conn
+                )
+            )
             {
                 command.Parameters.Add(new SqliteParameter("index", index));
                 command.Parameters.Add(new SqliteParameter("table", table));

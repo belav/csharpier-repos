@@ -22,8 +22,15 @@ namespace Microsoft.AspNetCore.ResponseCaching
         private static readonly TimeSpan DefaultExpirationTimeSpan = TimeSpan.FromSeconds(10);
 
         // see https://tools.ietf.org/html/rfc7232#section-4.1
-        private static readonly string[] HeadersToIncludeIn304 =
-            new[] { "Cache-Control", "Content-Location", "Date", "ETag", "Expires", "Vary" };
+        private static readonly string[] HeadersToIncludeIn304 = new[]
+        {
+            "Cache-Control",
+            "Content-Location",
+            "Date",
+            "ETag",
+            "Expires",
+            "Vary"
+        };
 
         private readonly RequestDelegate _next;
         private readonly ResponseCachingOptions _options;
@@ -43,18 +50,18 @@ namespace Microsoft.AspNetCore.ResponseCaching
             RequestDelegate next,
             IOptions<ResponseCachingOptions> options,
             ILoggerFactory loggerFactory,
-            ObjectPoolProvider poolProvider)
+            ObjectPoolProvider poolProvider
+        )
             : this(
                 next,
                 options,
                 loggerFactory,
                 new ResponseCachingPolicyProvider(),
-                new MemoryResponseCache(new MemoryCache(new MemoryCacheOptions
-                {
-                    SizeLimit = options.Value.SizeLimit
-                })),
-                new ResponseCachingKeyProvider(poolProvider, options))
-        { }
+                new MemoryResponseCache(
+                    new MemoryCache(new MemoryCacheOptions { SizeLimit = options.Value.SizeLimit })
+                ),
+                new ResponseCachingKeyProvider(poolProvider, options)
+            ) { }
 
         // for testing
         internal ResponseCachingMiddleware(
@@ -63,7 +70,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             ILoggerFactory loggerFactory,
             IResponseCachingPolicyProvider policyProvider,
             IResponseCache cache,
-            IResponseCachingKeyProvider keyProvider)
+            IResponseCachingKeyProvider keyProvider
+        )
         {
             if (next == null)
             {
@@ -111,7 +119,10 @@ namespace Microsoft.AspNetCore.ResponseCaching
             if (_policyProvider.AttemptResponseCaching(context))
             {
                 // Can this request be served from cache?
-                if (_policyProvider.AllowCacheLookup(context) && await TryServeFromCacheAsync(context))
+                if (
+                    _policyProvider.AllowCacheLookup(context)
+                    && await TryServeFromCacheAsync(context)
+                )
                 {
                     return;
                 }
@@ -154,7 +165,10 @@ namespace Microsoft.AspNetCore.ResponseCaching
             }
         }
 
-        internal async Task<bool> TryServeCachedResponseAsync(ResponseCachingContext context, IResponseCacheEntry? cacheEntry)
+        internal async Task<bool> TryServeCachedResponseAsync(
+            ResponseCachingContext context,
+            IResponseCacheEntry? cacheEntry
+        )
         {
             if (!(cacheEntry is CachedResponse cachedResponse))
             {
@@ -165,7 +179,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
             context.CachedResponseHeaders = cachedResponse.Headers;
             context.ResponseTime = _options.SystemClock.UtcNow;
             var cachedEntryAge = context.ResponseTime.Value - context.CachedResponse.Created;
-            context.CachedEntryAge = cachedEntryAge > TimeSpan.Zero ? cachedEntryAge : TimeSpan.Zero;
+            context.CachedEntryAge =
+                cachedEntryAge > TimeSpan.Zero ? cachedEntryAge : TimeSpan.Zero;
 
             if (_policyProvider.IsCachedEntryFresh(context))
             {
@@ -199,7 +214,9 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     // Note: int64 division truncates result and errors may be up to 1 second. This reduction in
                     // accuracy of age calculation is considered appropriate since it is small compared to clock
                     // skews and the "Age" header is an estimate of the real age of cached content.
-                    response.Headers[HeaderNames.Age] = HeaderUtilities.FormatNonNegativeInt64(context.CachedEntryAge.Value.Ticks / TimeSpan.TicksPerSecond);
+                    response.Headers[HeaderNames.Age] = HeaderUtilities.FormatNonNegativeInt64(
+                        context.CachedEntryAge.Value.Ticks / TimeSpan.TicksPerSecond
+                    );
 
                     // Copy the cached response body
                     var body = context.CachedResponse.Body;
@@ -207,7 +224,10 @@ namespace Microsoft.AspNetCore.ResponseCaching
                     {
                         try
                         {
-                            await body.CopyToAsync(response.BodyWriter, context.HttpContext.RequestAborted);
+                            await body.CopyToAsync(
+                                response.BodyWriter,
+                                context.HttpContext.RequestAborted
+                            );
                         }
                         catch (OperationCanceledException)
                         {
@@ -248,7 +268,12 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 }
             }
 
-            if (HeaderUtilities.ContainsCacheDirective(context.HttpContext.Request.Headers[HeaderNames.CacheControl], CacheControlHeaderValue.OnlyIfCachedString))
+            if (
+                HeaderUtilities.ContainsCacheDirective(
+                    context.HttpContext.Request.Headers[HeaderNames.CacheControl],
+                    CacheControlHeaderValue.OnlyIfCachedString
+                )
+            )
             {
                 _logger.GatewayTimeoutServed();
                 context.HttpContext.Response.StatusCode = StatusCodes.Status504GatewayTimeout;
@@ -258,7 +283,6 @@ namespace Microsoft.AspNetCore.ResponseCaching
             _logger.NoResponseServed();
             return false;
         }
-
 
         /// <summary>
         /// Finalize cache headers.
@@ -274,12 +298,17 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
                 // Create the cache entry now
                 var response = context.HttpContext.Response;
-                var varyHeaders = new StringValues(response.Headers.GetCommaSeparatedValues(HeaderNames.Vary));
-                var varyQueryKeys = new StringValues(context.HttpContext.Features.Get<IResponseCachingFeature>()?.VaryByQueryKeys);
-                context.CachedResponseValidFor = context.ResponseSharedMaxAge ??
-                    context.ResponseMaxAge ??
-                    (context.ResponseExpires - context.ResponseTime!.Value) ??
-                    DefaultExpirationTimeSpan;
+                var varyHeaders = new StringValues(
+                    response.Headers.GetCommaSeparatedValues(HeaderNames.Vary)
+                );
+                var varyQueryKeys = new StringValues(
+                    context.HttpContext.Features.Get<IResponseCachingFeature>()?.VaryByQueryKeys
+                );
+                context.CachedResponseValidFor =
+                    context.ResponseSharedMaxAge
+                    ?? context.ResponseMaxAge
+                    ?? (context.ResponseExpires - context.ResponseTime!.Value)
+                    ?? DefaultExpirationTimeSpan;
 
                 // Generate a base key if none exist
                 if (string.IsNullOrEmpty(context.BaseKey))
@@ -288,16 +317,29 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 }
 
                 // Check if any vary rules exist
-                if (!StringValues.IsNullOrEmpty(varyHeaders) || !StringValues.IsNullOrEmpty(varyQueryKeys))
+                if (
+                    !StringValues.IsNullOrEmpty(varyHeaders)
+                    || !StringValues.IsNullOrEmpty(varyQueryKeys)
+                )
                 {
                     // Normalize order and casing of vary by rules
                     var normalizedVaryHeaders = GetOrderCasingNormalizedStringValues(varyHeaders);
-                    var normalizedVaryQueryKeys = GetOrderCasingNormalizedStringValues(varyQueryKeys);
+                    var normalizedVaryQueryKeys = GetOrderCasingNormalizedStringValues(
+                        varyQueryKeys
+                    );
 
                     // Update vary rules if they are different
-                    if (context.CachedVaryByRules == null ||
-                        !StringValues.Equals(context.CachedVaryByRules.QueryKeys, normalizedVaryQueryKeys) ||
-                        !StringValues.Equals(context.CachedVaryByRules.Headers, normalizedVaryHeaders))
+                    if (
+                        context.CachedVaryByRules == null
+                        || !StringValues.Equals(
+                            context.CachedVaryByRules.QueryKeys,
+                            normalizedVaryQueryKeys
+                        )
+                        || !StringValues.Equals(
+                            context.CachedVaryByRules.Headers,
+                            normalizedVaryHeaders
+                        )
+                    )
                     {
                         context.CachedVaryByRules = new CachedVaryByRules
                         {
@@ -319,7 +361,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 {
                     context.ResponseDate = context.ResponseTime!.Value;
                     // Setting the date on the raw response headers.
-                    context.HttpContext.Response.Headers[HeaderNames.Date] = HeaderUtilities.FormatDate(context.ResponseDate.Value);
+                    context.HttpContext.Response.Headers[HeaderNames.Date] =
+                        HeaderUtilities.FormatDate(context.ResponseDate.Value);
                 }
 
                 // Store the response on the state
@@ -332,7 +375,13 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
                 foreach (var header in context.HttpContext.Response.Headers)
                 {
-                    if (!string.Equals(header.Key, HeaderNames.Age, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !string.Equals(
+                            header.Key,
+                            HeaderNames.Age,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         context.CachedResponse.Headers[header.Key] = header.Value;
                     }
@@ -349,7 +398,11 @@ namespace Microsoft.AspNetCore.ResponseCaching
         {
             if (OnFinalizeCacheHeaders(context))
             {
-                _cache.Set(context.BaseKey, context.CachedVaryByRules, context.CachedResponseValidFor);
+                _cache.Set(
+                    context.BaseKey,
+                    context.CachedVaryByRules,
+                    context.CachedResponseValidFor
+                );
             }
         }
 
@@ -359,20 +412,35 @@ namespace Microsoft.AspNetCore.ResponseCaching
             {
                 var contentLength = context.HttpContext.Response.ContentLength;
                 var cachedResponseBody = context.ResponseCachingStream.GetCachedResponseBody();
-                if (!contentLength.HasValue || contentLength == cachedResponseBody.Length
-                    || (cachedResponseBody.Length == 0
-                        && HttpMethods.IsHead(context.HttpContext.Request.Method)))
+                if (
+                    !contentLength.HasValue
+                    || contentLength == cachedResponseBody.Length
+                    || (
+                        cachedResponseBody.Length == 0
+                        && HttpMethods.IsHead(context.HttpContext.Request.Method)
+                    )
+                )
                 {
                     var response = context.HttpContext.Response;
                     // Add a content-length if required
-                    if (!response.ContentLength.HasValue && StringValues.IsNullOrEmpty(response.Headers[HeaderNames.TransferEncoding]))
+                    if (
+                        !response.ContentLength.HasValue
+                        && StringValues.IsNullOrEmpty(
+                            response.Headers[HeaderNames.TransferEncoding]
+                        )
+                    )
                     {
-                        context.CachedResponse.Headers[HeaderNames.ContentLength] = HeaderUtilities.FormatNonNegativeInt64(cachedResponseBody.Length);
+                        context.CachedResponse.Headers[HeaderNames.ContentLength] =
+                            HeaderUtilities.FormatNonNegativeInt64(cachedResponseBody.Length);
                     }
 
                     context.CachedResponse.Body = cachedResponseBody;
                     _logger.ResponseCached();
-                    _cache.Set(context.StorageVaryKey ?? context.BaseKey, context.CachedResponse, context.CachedResponseValidFor);
+                    _cache.Set(
+                        context.StorageVaryKey ?? context.BaseKey,
+                        context.CachedResponse,
+                        context.CachedResponseValidFor
+                    );
                 }
                 else
                 {
@@ -414,7 +482,9 @@ namespace Microsoft.AspNetCore.ResponseCaching
         {
             if (context.Features.Get<IResponseCachingFeature>() != null)
             {
-                throw new InvalidOperationException($"Another instance of {nameof(ResponseCachingFeature)} already exists. Only one instance of {nameof(ResponseCachingMiddleware)} can be configured for an application.");
+                throw new InvalidOperationException(
+                    $"Another instance of {nameof(ResponseCachingFeature)} already exists. Only one instance of {nameof(ResponseCachingMiddleware)} can be configured for an application."
+                );
             }
             context.Features.Set<IResponseCachingFeature>(new ResponseCachingFeature());
         }
@@ -427,7 +497,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
                 context.OriginalResponseStream,
                 _options.MaximumBodySize,
                 StreamUtilities.BodySegmentSize,
-                () => StartResponse(context));
+                () => StartResponse(context)
+            );
             context.HttpContext.Response.Body = context.ResponseCachingStream;
 
             // Add IResponseCachingFeature
@@ -453,16 +524,31 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
             if (!StringValues.IsNullOrEmpty(ifNoneMatchHeader))
             {
-                if (ifNoneMatchHeader.Count == 1 && StringSegment.Equals(ifNoneMatchHeader[0], EntityTagHeaderValue.Any.Tag, StringComparison.OrdinalIgnoreCase))
+                if (
+                    ifNoneMatchHeader.Count == 1
+                    && StringSegment.Equals(
+                        ifNoneMatchHeader[0],
+                        EntityTagHeaderValue.Any.Tag,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     context.Logger.NotModifiedIfNoneMatchStar();
                     return true;
                 }
 
                 EntityTagHeaderValue eTag;
-                if (!StringValues.IsNullOrEmpty(cachedResponseHeaders[HeaderNames.ETag])
-                    && EntityTagHeaderValue.TryParse(cachedResponseHeaders[HeaderNames.ETag].ToString(), out eTag)
-                    && EntityTagHeaderValue.TryParseList(ifNoneMatchHeader, out var ifNoneMatchEtags))
+                if (
+                    !StringValues.IsNullOrEmpty(cachedResponseHeaders[HeaderNames.ETag])
+                    && EntityTagHeaderValue.TryParse(
+                        cachedResponseHeaders[HeaderNames.ETag].ToString(),
+                        out eTag
+                    )
+                    && EntityTagHeaderValue.TryParseList(
+                        ifNoneMatchHeader,
+                        out var ifNoneMatchEtags
+                    )
+                )
                 {
                     for (var i = 0; i < ifNoneMatchEtags.Count; i++)
                     {
@@ -477,19 +563,31 @@ namespace Microsoft.AspNetCore.ResponseCaching
             }
             else
             {
-                var ifModifiedSince = context.HttpContext.Request.Headers[HeaderNames.IfModifiedSince];
+                var ifModifiedSince = context.HttpContext.Request.Headers[
+                    HeaderNames.IfModifiedSince
+                ];
                 if (!StringValues.IsNullOrEmpty(ifModifiedSince))
                 {
                     DateTimeOffset modified;
-                    if (!HeaderUtilities.TryParseDate(cachedResponseHeaders[HeaderNames.LastModified].ToString(), out modified) &&
-                        !HeaderUtilities.TryParseDate(cachedResponseHeaders[HeaderNames.Date].ToString(), out modified))
+                    if (
+                        !HeaderUtilities.TryParseDate(
+                            cachedResponseHeaders[HeaderNames.LastModified].ToString(),
+                            out modified
+                        )
+                        && !HeaderUtilities.TryParseDate(
+                            cachedResponseHeaders[HeaderNames.Date].ToString(),
+                            out modified
+                        )
+                    )
                     {
                         return false;
                     }
 
                     DateTimeOffset modifiedSince;
-                    if (HeaderUtilities.TryParseDate(ifModifiedSince.ToString(), out modifiedSince) &&
-                        modified <= modifiedSince)
+                    if (
+                        HeaderUtilities.TryParseDate(ifModifiedSince.ToString(), out modifiedSince)
+                        && modified <= modifiedSince
+                    )
                     {
                         context.Logger.NotModifiedIfModifiedSinceSatisfied(modified, modifiedSince);
                         return true;

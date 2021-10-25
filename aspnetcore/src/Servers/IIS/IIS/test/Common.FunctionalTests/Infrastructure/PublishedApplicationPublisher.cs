@@ -20,14 +20,21 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             _applicationName = applicationName;
         }
 
-        public override Task<PublishedApplication> Publish(DeploymentParameters deploymentParameters, ILogger logger)
+        public override Task<PublishedApplication> Publish(
+            DeploymentParameters deploymentParameters,
+            ILogger logger
+        )
         {
             var path = Path.Combine(AppContext.BaseDirectory, GetProfileName(deploymentParameters));
 
             if (!Directory.Exists(path))
             {
                 var solutionPath = GetProjectReferencePublishLocation(deploymentParameters);
-                logger.LogInformation("{PublishDir} doesn't exist falling back to solution based path {SolutionBasedDir}", solutionPath, solutionPath);
+                logger.LogInformation(
+                    "{PublishDir} doesn't exist falling back to solution based path {SolutionBasedDir}",
+                    solutionPath,
+                    solutionPath
+                );
                 path = solutionPath;
             }
 
@@ -42,13 +49,29 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
 
         private string GetProjectReferencePublishLocation(DeploymentParameters deploymentParameters)
         {
-// Deployers do not work in distributed environments
-// see https://github.com/dotnet/aspnetcore/issues/10268 and https://github.com/dotnet/extensions/issues/1697
+            // Deployers do not work in distributed environments
+            // see https://github.com/dotnet/aspnetcore/issues/10268 and https://github.com/dotnet/extensions/issues/1697
 #pragma warning disable 0618
-            var testAssetsBasePath = Path.Combine(TestPathUtilities.GetSolutionRootDirectory("IISIntegration"), "IIS", "test", "testassets", _applicationName);
+            var testAssetsBasePath = Path.Combine(
+                TestPathUtilities.GetSolutionRootDirectory("IISIntegration"),
+                "IIS",
+                "test",
+                "testassets",
+                _applicationName
+            );
 #pragma warning restore 0618
-            var configuration = this.GetType().GetTypeInfo().Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
-            var path = Path.Combine(testAssetsBasePath, "bin", configuration, deploymentParameters.TargetFramework, "publish", GetProfileName(deploymentParameters));
+            var configuration =
+                this.GetType()
+                    .GetTypeInfo()
+                    .Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>().Configuration;
+            var path = Path.Combine(
+                testAssetsBasePath,
+                "bin",
+                configuration,
+                deploymentParameters.TargetFramework,
+                "publish",
+                GetProfileName(deploymentParameters)
+            );
             return path;
         }
 

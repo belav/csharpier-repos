@@ -13,7 +13,6 @@ namespace Microsoft.CodeAnalysis.CodeGen
         Filter,
         Finally,
         Fault,
-
         /// <summary>
         /// Scope of user-defined variable hoisted to state machine.
         /// </summary>

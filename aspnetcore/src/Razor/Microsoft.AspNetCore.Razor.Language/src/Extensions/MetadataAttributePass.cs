@@ -17,10 +17,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
         protected override void OnInitialized()
         {
-            _identifierFeature = Engine.Features.OfType<IMetadataIdentifierFeature>().FirstOrDefault();
+            _identifierFeature = Engine.Features
+                .OfType<IMetadataIdentifierFeature>()
+                .FirstOrDefault();
         }
 
-        protected override void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+        protected override void ExecuteCore(
+            RazorCodeDocument codeDocument,
+            DocumentIntermediateNode documentNode
+        )
         {
             if (documentNode.Options == null || documentNode.Options.SuppressMetadataAttributes)
             {
@@ -28,7 +33,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 return;
             }
 
-            if (string.Equals(documentNode.DocumentKind, ComponentDocumentClassifierPass.ComponentDocumentKind, StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    documentNode.DocumentKind,
+                    ComponentDocumentClassifierPass.ComponentDocumentKind,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 // Metadata attributes are not used for components.
                 return;
@@ -36,7 +47,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 
             // We need to be able to compute the data we need for the [RazorCompiledItem] attribute - that includes
             // a full type name, and a document kind, and optionally an identifier.
-            // 
+            //
             // If we can't use [RazorCompiledItem] then we don't care about the rest of the attributes.
             var @namespace = documentNode.FindPrimaryNamespace();
             if (@namespace == null || string.IsNullOrEmpty(@namespace.Content))
@@ -66,12 +77,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             }
 
             // [RazorCompiledItem] is an [assembly: ... ] attribute, so it needs to be applied at the global scope.
-            documentNode.Children.Insert(0, new RazorCompiledItemAttributeIntermediateNode()
-            {
-                TypeName = @namespace.Content + "." + @class.ClassName,
-                Kind = documentNode.DocumentKind,
-                Identifier = identifier,
-            });
+            documentNode.Children.Insert(
+                0,
+                new RazorCompiledItemAttributeIntermediateNode()
+                {
+                    TypeName = @namespace.Content + "." + @class.ClassName,
+                    Kind = documentNode.DocumentKind,
+                    Identifier = identifier,
+                }
+            );
 
             // Now we need to add a [RazorSourceChecksum] for the source and for each import
             // these are class attributes, so we need to find the insertion point to put them
@@ -107,12 +121,15 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 return;
             }
 
-            @namespace.Children.Insert((int)insert++, new RazorSourceChecksumAttributeIntermediateNode()
-            {
-                Checksum = checksum,
-                ChecksumAlgorithm = checksumAlgorithm,
-                Identifier = identifier,
-            });
+            @namespace.Children.Insert(
+                (int)insert++,
+                new RazorSourceChecksumAttributeIntermediateNode()
+                {
+                    Checksum = checksum,
+                    ChecksumAlgorithm = checksumAlgorithm,
+                    Identifier = identifier,
+                }
+            );
 
             // Now process the checksums of the imports
             Debug.Assert(_identifierFeature != null);
@@ -124,18 +141,26 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
                 checksumAlgorithm = import.GetChecksumAlgorithm();
                 identifier = _identifierFeature.GetIdentifier(codeDocument, import);
 
-                if (checksum == null || checksum.Length == 0 || checksumAlgorithm == null || identifier == null)
+                if (
+                    checksum == null
+                    || checksum.Length == 0
+                    || checksumAlgorithm == null
+                    || identifier == null
+                )
                 {
                     // It's ok to skip an import if we don't have all of the required information.
                     continue;
                 }
 
-                @namespace.Children.Insert((int)insert++, new RazorSourceChecksumAttributeIntermediateNode()
-                {
-                    Checksum = checksum,
-                    ChecksumAlgorithm = checksumAlgorithm,
-                    Identifier = identifier,
-                });
+                @namespace.Children.Insert(
+                    (int)insert++,
+                    new RazorSourceChecksumAttributeIntermediateNode()
+                    {
+                        Checksum = checksum,
+                        ChecksumAlgorithm = checksumAlgorithm,
+                        Identifier = identifier,
+                    }
+                );
             }
         }
     }

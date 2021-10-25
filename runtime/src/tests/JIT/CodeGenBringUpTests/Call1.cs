@@ -11,9 +11,12 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void  M() { Console.WriteLine("Hello"); }
+    public static void M()
+    {
+        Console.WriteLine("Hello");
+    }
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void  Call1()
+    public static void Call1()
     {
         M();
     }

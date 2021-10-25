@@ -24,7 +24,10 @@ namespace Test
             {
                 Main1();
             }
-            catch (Exception) { return 100; }
+            catch (Exception)
+            {
+                return 100;
+            }
             return -1;
         }
     }

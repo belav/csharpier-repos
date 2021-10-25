@@ -18,22 +18,18 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             _dictionaryJumptable = new HttpMethodDictionaryPolicyJumpTable(
                 0,
-                new Dictionary<string, int>
-                {
-                    [HttpMethods.Get] = 1
-                },
+                new Dictionary<string, int> { [HttpMethods.Get] = 1 },
                 -1,
-                new Dictionary<string, int>
-                {
-                    [HttpMethods.Get] = 2
-                });
+                new Dictionary<string, int> { [HttpMethods.Get] = 2 }
+            );
             _singleEntryJumptable = new HttpMethodSingleEntryPolicyJumpTable(
                 0,
                 HttpMethods.Get,
                 -1,
                 supportsCorsPreflight: true,
                 -1,
-                2);
+                2
+            );
 
             _httpContext = new DefaultHttpContext();
             _httpContext.Request.Method = HttpMethods.Get;

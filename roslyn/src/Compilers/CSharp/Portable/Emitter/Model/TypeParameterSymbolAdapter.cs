@@ -17,16 +17,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal partial class
 #if DEBUG
-        TypeParameterSymbolAdapter : SymbolAdapter,
+    TypeParameterSymbolAdapter
+        : SymbolAdapter,
 #else
-        TypeParameterSymbol :
-#endif 
-        Cci.IGenericParameterReference,
-        Cci.IGenericMethodParameterReference,
-        Cci.IGenericTypeParameterReference,
-        Cci.IGenericParameter,
-        Cci.IGenericMethodParameter,
-        Cci.IGenericTypeParameter
+    TypeParameterSymbol
+        :
+#endif
+          Cci.IGenericParameterReference,
+          Cci.IGenericMethodParameterReference,
+          Cci.IGenericTypeParameterReference,
+          Cci.IGenericParameter,
+          Cci.IGenericMethodParameter,
+          Cci.IGenericTypeParameter
     {
         bool Cci.ITypeReference.IsEnum
         {
@@ -118,7 +120,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(EmitContext context)
+        Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
+            EmitContext context
+        )
         {
             return null;
         }
@@ -205,10 +209,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         ushort Cci.IParameterListEntry.Index
         {
-            get
-            {
-                return (ushort)AdaptedTypeParameterSymbol.Ordinal;
-            }
+            get { return (ushort)AdaptedTypeParameterSymbol.Ordinal; }
         }
 
         Cci.IMethodReference Cci.IGenericMethodParameterReference.DefiningMethod
@@ -225,11 +226,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 Debug.Assert(AdaptedTypeParameterSymbol.IsDefinition);
-                return ((NamedTypeSymbol)AdaptedTypeParameterSymbol.ContainingSymbol).GetCciAdapter();
+                return (
+                    (NamedTypeSymbol)AdaptedTypeParameterSymbol.ContainingSymbol
+                ).GetCciAdapter();
             }
         }
 
-        IEnumerable<Cci.TypeReferenceWithAttributes> Cci.IGenericParameter.GetConstraints(EmitContext context)
+        IEnumerable<Cci.TypeReferenceWithAttributes> Cci.IGenericParameter.GetConstraints(
+            EmitContext context
+        )
         {
             var moduleBeingBuilt = (PEModuleBuilder)context.Module;
 
@@ -239,13 +244,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var typeRef = moduleBeingBuilt.GetSpecialType(
                     SpecialType.System_ValueType,
                     syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                    diagnostics: context.Diagnostics);
+                    diagnostics: context.Diagnostics
+                );
 
                 var modifier = CSharpCustomModifier.CreateRequired(
-                    moduleBeingBuilt.Compilation.GetWellKnownType(WellKnownType.System_Runtime_InteropServices_UnmanagedType));
+                    moduleBeingBuilt.Compilation.GetWellKnownType(
+                        WellKnownType.System_Runtime_InteropServices_UnmanagedType
+                    )
+                );
 
                 // emit "(class [mscorlib]System.ValueType modreq([mscorlib]System.Runtime.InteropServices.UnmanagedType" pattern as "unmanaged"
-                yield return new Cci.TypeReferenceWithAttributes(new Cci.ModifiedTypeReference(typeRef, ImmutableArray.Create<Cci.ICustomModifier>(modifier)));
+                yield return new Cci.TypeReferenceWithAttributes(
+                    new Cci.ModifiedTypeReference(
+                        typeRef,
+                        ImmutableArray.Create<Cci.ICustomModifier>(modifier)
+                    )
+                );
 
                 // do not emit another one for Dev11 similarities
                 seenValueType = true;
@@ -262,22 +276,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         seenValueType = true;
                         break;
                 }
-                var typeRef = moduleBeingBuilt.Translate(type.Type,
-                                                            syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                                                            diagnostics: context.Diagnostics);
+                var typeRef = moduleBeingBuilt.Translate(
+                    type.Type,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    diagnostics: context.Diagnostics
+                );
 
                 yield return type.GetTypeRefWithAttributes(
-                                                            moduleBeingBuilt,
-                                                            declaringSymbol: AdaptedTypeParameterSymbol,
-                                                            typeRef);
+                    moduleBeingBuilt,
+                    declaringSymbol: AdaptedTypeParameterSymbol,
+                    typeRef
+                );
             }
 
             if (AdaptedTypeParameterSymbol.HasValueTypeConstraint && !seenValueType)
             {
                 // Add System.ValueType constraint to comply with Dev11 output
-                var typeRef = moduleBeingBuilt.GetSpecialType(SpecialType.System_ValueType,
-                                                                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
-                                                                diagnostics: context.Diagnostics);
+                var typeRef = moduleBeingBuilt.GetSpecialType(
+                    SpecialType.System_ValueType,
+                    syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNodeOpt,
+                    diagnostics: context.Diagnostics
+                );
 
                 yield return new Cci.TypeReferenceWithAttributes(typeRef);
             }
@@ -285,17 +304,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         bool Cci.IGenericParameter.MustBeReferenceType
         {
-            get
-            {
-                return AdaptedTypeParameterSymbol.HasReferenceTypeConstraint;
-            }
+            get { return AdaptedTypeParameterSymbol.HasReferenceTypeConstraint; }
         }
 
         bool Cci.IGenericParameter.MustBeValueType
         {
             get
             {
-                return AdaptedTypeParameterSymbol.HasValueTypeConstraint || AdaptedTypeParameterSymbol.HasUnmanagedTypeConstraint;
+                return AdaptedTypeParameterSymbol.HasValueTypeConstraint
+                    || AdaptedTypeParameterSymbol.HasUnmanagedTypeConstraint;
             }
         }
 
@@ -303,10 +320,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                //  add constructor constraint for value type constrained 
+                //  add constructor constraint for value type constrained
                 //  type parameters to comply with Dev11 output
                 //  do this for "unmanaged" constraint too
-                return AdaptedTypeParameterSymbol.HasConstructorConstraint || AdaptedTypeParameterSymbol.HasValueTypeConstraint || AdaptedTypeParameterSymbol.HasUnmanagedTypeConstraint;
+                return AdaptedTypeParameterSymbol.HasConstructorConstraint
+                    || AdaptedTypeParameterSymbol.HasValueTypeConstraint
+                    || AdaptedTypeParameterSymbol.HasUnmanagedTypeConstraint;
             }
         }
 
@@ -323,7 +342,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     case VarianceKind.Out:
                         return Cci.TypeParameterVariance.Covariant;
                     default:
-                        throw ExceptionUtilities.UnexpectedValue(AdaptedTypeParameterSymbol.Variance);
+                        throw ExceptionUtilities.UnexpectedValue(
+                            AdaptedTypeParameterSymbol.Variance
+                        );
                 }
             }
         }
@@ -342,7 +363,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 CheckDefinitionInvariant();
-                return ((NamedTypeSymbol)AdaptedTypeParameterSymbol.ContainingSymbol).GetCciAdapter();
+                return (
+                    (NamedTypeSymbol)AdaptedTypeParameterSymbol.ContainingSymbol
+                ).GetCciAdapter();
             }
         }
     }
@@ -358,7 +381,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyAdapter is null)
             {
-                return InterlockedOperations.Initialize(ref _lazyAdapter, new TypeParameterSymbolAdapter(this));
+                return InterlockedOperations.Initialize(
+                    ref _lazyAdapter,
+                    new TypeParameterSymbolAdapter(this)
+                );
             }
 
             return _lazyAdapter;
@@ -372,7 +398,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 #endif
     }
-
 #if DEBUG
     internal partial class TypeParameterSymbolAdapter
     {

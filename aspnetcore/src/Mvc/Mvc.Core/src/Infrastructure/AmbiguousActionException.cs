@@ -18,10 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// Creates a new instance of <see cref="AmbiguousActionException" />.
         /// </summary>
         /// <param name="message">The exception message.</param>
-        public AmbiguousActionException(string? message)
-            : base(message)
-        {
-        }
+        public AmbiguousActionException(string? message) : base(message) { }
 
         /// <summary>
         /// Framework infrastructure. Do not call directly.
@@ -29,8 +26,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// <param name="info"></param>
         /// <param name="context"></param>
         protected AmbiguousActionException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

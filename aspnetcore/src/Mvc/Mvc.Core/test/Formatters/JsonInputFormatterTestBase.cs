@@ -38,7 +38,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         [InlineData("", false)]
         [InlineData(null, false)]
         [InlineData("invalid", false)]
-        public void CanRead_ReturnsTrueForAnySupportedContentType(string requestContentType, bool expectedCanRead)
+        public void CanRead_ReturnsTrueForAnySupportedContentType(
+            string requestContentType,
+            bool expectedCanRead
+        )
         {
             // Arrange
             var formatter = GetInputFormatter();
@@ -129,7 +132,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             Assert.False(result.HasError);
             var stringValue = Assert.IsType<string>(result.Model);
             Assert.Equal(content, stringValue);
-            Assert.True(httpContext.Request.Body.CanRead, "Verify that the request stream hasn't been disposed");
+            Assert.True(
+                httpContext.Request.Body.CanRead,
+                "Verify that the request stream hasn't been disposed"
+            );
         }
 
         [Fact]
@@ -144,7 +150,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var contentBytes = Encoding.UTF8.GetBytes(content);
             var httpContext = GetHttpContext(contentBytes);
 
-            var formatterContext = CreateInputFormatterContext(typeof(IEnumerable<IDictionary<string, short>>), httpContext);
+            var formatterContext = CreateInputFormatterContext(
+                typeof(IEnumerable<IDictionary<string, short>>),
+                httpContext
+            );
 
             // Act
             var result = await formatter.ReadAsync(formatterContext);
@@ -156,7 +165,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 kvp =>
                 {
                     Assert.Equal(expectedKey, kvp.Key);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -172,7 +182,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var httpContext = GetHttpContext(contentBytes);
 
             var formatterContext = CreateInputFormatterContext(
-                typeof(IEnumerable<IDictionary<string, short>>), httpContext);
+                typeof(IEnumerable<IDictionary<string, short>>),
+                httpContext
+            );
 
             // Act
             var result = await formatter.ReadAsync(formatterContext);
@@ -184,7 +196,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 kvp =>
                 {
                     Assert.Equal(expectedKey, kvp.Key);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -253,16 +266,20 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         }
 
         [Fact]
-        public virtual Task ReadAsync_ReadsValidArray_AsListOfT() => ReadAsync_ReadsValidArray_AsList(typeof(List<int>));
+        public virtual Task ReadAsync_ReadsValidArray_AsListOfT() =>
+            ReadAsync_ReadsValidArray_AsList(typeof(List<int>));
 
         [Fact]
-        public virtual Task ReadAsync_ReadsValidArray_AsIListOfT() => ReadAsync_ReadsValidArray_AsList(typeof(IList<int>));
+        public virtual Task ReadAsync_ReadsValidArray_AsIListOfT() =>
+            ReadAsync_ReadsValidArray_AsList(typeof(IList<int>));
 
         [Fact]
-        public virtual Task ReadAsync_ReadsValidArray_AsCollectionOfT() => ReadAsync_ReadsValidArray_AsList(typeof(ICollection<int>));
+        public virtual Task ReadAsync_ReadsValidArray_AsCollectionOfT() =>
+            ReadAsync_ReadsValidArray_AsList(typeof(ICollection<int>));
 
         [Fact]
-        public virtual Task ReadAsync_ReadsValidArray_AsEnumerableOfT() => ReadAsync_ReadsValidArray_AsList(typeof(IEnumerable<int>));
+        public virtual Task ReadAsync_ReadsValidArray_AsEnumerableOfT() =>
+            ReadAsync_ReadsValidArray_AsList(typeof(IEnumerable<int>));
 
         protected async Task ReadAsync_ReadsValidArray_AsList(Type requestedType)
         {
@@ -294,7 +311,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var contentBytes = Encoding.UTF8.GetBytes(content);
             var httpContext = GetHttpContext(contentBytes);
 
-            var formatterContext = CreateInputFormatterContext(typeof(List<ComplexModel>), httpContext);
+            var formatterContext = CreateInputFormatterContext(
+                typeof(List<ComplexModel>),
+                httpContext
+            );
 
             var expectedKey = ReadAsync_ArrayOfObjects_HasCorrectKey_Expected;
 
@@ -303,12 +323,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // Assert
             Assert.True(result.HasError, "Model should have had an error!");
-            Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key),
+            Assert.Collection(
+                formatterContext.ModelState.OrderBy(k => k.Key),
                 kvp =>
                 {
                     Assert.Equal(expectedKey, kvp.Key);
                     Assert.Single(kvp.Value.Errors);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -329,12 +351,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // Assert
             Assert.True(result.HasError, "Model should have had an error!");
-            Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key),
+            Assert.Collection(
+                formatterContext.ModelState.OrderBy(k => k.Key),
                 kvp =>
                 {
                     Assert.Equal(expectedKey, kvp.Key);
                     Assert.Single(kvp.Value.Errors);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -356,11 +380,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // Assert
             Assert.True(result.HasError, "Model should have produced an error!");
-            Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key),
+            Assert.Collection(
+                formatterContext.ModelState.OrderBy(k => k.Key),
                 kvp =>
                 {
                     Assert.Equal(expectedValue, kvp.Key);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -369,11 +395,16 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Arrange
             var formatter = GetInputFormatter();
 
-            var content = "[{ \"Name\": \"Name One\", \"Age\": 30}, { \"Name\": \"Name Two\", \"Small\": 300}]";
+            var content =
+                "[{ \"Name\": \"Name One\", \"Age\": 30}, { \"Name\": \"Name Two\", \"Small\": 300}]";
             var contentBytes = Encoding.UTF8.GetBytes(content);
             var httpContext = GetHttpContext(contentBytes);
 
-            var formatterContext = CreateInputFormatterContext(typeof(ComplexModel[]), httpContext, modelName: "names");
+            var formatterContext = CreateInputFormatterContext(
+                typeof(ComplexModel[]),
+                httpContext,
+                modelName: "names"
+            );
             var expectedKey = ReadAsync_InvalidComplexArray_AddsOverflowErrorsToModelState_Expected;
 
             // Act
@@ -383,10 +414,12 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             Assert.True(result.HasError);
             Assert.Collection(
                 formatterContext.ModelState.OrderBy(k => k.Key),
-                kvp => {
+                kvp =>
+                {
                     Assert.Equal(expectedKey, kvp.Key);
                     Assert.Single(kvp.Value.Errors);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -421,7 +454,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public async Task ReadAsync_WithInputThatDeserializesToNull_SetsModelOnlyIfAllowingEmptyInput(
             string content,
             bool treatEmptyInputAsDefaultValue,
-            bool expectedIsModelSet)
+            bool expectedIsModelSet
+        )
         {
             // Arrange
             var formatter = GetInputFormatter();
@@ -432,7 +466,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var formatterContext = CreateInputFormatterContext(
                 typeof(string),
                 httpContext,
-                treatEmptyInputAsDefaultValue: treatEmptyInputAsDefaultValue);
+                treatEmptyInputAsDefaultValue: treatEmptyInputAsDefaultValue
+            );
 
             // Act
             var result = await formatter.ReadAsync(formatterContext);
@@ -449,7 +484,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Arrange
             var formatter = GetInputFormatter();
 
-            var content = "{ \"Id\": 5, \"Person\": { \"Name\": \"name\", \"Numbers\": [3, 2, \"Hamburger\"]} }";
+            var content =
+                "{ \"Id\": 5, \"Person\": { \"Name\": \"name\", \"Numbers\": [3, 2, \"Hamburger\"]} }";
             var contentBytes = Encoding.UTF8.GetBytes(content);
             var httpContext = GetHttpContext(contentBytes);
 
@@ -462,11 +498,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             // Assert
             Assert.True(result.HasError, "Model should have had an error!");
-            Assert.Collection(formatterContext.ModelState.OrderBy(k => k.Key),
-                kvp => {
+            Assert.Collection(
+                formatterContext.ModelState.OrderBy(k => k.Key),
+                kvp =>
+                {
                     Assert.Equal(expectedKey, kvp.Key);
                     Assert.Single(kvp.Value.Errors);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -497,7 +536,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var content = "{\"name\": \"Test\"}";
             var contentBytes = Encoding.UTF8.GetBytes(content);
             var httpContext = GetHttpContext(contentBytes);
-            var testBufferedReadStream = new VerifyDisposeFileBufferingReadStream(httpContext.Request.Body, 1024);
+            var testBufferedReadStream = new VerifyDisposeFileBufferingReadStream(
+                httpContext.Request.Body,
+                1024
+            );
             httpContext.Request.Body = testBufferedReadStream;
 
             var formatterContext = CreateInputFormatterContext(typeof(ComplexModel), httpContext);
@@ -574,18 +616,22 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
         internal abstract string ReadAsync_ComplexPoco_Expected { get; }
 
-        protected abstract TextInputFormatter GetInputFormatter(bool allowInputFormatterExceptionMessages = true);
+        protected abstract TextInputFormatter GetInputFormatter(
+            bool allowInputFormatterExceptionMessages = true
+        );
 
         protected static HttpContext GetHttpContext(
             byte[] contentBytes,
-            string contentType = "application/json")
+            string contentType = "application/json"
+        )
         {
             return GetHttpContext(new MemoryStream(contentBytes), contentType);
         }
 
         protected static HttpContext GetHttpContext(
             Stream requestStream,
-            string contentType = "application/json")
+            string contentType = "application/json"
+        )
         {
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Body = requestStream;
@@ -598,7 +644,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             Type modelType,
             HttpContext httpContext,
             string modelName = null,
-            bool treatEmptyInputAsDefaultValue = false)
+            bool treatEmptyInputAsDefaultValue = false
+        )
         {
             var provider = new EmptyModelMetadataProvider();
             var metadata = provider.GetMetadataForType(modelType);
@@ -609,7 +656,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
                 modelState: new ModelStateDictionary(),
                 metadata: metadata,
                 readerFactory: new TestHttpRequestStreamReaderFactory().CreateReader,
-                treatEmptyInputAsDefaultValue: treatEmptyInputAsDefaultValue);
+                treatEmptyInputAsDefaultValue: treatEmptyInputAsDefaultValue
+            );
         }
 
         protected sealed class ComplexPoco
@@ -638,9 +686,8 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         private class VerifyDisposeFileBufferingReadStream : FileBufferingReadStream
         {
             public bool Disposed { get; private set; }
-            public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold) : base(inner, memoryThreshold)
-            {
-            }
+            public VerifyDisposeFileBufferingReadStream(Stream inner, int memoryThreshold)
+                : base(inner, memoryThreshold) { }
 
             protected override void Dispose(bool disposing)
             {

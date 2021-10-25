@@ -22,8 +22,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private readonly SourceParameterSymbol _originalParam;
 
-        internal SourceClonedParameterSymbol(SourceParameterSymbol originalParam, Symbol newOwner, int newOrdinal, bool suppressOptional)
-            : base(newOwner, newOrdinal)
+        internal SourceClonedParameterSymbol(
+            SourceParameterSymbol originalParam,
+            Symbol newOwner,
+            int newOrdinal,
+            bool suppressOptional
+        ) : base(newOwner, newOrdinal)
         {
             Debug.Assert((object)originalParam != null);
 
@@ -39,7 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                // Since you can't get from the syntax node that represents the original parameter 
+                // Since you can't get from the syntax node that represents the original parameter
                 // back to this symbol we decided not to return the original syntax node here.
                 return ImmutableArray<SyntaxReference>.Empty;
             }
@@ -55,7 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 // pseudo-custom attributes are not suppressed:
-                return _suppressOptional ? _originalParam.HasOptionalAttribute : _originalParam.IsMetadataOptional;
+                return _suppressOptional
+                  ? _originalParam.HasOptionalAttribute
+                  : _originalParam.IsMetadataOptional;
             }
         }
 
@@ -64,7 +70,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 // pseudo-custom attributes are not suppressed:
-                return _suppressOptional ? _originalParam.DefaultValueFromAttributes : _originalParam.ExplicitDefaultConstantValue;
+                return _suppressOptional
+                  ? _originalParam.DefaultValueFromAttributes
+                  : _originalParam.ExplicitDefaultConstantValue;
             }
         }
 
@@ -73,13 +81,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _originalParam.DefaultValueFromAttributes; }
         }
 
-        internal override ParameterSymbol WithCustomModifiersAndParams(TypeSymbol newType, ImmutableArray<CustomModifier> newCustomModifiers, ImmutableArray<CustomModifier> newRefCustomModifiers, bool newIsParams)
+        internal override ParameterSymbol WithCustomModifiersAndParams(
+            TypeSymbol newType,
+            ImmutableArray<CustomModifier> newCustomModifiers,
+            ImmutableArray<CustomModifier> newRefCustomModifiers,
+            bool newIsParams
+        )
         {
             return new SourceClonedParameterSymbol(
-                _originalParam.WithCustomModifiersAndParamsCore(newType, newCustomModifiers, newRefCustomModifiers, newIsParams),
+                _originalParam.WithCustomModifiersAndParamsCore(
+                    newType,
+                    newCustomModifiers,
+                    newRefCustomModifiers,
+                    newIsParams
+                ),
                 this.ContainingSymbol,
                 this.Ordinal,
-                _suppressOptional);
+                _suppressOptional
+            );
         }
 
         #region Forwarded
@@ -163,7 +182,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get { return ImmutableHashSet<string>.Empty; }
         }
-
         #endregion
     }
 }

@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,59 +13,76 @@ namespace Microsoft.AspNetCore.Certificates.Generation
     internal class MacOSCertificateManager : CertificateManager
     {
         private const string CertificateSubjectRegex = "CN=(.*[^,]+).*";
-        private static readonly string MacOSUserKeyChain = Environment.GetEnvironmentVariable("HOME") + "/Library/Keychains/login.keychain-db";
+        private static readonly string MacOSUserKeyChain =
+            Environment.GetEnvironmentVariable("HOME") + "/Library/Keychains/login.keychain-db";
         private const string MacOSSystemKeyChain = "/Library/Keychains/System.keychain";
         private const string MacOSFindCertificateCommandLine = "security";
-        private static readonly string MacOSFindCertificateCommandLineArgumentsFormat = "find-certificate -c {0} -a -Z -p " + MacOSSystemKeyChain;
+        private static readonly string MacOSFindCertificateCommandLineArgumentsFormat =
+            "find-certificate -c {0} -a -Z -p " + MacOSSystemKeyChain;
         private const string MacOSFindCertificateOutputRegex = "SHA-1 hash: ([0-9A-Z]+)";
         private const string MacOSRemoveCertificateTrustCommandLine = "sudo";
-        private const string MacOSRemoveCertificateTrustCommandLineArgumentsFormat = "security remove-trusted-cert -d {0}";
+        private const string MacOSRemoveCertificateTrustCommandLineArgumentsFormat =
+            "security remove-trusted-cert -d {0}";
         private const string MacOSDeleteCertificateCommandLine = "sudo";
-        private const string MacOSDeleteCertificateCommandLineArgumentsFormat = "security delete-certificate -Z {0} {1}";
+        private const string MacOSDeleteCertificateCommandLineArgumentsFormat =
+            "security delete-certificate -Z {0} {1}";
         private const string MacOSTrustCertificateCommandLine = "sudo";
-        private static readonly string MacOSTrustCertificateCommandLineArguments = "security add-trusted-cert -d -r trustRoot -k " + MacOSSystemKeyChain + " ";
+        private static readonly string MacOSTrustCertificateCommandLineArguments =
+            "security add-trusted-cert -d -r trustRoot -k " + MacOSSystemKeyChain + " ";
 
         private const string MacOSAddCertificateToKeyChainCommandLine = "security";
-        private static readonly string MacOSAddCertificateToKeyChainCommandLineArgumentsFormat = "import {0} -k " + MacOSUserKeyChain + " -t cert -f pkcs12 -P {1} -A";
+        private static readonly string MacOSAddCertificateToKeyChainCommandLineArgumentsFormat =
+            "import {0} -k " + MacOSUserKeyChain + " -t cert -f pkcs12 -P {1} -A";
 
-        public const string InvalidCertificateState = "The ASP.NET Core developer certificate is in an invalid state. " +
-            "To fix this issue, run the following commands 'dotnet dev-certs https --clean' and 'dotnet dev-certs https' to remove all existing ASP.NET Core development certificates " +
-            "and create a new untrusted developer certificate. " +
-            "On macOS or Windows, use 'dotnet dev-certs https --trust' to trust the new certificate.";
+        public const string InvalidCertificateState =
+            "The ASP.NET Core developer certificate is in an invalid state. "
+            + "To fix this issue, run the following commands 'dotnet dev-certs https --clean' and 'dotnet dev-certs https' to remove all existing ASP.NET Core development certificates "
+            + "and create a new untrusted developer certificate. "
+            + "On macOS or Windows, use 'dotnet dev-certs https --trust' to trust the new certificate.";
 
         public const string KeyNotAccessibleWithoutUserInteraction =
-            "The application is trying to access the ASP.NET Core developer certificate key. " +
-            "A prompt might appear to ask for permission to access the key. " +
-            "When that happens, select 'Always Allow' to grant 'dotnet' access to the certificate key in the future.";
+            "The application is trying to access the ASP.NET Core developer certificate key. "
+            + "A prompt might appear to ask for permission to access the key. "
+            + "When that happens, select 'Always Allow' to grant 'dotnet' access to the certificate key in the future.";
 
         private static readonly TimeSpan MaxRegexTimeout = TimeSpan.FromMinutes(1);
 
-        public MacOSCertificateManager()
-        {
-        }
+        public MacOSCertificateManager() { }
 
-        internal MacOSCertificateManager(string subject, int version)
-            : base(subject, version)
-        {
-        }
+        internal MacOSCertificateManager(string subject, int version) : base(subject, version) { }
 
         protected override void TrustCertificateCore(X509Certificate2 publicCertificate)
         {
             var tmpFile = Path.GetTempFileName();
             try
             {
-                ExportCertificate(publicCertificate, tmpFile, includePrivateKey: false, password: null, CertificateKeyExportFormat.Pfx);
+                ExportCertificate(
+                    publicCertificate,
+                    tmpFile,
+                    includePrivateKey: false,
+                    password: null,
+                    CertificateKeyExportFormat.Pfx
+                );
                 if (Log.IsEnabled())
                 {
-                    Log.MacOSTrustCommandStart($"{MacOSTrustCertificateCommandLine} {MacOSTrustCertificateCommandLineArguments}{tmpFile}");
+                    Log.MacOSTrustCommandStart(
+                        $"{MacOSTrustCertificateCommandLine} {MacOSTrustCertificateCommandLineArguments}{tmpFile}"
+                    );
                 }
-                using (var process = Process.Start(MacOSTrustCertificateCommandLine, MacOSTrustCertificateCommandLineArguments + tmpFile))
+                using (
+                    var process = Process.Start(
+                        MacOSTrustCertificateCommandLine,
+                        MacOSTrustCertificateCommandLineArguments + tmpFile
+                    )
+                )
                 {
                     process.WaitForExit();
                     if (process.ExitCode != 0)
                     {
                         Log.MacOSTrustCommandError(process.ExitCode);
-                        throw new InvalidOperationException("There was an error trusting the certificate.");
+                        throw new InvalidOperationException(
+                            "There was an error trusting the certificate."
+                        );
                     }
                 }
                 Log.MacOSTrustCommandEnd();
@@ -87,12 +103,22 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             }
         }
 
-        internal override CheckCertificateStateResult CheckCertificateState(X509Certificate2 candidate, bool interactive)
+        internal override CheckCertificateStateResult CheckCertificateState(
+            X509Certificate2 candidate,
+            bool interactive
+        )
         {
-            var sentinelPath = Path.Combine(Environment.GetEnvironmentVariable("HOME")!, ".dotnet", $"certificates.{candidate.GetCertHashString(HashAlgorithmName.SHA256)}.sentinel");
+            var sentinelPath = Path.Combine(
+                Environment.GetEnvironmentVariable("HOME")!,
+                ".dotnet",
+                $"certificates.{candidate.GetCertHashString(HashAlgorithmName.SHA256)}.sentinel"
+            );
             if (!interactive && !File.Exists(sentinelPath))
             {
-                return new CheckCertificateStateResult(false, KeyNotAccessibleWithoutUserInteraction);
+                return new CheckCertificateStateResult(
+                    false,
+                    KeyNotAccessibleWithoutUserInteraction
+                );
             }
 
             // Tries to use the certificate key to validate it can't access it
@@ -109,11 +135,17 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 // with the certificate at some point.
                 var value = new byte[32];
                 RandomNumberGenerator.Fill(value);
-                rsa.Decrypt(rsa.Encrypt(value, RSAEncryptionPadding.Pkcs1), RSAEncryptionPadding.Pkcs1);
+                rsa.Decrypt(
+                    rsa.Encrypt(value, RSAEncryptionPadding.Pkcs1),
+                    RSAEncryptionPadding.Pkcs1
+                );
 
                 // If we were able to access the key, create a sentinel so that we don't have to show a prompt
                 // on every kestrel run.
-                if (Directory.Exists(Path.GetDirectoryName(sentinelPath)) && !File.Exists(sentinelPath))
+                if (
+                    Directory.Exists(Path.GetDirectoryName(sentinelPath))
+                    && !File.Exists(sentinelPath)
+                )
                 {
                     File.WriteAllText(sentinelPath, "true");
                 }
@@ -127,7 +159,6 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             }
         }
 
-
         internal override void CorrectCertificateState(X509Certificate2 candidate)
         {
             var status = CheckCertificateState(candidate, true);
@@ -137,26 +168,45 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             }
         }
 
-
         public override bool IsTrusted(X509Certificate2 certificate)
         {
-            var subjectMatch = Regex.Match(certificate.Subject, CertificateSubjectRegex, RegexOptions.Singleline, MaxRegexTimeout);
+            var subjectMatch = Regex.Match(
+                certificate.Subject,
+                CertificateSubjectRegex,
+                RegexOptions.Singleline,
+                MaxRegexTimeout
+            );
             if (!subjectMatch.Success)
             {
-                throw new InvalidOperationException($"Can't determine the subject for the certificate with subject '{certificate.Subject}'.");
+                throw new InvalidOperationException(
+                    $"Can't determine the subject for the certificate with subject '{certificate.Subject}'."
+                );
             }
             var subject = subjectMatch.Groups[1].Value;
-            using var checkTrustProcess = Process.Start(new ProcessStartInfo(
-                MacOSFindCertificateCommandLine,
-                string.Format(CultureInfo.InvariantCulture, MacOSFindCertificateCommandLineArgumentsFormat, subject))
-            {
-                RedirectStandardOutput = true
-            });
+            using var checkTrustProcess = Process.Start(
+                new ProcessStartInfo(
+                    MacOSFindCertificateCommandLine,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        MacOSFindCertificateCommandLineArgumentsFormat,
+                        subject
+                    )
+                ) {
+                    RedirectStandardOutput = true
+                }
+            );
             var output = checkTrustProcess!.StandardOutput.ReadToEnd();
             checkTrustProcess.WaitForExit();
-            var matches = Regex.Matches(output, MacOSFindCertificateOutputRegex, RegexOptions.Multiline, MaxRegexTimeout);
+            var matches = Regex.Matches(
+                output,
+                MacOSFindCertificateOutputRegex,
+                RegexOptions.Multiline,
+                MaxRegexTimeout
+            );
             var hashes = matches.OfType<Match>().Select(m => m.Groups[1].Value).ToList();
-            return hashes.Any(h => string.Equals(h, certificate.Thumbprint, StringComparison.Ordinal));
+            return hashes.Any(
+                h => string.Equals(h, certificate.Thumbprint, StringComparison.Ordinal)
+            );
         }
 
         protected override void RemoveCertificateFromTrustedRoots(X509Certificate2 certificate)
@@ -175,9 +225,7 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                 {
                     RemoveCertificateTrustRule(certificate);
                 }
-                catch
-                {
-                }
+                catch { }
 
                 RemoveCertificateFromKeyChain(MacOSSystemKeyChain, certificate);
             }
@@ -201,7 +249,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                         CultureInfo.InvariantCulture,
                         MacOSRemoveCertificateTrustCommandLineArgumentsFormat,
                         certificatePath
-                    ));
+                    )
+                );
                 using var process = Process.Start(processInfo);
                 process!.WaitForExit();
                 if (process.ExitCode != 0)
@@ -226,7 +275,10 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             }
         }
 
-        private static void RemoveCertificateFromKeyChain(string keyChain, X509Certificate2 certificate)
+        private static void RemoveCertificateFromKeyChain(
+            string keyChain,
+            X509Certificate2 certificate
+        )
         {
             var processInfo = new ProcessStartInfo(
                 MacOSDeleteCertificateCommandLine,
@@ -235,8 +287,8 @@ namespace Microsoft.AspNetCore.Certificates.Generation
                     MacOSDeleteCertificateCommandLineArgumentsFormat,
                     certificate.Thumbprint.ToUpperInvariant(),
                     keyChain
-                ))
-            {
+                )
+            ) {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };
@@ -248,15 +300,18 @@ namespace Microsoft.AspNetCore.Certificates.Generation
 
             using (var process = Process.Start(processInfo))
             {
-                var output = process!.StandardOutput.ReadToEnd() + process.StandardError.ReadToEnd();
+                var output =
+                    process!.StandardOutput.ReadToEnd() + process.StandardError.ReadToEnd();
                 process.WaitForExit();
 
                 if (process.ExitCode != 0)
                 {
                     Log.MacOSRemoveCertificateFromKeyChainError(process.ExitCode);
-                    throw new InvalidOperationException($@"There was an error removing the certificate with thumbprint '{certificate.Thumbprint}'.
+                    throw new InvalidOperationException(
+                        $@"There was an error removing the certificate with thumbprint '{certificate.Thumbprint}'.
 
-{output}");
+{output}"
+                    );
                 }
             }
 
@@ -278,33 +333,39 @@ namespace Microsoft.AspNetCore.Certificates.Generation
 
             var processInfo = new ProcessStartInfo(
                 MacOSAddCertificateToKeyChainCommandLine,
-            string.Format(
-                CultureInfo.InvariantCulture,
-                MacOSAddCertificateToKeyChainCommandLineArgumentsFormat,
-                certificatePath,
-                password
-            ))
-            {
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    MacOSAddCertificateToKeyChainCommandLineArgumentsFormat,
+                    certificatePath,
+                    password
+                )
+            ) {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };
 
             if (Log.IsEnabled())
             {
-                Log.MacOSAddCertificateToKeyChainStart(MacOSUserKeyChain, GetDescription(certificate));
+                Log.MacOSAddCertificateToKeyChainStart(
+                    MacOSUserKeyChain,
+                    GetDescription(certificate)
+                );
             }
 
             using (var process = Process.Start(processInfo))
             {
-                var output = process!.StandardOutput.ReadToEnd() + process.StandardError.ReadToEnd();
+                var output =
+                    process!.StandardOutput.ReadToEnd() + process.StandardError.ReadToEnd();
                 process.WaitForExit();
 
                 if (process.ExitCode != 0)
                 {
                     Log.MacOSAddCertificateToKeyChainError(process.ExitCode);
-                    throw new InvalidOperationException($@"There was an error importing the certificate into the user key chain '{certificate.Thumbprint}'.
+                    throw new InvalidOperationException(
+                        $@"There was an error importing the certificate into the user key chain '{certificate.Thumbprint}'.
 
-{output}");
+{output}"
+                    );
                 }
             }
 
@@ -313,7 +374,10 @@ namespace Microsoft.AspNetCore.Certificates.Generation
             return certificate;
         }
 
-        protected override IList<X509Certificate2> GetCertificatesToRemove(StoreName storeName, StoreLocation storeLocation)
+        protected override IList<X509Certificate2> GetCertificatesToRemove(
+            StoreName storeName,
+            StoreLocation storeLocation
+        )
         {
             return ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false);
         }

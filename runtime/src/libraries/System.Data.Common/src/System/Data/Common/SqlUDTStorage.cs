@@ -19,38 +19,56 @@ namespace System.Data.Common
         private readonly bool _implementsIXmlSerializable;
         private readonly bool _implementsIComparable;
 
-        private static readonly ConcurrentDictionary<Type, object> s_typeToNull = new ConcurrentDictionary<Type, object>();
+        private static readonly ConcurrentDictionary<Type, object> s_typeToNull =
+            new ConcurrentDictionary<Type, object>();
 
         public SqlUdtStorage(DataColumn column, Type type)
-        : this(column, type, GetStaticNullForUdtType(type))
-        {
-        }
+            : this(column, type, GetStaticNullForUdtType(type)) { }
 
         private SqlUdtStorage(DataColumn column, Type type, object nullValue)
-        : base(column, type, nullValue, nullValue, typeof(ICloneable).IsAssignableFrom(type), GetStorageType(type))
+            : base(
+                column,
+                type,
+                nullValue,
+                nullValue,
+                typeof(ICloneable).IsAssignableFrom(type),
+                GetStorageType(type)
+            )
         {
             _implementsIXmlSerializable = typeof(IXmlSerializable).IsAssignableFrom(type);
             _implementsIComparable = typeof(IComparable).IsAssignableFrom(type);
         }
 
         // to support oracle types and other INUllable types that have static Null as field
-        internal static object GetStaticNullForUdtType(Type type) => s_typeToNull.GetOrAdd(type, t =>
-        {
-            // TODO: Is it OK for the null value of a UDT to be null? For now annotating is non-nullable.
-            PropertyInfo? propInfo = type.GetProperty("Null", BindingFlags.Public | BindingFlags.Static);
-            if (propInfo != null)
-            {
-                return propInfo.GetValue(null, null)!;
-            }
+        internal static object GetStaticNullForUdtType(Type type) =>
+            s_typeToNull.GetOrAdd(
+                type,
+                t =>
+                {
+                    // TODO: Is it OK for the null value of a UDT to be null? For now annotating is non-nullable.
+                    PropertyInfo? propInfo = type.GetProperty(
+                        "Null",
+                        BindingFlags.Public | BindingFlags.Static
+                    );
+                    if (propInfo != null)
+                    {
+                        return propInfo.GetValue(null, null)!;
+                    }
 
-            FieldInfo fieldInfo = type.GetField("Null", BindingFlags.Public | BindingFlags.Static)!;
-            if (fieldInfo != null)
-            {
-                return fieldInfo.GetValue(null)!;
-            }
+                    FieldInfo fieldInfo = type.GetField(
+                        "Null",
+                        BindingFlags.Public | BindingFlags.Static
+                    )!;
+                    if (fieldInfo != null)
+                    {
+                        return fieldInfo.GetValue(null)!;
+                    }
 
-            throw ExceptionBuilder.INullableUDTwithoutStaticNull(type.AssemblyQualifiedName!);
-        });
+                    throw ExceptionBuilder.INullableUDTwithoutStaticNull(
+                        type.AssemblyQualifiedName!
+                    );
+                }
+            );
 
         public override bool IsNull(int record)
         {
@@ -160,7 +178,9 @@ namespace System.Data.Common
             }
 
             StringReader strreader = new StringReader(s);
-            XmlSerializer deserializerWithOutRootAttribute = ObjectStorage.GetXmlSerializer(_dataType);
+            XmlSerializer deserializerWithOutRootAttribute = ObjectStorage.GetXmlSerializer(
+                _dataType
+            );
             return (deserializerWithOutRootAttribute.Deserialize(strreader))!;
         }
 
@@ -170,10 +190,16 @@ namespace System.Data.Common
         {
             if (null == xmlAttrib)
             {
-                string? typeName = xmlReader.GetAttribute(Keywords.MSD_INSTANCETYPE, Keywords.MSDNS);
+                string? typeName = xmlReader.GetAttribute(
+                    Keywords.MSD_INSTANCETYPE,
+                    Keywords.MSDNS
+                );
                 if (typeName == null)
                 {
-                    string? xsdTypeName = xmlReader.GetAttribute(Keywords.MSD_INSTANCETYPE, Keywords.XSINS); // this xsd type
+                    string? xsdTypeName = xmlReader.GetAttribute(
+                        Keywords.MSD_INSTANCETYPE,
+                        Keywords.XSINS
+                    ); // this xsd type
                     if (null != xsdTypeName)
                     {
                         typeName = XSDSchema.XsdtoClr(xsdTypeName).FullName!;
@@ -181,17 +207,22 @@ namespace System.Data.Common
                 }
                 Type type = (typeName == null) ? _dataType : Type.GetType(typeName)!;
                 object Obj = System.Activator.CreateInstance(type, true)!;
-                Debug.Assert(xmlReader is DataTextReader, "Invalid DataTextReader is being passed to customer");
+                Debug.Assert(
+                    xmlReader is DataTextReader,
+                    "Invalid DataTextReader is being passed to customer"
+                );
                 ((IXmlSerializable)Obj).ReadXml(xmlReader);
                 return Obj;
             }
             else
             {
-                XmlSerializer deserializerWithRootAttribute = ObjectStorage.GetXmlSerializer(_dataType, xmlAttrib);
+                XmlSerializer deserializerWithRootAttribute = ObjectStorage.GetXmlSerializer(
+                    _dataType,
+                    xmlAttrib
+                );
                 return (deserializerWithRootAttribute.Deserialize(xmlReader))!;
             }
         }
-
 
         public override string ConvertObjectToXml(object value)
         {
@@ -205,17 +236,26 @@ namespace System.Data.Common
             }
             else
             {
-                XmlSerializer serializerWithOutRootAttribute = ObjectStorage.GetXmlSerializer(value.GetType());
+                XmlSerializer serializerWithOutRootAttribute = ObjectStorage.GetXmlSerializer(
+                    value.GetType()
+                );
                 serializerWithOutRootAttribute.Serialize(strwriter, value);
             }
             return (strwriter.ToString());
         }
 
-        public override void ConvertObjectToXml(object value, XmlWriter xmlWriter, XmlRootAttribute? xmlAttrib)
+        public override void ConvertObjectToXml(
+            object value,
+            XmlWriter xmlWriter,
+            XmlRootAttribute? xmlAttrib
+        )
         {
             if (null == xmlAttrib)
             {
-                Debug.Assert(xmlWriter is DataTextWriter, "Invalid DataTextWriter is being passed to customer");
+                Debug.Assert(
+                    xmlWriter is DataTextWriter,
+                    "Invalid DataTextWriter is being passed to customer"
+                );
                 ((IXmlSerializable)value).WriteXml(xmlWriter);
             }
             else
@@ -223,7 +263,10 @@ namespace System.Data.Common
                 // we support polymorphism only for types that implements IXmlSerializable.
                 // Assumption: value is the same type as DataType
 
-                XmlSerializer serializerWithRootAttribute = ObjectStorage.GetXmlSerializer(_dataType, xmlAttrib);
+                XmlSerializer serializerWithRootAttribute = ObjectStorage.GetXmlSerializer(
+                    _dataType,
+                    xmlAttrib
+                );
                 serializerWithRootAttribute.Serialize(xmlWriter, value);
             }
         }
@@ -233,7 +276,12 @@ namespace System.Data.Common
             return new object[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             object[] typedStore = (object[])store;
             typedStore[storeIndex] = _values[record];

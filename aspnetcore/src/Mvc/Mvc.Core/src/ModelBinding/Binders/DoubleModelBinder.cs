@@ -90,7 +90,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     modelState.TryAddModelError(
                         modelName,
                         metadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                            valueProviderResult.ToString()));
+                            valueProviderResult.ToString()
+                        )
+                    );
                 }
                 else
                 {
@@ -104,11 +106,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 {
                     // Unlike TypeConverters, floating point types do not seem to wrap FormatExceptions. Preserve
                     // this code in case a cursory review of the CoreFx code missed something.
-                    exception = ExceptionDispatchInfo.Capture(exception.InnerException).SourceException;
+                    exception =
+                        ExceptionDispatchInfo.Capture(exception.InnerException).SourceException;
                 }
 
                 modelState.TryAddModelError(modelName, exception, metadata);
-
                 // Conversion failed.
             }
 

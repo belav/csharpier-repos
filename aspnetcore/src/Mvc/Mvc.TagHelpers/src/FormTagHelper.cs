@@ -120,7 +120,10 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         /// <summary>
         /// Additional parameters for the route.
         /// </summary>
-        [HtmlAttributeName(RouteValuesDictionaryName, DictionaryAttributePrefix = RouteValuesPrefix)]
+        [HtmlAttributeName(
+            RouteValuesDictionaryName,
+            DictionaryAttributePrefix = RouteValuesPrefix
+        )]
         public IDictionary<string, string> RouteValues
         {
             get
@@ -132,10 +135,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
 
                 return _routeValues;
             }
-            set
-            {
-                _routeValues = value;
-            }
+            set { _routeValues = value; }
         }
 
         /// <inheritdoc />
@@ -165,14 +165,15 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             }
 
             var antiforgeryDefault = true;
-            var routeableParametersProvided = Action != null ||
-                Controller != null ||
-                Area != null ||
-                Page != null ||
-                PageHandler != null ||
-                Fragment != null ||
-                Route != null ||
-                (_routeValues != null && _routeValues.Count > 0);
+            var routeableParametersProvided =
+                Action != null
+                || Controller != null
+                || Area != null
+                || Page != null
+                || PageHandler != null
+                || Fragment != null
+                || Route != null
+                || (_routeValues != null && _routeValues.Count > 0);
 
             // If "action" is already set, it means the user is attempting to use a normal <form>.
             if (output.Attributes.TryGetAttribute(HtmlActionAttributeName, out var actionAttribute))
@@ -191,7 +192,9 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                             AreaAttributeName,
                             RouteAttributeName,
                             PageAttributeName,
-                            PageHandlerAttributeName));
+                            PageHandlerAttributeName
+                        )
+                    );
                 }
 
                 string attributeValue = null;
@@ -231,14 +234,20 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 var actionLink = Controller != null || Action != null;
                 var pageLink = Page != null || PageHandler != null;
 
-                if ((routeLink && actionLink) || (routeLink && pageLink) || (actionLink && pageLink))
+                if (
+                    (routeLink && actionLink) || (routeLink && pageLink) || (actionLink && pageLink)
+                )
                 {
                     var message = string.Join(
                         Environment.NewLine,
-                        Resources.FormatCannotDetermineAttributeFor(HtmlActionAttributeName, "<form>"),
+                        Resources.FormatCannotDetermineAttributeFor(
+                            HtmlActionAttributeName,
+                            "<form>"
+                        ),
                         RouteAttributeName,
                         ControllerAttributeName + ", " + ActionAttributeName,
-                        PageAttributeName);
+                        PageAttributeName
+                    );
 
                     throw new InvalidOperationException(message);
                 }
@@ -261,10 +270,13 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 }
 
                 TagBuilder tagBuilder = null;
-                if (!routeableParametersProvided &&
-                    _routeValues == null &&
-                    // Antiforgery will sometime be set globally via TagHelper Initializers, verify it was provided in the cshtml. 
-                    !context.AllAttributes.ContainsName(AntiforgeryAttributeName))
+                if (
+                    !routeableParametersProvided
+                    && _routeValues == null
+                    &&
+                    // Antiforgery will sometime be set globally via TagHelper Initializers, verify it was provided in the cshtml.
+                    !context.AllAttributes.ContainsName(AntiforgeryAttributeName)
+                )
                 {
                     // A <form> tag that doesn't utilize asp-* attributes. Let it flow to the output.
                     Method = Method ?? "get";
@@ -278,7 +290,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         routeValues,
                         Fragment,
                         method: null,
-                        htmlAttributes: null);
+                        htmlAttributes: null
+                    );
                 }
                 else if (routeLink)
                 {
@@ -288,7 +301,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         routeValues,
                         Fragment,
                         method: null,
-                        htmlAttributes: null);
+                        htmlAttributes: null
+                    );
                 }
                 else
                 {
@@ -299,7 +313,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                         Fragment,
                         routeValues,
                         method: null,
-                        htmlAttributes: null);
+                        htmlAttributes: null
+                    );
                 }
 
                 if (tagBuilder != null)

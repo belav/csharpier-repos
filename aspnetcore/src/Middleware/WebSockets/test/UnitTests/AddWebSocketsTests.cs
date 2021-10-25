@@ -16,11 +16,13 @@ namespace Microsoft.AspNetCore.WebSockets.Test
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddWebSockets(o =>
-            {
-                o.KeepAliveInterval = TimeSpan.FromSeconds(1000);
-                o.AllowedOrigins.Add("someString");
-            });
+            serviceCollection.AddWebSockets(
+                o =>
+                {
+                    o.KeepAliveInterval = TimeSpan.FromSeconds(1000);
+                    o.AllowedOrigins.Add("someString");
+                }
+            );
 
             var services = serviceCollection.BuildServiceProvider();
             var socketOptions = services.GetRequiredService<IOptions<WebSocketOptions>>().Value;

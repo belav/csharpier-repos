@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization
         internal sealed override object? ReadCoreAsObject(
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
-            ref ReadStack state)
+            ref ReadStack state
+        )
         {
             return ReadCore(ref reader, options, ref state);
         }
@@ -18,7 +19,8 @@ namespace System.Text.Json.Serialization
         internal T? ReadCore(
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
-            ref ReadStack state)
+            ref ReadStack state
+        )
         {
             try
             {
@@ -51,15 +53,28 @@ namespace System.Text.Json.Serialization
                 {
                     // For a continuation, read ahead here to avoid having to build and then tear
                     // down the call stack if there is more than one buffer fetch necessary.
-                    if (!SingleValueReadWithReadAhead(ConverterStrategy.Value, ref reader, ref state))
+                    if (
+                        !SingleValueReadWithReadAhead(
+                            ConverterStrategy.Value,
+                            ref reader,
+                            ref state
+                        )
+                    )
                     {
                         state.BytesConsumed += reader.BytesConsumed;
                         return default;
                     }
                 }
 
-                JsonPropertyInfo jsonPropertyInfo = state.Current.JsonTypeInfo.PropertyInfoForTypeInfo;
-                bool success = TryRead(ref reader, jsonPropertyInfo.RuntimePropertyType!, options, ref state, out T? value);
+                JsonPropertyInfo jsonPropertyInfo =
+                    state.Current.JsonTypeInfo.PropertyInfoForTypeInfo;
+                bool success = TryRead(
+                    ref reader,
+                    jsonPropertyInfo.RuntimePropertyType!,
+                    options,
+                    ref state,
+                    out T? value
+                );
                 if (success)
                 {
                     // Read any trailing whitespace. This will throw if JsonCommentHandling=Disallow.
@@ -79,12 +94,14 @@ namespace System.Text.Json.Serialization
                 ThrowHelper.ReThrowWithPath(state, ex);
                 return default;
             }
-            catch (FormatException ex) when (ex.Source == ThrowHelper.ExceptionSourceValueToRethrowAsJsonException)
+            catch (FormatException ex)
+                when (ex.Source == ThrowHelper.ExceptionSourceValueToRethrowAsJsonException)
             {
                 ThrowHelper.ReThrowWithPath(state, reader, ex);
                 return default;
             }
-            catch (InvalidOperationException ex) when (ex.Source == ThrowHelper.ExceptionSourceValueToRethrowAsJsonException)
+            catch (InvalidOperationException ex)
+                when (ex.Source == ThrowHelper.ExceptionSourceValueToRethrowAsJsonException)
             {
                 ThrowHelper.ReThrowWithPath(state, reader, ex);
                 return default;

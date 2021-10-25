@@ -28,7 +28,10 @@ namespace System
             return GetEnvironmentVariableCore(variable);
         }
 
-        public static string? GetEnvironmentVariable(string variable, EnvironmentVariableTarget target)
+        public static string? GetEnvironmentVariable(
+            string variable,
+            EnvironmentVariableTarget target
+        )
         {
             if (target == EnvironmentVariableTarget.Process)
                 return GetEnvironmentVariable(variable);
@@ -55,7 +58,11 @@ namespace System
             SetEnvironmentVariableCore(variable, value);
         }
 
-        public static void SetEnvironmentVariable(string variable, string? value, EnvironmentVariableTarget target)
+        public static void SetEnvironmentVariable(
+            string variable,
+            string? value,
+            EnvironmentVariableTarget target
+        )
         {
             if (target == EnvironmentVariableTarget.Process)
             {
@@ -69,7 +76,8 @@ namespace System
             SetEnvironmentVariableFromRegistry(variable, value, fromMachine: fromMachine);
         }
 
-        public static string CommandLine => PasteArguments.Paste(GetCommandLineArgs(), pasteFirstArgumentUsingArgV0Rules: true);
+        public static string CommandLine =>
+            PasteArguments.Paste(GetCommandLineArgs(), pasteFirstArgumentUsingArgV0Rules: true);
 
         public static string CurrentDirectory
         {
@@ -104,15 +112,27 @@ namespace System
             s_commandLineArgs = cmdLineArgs;
         }
 
-        public static string GetFolderPath(SpecialFolder folder) => GetFolderPath(folder, SpecialFolderOption.None);
+        public static string GetFolderPath(SpecialFolder folder) =>
+            GetFolderPath(folder, SpecialFolderOption.None);
 
         public static string GetFolderPath(SpecialFolder folder, SpecialFolderOption option)
         {
             if (!Enum.IsDefined(typeof(SpecialFolder), folder))
-                throw new ArgumentOutOfRangeException(nameof(folder), folder, SR.Format(SR.Arg_EnumIllegalVal, folder));
+                throw new ArgumentOutOfRangeException(
+                    nameof(folder),
+                    folder,
+                    SR.Format(SR.Arg_EnumIllegalVal, folder)
+                );
 
-            if (option != SpecialFolderOption.None && !Enum.IsDefined(typeof(SpecialFolderOption), option))
-                throw new ArgumentOutOfRangeException(nameof(option), option, SR.Format(SR.Arg_EnumIllegalVal, option));
+            if (
+                option != SpecialFolderOption.None
+                && !Enum.IsDefined(typeof(SpecialFolderOption), option)
+            )
+                throw new ArgumentOutOfRangeException(
+                    nameof(option),
+                    option,
+                    SR.Format(SR.Arg_EnumIllegalVal, option)
+                );
 
             return GetFolderPathCore(folder, option);
         }
@@ -164,7 +184,8 @@ namespace System
 
         public static bool Is64BitProcess => IntPtr.Size == 8;
 
-        public static bool Is64BitOperatingSystem => Is64BitProcess || Is64BitOperatingSystemWhen32BitProcess;
+        public static bool Is64BitOperatingSystem =>
+            Is64BitProcess || Is64BitOperatingSystemWhen32BitProcess;
 
         public static string NewLine => NewLineConst;
 
@@ -189,7 +210,8 @@ namespace System
         {
             get
             {
-                string? versionString = typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                string? versionString =
+                    typeof(object).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
                 ReadOnlySpan<char> versionSpan = versionString.AsSpan();
 
@@ -199,7 +221,9 @@ namespace System
                     versionSpan = versionSpan.Slice(0, separatorIndex);
 
                 // Return zeros rather then failing if the version string fails to parse
-                return Version.TryParse(versionSpan, out Version? version) ? version : new Version();
+                return Version.TryParse(versionSpan, out Version? version)
+                  ? version
+                  : new Version();
             }
         }
 
@@ -213,7 +237,11 @@ namespace System
             if (target == EnvironmentVariableTarget.User)
                 return false;
 
-            throw new ArgumentOutOfRangeException(nameof(target), target, SR.Format(SR.Arg_EnumIllegalVal, target));
+            throw new ArgumentOutOfRangeException(
+                nameof(target),
+                target,
+                SR.Format(SR.Arg_EnumIllegalVal, target)
+            );
         }
 
         private static void ValidateVariableAndValue(string variable, ref string? value)

@@ -27,9 +27,7 @@ namespace Microsoft.AspNetCore.Routing.Tree
 
         object IEnumerator.Current => Current;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public bool MoveNext()
         {

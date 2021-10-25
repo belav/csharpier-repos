@@ -13,34 +13,24 @@ namespace Microsoft.EntityFrameworkCore.Query
     public abstract class NorthwindKeylessEntitiesQueryTestBase<TFixture> : QueryTestBase<TFixture>
         where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
     {
-        protected NorthwindKeylessEntitiesQueryTestBase(TFixture fixture)
-            : base(fixture)
-        {
-        }
+        protected NorthwindKeylessEntitiesQueryTestBase(TFixture fixture) : base(fixture) { }
 
-        protected NorthwindContext CreateContext()
-            => Fixture.CreateContext();
+        protected NorthwindContext CreateContext() => Fixture.CreateContext();
 
-        protected virtual void ClearLog()
-        {
-        }
+        protected virtual void ClearLog() { }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task KeylessEntity_simple(bool async)
         {
-            return AssertQuery(
-                async,
-                ss => ss.Set<CustomerQuery>());
+            return AssertQuery(async, ss => ss.Set<CustomerQuery>());
         }
 
         [ConditionalTheory]
         [MemberData(nameof(IsAsyncData))]
         public virtual Task KeylessEntity_where_simple(bool async)
         {
-            return AssertQuery(
-                async,
-                ss => ss.Set<CustomerQuery>().Where(c => c.City == "London"));
+            return AssertQuery(async, ss => ss.Set<CustomerQuery>().Where(c => c.City == "London"));
         }
 
         [ConditionalFact]
@@ -65,10 +55,10 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual void KeylessEntity_with_nav_defining_query()
         {
             using var context = CreateContext();
-            var results
-                = context.Set<CustomerQueryWithQueryFilter>()
-                    .Where(cq => cq.OrderCount > 0)
-                    .ToArray();
+            var results = context
+                .Set<CustomerQueryWithQueryFilter>()
+                .Where(cq => cq.OrderCount > 0)
+                .ToArray();
 
             Assert.Equal(89, results.Length);
         }
@@ -79,7 +69,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<OrderQuery>().Where(ov => ov.CustomerID == "ALFKI"));
+                ss => ss.Set<OrderQuery>().Where(ov => ov.CustomerID == "ALFKI")
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#21828")]
@@ -88,12 +79,16 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<OrderQuery>().Where(ov => ov.CustomerID == "ALFKI").Select(ov => ov.Customer)
-                    .OrderBy(c => c.CustomerID)
-                    .Select(cv => cv.Orders.Where(cc => true).ToList()),
+                ss =>
+                    ss.Set<OrderQuery>()
+                        .Where(ov => ov.CustomerID == "ALFKI")
+                        .Select(ov => ov.Customer)
+                        .OrderBy(c => c.CustomerID)
+                        .Select(cv => cv.Orders.Where(cc => true).ToList()),
                 assertOrder: true,
                 elementAsserter: (e, a) => AssertCollection(e, a),
-                entryCount: 6);
+                entryCount: 6
+            );
         }
 
         [ConditionalTheory]
@@ -102,11 +97,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => from c in ss.Set<Customer>()
-                      from o in ss.Set<OrderQuery>().Where(ov => ov.CustomerID == c.CustomerID)
-                      select new { c, o },
+                ss =>
+                    from c in ss.Set<Customer>()
+                    from o in ss.Set<OrderQuery>().Where(ov => ov.CustomerID == c.CustomerID)
+                    select new { c, o },
                 e => e.c.CustomerID,
-                entryCount: 89);
+                entryCount: 89
+            );
         }
 
         [ConditionalTheory]
@@ -115,11 +112,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => from ov in ss.Set<OrderQuery>().Include(ov => ov.Customer)
-                      where ov.CustomerID == "ALFKI"
-                      select ov,
-                elementAsserter: (e, a) => AssertInclude(e, a, new ExpectedInclude<OrderQuery>(ov => ov.Customer)),
-                entryCount: 1);
+                ss =>
+                    from ov in ss.Set<OrderQuery>().Include(ov => ov.Customer)
+                    where ov.CustomerID == "ALFKI"
+                    select ov,
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<OrderQuery>(ov => ov.Customer)),
+                entryCount: 1
+            );
         }
 
         [ConditionalTheory(Skip = "Issue#21828")]
@@ -128,14 +128,19 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => from ov in ss.Set<OrderQuery>().Include(ov => ov.Customer.Orders)
-                      where ov.CustomerID == "ALFKI"
-                      select ov,
-                elementAsserter: (e, a) => AssertInclude(
-                    e, a,
-                    new ExpectedInclude<OrderQuery>(ov => ov.Customer),
-                    new ExpectedInclude<Customer>(c => c.Orders, "Customer")),
-                entryCount: 1);
+                ss =>
+                    from ov in ss.Set<OrderQuery>().Include(ov => ov.Customer.Orders)
+                    where ov.CustomerID == "ALFKI"
+                    select ov,
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<OrderQuery>(ov => ov.Customer),
+                        new ExpectedInclude<Customer>(c => c.Orders, "Customer")
+                    ),
+                entryCount: 1
+            );
         }
 
         [ConditionalTheory]
@@ -144,9 +149,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => from ov in ss.Set<OrderQuery>()
-                      where ov.Customer.City == "Seattle"
-                      select ov);
+                ss => from ov in ss.Set<OrderQuery>() where ov.Customer.City == "Seattle" select ov
+            );
         }
 
         [ConditionalTheory]
@@ -155,9 +159,8 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => from ov in ss.Set<OrderQuery>()
-                      where ov.Customer.Orders.Any()
-                      select ov);
+                ss => from ov in ss.Set<OrderQuery>() where ov.Customer.Orders.Any() select ov
+            );
         }
 
         [ConditionalTheory]
@@ -166,16 +169,15 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<CustomerQuery>()
-                    .GroupBy(cv => cv.City)
-                    .Select(
-                        g => new
-                        {
-                            g.Key,
-                            Count = g.Count(),
-                            Sum = g.Sum(e => e.Address.Length)
-                        }),
-                elementSorter: e => (e.Key, e.Count, e.Sum));
+                ss =>
+                    ss.Set<CustomerQuery>()
+                        .GroupBy(cv => cv.City)
+                        .Select(
+                            g =>
+                                new { g.Key, Count = g.Count(), Sum = g.Sum(e => e.Address.Length) }
+                        ),
+                elementSorter: e => (e.Key, e.Count, e.Sum)
+            );
         }
 
         [ConditionalFact]
@@ -183,10 +185,14 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             using var context = CreateContext();
 
-            var results = (from o in context.Set<Order>()
-                           join pv in context.Set<ProductView>() on o.CustomerID equals pv.CategoryName into grouping
-                           from pv in grouping.DefaultIfEmpty()
-                           select new { Order = o, ProductView = pv }).ToList();
+            var results = (
+                from o in context.Set<Order>()
+                join pv in context.Set<ProductView>()
+                    on o.CustomerID equals pv.CategoryName
+                    into grouping
+                from pv in grouping.DefaultIfEmpty()
+                select new { Order = o, ProductView = pv }
+            ).ToList();
 
             Assert.Equal(830, results.Count);
         }
@@ -197,11 +203,13 @@ namespace Microsoft.EntityFrameworkCore.Query
         {
             return AssertQuery(
                 async,
-                ss => ss.Set<CustomerQuery>()
-                    .Where(cq => ss.Set<Customer>().Where(c => c.City == cq.City).Any())
-                    .Select(pv => new { pv.City, pv.ContactName })
-                    .OrderBy(x => x.ContactName)
-                    .Take(2));
+                ss =>
+                    ss.Set<CustomerQuery>()
+                        .Where(cq => ss.Set<Customer>().Where(c => c.City == cq.City).Any())
+                        .Select(pv => new { pv.City, pv.ContactName })
+                        .OrderBy(x => x.ContactName)
+                        .Take(2)
+            );
         }
     }
 }

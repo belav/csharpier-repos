@@ -18,7 +18,7 @@ namespace JitTest
                 if (__refvalue(_ref, ulong) == MAGIC)
                 {
                     Console.WriteLine("Passed.");
-                    throw new ArgumentException();  //cleanup in an unusual way
+                    throw new ArgumentException(); //cleanup in an unusual way
                 }
                 else
                 {

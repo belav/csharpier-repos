@@ -8,10 +8,7 @@ namespace Microsoft.EntityFrameworkCore.Query
 {
     public class NorthwindODataContext : PoolableDbContext
     {
-        public NorthwindODataContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public NorthwindODataContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
@@ -38,7 +35,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     e.Ignore(em => em.TitleOfCourtesy);
 
                     e.HasOne(e1 => e1.Manager).WithMany().HasForeignKey(e1 => e1.ReportsTo);
-                });
+                }
+            );
 
             modelBuilder.Entity<Product>(
                 e =>
@@ -47,7 +45,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                     e.Ignore(p => p.QuantityPerUnit);
                     e.Ignore(p => p.ReorderLevel);
                     e.Ignore(p => p.UnitsOnOrder);
-                });
+                }
+            );
 
             modelBuilder.Entity<Order>(
                 e =>
@@ -62,36 +61,35 @@ namespace Microsoft.EntityFrameworkCore.Query
                     e.Ignore(o => o.ShipRegion);
                     e.Ignore(o => o.ShipVia);
                     e.Ignore(o => o.ShippedDate);
-                });
+                }
+            );
 
             modelBuilder.Entity<OrderDetail>(
                 e =>
                 {
-                    e.HasKey(
-                        od => new { od.OrderID, od.ProductID });
-                });
+                    e.HasKey(od => new { od.OrderID, od.ProductID });
+                }
+            );
 
-            modelBuilder.Entity<Customer>()
-                .Property(c => c.CustomerID)
-                .HasColumnType("nchar(5)");
+            modelBuilder.Entity<Customer>().Property(c => c.CustomerID).HasColumnType("nchar(5)");
 
             modelBuilder.Entity<Employee>(
                 b =>
                 {
                     b.Property(c => c.EmployeeID).HasColumnType("int");
                     b.Property(c => c.ReportsTo).HasColumnType("int");
-                });
+                }
+            );
 
             modelBuilder.Entity<Order>(
                 b =>
                 {
                     b.Property(o => o.EmployeeID).HasColumnType("int");
                     b.Property(o => o.OrderDate).HasColumnType("datetime");
-                });
+                }
+            );
 
-            modelBuilder.Entity<OrderDetail>()
-                .Property(od => od.UnitPrice)
-                .HasColumnType("money");
+            modelBuilder.Entity<OrderDetail>().Property(od => od.UnitPrice).HasColumnType("money");
 
             modelBuilder.Entity<OrderDetail>().ToTable("Order Details");
 
@@ -100,7 +98,8 @@ namespace Microsoft.EntityFrameworkCore.Query
                 {
                     b.Property(p => p.UnitPrice).HasColumnType("money");
                     b.Property(p => p.UnitsInStock).HasColumnType("smallint");
-                });
+                }
+            );
         }
     }
 }

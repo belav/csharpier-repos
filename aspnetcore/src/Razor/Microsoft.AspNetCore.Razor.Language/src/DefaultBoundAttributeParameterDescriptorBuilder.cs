@@ -6,7 +6,8 @@ using System.Linq;
 
 namespace Microsoft.AspNetCore.Razor.Language
 {
-    internal class DefaultBoundAttributeParameterDescriptorBuilder : BoundAttributeParameterDescriptorBuilder
+    internal class DefaultBoundAttributeParameterDescriptorBuilder
+        : BoundAttributeParameterDescriptorBuilder
     {
         private readonly DefaultBoundAttributeDescriptorBuilder _parent;
         private readonly string _kind;
@@ -14,7 +15,10 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         private RazorDiagnosticCollection _diagnostics;
 
-        public DefaultBoundAttributeParameterDescriptorBuilder(DefaultBoundAttributeDescriptorBuilder parent, string kind)
+        public DefaultBoundAttributeParameterDescriptorBuilder(
+            DefaultBoundAttributeDescriptorBuilder parent,
+            string kind
+        )
         {
             _parent = parent;
             _kind = kind;
@@ -66,7 +70,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 GetDisplayName(),
                 CaseSensitive,
                 new Dictionary<string, string>(Metadata),
-                diagnostics.ToArray());
+                diagnostics.ToArray()
+            );
 
             return descriptor;
         }
@@ -85,19 +90,27 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterNullOrWhitespace(_parent.Name);
+                var diagnostic =
+                    RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterNullOrWhitespace(
+                        _parent.Name
+                    );
                 yield return diagnostic;
             }
             else
             {
                 foreach (var character in Name)
                 {
-                    if (char.IsWhiteSpace(character) || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character))
+                    if (
+                        char.IsWhiteSpace(character)
+                        || HtmlConventions.InvalidNonWhitespaceHtmlCharacters.Contains(character)
+                    )
                     {
-                        var diagnostic = RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterName(
-                            _parent.Name,
-                            Name,
-                            character);
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidBoundAttributeParameterName(
+                                _parent.Name,
+                                Name,
+                                character
+                            );
 
                         yield return diagnostic;
                     }

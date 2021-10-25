@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Builder
     {
         private readonly IEndpointConventionBuilder _endpointConventionBuilder;
 
-        internal ConnectionEndpointRouteBuilder(IEndpointConventionBuilder endpointConventionBuilder)
+        internal ConnectionEndpointRouteBuilder(
+            IEndpointConventionBuilder endpointConventionBuilder
+        )
         {
             _endpointConventionBuilder = endpointConventionBuilder;
         }

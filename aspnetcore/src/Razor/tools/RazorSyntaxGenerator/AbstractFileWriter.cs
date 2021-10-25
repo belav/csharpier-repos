@@ -32,9 +32,18 @@ namespace RazorSyntaxGenerator
             _childMap = tree.Types.ToLookup(n => n.Base, n => n.Name);
         }
 
-        protected IDictionary<string, string> ParentMap { get { return _parentMap; } }
-        protected ILookup<string, string> ChildMap { get { return _childMap; } }
-        protected Tree Tree { get { return _tree; } }
+        protected IDictionary<string, string> ParentMap
+        {
+            get { return _parentMap; }
+        }
+        protected ILookup<string, string> ChildMap
+        {
+            get { return _childMap; }
+        }
+        protected Tree Tree
+        {
+            get { return _tree; }
+        }
 
         #region Output helpers
 
@@ -110,21 +119,26 @@ namespace RazorSyntaxGenerator
 
         protected static string OverrideOrNewModifier(Field field)
         {
-            return IsOverride(field) ? "override " : IsNew(field) ? "new " : "";
+            return IsOverride(field)
+              ? "override "
+              : IsNew(field)
+                  ? "new "
+                  : "";
         }
 
         protected static bool CanBeField(Field field)
         {
-            return field.Type != "SyntaxToken" && !IsAnyList(field.Type) && !IsOverride(field) && !IsNew(field);
+            return field.Type != "SyntaxToken"
+                && !IsAnyList(field.Type)
+                && !IsOverride(field)
+                && !IsNew(field);
         }
 
         protected static string GetFieldType(Field field, bool green)
         {
             if (IsAnyList(field.Type))
             {
-                return green
-                    ? "GreenNode"
-                    : "SyntaxNode";
+                return green ? "GreenNode" : "SyntaxNode";
             }
 
             return field.Type;
@@ -133,8 +147,10 @@ namespace RazorSyntaxGenerator
         protected bool IsDerivedOrListOfDerived(string baseType, string derivedType)
         {
             return IsDerivedType(baseType, derivedType)
-                || ((IsNodeList(derivedType) || IsSeparatedNodeList(derivedType))
-                    && IsDerivedType(baseType, GetElementType(derivedType)));
+                || (
+                    (IsNodeList(derivedType) || IsSeparatedNodeList(derivedType))
+                    && IsDerivedType(baseType, GetElementType(derivedType))
+                );
         }
 
         protected static bool IsSeparatedNodeList(string typeName)
@@ -154,7 +170,10 @@ namespace RazorSyntaxGenerator
 
         protected bool IsNodeOrNodeList(string typeName)
         {
-            return IsNode(typeName) || IsNodeList(typeName) || IsSeparatedNodeList(typeName) || typeName == "SyntaxNodeOrTokenList";
+            return IsNode(typeName)
+                || IsNodeList(typeName)
+                || IsSeparatedNodeList(typeName)
+                || typeName == "SyntaxNodeOrTokenList";
         }
 
         protected static string GetElementType(string typeName)
@@ -171,14 +190,18 @@ namespace RazorSyntaxGenerator
 
         protected static bool IsAnyList(string typeName)
         {
-            return IsNodeList(typeName) || IsSeparatedNodeList(typeName) || typeName == "SyntaxNodeOrTokenList";
+            return IsNodeList(typeName)
+                || IsSeparatedNodeList(typeName)
+                || typeName == "SyntaxNodeOrTokenList";
         }
 
         protected bool IsDerivedType(string typeName, string derivedTypeName)
         {
             if (typeName == derivedTypeName)
                 return true;
-            if (derivedTypeName != null && _parentMap.TryGetValue(derivedTypeName, out var baseType))
+            if (
+                derivedTypeName != null && _parentMap.TryGetValue(derivedTypeName, out var baseType)
+            )
             {
                 return IsDerivedType(typeName, baseType);
             }
@@ -187,7 +210,8 @@ namespace RazorSyntaxGenerator
 
         protected static bool IsRoot(Node n)
         {
-            return n.Root != null && string.Equals(n.Root, "true", StringComparison.OrdinalIgnoreCase);
+            return n.Root != null
+                && string.Equals(n.Root, "true", StringComparison.OrdinalIgnoreCase);
         }
 
         protected bool IsNode(string typeName)
@@ -195,30 +219,34 @@ namespace RazorSyntaxGenerator
             return _parentMap.ContainsKey(typeName);
         }
 
-        protected Node GetNode(string typeName)
-            => _nodeMap.TryGetValue(typeName, out var node) ? node : null;
+        protected Node GetNode(string typeName) =>
+            _nodeMap.TryGetValue(typeName, out var node) ? node : null;
 
-        protected TreeType GetTreeType(string typeName)
-            => _typeMap.TryGetValue(typeName, out var node) ? node : null;
+        protected TreeType GetTreeType(string typeName) =>
+            _typeMap.TryGetValue(typeName, out var node) ? node : null;
 
         protected static bool IsOptional(Field f)
         {
-            return f.Optional != null && string.Equals(f.Optional, "true", StringComparison.OrdinalIgnoreCase);
+            return f.Optional != null
+                && string.Equals(f.Optional, "true", StringComparison.OrdinalIgnoreCase);
         }
 
         protected static bool IsOverride(Field f)
         {
-            return f.Override != null && string.Equals(f.Override, "true", StringComparison.OrdinalIgnoreCase);
+            return f.Override != null
+                && string.Equals(f.Override, "true", StringComparison.OrdinalIgnoreCase);
         }
 
         protected static bool IsNew(Field f)
         {
-            return f.New != null && string.Equals(f.New, "true", StringComparison.OrdinalIgnoreCase);
+            return f.New != null
+                && string.Equals(f.New, "true", StringComparison.OrdinalIgnoreCase);
         }
 
         protected static bool HasErrors(Node n)
         {
-            return n.Errors == null || string.Equals(n.Errors, "true", StringComparison.OrdinalIgnoreCase);
+            return n.Errors == null
+                || string.Equals(n.Errors, "true", StringComparison.OrdinalIgnoreCase);
         }
 
         protected static string CamelCase(string name)
@@ -246,7 +274,9 @@ namespace RazorSyntaxGenerator
 
         protected string StripNode(string name)
         {
-            return (_tree.Root.EndsWith("Node", StringComparison.Ordinal)) ? _tree.Root.Substring(0, _tree.Root.Length - 4) : _tree.Root;
+            return (_tree.Root.EndsWith("Node", StringComparison.Ordinal))
+              ? _tree.Root.Substring(0, _tree.Root.Length - 4)
+              : _tree.Root;
         }
 
         protected string StripRoot(string name)
@@ -262,8 +292,8 @@ namespace RazorSyntaxGenerator
         protected static string StripPost(string name, string post)
         {
             return name.EndsWith(post, StringComparison.Ordinal)
-                ? name.Substring(0, name.Length - post.Length)
-                : name;
+              ? name.Substring(0, name.Length - post.Length)
+              : name;
         }
 
         protected static bool IsKeyword(string name)
@@ -352,7 +382,6 @@ namespace RazorSyntaxGenerator
                     return false;
             }
         }
-
         #endregion Node helpers
     }
 }

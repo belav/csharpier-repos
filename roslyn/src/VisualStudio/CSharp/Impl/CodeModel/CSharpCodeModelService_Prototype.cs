@@ -40,7 +40,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             return GetDelegatePrototype((INamedTypeSymbol)symbol, flags);
                         }
-
                         break;
                 }
 
@@ -52,21 +51,40 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 switch (node)
                 {
                     case BaseMethodDeclarationSyntax methodDeclaration:
-                        return GetFunctionPrototype(methodDeclaration, (IMethodSymbol)symbol, flags);
+                        return GetFunctionPrototype(
+                            methodDeclaration,
+                            (IMethodSymbol)symbol,
+                            flags
+                        );
                     case BasePropertyDeclarationSyntax propertyDeclaration:
-                        return GetPropertyPrototype(propertyDeclaration, (IPropertySymbol)symbol, flags);
-                    case VariableDeclaratorSyntax variableDeclarator when symbol.Kind == SymbolKind.Field:
-                        return GetVariablePrototype(variableDeclarator, (IFieldSymbol)symbol, flags);
+                        return GetPropertyPrototype(
+                            propertyDeclaration,
+                            (IPropertySymbol)symbol,
+                            flags
+                        );
+                    case VariableDeclaratorSyntax variableDeclarator
+                          when symbol.Kind == SymbolKind.Field:
+                        return GetVariablePrototype(
+                            variableDeclarator,
+                            (IFieldSymbol)symbol,
+                            flags
+                        );
                     case EnumMemberDeclarationSyntax enumMember:
                         return GetVariablePrototype(enumMember, (IFieldSymbol)symbol, flags);
                     case DelegateDeclarationSyntax delegateDeclaration:
-                        return GetDelegatePrototype(delegateDeclaration, (INamedTypeSymbol)symbol, flags);
+                        return GetDelegatePrototype(
+                            delegateDeclaration,
+                            (INamedTypeSymbol)symbol,
+                            flags
+                        );
                 }
 
                 // Crazily, events for source are not implemented by the legacy C#
                 // code model implementation, but they are for metadata events.
 
-                Debug.Fail(string.Format("Invalid node/symbol kind: {0}/{1}", node.Kind(), symbol.Kind));
+                Debug.Fail(
+                    string.Format("Invalid node/symbol kind: {0}/{1}", node.Kind(), symbol.Kind)
+                );
                 throw Exceptions.ThrowENotImpl();
             }
         }
@@ -93,7 +111,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return builder.ToString();
         }
 
-        private string GetDelegatePrototype(DelegateDeclarationSyntax node, INamedTypeSymbol symbol, PrototypeFlags flags)
+        private string GetDelegatePrototype(
+            DelegateDeclarationSyntax node,
+            INamedTypeSymbol symbol,
+            PrototypeFlags flags
+        )
         {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
@@ -146,7 +168,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 }
 
                 // The unique signature is simply the node key.
-                flags = PrototypeFlags.FullName | PrototypeFlags.Type | PrototypeFlags.ParameterTypes;
+                flags =
+                    PrototypeFlags.FullName | PrototypeFlags.Type | PrototypeFlags.ParameterTypes;
             }
 
             var builder = new StringBuilder();
@@ -156,7 +179,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return builder.ToString();
         }
 
-        private string GetFunctionPrototype(BaseMethodDeclarationSyntax node, IMethodSymbol symbol, PrototypeFlags flags)
+        private string GetFunctionPrototype(
+            BaseMethodDeclarationSyntax node,
+            IMethodSymbol symbol,
+            PrototypeFlags flags
+        )
         {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
@@ -198,7 +225,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return builder.ToString();
         }
 
-        private string GetPropertyPrototype(BasePropertyDeclarationSyntax node, IPropertySymbol symbol, PrototypeFlags flags)
+        private string GetPropertyPrototype(
+            BasePropertyDeclarationSyntax node,
+            IPropertySymbol symbol,
+            PrototypeFlags flags
+        )
         {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
@@ -240,7 +271,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return builder.ToString();
         }
 
-        private string GetVariablePrototype(VariableDeclaratorSyntax node, IFieldSymbol symbol, PrototypeFlags flags)
+        private string GetVariablePrototype(
+            VariableDeclaratorSyntax node,
+            IFieldSymbol symbol,
+            PrototypeFlags flags
+        )
         {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
@@ -258,10 +293,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
             AppendVariablePrototype(builder, symbol, flags, GetName(node));
 
-            if ((flags & PrototypeFlags.Initializer) != 0 &&
-                node.Initializer != null &&
-                node.Initializer.Value != null &&
-                !node.Initializer.Value.IsMissing)
+            if (
+                (flags & PrototypeFlags.Initializer) != 0
+                && node.Initializer != null
+                && node.Initializer.Value != null
+                && !node.Initializer.Value.IsMissing
+            )
             {
                 builder.Append(" = ");
                 builder.Append(node.Initializer.Value);
@@ -270,7 +307,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return builder.ToString();
         }
 
-        private string GetVariablePrototype(EnumMemberDeclarationSyntax node, IFieldSymbol symbol, PrototypeFlags flags)
+        private string GetVariablePrototype(
+            EnumMemberDeclarationSyntax node,
+            IFieldSymbol symbol,
+            PrototypeFlags flags
+        )
         {
             if ((flags & PrototypeFlags.Signature) != 0)
             {
@@ -288,10 +329,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
             AppendVariablePrototype(builder, symbol, flags, GetName(node));
 
-            if ((flags & PrototypeFlags.Initializer) != 0 &&
-                node.EqualsValue != null &&
-                node.EqualsValue.Value != null &&
-                !node.EqualsValue.Value.IsMissing)
+            if (
+                (flags & PrototypeFlags.Initializer) != 0
+                && node.EqualsValue != null
+                && node.EqualsValue.Value != null
+                && !node.EqualsValue.Value.IsMissing
+            )
             {
                 builder.Append(" = ");
                 builder.Append(node.EqualsValue.Value);
@@ -300,7 +343,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             return builder.ToString();
         }
 
-        private void AppendDelegatePrototype(StringBuilder builder, INamedTypeSymbol symbol, PrototypeFlags flags, string baseName)
+        private void AppendDelegatePrototype(
+            StringBuilder builder,
+            INamedTypeSymbol symbol,
+            PrototypeFlags flags,
+            string baseName
+        )
         {
             builder.Append("delegate ");
 
@@ -308,8 +356,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             {
                 builder.Append(GetAsStringForCodeTypeRef(symbol.DelegateInvokeMethod.ReturnType));
 
-                if (((flags & PrototypeFlags.NameMask) != PrototypeFlags.NoName) ||
-                    ((flags & (PrototypeFlags.ParameterNames | PrototypeFlags.ParameterTypes)) != 0))
+                if (
+                    ((flags & PrototypeFlags.NameMask) != PrototypeFlags.NoName)
+                    || (
+                        (flags & (PrototypeFlags.ParameterNames | PrototypeFlags.ParameterTypes))
+                        != 0
+                    )
+                )
                 {
                     builder.Append(' ');
                 }
@@ -320,12 +373,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             switch (flags & PrototypeFlags.NameMask)
             {
                 case PrototypeFlags.FullName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: true, includeGenerics: false, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: true,
+                        includeGenerics: false,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
                 case PrototypeFlags.TypeName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: true, includeGenerics: true, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: true,
+                        includeGenerics: true,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
@@ -353,7 +416,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             }
         }
 
-        private void AppendEventPrototype(StringBuilder builder, IEventSymbol symbol, PrototypeFlags flags, string baseName)
+        private void AppendEventPrototype(
+            StringBuilder builder,
+            IEventSymbol symbol,
+            PrototypeFlags flags,
+            string baseName
+        )
         {
             if ((flags & PrototypeFlags.Type) != 0)
             {
@@ -368,12 +436,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             switch (flags & PrototypeFlags.NameMask)
             {
                 case PrototypeFlags.FullName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: true, includeGenerics: false, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: true,
+                        includeGenerics: false,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
                 case PrototypeFlags.TypeName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: false, includeGenerics: true, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: false,
+                        includeGenerics: true,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
@@ -383,7 +461,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             }
         }
 
-        private void AppendFunctionPrototype(StringBuilder builder, IMethodSymbol symbol, PrototypeFlags flags, string baseName)
+        private void AppendFunctionPrototype(
+            StringBuilder builder,
+            IMethodSymbol symbol,
+            PrototypeFlags flags,
+            string baseName
+        )
         {
             if ((flags & PrototypeFlags.Type) != 0)
             {
@@ -400,12 +483,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             switch (flags & PrototypeFlags.NameMask)
             {
                 case PrototypeFlags.FullName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: true, includeGenerics: false, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: true,
+                        includeGenerics: false,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
                 case PrototypeFlags.TypeName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: false, includeGenerics: true, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: false,
+                        includeGenerics: true,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
@@ -433,7 +526,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             }
         }
 
-        private void AppendPropertyPrototype(StringBuilder builder, IPropertySymbol symbol, PrototypeFlags flags, string baseName)
+        private void AppendPropertyPrototype(
+            StringBuilder builder,
+            IPropertySymbol symbol,
+            PrototypeFlags flags,
+            string baseName
+        )
         {
             if ((flags & PrototypeFlags.Type) != 0)
             {
@@ -448,12 +546,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             switch (flags & PrototypeFlags.NameMask)
             {
                 case PrototypeFlags.FullName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: true, includeGenerics: false, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: true,
+                        includeGenerics: false,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
                 case PrototypeFlags.TypeName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: false, includeGenerics: true, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: false,
+                        includeGenerics: true,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
@@ -461,19 +569,27 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     if (symbol.IsIndexer)
                     {
                         builder.Append("this[");
-                        AppendParametersPrototype(builder, symbol.Parameters, PrototypeFlags.ParameterTypes | PrototypeFlags.ParameterNames);
+                        AppendParametersPrototype(
+                            builder,
+                            symbol.Parameters,
+                            PrototypeFlags.ParameterTypes | PrototypeFlags.ParameterNames
+                        );
                         builder.Append("]");
                     }
                     else
                     {
                         builder.Append(baseName);
                     }
-
                     break;
             }
         }
 
-        private void AppendVariablePrototype(StringBuilder builder, IFieldSymbol symbol, PrototypeFlags flags, string baseName)
+        private void AppendVariablePrototype(
+            StringBuilder builder,
+            IFieldSymbol symbol,
+            PrototypeFlags flags,
+            string baseName
+        )
         {
             if ((flags & PrototypeFlags.Type) != 0)
             {
@@ -488,12 +604,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             switch (flags & PrototypeFlags.NameMask)
             {
                 case PrototypeFlags.FullName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: true, includeGenerics: false, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: true,
+                        includeGenerics: false,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
                 case PrototypeFlags.TypeName:
-                    AppendTypeNamePrototype(builder, includeNamespaces: false, includeGenerics: true, symbol: symbol.ContainingSymbol);
+                    AppendTypeNamePrototype(
+                        builder,
+                        includeNamespaces: false,
+                        includeGenerics: true,
+                        symbol: symbol.ContainingSymbol
+                    );
                     builder.Append('.');
                     goto case PrototypeFlags.BaseName;
 
@@ -503,7 +629,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             }
         }
 
-        private void AppendParametersPrototype(StringBuilder builder, ImmutableArray<IParameterSymbol> parameters, PrototypeFlags flags)
+        private void AppendParametersPrototype(
+            StringBuilder builder,
+            ImmutableArray<IParameterSymbol> parameters,
+            PrototypeFlags flags
+        )
         {
             var first = true;
             foreach (var parameter in parameters)
@@ -519,7 +649,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             }
         }
 
-        private void AppendParameterPrototype(StringBuilder builder, PrototypeFlags flags, IParameterSymbol parameter)
+        private void AppendParameterPrototype(
+            StringBuilder builder,
+            PrototypeFlags flags,
+            IParameterSymbol parameter
+        )
         {
             var addSpace = false;
             if ((flags & PrototypeFlags.ParameterTypes) != 0)
@@ -552,7 +686,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             }
         }
 
-        private static void AppendTypeNamePrototype(StringBuilder builder, bool includeNamespaces, bool includeGenerics, ISymbol symbol)
+        private static void AppendTypeNamePrototype(
+            StringBuilder builder,
+            bool includeNamespaces,
+            bool includeGenerics,
+            ISymbol symbol
+        )
         {
             var symbols = new Stack<ISymbol>();
 

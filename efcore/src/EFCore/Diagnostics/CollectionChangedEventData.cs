@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EntityEntry entityEntry,
             INavigation navigation,
             IEnumerable<object> added,
-            IEnumerable<object> removed)
-            : base(eventDefinition, messageGenerator, navigation)
+            IEnumerable<object> removed
+        ) : base(eventDefinition, messageGenerator, navigation)
         {
             Check.NotNull(entityEntry, nameof(entityEntry));
             Check.NotNull(added, nameof(added));

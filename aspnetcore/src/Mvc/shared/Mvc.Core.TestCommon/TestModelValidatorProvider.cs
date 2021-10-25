@@ -11,10 +11,13 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
     public class TestModelValidatorProvider : CompositeModelValidatorProvider
     {
         // Creates a provider with all the defaults - includes data annotations
-        public static CompositeModelValidatorProvider CreateDefaultProvider(IStringLocalizerFactory stringLocalizerFactory = null)
+        public static CompositeModelValidatorProvider CreateDefaultProvider(
+            IStringLocalizerFactory stringLocalizerFactory = null
+        )
         {
             var options = Options.Create(new MvcDataAnnotationsLocalizationOptions());
-            options.Value.DataAnnotationLocalizerProvider = (modelType, localizerFactory) => localizerFactory.Create(modelType);
+            options.Value.DataAnnotationLocalizerProvider = (modelType, localizerFactory) =>
+                localizerFactory.Create(modelType);
 
             var providers = new IModelValidatorProvider[]
             {
@@ -22,15 +25,14 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                 new DataAnnotationsModelValidatorProvider(
                     new ValidationAttributeAdapterProvider(),
                     options,
-                    stringLocalizerFactory)
+                    stringLocalizerFactory
+                )
             };
 
             return new TestModelValidatorProvider(providers);
         }
 
         public TestModelValidatorProvider(IList<IModelValidatorProvider> providers)
-            : base(providers)
-        {
-        }
+            : base(providers) { }
     }
 }

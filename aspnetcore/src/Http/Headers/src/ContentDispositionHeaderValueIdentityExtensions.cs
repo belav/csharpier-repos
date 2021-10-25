@@ -24,7 +24,10 @@ namespace Microsoft.Net.Http.Headers
             }
 
             return header.DispositionType.Equals("form-data")
-                && (!StringSegment.IsNullOrEmpty(header.FileName) || !StringSegment.IsNullOrEmpty(header.FileNameStar));
+                && (
+                    !StringSegment.IsNullOrEmpty(header.FileName)
+                    || !StringSegment.IsNullOrEmpty(header.FileNameStar)
+                );
         }
 
         /// <summary>
@@ -40,7 +43,8 @@ namespace Microsoft.Net.Http.Headers
             }
 
             return header.DispositionType.Equals("form-data")
-               && StringSegment.IsNullOrEmpty(header.FileName) && StringSegment.IsNullOrEmpty(header.FileNameStar);
+                && StringSegment.IsNullOrEmpty(header.FileName)
+                && StringSegment.IsNullOrEmpty(header.FileNameStar);
         }
     }
 }

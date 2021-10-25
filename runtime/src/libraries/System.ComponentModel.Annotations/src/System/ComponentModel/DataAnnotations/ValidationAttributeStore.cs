@@ -20,7 +20,10 @@ namespace System.ComponentModel.DataAnnotations
     /// </remarks>
     internal sealed class ValidationAttributeStore
     {
-        private readonly Dictionary<Type, TypeStoreItem> _typeStoreItems = new Dictionary<Type, TypeStoreItem>();
+        private readonly Dictionary<Type, TypeStoreItem> _typeStoreItems = new Dictionary<
+            Type,
+            TypeStoreItem
+        >();
 
         /// <summary>
         ///     Gets the singleton <see cref="ValidationAttributeStore" />
@@ -32,8 +35,12 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the type.  It cannot be null.</param>
         /// <returns>The collection of validation attributes.  It could be empty.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
-        internal IEnumerable<ValidationAttribute> GetTypeValidationAttributes(ValidationContext validationContext)
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
+        internal IEnumerable<ValidationAttribute> GetTypeValidationAttributes(
+            ValidationContext validationContext
+        )
         {
             EnsureValidationContext(validationContext);
             var item = GetTypeStoreItem(validationContext.ObjectType);
@@ -45,7 +52,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the type.  It cannot be null.</param>
         /// <returns>The display attribute instance, if present.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         internal DisplayAttribute? GetTypeDisplayAttribute(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -58,8 +67,12 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
         /// <returns>The collection of validation attributes.  It could be empty.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
-        internal IEnumerable<ValidationAttribute> GetPropertyValidationAttributes(ValidationContext validationContext)
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
+        internal IEnumerable<ValidationAttribute> GetPropertyValidationAttributes(
+            ValidationContext validationContext
+        )
         {
             EnsureValidationContext(validationContext);
             var typeItem = GetTypeStoreItem(validationContext.ObjectType);
@@ -72,7 +85,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
         /// <returns>The display attribute instance, if present.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         internal DisplayAttribute? GetPropertyDisplayAttribute(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -86,7 +101,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
         /// <returns>The type of the specified property</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         internal Type GetPropertyType(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -102,7 +119,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The <see cref="ValidationContext" /> to check.</param>
         /// <returns><c>true</c> when the <paramref name="validationContext" /> represents a property, <c>false</c> otherwise.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         internal bool IsPropertyContext(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -116,7 +135,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="type">The type whose store item is needed.  It cannot be null</param>
         /// <returns>The type store item.  It will not be null.</returns>
-        private TypeStoreItem GetTypeStoreItem([DynamicallyAccessedMembers(TypeStoreItem.DynamicallyAccessedTypes)] Type type)
+        private TypeStoreItem GetTypeStoreItem(
+            [DynamicallyAccessedMembers(TypeStoreItem.DynamicallyAccessedTypes)] Type type
+        )
         {
             Debug.Assert(type != null);
 
@@ -147,7 +168,8 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         internal static bool IsPublic(PropertyInfo p) =>
-            (p.GetMethod != null && p.GetMethod.IsPublic) || (p.SetMethod != null && p.SetMethod.IsPublic);
+            (p.GetMethod != null && p.GetMethod.IsPublic)
+            || (p.SetMethod != null && p.SetMethod.IsPublic);
 
         /// <summary>
         ///     Private abstract class for all store items
@@ -170,15 +192,19 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         private sealed class TypeStoreItem : StoreItem
         {
-            internal const DynamicallyAccessedMemberTypes DynamicallyAccessedTypes = DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties;
+            internal const DynamicallyAccessedMemberTypes DynamicallyAccessedTypes =
+                DynamicallyAccessedMemberTypes.PublicProperties
+                | DynamicallyAccessedMemberTypes.NonPublicProperties;
 
             private readonly object _syncRoot = new object();
             [DynamicallyAccessedMembers(DynamicallyAccessedTypes)]
             private readonly Type _type;
             private Dictionary<string, PropertyStoreItem>? _propertyStoreItems;
 
-            internal TypeStoreItem([DynamicallyAccessedMembers(DynamicallyAccessedTypes)] Type type, IEnumerable<Attribute> attributes)
-                : base(attributes)
+            internal TypeStoreItem(
+                [DynamicallyAccessedMembers(DynamicallyAccessedTypes)] Type type,
+                IEnumerable<Attribute> attributes
+            ) : base(attributes)
             {
                 _type = type;
             }
@@ -187,14 +213,19 @@ namespace System.ComponentModel.DataAnnotations
             {
                 if (!TryGetPropertyStoreItem(propertyName, out PropertyStoreItem? item))
                 {
-                    throw new ArgumentException(SR.Format(SR.AttributeStore_Unknown_Property, _type.Name, propertyName),
-                                                nameof(propertyName));
+                    throw new ArgumentException(
+                        SR.Format(SR.AttributeStore_Unknown_Property, _type.Name, propertyName),
+                        nameof(propertyName)
+                    );
                 }
 
                 return item;
             }
 
-            internal bool TryGetPropertyStoreItem(string propertyName, [NotNullWhen(true)] out PropertyStoreItem? item)
+            internal bool TryGetPropertyStoreItem(
+                string propertyName,
+                [NotNullWhen(true)] out PropertyStoreItem? item
+            )
             {
                 if (string.IsNullOrEmpty(propertyName))
                 {
@@ -220,13 +251,16 @@ namespace System.ComponentModel.DataAnnotations
                 var propertyStoreItems = new Dictionary<string, PropertyStoreItem>();
 
                 // exclude index properties to match old TypeDescriptor functionality
-                var properties = _type.GetRuntimeProperties()
+                var properties = _type
+                    .GetRuntimeProperties()
                     .Where(prop => IsPublic(prop) && !prop.GetIndexParameters().Any());
                 foreach (PropertyInfo property in properties)
                 {
                     // use CustomAttributeExtensions.GetCustomAttributes() to get inherited attributes as well as direct ones
-                    var item = new PropertyStoreItem(property.PropertyType,
-                        CustomAttributeExtensions.GetCustomAttributes(property, true));
+                    var item = new PropertyStoreItem(
+                        property.PropertyType,
+                        CustomAttributeExtensions.GetCustomAttributes(property, true)
+                    );
                     propertyStoreItems[property.Name] = item;
                 }
 

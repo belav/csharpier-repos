@@ -68,7 +68,8 @@ namespace Microsoft.EntityFrameworkCore
 
                     context.SaveChanges();
                 },
-                context => AssertDatabaseState(context, clientOrder, expectedBlogs));
+                context => AssertDatabaseState(context, clientOrder, expectedBlogs)
+            );
         }
 
         [ConditionalFact]
@@ -84,12 +85,7 @@ namespace Microsoft.EntityFrameworkCore
                     context.Owners.Add(owner1);
                     context.Owners.Add(owner2);
 
-                    var blog1 = new Blog
-                    {
-                        Id = Guid.NewGuid(),
-                        Owner = owner1,
-                        Order = 1
-                    };
+                    var blog1 = new Blog { Id = Guid.NewGuid(), Owner = owner1, Order = 1 };
 
                     context.Set<Blog>().Add(blog1);
                     expectedBlogs.Add(blog1);
@@ -99,29 +95,20 @@ namespace Microsoft.EntityFrameworkCore
                     owner2.Name = "2";
 
                     blog1.Order = 0;
-                    var blog2 = new Blog
-                    {
-                        Id = Guid.NewGuid(),
-                        Owner = owner1,
-                        Order = 1
-                    };
+                    var blog2 = new Blog { Id = Guid.NewGuid(), Owner = owner1, Order = 1 };
 
                     context.Set<Blog>().Add(blog2);
                     expectedBlogs.Add(blog2);
 
-                    var blog3 = new Blog
-                    {
-                        Id = Guid.NewGuid(),
-                        Owner = owner2,
-                        Order = 2
-                    };
+                    var blog3 = new Blog { Id = Guid.NewGuid(), Owner = owner2, Order = 2 };
 
                     context.Set<Blog>().Add(blog3);
                     expectedBlogs.Add(blog3);
 
                     context.SaveChanges();
                 },
-                context => AssertDatabaseState(context, true, expectedBlogs));
+                context => AssertDatabaseState(context, true, expectedBlogs)
+            );
         }
 
         [ConditionalFact]
@@ -131,13 +118,18 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     var owner1 = new Owner { Id = "0", Name = "Zero" };
-                    var owner2 = new Owner { Id = "A", Name = string.Join("", Enumerable.Repeat('A', 900)) };
+                    var owner2 = new Owner
+                    {
+                        Id = "A",
+                        Name = string.Join("", Enumerable.Repeat('A', 900))
+                    };
                     context.Owners.Add(owner1);
                     context.Owners.Add(owner2);
 
                     context.SaveChanges();
                 },
-                context => Assert.Equal(2, context.Owners.Count()));
+                context => Assert.Equal(2, context.Owners.Count())
+            );
         }
 
         [ConditionalTheory]
@@ -168,17 +160,33 @@ namespace Microsoft.EntityFrameworkCore
 
                     Assert.Contains(
                         minBatchSize == 3
-                            ? RelationalResources.LogBatchReadyForExecution(new TestLogger<SqlServerLoggingDefinitions>())
-                                .GenerateMessage(3)
-                            : RelationalResources.LogBatchSmallerThanMinBatchSize(new TestLogger<SqlServerLoggingDefinitions>())
-                                .GenerateMessage(3, 4),
-                        Fixture.TestSqlLoggerFactory.Log.Select(l => l.Message));
+                          ? RelationalResources
+                            .LogBatchReadyForExecution(
+                                new TestLogger<SqlServerLoggingDefinitions>()
+                            )
+                            .GenerateMessage(3)
+                          : RelationalResources
+                            .LogBatchSmallerThanMinBatchSize(
+                                new TestLogger<SqlServerLoggingDefinitions>()
+                            )
+                            .GenerateMessage(3, 4),
+                        Fixture.TestSqlLoggerFactory.Log.Select(l => l.Message)
+                    );
 
-                    Assert.Equal(minBatchSize <= 3 ? 2 : 4, Fixture.TestSqlLoggerFactory.SqlStatements.Count);
-                }, context => AssertDatabaseState(context, false, expectedBlogs));
+                    Assert.Equal(
+                        minBatchSize <= 3 ? 2 : 4,
+                        Fixture.TestSqlLoggerFactory.SqlStatements.Count
+                    );
+                },
+                context => AssertDatabaseState(context, false, expectedBlogs)
+            );
         }
 
-        private void AssertDatabaseState(DbContext context, bool clientOrder, List<Blog> expectedBlogs)
+        private void AssertDatabaseState(
+            DbContext context,
+            bool clientOrder,
+            List<Blog> expectedBlogs
+        )
         {
             expectedBlogs = clientOrder
                 ? expectedBlogs.OrderBy(b => b.Order).ToList()
@@ -199,24 +207,25 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private BloggingContext CreateContext()
-            => (BloggingContext)Fixture.CreateContext();
+        private BloggingContext CreateContext() => (BloggingContext)Fixture.CreateContext();
 
         private void ExecuteWithStrategyInTransaction(
             Action<BloggingContext> testOperation,
-            Action<BloggingContext> nestedTestOperation)
-            => TestHelpers.ExecuteWithStrategyInTransaction(
-                CreateContext, UseTransaction, testOperation, nestedTestOperation);
+            Action<BloggingContext> nestedTestOperation
+        ) =>
+            TestHelpers.ExecuteWithStrategyInTransaction(
+                CreateContext,
+                UseTransaction,
+                testOperation,
+                nestedTestOperation
+            );
 
-        protected void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-            => facade.UseTransaction(transaction.GetDbTransaction());
+        protected void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction) =>
+            facade.UseTransaction(transaction.GetDbTransaction());
 
         private class BloggingContext : PoolableDbContext
         {
-            public BloggingContext(DbContextOptions options)
-                : base(options)
-            {
-            }
+            public BloggingContext(DbContextOptions options) : base(options) { }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -224,15 +233,21 @@ namespace Microsoft.EntityFrameworkCore
                     b =>
                     {
                         b.Property(e => e.Id).ValueGeneratedOnAdd();
-                        b.Property(e => e.Version).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
+                        b.Property(e => e.Version)
+                            .IsConcurrencyToken()
+                            .ValueGeneratedOnAddOrUpdate();
                         b.Property(e => e.Name).HasColumnType("nvarchar(450)");
-                    });
+                    }
+                );
                 modelBuilder.Entity<Blog>(
                     b =>
                     {
                         b.Property(e => e.Id).HasDefaultValueSql("NEWID()");
-                        b.Property(e => e.Version).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate();
-                    });
+                        b.Property(e => e.Version)
+                            .IsConcurrencyToken()
+                            .ValueGeneratedOnAddOrUpdate();
+                    }
+                );
             }
 
             // ReSharper disable once UnusedMember.Local
@@ -260,16 +275,16 @@ namespace Microsoft.EntityFrameworkCore
         {
             protected override string StoreName { get; } = "BatchingTest";
 
-            public TestSqlLoggerFactory TestSqlLoggerFactory
-                => (TestSqlLoggerFactory)ListLoggerFactory;
+            public TestSqlLoggerFactory TestSqlLoggerFactory =>
+                (TestSqlLoggerFactory)ListLoggerFactory;
 
-            protected override ITestStoreFactory TestStoreFactory
-                => SqlServerTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                SqlServerTestStoreFactory.Instance;
 
             protected override Type ContextType { get; } = typeof(BloggingContext);
 
-            protected override bool ShouldLogCategory(string logCategory)
-                => logCategory == DbLoggerCategory.Update.Name;
+            protected override bool ShouldLogCategory(string logCategory) =>
+                logCategory == DbLoggerCategory.Update.Name;
 
             protected override void Seed(PoolableDbContext context)
             {
@@ -277,7 +292,8 @@ namespace Microsoft.EntityFrameworkCore
                 context.Database.ExecuteSqlRaw(
                     @"
 ALTER TABLE dbo.Owners
-    ALTER COLUMN Name nvarchar(MAX);");
+    ALTER COLUMN Name nvarchar(MAX);"
+                );
             }
 
             public DbContext CreateContext(int minBatchSize)

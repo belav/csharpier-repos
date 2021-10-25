@@ -21,7 +21,6 @@ public class RefY2<T, U> { }
 public class RefX3<T, U, V> { }
 public class RefY3<T, U, V> { }
 
-
 public class Gen<T>
 {
     public T PassAsIn(T t)
@@ -65,12 +64,10 @@ public class Test
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     public static int Main()
     {
-
         int _int1 = 1;
         int _int2 = -1;
         new Gen<int>().PassAsParameter(_int1, _int2);
@@ -102,5 +99,4 @@ public class Test
             return 1;
         }
     }
-
 }

@@ -175,7 +175,6 @@ namespace Microsoft.Net.Http.Headers
             Assert.False(RangeHeaderValue.TryParse(input, out var result));
             Assert.Null(result);
         }
-
         #endregion
     }
 }

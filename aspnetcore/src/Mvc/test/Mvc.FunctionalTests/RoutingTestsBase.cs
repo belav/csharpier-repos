@@ -13,11 +13,14 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+    public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>
+        where TStartup : class
     {
         protected RoutingTestsBase(MvcTestFixture<TStartup> fixture)
         {
-            var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            var factory =
+                fixture.Factories.FirstOrDefault()
+                ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
             Client = factory.CreateDefaultClient();
         }
 
@@ -29,9 +32,24 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("http://localhost/Login/Index", "Login", "Index", "http://localhost/Login")]
         [InlineData("http://localhost/Login/Sso", "Login", "Sso", "http://localhost/Login/Sso")]
-        [InlineData("http://localhost/Contact/Index", "Contact", "Index", "http://localhost/Contact")]
-        [InlineData("http://localhost/Contact/Sso", "Contact", "Sso", "http://localhost/Contact/Sso")]
-        public async Task ConventionalRoutedAction_RouteUrl_AmbientValues(string requestUrl, string controller, string action, string expectedUrl)
+        [InlineData(
+            "http://localhost/Contact/Index",
+            "Contact",
+            "Index",
+            "http://localhost/Contact"
+        )]
+        [InlineData(
+            "http://localhost/Contact/Sso",
+            "Contact",
+            "Sso",
+            "http://localhost/Contact/Sso"
+        )]
+        public async Task ConventionalRoutedAction_RouteUrl_AmbientValues(
+            string requestUrl,
+            string controller,
+            string action,
+            string expectedUrl
+        )
         {
             // Arrange & Act
             var response = await Client.GetAsync(requestUrl);
@@ -52,7 +70,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ConventionalRoutedAction_RouteHasNonParameterConstraint_RouteConstraintRun_Allowed()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/NonParameterConstraintRoute/NonParameterConstraint/Index?allowed=true");
+            var response = await Client.GetAsync(
+                "http://localhost/NonParameterConstraintRoute/NonParameterConstraint/Index?allowed=true"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -68,7 +88,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ConventionalRoutedAction_RouteHasNonParameterConstraint_RouteConstraintRun_Denied()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/NonParameterConstraintRoute/NonParameterConstraint/Index?allowed=false");
+            var response = await Client.GetAsync(
+                "http://localhost/NonParameterConstraintRoute/NonParameterConstraint/Index?allowed=false"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -78,7 +100,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ConventionalRoutedAction_RouteContainsPage_RouteNotMatched()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/PageRoute/ConventionalRoute/pagevalue");
+            var response = await Client.GetAsync(
+                "http://localhost/PageRoute/ConventionalRoute/pagevalue"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -118,7 +142,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ConventionalRoutedAction_InArea_StaysInArea()
         {
             // Arrange
-            var url = LinkFrom("http://localhost/Travel/Flight").To(new { action = "Contact", controller = "Home", });
+            var url = LinkFrom("http://localhost/Travel/Flight")
+                .To(new { action = "Contact", controller = "Home", });
 
             // Act
             var response = await Client.GetAsync(url);
@@ -157,7 +182,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var body = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<ResultData>(body);
             Assert.Single(result.DataTokens);
-            Assert.Single(result.DataTokens, kvp => kvp.Key == "actionName" && ((string)kvp.Value) == "DataTokens");
+            Assert.Single(
+                result.DataTokens,
+                kvp => kvp.Key == "actionName" && ((string)kvp.Value) == "DataTokens"
+            );
 
             // Act
             response = await Client.GetAsync("http://localhost/RouteData/Conventional");
@@ -169,7 +197,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             result = JsonConvert.DeserializeObject<ResultData>(body);
 
             Assert.Single(result.DataTokens);
-            Assert.Single(result.DataTokens, kvp => kvp.Key == "actionName" && ((string)kvp.Value) == "Conventional");
+            Assert.Single(
+                result.DataTokens,
+                kvp => kvp.Key == "actionName" && ((string)kvp.Value) == "Conventional"
+            );
         }
 
         protected class ResultData
@@ -183,7 +214,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task DataTokens_ReturnsDataTokensForRoute()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/DataTokensRoute/DataTokens/Index");
+            var response = await Client.GetAsync(
+                "http://localhost/DataTokensRoute/DataTokens/Index"
+            );
 
             // Assert
             var body = await response.Content.ReadAsStringAsync();
@@ -227,7 +260,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task Page_PageRouteTransformer_RouteParameter()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/page-route-transformer/test-page/ExtraPath/World");
+            var response = await Client.GetAsync(
+                "http://localhost/page-route-transformer/test-page/ExtraPath/World"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -239,7 +274,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task Page_PageRouteTransformer_PageWithConfiguredRoute()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/PageRouteTransformer/NewConventionRoute/World");
+            var response = await Client.GetAsync(
+                "http://localhost/PageRouteTransformer/NewConventionRoute/World"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -268,7 +305,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                     { "controller", "Home" },
                     { "action", "Index" },
                 },
-                result.RouteValues);
+                result.RouteValues
+            );
         }
 
         [Fact]
@@ -292,7 +330,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                     { "controller", "Home" },
                     { "action", "Index" },
                 },
-                result.RouteValues);
+                result.RouteValues
+            );
         }
 
         [Fact]
@@ -327,7 +366,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
                     { "controller", "Flight" },
                     { "action", "Index" },
                 },
-                result.RouteValues);
+                result.RouteValues
+            );
         }
 
         [Fact]
@@ -343,10 +383,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("", "/Home/OptionalPath/default")]
         [InlineData("CustomPath", "/Home/OptionalPath/CustomPath")]
-        public virtual async Task ConventionalRoutedController_WithOptionalSegment(string optionalSegment, string expected)
+        public virtual async Task ConventionalRoutedController_WithOptionalSegment(
+            string optionalSegment,
+            string expected
+        )
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/Home/OptionalPath/" + optionalSegment);
+            var response = await Client.GetAsync(
+                "http://localhost/Home/OptionalPath/" + optionalSegment
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -375,11 +420,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             Assert.Contains(
                 new KeyValuePair<string, object>("controller", "Store"),
-                result.RouteValues);
+                result.RouteValues
+            );
 
             Assert.Contains(
                 new KeyValuePair<string, object>("action", "ListProducts"),
-                result.RouteValues);
+                result.RouteValues
+            );
         }
 
         [Theory]
@@ -388,7 +435,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("Delete", "/Friends")]
         public async Task AttributeRoutedAction_AcceptRequestsWithValidMethods_InRoutesWithoutExtraTemplateSegmentsOnTheAction(
             string method,
-            string url)
+            string url
+        )
         {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(method), $"http://localhost{url}");
@@ -408,21 +456,24 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             Assert.Contains(
                 new KeyValuePair<string, object>("controller", "Friends"),
-                result.RouteValues);
+                result.RouteValues
+            );
 
-            Assert.Contains(
-                new KeyValuePair<string, object>("action", method),
-                result.RouteValues);
+            Assert.Contains(new KeyValuePair<string, object>("action", method), result.RouteValues);
 
             if (result.RouteValues.ContainsKey("id"))
             {
                 Assert.Contains(
                     new KeyValuePair<string, object>("id", "Peter"),
-                    result.RouteValues);
+                    result.RouteValues
+                );
             }
         }
 
-        public static TheoryData<string, string> AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheActionData
+        public static TheoryData<
+            string,
+            string
+        > AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheActionData
         {
             get
             {
@@ -438,10 +489,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
 
         [Theory]
-        [MemberData(nameof(AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheActionData))]
+        [MemberData(
+            nameof(
+                AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheActionData
+            )
+        )]
         public virtual async Task AttributeRoutedAction_RejectsRequestsWithWrongMethods_InRoutesWithoutExtraTemplateSegmentsOnTheAction(
             string method,
-            string url)
+            string url
+        )
         {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(method), $"http://localhost{url}");
@@ -456,7 +512,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("http://localhost/api/v1/Maps")]
         [InlineData("http://localhost/api/v2/Maps")]
-        public virtual async Task AttributeRoutedAction_MultipleRouteAttributes_WorksWithNameAndOrder(string url)
+        public virtual async Task AttributeRoutedAction_MultipleRouteAttributes_WorksWithNameAndOrder(
+            string url
+        )
         {
             // Arrange & Act
             var response = await Client.GetAsync(url);
@@ -470,13 +528,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Maps", result.Controller);
             Assert.Equal("Get", result.Action);
 
-            Assert.Equal(new string[]
-            {
-                    "/api/v2/Maps",
-                    "/api/v1/Maps",
-                    "/api/v2/Maps"
-            },
-            result.ExpectedUrls);
+            Assert.Equal(
+                new string[] { "/api/v2/Maps", "/api/v1/Maps", "/api/v2/Maps" },
+                result.ExpectedUrls
+            );
         }
 
         [Fact]
@@ -497,12 +552,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Maps", result.Controller);
             Assert.Equal("Post", result.Action);
 
-            Assert.Equal(new string[]
-            {
-                    "/api/v2/Maps",
-                    "/api/v2/Maps"
-            },
-            result.ExpectedUrls);
+            Assert.Equal(new string[] { "/api/v2/Maps", "/api/v2/Maps" }, result.ExpectedUrls);
         }
 
         [Fact]
@@ -512,7 +562,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var url = "http://localhost/api/v1/Maps";
 
             // Act
-            var response = await Client.SendAsync(new HttpRequestMessage(new HttpMethod("POST"), url));
+            var response = await Client.SendAsync(
+                new HttpRequestMessage(new HttpMethod("POST"), url)
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.MethodNotAllowed, response.StatusCode);
@@ -525,10 +577,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("http://localhost/api/v2/Maps/PartialUpdate/5", "PATCH")]
         public virtual async Task AttributeRoutedAction_MultipleRouteAttributes_CombinesWithMultipleHttpAttributes(
             string url,
-            string method)
+            string method
+        )
         {
             // Arrange & Act
-            var response = await Client.SendAsync(new HttpRequestMessage(new HttpMethod(method), url));
+            var response = await Client.SendAsync(
+                new HttpRequestMessage(new HttpMethod(method), url)
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -539,18 +594,18 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Maps", result.Controller);
             Assert.Equal("Update", result.Action);
 
-            Assert.Equal(new string[]
-            {
-                    "/api/v2/Maps/PartialUpdate/5",
-                    "/api/v2/Maps/PartialUpdate/5"
-            },
-            result.ExpectedUrls);
+            Assert.Equal(
+                new string[] { "/api/v2/Maps/PartialUpdate/5", "/api/v2/Maps/PartialUpdate/5" },
+                result.ExpectedUrls
+            );
         }
 
         [Theory]
         [InlineData("http://localhost/Banks/Get/5")]
         [InlineData("http://localhost/Bank/Get/5")]
-        public virtual async Task AttributeRoutedAction_MultipleHttpAttributesAndTokenReplacement(string url)
+        public virtual async Task AttributeRoutedAction_MultipleHttpAttributesAndTokenReplacement(
+            string url
+        )
         {
             // Arrange
             var expectedUrl = new Uri(url).AbsolutePath;
@@ -567,15 +622,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Banks", result.Controller);
             Assert.Equal("Get", result.Action);
 
-            Assert.Equal(new string[]
-            {
-                    "/Bank/Get/5",
-                    "/Bank/Get/5"
-            },
-            result.ExpectedUrls);
+            Assert.Equal(new string[] { "/Bank/Get/5", "/Bank/Get/5" }, result.ExpectedUrls);
         }
 
-        public static TheoryData<string, string> AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraintsData
+        public static TheoryData<
+            string,
+            string
+        > AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraintsData
         {
             get
             {
@@ -590,16 +643,23 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
 
         [Theory]
-        [MemberData(nameof(AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraintsData))]
+        [MemberData(
+            nameof(
+                AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraintsData
+            )
+        )]
         public virtual async Task AttributeRoutedAction_MultipleRouteAttributes_WithMultipleHttpAttributes_RespectsConstraints(
             string url,
-            string method)
+            string method
+        )
         {
             // Arrange
             var expectedUrl = new Uri(url).AbsolutePath;
 
             // Act
-            var response = await Client.SendAsync(new HttpRequestMessage(new HttpMethod(method), url));
+            var response = await Client.SendAsync(
+                new HttpRequestMessage(new HttpMethod(method), url)
+            );
 
             // Assert
             AssertCorsRejectionStatusCode(response);
@@ -653,15 +713,12 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             Assert.Contains(
                 new KeyValuePair<string, object>("controller", "Blog"),
-                result.RouteValues);
+                result.RouteValues
+            );
 
-            Assert.Contains(
-                new KeyValuePair<string, object>("action", "Edit"),
-                result.RouteValues);
+            Assert.Contains(new KeyValuePair<string, object>("action", "Edit"), result.RouteValues);
 
-            Assert.Contains(
-                new KeyValuePair<string, object>("postId", "5"),
-                result.RouteValues);
+            Assert.Contains(new KeyValuePair<string, object>("postId", "5"), result.RouteValues);
         }
 
         // There's no [HttpGet] on the action here.
@@ -693,7 +750,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task AttributeRoutedAction_RouteAttributeOnAction_IsReachable(string method)
         {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/Store/Shop/Orders");
+            var message = new HttpRequestMessage(
+                new HttpMethod(method),
+                "http://localhost/Store/Shop/Orders"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -715,10 +775,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("PUT")]
         [InlineData("PATCH")]
         [InlineData("DELETE")]
-        public async Task AttributeRoutedAction_RouteAttributeOnActionAndController_IsReachable(string method)
+        public async Task AttributeRoutedAction_RouteAttributeOnActionAndController_IsReachable(
+            string method
+        )
         {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/api/Employee/5/Salary");
+            var message = new HttpRequestMessage(
+                new HttpMethod(method),
+                "http://localhost/api/Employee/5/Salary"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -738,7 +803,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task AttributeRoutedAction_RouteAttributeOnActionAndHttpGetOnDifferentAction_ReachesHttpGetAction()
         {
             // Arrange
-            var message = new HttpRequestMessage(HttpMethod.Get, "http://localhost/Store/Shop/Orders");
+            var message = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/Store/Shop/Orders"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -758,10 +826,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("PUT")]
         [InlineData("PATCH")]
-        public async Task AttributeRoutedAction_ControllerLevelRoute_WithAcceptVerbs_IsReachable(string verb)
+        public async Task AttributeRoutedAction_ControllerLevelRoute_WithAcceptVerbs_IsReachable(
+            string verb
+        )
         {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(verb), "http://localhost/api/Employee");
+            var message = new HttpRequestMessage(
+                new HttpMethod(verb),
+                "http://localhost/api/Employee"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -780,10 +853,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("PUT")]
         [InlineData("PATCH")]
-        public async Task AttributeRoutedAction_ControllerLevelRoute_WithAcceptVerbsAndRouteTemplate_IsReachable(string verb)
+        public async Task AttributeRoutedAction_ControllerLevelRoute_WithAcceptVerbsAndRouteTemplate_IsReachable(
+            string verb
+        )
         {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(verb), "http://localhost/api/Employee/Manager");
+            var message = new HttpRequestMessage(
+                new HttpMethod(verb),
+                "http://localhost/api/Employee/Manager"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -804,7 +882,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("PATCH", "Bank")]
         [InlineData("PUT", "Bank/Update")]
         [InlineData("PATCH", "Bank/Update")]
-        public virtual async Task AttributeRoutedAction_AcceptVerbsAndRouteTemplate_IsReachable(string verb, string path)
+        public virtual async Task AttributeRoutedAction_AcceptVerbsAndRouteTemplate_IsReachable(
+            string verb,
+            string path
+        )
         {
             // Arrange
             var expectedUrl = "/Bank/Update";
@@ -828,7 +909,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task AttributeRoutedAction_WithCustomHttpAttributes_IsReachable()
         {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod("MERGE"), "http://localhost/api/Employee/5");
+            var message = new HttpRequestMessage(
+                new HttpMethod("MERGE"),
+                "http://localhost/api/Employee/5"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -848,10 +932,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("GET", "GetAdministrator")]
         [InlineData("DELETE", "DeleteAdministrator")]
-        public async Task AttributeRoutedAction_ControllerLevelRoute_CombinedWithActionRoute_IsReachable(string verb, string action)
+        public async Task AttributeRoutedAction_ControllerLevelRoute_CombinedWithActionRoute_IsReachable(
+            string verb,
+            string action
+        )
         {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(verb), "http://localhost/api/Employee/5/Administrator");
+            var message = new HttpRequestMessage(
+                new HttpMethod(verb),
+                "http://localhost/api/Employee/5/Administrator"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -866,9 +956,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Employee", result.Controller);
             Assert.Equal(action, result.Action);
 
-            Assert.Contains(
-                new KeyValuePair<string, object>("id", "5"),
-                result.RouteValues);
+            Assert.Contains(new KeyValuePair<string, object>("id", "5"), result.RouteValues);
         }
 
         [Fact]
@@ -887,9 +975,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Employee", result.Controller);
             Assert.Equal("GetManager", result.Action);
 
-            Assert.Contains(
-                new KeyValuePair<string, object>("id", "5"),
-                result.RouteValues);
+            Assert.Contains(new KeyValuePair<string, object>("id", "5"), result.RouteValues);
         }
 
         [Fact]
@@ -908,9 +994,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("Team", result.Controller);
             Assert.Equal("GetOrganization", result.Action);
 
-            Assert.Contains(
-                new KeyValuePair<string, object>("teamId", "5"),
-                result.RouteValues);
+            Assert.Contains(new KeyValuePair<string, object>("teamId", "5"), result.RouteValues);
         }
 
         [Fact]
@@ -955,7 +1039,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [Theory]
         [InlineData("", "/TeamName/DefaultName")]
         [InlineData("CustomName", "/TeamName/CustomName")]
-        public virtual async Task AttributeRoutedAction_PreservesDefaultValue_IfRouteValueIsNull(string teamName, string expected)
+        public virtual async Task AttributeRoutedAction_PreservesDefaultValue_IfRouteValueIsNull(
+            string teamName,
+            string expected
+        )
         {
             // Arrange & Act
             var body = await Client.GetStringAsync("http://localhost/TeamName/" + teamName);
@@ -970,7 +1057,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_LinkToSelf()
         {
             // Arrange
-            var url = LinkFrom("http://localhost/api/Employee").To(new { });
+            var url = LinkFrom("http://localhost/api/Employee").To(new {  });
 
             // Act
             var response = await Client.GetAsync(url);
@@ -1010,7 +1097,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_LinkToAttributeRoutedController()
         {
             // Arrange
-            var url = LinkFrom("http://localhost/api/Employee").To(new { action = "ShowPosts", controller = "Blog" });
+            var url = LinkFrom("http://localhost/api/Employee")
+                .To(new { action = "ShowPosts", controller = "Blog" });
 
             // Act
             var response = await Client.GetAsync(url);
@@ -1030,7 +1118,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_LinkToConventionalController()
         {
             // Arrange
-            var url = LinkFrom("http://localhost/api/Employee").To(new { action = "Index", controller = "Home" });
+            var url = LinkFrom("http://localhost/api/Employee")
+                .To(new { action = "Index", controller = "Home" });
 
             // Act
             var response = await Client.GetAsync(url);
@@ -1051,10 +1140,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("PUT", "Put")]
         public virtual async Task AttributeRoutedAction_LinkWithName_WithNameInheritedFromControllerRoute(
             string method,
-            string actionName)
+            string actionName
+        )
         {
             // Arrange
-            var message = new HttpRequestMessage(new HttpMethod(method), "http://localhost/api/Company/5");
+            var message = new HttpRequestMessage(
+                new HttpMethod(method),
+                "http://localhost/api/Company/5"
+            );
 
             // Act
             var response = await Client.SendAsync(message);
@@ -1093,8 +1186,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_Link_WithNonEmptyActionRouteTemplateAndNoActionRouteName()
         {
             // Arrange
-            var url = LinkFrom("http://localhost")
-                .To(new { id = 5 });
+            var url = LinkFrom("http://localhost").To(new { id = 5 });
 
             // Act
             var response = await Client.GetAsync("http://localhost/api/Company/5/Employees");
@@ -1133,8 +1225,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task ConventionalRoutedAction_DefaultValues_OptionalParameter_LinkToDefaultValuePath()
         {
             // Arrange
-            var url = LinkFrom("http://localhost/DefaultValuesRoute/Optional")
-                .To(new { });
+            var url = LinkFrom("http://localhost/DefaultValuesRoute/Optional").To(new {  });
 
             // Act
             var response = await Client.GetAsync(url);
@@ -1168,15 +1259,17 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("DefaultValues", result.Controller);
             Assert.Equal("OptionalParameter", result.Action);
 
-            Assert.Equal("/DefaultValuesRoute/Optional/DEFAULTVALUES/OPTIONALPARAMETER/123", result.Link);
+            Assert.Equal(
+                "/DefaultValuesRoute/Optional/DEFAULTVALUES/OPTIONALPARAMETER/123",
+                result.Link
+            );
         }
 
         [Fact]
         public async Task ConventionalRoutedAction_DefaultValues_DefaultParameter_LinkToDefaultValuePath()
         {
             // Arrange
-            var url = LinkFrom("http://localhost/DefaultValuesRoute/Default")
-                .To(new { });
+            var url = LinkFrom("http://localhost/DefaultValuesRoute/Default").To(new {  });
 
             // Act
             var response = await Client.GetAsync(url);
@@ -1212,7 +1305,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("DefaultParameter", result.Action);
             Assert.Equal("17", result.RouteValues["id"]);
 
-            Assert.Equal("/DefaultValuesRoute/Default/DEFAULTVALUES/DEFAULTPARAMETER/17/CatchAll", result.Link);
+            Assert.Equal(
+                "/DefaultValuesRoute/Default/DEFAULTVALUES/DEFAULTPARAMETER/17/CatchAll",
+                result.Link
+            );
         }
 
         [Fact]
@@ -1234,14 +1330,19 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             Assert.Equal("DefaultParameter", result.Action);
             Assert.Equal("17", result.RouteValues["id"]);
 
-            Assert.Equal("/DefaultValuesRoute/Default/DEFAULTVALUES/DEFAULTPARAMETER/123", result.Link);
+            Assert.Equal(
+                "/DefaultValuesRoute/Default/DEFAULTVALUES/DEFAULTPARAMETER/123",
+                result.Link
+            );
         }
 
         [Fact]
         public async Task ConventionalRoutedAction_DefaultValues_DefaultParameterMatches_LinkToShortenedPath()
         {
             // Arrange
-            var url = LinkFrom("http://localhost/DefaultValuesRoute/Default/DefaultValues/DefaultParameter/123")
+            var url = LinkFrom(
+                    "http://localhost/DefaultValuesRoute/Default/DefaultValues/DefaultParameter/123"
+                )
                 .To(new { id = "17" });
 
             // Act
@@ -1346,7 +1447,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public virtual async Task AttributeRoutedAction_InArea_ImplicitLinkToArea()
         {
             // Arrange
-            var url = LinkFrom("http://localhost/ContosoCorp/Trains/CheckSchedule").To(new { action = "Index" });
+            var url = LinkFrom("http://localhost/ContosoCorp/Trains/CheckSchedule")
+                .To(new { action = "Index" });
 
             // Act
             var response = await Client.GetAsync(url);
@@ -1473,7 +1575,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("/Bank/Deposit/5", "PUT", "Deposit")]
         [InlineData("/Bank/Deposit/5", "POST", "Deposit")]
         [InlineData("/Bank/Withdraw/5", "POST", "Withdraw")]
-        public async Task AttributeRouting_MixedAcceptVerbsAndRoute_Reachable(string path, string verb, string actionName)
+        public async Task AttributeRouting_MixedAcceptVerbsAndRoute_Reachable(
+            string path,
+            string verb,
+            string actionName
+        )
         {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(verb), "http://localhost" + path);
@@ -1493,7 +1599,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
 
         // These verbs don't match
-        public static TheoryData<string, string> AttributeRouting_MixedAcceptVerbsAndRoute_UnreachableData
+        public static TheoryData<
+            string,
+            string
+        > AttributeRouting_MixedAcceptVerbsAndRoute_UnreachableData
         {
             get
             {
@@ -1508,7 +1617,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
         [Theory]
         [MemberData(nameof(AttributeRouting_MixedAcceptVerbsAndRoute_UnreachableData))]
-        public virtual async Task AttributeRouting_MixedAcceptVerbsAndRoute_Unreachable(string path, string verb)
+        public virtual async Task AttributeRouting_MixedAcceptVerbsAndRoute_Unreachable(
+            string path,
+            string verb
+        )
         {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(verb), "http://localhost" + path);
@@ -1525,7 +1637,11 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("/Order/Add", "POST", "Add")]
         [InlineData("/Order/Edit/1", "PUT", "Edit")]
         [InlineData("/Order/GetOrder", "GET", "GetOrder")]
-        public async Task AttributeRouting_RouteNameTokenReplace_Reachable(string path, string verb, string actionName)
+        public async Task AttributeRouting_RouteNameTokenReplace_Reachable(
+            string path,
+            string verb,
+            string actionName
+        )
         {
             // Arrange
             var request = new HttpRequestMessage(new HttpMethod(verb), "http://localhost" + path);

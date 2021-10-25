@@ -37,7 +37,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             }
         }
 
-        [Benchmark( OperationsPerInvoke = EndpointCount)]
+        [Benchmark(OperationsPerInvoke = EndpointCount)]
         public async Task Dfa()
         {
             for (var i = 0; i < EndpointCount; i++)

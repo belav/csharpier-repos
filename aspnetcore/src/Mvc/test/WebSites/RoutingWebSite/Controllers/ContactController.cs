@@ -17,12 +17,16 @@ namespace RoutingWebSite
 
         public IActionResult Index()
         {
-            return _generator.Generate(Url.RouteUrl("ActionAsMethod", null, Url.ActionContext.HttpContext.Request.Scheme));
+            return _generator.Generate(
+                Url.RouteUrl("ActionAsMethod", null, Url.ActionContext.HttpContext.Request.Scheme)
+            );
         }
 
         public IActionResult Sso()
         {
-            return _generator.Generate(Url.RouteUrl("ActionAsMethod", null, Url.ActionContext.HttpContext.Request.Scheme));
+            return _generator.Generate(
+                Url.RouteUrl("ActionAsMethod", null, Url.ActionContext.HttpContext.Request.Scheme)
+            );
         }
     }
 }

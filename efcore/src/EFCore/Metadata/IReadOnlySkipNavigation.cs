@@ -18,8 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <summary>
         ///     Gets the join type used by the foreign key.
         /// </summary>
-        IReadOnlyEntityType? JoinEntityType
-            => IsOnDependent ? ForeignKey?.PrincipalEntityType : ForeignKey?.DeclaringEntityType;
+        IReadOnlyEntityType? JoinEntityType =>
+            IsOnDependent ? ForeignKey?.PrincipalEntityType : ForeignKey?.DeclaringEntityType;
 
         /// <summary>
         ///     Gets the inverse skip navigation.
@@ -57,7 +57,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <param name="options"> Options for generating the string. </param>
         /// <param name="indent"> The number of indent spaces to use before each new line. </param>
         /// <returns> A human-readable representation. </returns>
-        string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+        string ToDebugString(
+            MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+            int indent = 0
+        )
         {
             var builder = new StringBuilder();
             var indentString = new string(' ', indent);
@@ -105,8 +108,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 builder.Append(" PropertyAccessMode.").Append(GetPropertyAccessMode());
             }
 
-            if ((options & MetadataDebugStringOptions.IncludePropertyIndexes) != 0
-                && ((AnnotatableBase)this).IsReadOnly)
+            if (
+                (options & MetadataDebugStringOptions.IncludePropertyIndexes) != 0
+                && ((AnnotatableBase)this).IsReadOnly
+            )
             {
                 var indexes = ((ISkipNavigation)this).GetPropertyIndexes();
                 builder.Append(" ").Append(indexes.Index);

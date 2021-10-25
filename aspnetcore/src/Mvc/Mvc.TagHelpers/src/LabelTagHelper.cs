@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
                 For.ModelExplorer,
                 For.Name,
                 labelText: null,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
 
             if (tagBuilder != null)
             {

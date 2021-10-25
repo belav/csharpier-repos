@@ -20,7 +20,9 @@ namespace System.Reflection.Tests
         [InlineData(typeof(ClassWithMultipleConstructors), 4)]
         public void DeclaredConstructors(Type type, int expectedCount)
         {
-            ConstructorInfo[] constructors = type.GetTypeInfo().DeclaredConstructors.Where(ctorInfo => !ctorInfo.IsStatic).ToArray();
+            ConstructorInfo[] constructors = type.GetTypeInfo()
+                .DeclaredConstructors.Where(ctorInfo => !ctorInfo.IsStatic)
+                .ToArray();
             Assert.Equal(expectedCount, constructors.Length);
             foreach (ConstructorInfo constructorInfo in constructors)
             {
@@ -31,13 +33,23 @@ namespace System.Reflection.Tests
 
         [Theory]
         [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.EventPublic), true, "EventHandler")]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.EventPublicStatic), true, "EventHandler")]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass.EventPublicStatic),
+            true,
+            "EventHandler"
+        )]
         [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.StuffHappened), true, "Action`1")]
         [InlineData(typeof(TI_BaseClass), "NoSuchEvent", false, "EventHandler")]
         [InlineData(typeof(TI_BaseClass), "", false, "EventHandler")]
         [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.EventPublicNew), true, "EventHandler")]
         [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.EventPublic), true, "EventHandler")]
-        [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.EventPublicStatic), false, "EventHandler")]
+        [InlineData(
+            typeof(TI_SubClass),
+            nameof(TI_SubClass.EventPublicStatic),
+            false,
+            "EventHandler"
+        )]
         public void DeclaredEvents(Type type, string name, bool exists, string eventHandlerTypeName)
         {
             IEnumerable<EventInfo> events = type.GetTypeInfo().DeclaredEvents;
@@ -56,27 +68,112 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass._field1), true, typeof(string), false)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass._field2), true, typeof(string), false)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass._readonlyField), true, typeof(string), false)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass._volatileField), true, typeof(string), false)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.s_field), true, typeof(string), false)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.s_readonlyField), true, typeof(string), false)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.s_volatileField), true, typeof(string), false)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.s_arrayField), true,  typeof(string[]), false)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.StuffHappened), true, typeof(Action<int>), true)]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass._field1),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass._field2),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass._readonlyField),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass._volatileField),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass.s_field),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass.s_readonlyField),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass.s_volatileField),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass.s_arrayField),
+            true,
+            typeof(string[]),
+            false
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass.StuffHappened),
+            true,
+            typeof(Action<int>),
+            true
+        )]
         [InlineData(typeof(TI_BaseClass), "_privateField", true, typeof(int), true)]
         [InlineData(typeof(TI_BaseClass), "NoSuchField", false, default(Type), default(Boolean))]
         [InlineData(typeof(TI_BaseClass), "", false, default(Type), default(Boolean))]
         [InlineData(typeof(TI_SubClass), nameof(TI_SubClass._field2), true, typeof(string), false)]
-        [InlineData(typeof(TI_SubClass), nameof(TI_SubClass._readonlyField), true, typeof(string), false)]
-        [InlineData(typeof(TI_SubClass), nameof(TI_SubClass._volatileField), true, typeof(string), false)]
+        [InlineData(
+            typeof(TI_SubClass),
+            nameof(TI_SubClass._readonlyField),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_SubClass),
+            nameof(TI_SubClass._volatileField),
+            true,
+            typeof(string),
+            false
+        )]
         [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.s_field), true, typeof(string), false)]
-        [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.s_readonlyField), true, typeof(string), false)]
-        [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.s_volatileField), true, typeof(string), false)]
-        public void DeclaredFields(Type type, string name, bool exists, Type fieldType, bool isPrivate)
+        [InlineData(
+            typeof(TI_SubClass),
+            nameof(TI_SubClass.s_readonlyField),
+            true,
+            typeof(string),
+            false
+        )]
+        [InlineData(
+            typeof(TI_SubClass),
+            nameof(TI_SubClass.s_volatileField),
+            true,
+            typeof(string),
+            false
+        )]
+        public void DeclaredFields(
+            Type type,
+            string name,
+            bool exists,
+            Type fieldType,
+            bool isPrivate
+        )
         {
-            IEnumerable<string> fields = type.GetTypeInfo().DeclaredFields.Select(fieldInfo => fieldInfo.Name);
+            IEnumerable<string> fields = type.GetTypeInfo()
+                .DeclaredFields.Select(fieldInfo => fieldInfo.Name);
             FieldInfo declaredFieldInfo = type.GetTypeInfo().GetDeclaredField(name);
             if (exists)
             {
@@ -93,11 +190,38 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(TI_BaseClass), new string[] { "_field1", "_field2", "_readonlyField", "_volatileField", "s_field", "s_readonlyField", "s_volatileField", "s_arrayField" })]
-        [InlineData(typeof(TI_SubClass), new string[] { "_field2", "_readonlyField", "_volatileField", "s_field", "s_readonlyField", "s_volatileField", "s_arrayField" })]
+        [InlineData(
+            typeof(TI_BaseClass),
+            new string[]
+            {
+                "_field1",
+                "_field2",
+                "_readonlyField",
+                "_volatileField",
+                "s_field",
+                "s_readonlyField",
+                "s_volatileField",
+                "s_arrayField"
+            }
+        )]
+        [InlineData(
+            typeof(TI_SubClass),
+            new string[]
+            {
+                "_field2",
+                "_readonlyField",
+                "_volatileField",
+                "s_field",
+                "s_readonlyField",
+                "s_volatileField",
+                "s_arrayField"
+            }
+        )]
         public void DeclaredMembers(Type type, string[] expected)
         {
-            HashSet<string> members = new HashSet<string>(type.GetTypeInfo().DeclaredMembers.Select(memberInfo => memberInfo.Name));
+            HashSet<string> members = new HashSet<string>(
+                type.GetTypeInfo().DeclaredMembers.Select(memberInfo => memberInfo.Name)
+            );
             Assert.Superset(new HashSet<string>(expected), members);
         }
 
@@ -105,8 +229,16 @@ namespace System.Reflection.Tests
         [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.VoidMethodReturningVoid1), true)]
         [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.StringMethodReturningVoid), true)]
         [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.VoidMethodReturningVoid2), true)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.VirtualVoidMethodReturningVoid1), true)]
-        [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.VirtualVoidMethodReturningVoid2), true)]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass.VirtualVoidMethodReturningVoid1),
+            true
+        )]
+        [InlineData(
+            typeof(TI_BaseClass),
+            nameof(TI_BaseClass.VirtualVoidMethodReturningVoid2),
+            true
+        )]
         [InlineData(typeof(TI_BaseClass), nameof(TI_BaseClass.StaticVoidMethodReturningVoid), true)]
         [InlineData(typeof(TI_BaseClass), "add_StuffHappened", true)]
         [InlineData(typeof(TI_BaseClass), "remove_StuffHappened", true)]
@@ -120,7 +252,8 @@ namespace System.Reflection.Tests
         [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.StaticVoidMethodReturningVoid), true)]
         public void DeclaredMethods(Type type, string name, bool exists)
         {
-            IEnumerable<string> methods = type.GetTypeInfo().DeclaredMethods.Select(methodInfo => methodInfo.Name);
+            IEnumerable<string> methods = type.GetTypeInfo()
+                .DeclaredMethods.Select(methodInfo => methodInfo.Name);
             MethodInfo declaredMethodInfo = type.GetTypeInfo().GetDeclaredMethod(name);
             if (exists)
             {
@@ -147,11 +280,20 @@ namespace System.Reflection.Tests
         [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.NestPublic3), true)]
         [InlineData(typeof(TI_SubClass), nameof(TI_SubClass.NESTPUBLIC3), true)]
         [InlineData(typeof(MultipleNestedClass), nameof(MultipleNestedClass.Nest1), true)]
-        [InlineData(typeof(MultipleNestedClass.Nest1), nameof(MultipleNestedClass.Nest1.Nest2), true)]
-        [InlineData(typeof(MultipleNestedClass.Nest1.Nest2), nameof(MultipleNestedClass.Nest1.Nest2.Nest3), true)]
+        [InlineData(
+            typeof(MultipleNestedClass.Nest1),
+            nameof(MultipleNestedClass.Nest1.Nest2),
+            true
+        )]
+        [InlineData(
+            typeof(MultipleNestedClass.Nest1.Nest2),
+            nameof(MultipleNestedClass.Nest1.Nest2.Nest3),
+            true
+        )]
         public void DeclaredNestedTypes(Type type, string name, bool exists)
         {
-            IEnumerable<string> nestedTypes = type.GetTypeInfo().DeclaredNestedTypes.Select(nestedType => nestedType.Name);
+            IEnumerable<string> nestedTypes = type.GetTypeInfo()
+                .DeclaredNestedTypes.Select(nestedType => nestedType.Name);
 
             TypeInfo typeInfo = type.GetTypeInfo().GetDeclaredNestedType(name);
             if (exists)
@@ -177,7 +319,9 @@ namespace System.Reflection.Tests
         public void DeclaredProperties(Type type, string name)
         {
             TypeInfo typeInfo = type.GetTypeInfo();
-            IEnumerable<string> properties = typeInfo.DeclaredProperties.Select(property => property.Name);
+            IEnumerable<string> properties = typeInfo.DeclaredProperties.Select(
+                property => property.Name
+            );
             Assert.Contains(name, properties);
             Assert.Equal(name, typeInfo.GetDeclaredProperty(name).Name);
         }
@@ -185,42 +329,74 @@ namespace System.Reflection.Tests
         [Fact]
         public void FindInterfaces()
         {
-            Type[] interfaces = typeof(ClassWithNoInterfaces).GetTypeInfo().FindInterfaces((Type t, object c) => true, "notused");
+            Type[] interfaces = typeof(ClassWithNoInterfaces)
+                .GetTypeInfo()
+                .FindInterfaces((Type t, object c) => true, "notused");
 
             Assert.Equal(0, interfaces.Length);
-            interfaces = typeof(TI_ClassWithInterface1).GetTypeInfo().FindInterfaces((Type t, object c) => true, "notused");
+            interfaces = typeof(TI_ClassWithInterface1)
+                .GetTypeInfo()
+                .FindInterfaces((Type t, object c) => true, "notused");
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
 
-            interfaces = typeof(TI_ClassWithInterface1).GetTypeInfo().FindInterfaces((Type t, object c) => t.Name.Equals(c), "TI_NonGenericInterface1");
+            interfaces = typeof(TI_ClassWithInterface1)
+                .GetTypeInfo()
+                .FindInterfaces((Type t, object c) => t.Name.Equals(c), "TI_NonGenericInterface1");
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
 
-            interfaces = typeof(ClassWithInterface2Interface3).GetTypeInfo().FindInterfaces((Type t, object c) => true, "notused");
+            interfaces = typeof(ClassWithInterface2Interface3)
+                .GetTypeInfo()
+                .FindInterfaces((Type t, object c) => true, "notused");
             Assert.Equal(2, interfaces.Length);
             Assert.All(interfaces, m => Assert.Contains("TI_NonGenericInterface", m.Name));
 
-            interfaces = typeof(ClassWithInterface2Interface3).GetTypeInfo().FindInterfaces((Type t, object c) => t.Name.Contains(c.ToString()), "TI_NonGenericInterface");
+            interfaces = typeof(ClassWithInterface2Interface3)
+                .GetTypeInfo()
+                .FindInterfaces(
+                    (Type t, object c) => t.Name.Contains(c.ToString()),
+                    "TI_NonGenericInterface"
+                );
             Assert.Equal(2, interfaces.Length);
             Assert.All(interfaces, m => Assert.Contains("TI_NonGenericInterface", m.Name));
 
-            interfaces = typeof(SubClassWithInterface1).GetTypeInfo().FindInterfaces((Type t, object c) => true, "notused");
+            interfaces = typeof(SubClassWithInterface1)
+                .GetTypeInfo()
+                .FindInterfaces((Type t, object c) => true, "notused");
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
 
-            interfaces = typeof(SubClassWithInterface1).GetTypeInfo().FindInterfaces((Type t, object c) => t.Name.Contains(c.ToString()), "TI_NonGenericInterface");
+            interfaces = typeof(SubClassWithInterface1)
+                .GetTypeInfo()
+                .FindInterfaces(
+                    (Type t, object c) => t.Name.Contains(c.ToString()),
+                    "TI_NonGenericInterface"
+                );
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
 
-            interfaces = typeof(SubClassWithInterface1Interface2Interface3).GetTypeInfo().FindInterfaces((Type t, object c) => true, "notused");
+            interfaces = typeof(SubClassWithInterface1Interface2Interface3)
+                .GetTypeInfo()
+                .FindInterfaces((Type t, object c) => true, "notused");
             Assert.Equal(3, interfaces.Length);
             Assert.All(interfaces, m => Assert.Contains("TI_NonGenericInterface", m.Name));
 
-            interfaces = typeof(SubClassWithInterface1Interface2Interface3).GetTypeInfo().FindInterfaces((Type t, object c) => t.Name.Contains(c.ToString()), "TI_NonGenericInterface");
+            interfaces = typeof(SubClassWithInterface1Interface2Interface3)
+                .GetTypeInfo()
+                .FindInterfaces(
+                    (Type t, object c) => t.Name.Contains(c.ToString()),
+                    "TI_NonGenericInterface"
+                );
             Assert.Equal(3, interfaces.Length);
             Assert.All(interfaces, m => Assert.Contains("TI_NonGenericInterface", m.Name));
 
-            interfaces = typeof(SubClassWithInterface1Interface2Interface3).GetTypeInfo().FindInterfaces((Type t, object c) => t.Name.Contains(c.ToString()), nameof(TI_NonGenericInterface1));
+            interfaces = typeof(SubClassWithInterface1Interface2Interface3)
+                .GetTypeInfo()
+                .FindInterfaces(
+                    (Type t, object c) => t.Name.Contains(c.ToString()),
+                    nameof(TI_NonGenericInterface1)
+                );
             Assert.Equal(1, interfaces.Length);
             Assert.Equal(nameof(TI_NonGenericInterface1), interfaces[0].Name);
         }
@@ -230,45 +406,190 @@ namespace System.Reflection.Tests
             // Interfaces
             yield return new object[] { typeof(TI_NonGenericInterface1), new Type[0], null };
             yield return new object[] { typeof(GenericInterface1<>), new Type[0], null };
-            yield return new object[] { typeof(GenericInterface1<int>), new Type[] { typeof(int) }, null };
-            yield return new object[] { typeof(GenericInterface2<,>), new Type[0], null };
-            yield return new object[] { typeof(GenericInterface2<int, string>), new Type[] { typeof(int), typeof(string) }, null };
+            yield return new object[]
+            {
+                typeof(GenericInterface1<int>),
+                new Type[] { typeof(int) },
+                null
+            };
+            yield return new object[] { typeof(GenericInterface2<, >), new Type[0], null };
+            yield return new object[]
+            {
+                typeof(GenericInterface2<int, string>),
+                new Type[] { typeof(int), typeof(string) },
+                null
+            };
 
             // Structs
-            yield return new object[] { typeof(NonGenericStructWithNoInterfaces), new Type[0], null };
-            yield return new object[] { typeof(GenericStructWithNoInterfaces1<>), new Type[0], null };
-            yield return new object[] { typeof(GenericStructWithNoInterfaces1<int>), new Type[] { typeof(int) }, null };
-            yield return new object[] { typeof(GenericStructWithNoInterfaces2<,>), new Type[0], null };
-            yield return new object[] { typeof(GenericStructWithNoInterfaces2<int, string>), new Type[] { typeof(int), typeof(string) }, null };
+            yield return new object[]
+            {
+                typeof(NonGenericStructWithNoInterfaces),
+                new Type[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithNoInterfaces1<>),
+                new Type[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithNoInterfaces1<int>),
+                new Type[] { typeof(int) },
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithNoInterfaces2<, >),
+                new Type[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithNoInterfaces2<int, string>),
+                new Type[] { typeof(int), typeof(string) },
+                null
+            };
 
-            yield return new object[] { typeof(NonGenericStructWithNonGenericInterface), new Type[0], new string[0] };
-            yield return new object[] { typeof(GenericStructWithGenericInterface1<>), new Type[0], new string[] { "TS" } };
-            yield return new object[] { typeof(GenericStructWithGenericInterface1<int>), new Type[] { typeof(int) }, new string[] { "Int32" } };
-            yield return new object[] { typeof(GenericStructWithGenericInterface2<,>), new Type[0], new string[] { "TS", "VS" } };
-            yield return new object[] { typeof(GenericStructWithGenericInterface2<int, string>), new Type[] { typeof(int), typeof(string) }, new string[] { "Int32", "String" } };
+            yield return new object[]
+            {
+                typeof(NonGenericStructWithNonGenericInterface),
+                new Type[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface1<>),
+                new Type[0],
+                new string[] { "TS" }
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface1<int>),
+                new Type[] { typeof(int) },
+                new string[] { "Int32" }
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface2<, >),
+                new Type[0],
+                new string[] { "TS", "VS" }
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface2<int, string>),
+                new Type[] { typeof(int), typeof(string) },
+                new string[] { "Int32", "String" }
+            };
 
-            yield return new object[] { typeof(NonGenericStructWithGenericInterface1), new Type[0], new string[] { "Int32" } };
-            yield return new object[] { typeof(GenericStructWithGenericInterface3<>), new Type[0], new string[] { "TS", "Int32" } };
-            yield return new object[] { typeof(GenericStructWithGenericInterface3<string>), new Type[] { typeof(string) }, new string[] { "String", "Int32" } };
-            yield return new object[] { typeof(NonGenericStructWithGenericInterface2), new Type[0], new string[] { "Int32", "Int32" } };
+            yield return new object[]
+            {
+                typeof(NonGenericStructWithGenericInterface1),
+                new Type[0],
+                new string[] { "Int32" }
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface3<>),
+                new Type[0],
+                new string[] { "TS", "Int32" }
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface3<string>),
+                new Type[] { typeof(string) },
+                new string[] { "String", "Int32" }
+            };
+            yield return new object[]
+            {
+                typeof(NonGenericStructWithGenericInterface2),
+                new Type[0],
+                new string[] { "Int32", "Int32" }
+            };
 
             // Classes
-            yield return new object[] { typeof(NonGenericClassWithNoInterfaces), new Type[0], null };
-            yield return new object[] { typeof(GenericClassWithNoInterfaces1<>), new Type[0], null };
-            yield return new object[] { typeof(GenericClassWithNoInterfaces1<int>), new Type[] { typeof(int) }, null };
-            yield return new object[] { typeof(GenericClassWithNoInterfaces2<,>), new Type[0], null };
-            yield return new object[] { typeof(GenericClassWithNoInterfaces2<int, string>), new Type[] { typeof(int), typeof(string) }, null };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithNoInterfaces),
+                new Type[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithNoInterfaces1<>),
+                new Type[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithNoInterfaces1<int>),
+                new Type[] { typeof(int) },
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithNoInterfaces2<, >),
+                new Type[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithNoInterfaces2<int, string>),
+                new Type[] { typeof(int), typeof(string) },
+                null
+            };
 
-            yield return new object[] { typeof(NonGenericClassWithNonGenericInterface), new Type[0], new string[0] };
-            yield return new object[] { typeof(GenericClassWithGenericInterface1<int>), new Type[] { typeof(int) }, new string[] { "Int32" } };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithNonGenericInterface),
+                new Type[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface1<int>),
+                new Type[] { typeof(int) },
+                new string[] { "Int32" }
+            };
 
-            yield return new object[] { typeof(GenericClassWithGenericInterface2<,>), new Type[0], new string[] { "T", "V" } };
-            yield return new object[] { typeof(GenericClassWithGenericInterface2<int, string>), new Type[] { typeof(int), typeof(string) }, new string[] { "Int32", "String" } };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface2<, >),
+                new Type[0],
+                new string[] { "T", "V" }
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface2<int, string>),
+                new Type[] { typeof(int), typeof(string) },
+                new string[] { "Int32", "String" }
+            };
 
-            yield return new object[] { typeof(NonGenericClassWithGenericInterface1), new Type[0], new string[] { "Int32" } };
-            yield return new object[] { typeof(GenericClassWithGenericInterface3<>), new Type[0], new string[] { "T", "Int32" } };
-            yield return new object[] { typeof(GenericClassWithGenericInterface3<string>), new Type[] { typeof(string) }, new string[] { "String", "Int32" } };
-            yield return new object[] { typeof(NonGenericClassWithGenericInterface2), new Type[0], new string[] { "Int32", "Int32" } };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithGenericInterface1),
+                new Type[0],
+                new string[] { "Int32" }
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface3<>),
+                new Type[0],
+                new string[] { "T", "Int32" }
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface3<string>),
+                new Type[] { typeof(string) },
+                new string[] { "String", "Int32" }
+            };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithGenericInterface2),
+                new Type[0],
+                new string[] { "Int32", "Int32" }
+            };
         }
 
         [Theory]
@@ -312,44 +633,194 @@ namespace System.Reflection.Tests
             yield return new object[] { typeof(TI_NonGenericInterface1), new string[0], null };
             yield return new object[] { typeof(GenericInterface1<>), new string[] { "TI" }, null };
             yield return new object[] { typeof(GenericInterface1<int>), new string[0], null };
-            yield return new object[] { typeof(GenericInterface2<,>), new string[] { "TI", "VI" }, null };
-            yield return new object[] { typeof(GenericInterface2<int, string>), new string[0], null };
+            yield return new object[]
+            {
+                typeof(GenericInterface2<, >),
+                new string[] { "TI", "VI" },
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericInterface2<int, string>),
+                new string[0],
+                null
+            };
 
             // Structs
-            yield return new object[] { typeof(NonGenericStructWithNoInterfaces), new string[0], null };
-            yield return new object[] { typeof(GenericStructWithNoInterfaces1<>), new string[] { "TS" }, null };
-            yield return new object[] { typeof(GenericStructWithNoInterfaces1<int>), new string[0], null };
-            yield return new object[] { typeof(GenericStructWithNoInterfaces2<,>), new string[] { "TS", "VS" }, null };
-            yield return new object[] { typeof(GenericStructWithNoInterfaces2<int, string>), new string[0], null };
+            yield return new object[]
+            {
+                typeof(NonGenericStructWithNoInterfaces),
+                new string[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithNoInterfaces1<>),
+                new string[] { "TS" },
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithNoInterfaces1<int>),
+                new string[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithNoInterfaces2<, >),
+                new string[] { "TS", "VS" },
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithNoInterfaces2<int, string>),
+                new string[0],
+                null
+            };
 
-            yield return new object[] { typeof(NonGenericStructWithNonGenericInterface), new string[0], new string[0] };
-            yield return new object[] { typeof(GenericStructWithGenericInterface1<>), new string[] { "TS" }, new string[0] };
-            yield return new object[] { typeof(GenericStructWithGenericInterface1<int>), new string[0], new string[0] };
-            yield return new object[] { typeof(GenericStructWithGenericInterface2<,>), new string[] { "TS", "VS" }, new string[0] };
-            yield return new object[] { typeof(GenericStructWithGenericInterface2<int, string>), new string[0], new string[0] };
+            yield return new object[]
+            {
+                typeof(NonGenericStructWithNonGenericInterface),
+                new string[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface1<>),
+                new string[] { "TS" },
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface1<int>),
+                new string[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface2<, >),
+                new string[] { "TS", "VS" },
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface2<int, string>),
+                new string[0],
+                new string[0]
+            };
 
-            yield return new object[] { typeof(NonGenericStructWithGenericInterface1), new string[0], new string[0] };
-            yield return new object[] { typeof(GenericStructWithGenericInterface3<>), new string[] { "TS" }, new string[0] };
-            yield return new object[] { typeof(GenericStructWithGenericInterface3<string>), new string[0], new string[0] };
-            yield return new object[] { typeof(NonGenericStructWithGenericInterface2), new string[0], new string[0] };
+            yield return new object[]
+            {
+                typeof(NonGenericStructWithGenericInterface1),
+                new string[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface3<>),
+                new string[] { "TS" },
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericStructWithGenericInterface3<string>),
+                new string[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(NonGenericStructWithGenericInterface2),
+                new string[0],
+                new string[0]
+            };
 
             // Classes
-            yield return new object[] { typeof(NonGenericClassWithNoInterfaces), new string[0], null };
-            yield return new object[] { typeof(GenericClassWithNoInterfaces1<>), new string[] { "T" }, null };
-            yield return new object[] { typeof(GenericClassWithNoInterfaces1<int>), new string[0], null };
-            yield return new object[] { typeof(GenericClassWithNoInterfaces2<,>), new string[] { "T", "V" }, null };
-            yield return new object[] { typeof(GenericClassWithNoInterfaces2<int, string>), new string[0], null };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithNoInterfaces),
+                new string[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithNoInterfaces1<>),
+                new string[] { "T" },
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithNoInterfaces1<int>),
+                new string[0],
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithNoInterfaces2<, >),
+                new string[] { "T", "V" },
+                null
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithNoInterfaces2<int, string>),
+                new string[0],
+                null
+            };
 
-            yield return new object[] { typeof(NonGenericClassWithNonGenericInterface), new string[0], new string[0] };
-            yield return new object[] { typeof(GenericClassWithGenericInterface1<>), new string[] { "T" }, new string[0] };
-            yield return new object[] { typeof(GenericClassWithGenericInterface1<int>), new string[0], new string[0] };
-            yield return new object[] { typeof(GenericClassWithGenericInterface2<,>), new string[] { "T", "V" }, new string[0] };
-            yield return new object[] { typeof(GenericClassWithGenericInterface2<int, string>), new string[0], new string[0] };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithNonGenericInterface),
+                new string[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface1<>),
+                new string[] { "T" },
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface1<int>),
+                new string[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface2<, >),
+                new string[] { "T", "V" },
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface2<int, string>),
+                new string[0],
+                new string[0]
+            };
 
-            yield return new object[] { typeof(NonGenericClassWithGenericInterface1), new string[0], new string[0] };
-            yield return new object[] { typeof(GenericClassWithGenericInterface3<>), new string[] { "T" }, new string[0] };
-            yield return new object[] { typeof(GenericClassWithGenericInterface3<string>), new string[0], new string[0] };
-            yield return new object[] { typeof(NonGenericClassWithGenericInterface2), new string[0], new string[0] };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithGenericInterface1),
+                new string[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface3<>),
+                new string[] { "T" },
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(GenericClassWithGenericInterface3<string>),
+                new string[0],
+                new string[0]
+            };
+            yield return new object[]
+            {
+                typeof(NonGenericClassWithGenericInterface2),
+                new string[0],
+                new string[0]
+            };
         }
 
         [Theory]
@@ -401,13 +872,22 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetEnumName_Invalid()
         {
-            AssertExtensions.Throws<ArgumentException>("value", () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumName(""));
-            Assert.Throws<ArgumentNullException>(() => typeof(IntEnum).GetTypeInfo().GetEnumName(null));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumName("")
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(IntEnum).GetTypeInfo().GetEnumName(null)
+            );
         }
 
         public static IEnumerable<object[]> GetEnumNames_TestData()
         {
-            yield return new object[] { typeof(IntEnum), new string[] { "Enum1", "Enum2", "Enum10", "Enum18", "Enum45" } };
+            yield return new object[]
+            {
+                typeof(IntEnum),
+                new string[] { "Enum1", "Enum2", "Enum10", "Enum18", "Enum45" }
+            };
             yield return new object[] { typeof(UIntEnum), new string[] { "A", "B" } };
         }
 
@@ -421,7 +901,10 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetEnumNames_TypeNotEnum_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("enumType", () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumNames());
+            AssertExtensions.Throws<ArgumentException>(
+                "enumType",
+                () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumNames()
+            );
         }
 
         [Theory]
@@ -435,13 +918,19 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetEnumUnderlyingType_TypeNotEnum_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("enumType", () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumUnderlyingType());
+            AssertExtensions.Throws<ArgumentException>(
+                "enumType",
+                () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumUnderlyingType()
+            );
         }
 
         [Fact]
         public static void GetEnumValues_Int()
         {
-            GetEnumValues(typeof(IntEnum), new IntEnum[] { (IntEnum)1, (IntEnum)2, (IntEnum)10, (IntEnum)18, (IntEnum)45 });
+            GetEnumValues(
+                typeof(IntEnum),
+                new IntEnum[] { (IntEnum)1, (IntEnum)2, (IntEnum)10, (IntEnum)18, (IntEnum)45 }
+            );
         }
 
         [Fact]
@@ -458,7 +947,10 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetEnumValues_TypeNotEnum_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("enumType", () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumUnderlyingType());
+            AssertExtensions.Throws<ArgumentException>(
+                "enumType",
+                () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().GetEnumUnderlyingType()
+            );
         }
 
         [Theory]
@@ -472,22 +964,78 @@ namespace System.Reflection.Tests
         [Fact]
         public void IsEnumDefined_Invalid()
         {
-            AssertExtensions.Throws<ArgumentException>("enumType", () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().IsEnumDefined(10));
-            AssertExtensions.Throws<ArgumentException>("enumType", () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().IsEnumDefined("10"));
-            Assert.Throws<ArgumentNullException>(() => typeof(IntEnum).GetTypeInfo().IsEnumDefined(null));
-            Assert.Throws<InvalidOperationException>(() => typeof(IntEnum).GetTypeInfo().IsEnumDefined(new NonGenericClassWithNoInterfaces()));
+            AssertExtensions.Throws<ArgumentException>(
+                "enumType",
+                () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().IsEnumDefined(10)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "enumType",
+                () => typeof(NonGenericClassWithNoInterfaces).GetTypeInfo().IsEnumDefined("10")
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(IntEnum).GetTypeInfo().IsEnumDefined(null)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    typeof(IntEnum)
+                        .GetTypeInfo()
+                        .IsEnumDefined(new NonGenericClassWithNoInterfaces())
+            );
         }
 
         [Theory]
         [InlineData(typeof(InheritedInteraface), new Type[] { typeof(TI_NonGenericInterface2) })]
-        [InlineData(typeof(StructWithInheritedInterface), new Type[] { typeof(TI_NonGenericInterface2), typeof(InheritedInteraface) })]
-        [InlineData(typeof(NonGenericClassWithNonGenericInterface), new Type[] { typeof(TI_NonGenericInterface1) })]
-        [InlineData(typeof(CompoundClass1), new Type[] { typeof(TI_NonGenericInterface2), typeof(TI_NonGenericInterface1), typeof(InheritedInteraface) })]
-        [InlineData(typeof(CompoundClass2<>), new Type[] { typeof(TI_NonGenericInterface2), typeof(TI_NonGenericInterface1), typeof(InheritedInteraface) })]
-        [InlineData(typeof(CompoundClass2<int>), new Type[] { typeof(TI_NonGenericInterface2), typeof(TI_NonGenericInterface1), typeof(InheritedInteraface) })]
-        [InlineData(typeof(CompoundClass3<InheritedInteraface>), new Type[] { typeof(GenericInterface1<InheritedInteraface>), typeof(TI_NonGenericInterface1) })]
-        [InlineData(typeof(CompoundClass4<>), new Type[] { typeof(GenericInterface1<string>), typeof(TI_NonGenericInterface1) })]
-        [InlineData(typeof(CompoundClass4<string>), new Type[] { typeof(GenericInterface1<string>), typeof(TI_NonGenericInterface1) })]
+        [InlineData(
+            typeof(StructWithInheritedInterface),
+            new Type[] { typeof(TI_NonGenericInterface2), typeof(InheritedInteraface) }
+        )]
+        [InlineData(
+            typeof(NonGenericClassWithNonGenericInterface),
+            new Type[] { typeof(TI_NonGenericInterface1) }
+        )]
+        [InlineData(
+            typeof(CompoundClass1),
+            new Type[]
+            {
+                typeof(TI_NonGenericInterface2),
+                typeof(TI_NonGenericInterface1),
+                typeof(InheritedInteraface)
+            }
+        )]
+        [InlineData(
+            typeof(CompoundClass2<>),
+            new Type[]
+            {
+                typeof(TI_NonGenericInterface2),
+                typeof(TI_NonGenericInterface1),
+                typeof(InheritedInteraface)
+            }
+        )]
+        [InlineData(
+            typeof(CompoundClass2<int>),
+            new Type[]
+            {
+                typeof(TI_NonGenericInterface2),
+                typeof(TI_NonGenericInterface1),
+                typeof(InheritedInteraface)
+            }
+        )]
+        [InlineData(
+            typeof(CompoundClass3<InheritedInteraface>),
+            new Type[]
+            {
+                typeof(GenericInterface1<InheritedInteraface>),
+                typeof(TI_NonGenericInterface1)
+            }
+        )]
+        [InlineData(
+            typeof(CompoundClass4<>),
+            new Type[] { typeof(GenericInterface1<string>), typeof(TI_NonGenericInterface1) }
+        )]
+        [InlineData(
+            typeof(CompoundClass4<string>),
+            new Type[] { typeof(GenericInterface1<string>), typeof(TI_NonGenericInterface1) }
+        )]
         public void ImplementedInterfaces(Type type, Type[] expected)
         {
             TypeInfo typeInfo = type.GetTypeInfo();
@@ -497,8 +1045,14 @@ namespace System.Reflection.Tests
             Array.Sort(expected, TypeSortComparer);
 
             Assert.Equal(expected, implementedInterfaces);
-            Assert.All(expected, ti => Assert.True(ti.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo())));
-            Assert.All(expected, ti => Assert.True(type.GetTypeInfo().IsAssignableTo(ti.GetTypeInfo())));
+            Assert.All(
+                expected,
+                ti => Assert.True(ti.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
+            );
+            Assert.All(
+                expected,
+                ti => Assert.True(type.GetTypeInfo().IsAssignableTo(ti.GetTypeInfo()))
+            );
 
             static int TypeSortComparer(Type a, Type b)
             {
@@ -510,8 +1064,18 @@ namespace System.Reflection.Tests
         public static IEnumerable<object[]> IsInstanceOfType_TestData()
         {
             yield return new object[] { typeof(Array), new int[0], true };
-            yield return new object[] { typeof(TI_ClassWithInterface1), new TI_ClassWithInterface1(), true };
-            yield return new object[] { typeof(TI_NonGenericInterface1), new TI_ClassWithInterface1(), true };
+            yield return new object[]
+            {
+                typeof(TI_ClassWithInterface1),
+                new TI_ClassWithInterface1(),
+                true
+            };
+            yield return new object[]
+            {
+                typeof(TI_NonGenericInterface1),
+                new TI_ClassWithInterface1(),
+                true
+            };
         }
 
         [Theory]
@@ -541,36 +1105,132 @@ namespace System.Reflection.Tests
         // Lists and arrays
         [InlineData(typeof(IList<object>), typeof(object[]), true)]
         [InlineData(typeof(object[]), typeof(IList<object>), false)]
-        [InlineData(typeof(BaseClassWithInterface1Interface2), typeof(SubClassWithInterface1Interface2), true)]
-        [InlineData(typeof(BaseClassWithInterface1Interface2[]), typeof(SubClassWithInterface1Interface2[]), true)]
+        [InlineData(
+            typeof(BaseClassWithInterface1Interface2),
+            typeof(SubClassWithInterface1Interface2),
+            true
+        )]
+        [InlineData(
+            typeof(BaseClassWithInterface1Interface2[]),
+            typeof(SubClassWithInterface1Interface2[]),
+            true
+        )]
         [InlineData(typeof(IList<object>), typeof(BaseClassWithInterface1Interface2[]), true)]
-        [InlineData(typeof(IList<BaseClassWithInterface1Interface2>), typeof(BaseClassWithInterface1Interface2[]), true)]
-        [InlineData(typeof(IList<BaseClassWithInterface1Interface2>), typeof(SubClassWithInterface1Interface2[]), true)]
-        [InlineData(typeof(IList<SubClassWithInterface1Interface2>), typeof(SubClassWithInterface1Interface2[]), true)]
+        [InlineData(
+            typeof(IList<BaseClassWithInterface1Interface2>),
+            typeof(BaseClassWithInterface1Interface2[]),
+            true
+        )]
+        [InlineData(
+            typeof(IList<BaseClassWithInterface1Interface2>),
+            typeof(SubClassWithInterface1Interface2[]),
+            true
+        )]
+        [InlineData(
+            typeof(IList<SubClassWithInterface1Interface2>),
+            typeof(SubClassWithInterface1Interface2[]),
+            true
+        )]
         // Strings and objects
-        [InlineData(typeof(GenericClassWithNoInterfaces1<object>), typeof(GenericSubSubClassWithNoInterfaces1<object>), true)]
-        [InlineData(typeof(GenericSubClassWithNoInterfaces1<string>), typeof(GenericSubSubClassWithNoInterfaces1<string>), true)]
-        [InlineData(typeof(GenericSubClassWithNoInterfaces1<string>), typeof(GenericSubClassWithNoInterfaces1<string>), true)]
-        [InlineData(typeof(GenericSubClassWithNoInterfaces1<string>), typeof(GenericSubClassWithNoInterfaces1<object>), false)]
-        [InlineData(typeof(GenericSubClassWithNoInterfaces1<object>), typeof(GenericSubClassWithNoInterfaces1<string>), false)]
-        [InlineData(typeof(GenericSubSubClassWithNoInterfaces1<object>), typeof(GenericSubClassWithNoInterfaces1<object>), false)]
-        [InlineData(typeof(GenericSubClassWithNoInterfaces1<string>), typeof(GenericClassWithNoInterfaces1<string>), false)]
+        [InlineData(
+            typeof(GenericClassWithNoInterfaces1<object>),
+            typeof(GenericSubSubClassWithNoInterfaces1<object>),
+            true
+        )]
+        [InlineData(
+            typeof(GenericSubClassWithNoInterfaces1<string>),
+            typeof(GenericSubSubClassWithNoInterfaces1<string>),
+            true
+        )]
+        [InlineData(
+            typeof(GenericSubClassWithNoInterfaces1<string>),
+            typeof(GenericSubClassWithNoInterfaces1<string>),
+            true
+        )]
+        [InlineData(
+            typeof(GenericSubClassWithNoInterfaces1<string>),
+            typeof(GenericSubClassWithNoInterfaces1<object>),
+            false
+        )]
+        [InlineData(
+            typeof(GenericSubClassWithNoInterfaces1<object>),
+            typeof(GenericSubClassWithNoInterfaces1<string>),
+            false
+        )]
+        [InlineData(
+            typeof(GenericSubSubClassWithNoInterfaces1<object>),
+            typeof(GenericSubClassWithNoInterfaces1<object>),
+            false
+        )]
+        [InlineData(
+            typeof(GenericSubClassWithNoInterfaces1<string>),
+            typeof(GenericClassWithNoInterfaces1<string>),
+            false
+        )]
         // Interfaces
         [InlineData(typeof(TI_NonGenericInterface2), typeof(TI_NonGenericInterface2), true)]
-        [InlineData(typeof(TI_NonGenericInterface2), typeof(BaseClassWithInterface1Interface2), true)]
-        [InlineData(typeof(TI_NonGenericInterface2), typeof(SubClassWithInterface1Interface2), true)]
-        [InlineData(typeof(TI_NonGenericInterface2), typeof(GenericSubClassWithInterface1Interface2<>), true)]
-        [InlineData(typeof(TI_NonGenericInterface2), typeof(GenericSubClassWithInterface1Interface2<string>), true)]
-        [InlineData(typeof(SubClassWithInterface1Interface2), typeof(TI_NonGenericInterface1), false)]
+        [InlineData(
+            typeof(TI_NonGenericInterface2),
+            typeof(BaseClassWithInterface1Interface2),
+            true
+        )]
+        [InlineData(
+            typeof(TI_NonGenericInterface2),
+            typeof(SubClassWithInterface1Interface2),
+            true
+        )]
+        [InlineData(
+            typeof(TI_NonGenericInterface2),
+            typeof(GenericSubClassWithInterface1Interface2<>),
+            true
+        )]
+        [InlineData(
+            typeof(TI_NonGenericInterface2),
+            typeof(GenericSubClassWithInterface1Interface2<string>),
+            true
+        )]
+        [InlineData(
+            typeof(SubClassWithInterface1Interface2),
+            typeof(TI_NonGenericInterface1),
+            false
+        )]
         // Namespaces
-        [InlineData(typeof(InnerNamespace.AbstractBaseClass), typeof(InnerNamespace.AbstractSubClass), true)]
-        [InlineData(typeof(InnerNamespace.AbstractBaseClass), typeof(InnerNamespace.AbstractSubSubClass), true)]
-        [InlineData(typeof(InnerNamespace.AbstractSubClass), typeof(InnerNamespace.AbstractSubSubClass), true)]
+        [InlineData(
+            typeof(InnerNamespace.AbstractBaseClass),
+            typeof(InnerNamespace.AbstractSubClass),
+            true
+        )]
+        [InlineData(
+            typeof(InnerNamespace.AbstractBaseClass),
+            typeof(InnerNamespace.AbstractSubSubClass),
+            true
+        )]
+        [InlineData(
+            typeof(InnerNamespace.AbstractSubClass),
+            typeof(InnerNamespace.AbstractSubSubClass),
+            true
+        )]
         // T[] is assignable to IList<U> iff T[] is assignable to U[]
-        [InlineData(typeof(TI_NonGenericInterface1[]), typeof(NonGenericStructWithNonGenericInterface[]), false)]
-        [InlineData(typeof(TI_NonGenericInterface1[]), typeof(SubClassWithInterface1Interface2[]), true)]
-        [InlineData(typeof(IList<TI_NonGenericInterface1>), typeof(NonGenericStructWithNonGenericInterface[]), false)]
-        [InlineData(typeof(IList<TI_NonGenericInterface1>), typeof(SubClassWithInterface1Interface2[]), true)]
+        [InlineData(
+            typeof(TI_NonGenericInterface1[]),
+            typeof(NonGenericStructWithNonGenericInterface[]),
+            false
+        )]
+        [InlineData(
+            typeof(TI_NonGenericInterface1[]),
+            typeof(SubClassWithInterface1Interface2[]),
+            true
+        )]
+        [InlineData(
+            typeof(IList<TI_NonGenericInterface1>),
+            typeof(NonGenericStructWithNonGenericInterface[]),
+            false
+        )]
+        [InlineData(
+            typeof(IList<TI_NonGenericInterface1>),
+            typeof(SubClassWithInterface1Interface2[]),
+            true
+        )]
         [InlineData(typeof(int[]), typeof(uint[]), true)]
         [InlineData(typeof(uint[]), typeof(int[]), true)]
         [InlineData(typeof(IList<int>), typeof(int[]), true)]
@@ -626,14 +1286,18 @@ namespace System.Reflection.Tests
             Assert.False(T.IsAssignableTo(nubOfT));
 
             // illegal type construction due to T->T?
-            Assert.Throws<ArgumentException>(() => typeof(G<,>).MakeGenericType(typeof(int), typeof(int?)));
+            Assert.Throws<ArgumentException>(
+                () => typeof(G<, >).MakeGenericType(typeof(int), typeof(int?))
+            );
 
             // Test trivial object casts
             s_boxedInt32 = (object)1234;
             Assert.True((s_boxedInt32 is int?) && (int?)s_boxedInt32 == 1234);
 
             // test construction again to catch caching issues
-            Assert.Throws<ArgumentException>(() => typeof(G<,>).MakeGenericType(typeof(int), typeof(int?)));
+            Assert.Throws<ArgumentException>(
+                () => typeof(G<, >).MakeGenericType(typeof(int), typeof(int?))
+            );
         }
 
         interface IFace
@@ -670,12 +1334,14 @@ namespace System.Reflection.Tests
             Assert.True(a.IsAssignableTo(typeof(IFace[])));
             Assert.True(a.IsAssignableTo(typeof(IEnumerable<IFace>)));
 
-            Type a1 = typeof(GG<,>).GetGenericArguments()[0].MakeArrayType();
-            Type a2 = typeof(GG<,>).GetGenericArguments()[1].MakeArrayType();
+            Type a1 = typeof(GG<, >).GetGenericArguments()[0].MakeArrayType();
+            Type a2 = typeof(GG<, >).GetGenericArguments()[1].MakeArrayType();
             Assert.True(a2.IsAssignableFrom(a1));
             Assert.True(a1.IsAssignableTo(a2));
 
-            Type ie = typeof(IEnumerable<>).MakeGenericType(typeof(GG<,>).GetGenericArguments()[1]);
+            Type ie = typeof(IEnumerable<>).MakeGenericType(
+                typeof(GG<, >).GetGenericArguments()[1]
+            );
             Assert.True(ie.IsAssignableFrom(a1));
             Assert.True(a1.IsAssignableTo(ie));
         }
@@ -687,7 +1353,12 @@ namespace System.Reflection.Tests
             object o = "stringAsObject";
             string s = "stringAsString";
             yield return new object[] { o.GetType(), s.GetType(), true };
-            yield return new object[] { typeof(ClassWithNoInterfaces), typeof(ClassWithNoInterfaces), true };
+            yield return new object[]
+            {
+                typeof(ClassWithNoInterfaces),
+                typeof(ClassWithNoInterfaces),
+                true
+            };
         }
 
         [Theory]
@@ -701,16 +1372,29 @@ namespace System.Reflection.Tests
         [InlineData(BindingFlags.Default, new int[] { 0, 2 })]
         [InlineData(BindingFlags.Public | BindingFlags.Instance, new int[] { 0, 2 })]
         [InlineData(BindingFlags.NonPublic | BindingFlags.Instance, new int[] { 1 })]
-        public void GetConstructors(BindingFlags bindingAttributes, int[] constructorParameterCounts)
+        public void GetConstructors(
+            BindingFlags bindingAttributes,
+            int[] constructorParameterCounts
+        )
         {
             TypeInfo typeInfo = typeof(MembersClass).GetTypeInfo();
             if (bindingAttributes == BindingFlags.Default)
             {
-                Assert.Equal(constructorParameterCounts, typeInfo.GetConstructors().Select(constructor => constructor.GetParameters().Length));
+                Assert.Equal(
+                    constructorParameterCounts,
+                    typeInfo
+                        .GetConstructors()
+                        .Select(constructor => constructor.GetParameters().Length)
+                );
             }
             else
             {
-                Assert.Equal(constructorParameterCounts, typeInfo.GetConstructors(bindingAttributes).Select(constructor => constructor.GetParameters().Length));
+                Assert.Equal(
+                    constructorParameterCounts,
+                    typeInfo
+                        .GetConstructors(bindingAttributes)
+                        .Select(constructor => constructor.GetParameters().Length)
+                );
             }
         }
 
@@ -735,45 +1419,123 @@ namespace System.Reflection.Tests
         [Fact]
         public static void FindMembers()
         {
-            MemberInfo[] members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.All, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => true, "notused");
+            MemberInfo[] members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.All,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => true,
+                    "notused"
+                );
             Assert.Equal(28, members.Length);
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Constructor, BindingFlags.Public | BindingFlags.Instance, (MemberInfo memberInfo, object c) => true, "notused");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Constructor,
+                    BindingFlags.Public | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => true,
+                    "notused"
+                );
             Assert.Equal(2, members.Length);
             Assert.All(members, m => Assert.Equal(".ctor", m.Name));
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Constructor, BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => true, "notused");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Constructor,
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => true,
+                    "notused"
+                );
             Assert.Equal(1, members.Length);
             Assert.Equal(1, ((ConstructorInfo)members[0]).GetParameters().Length);
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Constructor, BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => ((ConstructorInfo)memberInfo).GetParameters().Length >= Convert.ToInt32(c), "1");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Constructor,
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) =>
+                        ((ConstructorInfo)memberInfo).GetParameters().Length >= Convert.ToInt32(c),
+                    "1"
+                );
             Assert.Equal(1, members.Length);
             Assert.Equal(".ctor", members[0].Name);
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Event, BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => true, "notused");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Event,
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => true,
+                    "notused"
+                );
             Assert.Equal(1, members.Length);
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Event, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => memberInfo.Name.Contains(c.ToString()), "Event");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Event,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => memberInfo.Name.Contains(c.ToString()),
+                    "Event"
+                );
             Assert.Equal(2, members.Length);
             Assert.All(members, m => Assert.Contains("Event", m.Name));
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Property, BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => true, "notused");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Property,
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => true,
+                    "notused"
+                );
             Assert.Equal(1, members.Length);
             Assert.Equal("PrivateProp", members[0].Name);
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Property, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => memberInfo.Name.Contains(c.ToString()), "Prop");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Property,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => memberInfo.Name.Contains(c.ToString()),
+                    "Prop"
+                );
             Assert.Equal(2, members.Length);
             Assert.All(members, m => Assert.Contains("Prop", m.Name));
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Method, BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => true, "notused");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Method,
+                    BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => true,
+                    "notused"
+                );
             Assert.Equal(7, members.Length);
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.Method, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => memberInfo.Name.Contains(c.ToString()), "get");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.Method,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => memberInfo.Name.Contains(c.ToString()),
+                    "get"
+                );
             Assert.Equal(2, members.Length);
             Assert.All(members, m => Assert.Contains("Prop", m.Name));
             Assert.All(members, m => Assert.Contains("get_", m.Name));
 
-            members = typeof(MembersClass).GetTypeInfo().FindMembers(MemberTypes.NestedType, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, (MemberInfo memberInfo, object c) => true, "notused");
+            members = typeof(MembersClass)
+                .GetTypeInfo()
+                .FindMembers(
+                    MemberTypes.NestedType,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+                    (MemberInfo memberInfo, object c) => true,
+                    "notused"
+                );
             Assert.Equal(1, members.Length);
             Assert.Contains("EventHandler", members[0].Name);
         }
@@ -799,19 +1561,29 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetProperty()
         {
-            PropertyInfo prop = typeof(MembersClass).GetTypeInfo().GetProperty(nameof(MembersClass.PublicProp));
+            PropertyInfo prop = typeof(MembersClass)
+                .GetTypeInfo()
+                .GetProperty(nameof(MembersClass.PublicProp));
             Assert.NotNull(prop);
 
-            prop = typeof(MembersClass).GetTypeInfo().GetProperty(nameof(MembersClass.PublicProp), typeof(int));
+            prop = typeof(MembersClass)
+                .GetTypeInfo()
+                .GetProperty(nameof(MembersClass.PublicProp), typeof(int));
             Assert.NotNull(prop);
 
-            prop = typeof(MembersClass).GetTypeInfo().GetProperty(nameof(MembersClass.PublicProp), Type.EmptyTypes);
+            prop = typeof(MembersClass)
+                .GetTypeInfo()
+                .GetProperty(nameof(MembersClass.PublicProp), Type.EmptyTypes);
             Assert.NotNull(prop);
 
-            prop = typeof(MembersClass).GetTypeInfo().GetProperty(nameof(MembersClass.PublicProp), typeof(int), Type.EmptyTypes);
+            prop = typeof(MembersClass)
+                .GetTypeInfo()
+                .GetProperty(nameof(MembersClass.PublicProp), typeof(int), Type.EmptyTypes);
             Assert.NotNull(prop);
 
-            prop = typeof(MembersClass).GetTypeInfo().GetProperty(nameof(MembersClass.PublicProp), typeof(int), Type.EmptyTypes, null);
+            prop = typeof(MembersClass)
+                .GetTypeInfo()
+                .GetProperty(nameof(MembersClass.PublicProp), typeof(int), Type.EmptyTypes, null);
             Assert.NotNull(prop);
         }
 
@@ -821,16 +1593,27 @@ namespace System.Reflection.Tests
             MethodInfo[] methods = typeof(MembersClass).GetTypeInfo().GetMethods();
             Assert.Equal(9, methods.Length);
 
-            methods = typeof(MembersClass).GetTypeInfo().GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            methods = typeof(MembersClass)
+                .GetTypeInfo()
+                .GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.Equal(16, methods.Length);
         }
 
         [Fact]
         public void GetMethod_Invalid()
         {
-            Assert.Throws<ArgumentNullException>(() => typeof(MembersClass).GetTypeInfo().GetMethod(null));
-            Assert.Throws<ArgumentNullException>(() => typeof(MembersClass).GetTypeInfo().GetMethod("p", null));
-            Assert.Throws<ArgumentNullException>(() => typeof(MembersClass).GetTypeInfo().GetMethod("p", new Type[] { typeof(int), null }));
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(MembersClass).GetTypeInfo().GetMethod(null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(MembersClass).GetTypeInfo().GetMethod("p", null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    typeof(MembersClass)
+                        .GetTypeInfo()
+                        .GetMethod("p", new Type[] { typeof(int), null })
+            );
         }
 
         [Theory]
@@ -851,7 +1634,11 @@ namespace System.Reflection.Tests
 
         [Theory]
         [InlineData(nameof(MembersClass.EventHandler), BindingFlags.Default, true)]
-        [InlineData(nameof(MembersClass.EventHandler), BindingFlags.Public | BindingFlags.Instance, true)]
+        [InlineData(
+            nameof(MembersClass.EventHandler),
+            BindingFlags.Public | BindingFlags.Instance,
+            true
+        )]
         public void GetNestedType(string name, BindingFlags bindingAttributes, bool exists)
         {
             TypeInfo typeInfo = typeof(MembersClass).GetTypeInfo();
@@ -885,7 +1672,11 @@ namespace System.Reflection.Tests
         [InlineData("Public*", BindingFlags.Default, 4)]
         [InlineData("EventHandler", BindingFlags.Default, 1)]
         [InlineData("P*", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, 10)]
-        [InlineData(".ctor", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, 3)]
+        [InlineData(
+            ".ctor",
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+            3
+        )]
         public void GetMember(string name, BindingFlags bindingAttributes, int length)
         {
             TypeInfo typeInfo = typeof(MembersClass).GetTypeInfo();
@@ -917,23 +1708,35 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(MembersClass), new Type[] { typeof(TI_NonGenericInterface1), typeof(TI_NonGenericInterface2) })]
+        [InlineData(
+            typeof(MembersClass),
+            new Type[] { typeof(TI_NonGenericInterface1), typeof(TI_NonGenericInterface2) }
+        )]
         [InlineData(typeof(TI_NonGenericInterface2), new Type[0])]
         public void GetInterfaces(Type type, Type[] expected)
         {
-            Assert.Equal(expected.OrderBy(t => t.Name), type.GetTypeInfo().GetInterfaces().OrderBy(t => t.Name));
+            Assert.Equal(
+                expected.OrderBy(t => t.Name),
+                type.GetTypeInfo().GetInterfaces().OrderBy(t => t.Name)
+            );
         }
 
         [Theory]
         [InlineData(typeof(List<>), new string[] { "T" })]
-        [InlineData(typeof(Dictionary<,>), new string[] { "TKey", "TValue" })]
-        [InlineData(typeof(GenericClassWithNoInterfaces2<,>), new string[] { "T", "V" })]
-        [InlineData(typeof(GenericClassWithNoInterfaces2<int, string>), new string[] { "Int32", "String" })]
+        [InlineData(typeof(Dictionary<, >), new string[] { "TKey", "TValue" })]
+        [InlineData(typeof(GenericClassWithNoInterfaces2<, >), new string[] { "T", "V" })]
+        [InlineData(
+            typeof(GenericClassWithNoInterfaces2<int, string>),
+            new string[] { "Int32", "String" }
+        )]
         public void GetGenericArguments(Type type, string[] expectedNames)
         {
             Type[] genericArguments = type.GetTypeInfo().GetGenericArguments();
             Assert.Equal(expectedNames.Length, genericArguments.Length);
-            Assert.Equal(expectedNames, genericArguments.Select(genericArgument => genericArgument.Name));
+            Assert.Equal(
+                expectedNames,
+                genericArguments.Select(genericArgument => genericArgument.Name)
+            );
         }
 
         [Theory]
@@ -956,23 +1759,40 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetEvent_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => typeof(MembersClass).GetTypeInfo().GetEvent(null));
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(MembersClass).GetTypeInfo().GetEvent(null)
+            );
         }
 
         [Theory]
         [InlineData(BindingFlags.Default, new string[] { "PublicEvent" })]
-        [InlineData(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, new string[] { "PublicEvent", "PrivateEvent" })]
-        [InlineData(BindingFlags.NonPublic | BindingFlags.Instance, new string[] { "PrivateEvent" })]
+        [InlineData(
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+            new string[] { "PublicEvent", "PrivateEvent" }
+        )]
+        [InlineData(
+            BindingFlags.NonPublic | BindingFlags.Instance,
+            new string[] { "PrivateEvent" }
+        )]
         public void GetEvents(BindingFlags bindingAttributes, string[] expectedNames)
         {
             TypeInfo typeInfo = typeof(MembersClass).GetTypeInfo();
             if (bindingAttributes == BindingFlags.Default)
             {
-                Assert.Equal(expectedNames.OrderBy(e => e), typeInfo.GetEvents().Select(eventInfo => eventInfo.Name).OrderBy(e => e));
+                Assert.Equal(
+                    expectedNames.OrderBy(e => e),
+                    typeInfo.GetEvents().Select(eventInfo => eventInfo.Name).OrderBy(e => e)
+                );
             }
             else
             {
-                Assert.Equal(expectedNames.OrderBy(e => e), typeInfo.GetEvents(bindingAttributes).Select(eventInfo => eventInfo.Name).OrderBy(e => e));
+                Assert.Equal(
+                    expectedNames.OrderBy(e => e),
+                    typeInfo
+                        .GetEvents(bindingAttributes)
+                        .Select(eventInfo => eventInfo.Name)
+                        .OrderBy(e => e)
+                );
             }
         }
 
@@ -996,23 +1816,40 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetField_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => typeof(MembersClass).GetTypeInfo().GetField(null));
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(MembersClass).GetTypeInfo().GetField(null)
+            );
         }
 
         [Theory]
         [InlineData(BindingFlags.Default, new string[] { "PublicField" })]
-        [InlineData(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, new string[] { "PublicField", "PrivateField", "PublicEvent", "PrivateEvent" })]
-        [InlineData(BindingFlags.NonPublic | BindingFlags.Instance, new string[] { "PrivateField", "PublicEvent", "PrivateEvent" })]
+        [InlineData(
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
+            new string[] { "PublicField", "PrivateField", "PublicEvent", "PrivateEvent" }
+        )]
+        [InlineData(
+            BindingFlags.NonPublic | BindingFlags.Instance,
+            new string[] { "PrivateField", "PublicEvent", "PrivateEvent" }
+        )]
         public void GetFields(BindingFlags bindingAttributes, string[] expectedNames)
         {
             TypeInfo typeInfo = typeof(MembersClass).GetTypeInfo();
             if (bindingAttributes == BindingFlags.Default)
             {
-                Assert.Equal(expectedNames.OrderBy(f => f), typeInfo.GetFields().Select(field => field.Name).OrderBy(f => f));
+                Assert.Equal(
+                    expectedNames.OrderBy(f => f),
+                    typeInfo.GetFields().Select(field => field.Name).OrderBy(f => f)
+                );
             }
             else
             {
-                Assert.Equal(expectedNames.OrderBy(f => f), typeInfo.GetFields(bindingAttributes).Select(field => field.Name).OrderBy(f => f));
+                Assert.Equal(
+                    expectedNames.OrderBy(f => f),
+                    typeInfo
+                        .GetFields(bindingAttributes)
+                        .Select(field => field.Name)
+                        .OrderBy(f => f)
+                );
             }
         }
 
@@ -1022,7 +1859,10 @@ namespace System.Reflection.Tests
         [InlineData(typeof(MembersClass.EventHandler), new string[0])]
         public void GetDefaultMembers(Type type, string[] expectedNames)
         {
-            Assert.Equal(expectedNames.OrderBy(m => m), type.GetTypeInfo().GetDefaultMembers().Select(member => member.Name).OrderBy(m => m));
+            Assert.Equal(
+                expectedNames.OrderBy(m => m),
+                type.GetTypeInfo().GetDefaultMembers().Select(member => member.Name).OrderBy(m => m)
+            );
         }
 
         [Theory]
@@ -1049,19 +1889,25 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetDeclaredEvent_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredEvent(null));
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredEvent(null)
+            );
         }
 
         [Fact]
         public void GetDeclaredField_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredField(null));
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredField(null)
+            );
         }
 
         [Fact]
         public void GetDeclaredMethod_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredMethod(null));
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredMethod(null)
+            );
         }
 
         [Theory]
@@ -1069,7 +1915,9 @@ namespace System.Reflection.Tests
         [InlineData("NoSuchMethod", 0)]
         public void GetDeclaredMethods(string name, int count)
         {
-            IEnumerable<MethodInfo> methods = typeof(TI_BaseClass).GetTypeInfo().GetDeclaredMethods(name);
+            IEnumerable<MethodInfo> methods = typeof(TI_BaseClass)
+                .GetTypeInfo()
+                .GetDeclaredMethods(name);
             Assert.Equal(count, methods.Count());
             Assert.All(methods, method => method.Name.Equals(name));
         }
@@ -1077,7 +1925,9 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetDeclaredNestedType_NullName_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredNestedType(null));
+            Assert.Throws<ArgumentNullException>(
+                () => typeof(TI_BaseClass).GetTypeInfo().GetDeclaredNestedType(null)
+            );
         }
 
         [Theory]
@@ -1092,15 +1942,22 @@ namespace System.Reflection.Tests
         [Fact]
         public void GenericParameterConstraints()
         {
-            Type[] genericTypeParameters = typeof(MethodClassWithConstraints<,>).GetTypeInfo().GenericTypeParameters;
+            Type[] genericTypeParameters =
+                typeof(MethodClassWithConstraints<, >).GetTypeInfo().GenericTypeParameters;
             Assert.Equal(2, genericTypeParameters.Length);
 
-            Assert.Equal(new Type[] { typeof(TI_BaseClass), typeof(TI_NonGenericInterface1) }, genericTypeParameters[0].GetTypeInfo().GetGenericParameterConstraints());
+            Assert.Equal(
+                new Type[] { typeof(TI_BaseClass), typeof(TI_NonGenericInterface1) },
+                genericTypeParameters[0].GetTypeInfo().GetGenericParameterConstraints()
+            );
             Assert.Empty(genericTypeParameters[1].GetTypeInfo().GetGenericParameterConstraints());
         }
 
         [Theory]
-        [InlineData(typeof(GenericClassWithNoInterfaces1<int>), typeof(GenericClassWithNoInterfaces1<>))]
+        [InlineData(
+            typeof(GenericClassWithNoInterfaces1<int>),
+            typeof(GenericClassWithNoInterfaces1<>)
+        )]
         public void GetGenericTypeDefinition(Type type, Type expected)
         {
             Assert.Equal(expected, type.GetTypeInfo().GetGenericTypeDefinition());
@@ -1203,7 +2060,7 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(MethodClassWithConstraints<,>), true)]
+        [InlineData(typeof(MethodClassWithConstraints<, >), true)]
         [InlineData(typeof(TI_BaseClass), false)]
         public void ContainsGenericParameter(Type type, bool expected)
         {
@@ -1230,11 +2087,23 @@ namespace System.Reflection.Tests
 
             t = typeof(TI_FullNameTest<int>);
 
-            Assert.Equal("System.Int32", t.GetMethod("TypeParam").ReturnType.GetTypeInfo().FullName);
+            Assert.Equal(
+                "System.Int32",
+                t.GetMethod("TypeParam").ReturnType.GetTypeInfo().FullName
+            );
 
-            Assert.Equal("System.Int32[]", t.GetMethod("ArrayTypeParam").ReturnType.GetTypeInfo().FullName);
-            Assert.Equal("System.Int32*", t.GetMethod("PointerTypeParam").ReturnType.GetTypeInfo().FullName);
-            Assert.Equal("System.Int32&", t.GetMethod("ByRefTypeParam").ReturnType.GetTypeInfo().FullName);
+            Assert.Equal(
+                "System.Int32[]",
+                t.GetMethod("ArrayTypeParam").ReturnType.GetTypeInfo().FullName
+            );
+            Assert.Equal(
+                "System.Int32*",
+                t.GetMethod("PointerTypeParam").ReturnType.GetTypeInfo().FullName
+            );
+            Assert.Equal(
+                "System.Int32&",
+                t.GetMethod("ByRefTypeParam").ReturnType.GetTypeInfo().FullName
+            );
 
             Assert.NotNull(t.GetMethod("ListTypeParam").ReturnType.GetTypeInfo().FullName);
         }
@@ -1242,7 +2111,10 @@ namespace System.Reflection.Tests
         [Fact]
         public void Guid()
         {
-            Assert.Equal(new Guid("FD80F123-BEDD-4492-B50A-5D46AE94DD4E"), typeof(TypeInfoTests).GetTypeInfo().GUID);
+            Assert.Equal(
+                new Guid("FD80F123-BEDD-4492-B50A-5D46AE94DD4E"),
+                typeof(TypeInfoTests).GetTypeInfo().GUID
+            );
             Assert.Equal(System.Guid.Empty, typeof(int[]).GetTypeInfo().GUID);
         }
 
@@ -1488,7 +2360,12 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(StructWithoutExplicitStructLayout), LayoutKind.Sequential, CharSet.Ansi, 8)]
+        [InlineData(
+            typeof(StructWithoutExplicitStructLayout),
+            LayoutKind.Sequential,
+            CharSet.Ansi,
+            8
+        )]
         [InlineData(typeof(StructWithExplicitStructLayout), LayoutKind.Explicit, CharSet.Ansi, 1)]
         [InlineData(typeof(ClassWithoutExplicitStructLayout), LayoutKind.Auto, CharSet.Ansi, 8)]
         [InlineData(typeof(ClassWithExplicitStructLayout), LayoutKind.Explicit, CharSet.Unicode, 2)]
@@ -1503,7 +2380,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TypeInitializer()
         {
-            ConstructorInfo constructorInfo = typeof(ClassWithStaticConstructor).GetTypeInfo().TypeInitializer;
+            ConstructorInfo constructorInfo =
+                typeof(ClassWithStaticConstructor).GetTypeInfo().TypeInitializer;
             Assert.Equal(".cctor", constructorInfo.Name);
 
             constructorInfo = typeof(ClassWithNoInterfaces).GetTypeInfo().TypeInitializer;
@@ -1514,10 +2392,18 @@ namespace System.Reflection.Tests
         {
             yield return new object[] { typeof(object), typeof(object) };
             yield return new object[] { typeof(int), typeof(int) };
-            yield return new object[] { typeof(ClassWithNoInterfaces), typeof(ClassWithNoInterfaces) };
+            yield return new object[]
+            {
+                typeof(ClassWithNoInterfaces),
+                typeof(ClassWithNoInterfaces)
+            };
 
             Type type = typeof(List<>);
-            yield return new object[] { type.MakeGenericType(typeof(object)), typeof(List<object>) };
+            yield return new object[]
+            {
+                type.MakeGenericType(typeof(object)),
+                typeof(List<object>)
+            };
         }
 
         [Theory]
@@ -1538,10 +2424,22 @@ namespace System.Reflection.Tests
             yield return new object[] { typeof(TypeInfoTests), false };
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
-                yield return new object[] { Array.CreateInstance(typeof(int), new[] { 2 }, new[] { -1 }).GetType(), false };
-                yield return new object[] { Array.CreateInstance(typeof(int), new[] { 2 }, new[] { 1 }).GetType(), false };
+                yield return new object[]
+                {
+                    Array.CreateInstance(typeof(int), new[] { 2 }, new[] { -1 }).GetType(),
+                    false
+                };
+                yield return new object[]
+                {
+                    Array.CreateInstance(typeof(int), new[] { 2 }, new[] { 1 }).GetType(),
+                    false
+                };
             }
-            yield return new object[] { Array.CreateInstance(typeof(int), new[] { 2 }, new[] { 0 }).GetType(), true };
+            yield return new object[]
+            {
+                Array.CreateInstance(typeof(int), new[] { 2 }, new[] { 0 }).GetType(),
+                true
+            };
             yield return new object[] { typeof(int[][]), true };
             yield return new object[] { Type.GetType("System.Int32[]"), true };
             yield return new object[] { Type.GetType("System.Int32[*]"), false };
@@ -1550,12 +2448,34 @@ namespace System.Reflection.Tests
             yield return new object[] { typeof(int).MakeArrayType(1), false };
             yield return new object[] { typeof(int).MakeArrayType().MakeArrayType(), true };
             yield return new object[] { typeof(int).MakeArrayType(2), false };
-            yield return new object[] { typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>), false };
-            yield return new object[] { typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>[]), true };
-            yield return new object[] { typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>[,]), false };
+            yield return new object[]
+            {
+                typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>),
+                false
+            };
+            yield return new object[]
+            {
+                typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>[]),
+                true
+            };
+            yield return new object[]
+            {
+                typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>[,]),
+                false
+            };
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
-                yield return new object[] { Array.CreateInstance(typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>), new[] { 2 }, new[] { -1 }).GetType(), false };
+                yield return new object[]
+                {
+                    Array
+                        .CreateInstance(
+                            typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>),
+                            new[] { 2 },
+                            new[] { -1 }
+                        )
+                        .GetType(),
+                    false
+                };
             }
         }
 
@@ -1593,9 +2513,13 @@ namespace System.Reflection.Tests
         }
 
         public class ClassWithNoInterfaces { }
-        public class ClassWithInterface2Interface3 : TI_NonGenericInterface2, TI_NonGenericInterface3 { }
+        public class ClassWithInterface2Interface3
+            : TI_NonGenericInterface2,
+              TI_NonGenericInterface3 { }
         public class SubClassWithInterface1 : TI_ClassWithInterface1 { }
-        public class SubClassWithInterface1Interface2Interface3 : ClassWithInterface2Interface3, TI_NonGenericInterface1 { }
+        public class SubClassWithInterface1Interface2Interface3
+            : ClassWithInterface2Interface3,
+              TI_NonGenericInterface1 { }
 
         public interface TI_NonGenericInterface2 { }
         public interface TI_NonGenericInterface3 { }
@@ -1623,8 +2547,10 @@ namespace System.Reflection.Tests
         public class GenericClassWithGenericInterface2<T, V> : GenericInterface2<T, V> { }
 
         public class NonGenericClassWithGenericInterface1 : GenericInterface1<int> { }
-        public class GenericClassWithGenericInterface3<T> : GenericClassWithNoInterfaces2<T, int> { }
-        public class NonGenericClassWithGenericInterface2 : GenericClassWithNoInterfaces2<int, int> { }
+        public class GenericClassWithGenericInterface3<T>
+            : GenericClassWithNoInterfaces2<T, int> { }
+        public class NonGenericClassWithGenericInterface2
+            : GenericClassWithNoInterfaces2<int, int> { }
 
         public enum UIntEnum : uint
         {
@@ -1643,17 +2569,29 @@ namespace System.Reflection.Tests
 
         public interface InheritedInteraface : TI_NonGenericInterface2 { }
         public struct StructWithInheritedInterface : InheritedInteraface { }
-        public class CompoundClass1 : NonGenericClassWithNonGenericInterface, InheritedInteraface { }
-        public class CompoundClass2<T> : NonGenericClassWithNonGenericInterface, InheritedInteraface { }
-        public class CompoundClass3<T> : NonGenericClassWithNonGenericInterface, GenericInterface1<T> { }
-        public class CompoundClass4<T> : NonGenericClassWithNonGenericInterface, GenericInterface1<string> { }
+        public class CompoundClass1
+            : NonGenericClassWithNonGenericInterface,
+              InheritedInteraface { }
+        public class CompoundClass2<T>
+            : NonGenericClassWithNonGenericInterface,
+              InheritedInteraface { }
+        public class CompoundClass3<T>
+            : NonGenericClassWithNonGenericInterface,
+              GenericInterface1<T> { }
+        public class CompoundClass4<T>
+            : NonGenericClassWithNonGenericInterface,
+              GenericInterface1<string> { }
 
-        public class BaseClassWithInterface1Interface2 : TI_NonGenericInterface1, TI_NonGenericInterface2 { }
+        public class BaseClassWithInterface1Interface2
+            : TI_NonGenericInterface1,
+              TI_NonGenericInterface2 { }
         public class SubClassWithInterface1Interface2 : BaseClassWithInterface1Interface2 { }
-        public class GenericSubClassWithInterface1Interface2<T> : SubClassWithInterface1Interface2 { }
+        public class GenericSubClassWithInterface1Interface2<T>
+            : SubClassWithInterface1Interface2 { }
 
         public class GenericSubClassWithNoInterfaces1<T> : GenericClassWithNoInterfaces1<T> { }
-        public class GenericSubSubClassWithNoInterfaces1<T> : GenericSubClassWithNoInterfaces1<T> { }
+        public class GenericSubSubClassWithNoInterfaces1<T>
+            : GenericSubClassWithNoInterfaces1<T> { }
 
         [DefaultMember("PublicField")]
         public class MembersClass : TI_NonGenericInterface1, TI_NonGenericInterface2
@@ -1684,7 +2622,10 @@ namespace System.Reflection.Tests
             private event EventHandler PrivateEvent;
 
             public void PublicMethod() { }
-            private int PrivateMethod(int x, string y) { return default(int); }
+            private int PrivateMethod(int x, string y)
+            {
+                return default(int);
+            }
         }
 
         public sealed class SealedClass { }
@@ -1692,8 +2633,7 @@ namespace System.Reflection.Tests
 
         public class MethodClassWithConstraints<T, U>
             where T : TI_BaseClass, TI_NonGenericInterface1
-            where U : class, new()
-        { }
+            where U : class, new() { }
 
         public struct StructWithoutExplicitStructLayout
         {
@@ -1764,10 +2704,26 @@ namespace System.Reflection.Tests
         internal class InternalNestedClass { } // Internal members are not inherited
         protected class ProtectedNestedClass { }
 
-        public string StringProperty1 { get { return ""; } set { } }
-        public string StringProperty2 { get { return ""; } set { } }
-        public virtual string VirtualStringProperty { get { return ""; } set { } }
-        public static string StaticStringProperty { get { return ""; } set { } }
+        public string StringProperty1
+        {
+            get { return ""; }
+            set { }
+        }
+        public string StringProperty2
+        {
+            get { return ""; }
+            set { }
+        }
+        public virtual string VirtualStringProperty
+        {
+            get { return ""; }
+            set { }
+        }
+        public static string StaticStringProperty
+        {
+            get { return ""; }
+            set { }
+        }
 
         public void MethodWithSameName() { }
         public void MethodWithSameName(int i) { }
@@ -1801,9 +2757,21 @@ namespace System.Reflection.Tests
         public class NESTPUBLIC3 { }
         private class NestPrivate2 { }
 
-        public new string StringProperty1 { get { return ""; } set { } }
-        public new virtual string VirtualStringProperty { get { return ""; } set { } }
-        public static new string StaticStringProperty { get { return ""; } set { } }
+        public new string StringProperty1
+        {
+            get { return ""; }
+            set { }
+        }
+        public new virtual string VirtualStringProperty
+        {
+            get { return ""; }
+            set { }
+        }
+        public static new string StaticStringProperty
+        {
+            get { return ""; }
+            set { }
+        }
     }
 
     public interface TI_NonGenericInterface1 { }

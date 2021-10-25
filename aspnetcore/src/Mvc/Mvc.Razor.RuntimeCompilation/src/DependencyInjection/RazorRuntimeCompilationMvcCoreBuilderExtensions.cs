@@ -45,7 +45,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IMvcCoreBuilder" />.</param>
         /// <param name="setupAction">An action to configure the <see cref="MvcRazorRuntimeCompilationOptions"/>.</param>
         /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
-        public static IMvcCoreBuilder AddRazorRuntimeCompilation(this IMvcCoreBuilder builder, Action<MvcRazorRuntimeCompilationOptions> setupAction)
+        public static IMvcCoreBuilder AddRazorRuntimeCompilation(
+            this IMvcCoreBuilder builder,
+            Action<MvcRazorRuntimeCompilationOptions> setupAction
+        )
         {
             if (builder == null)
             {
@@ -66,12 +69,19 @@ namespace Microsoft.Extensions.DependencyInjection
         internal static void AddServices(IServiceCollection services)
         {
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient<IConfigureOptions<MvcRazorRuntimeCompilationOptions>, MvcRazorRuntimeCompilationOptionsSetup>());
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<MvcRazorRuntimeCompilationOptions>,
+                    MvcRazorRuntimeCompilationOptionsSetup
+                >()
+            );
 
-            var compilerProvider = services.FirstOrDefault(f =>
-                f.ServiceType == typeof(IViewCompilerProvider) &&
-                f.ImplementationType?.Assembly == typeof(IViewCompilerProvider).Assembly &&
-                f.ImplementationType.FullName == "Microsoft.AspNetCore.Mvc.Razor.Compilation.DefaultViewCompilerProvider");
+            var compilerProvider = services.FirstOrDefault(
+                f =>
+                    f.ServiceType == typeof(IViewCompilerProvider)
+                    && f.ImplementationType?.Assembly == typeof(IViewCompilerProvider).Assembly
+                    && f.ImplementationType.FullName
+                        == "Microsoft.AspNetCore.Mvc.Razor.Compilation.DefaultViewCompilerProvider"
+            );
 
             if (compilerProvider != null)
             {
@@ -81,9 +91,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddSingleton<IViewCompilerProvider, RuntimeViewCompilerProvider>();
 
-            var actionDescriptorProvider = services.FirstOrDefault(f =>
-                f.ServiceType == typeof(IActionDescriptorProvider) &&
-                f.ImplementationType == typeof(CompiledPageActionDescriptorProvider));
+            var actionDescriptorProvider = services.FirstOrDefault(
+                f =>
+                    f.ServiceType == typeof(IActionDescriptorProvider)
+                    && f.ImplementationType == typeof(CompiledPageActionDescriptorProvider)
+            );
 
             if (actionDescriptorProvider != null)
             {
@@ -93,9 +105,15 @@ namespace Microsoft.Extensions.DependencyInjection
                 // We only want to add support for this if we know AddRazorPages was called. In the absence of this, several services registered by Razor Pages
                 // will be absent. We'll use the presence of the CompiledPageActionDescriptorProvider service as a poor way to test this.
                 services.TryAddEnumerable(
-                    ServiceDescriptor.Singleton<IActionDescriptorProvider, PageActionDescriptorProvider>());
+                    ServiceDescriptor.Singleton<
+                        IActionDescriptorProvider,
+                        PageActionDescriptorProvider
+                    >()
+                );
 
-                services.TryAddEnumerable(ServiceDescriptor.Singleton<MatcherPolicy, PageLoaderMatcherPolicy>());
+                services.TryAddEnumerable(
+                    ServiceDescriptor.Singleton<MatcherPolicy, PageLoaderMatcherPolicy>()
+                );
             }
 
             services.TryAddSingleton<RuntimeCompilationFileProvider>();
@@ -103,36 +121,54 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<CSharpCompiler>();
 
             services.TryAddSingleton<RazorProjectFileSystem, FileProviderRazorProjectFileSystem>();
-            services.TryAddSingleton(s =>
-            {
-                var fileSystem = s.GetRequiredService<RazorProjectFileSystem>();
-                var csharpCompiler = s.GetRequiredService<CSharpCompiler>();
-                var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, builder =>
+            services.TryAddSingleton(
+                s =>
                 {
-                    RazorExtensions.Register(builder);
+                    var fileSystem = s.GetRequiredService<RazorProjectFileSystem>();
+                    var csharpCompiler = s.GetRequiredService<CSharpCompiler>();
+                    var projectEngine = RazorProjectEngine.Create(
+                        RazorConfiguration.Default,
+                        fileSystem,
+                        builder =>
+                        {
+                            RazorExtensions.Register(builder);
 
-                    // Roslyn + TagHelpers infrastructure
-                    var referenceManager = s.GetRequiredService<RazorReferenceManager>();
-                    builder.Features.Add(new LazyMetadataReferenceFeature(referenceManager));
-                    builder.Features.Add(new CompilationTagHelperFeature());
+                            // Roslyn + TagHelpers infrastructure
+                            var referenceManager = s.GetRequiredService<RazorReferenceManager>();
+                            builder.Features.Add(
+                                new LazyMetadataReferenceFeature(referenceManager)
+                            );
+                            builder.Features.Add(new CompilationTagHelperFeature());
 
-                    // TagHelperDescriptorProviders (actually do tag helper discovery)
-                    builder.Features.Add(new DefaultTagHelperDescriptorProvider());
-                    builder.Features.Add(new ViewComponentTagHelperDescriptorProvider());
-                    builder.SetCSharpLanguageVersion(csharpCompiler.ParseOptions.LanguageVersion);
-                });
+                            // TagHelperDescriptorProviders (actually do tag helper discovery)
+                            builder.Features.Add(new DefaultTagHelperDescriptorProvider());
+                            builder.Features.Add(new ViewComponentTagHelperDescriptorProvider());
+                            builder.SetCSharpLanguageVersion(
+                                csharpCompiler.ParseOptions.LanguageVersion
+                            );
+                        }
+                    );
 
-                return projectEngine;
-            });
+                    return projectEngine;
+                }
+            );
 
             //
             // Razor Pages
             //
             services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<IPageRouteModelProvider, RazorProjectPageRouteModelProvider>());
+                ServiceDescriptor.Singleton<
+                    IPageRouteModelProvider,
+                    RazorProjectPageRouteModelProvider
+                >()
+            );
 
             services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<IActionDescriptorChangeProvider, PageActionDescriptorChangeProvider>());
+                ServiceDescriptor.Singleton<
+                    IActionDescriptorChangeProvider,
+                    PageActionDescriptorChangeProvider
+                >()
+            );
         }
     }
 }

@@ -24,7 +24,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         private readonly Func<TEntity, TCollection> _getCollection;
         private readonly Action<TEntity, TCollection>? _setCollection;
         private readonly Action<TEntity, TCollection>? _setCollectionForMaterialization;
-        private readonly Func<TEntity, Action<TEntity, TCollection>, TCollection>? _createAndSetCollection;
+        private readonly Func<
+            TEntity,
+            Action<TEntity, TCollection>,
+            TCollection
+        >? _createAndSetCollection;
         private readonly Func<TCollection>? _createCollection;
 
         /// <summary>
@@ -33,8 +37,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual Type CollectionType
-            => typeof(TCollection);
+        public virtual Type CollectionType => typeof(TCollection);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             Action<TEntity, TCollection>? setCollection,
             Action<TEntity, TCollection>? setCollectionForMaterialization,
             Func<TEntity, Action<TEntity, TCollection>, TCollection>? createAndSetCollection,
-            Func<TCollection>? createCollection)
+            Func<TCollection>? createCollection
+        )
         {
             _propertyName = propertyName;
             _getCollection = getCollection;
@@ -91,7 +95,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             {
                 throw new InvalidOperationException(
                     CoreStrings.NavigationCannotCreateType(
-                        _propertyName, typeof(TEntity).ShortDisplayName(), typeof(TCollection).ShortDisplayName()));
+                        _propertyName,
+                        typeof(TEntity).ShortDisplayName(),
+                        typeof(TCollection).ShortDisplayName()
+                    )
+                );
             }
 
             return _createCollection();
@@ -103,10 +111,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual object GetOrCreate(object entity, bool forMaterialization)
-            => GetOrCreateCollection(entity, forMaterialization);
+        public virtual object GetOrCreate(object entity, bool forMaterialization) =>
+            GetOrCreateCollection(entity, forMaterialization);
 
-        private ICollection<TElement> GetOrCreateCollection(object instance, bool forMaterialization)
+        private ICollection<TElement> GetOrCreateCollection(
+            object instance,
+            bool forMaterialization
+        )
         {
             var collection = GetCollection(instance);
             if (collection == null)
@@ -117,17 +128,30 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
 
                 if (setCollection == null)
                 {
-                    throw new InvalidOperationException(CoreStrings.NavigationNoSetter(_propertyName, typeof(TEntity).ShortDisplayName()));
+                    throw new InvalidOperationException(
+                        CoreStrings.NavigationNoSetter(
+                            _propertyName,
+                            typeof(TEntity).ShortDisplayName()
+                        )
+                    );
                 }
 
                 if (_createAndSetCollection == null)
                 {
                     throw new InvalidOperationException(
                         CoreStrings.NavigationCannotCreateType(
-                            _propertyName, typeof(TEntity).ShortDisplayName(), typeof(TCollection).ShortDisplayName()));
+                            _propertyName,
+                            typeof(TEntity).ShortDisplayName(),
+                            typeof(TCollection).ShortDisplayName()
+                        )
+                    );
                 }
 
-                collection = (ICollection<TElement>)_createAndSetCollection((TEntity)instance, setCollection);
+                collection =
+                    (ICollection<TElement>)_createAndSetCollection(
+                        (TEntity)instance,
+                        setCollection
+                    );
             }
 
             return collection;
@@ -138,15 +162,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
             var enumerable = _getCollection((TEntity)instance);
             var collection = enumerable as ICollection<TElement>;
 
-            if (enumerable != null
-                && collection == null)
+            if (enumerable != null && collection == null)
             {
                 throw new InvalidOperationException(
                     CoreStrings.NavigationBadType(
                         _propertyName,
                         typeof(TEntity).ShortDisplayName(),
                         enumerable.GetType().ShortDisplayName(),
-                        typeof(TElement).ShortDisplayName()));
+                        typeof(TElement).ShortDisplayName()
+                    )
+                );
             }
 
             return collection;
@@ -158,8 +183,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual bool Contains(object entity, object value)
-            => Contains(GetCollection((TEntity)entity), value);
+        public virtual bool Contains(object entity, object value) =>
+            Contains(GetCollection((TEntity)entity), value);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

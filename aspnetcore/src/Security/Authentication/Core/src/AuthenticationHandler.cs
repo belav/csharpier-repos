@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Authentication
     /// An opinionated abstraction for implementing <see cref="IAuthenticationHandler"/>.
     /// </summary>
     /// <typeparam name="TOptions">The type for the options used to configure the authentication handler.</typeparam>
-    public abstract class AuthenticationHandler<TOptions> : IAuthenticationHandler where TOptions : AuthenticationSchemeOptions, new()
+    public abstract class AuthenticationHandler<TOptions> : IAuthenticationHandler
+        where TOptions : AuthenticationSchemeOptions, new()
     {
         private Task<AuthenticateResult>? _authenticateTask;
 
@@ -53,12 +54,14 @@ namespace Microsoft.AspNetCore.Authentication
         /// <summary>
         /// Gets the path as seen by the authentication middleware.
         /// </summary>
-        protected PathString OriginalPath => Context.Features.Get<IAuthenticationFeature>()?.OriginalPath ?? Request.Path;
+        protected PathString OriginalPath =>
+            Context.Features.Get<IAuthenticationFeature>()?.OriginalPath ?? Request.Path;
 
         /// <summary>
         /// Gets the path base as seen by the authentication middleware.
         /// </summary>
-        protected PathString OriginalPathBase => Context.Features.Get<IAuthenticationFeature>()?.OriginalPathBase ?? Request.PathBase;
+        protected PathString OriginalPathBase =>
+            Context.Features.Get<IAuthenticationFeature>()?.OriginalPathBase ?? Request.PathBase;
 
         /// <summary>
         /// Gets the <see cref="ILogger"/>.
@@ -99,7 +102,13 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         protected string CurrentUri
         {
-            get => Request.Scheme + Uri.SchemeDelimiter + Request.Host + Request.PathBase + Request.Path + Request.QueryString;
+            get =>
+                Request.Scheme
+                + Uri.SchemeDelimiter
+                + Request.Host
+                + Request.PathBase
+                + Request.Path
+                + Request.QueryString;
         }
 
         /// <summary>
@@ -109,7 +118,12 @@ namespace Microsoft.AspNetCore.Authentication
         /// <param name="logger">The <see cref="ILoggerFactory"/>.</param>
         /// <param name="encoder">The <see cref="System.Text.Encodings.Web.UrlEncoder"/>.</param>
         /// <param name="clock">The <see cref="ISystemClock"/>.</param>
-        protected AuthenticationHandler(IOptionsMonitor<TOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
+        protected AuthenticationHandler(
+            IOptionsMonitor<TOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock
+        )
         {
             Logger = logger.CreateLogger(this.GetType().FullName!);
             UrlEncoder = encoder;
@@ -173,8 +187,8 @@ namespace Microsoft.AspNetCore.Authentication
         /// </summary>
         /// <param name="targetPath">The path.</param>
         /// <returns>The absolute url.</returns>
-        protected string BuildRedirectUri(string targetPath)
-            => Request.Scheme + Uri.SchemeDelimiter + Request.Host + OriginalPathBase + targetPath;
+        protected string BuildRedirectUri(string targetPath) =>
+            Request.Scheme + Uri.SchemeDelimiter + Request.Host + OriginalPathBase + targetPath;
 
         /// <summary>
         /// Resolves the scheme that this authentication operation is forwarded to.
@@ -183,12 +197,11 @@ namespace Microsoft.AspNetCore.Authentication
         /// <returns>The forwarded scheme or <see langword="null"/>.</returns>
         protected virtual string? ResolveTarget(string? scheme)
         {
-            var target = scheme ?? Options.ForwardDefaultSelector?.Invoke(Context) ?? Options.ForwardDefault;
+            var target =
+                scheme ?? Options.ForwardDefaultSelector?.Invoke(Context) ?? Options.ForwardDefault;
 
             // Prevent self targetting
-            return string.Equals(target, Scheme.Name, StringComparison.Ordinal)
-                ? null
-                : target;
+            return string.Equals(target, Scheme.Name, StringComparison.Ordinal) ? null : target;
         }
 
         /// <inheritdoc />
@@ -216,7 +229,10 @@ namespace Microsoft.AspNetCore.Authentication
             }
             else
             {
-                Logger.AuthenticationSchemeNotAuthenticatedWithFailure(Scheme.Name, result.Failure.Message);
+                Logger.AuthenticationSchemeNotAuthenticatedWithFailure(
+                    Scheme.Name,
+                    result.Failure.Message
+                );
             }
             return result;
         }

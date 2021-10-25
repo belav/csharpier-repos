@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests
             {
                 var identity = WindowsIdentity.GetCurrent();
                 var principal = new WindowsPrincipal(identity);
-                return principal.IsInRole(WindowsBuiltInRole.Administrator) || SkipInVSTSAttribute.RunningInVSTS;
+                return principal.IsInRole(WindowsBuiltInRole.Administrator)
+                    || SkipInVSTSAttribute.RunningInVSTS;
             }
         }
 

@@ -17,15 +17,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
         [UseExportProvider]
         public class VisualBasic
         {
-            [Fact, WorkItem(530123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530123"), Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
+            [
+                Fact,
+                WorkItem(530123, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530123"),
+                Trait(Traits.Feature, Traits.Features.MetadataAsSource)
+            ]
             public async Task TestGenerateTypeInModule()
             {
-                var metadataSource = @"
+                var metadataSource =
+                    @"
 Module M
     Public Class D
     End Class
 End Module";
-                await GenerateAndVerifySourceAsync(metadataSource, "M+D", LanguageNames.VisualBasic, $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
+                await GenerateAndVerifySourceAsync(
+                    metadataSource,
+                    "M+D",
+                    LanguageNames.VisualBasic,
+                    $@"#Region ""{FeaturesResources.Assembly} ReferencedAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null""
 ' {CodeAnalysisResources.InMemoryAssembly}
 #End Region
 
@@ -33,16 +42,18 @@ Friend Module M
     Public Class [|D|]
         Public Sub New()
     End Class
-End Module");
+End Module"
+                );
             }
 
-            // This test depends on the version of mscorlib used by the TestWorkspace and may 
+            // This test depends on the version of mscorlib used by the TestWorkspace and may
             // change in the future
             [WorkItem(530526, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530526")]
             [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
             public async Task BracketedIdentifierSimplificationTest()
             {
-                var expected = $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
+                var expected =
+                    $@"#Region ""{FeaturesResources.Assembly} mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089""
 ' mscorlib.v4_6_1038_0.dll
 #End Region
 
@@ -69,15 +80,20 @@ End Namespace";
             [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
             public void ExtractXMLFromDocComment()
             {
-                var docCommentText = @"''' <summary>
+                var docCommentText =
+                    @"''' <summary>
 ''' I am the very model of a modern major general.
 ''' </summary>";
 
-                var expectedXMLFragment = @" <summary>
+                var expectedXMLFragment =
+                    @" <summary>
  I am the very model of a modern major general.
  </summary>";
 
-                var extractedXMLFragment = DocumentationCommentUtilities.ExtractXMLFragment(docCommentText, "'''");
+                var extractedXMLFragment = DocumentationCommentUtilities.ExtractXMLFragment(
+                    docCommentText,
+                    "'''"
+                );
 
                 Assert.Equal(expectedXMLFragment, extractedXMLFragment);
             }
@@ -86,8 +102,9 @@ End Namespace";
             public async Task TestValueTuple()
             {
                 using var context = TestContext.Create(LanguageNames.VisualBasic);
-                await context.GenerateAndVerifySourceAsync("System.ValueTuple",
-@$"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
+                await context.GenerateAndVerifySourceAsync(
+                    "System.ValueTuple",
+                    @$"#Region ""{FeaturesResources.Assembly} System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51""
 ' System.ValueTuple.dll
 #End Region
 
@@ -112,7 +129,8 @@ Namespace System
         Public Overrides Function GetHashCode() As Integer
         Public Overrides Function ToString() As String
     End Structure
-End Namespace");
+End Namespace"
+                );
             }
         }
     }

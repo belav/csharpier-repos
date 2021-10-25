@@ -30,8 +30,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public virtual IReadOnlyList<BoundAttributeParameterDescriptorBuilder> BoundAttributeParameters { get; }
 
-        public virtual void BindAttributeParameter(Action<BoundAttributeParameterDescriptorBuilder> configure)
-        {
-        }
+        public virtual void BindAttributeParameter(
+            Action<BoundAttributeParameterDescriptorBuilder> configure
+        ) { }
     }
 }

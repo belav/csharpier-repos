@@ -24,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 
             // Act
             var body = await Client.GetStringAsync(
-                "http://localhost/Directives/ViewInheritsInjectAndUsingsFromViewImports");
+                "http://localhost/Directives/ViewInheritsInjectAndUsingsFromViewImports"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim());
@@ -37,7 +38,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var expected = "WriteLiteral says:layout:Write says:Write says:Hello Person2";
 
             // Act
-            var body = await Client.GetStringAsync("http://localhost/Directives/ViewInheritsBasePageFromViewImports");
+            var body = await Client.GetStringAsync(
+                "http://localhost/Directives/ViewInheritsBasePageFromViewImports"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim());
@@ -48,11 +51,13 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var expected =
-@"WriteLiteral says:<h1>Write says:BobWriteLiteral says:</h1>
+                @"WriteLiteral says:<h1>Write says:BobWriteLiteral says:</h1>
 Write says:WriteLiteral says:<strong>Write says:98052WriteLiteral says:</strong>";
 
             // Act
-            var body = await Client.GetStringAsync("Directives/ViewReplacesTModelTokenFromInheritedBasePages");
+            var body = await Client.GetStringAsync(
+                "Directives/ViewReplacesTModelTokenFromInheritedBasePages"
+            );
 
             // Assert
             Assert.Equal(expected, body.Trim(), ignoreLineEndingDifferences: true);

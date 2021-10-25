@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Logging
             _noCertificate = LoggerMessage.Define(
                 eventId: new EventId(0, "NoCertificate"),
                 logLevel: LogLevel.Warning,
-                formatString: "Could not read certificate from header.");
+                formatString: "Could not read certificate from header."
+            );
         }
 
         public static void NoCertificate(this ILogger logger, Exception exception)

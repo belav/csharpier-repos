@@ -24,7 +24,13 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
         /// <remarks>
         /// The PBKDF2 algorithm is specified in RFC 2898.
         /// </remarks>
-        public static byte[] Pbkdf2(string password, byte[] salt, KeyDerivationPrf prf, int iterationCount, int numBytesRequested)
+        public static byte[] Pbkdf2(
+            string password,
+            byte[] salt,
+            KeyDerivationPrf prf,
+            int iterationCount,
+            int numBytesRequested
+        )
         {
             if (password == null)
             {
@@ -50,7 +56,13 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation
                 throw new ArgumentOutOfRangeException(nameof(numBytesRequested));
             }
 
-            return Pbkdf2Util.Pbkdf2Provider.DeriveKey(password, salt, prf, iterationCount, numBytesRequested);
+            return Pbkdf2Util.Pbkdf2Provider.DeriveKey(
+                password,
+                salt,
+                prf,
+                iterationCount,
+                numBytesRequested
+            );
         }
     }
 }

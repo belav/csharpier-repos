@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.Http
         // Testing this because it's an important design detail. If someone wants to globally replace the handler
         // they can do so by replacing this service. It's important that the Factory isn't the one to instantiate
         // the handler. The factory has no defaults - it only applies options.
-        [Fact] 
+        [Fact]
         public void Ctor_SetsPrimaryHandler()
         {
             // Arrange & Act
@@ -30,7 +30,6 @@ namespace Microsoft.Extensions.Http
             // Act
             Assert.IsType<HttpClientHandler>(builder.PrimaryHandler);
         }
-
 
         [Fact]
         public void Build_NoAdditionalHandlers_ReturnsPrimaryHandler()
@@ -79,10 +78,7 @@ namespace Microsoft.Extensions.Http
         public void Build_PrimaryHandlerIsNull_ThrowsException()
         {
             // Arrange
-            var builder = new DefaultHttpMessageHandlerBuilder(Services)
-            {
-                PrimaryHandler = null,
-            };
+            var builder = new DefaultHttpMessageHandlerBuilder(Services) { PrimaryHandler = null, };
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(() => builder.Build());
@@ -95,15 +91,15 @@ namespace Microsoft.Extensions.Http
             // Arrange
             var builder = new DefaultHttpMessageHandlerBuilder(Services)
             {
-                AdditionalHandlers =
-                {
-                    null,
-                }
+                AdditionalHandlers = { null, }
             };
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(() => builder.Build());
-            Assert.Equal("The 'additionalHandlers' must not contain a null entry.", exception.Message);
+            Assert.Equal(
+                "The 'additionalHandlers' must not contain a null entry.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -121,10 +117,12 @@ namespace Microsoft.Extensions.Http
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(() => builder.Build());
             Assert.Equal(
-                "The 'InnerHandler' property must be null. " +
-                "'DelegatingHandler' instances provided to 'HttpMessageHandlerBuilder' must not be reused or cached." + Environment.NewLine +
-                $"Handler: '{builder.AdditionalHandlers[0].ToString()}'",
-                exception.Message);
+                "The 'InnerHandler' property must be null. "
+                    + "'DelegatingHandler' instances provided to 'HttpMessageHandlerBuilder' must not be reused or cached."
+                    + Environment.NewLine
+                    + $"Handler: '{builder.AdditionalHandlers[0].ToString()}'",
+                exception.Message
+            );
         }
     }
 }

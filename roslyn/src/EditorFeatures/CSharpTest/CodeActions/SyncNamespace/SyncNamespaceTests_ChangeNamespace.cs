@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.SyncNamespa
             // No change namespace action because the folder name is not valid identifier
             var (folder, filePath) = CreateDocumentFilePath(new[] { "3B", "C" }, "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -48,7 +48,7 @@ namespace [||]{declaredNamespace}
             // No change namespace action because the folder name is not valid identifier
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B.3C", "D" }, "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -72,7 +72,7 @@ namespace [||]{declaredNamespace}
 
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -86,7 +86,7 @@ namespace [||]{declaredNamespace}
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     class Class1
     {
@@ -103,7 +103,7 @@ namespace [||]{declaredNamespace}
 
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -127,7 +127,7 @@ namespace [||]{declaredNamespace}
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     delegate void D1;
 
@@ -155,7 +155,7 @@ namespace [||]{declaredNamespace}
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -191,7 +191,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     /// <summary>
     /// See <see cref=""Class1""/>
@@ -205,7 +205,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 namespace Foo
 {
     using A.B.C;
@@ -231,7 +231,7 @@ namespace Foo
 
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -261,7 +261,7 @@ End Class</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     /// <summary>
     /// See <see cref=""Class1""/>
@@ -272,7 +272,7 @@ End Class</Document>
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 Imports A.B.C
 
 ''' <summary>
@@ -294,7 +294,7 @@ End Class";
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -326,7 +326,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"using Foo;
+                @"using Foo;
 using Foo.Bar;
 using Foo.Bar.Baz;
 
@@ -351,7 +351,7 @@ namespace A.B.C
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -383,7 +383,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"using Foo;
+                @"using Foo;
 using Foo.Bar;
 using Foo.Bar.Baz;
 
@@ -408,7 +408,7 @@ namespace A.B.C
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -441,7 +441,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     class Class1
     {
@@ -452,7 +452,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 using A.B.C;
 
 namespace Foo
@@ -479,7 +479,7 @@ namespace Foo
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -504,7 +504,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     interface Interface1
     {
@@ -512,7 +512,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 namespace Foo
 {
     using A.B.C;
@@ -534,7 +534,7 @@ namespace Foo
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -568,14 +568,14 @@ namespace NS1
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     class Class1
     {
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 namespace NS1
 {
     using A.B.C;
@@ -605,7 +605,7 @@ namespace NS1
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -639,7 +639,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     class Class1
     {
@@ -650,7 +650,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 using System;
 using A.B.C;
 using Class1Alias = A.B.C.Class1;
@@ -678,7 +678,7 @@ namespace Foo
 
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -697,7 +697,7 @@ namespace [||]{declaredNamespace}
 </Workspace>";
 
             var expectedSourceOriginal =
-@"using System;
+                @"using System;
 
 // Comments before declaration.
 // Comments after opening brace
@@ -718,7 +718,7 @@ class Class1
 
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -742,7 +742,7 @@ namespace [||]{declaredNamespace}
 </Workspace>";
 
             var expectedSourceOriginal =
-@"delegate void D1;
+                @"delegate void D1;
 
 interface Class1
 {
@@ -768,7 +768,7 @@ class Class2 : Class1
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -801,7 +801,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"class Class1
+                @"class Class1
 {
 }
 
@@ -810,7 +810,7 @@ class Class2
 }
 ";
             var expectedSourceReference =
-@"namespace Foo
+                @"namespace Foo
 {
     class RefClass
     {
@@ -834,7 +834,7 @@ class Class2
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -859,13 +859,13 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"interface Interface1
+                @"interface Interface1
 {
     void M1(Interface1 c1);
 }
 ";
             var expectedSourceReference =
-@"
+                @"
 namespace Foo
 {
     class RefClass : Interface1
@@ -885,7 +885,7 @@ namespace Foo
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -913,12 +913,12 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"class MyClass
+                @"class MyClass
 {
 }
 ";
             var expectedSourceReference =
-@"
+                @"
 namespace Foo
 {
     class RefClass
@@ -942,7 +942,7 @@ namespace Foo
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -974,7 +974,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"using Foo;
+                @"using Foo;
 using Foo.Bar;
 using Foo.Bar.Baz;
 
@@ -997,7 +997,7 @@ class Class1
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1031,12 +1031,12 @@ namespace NS1
 </Workspace>";
 
             var expectedSourceOriginal =
-@"class Class1
+                @"class Class1
 {
 }
 ";
             var expectedSourceReference =
-@"
+                @"
 namespace NS1
 {
     class Class2
@@ -1064,7 +1064,7 @@ namespace NS1
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1098,7 +1098,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"class Class1
+                @"class Class1
 {
 }
 
@@ -1107,7 +1107,7 @@ class Class2
 }
 ";
             var expectedSourceReference =
-@"using System;
+                @"using System;
 using Class1Alias = Class1;
 
 namespace Foo
@@ -1131,7 +1131,7 @@ namespace Foo
             var defaultNamespace = "A";
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1145,7 +1145,7 @@ class [||]Class1
 </Workspace>";
 
             var expectedSourceOriginal =
-@"using System;
+                @"using System;
 
 namespace A.B.C
 {
@@ -1162,7 +1162,7 @@ namespace A.B.C
             var defaultNamespace = "A";
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1183,7 +1183,7 @@ class Class2 : Class1
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     delegate void D1;
 
@@ -1210,7 +1210,7 @@ class Class2 : Class1
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1238,7 +1238,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     class Class1
     {
@@ -1249,7 +1249,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 using A.B.C;
 
 namespace Foo
@@ -1274,7 +1274,7 @@ namespace Foo
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1294,7 +1294,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     interface Interface1
     {
@@ -1302,7 +1302,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 using A.B.C;
 
 namespace Foo
@@ -1322,7 +1322,7 @@ namespace Foo
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1352,7 +1352,7 @@ namespace A
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     class Class1
     {
@@ -1372,7 +1372,7 @@ namespace A
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1403,14 +1403,14 @@ namespace NS1
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     class Class1
     {
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 namespace NS1
 {
     using System;
@@ -1442,7 +1442,7 @@ namespace NS1
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1474,7 +1474,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     class Class1
     {
@@ -1485,7 +1485,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 using A.B.C;
 using Class1Alias = Class1;
 
@@ -1514,7 +1514,7 @@ namespace Foo
 
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1536,14 +1536,14 @@ End Class</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     public class Class1
     {
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 Imports A.B.C
 
 Public Class VBClass
@@ -1560,7 +1560,7 @@ End Class";
 
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1580,14 +1580,14 @@ End Class</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     public class Class1
     {
     }
 }";
             var expectedSourceReference =
-@"Public Class VBClass
+                @"Public Class VBClass
     Public ReadOnly Property C1 As A.B.C.Class1
 End Class";
             await TestChangeNamespaceAsync(code, expectedSourceOriginal, expectedSourceReference);
@@ -1600,7 +1600,7 @@ End Class";
 
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1618,14 +1618,14 @@ End Class</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     public class Class1
     {
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 Imports A.B.C
 
 Public Class VBClass
@@ -1641,7 +1641,7 @@ End Class";
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1665,7 +1665,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     /// <summary>
     /// See <see cref=""Class1""/>
@@ -1675,7 +1675,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 using A.B.C;
 
 namespace Foo
@@ -1698,7 +1698,7 @@ namespace Foo
 
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1720,12 +1720,12 @@ End Class</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-@"public class Class1
+                @"public class Class1
 {
 }
 ";
             var expectedSourceReference =
-@"Public Class VBClass
+                @"Public Class VBClass
     Public ReadOnly Property C1 As Class1
 End Class";
             await TestChangeNamespaceAsync(code, expectedSourceOriginal, expectedSourceReference);
@@ -1739,7 +1739,7 @@ End Class";
 
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1764,12 +1764,12 @@ End Namespace</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-@"public class MyClass
+                @"public class MyClass
 {
 }
 ";
             var expectedSourceReference =
-@"Namespace Foo
+                @"Namespace Foo
     Public Class VBClass
         Public ReadOnly Property C1 As Global.MyClass
     End Class
@@ -1789,7 +1789,7 @@ End Namespace";
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}"">
@@ -1820,7 +1820,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"/// <summary>
+                @"/// <summary>
 /// See <see cref=""Class1""/>
 /// See <see cref=""Class1""/>
 /// </summary>
@@ -1829,7 +1829,7 @@ public class Class1
 }
 ";
             var expectedSourceReference =
-@"
+                @"
 namespace Foo
 {
     /// <summary>
@@ -1852,7 +1852,7 @@ namespace Foo
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1877,7 +1877,7 @@ namespace {defaultNamespace}
 </Workspace>";
 
             var expectedSourceOriginal =
-$@"namespace A.B.C
+                $@"namespace A.B.C
 {{
     public static class Extensions
     {{
@@ -1885,7 +1885,7 @@ $@"namespace A.B.C
     }}
 }}";
             var expectedSourceReference =
-$@"
+                $@"
 namespace {defaultNamespace}
 {{
     using System;
@@ -1908,7 +1908,7 @@ namespace {defaultNamespace}
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1933,7 +1933,7 @@ namespace A
 </Workspace>";
 
             var expectedSourceOriginal =
-$@"namespace A.B.C
+                $@"namespace A.B.C
 {{
     public static class Extensions
     {{
@@ -1941,7 +1941,7 @@ $@"namespace A.B.C
     }}
 }}";
             var expectedSourceReference =
-$@"
+                $@"
 using System;
 using A.B.C;
 
@@ -1964,7 +1964,7 @@ namespace A
             var (folder, filePath) = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}""> 
@@ -1992,7 +1992,7 @@ namespace A
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     public static class Extensions
     {
@@ -2003,7 +2003,7 @@ namespace A
     { }
 }";
             var expectedSourceReference =
-@"
+                @"
 using System;
 using A.B.C;
 
@@ -2026,7 +2026,7 @@ namespace A
 
             var (folder, filePath) = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{folder}"" FilePath=""{filePath}"">
@@ -2053,7 +2053,7 @@ End Class</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-$@"
+                $@"
 using System;
 
 namespace {defaultNamespace}
@@ -2064,7 +2064,7 @@ namespace {defaultNamespace}
     }}
 }}";
             var expectedSourceReference =
-$@"
+                $@"
 Imports {defaultNamespace}
 
 Public Class VBClass
@@ -2085,7 +2085,7 @@ End Class";
             var documentPath1 = CreateDocumentFilePath(new[] { "B", "C" }, "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{documentPath1.folder}"" FilePath=""{documentPath1.filePath}""> 
@@ -2113,7 +2113,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     enum Enum1
     {
@@ -2123,7 +2123,7 @@ namespace Foo
     }
 }";
             var expectedSourceReference =
-@"
+                @"
 using A.B.C;
 
 namespace Foo
@@ -2149,7 +2149,7 @@ namespace Foo
             var documentPath1 = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var documentPath2 = CreateDocumentFilePath(Array.Empty<string>(), "File2.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{documentPath1.folder}"" FilePath=""{documentPath1.filePath}""> 
@@ -2177,7 +2177,7 @@ namespace Foo
 </Workspace>";
 
             var expectedSourceOriginal =
-@"enum Enum1
+                @"enum Enum1
 {
     A,
     B,
@@ -2185,7 +2185,7 @@ namespace Foo
 }
 ";
             var expectedSourceReference =
-@"namespace Foo
+                @"namespace Foo
 {
     class RefClass
     {
@@ -2207,7 +2207,7 @@ namespace Foo
 
             var documentPath1 = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{documentPath1.folder}"" FilePath=""{documentPath1.filePath}""> 
@@ -2232,7 +2232,7 @@ End Class</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-@"namespace A.B.C
+                @"namespace A.B.C
 {
     public enum Enum1
     {
@@ -2242,7 +2242,7 @@ End Class</Document>
     }
 }";
             var expectedSourceReference =
-@"Public Class VBClass
+                @"Public Class VBClass
     Sub M()
         Dim x = A.B.C.Enum1.A
     End Sub
@@ -2259,7 +2259,7 @@ End Class";
 
             var documentPath1 = CreateDocumentFilePath(Array.Empty<string>(), "File1.cs");
             var code =
-$@"
+                $@"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" FilePath=""{ProjectFilePath}"" RootNamespace=""{defaultNamespace}"" CommonReferences=""true"">
         <Document Folders=""{documentPath1.folder}"" FilePath=""{documentPath1.filePath}""> 
@@ -2284,7 +2284,7 @@ End Class</Document>
 </Workspace>";
 
             var expectedSourceOriginal =
-@"public enum Enum1
+                @"public enum Enum1
 {
     A,
     B,
@@ -2292,7 +2292,7 @@ End Class</Document>
 }
 ";
             var expectedSourceReference =
-@"Public Class VBClass
+                @"Public Class VBClass
     Sub M()
         Dim x = Enum1.A
     End Sub

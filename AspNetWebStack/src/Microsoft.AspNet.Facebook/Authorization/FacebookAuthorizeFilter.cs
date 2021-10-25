@@ -45,7 +45,11 @@ namespace Microsoft.AspNet.Facebook.Authorization
         /// Called when authorization is required.
         /// </summary>
         /// <param name="filterContext">The filter context.</param>
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Type references are needed for authorization")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1506:AvoidExcessiveClassCoupling",
+            Justification = "Type references are needed for authorization"
+        )]
         public virtual void OnAuthorization(AuthorizationContext filterContext)
         {
             if (filterContext == null)
@@ -53,11 +57,16 @@ namespace Microsoft.AspNet.Facebook.Authorization
                 throw new ArgumentNullException("filterContext");
             }
 
-            IEnumerable<FacebookAuthorizeAttribute> authorizeAttributes = filterContext.ActionDescriptor
-                .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), inherit: true)
-                .Union(filterContext.ActionDescriptor.ControllerDescriptor
-                    .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), inherit: true))
-                .OfType<FacebookAuthorizeAttribute>();
+            IEnumerable<FacebookAuthorizeAttribute> authorizeAttributes =
+                filterContext.ActionDescriptor
+                    .GetCustomAttributes(typeof(FacebookAuthorizeAttribute), inherit: true)
+                    .Union(
+                        filterContext.ActionDescriptor.ControllerDescriptor.GetCustomAttributes(
+                            typeof(FacebookAuthorizeAttribute),
+                            inherit: true
+                        )
+                    )
+                    .OfType<FacebookAuthorizeAttribute>();
             if (!authorizeAttributes.Any())
             {
                 return;
@@ -70,7 +79,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
                 rawSignedRequest =>
                 {
                     return client.ParseSignedRequest(rawSignedRequest);
-                });
+                }
+            );
             string userId = null;
             string accessToken = null;
             if (signedRequest != null)
@@ -80,7 +90,9 @@ namespace Microsoft.AspNet.Facebook.Authorization
             }
 
             NameValueCollection parsedQueries = HttpUtility.ParseQueryString(request.Url.Query);
-            HashSet<string> requiredPermissions = PermissionHelper.GetRequiredPermissions(authorizeAttributes);
+            HashSet<string> requiredPermissions = PermissionHelper.GetRequiredPermissions(
+                authorizeAttributes
+            );
 
             bool handleError = !String.IsNullOrEmpty(parsedQueries["error"]);
 
@@ -124,27 +136,39 @@ namespace Microsoft.AspNet.Facebook.Authorization
             };
 
             // Check if we need to prompt for default permissions.
-            if (signedRequest == null || String.IsNullOrEmpty(userId) || String.IsNullOrEmpty(accessToken))
+            if (
+                signedRequest == null
+                || String.IsNullOrEmpty(userId)
+                || String.IsNullOrEmpty(accessToken)
+            )
             {
                 PromptDefaultPermissions(permissionContext, redirectUrl);
             }
             else if (requiredPermissions.Any())
             {
-                PermissionsStatus currentPermissionsStatus = _config.PermissionService.GetUserPermissionsStatus(userId, accessToken);
+                PermissionsStatus currentPermissionsStatus =
+                    _config.PermissionService.GetUserPermissionsStatus(userId, accessToken);
                 // Instead of performing another request to gather "granted" permissions just parse the status
-                IEnumerable<string> currentPermissions = PermissionHelper.GetGrantedPermissions(currentPermissionsStatus);
-                IEnumerable<string> missingPermissions = requiredPermissions.Except(currentPermissions);
+                IEnumerable<string> currentPermissions = PermissionHelper.GetGrantedPermissions(
+                    currentPermissionsStatus
+                );
+                IEnumerable<string> missingPermissions = requiredPermissions.Except(
+                    currentPermissions
+                );
 
-                // If we have missing permissions than we need to present a prompt or redirect to an error 
+                // If we have missing permissions than we need to present a prompt or redirect to an error
                 // page if there's an error.
                 if (missingPermissions.Any())
                 {
                     permissionContext.MissingPermissions = missingPermissions;
-                    permissionContext.DeclinedPermissions = PermissionHelper.GetDeclinedPermissions(currentPermissionsStatus);
+                    permissionContext.DeclinedPermissions = PermissionHelper.GetDeclinedPermissions(
+                        currentPermissionsStatus
+                    );
                     permissionContext.SkippedPermissions = PermissionHelper.GetSkippedPermissions(
                         filterContext.HttpContext.Request,
                         missingPermissions,
-                        permissionContext.DeclinedPermissions);
+                        permissionContext.DeclinedPermissions
+                    );
 
                     // Add a query string parameter that enables us to identify if we've already prompted for missing permissions
                     // and therefore can detect cookies.
@@ -192,9 +216,11 @@ namespace Microsoft.AspNet.Facebook.Authorization
         protected ShowPromptResult ShowPrompt(PermissionContext context)
         {
             FacebookClient client = context.FacebookContext.Client;
-            Uri navigationUrl = client.GetLoginUrl(context.RedirectUrl,
-                                                   _config.AppId,
-                                                   permissions: String.Join(",", context.RequiredPermissions));
+            Uri navigationUrl = client.GetLoginUrl(
+                context.RedirectUrl,
+                _config.AppId,
+                permissions: String.Join(",", context.RequiredPermissions)
+            );
 
             return new ShowPromptResult(navigationUrl);
         }
@@ -225,9 +251,7 @@ namespace Microsoft.AspNet.Facebook.Authorization
         /// Set the <paramref name="context"/>'s Result property to modify login flow.
         /// </summary>
         /// <param name="context">Provides access to permission information associated with the user.</param>
-        protected virtual void OnDeniedPermissionPrompt(PermissionContext context)
-        {
-        }
+        protected virtual void OnDeniedPermissionPrompt(PermissionContext context) { }
 
         /// <summary>
         /// Invoked during <see cref="OnAuthorization"/> prior to a permission prompt that is requesting permissions that have
@@ -249,10 +273,12 @@ namespace Microsoft.AspNet.Facebook.Authorization
             string requiredPermissionString = String.Join(",", requiredPermissions);
             UriBuilder authorizationUrlBuilder = new UriBuilder(new Uri(_config.AppUrl));
             authorizationUrlBuilder.Path += _config.AuthorizationRedirectPath.Substring(1);
-            authorizationUrlBuilder.Query = String.Format(CultureInfo.InvariantCulture,
+            authorizationUrlBuilder.Query = String.Format(
+                CultureInfo.InvariantCulture,
                 "originUrl={0}&permissions={1}",
                 HttpUtility.UrlEncode(originUrl),
-                HttpUtility.UrlEncode(requiredPermissionString));
+                HttpUtility.UrlEncode(requiredPermissionString)
+            );
 
             return authorizationUrlBuilder.Uri;
         }
@@ -267,11 +293,16 @@ namespace Microsoft.AspNet.Facebook.Authorization
 
         private string GetRedirectUrl(HttpRequestBase request)
         {
-            NameValueCollection queryNameValuePair = HttpUtility.ParseQueryString(request.Url.Query);
+            NameValueCollection queryNameValuePair = HttpUtility.ParseQueryString(
+                request.Url.Query
+            );
             return GetRedirectUrl(request, queryNameValuePair);
         }
 
-        private string GetRedirectUrl(HttpRequestBase request, NameValueCollection queryNameValuePair)
+        private string GetRedirectUrl(
+            HttpRequestBase request,
+            NameValueCollection queryNameValuePair
+        )
         {
             // Don't propagate query strings added by Facebook OAuth Dialog
             queryNameValuePair.Remove("code");
@@ -283,7 +314,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
                 CultureInfo.InvariantCulture,
                 "{0}/{1}",
                 _config.AppUrl.TrimEnd('/'),
-                request.AppRelativeCurrentExecutionFilePath.TrimStart('~', '/'));
+                request.AppRelativeCurrentExecutionFilePath.TrimStart('~', '/')
+            );
 
             string query = queryNameValuePair.ToString();
             if (!String.IsNullOrEmpty(query))
@@ -294,18 +326,22 @@ namespace Microsoft.AspNet.Facebook.Authorization
             return redirectUrl;
         }
 
-        private void PromptDefaultPermissions(PermissionContext permissionContext, string redirectUrl)
+        private void PromptDefaultPermissions(
+            PermissionContext permissionContext,
+            string redirectUrl
+        )
         {
             FacebookClient client = permissionContext.FacebookContext.Client;
             // Cannot obtain user information from signed_request, redirect to Facebook OAuth dialog.
-            Uri navigationUrl = client.GetLoginUrl(redirectUrl,
-                                                   _config.AppId,
-                                                   permissions: null);
+            Uri navigationUrl = client.GetLoginUrl(redirectUrl, _config.AppId, permissions: null);
 
             permissionContext.FilterContext.Result = CreateRedirectResult(navigationUrl);
         }
 
-        private void PromptMissingPermissions(PermissionContext permissionContext, string redirectUrl)
+        private void PromptMissingPermissions(
+            PermissionContext permissionContext,
+            string redirectUrl
+        )
         {
             AuthorizationContext filterContext = permissionContext.FilterContext;
             HashSet<string> requiredPermissions = permissionContext.RequiredPermissions;
@@ -319,17 +355,26 @@ namespace Microsoft.AspNet.Facebook.Authorization
 
             // Declined permissions and skipped permissions can persist through multiple pages.  So we need to cross check
             // them against the current pages permissions, this will determine if we should invoke the denied permission hook.
-            bool deniedPermissions = missingPermissions.Where(
-                permission => declinedPermissions.Contains(permission) ||
-                              skippedPermissions.Contains(permission)).Any();
+            bool deniedPermissions = missingPermissions
+                .Where(
+                    permission =>
+                        declinedPermissions.Contains(permission)
+                        || skippedPermissions.Contains(permission)
+                )
+                .Any();
 
             permissionContext.RedirectUrl = redirectUrl;
 
             // See if our persisted permissions cookie doesn't exist and if we've had missing permissions before.
             // Essentially this checks to see if we've tried to persist permissions before and were unsuccessful due to an
             // inability to create cookies.
-            if (!PermissionHelper.RequestedPermissionsCookieExists(filterContext.HttpContext.Request) &&
-                filterContext.HttpContext.Request.QueryString.Get(MissingPermissionsQueryName) != null)
+            if (
+                !PermissionHelper.RequestedPermissionsCookieExists(
+                    filterContext.HttpContext.Request
+                )
+                && filterContext.HttpContext.Request.QueryString.Get(MissingPermissionsQueryName)
+                    != null
+            )
             {
                 OnCannotCreateCookies(permissionContext);
             }

@@ -21,7 +21,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddViews();
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -36,7 +39,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider();
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -53,7 +59,8 @@ namespace Microsoft.Extensions.DependencyInjection
             // Assert
             Assert.DoesNotContain(
                 services,
-                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+            );
         }
 
         [Fact]
@@ -67,7 +74,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider(options => { });
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -84,7 +94,8 @@ namespace Microsoft.Extensions.DependencyInjection
             // Assert
             Assert.Single(
                 services,
-                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>));
+                item => item.ServiceType == typeof(IConfigureOptions<CookieTempDataProviderOptions>)
+            );
         }
 
         [Fact]
@@ -99,7 +110,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddViews();
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -115,7 +129,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddViews();
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -131,7 +148,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider();
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -147,7 +167,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider(options => { });
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -163,7 +186,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider();
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
 
@@ -179,7 +205,10 @@ namespace Microsoft.Extensions.DependencyInjection
             builder.AddCookieTempDataProvider(options => { });
 
             // Assert
-            var descriptor = Assert.Single(services, item => item.ServiceType == typeof(ITempDataProvider));
+            var descriptor = Assert.Single(
+                services,
+                item => item.ServiceType == typeof(ITempDataProvider)
+            );
             Assert.Equal(typeof(CookieTempDataProvider), descriptor.ImplementationType);
         }
     }

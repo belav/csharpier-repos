@@ -51,8 +51,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Compilation
 
                 // Generate: page.Path = relativePath;
                 // Use the normalized path specified from the result.
-                var propertyBindExpression = Expression.Bind(pathProperty, Expression.Constant(viewDescriptor.RelativePath));
-                var objectInitializeExpression = Expression.MemberInit(newExpression, propertyBindExpression);
+                var propertyBindExpression = Expression.Bind(
+                    pathProperty,
+                    Expression.Constant(viewDescriptor.RelativePath)
+                );
+                var objectInitializeExpression = Expression.MemberInit(
+                    newExpression,
+                    propertyBindExpression
+                );
                 var pageFactory = Expression
                     .Lambda<Func<IRazorPage>>(objectInitializeExpression)
                     .Compile();

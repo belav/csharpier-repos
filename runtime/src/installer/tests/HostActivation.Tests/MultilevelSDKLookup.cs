@@ -12,12 +12,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 {
     public class MultilevelSDKLookup : IDisposable
     {
-        private static readonly IDictionary<string, string> s_DefaultEnvironment = new Dictionary<string, string>()
+        private static readonly IDictionary<string, string> s_DefaultEnvironment = new Dictionary<
+            string,
+            string
+        >()
         {
-            {"COREHOST_TRACE", "1" },
+            { "COREHOST_TRACE", "1" },
             // The SDK being used may be crossgen'd for a different architecture than we are building for.
             // Turn off ready to run, so an x64 crossgen'd SDK can be loaded in an x86 process.
-            {"COMPlus_ReadyToRun", "0" },
+            { "COMPlus_ReadyToRun", "0" },
         };
 
         private readonly RepoDirectoriesProvider RepoDirectories;
@@ -43,7 +46,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             // The dotnetMultilevelSDKLookup dir will contain some folders and files that will be
             // necessary to perform the tests
-            string baseMultilevelDir = Path.Combine(TestArtifact.TestArtifactsPath, "dotnetMultilevelSDKLookup");
+            string baseMultilevelDir = Path.Combine(
+                TestArtifact.TestArtifactsPath,
+                "dotnetMultilevelSDKLookup"
+            );
             _multilevelDir = SharedFramework.CalculateUniqueTestDirectory(baseMultilevelDir);
 
             // The tested locations will be the cwd, user folder, exe dir, and registered directory. cwd and user are no longer supported.
@@ -53,7 +59,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             _exeDir = Path.Combine(_multilevelDir, "exe");
             _regDir = Path.Combine(_multilevelDir, "reg");
 
-            DotNet = new DotNetBuilder(_multilevelDir, Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"), "exe")
+            DotNet = new DotNetBuilder(
+                _multilevelDir,
+                Path.Combine(TestArtifact.TestArtifactsPath, "sharedFrameworkPublish"),
+                "exe"
+            )
                 .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("9999.0.0")
                 .Build();
 
@@ -61,7 +71,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             // SdkBaseDirs contain all available version folders
             _cwdSdkBaseDir = Path.Combine(_currentWorkingDir, "sdk");
-            _userSdkBaseDir = Path.Combine(_userDir, ".dotnet", RepoDirectories.BuildArchitecture, "sdk");
+            _userSdkBaseDir = Path.Combine(
+                _userDir,
+                ".dotnet",
+                RepoDirectories.BuildArchitecture,
+                "sdk"
+            );
             _exeSdkBaseDir = Path.Combine(_exeDir, "sdk");
             _regSdkBaseDir = Path.Combine(_regDir, "sdk");
 
@@ -75,7 +90,9 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             _exeSelectedMessage = $"Using .NET SDK dll=[{_exeSdkBaseDir}";
             _regSelectedMessage = $"Using .NET SDK dll=[{_regSdkBaseDir}";
 
-            _testOnlyProductBehaviorMarker = TestOnlyProductBehavior.Enable(DotNet.GreatestVersionHostFxrFilePath);
+            _testOnlyProductBehaviorMarker = TestOnlyProductBehavior.Enable(
+                DotNet.GreatestVersionHostFxrFilePath
+            );
         }
 
         public void Dispose()
@@ -106,17 +123,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: empty
             // Expected: no compatible version and a specific error messages
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "A compatible installed .NET SDK for global.json version"
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.4.1", "9999.3.4-dummy");
@@ -127,17 +151,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.4.1, 9999.3.4-dummy
             // Reg: empty
             // Expected: no compatible version and a specific error message
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "A compatible installed .NET SDK for global.json version"
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.3");
@@ -148,17 +179,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.4.1, 9999.3.4-dummy
             // Reg: 9999.3.3
             // Expected: no compatible version and a specific error message
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "A compatible installed .NET SDK for global.json version"
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.4");
@@ -169,17 +207,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.4
             // Reg: 9999.3.3
             // Expected: 9999.3.4 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.4", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.5-dummy");
@@ -190,17 +235,28 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.4
             // Reg: 9999.3.3, 9999.3.5-dummy
             // Expected: 9999.3.5-dummy from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.3.5-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _regSelectedMessage,
+                        "9999.3.5-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.600");
@@ -211,17 +267,28 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.4, 9999.3.600
             // Reg: 9999.3.3, 9999.3.5-dummy
             // Expected: 9999.3.5-dummy from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.3.5-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _regSelectedMessage,
+                        "9999.3.5-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.4-global-dummy");
@@ -232,28 +299,44 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.4, 9999.3.600, 9999.3.4-global-dummy
             // Reg: 9999.3.3, 9999.3.5-dummy
             // Expected: 9999.3.4-global-dummy from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.4-global-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.3.4-global-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Verify we have the expected SDK versions
-            DotNet.Exec("--list-sdks")
+            DotNet
+                .Exec("--list-sdks")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("9999.3.4-dummy")
                 .And.HaveStdOutContaining("9999.3.4-global-dummy")
                 .And.HaveStdOutContaining("9999.4.1")
@@ -281,17 +364,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: empty
             // Expected: no compatible version and a specific error messages
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "A compatible installed .NET SDK for global.json version"
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.57", "9999.3.4-dummy");
@@ -302,17 +392,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: 9999.3.57, 9999.3.4-dummy
             // Expected: no compatible version and a specific error message
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "A compatible installed .NET SDK for global.json version"
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.300", "9999.7.304-global-dummy");
@@ -323,17 +420,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.3.300, 9999.7.304-global-dummy
             // Reg: 9999.3.57, 9999.3.4-dummy
             // Expected: no compatible version and a specific error message
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(fExpectedToFail: true)
-                .Should().Fail()
-                .And.HaveStdErrContaining("A compatible installed .NET SDK for global.json version");
+                .Should()
+                .Fail()
+                .And.HaveStdErrContaining(
+                    "A compatible installed .NET SDK for global.json version"
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.304");
@@ -344,17 +448,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.3.300, 9999.7.304-global-dummy
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304
             // Expected: 9999.3.304 from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.3.304", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_regSelectedMessage, "9999.3.304", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.399", "9999.3.399-dummy", "9999.3.400");
@@ -365,17 +476,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.3.300, 9999.7.304-global-dummy, 9999.3.399, 9999.3.399-dummy, 9999.3.400
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304
             // Expected: 9999.3.399 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.2400", "9999.3.3004");
@@ -387,17 +505,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.3.300, 9999.7.304-global-dummy, 9999.3.399, 9999.3.399-dummy, 9999.3.400, 9999.3.2400, 9999.3.3004
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304, 9999.3.2400, 9999.3.3004
             // Expected: 9999.3.399 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.3.399", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.304-global-dummy");
@@ -408,28 +533,44 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.3.300, 9999.7.304-global-dummy, 9999.3.399, 9999.3.399-dummy, 9999.3.400, 9999.3.2400, 9999.3.3004
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304, 9999.3.2400, 9999.3.3004, 9999.3.304-global-dummy
             // Expected: 9999.3.304-global-dummy from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.3.304-global-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _regSelectedMessage,
+                        "9999.3.304-global-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Verify we have the expected SDK versions
-            DotNet.Exec("--list-sdks")
+            DotNet
+                .Exec("--list-sdks")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("9999.3.57")
                 .And.HaveStdOutContaining("9999.3.4-dummy")
                 .And.HaveStdOutContaining("9999.3.300")
@@ -463,17 +604,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: 9999.0.4
             // Expected: 9999.0.4 from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_regSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.4");
@@ -484,17 +632,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.0.4
             // Reg: 9999.0.4
             // Expected: 9999.0.4 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator)
+                );
         }
 
         [Fact]
@@ -519,9 +674,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             WriteEmptyGlobalJson();
 
-            using (var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(DotNet.GreatestVersionHostFxrFilePath))
+            using (
+                var registeredInstallLocationOverride = new RegisteredInstallLocationOverride(
+                    DotNet.GreatestVersionHostFxrFilePath
+                )
+            )
             {
-                registeredInstallLocationOverride.SetInstallLocation(_regDir, RepoDirectories.BuildArchitecture);
+                registeredInstallLocationOverride.SetInstallLocation(
+                    _regDir,
+                    RepoDirectories.BuildArchitecture
+                );
 
                 // Add SDK versions
                 AddAvailableSdkVersions(_regSdkBaseDir, "9999.0.4");
@@ -532,7 +694,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 // Exe: empty
                 // Reg: 9999.0.4
                 // Expected: 9999.0.4 from reg dir
-                DotNet.Exec("help")
+                DotNet
+                    .Exec("help")
                     .WorkingDirectory(_currentWorkingDir)
                     .WithUserProfile(_userDir)
                     .Environment(s_DefaultEnvironment)
@@ -541,8 +704,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     .CaptureStdOut()
                     .CaptureStdErr()
                     .Execute()
-                    .Should().Pass()
-                    .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.4", _dotnetSdkDllMessageTerminator));
+                    .Should()
+                    .Pass()
+                    .And.HaveStdErrContaining(
+                        Path.Combine(
+                            _regSelectedMessage,
+                            "9999.0.4",
+                            _dotnetSdkDllMessageTerminator
+                        )
+                    );
             }
         }
 
@@ -566,17 +736,28 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: 9999.0.0, 9999.0.3-dummy
             // Expected: 9999.0.3-dummy from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.3-dummy", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _regSelectedMessage,
+                        "9999.0.3-dummy",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.3");
@@ -587,17 +768,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.0.3
             // Reg: 9999.0.0, 9999.0.3-dummy
             // Expected: 9999.0.3 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_exeSelectedMessage, "9999.0.3", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_userSdkBaseDir, "9999.0.200");
@@ -610,17 +798,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.0.3
             // Reg: 9999.0.0, 9999.0.3-dummy, 9999.0.100
             // Expected: 9999.0.100 from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_regSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.80");
@@ -631,17 +826,24 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.0.3, 9999.0.80
             // Reg: 9999.0.0, 9999.0.3-dummy, 9999.0.100
             // Expected: 9999.0.100 from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(_regSelectedMessage, "9999.0.100", _dotnetSdkDllMessageTerminator)
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.0.5500000");
@@ -652,17 +854,28 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.0.3, 9999.0.80, 9999.0.5500000
             // Reg: 9999.0.0, 9999.0.3-dummy, 9999.0.100
             // Expected: 9999.0.5500000 from exe dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_exeSelectedMessage, "9999.0.5500000", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _exeSelectedMessage,
+                        "9999.0.5500000",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.0.52000000");
@@ -673,28 +886,44 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.0.3, 9999.0.80, 9999.0.5500000
             // Reg: 9999.0.0, 9999.0.3-dummy, 9999.0.100, 9999.0.52000000
             // Expected: 9999.0.52000000 from reg dir
-            DotNet.Exec("help")
+            DotNet
+                .Exec("help")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
-                .Should().Pass()
-                .And.HaveStdErrContaining(Path.Combine(_regSelectedMessage, "9999.0.52000000", _dotnetSdkDllMessageTerminator));
+                .Should()
+                .Pass()
+                .And.HaveStdErrContaining(
+                    Path.Combine(
+                        _regSelectedMessage,
+                        "9999.0.52000000",
+                        _dotnetSdkDllMessageTerminator
+                    )
+                );
 
             // Verify we have the expected SDK versions
-            DotNet.Exec("--list-sdks")
+            DotNet
+                .Exec("--list-sdks")
                 .WorkingDirectory(_currentWorkingDir)
                 .WithUserProfile(_userDir)
                 .Environment(s_DefaultEnvironment)
                 .EnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1")
-                .EnvironmentVariable(Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath, _regDir)
+                .EnvironmentVariable(
+                    Constants.TestOnlyEnvironmentVariables.GloballyRegisteredPath,
+                    _regDir
+                )
                 .CaptureStdOut()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveStdOutContaining("9999.0.0")
                 .And.HaveStdOutContaining("9999.0.3-dummy")
                 .And.HaveStdOutContaining("9999.0.3")
@@ -709,8 +938,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         // The dotnet.runtimeconfig.json created uses a dummy framework version (9999.0.0)
         private void AddAvailableSdkVersions(string sdkBaseDir, params string[] availableVersions)
         {
-            string dummyRuntimeConfig = Path.Combine(RepoDirectories.TestAssetsFolder, "TestUtils",
-                "SDKLookup", "dotnet.runtimeconfig.json");
+            string dummyRuntimeConfig = Path.Combine(
+                RepoDirectories.TestAssetsFolder,
+                "TestUtils",
+                "SDKLookup",
+                "dotnet.runtimeconfig.json"
+            );
 
             foreach (string version in availableVersions)
             {
@@ -730,8 +963,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         private void SetGlobalJsonVersion(string globalJsonFileName)
         {
             string destFile = Path.Combine(_currentWorkingDir, "global.json");
-            string srcFile = Path.Combine(RepoDirectories.TestAssetsFolder, "TestUtils",
-                "SDKLookup", globalJsonFileName);
+            string srcFile = Path.Combine(
+                RepoDirectories.TestAssetsFolder,
+                "TestUtils",
+                "SDKLookup",
+                globalJsonFileName
+            );
 
             File.Copy(srcFile, destFile, true);
         }

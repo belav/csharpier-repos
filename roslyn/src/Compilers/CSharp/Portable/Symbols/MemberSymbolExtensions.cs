@@ -132,24 +132,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 case SymbolKind.Property:
                     var propertySymbol = (PropertySymbol)symbol;
-                    return isImplementableAndNotPublic(propertySymbol.GetMethod) || isImplementableAndNotPublic(propertySymbol.SetMethod);
+                    return isImplementableAndNotPublic(propertySymbol.GetMethod)
+                        || isImplementableAndNotPublic(propertySymbol.SetMethod);
 
                 case SymbolKind.Event:
                     var eventSymbol = (EventSymbol)symbol;
-                    return isImplementableAndNotPublic(eventSymbol.AddMethod) || isImplementableAndNotPublic(eventSymbol.RemoveMethod);
+                    return isImplementableAndNotPublic(eventSymbol.AddMethod)
+                        || isImplementableAndNotPublic(eventSymbol.RemoveMethod);
             }
 
             return false;
 
             bool isImplementableAndNotPublic(MethodSymbol accessor)
             {
-                return accessor.IsImplementable() && accessor.DeclaredAccessibility != Accessibility.Public;
+                return accessor.IsImplementable()
+                    && accessor.DeclaredAccessibility != Accessibility.Public;
             }
         }
 
         public static bool IsImplementable(this MethodSymbol methodOpt)
         {
-            return (object)methodOpt != null && !methodOpt.IsSealed && (methodOpt.IsAbstract || methodOpt.IsVirtual);
+            return (object)methodOpt != null
+                && !methodOpt.IsSealed
+                && (methodOpt.IsAbstract || methodOpt.IsVirtual);
         }
 
         public static bool IsAccessor(this MethodSymbol methodSymbol)
@@ -170,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public static bool IsOperator(this MethodSymbol methodSymbol)
         {
-            return methodSymbol.MethodKind == MethodKind.UserDefinedOperator || methodSymbol.MethodKind == MethodKind.Conversion;
+            return methodSymbol.MethodKind == MethodKind.UserDefinedOperator
+                || methodSymbol.MethodKind == MethodKind.Conversion;
         }
 
         public static bool IsOperator(this Symbol symbol)
@@ -190,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public static bool IsUserDefinedConversion(this Symbol symbol)
         {
-            return symbol.Kind == SymbolKind.Method && ((MethodSymbol)symbol).MethodKind == MethodKind.Conversion;
+            return symbol.Kind == SymbolKind.Method
+                && ((MethodSymbol)symbol).MethodKind == MethodKind.Conversion;
         }
 
         /// <summary>
@@ -302,7 +309,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal static NamespaceOrTypeSymbol OfMinimalArity(this IEnumerable<NamespaceOrTypeSymbol> symbols)
+        internal static NamespaceOrTypeSymbol OfMinimalArity(
+            this IEnumerable<NamespaceOrTypeSymbol> symbols
+        )
         {
             NamespaceOrTypeSymbol minAritySymbol = null;
             int minArity = Int32.MaxValue;
@@ -319,7 +328,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return minAritySymbol;
         }
 
-        internal static ImmutableArray<TypeParameterSymbol> GetMemberTypeParameters(this Symbol symbol)
+        internal static ImmutableArray<TypeParameterSymbol> GetMemberTypeParameters(
+            this Symbol symbol
+        )
         {
             switch (symbol.Kind)
             {
@@ -337,15 +348,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal static ImmutableArray<TypeSymbol> GetMemberTypeArgumentsNoUseSiteDiagnostics(this Symbol symbol)
+        internal static ImmutableArray<TypeSymbol> GetMemberTypeArgumentsNoUseSiteDiagnostics(
+            this Symbol symbol
+        )
         {
             switch (symbol.Kind)
             {
                 case SymbolKind.Method:
-                    return ((MethodSymbol)symbol).TypeArgumentsWithAnnotations.SelectAsArray(TypeMap.AsTypeSymbol);
+                    return ((MethodSymbol)symbol).TypeArgumentsWithAnnotations.SelectAsArray(
+                        TypeMap.AsTypeSymbol
+                    );
                 case SymbolKind.NamedType:
                 case SymbolKind.ErrorType:
-                    return ((NamedTypeSymbol)symbol).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.SelectAsArray(TypeMap.AsTypeSymbol);
+                    return (
+                        (NamedTypeSymbol)symbol
+                    ).TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.SelectAsArray(
+                        TypeMap.AsTypeSymbol
+                    );
                 case SymbolKind.Field:
                 case SymbolKind.Property:
                 case SymbolKind.Event:
@@ -377,13 +396,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceMemberMethodSymbol sourceMethod = method as SourceMemberMethodSymbol;
                 if ((object)sourceMethod != null)
                 {
-                    ConstructorDeclarationSyntax constructorSyntax = sourceMethod.SyntaxNode as ConstructorDeclarationSyntax;
+                    ConstructorDeclarationSyntax constructorSyntax =
+                        sourceMethod.SyntaxNode as ConstructorDeclarationSyntax;
                     if (constructorSyntax != null)
                     {
-                        ConstructorInitializerSyntax initializerSyntax = constructorSyntax.Initializer;
+                        ConstructorInitializerSyntax initializerSyntax =
+                            constructorSyntax.Initializer;
                         if (initializerSyntax != null)
                         {
-                            return initializerSyntax.Kind() == SyntaxKind.ThisConstructorInitializer;
+                            return initializerSyntax.Kind()
+                                == SyntaxKind.ThisConstructorInitializer;
                         }
                     }
                 }
@@ -415,9 +437,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         internal static bool IsDefaultValueTypeConstructor(this MethodSymbol method)
         {
-            return method.IsImplicitlyDeclared &&
-                   method.ContainingType.IsValueType &&
-                   method.IsParameterlessConstructor();
+            return method.IsImplicitlyDeclared
+                && method.ContainingType.IsValueType
+                && method.IsParameterlessConstructor();
         }
 
         /// <summary>
@@ -532,7 +554,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 case SymbolKind.Method:
                     var method = (MethodSymbol)member;
-                    return method.ReturnType.ContainsTupleNames() || method.Parameters.Any(p => p.Type.ContainsTupleNames());
+                    return method.ReturnType.ContainsTupleNames()
+                        || method.Parameters.Any(p => p.Type.ContainsTupleNames());
                 case SymbolKind.Property:
                     return ((PropertySymbol)member).Type.ContainsTupleNames();
                 case SymbolKind.Event:
@@ -543,16 +566,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal static ImmutableArray<Symbol> GetExplicitInterfaceImplementations(this Symbol member)
+        internal static ImmutableArray<Symbol> GetExplicitInterfaceImplementations(
+            this Symbol member
+        )
         {
             switch (member.Kind)
             {
                 case SymbolKind.Method:
-                    return ((MethodSymbol)member).ExplicitInterfaceImplementations.Cast<MethodSymbol, Symbol>();
+                    return ((MethodSymbol)member).ExplicitInterfaceImplementations.Cast<
+                        MethodSymbol,
+                        Symbol
+                    >();
                 case SymbolKind.Property:
-                    return ((PropertySymbol)member).ExplicitInterfaceImplementations.Cast<PropertySymbol, Symbol>();
+                    return ((PropertySymbol)member).ExplicitInterfaceImplementations.Cast<
+                        PropertySymbol,
+                        Symbol
+                    >();
                 case SymbolKind.Event:
-                    return ((EventSymbol)member).ExplicitInterfaceImplementations.Cast<EventSymbol, Symbol>();
+                    return ((EventSymbol)member).ExplicitInterfaceImplementations.Cast<
+                        EventSymbol,
+                        Symbol
+                    >();
                 default:
                     return ImmutableArray<Symbol>.Empty;
             }
@@ -573,13 +607,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal static Symbol GetLeastOverriddenMember(this Symbol member, NamedTypeSymbol accessingTypeOpt)
+        internal static Symbol GetLeastOverriddenMember(
+            this Symbol member,
+            NamedTypeSymbol accessingTypeOpt
+        )
         {
             switch (member.Kind)
             {
                 case SymbolKind.Method:
                     var method = (MethodSymbol)member;
-                    return method.GetConstructedLeastOverriddenMethod(accessingTypeOpt, requireSameReturnType: false);
+                    return method.GetConstructedLeastOverriddenMethod(
+                        accessingTypeOpt,
+                        requireSameReturnType: false
+                    );
 
                 case SymbolKind.Property:
                     var property = (PropertySymbol)member;
@@ -617,9 +657,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 member = ((MethodSymbol)member).AssociatedSymbol ?? member;
             }
 
-            return member.IsIndexer() ? member.MetadataName :
-                member.IsExplicitInterfaceImplementation() ? ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member.Name) :
-                member.Name;
+            return member.IsIndexer()
+              ? member.MetadataName
+              : member.IsExplicitInterfaceImplementation()
+                  ? ExplicitInterfaceHelpers.GetMemberNameWithoutInterfaceName(member.Name)
+                  : member.Name;
         }
     }
 }

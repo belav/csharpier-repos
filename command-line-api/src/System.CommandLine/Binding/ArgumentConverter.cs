@@ -4,7 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.CommandLine.Parsing;
-using System.ComponentModel;    
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -15,7 +15,10 @@ namespace System.CommandLine.Binding
 {
     internal static class ArgumentConverter
     {
-        private static readonly Dictionary<Type, Func<string, object>> _converters = new Dictionary<Type, Func<string, object>>
+        private static readonly Dictionary<Type, Func<string, object>> _converters = new Dictionary<
+            Type,
+            Func<string, object>
+        >
         {
             [typeof(FileSystemInfo)] = value =>
             {
@@ -24,8 +27,13 @@ namespace System.CommandLine.Binding
                     return new DirectoryInfo(value);
                 }
 
-                if (value.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal) ||
-                    value.EndsWith(Path.AltDirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+                if (
+                    value.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal)
+                    || value.EndsWith(
+                        Path.AltDirectorySeparatorChar.ToString(),
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     return new DirectoryInfo(value);
                 }
@@ -37,7 +45,8 @@ namespace System.CommandLine.Binding
         internal static ArgumentConversionResult ConvertObject(
             IArgument argument,
             Type type,
-            object? value)
+            object? value
+        )
         {
             switch (value)
             {
@@ -61,7 +70,8 @@ namespace System.CommandLine.Binding
         private static ArgumentConversionResult ConvertString(
             IArgument argument,
             Type? type,
-            string value)
+            string value
+        )
         {
             type ??= typeof(string);
 
@@ -71,9 +81,7 @@ namespace System.CommandLine.Binding
                 {
                     try
                     {
-                        return Success(
-                            argument,
-                            typeConverter.ConvertFromInvariantString(value));
+                        return Success(argument, typeConverter.ConvertFromInvariantString(value));
                     }
                     catch (Exception)
                     {
@@ -84,18 +92,17 @@ namespace System.CommandLine.Binding
 
             if (_converters.TryGetValue(type, out var convert))
             {
-                return Success(
-                    argument,
-                    convert(value));
+                return Success(argument, convert(value));
             }
 
-            if (type.TryFindConstructorWithSingleParameterOfType(
-                typeof(string), out ConstructorInfo? ctor))
+            if (
+                type.TryFindConstructorWithSingleParameterOfType(
+                    typeof(string),
+                    out ConstructorInfo? ctor
+                )
+            )
             {
-                var instance = ctor.Invoke(new object[]
-                {
-                    value
-                });
+                var instance = ctor.Invoke(new object[] { value });
 
                 return Success(argument, instance);
             }
@@ -107,15 +114,15 @@ namespace System.CommandLine.Binding
             IArgument argument,
             Type type,
             IReadOnlyList<string> tokens,
-            ArgumentResult? argumentResult = null)
+            ArgumentResult? argumentResult = null
+        )
         {
-            var itemType = type == typeof(string)
-                               ? typeof(string)
-                               : Binder.GetItemTypeIfEnumerable(type);
+            var itemType =
+                type == typeof(string) ? typeof(string) : Binder.GetItemTypeIfEnumerable(type);
 
             var (values, isArray) = type.IsArray
-                             ? (CreateArray(itemType!, tokens.Count), true)
-                             : (CreateList(itemType!, tokens.Count), false);
+                ? (CreateArray(itemType!, tokens.Count), true)
+                : (CreateList(itemType!, tokens.Count), false);
 
             for (var i = 0; i < tokens.Count; i++)
             {
@@ -128,7 +135,7 @@ namespace System.CommandLine.Binding
                     case FailedArgumentTypeConversionResult _:
                     case FailedArgumentConversionResult _:
                         if (argumentResult is { })
-                        { 
+                        {
                             argumentResult.OnlyTake(i);
 
                             // exit the for loop
@@ -147,7 +154,6 @@ namespace System.CommandLine.Binding
                         {
                             values.Add(success.Value);
                         }
-
                         break;
                 }
             }
@@ -162,9 +168,10 @@ namespace System.CommandLine.Binding
                 }
                 else
                 {
-                    return (IList) Activator.CreateInstance(
+                    return (IList)Activator.CreateInstance(
                         typeof(List<>).MakeGenericType(itemType),
-                        capacity);
+                        capacity
+                    );
                 }
             }
 
@@ -188,7 +195,8 @@ namespace System.CommandLine.Binding
         private static FailedArgumentConversionResult Failure(
             IArgument argument,
             Type expectedType,
-            string value)
+            string value
+        )
         {
             return new FailedArgumentTypeConversionResult(argument, expectedType, value);
         }
@@ -196,7 +204,8 @@ namespace System.CommandLine.Binding
         internal static ArgumentConversionResult ConvertIfNeeded(
             this ArgumentConversionResult conversionResult,
             SymbolResult symbolResult,
-            Type toType)
+            Type toType
+        )
         {
             if (conversionResult is null)
             {
@@ -205,32 +214,33 @@ namespace System.CommandLine.Binding
 
             switch (conversionResult)
             {
-                case SuccessfulArgumentConversionResult successful when !toType.IsInstanceOfType(successful.Value):
-                    return ConvertObject(
-                        conversionResult.Argument,
-                        toType,
-                        successful.Value);
+                case SuccessfulArgumentConversionResult successful
+                      when !toType.IsInstanceOfType(successful.Value):
+                    return ConvertObject(conversionResult.Argument, toType, successful.Value);
 
                 case SuccessfulArgumentConversionResult successful
-                    when toType == typeof(object) && conversionResult.Argument.Arity.MaximumNumberOfValues > 1 &&
-                         successful.Value is string:
+                      when toType == typeof(object)
+                          && conversionResult.Argument.Arity.MaximumNumberOfValues > 1
+                          && successful.Value is string:
                     return ConvertObject(
                         conversionResult.Argument,
                         typeof(IEnumerable<string>),
-                        successful.Value);
+                        successful.Value
+                    );
 
                 case NoArgumentConversionResult _ when toType == typeof(bool):
                     return Success(conversionResult.Argument, true);
 
-                case NoArgumentConversionResult _ when conversionResult.Argument.Arity.MinimumNumberOfValues > 0:
+                case NoArgumentConversionResult _
+                      when conversionResult.Argument.Arity.MinimumNumberOfValues > 0:
                     return new MissingArgumentConversionResult(
                         conversionResult.Argument,
-                        Resources.Instance.RequiredArgumentMissing(symbolResult));
+                        Resources.Instance.RequiredArgumentMissing(symbolResult)
+                    );
 
-                case NoArgumentConversionResult _ when conversionResult.Argument.Arity.MaximumNumberOfValues > 1:
-                    return Success(
-                        conversionResult.Argument,
-                        Array.Empty<string>());
+                case NoArgumentConversionResult _
+                      when conversionResult.Argument.Arity.MaximumNumberOfValues > 1:
+                    return Success(conversionResult.Argument, Array.Empty<string>());
 
                 default:
                     return conversionResult;
@@ -243,7 +253,8 @@ namespace System.CommandLine.Binding
             return result switch
             {
                 SuccessfulArgumentConversionResult successful => (T)successful.Value!,
-                FailedArgumentConversionResult failed => throw new InvalidOperationException(failed.ErrorMessage),
+                FailedArgumentConversionResult failed
+                  => throw new InvalidOperationException(failed.ErrorMessage),
                 NoArgumentConversionResult _ => default!,
                 _ => default!,
             };
@@ -274,7 +285,8 @@ namespace System.CommandLine.Binding
                     value = ConvertObject(
                         argument,
                         argument.ValueType,
-                        argumentResult.Tokens[0].Value);
+                        argumentResult.Tokens[0].Value
+                    );
                     break;
 
                 default:
@@ -282,7 +294,8 @@ namespace System.CommandLine.Binding
                         argument,
                         argument.ValueType,
                         argumentResult.Tokens.Select(t => t.Value).ToArray(),
-                        argumentResult);
+                        argumentResult
+                    );
                     break;
             }
 

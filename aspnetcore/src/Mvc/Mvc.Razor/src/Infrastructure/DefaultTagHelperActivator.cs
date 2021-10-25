@@ -14,8 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure
     internal class DefaultTagHelperActivator : ITagHelperActivator
     {
         /// <inheritdoc />
-        public TTagHelper Create<TTagHelper>(ViewContext context)
-            where TTagHelper : ITagHelper
+        public TTagHelper Create<TTagHelper>(ViewContext context) where TTagHelper : ITagHelper
         {
             if (context == null)
             {
@@ -27,9 +26,13 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure
 
         private static class Cache<TTagHelper>
         {
-            private static readonly ObjectFactory _objectFactory = ActivatorUtilities.CreateFactory(typeof(TTagHelper), Type.EmptyTypes);
+            private static readonly ObjectFactory _objectFactory = ActivatorUtilities.CreateFactory(
+                typeof(TTagHelper),
+                Type.EmptyTypes
+            );
 
-            public static TTagHelper Create(IServiceProvider serviceProvider) => (TTagHelper)_objectFactory(serviceProvider, arguments: null);
+            public static TTagHelper Create(IServiceProvider serviceProvider) =>
+                (TTagHelper)_objectFactory(serviceProvider, arguments: null);
         }
     }
 }

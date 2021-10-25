@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         // Because of this usage pattern, we can cache information about these 'old' declarations
         // and keep that around as long as they do not change.  For example, we keep a single 'merged
         // declaration' for all those root declarations as well as sets of interesting information
-        // (like the type names in those decls). 
+        // (like the type names in those decls).
         private class Cache
         {
             // The merged root declaration for all the 'old' declarations.
@@ -33,16 +33,25 @@ namespace Microsoft.CodeAnalysis.CSharp
             public Cache(DeclarationTable table)
             {
                 this.MergedRoot = new Lazy<MergedNamespaceDeclaration>(
-                    () => MergedNamespaceDeclaration.Create(table._allOlderRootDeclarations.InInsertionOrder.AsImmutable<SingleNamespaceDeclaration>()));
+                    () =>
+                        MergedNamespaceDeclaration.Create(
+                            table._allOlderRootDeclarations.InInsertionOrder.AsImmutable<SingleNamespaceDeclaration>()
+                        )
+                );
 
-                this.TypeNames = new Lazy<ISet<string>>(
-                    () => GetTypeNames(this.MergedRoot.Value));
+                this.TypeNames = new Lazy<ISet<string>>(() => GetTypeNames(this.MergedRoot.Value));
 
                 this.NamespaceNames = new Lazy<ISet<string>>(
-                    () => GetNamespaceNames(this.MergedRoot.Value));
+                    () => GetNamespaceNames(this.MergedRoot.Value)
+                );
 
                 this.ReferenceDirectives = new Lazy<ImmutableArray<ReferenceDirective>>(
-                    () => MergedRoot.Value.Declarations.OfType<RootSingleNamespaceDeclaration>().SelectMany(r => r.ReferenceDirectives).AsImmutable());
+                    () =>
+                        MergedRoot.Value.Declarations
+                            .OfType<RootSingleNamespaceDeclaration>()
+                            .SelectMany(r => r.ReferenceDirectives)
+                            .AsImmutable()
+                );
             }
         }
     }

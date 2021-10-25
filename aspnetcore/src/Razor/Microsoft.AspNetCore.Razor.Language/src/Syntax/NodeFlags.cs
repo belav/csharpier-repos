@@ -15,7 +15,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax
         ContainsSkippedText = 1 << 3,
         ContainsAnnotations = 1 << 4,
         IsMissing = 1 << 5,
-
-        InheritMask = ContainsDiagnostics | ContainsStructuredTrivia | ContainsDirectives | ContainsSkippedText | ContainsAnnotations | IsMissing,
+        InheritMask =
+            ContainsDiagnostics
+            | ContainsStructuredTrivia
+            | ContainsDirectives
+            | ContainsSkippedText
+            | ContainsAnnotations
+            | IsMissing,
     }
 }

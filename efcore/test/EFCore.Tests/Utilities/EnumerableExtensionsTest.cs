@@ -47,12 +47,18 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             var value2A = new byte[] { 2, 1, 3, 4 };
             var value2B = new byte[] { 2, 1, 3, 4 };
 
-            Assert.True(new[] { value1A, value2A }.StructuralSequenceEqual(new[] { value1A, value2A }));
-            Assert.True(new[] { value1A, value2A }.StructuralSequenceEqual(new[] { value1B, value2B }));
+            Assert.True(
+                new[] { value1A, value2A }.StructuralSequenceEqual(new[] { value1A, value2A })
+            );
+            Assert.True(
+                new[] { value1A, value2A }.StructuralSequenceEqual(new[] { value1B, value2B })
+            );
 
             Assert.False(new[] { value1A, value2A }.StructuralSequenceEqual(new[] { value1B }));
             Assert.False(new[] { value1A }.StructuralSequenceEqual(new[] { value1B, value2B }));
-            Assert.False(new[] { value1A, value2A }.StructuralSequenceEqual(new[] { value2A, value2B }));
+            Assert.False(
+                new[] { value1A, value2A }.StructuralSequenceEqual(new[] { value2A, value2B })
+            );
 
             var singleReference = new[] { value1A, value2A };
             Assert.True(singleReference.StructuralSequenceEqual(singleReference));

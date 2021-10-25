@@ -28,7 +28,8 @@ namespace System.CommandLine.Parsing
             List<Token> unparsedTokens,
             List<Token> unmatchedTokens,
             IReadOnlyCollection<ParseError> parseErrors,
-            string? rawInput)
+            string? rawInput
+        )
         {
             _parser = parser;
             _tokenizeResult = tokenizeResult;
@@ -51,7 +52,8 @@ namespace System.CommandLine.Parsing
         {
             _rootCommandResult = new RootCommandResult(
                 rootCommandNode.Command,
-                rootCommandNode.Token);
+                rootCommandNode.Token
+            );
             _rootCommandResult.ValidationMessages = _parser.Configuration.ValidationMessages;
 
             _innermostCommandResult = _rootCommandResult;
@@ -62,30 +64,24 @@ namespace System.CommandLine.Parsing
             var commandResult = new CommandResult(
                 commandNode.Command,
                 commandNode.Token,
-                _innermostCommandResult);
+                _innermostCommandResult
+            );
 
-            _innermostCommandResult!
-                .Children
-                .Add(commandResult);
+            _innermostCommandResult!.Children.Add(commandResult);
 
             _innermostCommandResult = commandResult;
         }
 
-        protected override void VisitCommandArgumentNode(
-            CommandArgumentNode argumentNode)
+        protected override void VisitCommandArgumentNode(CommandArgumentNode argumentNode)
         {
             var commandResult = _innermostCommandResult;
 
-            var argumentResult =
-                commandResult!.Children.ResultFor(argumentNode.Argument);
+            var argumentResult = commandResult!.Children.ResultFor(argumentNode.Argument);
 
             if (argumentResult is null)
             {
-                argumentResult =
-                    new ArgumentResult(
-                        argumentNode.Argument,
-                        commandResult);
-                
+                argumentResult = new ArgumentResult(argumentNode.Argument, commandResult);
+
                 commandResult.Children.Add(argumentResult);
             }
 
@@ -100,16 +96,14 @@ namespace System.CommandLine.Parsing
                 var optionResult = new OptionResult(
                     optionNode.Option,
                     optionNode.Token,
-                    _innermostCommandResult);
+                    _innermostCommandResult
+                );
 
-                _innermostCommandResult
-                    .Children
-                    .Add(optionResult);
+                _innermostCommandResult.Children.Add(optionResult);
             }
         }
 
-        protected override void VisitOptionArgumentNode(
-            OptionArgumentNode argumentNode)
+        protected override void VisitOptionArgumentNode(OptionArgumentNode argumentNode)
         {
             var option = argumentNode.ParentOptionNode.Option;
 
@@ -117,15 +111,11 @@ namespace System.CommandLine.Parsing
 
             var argument = argumentNode.Argument;
 
-            var argumentResult =
-                (ArgumentResult?)optionResult!.Children.ResultFor(argument);
+            var argumentResult = (ArgumentResult?)optionResult!.Children.ResultFor(argument);
 
             if (argumentResult is null)
             {
-                argumentResult =
-                    new ArgumentResult(
-                        argumentNode.Argument,
-                        optionResult);
+                argumentResult = new ArgumentResult(argumentNode.Argument, optionResult);
                 optionResult.Children.Add(argumentResult);
             }
 
@@ -164,9 +154,7 @@ namespace System.CommandLine.Parsing
                 ValidateAndConvertOptionResult(optionResult);
             }
 
-            var argumentResults = _rootCommandResult!
-                                  .AllArgumentResults
-                                  .ToList();
+            var argumentResults = _rootCommandResult!.AllArgumentResults.ToList();
 
             if (argumentResults.Count > 0)
             {
@@ -179,13 +167,18 @@ namespace System.CommandLine.Parsing
                         var nextArgument = arguments[i];
                         var nextArgumentResult = new ArgumentResult(
                             nextArgument,
-                            _innermostCommandResult);
+                            _innermostCommandResult
+                        );
 
                         var previousArgumentResult = argumentResults[i - 1];
 
                         var passedOnTokensCount = _innermostCommandResult.Tokens.Count;
 
-                        for (var j = previousArgumentResult.Tokens.Count; j < passedOnTokensCount; j++)
+                        for (
+                            var j = previousArgumentResult.Tokens.Count;
+                            j < passedOnTokensCount;
+                            j++
+                        )
                         {
                             var token = _innermostCommandResult.Tokens[j];
 
@@ -208,8 +201,7 @@ namespace System.CommandLine.Parsing
 
                     ValidateAndConvertArgumentResult(argumentResult);
 
-                    if (argumentResult.PassedOnTokens is {} &&
-                        i == arguments.Count - 1)
+                    if (argumentResult.PassedOnTokens is { } && i == arguments.Count - 1)
                     {
                         _unparsedTokens.AddRange(argumentResult.PassedOnTokens);
                     }
@@ -228,35 +220,35 @@ namespace System.CommandLine.Parsing
 
                     if (!string.IsNullOrWhiteSpace(errorMessage))
                     {
-                        _errors.Add(
-                            new ParseError(errorMessage!, _innermostCommandResult));
+                        _errors.Add(new ParseError(errorMessage!, _innermostCommandResult));
                     }
                 }
             }
 
             var options = _innermostCommandResult.Command.Options;
 
-            for (var i = 0;
-                i < options.Count;
-                i++)
+            for (var i = 0; i < options.Count; i++)
             {
                 var option = options[i];
 
-                if (option is Option o &&
-                    o.IsRequired &&
-                    _rootCommandResult!.FindResultFor(o) is null)
+                if (
+                    option is Option o
+                    && o.IsRequired
+                    && _rootCommandResult!.FindResultFor(o) is null
+                )
                 {
                     _errors.Add(
-                        new ParseError($"Option '{o.Aliases.First()}' is required.",
-                                       _innermostCommandResult));
+                        new ParseError(
+                            $"Option '{o.Aliases.First()}' is required.",
+                            _innermostCommandResult
+                        )
+                    );
                 }
             }
 
             var arguments = _innermostCommandResult.Command.Arguments;
 
-            for (var i = 0;
-                i < arguments.Count;
-                i++)
+            for (var i = 0; i < arguments.Count; i++)
             {
                 var symbol = arguments[i];
 
@@ -264,20 +256,21 @@ namespace System.CommandLine.Parsing
                     _innermostCommandResult,
                     symbol,
                     symbol.Arity.MinimumNumberOfValues,
-                    symbol.Arity.MaximumNumberOfValues);
+                    symbol.Arity.MaximumNumberOfValues
+                );
 
                 if (arityFailure != null)
                 {
                     _errors.Add(
-                        new ParseError(arityFailure.ErrorMessage!, _innermostCommandResult));
+                        new ParseError(arityFailure.ErrorMessage!, _innermostCommandResult)
+                    );
                 }
             }
         }
 
         private void ValidateCommandHandler()
         {
-            if (!(_innermostCommandResult!.Command is Command cmd) ||
-                cmd.Handler != null)
+            if (!(_innermostCommandResult!.Command is Command cmd) || cmd.Handler != null)
             {
                 return;
             }
@@ -291,7 +284,9 @@ namespace System.CommandLine.Parsing
                 0,
                 new ParseError(
                     _innermostCommandResult.ValidationMessages.RequiredCommandWasNotProvided(),
-                    _innermostCommandResult));
+                    _innermostCommandResult
+                )
+            );
         }
 
         private void ValidateAndConvertOptionResult(OptionResult optionResult)
@@ -302,12 +297,12 @@ namespace System.CommandLine.Parsing
                 optionResult,
                 argument,
                 argument.Arity.MinimumNumberOfValues,
-                argument.Arity.MaximumNumberOfValues);
+                argument.Arity.MaximumNumberOfValues
+            );
 
             if (arityFailure != null)
             {
-                _errors.Add(
-                    new ParseError(arityFailure.ErrorMessage!, optionResult));
+                _errors.Add(new ParseError(arityFailure.ErrorMessage!, optionResult));
             }
 
             if (optionResult.Option is Option option)
@@ -339,8 +334,8 @@ namespace System.CommandLine.Parsing
             if (argumentResult.Argument is Argument argument)
             {
                 var parseError =
-                    argumentResult.Parent?.UnrecognizedArgumentError(argument) ??
-                    argumentResult.CustomError(argument);
+                    argumentResult.Parent?.UnrecognizedArgumentError(argument)
+                    ?? argumentResult.CustomError(argument);
 
                 if (parseError != null)
                 {
@@ -349,12 +344,12 @@ namespace System.CommandLine.Parsing
                 }
             }
 
-            if (argumentResult.GetArgumentConversionResult() is FailedArgumentConversionResult failed)
+            if (
+                argumentResult.GetArgumentConversionResult()
+                is FailedArgumentConversionResult failed
+            )
             {
-                _errors.Add(
-                    new ParseError(
-                        failed.ErrorMessage!,
-                        argumentResult));
+                _errors.Add(new ParseError(failed.ErrorMessage!, argumentResult));
             }
         }
 
@@ -364,7 +359,11 @@ namespace System.CommandLine.Parsing
 
             while (commandResult != null)
             {
-                for (var symbolIndex = 0; symbolIndex < commandResult.Command.Children.Count; symbolIndex++)
+                for (
+                    var symbolIndex = 0;
+                    symbolIndex < commandResult.Command.Children.Count;
+                    symbolIndex++
+                )
                 {
                     var symbol = commandResult.Command.Children[symbolIndex];
                     var symbolResult = _rootCommandResult!.FindResultForSymbol(symbol);
@@ -375,39 +374,35 @@ namespace System.CommandLine.Parsing
                         {
                             case Option option when option.Argument.HasDefaultValue:
 
-                                var optionResult = new OptionResult(
-                                    option,
-                                    null,
-                                    commandResult);
+                                var optionResult = new OptionResult(option, null, commandResult);
 
-                                var childArgumentResult = optionResult.GetOrCreateDefaultArgumentResult(
-                                    option.Argument);
+                                var childArgumentResult =
+                                    optionResult.GetOrCreateDefaultArgumentResult(option.Argument);
 
                                 optionResult.Children.Add(childArgumentResult);
                                 commandResult.Children.Add(optionResult);
                                 _rootCommandResult.AddToSymbolMap(optionResult);
-
                                 break;
 
                             case Argument argument when argument.HasDefaultValue:
 
-                                var argumentResult = commandResult.GetOrCreateDefaultArgumentResult(argument);
+                                var argumentResult = commandResult.GetOrCreateDefaultArgumentResult(
+                                    argument
+                                );
 
                                 commandResult.Children.Add(argumentResult);
                                 _rootCommandResult.AddToSymbolMap(argumentResult);
-
                                 break;
                         }
                     }
 
-                    if (symbolResult is OptionResult o &&
-                        o.Option.Argument.ValueType == typeof(bool) &&
-                        o.Children.Count == 0)
+                    if (
+                        symbolResult is OptionResult o
+                        && o.Option.Argument.ValueType == typeof(bool)
+                        && o.Children.Count == 0
+                    )
                     {
-                        o.Children.Add(
-                            new ArgumentResult(
-                                o.Option.Argument,
-                                o));
+                        o.Children.Add(new ArgumentResult(o.Option.Argument, o));
                     }
                 }
 
@@ -418,13 +413,16 @@ namespace System.CommandLine.Parsing
         public ParseResult Result =>
             new ParseResult(
                 _parser,
-                _rootCommandResult ?? throw new InvalidOperationException("No root command was found"),
-                _innermostCommandResult ?? throw new InvalidOperationException("No command was found"),
+                _rootCommandResult
+                    ?? throw new InvalidOperationException("No root command was found"),
+                _innermostCommandResult
+                    ?? throw new InvalidOperationException("No command was found"),
                 _directives,
                 _tokenizeResult,
                 _unparsedTokens,
                 _unmatchedTokens.ToArray(),
                 _errors,
-                _rawInput);
+                _rawInput
+            );
     }
 }

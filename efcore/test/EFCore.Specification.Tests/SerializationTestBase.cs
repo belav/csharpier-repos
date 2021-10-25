@@ -15,8 +15,7 @@ namespace Microsoft.EntityFrameworkCore
     public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
         where TFixture : F1FixtureBase<byte[]>, new()
     {
-        protected SerializationTestBase(TFixture fixture)
-            => Fixture = fixture;
+        protected SerializationTestBase(TFixture fixture) => Fixture = fixture;
 
         protected TFixture Fixture { get; }
 
@@ -27,12 +26,18 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, true, true)]
         [InlineData(true, false, false)]
         [InlineData(true, false, true)]
-        public virtual void Can_round_trip_through_JSON(bool useNewtonsoft, bool ignoreLoops, bool writeIndented)
+        public virtual void Can_round_trip_through_JSON(
+            bool useNewtonsoft,
+            bool ignoreLoops,
+            bool writeIndented
+        )
         {
             using var context = Fixture.CreateContext();
 
-            var teams = context.Teams.Include(e => e.Drivers)
-                .Include(e => e.Engine).ThenInclude(e => e.EngineSupplier)
+            var teams = context.Teams
+                .Include(e => e.Drivers)
+                .Include(e => e.Engine)
+                .ThenInclude(e => e.EngineSupplier)
                 .ToList();
 
             Assert.Equal(12, teams.Count);
@@ -56,7 +61,11 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private static void VerifyTeam(F1Context context, Team team, IDictionary<int, Team> teamsMap)
+        private static void VerifyTeam(
+            F1Context context,
+            Team team,
+            IDictionary<int, Team> teamsMap
+        )
         {
             var trackedTeam = context.Teams.Find(team.Id);
             Assert.Equal(trackedTeam.Constructor, team.Constructor);
@@ -81,7 +90,11 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private static void VerifyEngine(F1Context context, Engine engine, IDictionary<int, Engine> enginesMap)
+        private static void VerifyEngine(
+            F1Context context,
+            Engine engine,
+            IDictionary<int, Engine> enginesMap
+        )
         {
             var trackedEngine = context.Engines.Find(engine.Id);
             Assert.Equal(trackedEngine.StorageLocation.Latitude, engine.StorageLocation.Latitude);
@@ -102,14 +115,17 @@ namespace Microsoft.EntityFrameworkCore
         private static void VerifyEngineSupplier(
             F1Context context,
             EngineSupplier engineSupplier,
-            IDictionary<string, EngineSupplier> engineSupplierMap)
+            IDictionary<string, EngineSupplier> engineSupplierMap
+        )
         {
             var trackedEngineSupplier = context.EngineSuppliers.Find(engineSupplier.Name);
             Assert.Equal(trackedEngineSupplier.Name, engineSupplier.Name);
 
             if (engineSupplierMap != null)
             {
-                if (engineSupplierMap.TryGetValue(engineSupplier.Name, out var mappedEngineSupplier))
+                if (
+                    engineSupplierMap.TryGetValue(engineSupplier.Name, out var mappedEngineSupplier)
+                )
                 {
                     Assert.Same(engineSupplier, mappedEngineSupplier);
                 }
@@ -118,7 +134,12 @@ namespace Microsoft.EntityFrameworkCore
             }
         }
 
-        private static T RoundtripThroughBclJson<T>(T collection, bool ignoreLoops, bool writeIndented, int maxDepth = 64)
+        private static T RoundtripThroughBclJson<T>(
+            T collection,
+            bool ignoreLoops,
+            bool writeIndented,
+            int maxDepth = 64
+        )
         {
             Assert.False(ignoreLoops, "BCL doesn't support ignoring loops.");
 
@@ -129,10 +150,17 @@ namespace Microsoft.EntityFrameworkCore
                 MaxDepth = maxDepth
             };
 
-            return JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(collection, options), options);
+            return JsonSerializer.Deserialize<T>(
+                JsonSerializer.Serialize(collection, options),
+                options
+            );
         }
 
-        private static T RoundtripThroughNewtonsoftJson<T>(T collection, bool ignoreLoops, bool writeIndented)
+        private static T RoundtripThroughNewtonsoftJson<T>(
+            T collection,
+            bool ignoreLoops,
+            bool writeIndented
+        )
         {
             var options = new Newtonsoft.Json.JsonSerializerSettings
             {

@@ -4,10 +4,7 @@ namespace HealthChecksSample
 {
     public class MyContext : DbContext
     {
-        public MyContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public MyContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Blog> Blog { get; set; }
     }

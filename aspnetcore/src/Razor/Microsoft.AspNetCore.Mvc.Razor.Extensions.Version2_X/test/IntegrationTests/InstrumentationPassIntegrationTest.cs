@@ -13,15 +13,20 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
 {
     public class InstrumentationPassIntegrationTest : IntegrationTestBase
     {
-        private readonly static CSharpCompilation DefaultBaseCompilation = MvcShim.BaseCompilation.WithAssemblyName("AppCode");
+        private readonly static CSharpCompilation DefaultBaseCompilation =
+            MvcShim.BaseCompilation.WithAssemblyName("AppCode");
 
         public InstrumentationPassIntegrationTest()
-            : base(generateBaselines: null, projectDirectoryHint: "Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X")
+            : base(
+                generateBaselines: null,
+                projectDirectoryHint: "Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X"
+            )
         {
             Configuration = RazorConfiguration.Create(
                 RazorLanguageVersion.Version_2_0,
                 "MVC-2.1",
-                new[] { new AssemblyExtension("MVC-2.1", typeof(ExtensionInitializer).Assembly) });
+                new[] { new AssemblyExtension("MVC-2.1", typeof(ExtensionInitializer).Assembly) }
+            );
         }
 
         protected override CSharpCompilation BaseCompilation => DefaultBaseCompilation;
@@ -37,36 +42,40 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
                 CreateTagHelperDescriptor(
                     tagName: "p",
                     typeName: "PTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
                 CreateTagHelperDescriptor(
                     tagName: "form",
                     typeName: "FormTagHelper",
-                    assemblyName: "TestAssembly"),
+                    assemblyName: "TestAssembly"
+                ),
                 CreateTagHelperDescriptor(
                     tagName: "input",
                     typeName: "InputTagHelper",
                     assemblyName: "TestAssembly",
                     attributes: new Action<BoundAttributeDescriptorBuilder>[]
                     {
-                        builder => builder
-                            .Name("value")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),      // Gets preallocated
-                        builder => builder
-                            .Name("date")
-                            .PropertyName("BarProp")
-                            .TypeName("System.DateTime"),    // Doesn't get preallocated
-                    })
+                        builder =>
+                            builder.Name("value").PropertyName("FooProp").TypeName("System.String"), // Gets preallocated
+                        builder =>
+                            builder
+                                .Name("date")
+                                .PropertyName("BarProp")
+                                .TypeName("System.DateTime"), // Doesn't get preallocated
+                    }
+                )
             };
 
-            var engine = CreateProjectEngine(b =>
-            {
-                b.AddTagHelpers(descriptors);
-                b.Features.Add(new InstrumentationPass());
+            var engine = CreateProjectEngine(
+                b =>
+                {
+                    b.AddTagHelpers(descriptors);
+                    b.Features.Add(new InstrumentationPass());
 
-                // This test includes templates
-                b.AddTargetExtension(new TemplateTargetExtension());
-            });
+                    // This test includes templates
+                    b.AddTargetExtension(new TemplateTargetExtension());
+                }
+            );
 
             var projectItem = CreateProjectItemFromFile();
 
@@ -85,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Extensions.Version2_X.IntegrationTests
             string tagName,
             string typeName,
             string assemblyName,
-            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
+        )
         {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);

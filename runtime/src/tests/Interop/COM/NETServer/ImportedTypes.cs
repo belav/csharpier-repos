@@ -14,7 +14,11 @@ namespace NETServer
     public interface IEnumVARIANT
     {
         [PreserveSig]
-        int Next(int celt, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] object[] rgVar, IntPtr pceltFetched);
+        int Next(
+            int celt,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] object[] rgVar,
+            IntPtr pceltFetched
+        );
 
         [PreserveSig]
         int Skip(int celt);
@@ -24,7 +28,7 @@ namespace NETServer
 
         IEnumVARIANT Clone();
     }
-    
+
     [ComImport]
     [Guid("09799AFB-AD67-11d1-ABCD-00C04FC30936")]
     public class ContextMenu

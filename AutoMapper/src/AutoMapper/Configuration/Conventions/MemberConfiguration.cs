@@ -20,21 +20,52 @@ namespace AutoMapper.Configuration.Conventions
             where TNameMapper : ISourceToDestinationNameMapper, new();
 
         IParentSourceToDestinationNameMapper NameMapper { get; set; }
-        bool MapDestinationPropertyToSource(ProfileMap options, TypeDetails sourceType, Type destType, Type destMemberType, string nameToSearch, List<MemberInfo> resolvers, bool isReverseMap);
+        bool MapDestinationPropertyToSource(
+            ProfileMap options,
+            TypeDetails sourceType,
+            Type destType,
+            Type destMemberType,
+            string nameToSearch,
+            List<MemberInfo> resolvers,
+            bool isReverseMap
+        );
     }
     [EditorBrowsable(EditorBrowsableState.Never)]
     public interface IChildMemberConfiguration
     {
-        bool MapDestinationPropertyToSource(ProfileMap options, TypeDetails sourceType, Type destType, Type destMemberType, string nameToSearch, List<MemberInfo> resolvers, IMemberConfiguration parent, bool isReverseMap);
+        bool MapDestinationPropertyToSource(
+            ProfileMap options,
+            TypeDetails sourceType,
+            Type destType,
+            Type destMemberType,
+            string nameToSearch,
+            List<MemberInfo> resolvers,
+            IMemberConfiguration parent,
+            bool isReverseMap
+        );
     }
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class DefaultMember : IChildMemberConfiguration
     {
         public IParentSourceToDestinationNameMapper NameMapper { get; set; }
 
-        public bool MapDestinationPropertyToSource(ProfileMap options, TypeDetails sourceTypeDetails, Type destType, Type destMemberType, string nameToSearch, List<MemberInfo> resolvers, IMemberConfiguration parent = null, bool isReverseMap = false)
+        public bool MapDestinationPropertyToSource(
+            ProfileMap options,
+            TypeDetails sourceTypeDetails,
+            Type destType,
+            Type destMemberType,
+            string nameToSearch,
+            List<MemberInfo> resolvers,
+            IMemberConfiguration parent = null,
+            bool isReverseMap = false
+        )
         {
-            var matchingMemberInfo = NameMapper.GetMatchingMemberInfo(sourceTypeDetails, destType, destMemberType, nameToSearch);
+            var matchingMemberInfo = NameMapper.GetMatchingMemberInfo(
+                sourceTypeDetails,
+                destType,
+                destMemberType,
+                nameToSearch
+            );
             if (matchingMemberInfo != null)
             {
                 resolvers.Add(matchingMemberInfo);
@@ -48,10 +79,12 @@ namespace AutoMapper.Configuration.Conventions
     {
         public IParentSourceToDestinationNameMapper NameMapper { get; set; }
 
-        public List<IChildMemberConfiguration> MemberMappers { get; } = new List<IChildMemberConfiguration>();
+        public List<IChildMemberConfiguration> MemberMappers { get; } =
+            new List<IChildMemberConfiguration>();
 
-        public IMemberConfiguration AddMember<TMemberMapper>(Action<TMemberMapper> setupAction = null)
-            where TMemberMapper : IChildMemberConfiguration, new()
+        public IMemberConfiguration AddMember<TMemberMapper>(
+            Action<TMemberMapper> setupAction = null
+        ) where TMemberMapper : IChildMemberConfiguration, new()
         {
             GetOrAdd(_ => (IList)_.MemberMappers, setupAction);
             return this;
@@ -64,8 +97,10 @@ namespace AutoMapper.Configuration.Conventions
             return this;
         }
 
-        private TMemberMapper GetOrAdd<TMemberMapper>(Func<IMemberConfiguration, IList> getList, Action<TMemberMapper> setupAction = null)
-            where TMemberMapper : new()
+        private TMemberMapper GetOrAdd<TMemberMapper>(
+            Func<IMemberConfiguration, IList> getList,
+            Action<TMemberMapper> setupAction = null
+        ) where TMemberMapper : new()
         {
             var child = getList(this).OfType<TMemberMapper>().FirstOrDefault();
             if (child == null)
@@ -83,11 +118,30 @@ namespace AutoMapper.Configuration.Conventions
             MemberMappers.Add(new DefaultMember { NameMapper = NameMapper });
         }
 
-        public bool MapDestinationPropertyToSource(ProfileMap options, TypeDetails sourceType, Type destType, Type destMemberType, string nameToSearch, List<MemberInfo> resolvers, bool isReverseMap)
+        public bool MapDestinationPropertyToSource(
+            ProfileMap options,
+            TypeDetails sourceType,
+            Type destType,
+            Type destMemberType,
+            string nameToSearch,
+            List<MemberInfo> resolvers,
+            bool isReverseMap
+        )
         {
             foreach (var memberMapper in MemberMappers)
             {
-                if (memberMapper.MapDestinationPropertyToSource(options, sourceType, destType, destMemberType, nameToSearch, resolvers, this, isReverseMap))
+                if (
+                    memberMapper.MapDestinationPropertyToSource(
+                        options,
+                        sourceType,
+                        destType,
+                        destMemberType,
+                        nameToSearch,
+                        resolvers,
+                        this,
+                        isReverseMap
+                    )
+                )
                 {
                     return true;
                 }
@@ -101,7 +155,16 @@ namespace AutoMapper.Configuration.Conventions
         public INamingConvention SourceMemberNamingConvention { get; set; }
         public INamingConvention DestinationMemberNamingConvention { get; set; }
 
-        public bool MapDestinationPropertyToSource(ProfileMap options, TypeDetails sourceType, Type destType, Type destMemberType, string nameToSearch, List<MemberInfo> resolvers, IMemberConfiguration parent, bool isReverseMap)
+        public bool MapDestinationPropertyToSource(
+            ProfileMap options,
+            TypeDetails sourceType,
+            Type destType,
+            Type destMemberType,
+            string nameToSearch,
+            List<MemberInfo> resolvers,
+            IMemberConfiguration parent,
+            bool isReverseMap
+        )
         {
             var destinationMemberNamingConvention = isReverseMap
                 ? SourceMemberNamingConvention
@@ -110,31 +173,46 @@ namespace AutoMapper.Configuration.Conventions
                 ? DestinationMemberNamingConvention
                 : SourceMemberNamingConvention;
 
-            var matches = destinationMemberNamingConvention.SplittingExpression
-                ?.Matches(nameToSearch)
-                .Cast<Match>()
-                .Select(m => sourceMemberNamingConvention.ReplaceValue(m))
-                .ToArray()
-                ?? Array.Empty<string>();
+            var matches =
+                destinationMemberNamingConvention.SplittingExpression?
+                    .Matches(nameToSearch)
+                    .Cast<Match>()
+                    .Select(m => sourceMemberNamingConvention.ReplaceValue(m))
+                    .ToArray() ?? Array.Empty<string>();
 
             MemberInfo matchingMemberInfo = null;
             for (var i = 1; i <= matches.Length; i++)
             {
                 var first = string.Join(
                     sourceMemberNamingConvention.SeparatorCharacter,
-                    matches.Take(i).Select(SplitMembers));
+                    matches.Take(i).Select(SplitMembers)
+                );
                 var second = string.Join(
                     sourceMemberNamingConvention.SeparatorCharacter,
-                    matches.Skip(i).Select(SplitMembers));
+                    matches.Skip(i).Select(SplitMembers)
+                );
 
-                matchingMemberInfo = parent.NameMapper.GetMatchingMemberInfo(sourceType, destType, destMemberType, first);
+                matchingMemberInfo = parent.NameMapper.GetMatchingMemberInfo(
+                    sourceType,
+                    destType,
+                    destMemberType,
+                    first
+                );
 
                 if (matchingMemberInfo != null)
                 {
                     resolvers.Add(matchingMemberInfo);
 
                     var details = options.CreateTypeDetails(matchingMemberInfo.GetMemberType());
-                    var foundMatch = parent.MapDestinationPropertyToSource(options, details, destType, destMemberType, second, resolvers, isReverseMap);
+                    var foundMatch = parent.MapDestinationPropertyToSource(
+                        options,
+                        details,
+                        destType,
+                        destMemberType,
+                        second,
+                        resolvers,
+                        isReverseMap
+                    );
 
                     if (!foundMatch)
                         resolvers.RemoveAt(resolvers.Count - 1);
@@ -143,7 +221,11 @@ namespace AutoMapper.Configuration.Conventions
                 }
             }
             return matchingMemberInfo != null;
-            string SplitMembers(string value) => sourceMemberNamingConvention.SplittingExpression.Replace(value, sourceMemberNamingConvention.ReplaceValue);
+            string SplitMembers(string value) =>
+                sourceMemberNamingConvention.SplittingExpression.Replace(
+                    value,
+                    sourceMemberNamingConvention.ReplaceValue
+                );
         }
     }
 }

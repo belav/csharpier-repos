@@ -13,12 +13,14 @@ internal static partial class Interop
         internal static extern SocketError ioctlsocket(
             [In] IntPtr handle,
             [In] int cmd,
-            [In, Out] ref int argp);
+            [In, Out] ref int argp
+        );
 
         [DllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static extern SocketError ioctlsocket(
             [In] SafeSocketHandle socketHandle,
             [In] int cmd,
-            [In, Out] ref int argp);
+            [In, Out] ref int argp
+        );
     }
 }

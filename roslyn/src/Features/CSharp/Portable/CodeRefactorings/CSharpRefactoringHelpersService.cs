@@ -13,15 +13,21 @@ using Microsoft.CodeAnalysis.LanguageServices;
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
 {
     [ExportLanguageService(typeof(IRefactoringHelpersService), LanguageNames.CSharp), Shared]
-    internal class CSharpRefactoringHelpersService : AbstractRefactoringHelpersService<ExpressionSyntax, ArgumentSyntax, ExpressionStatementSyntax>
+    internal class CSharpRefactoringHelpersService
+        : AbstractRefactoringHelpersService<
+              ExpressionSyntax,
+              ArgumentSyntax,
+              ExpressionStatementSyntax
+          >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpRefactoringHelpersService()
-        {
-        }
+        public CSharpRefactoringHelpersService() { }
 
-        protected override IEnumerable<SyntaxNode> ExtractNodesSimple(SyntaxNode? node, ISyntaxFactsService syntaxFacts)
+        protected override IEnumerable<SyntaxNode> ExtractNodesSimple(
+            SyntaxNode? node,
+            ISyntaxFactsService syntaxFacts
+        )
         {
             if (node == null)
             {
@@ -44,9 +50,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
             if (node is VariableDeclaratorSyntax declarator)
             {
                 var declaration = declarator.Parent;
-                if (declaration?.Parent is LocalDeclarationStatementSyntax localDeclarationStatement)
+                if (
+                    declaration?.Parent is LocalDeclarationStatementSyntax localDeclarationStatement
+                )
                 {
-                    var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
+                    var variables = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
+                        localDeclarationStatement
+                    );
                     if (variables.Count == 1)
                     {
                         // -> `var a = b`;

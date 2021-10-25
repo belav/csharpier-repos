@@ -53,7 +53,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             ExpressionType operatorType,
             SqlExpression left,
             SqlExpression right,
-            CoreTypeMapping? typeMapping);
+            CoreTypeMapping? typeMapping
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -128,7 +129,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlBinaryExpression Add(
             SqlExpression left,
             SqlExpression right,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -139,7 +141,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlBinaryExpression Subtract(
             SqlExpression left,
             SqlExpression right,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -150,7 +153,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlBinaryExpression Multiply(
             SqlExpression left,
             SqlExpression right,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -161,7 +165,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlBinaryExpression Divide(
             SqlExpression left,
             SqlExpression right,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -172,7 +177,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlBinaryExpression Modulo(
             SqlExpression left,
             SqlExpression right,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -183,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlBinaryExpression And(
             SqlExpression left,
             SqlExpression right,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -194,7 +201,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlBinaryExpression Or(
             SqlExpression left,
             SqlExpression right,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -221,7 +229,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlUnaryExpression Convert(
             SqlExpression operand,
             Type type,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -249,7 +258,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
             string functionName,
             IEnumerable<SqlExpression> arguments,
             Type returnType,
-            CoreTypeMapping? typeMapping = null);
+            CoreTypeMapping? typeMapping = null
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -260,7 +270,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal
         SqlConditionalExpression Condition(
             SqlExpression test,
             SqlExpression ifTrue,
-            SqlExpression ifFalse);
+            SqlExpression ifFalse
+        );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -59,7 +59,10 @@ namespace System.Web.Http.Routing
             return null;
         }
 
-        public IHttpVirtualPathData GetVirtualPath(HttpRequestMessage request, IDictionary<string, object> values)
+        public IHttpVirtualPathData GetVirtualPath(
+            HttpRequestMessage request,
+            IDictionary<string, object> values
+        )
         {
             return _innerRoute.GetVirtualPath(request, values);
         }

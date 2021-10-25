@@ -137,9 +137,7 @@ namespace Microsoft.AspNetCore.Components
         /// Allows derived classes to lazily self-initialize. Implementations that support lazy-initialization should override
         /// this method and call <see cref="Initialize(string, string)" />.
         /// </summary>
-        protected virtual void EnsureInitialized()
-        {
-        }
+        protected virtual void EnsureInitialized() { }
 
         /// <summary>
         /// Converts a relative URI into an absolute one (by resolving it
@@ -203,11 +201,17 @@ namespace Microsoft.AspNetCore.Components
         {
             try
             {
-                _locationChanged?.Invoke(this, new LocationChangedEventArgs(_uri!, isInterceptedLink));
+                _locationChanged?.Invoke(
+                    this,
+                    new LocationChangedEventArgs(_uri!, isInterceptedLink)
+                );
             }
             catch (Exception ex)
             {
-                throw new LocationChangeException("An exception occurred while dispatching a location changed event.", ex);
+                throw new LocationChangeException(
+                    "An exception occurred while dispatching a location changed event.",
+                    ex
+                );
             }
         }
 
@@ -220,7 +224,9 @@ namespace Microsoft.AspNetCore.Components
 
             if (!_isInitialized)
             {
-                throw new InvalidOperationException($"'{GetType().Name}' has not been initialized.");
+                throw new InvalidOperationException(
+                    $"'{GetType().Name}' has not been initialized."
+                );
             }
         }
 

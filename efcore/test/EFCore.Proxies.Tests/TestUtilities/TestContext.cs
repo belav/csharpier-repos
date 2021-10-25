@@ -7,8 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
-    internal abstract class TestContext<TEntity> : DbContext
-        where TEntity : class
+    internal abstract class TestContext<TEntity> : DbContext where TEntity : class
     {
         private static readonly InMemoryDatabaseRoot _dbRoot = new();
 
@@ -24,13 +23,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             bool useLazyLoading = false,
             bool useChangeDetection = false,
             bool checkEquality = true,
-            ChangeTrackingStrategy? changeTrackingStrategy = null)
+            ChangeTrackingStrategy? changeTrackingStrategy = null
+        )
         {
-            _internalServiceProvider
-                = new ServiceCollection()
-                    .AddEntityFrameworkInMemoryDatabase()
-                    .AddEntityFrameworkProxies()
-                    .BuildServiceProvider();
+            _internalServiceProvider = new ServiceCollection()
+                .AddEntityFrameworkInMemoryDatabase()
+                .AddEntityFrameworkProxies()
+                .BuildServiceProvider();
 
             _dbName = dbName;
             _useLazyLoadingProxies = useLazyLoading;

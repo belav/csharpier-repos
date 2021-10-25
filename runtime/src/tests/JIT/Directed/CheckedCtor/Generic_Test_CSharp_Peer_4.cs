@@ -26,13 +26,20 @@ namespace Test
     public class BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public BaseClass(int arg) { Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg); return; }
+        public BaseClass(int arg)
+        {
+            Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg);
+            return;
+        }
     }
 
     public class DerivedClass<T> : BaseClass
     {
         private static readonly Random Generator = new Random();
-        private static string GetString() { return "Text"; }
+        private static string GetString()
+        {
+            return "Text";
+        }
         public int Field1 = ((Generator.Next(5, 8) == 10) ? 10 : 20);
         public string Field2 = (GetString() ?? "NeededToFallBack");
         public Func<int> Field3 = () => Generator.Next(5, 8);

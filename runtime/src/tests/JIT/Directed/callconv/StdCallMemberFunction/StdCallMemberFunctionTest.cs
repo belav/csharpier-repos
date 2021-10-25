@@ -71,7 +71,10 @@ unsafe class StdCallMemberFunctionTest
         {
             float width = 1.0f;
             float height = 2.0f;
-            StdCallMemberFunctionNative.C* instance = StdCallMemberFunctionNative.CreateInstanceOfC(width, height);
+            StdCallMemberFunctionNative.C* instance = StdCallMemberFunctionNative.CreateInstanceOfC(
+                width,
+                height
+            );
             Test8ByteHFA(instance);
             Test4ByteHFA(instance);
             Test4ByteNonHFA(instance);
@@ -129,7 +132,9 @@ unsafe class StdCallMemberFunctionTest
     private static void Test8ByteHFAUnmanagedCallersOnly()
     {
         StdCallMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);
-        StdCallMemberFunctionNative.SizeF result = StdCallMemberFunctionNative.GetSizeFromManaged(&c);
+        StdCallMemberFunctionNative.SizeF result = StdCallMemberFunctionNative.GetSizeFromManaged(
+            &c
+        );
 
         Assert.AreEqual(c.width, result.width);
         Assert.AreEqual(c.height, result.height);
@@ -138,7 +143,9 @@ unsafe class StdCallMemberFunctionTest
     private static void Test4ByteHFAUnmanagedCallersOnly()
     {
         StdCallMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);
-        StdCallMemberFunctionNative.Width result = StdCallMemberFunctionNative.GetWidthFromManaged(&c);
+        StdCallMemberFunctionNative.Width result = StdCallMemberFunctionNative.GetWidthFromManaged(
+            &c
+        );
 
         Assert.AreEqual(c.width, result.width);
     }
@@ -146,7 +153,8 @@ unsafe class StdCallMemberFunctionTest
     private static void Test4ByteNonHFAUnmanagedCallersOnly()
     {
         StdCallMemberFunctionNative.C c = CreateCWithUnmanagedCallersOnlyVTable(2.0f, 3.0f);
-        StdCallMemberFunctionNative.IntWrapper result = StdCallMemberFunctionNative.GetHeightAsIntFromManaged(&c);
+        StdCallMemberFunctionNative.IntWrapper result =
+            StdCallMemberFunctionNative.GetHeightAsIntFromManaged(&c);
 
         Assert.AreEqual((int)c.height, result.i);
     }
@@ -167,7 +175,10 @@ unsafe class StdCallMemberFunctionTest
         Assert.AreEqual((nint)c.width, result.Value);
     }
 
-    private static StdCallMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(float width, float height)
+    private static StdCallMemberFunctionNative.C CreateCWithUnmanagedCallersOnlyVTable(
+        float width,
+        float height
+    )
     {
         return new StdCallMemberFunctionNative.C
         {
@@ -186,7 +197,10 @@ unsafe class StdCallMemberFunctionTest
         {
             if (unmanagedCallersOnlyVtable == null)
             {
-                unmanagedCallersOnlyVtable = (StdCallMemberFunctionNative.C.VtableLayout*)Marshal.AllocHGlobal(sizeof(StdCallMemberFunctionNative.C.VtableLayout));
+                unmanagedCallersOnlyVtable =
+                    (StdCallMemberFunctionNative.C.VtableLayout*)Marshal.AllocHGlobal(
+                        sizeof(StdCallMemberFunctionNative.C.VtableLayout)
+                    );
                 unmanagedCallersOnlyVtable->getSize = &GetSize;
                 unmanagedCallersOnlyVtable->getWidth = &GetWidth;
                 unmanagedCallersOnlyVtable->getHeightAsInt = &GetHeightAsInt;
@@ -197,41 +211,46 @@ unsafe class StdCallMemberFunctionTest
         }
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvStdcall), typeof(CallConvMemberFunction)})]
-    private static StdCallMemberFunctionNative.SizeF GetSize(StdCallMemberFunctionNative.C* c, int unused)
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvStdcall), typeof(CallConvMemberFunction) }
+    )]
+    private static StdCallMemberFunctionNative.SizeF GetSize(
+        StdCallMemberFunctionNative.C* c,
+        int unused
+    )
     {
-        return new StdCallMemberFunctionNative.SizeF
-        {
-            width = c->width,
-            height = c->height
-        };
+        return new StdCallMemberFunctionNative.SizeF { width = c->width, height = c->height };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvStdcall), typeof(CallConvMemberFunction)})]
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvStdcall), typeof(CallConvMemberFunction) }
+    )]
     private static StdCallMemberFunctionNative.Width GetWidth(StdCallMemberFunctionNative.C* c)
     {
-        return new StdCallMemberFunctionNative.Width
-        {
-            width = c->width
-        };
+        return new StdCallMemberFunctionNative.Width { width = c->width };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvStdcall), typeof(CallConvMemberFunction)})]
-    private static StdCallMemberFunctionNative.IntWrapper GetHeightAsInt(StdCallMemberFunctionNative.C* c)
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvStdcall), typeof(CallConvMemberFunction) }
+    )]
+    private static StdCallMemberFunctionNative.IntWrapper GetHeightAsInt(
+        StdCallMemberFunctionNative.C* c
+    )
     {
-        return new StdCallMemberFunctionNative.IntWrapper
-        {
-            i = (int)c->height
-        };
+        return new StdCallMemberFunctionNative.IntWrapper { i = (int)c->height };
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvStdcall), typeof(CallConvMemberFunction)})]
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvStdcall), typeof(CallConvMemberFunction) }
+    )]
     private static StdCallMemberFunctionNative.E GetE(StdCallMemberFunctionNative.C* c)
     {
         return c->dummy;
     }
 
-    [UnmanagedCallersOnly(CallConvs = new [] {typeof(CallConvStdcall), typeof(CallConvMemberFunction)})]
+    [UnmanagedCallersOnly(
+        CallConvs = new[] { typeof(CallConvStdcall), typeof(CallConvMemberFunction) }
+    )]
     private static CLong GetWidthAsLong(StdCallMemberFunctionNative.C* c)
     {
         return new CLong((nint)c->width);

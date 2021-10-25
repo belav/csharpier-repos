@@ -41,13 +41,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
         private bool _needsCleanUp;
         private IEnumerator<KeyValuePair<TKey, WeakComHandle<TValue, TValue>>> _cleanUpEnumerator;
 
-        private enum CleanUpState { Initial, CollectingDeadKeys, RemovingDeadKeys }
+        private enum CleanUpState
+        {
+            Initial,
+            CollectingDeadKeys,
+            RemovingDeadKeys
+        }
         private CleanUpState _cleanUpState;
 
         public bool NeedsCleanUp => _needsCleanUp;
 
-        public CleanableWeakComHandleTable(IThreadingContext threadingContext, int? cleanUpThreshold = null, TimeSpan? cleanUpTimeSlice = null)
-            : base(threadingContext)
+        public CleanableWeakComHandleTable(
+            IThreadingContext threadingContext,
+            int? cleanUpThreshold = null,
+            TimeSpan? cleanUpTimeSlice = null
+        ) : base(threadingContext)
         {
             _table = new Dictionary<TKey, WeakComHandle<TValue, TValue>>();
             _deadKeySet = new HashSet<TKey>();
@@ -181,7 +189,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
 
             if (_table.ContainsKey(key))
             {
-                throw new InvalidOperationException($"Key already exists in table: {(key != null ? key.ToString() : "<null>")}.");
+                throw new InvalidOperationException(
+                    $"Key already exists in table: {(key != null ? key.ToString() : "<null>")}."
+                );
             }
 
             _itemsAddedSinceLastCleanUp++;

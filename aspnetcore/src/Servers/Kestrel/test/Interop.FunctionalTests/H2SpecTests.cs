@@ -25,22 +25,32 @@ namespace Interop.FunctionalTests
         public async Task RunIndividualTestCase(H2SpecTestCase testCase)
         {
             var hostBuilder = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(options =>
-                        {
-                            options.Listen(IPAddress.Loopback, 0, listenOptions =>
-                            {
-                                listenOptions.Protocols = HttpProtocols.Http2;
-                                if (testCase.Https)
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            .UseKestrel(
+                                options =>
                                 {
-                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                    options.Listen(
+                                        IPAddress.Loopback,
+                                        0,
+                                        listenOptions =>
+                                        {
+                                            listenOptions.Protocols = HttpProtocols.Http2;
+                                            if (testCase.Https)
+                                            {
+                                                listenOptions.UseHttps(
+                                                    TestResources.GetTestCertificate()
+                                                );
+                                            }
+                                        }
+                                    );
                                 }
-                            });
-                        })
-                    .Configure(ConfigureHelloWorld);
-                })
+                            )
+                            .Configure(ConfigureHelloWorld);
+                    }
+                )
                 .ConfigureServices(AddTestLogging);
 
             using (var host = hostBuilder.Build())
@@ -70,24 +80,28 @@ namespace Interop.FunctionalTests
                         skip = "https://github.com/dotnet/aspnetcore/issues/30373";
                     }
 
-                    dataset.Add(new H2SpecTestCase
-                    {
-                        Id = testcase.Item1,
-                        Description = testcase.Item2,
-                        Https = false,
-                        Skip = skip,
-                    });
+                    dataset.Add(
+                        new H2SpecTestCase
+                        {
+                            Id = testcase.Item1,
+                            Description = testcase.Item2,
+                            Https = false,
+                            Skip = skip,
+                        }
+                    );
 
                     // https://github.com/dotnet/aspnetcore/issues/11301 We should use Skip but it's broken at the moment.
                     if (supportsAlpn)
                     {
-                        dataset.Add(new H2SpecTestCase
-                        {
-                            Id = testcase.Item1,
-                            Description = testcase.Item2,
-                            Https = true,
-                            Skip = skip,
-                        });
+                        dataset.Add(
+                            new H2SpecTestCase
+                            {
+                                Id = testcase.Item1,
+                                Description = testcase.Item2,
+                                Https = true,
+                                Skip = skip,
+                            }
+                        );
                     }
                 }
 
@@ -98,9 +112,7 @@ namespace Interop.FunctionalTests
         public class H2SpecTestCase : IXunitSerializable
         {
             // For the serializer
-            public H2SpecTestCase()
-            {
-            }
+            public H2SpecTestCase() { }
 
             public string Id { get; set; }
             public string Description { get; set; }
@@ -131,12 +143,14 @@ namespace Interop.FunctionalTests
 
         private void ConfigureHelloWorld(IApplicationBuilder app)
         {
-            app.Run(async context =>
-            {
-                // Read the whole request body to check for errors.
-                await context.Request.Body.CopyToAsync(Stream.Null);
-                await context.Response.WriteAsync("Hello World");
-            });
+            app.Run(
+                async context =>
+                {
+                    // Read the whole request body to check for errors.
+                    await context.Request.Body.CopyToAsync(Stream.Null);
+                    await context.Response.WriteAsync("Hello World");
+                }
+            );
         }
     }
 }

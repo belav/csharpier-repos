@@ -225,7 +225,8 @@ namespace System.Drawing
         public static Pen LightBlue => GetPen(s_lightBlueKey, Color.LightBlue);
         public static Pen LightCoral => GetPen(s_lightCoralKey, Color.LightCoral);
         public static Pen LightCyan => GetPen(s_lightCyanKey, Color.LightCyan);
-        public static Pen LightGoldenrodYellow => GetPen(s_lightGoldenrodYellowKey, Color.LightGoldenrodYellow);
+        public static Pen LightGoldenrodYellow =>
+            GetPen(s_lightGoldenrodYellowKey, Color.LightGoldenrodYellow);
         public static Pen LightGreen => GetPen(s_lightGreenKey, Color.LightGreen);
         public static Pen LightGray => GetPen(s_lightGrayKey, Color.LightGray);
         public static Pen LightPink => GetPen(s_lightPinkKey, Color.LightPink);
@@ -247,7 +248,8 @@ namespace System.Drawing
         public static Pen MediumPurple => GetPen(s_mediumPurpleKey, Color.MediumPurple);
         public static Pen MediumSeaGreen => GetPen(s_mediumSeaGreenKey, Color.MediumSeaGreen);
         public static Pen MediumSlateBlue => GetPen(s_mediumSlateBlueKey, Color.MediumSlateBlue);
-        public static Pen MediumSpringGreen => GetPen(s_mediumSpringGreenKey, Color.MediumSpringGreen);
+        public static Pen MediumSpringGreen =>
+            GetPen(s_mediumSpringGreenKey, Color.MediumSpringGreen);
         public static Pen MediumTurquoise => GetPen(s_mediumTurquoiseKey, Color.MediumTurquoise);
         public static Pen MediumVioletRed => GetPen(s_mediumVioletRedKey, Color.MediumVioletRed);
         public static Pen MidnightBlue => GetPen(s_midnightBlueKey, Color.MidnightBlue);

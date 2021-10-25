@@ -18,10 +18,21 @@ namespace Microsoft.Extensions.Logging.Configuration
         /// <param name="services">The <see cref="IServiceCollection"/> to register on.</param>
         /// <typeparam name="TOptions">The options class </typeparam>
         /// <typeparam name="TProvider">The provider class</typeparam>
-        public static void RegisterProviderOptions<TOptions, TProvider>(IServiceCollection services) where TOptions : class
+        public static void RegisterProviderOptions<TOptions, TProvider>(IServiceCollection services)
+            where TOptions : class
         {
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<TOptions>, LoggerProviderConfigureOptions<TOptions, TProvider>>());
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IOptionsChangeTokenSource<TOptions>, LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>>());
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IConfigureOptions<TOptions>,
+                    LoggerProviderConfigureOptions<TOptions, TProvider>
+                >()
+            );
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IOptionsChangeTokenSource<TOptions>,
+                    LoggerProviderOptionsChangeTokenSource<TOptions, TProvider>
+                >()
+            );
         }
     }
 }

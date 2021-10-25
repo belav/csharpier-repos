@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis
 {
     public static class TestCompilation
     {
-        private static readonly ConcurrentDictionary<Assembly, IEnumerable<MetadataReference>> _referenceCache =
-            new ConcurrentDictionary<Assembly, IEnumerable<MetadataReference>>();
+        private static readonly ConcurrentDictionary<
+            Assembly,
+            IEnumerable<MetadataReference>
+        > _referenceCache = new ConcurrentDictionary<Assembly, IEnumerable<MetadataReference>>();
 
         public static IEnumerable<MetadataReference> GetMetadataReferences(Assembly assembly)
         {
@@ -47,9 +49,7 @@ namespace Microsoft.CodeAnalysis
             {
                 return library.ResolveReferencePaths();
             }
-            catch (InvalidOperationException)
-            {
-            }
+            catch (InvalidOperationException) { }
 
             return Array.Empty<string>();
         }
@@ -65,13 +65,23 @@ namespace Microsoft.CodeAnalysis
                 syntaxTrees = new[] { syntaxTree };
             }
 
-            if (!_referenceCache.TryGetValue(assembly, out IEnumerable<MetadataReference> metadataReferences))
+            if (
+                !_referenceCache.TryGetValue(
+                    assembly,
+                    out IEnumerable<MetadataReference> metadataReferences
+                )
+            )
             {
                 metadataReferences = GetMetadataReferences(assembly);
                 _referenceCache.TryAdd(assembly, metadataReferences);
             }
 
-            var compilation = CSharpCompilation.Create(AssemblyName, syntaxTrees, metadataReferences, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            var compilation = CSharpCompilation.Create(
+                AssemblyName,
+                syntaxTrees,
+                metadataReferences,
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
             EnsureValidCompilation(compilation);
 
@@ -87,8 +97,12 @@ namespace Microsoft.CodeAnalysis
                     .Emit(stream);
                 var diagnostics = string.Join(
                     Environment.NewLine,
-                    emitResult.Diagnostics.Select(d => CSharpDiagnosticFormatter.Instance.Format(d)));
-                Assert.True(emitResult.Success, $"Compilation is invalid : {Environment.NewLine}{diagnostics}");
+                    emitResult.Diagnostics.Select(d => CSharpDiagnosticFormatter.Instance.Format(d))
+                );
+                Assert.True(
+                    emitResult.Success,
+                    $"Compilation is invalid : {Environment.NewLine}{diagnostics}"
+                );
             }
         }
     }

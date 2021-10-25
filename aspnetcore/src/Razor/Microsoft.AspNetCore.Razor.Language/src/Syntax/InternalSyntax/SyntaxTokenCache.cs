@@ -64,7 +64,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
             var idx = indexableHash & CacheMask;
             var e = s_cache[idx];
 
-            if (e.Hash == hash && e.Token != null && e.Token.Kind == kind && e.Token.Content == content)
+            if (
+                e.Hash == hash
+                && e.Token != null
+                && e.Token.Kind == kind
+                && e.Token.Content == content
+            )
             {
                 return e.Token;
             }

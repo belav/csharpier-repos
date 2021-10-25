@@ -70,7 +70,9 @@ namespace Microsoft.AspNetCore.Hosting.Tests
         {
             // Arrange
             var factory = new Mock<IHttpContextFactory>();
-            factory.Setup(m => m.Create(It.IsAny<IFeatureCollection>())).Returns<IFeatureCollection>(f => new DefaultHttpContext(f));
+            factory
+                .Setup(m => m.Create(It.IsAny<IFeatureCollection>()))
+                .Returns<IFeatureCollection>(f => new DefaultHttpContext(f));
             factory.Setup(m => m.Dispose(It.IsAny<HttpContext>())).Callback(() => { });
 
             var hostingApplication = CreateApplication(factory.Object);
@@ -87,7 +89,10 @@ namespace Microsoft.AspNetCore.Hosting.Tests
             hostingApplication.DisposeContext(context, null);
         }
 
-        private static HostingApplication CreateApplication(IHttpContextFactory httpContextFactory = null, bool useHttpContextAccessor = false)
+        private static HostingApplication CreateApplication(
+            IHttpContextFactory httpContextFactory = null,
+            bool useHttpContextAccessor = false
+        )
         {
             var services = new ServiceCollection();
             services.AddOptions();
@@ -103,7 +108,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
                 NullLogger.Instance,
                 new DiagnosticListener("Microsoft.AspNetCore"),
                 new ActivitySource("Microsoft.AspNetCore"),
-                httpContextFactory);
+                httpContextFactory
+            );
 
             return hostingApplication;
         }
@@ -117,7 +123,11 @@ namespace Microsoft.AspNetCore.Hosting.Tests
 
             public IFeatureCollection Features { get; }
 
-            public object this[Type key] { get => Features[key]; set => Features[key] = value; }
+            public object this[Type key]
+            {
+                get => Features[key];
+                set => Features[key] = value;
+            }
 
             public T HostContext { get; set; }
 
@@ -127,7 +137,8 @@ namespace Microsoft.AspNetCore.Hosting.Tests
 
             public TFeature Get<TFeature>() => Features.Get<TFeature>();
 
-            public IEnumerator<KeyValuePair<Type, object>> GetEnumerator() => Features.GetEnumerator();
+            public IEnumerator<KeyValuePair<Type, object>> GetEnumerator() =>
+                Features.GetEnumerator();
 
             public void Set<TFeature>(TFeature instance) => Features.Set(instance);
 

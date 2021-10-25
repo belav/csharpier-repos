@@ -20,15 +20,15 @@ namespace System.Collections.Generic
     [DebuggerTypeProxy(typeof(QueueDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public class Queue<T> : IEnumerable<T>,
-        System.Collections.ICollection,
-        IReadOnlyCollection<T>
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public class Queue<T> : IEnumerable<T>, System.Collections.ICollection, IReadOnlyCollection<T>
     {
         private T[] _array;
-        private int _head;       // The index from which to dequeue if the queue isn't empty.
-        private int _tail;       // The index at which to enqueue if the queue isn't full.
-        private int _size;       // Number of elements.
+        private int _head; // The index from which to dequeue if the queue isn't empty.
+        private int _tail; // The index at which to enqueue if the queue isn't full.
+        private int _size; // Number of elements.
         private int _version;
 
         // Creates a queue with room for capacity objects. The default initial
@@ -43,7 +43,11 @@ namespace System.Collections.Generic
         public Queue(int capacity)
         {
             if (capacity < 0)
-                throw new ArgumentOutOfRangeException(nameof(capacity), capacity, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    capacity,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             _array = new T[capacity];
         }
 
@@ -55,7 +59,8 @@ namespace System.Collections.Generic
                 throw new ArgumentNullException(nameof(collection));
 
             _array = EnumerableHelpers.ToArray(collection, out _size);
-            if (_size != _array.Length) _tail = _size;
+            if (_size != _array.Length)
+                _tail = _size;
         }
 
         public int Count
@@ -107,7 +112,11 @@ namespace System.Collections.Generic
 
             if (arrayIndex < 0 || arrayIndex > array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(arrayIndex), arrayIndex, SR.ArgumentOutOfRange_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(arrayIndex),
+                    arrayIndex,
+                    SR.ArgumentOutOfRange_Index
+                );
             }
 
             if (array.Length - arrayIndex < _size)
@@ -116,7 +125,8 @@ namespace System.Collections.Generic
             }
 
             int numToCopy = _size;
-            if (numToCopy == 0) return;
+            if (numToCopy == 0)
+                return;
 
             int firstPart = Math.Min(_array.Length - _head, numToCopy);
             Array.Copy(_array, _head, array, arrayIndex, firstPart);
@@ -147,7 +157,11 @@ namespace System.Collections.Generic
             int arrayLen = array.Length;
             if (index < 0 || index > arrayLen)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_Index);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    index,
+                    SR.ArgumentOutOfRange_Index
+                );
             }
 
             if (arrayLen - index < _size)
@@ -156,11 +170,13 @@ namespace System.Collections.Generic
             }
 
             int numToCopy = _size;
-            if (numToCopy == 0) return;
+            if (numToCopy == 0)
+                return;
 
             try
             {
-                int firstPart = (_array.Length - _head < numToCopy) ? _array.Length - _head : numToCopy;
+                int firstPart =
+                    (_array.Length - _head < numToCopy) ? _array.Length - _head : numToCopy;
                 Array.Copy(_array, _head, array, index, firstPart);
                 numToCopy -= firstPart;
 
@@ -293,9 +309,8 @@ namespace System.Collections.Generic
             }
 
             // We've wrapped around. Check both partitions, the least recently enqueued first.
-            return
-                Array.IndexOf(_array, item, _head, _array.Length - _head) >= 0 ||
-                Array.IndexOf(_array, item, 0, _tail) >= 0;
+            return Array.IndexOf(_array, item, _head, _array.Length - _head) >= 0
+                || Array.IndexOf(_array, item, 0, _tail) >= 0;
         }
 
         // Iterates over the objects in the queue, returning an array of the
@@ -385,7 +400,11 @@ namespace System.Collections.Generic
         {
             if (capacity < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), capacity, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    capacity,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (_array.Length < capacity)
@@ -407,14 +426,16 @@ namespace System.Collections.Generic
 
             // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
             // Note that this check works even when _items.Length overflowed thanks to the (uint) cast
-            if ((uint)newcapacity > Array.MaxLength) newcapacity = Array.MaxLength;
+            if ((uint)newcapacity > Array.MaxLength)
+                newcapacity = Array.MaxLength;
 
             // Ensure minimum growth is respected.
             newcapacity = Math.Max(newcapacity, _array.Length + MinimumGrow);
 
             // If the computed capacity is still less than specified, set to the original argument.
             // Capacities exceeding Array.MaxLength will be surfaced as OutOfMemoryException by Array.Resize.
-            if (newcapacity < capacity) newcapacity = capacity;
+            if (newcapacity < capacity)
+                newcapacity = capacity;
 
             SetCapacity(newcapacity);
         }
@@ -422,12 +443,11 @@ namespace System.Collections.Generic
         // Implements an enumerator for a Queue.  The enumerator uses the
         // internal version number of the list to ensure that no modifications are
         // made to the list while an enumeration is in progress.
-        public struct Enumerator : IEnumerator<T>,
-            System.Collections.IEnumerator
+        public struct Enumerator : IEnumerator<T>, System.Collections.IEnumerator
         {
             private readonly Queue<T> _q;
             private readonly int _version;
-            private int _index;   // -1 = not started, -2 = ended/disposed
+            private int _index; // -1 = not started, -2 = ended/disposed
             private T? _currentElement;
 
             internal Enumerator(Queue<T> q)
@@ -446,7 +466,8 @@ namespace System.Collections.Generic
 
             public bool MoveNext()
             {
-                if (_version != _q._version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _q._version)
+                    throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
 
                 if (_index == -2)
                     return false;
@@ -497,7 +518,11 @@ namespace System.Collections.Generic
             private void ThrowEnumerationNotStartedOrEnded()
             {
                 Debug.Assert(_index == -1 || _index == -2);
-                throw new InvalidOperationException(_index == -1 ? SR.InvalidOperation_EnumNotStarted : SR.InvalidOperation_EnumEnded);
+                throw new InvalidOperationException(
+                    _index == -1
+                      ? SR.InvalidOperation_EnumNotStarted
+                      : SR.InvalidOperation_EnumEnded
+                );
             }
 
             object? IEnumerator.Current
@@ -507,7 +532,8 @@ namespace System.Collections.Generic
 
             void IEnumerator.Reset()
             {
-                if (_version != _q._version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _q._version)
+                    throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 _index = -1;
                 _currentElement = default;
             }

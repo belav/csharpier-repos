@@ -10,27 +10,48 @@ using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Owin
 {
-    using WebSocketCloseAsync =
-        Func<int /* closeStatus */,
-            string /* closeDescription */,
-            CancellationToken /* cancel */,
-            Task>;
-    using WebSocketReceiveAsync =
-        Func<ArraySegment<byte> /* data */,
-            CancellationToken /* cancel */,
-            Task<Tuple<int /* messageType */,
-                bool /* endOfMessage */,
-                int /* count */>>>;
-    using WebSocketReceiveTuple =
-        Tuple<int /* messageType */,
-            bool /* endOfMessage */,
-            int /* count */>;
-    using WebSocketSendAsync =
-        Func<ArraySegment<byte> /* data */,
-            int /* messageType */,
-            bool /* endOfMessage */,
-            CancellationToken /* cancel */,
-            Task>;
+    using WebSocketCloseAsync = Func<
+        int /* closeStatus */
+        ,
+        string /* closeDescription */
+        ,
+        CancellationToken /* cancel */
+        ,
+        Task
+    >;
+    using WebSocketReceiveAsync = Func<
+        ArraySegment<byte> /* data */
+        ,
+        CancellationToken /* cancel */
+        ,
+        Task<
+            Tuple<
+                int /* messageType */
+                ,
+                bool /* endOfMessage */
+                ,
+                int /* count */
+            >
+        >
+    >;
+    using WebSocketReceiveTuple = Tuple<
+        int /* messageType */
+        ,
+        bool /* endOfMessage */
+        ,
+        int /* count */
+    >;
+    using WebSocketSendAsync = Func<
+        ArraySegment<byte> /* data */
+        ,
+        int /* messageType */
+        ,
+        bool /* endOfMessage */
+        ,
+        CancellationToken /* cancel */
+        ,
+        Task
+    >;
 
     /// <summary>
     /// WebSocket adapter.
@@ -48,7 +69,9 @@ namespace Microsoft.AspNetCore.Owin
 
             _environment = new Dictionary<string, object>();
             _environment[OwinConstants.WebSocket.SendAsync] = new WebSocketSendAsync(SendAsync);
-            _environment[OwinConstants.WebSocket.ReceiveAsync] = new WebSocketReceiveAsync(ReceiveAsync);
+            _environment[OwinConstants.WebSocket.ReceiveAsync] = new WebSocketReceiveAsync(
+                ReceiveAsync
+            );
             _environment[OwinConstants.WebSocket.CloseAsync] = new WebSocketCloseAsync(CloseAsync);
             _environment[OwinConstants.WebSocket.CallCancelled] = ct;
             _environment[OwinConstants.WebSocket.Version] = OwinConstants.WebSocket.VersionValue;
@@ -61,7 +84,12 @@ namespace Microsoft.AspNetCore.Owin
             get { return _environment; }
         }
 
-        internal Task SendAsync(ArraySegment<byte> buffer, int messageType, bool endOfMessage, CancellationToken cancel)
+        internal Task SendAsync(
+            ArraySegment<byte> buffer,
+            int messageType,
+            bool endOfMessage,
+            CancellationToken cancel
+        )
         {
             // Remap close messages to CloseAsync.  System.Net.WebSockets.WebSocket.SendAsync does not allow close messages.
             if (messageType == 0x8)
@@ -77,20 +105,27 @@ namespace Microsoft.AspNetCore.Owin
             return _webSocket.SendAsync(buffer, OpCodeToEnum(messageType), endOfMessage, cancel);
         }
 
-        internal async Task<WebSocketReceiveTuple> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancel)
+        internal async Task<WebSocketReceiveTuple> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancel
+        )
         {
             WebSocketReceiveResult nativeResult = await _webSocket.ReceiveAsync(buffer, cancel);
 
             if (nativeResult.MessageType == WebSocketMessageType.Close)
             {
-                _environment[OwinConstants.WebSocket.ClientCloseStatus] = (int)(nativeResult.CloseStatus ?? WebSocketCloseStatus.NormalClosure);
-                _environment[OwinConstants.WebSocket.ClientCloseDescription] = nativeResult.CloseStatusDescription ?? string.Empty;
+                _environment[OwinConstants.WebSocket.ClientCloseStatus] = (int)(
+                    nativeResult.CloseStatus ?? WebSocketCloseStatus.NormalClosure
+                );
+                _environment[OwinConstants.WebSocket.ClientCloseDescription] =
+                    nativeResult.CloseStatusDescription ?? string.Empty;
             }
 
             return new WebSocketReceiveTuple(
                 EnumToOpCode(nativeResult.MessageType),
                 nativeResult.EndOfMessage,
-                nativeResult.Count);
+                nativeResult.Count
+            );
         }
 
         internal Task CloseAsync(int status, string description, CancellationToken cancel)
@@ -108,9 +143,12 @@ namespace Microsoft.AspNetCore.Owin
             {
                 // Unpack the close message.
                 int statusCode =
-                    (buffer.Array[buffer.Offset] << 8)
-                        | buffer.Array[buffer.Offset + 1];
-                string description = Encoding.UTF8.GetString(buffer.Array, buffer.Offset + 2, buffer.Count - 2);
+                    (buffer.Array[buffer.Offset] << 8) | buffer.Array[buffer.Offset + 1];
+                string description = Encoding.UTF8.GetString(
+                    buffer.Array,
+                    buffer.Offset + 2,
+                    buffer.Count - 2
+                );
 
                 return CloseAsync(statusCode, description, cancel);
             }
@@ -124,20 +162,25 @@ namespace Microsoft.AspNetCore.Owin
         {
             switch (_webSocket.State)
             {
-                case WebSocketState.Closed: // Closed gracefully, no action needed. 
-                case WebSocketState.Aborted: // Closed abortively, no action needed.                       
+                case WebSocketState.Closed: // Closed gracefully, no action needed.
+                case WebSocketState.Aborted: // Closed abortively, no action needed.
                     break;
                 case WebSocketState.CloseReceived:
                     // Echo what the client said, if anything.
-                    await _webSocket.CloseAsync(_webSocket.CloseStatus ?? WebSocketCloseStatus.NormalClosure,
-                        _webSocket.CloseStatusDescription ?? string.Empty, _cancellationToken);
+                    await _webSocket.CloseAsync(
+                        _webSocket.CloseStatus ?? WebSocketCloseStatus.NormalClosure,
+                        _webSocket.CloseStatusDescription ?? string.Empty,
+                        _cancellationToken
+                    );
                     break;
                 case WebSocketState.Open:
                 case WebSocketState.CloseSent: // No close received, abort so we don't have to drain the pipe.
                     _webSocket.Abort();
                     break;
                 default:
-                    throw new NotSupportedException($"Unsupported {nameof(WebSocketState)} value: {_webSocket.State}.");
+                    throw new NotSupportedException(
+                        $"Unsupported {nameof(WebSocketState)} value: {_webSocket.State}."
+                    );
             }
         }
 
@@ -152,7 +195,11 @@ namespace Microsoft.AspNetCore.Owin
                 case 0x8:
                     return WebSocketMessageType.Close;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(messageType), messageType, string.Empty);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(messageType),
+                        messageType,
+                        string.Empty
+                    );
             }
         }
 
@@ -167,7 +214,11 @@ namespace Microsoft.AspNetCore.Owin
                 case WebSocketMessageType.Close:
                     return 0x8;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(webSocketMessageType), webSocketMessageType, string.Empty);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(webSocketMessageType),
+                        webSocketMessageType,
+                        string.Empty
+                    );
             }
         }
     }

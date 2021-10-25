@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
             int argumentIndex,
             int argumentCount,
             string argumentName,
-            int? selectedItem = null)
+            int? selectedItem = null
+        )
         {
             Contract.ThrowIfNull(items);
             Contract.ThrowIfTrue(items.IsEmpty());
@@ -70,12 +71,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
 
             if (argumentIndex < 0)
             {
-                throw new ArgumentException($"{nameof(argumentIndex)} < 0. {argumentIndex} < 0", nameof(argumentIndex));
+                throw new ArgumentException(
+                    $"{nameof(argumentIndex)} < 0. {argumentIndex} < 0",
+                    nameof(argumentIndex)
+                );
             }
 
             if (argumentCount < argumentIndex)
             {
-                throw new ArgumentException($"{nameof(argumentCount)} < {nameof(argumentIndex)}. {argumentCount} < {argumentIndex}", nameof(argumentIndex));
+                throw new ArgumentException(
+                    $"{nameof(argumentCount)} < {nameof(argumentIndex)}. {argumentCount} < {argumentIndex}",
+                    nameof(argumentIndex)
+                );
             }
 
             // Adjust the `selectedItem` index if duplicates are able to be removed.

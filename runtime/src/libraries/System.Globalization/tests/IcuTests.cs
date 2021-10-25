@@ -9,8 +9,8 @@ namespace System.Globalization.Tests
 {
     public class IcuTests
     {
-        private static bool IsIcuCompatiblePlatform => PlatformDetection.IsNotWindows ||
-                                                       PlatformDetection.IsWindows10Version1903OrGreater;
+        private static bool IsIcuCompatiblePlatform =>
+            PlatformDetection.IsNotWindows || PlatformDetection.IsWindows10Version1903OrGreater;
 
         [ConditionalFact(nameof(IsIcuCompatiblePlatform))]
         public static void IcuShouldBeUsedByDefault()
@@ -18,7 +18,10 @@ namespace System.Globalization.Tests
             Type globalizationMode = Type.GetType("System.Globalization.GlobalizationMode");
             if (globalizationMode != null)
             {
-                MethodInfo methodInfo = globalizationMode.GetProperty("UseNls", BindingFlags.NonPublic | BindingFlags.Static)?.GetMethod;
+                MethodInfo methodInfo = globalizationMode.GetProperty(
+                    "UseNls",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )?.GetMethod;
                 if (methodInfo != null)
                 {
                     Assert.False((bool)methodInfo.Invoke(null, null));
@@ -26,7 +29,9 @@ namespace System.Globalization.Tests
                 }
             }
 
-            throw new XunitException("Couldn't get System.Globalization.GlobalizationMode.UseIcu property.");
+            throw new XunitException(
+                "Couldn't get System.Globalization.GlobalizationMode.UseIcu property."
+            );
         }
 
         [ConditionalFact(nameof(IsIcuCompatiblePlatform))]

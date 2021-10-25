@@ -11,8 +11,11 @@ namespace Roslyn.Utilities
 {
     internal static class ImmutableArrayExtensions
     {
-        public static bool Contains<T>(this ImmutableArray<T> items, T item, IEqualityComparer<T>? equalityComparer)
-            => items.IndexOf(item, 0, equalityComparer) >= 0;
+        public static bool Contains<T>(
+            this ImmutableArray<T> items,
+            T item,
+            IEqualityComparer<T>? equalityComparer
+        ) => items.IndexOf(item, 0, equalityComparer) >= 0;
 
         public static ImmutableArray<T> ToImmutableArrayOrEmpty<T>(this T[]? items)
         {
@@ -48,7 +51,9 @@ namespace Roslyn.Utilities
 
             if (items is ImmutableArray<T> array)
             {
-                return array.IsDefaultOrEmpty ? SpecializedCollections.EmptyBoxedImmutableArray<T>() : (IReadOnlyList<T>)items;
+                return array.IsDefaultOrEmpty
+                  ? SpecializedCollections.EmptyBoxedImmutableArray<T>()
+                  : (IReadOnlyList<T>)items;
             }
 
             if (items is ICollection<T> collection && collection.Count == 0)
@@ -59,8 +64,10 @@ namespace Roslyn.Utilities
             return ImmutableArray.CreateRange(items);
         }
 
-        public static ConcatImmutableArray<T> ConcatFast<T>(this ImmutableArray<T> first, ImmutableArray<T> second)
-            => new(first, second);
+        public static ConcatImmutableArray<T> ConcatFast<T>(
+            this ImmutableArray<T> first,
+            ImmutableArray<T> second
+        ) => new(first, second);
 
         public static ImmutableArray<T> TakeAsArray<T>(this ImmutableArray<T> array, int count)
         {

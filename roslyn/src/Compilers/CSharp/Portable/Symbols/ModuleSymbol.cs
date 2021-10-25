@@ -38,18 +38,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return (AssemblySymbol)ContainingSymbol;
-            }
+            get { return (AssemblySymbol)ContainingSymbol; }
         }
 
         internal sealed override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -57,13 +51,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.NetModule;
-            }
+            get { return SymbolKind.NetModule; }
         }
 
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitModule(this, argument);
         }
@@ -79,9 +73,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler can create ModuleSymbols.
-        internal ModuleSymbol()
-        {
-        }
+        internal ModuleSymbol() { }
 
         /// <summary>
         /// Module's ordinal within containing assembly's Modules array.
@@ -103,20 +95,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Does this symbol represent a missing module.
         /// </summary>
-        internal abstract bool IsMissing
-        {
-            get;
-        }
+        internal abstract bool IsMissing { get; }
 
         /// <summary>
         /// Returns 'NotApplicable'
         /// </summary>
         public sealed override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         /// <summary>
@@ -124,10 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -135,10 +118,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -146,10 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -157,10 +134,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -168,10 +142,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -179,10 +150,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -196,10 +164,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         /// <summary>
@@ -209,10 +174,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public ImmutableArray<AssemblyIdentity> ReferencedAssemblies
         {
-            get
-            {
-                return GetReferencedAssemblies();
-            }
+            get { return GetReferencedAssemblies(); }
         }
 
         /// <summary>
@@ -225,7 +187,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <returns></returns>
         internal abstract ImmutableArray<AssemblyIdentity> GetReferencedAssemblies(); // TODO: Remove this method and make ReferencedAssemblies property abstract instead.
 
-
         /// <summary>
         /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced 
         /// by this module. Items at the same position from ReferencedAssemblies and 
@@ -233,10 +194,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public ImmutableArray<AssemblySymbol> ReferencedAssemblySymbols
         {
-            get
-            {
-                return GetReferencedAssemblySymbols();
-            }
+            get { return GetReferencedAssemblySymbols(); }
         }
 
         /// <summary>
@@ -280,7 +238,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// this module symbol because the module can be shared across multiple source 
         /// assemblies. This method will only be called for the first one.
         /// </param>
-        internal abstract void SetReferences(ModuleReferences<AssemblySymbol> moduleReferences, SourceAssemblySymbol originatingSourceAssemblyDebugOnly = null);
+        internal abstract void SetReferences(
+            ModuleReferences<AssemblySymbol> moduleReferences,
+            SourceAssemblySymbol originatingSourceAssemblyDebugOnly = null
+        );
 
         /// <summary>
         /// True if this module has any unified references.
@@ -296,7 +257,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// the Assembly Manager might decide to use another reference if it matches except for version 
         /// (it unifies the version with the existing reference).  
         /// </remarks>
-        internal abstract bool GetUnificationUseSiteDiagnostic(ref DiagnosticInfo result, TypeSymbol dependentType);
+        internal abstract bool GetUnificationUseSiteDiagnostic(
+            ref DiagnosticInfo result,
+            TypeSymbol dependentType
+        );
 
         /// <summary>
         /// Lookup a top level type referenced from metadata, names should be
@@ -309,7 +273,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Symbol for the type, or MissingMetadataSymbol if the type isn't found.
         /// </returns>
         /// <remarks></remarks>
-        internal abstract NamedTypeSymbol LookupTopLevelMetadataType(ref MetadataTypeName emittedName);
+        internal abstract NamedTypeSymbol LookupTopLevelMetadataType(
+            ref MetadataTypeName emittedName
+        );
 
         internal abstract ICollection<string> TypeNames { get; }
 
@@ -346,13 +312,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             var moduleNs = namespaceSymbol as NamespaceSymbol;
-            if ((object)moduleNs != null && moduleNs.Extent.Kind == NamespaceKind.Module && moduleNs.ContainingModule == this)
+            if (
+                (object)moduleNs != null
+                && moduleNs.Extent.Kind == NamespaceKind.Module
+                && moduleNs.ContainingModule == this
+            )
             {
                 // this is already the correct module namespace
                 return moduleNs;
             }
 
-            if (namespaceSymbol.IsGlobalNamespace || (object)namespaceSymbol.ContainingNamespace == null)
+            if (
+                namespaceSymbol.IsGlobalNamespace
+                || (object)namespaceSymbol.ContainingNamespace == null
+            )
             {
                 return this.GlobalNamespace;
             }

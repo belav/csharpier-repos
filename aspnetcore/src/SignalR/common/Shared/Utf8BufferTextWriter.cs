@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Internal
 {
     internal sealed class Utf8BufferTextWriter : TextWriter
     {
-        private static readonly UTF8Encoding _utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+        private static readonly UTF8Encoding _utf8NoBom = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false
+        );
         private static readonly int MaximumBytesPerUtf8Char = 4;
 
         [ThreadStatic]
@@ -65,7 +67,6 @@ namespace Microsoft.AspNetCore.Internal
             writer._memory = Memory<byte>.Empty;
             writer._memoryUsed = 0;
             writer._bufferWriter = null;
-
 #if DEBUG
             writer._inUse = false;
 #endif
@@ -115,11 +116,27 @@ namespace Microsoft.AspNetCore.Internal
             var bytesUsed = 0;
             var charsUsed = 0;
 #if NETCOREAPP
-            _encoder.Convert(new Span<char>(&value, 1), destination, false, out charsUsed, out bytesUsed, out _);
+            _encoder.Convert(
+                new Span<char>(&value, 1),
+                destination,
+                false,
+                out charsUsed,
+                out bytesUsed,
+                out _
+            );
 #else
             fixed (byte* destinationBytes = &MemoryMarshal.GetReference(destination))
             {
-                _encoder.Convert(&value, 1, destinationBytes, destination.Length, false, out charsUsed, out bytesUsed, out _);
+                _encoder.Convert(
+                    &value,
+                    1,
+                    destinationBytes,
+                    destination.Length,
+                    false,
+                    out charsUsed,
+                    out bytesUsed,
+                    out _
+                );
             }
 #endif
 
@@ -181,7 +198,16 @@ namespace Microsoft.AspNetCore.Internal
                     fixed (char* sourceChars = &MemoryMarshal.GetReference(buffer))
                     fixed (byte* destinationBytes = &MemoryMarshal.GetReference(destination))
                     {
-                        _encoder.Convert(sourceChars, buffer.Length, destinationBytes, destination.Length, false, out charsUsed, out bytesUsed, out _);
+                        _encoder.Convert(
+                            sourceChars,
+                            buffer.Length,
+                            destinationBytes,
+                            destination.Length,
+                            false,
+                            out charsUsed,
+                            out bytesUsed,
+                            out _
+                        );
                     }
                 }
 #endif

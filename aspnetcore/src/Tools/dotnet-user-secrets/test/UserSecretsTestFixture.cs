@@ -16,7 +16,12 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Tests
 
         public UserSecretsTestFixture()
         {
-            _disposables.Push(() => TryDelete(Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId))));
+            _disposables.Push(
+                () =>
+                    TryDelete(
+                        Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(TestSecretsId))
+                    )
+            );
         }
 
         public void Dispose()
@@ -33,7 +38,8 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Tests
             return GetTempSecretProject(out userSecretsId);
         }
 
-        private const string ProjectTemplate = @"<Project ToolsVersion=""15.0"" Sdk=""Microsoft.NET.Sdk"">
+        private const string ProjectTemplate =
+            @"<Project ToolsVersion=""15.0"" Sdk=""Microsoft.NET.Sdk"">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net6.0</TargetFrameworks>
@@ -54,26 +60,33 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Tests
 
         public string CreateProject(string userSecretsId)
         {
-            var projectPath = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), "usersecretstest", Guid.NewGuid().ToString()));
+            var projectPath = Directory.CreateDirectory(
+                Path.Combine(Path.GetTempPath(), "usersecretstest", Guid.NewGuid().ToString())
+            );
             var prop = string.IsNullOrEmpty(userSecretsId)
                 ? string.Empty
                 : $"<UserSecretsId>{userSecretsId}</UserSecretsId>";
 
             File.WriteAllText(
                 Path.Combine(projectPath.FullName, "TestProject.csproj"),
-                string.Format(CultureInfo.InvariantCulture, ProjectTemplate, prop));
+                string.Format(CultureInfo.InvariantCulture, ProjectTemplate, prop)
+            );
 
             var id = userSecretsId;
-            _disposables.Push(() =>
-            {
-                try
+            _disposables.Push(
+                () =>
                 {
-                    // may throw if id is bad
-                    var secretsDir = Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(id));
-                    TryDelete(secretsDir);
+                    try
+                    {
+                        // may throw if id is bad
+                        var secretsDir = Path.GetDirectoryName(
+                            PathHelper.GetSecretsPathFromSecretsId(id)
+                        );
+                        TryDelete(secretsDir);
+                    }
+                    catch { }
                 }
-                catch { }
-            });
+            );
             _disposables.Push(() => TryDelete(projectPath.FullName));
 
             return projectPath.FullName;

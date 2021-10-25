@@ -17,7 +17,10 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
         /// </summary>
         /// <param name="configuration">The <see cref="AuthenticatedEncryptorDescriptor"/>.</param>
         /// <param name="masterKey">The master key.</param>
-        public AuthenticatedEncryptorDescriptor(AuthenticatedEncryptorConfiguration configuration, ISecret masterKey)
+        public AuthenticatedEncryptorDescriptor(
+            AuthenticatedEncryptorConfiguration configuration,
+            ISecret masterKey
+        )
         {
             if (configuration == null)
             {
@@ -46,20 +49,32 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
             //   <masterKey requiresEncryption="true">...</masterKey>
             // </descriptor>
 
-            var encryptionElement = new XElement("encryption",
-                new XAttribute("algorithm", Configuration.EncryptionAlgorithm));
+            var encryptionElement = new XElement(
+                "encryption",
+                new XAttribute("algorithm", Configuration.EncryptionAlgorithm)
+            );
 
-            var validationElement = (AuthenticatedEncryptorFactory.IsGcmAlgorithm(Configuration.EncryptionAlgorithm))
-                ? (object)new XComment(" AES-GCM includes a 128-bit authentication tag, no extra validation algorithm required. ")
-                : (object)new XElement("validation",
-                    new XAttribute("algorithm", Configuration.ValidationAlgorithm));
+            var validationElement =
+                (AuthenticatedEncryptorFactory.IsGcmAlgorithm(Configuration.EncryptionAlgorithm))
+                    ? (object)new XComment(
+                          " AES-GCM includes a 128-bit authentication tag, no extra validation algorithm required. "
+                      )
+                    : (object)new XElement(
+                          "validation",
+                          new XAttribute("algorithm", Configuration.ValidationAlgorithm)
+                      );
 
-            var outerElement = new XElement("descriptor",
+            var outerElement = new XElement(
+                "descriptor",
                 encryptionElement,
                 validationElement,
-                MasterKey.ToMasterKeyElement());
+                MasterKey.ToMasterKeyElement()
+            );
 
-            return new XmlSerializedDescriptorInfo(outerElement, typeof(AuthenticatedEncryptorDescriptorDeserializer));
+            return new XmlSerializedDescriptorInfo(
+                outerElement,
+                typeof(AuthenticatedEncryptorDescriptorDeserializer)
+            );
         }
     }
 }

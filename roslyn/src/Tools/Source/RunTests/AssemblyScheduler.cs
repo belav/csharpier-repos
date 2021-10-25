@@ -47,7 +47,8 @@ namespace RunTests
             int assemblyPartitionId,
             string assemblyPath,
             string displayName,
-            ImmutableArray<TypeInfo> typeInfoList)
+            ImmutableArray<TypeInfo> typeInfoList
+        )
         {
             AssemblyPartitionId = assemblyPartitionId;
             AssemblyPath = assemblyPath;
@@ -88,14 +89,22 @@ namespace RunTests
         /// https://github.com/dotnet/corefx/issues/3793
         /// https://github.com/dotnet/roslyn/issues/8936
         /// </summary>
-        private const string EventListenerGuardFullName = "Microsoft.CodeAnalysis.UnitTests.EventListenerGuard";
+        private const string EventListenerGuardFullName =
+            "Microsoft.CodeAnalysis.UnitTests.EventListenerGuard";
 
         private static class AssemblyInfoBuilder
         {
-            internal static void Build(string assemblyPath, int methodLimit, List<TypeInfo> typeInfoList, out ImmutableArray<PartitionInfo> partitionInfoList)
+            internal static void Build(
+                string assemblyPath,
+                int methodLimit,
+                List<TypeInfo> typeInfoList,
+                out ImmutableArray<PartitionInfo> partitionInfoList
+            )
             {
                 var list = new List<PartitionInfo>();
-                var hasEventListenerGuard = typeInfoList.Any(x => x.FullName == EventListenerGuardFullName);
+                var hasEventListenerGuard = typeInfoList.Any(
+                    x => x.FullName == EventListenerGuardFullName
+                );
                 var currentTypeInfoList = new List<TypeInfo>();
                 var currentClassNameLengthSum = -1;
                 var currentId = 0;
@@ -140,11 +149,13 @@ namespace RunTests
                         return;
                     }
 
-                    // One item we have to consider here is the maximum command line length in 
+                    // One item we have to consider here is the maximum command line length in
                     // Windows which is 32767 characters (XP is smaller but don't care).  Once
-                    // we get close then create a partition and move on. 
-                    if (currentTypeInfoList.Sum(x => x.MethodCount) >= methodLimit ||
-                        currentClassNameLengthSum > 25000)
+                    // we get close then create a partition and move on.
+                    if (
+                        currentTypeInfoList.Sum(x => x.MethodCount) >= methodLimit
+                        || currentClassNameLengthSum > 25000
+                    )
                     {
                         FinishPartition();
                         BeginPartition();
@@ -156,7 +167,8 @@ namespace RunTests
                             currentId,
                             assemblyPath,
                             $"{Path.GetFileName(assemblyPath)}.{currentId}",
-                            ImmutableArray.CreateRange(currentTypeInfoList));
+                            ImmutableArray.CreateRange(currentTypeInfoList)
+                        );
                         list.Add(partitionInfo);
                     }
                 }
@@ -179,7 +191,9 @@ namespace RunTests
         internal AssemblyScheduler(Options options)
         {
             _options = options;
-            _methodLimit = options.UseHelix ? AssemblyScheduler.HelixMethodLimit : AssemblyScheduler.DefaultMethodLimit;
+            _methodLimit = options.UseHelix
+                ? AssemblyScheduler.HelixMethodLimit
+                : AssemblyScheduler.DefaultMethodLimit;
         }
 
         public ImmutableArray<PartitionInfo> Schedule(string assemblyPath, bool force = false)
@@ -190,7 +204,12 @@ namespace RunTests
             }
 
             var typeInfoList = GetTypeInfoList(assemblyPath);
-            AssemblyInfoBuilder.Build(assemblyPath, _methodLimit, typeInfoList, out var partitionList);
+            AssemblyInfoBuilder.Build(
+                assemblyPath,
+                _methodLimit,
+                typeInfoList,
+                out var partitionList
+            );
 
             // If the scheduling didn't actually produce multiple partition then send back an unpartitioned
             // representation.
@@ -205,7 +224,9 @@ namespace RunTests
             {
                 var methodCount = partition.TypeInfoList.Sum(x => x.MethodCount);
                 var delta = methodCount - _methodLimit;
-                Logger.Log($"  Partition: {partition.AssemblyPartitionId} method count {methodCount} delta {delta}");
+                Logger.Log(
+                    $"  Partition: {partition.AssemblyPartitionId} method count {methodCount} delta {delta}"
+                );
                 foreach (var typeInfo in partition.TypeInfoList)
                 {
                     Logger.Log($"    {typeInfo.FullName} {typeInfo.MethodCount}");
@@ -256,15 +277,21 @@ namespace RunTests
         /// code doesn't actually resolve base types or trace through inherrited Fact attributes
         /// hence we have to error on the side of including types with no tests vs. excluding them.
         /// </summary>
-        private static bool ShouldIncludeType(MetadataReader reader, TypeDefinition type, int testMethodCount)
+        private static bool ShouldIncludeType(
+            MetadataReader reader,
+            TypeDefinition type,
+            int testMethodCount
+        )
         {
             // xunit only handles public, non-abstract classes
             var isPublic =
-                TypeAttributes.Public == (type.Attributes & TypeAttributes.Public) ||
-                TypeAttributes.NestedPublic == (type.Attributes & TypeAttributes.NestedPublic);
-            if (!isPublic ||
-                TypeAttributes.Abstract == (type.Attributes & TypeAttributes.Abstract) ||
-                TypeAttributes.Class != (type.Attributes & TypeAttributes.Class))
+                TypeAttributes.Public == (type.Attributes & TypeAttributes.Public)
+                || TypeAttributes.NestedPublic == (type.Attributes & TypeAttributes.NestedPublic);
+            if (
+                !isPublic
+                || TypeAttributes.Abstract == (type.Attributes & TypeAttributes.Abstract)
+                || TypeAttributes.Class != (type.Attributes & TypeAttributes.Class)
+            )
             {
                 return false;
             }
@@ -281,7 +308,7 @@ namespace RunTests
                 return true;
             }
 
-            // The case we still have to consider at this point is a class with 0 defined methods, 
+            // The case we still have to consider at this point is a class with 0 defined methods,
             // inheritting from a class with > 0 defined test methods.  That is a completely valid
             // xunit scenario.  For now we're just going to exclude types that inherit from object
             // or other built-in base types because they clearly don't fit that category.
@@ -294,13 +321,18 @@ namespace RunTests
             foreach (var handle in type.GetMethods())
             {
                 var methodDefinition = reader.GetMethodDefinition(handle);
-                if (methodDefinition.GetCustomAttributes().Count == 0 ||
-                    !IsValidIdentifier(reader, methodDefinition.Name))
+                if (
+                    methodDefinition.GetCustomAttributes().Count == 0
+                    || !IsValidIdentifier(reader, methodDefinition.Name)
+                )
                 {
                     continue;
                 }
 
-                if (MethodAttributes.Public != (methodDefinition.Attributes & MethodAttributes.Public))
+                if (
+                    MethodAttributes.Public
+                    != (methodDefinition.Attributes & MethodAttributes.Public)
+                )
                 {
                     continue;
                 }
@@ -328,7 +360,10 @@ namespace RunTests
             return true;
         }
 
-        private static bool InheritsFromFrameworkBaseType(MetadataReader reader, TypeDefinition type)
+        private static bool InheritsFromFrameworkBaseType(
+            MetadataReader reader,
+            TypeDefinition type
+        )
         {
             if (type.BaseType.Kind != HandleKind.TypeReference)
             {
@@ -336,9 +371,8 @@ namespace RunTests
             }
 
             var typeRef = reader.GetTypeReference((TypeReferenceHandle)type.BaseType);
-            return
-                reader.GetString(typeRef.Namespace) == "System" &&
-                reader.GetString(typeRef.Name) is "Object" or "ValueType" or "Enum";
+            return reader.GetString(typeRef.Namespace) == "System"
+                && reader.GetString(typeRef.Name) is "Object" or "ValueType" or "Enum";
         }
 
         private static string GetFullName(MetadataReader reader, TypeDefinition type)

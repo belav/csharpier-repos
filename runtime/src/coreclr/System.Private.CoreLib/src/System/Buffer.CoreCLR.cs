@@ -31,7 +31,11 @@ namespace System
         private const uint BulkMoveWithWriteBarrierChunk = 0x4000;
 #endif
 
-        internal static void BulkMoveWithWriteBarrier(ref byte destination, ref byte source, nuint byteCount)
+        internal static void BulkMoveWithWriteBarrier(
+            ref byte destination,
+            ref byte source,
+            nuint byteCount
+        )
         {
             if (byteCount <= BulkMoveWithWriteBarrierChunk)
                 __BulkMoveWithWriteBarrier(ref destination, ref source, byteCount);
@@ -41,7 +45,11 @@ namespace System
 
         // Non-inlinable wrapper around the loop for copying large blocks in chunks
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void _BulkMoveWithWriteBarrier(ref byte destination, ref byte source, nuint byteCount)
+        private static void _BulkMoveWithWriteBarrier(
+            ref byte destination,
+            ref byte source,
+            nuint byteCount
+        )
         {
             Debug.Assert(byteCount > BulkMoveWithWriteBarrierChunk);
 
@@ -55,11 +63,17 @@ namespace System
                 do
                 {
                     byteCount -= BulkMoveWithWriteBarrierChunk;
-                    __BulkMoveWithWriteBarrier(ref destination, ref source, BulkMoveWithWriteBarrierChunk);
-                    destination = ref Unsafe.AddByteOffset(ref destination, BulkMoveWithWriteBarrierChunk);
+                    __BulkMoveWithWriteBarrier(
+                        ref destination,
+                        ref source,
+                        BulkMoveWithWriteBarrierChunk
+                    );
+                    destination = ref Unsafe.AddByteOffset(
+                        ref destination,
+                        BulkMoveWithWriteBarrierChunk
+                    );
                     source = ref Unsafe.AddByteOffset(ref source, BulkMoveWithWriteBarrierChunk);
-                }
-                while (byteCount > BulkMoveWithWriteBarrierChunk);
+                } while (byteCount > BulkMoveWithWriteBarrierChunk);
             }
             else
             {
@@ -67,15 +81,22 @@ namespace System
                 do
                 {
                     byteCount -= BulkMoveWithWriteBarrierChunk;
-                    __BulkMoveWithWriteBarrier(ref Unsafe.AddByteOffset(ref destination, byteCount), ref Unsafe.AddByteOffset(ref source, byteCount), BulkMoveWithWriteBarrierChunk);
-                }
-                while (byteCount > BulkMoveWithWriteBarrierChunk);
+                    __BulkMoveWithWriteBarrier(
+                        ref Unsafe.AddByteOffset(ref destination, byteCount),
+                        ref Unsafe.AddByteOffset(ref source, byteCount),
+                        BulkMoveWithWriteBarrierChunk
+                    );
+                } while (byteCount > BulkMoveWithWriteBarrierChunk);
             }
             __BulkMoveWithWriteBarrier(ref destination, ref source, byteCount);
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void __BulkMoveWithWriteBarrier(ref byte destination, ref byte source, nuint byteCount);
+        private static extern void __BulkMoveWithWriteBarrier(
+            ref byte destination,
+            ref byte source,
+            nuint byteCount
+        );
 
         [DllImport(RuntimeHelpers.QCall, CharSet = CharSet.Unicode)]
         private static extern unsafe void __Memmove(byte* dest, byte* src, nuint len);
@@ -88,12 +109,25 @@ namespace System
         }
 
         // Used by ilmarshalers.cpp
-        internal static unsafe void Memcpy(byte* pDest, int destIndex, byte[] src, int srcIndex, int len)
+        internal static unsafe void Memcpy(
+            byte* pDest,
+            int destIndex,
+            byte[] src,
+            int srcIndex,
+            int len
+        )
         {
-            Debug.Assert((srcIndex >= 0) && (destIndex >= 0) && (len >= 0), "Index and length must be non-negative!");
+            Debug.Assert(
+                (srcIndex >= 0) && (destIndex >= 0) && (len >= 0),
+                "Index and length must be non-negative!"
+            );
             Debug.Assert(src.Length - srcIndex >= len, "not enough bytes in src");
 
-            Memmove(ref *(pDest + destIndex), ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(src), srcIndex), (nuint)len);
+            Memmove(
+                ref *(pDest + destIndex),
+                ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(src), srcIndex),
+                (nuint)len
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -105,7 +139,8 @@ namespace System
                 Memmove(
                     ref Unsafe.As<T, byte>(ref destination),
                     ref Unsafe.As<T, byte>(ref source),
-                    elementCount * (nuint)Unsafe.SizeOf<T>());
+                    elementCount * (nuint)Unsafe.SizeOf<T>()
+                );
             }
             else
             {
@@ -113,7 +148,8 @@ namespace System
                 BulkMoveWithWriteBarrier(
                     ref Unsafe.As<T, byte>(ref destination),
                     ref Unsafe.As<T, byte>(ref source),
-                    elementCount * (nuint)Unsafe.SizeOf<T>());
+                    elementCount * (nuint)Unsafe.SizeOf<T>()
+                );
             }
         }
     }

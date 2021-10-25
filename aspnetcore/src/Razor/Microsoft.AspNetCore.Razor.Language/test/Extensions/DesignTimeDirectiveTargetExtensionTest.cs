@@ -24,13 +24,14 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"#pragma warning disable 219
+                @"#pragma warning disable 219
 private void __RazorDirectiveTokenHelpers__() {
 }
 #pragma warning restore 219
 ",
-                    csharp,
-                    ignoreLineEndingDifferences: true);
+                csharp,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -55,7 +56,7 @@ private void __RazorDirectiveTokenHelpers__() {
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"#pragma warning disable 219
+                @"#pragma warning disable 219
 private void __RazorDirectiveTokenHelpers__() {
 ((System.Action)(() => {
 #nullable restore
@@ -70,8 +71,9 @@ System.String __typeHelper = default!;
 }
 #pragma warning restore 219
 ",
-                    csharp,
-                    ignoreLineEndingDifferences: true);
+                csharp,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -96,7 +98,7 @@ System.String __typeHelper = default!;
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"#pragma warning disable 219
+                @"#pragma warning disable 219
 private void __RazorDirectiveTokenHelpers__() {
 ((System.Action)(() => {
 #nullable restore
@@ -111,8 +113,9 @@ global::System.Object __typeHelper = nameof(System.Collections.Generic);
 }
 #pragma warning restore 219
 ",
-                    csharp,
-                    ignoreLineEndingDifferences: true);
+                csharp,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -137,7 +140,7 @@ global::System.Object __typeHelper = nameof(System.Collections.Generic);
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"#pragma warning disable 219
+                @"#pragma warning disable 219
 private void __RazorDirectiveTokenHelpers__() {
 ((System.Action)(() => {
 #nullable restore
@@ -152,8 +155,9 @@ global::System.Object Foo = null!;
 }
 #pragma warning restore 219
 ",
-                    csharp,
-                    ignoreLineEndingDifferences: true);
+                csharp,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -185,7 +189,7 @@ global::System.Object Foo = null!;
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"#pragma warning disable 219
+                @"#pragma warning disable 219
 private void __RazorDirectiveTokenHelpers__() {
 ((System.Action)(() => {
 #nullable restore
@@ -210,8 +214,9 @@ global::System.Object __typeHelper = ""Value"";
 }
 #pragma warning restore 219
 ",
-                    csharp,
-                    ignoreLineEndingDifferences: true);
+                csharp,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -220,7 +225,7 @@ global::System.Object __typeHelper = ""Value"";
             // Arrange
             var extension = new DesignTimeDirectiveTargetExtension();
             var context = TestCodeRenderingContext.CreateDesignTime();
-            
+
             var node = new DesignTimeDirectiveIntermediateNode();
             var token = new DirectiveTokenIntermediateNode()
             {
@@ -236,7 +241,7 @@ global::System.Object __typeHelper = ""Value"";
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"#pragma warning disable 219
+                @"#pragma warning disable 219
 private void __RazorDirectiveTokenHelpers__() {
 ((System.Action)(() => {
 #nullable restore
@@ -251,8 +256,9 @@ global::System.Boolean __typeHelper = true;
 }
 #pragma warning restore 219
 ",
-                    csharp,
-                    ignoreLineEndingDifferences: true);
+                csharp,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -276,13 +282,14 @@ global::System.Boolean __typeHelper = true;
             // Assert
             var csharp = context.CodeWriter.GenerateCode();
             Assert.Equal(
-@"#pragma warning disable 219
+                @"#pragma warning disable 219
 private void __RazorDirectiveTokenHelpers__() {
 }
 #pragma warning restore 219
 ",
-                    csharp,
-                    ignoreLineEndingDifferences: true);
+                csharp,
+                ignoreLineEndingDifferences: true
+            );
         }
     }
 }

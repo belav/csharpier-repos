@@ -27,7 +27,13 @@ namespace System.Net.Http.HPack
         /// <summary>
         /// Initialize header values. An entry will be reinitialized when reused.
         /// </summary>
-        public void Initialize(int hash, string name, string value, int index, EncoderHeaderEntry? next)
+        public void Initialize(
+            int hash,
+            string name,
+            string value,
+            int index,
+            EncoderHeaderEntry? next
+        )
         {
             Debug.Assert(name != null);
             Debug.Assert(value != null);

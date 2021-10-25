@@ -13,16 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
-    public class InitializerExpressionStructureTests : AbstractCSharpSyntaxNodeStructureTests<InitializerExpressionSyntax>
+    public class InitializerExpressionStructureTests
+        : AbstractCSharpSyntaxNodeStructureTests<InitializerExpressionSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider()
-            => new InitializerExpressionStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new InitializerExpressionStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestOuterInitializer()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -34,14 +35,15 @@ class C
     }
 }
 ",
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestInnerInitializer()
         {
             await VerifyBlockSpansAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -55,7 +57,8 @@ class C
     }
 }
 ",
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
     }
 }

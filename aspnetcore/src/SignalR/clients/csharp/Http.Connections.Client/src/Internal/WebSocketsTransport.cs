@@ -33,10 +33,16 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
         public PipeWriter Output => _transport!.Output;
 
-        public WebSocketsTransport(HttpConnectionOptions httpConnectionOptions, ILoggerFactory loggerFactory, Func<Task<string?>> accessTokenProvider)
+        public WebSocketsTransport(
+            HttpConnectionOptions httpConnectionOptions,
+            ILoggerFactory loggerFactory,
+            Func<Task<string?>> accessTokenProvider
+        )
         {
             _webSocket = new ClientWebSocket();
-            _logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger<WebSocketsTransport>();
+            _logger = (
+                loggerFactory ?? NullLoggerFactory.Instance
+            ).CreateLogger<WebSocketsTransport>();
 
             var isBrowser = OperatingSystem.IsBrowser();
             if (!isBrowser)
@@ -44,10 +50,16 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 // Full Framework will throw when trying to set the User-Agent header
                 // So avoid setting it in netstandard2.0 and only set it in netstandard2.1 and higher
 #if !NETSTANDARD2_0 && !NET461
-                _webSocket.Options.SetRequestHeader("User-Agent", Constants.UserAgentHeader.ToString());
+                _webSocket.Options.SetRequestHeader(
+                    "User-Agent",
+                    Constants.UserAgentHeader.ToString()
+                );
 #else
                 // Set an alternative user agent header on Full framework
-                _webSocket.Options.SetRequestHeader("X-SignalR-User-Agent", Constants.UserAgentHeader.ToString());
+                _webSocket.Options.SetRequestHeader(
+                    "X-SignalR-User-Agent",
+                    Constants.UserAgentHeader.ToString()
+                );
 #endif
 
                 // Set this header so the server auth middleware will set an Unauthorized instead of Redirect status code
@@ -81,7 +93,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
                     if (httpConnectionOptions.ClientCertificates != null)
                     {
-                        _webSocket.Options.ClientCertificates.AddRange(httpConnectionOptions.ClientCertificates);
+                        _webSocket.Options.ClientCertificates.AddRange(
+                            httpConnectionOptions.ClientCertificates
+                        );
                     }
 
                     if (httpConnectionOptions.Credentials != null)
@@ -96,7 +110,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
                     if (httpConnectionOptions.UseDefaultCredentials != null)
                     {
-                        _webSocket.Options.UseDefaultCredentials = httpConnectionOptions.UseDefaultCredentials.Value;
+                        _webSocket.Options.UseDefaultCredentials =
+                            httpConnectionOptions.UseDefaultCredentials.Value;
                     }
 
                     httpConnectionOptions.WebSocketConfiguration?.Invoke(_webSocket.Options);
@@ -109,7 +124,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
             _accessTokenProvider = accessTokenProvider;
         }
 
-        public async Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken = default)
+        public async Task StartAsync(
+            Uri url,
+            TransferFormat transferFormat,
+            CancellationToken cancellationToken = default
+        )
         {
             if (url == null)
             {
@@ -118,12 +137,16 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
             if (transferFormat != TransferFormat.Binary && transferFormat != TransferFormat.Text)
             {
-                throw new ArgumentException($"The '{transferFormat}' transfer format is not supported by this transport.", nameof(transferFormat));
+                throw new ArgumentException(
+                    $"The '{transferFormat}' transfer format is not supported by this transport.",
+                    nameof(transferFormat)
+                );
             }
 
-            _webSocketMessageType = transferFormat == TransferFormat.Binary
-                ? WebSocketMessageType.Binary
-                : WebSocketMessageType.Text;
+            _webSocketMessageType =
+                transferFormat == TransferFormat.Binary
+                    ? WebSocketMessageType.Binary
+                    : WebSocketMessageType.Text;
 
             var resolvedUrl = ResolveWebSocketsUrl(url);
 
@@ -143,7 +166,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                     else
                     {
 #pragma warning disable CA1416 // Analyzer bug
-                        _webSocket.Options.SetRequestHeader("Authorization", $"Bearer {accessToken}");
+                        _webSocket.Options.SetRequestHeader(
+                            "Authorization",
+                            $"Bearer {accessToken}"
+                        );
 #pragma warning restore CA1416 // Analyzer bug
                     }
                 }
@@ -199,7 +225,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
                     using (var delayCts = new CancellationTokenSource())
                     {
-                        var resultTask = await Task.WhenAny(sending, Task.Delay(_closeTimeout, delayCts.Token));
+                        var resultTask = await Task.WhenAny(
+                            sending,
+                            Task.Delay(_closeTimeout, delayCts.Token)
+                        );
 
                         if (resultTask != sending)
                         {
@@ -242,7 +271,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                 {
 #if NETSTANDARD2_1 || NETCOREAPP
                     // Do a 0 byte read so that idle connections don't allocate a buffer when waiting for a read
-                    var result = await socket.ReceiveAsync(Memory<byte>.Empty, CancellationToken.None);
+                    var result = await socket.ReceiveAsync(
+                        Memory<byte>.Empty,
+                        CancellationToken.None
+                    );
 
                     if (result.MessageType == WebSocketMessageType.Close)
                     {
@@ -250,7 +282,9 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
                         if (_webSocket.CloseStatus != WebSocketCloseStatus.NormalClosure)
                         {
-                            throw new InvalidOperationException($"Websocket closed with error: {_webSocket.CloseStatus}.");
+                            throw new InvalidOperationException(
+                                $"Websocket closed with error: {_webSocket.CloseStatus}."
+                            );
                         }
 
                         return;
@@ -265,7 +299,10 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                     Debug.Assert(isArray);
 
                     // Exceptions are handled above where the send and receive tasks are being run.
-                    var receiveResult = await socket.ReceiveAsync(arraySegment, CancellationToken.None);
+                    var receiveResult = await socket.ReceiveAsync(
+                        arraySegment,
+                        CancellationToken.None
+                    );
 #else
 #error TFMs need to be updated
 #endif
@@ -276,13 +313,20 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
                         if (_webSocket.CloseStatus != WebSocketCloseStatus.NormalClosure)
                         {
-                            throw new InvalidOperationException($"Websocket closed with error: {_webSocket.CloseStatus}.");
+                            throw new InvalidOperationException(
+                                $"Websocket closed with error: {_webSocket.CloseStatus}."
+                            );
                         }
 
                         return;
                     }
 
-                    Log.MessageReceived(_logger, receiveResult.MessageType, receiveResult.Count, receiveResult.EndOfMessage);
+                    Log.MessageReceived(
+                        _logger,
+                        receiveResult.MessageType,
+                        receiveResult.Count,
+                        receiveResult.EndOfMessage
+                    );
 
                     _application.Output.Advance(receiveResult.Count);
 
@@ -384,7 +428,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
                     try
                     {
                         // We're done sending, send the close frame to the client if the websocket is still open
-                        await socket.CloseOutputAsync(error != null ? WebSocketCloseStatus.InternalServerError : WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                        await socket.CloseOutputAsync(
+                            error != null
+                              ? WebSocketCloseStatus.InternalServerError
+                              : WebSocketCloseStatus.NormalClosure,
+                            "",
+                            CancellationToken.None
+                        );
                     }
                     catch (Exception ex)
                     {
@@ -400,9 +450,11 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal
 
         private static bool WebSocketCanSend(WebSocket ws)
         {
-            return !(ws.State == WebSocketState.Aborted ||
-                   ws.State == WebSocketState.Closed ||
-                   ws.State == WebSocketState.CloseSent);
+            return !(
+                ws.State == WebSocketState.Aborted
+                || ws.State == WebSocketState.Closed
+                || ws.State == WebSocketState.CloseSent
+            );
         }
 
         private static Uri ResolveWebSocketsUrl(Uri url)

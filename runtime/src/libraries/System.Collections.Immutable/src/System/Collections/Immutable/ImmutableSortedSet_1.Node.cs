@@ -162,7 +162,10 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Gets the value represented by the current node.
             /// </summary>
-            public T Value { get { return _key; } }
+            public T Value
+            {
+                get { return _key; }
+            }
 
             /// <summary>
             /// Gets the number of elements contained by this subtree starting at this node.
@@ -455,7 +458,11 @@ namespace System.Collections.Immutable
                             }
 
                             bool dummyMutated;
-                            var newRight = _right.Remove(successor._key, comparer, out dummyMutated);
+                            var newRight = _right.Remove(
+                                successor._key,
+                                comparer,
+                                out dummyMutated
+                            );
                             result = successor.Mutate(left: _left, right: newRight);
                         }
                     }
@@ -747,7 +754,11 @@ namespace System.Collections.Immutable
             /// <param name="start">The starting index within <paramref name="items"/> that should be captured by the node tree.</param>
             /// <param name="length">The number of elements from <paramref name="items"/> that should be captured by the node tree.</param>
             /// <returns>The root of the created node tree.</returns>
-            internal static Node NodeTreeFromList(IOrderedCollection<T> items, int start, int length)
+            internal static Node NodeTreeFromList(
+                IOrderedCollection<T> items,
+                int start,
+                int length
+            )
             {
                 Requires.NotNull(items, nameof(items));
                 Debug.Assert(start >= 0);

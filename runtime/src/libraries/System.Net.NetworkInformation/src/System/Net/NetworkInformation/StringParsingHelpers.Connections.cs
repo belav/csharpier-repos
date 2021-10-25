@@ -21,7 +21,11 @@ namespace System.Net.NetworkInformation
             // Parse the number of active connections out of /proc/net/sockstat
             string sockstatFile = File.ReadAllText(filePath);
             int indexOfTcp = sockstatFile.IndexOf(protocolName, StringComparison.Ordinal);
-            int endOfTcpLine = sockstatFile.IndexOf(Environment.NewLine, indexOfTcp + 1, StringComparison.Ordinal);
+            int endOfTcpLine = sockstatFile.IndexOf(
+                Environment.NewLine,
+                indexOfTcp + 1,
+                StringComparison.Ordinal
+            );
             string tcpLineData = sockstatFile.Substring(indexOfTcp, endOfTcpLine - indexOfTcp);
             StringParser sockstatParser = new StringParser(tcpLineData, ' ');
             sockstatParser.MoveNextOrFail(); // Skip "<name>:"
@@ -29,7 +33,10 @@ namespace System.Net.NetworkInformation
             return sockstatParser.ParseNextInt32();
         }
 
-        internal static TcpConnectionInformation[] ParseActiveTcpConnectionsFromFiles(string tcp4ConnectionsFile, string tcp6ConnectionsFile)
+        internal static TcpConnectionInformation[] ParseActiveTcpConnectionsFromFiles(
+            string tcp4ConnectionsFile,
+            string tcp6ConnectionsFile
+        )
         {
             if (!File.Exists(tcp4ConnectionsFile) || !File.Exists(tcp6ConnectionsFile))
             {
@@ -37,10 +44,16 @@ namespace System.Net.NetworkInformation
             }
 
             string tcp4FileContents = File.ReadAllText(tcp4ConnectionsFile);
-            string[] v4connections = tcp4FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+            string[] v4connections = tcp4FileContents.Split(
+                s_newLineSeparator,
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             string tcp6FileContents = File.ReadAllText(tcp6ConnectionsFile);
-            string[] v6connections = tcp6FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+            string[] v6connections = tcp6FileContents.Split(
+                s_newLineSeparator,
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             // First line is header in each file. On WSL, this file may be empty.
             int count = 0;
@@ -97,7 +110,10 @@ namespace System.Net.NetworkInformation
             return connections;
         }
 
-        internal static IPEndPoint[] ParseActiveTcpListenersFromFiles(string tcp4ConnectionsFile, string tcp6ConnectionsFile)
+        internal static IPEndPoint[] ParseActiveTcpListenersFromFiles(
+            string tcp4ConnectionsFile,
+            string tcp6ConnectionsFile
+        )
         {
             if (!File.Exists(tcp4ConnectionsFile) || !File.Exists(tcp6ConnectionsFile))
             {
@@ -105,10 +121,16 @@ namespace System.Net.NetworkInformation
             }
 
             string tcp4FileContents = File.ReadAllText(tcp4ConnectionsFile);
-            string[] v4connections = tcp4FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+            string[] v4connections = tcp4FileContents.Split(
+                s_newLineSeparator,
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             string tcp6FileContents = File.ReadAllText(tcp6ConnectionsFile);
-            string[] v6connections = tcp6FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+            string[] v6connections = tcp6FileContents.Split(
+                s_newLineSeparator,
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             // First line is header in each file. On WSL, this file may be empty.
             int count = 0;
@@ -130,7 +152,9 @@ namespace System.Net.NetworkInformation
             // TCP Connections
             for (int i = 1; i < v4connections.Length; i++) // Skip first line header.
             {
-                TcpConnectionInformation ti = ParseTcpConnectionInformationFromLine(v4connections[i]);
+                TcpConnectionInformation ti = ParseTcpConnectionInformationFromLine(
+                    v4connections[i]
+                );
                 if (ti.State == TcpState.Listen)
                 {
                     endPoints[index] = ti.LocalEndPoint;
@@ -145,7 +169,9 @@ namespace System.Net.NetworkInformation
             // TCP6 Connections
             for (int i = 1; i < v6connections.Length; i++) // Skip first line header.
             {
-                TcpConnectionInformation ti = ParseTcpConnectionInformationFromLine(v6connections[i]);
+                TcpConnectionInformation ti = ParseTcpConnectionInformationFromLine(
+                    v6connections[i]
+                );
                 if (ti.State == TcpState.Listen)
                 {
                     endPoints[index] = ti.LocalEndPoint;
@@ -165,7 +191,10 @@ namespace System.Net.NetworkInformation
             return endPoints;
         }
 
-        public static IPEndPoint[] ParseActiveUdpListenersFromFiles(string udp4File, string udp6File)
+        public static IPEndPoint[] ParseActiveUdpListenersFromFiles(
+            string udp4File,
+            string udp6File
+        )
         {
             if (!File.Exists(udp4File) || !File.Exists(udp6File))
             {
@@ -173,10 +202,16 @@ namespace System.Net.NetworkInformation
             }
 
             string udp4FileContents = File.ReadAllText(udp4File);
-            string[] v4connections = udp4FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+            string[] v4connections = udp4FileContents.Split(
+                s_newLineSeparator,
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             string udp6FileContents = File.ReadAllText(udp6File);
-            string[] v6connections = udp6FileContents.Split(s_newLineSeparator, StringSplitOptions.RemoveEmptyEntries);
+            string[] v6connections = udp6FileContents.Split(
+                s_newLineSeparator,
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             // First line is header in each file. On WSL, this file may be empty.
             int count = 0;
@@ -226,7 +261,14 @@ namespace System.Net.NetworkInformation
 
             string socketStateHex = parser.MoveAndExtractNext();
             int nativeTcpState;
-            if (!int.TryParse(socketStateHex, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out nativeTcpState))
+            if (
+                !int.TryParse(
+                    socketStateHex,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out nativeTcpState
+                )
+            )
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
@@ -252,9 +294,19 @@ namespace System.Net.NetworkInformation
             string remoteAddressString = localAddressAndPort.Substring(0, indexOfColon);
             IPAddress localIPAddress = ParseHexIPAddress(remoteAddressString);
 
-            string portString = localAddressAndPort.Substring(indexOfColon + 1, localAddressAndPort.Length - (indexOfColon + 1));
+            string portString = localAddressAndPort.Substring(
+                indexOfColon + 1,
+                localAddressAndPort.Length - (indexOfColon + 1)
+            );
             int localPort;
-            if (!int.TryParse(portString, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out localPort))
+            if (
+                !int.TryParse(
+                    portString,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out localPort
+                )
+            )
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
@@ -273,9 +325,19 @@ namespace System.Net.NetworkInformation
             string remoteAddressString = colonSeparatedAddress.Substring(0, indexOfColon);
             IPAddress ipAddress = ParseHexIPAddress(remoteAddressString);
 
-            string portString = colonSeparatedAddress.Substring(indexOfColon + 1, colonSeparatedAddress.Length - (indexOfColon + 1));
+            string portString = colonSeparatedAddress.Substring(
+                indexOfColon + 1,
+                colonSeparatedAddress.Length - (indexOfColon + 1)
+            );
             int port;
-            if (!int.TryParse(portString, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out port))
+            if (
+                !int.TryParse(
+                    portString,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out port
+                )
+            )
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
@@ -311,7 +373,14 @@ namespace System.Net.NetworkInformation
         {
             IPAddress ipAddress;
             long addressValue;
-            if (!long.TryParse(hexAddress, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out addressValue))
+            if (
+                !long.TryParse(
+                    hexAddress,
+                    NumberStyles.HexNumber,
+                    CultureInfo.InvariantCulture,
+                    out addressValue
+                )
+            )
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
@@ -336,8 +405,9 @@ namespace System.Net.NetworkInformation
             {
                 for (int i = 0; i < 16; i++)
                 {
-                    addressBytes[i] = (byte)(HexToByte(hexAddress[(i * 2)]) * 16
-                                           + HexToByte(hexAddress[(i * 2) + 1]));
+                    addressBytes[i] = (byte)(
+                        HexToByte(hexAddress[(i * 2)]) * 16 + HexToByte(hexAddress[(i * 2) + 1])
+                    );
                 }
             }
             else
@@ -348,8 +418,10 @@ namespace System.Net.NetworkInformation
                     {
                         int srcIndex = i * 4 + 3 - j;
                         int targetIndex = i * 4 + j;
-                        addressBytes[targetIndex] = (byte)(HexToByte(hexAddress[srcIndex * 2]) * 16
-                                                         + HexToByte(hexAddress[srcIndex * 2 + 1]));
+                        addressBytes[targetIndex] = (byte)(
+                            HexToByte(hexAddress[srcIndex * 2]) * 16
+                            + HexToByte(hexAddress[srcIndex * 2 + 1])
+                        );
                     }
                 }
             }

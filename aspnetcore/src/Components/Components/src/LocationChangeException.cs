@@ -16,8 +16,6 @@ namespace Microsoft.AspNetCore.Components
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">The inner exception.</param>
         public LocationChangeException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
     }
 }

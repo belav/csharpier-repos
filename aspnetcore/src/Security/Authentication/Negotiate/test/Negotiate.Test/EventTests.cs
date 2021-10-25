@@ -25,20 +25,24 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnChallenge_Fires()
         {
             var eventInvoked = false;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnChallenge = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        // Not changed yet
-                        eventInvoked = true;
-                        Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
-                        Assert.False(context.Response.Headers.ContainsKey(HeaderNames.WWWAuthenticate));
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnChallenge = context =>
+                        {
+                            // Not changed yet
+                            eventInvoked = true;
+                            Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
+                            Assert.False(
+                                context.Response.Headers.ContainsKey(HeaderNames.WWWAuthenticate)
+                            );
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
             var result = await SendAsync(server, "/Authenticate", new TestConnection());
@@ -50,19 +54,21 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         [Fact]
         public async Task OnChallenge_Handled()
         {
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnChallenge = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnChallenge = context =>
+                        {
+                            context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                            context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
+                            context.HandleResponse();
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
             var result = await SendAsync(server, "/Authenticate", new TestConnection());
@@ -74,23 +80,26 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticationFailed_FromException_Fires()
         {
             var eventInvoked = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        eventInvoked++;
-                        Assert.IsType<InvalidOperationException>(context.Exception);
-                        Assert.Equal("InvalidBlob", context.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticationFailed = context =>
+                        {
+                            eventInvoked++;
+                            Assert.IsType<InvalidOperationException>(context.Exception);
+                            Assert.Equal("InvalidBlob", context.Exception.Message);
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                SendAsync(server, "/404", new TestConnection(), "Negotiate InvalidBlob"));
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
+                () => SendAsync(server, "/404", new TestConnection(), "Negotiate InvalidBlob")
+            );
             Assert.Equal("InvalidBlob", ex.Message);
             Assert.Equal(1, eventInvoked);
         }
@@ -98,22 +107,29 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         [Fact]
         public async Task OnAuthenticationFailed_FromException_Handled()
         {
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticationFailed = context =>
+                        {
+                            context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                            context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
+                            context.HandleResponse();
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate InvalidBlob");
+            var result = await SendAsync(
+                server,
+                "/404",
+                new TestConnection(),
+                "Negotiate InvalidBlob"
+            );
             Assert.Equal(StatusCodes.Status418ImATeapot, result.Response.StatusCode);
             Assert.Equal("Teapot", result.Response.Headers[HeaderNames.WWWAuthenticate]);
         }
@@ -122,23 +138,26 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticationFailed_FromOtherBlobError_Fires()
         {
             var eventInvoked = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        eventInvoked++;
-                        Assert.IsType<Exception>(context.Exception);
-                        Assert.Equal("A test other error occurred", context.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticationFailed = context =>
+                        {
+                            eventInvoked++;
+                            Assert.IsType<Exception>(context.Exception);
+                            Assert.Equal("A test other error occurred", context.Exception.Message);
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var ex = await Assert.ThrowsAsync<Exception>(() =>
-                SendAsync(server, "/404", new TestConnection(), "Negotiate OtherError"));
+            var ex = await Assert.ThrowsAsync<Exception>(
+                () => SendAsync(server, "/404", new TestConnection(), "Negotiate OtherError")
+            );
             Assert.Equal("A test other error occurred", ex.Message);
             Assert.Equal(1, eventInvoked);
         }
@@ -147,23 +166,30 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticationFailed_FromOtherBlobError_Handled()
         {
             var eventInvoked = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        eventInvoked++;
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticationFailed = context =>
+                        {
+                            eventInvoked++;
+                            context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                            context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
+                            context.HandleResponse();
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate OtherError");
+            var result = await SendAsync(
+                server,
+                "/404",
+                new TestConnection(),
+                "Negotiate OtherError"
+            );
             Assert.Equal(StatusCodes.Status418ImATeapot, result.Response.StatusCode);
             Assert.Equal("Teapot", result.Response.Headers[HeaderNames.WWWAuthenticate]);
             Assert.Equal(1, eventInvoked);
@@ -173,22 +199,32 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticationFailed_FromCredentialError_Fires()
         {
             var eventInvoked = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        eventInvoked++;
-                        Assert.IsType<Exception>(context.Exception);
-                        Assert.Equal("A test credential error occurred", context.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticationFailed = context =>
+                        {
+                            eventInvoked++;
+                            Assert.IsType<Exception>(context.Exception);
+                            Assert.Equal(
+                                "A test credential error occurred",
+                                context.Exception.Message
+                            );
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var response = await SendAsync(server, "/418", new TestConnection(), "Negotiate CredentialError");
+            var response = await SendAsync(
+                server,
+                "/418",
+                new TestConnection(),
+                "Negotiate CredentialError"
+            );
             Assert.Equal(StatusCodes.Status418ImATeapot, response.Response.StatusCode);
             Assert.Equal(1, eventInvoked);
         }
@@ -197,23 +233,30 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticationFailed_FromCredentialError_Handled()
         {
             var eventInvoked = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        eventInvoked++;
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticationFailed = context =>
+                        {
+                            eventInvoked++;
+                            context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                            context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
+                            context.HandleResponse();
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate CredentialError");
+            var result = await SendAsync(
+                server,
+                "/404",
+                new TestConnection(),
+                "Negotiate CredentialError"
+            );
             Assert.Equal(StatusCodes.Status418ImATeapot, result.Response.StatusCode);
             Assert.Equal("Teapot", result.Response.Headers[HeaderNames.WWWAuthenticate]);
             Assert.Equal(1, eventInvoked);
@@ -223,22 +266,29 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticationFailed_FromClientError_Fires()
         {
             var eventInvoked = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        eventInvoked++;
-                        Assert.IsType<Exception>(context.Exception);
-                        Assert.Equal("A test client error occurred", context.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticationFailed = context =>
+                        {
+                            eventInvoked++;
+                            Assert.IsType<Exception>(context.Exception);
+                            Assert.Equal("A test client error occurred", context.Exception.Message);
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var response = await SendAsync(server, "/404", new TestConnection(), "Negotiate ClientError");
+            var response = await SendAsync(
+                server,
+                "/404",
+                new TestConnection(),
+                "Negotiate ClientError"
+            );
             Assert.Equal(StatusCodes.Status400BadRequest, response.Response.StatusCode);
             Assert.Equal(1, eventInvoked);
         }
@@ -247,23 +297,30 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticationFailed_FromClientError_Handled()
         {
             var eventInvoked = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticationFailed = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        eventInvoked++;
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticationFailed = context =>
+                        {
+                            eventInvoked++;
+                            context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                            context.Response.Headers[HeaderNames.WWWAuthenticate] = "Teapot";
+                            context.HandleResponse();
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate ClientError");
+            var result = await SendAsync(
+                server,
+                "/404",
+                new TestConnection(),
+                "Negotiate ClientError"
+            );
             Assert.Equal(StatusCodes.Status418ImATeapot, result.Response.StatusCode);
             Assert.Equal("Teapot", result.Response.Headers[HeaderNames.WWWAuthenticate]);
             Assert.Equal(1, eventInvoked);
@@ -273,22 +330,24 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticated_FiresOncePerRequest()
         {
             var callCount = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.PersistKerberosCredentials = true;
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticated = context =>
+                    options.PersistKerberosCredentials = true;
+                    options.Events = new NegotiateEvents()
                     {
-                        var identity = context.Principal.Identity;
-                        Assert.True(identity.IsAuthenticated);
-                        Assert.Equal("name", identity.Name);
-                        Assert.Equal("Kerberos", identity.AuthenticationType);
-                        callCount++;
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticated = context =>
+                        {
+                            var identity = context.Principal.Identity;
+                            Assert.True(identity.IsAuthenticated);
+                            Assert.Equal("name", identity.Name);
+                            Assert.Equal("Kerberos", identity.AuthenticationType);
+                            callCount++;
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
             var testConnection = new TestConnection();
@@ -303,18 +362,20 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticated_Success_Continues()
         {
             var callCount = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticated = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        context.Success();
-                        callCount++;
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticated = context =>
+                        {
+                            context.Success();
+                            callCount++;
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
             await KerberosStage1And2Auth(server, new TestConnection());
@@ -325,21 +386,28 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticated_NoResult_SuppresesCredentials()
         {
             var callCount = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticated = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        context.NoResult();
-                        callCount++;
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticated = context =>
+                        {
+                            context.NoResult();
+                            callCount++;
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var result = await SendAsync(server, "/Authenticate", new TestConnection(), "Negotiate ClientKerberosBlob");
+            var result = await SendAsync(
+                server,
+                "/Authenticate",
+                new TestConnection(),
+                "Negotiate ClientKerberosBlob"
+            );
             Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
             Assert.Equal("Negotiate", result.Response.Headers[HeaderNames.WWWAuthenticate]);
             Assert.Equal(1, callCount);
@@ -349,21 +417,28 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnAuthenticated_Fail_SuppresesCredentials()
         {
             var callCount = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnAuthenticated = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        callCount++;
-                        context.Fail("Event error.");
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnAuthenticated = context =>
+                        {
+                            callCount++;
+                            context.Fail("Event error.");
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
-            var result = await SendAsync(server, "/Authenticate", new TestConnection(), "Negotiate ClientKerberosBlob");
+            var result = await SendAsync(
+                server,
+                "/Authenticate",
+                new TestConnection(),
+                "Negotiate ClientKerberosBlob"
+            );
             Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
             Assert.Equal("Negotiate", result.Response.Headers[HeaderNames.WWWAuthenticate]);
             Assert.Equal(1, callCount);
@@ -373,115 +448,164 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
         public async Task OnRetrieveLdapClaims_DoesNotFireWhenLdapDisabled()
         {
             var callCount = 0;
-            using var host = await CreateHostAsync(options =>
-            {
-                options.Events = new NegotiateEvents()
+            using var host = await CreateHostAsync(
+                options =>
                 {
-                    OnRetrieveLdapClaims = context =>
+                    options.Events = new NegotiateEvents()
                     {
-                        callCount++;
-                        return Task.CompletedTask;
-                    }
-                };
-            });
+                        OnRetrieveLdapClaims = context =>
+                        {
+                            callCount++;
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );
             var server = host.GetTestServer();
 
             await KerberosStage1And2Auth(server, new TestConnection());
             Assert.Equal(0, callCount);
         }
 
-        private static async Task KerberosStage1And2Auth(TestServer server, TestConnection testConnection)
+        private static async Task KerberosStage1And2Auth(
+            TestServer server,
+            TestConnection testConnection
+        )
         {
             await KerberosStage1Auth(server, testConnection);
             await KerberosStage2Auth(server, testConnection);
         }
 
-        private static async Task KerberosStage1Auth(TestServer server, TestConnection testConnection)
+        private static async Task KerberosStage1Auth(
+            TestServer server,
+            TestConnection testConnection
+        )
         {
-            var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientKerberosBlob1");
+            var result = await SendAsync(
+                server,
+                "/Authenticate",
+                testConnection,
+                "Negotiate ClientKerberosBlob1"
+            );
             Assert.Equal(StatusCodes.Status401Unauthorized, result.Response.StatusCode);
-            Assert.Equal("Negotiate ServerKerberosBlob1", result.Response.Headers[HeaderNames.WWWAuthenticate]);
+            Assert.Equal(
+                "Negotiate ServerKerberosBlob1",
+                result.Response.Headers[HeaderNames.WWWAuthenticate]
+            );
         }
 
-        private static async Task KerberosStage2Auth(TestServer server, TestConnection testConnection)
+        private static async Task KerberosStage2Auth(
+            TestServer server,
+            TestConnection testConnection
+        )
         {
-            var result = await SendAsync(server, "/Authenticate", testConnection, "Negotiate ClientKerberosBlob2");
+            var result = await SendAsync(
+                server,
+                "/Authenticate",
+                testConnection,
+                "Negotiate ClientKerberosBlob2"
+            );
             Assert.Equal(StatusCodes.Status200OK, result.Response.StatusCode);
-            Assert.Equal("Negotiate ServerKerberosBlob2", result.Response.Headers[HeaderNames.WWWAuthenticate]);
+            Assert.Equal(
+                "Negotiate ServerKerberosBlob2",
+                result.Response.Headers[HeaderNames.WWWAuthenticate]
+            );
         }
 
-        private static async Task<IHost> CreateHostAsync(Action<NegotiateOptions> configureOptions = null)
+        private static async Task<IHost> CreateHostAsync(
+            Action<NegotiateOptions> configureOptions = null
+        )
         {
             var builder = new HostBuilder()
-                .ConfigureServices(services => services
-                    .AddRouting()
-                    .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-                    .AddNegotiate(options =>
+                .ConfigureServices(
+                    services =>
+                        services
+                            .AddRouting()
+                            .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+                            .AddNegotiate(
+                                options =>
+                                {
+                                    options.StateFactory = new TestNegotiateStateFactory();
+                                    configureOptions?.Invoke(options);
+                                }
+                            )
+                )
+                .ConfigureWebHost(
+                    webHostBuilder =>
                     {
-                        options.StateFactory = new TestNegotiateStateFactory();
-                        configureOptions?.Invoke(options);
-                    }))
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder.UseTestServer();
-                    webHostBuilder.Configure(app =>
-                    {
-                        app.UseRouting();
-                        app.UseAuthentication();
-                        app.UseEndpoints(ConfigureEndpoints);
-                    });
-                });
+                        webHostBuilder.UseTestServer();
+                        webHostBuilder.Configure(
+                            app =>
+                            {
+                                app.UseRouting();
+                                app.UseAuthentication();
+                                app.UseEndpoints(ConfigureEndpoints);
+                            }
+                        );
+                    }
+                );
 
             return await builder.StartAsync();
         }
 
         private static void ConfigureEndpoints(IEndpointRouteBuilder builder)
         {
-            builder.Map("/Authenticate", async context =>
-            {
-                if (!context.User.Identity.IsAuthenticated)
+            builder.Map(
+                "/Authenticate",
+                async context =>
                 {
-                    await context.ChallengeAsync();
-                    return;
+                    if (!context.User.Identity.IsAuthenticated)
+                    {
+                        await context.ChallengeAsync();
+                        return;
+                    }
+
+                    Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+                    var name = context.User.Identity.Name;
+                    Assert.False(string.IsNullOrEmpty(name), "name");
+                    await context.Response.WriteAsync(name);
                 }
+            );
 
-                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-                var name = context.User.Identity.Name;
-                Assert.False(string.IsNullOrEmpty(name), "name");
-                await context.Response.WriteAsync(name);
-            });
-
-            builder.Map("/418", context =>
-            {
-                context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                return Task.CompletedTask;
-            });
+            builder.Map(
+                "/418",
+                context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                    return Task.CompletedTask;
+                }
+            );
         }
 
-        private static Task<HttpContext> SendAsync(TestServer server, string path, TestConnection connection, string authorizationHeader = null)
+        private static Task<HttpContext> SendAsync(
+            TestServer server,
+            string path,
+            TestConnection connection,
+            string authorizationHeader = null
+        )
         {
-            return server.SendAsync(context =>
-            {
-                context.Request.Path = path;
-                if (!string.IsNullOrEmpty(authorizationHeader))
+            return server.SendAsync(
+                context =>
                 {
-                    context.Request.Headers[HeaderNames.Authorization] = authorizationHeader;
+                    context.Request.Path = path;
+                    if (!string.IsNullOrEmpty(authorizationHeader))
+                    {
+                        context.Request.Headers[HeaderNames.Authorization] = authorizationHeader;
+                    }
+                    if (connection != null)
+                    {
+                        context.Features.Set<IConnectionItemsFeature>(connection);
+                        context.Features.Set<IConnectionCompleteFeature>(connection);
+                    }
                 }
-                if (connection != null)
-                {
-                    context.Features.Set<IConnectionItemsFeature>(connection);
-                    context.Features.Set<IConnectionCompleteFeature>(connection);
-                }
-            });
+            );
         }
 
         private class TestConnection : IConnectionItemsFeature, IConnectionCompleteFeature
         {
             public IDictionary<object, object> Items { get; set; } = new ConnectionItems();
 
-            public void OnCompleted(Func<object, Task> callback, object state)
-            {
-            }
+            public void OnCompleted(Func<object, Task> callback, object state) { }
         }
 
         private class TestNegotiateStateFactory : INegotiateStateFactory
@@ -530,7 +654,11 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate
                 return new GenericIdentity("name", _protocol);
             }
 
-            public string GetOutgoingBlob(string incomingBlob, out BlobErrorType errorType, out Exception ex)
+            public string GetOutgoingBlob(
+                string incomingBlob,
+                out BlobErrorType errorType,
+                out Exception ex
+            )
             {
                 if (IsDisposed)
                 {

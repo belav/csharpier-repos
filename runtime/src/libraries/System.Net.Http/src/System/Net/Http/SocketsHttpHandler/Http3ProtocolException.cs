@@ -20,7 +20,8 @@ namespace System.Net.Http
             ErrorCode = errorCode;
         }
 
-        protected Http3ProtocolException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected Http3ProtocolException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             ErrorCode = (Http3ErrorCode)info.GetUInt32(nameof(ErrorCode));
         }

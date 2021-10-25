@@ -39,7 +39,6 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                     return result.ToArray();
                 }
             }
-
 #pragma warning restore 618
 #endif
         }

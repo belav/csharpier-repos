@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task FixAllDocumentBasic()
         {
-            var input = @"class Test
+            var input =
+                @"class Test
 {
     static void Main()
     {
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
 }
 ";
 
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     static void Main()
     {
@@ -47,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task FixAllDocumentVariedSingleLine()
         {
-            var input = @"class Test
+            var input =
+                @"class Test
 {
     static void Main()
     {
@@ -56,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
 }
 ";
 
-            var expected = @"class Test
+            var expected =
+                @"class Test
 {
     static void Main()
     {
@@ -73,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTypeOfToNameOf
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task FixAllDocumentVariedWithUsing()
         {
-            var input = @"using System;
+            var input =
+                @"using System;
 
 class Test
 {
@@ -87,7 +92,8 @@ class Test
 }
 ";
 
-            var expected = @"using System;
+            var expected =
+                @"using System;
 
 class Test
 {
@@ -109,7 +115,8 @@ class Test
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task FixAllProject()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -140,7 +147,8 @@ class Test2
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -179,7 +187,8 @@ class Test2
         [Trait(Traits.Feature, Traits.Features.CodeActionsFixAllOccurrences)]
         public async Task FixAllSolution()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -221,7 +230,8 @@ class Test3
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>

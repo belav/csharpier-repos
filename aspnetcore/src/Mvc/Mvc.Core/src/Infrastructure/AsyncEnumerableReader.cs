@@ -32,9 +32,13 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
     {
         private readonly MethodInfo Converter = typeof(AsyncEnumerableReader).GetMethod(
             nameof(ReadInternal),
-            BindingFlags.NonPublic | BindingFlags.Instance)!;
+            BindingFlags.NonPublic | BindingFlags.Instance
+        )!;
 
-        private readonly ConcurrentDictionary<Type, Func<object, Task<ICollection>>?> _asyncEnumerableConverters = new();
+        private readonly ConcurrentDictionary<
+            Type,
+            Func<object, Task<ICollection>>?
+        > _asyncEnumerableConverters = new();
         private readonly MvcOptions _mvcOptions;
 
         /// <summary>
@@ -52,11 +56,17 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
         /// <param name="type">The type to read.</param>
         /// <param name="reader">A delegate that when awaited reads the <see cref="IAsyncEnumerable{T}"/>.</param>
         /// <returns><see langword="true" /> when <paramref name="type"/> is an instance of <see cref="IAsyncEnumerable{T}"/>, othwerise <see langword="false"/>.</returns>
-        public bool TryGetReader(Type type, [NotNullWhen(true)] out Func<object, Task<ICollection>>? reader)
+        public bool TryGetReader(
+            Type type,
+            [NotNullWhen(true)] out Func<object, Task<ICollection>>? reader
+        )
         {
             if (!_asyncEnumerableConverters.TryGetValue(type, out reader))
             {
-                var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(type, typeof(IAsyncEnumerable<>));
+                var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(
+                    type,
+                    typeof(IAsyncEnumerable<>)
+                );
                 if (enumerableType is null)
                 {
                     // Not an IAsyncEnumerable<T>. Cache this result so we avoid reflection the next time we see this type.
@@ -67,9 +77,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 {
                     var enumeratedObjectType = enumerableType.GetGenericArguments()[0];
 
-                    var converter = (Func<object, Task<ICollection>>)Converter
-                        .MakeGenericMethod(enumeratedObjectType)
-                        .CreateDelegate(typeof(Func<object, Task<ICollection>>), this);
+                    var converter =
+                        (Func<object, Task<ICollection>>)Converter
+                            .MakeGenericMethod(enumeratedObjectType)
+                            .CreateDelegate(typeof(Func<object, Task<ICollection>>), this);
 
                     reader = converter;
                     _asyncEnumerableConverters.TryAdd(type, reader);
@@ -89,9 +100,12 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 if (count++ >= _mvcOptions.MaxIAsyncEnumerableBufferLimit)
                 {
-                    throw new InvalidOperationException(Resources.FormatObjectResultExecutor_MaxEnumerationExceeded(
-                        nameof(AsyncEnumerableReader),
-                        value.GetType()));
+                    throw new InvalidOperationException(
+                        Resources.FormatObjectResultExecutor_MaxEnumerationExceeded(
+                            nameof(AsyncEnumerableReader),
+                            value.GetType()
+                        )
+                    );
                 }
 
                 result.Add(item);

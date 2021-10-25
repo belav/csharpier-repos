@@ -7,18 +7,21 @@ using Microsoft.CodeAnalysis.Testing;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.CSharp.FileHeaders.CSharpFileHeaderDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.CSharp.FileHeaders.CSharpFileHeaderCodeFixProvider>;
+    Microsoft.CodeAnalysis.CSharp.FileHeaders.CSharpFileHeaderCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FileHeaders
 {
     public class FileHeaderTests
     {
-        private const string TestSettings = @"
+        private const string TestSettings =
+            @"
 [*.cs]
 file_header_template = Copyright (c) SomeCorp. All rights reserved.\nLicensed under the ??? license. See LICENSE file in the project root for full license information.
 ";
 
-        private const string TestSettingsWithEmptyLines = @"
+        private const string TestSettingsWithEmptyLines =
+            @"
 [*.cs]
 file_header_template = \nCopyright (c) SomeCorp. All rights reserved.\n\nLicensed under the ??? license. See LICENSE file in the project root for full license information.\n
 ";
@@ -33,7 +36,8 @@ file_header_template = \nCopyright (c) SomeCorp. All rights reserved.\n\nLicense
         [InlineData("file_header_template = unset")]
         public async Task TestFileHeaderNotConfiguredAsync(string fileHeaderTemplate)
         {
-            var testCode = @"namespace N
+            var testCode =
+                @"namespace N
 {
 }
 ";
@@ -42,7 +46,8 @@ file_header_template = \nCopyright (c) SomeCorp. All rights reserved.\n\nLicense
             {
                 TestCode = testCode,
                 FixedCode = testCode,
-                EditorConfig = $@"
+                EditorConfig =
+                    $@"
 [*]
 {fileHeaderTemplate}
 ",
@@ -56,11 +61,13 @@ file_header_template = \nCopyright (c) SomeCorp. All rights reserved.\n\nLicense
         [Fact]
         public async Task TestNoFileHeaderAsync()
         {
-            var testCode = @"[||]namespace N
+            var testCode =
+                @"[||]namespace N
 {
 }
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 namespace N
@@ -83,13 +90,15 @@ namespace N
         [Fact]
         public async Task TestNoFileHeaderWithUsingDirectiveAsync()
         {
-            var testCode = @"[||]using System;
+            var testCode =
+                @"[||]using System;
 
 namespace N
 {
 }
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -114,14 +123,16 @@ namespace N
         [Fact]
         public async Task TestNoFileHeaderWithBlankLineAndUsingDirectiveAsync()
         {
-            var testCode = @"[||]
+            var testCode =
+                @"[||]
 using System;
 
 namespace N
 {
 }
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -146,14 +157,17 @@ namespace N
         [Fact]
         public async Task TestNoFileHeaderWithWhitespaceLineAsync()
         {
-            var testCode = "[||]    " + @"
+            var testCode =
+                "[||]    "
+                + @"
 using System;
 
 namespace N
 {
 }
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -178,16 +192,19 @@ namespace N
         [Fact]
         public async Task TestFileNameBuiltInVariableAsync()
         {
-            var editorConfig = @"
+            var editorConfig =
+                @"
 [*.cs]
 file_header_template = {fileName} Copyright (c) SomeCorp. All rights reserved.\nLicensed under the ??? license. See LICENSE file in the project root for full license information.
 ";
 
-            var testCode = @"[||]namespace N
+            var testCode =
+                @"[||]namespace N
 {
 }
 ";
-            var fixedCode = @"// Test0.cs Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Test0.cs Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 namespace N
@@ -210,7 +227,8 @@ namespace N
         [Fact]
         public async Task TestValidFileHeaderWithSingleLineCommentsAsync()
         {
-            var testCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var testCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 namespace Bar
@@ -233,7 +251,8 @@ namespace Bar
         [Fact]
         public async Task TestValidFileHeaderWithMultiLineComments1Async()
         {
-            var testCode = @"/* Copyright (c) SomeCorp. All rights reserved.
+            var testCode =
+                @"/* Copyright (c) SomeCorp. All rights reserved.
  * Licensed under the ??? license. See LICENSE file in the project root for full license information.
  */
 
@@ -257,7 +276,8 @@ namespace Bar
         [Fact]
         public async Task TestValidFileHeaderWithMultiLineComments2Async()
         {
-            var testCode = @"/* Copyright (c) SomeCorp. All rights reserved.
+            var testCode =
+                @"/* Copyright (c) SomeCorp. All rights reserved.
    Licensed under the ??? license. See LICENSE file in the project root for full license information. */
 
 namespace Bar
@@ -281,7 +301,8 @@ namespace Bar
         [Fact]
         public async Task TestValidFileHeaderWithMultiLineComments3Async()
         {
-            var testCode = @"/* Copyright (c) SomeCorp. All rights reserved.
+            var testCode =
+                @"/* Copyright (c) SomeCorp. All rights reserved.
    Licensed under the ??? license. See LICENSE file in the project root for full license information.
 ";
 
@@ -308,13 +329,15 @@ namespace Bar
         [InlineData("[|//|]    ")]
         public async Task TestInvalidFileHeaderWithoutTextAsync(string comment)
         {
-            var testCode = $@"{comment}
+            var testCode =
+                $@"{comment}
 
 namespace Bar
 {{
 }}
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 namespace Bar
@@ -337,14 +360,16 @@ namespace Bar
         [Fact]
         public async Task TestInvalidFileHeaderWithWrongTextAsync()
         {
-            var testCode = @"[|//|] Copyright (c) OtherCorp. All rights reserved.
+            var testCode =
+                @"[|//|] Copyright (c) OtherCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 namespace Bar
 {
 }
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 namespace Bar
@@ -367,7 +392,8 @@ namespace Bar
         [Fact]
         public async Task TestInvalidFileHeaderWithWrongText2Async()
         {
-            var testCode = @"[|/*|] Copyright (c) OtherCorp. All rights reserved.
+            var testCode =
+                @"[|/*|] Copyright (c) OtherCorp. All rights reserved.
  * Licensed under the ??? license. See LICENSE file in the project root for full license information.
  */
 
@@ -375,7 +401,8 @@ namespace Bar
 {
 }
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 /* Copyright (c) OtherCorp. All rights reserved.
@@ -401,7 +428,8 @@ namespace Bar
         [InlineData(" Header", " Header")]
         public async Task TestValidFileHeaderInRegionAsync(string startLabel, string endLabel)
         {
-            var testCode = $@"#region{startLabel}
+            var testCode =
+                $@"#region{startLabel}
 // Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 #endregion{endLabel}
@@ -423,9 +451,13 @@ namespace Bar
         [InlineData("", "")]
         [InlineData(" Header", "")]
         [InlineData(" Header", " Header")]
-        public async Task TestInvalidFileHeaderWithWrongTextInRegionAsync(string startLabel, string endLabel)
+        public async Task TestInvalidFileHeaderWithWrongTextInRegionAsync(
+            string startLabel,
+            string endLabel
+        )
         {
-            var testCode = $@"#region{startLabel}
+            var testCode =
+                $@"#region{startLabel}
 [|//|] Copyright (c) OtherCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 #endregion{endLabel}
@@ -434,7 +466,8 @@ namespace Bar
 {{
 }}
 ";
-            var fixedCode = $@"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                $@"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 #region{startLabel}
@@ -462,10 +495,12 @@ namespace Bar
         [Fact]
         public async Task TestInvalidFileHeaderWithWrongTextInUnterminatedMultiLineComment1Async()
         {
-            var testCode = @"{|CS1035:|}[|/*|] Copyright (c) OtherCorp. All rights reserved.
+            var testCode =
+                @"{|CS1035:|}[|/*|] Copyright (c) OtherCorp. All rights reserved.
  * Licensed under the ??? license. See LICENSE file in the project root for full license information.
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 {|CS1035:|}/* Copyright (c) OtherCorp. All rights reserved.
@@ -487,9 +522,11 @@ namespace Bar
         [Fact]
         public async Task TestInvalidFileHeaderWithWrongTextInUnterminatedMultiLineComment2Async()
         {
-            var testCode = @"{|CS1035:|}[|/*|]/
+            var testCode =
+                @"{|CS1035:|}[|/*|]/
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 {|CS1035:|}/*/
@@ -512,7 +549,8 @@ namespace Bar
         [InlineData("    ")]
         public async Task TestInvalidFileHeaderWithWrongTextAfterBlankLineAsync(string firstLine)
         {
-            var testCode = $@"{firstLine}
+            var testCode =
+                $@"{firstLine}
 [|//|] Copyright (c) OtherCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
@@ -520,7 +558,8 @@ namespace Bar
 {{
 }}
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 namespace Bar
@@ -543,7 +582,8 @@ namespace Bar
         [Fact]
         public async Task TestInvalidFileHeaderWithWrongTextFollowedByCommentAsync()
         {
-            var testCode = @"[|//|] Copyright (c) OtherCorp. All rights reserved.
+            var testCode =
+                @"[|//|] Copyright (c) OtherCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 //using System;
@@ -552,7 +592,8 @@ namespace Bar
 {
 }
 ";
-            var fixedCode = @"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                @"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 //using System;
@@ -573,14 +614,16 @@ namespace Bar
         [Fact]
         public async Task TestHeaderMissingRequiredNewLinesAsync()
         {
-            var testCode = @"[|//|] Copyright (c) SomeCorp. All rights reserved.
+            var testCode =
+                @"[|//|] Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 namespace Bar
 {
 }
 ";
-            var fixedCode = @"//
+            var fixedCode =
+                @"//
 // Copyright (c) SomeCorp. All rights reserved.
 //
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.

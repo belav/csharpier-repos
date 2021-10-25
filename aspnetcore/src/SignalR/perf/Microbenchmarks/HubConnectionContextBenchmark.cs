@@ -32,8 +32,15 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             var memoryBufferWriter = MemoryBufferWriter.Get();
             try
             {
-                HandshakeProtocol.WriteRequestMessage(new HandshakeRequestMessage("json", 1), memoryBufferWriter);
-                _handshakeRequestResult = new ReadResult(new ReadOnlySequence<byte>(memoryBufferWriter.ToArray()), false, false);
+                HandshakeProtocol.WriteRequestMessage(
+                    new HandshakeRequestMessage("json", 1),
+                    memoryBufferWriter
+                );
+                _handshakeRequestResult = new ReadResult(
+                    new ReadOnlySequence<byte>(memoryBufferWriter.ToArray()),
+                    false,
+                    false
+                );
             }
             finally
             {
@@ -47,9 +54,15 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             {
                 KeepAliveInterval = Timeout.InfiniteTimeSpan,
             };
-            _hubConnectionContext = new HubConnectionContext(connection, contextOptions, NullLoggerFactory.Instance);
+            _hubConnectionContext = new HubConnectionContext(
+                connection,
+                contextOptions,
+                NullLoggerFactory.Instance
+            );
 
-            _successHubProtocolResolver = new TestHubProtocolResolver(new NewtonsoftJsonHubProtocol());
+            _successHubProtocolResolver = new TestHubProtocolResolver(
+                new NewtonsoftJsonHubProtocol()
+            );
             _failureHubProtocolResolver = new TestHubProtocolResolver(null);
             _userIdProvider = new TestUserIdProvider();
             _supportedProtocols = new List<string> { "json" };
@@ -60,8 +73,13 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
         {
             _pipe.AddReadResult(new ValueTask<ReadResult>(_handshakeRequestResult));
 
-            await _hubConnectionContext.HandshakeAsync(TimeSpan.FromSeconds(5), _supportedProtocols, _successHubProtocolResolver,
-                _userIdProvider, enableDetailedErrors: true);
+            await _hubConnectionContext.HandshakeAsync(
+                TimeSpan.FromSeconds(5),
+                _supportedProtocols,
+                _successHubProtocolResolver,
+                _userIdProvider,
+                enableDetailedErrors: true
+            );
         }
 
         [Benchmark]
@@ -69,8 +87,13 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
         {
             _pipe.AddReadResult(new ValueTask<ReadResult>(_handshakeRequestResult));
 
-            await _hubConnectionContext.HandshakeAsync(TimeSpan.FromSeconds(5), _supportedProtocols, _failureHubProtocolResolver,
-                _userIdProvider, enableDetailedErrors: true);
+            await _hubConnectionContext.HandshakeAsync(
+                TimeSpan.FromSeconds(5),
+                _supportedProtocols,
+                _failureHubProtocolResolver,
+                _userIdProvider,
+                enableDetailedErrors: true
+            );
         }
     }
 
@@ -94,7 +117,10 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             _instance = instance;
         }
 
-        public IHubProtocol GetProtocol(string protocolName, IReadOnlyList<string> supportedProtocols)
+        public IHubProtocol GetProtocol(
+            string protocolName,
+            IReadOnlyList<string> supportedProtocols
+        )
         {
             return _instance;
         }

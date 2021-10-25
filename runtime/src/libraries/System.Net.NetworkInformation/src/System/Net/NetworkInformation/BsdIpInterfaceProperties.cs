@@ -18,17 +18,50 @@ namespace System.Net.NetworkInformation
             _gatewayAddresses = GetGatewayAddresses(oni.Index);
         }
 
-        public override IPAddressInformationCollection AnycastAddresses { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override IPAddressInformationCollection AnycastAddresses
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override IPAddressCollection DhcpServerAddresses { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override IPAddressCollection DhcpServerAddresses
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override GatewayIPAddressInformationCollection GatewayAddresses { get { return _gatewayAddresses; } }
+        public override GatewayIPAddressInformationCollection GatewayAddresses
+        {
+            get { return _gatewayAddresses; }
+        }
 
-        public override bool IsDnsEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsDnsEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override bool IsDynamicDnsEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsDynamicDnsEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override IPAddressCollection WinsServersAddresses { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override IPAddressCollection WinsServersAddresses
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         public override IPv4InterfaceProperties GetIPv4Properties()
         {
@@ -40,30 +73,42 @@ namespace System.Net.NetworkInformation
             return _ipv6Properties;
         }
 
-        private static unsafe GatewayIPAddressInformationCollection GetGatewayAddresses(int interfaceIndex)
+        private static unsafe GatewayIPAddressInformationCollection GetGatewayAddresses(
+            int interfaceIndex
+        )
         {
             HashSet<IPAddress> addressSet = new HashSet<IPAddress>();
-            if (Interop.Sys.EnumerateGatewayAddressesForInterface((uint)interfaceIndex,
-                (gatewayAddressInfo) =>
-                {
-                    byte[] ipBytes = new byte[gatewayAddressInfo->NumAddressBytes];
-                    fixed (byte* ipArrayPtr = ipBytes)
+            if (
+                Interop.Sys.EnumerateGatewayAddressesForInterface(
+                    (uint)interfaceIndex,
+                    (gatewayAddressInfo) =>
                     {
-                        Buffer.MemoryCopy(gatewayAddressInfo->AddressBytes, ipArrayPtr, ipBytes.Length, ipBytes.Length);
+                        byte[] ipBytes = new byte[gatewayAddressInfo->NumAddressBytes];
+                        fixed (byte* ipArrayPtr = ipBytes)
+                        {
+                            Buffer.MemoryCopy(
+                                gatewayAddressInfo->AddressBytes,
+                                ipArrayPtr,
+                                ipBytes.Length,
+                                ipBytes.Length
+                            );
+                        }
+                        IPAddress ipAddress = new IPAddress(ipBytes);
+                        if (ipAddress.IsIPv6LinkLocal)
+                        {
+                            // For Link-Local addresses add ScopeId as that is not part of the route entry.
+                            ipAddress.ScopeId = interfaceIndex;
+                        }
+                        addressSet.Add(ipAddress);
                     }
-                    IPAddress ipAddress = new IPAddress(ipBytes);
-                    if (ipAddress.IsIPv6LinkLocal)
-                    {
-                        // For Link-Local addresses add ScopeId as that is not part of the route entry.
-                        ipAddress.ScopeId = interfaceIndex;
-                    }
-                    addressSet.Add(ipAddress);
-                }) == -1)
+                ) == -1
+            )
             {
                 throw new NetworkInformationException(SR.net_PInvokeError);
             }
 
-            GatewayIPAddressInformationCollection collection = new GatewayIPAddressInformationCollection();
+            GatewayIPAddressInformationCollection collection =
+                new GatewayIPAddressInformationCollection();
             foreach (IPAddress address in addressSet)
             {
                 collection.InternalAdd(new SimpleGatewayIPAddressInformation(address));

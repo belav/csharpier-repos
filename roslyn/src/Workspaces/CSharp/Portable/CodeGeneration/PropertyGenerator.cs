@@ -22,11 +22,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 {
     internal static class PropertyGenerator
     {
-        public static bool CanBeGenerated(IPropertySymbol property)
-            => property.IsIndexer || property.Parameters.Length == 0;
+        public static bool CanBeGenerated(IPropertySymbol property) =>
+            property.IsIndexer || property.Parameters.Length == 0;
 
         private static MemberDeclarationSyntax LastPropertyOrField(
-            SyntaxList<MemberDeclarationSyntax> members)
+            SyntaxList<MemberDeclarationSyntax> members
+        )
         {
             var lastProperty = members.LastOrDefault(m => m is PropertyDeclarationSyntax);
             return lastProperty ?? LastField(members);
@@ -36,14 +37,24 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CompilationUnitSyntax destination,
             IPropertySymbol property,
             CodeGenerationOptions options,
-            IList<bool> availableIndices)
+            IList<bool> availableIndices
+        )
         {
             var declaration = GeneratePropertyOrIndexer(
-                property, CodeGenerationDestination.CompilationUnit, options,
-                destination?.SyntaxTree.Options ?? options.ParseOptions);
+                property,
+                CodeGenerationDestination.CompilationUnit,
+                options,
+                destination?.SyntaxTree.Options ?? options.ParseOptions
+            );
 
-            var members = Insert(destination.Members, declaration, options,
-                availableIndices, after: LastPropertyOrField, before: FirstMember);
+            var members = Insert(
+                destination.Members,
+                declaration,
+                options,
+                availableIndices,
+                after: LastPropertyOrField,
+                before: FirstMember
+            );
             return destination.WithMembers(members);
         }
 
@@ -51,14 +62,25 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             TypeDeclarationSyntax destination,
             IPropertySymbol property,
             CodeGenerationOptions options,
-            IList<bool> availableIndices)
+            IList<bool> availableIndices
+        )
         {
-            var declaration = GeneratePropertyOrIndexer(property, GetDestination(destination),
-                options, destination?.SyntaxTree.Options ?? options.ParseOptions);
+            var declaration = GeneratePropertyOrIndexer(
+                property,
+                GetDestination(destination),
+                options,
+                destination?.SyntaxTree.Options ?? options.ParseOptions
+            );
 
-            // Create a clone of the original type with the new method inserted. 
-            var members = Insert(destination.Members, declaration, options,
-                availableIndices, after: LastPropertyOrField, before: FirstMember);
+            // Create a clone of the original type with the new method inserted.
+            var members = Insert(
+                destination.Members,
+                declaration,
+                options,
+                availableIndices,
+                after: LastPropertyOrField,
+                before: FirstMember
+            );
 
             // Find the best place to put the field.  It should go after the last field if we already
             // have fields, or at the beginning of the file if we don't.
@@ -69,9 +91,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IPropertySymbol property,
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
-            ParseOptions parseOptions)
+            ParseOptions parseOptions
+        )
         {
-            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(property, options);
+            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(
+                property,
+                options
+            );
             if (reusableSyntax != null)
             {
                 return reusableSyntax;
@@ -88,49 +114,76 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IPropertySymbol property,
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
-            ParseOptions parseOptions)
+            ParseOptions parseOptions
+        )
         {
-            var explicitInterfaceSpecifier = GenerateExplicitInterfaceSpecifier(property.ExplicitInterfaceImplementations);
+            var explicitInterfaceSpecifier = GenerateExplicitInterfaceSpecifier(
+                property.ExplicitInterfaceImplementations
+            );
 
             var declaration = SyntaxFactory.IndexerDeclaration(
-                    attributeLists: AttributeGenerator.GenerateAttributeLists(property.GetAttributes(), options),
-                    modifiers: GenerateModifiers(property, destination, options),
-                    type: GenerateTypeSyntax(property),
-                    explicitInterfaceSpecifier: explicitInterfaceSpecifier,
-                    parameterList: ParameterGenerator.GenerateBracketedParameterList(property.Parameters, explicitInterfaceSpecifier != null, options),
-                    accessorList: GenerateAccessorList(property, destination, options, parseOptions));
+                attributeLists: AttributeGenerator.GenerateAttributeLists(
+                    property.GetAttributes(),
+                    options
+                ),
+                modifiers: GenerateModifiers(property, destination, options),
+                type: GenerateTypeSyntax(property),
+                explicitInterfaceSpecifier: explicitInterfaceSpecifier,
+                parameterList: ParameterGenerator.GenerateBracketedParameterList(
+                    property.Parameters,
+                    explicitInterfaceSpecifier != null,
+                    options
+                ),
+                accessorList: GenerateAccessorList(property, destination, options, parseOptions)
+            );
             declaration = UseExpressionBodyIfDesired(options, declaration, parseOptions);
 
             return AddFormatterAndCodeGeneratorAnnotationsTo(
-                AddAnnotationsTo(property, declaration));
+                AddAnnotationsTo(property, declaration)
+            );
         }
 
         private static MemberDeclarationSyntax GeneratePropertyDeclaration(
-           IPropertySymbol property, CodeGenerationDestination destination,
-           CodeGenerationOptions options, ParseOptions parseOptions)
+            IPropertySymbol property,
+            CodeGenerationDestination destination,
+            CodeGenerationOptions options,
+            ParseOptions parseOptions
+        )
         {
-            var initializer = CodeGenerationPropertyInfo.GetInitializer(property) is ExpressionSyntax initializerNode
+            var initializer = CodeGenerationPropertyInfo.GetInitializer(property)
+                is ExpressionSyntax initializerNode
                 ? SyntaxFactory.EqualsValueClause(initializerNode)
                 : null;
 
-            var explicitInterfaceSpecifier = GenerateExplicitInterfaceSpecifier(property.ExplicitInterfaceImplementations);
+            var explicitInterfaceSpecifier = GenerateExplicitInterfaceSpecifier(
+                property.ExplicitInterfaceImplementations
+            );
 
             var accessorList = GenerateAccessorList(property, destination, options, parseOptions);
 
             var propertyDeclaration = SyntaxFactory.PropertyDeclaration(
-                attributeLists: AttributeGenerator.GenerateAttributeLists(property.GetAttributes(), options),
+                attributeLists: AttributeGenerator.GenerateAttributeLists(
+                    property.GetAttributes(),
+                    options
+                ),
                 modifiers: GenerateModifiers(property, destination, options),
                 type: GenerateTypeSyntax(property),
                 explicitInterfaceSpecifier: explicitInterfaceSpecifier,
                 identifier: property.Name.ToIdentifierToken(),
                 accessorList: accessorList,
                 expressionBody: null,
-                initializer: initializer);
+                initializer: initializer
+            );
 
-            propertyDeclaration = UseExpressionBodyIfDesired(options, propertyDeclaration, parseOptions);
+            propertyDeclaration = UseExpressionBodyIfDesired(
+                options,
+                propertyDeclaration,
+                parseOptions
+            );
 
             return AddFormatterAndCodeGeneratorAnnotationsTo(
-                AddAnnotationsTo(property, propertyDeclaration));
+                AddAnnotationsTo(property, propertyDeclaration)
+            );
         }
 
         private static TypeSyntax GenerateTypeSyntax(IPropertySymbol property)
@@ -152,19 +205,27 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static bool TryGetExpressionBody(
-            BasePropertyDeclarationSyntax baseProperty, ParseOptions options, ExpressionBodyPreference preference,
-            out ArrowExpressionClauseSyntax arrowExpression, out SyntaxToken semicolonToken)
+            BasePropertyDeclarationSyntax baseProperty,
+            ParseOptions options,
+            ExpressionBodyPreference preference,
+            out ArrowExpressionClauseSyntax arrowExpression,
+            out SyntaxToken semicolonToken
+        )
         {
             var accessorList = baseProperty.AccessorList;
-            if (preference != ExpressionBodyPreference.Never &&
-                accessorList.Accessors.Count == 1)
+            if (preference != ExpressionBodyPreference.Never && accessorList.Accessors.Count == 1)
             {
                 var accessor = accessorList.Accessors[0];
                 if (accessor.IsKind(SyntaxKind.GetAccessorDeclaration))
                 {
                     return TryGetArrowExpressionBody(
-                        baseProperty.Kind(), accessor, options, preference,
-                        out arrowExpression, out semicolonToken);
+                        baseProperty.Kind(),
+                        accessor,
+                        options,
+                        preference,
+                        out arrowExpression,
+                        out semicolonToken
+                    );
                 }
             }
 
@@ -174,20 +235,33 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static PropertyDeclarationSyntax UseExpressionBodyIfDesired(
-            CodeGenerationOptions options, PropertyDeclarationSyntax declaration, ParseOptions parseOptions)
+            CodeGenerationOptions options,
+            PropertyDeclarationSyntax declaration,
+            ParseOptions parseOptions
+        )
         {
             if (declaration.ExpressionBody == null)
             {
-                var expressionBodyPreference = options.Options.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedProperties).Value;
+                var expressionBodyPreference =
+                    options.Options.GetOption(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedProperties
+                    ).Value;
                 if (declaration.Initializer == null)
                 {
-                    if (TryGetExpressionBody(
-                            declaration, parseOptions, expressionBodyPreference,
-                            out var expressionBody, out var semicolonToken))
+                    if (
+                        TryGetExpressionBody(
+                            declaration,
+                            parseOptions,
+                            expressionBodyPreference,
+                            out var expressionBody,
+                            out var semicolonToken
+                        )
+                    )
                     {
-                        declaration = declaration.WithAccessorList(null)
-                                                 .WithExpressionBody(expressionBody)
-                                                 .WithSemicolonToken(semicolonToken);
+                        declaration = declaration
+                            .WithAccessorList(null)
+                            .WithExpressionBody(expressionBody)
+                            .WithSemicolonToken(semicolonToken);
                     }
                 }
             }
@@ -196,18 +270,31 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static IndexerDeclarationSyntax UseExpressionBodyIfDesired(
-            CodeGenerationOptions options, IndexerDeclarationSyntax declaration, ParseOptions parseOptions)
+            CodeGenerationOptions options,
+            IndexerDeclarationSyntax declaration,
+            ParseOptions parseOptions
+        )
         {
             if (declaration.ExpressionBody == null)
             {
-                var expressionBodyPreference = options.Options.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedIndexers).Value;
-                if (TryGetExpressionBody(
-                        declaration, parseOptions, expressionBodyPreference,
-                        out var expressionBody, out var semicolonToken))
+                var expressionBodyPreference =
+                    options.Options.GetOption(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers
+                    ).Value;
+                if (
+                    TryGetExpressionBody(
+                        declaration,
+                        parseOptions,
+                        expressionBodyPreference,
+                        out var expressionBody,
+                        out var semicolonToken
+                    )
+                )
                 {
-                    declaration = declaration.WithAccessorList(null)
-                                             .WithExpressionBody(expressionBody)
-                                             .WithSemicolonToken(semicolonToken);
+                    declaration = declaration
+                        .WithAccessorList(null)
+                        .WithExpressionBody(expressionBody)
+                        .WithSemicolonToken(semicolonToken);
                 }
             }
 
@@ -215,18 +302,31 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static AccessorDeclarationSyntax UseExpressionBodyIfDesired(
-            CodeGenerationOptions options, AccessorDeclarationSyntax declaration, ParseOptions parseOptions)
+            CodeGenerationOptions options,
+            AccessorDeclarationSyntax declaration,
+            ParseOptions parseOptions
+        )
         {
             if (declaration.ExpressionBody == null)
             {
-                var expressionBodyPreference = options.Options.GetOption(CSharpCodeStyleOptions.PreferExpressionBodiedAccessors).Value;
-                if (declaration.Body.TryConvertToArrowExpressionBody(
-                        declaration.Kind(), parseOptions, expressionBodyPreference,
-                        out var expressionBody, out var semicolonToken))
+                var expressionBodyPreference =
+                    options.Options.GetOption(
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors
+                    ).Value;
+                if (
+                    declaration.Body.TryConvertToArrowExpressionBody(
+                        declaration.Kind(),
+                        parseOptions,
+                        expressionBodyPreference,
+                        out var expressionBody,
+                        out var semicolonToken
+                    )
+                )
                 {
-                    declaration = declaration.WithBody(null)
-                                             .WithExpressionBody(expressionBody)
-                                             .WithSemicolonToken(semicolonToken);
+                    declaration = declaration
+                        .WithBody(null)
+                        .WithExpressionBody(expressionBody)
+                        .WithSemicolonToken(semicolonToken);
                 }
             }
 
@@ -234,8 +334,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static bool TryGetArrowExpressionBody(
-            SyntaxKind declaratoinKind, AccessorDeclarationSyntax accessor, ParseOptions options, ExpressionBodyPreference preference,
-            out ArrowExpressionClauseSyntax arrowExpression, out SyntaxToken semicolonToken)
+            SyntaxKind declaratoinKind,
+            AccessorDeclarationSyntax accessor,
+            ParseOptions options,
+            ExpressionBodyPreference preference,
+            out ArrowExpressionClauseSyntax arrowExpression,
+            out SyntaxToken semicolonToken
+        )
         {
             // If the accessor has an expression body already, then use that as the expression body
             // for the property.
@@ -247,23 +352,48 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             }
 
             return accessor.Body.TryConvertToArrowExpressionBody(
-                declaratoinKind, options, preference, out arrowExpression, out semicolonToken);
+                declaratoinKind,
+                options,
+                preference,
+                out arrowExpression,
+                out semicolonToken
+            );
         }
 
         private static AccessorListSyntax GenerateAccessorList(
-            IPropertySymbol property, CodeGenerationDestination destination,
-            CodeGenerationOptions options, ParseOptions parseOptions)
+            IPropertySymbol property,
+            CodeGenerationDestination destination,
+            CodeGenerationOptions options,
+            ParseOptions parseOptions
+        )
         {
-            var setAccessorKind = property.SetMethod?.IsInitOnly == true ? SyntaxKind.InitAccessorDeclaration : SyntaxKind.SetAccessorDeclaration;
+            var setAccessorKind =
+                property.SetMethod?.IsInitOnly == true
+                    ? SyntaxKind.InitAccessorDeclaration
+                    : SyntaxKind.SetAccessorDeclaration;
             var accessors = new List<AccessorDeclarationSyntax>
             {
-                GenerateAccessorDeclaration(property, property.GetMethod, SyntaxKind.GetAccessorDeclaration, destination, options, parseOptions),
-                GenerateAccessorDeclaration(property, property.SetMethod, setAccessorKind, destination, options, parseOptions),
+                GenerateAccessorDeclaration(
+                    property,
+                    property.GetMethod,
+                    SyntaxKind.GetAccessorDeclaration,
+                    destination,
+                    options,
+                    parseOptions
+                ),
+                GenerateAccessorDeclaration(
+                    property,
+                    property.SetMethod,
+                    setAccessorKind,
+                    destination,
+                    options,
+                    parseOptions
+                ),
             };
 
             return accessors[0] == null && accessors[1] == null
-                ? null
-                : SyntaxFactory.AccessorList(accessors.WhereNotNull().ToSyntaxList());
+              ? null
+              : SyntaxFactory.AccessorList(accessors.WhereNotNull().ToSyntaxList());
         }
 
         private static AccessorDeclarationSyntax GenerateAccessorDeclaration(
@@ -272,12 +402,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxKind kind,
             CodeGenerationDestination destination,
             CodeGenerationOptions options,
-            ParseOptions parseOptions)
+            ParseOptions parseOptions
+        )
         {
-            var hasBody = options.GenerateMethodBodies && HasAccessorBodies(property, destination, accessor);
+            var hasBody =
+                options.GenerateMethodBodies && HasAccessorBodies(property, destination, accessor);
             return accessor == null
-                ? null
-                : GenerateAccessorDeclaration(property, accessor, kind, hasBody, options, parseOptions);
+              ? null
+              : GenerateAccessorDeclaration(
+                    property,
+                    accessor,
+                    kind,
+                    hasBody,
+                    options,
+                    parseOptions
+                );
         }
 
         private static AccessorDeclarationSyntax GenerateAccessorDeclaration(
@@ -286,12 +425,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             SyntaxKind kind,
             bool hasBody,
             CodeGenerationOptions options,
-            ParseOptions parseOptions)
+            ParseOptions parseOptions
+        )
         {
-            var declaration = SyntaxFactory.AccessorDeclaration(kind)
-                                           .WithModifiers(GenerateAccessorModifiers(property, accessor, options))
-                                           .WithBody(hasBody ? GenerateBlock(accessor) : null)
-                                           .WithSemicolonToken(hasBody ? default : SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+            var declaration = SyntaxFactory
+                .AccessorDeclaration(kind)
+                .WithModifiers(GenerateAccessorModifiers(property, accessor, options))
+                .WithBody(hasBody ? GenerateBlock(accessor) : null)
+                .WithSemicolonToken(
+                    hasBody ? default : SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                );
 
             declaration = UseExpressionBodyIfDesired(options, declaration, parseOptions);
 
@@ -301,34 +444,47 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static BlockSyntax GenerateBlock(IMethodSymbol accessor)
         {
             return SyntaxFactory.Block(
-                StatementGenerator.GenerateStatements(CodeGenerationMethodInfo.GetStatements(accessor)));
+                StatementGenerator.GenerateStatements(
+                    CodeGenerationMethodInfo.GetStatements(accessor)
+                )
+            );
         }
 
         private static bool HasAccessorBodies(
             IPropertySymbol property,
             CodeGenerationDestination destination,
-            IMethodSymbol accessor)
+            IMethodSymbol accessor
+        )
         {
-            return destination != CodeGenerationDestination.InterfaceType &&
-                !property.IsAbstract &&
-                accessor != null &&
-                !accessor.IsAbstract;
+            return destination != CodeGenerationDestination.InterfaceType
+                && !property.IsAbstract
+                && accessor != null
+                && !accessor.IsAbstract;
         }
 
         private static SyntaxTokenList GenerateAccessorModifiers(
             IPropertySymbol property,
             IMethodSymbol accessor,
-            CodeGenerationOptions options)
+            CodeGenerationOptions options
+        )
         {
             var modifiers = ArrayBuilder<SyntaxToken>.GetInstance();
 
-            if (accessor.DeclaredAccessibility != Accessibility.NotApplicable &&
-                accessor.DeclaredAccessibility != property.DeclaredAccessibility)
+            if (
+                accessor.DeclaredAccessibility != Accessibility.NotApplicable
+                && accessor.DeclaredAccessibility != property.DeclaredAccessibility
+            )
             {
-                AddAccessibilityModifiers(accessor.DeclaredAccessibility, modifiers, options, property.DeclaredAccessibility);
+                AddAccessibilityModifiers(
+                    accessor.DeclaredAccessibility,
+                    modifiers,
+                    options,
+                    property.DeclaredAccessibility
+                );
             }
 
-            var hasNonReadOnlyAccessor = property.GetMethod?.IsReadOnly == false || property.SetMethod?.IsReadOnly == false;
+            var hasNonReadOnlyAccessor =
+                property.GetMethod?.IsReadOnly == false || property.SetMethod?.IsReadOnly == false;
             if (hasNonReadOnlyAccessor && accessor.IsReadOnly)
             {
                 modifiers.Add(SyntaxFactory.Token(SyntaxKind.ReadOnlyKeyword));
@@ -338,17 +494,27 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static SyntaxTokenList GenerateModifiers(
-            IPropertySymbol property, CodeGenerationDestination destination, CodeGenerationOptions options)
+            IPropertySymbol property,
+            CodeGenerationDestination destination,
+            CodeGenerationOptions options
+        )
         {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
             // Most modifiers not allowed if we're an explicit impl.
             if (!property.ExplicitInterfaceImplementations.Any())
             {
-                if (destination != CodeGenerationDestination.CompilationUnit &&
-                    destination != CodeGenerationDestination.InterfaceType)
+                if (
+                    destination != CodeGenerationDestination.CompilationUnit
+                    && destination != CodeGenerationDestination.InterfaceType
+                )
                 {
-                    AddAccessibilityModifiers(property.DeclaredAccessibility, tokens, options, Accessibility.Private);
+                    AddAccessibilityModifiers(
+                        property.DeclaredAccessibility,
+                        tokens,
+                        options,
+                        Accessibility.Private
+                    );
 
                     if (property.IsStatic)
                     {
@@ -358,7 +524,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     // note: explicit interface impls are allowed to be 'readonly' but it never actually affects callers
                     // because of the boxing requirement in order to call the method.
                     // therefore it seems like a small oversight to leave out the keyword for an explicit impl from metadata.
-                    var hasAllReadOnlyAccessors = property.GetMethod?.IsReadOnly != false && property.SetMethod?.IsReadOnly != false;
+                    var hasAllReadOnlyAccessors =
+                        property.GetMethod?.IsReadOnly != false
+                        && property.SetMethod?.IsReadOnly != false;
                     // Don't show the readonly modifier if the containing type is already readonly
                     if (hasAllReadOnlyAccessors && !property.ContainingType.IsReadOnly)
                     {

@@ -27,46 +27,71 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private readonly HostDiagnosticUpdateSource _updateSource;
         private readonly IVsFileChangeEx _fileChangeService;
 
-        private readonly Dictionary<string, FileChangeTracker> _fileChangeTrackers = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, FileChangeTracker> _fileChangeTrackers =
+            new(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
         /// Holds a list of assembly modified times that we can use to detect a file change prior to the <see cref="FileChangeTracker"/> being in place.
         /// Once it's in place and subscribed, we'll remove the entry because any further changes will be detected that way.
         /// </summary>
-        private readonly Dictionary<string, DateTime> _assemblyUpdatedTimesUtc = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, DateTime> _assemblyUpdatedTimesUtc =
+            new(StringComparer.OrdinalIgnoreCase);
 
         private readonly object _guard = new();
 
-        private readonly DiagnosticDescriptor _analyzerChangedRule = new(
-            id: IDEDiagnosticIds.AnalyzerChangedId,
-            title: ServicesVSResources.AnalyzerChangedOnDisk,
-            messageFormat: ServicesVSResources.The_analyzer_assembly_0_has_changed_Diagnostics_may_be_incorrect_until_Visual_Studio_is_restarted,
-            category: FeaturesResources.Roslyn_HostError,
-            defaultSeverity: DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+        private readonly DiagnosticDescriptor _analyzerChangedRule =
+            new(
+                id: IDEDiagnosticIds.AnalyzerChangedId,
+                title: ServicesVSResources.AnalyzerChangedOnDisk,
+                messageFormat: ServicesVSResources.The_analyzer_assembly_0_has_changed_Diagnostics_may_be_incorrect_until_Visual_Studio_is_restarted,
+                category: FeaturesResources.Roslyn_HostError,
+                defaultSeverity: DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public AnalyzerFileWatcherService(
             VisualStudioWorkspaceImpl workspace,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource,
-            SVsServiceProvider serviceProvider)
+            SVsServiceProvider serviceProvider
+        )
         {
             _workspace = workspace;
             _updateSource = hostDiagnosticUpdateSource;
-            _fileChangeService = (IVsFileChangeEx)serviceProvider.GetService(typeof(SVsFileChangeEx));
+            _fileChangeService = (IVsFileChangeEx)serviceProvider.GetService(
+                typeof(SVsFileChangeEx)
+            );
         }
-        internal void RemoveAnalyzerAlreadyLoadedDiagnostics(ProjectId projectId, string analyzerPath)
-            => _updateSource.ClearDiagnosticsForProject(projectId, Tuple.Create(s_analyzerChangedErrorId, analyzerPath));
+        internal void RemoveAnalyzerAlreadyLoadedDiagnostics(
+            ProjectId projectId,
+            string analyzerPath
+        ) =>
+            _updateSource.ClearDiagnosticsForProject(
+                projectId,
+                Tuple.Create(s_analyzerChangedErrorId, analyzerPath)
+            );
 
         private void RaiseAnalyzerChangedWarning(ProjectId projectId, string analyzerPath)
         {
             var messageArguments = new string[] { analyzerPath };
 
             var project = _workspace.CurrentSolution.GetProject(projectId);
-            if (project != null && DiagnosticData.TryCreate(_analyzerChangedRule, messageArguments, project, out var diagnostic))
+            if (
+                project != null
+                && DiagnosticData.TryCreate(
+                    _analyzerChangedRule,
+                    messageArguments,
+                    project,
+                    out var diagnostic
+                )
+            )
             {
-                _updateSource.UpdateDiagnosticsForProject(projectId, Tuple.Create(s_analyzerChangedErrorId, analyzerPath), SpecializedCollections.SingletonEnumerable(diagnostic));
+                _updateSource.UpdateDiagnosticsForProject(
+                    projectId,
+                    Tuple.Create(s_analyzerChangedErrorId, analyzerPath),
+                    SpecializedCollections.SingletonEnumerable(diagnostic)
+                );
             }
         }
 
@@ -156,9 +181,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             // assembly.
             foreach (var project in _workspace.CurrentSolution.Projects)
             {
-                var analyzerFileReferences = project.AnalyzerReferences.OfType<AnalyzerFileReference>();
+                var analyzerFileReferences =
+                    project.AnalyzerReferences.OfType<AnalyzerFileReference>();
 
-                if (analyzerFileReferences.Any(a => a.FullPath.Equals(filePath, StringComparison.OrdinalIgnoreCase)))
+                if (
+                    analyzerFileReferences.Any(
+                        a => a.FullPath.Equals(filePath, StringComparison.OrdinalIgnoreCase)
+                    )
+                )
                 {
                     RaiseAnalyzerChangedWarning(project.Id, filePath);
                 }

@@ -91,7 +91,11 @@ public class AndroidAppBuilderTask : Task
         apkBuilder.ForceInterpreter = ForceInterpreter;
         apkBuilder.ForceAOT = ForceAOT;
         apkBuilder.Assemblies = Assemblies;
-        (ApkBundlePath, ApkPackageId) = apkBuilder.BuildApk(abi, MainLibraryFileName, MonoRuntimeHeaders);
+        (ApkBundlePath, ApkPackageId) = apkBuilder.BuildApk(
+            abi,
+            MainLibraryFileName,
+            MonoRuntimeHeaders
+        );
 
         return true;
     }

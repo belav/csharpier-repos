@@ -53,7 +53,11 @@ namespace Microsoft.AspNetCore.Identity
         /// <param name="normalizedName">The normalized name to set.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
         /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-        Task SetNormalizedUserNameAsync(TUser user, string normalizedName, CancellationToken cancellationToken);
+        Task SetNormalizedUserNameAsync(
+            TUser user,
+            string normalizedName,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Creates the specified <paramref name="user"/> in the user store.

@@ -36,7 +36,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Drawing.Imaging
 {
-
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
     internal struct EnhMetafileHeader
     {
@@ -96,7 +95,6 @@ namespace System.Drawing.Imaging
     [StructLayout(LayoutKind.Sequential)]
     public sealed class MetafileHeader
     {
-
         private MonoMetafileHeader header;
 
         //constructor

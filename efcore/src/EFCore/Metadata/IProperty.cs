@@ -29,8 +29,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             var comparer = GetKeyValueComparer()!;
 
             return comparer is IEqualityComparer<TProperty> nullableComparer
-                ? nullableComparer
-                : new NullableComparer<TProperty>(comparer);
+              ? nullableComparer
+              : new NullableComparer<TProperty>(comparer);
         }
 
         private sealed class NullableComparer<TNullableKey> : IEqualityComparer<TNullableKey>
@@ -42,12 +42,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 _comparer = comparer;
             }
 
-            public bool Equals(TNullableKey? x, TNullableKey? y)
-                => (x == null && y == null)
-                    || (x != null && y != null && _comparer.Equals(x, y));
+            public bool Equals(TNullableKey? x, TNullableKey? y) =>
+                (x == null && y == null) || (x != null && y != null && _comparer.Equals(x, y));
 
-            public int GetHashCode(TNullableKey obj)
-                => obj is null ? 0 : _comparer.GetHashCode(obj);
+            public int GetHashCode(TNullableKey obj) =>
+                obj is null ? 0 : _comparer.GetHashCode(obj);
         }
 
         /// <summary>
@@ -55,16 +54,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     if the given property is part of a foreign key.
         /// </summary>
         /// <returns> The first associated principal property, or <see langword="null" /> if none exists. </returns>
-        new IProperty? FindFirstPrincipal()
-            => (IProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
+        new IProperty? FindFirstPrincipal() =>
+            (IProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
 
         /// <summary>
         ///     Finds the list of principal properties including the given property that the given property is constrained by
         ///     if the given property is part of a foreign key.
         /// </summary>
         /// <returns> The list of all associated principal properties including the given property. </returns>
-        new IReadOnlyList<IProperty> GetPrincipals()
-            => ((IReadOnlyProperty)this).GetPrincipals().Cast<IProperty>().ToList();
+        new IReadOnlyList<IProperty> GetPrincipals() =>
+            ((IReadOnlyProperty)this).GetPrincipals().Cast<IProperty>().ToList();
 
         /// <summary>
         ///     Gets all foreign keys that use this property (including composite foreign keys in which this property
@@ -91,8 +90,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         /// <returns>
         ///     The primary that use this property, or <see langword="null" /> if it is not part of the primary key.
         /// </returns>
-        new IKey? FindContainingPrimaryKey()
-            => (IKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
+        new IKey? FindContainingPrimaryKey() =>
+            (IKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
 
         /// <summary>
         ///     Gets all primary or alternate keys that use this property (including composite keys in which this property

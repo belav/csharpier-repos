@@ -14,17 +14,13 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Creates serialization metadata for a <see cref="ConverterStrategy.Object"/>.
         /// </summary>
-        public JsonTypeInfoInternal() : base(typeof(T), null!, ConverterStrategy.Object)
-        {
-        }
+        public JsonTypeInfoInternal() : base(typeof(T), null!, ConverterStrategy.Object) { }
 
         /// <summary>
         /// Creates serialization metadata for a <see cref="ConverterStrategy.Value"/>.
         /// </summary>
         public JsonTypeInfoInternal(JsonSerializerOptions options)
-            : base (typeof(T), options, ConverterStrategy.Value)
-        {
-        }
+            : base(typeof(T), options, ConverterStrategy.Value) { }
 
         /// <summary>
         /// Creates serialization metadata for a <see cref="ConverterStrategy.Enumerable"/>.
@@ -34,12 +30,18 @@ namespace System.Text.Json.Serialization.Metadata
             Func<T>? createObjectFunc,
             JsonConverter<T> converter,
             JsonTypeInfo elementInfo,
-            JsonNumberHandling numberHandling) : base(typeof(T), options, ConverterStrategy.Enumerable)
+            JsonNumberHandling numberHandling
+        ) : base(typeof(T), options, ConverterStrategy.Enumerable)
         {
             ElementType = converter.ElementType;
             ElementTypeInfo = elementInfo ?? throw new ArgumentNullException(nameof(elementInfo));
             NumberHandling = numberHandling;
-            PropertyInfoForTypeInfo = JsonPropertyInfo<T>.CreateForSourceGenTypeInfo(Type, runtimeTypeInfo: this, converter, Options);
+            PropertyInfoForTypeInfo = JsonPropertyInfo<T>.CreateForSourceGenTypeInfo(
+                Type,
+                runtimeTypeInfo: this,
+                converter,
+                Options
+            );
             SetCreateObjectFunc(createObjectFunc);
         }
 
@@ -52,14 +54,21 @@ namespace System.Text.Json.Serialization.Metadata
             JsonConverter<T> converter,
             JsonTypeInfo keyInfo,
             JsonTypeInfo valueInfo,
-            JsonNumberHandling numberHandling) : base(typeof(T), options, ConverterStrategy.Dictionary)
+            JsonNumberHandling numberHandling
+        ) : base(typeof(T), options, ConverterStrategy.Dictionary)
         {
             KeyType = converter.KeyType;
-            KeyTypeInfo = keyInfo ?? throw new ArgumentNullException(nameof(keyInfo)); ;
+            KeyTypeInfo = keyInfo ?? throw new ArgumentNullException(nameof(keyInfo));
+            ;
             ElementType = converter.ElementType;
             ElementTypeInfo = valueInfo ?? throw new ArgumentNullException(nameof(valueInfo));
             NumberHandling = numberHandling;
-            PropertyInfoForTypeInfo = JsonPropertyInfo<T>.CreateForSourceGenTypeInfo(Type, runtimeTypeInfo: this, converter, Options);
+            PropertyInfoForTypeInfo = JsonPropertyInfo<T>.CreateForSourceGenTypeInfo(
+                Type,
+                runtimeTypeInfo: this,
+                converter,
+                Options
+            );
             SetCreateObjectFunc(createObjectFunc);
         }
 
@@ -70,7 +79,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options,
             Func<T>? createObjectFunc,
             Func<JsonSerializerContext, JsonPropertyInfo[]> propInitFunc,
-            JsonNumberHandling numberHandling)
+            JsonNumberHandling numberHandling
+        )
         {
             Options = options;
 
@@ -80,7 +90,12 @@ namespace System.Text.Json.Serialization.Metadata
             JsonConverter converter = new ObjectSourceGenConverter<T>();
 #pragma warning restore CS8714
 
-            PropertyInfoForTypeInfo = JsonPropertyInfo<T>.CreateForSourceGenTypeInfo(Type, runtimeTypeInfo: this, converter, options);
+            PropertyInfoForTypeInfo = JsonPropertyInfo<T>.CreateForSourceGenTypeInfo(
+                Type,
+                runtimeTypeInfo: this,
+                converter,
+                options
+            );
             NumberHandling = numberHandling;
             PropInitFunc = propInitFunc;
             SetCreateObjectFunc(createObjectFunc);

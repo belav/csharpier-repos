@@ -17,12 +17,22 @@ namespace Microsoft.AspNetCore.Testing
             _diagnosticMessageSink = diagnosticMessageSink;
         }
 
-        protected override IXunitTestCase CreateTestCase(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo factAttribute)
+        protected override IXunitTestCase CreateTestCase(
+            ITestFrameworkDiscoveryOptions discoveryOptions,
+            ITestMethod testMethod,
+            IAttributeInfo factAttribute
+        )
         {
             var skipReason = testMethod.EvaluateSkipConditions();
             return skipReason != null
-                ? new SkippedTestCase(skipReason, _diagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), TestMethodDisplayOptions.None, testMethod)
-                : base.CreateTestCase(discoveryOptions, testMethod, factAttribute);
+              ? new SkippedTestCase(
+                    skipReason,
+                    _diagnosticMessageSink,
+                    discoveryOptions.MethodDisplayOrDefault(),
+                    TestMethodDisplayOptions.None,
+                    testMethod
+                )
+              : base.CreateTestCase(discoveryOptions, testMethod, factAttribute);
         }
     }
 }

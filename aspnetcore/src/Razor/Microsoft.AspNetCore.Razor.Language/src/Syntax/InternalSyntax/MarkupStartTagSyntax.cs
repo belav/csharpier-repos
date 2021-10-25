@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax
         {
             get
             {
-                var annotation = GetAnnotations().FirstOrDefault(n => n.Kind == MarkupTransitionKey);
+                var annotation = GetAnnotations()
+                    .FirstOrDefault(n => n.Kind == MarkupTransitionKey);
                 return annotation != null;
             }
         }

@@ -49,13 +49,20 @@ namespace AutoMapper.IntegrationTests
         {
             protected override void Seed(Context context)
             {
-                context.Customers.Add(new Customer
-                {
-                    Id = 1,
-                    FirstName = "Bob",
-                    LastName = "Smith",
-                    Items = new[] { new Item { Code = 1 }, new Item { Code = 3 }, new Item { Code = 5 } }
-                });
+                context.Customers.Add(
+                    new Customer
+                    {
+                        Id = 1,
+                        FirstName = "Bob",
+                        LastName = "Smith",
+                        Items = new[]
+                        {
+                            new Item { Code = 1 },
+                            new Item { Code = 3 },
+                            new Item { Code = 5 }
+                        }
+                    }
+                );
 
                 base.Seed(context);
             }
@@ -66,17 +73,26 @@ namespace AutoMapper.IntegrationTests
             public List<int> ItemCodes { get; set; }
         }
 
-        protected override MapperConfiguration Configuration => new MapperConfiguration(cfg => cfg.CreateProjection<CustomerItemCodes, CustomerViewModel>());
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                cfg => cfg.CreateProjection<CustomerItemCodes, CustomerViewModel>()
+            );
 
         [Fact]
         public void Can_map_with_projection()
         {
             using (var context = new Context())
             {
-                var result = ProjectTo<CustomerViewModel>(context.Customers.Select(customer => new CustomerItemCodes
-                {
-                    ItemCodes = customer.Items.Select(item => item.Code).ToList()
-                })).Single();
+                var result = ProjectTo<CustomerViewModel>(
+                        context.Customers.Select(
+                            customer =>
+                                new CustomerItemCodes
+                                {
+                                    ItemCodes = customer.Items.Select(item => item.Code).ToList()
+                                }
+                        )
+                    )
+                    .Single();
 
                 result.ItemCodesCount.ShouldBe(3);
                 result.ItemCodesMin.ShouldBe(1);

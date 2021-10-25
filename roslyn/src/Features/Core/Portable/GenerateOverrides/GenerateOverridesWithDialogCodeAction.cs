@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                 Document document,
                 TextSpan textSpan,
                 INamedTypeSymbol containingType,
-                ImmutableArray<ISymbol> viableMembers)
+                ImmutableArray<ISymbol> viableMembers
+            )
             {
                 _service = service;
                 _document = document;
@@ -42,11 +43,19 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
 
             public override object GetOptions(CancellationToken cancellationToken)
             {
-                var service = _service._pickMembersService_forTestingPurposes ?? _document.Project.Solution.Workspace.Services.GetRequiredService<IPickMembersService>();
-                return service.PickMembers(FeaturesResources.Pick_members_to_override, _viableMembers);
+                var service =
+                    _service._pickMembersService_forTestingPurposes
+                    ?? _document.Project.Solution.Workspace.Services.GetRequiredService<IPickMembersService>();
+                return service.PickMembers(
+                    FeaturesResources.Pick_members_to_override,
+                    _viableMembers
+                );
             }
 
-            protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(object options, CancellationToken cancellationToken)
+            protected override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
+                object options,
+                CancellationToken cancellationToken
+            )
             {
                 var result = (PickMembersResult)options;
                 if (result.IsCanceled || result.Members.Length == 0)
@@ -54,42 +63,56 @@ namespace Microsoft.CodeAnalysis.GenerateOverrides
                     return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
                 }
 
-                var syntaxTree = await _document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var syntaxTree = await _document
+                    .GetSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 RoslynDebug.AssertNotNull(syntaxTree);
 
                 // If the user has selected just one member then we will insert it at the current
                 // location.  Otherwise, if it's many members, then we'll auto insert them as appropriate.
-                var afterThisLocation = result.Members.Length == 1
-                    ? syntaxTree.GetLocation(_textSpan)
-                    : null;
+                var afterThisLocation =
+                    result.Members.Length == 1 ? syntaxTree.GetLocation(_textSpan) : null;
 
                 var generator = SyntaxGenerator.GetGenerator(_document);
                 var memberTasks = result.Members.SelectAsArray(
-                    m => GenerateOverrideAsync(generator, m, cancellationToken));
+                    m => GenerateOverrideAsync(generator, m, cancellationToken)
+                );
 
                 var members = await Task.WhenAll(memberTasks).ConfigureAwait(false);
 
-                var newDocument = await CodeGenerator.AddMemberDeclarationsAsync(
-                    _document.Project.Solution,
-                    _containingType,
-                    members,
-                    new CodeGenerationOptions(
-                        afterThisLocation: afterThisLocation,
-                        contextLocation: syntaxTree.GetLocation(_textSpan),
-                        options: await _document.GetOptionsAsync(cancellationToken).ConfigureAwait(false)),
-                    cancellationToken).ConfigureAwait(false);
+                var newDocument = await CodeGenerator
+                    .AddMemberDeclarationsAsync(
+                        _document.Project.Solution,
+                        _containingType,
+                        members,
+                        new CodeGenerationOptions(
+                            afterThisLocation: afterThisLocation,
+                            contextLocation: syntaxTree.GetLocation(_textSpan),
+                            options: await _document
+                                .GetOptionsAsync(cancellationToken)
+                                .ConfigureAwait(false)
+                        ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return SpecializedCollections.SingletonEnumerable(
-                    new ApplyChangesOperation(newDocument.Project.Solution));
+                    new ApplyChangesOperation(newDocument.Project.Solution)
+                );
             }
 
             private Task<ISymbol> GenerateOverrideAsync(
-                SyntaxGenerator generator, ISymbol symbol,
-                CancellationToken cancellationToken)
+                SyntaxGenerator generator,
+                ISymbol symbol,
+                CancellationToken cancellationToken
+            )
             {
                 return generator.OverrideAsync(
-                    symbol, _containingType, _document,
-                    cancellationToken: cancellationToken);
+                    symbol,
+                    _containingType,
+                    _document,
+                    cancellationToken: cancellationToken
+                );
             }
 
             public override string Title => FeaturesResources.Generate_overrides;

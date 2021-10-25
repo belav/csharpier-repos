@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
     {
         public static readonly string AssemblyName = "Microsoft.AspNetCore.Components";
 
-        public static readonly string AddMultipleAttributesTypeFullName = "global::System.Collections.Generic.IEnumerable<global::System.Collections.Generic.KeyValuePair<string, object>>";
+        public static readonly string AddMultipleAttributesTypeFullName =
+            "global::System.Collections.Generic.IEnumerable<global::System.Collections.Generic.KeyValuePair<string, object>>";
 
         public static class ComponentBase
         {
@@ -22,23 +23,27 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         public static class ParameterAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.ParameterAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.ParameterAttribute";
             public static readonly string MetadataName = FullTypeName;
         }
 
         public static class LayoutAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.LayoutAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.LayoutAttribute";
         }
 
         public static class InjectAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.InjectAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.InjectAttribute";
         }
 
         public static class IComponent
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.IComponent";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.IComponent";
 
             public static readonly string MetadataName = FullTypeName;
         }
@@ -64,7 +69,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         public static class RenderTreeBuilder
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder";
 
             public static readonly string BuilderParameter = "__builder";
 
@@ -84,9 +90,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             public static readonly string AddMultipleAttributes = nameof(AddMultipleAttributes);
 
-            public static readonly string AddElementReferenceCapture = nameof(AddElementReferenceCapture);
+            public static readonly string AddElementReferenceCapture = nameof(
+                AddElementReferenceCapture
+            );
 
-            public static readonly string AddComponentReferenceCapture = nameof(AddComponentReferenceCapture);
+            public static readonly string AddComponentReferenceCapture = nameof(
+                AddComponentReferenceCapture
+            );
 
             public static readonly string Clear = nameof(Clear);
 
@@ -98,45 +108,57 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
             public static readonly string SetUpdatesAttributeName = nameof(SetUpdatesAttributeName);
 
-            public static readonly string AddEventPreventDefaultAttribute = nameof(AddEventPreventDefaultAttribute);
+            public static readonly string AddEventPreventDefaultAttribute = nameof(
+                AddEventPreventDefaultAttribute
+            );
 
-            public static readonly string AddEventStopPropagationAttribute = nameof(AddEventStopPropagationAttribute);
+            public static readonly string AddEventStopPropagationAttribute = nameof(
+                AddEventStopPropagationAttribute
+            );
         }
 
         public static class RuntimeHelpers
         {
-            public static readonly string TypeCheck = "Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck";
-            public static readonly string CreateInferredEventCallback = "Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback";
+            public static readonly string TypeCheck =
+                "Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck";
+            public static readonly string CreateInferredEventCallback =
+                "Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback";
         }
 
         public static class RouteAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.RouteAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.RouteAttribute";
         }
 
         public static class BindElementAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.BindElementAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.BindElementAttribute";
         }
 
         public static class BindInputElementAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.BindInputElementAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.BindInputElementAttribute";
         }
 
         public static class EventHandlerAttribute
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.EventHandlerAttribute";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.EventHandlerAttribute";
         }
 
         public static class ElementReference
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.ElementReference";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.ElementReference";
         }
 
         public static class EventCallback
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.EventCallback";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.EventCallback";
             public static readonly string MetadataName = FullTypeName;
 
             public static readonly string FactoryAccessor = FullTypeName + ".Factory";
@@ -144,7 +166,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         public static class EventCallbackOfT
         {
-            public static readonly string MetadataName = "Microsoft.AspNetCore.Components.EventCallback`1";
+            public static readonly string MetadataName =
+                "Microsoft.AspNetCore.Components.EventCallback`1";
         }
 
         public static class EventCallbackFactory
@@ -155,13 +178,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Components
 
         public static class BindConverter
         {
-            public static readonly string FullTypeName = "Microsoft.AspNetCore.Components.BindConverter";
-            public static readonly string FormatValue = "Microsoft.AspNetCore.Components.BindConverter.FormatValue";
+            public static readonly string FullTypeName =
+                "Microsoft.AspNetCore.Components.BindConverter";
+            public static readonly string FormatValue =
+                "Microsoft.AspNetCore.Components.BindConverter.FormatValue";
         }
 
         public static class CascadingTypeParameterAttribute
         {
-            public static readonly string MetadataName = "Microsoft.AspNetCore.Components.CascadingTypeParameterAttribute";
+            public static readonly string MetadataName =
+                "Microsoft.AspNetCore.Components.CascadingTypeParameterAttribute";
         }
     }
 }

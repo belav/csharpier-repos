@@ -6,29 +6,34 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    [ActiveIssue("https://github.com/dotnet/runtime/issues/34583", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+    [ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/34583",
+        TestPlatforms.Windows,
+        TargetFrameworkMonikers.Netcoreapp,
+        TestRuntimes.Mono
+    )]
     public class Directory_Create_Tests : FileSystemWatcherTest
     {
         [Fact]
         public void FileSystemWatcher_Directory_EmptyPath()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                using (var watcher = new FileSystemWatcher(""))
+            Assert.Throws<ArgumentException>(
+                () =>
                 {
+                    using (var watcher = new FileSystemWatcher("")) { }
                 }
-            });
+            );
         }
 
         [Fact]
         public void FileSystemWatcher_Directory_PathNotExists()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                using (var watcher = new FileSystemWatcher(GetTestFilePath()))
+            Assert.Throws<ArgumentException>(
+                () =>
                 {
+                    using (var watcher = new FileSystemWatcher(GetTestFilePath())) { }
                 }
-            });
+            );
         }
 
         [Fact]
@@ -71,7 +76,11 @@ namespace System.IO.Tests
         public void FileSystemWatcher_Directory_Create_DeepDirectoryStructure()
         {
             using (var dir = new TempDirectory(GetTestFilePath()))
-            using (var deepDir = new TempDirectory(Path.Combine(dir.Path, "dir", "dir", "dir", "dir", "dir", "dir", "dir")))
+            using (
+                var deepDir = new TempDirectory(
+                    Path.Combine(dir.Path, "dir", "dir", "dir", "dir", "dir", "dir", "dir")
+                )
+            )
             using (var watcher = new FileSystemWatcher(dir.Path, "*"))
             {
                 watcher.IncludeSubdirectories = true;
@@ -82,7 +91,14 @@ namespace System.IO.Tests
                 Action action = () => Directory.CreateDirectory(dirPath);
                 Action cleanup = () => Directory.Delete(dirPath);
 
-                ExpectEvent(watcher, WatcherChangeTypes.Created, action, cleanup, dirPath, LongWaitTimeout);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Created,
+                    action,
+                    cleanup,
+                    dirPath,
+                    LongWaitTimeout
+                );
             }
         }
 

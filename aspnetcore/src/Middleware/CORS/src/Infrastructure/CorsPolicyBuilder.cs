@@ -75,11 +75,16 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                 throw new ArgumentNullException(nameof(origin));
             }
 
-            if (Uri.TryCreate(origin, UriKind.Absolute, out var uri) &&
-                (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps) &&
-                !string.Equals(uri.IdnHost, uri.Host, StringComparison.Ordinal))
+            if (
+                Uri.TryCreate(origin, UriKind.Absolute, out var uri)
+                && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
+                && !string.Equals(uri.IdnHost, uri.Host, StringComparison.Ordinal)
+            )
             {
-                var builder = new UriBuilder(uri.Scheme.ToLowerInvariant(), uri.IdnHost.ToLowerInvariant());
+                var builder = new UriBuilder(
+                    uri.Scheme.ToLowerInvariant(),
+                    uri.IdnHost.ToLowerInvariant()
+                );
                 if (!uri.IsDefaultPort)
                 {
                     // Uri does not have a way to differentiate between a port value inferred by default (e.g. Port = 80 for http://www.example.com) and
@@ -90,7 +95,10 @@ namespace Microsoft.AspNetCore.Cors.Infrastructure
                     builder.Port = uri.Port;
                 }
 
-                return builder.Uri.GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped);
+                return builder.Uri.GetComponents(
+                    UriComponents.SchemeAndServer,
+                    UriFormat.Unescaped
+                );
             }
 
             return origin.ToLowerInvariant();

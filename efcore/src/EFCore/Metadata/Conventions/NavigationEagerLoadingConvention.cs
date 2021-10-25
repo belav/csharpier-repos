@@ -15,7 +15,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         ///     Creates a new instance of <see cref="NavigationEagerLoadingConvention" />.
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this convention. </param>
-        public NavigationEagerLoadingConvention(ProviderConventionSetBuilderDependencies dependencies)
+        public NavigationEagerLoadingConvention(
+            ProviderConventionSetBuilderDependencies dependencies
+        )
         {
             Dependencies = dependencies;
         }
@@ -32,9 +34,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <param name="context"> Additional information associated with convention execution. </param>
         public virtual void ProcessForeignKeyOwnershipChanged(
             IConventionForeignKeyBuilder relationshipBuilder,
-            IConventionContext<bool?> context)
+            IConventionContext<bool?> context
+        )
         {
-            relationshipBuilder.Metadata.PrincipalToDependent?.Builder.AutoInclude(relationshipBuilder.Metadata.IsOwnership);
+            relationshipBuilder.Metadata.PrincipalToDependent?.Builder.AutoInclude(
+                relationshipBuilder.Metadata.IsOwnership
+            );
         }
     }
 }

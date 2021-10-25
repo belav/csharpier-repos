@@ -61,7 +61,11 @@ namespace Microsoft.AspNetCore.Http
                 ThrowIfDisposed();
                 if (value < 0 || value > Length)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, $"The Position must be within the length of the Stream: {Length}");
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        $"The Position must be within the length of the Stream: {Length}"
+                    );
                 }
                 VerifyPosition();
                 _position = value;
@@ -75,7 +79,9 @@ namespace Microsoft.AspNetCore.Http
         {
             if (_inner.Position != _innerOffset + _position)
             {
-                throw new InvalidOperationException("The inner stream position has changed unexpectedly.");
+                throw new InvalidOperationException(
+                    "The inner stream position has changed unexpectedly."
+                );
             }
         }
 
@@ -106,7 +112,12 @@ namespace Microsoft.AspNetCore.Http
             return read;
         }
 
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfDisposed();
             VerifyPosition();
@@ -120,7 +131,12 @@ namespace Microsoft.AspNetCore.Http
         {
             throw new NotSupportedException();
         }
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotSupportedException();
         }
@@ -130,9 +146,7 @@ namespace Microsoft.AspNetCore.Http
             throw new NotSupportedException();
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {

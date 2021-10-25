@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             RemoveEntityTypesUnreachableByNavigations(modelBuilder, context);
             RemoveNavigationlessForeignKeys(modelBuilder);
@@ -41,20 +42,26 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
 
         private void RemoveEntityTypesUnreachableByNavigations(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             var model = modelBuilder.Metadata;
             var rootEntityTypes = GetRoots(model, ConfigurationSource.DataAnnotation);
             using (context.DelayConventions())
             {
-                foreach (var orphan in new GraphAdapter(model).GetUnreachableVertices(rootEntityTypes))
+                foreach (
+                    var orphan in new GraphAdapter(model).GetUnreachableVertices(rootEntityTypes)
+                )
                 {
                     modelBuilder.HasNoEntityType(orphan, fromDataAnnotation: true);
                 }
             }
         }
 
-        private IReadOnlyList<IConventionEntityType> GetRoots(IConventionModel model, ConfigurationSource configurationSource)
+        private IReadOnlyList<IConventionEntityType> GetRoots(
+            IConventionModel model,
+            ConfigurationSource configurationSource
+        )
         {
             var roots = new List<IConventionEntityType>();
             // ReSharper disable once LoopCanBeConvertedToQuery
@@ -76,9 +83,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             {
                 foreach (var foreignKey in entityType.GetDeclaredForeignKeys().ToList())
                 {
-                    if (foreignKey.PrincipalToDependent == null
+                    if (
+                        foreignKey.PrincipalToDependent == null
                         && foreignKey.DependentToPrincipal == null
-                        && !foreignKey.GetReferencingSkipNavigations().Any())
+                        && !foreignKey.GetReferencingSkipNavigations().Any()
+                    )
                     {
                         entityType.Builder.HasNoRelationship(foreignKey, fromDataAnnotation: true);
                     }
@@ -105,25 +114,45 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
                 _model = model;
             }
 
-            public override IEnumerable<IConventionEntityType> Vertices
-                => _model.GetEntityTypes();
+            public override IEnumerable<IConventionEntityType> Vertices => _model.GetEntityTypes();
 
-            public override IEnumerable<IConventionEntityType> GetOutgoingNeighbors(IConventionEntityType from)
-                => from.GetForeignKeys().Where(fk => fk.DependentToPrincipal != null).Select(fk => fk.PrincipalEntityType)
+            public override IEnumerable<IConventionEntityType> GetOutgoingNeighbors(
+                IConventionEntityType from
+            ) =>
+                from.GetForeignKeys()
+                    .Where(fk => fk.DependentToPrincipal != null)
+                    .Select(fk => fk.PrincipalEntityType)
                     .Union(
-                        from.GetReferencingForeignKeys().Where(fk => fk.PrincipalToDependent != null).Select(fk => fk.DeclaringEntityType))
-                    .Union(from.GetSkipNavigations().Where(sn => sn.ForeignKey != null).Select(sn => sn.ForeignKey!.DeclaringEntityType))
+                        from.GetReferencingForeignKeys()
+                            .Where(fk => fk.PrincipalToDependent != null)
+                            .Select(fk => fk.DeclaringEntityType)
+                    )
+                    .Union(
+                        from.GetSkipNavigations()
+                            .Where(sn => sn.ForeignKey != null)
+                            .Select(sn => sn.ForeignKey!.DeclaringEntityType)
+                    )
                     .Union(from.GetSkipNavigations().Select(sn => sn.TargetEntityType));
 
-            public override IEnumerable<IConventionEntityType> GetIncomingNeighbors(IConventionEntityType to)
-                => to.GetForeignKeys().Where(fk => fk.PrincipalToDependent != null).Select(fk => fk.PrincipalEntityType)
-                    .Union(to.GetReferencingForeignKeys().Where(fk => fk.DependentToPrincipal != null).Select(fk => fk.DeclaringEntityType))
-                    .Union(to.GetSkipNavigations().Where(sn => sn.ForeignKey != null).Select(sn => sn.ForeignKey!.DeclaringEntityType))
+            public override IEnumerable<IConventionEntityType> GetIncomingNeighbors(
+                IConventionEntityType to
+            ) =>
+                to.GetForeignKeys()
+                    .Where(fk => fk.PrincipalToDependent != null)
+                    .Select(fk => fk.PrincipalEntityType)
+                    .Union(
+                        to.GetReferencingForeignKeys()
+                            .Where(fk => fk.DependentToPrincipal != null)
+                            .Select(fk => fk.DeclaringEntityType)
+                    )
+                    .Union(
+                        to.GetSkipNavigations()
+                            .Where(sn => sn.ForeignKey != null)
+                            .Select(sn => sn.ForeignKey!.DeclaringEntityType)
+                    )
                     .Union(to.GetSkipNavigations().Select(sn => sn.TargetEntityType));
 
-            public override void Clear()
-            {
-            }
+            public override void Clear() { }
         }
     }
 }

@@ -28,7 +28,9 @@ namespace AutoMapper.Features
         /// <typeparam name="TFeatureToFind">The type of the feature.</typeparam>
         /// <returns>The feature or null if feature not exists.</returns>
         public TFeatureToFind Get<TFeatureToFind>() where TFeatureToFind : TFeature =>
-            _features == null ? default : (TFeatureToFind)_features.GetOrDefault(typeof(TFeatureToFind));
+            _features == null
+                ? default
+                : (TFeatureToFind)_features.GetOrDefault(typeof(TFeatureToFind));
         /// <summary>
         /// Add or update the feature. Existing feature of the same type will be replaced.
         /// </summary>
@@ -39,22 +41,33 @@ namespace AutoMapper.Features
             _features[feature.GetType()] = feature;
         }
         public IEnumerator<TFeature> GetEnumerator() =>
-            _features == null ? Enumerable.Empty<TFeature>().GetEnumerator() : _features.Values.GetEnumerator();
+            _features == null
+                ? Enumerable.Empty<TFeature>().GetEnumerator()
+                : _features.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
     public static class FeatureExtensions
     {
-        public static IMapperConfigurationExpression SetFeature(this IMapperConfigurationExpression configuration, IGlobalFeature feature)
+        public static IMapperConfigurationExpression SetFeature(
+            this IMapperConfigurationExpression configuration,
+            IGlobalFeature feature
+        )
         {
             configuration.Internal().Features.Set(feature);
             return configuration;
         }
-        public static IMappingExpression<TSource, TDestination> SetFeature<TSource, TDestination>(this IMappingExpression<TSource, TDestination> mapping, IMappingFeature feature)
+        public static IMappingExpression<TSource, TDestination> SetFeature<TSource, TDestination>(
+            this IMappingExpression<TSource, TDestination> mapping,
+            IMappingFeature feature
+        )
         {
             mapping.Features.Set(feature);
             return mapping;
         }
-        internal static void Configure(this Features<IGlobalFeature> features, MapperConfiguration mapperConfiguration)
+        internal static void Configure(
+            this Features<IGlobalFeature> features,
+            MapperConfiguration mapperConfiguration
+        )
         {
             if (features.Count == 0)
             {
@@ -65,7 +78,10 @@ namespace AutoMapper.Features
                 feature.Configure(mapperConfiguration);
             }
         }
-        public static void ReverseTo(this Features<IMappingFeature> features, Features<IMappingFeature> reversedFeatures)
+        public static void ReverseTo(
+            this Features<IMappingFeature> features,
+            Features<IMappingFeature> reversedFeatures
+        )
         {
             if (features.Count == 0)
             {
@@ -91,7 +107,10 @@ namespace AutoMapper.Features
                 feature.Configure(typeMap);
             }
         }
-        internal static void Seal(this Features<IRuntimeFeature> features, IGlobalConfiguration configurationProvider)
+        internal static void Seal(
+            this Features<IRuntimeFeature> features,
+            IGlobalConfiguration configurationProvider
+        )
         {
             if (features.Count == 0)
             {

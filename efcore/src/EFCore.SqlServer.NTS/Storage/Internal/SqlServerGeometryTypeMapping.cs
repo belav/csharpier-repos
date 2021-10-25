@@ -26,11 +26,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public class SqlServerGeometryTypeMapping<TGeometry> : RelationalGeometryTypeMapping<TGeometry, SqlBytes>
-        where TGeometry : Geometry
+    public class SqlServerGeometryTypeMapping<TGeometry>
+        : RelationalGeometryTypeMapping<TGeometry, SqlBytes> where TGeometry : Geometry
     {
-        private static readonly MethodInfo _getSqlBytes
-            = typeof(SqlDataReader).GetRuntimeMethod(nameof(SqlDataReader.GetSqlBytes), new[] { typeof(int) })!;
+        private static readonly MethodInfo _getSqlBytes = typeof(SqlDataReader).GetRuntimeMethod(
+            nameof(SqlDataReader.GetSqlBytes),
+            new[] { typeof(int) }
+        )!;
 
         private static Action<DbParameter, SqlDbType>? _sqlDbTypeSetter;
         private static Action<DbParameter, string>? _udtTypeNameSetter;
@@ -48,9 +50,10 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             : base(
                 new GeometryValueConverter<TGeometry>(
                     CreateReader(geometryServices, IsGeography(storeType)),
-                    CreateWriter(IsGeography(storeType))),
-                storeType)
-            => _isGeography = IsGeography(storeType);
+                    CreateWriter(IsGeography(storeType))
+                ),
+                storeType
+            ) => _isGeography = IsGeography(storeType);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,8 +63,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         /// </summary>
         protected SqlServerGeometryTypeMapping(
             RelationalTypeMappingParameters parameters,
-            ValueConverter<TGeometry, SqlBytes>? converter)
-            : base(parameters, converter)
+            ValueConverter<TGeometry, SqlBytes>? converter
+        ) : base(parameters, converter)
         {
             _isGeography = IsGeography(StoreType);
         }
@@ -72,8 +75,9 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-            => new SqlServerGeometryTypeMapping<TGeometry>(parameters, SpatialConverter);
+        protected override RelationalTypeMapping Clone(
+            RelationalTypeMappingParameters parameters
+        ) => new SqlServerGeometryTypeMapping<TGeometry>(parameters, SpatialConverter);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -101,9 +105,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 
             if (!defaultSrid)
             {
-                builder
-                    .Append(", ")
-                    .Append(geometry.SRID);
+                builder.Append(", ").Append(geometry.SRID);
             }
 
             builder.Append(")");
@@ -117,8 +119,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override MethodInfo GetDataReaderMethod()
-            => _getSqlBytes;
+        public override MethodInfo GetDataReaderMethod() => _getSqlBytes;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -126,8 +127,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override string AsText(object value)
-            => ((Geometry)value).AsText();
+        protected override string AsText(object value) => ((Geometry)value).AsText();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -135,8 +135,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override int GetSrid(object value)
-            => ((Geometry)value).SRID;
+        protected override int GetSrid(object value) => ((Geometry)value).SRID;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -144,8 +143,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        protected override Type WKTReaderType
-            => typeof(WKTReader);
+        protected override Type WKTReaderType => typeof(WKTReader);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -156,8 +154,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         protected override void ConfigureParameter(DbParameter parameter)
         {
             var type = parameter.GetType();
-            LazyInitializer.EnsureInitialized(ref _sqlDbTypeSetter, () => CreateSqlDbTypeAccessor(type));
-            LazyInitializer.EnsureInitialized(ref _udtTypeNameSetter, () => CreateUdtTypeNameAccessor(type));
+            LazyInitializer.EnsureInitialized(
+                ref _sqlDbTypeSetter,
+                () => CreateSqlDbTypeAccessor(type)
+            );
+            LazyInitializer.EnsureInitialized(
+                ref _udtTypeNameSetter,
+                () => CreateUdtTypeNameAccessor(type)
+            );
 
             if (parameter.Value == DBNull.Value)
             {
@@ -168,27 +172,33 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             _udtTypeNameSetter(parameter, _isGeography ? "geography" : "geometry");
         }
 
-        private static SqlServerBytesReader CreateReader(NtsGeometryServices services, bool isGeography)
-            => new(services) { IsGeography = isGeography };
+        private static SqlServerBytesReader CreateReader(
+            NtsGeometryServices services,
+            bool isGeography
+        ) => new(services) { IsGeography = isGeography };
 
-        private static SqlServerBytesWriter CreateWriter(bool isGeography)
-            => new() { IsGeography = isGeography };
+        private static SqlServerBytesWriter CreateWriter(bool isGeography) =>
+            new() { IsGeography = isGeography };
 
-        private static bool IsGeography(string storeType)
-            => string.Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
+        private static bool IsGeography(string storeType) =>
+            string.Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
 
         private static Action<DbParameter, SqlDbType> CreateSqlDbTypeAccessor(Type paramType)
         {
             var paramParam = Expression.Parameter(typeof(DbParameter), "parameter");
             var valueParam = Expression.Parameter(typeof(SqlDbType), "value");
 
-            return Expression.Lambda<Action<DbParameter, SqlDbType>>(
-                Expression.Call(
-                    Expression.Convert(paramParam, paramType),
-                    paramType.GetProperty("SqlDbType")!.SetMethod!,
-                    valueParam),
-                paramParam,
-                valueParam).Compile();
+            return Expression
+                .Lambda<Action<DbParameter, SqlDbType>>(
+                    Expression.Call(
+                        Expression.Convert(paramParam, paramType),
+                        paramType.GetProperty("SqlDbType")!.SetMethod!,
+                        valueParam
+                    ),
+                    paramParam,
+                    valueParam
+                )
+                .Compile();
         }
 
         private static Action<DbParameter, string> CreateUdtTypeNameAccessor(Type paramType)
@@ -196,13 +206,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             var paramParam = Expression.Parameter(typeof(DbParameter), "parameter");
             var valueParam = Expression.Parameter(typeof(string), "value");
 
-            return Expression.Lambda<Action<DbParameter, string>>(
-                Expression.Call(
-                    Expression.Convert(paramParam, paramType),
-                    paramType.GetProperty("UdtTypeName")!.SetMethod!,
-                    valueParam),
-                paramParam,
-                valueParam).Compile();
+            return Expression
+                .Lambda<Action<DbParameter, string>>(
+                    Expression.Call(
+                        Expression.Convert(paramParam, paramType),
+                        paramType.GetProperty("UdtTypeName")!.SetMethod!,
+                        valueParam
+                    ),
+                    paramParam,
+                    valueParam
+                )
+                .Compile();
         }
     }
 }

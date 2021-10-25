@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         {
             // Arrange
             var providerFactory = new ProblemDetailsWrapperProviderFactory();
-            var context = new WrapperProviderContext(typeof(SerializableError), isSerialization: true);
+            var context = new WrapperProviderContext(
+                typeof(SerializableError),
+                isSerialization: true
+            );
 
             // Act
             var provider = providerFactory.GetProvider(context);

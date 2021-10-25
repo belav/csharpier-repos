@@ -15,6 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     <see cref="M:RelationalEntityTypeBuilderExtensions.ToSqlQuery" />.
         /// </summary>
         [Obsolete("Use RelationalEntityTypeExtensions.DefaultQueryNameBase")]
-        public static readonly string DefaultQueryNameBase = RelationalEntityTypeExtensions.DefaultQueryNameBase;
+        public static readonly string DefaultQueryNameBase =
+            RelationalEntityTypeExtensions.DefaultQueryNameBase;
     }
 }

@@ -101,7 +101,10 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create();
             container.ComposeParts(new SimpleMetadataExporterWithNullReferenceValue());
 
-            var export = container.GetExport<SimpleMetadataExporterWithNullReferenceValue, ISimpleMetadataView>();
+            var export = container.GetExport<
+                SimpleMetadataExporterWithNullReferenceValue,
+                ISimpleMetadataView
+            >();
 
             Assert.Null(export.Metadata.String);
             Assert.Equal(42, export.Metadata.Int);
@@ -117,7 +120,10 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create();
             container.ComposeParts(new SimpleMetadataExporterWithNullNonReferenceValue());
 
-            var exports = container.GetExports<SimpleMetadataExporterWithNullNonReferenceValue, ISimpleMetadataView>();
+            var exports = container.GetExports<
+                SimpleMetadataExporterWithNullNonReferenceValue,
+                ISimpleMetadataView
+            >();
             Assert.False(exports.Any());
         }
 
@@ -127,7 +133,10 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create();
             container.ComposeParts(new SimpleMetadataExporterWithTypeMismatch());
 
-            var exports = container.GetExports<SimpleMetadataExporterWithTypeMismatch, ISimpleMetadataView>();
+            var exports = container.GetExports<
+                SimpleMetadataExporterWithTypeMismatch,
+                ISimpleMetadataView
+            >();
             Assert.False(exports.Any());
         }
 
@@ -139,32 +148,60 @@ namespace System.ComponentModel.Composition
             batch.AddPart(new MyExporterWithValidMetadata());
             container.Compose(batch);
 
-            var typeVi = container.GetExport<MyExporterWithValidMetadata, IDictionary<string, object>>();
+            var typeVi = container.GetExport<
+                MyExporterWithValidMetadata,
+                IDictionary<string, object>
+            >();
             var metadataFoo = typeVi.Metadata["foo"] as IList<string>;
             Assert.Equal(2, metadataFoo.Count());
-            Assert.True(metadataFoo.Contains("bar1"), "The metadata collection should include value 'bar1'");
-            Assert.True(metadataFoo.Contains("bar2"), "The metadata collection should include value 'bar2'");
+            Assert.True(
+                metadataFoo.Contains("bar1"),
+                "The metadata collection should include value 'bar1'"
+            );
+            Assert.True(
+                metadataFoo.Contains("bar2"),
+                "The metadata collection should include value 'bar2'"
+            );
             Assert.Equal("world", typeVi.Metadata["hello"]);
             Assert.Equal("GoodOneValue2", typeVi.Metadata["GoodOne2"]);
 
             var metadataAcme = typeVi.Metadata["acme"] as IList<object>;
             Assert.Equal(2, metadataAcme.Count());
-            Assert.True(metadataAcme.Contains("acmebar"), "The metadata collection should include value 'bar'");
-            Assert.True(metadataAcme.Contains(2.0), "The metadata collection should include value 2");
+            Assert.True(
+                metadataAcme.Contains("acmebar"),
+                "The metadata collection should include value 'bar'"
+            );
+            Assert.True(
+                metadataAcme.Contains(2.0),
+                "The metadata collection should include value 2"
+            );
 
-            var memberVi = container.GetExport<Func<double>, IDictionary<string, object>>("ContractForValidMetadata");
+            var memberVi = container.GetExport<Func<double>, IDictionary<string, object>>(
+                "ContractForValidMetadata"
+            );
             var metadataBar = memberVi.Metadata["bar"] as IList<string>;
             Assert.Equal(2, metadataBar.Count());
-            Assert.True(metadataBar.Contains("foo1"), "The metadata collection should include value 'foo1'");
-            Assert.True(metadataBar.Contains("foo2"), "The metadata collection should include value 'foo2'");
+            Assert.True(
+                metadataBar.Contains("foo1"),
+                "The metadata collection should include value 'foo1'"
+            );
+            Assert.True(
+                metadataBar.Contains("foo2"),
+                "The metadata collection should include value 'foo2'"
+            );
             Assert.Equal("hello", memberVi.Metadata["world"]);
             Assert.Equal("GoodOneValue2", memberVi.Metadata["GoodOne2"]);
 
             var metadataStuff = memberVi.Metadata["stuff"] as IList<object>;
             Assert.Equal(2, metadataAcme.Count());
-            Assert.True(metadataStuff.Contains("acmebar"), "The metadata collection should include value 'acmebar'");
-            Assert.True(metadataStuff.Contains(2.0), "The metadata collection should include value 2");
-
+            Assert.True(
+                metadataStuff.Contains("acmebar"),
+                "The metadata collection should include value 'acmebar'"
+            );
+            Assert.True(
+                metadataStuff.Contains(2.0),
+                "The metadata collection should include value 2"
+            );
         }
 
         [Fact]
@@ -177,39 +214,71 @@ namespace System.ComponentModel.Composition
 
         private void ValidMetadataDiscoveredByCatalog(CompositionContainer container)
         {
-            var export1 = container.GetExport<MyExporterWithValidMetadata, IDictionary<string, object>>();
+            var export1 = container.GetExport<
+                MyExporterWithValidMetadata,
+                IDictionary<string, object>
+            >();
 
             var metadataFoo = export1.Metadata["foo"] as IList<string>;
             Assert.Equal(2, metadataFoo.Count());
-            Assert.True(metadataFoo.Contains("bar1"), "The metadata collection should include value 'bar1'");
-            Assert.True(metadataFoo.Contains("bar2"), "The metadata collection should include value 'bar2'");
+            Assert.True(
+                metadataFoo.Contains("bar1"),
+                "The metadata collection should include value 'bar1'"
+            );
+            Assert.True(
+                metadataFoo.Contains("bar2"),
+                "The metadata collection should include value 'bar2'"
+            );
             Assert.Equal("world", export1.Metadata["hello"]);
             Assert.Equal("GoodOneValue2", export1.Metadata["GoodOne2"]);
 
             var metadataAcme = export1.Metadata["acme"] as IList<object>;
             Assert.Equal(2, metadataAcme.Count());
-            Assert.True(metadataAcme.Contains("acmebar"), "The metadata collection should include value 'bar'");
-            Assert.True(metadataAcme.Contains(2.0), "The metadata collection should include value 2");
+            Assert.True(
+                metadataAcme.Contains("acmebar"),
+                "The metadata collection should include value 'bar'"
+            );
+            Assert.True(
+                metadataAcme.Contains(2.0),
+                "The metadata collection should include value 2"
+            );
 
-            var export2 = container.GetExport<Func<double>, IDictionary<string, object>>("ContractForValidMetadata");
+            var export2 = container.GetExport<Func<double>, IDictionary<string, object>>(
+                "ContractForValidMetadata"
+            );
             var metadataBar = export2.Metadata["bar"] as IList<string>;
             Assert.Equal(2, metadataBar.Count());
-            Assert.True(metadataBar.Contains("foo1"), "The metadata collection should include value 'foo1'");
-            Assert.True(metadataBar.Contains("foo2"), "The metadata collection should include value 'foo2'");
+            Assert.True(
+                metadataBar.Contains("foo1"),
+                "The metadata collection should include value 'foo1'"
+            );
+            Assert.True(
+                metadataBar.Contains("foo2"),
+                "The metadata collection should include value 'foo2'"
+            );
             Assert.Equal("hello", export2.Metadata["world"]);
             Assert.Equal("GoodOneValue2", export2.Metadata["GoodOne2"]);
 
             var metadataStuff = export2.Metadata["stuff"] as IList<object>;
             Assert.Equal(2, metadataAcme.Count());
-            Assert.True(metadataStuff.Contains("acmebar"), "The metadata collection should include value 'acmebar'");
-            Assert.True(metadataStuff.Contains(2.0), "The metadata collection should include value 2");
+            Assert.True(
+                metadataStuff.Contains("acmebar"),
+                "The metadata collection should include value 'acmebar'"
+            );
+            Assert.True(
+                metadataStuff.Contains(2.0),
+                "The metadata collection should include value 2"
+            );
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
         [MetadataAttribute]
         public class BadStrongMetadata : Attribute
         {
-            public string SelfConflicted { get { return "SelfConflictedValue"; } }
+            public string SelfConflicted
+            {
+                get { return "SelfConflictedValue"; }
+            }
         }
 
         [Export]
@@ -237,7 +306,10 @@ namespace System.ComponentModel.Composition
             [ExportMetadata("InvalidCollection", "InvalidCollectionValue2", IsMultiple = true)]
             [BadStrongMetadata]
             [ExportMetadata("GoodOne1", "GoodOneValue1")]
-            public double DoSomething() { return 0.618; }
+            public double DoSomething()
+            {
+                return 0.618;
+            }
         }
 
         [Export]
@@ -246,18 +318,22 @@ namespace System.ComponentModel.Composition
         [PartNotDiscoverable]
         public class ClassWithInvalidDuplicateMetadataOnType
         {
-
         }
 
         [Fact]
         public void InvalidDuplicateMetadataOnType_ShouldThrow()
         {
-            var part = AttributedModelServices.CreatePart(new ClassWithInvalidDuplicateMetadataOnType());
+            var part = AttributedModelServices.CreatePart(
+                new ClassWithInvalidDuplicateMetadataOnType()
+            );
             var export = part.ExportDefinitions.First();
-            var ex = ExceptionAssert.Throws<InvalidOperationException>(RetryMode.DoNotRetry, () =>
-            {
-                var metadata = export.Metadata;
-            });
+            var ex = ExceptionAssert.Throws<InvalidOperationException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var metadata = export.Metadata;
+                }
+            );
 
             Assert.Contains("DuplicateMetadataName", ex.Message);
         }
@@ -274,13 +350,18 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void InvalidDuplicateMetadataOnMember_ShouldThrow()
         {
-            var part = AttributedModelServices.CreatePart(new ClassWithInvalidDuplicateMetadataOnMember());
+            var part = AttributedModelServices.CreatePart(
+                new ClassWithInvalidDuplicateMetadataOnMember()
+            );
             var export = part.ExportDefinitions.First();
 
-            var ex = ExceptionAssert.Throws<InvalidOperationException>(RetryMode.DoNotRetry, () =>
-            {
-                var metadata = export.Metadata;
-            });
+            var ex = ExceptionAssert.Throws<InvalidOperationException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var metadata = export.Metadata;
+                }
+            );
 
             Assert.Contains("DuplicateMetadataName", ex.Message);
         }
@@ -290,7 +371,6 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("DuplicateMetadataName", "Your Name", IsMultiple = true)]
         public class ClassWithValidDuplicateMetadataOnType
         {
-
         }
 
         [Fact]
@@ -302,7 +382,10 @@ namespace System.ComponentModel.Composition
 
             container.Compose(batch);
 
-            var export = container.GetExport<ClassWithValidDuplicateMetadataOnType, IDictionary<string, object>>();
+            var export = container.GetExport<
+                ClassWithValidDuplicateMetadataOnType,
+                IDictionary<string, object>
+            >();
 
             var names = export.Metadata["DuplicateMetadataName"] as string[];
 
@@ -326,7 +409,10 @@ namespace System.ComponentModel.Composition
 
             container.Compose(batch);
 
-            var export = container.GetExport<ClassWithDuplicateMetadataOnMember, IDictionary<string, object>>();
+            var export = container.GetExport<
+                ClassWithDuplicateMetadataOnMember,
+                IDictionary<string, object>
+            >();
 
             var names = export.Metadata["DuplicateMetadataName"] as string[];
 
@@ -338,7 +424,6 @@ namespace System.ComponentModel.Composition
         [PartNotDiscoverable]
         public class ClassWithReservedMetadataValue
         {
-
         }
 
         [Fact]
@@ -347,10 +432,13 @@ namespace System.ComponentModel.Composition
             var part = AttributedModelServices.CreatePart(new ClassWithReservedMetadataValue());
             var export = part.ExportDefinitions.First();
 
-            var ex = ExceptionAssert.Throws<InvalidOperationException>(RetryMode.DoNotRetry, () =>
-            {
-                var metadata = export.Metadata;
-            });
+            var ex = ExceptionAssert.Throws<InvalidOperationException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var metadata = export.Metadata;
+                }
+            );
 
             Assert.Contains(CompositionConstants.PartCreationPolicyMetadataName, ex.Message);
         }
@@ -415,7 +503,18 @@ namespace System.ComponentModel.Composition
 
         private static ImportDefinition CreateImportDefinition(Type type, string metadataKey)
         {
-            return new ContractBasedImportDefinition(AttributedModelServices.GetContractName(typeof(IMyExporter)), null, new KeyValuePair<string, Type>[] { new KeyValuePair<string, Type>(metadataKey, typeof(object)) }, ImportCardinality.ZeroOrMore, true, true, CreationPolicy.Any);
+            return new ContractBasedImportDefinition(
+                AttributedModelServices.GetContractName(typeof(IMyExporter)),
+                null,
+                new KeyValuePair<string, Type>[]
+                {
+                    new KeyValuePair<string, Type>(metadataKey, typeof(object))
+                },
+                ImportCardinality.ZeroOrMore,
+                true,
+                true,
+                CreationPolicy.Any
+            );
         }
 
         #endregion
@@ -439,7 +538,6 @@ namespace System.ComponentModel.Composition
         private static void SelectiveImportBySTMThroughCatalog2(CompositionContainer container)
         {
             throw new NotImplementedException();
-
             //var export1 = container.GetExport<MyImporterWithExportStronglyTypedMetadata>();
             //var result1 = export1.TryGetExportedValue().VerifySuccess(CompositionIssueId.RequiredMetadataNotFound);
             //Assert.NotNull(result1.Value.ValueInfo, "The valid export should really get bound");
@@ -458,8 +556,18 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.CreateWithDefaultAttributedCatalog();
 
             var export = container.GetExport<ExportMultiple, IMyOptions>();
-            EnumerableAssert.AreEqual(export.Metadata.OptionNames.OrderBy(s => s), "name1", "name2", "name3");
-            EnumerableAssert.AreEqual(export.Metadata.OptionValues.OrderBy(o => o.ToString()), "value1", "value2", "value3");
+            EnumerableAssert.AreEqual(
+                export.Metadata.OptionNames.OrderBy(s => s),
+                "name1",
+                "name2",
+                "name3"
+            );
+            EnumerableAssert.AreEqual(
+                export.Metadata.OptionValues.OrderBy(o => o.ToString()),
+                "value1",
+                "value2",
+                "value3"
+            );
         }
 
         [Fact]
@@ -469,8 +577,18 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.CreateWithDefaultAttributedCatalog();
 
             var export = container.GetExport<ExportMultiple, IMyOptionsAsIEnumerable>();
-            EnumerableAssert.AreEqual(export.Metadata.OptionNames.OrderBy(s => s), "name1", "name2", "name3");
-            EnumerableAssert.AreEqual(export.Metadata.OptionValues.OrderBy(o => o.ToString()), "value1", "value2", "value3");
+            EnumerableAssert.AreEqual(
+                export.Metadata.OptionNames.OrderBy(s => s),
+                "name1",
+                "name2",
+                "name3"
+            );
+            EnumerableAssert.AreEqual(
+                export.Metadata.OptionValues.OrderBy(o => o.ToString()),
+                "value1",
+                "value2",
+                "value3"
+            );
         }
 
         [Fact]
@@ -480,8 +598,18 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.CreateWithDefaultAttributedCatalog();
 
             var export = container.GetExport<ExportMultiple, IMyOptionsAsArray>();
-            EnumerableAssert.AreEqual(export.Metadata.OptionNames.OrderBy(s => s), "name1", "name2", "name3");
-            EnumerableAssert.AreEqual(export.Metadata.OptionValues.OrderBy(o => o.ToString()), "value1", "value2", "value3");
+            EnumerableAssert.AreEqual(
+                export.Metadata.OptionNames.OrderBy(s => s),
+                "name1",
+                "name2",
+                "name3"
+            );
+            EnumerableAssert.AreEqual(
+                export.Metadata.OptionValues.OrderBy(o => o.ToString()),
+                "value1",
+                "value2",
+                "value3"
+            );
         }
 
         [Fact]
@@ -522,11 +650,18 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(BaseClassWithMetadataButNoExport),
-                typeof(DerivedClassWithExportButNoMetadata));
+                typeof(DerivedClassWithExportButNoMetadata)
+            );
 
-            var export = container.GetExport<BaseClassWithMetadataButNoExport, IDictionary<string, object>>();
+            var export = container.GetExport<
+                BaseClassWithMetadataButNoExport,
+                IDictionary<string, object>
+            >();
 
-            Assert.False(export.Metadata.ContainsKey("Name"), "Export should only contain metadata from the derived!");
+            Assert.False(
+                export.Metadata.ContainsKey("Name"),
+                "Export should only contain metadata from the derived!"
+            );
         }
 
         [InheritedExport(typeof(BaseClassWithExportButNoMetadata))]
@@ -544,11 +679,18 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(BaseClassWithExportButNoMetadata),
-                typeof(DerivedClassMetadataButNoExport));
+                typeof(DerivedClassMetadataButNoExport)
+            );
 
-            var export = container.GetExport<BaseClassWithExportButNoMetadata, IDictionary<string, object>>();
+            var export = container.GetExport<
+                BaseClassWithExportButNoMetadata,
+                IDictionary<string, object>
+            >();
 
-            Assert.False(export.Metadata.ContainsKey("Name"), "Export should only contain metadata from the base!");
+            Assert.False(
+                export.Metadata.ContainsKey("Name"),
+                "Export should only contain metadata from the base!"
+            );
         }
 
         [Export(typeof(BaseClassWithExportAndMetadata))]
@@ -568,13 +710,20 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.CreateWithAttributedCatalog(
                 typeof(BaseClassWithExportAndMetadata),
-                typeof(DerivedClassWithExportAndMetadata));
+                typeof(DerivedClassWithExportAndMetadata)
+            );
 
-            var exportBase = container.GetExport<BaseClassWithExportAndMetadata, IDictionary<string, object>>();
+            var exportBase = container.GetExport<
+                BaseClassWithExportAndMetadata,
+                IDictionary<string, object>
+            >();
 
             Assert.Equal("FromBaseType", exportBase.Metadata["Name"]);
 
-            var exportDerived = container.GetExport<DerivedClassWithExportAndMetadata, IDictionary<string, object>>();
+            var exportDerived = container.GetExport<
+                DerivedClassWithExportAndMetadata,
+                IDictionary<string, object>
+            >();
             Assert.Equal("FromDerivedType", exportDerived.Metadata["Name"]);
         }
 
@@ -598,7 +747,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ExportWithValidCollectionOfMetadata_ShouldDiscoverAllMetadata()
         {
-            var catalog = CatalogFactory.CreateAttributed(typeof(ClassWithLotsOfDifferentMetadataTypes));
+            var catalog = CatalogFactory.CreateAttributed(
+                typeof(ClassWithLotsOfDifferentMetadataTypes)
+            );
 
             var export = catalog.Parts.First().ExportDefinitions.First();
 
@@ -619,7 +770,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ExportWithIntCollectionPlusNullValueOfMetadata_ShouldDiscoverAllMetadata()
         {
-            var catalog = CatalogFactory.CreateAttributed(typeof(ClassWithIntCollectionWithNullValue));
+            var catalog = CatalogFactory.CreateAttributed(
+                typeof(ClassWithIntCollectionWithNullValue)
+            );
 
             var export = catalog.Parts.First().ExportDefinitions.First();
 
@@ -688,7 +841,10 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create();
             container.ComposeParts(new ExportWithMultipleMetadata_ExportStringsAsObjects());
 
-            var export = container.GetExport<ExportWithMultipleMetadata_ExportStringsAsObjects, IObjectView_AsStrings>();
+            var export = container.GetExport<
+                ExportWithMultipleMetadata_ExportStringsAsObjects,
+                IObjectView_AsStrings
+            >();
             Assert.NotNull(export);
 
             Assert.NotNull(export.Metadata);
@@ -700,9 +856,14 @@ namespace System.ComponentModel.Composition
         public void ExportWithMultipleMetadata_ExportStringsAsObjects_With_Null_ShouldDiscoverMetadataAsStrings()
         {
             var container = ContainerFactory.Create();
-            container.ComposeParts(new ExportWithMultipleMetadata_ExportStringsAsObjects_WithNull());
+            container.ComposeParts(
+                new ExportWithMultipleMetadata_ExportStringsAsObjects_WithNull()
+            );
 
-            var export = container.GetExport<ExportWithMultipleMetadata_ExportStringsAsObjects_WithNull, IObjectView_AsStrings>();
+            var export = container.GetExport<
+                ExportWithMultipleMetadata_ExportStringsAsObjects_WithNull,
+                IObjectView_AsStrings
+            >();
             Assert.NotNull(export);
 
             Assert.NotNull(export.Metadata);
@@ -716,7 +877,10 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create();
             container.ComposeParts(new ExportWithMultipleMetadata_ExportIntsAsObjects());
 
-            var export = container.GetExport<ExportWithMultipleMetadata_ExportIntsAsObjects, IObjectView_AsInts>();
+            var export = container.GetExport<
+                ExportWithMultipleMetadata_ExportIntsAsObjects,
+                IObjectView_AsInts
+            >();
             Assert.NotNull(export);
 
             Assert.NotNull(export.Metadata);
@@ -730,10 +894,16 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create();
             container.ComposeParts(new ExportWithMultipleMetadata_ExportIntsAsObjects_WithNull());
 
-            var exports = container.GetExports<ExportWithMultipleMetadata_ExportIntsAsObjects_WithNull, IObjectView_AsInts>();
+            var exports = container.GetExports<
+                ExportWithMultipleMetadata_ExportIntsAsObjects_WithNull,
+                IObjectView_AsInts
+            >();
             Assert.False(exports.Any());
 
-            var export = container.GetExport<ExportWithMultipleMetadata_ExportIntsAsObjects_WithNull, IObjectView>();
+            var export = container.GetExport<
+                ExportWithMultipleMetadata_ExportIntsAsObjects_WithNull,
+                IObjectView
+            >();
 
             Assert.NotNull(export.Metadata);
             Assert.NotNull(export.Metadata.Object);
@@ -852,7 +1022,10 @@ namespace System.ComponentModel.Composition
             var container = ContainerFactory.Create();
             container.ComposeParts(new ItemWithTypeExports_WithAllNulls());
 
-            var export = container.GetExport<ItemWithTypeExports_WithAllNulls, ITypesMetadataView>();
+            var export = container.GetExport<
+                ItemWithTypeExports_WithAllNulls,
+                ITypesMetadataView
+            >();
 
             Assert.NotNull(export.Metadata);
             Assert.NotNull(export.Metadata.Type);
@@ -872,13 +1045,14 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ExportMetadataWithNullKey_ShouldUseEmptyString()
         {
-            var nullMetadataCatalog = CatalogFactory.CreateAttributed(typeof(ClassWithNullMetadataKey));
+            var nullMetadataCatalog = CatalogFactory.CreateAttributed(
+                typeof(ClassWithNullMetadataKey)
+            );
             var nullMetadataExport = nullMetadataCatalog.Parts.Single().ExportDefinitions.Single();
 
             Assert.True(nullMetadataExport.Metadata.ContainsKey(string.Empty));
             Assert.Equal("ValueOfNullKey", nullMetadataExport.Metadata[string.Empty]);
         }
-
     }
 
     // Tests for metadata issues on export
@@ -898,16 +1072,28 @@ namespace System.ComponentModel.Composition
         [ExportMetadata("stuff", 2.0, IsMultiple = true)]
         [ExportMetadata("world", "hello")] // the order of the attribute should not affect the result
         [GoodStrongMetadata]
-        public double DoSomething() { return 0.618; }
+        public double DoSomething()
+        {
+            return 0.618;
+        }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     [MetadataAttribute]
     public class GoodStrongMetadata : Attribute
     {
-        public string GoodOne2 { get { return "GoodOneValue2"; } }
-        public string ConflictedOne1 { get { return "ConflictedOneValue1"; } }
-        public string ConflictedOne2 { get { return "ConflictedOneValue2"; } }
+        public string GoodOne2
+        {
+            get { return "GoodOneValue2"; }
+        }
+        public string ConflictedOne1
+        {
+            get { return "ConflictedOneValue1"; }
+        }
+        public string ConflictedOne2
+        {
+            get { return "ConflictedOneValue2"; }
+        }
     }
 
     // Tests for metadata as part of contract
@@ -967,7 +1153,9 @@ namespace System.ComponentModel.Composition
     public class MyImporterWithExportCollection
     {
         [ImportMany(typeof(MyExporterWithNoMetadata))]
-        public IEnumerable<Lazy<MyExporterWithNoMetadata, IFooMetadataView>> ValueInfoCol { get; set; }
+        public IEnumerable<
+            Lazy<MyExporterWithNoMetadata, IFooMetadataView>
+        > ValueInfoCol { get; set; }
     }
 
     [Export]
@@ -1014,20 +1202,32 @@ namespace System.ComponentModel.Composition
     public class MyExporterWithFullMetadata
     {
         [Export("MyStringContract")]
-        public string String1 { get { return "String1"; } }
+        public string String1
+        {
+            get { return "String1"; }
+        }
 
         [Export("MyStringContract")]
         [ExportMetadata("Foo", "fooValue")]
-        public string String2 { get { return "String2"; } }
+        public string String2
+        {
+            get { return "String2"; }
+        }
 
         [Export("MyStringContract")]
         [ExportMetadata("Bar", "barValue")]
-        public string String3 { get { return "String3"; } }
+        public string String3
+        {
+            get { return "String3"; }
+        }
 
         [Export("MyStringContract")]
         [ExportMetadata("Foo", "fooValue")]
         [ExportMetadata("Bar", "barValue")]
-        public string String4 { get { return "String4"; } }
+        public string String4
+        {
+            get { return "String4"; }
+        }
     }
 
     [MetadataAttribute]

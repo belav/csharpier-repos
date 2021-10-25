@@ -28,6 +28,7 @@ namespace Microsoft.AspNetCore.Routing
             IRouter? route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection);
+            RouteDirection routeDirection
+        );
     }
 }

@@ -7,13 +7,19 @@ struct S0
 {
     public long F0;
     public sbyte F4;
-    public S0(long f0): this() { F0 = f0; }
+    public S0(long f0) : this()
+    {
+        F0 = f0;
+    }
 }
 
 class C0
 {
     public S0 F5;
-    public C0(S0 f5) { F5 = f5; }
+    public C0(S0 f5)
+    {
+        F5 = f5;
+    }
 }
 
 public class GitHub_19243

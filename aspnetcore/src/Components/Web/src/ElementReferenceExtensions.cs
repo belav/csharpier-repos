@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Components
         /// </summary>
         /// <param name="elementReference">A reference to the element to focus.</param>
         /// <returns>The <see cref="ValueTask"/> representing the asynchronous focus operation.</returns>
-        public static ValueTask FocusAsync(this ElementReference elementReference) => elementReference.FocusAsync(preventScroll: false);
+        public static ValueTask FocusAsync(this ElementReference elementReference) =>
+            elementReference.FocusAsync(preventScroll: false);
 
         /// <summary>
         /// Gives focus to an element given its <see cref="ElementReference"/>.
@@ -31,7 +32,10 @@ namespace Microsoft.AspNetCore.Components
         /// </para>
         /// </param>
         /// <returns>The <see cref="ValueTask"/> representing the asynchronous focus operation.</returns>
-        public static ValueTask FocusAsync(this ElementReference elementReference, bool preventScroll)
+        public static ValueTask FocusAsync(
+            this ElementReference elementReference,
+            bool preventScroll
+        )
         {
             var jsRuntime = elementReference.GetJSRuntime();
 
@@ -40,14 +44,20 @@ namespace Microsoft.AspNetCore.Components
                 throw new InvalidOperationException("No JavaScript runtime found.");
             }
 
-            return jsRuntime.InvokeVoidAsync(DomWrapperInterop.Focus, elementReference, preventScroll);
+            return jsRuntime.InvokeVoidAsync(
+                DomWrapperInterop.Focus,
+                elementReference,
+                preventScroll
+            );
         }
 
         internal static IJSRuntime GetJSRuntime(this ElementReference elementReference)
         {
             if (!(elementReference.Context is WebElementReferenceContext context))
             {
-                throw new InvalidOperationException("ElementReference has not been configured correctly.");
+                throw new InvalidOperationException(
+                    "ElementReference has not been configured correctly."
+                );
             }
 
             return context.JSRuntime;

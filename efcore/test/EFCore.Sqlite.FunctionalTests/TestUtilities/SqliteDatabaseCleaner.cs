@@ -19,7 +19,9 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
 {
     public class SqliteDatabaseCleaner : RelationalDatabaseCleaner
     {
-        protected override IDatabaseModelFactory CreateDatabaseModelFactory(ILoggerFactory loggerFactory)
+        protected override IDatabaseModelFactory CreateDatabaseModelFactory(
+            ILoggerFactory loggerFactory
+        )
         {
             // NOTE: You may need to update AddEntityFrameworkDesignTimeServices() too
             var services = new ServiceCollection()
@@ -36,19 +38,15 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
                 .AddLogging();
             new SqliteDesignTimeServices().ConfigureDesignTimeServices(services);
 
-            return services
-                .BuildServiceProvider()
-                .GetRequiredService<IDatabaseModelFactory>();
+            return services.BuildServiceProvider().GetRequiredService<IDatabaseModelFactory>();
         }
 
-        protected override bool AcceptForeignKey(DatabaseForeignKey foreignKey)
-            => false;
+        protected override bool AcceptForeignKey(DatabaseForeignKey foreignKey) => false;
 
-        protected override bool AcceptIndex(DatabaseIndex index)
-            => false;
+        protected override bool AcceptIndex(DatabaseIndex index) => false;
 
-        protected override string BuildCustomSql(DatabaseModel databaseModel)
-            => "PRAGMA foreign_keys=OFF;";
+        protected override string BuildCustomSql(DatabaseModel databaseModel) =>
+            "PRAGMA foreign_keys=OFF;";
 
         protected override void OpenConnection(IRelationalConnection connection)
         {

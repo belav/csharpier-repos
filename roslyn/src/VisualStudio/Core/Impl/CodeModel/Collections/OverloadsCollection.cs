@@ -19,20 +19,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
     [ComDefaultInterface(typeof(ICodeElements))]
     public sealed class OverloadsCollection : AbstractCodeElementCollection
     {
-        internal static EnvDTE.CodeElements Create(
-            CodeModelState state,
-            CodeFunction parent)
+        internal static EnvDTE.CodeElements Create(CodeModelState state, CodeFunction parent)
         {
             var collection = new OverloadsCollection(state, parent);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
-        private OverloadsCollection(
-            CodeModelState state,
-            CodeFunction parent)
-            : base(state, parent)
-        {
-        }
+        private OverloadsCollection(CodeModelState state, CodeFunction parent) : base(state, parent)
+        { }
 
         private ImmutableArray<EnvDTE.CodeElement> _overloads;
 
@@ -52,8 +46,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 // Only methods and constructors can be overloaded.  However, all functions
                 // can successfully return a collection of overloaded functions; if not
                 // really overloaded, the collection contains just the original function.
-                if (symbol.MethodKind != MethodKind.Ordinary &&
-                    symbol.MethodKind != MethodKind.Constructor)
+                if (
+                    symbol.MethodKind != MethodKind.Ordinary
+                    && symbol.MethodKind != MethodKind.Constructor
+                )
                 {
                     return ImmutableArray.Create((EnvDTE.CodeElement)Parent);
                 }
@@ -77,9 +73,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                             var fileCodeModelObject = this.Workspace.GetFileCodeModel(document.Id);
                             if (fileCodeModelObject != null)
                             {
-                                var fileCodeModel = ComAggregate.GetManagedObject<FileCodeModel>(fileCodeModelObject);
+                                var fileCodeModel = ComAggregate.GetManagedObject<FileCodeModel>(
+                                    fileCodeModelObject
+                                );
 
-                                var element = fileCodeModel.CodeElementFromPosition(location.SourceSpan.Start, EnvDTE.vsCMElement.vsCMElementFunction);
+                                var element = fileCodeModel.CodeElementFromPosition(
+                                    location.SourceSpan.Start,
+                                    EnvDTE.vsCMElement.vsCMElementFunction
+                                );
                                 if (element != null)
                                 {
                                     overloadsBuilder.Add(element);

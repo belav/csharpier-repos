@@ -33,16 +33,20 @@ namespace Microsoft.Extensions.Hosting
         {
             if (SystemdHelpers.IsSystemdService())
             {
-                hostBuilder.ConfigureServices((hostContext, services) =>
-                {
-                    services.Configure<ConsoleLoggerOptions>(options =>
+                hostBuilder.ConfigureServices(
+                    (hostContext, services) =>
                     {
-                        options.FormatterName = ConsoleFormatterNames.Systemd;
-                    });
+                        services.Configure<ConsoleLoggerOptions>(
+                            options =>
+                            {
+                                options.FormatterName = ConsoleFormatterNames.Systemd;
+                            }
+                        );
 
-                    services.AddSingleton<ISystemdNotifier, SystemdNotifier>();
-                    services.AddSingleton<IHostLifetime, SystemdLifetime>();
-                });
+                        services.AddSingleton<ISystemdNotifier, SystemdNotifier>();
+                        services.AddSingleton<IHostLifetime, SystemdLifetime>();
+                    }
+                );
             }
             return hostBuilder;
         }

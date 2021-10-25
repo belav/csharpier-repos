@@ -16,9 +16,12 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class ContentNegotiationTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+    public class ContentNegotiationTest
+        : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
     {
-        public ContentNegotiationTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
+        public ContentNegotiationTest(
+            MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
+        )
         {
             Client = fixture.CreateDefaultClient();
         }
@@ -30,11 +33,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             // Selects custom even though it is last in the list.
-            var expectedContentType = MediaTypeHeaderValue.Parse("application/custom;charset=utf-8");
+            var expectedContentType = MediaTypeHeaderValue.Parse(
+                "application/custom;charset=utf-8"
+            );
             var expectedBody = "Written using custom format.";
 
             // Act
-            var response = await Client.GetAsync("http://localhost/Normal/WriteUserUsingCustomFormat");
+            var response = await Client.GetAsync(
+                "http://localhost/Normal/WriteUserUsingCustomFormat"
+            );
 
             // Assert
             Assert.Equal(expectedContentType, response.Content.Headers.ContentType);
@@ -47,11 +54,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse("application/json;charset=utf-8");
-            var expectedBody = $"{{{Environment.NewLine}  \"name\": \"My name\",{Environment.NewLine}" +
-                $"  \"address\": \"My address\"{Environment.NewLine}}}";
+            var expectedBody =
+                $"{{{Environment.NewLine}  \"name\": \"My name\",{Environment.NewLine}"
+                + $"  \"address\": \"My address\"{Environment.NewLine}}}";
 
             // Act
-            var response = await Client.GetAsync("http://localhost/Normal/MultipleAllowedContentTypes");
+            var response = await Client.GetAsync(
+                "http://localhost/Normal/MultipleAllowedContentTypes"
+            );
 
             // Assert
             Assert.Equal(expectedContentType, response.Content.Headers.ContentType);
@@ -93,11 +103,16 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         [InlineData("/;q=0.9, invalid;q=0.5;application/json;q=0.1")]
         [InlineData("/invalid;q=0.9, application/json;q=0.1,invalid;q=0.5")]
         [InlineData("text/html, application/json, image/jpeg, *; q=.2, */*; q=.2")]
-        public async Task ContentNegotiationWithPartiallyValidAcceptHeader_SkipsInvalidEntries(string acceptHeader)
+        public async Task ContentNegotiationWithPartiallyValidAcceptHeader_SkipsInvalidEntries(
+            string acceptHeader
+        )
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse("application/json;charset=utf-8");
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/ContentNegotiation/UserInfo_ProducesWithTypeOnly");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/ContentNegotiation/UserInfo_ProducesWithTypeOnly"
+            );
             request.Headers.TryAddWithoutValidation("Accept", acceptHeader);
 
             // Act
@@ -116,7 +131,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var expectedOutput = "{\"name\":\"John\",\"address\":\"One Microsoft Way\"}";
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
-                "http://localhost/ContentNegotiation/UserInfo_ProducesWithTypeOnly");
+                "http://localhost/ContentNegotiation/UserInfo_ProducesWithTypeOnly"
+            );
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             // Act
@@ -136,12 +152,14 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse("application/xml;charset=utf-8");
-            var expectedOutput = "<User xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" " +
-                "xmlns=\"http://schemas.datacontract.org/2004/07/BasicWebSite.Models\">" +
-                "<Address>One Microsoft Way</Address><Name>John</Name></User>";
+            var expectedOutput =
+                "<User xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" "
+                + "xmlns=\"http://schemas.datacontract.org/2004/07/BasicWebSite.Models\">"
+                + "<Address>One Microsoft Way</Address><Name>John</Name></User>";
             var request = new HttpRequestMessage(
                 HttpMethod.Get,
-                "http://localhost/ContentNegotiation/UserInfo_ProducesWithTypeAndContentType");
+                "http://localhost/ContentNegotiation/UserInfo_ProducesWithTypeAndContentType"
+            );
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
 
             // Act
@@ -155,9 +173,15 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         }
 
         [Theory]
-        [InlineData("http://localhost/FallbackOnTypeBasedMatch/UseTheFallback_WithDefaultFormatters")]
-        [InlineData("http://localhost/FallbackOnTypeBasedMatch/OverrideTheFallback_WithDefaultFormatters")]
-        public async Task NoAcceptAndRequestContentTypeHeaders_UsesFirstFormatterWhichCanWriteType(string url)
+        [InlineData(
+            "http://localhost/FallbackOnTypeBasedMatch/UseTheFallback_WithDefaultFormatters"
+        )]
+        [InlineData(
+            "http://localhost/FallbackOnTypeBasedMatch/OverrideTheFallback_WithDefaultFormatters"
+        )]
+        public async Task NoAcceptAndRequestContentTypeHeaders_UsesFirstFormatterWhichCanWriteType(
+            string url
+        )
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse("application/json;charset=utf-8");
@@ -176,7 +200,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task NoMatchingFormatter_ForTheGivenContentType_Returns406()
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/Normal/ReturnUser_NoMatchingFormatter");
+            var response = await Client.GetAsync(
+                "http://localhost/Normal/ReturnUser_NoMatchingFormatter"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.NotAcceptable, response.StatusCode);
@@ -189,7 +215,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             @"BEGIN:VCARD
 FN:John Williams
 END:VCARD
-")]
+"
+        )]
         [InlineData(
             "ContactInfoUsingV4Format",
             "text/vcard; version=v4.0; charset=utf-8",
@@ -197,14 +224,18 @@ END:VCARD
 FN:John Williams
 GENDER:M
 END:VCARD
-")]
+"
+        )]
         public async Task ProducesAttribute_WithMediaTypeHavingParameters_IsCaseInsensitiveMatch(
             string action,
             string expectedMediaType,
-            string expectedResponseBody)
+            string expectedResponseBody
+        )
         {
             // Arrange & Act
-            var response = await Client.GetAsync("http://localhost/ProducesWithMediaTypeParameters/" + action);
+            var response = await Client.GetAsync(
+                "http://localhost/ProducesWithMediaTypeParameters/" + action
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -214,7 +245,11 @@ END:VCARD
             Assert.Equal(expectedMediaType, contentType.ToString());
 
             var actualResponseBody = await response.Content.ReadAsStringAsync();
-            Assert.Equal(expectedResponseBody, actualResponseBody, ignoreLineEndingDifferences: true);
+            Assert.Equal(
+                expectedResponseBody,
+                actualResponseBody,
+                ignoreLineEndingDifferences: true
+            );
         }
 
         [Fact]
@@ -223,11 +258,14 @@ END:VCARD
             // Arrange
             // Value on the class is application/json.
             var expectedContentType = MediaTypeHeaderValue.Parse(
-                "application/custom_ProducesContentBaseController_Action;charset=utf-8");
+                "application/custom_ProducesContentBaseController_Action;charset=utf-8"
+            );
             var expectedBody = "ProducesContentBaseController";
 
             // Act
-            var response = await Client.GetAsync("http://localhost/ProducesContentBase/ReturnClassName");
+            var response = await Client.GetAsync(
+                "http://localhost/ProducesContentBase/ReturnClassName"
+            );
 
             // Assert
             Assert.Equal(expectedContentType, response.Content.Headers.ContentType);
@@ -240,12 +278,14 @@ END:VCARD
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse(
-                "application/custom_ProducesContentOnClassController;charset=utf-8");
+                "application/custom_ProducesContentOnClassController;charset=utf-8"
+            );
             var expectedBody = "ProducesContentOnClassController";
 
             // Act
             var response = await Client.GetAsync(
-                "http://localhost/ProducesContentOnClass/ReturnClassNameWithNoContentTypeOnAction");
+                "http://localhost/ProducesContentOnClass/ReturnClassNameWithNoContentTypeOnAction"
+            );
 
             // Assert
             Assert.Equal(expectedContentType, response.Content.Headers.ContentType);
@@ -258,11 +298,14 @@ END:VCARD
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse(
-                "application/custom_NoProducesContentOnClassController_Action;charset=utf-8");
+                "application/custom_NoProducesContentOnClassController_Action;charset=utf-8"
+            );
             var expectedBody = "NoProducesContentOnClassController";
 
             // Act
-            var response = await Client.GetAsync("http://localhost/NoProducesContentOnClass/ReturnClassName");
+            var response = await Client.GetAsync(
+                "http://localhost/NoProducesContentOnClass/ReturnClassName"
+            );
 
             // Assert
             Assert.Equal(expectedContentType, response.Content.Headers.ContentType);
@@ -275,11 +318,14 @@ END:VCARD
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse(
-                "application/custom_NoProducesContentOnClassController_Action;charset=utf-8");
+                "application/custom_NoProducesContentOnClassController_Action;charset=utf-8"
+            );
             var expectedBody = "NoProducesContentOnClassController";
 
             // Act
-            var response = await Client.GetAsync("http://localhost/NoProducesContentOnClass/ReturnClassName");
+            var response = await Client.GetAsync(
+                "http://localhost/NoProducesContentOnClass/ReturnClassName"
+            );
 
             // Assert
             Assert.Equal(expectedContentType, response.Content.Headers.ContentType);
@@ -292,12 +338,14 @@ END:VCARD
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse(
-                "application/custom_ProducesContentOnClassController_Action;charset=utf-8");
+                "application/custom_ProducesContentOnClassController_Action;charset=utf-8"
+            );
             var expectedBody = "ProducesContentOnClassController";
 
             // Act
             var response = await Client.GetAsync(
-                "http://localhost/ProducesContentOnClass/ReturnClassNameContentTypeOnDerivedAction");
+                "http://localhost/ProducesContentOnClass/ReturnClassNameContentTypeOnDerivedAction"
+            );
 
             // Assert
             Assert.Equal(expectedContentType, response.Content.Headers.ContentType);
@@ -313,7 +361,9 @@ END:VCARD
             var expectedBody = "{\"methodName\":\"Produces_WithNonObjectResult\"}";
 
             // Act
-            var response = await Client.GetAsync("http://localhost/ProducesJson/Produces_WithNonObjectResult");
+            var response = await Client.GetAsync(
+                "http://localhost/ProducesJson/Produces_WithNonObjectResult"
+            );
 
             // Assert
             Assert.Equal(expectedContentType, response.Content.Headers.ContentType);
@@ -328,13 +378,17 @@ END:VCARD
         {
             // Arrange
             var expectedContentType = MediaTypeHeaderValue.Parse("application/xml;charset=utf-8");
-            var expectedBody = @"<User xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" " +
-                @"xmlns=""http://schemas.datacontract.org/2004/07/BasicWebSite.Models""><Address>" +
-                @"One Microsoft Way</Address><Name>John</Name></User>";
+            var expectedBody =
+                @"<User xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" "
+                + @"xmlns=""http://schemas.datacontract.org/2004/07/BasicWebSite.Models""><Address>"
+                + @"One Microsoft Way</Address><Name>John</Name></User>";
 
             for (int i = 0; i < 5; i++)
             {
-                var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/ContentNegotiation/UserInfo");
+                var request = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    "http://localhost/ContentNegotiation/UserInfo"
+                );
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
                 request.Headers.AcceptCharset.Add(new StringWithQualityHeaderValue("utf-8"));
 
@@ -352,10 +406,15 @@ END:VCARD
         [InlineData("text/plain")]
         [InlineData("text/plain; charset=utf-8")]
         [InlineData("text/html, application/xhtml+xml, image/jxr, */*")] // typical browser accept header
-        public async Task ObjectResult_WithStringReturnType_DefaultToTextPlain(string acceptMediaType)
+        public async Task ObjectResult_WithStringReturnType_DefaultToTextPlain(
+            string acceptMediaType
+        )
         {
             // Arrange
-            var request = new HttpRequestMessage(HttpMethod.Get, "FallbackOnTypeBasedMatch/ReturnString");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "FallbackOnTypeBasedMatch/ReturnString"
+            );
             request.Headers.Accept.ParseAdd(acceptMediaType);
 
             // Act
@@ -363,7 +422,10 @@ END:VCARD
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("text/plain; charset=utf-8", response.Content.Headers.ContentType.ToString());
+            Assert.Equal(
+                "text/plain; charset=utf-8",
+                response.Content.Headers.ContentType.ToString()
+            );
             var actualBody = await response.Content.ReadAsStringAsync();
             Assert.Equal("Hello World!", actualBody);
         }
@@ -381,7 +443,10 @@ END:VCARD
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("application/json; charset=utf-8", response.Content.Headers.ContentType.ToString());
+            Assert.Equal(
+                "application/json; charset=utf-8",
+                response.Content.Headers.ContentType.ToString()
+            );
             var actualBody = await response.Content.ReadAsStringAsync();
             Assert.Equal("\"Hello World!\"", actualBody);
         }
@@ -390,10 +455,13 @@ END:VCARD
         public async Task NoMatchOn_RequestContentType_FallsBackOnTypeBasedMatch_NoMatchFound_Returns406()
         {
             // Arrange
-            var targetUri = "http://localhost/FallbackOnTypeBasedMatch/FallbackGivesNoMatch/?input=1234";
+            var targetUri =
+                "http://localhost/FallbackOnTypeBasedMatch/FallbackGivesNoMatch/?input=1234";
             var content = new StringContent("1234", Encoding.UTF8, "application/custom");
             var request = new HttpRequestMessage(HttpMethod.Post, targetUri);
-            request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/custom1"));
+            request.Headers.Accept.Add(
+                MediaTypeWithQualityHeaderValue.Parse("application/custom1")
+            );
             request.Content = content;
 
             // Act
@@ -409,7 +477,9 @@ END:VCARD
             // Arrange
             var targetUri = "http://localhost/InvalidContentType/SetResponseContentTypeJson";
             var request = new HttpRequestMessage(HttpMethod.Get, targetUri);
-            request.Headers.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/custom1"));
+            request.Headers.Accept.Add(
+                MediaTypeWithQualityHeaderValue.Parse("application/custom1")
+            );
 
             // Act
             var response = await Client.SendAsync(request);
@@ -452,7 +522,8 @@ END:VCARD
         {
             // Arrange & Act
             var response = await Client.GetAsync(
-                "http://localhost/FormatFilter/ProducesTakesPrecedenceOverUserSuppliedFormatMethod?format=json");
+                "http://localhost/FormatFilter/ProducesTakesPrecedenceOverUserSuppliedFormatMethod?format=json"
+            );
 
             // Assert
             // Explicit content type set by the developer takes precedence over the format requested by the end user
@@ -464,7 +535,8 @@ END:VCARD
         {
             // Arrange & Act
             var response = await Client.GetAsync(
-                "http://localhost/FormatFilter/ProducesTakesPrecedenceOverUserSuppliedFormatMethod");
+                "http://localhost/FormatFilter/ProducesTakesPrecedenceOverUserSuppliedFormatMethod"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -476,8 +548,13 @@ END:VCARD
         public async Task ProducesAttribute_CustomMediaTypeWithJsonSuffix_RunsConnegAndSelectsJsonFormatter()
         {
             // Arrange
-            var expectedMediaType = MediaTypeHeaderValue.Parse("application/vnd.example.contact+json; v=2; charset=utf-8");
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/ProducesWithMediaTypeSuffixesController/ContactInfo");
+            var expectedMediaType = MediaTypeHeaderValue.Parse(
+                "application/vnd.example.contact+json; v=2; charset=utf-8"
+            );
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/ProducesWithMediaTypeSuffixesController/ContactInfo"
+            );
             request.Headers.Add("Accept", "application/vnd.example.contact+json; v=2");
 
             // Act
@@ -494,8 +571,13 @@ END:VCARD
         public async Task ProducesAttribute_CustomMediaTypeWithXmlSuffix_RunsConnegAndSelectsXmlFormatter()
         {
             // Arrange
-            var expectedMediaType = MediaTypeHeaderValue.Parse("application/vnd.example.contact+xml; v=2; charset=utf-8");
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/ProducesWithMediaTypeSuffixesController/ContactInfo");
+            var expectedMediaType = MediaTypeHeaderValue.Parse(
+                "application/vnd.example.contact+xml; v=2; charset=utf-8"
+            );
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/ProducesWithMediaTypeSuffixesController/ContactInfo"
+            );
             request.Headers.Add("Accept", "application/vnd.example.contact+xml; v=2");
 
             // Act
@@ -513,17 +595,22 @@ END:VCARD
         public async Task FormatFilter_XmlAsFormat_ReturnsXml()
         {
             // Arrange
-            var expectedBody = "<FormatFilterController.Customer xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\""
+            var expectedBody =
+                "<FormatFilterController.Customer xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\""
                 + " xmlns=\"http://schemas.datacontract.org/2004/07/BasicWebSite.Controllers.ContentNegotiation\">"
                 + "<Name>John</Name></FormatFilterController.Customer>";
 
             // Act
             var response = await Client.GetAsync(
-                "http://localhost/FormatFilter/CustomerInfo?format=xml");
+                "http://localhost/FormatFilter/CustomerInfo?format=xml"
+            );
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal("application/xml; charset=utf-8", response.Content.Headers.ContentType.ToString());
+            Assert.Equal(
+                "application/xml; charset=utf-8",
+                response.Content.Headers.ContentType.ToString()
+            );
             var body = await response.Content.ReadAsStringAsync();
             Assert.Equal(expectedBody, body);
         }

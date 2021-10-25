@@ -132,14 +132,21 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, null)]
         public void Does_non_key_SQL_Server_string_mapping(bool? unicode, bool? fixedLength)
         {
-            var typeMapping = GetTypeMapping(typeof(string), unicode: unicode, fixedLength: fixedLength);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                unicode: unicode,
+                fixedLength: fixedLength
+            );
 
             Assert.Null(typeMapping.DbType);
             Assert.Equal("nvarchar(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.True(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(4000, typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size);
+            Assert.Equal(
+                4000,
+                typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size
+            );
         }
 
         [ConditionalTheory]
@@ -147,7 +154,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, false)]
         [InlineData(true, null)]
         [InlineData(null, null)]
-        public void Does_non_key_SQL_Server_string_mapping_with_value_that_fits_max_length(bool? unicode, bool? fixedLength)
+        public void Does_non_key_SQL_Server_string_mapping_with_value_that_fits_max_length(
+            bool? unicode,
+            bool? fixedLength
+        )
         {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength);
 
@@ -164,7 +174,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, false)]
         [InlineData(true, null)]
         [InlineData(null, null)]
-        public void Does_non_key_SQL_Server_string_mapping_with_max_length(bool? unicode, bool? fixedLength)
+        public void Does_non_key_SQL_Server_string_mapping_with_max_length(
+            bool? unicode,
+            bool? fixedLength
+        )
         {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength);
 
@@ -173,13 +186,18 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(3, typeMapping.Size);
             Assert.True(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(4000, typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size);
+            Assert.Equal(
+                4000,
+                typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size
+            );
         }
 
         [ConditionalTheory]
         [InlineData(true)]
         [InlineData(null)]
-        public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_large_value(bool? unicode)
+        public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_large_value(
+            bool? unicode
+        )
         {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength: true);
 
@@ -197,7 +215,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalTheory]
         [InlineData(true)]
         [InlineData(null)]
-        public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_small_value(bool? unicode)
+        public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_small_value(
+            bool? unicode
+        )
         {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength: true);
 
@@ -215,7 +235,9 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalTheory]
         [InlineData(true)]
         [InlineData(null)]
-        public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_exact_value(bool? unicode)
+        public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_exact_value(
+            bool? unicode
+        )
         {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength: true);
 
@@ -235,16 +257,26 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, false)]
         [InlineData(true, null)]
         [InlineData(null, null)]
-        public void Does_non_key_SQL_Server_string_mapping_with_long_string(bool? unicode, bool? fixedLength)
+        public void Does_non_key_SQL_Server_string_mapping_with_long_string(
+            bool? unicode,
+            bool? fixedLength
+        )
         {
-            var typeMapping = GetTypeMapping(typeof(string), unicode: unicode, fixedLength: fixedLength);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                unicode: unicode,
+                fixedLength: fixedLength
+            );
 
             Assert.Null(typeMapping.DbType);
             Assert.Equal("nvarchar(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.True(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(-1, typeMapping.CreateParameter(new TestCommand(), "Name", new string('X', 4001)).Size);
+            Assert.Equal(
+                -1,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new string('X', 4001)).Size
+            );
         }
 
         [ConditionalTheory]
@@ -252,7 +284,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, false)]
         [InlineData(true, null)]
         [InlineData(null, null)]
-        public void Does_non_key_SQL_Server_string_mapping_with_max_length_with_long_string(bool? unicode, bool? fixedLength)
+        public void Does_non_key_SQL_Server_string_mapping_with_max_length_with_long_string(
+            bool? unicode,
+            bool? fixedLength
+        )
         {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode, fixedLength);
 
@@ -261,7 +296,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(3, typeMapping.Size);
             Assert.True(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(-1, typeMapping.CreateParameter(new TestCommand(), "Name", new string('X', 4001)).Size);
+            Assert.Equal(
+                -1,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new string('X', 4001)).Size
+            );
         }
 
         [ConditionalTheory]
@@ -269,16 +307,27 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, false)]
         [InlineData(true, null)]
         [InlineData(null, null)]
-        public void Does_non_key_SQL_Server_required_string_mapping(bool? unicode, bool? fixedLength)
+        public void Does_non_key_SQL_Server_required_string_mapping(
+            bool? unicode,
+            bool? fixedLength
+        )
         {
-            var typeMapping = GetTypeMapping(typeof(string), nullable: false, unicode: unicode, fixedLength: fixedLength);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                nullable: false,
+                unicode: unicode,
+                fixedLength: fixedLength
+            );
 
             Assert.Null(typeMapping.DbType);
             Assert.Equal("nvarchar(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.True(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(4000, typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size);
+            Assert.Equal(
+                4000,
+                typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size
+            );
         }
 
         [ConditionalTheory]
@@ -317,7 +366,11 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
 
@@ -334,7 +387,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, false)]
         [InlineData(true, null)]
         [InlineData(null, null)]
-        public void Does_required_foreign_key_SQL_Server_string_mapping(bool? unicode, bool? fixedLength)
+        public void Does_required_foreign_key_SQL_Server_string_mapping(
+            bool? unicode,
+            bool? fixedLength
+        )
         {
             var property = CreateEntityType<MyType>().AddProperty("MyProp", typeof(string));
             property.IsNullable = false;
@@ -342,7 +398,11 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
@@ -383,7 +443,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null, false)]
         [InlineData(true, null)]
         [InlineData(null, null)]
-        public void Does_IndexAttribute_column_SQL_Server_string_mapping(bool? unicode, bool? fixedLength)
+        public void Does_IndexAttribute_column_SQL_Server_string_mapping(
+            bool? unicode,
+            bool? fixedLength
+        )
         {
             var entityType = CreateEntityType<MyTypeWithIndexAttribute>();
             var property = entityType.FindProperty("Name");
@@ -406,20 +469,29 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_string_mapping_ansi(bool? fixedLength)
         {
-            var typeMapping = GetTypeMapping(typeof(string), unicode: false, fixedLength: fixedLength);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                unicode: false,
+                fixedLength: fixedLength
+            );
 
             Assert.Equal(DbType.AnsiString, typeMapping.DbType);
             Assert.Equal("varchar(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.False(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(8000, typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size);
+            Assert.Equal(
+                8000,
+                typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size
+            );
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(null)]
-        public void Does_non_key_SQL_Server_string_mapping_for_value_that_fits_with_max_length_ansi(bool? fixedLength)
+        public void Does_non_key_SQL_Server_string_mapping_for_value_that_fits_with_max_length_ansi(
+            bool? fixedLength
+        )
         {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode: false, fixedLength);
 
@@ -436,20 +508,35 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_string_mapping_with_max_length_ansi(bool? fixedLength)
         {
-            var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode: false, fixedLength: fixedLength);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                null,
+                3,
+                unicode: false,
+                fixedLength: fixedLength
+            );
 
             Assert.Equal(DbType.AnsiString, typeMapping.DbType);
             Assert.Equal("varchar(3)", typeMapping.StoreType);
             Assert.Equal(3, typeMapping.Size);
             Assert.False(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(8000, typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size);
+            Assert.Equal(
+                8000,
+                typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size
+            );
         }
 
         [ConditionalFact]
         public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_ansi_large_value()
         {
-            var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode: false, fixedLength: true);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                null,
+                3,
+                unicode: false,
+                fixedLength: true
+            );
 
             Assert.Equal(DbType.AnsiStringFixedLength, typeMapping.DbType);
             Assert.Equal("char(3)", typeMapping.StoreType);
@@ -465,7 +552,13 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_ansi_small_value()
         {
-            var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode: false, fixedLength: true);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                null,
+                3,
+                unicode: false,
+                fixedLength: true
+            );
 
             Assert.Equal(DbType.AnsiStringFixedLength, typeMapping.DbType);
             Assert.Equal("char(3)", typeMapping.StoreType);
@@ -481,7 +574,13 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Does_non_key_SQL_Server_fixed_string_mapping_with_max_length_ansi_exact_value()
         {
-            var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode: false, fixedLength: true);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                null,
+                3,
+                unicode: false,
+                fixedLength: true
+            );
 
             Assert.Equal(DbType.AnsiStringFixedLength, typeMapping.DbType);
             Assert.Equal("char(3)", typeMapping.StoreType);
@@ -499,20 +598,29 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_string_mapping_with_long_string_ansi(bool? fixedLength)
         {
-            var typeMapping = GetTypeMapping(typeof(string), unicode: false, fixedLength: fixedLength);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                unicode: false,
+                fixedLength: fixedLength
+            );
 
             Assert.Equal(DbType.AnsiString, typeMapping.DbType);
             Assert.Equal("varchar(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.False(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(-1, typeMapping.CreateParameter(new TestCommand(), "Name", new string('X', 8001)).Size);
+            Assert.Equal(
+                -1,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new string('X', 8001)).Size
+            );
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(null)]
-        public void Does_non_key_SQL_Server_string_mapping_with_max_length_with_long_string_ansi(bool? fixedLength)
+        public void Does_non_key_SQL_Server_string_mapping_with_max_length_with_long_string_ansi(
+            bool? fixedLength
+        )
         {
             var typeMapping = GetTypeMapping(typeof(string), null, 3, unicode: false, fixedLength);
 
@@ -521,7 +629,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(3, typeMapping.Size);
             Assert.False(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(-1, typeMapping.CreateParameter(new TestCommand(), "Name", new string('X', 8001)).Size);
+            Assert.Equal(
+                -1,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new string('X', 8001)).Size
+            );
         }
 
         [ConditionalTheory]
@@ -529,14 +640,22 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_required_string_mapping_ansi(bool? fixedLength)
         {
-            var typeMapping = GetTypeMapping(typeof(string), nullable: false, unicode: false, fixedLength: fixedLength);
+            var typeMapping = GetTypeMapping(
+                typeof(string),
+                nullable: false,
+                unicode: false,
+                fixedLength: fixedLength
+            );
 
             Assert.Equal(DbType.AnsiString, typeMapping.DbType);
             Assert.Equal("varchar(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.False(typeMapping.IsUnicode);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(8000, typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size);
+            Assert.Equal(
+                8000,
+                typeMapping.CreateParameter(new TestCommand(), "Name", "Value").Size
+            );
         }
 
         [ConditionalTheory]
@@ -571,7 +690,11 @@ namespace Microsoft.EntityFrameworkCore
             property.IsNullable = false;
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
 
@@ -594,7 +717,11 @@ namespace Microsoft.EntityFrameworkCore
             property.IsNullable = false;
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(string));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
@@ -660,7 +787,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal("varbinary(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(8000, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size);
+            Assert.Equal(
+                8000,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size
+            );
         }
 
         [ConditionalTheory]
@@ -674,7 +804,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal("varbinary(3)", typeMapping.StoreType);
             Assert.Equal(3, typeMapping.Size);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(3, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size);
+            Assert.Equal(
+                3,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size
+            );
         }
 
         [ConditionalTheory]
@@ -688,13 +821,18 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal("varbinary(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(-1, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[8001]).Size);
+            Assert.Equal(
+                -1,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[8001]).Size
+            );
         }
 
         [ConditionalTheory]
         [InlineData(false)]
         [InlineData(null)]
-        public void Does_non_key_SQL_Server_binary_mapping_with_max_length_with_long_array(bool? fixedLength)
+        public void Does_non_key_SQL_Server_binary_mapping_with_max_length_with_long_array(
+            bool? fixedLength
+        )
         {
             var typeMapping = GetTypeMapping(typeof(byte[]), null, 3, fixedLength: fixedLength);
 
@@ -702,7 +840,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal("varbinary(3)", typeMapping.StoreType);
             Assert.Equal(3, typeMapping.Size);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(-1, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[8001]).Size);
+            Assert.Equal(
+                -1,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[8001]).Size
+            );
         }
 
         [ConditionalTheory]
@@ -710,13 +851,20 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(null)]
         public void Does_non_key_SQL_Server_required_binary_mapping(bool? fixedLength)
         {
-            var typeMapping = GetTypeMapping(typeof(byte[]), nullable: false, fixedLength: fixedLength);
+            var typeMapping = GetTypeMapping(
+                typeof(byte[]),
+                nullable: false,
+                fixedLength: fixedLength
+            );
 
             Assert.Equal(DbType.Binary, typeMapping.DbType);
             Assert.Equal("varbinary(max)", typeMapping.StoreType);
             Assert.Null(typeMapping.Size);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(8000, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size);
+            Assert.Equal(
+                8000,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size
+            );
         }
 
         [ConditionalTheory]
@@ -724,7 +872,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData("binary(100)", 100)]
         [InlineData("binary", 100)]
         [InlineData(null, 100)]
-        public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_small_value(string typeName, int? maxLength)
+        public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_small_value(
+            string typeName,
+            int? maxLength
+        )
         {
             var typeMapping = CreateBinaryMapping(typeName, maxLength);
 
@@ -742,7 +893,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData("binary(100)", 100)]
         [InlineData("binary", 100)]
         [InlineData(null, 100)]
-        public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_exact_value(string typeName, int? maxLength)
+        public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_exact_value(
+            string typeName,
+            int? maxLength
+        )
         {
             var typeMapping = CreateBinaryMapping(typeName, maxLength);
 
@@ -760,7 +914,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData("binary(100)", 100)]
         [InlineData("binary", 100)]
         [InlineData(null, 100)]
-        public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_large_value(string typeName, int? maxLength)
+        public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_large_value(
+            string typeName,
+            int? maxLength
+        )
         {
             var typeMapping = CreateBinaryMapping(typeName, maxLength);
 
@@ -778,7 +935,10 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData("binary(100)", 100)]
         [InlineData("binary", 100)]
         [InlineData(null, 100)]
-        public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_extreme_value(string typeName, int? maxLength)
+        public void Does_non_key_SQL_Server_fixed_length_binary_mapping_with_extreme_value(
+            string typeName,
+            int? maxLength
+        )
         {
             var typeMapping = CreateBinaryMapping(typeName, maxLength);
 
@@ -827,7 +987,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(DbType.Binary, typeMapping.DbType);
             Assert.Equal("varbinary(900)", typeMapping.StoreType);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(900, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size);
+            Assert.Equal(
+                900,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size
+            );
         }
 
         [ConditionalTheory]
@@ -840,14 +1003,21 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(byte[]));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
             Assert.False(typeMapping.IsFixedLength);
 
             Assert.Equal(DbType.Binary, typeMapping.DbType);
             Assert.Equal("varbinary(900)", typeMapping.StoreType);
-            Assert.Equal(900, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size);
+            Assert.Equal(
+                900,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size
+            );
         }
 
         [ConditionalTheory]
@@ -860,7 +1030,11 @@ namespace Microsoft.EntityFrameworkCore
             property.SetIsFixedLength(fixedLength);
             var fkProperty = property.DeclaringEntityType.AddProperty("FK", typeof(byte[]));
             var pk = property.DeclaringEntityType.SetPrimaryKey(property);
-            property.DeclaringEntityType.AddForeignKey(fkProperty, pk, property.DeclaringEntityType);
+            property.DeclaringEntityType.AddForeignKey(
+                fkProperty,
+                pk,
+                property.DeclaringEntityType
+            );
             fkProperty.IsNullable = false;
 
             var typeMapping = CreateTypeMapper().GetMapping((IProperty)fkProperty);
@@ -868,7 +1042,10 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(DbType.Binary, typeMapping.DbType);
             Assert.Equal("varbinary(900)", typeMapping.StoreType);
-            Assert.Equal(900, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size);
+            Assert.Equal(
+                900,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[3]).Size
+            );
         }
 
         [ConditionalTheory]
@@ -886,7 +1063,14 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(DbType.Binary, typeMapping.DbType);
             Assert.Equal("varbinary(900)", typeMapping.StoreType);
-            Assert.Equal(900, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[] { 0, 1, 2, 3 }).Size);
+            Assert.Equal(
+                900,
+                typeMapping.CreateParameter(
+                    new TestCommand(),
+                    "Name",
+                    new byte[] { 0, 1, 2, 3 }
+                ).Size
+            );
         }
 
         [ConditionalFact]
@@ -902,7 +1086,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal("rowversion", typeMapping.StoreType);
             Assert.Equal(8, typeMapping.Size);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(8, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[8]).Size);
+            Assert.Equal(
+                8,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[8]).Size
+            );
         }
 
         [ConditionalFact]
@@ -919,7 +1106,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal("rowversion", typeMapping.StoreType);
             Assert.Equal(8, typeMapping.Size);
             Assert.False(typeMapping.IsFixedLength);
-            Assert.Equal(8, typeMapping.CreateParameter(new TestCommand(), "Name", new byte[8]).Size);
+            Assert.Equal(
+                8,
+                typeMapping.CreateParameter(new TestCommand(), "Name", new byte[8]).Size
+            );
         }
 
         [ConditionalFact]
@@ -940,7 +1130,8 @@ namespace Microsoft.EntityFrameworkCore
             bool? nullable = null,
             int? maxLength = null,
             bool? unicode = null,
-            bool? fixedLength = null)
+            bool? fixedLength = null
+        )
         {
             var property = CreateEntityType<MyType>().AddProperty("MyProp", propertyType);
 
@@ -986,9 +1177,18 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Does_default_mappings_for_values()
         {
-            Assert.Equal("nvarchar(max)", CreateTypeMapper().GetMappingForValue("Cheese").StoreType);
-            Assert.Equal("varbinary(max)", CreateTypeMapper().GetMappingForValue(new byte[1]).StoreType);
-            Assert.Equal("datetime2", CreateTypeMapper().GetMappingForValue(new DateTime()).StoreType);
+            Assert.Equal(
+                "nvarchar(max)",
+                CreateTypeMapper().GetMappingForValue("Cheese").StoreType
+            );
+            Assert.Equal(
+                "varbinary(max)",
+                CreateTypeMapper().GetMappingForValue(new byte[1]).StoreType
+            );
+            Assert.Equal(
+                "datetime2",
+                CreateTypeMapper().GetMappingForValue(new DateTime()).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1001,16 +1201,34 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_for_unrecognized_property_types()
         {
-            var property = ((IMutableModel)new Model()).AddEntityType("Entity1")
+            var property = ((IMutableModel)new Model())
+                .AddEntityType("Entity1")
                 .AddProperty("Strange", typeof(object));
-            var ex = Assert.Throws<InvalidOperationException>(() => CreateTypeMapper().GetMapping((IProperty)property));
-            Assert.Equal(RelationalStrings.UnsupportedPropertyType("Entity1 (Dictionary<string, object>)", "Strange", "object"), ex.Message);
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => CreateTypeMapper().GetMapping((IProperty)property)
+            );
+            Assert.Equal(
+                RelationalStrings.UnsupportedPropertyType(
+                    "Entity1 (Dictionary<string, object>)",
+                    "Strange",
+                    "object"
+                ),
+                ex.Message
+            );
 
-            Assert.Equal(RelationalStrings.UnsupportedType("object"),
-                Assert.Throws<InvalidOperationException>(() => CreateTypeMapper().GetMapping(typeof(object))).Message);
+            Assert.Equal(
+                RelationalStrings.UnsupportedType("object"),
+                Assert.Throws<InvalidOperationException>(
+                    () => CreateTypeMapper().GetMapping(typeof(object))
+                ).Message
+            );
 
-            Assert.Equal(RelationalStrings.UnsupportedStoreType("object"),
-                Assert.Throws<InvalidOperationException>(() => CreateTypeMapper().GetMapping("object")).Message);
+            Assert.Equal(
+                RelationalStrings.UnsupportedStoreType("object"),
+                Assert.Throws<InvalidOperationException>(
+                    () => CreateTypeMapper().GetMapping("object")
+                ).Message
+            );
         }
 
         [ConditionalTheory]
@@ -1062,7 +1280,14 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData("varchar(333)", typeof(string), 333, false, false)]
         [InlineData("varchar(max)", typeof(string), null, false, false)]
         [InlineData("VARCHAR(max)", typeof(string), null, false, false, "VARCHAR(max)")]
-        public void Can_map_by_type_name(string typeName, Type type, int? size, bool unicode, bool fixedLength, string expectedType = null)
+        public void Can_map_by_type_name(
+            string typeName,
+            Type type,
+            int? size,
+            bool unicode,
+            bool fixedLength,
+            string expectedType = null
+        )
         {
             var mapping = CreateTypeMapper().FindMapping(typeName);
 
@@ -1090,18 +1315,25 @@ namespace Microsoft.EntityFrameworkCore
         {
             var builder = CreateModelBuilder();
 
-            var property = builder.Entity<StringCheese>()
-                .Property(e => e.StringWithSize)
-                .HasColumnType(typeName)
-                .HasMaxLength(2018)
-                .Metadata;
+            var property =
+                builder
+                    .Entity<StringCheese>()
+                    .Property(e => e.StringWithSize)
+                    .HasColumnType(typeName)
+                    .HasMaxLength(2018).Metadata;
 
             var mapping = CreateTypeMapper().FindMapping((IProperty)property);
 
             Assert.Same(typeof(string), mapping.ClrType);
             Assert.Equal(2018, mapping.Size);
-            Assert.Equal(typeName.StartsWith("n", StringComparison.OrdinalIgnoreCase), mapping.IsUnicode);
-            Assert.Equal(typeName.Contains("var", StringComparison.OrdinalIgnoreCase), !mapping.IsFixedLength);
+            Assert.Equal(
+                typeName.StartsWith("n", StringComparison.OrdinalIgnoreCase),
+                mapping.IsUnicode
+            );
+            Assert.Equal(
+                typeName.Contains("var", StringComparison.OrdinalIgnoreCase),
+                !mapping.IsFixedLength
+            );
             Assert.Equal(typeName + "(2018)", mapping.StoreType);
         }
 
@@ -1113,17 +1345,21 @@ namespace Microsoft.EntityFrameworkCore
         {
             var builder = CreateModelBuilder();
 
-            var property = builder.Entity<StringCheese>()
-                .Property(e => e.BinaryWithSize)
-                .HasColumnType(typeName)
-                .HasMaxLength(2018)
-                .Metadata;
+            var property =
+                builder
+                    .Entity<StringCheese>()
+                    .Property(e => e.BinaryWithSize)
+                    .HasColumnType(typeName)
+                    .HasMaxLength(2018).Metadata;
 
             var mapping = CreateTypeMapper().FindMapping((IProperty)property);
 
             Assert.Same(typeof(byte[]), mapping.ClrType);
             Assert.Equal(2018, mapping.Size);
-            Assert.Equal(typeName.Contains("var", StringComparison.OrdinalIgnoreCase), !mapping.IsFixedLength);
+            Assert.Equal(
+                typeName.Contains("var", StringComparison.OrdinalIgnoreCase),
+                !mapping.IsFixedLength
+            );
             Assert.Equal(typeName + "(2018)", mapping.StoreType);
         }
 
@@ -1142,11 +1378,15 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "money",
-                mapper.GetMapping(model.FindEntityType(typeof(MyType)).FindProperty("Id")).StoreType);
+                mapper.GetMapping(model.FindEntityType(typeof(MyType)).FindProperty("Id")).StoreType
+            );
 
             Assert.Equal(
                 "money",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship1Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship1Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1157,11 +1397,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "nchar(200)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "nchar(200)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship1Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship1Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1172,11 +1418,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "binary(100)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "binary(100)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship1Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship1Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1187,11 +1439,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "varchar(900)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "varchar(900)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship1Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship1Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1202,11 +1460,15 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "money",
-                mapper.GetMapping(model.FindEntityType(typeof(MyType)).FindProperty("Id")).StoreType);
+                mapper.GetMapping(model.FindEntityType(typeof(MyType)).FindProperty("Id")).StoreType
+            );
 
             Assert.Equal(
                 "dec(6,1)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship2Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Relationship2Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1217,11 +1479,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "nchar(200)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType1)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "nchar(787)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship2Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Relationship2Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1232,11 +1500,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "binary(100)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType2)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "binary(767)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship2Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Relationship2Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1247,11 +1521,17 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 "varchar(900)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType3)).FindProperty("Id")
+                ).StoreType
+            );
 
             Assert.Equal(
                 "nvarchar(450)",
-                mapper.GetMapping(model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship2Id")).StoreType);
+                mapper.GetMapping(
+                    model.FindEntityType(typeof(MyRelatedType4)).FindProperty("Relationship2Id")
+                ).StoreType
+            );
         }
 
         [ConditionalFact]
@@ -1262,21 +1542,23 @@ namespace Microsoft.EntityFrameworkCore
                 TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>() with
                 {
                     Plugins = new[] { new FakeTypeMappingSourcePlugin() }
-                });
+                }
+            );
 
             Assert.Equal("String", typeMappingSource.GetMapping("datetime2").ClrType.Name);
         }
 
         class FakeTypeMappingSourcePlugin : IRelationalTypeMappingSourcePlugin
         {
-            public RelationalTypeMapping FindMapping(in RelationalTypeMappingInfo mappingInfo)
-                => new StringTypeMapping("datetime2");
+            public RelationalTypeMapping FindMapping(in RelationalTypeMappingInfo mappingInfo) =>
+                new StringTypeMapping("datetime2");
         }
 
-        private static IRelationalTypeMappingSource CreateTypeMapper()
-            => new SqlServerTypeMappingSource(
+        private static IRelationalTypeMappingSource CreateTypeMapper() =>
+            new SqlServerTypeMappingSource(
                 TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
 
         private enum LongEnum : long
         {
@@ -1294,14 +1576,12 @@ namespace Microsoft.EntityFrameworkCore
         {
         }
 
-        protected override ModelBuilder CreateModelBuilder()
-            => SqlServerTestHelpers.Instance.CreateConventionBuilder();
+        protected override ModelBuilder CreateModelBuilder() =>
+            SqlServerTestHelpers.Instance.CreateConventionBuilder();
 
         private class TestParameter : DbParameter
         {
-            public override void ResetDbType()
-            {
-            }
+            public override void ResetDbType() { }
 
             public override DbType DbType { get; set; }
             public override ParameterDirection Direction { get; set; }
@@ -1315,9 +1595,7 @@ namespace Microsoft.EntityFrameworkCore
 
         private class TestCommand : DbCommand
         {
-            public override void Prepare()
-            {
-            }
+            public override void Prepare() { }
 
             public override string CommandText { get; set; }
             public override int CommandTimeout { get; set; }
@@ -1328,9 +1606,7 @@ namespace Microsoft.EntityFrameworkCore
             protected override DbTransaction DbTransaction { get; set; }
             public override bool DesignTimeVisible { get; set; }
 
-            public override void Cancel()
-            {
-            }
+            public override void Cancel() { }
 
             protected override DbParameter CreateDbParameter()
             {

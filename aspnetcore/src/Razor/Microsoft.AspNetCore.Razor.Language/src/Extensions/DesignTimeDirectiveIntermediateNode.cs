@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
 {
     internal sealed class DesignTimeDirectiveIntermediateNode : ExtensionIntermediateNode
     {
-        public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
+        public override IntermediateNodeCollection Children { get; } =
+            new IntermediateNodeCollection();
 
         public override void Accept(IntermediateNodeVisitor visitor)
         {

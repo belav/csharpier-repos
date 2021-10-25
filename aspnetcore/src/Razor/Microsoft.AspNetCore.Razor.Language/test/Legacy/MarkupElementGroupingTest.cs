@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void Handles_ValidTags()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <div>Foo</div>
 <p>Bar</p>
 ";
@@ -24,7 +25,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void Handles_ValidNestedTags()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <div>
     Foo
     <p>Bar</p>
@@ -39,7 +41,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void Handles_ValidNestedTagsMixedWithCode()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <div>
     Foo
     <p>@Bar</p>
@@ -55,7 +58,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
         public void Handles_EndTagsWithMissingStartTags()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 Foo</div>
 ";
 
@@ -67,7 +71,8 @@ Foo</div>
         public void Handles_StartTagsWithMissingEndTags()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <div>
     Foo
     <p>
@@ -83,7 +88,8 @@ Foo</div>
         public void Handles_SelfClosingTags()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <br/>Foo<custom />
 ";
 
@@ -95,7 +101,8 @@ Foo</div>
         public void Handles_MalformedTags_RecoversSuccessfully()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <div>content</span>footer</div>
 ";
 
@@ -107,7 +114,8 @@ Foo</div>
         public void Handles_MisplacedEndTags_RecoversSuccessfully()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <div>content<span>footer</div></span>
 ";
 
@@ -119,7 +127,8 @@ Foo</div>
         public void Handles_DoesNotSpecialCase_VoidTags()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <input>Foo</input>
 ";
 
@@ -131,7 +140,8 @@ Foo</div>
         public void Handles_SpecialCasesVoidTags_WithNoEndTags()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <head><meta><!meta></head>
 ";
 
@@ -143,7 +153,8 @@ Foo</div>
         public void Handles_IncompleteTags()
         {
             // Arrange
-            var content = @"
+            var content =
+                @"
 <<div>>Foo</</div><   >
 ";
 

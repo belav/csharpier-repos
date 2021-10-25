@@ -17,21 +17,60 @@ namespace Microsoft.AspNetCore.ResponseCaching
         private static readonly Action<ILogger, Exception?> _requestWithNoCacheNotCacheable;
         private static readonly Action<ILogger, Exception?> _requestWithPragmaNoCacheNotCacheable;
         private static readonly Action<ILogger, TimeSpan, Exception?> _expirationMinFreshAdded;
-        private static readonly Action<ILogger, TimeSpan, TimeSpan, Exception?> _expirationSharedMaxAgeExceeded;
-        private static readonly Action<ILogger, TimeSpan, TimeSpan, Exception?> _expirationMustRevalidate;
-        private static readonly Action<ILogger, TimeSpan, TimeSpan, TimeSpan, Exception?> _expirationMaxStaleSatisfied;
-        private static readonly Action<ILogger, TimeSpan, TimeSpan, Exception?> _expirationMaxAgeExceeded;
-        private static readonly Action<ILogger, DateTimeOffset, DateTimeOffset, Exception?> _expirationExpiresExceeded;
+        private static readonly Action<
+            ILogger,
+            TimeSpan,
+            TimeSpan,
+            Exception?
+        > _expirationSharedMaxAgeExceeded;
+        private static readonly Action<
+            ILogger,
+            TimeSpan,
+            TimeSpan,
+            Exception?
+        > _expirationMustRevalidate;
+        private static readonly Action<
+            ILogger,
+            TimeSpan,
+            TimeSpan,
+            TimeSpan,
+            Exception?
+        > _expirationMaxStaleSatisfied;
+        private static readonly Action<
+            ILogger,
+            TimeSpan,
+            TimeSpan,
+            Exception?
+        > _expirationMaxAgeExceeded;
+        private static readonly Action<
+            ILogger,
+            DateTimeOffset,
+            DateTimeOffset,
+            Exception?
+        > _expirationExpiresExceeded;
         private static readonly Action<ILogger, Exception?> _responseWithoutPublicNotCacheable;
         private static readonly Action<ILogger, Exception?> _responseWithNoStoreNotCacheable;
         private static readonly Action<ILogger, Exception?> _responseWithNoCacheNotCacheable;
         private static readonly Action<ILogger, Exception?> _responseWithSetCookieNotCacheable;
         private static readonly Action<ILogger, Exception?> _responseWithVaryStarNotCacheable;
         private static readonly Action<ILogger, Exception?> _responseWithPrivateNotCacheable;
-        private static readonly Action<ILogger, int, Exception?> _responseWithUnsuccessfulStatusCodeNotCacheable;
+        private static readonly Action<
+            ILogger,
+            int,
+            Exception?
+        > _responseWithUnsuccessfulStatusCodeNotCacheable;
         private static readonly Action<ILogger, Exception?> _notModifiedIfNoneMatchStar;
-        private static readonly Action<ILogger, EntityTagHeaderValue, Exception?> _notModifiedIfNoneMatchMatched;
-        private static readonly Action<ILogger, DateTimeOffset, DateTimeOffset, Exception?> _notModifiedIfModifiedSinceSatisfied;
+        private static readonly Action<
+            ILogger,
+            EntityTagHeaderValue,
+            Exception?
+        > _notModifiedIfNoneMatchMatched;
+        private static readonly Action<
+            ILogger,
+            DateTimeOffset,
+            DateTimeOffset,
+            Exception?
+        > _notModifiedIfModifiedSinceSatisfied;
         private static readonly Action<ILogger, Exception?> _notModifiedServed;
         private static readonly Action<ILogger, Exception?> _cachedResponseServed;
         private static readonly Action<ILogger, Exception?> _gatewayTimeoutServed;
@@ -40,126 +79,163 @@ namespace Microsoft.AspNetCore.ResponseCaching
         private static readonly Action<ILogger, Exception?> _responseCached;
         private static readonly Action<ILogger, Exception?> _responseNotCached;
         private static readonly Action<ILogger, Exception?> _responseContentLengthMismatchNotCached;
-        private static readonly Action<ILogger, TimeSpan, TimeSpan, Exception?> _expirationInfiniteMaxStaleSatisfied;
+        private static readonly Action<
+            ILogger,
+            TimeSpan,
+            TimeSpan,
+            Exception?
+        > _expirationInfiniteMaxStaleSatisfied;
 
         static LoggerExtensions()
         {
             _requestMethodNotCacheable = LoggerMessage.Define<string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(1, "RequestMethodNotCacheable"),
-                formatString: "The request cannot be served from cache because it uses the HTTP method: {Method}.");
+                formatString: "The request cannot be served from cache because it uses the HTTP method: {Method}."
+            );
             _requestWithAuthorizationNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(2, "RequestWithAuthorizationNotCacheable"),
-                formatString: $"The request cannot be served from cache because it contains an '{HeaderNames.Authorization}' header.");
+                formatString: $"The request cannot be served from cache because it contains an '{HeaderNames.Authorization}' header."
+            );
             _requestWithNoCacheNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(3, "RequestWithNoCacheNotCacheable"),
-                formatString: "The request cannot be served from cache because it contains a 'no-cache' cache directive.");
+                formatString: "The request cannot be served from cache because it contains a 'no-cache' cache directive."
+            );
             _requestWithPragmaNoCacheNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(4, "RequestWithPragmaNoCacheNotCacheable"),
-                formatString: "The request cannot be served from cache because it contains a 'no-cache' pragma directive.");
+                formatString: "The request cannot be served from cache because it contains a 'no-cache' pragma directive."
+            );
             _expirationMinFreshAdded = LoggerMessage.Define<TimeSpan>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(5, "LogRequestMethodNotCacheable"),
-                formatString: "Adding a minimum freshness requirement of {Duration} specified by the 'min-fresh' cache directive.");
+                formatString: "Adding a minimum freshness requirement of {Duration} specified by the 'min-fresh' cache directive."
+            );
             _expirationSharedMaxAgeExceeded = LoggerMessage.Define<TimeSpan, TimeSpan>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(6, "ExpirationSharedMaxAgeExceeded"),
-                formatString: "The age of the entry is {Age} and has exceeded the maximum age for shared caches of {SharedMaxAge} specified by the 's-maxage' cache directive.");
+                formatString: "The age of the entry is {Age} and has exceeded the maximum age for shared caches of {SharedMaxAge} specified by the 's-maxage' cache directive."
+            );
             _expirationMustRevalidate = LoggerMessage.Define<TimeSpan, TimeSpan>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(7, "ExpirationMustRevalidate"),
-                formatString: "The age of the entry is {Age} and has exceeded the maximum age of {MaxAge} specified by the 'max-age' cache directive. It must be revalidated because the 'must-revalidate' or 'proxy-revalidate' cache directive is specified.");
+                formatString: "The age of the entry is {Age} and has exceeded the maximum age of {MaxAge} specified by the 'max-age' cache directive. It must be revalidated because the 'must-revalidate' or 'proxy-revalidate' cache directive is specified."
+            );
             _expirationMaxStaleSatisfied = LoggerMessage.Define<TimeSpan, TimeSpan, TimeSpan>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(8, "ExpirationMaxStaleSatisfied"),
-                formatString: "The age of the entry is {Age} and has exceeded the maximum age of {MaxAge} specified by the 'max-age' cache directive. However, it satisfied the maximum stale allowance of {MaxStale} specified by the 'max-stale' cache directive.");
+                formatString: "The age of the entry is {Age} and has exceeded the maximum age of {MaxAge} specified by the 'max-age' cache directive. However, it satisfied the maximum stale allowance of {MaxStale} specified by the 'max-stale' cache directive."
+            );
             _expirationMaxAgeExceeded = LoggerMessage.Define<TimeSpan, TimeSpan>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(9, "ExpirationMaxAgeExceeded"),
-                formatString: "The age of the entry is {Age} and has exceeded the maximum age of {MaxAge} specified by the 'max-age' cache directive.");
+                formatString: "The age of the entry is {Age} and has exceeded the maximum age of {MaxAge} specified by the 'max-age' cache directive."
+            );
             _expirationExpiresExceeded = LoggerMessage.Define<DateTimeOffset, DateTimeOffset>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(10, "ExpirationExpiresExceeded"),
-                formatString: $"The response time of the entry is {{ResponseTime}} and has exceeded the expiry date of {{Expired}} specified by the '{HeaderNames.Expires}' header.");
+                formatString: $"The response time of the entry is {{ResponseTime}} and has exceeded the expiry date of {{Expired}} specified by the '{HeaderNames.Expires}' header."
+            );
             _responseWithoutPublicNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(11, "ResponseWithoutPublicNotCacheable"),
-                formatString: "Response is not cacheable because it does not contain the 'public' cache directive.");
+                formatString: "Response is not cacheable because it does not contain the 'public' cache directive."
+            );
             _responseWithNoStoreNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(12, "ResponseWithNoStoreNotCacheable"),
-                formatString: "Response is not cacheable because it or its corresponding request contains a 'no-store' cache directive.");
+                formatString: "Response is not cacheable because it or its corresponding request contains a 'no-store' cache directive."
+            );
             _responseWithNoCacheNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(13, "ResponseWithNoCacheNotCacheable"),
-                formatString: "Response is not cacheable because it contains a 'no-cache' cache directive.");
+                formatString: "Response is not cacheable because it contains a 'no-cache' cache directive."
+            );
             _responseWithSetCookieNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(14, "ResponseWithSetCookieNotCacheable"),
-                formatString: $"Response is not cacheable because it contains a '{HeaderNames.SetCookie}' header.");
+                formatString: $"Response is not cacheable because it contains a '{HeaderNames.SetCookie}' header."
+            );
             _responseWithVaryStarNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(15, "ResponseWithVaryStarNotCacheable"),
-                formatString: $"Response is not cacheable because it contains a '{HeaderNames.Vary}' header with a value of *.");
+                formatString: $"Response is not cacheable because it contains a '{HeaderNames.Vary}' header with a value of *."
+            );
             _responseWithPrivateNotCacheable = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(16, "ResponseWithPrivateNotCacheable"),
-                formatString: "Response is not cacheable because it contains the 'private' cache directive.");
+                formatString: "Response is not cacheable because it contains the 'private' cache directive."
+            );
             _responseWithUnsuccessfulStatusCodeNotCacheable = LoggerMessage.Define<int>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(17, "ResponseWithUnsuccessfulStatusCodeNotCacheable"),
-                formatString: "Response is not cacheable because its status code {StatusCode} does not indicate success.");
+                formatString: "Response is not cacheable because its status code {StatusCode} does not indicate success."
+            );
             _notModifiedIfNoneMatchStar = LoggerMessage.Define(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(18, "ExpirationExpiresExceeded"),
-                formatString: $"The '{HeaderNames.IfNoneMatch}' header of the request contains a value of *.");
+                formatString: $"The '{HeaderNames.IfNoneMatch}' header of the request contains a value of *."
+            );
             _notModifiedIfNoneMatchMatched = LoggerMessage.Define<EntityTagHeaderValue>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(19, "NotModifiedIfNoneMatchMatched"),
-                formatString: $"The ETag {{ETag}} in the '{HeaderNames.IfNoneMatch}' header matched the ETag of a cached entry.");
-            _notModifiedIfModifiedSinceSatisfied = LoggerMessage.Define<DateTimeOffset, DateTimeOffset>(
+                formatString: $"The ETag {{ETag}} in the '{HeaderNames.IfNoneMatch}' header matched the ETag of a cached entry."
+            );
+            _notModifiedIfModifiedSinceSatisfied = LoggerMessage.Define<
+                DateTimeOffset,
+                DateTimeOffset
+            >(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(20, "NotModifiedIfModifiedSinceSatisfied"),
-                formatString: $"The last modified date of {{LastModified}} is before the date {{IfModifiedSince}} specified in the '{HeaderNames.IfModifiedSince}' header.");
+                formatString: $"The last modified date of {{LastModified}} is before the date {{IfModifiedSince}} specified in the '{HeaderNames.IfModifiedSince}' header."
+            );
             _notModifiedServed = LoggerMessage.Define(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(21, "NotModifiedServed"),
-                formatString: "The content requested has not been modified.");
+                formatString: "The content requested has not been modified."
+            );
             _cachedResponseServed = LoggerMessage.Define(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(22, "CachedResponseServed"),
-                formatString: "Serving response from cache.");
+                formatString: "Serving response from cache."
+            );
             _gatewayTimeoutServed = LoggerMessage.Define(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(23, "GatewayTimeoutServed"),
-                formatString: "No cached response available for this request and the 'only-if-cached' cache directive was specified.");
+                formatString: "No cached response available for this request and the 'only-if-cached' cache directive was specified."
+            );
             _noResponseServed = LoggerMessage.Define(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(24, "NoResponseServed"),
-                formatString: "No cached response available for this request.");
+                formatString: "No cached response available for this request."
+            );
             _varyByRulesUpdated = LoggerMessage.Define<string, string>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(25, "VaryByRulesUpdated"),
-                formatString: "Vary by rules were updated. Headers: {Headers}, Query keys: {QueryKeys}");
+                formatString: "Vary by rules were updated. Headers: {Headers}, Query keys: {QueryKeys}"
+            );
             _responseCached = LoggerMessage.Define(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(26, "ResponseCached"),
-                formatString: "The response has been cached.");
+                formatString: "The response has been cached."
+            );
             _responseNotCached = LoggerMessage.Define(
                 logLevel: LogLevel.Information,
                 eventId: new EventId(27, "ResponseNotCached"),
-                formatString: "The response could not be cached for this request.");
+                formatString: "The response could not be cached for this request."
+            );
             _responseContentLengthMismatchNotCached = LoggerMessage.Define(
                 logLevel: LogLevel.Warning,
                 eventId: new EventId(28, "responseContentLengthMismatchNotCached"),
-                formatString: $"The response could not be cached for this request because the '{HeaderNames.ContentLength}' did not match the body length.");
+                formatString: $"The response could not be cached for this request because the '{HeaderNames.ContentLength}' did not match the body length."
+            );
             _expirationInfiniteMaxStaleSatisfied = LoggerMessage.Define<TimeSpan, TimeSpan>(
                 logLevel: LogLevel.Debug,
                 eventId: new EventId(29, "ExpirationInfiniteMaxStaleSatisfied"),
-                formatString: "The age of the entry is {Age} and has exceeded the maximum age of {MaxAge} specified by the 'max-age' cache directive. However, the 'max-stale' cache directive was specified without an assigned value and a stale response of any age is accepted.");
+                formatString: "The age of the entry is {Age} and has exceeded the maximum age of {MaxAge} specified by the 'max-age' cache directive. However, the 'max-stale' cache directive was specified without an assigned value and a stale response of any age is accepted."
+            );
         }
 
         internal static void RequestMethodNotCacheable(this ILogger logger, string method)
@@ -187,27 +263,48 @@ namespace Microsoft.AspNetCore.ResponseCaching
             _expirationMinFreshAdded(logger, duration, null);
         }
 
-        internal static void ExpirationSharedMaxAgeExceeded(this ILogger logger, TimeSpan age, TimeSpan sharedMaxAge)
+        internal static void ExpirationSharedMaxAgeExceeded(
+            this ILogger logger,
+            TimeSpan age,
+            TimeSpan sharedMaxAge
+        )
         {
             _expirationSharedMaxAgeExceeded(logger, age, sharedMaxAge, null);
         }
 
-        internal static void ExpirationMustRevalidate(this ILogger logger, TimeSpan age, TimeSpan maxAge)
+        internal static void ExpirationMustRevalidate(
+            this ILogger logger,
+            TimeSpan age,
+            TimeSpan maxAge
+        )
         {
             _expirationMustRevalidate(logger, age, maxAge, null);
         }
 
-        internal static void ExpirationMaxStaleSatisfied(this ILogger logger, TimeSpan age, TimeSpan maxAge, TimeSpan maxStale)
+        internal static void ExpirationMaxStaleSatisfied(
+            this ILogger logger,
+            TimeSpan age,
+            TimeSpan maxAge,
+            TimeSpan maxStale
+        )
         {
             _expirationMaxStaleSatisfied(logger, age, maxAge, maxStale, null);
         }
 
-        internal static void ExpirationMaxAgeExceeded(this ILogger logger, TimeSpan age, TimeSpan sharedMaxAge)
+        internal static void ExpirationMaxAgeExceeded(
+            this ILogger logger,
+            TimeSpan age,
+            TimeSpan sharedMaxAge
+        )
         {
             _expirationMaxAgeExceeded(logger, age, sharedMaxAge, null);
         }
 
-        internal static void ExpirationExpiresExceeded(this ILogger logger, DateTimeOffset responseTime, DateTimeOffset expires)
+        internal static void ExpirationExpiresExceeded(
+            this ILogger logger,
+            DateTimeOffset responseTime,
+            DateTimeOffset expires
+        )
         {
             _expirationExpiresExceeded(logger, responseTime, expires, null);
         }
@@ -242,7 +339,10 @@ namespace Microsoft.AspNetCore.ResponseCaching
             _responseWithPrivateNotCacheable(logger, null);
         }
 
-        internal static void ResponseWithUnsuccessfulStatusCodeNotCacheable(this ILogger logger, int statusCode)
+        internal static void ResponseWithUnsuccessfulStatusCodeNotCacheable(
+            this ILogger logger,
+            int statusCode
+        )
         {
             _responseWithUnsuccessfulStatusCodeNotCacheable(logger, statusCode, null);
         }
@@ -252,12 +352,19 @@ namespace Microsoft.AspNetCore.ResponseCaching
             _notModifiedIfNoneMatchStar(logger, null);
         }
 
-        internal static void NotModifiedIfNoneMatchMatched(this ILogger logger, EntityTagHeaderValue etag)
+        internal static void NotModifiedIfNoneMatchMatched(
+            this ILogger logger,
+            EntityTagHeaderValue etag
+        )
         {
             _notModifiedIfNoneMatchMatched(logger, etag, null);
         }
 
-        internal static void NotModifiedIfModifiedSinceSatisfied(this ILogger logger, DateTimeOffset lastModified, DateTimeOffset ifModifiedSince)
+        internal static void NotModifiedIfModifiedSinceSatisfied(
+            this ILogger logger,
+            DateTimeOffset lastModified,
+            DateTimeOffset ifModifiedSince
+        )
         {
             _notModifiedIfModifiedSinceSatisfied(logger, lastModified, ifModifiedSince, null);
         }
@@ -282,7 +389,11 @@ namespace Microsoft.AspNetCore.ResponseCaching
             _noResponseServed(logger, null);
         }
 
-        internal static void VaryByRulesUpdated(this ILogger logger, string headers, string queryKeys)
+        internal static void VaryByRulesUpdated(
+            this ILogger logger,
+            string headers,
+            string queryKeys
+        )
         {
             _varyByRulesUpdated(logger, headers, queryKeys, null);
         }
@@ -302,7 +413,11 @@ namespace Microsoft.AspNetCore.ResponseCaching
             _responseContentLengthMismatchNotCached(logger, null);
         }
 
-        internal static void ExpirationInfiniteMaxStaleSatisfied(this ILogger logger, TimeSpan age, TimeSpan maxAge)
+        internal static void ExpirationInfiniteMaxStaleSatisfied(
+            this ILogger logger,
+            TimeSpan age,
+            TimeSpan maxAge
+        )
         {
             _expirationInfiniteMaxStaleSatisfied(logger, age, maxAge, null);
         }

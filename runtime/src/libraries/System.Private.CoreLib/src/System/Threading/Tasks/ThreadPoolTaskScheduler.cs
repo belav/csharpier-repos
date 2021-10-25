@@ -56,7 +56,10 @@ namespace System.Threading.Tasks
             else
             {
                 // Normal handling for non-LongRunning tasks.
-                ThreadPool.UnsafeQueueUserWorkItemInternal(task, (options & TaskCreationOptions.PreferFairness) == 0);
+                ThreadPool.UnsafeQueueUserWorkItemInternal(
+                    task,
+                    (options & TaskCreationOptions.PreferFairness) == 0
+                );
             }
         }
 
@@ -81,7 +84,8 @@ namespace System.Threading.Tasks
             finally
             {
                 // Only call NWIP() if task was previously queued
-                if (taskWasPreviouslyQueued) NotifyWorkItemProgress();
+                if (taskWasPreviouslyQueued)
+                    NotifyWorkItemProgress();
             }
 
             return true;

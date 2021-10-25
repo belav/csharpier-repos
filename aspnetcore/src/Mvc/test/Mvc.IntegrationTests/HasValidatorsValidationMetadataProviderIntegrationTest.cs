@@ -27,7 +27,9 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Act
             var options = services.GetRequiredService<IOptions<MvcOptions>>();
 
-            Assert.IsType<HasValidatorsValidationMetadataProvider>(options.Value.ModelMetadataDetailsProviders.Last());
+            Assert.IsType<HasValidatorsValidationMetadataProvider>(
+                options.Value.ModelMetadataDetailsProviders.Last()
+            );
         }
 
         [Fact]
@@ -36,16 +38,22 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             // Arrange
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddLogging();
-            serviceCollection.AddMvc(mvcOptions =>
-            {
-                mvcOptions.ModelMetadataDetailsProviders.Add(new SuppressChildValidationMetadataProvider(typeof(IQueryable)));
-            });
+            serviceCollection.AddMvc(
+                mvcOptions =>
+                {
+                    mvcOptions.ModelMetadataDetailsProviders.Add(
+                        new SuppressChildValidationMetadataProvider(typeof(IQueryable))
+                    );
+                }
+            );
             var services = serviceCollection.BuildServiceProvider();
 
             // Act
             var options = services.GetRequiredService<IOptions<MvcOptions>>();
 
-            Assert.IsType<HasValidatorsValidationMetadataProvider>(options.Value.ModelMetadataDetailsProviders.Last());
+            Assert.IsType<HasValidatorsValidationMetadataProvider>(
+                options.Value.ModelMetadataDetailsProviders.Last()
+            );
         }
     }
 }

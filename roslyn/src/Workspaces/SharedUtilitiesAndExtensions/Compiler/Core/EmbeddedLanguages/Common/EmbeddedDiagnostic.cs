@@ -29,12 +29,11 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             Span = span;
         }
 
-        public override bool Equals(object? obj)
-            => obj is EmbeddedDiagnostic diagnostic && Equals(diagnostic);
+        public override bool Equals(object? obj) =>
+            obj is EmbeddedDiagnostic diagnostic && Equals(diagnostic);
 
-        public bool Equals(EmbeddedDiagnostic other)
-            => Message == other.Message &&
-               Span.Equals(other.Span);
+        public bool Equals(EmbeddedDiagnostic other) =>
+            Message == other.Message && Span.Equals(other.Span);
 
         public override int GetHashCode()
         {
@@ -42,16 +41,22 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
             {
                 var hashCode = -954867195;
                 hashCode = hashCode * -1521134295 + base.GetHashCode();
-                hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Message);
-                hashCode = hashCode * -1521134295 + EqualityComparer<TextSpan>.Default.GetHashCode(Span);
+                hashCode =
+                    hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Message);
+                hashCode =
+                    hashCode * -1521134295 + EqualityComparer<TextSpan>.Default.GetHashCode(Span);
                 return hashCode;
             }
         }
 
-        public static bool operator ==(EmbeddedDiagnostic diagnostic1, EmbeddedDiagnostic diagnostic2)
-            => diagnostic1.Equals(diagnostic2);
+        public static bool operator ==(
+            EmbeddedDiagnostic diagnostic1,
+            EmbeddedDiagnostic diagnostic2
+        ) => diagnostic1.Equals(diagnostic2);
 
-        public static bool operator !=(EmbeddedDiagnostic diagnostic1, EmbeddedDiagnostic diagnostic2)
-            => !(diagnostic1 == diagnostic2);
+        public static bool operator !=(
+            EmbeddedDiagnostic diagnostic1,
+            EmbeddedDiagnostic diagnostic2
+        ) => !(diagnostic1 == diagnostic2);
     }
 }

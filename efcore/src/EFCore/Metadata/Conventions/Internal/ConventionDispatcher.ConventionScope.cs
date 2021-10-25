@@ -12,11 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
     {
         private abstract class ConventionScope : ConventionNode
         {
-            public virtual ConventionScope? Parent
-                => null;
+            public virtual ConventionScope? Parent => null;
 
-            public virtual IReadOnlyList<ConventionNode>? Children
-                => null;
+            public virtual IReadOnlyList<ConventionNode>? Children => null;
 
             public int GetLeafCount()
             {
@@ -52,80 +50,102 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 return leafCount;
             }
 
-            public abstract IConventionEntityTypeBuilder? OnEntityTypeAdded(IConventionEntityTypeBuilder entityTypeBuilder);
+            public abstract IConventionEntityTypeBuilder? OnEntityTypeAdded(
+                IConventionEntityTypeBuilder entityTypeBuilder
+            );
 
             public abstract IConventionAnnotation? OnEntityTypeAnnotationChanged(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation);
+                IConventionAnnotation? oldAnnotation
+            );
 
             public abstract IConventionEntityType? OnEntityTypeBaseTypeChanged(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionEntityType? newBaseType,
-                IConventionEntityType? previousBaseType);
+                IConventionEntityType? previousBaseType
+            );
 
             public abstract string? OnEntityTypeIgnored(
                 IConventionModelBuilder modelBuilder,
                 string name,
-                Type? type);
+                Type? type
+            );
 
             public abstract string? OnEntityTypeMemberIgnored(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                string name);
+                string name
+            );
 
             public abstract IConventionKey? OnEntityTypePrimaryKeyChanged(
                 IConventionEntityTypeBuilder entityTypeBuilder,
                 IConventionKey? newPrimaryKey,
-                IConventionKey? previousPrimaryKey);
+                IConventionKey? previousPrimaryKey
+            );
 
             public abstract IConventionEntityType? OnEntityTypeRemoved(
                 IConventionModelBuilder modelBuilder,
-                IConventionEntityType entityType);
+                IConventionEntityType entityType
+            );
 
-            public abstract IConventionForeignKeyBuilder? OnForeignKeyAdded(IConventionForeignKeyBuilder relationshipBuilder);
+            public abstract IConventionForeignKeyBuilder? OnForeignKeyAdded(
+                IConventionForeignKeyBuilder relationshipBuilder
+            );
 
             public abstract IConventionAnnotation? OnForeignKeyAnnotationChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation);
+                IConventionAnnotation? oldAnnotation
+            );
 
             public abstract bool? OnForeignKeyOwnershipChanged(
-                IConventionForeignKeyBuilder relationshipBuilder);
+                IConventionForeignKeyBuilder relationshipBuilder
+            );
 
             public abstract IConventionForeignKeyBuilder? OnForeignKeyPrincipalEndChanged(
-                IConventionForeignKeyBuilder relationshipBuilder);
+                IConventionForeignKeyBuilder relationshipBuilder
+            );
 
             public abstract IReadOnlyList<IConventionProperty>? OnForeignKeyPropertiesChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IReadOnlyList<IConventionProperty> oldDependentProperties,
-                IConventionKey oldPrincipalKey);
+                IConventionKey oldPrincipalKey
+            );
 
             public abstract IConventionForeignKey? OnForeignKeyRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionForeignKey foreignKey);
+                IConventionForeignKey foreignKey
+            );
 
             public abstract bool? OnForeignKeyRequirednessChanged(
-                IConventionForeignKeyBuilder relationshipBuilder);
+                IConventionForeignKeyBuilder relationshipBuilder
+            );
 
             public abstract bool? OnForeignKeyDependentRequirednessChanged(
-                IConventionForeignKeyBuilder relationshipBuilder);
+                IConventionForeignKeyBuilder relationshipBuilder
+            );
 
             public abstract bool? OnForeignKeyUniquenessChanged(
-                IConventionForeignKeyBuilder relationshipBuilder);
+                IConventionForeignKeyBuilder relationshipBuilder
+            );
 
-            public abstract IConventionIndexBuilder? OnIndexAdded(IConventionIndexBuilder indexBuilder);
+            public abstract IConventionIndexBuilder? OnIndexAdded(
+                IConventionIndexBuilder indexBuilder
+            );
 
             public abstract IConventionAnnotation? OnIndexAnnotationChanged(
                 IConventionIndexBuilder indexBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation);
+                IConventionAnnotation? oldAnnotation
+            );
 
             public abstract IConventionIndex? OnIndexRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionIndex index);
+                IConventionIndex index
+            );
 
             public abstract bool? OnIndexUniquenessChanged(IConventionIndexBuilder indexBuilder);
             public abstract IConventionKeyBuilder? OnKeyAdded(IConventionKeyBuilder keyBuilder);
@@ -134,74 +154,93 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions.Internal
                 IConventionKeyBuilder keyBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation);
+                IConventionAnnotation? oldAnnotation
+            );
 
             public abstract IConventionKey? OnKeyRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionKey key);
+                IConventionKey key
+            );
 
             public abstract IConventionAnnotation? OnModelAnnotationChanged(
                 IConventionModelBuilder modelBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation);
+                IConventionAnnotation? oldAnnotation
+            );
 
-            public abstract IConventionNavigationBuilder? OnNavigationAdded(IConventionNavigationBuilder navigationBuilder);
+            public abstract IConventionNavigationBuilder? OnNavigationAdded(
+                IConventionNavigationBuilder navigationBuilder
+            );
 
             public abstract string? OnNavigationRemoved(
                 IConventionEntityTypeBuilder sourceEntityTypeBuilder,
                 IConventionEntityTypeBuilder targetEntityTypeBuilder,
                 string navigationName,
-                MemberInfo? memberInfo);
+                MemberInfo? memberInfo
+            );
 
             public abstract IConventionAnnotation? OnNavigationAnnotationChanged(
                 IConventionForeignKeyBuilder relationshipBuilder,
                 IConventionNavigation navigation,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation);
+                IConventionAnnotation? oldAnnotation
+            );
 
             public abstract IConventionSkipNavigationBuilder? OnSkipNavigationAdded(
-                IConventionSkipNavigationBuilder navigationBuilder);
+                IConventionSkipNavigationBuilder navigationBuilder
+            );
 
             public abstract IConventionForeignKey? OnSkipNavigationForeignKeyChanged(
                 IConventionSkipNavigationBuilder navigationBuilder,
                 IConventionForeignKey? foreignKey,
-                IConventionForeignKey? oldForeignKey);
+                IConventionForeignKey? oldForeignKey
+            );
 
             public abstract IConventionAnnotation? OnSkipNavigationAnnotationChanged(
                 IConventionSkipNavigationBuilder navigationBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation);
+                IConventionAnnotation? oldAnnotation
+            );
 
             public abstract IConventionSkipNavigation? OnSkipNavigationInverseChanged(
                 IConventionSkipNavigationBuilder navigationBuilder,
                 IConventionSkipNavigation? inverse,
-                IConventionSkipNavigation? oldInverse);
+                IConventionSkipNavigation? oldInverse
+            );
 
             public abstract IConventionSkipNavigation? OnSkipNavigationRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionSkipNavigation navigation);
+                IConventionSkipNavigation navigation
+            );
 
-            public abstract IConventionPropertyBuilder? OnPropertyAdded(IConventionPropertyBuilder propertyBuilder);
+            public abstract IConventionPropertyBuilder? OnPropertyAdded(
+                IConventionPropertyBuilder propertyBuilder
+            );
 
             public abstract IConventionAnnotation? OnPropertyAnnotationChanged(
                 IConventionPropertyBuilder propertyBuilder,
                 string name,
                 IConventionAnnotation? annotation,
-                IConventionAnnotation? oldAnnotation);
+                IConventionAnnotation? oldAnnotation
+            );
 
             public abstract FieldInfo? OnPropertyFieldChanged(
                 IConventionPropertyBuilder propertyBuilder,
                 FieldInfo? newFieldInfo,
-                FieldInfo? oldFieldInfo);
+                FieldInfo? oldFieldInfo
+            );
 
-            public abstract bool? OnPropertyNullabilityChanged(IConventionPropertyBuilder propertyBuilder);
+            public abstract bool? OnPropertyNullabilityChanged(
+                IConventionPropertyBuilder propertyBuilder
+            );
 
             public abstract IConventionProperty? OnPropertyRemoved(
                 IConventionEntityTypeBuilder entityTypeBuilder,
-                IConventionProperty property);
+                IConventionProperty property
+            );
         }
     }
 }

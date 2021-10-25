@@ -1,6 +1,6 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for more information.  
+// See the LICENSE file in the project root for more information.
 
 #nullable disable
 
@@ -12,18 +12,27 @@ namespace Microsoft.CodeAnalysis.PullMemberUp
 {
     internal static class MemberAndDestinationValidator
     {
-        public static bool IsDestinationValid(Solution solution, INamedTypeSymbol destination, CancellationToken cancellationToken)
+        public static bool IsDestinationValid(
+            Solution solution,
+            INamedTypeSymbol destination,
+            CancellationToken cancellationToken
+        )
         {
             // Make sure destination is class or interface since it could be ErrorTypeSymbol
-            if (destination.TypeKind != TypeKind.Interface && destination.TypeKind != TypeKind.Class)
+            if (
+                destination.TypeKind != TypeKind.Interface && destination.TypeKind != TypeKind.Class
+            )
             {
                 return false;
             }
 
             // Don't provide any refactoring option if the destination is not in source.
             // If the destination is generated code, also don't provide refactoring since we can't make sure if we won't break it.
-            var isDestinationInSourceAndNotGeneratedCode =
-                destination.Locations.Any(location => location.IsInSource && !solution.GetDocument(location.SourceTree).IsGeneratedCode(cancellationToken));
+            var isDestinationInSourceAndNotGeneratedCode = destination.Locations.Any(
+                location =>
+                    location.IsInSource
+                    && !solution.GetDocument(location.SourceTree).IsGeneratedCode(cancellationToken)
+            );
             return isDestinationInSourceAndNotGeneratedCode;
         }
 

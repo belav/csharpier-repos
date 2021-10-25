@@ -21,19 +21,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseAutoProperty
 {
     public class UseAutoPropertyTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseAutoPropertyTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public UseAutoPropertyTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseAutoPropertyAnalyzer(), GetCSharpUseAutoPropertyCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpUseAutoPropertyAnalyzer(), GetCSharpUseAutoPropertyCodeFixProvider());
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleGetterFromField()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -45,17 +43,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseAutoProperty
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleGetterFromField_InRecord()
         {
             await TestInRegularAndScript1Async(
-@"record Class
+                @"record Class
 {
     [|int i|];
 
@@ -67,10 +66,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseAutoProperty
         }
     }
 }",
-@"record Class
+                @"record Class
 {
     int P { get; }
-}", new TestParameters(TestOptions.RegularPreview));
+}",
+                new TestParameters(TestOptions.RegularPreview)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -79,7 +80,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseAutoProperty
         {
             // ⚠ The expected outcome of this test should not change.
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|MutableInt? i|];
 
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseAutoProperty
         }
     }
 }
-struct MutableInt { public int Value; }");
+struct MutableInt { public int Value; }"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -99,7 +101,7 @@ struct MutableInt { public int Value; }");
         public async Task TestNullable2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly MutableInt? i|];
 
@@ -112,11 +114,12 @@ struct MutableInt { public int Value; }");
     }
 }
 struct MutableInt { public int Value; }",
-@"class Class
+                @"class Class
 {
     MutableInt? P { get; }
 }
-struct MutableInt { public int Value; }");
+struct MutableInt { public int Value; }"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -124,7 +127,7 @@ struct MutableInt { public int Value; }");
         public async Task TestNullable3()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int? i|];
 
@@ -136,10 +139,11 @@ struct MutableInt { public int Value; }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int? P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -147,7 +151,7 @@ struct MutableInt { public int Value; }");
         public async Task TestNullable4()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly int? i|];
 
@@ -159,10 +163,11 @@ struct MutableInt { public int Value; }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int? P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -171,7 +176,7 @@ struct MutableInt { public int Value; }");
         {
             // Recursive type check
             await TestMissingInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 class Class
 {
     [|Nullable<MutableInt?> i|];
@@ -184,7 +189,8 @@ class Class
         }
     }
 }
-struct MutableInt { public int Value; }");
+struct MutableInt { public int Value; }"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -192,7 +198,7 @@ struct MutableInt { public int Value; }");
         public async Task TestMutableValueType1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|MutableInt i|];
 
@@ -204,7 +210,8 @@ struct MutableInt { public int Value; }");
         }
     }
 }
-struct MutableInt { public int Value; }");
+struct MutableInt { public int Value; }"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -212,7 +219,7 @@ struct MutableInt { public int Value; }");
         public async Task TestMutableValueType2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly MutableInt i|];
 
@@ -225,11 +232,12 @@ struct MutableInt { public int Value; }");
     }
 }
 struct MutableInt { public int Value; }",
-@"class Class
+                @"class Class
 {
     MutableInt P { get; }
 }
-struct MutableInt { public int Value; }");
+struct MutableInt { public int Value; }"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -237,7 +245,7 @@ struct MutableInt { public int Value; }");
         public async Task TestMutableValueType3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|MutableInt i|];
 
@@ -249,7 +257,8 @@ struct MutableInt { public int Value; }");
         }
     }
 }
-struct MutableInt { public int Value { get; set; } }");
+struct MutableInt { public int Value { get; set; } }"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -257,7 +266,7 @@ struct MutableInt { public int Value { get; set; } }");
         public async Task TestErrorType1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|ErrorType i|];
 
@@ -268,7 +277,8 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -276,7 +286,7 @@ struct MutableInt { public int Value { get; set; } }");
         public async Task TestErrorType2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly ErrorType i|];
 
@@ -288,10 +298,11 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     ErrorType P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -299,7 +310,7 @@ struct MutableInt { public int Value { get; set; } }");
         public async Task TestErrorType3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|ErrorType? i|];
 
@@ -310,7 +321,8 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -318,7 +330,7 @@ struct MutableInt { public int Value { get; set; } }");
         public async Task TestErrorType4()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly ErrorType? i|];
 
@@ -330,10 +342,11 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     ErrorType? P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -341,7 +354,7 @@ struct MutableInt { public int Value { get; set; } }");
         public async Task TestErrorType5()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|ErrorType[] i|];
 
@@ -353,17 +366,18 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     ErrorType[] P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestCSharp5_1()
         {
             await TestAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -375,18 +389,19 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     public int P { get; private set; }
 }",
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5));
+                CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestCSharp5_2()
         {
             await TestMissingAsync(
-@"class Class
+                @"class Class
 {
     [|readonly int i|];
 
@@ -397,14 +412,18 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}", new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)));
+}",
+                new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestInitializer()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i = 1|];
 
@@ -416,17 +435,18 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; } = 1;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestInitializer_CSharp5()
         {
             await TestMissingAsync(
-@"class Class
+                @"class Class
 {
     [|int i = 1|];
 
@@ -437,14 +457,18 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}", new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)));
+}",
+                new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleGetterFromProperty()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int i;
 
@@ -456,17 +480,18 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }|]
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleSetter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -477,14 +502,15 @@ struct MutableInt { public int Value { get; set; } }");
             i = value;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestGetterAndSetter()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -501,17 +527,18 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleGetterWithThis()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -523,17 +550,18 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleSetterWithThis()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -544,14 +572,15 @@ struct MutableInt { public int Value { get; set; } }");
             this.i = value;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestGetterAndSetterWithThis()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -568,17 +597,18 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestGetterWithMutipleStatements()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -590,14 +620,15 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSetterWithMutipleStatements()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -609,14 +640,15 @@ struct MutableInt { public int Value { get; set; } }");
             i = value;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSetterWithMultipleStatementsAndGetterWithSingleStatement()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -633,14 +665,15 @@ struct MutableInt { public int Value { get; set; } }");
             i = value;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestGetterAndSetterUseDifferentFields()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
     int j;
@@ -657,14 +690,15 @@ struct MutableInt { public int Value { get; set; } }");
             j = value;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestFieldAndPropertyHaveDifferentStaticInstance()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|static int i|];
 
@@ -675,14 +709,15 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestNotIfFieldUsedInRefArgument1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -698,14 +733,15 @@ struct MutableInt { public int Value { get; set; } }");
     {
         M(ref i);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestNotIfFieldUsedInRefArgument2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -721,14 +757,15 @@ struct MutableInt { public int Value { get; set; } }");
     {
         M(ref this.i);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestNotIfFieldUsedInOutArgument()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -744,14 +781,15 @@ struct MutableInt { public int Value { get; set; } }");
     {
         M(out i);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestNotIfFieldUsedInInArgument()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -767,7 +805,8 @@ struct MutableInt { public int Value { get; set; } }");
     {
         M(in i);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(25429, "https://github.com/dotnet/roslyn/issues/25429")]
@@ -775,7 +814,7 @@ struct MutableInt { public int Value { get; set; } }");
         public async Task TestNotIfFieldUsedInRefExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -791,14 +830,15 @@ struct MutableInt { public int Value { get; set; } }");
     {
         ref int x = ref i;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestNotIfFieldUsedInRefExpression_AsCandidateSymbol()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -816,14 +856,15 @@ struct MutableInt { public int Value { get; set; } }");
         // let's be conservative here and disable the analyzer if we're not sure
         ref int x = ref Class.i;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestIfUnrelatedSymbolUsedInRefExpression()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
     int j;
@@ -843,7 +884,7 @@ struct MutableInt { public int Value { get; set; } }");
         ref int y = ref j;
     }
 }",
-@"class Class
+                @"class Class
 {
     int j;
 
@@ -855,14 +896,15 @@ struct MutableInt { public int Value { get; set; } }");
         ref int x = ref i;
         ref int y = ref j;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestNotWithVirtualProperty()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -873,14 +915,15 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestNotWithConstField()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|const int i|];
 
@@ -891,7 +934,8 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(25379, "https://github.com/dotnet/roslyn/issues/25379")]
@@ -899,7 +943,7 @@ struct MutableInt { public int Value { get; set; } }");
         public async Task TestNotWithVolatileField()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|volatile int i|];
 
@@ -910,14 +954,15 @@ struct MutableInt { public int Value { get; set; } }");
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestFieldWithMultipleDeclarators1()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|], j, k;
 
@@ -929,19 +974,20 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int j, k;
 
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestFieldWithMultipleDeclarators2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int i, [|j|], k;
 
@@ -953,19 +999,20 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int i, k;
 
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestFieldWithMultipleDeclarators3()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int i, j, [|k|];
 
@@ -977,19 +1024,20 @@ struct MutableInt { public int Value { get; set; } }");
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int i, j;
 
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestFieldAndPropertyInDifferentParts()
         {
             await TestInRegularAndScript1Async(
-@"partial class Class
+                @"partial class Class
 {
     [|int i|];
 }
@@ -1004,21 +1052,22 @@ partial class Class
         }
     }
 }",
-@"partial class Class
+                @"partial class Class
 {
 }
 
 partial class Class
 {
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestNotWithFieldWithAttribute()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|[A]
     int i|];
@@ -1030,14 +1079,15 @@ partial class Class
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestUpdateReferences()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -1054,7 +1104,7 @@ partial class Class
         i = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
 
@@ -1062,14 +1112,15 @@ partial class Class
     {
         P = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestUpdateReferencesConflictResolution()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -1086,7 +1137,7 @@ partial class Class
         i = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
 
@@ -1094,14 +1145,15 @@ partial class Class
     {
         this.P = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestWriteInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -1118,7 +1170,7 @@ partial class Class
         i = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
 
@@ -1126,14 +1178,15 @@ partial class Class
     {
         P = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestWriteInNotInConstructor1()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -1150,7 +1203,7 @@ partial class Class
         i = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; }
 
@@ -1158,14 +1211,15 @@ partial class Class
     {
         P = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestWriteInNotInConstructor2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -1182,7 +1236,7 @@ partial class Class
         i = 1;
     }
 }",
-@"class Class
+                @"class Class
 {
     public int P { get; private set; }
 
@@ -1190,7 +1244,8 @@ partial class Class
     {
         P = 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30108, "https://github.com/dotnet/roslyn/issues/30108")]
@@ -1198,7 +1253,7 @@ partial class Class
         public async Task TestWriteInSimpleExpressionLambdaInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1210,7 +1265,7 @@ class C
         Action<int> x = _ => i = 1;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1220,7 +1275,8 @@ class C
     {
         Action<int> x = _ => P = 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30108, "https://github.com/dotnet/roslyn/issues/30108")]
@@ -1228,7 +1284,7 @@ class C
         public async Task TestWriteInSimpleBlockLambdaInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1243,7 +1299,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1256,7 +1312,8 @@ class C
             P = 1;
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30108, "https://github.com/dotnet/roslyn/issues/30108")]
@@ -1264,7 +1321,7 @@ class C
         public async Task TestWriteInParenthesizedExpressionLambdaInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1276,7 +1333,7 @@ class C
         Action x = () => i = 1;
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1286,7 +1343,8 @@ class C
     {
         Action x = () => P = 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30108, "https://github.com/dotnet/roslyn/issues/30108")]
@@ -1294,7 +1352,7 @@ class C
         public async Task TestWriteInParenthesizedBlockLambdaInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1309,7 +1367,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1322,7 +1380,8 @@ class C
             P = 1;
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30108, "https://github.com/dotnet/roslyn/issues/30108")]
@@ -1330,7 +1389,7 @@ class C
         public async Task TestWriteInAnonymousMethodInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1345,7 +1404,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -1358,7 +1417,8 @@ class C
             P = 1;
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30108, "https://github.com/dotnet/roslyn/issues/30108")]
@@ -1366,7 +1426,7 @@ class C
         public async Task TestWriteInLocalFunctionInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     [|int i|];
     int P => i;
@@ -1379,7 +1439,7 @@ class C
         }
     }
 }",
-@"class C
+                @"class C
 {
     int P { get; set; }
 
@@ -1390,7 +1450,8 @@ class C
             P = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(30108, "https://github.com/dotnet/roslyn/issues/30108")]
@@ -1398,7 +1459,7 @@ class C
         public async Task TestWriteInExpressionBodiedLocalFunctionInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     [|int i|];
     int P => i;
@@ -1408,7 +1469,7 @@ class C
         void F() => i = 1;
     }
 }",
-@"class C
+                @"class C
 {
     int P { get; set; }
 
@@ -1416,14 +1477,15 @@ class C
     {
         void F() => P = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestReadInExpressionBodiedLocalFunctionInConstructor()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     [|int i|];
     int P => i;
@@ -1433,7 +1495,7 @@ class C
         bool F() => i == 1;
     }
 }",
-@"class C
+                @"class C
 {
     int P { get; }
 
@@ -1441,49 +1503,53 @@ class C
     {
         bool F() => P == 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestAlreadyAutoPropertyWithGetterWithNoBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     public int [|P|] { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestAlreadyAutoPropertyWithGetterAndSetterWithNoBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     public int [|P|] { get; set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleLine1()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
     int P { get { return i; } }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleLine2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
     int P
@@ -1491,17 +1557,18 @@ class C
         get { return i; }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestSingleLine3()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
     int P
@@ -1510,17 +1577,18 @@ class C
         set { i = value; }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task Tuple_SingleGetterFromField()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly (int, string) i|];
 
@@ -1532,17 +1600,18 @@ class C
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     (int, string) P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TupleWithNames_SingleGetterFromField()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly (int a, string b) i|];
 
@@ -1554,17 +1623,18 @@ class C
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     (int a, string b) P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TupleWithDifferentNames_SingleGetterFromField()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|readonly (int a, string b) i|];
 
@@ -1575,14 +1645,15 @@ class C
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TupleWithOneName_SingleGetterFromField()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly (int a, string) i|];
 
@@ -1594,17 +1665,18 @@ class C
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     (int a, string) P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task Tuple_Initializer()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|readonly (int, string) i = (1, ""hello"")|];
 
@@ -1616,17 +1688,18 @@ class C
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     (int, string) P { get; } = (1, ""hello"");
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task Tuple_GetterAndSetter()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class Class
+                @"class Class
 {
     [|(int, string) i|];
 
@@ -1642,7 +1715,8 @@ class C
             i = value;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23215, "https://github.com/dotnet/roslyn/issues/23215")]
@@ -1651,7 +1725,7 @@ class C
         public async Task TestFixAllInDocument()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     {|FixAllInDocument:int i|};
 
@@ -1673,19 +1747,21 @@ class C
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
 
     int Q { get; }
-}");
+}"
+            );
         }
 
         [WorkItem(23735, "https://github.com/dotnet/roslyn/issues/23735")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExplicitInterfaceImplementationGetterOnly()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 namespace RoslynSandbox
 {
     public interface IFoo
@@ -1707,14 +1783,16 @@ namespace RoslynSandbox
             get { return bar; }
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23735, "https://github.com/dotnet/roslyn/issues/23735")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExplicitInterfaceImplementationGetterAndSetter()
         {
-            await TestMissingInRegularAndScriptAsync(@"
+            await TestMissingInRegularAndScriptAsync(
+                @"
 namespace RoslynSandbox
 {
     public interface IFoo
@@ -1737,14 +1815,15 @@ namespace RoslynSandbox
             set { bar = value; }
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedMemberGetOnly()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|];
     int P
@@ -1752,17 +1831,18 @@ namespace RoslynSandbox
         get => i;
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedMemberGetOnlyWithInitializer()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|] = 1;
     int P
@@ -1770,17 +1850,18 @@ namespace RoslynSandbox
         get => i;
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; } = 1;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedMemberGetOnlyWithInitializerAndNeedsSetter()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|] = 1;
     int P
@@ -1789,18 +1870,19 @@ namespace RoslynSandbox
     }
     void M() { i = 2; }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; } = 1;
     void M() { P = 2; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedMemberGetterAndSetter()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|];
     int P
@@ -1809,64 +1891,68 @@ namespace RoslynSandbox
         set { i = value; }
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedMemberGetter()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|];
     int P => i;
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedMemberGetterWithSetterNeeded()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|];
     int P => i;
     void M() { i = 1; }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; }
     void M() { P = 1; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedMemberGetterWithInitializer()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|] = 1;
     int P => i;
 }",
-@"class Class
+                @"class Class
 {
     int P { get; } = 1;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedGetterAndSetter()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|];
     int P { 
@@ -1874,17 +1960,18 @@ namespace RoslynSandbox
         set => i = value;
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task ExpressionBodiedGetterAndSetterWithInitializer()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int [|i|] = 1;
     int P { 
@@ -1892,10 +1979,11 @@ namespace RoslynSandbox
         set => i = value;
     }
 }",
-@"class Class
+                @"class Class
 {
     int P { get; set; } = 1;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -1903,7 +1991,7 @@ namespace RoslynSandbox
         public async Task TestGetterAccessibilityDiffers()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -1920,10 +2008,11 @@ namespace RoslynSandbox
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     public int P { protected get; set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -1931,7 +2020,7 @@ namespace RoslynSandbox
         public async Task TestSetterAccessibilityDiffers()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -1948,10 +2037,11 @@ namespace RoslynSandbox
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     public int P { get; protected set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -1959,18 +2049,19 @@ namespace RoslynSandbox
         public async Task TestPreserveTrailingTrivia1()
         {
             await TestInRegularAndScript1Async(
-@"class Goo
+                @"class Goo
 {
     private readonly object [|bar|] = new object();
 
     public object Bar => bar;
     public int Baz => 0;
 }",
-@"class Goo
+                @"class Goo
 {
     public object Bar { get; } = new object();
     public int Baz => 0;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -1978,18 +2069,19 @@ namespace RoslynSandbox
         public async Task TestPreserveTrailingTrivia2()
         {
             await TestInRegularAndScript1Async(
-@"class Goo
+                @"class Goo
 {
     private readonly object [|bar|] = new object();
 
     public object Bar => bar; // prop comment
     public int Baz => 0;
 }",
-@"class Goo
+                @"class Goo
 {
     public object Bar { get; } = new object(); // prop comment
     public int Baz => 0;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -1997,7 +2089,7 @@ namespace RoslynSandbox
         public async Task TestPreserveTrailingTrivia3()
         {
             await TestInRegularAndScript1Async(
-@"class Goo
+                @"class Goo
 {
     private readonly object [|bar|] = new object();
 
@@ -2005,12 +2097,13 @@ namespace RoslynSandbox
     public object Bar => bar; // prop comment
     public int Baz => 0;
 }",
-@"class Goo
+                @"class Goo
 {
     // doc
     public object Bar { get; } = new object(); // prop comment
     public int Baz => 0;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
@@ -2018,7 +2111,7 @@ namespace RoslynSandbox
         public async Task TestKeepLeadingBlank()
         {
             await TestInRegularAndScript1Async(
-@"class Goo
+                @"class Goo
 {
 
     private readonly object [|bar|] = new object();
@@ -2027,20 +2120,21 @@ namespace RoslynSandbox
     public object Bar => bar; // prop comment
     public int Baz => 0;
 }",
-@"class Goo
+                @"class Goo
 {
 
     // doc
     public object Bar { get; } = new object(); // prop comment
     public int Baz => 0;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestMultipleFieldsAbove1()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
     int j;
@@ -2053,19 +2147,20 @@ namespace RoslynSandbox
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int j;
 
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestMultipleFieldsAbove2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int j;
     [|int i|];
@@ -2078,19 +2173,20 @@ namespace RoslynSandbox
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int j;
 
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestMultipleFieldsAbove3()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     [|int i|];
 
@@ -2104,19 +2200,20 @@ namespace RoslynSandbox
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int j;
 
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestMultipleFieldsAbove4()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int j;
 
@@ -2130,19 +2227,20 @@ namespace RoslynSandbox
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     int j;
 
     int P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestMultipleFieldsBelow1()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int P
     {
@@ -2155,19 +2253,20 @@ namespace RoslynSandbox
     [|int i|];
     int j;
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
 
     int j;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestMultipleFieldsBelow2()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int P
     {
@@ -2180,19 +2279,20 @@ namespace RoslynSandbox
     int j;
     [|int i|];
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
 
     int j;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestMultipleFieldsBelow3()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int P
     {
@@ -2206,19 +2306,20 @@ namespace RoslynSandbox
 
     int j;
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
 
     int j;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseAutoProperty)]
         public async Task TestMultipleFieldsBelow4()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     int P
     {
@@ -2232,12 +2333,13 @@ namespace RoslynSandbox
 
     [|int i|];
 }",
-@"class Class
+                @"class Class
 {
     int P { get; }
 
     int j;
-}");
+}"
+            );
         }
 
         [WorkItem(27675, "https://github.com/dotnet/roslyn/issues/27675")]
@@ -2245,7 +2347,7 @@ namespace RoslynSandbox
         public async Task TestSingleLineWithDirective()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     #region Test
     [|int i|];
@@ -2259,13 +2361,14 @@ namespace RoslynSandbox
         }
     }
 }",
-@"class Class
+                @"class Class
 {
     #region Test
     #endregion
 
     int P { get; }
-}");
+}"
+            );
         }
 
         [WorkItem(27675, "https://github.com/dotnet/roslyn/issues/27675")]
@@ -2273,7 +2376,7 @@ namespace RoslynSandbox
         public async Task TestMultipleFieldsWithDirective()
         {
             await TestInRegularAndScript1Async(
-@"class Class
+                @"class Class
 {
     #region Test
     [|int i|];
@@ -2289,7 +2392,7 @@ namespace RoslynSandbox
     }
 
 }",
-@"class Class
+                @"class Class
 {
     #region Test
     int j;
@@ -2297,7 +2400,8 @@ namespace RoslynSandbox
 
     int P { get; }
 
-}");
+}"
+            );
         }
 
         [WorkItem(27675, "https://github.com/dotnet/roslyn/issues/27675")]
@@ -2305,7 +2409,7 @@ namespace RoslynSandbox
         public async Task TestSingleLineWithDoubleDirectives()
         {
             await TestInRegularAndScript1Async(
-@"class TestClass
+                @"class TestClass
 {
     #region Field
     [|int i|];
@@ -2318,7 +2422,7 @@ namespace RoslynSandbox
     }
     #endregion
 }",
-@"class TestClass
+                @"class TestClass
 {
     #region Field
     #endregion
@@ -2326,7 +2430,8 @@ namespace RoslynSandbox
     #region Property
     int P { get; }
     #endregion
-}");
+}"
+            );
         }
 
         [WorkItem(40622, "https://github.com/dotnet/roslyn/issues/40622")]
@@ -2334,16 +2439,18 @@ namespace RoslynSandbox
         public async Task TestUseTabs()
         {
             await TestInRegularAndScript1Async(
-@"public class Foo
+                @"public class Foo
 {
 	private readonly object o;
 
 	[||]public object O => o;
 }",
-@"public class Foo
+                @"public class Foo
 {
 	public object O { get; }
-}", new TestParameters(options: Option(FormattingOptions2.UseTabs, true)));
+}",
+                new TestParameters(options: Option(FormattingOptions2.UseTabs, true))
+            );
         }
 
         [WorkItem(40622, "https://github.com/dotnet/roslyn/issues/40622")]
@@ -2351,16 +2458,18 @@ namespace RoslynSandbox
         public async Task TestUseSpaces()
         {
             await TestInRegularAndScript1Async(
-@"public class Foo
+                @"public class Foo
 {
 	private readonly object o;
 
 	[||]public object O => o;
 }",
-@"public class Foo
+                @"public class Foo
 {
     public object O { get; }
-}", new TestParameters(options: Option(FormattingOptions2.UseTabs, false)));
+}",
+                new TestParameters(options: Option(FormattingOptions2.UseTabs, false))
+            );
         }
 
         [WorkItem(40622, "https://github.com/dotnet/roslyn/issues/40622")]
@@ -2368,7 +2477,7 @@ namespace RoslynSandbox
         public async Task TestUseTabs_Editorconfig()
         {
             await TestInRegularAndScript1Async(
-@"<Workspace>
+                @"<Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
 public class Foo
@@ -2384,7 +2493,7 @@ indent_style = tab
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
 public class Foo
@@ -2397,7 +2506,8 @@ public class Foo
 indent_style = tab
 </AnalyzerConfigDocument>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [WorkItem(40622, "https://github.com/dotnet/roslyn/issues/40622")]
@@ -2405,7 +2515,7 @@ indent_style = tab
         public async Task TestUseSpaces_Editorconfig()
         {
             await TestInRegularAndScript1Async(
-@"<Workspace>
+                @"<Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
 public class Foo
@@ -2421,7 +2531,7 @@ indent_style = space
 </AnalyzerConfigDocument>
     </Project>
 </Workspace>",
-@"<Workspace>
+                @"<Workspace>
     <Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath = ""z:\\file.cs"">
 public class Foo
@@ -2434,7 +2544,8 @@ public class Foo
 indent_style = space
 </AnalyzerConfigDocument>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [WorkItem(34783, "https://github.com/dotnet/roslyn/issues/34783")]
@@ -2442,7 +2553,7 @@ indent_style = space
         public async Task TestNotOnSerializableType()
         {
             await TestMissingAsync(
-@"
+                @"
 [System.Serializable]
 class Class
 {
@@ -2455,7 +2566,8 @@ class Class
             return i;
         }
     }
-}");
+}"
+            );
         }
 
         [WorkItem(47999, "https://github.com/dotnet/roslyn/issues/47999")]
@@ -2463,17 +2575,18 @@ class Class
         public async Task TestPropertyIsReadOnlyAndSetterNeeded()
         {
             await TestInRegularAndScript1Async(
-@"struct S
+                @"struct S
 {
     [|int i|];
     public readonly int P => i;
     public void SetP(int value) => i = value;
 }",
-@"struct S
+                @"struct S
 {
     public int P { get; private set; }
     public void SetP(int value) => P = value;
-}");
+}"
+            );
         }
 
         [WorkItem(47999, "https://github.com/dotnet/roslyn/issues/47999")]
@@ -2481,17 +2594,18 @@ class Class
         public async Task TestPropertyIsReadOnlyWithNoAccessModifierAndSetterNeeded()
         {
             await TestInRegularAndScript1Async(
-@"struct S
+                @"struct S
 {
     [|int i|];
     readonly int P => i;
     public void SetP(int value) => i = value;
 }",
-@"struct S
+                @"struct S
 {
     int P { get; set; }
     public void SetP(int value) => P = value;
-}");
+}"
+            );
         }
 
         [WorkItem(47999, "https://github.com/dotnet/roslyn/issues/47999")]
@@ -2499,15 +2613,16 @@ class Class
         public async Task TestPropertyIsReadOnlyAndSetterUnneeded()
         {
             await TestInRegularAndScript1Async(
-@"struct S
+                @"struct S
 {
     [|int i|];
     public readonly int P => i;
 }",
-@"struct S
+                @"struct S
 {
     public readonly int P { get; }
-}");
+}"
+            );
         }
     }
 }

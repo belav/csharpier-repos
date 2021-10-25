@@ -56,7 +56,8 @@ namespace Microsoft.AspNetCore.Rewrite
             RedirectToWwwHelper.SetRedirect(
                 context,
                 new HostString(request.Host.Value.Substring(4)), // We verified the hostname begins with "www." already.
-                _statusCode);
+                _statusCode
+            );
 
             context.Logger.RedirectedToNonWww();
         }

@@ -10,22 +10,36 @@ using Microsoft.CodeAnalysis.UseCompoundAssignment;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseCompoundAssignment), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseCompoundAssignment
+        ),
+        Shared
+    ]
     internal class CSharpUseCompoundAssignmentCodeFixProvider
-        : AbstractUseCompoundAssignmentCodeFixProvider<SyntaxKind, AssignmentExpressionSyntax, ExpressionSyntax>
+        : AbstractUseCompoundAssignmentCodeFixProvider<
+              SyntaxKind,
+              AssignmentExpressionSyntax,
+              ExpressionSyntax
+          >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseCompoundAssignmentCodeFixProvider()
-            : base(Utilities.Kinds)
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseCompoundAssignmentCodeFixProvider() : base(Utilities.Kinds) { }
 
-        protected override SyntaxToken Token(SyntaxKind kind)
-            => SyntaxFactory.Token(kind);
+        protected override SyntaxToken Token(SyntaxKind kind) => SyntaxFactory.Token(kind);
 
         protected override AssignmentExpressionSyntax Assignment(
-            SyntaxKind assignmentOpKind, ExpressionSyntax left, SyntaxToken syntaxToken, ExpressionSyntax right)
+            SyntaxKind assignmentOpKind,
+            ExpressionSyntax left,
+            SyntaxToken syntaxToken,
+            ExpressionSyntax right
+        )
         {
             return SyntaxFactory.AssignmentExpression(assignmentOpKind, left, syntaxToken, right);
         }

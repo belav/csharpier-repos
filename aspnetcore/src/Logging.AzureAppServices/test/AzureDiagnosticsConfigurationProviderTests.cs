@@ -14,11 +14,13 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [Fact]
         public void NoConfigFile()
         {
-            var tempFolder = Path.Combine(Path.GetTempPath(), "AzureWebAppLoggerThisFolderShouldNotExist");
+            var tempFolder = Path.Combine(
+                Path.GetTempPath(),
+                "AzureWebAppLoggerThisFolderShouldNotExist"
+            );
 
             var contextMock = new Mock<IWebAppContext>();
-            contextMock.SetupGet(c => c.HomeFolder)
-                .Returns(tempFolder);
+            contextMock.SetupGet(c => c.HomeFolder).Returns(tempFolder);
 
             var config = SiteConfigurationProvider.GetAzureLoggingConfiguration(contextMock.Object);
 
@@ -28,7 +30,10 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
         [Fact]
         public void ReadsSettingsFileAndEnvironment()
         {
-            var tempFolder = Path.Combine(Path.GetTempPath(), "WebAppLoggerConfigurationDisabledInSettingsFile");
+            var tempFolder = Path.Combine(
+                Path.GetTempPath(),
+                "WebAppLoggerConfigurationDisabledInSettingsFile"
+            );
 
             try
             {
@@ -43,10 +48,11 @@ namespace Microsoft.Extensions.Logging.AzureAppServices.Test
                 File.WriteAllText(settingsFile, @"{ ""key"":""test value"" }");
 
                 var contextMock = new Mock<IWebAppContext>();
-                contextMock.SetupGet(c => c.HomeFolder)
-                    .Returns(tempFolder);
+                contextMock.SetupGet(c => c.HomeFolder).Returns(tempFolder);
 
-                var config = SiteConfigurationProvider.GetAzureLoggingConfiguration(contextMock.Object);
+                var config = SiteConfigurationProvider.GetAzureLoggingConfiguration(
+                    contextMock.Object
+                );
 
                 Assert.Equal("test value", config["key"]);
                 Assert.Equal("USEFUL_VALUE", config["RANDOM_ENVIRONMENT_VARIABLE"]);

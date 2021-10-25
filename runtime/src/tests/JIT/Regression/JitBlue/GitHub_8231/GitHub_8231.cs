@@ -25,9 +25,15 @@ namespace N
                 // were incorrectly shared.
                 switch (i)
                 {
-                    case 1: s += 4; break;
-                    case 2: s += 2; break;
-                    case 3: s += i; break;
+                    case 1:
+                        s += 4;
+                        break;
+                    case 2:
+                        s += 2;
+                        break;
+                    case 3:
+                        s += i;
+                        break;
                 }
             }
 
@@ -40,7 +46,7 @@ namespace N
 
             // Expected result is a function of Vector<int>.Count.
             int expected;
-            switch(Vector<int>.Count)
+            switch (Vector<int>.Count)
             {
                 case 1:
                     expected = 4;
@@ -57,5 +63,5 @@ namespace N
             // values on failure.
             return 100 + result - expected;
         }
-   }
+    }
 }

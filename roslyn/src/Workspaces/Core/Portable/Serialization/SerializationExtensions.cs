@@ -13,8 +13,10 @@ namespace Microsoft.CodeAnalysis.Serialization
 {
     internal static class SerializationExtensions
     {
-        public static WellKnownSynchronizationKind GetWellKnownSynchronizationKind(this object value)
-            => value switch
+        public static WellKnownSynchronizationKind GetWellKnownSynchronizationKind(
+            this object value
+        ) =>
+            value switch
             {
                 SolutionStateChecksums _ => WellKnownSynchronizationKind.SolutionState,
                 ProjectStateChecksums _ => WellKnownSynchronizationKind.ProjectState,
@@ -22,13 +24,19 @@ namespace Microsoft.CodeAnalysis.Serialization
                 ProjectChecksumCollection _ => WellKnownSynchronizationKind.Projects,
                 DocumentChecksumCollection _ => WellKnownSynchronizationKind.Documents,
                 TextDocumentChecksumCollection _ => WellKnownSynchronizationKind.TextDocuments,
-                AnalyzerConfigDocumentChecksumCollection _ => WellKnownSynchronizationKind.AnalyzerConfigDocuments,
-                ProjectReferenceChecksumCollection _ => WellKnownSynchronizationKind.ProjectReferences,
-                MetadataReferenceChecksumCollection _ => WellKnownSynchronizationKind.MetadataReferences,
-                AnalyzerReferenceChecksumCollection _ => WellKnownSynchronizationKind.AnalyzerReferences,
-                SolutionInfo.SolutionAttributes _ => WellKnownSynchronizationKind.SolutionAttributes,
+                AnalyzerConfigDocumentChecksumCollection _
+                  => WellKnownSynchronizationKind.AnalyzerConfigDocuments,
+                ProjectReferenceChecksumCollection _
+                  => WellKnownSynchronizationKind.ProjectReferences,
+                MetadataReferenceChecksumCollection _
+                  => WellKnownSynchronizationKind.MetadataReferences,
+                AnalyzerReferenceChecksumCollection _
+                  => WellKnownSynchronizationKind.AnalyzerReferences,
+                SolutionInfo.SolutionAttributes _
+                  => WellKnownSynchronizationKind.SolutionAttributes,
                 ProjectInfo.ProjectAttributes _ => WellKnownSynchronizationKind.ProjectAttributes,
-                DocumentInfo.DocumentAttributes _ => WellKnownSynchronizationKind.DocumentAttributes,
+                DocumentInfo.DocumentAttributes _
+                  => WellKnownSynchronizationKind.DocumentAttributes,
                 CompilationOptions _ => WellKnownSynchronizationKind.CompilationOptions,
                 ParseOptions _ => WellKnownSynchronizationKind.ParseOptions,
                 ProjectReference _ => WellKnownSynchronizationKind.ProjectReference,
@@ -41,10 +49,14 @@ namespace Microsoft.CodeAnalysis.Serialization
                 _ => throw ExceptionUtilities.UnexpectedValue(value),
             };
 
-        public static CompilationOptions FixUpCompilationOptions(this ProjectInfo.ProjectAttributes info, CompilationOptions compilationOptions)
+        public static CompilationOptions FixUpCompilationOptions(
+            this ProjectInfo.ProjectAttributes info,
+            CompilationOptions compilationOptions
+        )
         {
-            return compilationOptions.WithXmlReferenceResolver(GetXmlResolver(info.FilePath))
-                                     .WithStrongNameProvider(new DesktopStrongNameProvider(GetStrongNameKeyPaths(info)));
+            return compilationOptions
+                .WithXmlReferenceResolver(GetXmlResolver(info.FilePath))
+                .WithStrongNameProvider(new DesktopStrongNameProvider(GetStrongNameKeyPaths(info)));
         }
 
         private static XmlFileResolver GetXmlResolver(string? filePath)
@@ -64,7 +76,9 @@ namespace Microsoft.CodeAnalysis.Serialization
             return new XmlFileResolver(PathUtilities.GetDirectoryName(filePath));
         }
 
-        private static ImmutableArray<string> GetStrongNameKeyPaths(ProjectInfo.ProjectAttributes info)
+        private static ImmutableArray<string> GetStrongNameKeyPaths(
+            ProjectInfo.ProjectAttributes info
+        )
         {
             // Given FilePath/OutputFilePath can be any arbitrary strings project is created with.
             // for primary solution in host such as VSWorkspace, ETA or MSBuildWorkspace

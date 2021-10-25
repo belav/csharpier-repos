@@ -22,9 +22,21 @@ namespace Microsoft.AspNetCore.NodeServices.Npm
         public EventedStreamReader StdOut { get; }
         public EventedStreamReader StdErr { get; }
 
-        private static Regex AnsiColorRegex = new Regex("\x001b\\[[0-9;]*m", RegexOptions.None, TimeSpan.FromSeconds(1));
+        private static Regex AnsiColorRegex = new Regex(
+            "\x001b\\[[0-9;]*m",
+            RegexOptions.None,
+            TimeSpan.FromSeconds(1)
+        );
 
-        public NodeScriptRunner(string workingDirectory, string scriptName, string? arguments, IDictionary<string, string>? envVars, string pkgManagerCommand, DiagnosticSource diagnosticSource, CancellationToken applicationStoppingToken)
+        public NodeScriptRunner(
+            string workingDirectory,
+            string scriptName,
+            string? arguments,
+            IDictionary<string, string>? envVars,
+            string pkgManagerCommand,
+            DiagnosticSource diagnosticSource,
+            CancellationToken applicationStoppingToken
+        )
         {
             if (string.IsNullOrEmpty(workingDirectory))
             {
@@ -80,11 +92,8 @@ namespace Microsoft.AspNetCore.NodeServices.Npm
             {
                 diagnosticSource.Write(
                     "Microsoft.AspNetCore.NodeServices.Npm.NpmStarted",
-                    new
-                    {
-                        processStartInfo = processStartInfo,
-                        process = _npmProcess
-                    });
+                    new { processStartInfo = processStartInfo, process = _npmProcess }
+                );
             }
         }
 
@@ -115,8 +124,8 @@ namespace Microsoft.AspNetCore.NodeServices.Npm
             {
                 Debug.Assert(chunk.Array != null);
 
-                var containsNewline = Array.IndexOf(
-                    chunk.Array, '\n', chunk.Offset, chunk.Count) >= 0;
+                var containsNewline =
+                    Array.IndexOf(chunk.Array, '\n', chunk.Offset, chunk.Count) >= 0;
                 if (!containsNewline)
                 {
                     Console.Write(chunk.Array, chunk.Offset, chunk.Count);
@@ -124,8 +133,8 @@ namespace Microsoft.AspNetCore.NodeServices.Npm
             };
         }
 
-        private static string StripAnsiColors(string line)
-            => AnsiColorRegex.Replace(line, string.Empty);
+        private static string StripAnsiColors(string line) =>
+            AnsiColorRegex.Replace(line, string.Empty);
 
         private static Process LaunchNodeProcess(ProcessStartInfo startInfo, string commandName)
         {
@@ -140,11 +149,12 @@ namespace Microsoft.AspNetCore.NodeServices.Npm
             }
             catch (Exception ex)
             {
-                var message = $"Failed to start '{commandName}'. To resolve this:.\n\n"
-                            + $"[1] Ensure that '{commandName}' is installed and can be found in one of the PATH directories.\n"
-                            + $"    Current PATH enviroment variable is: { Environment.GetEnvironmentVariable("PATH") }\n"
-                            + "    Make sure the executable is in one of those directories, or update your PATH.\n\n"
-                            + "[2] See the InnerException for further details of the cause.";
+                var message =
+                    $"Failed to start '{commandName}'. To resolve this:.\n\n"
+                    + $"[1] Ensure that '{commandName}' is installed and can be found in one of the PATH directories.\n"
+                    + $"    Current PATH enviroment variable is: {Environment.GetEnvironmentVariable("PATH")}\n"
+                    + "    Make sure the executable is in one of those directories, or update your PATH.\n\n"
+                    + "[2] See the InnerException for further details of the cause.";
                 throw new InvalidOperationException(message, ex);
             }
         }

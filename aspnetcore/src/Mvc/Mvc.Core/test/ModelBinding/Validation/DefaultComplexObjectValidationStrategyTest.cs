@@ -14,14 +14,11 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         public void GetChildren_ReturnsExpectedElements()
         {
             // Arrange
-            var model = new Person()
-            {
-                Age = 23,
-                Id = 1,
-                Name = "Joey",
-            };
+            var model = new Person() { Age = 23, Id = 1, Name = "Joey", };
 
-            var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(Person));
+            var metadata = TestModelMetadataProvider
+                .CreateDefaultProvider()
+                .GetMetadataForType(typeof(Person));
             var strategy = DefaultComplexObjectValidationStrategy.Instance;
 
             // Act
@@ -47,7 +44,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     Assert.Equal("prefix.Name", entry.Key);
                     Assert.Equal("Joey", entry.Model);
                     Assert.Same(metadata.Properties["Name"], entry.Metadata);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -55,7 +53,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             Person model = null;
-            var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(Person));
+            var metadata = TestModelMetadataProvider
+                .CreateDefaultProvider()
+                .GetMetadataForType(typeof(Person));
             var strategy = DefaultComplexObjectValidationStrategy.Instance;
 
             // Act
@@ -81,7 +81,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     Assert.Equal("prefix.Name", entry.Key);
                     Assert.Null(entry.Model);
                     Assert.Same(metadata.Properties["Name"], entry.Metadata);
-                });
+                }
+            );
         }
 
         [Fact]
@@ -89,7 +90,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
         {
             // Arrange
             var model = new LazyPerson(input: null);
-            var metadata = TestModelMetadataProvider.CreateDefaultProvider().GetMetadataForType(typeof(LazyPerson));
+            var metadata = TestModelMetadataProvider
+                .CreateDefaultProvider()
+                .GetMetadataForType(typeof(LazyPerson));
             var strategy = DefaultComplexObjectValidationStrategy.Instance;
 
             // Act
@@ -116,7 +119,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
                     Assert.Equal("prefix.Name", entry.Key);
                     Assert.Throws<NullReferenceException>(() => entry.Model);
                     Assert.Same(metadata.Properties["Name"], entry.Metadata);
-                });
+                }
+            );
         }
 
         private List<ValidationEntry> BufferEntries(IEnumerator<ValidationEntry> enumerator)

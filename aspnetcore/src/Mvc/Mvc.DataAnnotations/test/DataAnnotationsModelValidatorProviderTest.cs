@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 {
     public class DataAnnotationsModelValidatorProviderTest
     {
-        private readonly IModelMetadataProvider _metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
+        private readonly IModelMetadataProvider _metadataProvider =
+            TestModelMetadataProvider.CreateDefaultProvider();
 
         [Fact]
         public void CreateValidators_ReturnsValidatorForIValidatableObject()
@@ -24,11 +25,15 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = new DataAnnotationsModelValidatorProvider(
                 new ValidationAttributeAdapterProvider(),
                 Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                stringLocalizerFactory: null);
+                stringLocalizerFactory: null
+            );
             var mockValidatable = Mock.Of<IValidatableObject>();
             var metadata = _metadataProvider.GetMetadataForType(mockValidatable.GetType());
 
-            var providerContext = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
+            var providerContext = new ModelValidatorProviderContext(
+                metadata,
+                GetValidatorItems(metadata)
+            );
 
             // Act
             provider.CreateValidators(providerContext);
@@ -44,20 +49,29 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = new DataAnnotationsModelValidatorProvider(
                 new ValidationAttributeAdapterProvider(),
                 Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                stringLocalizerFactory: null);
+                stringLocalizerFactory: null
+            );
             var metadata = _metadataProvider.GetMetadataForProperty(
                 typeof(ClassWithProperty),
-                "PropertyWithMultipleValidationAttributes");
+                "PropertyWithMultipleValidationAttributes"
+            );
 
-            var providerContext = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
+            var providerContext = new ModelValidatorProviderContext(
+                metadata,
+                GetValidatorItems(metadata)
+            );
 
             // Act
             provider.CreateValidators(providerContext);
 
             // Assert
             Assert.Equal(4, providerContext.Results.Count);
-            Assert.IsAssignableFrom<RequiredAttribute>(((DataAnnotationsModelValidator)providerContext.Results[0].Validator).Attribute);
-            Assert.IsAssignableFrom<RequiredAttribute>(((DataAnnotationsModelValidator)providerContext.Results[1].Validator).Attribute);
+            Assert.IsAssignableFrom<RequiredAttribute>(
+                ((DataAnnotationsModelValidator)providerContext.Results[0].Validator).Attribute
+            );
+            Assert.IsAssignableFrom<RequiredAttribute>(
+                ((DataAnnotationsModelValidator)providerContext.Results[1].Validator).Attribute
+            );
         }
 
         [Fact]
@@ -67,10 +81,16 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = new DataAnnotationsModelValidatorProvider(
                 new ValidationAttributeAdapterProvider(),
                 Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                stringLocalizerFactory: null);
-            var metadata = _metadataProvider.GetMetadataForType(typeof(DummyClassWithDummyValidationAttribute));
+                stringLocalizerFactory: null
+            );
+            var metadata = _metadataProvider.GetMetadataForType(
+                typeof(DummyClassWithDummyValidationAttribute)
+            );
 
-            var providerContext = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
+            var providerContext = new ModelValidatorProviderContext(
+                metadata,
+                GetValidatorItems(metadata)
+            );
 
             // Act
             provider.CreateValidators(providerContext);
@@ -98,11 +118,15 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = new DataAnnotationsModelValidatorProvider(
                 new ValidationAttributeAdapterProvider(),
                 Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                stringLocalizerFactory: null);
+                stringLocalizerFactory: null
+            );
             var mockValidatable = new Mock<IValidatableObject>();
             var metadata = _metadataProvider.GetMetadataForType(mockValidatable.Object.GetType());
 
-            var providerContext = new ModelValidatorProviderContext(metadata, GetValidatorItems(metadata));
+            var providerContext = new ModelValidatorProviderContext(
+                metadata,
+                GetValidatorItems(metadata)
+            );
 
             // Act
             provider.CreateValidators(providerContext);
@@ -130,7 +154,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var provider = GetProvider();
-            var attributes = new object[] { new BindNeverAttribute(), new DummyValidationAttribute() };
+            var attributes = new object[]
+            {
+                new BindNeverAttribute(),
+                new DummyValidationAttribute()
+            };
 
             // Act
             var result = provider.HasValidators(typeof(object), attributes);
@@ -158,7 +186,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             return new DataAnnotationsModelValidatorProvider(
                 new ValidationAttributeAdapterProvider(),
                 Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                stringLocalizerFactory: null);
+                stringLocalizerFactory: null
+            );
         }
 
         private IList<ValidatorItem> GetValidatorItems(ModelMetadata metadata)

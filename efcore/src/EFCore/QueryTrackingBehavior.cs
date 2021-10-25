@@ -16,7 +16,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     <see cref="DbContext.SaveChanges()" />.
         /// </summary>
         TrackAll = 0,
-
         /// <summary>
         ///     <para>
         ///         The change tracker will not track any of the entities that are returned from a LINQ query. If the
@@ -35,7 +34,6 @@ namespace Microsoft.EntityFrameworkCore
         ///     </para>
         /// </summary>
         NoTracking,
-
         /// <summary>
         ///     <para>
         ///         The change tracker will not track any of the entities that are returned from a LINQ query. If the

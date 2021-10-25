@@ -70,7 +70,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task Execute_ReturnsContentPath_WhenItDoesNotStartWithTilde(
             string appRoot,
             string contentPath,
-            string expectedPath)
+            string expectedPath
+        )
         {
             // Arrange
             var httpContext = GetHttpContext(appRoot);
@@ -82,7 +83,10 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             // Verifying if Redirect was called with the specific Url and parameter flag.
-            Assert.Equal(expectedPath, httpContext.Response.Headers[HeaderNames.Location].ToString());
+            Assert.Equal(
+                expectedPath,
+                httpContext.Response.Headers[HeaderNames.Location].ToString()
+            );
             Assert.Equal(StatusCodes.Status302Found, httpContext.Response.StatusCode);
         }
 
@@ -95,7 +99,8 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task Execute_ReturnsAppRelativePath_WhenItStartsWithTilde(
             string appRoot,
             string contentPath,
-            string expectedPath)
+            string expectedPath
+        )
         {
             // Arrange
             var httpContext = GetHttpContext(appRoot);
@@ -107,7 +112,10 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             // Verifying if Redirect was called with the specific Url and parameter flag.
-            Assert.Equal(expectedPath, httpContext.Response.Headers[HeaderNames.Location].ToString());
+            Assert.Equal(
+                expectedPath,
+                httpContext.Response.Headers[HeaderNames.Location].ToString()
+            );
             Assert.Equal(StatusCodes.Status302Found, httpContext.Response.StatusCode);
         }
 
@@ -116,22 +124,22 @@ namespace Microsoft.AspNetCore.Mvc
             var routeData = new RouteData();
             routeData.Routers.Add(new Mock<IRouter>().Object);
 
-            return new ActionContext(httpContext,
-                                    routeData,
-                                    new ActionDescriptor());
+            return new ActionContext(httpContext, routeData, new ActionDescriptor());
         }
 
         private static IServiceProvider GetServiceProvider()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton<IActionResultExecutor<RedirectResult>, RedirectResultExecutor>();
+            serviceCollection.AddSingleton<
+                IActionResultExecutor<RedirectResult>,
+                RedirectResultExecutor
+            >();
             serviceCollection.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
             serviceCollection.AddTransient<ILoggerFactory, LoggerFactory>();
             return serviceCollection.BuildServiceProvider();
         }
 
-        private static HttpContext GetHttpContext(
-            string appRoot)
+        private static HttpContext GetHttpContext(string appRoot)
         {
             var httpContext = new DefaultHttpContext();
             httpContext.RequestServices = GetServiceProvider();

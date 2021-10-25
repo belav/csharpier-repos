@@ -40,13 +40,17 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
                 return null;
             }
 
-            return CreateAuthenticatedEncryptorInstance(descriptor.MasterKey, descriptor.Configuration);
+            return CreateAuthenticatedEncryptorInstance(
+                descriptor.MasterKey,
+                descriptor.Configuration
+            );
         }
 
         [return: NotNullIfNotNull("authenticatedConfiguration")]
         internal IAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
             ISecret secret,
-            AuthenticatedEncryptorConfiguration? authenticatedConfiguration)
+            AuthenticatedEncryptorConfiguration? authenticatedConfiguration
+        )
         {
             if (authenticatedConfiguration == null)
             {
@@ -56,23 +60,34 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             if (IsGcmAlgorithm(authenticatedConfiguration.EncryptionAlgorithm))
             {
 #if NETCOREAPP
-                return new AesGcmAuthenticatedEncryptor(secret, GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm) / 8);
+                return new AesGcmAuthenticatedEncryptor(
+                    secret,
+                    GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm) / 8
+                );
 #else
                 // GCM requires CNG, and CNG is only supported on Windows.
                 if (!OSVersionUtil.IsWindows())
                 {
-                    throw new PlatformNotSupportedException(Resources.Platform_WindowsRequiredForGcm);
+                    throw new PlatformNotSupportedException(
+                        Resources.Platform_WindowsRequiredForGcm
+                    );
                 }
 
                 Debug.Assert(RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
 
                 var configuration = new CngGcmAuthenticatedEncryptorConfiguration()
                 {
-                    EncryptionAlgorithm = GetBCryptAlgorithmNameFromEncryptionAlgorithm(authenticatedConfiguration.EncryptionAlgorithm),
-                    EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm)
+                    EncryptionAlgorithm = GetBCryptAlgorithmNameFromEncryptionAlgorithm(
+                        authenticatedConfiguration.EncryptionAlgorithm
+                    ),
+                    EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(
+                        authenticatedConfiguration.EncryptionAlgorithm
+                    )
                 };
 
-                return new CngGcmAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(secret, configuration);
+                return new CngGcmAuthenticatedEncryptorFactory(
+                    _loggerFactory
+                ).CreateAuthenticatedEncryptorInstance(secret, configuration);
 #endif
             }
             else
@@ -83,31 +98,50 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
                     // CNG preferred over managed implementations if running on Windows
                     var configuration = new CngCbcAuthenticatedEncryptorConfiguration()
                     {
-                        EncryptionAlgorithm = GetBCryptAlgorithmNameFromEncryptionAlgorithm(authenticatedConfiguration.EncryptionAlgorithm),
-                        EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm),
-                        HashAlgorithm = GetBCryptAlgorithmNameFromValidationAlgorithm(authenticatedConfiguration.ValidationAlgorithm)
+                        EncryptionAlgorithm = GetBCryptAlgorithmNameFromEncryptionAlgorithm(
+                            authenticatedConfiguration.EncryptionAlgorithm
+                        ),
+                        EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(
+                            authenticatedConfiguration.EncryptionAlgorithm
+                        ),
+                        HashAlgorithm = GetBCryptAlgorithmNameFromValidationAlgorithm(
+                            authenticatedConfiguration.ValidationAlgorithm
+                        )
                     };
 
-                    return new CngCbcAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(secret, configuration);
+                    return new CngCbcAuthenticatedEncryptorFactory(
+                        _loggerFactory
+                    ).CreateAuthenticatedEncryptorInstance(secret, configuration);
                 }
                 else
                 {
                     // Use managed implementations as a fallback
                     var configuration = new ManagedAuthenticatedEncryptorConfiguration()
                     {
-                        EncryptionAlgorithmType = GetManagedTypeFromEncryptionAlgorithm(authenticatedConfiguration.EncryptionAlgorithm),
-                        EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm),
-                        ValidationAlgorithmType = GetManagedTypeFromValidationAlgorithm(authenticatedConfiguration.ValidationAlgorithm)
+                        EncryptionAlgorithmType = GetManagedTypeFromEncryptionAlgorithm(
+                            authenticatedConfiguration.EncryptionAlgorithm
+                        ),
+                        EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(
+                            authenticatedConfiguration.EncryptionAlgorithm
+                        ),
+                        ValidationAlgorithmType = GetManagedTypeFromValidationAlgorithm(
+                            authenticatedConfiguration.ValidationAlgorithm
+                        )
                     };
 
-                    return new ManagedAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(secret, configuration);
+                    return new ManagedAuthenticatedEncryptorFactory(
+                        _loggerFactory
+                    ).CreateAuthenticatedEncryptorInstance(secret, configuration);
                 }
             }
         }
 
         internal static bool IsGcmAlgorithm(EncryptionAlgorithm algorithm)
         {
-            return (EncryptionAlgorithm.AES_128_GCM <= algorithm && algorithm <= EncryptionAlgorithm.AES_256_GCM);
+            return (
+                EncryptionAlgorithm.AES_128_GCM <= algorithm
+                && algorithm <= EncryptionAlgorithm.AES_256_GCM
+            );
         }
 
         private static int GetAlgorithmKeySizeInBits(EncryptionAlgorithm algorithm)
@@ -131,7 +165,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             }
         }
 
-        private static string GetBCryptAlgorithmNameFromEncryptionAlgorithm(EncryptionAlgorithm algorithm)
+        private static string GetBCryptAlgorithmNameFromEncryptionAlgorithm(
+            EncryptionAlgorithm algorithm
+        )
         {
             switch (algorithm)
             {
@@ -148,7 +184,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption
             }
         }
 
-        private static string GetBCryptAlgorithmNameFromValidationAlgorithm(ValidationAlgorithm algorithm)
+        private static string GetBCryptAlgorithmNameFromValidationAlgorithm(
+            ValidationAlgorithm algorithm
+        )
         {
             switch (algorithm)
             {

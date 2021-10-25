@@ -15,10 +15,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             // Arrange
             var node = new SectionIntermediateNode()
             {
-                Children =
-                {
-                    new CSharpExpressionIntermediateNode(),
-                },
+                Children = { new CSharpExpressionIntermediateNode(), },
                 SectionName = "MySection"
             };
 
@@ -33,7 +30,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Extensions
             extension.WriteSection(context, node);
 
             // Assert
-            var expected = @"CreateSection(""MySection"", async(__razor_section_writer) => {
+            var expected =
+                @"CreateSection(""MySection"", async(__razor_section_writer) => {
     Render Children
 }
 );

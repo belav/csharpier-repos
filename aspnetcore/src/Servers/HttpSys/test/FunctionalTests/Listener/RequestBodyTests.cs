@@ -27,9 +27,13 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
 
                 Assert.False(server.Options.AllowSynchronousIO);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 byte[] input = new byte[100];
-                Assert.Throws<InvalidOperationException>(() => context.Request.Body.Read(input, 0, input.Length));
+                Assert.Throws<InvalidOperationException>(
+                    () => context.Request.Body.Read(input, 0, input.Length)
+                );
 
                 context.AllowSynchronousIO = true;
 
@@ -51,7 +55,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 Task<string> responseTask = SendRequestAsync(address, "Hello World");
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
 
                 byte[] input = new byte[10];
                 var cts = new CancellationTokenSource();
@@ -76,7 +82,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 Task<string> responseTask = SendRequestAsync(address, content);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 byte[] input = new byte[10];
                 var cts = new CancellationTokenSource();
                 int read = await context.Request.Body.ReadAsync(input, 0, input.Length, cts.Token);
@@ -100,7 +108,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 Task<string> responseTask = SendRequestAsync(address, content);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 byte[] input = new byte[10];
                 var cts = new CancellationTokenSource();
                 cts.CancelAfter(TimeSpan.FromSeconds(5));
@@ -125,7 +135,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 Task<string> responseTask = SendRequestAsync(address, content);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 byte[] input = new byte[10];
                 var cts = new CancellationTokenSource();
                 int read = await context.Request.Body.ReadAsync(input, 0, input.Length, cts.Token);
@@ -150,7 +162,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 Task<string> responseTask = SendRequestAsync(address, content);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 byte[] input = new byte[10];
                 var cts = new CancellationTokenSource();
                 int read = await context.Request.Body.ReadAsync(input, 0, input.Length, cts.Token);
@@ -178,18 +192,35 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 var client = new HttpClient();
                 var responseTask = client.PostAsync(address, content);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 byte[] input = new byte[10];
-                int read = await context.Request.Body.ReadAsync(input, 0, input.Length, context.DisconnectToken);
+                int read = await context.Request.Body.ReadAsync(
+                    input,
+                    0,
+                    input.Length,
+                    context.DisconnectToken
+                );
                 Assert.False(context.DisconnectToken.IsCancellationRequested);
                 // The client should timeout and disconnect, making this read fail.
-                var assertTask = Assert.ThrowsAsync<IOException>(async () => await context.Request.Body.ReadAsync(input, 0, input.Length, context.DisconnectToken));
+                var assertTask = Assert.ThrowsAsync<IOException>(
+                    async () =>
+                        await context.Request.Body.ReadAsync(
+                            input,
+                            0,
+                            input.Length,
+                            context.DisconnectToken
+                        )
+                );
                 client.CancelPendingRequests();
                 await assertTask;
                 content.Block.Release();
                 context.Dispose();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await responseTask);
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(
+                    async () => await responseTask
+                );
             }
         }
 
@@ -218,7 +249,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
 
             public SemaphoreSlim Block { get; private set; }
 
-            protected async override Task SerializeToStreamAsync(Stream stream, TransportContext context)
+            protected async override Task SerializeToStreamAsync(
+                Stream stream,
+                TransportContext context
+            )
             {
                 await stream.WriteAsync(new byte[5], 0, 5);
                 await stream.FlushAsync();

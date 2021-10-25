@@ -23,16 +23,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
     public class InMemoryTransportBenchmark
     {
         private const string _plaintextExpectedResponse =
-            "HTTP/1.1 200 OK\r\n" +
-            "Date: Fri, 02 Mar 2018 18:37:05 GMT\r\n" +
-            "Content-Type: text/plain\r\n" +
-            "Server: Kestrel\r\n" +
-            "Content-Length: 13\r\n" +
-            "\r\n" +
-            "Hello, World!";
+            "HTTP/1.1 200 OK\r\n"
+            + "Date: Fri, 02 Mar 2018 18:37:05 GMT\r\n"
+            + "Content-Type: text/plain\r\n"
+            + "Server: Kestrel\r\n"
+            + "Content-Length: 13\r\n"
+            + "\r\n"
+            + "Hello, World!";
 
-        private static readonly string _plaintextPipelinedExpectedResponse =
-            string.Concat(Enumerable.Repeat(_plaintextExpectedResponse, RequestParsingData.Pipelining));
+        private static readonly string _plaintextPipelinedExpectedResponse = string.Concat(
+            Enumerable.Repeat(_plaintextExpectedResponse, RequestParsingData.Pipelining)
+        );
 
         private IHost _host;
         private InMemoryConnection _connection;
@@ -43,17 +44,21 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             var transportFactory = new InMemoryTransportFactory(connectionsPerEndPoint: 1);
 
             _host = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder
-                        // Prevent VS from attaching to hosting startup which could impact results
-                        .UseSetting("preventHostingStartup", "true")
-                        .UseKestrel()
-                        // Bind to a single non-HTTPS endpoint
-                        .UseUrls("http://127.0.0.1:5000")
-                        .Configure(app => app.UseMiddleware<PlaintextMiddleware>());
-                })
-                .ConfigureServices(services => services.AddSingleton<IConnectionListenerFactory>(transportFactory))
+                .ConfigureWebHost(
+                    webHostBuilder =>
+                    {
+                        webHostBuilder
+                            // Prevent VS from attaching to hosting startup which could impact results
+                            .UseSetting("preventHostingStartup", "true")
+                            .UseKestrel()
+                            // Bind to a single non-HTTPS endpoint
+                            .UseUrls("http://127.0.0.1:5000")
+                            .Configure(app => app.UseMiddleware<PlaintextMiddleware>());
+                    }
+                )
+                .ConfigureServices(
+                    services => services.AddSingleton<IConnectionListenerFactory>(transportFactory)
+                )
                 .Build();
 
             _host.Start();
@@ -61,23 +66,45 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             // Ensure there is a single endpoint and single connection
             _connection = transportFactory.Connections.Values.Single().Single();
 
-            ValidateResponseAsync(RequestParsingData.PlaintextTechEmpowerRequest, _plaintextExpectedResponse).Wait();
-            ValidateResponseAsync(RequestParsingData.PlaintextTechEmpowerPipelinedRequests, _plaintextPipelinedExpectedResponse).Wait();
+            ValidateResponseAsync(
+                    RequestParsingData.PlaintextTechEmpowerRequest,
+                    _plaintextExpectedResponse
+                )
+                .Wait();
+            ValidateResponseAsync(
+                    RequestParsingData.PlaintextTechEmpowerPipelinedRequests,
+                    _plaintextPipelinedExpectedResponse
+                )
+                .Wait();
         }
 
         private async Task ValidateResponseAsync(byte[] request, string expectedResponse)
         {
             await _connection.SendRequestAsync(request);
-            var response = Encoding.ASCII.GetString(await _connection.GetResponseAsync(expectedResponse.Length));
+            var response = Encoding.ASCII.GetString(
+                await _connection.GetResponseAsync(expectedResponse.Length)
+            );
 
             // Exclude date header since the value changes on every request
-            var expectedResponseLines = expectedResponse.Split("\r\n").Where(s => !s.StartsWith("Date:", StringComparison.Ordinal));
-            var responseLines = response.Split("\r\n").Where(s => !s.StartsWith("Date:", StringComparison.Ordinal));
+            var expectedResponseLines = expectedResponse
+                .Split("\r\n")
+                .Where(s => !s.StartsWith("Date:", StringComparison.Ordinal));
+            var responseLines = response
+                .Split("\r\n")
+                .Where(s => !s.StartsWith("Date:", StringComparison.Ordinal));
 
             if (!Enumerable.SequenceEqual(expectedResponseLines, responseLines))
             {
-                throw new InvalidOperationException(string.Join(Environment.NewLine,
-                    "Invalid response", "Expected:", expectedResponse, "Actual:", response));
+                throw new InvalidOperationException(
+                    string.Join(
+                        Environment.NewLine,
+                        "Invalid response",
+                        "Expected:",
+                        expectedResponse,
+                        "Actual:",
+                        response
+                    )
+                );
             }
         }
 
@@ -97,7 +124,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         [Benchmark(OperationsPerInvoke = RequestParsingData.Pipelining)]
         public async Task PlaintextPipelined()
         {
-            await _connection.SendRequestAsync(RequestParsingData.PlaintextTechEmpowerPipelinedRequests);
+            await _connection.SendRequestAsync(
+                RequestParsingData.PlaintextTechEmpowerPipelinedRequests
+            );
             await _connection.ReadResponseAsync(_plaintextPipelinedExpectedResponse.Length);
         }
 
@@ -108,14 +137,18 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             private readonly Dictionary<EndPoint, IReadOnlyList<InMemoryConnection>> _connections =
                 new Dictionary<EndPoint, IReadOnlyList<InMemoryConnection>>();
 
-            public IReadOnlyDictionary<EndPoint, IReadOnlyList<InMemoryConnection>> Connections => _connections;
+            public IReadOnlyDictionary<EndPoint, IReadOnlyList<InMemoryConnection>> Connections =>
+                _connections;
 
             public InMemoryTransportFactory(int connectionsPerEndPoint)
             {
                 _connectionsPerEndPoint = connectionsPerEndPoint;
             }
 
-            public ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+            public ValueTask<IConnectionListener> BindAsync(
+                EndPoint endpoint,
+                CancellationToken cancellationToken = default
+            )
             {
                 var connections = new InMemoryConnection[_connectionsPerEndPoint];
                 for (var i = 0; i < _connectionsPerEndPoint; i++)
@@ -125,17 +158,25 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
                 _connections.Add(endpoint, connections);
 
-                return new ValueTask<IConnectionListener>(new InMemoryTransport(endpoint, connections));
+                return new ValueTask<IConnectionListener>(
+                    new InMemoryTransport(endpoint, connections)
+                );
             }
         }
 
         internal class InMemoryTransport : IConnectionListener
         {
             private readonly IReadOnlyList<InMemoryConnection> _connections;
-            private readonly TaskCompletionSource<ConnectionContext> _tcs = new TaskCompletionSource<ConnectionContext>(TaskCreationOptions.RunContinuationsAsynchronously);
+            private readonly TaskCompletionSource<ConnectionContext> _tcs =
+                new TaskCompletionSource<ConnectionContext>(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
             private int _acceptedConnections;
 
-            public InMemoryTransport(EndPoint endpoint, IReadOnlyList<InMemoryConnection> connections)
+            public InMemoryTransport(
+                EndPoint endpoint,
+                IReadOnlyList<InMemoryConnection> connections
+            )
             {
                 EndPoint = endpoint;
                 _connections = connections;
@@ -143,7 +184,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
             public EndPoint EndPoint { get; }
 
-            public ValueTask<ConnectionContext> AcceptAsync(CancellationToken cancellationToken = default)
+            public ValueTask<ConnectionContext> AcceptAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 if (_acceptedConnections < _connections.Count)
                 {
@@ -237,7 +280,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         public class PlaintextMiddleware
         {
             private static readonly PathString _path = new PathString("/plaintext");
-            private static readonly byte[] _helloWorldPayload = Encoding.UTF8.GetBytes("Hello, World!");
+            private static readonly byte[] _helloWorldPayload = Encoding.UTF8.GetBytes(
+                "Hello, World!"
+            );
 
             private readonly RequestDelegate _next;
 

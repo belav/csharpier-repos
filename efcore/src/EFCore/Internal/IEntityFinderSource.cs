@@ -32,6 +32,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
             IStateManager stateManager,
             IDbSetSource setSource,
             IDbSetCache setCache,
-            IEntityType type);
+            IEntityType type
+        );
     }
 }

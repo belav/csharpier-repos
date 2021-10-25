@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // Bug#94878 Problem with the Large Object Allocator
-// Repro test from MStanton 
+// Repro test from MStanton
 
 using System;
 using System.Threading;
@@ -42,7 +42,10 @@ internal class Mainy
             Threads = Int64.Parse(args[0]);
         }
 
-        TestLibrary.Logging.WriteLine("LargeObjectAlloc started with {0} threads. Control-C to exit", Threads.ToString());
+        TestLibrary.Logging.WriteLine(
+            "LargeObjectAlloc started with {0} threads. Control-C to exit",
+            Threads.ToString()
+        );
 
         Thread myThread = null;
         for (long i = 0; i < Threads; i++)
@@ -54,7 +57,6 @@ internal class Mainy
 
         TestLibrary.Logging.WriteLine("All threads started");
         myThread.Join();
-
 
         TestLibrary.Logging.WriteLine("Test Passed");
         return 100;

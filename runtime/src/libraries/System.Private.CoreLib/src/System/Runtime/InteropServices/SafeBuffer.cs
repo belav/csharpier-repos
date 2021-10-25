@@ -90,10 +90,16 @@ namespace System.Runtime.InteropServices
         public void Initialize(ulong numBytes)
         {
             if (IntPtr.Size == 4 && numBytes > uint.MaxValue)
-                throw new ArgumentOutOfRangeException(nameof(numBytes), SR.ArgumentOutOfRange_AddressSpace);
+                throw new ArgumentOutOfRangeException(
+                    nameof(numBytes),
+                    SR.ArgumentOutOfRange_AddressSpace
+                );
 
             if (numBytes >= (ulong)Uninitialized)
-                throw new ArgumentOutOfRangeException(nameof(numBytes), SR.ArgumentOutOfRange_UIntPtrMax);
+                throw new ArgumentOutOfRangeException(
+                    nameof(numBytes),
+                    SR.ArgumentOutOfRange_UIntPtrMax
+                );
 
             _numBytes = (nuint)numBytes;
         }
@@ -204,15 +210,20 @@ namespace System.Runtime.InteropServices
         }
 
         [CLSCompliant(false)]
-        public void ReadArray<T>(ulong byteOffset, T[] array, int index, int count)
-            where T : struct
+        public void ReadArray<T>(ulong byteOffset, T[] array, int index, int count) where T : struct
         {
             if (array == null)
                 throw new ArgumentNullException(nameof(array), SR.ArgumentNull_Buffer);
             if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (array.Length - index < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -220,8 +231,7 @@ namespace System.Runtime.InteropServices
         }
 
         [CLSCompliant(false)]
-        public void ReadSpan<T>(ulong byteOffset, Span<T> buffer)
-            where T : struct
+        public void ReadSpan<T>(ulong byteOffset, Span<T> buffer) where T : struct
         {
             if (_numBytes == Uninitialized)
                 throw NotInitialized();
@@ -237,7 +247,11 @@ namespace System.Runtime.InteropServices
 
                 ref T structure = ref MemoryMarshal.GetReference(buffer);
                 for (int i = 0; i < buffer.Length; i++)
-                    Buffer.Memmove(ref Unsafe.Add(ref structure, i), ref Unsafe.AsRef<T>(ptr + alignedSizeofT * i), 1);
+                    Buffer.Memmove(
+                        ref Unsafe.Add(ref structure, i),
+                        ref Unsafe.AsRef<T>(ptr + alignedSizeofT * i),
+                        1
+                    );
             }
             finally
             {
@@ -286,9 +300,15 @@ namespace System.Runtime.InteropServices
             if (array == null)
                 throw new ArgumentNullException(nameof(array), SR.ArgumentNull_Buffer);
             if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (array.Length - index < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -296,8 +316,7 @@ namespace System.Runtime.InteropServices
         }
 
         [CLSCompliant(false)]
-        public void WriteSpan<T>(ulong byteOffset, ReadOnlySpan<T> data)
-            where T : struct
+        public void WriteSpan<T>(ulong byteOffset, ReadOnlySpan<T> data) where T : struct
         {
             if (_numBytes == Uninitialized)
                 throw NotInitialized();
@@ -313,7 +332,11 @@ namespace System.Runtime.InteropServices
 
                 ref T structure = ref MemoryMarshal.GetReference(data);
                 for (int i = 0; i < data.Length; i++)
-                    Buffer.Memmove(ref Unsafe.AsRef<T>(ptr + alignedSizeofT * i), ref Unsafe.Add(ref structure, i), 1);
+                    Buffer.Memmove(
+                        ref Unsafe.AsRef<T>(ptr + alignedSizeofT * i),
+                        ref Unsafe.Add(ref structure, i),
+                        1
+                    );
             }
             finally
             {

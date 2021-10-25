@@ -15,13 +15,20 @@ namespace Microsoft.AspNetCore.Hosting
         public async Task DisposingHostCallsDisposeAsyncOnProvider()
         {
             var providerFactory = new AsyncServiceProviderFactory();
-            using (var host = CreateBuilder()
-                .UseFakeServer()
-                .ConfigureServices((context, services) =>
-                    services.Add(ServiceDescriptor.Singleton<IServiceProviderFactory<IServiceCollection>>(providerFactory)
-                    ))
-                .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
-                .Build())
+            using (
+                var host = CreateBuilder()
+                    .UseFakeServer()
+                    .ConfigureServices(
+                        (context, services) =>
+                            services.Add(
+                                ServiceDescriptor.Singleton<
+                                    IServiceProviderFactory<IServiceCollection>
+                                >(providerFactory)
+                            )
+                    )
+                    .UseStartup("Microsoft.AspNetCore.Hosting.Tests")
+                    .Build()
+            )
             {
                 await host.StartAsync();
 
@@ -29,23 +36,32 @@ namespace Microsoft.AspNetCore.Hosting
 
                 await host.StopAsync();
 
-                Assert.All(providerFactory.Providers, provider => {
-                    Assert.False(provider.DisposeCalled);
-                    Assert.False(provider.DisposeAsyncCalled);
-                });
+                Assert.All(
+                    providerFactory.Providers,
+                    provider =>
+                    {
+                        Assert.False(provider.DisposeCalled);
+                        Assert.False(provider.DisposeAsyncCalled);
+                    }
+                );
 
                 host.Dispose();
 
-                Assert.All(providerFactory.Providers, provider => {
-                    Assert.False(provider.DisposeCalled);
-                    Assert.True(provider.DisposeAsyncCalled);
-                });
+                Assert.All(
+                    providerFactory.Providers,
+                    provider =>
+                    {
+                        Assert.False(provider.DisposeCalled);
+                        Assert.True(provider.DisposeAsyncCalled);
+                    }
+                );
             }
         }
 
         private class AsyncServiceProviderFactory : IServiceProviderFactory<IServiceCollection>
         {
-            public List<AsyncDisposableServiceProvider> Providers { get; } = new List<AsyncDisposableServiceProvider>();
+            public List<AsyncDisposableServiceProvider> Providers { get; } =
+                new List<AsyncDisposableServiceProvider>();
 
             public IServiceCollection CreateBuilder(IServiceCollection services)
             {
@@ -54,13 +70,18 @@ namespace Microsoft.AspNetCore.Hosting
 
             public IServiceProvider CreateServiceProvider(IServiceCollection containerBuilder)
             {
-                var provider = new AsyncDisposableServiceProvider(containerBuilder.BuildServiceProvider());
+                var provider = new AsyncDisposableServiceProvider(
+                    containerBuilder.BuildServiceProvider()
+                );
                 Providers.Add(provider);
                 return provider;
             }
         }
 
-        private class AsyncDisposableServiceProvider : IServiceProvider, IDisposable, IAsyncDisposable
+        private class AsyncDisposableServiceProvider
+            : IServiceProvider,
+              IDisposable,
+              IAsyncDisposable
         {
             private readonly ServiceProvider _serviceProvider;
 
@@ -89,5 +110,4 @@ namespace Microsoft.AspNetCore.Hosting
             }
         }
     }
-
 }

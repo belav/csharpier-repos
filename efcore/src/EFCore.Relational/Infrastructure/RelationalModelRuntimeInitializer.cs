@@ -31,8 +31,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         /// <param name="relationalDependencies"> The relational dependencies to use. </param>
         public RelationalModelRuntimeInitializer(
             ModelRuntimeInitializerDependencies dependencies,
-            RelationalModelRuntimeInitializerDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalModelRuntimeInitializerDependencies relationalDependencies
+        ) : base(dependencies)
         {
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
@@ -56,7 +56,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             if (preValidation)
             {
-                model.AddRuntimeAnnotation(RelationalAnnotationNames.ModelDependencies, RelationalDependencies);
+                model.AddRuntimeAnnotation(
+                    RelationalAnnotationNames.ModelDependencies,
+                    RelationalDependencies
+                );
             }
             else
             {

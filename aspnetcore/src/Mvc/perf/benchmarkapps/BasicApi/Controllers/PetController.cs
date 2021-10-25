@@ -25,7 +25,7 @@ namespace BasicApi.Controllers
         public BasicApiContext DbContext { get; }
 
         [HttpGet("{id}", Name = "FindPetById")]
-        [ProducesResponseType(typeof(Pet),  StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Pet), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Pet>> FindById(int id)

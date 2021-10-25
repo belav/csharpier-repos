@@ -10,13 +10,8 @@ namespace System.Speech.Synthesis
     {
         #region Constructors
         public FilePrompt(string path, SynthesisMediaType media)
-            : this(new Uri(path, UriKind.Relative), media)
-        {
-        }
-        public FilePrompt(Uri promptFile, SynthesisMediaType media)
-            : base(promptFile, media)
-        {
-        }
+            : this(new Uri(path, UriKind.Relative), media) { }
+        public FilePrompt(Uri promptFile, SynthesisMediaType media) : base(promptFile, media) { }
         #endregion
     }
 }

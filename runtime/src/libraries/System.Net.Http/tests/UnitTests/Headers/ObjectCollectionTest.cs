@@ -18,24 +18,36 @@ namespace System.Net.Http.Tests
             c.Add("value1");
             c.Add("value2");
 
-            Assert.Throws<ArgumentNullException>(() => { c.Add(null); });
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                {
+                    c.Add(null);
+                }
+            );
 
             Assert.Equal(2, c.Count);
             Assert.True(c.Contains("value2"));
             Assert.True(c.Contains("value1"));
 
             // Use custom validator
-            c = new ObjectCollection<string>(item =>
-            {
-                if (item == null)
+            c = new ObjectCollection<string>(
+                item =>
                 {
-                    throw new InvalidOperationException("custom");
+                    if (item == null)
+                    {
+                        throw new InvalidOperationException("custom");
+                    }
                 }
-            });
+            );
 
             c.Add("value1");
 
-            Assert.Throws<InvalidOperationException>(() => { c.Add(null); });
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    c.Add(null);
+                }
+            );
 
             Assert.Equal(1, c.Count);
             Assert.True(c.Contains("value1"));

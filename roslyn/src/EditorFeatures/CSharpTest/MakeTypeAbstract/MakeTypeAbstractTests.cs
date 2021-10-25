@@ -17,51 +17,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
 {
     public class MakeTypeAbstractTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public MakeTypeAbstractTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public MakeTypeAbstractTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpMakeTypeAbstractCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpMakeTypeAbstractCodeFixProvider());
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestMethod()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Foo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 public abstract class Foo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestMethodEnclosingClassWithoutAccessibility()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class Foo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 abstract class Foo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestMethodEnclosingClassDocumentationComment()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 /// <summary>
 /// Some class comment.
 /// </summary>
@@ -69,85 +69,93 @@ public class Foo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 /// <summary>
 /// Some class comment.
 /// </summary>
 public abstract class Foo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestPropertyGetter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Foo
 {
     public abstract object P { [|get|]; }
 }",
-@"
+                @"
 public abstract class Foo
 {
     public abstract object P { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestPropertySetter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Foo
 {
     public abstract object P { [|set|]; }
 }",
-@"
+                @"
 public abstract class Foo
 {
     public abstract object P { set; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestIndexerGetter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Foo
 {
     public abstract object this[object o] { [|get|]; }
 }",
-@"
+                @"
 public abstract class Foo
 {
     public abstract object this[object o] { get; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestIndexerSetter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Foo
 {
     public abstract object this[object o] { [|set|]; }
 }",
-@"
+                @"
 public abstract class Foo
 {
     public abstract object this[object o] { set; }
-}");
+}"
+            );
         }
 
-        [Fact(Skip = "https://github.com/dotnet/roslyn/issues/41654"), Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
+        [
+            Fact(Skip = "https://github.com/dotnet/roslyn/issues/41654"),
+            Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)
+        ]
         public async Task TestPartialClass()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public partial class Foo
 {
     public abstract void [|M|]();
@@ -156,7 +164,7 @@ public partial class Foo
 public partial class Foo
 {
 }",
-@"
+                @"
 public partial abstract class Foo
 {
     public abstract void M();
@@ -164,113 +172,122 @@ public partial abstract class Foo
 
 public partial class Foo
 {
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestEventAdd()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Foo
 {
     public abstract event System.EventHandler E { [|add|]; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestEventRemove()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Foo
 {
     public abstract event System.EventHandler E { [|remove|]; }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestMethodWithBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Foo
 {
     public abstract int [|M|]() => 3;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestPropertyGetterWithArrowBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Foo
 {
     public abstract int [|P|] => 3;
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestPropertyGetterWithBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Foo
 {
     public abstract int P
     {
         [|get|] { return 1; }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestStructNestedInClass()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class C
 {
     public struct S
     {
         public abstract void [|Foo|]();
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestMethodEnclosingClassStatic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public static class Foo
 {
     public abstract void [|M|]();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task TestRecord()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public record Foo
 {
     public abstract void [|M|]();
 }",
-@"
+                @"
 public abstract record Foo
 {
     public abstract void M();
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeTypeAbstract)]
         public async Task FixAll()
         {
             await TestInRegularAndScript1Async(
-@"namespace NS
+                @"namespace NS
 {
     using System;
 
@@ -294,7 +311,7 @@ public abstract record Foo
         }
     }
 }",
-@"namespace NS
+                @"namespace NS
 {
     using System;
 
@@ -317,7 +334,8 @@ public abstract record Foo
             public abstract void M();
         }
     }
-}");
+}"
+            );
         }
     }
 }

@@ -19,7 +19,12 @@ namespace Microsoft.AspNetCore.Analyzers
         public void AnalyzeSymbol(SymbolAnalysisContext context)
         {
             Debug.Assert(context.Symbol.Kind == SymbolKind.NamedType);
-            Debug.Assert(StartupFacts.IsStartupClass(_context.StartupSymbols, (INamedTypeSymbol)context.Symbol));
+            Debug.Assert(
+                StartupFacts.IsStartupClass(
+                    _context.StartupSymbols,
+                    (INamedTypeSymbol)context.Symbol
+                )
+            );
 
             var type = (INamedTypeSymbol)context.Symbol;
 
@@ -29,11 +34,14 @@ namespace Microsoft.AspNetCore.Analyzers
                 {
                     if (serviceItem.UseMethod.Name == "BuildServiceProvider")
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(
-                            StartupAnalyzer.Diagnostics.BuildServiceProviderShouldNotCalledInConfigureServicesMethod,
-                            serviceItem.Operation.Syntax.GetLocation(),
-                            serviceItem.UseMethod.Name,
-                            serviceAnalysis.ConfigureServicesMethod.Name));
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                StartupAnalyzer.Diagnostics.BuildServiceProviderShouldNotCalledInConfigureServicesMethod,
+                                serviceItem.Operation.Syntax.GetLocation(),
+                                serviceItem.UseMethod.Name,
+                                serviceAnalysis.ConfigureServicesMethod.Name
+                            )
+                        );
                     }
                 }
             }

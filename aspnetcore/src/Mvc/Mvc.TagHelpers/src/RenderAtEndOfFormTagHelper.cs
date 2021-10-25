@@ -39,10 +39,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             }
 
             // Push the new FormContext.
-            ViewContext.FormContext = new FormContext
-            {
-                CanRenderAtEndOfForm = true
-            };
+            ViewContext.FormContext = new FormContext { CanRenderAtEndOfForm = true };
         }
 
         /// <inheritdoc />

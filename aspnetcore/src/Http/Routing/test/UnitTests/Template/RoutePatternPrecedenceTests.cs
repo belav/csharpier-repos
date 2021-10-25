@@ -19,7 +19,10 @@ namespace Microsoft.AspNetCore.Routing.Template
             return ComputeRoutePattern(template, RoutePrecedence.ComputeOutbound);
         }
 
-        private static decimal ComputeRoutePattern(string template, Func<RoutePattern, decimal> func)
+        private static decimal ComputeRoutePattern(
+            string template,
+            Func<RoutePattern, decimal> func
+        )
         {
             var parsed = RoutePatternFactory.Parse(template);
             return func(parsed);
@@ -28,14 +31,15 @@ namespace Microsoft.AspNetCore.Routing.Template
         [Fact]
         public void InboundPrecedence_ParameterWithRequiredValue_HasPrecedence()
         {
-            var parameterPrecedence = RoutePatternFactory.Parse(
-                "{controller}").InboundPrecedence;
+            var parameterPrecedence = RoutePatternFactory.Parse("{controller}").InboundPrecedence;
 
-            var requiredValueParameterPrecedence = RoutePatternFactory.Parse(
-                "{controller}",
-                defaults: null,
-                parameterPolicies: null,
-                requiredValues: new { controller = "Home" }).InboundPrecedence;
+            var requiredValueParameterPrecedence =
+                RoutePatternFactory.Parse(
+                    "{controller}",
+                    defaults: null,
+                    parameterPolicies: null,
+                    requiredValues: new { controller = "Home" }
+                ).InboundPrecedence;
 
             Assert.True(requiredValueParameterPrecedence < parameterPrecedence);
         }

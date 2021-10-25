@@ -13,8 +13,14 @@ namespace Microsoft.AspNetCore.Http
     internal sealed class DefaultConnectionInfo : ConnectionInfo
     {
         // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624
-        private readonly static Func<IFeatureCollection, IHttpConnectionFeature> _newHttpConnectionFeature = f => new HttpConnectionFeature();
-        private readonly static Func<IFeatureCollection, ITlsConnectionFeature> _newTlsConnectionFeature = f => new TlsConnectionFeature();
+        private readonly static Func<
+            IFeatureCollection,
+            IHttpConnectionFeature
+        > _newHttpConnectionFeature = f => new HttpConnectionFeature();
+        private readonly static Func<
+            IFeatureCollection,
+            ITlsConnectionFeature
+        > _newTlsConnectionFeature = f => new TlsConnectionFeature();
 
         private FeatureReferences<FeatureInterfaces> _features;
 
@@ -23,7 +29,7 @@ namespace Microsoft.AspNetCore.Http
             Initialize(features);
         }
 
-        public void Initialize( IFeatureCollection features)
+        public void Initialize(IFeatureCollection features)
         {
             _features.Initalize(features);
         }
@@ -41,7 +47,7 @@ namespace Microsoft.AspNetCore.Http
         private IHttpConnectionFeature HttpConnectionFeature =>
             _features.Fetch(ref _features.Cache.Connection, _newHttpConnectionFeature)!;
 
-        private ITlsConnectionFeature TlsConnectionFeature=>
+        private ITlsConnectionFeature TlsConnectionFeature =>
             _features.Fetch(ref _features.Cache.TlsConnection, _newTlsConnectionFeature)!;
 
         /// <inheritdoc />
@@ -81,7 +87,9 @@ namespace Microsoft.AspNetCore.Http
             set { TlsConnectionFeature.ClientCertificate = value; }
         }
 
-        public override Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken = default)
+        public override Task<X509Certificate2?> GetClientCertificateAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             return TlsConnectionFeature.GetClientCertificateAsync(cancellationToken);
         }

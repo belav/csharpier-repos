@@ -12,19 +12,28 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage
     {
         private readonly IHtmlFormElement _removeLoginForm;
 
-        public RemoveExternalLogin(HttpClient client, IHtmlDocument externalLogin, DefaultUIContext context)
-            : base(client, externalLogin, context)
+        public RemoveExternalLogin(
+            HttpClient client,
+            IHtmlDocument externalLogin,
+            DefaultUIContext context
+        ) : base(client, externalLogin, context)
         {
             _removeLoginForm = HtmlAssert.HasForm($"#remove-login-Contoso", externalLogin);
         }
 
-        public async Task<RemoveExternalLogin> RemoveLoginAsync(string loginProvider, string providerKey)
+        public async Task<RemoveExternalLogin> RemoveLoginAsync(
+            string loginProvider,
+            string providerKey
+        )
         {
-            await Client.SendAsync(_removeLoginForm, new Dictionary<string, string>
-            {
-                ["login_LoginProvider"] = loginProvider,
-                ["login_ProviderKey"] = providerKey
-            });
+            await Client.SendAsync(
+                _removeLoginForm,
+                new Dictionary<string, string>
+                {
+                    ["login_LoginProvider"] = loginProvider,
+                    ["login_ProviderKey"] = providerKey
+                }
+            );
 
             return this;
         }

@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         protected abstract int? GetRightmostNameArity(SyntaxNode node);
         protected abstract bool IsParentAnAttribute(SyntaxNode node);
 
-        protected ISymbol? TryGetSymbol(SyntaxNode node, SymbolInfo symbolInfo, SemanticModel semanticModel)
+        protected ISymbol? TryGetSymbol(
+            SyntaxNode node,
+            SymbolInfo symbolInfo,
+            SemanticModel semanticModel
+        )
         {
             var symbol = symbolInfo.Symbol;
 
@@ -32,7 +36,6 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
                         {
                             symbol = firstSymbol;
                         }
-
                         break;
 
                     case CandidateReason.OverloadResolutionFailure:
@@ -41,16 +44,20 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
                         {
                             symbol = firstSymbol;
                         }
-
                         break;
 
                     case CandidateReason.Inaccessible:
                         // If a constructor wasn't accessible, still classify the type if it's accessible.
-                        if (firstSymbol.IsConstructor() && semanticModel.IsAccessible(node.SpanStart, firstSymbol.ContainingType))
+                        if (
+                            firstSymbol.IsConstructor()
+                            && semanticModel.IsAccessible(
+                                node.SpanStart,
+                                firstSymbol.ContainingType
+                            )
+                        )
                         {
                             symbol = firstSymbol;
                         }
-
                         break;
 
                     case CandidateReason.WrongArity:
@@ -58,13 +65,12 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
 
                         if (arity.HasValue && arity.Value == 0)
                         {
-                            // When the user writes something like "IList" we don't want to *not* classify 
+                            // When the user writes something like "IList" we don't want to *not* classify
                             // just because the type bound to "IList<T>".  This is also important for use
                             // cases like "Add-using" where it can be confusing when the using is added for
                             // "using System.Collection.Generic" but then the type name still does not classify.
                             symbol = firstSymbol;
                         }
-
                         break;
                 }
             }
@@ -82,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         protected static void TryClassifyStaticSymbol(
             ISymbol? symbol,
             TextSpan span,
-            ArrayBuilder<ClassifiedSpan> result)
+            ArrayBuilder<ClassifiedSpan> result
+        )
         {
             if (!IsStaticSymbol(symbol))
             {

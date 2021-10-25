@@ -37,7 +37,6 @@ class test
         catch (Exception)
         {
             Console.WriteLine("In catch1");
-
         }
         finally
         {

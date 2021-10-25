@@ -19,11 +19,7 @@ namespace HtmlGenerationWebSite.Controllers
                 Number = 0,
                 HomePage = new Uri("http://www.contoso.com")
             },
-            new Product
-            {
-                ProductName = "Product_1",
-                Number = 1,
-            },
+            new Product { ProductName = "Product_1", Number = 1, },
             new Product
             {
                 ProductName = "Product_2",
@@ -112,10 +108,7 @@ namespace HtmlGenerationWebSite.Controllers
 
         public IActionResult ProductListUsingTagHelpersWithNullModel()
         {
-            var model = new List<Product>
-            {
-                null,
-            };
+            var model = new List<Product> { null, };
 
             return View(nameof(ProductListUsingTagHelpers), model);
         }
@@ -137,12 +130,7 @@ namespace HtmlGenerationWebSite.Controllers
                     OfficeNumber = "1002",
                     Gender = Gender.Female
                 },
-                new Employee
-                {
-                    Name = "EmployeeName_2",
-                    Number = 2,
-                    Remote = true
-                },
+                new Employee { Name = "EmployeeName_2", Number = 2, Remote = true },
             };
 
             // Extra data that should be ignored / not used within a template.
@@ -241,11 +229,13 @@ namespace HtmlGenerationWebSite.Controllers
         public IActionResult ValidationProviderAttribute() => View();
 
         [HttpPost]
-        public IActionResult ValidationProviderAttribute(ValidationProviderAttributeModel model) => View(model);
+        public IActionResult ValidationProviderAttribute(ValidationProviderAttributeModel model) =>
+            View(model);
 
         public IActionResult PartialTagHelperWithoutModel() => View();
 
-        public IActionResult StatusMessage() => View(new StatusMessageModel { Message = "Some status message"});
+        public IActionResult StatusMessage() =>
+            View(new StatusMessageModel { Message = "Some status message" });
 
         public IActionResult NullStatusMessage() => View("StatusMessage", new StatusMessageModel());
     }

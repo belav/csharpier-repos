@@ -25,19 +25,28 @@ namespace Roslyn.Test.Utilities
             // TODO: context.RegisterForAdditionalFileChanges(UpdateContext);
         }
 
-        private static void AddSourceForAdditionalFile(GeneratorExecutionContext context, AdditionalText file)
+        private static void AddSourceForAdditionalFile(
+            GeneratorExecutionContext context,
+            AdditionalText file
+        )
         {
             // We're going to "comment" out the contents of the file when generating this
             var sourceText = file.GetText(context.CancellationToken);
             Contract.ThrowIfNull(sourceText, "Failed to fetch the text of an additional file.");
 
-            var changes = sourceText.Lines.SelectAsArray(l => new TextChange(new TextSpan(l.Start, length: 0), "// "));
+            var changes = sourceText.Lines.SelectAsArray(
+                l => new TextChange(new TextSpan(l.Start, length: 0), "// ")
+            );
             var generatedText = sourceText.WithChanges(changes);
 
             // TODO: remove the generatedText.ToString() when I don't have to specify the encoding
-            context.AddSource(GetGeneratedFileName(file.Path), SourceText.From(generatedText.ToString(), encoding: Encoding.UTF8));
+            context.AddSource(
+                GetGeneratedFileName(file.Path),
+                SourceText.From(generatedText.ToString(), encoding: Encoding.UTF8)
+            );
         }
 
-        private static string GetGeneratedFileName(string path) => $"{Path.GetFileNameWithoutExtension(path)}.generated";
+        private static string GetGeneratedFileName(string path) =>
+            $"{Path.GetFileNameWithoutExtension(path)}.generated";
     }
 }

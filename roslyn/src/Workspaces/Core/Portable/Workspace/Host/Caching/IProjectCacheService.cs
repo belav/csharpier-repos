@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Host
         /// </summary>
         /// <returns>The instance passed in is always returned</returns>
         [return: NotNullIfNotNull("instance")]
-        T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, object owner, T? instance) where T : class;
+        T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, object owner, T? instance)
+            where T : class;
 
         /// <summary>
         /// If caching is enabled for <see cref="ProjectId"/> key, <see cref="ICachedObjectOwner.CachedObject"/>
@@ -46,6 +47,10 @@ namespace Microsoft.CodeAnalysis.Host
         /// </summary>
         /// <returns>The instance passed in is always returned</returns>
         [return: NotNullIfNotNull("instance")]
-        T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, ICachedObjectOwner owner, T? instance) where T : class;
+        T? CacheObjectIfCachingEnabledForKey<T>(
+            ProjectId key,
+            ICachedObjectOwner owner,
+            T? instance
+        ) where T : class;
     }
 }

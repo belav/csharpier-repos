@@ -56,7 +56,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public RuntimeModelDependencies(
             ITypeMappingSource typeMappingSource,
             IConstructorBindingFactory constructorBindingFactory,
-            IParameterBindingFactories parameterBindingFactories)
+            IParameterBindingFactories parameterBindingFactories
+        )
         {
             Check.NotNull(typeMappingSource, nameof(typeMappingSource));
             Check.NotNull(constructorBindingFactory, nameof(constructorBindingFactory));

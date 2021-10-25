@@ -51,8 +51,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalQueryCompilationContextDependencies()
-        {
-        }
+        public RelationalQueryCompilationContextDependencies() { }
     }
 }

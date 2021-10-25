@@ -13,7 +13,14 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
     internal interface IRemoveUnnecessaryImportsService : ILanguageService
     {
-        Task<Document> RemoveUnnecessaryImportsAsync(Document document, CancellationToken cancellationToken);
-        Task<Document> RemoveUnnecessaryImportsAsync(Document fromDocument, Func<SyntaxNode, bool> predicate, CancellationToken cancellationToken);
+        Task<Document> RemoveUnnecessaryImportsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
+        Task<Document> RemoveUnnecessaryImportsAsync(
+            Document fromDocument,
+            Func<SyntaxNode, bool> predicate,
+            CancellationToken cancellationToken
+        );
     }
 }

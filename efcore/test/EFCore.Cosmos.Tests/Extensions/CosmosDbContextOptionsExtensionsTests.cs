@@ -16,16 +16,19 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public void Throws_with_multiple_providers_new_when_no_provider()
         {
-            var options = new DbContextOptionsBuilder()
-                .UseCosmos("serviceEndPoint", "authKeyOrResourceToken", "databaseName")
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options;
+            var options =
+                new DbContextOptionsBuilder()
+                    .UseCosmos("serviceEndPoint", "authKeyOrResourceToken", "databaseName")
+                    .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
 
             var context = new DbContext(options);
 
             Assert.Equal(
-                CoreStrings.MultipleProvidersConfigured("'Microsoft.EntityFrameworkCore.Cosmos', 'Microsoft.EntityFrameworkCore.InMemory'"),
-                Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+                CoreStrings.MultipleProvidersConfigured(
+                    "'Microsoft.EntityFrameworkCore.Cosmos', 'Microsoft.EntityFrameworkCore.InMemory'"
+                ),
+                Assert.Throws<InvalidOperationException>(() => context.Model).Message
+            );
         }
 
         [ConditionalFact]
@@ -36,10 +39,13 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.Region(regionName); });
+                o =>
+                {
+                    o.Region(regionName);
+                }
+            );
 
-            var extension = options
-                .Options.FindExtension<CosmosOptionsExtension>();
+            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
             Assert.Equal(regionName, extension.Region);
         }
@@ -52,10 +58,13 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.Region(regionName); });
+                o =>
+                {
+                    o.Region(regionName);
+                }
+            );
 
-            var extension = options
-                .Options.FindExtension<CosmosOptionsExtension>();
+            var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
             // The region will be validated by the Cosmos SDK, because the region list is not constant
             Assert.Equal(regionName, extension.Region);
@@ -69,7 +78,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.ConnectionMode(connectionMode); });
+                o =>
+                {
+                    o.ConnectionMode(connectionMode);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -86,7 +99,12 @@ namespace Microsoft.EntityFrameworkCore
                         "serviceEndPoint",
                         "authKeyOrResourceToken",
                         "databaseName",
-                        o => { o.ConnectionMode(connectionMode); }));
+                        o =>
+                        {
+                            o.ConnectionMode(connectionMode);
+                        }
+                    )
+            );
         }
 
         [ConditionalFact]
@@ -96,7 +114,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.LimitToEndpoint(); });
+                o =>
+                {
+                    o.LimitToEndpoint();
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -111,7 +133,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.WebProxy(webProxy); });
+                o =>
+                {
+                    o.WebProxy(webProxy);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -126,7 +152,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.RequestTimeout(requestTimeout); });
+                o =>
+                {
+                    o.RequestTimeout(requestTimeout);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -141,7 +171,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.OpenTcpConnectionTimeout(timeout); });
+                o =>
+                {
+                    o.OpenTcpConnectionTimeout(timeout);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -156,7 +190,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.IdleTcpConnectionTimeout(timeout); });
+                o =>
+                {
+                    o.IdleTcpConnectionTimeout(timeout);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -171,7 +209,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.GatewayModeMaxConnectionLimit(connectionLimit); });
+                o =>
+                {
+                    o.GatewayModeMaxConnectionLimit(connectionLimit);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -186,7 +228,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.MaxTcpConnectionsPerEndpoint(connectionLimit); });
+                o =>
+                {
+                    o.MaxTcpConnectionsPerEndpoint(connectionLimit);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -201,7 +247,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.MaxRequestsPerTcpConnection(requestLimit); });
+                o =>
+                {
+                    o.MaxRequestsPerTcpConnection(requestLimit);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
@@ -216,7 +266,11 @@ namespace Microsoft.EntityFrameworkCore
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                o => { o.ContentResponseOnWriteEnabled(enabled); });
+                o =>
+                {
+                    o.ContentResponseOnWriteEnabled(enabled);
+                }
+            );
 
             var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 

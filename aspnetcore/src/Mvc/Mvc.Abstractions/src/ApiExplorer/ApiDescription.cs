@@ -31,7 +31,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         /// <summary>
         /// Gets a list of <see cref="ApiParameterDescription"/> for this api.
         /// </summary>
-        public IList<ApiParameterDescription> ParameterDescriptions { get; } = new List<ApiParameterDescription>();
+        public IList<ApiParameterDescription> ParameterDescriptions { get; } =
+            new List<ApiParameterDescription>();
 
         /// <summary>
         /// Gets arbitrary metadata properties associated with the <see cref="ApiDescription"/>.
@@ -49,7 +50,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer
         /// <remarks>
         /// Will be empty if the action does not accept a parameter decorated with the <c>[FromBody]</c> attribute.
         /// </remarks>
-        public IList<ApiRequestFormat> SupportedRequestFormats { get; } = new List<ApiRequestFormat>();
+        public IList<ApiRequestFormat> SupportedRequestFormats { get; } =
+            new List<ApiRequestFormat>();
 
         /// <summary>
         /// Gets the list of possible formats for a response.

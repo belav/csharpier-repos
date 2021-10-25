@@ -10,27 +10,24 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    [ExportLanguageServiceFactory(typeof(ITypeImportCompletionService), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(typeof(ITypeImportCompletionService), LanguageNames.CSharp),
+        Shared
+    ]
     internal sealed class TypeImportCompletionServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TypeImportCompletionServiceFactory()
-        {
-        }
+        public TypeImportCompletionServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => new CSharpTypeImportCompletionService(languageServices.WorkspaceServices.Workspace);
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            new CSharpTypeImportCompletionService(languageServices.WorkspaceServices.Workspace);
 
         private class CSharpTypeImportCompletionService : AbstractTypeImportCompletionService
         {
-            public CSharpTypeImportCompletionService(Workspace workspace)
-                : base(workspace)
-            {
-            }
+            public CSharpTypeImportCompletionService(Workspace workspace) : base(workspace) { }
 
-            protected override string GenericTypeSuffix
-                => "<>";
+            protected override string GenericTypeSuffix => "<>";
 
             protected override bool IsCaseSensitive => true;
         }

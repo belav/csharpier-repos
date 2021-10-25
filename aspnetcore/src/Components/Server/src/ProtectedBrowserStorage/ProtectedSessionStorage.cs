@@ -22,9 +22,9 @@ namespace Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
         /// </summary>
         /// <param name="jsRuntime">The <see cref="IJSRuntime"/>.</param>
         /// <param name="dataProtectionProvider">The <see cref="IDataProtectionProvider"/>.</param>
-        public ProtectedSessionStorage(IJSRuntime jsRuntime, IDataProtectionProvider dataProtectionProvider)
-            : base("sessionStorage", jsRuntime, dataProtectionProvider)
-        {
-        }
+        public ProtectedSessionStorage(
+            IJSRuntime jsRuntime,
+            IDataProtectionProvider dataProtectionProvider
+        ) : base("sessionStorage", jsRuntime, dataProtectionProvider) { }
     }
 }

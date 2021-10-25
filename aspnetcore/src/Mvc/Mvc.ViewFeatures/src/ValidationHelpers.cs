@@ -26,7 +26,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static string GetModelErrorMessageOrDefault(
             ModelError modelError,
             ModelStateEntry containingEntry,
-            ModelExplorer modelExplorer)
+            ModelExplorer modelExplorer
+        )
         {
             Debug.Assert(modelError != null);
             Debug.Assert(containingEntry != null);
@@ -39,13 +40,16 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             // Default in the ValidationMessage case is a fallback error message.
             var attemptedValue = containingEntry.AttemptedValue ?? "null";
-            return modelExplorer.Metadata.ModelBindingMessageProvider.ValueIsInvalidAccessor(attemptedValue);
+            return modelExplorer.Metadata.ModelBindingMessageProvider.ValueIsInvalidAccessor(
+                attemptedValue
+            );
         }
 
         // Returns non-null list of model states, which caller will render in order provided.
         public static IList<ModelStateEntry> GetModelStateList(
             ViewDataDictionary viewData,
-            bool excludePropertyErrors)
+            bool excludePropertyErrors
+        )
         {
             if (excludePropertyErrors)
             {
@@ -84,7 +88,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         private static void Visit(
             ModelStateEntry modelStateEntry,
             ModelMetadata metadata,
-            List<ModelStateEntry> orderedModelStateEntries)
+            List<ModelStateEntry> orderedModelStateEntries
+        )
         {
             if (metadata.ElementMetadata != null && modelStateEntry.Children != null)
             {
@@ -98,12 +103,14 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 for (var i = 0; i < metadata.Properties.Count; i++)
                 {
                     var propertyMetadata = metadata.Properties[i];
-                    var propertyModelStateEntry = modelStateEntry.GetModelStateForProperty(propertyMetadata.PropertyName);
+                    var propertyModelStateEntry = modelStateEntry.GetModelStateForProperty(
+                        propertyMetadata.PropertyName
+                    );
                     if (propertyModelStateEntry != null)
                     {
                         Visit(propertyModelStateEntry, propertyMetadata, orderedModelStateEntries);
                     }
-                } 
+                }
             }
 
             if (!modelStateEntry.IsContainerNode)

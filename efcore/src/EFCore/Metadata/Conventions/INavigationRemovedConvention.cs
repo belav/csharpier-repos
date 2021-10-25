@@ -24,6 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder targetEntityTypeBuilder,
             string navigationName,
             MemberInfo? memberInfo,
-            IConventionContext<string> context);
+            IConventionContext<string> context
+        );
     }
 }

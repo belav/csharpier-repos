@@ -14,15 +14,15 @@ namespace Microsoft.CodeAnalysis
         // Windows.*[.winmd]
         internal static bool IsWindowsComponent(this AssemblyIdentity identity)
         {
-            return (identity.ContentType == AssemblyContentType.WindowsRuntime) &&
-                identity.Name.StartsWith("windows.", StringComparison.OrdinalIgnoreCase);
+            return (identity.ContentType == AssemblyContentType.WindowsRuntime)
+                && identity.Name.StartsWith("windows.", StringComparison.OrdinalIgnoreCase);
         }
 
         // Windows[.winmd]
         internal static bool IsWindowsRuntime(this AssemblyIdentity identity)
         {
-            return (identity.ContentType == AssemblyContentType.WindowsRuntime) &&
-                string.Equals(identity.Name, "windows", StringComparison.OrdinalIgnoreCase);
+            return (identity.ContentType == AssemblyContentType.WindowsRuntime)
+                && string.Equals(identity.Name, "windows", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

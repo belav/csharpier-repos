@@ -47,7 +47,11 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             try
             {
                 HandshakeProtocol.WriteResponseMessage(HandshakeResponseMessage.Empty, writer);
-                var handshakeResponseResult = new ReadResult(new ReadOnlySequence<byte>(writer.ToArray()), false, false);
+                var handshakeResponseResult = new ReadResult(
+                    new ReadOnlySequence<byte>(writer.ToArray()),
+                    false,
+                    false
+                );
 
                 _pipe = new TestDuplexPipe();
                 _pipe.AddReadResult(new ValueTask<ReadResult>(handshakeResponseResult));
@@ -72,20 +76,30 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
                 hubProtocol = new MessagePackHubProtocol();
             }
 
-            hubConnectionBuilder.Services.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(IHubProtocol), hubProtocol));
+            hubConnectionBuilder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton(typeof(IHubProtocol), hubProtocol)
+            );
             hubConnectionBuilder.WithUrl("http://doesntmatter");
 
-            _invocationMessageBytes = hubProtocol.GetMessageBytes(new InvocationMessage(MethodName, arguments));
+            _invocationMessageBytes = hubProtocol.GetMessageBytes(
+                new InvocationMessage(MethodName, arguments)
+            );
 
-            var delegateConnectionFactory = new DelegateConnectionFactory(endPoint =>
-            {
-                var connection = new DefaultConnectionContext();
-                // prevents keep alive time being activated
-                connection.Features.Set<IConnectionInherentKeepAliveFeature>(new TestConnectionInherentKeepAliveFeature());
-                connection.Transport = _pipe;
-                return new ValueTask<ConnectionContext>(connection);
-            });
-            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
+            var delegateConnectionFactory = new DelegateConnectionFactory(
+                endPoint =>
+                {
+                    var connection = new DefaultConnectionContext();
+                    // prevents keep alive time being activated
+                    connection.Features.Set<IConnectionInherentKeepAliveFeature>(
+                        new TestConnectionInherentKeepAliveFeature()
+                    );
+                    connection.Transport = _pipe;
+                    return new ValueTask<ConnectionContext>(connection);
+                }
+            );
+            hubConnectionBuilder.Services.AddSingleton<IConnectionFactory>(
+                delegateConnectionFactory
+            );
 
             _hubConnection = hubConnectionBuilder.Build();
             _hubConnection.On(MethodName, arguments.Select(v => v.GetType()).ToArray(), OnInvoke);
@@ -137,7 +151,15 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             // Add the results for additional messages (minus 1 because 1 result has already been added)
             for (int i = 0; i < MessageCount - 1; i++)
             {
-                _pipe.AddReadResult(new ValueTask<ReadResult>(new ReadResult(new ReadOnlySequence<byte>(_invocationMessageBytes), false, false)));
+                _pipe.AddReadResult(
+                    new ValueTask<ReadResult>(
+                        new ReadResult(
+                            new ReadOnlySequence<byte>(_invocationMessageBytes),
+                            false,
+                            false
+                        )
+                    )
+                );
             }
 
             // The receive task that will be waited on once messages are read
@@ -154,7 +176,9 @@ namespace Microsoft.AspNetCore.SignalR.Microbenchmarks
             OperationSetup();
 
             // Start receive of the next batch of messages
-            _tcs.SetResult(new ReadResult(new ReadOnlySequence<byte>(_invocationMessageBytes), false, false));
+            _tcs.SetResult(
+                new ReadResult(new ReadOnlySequence<byte>(_invocationMessageBytes), false, false)
+            );
 
             // Wait for all messages to be read and invoked
             await _waitTcs.Task.DefaultTimeout();

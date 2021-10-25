@@ -16,8 +16,15 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
     {
         private readonly IHttpApplication<TContext> _application;
 
-        public IISHttpContextOfT(MemoryPool<byte> memoryPool, IHttpApplication<TContext> application, NativeSafeHandle pInProcessHandler, IISServerOptions options, IISHttpServer server, ILogger logger, bool useLatin1)
-            : base(memoryPool, pInProcessHandler, options, server, logger, useLatin1)
+        public IISHttpContextOfT(
+            MemoryPool<byte> memoryPool,
+            IHttpApplication<TContext> application,
+            NativeSafeHandle pInProcessHandler,
+            IISServerOptions options,
+            IISHttpServer server,
+            ILogger logger,
+            bool useLatin1
+        ) : base(memoryPool, pInProcessHandler, options, server, logger, useLatin1)
         {
             _application = application;
         }
@@ -62,7 +69,11 @@ namespace Microsoft.AspNetCore.Server.IIS.Core
                     // Dispose
                 }
 
-                if (!success && HasResponseStarted && NativeMethods.HttpSupportTrailer(_requestNativeHandle))
+                if (
+                    !success
+                    && HasResponseStarted
+                    && NativeMethods.HttpSupportTrailer(_requestNativeHandle)
+                )
                 {
                     // HTTP/2 INTERNAL_ERROR = 0x2 https://tools.ietf.org/html/rfc7540#section-7
                     // Otherwise the default is Cancel = 0x8.

@@ -34,10 +34,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             StandardTableColumnDefinitions.SuppressionState
         };
 
-        protected VisualStudioBaseDiagnosticListTable(Workspace workspace, ITableManagerProvider provider) :
-            base(workspace, provider, StandardTables.ErrorsTable)
-        {
-        }
+        protected VisualStudioBaseDiagnosticListTable(
+            Workspace workspace,
+            ITableManagerProvider provider
+        ) : base(workspace, provider, StandardTables.ErrorsTable) { }
 
         internal override IReadOnlyCollection<string> Columns => s_columns;
 
@@ -53,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             };
         }
 
-        protected abstract class DiagnosticTableEntriesSource : AbstractTableEntriesSource<DiagnosticTableItem>
+        protected abstract class DiagnosticTableEntriesSource
+            : AbstractTableEntriesSource<DiagnosticTableItem>
         {
             public abstract string BuildTool { get; }
             public abstract bool SupportSpanTracking { get; }
@@ -66,7 +67,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             public readonly DiagnosticAnalyzer Analyzer;
             public readonly int Kind;
 
-            public AggregatedKey(ImmutableArray<DocumentId> documentIds, DiagnosticAnalyzer analyzer, int kind)
+            public AggregatedKey(
+                ImmutableArray<DocumentId> documentIds,
+                DiagnosticAnalyzer analyzer,
+                int kind
+            )
             {
                 DocumentIds = documentIds;
                 Analyzer = analyzer;
@@ -80,11 +85,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     return false;
                 }
 
-                return this.DocumentIds == other.DocumentIds && this.Analyzer == other.Analyzer && this.Kind == other.Kind;
+                return this.DocumentIds == other.DocumentIds
+                    && this.Analyzer == other.Analyzer
+                    && this.Kind == other.Kind;
             }
 
-            public override int GetHashCode()
-                => Hash.Combine(Analyzer.GetHashCode(), Hash.Combine(DocumentIds.GetHashCode(), Kind));
+            public override int GetHashCode() =>
+                Hash.Combine(Analyzer.GetHashCode(), Hash.Combine(DocumentIds.GetHashCode(), Kind));
         }
     }
 }

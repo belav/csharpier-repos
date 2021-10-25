@@ -13,7 +13,9 @@ namespace System.Collections
     // A vector of bits.  Use this to store bits efficiently, without having to do bit
     // shifting yourself.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class BitArray : ICollection, ICloneable
     {
         private int[] m_array; // Do not rename (binary serialization)
@@ -28,10 +30,7 @@ namespace System.Collections
         **
         ** Exceptions: ArgumentException if length < 0.
         =========================================================================*/
-        public BitArray(int length)
-            : this(length, false)
-        {
-        }
+        public BitArray(int length) : this(length, false) { }
 
         /*=========================================================================
         ** Allocates space to hold length bit values. All of the values in the bit
@@ -43,7 +42,11 @@ namespace System.Collections
         {
             if (length < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(length), length, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(length),
+                    length,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             m_array = new int[GetInt32ArrayLengthFromBitLength(length)];
@@ -84,7 +87,10 @@ namespace System.Collections
             // type of m_length can't be changed to accommodate.
             if (bytes.Length > int.MaxValue / BitsPerByte)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_ArrayTooLarge, BitsPerByte), nameof(bytes));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_ArrayTooLarge, BitsPerByte),
+                    nameof(bytes)
+                );
             }
 
             m_array = new int[GetInt32ArrayLengthFromByteLength(bytes.Length)];
@@ -120,9 +126,9 @@ namespace System.Collections
             _version = 0;
         }
 
-        private static readonly Vector128<byte> s_bitMask128 = BitConverter.IsLittleEndian ?
-                                                Vector128.Create(0x80402010_08040201).AsByte() :
-                                                Vector128.Create(0x01020408_10204080).AsByte();
+        private static readonly Vector128<byte> s_bitMask128 = BitConverter.IsLittleEndian
+            ? Vector128.Create(0x80402010_08040201).AsByte()
+            : Vector128.Create(0x01020408_10204080).AsByte();
 
         private const uint Vector128ByteCount = 16;
         private const uint Vector128IntCount = 4;
@@ -170,13 +176,19 @@ namespace System.Collections
                 Vector128<byte> zero = Vector128<byte>.Zero;
                 fixed (bool* ptr = values)
                 {
-                    for (; (i + Vector128ByteCount * 2u) <= (uint)values.Length; i += Vector128ByteCount * 2u)
+                    for (
+                        ;
+                        (i + Vector128ByteCount * 2u) <= (uint)values.Length;
+                        i += Vector128ByteCount * 2u
+                    )
                     {
                         Vector128<byte> lowerVector = Sse2.LoadVector128((byte*)ptr + i);
                         Vector128<byte> lowerIsFalse = Sse2.CompareEqual(lowerVector, zero);
                         int lowerPackedIsFalse = Sse2.MoveMask(lowerIsFalse);
 
-                        Vector128<byte> upperVector = Sse2.LoadVector128((byte*)ptr + i + Vector128<byte>.Count);
+                        Vector128<byte> upperVector = Sse2.LoadVector128(
+                            (byte*)ptr + i + Vector128<byte>.Count
+                        );
                         Vector128<byte> upperIsFalse = Sse2.CompareEqual(upperVector, zero);
                         int upperPackedIsFalse = Sse2.MoveMask(upperIsFalse);
 
@@ -192,7 +204,11 @@ namespace System.Collections
                 Vector128<byte> zero = Vector128<byte>.Zero;
                 fixed (bool* ptr = values)
                 {
-                    for (; (i + Vector128ByteCount * 2u) <= (uint)values.Length; i += Vector128ByteCount * 2u)
+                    for (
+                        ;
+                        (i + Vector128ByteCount * 2u) <= (uint)values.Length;
+                        i += Vector128ByteCount * 2u
+                    )
                     {
                         // Same logic as SSE2 path, however we lack MoveMask (equivalent) instruction
                         // As a workaround, mask out the relevant bit after comparison
@@ -205,7 +221,9 @@ namespace System.Collections
                         bitsExtracted1 = AdvSimd.Arm64.AddPairwise(bitsExtracted1, bitsExtracted1);
                         Vector128<short> lowerPackedIsFalse = bitsExtracted1.AsInt16();
 
-                        Vector128<byte> upperVector = AdvSimd.LoadVector128((byte*)ptr + i + Vector128<byte>.Count);
+                        Vector128<byte> upperVector = AdvSimd.LoadVector128(
+                            (byte*)ptr + i + Vector128<byte>.Count
+                        );
                         Vector128<byte> upperIsFalse = AdvSimd.CompareEqual(upperVector, zero);
                         Vector128<byte> bitsExtracted2 = AdvSimd.And(upperIsFalse, s_bitMask128);
                         bitsExtracted2 = AdvSimd.Arm64.AddPairwise(bitsExtracted2, bitsExtracted2);
@@ -213,7 +231,10 @@ namespace System.Collections
                         bitsExtracted2 = AdvSimd.Arm64.AddPairwise(bitsExtracted2, bitsExtracted2);
                         Vector128<short> upperPackedIsFalse = bitsExtracted2.AsInt16();
 
-                        int result = AdvSimd.Arm64.ZipLow(lowerPackedIsFalse, upperPackedIsFalse).AsInt32().ToScalar();
+                        int result = AdvSimd.Arm64
+                            .ZipLow(lowerPackedIsFalse, upperPackedIsFalse)
+                            .AsInt32()
+                            .ToScalar();
                         if (!BitConverter.IsLittleEndian)
                         {
                             result = BinaryPrimitives.ReverseEndianness(result);
@@ -223,7 +244,7 @@ namespace System.Collections
                 }
             }
 
-        LessThan32:
+            LessThan32:
             for (; i < (uint)values.Length; i++)
             {
                 if (values[i])
@@ -254,7 +275,10 @@ namespace System.Collections
             // this value is chosen to prevent overflow when computing m_length
             if (values.Length > int.MaxValue / BitsPerInt32)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_ArrayTooLarge, BitsPerInt32), nameof(values));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_ArrayTooLarge, BitsPerInt32),
+                    nameof(values)
+                );
             }
 
             m_array = new int[values.Length];
@@ -383,20 +407,39 @@ namespace System.Collections
             int[] valueArray = value.m_array;
 
             int count = GetInt32ArrayLengthFromBitLength(Length);
-            if (Length != value.Length || (uint)count > (uint)thisArray.Length || (uint)count > (uint)valueArray.Length)
+            if (
+                Length != value.Length
+                || (uint)count > (uint)thisArray.Length
+                || (uint)count > (uint)valueArray.Length
+            )
                 throw new ArgumentException(SR.Arg_ArrayLengthsDiffer);
 
             // Unroll loop for count less than Vector256 size.
             switch (count)
             {
-                case 7: thisArray[6] &= valueArray[6]; goto case 6;
-                case 6: thisArray[5] &= valueArray[5]; goto case 5;
-                case 5: thisArray[4] &= valueArray[4]; goto case 4;
-                case 4: thisArray[3] &= valueArray[3]; goto case 3;
-                case 3: thisArray[2] &= valueArray[2]; goto case 2;
-                case 2: thisArray[1] &= valueArray[1]; goto case 1;
-                case 1: thisArray[0] &= valueArray[0]; goto Done;
-                case 0: goto Done;
+                case 7:
+                    thisArray[6] &= valueArray[6];
+                    goto case 6;
+                case 6:
+                    thisArray[5] &= valueArray[5];
+                    goto case 5;
+                case 5:
+                    thisArray[4] &= valueArray[4];
+                    goto case 4;
+                case 4:
+                    thisArray[3] &= valueArray[3];
+                    goto case 3;
+                case 3:
+                    thisArray[2] &= valueArray[2];
+                    goto case 2;
+                case 2:
+                    thisArray[1] &= valueArray[1];
+                    goto case 1;
+                case 1:
+                    thisArray[0] &= valueArray[0];
+                    goto Done;
+                case 0:
+                    goto Done;
             }
 
             uint i = 0;
@@ -443,7 +486,7 @@ namespace System.Collections
             for (; i < (uint)count; i++)
                 thisArray[i] &= valueArray[i];
 
-        Done:
+            Done:
             _version++;
             return this;
         }
@@ -469,20 +512,39 @@ namespace System.Collections
             int[] valueArray = value.m_array;
 
             int count = GetInt32ArrayLengthFromBitLength(Length);
-            if (Length != value.Length || (uint)count > (uint)thisArray.Length || (uint)count > (uint)valueArray.Length)
+            if (
+                Length != value.Length
+                || (uint)count > (uint)thisArray.Length
+                || (uint)count > (uint)valueArray.Length
+            )
                 throw new ArgumentException(SR.Arg_ArrayLengthsDiffer);
 
             // Unroll loop for count less than Vector256 size.
             switch (count)
             {
-                case 7: thisArray[6] |= valueArray[6]; goto case 6;
-                case 6: thisArray[5] |= valueArray[5]; goto case 5;
-                case 5: thisArray[4] |= valueArray[4]; goto case 4;
-                case 4: thisArray[3] |= valueArray[3]; goto case 3;
-                case 3: thisArray[2] |= valueArray[2]; goto case 2;
-                case 2: thisArray[1] |= valueArray[1]; goto case 1;
-                case 1: thisArray[0] |= valueArray[0]; goto Done;
-                case 0: goto Done;
+                case 7:
+                    thisArray[6] |= valueArray[6];
+                    goto case 6;
+                case 6:
+                    thisArray[5] |= valueArray[5];
+                    goto case 5;
+                case 5:
+                    thisArray[4] |= valueArray[4];
+                    goto case 4;
+                case 4:
+                    thisArray[3] |= valueArray[3];
+                    goto case 3;
+                case 3:
+                    thisArray[2] |= valueArray[2];
+                    goto case 2;
+                case 2:
+                    thisArray[1] |= valueArray[1];
+                    goto case 1;
+                case 1:
+                    thisArray[0] |= valueArray[0];
+                    goto Done;
+                case 0:
+                    goto Done;
             }
 
             uint i = 0;
@@ -529,7 +591,7 @@ namespace System.Collections
             for (; i < (uint)count; i++)
                 thisArray[i] |= valueArray[i];
 
-        Done:
+            Done:
             _version++;
             return this;
         }
@@ -555,20 +617,39 @@ namespace System.Collections
             int[] valueArray = value.m_array;
 
             int count = GetInt32ArrayLengthFromBitLength(Length);
-            if (Length != value.Length || (uint)count > (uint)thisArray.Length || (uint)count > (uint)valueArray.Length)
+            if (
+                Length != value.Length
+                || (uint)count > (uint)thisArray.Length
+                || (uint)count > (uint)valueArray.Length
+            )
                 throw new ArgumentException(SR.Arg_ArrayLengthsDiffer);
 
             // Unroll loop for count less than Vector256 size.
             switch (count)
             {
-                case 7: thisArray[6] ^= valueArray[6]; goto case 6;
-                case 6: thisArray[5] ^= valueArray[5]; goto case 5;
-                case 5: thisArray[4] ^= valueArray[4]; goto case 4;
-                case 4: thisArray[3] ^= valueArray[3]; goto case 3;
-                case 3: thisArray[2] ^= valueArray[2]; goto case 2;
-                case 2: thisArray[1] ^= valueArray[1]; goto case 1;
-                case 1: thisArray[0] ^= valueArray[0]; goto Done;
-                case 0: goto Done;
+                case 7:
+                    thisArray[6] ^= valueArray[6];
+                    goto case 6;
+                case 6:
+                    thisArray[5] ^= valueArray[5];
+                    goto case 5;
+                case 5:
+                    thisArray[4] ^= valueArray[4];
+                    goto case 4;
+                case 4:
+                    thisArray[3] ^= valueArray[3];
+                    goto case 3;
+                case 3:
+                    thisArray[2] ^= valueArray[2];
+                    goto case 2;
+                case 2:
+                    thisArray[1] ^= valueArray[1];
+                    goto case 1;
+                case 1:
+                    thisArray[0] ^= valueArray[0];
+                    goto Done;
+                case 0:
+                    goto Done;
             }
 
             uint i = 0;
@@ -615,7 +696,7 @@ namespace System.Collections
             for (; i < (uint)count; i++)
                 thisArray[i] ^= valueArray[i];
 
-        Done:
+            Done:
             _version++;
             return this;
         }
@@ -639,14 +720,29 @@ namespace System.Collections
             // Unroll loop for count less than Vector256 size.
             switch (count)
             {
-                case 7: thisArray[6] = ~thisArray[6]; goto case 6;
-                case 6: thisArray[5] = ~thisArray[5]; goto case 5;
-                case 5: thisArray[4] = ~thisArray[4]; goto case 4;
-                case 4: thisArray[3] = ~thisArray[3]; goto case 3;
-                case 3: thisArray[2] = ~thisArray[2]; goto case 2;
-                case 2: thisArray[1] = ~thisArray[1]; goto case 1;
-                case 1: thisArray[0] = ~thisArray[0]; goto Done;
-                case 0: goto Done;
+                case 7:
+                    thisArray[6] = ~thisArray[6];
+                    goto case 6;
+                case 6:
+                    thisArray[5] = ~thisArray[5];
+                    goto case 5;
+                case 5:
+                    thisArray[4] = ~thisArray[4];
+                    goto case 4;
+                case 4:
+                    thisArray[3] = ~thisArray[3];
+                    goto case 3;
+                case 3:
+                    thisArray[2] = ~thisArray[2];
+                    goto case 2;
+                case 2:
+                    thisArray[1] = ~thisArray[1];
+                    goto case 1;
+                case 1:
+                    thisArray[0] = ~thisArray[0];
+                    goto Done;
+                case 0:
+                    goto Done;
             }
 
             uint i = 0;
@@ -689,7 +785,7 @@ namespace System.Collections
             for (; i < (uint)count; i++)
                 thisArray[i] = ~thisArray[i];
 
-        Done:
+            Done:
             _version++;
             return this;
         }
@@ -706,7 +802,11 @@ namespace System.Collections
             {
                 if (count < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(count), count, SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(count),
+                        count,
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 }
 
                 _version++;
@@ -773,7 +873,11 @@ namespace System.Collections
             {
                 if (count < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(count), count, SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(count),
+                        count,
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 }
 
                 _version++;
@@ -783,7 +887,7 @@ namespace System.Collections
             int lengthToClear;
             if (count < m_length)
             {
-                int lastIndex = (m_length - 1) >> BitShiftPerInt32;  // Divide by 32.
+                int lastIndex = (m_length - 1) >> BitShiftPerInt32; // Divide by 32.
 
                 // We can not use Math.DivRem without taking a dependency on System.Runtime.Extensions
                 lengthToClear = Div32Rem(count, out int shiftCount);
@@ -820,15 +924,16 @@ namespace System.Collections
 
         public int Length
         {
-            get
-            {
-                return m_length;
-            }
+            get { return m_length; }
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), value, SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        value,
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
                 }
 
                 int newints = GetInt32ArrayLengthFromBitLength(value);
@@ -860,8 +965,12 @@ namespace System.Collections
         // The mask used when shuffling a single int into Vector128/256.
         // On little endian machines, the lower 8 bits of int belong in the first byte, next lower 8 in the second and so on.
         // We place the bytes that contain the bits to its respective byte so that we can mask out only the relevant bits later.
-        private static readonly Vector128<byte> s_lowerShuffleMask_CopyToBoolArray = Vector128.Create(0, 0x01010101_01010101).AsByte();
-        private static readonly Vector128<byte> s_upperShuffleMask_CopyToBoolArray = Vector128.Create(0x02020202_02020202, 0x03030303_03030303).AsByte();
+        private static readonly Vector128<byte> s_lowerShuffleMask_CopyToBoolArray = Vector128
+            .Create(0, 0x01010101_01010101)
+            .AsByte();
+        private static readonly Vector128<byte> s_upperShuffleMask_CopyToBoolArray = Vector128
+            .Create(0x02020202_02020202, 0x03030303_03030303)
+            .AsByte();
 
         public unsafe void CopyTo(Array array, int index)
         {
@@ -869,7 +978,11 @@ namespace System.Collections
                 throw new ArgumentNullException(nameof(array));
 
             if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    index,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (array.Rank != 1)
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported, nameof(array));
@@ -923,7 +1036,9 @@ namespace System.Collections
                     Debug.Assert(span.Length > 0);
                     Debug.Assert(m_array.Length > quotient);
                     // mask the final byte
-                    span[remainder] = (byte)((m_array[quotient] >> (remainder * 8)) & ((1 << (int)extraBits) - 1));
+                    span[remainder] = (byte)(
+                        (m_array[quotient] >> (remainder * 8)) & ((1 << (int)extraBits) - 1)
+                    );
                 }
 
                 switch (remainder)
@@ -955,7 +1070,10 @@ namespace System.Collections
 
                 if (Avx2.IsSupported)
                 {
-                    Vector256<byte> shuffleMask = Vector256.Create(s_lowerShuffleMask_CopyToBoolArray, s_upperShuffleMask_CopyToBoolArray);
+                    Vector256<byte> shuffleMask = Vector256.Create(
+                        s_lowerShuffleMask_CopyToBoolArray,
+                        s_upperShuffleMask_CopyToBoolArray
+                    );
                     Vector256<byte> bitMask = Vector256.Create(0x80402010_08040201).AsByte();
                     Vector256<byte> ones = Vector256.Create((byte)1);
 
@@ -983,20 +1101,36 @@ namespace System.Collections
 
                     fixed (bool* destination = &boolArray[index])
                     {
-                        for (; (i + Vector128ByteCount * 2u) <= (uint)m_length; i += Vector128ByteCount * 2u)
+                        for (
+                            ;
+                            (i + Vector128ByteCount * 2u) <= (uint)m_length;
+                            i += Vector128ByteCount * 2u
+                        )
                         {
                             int bits = m_array[i / (uint)BitsPerInt32];
                             Vector128<int> scalar = Vector128.CreateScalarUnsafe(bits);
 
-                            Vector128<byte> shuffledLower = Ssse3.Shuffle(scalar.AsByte(), lowerShuffleMask);
+                            Vector128<byte> shuffledLower = Ssse3.Shuffle(
+                                scalar.AsByte(),
+                                lowerShuffleMask
+                            );
                             Vector128<byte> extractedLower = Sse2.And(shuffledLower, s_bitMask128);
                             Vector128<byte> normalizedLower = Sse2.Min(extractedLower, ones);
                             Sse2.Store((byte*)destination + i, normalizedLower);
 
-                            Vector128<byte> shuffledHigher = Ssse3.Shuffle(scalar.AsByte(), upperShuffleMask);
-                            Vector128<byte> extractedHigher = Sse2.And(shuffledHigher, s_bitMask128);
+                            Vector128<byte> shuffledHigher = Ssse3.Shuffle(
+                                scalar.AsByte(),
+                                upperShuffleMask
+                            );
+                            Vector128<byte> extractedHigher = Sse2.And(
+                                shuffledHigher,
+                                s_bitMask128
+                            );
                             Vector128<byte> normalizedHigher = Sse2.Min(extractedHigher, ones);
-                            Sse2.Store((byte*)destination + i + Vector128<byte>.Count, normalizedHigher);
+                            Sse2.Store(
+                                (byte*)destination + i + Vector128<byte>.Count,
+                                normalizedHigher
+                            );
                         }
                     }
                 }
@@ -1005,7 +1139,11 @@ namespace System.Collections
                     Vector128<byte> ones = Vector128.Create((byte)1);
                     fixed (bool* destination = &boolArray[index])
                     {
-                        for (; (i + Vector128ByteCount * 2u) <= (uint)m_length; i += Vector128ByteCount * 2u)
+                        for (
+                            ;
+                            (i + Vector128ByteCount * 2u) <= (uint)m_length;
+                            i += Vector128ByteCount * 2u
+                        )
                         {
                             int bits = m_array[i / (uint)BitsPerInt32];
                             // Same logic as SSSE3 path, except we do not have Shuffle instruction.
@@ -1028,23 +1166,33 @@ namespace System.Collections
                             vector = AdvSimd.Arm64.ZipLow(vector, vector);
 
                             Vector128<byte> shuffledLower = AdvSimd.Arm64.ZipLow(vector, vector);
-                            Vector128<byte> extractedLower = AdvSimd.And(shuffledLower, s_bitMask128);
+                            Vector128<byte> extractedLower = AdvSimd.And(
+                                shuffledLower,
+                                s_bitMask128
+                            );
                             Vector128<byte> normalizedLower = AdvSimd.Min(extractedLower, ones);
                             AdvSimd.Store((byte*)destination + i, normalizedLower);
 
                             Vector128<byte> shuffledHigher = AdvSimd.Arm64.ZipHigh(vector, vector);
-                            Vector128<byte> extractedHigher = AdvSimd.And(shuffledHigher, s_bitMask128);
+                            Vector128<byte> extractedHigher = AdvSimd.And(
+                                shuffledHigher,
+                                s_bitMask128
+                            );
                             Vector128<byte> normalizedHigher = AdvSimd.Min(extractedHigher, ones);
-                            AdvSimd.Store((byte*)destination + i + Vector128<byte>.Count, normalizedHigher);
+                            AdvSimd.Store(
+                                (byte*)destination + i + Vector128<byte>.Count,
+                                normalizedHigher
+                            );
                         }
                     }
                 }
 
-            LessThan32:
+                LessThan32:
                 for (; i < (uint)m_length; i++)
                 {
                     int elementIndex = Div32Rem((int)i, out int extraBits);
-                    boolArray[(uint)index + i] = ((m_array[elementIndex] >> extraBits) & 0x00000001) != 0;
+                    boolArray[(uint)index + i] =
+                        ((m_array[elementIndex] >> extraBits) & 0x00000001) != 0;
                 }
             }
             else
@@ -1100,7 +1248,9 @@ namespace System.Collections
             Debug.Assert(n >= 0);
             // Due to sign extension, we don't need to special case for n == 0, since ((n - 1) >> 2) + 1 = 0
             // This doesn't hold true for ((n - 1) / 4) + 1, which equals 1.
-            return (int)((uint)(n - 1 + (1 << BitShiftForBytesPerInt32)) >> BitShiftForBytesPerInt32);
+            return (int)(
+                (uint)(n - 1 + (1 << BitShiftForBytesPerInt32)) >> BitShiftForBytesPerInt32
+            );
         }
 
         private static int GetByteArrayLengthFromBitLength(int n)
@@ -1114,20 +1264,24 @@ namespace System.Collections
         private static int Div32Rem(int number, out int remainder)
         {
             uint quotient = (uint)number / 32;
-            remainder = number & (32 - 1);    // equivalent to number % 32, since 32 is a power of 2
+            remainder = number & (32 - 1); // equivalent to number % 32, since 32 is a power of 2
             return (int)quotient;
         }
 
         private static int Div4Rem(int number, out int remainder)
         {
             uint quotient = (uint)number / 4;
-            remainder = number & (4 - 1);   // equivalent to number % 4, since 4 is a power of 2
+            remainder = number & (4 - 1); // equivalent to number % 4, since 4 is a power of 2
             return (int)quotient;
         }
 
         private static void ThrowArgumentOutOfRangeException(int index)
         {
-            throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_Index);
+            throw new ArgumentOutOfRangeException(
+                nameof(index),
+                index,
+                SR.ArgumentOutOfRange_Index
+            );
         }
 
         private sealed class BitArrayEnumeratorSimple : IEnumerator, ICloneable

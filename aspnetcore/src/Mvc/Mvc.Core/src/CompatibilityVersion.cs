@@ -38,9 +38,11 @@ namespace Microsoft.AspNetCore.Mvc
     /// </para>
     /// </remarks>
     // Remove after .NET 6.
-    [Obsolete("This API is obsolete and will be removed in a future version. Consider removing usages.",
+    [Obsolete(
+        "This API is obsolete and will be removed in a future version. Consider removing usages.",
         DiagnosticId = "ASP5001",
-        UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}")]
+        UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}"
+    )]
     public enum CompatibilityVersion
     {
         /// <summary>
@@ -49,7 +51,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// </summary>
         [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
         Version_2_0,
-
         /// <summary>
         /// Sets the default value of settings on <see cref="MvcOptions"/> to match the behavior of
         /// ASP.NET Core MVC 2.1.
@@ -60,7 +61,6 @@ namespace Microsoft.AspNetCore.Mvc
         /// </remarks>
         [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
         Version_2_1,
-
         /// <summary>
         /// Sets the default value of settings on <see cref="MvcOptions"/> to match the behavior of
         /// ASP.NET Core MVC 2.2.
@@ -76,14 +76,12 @@ namespace Microsoft.AspNetCore.Mvc
         /// </remarks>
         [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
         Version_2_2,
-
         /// <summary>
         /// Sets the default value of settings on <see cref="MvcOptions"/> and other <c>Options</c> types to match
         /// the behavior of ASP.NET Core MVC 3.0.
         /// </summary>
         [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
         Version_3_0,
-
         /// <summary>
         /// Sets the default value of settings on <see cref="MvcOptions"/> to match the latest release. Use this
         /// value with care, upgrading minor versions will cause breaking changes when using <see cref="Latest"/>.

@@ -166,7 +166,9 @@ namespace SdtEventSources
     {
         [Event(1, Message = "Message = {0,12:G}")]
         public void WriteString(string msg)
-        { WriteEvent(1, msg); }
+        {
+            WriteEvent(1, msg);
+        }
     }
 #if FEATURE_ADVANCED_MANAGED_ETW_CHANNELS
     public sealed class TooManyChannelsEventSource : EventSource
@@ -258,7 +260,9 @@ namespace SdtEventSources
     {
         [Event(1)]
         public void WriteInteger(int n)
-        { WriteEvent(1, n); }
+        {
+            WriteEvent(1, n);
+        }
     }
 
     public interface ILogging
@@ -272,6 +276,8 @@ namespace SdtEventSources
 
         [Event(1)]
         void ILogging.Error(int errorCode, string msg)
-        { WriteEvent(1, errorCode, msg); }
+        {
+            WriteEvent(1, errorCode, msg);
+        }
     }
 }

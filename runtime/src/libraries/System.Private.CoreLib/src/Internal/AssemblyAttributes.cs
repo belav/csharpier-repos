@@ -18,7 +18,9 @@ using System.Resources;
 [assembly: CLSCompliant(true)]
 [assembly: ComVisible(false)]
 
-[assembly: DefaultDllImportSearchPaths(DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32)]
+[assembly: DefaultDllImportSearchPaths(
+    DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.System32
+)]
 
 [assembly: AssemblyMetadata("Serviceable", "True")]
 [assembly: AssemblyMetadata(".NETFrameworkAssembly", "")]

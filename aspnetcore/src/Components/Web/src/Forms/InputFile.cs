@@ -67,7 +67,11 @@ namespace Microsoft.AspNetCore.Components.Forms
             if (firstRender)
             {
                 _jsCallbacksRelay = new InputFileJsCallbacksRelay(this);
-                await JSRuntime.InvokeVoidAsync(InputFileInterop.Init, _jsCallbacksRelay.DotNetReference, _inputFileElement);
+                await JSRuntime.InvokeVoidAsync(
+                    InputFileInterop.Init,
+                    _jsCallbacksRelay.DotNetReference,
+                    _inputFileElement
+                );
             }
         }
 
@@ -77,22 +81,50 @@ namespace Microsoft.AspNetCore.Components.Forms
             builder.OpenElement(0, "input");
             builder.AddMultipleAttributes(1, AdditionalAttributes);
             builder.AddAttribute(2, "type", "file");
-            builder.AddElementReferenceCapture(3, elementReference => _inputFileElement = elementReference);
+            builder.AddElementReferenceCapture(
+                3,
+                elementReference => _inputFileElement = elementReference
+            );
             builder.CloseElement();
         }
 
-        internal Stream OpenReadStream(BrowserFile file, CancellationToken cancellationToken)
-            => _jsUnmarshalledRuntime != null ?
-                (Stream)new SharedBrowserFileStream(JSRuntime, _jsUnmarshalledRuntime, _inputFileElement, file) :
-                new RemoteBrowserFileStream(JSRuntime, _inputFileElement, file, Options.Value, cancellationToken);
+        internal Stream OpenReadStream(BrowserFile file, CancellationToken cancellationToken) =>
+            _jsUnmarshalledRuntime != null
+                ? (Stream)new SharedBrowserFileStream(
+                      JSRuntime,
+                      _jsUnmarshalledRuntime,
+                      _inputFileElement,
+                      file
+                  )
+                : new RemoteBrowserFileStream(
+                      JSRuntime,
+                      _inputFileElement,
+                      file,
+                      Options.Value,
+                      cancellationToken
+                  );
 
-        internal async ValueTask<IBrowserFile> ConvertToImageFileAsync(BrowserFile file, string format, int maxWidth, int maxHeight)
+        internal async ValueTask<IBrowserFile> ConvertToImageFileAsync(
+            BrowserFile file,
+            string format,
+            int maxWidth,
+            int maxHeight
+        )
         {
-            var imageFile = await JSRuntime.InvokeAsync<BrowserFile>(InputFileInterop.ToImageFile, _inputFileElement, file.Id, format, maxWidth, maxHeight);
+            var imageFile = await JSRuntime.InvokeAsync<BrowserFile>(
+                InputFileInterop.ToImageFile,
+                _inputFileElement,
+                file.Id,
+                format,
+                maxWidth,
+                maxHeight
+            );
 
             if (imageFile is null)
             {
-                throw new InvalidOperationException("ToImageFile returned an unexpected null result.");
+                throw new InvalidOperationException(
+                    "ToImageFile returned an unexpected null result."
+                );
             }
 
             imageFile.Owner = this;

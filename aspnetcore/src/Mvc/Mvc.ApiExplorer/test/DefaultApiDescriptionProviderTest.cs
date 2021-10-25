@@ -102,7 +102,6 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Null(description.HttpMethod);
         }
 
-
         [Fact]
         public void GetApiDescription_CreatesMultipleDescriptionsForMultipleHttpMethods()
         {
@@ -139,7 +138,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             string template,
             bool isOptional,
             Type constraintType,
-            object defaultValue)
+            object defaultValue
+        )
         {
             // Arrange
             var action = CreateActionDescriptor();
@@ -185,7 +185,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             string template,
             bool isOptional,
             Type constraintType,
-            object defaultValue)
+            object defaultValue
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(nameof(FromRouting));
@@ -241,13 +242,19 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void GetApiDescription_ParameterDescription_DoesNotIncludeRouteInfo(
             string template,
             string methodName,
-            string source)
+            string source
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName);
             action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
 
-            var expected = new BindingSource(source, displayName: null, isGreedy: false, isFromRequest: false);
+            var expected = new BindingSource(
+                source,
+                displayName: null,
+                isGreedy: false,
+                isFromRequest: false
+            );
 
             // Act
             var descriptions = GetApiDescriptions(action);
@@ -272,13 +279,19 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void GetApiDescription_ParameterDescription_IncludesRouteInfo(
             string template,
             string methodName,
-            string source)
+            string source
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName);
             action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
 
-            var expected = new BindingSource(source, displayName: null, isGreedy: false, isFromRequest: false);
+            var expected = new BindingSource(
+                source,
+                displayName: null,
+                isGreedy: false,
+                isFromRequest: false
+            );
 
             // Act
             var descriptions = GetApiDescriptions(action);
@@ -297,7 +310,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData("api/products/{id=5}", true)]
         public void GetApiDescription_ParameterFromPathAndDescriptor_IsOptionalIfRouteParameterIsOptional(
             string template,
-            bool expectedOptional)
+            bool expectedOptional
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(nameof(FromRouting));
@@ -320,15 +334,15 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData("api/Products/{*id}", "api/Products/{id}")]
         [InlineData("api/Products/{*id:int}", "api/Products/{id}")]
         [InlineData("api/Products/{id1}-{id2:int}", "api/Products/{id1}-{id2}")]
-        [InlineData("api/{id1}/{id2?}/{id3:int}/{id4:int?}/{*id5:int}", "api/{id1}/{id2}/{id3}/{id4}/{id5}")]
+        [InlineData(
+            "api/{id1}/{id2?}/{id3:int}/{id4:int?}/{*id5:int}",
+            "api/{id1}/{id2}/{id3}/{id4}/{id5}"
+        )]
         public void GetApiDescription_PopulatesRelativePath(string template, string relativePath)
         {
             // Arrange
             var action = CreateActionDescriptor();
-            action.AttributeRouteInfo = new AttributeRouteInfo
-            {
-                Template = template
-            };
+            action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
 
             // Act
             var descriptions = GetApiDescriptions(action);
@@ -441,7 +455,9 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [Theory]
         [InlineData(nameof(ReturnsActionResultOfSequenceOfProducts))]
         [InlineData(nameof(ReturnsTaskOfActionResultOfSequenceOfProducts))]
-        public void GetApiDescription_PopulatesResponseType_ForActionResultOfSequenceOfT(string methodName)
+        public void GetApiDescription_PopulatesResponseType_ForActionResultOfSequenceOfT(
+            string methodName
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName);
@@ -498,7 +514,9 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData(nameof(ReturnsValueTaskOfObject))]
         [InlineData(nameof(ReturnsValueTaskOfActionResult))]
         [InlineData(nameof(ReturnsValueTaskOfJsonResult))]
-        public void GetApiDescription_DoesNotPopulatesResponseInformation_WhenUnknown(string methodName)
+        public void GetApiDescription_DoesNotPopulatesResponseInformation_WhenUnknown(
+            string methodName
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName);
@@ -518,17 +536,24 @@ namespace Microsoft.AspNetCore.Mvc.Description
                 var filterDescriptors = new List<FilterDescriptor>()
                 {
                     new FilterDescriptor(
-                        new ProducesAttribute("text/json", "application/json") { Type = typeof(Customer) },
-                        FilterScope.Action),
+                        new ProducesAttribute("text/json", "application/json")
+                        {
+                            Type = typeof(Customer)
+                        },
+                        FilterScope.Action
+                    ),
                     new FilterDescriptor(
                         new ProducesResponseTypeAttribute(304),
-                        FilterScope.Action),
+                        FilterScope.Action
+                    ),
                     new FilterDescriptor(
                         new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                        FilterScope.Action),
+                        FilterScope.Action
+                    ),
                     new FilterDescriptor(
                         new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                        FilterScope.Action),
+                        FilterScope.Action
+                    ),
                 };
 
                 return new TheoryData<Type, string, List<FilterDescriptor>>
@@ -562,7 +587,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void GetApiDescription_ReturnsActionResultWithProduces_And_ProducesContentType(
             Type controllerType,
             string methodName,
-            List<FilterDescriptor> filterDescriptors)
+            List<FilterDescriptor> filterDescriptors
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName, controllerType);
@@ -605,10 +631,15 @@ namespace Microsoft.AspNetCore.Mvc.Description
                     Assert.Equal(typeof(ErrorDetails), responseType.Type);
                     Assert.NotNull(responseType.ModelMetadata);
                     Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-                });
+                }
+            );
         }
 
-        public static TheoryData<Type, string, List<FilterDescriptor>> ReturnsVoidOrTaskWithProducesContentTypeData
+        public static TheoryData<
+            Type,
+            string,
+            List<FilterDescriptor>
+        > ReturnsVoidOrTaskWithProducesContentTypeData
         {
             get
             {
@@ -619,16 +650,20 @@ namespace Microsoft.AspNetCore.Mvc.Description
                     // based on runtime conditions.
                     new FilterDescriptor(
                         new ProducesAttribute("text/json", "application/json"),
-                        FilterScope.Action),
+                        FilterScope.Action
+                    ),
                     new FilterDescriptor(
                         new ProducesResponseTypeAttribute(200),
-                        FilterScope.Action),
+                        FilterScope.Action
+                    ),
                     new FilterDescriptor(
                         new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                        FilterScope.Action),
+                        FilterScope.Action
+                    ),
                     new FilterDescriptor(
                         new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                        FilterScope.Action)
+                        FilterScope.Action
+                    )
                 };
 
                 return new TheoryData<Type, string, List<FilterDescriptor>>
@@ -672,7 +707,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void GetApiDescription_ReturnsVoidWithProducesContentType(
             Type controllerType,
             string methodName,
-            List<FilterDescriptor> filterDescriptors)
+            List<FilterDescriptor> filterDescriptors
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName, controllerType);
@@ -708,14 +744,16 @@ namespace Microsoft.AspNetCore.Mvc.Description
                     Assert.Equal(500, responseType.StatusCode);
                     Assert.NotNull(responseType.ModelMetadata);
                     Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-                });
+                }
+            );
         }
 
         [Theory]
         [InlineData(nameof(ReturnsActionResultOfProduct))]
         [InlineData(nameof(ReturnsTaskOfActionResultOfProduct))]
         public void GetApiDescription_ReturnsActionResultOfTWithProducesContentType(
-            string methodName)
+            string methodName
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName);
@@ -726,19 +764,18 @@ namespace Microsoft.AspNetCore.Mvc.Description
                 // based on runtime conditions.
                 new FilterDescriptor(
                     new ProducesAttribute("text/json", "application/json"),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(200),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(202),
-                    FilterScope.Action),
+                    FilterScope.Action
+                ),
+                new FilterDescriptor(new ProducesResponseTypeAttribute(200), FilterScope.Action),
+                new FilterDescriptor(new ProducesResponseTypeAttribute(202), FilterScope.Action),
                 new FilterDescriptor(
                     new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                    FilterScope.Action),
+                    FilterScope.Action
+                ),
                 new FilterDescriptor(
                     new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                    FilterScope.Action)
+                    FilterScope.Action
+                )
             };
             var expectedMediaTypes = new[] { "application/json", "text/json" };
 
@@ -778,14 +815,16 @@ namespace Microsoft.AspNetCore.Mvc.Description
                     Assert.Equal(500, responseType.StatusCode);
                     Assert.NotNull(responseType.ModelMetadata);
                     Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-                });
+                }
+            );
         }
 
         [Theory]
         [InlineData(nameof(ReturnsActionResultOfProduct))]
         [InlineData(nameof(ReturnsTaskOfActionResultOfProduct))]
         public void GetApiDescription_ReturnsActionResultOfTWithProducesContentType_ForStatusCode201(
-            string methodName)
+            string methodName
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName);
@@ -796,19 +835,18 @@ namespace Microsoft.AspNetCore.Mvc.Description
                 // based on runtime conditions.
                 new FilterDescriptor(
                     new ProducesAttribute("text/json", "application/json"),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(201),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(204),
-                    FilterScope.Action),
+                    FilterScope.Action
+                ),
+                new FilterDescriptor(new ProducesResponseTypeAttribute(201), FilterScope.Action),
+                new FilterDescriptor(new ProducesResponseTypeAttribute(204), FilterScope.Action),
                 new FilterDescriptor(
                     new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                    FilterScope.Action),
+                    FilterScope.Action
+                ),
                 new FilterDescriptor(
                     new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                    FilterScope.Action)
+                    FilterScope.Action
+                )
             };
             var expectedMediaTypes = new[] { "application/json", "text/json" };
 
@@ -848,14 +886,16 @@ namespace Microsoft.AspNetCore.Mvc.Description
                     Assert.Equal(500, responseType.StatusCode);
                     Assert.NotNull(responseType.ModelMetadata);
                     Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-                });
+                }
+            );
         }
 
         [Theory]
         [InlineData(nameof(ReturnsActionResultOfSequenceOfProducts))]
         [InlineData(nameof(ReturnsTaskOfActionResultOfSequenceOfProducts))]
         public void GetApiDescription_ReturnsActionResultOfSequenceOfTWithProducesContentType(
-            string methodName)
+            string methodName
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName);
@@ -866,19 +906,18 @@ namespace Microsoft.AspNetCore.Mvc.Description
                 // based on runtime conditions.
                 new FilterDescriptor(
                     new ProducesAttribute("text/json", "application/json"),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(200),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(201),
-                    FilterScope.Action),
+                    FilterScope.Action
+                ),
+                new FilterDescriptor(new ProducesResponseTypeAttribute(200), FilterScope.Action),
+                new FilterDescriptor(new ProducesResponseTypeAttribute(201), FilterScope.Action),
                 new FilterDescriptor(
                     new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                    FilterScope.Action),
+                    FilterScope.Action
+                ),
                 new FilterDescriptor(
                     new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                    FilterScope.Action)
+                    FilterScope.Action
+                )
             };
             var expectedMediaTypes = new[] { "application/json", "text/json" };
 
@@ -918,7 +957,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
                     Assert.Equal(500, responseType.StatusCode);
                     Assert.NotNull(responseType.ModelMetadata);
                     Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-                });
+                }
+            );
         }
 
         [Theory]
@@ -979,14 +1019,13 @@ namespace Microsoft.AspNetCore.Mvc.Description
         [InlineData(nameof(ReturnsValueTaskOfObject))]
         [InlineData(nameof(ReturnsValueTaskOfActionResult))]
         [InlineData(nameof(ReturnsValueTaskOfJsonResult))]
-        public void GetApiDescription_PopulatesResponseInformation_WhenSetByFilter(string methodName)
+        public void GetApiDescription_PopulatesResponseInformation_WhenSetByFilter(
+            string methodName
+        )
         {
             // Arrange
             var action = CreateActionDescriptor(methodName);
-            var filter = new ContentTypeAttribute("text/*")
-            {
-                Type = typeof(Order)
-            };
+            var filter = new ContentTypeAttribute("text/*") { Type = typeof(Order) };
 
             action.FilterDescriptors = new List<FilterDescriptor>
             {
@@ -1014,7 +1053,13 @@ namespace Microsoft.AspNetCore.Mvc.Description
         {
             // Arrange
             var action = CreateActionDescriptor(nameof(ReturnsProduct));
-            var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+            var expectedMediaTypes = new[]
+            {
+                "application/json",
+                "application/xml",
+                "text/json",
+                "text/xml"
+            };
 
             // Act
             var descriptions = GetApiDescriptions(action);
@@ -1050,10 +1095,7 @@ namespace Microsoft.AspNetCore.Mvc.Description
         {
             // Arrange
             var action = CreateActionDescriptor(nameof(ReturnsObject));
-            var filter = new ContentTypeAttribute("text/*")
-            {
-                Type = typeof(Order)
-            };
+            var filter = new ContentTypeAttribute("text/*") { Type = typeof(Order) };
 
             action.FilterDescriptors = new List<FilterDescriptor>
             {
@@ -1077,7 +1119,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Equal(typeof(Order), responseType.Type);
             Assert.NotNull(responseType.ModelMetadata);
             var apiResponseFormat = Assert.Single(
-                responseType.ApiResponseFormats.Where(responseFormat => responseFormat.MediaType == "text/json"));
+                responseType.ApiResponseFormats.Where(
+                    responseFormat => responseFormat.MediaType == "text/json"
+                )
+            );
             Assert.Same(formatters[0], apiResponseFormat.Formatter);
         }
 
@@ -1111,7 +1156,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
                 f => Assert.Equal("application/json", f.MediaType.ToString()),
                 f => Assert.Equal("application/xml", f.MediaType.ToString()),
                 f => Assert.Equal("text/json", f.MediaType.ToString()),
-                f => Assert.Equal("text/xml", f.MediaType.ToString()));
+                f => Assert.Equal("text/xml", f.MediaType.ToString())
+            );
         }
 
         [Fact]
@@ -1133,7 +1179,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Collection(
                 description.SupportedRequestFormats.OrderBy(f => f.MediaType.ToString()),
                 f => Assert.Equal("text/json", f.MediaType.ToString()),
-                f => Assert.Equal("text/xml", f.MediaType.ToString()));
+                f => Assert.Equal("text/xml", f.MediaType.ToString())
+            );
         }
 
         [Fact]
@@ -1299,7 +1346,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             var action = CreateActionDescriptor(nameof(AcceptsFormFile));
             action.FilterDescriptors = new[]
             {
-                new FilterDescriptor(new ConsumesAttribute("multipart/form-data"), FilterScope.Action),
+                new FilterDescriptor(
+                    new ConsumesAttribute("multipart/form-data"),
+                    FilterScope.Action
+                ),
             };
 
             // Act
@@ -1412,7 +1462,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Path, id.Source);
             Assert.Equal(typeof(int), id.Type);
 
-            var product = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product");
+            var product = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Product"
+            );
             Assert.Same(BindingSource.Body, product.Source);
             Assert.Equal(typeof(Product), product.Type);
 
@@ -1420,7 +1473,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Header, userId.Source);
             Assert.Equal(typeof(string), userId.Type);
 
-            var comments = Assert.Single(description.ParameterDescriptions, p => p.Name == "Comments");
+            var comments = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Comments"
+            );
             Assert.Same(BindingSource.ModelBinding, comments.Source);
             Assert.Equal(typeof(string), comments.Type);
         }
@@ -1443,7 +1499,7 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Query, id.Source);
             Assert.Equal(typeof(string), id.Type);
         }
-        
+
         [Fact]
         public void GetApiDescription_ParameterDescription_FromQueryManager()
         {
@@ -1486,7 +1542,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Path, id.Source);
             Assert.Equal(typeof(int), id.Type);
 
-            var product = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product");
+            var product = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Product"
+            );
             Assert.Same(BindingSource.Body, product.Source);
             Assert.Equal(typeof(Product), product.Type);
 
@@ -1494,7 +1553,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Header, userId.Source);
             Assert.Equal(typeof(string), userId.Type);
 
-            var comments = Assert.Single(description.ParameterDescriptions, p => p.Name == "Comments");
+            var comments = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Comments"
+            );
             Assert.Same(BindingSource.Query, comments.Source);
             Assert.Equal(typeof(string), comments.Type);
         }
@@ -1517,15 +1579,24 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Path, id.Source);
             Assert.Equal(typeof(int), id.Type);
 
-            var quantity = Assert.Single(description.ParameterDescriptions, p => p.Name == "Quantity");
+            var quantity = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Quantity"
+            );
             Assert.Same(BindingSource.ModelBinding, quantity.Source);
             Assert.Equal(typeof(int), quantity.Type);
 
-            var productId = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product.Id");
+            var productId = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Product.Id"
+            );
             Assert.Same(BindingSource.ModelBinding, productId.Source);
             Assert.Equal(typeof(int), productId.Type);
 
-            var price = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product.Price");
+            var price = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Product.Price"
+            );
             Assert.Same(BindingSource.Query, price.Source);
             Assert.Equal(typeof(decimal), price.Type);
         }
@@ -1549,15 +1620,24 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Path, id.Source);
             Assert.Equal(typeof(int), id.Type);
 
-            var quantity = Assert.Single(description.ParameterDescriptions, p => p.Name == "Quantity");
+            var quantity = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Quantity"
+            );
             Assert.Same(BindingSource.Query, quantity.Source);
             Assert.Equal(typeof(int), quantity.Type);
 
-            var productId = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product.Id");
+            var productId = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Product.Id"
+            );
             Assert.Same(BindingSource.Query, productId.Source);
             Assert.Equal(typeof(int), productId.Type);
 
-            var productPrice = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product.Price");
+            var productPrice = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Product.Price"
+            );
             Assert.Same(BindingSource.Query, productPrice.Source);
             Assert.Equal(typeof(decimal), productPrice.Type);
         }
@@ -1580,11 +1660,17 @@ namespace Microsoft.AspNetCore.Mvc.Description
 
             foreach (var parentName in parentNames)
             {
-                var id = Assert.Single(description.ParameterDescriptions, p => p.Name == $"{parentName}.Child.Id");
+                var id = Assert.Single(
+                    description.ParameterDescriptions,
+                    p => p.Name == $"{parentName}.Child.Id"
+                );
                 Assert.Same(BindingSource.Query, id.Source);
                 Assert.Equal(typeof(int), id.Type);
 
-                var name = Assert.Single(description.ParameterDescriptions, p => p.Name == $"{parentName}.Child.Name");
+                var name = Assert.Single(
+                    description.ParameterDescriptions,
+                    p => p.Name == $"{parentName}.Child.Name"
+                );
                 Assert.Same(BindingSource.Query, name.Source);
                 Assert.Equal(typeof(string), name.Type);
             }
@@ -1611,11 +1697,17 @@ namespace Microsoft.AspNetCore.Mvc.Description
             {
                 foreach (var parentName in parentNames)
                 {
-                    var id = Assert.Single(description.ParameterDescriptions, p => p.Name == $"{groupName}.{parentName}.Child.Id");
+                    var id = Assert.Single(
+                        description.ParameterDescriptions,
+                        p => p.Name == $"{groupName}.{parentName}.Child.Id"
+                    );
                     Assert.Same(BindingSource.Query, id.Source);
                     Assert.Equal(typeof(int), id.Type);
 
-                    var name = Assert.Single(description.ParameterDescriptions, p => p.Name == $"{groupName}.{parentName}.Child.Name");
+                    var name = Assert.Single(
+                        description.ParameterDescriptions,
+                        p => p.Name == $"{groupName}.{parentName}.Child.Name"
+                    );
                     Assert.Same(BindingSource.Query, name.Source);
                     Assert.Equal(typeof(string), name.Type);
                 }
@@ -1746,7 +1838,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Path, id.Source);
             Assert.Equal(typeof(int), id.Type);
 
-            var product = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product");
+            var product = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Product"
+            );
             Assert.Same(BindingSource.Body, product.Source);
             Assert.Equal(typeof(Product), product.Type);
 
@@ -1754,7 +1849,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Same(BindingSource.Header, userId.Source);
             Assert.Equal(typeof(string), userId.Type);
 
-            var comments = Assert.Single(description.ParameterDescriptions, p => p.Name == "Comments");
+            var comments = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == "Comments"
+            );
             Assert.Same(BindingSource.ModelBinding, comments.Source);
             Assert.Equal(typeof(string), comments.Type);
         }
@@ -1781,7 +1879,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             var context = GetApiParameterContext(description);
 
             // Act
-            DefaultApiDescriptionProvider.ProcessIsRequired(context, new MvcOptions { AllowEmptyInputInBodyModelBinding = true });
+            DefaultApiDescriptionProvider.ProcessIsRequired(
+                context,
+                new MvcOptions { AllowEmptyInputInBodyModelBinding = true }
+            );
 
             // Assert
             Assert.False(description.IsRequired);
@@ -1794,10 +1895,7 @@ namespace Microsoft.AspNetCore.Mvc.Description
             var description = new ApiParameterDescription
             {
                 Source = BindingSource.Body,
-                BindingInfo = new BindingInfo
-                {
-                    EmptyBodyBehavior = EmptyBodyBehavior.Allow,
-                }
+                BindingInfo = new BindingInfo { EmptyBodyBehavior = EmptyBodyBehavior.Allow, }
             };
             var context = GetApiParameterContext(description);
 
@@ -1812,16 +1910,16 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void ProcessIsRequired_SetsTrue_ForParameterDescriptorsWithBindRequired()
         {
             // Arrange
-            var description = new ApiParameterDescription
-            {
-                Source = BindingSource.Query,
-            };
+            var description = new ApiParameterDescription { Source = BindingSource.Query, };
             var context = GetApiParameterContext(description);
             var modelMetadataProvider = new TestModelMetadataProvider();
             modelMetadataProvider
                 .ForProperty<Person>(nameof(Person.Name))
                 .BindingDetails(d => d.IsBindingRequired = true);
-            description.ModelMetadata = modelMetadataProvider.GetMetadataForProperty(typeof(Person), nameof(Person.Name));
+            description.ModelMetadata = modelMetadataProvider.GetMetadataForProperty(
+                typeof(Person),
+                nameof(Person.Name)
+            );
 
             // Act
             DefaultApiDescriptionProvider.ProcessIsRequired(context, new MvcOptions());
@@ -1872,7 +1970,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             modelMetadataProvider
                 .ForProperty<Person>(nameof(Person.Name))
                 .ValidationDetails(d => d.IsRequired = true);
-            description.ModelMetadata = modelMetadataProvider.GetMetadataForProperty(typeof(Person), nameof(Person.Name));
+            description.ModelMetadata = modelMetadataProvider.GetMetadataForProperty(
+                typeof(Person),
+                nameof(Person.Name)
+            );
 
             // Act
             DefaultApiDescriptionProvider.ProcessIsRequired(context, new MvcOptions());
@@ -1885,7 +1986,11 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void ProcessDefaultValue_SetsDefaultRouteValue()
         {
             // Arrange
-            var methodInfo = GetType().GetMethod(nameof(ParameterDefaultValue), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(
+                    nameof(ParameterDefaultValue),
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
             var parameterInfo = methodInfo.GetParameters()[0];
 
             var defaultValue = new object();
@@ -1911,7 +2016,11 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void ProcessDefaultValue_SetsDefaultValue_FromParameterInfo()
         {
             // Arrange
-            var methodInfo = GetType().GetMethod(nameof(ParameterDefaultValue), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(
+                    nameof(ParameterDefaultValue),
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
             var parameterInfo = methodInfo.GetParameters()[0];
             var description = new ApiParameterDescription
             {
@@ -1934,7 +2043,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
         public void ProcessDefaultValue_DoesNotSpecifyDefaultValueForValueTypes_WhenNoValueIsSpecified()
         {
             // Arrange
-            var methodInfo = GetType().GetMethod(nameof(AcceptsId_Query), BindingFlags.Instance | BindingFlags.NonPublic);
+            var methodInfo = GetType()
+                .GetMethod(nameof(AcceptsId_Query), BindingFlags.Instance | BindingFlags.NonPublic);
             var parameterInfo = methodInfo.GetParameters()[0];
             var description = new ApiParameterDescription
             {
@@ -1953,9 +2063,15 @@ namespace Microsoft.AspNetCore.Mvc.Description
             Assert.Null(description.DefaultValue);
         }
 
-        private static ApiParameterContext GetApiParameterContext(ApiParameterDescription description)
+        private static ApiParameterContext GetApiParameterContext(
+            ApiParameterDescription description
+        )
         {
-            var context = new ApiParameterContext(new EmptyModelMetadataProvider(), new ControllerActionDescriptor(), new TemplatePart[0]);
+            var context = new ApiParameterContext(
+                new EmptyModelMetadataProvider(),
+                new ControllerActionDescriptor(),
+                new TemplatePart[0]
+            );
             context.Results.Add(description);
             return context;
         }
@@ -1964,7 +2080,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             ActionDescriptor action,
             List<MockInputFormatter> inputFormatters = null,
             List<MockOutputFormatter> outputFormatters = null,
-            RouteOptions routeOptions = null)
+            RouteOptions routeOptions = null
+        )
         {
             var context = new ApiDescriptionProviderContext(new ActionDescriptor[] { action });
 
@@ -1982,7 +2099,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
             var optionsAccessor = Options.Create(options);
 
             var constraintResolver = new Mock<IInlineConstraintResolver>();
-            constraintResolver.Setup(c => c.ResolveConstraint("int"))
+            constraintResolver
+                .Setup(c => c.ResolveConstraint("int"))
                 .Returns(new IntRouteConstraint());
 
             var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -1992,7 +2110,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
                 constraintResolver.Object,
                 modelMetadataProvider,
                 new ActionResultTypeMapper(),
-                Options.Create(routeOptions ?? new RouteOptions()));
+                Options.Create(routeOptions ?? new RouteOptions())
+            );
 
             provider.OnProvidersExecuting(context);
             provider.OnProvidersExecuted(context);
@@ -2036,7 +2155,10 @@ namespace Microsoft.AspNetCore.Mvc.Description
             return formatters;
         }
 
-        private ControllerActionDescriptor CreateActionDescriptor(string methodName = null, Type controllerType = null)
+        private ControllerActionDescriptor CreateActionDescriptor(
+            string methodName = null,
+            Type controllerType = null
+        )
         {
             var action = new ControllerActionDescriptor();
             action.SetProperty(new ApiDescriptionActionData());
@@ -2045,42 +2167,53 @@ namespace Microsoft.AspNetCore.Mvc.Description
             {
                 action.MethodInfo = controllerType.GetMethod(
                     methodName ?? "ReturnsObject",
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
 
                 action.ControllerTypeInfo = controllerType.GetTypeInfo();
                 action.BoundProperties = new List<ParameterDescriptor>();
 
                 foreach (var property in controllerType.GetProperties())
                 {
-                    var bindingInfo = BindingInfo.GetBindingInfo(property.GetCustomAttributes().OfType<object>());
+                    var bindingInfo = BindingInfo.GetBindingInfo(
+                        property.GetCustomAttributes().OfType<object>()
+                    );
                     if (bindingInfo != null)
                     {
-                        action.BoundProperties.Add(new ParameterDescriptor()
-                        {
-                            BindingInfo = bindingInfo,
-                            Name = property.Name,
-                            ParameterType = property.PropertyType,
-                        });
+                        action.BoundProperties.Add(
+                            new ParameterDescriptor()
+                            {
+                                BindingInfo = bindingInfo,
+                                Name = property.Name,
+                                ParameterType = property.PropertyType,
+                            }
+                        );
                     }
                 }
             }
             else
             {
-                action.MethodInfo = GetType().GetMethod(
-                    methodName ?? "ReturnsObject",
-                    BindingFlags.Instance | BindingFlags.NonPublic);
+                action.MethodInfo = GetType()
+                    .GetMethod(
+                        methodName ?? "ReturnsObject",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    );
             }
 
             action.Parameters = new List<ParameterDescriptor>();
             foreach (var parameter in action.MethodInfo.GetParameters())
             {
-                action.Parameters.Add(new ControllerParameterDescriptor()
-                {
-                    Name = parameter.Name,
-                    ParameterType = parameter.ParameterType,
-                    BindingInfo = BindingInfo.GetBindingInfo(parameter.GetCustomAttributes().OfType<object>()),
-                    ParameterInfo = parameter
-                });
+                action.Parameters.Add(
+                    new ControllerParameterDescriptor()
+                    {
+                        Name = parameter.Name,
+                        ParameterType = parameter.ParameterType,
+                        BindingInfo = BindingInfo.GetBindingInfo(
+                            parameter.GetCustomAttributes().OfType<object>()
+                        ),
+                        ParameterInfo = parameter
+                    }
+                );
             }
 
             return action;
@@ -2098,10 +2231,7 @@ namespace Microsoft.AspNetCore.Mvc.Description
             return null;
         }
 
-        private void ReturnsVoid()
-        {
-
-        }
+        private void ReturnsVoid() { }
 
         private IActionResult ReturnsActionResult()
         {
@@ -2170,129 +2300,78 @@ namespace Microsoft.AspNetCore.Mvc.Description
 
         private ActionResult<Product> ReturnsActionResultOfProduct() => null;
 
-        private ActionResult<IEnumerable<Product>> ReturnsActionResultOfSequenceOfProducts() => null;
+        private ActionResult<IEnumerable<Product>> ReturnsActionResultOfSequenceOfProducts() =>
+            null;
 
         private Task<ActionResult<Product>> ReturnsTaskOfActionResultOfProduct() => null;
 
-        private Task<ActionResult<IEnumerable<Product>>> ReturnsTaskOfActionResultOfSequenceOfProducts() => null;
+        private Task<
+            ActionResult<IEnumerable<Product>>
+        > ReturnsTaskOfActionResultOfSequenceOfProducts() => null;
 
-        private void AcceptsProduct(Product product)
-        {
-        }
+        private void AcceptsProduct(Product product) { }
 
-        private void RequiredParameter([BindRequired, Required] string name)
-        {
-        }
+        private void RequiredParameter([BindRequired, Required] string name) { }
 
-        private void AcceptsProduct_Body([FromBody] Product product)
-        {
-        }
+        private void AcceptsProduct_Body([FromBody] Product product) { }
 
-        private void AcceptsProduct_Form([FromForm] Product product)
-        {
-        }
+        private void AcceptsProduct_Form([FromForm] Product product) { }
 
-        private void AcceptsFormFile([FromFormFile] IFormFile formFile)
-        {
-        }
+        private void AcceptsFormFile([FromFormFile] IFormFile formFile) { }
 
         // This will show up as source = model binding
-        private void AcceptsProduct_Default([ModelBinder] Product product)
-        {
-        }
+        private void AcceptsProduct_Default([ModelBinder] Product product) { }
 
         // This will show up as source = unknown
-        private void AcceptsProduct_Custom([ModelBinder(BinderType = typeof(BodyModelBinder))] Product product)
-        {
-        }
+        private void AcceptsProduct_Custom(
+            [ModelBinder(BinderType = typeof(BodyModelBinder))] Product product
+        ) { }
 
-        private void AcceptsId_Route([FromRoute] int id)
-        {
-        }
+        private void AcceptsId_Route([FromRoute] int id) { }
 
-        private void AcceptsId_Query([FromQuery] int id)
-        {
-        }
+        private void AcceptsId_Query([FromQuery] int id) { }
 
-        private void AcceptsId_Header([FromHeader] int id)
-        {
-        }
+        private void AcceptsId_Header([FromHeader] int id) { }
 
-        private void AcceptsFormatters_Services([FromServices] ITestService tempDataProvider)
-        {
-        }
+        private void AcceptsFormatters_Services([FromServices] ITestService tempDataProvider) { }
 
-        private void AcceptsProductChangeDTO(ProductChangeDTO dto)
-        {
-        }
+        private void AcceptsProductChangeDTO(ProductChangeDTO dto) { }
 
-        private void AcceptsProductChangeDTO_Query([FromQuery] ProductChangeDTO dto)
-        {
-        }
+        private void AcceptsProductChangeDTO_Query([FromQuery] ProductChangeDTO dto) { }
 
-        private void AcceptsManager([ModelBinder] Manager dto)
-        {
-        }
+        private void AcceptsManager([ModelBinder] Manager dto) { }
 
-        private void AcceptsEmployee([FromQuery(Name = "employee")] Employee dto)
-        {
-        }
+        private void AcceptsEmployee([FromQuery(Name = "employee")] Employee dto) { }
 
-        private void AcceptsOrderDTO(OrderDTO dto)
-        {
-        }
+        private void AcceptsOrderDTO(OrderDTO dto) { }
 
-        private void AcceptsOrderDTO_Query([FromQuery] OrderDTO dto)
-        {
-        }
+        private void AcceptsOrderDTO_Query([FromQuery] OrderDTO dto) { }
 
-        private void AcceptsCycle(Cycle1 c)
-        {
-        }
+        private void AcceptsCycle(Cycle1 c) { }
 
-        private void AcceptsHasCollection(HasCollection c)
-        {
-        }
+        private void AcceptsHasCollection(HasCollection c) { }
 
-        private void AcceptsHasCollection_Complex(HasCollection_Complex c)
-        {
-        }
+        private void AcceptsHasCollection_Complex(HasCollection_Complex c) { }
 
-        private void AcceptsRedundantMetadata([FromQuery] RedundantMetadata r)
-        {
-        }
+        private void AcceptsRedundantMetadata([FromQuery] RedundantMetadata r) { }
 
-        private void AcceptsPerson([FromForm] Person person)
-        {
-        }
+        private void AcceptsPerson([FromForm] Person person) { }
 
-        private void FromRouting([FromRoute] int id)
-        {
-        }
+        private void FromRouting([FromRoute] int id) { }
 
-        private void FromModelBinding(int id)
-        {
-        }
+        private void FromModelBinding(int id) { }
 
-        private void FromCustom([ModelBinder(typeof(BodyModelBinder))] int id)
-        {
-        }
+        private void FromCustom([ModelBinder(typeof(BodyModelBinder))] int id) { }
 
-        private void FromHeader([FromHeader] int id)
-        {
-        }
+        private void FromHeader([FromHeader] int id) { }
 
-        private void FromBody([FromBody] int id)
-        {
-        }
+        private void FromBody([FromBody] int id) { }
 
-        private void AcceptsMultipleProperties([FromQuery] MultipleProperties model)
-        {
-        }
+        private void AcceptsMultipleProperties([FromQuery] MultipleProperties model) { }
 
-        private void AcceptsMultiplePropertiesNested([FromQuery] MultiplePropertiesContainer model)
-        {
-        }
+        private void AcceptsMultiplePropertiesNested(
+            [FromQuery] MultiplePropertiesContainer model
+        ) { }
 
         private void ParameterDefaultValue(int value = 10) { }
 
@@ -2312,9 +2391,7 @@ namespace Microsoft.AspNetCore.Mvc.Description
 
             public string NotBound { get; set; }
 
-            public void FromQueryName([FromQuery] string name)
-            {
-            }
+            public void FromQueryName([FromQuery] string name) { }
         }
 
         public class Customer
@@ -2346,9 +2423,7 @@ namespace Microsoft.AspNetCore.Mvc.Description
                 return default;
             }
 
-            public void ReturnsVoid()
-            {
-            }
+            public void ReturnsVoid() { }
         }
 
         public class DerivedProducesController : BaseProducesController
@@ -2492,7 +2567,8 @@ namespace Microsoft.AspNetCore.Mvc.Description
 
             public override Task<InputFormatterResult> ReadRequestBodyAsync(
                 InputFormatterContext context,
-                Encoding effectiveEncoding)
+                Encoding effectiveEncoding
+            )
             {
                 throw new NotImplementedException();
             }
@@ -2540,11 +2616,11 @@ namespace Microsoft.AspNetCore.Mvc.Description
             }
         }
 
-        private class ContentTypeAttribute :
-            Attribute,
-            IFilterMetadata,
-            IApiResponseMetadataProvider,
-            IApiRequestMetadataProvider
+        private class ContentTypeAttribute
+            : Attribute,
+              IFilterMetadata,
+              IApiResponseMetadataProvider,
+              IApiRequestMetadataProvider
         {
             public ContentTypeAttribute(string mediaType)
             {
@@ -2570,7 +2646,6 @@ namespace Microsoft.AspNetCore.Mvc.Description
 
         private interface ITestService
         {
-
         }
 
         private class FromFormFileAttribute : Attribute, IBindingSourceMetadata

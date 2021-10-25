@@ -23,7 +23,11 @@ namespace Microsoft.AspNetCore.Razor.Language
             FileKind = fileKind;
         }
 
-        public DefaultRazorParserOptionsBuilder(bool designTime, RazorLanguageVersion version, string fileKind)
+        public DefaultRazorParserOptionsBuilder(
+            bool designTime,
+            RazorLanguageVersion version,
+            string fileKind
+        )
         {
             _designTime = designTime;
             LanguageVersion = version;
@@ -34,7 +38,8 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override bool DesignTime => _designTime;
 
-        public override ICollection<DirectiveDescriptor> Directives { get; } = new List<DirectiveDescriptor>();
+        public override ICollection<DirectiveDescriptor> Directives { get; } =
+            new List<DirectiveDescriptor>();
 
         public override string FileKind { get; }
 
@@ -44,7 +49,13 @@ namespace Microsoft.AspNetCore.Razor.Language
 
         public override RazorParserOptions Build()
         {
-            return new DefaultRazorParserOptions(Directives.ToArray(), DesignTime, ParseLeadingDirectives, LanguageVersion, FileKind ?? FileKinds.Legacy);
+            return new DefaultRazorParserOptions(
+                Directives.ToArray(),
+                DesignTime,
+                ParseLeadingDirectives,
+                LanguageVersion,
+                FileKind ?? FileKinds.Legacy
+            );
         }
 
         public override void SetDesignTime(bool designTime)

@@ -13,26 +13,24 @@ namespace PInvokeTests
     static class IEnumeratorNative
     {
         [DllImport(nameof(IEnumeratorNative), PreserveSig = false)]
-        public static extern IEnumerator GetIntegerEnumerator(
-            int start,
-            int count);
+        public static extern IEnumerator GetIntegerEnumerator(int start, int count);
 
         [DllImport(nameof(IEnumeratorNative), PreserveSig = false)]
-        public static extern IEnumerable GetIntegerEnumeration(
-            int start,
-            int count);
+        public static extern IEnumerable GetIntegerEnumeration(int start, int count);
 
         [DllImport(nameof(IEnumeratorNative), PreserveSig = false)]
         public static extern void VerifyIntegerEnumerator(
             IEnumerator enumerator,
             int start,
-            int count);
+            int count
+        );
 
         [DllImport(nameof(IEnumeratorNative), PreserveSig = false)]
         public static extern void VerifyIntegerEnumeration(
             IEnumerable enumerable,
             int start,
-            int count);
+            int count
+        );
 
         [DllImport(nameof(IEnumeratorNative), PreserveSig = false)]
         public static extern IEnumerator PassThroughEnumerator(IEnumerator enumerator);
@@ -42,26 +40,42 @@ namespace PInvokeTests
     {
         private static void TestNativeToManaged()
         {
-            Assert.AreAllEqual(Enumerable.Range(1, 10), EnumeratorAsEnumerable(IEnumeratorNative.GetIntegerEnumerator(1, 10)));
-            Assert.AreAllEqual(Enumerable.Range(1, 10), IEnumeratorNative.GetIntegerEnumeration(1, 10).OfType<int>());
+            Assert.AreAllEqual(
+                Enumerable.Range(1, 10),
+                EnumeratorAsEnumerable(IEnumeratorNative.GetIntegerEnumerator(1, 10))
+            );
+            Assert.AreAllEqual(
+                Enumerable.Range(1, 10),
+                IEnumeratorNative.GetIntegerEnumeration(1, 10).OfType<int>()
+            );
         }
 
         private static void TestManagedToNative()
         {
-            IEnumeratorNative.VerifyIntegerEnumerator(Enumerable.Range(1, 10).GetEnumerator(), 1, 10);
+            IEnumeratorNative.VerifyIntegerEnumerator(
+                Enumerable.Range(1, 10).GetEnumerator(),
+                1,
+                10
+            );
             IEnumeratorNative.VerifyIntegerEnumeration(Enumerable.Range(1, 10), 1, 10);
         }
 
         private static void TestNativeRoundTrip()
         {
             IEnumerator nativeEnumerator = IEnumeratorNative.GetIntegerEnumerator(1, 10);
-            Assert.AreEqual(nativeEnumerator, IEnumeratorNative.PassThroughEnumerator(nativeEnumerator));
+            Assert.AreEqual(
+                nativeEnumerator,
+                IEnumeratorNative.PassThroughEnumerator(nativeEnumerator)
+            );
         }
 
         private static void TestManagedRoundTrip()
         {
             IEnumerator managedEnumerator = Enumerable.Range(1, 10).GetEnumerator();
-            Assert.AreEqual(managedEnumerator, IEnumeratorNative.PassThroughEnumerator(managedEnumerator));
+            Assert.AreEqual(
+                managedEnumerator,
+                IEnumeratorNative.PassThroughEnumerator(managedEnumerator)
+            );
         }
 
         public static int Main()

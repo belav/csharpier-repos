@@ -47,10 +47,9 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers
         protected virtual bool IncludeType(TypeInfo type)
         {
             // We don't need to check visibility here, that's handled by the type provider.
-            return
-                typeof(ITagHelper).GetTypeInfo().IsAssignableFrom(type) &&
-                !type.IsAbstract &&
-                !type.IsGenericType;
+            return typeof(ITagHelper).GetTypeInfo().IsAssignableFrom(type)
+                && !type.IsAbstract
+                && !type.IsGenericType;
         }
     }
 }

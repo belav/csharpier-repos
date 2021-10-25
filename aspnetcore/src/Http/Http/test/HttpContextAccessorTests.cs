@@ -46,30 +46,38 @@ namespace Microsoft.AspNetCore.Http
             var context = new DefaultHttpContext();
             accessor.HttpContext = context;
 
-            var checkAsyncFlowTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var waitForNullTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var afterNullCheckTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var checkAsyncFlowTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var waitForNullTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var afterNullCheckTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            ThreadPool.QueueUserWorkItem(async _ =>
-            {
-                // The HttpContext flows with the execution context
-                Assert.Same(context, accessor.HttpContext);
-
-                checkAsyncFlowTcs.SetResult(null);
-
-                await waitForNullTcs.Task;
-
-                try
+            ThreadPool.QueueUserWorkItem(
+                async _ =>
                 {
-                    Assert.Null(accessor.HttpContext);
+                    // The HttpContext flows with the execution context
+                    Assert.Same(context, accessor.HttpContext);
 
-                    afterNullCheckTcs.SetResult(null);
+                    checkAsyncFlowTcs.SetResult(null);
+
+                    await waitForNullTcs.Task;
+
+                    try
+                    {
+                        Assert.Null(accessor.HttpContext);
+
+                        afterNullCheckTcs.SetResult(null);
+                    }
+                    catch (Exception ex)
+                    {
+                        afterNullCheckTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    afterNullCheckTcs.SetException(ex);
-                }
-            });
+            );
 
             await checkAsyncFlowTcs.Task;
 
@@ -91,30 +99,38 @@ namespace Microsoft.AspNetCore.Http
             var context = new DefaultHttpContext();
             accessor.HttpContext = context;
 
-            var checkAsyncFlowTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var waitForNullTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
-            var afterNullCheckTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var checkAsyncFlowTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var waitForNullTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var afterNullCheckTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            ThreadPool.QueueUserWorkItem(async _ =>
-            {
-                // The HttpContext flows with the execution context
-                Assert.Same(context, accessor.HttpContext);
-
-                checkAsyncFlowTcs.SetResult(null);
-
-                await waitForNullTcs.Task;
-
-                try
+            ThreadPool.QueueUserWorkItem(
+                async _ =>
                 {
-                    Assert.Null(accessor.HttpContext);
+                    // The HttpContext flows with the execution context
+                    Assert.Same(context, accessor.HttpContext);
 
-                    afterNullCheckTcs.SetResult(null);
+                    checkAsyncFlowTcs.SetResult(null);
+
+                    await waitForNullTcs.Task;
+
+                    try
+                    {
+                        Assert.Null(accessor.HttpContext);
+
+                        afterNullCheckTcs.SetResult(null);
+                    }
+                    catch (Exception ex)
+                    {
+                        afterNullCheckTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    afterNullCheckTcs.SetException(ex);
-                }
-            });
+            );
 
             await checkAsyncFlowTcs.Task;
 
@@ -137,23 +153,27 @@ namespace Microsoft.AspNetCore.Http
             var context = new DefaultHttpContext();
             accessor.HttpContext = context;
 
-            var checkAsyncFlowTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var checkAsyncFlowTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             accessor.HttpContext = null;
 
-            ThreadPool.QueueUserWorkItem(_ =>
-            {
-                try
+            ThreadPool.QueueUserWorkItem(
+                _ =>
                 {
-                    // The HttpContext flows with the execution context
-                    Assert.Null(accessor.HttpContext);
-                    checkAsyncFlowTcs.SetResult(null);
+                    try
+                    {
+                        // The HttpContext flows with the execution context
+                        Assert.Null(accessor.HttpContext);
+                        checkAsyncFlowTcs.SetResult(null);
+                    }
+                    catch (Exception ex)
+                    {
+                        checkAsyncFlowTcs.SetException(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    checkAsyncFlowTcs.SetException(ex);
-                }
-            });
+            );
 
             await checkAsyncFlowTcs.Task;
         }
@@ -166,21 +186,26 @@ namespace Microsoft.AspNetCore.Http
             var context = new DefaultHttpContext();
             accessor.HttpContext = context;
 
-            var checkAsyncFlowTcs = new TaskCompletionSource<object>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var checkAsyncFlowTcs = new TaskCompletionSource<object>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            ThreadPool.UnsafeQueueUserWorkItem(_ =>
-            {
-                try
+            ThreadPool.UnsafeQueueUserWorkItem(
+                _ =>
                 {
-                    // The HttpContext flows with the execution context
-                    Assert.Null(accessor.HttpContext);
-                    checkAsyncFlowTcs.SetResult(null);
-                }
-                catch (Exception ex)
-                {
-                    checkAsyncFlowTcs.SetException(ex);
-                }
-            }, null);
+                    try
+                    {
+                        // The HttpContext flows with the execution context
+                        Assert.Null(accessor.HttpContext);
+                        checkAsyncFlowTcs.SetResult(null);
+                    }
+                    catch (Exception ex)
+                    {
+                        checkAsyncFlowTcs.SetException(ex);
+                    }
+                },
+                null
+            );
 
             await checkAsyncFlowTcs.Task;
         }

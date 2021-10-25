@@ -36,7 +36,8 @@ namespace Microsoft.AspNetCore.Diagnostics
             RequestDelegate next,
             ILoggerFactory loggerFactory,
             IOptions<ExceptionHandlerOptions> options,
-            DiagnosticListener diagnosticListener)
+            DiagnosticListener diagnosticListener
+        )
         {
             _next = next;
             _options = options.Value;
@@ -47,7 +48,9 @@ namespace Microsoft.AspNetCore.Diagnostics
             {
                 if (_options.ExceptionHandlingPath == null)
                 {
-                    throw new InvalidOperationException(Resources.ExceptionHandlerOptions_NotConfiguredCorrectly);
+                    throw new InvalidOperationException(
+                        Resources.ExceptionHandlerOptions_NotConfiguredCorrectly
+                    );
                 }
                 else
                 {
@@ -81,7 +84,11 @@ namespace Microsoft.AspNetCore.Diagnostics
 
             return HandleException(context, edi);
 
-            static async Task Awaited(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+            static async Task Awaited(
+                ExceptionHandlerMiddleware middleware,
+                HttpContext context,
+                Task task
+            )
             {
                 ExceptionDispatchInfo? edi = null;
                 try
@@ -132,19 +139,35 @@ namespace Microsoft.AspNetCore.Diagnostics
 
                 await _options.ExceptionHandler!(context);
 
-                if (context.Response.StatusCode != StatusCodes.Status404NotFound || _options.AllowStatusCode404Response)
+                if (
+                    context.Response.StatusCode != StatusCodes.Status404NotFound
+                    || _options.AllowStatusCode404Response
+                )
                 {
-                    if (_diagnosticListener.IsEnabled() && _diagnosticListener.IsEnabled("Microsoft.AspNetCore.Diagnostics.HandledException"))
+                    if (
+                        _diagnosticListener.IsEnabled()
+                        && _diagnosticListener.IsEnabled(
+                            "Microsoft.AspNetCore.Diagnostics.HandledException"
+                        )
+                    )
                     {
-                        _diagnosticListener.Write("Microsoft.AspNetCore.Diagnostics.HandledException", new { httpContext = context, exception = edi.SourceException });
+                        _diagnosticListener.Write(
+                            "Microsoft.AspNetCore.Diagnostics.HandledException",
+                            new { httpContext = context, exception = edi.SourceException }
+                        );
                     }
 
                     return;
                 }
 
-                edi = ExceptionDispatchInfo.Capture(new InvalidOperationException($"The exception handler configured on {nameof(ExceptionHandlerOptions)} produced a 404 status response. " +
-                    $"This {nameof(InvalidOperationException)} containing the original exception was thrown since this is often due to a misconfigured {nameof(ExceptionHandlerOptions.ExceptionHandlingPath)}. " +
-                    $"If the exception handler is expected to return 404 status responses then set {nameof(ExceptionHandlerOptions.AllowStatusCode404Response)} to true.", edi.SourceException));
+                edi = ExceptionDispatchInfo.Capture(
+                    new InvalidOperationException(
+                        $"The exception handler configured on {nameof(ExceptionHandlerOptions)} produced a 404 status response. "
+                            + $"This {nameof(InvalidOperationException)} containing the original exception was thrown since this is often due to a misconfigured {nameof(ExceptionHandlerOptions.ExceptionHandlingPath)}. "
+                            + $"If the exception handler is expected to return 404 status responses then set {nameof(ExceptionHandlerOptions.AllowStatusCode404Response)} to true.",
+                        edi.SourceException
+                    )
+                );
             }
             catch (Exception ex2)
             {

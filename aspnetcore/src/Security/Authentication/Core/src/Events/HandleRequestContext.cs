@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Authentication
     /// Base context type for handling authentication request.
     /// </summary>
     /// <typeparam name="TOptions"></typeparam>
-    public class HandleRequestContext<TOptions> : BaseContext<TOptions> where TOptions : AuthenticationSchemeOptions
+    public class HandleRequestContext<TOptions> : BaseContext<TOptions>
+        where TOptions : AuthenticationSchemeOptions
     {
         /// <summary>
         /// Initializes a new instance of <see cref="HandleRequestContext{TOptions}"/>.
@@ -20,8 +21,8 @@ namespace Microsoft.AspNetCore.Authentication
         protected HandleRequestContext(
             HttpContext context,
             AuthenticationScheme scheme,
-            TOptions options)
-            : base(context, scheme, options) { }
+            TOptions options
+        ) : base(context, scheme, options) { }
 
         /// <summary>
         /// The <see cref="HandleRequestResult"/> which is used by the handler.

@@ -22,11 +22,23 @@ namespace System.Text.RegularExpressions
         /// the <paramref name="pattern "/>with the <paramref name="replacement "/>
         /// pattern, starting at the first character in the input string.
         /// </summary>
-        public static string Replace(string input, string pattern, string replacement, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Replace(input, replacement);
+        public static string Replace(
+            string input,
+            string pattern,
+            string replacement,
+            RegexOptions options
+        ) =>
+            RegexCache
+                .GetOrAdd(pattern, options, s_defaultMatchTimeout)
+                .Replace(input, replacement);
 
-        public static string Replace(string input, string pattern, string replacement, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).Replace(input, replacement);
+        public static string Replace(
+            string input,
+            string pattern,
+            string replacement,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).Replace(input, replacement);
 
         /// <summary>
         /// Replaces all occurrences of the previously defined pattern with the
@@ -76,9 +88,9 @@ namespace System.Text.RegularExpressions
 
             // Gets the weakly cached replacement helper or creates one if there isn't one already,
             // then uses it to perform the replace.
-            return
-                RegexReplacement.GetOrCreate(_replref!, replacement, caps!, capsize, capnames!, roptions).
-                Replace(this, input, count, startat);
+            return RegexReplacement
+                .GetOrCreate(_replref!, replacement, caps!, capsize, capnames!, roptions)
+                .Replace(this, input, count, startat);
         }
 
         /// <summary>
@@ -92,11 +104,20 @@ namespace System.Text.RegularExpressions
         /// Replaces all occurrences of the <paramref name="pattern"/> with the recent
         /// replacement pattern, starting at the first character.
         /// </summary>
-        public static string Replace(string input, string pattern, MatchEvaluator evaluator, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Replace(input, evaluator);
+        public static string Replace(
+            string input,
+            string pattern,
+            MatchEvaluator evaluator,
+            RegexOptions options
+        ) => RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Replace(input, evaluator);
 
-        public static string Replace(string input, string pattern, MatchEvaluator evaluator, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).Replace(input, evaluator);
+        public static string Replace(
+            string input,
+            string pattern,
+            MatchEvaluator evaluator,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).Replace(input, evaluator);
 
         /// <summary>
         /// Replaces all occurrences of the previously defined pattern with the recent
@@ -150,7 +171,13 @@ namespace System.Text.RegularExpressions
         /// The right-to-left case is split out because StringBuilder
         /// doesn't handle right-to-left string building directly very well.
         /// </summary>
-        private static string Replace(MatchEvaluator evaluator, Regex regex, string input, int count, int startat)
+        private static string Replace(
+            MatchEvaluator evaluator,
+            Regex regex,
+            string input,
+            int count,
+            int startat
+        )
         {
             if (evaluator is null)
             {
@@ -158,11 +185,17 @@ namespace System.Text.RegularExpressions
             }
             if (count < -1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.CountTooSmall);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.CountTooSmall
+                );
             }
             if ((uint)startat > (uint)input.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startat, ExceptionResource.BeginIndexNotNegative);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.startat,
+                    ExceptionResource.BeginIndexNotNegative
+                );
             }
 
             if (count == 0)
@@ -170,17 +203,34 @@ namespace System.Text.RegularExpressions
                 return input;
             }
 
-            var state = (segments: SegmentStringBuilder.Create(), evaluator, prevat: 0, input, count);
+            var state = (
+                segments: SegmentStringBuilder.Create(),
+                evaluator,
+                prevat: 0,
+                input,
+                count
+            );
 
             if (!regex.RightToLeft)
             {
-                regex.Run(input, startat, ref state, static (ref (SegmentStringBuilder segments, MatchEvaluator evaluator, int prevat, string input, int count) state, Match match) =>
-                {
-                    state.segments.Add(state.input.AsMemory(state.prevat, match.Index - state.prevat));
-                    state.prevat = match.Index + match.Length;
-                    state.segments.Add(state.evaluator(match).AsMemory());
-                    return --state.count != 0;
-                }, reuseMatchObject: false);
+                regex.Run(
+                    input,
+                    startat,
+                    ref state,
+                    static (
+                        ref (SegmentStringBuilder segments, MatchEvaluator evaluator, int prevat, string input, int count) state,
+                        Match match
+                    ) =>
+                    {
+                        state.segments.Add(
+                            state.input.AsMemory(state.prevat, match.Index - state.prevat)
+                        );
+                        state.prevat = match.Index + match.Length;
+                        state.segments.Add(state.evaluator(match).AsMemory());
+                        return --state.count != 0;
+                    },
+                    reuseMatchObject: false
+                );
 
                 if (state.segments.Count == 0)
                 {
@@ -193,13 +243,27 @@ namespace System.Text.RegularExpressions
             {
                 state.prevat = input.Length;
 
-                regex.Run(input, startat, ref state, static (ref (SegmentStringBuilder segments, MatchEvaluator evaluator, int prevat, string input, int count) state, Match match) =>
-                {
-                    state.segments.Add(state.input.AsMemory(match.Index + match.Length, state.prevat - match.Index - match.Length));
-                    state.prevat = match.Index;
-                    state.segments.Add(state.evaluator(match).AsMemory());
-                    return --state.count != 0;
-                }, reuseMatchObject: false);
+                regex.Run(
+                    input,
+                    startat,
+                    ref state,
+                    static (
+                        ref (SegmentStringBuilder segments, MatchEvaluator evaluator, int prevat, string input, int count) state,
+                        Match match
+                    ) =>
+                    {
+                        state.segments.Add(
+                            state.input.AsMemory(
+                                match.Index + match.Length,
+                                state.prevat - match.Index - match.Length
+                            )
+                        );
+                        state.prevat = match.Index;
+                        state.segments.Add(state.evaluator(match).AsMemory());
+                        return --state.count != 0;
+                    },
+                    reuseMatchObject: false
+                );
 
                 if (state.segments.Count == 0)
                 {

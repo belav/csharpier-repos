@@ -22,16 +22,70 @@ namespace System.Net.Http.Tests
             Assert.Equal("x11", via.ProtocolVersion);
             Assert.Equal("[::1]:1818", via.ReceivedBy);
 
-            AssertExtensions.Throws<ArgumentException>("protocolVersion", () => { new ViaHeaderValue(null, "host"); });
-            AssertExtensions.Throws<ArgumentException>("protocolVersion", () => { new ViaHeaderValue("", "host"); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("x y", "h"); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("x ", "h"); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue(" x", "h"); });
-            AssertExtensions.Throws<ArgumentException>("receivedBy", () => { new ViaHeaderValue("1.1", null); });
-            AssertExtensions.Throws<ArgumentException>("receivedBy", () => { new ViaHeaderValue("1.1", ""); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("v", "x y"); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("v", "x "); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("v", " x"); });
+            AssertExtensions.Throws<ArgumentException>(
+                "protocolVersion",
+                () =>
+                {
+                    new ViaHeaderValue(null, "host");
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "protocolVersion",
+                () =>
+                {
+                    new ViaHeaderValue("", "host");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("x y", "h");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("x ", "h");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue(" x", "h");
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "receivedBy",
+                () =>
+                {
+                    new ViaHeaderValue("1.1", null);
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "receivedBy",
+                () =>
+                {
+                    new ViaHeaderValue("1.1", "");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("v", "x y");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("v", "x ");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("v", " x");
+                }
+            );
         }
 
         [Fact]
@@ -43,9 +97,24 @@ namespace System.Net.Http.Tests
             Assert.Equal("HTTP", via.ProtocolName);
             Assert.Null(via.Comment);
 
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("v", "h", "x y"); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("v", "h", "x "); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("v", "h", " x"); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("v", "h", "x y");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("v", "h", "x ");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("v", "h", " x");
+                }
+            );
         }
 
         [Fact]
@@ -57,8 +126,18 @@ namespace System.Net.Http.Tests
             Assert.Equal("HTTP", via.ProtocolName);
             Assert.Equal("(comment)", via.Comment);
 
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("v", "h", "p", "(x"); });
-            Assert.Throws<FormatException>(() => { new ViaHeaderValue("v", "h", "p", "x)"); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("v", "h", "p", "(x");
+                }
+            );
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    new ViaHeaderValue("v", "h", "p", "x)");
+                }
+            );
         }
 
         [Fact]
@@ -173,16 +252,29 @@ namespace System.Net.Http.Tests
         [Fact]
         public void GetViaLength_DifferentValidScenarios_AllReturnNonZero()
         {
-            CheckGetViaLength(" HTTP  /  1.1   .host \t (comment)  ", 1, 34,
-                new ViaHeaderValue("1.1", ".host", "HTTP", "(comment)"));
-            CheckGetViaLength("x11x [FE18:AB64::156]:80 (comment,) other", 0, 36,
-                new ViaHeaderValue("x11x", "[FE18:AB64::156]:80", null, "(comment,)"));
+            CheckGetViaLength(
+                " HTTP  /  1.1   .host \t (comment)  ",
+                1,
+                34,
+                new ViaHeaderValue("1.1", ".host", "HTTP", "(comment)")
+            );
+            CheckGetViaLength(
+                "x11x [FE18:AB64::156]:80 (comment,) other",
+                0,
+                36,
+                new ViaHeaderValue("x11x", "[FE18:AB64::156]:80", null, "(comment,)")
+            );
 
             // The parser reads until it reaches an invalid/unexpected character. If until then it was able to create
             // a valid ViaHeaderValue, it will return the length of the parsed string. Therefore a string like
             // "1.1 host," is considered valid (until ','), whereas "1.1 host (invalid" is considered invalid, since
             // the comment is in an invalid format.
-            CheckGetViaLength("WS/version example.com,next", 0, 22, new ViaHeaderValue("version", "example.com", "WS"));
+            CheckGetViaLength(
+                "WS/version example.com,next",
+                0,
+                22,
+                new ViaHeaderValue("version", "example.com", "WS")
+            );
 
             // Note that since 'HTTP1.1' is a valid token, it is considered to be the protocol version.
             CheckGetViaLength("HTTP1.1 host", 0, 12, new ViaHeaderValue("HTTP1.1", "host"));
@@ -229,8 +321,10 @@ namespace System.Net.Http.Tests
         public void Parse_SetOfValidValueStrings_ParsedCorrectly()
         {
             CheckValidParse(" 1.1   host ", new ViaHeaderValue("1.1", "host"));
-            CheckValidParse(" HTTP  /  x11   192.168.0.1\r\n (comment) ",
-                new ViaHeaderValue("x11", "192.168.0.1", "HTTP", "(comment)"));
+            CheckValidParse(
+                " HTTP  /  x11   192.168.0.1\r\n (comment) ",
+                new ViaHeaderValue("x11", "192.168.0.1", "HTTP", "(comment)")
+            );
             CheckValidParse(" HTTP/1.1 [::1]", new ViaHeaderValue("1.1", "[::1]", "HTTP"));
             CheckValidParse("1.1 host", new ViaHeaderValue("1.1", "host"));
         }
@@ -264,8 +358,10 @@ namespace System.Net.Http.Tests
         public void TryParse_SetOfValidValueStrings_ParsedCorrectly()
         {
             CheckValidTryParse(" 1.1   host ", new ViaHeaderValue("1.1", "host"));
-            CheckValidTryParse(" HTTP  /  x11   192.168.0.1\r\n (comment) ",
-                new ViaHeaderValue("x11", "192.168.0.1", "HTTP", "(comment)"));
+            CheckValidTryParse(
+                " HTTP  /  x11   192.168.0.1\r\n (comment) ",
+                new ViaHeaderValue("x11", "192.168.0.1", "HTTP", "(comment)")
+            );
             CheckValidTryParse(" HTTP/1.1 [::1]", new ViaHeaderValue("1.1", "[::1]", "HTTP"));
             CheckValidTryParse("1.1 host", new ViaHeaderValue("1.1", "host"));
         }
@@ -305,7 +401,12 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { ViaHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(
+                () =>
+                {
+                    ViaHeaderValue.Parse(input);
+                }
+            );
         }
 
         private void CheckValidTryParse(string input, ViaHeaderValue expectedResult)
@@ -322,11 +423,18 @@ namespace System.Net.Http.Tests
             Assert.Null(result);
         }
 
-        private static void CheckGetViaLength(string input, int startIndex, int expectedLength,
-            ViaHeaderValue expectedResult)
+        private static void CheckGetViaLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            ViaHeaderValue expectedResult
+        )
         {
             object result = null;
-            Assert.Equal(expectedLength, ViaHeaderValue.GetViaLength(input, startIndex, out result));
+            Assert.Equal(
+                expectedLength,
+                ViaHeaderValue.GetViaLength(input, startIndex, out result)
+            );
             Assert.Equal(expectedResult, result);
         }
 

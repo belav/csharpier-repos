@@ -9,8 +9,7 @@ namespace System.Speech.Internal.SrgsCompiler
 {
     internal abstract class ParseElementCollection : ParseElement
     {
-        protected ParseElementCollection(Backend backend, Rule rule)
-            : base(rule)
+        protected ParseElementCollection(Backend backend, Rule rule) : base(rule)
         {
             _backend = backend;
         }
@@ -64,11 +63,21 @@ namespace System.Speech.Internal.SrgsCompiler
             // If the arc is a epsilon, creating a new epsilon arc might not be needed
             if (arc.IsEpsilonTransition)
             {
-                if (position == Position.Before && arc.End != null && arc.End.InArcs.CountIsOne && Graph.MoveSemanticTagRight(arc))
+                if (
+                    position == Position.Before
+                    && arc.End != null
+                    && arc.End.InArcs.CountIsOne
+                    && Graph.MoveSemanticTagRight(arc)
+                )
                 {
                     return arc;
                 }
-                if (position == Position.After && arc.Start != null && arc.Start.OutArcs.CountIsOne && Graph.MoveSemanticTagLeft(arc))
+                if (
+                    position == Position.After
+                    && arc.Start != null
+                    && arc.Start.OutArcs.CountIsOne
+                    && Graph.MoveSemanticTagLeft(arc)
+                )
                 {
                     return arc;
                 }
@@ -103,7 +112,15 @@ namespace System.Speech.Internal.SrgsCompiler
             if (start.End != null)
             {
                 // Remove the added startState if possible, check done by MoveSemanticTagRight
-                for (State startState = startArc.End; startArc.IsEpsilonTransition && startState != null && Graph.MoveSemanticTagRight(startArc) && startState.InArcs.CountIsOne && startState.OutArcs.CountIsOne; startState = startArc.End)
+                for (
+                    State startState = startArc.End;
+                    startArc.IsEpsilonTransition
+                        && startState != null
+                        && Graph.MoveSemanticTagRight(startArc)
+                        && startState.InArcs.CountIsOne
+                        && startState.OutArcs.CountIsOne;
+                    startState = startArc.End
+                )
                 {
                     // State has a single input epsilon transition
                     // Delete the input epsilon transition and delete state.
@@ -133,7 +150,15 @@ namespace System.Speech.Internal.SrgsCompiler
             if (endArc != null)
             {
                 // Remove the end arc if possible, check done by MoveSemanticTagRight
-                for (State endState = endArc.Start; endArc.IsEpsilonTransition && endState != null && Graph.MoveSemanticTagLeft(endArc) && endState.InArcs.CountIsOne && endState.OutArcs.CountIsOne; endState = endArc.Start)
+                for (
+                    State endState = endArc.Start;
+                    endArc.IsEpsilonTransition
+                        && endState != null
+                        && Graph.MoveSemanticTagLeft(endArc)
+                        && endState.InArcs.CountIsOne
+                        && endState.OutArcs.CountIsOne;
+                    endState = endArc.Start
+                )
                 {
                     // State has a single input epsilon transition
                     // Delete the input epsilon transition and delete state.
@@ -161,7 +186,10 @@ namespace System.Speech.Internal.SrgsCompiler
             }
         }
 
-        internal void AddArc(Arc arc) { AddArc(arc, arc); }
+        internal void AddArc(Arc arc)
+        {
+            AddArc(arc, arc);
+        }
 
         internal enum Position
         {
@@ -218,7 +246,10 @@ namespace System.Speech.Internal.SrgsCompiler
                             else
                             {
                                 // No tags, just fold the start and end state
-                                if (_endArc.IsPropertylessTransition && start.IsPropertylessTransition)
+                                if (
+                                    _endArc.IsPropertylessTransition
+                                    && start.IsPropertylessTransition
+                                )
                                 {
                                     // Move the end arc
                                     start.End = null;
@@ -250,7 +281,6 @@ namespace System.Speech.Internal.SrgsCompiler
                             // Discard the endstate and replace it with the startArc
                             state = _endArc.Start;
                             _endArc.Start = null;
-
                             // Connexion between the state end the start is done below
                             //state.OutArcs.Add (start);
                             //start.Start = state;

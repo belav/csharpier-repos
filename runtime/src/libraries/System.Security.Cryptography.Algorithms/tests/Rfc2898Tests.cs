@@ -22,65 +22,102 @@ namespace System.Security.Cryptography.DeriveBytesTests
         [Fact]
         public static void Ctor_NullPasswordBytes()
         {
-            Assert.Throws<NullReferenceException>(() => new Rfc2898DeriveBytes((byte[])null, s_testSalt, DefaultIterationCount));
+            Assert.Throws<NullReferenceException>(
+                () => new Rfc2898DeriveBytes((byte[])null, s_testSalt, DefaultIterationCount)
+            );
         }
 
         [Fact]
         public static void Ctor_NullPasswordString()
         {
-            Assert.Throws<ArgumentNullException>(() => new Rfc2898DeriveBytes((string)null, s_testSalt, DefaultIterationCount));
+            Assert.Throws<ArgumentNullException>(
+                () => new Rfc2898DeriveBytes((string)null, s_testSalt, DefaultIterationCount)
+            );
         }
 
         [Fact]
         public static void Ctor_NullSalt()
         {
-            Assert.Throws<ArgumentNullException>(() => new Rfc2898DeriveBytes(TestPassword, null, DefaultIterationCount));
+            Assert.Throws<ArgumentNullException>(
+                () => new Rfc2898DeriveBytes(TestPassword, null, DefaultIterationCount)
+            );
         }
 
         [Fact]
         public static void Ctor_EmptySalt()
         {
-            AssertExtensions.Throws<ArgumentException>("salt", null, () => new Rfc2898DeriveBytes(TestPassword, Array.Empty<byte>(), DefaultIterationCount));
+            AssertExtensions.Throws<ArgumentException>(
+                "salt",
+                null,
+                () =>
+                    new Rfc2898DeriveBytes(TestPassword, Array.Empty<byte>(), DefaultIterationCount)
+            );
         }
 
         [Fact]
         public static void Ctor_DiminishedSalt()
         {
-            AssertExtensions.Throws<ArgumentException>("salt", null, () => new Rfc2898DeriveBytes(TestPassword, new byte[7], DefaultIterationCount));
+            AssertExtensions.Throws<ArgumentException>(
+                "salt",
+                null,
+                () => new Rfc2898DeriveBytes(TestPassword, new byte[7], DefaultIterationCount)
+            );
         }
 
         [Fact]
         public static void Ctor_GenerateZeroSalt()
         {
-            AssertExtensions.Throws<ArgumentException>("saltSize", null, () => new Rfc2898DeriveBytes(TestPassword, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "saltSize",
+                null,
+                () => new Rfc2898DeriveBytes(TestPassword, 0)
+            );
         }
 
         [Fact]
         public static void Ctor_GenerateNegativeSalt()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Rfc2898DeriveBytes(TestPassword, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Rfc2898DeriveBytes(TestPassword, int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Rfc2898DeriveBytes(TestPassword, int.MinValue / 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, int.MinValue)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, int.MinValue / 2)
+            );
         }
 
         [Fact]
         public static void Ctor_GenerateDiminishedSalt()
         {
-            AssertExtensions.Throws<ArgumentException>("saltSize", null, () => new Rfc2898DeriveBytes(TestPassword, 7));
+            AssertExtensions.Throws<ArgumentException>(
+                "saltSize",
+                null,
+                () => new Rfc2898DeriveBytes(TestPassword, 7)
+            );
         }
 
         [Fact]
         public static void Ctor_TooFewIterations()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Rfc2898DeriveBytes(TestPassword, s_testSalt, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, 0)
+            );
         }
 
         [Fact]
         public static void Ctor_NegativeIterations()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Rfc2898DeriveBytes(TestPassword, s_testSalt, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Rfc2898DeriveBytes(TestPassword, s_testSalt, int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Rfc2898DeriveBytes(TestPassword, s_testSalt, int.MinValue / 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, int.MinValue)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, int.MinValue / 2)
+            );
         }
 
 #if NETCOREAPP
@@ -90,25 +127,45 @@ namespace System.Security.Cryptography.DeriveBytesTests
             HashAlgorithmName alg = default(HashAlgorithmName);
 
             // (byte[], byte[], int, HashAlgorithmName)
-            Assert.Throws<CryptographicException>(() => new Rfc2898DeriveBytes(s_testSalt, s_testSalt, DefaultIterationCount, alg));
+            Assert.Throws<CryptographicException>(
+                () => new Rfc2898DeriveBytes(s_testSalt, s_testSalt, DefaultIterationCount, alg)
+            );
             // (string, byte[], int, HashAlgorithmName)
-            Assert.Throws<CryptographicException>(() => new Rfc2898DeriveBytes(TestPassword, s_testSalt, DefaultIterationCount, alg));
+            Assert.Throws<CryptographicException>(
+                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, DefaultIterationCount, alg)
+            );
             // (string, int, int, HashAlgorithmName)
-            Assert.Throws<CryptographicException>(() => new Rfc2898DeriveBytes(TestPassword, 8, DefaultIterationCount, alg));
+            Assert.Throws<CryptographicException>(
+                () => new Rfc2898DeriveBytes(TestPassword, 8, DefaultIterationCount, alg)
+            );
         }
 
         [Fact]
         public static void Ctor_MD5NotSupported()
         {
             Assert.Throws<CryptographicException>(
-                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, DefaultIterationCount, HashAlgorithmName.MD5));
+                () =>
+                    new Rfc2898DeriveBytes(
+                        TestPassword,
+                        s_testSalt,
+                        DefaultIterationCount,
+                        HashAlgorithmName.MD5
+                    )
+            );
         }
 
         [Fact]
         public static void Ctor_UnknownAlgorithm()
         {
             Assert.Throws<CryptographicException>(
-                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, DefaultIterationCount, new HashAlgorithmName("PotatoLemming")));
+                () =>
+                    new Rfc2898DeriveBytes(
+                        TestPassword,
+                        s_testSalt,
+                        DefaultIterationCount,
+                        new HashAlgorithmName("PotatoLemming")
+                    )
+            );
         }
 #endif
 
@@ -117,7 +174,13 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             byte[] saltIn = (byte[])s_testSalt.Clone();
 
-            using (var deriveBytes = new Rfc2898DeriveBytes(TestPassword, saltIn, DefaultIterationCount))
+            using (
+                var deriveBytes = new Rfc2898DeriveBytes(
+                    TestPassword,
+                    saltIn,
+                    DefaultIterationCount
+                )
+            )
             {
                 byte[] saltOut = deriveBytes.Salt;
 
@@ -158,7 +221,13 @@ namespace System.Security.Cryptography.DeriveBytesTests
             byte[] first;
             byte[] second;
 
-            using (var deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt, DefaultIterationCount))
+            using (
+                var deriveBytes = new Rfc2898DeriveBytes(
+                    TestPassword,
+                    s_testSalt,
+                    DefaultIterationCount
+                )
+            )
             {
                 first = deriveBytes.Salt;
                 second = deriveBytes.Salt;
@@ -197,7 +266,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
             Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt);
             Assert.Throws<ArgumentOutOfRangeException>(() => deriveBytes.GetBytes(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => deriveBytes.GetBytes(int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() => deriveBytes.GetBytes(int.MinValue / 2));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => deriveBytes.GetBytes(int.MinValue / 2)
+            );
         }
 
         [Fact]
@@ -240,10 +311,18 @@ namespace System.Security.Cryptography.DeriveBytesTests
             using (var deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt))
             {
                 byte[] secondFirstHalf = deriveBytes.GetBytes(first.Length / 2);
-                byte[] secondSecondHalf = deriveBytes.GetBytes(first.Length - secondFirstHalf.Length);
+                byte[] secondSecondHalf = deriveBytes.GetBytes(
+                    first.Length - secondFirstHalf.Length
+                );
 
                 Buffer.BlockCopy(secondFirstHalf, 0, second, 0, secondFirstHalf.Length);
-                Buffer.BlockCopy(secondSecondHalf, 0, second, secondFirstHalf.Length, secondSecondHalf.Length);
+                Buffer.BlockCopy(
+                    secondSecondHalf,
+                    0,
+                    second,
+                    secondFirstHalf.Length,
+                    secondSecondHalf.Length
+                );
             }
 
             Assert.Equal(first, second);
@@ -291,11 +370,40 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 DefaultIterationCount,
                 new byte[]
                 {
-                    0x6C, 0x3C, 0x55, 0xA4, 0x2E, 0xE9, 0xD6, 0xAE,
-                    0x7D, 0x28, 0x6C, 0x83, 0xE4, 0xD7, 0xA3, 0xC8,
-                    0xB5, 0x93, 0x9F, 0x45, 0x2F, 0x2B, 0xF3, 0x68,
-                    0xFA, 0xE8, 0xB2, 0x74, 0x55, 0x3A, 0x36, 0x8A,
-                });
+                    0x6C,
+                    0x3C,
+                    0x55,
+                    0xA4,
+                    0x2E,
+                    0xE9,
+                    0xD6,
+                    0xAE,
+                    0x7D,
+                    0x28,
+                    0x6C,
+                    0x83,
+                    0xE4,
+                    0xD7,
+                    0xA3,
+                    0xC8,
+                    0xB5,
+                    0x93,
+                    0x9F,
+                    0x45,
+                    0x2F,
+                    0x2B,
+                    0xF3,
+                    0x68,
+                    0xFA,
+                    0xE8,
+                    0xB2,
+                    0x74,
+                    0x55,
+                    0x3A,
+                    0x36,
+                    0x8A,
+                }
+            );
         }
 
         [Fact]
@@ -307,11 +415,40 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 DefaultIterationCount + 1,
                 new byte[]
                 {
-                    0x8E, 0x9B, 0xF7, 0xC1, 0x83, 0xD4, 0xD1, 0x20,
-                    0x87, 0xA8, 0x2C, 0xD7, 0xCD, 0x84, 0xBC, 0x1A,
-                    0xC6, 0x7A, 0x7A, 0xDD, 0x46, 0xFA, 0x40, 0xAA,
-                    0x60, 0x3A, 0x2B, 0x8B, 0x79, 0x2C, 0x8A, 0x6D,
-                });
+                    0x8E,
+                    0x9B,
+                    0xF7,
+                    0xC1,
+                    0x83,
+                    0xD4,
+                    0xD1,
+                    0x20,
+                    0x87,
+                    0xA8,
+                    0x2C,
+                    0xD7,
+                    0xCD,
+                    0x84,
+                    0xBC,
+                    0x1A,
+                    0xC6,
+                    0x7A,
+                    0x7A,
+                    0xDD,
+                    0x46,
+                    0xFA,
+                    0x40,
+                    0xAA,
+                    0x60,
+                    0x3A,
+                    0x2B,
+                    0x8B,
+                    0x79,
+                    0x2C,
+                    0x8A,
+                    0x6D,
+                }
+            );
         }
 
         [Fact]
@@ -323,11 +460,40 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 DefaultIterationCount,
                 new byte[]
                 {
-                    0x4E, 0xF5, 0xA5, 0x85, 0x92, 0x9D, 0x8B, 0xC5,
-                    0x57, 0x0C, 0x83, 0xB5, 0x19, 0x69, 0x4B, 0xC2,
-                    0x4B, 0xAA, 0x09, 0xE9, 0xE7, 0x9C, 0x29, 0x94,
-                    0x14, 0x19, 0xE3, 0x61, 0xDA, 0x36, 0x5B, 0xB3,
-                });
+                    0x4E,
+                    0xF5,
+                    0xA5,
+                    0x85,
+                    0x92,
+                    0x9D,
+                    0x8B,
+                    0xC5,
+                    0x57,
+                    0x0C,
+                    0x83,
+                    0xB5,
+                    0x19,
+                    0x69,
+                    0x4B,
+                    0xC2,
+                    0x4B,
+                    0xAA,
+                    0x09,
+                    0xE9,
+                    0xE7,
+                    0x9C,
+                    0x29,
+                    0x94,
+                    0x14,
+                    0x19,
+                    0xE3,
+                    0x61,
+                    0xDA,
+                    0x36,
+                    0x5B,
+                    0xB3,
+                }
+            );
         }
 
         [Fact]
@@ -339,11 +505,40 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 DefaultIterationCount,
                 new byte[]
                 {
-                    0x86, 0xBB, 0xB3, 0xD7, 0x99, 0x0C, 0xAC, 0x4D,
-                    0x1D, 0xB2, 0x78, 0x9D, 0x57, 0x5C, 0x06, 0x93,
-                    0x97, 0x50, 0x72, 0xFF, 0x56, 0x57, 0xAC, 0x7F,
-                    0x9B, 0xD2, 0x14, 0x9D, 0xE9, 0x95, 0xA2, 0x6D,
-                });
+                    0x86,
+                    0xBB,
+                    0xB3,
+                    0xD7,
+                    0x99,
+                    0x0C,
+                    0xAC,
+                    0x4D,
+                    0x1D,
+                    0xB2,
+                    0x78,
+                    0x9D,
+                    0x57,
+                    0x5C,
+                    0x06,
+                    0x93,
+                    0x97,
+                    0x50,
+                    0x72,
+                    0xFF,
+                    0x56,
+                    0x57,
+                    0xAC,
+                    0x7F,
+                    0x9B,
+                    0xD2,
+                    0x14,
+                    0x9D,
+                    0xE9,
+                    0x95,
+                    0xA2,
+                    0x6D,
+                }
+            );
         }
 
 #if NETCOREAPP
@@ -357,7 +552,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 testCase.Password,
                 testCase.Salt,
                 testCase.IterationCount,
-                new HashAlgorithmName(testCase.HashAlgorithmName));
+                new HashAlgorithmName(testCase.HashAlgorithmName)
+            );
 
             using (pbkdf2)
             {
@@ -376,7 +572,14 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             HashAlgorithmName hashAlgorithm = new HashAlgorithmName(hashAlgorithmName);
 
-            using (var pbkdf2 = new Rfc2898DeriveBytes(TestPassword, s_testSalt, DefaultIterationCount, hashAlgorithm))
+            using (
+                var pbkdf2 = new Rfc2898DeriveBytes(
+                    TestPassword,
+                    s_testSalt,
+                    DefaultIterationCount,
+                    hashAlgorithm
+                )
+            )
             {
                 Assert.Equal(hashAlgorithm, pbkdf2.HashAlgorithm);
             }
@@ -388,17 +591,24 @@ namespace System.Security.Cryptography.DeriveBytesTests
         {
             using (var deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt))
             {
-                Assert.Throws<PlatformNotSupportedException>(() => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, new byte[8]));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => deriveBytes.CryptDeriveKey("RC2", "SHA1", 128, new byte[8])
+                );
             }
         }
 
         [Fact]
         public static void GetBytes_ExceedCounterLimit()
         {
-            FieldInfo blockField = typeof(Rfc2898DeriveBytes).GetField("_block", BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo blockField = typeof(Rfc2898DeriveBytes).GetField(
+                "_block",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(blockField);
 
-            using (Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt))
+            using (
+                Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(TestPassword, s_testSalt)
+            )
             {
                 // Set the internal block counter to be on the last possible block. This should succeed.
                 blockField.SetValue(deriveBytes, uint.MaxValue - 1);
@@ -415,12 +625,24 @@ namespace System.Security.Cryptography.DeriveBytesTests
             byte[] passwordBytes = Encoding.UTF8.GetBytes(TestPassword);
             byte[] derived;
 
-            using (Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(passwordBytes, s_testSaltB, DefaultIterationCount))
+            using (
+                Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
+                    passwordBytes,
+                    s_testSaltB,
+                    DefaultIterationCount
+                )
+            )
             {
                 derived = deriveBytes.GetBytes(64);
             }
 
-            using (Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(passwordBytes, s_testSaltB, DefaultIterationCount))
+            using (
+                Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
+                    passwordBytes,
+                    s_testSaltB,
+                    DefaultIterationCount
+                )
+            )
             {
                 passwordBytes[0] ^= 0xFF; // Flipping a byte after the object is constructed should not be observed.
 
@@ -435,13 +657,24 @@ namespace System.Security.Cryptography.DeriveBytesTests
             byte[] passwordBytes = Encoding.UTF8.GetBytes(TestPassword);
             byte[] passwordBytesOriginal = passwordBytes.AsSpan().ToArray();
 
-            using (Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(passwordBytes, s_testSaltB, DefaultIterationCount))
+            using (
+                Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
+                    passwordBytes,
+                    s_testSaltB,
+                    DefaultIterationCount
+                )
+            )
             {
                 Assert.Equal(passwordBytesOriginal, passwordBytes);
             }
         }
 
-        private static void TestKnownValue(string password, byte[] salt, int iterationCount, byte[] expected)
+        private static void TestKnownValue(
+            string password,
+            byte[] salt,
+            int iterationCount,
+            byte[] expected
+        )
         {
             byte[] output;
 
@@ -462,7 +695,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
             {
                 if (!testCaseNames.Add(testCase.CaseName))
                 {
-                    throw new InvalidOperationException($"Duplicate test case name: {testCase.CaseName}");
+                    throw new InvalidOperationException(
+                        $"Duplicate test case name: {testCase.CaseName}"
+                    );
                 }
 
                 yield return new object[] { testCase };
@@ -487,7 +722,8 @@ namespace System.Security.Cryptography.DeriveBytesTests
             {
                 CaseName = "RFC 3211 Section 3 #2",
                 HashAlgorithmName = "SHA1",
-                Password = "All n-entities must communicate with other n-entities via n-1 entiteeheehees",
+                Password =
+                    "All n-entities must communicate with other n-entities via n-1 entiteeheehees",
                 Salt = "1234567878563412".HexToByteArray(),
                 IterationCount = 500,
                 AnswerHex = "6A8970BF68C92CAEA84A8DF28510858607126380CC47AB2D",
@@ -527,8 +763,9 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 Salt = ascii.GetBytes("saltSALTsaltSALTsaltSALTsaltSALTsalt"),
                 IterationCount = 4096,
                 AnswerHex = (
-                    "8C0511F4C6E597C6AC6315D8F0362E225F3C501495BA23B868C005174DC4EE71" +
-                    "115B59F9E60CD9532FA33E0F75AEFE30225C583A186CD82BD4DAEA9724A3D3B8"),
+                    "8C0511F4C6E597C6AC6315D8F0362E225F3C501495BA23B868C005174DC4EE71"
+                    + "115B59F9E60CD9532FA33E0F75AEFE30225C583A186CD82BD4DAEA9724A3D3B8"
+                ),
             };
 
             // Verified against BCryptDeriveKeyPBKDF2, as an independent implementation.
@@ -540,10 +777,11 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 Salt = ascii.GetBytes("ATHENA.MIT.EDUraeburn"),
                 IterationCount = 24000,
                 AnswerHex = (
-                    "4B138897F289129C6E80965F96B940F76BBC0363CD22190E0BD94ADBA79BE33E" +
-                    "02C9D8E0AF0D19B295B02828770587F672E0ED182A9A59BA5E07120CA936E6BF" +
-                    "F5D425688253C2A8336ED30DA898C67FD9DDFD8EF3F8C708392E2E2458716DF8" +
-                    "6799372DEF27AB36AF239D7D654A56A51395086A322B9322977F62A98662B57E"),
+                    "4B138897F289129C6E80965F96B940F76BBC0363CD22190E0BD94ADBA79BE33E"
+                    + "02C9D8E0AF0D19B295B02828770587F672E0ED182A9A59BA5E07120CA936E6BF"
+                    + "F5D425688253C2A8336ED30DA898C67FD9DDFD8EF3F8C708392E2E2458716DF8"
+                    + "6799372DEF27AB36AF239D7D654A56A51395086A322B9322977F62A98662B57E"
+                ),
             };
 
             // These "alternate" tests are made up, due to a lack of test corpus diversity
@@ -556,9 +794,11 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 IterationCount = 1,
                 AnswerHex = (
                     // T-Block 1
-                    "9352784113E5E6DC21FC82ADA3A321D64962F760DF6EAA8E46CEEF4FAF6C6E" +
+                    "9352784113E5E6DC21FC82ADA3A321D64962F760DF6EAA8E46CEEF4FAF6C6E"
+                    +
                     // T-Block 2
-                    "EE6DB97E5852FC4C15FA7C52FACDEDE89B916BCC864028084A2CF0889F7F76"),
+                    "EE6DB97E5852FC4C15FA7C52FACDEDE89B916BCC864028084A2CF0889F7F76"
+                ),
             };
 
             yield return new KnownValuesTestCase
@@ -570,9 +810,11 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 IterationCount = 1,
                 AnswerHex = (
                     // T-Block 1
-                    "B9A10C6C82F36482D76C0C38C982C05F8BB21211ACBE1D1104B4F647DDEAEE179B92ACB0E00A304B791FD0" +
+                    "B9A10C6C82F36482D76C0C38C982C05F8BB21211ACBE1D1104B4F647DDEAEE179B92ACB0E00A304B791FD0"
+                    +
                     // T-Block 2
-                    "3C6A08364D0A47CD1F15E0E314800FF3AC9CF2E93B3F81A5EB67FE9F2FE6E86B0430B59902CCB5FD190E67"),
+                    "3C6A08364D0A47CD1F15E0E314800FF3AC9CF2E93B3F81A5EB67FE9F2FE6E86B0430B59902CCB5FD190E67"
+                ),
             };
 
             yield return new KnownValuesTestCase
@@ -584,11 +826,13 @@ namespace System.Security.Cryptography.DeriveBytesTests
                 IterationCount = 1,
                 AnswerHex = (
                     // T-Block 1
-                    "AD8CE08CFA8F932CF9FEDDCDB6E4BC6417D61F0465D408C0BFE9656E2C1C47" +
-                    "1424537ADB2D9EBE4E4232F474EFEE2AF347F21A804F64CBC05474A6DCE0A5" +
+                    "AD8CE08CFA8F932CF9FEDDCDB6E4BC6417D61F0465D408C0BFE9656E2C1C47"
+                    + "1424537ADB2D9EBE4E4232F474EFEE2AF347F21A804F64CBC05474A6DCE0A5"
+                    +
                     // T-Block 2
-                    "078100F813C1F8388EC233C1397D5E18C6509B5483141EF836C15A34D6DC67" +
-                    "A3C46A45798A2839CFD239749219E9F2EDAD3249EC8221AFB17C0028A4A0A5"),
+                    "078100F813C1F8388EC233C1397D5E18C6509B5483141EF836C15A34D6DC67"
+                    + "A3C46A45798A2839CFD239749219E9F2EDAD3249EC8221AFB17C0028A4A0A5"
+                ),
             };
         }
 

@@ -24,16 +24,14 @@ namespace WebServer
             catch (Exception)
             {
                 context.Response.StatusCode = 500;
-                context.Response.StatusDescription = "Error parsing statuscode: " + statusCodeString;
+                context.Response.StatusDescription =
+                    "Error parsing statuscode: " + statusCodeString;
             }
         }
 
         public bool IsReusable
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 }

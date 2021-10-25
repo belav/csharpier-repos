@@ -17,7 +17,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal enum AttributeLocation : short
     {
         None = 0,
-
         // the order of these determine the order in which they are displayed in error messages when multiple locations are possible:
         Assembly = 1 << 0,
         Module = 1 << 1,
@@ -29,7 +28,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         Parameter = 1 << 7,
         Return = 1 << 8,
         TypeParameter = 1 << 9,
-
         // must be the last:
         Unknown = 1 << 10,
     }
@@ -107,7 +105,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return ToAttributeLocation(token.ValueText);
         }
 
-        internal static AttributeLocation ToAttributeLocation(this Syntax.InternalSyntax.SyntaxToken token)
+        internal static AttributeLocation ToAttributeLocation(
+            this Syntax.InternalSyntax.SyntaxToken token
+        )
         {
             // NOTE: to match dev10, we're using the value text, rather
             // than the actual text.  For example, "@return" is equivalent

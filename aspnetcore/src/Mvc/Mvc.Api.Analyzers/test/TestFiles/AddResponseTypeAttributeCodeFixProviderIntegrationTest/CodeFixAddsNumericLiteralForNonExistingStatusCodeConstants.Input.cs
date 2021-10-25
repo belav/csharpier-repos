@@ -2,7 +2,8 @@
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class CodeFixAddsNumericLiteralForNonExistingStatusCodeConstantsController : ControllerBase
+    public class CodeFixAddsNumericLiteralForNonExistingStatusCodeConstantsController
+        : ControllerBase
     {
         public IActionResult GetItem(int id)
         {

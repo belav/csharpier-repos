@@ -25,7 +25,10 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         /// </summary>
         /// <param name="subquery"> A subquery projecting single row with a single scalar projection. </param>
         public ScalarSubqueryExpression(SelectExpression subquery)
-            : base(Verify(subquery).Projection[0].Type, subquery.Projection[0].Expression.TypeMapping)
+            : base(
+                Verify(subquery).Projection[0].Type,
+                subquery.Projection[0].Expression.TypeMapping
+            )
         {
             Check.NotNull(subquery, nameof(subquery));
 
@@ -36,7 +39,9 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             if (selectExpression.Projection.Count != 1)
             {
-                throw new InvalidOperationException(CoreStrings.TranslationFailed(selectExpression.Print()));
+                throw new InvalidOperationException(
+                    CoreStrings.TranslationFailed(selectExpression.Print())
+                );
             }
 
             return selectExpression;
@@ -65,9 +70,7 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         {
             Check.NotNull(subquery, nameof(subquery));
 
-            return subquery != Subquery
-                ? new ScalarSubqueryExpression(subquery)
-                : this;
+            return subquery != Subquery ? new ScalarSubqueryExpression(subquery) : this;
         }
 
         /// <inheritdoc />
@@ -85,18 +88,19 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
         }
 
         /// <inheritdoc />
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is ScalarSubqueryExpression scalarSubqueryExpression
-                    && Equals(scalarSubqueryExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is ScalarSubqueryExpression scalarSubqueryExpression
+                    && Equals(scalarSubqueryExpression)
+            );
 
-        private bool Equals(ScalarSubqueryExpression scalarSubqueryExpression)
-            => base.Equals(scalarSubqueryExpression)
-                && Subquery.Equals(scalarSubqueryExpression.Subquery);
+        private bool Equals(ScalarSubqueryExpression scalarSubqueryExpression) =>
+            base.Equals(scalarSubqueryExpression)
+            && Subquery.Equals(scalarSubqueryExpression.Subquery);
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), Subquery);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Subquery);
     }
 }

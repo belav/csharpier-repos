@@ -13,21 +13,36 @@ namespace AutoMapper.UnitTests.Projection
 
         public NonGenericProjectEnumTest()
         {
-            _config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap(typeof(Customer), typeof(CustomerDto));
-                cfg.CreateMap(typeof(CustomerType), typeof(string)).ConvertUsing(ct => ct.ToString().ToUpper());
-            });
+            _config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Customer), typeof(CustomerDto));
+                    cfg.CreateMap(typeof(CustomerType), typeof(string))
+                        .ConvertUsing(ct => ct.ToString().ToUpper());
+                }
+            );
         }
 
         [Fact]
         public void ProjectingEnumToString()
         {
-            var customers = new[] { new Customer() { FirstName = "Bill", LastName = "White", CustomerType = CustomerType.Vip } }.AsQueryable();
+            var customers = new[]
+            {
+                new Customer()
+                {
+                    FirstName = "Bill",
+                    LastName = "White",
+                    CustomerType = CustomerType.Vip
+                }
+            }.AsQueryable();
 
             var projected = customers.ProjectTo<CustomerDto>(_config);
             projected.ShouldNotBeNull();
-            customers.Single().CustomerType.ToString().ToUpper().ShouldBe(projected.Single().CustomerType);
+            customers
+                .Single()
+                .CustomerType.ToString()
+                .ToUpper()
+                .ShouldBe(projected.Single().CustomerType);
         }
 
         public class Customer
@@ -61,22 +76,37 @@ namespace AutoMapper.UnitTests.Projection
 
         public NonGenericProjectAndMapEnumTest()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap(typeof (Customer), typeof (CustomerDto));
-                cfg.CreateMap(typeof (CustomerType), typeof (string)).ConvertUsing(ct => ct.ToString().ToUpper());
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Customer), typeof(CustomerDto));
+                    cfg.CreateMap(typeof(CustomerType), typeof(string))
+                        .ConvertUsing(ct => ct.ToString().ToUpper());
+                }
+            );
             _mapper = config.CreateMapper();
         }
 
         [Fact]
         public void ProjectingEnumToString()
         {
-            var customers = new[] { new Customer() { FirstName = "Bill", LastName = "White", CustomerType = CustomerType.Vip } }.AsQueryable();
+            var customers = new[]
+            {
+                new Customer()
+                {
+                    FirstName = "Bill",
+                    LastName = "White",
+                    CustomerType = CustomerType.Vip
+                }
+            }.AsQueryable();
 
             var projected = customers.ProjectTo<CustomerDto>(_mapper.ConfigurationProvider);
             projected.ShouldNotBeNull();
-            Assert.Equal(customers.Single().CustomerType.ToString(), projected.Single().CustomerType, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                customers.Single().CustomerType.ToString(),
+                projected.Single().CustomerType,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public class Customer
@@ -108,7 +138,6 @@ namespace AutoMapper.UnitTests.Projection
     {
         public class Source
         {
-            
         }
 
         public class Dest
@@ -116,15 +145,21 @@ namespace AutoMapper.UnitTests.Projection
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration Configuration { get; } = new MapperConfiguration(cfg =>
-        {
-            cfg.CreateMap(typeof (Source), typeof (Dest)).ConvertUsing(src => new Dest {Value = 10});
-        });
+        protected override MapperConfiguration Configuration { get; } =
+            new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap(typeof(Source), typeof(Dest))
+                        .ConvertUsing(src => new Dest { Value = 10 });
+                }
+            );
 
         [Fact]
         public void Should_validate_because_of_overridden_projection()
         {
-            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(Configuration.AssertConfigurationIsValid);
+            typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
+                Configuration.AssertConfigurationIsValid
+            );
         }
     }
 }

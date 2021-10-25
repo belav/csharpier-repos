@@ -8,8 +8,14 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Serialization.Converters
 {
-    internal sealed class KeyValuePairConverter<TKey, TValue> :
-        SmallObjectWithParameterizedConstructorConverter<KeyValuePair<TKey, TValue>, TKey, TValue, object, object>
+    internal sealed class KeyValuePairConverter<TKey, TValue>
+        : SmallObjectWithParameterizedConstructorConverter<
+              KeyValuePair<TKey, TValue>,
+              TKey,
+              TValue,
+              object,
+              object
+          >
     {
         private const string KeyNameCLR = "Key";
         private const string ValueNameCLR = "Value";
@@ -20,8 +26,10 @@ namespace System.Text.Json.Serialization.Converters
         private string _keyName = null!;
         private string _valueName = null!;
 
-        private static readonly ConstructorInfo s_constructorInfo =
-            typeof(KeyValuePair<TKey, TValue>).GetConstructor(new[] { typeof(TKey), typeof(TValue) })!;
+        private static readonly ConstructorInfo s_constructorInfo = typeof(KeyValuePair<
+            TKey,
+            TValue
+        >).GetConstructor(new[] { typeof(TKey), typeof(TValue) })!;
 
         internal override void Initialize(JsonSerializerOptions options)
         {
@@ -35,7 +43,6 @@ namespace System.Text.Json.Serialization.Converters
             {
                 _keyName = namingPolicy.ConvertName(KeyNameCLR);
                 _valueName = namingPolicy.ConvertName(ValueNameCLR);
-
                 // Validation for the naming policy will occur during JsonPropertyInfo creation.
             }
 
@@ -50,12 +57,15 @@ namespace System.Text.Json.Serialization.Converters
             ref ReadStack state,
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
-            out JsonParameterInfo? jsonParameterInfo)
+            out JsonParameterInfo? jsonParameterInfo
+        )
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
             ArgumentState? argState = state.Current.CtorArgumentState;
 
-            Debug.Assert(typeInfo.PropertyInfoForTypeInfo.ConverterStrategy == ConverterStrategy.Object);
+            Debug.Assert(
+                typeInfo.PropertyInfoForTypeInfo.ConverterStrategy == ConverterStrategy.Object
+            );
             Debug.Assert(argState != null);
             Debug.Assert(_keyName != null);
             Debug.Assert(_valueName != null);
@@ -65,14 +75,12 @@ namespace System.Text.Json.Serialization.Converters
             string propertyName = reader.GetString()!;
             state.Current.JsonPropertyNameAsString = propertyName;
 
-            if (!argState.FoundKey &&
-                FoundKeyProperty(propertyName, caseInsensitiveMatch))
+            if (!argState.FoundKey && FoundKeyProperty(propertyName, caseInsensitiveMatch))
             {
                 jsonParameterInfo = typeInfo.ParameterCache![_keyName];
                 argState.FoundKey = true;
             }
-            else if (!argState.FoundValue &&
-                FoundValueProperty(propertyName, caseInsensitiveMatch))
+            else if (!argState.FoundValue && FoundValueProperty(propertyName, caseInsensitiveMatch))
             {
                 jsonParameterInfo = typeInfo.ParameterCache![_valueName];
                 argState.FoundValue = true;
@@ -103,16 +111,22 @@ namespace System.Text.Json.Serialization.Converters
 
         private bool FoundKeyProperty(string propertyName, bool caseInsensitiveMatch)
         {
-            return propertyName == _keyName ||
-                (caseInsensitiveMatch && string.Equals(propertyName, _keyName, StringComparison.OrdinalIgnoreCase)) ||
-                propertyName == KeyNameCLR;
+            return propertyName == _keyName
+                || (
+                    caseInsensitiveMatch
+                    && string.Equals(propertyName, _keyName, StringComparison.OrdinalIgnoreCase)
+                )
+                || propertyName == KeyNameCLR;
         }
 
         private bool FoundValueProperty(string propertyName, bool caseInsensitiveMatch)
         {
-            return propertyName == _valueName ||
-                (caseInsensitiveMatch && string.Equals(propertyName, _valueName, StringComparison.OrdinalIgnoreCase)) ||
-                propertyName == ValueNameCLR;
+            return propertyName == _valueName
+                || (
+                    caseInsensitiveMatch
+                    && string.Equals(propertyName, _valueName, StringComparison.OrdinalIgnoreCase)
+                )
+                || propertyName == ValueNameCLR;
         }
     }
 }

@@ -36,4 +36,7 @@ public class Test
         return true;
     }
 }
-public enum MyEnum { Value0 = 0 }
+public enum MyEnum
+{
+    Value0 = 0
+}

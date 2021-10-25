@@ -14,7 +14,13 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
     /// Helper class to match signatures in format of 
     /// MemberDescriptor.Signature to members.
     /// </summary>
-    internal abstract class SignatureComparer<MethodSymbol, FieldSymbol, PropertySymbol, TypeSymbol, ParameterSymbol>
+    internal abstract class SignatureComparer<
+        MethodSymbol,
+        FieldSymbol,
+        PropertySymbol,
+        TypeSymbol,
+        ParameterSymbol
+    >
         where MethodSymbol : class
         where FieldSymbol : class
         where PropertySymbol : class
@@ -125,7 +131,11 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
             return true;
         }
 
-        private bool MatchParameter(ParameterSymbol parameter, ImmutableArray<byte> signature, ref int position)
+        private bool MatchParameter(
+            ParameterSymbol parameter,
+            ImmutableArray<byte> signature,
+            ref int position
+        )
         {
             bool isByRef = IsByRef(signature, ref position);
 
@@ -151,7 +161,6 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
                 return false;
             }
         }
-
 
         /// <summary>
         /// Does pretty much the same thing as MetadataDecoder.DecodeType only instead of 
@@ -217,7 +226,13 @@ namespace Microsoft.CodeAnalysis.RuntimeMembers
 
                     for (int argumentIndex = 0; argumentIndex < argumentCount; argumentIndex++)
                     {
-                        if (!MatchType(GetGenericTypeArgument(type, argumentIndex), signature, ref position))
+                        if (
+                            !MatchType(
+                                GetGenericTypeArgument(type, argumentIndex),
+                                signature,
+                                ref position
+                            )
+                        )
                         {
                             return false;
                         }

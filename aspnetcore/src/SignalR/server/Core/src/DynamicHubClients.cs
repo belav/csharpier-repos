@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.SignalR
         /// </summary>
         /// <param name="excludedConnectionIds">A collection of connection IDs to exclude.</param>
         /// <returns>An object that can be used to invoke methods on the specified user.</returns>
-        public dynamic AllExcept(IReadOnlyList<string> excludedConnectionIds) => new DynamicClientProxy(_clients.AllExcept(excludedConnectionIds));
+        public dynamic AllExcept(IReadOnlyList<string> excludedConnectionIds) =>
+            new DynamicClientProxy(_clients.AllExcept(excludedConnectionIds));
 
         /// <summary>
         /// Gets an object that can be used to invoke methods on the connection which triggered the current invocation.
@@ -45,14 +46,16 @@ namespace Microsoft.AspNetCore.SignalR
         /// </summary>
         /// <param name="connectionId">The connection ID.</param>
         /// <returns>An object that can be used to invoke methods.</returns>
-        public dynamic Client(string connectionId) => new DynamicClientProxy(_clients.Client(connectionId));
+        public dynamic Client(string connectionId) =>
+            new DynamicClientProxy(_clients.Client(connectionId));
 
         /// <summary>
         /// Gets an object that can be used to invoke methods on the specified connections.
         /// </summary>
         /// <param name="connectionIds">The connection IDs.</param>
         /// <returns>An object that can be used to invoke methods.</returns>
-        public dynamic Clients(IReadOnlyList<string> connectionIds) => new DynamicClientProxy(_clients.Clients(connectionIds));
+        public dynamic Clients(IReadOnlyList<string> connectionIds) =>
+            new DynamicClientProxy(_clients.Clients(connectionIds));
 
         /// <summary>
         /// Gets an object that can be used to invoke methods on all connections in the specified group.
@@ -66,7 +69,8 @@ namespace Microsoft.AspNetCore.SignalR
         /// </summary>
         /// <param name="groupNames">The group names.</param>
         /// <returns>An object that can be used to invoke methods on the specified user.</returns>
-        public dynamic Groups(IReadOnlyList<string> groupNames) => new DynamicClientProxy(_clients.Groups(groupNames));
+        public dynamic Groups(IReadOnlyList<string> groupNames) =>
+            new DynamicClientProxy(_clients.Groups(groupNames));
 
         /// <summary>
         /// Gets an object that can be used to invoke methods on all connections in the specified group excluding the specified connections.
@@ -74,13 +78,15 @@ namespace Microsoft.AspNetCore.SignalR
         /// <param name="groupName">The group name.</param>
         /// <param name="excludedConnectionIds">A collection of connection IDs to exclude.</param>
         /// <returns>An object that can be used to invoke methods.</returns>
-        public dynamic GroupExcept(string groupName, IReadOnlyList<string> excludedConnectionIds) => new DynamicClientProxy(_clients.GroupExcept(groupName, excludedConnectionIds));
+        public dynamic GroupExcept(string groupName, IReadOnlyList<string> excludedConnectionIds) =>
+            new DynamicClientProxy(_clients.GroupExcept(groupName, excludedConnectionIds));
 
         /// <summary>
         /// Gets an object that can be used to invoke methods on connections in a group other than the caller.
         /// </summary>
         /// <returns>An object that can be used to invoke methods.</returns>
-        public dynamic OthersInGroup(string groupName) => new DynamicClientProxy(_clients.OthersInGroup(groupName));
+        public dynamic OthersInGroup(string groupName) =>
+            new DynamicClientProxy(_clients.OthersInGroup(groupName));
 
         /// <summary>
         /// Gets an object that can be used to invoke methods on connections other than the caller.
@@ -99,6 +105,7 @@ namespace Microsoft.AspNetCore.SignalR
         /// </summary>
         /// <param name="userIds">The user IDs.</param>
         /// <returns>An object that can be used to invoke methods.</returns>
-        public dynamic Users(IReadOnlyList<string> userIds) => new DynamicClientProxy(_clients.Users(userIds));
+        public dynamic Users(IReadOnlyList<string> userIds) =>
+            new DynamicClientProxy(_clients.Users(userIds));
     }
 }

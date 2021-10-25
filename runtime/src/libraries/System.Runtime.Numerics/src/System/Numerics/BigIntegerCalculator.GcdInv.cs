@@ -85,19 +85,25 @@ namespace System.Numerics
 
             while (right.GetLength() > 2)
             {
-                ulong x, y;
+                ulong x,
+                    y;
 
                 ExtractDigits(ref left, ref right, out x, out y);
 
-                uint a = 1U, b = 0U;
-                uint c = 0U, d = 1U;
+                uint a = 1U,
+                    b = 0U;
+                uint c = 0U,
+                    d = 1U;
 
                 int iteration = 0;
 
                 // Lehmer's guessing
                 while (y != 0)
                 {
-                    ulong q, r, s, t;
+                    ulong q,
+                        r,
+                        s,
+                        t;
 
                     // Odd iteration
                     q = x / y;
@@ -186,9 +192,12 @@ namespace System.Numerics
             }
         }
 
-        private static void ExtractDigits(ref BitsBuffer xBuffer,
-                                          ref BitsBuffer yBuffer,
-                                          out ulong x, out ulong y)
+        private static void ExtractDigits(
+            ref BitsBuffer xBuffer,
+            ref BitsBuffer yBuffer,
+            out ulong x,
+            out ulong y
+        )
         {
             Debug.Assert(xBuffer.GetLength() >= 3);
             Debug.Assert(yBuffer.GetLength() >= 3);
@@ -207,7 +216,9 @@ namespace System.Numerics
             ulong xm = xBits[xLength - 2];
             ulong xl = xBits[xLength - 3];
 
-            ulong yh, ym, yl;
+            ulong yh,
+                ym,
+                yl;
 
             // arrange the bits
             switch (xLength - yLength)
@@ -246,10 +257,14 @@ namespace System.Numerics
             Debug.Assert(x >= y);
         }
 
-        private static void LehmerCore(ref BitsBuffer xBuffer,
-                                       ref BitsBuffer yBuffer,
-                                       long a, long b,
-                                       long c, long d)
+        private static void LehmerCore(
+            ref BitsBuffer xBuffer,
+            ref BitsBuffer yBuffer,
+            long a,
+            long b,
+            long c,
+            long d
+        )
         {
             Debug.Assert(xBuffer.GetLength() >= 1);
             Debug.Assert(yBuffer.GetLength() >= 1);
@@ -264,7 +279,8 @@ namespace System.Numerics
 
             int length = yBuffer.GetLength();
 
-            long xCarry = 0L, yCarry = 0L;
+            long xCarry = 0L,
+                yCarry = 0L;
             for (int i = 0; i < length; i++)
             {
                 long xDigit = a * x[i] - b * y[i] + xCarry;

@@ -35,9 +35,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class LevelTwoController : TestODataController, IDisposable
@@ -65,9 +63,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class LevelThreeController : TestODataController, IDisposable
@@ -95,9 +91,7 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 
     public class LevelFourController : TestODataController, IDisposable
@@ -125,8 +119,6 @@ namespace Microsoft.EntityFrameworkCore.Query
             return result == null ? NotFound() : (ITestActionResult)Ok(result);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

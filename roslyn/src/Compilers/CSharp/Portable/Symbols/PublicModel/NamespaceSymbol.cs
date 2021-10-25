@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         }
 
         internal override CSharp.Symbol UnderlyingSymbol => _underlying;
-        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol => _underlying;
+        internal override Symbols.NamespaceOrTypeSymbol UnderlyingNamespaceOrTypeSymbol =>
+            _underlying;
         internal Symbols.NamespaceSymbol UnderlyingNamespaceSymbol => _underlying;
 
         bool INamespaceSymbol.IsGlobalNamespace => _underlying.IsGlobalNamespace;
@@ -32,10 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ImmutableArray<INamespaceSymbol> INamespaceSymbol.ConstituentNamespaces
         {
-            get
-            {
-                return _underlying.ConstituentNamespaces.GetPublicSymbols();
-            }
+            get { return _underlying.ConstituentNamespaces.GetPublicSymbols(); }
         }
 
         IEnumerable<INamespaceOrTypeSymbol> INamespaceSymbol.GetMembers()
@@ -73,7 +71,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         {
             return visitor.VisitNamespace(this);
         }
-
         #endregion
     }
 }

@@ -9,26 +9,26 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class SqlServerNTSApiConsistencyTest : ApiConsistencyTestBase<SqlServerNTSApiConsistencyTest.SqlServerNTSApiConsistencyFixture>
+    public class SqlServerNTSApiConsistencyTest
+        : ApiConsistencyTestBase<SqlServerNTSApiConsistencyTest.SqlServerNTSApiConsistencyFixture>
     {
         public SqlServerNTSApiConsistencyTest(SqlServerNTSApiConsistencyFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
-        protected override void AddServices(ServiceCollection serviceCollection)
-            => serviceCollection.AddEntityFrameworkSqlServerNetTopologySuite();
+        protected override void AddServices(ServiceCollection serviceCollection) =>
+            serviceCollection.AddEntityFrameworkSqlServerNetTopologySuite();
 
-        protected override Assembly TargetAssembly
-            => typeof(SqlServerNetTopologySuiteServiceCollectionExtensions).Assembly;
+        protected override Assembly TargetAssembly =>
+            typeof(SqlServerNetTopologySuiteServiceCollectionExtensions).Assembly;
 
         public class SqlServerNTSApiConsistencyFixture : ApiConsistencyFixtureBase
         {
-            public override HashSet<Type> FluentApiTypes { get; } = new()
-            {
-                typeof(SqlServerNetTopologySuiteDbContextOptionsBuilderExtensions),
-                typeof(SqlServerNetTopologySuiteServiceCollectionExtensions)
-            };
+            public override HashSet<Type> FluentApiTypes { get; } =
+                new()
+                {
+                    typeof(SqlServerNetTopologySuiteDbContextOptionsBuilderExtensions),
+                    typeof(SqlServerNetTopologySuiteServiceCollectionExtensions)
+                };
         }
     }
 }

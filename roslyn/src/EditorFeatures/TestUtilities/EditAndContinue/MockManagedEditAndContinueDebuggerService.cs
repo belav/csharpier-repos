@@ -11,16 +11,25 @@ using Microsoft.VisualStudio.Debugger.Contracts.EditAndContinue;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 {
-    internal class MockManagedEditAndContinueDebuggerService : IManagedEditAndContinueDebuggerService
+    internal class MockManagedEditAndContinueDebuggerService
+        : IManagedEditAndContinueDebuggerService
     {
         public Func<Guid, ManagedEditAndContinueAvailability>? IsEditAndContinueAvailable;
         public Dictionary<Guid, ManagedEditAndContinueAvailability>? LoadedModules;
         public Func<ImmutableArray<ManagedActiveStatementDebugInfo>>? GetActiveStatementsImpl;
 
-        public Task<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellationToken)
-            => Task.FromResult(GetActiveStatementsImpl?.Invoke() ?? ImmutableArray<ManagedActiveStatementDebugInfo>.Empty);
+        public Task<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(
+            CancellationToken cancellationToken
+        ) =>
+            Task.FromResult(
+                GetActiveStatementsImpl?.Invoke()
+                    ?? ImmutableArray<ManagedActiveStatementDebugInfo>.Empty
+            );
 
-        public Task<ManagedEditAndContinueAvailability> GetAvailabilityAsync(Guid mvid, CancellationToken cancellationToken)
+        public Task<ManagedEditAndContinueAvailability> GetAvailabilityAsync(
+            Guid mvid,
+            CancellationToken cancellationToken
+        )
         {
             if (IsEditAndContinueAvailable != null)
             {
@@ -29,13 +38,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             if (LoadedModules != null)
             {
-                return Task.FromResult(LoadedModules.TryGetValue(mvid, out var result) ? result : new ManagedEditAndContinueAvailability(ManagedEditAndContinueAvailabilityStatus.ModuleNotLoaded));
+                return Task.FromResult(
+                    LoadedModules.TryGetValue(mvid, out var result)
+                      ? result
+                      : new ManagedEditAndContinueAvailability(
+                            ManagedEditAndContinueAvailabilityStatus.ModuleNotLoaded
+                        )
+                );
             }
 
             throw new NotImplementedException();
         }
 
-        public Task PrepareModuleForUpdateAsync(Guid mvid, CancellationToken cancellationToken)
-            => Task.CompletedTask;
+        public Task PrepareModuleForUpdateAsync(Guid mvid, CancellationToken cancellationToken) =>
+            Task.CompletedTask;
     }
 }

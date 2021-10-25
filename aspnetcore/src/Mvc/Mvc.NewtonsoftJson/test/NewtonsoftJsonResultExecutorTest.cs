@@ -11,14 +11,17 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson
 {
     public class NewtonsoftJsonResultExecutorTest : JsonResultExecutorTestBase
     {
-        protected override IActionResultExecutor<JsonResult> CreateExecutor(ILoggerFactory loggerFactory)
+        protected override IActionResultExecutor<JsonResult> CreateExecutor(
+            ILoggerFactory loggerFactory
+        )
         {
             return new NewtonsoftJsonResultExecutor(
                 new TestHttpResponseStreamWriterFactory(),
-                loggerFactory.CreateLogger< NewtonsoftJsonResultExecutor>(),
+                loggerFactory.CreateLogger<NewtonsoftJsonResultExecutor>(),
                 Options.Create(new MvcOptions()),
                 Options.Create(new MvcNewtonsoftJsonOptions()),
-                ArrayPool<char>.Shared);
+                ArrayPool<char>.Shared
+            );
         }
 
         protected override object GetIndentedSettings()

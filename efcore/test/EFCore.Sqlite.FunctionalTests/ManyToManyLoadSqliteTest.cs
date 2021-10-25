@@ -6,10 +6,7 @@ namespace Microsoft.EntityFrameworkCore
     public class ManyToManyLoadSqliteTest
         : ManyToManyLoadSqliteTestBase<ManyToManyLoadSqliteTest.ManyToManyLoadSqliteFixture>
     {
-        public ManyToManyLoadSqliteTest(ManyToManyLoadSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public ManyToManyLoadSqliteTest(ManyToManyLoadSqliteFixture fixture) : base(fixture) { }
 
         public class ManyToManyLoadSqliteFixture : ManyToManyLoadSqliteFixtureBase
         {

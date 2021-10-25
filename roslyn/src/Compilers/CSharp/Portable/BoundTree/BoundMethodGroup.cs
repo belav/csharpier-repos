@@ -19,17 +19,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<MethodSymbol> methods,
             LookupResult lookupResult,
             BoundMethodGroupFlags flags,
-            bool hasErrors = false)
-            : this(syntax, typeArgumentsOpt, name, methods, lookupResult.SingleSymbolOrDefault, lookupResult.Error, flags, receiverOpt, lookupResult.Kind, hasErrors)
-        {
-        }
+            bool hasErrors = false
+        )
+            : this(
+                syntax,
+                typeArgumentsOpt,
+                name,
+                methods,
+                lookupResult.SingleSymbolOrDefault,
+                lookupResult.Error,
+                flags,
+                receiverOpt,
+                lookupResult.Kind,
+                hasErrors
+            ) { }
 
         public MemberAccessExpressionSyntax? MemberAccessExpressionSyntax
         {
-            get
-            {
-                return this.Syntax as MemberAccessExpressionSyntax;
-            }
+            get { return this.Syntax as MemberAccessExpressionSyntax; }
         }
 
         public SyntaxNode NameSyntax
@@ -65,10 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public bool SearchExtensionMethods
         {
-            get
-            {
-                return (this.Flags & BoundMethodGroupFlags.SearchExtensionMethods) != 0;
-            }
+            get { return (this.Flags & BoundMethodGroupFlags.SearchExtensionMethods) != 0; }
         }
     }
 }

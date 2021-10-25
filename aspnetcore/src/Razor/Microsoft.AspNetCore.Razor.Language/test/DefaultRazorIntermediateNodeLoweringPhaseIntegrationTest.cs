@@ -39,12 +39,14 @@ namespace Microsoft.AspNetCore.Razor.Language
             var callback = new Mock<IConfigureRazorCodeGenerationOptionsFeature>();
             callback
                 .Setup(c => c.Configure(It.IsAny<RazorCodeGenerationOptionsBuilder>()))
-                .Callback<RazorCodeGenerationOptionsBuilder>(o =>
-                {
-                    o.IndentSize = 17;
-                    o.IndentWithTabs = true;
-                    o.SuppressChecksum = true;
-                });
+                .Callback<RazorCodeGenerationOptionsBuilder>(
+                    o =>
+                    {
+                        o.IndentSize = 17;
+                        o.IndentWithTabs = true;
+                        o.SuppressChecksum = true;
+                    }
+                );
 
             // Act
             var documentNode = Lower(
@@ -53,7 +55,8 @@ namespace Microsoft.AspNetCore.Razor.Language
                 {
                     b.Features.Add(callback.Object);
                 },
-                designTime: true);
+                designTime: true
+            );
 
             // Assert
             Assert.NotNull(documentNode.Options);
@@ -73,89 +76,112 @@ namespace Microsoft.AspNetCore.Razor.Language
             var documentNode = Lower(codeDocument);
 
             // Assert
-            Children(documentNode,
-                n => Html("Hello, World!", n));
+            Children(documentNode, n => Html("Hello, World!", n));
         }
 
         [Fact]
         public void Lower_HtmlWithDataDashAttributes()
         {
             // Arrange
-            var codeDocument = TestRazorCodeDocument.Create(@"
+            var codeDocument = TestRazorCodeDocument.Create(
+                @"
 <html>
     <body>
         <span data-val=""@Hello"" />
     </body>
-</html>");
+</html>"
+            );
 
             // Act
             var documentNode = Lower(codeDocument);
 
             // Assert
-            Children(documentNode,
-                n => Html(
-@"
+            Children(
+                documentNode,
+                n =>
+                    Html(
+                        @"
 <html>
     <body>
-        <span data-val=""", n),
+        <span data-val=""",
+                        n
+                    ),
                 n => CSharpExpression("Hello", n),
-                n => Html(@""" />
+                n =>
+                    Html(
+                        @""" />
     </body>
-</html>", n));
+</html>",
+                        n
+                    )
+            );
         }
 
         [Fact]
         public void Lower_HtmlWithConditionalAttributes()
         {
             // Arrange
-            var codeDocument = TestRazorCodeDocument.Create(@"
+            var codeDocument = TestRazorCodeDocument.Create(
+                @"
 <html>
     <body>
         <span val=""@Hello World"" />
     </body>
-</html>");
+</html>"
+            );
 
             // Act
             var documentNode = Lower(codeDocument);
 
             // Assert
-            Children(documentNode,
-                n => Html(
-@"
+            Children(
+                documentNode,
+                n =>
+                    Html(
+                        @"
 <html>
     <body>
-        <span", n),
-
-                n => ConditionalAttribute(
-                    prefix: " val=\"",
-                    name: "val",
-                    suffix: "\"",
-                    node: n,
-                    valueValidators: new Action<IntermediateNode>[]
-                    {
-                        value => CSharpExpressionAttributeValue(string.Empty, "Hello", value),
-                        value => LiteralAttributeValue(" ",  "World", value)
-                    }),
-                n => Html(@" />
+        <span",
+                        n
+                    ),
+                n =>
+                    ConditionalAttribute(
+                        prefix: " val=\"",
+                        name: "val",
+                        suffix: "\"",
+                        node: n,
+                        valueValidators: new Action<IntermediateNode>[]
+                        {
+                            value => CSharpExpressionAttributeValue(string.Empty, "Hello", value),
+                            value => LiteralAttributeValue(" ", "World", value)
+                        }
+                    ),
+                n =>
+                    Html(
+                        @" />
     </body>
-</html>", n));
+</html>",
+                        n
+                    )
+            );
         }
 
         [Fact]
         public void Lower_WithFunctions()
         {
             // Arrange
-            var codeDocument = TestRazorCodeDocument.Create(@"@functions { public int Foo { get; set; }}");
+            var codeDocument = TestRazorCodeDocument.Create(
+                @"@functions { public int Foo { get; set; }}"
+            );
 
             // Act
             var documentNode = Lower(codeDocument);
 
             // Assert
-            Children(documentNode,
-                n => Directive(
-                    "functions",
-                    n,
-                    c => Assert.IsType<CSharpCodeIntermediateNode>(c)));
+            Children(
+                documentNode,
+                n => Directive("functions", n, c => Assert.IsType<CSharpCodeIntermediateNode>(c))
+            );
         }
 
         [Fact]
@@ -169,107 +195,31 @@ namespace Microsoft.AspNetCore.Razor.Language
             var documentNode = Lower(codeDocument);
 
             // Assert
-            Children(documentNode,
+            Children(
+                documentNode,
                 n =>
                 {
                     Using("System", n);
                     Assert.Equal(expectedSourceLocation, n.Source);
-                });
+                }
+            );
         }
 
         [Fact]
         public void Lower_TagHelpers()
         {
             // Arrange
-            var codeDocument = TestRazorCodeDocument.Create(@"@addTagHelper *, TestAssembly
-<span val=""@Hello World""></span>");
+            var codeDocument = TestRazorCodeDocument.Create(
+                @"@addTagHelper *, TestAssembly
+<span val=""@Hello World""></span>"
+            );
             var tagHelpers = new[]
             {
                 CreateTagHelperDescriptor(
                     tagName: "span",
                     typeName: "SpanTagHelper",
-                    assemblyName: "TestAssembly")
-            };
-
-            // Act
-            var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
-
-            // Assert
-            Children(documentNode,
-                n => Directive(
-                    SyntaxConstants.CSharp.AddTagHelperKeyword,
-                    n,
-                    v => DirectiveToken(DirectiveTokenKind.String, "*, TestAssembly", v)),
-                n => TagHelper(
-                    "span",
-                    TagMode.StartTagAndEndTag,
-                    tagHelpers,
-                    n,
-                    c => Assert.IsType<TagHelperBodyIntermediateNode>(c),
-                    c => TagHelperHtmlAttribute(
-                        "val",
-                        AttributeStructure.DoubleQuotes,
-                        c,
-                        v => CSharpExpressionAttributeValue(string.Empty, "Hello", v),
-                        v => LiteralAttributeValue(" ", "World", v))));
-        }
-
-        [Fact]
-        public void Lower_TagHelpers_WithPrefix()
-        {
-            // Arrange
-            var codeDocument = TestRazorCodeDocument.Create(@"@addTagHelper *, TestAssembly
-@tagHelperPrefix cool:
-<cool:span val=""@Hello World""></cool:span>");
-            var tagHelpers = new[]
-            {
-                CreateTagHelperDescriptor(
-                    tagName: "span",
-                    typeName: "SpanTagHelper",
-                    assemblyName: "TestAssembly")
-            };
-
-            // Act
-            var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
-
-            // Assert
-            Children(documentNode,
-                n => Directive(
-                    SyntaxConstants.CSharp.AddTagHelperKeyword,
-                    n,
-                    v => DirectiveToken(DirectiveTokenKind.String, "*, TestAssembly", v)),
-                n => Directive(
-                    SyntaxConstants.CSharp.TagHelperPrefixKeyword,
-                    n,
-                    v => DirectiveToken(DirectiveTokenKind.String, "cool:", v)),
-                n => TagHelper(
-                    "span",  // Note: this is span not cool:span
-                    TagMode.StartTagAndEndTag,
-                    tagHelpers,
-                    n,
-                    c => Assert.IsType<TagHelperBodyIntermediateNode>(c),
-                    c => TagHelperHtmlAttribute(
-                        "val",
-                        AttributeStructure.DoubleQuotes,
-                        c,
-                        v => CSharpExpressionAttributeValue(string.Empty, "Hello", v),
-                        v => LiteralAttributeValue(" ", "World", v))));
-        }
-
-        [Fact]
-        public void Lower_TagHelper_InSection()
-        {
-            // Arrange
-            var codeDocument = TestRazorCodeDocument.Create(@"@addTagHelper *, TestAssembly
-@section test {
-<span val=""@Hello World""></span>
-}");
-            var tagHelpers = new[]
-            {
-                        CreateTagHelperDescriptor(
-                            tagName: "span",
-                            typeName: "SpanTagHelper",
-                            assemblyName: "TestAssembly")
+                    assemblyName: "TestAssembly"
+                )
             };
 
             // Act
@@ -278,36 +228,157 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Assert
             Children(
                 documentNode,
-                n => Directive(
-                    SyntaxConstants.CSharp.AddTagHelperKeyword,
-                    n,
-                    v => DirectiveToken(DirectiveTokenKind.String, "*, TestAssembly", v)),
-                n => Directive(
-                    "section",
-                    n,
-                    c1 => DirectiveToken(DirectiveTokenKind.Member, "test", c1),
-                    c1 => Html(Environment.NewLine, c1),
-                    c1 => TagHelper(
+                n =>
+                    Directive(
+                        SyntaxConstants.CSharp.AddTagHelperKeyword,
+                        n,
+                        v => DirectiveToken(DirectiveTokenKind.String, "*, TestAssembly", v)
+                    ),
+                n =>
+                    TagHelper(
                         "span",
                         TagMode.StartTagAndEndTag,
                         tagHelpers,
-                        c1,
-                        c2 => Assert.IsType<TagHelperBodyIntermediateNode>(c2),
-                        c2 => TagHelperHtmlAttribute(
-                            "val",
-                            AttributeStructure.DoubleQuotes,
-                            c2,
-                            v => CSharpExpressionAttributeValue(string.Empty, "Hello", v),
-                            v => LiteralAttributeValue(" ", "World", v))),
-                    c1 => Html(Environment.NewLine, c1)));
+                        n,
+                        c => Assert.IsType<TagHelperBodyIntermediateNode>(c),
+                        c =>
+                            TagHelperHtmlAttribute(
+                                "val",
+                                AttributeStructure.DoubleQuotes,
+                                c,
+                                v => CSharpExpressionAttributeValue(string.Empty, "Hello", v),
+                                v => LiteralAttributeValue(" ", "World", v)
+                            )
+                    )
+            );
+        }
+
+        [Fact]
+        public void Lower_TagHelpers_WithPrefix()
+        {
+            // Arrange
+            var codeDocument = TestRazorCodeDocument.Create(
+                @"@addTagHelper *, TestAssembly
+@tagHelperPrefix cool:
+<cool:span val=""@Hello World""></cool:span>"
+            );
+            var tagHelpers = new[]
+            {
+                CreateTagHelperDescriptor(
+                    tagName: "span",
+                    typeName: "SpanTagHelper",
+                    assemblyName: "TestAssembly"
+                )
+            };
+
+            // Act
+            var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
+
+            // Assert
+            Children(
+                documentNode,
+                n =>
+                    Directive(
+                        SyntaxConstants.CSharp.AddTagHelperKeyword,
+                        n,
+                        v => DirectiveToken(DirectiveTokenKind.String, "*, TestAssembly", v)
+                    ),
+                n =>
+                    Directive(
+                        SyntaxConstants.CSharp.TagHelperPrefixKeyword,
+                        n,
+                        v => DirectiveToken(DirectiveTokenKind.String, "cool:", v)
+                    ),
+                n =>
+                    TagHelper(
+                        "span", // Note: this is span not cool:span
+                        TagMode.StartTagAndEndTag,
+                        tagHelpers,
+                        n,
+                        c => Assert.IsType<TagHelperBodyIntermediateNode>(c),
+                        c =>
+                            TagHelperHtmlAttribute(
+                                "val",
+                                AttributeStructure.DoubleQuotes,
+                                c,
+                                v => CSharpExpressionAttributeValue(string.Empty, "Hello", v),
+                                v => LiteralAttributeValue(" ", "World", v)
+                            )
+                    )
+            );
+        }
+
+        [Fact]
+        public void Lower_TagHelper_InSection()
+        {
+            // Arrange
+            var codeDocument = TestRazorCodeDocument.Create(
+                @"@addTagHelper *, TestAssembly
+@section test {
+<span val=""@Hello World""></span>
+}"
+            );
+            var tagHelpers = new[]
+            {
+                CreateTagHelperDescriptor(
+                    tagName: "span",
+                    typeName: "SpanTagHelper",
+                    assemblyName: "TestAssembly"
+                )
+            };
+
+            // Act
+            var documentNode = Lower(codeDocument, tagHelpers: tagHelpers);
+
+            // Assert
+            Children(
+                documentNode,
+                n =>
+                    Directive(
+                        SyntaxConstants.CSharp.AddTagHelperKeyword,
+                        n,
+                        v => DirectiveToken(DirectiveTokenKind.String, "*, TestAssembly", v)
+                    ),
+                n =>
+                    Directive(
+                        "section",
+                        n,
+                        c1 => DirectiveToken(DirectiveTokenKind.Member, "test", c1),
+                        c1 => Html(Environment.NewLine, c1),
+                        c1 =>
+                            TagHelper(
+                                "span",
+                                TagMode.StartTagAndEndTag,
+                                tagHelpers,
+                                c1,
+                                c2 => Assert.IsType<TagHelperBodyIntermediateNode>(c2),
+                                c2 =>
+                                    TagHelperHtmlAttribute(
+                                        "val",
+                                        AttributeStructure.DoubleQuotes,
+                                        c2,
+                                        v =>
+                                            CSharpExpressionAttributeValue(
+                                                string.Empty,
+                                                "Hello",
+                                                v
+                                            ),
+                                        v => LiteralAttributeValue(" ", "World", v)
+                                    )
+                            ),
+                        c1 => Html(Environment.NewLine, c1)
+                    )
+            );
         }
 
         [Fact]
         public void Lower_TagHelpersWithBoundAttribute()
         {
             // Arrange
-            var codeDocument = TestRazorCodeDocument.Create(@"@addTagHelper *, TestAssembly
-<input bound='foo' />");
+            var codeDocument = TestRazorCodeDocument.Create(
+                @"@addTagHelper *, TestAssembly
+<input bound='foo' />"
+            );
             var tagHelpers = new[]
             {
                 CreateTagHelperDescriptor(
@@ -316,11 +387,10 @@ namespace Microsoft.AspNetCore.Razor.Language
                     assemblyName: "TestAssembly",
                     attributes: new Action<BoundAttributeDescriptorBuilder>[]
                     {
-                        builder => builder
-                            .Name("bound")
-                            .PropertyName("FooProp")
-                            .TypeName("System.String"),
-                            })
+                        builder =>
+                            builder.Name("bound").PropertyName("FooProp").TypeName("System.String"),
+                    }
+                )
             };
 
             // Act
@@ -329,30 +399,39 @@ namespace Microsoft.AspNetCore.Razor.Language
             // Assert
             Children(
                 documentNode,
-                n => Directive(
-                    SyntaxConstants.CSharp.AddTagHelperKeyword,
-                    n,
-                    v => DirectiveToken(DirectiveTokenKind.String, "*, TestAssembly", v)),
-                n => TagHelper(
-                    "input",
-                    TagMode.SelfClosing,
-                    tagHelpers,
-                    n,
-                    c => Assert.IsType<TagHelperBodyIntermediateNode>(c),
-                    c => SetTagHelperProperty(
-                        "bound",
-                        "FooProp",
-                        AttributeStructure.SingleQuotes,
-                        c,
-                        v => Html("foo", v))));
+                n =>
+                    Directive(
+                        SyntaxConstants.CSharp.AddTagHelperKeyword,
+                        n,
+                        v => DirectiveToken(DirectiveTokenKind.String, "*, TestAssembly", v)
+                    ),
+                n =>
+                    TagHelper(
+                        "input",
+                        TagMode.SelfClosing,
+                        tagHelpers,
+                        n,
+                        c => Assert.IsType<TagHelperBodyIntermediateNode>(c),
+                        c =>
+                            SetTagHelperProperty(
+                                "bound",
+                                "FooProp",
+                                AttributeStructure.SingleQuotes,
+                                c,
+                                v => Html("foo", v)
+                            )
+                    )
+            );
         }
 
         [Fact]
         public void Lower_WithImports_Using()
         {
             // Arrange
-            var source = TestRazorSourceDocument.Create(@"@using System.Threading.Tasks
-<p>Hi!</p>");
+            var source = TestRazorSourceDocument.Create(
+                @"@using System.Threading.Tasks
+<p>Hi!</p>"
+            );
             var imports = new[]
             {
                 TestRazorSourceDocument.Create("@using System.Globalization"),
@@ -370,15 +449,18 @@ namespace Microsoft.AspNetCore.Razor.Language
                 n => Using("System.Globalization", n),
                 n => Using("System.Text", n),
                 n => Using("System.Threading.Tasks", n),
-                n => Html("<p>Hi!</p>", n));
+                n => Html("<p>Hi!</p>", n)
+            );
         }
 
         [Fact]
         public void Lower_WithImports_AllowsIdenticalNamespacesInPrimaryDocument()
         {
             // Arrange
-            var source = TestRazorSourceDocument.Create(@"@using System.Threading.Tasks
-@using System.Threading.Tasks");
+            var source = TestRazorSourceDocument.Create(
+                @"@using System.Threading.Tasks
+@using System.Threading.Tasks"
+            );
             var imports = new[]
             {
                 TestRazorSourceDocument.Create("@using System.Threading.Tasks"),
@@ -393,7 +475,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             Children(
                 documentNode,
                 n => Using("System.Threading.Tasks", n),
-                n => Using("System.Threading.Tasks", n));
+                n => Using("System.Threading.Tasks", n)
+            );
         }
 
         [Fact]
@@ -410,23 +493,35 @@ namespace Microsoft.AspNetCore.Razor.Language
             var codeDocument = TestRazorCodeDocument.Create(source, imports);
 
             // Act
-            var documentNode = Lower(codeDocument, b =>
-            {
-                b.AddDirective(DirectiveDescriptor.CreateDirective(
-                    "test",
-                    DirectiveKind.SingleLine,
-                    builder =>
-                    {
-                        builder.AddMemberToken();
-                        builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
-                    }));
-            });
+            var documentNode = Lower(
+                codeDocument,
+                b =>
+                {
+                    b.AddDirective(
+                        DirectiveDescriptor.CreateDirective(
+                            "test",
+                            DirectiveKind.SingleLine,
+                            builder =>
+                            {
+                                builder.AddMemberToken();
+                                builder.Usage = DirectiveUsage.FileScopedSinglyOccurring;
+                            }
+                        )
+                    );
+                }
+            );
 
             // Assert
             Children(
                 documentNode,
-                n => Directive("test", n, c => DirectiveToken(DirectiveTokenKind.Member, "value2", c)),
-                n => Html("<p>Hi!</p>", n));
+                n =>
+                    Directive(
+                        "test",
+                        n,
+                        c => DirectiveToken(DirectiveTokenKind.Member, "value2", c)
+                    ),
+                n => Html("<p>Hi!</p>", n)
+            );
         }
 
         [Fact]
@@ -434,30 +529,35 @@ namespace Microsoft.AspNetCore.Razor.Language
         {
             // Arrange
             var source = TestRazorSourceDocument.Create("<p>Hi!</p>");
-            var imports = new[]
-            {
-                TestRazorSourceDocument.Create("@block token { }"),
-            };
+            var imports = new[] { TestRazorSourceDocument.Create("@block token { }"), };
 
             var codeDocument = TestRazorCodeDocument.Create(source, imports);
 
             // Act
-            var documentNode = Lower(codeDocument, b =>
-            {
-                b.AddDirective(DirectiveDescriptor.CreateDirective("block", DirectiveKind.RazorBlock, d => d.AddMemberToken()));
-            });
+            var documentNode = Lower(
+                codeDocument,
+                b =>
+                {
+                    b.AddDirective(
+                        DirectiveDescriptor.CreateDirective(
+                            "block",
+                            DirectiveKind.RazorBlock,
+                            d => d.AddMemberToken()
+                        )
+                    );
+                }
+            );
 
             // Assert
-            Children(
-                documentNode,
-                n => Html("<p>Hi!</p>", n));
+            Children(documentNode, n => Html("<p>Hi!</p>", n));
         }
 
         private DocumentIntermediateNode Lower(
             RazorCodeDocument codeDocument,
             Action<RazorProjectEngineBuilder> builder = null,
             IEnumerable<TagHelperDescriptor> tagHelpers = null,
-            bool designTime = false)
+            bool designTime = false
+        )
         {
             tagHelpers = tagHelpers ?? new TagHelperDescriptor[0];
 
@@ -494,7 +594,8 @@ namespace Microsoft.AspNetCore.Razor.Language
             string tagName,
             string typeName,
             string assemblyName,
-            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null)
+            IEnumerable<Action<BoundAttributeDescriptorBuilder>> attributes = null
+        )
         {
             var builder = TagHelperDescriptorBuilder.Create(typeName, assemblyName);
             builder.TypeName(typeName);
@@ -514,7 +615,9 @@ namespace Microsoft.AspNetCore.Razor.Language
             return descriptor;
         }
 
-        private class DesignTimeOptionsFeature : IConfigureRazorParserOptionsFeature, IConfigureRazorCodeGenerationOptionsFeature
+        private class DesignTimeOptionsFeature
+            : IConfigureRazorParserOptionsFeature,
+              IConfigureRazorCodeGenerationOptionsFeature
         {
             private bool _designTime;
 

@@ -42,7 +42,7 @@ namespace Exchange
         private long newValueA = 0;
         private long newValueB = Int64.MinValue;
         private bool success;
-        public ThreadSafe(): this(10000) { }
+        public ThreadSafe() : this(10000) { }
         public ThreadSafe(int loops)
         {
             success = true;
@@ -60,7 +60,6 @@ namespace Exchange
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueA);
-
         }
         public void ThreadWorkerB()
         {
@@ -78,22 +77,16 @@ namespace Exchange
                 tmpVal = totalValue;
                 if (tmpVal != newValueB && tmpVal != newValueA)
                 {
-
-                    Console.WriteLine(tmpVal + "," +
-                        newValueB + "," + newValueA);
+                    Console.WriteLine(tmpVal + "," + newValueB + "," + newValueA);
                     success = false;
                 }
                 Thread.Sleep(0);
             }
-
         }
 
         public bool Pass
         {
-            get
-            {
-                return (success);
-            }
+            get { return (success); }
         }
     }
 }

@@ -32,10 +32,10 @@ namespace XmlCoreTest.Common
         private const string COMMENT = "COMMENT_";
 
         private long _eCount = 0; //element indexer
-        private long _aCount = 0;   //attribute indexer
+        private long _aCount = 0; //attribute indexer
         private long _cCount = 0; //Cdata indexer
-        private long _tCount = 0;   //Text indexer
-        private long _pCount = 0;   //PI Indexer
+        private long _tCount = 0; //Text indexer
+        private long _pCount = 0; //PI Indexer
         private long _mCount = 0; //Comment Indexer
 
         private StreamWriter _textWriter = null;
@@ -160,20 +160,17 @@ namespace XmlCoreTest.Common
             _q.Append(XML_DECL);
         }
 
-
         /// Writing a Root Element.
         public void PutRoot()
         {
             _q.Append(S_ROOT);
         }
 
-
         /// Writing End Root Element.
         public void PutEndRoot()
         {
             _q.Append(E_ROOT);
         }
-
 
         /// Writing a start of open element.
         public void OpenElement()
@@ -214,7 +211,6 @@ namespace XmlCoreTest.Common
             ++_aCount;
         }
 
-
         /// Overloaded PutAttribute which takes user values.
         public void PutAttribute(string myAttrName, string myAttrValue)
         {
@@ -222,7 +218,6 @@ namespace XmlCoreTest.Common
 
             _q.Append(attr);
         }
-
 
         /// Writing empty element.
         public void PutEmptyElement()

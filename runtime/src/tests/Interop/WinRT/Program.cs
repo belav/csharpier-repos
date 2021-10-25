@@ -9,7 +9,7 @@ using TestLibrary;
 namespace WinRT
 {
     [WindowsRuntimeImport]
-    interface I {}
+    interface I { }
 
     class Program
     {

@@ -37,18 +37,22 @@ namespace Microsoft.AspNetCore.Routing.LinkGeneration
         [Benchmark(Baseline = true)]
         public void TreeRouter()
         {
-            var virtualPathData = _treeRouter.GetVirtualPath(new VirtualPathContext(
-                _requestContext.HttpContext,
-                ambientValues: _requestContext.AmbientValues,
-                values: new RouteValueDictionary(
-                    new
-                    {
-                        controller = "Customers",
-                        action = "Details",
-                        category = "Administration",
-                        region = "US",
-                        id = 10
-                    })));
+            var virtualPathData = _treeRouter.GetVirtualPath(
+                new VirtualPathContext(
+                    _requestContext.HttpContext,
+                    ambientValues: _requestContext.AmbientValues,
+                    values: new RouteValueDictionary(
+                        new
+                        {
+                            controller = "Customers",
+                            action = "Details",
+                            category = "Administration",
+                            region = "US",
+                            id = 10
+                        }
+                    )
+                )
+            );
 
             AssertUrl("/Customers/Details/Administration/US/10", virtualPathData?.VirtualPath);
         }
@@ -66,7 +70,8 @@ namespace Microsoft.AspNetCore.Routing.LinkGeneration
                     category = "Administration",
                     region = "US",
                     id = 10
-                });
+                }
+            );
 
             AssertUrl("/Customers/Details/Administration/US/10", actualUrl);
         }

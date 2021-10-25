@@ -11,16 +11,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
 {
     public abstract class CSharpSquigglesCommon : AbstractEditorTest
     {
-        protected CSharpSquigglesCommon(VisualStudioInstanceFactory instanceFactory, string projectTemplate)
-            : base(instanceFactory, nameof(CSharpSquigglesCommon), projectTemplate)
-        {
-        }
+        protected CSharpSquigglesCommon(
+            VisualStudioInstanceFactory instanceFactory,
+            string projectTemplate
+        ) : base(instanceFactory, nameof(CSharpSquigglesCommon), projectTemplate) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
         public virtual void VerifySyntaxErrorSquiggles()
         {
-            VisualStudio.Editor.SetText(@"using System;
+            VisualStudio.Editor.SetText(
+                @"using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -38,24 +39,29 @@ namespace ConsoleApplication1
         private static void Sub()
         {
     }
-}");
+}"
+            );
 
             VisualStudio.Editor.Verify.ErrorTags(
-              "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System.Collections.Generic;\\r\\nusing System.Text;'[15-68]",
-              "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[286-287]",
-              "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'}'[354-355]");
+                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System.Collections.Generic;\\r\\nusing System.Text;'[15-68]",
+                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[286-287]",
+                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'}'[354-355]"
+            );
         }
 
         public virtual void VerifySemanticErrorSquiggles()
         {
-            VisualStudio.Editor.SetText(@"using System;
+            VisualStudio.Editor.SetText(
+                @"using System;
 
 class C  : Bar
 {
-}");
+}"
+            );
             VisualStudio.Editor.Verify.ErrorTags(
                 "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;'[0-13]",
-                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[28-31]");
+                "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[28-31]"
+            );
         }
     }
 }

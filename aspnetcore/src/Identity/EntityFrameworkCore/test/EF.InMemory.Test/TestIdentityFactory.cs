@@ -8,8 +8,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
 {
     public static class TestIdentityFactory
     {
-        private static InMemoryContext CreateContext(SqliteConnection connection)
-            => InMemoryContext.Create(connection);
+        private static InMemoryContext CreateContext(SqliteConnection connection) =>
+            InMemoryContext.Create(connection);
 
         public static IServiceCollection CreateTestServices()
         {
@@ -27,7 +27,7 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test
             return services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>();
         }
 
-        public static RoleManager<IdentityRole> CreateRoleManager(SqliteConnection connection)
-            => CreateRoleManager(CreateContext(connection));
+        public static RoleManager<IdentityRole> CreateRoleManager(SqliteConnection connection) =>
+            CreateRoleManager(CreateContext(connection));
     }
 }

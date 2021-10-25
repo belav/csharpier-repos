@@ -27,10 +27,8 @@ namespace Microsoft.AspNetCore.Mvc
         public RedirectToActionResult(
             string? actionName,
             string? controllerName,
-            object? routeValues)
-            : this(actionName, controllerName, routeValues, permanent: false)
-        {
-        }
+            object? routeValues
+        ) : this(actionName, controllerName, routeValues, permanent: false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -44,10 +42,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? actionName,
             string? controllerName,
             object? routeValues,
-            string? fragment)
-            : this(actionName, controllerName, routeValues, permanent: false, fragment: fragment)
-        {
-        }
+            string? fragment
+        ) : this(actionName, controllerName, routeValues, permanent: false, fragment: fragment) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -61,10 +57,8 @@ namespace Microsoft.AspNetCore.Mvc
             string? actionName,
             string? controllerName,
             object? routeValues,
-            bool permanent)
-            : this(actionName, controllerName, routeValues, permanent, fragment: null)
-        {
-        }
+            bool permanent
+        ) : this(actionName, controllerName, routeValues, permanent, fragment: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -80,10 +74,9 @@ namespace Microsoft.AspNetCore.Mvc
             string? controllerName,
             object? routeValues,
             bool permanent,
-            bool preserveMethod)
-            : this(actionName, controllerName, routeValues, permanent, preserveMethod, fragment: null)
-        {
-        }
+            bool preserveMethod
+        ) : this(actionName, controllerName, routeValues, permanent, preserveMethod, fragment: null)
+        { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -99,10 +92,16 @@ namespace Microsoft.AspNetCore.Mvc
             string? controllerName,
             object? routeValues,
             bool permanent,
-            string? fragment)
-            : this(actionName, controllerName, routeValues, permanent, preserveMethod: false, fragment: fragment)
-        {
-        }
+            string? fragment
+        )
+            : this(
+                actionName,
+                controllerName,
+                routeValues,
+                permanent,
+                preserveMethod: false,
+                fragment: fragment
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToActionResult"/> with the values
@@ -120,7 +119,8 @@ namespace Microsoft.AspNetCore.Mvc
             object? routeValues,
             bool permanent,
             bool preserveMethod,
-            string? fragment)
+            string? fragment
+        )
         {
             ActionName = actionName;
             ControllerName = controllerName;
@@ -173,7 +173,9 @@ namespace Microsoft.AspNetCore.Mvc
                 throw new ArgumentNullException(nameof(context));
             }
 
-            var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<RedirectToActionResult>>();
+            var executor = context.HttpContext.RequestServices.GetRequiredService<
+                IActionResultExecutor<RedirectToActionResult>
+            >();
             return executor.ExecuteAsync(context, this);
         }
     }

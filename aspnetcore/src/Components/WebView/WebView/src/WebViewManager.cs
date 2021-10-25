@@ -40,13 +40,25 @@ namespace Microsoft.AspNetCore.Components.WebView
         /// <param name="appBaseUri">The base URI for the application. Since this is a webview, the base URI is typically on a private origin such as http://0.0.0.0/ or app://example/</param>
         /// <param name="fileProvider">Provides static content to the webview.</param>
         /// <param name="hostPageRelativePath">Path to the host page within the <paramref name="fileProvider"/>.</param>
-        public WebViewManager(IServiceProvider provider, Dispatcher dispatcher, Uri appBaseUri, IFileProvider fileProvider, string hostPageRelativePath)
+        public WebViewManager(
+            IServiceProvider provider,
+            Dispatcher dispatcher,
+            Uri appBaseUri,
+            IFileProvider fileProvider,
+            string hostPageRelativePath
+        )
         {
             _provider = provider ?? throw new ArgumentNullException(nameof(provider));
             _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
-            _appBaseUri = EnsureTrailingSlash(appBaseUri ?? throw new ArgumentNullException(nameof(appBaseUri)));
+            _appBaseUri = EnsureTrailingSlash(
+                appBaseUri ?? throw new ArgumentNullException(nameof(appBaseUri))
+            );
             fileProvider = StaticWebAssetsLoader.UseStaticWebAssets(fileProvider);
-            _staticContentProvider = new StaticContentProvider(fileProvider, appBaseUri, hostPageRelativePath);
+            _staticContentProvider = new StaticContentProvider(
+                fileProvider,
+                appBaseUri,
+                hostPageRelativePath
+            );
             _ipcSender = new IpcSender(_dispatcher, SendMessage);
             _ipcReceiver = new IpcReceiver(AttachToPageAsync);
         }
@@ -61,8 +73,7 @@ namespace Microsoft.AspNetCore.Components.WebView
         /// client-side routing.
         /// </summary>
         /// <param name="url">The URL, which may be absolute or relative to the application root.</param>
-        public void Navigate(string url)
-            => NavigateCore(new Uri(_appBaseUri, url));
+        public void Navigate(string url) => NavigateCore(new Uri(_appBaseUri, url));
 
         /// <summary>
         /// Instructs the web view to navigate to the specified location, bypassing any
@@ -84,19 +95,36 @@ namespace Microsoft.AspNetCore.Components.WebView
         /// <param name="componentType">The type of the root component. This must implement <see cref="IComponent"/>.</param>
         /// <param name="selector">The CSS selector describing where in the page the component should be placed.</param>
         /// <param name="parameters">Parameters for the component.</param>
-        public Task AddRootComponentAsync(Type componentType, string selector, ParameterView parameters)
+        public Task AddRootComponentAsync(
+            Type componentType,
+            string selector,
+            ParameterView parameters
+        )
         {
-            var rootComponent = new RootComponent { ComponentType = componentType, Parameters = parameters };
+            var rootComponent = new RootComponent
+            {
+                ComponentType = componentType,
+                Parameters = parameters
+            };
             if (!_rootComponentsBySelector.TryAdd(selector, rootComponent))
             {
-                throw new InvalidOperationException($"There is already a root component with selector '{selector}'.");
+                throw new InvalidOperationException(
+                    $"There is already a root component with selector '{selector}'."
+                );
             }
 
             // If the page is already attached, add the root component to it now. Otherwise we'll
             // add it when the page attaches later.
             if (_currentPageContext != null)
             {
-                return Dispatcher.InvokeAsync(() => _currentPageContext.Renderer.AddRootComponentAsync(componentType, selector, parameters));
+                return Dispatcher.InvokeAsync(
+                    () =>
+                        _currentPageContext.Renderer.AddRootComponentAsync(
+                            componentType,
+                            selector,
+                            parameters
+                        )
+                );
             }
             else
             {
@@ -112,14 +140,18 @@ namespace Microsoft.AspNetCore.Components.WebView
         {
             if (!_rootComponentsBySelector.Remove(selector))
             {
-                throw new InvalidOperationException($"There is no root component with selector '{selector}'.");
+                throw new InvalidOperationException(
+                    $"There is no root component with selector '{selector}'."
+                );
             }
 
             // If the page is already attached, remove the root component from it now. Otherwise it's
             // enough to have updated the dictionary.
             if (_currentPageContext != null)
             {
-                return Dispatcher.InvokeAsync(() => _currentPageContext.Renderer.RemoveRootComponentAsync(selector));
+                return Dispatcher.InvokeAsync(
+                    () => _currentPageContext.Renderer.RemoveRootComponentAsync(selector)
+                );
             }
             else
             {
@@ -141,21 +173,23 @@ namespace Microsoft.AspNetCore.Components.WebView
                 return;
             }
 
-            _ = _dispatcher.InvokeAsync(async () =>
-            {
-                // TODO: Verify this produces the correct exception-surfacing behaviors.
-                // For example, JS interop exceptions should flow back into JS, whereas
-                // renderer exceptions should be fatal.
-                try
+            _ = _dispatcher.InvokeAsync(
+                async () =>
                 {
-                    await _ipcReceiver.OnMessageReceivedAsync(_currentPageContext, message);
+                    // TODO: Verify this produces the correct exception-surfacing behaviors.
+                    // For example, JS interop exceptions should flow back into JS, whereas
+                    // renderer exceptions should be fatal.
+                    try
+                    {
+                        await _ipcReceiver.OnMessageReceivedAsync(_currentPageContext, message);
+                    }
+                    catch (Exception ex)
+                    {
+                        _ipcSender.NotifyUnhandledException(ex);
+                        throw;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    _ipcSender.NotifyUnhandledException(ex);
-                    throw;
-                }
-            });
+            );
         }
 
         /// <summary>
@@ -168,8 +202,22 @@ namespace Microsoft.AspNetCore.Components.WebView
         /// <param name="content">The response content</param>
         /// <param name="headers">The response headers</param>
         /// <returns><c>true</c> if the response can be provided; <c>false</c> otherwise.</returns>
-        protected bool TryGetResponseContent(string uri, bool allowFallbackOnHostPage, out int statusCode, out string statusMessage, out Stream content, out IDictionary<string, string> headers)
-            => _staticContentProvider.TryGetResponseContent(uri, allowFallbackOnHostPage, out statusCode, out statusMessage, out content, out headers);
+        protected bool TryGetResponseContent(
+            string uri,
+            bool allowFallbackOnHostPage,
+            out int statusCode,
+            out string statusMessage,
+            out Stream content,
+            out IDictionary<string, string> headers
+        ) =>
+            _staticContentProvider.TryGetResponseContent(
+                uri,
+                allowFallbackOnHostPage,
+                out statusCode,
+                out statusMessage,
+                out content,
+                out headers
+            );
 
         internal async Task AttachToPageAsync(string baseUrl, string startUrl)
         {
@@ -179,7 +227,13 @@ namespace Microsoft.AspNetCore.Components.WebView
             _currentPageContext?.Dispose();
 
             var serviceScope = _provider.CreateScope();
-            _currentPageContext = new PageContext(_dispatcher, serviceScope, _ipcSender, baseUrl, startUrl);
+            _currentPageContext = new PageContext(
+                _dispatcher,
+                serviceScope,
+                _ipcSender,
+                baseUrl,
+                startUrl
+            );
 
             // Add any root components that were registered before the page attached
             foreach (var (selector, rootComponent) in _rootComponentsBySelector)
@@ -187,12 +241,13 @@ namespace Microsoft.AspNetCore.Components.WebView
                 await _currentPageContext.Renderer.AddRootComponentAsync(
                     rootComponent.ComponentType,
                     selector,
-                    rootComponent.Parameters);
+                    rootComponent.Parameters
+                );
             }
         }
 
-        private static Uri EnsureTrailingSlash(Uri uri)
-            => uri.AbsoluteUri.EndsWith('/') ? uri : new Uri(uri.AbsoluteUri + '/');
+        private static Uri EnsureTrailingSlash(Uri uri) =>
+            uri.AbsoluteUri.EndsWith('/') ? uri : new Uri(uri.AbsoluteUri + '/');
 
         record RootComponent
         {

@@ -19,7 +19,11 @@ namespace Microsoft.AspNetCore.Rewrite
         /// <param name="options">The <see cref="RewriteOptions"/></param>
         /// <param name="fileProvider">The <see cref="IFileProvider"/> </param>
         /// <param name="filePath">The path to the file containing mod_rewrite rules.</param>
-        public static RewriteOptions AddApacheModRewrite(this RewriteOptions options, IFileProvider fileProvider, string filePath)
+        public static RewriteOptions AddApacheModRewrite(
+            this RewriteOptions options,
+            IFileProvider fileProvider,
+            string filePath
+        )
         {
             if (options == null)
             {
@@ -43,7 +47,10 @@ namespace Microsoft.AspNetCore.Rewrite
         /// </summary>
         /// <param name="options">The <see cref="RewriteOptions"/></param>
         /// <param name="reader">A stream of mod_rewrite rules.</param>
-        public static RewriteOptions AddApacheModRewrite(this RewriteOptions options, TextReader reader)
+        public static RewriteOptions AddApacheModRewrite(
+            this RewriteOptions options,
+            TextReader reader
+        )
         {
             if (options == null)
             {
@@ -62,6 +69,5 @@ namespace Microsoft.AspNetCore.Rewrite
             }
             return options;
         }
-
     }
 }

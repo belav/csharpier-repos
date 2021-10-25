@@ -23,10 +23,16 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var mediaType1 = new StringSegment("application/json");
             var mediaType2 = new StringSegment("text/json;charset=utf-8");
-            var producesContentAttribute = new ProducesAttribute("application/json", "text/json;charset=utf-8");
-            var resultExecutingContext = CreateResultExecutingContext(new IFilterMetadata[] { producesContentAttribute });
+            var producesContentAttribute = new ProducesAttribute(
+                "application/json",
+                "text/json;charset=utf-8"
+            );
+            var resultExecutingContext = CreateResultExecutingContext(
+                new IFilterMetadata[] { producesContentAttribute }
+            );
             var next = new ResultExecutionDelegate(
-                            () => Task.FromResult(CreateResultExecutedContext(resultExecutingContext)));
+                () => Task.FromResult(CreateResultExecutedContext(resultExecutingContext))
+            );
 
             // Act
             producesContentAttribute.OnResultExecuting(resultExecutingContext);
@@ -45,15 +51,14 @@ namespace Microsoft.AspNetCore.Mvc
             var producesContentAttribute = new ProducesAttribute("application/xml");
 
             var formatFilter = new Mock<IFormatFilter>();
-            formatFilter
-                .Setup(f => f.GetFormat(It.IsAny<ActionContext>()))
-                .Returns((string)null);
+            formatFilter.Setup(f => f.GetFormat(It.IsAny<ActionContext>())).Returns((string)null);
 
             var filters = new IFilterMetadata[] { producesContentAttribute, formatFilter.Object };
             var resultExecutingContext = CreateResultExecutingContext(filters);
 
             var next = new ResultExecutionDelegate(
-                            () => Task.FromResult(CreateResultExecutedContext(resultExecutingContext)));
+                () => Task.FromResult(CreateResultExecutedContext(resultExecutingContext))
+            );
 
             // Act
             producesContentAttribute.OnResultExecuting(resultExecutingContext);
@@ -70,15 +75,14 @@ namespace Microsoft.AspNetCore.Mvc
             var producesContentAttribute = new ProducesAttribute("application/xml");
 
             var formatFilter = new Mock<IFormatFilter>();
-            formatFilter
-                .Setup(f => f.GetFormat(It.IsAny<ActionContext>()))
-                .Returns("xml");
+            formatFilter.Setup(f => f.GetFormat(It.IsAny<ActionContext>())).Returns("xml");
 
             var filters = new IFilterMetadata[] { producesContentAttribute, formatFilter.Object };
             var resultExecutingContext = CreateResultExecutingContext(filters);
 
             var next = new ResultExecutionDelegate(
-                            () => Task.FromResult(CreateResultExecutedContext(resultExecutingContext)));
+                () => Task.FromResult(CreateResultExecutedContext(resultExecutingContext))
+            );
 
             // Act
             producesContentAttribute.OnResultExecuting(resultExecutingContext);
@@ -95,41 +99,59 @@ namespace Microsoft.AspNetCore.Mvc
         [InlineData("invalid", "invalid")]
         [InlineData("application/xml,invalid, application/json", "invalid")]
         [InlineData("invalid, application/json", "invalid")]
-        public void ProducesAttribute_UnParsableContentType_Throws(string content, string invalidContentType)
+        public void ProducesAttribute_UnParsableContentType_Throws(
+            string content,
+            string invalidContentType
+        )
         {
             // Act
-            var contentTypes = content.Split(',').Select(contentType => contentType.Trim()).ToArray();
+            var contentTypes = content
+                .Split(',')
+                .Select(contentType => contentType.Trim())
+                .ToArray();
 
             // Assert
             var ex = Assert.Throws<FormatException>(
-                       () => new ProducesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
-            Assert.Equal("The header contains invalid values at index 0: '" + (invalidContentType ?? "<null>") + "'",
-                         ex.Message);
+                () => new ProducesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+            );
+            Assert.Equal(
+                "The header contains invalid values at index 0: '"
+                    + (invalidContentType ?? "<null>")
+                    + "'",
+                ex.Message
+            );
         }
 
         [Theory]
         [InlineData("application/*", "application/*")]
         [InlineData("application/xml, application/*, application/json", "application/*")]
         [InlineData("application/*, application/json", "application/*")]
-
         [InlineData("*/*", "*/*")]
         [InlineData("application/xml, */*, application/json", "*/*")]
         [InlineData("*/*, application/json", "*/*")]
         [InlineData("application/*+json", "application/*+json")]
         [InlineData("application/json;v=1;*", "application/json;v=1;*")]
-        public void ProducesAttribute_InvalidContentType_Throws(string content, string invalidContentType)
+        public void ProducesAttribute_InvalidContentType_Throws(
+            string content,
+            string invalidContentType
+        )
         {
             // Act
-            var contentTypes = content.Split(',').Select(contentType => contentType.Trim()).ToArray();
+            var contentTypes = content
+                .Split(',')
+                .Select(contentType => contentType.Trim())
+                .ToArray();
 
             // Assert
             var ex = Assert.Throws<InvalidOperationException>(
-                       () => new ProducesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray()));
+                () => new ProducesAttribute(contentTypes[0], contentTypes.Skip(1).ToArray())
+            );
 
             Assert.Equal(
-                $"The argument '{invalidContentType}' is invalid. " +
-                "Media types which match all types or match all subtypes are not supported.",
-                ex.Message);
+                $"The argument '{invalidContentType}' is invalid. "
+                    + "Media types which match all types or match all subtypes are not supported.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -155,23 +177,37 @@ namespace Microsoft.AspNetCore.Mvc
             Assert.Empty(producesAttribute.ContentTypes);
         }
 
-        private static ResultExecutedContext CreateResultExecutedContext(ResultExecutingContext context)
+        private static ResultExecutedContext CreateResultExecutedContext(
+            ResultExecutingContext context
+        )
         {
-            return new ResultExecutedContext(context, context.Filters, context.Result, context.Controller);
+            return new ResultExecutedContext(
+                context,
+                context.Filters,
+                context.Result,
+                context.Controller
+            );
         }
 
-        private static ResultExecutingContext CreateResultExecutingContext(IFilterMetadata[] filters)
+        private static ResultExecutingContext CreateResultExecutingContext(
+            IFilterMetadata[] filters
+        )
         {
             return new ResultExecutingContext(
                 CreateActionContext(),
                 filters,
                 new ObjectResult("Some Value"),
-                controller: new object());
+                controller: new object()
+            );
         }
 
         private static ActionContext CreateActionContext()
         {
-            return new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+            return new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new ActionDescriptor()
+            );
         }
 
         private class Person

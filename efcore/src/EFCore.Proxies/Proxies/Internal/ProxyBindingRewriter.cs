@@ -23,14 +23,16 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
     /// </summary>
     public class ProxyBindingRewriter : IModelFinalizingConvention
     {
-        private static readonly MethodInfo _createLazyLoadingProxyMethod
-            = typeof(IProxyFactory).GetTypeInfo().GetDeclaredMethod(nameof(IProxyFactory.CreateLazyLoadingProxy))!;
+        private static readonly MethodInfo _createLazyLoadingProxyMethod = typeof(IProxyFactory)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(IProxyFactory.CreateLazyLoadingProxy))!;
 
-        private static readonly PropertyInfo _lazyLoaderProperty
-            = typeof(IProxyLazyLoader).GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
+        private static readonly PropertyInfo _lazyLoaderProperty =
+            typeof(IProxyLazyLoader).GetProperty(nameof(IProxyLazyLoader.LazyLoader))!;
 
-        private static readonly MethodInfo _createProxyMethod
-            = typeof(IProxyFactory).GetTypeInfo().GetDeclaredMethod(nameof(IProxyFactory.CreateProxy))!;
+        private static readonly MethodInfo _createProxyMethod = typeof(IProxyFactory)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(IProxyFactory.CreateProxy))!;
 
         private readonly ConstructorBindingConvention _directBindingConvention;
         private readonly LazyLoaderParameterBindingFactoryDependencies _lazyLoaderParameterBindingFactoryDependencies;
@@ -47,18 +49,23 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
             IProxyFactory proxyFactory,
             ProxiesOptionsExtension? options,
             LazyLoaderParameterBindingFactoryDependencies lazyLoaderParameterBindingFactoryDependencies,
-            ProviderConventionSetBuilderDependencies conventionSetBuilderDependencies)
+            ProviderConventionSetBuilderDependencies conventionSetBuilderDependencies
+        )
         {
             _proxyFactory = proxyFactory;
             _options = options;
-            _lazyLoaderParameterBindingFactoryDependencies = lazyLoaderParameterBindingFactoryDependencies;
-            _directBindingConvention = new ConstructorBindingConvention(conventionSetBuilderDependencies);
+            _lazyLoaderParameterBindingFactoryDependencies =
+                lazyLoaderParameterBindingFactoryDependencies;
+            _directBindingConvention = new ConstructorBindingConvention(
+                conventionSetBuilderDependencies
+            );
         }
 
         /// <inheritdoc />
         public virtual void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
+            IConventionContext<IConventionModelBuilder> context
+        )
         {
             if (_options?.UseProxies == true)
             {
@@ -72,7 +79,9 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
 
                     if (clrType.IsSealed)
                     {
-                        throw new InvalidOperationException(ProxiesStrings.ItsASeal(entityType.DisplayName()));
+                        throw new InvalidOperationException(
+                            ProxiesStrings.ItsASeal(entityType.DisplayName())
+                        );
                     }
 
                     var proxyType = _proxyFactory.CreateProxyType(_options, entityType);
@@ -88,41 +97,68 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
 
                     ((EntityType)entityType).SetConstructorBinding(
                         UpdateConstructorBindings(entityType, proxyType, binding),
-                        ConfigurationSource.Convention);
+                        ConfigurationSource.Convention
+                    );
 
                     binding = ((EntityType)entityType).ServiceOnlyConstructorBinding;
                     if (binding != null)
                     {
                         ((EntityType)entityType).SetServiceOnlyConstructorBinding(
                             UpdateConstructorBindings(entityType, proxyType, binding),
-                            ConfigurationSource.Convention);
+                            ConfigurationSource.Convention
+                        );
                     }
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
-                    foreach (var navigationBase in entityType.GetDeclaredNavigations()
-                        .Concat<IConventionNavigationBase>(entityType.GetDeclaredSkipNavigations()))
+                    foreach (
+                        var navigationBase in entityType
+                            .GetDeclaredNavigations()
+                            .Concat<IConventionNavigationBase>(
+                                entityType.GetDeclaredSkipNavigations()
+                            )
+                    )
                     {
                         if (navigationBase.PropertyInfo == null)
                         {
                             throw new InvalidOperationException(
-                                ProxiesStrings.FieldProperty(navigationBase.Name, entityType.DisplayName()));
+                                ProxiesStrings.FieldProperty(
+                                    navigationBase.Name,
+                                    entityType.DisplayName()
+                                )
+                            );
                         }
 
-                        if (_options.UseChangeTrackingProxies
-                            && navigationBase.PropertyInfo.SetMethod?.IsReallyVirtual() == false)
+                        if (
+                            _options.UseChangeTrackingProxies
+                            && navigationBase.PropertyInfo.SetMethod?.IsReallyVirtual() == false
+                        )
                         {
                             throw new InvalidOperationException(
-                                ProxiesStrings.NonVirtualProperty(navigationBase.Name, entityType.DisplayName()));
+                                ProxiesStrings.NonVirtualProperty(
+                                    navigationBase.Name,
+                                    entityType.DisplayName()
+                                )
+                            );
                         }
 
                         if (_options.UseLazyLoadingProxies)
                         {
-                            if (!navigationBase.PropertyInfo.GetMethod!.IsReallyVirtual()
-                                && (!(navigationBase is INavigation navigation
-                                    && navigation.ForeignKey.IsOwnership)))
+                            if (
+                                !navigationBase.PropertyInfo.GetMethod!.IsReallyVirtual()
+                                && (
+                                    !(
+                                        navigationBase is INavigation navigation
+                                        && navigation.ForeignKey.IsOwnership
+                                    )
+                                )
+                            )
                             {
                                 throw new InvalidOperationException(
-                                    ProxiesStrings.NonVirtualProperty(navigationBase.Name, entityType.DisplayName()));
+                                    ProxiesStrings.NonVirtualProperty(
+                                        navigationBase.Name,
+                                        entityType.DisplayName()
+                                    )
+                                );
                             }
 
                             navigationBase.SetPropertyAccessMode(PropertyAccessMode.Field);
@@ -132,8 +168,11 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                     if (_options.UseChangeTrackingProxies)
                     {
                         var indexerChecked = false;
-                        foreach (var property in entityType.GetDeclaredProperties()
-                            .Where(p => !p.IsShadowProperty()))
+                        foreach (
+                            var property in entityType
+                                .GetDeclaredProperties()
+                                .Where(p => !p.IsShadowProperty())
+                        )
                         {
                             if (property.IsIndexerProperty())
                             {
@@ -143,24 +182,39 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
 
                                     if (!property.PropertyInfo!.SetMethod!.IsReallyVirtual())
                                     {
-                                        if (clrType.IsGenericType
-                                            && clrType.GetGenericTypeDefinition() == typeof(Dictionary<,>)
-                                            && clrType.GenericTypeArguments[0] == typeof(string))
+                                        if (
+                                            clrType.IsGenericType
+                                            && clrType.GetGenericTypeDefinition()
+                                                == typeof(Dictionary<, >)
+                                            && clrType.GenericTypeArguments[0] == typeof(string)
+                                        )
                                         {
-                                            if (entityType.GetProperties().Any(p => !p.IsPrimaryKey()))
+                                            if (
+                                                entityType
+                                                    .GetProperties()
+                                                    .Any(p => !p.IsPrimaryKey())
+                                            )
                                             {
                                                 throw new InvalidOperationException(
                                                     ProxiesStrings.DictionaryCannotBeProxied(
                                                         clrType.ShortDisplayName(),
                                                         entityType.DisplayName(),
-                                                        typeof(IDictionary<,>).MakeGenericType(clrType.GenericTypeArguments)
-                                                            .ShortDisplayName()));
+                                                        typeof(IDictionary<, >)
+                                                            .MakeGenericType(
+                                                                clrType.GenericTypeArguments
+                                                            )
+                                                            .ShortDisplayName()
+                                                    )
+                                                );
                                             }
                                         }
                                         else
                                         {
                                             throw new InvalidOperationException(
-                                                ProxiesStrings.NonVirtualIndexerProperty(entityType.DisplayName()));
+                                                ProxiesStrings.NonVirtualIndexerProperty(
+                                                    entityType.DisplayName()
+                                                )
+                                            );
                                         }
                                     }
                                 }
@@ -170,13 +224,21 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                                 if (property.PropertyInfo == null)
                                 {
                                     throw new InvalidOperationException(
-                                        ProxiesStrings.FieldProperty(property.Name, entityType.DisplayName()));
+                                        ProxiesStrings.FieldProperty(
+                                            property.Name,
+                                            entityType.DisplayName()
+                                        )
+                                    );
                                 }
 
                                 if (property.PropertyInfo.SetMethod?.IsReallyVirtual() == false)
                                 {
                                     throw new InvalidOperationException(
-                                        ProxiesStrings.NonVirtualProperty(property.Name, entityType.DisplayName()));
+                                        ProxiesStrings.NonVirtualProperty(
+                                            property.Name,
+                                            entityType.DisplayName()
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -188,29 +250,38 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
         private InstantiationBinding UpdateConstructorBindings(
             IConventionEntityType entityType,
             Type proxyType,
-            InstantiationBinding binding)
+            InstantiationBinding binding
+        )
         {
             if (_options?.UseLazyLoadingProxies == true)
             {
-                foreach (var conflictingProperty in entityType.GetDerivedTypes()
-                    .SelectMany(e => e.GetDeclaredServiceProperties().Where(p => p.ClrType == typeof(ILazyLoader)))
-                    .ToList())
+                foreach (
+                    var conflictingProperty in entityType
+                        .GetDerivedTypes()
+                        .SelectMany(
+                            e =>
+                                e.GetDeclaredServiceProperties()
+                                    .Where(p => p.ClrType == typeof(ILazyLoader))
+                        )
+                        .ToList()
+                )
                 {
-                    conflictingProperty.DeclaringEntityType.RemoveServiceProperty(conflictingProperty.Name);
+                    conflictingProperty.DeclaringEntityType.RemoveServiceProperty(
+                        conflictingProperty.Name
+                    );
                 }
 
-                var serviceProperty = entityType.GetServiceProperties()
+                var serviceProperty = entityType
+                    .GetServiceProperties()
                     .FirstOrDefault(e => e.ClrType == typeof(ILazyLoader));
                 if (serviceProperty == null)
                 {
                     serviceProperty = entityType.AddServiceProperty(_lazyLoaderProperty);
                     serviceProperty.SetParameterBinding(
                         (ServiceParameterBinding)new LazyLoaderParameterBindingFactory(
-                                _lazyLoaderParameterBindingFactoryDependencies)
-                            .Bind(
-                                entityType,
-                                typeof(ILazyLoader),
-                                nameof(IProxyLazyLoader.LazyLoader)));
+                            _lazyLoaderParameterBindingFactoryDependencies
+                        ).Bind(entityType, typeof(ILazyLoader), nameof(IProxyLazyLoader.LazyLoader))
+                    );
                 }
 
                 return new FactoryMethodBinding(
@@ -221,10 +292,14 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                         new ContextParameterBinding(typeof(DbContext)),
                         new EntityTypeParameterBinding(),
                         new DependencyInjectionParameterBinding(
-                            typeof(ILazyLoader), typeof(ILazyLoader), new[] { (IPropertyBase)serviceProperty }),
+                            typeof(ILazyLoader),
+                            typeof(ILazyLoader),
+                            new[] { (IPropertyBase)serviceProperty }
+                        ),
                         new ObjectArrayParameterBinding(binding.ParameterBindings)
                     },
-                    proxyType);
+                    proxyType
+                );
             }
 
             return new FactoryMethodBinding(
@@ -236,7 +311,8 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal
                     new EntityTypeParameterBinding(),
                     new ObjectArrayParameterBinding(binding.ParameterBindings)
                 },
-                proxyType);
+                proxyType
+            );
         }
     }
 }

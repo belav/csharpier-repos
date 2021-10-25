@@ -17,9 +17,13 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation
         /// <summary>
         /// Creates a <see cref="SecurityTokenValidatedContext"/>
         /// </summary>
-        public SecurityTokenValidatedContext(HttpContext context, AuthenticationScheme scheme, WsFederationOptions options, ClaimsPrincipal principal, AuthenticationProperties properties)
-            : base(context, scheme, options, properties)
-            => Principal = principal;
+        public SecurityTokenValidatedContext(
+            HttpContext context,
+            AuthenticationScheme scheme,
+            WsFederationOptions options,
+            ClaimsPrincipal principal,
+            AuthenticationProperties properties
+        ) : base(context, scheme, options, properties) => Principal = principal;
 
         /// <summary>
         /// The <see cref="WsFederationMessage"/> received on this request.

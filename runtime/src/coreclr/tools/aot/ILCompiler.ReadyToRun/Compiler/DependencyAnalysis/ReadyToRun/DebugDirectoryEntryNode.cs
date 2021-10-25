@@ -35,7 +35,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public abstract void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb);
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
@@ -46,17 +47,19 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     public class NativeDebugDirectoryEntryNode : DebugDirectoryEntryNode
     {
         const int RSDSSize =
-            sizeof(int) +   // Magic
-            16 +            // Signature (guid)
-            sizeof(int) +   // Age
-            260;            // FileName
+            sizeof(int)
+            + // Magic
+            16
+            + // Signature (guid)
+            sizeof(int)
+            + // Age
+            260; // FileName
 
         public override int ClassCode => 119958401;
 
         public unsafe int Size => RSDSSize;
 
-        public NativeDebugDirectoryEntryNode(string pdbName)
-            : base(null)
+        public NativeDebugDirectoryEntryNode(string pdbName) : base(null)
         {
             _pdbName = pdbName;
         }
@@ -66,7 +69,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
-            sb.Append($"__NativeDebugDirectory_{_pdbName.Replace('.','_')}");
+            sb.Append($"__NativeDebugDirectory_{_pdbName.Replace('.', '_')}");
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
@@ -94,7 +97,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // However we want the printed version of the GUID to be the same as the
                 // byte dump of the signature so we swap bytes to make this work.
                 Debug.Assert(md5Hash.Length == 16);
-                writer.Write((uint)((md5Hash[0] * 256 + md5Hash[1]) * 256 + md5Hash[2]) * 256 + md5Hash[3]);
+                writer.Write(
+                    (uint)((md5Hash[0] * 256 + md5Hash[1]) * 256 + md5Hash[2]) * 256 + md5Hash[3]
+                );
                 writer.Write((ushort)(md5Hash[4] * 256 + md5Hash[5]));
                 writer.Write((ushort)(md5Hash[6] * 256 + md5Hash[7]));
                 writer.Write(md5Hash, 8, 8);
@@ -133,14 +138,21 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
             sb.Append(nameMangler.CompilationUnitPrefix);
-            sb.Append($"__CopiedDebugEntryNode_{_debugEntryIndex}_{_module.Assembly.GetName().Name}");
+            sb.Append(
+                $"__CopiedDebugEntryNode_{_debugEntryIndex}_{_module.Assembly.GetName().Name}"
+            );
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             if (relocsOnly)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
             }
 
             ImmutableArray<DebugDirectoryEntry> entries = _module.PEReader.ReadDebugDirectory();
@@ -148,11 +160,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             DebugDirectoryEntry sourceDebugEntry = entries[_debugEntryIndex];
 
-            PEMemoryBlock block = _module.PEReader.GetSectionData(sourceDebugEntry.DataRelativeVirtualAddress);
+            PEMemoryBlock block = _module.PEReader.GetSectionData(
+                sourceDebugEntry.DataRelativeVirtualAddress
+            );
             byte[] result = new byte[sourceDebugEntry.DataSize];
             block.GetContent(0, sourceDebugEntry.DataSize).CopyTo(result);
 
-            return new ObjectData(result, Array.Empty<Relocation>(), _module.Context.Target.PointerSize, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                result,
+                Array.Empty<Relocation>(),
+                _module.Context.Target.PointerSize,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)

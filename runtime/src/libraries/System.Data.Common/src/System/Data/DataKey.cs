@@ -109,7 +109,8 @@ namespace System.Data
             }
             else
             {
-                int i, j;
+                int i,
+                    j;
                 for (i = 0; i < column1.Length; i++)
                 {
                     bool check = false;

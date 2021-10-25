@@ -19,7 +19,10 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         private readonly InMemoryQueryExpression? _queryExpression;
         private readonly ParameterExpression _valueBufferParameter;
 
-        private readonly IDictionary<Expression, ParameterExpression> _mapping = new Dictionary<Expression, ParameterExpression>();
+        private readonly IDictionary<Expression, ParameterExpression> _mapping = new Dictionary<
+            Expression,
+            ParameterExpression
+        >();
         private readonly List<ParameterExpression> _variables = new();
         private readonly List<Expression> _expressions = new();
 
@@ -31,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
         /// </summary>
         public ShaperExpressionProcessingExpressionVisitor(
             InMemoryQueryExpression? queryExpression,
-            ParameterExpression valueBufferParameter)
+            ParameterExpression valueBufferParameter
+        )
         {
             _queryExpression = queryExpression;
             _valueBufferParameter = valueBufferParameter;
@@ -52,11 +56,12 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             return ConvertToLambda(result);
         }
 
-        private LambdaExpression ConvertToLambda(Expression result)
-            => Expression.Lambda(
+        private LambdaExpression ConvertToLambda(Expression result) =>
+            Expression.Lambda(
                 result,
                 QueryCompilationContext.QueryContextParameter,
-                _valueBufferParameter);
+                _valueBufferParameter
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -72,7 +77,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             {
                 case EntityShaperExpression entityShaperExpression:
                 {
-                    var key = GenerateKey((ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression);
+                    var key = GenerateKey(
+                        (ProjectionBindingExpression)entityShaperExpression.ValueBufferExpression
+                    );
                     if (!_mapping.TryGetValue(key, out var variable))
                     {
                         variable = Expression.Parameter(entityShaperExpression.EntityType.ClrType);
@@ -101,25 +108,35 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 case IncludeExpression includeExpression:
                 {
                     var entity = Visit(includeExpression.EntityExpression);
-                    if (includeExpression.NavigationExpression is CollectionShaperExpression collectionShaper)
+                    if (
+                        includeExpression.NavigationExpression
+                        is CollectionShaperExpression collectionShaper
+                    )
                     {
                         var innerLambda = (LambdaExpression)collectionShaper.InnerShaper;
-                        var innerShaper = new ShaperExpressionProcessingExpressionVisitor(null, innerLambda.Parameters[0])
-                            .Inject(innerLambda.Body);
+                        var innerShaper = new ShaperExpressionProcessingExpressionVisitor(
+                            null,
+                            innerLambda.Parameters[0]
+                        ).Inject(innerLambda.Body);
 
                         _expressions.Add(
                             includeExpression.Update(
                                 entity,
                                 collectionShaper.Update(
                                     Visit(collectionShaper.Projection),
-                                    innerShaper)));
+                                    innerShaper
+                                )
+                            )
+                        );
                     }
                     else
                     {
                         _expressions.Add(
                             includeExpression.Update(
                                 entity,
-                                Visit(includeExpression.NavigationExpression)));
+                                Visit(includeExpression.NavigationExpression)
+                            )
+                        );
                     }
 
                     return entity;
@@ -127,7 +144,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 case CollectionShaperExpression collectionShaperExpression:
                 {
-                    var key = GenerateKey((ProjectionBindingExpression)collectionShaperExpression.Projection);
+                    var key = GenerateKey(
+                        (ProjectionBindingExpression)collectionShaperExpression.Projection
+                    );
                     if (!_mapping.TryGetValue(key, out var variable))
                     {
                         var projection = Visit(collectionShaperExpression.Projection);
@@ -136,10 +155,17 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         _variables.Add(variable);
 
                         var innerLambda = (LambdaExpression)collectionShaperExpression.InnerShaper;
-                        var innerShaper = new ShaperExpressionProcessingExpressionVisitor(null, innerLambda.Parameters[0])
-                            .Inject(innerLambda.Body);
+                        var innerShaper = new ShaperExpressionProcessingExpressionVisitor(
+                            null,
+                            innerLambda.Parameters[0]
+                        ).Inject(innerLambda.Body);
 
-                        _expressions.Add(Expression.Assign(variable, collectionShaperExpression.Update(projection, innerShaper)));
+                        _expressions.Add(
+                            Expression.Assign(
+                                variable,
+                                collectionShaperExpression.Update(projection, innerShaper)
+                            )
+                        );
                         _mapping[key] = variable;
                     }
 
@@ -148,7 +174,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
 
                 case SingleResultShaperExpression singleResultShaperExpression:
                 {
-                    var key = GenerateKey((ProjectionBindingExpression)singleResultShaperExpression.Projection);
+                    var key = GenerateKey(
+                        (ProjectionBindingExpression)singleResultShaperExpression.Projection
+                    );
                     if (!_mapping.TryGetValue(key, out var variable))
                     {
                         var projection = Visit(singleResultShaperExpression.Projection);
@@ -156,11 +184,19 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                         variable = Expression.Parameter(singleResultShaperExpression.Type);
                         _variables.Add(variable);
 
-                        var innerLambda = (LambdaExpression)singleResultShaperExpression.InnerShaper;
-                        var innerShaper = new ShaperExpressionProcessingExpressionVisitor(null, innerLambda.Parameters[0])
-                            .Inject(innerLambda.Body);
+                        var innerLambda =
+                            (LambdaExpression)singleResultShaperExpression.InnerShaper;
+                        var innerShaper = new ShaperExpressionProcessingExpressionVisitor(
+                            null,
+                            innerLambda.Parameters[0]
+                        ).Inject(innerLambda.Body);
 
-                        _expressions.Add(Expression.Assign(variable, singleResultShaperExpression.Update(projection, innerShaper)));
+                        _expressions.Add(
+                            Expression.Assign(
+                                variable,
+                                singleResultShaperExpression.Update(projection, innerShaper)
+                            )
+                        );
                         _mapping[key] = variable;
                     }
 
@@ -171,10 +207,9 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             return base.VisitExtension(extensionExpression);
         }
 
-        private Expression GenerateKey(ProjectionBindingExpression projectionBindingExpression)
-            => _queryExpression != null
-                && projectionBindingExpression.ProjectionMember != null
-                    ? _queryExpression.GetMappedProjection(projectionBindingExpression.ProjectionMember)
-                    : projectionBindingExpression;
+        private Expression GenerateKey(ProjectionBindingExpression projectionBindingExpression) =>
+            _queryExpression != null && projectionBindingExpression.ProjectionMember != null
+                ? _queryExpression.GetMappedProjection(projectionBindingExpression.ProjectionMember)
+                : projectionBindingExpression;
     }
 }

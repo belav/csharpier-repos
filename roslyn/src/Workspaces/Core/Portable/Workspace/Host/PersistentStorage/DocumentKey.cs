@@ -37,13 +37,16 @@ namespace Microsoft.CodeAnalysis.PersistentStorage
             Name = name;
         }
 
-        public static DocumentKey ToDocumentKey(Document document)
-            => new(ProjectKey.ToProjectKey(document.Project), document.Id, document.FilePath, document.Name);
+        public static DocumentKey ToDocumentKey(Document document) =>
+            new(
+                ProjectKey.ToProjectKey(document.Project),
+                document.Id,
+                document.FilePath,
+                document.Name
+            );
 
-        public bool Equals(DocumentKey x, DocumentKey y)
-            => x.Id == y.Id;
+        public bool Equals(DocumentKey x, DocumentKey y) => x.Id == y.Id;
 
-        public int GetHashCode(DocumentKey obj)
-            => obj.Id.GetHashCode();
+        public int GetHashCode(DocumentKey obj) => obj.Id.GetHashCode();
     }
 }

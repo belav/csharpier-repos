@@ -28,33 +28,49 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [Theory]
             [InlineData(HttpTransportType.LongPolling)]
             [InlineData(HttpTransportType.ServerSentEvents)]
-            public async Task HttpConnectionSetsAccessTokenOnAllRequests(HttpTransportType transportType)
+            public async Task HttpConnectionSetsAccessTokenOnAllRequests(
+                HttpTransportType transportType
+            )
             {
                 var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
                 var requestsExecuted = false;
                 var callCount = 0;
 
-                testHttpHandler.OnNegotiate((_, cancellationToken) =>
-                {
-                    return ResponseUtils.CreateResponse(HttpStatusCode.OK, ResponseUtils.CreateNegotiationContent());
-                });
+                testHttpHandler.OnNegotiate(
+                    (_, cancellationToken) =>
+                    {
+                        return ResponseUtils.CreateResponse(
+                            HttpStatusCode.OK,
+                            ResponseUtils.CreateNegotiationContent()
+                        );
+                    }
+                );
 
-                testHttpHandler.OnRequest(async (request, next, token) =>
-                {
-                    Assert.Equal("Bearer", request.Headers.Authorization.Scheme);
+                testHttpHandler.OnRequest(
+                    async (request, next, token) =>
+                    {
+                        Assert.Equal("Bearer", request.Headers.Authorization.Scheme);
 
-                    // Call count increments with each call and is used as the access token
-                    Assert.Equal(callCount.ToString(CultureInfo.InvariantCulture), request.Headers.Authorization.Parameter);
+                        // Call count increments with each call and is used as the access token
+                        Assert.Equal(
+                            callCount.ToString(CultureInfo.InvariantCulture),
+                            request.Headers.Authorization.Parameter
+                        );
 
-                    requestsExecuted = true;
+                        requestsExecuted = true;
 
-                    return await next();
-                });
+                        return await next();
+                    }
+                );
 
-                testHttpHandler.OnRequest((request, next, token) =>
-                {
-                    return Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent));
-                });
+                testHttpHandler.OnRequest(
+                    (request, next, token) =>
+                    {
+                        return Task.FromResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                        );
+                    }
+                );
 
                 Task<string> AccessTokenProvider()
                 {
@@ -63,13 +79,22 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 }
 
                 await WithConnectionAsync(
-                    CreateConnection(testHttpHandler, transportType: transportType, accessTokenProvider: AccessTokenProvider),
+                    CreateConnection(
+                        testHttpHandler,
+                        transportType: transportType,
+                        accessTokenProvider: AccessTokenProvider
+                    ),
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        await connection.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Hello world 1"));
-                        await connection.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Hello world 2"));
-                    });
+                        await connection.Transport.Output.WriteAsync(
+                            Encoding.UTF8.GetBytes("Hello world 1")
+                        );
+                        await connection.Transport.Output.WriteAsync(
+                            Encoding.UTF8.GetBytes("Hello world 2")
+                        );
+                    }
+                );
                 // Fail safe in case the code is modified and some requests don't execute as a result
                 Assert.True(requestsExecuted);
             }
@@ -77,74 +102,106 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [Theory]
             [InlineData(HttpTransportType.LongPolling, true)]
             [InlineData(HttpTransportType.ServerSentEvents, false)]
-            public async Task HttpConnectionSetsInherentKeepAliveFeature(HttpTransportType transportType, bool expectedValue)
+            public async Task HttpConnectionSetsInherentKeepAliveFeature(
+                HttpTransportType transportType,
+                bool expectedValue
+            )
             {
                 using (StartVerifiableLog())
                 {
                     var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
 
-                    testHttpHandler.OnNegotiate((_, cancellationToken) => ResponseUtils.CreateResponse(HttpStatusCode.OK, ResponseUtils.CreateNegotiationContent()));
+                    testHttpHandler.OnNegotiate(
+                        (_, cancellationToken) =>
+                            ResponseUtils.CreateResponse(
+                                HttpStatusCode.OK,
+                                ResponseUtils.CreateNegotiationContent()
+                            )
+                    );
 
-                    testHttpHandler.OnRequest((request, next, token) => Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent)));
+                    testHttpHandler.OnRequest(
+                        (request, next, token) =>
+                            Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent))
+                    );
 
                     await WithConnectionAsync(
-                        CreateConnection(testHttpHandler, transportType: transportType, loggerFactory: LoggerFactory),
+                        CreateConnection(
+                            testHttpHandler,
+                            transportType: transportType,
+                            loggerFactory: LoggerFactory
+                        ),
                         async (connection) =>
                         {
                             await connection.StartAsync().DefaultTimeout();
 
-                            var feature = connection.Features.Get<IConnectionInherentKeepAliveFeature>();
+                            var feature =
+                                connection.Features.Get<IConnectionInherentKeepAliveFeature>();
                             Assert.NotNull(feature);
                             Assert.Equal(expectedValue, feature.HasInherentKeepAlive);
-                        });
+                        }
+                    );
                 }
             }
 
             [Theory]
             [InlineData(HttpTransportType.LongPolling)]
             [InlineData(HttpTransportType.ServerSentEvents)]
-            public async Task HttpConnectionSetsUserAgentOnAllRequests(HttpTransportType transportType)
+            public async Task HttpConnectionSetsUserAgentOnAllRequests(
+                HttpTransportType transportType
+            )
             {
                 var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
                 var requestsExecuted = false;
 
+                testHttpHandler.OnNegotiate(
+                    (_, cancellationToken) =>
+                    {
+                        return ResponseUtils.CreateResponse(
+                            HttpStatusCode.OK,
+                            ResponseUtils.CreateNegotiationContent()
+                        );
+                    }
+                );
 
-                testHttpHandler.OnNegotiate((_, cancellationToken) =>
-                {
-                    return ResponseUtils.CreateResponse(HttpStatusCode.OK, ResponseUtils.CreateNegotiationContent());
-                });
+                testHttpHandler.OnRequest(
+                    async (request, next, token) =>
+                    {
+                        var userAgentHeader = request.Headers.UserAgent.ToString();
 
-                testHttpHandler.OnRequest(async (request, next, token) =>
-                {
-                    var userAgentHeader = request.Headers.UserAgent.ToString();
+                        Assert.NotNull(userAgentHeader);
+                        Assert.StartsWith("Microsoft SignalR/", userAgentHeader);
 
-                    Assert.NotNull(userAgentHeader);
-                    Assert.StartsWith("Microsoft SignalR/", userAgentHeader);
+                        // user agent version should come from version embedded in assembly metadata
+                        var assemblyVersion =
+                            typeof(Constants).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 
-                    // user agent version should come from version embedded in assembly metadata
-                    var assemblyVersion = typeof(Constants)
-                            .Assembly
-                            .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                        Assert.Contains(assemblyVersion.InformationalVersion, userAgentHeader);
 
-                    Assert.Contains(assemblyVersion.InformationalVersion, userAgentHeader);
+                        requestsExecuted = true;
 
-                    requestsExecuted = true;
+                        return await next();
+                    }
+                );
 
-                    return await next();
-                });
-
-                testHttpHandler.OnRequest((request, next, token) =>
-                {
-                    return Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent));
-                });
+                testHttpHandler.OnRequest(
+                    (request, next, token) =>
+                    {
+                        return Task.FromResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                        );
+                    }
+                );
 
                 await WithConnectionAsync(
                     CreateConnection(testHttpHandler, transportType: transportType),
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        await connection.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Hello World"));
-                    });
+                        await connection.Transport.Output.WriteAsync(
+                            Encoding.UTF8.GetBytes("Hello World")
+                        );
+                    }
+                );
                 // Fail safe in case the code is modified and some requests don't execute as a result
                 Assert.True(requestsExecuted);
             }
@@ -152,39 +209,57 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
             [Theory]
             [InlineData(HttpTransportType.LongPolling)]
             [InlineData(HttpTransportType.ServerSentEvents)]
-            public async Task HttpConnectionSetsRequestedWithOnAllRequests(HttpTransportType transportType)
+            public async Task HttpConnectionSetsRequestedWithOnAllRequests(
+                HttpTransportType transportType
+            )
             {
                 var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
                 var requestsExecuted = false;
 
-                testHttpHandler.OnNegotiate((_, cancellationToken) =>
-                {
-                    return ResponseUtils.CreateResponse(HttpStatusCode.OK, ResponseUtils.CreateNegotiationContent());
-                });
+                testHttpHandler.OnNegotiate(
+                    (_, cancellationToken) =>
+                    {
+                        return ResponseUtils.CreateResponse(
+                            HttpStatusCode.OK,
+                            ResponseUtils.CreateNegotiationContent()
+                        );
+                    }
+                );
 
-                testHttpHandler.OnRequest(async (request, next, token) =>
-                {
-                    var requestedWithHeader = request.Headers.GetValues(HeaderNames.XRequestedWith);
-                    var requestedWithValue = Assert.Single(requestedWithHeader);
-                    Assert.Equal("XMLHttpRequest", requestedWithValue);
+                testHttpHandler.OnRequest(
+                    async (request, next, token) =>
+                    {
+                        var requestedWithHeader = request.Headers.GetValues(
+                            HeaderNames.XRequestedWith
+                        );
+                        var requestedWithValue = Assert.Single(requestedWithHeader);
+                        Assert.Equal("XMLHttpRequest", requestedWithValue);
 
-                    requestsExecuted = true;
+                        requestsExecuted = true;
 
-                    return await next();
-                });
+                        return await next();
+                    }
+                );
 
-                testHttpHandler.OnRequest((request, next, token) =>
-                {
-                    return Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent));
-                });
+                testHttpHandler.OnRequest(
+                    (request, next, token) =>
+                    {
+                        return Task.FromResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                        );
+                    }
+                );
 
                 await WithConnectionAsync(
                     CreateConnection(testHttpHandler, transportType: transportType),
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        await connection.Transport.Output.WriteAsync(Encoding.UTF8.GetBytes("Hello World"));
-                    });
+                        await connection.Transport.Output.WriteAsync(
+                            Encoding.UTF8.GetBytes("Hello World")
+                        );
+                    }
+                );
                 // Fail safe in case the code is modified and some requests don't execute as a result
                 Assert.True(requestsExecuted);
             }
@@ -197,26 +272,37 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                 // Set the long poll up to return a single message over a few polls.
                 var requestCount = 0;
                 var messageFragments = new[] { "This ", "is ", "a ", "test" };
-                testHttpHandler.OnLongPoll(cancellationToken =>
-                {
-                    if (requestCount >= messageFragments.Length)
+                testHttpHandler.OnLongPoll(
+                    cancellationToken =>
                     {
-                        return ResponseUtils.CreateResponse(HttpStatusCode.NoContent);
-                    }
+                        if (requestCount >= messageFragments.Length)
+                        {
+                            return ResponseUtils.CreateResponse(HttpStatusCode.NoContent);
+                        }
 
-                    var resp = ResponseUtils.CreateResponse(HttpStatusCode.OK, messageFragments[requestCount]);
-                    requestCount += 1;
-                    return resp;
-                });
-                testHttpHandler.OnSocketSend((_, __) => ResponseUtils.CreateResponse(HttpStatusCode.Accepted));
+                        var resp = ResponseUtils.CreateResponse(
+                            HttpStatusCode.OK,
+                            messageFragments[requestCount]
+                        );
+                        requestCount += 1;
+                        return resp;
+                    }
+                );
+                testHttpHandler.OnSocketSend(
+                    (_, __) => ResponseUtils.CreateResponse(HttpStatusCode.Accepted)
+                );
 
                 await WithConnectionAsync(
                     CreateConnection(testHttpHandler),
                     async (connection) =>
                     {
                         await connection.StartAsync().DefaultTimeout();
-                        Assert.Contains("This is a test", Encoding.UTF8.GetString(await connection.Transport.Input.ReadAllAsync()));
-                    });
+                        Assert.Contains(
+                            "This is a test",
+                            Encoding.UTF8.GetString(await connection.Transport.Input.ReadAllAsync())
+                        );
+                    }
+                );
             }
 
             [Fact]
@@ -231,11 +317,15 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                 testHttpHandler.OnLongPoll(cancellationToken => longPollTcs.Task);
 
-                testHttpHandler.OnSocketSend((buf, cancellationToken) =>
-                {
-                    sendTcs.TrySetResult(buf);
-                    return Task.FromResult(ResponseUtils.CreateResponse(HttpStatusCode.Accepted));
-                });
+                testHttpHandler.OnSocketSend(
+                    (buf, cancellationToken) =>
+                    {
+                        sendTcs.TrySetResult(buf);
+                        return Task.FromResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.Accepted)
+                        );
+                    }
+                );
 
                 await WithConnectionAsync(
                     CreateConnection(testHttpHandler),
@@ -247,8 +337,11 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
 
                         Assert.Equal(data, await sendTcs.Task.DefaultTimeout());
 
-                        longPollTcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent));
-                    });
+                        longPollTcs.TrySetResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
+                        );
+                    }
+                );
             }
 
             [Fact]
@@ -259,9 +352,15 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     async (connection) =>
                     {
                         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                            () => connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout());
-                        Assert.Equal($"Cannot access the {nameof(Transport)} pipe before the connection has started.", exception.Message);
-                    });
+                            () =>
+                                connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
+                        );
+                        Assert.Equal(
+                            $"Cannot access the {nameof(Transport)} pipe before the connection has started.",
+                            exception.Message
+                        );
+                    }
+                );
             }
 
             [Fact]
@@ -275,9 +374,12 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         await connection.DisposeAsync().DefaultTimeout();
 
                         var exception = await Assert.ThrowsAsync<ObjectDisposedException>(
-                            () => connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout());
+                            () =>
+                                connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
+                        );
                         Assert.Equal(nameof(HttpConnection), exception.ObjectName);
-                    });
+                    }
+                );
             }
 
             [Fact]
@@ -294,7 +396,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         // This will throw OperationCanceledException if it's forcibly terminated
                         // which we don't want
                         await transport.Receiving.DefaultTimeout();
-                    });
+                    }
+                );
             }
 
             [Fact]
@@ -309,7 +412,8 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                         await connection.StartAsync(TransferFormat.Text).DefaultTimeout();
 
                         Assert.Equal(TransferFormat.Text, transport.Format);
-                    });
+                    }
+                );
             }
         }
     }

@@ -21,12 +21,23 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse2.IsSupported)
             {
-                using (TestTable<double> doubleTable = new TestTable<double>(new double[2] { 1, -5 }, new double[2]))
+                using (
+                    TestTable<double> doubleTable = new TestTable<double>(
+                        new double[2] { 1, -5 },
+                        new double[2]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<double>>(doubleTable.inArrayPtr);
                     Sse2.Store((double*)(doubleTable.outArrayPtr), vf);
 
-                    if (!doubleTable.CheckResult((x, y) => BitConverter.DoubleToInt64Bits(x) == BitConverter.DoubleToInt64Bits(y)))
+                    if (
+                        !doubleTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.DoubleToInt64Bits(x)
+                                == BitConverter.DoubleToInt64Bits(y)
+                        )
+                    )
                     {
                         Console.WriteLine("Sse2 Store failed on double:");
                         foreach (var item in doubleTable.outArray)
@@ -38,7 +49,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<long> intTable = new TestTable<long>(new long[2] { 1, -5 }, new long[2]))
+                using (
+                    TestTable<long> intTable = new TestTable<long>(
+                        new long[2] { 1, -5 },
+                        new long[2]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<long>>(intTable.inArrayPtr);
                     Sse2.Store((long*)(intTable.outArrayPtr), vf);
@@ -55,7 +71,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ulong> intTable = new TestTable<ulong>(new ulong[2] { 1, 5 }, new ulong[2]))
+                using (
+                    TestTable<ulong> intTable = new TestTable<ulong>(
+                        new ulong[2] { 1, 5 },
+                        new ulong[2]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<ulong>>(intTable.inArrayPtr);
                     Sse2.Store((ulong*)(intTable.outArrayPtr), vf);
@@ -72,7 +93,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<int> intTable = new TestTable<int>(new int[4] { 1, -5, 100, 0 }, new int[4]))
+                using (
+                    TestTable<int> intTable = new TestTable<int>(
+                        new int[4] { 1, -5, 100, 0 },
+                        new int[4]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<int>>(intTable.inArrayPtr);
                     Sse2.Store((int*)(intTable.outArrayPtr), vf);
@@ -89,7 +115,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<uint> intTable = new TestTable<uint>(new uint[4] { 1, 5, 100, 0 }, new uint[4]))
+                using (
+                    TestTable<uint> intTable = new TestTable<uint>(
+                        new uint[4] { 1, 5, 100, 0 },
+                        new uint[4]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<uint>>(intTable.inArrayPtr);
                     Sse2.Store((uint*)(intTable.outArrayPtr), vf);
@@ -106,7 +137,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<short> intTable = new TestTable<short>(new short[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new short[8]))
+                using (
+                    TestTable<short> intTable = new TestTable<short>(
+                        new short[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new short[8]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<short>>(intTable.inArrayPtr);
                     Sse2.Store((short*)(intTable.outArrayPtr), vf);
@@ -123,7 +159,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<ushort> intTable = new TestTable<ushort>(new ushort[8] { 1, 5, 100, 0, 1, 2, 3, 4 }, new ushort[8]))
+                using (
+                    TestTable<ushort> intTable = new TestTable<ushort>(
+                        new ushort[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new ushort[8]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<ushort>>(intTable.inArrayPtr);
                     Sse2.Store((ushort*)(intTable.outArrayPtr), vf);
@@ -140,7 +181,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<sbyte> intTable = new TestTable<sbyte>(new sbyte[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new sbyte[16]))
+                using (
+                    TestTable<sbyte> intTable = new TestTable<sbyte>(
+                        new sbyte[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new sbyte[16]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<sbyte>>(intTable.inArrayPtr);
                     Sse2.Store((sbyte*)(intTable.outArrayPtr), vf);
@@ -157,7 +203,12 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
 
-                using (TestTable<byte> intTable = new TestTable<byte>(new byte[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new byte[16]))
+                using (
+                    TestTable<byte> intTable = new TestTable<byte>(
+                        new byte[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new byte[16]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<byte>>(intTable.inArrayPtr);
                     Sse2.Store((byte*)(intTable.outArrayPtr), vf);
@@ -173,7 +224,6 @@ namespace IntelHardwareIntrinsicTest
                         testResult = Fail;
                     }
                 }
-
             }
 
             return testResult;
@@ -215,6 +265,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

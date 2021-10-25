@@ -25,7 +25,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         private readonly LibuvFunctions _libuv;
         private readonly IHostApplicationLifetime _appLifetime;
         private readonly Thread _thread;
-        private readonly TaskCompletionSource _threadTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _threadTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         private readonly UvLoopHandle _loop;
         private readonly UvAsyncHandle _post;
         private Queue<Work> _workAdding = new Queue<Work>(1024);
@@ -40,12 +42,26 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         private Exception _closeError;
         private readonly ILibuvTrace _log;
 
-        public LibuvThread(LibuvFunctions libuv, LibuvTransportContext libuvTransportContext, int maxLoops = 8)
-            : this(libuv, libuvTransportContext.AppLifetime, libuvTransportContext.Options.MemoryPoolFactory(), libuvTransportContext.Log, maxLoops)
-        {
-        }
+        public LibuvThread(
+            LibuvFunctions libuv,
+            LibuvTransportContext libuvTransportContext,
+            int maxLoops = 8
+        )
+            : this(
+                libuv,
+                libuvTransportContext.AppLifetime,
+                libuvTransportContext.Options.MemoryPoolFactory(),
+                libuvTransportContext.Log,
+                maxLoops
+            ) { }
 
-        public LibuvThread(LibuvFunctions libuv, IHostApplicationLifetime appLifetime, MemoryPool<byte> pool, ILibuvTrace log, int maxLoops = 8)
+        public LibuvThread(
+            LibuvFunctions libuv,
+            IHostApplicationLifetime appLifetime,
+            MemoryPool<byte> pool,
+            ILibuvTrace log,
+            int maxLoops = 8
+        )
         {
             _libuv = libuv;
             _appLifetime = appLifetime;
@@ -70,7 +86,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             WriteReqPool = new WriteReqPool(this, _log);
         }
 
-        public UvLoopHandle Loop { get { return _loop; } }
+        public UvLoopHandle Loop
+        {
+            get { return _loop; }
+        }
 
         public MemoryPool<byte> MemoryPool { get; }
 
@@ -88,7 +107,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         public Task StartAsync()
         {
-            var tcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             _thread.Start(tcs);
             return tcs.Task;
         }
@@ -103,7 +124,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 }
             }
 
-            Debug.Assert(!_threadTcs.Task.IsCompleted, "The loop thread was completed before calling uv_unref on the post handle.");
+            Debug.Assert(
+                !_threadTcs.Task.IsCompleted,
+                "The loop thread was completed before calling uv_unref on the post handle."
+            );
 
             var stepTimeout = TimeSpan.FromTicks(timeout.Ticks / 3);
 
@@ -112,17 +136,23 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 Post(t => t.AllowStop());
                 if (!await WaitAsync(_threadTcs.Task, stepTimeout).ConfigureAwait(false))
                 {
-                    _log.LogWarning($"{nameof(LibuvThread)}.{nameof(StopAsync)} failed to terminate libuv thread, {nameof(AllowStop)}");
+                    _log.LogWarning(
+                        $"{nameof(LibuvThread)}.{nameof(StopAsync)} failed to terminate libuv thread, {nameof(AllowStop)}"
+                    );
 
                     Post(t => t.OnStopRude());
                     if (!await WaitAsync(_threadTcs.Task, stepTimeout).ConfigureAwait(false))
                     {
-                        _log.LogCritical($"{nameof(LibuvThread)}.{nameof(StopAsync)} failed to terminate libuv thread, {nameof(OnStopRude)}.");
+                        _log.LogCritical(
+                            $"{nameof(LibuvThread)}.{nameof(StopAsync)} failed to terminate libuv thread, {nameof(OnStopRude)}."
+                        );
 
                         Post(t => t.OnStopImmediate());
                         if (!await WaitAsync(_threadTcs.Task, stepTimeout).ConfigureAwait(false))
                         {
-                            _log.LogCritical($"{nameof(LibuvThread)}.{nameof(StopAsync)} failed to terminate libuv thread, {nameof(OnStopImmediate)}.");
+                            _log.LogCritical(
+                                $"{nameof(LibuvThread)}.{nameof(StopAsync)} failed to terminate libuv thread, {nameof(OnStopImmediate)}."
+                            );
                         }
                     }
                 }
@@ -131,7 +161,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             {
                 if (!await WaitAsync(_threadTcs.Task, stepTimeout).ConfigureAwait(false))
                 {
-                    _log.LogCritical($"{nameof(LibuvThread)}.{nameof(StopAsync)} failed to terminate libuv thread.");
+                    _log.LogCritical(
+                        $"{nameof(LibuvThread)}.{nameof(StopAsync)} failed to terminate libuv thread."
+                    );
                 }
             }
 
@@ -151,7 +183,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
             // Detect leaks in UvRequest objects
             foreach (var request in Requests)
             {
-                Debug.Assert(request.Target == null, $"{request.Target?.GetType()} object is still alive.");
+                Debug.Assert(
+                    request.Target == null,
+                    $"{request.Target?.GetType()} object is still alive."
+                );
             }
         }
 #endif
@@ -163,15 +198,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         private void OnStopRude()
         {
-            Walk(ptr =>
-            {
-                var handle = UvMemory.FromIntPtr<UvHandle>(ptr);
-                if (handle != _post)
+            Walk(
+                ptr =>
                 {
-                    // handle can be null because UvMemory.FromIntPtr looks up a weak reference
-                    handle?.Dispose();
+                    var handle = UvMemory.FromIntPtr<UvHandle>(ptr);
+                    if (handle != _post)
+                    {
+                        // handle can be null because UvMemory.FromIntPtr looks up a weak reference
+                        handle?.Dispose();
+                    }
                 }
-            });
+            );
         }
 
         private void OnStopImmediate()
@@ -256,11 +293,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         private void Walk(LibuvFunctions.uv_walk_cb callback, IntPtr arg)
         {
-            _libuv.walk(
-                _loop,
-                callback,
-                arg
-                );
+            _libuv.walk(_loop, callback, arg);
         }
 
         private void PostCloseHandle(Action<IntPtr> callback, IntPtr handle)
@@ -314,12 +347,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 // Calling ReadStop makes the handle as in-active which means the loop can
                 // end while there's still valid handles around. This makes loop.Dispose throw
                 // with an EBUSY. To avoid that, we walk all of the handles and dispose them.
-                Walk(ptr =>
-                {
-                    var handle = UvMemory.FromIntPtr<UvHandle>(ptr);
-                    // handle can be null because UvMemory.FromIntPtr looks up a weak reference
-                    handle?.Dispose();
-                });
+                Walk(
+                    ptr =>
+                    {
+                        var handle = UvMemory.FromIntPtr<UvHandle>(ptr);
+                        // handle can be null because UvMemory.FromIntPtr looks up a weak reference
+                        handle?.Dispose();
+                    }
+                );
 
                 // Ensure the Dispose operations complete in the event loop.
                 _loop.Run();
@@ -341,11 +376,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 }
                 catch (Exception ex)
                 {
-                    _closeError = _closeError == null ? ex : new AggregateException(_closeError, ex);
+                    _closeError =
+                        _closeError == null ? ex : new AggregateException(_closeError, ex);
                 }
                 WriteReqPool.Dispose();
                 _threadTcs.SetResult();
-
 #if DEBUG && !INNER_LOOP
                 // Check for handle leaks after disposing everything
                 CheckUvReqLeaks();
@@ -457,8 +492,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         private class CallbackAdapter<T>
         {
-            public static readonly Action<object, object> PostCallbackAdapter = (callback, state) => ((Action<T>)callback).Invoke((T)state);
-            public static readonly Action<object, object> PostAsyncCallbackAdapter = (callback, state) => ((Action<T>)callback).Invoke((T)state);
+            public static readonly Action<object, object> PostCallbackAdapter = (callback, state) =>
+                ((Action<T>)callback).Invoke((T)state);
+            public static readonly Action<object, object> PostAsyncCallbackAdapter = (
+                callback,
+                state
+            ) => ((Action<T>)callback).Invoke((T)state);
         }
     }
 }

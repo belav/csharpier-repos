@@ -41,7 +41,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             LocalDetectChanges();
 
             // ReSharper disable once VirtualMemberCallInConstructor
-            Check.DebugAssert(Metadata is INavigation, "Issue #21673. Non-collection skip navigations not supported.");
+            Check.DebugAssert(
+                Metadata is INavigation,
+                "Issue #21673. Non-collection skip navigations not supported."
+            );
         }
 
         /// <summary>
@@ -57,20 +60,24 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
             LocalDetectChanges();
 
             // ReSharper disable once VirtualMemberCallInConstructor
-            Check.DebugAssert(Metadata is INavigation, "Issue #21673. Non-collection skip navigations not supported.");
+            Check.DebugAssert(
+                Metadata is INavigation,
+                "Issue #21673. Non-collection skip navigations not supported."
+            );
         }
 
         private void LocalDetectChanges()
         {
-            if (!(Metadata is INavigation navigation
-                && navigation.IsOnDependent))
+            if (!(Metadata is INavigation navigation && navigation.IsOnDependent))
             {
                 var target = GetTargetEntry();
                 if (target != null)
                 {
                     var context = InternalEntry.StateManager.Context;
-                    if (context.ChangeTracker.AutoDetectChangesEnabled
-                        && !((IRuntimeModel)context.Model).SkipDetectChanges)
+                    if (
+                        context.ChangeTracker.AutoDetectChangesEnabled
+                        && !((IRuntimeModel)context.Model).SkipDetectChanges
+                    )
                     {
                         context.GetDependencies().ChangeDetector.DetectChanges(target);
                     }
@@ -111,8 +118,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         /// <param name="cancellationToken"> A <see cref="CancellationToken" /> to observe while waiting for the task to complete. </param>
         /// <returns> A task that represents the asynchronous operation. </returns>
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
-        public override Task LoadAsync(CancellationToken cancellationToken = default)
-            => IsLoaded
+        public override Task LoadAsync(CancellationToken cancellationToken = default) =>
+            IsLoaded
                 ? Task.CompletedTask
                 : TargetFinder.LoadAsync((INavigation)Metadata, InternalEntry, cancellationToken);
 
@@ -127,8 +134,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     </para>
         /// </summary>
         /// <returns> The query to load related entities. </returns>
-        public override IQueryable Query()
-            => TargetFinder.Query((INavigation)Metadata, InternalEntry);
+        public override IQueryable Query() =>
+            TargetFinder.Query((INavigation)Metadata, InternalEntry);
 
         /// <summary>
         ///     Gets or sets a value indicating whether any of foreign key property values associated
@@ -142,8 +149,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 var navigation = (INavigation)Metadata;
 
                 return navigation.IsOnDependent
-                    ? navigation.ForeignKey.Properties.Any(InternalEntry.IsModified)
-                    : AnyFkPropertiesModified(navigation, CurrentValue);
+                  ? navigation.ForeignKey.Properties.Any(InternalEntry.IsModified)
+                  : AnyFkPropertiesModified(navigation, CurrentValue);
             }
             set
             {
@@ -158,7 +165,10 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     var navigationValue = CurrentValue;
                     if (navigationValue != null)
                     {
-                        var relatedEntry = InternalEntry.StateManager.TryGetEntry(navigationValue, Metadata.TargetEntityType);
+                        var relatedEntry = InternalEntry.StateManager.TryGetEntry(
+                            navigationValue,
+                            Metadata.TargetEntityType
+                        );
                         if (relatedEntry != null)
                         {
                             SetFkPropertiesModified(navigation, relatedEntry, value);
@@ -171,15 +181,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         private void SetFkPropertiesModified(
             INavigation navigation,
             InternalEntityEntry internalEntityEntry,
-            bool modified)
+            bool modified
+        )
         {
             var anyNonPk = navigation.ForeignKey.Properties.Any(p => !p.IsPrimaryKey());
             foreach (var property in navigation.ForeignKey.Properties)
             {
-                if (anyNonPk
-                    && !property.IsPrimaryKey())
+                if (anyNonPk && !property.IsPrimaryKey())
                 {
-                    internalEntityEntry.SetPropertyModified(property, isModified: modified, acceptChanges: false);
+                    internalEntityEntry.SetPropertyModified(
+                        property,
+                        isModified: modified,
+                        acceptChanges: false
+                    );
                 }
             }
         }
@@ -191,12 +205,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                 return false;
             }
 
-            var relatedEntry = InternalEntry.StateManager.TryGetEntry(relatedEntity, Metadata.TargetEntityType);
+            var relatedEntry = InternalEntry.StateManager.TryGetEntry(
+                relatedEntity,
+                Metadata.TargetEntityType
+            );
 
             return relatedEntry != null
-                && (relatedEntry.EntityState == EntityState.Added
+                && (
+                    relatedEntry.EntityState == EntityState.Added
                     || relatedEntry.EntityState == EntityState.Deleted
-                    || navigation.ForeignKey.Properties.Any(relatedEntry.IsModified));
+                    || navigation.ForeignKey.Properties.Any(relatedEntry.IsModified)
+                );
         }
 
         /// <summary>
@@ -219,12 +238,15 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        protected virtual InternalEntityEntry? GetTargetEntry()
-            => CurrentValue == null
+        protected virtual InternalEntityEntry? GetTargetEntry() =>
+            CurrentValue == null
                 ? null
-                : InternalEntry.StateManager.GetOrCreateEntry(CurrentValue, Metadata.TargetEntityType);
+                : InternalEntry.StateManager.GetOrCreateEntry(
+                      CurrentValue,
+                      Metadata.TargetEntityType
+                  );
 
-        private IEntityFinder TargetFinder
-            => _finder ??= InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType);
+        private IEntityFinder TargetFinder =>
+            _finder ??= InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType);
     }
 }

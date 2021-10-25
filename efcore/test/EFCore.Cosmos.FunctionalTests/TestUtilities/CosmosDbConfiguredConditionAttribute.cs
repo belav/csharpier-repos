@@ -14,8 +14,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
     public class CosmosDbConfiguredConditionAttribute : Attribute, ITestCondition
     {
-        public string SkipReason
-            => "Unable to connect to Cosmos DB. Please install/start the emulator service or configure a valid endpoint.";
+        public string SkipReason =>
+            "Unable to connect to Cosmos DB. Please install/start the emulator service or configure a valid endpoint.";
 
         private static bool? _connectionAvailable;
 
@@ -65,14 +65,20 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             }
         }
 
-        private static bool IsNotConfigured(Exception exception)
-            => exception switch
+        private static bool IsNotConfigured(Exception exception) =>
+            exception switch
             {
-                HttpRequestException re => re.InnerException is SocketException // Exception in Mac/Linux
-                    || (re.InnerException is IOException ioException && ioException.InnerException is SocketException), // Exception in Windows
-                _ => exception.Message.Contains(
-                    "The input authorization token can't serve the request. Please check that the expected payload is built as per the protocol, and check the key being used.",
-                    StringComparison.Ordinal),
+                HttpRequestException re
+                  => re.InnerException is SocketException // Exception in Mac/Linux
+                      || (
+                          re.InnerException is IOException ioException
+                          && ioException.InnerException is SocketException
+                      ), // Exception in Windows
+                _
+                  => exception.Message.Contains(
+                      "The input authorization token can't serve the request. Please check that the expected payload is built as per the protocol, and check the key being used.",
+                      StringComparison.Ordinal
+                  ),
             };
     }
 }

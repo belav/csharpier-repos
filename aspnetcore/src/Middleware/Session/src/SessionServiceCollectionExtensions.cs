@@ -36,7 +36,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
         /// <param name="configure">The session options to configure the middleware with.</param>
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddSession(this IServiceCollection services, Action<SessionOptions> configure)
+        public static IServiceCollection AddSession(
+            this IServiceCollection services,
+            Action<SessionOptions> configure
+        )
         {
             if (services == null)
             {

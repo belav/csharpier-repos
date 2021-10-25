@@ -15,10 +15,7 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors.
         //
 
-        public Pkcs9SigningTime()
-            : this(DateTime.Now)
-        {
-        }
+        public Pkcs9SigningTime() : this(DateTime.Now) { }
 
         public Pkcs9SigningTime(DateTime signingTime)
             : base(Oids.SigningTimeOid.CopyOid(), Encode(signingTime))
@@ -27,9 +24,7 @@ namespace System.Security.Cryptography.Pkcs
         }
 
         public Pkcs9SigningTime(byte[] encodedSigningTime)
-            : base(Oids.SigningTimeOid.CopyOid(), encodedSigningTime)
-        {
-        }
+            : base(Oids.SigningTimeOid.CopyOid(), encodedSigningTime) { }
 
         //
         // Public properties.

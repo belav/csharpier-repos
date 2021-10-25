@@ -68,19 +68,48 @@ namespace System.Collections.Immutable.Tests
 
             Assert.True(Empty<int, int>().ToReadOnlyDictionary().Equals(Empty<int, int>()));
             Assert.True(Empty<int, int>().Equals(Empty<int, int>().ToReadOnlyDictionary()));
-            Assert.True(Empty<int, int>().ToReadOnlyDictionary().Equals(Empty<int, int>().ToReadOnlyDictionary()));
-            Assert.False(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary().Equals(Empty<int, int>()));
-            Assert.False(Empty<int, int>().Equals(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary()));
-            Assert.False(Empty<int, int>().ToReadOnlyDictionary().Equals(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary()));
+            Assert.True(
+                Empty<int, int>()
+                    .ToReadOnlyDictionary()
+                    .Equals(Empty<int, int>().ToReadOnlyDictionary())
+            );
+            Assert.False(
+                Empty<int, int>().Add(3, 1).ToReadOnlyDictionary().Equals(Empty<int, int>())
+            );
+            Assert.False(
+                Empty<int, int>().Equals(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary())
+            );
+            Assert.False(
+                Empty<int, int>()
+                    .ToReadOnlyDictionary()
+                    .Equals(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary())
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/49568", typeof(PlatformDetection), nameof(PlatformDetection.IsMacOsAppleSilicon))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/49568",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMacOsAppleSilicon)
+        )]
         public void AddRangeTest()
         {
             var map = Empty<int, GenericParameterHelper>();
-            map = map.AddRange(Enumerable.Range(1, 100).Select(n => new KeyValuePair<int, GenericParameterHelper>(n, new GenericParameterHelper())));
-            CollectionAssertAreEquivalent(map.Select(kv => kv.Key).ToList(), Enumerable.Range(1, 100).ToList());
+            map = map.AddRange(
+                Enumerable
+                    .Range(1, 100)
+                    .Select(
+                        n =>
+                            new KeyValuePair<int, GenericParameterHelper>(
+                                n,
+                                new GenericParameterHelper()
+                            )
+                    )
+            );
+            CollectionAssertAreEquivalent(
+                map.Select(kv => kv.Key).ToList(),
+                Enumerable.Range(1, 100).ToList()
+            );
             this.VerifyAvlTreeState(map);
             Assert.Equal(100, map.Count);
 
@@ -114,7 +143,11 @@ namespace System.Collections.Immutable.Tests
             this.AddRemoveEnumerableTestHelper(Empty<int, int>());
         }
 
-        private IImmutableDictionary<TKey, TValue> AddTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value) where TKey : IComparable<TKey>
+        private IImmutableDictionary<TKey, TValue> AddTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value
+        ) where TKey : IComparable<TKey>
         {
             Assert.NotNull(map);
             Assert.NotNull(key);
@@ -147,7 +180,9 @@ namespace System.Collections.Immutable.Tests
             }
         }
 
-        protected void AddDescendingTestHelper(IImmutableDictionary<int, GenericParameterHelper> map)
+        protected void AddDescendingTestHelper(
+            IImmutableDictionary<int, GenericParameterHelper> map
+        )
         {
             for (int i = 10; i > 0; i--)
             {
@@ -161,7 +196,9 @@ namespace System.Collections.Immutable.Tests
             }
         }
 
-        protected void AddRemoveRandomDataTestHelper(IImmutableDictionary<double, GenericParameterHelper> map)
+        protected void AddRemoveRandomDataTestHelper(
+            IImmutableDictionary<double, GenericParameterHelper> map
+        )
         {
             Assert.NotNull(map);
 
@@ -192,7 +229,11 @@ namespace System.Collections.Immutable.Tests
 
             Assert.Same(empty, empty.RemoveRange(Enumerable.Empty<int>()));
             Assert.Same(empty, empty.AddRange(Enumerable.Empty<KeyValuePair<int, int>>()));
-            var list = new List<KeyValuePair<int, int>> { new KeyValuePair<int, int>(3, 5), new KeyValuePair<int, int>(8, 10) };
+            var list = new List<KeyValuePair<int, int>>
+            {
+                new KeyValuePair<int, int>(3, 5),
+                new KeyValuePair<int, int>(8, 10)
+            };
             var nonEmpty = empty.AddRange(list);
             this.VerifyAvlTreeState(nonEmpty);
             var halfRemoved = nonEmpty.RemoveRange(Enumerable.Range(1, 5));
@@ -201,7 +242,10 @@ namespace System.Collections.Immutable.Tests
             this.VerifyAvlTreeState(halfRemoved);
         }
 
-        protected void KeysTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key)
+        protected void KeysTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key
+        )
         {
             Assert.Equal(0, map.Keys.Count());
             Assert.Equal(0, map.ToReadOnlyDictionary().Keys.Count());
@@ -212,7 +256,10 @@ namespace System.Collections.Immutable.Tests
             KeysOrValuesTestHelper(((IDictionary<TKey, TValue>)nonEmpty).Keys, key);
         }
 
-        protected void ValuesTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key)
+        protected void ValuesTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key
+        )
         {
             Assert.Equal(0, map.Values.Count());
             Assert.Equal(0, map.ToReadOnlyDictionary().Values.Count());
@@ -239,7 +286,10 @@ namespace System.Collections.Immutable.Tests
             }
 
             var list = map.ToList();
-            Assert.Equal<KeyValuePair<int, GenericParameterHelper>>(list, ImmutableSetTest.ToListNonGeneric<KeyValuePair<int, GenericParameterHelper>>(map));
+            Assert.Equal<KeyValuePair<int, GenericParameterHelper>>(
+                list,
+                ImmutableSetTest.ToListNonGeneric<KeyValuePair<int, GenericParameterHelper>>(map)
+            );
 
             // Apply some less common uses to the enumerator to test its metal.
             using (var enumerator = map.GetEnumerator())
@@ -263,7 +313,9 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<InvalidOperationException>(() => manualEnum.Current);
         }
 
-        internal abstract IBinaryTree GetRootNode<TKey, TValue>(IImmutableDictionary<TKey, TValue> dictionary);
+        internal abstract IBinaryTree GetRootNode<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> dictionary
+        );
 
         private static void KeysOrValuesTestHelper<T>(ICollection<T> collection, T containedValue)
         {
@@ -279,7 +331,10 @@ namespace System.Collections.Immutable.Tests
             Assert.True(nonGeneric.IsSynchronized);
             Assert.True(collection.IsReadOnly);
 
-            AssertExtensions.Throws<ArgumentNullException>("array", () => nonGeneric.CopyTo(null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => nonGeneric.CopyTo(null, 0)
+            );
             var array = new T[collection.Count + 1];
             nonGeneric.CopyTo(array, 1);
             Assert.Equal(default(T), array[0]);

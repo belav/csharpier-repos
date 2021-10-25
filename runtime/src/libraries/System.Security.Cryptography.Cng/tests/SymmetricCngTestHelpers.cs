@@ -18,7 +18,8 @@ namespace System.Security.Cryptography.Cng.Tests
             Func<string, SymmetricAlgorithm> persistedFunc,
             Func<SymmetricAlgorithm> ephemeralFunc,
             CipherMode cipherMode,
-            PaddingMode paddingMode)
+            PaddingMode paddingMode
+        )
         {
             string keyName = Guid.NewGuid().ToString();
             CngKeyCreationParameters creationParameters = new CngKeyCreationParameters
@@ -27,7 +28,11 @@ namespace System.Security.Cryptography.Cng.Tests
                 ExportPolicy = CngExportPolicies.AllowPlaintextExport,
                 Parameters =
                 {
-                    new CngProperty("Length", BitConverter.GetBytes(keySize), CngPropertyOptions.None),
+                    new CngProperty(
+                        "Length",
+                        BitConverter.GetBytes(keySize),
+                        CngPropertyOptions.None
+                    ),
                 }
             };
 
@@ -41,7 +46,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     persistedFunc,
                     ephemeralFunc,
                     cipherMode,
-                    paddingMode);
+                    paddingMode
+                );
             }
             finally
             {
@@ -56,7 +62,8 @@ namespace System.Security.Cryptography.Cng.Tests
             Func<string, SymmetricAlgorithm> persistedFunc,
             Func<SymmetricAlgorithm> ephemeralFunc,
             CipherMode cipherMode,
-            PaddingMode paddingMode)
+            PaddingMode paddingMode
+        )
         {
             byte[] plainBytes = GenerateRandom(plainBytesCount);
 
@@ -76,16 +83,28 @@ namespace System.Security.Cryptography.Cng.Tests
                 {
                     Assert.True(
                         persistedEncryptor.CanTransformMultipleBlocks,
-                        "Pre-condition: persistedEncryptor.CanTransformMultipleBlocks");
+                        "Pre-condition: persistedEncryptor.CanTransformMultipleBlocks"
+                    );
 
-                    byte[] persistedEncrypted = persistedEncryptor.TransformFinalBlock(plainBytes, 0, plainBytesCount);
-                    byte[] ephemeralEncrypted = ephemeralEncryptor.TransformFinalBlock(plainBytes, 0, plainBytesCount);
+                    byte[] persistedEncrypted = persistedEncryptor.TransformFinalBlock(
+                        plainBytes,
+                        0,
+                        plainBytesCount
+                    );
+                    byte[] ephemeralEncrypted = ephemeralEncryptor.TransformFinalBlock(
+                        plainBytes,
+                        0,
+                        plainBytesCount
+                    );
 
                     Assert.Equal(ephemeralEncrypted, persistedEncrypted);
 
                     byte[] cipherBytes = persistedEncrypted;
-                    byte[] persistedDecrypted = persistedDecryptor.TransformFinalBlock(cipherBytes, 0,
-                        cipherBytes.Length);
+                    byte[] persistedDecrypted = persistedDecryptor.TransformFinalBlock(
+                        cipherBytes,
+                        0,
+                        cipherBytes.Length
+                    );
 
                     byte[] expectedBytes = plainBytes;
 
@@ -105,7 +124,8 @@ namespace System.Security.Cryptography.Cng.Tests
 
         public static void GetKey_NonExportable(
             CngAlgorithm algorithm,
-            Func<string, SymmetricAlgorithm> persistedFunc)
+            Func<string, SymmetricAlgorithm> persistedFunc
+        )
         {
             string keyName = Guid.NewGuid().ToString();
             CngKey cngKey = CngKey.Create(algorithm, keyName);
@@ -126,7 +146,8 @@ namespace System.Security.Cryptography.Cng.Tests
 
         public static void SetKey_DetachesFromPersistedKey(
             CngAlgorithm algorithm,
-            Func<string, SymmetricAlgorithm> persistedFunc)
+            Func<string, SymmetricAlgorithm> persistedFunc
+        )
         {
             // This test verifies that:
             // * [Algorithm]Cng.set_Key does not change the persisted key value
@@ -157,7 +178,11 @@ namespace System.Security.Cryptography.Cng.Tests
 
                     using (ICryptoTransform encryptor = replaceKey.CreateEncryptor())
                     {
-                        encryptedBytes = encryptor.TransformFinalBlock(plainTextBytes, 0, plainTextBytes.Length);
+                        encryptedBytes = encryptor.TransformFinalBlock(
+                            plainTextBytes,
+                            0,
+                            plainTextBytes.Length
+                        );
                     }
 
                     using (ICryptoTransform replaceBefore = replaceKey.CreateDecryptor())
@@ -186,15 +211,31 @@ namespace System.Security.Cryptography.Cng.Tests
                             // All of the Befores, and the BeforeDelayed (which have not accessed their key material)
                             // should still decrypt correctly.  And so should stableAfter.
                             AssertTransformsEqual(plainTextBytes, regenBefore, encryptedBytes);
-                            AssertTransformsEqual(plainTextBytes, regenBeforeDelayed, encryptedBytes);
+                            AssertTransformsEqual(
+                                plainTextBytes,
+                                regenBeforeDelayed,
+                                encryptedBytes
+                            );
                             AssertTransformsEqual(plainTextBytes, replaceBefore, encryptedBytes);
-                            AssertTransformsEqual(plainTextBytes, replaceBeforeDelayed, encryptedBytes);
+                            AssertTransformsEqual(
+                                plainTextBytes,
+                                replaceBeforeDelayed,
+                                encryptedBytes
+                            );
                             AssertTransformsEqual(plainTextBytes, stableBefore, encryptedBytes);
-                            AssertTransformsEqual(plainTextBytes, stableBeforeDelayed, encryptedBytes);
+                            AssertTransformsEqual(
+                                plainTextBytes,
+                                stableBeforeDelayed,
+                                encryptedBytes
+                            );
                             AssertTransformsEqual(plainTextBytes, stableAfter, encryptedBytes);
 
                             // There's a 1 in 2^128 chance that the regenerated key matched the original generated key.
-                            byte[] badDecrypt = replaceAfter.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
+                            byte[] badDecrypt = replaceAfter.TransformFinalBlock(
+                                encryptedBytes,
+                                0,
+                                encryptedBytes.Length
+                            );
                             Assert.NotEqual(plainTextBytes, badDecrypt);
 
                             // Regen and replace should come up with the same bad value, since they have the same
@@ -227,7 +268,8 @@ namespace System.Security.Cryptography.Cng.Tests
             CngAlgorithm algorithm,
             int plainBytesCount,
             Func<string, SymmetricAlgorithm> persistedFunc,
-            Func<SymmetricAlgorithm> ephemeralFunc)
+            Func<SymmetricAlgorithm> ephemeralFunc
+        )
         {
             string keyName = Guid.NewGuid().ToString();
             CngKeyCreationParameters creationParameters = new CngKeyCreationParameters
@@ -247,7 +289,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     persistedFunc,
                     ephemeralFunc,
                     CipherMode.CBC,
-                    PaddingMode.PKCS7);
+                    PaddingMode.PKCS7
+                );
             }
             finally
             {
@@ -265,7 +308,9 @@ namespace System.Security.Cryptography.Cng.Tests
                 {
                     // Windows 7 (Microsoft Windows 6.1) does not support persisted symmetric keys
                     // in the Microsoft Software KSP
-                    s_supportsPersistedSymmetricKeys = !RuntimeInformation.OSDescription.Contains("Windows 6.1");
+                    s_supportsPersistedSymmetricKeys = !RuntimeInformation.OSDescription.Contains(
+                        "Windows 6.1"
+                    );
                 }
 
                 return s_supportsPersistedSymmetricKeys.Value;
@@ -280,7 +325,8 @@ namespace System.Security.Cryptography.Cng.Tests
                     WindowsPrincipal principal = new WindowsPrincipal(identity);
                     return principal.IsInRole(WindowsBuiltInRole.Administrator);
                 }
-            });
+            }
+        );
 
         internal static bool IsAdministrator => s_isAdministrator.Value;
 
@@ -294,9 +340,17 @@ namespace System.Security.Cryptography.Cng.Tests
             return buffer;
         }
 
-        internal static void AssertTransformsEqual(byte[] plainTextBytes, ICryptoTransform decryptor, byte[] encryptedBytes)
+        internal static void AssertTransformsEqual(
+            byte[] plainTextBytes,
+            ICryptoTransform decryptor,
+            byte[] encryptedBytes
+        )
         {
-            byte[] decrypted = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
+            byte[] decrypted = decryptor.TransformFinalBlock(
+                encryptedBytes,
+                0,
+                encryptedBytes.Length
+            );
             Assert.Equal(plainTextBytes, decrypted);
         }
     }

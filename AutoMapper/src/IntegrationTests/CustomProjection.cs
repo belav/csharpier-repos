@@ -11,7 +11,8 @@ namespace AutoMapper.UnitTests.Projection
     {
         public class TestContext : DbContext
         {
-            public TestContext(): base() => Database.SetInitializer<TestContext>(new DatabaseInitializer());
+            public TestContext() : base() =>
+                Database.SetInitializer<TestContext>(new DatabaseInitializer());
             public DbSet<Source> Sources { get; set; }
         }
         const string _badGreeting = "GRRRRR";
@@ -23,11 +24,15 @@ namespace AutoMapper.UnitTests.Projection
                 base.Seed(testContext);
             }
         }
-        protected override MapperConfiguration Configuration => new MapperConfiguration(x => {
-            x.CreateProjection<string, string>().ConvertUsing(s => _niceGreeting);
-            x.CreateProjection<Source, Target>();
-            x.CreateProjection<SourceChild, TargetChild>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                x =>
+                {
+                    x.CreateProjection<string, string>().ConvertUsing(s => _niceGreeting);
+                    x.CreateProjection<Source, Target>();
+                    x.CreateProjection<SourceChild, TargetChild>();
+                }
+            );
         const string _niceGreeting = "Hello";
         [Fact]
         public void Direct_assignability_shouldnt_trump_custom_projection()
@@ -64,7 +69,8 @@ namespace AutoMapper.UnitTests.Projection
     {
         public class TestContext : DbContext
         {
-            public TestContext() : base() => Database.SetInitializer<TestContext>(new DatabaseInitializer());
+            public TestContext() : base() =>
+                Database.SetInitializer<TestContext>(new DatabaseInitializer());
             public DbSet<Source> Sources { get; set; }
         }
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
@@ -76,11 +82,15 @@ namespace AutoMapper.UnitTests.Projection
             }
         }
         const string _niceGreeting = "Hello";
-        protected override MapperConfiguration Configuration => new MapperConfiguration(x =>
-        {
-            x.CreateProjection<Source, Target>().ConvertUsing(s => new Target { Greeting = _niceGreeting });
-            x.CreateProjection<SourceChild, TargetChild>();
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                x =>
+                {
+                    x.CreateProjection<Source, Target>()
+                        .ConvertUsing(s => new Target { Greeting = _niceGreeting });
+                    x.CreateProjection<SourceChild, TargetChild>();
+                }
+            );
         [Fact]
         public void Should_work()
         {
@@ -116,23 +126,28 @@ namespace AutoMapper.UnitTests.Projection
     {
         public class TestContext : DbContext
         {
-            public TestContext() : base() => Database.SetInitializer<TestContext>(new DatabaseInitializer());
+            public TestContext() : base() =>
+                Database.SetInitializer<TestContext>(new DatabaseInitializer());
             public DbSet<Source> Sources { get; set; }
         }
         public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
         {
             protected override void Seed(TestContext testContext)
             {
-                testContext.Sources.Add(new Source { Child = new SourceChild { } });
+                testContext.Sources.Add(new Source { Child = new SourceChild {  } });
                 base.Seed(testContext);
             }
         }
         const string _niceGreeting = "Hello";
-        protected override MapperConfiguration Configuration => new MapperConfiguration(x =>
-        {
-            x.CreateProjection<Source, Target>();
-            x.CreateProjection<SourceChild, TargetChild>().ConvertUsing(s => new TargetChild { Greeting = _niceGreeting });
-        });
+        protected override MapperConfiguration Configuration =>
+            new MapperConfiguration(
+                x =>
+                {
+                    x.CreateProjection<Source, Target>();
+                    x.CreateProjection<SourceChild, TargetChild>()
+                        .ConvertUsing(s => new TargetChild { Greeting = _niceGreeting });
+                }
+            );
         [Fact]
         public void Should_work()
         {

@@ -18,7 +18,10 @@ namespace Microsoft.AspNetCore.WebSockets
         /// <param name="services">The service collection to add WebSockets specific configuration to.</param>
         /// <param name="configure">The configuration callback to setup <see cref="WebSocketOptions"/>.</param>
         /// <returns></returns>
-        public static IServiceCollection AddWebSockets(this IServiceCollection services, Action<WebSocketOptions> configure)
+        public static IServiceCollection AddWebSockets(
+            this IServiceCollection services,
+            Action<WebSocketOptions> configure
+        )
         {
             if (configure is null)
             {

@@ -16,7 +16,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public RazorPagesRazorViewEngineOptionsSetup(IOptions<RazorPagesOptions> pagesOptions)
         {
-            _pagesOptions = pagesOptions?.Value ?? throw new ArgumentNullException(nameof(pagesOptions));
+            _pagesOptions =
+                pagesOptions?.Value ?? throw new ArgumentNullException(nameof(pagesOptions));
         }
 
         public void Configure(RazorViewEngineOptions options)
@@ -28,14 +29,22 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var rootDirectory = _pagesOptions.RootDirectory;
             Debug.Assert(!string.IsNullOrEmpty(rootDirectory));
-            var defaultPageSearchPath = CombinePath(rootDirectory, "{1}/{0}" + RazorViewEngine.ViewExtension);
+            var defaultPageSearchPath = CombinePath(
+                rootDirectory,
+                "{1}/{0}" + RazorViewEngine.ViewExtension
+            );
             options.PageViewLocationFormats.Add(defaultPageSearchPath);
 
             // /Pages/Shared/{0}.cshtml
-            var pagesSharedDirectory = CombinePath(rootDirectory, "Shared/{0}" + RazorViewEngine.ViewExtension);
+            var pagesSharedDirectory = CombinePath(
+                rootDirectory,
+                "Shared/{0}" + RazorViewEngine.ViewExtension
+            );
             options.PageViewLocationFormats.Add(pagesSharedDirectory);
 
-            options.PageViewLocationFormats.Add("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+            options.PageViewLocationFormats.Add(
+                "/Views/Shared/{0}" + RazorViewEngine.ViewExtension
+            );
 
             var areaDirectory = CombinePath("/Areas/", "{2}");
             // Areas/{2}/Pages/
@@ -46,17 +55,28 @@ namespace Microsoft.Extensions.DependencyInjection
             // Areas/{2}/Views/Shared/{0}.cshtml
             // Pages/Shared/{0}.cshtml
             // Views/Shared/{0}.cshtml
-            var areaSearchPath = CombinePath(areaPagesDirectory, "{1}/{0}" + RazorViewEngine.ViewExtension);
+            var areaSearchPath = CombinePath(
+                areaPagesDirectory,
+                "{1}/{0}" + RazorViewEngine.ViewExtension
+            );
             options.AreaPageViewLocationFormats.Add(areaSearchPath);
 
-            var areaPagesSharedSearchPath = CombinePath(areaPagesDirectory, "Shared/{0}" + RazorViewEngine.ViewExtension);
+            var areaPagesSharedSearchPath = CombinePath(
+                areaPagesDirectory,
+                "Shared/{0}" + RazorViewEngine.ViewExtension
+            );
             options.AreaPageViewLocationFormats.Add(areaPagesSharedSearchPath);
 
-            var areaViewsSharedSearchPath = CombinePath(areaDirectory, "Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+            var areaViewsSharedSearchPath = CombinePath(
+                areaDirectory,
+                "Views/Shared/{0}" + RazorViewEngine.ViewExtension
+            );
             options.AreaPageViewLocationFormats.Add(areaViewsSharedSearchPath);
 
             options.AreaPageViewLocationFormats.Add(pagesSharedDirectory);
-            options.AreaPageViewLocationFormats.Add("/Views/Shared/{0}" + RazorViewEngine.ViewExtension);
+            options.AreaPageViewLocationFormats.Add(
+                "/Views/Shared/{0}" + RazorViewEngine.ViewExtension
+            );
 
             options.ViewLocationFormats.Add(pagesSharedDirectory);
             options.AreaViewLocationFormats.Add(pagesSharedDirectory);
@@ -66,11 +86,17 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private static string CombinePath(string path1, string path2)
         {
-            if (path1.EndsWith("/", StringComparison.Ordinal) || path2.StartsWith("/", StringComparison.Ordinal))
+            if (
+                path1.EndsWith("/", StringComparison.Ordinal)
+                || path2.StartsWith("/", StringComparison.Ordinal)
+            )
             {
                 return path1 + path2;
             }
-            else if (path1.EndsWith("/", StringComparison.Ordinal) && path2.StartsWith("/", StringComparison.Ordinal))
+            else if (
+                path1.EndsWith("/", StringComparison.Ordinal)
+                && path2.StartsWith("/", StringComparison.Ordinal)
+            )
             {
                 return path1 + path2.Substring(1);
             }

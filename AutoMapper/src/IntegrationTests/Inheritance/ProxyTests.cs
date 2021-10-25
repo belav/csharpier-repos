@@ -14,11 +14,15 @@
         {
             Database.SetInitializer(new Initializer());
 
-            var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<TrainingCourse, TrainingCourseDto>().Include<TrainingCourse, ParentTrainingCourseDto>();
-                cfg.CreateMap<TrainingCourse, ParentTrainingCourseDto>();
-                cfg.CreateMap<TrainingContent, TrainingContentDto>();
-            });
+            var config = new MapperConfiguration(
+                cfg =>
+                {
+                    cfg.CreateMap<TrainingCourse, TrainingCourseDto>()
+                        .Include<TrainingCourse, ParentTrainingCourseDto>();
+                    cfg.CreateMap<TrainingCourse, ParentTrainingCourseDto>();
+                    cfg.CreateMap<TrainingContent, TrainingContentDto>();
+                }
+            );
             config.AssertConfigurationIsValid();
 
             var context = new ClientContext();
@@ -41,9 +45,7 @@
 
         class ClientContext : DbContext
         {
-            public ClientContext()
-            {
-            }
+            public ClientContext() { }
 
             public DbSet<TrainingCourse> TrainingCourses { get; set; }
             public DbSet<TrainingContent> TrainingContents { get; set; }
@@ -71,9 +73,7 @@
 
         public class TrainingContent
         {
-            public TrainingContent()
-            {
-            }
+            public TrainingContent() { }
 
             [Key]
             public int ContentId { get; set; }
@@ -81,7 +81,6 @@
             public string ContentName { get; set; }
 
             public virtual TrainingCourse Course { get; set; }
-
             //  public int CourseId { get; set; }
 
         }
@@ -108,7 +107,6 @@
             public string ContentName { get; set; }
 
             public ParentTrainingCourseDto Course { get; set; }
-
             //  public int CourseId { get; set; }
         }
     }

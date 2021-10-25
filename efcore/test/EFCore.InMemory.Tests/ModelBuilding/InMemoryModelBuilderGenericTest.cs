@@ -16,14 +16,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
     {
         public class InMemoryGenericNonRelationship : GenericNonRelationship
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(InMemoryTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(InMemoryTestHelpers.Instance);
         }
 
         public class InMemoryGenericInheritance : GenericInheritance
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(InMemoryTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(InMemoryTestHelpers.Instance);
         }
 
         public class InMemoryGenericOneToMany : GenericOneToMany
@@ -33,30 +33,39 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<ModifierGroupHeader>()
-                    .HasKey(
-                        x => new { x.GroupHeaderId, x.AccountId });
+                modelBuilder
+                    .Entity<ModifierGroupHeader>()
+                    .HasKey(x => new { x.GroupHeaderId, x.AccountId });
 
-                modelBuilder.Entity<ModifierGroupHeader>()
+                modelBuilder
+                    .Entity<ModifierGroupHeader>()
                     .HasOne(x => x.ModifierGroupHeader2)
                     .WithMany(x => x.ModifierGroupHeader1)
-                    .HasForeignKey(
-                        x => new { x.LinkedGroupHeaderId, x.AccountId });
+                    .HasForeignKey(x => new { x.LinkedGroupHeaderId, x.AccountId });
 
-                var contextOptions = new DbContextOptionsBuilder()
-                    .UseModel(modelBuilder.Model.FinalizeModel())
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider)
-                    .UseInMemoryDatabase("Can_use_self_referencing_overlapping_FK_PK", b => b.EnableNullabilityCheck(false))
-                    .Options;
+                var contextOptions =
+                    new DbContextOptionsBuilder()
+                        .UseModel(modelBuilder.Model.FinalizeModel())
+                        .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider)
+                        .UseInMemoryDatabase(
+                            "Can_use_self_referencing_overlapping_FK_PK",
+                            b => b.EnableNullabilityCheck(false)
+                        ).Options;
 
                 using (var context = new DbContext(contextOptions))
                 {
-                    var parent = context.Add(
-                        new ModifierGroupHeader { GroupHeaderId = 77, AccountId = 90 }).Entity;
-                    var child1 = context.Add(
-                        new ModifierGroupHeader { GroupHeaderId = 78, AccountId = 90 }).Entity;
-                    var child2 = context.Add(
-                        new ModifierGroupHeader { GroupHeaderId = 79, AccountId = 90 }).Entity;
+                    var parent =
+                        context.Add(
+                            new ModifierGroupHeader { GroupHeaderId = 77, AccountId = 90 }
+                        ).Entity;
+                    var child1 =
+                        context.Add(
+                            new ModifierGroupHeader { GroupHeaderId = 78, AccountId = 90 }
+                        ).Entity;
+                    var child2 =
+                        context.Add(
+                            new ModifierGroupHeader { GroupHeaderId = 79, AccountId = 90 }
+                        ).Entity;
 
                     child1.ModifierGroupHeader2 = parent;
                     child2.ModifierGroupHeader2 = parent;
@@ -68,9 +77,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 using (var context = new DbContext(contextOptions))
                 {
-                    var parent = context.Set<ModifierGroupHeader>().Single(e => e.GroupHeaderId == 77);
-                    var child1 = context.Set<ModifierGroupHeader>().Single(e => e.GroupHeaderId == 78);
-                    var child2 = context.Set<ModifierGroupHeader>().Single(e => e.GroupHeaderId == 79);
+                    var parent = context
+                        .Set<ModifierGroupHeader>()
+                        .Single(e => e.GroupHeaderId == 77);
+                    var child1 = context
+                        .Set<ModifierGroupHeader>()
+                        .Single(e => e.GroupHeaderId == 78);
+                    var child2 = context
+                        .Set<ModifierGroupHeader>()
+                        .Single(e => e.GroupHeaderId == 79);
 
                     AssertGraph(parent, child1, child2);
                 }
@@ -79,7 +94,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             private static void AssertGraph(
                 ModifierGroupHeader parent,
                 ModifierGroupHeader child1,
-                ModifierGroupHeader child2)
+                ModifierGroupHeader child2
+            )
             {
                 Assert.Equal(new[] { child1, child2 }, parent.ModifierGroupHeader1.ToArray());
                 Assert.Same(parent, child1.ModifierGroupHeader2);
@@ -134,20 +150,20 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 public bool? IsFollowSet { get; set; }
 
-                public virtual ICollection<ModifierGroupHeader> ModifierGroupHeader1 { get; set; }
-                    = new HashSet<ModifierGroupHeader>();
+                public virtual ICollection<ModifierGroupHeader> ModifierGroupHeader1 { get; set; } =
+                    new HashSet<ModifierGroupHeader>();
 
                 public virtual ModifierGroupHeader ModifierGroupHeader2 { get; set; }
             }
 
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(InMemoryTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(InMemoryTestHelpers.Instance);
         }
 
         public class InMemoryGenericManyToOne : GenericManyToOne
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(InMemoryTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(InMemoryTestHelpers.Instance);
         }
 
         public class InMemoryGenericOneToOne : GenericOneToOne
@@ -160,28 +176,26 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<Node>(
                     b =>
                     {
-                        b.HasKey(
-                            e => new { e.ListId, e.PreviousNodeId });
+                        b.HasKey(e => new { e.ListId, e.PreviousNodeId });
                         b.HasOne(e => e.NextNode)
                             .WithOne(e => e.PreviousNode)
-                            .HasForeignKey<Node>(
-                                e => new { e.ListId, e.NextNodeId });
-                    });
+                            .HasForeignKey<Node>(e => new { e.ListId, e.NextNodeId });
+                    }
+                );
 
-                var contextOptions = new DbContextOptionsBuilder()
-                    .UseModel(modelBuilder.Model.FinalizeModel())
-                    .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
-                    .UseInMemoryDatabase("Can_use_self_referencing_overlapping_FK_PK_one_to_one")
-                    .Options;
+                var contextOptions =
+                    new DbContextOptionsBuilder()
+                        .UseModel(modelBuilder.Model.FinalizeModel())
+                        .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
+                        .UseInMemoryDatabase(
+                            "Can_use_self_referencing_overlapping_FK_PK_one_to_one"
+                        ).Options;
 
                 using (var context = new DbContext(contextOptions))
                 {
-                    var node1 = context.Add(
-                        new Node { ListId = 90, PreviousNodeId = 77 }).Entity;
-                    var node2 = context.Add(
-                        new Node { ListId = 90, PreviousNodeId = 78 }).Entity;
-                    var node3 = context.Add(
-                        new Node { ListId = 90, PreviousNodeId = 79 }).Entity;
+                    var node1 = context.Add(new Node { ListId = 90, PreviousNodeId = 77 }).Entity;
+                    var node2 = context.Add(new Node { ListId = 90, PreviousNodeId = 78 }).Entity;
+                    var node3 = context.Add(new Node { ListId = 90, PreviousNodeId = 79 }).Entity;
 
                     node1.NextNode = node2;
                     node3.PreviousNode = node2;
@@ -231,14 +245,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 public Node NextNode { get; set; }
             }
 
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(InMemoryTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(InMemoryTestHelpers.Instance);
         }
 
         public class InMemoryGenericOwnedTypes : GenericOwnedTypes
         {
-            protected override TestModelBuilder CreateModelBuilder()
-                => CreateTestModelBuilder(InMemoryTestHelpers.Instance);
+            protected override TestModelBuilder CreateModelBuilder() =>
+                CreateTestModelBuilder(InMemoryTestHelpers.Instance);
         }
     }
 }

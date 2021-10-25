@@ -17,7 +17,6 @@ using System.Runtime.InteropServices;
 
 namespace BigFrames
 {
-
     [StructLayout(LayoutKind.Explicit)]
     public struct LargeStruct
     {
@@ -40,7 +39,18 @@ namespace BigFrames
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void SmallArgSpace(long i1, long i2, long i3, long i4, long i5, long i6, long i7, long i8, long i9, long i10)
+        public static void SmallArgSpace(
+            long i1,
+            long i2,
+            long i3,
+            long i4,
+            long i5,
+            long i6,
+            long i7,
+            long i8,
+            long i9,
+            long i10
+        )
         {
             long result = i1 + i2 + i3 + i4 + i5 + i6 + i7 + i8 + i9 + i10;
             Console.Write("SmallArgSpace: ");
@@ -58,12 +68,13 @@ namespace BigFrames
 
             // Localloc some space; this moves the outgoing argument space.
 
-            if (n < 1) n = 1;
+            if (n < 1)
+                n = 1;
             int* a = stackalloc int[n * 4096];
             a[0] = 7;
             int i;
 
-            for (i=1; i < 5; ++i)
+            for (i = 1; i < 5; ++i)
             {
                 a[i] = i + a[i - 1];
             }
@@ -77,9 +88,7 @@ namespace BigFrames
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void Escape(ref LargeStruct s)
-        {
-        }
+        public static void Escape(ref LargeStruct s) { }
 
         public static int Main()
         {

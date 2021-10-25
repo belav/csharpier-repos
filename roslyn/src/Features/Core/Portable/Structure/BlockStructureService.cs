@@ -17,15 +17,18 @@ namespace Microsoft.CodeAnalysis.Structure
         /// <summary>
         /// Gets the service corresponding to the specified document.
         /// </summary>
-        public static BlockStructureService GetService(Document document)
-            => document.GetLanguageService<BlockStructureService>();
+        public static BlockStructureService GetService(Document document) =>
+            document.GetLanguageService<BlockStructureService>();
 
         /// <summary>
         /// The language from <see cref="LanguageNames"/> this service corresponds to.
         /// </summary>
         public abstract string Language { get; }
 
-        public abstract Task<BlockStructure> GetBlockStructureAsync(Document document, CancellationToken cancellationToken);
+        public abstract Task<BlockStructure> GetBlockStructureAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Gets the <see cref="BlockStructure"/> for the provided document. Note that the
@@ -33,7 +36,10 @@ namespace Microsoft.CodeAnalysis.Structure
         /// and blocking on the async operation. Subclasses should provide more efficient
         /// implementations that do not block on async operations if possible.
         /// </summary>
-        public virtual BlockStructure GetBlockStructure(Document document, CancellationToken cancellationToken)
-            => GetBlockStructureAsync(document, cancellationToken).WaitAndGetResult(cancellationToken);
+        public virtual BlockStructure GetBlockStructure(
+            Document document,
+            CancellationToken cancellationToken
+        ) =>
+            GetBlockStructureAsync(document, cancellationToken).WaitAndGetResult(cancellationToken);
     }
 }

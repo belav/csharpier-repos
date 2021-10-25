@@ -11,8 +11,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         internal readonly DebugDataTipInfo UnderlyingObject;
 
-        public VSTypeScriptDebugDataTipInfoWrapper(TextSpan span, string text)
-            => UnderlyingObject = new DebugDataTipInfo(span, text);
+        public VSTypeScriptDebugDataTipInfoWrapper(TextSpan span, string text) =>
+            UnderlyingObject = new DebugDataTipInfo(span, text);
 
         public readonly TextSpan Span => UnderlyingObject.Span;
         public readonly string Text => UnderlyingObject.Text;

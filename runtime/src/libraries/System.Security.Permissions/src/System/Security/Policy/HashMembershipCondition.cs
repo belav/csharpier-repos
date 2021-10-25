@@ -6,13 +6,24 @@ using System.Security.Cryptography;
 
 namespace System.Security.Policy
 {
-    public sealed partial class HashMembershipCondition : IDeserializationCallback, ISerializable, ISecurityEncodable, ISecurityPolicyEncodable, IMembershipCondition
+    public sealed partial class HashMembershipCondition
+        : IDeserializationCallback,
+          ISerializable,
+          ISecurityEncodable,
+          ISecurityPolicyEncodable,
+          IMembershipCondition
     {
         public HashMembershipCondition(HashAlgorithm hashAlg, byte[] value) { }
         public HashAlgorithm HashAlgorithm { get; set; }
         public byte[] HashValue { get; set; }
-        public bool Check(Evidence evidence) { return false; }
-        public IMembershipCondition Copy() { return this; }
+        public bool Check(Evidence evidence)
+        {
+            return false;
+        }
+        public IMembershipCondition Copy()
+        {
+            return this;
+        }
         public override bool Equals(object o) => base.Equals(o);
         public void FromXml(SecurityElement e) { }
         public void FromXml(SecurityElement e, PolicyLevel level) { }
@@ -24,7 +35,13 @@ namespace System.Security.Policy
         }
 
         public override string ToString() => base.ToString();
-        public SecurityElement ToXml() { return default(SecurityElement); }
-        public SecurityElement ToXml(PolicyLevel level) { return default(SecurityElement); }
+        public SecurityElement ToXml()
+        {
+            return default(SecurityElement);
+        }
+        public SecurityElement ToXml(PolicyLevel level)
+        {
+            return default(SecurityElement);
+        }
     }
 }

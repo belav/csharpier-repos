@@ -20,10 +20,13 @@ namespace Microsoft.CodeAnalysis
 
             public DiagnosticWithProgrammaticSuppression(
                 Diagnostic originalUnsuppressedDiagnostic,
-                ProgrammaticSuppressionInfo programmaticSuppressionInfo)
+                ProgrammaticSuppressionInfo programmaticSuppressionInfo
+            )
             {
                 RoslynDebug.Assert(!originalUnsuppressedDiagnostic.IsSuppressed);
-                RoslynDebug.Assert(originalUnsuppressedDiagnostic.ProgrammaticSuppressionInfo == null);
+                RoslynDebug.Assert(
+                    originalUnsuppressedDiagnostic.ProgrammaticSuppressionInfo == null
+                );
                 RoslynDebug.Assert(programmaticSuppressionInfo != null);
 
                 _originalUnsuppressedDiagnostic = originalUnsuppressedDiagnostic;
@@ -40,8 +43,8 @@ namespace Microsoft.CodeAnalysis
                 get { return Descriptor.Id; }
             }
 
-            public override string GetMessage(IFormatProvider? formatProvider = null)
-                => _originalUnsuppressedDiagnostic.GetMessage(formatProvider);
+            public override string GetMessage(IFormatProvider? formatProvider = null) =>
+                _originalUnsuppressedDiagnostic.GetMessage(formatProvider);
 
             internal override IReadOnlyList<object?> Arguments
             {
@@ -96,8 +99,10 @@ namespace Microsoft.CodeAnalysis
                     return false;
                 }
 
-                return Equals(_originalUnsuppressedDiagnostic, other._originalUnsuppressedDiagnostic) &&
-                    Equals(_programmaticSuppressionInfo, other._programmaticSuppressionInfo);
+                return Equals(
+                        _originalUnsuppressedDiagnostic,
+                        other._originalUnsuppressedDiagnostic
+                    ) && Equals(_programmaticSuppressionInfo, other._programmaticSuppressionInfo);
             }
 
             public override bool Equals(object? obj)
@@ -107,7 +112,10 @@ namespace Microsoft.CodeAnalysis
 
             public override int GetHashCode()
             {
-                return Hash.Combine(_originalUnsuppressedDiagnostic.GetHashCode(), _programmaticSuppressionInfo.GetHashCode());
+                return Hash.Combine(
+                    _originalUnsuppressedDiagnostic.GetHashCode(),
+                    _programmaticSuppressionInfo.GetHashCode()
+                );
             }
 
             internal override Diagnostic WithLocation(Location location)
@@ -119,7 +127,10 @@ namespace Microsoft.CodeAnalysis
 
                 if (this.Location != location)
                 {
-                    return new DiagnosticWithProgrammaticSuppression(_originalUnsuppressedDiagnostic.WithLocation(location), _programmaticSuppressionInfo);
+                    return new DiagnosticWithProgrammaticSuppression(
+                        _originalUnsuppressedDiagnostic.WithLocation(location),
+                        _programmaticSuppressionInfo
+                    );
                 }
 
                 return this;
@@ -129,7 +140,10 @@ namespace Microsoft.CodeAnalysis
             {
                 if (this.Severity != severity)
                 {
-                    return new DiagnosticWithProgrammaticSuppression(_originalUnsuppressedDiagnostic.WithSeverity(severity), _programmaticSuppressionInfo);
+                    return new DiagnosticWithProgrammaticSuppression(
+                        _originalUnsuppressedDiagnostic.WithSeverity(severity),
+                        _programmaticSuppressionInfo
+                    );
                 }
 
                 return this;

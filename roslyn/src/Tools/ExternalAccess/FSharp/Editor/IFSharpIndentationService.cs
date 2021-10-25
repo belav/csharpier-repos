@@ -48,6 +48,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         /// <see langword="null"/> if the line in question is not blank and thus indentation should
         /// be deferred to the formatting command handler to handle.
         /// </summary>
-        FSharpIndentationResult? GetDesiredIndentation(Document document, int lineNumber, CancellationToken cancellationToken);
+        FSharpIndentationResult? GetDesiredIndentation(
+            Document document,
+            int lineNumber,
+            CancellationToken cancellationToken
+        );
     }
 }

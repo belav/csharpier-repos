@@ -13,10 +13,7 @@ namespace System.Buffers
 
         public BufferSegment Append(Memory<byte> memory)
         {
-            var segment = new BufferSegment(memory)
-            {
-                RunningIndex = RunningIndex + Memory.Length
-            };
+            var segment = new BufferSegment(memory) { RunningIndex = RunningIndex + Memory.Length };
             Next = segment;
             return segment;
         }

@@ -21,7 +21,11 @@ internal static partial class Interop
             static unsafe void Initialize()
             {
                 WSAData d;
-                SocketError errorCode = WSAStartup(0x0202 /* 2.2 */, &d);
+                SocketError errorCode = WSAStartup(
+                    0x0202 /* 2.2 */
+                    ,
+                    &d
+                );
 
                 if (errorCode != SocketError.Success)
                 {
@@ -40,7 +44,10 @@ internal static partial class Interop
         }
 
         [DllImport(Libraries.Ws2_32)]
-        private static extern unsafe SocketError WSAStartup(short wVersionRequested, WSAData* lpWSAData);
+        private static extern unsafe SocketError WSAStartup(
+            short wVersionRequested,
+            WSAData* lpWSAData
+        );
 
         [DllImport(Libraries.Ws2_32)]
         private static extern SocketError WSACleanup();

@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             IModelMetadataProvider modelMetadataProvider,
             IEnumerable<IFilterProvider> filterProviders,
             IControllerFactoryProvider factoryProvider,
-            IOptions<MvcOptions> mvcOptions)
+            IOptions<MvcOptions> mvcOptions
+        )
         {
             _parameterBinder = parameterBinder;
             _modelBinderFactory = modelBinderFactory;
@@ -38,7 +39,9 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             _mvcOptions = mvcOptions.Value;
         }
 
-        public (ControllerActionInvokerCacheEntry cacheEntry, IFilterMetadata[] filters) GetCachedResult(ControllerContext controllerContext)
+        public (ControllerActionInvokerCacheEntry cacheEntry, IFilterMetadata[] filters) GetCachedResult(
+            ControllerContext controllerContext
+        )
         {
             var actionDescriptor = controllerContext.ActionDescriptor;
 
@@ -49,25 +52,35 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             // We don't care about thread safety here
             if (cacheEntry is null)
             {
-                var filterFactoryResult = FilterFactory.GetAllFilters(_filterProviders, controllerContext);
+                var filterFactoryResult = FilterFactory.GetAllFilters(
+                    _filterProviders,
+                    controllerContext
+                );
                 filters = filterFactoryResult.Filters;
 
-                var parameterDefaultValues = ParameterDefaultValues
-                    .GetParameterDefaultValues(actionDescriptor.MethodInfo);
+                var parameterDefaultValues = ParameterDefaultValues.GetParameterDefaultValues(
+                    actionDescriptor.MethodInfo
+                );
 
                 var objectMethodExecutor = ObjectMethodExecutor.Create(
                     actionDescriptor.MethodInfo,
                     actionDescriptor.ControllerTypeInfo,
-                    parameterDefaultValues);
+                    parameterDefaultValues
+                );
 
-                var controllerFactory = _controllerFactoryProvider.CreateControllerFactory(actionDescriptor);
-                var controllerReleaser = _controllerFactoryProvider.CreateAsyncControllerReleaser(actionDescriptor);
+                var controllerFactory = _controllerFactoryProvider.CreateControllerFactory(
+                    actionDescriptor
+                );
+                var controllerReleaser = _controllerFactoryProvider.CreateAsyncControllerReleaser(
+                    actionDescriptor
+                );
                 var propertyBinderFactory = ControllerBinderDelegateProvider.CreateBinderDelegate(
                     _parameterBinder,
                     _modelBinderFactory,
                     _modelMetadataProvider,
                     actionDescriptor,
-                    _mvcOptions);
+                    _mvcOptions
+                );
 
                 var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
@@ -77,14 +90,19 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                     controllerReleaser,
                     propertyBinderFactory,
                     objectMethodExecutor,
-                    actionMethodExecutor);
+                    actionMethodExecutor
+                );
 
                 actionDescriptor.CacheEntry = cacheEntry;
             }
             else
             {
                 // Filter instances from statically defined filter descriptors + from filter providers
-                filters = FilterFactory.CreateUncachedFilters(_filterProviders, controllerContext, cacheEntry.CachedFilters);
+                filters = FilterFactory.CreateUncachedFilters(
+                    _filterProviders,
+                    controllerContext,
+                    cacheEntry.CachedFilters
+                );
             }
 
             return (cacheEntry, filters);

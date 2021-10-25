@@ -43,8 +43,13 @@ namespace System.Web.Http.ExceptionHandling
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             Task expectedTask = CreateCompletedTask();
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(expectedTask);
             IExceptionHandler innerHander = mock.Object;
 
@@ -62,24 +67,36 @@ namespace System.Web.Http.ExceptionHandling
                 // Assert
                 Assert.Same(expectedTask, task);
                 await task;
-                mock.Verify(h => h.HandleAsync(expectedContext, expectedCancellationToken), Times.Once());
+                mock.Verify(
+                    h => h.HandleAsync(expectedContext, expectedCancellationToken),
+                    Times.Once()
+                );
             }
         }
 
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task HandleAsync_IfIsTopLevelCatchBlockAndCanCreateExceptionResult_InitializesResult(bool includeDetail)
+        public async Task HandleAsync_IfIsTopLevelCatchBlockAndCanCreateExceptionResult_InitializesResult(
+            bool includeDetail
+        )
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             IHttpActionResult result = null;
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
-                .Returns<ExceptionHandlerContext, CancellationToken>((c, i) =>
-                {
-                    result = c != null ? c.Result : null;
-                    return Task.FromResult(0);
-                });
+            mock.Setup(
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Returns<ExceptionHandlerContext, CancellationToken>(
+                    (c, i) =>
+                    {
+                        result = c != null ? c.Result : null;
+                        return Task.FromResult(0);
+                    }
+                );
             IExceptionHandler innerHander = mock.Object;
 
             IExceptionHandler product = CreateProductUnderTest(innerHander);
@@ -90,22 +107,27 @@ namespace System.Web.Http.ExceptionHandling
             using (HttpConfiguration configuration = CreateConfiguration())
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                configuration.Services.Replace(typeof(IContentNegotiator), expectedContentNegotiator);
+                configuration.Services.Replace(
+                    typeof(IContentNegotiator),
+                    expectedContentNegotiator
+                );
                 configuration.Formatters.Clear();
                 MediaTypeFormatter expectedFormatter = CreateDummyFormatter();
                 configuration.Formatters.Add(expectedFormatter);
 
-                ExceptionHandlerContext context = new ExceptionHandlerContext(new ExceptionContext(
-                    exception: expectedException,
-                    catchBlock: CreateTopLevelCatchBlock(),
-                    request: expectedRequest)
-                {
-                    RequestContext = new HttpRequestContext
-                                    {
-                                        Configuration = configuration,
-                                        IncludeErrorDetail = includeDetail
-                                    },
-                });
+                ExceptionHandlerContext context = new ExceptionHandlerContext(
+                    new ExceptionContext(
+                        exception: expectedException,
+                        catchBlock: CreateTopLevelCatchBlock(),
+                        request: expectedRequest
+                    ) {
+                        RequestContext = new HttpRequestContext
+                        {
+                            Configuration = configuration,
+                            IncludeErrorDetail = includeDetail
+                        },
+                    }
+                );
 
                 CancellationToken cancellationToken = CancellationToken.None;
 
@@ -136,13 +158,10 @@ namespace System.Web.Http.ExceptionHandling
                 ExceptionContext context = new ExceptionContext(
                     exception,
                     CreateNonTopLevelCatchBlock(),
-                    request)
-                    {
-                        RequestContext = new HttpRequestContext
-                                        {
-                                            Configuration = configuration
-                                        },
-                    };
+                    request
+                ) {
+                    RequestContext = new HttpRequestContext { Configuration = configuration },
+                };
 
                 // More Arrange; then Act & Assert
                 await TestHandleAsyncLeavesResultNull(context);
@@ -169,12 +188,9 @@ namespace System.Web.Http.ExceptionHandling
             {
                 ExceptionContext context = new ExceptionContext(
                     exception,
-                    CreateTopLevelCatchBlock())
-                {
-                    RequestContext = new HttpRequestContext
-                    {
-                        Configuration = configuration
-                    },
+                    CreateTopLevelCatchBlock()
+                ) {
+                    RequestContext = new HttpRequestContext { Configuration = configuration },
                     Request = null
                 };
 
@@ -193,8 +209,8 @@ namespace System.Web.Http.ExceptionHandling
             {
                 ExceptionContext context = new ExceptionContext(
                     exception,
-                    CreateTopLevelCatchBlock())
-                {
+                    CreateTopLevelCatchBlock()
+                ) {
                     RequestContext = null,
                     Request = request
                 };
@@ -214,12 +230,9 @@ namespace System.Web.Http.ExceptionHandling
             {
                 ExceptionContext context = new ExceptionContext(
                     exception,
-                    CreateTopLevelCatchBlock())
-                {
-                    RequestContext = new HttpRequestContext
-                    {
-                        Configuration = null
-                    },
+                    CreateTopLevelCatchBlock()
+                ) {
+                    RequestContext = new HttpRequestContext { Configuration = null },
                     Request = request
                 };
 
@@ -241,12 +254,9 @@ namespace System.Web.Http.ExceptionHandling
 
                 ExceptionContext context = new ExceptionContext(
                     exception,
-                    CreateTopLevelCatchBlock())
-                {
-                    RequestContext = new HttpRequestContext
-                    {
-                        Configuration = configuration
-                    },
+                    CreateTopLevelCatchBlock()
+                ) {
+                    RequestContext = new HttpRequestContext { Configuration = configuration },
                     Request = request
                 };
 
@@ -264,13 +274,20 @@ namespace System.Web.Http.ExceptionHandling
         {
             Mock<IExceptionHandler> mock = new Mock<IExceptionHandler>(MockBehavior.Strict);
             IHttpActionResult result = null;
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
-                .Returns<ExceptionHandlerContext, CancellationToken>((c, i) =>
-                {
-                    result = c != null ? c.Result : null;
-                    return Task.FromResult(0);
-                });
+            mock.Setup(
+                    h =>
+                        h.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
+                .Returns<ExceptionHandlerContext, CancellationToken>(
+                    (c, i) =>
+                    {
+                        result = c != null ? c.Result : null;
+                        return Task.FromResult(0);
+                    }
+                );
             IExceptionHandler innerHander = mock.Object;
 
             IExceptionHandler product = CreateProductUnderTest(innerHander);
@@ -338,10 +355,16 @@ namespace System.Web.Http.ExceptionHandling
 
         private static ExceptionContextCatchBlock CreateNonTopLevelCatchBlock()
         {
-            return new ExceptionContextCatchBlock("IgnoreCaughtAt", isTopLevel: false, callsHandler: false);
+            return new ExceptionContextCatchBlock(
+                "IgnoreCaughtAt",
+                isTopLevel: false,
+                callsHandler: false
+            );
         }
 
-        private static LastChanceExceptionHandler CreateProductUnderTest(IExceptionHandler innerHandler)
+        private static LastChanceExceptionHandler CreateProductUnderTest(
+            IExceptionHandler innerHandler
+        )
         {
             return new LastChanceExceptionHandler(innerHandler);
         }
@@ -353,7 +376,11 @@ namespace System.Web.Http.ExceptionHandling
 
         private static ExceptionContextCatchBlock CreateTopLevelCatchBlock()
         {
-            return new ExceptionContextCatchBlock("IgnoreCaughtAt", isTopLevel: true, callsHandler: false);
+            return new ExceptionContextCatchBlock(
+                "IgnoreCaughtAt",
+                isTopLevel: true,
+                callsHandler: false
+            );
         }
     }
 }

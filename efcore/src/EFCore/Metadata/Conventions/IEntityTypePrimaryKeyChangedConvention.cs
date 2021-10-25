@@ -21,6 +21,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions
             IConventionEntityTypeBuilder entityTypeBuilder,
             IConventionKey? newPrimaryKey,
             IConventionKey? previousPrimaryKey,
-            IConventionContext<IConventionKey> context);
+            IConventionContext<IConventionKey> context
+        );
     }
 }

@@ -22,21 +22,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
 {
     public class CSharpSuppressionAllCodeTests : AbstractSuppressionAllCodeTests
     {
-        private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService = EditorTestCompositions.EditorFeatures
-            .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
-            .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
+        private static readonly TestComposition s_compositionWithMockDiagnosticUpdateSourceRegistrationService =
+            EditorTestCompositions.EditorFeatures
+                .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
+                .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
-        protected override TestWorkspace CreateWorkspaceFromFile(string definition, ParseOptions parseOptions)
-            => TestWorkspace.CreateCSharp(definition, (CSharpParseOptions)parseOptions, composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService);
+        protected override TestWorkspace CreateWorkspaceFromFile(
+            string definition,
+            ParseOptions parseOptions
+        ) =>
+            TestWorkspace.CreateCSharp(
+                definition,
+                (CSharpParseOptions)parseOptions,
+                composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
+            );
 
-        internal override Tuple<Analyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => new Tuple<Analyzer, IConfigurationFixProvider>(new Analyzer(), new CSharpSuppressionCodeFixProvider());
+        internal override Tuple<
+            Analyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace) =>
+            new Tuple<Analyzer, IConfigurationFixProvider>(
+                new Analyzer(),
+                new CSharpSuppressionCodeFixProvider()
+            );
 
         [WorkItem(956453, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/956453")]
         [WorkItem(1007071, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1007071")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
-        public async Task TestPragmaWarningOnEveryNodes()
-            => await TestPragmaAsync(TestResource.AllInOneCSharpCode, CSharpParseOptions.Default, verifier: t => t.IndexOf("#pragma warning disable", StringComparison.Ordinal) >= 0);
+        public async Task TestPragmaWarningOnEveryNodes() =>
+            await TestPragmaAsync(
+                TestResource.AllInOneCSharpCode,
+                CSharpParseOptions.Default,
+                verifier: t => t.IndexOf("#pragma warning disable", StringComparison.Ordinal) >= 0
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsSuppression)]
         public async Task TestSuppressionWithAttributeOnEveryNodes()
@@ -45,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Suppression
                 TestResource.AllInOneCSharpCode,
                 CSharpParseOptions.Default,
                 digInto: n => !(n is StatementSyntax) || n is BlockSyntax,
-                verifier: t => t.IndexOf("SuppressMessage", StringComparison.Ordinal) >= 0);
+                verifier: t => t.IndexOf("SuppressMessage", StringComparison.Ordinal) >= 0
+            );
         }
     }
 }

@@ -16,7 +16,10 @@ namespace Microsoft.Extensions.StackTrace.Sources
 {
     internal class StackTraceHelper
     {
-        public static IList<StackFrameInfo> GetFrames(Exception exception, out AggregateException? error)
+        public static IList<StackFrameInfo> GetFrames(
+            Exception exception,
+            out AggregateException? error
+        )
         {
             if (exception == null)
             {
@@ -49,7 +52,12 @@ namespace Microsoft.Extensions.StackTrace.Sources
                     continue;
                 }
 
-                var stackFrame = new StackFrameInfo(frame.GetFileLineNumber(), frame.GetFileName(), frame, GetMethodDisplayString(frame.GetMethod()));
+                var stackFrame = new StackFrameInfo(
+                    frame.GetFileLineNumber(),
+                    frame.GetFileName(),
+                    frame,
+                    GetMethodDisplayString(frame.GetMethod())
+                );
                 frames.Add(stackFrame);
             }
 
@@ -77,8 +85,14 @@ namespace Microsoft.Extensions.StackTrace.Sources
             var methodName = method.Name;
 
             string? subMethod = null;
-            if (type != null && type.IsDefined(typeof(CompilerGeneratedAttribute)) &&
-                (typeof(IAsyncStateMachine).IsAssignableFrom(type) || typeof(IEnumerator).IsAssignableFrom(type)))
+            if (
+                type != null
+                && type.IsDefined(typeof(CompilerGeneratedAttribute))
+                && (
+                    typeof(IAsyncStateMachine).IsAssignableFrom(type)
+                    || typeof(IEnumerator).IsAssignableFrom(type)
+                )
+            )
             {
                 // Convert StateMachine methods to correct overload +MoveNext()
                 if (TryResolveStateMachineMethod(ref method, out type))
@@ -91,51 +105,82 @@ namespace Microsoft.Extensions.StackTrace.Sources
             // ResolveStateMachineMethod may have set declaringType to null
             if (type != null)
             {
-                declaringTypeName = TypeNameHelper.GetTypeDisplayName(type, includeGenericParameterNames: true);
+                declaringTypeName = TypeNameHelper.GetTypeDisplayName(
+                    type,
+                    includeGenericParameterNames: true
+                );
             }
 
             string? genericArguments = null;
             if (method.IsGenericMethod)
             {
-                genericArguments = "<" + string.Join(", ", method.GetGenericArguments()
-                    .Select(arg => TypeNameHelper.GetTypeDisplayName(arg, fullName: false, includeGenericParameterNames: true))) + ">";
+                genericArguments =
+                    "<"
+                    + string.Join(
+                        ", ",
+                        method
+                            .GetGenericArguments()
+                            .Select(
+                                arg =>
+                                    TypeNameHelper.GetTypeDisplayName(
+                                        arg,
+                                        fullName: false,
+                                        includeGenericParameterNames: true
+                                    )
+                            )
+                    )
+                    + ">";
             }
 
             // Method parameters
-            var parameters = method.GetParameters().Select(parameter =>
-            {
-                var parameterType = parameter.ParameterType;
-
-                var prefix = string.Empty;
-                if (parameter.IsOut)
-                {
-                    prefix = "out";
-                }
-                else if (parameterType != null && parameterType.IsByRef)
-                {
-                    prefix = "ref";
-                }
-
-                var parameterTypeString = "?";
-                if (parameterType != null)
-                {
-                    if (parameterType.IsByRef)
+            var parameters = method
+                .GetParameters()
+                .Select(
+                    parameter =>
                     {
-                        parameterType = parameterType.GetElementType();
+                        var parameterType = parameter.ParameterType;
+
+                        var prefix = string.Empty;
+                        if (parameter.IsOut)
+                        {
+                            prefix = "out";
+                        }
+                        else if (parameterType != null && parameterType.IsByRef)
+                        {
+                            prefix = "ref";
+                        }
+
+                        var parameterTypeString = "?";
+                        if (parameterType != null)
+                        {
+                            if (parameterType.IsByRef)
+                            {
+                                parameterType = parameterType.GetElementType();
+                            }
+
+                            parameterTypeString = TypeNameHelper.GetTypeDisplayName(
+                                parameterType!,
+                                fullName: false,
+                                includeGenericParameterNames: true
+                            );
+                        }
+
+                        return new ParameterDisplayInfo
+                        {
+                            Prefix = prefix,
+                            Name = parameter.Name,
+                            Type = parameterTypeString,
+                        };
                     }
+                );
 
-                    parameterTypeString = TypeNameHelper.GetTypeDisplayName(parameterType!, fullName: false, includeGenericParameterNames: true);
-                }
-
-                return new ParameterDisplayInfo
-                {
-                    Prefix = prefix,
-                    Name = parameter.Name,
-                    Type = parameterTypeString,
-                };
-            });
-
-            var methodDisplayInfo = new MethodDisplayInfo(declaringTypeName, method.Name, genericArguments, subMethod, parameters);
+            var methodDisplayInfo = new MethodDisplayInfo(
+                declaringTypeName,
+                method.Name,
+                genericArguments,
+                subMethod,
+                parameters
+            );
 
             return methodDisplayInfo;
         }
@@ -150,7 +195,6 @@ namespace Microsoft.Extensions.StackTrace.Sources
             {
                 return false;
             }
-
 
             var type = method.DeclaringType;
             if (type == null)
@@ -168,10 +212,12 @@ namespace Microsoft.Extensions.StackTrace.Sources
             {
                 return false;
             }
-            else if (type == typeof(TaskAwaiter) ||
-                type == typeof(TaskAwaiter<>) ||
-                type == typeof(ConfiguredTaskAwaitable.ConfiguredTaskAwaiter) ||
-                type == typeof(ConfiguredTaskAwaitable<>.ConfiguredTaskAwaiter))
+            else if (
+                type == typeof(TaskAwaiter)
+                || type == typeof(TaskAwaiter<>)
+                || type == typeof(ConfiguredTaskAwaitable.ConfiguredTaskAwaiter)
+                || type == typeof(ConfiguredTaskAwaitable<>.ConfiguredTaskAwaiter)
+            )
             {
                 switch (method.Name)
                 {
@@ -186,7 +232,10 @@ namespace Microsoft.Extensions.StackTrace.Sources
             return true;
         }
 
-        private static bool TryResolveStateMachineMethod(ref MethodBase method, out Type? declaringType)
+        private static bool TryResolveStateMachineMethod(
+            ref MethodBase method,
+            out Type? declaringType
+        )
         {
             Debug.Assert(method != null);
             Debug.Assert(method.DeclaringType != null);
@@ -199,7 +248,13 @@ namespace Microsoft.Extensions.StackTrace.Sources
                 return false;
             }
 
-            var methods = parentType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            var methods = parentType.GetMethods(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Static
+                    | BindingFlags.Instance
+                    | BindingFlags.DeclaredOnly
+            );
             if (methods == null)
             {
                 return false;

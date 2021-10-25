@@ -13,19 +13,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         // Should be large enough for any content attempting to write to the buffer
         private readonly byte[] _buffer = new byte[1024 * 128];
 
-        public override void Advance(int bytes)
-        {
-        }
+        public override void Advance(int bytes) { }
 
-        public override void CancelPendingFlush()
-        {
-        }
+        public override void CancelPendingFlush() { }
 
-        public override void Complete(Exception exception = null)
-        {
-        }
+        public override void Complete(Exception exception = null) { }
 
-        public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default)
+        public override ValueTask<FlushResult> FlushAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             return new ValueTask<FlushResult>(new FlushResult(false, true));
         }

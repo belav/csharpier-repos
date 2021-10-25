@@ -33,19 +33,16 @@ namespace Microsoft.AspNetCore.Mvc
                 PageHandler = "Bar"
             };
 
-            var ambientValues = new RouteValueDictionary()
-            {
-                ["page"] = "/Foo"
-            };
+            var ambientValues = new RouteValueDictionary() { ["page"] = "/Foo" };
 
-            var routeData = new RouteData(ambientValues)
-            {
-                Routers = { Mock.Of<IRouter>() }
-            };
+            var routeData = new RouteData(ambientValues) { Routers = { Mock.Of<IRouter>() } };
 
             var urlHelper = new MockUrlHelper(url: "/Foo?handler=Bar")
             {
-                ActionContext = GetActionContext(new ServiceCollection().BuildServiceProvider(), routeData)
+                ActionContext = GetActionContext(
+                    new ServiceCollection().BuildServiceProvider(),
+                    routeData
+                )
             };
 
             var validationContext = GetValidationContext(urlHelper);
@@ -71,19 +68,16 @@ namespace Microsoft.AspNetCore.Mvc
                 PageHandler = "Bar"
             };
 
-            var ambientValues = new RouteValueDictionary
-            {
-                ["page"] = "/Page"
-            };
+            var ambientValues = new RouteValueDictionary { ["page"] = "/Page" };
 
-            var routeData = new RouteData(ambientValues)
-            {
-                Routers = { Mock.Of<IRouter>() }
-            };
-            
+            var routeData = new RouteData(ambientValues) { Routers = { Mock.Of<IRouter>() } };
+
             var urlHelper = new MockUrlHelper(url: null)
             {
-                ActionContext = GetActionContext(new ServiceCollection().BuildServiceProvider(), routeData)
+                ActionContext = GetActionContext(
+                    new ServiceCollection().BuildServiceProvider(),
+                    routeData
+                )
             };
 
             var validationContext = GetValidationContext(urlHelper);
@@ -91,31 +85,26 @@ namespace Microsoft.AspNetCore.Mvc
             // Act && Assert
             ExceptionAssert.Throws<InvalidOperationException>(
                 () => testableAttribute.InvokeGetUrl(validationContext),
-                Resources.RemoteAttribute_NoUrlFound);
+                Resources.RemoteAttribute_NoUrlFound
+            );
         }
 
         [Fact]
         public void GetUrl_WhenPageNameIsNotSet_WillUsePageNameFromAmbientValues()
         {
             // Arrange
-            var testableAttribute = new TestablePageRemoteAttribute()
-            {
-                PageHandler = "Handler"
-            };
+            var testableAttribute = new TestablePageRemoteAttribute() { PageHandler = "Handler" };
 
-            var ambientValues = new RouteValueDictionary
-            {
-                ["page"] = "/Page"
-            };
+            var ambientValues = new RouteValueDictionary { ["page"] = "/Page" };
 
-            var routeData = new RouteData(ambientValues)
-            {
-                Routers = { Mock.Of<IRouter>() }
-            };
+            var routeData = new RouteData(ambientValues) { Routers = { Mock.Of<IRouter>() } };
 
             var urlHelper = new MockUrlHelper(url: "/Page?handler=Handler")
             {
-                ActionContext = GetActionContext(new ServiceCollection().BuildServiceProvider(), routeData)
+                ActionContext = GetActionContext(
+                    new ServiceCollection().BuildServiceProvider(),
+                    routeData
+                )
             };
 
             var validationContext = GetValidationContext(urlHelper);
@@ -139,14 +128,14 @@ namespace Microsoft.AspNetCore.Mvc
                 ["handler"] = "Handler"
             };
 
-            var routeData = new RouteData(ambientValues)
-            {
-                Routers = { Mock.Of<IRouter>() }
-            };
+            var routeData = new RouteData(ambientValues) { Routers = { Mock.Of<IRouter>() } };
 
             var urlHelper = new MockUrlHelper(url: "/Page?handler=Handler")
             {
-                ActionContext = GetActionContext(new ServiceCollection().BuildServiceProvider(), routeData)
+                ActionContext = GetActionContext(
+                    new ServiceCollection().BuildServiceProvider(),
+                    routeData
+                )
             };
 
             var validationContext = GetValidationContext(urlHelper);
@@ -157,8 +146,11 @@ namespace Microsoft.AspNetCore.Mvc
             // Assert
             Assert.Equal("/Page?handler=Handler", actualUrl);
         }
-        
-        private static ClientModelValidationContext GetValidationContext(IUrlHelper urlHelper, RouteData routeData = null)
+
+        private static ClientModelValidationContext GetValidationContext(
+            IUrlHelper urlHelper,
+            RouteData routeData = null
+        )
         {
             var serviceCollection = GetServiceCollection();
             var factory = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
@@ -167,52 +159,53 @@ namespace Microsoft.AspNetCore.Mvc
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var actionContext = GetActionContext(serviceProvider, routeData);
 
-            factory
-                .Setup(f => f.GetUrlHelper(actionContext))
-                .Returns(urlHelper);
+            factory.Setup(f => f.GetUrlHelper(actionContext)).Returns(urlHelper);
 
             var metadataProvider = new EmptyModelMetadataProvider();
             var metadata = metadataProvider.GetMetadataForProperty(
                 containerType: typeof(string),
-                propertyName: nameof(string.Length));
+                propertyName: nameof(string.Length)
+            );
 
             return new ClientModelValidationContext(
                 actionContext,
                 metadata,
                 metadataProvider,
-                new AttributeDictionary());
+                new AttributeDictionary()
+            );
         }
 
         private static ServiceCollection GetServiceCollection()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection
-                .AddSingleton<ILoggerFactory>(new NullLoggerFactory());
+            serviceCollection.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
             serviceCollection.AddOptions();
             serviceCollection.AddRouting();
 
             serviceCollection.AddSingleton<IInlineConstraintResolver>(
-                provider => new DefaultInlineConstraintResolver(provider.GetRequiredService<IOptions<RouteOptions>>(), provider));
+                provider =>
+                    new DefaultInlineConstraintResolver(
+                        provider.GetRequiredService<IOptions<RouteOptions>>(),
+                        provider
+                    )
+            );
 
             return serviceCollection;
         }
 
-        private static ActionContext GetActionContext(IServiceProvider serviceProvider, RouteData routeData)
+        private static ActionContext GetActionContext(
+            IServiceProvider serviceProvider,
+            RouteData routeData
+        )
         {
             // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
             // through the HttpContext.
-            var httpContext = new DefaultHttpContext
-            {
-                RequestServices = serviceProvider,
-            };
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider, };
 
             if (routeData == null)
             {
-                routeData = new RouteData
-                {
-                    Routers = { Mock.Of<IRouter>(), },
-                };
+                routeData = new RouteData { Routers = { Mock.Of<IRouter>(), }, };
             }
 
             return new ActionContext(httpContext, routeData, new ActionDescriptor());

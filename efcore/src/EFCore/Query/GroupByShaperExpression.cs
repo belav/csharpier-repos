@@ -24,9 +24,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// </summary>
         /// <param name="keySelector"> An expression representing key selector for the grouping element. </param>
         /// <param name="elementSelector"> An expression representing element selector for the grouping element. </param>
-        public GroupByShaperExpression(
-            Expression keySelector,
-            Expression elementSelector)
+        public GroupByShaperExpression(Expression keySelector, Expression elementSelector)
         {
             Check.NotNull(keySelector, nameof(keySelector));
             Check.NotNull(elementSelector, nameof(elementSelector));
@@ -46,12 +44,11 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual Expression ElementSelector { get; }
 
         /// <inheritdoc />
-        public override Type Type
-            => typeof(IGrouping<,>).MakeGenericType(KeySelector.Type, ElementSelector.Type);
+        public override Type Type =>
+            typeof(IGrouping<, >).MakeGenericType(KeySelector.Type, ElementSelector.Type);
 
         /// <inheritdoc />
-        public sealed override ExpressionType NodeType
-            => ExpressionType.Extension;
+        public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
         /// <inheritdoc />
         protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -71,14 +68,17 @@ namespace Microsoft.EntityFrameworkCore.Query
         /// <param name="keySelector"> The <see cref="KeySelector" /> property of the result. </param>
         /// <param name="elementSelector"> The <see cref="ElementSelector" /> property of the result. </param>
         /// <returns> This expression if no children changed, or an expression with the updated children. </returns>
-        public virtual GroupByShaperExpression Update(Expression keySelector, Expression elementSelector)
+        public virtual GroupByShaperExpression Update(
+            Expression keySelector,
+            Expression elementSelector
+        )
         {
             Check.NotNull(keySelector, nameof(keySelector));
             Check.NotNull(elementSelector, nameof(elementSelector));
 
             return keySelector != KeySelector || elementSelector != ElementSelector
-                ? new GroupByShaperExpression(keySelector, elementSelector)
-                : this;
+              ? new GroupByShaperExpression(keySelector, elementSelector)
+              : this;
         }
 
         /// <inheritdoc />

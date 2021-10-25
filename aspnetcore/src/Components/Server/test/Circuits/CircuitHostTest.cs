@@ -28,7 +28,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var remoteRenderer = GetRemoteRenderer();
             var circuitHost = TestCircuitHost.Create(
                 serviceScope: serviceScope.Object,
-                remoteRenderer: remoteRenderer);
+                remoteRenderer: remoteRenderer
+            );
 
             // Act
             await circuitHost.DisposeAsync();
@@ -53,7 +54,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var remoteRenderer = GetRemoteRenderer();
             var circuitHost = TestCircuitHost.Create(
                 serviceScope: serviceScope.Object,
-                remoteRenderer: remoteRenderer);
+                remoteRenderer: remoteRenderer
+            );
 
             // Act
             await circuitHost.DisposeAsync();
@@ -72,13 +74,16 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var serviceScope = new Mock<IServiceScope>();
             var handler = new Mock<CircuitHandler>();
             handler
-                .Setup(h => h.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()))
+                .Setup(
+                    h => h.OnCircuitClosedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())
+                )
                 .Throws<InvalidTimeZoneException>();
             var remoteRenderer = GetRemoteRenderer();
             var circuitHost = TestCircuitHost.Create(
                 serviceScope: serviceScope.Object,
                 remoteRenderer: remoteRenderer,
-                handlers: new[] { handler.Object });
+                handlers: new[] { handler.Object }
+            );
 
             var throwOnDisposeComponent = new ThrowOnDisposeComponent();
             circuitHost.Renderer.AssignRootComponentId(throwOnDisposeComponent);
@@ -100,7 +105,8 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var remoteRenderer = GetRemoteRenderer();
             var circuitHost = TestCircuitHost.Create(
                 serviceScope: serviceScope.Object,
-                remoteRenderer: remoteRenderer);
+                remoteRenderer: remoteRenderer
+            );
 
             var component = new DispatcherComponent(circuitHost.Renderer.Dispatcher);
             circuitHost.Renderer.AssignRootComponentId(component);
@@ -155,10 +161,15 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
-            var circuitHost = TestCircuitHost.Create(handlers: new[] { handler1.Object, handler2.Object });
+            var circuitHost = TestCircuitHost.Create(
+                handlers: new[] { handler1.Object, handler2.Object }
+            );
 
             // Act
-            await circuitHost.InitializeAsync(new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()), cancellationToken);
+            await circuitHost.InitializeAsync(
+                new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()),
+                cancellationToken
+            );
 
             // Assert
             handler1.VerifyAll();
@@ -174,7 +185,9 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             var reportedErrors = new List<UnhandledExceptionEventArgs>();
 
             handler
-                .Setup(h => h.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>()))
+                .Setup(
+                    h => h.OnCircuitOpenedAsync(It.IsAny<Circuit>(), It.IsAny<CancellationToken>())
+                )
                 .Returns(tcs.Task)
                 .Verifiable();
 
@@ -186,7 +199,10 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             };
 
             // Act
-            var initializeAsyncTask = circuitHost.InitializeAsync(new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()), new CancellationToken());
+            var initializeAsyncTask = circuitHost.InitializeAsync(
+                new ProtectedPrerenderComponentApplicationStore(Mock.Of<IDataProtectionProvider>()),
+                new CancellationToken()
+            );
 
             // Assert: No synchronous exceptions
             handler.VerifyAll();
@@ -239,7 +255,9 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
                 .Returns(Task.CompletedTask)
                 .Verifiable();
 
-            var circuitHost = TestCircuitHost.Create(handlers: new[] { handler1.Object, handler2.Object });
+            var circuitHost = TestCircuitHost.Create(
+                handlers: new[] { handler1.Object, handler2.Object }
+            );
 
             // Act
             await circuitHost.DisposeAsync();
@@ -251,23 +269,20 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
 
         private static TestRemoteRenderer GetRemoteRenderer()
         {
-            return new TestRemoteRenderer(
-                Mock.Of<IServiceProvider>(),
-                Mock.Of<IClientProxy>());
+            return new TestRemoteRenderer(Mock.Of<IServiceProvider>(), Mock.Of<IClientProxy>());
         }
 
         private class TestRemoteRenderer : RemoteRenderer
         {
             public TestRemoteRenderer(IServiceProvider serviceProvider, IClientProxy client)
                 : base(
-                      serviceProvider,
-                      NullLoggerFactory.Instance,
-                      new CircuitOptions(),
-                      new CircuitClientProxy(client, "connection"),
-                      NullLogger.Instance,
-                      null)
-            {
-            }
+                    serviceProvider,
+                    NullLoggerFactory.Instance,
+                    new CircuitOptions(),
+                    new CircuitClientProxy(client, "connection"),
+                    NullLogger.Instance,
+                    null
+                ) { }
 
             public bool Disposed { get; set; }
 
@@ -300,8 +315,7 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits
             public bool DidCallDispose { get; private set; }
             public void Attach(RenderHandle renderHandle) { }
 
-            public Task SetParametersAsync(ParameterView parameters)
-                => Task.CompletedTask;
+            public Task SetParametersAsync(ParameterView parameters) => Task.CompletedTask;
 
             public void Dispose()
             {

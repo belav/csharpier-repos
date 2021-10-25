@@ -35,7 +35,9 @@ namespace System.Net.NetworkInformation.Tests
 
                 Assert.Throws<PlatformNotSupportedException>(() => ipProperties.AnycastAddresses);
 
-                Assert.Throws<PlatformNotSupportedException>(() => ipProperties.DhcpServerAddresses);
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => ipProperties.DhcpServerAddresses
+                );
 
                 try
                 {
@@ -60,7 +62,9 @@ namespace System.Net.NetworkInformation.Tests
 
                 Assert.Throws<PlatformNotSupportedException>(() => ipProperties.IsDnsEnabled);
 
-                Assert.Throws<PlatformNotSupportedException>(() => ipProperties.IsDynamicDnsEnabled);
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => ipProperties.IsDynamicDnsEnabled
+                );
 
                 Assert.NotNull(ipProperties.MulticastAddresses);
                 _log.WriteLine("- Multicast Addresses: " + ipProperties.MulticastAddresses.Count);
@@ -76,10 +80,14 @@ namespace System.Net.NetworkInformation.Tests
                 foreach (UnicastIPAddressInformation uni in ipProperties.UnicastAddresses)
                 {
                     _log.WriteLine("-- " + uni.Address.ToString());
-                    Assert.Throws<PlatformNotSupportedException>(() => uni.AddressPreferredLifetime);
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () => uni.AddressPreferredLifetime
+                    );
                     Assert.Throws<PlatformNotSupportedException>(() => uni.AddressValidLifetime);
                     Assert.Throws<PlatformNotSupportedException>(() => uni.DhcpLeaseLifetime);
-                    Assert.Throws<PlatformNotSupportedException>(() => uni.DuplicateAddressDetectionState);
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () => uni.DuplicateAddressDetectionState
+                    );
 
                     Assert.NotNull(uni.IPv4Mask);
                     _log.WriteLine("--- IPv4 Mask: " + uni.IPv4Mask);
@@ -91,11 +99,15 @@ namespace System.Net.NetworkInformation.Tests
                     // Prefix Length
                     _log.WriteLine("--- PrefixLength: " + uni.PrefixLength);
                     Assert.True(uni.PrefixLength > 0);
-                    Assert.True((uni.Address.AddressFamily == AddressFamily.InterNetwork ? 33 : 129) > uni.PrefixLength);
-
+                    Assert.True(
+                        (uni.Address.AddressFamily == AddressFamily.InterNetwork ? 33 : 129)
+                            > uni.PrefixLength
+                    );
                 }
 
-                Assert.Throws<PlatformNotSupportedException>(() => ipProperties.WinsServersAddresses);
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => ipProperties.WinsServersAddresses
+                );
             }
         }
 
@@ -113,10 +125,16 @@ namespace System.Net.NetworkInformation.Tests
                 IPv4InterfaceProperties ipv4Properties = ipProperties.GetIPv4Properties();
 
                 _log.WriteLine("Index: " + ipv4Properties.Index);
-                Assert.Throws<PlatformNotSupportedException>(() => ipv4Properties.IsAutomaticPrivateAddressingActive);
-                Assert.Throws<PlatformNotSupportedException>(() => ipv4Properties.IsAutomaticPrivateAddressingEnabled);
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => ipv4Properties.IsAutomaticPrivateAddressingActive
+                );
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => ipv4Properties.IsAutomaticPrivateAddressingEnabled
+                );
                 Assert.Throws<PlatformNotSupportedException>(() => ipv4Properties.IsDhcpEnabled);
-                Assert.Throws<PlatformNotSupportedException>(() => ipv4Properties.IsForwardingEnabled);
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => ipv4Properties.IsForwardingEnabled
+                );
                 _log.WriteLine("Mtu: " + ipv4Properties.Mtu);
                 Assert.Throws<PlatformNotSupportedException>(() => ipv4Properties.UsesWins);
             }
@@ -143,7 +161,9 @@ namespace System.Net.NetworkInformation.Tests
 
                 _log.WriteLine("Index: " + ipv6Properties.Index);
                 _log.WriteLine("Mtu: " + ipv6Properties.Mtu);
-                Assert.Throws<PlatformNotSupportedException>(() => ipv6Properties.GetScopeId(ScopeLevel.Link));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => ipv6Properties.GetScopeId(ScopeLevel.Link)
+                );
             }
         }
 
@@ -169,7 +189,9 @@ namespace System.Net.NetworkInformation.Tests
                 Array values = Enum.GetValues(typeof(ScopeLevel));
                 foreach (ScopeLevel level in values)
                 {
-                    Assert.Throws<PlatformNotSupportedException>(() => ipv6Properties.GetScopeId(level));
+                    Assert.Throws<PlatformNotSupportedException>(
+                        () => ipv6Properties.GetScopeId(level)
+                    );
                 }
             }
         }
@@ -182,10 +204,14 @@ namespace System.Net.NetworkInformation.Tests
 
             _log.WriteLine("Loopback IPv4 index: " + NetworkInterface.LoopbackInterfaceIndex);
 
-            NetworkInterface loopback = NetworkInterface.GetAllNetworkInterfaces().First(ni => ni.Name == "lo0");
+            NetworkInterface loopback = NetworkInterface
+                .GetAllNetworkInterfaces()
+                .First(ni => ni.Name == "lo0");
             Assert.NotNull(loopback);
 
-            foreach (UnicastIPAddressInformation unicast in loopback.GetIPProperties().UnicastAddresses)
+            foreach (
+                UnicastIPAddressInformation unicast in loopback.GetIPProperties().UnicastAddresses
+            )
             {
                 if (unicast.Address.Equals(IPAddress.Loopback))
                 {
@@ -204,10 +230,14 @@ namespace System.Net.NetworkInformation.Tests
 
             _log.WriteLine("Loopback IPv6 index: " + NetworkInterface.IPv6LoopbackInterfaceIndex);
 
-            NetworkInterface loopback = NetworkInterface.GetAllNetworkInterfaces().First(ni => ni.Name == "lo0");
+            NetworkInterface loopback = NetworkInterface
+                .GetAllNetworkInterfaces()
+                .First(ni => ni.Name == "lo0");
             Assert.NotNull(loopback);
 
-            foreach (UnicastIPAddressInformation unicast in loopback.GetIPProperties().UnicastAddresses)
+            foreach (
+                UnicastIPAddressInformation unicast in loopback.GetIPProperties().UnicastAddresses
+            )
             {
                 if (unicast.Address.Equals(IPAddress.IPv6Loopback))
                 {

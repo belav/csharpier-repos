@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [WorkItem(13480, "https://github.com/dotnet/roslyn/issues/13480")]
         public void IncompleteLocalFunc()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M1()
@@ -50,7 +51,8 @@ class C
     {
         int? L(
     }
-}");
+}"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -299,7 +301,8 @@ class C
         [WorkItem(38801, "https://github.com/dotnet/roslyn/issues/38801")]
         public void LocalFunctionAttribute()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void M()
@@ -315,7 +318,9 @@ class C
 
         [A][B] void local() { }
     }
-}", options: TestOptions.Regular9);
+}",
+                options: TestOptions.Regular9
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -496,14 +501,17 @@ class C
         [WorkItem(38801, "https://github.com/dotnet/roslyn/issues/38801")]
         public void LocalFunctionModifier_Error_LocalVariable()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void M()
     {
         public object local;
     }
-}", TestOptions.Regular9);
+}",
+                TestOptions.Regular9
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -552,20 +560,23 @@ class C
             }
             EOF();
 
-            tree.GetDiagnostics().Verify(
-                // (5,6): error CS1513: } expected
-                //     {
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 6),
-                // (8,1): error CS1022: Type or namespace definition, or end-of-file expected
-                // }
-                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(8, 1));
+            tree.GetDiagnostics()
+                .Verify(
+                    // (5,6): error CS1513: } expected
+                    //     {
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(5, 6),
+                    // (8,1): error CS1022: Type or namespace definition, or end-of-file expected
+                    // }
+                    Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(8, 1)
+                );
         }
 
         [Fact]
         [WorkItem(38801, "https://github.com/dotnet/roslyn/issues/38801")]
         public void LocalFunction_NoBody()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     void M()
@@ -573,7 +584,8 @@ class C
         void local();
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -624,7 +636,8 @@ class C
         [WorkItem(38801, "https://github.com/dotnet/roslyn/issues/38801")]
         public void LocalFunction_Extern()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -636,10 +649,15 @@ class C
             UsingTree(code, TestOptions.Regular9).GetDiagnostics().Verify();
             verifyTree();
 
-            UsingTree(code, TestOptions.Regular8).GetDiagnostics().Verify(
-                // (6,9): error CS8400: Feature 'extern local functions' is not available in C# 8.0. Please use language version 9.0 or greater.
-                //         extern void local();
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "extern").WithArguments("extern local functions", "9.0").WithLocation(6, 9));
+            UsingTree(code, TestOptions.Regular8)
+                .GetDiagnostics()
+                .Verify(
+                    // (6,9): error CS8400: Feature 'extern local functions' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    //         extern void local();
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "extern")
+                        .WithArguments("extern local functions", "9.0")
+                        .WithLocation(6, 9)
+                );
             verifyTree();
 
             void verifyTree()
@@ -696,7 +714,8 @@ class C
         [WorkItem(38801, "https://github.com/dotnet/roslyn/issues/38801")]
         public void LocalFunction_Extern_Body()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void M()
@@ -708,10 +727,15 @@ class C
             UsingTree(code, TestOptions.Regular9).GetDiagnostics().Verify();
             verifyTree();
 
-            UsingTree(code, TestOptions.Regular8).GetDiagnostics().Verify(
-                // (6,9): error CS8400: Feature 'extern local functions' is not available in C# 8.0. Please use language version 9.0 or greater.
-                //         extern void local() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "extern").WithArguments("extern local functions", "9.0").WithLocation(6, 9));
+            UsingTree(code, TestOptions.Regular8)
+                .GetDiagnostics()
+                .Verify(
+                    // (6,9): error CS8400: Feature 'extern local functions' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    //         extern void local() { }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "extern")
+                        .WithArguments("extern local functions", "9.0")
+                        .WithLocation(6, 9)
+                );
             verifyTree();
 
             void verifyTree()
@@ -773,16 +797,25 @@ class C
         public void LocalVariable_Extern()
         {
             const string statement = "extern object obj;";
-            UsingStatement(statement, TestOptions.Regular9,
+            UsingStatement(
+                statement,
+                TestOptions.Regular9,
                 // (1,1): error CS0106: The modifier 'extern' is not valid for this item
                 // extern object obj;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "extern").WithArguments("extern").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "extern")
+                    .WithArguments("extern")
+                    .WithLocation(1, 1)
+            );
             verifyTree();
 
-            UsingStatement(statement,
+            UsingStatement(
+                statement,
                 // (1,1): error CS0106: The modifier 'extern' is not valid for this item
                 // extern object obj;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "extern").WithArguments("extern").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "extern")
+                    .WithArguments("extern")
+                    .WithLocation(1, 1)
+            );
             verifyTree();
 
             void verifyTree()
@@ -811,14 +844,17 @@ class C
         [WorkItem(38801, "https://github.com/dotnet/roslyn/issues/38801")]
         public void LocalFunctionAttribute_Error_LocalVariable()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void M()
     {
         [A] object local;
     }
-}", TestOptions.Regular9);
+}",
+                TestOptions.Regular9
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -878,27 +914,34 @@ class C
             }
             EOF();
 
-            CreateCompilation(tree).VerifyDiagnostics(
-                // (6,9): error CS7014: Attributes are not valid in this context.
-                //         [A] object local;
-                Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[A]").WithLocation(6, 9),
-                // (6,20): warning CS0168: The variable 'local' is declared but never used
-                //         [A] object local;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "local").WithArguments("local").WithLocation(6, 20));
+            CreateCompilation(tree)
+                .VerifyDiagnostics(
+                    // (6,9): error CS7014: Attributes are not valid in this context.
+                    //         [A] object local;
+                    Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[A]").WithLocation(6, 9),
+                    // (6,20): warning CS0168: The variable 'local' is declared but never used
+                    //         [A] object local;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "local")
+                        .WithArguments("local")
+                        .WithLocation(6, 20)
+                );
         }
 
         [Fact]
         [WorkItem(38801, "https://github.com/dotnet/roslyn/issues/38801")]
         public void LocalFunctionAttribute_Error_LocalVariable_MultipleDeclarators()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void M()
     {
         [A] object local1, local2;
     }
-}", TestOptions.Regular9);
+}",
+                TestOptions.Regular9
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -963,30 +1006,38 @@ class C
             }
             EOF();
 
-            CreateCompilation(tree).VerifyDiagnostics(
-                // (6,9): error CS7014: Attributes are not valid in this context.
-                //         [A] object local1, local2;
-                Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[A]").WithLocation(6, 9),
-                // (6,20): warning CS0168: The variable 'local1' is declared but never used
-                //         [A] object local1, local2;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "local1").WithArguments("local1").WithLocation(6, 20),
-                // (6,28): warning CS0168: The variable 'local2' is declared but never used
-                //         [A] object local1, local2;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "local2").WithArguments("local2").WithLocation(6, 28));
+            CreateCompilation(tree)
+                .VerifyDiagnostics(
+                    // (6,9): error CS7014: Attributes are not valid in this context.
+                    //         [A] object local1, local2;
+                    Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[A]").WithLocation(6, 9),
+                    // (6,20): warning CS0168: The variable 'local1' is declared but never used
+                    //         [A] object local1, local2;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "local1")
+                        .WithArguments("local1")
+                        .WithLocation(6, 20),
+                    // (6,28): warning CS0168: The variable 'local2' is declared but never used
+                    //         [A] object local1, local2;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "local2")
+                        .WithArguments("local2")
+                        .WithLocation(6, 28)
+                );
         }
 
         [Fact]
         [WorkItem(12280, "https://github.com/dotnet/roslyn/issues/12280")]
         public void LocalFunctionAttribute_Error_IncompleteMember()
         {
-            var tree = UsingTree(@"
+            var tree = UsingTree(
+                @"
 class C
 {
     void M()
     {
         [A]
     }
-}");
+}"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1039,21 +1090,25 @@ class C
             }
             EOF();
 
-            tree.GetDiagnostics().Verify(
-                // (6,12): error CS1525: Invalid expression term '}'
-                //         [A]
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "").WithArguments("}").WithLocation(6, 12),
-                // (6,12): error CS1002: ; expected
-                //         [A]
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 12)
-            );
+            tree.GetDiagnostics()
+                .Verify(
+                    // (6,12): error CS1525: Invalid expression term '}'
+                    //         [A]
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "")
+                        .WithArguments("}")
+                        .WithLocation(6, 12),
+                    // (6,12): error CS1002: ; expected
+                    //         [A]
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 12)
+                );
         }
 
         [Fact]
         [WorkItem(12280, "https://github.com/dotnet/roslyn/issues/12280")]
         public void LocalFuncWithWhitespace()
         {
-            var file = ParseFile(@"
+            var file = ParseFile(
+                @"
 class C
 {
     void Main()
@@ -1076,11 +1131,13 @@ class C
         int
             goo<T>() where T : IFace { return 5; }
     }
-}");
+}"
+            );
             Assert.NotNull(file);
             file.SyntaxTree.GetDiagnostics().Verify();
 
-            var errorText = @"
+            var errorText =
+                @"
 class C
 {
     void M()
@@ -1095,46 +1152,67 @@ class C
 }";
             file = ParseFile(errorText);
 
-            CreateCompilation(errorText).VerifyDiagnostics(
-                // (11,19): error CS1003: Syntax error, '(' expected
-                //             goo<T>) { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("(", ")").WithLocation(11, 19),
-                // (7,19): error CS0080: Constraints are not allowed on non-generic declarations
-                //             goo() where T : IFace => 5;
-                Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where").WithLocation(7, 19),
-                // (9,13): error CS0128: A local variable or function named 'goo' is already defined in this scope
-                //             goo() where T : IFace { return 5; }
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "goo").WithArguments("goo").WithLocation(9, 13),
-                // (9,19): error CS0080: Constraints are not allowed on non-generic declarations
-                //             goo() where T : IFace { return 5; }
-                Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where").WithLocation(9, 19),
-                // (11,13): error CS0128: A local variable or function named 'goo' is already defined in this scope
-                //             goo<T>) { }
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "goo").WithArguments("goo").WithLocation(11, 13),
-                // (11,13): error CS0161: 'goo<T>()': not all code paths return a value
-                //             goo<T>) { }
-                Diagnostic(ErrorCode.ERR_ReturnExpected, "goo").WithArguments("goo<T>()").WithLocation(11, 13),
-                // (7,13): warning CS8321: The local function 'goo' is declared but never used
-                //             goo() where T : IFace => 5;
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "goo").WithArguments("goo").WithLocation(7, 13),
-                // (9,13): warning CS8321: The local function 'goo' is declared but never used
-                //             goo() where T : IFace { return 5; }
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "goo").WithArguments("goo").WithLocation(9, 13),
-                // (11,13): warning CS8321: The local function 'goo' is declared but never used
-                //             goo<T>) { }
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "goo").WithArguments("goo").WithLocation(11, 13));
+            CreateCompilation(errorText)
+                .VerifyDiagnostics(
+                    // (11,19): error CS1003: Syntax error, '(' expected
+                    //             goo<T>) { }
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                        .WithArguments("(", ")")
+                        .WithLocation(11, 19),
+                    // (7,19): error CS0080: Constraints are not allowed on non-generic declarations
+                    //             goo() where T : IFace => 5;
+                    Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
+                        .WithLocation(7, 19),
+                    // (9,13): error CS0128: A local variable or function named 'goo' is already defined in this scope
+                    //             goo() where T : IFace { return 5; }
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "goo")
+                        .WithArguments("goo")
+                        .WithLocation(9, 13),
+                    // (9,19): error CS0080: Constraints are not allowed on non-generic declarations
+                    //             goo() where T : IFace { return 5; }
+                    Diagnostic(ErrorCode.ERR_ConstraintOnlyAllowedOnGenericDecl, "where")
+                        .WithLocation(9, 19),
+                    // (11,13): error CS0128: A local variable or function named 'goo' is already defined in this scope
+                    //             goo<T>) { }
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "goo")
+                        .WithArguments("goo")
+                        .WithLocation(11, 13),
+                    // (11,13): error CS0161: 'goo<T>()': not all code paths return a value
+                    //             goo<T>) { }
+                    Diagnostic(ErrorCode.ERR_ReturnExpected, "goo")
+                        .WithArguments("goo<T>()")
+                        .WithLocation(11, 13),
+                    // (7,13): warning CS8321: The local function 'goo' is declared but never used
+                    //             goo() where T : IFace => 5;
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "goo")
+                        .WithArguments("goo")
+                        .WithLocation(7, 13),
+                    // (9,13): warning CS8321: The local function 'goo' is declared but never used
+                    //             goo() where T : IFace { return 5; }
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "goo")
+                        .WithArguments("goo")
+                        .WithLocation(9, 13),
+                    // (11,13): warning CS8321: The local function 'goo' is declared but never used
+                    //             goo<T>) { }
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "goo")
+                        .WithArguments("goo")
+                        .WithLocation(11, 13)
+                );
 
-            var m = Assert.IsType<MethodDeclarationSyntax>(file.DescendantNodes()
-                .Where(n => n.Kind() == SyntaxKind.MethodDeclaration)
-                .Single());
-            Assert.All(m.Body.Statements,
-                s => Assert.Equal(SyntaxKind.LocalFunctionStatement, s.Kind()));
+            var m = Assert.IsType<MethodDeclarationSyntax>(
+                file.DescendantNodes().Where(n => n.Kind() == SyntaxKind.MethodDeclaration).Single()
+            );
+            Assert.All(
+                m.Body.Statements,
+                s => Assert.Equal(SyntaxKind.LocalFunctionStatement, s.Kind())
+            );
         }
 
         [Fact]
         public void NeverEndingTest()
         {
-            var file = ParseFile(@"public class C {
+            var file = ParseFile(
+                @"public class C {
     public void M() {
         async public virtual M() {}
         unsafe public M() {}
@@ -1142,29 +1220,37 @@ class C
         unsafe private async override M() {}
         async virtual override sealed M() {}
     }
-}");
-            file.SyntaxTree.GetDiagnostics().Verify(
-                // (3,9): error CS0106: The modifier 'async' is not valid for this item
-                //         async public virtual M() {}
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "async").WithArguments("async").WithLocation(3, 9),
-                // (3,15): error CS0106: The modifier 'public' is not valid for this item
-                //         async public virtual M() {}
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "public").WithArguments("public").WithLocation(3, 15),
-                // (3,22): error CS1031: Type expected
-                //         async public virtual M() {}
-                Diagnostic(ErrorCode.ERR_TypeExpected, "virtual").WithLocation(3, 22),
-                // (3,22): error CS1001: Identifier expected
-                //         async public virtual M() {}
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "virtual").WithLocation(3, 22),
-                // (3,22): error CS1002: ; expected
-                //         async public virtual M() {}
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "virtual").WithLocation(3, 22),
-                // (3,22): error CS1513: } expected
-                //         async public virtual M() {}
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "virtual").WithLocation(3, 22),
-                // (9,1): error CS1022: Type or namespace definition, or end-of-file expected
-                // }
-                Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(9, 1));
+}"
+            );
+            file.SyntaxTree
+                .GetDiagnostics()
+                .Verify(
+                    // (3,9): error CS0106: The modifier 'async' is not valid for this item
+                    //         async public virtual M() {}
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "async")
+                        .WithArguments("async")
+                        .WithLocation(3, 9),
+                    // (3,15): error CS0106: The modifier 'public' is not valid for this item
+                    //         async public virtual M() {}
+                    Diagnostic(ErrorCode.ERR_BadMemberFlag, "public")
+                        .WithArguments("public")
+                        .WithLocation(3, 15),
+                    // (3,22): error CS1031: Type expected
+                    //         async public virtual M() {}
+                    Diagnostic(ErrorCode.ERR_TypeExpected, "virtual").WithLocation(3, 22),
+                    // (3,22): error CS1001: Identifier expected
+                    //         async public virtual M() {}
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "virtual").WithLocation(3, 22),
+                    // (3,22): error CS1002: ; expected
+                    //         async public virtual M() {}
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "virtual").WithLocation(3, 22),
+                    // (3,22): error CS1513: } expected
+                    //         async public virtual M() {}
+                    Diagnostic(ErrorCode.ERR_RbraceExpected, "virtual").WithLocation(3, 22),
+                    // (9,1): error CS1022: Type or namespace definition, or end-of-file expected
+                    // }
+                    Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(9, 1)
+                );
         }
 
         [Fact]
@@ -1172,7 +1258,8 @@ class C
         {
             // Experimental nodes should only appear when experimental are
             // turned on in parse options
-            var file = ParseFile(@"
+            var file = ParseFile(
+                @"
 class c
 {
     void m()
@@ -1183,17 +1270,30 @@ class c
     {
         int local() { return 0; }
     }
-}", parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6));
+}",
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+            );
             Assert.NotNull(file);
-            Assert.False(file.DescendantNodes().Any(n => n.Kind() == SyntaxKind.LocalFunctionStatement && !n.ContainsDiagnostics));
+            Assert.False(
+                file.DescendantNodes()
+                    .Any(
+                        n => n.Kind() == SyntaxKind.LocalFunctionStatement && !n.ContainsDiagnostics
+                    )
+            );
             Assert.True(file.HasErrors);
-            file.SyntaxTree.GetDiagnostics().Verify(
-                // (6,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
-                //         int local() => 0;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "local").WithArguments("local functions", "7.0").WithLocation(6, 13),
-                // (10,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
-                //         int local() { return 0; }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "local").WithArguments("local functions", "7.0").WithLocation(10, 13)
+            file.SyntaxTree
+                .GetDiagnostics()
+                .Verify(
+                    // (6,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         int local() => 0;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "local")
+                        .WithArguments("local functions", "7.0")
+                        .WithLocation(6, 13),
+                    // (10,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                    //         int local() { return 0; }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "local")
+                        .WithArguments("local functions", "7.0")
+                        .WithLocation(10, 13)
                 );
 
             Assert.Equal(0, file.SyntaxTree.Options.Features.Count);
@@ -1213,7 +1313,8 @@ class c
         {
             // Experimental nodes should only appear when experimental are
             // turned on in parse options
-            var file = ParseFile(@"
+            var file = ParseFile(
+                @"
 class c
 {
     void m()
@@ -1227,7 +1328,8 @@ class c
             return 0;
         }
     }
-}");
+}"
+            );
 
             Assert.NotNull(file);
             Assert.False(file.HasErrors);
@@ -1260,7 +1362,8 @@ class c
         [Fact]
         public void LocalFunctionsWithAwait()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class c
 {
     void m1() { await await() => new await(); }
@@ -1268,7 +1371,8 @@ class c
     async void m3() { await () => new await(); }
     void m4() { async await() => new await(); }
     async void m5() { await async () => new await(); }
-}");
+}"
+            );
 
             N(SyntaxKind.CompilationUnit);
             {
@@ -1545,7 +1649,7 @@ class c
         public void AsyncVariable()
         {
             var file = ParseFile(
-@"class C
+                @"class C
 {
     static void F(object async)
     {
@@ -1571,7 +1675,8 @@ class c
         async.T t() { }
         async<object> u(object o) => o;
     }
-}");
+}"
+            );
             file.SyntaxTree.GetDiagnostics().Verify();
         }
 
@@ -1579,7 +1684,7 @@ class c
         public void StaticFunctions()
         {
             const string text =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1591,7 +1696,9 @@ class c
             {
                 // (5,9): error CS8652: The feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //         static void F() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static").WithArguments("static local functions", "8.0").WithLocation(5, 9)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
+                    .WithArguments("static local functions", "8.0")
+                    .WithLocation(5, 9)
             };
 
             UsingDeclaration(text, options: TestOptions.Regular7_3, expected);
@@ -1655,7 +1762,7 @@ class c
         public void AsyncStaticFunctions()
         {
             const string text =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1668,10 +1775,14 @@ class c
             {
                 // (5,9): error CS8652: The feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //         static async void F1() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static").WithArguments("static local functions", "8.0").WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
+                    .WithArguments("static local functions", "8.0")
+                    .WithLocation(5, 9),
                 // (6,15): error CS8652: The feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //         async static void F2() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static").WithArguments("static local functions", "8.0").WithLocation(6, 15)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
+                    .WithArguments("static local functions", "8.0")
+                    .WithLocation(6, 15)
             };
             UsingDeclaration(text, options: TestOptions.Regular7_3, expected);
             checkNodes();
@@ -1753,7 +1864,7 @@ class c
         public void DuplicateStatic()
         {
             const string text =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1766,43 +1877,69 @@ class c
             {
                 // (5,9): error CS8652: The feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //         static static void F1() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static").WithArguments("static local functions", "8.0").WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
+                    .WithArguments("static local functions", "8.0")
+                    .WithLocation(5, 9),
                 // (5,16): error CS1031: Type expected
                 //         static static void F1() { }
-                Diagnostic(ErrorCode.ERR_TypeExpected, "static").WithArguments("static").WithLocation(5, 16),
+                Diagnostic(ErrorCode.ERR_TypeExpected, "static")
+                    .WithArguments("static")
+                    .WithLocation(5, 16),
                 // (5,16): error CS8652: The feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //         static static void F1() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static").WithArguments("static local functions", "8.0").WithLocation(5, 16),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
+                    .WithArguments("static local functions", "8.0")
+                    .WithLocation(5, 16),
                 // (6,9): error CS8652: The feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //         static async static void F2() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static").WithArguments("static local functions", "8.0").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
+                    .WithArguments("static local functions", "8.0")
+                    .WithLocation(6, 9),
                 // (6,22): error CS1031: Type expected
                 //         static async static void F2() { }
-                Diagnostic(ErrorCode.ERR_TypeExpected, "static").WithArguments("static").WithLocation(6, 22),
+                Diagnostic(ErrorCode.ERR_TypeExpected, "static")
+                    .WithArguments("static")
+                    .WithLocation(6, 22),
                 // (6,22): error CS8652: The feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //         static async static void F2() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static").WithArguments("static local functions", "8.0").WithLocation(6, 22)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
+                    .WithArguments("static local functions", "8.0")
+                    .WithLocation(6, 22)
             };
 
             UsingDeclaration(text, options: TestOptions.Regular7_3, expected);
             checkNodes();
 
-            UsingDeclaration(text, options: TestOptions.Regular8,
+            UsingDeclaration(
+                text,
+                options: TestOptions.Regular8,
                 // (5,16): error CS1031: Type expected
                 //         static static void F1() { }
-                Diagnostic(ErrorCode.ERR_TypeExpected, "static").WithArguments("static").WithLocation(5, 16),
+                Diagnostic(ErrorCode.ERR_TypeExpected, "static")
+                    .WithArguments("static")
+                    .WithLocation(5, 16),
                 // (6,22): error CS1031: Type expected
                 //         static async static void F2() { }
-                Diagnostic(ErrorCode.ERR_TypeExpected, "static").WithArguments("static").WithLocation(6, 22));
+                Diagnostic(ErrorCode.ERR_TypeExpected, "static")
+                    .WithArguments("static")
+                    .WithLocation(6, 22)
+            );
             checkNodes();
 
-            UsingDeclaration(text, options: TestOptions.Regular9,
+            UsingDeclaration(
+                text,
+                options: TestOptions.Regular9,
                 // (5,16): error CS1031: Type expected
                 //         static static void F1() { }
-                Diagnostic(ErrorCode.ERR_TypeExpected, "static").WithArguments("static").WithLocation(5, 16),
+                Diagnostic(ErrorCode.ERR_TypeExpected, "static")
+                    .WithArguments("static")
+                    .WithLocation(5, 16),
                 // (6,22): error CS1031: Type expected
                 //         static async static void F2() { }
-                Diagnostic(ErrorCode.ERR_TypeExpected, "static").WithArguments("static").WithLocation(6, 22));
+                Diagnostic(ErrorCode.ERR_TypeExpected, "static")
+                    .WithArguments("static")
+                    .WithLocation(6, 22)
+            );
             checkNodes();
 
             void checkNodes()
@@ -1877,7 +2014,7 @@ class c
         public void ReturnTypeBeforeStatic()
         {
             const string text =
-@"class Program
+                @"class Program
 {
     void M()
     {
@@ -1897,7 +2034,9 @@ class c
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "static").WithLocation(5, 14),
                 // (5,14): error CS8652: The feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
                 //         void static F() { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static").WithArguments("static local functions", "8.0").WithLocation(5, 14),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
+                    .WithArguments("static local functions", "8.0")
+                    .WithLocation(5, 14),
                 // (5,22): error CS1001: Identifier expected
                 //         void static F() { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(5, 22)

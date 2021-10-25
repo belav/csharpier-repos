@@ -21,42 +21,54 @@ namespace ServerComparison.TestSites
             // NGinx's default min size is 20 bytes
             var helloWorldBody = "Hello World;" + new string('a', 20);
 
-            app.Map("/NoAppCompression", subApp =>
-            {
-                subApp.Run(context =>
+            app.Map(
+                "/NoAppCompression",
+                subApp =>
+                {
+                    subApp.Run(
+                        context =>
+                        {
+                            context.Response.ContentType = "text/plain";
+                            context.Response.ContentLength = helloWorldBody.Length;
+                            return context.Response.WriteAsync(helloWorldBody);
+                        }
+                    );
+                }
+            );
+
+            app.Map(
+                "/AppCompression",
+                subApp =>
+                {
+                    subApp.UseResponseCompression();
+                    subApp.Run(
+                        context =>
+                        {
+                            context.Response.ContentType = "text/plain";
+                            context.Response.ContentLength = helloWorldBody.Length;
+                            return context.Response.WriteAsync(helloWorldBody);
+                        }
+                    );
+                }
+            );
+            app.Run(
+                context =>
                 {
                     context.Response.ContentType = "text/plain";
-                    context.Response.ContentLength = helloWorldBody.Length;
-                    return context.Response.WriteAsync(helloWorldBody);
-                });
-            });
+                    string body;
+                    if (context.Request.Path.Value == "/")
+                    {
+                        body = "Running";
+                    }
+                    else
+                    {
+                        body = "Not Implemented: " + context.Request.Path;
+                    }
 
-            app.Map("/AppCompression", subApp =>
-            {
-                subApp.UseResponseCompression();
-                subApp.Run(context =>
-                {
-                    context.Response.ContentType = "text/plain";
-                    context.Response.ContentLength = helloWorldBody.Length;
-                    return context.Response.WriteAsync(helloWorldBody);
-                });
-            });
-            app.Run(context =>
-            {
-                context.Response.ContentType = "text/plain";
-                string body;
-                if (context.Request.Path.Value == "/")
-                {
-                    body = "Running";
+                    context.Response.ContentLength = body.Length;
+                    return context.Response.WriteAsync(body);
                 }
-                else
-                {
-                    body = "Not Implemented: " + context.Request.Path;
-                }
-
-                context.Response.ContentLength = body.Length;
-                return context.Response.WriteAsync(body);
-            });
+            );
         }
     }
 }

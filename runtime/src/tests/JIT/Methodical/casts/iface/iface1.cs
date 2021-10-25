@@ -22,13 +22,22 @@ namespace JitTest
 
     internal class BaseClass : Iface2
     {
-        public int Method1a() { return 1; }
-        public int Method2a() { return 10; }
+        public int Method1a()
+        {
+            return 1;
+        }
+        public int Method2a()
+        {
+            return 10;
+        }
     }
 
     internal class CoClass : BaseClass, Iface3
     {
-        public int Method3a() { return 100; }
+        public int Method3a()
+        {
+            return 100;
+        }
 
         private static int Static0(BaseClass co)
         {
@@ -46,52 +55,39 @@ namespace JitTest
             {
                 try
                 {
-                    return ((Iface3)co).Method3a() +
-                        (co as Iface3).Method3a();
+                    return ((Iface3)co).Method3a() + (co as Iface3).Method3a();
                 }
-                catch { s += 1000; }
+                catch
+                {
+                    s += 1000;
+                }
             }
             return s;
         }
 
         private static int Static1(Iface1 i)
         {
-            return
-                Static0((CoClass)i) +
-                Static0(i as CoClass)
-                ;
+            return Static0((CoClass)i) + Static0(i as CoClass);
         }
 
         private static int Static2(Iface2 i)
         {
-            return
-                Static0((CoClass)i) +
-                Static0(i as CoClass)
-                ;
+            return Static0((CoClass)i) + Static0(i as CoClass);
         }
 
         private static int Static3(Iface3 i)
         {
-            return
-                Static0((CoClass)i) +
-                Static0(i as CoClass)
-                ;
+            return Static0((CoClass)i) + Static0(i as CoClass);
         }
 
         private static int Static4(Iface1 i)
         {
-            return
-                Static0((BaseClass)i) +
-                Static0(i as BaseClass)
-                ;
+            return Static0((BaseClass)i) + Static0(i as BaseClass);
         }
 
         private static int Static5(Iface2 i)
         {
-            return
-                Static0((BaseClass)i) +
-                Static0(i as BaseClass)
-                ;
+            return Static0((BaseClass)i) + Static0(i as BaseClass);
         }
 
         private static int Main()

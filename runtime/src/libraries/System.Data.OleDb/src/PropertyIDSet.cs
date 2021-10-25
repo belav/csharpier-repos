@@ -9,7 +9,8 @@ namespace System.Data.OleDb
 {
     internal sealed class PropertyIDSet : DbBuffer
     {
-        private static readonly int PropertyIDSetAndValueSize = ODB.SizeOf_tagDBPROPIDSET + ADP.PtrSize; // sizeof(tagDBPROPIDSET) + sizeof(int)
+        private static readonly int PropertyIDSetAndValueSize =
+            ODB.SizeOf_tagDBPROPIDSET + ADP.PtrSize; // sizeof(tagDBPROPIDSET) + sizeof(int)
         private static readonly int PropertyIDSetSize = ODB.SizeOf_tagDBPROPIDSET;
 
         private readonly int _count;
@@ -25,10 +26,18 @@ namespace System.Data.OleDb
             IntPtr ptr = ADP.IntPtrOffset(base.handle, PropertyIDSetSize);
             Marshal.WriteIntPtr(base.handle, 0, ptr);
 
-            Marshal.WriteInt32(base.handle, ADP.PtrSize, /*propertyid count*/1);
+            Marshal.WriteInt32(
+                base.handle,
+                ADP.PtrSize, /*propertyid count*/
+                1
+            );
 
             ptr = ADP.IntPtrOffset(base.handle, ODB.OffsetOf_tagDBPROPIDSET_PropertySet);
-            Marshal.StructureToPtr(propertySet, ptr, false/*deleteold*/);
+            Marshal.StructureToPtr(
+                propertySet,
+                ptr,
+                false /*deleteold*/
+            );
 
             // write the propertyID at the same offset
             Marshal.WriteInt32(base.handle, PropertyIDSetSize, propertyID);
@@ -40,17 +49,21 @@ namespace System.Data.OleDb
             _count = propertySets.Length;
             for (int i = 0; i < propertySets.Length; ++i)
             {
-                IntPtr ptr = ADP.IntPtrOffset(base.handle, (i * PropertyIDSetSize) + ODB.OffsetOf_tagDBPROPIDSET_PropertySet);
-                Marshal.StructureToPtr(propertySets[i], ptr, false/*deleteold*/);
+                IntPtr ptr = ADP.IntPtrOffset(
+                    base.handle,
+                    (i * PropertyIDSetSize) + ODB.OffsetOf_tagDBPROPIDSET_PropertySet
+                );
+                Marshal.StructureToPtr(
+                    propertySets[i],
+                    ptr,
+                    false /*deleteold*/
+                );
             }
         }
 
         internal int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
     }
 }

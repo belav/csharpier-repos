@@ -17,15 +17,20 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 {
     public class ResponseHeadersWritingBenchmark
     {
-        private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes("\r\nServer: " + Constants.ServerName);
-        private static readonly byte[] _helloWorldPayload = Encoding.ASCII.GetBytes("Hello, World!");
+        private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes(
+            "\r\nServer: " + Constants.ServerName
+        );
+        private static readonly byte[] _helloWorldPayload = Encoding.ASCII.GetBytes(
+            "Hello, World!"
+        );
 
         private HttpResponseHeaders _responseHeaders;
         private IHeaderDictionary _responseHeadersDict;
         private DateHeaderValueManager _dateHeaderValueManager;
         private Writer _writer;
 
-        private DateHeaderValueManager.DateHeaderValues DateHeaderValues => _dateHeaderValueManager.GetDateHeaderValues();
+        private DateHeaderValueManager.DateHeaderValues DateHeaderValues =>
+            _dateHeaderValueManager.GetDateHeaderValues();
 
         [Params(
             BenchmarkTypes.TechEmpowerPlaintext,
@@ -83,7 +88,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
             var responseHeaders = _responseHeaders;
             responseHeaders.HeaderContentEncoding = "gzip";
             responseHeaders.HeaderContentType = "text/html; charset=utf-8";
-            _responseHeadersDict[HeaderNames.StrictTransportSecurity] = "max-age=31536000; includeSubdomains";
+            _responseHeadersDict[HeaderNames.StrictTransportSecurity] =
+                "max-age=31536000; includeSubdomains";
             responseHeaders.HeaderVary = "Accept-Encoding";
             _responseHeadersDict["X-Powered-By"] = "ASP.NET";
 
@@ -95,7 +101,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             var responseHeaders = _responseHeaders;
             responseHeaders.HeaderContentType = "text/plain";
-            responseHeaders.HeaderSetCookie = "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
+            responseHeaders.HeaderSetCookie =
+                "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
             responseHeaders.ContentLength = _helloWorldPayload.Length;
 
             var writer = new BufferWriter<PipeWriter>(_writer);
@@ -106,7 +113,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
         {
             var responseHeaders = _responseHeaders;
             responseHeaders.HeaderContentType = "text/plain";
-            responseHeaders.HeaderSetCookie = "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
+            responseHeaders.HeaderSetCookie =
+                "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
             responseHeaders.HeaderTransferEncoding = "chunked";
 
             var writer = new BufferWriter<PipeWriter>(_writer);
@@ -141,8 +149,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks
 
             public override void Advance(int bytes) { }
             public override void CancelPendingFlush() { }
-            public override void Complete(Exception exception = null)  { }
-            public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default) => default;
+            public override void Complete(Exception exception = null) { }
+            public override ValueTask<FlushResult> FlushAsync(
+                CancellationToken cancellationToken = default
+            ) => default;
         }
 
         public enum BenchmarkTypes

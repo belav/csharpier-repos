@@ -42,7 +42,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             // that type. Thus, we ignore context.TypeAttributes for properties and not check at all for types.
             if (context.Key.MetadataKind == ModelMetadataKind.Property)
             {
-                var validationFilter = context.PropertyAttributes!.OfType<IPropertyValidationFilter>().FirstOrDefault();
+                var validationFilter = context.PropertyAttributes!
+                    .OfType<IPropertyValidationFilter>()
+                    .FirstOrDefault();
                 if (validationFilter == null)
                 {
                     // No IPropertyValidationFilter attributes on the property.
@@ -57,7 +59,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
             }
             else if (context.Key.MetadataKind == ModelMetadataKind.Parameter)
             {
-                var validationFilter = context.ParameterAttributes!.OfType<IPropertyValidationFilter>().FirstOrDefault();
+                var validationFilter = context.ParameterAttributes!
+                    .OfType<IPropertyValidationFilter>()
+                    .FirstOrDefault();
                 context.ValidationMetadata.PropertyValidationFilter = validationFilter;
             }
         }

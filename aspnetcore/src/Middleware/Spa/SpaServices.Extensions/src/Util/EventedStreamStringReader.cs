@@ -18,8 +18,8 @@ namespace Microsoft.AspNetCore.NodeServices.Util
 
         public EventedStreamStringReader(EventedStreamReader eventedStreamReader)
         {
-            _eventedStreamReader = eventedStreamReader
-                ?? throw new ArgumentNullException(nameof(eventedStreamReader));
+            _eventedStreamReader =
+                eventedStreamReader ?? throw new ArgumentNullException(nameof(eventedStreamReader));
             _eventedStreamReader.OnReceivedLine += OnReceivedLine;
         }
 

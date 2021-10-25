@@ -38,7 +38,6 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
 
                 return _displayName;
             }
-
             set
             {
                 if (value == null)

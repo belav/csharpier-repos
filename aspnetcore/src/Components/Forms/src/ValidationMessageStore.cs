@@ -14,7 +14,10 @@ namespace Microsoft.AspNetCore.Components.Forms
     public sealed class ValidationMessageStore
     {
         private readonly EditContext _editContext;
-        private readonly Dictionary<FieldIdentifier, List<string>> _messages = new Dictionary<FieldIdentifier, List<string>>();
+        private readonly Dictionary<FieldIdentifier, List<string>> _messages = new Dictionary<
+            FieldIdentifier,
+            List<string>
+        >();
 
         /// <summary>
         /// Creates an instance of <see cref="ValidationMessageStore"/>.
@@ -30,32 +33,32 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// </summary>
         /// <param name="fieldIdentifier">The identifier for the field.</param>
         /// <param name="message">The validation message.</param>
-        public void Add(in FieldIdentifier fieldIdentifier, string message)
-            => GetOrCreateMessagesListForField(fieldIdentifier).Add(message);
+        public void Add(in FieldIdentifier fieldIdentifier, string message) =>
+            GetOrCreateMessagesListForField(fieldIdentifier).Add(message);
 
         /// <summary>
         /// Adds a validation message for the specified field.
         /// </summary>
         /// <param name="accessor">Identifies the field for which to add the message.</param>
         /// <param name="message">The validation message.</param>
-        public void Add(Expression<Func<object>> accessor, string message)
-            => Add(FieldIdentifier.Create(accessor), message);
+        public void Add(Expression<Func<object>> accessor, string message) =>
+            Add(FieldIdentifier.Create(accessor), message);
 
         /// <summary>
         /// Adds the messages from the specified collection for the specified field.
         /// </summary>
         /// <param name="fieldIdentifier">The identifier for the field.</param>
         /// <param name="messages">The validation messages to be added.</param>
-        public void Add(in FieldIdentifier fieldIdentifier, IEnumerable<string> messages)
-            => GetOrCreateMessagesListForField(fieldIdentifier).AddRange(messages);
+        public void Add(in FieldIdentifier fieldIdentifier, IEnumerable<string> messages) =>
+            GetOrCreateMessagesListForField(fieldIdentifier).AddRange(messages);
 
         /// <summary>
         /// Adds the messages from the specified collection for the specified field.
         /// </summary>
         /// <param name="accessor">Identifies the field for which to add the messages.</param>
         /// <param name="messages">The validation messages to be added.</param>
-        public void Add(Expression<Func<object>> accessor, IEnumerable<string> messages)
-            => Add(FieldIdentifier.Create(accessor), messages);
+        public void Add(Expression<Func<object>> accessor, IEnumerable<string> messages) =>
+            Add(FieldIdentifier.Create(accessor), messages);
 
         /// <summary>
         /// Gets the validation messages within this <see cref="ValidationMessageStore"/> for the specified field.
@@ -64,8 +67,10 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// </summary>
         /// <param name="fieldIdentifier">The identifier for the field.</param>
         /// <returns>The validation messages for the specified field within this <see cref="ValidationMessageStore"/>.</returns>
-        public IEnumerable<string> this[FieldIdentifier fieldIdentifier]
-            => _messages.TryGetValue(fieldIdentifier, out var messages) ? messages : Enumerable.Empty<string>();
+        public IEnumerable<string> this[FieldIdentifier fieldIdentifier] =>
+            _messages.TryGetValue(fieldIdentifier, out var messages)
+                ? messages
+                : Enumerable.Empty<string>();
 
         /// <summary>
         /// Gets the validation messages within this <see cref="ValidationMessageStore"/> for the specified field.
@@ -74,8 +79,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// </summary>
         /// <param name="accessor">The identifier for the field.</param>
         /// <returns>The validation messages for the specified field within this <see cref="ValidationMessageStore"/>.</returns>
-        public IEnumerable<string> this[Expression<Func<object>> accessor]
-            => this[FieldIdentifier.Create(accessor)];
+        public IEnumerable<string> this[Expression<Func<object>> accessor] =>
+            this[FieldIdentifier.Create(accessor)];
 
         /// <summary>
         /// Removes all messages within this <see cref="ValidationMessageStore"/>.
@@ -94,8 +99,8 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// Removes all messages within this <see cref="ValidationMessageStore"/> for the specified field.
         /// </summary>
         /// <param name="accessor">Identifies the field for which to remove the messages.</param>
-        public void Clear(Expression<Func<object>> accessor)
-            => Clear(FieldIdentifier.Create(accessor));
+        public void Clear(Expression<Func<object>> accessor) =>
+            Clear(FieldIdentifier.Create(accessor));
 
         /// <summary>
         /// Removes all messages within this <see cref="ValidationMessageStore"/> for the specified field.
@@ -119,10 +124,12 @@ namespace Microsoft.AspNetCore.Components.Forms
             return messagesForField;
         }
 
-        private void AssociateWithField(in FieldIdentifier fieldIdentifier)
-            => _editContext.GetOrAddFieldState(fieldIdentifier).AssociateWithValidationMessageStore(this);
+        private void AssociateWithField(in FieldIdentifier fieldIdentifier) =>
+            _editContext
+                .GetOrAddFieldState(fieldIdentifier)
+                .AssociateWithValidationMessageStore(this);
 
-        private void DissociateFromField(in FieldIdentifier fieldIdentifier)
-            => _editContext.GetFieldState(fieldIdentifier)?.DissociateFromValidationMessageStore(this);
+        private void DissociateFromField(in FieldIdentifier fieldIdentifier) =>
+            _editContext.GetFieldState(fieldIdentifier)?.DissociateFromValidationMessageStore(this);
     }
 }

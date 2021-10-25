@@ -16,7 +16,15 @@ class testout1
     }
     static int Test1(int Par)
     {
-        int A, B, C, D, E, F, G, H, I;
+        int A,
+            B,
+            C,
+            D,
+            E,
+            F,
+            G,
+            H,
+            I;
         for (A = 0; A <= 5; A++)
             for (B = 0; B <= 5; B++)
                 for (C = 0; C <= 5; C++)
@@ -31,7 +39,15 @@ class testout1
     }
     static int Test2(int Par)
     {
-        int A, B, C, D, E, F, G, H, I;
+        int A,
+            B,
+            C,
+            D,
+            E,
+            F,
+            G,
+            H,
+            I;
         for (A = 0; A <= 4; A++)
             for (B = 0; B <= 4; B++)
                 for (C = 0; C <= 4; C++)

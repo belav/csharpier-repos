@@ -22,7 +22,11 @@ namespace Microsoft.AspNetCore.ResponseCaching
         {
             if (segmentSize <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(segmentSize), segmentSize, $"{nameof(segmentSize)} must be greater than 0.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(segmentSize),
+                    segmentSize,
+                    $"{nameof(segmentSize)} must be greater than 0."
+                );
             }
 
             _segmentSize = segmentSize;
@@ -49,14 +53,8 @@ namespace Microsoft.AspNetCore.ResponseCaching
 
         public override long Position
         {
-            get
-            {
-                return _length;
-            }
-            set
-            {
-                throw new NotSupportedException("The stream does not support seeking.");
-            }
+            get { return _length; }
+            set { throw new NotSupportedException("The stream does not support seeking."); }
         }
 
         private void DisposeMemoryStream()
@@ -134,15 +132,25 @@ namespace Microsoft.AspNetCore.ResponseCaching
             }
             if (offset < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(offset), offset, "Non-negative number required.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    offset,
+                    "Non-negative number required."
+                );
             }
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), count, "Non-negative number required.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    count,
+                    "Non-negative number required."
+                );
             }
             if (count > buffer.Length - offset)
             {
-                throw new ArgumentException("Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection.");
+                throw new ArgumentException(
+                    "Offset and length were out of bounds for the array or count is greater than the number of elements from index to the end of the source collection."
+                );
             }
             if (!CanWrite)
             {
@@ -166,7 +174,12 @@ namespace Microsoft.AspNetCore.ResponseCaching
             }
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             Write(buffer, offset, count);
             return Task.CompletedTask;
@@ -189,10 +202,19 @@ namespace Microsoft.AspNetCore.ResponseCaching
             _length++;
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-            => TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) =>
+            TaskToApm.Begin(
+                WriteAsync(buffer, offset, count, CancellationToken.None),
+                callback,
+                state
+            );
 
-        public override void EndWrite(IAsyncResult asyncResult)
-            => TaskToApm.End(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
     }
 }

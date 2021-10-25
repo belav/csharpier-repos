@@ -22,7 +22,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         public async Task Server_TokenRegisteredAfterClientDisconnects_CallCanceled()
         {
             var interval = TimeSpan.FromSeconds(1);
-            var canceled = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var canceled = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             string address;
             using (var server = Utilities.CreateHttpServer(out address))
@@ -31,7 +33,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 {
                     var responseTask = client.GetAsync(address);
 
-                    var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                    var context = await server
+                        .AcceptAsync(Utilities.DefaultTimeout)
+                        .Before(responseTask);
 
                     client.CancelPendingRequests();
                     await Assert.ThrowsAnyAsync<OperationCanceledException>(() => responseTask);
@@ -51,7 +55,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         public async Task Server_TokenRegisteredAfterResponseSent_Success()
         {
             var interval = TimeSpan.FromSeconds(1);
-            var canceled = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var canceled = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             string address;
             using (var server = Utilities.CreateHttpServer(out address))
@@ -60,7 +66,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 {
                     var responseTask = client.GetAsync(address);
 
-                    var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                    var context = await server
+                        .AcceptAsync(Utilities.DefaultTimeout)
+                        .Before(responseTask);
                     context.Dispose();
 
                     var response = await responseTask;
@@ -81,14 +89,18 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
         public async Task Server_ConnectionCloseHeader_CancellationTokenFires()
         {
             var interval = TimeSpan.FromSeconds(1);
-            var canceled = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var canceled = new TaskCompletionSource<int>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             string address;
             using (var server = Utilities.CreateHttpServer(out address))
             {
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 var ct = context.DisconnectToken;
                 Assert.True(ct.CanBeCanceled, "CanBeCanceled");
                 Assert.False(ct.IsCancellationRequested, "IsCancellationRequested");
@@ -117,7 +129,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 server.Options.Http503Verbosity = Http503VerbosityLevel.Limited;
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 context.Dispose();
 
                 var response = await responseTask;
@@ -136,7 +150,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
 
             var exception = Assert.Throws<HttpSysException>(() => listener.Start());
 
-            Assert.Equal((int)UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS, exception.ErrorCode);
+            Assert.Equal(
+                (int)UnsafeNclNativeMethods.ErrorCodes.ERROR_ALREADY_EXISTS,
+                exception.ErrorCode
+            );
             Assert.Contains($"The prefix '{address1}' is already registered.", exception.Message);
         }
 
@@ -148,7 +165,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
             {
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 Assert.Equal(string.Empty, context.Request.PathBase);
                 Assert.Equal("/", context.Request.Path);
                 context.Dispose();
@@ -181,7 +200,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys.Listener
                 server.Options.UrlPrefixes.Add(address);
                 var responseTask = SendRequestAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 Assert.Equal("/pathbase", context.Request.PathBase);
                 Assert.Equal("/", context.Request.Path);
                 context.Dispose();

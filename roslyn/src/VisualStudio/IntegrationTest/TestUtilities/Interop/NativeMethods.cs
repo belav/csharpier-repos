@@ -40,10 +40,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
         #region ole32.dll
 
         [DllImport(Ole32, PreserveSig = false)]
-        public static extern void CreateBindCtx(int reserved, [MarshalAs(UnmanagedType.Interface)] out IBindCtx bindContext);
+        public static extern void CreateBindCtx(
+            int reserved,
+            [MarshalAs(UnmanagedType.Interface)] out IBindCtx bindContext
+        );
 
         [DllImport(Ole32, PreserveSig = false)]
-        public static extern void GetRunningObjectTable(int reserved, [MarshalAs(UnmanagedType.Interface)] out IRunningObjectTable runningObjectTable);
+        public static extern void GetRunningObjectTable(
+            int reserved,
+            [MarshalAs(UnmanagedType.Interface)] out IRunningObjectTable runningObjectTable
+        );
 
         #endregion
 
@@ -131,7 +137,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
 
         [DllImport(User32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool EnumWindows([MarshalAs(UnmanagedType.FunctionPtr)] WNDENUMPROC lpEnumFunc, IntPtr lParam);
+        public static extern bool EnumWindows(
+            [MarshalAs(UnmanagedType.FunctionPtr)] WNDENUMPROC lpEnumFunc,
+            IntPtr lParam
+        );
 
         [DllImport(User32)]
         public static extern IntPtr GetAncestor(IntPtr hWnd, uint gaFlags);
@@ -152,19 +161,39 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
         public static extern IntPtr GetWindowDC(IntPtr hWnd);
 
         [DllImport(User32)]
-        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, [Optional] IntPtr lpdwProcessId);
+        public static extern uint GetWindowThreadProcessId(
+            IntPtr hWnd,
+            [Optional] IntPtr lpdwProcessId
+        );
 
         [DllImport(User32)]
-        public static extern uint GetWindowThreadProcessId(IntPtr hWnd, [Optional] out uint lpdwProcessId);
+        public static extern uint GetWindowThreadProcessId(
+            IntPtr hWnd,
+            [Optional] out uint lpdwProcessId
+        );
 
         [DllImport(User32, SetLastError = true)]
-        public static extern uint SendInput(uint nInputs, [In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] INPUT[] pInputs, int cbSize);
+        public static extern uint SendInput(
+            uint nInputs,
+            [In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] INPUT[] pInputs,
+            int cbSize
+        );
 
         [DllImport(User32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, uint uMsg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessage(
+            IntPtr hWnd,
+            uint uMsg,
+            IntPtr wParam,
+            IntPtr lParam
+        );
 
         [DllImport(User32, CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, uint uMsg, IntPtr wParam, [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder lParam);
+        public static extern IntPtr SendMessage(
+            IntPtr hWnd,
+            uint uMsg,
+            IntPtr wParam,
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder lParam
+        );
 
         [DllImport(User32, SetLastError = false)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -172,7 +201,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
 
         [DllImport(User32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+        public static extern bool SetWindowPos(
+            IntPtr hWnd,
+            IntPtr hWndInsertAfter,
+            int x,
+            int y,
+            int cx,
+            int cy,
+            uint uFlags
+        );
 
         public const uint SWP_NOZORDER = 4;
 
@@ -180,7 +217,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
         public static extern IntPtr GetLastActivePopup(IntPtr hWnd);
 
         [DllImport(User32, SetLastError = true)]
-        public static extern void SwitchToThisWindow(IntPtr hWnd, [MarshalAs(UnmanagedType.Bool)] bool fUnknown);
+        public static extern void SwitchToThisWindow(
+            IntPtr hWnd,
+            [MarshalAs(UnmanagedType.Bool)] bool fUnknown
+        );
 
         [DllImport(User32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -199,7 +239,6 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Interop
 
         [DllImport(User32)]
         public static extern IntPtr GetMessageExtraInfo();
-
         #endregion
     }
 }

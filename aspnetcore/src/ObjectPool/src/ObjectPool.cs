@@ -30,7 +30,8 @@ namespace Microsoft.Extensions.ObjectPool
     public static class ObjectPool
     {
         /// <inheritdoc />
-        public static ObjectPool<T> Create<T>(IPooledObjectPolicy<T>? policy = null) where T : class, new()
+        public static ObjectPool<T> Create<T>(IPooledObjectPolicy<T>? policy = null)
+            where T : class, new()
         {
             var provider = new DefaultObjectPoolProvider();
             return provider.Create(policy ?? new DefaultPooledObjectPolicy<T>());

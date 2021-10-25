@@ -39,7 +39,9 @@ namespace System.Text.Json
         /// <remarks>Using a <see cref="string"/> is not as efficient as using the
         /// UTF-8 methods since the implementation natively uses UTF-8.
         /// </remarks>
-        public static TValue? Deserialize<[DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] TValue>(string json, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<
+            [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] TValue
+        >(string json, JsonSerializerOptions? options = null)
         {
             if (json == null)
             {
@@ -72,7 +74,9 @@ namespace System.Text.Json
         /// <remarks>Using a UTF-16 span is not as efficient as using the
         /// UTF-8 methods since the implementation natively uses UTF-8.
         /// </remarks>
-        public static TValue? Deserialize<[DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] TValue>(ReadOnlySpan<char> json, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<
+            [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] TValue
+        >(ReadOnlySpan<char> json, JsonSerializerOptions? options = null)
         {
             // default/null span is treated as empty
 
@@ -106,7 +110,11 @@ namespace System.Text.Json
         /// <remarks>Using a <see cref="string"/> is not as efficient as using the
         /// UTF-8 methods since the implementation natively uses UTF-8.
         /// </remarks>
-        public static object? Deserialize(string json, [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            string json,
+            [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             if (json == null)
             {
@@ -150,7 +158,11 @@ namespace System.Text.Json
         /// <remarks>Using a UTF-16 span is not as efficient as using the
         /// UTF-8 methods since the implementation natively uses UTF-8.
         /// </remarks>
-        public static object? Deserialize(ReadOnlySpan<char> json, [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            ReadOnlySpan<char> json,
+            [DynamicallyAccessedMembers(JsonHelpers.MembersAccessedOnRead)] Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             // default/null span is treated as empty
 
@@ -164,7 +176,11 @@ namespace System.Text.Json
             return value;
         }
 
-        private static TValue? Deserialize<TValue>(ReadOnlySpan<char> json, Type returnType, JsonSerializerOptions? options)
+        private static TValue? Deserialize<TValue>(
+            ReadOnlySpan<char> json,
+            Type returnType,
+            JsonSerializerOptions? options
+        )
         {
             const long ArrayPoolMaxSizeBeforeUsingNormalAlloc = 1024 * 1024;
 
@@ -176,12 +192,21 @@ namespace System.Text.Json
             byte[]? tempArray = null;
 
             // For performance, avoid obtaining actual byte count unless memory usage is higher than the threshold.
-            Span<byte> utf8 = json.Length <= (ArrayPoolMaxSizeBeforeUsingNormalAlloc / JsonConstants.MaxExpansionFactorWhileTranscoding) ?
-                // Use a pooled alloc.
-                tempArray = ArrayPool<byte>.Shared.Rent(json.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) :
-                // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per current implementation)
-                // and by using a normal alloc we can avoid the Clear().
-                new byte[JsonReaderHelper.GetUtf8ByteCount(json)];
+            Span<byte> utf8 =
+                json.Length
+                <= (
+                    ArrayPoolMaxSizeBeforeUsingNormalAlloc
+                    / JsonConstants.MaxExpansionFactorWhileTranscoding
+                )
+                    ?
+                      // Use a pooled alloc.
+                      tempArray = ArrayPool<byte>.Shared.Rent(
+                          json.Length * JsonConstants.MaxExpansionFactorWhileTranscoding
+                      )
+                    :
+                      // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per current implementation)
+                      // and by using a normal alloc we can avoid the Clear().
+                      new byte[JsonReaderHelper.GetUtf8ByteCount(json)];
 
             try
             {

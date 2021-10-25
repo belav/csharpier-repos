@@ -7,15 +7,14 @@ using System.Linq;
 
 namespace System.CommandLine.Collections
 {
-    public abstract class AliasedSet<T> : IReadOnlyList<T>
-        where T : class
+    public abstract class AliasedSet<T> : IReadOnlyList<T> where T : class
     {
         private protected readonly Dictionary<string, T> ItemsByAlias = new Dictionary<string, T>();
 
         private protected List<T> Items { get; } = new List<T>();
 
         private protected HashSet<T> DirtyItems { get; } = new HashSet<T>();
-        
+
         public int Count => Items.Count;
 
         public bool Contains(string alias)

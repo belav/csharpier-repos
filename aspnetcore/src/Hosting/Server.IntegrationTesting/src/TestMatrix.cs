@@ -14,19 +14,18 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
         public IList<ServerType> Servers { get; set; } = new List<ServerType>();
         public IList<string> Tfms { get; set; } = new List<string>();
         public IList<ApplicationType> ApplicationTypes { get; set; } = new List<ApplicationType>();
-        public IList<RuntimeArchitecture> Architectures { get; set; } = new List<RuntimeArchitecture>();
+        public IList<RuntimeArchitecture> Architectures { get; set; } =
+            new List<RuntimeArchitecture>();
 
         // ANCM specific...
         public IList<HostingModel> HostingModels { get; set; } = new List<HostingModel>();
 
-        private IList<Tuple<Func<TestVariant, bool>, string>> Skips { get; } = new List<Tuple<Func<TestVariant, bool>, string>>();
+        private IList<Tuple<Func<TestVariant, bool>, string>> Skips { get; } =
+            new List<Tuple<Func<TestVariant, bool>, string>>();
 
         public static TestMatrix ForServers(params ServerType[] types)
         {
-            return new TestMatrix()
-            {
-                Servers = types
-            };
+            return new TestMatrix() { Servers = types };
         }
 
         public TestMatrix WithTfms(params string[] tfms)
@@ -203,7 +202,12 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             return null;
         }
 
-        private void VaryByApplicationType(List<TestVariant> variants, ServerType server, string tfm, string skip)
+        private void VaryByApplicationType(
+            List<TestVariant> variants,
+            ServerType server,
+            string tfm,
+            string skip
+        )
         {
             foreach (var t in ApplicationTypes)
             {
@@ -225,7 +229,13 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             }
         }
 
-        private void VaryByArchitecture(List<TestVariant> variants, ServerType server, string tfm, string skip, ApplicationType type)
+        private void VaryByArchitecture(
+            List<TestVariant> variants,
+            ServerType server,
+            string tfm,
+            string skip,
+            ApplicationType type
+        )
         {
             foreach (var arch in Architectures)
             {
@@ -241,14 +251,16 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                 }
                 else
                 {
-                    variants.Add(new TestVariant()
-                    {
-                        Server = server,
-                        Tfm = tfm,
-                        ApplicationType = type,
-                        Architecture = arch,
-                        Skip = archSkip,
-                    });
+                    variants.Add(
+                        new TestVariant()
+                        {
+                            Server = server,
+                            Tfm = tfm,
+                            ApplicationType = type,
+                            Architecture = arch,
+                            Skip = archSkip,
+                        }
+                    );
                 }
             }
         }
@@ -258,12 +270,18 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             if (arch == RuntimeArchitecture.x64)
             {
                 // Can't run x64 on a x86 OS.
-                return (RuntimeInformation.OSArchitecture == Architecture.Arm || RuntimeInformation.OSArchitecture == Architecture.X86)
-                    ? $"Cannot run {arch} on your current system." : null;
+                return (
+                    RuntimeInformation.OSArchitecture == Architecture.Arm
+                    || RuntimeInformation.OSArchitecture == Architecture.X86
+                )
+                  ? $"Cannot run {arch} on your current system."
+                  : null;
             }
 
             // No x86 runtimes available on MacOS or Linux.
-            return OperatingSystem.IsWindows() ? null : $"No {arch} available for non-Windows systems.";
+            return OperatingSystem.IsWindows()
+              ? null
+              : $"No {arch} available for non-Windows systems.";
         }
 
         private bool IsArchitectureSupportedOnServer(RuntimeArchitecture arch, ServerType server)
@@ -272,7 +290,14 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
             return !(arch == RuntimeArchitecture.x86 && ServerType.Nginx == server);
         }
 
-        private void VaryByAncmHostingModel(IList<TestVariant> variants, ServerType server, string tfm, ApplicationType type, RuntimeArchitecture arch, string skip)
+        private void VaryByAncmHostingModel(
+            IList<TestVariant> variants,
+            ServerType server,
+            string tfm,
+            ApplicationType type,
+            RuntimeArchitecture arch,
+            string skip
+        )
         {
             foreach (var hostingModel in HostingModels)
             {
@@ -291,15 +316,17 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting
                     }
                 }
 
-                variants.Add(new TestVariant()
-                {
-                    Server = server,
-                    Tfm = tfm,
-                    ApplicationType = type,
-                    Architecture = arch,
-                    HostingModel = hostingModel,
-                    Skip = skipAncm,
-                });
+                variants.Add(
+                    new TestVariant()
+                    {
+                        Server = server,
+                        Tfm = tfm,
+                        ApplicationType = type,
+                        Architecture = arch,
+                        HostingModel = hostingModel,
+                        Skip = skipAncm,
+                    }
+                );
             }
         }
 

@@ -9,12 +9,18 @@ namespace Microsoft.CodeAnalysis.NavigationBar
         public class GenerateDefaultConstructor : AbstractGenerateCodeItem
         {
             public GenerateDefaultConstructor(string text, SymbolKey destinationTypeSymbolKey)
-                : base(RoslynNavigationBarItemKind.GenerateDefaultConstructor, text, Glyph.MethodPublic, destinationTypeSymbolKey)
-            {
-            }
+                : base(
+                    RoslynNavigationBarItemKind.GenerateDefaultConstructor,
+                    text,
+                    Glyph.MethodPublic,
+                    destinationTypeSymbolKey
+                ) { }
 
-            protected internal override SerializableNavigationBarItem Dehydrate()
-                => SerializableNavigationBarItem.GenerateDefaultConstructor(Text, DestinationTypeSymbolKey);
+            protected internal override SerializableNavigationBarItem Dehydrate() =>
+                SerializableNavigationBarItem.GenerateDefaultConstructor(
+                    Text,
+                    DestinationTypeSymbolKey
+                );
         }
     }
 }

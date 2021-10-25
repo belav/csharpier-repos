@@ -22,13 +22,29 @@ namespace Microsoft.CodeAnalysis.NavigationBar
                 ImmutableArray<RoslynNavigationBarItem> childItems = default,
                 int indent = 0,
                 bool bolded = false,
-                bool grayed = false)
-                : base(RoslynNavigationBarItemKind.Actionless, text, glyph, bolded, grayed, indent, childItems, spans)
-            {
-            }
+                bool grayed = false
+            )
+                : base(
+                    RoslynNavigationBarItemKind.Actionless,
+                    text,
+                    glyph,
+                    bolded,
+                    grayed,
+                    indent,
+                    childItems,
+                    spans
+                ) { }
 
-            protected internal override SerializableNavigationBarItem Dehydrate()
-                => SerializableNavigationBarItem.ActionlessItem(Text, Glyph, Spans, SerializableNavigationBarItem.Dehydrate(ChildItems), Indent, Bolded, Grayed);
+            protected internal override SerializableNavigationBarItem Dehydrate() =>
+                SerializableNavigationBarItem.ActionlessItem(
+                    Text,
+                    Glyph,
+                    Spans,
+                    SerializableNavigationBarItem.Dehydrate(ChildItems),
+                    Indent,
+                    Bolded,
+                    Grayed
+                );
         }
     }
 }

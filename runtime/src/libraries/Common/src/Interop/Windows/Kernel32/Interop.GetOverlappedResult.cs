@@ -14,6 +14,7 @@ internal static partial class Interop
             SafeFileHandle hFile,
             NativeOverlapped* lpOverlapped,
             ref int lpNumberOfBytesTransferred,
-            bool bWait);
+            bool bWait
+        );
     }
 }

@@ -19,7 +19,10 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestInterFaces2()
         {
-            VerifyInterfaces(typeof(S1).Project(), new Type[] { typeof(ImI1).Project(), typeof(I21).Project() });
+            VerifyInterfaces(
+                typeof(S1).Project(),
+                new Type[] { typeof(ImI1).Project(), typeof(I21).Project() }
+            );
         }
 
         // Verify implemented interfaces
@@ -34,7 +37,10 @@ namespace System.Reflection.Tests
         [ActiveIssue("https://github.com/mono/mono/issues/18294", TestRuntimes.Mono)]
         public static void TestInterFaces4()
         {
-            VerifyInterfaces(typeof(D1).Project(), new Type[] { typeof(ImI1).Project(), typeof(I0).Project(), typeof(I21).Project() });
+            VerifyInterfaces(
+                typeof(D1).Project(),
+                new Type[] { typeof(ImI1).Project(), typeof(I0).Project(), typeof(I21).Project() }
+            );
         }
 
         // Verify implemented interfaces
@@ -42,7 +48,10 @@ namespace System.Reflection.Tests
         [ActiveIssue("https://github.com/mono/mono/issues/18294", TestRuntimes.Mono)]
         public static void TestInterFaces5()
         {
-            VerifyInterfaces(typeof(D2<>).Project(), new Type[] { typeof(ImI1).Project(), typeof(I0).Project(), typeof(I21).Project() });
+            VerifyInterfaces(
+                typeof(D2<>).Project(),
+                new Type[] { typeof(ImI1).Project(), typeof(I0).Project(), typeof(I21).Project() }
+            );
         }
 
         // Verify implemented interfaces
@@ -50,32 +59,41 @@ namespace System.Reflection.Tests
         [ActiveIssue("https://github.com/mono/mono/issues/18294", TestRuntimes.Mono)]
         public static void TestInterFaces6()
         {
-            VerifyInterfaces(typeof(D2<int>).Project(), new Type[] { typeof(ImI1).Project(), typeof(I0).Project(), typeof(I21).Project() });
+            VerifyInterfaces(
+                typeof(D2<int>).Project(),
+                new Type[] { typeof(ImI1).Project(), typeof(I0).Project(), typeof(I21).Project() }
+            );
         }
 
         // Verify implemented interfaces
         [Fact]
         public static void TestInterFaces7()
         {
-            VerifyInterfaces(typeof(D3<I21>).Project(), new Type[] { typeof(I3<I21>).Project(), typeof(I0).Project() });
+            VerifyInterfaces(
+                typeof(D3<I21>).Project(),
+                new Type[] { typeof(I3<I21>).Project(), typeof(I0).Project() }
+            );
         }
 
         // Verify implemented interfaces
         [Fact]
         public static void TestInterFaces8()
         {
-            VerifyInterfaces(typeof(D4<>).Project(), new Type[] { typeof(I3<string>).Project(), typeof(I0).Project() });
+            VerifyInterfaces(
+                typeof(D4<>).Project(),
+                new Type[] { typeof(I3<string>).Project(), typeof(I0).Project() }
+            );
         }
 
         // Verify implemented interfaces
         [Fact]
         public static void TestInterFaces9()
         {
-            VerifyInterfaces(typeof(D4<string>).Project(), new Type[] { typeof(I3<string>).Project(), typeof(I0).Project() });
+            VerifyInterfaces(
+                typeof(D4<string>).Project(),
+                new Type[] { typeof(I3<string>).Project(), typeof(I0).Project() }
+            );
         }
-
-
-
 
         //private helper methods
         private static void VerifyInterfaces(Type type, params Type[] expected)
@@ -93,8 +111,20 @@ namespace System.Reflection.Tests
             }
             Type[] actual = list.ToArray();
 
-            Array.Sort(actual, delegate (Type a, Type b) { return a.GetHashCode() - b.GetHashCode(); });
-            Array.Sort(expected, delegate (Type a, Type b) { return a.GetHashCode() - b.GetHashCode(); });
+            Array.Sort(
+                actual,
+                delegate(Type a, Type b)
+                {
+                    return a.GetHashCode() - b.GetHashCode();
+                }
+            );
+            Array.Sort(
+                expected,
+                delegate(Type a, Type b)
+                {
+                    return a.GetHashCode() - b.GetHashCode();
+                }
+            );
 
             for (int i = 0; i < actual.Length; i++)
             {
@@ -124,5 +154,9 @@ namespace System.Reflection.Tests
     public class E3<T> where T : C1, I3<T> { }
     public class E4<T> where T : C1, I3<int> { }
 
-    public enum MyEnum1 { A, B }
+    public enum MyEnum1
+    {
+        A,
+        B
+    }
 }

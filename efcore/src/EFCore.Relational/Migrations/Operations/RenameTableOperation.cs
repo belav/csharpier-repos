@@ -32,7 +32,6 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations
         public virtual string? NewName { get; set; }
 
         /// <inheritdoc />
-        string ITableMigrationOperation.Table
-            => Name;
+        string ITableMigrationOperation.Table => Name;
     }
 }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void IAnonymousFunctionExpression_BoundLambda_HasValidLambdaExpressionTree()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -36,7 +37,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'Action x = () => F();')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Action x = () => F()')
     Declarators:
@@ -61,14 +63,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IAnonymousFunctionExpression_BoundLambda_HasValidLambdaExpressionTree_JustBindingLambdaReturnsOnlyIAnonymousFunctionExpression()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -83,7 +90,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAnonymousFunctionOperation (Symbol: lambda expression) (OperationKind.AnonymousFunction, Type: null) (Syntax: '() => F()')
   IBlockOperation (2 statements) (OperationKind.Block, Type: null, IsImplicit) (Syntax: 'F()')
     IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null, IsImplicit) (Syntax: 'F()')
@@ -98,14 +106,19 @@ IAnonymousFunctionOperation (Symbol: lambda expression) (OperationKind.Anonymous
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ParenthesizedLambdaExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ParenthesizedLambdaExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IAnonymousFunctionExpression_BoundLambda_HasValidLambdaExpressionTree_ExplicitCast()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -120,7 +133,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'Action x =  ... () => F());')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'Action x =  ... (() => F())')
     Declarators:
@@ -145,14 +159,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IAnonymousFunctionExpression_BoundLambda_HasValidLambdaExpressionTree2()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -167,7 +186,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAnonymousFunctionOperation (Symbol: lambda expression) (OperationKind.AnonymousFunction, Type: null) (Syntax: '() => F()')
   IBlockOperation (2 statements) (OperationKind.Block, Type: null, IsImplicit) (Syntax: 'F()')
     IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null, IsImplicit) (Syntax: 'F()')
@@ -182,14 +202,19 @@ IAnonymousFunctionOperation (Symbol: lambda expression) (OperationKind.Anonymous
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ParenthesizedLambdaExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ParenthesizedLambdaExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IAnonymousFunctionExpression_UnboundLambdaAsVar_HasValidLambdaExpressionTree()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -204,7 +229,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'var x = () => F();')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'var x = () => F()')
     Declarators:
@@ -222,20 +248,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0815: Cannot assign lambda expression to an implicitly-typed variable
                 //         /*<bind>*/var x = () => F();/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue, "x = () => F()").WithArguments("lambda expression").WithLocation(8, 23),
+                Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableAssignedBadValue, "x = () => F()")
+                    .WithArguments("lambda expression")
+                    .WithLocation(8, 23),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IAnonymousFunctionExpression_UnboundLambdaAsDelegate_HasValidLambdaExpressionTree()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -250,7 +284,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'Action<int> ...  () => F();')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Action<int> ... = () => F()')
     Declarators:
@@ -270,20 +305,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1593: Delegate 'Action<int>' does not take 0 arguments
                 //         Action<int> x /*<bind>*/= () => F()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadDelArgCount, "() => F()").WithArguments("System.Action<int>", "0").WithLocation(8, 35)
+                Diagnostic(ErrorCode.ERR_BadDelArgCount, "() => F()")
+                    .WithArguments("System.Action<int>", "0")
+                    .WithLocation(8, 35)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IAnonymousFunctionExpression_UnboundLambdaAsDelegate_HasValidLambdaExpressionTree_ExplicitValidCast()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -298,7 +341,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'Action<int> ... () => F());')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Action<int> ... (() => F())')
     Declarators:
@@ -324,20 +368,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'System.Action' to 'System.Action<int>'
                 //         /*<bind>*/Action<int> x = (Action)(() => F());/*</bind>*/
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "(Action)(() => F())").WithArguments("System.Action", "System.Action<int>").WithLocation(8, 35)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "(Action)(() => F())")
+                    .WithArguments("System.Action", "System.Action<int>")
+                    .WithLocation(8, 35)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IAnonymousFunctionExpression_UnboundLambdaAsDelegate_HasValidLambdaExpressionTree_ExplicitInvalidCast()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -352,7 +404,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'Action<int> ... () => F());')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Action<int> ... (() => F())')
     Declarators:
@@ -372,20 +425,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1593: Delegate 'Action<int>' does not take 0 arguments
                 //         /*<bind>*/Action<int> x = (Action<int>)(() => F());/*</bind>*/
-                Diagnostic(ErrorCode.ERR_BadDelArgCount, "() => F()").WithArguments("System.Action<int>", "0").WithLocation(8, 49)
+                Diagnostic(ErrorCode.ERR_BadDelArgCount, "() => F()")
+                    .WithArguments("System.Action<int>", "0")
+                    .WithLocation(8, 49)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void IAnonymousFunctionExpression_UnboundLambda_ReferenceEquality()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -405,20 +466,36 @@ class Program
             var syntaxTree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
-            var variableDeclaration = syntaxTree.GetRoot().DescendantNodes().OfType<LocalDeclarationStatementSyntax>().Single();
-            var lambdaSyntax = (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables.Single().Initializer.Value;
+            var variableDeclaration = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<LocalDeclarationStatementSyntax>()
+                .Single();
+            var lambdaSyntax =
+                (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables.Single().Initializer.Value;
 
-            var variableDeclarationGroupOperation = (IVariableDeclarationGroupOperation)semanticModel.GetOperation(variableDeclaration);
-            var variableTreeLambdaOperation = (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations.Single().Declarators.Single().Initializer.Value;
-            var lambdaOperation = (IAnonymousFunctionOperation)semanticModel.GetOperation(lambdaSyntax);
+            var variableDeclarationGroupOperation =
+                (IVariableDeclarationGroupOperation)semanticModel.GetOperation(variableDeclaration);
+            var variableTreeLambdaOperation =
+                (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations
+                    .Single()
+                    .Declarators.Single().Initializer.Value;
+            var lambdaOperation = (IAnonymousFunctionOperation)semanticModel.GetOperation(
+                lambdaSyntax
+            );
 
             // Assert that both ways of getting to the lambda (requesting the lambda directly, and requesting via the lambda syntax)
             // return the same bound node.
             Assert.Same(variableTreeLambdaOperation, lambdaOperation);
 
-            var variableDeclarationGroupOperationSecondRequest = (IVariableDeclarationGroupOperation)semanticModel.GetOperation(variableDeclaration);
-            var variableTreeLambdaOperationSecondRequest = (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations.Single().Declarators.Single().Initializer.Value;
-            var lambdaOperationSecondRequest = (IAnonymousFunctionOperation)semanticModel.GetOperation(lambdaSyntax);
+            var variableDeclarationGroupOperationSecondRequest =
+                (IVariableDeclarationGroupOperation)semanticModel.GetOperation(variableDeclaration);
+            var variableTreeLambdaOperationSecondRequest =
+                (IAnonymousFunctionOperation)variableDeclarationGroupOperation.Declarations
+                    .Single()
+                    .Declarators.Single().Initializer.Value;
+            var lambdaOperationSecondRequest =
+                (IAnonymousFunctionOperation)semanticModel.GetOperation(lambdaSyntax);
 
             // Assert that, when request the variable declaration or the lambda for a second time, there is no rebinding of the
             // underlying UnboundLambda, and we get the same IAnonymousFunctionExpression as before
@@ -430,7 +507,8 @@ class Program
         [Fact]
         public void IAnonymousFunctionExpression_StaticLambda()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program
@@ -445,7 +523,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: 'Action x =  ...  () => F();')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'Action x =  ... c () => F()')
     Declarators:
@@ -468,10 +547,13 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(8,30): error CS8400: Feature 'static anonymous function' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //         /*<bind>*/Action x = static () => F();/*</bind>*/
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "static").WithArguments("static anonymous function", "9.0").WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "static")
+                    .WithArguments("static anonymous function", "9.0")
+                    .WithLocation(8, 30)
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -479,15 +561,22 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 expectedOperationTree,
                 expectedDiagnostics,
                 parseOptions: TestOptions.Regular8
-                );
+            );
 
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             var syntaxTree = compilation.SyntaxTrees[0];
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
-            var variableDeclaration = syntaxTree.GetRoot().DescendantNodes().OfType<LocalDeclarationStatementSyntax>().Single();
-            var lambdaSyntax = (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables.Single().Initializer.Value;
-            var lambdaOperation = (IAnonymousFunctionOperation)semanticModel.GetOperation(lambdaSyntax);
+            var variableDeclaration = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<LocalDeclarationStatementSyntax>()
+                .Single();
+            var lambdaSyntax =
+                (LambdaExpressionSyntax)variableDeclaration.Declaration.Variables.Single().Initializer.Value;
+            var lambdaOperation = (IAnonymousFunctionOperation)semanticModel.GetOperation(
+                lambdaSyntax
+            );
 
             Assert.True(lambdaOperation.Symbol.IsStatic);
         }
@@ -496,7 +585,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
         [Fact]
         public void LambdaFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(System.Action<bool, bool> d)
@@ -510,7 +600,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -569,14 +660,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LambdaFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(System.Action<bool, bool> d1, System.Action<bool, bool> d2)
@@ -589,7 +685,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -663,14 +760,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LambdaFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(System.Action<int> d1, System.Action<bool> d2)
@@ -691,7 +793,8 @@ struct C
     }/*</bind>*/
 }
 ";
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -791,14 +894,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void LambdaFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(System.Action d1, System.Action<bool, bool> d2)
@@ -820,22 +928,36 @@ struct C
             var compilation = CreateCompilation(source);
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
-            var graphM = ControlFlowGraph.Create((IMethodBodyOperation)semanticModel.GetOperation(tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single()));
+            var graphM = ControlFlowGraph.Create(
+                (IMethodBodyOperation)semanticModel.GetOperation(
+                    tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single()
+                )
+            );
 
             Assert.NotNull(graphM);
             Assert.Null(graphM.Parent);
 
             IFlowAnonymousFunctionOperation lambdaD1 = getLambda(graphM);
 
-            Assert.Throws<ArgumentNullException>(() => graphM.GetLocalFunctionControlFlowGraph(null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol));
-            Assert.Throws<ArgumentNullException>(() => graphM.GetLocalFunctionControlFlowGraphInScope(null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => graphM.GetLocalFunctionControlFlowGraphInScope(lambdaD1.Symbol));
+            Assert.Throws<ArgumentNullException>(
+                () => graphM.GetLocalFunctionControlFlowGraph(null)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => graphM.GetLocalFunctionControlFlowGraphInScope(null)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => graphM.GetLocalFunctionControlFlowGraphInScope(lambdaD1.Symbol)
+            );
 
             var graphD1 = graphM.GetAnonymousFunctionControlFlowGraph(lambdaD1);
             Assert.NotNull(graphD1);
             Assert.Same(graphM, graphD1.Parent);
-            var graphD1_FromExtension = graphM.GetAnonymousFunctionControlFlowGraphInScope(lambdaD1);
+            var graphD1_FromExtension = graphM.GetAnonymousFunctionControlFlowGraphInScope(
+                lambdaD1
+            );
             Assert.Same(graphD1, graphD1_FromExtension);
 
             IFlowAnonymousFunctionOperation lambdaD2 = getLambda(graphD1);
@@ -843,14 +965,25 @@ struct C
             Assert.NotNull(graphD2);
             Assert.Same(graphD1, graphD2.Parent);
 
-            Assert.Throws<ArgumentNullException>(() => graphM.GetAnonymousFunctionControlFlowGraph(null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => graphM.GetAnonymousFunctionControlFlowGraph(lambdaD2));
-            Assert.Throws<ArgumentNullException>(() => graphM.GetAnonymousFunctionControlFlowGraphInScope(null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => graphM.GetAnonymousFunctionControlFlowGraphInScope(lambdaD2));
+            Assert.Throws<ArgumentNullException>(
+                () => graphM.GetAnonymousFunctionControlFlowGraph(null)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => graphM.GetAnonymousFunctionControlFlowGraph(lambdaD2)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => graphM.GetAnonymousFunctionControlFlowGraphInScope(null)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => graphM.GetAnonymousFunctionControlFlowGraphInScope(lambdaD2)
+            );
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph)
             {
-                return graph.Blocks.SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf())).OfType<IFlowAnonymousFunctionOperation>().Single();
+                return graph.Blocks
+                    .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
+                    .OfType<IFlowAnonymousFunctionOperation>()
+                    .Single();
             }
         }
 
@@ -858,7 +991,8 @@ struct C
         [Fact]
         public void LambdaFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 struct C
 {
     void M(System.Action d1, System.Action d2)
@@ -875,7 +1009,11 @@ struct C
             var compilation = CreateCompilation(source);
             var tree = compilation.SyntaxTrees.Single();
             var semanticModel = compilation.GetSemanticModel(tree);
-            var graphM = ControlFlowGraph.Create((IMethodBodyOperation)semanticModel.GetOperation(tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single()));
+            var graphM = ControlFlowGraph.Create(
+                (IMethodBodyOperation)semanticModel.GetOperation(
+                    tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single()
+                )
+            );
 
             Assert.NotNull(graphM);
             Assert.Null(graphM.Parent);
@@ -885,10 +1023,18 @@ struct C
             IFlowAnonymousFunctionOperation lambdaD2 = getLambda(graphM, index: 1);
             Assert.NotNull(lambdaD2);
 
-            Assert.Throws<ArgumentNullException>(() => graphM.GetLocalFunctionControlFlowGraph(null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol));
-            Assert.Throws<ArgumentNullException>(() => graphM.GetLocalFunctionControlFlowGraphInScope(null));
-            Assert.Throws<ArgumentOutOfRangeException>(() => graphM.GetLocalFunctionControlFlowGraphInScope(lambdaD1.Symbol));
+            Assert.Throws<ArgumentNullException>(
+                () => graphM.GetLocalFunctionControlFlowGraph(null)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => graphM.GetLocalFunctionControlFlowGraphInScope(null)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => graphM.GetLocalFunctionControlFlowGraphInScope(lambdaD1.Symbol)
+            );
 
             var graphD1 = graphM.GetAnonymousFunctionControlFlowGraph(lambdaD1);
             Assert.NotNull(graphD1);
@@ -897,16 +1043,23 @@ struct C
             Assert.NotNull(graphD2);
             Assert.Same(graphM, graphD2.Parent);
 
-            var graphD1_FromExtension = graphM.GetAnonymousFunctionControlFlowGraphInScope(lambdaD1);
+            var graphD1_FromExtension = graphM.GetAnonymousFunctionControlFlowGraphInScope(
+                lambdaD1
+            );
             Assert.Same(graphD1, graphD1_FromExtension);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => graphD2.GetAnonymousFunctionControlFlowGraph(lambdaD1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => graphD2.GetAnonymousFunctionControlFlowGraph(lambdaD1)
+            );
             graphD1_FromExtension = graphD2.GetAnonymousFunctionControlFlowGraphInScope(lambdaD1);
             Assert.Same(graphD1, graphD1_FromExtension);
 
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph, int index)
             {
-                return graph.Blocks.SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf())).OfType<IFlowAnonymousFunctionOperation>().ElementAt(index);
+                return graph.Blocks
+                    .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
+                    .OfType<IFlowAnonymousFunctionOperation>()
+                    .ElementAt(index);
             }
         }
     }

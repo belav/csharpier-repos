@@ -34,7 +34,16 @@ namespace Microsoft.AspNetCore.SignalR
         {
             foreach (var hubProtocol in protocols)
             {
-                if (hubProtocol.GetType().CustomAttributes.Where(a => a.AttributeType.FullName == "Microsoft.AspNetCore.SignalR.Internal.NonDefaultHubProtocolAttribute").Any())
+                if (
+                    hubProtocol
+                        .GetType()
+                        .CustomAttributes.Where(
+                            a =>
+                                a.AttributeType.FullName
+                                == "Microsoft.AspNetCore.SignalR.Internal.NonDefaultHubProtocolAttribute"
+                        )
+                        .Any()
+                )
                 {
                     continue;
                 }

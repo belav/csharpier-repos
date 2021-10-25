@@ -15,18 +15,20 @@ namespace Microsoft.AspNetCore.Components
         [Fact]
         public void RejectsUnknownParameters()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-            {
-                var parameters = new Dictionary<string, object>
+            var ex = Assert.Throws<InvalidOperationException>(
+                () =>
                 {
-                    { "unknownparameter", 123 }
-                };
-                _ = new DynamicComponent().SetParametersAsync(ParameterView.FromDictionary(parameters));
-            });
+                    var parameters = new Dictionary<string, object> { { "unknownparameter", 123 } };
+                    _ = new DynamicComponent().SetParametersAsync(
+                        ParameterView.FromDictionary(parameters)
+                    );
+                }
+            );
 
             Assert.StartsWith(
-                $"{ nameof(DynamicComponent)} does not accept a parameter with the name 'unknownparameter'.",
-                ex.Message);
+                $"{nameof(DynamicComponent)} does not accept a parameter with the name 'unknownparameter'.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -37,11 +39,13 @@ namespace Microsoft.AspNetCore.Components
             var componentId = renderer.AssignRootComponentId(instance);
 
             var ex = Assert.Throws<InvalidOperationException>(
-                () => renderer.RenderRootComponent(componentId, ParameterView.Empty));
+                () => renderer.RenderRootComponent(componentId, ParameterView.Empty)
+            );
 
             Assert.StartsWith(
-                $"{ nameof(DynamicComponent)} requires a non-null value for the parameter {nameof(DynamicComponent.Type)}.",
-                ex.Message);
+                $"{nameof(DynamicComponent)} requires a non-null value for the parameter {nameof(DynamicComponent.Type)}.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -51,10 +55,12 @@ namespace Microsoft.AspNetCore.Components
             var instance = new DynamicComponent();
             var renderer = new TestRenderer();
             var componentId = renderer.AssignRootComponentId(instance);
-            var parameters = ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(DynamicComponent.Type), typeof(TestComponent) },
-            });
+            var parameters = ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(DynamicComponent.Type), typeof(TestComponent) },
+                }
+            );
 
             // Act
             renderer.RenderRootComponent(componentId, parameters);
@@ -62,7 +68,11 @@ namespace Microsoft.AspNetCore.Components
             // Assert
             var batch = renderer.Batches.Single();
             AssertFrame.Component<TestComponent>(batch.ReferenceFrames[0], 1, 0);
-            AssertFrame.Text(batch.ReferenceFrames[1], "Hello from TestComponent with IntProp=0", 0);
+            AssertFrame.Text(
+                batch.ReferenceFrames[1],
+                "Hello from TestComponent with IntProp=0",
+                0
+            );
         }
 
         [Fact]
@@ -74,21 +84,26 @@ namespace Microsoft.AspNetCore.Components
             var childParameters = new Dictionary<string, object>
             {
                 { nameof(TestComponent.IntProp), 123 },
-                { nameof(TestComponent.ChildContent), (RenderFragment)(builder =>
                 {
-                    builder.AddContent(0, "This is some child content");
-                })},
+                    nameof(TestComponent.ChildContent),
+                    (RenderFragment)(
+                        builder =>
+                        {
+                            builder.AddContent(0, "This is some child content");
+                        }
+                    )
+                },
             };
-            var parameters = ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(DynamicComponent.Type), typeof(TestComponent) },
-                { nameof(DynamicComponent.Parameters), childParameters },
-            });
+            var parameters = ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(DynamicComponent.Type), typeof(TestComponent) },
+                    { nameof(DynamicComponent.Parameters), childParameters },
+                }
+            );
 
             // Act
-            renderer.RenderRootComponent(
-                renderer.AssignRootComponentId(instance),
-                parameters);
+            renderer.RenderRootComponent(renderer.AssignRootComponentId(instance), parameters);
 
             // Assert
             var batch = renderer.Batches.Single();
@@ -99,14 +114,20 @@ namespace Microsoft.AspNetCore.Components
             AssertFrame.Attribute(batch.ReferenceFrames[2], nameof(TestComponent.ChildContent), 1);
 
             // The child component itself is rendered
-            AssertFrame.Text(batch.ReferenceFrames[3], "Hello from TestComponent with IntProp=123", 0);
+            AssertFrame.Text(
+                batch.ReferenceFrames[3],
+                "Hello from TestComponent with IntProp=123",
+                0
+            );
             AssertFrame.Text(batch.ReferenceFrames[4], "This is some child content", 0);
         }
 
         private class TestComponent : AutoRenderComponent
         {
-            [Parameter] public int IntProp { get; set; }
-            [Parameter] public RenderFragment ChildContent { get; set; }
+            [Parameter]
+            public int IntProp { get; set; }
+            [Parameter]
+            public RenderFragment ChildContent { get; set; }
 
             protected override void BuildRenderTree(RenderTreeBuilder builder)
             {

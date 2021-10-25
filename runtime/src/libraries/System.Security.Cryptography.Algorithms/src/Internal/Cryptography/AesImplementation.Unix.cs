@@ -16,12 +16,22 @@ namespace Internal.Cryptography
             int blockSize,
             int paddingSize,
             int feedback,
-            bool encrypting)
+            bool encrypting
+        )
         {
             // The algorithm pointer is a static pointer, so not having any cleanup code is correct.
             IntPtr algorithm = GetAlgorithm(key.Length * 8, feedback * 8, cipherMode);
 
-            BasicSymmetricCipher cipher = new OpenSslCipher(algorithm, cipherMode, blockSize, paddingSize, key, 0, iv, encrypting);
+            BasicSymmetricCipher cipher = new OpenSslCipher(
+                algorithm,
+                cipherMode,
+                blockSize,
+                paddingSize,
+                key,
+                0,
+                iv,
+                encrypting
+            );
             return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
         }
 
@@ -45,9 +55,12 @@ namespace Internal.Cryptography
                 (256, CipherMode.CFB) when feedback == 8 => Interop.Crypto.EvpAes256Cfb8(),
                 (256, CipherMode.CFB) when feedback == 128 => Interop.Crypto.EvpAes256Cfb128(),
 
-                _ => throw (keySize == 128 || keySize == 192 || keySize == 256 ? (Exception)
-                        new NotSupportedException() :
-                        new CryptographicException(SR.Cryptography_InvalidKeySize)),
+                _
+                  => throw (
+                      keySize == 128 || keySize == 192 || keySize == 256
+                          ? (Exception)new NotSupportedException()
+                          : new CryptographicException(SR.Cryptography_InvalidKeySize)
+                  ),
             };
     }
 }

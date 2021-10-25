@@ -19,9 +19,13 @@ namespace Microsoft.AspNetCore.Http
         public virtual string? Name
         {
             get => _name;
-            set => _name = !string.IsNullOrEmpty(value)
-                ? value
-                : throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(value));
+            set =>
+                _name = !string.IsNullOrEmpty(value)
+                    ? value
+                    : throw new ArgumentException(
+                          Resources.ArgumentCannotBeNullOrEmpty,
+                          nameof(value)
+                      );
         }
 
         /// <summary>
@@ -106,8 +110,14 @@ namespace Microsoft.AspNetCore.Http
                 MaxAge = MaxAge,
                 Domain = Domain,
                 IsEssential = IsEssential,
-                Secure = SecurePolicy == CookieSecurePolicy.Always || (SecurePolicy == CookieSecurePolicy.SameAsRequest && context.Request.IsHttps),
-                Expires = Expiration.HasValue ? expiresFrom.Add(Expiration.GetValueOrDefault()) : default(DateTimeOffset?)
+                Secure =
+                    SecurePolicy == CookieSecurePolicy.Always
+                    || (
+                        SecurePolicy == CookieSecurePolicy.SameAsRequest && context.Request.IsHttps
+                    ),
+                Expires = Expiration.HasValue
+                    ? expiresFrom.Add(Expiration.GetValueOrDefault())
+                    : default(DateTimeOffset?)
             };
         }
     }

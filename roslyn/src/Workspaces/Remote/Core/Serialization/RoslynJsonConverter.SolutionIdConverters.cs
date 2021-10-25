@@ -63,11 +63,16 @@ namespace Microsoft.CodeAnalysis.Remote
             protected override SolutionId ReadValue(JsonReader reader, JsonSerializer serializer)
             {
                 (Guid id, string debugName)? tuple = ReadFromJsonObject(reader);
-                return tuple == null ? null : SolutionId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
+                return tuple == null
+                  ? null
+                  : SolutionId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
             }
 
-            protected override void WriteValue(JsonWriter writer, SolutionId solutionId, JsonSerializer serializer)
-                => WriteToJsonObject(writer, solutionId.Id, solutionId.DebugName);
+            protected override void WriteValue(
+                JsonWriter writer,
+                SolutionId solutionId,
+                JsonSerializer serializer
+            ) => WriteToJsonObject(writer, solutionId.Id, solutionId.DebugName);
         }
 
         private class ProjectIdJsonConverter : WorkspaceIdJsonConverter<ProjectId>
@@ -75,11 +80,16 @@ namespace Microsoft.CodeAnalysis.Remote
             protected override ProjectId ReadValue(JsonReader reader, JsonSerializer serializer)
             {
                 (Guid id, string debugName)? tuple = ReadFromJsonObject(reader);
-                return tuple == null ? null : ProjectId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
+                return tuple == null
+                  ? null
+                  : ProjectId.CreateFromSerialized(tuple.Value.id, tuple.Value.debugName);
             }
 
-            protected override void WriteValue(JsonWriter writer, ProjectId projectId, JsonSerializer serializer)
-                => WriteToJsonObject(writer, projectId.Id, projectId.DebugName);
+            protected override void WriteValue(
+                JsonWriter writer,
+                ProjectId projectId,
+                JsonSerializer serializer
+            ) => WriteToJsonObject(writer, projectId.Id, projectId.DebugName);
         }
 
         private class DocumentIdJsonConverter : WorkspaceIdJsonConverter<DocumentId>
@@ -103,7 +113,11 @@ namespace Microsoft.CodeAnalysis.Remote
                 return DocumentId.CreateFromSerialized(projectId, id, debugName);
             }
 
-            protected override void WriteValue(JsonWriter writer, DocumentId documentId, JsonSerializer serializer)
+            protected override void WriteValue(
+                JsonWriter writer,
+                DocumentId documentId,
+                JsonSerializer serializer
+            )
             {
                 writer.WriteStartObject();
 

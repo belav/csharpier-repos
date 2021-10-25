@@ -30,8 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             EntityEntry entityEntry,
             INavigation navigation,
             object? oldReferencedEntity,
-            object? newReferencedEntity)
-            : base(eventDefinition, messageGenerator, navigation)
+            object? newReferencedEntity
+        ) : base(eventDefinition, messageGenerator, navigation)
         {
             Check.NotNull(entityEntry, nameof(entityEntry));
 

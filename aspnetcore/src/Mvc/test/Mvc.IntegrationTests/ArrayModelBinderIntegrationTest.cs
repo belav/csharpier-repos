@@ -24,10 +24,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(int[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0]=10&parameter[1]=11");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?parameter[0]=10&parameter[1]=11");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -61,17 +63,16 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "prefix",
-                },
+                BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
                 ParameterType = typeof(int[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?prefix[0]=10&prefix[1]=11");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?prefix[0]=10&prefix[1]=11");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -108,10 +109,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(int[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?[0]=10&[1]=11");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?[0]=10&[1]=11");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -148,10 +151,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(int[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -183,10 +188,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Person[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter[0].Name=bill&parameter[1].Name=lang");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter[0].Name=bill&parameter[1].Name=lang"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -221,17 +230,18 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
-                BindingInfo = new BindingInfo()
-                {
-                    BinderModelName = "prefix",
-                },
+                BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
                 ParameterType = typeof(Person[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?prefix[0].Name=bill&prefix[1].Name=lang");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?prefix[0].Name=bill&prefix[1].Name=lang"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -269,10 +279,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Person[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?[0].Name=bill&[1].Name=lang");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?[0].Name=bill&[1].Name=lang");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -310,10 +322,12 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(Person[])
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString("?");
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -347,10 +361,14 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
                 ParameterType = typeof(PersonWithReadOnlyAndInitializedProperty)
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                request.QueryString = new QueryString("?parameter.Name=James&parameter.Aliases[0]=bill&parameter.Aliases[1]=william");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    request.QueryString = new QueryString(
+                        "?parameter.Name=James&parameter.Aliases[0]=bill&parameter.Aliases[1]=william"
+                    );
+                }
+            );
 
             var modelState = testContext.ModelState;
 
@@ -362,36 +380,42 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             Assert.True(modelState.IsValid);
 
-            var model = Assert.IsType<PersonWithReadOnlyAndInitializedProperty>(modelBindingResult.Model);
+            var model = Assert.IsType<PersonWithReadOnlyAndInitializedProperty>(
+                modelBindingResult.Model
+            );
             Assert.Equal("James", model.Name);
             Assert.NotNull(model.Aliases);
             Assert.Collection(
                 model.Aliases,
                 (e) => Assert.Equal("Alias1", e),
-                (e) => Assert.Equal("Alias2", e));
+                (e) => Assert.Equal("Alias2", e)
+            );
         }
 
         [Fact]
         public async Task ArrayModelBinder_ThrowsOn1025Items_AtTopLevel()
         {
             // Arrange
-            var expectedMessage = $"Collection bound to 'parameter' exceeded " +
-                $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} (1024). This limit is a " +
-                $"safeguard against incorrect model binders and models. Address issues in " +
-                $"'{typeof(SuccessfulModel)}'. For example, this type may have a property with a model binder that " +
-                $"always succeeds. See the {nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} " +
-                $"documentation for more information.";
+            var expectedMessage =
+                $"Collection bound to 'parameter' exceeded "
+                + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} (1024). This limit is a "
+                + $"safeguard against incorrect model binders and models. Address issues in "
+                + $"'{typeof(SuccessfulModel)}'. For example, this type may have a property with a model binder that "
+                + $"always succeeds. See the {nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingCollectionSize)} "
+                + $"documentation for more information.";
             var parameter = new ParameterDescriptor()
             {
                 Name = "parameter",
                 ParameterType = typeof(SuccessfulModel[]),
             };
 
-            var testContext = ModelBindingTestHelper.GetTestContext(request =>
-            {
-                // CollectionModelBinder binds an empty collection when value providers are all empty.
-                request.QueryString = new QueryString("?a=b");
-            });
+            var testContext = ModelBindingTestHelper.GetTestContext(
+                request =>
+                {
+                    // CollectionModelBinder binds an empty collection when value providers are all empty.
+                    request.QueryString = new QueryString("?a=b");
+                }
+            );
 
             var modelState = testContext.ModelState;
             var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -400,7 +424,8 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => parameterBinder.BindModelAsync(parameter, testContext));
+                () => parameterBinder.BindModelAsync(parameter, testContext)
+            );
             Assert.Equal(expectedMessage, exception.Message);
         }
     }

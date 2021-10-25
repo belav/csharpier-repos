@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests
         public StartupErrorNotificationTest(
             BrowserFixture browserFixture,
             DevHostServerFixture<Program> serverFixture,
-            ITestOutputHelper output)
-            : base(browserFixture, serverFixture, output)
+            ITestOutputHelper output
+        ) : base(browserFixture, serverFixture, output)
         {
             _serverFixture.PathBase = ServerPathBase;
         }

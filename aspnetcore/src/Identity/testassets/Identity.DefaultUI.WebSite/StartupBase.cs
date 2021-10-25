@@ -17,7 +17,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Identity.DefaultUI.WebSite
 {
-    public class StartupBase<TUser,TContext>
+    public class StartupBase<TUser, TContext>
         where TUser : class
         where TContext : DbContext
     {
@@ -31,22 +31,29 @@ namespace Identity.DefaultUI.WebSite
         // This method gets called by the runtime. Use this method to add services to the container.
         public virtual void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-            });
+            services.Configure<CookiePolicyOptions>(
+                options =>
+                {
+                    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                    options.CheckConsentNeeded = context => true;
+                }
+            );
 
-            services.AddDbContext<TContext>(options =>
-                options
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                    //.UseSqlServer(
-                    //    Configuration.GetConnectionString("DefaultConnection"),
-                    //    sqlOptions => sqlOptions.MigrationsAssembly("Identity.DefaultUI.WebSite")
-                    //));
-                    .UseSqlite("DataSource=:memory:"));
+            services.AddDbContext<TContext>(
+                options =>
+                    options
+                        .ConfigureWarnings(
+                            b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)
+                        )
+                        //.UseSqlServer(
+                        //    Configuration.GetConnectionString("DefaultConnection"),
+                        //    sqlOptions => sqlOptions.MigrationsAssembly("Identity.DefaultUI.WebSite")
+                        //));
+                        .UseSqlite("DataSource=:memory:")
+            );
 
-            services.AddDefaultIdentity<TUser>()
+            services
+                .AddDefaultIdentity<TUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TContext>();
 
@@ -82,11 +89,13 @@ namespace Identity.DefaultUI.WebSite
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(
+                endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapRazorPages();
+                }
+            );
         }
 
         public static void DisableFilePolling(IWebHostEnvironment env)
@@ -101,7 +110,8 @@ namespace Identity.DefaultUI.WebSite
                     case PhysicalFileProvider physical:
                         physical.UseActivePolling = false;
                         break;
-                    case IFileProvider staticWebAssets when staticWebAssets.GetType().Name == "StaticWebAssetsFileProvider":
+                    case IFileProvider staticWebAssets
+                          when staticWebAssets.GetType().Name == "StaticWebAssetsFileProvider":
                         GetUnderlyingProvider(staticWebAssets).UseActivePolling = false;
                         break;
                     case CompositeFileProvider composite:
@@ -118,7 +128,10 @@ namespace Identity.DefaultUI.WebSite
 
         private static PhysicalFileProvider GetUnderlyingProvider(IFileProvider staticWebAssets)
         {
-            return (PhysicalFileProvider) staticWebAssets.GetType().GetProperty("InnerProvider").GetValue(staticWebAssets);
+            return (PhysicalFileProvider)staticWebAssets
+                .GetType()
+                .GetProperty("InnerProvider")
+                .GetValue(staticWebAssets);
         }
     }
 }

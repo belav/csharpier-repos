@@ -40,12 +40,16 @@ namespace System.Net.Security
             get { return _policy; }
         }
 
-        public SafeFreeSslCredentials(X509Certificate? certificate, SslProtocols protocols, EncryptionPolicy policy)
-            : base(IntPtr.Zero, true)
+        public SafeFreeSslCredentials(
+            X509Certificate? certificate,
+            SslProtocols protocols,
+            EncryptionPolicy policy
+        ) : base(IntPtr.Zero, true)
         {
             Debug.Assert(
                 certificate == null || certificate is X509Certificate2,
-                "Only X509Certificate2 certificates are supported at this time");
+                "Only X509Certificate2 certificates are supported at this time"
+            );
 
             X509Certificate2? cert = (X509Certificate2?)certificate;
 

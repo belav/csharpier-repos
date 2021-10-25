@@ -31,7 +31,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache
             {
                 throw new ArgumentNullException(nameof(key));
             }
-            
+
             return _distributedCache.GetAsync(key);
         }
 

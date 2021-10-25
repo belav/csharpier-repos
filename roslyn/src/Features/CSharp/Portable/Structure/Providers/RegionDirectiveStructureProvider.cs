@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class RegionDirectiveStructureProvider : AbstractSyntaxNodeStructureProvider<RegionDirectiveTriviaSyntax>
+    internal class RegionDirectiveStructureProvider
+        : AbstractSyntaxNodeStructureProvider<RegionDirectiveTriviaSyntax>
     {
         private static string GetBannerText(DirectiveTriviaSyntax simpleDirective)
         {
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             RegionDirectiveTriviaSyntax regionDirective,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptionProvider optionProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var match = regionDirective.GetMatchingDirective(cancellationToken);
             if (match != null)
@@ -46,16 +48,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 //   #endregion
                 //
                 // For other files, auto-collapse regions based on the user option.
-                var autoCollapse = optionProvider.IsMetadataAsSource || optionProvider.GetOption(
-                    BlockStructureOptions.CollapseRegionsWhenCollapsingToDefinitions, LanguageNames.CSharp);
+                var autoCollapse =
+                    optionProvider.IsMetadataAsSource
+                    || optionProvider.GetOption(
+                        BlockStructureOptions.CollapseRegionsWhenCollapsingToDefinitions,
+                        LanguageNames.CSharp
+                    );
 
-                spans.Add(new BlockSpan(
-                    isCollapsible: true,
-                    textSpan: TextSpan.FromBounds(regionDirective.SpanStart, match.Span.End),
-                    type: BlockTypes.PreprocessorRegion,
-                    bannerText: GetBannerText(regionDirective),
-                    autoCollapse: autoCollapse,
-                    isDefaultCollapsed: !optionProvider.IsMetadataAsSource));
+                spans.Add(
+                    new BlockSpan(
+                        isCollapsible: true,
+                        textSpan: TextSpan.FromBounds(regionDirective.SpanStart, match.Span.End),
+                        type: BlockTypes.PreprocessorRegion,
+                        bannerText: GetBannerText(regionDirective),
+                        autoCollapse: autoCollapse,
+                        isDefaultCollapsed: !optionProvider.IsMetadataAsSource
+                    )
+                );
             }
         }
     }

@@ -1,4 +1,4 @@
-// Copyright (c) .NET Foundation. All rights reserved.
+﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
     {
         private Dictionary<char, Func<SyntaxKind>> _operatorHandlers;
 
-        private static readonly Dictionary<string, CSharpKeyword> _keywords = new Dictionary<string, CSharpKeyword>(StringComparer.Ordinal)
+        private static readonly Dictionary<string, CSharpKeyword> _keywords = new Dictionary<
+            string,
+            CSharpKeyword
+        >(StringComparer.Ordinal)
         {
             { "await", CSharpKeyword.Await },
             { "abstract", CSharpKeyword.Abstract },
@@ -97,8 +100,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             { "where", CSharpKeyword.Where }
         };
 
-        public CSharpTokenizer(ITextDocument source)
-            : base(source)
+        public CSharpTokenizer(ITextDocument source) : base(source)
         {
             base.CurrentState = StartState;
 
@@ -107,15 +109,67 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 { '-', MinusOperator },
                 { '<', LessThanOperator },
                 { '>', GreaterThanOperator },
-                { '&', CreateTwoCharOperatorHandler(SyntaxKind.And, '=', SyntaxKind.AndAssign, '&', SyntaxKind.DoubleAnd) },
-                { '|', CreateTwoCharOperatorHandler(SyntaxKind.Or, '=', SyntaxKind.OrAssign, '|', SyntaxKind.DoubleOr) },
-                { '+', CreateTwoCharOperatorHandler(SyntaxKind.Plus, '=', SyntaxKind.PlusAssign, '+', SyntaxKind.Increment) },
-                { '=', CreateTwoCharOperatorHandler(SyntaxKind.Assign, '=', SyntaxKind.Equals, '>', SyntaxKind.GreaterThanEqual) },
+                {
+                    '&',
+                    CreateTwoCharOperatorHandler(
+                        SyntaxKind.And,
+                        '=',
+                        SyntaxKind.AndAssign,
+                        '&',
+                        SyntaxKind.DoubleAnd
+                    )
+                },
+                {
+                    '|',
+                    CreateTwoCharOperatorHandler(
+                        SyntaxKind.Or,
+                        '=',
+                        SyntaxKind.OrAssign,
+                        '|',
+                        SyntaxKind.DoubleOr
+                    )
+                },
+                {
+                    '+',
+                    CreateTwoCharOperatorHandler(
+                        SyntaxKind.Plus,
+                        '=',
+                        SyntaxKind.PlusAssign,
+                        '+',
+                        SyntaxKind.Increment
+                    )
+                },
+                {
+                    '=',
+                    CreateTwoCharOperatorHandler(
+                        SyntaxKind.Assign,
+                        '=',
+                        SyntaxKind.Equals,
+                        '>',
+                        SyntaxKind.GreaterThanEqual
+                    )
+                },
                 { '!', CreateTwoCharOperatorHandler(SyntaxKind.Not, '=', SyntaxKind.NotEqual) },
-                { '%', CreateTwoCharOperatorHandler(SyntaxKind.Modulo, '=', SyntaxKind.ModuloAssign) },
-                { '*', CreateTwoCharOperatorHandler(SyntaxKind.Star, '=', SyntaxKind.MultiplyAssign) },
-                { ':', CreateTwoCharOperatorHandler(SyntaxKind.Colon, ':', SyntaxKind.DoubleColon) },
-                { '?', CreateTwoCharOperatorHandler(SyntaxKind.QuestionMark, '?', SyntaxKind.NullCoalesce) },
+                {
+                    '%',
+                    CreateTwoCharOperatorHandler(SyntaxKind.Modulo, '=', SyntaxKind.ModuloAssign)
+                },
+                {
+                    '*',
+                    CreateTwoCharOperatorHandler(SyntaxKind.Star, '=', SyntaxKind.MultiplyAssign)
+                },
+                {
+                    ':',
+                    CreateTwoCharOperatorHandler(SyntaxKind.Colon, ':', SyntaxKind.DoubleColon)
+                },
+                {
+                    '?',
+                    CreateTwoCharOperatorHandler(
+                        SyntaxKind.QuestionMark,
+                        '?',
+                        SyntaxKind.NullCoalesce
+                    )
+                },
                 { '^', CreateTwoCharOperatorHandler(SyntaxKind.Xor, '=', SyntaxKind.XorAssign) },
                 { '(', () => SyntaxKind.LeftParenthesis },
                 { ')', () => SyntaxKind.RightParenthesis },
@@ -272,7 +326,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         return "#";
                     case SyntaxKind.Transition:
                         return "@";
-
                 }
             }
             else if (tokenLength == 2)
@@ -327,8 +380,6 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                         return ">=";
                     case SyntaxKind.RightShift:
                         return ">>";
-
-
                 }
             }
             else if (tokenLength == 3)
@@ -345,7 +396,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             return base.GetTokenContent(type);
         }
 
-        protected override SyntaxToken CreateToken(string content, SyntaxKind kind, RazorDiagnostic [] errors)
+        protected override SyntaxToken CreateToken(
+            string content,
+            SyntaxKind kind,
+            RazorDiagnostic[] errors
+        )
         {
             return SyntaxFactory.Token(kind, content, errors);
         }
@@ -431,14 +486,16 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 return Transition(
                     CSharpTokenizerState.AfterRazorCommentTransition,
-                    EndToken(SyntaxKind.RazorCommentTransition));
+                    EndToken(SyntaxKind.RazorCommentTransition)
+                );
             }
             else if (CurrentCharacter == '@')
             {
                 // Could be escaped comment transition
                 return Transition(
                     CSharpTokenizerState.EscapedRazorCommentTransition,
-                    EndToken(SyntaxKind.Transition));
+                    EndToken(SyntaxKind.Transition)
+                );
             }
 
             return Stay(EndToken(SyntaxKind.Transition));
@@ -502,7 +559,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             return SyntaxKind.Minus;
         }
 
-        private Func<SyntaxKind> CreateTwoCharOperatorHandler(SyntaxKind typeIfOnlyFirst, char second, SyntaxKind typeIfBoth)
+        private Func<SyntaxKind> CreateTwoCharOperatorHandler(
+            SyntaxKind typeIfOnlyFirst,
+            char second,
+            SyntaxKind typeIfBoth
+        )
         {
             return () =>
             {
@@ -515,7 +576,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             };
         }
 
-        private Func<SyntaxKind> CreateTwoCharOperatorHandler(SyntaxKind typeIfOnlyFirst, char option1, SyntaxKind typeIfOption1, char option2, SyntaxKind typeIfOption2)
+        private Func<SyntaxKind> CreateTwoCharOperatorHandler(
+            SyntaxKind typeIfOnlyFirst,
+            char option1,
+            SyntaxKind typeIfOption1,
+            char option2,
+            SyntaxKind typeIfOption2
+        )
         {
             return () =>
             {
@@ -550,19 +617,32 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 CurrentErrors.Add(
                     RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
-                        new SourceSpan(CurrentStart, contentLength: 1 /* end of file */)));
+                        new SourceSpan(
+                            CurrentStart,
+                            contentLength: 1 /* end of file */
+                        )
+                    )
+                );
             }
             return Transition(CSharpTokenizerState.Data, EndToken(SyntaxKind.StringLiteral));
         }
 
-        private StateResult QuotedCharacterLiteral() => QuotedLiteral('\'', IsEndQuotedCharacterLiteral, SyntaxKind.CharacterLiteral);
+        private StateResult QuotedCharacterLiteral() =>
+            QuotedLiteral('\'', IsEndQuotedCharacterLiteral, SyntaxKind.CharacterLiteral);
 
-        private StateResult QuotedStringLiteral() => QuotedLiteral('\"', IsEndQuotedStringLiteral, SyntaxKind.StringLiteral);
+        private StateResult QuotedStringLiteral() =>
+            QuotedLiteral('\"', IsEndQuotedStringLiteral, SyntaxKind.StringLiteral);
 
-        private Func<char, bool> IsEndQuotedCharacterLiteral = (c) => c == '\\' || c == '\'' || ParserHelpers.IsNewLine(c);
-        private Func<char, bool> IsEndQuotedStringLiteral = (c) => c == '\\' || c == '\"' || ParserHelpers.IsNewLine(c);
+        private Func<char, bool> IsEndQuotedCharacterLiteral = (c) =>
+            c == '\\' || c == '\'' || ParserHelpers.IsNewLine(c);
+        private Func<char, bool> IsEndQuotedStringLiteral = (c) =>
+            c == '\\' || c == '\"' || ParserHelpers.IsNewLine(c);
 
-        private StateResult QuotedLiteral(char quote, Func<char, bool> isEndQuotedLiteral, SyntaxKind literalType)
+        private StateResult QuotedLiteral(
+            char quote,
+            Func<char, bool> isEndQuotedLiteral,
+            SyntaxKind literalType
+        )
         {
             TakeUntil(isEndQuotedLiteral);
             if (CurrentCharacter == '\\')
@@ -580,7 +660,12 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 CurrentErrors.Add(
                     RazorDiagnosticFactory.CreateParsing_UnterminatedStringLiteral(
-                        new SourceSpan(CurrentStart, contentLength: 1 /* " */)));
+                        new SourceSpan(
+                            CurrentStart,
+                            contentLength: 1 /* " */
+                        )
+                    )
+                );
             }
             else
             {
@@ -597,8 +682,13 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 CurrentErrors.Add(
                     RazorDiagnosticFactory.CreateParsing_BlockCommentNotTerminated(
-                        new SourceSpan(CurrentStart, contentLength: 1 /* end of file */)));
-                    
+                        new SourceSpan(
+                            CurrentStart,
+                            contentLength: 1 /* end of file */
+                        )
+                    )
+                );
+
                 return Transition(CSharpTokenizerState.Data, EndToken(SyntaxKind.CSharpComment));
             }
             if (CurrentCharacter == '*')
@@ -607,7 +697,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 if (CurrentCharacter == '/')
                 {
                     TakeCurrent();
-                    return Transition(CSharpTokenizerState.Data, EndToken(SyntaxKind.CSharpComment));
+                    return Transition(
+                        CSharpTokenizerState.Data,
+                        EndToken(SyntaxKind.CSharpComment)
+                    );
                 }
             }
             return Stay();
@@ -647,8 +740,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             {
                 return RealLiteral();
             }
-            else if (IsRealLiteralSuffix(CurrentCharacter) ||
-                     CurrentCharacter == 'E' || CurrentCharacter == 'e')
+            else if (
+                IsRealLiteralSuffix(CurrentCharacter)
+                || CurrentCharacter == 'E'
+                || CurrentCharacter == 'e'
+            )
             {
                 return RealLiteralExponentPart();
             }
@@ -725,7 +821,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
                 }
 
                 token = SyntaxFactory.Token(type, tokenContent);
-                
+
                 Buffer.Clear();
                 CurrentErrors.Clear();
             }
@@ -745,41 +841,46 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
 
         private static bool IsIdentifierStart(char character)
         {
-            return char.IsLetter(character) ||
-                   character == '_' ||
-                   CharUnicodeInfo.GetUnicodeCategory(character) == UnicodeCategory.LetterNumber;
+            return char.IsLetter(character)
+                || character == '_'
+                || CharUnicodeInfo.GetUnicodeCategory(character) == UnicodeCategory.LetterNumber;
         }
 
         private static bool IsIdentifierPart(char character)
         {
-            return char.IsDigit(character) ||
-                   IsIdentifierStart(character) ||
-                   IsIdentifierPartByUnicodeCategory(character);
+            return char.IsDigit(character)
+                || IsIdentifierStart(character)
+                || IsIdentifierPartByUnicodeCategory(character);
         }
 
         private static bool IsRealLiteralSuffix(char character)
         {
-            return character == 'F' ||
-                   character == 'f' ||
-                   character == 'D' ||
-                   character == 'd' ||
-                   character == 'M' ||
-                   character == 'm';
+            return character == 'F'
+                || character == 'f'
+                || character == 'D'
+                || character == 'd'
+                || character == 'M'
+                || character == 'm';
         }
 
         private static bool IsIdentifierPartByUnicodeCategory(char character)
         {
             var category = CharUnicodeInfo.GetUnicodeCategory(character);
 
-            return category == UnicodeCategory.NonSpacingMark || // Mn
-                   category == UnicodeCategory.SpacingCombiningMark || // Mc
-                   category == UnicodeCategory.ConnectorPunctuation || // Pc
-                   category == UnicodeCategory.Format; // Cf
+            return category == UnicodeCategory.NonSpacingMark
+                || // Mn
+                category == UnicodeCategory.SpacingCombiningMark
+                || // Mc
+                category == UnicodeCategory.ConnectorPunctuation
+                || // Pc
+                category == UnicodeCategory.Format; // Cf
         }
 
         private static bool IsHexDigit(char value)
         {
-            return (value >= '0' && value <= '9') || (value >= 'A' && value <= 'F') || (value >= 'a' && value <= 'f');
+            return (value >= '0' && value <= '9')
+                || (value >= 'A' && value <= 'F')
+                || (value >= 'a' && value <= 'f');
         }
 
         internal static CSharpKeyword? GetTokenKeyword(SyntaxToken token)
@@ -799,10 +900,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             QuotedCharacterLiteral,
             QuotedStringLiteral,
             VerbatimStringLiteral,
-
             // Razor Comments - need to be the same for HTML and CSharp
             AfterRazorCommentTransition = RazorCommentTokenizerState.AfterRazorCommentTransition,
-            EscapedRazorCommentTransition = RazorCommentTokenizerState.EscapedRazorCommentTransition,
+            EscapedRazorCommentTransition =
+                RazorCommentTokenizerState.EscapedRazorCommentTransition,
             RazorCommentBody = RazorCommentTokenizerState.RazorCommentBody,
             StarAfterRazorCommentBody = RazorCommentTokenizerState.StarAfterRazorCommentBody,
             AtTokenAfterRazorCommentBody = RazorCommentTokenizerState.AtTokenAfterRazorCommentBody,

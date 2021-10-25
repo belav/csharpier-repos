@@ -11,7 +11,7 @@ namespace Microsoft.AspNetCore.DataProtection.Test
     public class ContainerUtilsTests
     {
         // example of content from /proc/self/mounts
-        private static readonly string[] fstab = new []
+        private static readonly string[] fstab = new[]
         {
             "none / aufs rw,relatime,si=f9bfcf896de3f6c2,dio,dirperm1 0 0",
             "# comments",

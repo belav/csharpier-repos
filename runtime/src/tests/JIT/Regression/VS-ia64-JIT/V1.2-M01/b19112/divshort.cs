@@ -4,12 +4,12 @@
 
 class foo
 {
-
-    public static short a, b, c;
+    public static short a,
+        b,
+        c;
 
     public static int Main()
     {
-
         a = 19;
         b = 3;
 
@@ -20,8 +20,6 @@ class foo
 
     public static void div()
     {
-
         c = (short)(a / b);
     }
-
 }

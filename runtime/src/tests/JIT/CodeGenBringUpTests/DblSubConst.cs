@@ -11,13 +11,18 @@ public class BringUpTest
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static double DblSubConst(double x) { return x-1d; }
+    public static double DblSubConst(double x)
+    {
+        return x - 1d;
+    }
 
     public static int Main()
     {
         double y = DblSubConst(1d);
         Console.WriteLine(y);
-        if (System.Math.Abs(y) <= Double.Epsilon) return Pass;
-        else return Fail;
+        if (System.Math.Abs(y) <= Double.Epsilon)
+            return Pass;
+        else
+            return Fail;
     }
 }

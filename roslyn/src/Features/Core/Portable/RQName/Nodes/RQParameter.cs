@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
             Type = type;
         }
 
-        public SimpleTreeNode ToSimpleTree()
-            => new SimpleGroupNode(RQNameStrings.Param, CreateSimpleTreeForType());
+        public SimpleTreeNode ToSimpleTree() =>
+            new SimpleGroupNode(RQNameStrings.Param, CreateSimpleTreeForType());
 
         public abstract SimpleTreeNode CreateSimpleTreeForType();
     }

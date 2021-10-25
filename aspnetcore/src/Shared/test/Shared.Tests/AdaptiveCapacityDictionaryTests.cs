@@ -46,7 +46,10 @@ namespace Microsoft.AspNetCore.Internal.Tests
                 {
                     new KeyValuePair<string, object?>("Name", "James"),
                     new KeyValuePair<string, object?>("Age", 30),
-                    new KeyValuePair<string, object?>("Address", new Address() { City = "Redmond", State = "WA" })
+                    new KeyValuePair<string, object?>(
+                        "Address",
+                        new Address() { City = "Redmond", State = "WA" }
+                    )
                 };
             }
         }
@@ -68,7 +71,11 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void CreateFromIEnumerableKeyValuePair_CopiesValues()
         {
             // Arrange & Act
-            var dict = new AdaptiveCapacityDictionary<string, object?>(IEnumerableKeyValuePairData, capacity: IEnumerableKeyValuePairData.Length, EqualityComparer<string>.Default);
+            var dict = new AdaptiveCapacityDictionary<string, object?>(
+                IEnumerableKeyValuePairData,
+                capacity: IEnumerableKeyValuePairData.Length,
+                EqualityComparer<string>.Default
+            );
 
             // Assert
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
@@ -81,23 +88,49 @@ namespace Microsoft.AspNetCore.Internal.Tests
                     Assert.Equal("Redmond", address.City);
                     Assert.Equal("WA", address.State);
                 },
-                kvp => { Assert.Equal("Age", kvp.Key); Assert.Equal(30, kvp.Value); },
-                kvp => { Assert.Equal("Name", kvp.Key); Assert.Equal("James", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("Age", kvp.Key);
+                    Assert.Equal(30, kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("Name", kvp.Key);
+                    Assert.Equal("James", kvp.Value);
+                }
+            );
         }
 
         [Fact]
         public void CreateFromIEnumerableStringValuePair_CopiesValues()
         {
             // Arrange & Act
-            var dict = new AdaptiveCapacityDictionary<string, string>(IEnumerableStringValuePairData, capacity: 3, StringComparer.OrdinalIgnoreCase);
+            var dict = new AdaptiveCapacityDictionary<string, string>(
+                IEnumerableStringValuePairData,
+                capacity: 3,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Assert
             Assert.IsType<KeyValuePair<string, string>[]>(dict._arrayStorage);
             Assert.Collection(
                 dict.OrderBy(kvp => kvp.Key),
-                kvp => { Assert.Equal("First Name", kvp.Key); Assert.Equal("James", kvp.Value); },
-                kvp => { Assert.Equal("Last Name", kvp.Key); Assert.Equal("Henrik", kvp.Value); },
-                kvp => { Assert.Equal("Middle Name", kvp.Key); Assert.Equal("Bob", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("First Name", kvp.Key);
+                    Assert.Equal("James", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("Last Name", kvp.Key);
+                    Assert.Equal("Henrik", kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("Middle Name", kvp.Key);
+                    Assert.Equal("Bob", kvp.Value);
+                }
+            );
         }
 
         [Fact]
@@ -105,13 +138,16 @@ namespace Microsoft.AspNetCore.Internal.Tests
         {
             // Arrange, Act & Assert
             ExceptionAssert.ThrowsArgument(
-                () => new AdaptiveCapacityDictionary<string, object?>(StringComparer.OrdinalIgnoreCase)
-                {
-                    {  "name", "Billy" },
-                    {  "Name", "Joey" }
-                },
+                () =>
+                    new AdaptiveCapacityDictionary<string, object?>(
+                        StringComparer.OrdinalIgnoreCase
+                    ) {
+                        { "name", "Billy" },
+                        { "Name", "Joey" }
+                    },
                 "key",
-                $"An element with the key 'Name' already exists in the {nameof(AdaptiveCapacityDictionary<string, object?>)}.");
+                $"An element with the key 'Name' already exists in the {nameof(AdaptiveCapacityDictionary<string, object?>)}."
+            );
         }
 
         [Fact]
@@ -126,9 +162,15 @@ namespace Microsoft.AspNetCore.Internal.Tests
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(
-                () => new AdaptiveCapacityDictionary<string, string>(values, capacity: 3, StringComparer.OrdinalIgnoreCase),
+                () =>
+                    new AdaptiveCapacityDictionary<string, string>(
+                        values,
+                        capacity: 3,
+                        StringComparer.OrdinalIgnoreCase
+                    ),
                 "key",
-                $"An element with the key 'Name' already exists in the {nameof(AdaptiveCapacityDictionary<string, object>)}.");
+                $"An element with the key 'Name' already exists in the {nameof(AdaptiveCapacityDictionary<string, object>)}."
+            );
         }
 
         [Fact]
@@ -136,7 +178,9 @@ namespace Microsoft.AspNetCore.Internal.Tests
         {
             // Arrange
             // Act
-            var dict = new AdaptiveCapacityDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var dict = new AdaptiveCapacityDictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Assert
             Assert.Same(StringComparer.OrdinalIgnoreCase, dict.Comparer);
@@ -201,10 +245,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void IndexGet_ListStorage_Match_ReturnsValue()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var value = dict["key"];
@@ -218,8 +259,9 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void IndexGet_ListStorage_MatchIgnoreCase_ReturnsValue()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
+            var dict = new AdaptiveCapacityDictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            ) {
                 { "key", "value" },
             };
 
@@ -254,7 +296,14 @@ namespace Microsoft.AspNetCore.Internal.Tests
             dict["key"] = "value";
 
             // Assert
-            Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            Assert.Collection(
+                dict,
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -262,10 +311,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void IndexSet_ListStorage_NoMatch_AddsValue()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "age", 30 },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "age", 30 }, };
 
             // Act
             dict["key"] = "value";
@@ -273,8 +319,17 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Assert
             Assert.Collection(
                 dict.OrderBy(kvp => kvp.Key),
-                kvp => { Assert.Equal("age", kvp.Key); Assert.Equal(30, kvp.Value); },
-                kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("age", kvp.Key);
+                    Assert.Equal(30, kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -282,16 +337,20 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void IndexSet_ListStorage_Match_SetsValue()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             dict["key"] = "value";
 
             // Assert
-            Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            Assert.Collection(
+                dict,
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -299,16 +358,20 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void IndexSet_ListStorage_MatchIgnoreCase_SetsValue()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             dict["key"] = "value";
 
             // Assert
-            Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            Assert.Collection(
+                dict,
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -329,10 +392,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Count_ListStorage()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var count = dict.Count;
@@ -360,10 +420,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Keys_ListStorage()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var keys = dict.Keys;
@@ -391,10 +448,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Values_ListStorage()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var values = dict.Values;
@@ -414,7 +468,14 @@ namespace Microsoft.AspNetCore.Internal.Tests
             dict.Add("key", "value");
 
             // Assert
-            Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            Assert.Collection(
+                dict,
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -435,10 +496,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Add_ListStorage()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "age", 30 },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "age", 30 }, };
 
             // Act
             dict.Add("key", "value");
@@ -446,8 +504,17 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Assert
             Assert.Collection(
                 dict.OrderBy(kvp => kvp.Key),
-                kvp => { Assert.Equal("age", kvp.Key); Assert.Equal(30, kvp.Value); },
-                kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("age", kvp.Key);
+                    Assert.Equal(30, kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -455,12 +522,10 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Add_DuplicateKey()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
-            var message = $"An element with the key 'key' already exists in the {nameof(AdaptiveCapacityDictionary<string, string>)}";
+            var message =
+                $"An element with the key 'key' already exists in the {nameof(AdaptiveCapacityDictionary<string, string>)}";
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(() => dict.Add("key", "value2"), "key", message);
@@ -468,7 +533,12 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Assert
             Assert.Collection(
                 dict.OrderBy(kvp => kvp.Key),
-                kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -476,12 +546,14 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Add_DuplicateKey_CaseInsensitive()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
+            var dict = new AdaptiveCapacityDictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            ) {
                 { "key", "value" },
             };
 
-            var message = $"An element with the key 'kEy' already exists in the {nameof(AdaptiveCapacityDictionary<string, string>)}";
+            var message =
+                $"An element with the key 'kEy' already exists in the {nameof(AdaptiveCapacityDictionary<string, string>)}";
 
             // Act & Assert
             ExceptionAssert.ThrowsArgument(() => dict.Add("kEy", "value2"), "key", message);
@@ -489,7 +561,12 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Assert
             Assert.Collection(
                 dict.OrderBy(kvp => kvp.Key),
-                kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -497,19 +574,27 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Add_KeyValuePair()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "age", 30 },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "age", 30 }, };
 
             // Act
-            ((ICollection<KeyValuePair<string, object?>>)dict).Add(new KeyValuePair<string, object?>("key", "value"));
+            ((ICollection<KeyValuePair<string, object?>>)dict).Add(
+                new KeyValuePair<string, object?>("key", "value")
+            );
 
             // Assert
             Assert.Collection(
                 dict.OrderBy(kvp => kvp.Key),
-                kvp => { Assert.Equal("age", kvp.Key); Assert.Equal(30, kvp.Value); },
-                kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+                kvp =>
+                {
+                    Assert.Equal("age", kvp.Key);
+                    Assert.Equal(30, kvp.Value);
+                },
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -530,10 +615,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Clear_ListStorage()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             dict.Clear();
@@ -548,10 +630,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Contains_ListStorage_KeyValuePair_True()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             var input = new KeyValuePair<string, object?>("key", "value");
 
@@ -567,8 +646,9 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Contains_ListStory_KeyValuePair_True_CaseInsensitive()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
+            var dict = new AdaptiveCapacityDictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            ) {
                 { "key", "value" },
             };
 
@@ -586,10 +666,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Contains_ListStorage_KeyValuePair_False()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             var input = new KeyValuePair<string, object?>("other", "value");
 
@@ -606,10 +683,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Contains_ListStorage_KeyValuePair_False_ValueComparisonIsDefault()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             var input = new KeyValuePair<string, object?>("key", "valUE");
 
@@ -651,10 +725,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void ContainsKey_ListStorage_False()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var result = dict.ContainsKey("other");
@@ -668,10 +739,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void ContainsKey_ListStorage_True()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var result = dict.ContainsKey("key");
@@ -685,8 +753,9 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void ContainsKey_ListStorage_True_CaseInsensitive()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
+            var dict = new AdaptiveCapacityDictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            ) {
                 { "key", "value" },
             };
 
@@ -702,10 +771,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void CopyTo()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             var array = new KeyValuePair<string, object?>[2];
 
@@ -719,7 +785,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
                     default(KeyValuePair<string, object?>),
                     new KeyValuePair<string, object?>("key", "value")
                 },
-                array);
+                array
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -727,10 +794,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Remove_KeyValuePair_True()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             var input = new KeyValuePair<string, object?>("key", "value");
 
@@ -747,8 +811,9 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Remove_KeyValuePair_True_CaseInsensitive()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
+            var dict = new AdaptiveCapacityDictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            ) {
                 { "key", "value" },
             };
 
@@ -767,10 +832,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Remove_KeyValuePair_False()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             var input = new KeyValuePair<string, object?>("other", "value");
 
@@ -779,7 +841,14 @@ namespace Microsoft.AspNetCore.Internal.Tests
 
             // Assert
             Assert.False(result);
-            Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            Assert.Collection(
+                dict,
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -788,10 +857,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Remove_KeyValuePair_False_ValueComparisonIsDefault()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             var input = new KeyValuePair<string, object?>("key", "valUE");
 
@@ -800,7 +866,14 @@ namespace Microsoft.AspNetCore.Internal.Tests
 
             // Assert
             Assert.False(result);
-            Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            Assert.Collection(
+                dict,
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -834,17 +907,21 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Remove_ListStorage_False()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var result = dict.Remove("other");
 
             // Assert
             Assert.False(result);
-            Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            Assert.Collection(
+                dict,
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -852,10 +929,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Remove_ListStorage_True()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var result = dict.Remove("key");
@@ -870,8 +944,9 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Remove_ListStorage_True_CaseInsensitive()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
+            var dict = new AdaptiveCapacityDictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            ) {
                 { "key", "value" },
             };
 
@@ -883,7 +958,6 @@ namespace Microsoft.AspNetCore.Internal.Tests
             Assert.Empty(dict);
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
-
 
         [Fact]
         public void Remove_KeyAndOutValue_EmptyStorage()
@@ -917,10 +991,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void Remove_KeyAndOutValue_ListStorage_False()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var result = dict.Remove("other", out var removedValue);
@@ -928,7 +999,14 @@ namespace Microsoft.AspNetCore.Internal.Tests
             // Assert
             Assert.False(result);
             Assert.Null(removedValue);
-            Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            Assert.Collection(
+                dict,
+                kvp =>
+                {
+                    Assert.Equal("key", kvp.Key);
+                    Assert.Equal("value", kvp.Value);
+                }
+            );
             Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
         }
 
@@ -937,10 +1015,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         {
             // Arrange
             object value = "value";
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", value }
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", value } };
 
             // Act
             var result = dict.Remove("key", out var removedValue);
@@ -957,8 +1032,9 @@ namespace Microsoft.AspNetCore.Internal.Tests
         {
             // Arrange
             object value = "value";
-            var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
+            var dict = new AdaptiveCapacityDictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            ) {
                 { "key", value }
             };
 
@@ -1082,17 +1158,15 @@ namespace Microsoft.AspNetCore.Internal.Tests
                 kvp => Assert.Equal(default, kvp),
                 kvp => Assert.Equal(default, kvp),
                 kvp => Assert.Equal(default, kvp),
-                kvp => Assert.Equal(default, kvp));
+                kvp => Assert.Equal(default, kvp)
+            );
         }
 
         [Fact]
         public void TryAdd_ArrayStorage_CanAdd()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key0", "value0" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key0", "value0" }, };
 
             // Act
             var result = dict.TryAdd("key1", "value1");
@@ -1110,17 +1184,15 @@ namespace Microsoft.AspNetCore.Internal.Tests
                 kvp => Assert.Equal(default, kvp),
                 kvp => Assert.Equal(default, kvp),
                 kvp => Assert.Equal(default, kvp),
-                kvp => Assert.Equal(default, kvp));
+                kvp => Assert.Equal(default, kvp)
+            );
         }
 
         [Fact]
         public void TryAdd_ArrayStorage_DoesNotAddWhenKeyIsPresent()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key0", "value0" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key0", "value0" }, };
 
             // Act
             var result = dict.TryAdd("key0", "value1");
@@ -1138,7 +1210,8 @@ namespace Microsoft.AspNetCore.Internal.Tests
                 kvp => Assert.Equal(default, kvp),
                 kvp => Assert.Equal(default, kvp),
                 kvp => Assert.Equal(default, kvp),
-                kvp => Assert.Equal(default, kvp));
+                kvp => Assert.Equal(default, kvp)
+            );
         }
 
         [Fact]
@@ -1173,10 +1246,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void TryGetValue_ListStorage_False()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var result = dict.TryGetValue("other", out var value);
@@ -1191,10 +1261,7 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void TryGetValue_ListStorage_True()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+            var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" }, };
 
             // Act
             var result = dict.TryGetValue("key", out var value);
@@ -1209,8 +1276,9 @@ namespace Microsoft.AspNetCore.Internal.Tests
         public void TryGetValue_ListStorage_True_CaseInsensitive()
         {
             // Arrange
-            var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
+            var dict = new AdaptiveCapacityDictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            ) {
                 { "key", "value" },
             };
 
@@ -1368,7 +1436,10 @@ namespace Microsoft.AspNetCore.Internal.Tests
         {
             private bool _coolSetOnly;
 
-            public bool CoolSetOnly { set { _coolSetOnly = value; } }
+            public bool CoolSetOnly
+            {
+                set { _coolSetOnly = value; }
+            }
         }
 
         private class Base

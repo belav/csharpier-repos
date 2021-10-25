@@ -14,9 +14,6 @@ namespace Microsoft.AspNetCore.Hosting.Fakes
             throw new Exception("Exception from ConfigureServices");
         }
 
-        public void Configure(IApplicationBuilder builder)
-        {
-
-        }
+        public void Configure(IApplicationBuilder builder) { }
     }
 }

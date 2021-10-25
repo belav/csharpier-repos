@@ -67,7 +67,6 @@ namespace test2
             }
             catch
             {
-
                 Console.WriteLine("In catch");
                 int x = new int();
 
@@ -82,13 +81,11 @@ namespace test2
                 ar = null;
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-
             }
             // stop recoding
             testLog.StopRecording();
 
             return testLog.VerifyOutput();
         }
-
     }
 }

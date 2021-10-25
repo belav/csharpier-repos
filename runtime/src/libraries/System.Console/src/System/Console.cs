@@ -24,7 +24,8 @@ namespace System
 
         private static readonly object s_syncObject = new object();
         private static TextReader? s_in;
-        private static TextWriter? s_out, s_error;
+        private static TextWriter? s_out,
+            s_error;
         private static Encoding? s_inputEncoding;
         private static Encoding? s_outputEncoding;
         private static bool s_isOutTextWriterRedirected;
@@ -147,7 +148,9 @@ namespace System
             {
                 if (IsInputRedirected)
                 {
-                    throw new InvalidOperationException(SR.InvalidOperation_ConsoleKeyAvailableOnFile);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_ConsoleKeyAvailableOnFile
+                    );
                 }
 
                 return ConsolePal.KeyAvailable;
@@ -187,7 +190,10 @@ namespace System
                     {
                         if (s_out == null)
                         {
-                            Volatile.Write(ref s_out, CreateOutputWriter(ConsolePal.OpenStandardOutput()));
+                            Volatile.Write(
+                                ref s_out,
+                                CreateOutputWriter(ConsolePal.OpenStandardOutput())
+                            );
                         }
                         return s_out;
                     }
@@ -207,7 +213,10 @@ namespace System
                     {
                         if (s_error == null)
                         {
-                            Volatile.Write(ref s_error, CreateOutputWriter(ConsolePal.OpenStandardError()));
+                            Volatile.Write(
+                                ref s_error,
+                                CreateOutputWriter(ConsolePal.OpenStandardError())
+                            );
                         }
                         return s_error;
                     }
@@ -217,16 +226,18 @@ namespace System
 
         private static TextWriter CreateOutputWriter(Stream outputStream)
         {
-            return TextWriter.Synchronized(outputStream == Stream.Null ?
-                StreamWriter.Null :
-                new StreamWriter(
-                    stream: outputStream,
-                    encoding: OutputEncoding.RemovePreamble(), // This ensures no prefix is written to the stream.
-                    bufferSize: WriteBufferSize,
-                    leaveOpen: true)
-                {
-                    AutoFlush = true
-                });
+            return TextWriter.Synchronized(
+                outputStream == Stream.Null
+                  ? StreamWriter.Null
+                  : new StreamWriter(
+                        stream: outputStream,
+                        encoding: OutputEncoding.RemovePreamble(), // This ensures no prefix is written to the stream.
+                        bufferSize: WriteBufferSize,
+                        leaveOpen: true
+                    ) {
+                        AutoFlush = true
+                    }
+            );
         }
 
         private static StrongBox<bool>? _isStdInRedirected;
@@ -237,12 +248,16 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected = Volatile.Read(ref _isStdInRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected =
+                    Volatile.Read(ref _isStdInRedirected) ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()
                 {
-                    Volatile.Write(ref _isStdInRedirected, new StrongBox<bool>(ConsolePal.IsInputRedirectedCore()));
+                    Volatile.Write(
+                        ref _isStdInRedirected,
+                        new StrongBox<bool>(ConsolePal.IsInputRedirectedCore())
+                    );
                     return _isStdInRedirected;
                 }
             }
@@ -252,12 +267,16 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected = Volatile.Read(ref _isStdOutRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected =
+                    Volatile.Read(ref _isStdOutRedirected) ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()
                 {
-                    Volatile.Write(ref _isStdOutRedirected, new StrongBox<bool>(ConsolePal.IsOutputRedirectedCore()));
+                    Volatile.Write(
+                        ref _isStdOutRedirected,
+                        new StrongBox<bool>(ConsolePal.IsOutputRedirectedCore())
+                    );
                     return _isStdOutRedirected;
                 }
             }
@@ -267,12 +286,16 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected = Volatile.Read(ref _isStdErrRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected =
+                    Volatile.Read(ref _isStdErrRedirected) ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()
                 {
-                    Volatile.Write(ref _isStdErrRedirected, new StrongBox<bool>(ConsolePal.IsErrorRedirectedCore()));
+                    Volatile.Write(
+                        ref _isStdErrRedirected,
+                        new StrongBox<bool>(ConsolePal.IsErrorRedirectedCore())
+                    );
                     return _isStdErrRedirected;
                 }
             }
@@ -434,10 +457,7 @@ namespace System
             [SupportedOSPlatform("windows")]
             get { return ConsolePal.Title; }
             [UnsupportedOSPlatform("browser")]
-            set
-            {
-                ConsolePal.Title = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            set { ConsolePal.Title = value ?? throw new ArgumentNullException(nameof(value)); }
         }
 
         [UnsupportedOSPlatform("browser")]
@@ -453,15 +473,52 @@ namespace System
         }
 
         [SupportedOSPlatform("windows")]
-        public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft, int targetTop)
+        public static void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop
+        )
         {
-            ConsolePal.MoveBufferArea(sourceLeft, sourceTop, sourceWidth, sourceHeight, targetLeft, targetTop, ' ', ConsoleColor.Black, BackgroundColor);
+            ConsolePal.MoveBufferArea(
+                sourceLeft,
+                sourceTop,
+                sourceWidth,
+                sourceHeight,
+                targetLeft,
+                targetTop,
+                ' ',
+                ConsoleColor.Black,
+                BackgroundColor
+            );
         }
 
         [SupportedOSPlatform("windows")]
-        public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft, int targetTop, char sourceChar, ConsoleColor sourceForeColor, ConsoleColor sourceBackColor)
+        public static void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop,
+            char sourceChar,
+            ConsoleColor sourceForeColor,
+            ConsoleColor sourceBackColor
+        )
         {
-            ConsolePal.MoveBufferArea(sourceLeft, sourceTop, sourceWidth, sourceHeight, targetLeft, targetTop, sourceChar, sourceForeColor, sourceBackColor);
+            ConsolePal.MoveBufferArea(
+                sourceLeft,
+                sourceTop,
+                sourceWidth,
+                sourceHeight,
+                targetLeft,
+                targetTop,
+                sourceChar,
+                sourceForeColor,
+                sourceBackColor
+            );
         }
 
         public static void Clear()
@@ -474,9 +531,17 @@ namespace System
         {
             // Basic argument validation.  The PAL implementation may provide further validation.
             if (left < 0 || left >= short.MaxValue)
-                throw new ArgumentOutOfRangeException(nameof(left), left, SR.ArgumentOutOfRange_ConsoleBufferBoundaries);
+                throw new ArgumentOutOfRangeException(
+                    nameof(left),
+                    left,
+                    SR.ArgumentOutOfRange_ConsoleBufferBoundaries
+                );
             if (top < 0 || top >= short.MaxValue)
-                throw new ArgumentOutOfRangeException(nameof(top), top, SR.ArgumentOutOfRange_ConsoleBufferBoundaries);
+                throw new ArgumentOutOfRangeException(
+                    nameof(top),
+                    top,
+                    SR.ArgumentOutOfRange_ConsoleBufferBoundaries
+                );
 
             ConsolePal.SetCursorPosition(left, top);
         }
@@ -534,7 +599,10 @@ namespace System
             // bufferSize is ignored, other than in argument validation, even in the .NET Framework
             if (bufferSize < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bufferSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferSize),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             return ConsolePal.OpenStandardInput();
         }
@@ -549,7 +617,10 @@ namespace System
             // bufferSize is ignored, other than in argument validation, even in the .NET Framework
             if (bufferSize < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bufferSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferSize),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             return ConsolePal.OpenStandardOutput();
         }
@@ -564,7 +635,10 @@ namespace System
             // bufferSize is ignored, other than in argument validation, even in the .NET Framework
             if (bufferSize < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(bufferSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(bufferSize),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             return ConsolePal.OpenStandardError();
         }
@@ -736,7 +810,7 @@ namespace System
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void WriteLine(string format, params object?[]? arg)
         {
-            if (arg == null)                       // avoid ArgumentNullException from String.Format
+            if (arg == null) // avoid ArgumentNullException from String.Format
                 Out.WriteLine(format, null, null); // faster than Out.WriteLine(format, (Object)arg);
             else
                 Out.WriteLine(format, arg);
@@ -763,7 +837,7 @@ namespace System
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Write(string format, params object?[]? arg)
         {
-            if (arg == null)                   // avoid ArgumentNullException from String.Format
+            if (arg == null) // avoid ArgumentNullException from String.Format
                 Out.Write(format, null, null); // faster than Out.Write(format, (Object)arg);
             else
                 Out.Write(format, arg);

@@ -55,9 +55,16 @@ namespace System.Reflection.Internal
 
         // The pooled buffers for (2) and (3) above. Use AcquireBuffer(int) and ReleaseBuffer(byte[])
         // instead of the pool directly to implement the size check.
-        private static readonly ObjectPool<byte[]> s_pool = new ObjectPool<byte[]>(() => new byte[PooledBufferSize]);
+        private static readonly ObjectPool<byte[]> s_pool = new ObjectPool<byte[]>(
+            () => new byte[PooledBufferSize]
+        );
 
-        public static string DecodeUtf8(byte* bytes, int byteCount, byte[] prefix, MetadataStringDecoder utf8Decoder)
+        public static string DecodeUtf8(
+            byte* bytes,
+            int byteCount,
+            byte[] prefix,
+            MetadataStringDecoder utf8Decoder
+        )
         {
             Debug.Assert(utf8Decoder != null);
 
@@ -74,7 +81,12 @@ namespace System.Reflection.Internal
             return utf8Decoder.GetString(bytes, byteCount);
         }
 
-        private static string DecodeUtf8Prefixed(byte* bytes, int byteCount, byte[] prefix, MetadataStringDecoder utf8Decoder)
+        private static string DecodeUtf8Prefixed(
+            byte* bytes,
+            int byteCount,
+            byte[] prefix,
+            MetadataStringDecoder utf8Decoder
+        )
         {
             Debug.Assert(utf8Decoder != null);
 
@@ -123,7 +135,11 @@ namespace System.Reflection.Internal
         #region Light-Up
 
         internal delegate string Encoding_GetString(Encoding encoding, byte* bytes, int byteCount); // only internal for test hook
-        private delegate string String_CreateStringFromEncoding(byte* bytes, int byteCount, Encoding encoding);
+        private delegate string String_CreateStringFromEncoding(
+            byte* bytes,
+            int byteCount,
+            Encoding encoding
+        );
 
         private static Encoding_GetString s_getStringPlatform = LoadGetStringPlatform(); // only non-readonly for test hook
 
@@ -139,7 +155,11 @@ namespace System.Reflection.Internal
             return s_getStringPlatform(encoding, bytes, byteCount);
         }
 
-        private static unsafe string GetStringPortable(Encoding encoding, byte* bytes, int byteCount)
+        private static unsafe string GetStringPortable(
+            Encoding encoding,
+            byte* bytes,
+            int byteCount
+        )
         {
             // This implementation can leak publicly (by design) to MetadataStringDecoder.GetString.
             // Therefore we implement the same validation.
@@ -169,17 +189,23 @@ namespace System.Reflection.Internal
             //
             // Try to bind to Encoding.GetString(byte*, int);
 
-            MethodInfo getStringInfo = LightUpHelper.GetMethod(typeof(Encoding), "GetString", typeof(byte*), typeof(int));
+            MethodInfo getStringInfo = LightUpHelper.GetMethod(
+                typeof(Encoding),
+                "GetString",
+                typeof(byte*),
+                typeof(int)
+            );
 
             if (getStringInfo != null && getStringInfo.ReturnType == typeof(string))
             {
                 try
                 {
-                    return (Encoding_GetString)getStringInfo.CreateDelegate(typeof(Encoding_GetString), null);
+                    return (Encoding_GetString)getStringInfo.CreateDelegate(
+                        typeof(Encoding_GetString),
+                        null
+                    );
                 }
-                catch (MemberAccessException)
-                {
-                }
+                catch (MemberAccessException) { }
                 catch (InvalidOperationException)
                 {
                     // thrown when accessing unapproved API in a Windows Store app
@@ -208,24 +234,36 @@ namespace System.Reflection.Internal
             //       However, on .NET < 4.6, there isn't no-op fast path for zero-initialization case so we'd slow down.
             //       Plus, mutating a System.String is no better than the reflection here.
 
-            IEnumerable<MethodInfo> createStringInfos = typeof(string).GetTypeInfo().GetDeclaredMethods("CreateStringFromEncoding");
+            IEnumerable<MethodInfo> createStringInfos = typeof(string)
+                .GetTypeInfo()
+                .GetDeclaredMethods("CreateStringFromEncoding");
             foreach (var methodInfo in createStringInfos)
             {
                 var parameters = methodInfo.GetParameters();
-                if (parameters.Length == 3
+                if (
+                    parameters.Length == 3
                     && parameters[0].ParameterType == typeof(byte*)
                     && parameters[1].ParameterType == typeof(int)
                     && parameters[2].ParameterType == typeof(Encoding)
-                    && methodInfo.ReturnType == typeof(string))
+                    && methodInfo.ReturnType == typeof(string)
+                )
                 {
                     try
                     {
-                        var createStringFromEncoding = (String_CreateStringFromEncoding)methodInfo.CreateDelegate(typeof(String_CreateStringFromEncoding), null);
-                        return (encoding, bytes, byteCount) => GetStringUsingCreateStringFromEncoding(createStringFromEncoding, bytes, byteCount, encoding);
+                        var createStringFromEncoding =
+                            (String_CreateStringFromEncoding)methodInfo.CreateDelegate(
+                                typeof(String_CreateStringFromEncoding),
+                                null
+                            );
+                        return (encoding, bytes, byteCount) =>
+                            GetStringUsingCreateStringFromEncoding(
+                                createStringFromEncoding,
+                                bytes,
+                                byteCount,
+                                encoding
+                            );
                     }
-                    catch (MemberAccessException)
-                    {
-                    }
+                    catch (MemberAccessException) { }
                     catch (InvalidOperationException)
                     {
                         // thrown when accessing unapproved API in a Windows Store app
@@ -241,7 +279,8 @@ namespace System.Reflection.Internal
             String_CreateStringFromEncoding createStringFromEncoding,
             byte* bytes,
             int byteCount,
-            Encoding encoding)
+            Encoding encoding
+        )
         {
             // String.CreateStringFromEncoding is an internal method that does not validate
             // arguments, but this implementation can leak publicly (by design) via

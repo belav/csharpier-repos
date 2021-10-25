@@ -50,8 +50,6 @@ namespace Microsoft.EntityFrameworkCore.Query
         ///     </para>
         /// </summary>
         [EntityFrameworkInternal]
-        public RelationalEvaluatableExpressionFilterDependencies()
-        {
-        }
+        public RelationalEvaluatableExpressionFilterDependencies() { }
     }
 }

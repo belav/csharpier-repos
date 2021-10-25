@@ -18,8 +18,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
         private readonly IVsEditorAdaptersFactoryService _editorAdaptersFactoryService;
         private readonly IVsTextLines _textLines;
 
-        public EditorTextUpdater(IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
-                                 IVsTextLines textLines)
+        public EditorTextUpdater(
+            IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
+            IVsTextLines textLines
+        )
         {
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
             _textLines = textLines;
@@ -32,7 +34,11 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
             {
                 return;
             }
-            TextEditApplication.UpdateText(changes.ToImmutableArray(), buffer, EditOptions.DefaultMinimalChange);
+            TextEditApplication.UpdateText(
+                changes.ToImmutableArray(),
+                buffer,
+                EditOptions.DefaultMinimalChange
+            );
         }
     }
 }

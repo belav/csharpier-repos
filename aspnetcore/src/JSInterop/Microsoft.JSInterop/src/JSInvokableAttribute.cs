@@ -26,9 +26,7 @@ namespace Microsoft.JSInterop
         /// Constructs an instance of <see cref="JSInvokableAttribute"/> without setting
         /// an identifier for the method.
         /// </summary>
-        public JSInvokableAttribute()
-        {
-        }
+        public JSInvokableAttribute() { }
 
         /// <summary>
         /// Constructs an instance of <see cref="JSInvokableAttribute"/> using the specified

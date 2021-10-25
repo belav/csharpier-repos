@@ -17,13 +17,15 @@ namespace System.Net.WebSockets.Client.Tests
     /// </summary>
     public class ClientWebSocketTestBase
     {
-        public static readonly object[][] EchoServers = System.Net.Test.Common.Configuration.WebSockets.EchoServers;
-        public static readonly object[][] EchoHeadersServers = System.Net.Test.Common.Configuration.WebSockets.EchoHeadersServers;
-        public static readonly object[][] EchoServersAndBoolean = EchoServers.SelectMany(o => new object[][]
-        {
-            new object[] { o[0], false },
-            new object[] { o[0], true }
-        }).ToArray();
+        public static readonly object[][] EchoServers =
+            System.Net.Test.Common.Configuration.WebSockets.EchoServers;
+        public static readonly object[][] EchoHeadersServers =
+            System.Net.Test.Common.Configuration.WebSockets.EchoHeadersServers;
+        public static readonly object[][] EchoServersAndBoolean = EchoServers
+            .SelectMany(
+                o => new object[][] { new object[] { o[0], false }, new object[] { o[0], true } }
+            )
+            .ToArray();
 
         public const int TimeOutMilliseconds = 30000;
         public const int CloseDescriptionMaxLength = 123;
@@ -44,7 +46,9 @@ namespace System.Net.WebSockets.Client.Tests
                 // Unknown server.
                 {
                     server = new Uri(string.Format("ws://{0}", Guid.NewGuid().ToString()));
-                    exceptionMessage = ResourceHelper.GetExceptionMessage("net_webstatus_ConnectFailure");
+                    exceptionMessage = ResourceHelper.GetExceptionMessage(
+                        "net_webstatus_ConnectFailure"
+                    );
 
                     yield return new object[] { server, exceptionMessage, WebSocketError.Faulted };
                 }
@@ -53,16 +57,30 @@ namespace System.Net.WebSockets.Client.Tests
                 {
                     server = System.Net.Test.Common.Configuration.Http.RemoteEchoServer;
                     var ub = new UriBuilder("ws", server.Host, server.Port, server.PathAndQuery);
-                    exceptionMessage = ResourceHelper.GetExceptionMessage("net_WebSockets_Connect101Expected", (int) HttpStatusCode.OK);
+                    exceptionMessage = ResourceHelper.GetExceptionMessage(
+                        "net_WebSockets_Connect101Expected",
+                        (int)HttpStatusCode.OK
+                    );
 
-                    yield return new object[] { ub.Uri, exceptionMessage, WebSocketError.NotAWebSocket };
+                    yield return new object[]
+                    {
+                        ub.Uri,
+                        exceptionMessage,
+                        WebSocketError.NotAWebSocket
+                    };
                 }
             }
         }
 
         public async Task TestCancellation(Func<ClientWebSocket, Task> action, Uri server)
         {
-            using (ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(server, TimeOutMilliseconds, _output))
+            using (
+                ClientWebSocket cws = await WebSocketHelper.GetConnectedWebSocket(
+                    server,
+                    TimeOutMilliseconds,
+                    _output
+                )
+            )
             {
                 try
                 {
@@ -87,7 +105,11 @@ namespace System.Net.WebSockets.Client.Tests
             }
         }
 
-        protected static async Task<WebSocketReceiveResult> ReceiveEntireMessageAsync(WebSocket ws, ArraySegment<byte> segment, CancellationToken cancellationToken)
+        protected static async Task<WebSocketReceiveResult> ReceiveEntireMessageAsync(
+            WebSocket ws,
+            ArraySegment<byte> segment,
+            CancellationToken cancellationToken
+        )
         {
             int bytesReceived = 0;
             while (true)
@@ -95,16 +117,29 @@ namespace System.Net.WebSockets.Client.Tests
                 WebSocketReceiveResult r = await ws.ReceiveAsync(segment, cancellationToken);
                 if (r.EndOfMessage)
                 {
-                    return new WebSocketReceiveResult(bytesReceived + r.Count, r.MessageType, true, r.CloseStatus, r.CloseStatusDescription);
+                    return new WebSocketReceiveResult(
+                        bytesReceived + r.Count,
+                        r.MessageType,
+                        true,
+                        r.CloseStatus,
+                        r.CloseStatusDescription
+                    );
                 }
                 else
                 {
                     bytesReceived += r.Count;
-                    segment = new ArraySegment<byte>(segment.Array, segment.Offset + r.Count, segment.Count - r.Count);
+                    segment = new ArraySegment<byte>(
+                        segment.Array,
+                        segment.Offset + r.Count,
+                        segment.Count - r.Count
+                    );
                 }
             }
         }
 
-        public static bool WebSocketsSupported { get { return WebSocketHelper.WebSocketsSupported; } }
+        public static bool WebSocketsSupported
+        {
+            get { return WebSocketHelper.WebSocketsSupported; }
+        }
     }
 }

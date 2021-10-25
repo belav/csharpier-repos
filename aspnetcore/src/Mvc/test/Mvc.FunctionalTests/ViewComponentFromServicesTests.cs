@@ -8,9 +8,12 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class ViewComponentFromServicesTest : IClassFixture<MvcTestFixture<ControllersFromServicesWebSite.Startup>>
+    public class ViewComponentFromServicesTest
+        : IClassFixture<MvcTestFixture<ControllersFromServicesWebSite.Startup>>
     {
-        public ViewComponentFromServicesTest(MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture)
+        public ViewComponentFromServicesTest(
+            MvcTestFixture<ControllersFromServicesWebSite.Startup> fixture
+        )
         {
             Client = fixture.CreateDefaultClient();
         }
@@ -22,7 +25,10 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         {
             // Arrange
             var expected = "Value = 3";
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/another/InServicesViewComponent");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                "http://localhost/another/InServicesViewComponent"
+            );
 
             // Act
             var response = await Client.SendAsync(request);

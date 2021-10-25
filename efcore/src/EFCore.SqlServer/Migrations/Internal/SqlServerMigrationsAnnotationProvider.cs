@@ -31,18 +31,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Migrations.Internal
         /// </summary>
         /// <param name="dependencies"> Parameter object containing dependencies for this service. </param>
 #pragma warning disable EF1001 // Internal EF Core API usage.
-        public SqlServerMigrationsAnnotationProvider(MigrationsAnnotationProviderDependencies dependencies)
+        public SqlServerMigrationsAnnotationProvider(
+            MigrationsAnnotationProviderDependencies dependencies
+        )
 #pragma warning restore EF1001 // Internal EF Core API usage.
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         /// <inheritdoc />
-        public override IEnumerable<IAnnotation> ForRemove(IRelationalModel model)
-            => model.GetAnnotations().Where(a => a.Name != SqlServerAnnotationNames.EditionOptions);
+        public override IEnumerable<IAnnotation> ForRemove(IRelationalModel model) =>
+            model.GetAnnotations().Where(a => a.Name != SqlServerAnnotationNames.EditionOptions);
 
         /// <inheritdoc />
-        public override IEnumerable<IAnnotation> ForRemove(ITable table)
-            => table.GetAnnotations();
+        public override IEnumerable<IAnnotation> ForRemove(ITable table) => table.GetAnnotations();
     }
 }

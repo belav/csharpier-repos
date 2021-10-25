@@ -9,7 +9,8 @@ namespace System.Text.Json.Serialization
             Utf8JsonWriter writer,
             object? value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             if (IsValueType)
             {
@@ -20,7 +21,10 @@ namespace System.Text.Json.Serialization
                 }
 
                 // Root object is a boxed value type, we need to push it to the reference stack before it gets unboxed here.
-                if (options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles && value != null)
+                if (
+                    options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles
+                    && value != null
+                )
                 {
                     state.ReferenceResolver.PushReferenceForCycleDetection(value);
                 }
@@ -34,13 +38,15 @@ namespace System.Text.Json.Serialization
             Utf8JsonWriter writer,
             in T value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             try
             {
                 return TryWrite(writer, value, options, ref state);
             }
-            catch (InvalidOperationException ex) when (ex.Source == ThrowHelper.ExceptionSourceValueToRethrowAsJsonException)
+            catch (InvalidOperationException ex)
+                when (ex.Source == ThrowHelper.ExceptionSourceValueToRethrowAsJsonException)
             {
                 ThrowHelper.ReThrowWithPath(state, ex);
                 throw;

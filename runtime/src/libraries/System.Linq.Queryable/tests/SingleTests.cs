@@ -11,7 +11,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Empty()
         {
-            int[] source = { };
+            int[] source = {  };
             Assert.Throws<InvalidOperationException>(() => source.AsQueryable().Single());
         }
 
@@ -32,15 +32,19 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithPredicate()
         {
-            int[] source = { };
-            Assert.Throws<InvalidOperationException>(() => source.AsQueryable().Single(i => i % 2 == 0));
+            int[] source = {  };
+            Assert.Throws<InvalidOperationException>(
+                () => source.AsQueryable().Single(i => i % 2 == 0)
+            );
         }
 
         [Fact]
         public void ManyElementsPredicateFalseForAll()
         {
             int[] source = { 3, 1, 7, 9, 13, 19 };
-            Assert.Throws<InvalidOperationException>(() => source.AsQueryable().Single(i => i % 2 == 0));
+            Assert.Throws<InvalidOperationException>(
+                () => source.AsQueryable().Single(i => i % 2 == 0)
+            );
         }
 
         [Fact]
@@ -63,15 +67,21 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source = null;
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.Single());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Single(i => i % 2 == 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Single(i => i % 2 == 0)
+            );
         }
 
         [Fact]
         public void ThrowsOnNullPredicate()
         {
-            int[] source = { };
+            int[] source = {  };
             Expression<Func<int, bool>> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.AsQueryable().Single(nullPredicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.AsQueryable().Single(nullPredicate)
+            );
         }
 
         [Fact]

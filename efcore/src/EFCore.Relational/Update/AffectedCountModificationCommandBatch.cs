@@ -27,10 +27,9 @@ namespace Microsoft.EntityFrameworkCore.Update
         ///     Creates a new <see cref="AffectedCountModificationCommandBatch" /> instance.
         /// </summary>
         /// <param name="dependencies"> Service dependencies. </param>
-        protected AffectedCountModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+        protected AffectedCountModificationCommandBatch(
+            ModificationCommandBatchFactoryDependencies dependencies
+        ) : base(dependencies) { }
 
         /// <summary>
         ///     Consumes the data reader created by <see cref="ReaderModificationCommandBatch.Execute" />.
@@ -40,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.Update
         {
             Check.DebugAssert(
                 CommandResultSet.Count == ModificationCommands.Count,
-                $"CommandResultSet.Count of {CommandResultSet.Count} != ModificationCommands.Count of {ModificationCommands.Count}");
+                $"CommandResultSet.Count of {CommandResultSet.Count} != ModificationCommands.Count of {ModificationCommands.Count}"
+            );
 
             var commandIndex = 0;
 
@@ -49,8 +49,10 @@ namespace Microsoft.EntityFrameworkCore.Update
                 var actualResultSetCount = 0;
                 do
                 {
-                    while (commandIndex < CommandResultSet.Count
-                        && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet)
+                    while (
+                        commandIndex < CommandResultSet.Count
+                        && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet
+                    )
                     {
                         commandIndex++;
                     }
@@ -62,26 +64,32 @@ namespace Microsoft.EntityFrameworkCore.Update
                             : ConsumeResultSetWithoutPropagation(commandIndex, reader);
                         actualResultSetCount++;
                     }
-                }
-                while (commandIndex < CommandResultSet.Count
-                    && reader.DbDataReader.NextResult());
-
+                } while (commandIndex < CommandResultSet.Count && reader.DbDataReader.NextResult());
 #if DEBUG
-                while (commandIndex < CommandResultSet.Count
-                    && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet)
+                while (
+                    commandIndex < CommandResultSet.Count
+                    && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet
+                )
                 {
                     commandIndex++;
                 }
 
                 Check.DebugAssert(
                     commandIndex == ModificationCommands.Count,
-                    "Expected " + ModificationCommands.Count + " results, got " + commandIndex);
+                    "Expected " + ModificationCommands.Count + " results, got " + commandIndex
+                );
 
-                var expectedResultSetCount = CommandResultSet.Count(e => e == ResultSetMapping.LastInResultSet);
+                var expectedResultSetCount = CommandResultSet.Count(
+                    e => e == ResultSetMapping.LastInResultSet
+                );
 
                 Check.DebugAssert(
                     actualResultSetCount == expectedResultSetCount,
-                    "Expected " + expectedResultSetCount + " result sets, got " + actualResultSetCount);
+                    "Expected "
+                        + expectedResultSetCount
+                        + " result sets, got "
+                        + actualResultSetCount
+                );
 #endif
             }
             catch (Exception ex) when (!(ex is DbUpdateException))
@@ -89,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 throw new DbUpdateException(
                     RelationalStrings.UpdateStoreException,
                     ex,
-                    ModificationCommands[commandIndex].Entries);
+                    ModificationCommands[commandIndex].Entries
+                );
             }
         }
 
@@ -102,11 +111,13 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <exception cref="OperationCanceledException"> If the <see cref="CancellationToken"/> is canceled. </exception>
         protected override async Task ConsumeAsync(
             RelationalDataReader reader,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Check.DebugAssert(
                 CommandResultSet.Count == ModificationCommands.Count,
-                $"CommandResultSet.Count of {CommandResultSet.Count} != ModificationCommands.Count of {ModificationCommands.Count}");
+                $"CommandResultSet.Count of {CommandResultSet.Count} != ModificationCommands.Count of {ModificationCommands.Count}"
+            );
 
             var commandIndex = 0;
 
@@ -115,8 +126,10 @@ namespace Microsoft.EntityFrameworkCore.Update
                 var actualResultSetCount = 0;
                 do
                 {
-                    while (commandIndex < CommandResultSet.Count
-                        && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet)
+                    while (
+                        commandIndex < CommandResultSet.Count
+                        && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet
+                    )
                     {
                         commandIndex++;
                     }
@@ -124,30 +137,51 @@ namespace Microsoft.EntityFrameworkCore.Update
                     if (commandIndex < CommandResultSet.Count)
                     {
                         commandIndex = ModificationCommands[commandIndex].RequiresResultPropagation
-                            ? await ConsumeResultSetWithPropagationAsync(commandIndex, reader, cancellationToken).ConfigureAwait(false)
-                            : await ConsumeResultSetWithoutPropagationAsync(commandIndex, reader, cancellationToken).ConfigureAwait(false);
+                            ? await ConsumeResultSetWithPropagationAsync(
+                                      commandIndex,
+                                      reader,
+                                      cancellationToken
+                                  )
+                                  .ConfigureAwait(false)
+                            : await ConsumeResultSetWithoutPropagationAsync(
+                                      commandIndex,
+                                      reader,
+                                      cancellationToken
+                                  )
+                                  .ConfigureAwait(false);
                         actualResultSetCount++;
                     }
-                }
-                while (commandIndex < CommandResultSet.Count
-                    && await reader.DbDataReader.NextResultAsync(cancellationToken).ConfigureAwait(false));
-
+                } while (
+                    commandIndex < CommandResultSet.Count
+                    && await reader.DbDataReader
+                        .NextResultAsync(cancellationToken)
+                        .ConfigureAwait(false)
+                );
 #if DEBUG
-                while (commandIndex < CommandResultSet.Count
-                    && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet)
+                while (
+                    commandIndex < CommandResultSet.Count
+                    && CommandResultSet[commandIndex] == ResultSetMapping.NoResultSet
+                )
                 {
                     commandIndex++;
                 }
 
                 Check.DebugAssert(
                     commandIndex == ModificationCommands.Count,
-                    "Expected " + ModificationCommands.Count + " results, got " + commandIndex);
+                    "Expected " + ModificationCommands.Count + " results, got " + commandIndex
+                );
 
-                var expectedResultSetCount = CommandResultSet.Count(e => e == ResultSetMapping.LastInResultSet);
+                var expectedResultSetCount = CommandResultSet.Count(
+                    e => e == ResultSetMapping.LastInResultSet
+                );
 
                 Check.DebugAssert(
                     actualResultSetCount == expectedResultSetCount,
-                    "Expected " + expectedResultSetCount + " result sets, got " + actualResultSetCount);
+                    "Expected "
+                        + expectedResultSetCount
+                        + " result sets, got "
+                        + actualResultSetCount
+                );
 #endif
             }
             catch (Exception ex) when (!(ex is DbUpdateException))
@@ -155,7 +189,8 @@ namespace Microsoft.EntityFrameworkCore.Update
                 throw new DbUpdateException(
                     RelationalStrings.UpdateStoreException,
                     ex,
-                    ModificationCommands[commandIndex].Entries);
+                    ModificationCommands[commandIndex].Entries
+                );
             }
         }
 
@@ -166,33 +201,48 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="commandIndex"> The ordinal of the command being consumed. </param>
         /// <param name="reader"> The data reader. </param>
         /// <returns> The ordinal of the next command that must be consumed. </returns>
-        protected virtual int ConsumeResultSetWithPropagation(int commandIndex, RelationalDataReader reader)
+        protected virtual int ConsumeResultSetWithPropagation(
+            int commandIndex,
+            RelationalDataReader reader
+        )
         {
             var rowsAffected = 0;
             do
             {
                 var tableModification = ModificationCommands[commandIndex];
-                Check.DebugAssert(tableModification.RequiresResultPropagation, "RequiresResultPropagation is false");
+                Check.DebugAssert(
+                    tableModification.RequiresResultPropagation,
+                    "RequiresResultPropagation is false"
+                );
 
                 if (!reader.Read())
                 {
                     var expectedRowsAffected = rowsAffected + 1;
-                    while (++commandIndex < CommandResultSet.Count
-                        && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet)
+                    while (
+                        ++commandIndex < CommandResultSet.Count
+                        && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
+                    )
                     {
                         expectedRowsAffected++;
                     }
 
-                    ThrowAggregateUpdateConcurrencyException(commandIndex, expectedRowsAffected, rowsAffected);
+                    ThrowAggregateUpdateConcurrencyException(
+                        commandIndex,
+                        expectedRowsAffected,
+                        rowsAffected
+                    );
                 }
 
-                var valueBufferFactory = CreateValueBufferFactory(tableModification.ColumnModifications);
+                var valueBufferFactory = CreateValueBufferFactory(
+                    tableModification.ColumnModifications
+                );
 
                 tableModification.PropagateResults(valueBufferFactory.Create(reader.DbDataReader));
                 rowsAffected++;
-            }
-            while (++commandIndex < CommandResultSet.Count
-                && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet);
+            } while (
+                ++commandIndex < CommandResultSet.Count
+                && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
+            );
 
             return commandIndex;
         }
@@ -212,33 +262,46 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual async Task<int> ConsumeResultSetWithPropagationAsync(
             int commandIndex,
             RelationalDataReader reader,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var rowsAffected = 0;
             do
             {
                 var tableModification = ModificationCommands[commandIndex];
-                Check.DebugAssert(tableModification.RequiresResultPropagation, "RequiresResultPropagation is false");
+                Check.DebugAssert(
+                    tableModification.RequiresResultPropagation,
+                    "RequiresResultPropagation is false"
+                );
 
                 if (!await reader.ReadAsync(cancellationToken).ConfigureAwait(false))
                 {
                     var expectedRowsAffected = rowsAffected + 1;
-                    while (++commandIndex < CommandResultSet.Count
-                        && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet)
+                    while (
+                        ++commandIndex < CommandResultSet.Count
+                        && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
+                    )
                     {
                         expectedRowsAffected++;
                     }
 
-                    ThrowAggregateUpdateConcurrencyException(commandIndex, expectedRowsAffected, rowsAffected);
+                    ThrowAggregateUpdateConcurrencyException(
+                        commandIndex,
+                        expectedRowsAffected,
+                        rowsAffected
+                    );
                 }
 
-                var valueBufferFactory = CreateValueBufferFactory(tableModification.ColumnModifications);
+                var valueBufferFactory = CreateValueBufferFactory(
+                    tableModification.ColumnModifications
+                );
 
                 tableModification.PropagateResults(valueBufferFactory.Create(reader.DbDataReader));
                 rowsAffected++;
-            }
-            while (++commandIndex < CommandResultSet.Count
-                && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet);
+            } while (
+                ++commandIndex < CommandResultSet.Count
+                && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
+            );
 
             return commandIndex;
         }
@@ -250,13 +313,21 @@ namespace Microsoft.EntityFrameworkCore.Update
         /// <param name="commandIndex"> The ordinal of the command being consumed. </param>
         /// <param name="reader"> The data reader. </param>
         /// <returns> The ordinal of the next command that must be consumed. </returns>
-        protected virtual int ConsumeResultSetWithoutPropagation(int commandIndex, RelationalDataReader reader)
+        protected virtual int ConsumeResultSetWithoutPropagation(
+            int commandIndex,
+            RelationalDataReader reader
+        )
         {
             var expectedRowsAffected = 1;
-            while (++commandIndex < CommandResultSet.Count
-                && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet)
+            while (
+                ++commandIndex < CommandResultSet.Count
+                && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
+            )
             {
-                Check.DebugAssert(!ModificationCommands[commandIndex].RequiresResultPropagation, "RequiresResultPropagation is true");
+                Check.DebugAssert(
+                    !ModificationCommands[commandIndex].RequiresResultPropagation,
+                    "RequiresResultPropagation is true"
+                );
 
                 expectedRowsAffected++;
             }
@@ -266,7 +337,11 @@ namespace Microsoft.EntityFrameworkCore.Update
                 var rowsAffected = reader.DbDataReader.GetInt32(0);
                 if (rowsAffected != expectedRowsAffected)
                 {
-                    ThrowAggregateUpdateConcurrencyException(commandIndex, expectedRowsAffected, rowsAffected);
+                    ThrowAggregateUpdateConcurrencyException(
+                        commandIndex,
+                        expectedRowsAffected,
+                        rowsAffected
+                    );
                 }
             }
             else
@@ -292,13 +367,19 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual async Task<int> ConsumeResultSetWithoutPropagationAsync(
             int commandIndex,
             RelationalDataReader reader,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var expectedRowsAffected = 1;
-            while (++commandIndex < CommandResultSet.Count
-                && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet)
+            while (
+                ++commandIndex < CommandResultSet.Count
+                && CommandResultSet[commandIndex - 1] == ResultSetMapping.NotLastInResultSet
+            )
             {
-                Check.DebugAssert(!ModificationCommands[commandIndex].RequiresResultPropagation, "RequiresResultPropagation is true");
+                Check.DebugAssert(
+                    !ModificationCommands[commandIndex].RequiresResultPropagation,
+                    "RequiresResultPropagation is true"
+                );
 
                 expectedRowsAffected++;
             }
@@ -308,7 +389,11 @@ namespace Microsoft.EntityFrameworkCore.Update
                 var rowsAffected = reader.DbDataReader.GetInt32(0);
                 if (rowsAffected != expectedRowsAffected)
                 {
-                    ThrowAggregateUpdateConcurrencyException(commandIndex, expectedRowsAffected, rowsAffected);
+                    ThrowAggregateUpdateConcurrencyException(
+                        commandIndex,
+                        expectedRowsAffected,
+                        rowsAffected
+                    );
                 }
             }
             else
@@ -339,11 +424,13 @@ namespace Microsoft.EntityFrameworkCore.Update
         protected virtual void ThrowAggregateUpdateConcurrencyException(
             int commandIndex,
             int expectedRowsAffected,
-            int rowsAffected)
+            int rowsAffected
+        )
         {
             throw new DbUpdateConcurrencyException(
                 RelationalStrings.UpdateConcurrencyException(expectedRowsAffected, rowsAffected),
-                AggregateEntries(commandIndex, expectedRowsAffected));
+                AggregateEntries(commandIndex, expectedRowsAffected)
+            );
         }
     }
 }

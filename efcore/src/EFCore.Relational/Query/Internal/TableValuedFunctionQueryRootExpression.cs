@@ -28,8 +28,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         public TableValuedFunctionQueryRootExpression(
             IEntityType entityType,
             IStoreFunction function,
-            IReadOnlyCollection<Expression> arguments)
-            : base(entityType)
+            IReadOnlyCollection<Expression> arguments
+        ) : base(entityType)
         {
             Check.NotNull(function, nameof(function));
             Check.NotNull(arguments, nameof(arguments));
@@ -72,8 +72,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
             }
 
             return changed
-                ? new TableValuedFunctionQueryRootExpression(EntityType, Function, arguments)
-                : this;
+              ? new TableValuedFunctionQueryRootExpression(EntityType, Function, arguments)
+              : this;
         }
 
         /// <summary>
@@ -98,16 +98,21 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public override bool Equals(object? obj)
-            => obj != null
-                && (ReferenceEquals(this, obj)
-                    || obj is TableValuedFunctionQueryRootExpression queryRootExpression
-                    && Equals(queryRootExpression));
+        public override bool Equals(object? obj) =>
+            obj != null
+            && (
+                ReferenceEquals(this, obj)
+                || obj is TableValuedFunctionQueryRootExpression queryRootExpression
+                    && Equals(queryRootExpression)
+            );
 
-        private bool Equals(TableValuedFunctionQueryRootExpression queryRootExpression)
-            => base.Equals(queryRootExpression)
-                && Equals(Function, queryRootExpression.Function)
-                && Arguments.SequenceEqual(queryRootExpression.Arguments, ExpressionEqualityComparer.Instance);
+        private bool Equals(TableValuedFunctionQueryRootExpression queryRootExpression) =>
+            base.Equals(queryRootExpression)
+            && Equals(Function, queryRootExpression.Function)
+            && Arguments.SequenceEqual(
+                queryRootExpression.Arguments,
+                ExpressionEqualityComparer.Instance
+            );
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -10,12 +10,11 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests
 {
-    public class NewtonsoftJsonOutputFormatterTest : JsonOutputFormatterTestBase<FormatterWebSite.Startup>
+    public class NewtonsoftJsonOutputFormatterTest
+        : JsonOutputFormatterTestBase<FormatterWebSite.Startup>
     {
         public NewtonsoftJsonOutputFormatterTest(MvcTestFixture<FormatterWebSite.Startup> fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         [Fact]
         public async Task JsonOutputFormatter_ReturnsIndentedJson()
@@ -25,7 +24,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             {
                 Id = 1,
                 Alias = "john",
-                description = "This is long so we can test large objects " + new string('a', 1024 * 65),
+                description =
+                    "This is long so we can test large objects " + new string('a', 1024 * 65),
                 Designation = "Administrator",
                 Name = "John Williams"
             };
@@ -35,7 +35,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
             var expectedBody = JsonConvert.SerializeObject(user, serializerSettings);
 
             // Act
-            var response = await Client.GetAsync("http://localhost/JsonFormatter/ReturnsIndentedJson");
+            var response = await Client.GetAsync(
+                "http://localhost/JsonFormatter/ReturnsIndentedJson"
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -47,7 +49,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests
         public async Task JsonOutputFormatter_SetsContentLength()
         {
             // Act
-            var response = await Client.GetAsync($"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.SimpleModelResult)}");
+            var response = await Client.GetAsync(
+                $"/JsonOutputFormatter/{nameof(JsonOutputFormatterController.SimpleModelResult)}"
+            );
 
             // Assert
             await response.AssertStatusCodeAsync(HttpStatusCode.OK);

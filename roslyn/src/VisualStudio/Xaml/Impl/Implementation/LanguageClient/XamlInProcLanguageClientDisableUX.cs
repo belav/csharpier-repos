@@ -40,11 +40,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             IDiagnosticService diagnosticService,
             IAsynchronousOperationListenerProvider listenerProvider,
             ILspWorkspaceRegistrationService lspWorkspaceRegistrationService,
-            [Import(typeof(SAsyncServiceProvider))] VSShell.IAsyncServiceProvider asyncServiceProvider,
-            IThreadingContext threadingContext)
-            : base(xamlDispatcherFactory, workspace, diagnosticService, listenerProvider, lspWorkspaceRegistrationService, asyncServiceProvider, threadingContext, diagnosticsClientName: null)
-        {
-        }
+            [Import(typeof(SAsyncServiceProvider))]
+                VSShell.IAsyncServiceProvider asyncServiceProvider,
+            IThreadingContext threadingContext
+        )
+            : base(
+                xamlDispatcherFactory,
+                workspace,
+                diagnosticService,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                asyncServiceProvider,
+                threadingContext,
+                diagnosticsClientName: null
+            ) { }
 
         /// <summary>
         /// Gets the name of the language client (displayed in yellow bars).
@@ -53,13 +62,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
 
         protected internal override VSServerCapabilities GetCapabilities()
         {
-            var experimentationService = Workspace.Services.GetRequiredService<IExperimentationService>();
-            var isLspExperimentEnabled = experimentationService.IsExperimentEnabled(StringConstants.EnableLspIntelliSense);
+            var experimentationService =
+                Workspace.Services.GetRequiredService<IExperimentationService>();
+            var isLspExperimentEnabled = experimentationService.IsExperimentEnabled(
+                StringConstants.EnableLspIntelliSense
+            );
 
-            var capabilities = isLspExperimentEnabled ? XamlCapabilities.None : XamlCapabilities.Current;
+            var capabilities = isLspExperimentEnabled
+                ? XamlCapabilities.None
+                : XamlCapabilities.Current;
 
             // Only turn on CodeAction support for client scenarios. Hosts will get non-LSP lightbulbs automatically.
-            capabilities.CodeActionProvider = new CodeActionOptions { CodeActionKinds = new[] { CodeActionKind.QuickFix, CodeActionKind.Refactor } };
+            capabilities.CodeActionProvider = new CodeActionOptions
+            {
+                CodeActionKinds = new[] { CodeActionKind.QuickFix, CodeActionKind.Refactor }
+            };
             capabilities.CodeActionsResolveProvider = true;
 
             return capabilities;

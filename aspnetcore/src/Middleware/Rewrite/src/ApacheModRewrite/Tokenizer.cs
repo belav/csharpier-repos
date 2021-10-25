@@ -45,7 +45,9 @@ namespace Microsoft.AspNetCore.Rewrite.ApacheModRewrite
                         if (!context.Next())
                         {
                             // Means that a character was not escaped appropriately Ex: "foo\"
-                            throw new FormatException($"Invalid escaper character in string: {rule}");
+                            throw new FormatException(
+                                $"Invalid escaper character in string: {rule}"
+                            );
                         }
                         break;
                     case Quote:

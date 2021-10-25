@@ -10,6 +10,5 @@ namespace Microsoft.AspNetCore.Mvc.Core.Infrastructure
     /// antiforgery validation failed. This can be matched inside MVC result
     /// filters to process the validation failure.
     /// </summary>
-    public interface IAntiforgeryValidationFailedResult : IActionResult
-    { }
+    public interface IAntiforgeryValidationFailedResult : IActionResult { }
 }

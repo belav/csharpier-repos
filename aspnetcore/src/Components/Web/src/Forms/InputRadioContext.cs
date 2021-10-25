@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// <summary>
         /// Gets the name of the input radio group.
         /// </summary>
-        public string GroupName { get; } 
+        public string GroupName { get; }
 
         /// <summary>
         /// Gets the current selected value in the input radio group.
@@ -43,7 +43,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             string groupName,
             object? currentValue,
             string fieldClass,
-            EventCallback<ChangeEventArgs> changeEventCallback)
+            EventCallback<ChangeEventArgs> changeEventCallback
+        )
         {
             _parentContext = parentContext;
 
@@ -58,7 +59,9 @@ namespace Microsoft.AspNetCore.Components.Forms
         /// </summary>
         /// <param name="groupName">The group name of the ancestor <see cref="InputRadioContext"/>.</param>
         /// <returns>The <see cref="InputRadioContext"/>, or <c>null</c> if none was found.</returns>
-        public InputRadioContext? FindContextInAncestors(string groupName)
-            => string.Equals(GroupName, groupName) ? this : _parentContext?.FindContextInAncestors(groupName);
+        public InputRadioContext? FindContextInAncestors(string groupName) =>
+            string.Equals(GroupName, groupName)
+                ? this
+                : _parentContext?.FindContextInAncestors(groupName);
     }
 }

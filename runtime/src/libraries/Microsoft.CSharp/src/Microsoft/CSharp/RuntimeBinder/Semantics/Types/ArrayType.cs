@@ -13,8 +13,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class ArrayType : CType
     {
-        public ArrayType(CType elementType, int rank, bool isSZArray)
-            : base(TypeKind.TK_ArrayType)
+        public ArrayType(CType elementType, int rank, bool isSZArray) : base(TypeKind.TK_ArrayType)
         {
             Rank = rank;
             IsSZArray = isSZArray;
@@ -63,6 +62,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public override ConstValKind ConstValKind => ConstValKind.IntPtr;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public override AggregateType GetAts() => SymbolLoader.GetPredefindType(PredefinedType.PT_ARRAY);
+        public override AggregateType GetAts() =>
+            SymbolLoader.GetPredefindType(PredefinedType.PT_ARRAY);
     }
 }

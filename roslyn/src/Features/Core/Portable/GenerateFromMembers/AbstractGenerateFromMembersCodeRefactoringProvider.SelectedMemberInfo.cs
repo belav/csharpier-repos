@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.CodeRefactorings;
 
 namespace Microsoft.CodeAnalysis.GenerateFromMembers
 {
-    internal abstract partial class AbstractGenerateFromMembersCodeRefactoringProvider : CodeRefactoringProvider
+    internal abstract partial class AbstractGenerateFromMembersCodeRefactoringProvider
+        : CodeRefactoringProvider
     {
         protected class SelectedMemberInfo
         {
@@ -20,7 +21,8 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
             public SelectedMemberInfo(
                 INamedTypeSymbol containingType,
                 ImmutableArray<SyntaxNode> selectedDeclarations,
-                ImmutableArray<ISymbol> selectedMembers)
+                ImmutableArray<ISymbol> selectedMembers
+            )
             {
                 ContainingType = containingType;
                 SelectedDeclarations = selectedDeclarations;

@@ -15,11 +15,7 @@ namespace BinderTracingTests
 {
     public class BinderTestException : Exception
     {
-        public BinderTestException(string message)
-                : base(message)
-        {
-        }
-
+        public BinderTestException(string message) : base(message) { }
     }
     partial class BinderTracingTest
     {
@@ -123,7 +119,9 @@ namespace BinderTracingTests
                     ResultAssemblyName = asm.GetName(),
                     ResultAssemblyPath = asm.Location,
                     Cached = false,
-                    AssemblyLoadContextResolvingHandlers = handlerNull.Invocations.Concat(handlerLoad.Invocations).ToList(),
+                    AssemblyLoadContextResolvingHandlers = handlerNull.Invocations
+                        .Concat(handlerLoad.Invocations)
+                        .ToList(),
                     NestedBinds = handlerNull.Binds.Concat(handlerLoad.Binds).ToList()
                 };
             }
@@ -230,19 +228,27 @@ namespace BinderTracingTests
                     ResultAssemblyName = asm.GetName(),
                     ResultAssemblyPath = asm.Location,
                     Cached = false,
-                    AppDomainAssemblyResolveHandlers = handlerNull.Invocations.Concat(handlerLoad.Invocations).ToList(),
+                    AppDomainAssemblyResolveHandlers = handlerNull.Invocations
+                        .Concat(handlerLoad.Invocations)
+                        .ToList(),
                     NestedBinds = handlerNull.Binds.Concat(handlerLoad.Binds).ToList()
                 };
             }
         }
 
-        [BinderTest(isolate: true, additionalLoadsToTrack: new string[] { "AssemblyToLoadDependency" })]
+        [BinderTest(
+            isolate: true,
+            additionalLoadsToTrack: new string[] { "AssemblyToLoadDependency" }
+        )]
         public static BindOperation AssemblyLoadFromResolveHandler_LoadDependency()
         {
             string assemblyPath = Helpers.GetAssemblyInSubdirectoryPath(SubdirectoryAssemblyName);
             Assembly asm = Assembly.LoadFrom(assemblyPath);
             Type t = asm.GetType(DependentAssemblyTypeName);
-            MethodInfo method = t.GetMethod("UseDependentAssembly", BindingFlags.Public | BindingFlags.Static);
+            MethodInfo method = t.GetMethod(
+                "UseDependentAssembly",
+                BindingFlags.Public | BindingFlags.Static
+            );
             Assembly asmDependency = (Assembly)method.Invoke(null, new object[0]);
 
             return new BindOperation()
@@ -275,15 +281,23 @@ namespace BinderTracingTests
             };
         }
 
-        [BinderTest(isolate: true, additionalLoadsToTrack: new string[] { "AssemblyToLoadDependency" })]
+        [BinderTest(
+            isolate: true,
+            additionalLoadsToTrack: new string[] { "AssemblyToLoadDependency" }
+        )]
         public static BindOperation AssemblyLoadFromResolveHandler_MissingDependency()
         {
             string appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string assemblyPath = Path.Combine(appPath, $"{DependentAssemblyName}.dll");
             Assembly asm = Assembly.LoadFrom(assemblyPath);
             Type t = asm.GetType(DependentAssemblyTypeName);
-            MethodInfo method = t.GetMethod("UseDependentAssembly", BindingFlags.Public | BindingFlags.Static);
-            Assert.Throws<TargetInvocationException, FileNotFoundException>(() => method.Invoke(null, new object[0]));
+            MethodInfo method = t.GetMethod(
+                "UseDependentAssembly",
+                BindingFlags.Public | BindingFlags.Static
+            );
+            Assert.Throws<TargetInvocationException, FileNotFoundException>(
+                () => method.Invoke(null, new object[0])
+            );
 
             var assemblyName = new AssemblyName(asm.FullName);
             assemblyName.Name = "AssemblyToLoadDependency";
@@ -386,17 +400,23 @@ namespace BinderTracingTests
                     alc.Resolving -= OnAssemblyLoadContextResolving;
             }
 
-            private Assembly OnAssemblyLoadContextResolving(AssemblyLoadContext context, AssemblyName assemblyName)
+            private Assembly OnAssemblyLoadContextResolving(
+                AssemblyLoadContext context,
+                AssemblyName assemblyName
+            )
             {
                 if (handlerReturn == HandlerReturn.Exception)
-                    throw new BinderTestException("Exception in handler for AssemblyLoadContext.Resolving");
+                    throw new BinderTestException(
+                        "Exception in handler for AssemblyLoadContext.Resolving"
+                    );
 
                 Assembly asm = ResolveAssembly(context, assemblyName);
                 var invocation = new HandlerInvocation()
                 {
                     AssemblyName = assemblyName,
                     HandlerName = nameof(OnAssemblyLoadContextResolving),
-                    AssemblyLoadContext = context == AssemblyLoadContext.Default ? context.Name : context.ToString(),
+                    AssemblyLoadContext =
+                        context == AssemblyLoadContext.Default ? context.Name : context.ToString(),
                 };
                 if (asm != null)
                 {
@@ -411,7 +431,9 @@ namespace BinderTracingTests
             private Assembly OnAppDomainAssemblyResolve(object sender, ResolveEventArgs args)
             {
                 if (handlerReturn == HandlerReturn.Exception)
-                    throw new BinderTestException("Exception in handler for AppDomain.AssemblyResolve");
+                    throw new BinderTestException(
+                        "Exception in handler for AppDomain.AssemblyResolve"
+                    );
 
                 var assemblyName = new AssemblyName(args.Name);
                 var customContext = new CustomALC(nameof(OnAppDomainAssemblyResolve));
@@ -436,7 +458,10 @@ namespace BinderTracingTests
                 if (handlerReturn == HandlerReturn.Null)
                     return null;
 
-                string name = handlerReturn == HandlerReturn.RequestedAssembly ? assemblyName.Name : $"{assemblyName.Name}Mismatch";
+                string name =
+                    handlerReturn == HandlerReturn.RequestedAssembly
+                        ? assemblyName.Name
+                        : $"{assemblyName.Name}Mismatch";
                 string assemblyPath = Helpers.GetAssemblyInSubdirectoryPath(name);
 
                 if (!File.Exists(assemblyPath))
@@ -447,7 +472,8 @@ namespace BinderTracingTests
                 {
                     AssemblyName = asm.GetName(),
                     AssemblyPath = assemblyPath,
-                    AssemblyLoadContext = context == AssemblyLoadContext.Default ? context.Name : context.ToString(),
+                    AssemblyLoadContext =
+                        context == AssemblyLoadContext.Default ? context.Name : context.ToString(),
                     RequestingAssembly = CoreLibName,
                     RequestingAssemblyLoadContext = DefaultALC,
                     Success = true,

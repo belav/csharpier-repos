@@ -13,7 +13,6 @@ namespace Microsoft.CodeAnalysis.Emit
         /// No instrumentation.
         /// </summary>
         None = 0,
-
         /// <summary>
         /// Instruments the binary to add test coverage.
         /// </summary>

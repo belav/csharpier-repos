@@ -35,10 +35,13 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var factoryProvider = CreatePageFactory();
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(() => factoryProvider.CreatePageFactory(descriptor));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => factoryProvider.CreatePageFactory(descriptor)
+            );
             Assert.Equal(
                 $"Page created by '{pageActivator.GetType()}' must be an instance of '{typeof(PageBase)}'.",
-                ex.Message);
+                ex.Message
+            );
         }
 
         [Fact]
@@ -49,10 +52,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             {
                 PageTypeInfo = typeof(TestPage).GetTypeInfo(),
             };
-            var pageContext = new PageContext
-            {
-                ActionDescriptor = descriptor
-            };
+            var pageContext = new PageContext { ActionDescriptor = descriptor };
             var viewContext = new ViewContext();
             var factoryProvider = CreatePageFactory();
 
@@ -90,7 +90,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
 
             var factoryProvider = CreatePageFactory(
                 urlHelperFactory: urlHelperFactory.Object,
-                htmlEncoder: htmlEncoder);
+                htmlEncoder: htmlEncoder
+            );
 
             // Act
             var factory = factoryProvider.CreatePageFactory(pageContext.ActionDescriptor);
@@ -115,10 +116,7 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             };
             descriptor.RelativePath = "/this/is/a/path.cshtml";
 
-            var pageContext = new PageContext
-            {
-                ActionDescriptor = descriptor
-            };
+            var pageContext = new PageContext { ActionDescriptor = descriptor };
 
             var viewContext = new ViewContext();
 
@@ -221,8 +219,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     PageTypeInfo = typeof(TestPage).GetTypeInfo()
                 },
-                ViewData = new ViewDataDictionary<TestPage>(modelMetadataProvider, new ModelStateDictionary())
-                {
+                ViewData = new ViewDataDictionary<TestPage>(
+                    modelMetadataProvider,
+                    new ModelStateDictionary()
+                ) {
                     { "test-key", "test-value" },
                 }
             };
@@ -260,16 +260,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     PageTypeInfo = typeof(PropertiesWithoutRazorInject).GetTypeInfo()
                 },
-                HttpContext = new DefaultHttpContext
-                {
-                    RequestServices = serviceProvider,
-                },
+                HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },
             };
 
-            var viewContext = new ViewContext()
-            {
-                HttpContext = pageContext.HttpContext,
-            };
+            var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext, };
 
             var factoryProvider = CreatePageFactory();
 
@@ -303,16 +297,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     PageTypeInfo = typeof(DisposablePage).GetTypeInfo()
                 },
-                HttpContext = new DefaultHttpContext
-                {
-                    RequestServices = serviceProvider,
-                },
+                HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },
             };
 
-            var viewContext = new ViewContext()
-            {
-                HttpContext = pageContext.HttpContext,
-            };
+            var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext, };
 
             var factoryProvider = CreatePageFactory();
 
@@ -341,16 +329,10 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 {
                     PageTypeInfo = typeof(DisposablePage).GetTypeInfo()
                 },
-                HttpContext = new DefaultHttpContext
-                {
-                    RequestServices = serviceProvider,
-                },
+                HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },
             };
 
-            var viewContext = new ViewContext()
-            {
-                HttpContext = pageContext.HttpContext,
-            };
+            var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext, };
 
             var factoryProvider = CreatePageFactory();
 
@@ -372,7 +354,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             IJsonHelper jsonHelper = null,
             DiagnosticListener diagnosticListener = null,
             HtmlEncoder htmlEncoder = null,
-            IModelExpressionProvider modelExpressionProvider = null)
+            IModelExpressionProvider modelExpressionProvider = null
+        )
         {
             return new DefaultPageFactoryProvider(
                 pageActivator ?? CreateActivator(),
@@ -381,7 +364,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
                 jsonHelper ?? Mock.Of<IJsonHelper>(),
                 diagnosticListener ?? new DiagnosticListener("Microsoft.AspNetCore.Mvc.RazorPages"),
                 htmlEncoder ?? HtmlEncoder.Default,
-                modelExpressionProvider ?? Mock.Of<IModelExpressionProvider>());
+                modelExpressionProvider ?? Mock.Of<IModelExpressionProvider>()
+            );
         }
 
         private static IPageActivatorProvider CreateActivator()
@@ -389,28 +373,37 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure
             var activator = new Mock<IPageActivatorProvider>();
             activator
                 .Setup(a => a.CreateActivator(It.IsAny<CompiledPageActionDescriptor>()))
-                .Returns((CompiledPageActionDescriptor descriptor) =>
-                {
-                    return (context, viewContext) => Activator.CreateInstance(descriptor.PageTypeInfo.AsType());
-                });
+                .Returns(
+                    (CompiledPageActionDescriptor descriptor) =>
+                    {
+                        return (context, viewContext) =>
+                            Activator.CreateInstance(descriptor.PageTypeInfo.AsType());
+                    }
+                );
             activator
                 .Setup(a => a.CreateReleaser(It.IsAny<CompiledPageActionDescriptor>()))
-                .Returns((CompiledPageActionDescriptor descriptor) =>
-                {
-                    return (context, viewContext, instance) => (instance as IDisposable)?.Dispose();
-                });
+                .Returns(
+                    (CompiledPageActionDescriptor descriptor) =>
+                    {
+                        return (context, viewContext, instance) =>
+                            (instance as IDisposable)?.Dispose();
+                    }
+                );
 
             activator
                 .Setup(a => a.CreateAsyncReleaser(It.IsAny<CompiledPageActionDescriptor>()))
-                .Returns((CompiledPageActionDescriptor descriptor) =>
-                {
-                    return (context, viewContext, instance) => instance switch
+                .Returns(
+                    (CompiledPageActionDescriptor descriptor) =>
                     {
-                        IAsyncDisposable asyncDisposable => asyncDisposable.DisposeAsync(),
-                        IDisposable disposable => SyncDispose(disposable),
-                        _ => default
-                    };
-                });
+                        return (context, viewContext, instance) =>
+                            instance switch
+                            {
+                                IAsyncDisposable asyncDisposable => asyncDisposable.DisposeAsync(),
+                                IDisposable disposable => SyncDispose(disposable),
+                                _ => default
+                            };
+                    }
+                );
 
             ValueTask SyncDispose(IDisposable disposable)
             {

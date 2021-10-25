@@ -7,9 +7,12 @@ using Autofac.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection.Specification
 {
-    public class AutofacDependencyInjectionSpecificationTests : DependencyInjectionSpecificationTests
+    public class AutofacDependencyInjectionSpecificationTests
+        : DependencyInjectionSpecificationTests
     {
-        protected override IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
+        protected override IServiceProvider CreateServiceProvider(
+            IServiceCollection serviceCollection
+        )
         {
             var builder = new ContainerBuilder();
             builder.Populate(serviceCollection);

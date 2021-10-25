@@ -26,7 +26,11 @@ namespace TestServer
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ResourceRequestLog resourceRequestLog)
+        public void Configure(
+            IApplicationBuilder app,
+            IWebHostEnvironment env,
+            ResourceRequestLog resourceRequestLog
+        )
         {
             var enUs = new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = enUs;
@@ -38,28 +42,40 @@ namespace TestServer
             }
 
             // Mount the server-side Blazor app on /subdir
-            app.Map("/subdir", app =>
-            {
-                app.Use((context, next) =>
+            app.Map(
+                "/subdir",
+                app =>
                 {
-                    if (context.Request.Path.Value.EndsWith("/images/blazor_logo_1000x.png", StringComparison.Ordinal))
-                    {
-                        resourceRequestLog.AddRequest(context.Request);
-                    }
+                    app.Use(
+                        (context, next) =>
+                        {
+                            if (
+                                context.Request.Path.Value.EndsWith(
+                                    "/images/blazor_logo_1000x.png",
+                                    StringComparison.Ordinal
+                                )
+                            )
+                            {
+                                resourceRequestLog.AddRequest(context.Request);
+                            }
 
-                    return next();
-                });
+                            return next();
+                        }
+                    );
 
-                app.UseStaticFiles();
+                    app.UseStaticFiles();
 
-                app.UseRouting();
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapBlazorHub();
-                    endpoints.MapControllerRoute("mvc", "{controller}/{action}");
-                    endpoints.MapFallbackToPage("/_ServerHost");
-                });
-            });
+                    app.UseRouting();
+                    app.UseEndpoints(
+                        endpoints =>
+                        {
+                            endpoints.MapBlazorHub();
+                            endpoints.MapControllerRoute("mvc", "{controller}/{action}");
+                            endpoints.MapFallbackToPage("/_ServerHost");
+                        }
+                    );
+                }
+            );
         }
     }
 }

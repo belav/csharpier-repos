@@ -23,12 +23,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             /// Indicates it is either completely unprocessed or partially processed by one or more older requests that was either completed or cancelled.
             /// </summary>
             ReadyToProcess,
-
             /// <summary>
             /// Currently being processed.
             /// </summary>
             InProcess,
-
             /// <summary>
             /// Fully processed.
             /// </summary>

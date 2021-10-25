@@ -20,11 +20,17 @@ namespace System.Net.Http
         private const string Gzip = "gzip";
         private const string Deflate = "deflate";
         private const string Brotli = "br";
-        private static readonly StringWithQualityHeaderValue s_gzipHeaderValue = new StringWithQualityHeaderValue(Gzip);
-        private static readonly StringWithQualityHeaderValue s_deflateHeaderValue = new StringWithQualityHeaderValue(Deflate);
-        private static readonly StringWithQualityHeaderValue s_brotliHeaderValue = new StringWithQualityHeaderValue(Brotli);
+        private static readonly StringWithQualityHeaderValue s_gzipHeaderValue =
+            new StringWithQualityHeaderValue(Gzip);
+        private static readonly StringWithQualityHeaderValue s_deflateHeaderValue =
+            new StringWithQualityHeaderValue(Deflate);
+        private static readonly StringWithQualityHeaderValue s_brotliHeaderValue =
+            new StringWithQualityHeaderValue(Brotli);
 
-        public DecompressionHandler(DecompressionMethods decompressionMethods, HttpMessageHandlerStage innerHandler)
+        public DecompressionHandler(
+            DecompressionMethods decompressionMethods,
+            HttpMessageHandlerStage innerHandler
+        )
         {
             Debug.Assert(decompressionMethods != DecompressionMethods.None);
             Debug.Assert(innerHandler != null);
@@ -37,11 +43,20 @@ namespace System.Net.Http
         internal bool DeflateEnabled => (_decompressionMethods & DecompressionMethods.Deflate) != 0;
         internal bool BrotliEnabled => (_decompressionMethods & DecompressionMethods.Brotli) != 0;
 
-        private static bool EncodingExists(HttpHeaderValueCollection<StringWithQualityHeaderValue> acceptEncodingHeader, string encoding)
+        private static bool EncodingExists(
+            HttpHeaderValueCollection<StringWithQualityHeaderValue> acceptEncodingHeader,
+            string encoding
+        )
         {
             foreach (StringWithQualityHeaderValue existingEncoding in acceptEncodingHeader)
             {
-                if (string.Equals(existingEncoding.Value, encoding, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        existingEncoding.Value,
+                        encoding,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
@@ -50,7 +65,11 @@ namespace System.Net.Http
             return false;
         }
 
-        internal override async ValueTask<HttpResponseMessage> SendAsync(HttpRequestMessage request, bool async, CancellationToken cancellationToken)
+        internal override async ValueTask<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            bool async,
+            CancellationToken cancellationToken
+        )
         {
             if (GZipEnabled && !EncodingExists(request.Headers.AcceptEncoding, Gzip))
             {
@@ -67,7 +86,9 @@ namespace System.Net.Http
                 request.Headers.AcceptEncoding.Add(s_brotliHeaderValue);
             }
 
-            HttpResponseMessage response = await _innerHandler.SendAsync(request, async, cancellationToken).ConfigureAwait(false);
+            HttpResponseMessage response = await _innerHandler
+                .SendAsync(request, async, cancellationToken)
+                .ConfigureAwait(false);
 
             Debug.Assert(response.Content != null);
             ICollection<string> contentEncodings = response.Content.Headers.ContentEncoding;
@@ -135,34 +156,58 @@ namespace System.Net.Http
 
             protected abstract Stream GetDecompressedStream(Stream originalStream);
 
-            protected override void SerializeToStream(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+            protected override void SerializeToStream(
+                Stream stream,
+                TransportContext? context,
+                CancellationToken cancellationToken
+            )
             {
                 using Stream decompressedStream = CreateContentReadStream(cancellationToken);
                 decompressedStream.CopyTo(stream);
             }
 
-            protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context) =>
-                SerializeToStreamAsync(stream, context, CancellationToken.None);
+            protected override Task SerializeToStreamAsync(
+                Stream stream,
+                TransportContext? context
+            ) => SerializeToStreamAsync(stream, context, CancellationToken.None);
 
-            protected override async Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+            protected override async Task SerializeToStreamAsync(
+                Stream stream,
+                TransportContext? context,
+                CancellationToken cancellationToken
+            )
             {
-                using (Stream decompressedStream = TryCreateContentReadStream() ?? await CreateContentReadStreamAsync(cancellationToken).ConfigureAwait(false))
+                using (
+                    Stream decompressedStream =
+                        TryCreateContentReadStream()
+                        ?? await CreateContentReadStreamAsync(cancellationToken)
+                            .ConfigureAwait(false)
+                )
                 {
-                    await decompressedStream.CopyToAsync(stream, cancellationToken).ConfigureAwait(false);
+                    await decompressedStream
+                        .CopyToAsync(stream, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
 
             protected override Stream CreateContentReadStream(CancellationToken cancellationToken)
             {
-                ValueTask<Stream> task = CreateContentReadStreamAsyncCore(async: false, cancellationToken);
+                ValueTask<Stream> task = CreateContentReadStreamAsyncCore(
+                    async: false,
+                    cancellationToken
+                );
                 Debug.Assert(task.IsCompleted);
                 return task.GetAwaiter().GetResult();
             }
 
-            protected override Task<Stream> CreateContentReadStreamAsync(CancellationToken cancellationToken) =>
-                CreateContentReadStreamAsyncCore(async: true, cancellationToken).AsTask();
+            protected override Task<Stream> CreateContentReadStreamAsync(
+                CancellationToken cancellationToken
+            ) => CreateContentReadStreamAsyncCore(async: true, cancellationToken).AsTask();
 
-            private async ValueTask<Stream> CreateContentReadStreamAsyncCore(bool async, CancellationToken cancellationToken)
+            private async ValueTask<Stream> CreateContentReadStreamAsyncCore(
+                bool async,
+                CancellationToken cancellationToken
+            )
             {
                 if (_contentConsumed)
                 {
@@ -174,7 +219,11 @@ namespace System.Net.Http
                 Stream originalStream;
                 if (async)
                 {
-                    originalStream = _originalContent.TryReadAsStream() ?? await _originalContent.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+                    originalStream =
+                        _originalContent.TryReadAsStream()
+                        ?? await _originalContent
+                            .ReadAsStreamAsync(cancellationToken)
+                            .ConfigureAwait(false);
                 }
                 else
                 {
@@ -209,9 +258,7 @@ namespace System.Net.Http
 
         private sealed class GZipDecompressedContent : DecompressedContent
         {
-            public GZipDecompressedContent(HttpContent originalContent)
-                : base(originalContent)
-            { }
+            public GZipDecompressedContent(HttpContent originalContent) : base(originalContent) { }
 
             protected override Stream GetDecompressedStream(Stream originalStream) =>
                 new GZipStream(originalStream, CompressionMode.Decompress);
@@ -219,8 +266,7 @@ namespace System.Net.Http
 
         private sealed class DeflateDecompressedContent : DecompressedContent
         {
-            public DeflateDecompressedContent(HttpContent originalContent)
-                : base(originalContent)
+            public DeflateDecompressedContent(HttpContent originalContent) : base(originalContent)
             { }
 
             protected override Stream GetDecompressedStream(Stream originalStream) =>
@@ -234,8 +280,7 @@ namespace System.Net.Http
 
         private sealed class BrotliDecompressedContent : DecompressedContent
         {
-            public BrotliDecompressedContent(HttpContent originalContent) :
-                base(originalContent)
+            public BrotliDecompressedContent(HttpContent originalContent) : base(originalContent)
             { }
 
             protected override Stream GetDecompressedStream(Stream originalStream) =>

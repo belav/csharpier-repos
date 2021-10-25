@@ -21,7 +21,7 @@ namespace Internal.Runtime
 #pragma warning disable 0169
     internal struct ReadyToRunHeader
     {
-        private uint Signature;      // ReadyToRunHeaderConstants.Signature
+        private uint Signature; // ReadyToRunHeaderConstants.Signature
         private ushort MajorVersion;
         private ushort MinorVersion;
 
@@ -30,7 +30,6 @@ namespace Internal.Runtime
         private ushort NumberOfSections;
         private byte EntrySize;
         private byte EntryType;
-
         // Array of sections follows.
     };
 #pragma warning restore 0169
@@ -67,7 +66,6 @@ namespace Internal.Runtime
         OwnerCompositeExecutable = 116, // Added in 4.1
         PgoInstrumentationData = 117, // Added in 5.2
         ManifestAssemblyMvids = 118, // Added in 5.3
-
         //
         // CoreRT ReadyToRun sections
         //
@@ -84,7 +82,6 @@ namespace Internal.Runtime
         ThreadStaticIndex = 210,
         LoopHijackFlag = 211,
         ImportAddressTables = 212,
-
         // Sections 300 - 399 are reserved for RhFindBlob backwards compatibility
         ReadonlyBlobRegionStart = 300,
         ReadonlyBlobRegionEnd = 399,

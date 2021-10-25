@@ -20,13 +20,14 @@ namespace MvcSample.Web.Components
     [ViewComponent(Name = "Tags")]
     public class TagCloudViewComponentTagHelper : ITagHelper
     {
-        private static readonly string[] Tags =
-            ("Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua" +
-             "Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure " +
-             "dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat" +
-             "non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
-                .Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                .ToArray();
+        private static readonly string[] Tags = (
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+            + "Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat Duis aute irure "
+            + "dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat cupidatat"
+            + "non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+        )
+            .Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+            .ToArray();
         private readonly HtmlEncoder _htmlEncoder;
 
         public TagCloudViewComponentTagHelper(HtmlEncoder htmlEncoder)
@@ -42,9 +43,7 @@ namespace MvcSample.Web.Components
 
         public int Order { get; } = 0;
 
-        public void Init(TagHelperContext context)
-        {
-        }
+        public void Init(TagHelperContext context) { }
 
         public async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
@@ -58,12 +57,15 @@ namespace MvcSample.Web.Components
                 FullName = "TagCloudViewComponentTagHelper",
             };
 
-            await result.ExecuteAsync(new ViewComponentContext(
-                viewComponentDescriptor,
-                new Dictionary<string, object>(),
-                _htmlEncoder,
-                ViewContext,
-                writer));
+            await result.ExecuteAsync(
+                new ViewComponentContext(
+                    viewComponentDescriptor,
+                    new Dictionary<string, object>(),
+                    _htmlEncoder,
+                    ViewContext,
+                    writer
+                )
+            );
 
             output.TagName = null;
             output.Content.AppendHtml(writer.ToString());

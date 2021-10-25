@@ -8,13 +8,14 @@ using System.Web.Http.Internal;
 
 namespace System.Web.Http.Routing
 {
-    [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "This class will never be serialized.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2237:MarkISerializableTypesWithSerializable",
+        Justification = "This class will never be serialized."
+    )]
     public class HttpRouteValueDictionary : Dictionary<string, object>
     {
-        public HttpRouteValueDictionary()
-            : base(StringComparer.OrdinalIgnoreCase)
-        {
-        }
+        public HttpRouteValueDictionary() : base(StringComparer.OrdinalIgnoreCase) { }
 
         public HttpRouteValueDictionary(IDictionary<string, object> dictionary)
             : base(StringComparer.OrdinalIgnoreCase)
@@ -28,8 +29,7 @@ namespace System.Web.Http.Routing
             }
         }
 
-        public HttpRouteValueDictionary(object values)
-            : base(StringComparer.OrdinalIgnoreCase)
+        public HttpRouteValueDictionary(object values) : base(StringComparer.OrdinalIgnoreCase)
         {
             IDictionary<string, object> valuesAsDictionary = values as IDictionary<string, object>;
             if (valuesAsDictionary != null)

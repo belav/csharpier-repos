@@ -44,7 +44,9 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
                 throw new ArgumentNullException(nameof(feature));
             }
 
-            foreach (var provider in FeatureProviders.OfType<IApplicationFeatureProvider<TFeature>>())
+            foreach (
+                var provider in FeatureProviders.OfType<IApplicationFeatureProvider<TFeature>>()
+            )
             {
                 provider.PopulateFeature(ApplicationParts, feature);
             }
@@ -80,22 +82,23 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts
 
             // Use ApplicationPartAttribute to get the closure of direct or transitive dependencies
             // that reference MVC.
-            var assembliesFromAttributes = entryAssembly.GetCustomAttributes<ApplicationPartAttribute>()
+            var assembliesFromAttributes = entryAssembly
+                .GetCustomAttributes<ApplicationPartAttribute>()
                 .Select(name => Assembly.Load(name.AssemblyName))
                 .OrderBy(assembly => assembly.FullName, StringComparer.Ordinal)
                 .SelectMany(GetAssemblyClosure);
 
             // The SDK will not include the entry assembly as an application part. We'll explicitly list it
             // and have it appear before all other assemblies \ ApplicationParts.
-            return GetAssemblyClosure(entryAssembly)
-                .Concat(assembliesFromAttributes);
+            return GetAssemblyClosure(entryAssembly).Concat(assembliesFromAttributes);
         }
 
         private static IEnumerable<Assembly> GetAssemblyClosure(Assembly assembly)
         {
             yield return assembly;
 
-            var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: false)
+            var relatedAssemblies = RelatedAssemblyAttribute
+                .GetRelatedAssemblies(assembly, throwOnError: false)
                 .OrderBy(assembly => assembly.FullName, StringComparer.Ordinal);
 
             foreach (var relatedAssembly in relatedAssemblies)

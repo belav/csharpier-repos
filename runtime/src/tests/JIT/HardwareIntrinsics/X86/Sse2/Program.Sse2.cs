@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Add.Double"] = AddDouble,
                 ["Add.Byte"] = AddByte,
                 ["Add.Int16"] = AddInt16,
@@ -60,12 +61,16 @@ namespace JIT.HardwareIntrinsics.X86
                 ["CompareGreaterThan.Int32"] = CompareGreaterThanInt32,
                 ["CompareGreaterThan.SByte"] = CompareGreaterThanSByte,
                 ["CompareScalarGreaterThan.Double"] = CompareScalarGreaterThanDouble,
-                ["CompareScalarOrderedGreaterThan.Boolean"] = CompareScalarOrderedGreaterThanBoolean,
-                ["CompareScalarUnorderedGreaterThan.Boolean"] = CompareScalarUnorderedGreaterThanBoolean,
+                ["CompareScalarOrderedGreaterThan.Boolean"] =
+                    CompareScalarOrderedGreaterThanBoolean,
+                ["CompareScalarUnorderedGreaterThan.Boolean"] =
+                    CompareScalarUnorderedGreaterThanBoolean,
                 ["CompareGreaterThanOrEqual.Double"] = CompareGreaterThanOrEqualDouble,
                 ["CompareScalarGreaterThanOrEqual.Double"] = CompareScalarGreaterThanOrEqualDouble,
-                ["CompareScalarOrderedGreaterThanOrEqual.Boolean"] = CompareScalarOrderedGreaterThanOrEqualBoolean,
-                ["CompareScalarUnorderedGreaterThanOrEqual.Boolean"] = CompareScalarUnorderedGreaterThanOrEqualBoolean,
+                ["CompareScalarOrderedGreaterThanOrEqual.Boolean"] =
+                    CompareScalarOrderedGreaterThanOrEqualBoolean,
+                ["CompareScalarUnorderedGreaterThanOrEqual.Boolean"] =
+                    CompareScalarUnorderedGreaterThanOrEqualBoolean,
                 ["CompareLessThan.Double"] = CompareLessThanDouble,
                 ["CompareLessThan.Int16"] = CompareLessThanInt16,
                 ["CompareLessThan.Int32"] = CompareLessThanInt32,
@@ -75,8 +80,10 @@ namespace JIT.HardwareIntrinsics.X86
                 ["CompareScalarUnorderedLessThan.Boolean"] = CompareScalarUnorderedLessThanBoolean,
                 ["CompareLessThanOrEqual.Double"] = CompareLessThanOrEqualDouble,
                 ["CompareScalarLessThanOrEqual.Double"] = CompareScalarLessThanOrEqualDouble,
-                ["CompareScalarOrderedLessThanOrEqual.Boolean"] = CompareScalarOrderedLessThanOrEqualBoolean,
-                ["CompareScalarUnorderedLessThanOrEqual.Boolean"] = CompareScalarUnorderedLessThanOrEqualBoolean,
+                ["CompareScalarOrderedLessThanOrEqual.Boolean"] =
+                    CompareScalarOrderedLessThanOrEqualBoolean,
+                ["CompareScalarUnorderedLessThanOrEqual.Boolean"] =
+                    CompareScalarUnorderedLessThanOrEqualBoolean,
                 ["CompareNotEqual.Double"] = CompareNotEqualDouble,
                 ["CompareScalarNotEqual.Double"] = CompareScalarNotEqualDouble,
                 ["CompareScalarOrderedNotEqual.Boolean"] = CompareScalarOrderedNotEqualBoolean,
@@ -84,7 +91,8 @@ namespace JIT.HardwareIntrinsics.X86
                 ["CompareNotGreaterThan.Double"] = CompareNotGreaterThanDouble,
                 ["CompareScalarNotGreaterThan.Double"] = CompareScalarNotGreaterThanDouble,
                 ["CompareNotGreaterThanOrEqual.Double"] = CompareNotGreaterThanOrEqualDouble,
-                ["CompareScalarNotGreaterThanOrEqual.Double"] = CompareScalarNotGreaterThanOrEqualDouble,
+                ["CompareScalarNotGreaterThanOrEqual.Double"] =
+                    CompareScalarNotGreaterThanOrEqualDouble,
                 ["CompareNotLessThan.Double"] = CompareNotLessThanDouble,
                 ["CompareScalarNotLessThan.Double"] = CompareScalarNotLessThanDouble,
                 ["CompareNotLessThanOrEqual.Double"] = CompareNotLessThanOrEqualDouble,
@@ -95,16 +103,25 @@ namespace JIT.HardwareIntrinsics.X86
                 ["CompareScalarUnordered.Double"] = CompareScalarUnorderedDouble,
                 ["ConvertToInt32.Vector128Double"] = ConvertToInt32Vector128Double,
                 ["ConvertToInt32.Vector128Int32"] = ConvertToInt32Vector128Int32,
-                ["ConvertToInt32WithTruncation.Vector128Double"] = ConvertToInt32WithTruncationVector128Double,
+                ["ConvertToInt32WithTruncation.Vector128Double"] =
+                    ConvertToInt32WithTruncationVector128Double,
                 ["ConvertToUInt32.Vector128UInt32"] = ConvertToUInt32Vector128UInt32,
-                ["ConvertToVector128Double.Vector128Single"] = ConvertToVector128DoubleVector128Single,
-                ["ConvertToVector128Double.Vector128Int32"] = ConvertToVector128DoubleVector128Int32,
-                ["ConvertToVector128Int32.Vector128Double"] = ConvertToVector128Int32Vector128Double,
-                ["ConvertToVector128Int32.Vector128Single"] = ConvertToVector128Int32Vector128Single,
-                ["ConvertToVector128Int32WithTruncation.Vector128Double"] = ConvertToVector128Int32WithTruncationVector128Double,
-                ["ConvertToVector128Int32WithTruncation.Vector128Single"] = ConvertToVector128Int32WithTruncationVector128Single,
-                ["ConvertToVector128Single.Vector128Double"] = ConvertToVector128SingleVector128Double,
-                ["ConvertToVector128Single.Vector128Int32"] = ConvertToVector128SingleVector128Int32,
+                ["ConvertToVector128Double.Vector128Single"] =
+                    ConvertToVector128DoubleVector128Single,
+                ["ConvertToVector128Double.Vector128Int32"] =
+                    ConvertToVector128DoubleVector128Int32,
+                ["ConvertToVector128Int32.Vector128Double"] =
+                    ConvertToVector128Int32Vector128Double,
+                ["ConvertToVector128Int32.Vector128Single"] =
+                    ConvertToVector128Int32Vector128Single,
+                ["ConvertToVector128Int32WithTruncation.Vector128Double"] =
+                    ConvertToVector128Int32WithTruncationVector128Double,
+                ["ConvertToVector128Int32WithTruncation.Vector128Single"] =
+                    ConvertToVector128Int32WithTruncationVector128Single,
+                ["ConvertToVector128Single.Vector128Double"] =
+                    ConvertToVector128SingleVector128Double,
+                ["ConvertToVector128Single.Vector128Int32"] =
+                    ConvertToVector128SingleVector128Int32,
                 ["ConvertScalarToVector128Double.Double"] = ConvertScalarToVector128DoubleDouble,
                 ["ConvertScalarToVector128Int32.Int32"] = ConvertScalarToVector128Int32Int32,
                 ["ConvertScalarToVector128UInt32.UInt32"] = ConvertScalarToVector128UInt32UInt32,

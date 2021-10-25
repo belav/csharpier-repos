@@ -10,10 +10,15 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
 {
     internal class RedisSubscriptionManager
     {
-        private readonly ConcurrentDictionary<string, HubConnectionStore> _subscriptions = new ConcurrentDictionary<string, HubConnectionStore>(StringComparer.Ordinal);
+        private readonly ConcurrentDictionary<string, HubConnectionStore> _subscriptions =
+            new ConcurrentDictionary<string, HubConnectionStore>(StringComparer.Ordinal);
         private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 
-        public async Task AddSubscriptionAsync(string id, HubConnectionContext connection, Func<string, HubConnectionStore, Task> subscribeMethod)
+        public async Task AddSubscriptionAsync(
+            string id,
+            HubConnectionContext connection,
+            Func<string, HubConnectionStore, Task> subscribeMethod
+        )
         {
             await _lock.WaitAsync();
 
@@ -35,7 +40,11 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal
             }
         }
 
-        public async Task RemoveSubscriptionAsync(string id, HubConnectionContext connection, Func<string, Task> unsubscribeMethod)
+        public async Task RemoveSubscriptionAsync(
+            string id,
+            HubConnectionContext connection,
+            Func<string, Task> unsubscribeMethod
+        )
         {
             await _lock.WaitAsync();
 

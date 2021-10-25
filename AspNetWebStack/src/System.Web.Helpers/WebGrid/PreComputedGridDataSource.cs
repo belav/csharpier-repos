@@ -22,7 +22,9 @@ namespace System.Web.Helpers
             Debug.Assert(values != null);
 
             _totalRows = totalRows;
-            _rows = values.Select((value, index) => new WebGridRow(grid, value: value, rowIndex: index)).ToList();
+            _rows = values
+                .Select((value, index) => new WebGridRow(grid, value: value, rowIndex: index))
+                .ToList();
         }
 
         public int TotalRowCount

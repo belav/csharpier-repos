@@ -15,11 +15,17 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
         {
             if (inetAddress.si_family == IPv4)
             {
-                return new IPEndPoint(new IPAddress(inetAddress.Ipv4.Address), (ushort)IPAddress.NetworkToHostOrder((short)inetAddress.Ipv4.sin_port));
+                return new IPEndPoint(
+                    new IPAddress(inetAddress.Ipv4.Address),
+                    (ushort)IPAddress.NetworkToHostOrder((short)inetAddress.Ipv4.sin_port)
+                );
             }
             else
             {
-                return new IPEndPoint(new IPAddress(inetAddress.Ipv6.Address), (ushort)IPAddress.NetworkToHostOrder((short)inetAddress.Ipv6._port));
+                return new IPEndPoint(
+                    new IPAddress(inetAddress.Ipv6.Address),
+                    (ushort)IPAddress.NetworkToHostOrder((short)inetAddress.Ipv6._port)
+                );
             }
         }
 
@@ -66,7 +72,11 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             return socketAddress;
         }
 
-        private static void SetPort(AddressFamily addressFamily, ref SOCKADDR_INET socketAddrInet, int originalPort)
+        private static void SetPort(
+            AddressFamily addressFamily,
+            ref SOCKADDR_INET socketAddrInet,
+            int originalPort
+        )
         {
             ushort convertedPort = (ushort)IPAddress.HostToNetworkOrder((short)originalPort);
             switch (addressFamily)

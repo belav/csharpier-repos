@@ -53,9 +53,9 @@ namespace Microsoft.AspNetCore.Mvc.Test.ApplicationModels
 
         private class CustomPageRouteTransformerConvention : PageRouteTransformerConvention
         {
-            public CustomPageRouteTransformerConvention(IOutboundParameterTransformer parameterTransformer) : base(parameterTransformer)
-            {
-            }
+            public CustomPageRouteTransformerConvention(
+                IOutboundParameterTransformer parameterTransformer
+            ) : base(parameterTransformer) { }
 
             protected override bool ShouldApply(PageRouteModel action)
             {

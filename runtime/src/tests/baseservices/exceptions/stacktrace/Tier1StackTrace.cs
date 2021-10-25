@@ -10,7 +10,8 @@ internal static class Program
 {
     private static int Main()
     {
-        const int Pass = 100, Fail = 1;
+        const int Pass = 100,
+            Fail = 1;
 
         string tier0StackTrace = Capture(true);
         PromoteToTier1(() => Capture(false));

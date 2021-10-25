@@ -19,7 +19,9 @@ namespace Microsoft.EntityFrameworkCore
         public async Task CanConnect_returns_true(bool async)
         {
             using var context = new SimpleContext();
-            Assert.True(async ? await context.Database.CanConnectAsync() : context.Database.CanConnect());
+            Assert.True(
+                async ? await context.Database.CanConnectAsync() : context.Database.CanConnect()
+            );
         }
 
         [ConditionalFact]
@@ -31,10 +33,10 @@ namespace Microsoft.EntityFrameworkCore
                 .AddSingleton(TestModelSource.GetFactory(OnModelCreating))
                 .BuildServiceProvider();
 
-            var options = new DbContextOptionsBuilder()
-                .UseInternalServiceProvider(serviceProvider)
-                .UseInMemoryDatabase(nameof(DatabaseInMemoryTest))
-                .Options;
+            var options =
+                new DbContextOptionsBuilder()
+                    .UseInternalServiceProvider(serviceProvider)
+                    .UseInMemoryDatabase(nameof(DatabaseInMemoryTest)).Options;
 
             var customer = new Customer { Id = 42, Name = "Theon" };
 
@@ -93,9 +95,7 @@ namespace Microsoft.EntityFrameworkCore
                 Name = (string)values[1];
             }
 
-            public Customer()
-            {
-            }
+            public Customer() { }
 
             public int Id { get; set; }
             public string Name { get; set; }
@@ -111,8 +111,7 @@ namespace Microsoft.EntityFrameworkCore
         {
             using (var db = new SimpleContext())
             {
-                db.Artists.Add(
-                    new SimpleContext.Artist { ArtistId = "JDId", Name = "John Doe" });
+                db.Artists.Add(new SimpleContext.Artist { ArtistId = "JDId", Name = "John Doe" });
                 await db.SaveChangesAsync();
             }
 
@@ -130,13 +129,13 @@ namespace Microsoft.EntityFrameworkCore
             // ReSharper disable once UnusedAutoPropertyAccessor.Local
             public DbSet<Artist> Artists { get; set; }
 
-            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-                => optionsBuilder
+            protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+                optionsBuilder
                     .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                     .UseInMemoryDatabase(nameof(SimpleContext));
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Artist>().HasKey(a => a.ArtistId);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Artist>().HasKey(a => a.ArtistId);
 
             public class Artist : ArtistBase<string>
             {

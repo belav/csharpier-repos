@@ -11,8 +11,7 @@ namespace Microsoft.AspNetCore.Testing
 
         public KestrelTestLoggerProvider(bool throwOnCriticalErrors = true)
             : this(new TestApplicationErrorLogger { ThrowOnCriticalErrors = throwOnCriticalErrors })
-        {
-        }
+        { }
 
         public KestrelTestLoggerProvider(ILogger testLogger)
         {
@@ -24,8 +23,6 @@ namespace Microsoft.AspNetCore.Testing
             return _testLogger;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

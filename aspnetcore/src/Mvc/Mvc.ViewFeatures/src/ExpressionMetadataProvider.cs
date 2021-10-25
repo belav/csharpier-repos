@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static ModelExplorer FromLambdaExpression<TModel, TResult>(
             Expression<Func<TModel, TResult>> expression,
             ViewDataDictionary<TModel> viewData,
-            IModelMetadataProvider metadataProvider)
+            IModelMetadataProvider metadataProvider
+        )
         {
             if (expression == null)
             {
@@ -50,10 +51,15 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 case ExpressionType.MemberAccess:
                     // Property/field access is always legal
                     var memberExpression = (MemberExpression)expression.Body;
-                    propertyName = memberExpression.Member is PropertyInfo ? memberExpression.Member.Name : null;
-                    if (string.Equals(propertyName, "Model", StringComparison.Ordinal) &&
-                        memberExpression.Type == typeof(TModel) &&
-                        memberExpression.Expression.NodeType == ExpressionType.Constant)
+                    propertyName =
+                        memberExpression.Member is PropertyInfo
+                            ? memberExpression.Member.Name
+                            : null;
+                    if (
+                        string.Equals(propertyName, "Model", StringComparison.Ordinal)
+                        && memberExpression.Type == typeof(TModel)
+                        && memberExpression.Expression.NodeType == ExpressionType.Constant
+                    )
                     {
                         // Special case the Model property in RazorPage<TModel>. (m => Model) should behave identically
                         // to (m => m). But do the more complicated thing for (m => m.Model) since that is a slightly
@@ -107,9 +113,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 //    m => m.Color (simple property access)
                 //    m => m.Color.Red (nested property access)
                 //    m => m.Widgets[0].Size (expression ending with property-access)
-                metadata = metadataProvider.GetMetadataForType(containerType).Properties[propertyName];
+                metadata = metadataProvider.GetMetadataForType(containerType).Properties[
+                    propertyName
+                ];
             }
-            
+
             if (metadata == null)
             {
                 // Ex:
@@ -144,7 +152,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
         public static ModelExplorer FromStringExpression(
             string expression,
             ViewDataDictionary viewData,
-            IModelMetadataProvider metadataProvider)
+            IModelMetadataProvider metadataProvider
+        )
         {
             if (viewData == null)
             {
@@ -164,9 +173,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
 
             if (viewDataInfo != null)
             {
-                if (viewDataInfo.Container == viewData &&
-                    viewDataInfo.Value == viewData.Model &&
-                    string.IsNullOrEmpty(expression))
+                if (
+                    viewDataInfo.Container == viewData
+                    && viewDataInfo.Value == viewData.Model
+                    && string.IsNullOrEmpty(expression)
+                )
                 {
                     // Nothing for empty expression in ViewData and ViewDataEvaluator just returned the model. Handle
                     // using FromModel() for its object special case.
@@ -178,34 +189,51 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
                 {
                     containerExplorer = metadataProvider.GetModelExplorerForType(
                         viewDataInfo.Container.GetType(),
-                        viewDataInfo.Container);
+                        viewDataInfo.Container
+                    );
                 }
 
                 if (viewDataInfo.PropertyInfo != null)
                 {
                     // We've identified a property access, which provides us with accurate metadata.
-                    var containerMetadata = metadataProvider.GetMetadataForType(viewDataInfo.Container.GetType());
-                    var propertyMetadata = containerMetadata.Properties[viewDataInfo.PropertyInfo.Name];
+                    var containerMetadata = metadataProvider.GetMetadataForType(
+                        viewDataInfo.Container.GetType()
+                    );
+                    var propertyMetadata = containerMetadata.Properties[
+                        viewDataInfo.PropertyInfo.Name
+                    ];
 
                     Func<object, object> modelAccessor = (ignore) => viewDataInfo.Value;
-                    return containerExplorer.GetExplorerForExpression(propertyMetadata, modelAccessor);
+                    return containerExplorer.GetExplorerForExpression(
+                        propertyMetadata,
+                        modelAccessor
+                    );
                 }
                 else if (viewDataInfo.Value != null)
                 {
                     // We have a value, even though we may not know where it came from.
-                    var valueMetadata = metadataProvider.GetMetadataForType(viewDataInfo.Value.GetType());
-                    return containerExplorer.GetExplorerForExpression(valueMetadata, viewDataInfo.Value);
+                    var valueMetadata = metadataProvider.GetMetadataForType(
+                        viewDataInfo.Value.GetType()
+                    );
+                    return containerExplorer.GetExplorerForExpression(
+                        valueMetadata,
+                        viewDataInfo.Value
+                    );
                 }
             }
 
             // Treat the expression as string if we don't find anything better.
             var stringMetadata = metadataProvider.GetMetadataForType(typeof(string));
-            return viewData.ModelExplorer.GetExplorerForExpression(stringMetadata, modelAccessor: null);
+            return viewData.ModelExplorer.GetExplorerForExpression(
+                stringMetadata,
+                modelAccessor: null
+            );
         }
 
         private static ModelExplorer FromModel(
             ViewDataDictionary viewData,
-            IModelMetadataProvider metadataProvider)
+            IModelMetadataProvider metadataProvider
+        )
         {
             if (viewData == null)
             {
@@ -215,7 +243,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures
             if (viewData.ModelMetadata.ModelType == typeof(object))
             {
                 // Use common simple type rather than object so e.g. Editor() at least generates a TextBox.
-                var model = viewData.Model == null ? null : Convert.ToString(viewData.Model, CultureInfo.CurrentCulture);
+                var model =
+                    viewData.Model == null
+                        ? null
+                        : Convert.ToString(viewData.Model, CultureInfo.CurrentCulture);
                 return metadataProvider.GetModelExplorerForType(typeof(string), model);
             }
             else

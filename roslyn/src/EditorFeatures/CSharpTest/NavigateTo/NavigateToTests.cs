@@ -29,17 +29,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
     {
         protected override string Language => "csharp";
 
-        protected override TestWorkspace CreateWorkspace(string content, ExportProvider exportProvider)
-            => TestWorkspace.CreateCSharp(content, exportProvider: exportProvider);
+        protected override TestWorkspace CreateWorkspace(
+            string content,
+            ExportProvider exportProvider
+        ) => TestWorkspace.CreateCSharp(content, exportProvider: exportProvider);
 
         [Theory]
         [CombinatorialData]
         public async Task NoItemsForEmptyFile(TestHost testHost)
         {
-            await TestAsync(testHost, "", async w =>
-            {
-                Assert.Empty(await _aggregator.GetItemsAsync("Hello"));
-            });
+            await TestAsync(
+                testHost,
+                "",
+                async w =>
+                {
+                    Assert.Empty(await _aggregator.GetItemsAsync("Hello"));
+                }
+            );
         }
 
         [Theory]
@@ -47,13 +53,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
         public async Task FindClass(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Goo")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "Goo", "[|Goo|]", PatternMatchKind.Exact, NavigateToItemKind.Class, Glyph.ClassInternal);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Goo",
+                        "[|Goo|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Class,
+                        Glyph.ClassInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -61,13 +79,25 @@ testHost, @"class Goo
         public async Task FindRecord(TestHost testHost)
         {
             await TestAsync(
-testHost, @"record Goo
+                testHost,
+                @"record Goo
 {
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Goo")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "Goo", "[|Goo|]", PatternMatchKind.Exact, NavigateToItemKind.Class, Glyph.ClassInternal);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Goo",
+                        "[|Goo|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Class,
+                        Glyph.ClassInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -75,17 +105,38 @@ testHost, @"record Goo
         public async Task FindVerbatimClass(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class @static
+                testHost,
+                @"class @static
 {
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("static")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "static", "[|static|]", PatternMatchKind.Exact, NavigateToItemKind.Class, Glyph.ClassInternal);
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("static")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "static",
+                        "[|static|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Class,
+                        Glyph.ClassInternal
+                    );
 
-                // Check searching for @static too
-                item = (await _aggregator.GetItemsAsync("@static")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "static", "[|static|]", PatternMatchKind.Exact, NavigateToItemKind.Class, Glyph.ClassInternal);
-            });
+                    // Check searching for @static too
+                    item = (await _aggregator.GetItemsAsync("@static")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "static",
+                        "[|static|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Class,
+                        Glyph.ClassInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -93,7 +144,8 @@ testHost, @"class @static
         public async Task FindNestedClass(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     class Bar
     {
@@ -101,11 +153,22 @@ testHost, @"class Goo
         {
         }
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("DogBed")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "DogBed", "[|DogBed|]", PatternMatchKind.Exact, NavigateToItemKind.Class, Glyph.ClassInternal);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("DogBed")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "DogBed",
+                        "[|DogBed|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Class,
+                        Glyph.ClassInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -113,7 +176,8 @@ testHost, @"class Goo
         public async Task FindMemberInANestedClass(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     class Bar 
     {
@@ -124,11 +188,21 @@ testHost, @"class Goo
             }
         }
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Method")).Single();
-                VerifyNavigateToResultItem(item, "Method", "[|Method|]()", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPublic, string.Format(FeaturesResources.in_0_project_1, "Goo.Bar.DogBed", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Method")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Method",
+                        "[|Method|]()",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPublic,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo.Bar.DogBed", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -136,15 +210,27 @@ testHost, @"class Goo
         public async Task FindGenericClassWithConstraints(TestHost testHost)
         {
             await TestAsync(
-testHost, @"using System.Collections;
+                testHost,
+                @"using System.Collections;
 
 class Goo<T> where T : IEnumerable
 {
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Goo")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "Goo", "[|Goo|]<T>", PatternMatchKind.Exact, NavigateToItemKind.Class, Glyph.ClassInternal);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Goo",
+                        "[|Goo|]<T>",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Class,
+                        Glyph.ClassInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -152,18 +238,29 @@ class Goo<T> where T : IEnumerable
         public async Task FindGenericMethodWithConstraints(TestHost testHost)
         {
             await TestAsync(
-testHost, @"using System;
+                testHost,
+                @"using System;
 
 class Goo<U>
 {
     public void Bar<T>(T item) where T : IComparable<T>
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Bar")).Single();
-                VerifyNavigateToResultItem(item, "Bar", "[|Bar|]<T>(T)", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPublic, string.Format(FeaturesResources.in_0_project_1, "Goo<U>", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Bar")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Bar",
+                        "[|Bar|]<T>(T)",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPublic,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo<U>", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -171,7 +268,8 @@ class Goo<U>
         public async Task FindPartialClass(TestHost testHost)
         {
             await TestAsync(
-testHost, @"public partial class Goo
+                testHost,
+                @"public partial class Goo
 {
     int a;
 }
@@ -179,15 +277,25 @@ testHost, @"public partial class Goo
 partial class Goo
 {
     int b;
-}", async w =>
-            {
-                var expecteditem1 = new NavigateToItem("Goo", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null);
-                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem1 };
+}",
+                async w =>
+                {
+                    var expecteditem1 = new NavigateToItem(
+                        "Goo",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    );
+                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem1 };
 
-                var items = await _aggregator.GetItemsAsync("Goo");
+                    var items = await _aggregator.GetItemsAsync("Goo");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -195,13 +303,16 @@ partial class Goo
         public async Task FindTypesInMetadata(TestHost testHost)
         {
             await TestAsync(
-testHost, @"using System;
+                testHost,
+                @"using System;
 
-Class Program { FileStyleUriParser f; }", async w =>
-            {
-                var items = await _aggregator.GetItemsAsync("FileStyleUriParser");
-                Assert.Equal(0, items.Count());
-            });
+Class Program { FileStyleUriParser f; }",
+                async w =>
+                {
+                    var items = await _aggregator.GetItemsAsync("FileStyleUriParser");
+                    Assert.Equal(0, items.Count());
+                }
+            );
         }
 
         [Theory]
@@ -209,16 +320,28 @@ Class Program { FileStyleUriParser f; }", async w =>
         public async Task FindClassInNamespace(TestHost testHost)
         {
             await TestAsync(
-testHost, @"namespace Bar
+                testHost,
+                @"namespace Bar
 {
     class Goo
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Goo")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "Goo", "[|Goo|]", PatternMatchKind.Exact, NavigateToItemKind.Class, Glyph.ClassInternal);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Goo",
+                        "[|Goo|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Class,
+                        Glyph.ClassInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -226,13 +349,25 @@ testHost, @"namespace Bar
         public async Task FindStruct(TestHost testHost)
         {
             await TestAsync(
-testHost, @"struct Bar
+                testHost,
+                @"struct Bar
 {
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("B")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "Bar", "[|B|]ar", PatternMatchKind.Prefix, NavigateToItemKind.Structure, Glyph.StructureInternal);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("B")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Bar",
+                        "[|B|]ar",
+                        PatternMatchKind.Prefix,
+                        NavigateToItemKind.Structure,
+                        Glyph.StructureInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -240,16 +375,28 @@ testHost, @"struct Bar
         public async Task FindEnum(TestHost testHost)
         {
             await TestAsync(
-testHost, @"enum Colors
+                testHost,
+                @"enum Colors
 {
     Red,
     Green,
     Blue
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Colors")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "Colors", "[|Colors|]", PatternMatchKind.Exact, NavigateToItemKind.Enum, Glyph.EnumInternal);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Colors")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Colors",
+                        "[|Colors|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Enum,
+                        Glyph.EnumInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -257,16 +404,26 @@ testHost, @"enum Colors
         public async Task FindEnumMember(TestHost testHost)
         {
             await TestAsync(
-testHost, @"enum Colors
+                testHost,
+                @"enum Colors
 {
     Red,
     Green,
     Blue
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("R")).Single();
-                VerifyNavigateToResultItem(item, "Red", "[|R|]ed", PatternMatchKind.Prefix, NavigateToItemKind.EnumItem, Glyph.EnumMemberPublic);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("R")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Red",
+                        "[|R|]ed",
+                        PatternMatchKind.Prefix,
+                        NavigateToItemKind.EnumItem,
+                        Glyph.EnumMemberPublic
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -274,14 +431,29 @@ testHost, @"enum Colors
         public async Task FindField1(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     int bar;
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("b")).Single();
-                VerifyNavigateToResultItem(item, "bar", "[|b|]ar", PatternMatchKind.Prefix, NavigateToItemKind.Field, Glyph.FieldPrivate, additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("b")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "bar",
+                        "[|b|]ar",
+                        PatternMatchKind.Prefix,
+                        NavigateToItemKind.Field,
+                        Glyph.FieldPrivate,
+                        additionalInfo: string.Format(
+                            FeaturesResources.in_0_project_1,
+                            "Goo",
+                            "Test"
+                        )
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -289,14 +461,29 @@ testHost, @"class Goo
         public async Task FindField2(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     int bar;
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("ba")).Single();
-                VerifyNavigateToResultItem(item, "bar", "[|ba|]r", PatternMatchKind.Prefix, NavigateToItemKind.Field, Glyph.FieldPrivate, additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("ba")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "bar",
+                        "[|ba|]r",
+                        PatternMatchKind.Prefix,
+                        NavigateToItemKind.Field,
+                        Glyph.FieldPrivate,
+                        additionalInfo: string.Format(
+                            FeaturesResources.in_0_project_1,
+                            "Goo",
+                            "Test"
+                        )
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -304,13 +491,16 @@ testHost, @"class Goo
         public async Task FindField3(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     int bar;
-}", async w =>
-            {
-                Assert.Empty(await _aggregator.GetItemsAsync("ar"));
-            });
+}",
+                async w =>
+                {
+                    Assert.Empty(await _aggregator.GetItemsAsync("ar"));
+                }
+            );
         }
 
         [Theory]
@@ -318,18 +508,45 @@ testHost, @"class Goo
         public async Task FindVerbatimField(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     int @string;
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("string")).Single();
-                VerifyNavigateToResultItem(item, "string", "[|string|]", PatternMatchKind.Exact, NavigateToItemKind.Field, Glyph.FieldPrivate, additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("string")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "string",
+                        "[|string|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Field,
+                        Glyph.FieldPrivate,
+                        additionalInfo: string.Format(
+                            FeaturesResources.in_0_project_1,
+                            "Goo",
+                            "Test"
+                        )
+                    );
 
-                // Check searching for@string too
-                item = (await _aggregator.GetItemsAsync("@string")).Single();
-                VerifyNavigateToResultItem(item, "string", "[|string|]", PatternMatchKind.Exact, NavigateToItemKind.Field, Glyph.FieldPrivate, additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+                    // Check searching for@string too
+                    item = (await _aggregator.GetItemsAsync("@string")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "string",
+                        "[|string|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Field,
+                        Glyph.FieldPrivate,
+                        additionalInfo: string.Format(
+                            FeaturesResources.in_0_project_1,
+                            "Goo",
+                            "Test"
+                        )
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -337,13 +554,16 @@ testHost, @"class Goo
         public async Task FindPtrField1(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     int* bar;
-}", async w =>
-            {
-                Assert.Empty(await _aggregator.GetItemsAsync("ar"));
-            });
+}",
+                async w =>
+                {
+                    Assert.Empty(await _aggregator.GetItemsAsync("ar"));
+                }
+            );
         }
 
         [Theory]
@@ -351,14 +571,24 @@ testHost, @"class Goo
         public async Task FindPtrField2(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     int* bar;
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("b")).Single();
-                VerifyNavigateToResultItem(item, "bar", "[|b|]ar", PatternMatchKind.Prefix, NavigateToItemKind.Field, Glyph.FieldPrivate);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("b")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "bar",
+                        "[|b|]ar",
+                        PatternMatchKind.Prefix,
+                        NavigateToItemKind.Field,
+                        Glyph.FieldPrivate
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -366,26 +596,53 @@ testHost, @"class Goo
         public async Task FindConstField(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     const int bar = 7;
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("ba")).Single();
-                VerifyNavigateToResultItem(item, "bar", "[|ba|]r", PatternMatchKind.Prefix, NavigateToItemKind.Constant, Glyph.ConstantPrivate);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("ba")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "bar",
+                        "[|ba|]r",
+                        PatternMatchKind.Prefix,
+                        NavigateToItemKind.Constant,
+                        Glyph.ConstantPrivate
+                    );
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task FindIndexer(TestHost testHost)
         {
-            var program = @"class Goo { int[] arr; public int this[int i] { get { return arr[i]; } set { arr[i] = value; } } }";
-            await TestAsync(testHost, program, async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("this")).Single();
-                VerifyNavigateToResultItem(item, "this", "[|this|][int]", PatternMatchKind.Exact, NavigateToItemKind.Property, Glyph.PropertyPublic, additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+            var program =
+                @"class Goo { int[] arr; public int this[int i] { get { return arr[i]; } set { arr[i] = value; } } }";
+            await TestAsync(
+                testHost,
+                program,
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("this")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "this",
+                        "[|this|][int]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Property,
+                        Glyph.PropertyPublic,
+                        additionalInfo: string.Format(
+                            FeaturesResources.in_0_project_1,
+                            "Goo",
+                            "Test"
+                        )
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -393,11 +650,27 @@ testHost, @"class Goo
         public async Task FindEvent(TestHost testHost)
         {
             var program = "class Goo { public event EventHandler ChangedEventHandler; }";
-            await TestAsync(testHost, program, async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("CEH")).Single();
-                VerifyNavigateToResultItem(item, "ChangedEventHandler", "[|C|]hanged[|E|]vent[|H|]andler", PatternMatchKind.CamelCaseExact, NavigateToItemKind.Event, Glyph.EventPublic, additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+            await TestAsync(
+                testHost,
+                program,
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("CEH")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "ChangedEventHandler",
+                        "[|C|]hanged[|E|]vent[|H|]andler",
+                        PatternMatchKind.CamelCaseExact,
+                        NavigateToItemKind.Event,
+                        Glyph.EventPublic,
+                        additionalInfo: string.Format(
+                            FeaturesResources.in_0_project_1,
+                            "Goo",
+                            "Test"
+                        )
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -405,14 +678,29 @@ testHost, @"class Goo
         public async Task FindAutoProperty(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     int Bar { get; set; }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("B")).Single();
-                VerifyNavigateToResultItem(item, "Bar", "[|B|]ar", PatternMatchKind.Prefix, NavigateToItemKind.Property, Glyph.PropertyPrivate, additionalInfo: string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("B")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Bar",
+                        "[|B|]ar",
+                        PatternMatchKind.Prefix,
+                        NavigateToItemKind.Property,
+                        Glyph.PropertyPrivate,
+                        additionalInfo: string.Format(
+                            FeaturesResources.in_0_project_1,
+                            "Goo",
+                            "Test"
+                        )
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -420,14 +708,25 @@ testHost, @"class Goo
         public async Task FindMethod(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     void DoSomething();
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("DS")).Single();
-                VerifyNavigateToResultItem(item, "DoSomething", "[|D|]o[|S|]omething()", PatternMatchKind.CamelCaseExact, NavigateToItemKind.Method, Glyph.MethodPrivate, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("DS")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "DoSomething",
+                        "[|D|]o[|S|]omething()",
+                        PatternMatchKind.CamelCaseExact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -435,18 +734,37 @@ testHost, @"class Goo
         public async Task FindVerbatimMethod(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     void @static();
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("static")).Single();
-                VerifyNavigateToResultItem(item, "static", "[|static|]()", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPrivate, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("static")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "static",
+                        "[|static|]()",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
 
-                // Verify if we search for @static too
-                item = (await _aggregator.GetItemsAsync("@static")).Single();
-                VerifyNavigateToResultItem(item, "static", "[|static|]()", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPrivate, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+                    // Verify if we search for @static too
+                    item = (await _aggregator.GetItemsAsync("@static")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "static",
+                        "[|static|]()",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -454,16 +772,27 @@ testHost, @"class Goo
         public async Task FindParameterizedMethod(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     void DoSomething(int a, string b)
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("DS")).Single();
-                VerifyNavigateToResultItem(item, "DoSomething", "[|D|]o[|S|]omething(int, string)", PatternMatchKind.CamelCaseExact, NavigateToItemKind.Method, Glyph.MethodPrivate, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("DS")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "DoSomething",
+                        "[|D|]o[|S|]omething(int, string)",
+                        PatternMatchKind.CamelCaseExact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -471,16 +800,29 @@ testHost, @"class Goo
         public async Task FindConstructor(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     public Goo()
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Goo")).Single(t => t.Kind == NavigateToItemKind.Method);
-                VerifyNavigateToResultItem(item, "Goo", "[|Goo|]()", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPublic, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
+                        t => t.Kind == NavigateToItemKind.Method
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Goo",
+                        "[|Goo|]()",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPublic,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -488,16 +830,29 @@ testHost, @"class Goo
         public async Task FindParameterizedConstructor(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     public Goo(int i)
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Goo")).Single(t => t.Kind == NavigateToItemKind.Method);
-                VerifyNavigateToResultItem(item, "Goo", "[|Goo|](int)", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPublic, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
+                        t => t.Kind == NavigateToItemKind.Method
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Goo",
+                        "[|Goo|](int)",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPublic,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -505,31 +860,56 @@ testHost, @"class Goo
         public async Task FindStaticConstructor(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     static Goo()
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Goo")).Single(t => t.Kind == NavigateToItemKind.Method && t.Name != ".ctor");
-                VerifyNavigateToResultItem(item, "Goo", "[|Goo|].static Goo()", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPrivate, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Goo")).Single(
+                        t => t.Kind == NavigateToItemKind.Method && t.Name != ".ctor"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Goo",
+                        "[|Goo|].static Goo()",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task FindPartialMethods(TestHost testHost)
         {
-            await TestAsync(testHost, "partial class Goo { partial void Bar(); } partial class Goo { partial void Bar() { Console.Write(\"hello\"); } }", async w =>
-            {
-                var expecteditem1 = new NavigateToItem("Bar", NavigateToItemKind.Method, "csharp", null, null, s_emptyExactPatternMatch, null);
-                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem1 };
+            await TestAsync(
+                testHost,
+                "partial class Goo { partial void Bar(); } partial class Goo { partial void Bar() { Console.Write(\"hello\"); } }",
+                async w =>
+                {
+                    var expecteditem1 = new NavigateToItem(
+                        "Bar",
+                        NavigateToItemKind.Method,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    );
+                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem1 };
 
-                var items = await _aggregator.GetItemsAsync("Bar");
+                    var items = await _aggregator.GetItemsAsync("Bar");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -537,14 +917,25 @@ testHost, @"class Goo
         public async Task FindPartialMethodDefinitionOnly(TestHost testHost)
         {
             await TestAsync(
-testHost, @"partial class Goo
+                testHost,
+                @"partial class Goo
 {
     partial void Bar();
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Bar")).Single();
-                VerifyNavigateToResultItem(item, "Bar", "[|Bar|]()", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPrivate, string.Format(FeaturesResources.in_0_1_2, "Goo", "test1.cs", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Bar")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Bar",
+                        "[|Bar|]()",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate,
+                        string.Format(FeaturesResources.in_0_1_2, "Goo", "test1.cs", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -552,46 +943,76 @@ testHost, @"partial class Goo
         public async Task FindPartialMethodImplementationOnly(TestHost testHost)
         {
             await TestAsync(
-testHost, @"partial class Goo
+                testHost,
+                @"partial class Goo
 {
     partial void Bar()
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("Bar")).Single();
-                VerifyNavigateToResultItem(item, "Bar", "[|Bar|]()", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPrivate, string.Format(FeaturesResources.in_0_1_2, "Goo", "test1.cs", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("Bar")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "Bar",
+                        "[|Bar|]()",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate,
+                        string.Format(FeaturesResources.in_0_1_2, "Goo", "test1.cs", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task FindOverriddenMembers(TestHost testHost)
         {
-            var program = "class Goo { public virtual string Name { get; set; } } class DogBed : Goo { public override string Name { get { return base.Name; } set {} } }";
-            await TestAsync(testHost, program, async w =>
-            {
-                var expecteditem1 = new NavigateToItem("Name", NavigateToItemKind.Property, "csharp", null, null, s_emptyExactPatternMatch, null);
-                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem1 };
+            var program =
+                "class Goo { public virtual string Name { get; set; } } class DogBed : Goo { public override string Name { get { return base.Name; } set {} } }";
+            await TestAsync(
+                testHost,
+                program,
+                async w =>
+                {
+                    var expecteditem1 = new NavigateToItem(
+                        "Name",
+                        NavigateToItemKind.Property,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    );
+                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem1 };
 
-                var items = await _aggregator.GetItemsAsync("Name");
+                    var items = await _aggregator.GetItemsAsync("Name");
 
-                VerifyNavigateToResultItems(expecteditems, items);
+                    VerifyNavigateToResultItems(expecteditems, items);
 
-                var item = items.ElementAt(1);
-                var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
-                var unused = itemDisplay.Glyph;
+                    var item = items.ElementAt(1);
+                    var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
+                    var unused = itemDisplay.Glyph;
 
-                Assert.Equal("Name", itemDisplay.Name);
-                Assert.Equal(string.Format(FeaturesResources.in_0_project_1, "DogBed", "Test"), itemDisplay.AdditionalInformation);
+                    Assert.Equal("Name", itemDisplay.Name);
+                    Assert.Equal(
+                        string.Format(FeaturesResources.in_0_project_1, "DogBed", "Test"),
+                        itemDisplay.AdditionalInformation
+                    );
 
-                item = items.ElementAt(0);
-                itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
-                unused = itemDisplay.Glyph;
+                    item = items.ElementAt(0);
+                    itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
+                    unused = itemDisplay.Glyph;
 
-                Assert.Equal("Name", itemDisplay.Name);
-                Assert.Equal(string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"), itemDisplay.AdditionalInformation);
-            });
+                    Assert.Equal("Name", itemDisplay.Name);
+                    Assert.Equal(
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"),
+                        itemDisplay.AdditionalInformation
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -599,13 +1020,23 @@ testHost, @"partial class Goo
         public async Task FindInterface(TestHost testHost)
         {
             await TestAsync(
-testHost, @"public interface IGoo
+                testHost,
+                @"public interface IGoo
 {
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("IG")).Single();
-                VerifyNavigateToResultItem(item, "IGoo", "[|IG|]oo", PatternMatchKind.Prefix, NavigateToItemKind.Interface, Glyph.InterfacePublic);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("IG")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "IGoo",
+                        "[|IG|]oo",
+                        PatternMatchKind.Prefix,
+                        NavigateToItemKind.Interface,
+                        Glyph.InterfacePublic
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -613,14 +1044,26 @@ testHost, @"public interface IGoo
         public async Task FindDelegateInNamespace(TestHost testHost)
         {
             await TestAsync(
-testHost, @"namespace Goo
+                testHost,
+                @"namespace Goo
 {
     delegate void DoStuff();
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("DoStuff")).Single(x => x.Kind != "Method");
-                VerifyNavigateToResultItem(item, "DoStuff", "[|DoStuff|]", PatternMatchKind.Exact, NavigateToItemKind.Delegate, Glyph.DelegateInternal);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("DoStuff")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    VerifyNavigateToResultItem(
+                        item,
+                        "DoStuff",
+                        "[|DoStuff|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Delegate,
+                        Glyph.DelegateInternal
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -628,16 +1071,27 @@ testHost, @"namespace Goo
         public async Task FindLambdaExpression(TestHost testHost)
         {
             await TestAsync(
-testHost, @"using System;
+                testHost,
+                @"using System;
 
 class Goo
 {
     Func<int, int> sqr = x => x * x;
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("sqr")).Single();
-                VerifyNavigateToResultItem(item, "sqr", "[|sqr|]", PatternMatchKind.Exact, NavigateToItemKind.Field, Glyph.FieldPrivate, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("sqr")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "sqr",
+                        "[|sqr|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Field,
+                        Glyph.FieldPrivate,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -645,14 +1099,25 @@ class Goo
         public async Task FindArray(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
     object[] itemArray;
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("itemArray")).Single();
-                VerifyNavigateToResultItem(item, "itemArray", "[|itemArray|]", PatternMatchKind.Exact, NavigateToItemKind.Field, Glyph.FieldPrivate, string.Format(FeaturesResources.in_0_project_1, "Goo", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("itemArray")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "itemArray",
+                        "[|itemArray|]",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Field,
+                        Glyph.FieldPrivate,
+                        string.Format(FeaturesResources.in_0_project_1, "Goo", "Test")
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -660,7 +1125,8 @@ testHost, @"class Goo
         public async Task FindClassAndMethodWithSameName(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class Goo
+                testHost,
+                @"class Goo
 {
 }
 
@@ -669,16 +1135,34 @@ class Test
     void Goo()
     {
     }
-}", async w =>
-            {
-                var expectedItems = new List<NavigateToItem>
+}",
+                async w =>
                 {
-                    new NavigateToItem("Goo", NavigateToItemKind.Class, "csharp", "Goo", null, s_emptyExactPatternMatch, null),
-                    new NavigateToItem("Goo", NavigateToItemKind.Method, "csharp", "Goo", null, s_emptyExactPatternMatch, null),
-                };
-                var items = await _aggregator.GetItemsAsync("Goo");
-                VerifyNavigateToResultItems(expectedItems, items);
-            });
+                    var expectedItems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "Goo",
+                            NavigateToItemKind.Class,
+                            "csharp",
+                            "Goo",
+                            null,
+                            s_emptyExactPatternMatch,
+                            null
+                        ),
+                        new NavigateToItem(
+                            "Goo",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            "Goo",
+                            null,
+                            s_emptyExactPatternMatch,
+                            null
+                        ),
+                    };
+                    var items = await _aggregator.GetItemsAsync("Goo");
+                    VerifyNavigateToResultItems(expectedItems, items);
+                }
+            );
         }
 
         [Theory]
@@ -686,7 +1170,8 @@ class Test
         public async Task FindMethodNestedInGenericTypes(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class A<T>
+                testHost,
+                @"class A<T>
 {
     class B
     {
@@ -697,11 +1182,25 @@ testHost, @"class A<T>
             }
         }
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("M")).Single();
-                VerifyNavigateToResultItem(item, "M", "[|M|]()", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPrivate, additionalInfo: string.Format(FeaturesResources.in_0_project_1, "A<T>.B.C<U>", "Test"));
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("M")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "M",
+                        "[|M|]()",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate,
+                        additionalInfo: string.Format(
+                            FeaturesResources.in_0_project_1,
+                            "A<T>.B.C<U>",
+                            "Test"
+                        )
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -709,7 +1208,8 @@ testHost, @"class A<T>
         public async Task OrderingOfConstructorsAndTypes(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class C1
+                testHost,
+                @"class C1
 {
     C1(int i)
     {
@@ -725,20 +1225,62 @@ class C2
     static C2()
     {
     }
-}", async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+}",
+                async w =>
                 {
-                    new NavigateToItem("C1", NavigateToItemKind.Class, "csharp", "C1", null, s_emptyPrefixPatternMatch, null),
-                    new NavigateToItem("C1", NavigateToItemKind.Method, "csharp", "C1", null, s_emptyPrefixPatternMatch, null),
-                    new NavigateToItem("C2", NavigateToItemKind.Class, "csharp", "C2", null, s_emptyPrefixPatternMatch, null),
-                    new NavigateToItem("C2", NavigateToItemKind.Method, "csharp", "C2", null, s_emptyPrefixPatternMatch, null), // this is the static ctor
-                    new NavigateToItem("C2", NavigateToItemKind.Method, "csharp", "C2", null, s_emptyPrefixPatternMatch, null),
-                };
-                var items = (await _aggregator.GetItemsAsync("C")).ToList();
-                items.Sort(CompareNavigateToItems);
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "C1",
+                            NavigateToItemKind.Class,
+                            "csharp",
+                            "C1",
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        ),
+                        new NavigateToItem(
+                            "C1",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            "C1",
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        ),
+                        new NavigateToItem(
+                            "C2",
+                            NavigateToItemKind.Class,
+                            "csharp",
+                            "C2",
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        ),
+                        new NavigateToItem(
+                            "C2",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            "C2",
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        ), // this is the static ctor
+                        new NavigateToItem(
+                            "C2",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            "C2",
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        ),
+                    };
+                    var items = (await _aggregator.GetItemsAsync("C")).ToList();
+                    items.Sort(CompareNavigateToItems);
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -746,16 +1288,26 @@ class C2
         public async Task NavigateToMethodWithNullableParameter(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class C
+                testHost,
+                @"class C
 {
     void M(object? o)
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("M")).Single();
-                VerifyNavigateToResultItem(item, "M", "[|M|](object?)", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPrivate);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("M")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "M",
+                        "[|M|](object?)",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPrivate
+                    );
+                }
+            );
         }
 
         [Theory]
@@ -764,155 +1316,305 @@ testHost, @"class C
         {
             // Verify that multiple calls to start/stop and dispose don't blow up
             await TestAsync(
-testHost, @"public class Goo
+                testHost,
+                @"public class Goo
 {
-}", async w =>
-            {
-                // Do one set of queries
-                Assert.Single((await _aggregator.GetItemsAsync("Goo")).Where(x => x.Kind != "Method"));
-                _provider.StopSearch();
+}",
+                async w =>
+                {
+                    // Do one set of queries
+                    Assert.Single(
+                        (await _aggregator.GetItemsAsync("Goo")).Where(x => x.Kind != "Method")
+                    );
+                    _provider.StopSearch();
 
-                // Do the same query again, make sure nothing was left over
-                Assert.Single((await _aggregator.GetItemsAsync("Goo")).Where(x => x.Kind != "Method"));
-                _provider.StopSearch();
+                    // Do the same query again, make sure nothing was left over
+                    Assert.Single(
+                        (await _aggregator.GetItemsAsync("Goo")).Where(x => x.Kind != "Method")
+                    );
+                    _provider.StopSearch();
 
-                // Dispose the provider
-                _provider.Dispose();
-            });
+                    // Dispose the provider
+                    _provider.Dispose();
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task DescriptionItems(TestHost testHost)
         {
-            await TestAsync(testHost, "public\r\nclass\r\nGoo\r\n{ }", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("G")).Single(x => x.Kind != "Method");
-                var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
-
-                var descriptionItems = itemDisplay.DescriptionItems;
-
-                void assertDescription(string label, string value)
+            await TestAsync(
+                testHost,
+                "public\r\nclass\r\nGoo\r\n{ }",
+                async w =>
                 {
-                    var descriptionItem = descriptionItems.Single(i => i.Category.Single().Text == label);
-                    Assert.Equal(value, descriptionItem.Details.Single().Text);
-                }
+                    var item = (await _aggregator.GetItemsAsync("G")).Single(
+                        x => x.Kind != "Method"
+                    );
+                    var itemDisplay = item.DisplayFactory.CreateItemDisplay(item);
 
-                assertDescription("File:", w.Documents.Single().Name);
-                assertDescription("Line:", "3"); // one based line number
-                assertDescription("Project:", "Test");
-            });
+                    var descriptionItems = itemDisplay.DescriptionItems;
+
+                    void assertDescription(string label, string value)
+                    {
+                        var descriptionItem = descriptionItems.Single(
+                            i => i.Category.Single().Text == label
+                        );
+                        Assert.Equal(value, descriptionItem.Details.Single().Text);
+                    }
+
+                    assertDescription("File:", w.Documents.Single().Name);
+                    assertDescription("Line:", "3"); // one based line number
+                    assertDescription("Project:", "Test");
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TermSplittingTest1(TestHost testHost)
         {
-            var source = "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditem1 = new NavigateToItem("get_keyword", NavigateToItemKind.Field, "csharp", null, null, s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive, null);
-                var expecteditem2 = new NavigateToItem("get_key_word", NavigateToItemKind.Field, "csharp", null, null, s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive, null);
-                var expecteditem3 = new NavigateToItem("GetKeyWord", NavigateToItemKind.Field, "csharp", null, null, s_emptyCamelCasePrefixPatternMatch, null);
-                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2, expecteditem3 };
+            var source =
+                "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
+                {
+                    var expecteditem1 = new NavigateToItem(
+                        "get_keyword",
+                        NavigateToItemKind.Field,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
+                        null
+                    );
+                    var expecteditem2 = new NavigateToItem(
+                        "get_key_word",
+                        NavigateToItemKind.Field,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
+                        null
+                    );
+                    var expecteditem3 = new NavigateToItem(
+                        "GetKeyWord",
+                        NavigateToItemKind.Field,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyCamelCasePrefixPatternMatch,
+                        null
+                    );
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        expecteditem1,
+                        expecteditem2,
+                        expecteditem3
+                    };
 
-                var items = await _aggregator.GetItemsAsync("GK");
+                    var items = await _aggregator.GetItemsAsync("GK");
 
-                Assert.Equal(expecteditems.Count(), items.Count());
+                    Assert.Equal(expecteditems.Count(), items.Count());
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TermSplittingTest2(TestHost testHost)
         {
-            var source = "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditem1 = new NavigateToItem("get_key_word", NavigateToItemKind.Field, "csharp", null, null, s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive, null);
-                var expecteditem2 = new NavigateToItem("GetKeyWord", NavigateToItemKind.Field, "csharp", null, null, s_emptyCamelCaseExactPatternMatch, null);
-                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
+            var source =
+                "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
+                {
+                    var expecteditem1 = new NavigateToItem(
+                        "get_key_word",
+                        NavigateToItemKind.Field,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyCamelCaseNonContiguousPrefixPatternMatch_NotCaseSensitive,
+                        null
+                    );
+                    var expecteditem2 = new NavigateToItem(
+                        "GetKeyWord",
+                        NavigateToItemKind.Field,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyCamelCaseExactPatternMatch,
+                        null
+                    );
+                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
 
-                var items = await _aggregator.GetItemsAsync("GKW");
+                    var items = await _aggregator.GetItemsAsync("GKW");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TermSplittingTest3(TestHost testHost)
         {
-            var source = "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditem1 = new NavigateToItem("get_key_word", NavigateToItemKind.Field, "csharp", null, null, s_emptyCamelCaseSubstringPatternMatch_NotCaseSensitive, null);
-                var expecteditem2 = new NavigateToItem("GetKeyWord", NavigateToItemKind.Field, "csharp", null, null, s_emptySubstringPatternMatch, null);
-                var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
+            var source =
+                "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
+                {
+                    var expecteditem1 = new NavigateToItem(
+                        "get_key_word",
+                        NavigateToItemKind.Field,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyCamelCaseSubstringPatternMatch_NotCaseSensitive,
+                        null
+                    );
+                    var expecteditem2 = new NavigateToItem(
+                        "GetKeyWord",
+                        NavigateToItemKind.Field,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptySubstringPatternMatch,
+                        null
+                    );
+                    var expecteditems = new List<NavigateToItem> { expecteditem1, expecteditem2 };
 
-                var items = await _aggregator.GetItemsAsync("K W");
+                    var items = await _aggregator.GetItemsAsync("K W");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TermSplittingTest4(TestHost testHost)
         {
-            var source = "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(testHost, source, async w =>
-            {
-                var items = await _aggregator.GetItemsAsync("WKG");
-                Assert.Empty(items);
-            });
+            var source =
+                "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
+                {
+                    var items = await _aggregator.GetItemsAsync("WKG");
+                    Assert.Empty(items);
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TermSplittingTest5(TestHost testHost)
         {
-            var source = "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(testHost, source, async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("G_K_W")).Single();
-                VerifyNavigateToResultItem(item, "get_key_word", "[|g|]et[|_k|]ey[|_w|]ord", PatternMatchKind.CamelCaseExact, NavigateToItemKind.Field, Glyph.FieldPrivate);
-            });
+            var source =
+                "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("G_K_W")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "get_key_word",
+                        "[|g|]et[|_k|]ey[|_w|]ord",
+                        PatternMatchKind.CamelCaseExact,
+                        NavigateToItemKind.Field,
+                        Glyph.FieldPrivate
+                    );
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TermSplittingTest6(TestHost testHost)
         {
-            var source = "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            var source =
+                "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                    new NavigateToItem("getkeyword", NavigateToItemKind.Field, "csharp", null, null, s_emptyFuzzyPatternMatch, null),
-                    new NavigateToItem("get_keyword", NavigateToItemKind.Field, "csharp", null, null, s_emptyFuzzyPatternMatch, null),
-                    new NavigateToItem("get_key_word", NavigateToItemKind.Field, "csharp", null, null,s_emptySubstringPatternMatch, null),
-                    new NavigateToItem("GetKeyWord", NavigateToItemKind.Field, "csharp", null, null, s_emptySubstringPatternMatch_NotCaseSensitive, null)
-                };
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "getkeyword",
+                            NavigateToItemKind.Field,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyFuzzyPatternMatch,
+                            null
+                        ),
+                        new NavigateToItem(
+                            "get_keyword",
+                            NavigateToItemKind.Field,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyFuzzyPatternMatch,
+                            null
+                        ),
+                        new NavigateToItem(
+                            "get_key_word",
+                            NavigateToItemKind.Field,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptySubstringPatternMatch,
+                            null
+                        ),
+                        new NavigateToItem(
+                            "GetKeyWord",
+                            NavigateToItemKind.Field,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptySubstringPatternMatch_NotCaseSensitive,
+                            null
+                        )
+                    };
 
-                var items = await _aggregator.GetItemsAsync("get word");
+                    var items = await _aggregator.GetItemsAsync("get word");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TermSplittingTest7(TestHost testHost)
         {
-            var source = "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
-            await TestAsync(testHost, source, async w =>
-            {
-                var items = await _aggregator.GetItemsAsync("GTW");
-                Assert.Empty(items);
-            });
+            var source =
+                "class SyllableBreaking {int GetKeyWord; int get_key_word; string get_keyword; int getkeyword; int wake;}";
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
+                {
+                    var items = await _aggregator.GetItemsAsync("GTW");
+                    Assert.Empty(items);
+                }
+            );
         }
 
         [Theory]
@@ -920,7 +1622,7 @@ testHost, @"public class Goo
         public async Task TestIndexer1(TestHost testHost)
         {
             var source =
-@"class C
+                @"class C
 {
     public int this[int y] { get { } }
 }
@@ -933,17 +1635,29 @@ class D
         var b = q[4];
     }
 }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                    new NavigateToItem("this", NavigateToItemKind.Property, "csharp", null, null, s_emptyExactPatternMatch, null),
-                };
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "this",
+                            NavigateToItemKind.Property,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyExactPatternMatch,
+                            null
+                        ),
+                    };
 
-                var items = await _aggregator.GetItemsAsync("this");
+                    var items = await _aggregator.GetItemsAsync("this");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -951,17 +1665,29 @@ class D
         public async Task DottedPattern1(TestHost testHost)
         {
             var source = "namespace Goo { namespace Bar { class Baz { void Quux() { } } } }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                    new NavigateToItem("Quux", NavigateToItemKind.Method, "csharp", null, null, s_emptyPrefixPatternMatch, null)
-                };
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "Quux",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        )
+                    };
 
-                var items = await _aggregator.GetItemsAsync("B.Q");
+                    var items = await _aggregator.GetItemsAsync("B.Q");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -969,16 +1695,18 @@ class D
         public async Task DottedPattern2(TestHost testHost)
         {
             var source = "namespace Goo { namespace Bar { class Baz { void Quux() { } } } }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                };
+                    var expecteditems = new List<NavigateToItem> {  };
 
-                var items = await _aggregator.GetItemsAsync("C.Q");
+                    var items = await _aggregator.GetItemsAsync("C.Q");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -986,17 +1714,29 @@ class D
         public async Task DottedPattern3(TestHost testHost)
         {
             var source = "namespace Goo { namespace Bar { class Baz { void Quux() { } } } }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                    new NavigateToItem("Quux", NavigateToItemKind.Method, "csharp", null, null, s_emptyPrefixPatternMatch, null)
-                };
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "Quux",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        )
+                    };
 
-                var items = await _aggregator.GetItemsAsync("B.B.Q");
+                    var items = await _aggregator.GetItemsAsync("B.B.Q");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -1004,17 +1744,29 @@ class D
         public async Task DottedPattern4(TestHost testHost)
         {
             var source = "namespace Goo { namespace Bar { class Baz { void Quux() { } } } }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                    new NavigateToItem("Quux", NavigateToItemKind.Method, "csharp", null, null, s_emptyExactPatternMatch, null)
-                };
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "Quux",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyExactPatternMatch,
+                            null
+                        )
+                    };
 
-                var items = await _aggregator.GetItemsAsync("Baz.Quux");
+                    var items = await _aggregator.GetItemsAsync("Baz.Quux");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -1022,17 +1774,29 @@ class D
         public async Task DottedPattern5(TestHost testHost)
         {
             var source = "namespace Goo { namespace Bar { class Baz { void Quux() { } } } }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                    new NavigateToItem("Quux", NavigateToItemKind.Method, "csharp", null, null, s_emptyExactPatternMatch, null)
-                };
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "Quux",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyExactPatternMatch,
+                            null
+                        )
+                    };
 
-                var items = await _aggregator.GetItemsAsync("G.B.B.Quux");
+                    var items = await _aggregator.GetItemsAsync("G.B.B.Quux");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -1040,16 +1804,18 @@ class D
         public async Task DottedPattern6(TestHost testHost)
         {
             var source = "namespace Goo { namespace Bar { class Baz { void Quux() { } } } }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                };
+                    var expecteditems = new List<NavigateToItem> {  };
 
-                var items = await _aggregator.GetItemsAsync("F.F.B.B.Quux");
+                    var items = await _aggregator.GetItemsAsync("F.F.B.B.Quux");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory]
@@ -1058,36 +1824,69 @@ class D
         public async Task DottedPattern7(TestHost testHost)
         {
             var source = "namespace Goo { namespace Bar { class Baz<X,Y,Z> { void Quux() { } } } }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                    new NavigateToItem("Quux", NavigateToItemKind.Method, "csharp", null, null, s_emptyPrefixPatternMatch, null)
-                };
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "Quux",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        )
+                    };
 
-                var items = await _aggregator.GetItemsAsync("Baz.Q");
+                    var items = await _aggregator.GetItemsAsync("Baz.Q");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Theory, WorkItem(46267, "https://github.com/dotnet/roslyn/issues/46267")]
         [CombinatorialData]
         public async Task DottedPatternMatchKind(TestHost testHost)
         {
-            var source = "namespace System { class Console { void Write(string s) { } void WriteLine(string s) { } } }";
-            await TestAsync(testHost, source, async w =>
-            {
-                var expecteditems = new List<NavigateToItem>
+            var source =
+                "namespace System { class Console { void Write(string s) { } void WriteLine(string s) { } } }";
+            await TestAsync(
+                testHost,
+                source,
+                async w =>
                 {
-                    new NavigateToItem("Write", NavigateToItemKind.Method, "csharp", null, null, s_emptyExactPatternMatch, null),
-                    new NavigateToItem("WriteLine", NavigateToItemKind.Method, "csharp", null, null, s_emptyPrefixPatternMatch, null)
-                };
+                    var expecteditems = new List<NavigateToItem>
+                    {
+                        new NavigateToItem(
+                            "Write",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyExactPatternMatch,
+                            null
+                        ),
+                        new NavigateToItem(
+                            "WriteLine",
+                            NavigateToItemKind.Method,
+                            "csharp",
+                            null,
+                            null,
+                            s_emptyPrefixPatternMatch,
+                            null
+                        )
+                    };
 
-                var items = await _aggregator.GetItemsAsync("Console.Write");
+                    var items = await _aggregator.GetItemsAsync("Console.Write");
 
-                VerifyNavigateToResultItems(expecteditems, items);
-            });
+                    VerifyNavigateToResultItems(expecteditems, items);
+                }
+            );
         }
 
         [Fact]
@@ -1095,7 +1894,8 @@ class D
         [WorkItem(8009, "https://github.com/dotnet/roslyn/issues/8009")]
         public async Task NavigateToGeneratedFiles()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath=""File1.cs"">
@@ -1118,17 +1918,39 @@ class D
         </Document>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
             var items = await _aggregator.GetItemsAsync("VisibleMethod");
             var expectedItems = new List<NavigateToItem>()
-                {
-                    new NavigateToItem("VisibleMethod", NavigateToItemKind.Method, "csharp", null, null, s_emptyExactPatternMatch, null),
-                    new NavigateToItem("VisibleMethod_Generated", NavigateToItemKind.Method, "csharp", null, null, s_emptyPrefixPatternMatch, null)
-                };
+            {
+                new NavigateToItem(
+                    "VisibleMethod",
+                    NavigateToItemKind.Method,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyExactPatternMatch,
+                    null
+                ),
+                new NavigateToItem(
+                    "VisibleMethod_Generated",
+                    NavigateToItemKind.Method,
+                    "csharp",
+                    null,
+                    null,
+                    s_emptyPrefixPatternMatch,
+                    null
+                )
+            };
 
             // The pattern matcher should match 'VisibleMethod' to both 'VisibleMethod' and 'VisibleMethod_Not', except that
             // the _Not method is declared in a generated file.
@@ -1141,16 +1963,26 @@ class D
         public async Task FindFuzzy1(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class C
+                testHost,
+                @"class C
 {
     public void ToError()
     {
     }
-}", async w =>
-            {
-                var item = (await _aggregator.GetItemsAsync("ToEror")).Single();
-                VerifyNavigateToResultItem(item, "ToError", "ToError()", PatternMatchKind.Fuzzy, NavigateToItemKind.Method, Glyph.MethodPublic);
-            });
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("ToEror")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "ToError",
+                        "ToError()",
+                        PatternMatchKind.Fuzzy,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPublic
+                    );
+                }
+            );
         }
 
         [WorkItem(18843, "https://github.com/dotnet/roslyn/issues/18843")]
@@ -1159,22 +1991,33 @@ testHost, @"class C
         public async Task Test__arglist(TestHost testHost)
         {
             await TestAsync(
-testHost, @"class C
+                testHost,
+                @"class C
 {
     public void ToError(__arglist)
     {
     }
-}", async w =>
-{
-    var item = (await _aggregator.GetItemsAsync("ToError")).Single();
-    VerifyNavigateToResultItem(item, "ToError", "[|ToError|](__arglist)", PatternMatchKind.Exact, NavigateToItemKind.Method, Glyph.MethodPublic);
-});
+}",
+                async w =>
+                {
+                    var item = (await _aggregator.GetItemsAsync("ToError")).Single();
+                    VerifyNavigateToResultItem(
+                        item,
+                        "ToError",
+                        "[|ToError|](__arglist)",
+                        PatternMatchKind.Exact,
+                        NavigateToItemKind.Method,
+                        Glyph.MethodPublic
+                    );
+                }
+            );
         }
 
         [Fact]
         public async Task DoNotIncludeTrivialPartialContainer()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath=""File1.cs"">
@@ -1191,23 +2034,39 @@ testHost, @"class C
         </Document>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
             VerifyNavigateToResultItems(
                 new()
                 {
-                    new NavigateToItem("Outer", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
+                    new NavigateToItem(
+                        "Outer",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
                 },
-                await _aggregator.GetItemsAsync("Outer"));
+                await _aggregator.GetItemsAsync("Outer")
+            );
         }
 
         [Fact]
         public async Task DoNotIncludeTrivialPartialContainerWithMultipleNestedTypes()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath=""File1.cs"">
@@ -1225,23 +2084,39 @@ testHost, @"class C
         </Document>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
             VerifyNavigateToResultItems(
                 new()
                 {
-                    new NavigateToItem("Outer", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
+                    new NavigateToItem(
+                        "Outer",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
                 },
-                await _aggregator.GetItemsAsync("Outer"));
+                await _aggregator.GetItemsAsync("Outer")
+            );
         }
 
         [Fact]
         public async Task DoNotIncludeWhenAllAreTrivialPartialContainer()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath=""File1.cs"">
@@ -1258,20 +2133,25 @@ testHost, @"class C
         </Document>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
-            VerifyNavigateToResultItems(
-                new() { },
-                await _aggregator.GetItemsAsync("Outer"));
+            VerifyNavigateToResultItems(new() {  }, await _aggregator.GetItemsAsync("Outer"));
         }
 
         [Fact]
         public async Task DoIncludeNonTrivialPartialContainer()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath=""File1.cs"">
@@ -1288,24 +2168,48 @@ testHost, @"class C
         </Document>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
             VerifyNavigateToResultItems(
                 new()
                 {
-                    new NavigateToItem("Outer", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
-                    new NavigateToItem("Outer", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
+                    new NavigateToItem(
+                        "Outer",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
+                    new NavigateToItem(
+                        "Outer",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
                 },
-                await _aggregator.GetItemsAsync("Outer"));
+                await _aggregator.GetItemsAsync("Outer")
+            );
         }
 
         [Fact]
         public async Task DoIncludeNonTrivialPartialContainerWithNestedType()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath=""File1.cs"">
@@ -1323,24 +2227,48 @@ testHost, @"class C
         </Document>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
             VerifyNavigateToResultItems(
                 new()
                 {
-                    new NavigateToItem("Outer", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
-                    new NavigateToItem("Outer", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
+                    new NavigateToItem(
+                        "Outer",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
+                    new NavigateToItem(
+                        "Outer",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
                 },
-                await _aggregator.GetItemsAsync("Outer"));
+                await _aggregator.GetItemsAsync("Outer")
+            );
         }
 
         [Fact]
         public async Task DoIncludePartialWithNoContents()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath=""File1.cs"">
@@ -1350,23 +2278,39 @@ testHost, @"class C
         </Document>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
             VerifyNavigateToResultItems(
                 new()
                 {
-                    new NavigateToItem("Outer", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
+                    new NavigateToItem(
+                        "Outer",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
                 },
-                await _aggregator.GetItemsAsync("Outer"));
+                await _aggregator.GetItemsAsync("Outer")
+            );
         }
 
         [Fact]
         public async Task DoIncludeNonPartialOnlyContainingNestedTypes()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <Document FilePath=""File1.cs"">
@@ -1377,23 +2321,39 @@ testHost, @"class C
         </Document>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
             VerifyNavigateToResultItems(
                 new()
                 {
-                    new NavigateToItem("Outer", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
+                    new NavigateToItem(
+                        "Outer",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
                 },
-                await _aggregator.GetItemsAsync("Outer"));
+                await _aggregator.GetItemsAsync("Outer")
+            );
         }
 
         [Fact]
         public async Task DoIncludeSymbolsFromSourceGeneratedFiles()
         {
-            using var workspace = TestWorkspace.Create(@"
+            using var workspace = TestWorkspace.Create(
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <DocumentFromSourceGenerator>
@@ -1403,17 +2363,32 @@ testHost, @"class C
         </DocumentFromSourceGenerator>
     </Project>
 </Workspace>
-", composition: EditorTestCompositions.EditorFeatures);
+",
+                composition: EditorTestCompositions.EditorFeatures
+            );
 
-            _provider = new NavigateToItemProvider(workspace, AsynchronousOperationListenerProvider.NullListener, workspace.GetService<IThreadingContext>());
+            _provider = new NavigateToItemProvider(
+                workspace,
+                AsynchronousOperationListenerProvider.NullListener,
+                workspace.GetService<IThreadingContext>()
+            );
             _aggregator = new NavigateToTestAggregator(_provider);
 
             VerifyNavigateToResultItems(
                 new()
                 {
-                    new NavigateToItem("C", NavigateToItemKind.Class, "csharp", null, null, s_emptyExactPatternMatch, null),
+                    new NavigateToItem(
+                        "C",
+                        NavigateToItemKind.Class,
+                        "csharp",
+                        null,
+                        null,
+                        s_emptyExactPatternMatch,
+                        null
+                    ),
                 },
-                await _aggregator.GetItemsAsync("C"));
+                await _aggregator.GetItemsAsync("C")
+            );
         }
     }
 }

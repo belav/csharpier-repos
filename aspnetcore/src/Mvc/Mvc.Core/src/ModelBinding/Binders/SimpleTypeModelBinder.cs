@@ -50,7 +50,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
 
             _logger.AttemptingToBindModel(bindingContext);
 
-            var valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            var valueProviderResult = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName
+            );
             if (valueProviderResult == ValueProviderResult.None)
             {
                 _logger.FoundNoValueInRequest(bindingContext);
@@ -70,7 +72,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 if (bindingContext.ModelType == typeof(string))
                 {
                     // Already have a string. No further conversion required but handle ConvertEmptyStringToNull.
-                    if (bindingContext.ModelMetadata.ConvertEmptyStringToNull && string.IsNullOrWhiteSpace(value))
+                    if (
+                        bindingContext.ModelMetadata.ConvertEmptyStringToNull
+                        && string.IsNullOrWhiteSpace(value)
+                    )
                     {
                         model = null;
                     }
@@ -89,7 +94,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                     model = _typeConverter.ConvertFrom(
                         context: null,
                         culture: valueProviderResult.Culture,
-                        value: value);
+                        value: value
+                    );
                 }
 
                 CheckModel(bindingContext, valueProviderResult, model);
@@ -104,13 +110,15 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 {
                     // TypeConverter throws System.Exception wrapping the FormatException,
                     // so we capture the inner exception.
-                    exception = ExceptionDispatchInfo.Capture(exception.InnerException).SourceException;
+                    exception =
+                        ExceptionDispatchInfo.Capture(exception.InnerException).SourceException;
                 }
 
                 bindingContext.ModelState.TryAddModelError(
                     bindingContext.ModelName,
                     exception,
-                    bindingContext.ModelMetadata);
+                    bindingContext.ModelMetadata
+                );
 
                 // Were able to find a converter for the type but conversion failed.
                 return Task.CompletedTask;
@@ -121,7 +129,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
         protected virtual void CheckModel(
             ModelBindingContext bindingContext,
             ValueProviderResult valueProviderResult,
-            object? model)
+            object? model
+        )
         {
             // When converting newModel a null value may indicate a failed conversion for an otherwise required
             // model (can't set a ValueType to null). This detects if a null model value is acceptable given the
@@ -131,7 +140,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders
                 bindingContext.ModelState.TryAddModelError(
                     bindingContext.ModelName,
                     bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                        valueProviderResult.ToString()));
+                        valueProviderResult.ToString()
+                    )
+                );
             }
             else
             {

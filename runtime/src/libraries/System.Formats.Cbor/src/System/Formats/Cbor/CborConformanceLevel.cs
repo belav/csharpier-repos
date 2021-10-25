@@ -16,7 +16,6 @@ namespace System.Formats.Cbor
         ///   Ensures that the CBOR data is well-formed, as specified in RFC7049.
         /// </summary>
         Lax,
-
         /// <summary>
         ///   Ensures that the CBOR data adheres to strict mode, as specified in RFC7049 section 3.10.
         ///   Extends lax conformance with the following requirements:
@@ -27,7 +26,6 @@ namespace System.Formats.Cbor
         ///   </list>
         /// </summary>
         Strict,
-
         /// <summary>
         ///   Ensures that the CBOR data is canonical, as specified in RFC7049 section 3.9.
         ///   Extends strict conformance with the following requirements:
@@ -38,7 +36,6 @@ namespace System.Formats.Cbor
         ///   </list>
         /// </summary>
         Canonical,
-
         /// <summary>
         ///   Ensures that the CBOR data is canonical, as specified by the CTAP v2.0 standard, section 6.
         ///   Extends strict conformance with the following requirements:
@@ -55,19 +52,29 @@ namespace System.Formats.Cbor
 
     internal static class CborConformanceModeHelpers
     {
-        private static readonly UTF8Encoding s_utf8EncodingLax    = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: false);
-        private static readonly UTF8Encoding s_utf8EncodingStrict = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static readonly UTF8Encoding s_utf8EncodingLax = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: false
+        );
+        private static readonly UTF8Encoding s_utf8EncodingStrict = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
 
         public static void Validate(CborConformanceMode conformanceMode)
         {
-            if (conformanceMode < CborConformanceMode.Lax ||
-                conformanceMode > CborConformanceMode.Ctap2Canonical)
+            if (
+                conformanceMode < CborConformanceMode.Lax
+                || conformanceMode > CborConformanceMode.Ctap2Canonical
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(conformanceMode));
             }
         }
 
-        public static bool RequiresCanonicalIntegerRepresentation(CborConformanceMode conformanceMode)
+        public static bool RequiresCanonicalIntegerRepresentation(
+            CborConformanceMode conformanceMode
+        )
         {
             switch (conformanceMode)
             {
@@ -81,7 +88,8 @@ namespace System.Formats.Cbor
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(conformanceMode));
-            };
+            }
+            ;
         }
 
         public static bool RequiresPreservingFloatPrecision(CborConformanceMode conformanceMode)
@@ -98,7 +106,8 @@ namespace System.Formats.Cbor
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(conformanceMode));
-            };
+            }
+            ;
         }
 
         public static bool RequiresUtf8Validation(CborConformanceMode conformanceMode)
@@ -115,12 +124,15 @@ namespace System.Formats.Cbor
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(conformanceMode));
-            };
+            }
+            ;
         }
 
         public static Encoding GetUtf8Encoding(CborConformanceMode conformanceMode)
         {
-            return conformanceMode == CborConformanceMode.Lax ? s_utf8EncodingLax : s_utf8EncodingStrict;
+            return conformanceMode == CborConformanceMode.Lax
+              ? s_utf8EncodingLax
+              : s_utf8EncodingStrict;
         }
 
         public static bool RequiresDefiniteLengthItems(CborConformanceMode conformanceMode)
@@ -137,7 +149,8 @@ namespace System.Formats.Cbor
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(conformanceMode));
-            };
+            }
+            ;
         }
 
         public static bool AllowsTags(CborConformanceMode conformanceMode)
@@ -154,7 +167,8 @@ namespace System.Formats.Cbor
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(conformanceMode));
-            };
+            }
+            ;
         }
 
         public static bool RequiresUniqueKeys(CborConformanceMode conformanceMode)
@@ -171,7 +185,8 @@ namespace System.Formats.Cbor
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(conformanceMode));
-            };
+            }
+            ;
         }
 
         public static bool RequiresSortedKeys(CborConformanceMode conformanceMode)
@@ -188,7 +203,8 @@ namespace System.Formats.Cbor
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(conformanceMode));
-            };
+            }
+            ;
         }
 
         public static bool RequireCanonicalSimpleValueEncodings(CborConformanceMode conformanceMode)
@@ -232,7 +248,11 @@ namespace System.Formats.Cbor
             return left.SequenceEqual(right);
         }
 
-        public static int CompareKeyEncodings(ReadOnlySpan<byte> left, ReadOnlySpan<byte> right, CborConformanceMode mode)
+        public static int CompareKeyEncodings(
+            ReadOnlySpan<byte> left,
+            ReadOnlySpan<byte> right,
+            CborConformanceMode mode
+        )
         {
             Debug.Assert(!left.IsEmpty && !right.IsEmpty);
 

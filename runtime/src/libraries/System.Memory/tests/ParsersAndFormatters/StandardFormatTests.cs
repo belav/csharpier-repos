@@ -13,7 +13,9 @@ namespace System.Buffers.Text.Tests
         public static void StandardFormatCtorNegative()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new StandardFormat((char)256));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StandardFormat('D', StandardFormat.MaxPrecision + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StandardFormat('D', StandardFormat.MaxPrecision + 1)
+            );
         }
 
         [Theory]
@@ -23,7 +25,11 @@ namespace System.Buffers.Text.Tests
         [InlineData("x99", 'x', StandardFormat.MaxPrecision)]
         [InlineData(null, default(char), default(byte))]
         [InlineData("", default(char), default(byte))]
-        public static void StandardFormatParseString(string formatString, char expectedSymbol, byte expectedPrecision)
+        public static void StandardFormatParseString(
+            string formatString,
+            char expectedSymbol,
+            byte expectedPrecision
+        )
         {
             StandardFormat format = StandardFormat.Parse(formatString);
             Assert.Equal(expectedSymbol, format.Symbol);
@@ -36,7 +42,11 @@ namespace System.Buffers.Text.Tests
         [InlineData("d", 'd', StandardFormat.NoPrecision)]
         [InlineData("x99", 'x', StandardFormat.MaxPrecision)]
         [InlineData("", default(char), default(byte))]
-        public static void StandardFormatParseSpan(string formatString, char expectedSymbol, byte expectedPrecision)
+        public static void StandardFormatParseSpan(
+            string formatString,
+            char expectedSymbol,
+            byte expectedPrecision
+        )
         {
             ReadOnlySpan<char> span = formatString.AsSpan();
             StandardFormat format = StandardFormat.Parse(span);
@@ -63,7 +73,12 @@ namespace System.Buffers.Text.Tests
         [InlineData("G$", default(char), default(byte), false)]
         [InlineData("Ga", default(char), default(byte), false)]
         [InlineData("G100", default(char), default(byte), false)]
-        public static void StandardFormatTryParse(string formatString, char expectedSymbol, byte expectedPrecision, bool expectedResult)
+        public static void StandardFormatTryParse(
+            string formatString,
+            char expectedSymbol,
+            byte expectedPrecision,
+            bool expectedResult
+        )
         {
             bool result = StandardFormat.TryParse(formatString, out StandardFormat format);
             Assert.Equal(expectedSymbol, format.Symbol);
@@ -83,7 +98,11 @@ namespace System.Buffers.Text.Tests
 
         [Theory]
         [MemberData(nameof(EqualityTestData))]
-        public static void StandardFormatEquality(StandardFormat f1, StandardFormat f2, bool expectedToBeEqual)
+        public static void StandardFormatEquality(
+            StandardFormat f1,
+            StandardFormat f2,
+            bool expectedToBeEqual
+        )
         {
             {
                 bool actual = f1.Equals(f2);
@@ -93,17 +112,24 @@ namespace System.Buffers.Text.Tests
 
         [Theory]
         [MemberData(nameof(EqualityTestData))]
-        public static void StandardFormatBoxedEquality(StandardFormat f1, StandardFormat f2, bool expectedToBeEqual)
+        public static void StandardFormatBoxedEquality(
+            StandardFormat f1,
+            StandardFormat f2,
+            bool expectedToBeEqual
+        )
         {
             object boxedf2 = f2;
             bool actual = f1.Equals(boxedf2);
             Assert.Equal(expectedToBeEqual, actual);
-
         }
 
         [Theory]
         [MemberData(nameof(EqualityTestData))]
-        public static void StandardFormatOpEquality(StandardFormat f1, StandardFormat f2, bool expectedToBeEqual)
+        public static void StandardFormatOpEquality(
+            StandardFormat f1,
+            StandardFormat f2,
+            bool expectedToBeEqual
+        )
         {
             {
                 bool actual = f1 == f2;
@@ -113,7 +139,11 @@ namespace System.Buffers.Text.Tests
 
         [Theory]
         [MemberData(nameof(EqualityTestData))]
-        public static void StandardFormatOpInequality(StandardFormat f1, StandardFormat f2, bool expectedToBeEqual)
+        public static void StandardFormatOpInequality(
+            StandardFormat f1,
+            StandardFormat f2,
+            bool expectedToBeEqual
+        )
         {
             {
                 bool actual = f1 != f2;
@@ -123,7 +153,11 @@ namespace System.Buffers.Text.Tests
 
         [Theory]
         [MemberData(nameof(EqualityTestData))]
-        public static void StandardFormatGetHashCode(StandardFormat f1, StandardFormat f2, bool expectedToBeEqual)
+        public static void StandardFormatGetHashCode(
+            StandardFormat f1,
+            StandardFormat f2,
+            bool expectedToBeEqual
+        )
         {
             if (expectedToBeEqual)
             {
@@ -135,7 +169,11 @@ namespace System.Buffers.Text.Tests
 
         [Theory]
         [MemberData(nameof(EqualityTestData))]
-        public static void StandardFormatGetHashCodeIsContentBased(StandardFormat f1, StandardFormat f2, bool expectedToBeEqual)
+        public static void StandardFormatGetHashCodeIsContentBased(
+            StandardFormat f1,
+            StandardFormat f2,
+            bool expectedToBeEqual
+        )
         {
             _ = f2;
             _ = expectedToBeEqual;
@@ -150,10 +188,30 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                yield return new object[] { new StandardFormat('A', 3), new StandardFormat('A', 3), true };
-                yield return new object[] { new StandardFormat('a', 3), new StandardFormat('A', 3), false };
-                yield return new object[] { new StandardFormat('A', 3), new StandardFormat('A', 4), false };
-                yield return new object[] { new StandardFormat('A', 3), new StandardFormat('A', StandardFormat.NoPrecision), false };
+                yield return new object[]
+                {
+                    new StandardFormat('A', 3),
+                    new StandardFormat('A', 3),
+                    true
+                };
+                yield return new object[]
+                {
+                    new StandardFormat('a', 3),
+                    new StandardFormat('A', 3),
+                    false
+                };
+                yield return new object[]
+                {
+                    new StandardFormat('A', 3),
+                    new StandardFormat('A', 4),
+                    false
+                };
+                yield return new object[]
+                {
+                    new StandardFormat('A', 3),
+                    new StandardFormat('A', StandardFormat.NoPrecision),
+                    false
+                };
             }
         }
 

@@ -18,132 +18,342 @@ using RoslynTrigger = Microsoft.CodeAnalysis.Completion.CompletionTrigger;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
-    public abstract class AbstractCSharpCompletionProviderTests : AbstractCSharpCompletionProviderTests<CSharpTestWorkspaceFixture>
+    public abstract class AbstractCSharpCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests<CSharpTestWorkspaceFixture>
     {
     }
 
-    public abstract class AbstractCSharpCompletionProviderTests<TWorkspaceFixture> : AbstractCompletionProviderTests<TWorkspaceFixture>
+    public abstract class AbstractCSharpCompletionProviderTests<TWorkspaceFixture>
+        : AbstractCompletionProviderTests<TWorkspaceFixture>
         where TWorkspaceFixture : TestWorkspaceFixture, new()
     {
         protected const string NonBreakingSpaceString = "\x00A0";
 
-        protected override TestWorkspace CreateWorkspace(string fileContents)
-            => TestWorkspace.CreateCSharp(fileContents, exportProvider: ExportProvider);
+        protected override TestWorkspace CreateWorkspace(string fileContents) =>
+            TestWorkspace.CreateCSharp(fileContents, exportProvider: ExportProvider);
 
-        internal override CompletionServiceWithProviders GetCompletionService(Project project)
-            => Assert.IsType<CSharpCompletionService>(base.GetCompletionService(project));
+        internal override CompletionServiceWithProviders GetCompletionService(Project project) =>
+            Assert.IsType<CSharpCompletionService>(base.GetCompletionService(project));
 
         private protected override Task BaseVerifyWorkerAsync(
-            string code, int position,
-            string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool usePreviousCharAsTrigger, bool checkForAbsence,
-            int? glyph, int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string inlineDescription = null, bool? isComplexTextEdit = null,
-            List<CompletionFilter> matchingFilters = null, CompletionItemFlags? flags = null)
+            string code,
+            int position,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool usePreviousCharAsTrigger,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription = null,
+            bool? isComplexTextEdit = null,
+            List<CompletionFilter> matchingFilters = null,
+            CompletionItemFlags? flags = null
+        )
         {
             return base.VerifyWorkerAsync(
-                code, position, expectedItemOrNull, expectedDescriptionOrNull,
-                sourceCodeKind, usePreviousCharAsTrigger, checkForAbsence,
-                glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters, flags);
+                code,
+                position,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                usePreviousCharAsTrigger,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags
+            );
         }
 
         private protected override async Task VerifyWorkerAsync(
-            string code, int position,
-            string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool usePreviousCharAsTrigger,
-            bool checkForAbsence, int? glyph, int? matchPriority,
-            bool? hasSuggestionItem, string displayTextSuffix, string displayTextPrefix, string inlineDescription = null,
-            bool? isComplexTextEdit = null, List<CompletionFilter> matchingFilters = null, CompletionItemFlags? flags = null)
+            string code,
+            int position,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool usePreviousCharAsTrigger,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription = null,
+            bool? isComplexTextEdit = null,
+            List<CompletionFilter> matchingFilters = null,
+            CompletionItemFlags? flags = null
+        )
         {
-            await VerifyAtPositionAsync(code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters);
-            await VerifyInFrontOfCommentAsync(code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters);
-            await VerifyAtEndOfFileAsync(code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters);
+            await VerifyAtPositionAsync(
+                code,
+                position,
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters
+            );
+            await VerifyInFrontOfCommentAsync(
+                code,
+                position,
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters
+            );
+            await VerifyAtEndOfFileAsync(
+                code,
+                position,
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters
+            );
 
             // Items cannot be partially written if we're checking for their absence,
             // or if we're verifying that the list will show up (without specifying an actual item)
             if (!checkForAbsence && expectedItemOrNull != null)
             {
-                await VerifyAtPosition_ItemPartiallyWrittenAsync(code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters);
-                await VerifyInFrontOfComment_ItemPartiallyWrittenAsync(code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters);
-                await VerifyAtEndOfFile_ItemPartiallyWrittenAsync(code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters);
+                await VerifyAtPosition_ItemPartiallyWrittenAsync(
+                    code,
+                    position,
+                    usePreviousCharAsTrigger,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters
+                );
+                await VerifyInFrontOfComment_ItemPartiallyWrittenAsync(
+                    code,
+                    position,
+                    usePreviousCharAsTrigger,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters
+                );
+                await VerifyAtEndOfFile_ItemPartiallyWrittenAsync(
+                    code,
+                    position,
+                    usePreviousCharAsTrigger,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters
+                );
             }
         }
 
-        protected override string ItemPartiallyWritten(string expectedItemOrNull)
-            => expectedItemOrNull[0] == '@' ? expectedItemOrNull.Substring(1, 1) : expectedItemOrNull.Substring(0, 1);
+        protected override string ItemPartiallyWritten(string expectedItemOrNull) =>
+            expectedItemOrNull[0] == '@'
+                ? expectedItemOrNull.Substring(1, 1)
+                : expectedItemOrNull.Substring(0, 1);
 
         private Task VerifyInFrontOfCommentAsync(
-            string code, int position, string insertText, bool usePreviousCharAsTrigger,
-            string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool checkForAbsence, int? glyph,
-            int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string inlineDescription, bool? isComplexTextEdit, List<CompletionFilter> matchingFilters)
+            string code,
+            int position,
+            string insertText,
+            bool usePreviousCharAsTrigger,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription,
+            bool? isComplexTextEdit,
+            List<CompletionFilter> matchingFilters
+        )
         {
             code = code.Substring(0, position) + insertText + "/**/" + code.Substring(position);
             position += insertText.Length;
 
             return base.VerifyWorkerAsync(
-                code, position, expectedItemOrNull, expectedDescriptionOrNull,
-                sourceCodeKind, usePreviousCharAsTrigger, checkForAbsence, glyph,
-                matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix,
-                inlineDescription, isComplexTextEdit, matchingFilters, flags: null);
+                code,
+                position,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                usePreviousCharAsTrigger,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags: null
+            );
         }
 
         private Task VerifyInFrontOfCommentAsync(
-            string code, int position, bool usePreviousCharAsTrigger,
-            string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool checkForAbsence, int? glyph,
-            int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string inlineDescription, bool? isComplexTextEdit,
-            List<CompletionFilter> matchingFilters)
+            string code,
+            int position,
+            bool usePreviousCharAsTrigger,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription,
+            bool? isComplexTextEdit,
+            List<CompletionFilter> matchingFilters
+        )
         {
             return VerifyInFrontOfCommentAsync(
-                code, position, string.Empty, usePreviousCharAsTrigger,
-                expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind,
-                checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters);
+                code,
+                position,
+                string.Empty,
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters
+            );
         }
 
         private protected Task VerifyInFrontOfComment_ItemPartiallyWrittenAsync(
-            string code, int position, bool usePreviousCharAsTrigger,
-            string expectedItemOrNull, string expectedDescriptionOrNull,
-            SourceCodeKind sourceCodeKind, bool checkForAbsence, int? glyph,
-            int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string inlineDescription, bool? isComplexTextEdit,
-            List<CompletionFilter> matchingFilters)
+            string code,
+            int position,
+            bool usePreviousCharAsTrigger,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string inlineDescription,
+            bool? isComplexTextEdit,
+            List<CompletionFilter> matchingFilters
+        )
         {
             return VerifyInFrontOfCommentAsync(
-                code, position, ItemPartiallyWritten(expectedItemOrNull), usePreviousCharAsTrigger,
-                expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind,
-                checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters);
+                code,
+                position,
+                ItemPartiallyWritten(expectedItemOrNull),
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters
+            );
         }
 
         protected static string AddInsideMethod(string text)
         {
-            return
-@"class C
+            return @"class C
 {
   void F()
   {
-    " + text +
-@"  }
+    "
+                + text
+                + @"  }
 }";
         }
 
         protected static string AddUsingDirectives(string usingDirectives, string text)
         {
-            return
-usingDirectives +
-@"
+            return usingDirectives
+                + @"
 
 
-" +
-text;
+"
+                + text;
         }
 
-        protected async Task VerifySendEnterThroughToEnterAsync(string initialMarkup, string textTypedSoFar, EnterKeyRule sendThroughEnterOption, bool expected)
+        protected async Task VerifySendEnterThroughToEnterAsync(
+            string initialMarkup,
+            string textTypedSoFar,
+            EnterKeyRule sendThroughEnterOption,
+            bool expected
+        )
         {
             using var workspace = CreateWorkspace(initialMarkup);
             var hostDocument = workspace.DocumentWithCursor;
@@ -152,51 +362,66 @@ text;
             var document = workspace.CurrentSolution.GetDocument(documentId);
             var position = hostDocument.CursorPosition.Value;
 
-            workspace.TryApplyChanges(workspace.CurrentSolution.WithOptions(workspace.Options
-                .WithChangedOption(
-                    CompletionOptions.EnterKeyBehavior,
-                    LanguageNames.CSharp,
-                    sendThroughEnterOption)));
+            workspace.TryApplyChanges(
+                workspace.CurrentSolution.WithOptions(
+                    workspace.Options.WithChangedOption(
+                        CompletionOptions.EnterKeyBehavior,
+                        LanguageNames.CSharp,
+                        sendThroughEnterOption
+                    )
+                )
+            );
 
             var service = GetCompletionService(document.Project);
-            var completionList = await GetCompletionListAsync(service, document, position, RoslynTrigger.Invoke);
-            var item = completionList.Items.First(i => (i.DisplayText + i.DisplayTextSuffix).StartsWith(textTypedSoFar));
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                position,
+                RoslynTrigger.Invoke
+            );
+            var item = completionList.Items.First(
+                i => (i.DisplayText + i.DisplayTextSuffix).StartsWith(textTypedSoFar)
+            );
 
-            Assert.Equal(expected, CommitManager.SendEnterThroughToEditor(service.GetRules(), item, textTypedSoFar));
+            Assert.Equal(
+                expected,
+                CommitManager.SendEnterThroughToEditor(service.GetRules(), item, textTypedSoFar)
+            );
         }
 
         protected void TestCommonIsTextualTriggerCharacter()
         {
-            var alwaysTriggerList = new[]
-            {
-                "goo$$.",
-            };
+            var alwaysTriggerList = new[] { "goo$$.", };
 
             foreach (var markup in alwaysTriggerList)
             {
-                VerifyTextualTriggerCharacter(markup, shouldTriggerWithTriggerOnLettersEnabled: true, shouldTriggerWithTriggerOnLettersDisabled: true);
+                VerifyTextualTriggerCharacter(
+                    markup,
+                    shouldTriggerWithTriggerOnLettersEnabled: true,
+                    shouldTriggerWithTriggerOnLettersDisabled: true
+                );
             }
 
-            var triggerOnlyWithLettersList = new[]
-            {
-                "$$a",
-                "$$_"
-            };
+            var triggerOnlyWithLettersList = new[] { "$$a", "$$_" };
 
             foreach (var markup in triggerOnlyWithLettersList)
             {
-                VerifyTextualTriggerCharacter(markup, shouldTriggerWithTriggerOnLettersEnabled: true, shouldTriggerWithTriggerOnLettersDisabled: false);
+                VerifyTextualTriggerCharacter(
+                    markup,
+                    shouldTriggerWithTriggerOnLettersEnabled: true,
+                    shouldTriggerWithTriggerOnLettersDisabled: false
+                );
             }
 
-            var neverTriggerList = new[]
-            {
-                "goo$$x",
-                "goo$$_"
-            };
+            var neverTriggerList = new[] { "goo$$x", "goo$$_" };
 
             foreach (var markup in neverTriggerList)
             {
-                VerifyTextualTriggerCharacter(markup, shouldTriggerWithTriggerOnLettersEnabled: false, shouldTriggerWithTriggerOnLettersDisabled: false);
+                VerifyTextualTriggerCharacter(
+                    markup,
+                    shouldTriggerWithTriggerOnLettersEnabled: false,
+                    shouldTriggerWithTriggerOnLettersDisabled: false
+                );
             }
         }
     }

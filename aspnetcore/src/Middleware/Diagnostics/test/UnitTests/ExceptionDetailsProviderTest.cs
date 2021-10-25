@@ -21,10 +21,7 @@ namespace Microsoft.Extensions.Internal
         {
             get
             {
-                var data = new TheoryData<string>
-                {
-                    "TestFiles/SourceFile.txt"
-                };
+                var data = new TheoryData<string> { "TestFiles/SourceFile.txt" };
 
                 if (!(OperatingSystem.IsLinux() || OperatingSystem.IsMacOS()))
                 {
@@ -65,11 +62,16 @@ namespace Microsoft.Extensions.Internal
             using (var provider = new PhysicalFileProvider(rootPath))
             {
                 // Act
-                var exceptionDetailProvider = new ExceptionDetailsProvider(provider, logger: null, sourceCodeLineCount: 6);
+                var exceptionDetailProvider = new ExceptionDetailsProvider(
+                    provider,
+                    logger: null,
+                    sourceCodeLineCount: 6
+                );
                 var stackFrame = exceptionDetailProvider.GetStackFrameSourceCodeInfo(
                     "func1",
                     absoluteFilePath,
-                    lineNumber: 10);
+                    lineNumber: 10
+                );
 
                 // Assert
                 // Lines 4-16 (inclusive) is the code block
@@ -89,11 +91,16 @@ namespace Microsoft.Extensions.Internal
             using (var provider = new PhysicalFileProvider(rootPath))
             {
                 // Act
-                var exceptionDetailProvider = new ExceptionDetailsProvider(provider, logger: null, sourceCodeLineCount: 6);
+                var exceptionDetailProvider = new ExceptionDetailsProvider(
+                    provider,
+                    logger: null,
+                    sourceCodeLineCount: 6
+                );
                 var stackFrame = exceptionDetailProvider.GetStackFrameSourceCodeInfo(
                     "func1",
                     relativePath,
-                    lineNumber: 10);
+                    lineNumber: 10
+                );
 
                 // Assert
                 // Lines 4-16 (inclusive) is the code block
@@ -112,14 +119,20 @@ namespace Microsoft.Extensions.Internal
             // Arrange
             var provider = new EmbeddedFileProvider(
                 GetType().Assembly,
-                baseNamespace: $"{typeof(ExceptionDetailsProviderTest).Assembly.GetName().Name}.Resources");
+                baseNamespace: $"{typeof(ExceptionDetailsProviderTest).Assembly.GetName().Name}.Resources"
+            );
 
             // Act
-            var exceptionDetailProvider = new ExceptionDetailsProvider(provider, logger: null, sourceCodeLineCount: 6);
+            var exceptionDetailProvider = new ExceptionDetailsProvider(
+                provider,
+                logger: null,
+                sourceCodeLineCount: 6
+            );
             var stackFrame = exceptionDetailProvider.GetStackFrameSourceCodeInfo(
                 "func1",
                 relativePath,
-                lineNumber: 10);
+                lineNumber: 10
+            );
 
             // Assert
             // Lines 4-16 (inclusive) is the code block
@@ -155,7 +168,6 @@ namespace Microsoft.Extensions.Internal
                         ExpectedErrorCode = GetCodeLines(10, 13),
                         ExpectedPostErrorCode = GetCodeLines(14, 19)
                     },
-
                     // PreErrorCode less than source code line count
                     new ErrorData()
                     {
@@ -177,7 +189,6 @@ namespace Microsoft.Extensions.Internal
                         ExpectedErrorCode = GetCodeLines(3, 5),
                         ExpectedPostErrorCode = GetCodeLines(6, 10)
                     },
-
                     // PostErrorCode less than source code line count
                     new ErrorData()
                     {
@@ -209,7 +220,6 @@ namespace Microsoft.Extensions.Internal
                         ExpectedErrorCode = GetCodeLines(5, 8),
                         ExpectedPostErrorCode = GetCodeLines(9, 10)
                     },
-
                     // Pre and Post error code less than source code line count
                     new ErrorData()
                     {
@@ -231,7 +241,6 @@ namespace Microsoft.Extensions.Internal
                         ExpectedErrorCode = GetCodeLines(1, 4),
                         ExpectedPostErrorCode = Enumerable.Empty<string>()
                     },
-
                     // change source code line count
                     new ErrorData()
                     {
@@ -259,13 +268,15 @@ namespace Microsoft.Extensions.Internal
             var exceptionDetailProvider = new ExceptionDetailsProvider(
                 new PhysicalFileProvider(Directory.GetCurrentDirectory()),
                 logger: null,
-                sourceCodeLineCount: 6);
+                sourceCodeLineCount: 6
+            );
 
             exceptionDetailProvider.ReadFrameContent(
                 stackFrame,
                 errorData.AllLines,
                 errorData.ErrorStartLine,
-                errorData.ErrorEndLine);
+                errorData.ErrorEndLine
+            );
 
             // Assert
             Assert.Equal(errorData.ExpectedPreContextLine, stackFrame.PreContextLine);
@@ -278,7 +289,9 @@ namespace Microsoft.Extensions.Internal
         {
             var start = fromLine;
             var count = toLine - fromLine + 1;
-            return Enumerable.Range(start, count).Select(i => string.Format(CultureInfo.InvariantCulture, "Line{0}", i));
+            return Enumerable
+                .Range(start, count)
+                .Select(i => string.Format(CultureInfo.InvariantCulture, "Line{0}", i));
         }
 
         private class TestFileProvider : IFileProvider
@@ -325,50 +338,32 @@ namespace Microsoft.Extensions.Internal
 
             public bool Exists
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public bool IsDirectory
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public DateTimeOffset LastModified
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public long Length
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public string Name
             {
-                get
-                {
-                    throw new NotImplementedException();
-                }
+                get { throw new NotImplementedException(); }
             }
 
             public string PhysicalPath
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             public Stream CreateReadStream()

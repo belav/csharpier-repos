@@ -12,10 +12,7 @@ namespace System.Security.Cryptography
         //
         // Constructors.
         //
-        public CryptographicAttributeObject(Oid oid)
-            : this(oid, new AsnEncodedDataCollection())
-        {
-        }
+        public CryptographicAttributeObject(Oid oid) : this(oid, new AsnEncodedDataCollection()) { }
 
         public CryptographicAttributeObject(Oid oid, AsnEncodedDataCollection? values)
         {
@@ -30,7 +27,13 @@ namespace System.Security.Cryptography
                 foreach (AsnEncodedData asn in values)
                 {
                     if (!string.Equals(asn.Oid!.Value, oid.Value, StringComparison.Ordinal))
-                        throw new InvalidOperationException(SR.Format(SR.InvalidOperation_WrongOidInAsnCollection, oid.Value, asn.Oid.Value));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.InvalidOperation_WrongOidInAsnCollection,
+                                oid.Value,
+                                asn.Oid.Value
+                            )
+                        );
                 }
                 Values = values;
             }

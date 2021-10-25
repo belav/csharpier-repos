@@ -113,7 +113,9 @@ namespace System.IO.Tests
                     Assert.Equal(Encoding.UTF8.GetBytes("text"), File.ReadAllBytes(path));
                 }
                 else
-                    Assert.Throws<UnauthorizedAccessException>(() => File.WriteAllBytes(path, Encoding.UTF8.GetBytes("text")));
+                    Assert.Throws<UnauthorizedAccessException>(
+                        () => File.WriteAllBytes(path, Encoding.UTF8.GetBytes("text"))
+                    );
             }
             finally
             {
@@ -157,7 +159,7 @@ namespace System.IO.Tests
         public void ReadAllBytes_ProcFs_Uptime_ContainsTwoNumbers()
         {
             string text = Encoding.UTF8.GetString(File.ReadAllBytes("/proc/uptime"));
-            string[] parts = text.Split(new [] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] parts = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             Assert.Equal(2, parts.Length);
             Assert.True(double.TryParse(parts[0].Trim(), out _));
             Assert.True(double.TryParse(parts[1].Trim(), out _));

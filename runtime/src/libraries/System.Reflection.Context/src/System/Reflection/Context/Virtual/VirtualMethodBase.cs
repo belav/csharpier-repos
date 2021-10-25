@@ -54,7 +54,10 @@ namespace System.Reflection.Context.Virtual
 
         public override sealed ParameterInfo ReturnParameter
         {
-            get { return _returnParameter ?? (_returnParameter = new VirtualReturnParameter(this)); }
+            get
+            {
+                return _returnParameter ?? (_returnParameter = new VirtualReturnParameter(this));
+            }
         }
 
         public override sealed ICustomAttributeProvider ReturnTypeCustomAttributes
@@ -89,7 +92,9 @@ namespace System.Reflection.Context.Virtual
 
         public override sealed MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
-            throw new InvalidOperationException(SR.Format(SR.InvalidOperation_NotGenericMethodDefinition, this));
+            throw new InvalidOperationException(
+                SR.Format(SR.InvalidOperation_NotGenericMethodDefinition, this)
+            );
         }
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
@@ -116,17 +121,17 @@ namespace System.Reflection.Context.Virtual
         {
             // We don't need to compare the invokees
             // But do we need to compare the contexts and return types?
-            return obj is VirtualMethodBase other &&
-                Name == other.Name &&
-                DeclaringType.Equals(other.DeclaringType) &&
-                CollectionServices.CompareArrays(GetParameterTypes(), other.GetParameterTypes());
+            return obj is VirtualMethodBase other
+                && Name == other.Name
+                && DeclaringType.Equals(other.DeclaringType)
+                && CollectionServices.CompareArrays(GetParameterTypes(), other.GetParameterTypes());
         }
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() ^
-                DeclaringType.GetHashCode() ^
-                CollectionServices.GetArrayHashCode(GetParameterTypes());
+            return Name.GetHashCode()
+                ^ DeclaringType.GetHashCode()
+                ^ CollectionServices.GetArrayHashCode(GetParameterTypes());
         }
 
         public override string ToString()

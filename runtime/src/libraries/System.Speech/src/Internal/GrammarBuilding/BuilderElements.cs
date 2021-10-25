@@ -15,9 +15,7 @@ namespace System.Speech.Internal.GrammarBuilding
     {
         #region Constructors
 
-        internal BuilderElements()
-        {
-        }
+        internal BuilderElements() { }
 
         #endregion
 
@@ -150,7 +148,11 @@ namespace System.Speech.Internal.GrammarBuilding
             }
         }
 
-        internal void CreateChildrenElements(IElementFactory elementFactory, IRule parent, IdentifierCollection ruleIds)
+        internal void CreateChildrenElements(
+            IElementFactory elementFactory,
+            IRule parent,
+            IdentifierCollection ruleIds
+        )
         {
             foreach (GrammarBuilderBase buider in Items)
             {
@@ -163,7 +165,12 @@ namespace System.Speech.Internal.GrammarBuilding
             }
         }
 
-        internal void CreateChildrenElements(IElementFactory elementFactory, IItem parent, IRule rule, IdentifierCollection ruleIds)
+        internal void CreateChildrenElements(
+            IElementFactory elementFactory,
+            IItem parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             foreach (GrammarBuilderBase buider in Items)
             {
@@ -195,10 +202,7 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal List<GrammarBuilderBase> Items
         {
-            get
-            {
-                return _items;
-            }
+            get { return _items; }
         }
 
         internal override string DebugSummary
@@ -244,7 +248,9 @@ namespace System.Speech.Internal.GrammarBuilding
             }
         }
 
-        private void RemoveDictionaryElements(SortedDictionary<int, Collection<BuilderElements>> dict)
+        private void RemoveDictionaryElements(
+            SortedDictionary<int, Collection<BuilderElements>> dict
+        )
         {
             // Recursive search from a matching subtree
             foreach (GrammarBuilderBase item in Items)
@@ -268,7 +274,6 @@ namespace System.Speech.Internal.GrammarBuilding
 
         // List of builder elements
         private readonly List<GrammarBuilderBase> _items = new();
-
         #endregion
     }
 }

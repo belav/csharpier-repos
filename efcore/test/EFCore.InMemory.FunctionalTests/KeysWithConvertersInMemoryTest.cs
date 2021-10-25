@@ -5,18 +5,16 @@ using Microsoft.EntityFrameworkCore.TestUtilities;
 
 namespace Microsoft.EntityFrameworkCore
 {
-    public class KeysWithConvertersInMemoryTest : KeysWithConvertersTestBase<
-        KeysWithConvertersInMemoryTest.KeysWithConvertersInMemoryFixture>
+    public class KeysWithConvertersInMemoryTest
+        : KeysWithConvertersTestBase<KeysWithConvertersInMemoryTest.KeysWithConvertersInMemoryFixture>
     {
         public KeysWithConvertersInMemoryTest(KeysWithConvertersInMemoryFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class KeysWithConvertersInMemoryFixture : KeysWithConvertersFixtureBase
         {
-            protected override ITestStoreFactory TestStoreFactory
-                => InMemoryTestStoreFactory.Instance;
+            protected override ITestStoreFactory TestStoreFactory =>
+                InMemoryTestStoreFactory.Instance;
         }
     }
 }

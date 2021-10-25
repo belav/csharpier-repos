@@ -62,7 +62,10 @@ namespace System.Reflection.Emit.Tests
         }
 
         [Theory]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Passing null for SetConstant on value types not supported on NETFX")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Passing null for SetConstant on value types not supported on NETFX"
+        )]
         [MemberData(nameof(SetConstant_ValueTypes_TestData))]
         public void SetConstant_Null_not_supported_on_NETFX(Type parameterType)
         {
@@ -70,10 +73,21 @@ namespace System.Reflection.Emit.Tests
         }
 
         [Theory]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Passing non-null value for SetConstant on nullable enum types not supported on NETFX")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "Passing non-null value for SetConstant on nullable enum types not supported on NETFX"
+        )]
         [InlineData(typeof(AttributeTargets?), AttributeTargets.All, (int)AttributeTargets.All)]
-        [InlineData(typeof(AttributeTargets?), (int)AttributeTargets.All, (int)AttributeTargets.All)]
-        public void SetConstant_NonNull_on_nullable_enum_not_supported_on_NETFX(Type parameterType, object valueToWrite, object expectedValueWhenRead)
+        [InlineData(
+            typeof(AttributeTargets?),
+            (int)AttributeTargets.All,
+            (int)AttributeTargets.All
+        )]
+        public void SetConstant_NonNull_on_nullable_enum_not_supported_on_NETFX(
+            Type parameterType,
+            object valueToWrite,
+            object expectedValueWhenRead
+        )
         {
             SetConstant(parameterType, valueToWrite, expectedValueWhenRead);
         }
@@ -83,11 +97,26 @@ namespace System.Reflection.Emit.Tests
             SetConstant(parameterType, null, null);
         }
 
-        private void SetConstant(Type parameterType, object valueToWrite, object expectedValueWhenRead)
+        private void SetConstant(
+            Type parameterType,
+            object valueToWrite,
+            object expectedValueWhenRead
+        )
         {
-            TypeBuilder type = Helpers.DynamicType(TypeAttributes.Interface | TypeAttributes.Abstract);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, typeof(void), new Type[] { parameterType });
-            ParameterBuilder parameter = method.DefineParameter(1, ParameterAttributes.Optional | ParameterAttributes.HasDefault, "arg");
+            TypeBuilder type = Helpers.DynamicType(
+                TypeAttributes.Interface | TypeAttributes.Abstract
+            );
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual,
+                typeof(void),
+                new Type[] { parameterType }
+            );
+            ParameterBuilder parameter = method.DefineParameter(
+                1,
+                ParameterAttributes.Optional | ParameterAttributes.HasDefault,
+                "arg"
+            );
 
             parameter.SetConstant(valueToWrite);
 
@@ -96,7 +125,11 @@ namespace System.Reflection.Emit.Tests
             Assert.Equal(expectedValueWhenRead, createdParameter.DefaultValue);
         }
 
-        private static ParameterInfo GetCreatedParameter(TypeBuilder type, string methodName, int parameterIndex)
+        private static ParameterInfo GetCreatedParameter(
+            TypeBuilder type,
+            string methodName,
+            int parameterIndex
+        )
         {
             Type createdType = type.CreateTypeInfo().AsType();
             MethodInfo createdMethod = createdType.GetMethod(methodName);

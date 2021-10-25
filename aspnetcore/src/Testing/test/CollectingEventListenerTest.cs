@@ -24,11 +24,14 @@ namespace Microsoft.AspNetCore.Testing.Tests
                 await Task.Yield();
 
                 var events = GetEvents();
-                EventAssert.Collection(events,
+                EventAssert.Collection(
+                    events,
                     EventAssert.Event(1, "Test", EventLevel.Informational),
-                    EventAssert.Event(2, "TestWithPayload", EventLevel.Verbose)
+                    EventAssert
+                        .Event(2, "TestWithPayload", EventLevel.Verbose)
                         .Payload("payload1", 42)
-                        .Payload("payload2", 4.2));
+                        .Payload("payload2", 4.2)
+                );
             }
         }
 
@@ -74,14 +77,13 @@ namespace Microsoft.AspNetCore.Testing.Tests
     {
         public static readonly TestEventSource Log = new TestEventSource();
 
-        private TestEventSource()
-        {
-        }
+        private TestEventSource() { }
 
         [Event(eventId: 1, Level = EventLevel.Informational, Message = "Test")]
         public void Test() => WriteEvent(1);
 
         [Event(eventId: 2, Level = EventLevel.Verbose, Message = "Test")]
-        public void TestWithPayload(int payload1, double payload2) => WriteEvent(2, payload1, payload2);
+        public void TestWithPayload(int payload1, double payload2) =>
+            WriteEvent(2, payload1, payload2);
     }
 }

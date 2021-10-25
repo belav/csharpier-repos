@@ -18,9 +18,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SemanticTokensHandlerProvider()
-        {
-        }
+        public SemanticTokensHandlerProvider() { }
 
         public override ImmutableArray<IRequestHandler> CreateRequestHandlers()
         {
@@ -28,7 +26,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             return ImmutableArray.Create<IRequestHandler>(
                 new SemanticTokensHandler(semanticTokensCache),
                 new SemanticTokensEditsHandler(semanticTokensCache),
-                new SemanticTokensRangeHandler(semanticTokensCache));
+                new SemanticTokensRangeHandler(semanticTokensCache)
+            );
         }
     }
 }

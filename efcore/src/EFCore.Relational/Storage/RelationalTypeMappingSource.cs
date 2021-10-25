@@ -31,10 +31,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
     ///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
     ///     </para>
     /// </summary>
-    public abstract class RelationalTypeMappingSource : TypeMappingSourceBase, IRelationalTypeMappingSource
+    public abstract class RelationalTypeMappingSource
+        : TypeMappingSourceBase,
+          IRelationalTypeMappingSource
     {
-        private readonly ConcurrentDictionary<(RelationalTypeMappingInfo, Type?, ValueConverter?), RelationalTypeMapping?> _explicitMappings
-            = new();
+        private readonly ConcurrentDictionary<
+            (RelationalTypeMappingInfo, Type?, ValueConverter?),
+            RelationalTypeMapping?
+        > _explicitMappings = new();
 
         /// <summary>
         ///     Initializes a new instance of the this class.
@@ -43,8 +47,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="relationalDependencies"> Parameter object containing relational-specific dependencies for this service. </param>
         protected RelationalTypeMappingSource(
             TypeMappingSourceDependencies dependencies,
-            RelationalTypeMappingSourceDependencies relationalDependencies)
-            : base(dependencies)
+            RelationalTypeMappingSourceDependencies relationalDependencies
+        ) : base(dependencies)
         {
             Check.NotNull(relationalDependencies, nameof(relationalDependencies));
 
@@ -63,7 +67,9 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="mappingInfo"> The mapping info to use to create the mapping. </param>
         /// <returns> The type mapping, or <see langword="null" /> if none could be found. </returns>
-        protected virtual RelationalTypeMapping? FindMapping(in RelationalTypeMappingInfo mappingInfo)
+        protected virtual RelationalTypeMapping? FindMapping(
+            in RelationalTypeMappingInfo mappingInfo
+        )
         {
             foreach (var plugin in RelationalDependencies.Plugins)
             {
@@ -87,13 +93,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="mappingInfo"> The mapping info to use to create the mapping. </param>
         /// <returns> The type mapping, or <see langword="null" /> if none could be found. </returns>
-        protected override CoreTypeMapping FindMapping(in TypeMappingInfo mappingInfo)
-            => throw new InvalidOperationException(
-                RelationalStrings.NoneRelationalTypeMappingOnARelationalTypeMappingSource);
+        protected override CoreTypeMapping FindMapping(in TypeMappingInfo mappingInfo) =>
+            throw new InvalidOperationException(
+                RelationalStrings.NoneRelationalTypeMappingOnARelationalTypeMappingSource
+            );
 
         private RelationalTypeMapping? FindMappingWithConversion(
             in RelationalTypeMappingInfo mappingInfo,
-            IReadOnlyList<IProperty>? principals)
+            IReadOnlyList<IProperty>? principals
+        )
         {
             Type? providerClrType = null;
             ValueConverter? customConverter = null;
@@ -127,8 +135,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 k =>
                 {
                     var (info, providerType, converter) = k;
-                    var mapping = providerType == null
-                        || providerType == info.ClrType
+                    var mapping =
+                        providerType == null || providerType == info.ClrType
                             ? FindMapping(info)
                             : null;
 
@@ -138,25 +146,33 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                         if (sourceType != null)
                         {
-                            foreach (var converterInfo in Dependencies
-                                .ValueConverterSelector
-                                .Select(sourceType, providerType))
+                            foreach (
+                                var converterInfo in Dependencies.ValueConverterSelector.Select(
+                                    sourceType,
+                                    providerType
+                                )
+                            )
                             {
                                 var mappingInfoUsed = info.WithConverter(converterInfo);
                                 mapping = FindMapping(mappingInfoUsed);
 
-                                if (mapping == null
-                                    && providerType != null)
+                                if (mapping == null && providerType != null)
                                 {
-                                    foreach (var secondConverterInfo in Dependencies
-                                        .ValueConverterSelector
-                                        .Select(providerType))
+                                    foreach (
+                                        var secondConverterInfo in Dependencies.ValueConverterSelector.Select(
+                                            providerType
+                                        )
+                                    )
                                     {
-                                        mapping = FindMapping(mappingInfoUsed.WithConverter(secondConverterInfo));
+                                        mapping = FindMapping(
+                                            mappingInfoUsed.WithConverter(secondConverterInfo)
+                                        );
 
                                         if (mapping != null)
                                         {
-                                            mapping = (RelationalTypeMapping)mapping.Clone(secondConverterInfo.Create());
+                                            mapping = (RelationalTypeMapping)mapping.Clone(
+                                                secondConverterInfo.Create()
+                                            );
                                             break;
                                         }
                                     }
@@ -164,21 +180,23 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
                                 if (mapping != null)
                                 {
-                                    mapping = (RelationalTypeMapping)mapping.Clone(converterInfo.Create());
+                                    mapping = (RelationalTypeMapping)mapping.Clone(
+                                        converterInfo.Create()
+                                    );
                                     break;
                                 }
                             }
                         }
                     }
 
-                    if (mapping != null
-                        && converter != null)
+                    if (mapping != null && converter != null)
                     {
                         mapping = (RelationalTypeMapping)mapping.Clone(converter);
                     }
 
                     return mapping;
-                });
+                }
+            );
 
             ValidateMapping(resolvedMapping, principals?[0]);
 
@@ -220,11 +238,27 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 }
             }
 
-            var storeTypeNameBase = ParseStoreTypeName(storeTypeName, out var unicode, out var size, out var precision, out var scale);
+            var storeTypeNameBase = ParseStoreTypeName(
+                storeTypeName,
+                out var unicode,
+                out var size,
+                out var precision,
+                out var scale
+            );
 
             return FindMappingWithConversion(
-                new RelationalTypeMappingInfo(principals, storeTypeName, storeTypeNameBase, unicode, isFixedLength, size, precision, scale),
-                principals);
+                new RelationalTypeMappingInfo(
+                    principals,
+                    storeTypeName,
+                    storeTypeNameBase,
+                    unicode,
+                    isFixedLength,
+                    size,
+                    precision,
+                    scale
+                ),
+                principals
+            );
         }
 
         /// <summary>
@@ -242,8 +276,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// </summary>
         /// <param name="type"> The CLR type. </param>
         /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
-        public override CoreTypeMapping? FindMapping(Type type)
-            => FindMappingWithConversion(new RelationalTypeMappingInfo(type), null);
+        public override CoreTypeMapping? FindMapping(Type type) =>
+            FindMappingWithConversion(new RelationalTypeMappingInfo(type), null);
 
         /// <summary>
         ///     <para>
@@ -266,10 +300,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
             {
                 var storeTypeName = attribute.TypeName;
                 var storeTypeNameBase = ParseStoreTypeName(
-                    attribute.TypeName, out var unicode, out var size, out var precision, out var scale);
+                    attribute.TypeName,
+                    out var unicode,
+                    out var size,
+                    out var precision,
+                    out var scale
+                );
 
                 return FindMappingWithConversion(
-                    new RelationalTypeMappingInfo(member, storeTypeName, storeTypeNameBase, unicode, size, precision, scale), null);
+                    new RelationalTypeMappingInfo(
+                        member,
+                        storeTypeName,
+                        storeTypeNameBase,
+                        unicode,
+                        size,
+                        precision,
+                        scale
+                    ),
+                    null
+                );
             }
 
             return FindMappingWithConversion(new RelationalTypeMappingInfo(member), null);
@@ -291,10 +340,25 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <returns> The type mapping, or <see langword="null" /> if none was found. </returns>
         public virtual RelationalTypeMapping? FindMapping(string storeTypeName)
         {
-            var storeTypeBaseName = ParseStoreTypeName(storeTypeName, out var unicode, out var size, out var precision, out var scale);
+            var storeTypeBaseName = ParseStoreTypeName(
+                storeTypeName,
+                out var unicode,
+                out var size,
+                out var precision,
+                out var scale
+            );
 
             return FindMappingWithConversion(
-                new RelationalTypeMappingInfo(storeTypeName, storeTypeBaseName, unicode, size, precision, scale), null);
+                new RelationalTypeMappingInfo(
+                    storeTypeName,
+                    storeTypeBaseName,
+                    unicode,
+                    size,
+                    precision,
+                    scale
+                ),
+                null
+            );
         }
 
         /// <summary>
@@ -328,14 +392,20 @@ namespace Microsoft.EntityFrameworkCore.Storage
             bool? rowVersion = null,
             bool? fixedLength = null,
             int? precision = null,
-            int? scale = null)
+            int? scale = null
+        )
         {
             string? storeTypeBaseName = null;
 
             if (storeTypeName != null)
             {
                 storeTypeBaseName = ParseStoreTypeName(
-                    storeTypeName, out var parsedUnicode, out var parsedSize, out var parsedPrecision, out var parsedScale);
+                    storeTypeName,
+                    out var parsedUnicode,
+                    out var parsedSize,
+                    out var parsedPrecision,
+                    out var parsedScale
+                );
                 if (size == null)
                 {
                     size = parsedSize;
@@ -359,20 +429,32 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             return FindMappingWithConversion(
                 new RelationalTypeMappingInfo(
-                    type, storeTypeName, storeTypeBaseName, keyOrIndex, unicode, size, rowVersion, fixedLength, precision, scale), null);
+                    type,
+                    storeTypeName,
+                    storeTypeBaseName,
+                    keyOrIndex,
+                    unicode,
+                    size,
+                    rowVersion,
+                    fixedLength,
+                    precision,
+                    scale
+                ),
+                null
+            );
         }
 
         /// <inheritdoc />
-        RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(IProperty property)
-            => (RelationalTypeMapping?)FindMapping(property);
+        RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(IProperty property) =>
+            (RelationalTypeMapping?)FindMapping(property);
 
         /// <inheritdoc />
-        RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(Type type)
-            => (RelationalTypeMapping?)FindMapping(type);
+        RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(Type type) =>
+            (RelationalTypeMapping?)FindMapping(type);
 
         /// <inheritdoc />
-        RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(MemberInfo member)
-            => (RelationalTypeMapping?)FindMapping(member);
+        RelationalTypeMapping? IRelationalTypeMappingSource.FindMapping(MemberInfo member) =>
+            (RelationalTypeMapping?)FindMapping(member);
 
         /// <summary>
         ///     <para>
@@ -397,7 +479,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
             out bool? unicode,
             out int? size,
             out int? precision,
-            out int? scale)
+            out int? scale
+        )
         {
             unicode = null;
             size = null;
@@ -410,25 +493,48 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 if (openParen > 0)
                 {
                     var storeTypeNameBase = storeTypeName.Substring(0, openParen).Trim();
-                    var closeParen = storeTypeName.IndexOf(")", openParen + 1, StringComparison.Ordinal);
+                    var closeParen = storeTypeName.IndexOf(
+                        ")",
+                        openParen + 1,
+                        StringComparison.Ordinal
+                    );
                     if (closeParen > openParen)
                     {
-                        var comma = storeTypeName.IndexOf(",", openParen + 1, StringComparison.Ordinal);
-                        if (comma > openParen
-                            && comma < closeParen)
+                        var comma = storeTypeName.IndexOf(
+                            ",",
+                            openParen + 1,
+                            StringComparison.Ordinal
+                        );
+                        if (comma > openParen && comma < closeParen)
                         {
-                            if (int.TryParse(storeTypeName.Substring(openParen + 1, comma - openParen - 1), out var parsedPrecision))
+                            if (
+                                int.TryParse(
+                                    storeTypeName.Substring(openParen + 1, comma - openParen - 1),
+                                    out var parsedPrecision
+                                )
+                            )
                             {
                                 precision = parsedPrecision;
                             }
 
-                            if (int.TryParse(storeTypeName.Substring(comma + 1, closeParen - comma - 1), out var parsedScale))
+                            if (
+                                int.TryParse(
+                                    storeTypeName.Substring(comma + 1, closeParen - comma - 1),
+                                    out var parsedScale
+                                )
+                            )
                             {
                                 scale = parsedScale;
                             }
                         }
-                        else if (int.TryParse(
-                            storeTypeName.Substring(openParen + 1, closeParen - openParen - 1).Trim(), out var parsedSize))
+                        else if (
+                            int.TryParse(
+                                storeTypeName
+                                    .Substring(openParen + 1, closeParen - openParen - 1)
+                                    .Trim(),
+                                out var parsedSize
+                            )
+                        )
                         {
                             size = parsedSize;
                         }

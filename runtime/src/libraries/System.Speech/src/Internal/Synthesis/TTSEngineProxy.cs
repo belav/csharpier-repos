@@ -21,7 +21,10 @@ namespace System.Speech.Internal.Synthesis
         internal abstract void ReleaseInterface();
         internal abstract char[] ConvertPhonemes(char[] phones, AlphabetType alphabet);
         internal abstract AlphabetType EngineAlphabet { get; }
-        internal AlphabetConverter AlphabetConverter { get { return _alphabetConverter; } }
+        internal AlphabetConverter AlphabetConverter
+        {
+            get { return _alphabetConverter; }
+        }
 
         protected AlphabetConverter _alphabetConverter;
     }
@@ -30,8 +33,7 @@ namespace System.Speech.Internal.Synthesis
     {
         #region Constructors
 
-        internal TtsProxySsml(TtsEngineSsml ssmlEngine, ITtsEngineSite site, int lcid)
-            : base(lcid)
+        internal TtsProxySsml(TtsEngineSsml ssmlEngine, ITtsEngineSite site, int lcid) : base(lcid)
         {
             _ssmlEngine = ssmlEngine;
             _site = site;
@@ -84,18 +86,13 @@ namespace System.Speech.Internal.Synthesis
 
         internal override AlphabetType EngineAlphabet
         {
-            get
-            {
-                return AlphabetType.Ipa;
-            }
+            get { return AlphabetType.Ipa; }
         }
 
         /// <summary>
         /// Release the COM interface for COM object
         /// </summary>
-        internal override void ReleaseInterface()
-        {
-        }
+        internal override void ReleaseInterface() { }
 
         #endregion
 
@@ -103,7 +100,6 @@ namespace System.Speech.Internal.Synthesis
 
         private TtsEngineSsml _ssmlEngine;
         private ITtsEngineSite _site;
-
         #endregion
     }
 
@@ -111,8 +107,7 @@ namespace System.Speech.Internal.Synthesis
     {
         #region Constructors
 
-        internal TtsProxySapi(ITtsEngine sapiEngine, IntPtr iSite, int lcid)
-            : base(lcid)
+        internal TtsProxySapi(ITtsEngine sapiEngine, IntPtr iSite, int lcid) : base(lcid)
         {
             _iSite = iSite;
             _sapiEngine = sapiEngine;
@@ -156,7 +151,13 @@ namespace System.Speech.Internal.Synthesis
                     Guid formatId = SAPIGuids.SPDFID_WaveFormatEx;
                     try
                     {
-                        _sapiEngine.Speak(0, ref formatId, waveFormat, spvTextFragment.AddrOfPinnedObject(), _iSite);
+                        _sapiEngine.Speak(
+                            0,
+                            ref formatId,
+                            waveFormat,
+                            spvTextFragment.AddrOfPinnedObject(),
+                            _iSite
+                        );
                     }
                     finally
                     {
@@ -172,10 +173,7 @@ namespace System.Speech.Internal.Synthesis
 
         internal override AlphabetType EngineAlphabet
         {
-            get
-            {
-                return AlphabetType.Sapi;
-            }
+            get { return AlphabetType.Sapi; }
         }
 
         internal override char[] ConvertPhonemes(char[] phones, AlphabetType alphabet)
@@ -206,7 +204,6 @@ namespace System.Speech.Internal.Synthesis
 
         // This variable is stored here but never created or deleted
         private IntPtr _iSite;
-
         #endregion
     }
 }

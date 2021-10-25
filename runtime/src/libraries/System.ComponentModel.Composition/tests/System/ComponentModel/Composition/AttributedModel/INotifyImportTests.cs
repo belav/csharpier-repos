@@ -24,13 +24,15 @@ namespace System.ComponentModel.Composition.AttributedModel
         [Fact]
         public void ImportsSatisfiedOnComponentWithoutImports()
         {
-            CompositionContainer container = ContainerFactory.CreateWithAttributedCatalog(typeof(PartWithoutImports));
+            CompositionContainer container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(PartWithoutImports)
+            );
 
-            PartWithoutImports partWithoutImports = container.GetExportedValue<PartWithoutImports>();
+            PartWithoutImports partWithoutImports =
+                container.GetExportedValue<PartWithoutImports>();
             Assert.NotNull(partWithoutImports);
 
             Assert.True(partWithoutImports.ImportsSatisfiedInvoked);
-
         }
 
         [Fact]
@@ -97,12 +99,16 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             var container = ContainerFactory.Create();
             CompositionBatch batch = new CompositionBatch();
-            batch.AddParts(new CallbackImportNotify(delegate
-            {
-                batch = new CompositionBatch();
-                batch.AddPart(new object());
-                container.Compose(batch);
-            }));
+            batch.AddParts(
+                new CallbackImportNotify(
+                    delegate
+                    {
+                        batch = new CompositionBatch();
+                        batch.AddPart(new object());
+                        container.Compose(batch);
+                    }
+                )
+            );
 
             container.Compose(batch);
         }
@@ -140,13 +146,19 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assert.Equal(1, childImporter.ImportCompletedCallCount);
             Assert.Equal(1, child2Importer.ImportCompletedCallCount);
 
-            MyNotifyImportExporter parentExporter = parent.GetExportedValue<MyNotifyImportExporter>("MyNotifyImportExporter");
+            MyNotifyImportExporter parentExporter = parent.GetExportedValue<MyNotifyImportExporter>(
+                "MyNotifyImportExporter"
+            );
             Assert.Equal(1, parentExporter.ImportCompletedCallCount);
 
-            MyNotifyImportExporter childExporter = child.GetExportedValue<MyNotifyImportExporter>("MyNotifyImportExporter");
+            MyNotifyImportExporter childExporter = child.GetExportedValue<MyNotifyImportExporter>(
+                "MyNotifyImportExporter"
+            );
             Assert.Equal(1, childExporter.ImportCompletedCallCount);
 
-            MyNotifyImportExporter child2Exporter = child2.GetExportedValue<MyNotifyImportExporter>("MyNotifyImportExporter");
+            MyNotifyImportExporter child2Exporter = child2.GetExportedValue<MyNotifyImportExporter>(
+                "MyNotifyImportExporter"
+            );
             Assert.Equal(1, child2Exporter.ImportCompletedCallCount);
         }
 
@@ -179,12 +191,16 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assert.Equal(1, childImporter.ImportCompletedCallCount);
 
             // Parent will become bound at this point.
-            MyNotifyImportExporter parentExporter = parent.GetExportedValue<MyNotifyImportExporter>("MyNotifyImportExporter");
+            MyNotifyImportExporter parentExporter = parent.GetExportedValue<MyNotifyImportExporter>(
+                "MyNotifyImportExporter"
+            );
             parent.Compose(parentBatch);
             Assert.Equal(1, parentImporter.ImportCompletedCallCount);
             Assert.Equal(1, parentExporter.ImportCompletedCallCount);
 
-            MyNotifyImportExporter childExporter = child.GetExportedValue<MyNotifyImportExporter>("MyNotifyImportExporter");
+            MyNotifyImportExporter childExporter = child.GetExportedValue<MyNotifyImportExporter>(
+                "MyNotifyImportExporter"
+            );
             Assert.Equal(1, childExporter.ImportCompletedCallCount);
         }
 
@@ -215,10 +231,14 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assert.Equal(1, parentImporter.ImportCompletedCallCount);
             Assert.Equal(1, childImporter.ImportCompletedCallCount);
 
-            MyNotifyImportExporter parentExporter = parent.GetExportedValue<MyNotifyImportExporter>("MyNotifyImportExporter");
+            MyNotifyImportExporter parentExporter = parent.GetExportedValue<MyNotifyImportExporter>(
+                "MyNotifyImportExporter"
+            );
             Assert.Equal(1, parentExporter.ImportCompletedCallCount);
 
-            MyNotifyImportExporter childExporter = child.GetExportedValue<MyNotifyImportExporter>("MyNotifyImportExporter");
+            MyNotifyImportExporter childExporter = child.GetExportedValue<MyNotifyImportExporter>(
+                "MyNotifyImportExporter"
+            );
             Assert.Equal(1, childExporter.ImportCompletedCallCount);
         }
 
@@ -230,7 +250,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             CompositionContainer container = new CompositionContainer(cat);
 
             NotifyImportExportee.InstanceCount = 0;
-            NotifyImportExportsLazy notifyee = container.GetExportedValue<NotifyImportExportsLazy>("NotifyImportExportsLazy");
+            NotifyImportExportsLazy notifyee = container.GetExportedValue<NotifyImportExportsLazy>(
+                "NotifyImportExportsLazy"
+            );
             Assert.NotNull(notifyee);
             Assert.NotNull(notifyee.Imports);
             Assert.True(notifyee.NeedRefresh);
@@ -251,7 +273,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             CompositionContainer container = new CompositionContainer(cat);
 
             NotifyImportExportee.InstanceCount = 0;
-            var notifyee = container.GetExportedValue<NotifyImportExportsEager>("NotifyImportExportsEager");
+            var notifyee = container.GetExportedValue<NotifyImportExportsEager>(
+                "NotifyImportExportsEager"
+            );
             Assert.NotNull(notifyee);
             Assert.NotNull(notifyee.Imports);
             Assert.Equal(3, notifyee.Imports.Count);
@@ -279,41 +303,28 @@ namespace System.ComponentModel.Composition.AttributedModel
 
     public class NotifyImportExporter
     {
-
-        public NotifyImportExporter()
-        {
-        }
+        public NotifyImportExporter() { }
 
         [Export()]
         [ExportMetadata("Filter", false)]
         public NotifyImportExportee Export1
         {
-            get
-            {
-                return new NotifyImportExportee(1);
-            }
+            get { return new NotifyImportExportee(1); }
         }
 
         [Export()]
         [ExportMetadata("Filter", true)]
         public NotifyImportExportee Export2
         {
-            get
-            {
-                return new NotifyImportExportee(2);
-            }
+            get { return new NotifyImportExportee(2); }
         }
 
         [Export()]
         [ExportMetadata("Filter", false)]
         public NotifyImportExportee Export3
         {
-            get
-            {
-                return new NotifyImportExportee(3);
-            }
+            get { return new NotifyImportExportee(3); }
         }
-
     }
 
     [Export("NotifyImportExportsLazy")]
@@ -325,7 +336,9 @@ namespace System.ComponentModel.Composition.AttributedModel
         }
 
         [ImportMany(typeof(NotifyImportExportee))]
-        public Collection<Lazy<NotifyImportExportee, IDictionary<string, object>>> Imports { get; set; }
+        public Collection<
+            Lazy<NotifyImportExportee, IDictionary<string, object>>
+        > Imports { get; set; }
 
         public bool NeedRefresh { get; set; }
 
@@ -334,7 +347,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             NeedRefresh = true;
         }
 
-        internal Collection<NotifyImportExportee> realImports = new Collection<NotifyImportExportee>();
+        internal Collection<NotifyImportExportee> realImports =
+            new Collection<NotifyImportExportee>();
 
         public Collection<NotifyImportExportee> RealImports
         {
@@ -360,12 +374,12 @@ namespace System.ComponentModel.Composition.AttributedModel
     [Export("NotifyImportExportsEager")]
     public class NotifyImportExportsEager : IPartImportsSatisfiedNotification
     {
-        public NotifyImportExportsEager()
-        {
-        }
+        public NotifyImportExportsEager() { }
 
         [ImportMany]
-        public Collection<Lazy<NotifyImportExportee, IDictionary<string, object>>> Imports { get; set; }
+        public Collection<
+            Lazy<NotifyImportExportee, IDictionary<string, object>>
+        > Imports { get; set; }
 
         public void OnImportsSatisfied()
         {
@@ -379,14 +393,12 @@ namespace System.ComponentModel.Composition.AttributedModel
             }
         }
 
-        internal Collection<NotifyImportExportee> realImports = new Collection<NotifyImportExportee>();
+        internal Collection<NotifyImportExportee> realImports =
+            new Collection<NotifyImportExportee>();
 
         public Collection<NotifyImportExportee> RealImports
         {
-            get
-            {
-                return realImports;
-            }
+            get { return realImports; }
         }
     }
 
@@ -423,10 +435,7 @@ namespace System.ComponentModel.Composition.AttributedModel
 
         public bool AreAllImportsFullyComposed
         {
-            get
-            {
-                return this.AreAllImportsSet && this.FullyComposedImport.AreAllImportsSet;
-            }
+            get { return this.AreAllImportsSet && this.FullyComposedImport.AreAllImportsSet; }
         }
     }
 
@@ -447,10 +456,7 @@ namespace System.ComponentModel.Composition.AttributedModel
 
         public bool AreAllImportsFullyComposed
         {
-            get
-            {
-                return this.AreAllImportsSet && this.FullyComposedImport.AreAllImportsSet;
-            }
+            get { return this.AreAllImportsSet && this.FullyComposedImport.AreAllImportsSet; }
         }
     }
 

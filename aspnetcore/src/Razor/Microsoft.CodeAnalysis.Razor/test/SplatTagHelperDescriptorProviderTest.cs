@@ -31,15 +31,22 @@ namespace Microsoft.CodeAnalysis.Razor
             Assert.Empty(item.Diagnostics);
             Assert.False(item.HasErrors);
             Assert.Equal(ComponentMetadata.Splat.TagHelperKind, item.Kind);
-            Assert.Equal(bool.TrueString, item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]);
-            Assert.Equal(ComponentMetadata.Splat.RuntimeName, item.Metadata[TagHelperMetadata.Runtime.Name]);
+            Assert.Equal(
+                bool.TrueString,
+                item.Metadata[TagHelperMetadata.Common.ClassifyAttributesOnly]
+            );
+            Assert.Equal(
+                ComponentMetadata.Splat.RuntimeName,
+                item.Metadata[TagHelperMetadata.Runtime.Name]
+            );
             Assert.False(item.IsDefaultKind());
             Assert.False(item.KindUsesDefaultTagHelperRuntime());
             Assert.True(item.CaseSensitive);
 
             Assert.Equal(
                 "Merges a collection of attributes into the current element or component.",
-                item.Documentation);
+                item.Documentation
+            );
 
             Assert.Equal("Microsoft.AspNetCore.Components", item.AssemblyName);
             Assert.Equal("Attributes", item.Name);
@@ -57,9 +64,15 @@ namespace Microsoft.CodeAnalysis.Razor
             Assert.Empty(requiredAttribute.Diagnostics);
             Assert.Equal("@attributes", requiredAttribute.DisplayName);
             Assert.Equal("@attributes", requiredAttribute.Name);
-            Assert.Equal(RequiredAttributeDescriptor.NameComparisonMode.FullMatch, requiredAttribute.NameComparison);
+            Assert.Equal(
+                RequiredAttributeDescriptor.NameComparisonMode.FullMatch,
+                requiredAttribute.NameComparison
+            );
             Assert.Null(requiredAttribute.Value);
-            Assert.Equal(RequiredAttributeDescriptor.ValueComparisonMode.None, requiredAttribute.ValueComparison);
+            Assert.Equal(
+                RequiredAttributeDescriptor.ValueComparisonMode.None,
+                requiredAttribute.ValueComparison
+            );
 
             var attribute = Assert.Single(item.BoundAttributes);
             Assert.Empty(attribute.Diagnostics);
@@ -74,11 +87,15 @@ namespace Microsoft.CodeAnalysis.Razor
 
             Assert.Equal(
                 "Merges a collection of attributes into the current element or component.",
-                attribute.Documentation);
+                attribute.Documentation
+            );
 
             Assert.Equal("@attributes", attribute.Name);
             Assert.Equal("Attributes", attribute.GetPropertyName());
-            Assert.Equal("object Microsoft.AspNetCore.Components.Attributes.Attributes", attribute.DisplayName);
+            Assert.Equal(
+                "object Microsoft.AspNetCore.Components.Attributes.Attributes",
+                attribute.DisplayName
+            );
             Assert.Equal("System.Object", attribute.TypeName);
             Assert.False(attribute.IsStringProperty);
             Assert.False(attribute.IsBooleanProperty);

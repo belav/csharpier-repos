@@ -61,7 +61,6 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             Assert.Equal("TypePrefix", metadata.BinderModelName);
         }
 
-
         [Fact]
         public void ModelMetadataProvider_ReadsScaffoldColumnAttribute_ForShowForDisplay()
         {
@@ -72,7 +71,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Act & Assert
             Assert.True(provider.GetMetadataForProperty(type, "NoAttribute").ShowForDisplay);
             Assert.True(provider.GetMetadataForProperty(type, "ScaffoldColumnTrue").ShowForDisplay);
-            Assert.False(provider.GetMetadataForProperty(type, "ScaffoldColumnFalse").ShowForDisplay);
+            Assert.False(
+                provider.GetMetadataForProperty(type, "ScaffoldColumnFalse").ShowForDisplay
+            );
         }
 
         [Fact]
@@ -93,7 +94,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             // Arrange
             var provider = CreateProvider();
-            var metadata = provider.GetMetadataForType(modelType: typeof(ClassWithHiddenProperties));
+            var metadata = provider.GetMetadataForType(
+                modelType: typeof(ClassWithHiddenProperties)
+            );
             var property = metadata.Properties["DirectlyHidden"];
 
             // Act
@@ -155,7 +158,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             // Act
-            var propertyMetadata = provider.GetMetadataForProperty(typeof(Person), nameof(Person.Parent));
+            var propertyMetadata = provider.GetMetadataForProperty(
+                typeof(Person),
+                nameof(Person.Parent)
+            );
 
             // Assert
             Assert.Equal("PersonType", propertyMetadata.BinderModelName);
@@ -168,7 +174,10 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             var provider = CreateProvider();
 
             // Act
-            var propertyMetadata = provider.GetMetadataForProperty(typeof(Person), nameof(Person.GrandParent));
+            var propertyMetadata = provider.GetMetadataForProperty(
+                typeof(Person),
+                nameof(Person.GrandParent)
+            );
 
             // Assert
             Assert.Equal("GrandParentProperty", propertyMetadata.BinderModelName);
@@ -180,53 +189,58 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             {
                 return new TheoryData<object, Func<ModelMetadata, string>>
                 {
+                    { new DataTypeAttribute("value"), metadata => metadata.DataTypeName },
                     {
-                        new DataTypeAttribute("value"), metadata => metadata.DataTypeName
+                        new DataTypeWithCustomDisplayFormat(),
+                        metadata => metadata.DisplayFormatString
                     },
+                    { new DataTypeWithCustomEditFormat(), metadata => metadata.EditFormatString },
                     {
-                        new DataTypeWithCustomDisplayFormat(), metadata => metadata.DisplayFormatString
+                        new DisplayAttribute { Description = "value" },
+                        metadata => metadata.Description
                     },
-                    {
-                        new DataTypeWithCustomEditFormat(), metadata => metadata.EditFormatString
-                    },
-                    {
-                        new DisplayAttribute { Description = "value" }, metadata => metadata.Description
-                    },
-                    {
-                        new DisplayAttribute { Name = "value" }, metadata => metadata.DisplayName
-                    },
-                    {
-                        new DisplayAttribute { Prompt = "value" }, metadata => metadata.Placeholder
-                    },
+                    { new DisplayAttribute { Name = "value" }, metadata => metadata.DisplayName },
+                    { new DisplayAttribute { Prompt = "value" }, metadata => metadata.Placeholder },
                     {
                         new DisplayFormatAttribute { DataFormatString = "value" },
                         metadata => metadata.DisplayFormatString
                     },
                     {
                         // DisplayFormatString does not ignore [DisplayFormat] if ApplyFormatInEditMode==true.
-                        new DisplayFormatAttribute { ApplyFormatInEditMode = true, DataFormatString = "value" },
+                        new DisplayFormatAttribute
+                        {
+                            ApplyFormatInEditMode = true,
+                            DataFormatString = "value"
+                        },
                         metadata => metadata.DisplayFormatString
                     },
                     {
-                        new DisplayFormatAttribute { ApplyFormatInEditMode = true, DataFormatString = "value" },
+                        new DisplayFormatAttribute
+                        {
+                            ApplyFormatInEditMode = true,
+                            DataFormatString = "value"
+                        },
                         metadata => metadata.EditFormatString
                     },
                     {
-                        new DisplayFormatAttribute { NullDisplayText = "value" }, metadata => metadata.NullDisplayText
+                        new DisplayFormatAttribute { NullDisplayText = "value" },
+                        metadata => metadata.NullDisplayText
                     },
                     {
-                        new TestModelNameProvider { Name = "value" }, metadata => metadata.BinderModelName
+                        new TestModelNameProvider { Name = "value" },
+                        metadata => metadata.BinderModelName
                     },
-                    {
-                         new UIHintAttribute("value"), metadata => metadata.TemplateHint
-                    },
+                    { new UIHintAttribute("value"), metadata => metadata.TemplateHint },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(ExpectedAttributeDataStrings))]
-        public void AttributesOverrideMetadataStrings(object attribute, Func<ModelMetadata, string> accessor)
+        public void AttributesOverrideMetadataStrings(
+            object attribute,
+            Func<ModelMetadata, string> accessor
+        )
         {
             // Arrange
             var attributes = new[] { attribute };
@@ -257,7 +271,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             Assert.Equal("Property", result);
         }
 
-        public static TheoryData<Attribute, Func<ModelMetadata, bool>, bool> ExpectedAttributeDataBooleans
+        public static TheoryData<
+            Attribute,
+            Func<ModelMetadata, bool>,
+            bool
+        > ExpectedAttributeDataBooleans
         {
             get
             {
@@ -292,7 +310,11 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         false
                     },
                     {
-                        new DisplayFormatAttribute { ApplyFormatInEditMode = true, DataFormatString = "value" },
+                        new DisplayFormatAttribute
+                        {
+                            ApplyFormatInEditMode = true,
+                            DataFormatString = "value"
+                        },
                         metadata => metadata.HasNonDefaultEditFormat,
                         true
                     },
@@ -328,14 +350,15 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                     },
                     {
                         new HiddenInputAttribute(),
-                        metadata => string.Equals("HiddenInput", metadata.TemplateHint, StringComparison.Ordinal),
+                        metadata =>
+                            string.Equals(
+                                "HiddenInput",
+                                metadata.TemplateHint,
+                                StringComparison.Ordinal
+                            ),
                         true
                     },
-                    {
-                        new RequiredAttribute(),
-                        metadata => metadata.IsRequired,
-                        true
-                    },
+                    { new RequiredAttribute(), metadata => metadata.IsRequired, true },
                 };
             }
         }
@@ -345,7 +368,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void AttributesOverrideMetadataBooleans(
             Attribute attribute,
             Func<ModelMetadata, bool> accessor,
-            bool expectedResult)
+            bool expectedResult
+        )
         {
             // Arrange
             var attributes = new[] { attribute };
@@ -365,30 +389,14 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             {
                 return new TheoryData<DisplayAttribute, int>
                 {
-                    {
-                        new DisplayAttribute(), ModelMetadata.DefaultOrder
-                    },
-                    {
-                        new DisplayAttribute { Order = int.MinValue }, int.MinValue
-                    },
-                    {
-                        new DisplayAttribute { Order = -100 }, -100
-                    },
-                    {
-                        new DisplayAttribute { Order = -1 }, -1
-                    },
-                    {
-                        new DisplayAttribute { Order = 0 }, 0
-                    },
-                    {
-                        new DisplayAttribute { Order = 1 }, 1
-                    },
-                    {
-                        new DisplayAttribute { Order = 200 }, 200
-                    },
-                    {
-                        new DisplayAttribute { Order = int.MaxValue }, int.MaxValue
-                    },
+                    { new DisplayAttribute(), ModelMetadata.DefaultOrder },
+                    { new DisplayAttribute { Order = int.MinValue }, int.MinValue },
+                    { new DisplayAttribute { Order = -100 }, -100 },
+                    { new DisplayAttribute { Order = -1 }, -1 },
+                    { new DisplayAttribute { Order = 0 }, 0 },
+                    { new DisplayAttribute { Order = 1 }, 1 },
+                    { new DisplayAttribute { Order = 200 }, 200 },
+                    { new DisplayAttribute { Order = int.MaxValue }, int.MaxValue },
                 };
             }
         }
@@ -665,9 +673,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void IsRequired_DefaultsToTrueForValueType()
         {
             // Arrange
-            var attributes = new object[]
-            {
-            };
+            var attributes = new object[] {  };
 
             var provider = CreateProvider(attributes);
 
@@ -682,9 +688,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void IsRequired_DefaultsToFalseForReferenceType()
         {
             // Arrange
-            var attributes = new object[]
-            {
-            };
+            var attributes = new object[] {  };
 
             var provider = CreateProvider(attributes);
 
@@ -704,7 +708,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Act
             var metadata = provider.GetMetadataForProperty(
                 typeof(RequiredMember),
-                nameof(RequiredMember.RequiredProperty));
+                nameof(RequiredMember.RequiredProperty)
+            );
 
             // Assert
             Assert.True(metadata.IsRequired);
@@ -719,7 +724,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Act
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ClassWithDataMemberIsRequiredTrue),
-                nameof(ClassWithDataMemberIsRequiredTrue.StringProperty));
+                nameof(ClassWithDataMemberIsRequiredTrue.StringProperty)
+            );
 
             // Assert
             Assert.True(metadata.IsBindingRequired);
@@ -734,7 +740,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Act
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ClassWithDataMemberIsRequiredFalse),
-                nameof(ClassWithDataMemberIsRequiredFalse.StringProperty));
+                nameof(ClassWithDataMemberIsRequiredFalse.StringProperty)
+            );
 
             // Assert
             Assert.False(metadata.IsBindingRequired);
@@ -749,7 +756,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Act
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ClassWithDataMemberIsRequiredTrueWithoutDataContract),
-                nameof(ClassWithDataMemberIsRequiredTrueWithoutDataContract.StringProperty));
+                nameof(ClassWithDataMemberIsRequiredTrueWithoutDataContract.StringProperty)
+            );
 
             // Assert
             Assert.False(metadata.IsBindingRequired);
@@ -764,7 +772,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Act
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ClassWithPublicSetProperty),
-                nameof(ClassWithPublicSetProperty.StringProperty));
+                nameof(ClassWithPublicSetProperty.StringProperty)
+            );
 
             // Assert
             Assert.NotNull(metadata.PropertySetter);
@@ -780,7 +789,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Act
             var metadata = metadataProvider.GetMetadataForProperty(
                 typeof(ClassWithPrivateSetProperty),
-                nameof(ClassWithPrivateSetProperty.StringProperty));
+                nameof(ClassWithPrivateSetProperty.StringProperty)
+            );
 
             // Assert
             Assert.Null(metadata.PropertySetter);
@@ -933,10 +943,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         {
             public DataTypeWithCustomDisplayFormat() : base("Custom datatype")
             {
-                DisplayFormat = new DisplayFormatAttribute
-                {
-                    DataFormatString = "value",
-                };
+                DisplayFormat = new DisplayFormatAttribute { DataFormatString = "value", };
             }
         }
 
@@ -975,13 +982,9 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             [NonTypeBasedBinder(Name = "GrandParentProperty")]
             public Person GrandParent { get; set; }
 
-            public void Update(Person person)
-            {
-            }
+            public void Update(Person person) { }
 
-            public void Save([NonTypeBasedBinder(Name = "PersonParameter")] Person person)
-            {
-            }
+            public void Save([NonTypeBasedBinder(Name = "PersonParameter")] Person person) { }
         }
 
         private class ScaffoldColumnModel
@@ -1048,15 +1051,19 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
 
             public AttributeInjectModelMetadataProvider(object[] attributes)
                 : base(
-                      new DefaultCompositeMetadataDetailsProvider(new IMetadataDetailsProvider[]
-                      {
-                          new DefaultBindingMetadataProvider(),
-                          new DataAnnotationsMetadataProvider(
-                              new MvcOptions(),
-                              Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-                              stringLocalizerFactory: null),
-                      }),
-                      Options.Create(new MvcOptions()))
+                    new DefaultCompositeMetadataDetailsProvider(
+                        new IMetadataDetailsProvider[]
+                        {
+                            new DefaultBindingMetadataProvider(),
+                            new DataAnnotationsMetadataProvider(
+                                new MvcOptions(),
+                                Options.Create(new MvcDataAnnotationsLocalizationOptions()),
+                                stringLocalizerFactory: null
+                            ),
+                        }
+                    ),
+                    Options.Create(new MvcOptions())
+                )
             {
                 _attributes = attributes;
             }
@@ -1071,25 +1078,34 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
                         new ModelAttributes(
                             _attributes.Concat(entry.ModelAttributes.TypeAttributes).ToArray(),
                             Array.Empty<object>(),
-                            Array.Empty<object>()));
+                            Array.Empty<object>()
+                        )
+                    );
                 }
 
                 return entry;
             }
 
-            protected override DefaultMetadataDetails[] CreatePropertyDetails(ModelMetadataIdentity key)
+            protected override DefaultMetadataDetails[] CreatePropertyDetails(
+                ModelMetadataIdentity key
+            )
             {
                 var entries = base.CreatePropertyDetails(key);
-                return entries.Select(e =>
-                {
-                    return new DefaultMetadataDetails(
-                        e.Key,
-                        new ModelAttributes(
-                            e.ModelAttributes.TypeAttributes,
-                            _attributes.Concat(e.ModelAttributes.PropertyAttributes),
-                            Array.Empty<object>()));
-                })
-                .ToArray();
+                return entries
+                    .Select(
+                        e =>
+                        {
+                            return new DefaultMetadataDetails(
+                                e.Key,
+                                new ModelAttributes(
+                                    e.ModelAttributes.TypeAttributes,
+                                    _attributes.Concat(e.ModelAttributes.PropertyAttributes),
+                                    Array.Empty<object>()
+                                )
+                            );
+                        }
+                    )
+                    .ToArray();
             }
         }
     }

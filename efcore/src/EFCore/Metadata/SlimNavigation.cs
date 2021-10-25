@@ -33,8 +33,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             FieldInfo? fieldInfo,
             SlimForeignKey foreignKey,
             PropertyAccessMode propertyAccessMode,
-            bool eagerLoaded)
-            : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+            bool eagerLoaded
+        ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
         {
             ClrType = clrType;
             ForeignKey = foreignKey;
@@ -60,15 +60,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         public override SlimEntityType DeclaringEntityType
         {
             [DebuggerStepThrough]
-            get => ((IReadOnlyNavigation)this).IsOnDependent ? ForeignKey.DeclaringEntityType : ForeignKey.PrincipalEntityType;
+            get =>
+                ((IReadOnlyNavigation)this).IsOnDependent
+                    ? ForeignKey.DeclaringEntityType
+                    : ForeignKey.PrincipalEntityType;
         }
 
         /// <summary>
         ///     Returns a string that represents the current object.
         /// </summary>
         /// <returns> A string that represents the current object. </returns>
-        public override string ToString()
-            => ((IReadOnlyNavigation)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+        public override string ToString() =>
+            ((IReadOnlyNavigation)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -77,10 +80,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         [EntityFrameworkInternal]
-        public virtual DebugView DebugView
-            => new(
-                () => ((IReadOnlyNavigation)this).ToDebugString(MetadataDebugStringOptions.ShortDefault),
-                () => ((IReadOnlyNavigation)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+        public virtual DebugView DebugView =>
+            new(
+                () =>
+                    ((IReadOnlyNavigation)this).ToDebugString(
+                        MetadataDebugStringOptions.ShortDefault
+                    ),
+                () =>
+                    ((IReadOnlyNavigation)this).ToDebugString(
+                        MetadataDebugStringOptions.LongDefault
+                    )
+            );
 
         /// <inheritdoc/>
         IReadOnlyForeignKey IReadOnlyNavigation.ForeignKey
@@ -91,8 +101,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         /// <inheritdoc/>
         [DebuggerStepThrough]
-        IClrCollectionAccessor? INavigationBase.GetCollectionAccessor()
-            => NonCapturingLazyInitializer.EnsureInitialized(
+        IClrCollectionAccessor? INavigationBase.GetCollectionAccessor() =>
+            NonCapturingLazyInitializer.EnsureInitialized(
                 ref _collectionAccessor,
                 ref _collectionAccessorInitialized,
                 this,
@@ -100,6 +110,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     navigation.EnsureReadOnly();
                     return new ClrCollectionAccessorFactory().Create(navigation);
-                });
+                }
+            );
     }
 }

@@ -66,7 +66,8 @@ namespace Microsoft.AspNetCore.Components.Server
             IDataProtectionProvider dataProtectionProvider,
             ILogger<ServerComponentDeserializer> logger,
             RootComponentTypeCache rootComponentTypeCache,
-            ComponentParameterDeserializer parametersDeserializer)
+            ComponentParameterDeserializer parametersDeserializer
+        )
         {
             // When we protect the data we use a time-limited data protector with the
             // limits established in 'ServerComponentSerializationSettings.DataExpiration'
@@ -84,9 +85,15 @@ namespace Microsoft.AspNetCore.Components.Server
             _parametersDeserializer = parametersDeserializer;
         }
 
-        public bool TryDeserializeComponentDescriptorCollection(string serializedComponentRecords, out List<ComponentDescriptor> descriptors)
+        public bool TryDeserializeComponentDescriptorCollection(
+            string serializedComponentRecords,
+            out List<ComponentDescriptor> descriptors
+        )
         {
-            var markers = JsonSerializer.Deserialize<IEnumerable<ServerComponentMarker>>(serializedComponentRecords, ServerComponentSerializationSettings.JsonSerializationOptions);
+            var markers = JsonSerializer.Deserialize<IEnumerable<ServerComponentMarker>>(
+                serializedComponentRecords,
+                ServerComponentSerializationSettings.JsonSerializationOptions
+            );
             descriptors = new List<ComponentDescriptor>();
             int lastSequence = -1;
 
@@ -126,15 +133,26 @@ namespace Microsoft.AspNetCore.Components.Server
                     }
                     else
                     {
-                        Log.OutOfSequenceDescriptor(_logger, lastSequence, serverComponent.Sequence);
+                        Log.OutOfSequenceDescriptor(
+                            _logger,
+                            lastSequence,
+                            serverComponent.Sequence
+                        );
                     }
                     descriptors.Clear();
                     return false;
                 }
 
-                if (lastSequence != -1 && !previousInstance.InvocationId.Equals(serverComponent.InvocationId))
+                if (
+                    lastSequence != -1
+                    && !previousInstance.InvocationId.Equals(serverComponent.InvocationId)
+                )
                 {
-                    Log.MismatchedInvocationId(_logger, previousInstance.InvocationId.ToString("N"), serverComponent.InvocationId.ToString("N"));
+                    Log.MismatchedInvocationId(
+                        _logger,
+                        previousInstance.InvocationId.ToString("N"),
+                        serverComponent.InvocationId.ToString("N")
+                    );
                     descriptors.Clear();
                     return false;
                 }
@@ -149,7 +167,9 @@ namespace Microsoft.AspNetCore.Components.Server
             return true;
         }
 
-        private (ComponentDescriptor, ServerComponent) DeserializeServerComponent(ServerComponentMarker record)
+        private (ComponentDescriptor, ServerComponent) DeserializeServerComponent(
+            ServerComponentMarker record
+        )
         {
             string unprotected;
             try
@@ -169,7 +189,8 @@ namespace Microsoft.AspNetCore.Components.Server
             {
                 serverComponent = JsonSerializer.Deserialize<ServerComponent>(
                     unprotected,
-                    ServerComponentSerializationSettings.JsonSerializationOptions);
+                    ServerComponentSerializationSettings.JsonSerializationOptions
+                );
             }
             catch (Exception e)
             {
@@ -177,21 +198,33 @@ namespace Microsoft.AspNetCore.Components.Server
                 return default;
             }
 
-            var componentType = _rootComponentTypeCache
-                .GetRootComponent(serverComponent.AssemblyName, serverComponent.TypeName);
+            var componentType = _rootComponentTypeCache.GetRootComponent(
+                serverComponent.AssemblyName,
+                serverComponent.TypeName
+            );
 
             if (componentType == null)
             {
-                Log.FailedToFindComponent(_logger, serverComponent.TypeName, serverComponent.AssemblyName);
+                Log.FailedToFindComponent(
+                    _logger,
+                    serverComponent.TypeName,
+                    serverComponent.AssemblyName
+                );
                 return default;
             }
 
-            if (!_parametersDeserializer.TryDeserializeParameters(serverComponent.ParameterDefinitions, serverComponent.ParameterValues, out var parameters))
+            if (
+                !_parametersDeserializer.TryDeserializeParameters(
+                    serverComponent.ParameterDefinitions,
+                    serverComponent.ParameterValues,
+                    out var parameters
+                )
+            )
             {
                 // TryDeserializeParameters does appropriate logging.
                 return default;
             }
-            
+
             var componentDescriptor = new ComponentDescriptor
             {
                 ComponentType = componentType,
@@ -208,73 +241,110 @@ namespace Microsoft.AspNetCore.Components.Server
                 LoggerMessage.Define(
                     LogLevel.Debug,
                     new EventId(1, "FailedToDeserializeDescriptor"),
-                    "Failed to deserialize the component descriptor.");
+                    "Failed to deserialize the component descriptor."
+                );
 
-            private static readonly Action<ILogger, string, string, Exception> _failedToFindComponent =
-                LoggerMessage.Define<string, string>(
-                    LogLevel.Debug,
-                    new EventId(2, "FailedToFindComponent"),
-                    "Failed to find component '{ComponentName}' in assembly '{Assembly}'.");
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                Exception
+            > _failedToFindComponent = LoggerMessage.Define<string, string>(
+                LogLevel.Debug,
+                new EventId(2, "FailedToFindComponent"),
+                "Failed to find component '{ComponentName}' in assembly '{Assembly}'."
+            );
 
             private static readonly Action<ILogger, Exception> _failedToUnprotectDescriptor =
                 LoggerMessage.Define(
                     LogLevel.Debug,
                     new EventId(3, "FailedToUnprotectDescriptor"),
-                    "Failed to unprotect the component descriptor.");
+                    "Failed to unprotect the component descriptor."
+                );
 
             private static readonly Action<ILogger, string, Exception> _invalidMarkerType =
                 LoggerMessage.Define<string>(
                     LogLevel.Debug,
                     new EventId(4, "InvalidMarkerType"),
-                    "Invalid component marker type '{}'.");
+                    "Invalid component marker type '{}'."
+                );
 
             private static readonly Action<ILogger, Exception> _missingMarkerDescriptor =
                 LoggerMessage.Define(
                     LogLevel.Debug,
                     new EventId(5, "MissingMarkerDescriptor"),
-                    "The component marker is missing the descriptor.");
+                    "The component marker is missing the descriptor."
+                );
 
-            private static readonly Action<ILogger, string, string, Exception> _mismatchedInvocationId =
-                LoggerMessage.Define<string, string>(
-                    LogLevel.Debug,
-                    new EventId(6, "MismatchedInvocationId"),
-                    "The descriptor invocationId is '{invocationId}' and got a descriptor with invocationId '{currentInvocationId}'.");
+            private static readonly Action<
+                ILogger,
+                string,
+                string,
+                Exception
+            > _mismatchedInvocationId = LoggerMessage.Define<string, string>(
+                LogLevel.Debug,
+                new EventId(6, "MismatchedInvocationId"),
+                "The descriptor invocationId is '{invocationId}' and got a descriptor with invocationId '{currentInvocationId}'."
+            );
 
             private static readonly Action<ILogger, int, int, Exception> _outOfSequenceDescriptor =
                 LoggerMessage.Define<int, int>(
                     LogLevel.Debug,
                     new EventId(7, "OutOfSequenceDescriptor"),
-                    "The last descriptor sequence was '{lastSequence}' and got a descriptor with sequence '{receivedSequence}'.");
+                    "The last descriptor sequence was '{lastSequence}' and got a descriptor with sequence '{receivedSequence}'."
+                );
 
-            private static readonly Action<ILogger, int, Exception> _descriptorSequenceMustStartAtZero =
-                LoggerMessage.Define<int>(
-                    LogLevel.Debug,
-                    new EventId(8, "DescriptorSequenceMustStartAtZero"),
-                    "The descriptor sequence '{sequence}' is an invalid start sequence.");
+            private static readonly Action<
+                ILogger,
+                int,
+                Exception
+            > _descriptorSequenceMustStartAtZero = LoggerMessage.Define<int>(
+                LogLevel.Debug,
+                new EventId(8, "DescriptorSequenceMustStartAtZero"),
+                "The descriptor sequence '{sequence}' is an invalid start sequence."
+            );
 
-            public static void FailedToDeserializeDescriptor(ILogger<ServerComponentDeserializer> logger, Exception e) =>
-                _failedToDeserializeDescriptor(logger, e);
+            public static void FailedToDeserializeDescriptor(
+                ILogger<ServerComponentDeserializer> logger,
+                Exception e
+            ) => _failedToDeserializeDescriptor(logger, e);
 
-            public static void FailedToFindComponent(ILogger<ServerComponentDeserializer> logger, string assemblyName, string typeName) =>
-                _failedToFindComponent(logger, assemblyName, typeName, null);
+            public static void FailedToFindComponent(
+                ILogger<ServerComponentDeserializer> logger,
+                string assemblyName,
+                string typeName
+            ) => _failedToFindComponent(logger, assemblyName, typeName, null);
 
-            public static void FailedToUnprotectDescriptor(ILogger<ServerComponentDeserializer> logger, Exception e) =>
-                _failedToUnprotectDescriptor(logger, e);
+            public static void FailedToUnprotectDescriptor(
+                ILogger<ServerComponentDeserializer> logger,
+                Exception e
+            ) => _failedToUnprotectDescriptor(logger, e);
 
-            public static void InvalidMarkerType(ILogger<ServerComponentDeserializer> logger, string markerType) =>
-                _invalidMarkerType(logger, markerType, null);
+            public static void InvalidMarkerType(
+                ILogger<ServerComponentDeserializer> logger,
+                string markerType
+            ) => _invalidMarkerType(logger, markerType, null);
 
-            public static void MissingMarkerDescriptor(ILogger<ServerComponentDeserializer> logger) =>
-                _missingMarkerDescriptor(logger, null);
+            public static void MissingMarkerDescriptor(
+                ILogger<ServerComponentDeserializer> logger
+            ) => _missingMarkerDescriptor(logger, null);
 
-            public static void MismatchedInvocationId(ILogger<ServerComponentDeserializer> logger, string invocationId, string currentInvocationId) =>
-                _mismatchedInvocationId(logger, invocationId, currentInvocationId, null);
+            public static void MismatchedInvocationId(
+                ILogger<ServerComponentDeserializer> logger,
+                string invocationId,
+                string currentInvocationId
+            ) => _mismatchedInvocationId(logger, invocationId, currentInvocationId, null);
 
-            public static void OutOfSequenceDescriptor(ILogger<ServerComponentDeserializer> logger, int lastSequence, int sequence) =>
-                _outOfSequenceDescriptor(logger, lastSequence, sequence, null);
+            public static void OutOfSequenceDescriptor(
+                ILogger<ServerComponentDeserializer> logger,
+                int lastSequence,
+                int sequence
+            ) => _outOfSequenceDescriptor(logger, lastSequence, sequence, null);
 
-            public static void DescriptorSequenceMustStartAtZero(ILogger<ServerComponentDeserializer> logger, int sequence) =>
-                _descriptorSequenceMustStartAtZero(logger, sequence, null);
+            public static void DescriptorSequenceMustStartAtZero(
+                ILogger<ServerComponentDeserializer> logger,
+                int sequence
+            ) => _descriptorSequenceMustStartAtZero(logger, sequence, null);
         }
     }
 }

@@ -19,7 +19,9 @@ namespace Microsoft.AspNetCore.Mvc.Core
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var helper = DefaultTemplatesUtilities.GetHtmlHelper(new ViewDataDictionary<TestModel>(metadataProvider));
+            var helper = DefaultTemplatesUtilities.GetHtmlHelper(
+                new ViewDataDictionary<TestModel>(metadataProvider)
+            );
             helper.ViewContext.ClientValidationEnabled = false;
             helper.ViewData.Model = new TestModel { Property1 = "propValue" };
 
@@ -28,9 +30,11 @@ namespace Microsoft.AspNetCore.Mvc.Core
 
             // Assert
             Assert.Equal(
-                "<textarea id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">" + Environment.NewLine +
-                "HtmlEncode[[propValue]]</textarea>",
-                HtmlContentUtilities.HtmlContentToString(textAreaResult));
+                "<textarea id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">"
+                    + Environment.NewLine
+                    + "HtmlEncode[[propValue]]</textarea>",
+                HtmlContentUtilities.HtmlContentToString(textAreaResult)
+            );
         }
 
         [Fact]
@@ -38,7 +42,9 @@ namespace Microsoft.AspNetCore.Mvc.Core
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var helper = DefaultTemplatesUtilities.GetHtmlHelper(new ViewDataDictionary<TestModel>(metadataProvider));
+            var helper = DefaultTemplatesUtilities.GetHtmlHelper(
+                new ViewDataDictionary<TestModel>(metadataProvider)
+            );
             helper.ViewContext.ClientValidationEnabled = false;
             helper.ViewData.Model = new TestModel { Property1 = "propValue" };
 
@@ -47,9 +53,11 @@ namespace Microsoft.AspNetCore.Mvc.Core
 
             // Assert
             Assert.Equal(
-                "<textarea id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">" + Environment.NewLine +
-                "HtmlEncode[[propValue]]</textarea>",
-                HtmlContentUtilities.HtmlContentToString(textAreaForResult));
+                "<textarea id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">"
+                    + Environment.NewLine
+                    + "HtmlEncode[[propValue]]</textarea>",
+                HtmlContentUtilities.HtmlContentToString(textAreaForResult)
+            );
         }
 
         [Fact]
@@ -57,7 +65,9 @@ namespace Microsoft.AspNetCore.Mvc.Core
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var helper = DefaultTemplatesUtilities.GetHtmlHelper(new ViewDataDictionary<TestModel>(metadataProvider));
+            var helper = DefaultTemplatesUtilities.GetHtmlHelper(
+                new ViewDataDictionary<TestModel>(metadataProvider)
+            );
             helper.ViewContext.ClientValidationEnabled = false;
             helper.ViewData.Model = new TestModel { Property1 = "propValue" };
 
@@ -66,9 +76,11 @@ namespace Microsoft.AspNetCore.Mvc.Core
 
             // Assert
             Assert.Equal(
-                "<textarea id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">" + Environment.NewLine +
-                "HtmlEncode[[myvalue]]</textarea>",
-                HtmlContentUtilities.HtmlContentToString(textAreaResult));
+                "<textarea id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">"
+                    + Environment.NewLine
+                    + "HtmlEncode[[myvalue]]</textarea>",
+                HtmlContentUtilities.HtmlContentToString(textAreaResult)
+            );
         }
 
         [Fact]
@@ -76,19 +88,25 @@ namespace Microsoft.AspNetCore.Mvc.Core
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var helper = DefaultTemplatesUtilities.GetHtmlHelper(new ViewDataDictionary<TestModel>(metadataProvider));
+            var helper = DefaultTemplatesUtilities.GetHtmlHelper(
+                new ViewDataDictionary<TestModel>(metadataProvider)
+            );
             helper.ViewContext.ClientValidationEnabled = false;
             helper.ViewData.Model = new TestModel { Property1 = "propValue" };
 
             // Act
-            var textAreaResult = helper.TextArea("Property1", htmlAttributes: new { attr = "value" });
+            var textAreaResult = helper.TextArea(
+                "Property1",
+                htmlAttributes: new { attr = "value" }
+            );
 
             // Assert
             Assert.Equal(
-                "<textarea attr=\"HtmlEncode[[value]]\" id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">" +
-                Environment.NewLine +
-                "HtmlEncode[[propValue]]</textarea>",
-                HtmlContentUtilities.HtmlContentToString(textAreaResult));
+                "<textarea attr=\"HtmlEncode[[value]]\" id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">"
+                    + Environment.NewLine
+                    + "HtmlEncode[[propValue]]</textarea>",
+                HtmlContentUtilities.HtmlContentToString(textAreaResult)
+            );
         }
 
         [Fact]
@@ -96,19 +114,25 @@ namespace Microsoft.AspNetCore.Mvc.Core
         {
             // Arrange
             var metadataProvider = new EmptyModelMetadataProvider();
-            var helper = DefaultTemplatesUtilities.GetHtmlHelper(new ViewDataDictionary<TestModel>(metadataProvider));
+            var helper = DefaultTemplatesUtilities.GetHtmlHelper(
+                new ViewDataDictionary<TestModel>(metadataProvider)
+            );
             helper.ViewContext.ClientValidationEnabled = false;
             helper.ViewData.Model = new TestModel { Property1 = "propValue" };
 
             // Act
-            var textAreaForResult = helper.TextAreaFor(m => m.Property1, htmlAttributes: new { attr = "value" });
+            var textAreaForResult = helper.TextAreaFor(
+                m => m.Property1,
+                htmlAttributes: new { attr = "value" }
+            );
 
             // Assert
             Assert.Equal(
-                "<textarea attr=\"HtmlEncode[[value]]\" id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">" +
-                Environment.NewLine +
-                "HtmlEncode[[propValue]]</textarea>",
-                HtmlContentUtilities.HtmlContentToString(textAreaForResult));
+                "<textarea attr=\"HtmlEncode[[value]]\" id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\">"
+                    + Environment.NewLine
+                    + "HtmlEncode[[propValue]]</textarea>",
+                HtmlContentUtilities.HtmlContentToString(textAreaForResult)
+            );
         }
 
         [Fact]
@@ -118,14 +142,22 @@ namespace Microsoft.AspNetCore.Mvc.Core
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
             // Act
-            var textAreaResult = helper.TextArea("Property1", value: "myvalue", rows: 1, columns: 2, htmlAttributes: new { attr = "value" });
+            var textAreaResult = helper.TextArea(
+                "Property1",
+                value: "myvalue",
+                rows: 1,
+                columns: 2,
+                htmlAttributes: new { attr = "value" }
+            );
 
             // Assert
             Assert.Equal(
-                "<textarea attr=\"HtmlEncode[[value]]\" cols=\"HtmlEncode[[2]]\" id=\"HtmlEncode[[Property1]]\" " +
-                "name=\"HtmlEncode[[Property1]]\" rows=\"HtmlEncode[[1]]\">" + Environment.NewLine +
-                "HtmlEncode[[myvalue]]</textarea>",
-                HtmlContentUtilities.HtmlContentToString(textAreaResult));
+                "<textarea attr=\"HtmlEncode[[value]]\" cols=\"HtmlEncode[[2]]\" id=\"HtmlEncode[[Property1]]\" "
+                    + "name=\"HtmlEncode[[Property1]]\" rows=\"HtmlEncode[[1]]\">"
+                    + Environment.NewLine
+                    + "HtmlEncode[[myvalue]]</textarea>",
+                HtmlContentUtilities.HtmlContentToString(textAreaResult)
+            );
         }
 
         [Fact]
@@ -135,14 +167,21 @@ namespace Microsoft.AspNetCore.Mvc.Core
             var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
             // Act
-            var textAreaForResult = helper.TextAreaFor(m => m.Property1, rows: 1, columns: 2, htmlAttributes: new { attr = "value" });
+            var textAreaForResult = helper.TextAreaFor(
+                m => m.Property1,
+                rows: 1,
+                columns: 2,
+                htmlAttributes: new { attr = "value" }
+            );
 
             // Assert
             Assert.Equal(
-                "<textarea attr=\"HtmlEncode[[value]]\" cols=\"HtmlEncode[[2]]\" id=\"HtmlEncode[[Property1]]\" " +
-                "name=\"HtmlEncode[[Property1]]\" rows=\"HtmlEncode[[1]]\">" + Environment.NewLine +
-                "</textarea>",
-                HtmlContentUtilities.HtmlContentToString(textAreaForResult));
+                "<textarea attr=\"HtmlEncode[[value]]\" cols=\"HtmlEncode[[2]]\" id=\"HtmlEncode[[Property1]]\" "
+                    + "name=\"HtmlEncode[[Property1]]\" rows=\"HtmlEncode[[1]]\">"
+                    + Environment.NewLine
+                    + "</textarea>",
+                HtmlContentUtilities.HtmlContentToString(textAreaForResult)
+            );
         }
 
         private class TestModel
