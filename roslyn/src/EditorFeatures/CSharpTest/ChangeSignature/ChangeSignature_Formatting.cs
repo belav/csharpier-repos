@@ -468,7 +468,7 @@ class CustomAttribute : System.Attribute
 {
     public $$CustomAttribute(int x, int y) { }
 }";
-            var updatedSignature = new int[] {  };
+            var updatedSignature = new int[] { };
             var expectedUpdatedCode =
                 @"
 [Custom(

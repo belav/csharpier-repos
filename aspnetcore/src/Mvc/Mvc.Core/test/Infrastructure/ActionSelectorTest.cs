@@ -671,7 +671,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
             {
                 ActionConstraints = new List<IActionConstraintMetadata>()
                 {
-                    new ConstraintFactory() {  },
+                    new ConstraintFactory() { },
                 }
             };
 

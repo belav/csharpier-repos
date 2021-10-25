@@ -44,8 +44,8 @@ namespace System.Linq.Tests
         [Fact]
         public void BothEmpty()
         {
-            int[] first = {  };
-            int[] second = {  };
+            int[] first = { };
+            int[] second = { };
 
             Assert.True(first.SequenceEqual(second));
             Assert.True(FlipIsCollection(first).SequenceEqual(second));
@@ -137,7 +137,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyWithNonEmpty()
         {
-            int?[] first = {  };
+            int?[] first = { };
             int?[] second = { 2, 3, 4 };
 
             Assert.False(first.SequenceEqual(second));
@@ -150,7 +150,7 @@ namespace System.Linq.Tests
         public void NonEmptyWithEmpty()
         {
             int?[] first = { 2, 3, 4 };
-            int?[] second = {  };
+            int?[] second = { };
 
             Assert.False(first.SequenceEqual(second));
             Assert.False(FlipIsCollection(first).SequenceEqual(second));
@@ -222,7 +222,7 @@ namespace System.Linq.Tests
         public void FirstSourceNull()
         {
             int[] first = null;
-            int[] second = {  };
+            int[] second = { };
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "first",
@@ -233,7 +233,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SecondSourceNull()
         {
-            int[] first = {  };
+            int[] first = { };
             int[] second = null;
 
             AssertExtensions.Throws<ArgumentNullException>(

@@ -34,7 +34,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<InvalidOperationException>(
                 () => source.RunOnce().Aggregate((x, y) => x + y)
@@ -89,7 +89,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceAndSeed()
         {
-            int[] source = {  };
+            int[] source = { };
             long seed = 2;
             long expected = 2;
 
@@ -139,7 +139,7 @@ namespace System.Linq.Tests
         [Fact]
         public void NoElementsSeedResultSeletor()
         {
-            int[] source = {  };
+            int[] source = { };
             long seed = 2;
             double expected = 7;
 

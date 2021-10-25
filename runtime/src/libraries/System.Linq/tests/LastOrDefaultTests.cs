@@ -33,7 +33,7 @@ namespace System.Linq.Tests
 
         private static void TestEmptyIList<T>()
         {
-            T[] source = {  };
+            T[] source = { };
             T expected = default(T);
 
             Assert.IsAssignableFrom<IList<T>>(source);
@@ -43,7 +43,7 @@ namespace System.Linq.Tests
 
         private static void TestEmptyIListDefault<T>(T defaultValue)
         {
-            T[] source = {  };
+            T[] source = { };
 
             Assert.IsAssignableFrom<IList<T>>(source);
 
@@ -182,7 +182,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyIListSource()
         {
-            int?[] source = {  };
+            int?[] source = { };
 
             Assert.Null(source.LastOrDefault(x => true));
             Assert.Null(source.LastOrDefault(x => false));

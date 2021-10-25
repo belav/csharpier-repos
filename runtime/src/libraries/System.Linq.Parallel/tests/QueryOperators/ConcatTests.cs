@@ -108,7 +108,6 @@ namespace System.Linq.Parallel.Tests
             nameof(ConcatData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Concat_Longrunning(
@@ -168,7 +167,6 @@ namespace System.Linq.Parallel.Tests
             nameof(ConcatData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Concat_NotPipelined_Longrunning(

@@ -147,7 +147,7 @@ namespace TypeSystemTests
                 MethodSignatureFlags.None,
                 0,
                 _context.GetSignatureVariable(0, false),
-                new TypeDesc[0] {  }
+                new TypeDesc[0] { }
             );
             MethodDesc fooMethod = t.GetMethod("Foo", sig);
             Assert.NotNull(fooMethod);

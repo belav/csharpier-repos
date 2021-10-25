@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             IEnumerable<KeyValuePair<string, string>>? vars
         )
         {
-            vars = vars ?? new KeyValuePair<string, string>[] {  };
+            vars = vars ?? new KeyValuePair<string, string>[] { };
             if (!vars.Where(kvp => kvp.Key == "RoslynCommandLineLogFile").Any())
             {
                 var list = vars.ToList();

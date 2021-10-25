@@ -177,7 +177,7 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var factory = new OptionsFactory<FakeOptions>(
                 new IConfigureOptions<FakeOptions>[0],
-                new IPostConfigureOptions<FakeOptions>[] {  }
+                new IPostConfigureOptions<FakeOptions>[] { }
             );
 
             Assert.Equal("", factory.Create("").Message);

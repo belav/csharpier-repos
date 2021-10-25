@@ -40,7 +40,7 @@ namespace System.Data.Tests
             ds.ReadXml(xmlSR, XmlReadMode.ReadSchema);
             Text.StringBuilder sb = new System.Text.StringBuilder();
 
-            using (XmlWriter xw = XmlWriter.Create(sb, new XmlWriterSettings() {  }))
+            using (XmlWriter xw = XmlWriter.Create(sb, new XmlWriterSettings() { }))
             {
                 ds.WriteXml(xw, XmlWriteMode.WriteSchema);
             }

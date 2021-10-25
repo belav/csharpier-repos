@@ -292,7 +292,7 @@ namespace System.Data.Tests
                 null,
                 () =>
                 {
-                    fkc = new ForeignKeyConstraint(new DataColumn[] {  }, new DataColumn[] {  });
+                    fkc = new ForeignKeyConstraint(new DataColumn[] { }, new DataColumn[] { });
                 }
             );
 

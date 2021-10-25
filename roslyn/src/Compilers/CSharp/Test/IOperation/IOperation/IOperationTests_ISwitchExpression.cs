@@ -241,7 +241,7 @@ ISwitchExpressionOperation (2 arms) (OperationKind.SwitchExpression, Type: Syste
             Operand: 
               ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: ""Z"") (Syntax: '""Z""')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {  };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
                 expectedOperationTree,
@@ -1662,7 +1662,7 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {  };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
             string expectedFlowGraph =
                 @"
     Block[B0] - Entry

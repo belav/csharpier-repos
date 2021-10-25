@@ -134,7 +134,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             {
                 return new TheoryData<List<int>, List<int>>()
                 {
-                    { new List<int>() {  }, new List<int>() { 20 } },
+                    { new List<int>() { }, new List<int>() { 20 } },
                     { new List<int>() { 5, 10 }, new List<int>() { 5, 10, 20 } }
                 };
             }
@@ -230,7 +230,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
             {
                 return new TheoryData<IList, object, string, IList>()
                 {
-                    { new List<string>() {  }, "a", "-", new List<string>() { "a" } },
+                    { new List<string>() { }, "a", "-", new List<string>() { "a" } },
                     {
                         new List<string>() { "a", "b" },
                         "c",
@@ -292,7 +292,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
                 return new TheoryData<IList, object, string, IList>()
                 {
                     {
-                        new List<SimpleObject>() {  },
+                        new List<SimpleObject>() { },
                         sDto1,
                         "-",
                         new List<SimpleObject>() { sDto1 }
@@ -349,7 +349,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         }
 
         [Theory]
-        [InlineData(new int[] {  }, "0")]
+        [InlineData(new int[] { }, "0")]
         [InlineData(new[] { 10, 20 }, "-1")]
         [InlineData(new[] { 10, 20 }, "2")]
         public void Get_IndexOutOfBounds(int[] input, string position)
@@ -403,7 +403,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         }
 
         [Theory]
-        [InlineData(new int[] {  }, "0")]
+        [InlineData(new int[] { }, "0")]
         [InlineData(new[] { 10, 20 }, "-1")]
         [InlineData(new[] { 10, 20 }, "2")]
         public void Remove_IndexOutOfBounds(int[] input, string position)
@@ -432,7 +432,7 @@ namespace Microsoft.AspNetCore.JsonPatch.Internal
         [Theory]
         [InlineData(new[] { 10, 20 }, "0", new[] { 20 })]
         [InlineData(new[] { 10, 20 }, "1", new[] { 10 })]
-        [InlineData(new[] { 10 }, "0", new int[] {  })]
+        [InlineData(new[] { 10 }, "0", new int[] { })]
         public void Remove(int[] input, string position, int[] expected)
         {
             // Arrange

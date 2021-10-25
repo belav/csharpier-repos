@@ -32,12 +32,12 @@ namespace XmlFormattersWebSite.Controllers
 
         public IQueryable<Person> WrappedTypes_Empty()
         {
-            return (new Person[] {  }).AsQueryable();
+            return (new Person[] { }).AsQueryable();
         }
 
         public IQueryable<string> NonWrappedTypes_Empty()
         {
-            return (new string[] {  }).AsQueryable();
+            return (new string[] { }).AsQueryable();
         }
 
         public IQueryable<string> NonWrappedTypes_NullInstance()

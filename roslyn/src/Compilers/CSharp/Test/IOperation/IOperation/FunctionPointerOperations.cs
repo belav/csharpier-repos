@@ -157,7 +157,7 @@ IAddressOfOperation (OperationKind.AddressOf, Type: delegate*<System.Void>) (Syn
         null
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {  };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
             VerifyOperationTreeAndDiagnosticsForTest<PrefixUnaryExpressionSyntax>(
                 comp,

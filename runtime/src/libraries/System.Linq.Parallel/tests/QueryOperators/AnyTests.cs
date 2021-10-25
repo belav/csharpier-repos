@@ -88,7 +88,6 @@ namespace System.Linq.Parallel.Tests
             nameof(OnlyOneData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Any_OneFalse_Longrunning(int count, int position)
@@ -109,7 +108,6 @@ namespace System.Linq.Parallel.Tests
             nameof(OnlyOneData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Any_OneTrue_Longrunning(int count, int position)

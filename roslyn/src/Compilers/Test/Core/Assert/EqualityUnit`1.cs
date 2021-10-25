@@ -13,7 +13,7 @@ namespace Roslyn.Test.Utilities
     public sealed class EqualityUnit<T>
     {
         private static readonly ReadOnlyCollection<T> s_emptyCollection = new ReadOnlyCollection<T>(
-            new T[] {  }
+            new T[] { }
         );
 
         public readonly T Value;

@@ -333,13 +333,13 @@ namespace System.Collections.Immutable.Tests
         {
             return new List<SetTriad>
             {
-                new SetTriad(SetWith<int>(), new int[] {  }, true),
+                new SetTriad(SetWith<int>(), new int[] { }, true),
                 new SetTriad(SetWith<int>(5), new int[] { 5 }, true),
                 new SetTriad(SetWith<int>(5), new int[] { 5, 5 }, true),
                 new SetTriad(SetWith<int>(5, 8), new int[] { 5, 5 }, false),
                 new SetTriad(SetWith<int>(5, 8), new int[] { 5, 7 }, false),
                 new SetTriad(SetWith<int>(5, 8), new int[] { 5, 8 }, true),
-                new SetTriad(SetWith<int>(5), new int[] {  }, false),
+                new SetTriad(SetWith<int>(5), new int[] { }, false),
                 new SetTriad(SetWith<int>(), new int[] { 5 }, false),
                 new SetTriad(SetWith<int>(5, 8), new int[] { 5 }, false),
                 new SetTriad(SetWith<int>(5), new int[] { 5, 8 }, false),
@@ -351,12 +351,12 @@ namespace System.Collections.Immutable.Tests
         {
             return new List<SetTriad>
             {
-                new SetTriad(new int[] {  }, new int[] {  }, false),
-                new SetTriad(new int[] { 1 }, new int[] {  }, false),
+                new SetTriad(new int[] { }, new int[] { }, false),
+                new SetTriad(new int[] { 1 }, new int[] { }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2, 3 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 1, 2 }, true),
-                new SetTriad(new int[] {  }, new int[] { 1 }, true),
+                new SetTriad(new int[] { }, new int[] { 1 }, true),
             };
         }
 
@@ -364,10 +364,10 @@ namespace System.Collections.Immutable.Tests
         {
             var results = new List<SetTriad>
             {
-                new SetTriad(new int[] {  }, new int[] {  }, true),
+                new SetTriad(new int[] { }, new int[] { }, true),
                 new SetTriad(new int[] { 1 }, new int[] { 1 }, true),
                 new SetTriad(new int[] { 1, 2 }, new int[] { 1, 2 }, true),
-                new SetTriad(new int[] { 1 }, new int[] {  }, false),
+                new SetTriad(new int[] { 1 }, new int[] { }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2, 3 }, false),
             };
@@ -382,8 +382,8 @@ namespace System.Collections.Immutable.Tests
         {
             return new List<SetTriad>
             {
-                new SetTriad(new int[] {  }, new int[] {  }, false),
-                new SetTriad(new int[] {  }, new int[] { 1 }, false),
+                new SetTriad(new int[] { }, new int[] { }, false),
+                new SetTriad(new int[] { }, new int[] { 1 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2 }, false),
                 new SetTriad(new int[] { 1 }, new int[] { 2, 3 }, false),
                 new SetTriad(new int[] { 1, 2 }, new int[] { 3 }, false),

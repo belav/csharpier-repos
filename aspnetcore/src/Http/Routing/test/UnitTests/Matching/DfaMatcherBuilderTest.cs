@@ -1182,13 +1182,13 @@ namespace Microsoft.AspNetCore.Routing.Matching
                 new TestMetadata2MatcherPolicy()
             );
 
-            var endpoint1 = CreateEndpoint("/a", metadata: new object[] {  });
+            var endpoint1 = CreateEndpoint("/a", metadata: new object[] { });
             builder.AddEndpoint(endpoint1);
 
-            var endpoint2 = CreateEndpoint("/a", metadata: new object[] {  });
+            var endpoint2 = CreateEndpoint("/a", metadata: new object[] { });
             builder.AddEndpoint(endpoint2);
 
-            var endpoint3 = CreateEndpoint("/a", metadata: new object[] {  });
+            var endpoint3 = CreateEndpoint("/a", metadata: new object[] { });
             builder.AddEndpoint(endpoint3);
 
             // Act
@@ -1780,8 +1780,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
                     constraints: new { a = new IntRouteConstraint(), },
                     metadata: new object[] { new TestMetadata2(), }
                 ),
-                CreateEndpoint("/a/b/c", constraints: new {  }, metadata: new object[] {  }),
-                CreateEndpoint("/a/b/c", constraints: new {  }, metadata: new object[] {  }),
+                CreateEndpoint("/a/b/c", constraints: new {  }, metadata: new object[] { }),
+                CreateEndpoint("/a/b/c", constraints: new {  }, metadata: new object[] { }),
             };
 
             var builder = CreateDfaMatcherBuilder(

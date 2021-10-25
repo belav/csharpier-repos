@@ -18,7 +18,7 @@ public struct AA
         )
         {
             for (
-                new byte[] {  }[64] /= (new byte[44u, 81u, 16u, 52u, 20u])[
+                new byte[] { }[64] /= (new byte[44u, 81u, 16u, 52u, 20u])[
                     (new int[58u, 45u])[125, 36],
                     Math.Max(22, 90),
                     8,
@@ -35,7 +35,7 @@ public struct AA
             try { }
             catch (IndexOutOfRangeException) { }
         }
-        return ((new byte[40u, 107u, 4u][,,][])[107, 69, 93] = new byte[][,,][] {  }[70]);
+        return ((new byte[40u, 107u, 4u][,,][])[107, 69, 93] = new byte[][,,][] { }[70]);
     }
 }
 

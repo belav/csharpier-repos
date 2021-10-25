@@ -357,7 +357,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Unordered_Longrunning(
@@ -394,7 +393,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Longrunning(
@@ -430,7 +428,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Unordered_NotPipelined_Longrunning(
@@ -467,7 +464,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_NotPipelined_Longrunning(
@@ -511,7 +507,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Unordered_ResultSelector_Longrunning(
@@ -556,7 +551,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Unordered_ResultSelector_NotPipelined_Longrunning(
@@ -599,7 +593,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_ResultSelector_Longrunning(
@@ -646,7 +639,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_ResultSelector_NotPipelined_Longrunning(
@@ -692,7 +684,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Indexed_Unordered_Longrunning(
@@ -739,7 +730,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Indexed_Unordered_NotPipelined_Longrunning(
@@ -781,7 +771,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Indexed_Longrunning(
@@ -828,7 +817,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Indexed_NotPipelined_Longrunning(
@@ -877,7 +865,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Indexed_Unordered_ResultSelector_Longrunning(
@@ -927,7 +914,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Indexed_Unordered_ResultSelector_NotPipelined_Longrunning(
@@ -972,7 +958,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Indexed_ResultSelector_Longrunning(
@@ -1022,7 +1007,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SelectManyData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SelectMany_Indexed_ResultSelector_NotPipelined_Longrunning(

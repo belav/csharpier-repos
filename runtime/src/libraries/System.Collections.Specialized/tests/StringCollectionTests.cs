@@ -78,7 +78,6 @@ namespace System.Collections.Specialized.Tests
             yield return ConstructRow(
                 new string[]
                 { /* empty */
-
                 }
             );
             yield return ConstructRow(new string[] { null });
@@ -179,7 +178,6 @@ namespace System.Collections.Specialized.Tests
             added.AddRange(
                 new string[]
                 { /*empty*/
-
                 }
             );
             Assert.Equal(collection, added);

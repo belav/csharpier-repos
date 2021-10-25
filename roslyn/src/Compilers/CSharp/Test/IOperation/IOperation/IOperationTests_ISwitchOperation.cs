@@ -3857,7 +3857,7 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {  };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
             string expectedFlowGraph =
                 @"
@@ -3962,7 +3962,7 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {  };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
             string expectedFlowGraph =
                 @"
@@ -4070,7 +4070,7 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {  };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
             string expectedFlowGraph =
                 @"
@@ -4169,7 +4169,7 @@ public sealed class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {  };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
             string expectedFlowGraph =
                 @"

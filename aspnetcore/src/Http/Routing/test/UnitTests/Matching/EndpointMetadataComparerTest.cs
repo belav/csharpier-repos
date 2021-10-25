@@ -20,7 +20,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             );
             var endpoint2 = new Endpoint(
                 TestConstants.EmptyRequestDelegate,
-                new EndpointMetadataCollection(new object[] {  }),
+                new EndpointMetadataCollection(new object[] { }),
                 "test2"
             );
 
@@ -40,7 +40,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var endpoint1 = new Endpoint(
                 TestConstants.EmptyRequestDelegate,
-                new EndpointMetadataCollection(new object[] {  }),
+                new EndpointMetadataCollection(new object[] { }),
                 "test1"
             );
             var endpoint2 = new Endpoint(
@@ -90,12 +90,12 @@ namespace Microsoft.AspNetCore.Routing.Matching
             // Arrange
             var endpoint1 = new Endpoint(
                 TestConstants.EmptyRequestDelegate,
-                new EndpointMetadataCollection(new object[] {  }),
+                new EndpointMetadataCollection(new object[] { }),
                 "test1"
             );
             var endpoint2 = new Endpoint(
                 TestConstants.EmptyRequestDelegate,
-                new EndpointMetadataCollection(new object[] {  }),
+                new EndpointMetadataCollection(new object[] { }),
                 "test2"
             );
 
@@ -120,7 +120,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             );
             var endpoint2 = new Endpoint(
                 TestConstants.EmptyRequestDelegate,
-                new EndpointMetadataCollection(new object[] {  }),
+                new EndpointMetadataCollection(new object[] { }),
                 "test2"
             );
 

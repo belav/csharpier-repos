@@ -3823,7 +3823,7 @@ namespace AttributeTest
                     TypedConstantKind.Primitive,
                     "NoArgumentsToParamsParameter"
                 );
-                attr.VerifyValue<int[]>(1, TypedConstantKind.Array, new int[] {  });
+                attr.VerifyValue<int[]>(1, TypedConstantKind.Array, new int[] { });
 
                 method = (MethodSymbol)type.GetMember("NullArgumentToParamsParameter");
                 attrs = method.GetAttributes(attributeClass);

@@ -38,7 +38,7 @@ namespace System.Reflection.Tests
             "Void ProIntMeth2ToOverride()"
         };
 
-        public static string[] InheritedMethodNames = new string[] {  };
+        public static string[] InheritedMethodNames = new string[] { };
 
         public static string[] PublicMethodNames = new string[]
         {
@@ -178,7 +178,7 @@ namespace System.Reflection.Tests
             "Void meth3()",
             "Void meth4()"
         };
-        public static string[] InheritedMethodNames = new string[] {  };
+        public static string[] InheritedMethodNames = new string[] { };
         public static string[] PublicMethodNames = new string[] { "Void meth1()" };
 
         public abstract void meth1();
@@ -192,7 +192,7 @@ namespace System.Reflection.Tests
         public static new int Members = 7;
         public static new int MembersEverything = 17;
 
-        public static new string[] DeclaredMethodNames = new string[] {  };
+        public static new string[] DeclaredMethodNames = new string[] { };
         public static new string[] InheritedMethodNames = new string[]
         {
             "Void meth1()",
@@ -200,6 +200,6 @@ namespace System.Reflection.Tests
             "Void meth3()",
             "Void meth4()"
         };
-        public static new string[] PublicMethodNames = new string[] {  };
+        public static new string[] PublicMethodNames = new string[] { };
     }
 }

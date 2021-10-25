@@ -55,7 +55,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
             );
 
             // Act
-            var wrapped = wrapperProvider.Wrap(new int[] {  });
+            var wrapped = wrapperProvider.Wrap(new int[] { });
 
             // Assert
             Assert.Equal(typeof(DelegatingEnumerable<int, int>), wrapperProvider.WrappingType);

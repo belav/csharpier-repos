@@ -1208,12 +1208,12 @@ namespace System.Tests
                 '\u00f3',
                 '\u00fa'
             },
-            /* TitlecaseLetter         */new char[] {  },
-            /* ModifierLetter          */new char[] {  },
+            /* TitlecaseLetter         */new char[] { },
+            /* ModifierLetter          */new char[] { },
             /* OtherLetter             */new char[] { '\u00aa', '\u00ba' },
-            /* NonSpacingMark          */new char[] {  },
-            /* SpacingCombiningMark    */new char[] {  },
-            /* EnclosingMark           */new char[] {  },
+            /* NonSpacingMark          */new char[] { },
+            /* SpacingCombiningMark    */new char[] { },
+            /* EnclosingMark           */new char[] { },
             /* DecimalDigitNumber      */new char[]
             {
                 '\u0030',
@@ -1227,11 +1227,11 @@ namespace System.Tests
                 '\u0038',
                 '\u0039'
             },
-            /* LetterNumber            */new char[] {  },
+            /* LetterNumber            */new char[] { },
             /* OtherNumber             */new char[] { '\u00b2', '\u00b3', '\u00b9', '\u00bc', '\u00bd', '\u00be' },
             /* SpaceSeparator          */new char[] { '\u0020', '\u00a0' },
-            /* LineSeparator           */new char[] {  },
-            /* ParagraphSeparator      */new char[] {  },
+            /* LineSeparator           */new char[] { },
+            /* ParagraphSeparator      */new char[] { },
             /* Control                 */new char[]
             {
                 '\u0005',
@@ -1246,8 +1246,8 @@ namespace System.Tests
                 '\u009a'
             },
             /* Format                  */new char[] { '\u00ad' },
-            /* Surrogate               */new char[] {  },
-            /* PrivateUse              */new char[] {  },
+            /* Surrogate               */new char[] { },
+            /* PrivateUse              */new char[] { },
             /* ConnectorPunctuation    */new char[] { '\u005f' },
             /* DashPunctuation         */new char[] { '\u002d' },
             /* OpenPunctuation         */new char[] { '\u0028', '\u005b', '\u007b' },
@@ -1285,7 +1285,7 @@ namespace System.Tests
             /* CurrencySymbol          */new char[] { '\u0024', '\u00a2', '\u00a3', '\u00a4', '\u00a5' },
             /* ModifierSymbol          */new char[] { '\u005e', '\u0060', '\u00a8', '\u00af', '\u00b4', '\u00b8' },
             /* OtherSymbol             */new char[] { '\u00a6', '\u00a9', '\u00ae', '\u00b0' },
-            /* OtherNotAssigned        */new char[] {  },
+            /* OtherNotAssigned        */new char[] { },
         };
 
         private static char[][] s_unicodeTestSet = new char[][]
@@ -1447,7 +1447,7 @@ namespace System.Tests
             }, // UnicodeCategory.SpaceSeparator
             new char[] { '\u2028' }, // UnicodeCategory.LineSeparator
             new char[] { '\u2029' }, // UnicodeCategory.ParagraphSeparator
-            new char[] {  }, // UnicodeCategory.Control
+            new char[] { }, // UnicodeCategory.Control
             new char[]
             {
                 '\u0603',

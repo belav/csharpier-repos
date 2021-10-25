@@ -20,7 +20,7 @@ namespace Microsoft.DotNet.OpenApi.Add.Tests
         public void OpenApi_Empty_ShowsHelp()
         {
             var app = GetApplication();
-            var run = app.Execute(new string[] {  });
+            var run = app.Execute(new string[] { });
 
             AssertNoErrors(run);
 

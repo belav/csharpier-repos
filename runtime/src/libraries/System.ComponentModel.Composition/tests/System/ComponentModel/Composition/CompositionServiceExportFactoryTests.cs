@@ -46,7 +46,7 @@ namespace System.ComponentModel.Composition
         {
             var childCatalog = new CompositionScopeDefinition(
                 new TypeCatalog(typeof(Foo1)),
-                new CompositionScopeDefinition[] {  }
+                new CompositionScopeDefinition[] { }
             );
             var rootCatalog = new CompositionScopeDefinition(
                 new TypeCatalog(typeof(Child)),
@@ -76,7 +76,7 @@ namespace System.ComponentModel.Composition
         {
             var childCatalog = new CompositionScopeDefinition(
                 new TypeCatalog(typeof(Foo1), typeof(Child)),
-                new CompositionScopeDefinition[] {  }
+                new CompositionScopeDefinition[] { }
             );
             var rootCatalog = new CompositionScopeDefinition(
                 new TypeCatalog(),
@@ -106,7 +106,7 @@ namespace System.ComponentModel.Composition
         {
             var childCatalog = new CompositionScopeDefinition(
                 new TypeCatalog(typeof(Foo1), typeof(Child)),
-                new CompositionScopeDefinition[] {  }
+                new CompositionScopeDefinition[] { }
             );
             var rootCatalog = new CompositionScopeDefinition(
                 new TypeCatalog(typeof(Child)),

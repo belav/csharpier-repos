@@ -2185,14 +2185,14 @@ class Test
             // replace first with empty list
             newNode = invocation.ReplaceNode(
                 invocation.ArgumentList.Arguments[0],
-                new SyntaxNode[] {  }
+                new SyntaxNode[] { }
             );
             Assert.Equal("m(b)", newNode.ToFullString());
 
             // replace last with empty list
             newNode = invocation.ReplaceNode(
                 invocation.ArgumentList.Arguments[1],
-                new SyntaxNode[] {  }
+                new SyntaxNode[] { }
             );
             Assert.Equal("m(a)", newNode.ToFullString());
         }
@@ -2213,7 +2213,7 @@ class Test
 
             // you cannot replace a node that is a single node member with an empty list
             Assert.Throws<InvalidOperationException>(
-                () => ifstatement.ReplaceNode(then, new StatementSyntax[] {  })
+                () => ifstatement.ReplaceNode(then, new StatementSyntax[] { })
             );
         }
 
@@ -2269,7 +2269,7 @@ class Test
 
             // you cannot insert nodes before/after a node that is not part of a list
             Assert.Throws<InvalidOperationException>(
-                () => ifstatement.InsertNodesAfter(then, new StatementSyntax[] {  })
+                () => ifstatement.InsertNodesAfter(then, new StatementSyntax[] { })
             );
         }
 
@@ -2289,11 +2289,11 @@ class Test
             Assert.Equal("{ var x = 10; var z = 30; var q = 40; }", newBlock.ToFullString());
 
             // replace first with empty list
-            newBlock = block.ReplaceNode(block.Statements[0], new SyntaxNode[] {  });
+            newBlock = block.ReplaceNode(block.Statements[0], new SyntaxNode[] { });
             Assert.Equal("{ var y = 20; }", newBlock.ToFullString());
 
             // replace second with empty list
-            newBlock = block.ReplaceNode(block.Statements[1], new SyntaxNode[] {  });
+            newBlock = block.ReplaceNode(block.Statements[1], new SyntaxNode[] { });
             Assert.Equal("{ var x = 10; }", newBlock.ToFullString());
         }
 
@@ -2368,7 +2368,7 @@ class Test
             var cu2 = cu.ReplaceToken(privateToken, new[] { publicToken, partialToken });
             Assert.Equal("public partial class C { }", cu2.ToFullString());
 
-            var cu3 = cu.ReplaceToken(privateToken, new SyntaxToken[] {  });
+            var cu3 = cu.ReplaceToken(privateToken, new SyntaxToken[] { });
             Assert.Equal("class C { }", cu3.ToFullString());
         }
 
@@ -2388,7 +2388,7 @@ class Test
 
             // you cannot replace a token that is a single token member with an empty list of tokens
             Assert.Throws<InvalidOperationException>(
-                () => cu.ReplaceToken(identifierC, new SyntaxToken[] {  })
+                () => cu.ReplaceToken(identifierC, new SyntaxToken[] { })
             );
         }
 
@@ -2542,7 +2542,7 @@ class Test
             var ex2 = ex.ReplaceTrivia(comment1, new[] { newComment1, newComment2 });
             Assert.Equal("/* a *//* b */ identifier", ex2.ToFullString());
 
-            var ex3 = ex.ReplaceTrivia(comment1, new SyntaxTrivia[] {  });
+            var ex3 = ex.ReplaceTrivia(comment1, new SyntaxTrivia[] { });
             Assert.Equal(" identifier", ex3.ToFullString());
         }
 

@@ -23,7 +23,7 @@ namespace System.Memory.Tests.SequenceReader
                 {
                     new byte[] { 0 },
                     new byte[] { 1, 2 },
-                    new byte[] {  },
+                    new byte[] { },
                     new byte[] { 3, 4, 5, 6 }
                 }
             );
@@ -78,7 +78,7 @@ namespace System.Memory.Tests.SequenceReader
                 {
                     new byte[] { 0 },
                     new byte[] { 1, 2 },
-                    new byte[] {  },
+                    new byte[] { },
                     new byte[] { 3, 4, 5, 6 }
                 }
             );
@@ -138,7 +138,7 @@ namespace System.Memory.Tests.SequenceReader
                 {
                     new byte[] { 0, 0 },
                     new byte[] { 1, 1, 2, 2 },
-                    new byte[] {  },
+                    new byte[] { },
                     new byte[] { 3, 3, 4, 4, 5, 5, 6, 6 }
                 }
             );

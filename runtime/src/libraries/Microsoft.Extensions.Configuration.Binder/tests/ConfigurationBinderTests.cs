@@ -282,7 +282,7 @@ namespace Microsoft.Extensions.Configuration.Binder.Test
         [Fact]
         public void GetDefaultsWhenDataDoesNotExist()
         {
-            var dic = new Dictionary<string, string> {  };
+            var dic = new Dictionary<string, string> { };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();

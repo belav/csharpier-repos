@@ -129,7 +129,6 @@ namespace System.Linq.Parallel.Tests
             nameof(PartitioningData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Partitioning_Default_Longrunning(
@@ -169,7 +168,6 @@ namespace System.Linq.Parallel.Tests
             nameof(PartitioningData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Partitioning_Striped_Longrunning(
@@ -203,7 +201,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MergeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Merge_Ordered_Longrunning(

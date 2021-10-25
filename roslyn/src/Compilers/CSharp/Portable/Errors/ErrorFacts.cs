@@ -143,7 +143,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var map = new Dictionary<ErrorCode, string>()
             {
-
                 // { ERROR_CODE,    CATEGORY }
             };
 

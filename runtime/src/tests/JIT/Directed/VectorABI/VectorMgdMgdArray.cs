@@ -497,12 +497,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA64_01()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA64_01),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA64_01()
@@ -537,12 +537,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA64_02()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA64_02),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA64_02()
@@ -579,12 +579,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA64_03()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA64_03),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA64_03()
@@ -631,12 +631,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA64_04()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA64_04),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA64_04()
@@ -689,12 +689,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA64_05()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA64_05),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA64_05()
@@ -859,12 +859,12 @@ public static class VectorMgdMgd
 
         public void Init_Reflection_Return_HVA128_01()
         {
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA128_01),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA128_01()
@@ -899,12 +899,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA128_02()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA128_02),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA128_02()
@@ -941,12 +941,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA128_03()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA128_03),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA128_03()
@@ -993,12 +993,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA128_04()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA128_04),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA128_04()
@@ -1051,12 +1051,12 @@ public static class VectorMgdMgd
         public void Init_Reflection_Return_HVA128_05()
         {
             isReflection = true;
-            reflectionParameterTypes = new Type[] {  };
+            reflectionParameterTypes = new Type[] { };
             reflectionMethodInfo = typeof(HVATests<T>).GetMethod(
                 nameof(HVATests<T>.returnTest_HVA128_05),
                 reflectionParameterTypes
             );
-            reflectionInvokeArgs = new object[] {  };
+            reflectionInvokeArgs = new object[] { };
         }
 
         public void testReflectionReturn_HVA128_05()

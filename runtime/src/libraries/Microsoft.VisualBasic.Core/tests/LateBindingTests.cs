@@ -209,9 +209,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 null,
                 typeof(StaticClass),
                 "M",
-                new object[] {  },
-                new string[] {  },
-                new bool[] {  },
+                new object[] { },
+                new string[] { },
+                new bool[] { },
                 new Func<object, object>(_ => StaticClass.Value),
                 1
             };
@@ -221,8 +221,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(StaticClass),
                 "M",
                 new object[] { 2, 3 },
-                new string[] {  },
-                new bool[] {  },
+                new string[] { },
+                new bool[] { },
                 new Func<object, object>(_ => StaticClass.Value),
                 2
             };
@@ -233,7 +233,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 "M",
                 new object[] { 4, 5 },
                 new string[] { "a", "b" },
-                new bool[] {  },
+                new bool[] { },
                 new Func<object, object>(_ => StaticClass.Value),
                 5
             };
@@ -242,9 +242,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new InstanceClass(),
                 typeof(InstanceClass),
                 "M",
-                new object[] {  },
-                new string[] {  },
-                new bool[] {  },
+                new object[] { },
+                new string[] { },
+                new bool[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
                 1
             };
@@ -254,8 +254,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(InstanceClass),
                 "M",
                 new object[] { 2, 3 },
-                new string[] {  },
-                new bool[] {  },
+                new string[] { },
+                new bool[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
                 2
             };
@@ -266,7 +266,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 "M",
                 new object[] { 4, 5 },
                 new string[] { "a", "b" },
-                new bool[] {  },
+                new bool[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
                 5
             };
@@ -279,9 +279,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 null,
                 typeof(StaticClass),
                 "M",
-                new object[] {  },
-                new string[] {  },
-                new bool[] {  },
+                new object[] { },
+                new string[] { },
+                new bool[] { },
                 1
             };
             yield return new object[]
@@ -290,8 +290,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(StaticClass),
                 "M",
                 new object[] { 2, 3 },
-                new string[] {  },
-                new bool[] {  },
+                new string[] { },
+                new bool[] { },
                 2
             };
             yield return new object[]
@@ -301,7 +301,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 "M",
                 new object[] { 4, 5 },
                 new string[] { "a", "b" },
-                new bool[] {  },
+                new bool[] { },
                 5
             };
             yield return new object[]
@@ -309,9 +309,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new InstanceClass(),
                 typeof(InstanceClass),
                 "M",
-                new object[] {  },
-                new string[] {  },
-                new bool[] {  },
+                new object[] { },
+                new string[] { },
+                new bool[] { },
                 1
             };
             yield return new object[]
@@ -320,8 +320,8 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(InstanceClass),
                 "M",
                 new object[] { 2, 3 },
-                new string[] {  },
-                new bool[] {  },
+                new string[] { },
+                new bool[] { },
                 2
             };
             yield return new object[]
@@ -331,7 +331,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 "M",
                 new object[] { 4, 5 },
                 new string[] { "a", "b" },
-                new bool[] {  },
+                new bool[] { },
                 5
             };
         }
@@ -344,7 +344,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(StaticClass),
                 "M",
                 new object[] { 2, 3 },
-                new string[] {  },
+                new string[] { },
                 new Func<object, object>(_ => StaticClass.Value),
                 2
             };
@@ -364,7 +364,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(InstanceClass),
                 "M",
                 new object[] { 2, 3 },
-                new string[] {  },
+                new string[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
                 2
             };
@@ -384,7 +384,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(InstanceClass),
                 "P",
                 new object[] { 6 },
-                new string[] {  },
+                new string[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
                 6
             };
@@ -398,7 +398,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(InstanceClass),
                 "P",
                 new object[] { 1 },
-                new string[] {  },
+                new string[] { },
                 false,
                 false
             };
@@ -408,7 +408,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(InstanceClass),
                 "Q",
                 new object[] { 2 },
-                new string[] {  },
+                new string[] { },
                 true,
                 false
             };
@@ -418,7 +418,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(InstanceStruct),
                 "P",
                 new object[] { 3 },
-                new string[] {  },
+                new string[] { },
                 false,
                 true
             };
@@ -428,7 +428,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 typeof(InstanceStruct),
                 "Q",
                 new object[] { 4 },
-                new string[] {  },
+                new string[] { },
                 true,
                 true
             };
@@ -440,28 +440,28 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new InstanceClass(),
                 new object[] { 1 },
-                new string[] {  },
+                new string[] { },
                 2
             };
             yield return new object[]
             {
                 new InstanceClass(),
                 new object[] { 2, 3 },
-                new string[] {  },
+                new string[] { },
                 5
             };
             yield return new object[]
             {
                 new InstanceStruct(),
                 new object[] { 4 },
-                new string[] {  },
+                new string[] { },
                 8
             };
             yield return new object[]
             {
                 new InstanceStruct(),
                 new object[] { 5, 6 },
-                new string[] {  },
+                new string[] { },
                 11
             };
         }
@@ -472,7 +472,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new InstanceClass(),
                 new object[] { 1, 2, 3 },
-                new string[] {  },
+                new string[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
                 6
             };
@@ -480,7 +480,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new InstanceStruct(),
                 new object[] { 4, 5, 6 },
-                new string[] {  },
+                new string[] { },
                 new Func<object, object>(obj => ((InstanceStruct)obj).Value),
                 15
             };
@@ -488,18 +488,18 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         public static IEnumerable<object[]> LateIndexSet_MissingMember_TestData()
         {
-            yield return new object[] { new StaticClass(), new object[] { 1 }, new string[] {  } };
+            yield return new object[] { new StaticClass(), new object[] { 1 }, new string[] { } };
             yield return new object[]
             {
                 new InstanceClass(),
                 new object[] { 2, 3 },
-                new string[] {  }
+                new string[] { }
             };
             yield return new object[]
             {
                 new InstanceStruct(),
                 new object[] { 5, 6 },
-                new string[] {  }
+                new string[] { }
             };
         }
 

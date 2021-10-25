@@ -37,7 +37,6 @@ namespace System.Net.Http.Functional.Tests
         protected HttpClient CreateHttpClient(HttpMessageHandler handler) =>
             new HttpClient(handler)
             {
-
 #if !NETFRAMEWORK
                 DefaultRequestVersion = UseVersion
 #endif
@@ -52,7 +51,6 @@ namespace System.Net.Http.Functional.Tests
         ) =>
             new HttpClient(handler)
             {
-
 #if !NETFRAMEWORK
                 DefaultRequestVersion = Version.Parse(useVersionString)
 #endif
@@ -90,7 +88,6 @@ namespace System.Net.Http.Functional.Tests
 
             return new HttpClient(wrappedHandler)
             {
-
 #if !NETFRAMEWORK
                 DefaultRequestVersion = remoteServer.HttpVersion
 #endif

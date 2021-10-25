@@ -492,7 +492,7 @@ namespace System.IO.Tests
             InlineData(
                 "foodies*.",
                 new string[] { @"foodies. ", @"foodies.  ", @"foodies.   " },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "foooooo*.",
@@ -502,7 +502,7 @@ namespace System.IO.Tests
             InlineData(
                 "foooooo*.",
                 new string[] { @"foooooo. ", @"foooooo.  ", @"foooooo.   " },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "foodies*.",
@@ -527,7 +527,7 @@ namespace System.IO.Tests
                     @"foodies.    ",
                     @"foodies.     "
                 },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "foo*.",
@@ -598,7 +598,7 @@ namespace System.IO.Tests
             InlineData(
                 "foo*.",
                 new string[] { @"foo. ", @"foo.  ", @"foo.   ", @"foo.    " },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "foo*.",
@@ -647,7 +647,7 @@ namespace System.IO.Tests
             InlineData(
                 "foo*.",
                 new string[] { @"foo. ", @"foo.  ", @"foo.   ", @"foo.    ", @"foo.     " },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "foo*.",
@@ -738,12 +738,12 @@ namespace System.IO.Tests
             InlineData(
                 "fooooo*.",
                 new string[] { @"foooooo. ", @"foooooo.  ", @"foooooo.   " },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "fo*.",
                 new string[] { @"foo. ", @"foo.  ", @"foo.   ", @"foo.    ", @"foo.     " },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "fo*.",
@@ -757,7 +757,7 @@ namespace System.IO.Tests
                     @"foo.      ",
                     @"foo.       "
                 },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "fo*.",
@@ -774,7 +774,7 @@ namespace System.IO.Tests
                     @"foo.      ",
                     @"foo.       "
                 },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "fo*.",
@@ -793,7 +793,7 @@ namespace System.IO.Tests
                     @"foo.      ",
                     @"foo.       "
                 },
-                new string[] {  }
+                new string[] { }
             ),
             InlineData(
                 "foo*.",

@@ -65,7 +65,7 @@ namespace Microsoft.Extensions.Primitives
                 {
                     { default(StringValues), (string)null },
                     { StringValues.Empty, (string)null },
-                    { new StringValues(new string[] {  }), (string)null },
+                    { new StringValues(new string[] { }), (string)null },
                     { new StringValues(string.Empty), string.Empty },
                     { new StringValues(new string[] { string.Empty }), string.Empty },
                     { new StringValues("abc"), "abc" }
@@ -81,7 +81,7 @@ namespace Microsoft.Extensions.Primitives
                 {
                     { default(StringValues), (object)null },
                     { StringValues.Empty, (object)null },
-                    { new StringValues(new string[] {  }), (object)null },
+                    { new StringValues(new string[] { }), (object)null },
                     { new StringValues("abc"), (object)"abc" },
                     { new StringValues("abc"), (object)new[] { "abc" } },
                     { new StringValues(new[] { "abc" }), (object)new[] { "abc" } },

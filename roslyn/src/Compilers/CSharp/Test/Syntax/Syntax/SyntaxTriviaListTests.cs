@@ -186,15 +186,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(4, newList.Count);
             Assert.Equal("/*A*//*B*//*D*//*E*/", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementA, new SyntaxTrivia[] {  });
+            newList = list.ReplaceRange(elementA, new SyntaxTrivia[] { });
             Assert.Equal(2, newList.Count);
             Assert.Equal("/*B*//*C*/", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementB, new SyntaxTrivia[] {  });
+            newList = list.ReplaceRange(elementB, new SyntaxTrivia[] { });
             Assert.Equal(2, newList.Count);
             Assert.Equal("/*A*//*C*/", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementC, new SyntaxTrivia[] {  });
+            newList = list.ReplaceRange(elementC, new SyntaxTrivia[] { });
             Assert.Equal(2, newList.Count);
             Assert.Equal("/*A*//*B*/", newList.ToFullString());
 

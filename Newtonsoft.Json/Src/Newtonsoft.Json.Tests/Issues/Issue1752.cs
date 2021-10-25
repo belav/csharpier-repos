@@ -59,7 +59,7 @@ namespace Newtonsoft.Json.Tests.Issues
             };
 
             string s1 = JsonConvert.SerializeObject(
-                new TestObject() { Obj = new byte[] {  } },
+                new TestObject() { Obj = new byte[] { } },
                 settings
             );
 

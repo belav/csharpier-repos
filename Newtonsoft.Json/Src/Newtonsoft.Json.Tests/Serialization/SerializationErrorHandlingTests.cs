@@ -672,7 +672,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void ErrorHandlingAndAvoidingRecursiveDepthError()
         {
             string json = "{'A':{'A':{'A':{'A':{'A':{}}}}}}";
-            JsonSerializer serializer = new JsonSerializer() {  };
+            JsonSerializer serializer = new JsonSerializer() { };
             IList<string> errors = new List<string>();
             serializer.Error += (sender, e) =>
             {
@@ -1158,7 +1158,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeWrappingErrorsAndErrorHandling()
         {
-            var serialiser = JsonSerializer.Create(new JsonSerializerSettings() {  });
+            var serialiser = JsonSerializer.Create(new JsonSerializerSettings() { });
 
             string foo = "{ something: { rootSomethingElse { somethingElse: 0 } } }";
             var reader = new System.IO.StringReader(foo);
@@ -1175,7 +1175,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeWrappingErrorsAndErrorHandling()
         {
-            var serialiser = JsonSerializer.Create(new JsonSerializerSettings() {  });
+            var serialiser = JsonSerializer.Create(new JsonSerializerSettings() { });
 
             Something s = new Something
             {

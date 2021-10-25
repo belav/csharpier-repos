@@ -930,7 +930,7 @@ public class Tests
 
                 /* in */
 
-                array = new object[] {  };
+                array = new object[] { };
                 if (mono_test_marshal_safearray_in_byval_1dim_empty(array) != 0)
                     return 71;
 
@@ -976,7 +976,7 @@ public class Tests
 
                 /* in, out, byref */
 
-                array = new object[] {  };
+                array = new object[] { };
                 if (
                     (mono_test_marshal_safearray_in_out_byref_1dim_empty(ref array) != 0)
                     || (array.Rank != 1)

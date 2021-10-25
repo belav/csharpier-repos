@@ -1039,7 +1039,7 @@ namespace SerializationTestTypes
                         {
                             dictEnumObj = collectionContract.GetEnumeratorMethod.Invoke(
                                 data,
-                                new object[] {  }
+                                new object[] { }
                             );
                         }
                         catch (Exception) { }

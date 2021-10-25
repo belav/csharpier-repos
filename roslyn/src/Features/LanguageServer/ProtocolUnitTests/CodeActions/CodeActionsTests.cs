@@ -284,7 +284,6 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 Range = caret.Range,
                 Context = new LSP.CodeActionContext
                 {
-
                     // TODO - Code actions should respect context.
                 }
             };

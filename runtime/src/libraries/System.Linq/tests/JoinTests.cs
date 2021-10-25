@@ -49,7 +49,7 @@ namespace System.Linq.Tests
         [Fact]
         public void OuterEmptyInnerNonEmpty()
         {
-            CustomerRec[] outer = {  };
+            CustomerRec[] outer = { };
             OrderRec[] inner = new[]
             {
                 new OrderRec { orderID = 45321, custID = 98022, total = 50 },
@@ -393,7 +393,7 @@ namespace System.Linq.Tests
                 new CustomerRec { name = "Tim", custID = 43434 },
                 new CustomerRec { name = "Bob", custID = 34093 }
             };
-            OrderRec[] inner = {  };
+            OrderRec[] inner = { };
             Assert.Empty(outer.Join(inner, e => e.custID, e => e.custID, createJoinRec));
         }
 

@@ -6,7 +6,7 @@ namespace System.Web.Mvc
     public static class ModelBinderProviders
     {
         private static readonly ModelBinderProviderCollection _binderProviders =
-            new ModelBinderProviderCollection {  };
+            new ModelBinderProviderCollection { };
 
         public static ModelBinderProviderCollection BinderProviders
         {

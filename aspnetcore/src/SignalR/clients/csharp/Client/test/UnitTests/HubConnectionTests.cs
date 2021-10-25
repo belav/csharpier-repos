@@ -113,7 +113,7 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     {
                         type = HubProtocolConstants.InvocationMessageType,
                         target = "method",
-                        arguments = new object[] {  }
+                        arguments = new object[] { }
                     }
                 )
                 .DefaultTimeout();
@@ -148,7 +148,7 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests
                     {
                         type = HubProtocolConstants.InvocationMessageType,
                         target = "method",
-                        arguments = new object[] {  }
+                        arguments = new object[] { }
                     }
                 )
                 .DefaultTimeout();

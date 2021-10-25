@@ -82,7 +82,7 @@ public class Test
         Eval((new Gen<object[,,,]>(new object[1, 1, 1, 1])).InstVerify(typeof(object[,,,])));
         Eval((new Gen<Guid[][,,,][]>(new Guid[1][,,,][])).InstVerify(typeof(Guid[][,,,][])));
 
-        Eval((new Gen<RefX1<int>[]>(new RefX1<int>[] {  })).InstVerify(typeof(RefX1<int>[])));
+        Eval((new Gen<RefX1<int>[]>(new RefX1<int>[] { })).InstVerify(typeof(RefX1<int>[])));
         Eval(
             (new Gen<RefX1<double>[,]>(new RefX1<double>[1, 1])).InstVerify(
                 typeof(RefX1<double>[,])
@@ -105,7 +105,7 @@ public class Test
         );
 
         Eval(
-            (new Gen<RefX2<int, int>[]>(new RefX2<int, int>[] {  })).InstVerify(
+            (new Gen<RefX2<int, int>[]>(new RefX2<int, int>[] { })).InstVerify(
                 typeof(RefX2<int, int>[])
             )
         );
@@ -130,7 +130,7 @@ public class Test
             )
         );
 
-        Eval((new Gen<ValX1<int>[]>(new ValX1<int>[] {  })).InstVerify(typeof(ValX1<int>[])));
+        Eval((new Gen<ValX1<int>[]>(new ValX1<int>[] { })).InstVerify(typeof(ValX1<int>[])));
         Eval(
             (new Gen<ValX1<double>[,]>(new ValX1<double>[1, 1])).InstVerify(
                 typeof(ValX1<double>[,])
@@ -153,7 +153,7 @@ public class Test
         );
 
         Eval(
-            (new Gen<ValX2<int, int>[]>(new ValX2<int, int>[] {  })).InstVerify(
+            (new Gen<ValX2<int, int>[]>(new ValX2<int, int>[] { })).InstVerify(
                 typeof(ValX2<int, int>[])
             )
         );

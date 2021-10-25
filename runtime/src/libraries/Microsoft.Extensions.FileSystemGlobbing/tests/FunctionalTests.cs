@@ -40,7 +40,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
 
         [Theory]
         [InlineData("src/project", "source1.cs", new string[] { "source1.cs" })]
-        [InlineData("src/project", "Source1.cs", new string[] {  })]
+        [InlineData("src/project", "Source1.cs", new string[] { })]
         [InlineData(
             "src/project",
             "compiler/preprocess/**/*.cs",
@@ -51,7 +51,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "compiler/preprocess/sub/sub/preprocess-source3.cs"
             }
         )]
-        [InlineData("src/project", "compiler/Preprocess/**.cs", new string[] {  })]
+        [InlineData("src/project", "compiler/Preprocess/**.cs", new string[] { })]
         public void IncludeCaseSensitive(string root, string includePattern, string[] expectedFiles)
         {
             var matcher = new Matcher(StringComparison.Ordinal);
@@ -139,7 +139,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "sub/sub/preprocess-source3.txt"
             }
         )]
-        [InlineData("src/project/compiler/preprocess/", "**/preprocess*", new string[] {  })]
+        [InlineData("src/project/compiler/preprocess/", "**/preprocess*", new string[] { })]
         [InlineData(
             "src/project/compiler/preprocess/",
             "**/*source*.cs",
@@ -213,8 +213,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "sub/sub/preprocess-source3.txt"
             }
         )]
-        [InlineData("src/project/compiler/preprocess/", "**/Preprocess*", new string[] {  })]
-        [InlineData("src/project/compiler/preprocess/", "**/preprocess*", new string[] {  })]
+        [InlineData("src/project/compiler/preprocess/", "**/Preprocess*", new string[] { })]
+        [InlineData("src/project/compiler/preprocess/", "**/preprocess*", new string[] { })]
         [InlineData(
             "src/project/compiler/preprocess/",
             "**/*source*.cs",

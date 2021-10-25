@@ -26,7 +26,7 @@ class Program
             !(
                 (RuntimeTypeHandle)typeof(IFoo<Fooer>)
                     .GetMethod("StaticMethod")
-                    .Invoke(null, new object[] {  })
+                    .Invoke(null, new object[] { })
             ).Equals(typeof(Fooer[,]).TypeHandle)
         )
             return 11;
@@ -35,7 +35,7 @@ class Program
             !(
                 (RuntimeTypeHandle)typeof(IFoo<Fooer>)
                     .GetMethod("DefaultMethod")
-                    .Invoke(new Fooer(), new object[] {  })
+                    .Invoke(new Fooer(), new object[] { })
             ).Equals(typeof(Fooer).TypeHandle)
         )
             return 12;
@@ -44,7 +44,7 @@ class Program
             !(
                 (RuntimeTypeHandle)typeof(IFoo<Fooer>)
                     .GetMethod("InstanceMethod")
-                    .Invoke(new Fooer(), new object[] {  })
+                    .Invoke(new Fooer(), new object[] { })
             ).Equals(typeof(Fooer[]).TypeHandle)
         )
             return 13;
@@ -67,7 +67,7 @@ class Program
             !(
                 (RuntimeTypeHandle)typeof(IFoo<Fooer>)
                     .GetMethod("DefaultMethod")
-                    .Invoke(new ValueFooer(), new object[] {  })
+                    .Invoke(new ValueFooer(), new object[] { })
             ).Equals(typeof(Fooer).TypeHandle)
         )
             return 32;
@@ -76,7 +76,7 @@ class Program
             !(
                 (RuntimeTypeHandle)typeof(IFoo<Fooer>)
                     .GetMethod("InstanceMethod")
-                    .Invoke(new ValueFooer(), new object[] {  })
+                    .Invoke(new ValueFooer(), new object[] { })
             ).Equals(typeof(Fooer[]).TypeHandle)
         )
             return 33;

@@ -1729,7 +1729,7 @@ namespace System.Threading.Tasks.Tests
             int numCores = Environment.ProcessorCount;
 
             // Basic tests w/ <64 tasks
-            CoreWaitAnyTest(0, new bool[] {  }, -1);
+            CoreWaitAnyTest(0, new bool[] { }, -1);
             CoreWaitAnyTest(0, new bool[] { true }, 0);
             CoreWaitAnyTest(0, new bool[] { true, false, false, false }, 0);
 

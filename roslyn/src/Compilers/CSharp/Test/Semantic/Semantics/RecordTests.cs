@@ -16833,7 +16833,7 @@ THROW
                               .WithArguments("B")
                               .WithLocation(2, 15)
                       }
-                    : new DiagnosticDescription[] {  };
+                    : new DiagnosticDescription[] { };
 
                 comp.VerifyDiagnostics(expectedDiagnostics);
                 if (expectedDiagnostics is null)
@@ -30991,17 +30991,17 @@ public record Test(
                 var @class = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
 
                 var prop1 = @class.GetMember<PropertySymbol>("P1");
-                AssertEx.SetEqual(new string[] {  }, getAttributeStrings(prop1));
+                AssertEx.SetEqual(new string[] { }, getAttributeStrings(prop1));
 
                 var field1 = @class.GetMember<FieldSymbol>("<P1>k__BackingField");
-                AssertEx.SetEqual(new string[] {  }, getAttributeStrings(field1));
+                AssertEx.SetEqual(new string[] { }, getAttributeStrings(field1));
 
                 var param1 = @class
                     .GetMembers(".ctor")
                     .OfType<MethodSymbol>()
                     .Where(m => m.Parameters.AsSingleton()?.Name == "P1")
                     .Single().Parameters[0];
-                AssertEx.SetEqual(new string[] {  }, getAttributeStrings(param1));
+                AssertEx.SetEqual(new string[] { }, getAttributeStrings(param1));
             };
 
             var comp = CompileAndVerify(

@@ -157,7 +157,7 @@ namespace System.IO.Tests
         {
             var byteArrayInputs = new byte[][]
             {
-                new byte[] {  },
+                new byte[] { },
                 new byte[] { 0x00 },
                 new byte[] { 0xEF },
                 new byte[] { 0xFE },

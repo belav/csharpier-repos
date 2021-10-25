@@ -321,7 +321,7 @@ namespace System.Xml.Tests
 
             atts.Clear();
             val.GetUnspecifiedDefaultAttributes(atts);
-            CheckDefaultAttributes(atts, new string[] {  });
+            CheckDefaultAttributes(atts, new string[] { });
 
             return;
         }
@@ -351,7 +351,7 @@ namespace System.Xml.Tests
             val.ValidateElement("FixedRequiredAttributeElement", "", null);
 
             val.GetUnspecifiedDefaultAttributes(atts);
-            CheckDefaultAttributes(atts, new string[] {  });
+            CheckDefaultAttributes(atts, new string[] { });
 
             return;
         }

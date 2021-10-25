@@ -111,7 +111,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string newPropertyName = "HOST_TEST_PROPERTY";
             string[] args = { HostContextArg, Scenario.App, checkProperties, hostFxrPath };
 
-            string[] commandArgs = {  };
+            string[] commandArgs = { };
             switch (commandLine)
             {
                 case CommandLine.AppPath:

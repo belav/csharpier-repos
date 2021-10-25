@@ -71,7 +71,7 @@ namespace System.Drawing.Imaging.Tests
             get
             {
                 yield return new object[] { null, typeof(NullReferenceException) };
-                yield return new object[] { new float[][] {  }, typeof(IndexOutOfRangeException) };
+                yield return new object[] { new float[][] { }, typeof(IndexOutOfRangeException) };
                 yield return new object[]
                 {
                     new float[][] { new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f } },

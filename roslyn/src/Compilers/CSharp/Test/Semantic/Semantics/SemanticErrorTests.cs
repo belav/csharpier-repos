@@ -9321,7 +9321,7 @@ class A
 }";
             var comp = CreateCompilation(
                 new[] { Parse(test, options: TestOptions.Regular6) },
-                new MetadataReference[] {  }
+                new MetadataReference[] { }
             );
             comp.VerifyDiagnostics(
                 // (6,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
@@ -28068,7 +28068,7 @@ public class E
 ";
             DiagnosticsUtils.VerifyErrorsAndGetCompilationWithMscorlib(
                 text,
-                new ErrorDescription[] {  }
+                new ErrorDescription[] { }
             );
         }
 

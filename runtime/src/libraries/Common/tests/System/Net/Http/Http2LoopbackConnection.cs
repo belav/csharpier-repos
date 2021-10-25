@@ -765,7 +765,7 @@ namespace System.Net.Test.Common
             ProtocolErrors errorCode = ProtocolErrors.NO_ERROR
         )
         {
-            GoAwayFrame frame = new GoAwayFrame(lastStreamId, (int)errorCode, new byte[] {  }, 0);
+            GoAwayFrame frame = new GoAwayFrame(lastStreamId, (int)errorCode, new byte[] { }, 0);
             await WriteFrameAsync(frame).ConfigureAwait(false);
         }
 

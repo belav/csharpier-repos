@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions
             .WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(
                     CharacterSetModificationKind.Replace,
-                    new char[] {  }
+                    new char[] { }
                 )
             );
 

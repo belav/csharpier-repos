@@ -468,7 +468,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                                 new RuntimeAssetGroup(string.Empty, "native.dll"),
                                 new RuntimeAssetGroup("win7-x64", "Banana.Win7-x64.so")
                             },
-                            new ResourceAssembly[] {  },
+                            new ResourceAssembly[] { },
                             new[] { new Dependency("Fruits.Abstract.dll", "2.0.0") },
                             true,
                             "PackagePath",
@@ -573,7 +573,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                                     "runtimes\\osx\\native\\native.dylib"
                                 )
                             },
-                            new ResourceAssembly[] {  },
+                            new ResourceAssembly[] { },
                             new[] { new Dependency("Fruits.Abstract.dll", "2.0.0") },
                             true,
                             "PackagePath",
@@ -632,8 +632,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                                 new RuntimeAssetGroup("linux-x64"),
                                 new RuntimeAssetGroup("osx", "native\\OSXSupport.dylib")
                             },
-                            new ResourceAssembly[] {  },
-                            new Dependency[] {  },
+                            new ResourceAssembly[] { },
+                            new Dependency[] { },
                             true,
                             "PackagePath",
                             "PackageHashPath"
@@ -687,10 +687,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                             "PackageName",
                             "1.2.3",
                             "HASH",
-                            new RuntimeAssetGroup[] {  },
-                            new RuntimeAssetGroup[] {  },
+                            new RuntimeAssetGroup[] { },
+                            new RuntimeAssetGroup[] { },
                             new[] { new ResourceAssembly("en-US/Fruits.resources.dll", "en-US") },
-                            new Dependency[] {  },
+                            new Dependency[] { },
                             true,
                             "PackagePath",
                             "PackageHashPath"
@@ -723,10 +723,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                             "PackageName",
                             "1.2.3",
                             "HASH",
-                            new RuntimeAssetGroup[] {  },
-                            new RuntimeAssetGroup[] {  },
+                            new RuntimeAssetGroup[] { },
+                            new RuntimeAssetGroup[] { },
                             new[] { new ResourceAssembly("en-US/Fruits.resources.dll", "en-US") },
-                            new Dependency[] {  },
+                            new Dependency[] { },
                             true,
                             "PackagePath",
                             "PackageHashPath"

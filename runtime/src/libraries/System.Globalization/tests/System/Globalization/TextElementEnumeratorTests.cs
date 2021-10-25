@@ -14,7 +14,6 @@ namespace System.Globalization.Tests
             {
                 new string[]
                 { /* empty */
-
                 }
             };
             yield return new object[] { new string[] { "H", "e", "l", "l", "o" } };

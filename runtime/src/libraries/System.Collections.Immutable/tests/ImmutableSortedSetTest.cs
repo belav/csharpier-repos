@@ -127,7 +127,7 @@ namespace System.Collections.Immutable.Tests
         }
 
         [Theory]
-        [InlineData(new int[] {  }, new int[] {  })]
+        [InlineData(new int[] { }, new int[] { })]
         [InlineData(new int[] { 1 }, new int[] { 1 })]
         [InlineData(new int[] { 1, 1 }, new int[] { 1 })]
         [InlineData(new int[] { 1, 1, 1 }, new int[] { 1 })]
@@ -146,7 +146,7 @@ namespace System.Collections.Immutable.Tests
         }
 
         [Theory]
-        [InlineData(new int[] {  }, new int[] { 1 })]
+        [InlineData(new int[] { }, new int[] { 1 })]
         [InlineData(new int[] { 1 }, new int[] { 1 })]
         [InlineData(new int[] { 1, 1 }, new int[] { 1 })]
         [InlineData(new int[] { 1, 1, 1 }, new int[] { 1 })]

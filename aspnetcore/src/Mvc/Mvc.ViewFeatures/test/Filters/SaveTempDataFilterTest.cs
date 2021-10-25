@@ -306,8 +306,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
                 new RouteData(),
                 new ActionDescriptor()
             );
-            var filters = new IFilterMetadata[] {  };
-            var valueProviderFactories = new IValueProviderFactory[] {  };
+            var filters = new IFilterMetadata[] { };
+            var valueProviderFactories = new IValueProviderFactory[] { };
 
             return new ResourceExecutingContext(actionContext, filters, valueProviderFactories);
         }
@@ -327,7 +327,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             }
             return new ResultExecutedContext(
                 new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 actionResult,
                 new TestController()
             );
@@ -344,7 +344,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             }
             return new ResultExecutingContext(
                 actionContext,
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 actionResult,
                 new TestController()
             );
@@ -365,7 +365,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters
             }
             return new ResultExecutingContext(
                 new ActionContext(httpContext, new RouteData(), new ActionDescriptor()),
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 new Mock<IActionResult>().Object,
                 new TestController()
             );

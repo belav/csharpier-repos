@@ -616,7 +616,7 @@ class Tests
         res2 = (int?)typeof(NullableMethods)
             .GetMethod("GetNull")
             .MakeGenericMethod(new Type[] { typeof(int) })
-            .Invoke(null, new object[] {  });
+            .Invoke(null, new object[] { });
         if (res2.HasValue)
             return 5;
 

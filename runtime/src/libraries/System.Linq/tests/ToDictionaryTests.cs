@@ -413,8 +413,8 @@ namespace System.Linq.Tests
         [Fact]
         public void EmtpySource()
         {
-            int[] elements = new int[] {  };
-            string[] keys = new string[] {  };
+            int[] elements = new int[] { };
+            string[] keys = new string[] { };
             var source = keys.Zip(elements, (k, e) => new { Name = k, Score = e });
 
             AssertMatches(

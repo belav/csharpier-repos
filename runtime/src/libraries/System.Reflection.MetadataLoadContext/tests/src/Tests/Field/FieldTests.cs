@@ -546,7 +546,7 @@ namespace System.Reflection.Tests
                 Type[] opt = f.GetOptionalCustomModifiers();
 
                 Assert.Equal<Type>(new Type[] { reqB }, req);
-                Assert.Equal<Type>(new Type[] {  }, opt);
+                Assert.Equal<Type>(new Type[] { }, opt);
 
                 TestUtils.AssertNewObjectReturnedEachTime(() => f.GetRequiredCustomModifiers());
                 TestUtils.AssertNewObjectReturnedEachTime(() => f.GetOptionalCustomModifiers());

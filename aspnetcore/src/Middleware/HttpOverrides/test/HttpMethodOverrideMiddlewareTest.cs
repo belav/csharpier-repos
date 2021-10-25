@@ -210,7 +210,7 @@ namespace Microsoft.AspNetCore.HttpOverrides
             var server = host.GetTestServer();
 
             var req = new HttpRequestMessage(HttpMethod.Post, "");
-            req.Content = new FormUrlEncodedContent(new Dictionary<string, string>() {  });
+            req.Content = new FormUrlEncodedContent(new Dictionary<string, string>() { });
 
             await server.CreateClient().SendAsync(req);
             Assert.True(assertsExecuted);

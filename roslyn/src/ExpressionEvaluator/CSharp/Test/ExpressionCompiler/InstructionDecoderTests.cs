@@ -417,7 +417,7 @@ class C
                     source,
                     "C.M",
                     DkmVariableInfoFlags.Types | DkmVariableInfoFlags.Names,
-                    argumentValues: new string[] {  }
+                    argumentValues: new string[] { }
                 )
             );
 

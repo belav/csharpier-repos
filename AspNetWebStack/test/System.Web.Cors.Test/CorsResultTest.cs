@@ -101,7 +101,6 @@ namespace System.Web.Cors.Test
         {
             CorsResult result = new CorsResult
             {
-
                 // AllowMethods is empty by default
             };
 
@@ -157,7 +156,6 @@ namespace System.Web.Cors.Test
         {
             CorsResult result = new CorsResult
             {
-
                 // AllowHeaders is empty by default
             };
 
@@ -231,7 +229,6 @@ namespace System.Web.Cors.Test
         {
             CorsResult result = new CorsResult
             {
-
                 // AllowExposedHeaders is empty by default
             };
 

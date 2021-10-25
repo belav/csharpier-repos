@@ -108,7 +108,6 @@ namespace System.Linq.Parallel.Tests
             nameof(OnlyOneData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Count_One_Longrunning(int count, int position)
@@ -132,7 +131,6 @@ namespace System.Linq.Parallel.Tests
             nameof(OnlyOneData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void LongCount_One_Longrunning(int count, long position)

@@ -193,7 +193,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
             Assert.True(compilationOptions.StrongNameProvider is DesktopStrongNameProvider);
             Assert.True(compilationOptions.XmlReferenceResolver is XmlFileResolver);
 
-            var array = new string[] {  };
+            var array = new string[] { };
             Assert.Equal(
                 Hash.CombineValues(array, StringComparer.Ordinal),
                 compilationOptions.StrongNameProvider.GetHashCode()

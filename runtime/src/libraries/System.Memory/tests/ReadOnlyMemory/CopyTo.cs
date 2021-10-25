@@ -47,7 +47,7 @@ namespace System.MemoryTests
         [Fact]
         public static void TryCopyToEmpty()
         {
-            int[] src = {  };
+            int[] src = { };
             int[] dst = { 99, 100, 101 };
 
             ReadOnlyMemory<int> srcMemory = src;

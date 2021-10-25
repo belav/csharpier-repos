@@ -88,7 +88,6 @@ namespace System.Linq.Parallel.Tests
             new[] { 1, 4, 32 },
             new int[]
             { /* same as count */
-
             }
         )]
         [OuterLoop]
@@ -121,7 +120,6 @@ namespace System.Linq.Parallel.Tests
             nameof(DegreeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             },
             new[] { 1, 4, 64, 128 }
         )]
@@ -153,7 +151,6 @@ namespace System.Linq.Parallel.Tests
             new[] { 1, 4 },
             new int[]
             { /* same as count */
-
             }
         )]
         [MemberData(nameof(DegreeData), new[] { 32 }, new[] { 4 })]
@@ -190,7 +187,6 @@ namespace System.Linq.Parallel.Tests
             new[] { 1, 4 },
             new int[]
             { /* same as count */
-
             }
         )]
         [MemberData(nameof(NotLoadBalancedDegreeData), new[] { 32, 512, 1024 }, new[] { 4, 16 })]
@@ -226,7 +222,6 @@ namespace System.Linq.Parallel.Tests
             new[] { 1, 4 },
             new int[]
             { /* same as count */
-
             }
         )]
         [MemberData(nameof(NotLoadBalancedDegreeData), new[] { 32, 512, 1024 }, new[] { 4, 16 })]

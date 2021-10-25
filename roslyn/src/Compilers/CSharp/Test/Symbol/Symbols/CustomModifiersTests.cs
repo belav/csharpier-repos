@@ -1810,7 +1810,7 @@ class Module1
             );
 
             var compilation2 = CreateCompilationWithMscorlib45(
-                new SyntaxTree[] {  },
+                new SyntaxTree[] { },
                 references: new[] { new CSharpCompilationReference(compilation1) }
             );
 

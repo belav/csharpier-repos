@@ -108,7 +108,7 @@ namespace System.Tests
 
             // Check invoke on a delegate that takes no parameters.
             Action emptyDelegate = EmptyFunc;
-            emptyDelegate.DynamicInvoke(new object[] {  });
+            emptyDelegate.DynamicInvoke(new object[] { });
             emptyDelegate.DynamicInvoke(null);
         }
 

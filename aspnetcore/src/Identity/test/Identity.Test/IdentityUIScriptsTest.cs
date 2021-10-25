@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Identity.Test
         {
             _output = output;
             _httpClient = new HttpClient(
-                new RetryHandler(new HttpClientHandler() {  }, output, TimeSpan.FromSeconds(1), 5)
+                new RetryHandler(new HttpClientHandler() { }, output, TimeSpan.FromSeconds(1), 5)
             );
         }
 

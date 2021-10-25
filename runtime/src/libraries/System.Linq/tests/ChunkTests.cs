@@ -129,9 +129,9 @@ namespace System.Linq.Tests
         }
 
         [Theory]
-        [InlineData(new int[] {  }, typeof(TestReadOnlyCollection<int>))]
-        [InlineData(new int[] {  }, typeof(TestCollection<int>))]
-        [InlineData(new int[] {  }, typeof(TestEnumerable<int>))]
+        [InlineData(new int[] { }, typeof(TestReadOnlyCollection<int>))]
+        [InlineData(new int[] { }, typeof(TestCollection<int>))]
+        [InlineData(new int[] { }, typeof(TestEnumerable<int>))]
         public void EmptySourceYieldsNoChunks(int[] array, Type type)
         {
             IEnumerable<int> source = ConvertToType(array, type);

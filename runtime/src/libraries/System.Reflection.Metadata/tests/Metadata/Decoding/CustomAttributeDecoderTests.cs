@@ -157,7 +157,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         [Test(UInt16Enum.Value)]
         [Test(UInt32Enum.Value)]
         [Test(UInt64Enum.Value)]
-        [Test(new string[] {  })]
+        [Test(new string[] { })]
         [Test(new string[] { "x", "y", "z", null })]
         [Test(new Int32Enum[] { Int32Enum.Value })]
         // same single fixed arguments as above, typed as object
@@ -184,7 +184,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         [Test((object)(UInt16Enum.Value))]
         [Test((object)(UInt32Enum.Value))]
         [Test((object)(UInt64Enum.Value))]
-        [Test((object)(new string[] {  }))]
+        [Test((object)(new string[] { }))]
         [Test((object)(new string[] { "x", "y", "z", null }))]
         [Test((object)(new Int32Enum[] { Int32Enum.Value }))]
         // same values as above two cases, but put into an object[]
@@ -214,7 +214,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 Int16Enum.Value,
                 Int32Enum.Value,
                 Int64Enum.Value,
-                new string[] {  },
+                new string[] { },
                 new string[] { "x", "y", "z", null },
             }
         )]
@@ -244,7 +244,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         [Test(UInt16EnumField = UInt16Enum.Value)]
         [Test(UInt32EnumField = UInt32Enum.Value)]
         [Test(UInt64EnumField = UInt64Enum.Value)]
-        [Test(new string[] {  })]
+        [Test(new string[] { })]
         [Test(new string[] { "x", "y", "z", null })]
         [Test(new Int32Enum[] { Int32Enum.Value })]
         // null named arguments

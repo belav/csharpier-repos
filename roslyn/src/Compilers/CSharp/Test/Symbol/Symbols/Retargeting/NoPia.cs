@@ -1711,7 +1711,7 @@ public class C
             var assemblies1 = MetadataTestHelpers.GetSymbolsForReferences(
                 new CSharpCompilation[] { comp },
                 null,
-                new MetadataReference[] {  },
+                new MetadataReference[] { },
                 null
             );
 
@@ -1721,7 +1721,7 @@ public class C
             );
 
             var assemblies2 = MetadataTestHelpers.GetSymbolsForReferences(
-                new CSharpCompilation[] {  },
+                new CSharpCompilation[] { },
                 null,
                 new MetadataReference[] { comp.ToMetadataReference() },
                 null
@@ -1769,7 +1769,7 @@ public class C
             var assemblies1 = MetadataTestHelpers.GetSymbolsForReferences(
                 new CSharpCompilation[] { comp },
                 null,
-                new MetadataReference[] {  },
+                new MetadataReference[] { },
                 null
             );
 
@@ -1779,7 +1779,7 @@ public class C
             );
 
             var assemblies2 = MetadataTestHelpers.GetSymbolsForReferences(
-                new CSharpCompilation[] {  },
+                new CSharpCompilation[] { },
                 null,
                 new MetadataReference[] { comp.ToMetadataReference() },
                 null

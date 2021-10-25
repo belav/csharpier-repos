@@ -360,7 +360,7 @@ namespace System.Web.Mvc.Test
                 new RouteData()
             );
             DefaultControllerFactory factory = new DefaultControllerFactory();
-            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] {  });
+            MockBuildManager buildManagerMock = new MockBuildManager(new Assembly[] { });
             ControllerTypeCache controllerTypeCache = new ControllerTypeCache();
 
             factory.BuildManager = buildManagerMock;

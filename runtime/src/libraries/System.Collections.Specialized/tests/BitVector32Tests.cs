@@ -19,7 +19,7 @@ namespace System.Collections.Specialized.Tests
         /// <returns>Row of data</returns>
         public static IEnumerable<object[]> Mask_SetUnset_Multiple_Data()
         {
-            yield return new object[] { 0, 0, new int[] {  } };
+            yield return new object[] { 0, 0, new int[] { } };
             yield return new object[] { 1, 0, new int[] { 1 } };
             yield return new object[] { 2, 0, new int[] { 2 } };
             yield return new object[] { int.MinValue, 0, new int[] { 32 } };

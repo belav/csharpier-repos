@@ -31,7 +31,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyIList()
         {
-            int?[] source = {  };
+            int?[] source = { };
             int? expected = null;
 
             Assert.Equal(expected, source.SingleOrDefault());
@@ -40,7 +40,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyIListDefault()
         {
-            int?[] source = {  };
+            int?[] source = { };
             int expected = 5;
 
             Assert.Equal(expected, source.SingleOrDefault(5));
@@ -109,7 +109,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithPredicate()
         {
-            int[] source = {  };
+            int[] source = { };
             int expected = default(int);
 
             Assert.Equal(expected, source.SingleOrDefault(i => i % 2 == 0));
@@ -118,7 +118,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithPredicateDefault()
         {
-            int[] source = {  };
+            int[] source = { };
             int expected = 5;
 
             Assert.Equal(expected, source.SingleOrDefault(i => i % 2 == 0, 5));
@@ -264,7 +264,7 @@ namespace System.Linq.Tests
         [Fact]
         public void ThrowsOnNullPredicate()
         {
-            int[] source = {  };
+            int[] source = { };
             Func<int, bool> nullPredicate = null;
             AssertExtensions.Throws<ArgumentNullException>(
                 "predicate",
@@ -275,7 +275,7 @@ namespace System.Linq.Tests
         [Fact]
         public void ThrowsOnNullPredicateDefault()
         {
-            int[] source = {  };
+            int[] source = { };
             Func<int, bool> nullPredicate = null;
             AssertExtensions.Throws<ArgumentNullException>(
                 "predicate",

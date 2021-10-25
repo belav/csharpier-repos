@@ -92,7 +92,7 @@ namespace System.Reflection.Tests
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ClassWithStaticConstructor));
             Assert.Equal(1, constructors.Length);
-            object obj = constructors[0].Invoke(null, new object[] {  });
+            object obj = constructors[0].Invoke(null, new object[] { });
             Assert.Null(obj);
         }
 
@@ -111,7 +111,7 @@ namespace System.Reflection.Tests
                 0,
                 ClassWithStaticConstructorThatIsCalledMultipleTimesViaReflection.VisibleStatics.s_cctorCallCount
             );
-            object obj = constructors[0].Invoke(null, new object[] {  });
+            object obj = constructors[0].Invoke(null, new object[] { });
             Assert.Null(obj);
             Assert.Equal(
                 1,
@@ -120,7 +120,7 @@ namespace System.Reflection.Tests
 
             // Subsequent invocations of the static cctor should not run the cctor at all, as it has already executed
             // and running multiple times opens up the possibility of modifying read only static data
-            obj = constructors[0].Invoke(null, new object[] {  });
+            obj = constructors[0].Invoke(null, new object[] { });
             Assert.Null(obj);
             Assert.Equal(
                 1,
@@ -246,7 +246,7 @@ namespace System.Reflection.Tests
         {
             ConstructorInfo[] constructors = GetConstructors(typeof(ConstructorInfoDerived));
             ConstructorInfoDerived obj = null;
-            obj = (ConstructorInfoDerived)constructors[0].Invoke(new object[] {  });
+            obj = (ConstructorInfoDerived)constructors[0].Invoke(new object[] { });
             Assert.NotNull(obj);
         }
 

@@ -415,7 +415,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
                             // we'll return error if there wasn't at least an open paren...
                             if ((openParenIndex >= 0) && method != null)
                             {
-                                var methodValue = method.Invoke(RawValue, new object[] {  });
+                                var methodValue = method.Invoke(RawValue, new object[] { });
                                 exprValue = new DkmClrValue(
                                     methodValue,
                                     methodValue,

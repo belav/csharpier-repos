@@ -414,9 +414,9 @@ namespace System.Data.Tests
             dt.Columns.Add(new DataColumn());
 
             //init some rows
-            dt.Rows.Add(new object[] {  });
-            dt.Rows.Add(new object[] {  });
-            dt.Rows.Add(new object[] {  });
+            dt.Rows.Add(new object[] { });
+            dt.Rows.Add(new object[] { });
+            dt.Rows.Add(new object[] { });
 
             DataRow dr = dt.Rows[1];
 

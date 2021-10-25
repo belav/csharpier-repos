@@ -463,8 +463,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
             MyType2.Result = -1;
             new MyType2(ve, ve);
             ret &= Varifier(16, MyType2.Result, "MyType2(MyEnum p1, MyEnum=MyEnum.one)");
-            dynamic ves = new MyEnum[] {  };
-            dynamic vs = new MyStruct[] {  };
+            dynamic ves = new MyEnum[] { };
+            dynamic vs = new MyStruct[] { };
             new MyType2(ves);
             ret &= Varifier(17, MyType1.Result, "MyType2(MyEnum[], MyStruct[] = null)");
             //
@@ -1675,7 +1675,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
         public static int MainMethod(string[] args)
         {
             CommonLibrary c = new CommonLibrary();
-            dynamic d = new Dictionary<dynamic, dynamic>() {  };
+            dynamic d = new Dictionary<dynamic, dynamic>() { };
             c.Method1(d);
             if (Test.Status == 1)
                 return 0;

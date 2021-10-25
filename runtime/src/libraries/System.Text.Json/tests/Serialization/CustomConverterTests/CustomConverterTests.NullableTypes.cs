@@ -604,7 +604,7 @@ namespace System.Text.Json.Serialization.Tests
                     ),
                     BindingFlags.Instance | BindingFlags.Public,
                     binder: null,
-                    args: new object[] {  },
+                    args: new object[] { },
                     culture: null
                 );
 

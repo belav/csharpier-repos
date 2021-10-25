@@ -179,14 +179,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                 // Ex: Null ref
                 // retval -= (int)d003(ref so, d, out d);
                 s_retval -= (int)d003(ref s_so, s_so, out s_so);
-                dynamic[] dary = new object[] {  };
+                dynamic[] dary = new object[] { };
                 int ret = 0;
                 D004 del004 = new D004(Foo.M0C);
-                del004(ref ret, new object[] {  }, dary);
+                del004(ref ret, new object[] { }, dary);
                 s_retval -= ret;
                 del004 = new D004(foo.M0D);
                 ret = 0;
-                del004(ref ret, new dynamic[] {  }, dary);
+                del004(ref ret, new dynamic[] { }, dary);
                 s_retval -= ret;
                 return s_retval;
             }
@@ -497,8 +497,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlg
                     ret = false;
                 }
 
-                dynamic[] dary = new object[] {  };
-                object[] oary = new object[] {  };
+                dynamic[] dary = new object[] { };
+                object[] oary = new object[] { };
                 ManagedTests.DynamicCSharp.Conformance.dynamic.context.dlgateEvent.dlgate.dlgatedeclarelib02.dlgatedeclarelib02.DynNamespace01.DynClass.DynStruct.D101 d101 =
                     null;
                 d101 =

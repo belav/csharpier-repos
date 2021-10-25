@@ -13,7 +13,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters1()
         {
-            VerifyGenericTypeParameters(typeof(Test_I1).Project(), new string[] {  }, null);
+            VerifyGenericTypeParameters(typeof(Test_I1).Project(), new string[] { }, null);
         }
 
         // Verify Generic Arguments
@@ -27,7 +27,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters3()
         {
-            VerifyGenericTypeParameters(typeof(Test_IG1<int>).Project(), new string[] {  }, null);
+            VerifyGenericTypeParameters(typeof(Test_IG1<int>).Project(), new string[] { }, null);
         }
 
         // Verify Generic Arguments
@@ -47,7 +47,7 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_IG21<int, string>).Project(),
-                new string[] {  },
+                new string[] { },
                 null
             );
         }
@@ -57,7 +57,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters6()
         {
-            VerifyGenericTypeParameters(typeof(Test_S1).Project(), new string[] {  }, null);
+            VerifyGenericTypeParameters(typeof(Test_S1).Project(), new string[] { }, null);
         }
 
         // Verify Generic Arguments
@@ -71,7 +71,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters8()
         {
-            VerifyGenericTypeParameters(typeof(Test_SG1<int>).Project(), new string[] {  }, null);
+            VerifyGenericTypeParameters(typeof(Test_SG1<int>).Project(), new string[] { }, null);
         }
 
         // Verify Generic Arguments
@@ -91,7 +91,7 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_SG21<int, string>).Project(),
-                new string[] {  },
+                new string[] { },
                 null
             );
         }
@@ -102,8 +102,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_SI1).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -114,7 +114,7 @@ namespace System.Reflection.Tests
             VerifyGenericTypeParameters(
                 typeof(Test_SIG1<>).Project(),
                 new string[] { "TS" },
-                new string[] {  }
+                new string[] { }
             );
         }
 
@@ -124,8 +124,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_SIG1<int>).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -136,7 +136,7 @@ namespace System.Reflection.Tests
             VerifyGenericTypeParameters(
                 typeof(Test_SIG21<, >).Project(),
                 new string[] { "TS", "VS" },
-                new string[] {  }
+                new string[] { }
             );
         }
 
@@ -146,8 +146,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_SIG21<int, string>).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -157,8 +157,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_SI_Int1).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -169,7 +169,7 @@ namespace System.Reflection.Tests
             VerifyGenericTypeParameters(
                 typeof(Test_SIG_Int1<>).Project(),
                 new string[] { "TS" },
-                new string[] {  }
+                new string[] { }
             );
         }
 
@@ -179,8 +179,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_SIG_Int1<string>).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -190,8 +190,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_SIG_Int_Int1).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -201,7 +201,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters20()
         {
-            VerifyGenericTypeParameters(typeof(Test_C1).Project(), new string[] {  }, null);
+            VerifyGenericTypeParameters(typeof(Test_C1).Project(), new string[] { }, null);
         }
 
         // Verify Generic Arguments
@@ -215,7 +215,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestGenericParameters22()
         {
-            VerifyGenericTypeParameters(typeof(Test_CG1<int>).Project(), new string[] {  }, null);
+            VerifyGenericTypeParameters(typeof(Test_CG1<int>).Project(), new string[] { }, null);
         }
 
         // Verify Generic Arguments
@@ -235,7 +235,7 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_CG21<int, string>).Project(),
-                new string[] {  },
+                new string[] { },
                 null
             );
         }
@@ -246,8 +246,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_CI1).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -258,7 +258,7 @@ namespace System.Reflection.Tests
             VerifyGenericTypeParameters(
                 typeof(Test_CIG1<>).Project(),
                 new string[] { "T" },
-                new string[] {  }
+                new string[] { }
             );
         }
 
@@ -268,8 +268,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_CIG1<int>).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -280,7 +280,7 @@ namespace System.Reflection.Tests
             VerifyGenericTypeParameters(
                 typeof(Test_CIG21<, >).Project(),
                 new string[] { "T", "V" },
-                new string[] {  }
+                new string[] { }
             );
         }
 
@@ -290,8 +290,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_CIG21<int, string>).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -301,8 +301,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_CI_Int1).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -313,7 +313,7 @@ namespace System.Reflection.Tests
             VerifyGenericTypeParameters(
                 typeof(Test_CIG_Int1<>).Project(),
                 new string[] { "T" },
-                new string[] {  }
+                new string[] { }
             );
         }
 
@@ -323,8 +323,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_CIG_Int1<string>).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 
@@ -334,8 +334,8 @@ namespace System.Reflection.Tests
         {
             VerifyGenericTypeParameters(
                 typeof(Test_CIG_Int_Int1).Project(),
-                new string[] {  },
-                new string[] {  }
+                new string[] { },
+                new string[] { }
             );
         }
 

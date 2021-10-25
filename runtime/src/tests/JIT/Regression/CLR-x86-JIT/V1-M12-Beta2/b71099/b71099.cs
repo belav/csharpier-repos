@@ -14,7 +14,7 @@ namespace Test
         {
             double[] local3 = new double[] { 106.0, 7.0, 122.0, 55.0, 112.0 };
             uint[] local4 = new uint[] { AA.m_uStatic2, 124u, AA.m_uStatic2, 5u };
-            long local5 = new long[] {  }[23];
+            long local5 = new long[] { }[23];
             float[] local6 = new float[] { 54.0f };
             sbyte local7 = ((sbyte)CC.m_xStatic1);
             bool local8 = ((bool)CC.m_xStatic1);

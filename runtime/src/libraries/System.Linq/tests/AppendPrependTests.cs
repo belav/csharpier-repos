@@ -81,14 +81,14 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyAppend()
         {
-            int[] first = {  };
+            int[] first = { };
             Assert.Single(first.Append(42), 42);
         }
 
         [Fact]
         public void EmptyPrepend()
         {
-            string[] first = {  };
+            string[] first = { };
             Assert.Single(first.Prepend("aa"), "aa");
         }
 

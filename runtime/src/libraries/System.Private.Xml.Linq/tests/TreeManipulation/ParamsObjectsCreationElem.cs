@@ -293,7 +293,7 @@ namespace XLinqTests
             var mode = (InputParamStyle)Param;
             object[] nulls =
             {
-                new object[] {  },
+                new object[] { },
                 new object[] { null, null },
                 null,
                 "",

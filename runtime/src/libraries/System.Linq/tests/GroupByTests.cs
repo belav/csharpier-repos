@@ -246,22 +246,22 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            string[] key = {  };
-            int[] element = {  };
-            Record[] source = {  };
+            string[] key = { };
+            int[] element = { };
+            Record[] source = { };
             Assert.Empty(
-                new Record[] {  }.GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
+                new Record[] { }.GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
             );
         }
 
         [Fact]
         public void EmptySourceRunOnce()
         {
-            string[] key = {  };
-            int[] element = {  };
-            Record[] source = {  };
+            string[] key = { };
+            int[] element = { };
+            Record[] source = { };
             Assert.Empty(
-                new Record[] {  }
+                new Record[] { }
                     .RunOnce()
                     .GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
             );
@@ -533,11 +533,11 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithResultSelector()
         {
-            string[] key = {  };
-            int[] element = {  };
-            Record[] source = {  };
+            string[] key = { };
+            int[] element = { };
+            Record[] source = { };
             Assert.Empty(
-                new Record[] {  }.GroupBy(
+                new Record[] { }.GroupBy(
                     e => e.Name,
                     e => e.Score,
                     (k, es) => (long)(k ?? " ").Length * es.Sum(),

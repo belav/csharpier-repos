@@ -8557,7 +8557,7 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
     Finally: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {  };
+            var expectedDiagnostics = new DiagnosticDescription[] { };
 
             var comp = CreateCompilation(source);
             VerifyOperationTreeForTest<BlockSyntax>(comp, expectedIoperationTree);

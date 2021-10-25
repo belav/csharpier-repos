@@ -32,7 +32,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             controller.ControllerProperties.Add(
                 new PropertyModel(
                     controller.ControllerType.AsType().GetProperty("TestProperty"),
-                    new List<object>() {  }
+                    new List<object>() { }
                 )
             );
 

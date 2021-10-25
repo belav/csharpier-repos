@@ -602,7 +602,7 @@ namespace Microsoft.AspNetCore.Authorization.Test
                     );
                 }
             );
-            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {  }, "AuthType"));
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { }, "AuthType"));
 
             // Act
             var allowed = await authorizationService.AuthorizeAsync(user, "Basic");
@@ -1135,7 +1135,7 @@ namespace Microsoft.AspNetCore.Authorization.Test
                     services.AddTransient<IAuthorizationHandler, EvenHandler>();
                 }
             );
-            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] {  }, "AuthType"));
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[] { }, "AuthType"));
 
             // Act
             // Assert

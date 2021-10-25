@@ -163,7 +163,7 @@ namespace Microsoft.AspNetCore.Routing
         public void AddressScheme_IgnoresEndpointsWithoutEndpointName()
         {
             // Arrange
-            var endpoint = EndpointFactory.CreateRouteEndpoint("/a", metadata: new object[] {  });
+            var endpoint = EndpointFactory.CreateRouteEndpoint("/a", metadata: new object[] { });
 
             // Act
             var addressScheme = CreateAddressScheme(endpoint);

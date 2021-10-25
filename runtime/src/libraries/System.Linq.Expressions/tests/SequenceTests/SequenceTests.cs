@@ -1061,9 +1061,9 @@ namespace System.Linq.Expressions.Tests
 
         private static void ConstructAggregates<T>(T value)
         {
-            ConstantExpression values = Expression.Constant(new T[] {  }.AsQueryable());
+            ConstantExpression values = Expression.Constant(new T[] { }.AsQueryable());
             ConstantExpression custs = Expression.Constant(
-                new NWindProxy.Customer[] {  }.AsQueryable()
+                new NWindProxy.Customer[] { }.AsQueryable()
             );
             Expression<Func<NWindProxy.Customer, T>> cvalue = c => value;
             Type[] taCust = new Type[] { typeof(NWindProxy.Customer) };
@@ -2291,7 +2291,7 @@ namespace System.Linq.Expressions.Tests
             );
             Expression<Func<string[]>> linq1b = Expression.Lambda<Func<string[]>>(
                 linq1a,
-                new ParameterExpression[] {  }
+                new ParameterExpression[] { }
             );
             Func<string[]> f = linq1b.Compile(useInterpreter);
         }
@@ -2500,7 +2500,7 @@ namespace System.Linq.Expressions.Tests
                     "ComputeDynamicLambda",
                     BindingFlags.Static | BindingFlags.Public
                 ),
-                new Expression[] {  }
+                new Expression[] { }
             );
             AssertExtensions.Throws<ArgumentException>(
                 "expression",
@@ -2522,7 +2522,7 @@ namespace System.Linq.Expressions.Tests
                     "ComputeDynamicDelegate",
                     BindingFlags.Static | BindingFlags.Public
                 ),
-                new Expression[] {  }
+                new Expression[] { }
             );
             AssertExtensions.Throws<ArgumentException>(
                 "expression",

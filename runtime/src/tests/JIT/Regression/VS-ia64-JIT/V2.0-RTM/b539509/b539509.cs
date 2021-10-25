@@ -134,7 +134,7 @@ public class AA<TA, TB, TC, TD, TE, TF>
         return new short[][][]
         { /*2 REFS*/
             (new short[36u][]),
-            new short[][] {  },
+            new short[][] { },
             /*2 REFS*/(new short[36u][])
         };
     }

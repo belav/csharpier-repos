@@ -12,7 +12,7 @@ namespace Microsoft.Extensions.Logging.Test
     {
         [Theory]
         [InlineData("", "", null)]
-        [InlineData("", "", new object[] {  })]
+        [InlineData("", "", new object[] { })]
         [InlineData("arg1 arg2", "{0} {1}", new object[] { "arg1", "arg2" })]
         [InlineData("arg1 arg2", "{Start} {End}", new object[] { "arg1", "arg2" })]
         [InlineData("arg1     arg2", "{Start,-6} {End,6}", new object[] { "arg1", "arg2" })]
@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.Logging.Test
 
         [Theory]
         [InlineData("[null]", null, null)]
-        [InlineData("[null]", null, new object[] {  })]
+        [InlineData("[null]", null, new object[] { })]
         [InlineData("[null]", null, new object[] { null })]
         [InlineData("[null]", null, new object[] { 1 })]
         public void Log_NullFormat(string expected, string format, object[] args)
@@ -167,7 +167,7 @@ namespace Microsoft.Extensions.Logging.Test
                     // empty enumerable
                     {
                         "The view '{ViewName}' was not found. Searched locations: {SearchedLocations}",
-                        new object[] { "Index", new string[] {  } },
+                        new object[] { "Index", new string[] { } },
                         "The view 'Index' was not found. Searched locations: "
                     },
                     // single item enumerable

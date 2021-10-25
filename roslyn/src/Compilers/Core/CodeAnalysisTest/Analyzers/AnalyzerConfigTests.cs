@@ -1337,7 +1337,7 @@ dotnet_diagnostic.cs000.some_key = some_val",
                 new[]
                 {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "some_val") },
-                    new (string, string)[] {  }
+                    new (string, string)[] { }
                 },
                 options
             );
@@ -1376,7 +1376,7 @@ dotnet_diagnostic.cs000.some_key = some_val",
                 new[]
                 {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "some_val") },
-                    new (string, string)[] {  },
+                    new (string, string)[] { },
                     new[] { ("dotnet_diagnostic.cs000.bad_key", "bad_val") }
                 },
                 options
@@ -2080,10 +2080,10 @@ option4 = value4
             VerifyAnalyzerOptions(
                 new[]
                 {
-                    new (string, string)[] {  },
-                    new (string, string)[] {  },
+                    new (string, string)[] { },
+                    new (string, string)[] { },
                     new (string, string)[] { ("option1", "value1") },
-                    new (string, string)[] {  }
+                    new (string, string)[] { }
                 },
                 options
             );
@@ -2279,7 +2279,7 @@ option1 = value1
             configs.Free();
 
             VerifyAnalyzerOptions(
-                new[] { new[] { ("option1", "value1") }, new (string, string)[] {  } },
+                new[] { new[] { ("option1", "value1") }, new (string, string)[] { } },
                 options
             );
         }
@@ -2474,7 +2474,7 @@ is_global = true
             configs.Free();
 
             VerifyAnalyzerOptions(
-                new[] { new (string, string)[] {  }, new[] { ("is_global", "true") } },
+                new[] { new (string, string)[] { }, new[] { ("is_global", "true") } },
                 options
             );
         }

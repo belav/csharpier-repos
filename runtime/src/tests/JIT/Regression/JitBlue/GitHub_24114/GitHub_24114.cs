@@ -25,6 +25,6 @@ namespace GitHub_24114
 
     public struct SimpleStruct
     {
-        public static readonly SimpleStruct Default = new SimpleStruct() {  };
+        public static readonly SimpleStruct Default = new SimpleStruct() { };
     }
 }

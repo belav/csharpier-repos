@@ -91,7 +91,6 @@ namespace System.Linq.Parallel.Tests
             nameof(OnlyOneData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Contains_OneMatching_Longrunning(int count, int position)

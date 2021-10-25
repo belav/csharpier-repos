@@ -1689,7 +1689,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation
             {
                 yield return new ValidationResult(
                     $"Error1 about '{validationContext.MemberName}' (display: '{validationContext.DisplayName}').",
-                    new string[] {  }
+                    new string[] { }
                 );
                 yield return new ValidationResult("Error2", new[] { "Property1" });
                 yield return new ValidationResult("Error3", new[] { "Property2", "Property3" });

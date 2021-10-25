@@ -60,7 +60,7 @@ namespace System.Collections.Immutable.Tests
         {
             this.UnionTestHelper(this.Empty<int>(), new[] { 1, 3, 5, 7 });
             this.UnionTestHelper(this.Empty<int>().Union(new[] { 2, 4, 6 }), new[] { 1, 3, 5, 7 });
-            this.UnionTestHelper(this.Empty<int>().Union(new[] { 1, 2, 3 }), new int[0] {  });
+            this.UnionTestHelper(this.Empty<int>().Union(new[] { 1, 2, 3 }), new int[0] { });
             this.UnionTestHelper(
                 this.Empty<int>().Union(new[] { 2 }),
                 Enumerable.Range(0, 1000).ToArray()

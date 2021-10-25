@@ -33,7 +33,7 @@ namespace System.Linq.Tests
 
         private static void TestEmptyIList<T>()
         {
-            T[] source = {  };
+            T[] source = { };
 
             Assert.NotNull(source as IList<T>);
 
@@ -130,7 +130,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<InvalidOperationException>(() => source.First(x => true));
             Assert.Throws<InvalidOperationException>(() => source.First(x => false));

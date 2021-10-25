@@ -1537,7 +1537,7 @@ namespace System.Numerics.Tensors.Tests
             );
 
             Assert.Throws<ArgumentException>(
-                () => TensorOperations.Contract(left, right, new int[] {  }, new[] { 1 })
+                () => TensorOperations.Contract(left, right, new int[] { }, new[] { 1 })
             );
 
             // reshape to include dimension of length 1.

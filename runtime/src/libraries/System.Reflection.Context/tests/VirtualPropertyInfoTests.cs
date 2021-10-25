@@ -295,7 +295,7 @@ namespace System.Reflection.Context.Tests
                 42,
                 BindingFlags.Default,
                 null,
-                new object[] {  },
+                new object[] { },
                 CultureInfo.InvariantCulture
             );
         }

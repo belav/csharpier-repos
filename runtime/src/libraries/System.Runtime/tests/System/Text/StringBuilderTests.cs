@@ -2867,7 +2867,7 @@ namespace System.Text.Tests
         [Theory]
         [InlineData(null, new object[] { null, null })]
         [InlineData("", new object[] { "", "" })]
-        [InlineData(" ", new object[] {  })]
+        [InlineData(" ", new object[] { })]
         [InlineData(", ", new object[] { "" })]
         public static void AppendJoin_NoValues_NoSpareCapacity_DoesNotThrow(
             string separator,

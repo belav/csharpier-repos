@@ -22,7 +22,7 @@ namespace System.Reflection.Internal.Tests
                 {
                     Assert.Equal(4, block.Size);
                     AssertEx.Equal(provider.Pointer, block.Pointer);
-                    AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(0, 0));
+                    AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(0, 0));
                     AssertEx.Equal(new byte[] { 3, 4 }, block.GetContentUnchecked(2, 2));
                     AssertEx.Equal(new byte[] { 1, 2, 3 }, block.GetContentUnchecked(0, 3));
                 }
@@ -33,7 +33,7 @@ namespace System.Reflection.Internal.Tests
                     Assert.Equal(2, block.Size);
                     AssertEx.Equal(new byte[] { 2, 3 }, block.GetContentUnchecked(0, 2));
                     AssertEx.Equal(new byte[] { 3 }, block.GetContentUnchecked(1, 1));
-                    AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(2, 0));
+                    AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(2, 0));
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace System.Reflection.Internal.Tests
                     {
                         Assert.Equal(4, block.Size);
                         AssertEx.Equal(provider.Pointer, block.Pointer);
-                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(0, 0));
+                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(0, 0));
                         AssertEx.Equal(new byte[] { 3, 4 }, block.GetContentUnchecked(2, 2));
                         AssertEx.Equal(new byte[] { 1, 2, 3 }, block.GetContentUnchecked(0, 3));
                     }
@@ -61,7 +61,7 @@ namespace System.Reflection.Internal.Tests
                         Assert.Equal(2, block.Size);
                         AssertEx.Equal(new byte[] { 2, 3 }, block.GetContentUnchecked(0, 2));
                         AssertEx.Equal(new byte[] { 3 }, block.GetContentUnchecked(1, 1));
-                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(2, 0));
+                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(2, 0));
                     }
                 }
             }
@@ -89,7 +89,7 @@ namespace System.Reflection.Internal.Tests
                     {
                         Assert.IsType<NativeHeapMemoryBlock>(block);
                         Assert.Equal(4, block.Size);
-                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(0, 0));
+                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(0, 0));
                         AssertEx.Equal(new byte[] { 3, 4 }, block.GetContentUnchecked(2, 2));
                         AssertEx.Equal(new byte[] { 1, 2, 3 }, block.GetContentUnchecked(0, 3));
                     }
@@ -102,7 +102,7 @@ namespace System.Reflection.Internal.Tests
                         Assert.Equal(2, block.Size);
                         AssertEx.Equal(new byte[] { 2, 3 }, block.GetContentUnchecked(0, 2));
                         AssertEx.Equal(new byte[] { 3 }, block.GetContentUnchecked(1, 1));
-                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(2, 0));
+                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(2, 0));
                     }
 
                     Assert.Equal(3, stream.Position);
@@ -122,7 +122,7 @@ namespace System.Reflection.Internal.Tests
                     {
                         Assert.IsType<NativeHeapMemoryBlock>(block);
                         Assert.Equal(4, block.Size);
-                        AssertEx.Equal(new byte[] {  }, block.GetContentUnchecked(0, 0));
+                        AssertEx.Equal(new byte[] { }, block.GetContentUnchecked(0, 0));
                         AssertEx.Equal(new byte[] { 3, 4 }, block.GetContentUnchecked(2, 2));
                         AssertEx.Equal(new byte[] { 1, 2, 3 }, block.GetContentUnchecked(0, 3));
                     }

@@ -124,7 +124,7 @@ namespace System.Reflection.Context.Tests
                 _testObject,
                 BindingFlags.GetProperty,
                 null,
-                new object[] {  },
+                new object[] { },
                 CultureInfo.InvariantCulture
             );
             Assert.Equal(42, returnVal);

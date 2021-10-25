@@ -47,7 +47,7 @@ namespace System.Web.Http.Controllers
 
             // Assert
             Assert.Same(expectedResponse, response);
-            Assert.Equal(new string[] {  }, log.ToArray());
+            Assert.Equal(new string[] { }, log.ToArray());
         }
 
         [Fact]

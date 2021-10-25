@@ -17,7 +17,7 @@ namespace System.Linq.Tests
         }
 
         [Theory]
-        [InlineData(new int[] {  })]
+        [InlineData(new int[] { })]
         [InlineData(new int[] { 1 })]
         [InlineData(new int[] { 5 })]
         [InlineData(new int[] { 1, 3, 5 })]

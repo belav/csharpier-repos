@@ -48,7 +48,7 @@ namespace TestHelper
             {
                 if (this.locations == null)
                 {
-                    this.locations = new DiagnosticResultLocation[] {  };
+                    this.locations = new DiagnosticResultLocation[] { };
                 }
                 return this.locations;
             }

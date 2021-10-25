@@ -89,7 +89,7 @@ public class TestMethodInfo
     {
         Type testClass = Type.GetType("TestSmallStackArgsClass");
         ConstructorInfo testConstructor = testClass.GetConstructor(Type.EmptyTypes);
-        object testClassObject = testConstructor.Invoke(new object[] {  });
+        object testClassObject = testConstructor.Invoke(new object[] { });
 
         MethodInfo testMethod = testClass.GetMethod("TestSmallStackArgsMethod");
         var args = new object[12];

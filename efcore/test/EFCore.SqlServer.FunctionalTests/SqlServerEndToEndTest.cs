@@ -421,12 +421,12 @@ namespace Microsoft.EntityFrameworkCore
             {
                 context.Database.EnsureCreatedResiliently();
 
-                var category = new Category {  };
+                var category = new Category { };
                 context.Categories.Add(category);
 
                 context.SaveChanges();
 
-                var fileMetadata = new FileMetadata {  };
+                var fileMetadata = new FileMetadata { };
                 context.FileMetadata.Add(fileMetadata);
                 category.Picture = new FileSource { FileId = fileMetadata.Id };
 

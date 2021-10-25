@@ -35,10 +35,10 @@ namespace System.Xml.Tests
             {
                 val.Initialize();
                 val.EndValidation();
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
+                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
             }
             else
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
+                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
 
             return;
         }
@@ -97,7 +97,7 @@ namespace System.Xml.Tests
                 val.ValidateElement("elem2", "", info);
                 val.SkipToEndElement(info);
 
-                names = new XmlQualifiedName[] {  };
+                names = new XmlQualifiedName[] { };
             }
             else
             {
@@ -162,7 +162,7 @@ namespace System.Xml.Tests
             val.ValidateElement(elem, "", info);
             val.SkipToEndElement(info);
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
+            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
 
             return;
         }
@@ -247,7 +247,7 @@ namespace System.Xml.Tests
                 val.SkipToEndElement(info);
             }
 
-            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
+            CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
 
             return;
         }
@@ -276,7 +276,7 @@ namespace System.Xml.Tests
             foreach (string elem in new string[] { "bar", "foo", "NestedElement" })
             {
                 val.ValidateEndElement(info);
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
+                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
             }
 
             return;
@@ -420,7 +420,7 @@ namespace System.Xml.Tests
                 val.ValidateElement("elem1", "uri:tempuri", info);
                 val.SkipToEndElement(info);
 
-                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] {  });
+                CheckExpectedElements(val.GetExpectedParticles(), new XmlQualifiedName[] { });
             }
 
             return;
@@ -602,7 +602,7 @@ namespace System.Xml.Tests
                 val.ValidateElement("elem1", "", info);
                 val.ValidateEndElement(info);
 
-                names = new XmlQualifiedName[] {  };
+                names = new XmlQualifiedName[] { };
             }
 
             CheckExpectedElements(val.GetExpectedParticles(), names);

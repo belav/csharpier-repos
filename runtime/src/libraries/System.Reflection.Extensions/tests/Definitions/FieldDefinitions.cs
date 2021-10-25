@@ -47,7 +47,7 @@ namespace System.Reflection.Tests
             "PublicFieldNames"
         };
 
-        public static string[] InheritedFieldNames = new string[] {  };
+        public static string[] InheritedFieldNames = new string[] { };
 
         public static string[] PublicFieldNames = new string[]
         {

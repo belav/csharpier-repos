@@ -35,7 +35,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer
             {
                 // Arrange
                 var configuration = new ConfigurationBuilder()
-                    .AddInMemoryCollection(new Dictionary<string, string>() {  })
+                    .AddInMemoryCollection(new Dictionary<string, string>() { })
                     .Build();
 
                 var configureSigningCredentials = new ConfigureSigningCredentials(

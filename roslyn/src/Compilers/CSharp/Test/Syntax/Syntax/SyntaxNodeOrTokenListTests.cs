@@ -163,15 +163,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             Assert.Equal(4, newList.Count);
             Assert.Equal("A B D E ", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementA, new SyntaxNodeOrToken[] {  });
+            newList = list.ReplaceRange(elementA, new SyntaxNodeOrToken[] { });
             Assert.Equal(2, newList.Count);
             Assert.Equal("B C ", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementB, new SyntaxNodeOrToken[] {  });
+            newList = list.ReplaceRange(elementB, new SyntaxNodeOrToken[] { });
             Assert.Equal(2, newList.Count);
             Assert.Equal("A C ", newList.ToFullString());
 
-            newList = list.ReplaceRange(elementC, new SyntaxNodeOrToken[] {  });
+            newList = list.ReplaceRange(elementC, new SyntaxNodeOrToken[] { });
             Assert.Equal(2, newList.Count);
             Assert.Equal("A B ", newList.ToFullString());
 

@@ -24,12 +24,12 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                 >()
                 {
                     {
-                        new KeyValuePair<string, object>[] {  },
-                        new KeyValuePair<string, object>[] {  }
+                        new KeyValuePair<string, object>[] { },
+                        new KeyValuePair<string, object>[] { }
                     },
                     {
                         // subset
-                        new KeyValuePair<string, object>[] {  },
+                        new KeyValuePair<string, object>[] { },
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
@@ -96,7 +96,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
                             new KeyValuePair<string, object>("RouteKey", "id")
                         },
-                        new KeyValuePair<string, object>[] {  }
+                        new KeyValuePair<string, object>[] { }
                     },
                     {
                         new[]

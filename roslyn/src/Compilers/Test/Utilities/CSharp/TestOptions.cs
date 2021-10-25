@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             RegularPreview;
 
         private static readonly SmallDictionary<string, string> s_experimentalFeatures =
-            new SmallDictionary<string, string> {  };
+            new SmallDictionary<string, string> { };
         public static readonly CSharpParseOptions ExperimentalParseOptions = new CSharpParseOptions(
             kind: SourceCodeKind.Regular,
             documentationMode: DocumentationMode.None,

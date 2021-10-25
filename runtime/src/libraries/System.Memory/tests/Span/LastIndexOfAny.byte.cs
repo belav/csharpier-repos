@@ -343,7 +343,7 @@ namespace System.SpanTests
             int idx = sp.LastIndexOfAny(values);
             Assert.Equal(-1, idx);
 
-            values = new ReadOnlySpan<byte>(new byte[] {  });
+            values = new ReadOnlySpan<byte>(new byte[] { });
             idx = sp.LastIndexOfAny(values);
             Assert.Equal(-1, idx);
         }

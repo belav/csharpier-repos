@@ -26,7 +26,7 @@ namespace System.Web.Helpers.Test
         public void ConstructorThrowsWhenFilePathIsNull()
         {
             Assert.ThrowsArgument(
-                () => new WebImage(GetContext(), s => new byte[] {  }, filePath: null),
+                () => new WebImage(GetContext(), s => new byte[] { }, filePath: null),
                 "filePath",
                 "Value cannot be null or an empty string."
             );
@@ -36,7 +36,7 @@ namespace System.Web.Helpers.Test
         public void ConstructorThrowsWhenFilePathIsEmpty()
         {
             Assert.ThrowsArgument(
-                () => new WebImage(GetContext(), s => new byte[] {  }, filePath: String.Empty),
+                () => new WebImage(GetContext(), s => new byte[] { }, filePath: String.Empty),
                 "filePath",
                 "Value cannot be null or an empty string."
             );

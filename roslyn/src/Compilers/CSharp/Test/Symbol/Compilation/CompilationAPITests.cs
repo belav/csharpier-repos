@@ -740,7 +740,7 @@ namespace A.B {
             Assert.Equal(0, comp.ExternalReferences.Length);
 
             // Overload with ConcurrentStack
-            var stack = new ConcurrentStack<MetadataReference> {  };
+            var stack = new ConcurrentStack<MetadataReference> { };
             stack.Push(ref1);
             stack.Push(ref2);
             stack.Push(ref3);
@@ -755,7 +755,7 @@ namespace A.B {
             Assert.Equal(0, compCollection.ExternalReferences.Length);
 
             // Overload with ConcurrentQueue
-            var queue = new ConcurrentQueue<MetadataReference> {  };
+            var queue = new ConcurrentQueue<MetadataReference> { };
             queue.Enqueue(ref1);
             queue.Enqueue(ref2);
             queue.Enqueue(ref3);
@@ -1169,7 +1169,7 @@ class D
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
 
             // Overload with ConcurrentStack
-            var stack = new ConcurrentStack<SyntaxTree> {  };
+            var stack = new ConcurrentStack<SyntaxTree> { };
             stack.Push(t4);
             stack.Push(t5);
             stack.Push(t6);
@@ -1183,7 +1183,7 @@ class D
             Assert.Equal(0, compCollection.SyntaxTrees.Length);
 
             // Overload with ConcurrentQueue
-            var queue = new ConcurrentQueue<SyntaxTree> {  };
+            var queue = new ConcurrentQueue<SyntaxTree> { };
             queue.Enqueue(t4);
             queue.Enqueue(t5);
             queue.Enqueue(t6);

@@ -411,7 +411,7 @@ namespace System.Web.Http.Dispatcher
 
             controllerTypeResolver
                 .Setup(c => c.GetControllerTypes(It.IsAny<IAssembliesResolver>()))
-                .Returns(new Collection<Type> {  }); // No controllers here
+                .Returns(new Collection<Type> { }); // No controllers here
 
             HttpRequestMessage request = new HttpRequestMessage();
 

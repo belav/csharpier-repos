@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure
                 new TestXmlOutputFormatter(),
                 new TestJsonOutputFormatter(), // This will be chosen based on the content type
             };
-            var selector = CreateSelector(new IOutputFormatter[] {  });
+            var selector = CreateSelector(new IOutputFormatter[] { });
 
             var context = new OutputFormatterWriteContext(
                 new DefaultHttpContext(),

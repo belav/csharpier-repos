@@ -44,7 +44,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyIndexZero()
         {
-            int[] source = {  };
+            int[] source = { };
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "index",

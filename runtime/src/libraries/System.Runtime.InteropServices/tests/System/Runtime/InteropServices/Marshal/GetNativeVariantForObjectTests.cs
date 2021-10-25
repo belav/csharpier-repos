@@ -453,10 +453,10 @@ namespace System.Runtime.InteropServices.Tests
             try
             {
                 Assert.Throws<SafeArrayTypeMismatchException>(
-                    () => Marshal.GetNativeVariantForObject(new int[][] {  }, pNative)
+                    () => Marshal.GetNativeVariantForObject(new int[][] { }, pNative)
                 );
                 Assert.Throws<SafeArrayTypeMismatchException>(
-                    () => Marshal.GetNativeVariantForObject<object>(new int[][] {  }, pNative)
+                    () => Marshal.GetNativeVariantForObject<object>(new int[][] { }, pNative)
                 );
             }
             finally

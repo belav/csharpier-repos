@@ -181,7 +181,7 @@ namespace System.Web.Mvc.Test
             RouteCollection routes = new RouteCollection();
 
             // Act
-            routes.MapRoute("RouteName", "SomeUrl", new string[] {  });
+            routes.MapRoute("RouteName", "SomeUrl", new string[] { });
 
             // Assert
             Route route = Assert.Single(routes.Cast<Route>());

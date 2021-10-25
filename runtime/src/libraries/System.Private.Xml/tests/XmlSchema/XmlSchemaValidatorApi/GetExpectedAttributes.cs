@@ -47,7 +47,7 @@ namespace System.Xml.Tests
             else
             {
                 val.Initialize();
-                CheckExpectedAttributes(val.GetExpectedAttributes(), new XmlQualifiedName[] {  });
+                CheckExpectedAttributes(val.GetExpectedAttributes(), new XmlQualifiedName[] { });
             }
 
             return;
@@ -62,7 +62,7 @@ namespace System.Xml.Tests
             val.Initialize();
             val.ValidateElement("NoAttributesElement", "", info);
 
-            CheckExpectedAttributes(val.GetExpectedAttributes(), new XmlQualifiedName[] {  });
+            CheckExpectedAttributes(val.GetExpectedAttributes(), new XmlQualifiedName[] { });
 
             return;
         }

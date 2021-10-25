@@ -381,7 +381,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var actions = new ActionDescriptor[]
             {
-                new ActionDescriptor() {  },
+                new ActionDescriptor() { },
                 new ActionDescriptor()
                 {
                     ActionConstraints = new List<IActionConstraintMetadata>()
@@ -414,7 +414,7 @@ namespace Microsoft.AspNetCore.Mvc.Routing
             // Arrange
             var actions = new ActionDescriptor[]
             {
-                new ActionDescriptor() {  },
+                new ActionDescriptor() { },
                 new ActionDescriptor()
                 {
                     ActionConstraints = new List<IActionConstraintMetadata>()

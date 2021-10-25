@@ -30,9 +30,9 @@ namespace Castle.DynamicProxy.Tests
         {
             generator.CreateClassProxy(
                 typeof(MyOwnClass),
-                new Type[] {  },
+                new Type[] { },
                 ProxyGenerationOptions.Default,
-                new object[] {  },
+                new object[] { },
                 new StandardInterceptor()
             );
         }
@@ -73,7 +73,7 @@ namespace Castle.DynamicProxy.Tests
         {
             var proxy = (ClassWithVariousConstructors)generator.CreateClassProxy(
                 typeof(ClassWithVariousConstructors),
-                new object[] { new string[] {  } }
+                new object[] { new string[] { } }
             );
             Assert.AreEqual(Constructor.ArrayOfStrings, proxy.ConstructorCalled);
         }
@@ -81,12 +81,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Can_pass_params_arguments_inline()
         {
-            generator.CreateClassProxy(typeof(HasCtorWithParamsStrings), new object[] {  });
+            generator.CreateClassProxy(typeof(HasCtorWithParamsStrings), new object[] { });
         }
         [Test]
         public void Can_pass_params_arguments_inline2()
         {
-            generator.CreateClassProxy(typeof(HasCtorWithParamsArgument), new object[] {  });
+            generator.CreateClassProxy(typeof(HasCtorWithParamsArgument), new object[] { });
         }
 
         [Test]

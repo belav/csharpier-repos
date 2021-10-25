@@ -58,7 +58,7 @@ namespace System.Security.Cryptography.ProtectedDataTests
         {
             // Passing a zero-length array as entropy is equivalent to passing null as entropy.
             byte[] plain = { 1, 2, 3 };
-            byte[] nullEntropy = {  };
+            byte[] nullEntropy = { };
             byte[] encrypted = ProtectedData.Protect(plain, null, DataProtectionScope.CurrentUser);
             byte[] recovered = ProtectedData.Unprotect(
                 encrypted,
@@ -73,7 +73,7 @@ namespace System.Security.Cryptography.ProtectedDataTests
         {
             // Passing a zero-length array as entropy is equivalent to passing null as entropy.
             byte[] plain = { 1, 2, 3 };
-            byte[] nullEntropy = {  };
+            byte[] nullEntropy = { };
             byte[] encrypted = ProtectedData.Protect(
                 plain,
                 nullEntropy,

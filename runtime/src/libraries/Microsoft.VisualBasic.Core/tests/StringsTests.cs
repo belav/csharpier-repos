@@ -163,8 +163,8 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Theory]
-        [InlineData(new string[] {  }, null, null)]
-        [InlineData(new string[] {  }, "", null)]
+        [InlineData(new string[] { }, null, null)]
+        [InlineData(new string[] { }, "", null)]
         public void Filter_WhenNoMatchArgument_ReturnsNull(
             string[] source,
             string match,
@@ -175,7 +175,7 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Theory]
-        [InlineData(new string[] {  }, "a", new string[] {  }, new string[] {  })]
+        [InlineData(new string[] { }, "a", new string[] { }, new string[] { })]
         public void Filter_NoElements(
             string[] source,
             string match,
@@ -188,14 +188,14 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Theory]
-        [InlineData(new string[] {  }, "a", new string[] {  }, new string[] {  })]
-        [InlineData(new string[] { "a" }, "a", new string[] { "a" }, new string[] {  })]
-        [InlineData(new string[] { "ab" }, "a", new string[] { "ab" }, new string[] {  })]
-        [InlineData(new string[] { "ba" }, "a", new string[] { "ba" }, new string[] {  })]
-        [InlineData(new string[] { "bab" }, "a", new string[] { "bab" }, new string[] {  })]
-        [InlineData(new string[] { "b" }, "a", new string[] {  }, new string[] { "b" })]
-        [InlineData(new string[] { "a" }, "ab", new string[] {  }, new string[] { "a" })]
-        [InlineData(new string[] { "ab" }, "ab", new string[] { "ab" }, new string[] {  })]
+        [InlineData(new string[] { }, "a", new string[] { }, new string[] { })]
+        [InlineData(new string[] { "a" }, "a", new string[] { "a" }, new string[] { })]
+        [InlineData(new string[] { "ab" }, "a", new string[] { "ab" }, new string[] { })]
+        [InlineData(new string[] { "ba" }, "a", new string[] { "ba" }, new string[] { })]
+        [InlineData(new string[] { "bab" }, "a", new string[] { "bab" }, new string[] { })]
+        [InlineData(new string[] { "b" }, "a", new string[] { }, new string[] { "b" })]
+        [InlineData(new string[] { "a" }, "ab", new string[] { }, new string[] { "a" })]
+        [InlineData(new string[] { "ab" }, "ab", new string[] { "ab" }, new string[] { })]
         public void Filter_SingleElement(
             string[] source,
             string match,
@@ -208,7 +208,7 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Theory]
-        [InlineData(new string[] { "A" }, "a", new string[] {  }, new string[] { "A" })]
+        [InlineData(new string[] { "A" }, "a", new string[] { }, new string[] { "A" })]
         public void Filter_SingleElement_BinaryCompare(
             string[] source,
             string match,
@@ -227,7 +227,7 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Theory]
-        [InlineData(new string[] { "A" }, "a", new string[] { "A" }, new string[] {  })]
+        [InlineData(new string[] { "A" }, "a", new string[] { "A" }, new string[] { })]
         public void Filter_SingleElement_TextCompare(
             string[] source,
             string match,
@@ -246,10 +246,10 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Theory]
-        [InlineData(new string[] { "a", "a" }, "a", new string[] { "a", "a" }, new string[] {  })]
+        [InlineData(new string[] { "a", "a" }, "a", new string[] { "a", "a" }, new string[] { })]
         [InlineData(new string[] { "a", "b" }, "a", new string[] { "a" }, new string[] { "b" })]
         [InlineData(new string[] { "b", "a" }, "a", new string[] { "a" }, new string[] { "b" })]
-        [InlineData(new string[] { "b", "b" }, "a", new string[] {  }, new string[] { "b", "b" })]
+        [InlineData(new string[] { "b", "b" }, "a", new string[] { }, new string[] { "b", "b" })]
         public void Filter_MultipleElements(
             string[] source,
             string match,
@@ -275,8 +275,8 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { 42 }, "42", new string[] { "42" }, new string[] {  })]
-        [InlineData(new object[] { true }, "True", new string[] { "True" }, new string[] {  })]
+        [InlineData(new object[] { 42 }, "42", new string[] { "42" }, new string[] { })]
+        [InlineData(new object[] { true }, "True", new string[] { "True" }, new string[] { })]
         public void Filter_Objects(
             object[] source,
             string match,

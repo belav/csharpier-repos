@@ -77,7 +77,7 @@ namespace System.IO.Tests
         [Fact]
         public void SynchronizingObject_GetSetRoundtrips()
         {
-            TestISynchronizeInvoke invoker = new TestISynchronizeInvoke() {  };
+            TestISynchronizeInvoke invoker = new TestISynchronizeInvoke() { };
             using (var testDirectory = new TempDirectory(GetTestFilePath()))
             using (var watcher = new TestFileSystemWatcher(testDirectory.Path, "*"))
             {

@@ -75,9 +75,9 @@ namespace System.Reflection.Metadata.Tests
             Assert.True(builder.ContentEquals(builder));
             Assert.False(builder.ContentEquals(null));
 
-            TestContentEquals(new byte[] {  }, new byte[] {  });
-            TestContentEquals(new byte[] { 1 }, new byte[] {  });
-            TestContentEquals(new byte[] {  }, new byte[] { 1 });
+            TestContentEquals(new byte[] { }, new byte[] { });
+            TestContentEquals(new byte[] { 1 }, new byte[] { });
+            TestContentEquals(new byte[] { }, new byte[] { 1 });
             TestContentEquals(new byte[] { 1 }, new byte[] { 1 });
 
             TestContentEquals(
@@ -639,7 +639,7 @@ namespace System.Reflection.Metadata.Tests
         {
             var builder = new BlobBuilder(16);
 
-            AssertEx.Equal(new byte[] {  }, builder.ToArray(0, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToArray(0, 0));
 
             for (int i = 0; i < 13; i++)
             {
@@ -671,14 +671,14 @@ namespace System.Reflection.Metadata.Tests
                 },
                 builder.ToArray()
             );
-            AssertEx.Equal(new byte[] {  }, builder.ToArray(0, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToArray(0, 0));
             AssertEx.Equal(new byte[] { 0 }, builder.ToArray(0, 1));
             AssertEx.Equal(new byte[] { 1 }, builder.ToArray(1, 1));
 
-            AssertEx.Equal(new byte[] {  }, builder.ToArray(14, 0));
-            AssertEx.Equal(new byte[] {  }, builder.ToArray(15, 0));
-            AssertEx.Equal(new byte[] {  }, builder.ToArray(16, 0));
-            AssertEx.Equal(new byte[] {  }, builder.ToArray(17, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToArray(14, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToArray(15, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToArray(16, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToArray(17, 0));
 
             AssertEx.Equal(new byte[] { 0xdd }, builder.ToArray(13, 1));
             AssertEx.Equal(new byte[] { 0xcc }, builder.ToArray(14, 1));
@@ -700,7 +700,7 @@ namespace System.Reflection.Metadata.Tests
         {
             var builder = new BlobBuilder(16);
 
-            AssertEx.Equal(new byte[] {  }, builder.ToArray(0, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToArray(0, 0));
 
             for (int i = 0; i < 34; i++)
             {
@@ -803,7 +803,7 @@ namespace System.Reflection.Metadata.Tests
         {
             var builder = new BlobBuilder(16);
 
-            AssertEx.Equal(new byte[] {  }, builder.ToArray(0, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToArray(0, 0));
 
             for (int i = 0; i < 13; i++)
             {
@@ -835,14 +835,14 @@ namespace System.Reflection.Metadata.Tests
                 },
                 builder.ToImmutableArray()
             );
-            AssertEx.Equal(new byte[] {  }, builder.ToImmutableArray(0, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToImmutableArray(0, 0));
             AssertEx.Equal(new byte[] { 0 }, builder.ToImmutableArray(0, 1));
             AssertEx.Equal(new byte[] { 1 }, builder.ToImmutableArray(1, 1));
 
-            AssertEx.Equal(new byte[] {  }, builder.ToImmutableArray(14, 0));
-            AssertEx.Equal(new byte[] {  }, builder.ToImmutableArray(15, 0));
-            AssertEx.Equal(new byte[] {  }, builder.ToImmutableArray(16, 0));
-            AssertEx.Equal(new byte[] {  }, builder.ToImmutableArray(17, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToImmutableArray(14, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToImmutableArray(15, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToImmutableArray(16, 0));
+            AssertEx.Equal(new byte[] { }, builder.ToImmutableArray(17, 0));
 
             AssertEx.Equal(new byte[] { 0xdd }, builder.ToImmutableArray(13, 1));
             AssertEx.Equal(new byte[] { 0xcc }, builder.ToImmutableArray(14, 1));
@@ -1419,13 +1419,13 @@ namespace System.Reflection.Metadata.Tests
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => builder.WriteBytes(0, -1));
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => builder.WriteBytes(new byte[] {  }, 1, 0)
+                () => builder.WriteBytes(new byte[] { }, 1, 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => builder.WriteBytes(new byte[] {  }, 0, 1)
+                () => builder.WriteBytes(new byte[] { }, 0, 1)
             );
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => builder.WriteBytes(new byte[] {  }, 0, -1)
+                () => builder.WriteBytes(new byte[] { }, 0, -1)
             );
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => builder.WriteBytes(ImmutableArray<byte>.Empty, 1, 0)
@@ -1730,8 +1730,8 @@ namespace System.Reflection.Metadata.Tests
             var writer = new BlobBuilder(4);
 
             writer.WriteBytes(new byte[] { 1, 2, 3, 4 });
-            writer.WriteBytes(new byte[] {  });
-            writer.WriteBytes(new byte[] {  }, 0, 0);
+            writer.WriteBytes(new byte[] { });
+            writer.WriteBytes(new byte[] { }, 0, 0);
             writer.WriteBytes(new byte[] { 5, 6, 7, 8 });
             writer.WriteBytes(new byte[] { 9 });
             writer.WriteBytes(new byte[] { 0x0a }, 0, 0);
@@ -2079,7 +2079,7 @@ namespace System.Reflection.Metadata.Tests
         {
             var writer = new BlobWriter(16);
             writer.WriteBytes(1, 16);
-            writer.WriteBytes(new byte[] {  });
+            writer.WriteBytes(new byte[] { });
             writer.WriteBytes(2, 0);
             writer.WriteUTF8("", allowUnpairedSurrogates: false);
             writer.WriteUTF16("");

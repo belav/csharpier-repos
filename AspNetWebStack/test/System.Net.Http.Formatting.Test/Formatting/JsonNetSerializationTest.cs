@@ -72,7 +72,7 @@ namespace System.Net.Http.Formatting
                     // Structs
                     { new Point() { x = 45, Y = -5 }, "{\"x\":45,\"Y\":-5}" },
                     // Arrays
-                    { new object[] {  }, "[]" },
+                    { new object[] { }, "[]" },
                     { new int[] { 1, 2, 3 }, "[1,2,3]" },
                     { new string[] { "a", "b" }, "[\"a\",\"b\"]" },
                     {

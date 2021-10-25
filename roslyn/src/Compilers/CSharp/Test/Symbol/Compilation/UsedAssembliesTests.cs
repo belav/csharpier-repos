@@ -156,8 +156,8 @@ public class C2
             AssertUsedAssemblyReferences(
                 comp,
                 expected,
-                new DiagnosticDescription[] {  },
-                new DiagnosticDescription[] {  },
+                new DiagnosticDescription[] { },
+                new DiagnosticDescription[] { },
                 specificReferencesToAssert: null
             );
         }
@@ -171,8 +171,8 @@ public class C2
             AssertUsedAssemblyReferences(
                 comp,
                 expected,
-                new DiagnosticDescription[] {  },
-                new DiagnosticDescription[] {  },
+                new DiagnosticDescription[] { },
+                new DiagnosticDescription[] { },
                 specificReferencesToAssert
             );
         }
@@ -1180,7 +1180,7 @@ class C2
                 );
                 AssertUsedAssemblyReferences(
                     comp2,
-                    hasTypeReferencesInUsing ? references : new MetadataReference[] {  },
+                    hasTypeReferencesInUsing ? references : new MetadataReference[] { },
                     references
                 );
 
@@ -4267,7 +4267,7 @@ class C2
                 );
                 AssertUsedAssemblyReferences(
                     comp2,
-                    hasTypeReferencesInUsing ? references : new MetadataReference[] {  },
+                    hasTypeReferencesInUsing ? references : new MetadataReference[] { },
                     references
                 );
 
@@ -4405,7 +4405,7 @@ class C2
                 );
                 AssertUsedAssemblyReferences(
                     comp2,
-                    hasTypeReferencesInUsing ? references : new MetadataReference[] {  },
+                    hasTypeReferencesInUsing ? references : new MetadataReference[] { },
                     references
                 );
 
@@ -4933,7 +4933,7 @@ class C2
                     references: references,
                     parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
                 ),
-                new MetadataReference[] {  },
+                new MetadataReference[] { },
                 new[]
                 {
                     // (2,1): hidden CS8019: Unnecessary using directive.
@@ -4981,7 +4981,7 @@ class C2
                     references: references,
                     parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
                 ),
-                new MetadataReference[] {  },
+                new MetadataReference[] { },
                 new[]
                 {
                     // (2,1): hidden CS8019: Unnecessary using directive.
@@ -5073,7 +5073,7 @@ class C2
                     {
                         1 => references,
                         2 => expected,
-                        _ => new MetadataReference[] {  }
+                        _ => new MetadataReference[] { }
                     },
                     references
                 );
@@ -5258,7 +5258,7 @@ class C2
                     references: references,
                     parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
                 ),
-                new MetadataReference[] {  },
+                new MetadataReference[] { },
                 new[]
                 {
                     // (2,1): hidden CS8019: Unnecessary using directive.
@@ -5333,7 +5333,7 @@ class C2
                         1 => references,
                         2 => new[] { reference0, reference1 },
                         3 => new[] { reference0 },
-                        _ => new MetadataReference[] {  }
+                        _ => new MetadataReference[] { }
                     },
                     references
                 );
@@ -6570,7 +6570,7 @@ public class C2
                     references: references,
                     parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
                 ),
-                new MetadataReference[] {  },
+                new MetadataReference[] { },
                 new[]
                 {
                     // (2,1): hidden CS8020: Unused extern alias.
@@ -6610,7 +6610,7 @@ public class C2
                     references: references,
                     parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.Parse)
                 ),
-                new MetadataReference[] {  },
+                new MetadataReference[] { },
                 new[]
                 {
                     // (2,1): hidden CS8020: Unused extern alias.

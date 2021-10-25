@@ -153,7 +153,7 @@ namespace Microsoft.Web.Helpers.Test
         public void LinkShare_GetSitesInOrderReturnsAllSitesWhenArgumentIEmpty()
         {
             // Act
-            var result = LinkShare.GetSitesInOrder(linkSites: new LinkShareSite[] {  });
+            var result = LinkShare.GetSitesInOrder(linkSites: new LinkShareSite[] { });
 
             // Assert
             Assert.Equal(_allLinkShareSites, result.ToArray());

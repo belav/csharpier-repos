@@ -48,7 +48,7 @@ namespace System.SpanTests
         [Fact]
         public static void TryCopyToEmpty()
         {
-            int[] src = {  };
+            int[] src = { };
             int[] dst = { 99, 100, 101 };
 
             Span<int> srcSpan = new Span<int>(src);
@@ -148,17 +148,17 @@ namespace System.SpanTests
         [Fact]
         public static void CopyToEmptyArray()
         {
-            int[] src = {  };
+            int[] src = { };
             Span<int> dst = new int[3] { 99, 100, 101 };
 
             src.CopyTo(dst);
             int[] expected = { 99, 100, 101 };
             Assert.Equal<int>(expected, dst.ToArray());
 
-            Span<int> dstEmpty = new int[0] {  };
+            Span<int> dstEmpty = new int[0] { };
 
             src.CopyTo(dstEmpty);
-            int[] expectedEmpty = {  };
+            int[] expectedEmpty = { };
             Assert.Equal<int>(expectedEmpty, dstEmpty.ToArray());
         }
 

@@ -23,7 +23,7 @@ namespace System.Tests
             Choice1 c = (Choice1)(Activator.CreateInstance(typeof(Choice1), null));
             Assert.Equal(1, c.I);
 
-            c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] {  }));
+            c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { }));
             Assert.Equal(1, c.I);
 
             c = (Choice1)(Activator.CreateInstance(typeof(Choice1), new object[] { 42 }));
@@ -983,7 +983,7 @@ namespace System.Tests
         public static void TestingActivationAttributes1()
         {
             Activator.CreateInstance(typeof(ClassWithIsTestedAttribute), null, null);
-            Activator.CreateInstance(typeof(ClassWithIsTestedAttribute), null, new object[] {  });
+            Activator.CreateInstance(typeof(ClassWithIsTestedAttribute), null, new object[] { });
         }
 
         [ConditionalFact(

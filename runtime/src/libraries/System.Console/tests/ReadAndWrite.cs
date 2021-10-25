@@ -34,7 +34,7 @@ public class ReadAndWrite
     public static void WriteToOutputStream_EmptyArray()
     {
         Stream outStream = Console.OpenStandardOutput();
-        outStream.Write(new byte[] {  }, 0, 0);
+        outStream.Write(new byte[] { }, 0, 0);
     }
 
     [Fact]

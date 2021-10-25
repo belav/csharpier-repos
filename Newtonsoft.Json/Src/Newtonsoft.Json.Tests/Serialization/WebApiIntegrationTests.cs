@@ -81,7 +81,6 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0
                         IgnoreSerializableAttribute = false
 #endif

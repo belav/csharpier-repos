@@ -811,7 +811,7 @@ namespace Microsoft.AspNetCore.Routing
         }
 
         [Theory]
-        [InlineData(new string[] {  }, new string[] {  }, "/")]
+        [InlineData(new string[] { }, new string[] { }, "/")]
         [InlineData(new string[] { "id" }, new string[] { "3" }, "/Home/Index/3")]
         [InlineData(new string[] { "custom" }, new string[] { "Custom" }, "/?custom=Custom")]
         public void GetPathByRouteValues_UsesFirstTemplateThatSucceeds(
@@ -878,7 +878,7 @@ namespace Microsoft.AspNetCore.Routing
         }
 
         [Theory]
-        [InlineData(new string[] {  }, new string[] {  }, "/")]
+        [InlineData(new string[] { }, new string[] { }, "/")]
         [InlineData(new string[] { "id" }, new string[] { "3" }, "/Home/Index/3")]
         [InlineData(new string[] { "custom" }, new string[] { "Custom" }, "/?custom=Custom")]
         [InlineData(
@@ -934,7 +934,7 @@ namespace Microsoft.AspNetCore.Routing
         }
 
         [Theory]
-        [InlineData(new string[] {  }, new string[] {  }, null)]
+        [InlineData(new string[] { }, new string[] { }, null)]
         [InlineData(new string[] { "id" }, new string[] { "3" }, null)]
         [InlineData(new string[] { "custom" }, new string[] { "Custom" }, null)]
         [InlineData(

@@ -171,7 +171,7 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [InlineData(new byte[] {  })]
+        [InlineData(new byte[] { })]
         [InlineData(new byte[] { 0, 1, 2, 3 })]
         public void Ctor_Encoder_ByteArray(byte[] value)
         {
@@ -202,7 +202,7 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [InlineData(new short[] {  })]
+        [InlineData(new short[] { })]
         [InlineData(new short[] { 0, 1, 2, 3 })]
         public void Ctor_Encoder_ShortArray(short[] value)
         {
@@ -218,7 +218,7 @@ namespace System.Drawing.Imaging.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [InlineData(new long[] {  })]
+        [InlineData(new long[] { })]
         [InlineData(new long[] { 0, 1, 2, 3 })]
         public void Ctor_Encoder_LongArray(long[] value)
         {
@@ -555,27 +555,27 @@ namespace System.Drawing.Imaging.Tests
                 };
                 yield return new object[]
                 {
-                    new Action(() => new EncoderParameter(null, new byte[] {  }))
+                    new Action(() => new EncoderParameter(null, new byte[] { }))
                 };
                 yield return new object[]
                 {
-                    new Action(() => new EncoderParameter(null, new byte[] {  }, false))
+                    new Action(() => new EncoderParameter(null, new byte[] { }, false))
                 };
                 yield return new object[]
                 {
-                    new Action(() => new EncoderParameter(null, new short[] {  }))
+                    new Action(() => new EncoderParameter(null, new short[] { }))
                 };
                 yield return new object[]
                 {
-                    new Action(() => new EncoderParameter(null, new long[] {  }))
+                    new Action(() => new EncoderParameter(null, new long[] { }))
                 };
                 yield return new object[]
                 {
-                    new Action(() => new EncoderParameter(null, new int[] {  }, new int[] {  }))
+                    new Action(() => new EncoderParameter(null, new int[] { }, new int[] { }))
                 };
                 yield return new object[]
                 {
-                    new Action(() => new EncoderParameter(null, new long[] {  }, new long[] {  }))
+                    new Action(() => new EncoderParameter(null, new long[] { }, new long[] { }))
                 };
             }
         }
@@ -594,23 +594,19 @@ namespace System.Drawing.Imaging.Tests
             );
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, 0, 0, 0, 0));
             Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, "anyString"));
+            Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, new byte[] { }));
             Assert.Throws<NullReferenceException>(
-                () => new EncoderParameter(null, new byte[] {  })
+                () => new EncoderParameter(null, new byte[] { }, false)
             );
             Assert.Throws<NullReferenceException>(
-                () => new EncoderParameter(null, new byte[] {  }, false)
+                () => new EncoderParameter(null, new short[] { })
+            );
+            Assert.Throws<NullReferenceException>(() => new EncoderParameter(null, new long[] { }));
+            Assert.Throws<NullReferenceException>(
+                () => new EncoderParameter(null, new int[] { }, new int[] { })
             );
             Assert.Throws<NullReferenceException>(
-                () => new EncoderParameter(null, new short[] {  })
-            );
-            Assert.Throws<NullReferenceException>(
-                () => new EncoderParameter(null, new long[] {  })
-            );
-            Assert.Throws<NullReferenceException>(
-                () => new EncoderParameter(null, new int[] {  }, new int[] {  })
-            );
-            Assert.Throws<NullReferenceException>(
-                () => new EncoderParameter(null, new long[] {  }, new long[] {  })
+                () => new EncoderParameter(null, new long[] { }, new long[] { })
             );
         }
 

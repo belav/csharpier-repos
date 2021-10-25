@@ -21,7 +21,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 typeof(string),
                 "mvc.1.0.view",
                 "/Views/Home/Index.cstml",
-                new object[] {  }
+                new object[] { }
             );
 
             // Act
@@ -94,7 +94,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                 typeof(string),
                 "mvc.1.0.view",
                 "/Views/Home/Index.cstml",
-                new object[] {  }
+                new object[] { }
             );
 
             // Act

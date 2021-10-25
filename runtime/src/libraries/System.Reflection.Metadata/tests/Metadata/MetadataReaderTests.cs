@@ -1060,7 +1060,6 @@ namespace System.Reflection.Metadata.Tests
             var expMods = new string[] { "ModuleCS00.mod" };
             var expHashs = new byte[][]
             {
-
                 // ModuleCS00.mod
                 // new byte [] { 0xd4, 0x6b, 0xec, 0x25, 0x47, 0x01, 0x20, 0x30, 0x05, 0x42, 0x34, 0x4b, 0x31, 0x22, 0x44, 0xd8, 0x1c, 0x87, 0xd0, 0x98 },
             };
@@ -1799,7 +1798,7 @@ namespace System.Reflection.Metadata.Tests
             }
             else
             {
-                expTypeForwarders = new string[] {  };
+                expTypeForwarders = new string[] { };
             }
 
             int numberOfTypeForwarders = 0;
@@ -1908,13 +1907,13 @@ namespace System.Reflection.Metadata.Tests
             uniqueForwarders.Add("Forwarder", new[] { "FwdType" });
             uniqueForwarders.Add("Forwarder.NoDefs", new[] { "FwdType" });
             var uniqueDefinitions = new Dictionary<string, IList<string>>();
-            uniqueDefinitions.Add("Microsoft", new string[] {  });
-            uniqueDefinitions.Add("FxResources", new string[] {  });
-            uniqueDefinitions.Add("FxResources.Microsoft", new string[] {  });
-            uniqueDefinitions.Add("Forwarder.NoDefs", new string[] {  });
-            uniqueDefinitions.Add("SkipFirst", new string[] {  });
-            uniqueDefinitions.Add("SkipFirst.AndSecond", new string[] {  });
-            uniqueDefinitions.Add("SkipFirstOnce", new string[] {  });
+            uniqueDefinitions.Add("Microsoft", new string[] { });
+            uniqueDefinitions.Add("FxResources", new string[] { });
+            uniqueDefinitions.Add("FxResources.Microsoft", new string[] { });
+            uniqueDefinitions.Add("Forwarder.NoDefs", new string[] { });
+            uniqueDefinitions.Add("SkipFirst", new string[] { });
+            uniqueDefinitions.Add("SkipFirst.AndSecond", new string[] { });
+            uniqueDefinitions.Add("SkipFirstOnce", new string[] { });
 
             var reader = GetMetadataReader(Namespace.NamespaceTests);
 

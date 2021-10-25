@@ -531,9 +531,9 @@ namespace Microsoft.AspNetCore.Routing.Matching
             new string[] { "Controller", "id", "Param1" },
             new string[] { "Home", "123", "p1" }
         )]
-        [InlineData("(Controller).mvc", "/(Controller).mvc", new string[] {  }, new string[] {  })]
-        [InlineData("Controller.mvc/ ", "/Controller.mvc/ ", new string[] {  }, new string[] {  })]
-        [InlineData("Controller.mvc ", "/Controller.mvc ", new string[] {  }, new string[] {  })]
+        [InlineData("(Controller).mvc", "/(Controller).mvc", new string[] { }, new string[] { })]
+        [InlineData("Controller.mvc/ ", "/Controller.mvc/ ", new string[] { }, new string[] { })]
+        [InlineData("Controller.mvc ", "/Controller.mvc ", new string[] { }, new string[] { })]
         public virtual async Task Match_WeirdCharacterCases(
             string template,
             string path,

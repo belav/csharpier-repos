@@ -112,7 +112,7 @@ namespace System.Web.WebPages.Instrumentation
                 {
                     Site = Expression
                         .Lambda<Func<object>>(
-                            Expression.New(_targetType.GetConstructor(new Type[] {  }))
+                            Expression.New(_targetType.GetConstructor(new Type[] { }))
                         )
                         .Compile();
                 }

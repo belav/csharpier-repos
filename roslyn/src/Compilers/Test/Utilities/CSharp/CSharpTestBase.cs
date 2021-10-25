@@ -975,7 +975,7 @@ namespace System.Runtime.CompilerServices
         {
             if (sources == null || !sources.Any())
             {
-                return new SyntaxTree[] {  };
+                return new SyntaxTree[] { };
             }
 
             return Parse(options, sources.ToArray());
@@ -985,7 +985,7 @@ namespace System.Runtime.CompilerServices
         {
             if (sources == null || (sources.Length == 1 && null == sources[0]))
             {
-                return new SyntaxTree[] {  };
+                return new SyntaxTree[] { };
             }
 
             return sources.Select(src => Parse(src, options: options)).ToArray();

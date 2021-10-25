@@ -133,7 +133,7 @@ namespace Microsoft.Data.Sqlite
         }
 
         [Theory]
-        [InlineData(0, new byte[] {  }, 0, 0, 0)]
+        [InlineData(0, new byte[] { }, 0, 0, 0)]
         [InlineData(0, new byte[] { 0 }, 0, 0, 0)]
         [InlineData(0, new byte[] { 0 }, 2, 0, 1)]
         [InlineData(0, new byte[] { 0 }, 3, 0, 1)]
@@ -307,9 +307,9 @@ namespace Microsoft.Data.Sqlite
         [InlineData(new byte[] { 3, 2 }, 0, new byte[] { 3, 4 }, 0, 1)]
         [InlineData(new byte[] { 4, 2 }, 0, new byte[] { 3, 4 }, 1, 1)]
         [InlineData(new byte[] { 1, 3 }, 1, new byte[] { 3 }, 0, 1)]
-        [InlineData(new byte[] { 1, 2 }, 0, new byte[] {  }, 0, 0)]
-        [InlineData(new byte[] { 1, 2 }, 2, new byte[] {  }, 0, 0)]
-        [InlineData(new byte[] { 1, 2 }, 3, new byte[] {  }, 0, 0)]
+        [InlineData(new byte[] { 1, 2 }, 0, new byte[] { }, 0, 0)]
+        [InlineData(new byte[] { 1, 2 }, 2, new byte[] { }, 0, 0)]
+        [InlineData(new byte[] { 1, 2 }, 3, new byte[] { }, 0, 0)]
         [InlineData(new byte[] { 1, 2 }, 0, new byte[] { 3 }, 1, 0)]
         public void Write_works(
             byte[] expected,

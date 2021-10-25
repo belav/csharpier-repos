@@ -331,7 +331,7 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
                     typeof(string),
                     "mvc.1.0.view",
                     path,
-                    new object[] {  }
+                    new object[] { }
                 ),
             };
 

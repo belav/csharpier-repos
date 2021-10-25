@@ -47,7 +47,7 @@ namespace System.MemoryTests
         [Fact]
         public static void TryCopyToEmpty()
         {
-            int[] src = {  };
+            int[] src = { };
             int[] dst = { 99, 100, 101 };
 
             Memory<int> srcMemory = src;
@@ -144,17 +144,17 @@ namespace System.MemoryTests
         [Fact]
         public static void CopyToEmptyArray()
         {
-            int[] src = {  };
+            int[] src = { };
             Memory<int> dst = new int[3] { 99, 100, 101 };
 
             src.CopyTo(dst);
             int[] expected = { 99, 100, 101 };
             Assert.Equal<int>(expected, dst.ToArray());
 
-            Memory<int> dstEmpty = new int[0] {  };
+            Memory<int> dstEmpty = new int[0] { };
 
             src.CopyTo(dstEmpty);
-            int[] expectedEmpty = {  };
+            int[] expectedEmpty = { };
             Assert.Equal<int>(expectedEmpty, dstEmpty.ToArray());
         }
 

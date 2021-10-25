@@ -3440,11 +3440,11 @@ class Tests
         {
             // The invoke calls a runtime-invoke wrapper which has a filter clause
 #if __MOBILE__
-            typeof(ExceptionTests).GetMethod("lmf_filter").Invoke(null, new object[] {  });
+            typeof(ExceptionTests).GetMethod("lmf_filter").Invoke(null, new object[] { });
 #else
             typeof(Tests)
                 .GetMethod("lmf_filter")
-                .Invoke(null, new object[] {  });
+                .Invoke(null, new object[] { });
 #endif
         }
         catch (TargetInvocationException) { }

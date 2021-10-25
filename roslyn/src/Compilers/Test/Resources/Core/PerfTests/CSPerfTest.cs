@@ -177,7 +177,7 @@ namespace ns1
                         virt(i, ref c);
                         virt(ref i, new c4(), new c4(), new c2<string>());
                         virt(new int[] { 1, 2, 3 });
-                        virt(new Exception[] {  });
+                        virt(new Exception[] { });
                         virt(new c1[] { new c4(), new c2<string>() });
                     }
                 }
@@ -583,7 +583,7 @@ namespace ns1
                     virt(y: ref a, x: i);
                     virt(ref i, new c4(), new c4(), new c2<string>());
                     virt(new int[] { 1, 2, 3 });
-                    virt(new Exception[] {  });
+                    virt(new Exception[] { });
                     virt(new c1[] { new c4(), new c2<string>() });
                 }
             }
@@ -1125,7 +1125,7 @@ namespace ns1
                                                         new c2<string>()
                                                     );
                                                     c.virt(new int[] { 1, 2, 3 });
-                                                    c.virt(new Exception[] {  });
+                                                    c.virt(new Exception[] { });
                                                     c.virt(new c1[] { new c4(), new c2<string>() });
                                                     s = (short)us;
                                                     if (true)

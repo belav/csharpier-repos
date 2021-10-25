@@ -3918,7 +3918,7 @@ namespace System.Xml.Tests
                             new XmlQualifiedName("b", null)
                         }
                     );
-                    value.Add("List", new List<Guid>[] {  });
+                    value.Add("List", new List<Guid>[] { });
                     value.Add("TimeSpan", new TimeSpan());
                     value.Add("Double", double.MaxValue);
                     value.Add("Uri", "http");

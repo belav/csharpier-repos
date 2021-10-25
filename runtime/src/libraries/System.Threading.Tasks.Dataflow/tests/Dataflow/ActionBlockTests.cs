@@ -165,7 +165,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 // Actual values used here aren't important; just want to make sure the block works
                 // with these properties set to non-default values
-                new ExecutionDataflowBlockOptions {  },
+                new ExecutionDataflowBlockOptions { },
                 new ExecutionDataflowBlockOptions { BoundedCapacity = 1 },
                 new ExecutionDataflowBlockOptions { MaxMessagesPerTask = 2 },
                 new ExecutionDataflowBlockOptions { SingleProducerConstrained = true },

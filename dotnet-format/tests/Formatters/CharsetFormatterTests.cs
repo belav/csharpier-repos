@@ -66,7 +66,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
 
             var testCode = "class 🤵 { }";
 
-            var editorConfig = new Dictionary<string, string>() {  };
+            var editorConfig = new Dictionary<string, string>() { };
 
             var formattedText = await AssertCodeUnchangedAsync(
                 testCode,

@@ -1143,7 +1143,7 @@ namespace System.Collections.Concurrent.Tests
             Assert.Throws<ArgumentNullException>(() => dictionary.CopyTo(null, 0));
             // "TestICollection:  FAILED.  CopyTo didn't throw ANE when null Array is passed");
             Assert.Throws<ArgumentOutOfRangeException>(
-                () => dictionary.CopyTo(new object[] {  }, -1)
+                () => dictionary.CopyTo(new object[] { }, -1)
             );
             // "TestICollection:  FAILED.  CopyTo didn't throw AORE when negative index passed");
 
@@ -1151,7 +1151,7 @@ namespace System.Collections.Concurrent.Tests
             ((ConcurrentDictionary<int, int>)dictionary).TryAdd(1, 1);
             AssertExtensions.Throws<ArgumentException>(
                 null,
-                () => dictionary.CopyTo(new object[] {  }, 0)
+                () => dictionary.CopyTo(new object[] { }, 0)
             );
             // "TestICollection:  FAILED.  CopyTo didn't throw AE when the Array size is smaller than the dictionary count");
         }

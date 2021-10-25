@@ -431,10 +431,10 @@ namespace System.Reflection.Emit.Tests
                 AssemblyBuilderAccess.Run
             );
 
-            ConstructorInfo classCtorInfo = typeof(CustomAttribute).GetConstructor(new Type[] {  });
+            ConstructorInfo classCtorInfo = typeof(CustomAttribute).GetConstructor(new Type[] { });
             CustomAttributeBuilder cattr = new CustomAttributeBuilder(
                 classCtorInfo,
-                new object[] {  }
+                new object[] { }
             );
 
             Assert.Equal(0, cattr_asm.GetReferencedAssemblies().Length);
@@ -487,7 +487,7 @@ namespace System.Reflection.Emit.Tests
                 "MyMethod",
                 MethodAttributes.Public | MethodAttributes.Static,
                 typeof(void),
-                new Type[] {  }
+                new Type[] { }
             );
 
             var ilg = mb.GetILGenerator();
@@ -517,7 +517,7 @@ namespace System.Reflection.Emit.Tests
                 "MyMethod",
                 MethodAttributes.Public | MethodAttributes.Static,
                 typeof(void),
-                new Type[] {  }
+                new Type[] { }
             );
 
             var ilg = mb.GetILGenerator();
@@ -564,7 +564,7 @@ namespace System.Reflection.Emit.Tests
                 "MyMethod",
                 MethodAttributes.Public | MethodAttributes.Static,
                 typeof(void),
-                new Type[] {  }
+                new Type[] { }
             );
 
             var ilg = mb.GetILGenerator();

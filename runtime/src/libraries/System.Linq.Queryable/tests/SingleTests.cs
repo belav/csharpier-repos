@@ -11,7 +11,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Empty()
         {
-            int[] source = {  };
+            int[] source = { };
             Assert.Throws<InvalidOperationException>(() => source.AsQueryable().Single());
         }
 
@@ -32,7 +32,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithPredicate()
         {
-            int[] source = {  };
+            int[] source = { };
             Assert.Throws<InvalidOperationException>(
                 () => source.AsQueryable().Single(i => i % 2 == 0)
             );
@@ -76,7 +76,7 @@ namespace System.Linq.Tests
         [Fact]
         public void ThrowsOnNullPredicate()
         {
-            int[] source = {  };
+            int[] source = { };
             Expression<Func<int, bool>> nullPredicate = null;
             AssertExtensions.Throws<ArgumentNullException>(
                 "predicate",

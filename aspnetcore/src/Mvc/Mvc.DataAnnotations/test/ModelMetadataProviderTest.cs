@@ -673,7 +673,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void IsRequired_DefaultsToTrueForValueType()
         {
             // Arrange
-            var attributes = new object[] {  };
+            var attributes = new object[] { };
 
             var provider = CreateProvider(attributes);
 
@@ -688,7 +688,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
         public void IsRequired_DefaultsToFalseForReferenceType()
         {
             // Arrange
-            var attributes = new object[] {  };
+            var attributes = new object[] { };
 
             var provider = CreateProvider(attributes);
 

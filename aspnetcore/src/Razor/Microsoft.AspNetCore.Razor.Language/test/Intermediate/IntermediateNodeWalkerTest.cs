@@ -62,7 +62,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Intermediate
 
             var ancestors = new Dictionary<string, string[]>()
             {
-                { "Root", new string[] {  } },
+                { "Root", new string[] { } },
                 { "Root->A", new string[] { "Root" } },
                 { "Root->B", new string[] { "Root" } },
                 { "Root->B->1", new string[] { "Root->B", "Root" } },

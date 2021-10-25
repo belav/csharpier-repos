@@ -167,8 +167,8 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            string[] key = {  };
-            int[] element = {  };
+            string[] key = { };
+            int[] element = { };
             var source = key.Zip(element, (k, e) => new { Name = k, Score = e });
 
             AssertMatches(

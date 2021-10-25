@@ -361,7 +361,7 @@ namespace System.IO.Pipelines.Tests
             Assert.False(awaitable.IsCompleted);
             awaitable.OnCompleted(() => { });
 
-            Pipe.Writer.WriteAsync(new byte[] {  });
+            Pipe.Writer.WriteAsync(new byte[] { });
             Pipe.Reader.CancelPendingRead();
 
             Assert.True(awaitable.IsCompleted);
@@ -378,7 +378,7 @@ namespace System.IO.Pipelines.Tests
             Assert.False(awaitable.IsCompleted);
             awaitable.OnCompleted(() => { });
 
-            Pipe.Writer.WriteAsync(new byte[] {  });
+            Pipe.Writer.WriteAsync(new byte[] { });
             Pipe.Reader.CancelPendingRead();
 
             Assert.True(awaitable.IsCompleted);

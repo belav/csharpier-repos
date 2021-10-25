@@ -70,13 +70,13 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public static TheoryData<string[], string[]> ParseAcceptHeaderWithInvalidMediaTypesData =>
             new TheoryData<string[], string[]>
             {
-                { new[] { ";q=0.9" }, new string[] {  } },
-                { new[] { "/" }, new string[] {  } },
-                { new[] { "*/" }, new string[] {  } },
-                { new[] { "/*" }, new string[] {  } },
-                { new[] { "/;q=0.9" }, new string[] {  } },
-                { new[] { "*/;q=0.9" }, new string[] {  } },
-                { new[] { "/*;q=0.9" }, new string[] {  } },
+                { new[] { ";q=0.9" }, new string[] { } },
+                { new[] { "/" }, new string[] { } },
+                { new[] { "*/" }, new string[] { } },
+                { new[] { "/*" }, new string[] { } },
+                { new[] { "/;q=0.9" }, new string[] { } },
+                { new[] { "*/;q=0.9" }, new string[] { } },
+                { new[] { "/*;q=0.9" }, new string[] { } },
                 { new[] { "/;q=0.9,text/html" }, new string[] { "text/html" } },
                 { new[] { "*/;q=0.9,text/html" }, new string[] { "text/html" } },
                 { new[] { "/*;q=0.9,text/html" }, new string[] { "text/html" } },

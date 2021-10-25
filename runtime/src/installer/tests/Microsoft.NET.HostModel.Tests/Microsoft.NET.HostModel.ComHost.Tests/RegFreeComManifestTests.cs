@@ -21,7 +21,7 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
         public void RegFreeComManifestCorrectlyIncludesComHostFile()
         {
             using TestDirectory directory = TestDirectory.Create();
-            JObject clsidMap = new JObject {  };
+            JObject clsidMap = new JObject { };
 
             string clsidmapPath = Path.Combine(directory.Path, "test.clsidmap");
             string json = JsonConvert.SerializeObject(clsidMap);

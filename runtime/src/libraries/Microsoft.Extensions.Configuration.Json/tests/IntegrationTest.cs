@@ -22,10 +22,7 @@ namespace Microsoft.Extensions.Configuration.Json.Test
             configurationBuilder.AddJsonStream(TestStreamHelpers.StringToStream(json));
             var configuration = configurationBuilder.Build();
 
-            Assert.Collection(
-                configuration.GetChildren(),
-                new Action<IConfigurationSection>[] {  }
-            );
+            Assert.Collection(configuration.GetChildren(), new Action<IConfigurationSection>[] { });
         }
 
         [Fact]

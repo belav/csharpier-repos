@@ -1607,7 +1607,7 @@ public static partial class DataContractJsonSerializerTests
         {
             new int[][] { new int[] { 1 }, new int[] { 3 } },
             new int[][] { new int[] { 0 } },
-            new int[][] { new int[] {  } }
+            new int[][] { new int[] { } }
         };
         var actualJaggedIntegerArray2 = SerializeAndDeserialize<int[][][]>(
             jaggedIntegerArray2,
@@ -1913,7 +1913,7 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_TypeWithGenericDictionaryAsKnownType()
     {
-        TypeWithGenericDictionaryAsKnownType value = new TypeWithGenericDictionaryAsKnownType {  };
+        TypeWithGenericDictionaryAsKnownType value = new TypeWithGenericDictionaryAsKnownType { };
         value.Foo.Add(10, new Level() { Name = "Foo", LevelNo = 1 });
         value.Foo.Add(20, new Level() { Name = "Bar", LevelNo = 2 });
         var deserializedValue = SerializeAndDeserialize<TypeWithGenericDictionaryAsKnownType>(

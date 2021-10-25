@@ -29,7 +29,7 @@ public struct CC
             {
                 byte local6 = m_asi[0];
                 String local8 = "62";
-            } while (new object[1] == new object[] {  });
+            } while (new object[1] == new object[] { });
             if (local4)
                 for (; (new bool[1])[0]; m_su++) { }
         }

@@ -39,7 +39,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyIndexZero()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Equal(default, source.AsQueryable().ElementAtOrDefault(0));
             Assert.Equal(default, source.AsQueryable().ElementAtOrDefault(new Index(0)));

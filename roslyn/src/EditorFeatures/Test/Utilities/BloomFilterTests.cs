@@ -163,7 +163,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 
             for (var d = 0.1; d >= 0.0001; d /= 10)
             {
-                var filter = new BloomFilter(d, new string[] {  }, longs);
+                var filter = new BloomFilter(d, new string[] { }, longs);
 
                 var correctCount = 0.0;
                 var incorrectCount = 0.0;

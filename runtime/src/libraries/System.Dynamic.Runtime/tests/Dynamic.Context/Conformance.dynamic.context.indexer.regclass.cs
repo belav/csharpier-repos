@@ -275,7 +275,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             get
             {
                 MemberClass.t_status = 1;
-                return new MyStruct[] {  };
+                return new MyStruct[] { };
             }
             set { MemberClass.t_status = 2; }
         }
@@ -557,7 +557,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             get
             {
                 MemberClass.t_status = 1;
-                return new MyStruct[] {  };
+                return new MyStruct[] { };
             }
             set { MemberClass.t_status = 2; }
         }

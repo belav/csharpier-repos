@@ -108,7 +108,7 @@ namespace System.MemoryTests
         [Fact]
         public static void MemoryManagerPinEmptyArray()
         {
-            int[] a = {  };
+            int[] a = { };
             MemoryManager<int> manager = new CustomMemoryForTest<int>(a);
             MemoryHandle handle = manager.Pin();
             unsafe

@@ -5773,25 +5773,25 @@ namespace NativeVarargTest
 
             // Try passing empty varargs.
             success = ReportFailure(
-                TestPassingEmptyIntsManaged(new int[] {  }),
+                TestPassingEmptyIntsManaged(new int[] { }),
                 "TestPassingEmptyIntsManaged(new int[] { })",
                 success,
                 42
             );
             success = ReportFailure(
-                TestPassingEmptyLongsManaged(new long[] {  }),
+                TestPassingEmptyLongsManaged(new long[] { }),
                 "TestPassingEmptyLongsManaged(new long[] { })",
                 success,
                 43
             );
             success = ReportFailure(
-                TestPassingEmptyFloatsManaged(new float[] {  }),
+                TestPassingEmptyFloatsManaged(new float[] { }),
                 "TestPassingEmptyFloatsManaged(new float[] { })",
                 success,
                 44
             );
             success = ReportFailure(
-                TestPassingEmptyDoubleManaged(new double[] {  }),
+                TestPassingEmptyDoubleManaged(new double[] { }),
                 "TestPassingEmptyDoubleManaged(new double[] { })",
                 success,
                 45
@@ -6076,25 +6076,25 @@ namespace NativeVarargTest
 
             // Try passing empty varargs.
             success = ReportFailure(
-                TestPassingEmptyInts(new int[] {  }),
+                TestPassingEmptyInts(new int[] { }),
                 "TestPassingEmptyInts(new int[] { })",
                 success,
                 11
             );
             success = ReportFailure(
-                TestPassingEmptyLongs(new long[] {  }),
+                TestPassingEmptyLongs(new long[] { }),
                 "TestPassingEmptyLongs(new long[] { })",
                 success,
                 12
             );
             success = ReportFailure(
-                TestPassingEmptyFloats(new float[] {  }),
+                TestPassingEmptyFloats(new float[] { }),
                 "TestPassingEmptyFloats(new float[] { })",
                 success,
                 13
             );
             success = ReportFailure(
-                TestPassingEmptyDouble(new double[] {  }),
+                TestPassingEmptyDouble(new double[] { }),
                 "TestPassingEmptyDouble(new double[] { })",
                 success,
                 14

@@ -56,9 +56,9 @@ namespace JIT.HardwareIntrinsics.General
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario));
 
             object result = typeof(Vector64<Int16>)
-                .GetProperty(nameof(Vector64<Int16>.Zero), new Type[] {  })
+                .GetProperty(nameof(Vector64<Int16>.Zero), new Type[] { })
                 .GetGetMethod()
-                .Invoke(null, new object[] {  });
+                .Invoke(null, new object[] { });
 
             ValidateResult((Vector64<Int16>)(result));
         }

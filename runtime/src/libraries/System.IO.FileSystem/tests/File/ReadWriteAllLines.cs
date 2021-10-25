@@ -49,7 +49,7 @@ namespace System.IO.Tests
         public void EmptyStringCreatesFile()
         {
             string path = GetTestFilePath();
-            Write(path, new string[] {  });
+            Write(path, new string[] { });
             Assert.True(File.Exists(path));
             Assert.Empty(Read(path));
         }
@@ -243,7 +243,7 @@ namespace System.IO.Tests
         public void EmptyStringCreatesFile()
         {
             string path = GetTestFilePath();
-            Write(path, new string[] {  });
+            Write(path, new string[] { });
             Assert.True(File.Exists(path));
             Assert.Empty(Read(path));
         }

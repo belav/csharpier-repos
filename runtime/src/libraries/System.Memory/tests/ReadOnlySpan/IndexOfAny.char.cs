@@ -740,7 +740,7 @@ namespace System.SpanTests
             int idx = sp.IndexOfAny(values);
             Assert.Equal(-1, idx);
 
-            values = new ReadOnlySpan<char>(new char[] {  });
+            values = new ReadOnlySpan<char>(new char[] { });
             idx = sp.IndexOfAny(values);
             Assert.Equal(-1, idx);
         }

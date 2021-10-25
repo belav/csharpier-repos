@@ -505,7 +505,7 @@ namespace Microsoft.AspNetCore.Mvc.IntegrationTests
 
         private class Person5
         {
-            public Address[] Address { get; } = new Address[] {  };
+            public Address[] Address { get; } = new Address[] { };
         }
 
         [Fact]

@@ -34,7 +34,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     }
                 },
                 HoverProvider = true,
-                FoldingRangeProvider = new FoldingRangeOptions {  },
+                FoldingRangeProvider = new FoldingRangeOptions { },
                 DocumentFormattingProvider = true,
                 DocumentRangeFormattingProvider = true,
                 DocumentOnTypeFormattingProvider = new DocumentOnTypeFormattingOptions

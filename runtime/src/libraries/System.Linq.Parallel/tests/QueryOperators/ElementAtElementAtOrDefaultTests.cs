@@ -75,14 +75,12 @@ namespace System.Linq.Parallel.Tests
             nameof(ElementAtUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(ElementAtData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void ElementAt_Longrunning(
@@ -113,7 +111,6 @@ namespace System.Linq.Parallel.Tests
             nameof(ElementAtOutOfRangeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void ElementAt_OutOfRange_Longrunning(
@@ -147,14 +144,12 @@ namespace System.Linq.Parallel.Tests
             nameof(ElementAtUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(ElementAtData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void ElementAtOrDefault_Longrunning(
@@ -185,7 +180,6 @@ namespace System.Linq.Parallel.Tests
             nameof(ElementAtOutOfRangeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void ElementAtOrDefault_OutOfRange_Longrunning(

@@ -15,7 +15,7 @@ namespace Microsoft.EntityFrameworkCore.Internal
             );
             using var context = new IdentifierShadowValuePresenceTestContext(testDatabase);
 
-            var item = new GItem {  };
+            var item = new GItem { };
 
             Assert.Null(item.Id);
 

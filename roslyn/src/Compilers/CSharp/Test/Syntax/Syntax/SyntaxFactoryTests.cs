@@ -335,7 +335,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, null2.SeparatorCount);
             Assert.Equal("", null2.ToString());
 
-            var empty1 = SyntaxFactory.SeparatedList(new TypeArgumentListSyntax[] {  });
+            var empty1 = SyntaxFactory.SeparatedList(new TypeArgumentListSyntax[] { });
 
             Assert.Equal(0, empty1.Count);
             Assert.Equal(0, empty1.SeparatorCount);

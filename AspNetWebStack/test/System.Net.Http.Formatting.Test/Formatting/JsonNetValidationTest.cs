@@ -62,7 +62,7 @@ namespace System.Net.Http.Formatting
         {
             JsonMediaTypeFormatter formatter = new JsonMediaTypeFormatter();
             formatter.RequiredMemberSelector = new SimpleRequiredMemberSelector();
-            Mock<IFormatterLogger> mockLogger = new Mock<IFormatterLogger>() {  };
+            Mock<IFormatterLogger> mockLogger = new Mock<IFormatterLogger>() { };
 
             await JsonNetSerializationTest.DeserializeAsync(
                 json,

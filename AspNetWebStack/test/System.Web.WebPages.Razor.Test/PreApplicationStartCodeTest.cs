@@ -29,7 +29,7 @@ namespace System.Web.WebPages.Razor.Test
                         buildProviders
                             .GetType()
                             .GetProperty("Count", BindingFlags.Public | BindingFlags.Instance)
-                            .GetValue(buildProviders, new object[] {  })
+                            .GetValue(buildProviders, new object[] { })
                     );
                 }
             );

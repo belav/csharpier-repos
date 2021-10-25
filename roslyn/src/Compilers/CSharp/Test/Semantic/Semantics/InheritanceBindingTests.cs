@@ -3501,7 +3501,7 @@ class Derived : Base
     public override IGoo<X> Method2<X>(X u) { return null; }
 }
 ";
-            CompileAndVerifyDiagnostics(text, new ErrorDescription[] {  });
+            CompileAndVerifyDiagnostics(text, new ErrorDescription[] { });
         }
 
         [Fact]
@@ -3521,7 +3521,7 @@ class Derived<S> : Base<S>
     public override S Method(S s) { return s; }
 }
 ";
-            CompileAndVerifyDiagnostics(text, new ErrorDescription[] {  });
+            CompileAndVerifyDiagnostics(text, new ErrorDescription[] { });
         }
 
         [Fact]

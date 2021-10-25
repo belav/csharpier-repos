@@ -550,7 +550,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(SourceCodeKind.Script, newTree.Options.Kind);
             Assert.Equal(tree.Options, newTree.Options);
 
-            var newRoot2 = root.ReplaceTrivia(comment1, new SyntaxTrivia[] {  });
+            var newRoot2 = root.ReplaceTrivia(comment1, new SyntaxTrivia[] { });
             Assert.Equal(" identifier", newRoot2.ToFullString());
             var newTree2 = newRoot2.SyntaxTree;
             Assert.Equal(SourceCodeKind.Script, newTree2.Options.Kind);

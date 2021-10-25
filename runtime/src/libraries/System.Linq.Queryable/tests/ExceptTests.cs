@@ -12,8 +12,8 @@ namespace System.Linq.Tests
         [Fact]
         public void BothEmpty()
         {
-            int[] first = {  };
-            int[] second = {  };
+            int[] first = { };
+            int[] second = { };
             Assert.Empty(first.AsQueryable().Except(second.AsQueryable()));
         }
 

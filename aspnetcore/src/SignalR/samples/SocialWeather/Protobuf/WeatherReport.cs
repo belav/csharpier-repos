@@ -38,7 +38,7 @@ namespace SocialWeather.Protobuf
             );
             descriptor = pbr::FileDescriptor.FromGeneratedCode(
                 descriptorData,
-                new pbr::FileDescriptor[] {  },
+                new pbr::FileDescriptor[] { },
                 new pbr::GeneratedClrTypeInfo(
                     null,
                     new pbr::GeneratedClrTypeInfo[]

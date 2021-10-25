@@ -1229,15 +1229,15 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
         public void TestIfStatements()
         {
             VerifySyntax<IfStatementSyntax>(
-                Generator.IfStatement(Generator.IdentifierName("x"), new SyntaxNode[] {  }),
+                Generator.IfStatement(Generator.IdentifierName("x"), new SyntaxNode[] { }),
                 "if (x)\r\n{\r\n}"
             );
 
             VerifySyntax<IfStatementSyntax>(
                 Generator.IfStatement(
                     Generator.IdentifierName("x"),
-                    new SyntaxNode[] {  },
-                    new SyntaxNode[] {  }
+                    new SyntaxNode[] { },
+                    new SyntaxNode[] { }
                 ),
                 "if (x)\r\n{\r\n}\r\nelse\r\n{\r\n}"
             );
@@ -1502,7 +1502,7 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
 
             VerifySyntax<ParenthesizedLambdaExpressionSyntax>(
                 Generator.ValueReturningLambdaExpression(
-                    new SyntaxNode[] {  },
+                    new SyntaxNode[] { },
                     Generator.IdentifierName("y")
                 ),
                 "() => y"
@@ -1523,7 +1523,7 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
 
             VerifySyntax<ParenthesizedLambdaExpressionSyntax>(
                 Generator.VoidReturningLambdaExpression(
-                    new SyntaxNode[] {  },
+                    new SyntaxNode[] { },
                     Generator.IdentifierName("y")
                 ),
                 "() => y"
@@ -1547,7 +1547,7 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
 
             VerifySyntax<ParenthesizedLambdaExpressionSyntax>(
                 Generator.ValueReturningLambdaExpression(
-                    new SyntaxNode[] {  },
+                    new SyntaxNode[] { },
                     new[] { Generator.ReturnStatement(Generator.IdentifierName("y")) }
                 ),
                 "() =>\r\n{\r\n    return y;\r\n}"
@@ -1571,7 +1571,7 @@ public class MyAttribute : Attribute { public int Value {get; set;} }",
 
             VerifySyntax<ParenthesizedLambdaExpressionSyntax>(
                 Generator.VoidReturningLambdaExpression(
-                    new SyntaxNode[] {  },
+                    new SyntaxNode[] { },
                     new[] { Generator.IdentifierName("y") }
                 ),
                 "() =>\r\n{\r\n    y;\r\n}"
@@ -2436,7 +2436,7 @@ public interface IFace
             );
 
             VerifySyntax<ClassDeclarationSyntax>(
-                Generator.ClassDeclaration("c", interfaceTypes: new SyntaxNode[] {  }),
+                Generator.ClassDeclaration("c", interfaceTypes: new SyntaxNode[] { }),
                 "class c\r\n{\r\n}"
             );
 
@@ -2505,7 +2505,7 @@ public interface IFace
             );
 
             VerifySyntax<StructDeclarationSyntax>(
-                Generator.StructDeclaration("s", interfaceTypes: new SyntaxNode[] {  }),
+                Generator.StructDeclaration("s", interfaceTypes: new SyntaxNode[] { }),
                 "struct s\r\n{\r\n}"
             );
 
@@ -2574,7 +2574,7 @@ public interface IFace
             );
 
             VerifySyntax<InterfaceDeclarationSyntax>(
-                Generator.InterfaceDeclaration("i", interfaceTypes: new SyntaxNode[] {  }),
+                Generator.InterfaceDeclaration("i", interfaceTypes: new SyntaxNode[] { }),
                 "interface i\r\n{\r\n}"
             );
 
@@ -2915,7 +2915,7 @@ public interface IFace
             VerifySyntax<AttributeListSyntax>(Generator.Attribute("a.b"), "[a.b]");
 
             VerifySyntax<AttributeListSyntax>(
-                Generator.Attribute("a", new SyntaxNode[] {  }),
+                Generator.Attribute("a", new SyntaxNode[] { }),
                 "[a()]"
             );
 
@@ -3530,7 +3530,7 @@ public class C { } // end"
             TestRemoveNamespaceImport(
                 Generator.CompilationUnit(Generator.NamespaceImportDeclaration("x")),
                 "x",
-                new string[] {  }
+                new string[] { }
             );
             TestRemoveNamespaceImport(
                 Generator.CompilationUnit(
@@ -5752,7 +5752,7 @@ public class C
             var newGetAccessor = Generator.WithStatements(getAccessor, null);
             VerifySyntax<AccessorDeclarationSyntax>(newGetAccessor, @"get;");
 
-            var newNewGetAccessor = Generator.WithStatements(newGetAccessor, new SyntaxNode[] {  });
+            var newNewGetAccessor = Generator.WithStatements(newGetAccessor, new SyntaxNode[] { });
             VerifySyntax<AccessorDeclarationSyntax>(
                 newNewGetAccessor,
                 @"get
@@ -6036,7 +6036,7 @@ public class C
             Assert.Equal(
                 0,
                 Generator.GetStatements(
-                    Generator.VoidReturningLambdaExpression(new SyntaxNode[] {  })
+                    Generator.VoidReturningLambdaExpression(new SyntaxNode[] { })
                 ).Count
             );
             Assert.Equal(
@@ -6047,7 +6047,7 @@ public class C
             Assert.Equal(
                 0,
                 Generator.GetStatements(
-                    Generator.ValueReturningLambdaExpression(new SyntaxNode[] {  })
+                    Generator.ValueReturningLambdaExpression(new SyntaxNode[] { })
                 ).Count
             );
             Assert.Equal(
@@ -6095,7 +6095,7 @@ public class C
                 2,
                 Generator.GetStatements(
                     Generator.WithStatements(
-                        Generator.VoidReturningLambdaExpression(new SyntaxNode[] {  }),
+                        Generator.VoidReturningLambdaExpression(new SyntaxNode[] { }),
                         stmts
                     )
                 ).Count
@@ -6104,7 +6104,7 @@ public class C
                 2,
                 Generator.GetStatements(
                     Generator.WithStatements(
-                        Generator.ValueReturningLambdaExpression(new SyntaxNode[] {  }),
+                        Generator.ValueReturningLambdaExpression(new SyntaxNode[] { }),
                         stmts
                     )
                 ).Count

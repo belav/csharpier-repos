@@ -981,7 +981,7 @@ public static partial class XmlSerializerTests
         {
             new int[][] { new int[] { 1 }, new int[] { 3 } },
             new int[][] { new int[] { 0 } },
-            new int[][] { new int[] {  } }
+            new int[][] { new int[] { } }
         };
         int[][][] actualJaggedIntegerArray2 = SerializeAndDeserialize<int[][][]>(
             jaggedIntegerArray2,

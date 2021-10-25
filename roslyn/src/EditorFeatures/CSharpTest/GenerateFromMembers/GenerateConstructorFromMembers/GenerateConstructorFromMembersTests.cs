@@ -1020,7 +1020,7 @@ class Z
     {
     }
 }",
-                chosenSymbols: new string[] {  }
+                chosenSymbols: new string[] { }
             );
         }
 

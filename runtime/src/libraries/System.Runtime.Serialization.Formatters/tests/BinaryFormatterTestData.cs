@@ -3044,10 +3044,10 @@ namespace System.Runtime.Serialization.Formatters.Tests
                         .GetConstructor(
                             BindingFlags.NonPublic | BindingFlags.Instance,
                             null,
-                            new Type[] {  },
+                            new Type[] { },
                             null
                         )
-                        .Invoke(new object[] {  });
+                        .Invoke(new object[] { });
                 typeof(OdbcErrorCollection)
                     .GetMethod("Add", BindingFlags.NonPublic | BindingFlags.Instance)
                     .Invoke(odbcErrorCollection, new object[] { odbcError });
@@ -3897,10 +3897,10 @@ namespace System.Runtime.Serialization.Formatters.Tests
                     .GetConstructor(
                         BindingFlags.NonPublic | BindingFlags.Instance,
                         null,
-                        new Type[] {  },
+                        new Type[] { },
                         null
                     )
-                    .Invoke(new object[] {  });
+                    .Invoke(new object[] { });
             yield return new object[]
             {
                 PopulateException(threadAbortException),
@@ -5820,7 +5820,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                new int[] {  },
+                new int[] { },
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(
@@ -5880,7 +5880,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             };
             yield return new object[]
             {
-                new string[] {  },
+                new string[] { },
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(
@@ -6032,7 +6032,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             // Arrays of other types
             yield return new object[]
             {
-                new object[] {  },
+                new object[] { },
                 new TypeSerializableValue[]
                 {
                     new TypeSerializableValue(

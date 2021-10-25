@@ -61,7 +61,7 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy
             );
 
         internal static readonly IEnumerable<DirectiveDescriptor> DefaultDirectiveDescriptors =
-            new DirectiveDescriptor[] {  };
+            new DirectiveDescriptor[] { };
 
         internal static ISet<string> DefaultKeywords = new HashSet<string>()
         {

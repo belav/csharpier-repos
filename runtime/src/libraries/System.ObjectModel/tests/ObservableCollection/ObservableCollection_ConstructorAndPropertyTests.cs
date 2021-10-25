@@ -67,7 +67,7 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void IEnumerableConstructorTest_Empty()
         {
-            var col = new ObservableCollection<string>(new string[] {  });
+            var col = new ObservableCollection<string>(new string[] { });
             Assert.Equal(0, col.Count);
             Assert.Empty(col);
         }

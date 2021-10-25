@@ -672,7 +672,7 @@ class Query
                     symbolValidator: module =>
                         TestAnonymousTypeSymbols(
                             module,
-                            new TypeDescr() { FieldNames = new string[] {  } }
+                            new TypeDescr() { FieldNames = new string[] { } }
                         ),
                     expectedOutput: @"
 <>f__AnonymousType0:
@@ -1098,7 +1098,7 @@ class Query
                 {
                     CtorName =
                         "System.Runtime.CompilerServices.CompilerGeneratedAttribute.CompilerGeneratedAttribute()",
-                    ConstructorArguments = new string[] {  }
+                    ConstructorArguments = new string[] { }
                 }
             );
 
@@ -1129,7 +1129,7 @@ class Query
                 {
                     CtorName =
                         "System.Diagnostics.DebuggerHiddenAttribute.DebuggerHiddenAttribute()",
-                    ConstructorArguments = new string[] {  }
+                    ConstructorArguments = new string[] { }
                 }
             );
             CheckMethodSymbol(
@@ -1141,7 +1141,7 @@ class Query
                 {
                     CtorName =
                         "System.Diagnostics.DebuggerHiddenAttribute.DebuggerHiddenAttribute()",
-                    ConstructorArguments = new string[] {  }
+                    ConstructorArguments = new string[] { }
                 }
             );
             CheckMethodSymbol(
@@ -1153,7 +1153,7 @@ class Query
                 {
                     CtorName =
                         "System.Diagnostics.DebuggerHiddenAttribute.DebuggerHiddenAttribute()",
-                    ConstructorArguments = new string[] {  }
+                    ConstructorArguments = new string[] { }
                 }
             );
             CheckMethodSymbol(
@@ -1165,7 +1165,7 @@ class Query
                 {
                     CtorName =
                         "System.Diagnostics.DebuggerHiddenAttribute.DebuggerHiddenAttribute()",
-                    ConstructorArguments = new string[] {  }
+                    ConstructorArguments = new string[] { }
                 }
             );
         }
@@ -1234,7 +1234,7 @@ class Query
 
             TestAttributeOnSymbol(
                 method,
-                attr == null ? new AttributeInfo[] {  } : new AttributeInfo[] { attr }
+                attr == null ? new AttributeInfo[] { } : new AttributeInfo[] { attr }
             );
         }
 

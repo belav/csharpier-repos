@@ -186,7 +186,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string included = JsonConvert.SerializeObject(
                 invoice,
                 Formatting.Indented,
-                new JsonSerializerSettings {  }
+                new JsonSerializerSettings { }
             );
 
             StringAssert.AreEqual(

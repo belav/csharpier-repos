@@ -120,7 +120,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 references: new[] { TestMetadata.NetCoreApp.SystemRuntime }
             );
 
-            var knownMissingTypes = new HashSet<SpecialType>() {  };
+            var knownMissingTypes = new HashSet<SpecialType>() { };
 
             for (
                 var specialType = SpecialType.None + 1;

@@ -1002,7 +1002,7 @@ namespace System.Diagnostics.Tests
 
                             /***************************************************************************************/
                             // Emit an event with the same schema as the first event.   (uses first-event cache)
-                            val = new MyClass() {  };
+                            val = new MyClass() { };
                             if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                                 diagnosticSourceListener.Write(
                                     "TestEvent1",

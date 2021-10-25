@@ -55,7 +55,7 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new string[] {  }, "7fff")]
+        [InlineData(new string[] { }, "7fff")]
         [InlineData(new string[] { "" }, "7f60ff")]
         [InlineData(new string[] { "ab", "" }, "7f62616260ff")]
         [InlineData(new string[] { "ab", "bc", "" }, "7f62616262626360ff")]

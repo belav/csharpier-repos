@@ -31,7 +31,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                         type: typeof(BloggingContext),
                         databaseExists: false,
                         pendingModelChanges: false,
-                        pendingMigrations: new string[] {  }
+                        pendingMigrations: new string[] { }
                     )
                 },
                 options: options,
@@ -139,7 +139,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                         type: typeof(BloggingContext),
                         databaseExists: true,
                         pendingModelChanges: true,
-                        pendingMigrations: new string[] {  }
+                        pendingMigrations: new string[] { }
                     )
                 },
                 options: options,
@@ -166,7 +166,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                         type: typeof(BloggingContext),
                         databaseExists: false,
                         pendingModelChanges: false,
-                        pendingMigrations: new string[] {  }
+                        pendingMigrations: new string[] { }
                     )
                 },
                 options: options,
@@ -194,7 +194,7 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests
                         type: typeof(BloggingContext),
                         databaseExists: false,
                         pendingModelChanges: false,
-                        pendingMigrations: new string[] {  }
+                        pendingMigrations: new string[] { }
                     )
                 },
                 options: options,

@@ -66,7 +66,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MaxData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Max_Int_Longrunning(
@@ -116,7 +115,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MaxData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Max_Long_Longrunning(
@@ -181,7 +179,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MaxData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Max_Float_Longrunning(
@@ -246,7 +243,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MaxData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Max_Double_Longrunning(
@@ -304,7 +300,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MaxData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Max_Decimal_Longrunning(
@@ -368,7 +363,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MaxData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Max_Other_Longrunning(

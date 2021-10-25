@@ -641,7 +641,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                 initializer.WithAdditionalAnnotations(Simplifier.Annotation)
                             )
                         };
-                        nodesAfterLocal = new StatementSyntax[] {  };
+                        nodesAfterLocal = new StatementSyntax[] { };
                     }
                     else
                     {

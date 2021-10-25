@@ -31,7 +31,7 @@ namespace System.CodeDom.Compiler.Tests
         {
             CodeDomProvider provider = GetProvider();
 
-            var options = new CompilerParameters(new string[] {  }, "test.exe");
+            var options = new CompilerParameters(new string[] { }, "test.exe");
 
             var cu = new CodeCompileUnit();
             var ns = new CodeNamespace("ns");

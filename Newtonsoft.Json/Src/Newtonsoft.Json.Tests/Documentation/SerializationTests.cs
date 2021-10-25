@@ -799,7 +799,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             string included = JsonConvert.SerializeObject(
                 movie,
                 Formatting.Indented,
-                new JsonSerializerSettings {  }
+                new JsonSerializerSettings { }
             );
 
             // {
@@ -881,7 +881,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             string included = JsonConvert.SerializeObject(
                 invoice,
                 Formatting.Indented,
-                new JsonSerializerSettings {  }
+                new JsonSerializerSettings { }
             );
 
             // {

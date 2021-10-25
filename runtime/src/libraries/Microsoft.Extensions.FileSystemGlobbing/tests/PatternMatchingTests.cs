@@ -131,7 +131,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         }
 
         [Theory]
-        [InlineData(@"", new string[] {  })]
+        [InlineData(@"", new string[] { })]
         [InlineData(@"./", new string[] { "alpha/hello.txt", "beta/hello.txt", "gamma/hello.txt" })]
         [InlineData(@"./alpha/hello.txt", new string[] { "alpha/hello.txt" })]
         [InlineData(

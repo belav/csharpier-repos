@@ -687,7 +687,7 @@ namespace System.IO.Tests
             Assert.Equal(0, watcher.Filters.Count);
             Assert.Empty(watcher.Filters);
             Assert.NotNull(watcher.Filters);
-            Assert.Equal(new string[] {  }, watcher.Filters);
+            Assert.Equal(new string[] { }, watcher.Filters);
         }
 
         [Fact]
@@ -803,7 +803,7 @@ namespace System.IO.Tests
             watcher.Filters.RemoveAt(0);
             Assert.Equal(0, watcher.Filters.Count);
             Assert.Equal("*", watcher.Filter);
-            Assert.Equal(new string[] {  }, watcher.Filters);
+            Assert.Equal(new string[] { }, watcher.Filters);
         }
 
         [Fact]
@@ -954,7 +954,7 @@ namespace System.IO.Tests
 
             watcher.Filters.Clear();
             Assert.Equal(0, watcher.Filters.Count);
-            Assert.Equal(new string[] {  }, watcher.Filters);
+            Assert.Equal(new string[] { }, watcher.Filters);
         }
 
         [Fact]
@@ -968,7 +968,7 @@ namespace System.IO.Tests
 
                 watcher.Filters.Clear();
                 Assert.Equal("*", watcher.Filter);
-                Assert.Equal(new string[] {  }, watcher.Filters);
+                Assert.Equal(new string[] { }, watcher.Filters);
             }
         }
 

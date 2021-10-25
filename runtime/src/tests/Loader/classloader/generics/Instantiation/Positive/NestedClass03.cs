@@ -89,7 +89,7 @@ public class Test
         );
 
         Eval(
-            (new GenOuter.GenInner<RefX1<int>[]>(new RefX1<int>[] {  })).InstVerify(
+            (new GenOuter.GenInner<RefX1<int>[]>(new RefX1<int>[] { })).InstVerify(
                 typeof(RefX1<int>[])
             )
         );
@@ -115,7 +115,7 @@ public class Test
         );
 
         Eval(
-            (new GenOuter.GenInner<RefX2<int, int>[]>(new RefX2<int, int>[] {  })).InstVerify(
+            (new GenOuter.GenInner<RefX2<int, int>[]>(new RefX2<int, int>[] { })).InstVerify(
                 typeof(RefX2<int, int>[])
             )
         );
@@ -143,7 +143,7 @@ public class Test
         );
 
         Eval(
-            (new GenOuter.GenInner<ValX1<int>[]>(new ValX1<int>[] {  })).InstVerify(
+            (new GenOuter.GenInner<ValX1<int>[]>(new ValX1<int>[] { })).InstVerify(
                 typeof(ValX1<int>[])
             )
         );
@@ -169,7 +169,7 @@ public class Test
         );
 
         Eval(
-            (new GenOuter.GenInner<ValX2<int, int>[]>(new ValX2<int, int>[] {  })).InstVerify(
+            (new GenOuter.GenInner<ValX2<int, int>[]>(new ValX2<int, int>[] { })).InstVerify(
                 typeof(ValX2<int, int>[])
             )
         );

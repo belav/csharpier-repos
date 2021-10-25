@@ -151,7 +151,7 @@ public class Tests
             );
 
             // float ret
-            GenCase(w, "float", "0.123f", new string[] {  }, new string[] {  });
+            GenCase(w, "float", "0.123f", new string[] { }, new string[] { });
 
             // double
             GenCase(w, "void", "", new string[] { "double" }, new string[] { "0.123f" });
@@ -166,7 +166,7 @@ public class Tests
             );
 
             // double ret
-            GenCase(w, "double", "0.123f", new string[] {  }, new string[] {  });
+            GenCase(w, "double", "0.123f", new string[] { }, new string[] { });
 
             w.WriteLine("}");
         }

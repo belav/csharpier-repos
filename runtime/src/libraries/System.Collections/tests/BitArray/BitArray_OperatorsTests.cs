@@ -356,7 +356,6 @@ namespace System.Collections.Tests
                         size,
                         new int[]
                         { /* deliberately empty */
-
                         },
                         shift
                     };

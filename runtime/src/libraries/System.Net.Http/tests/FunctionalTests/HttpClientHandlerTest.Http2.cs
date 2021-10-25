@@ -2795,7 +2795,7 @@ namespace System.Net.Http.Functional.Tests
         {
             byte[] readBuffer = new byte[1];
 
-            await connection.SendResponseDataAsync(streamId, new byte[] {  }, endStream: true);
+            await connection.SendResponseDataAsync(streamId, new byte[] { }, endStream: true);
             int bytesRead = await responseStream.ReadAsync(readBuffer);
             Assert.Equal(0, bytesRead);
 

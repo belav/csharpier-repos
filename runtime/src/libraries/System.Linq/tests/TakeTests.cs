@@ -77,7 +77,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SourceEmptyCountPositive()
         {
-            var source = new int[] {  };
+            var source = new int[] { };
             Assert.Empty(source.Take(5));
 
             Assert.Empty(source.Take(0..5));
@@ -1225,7 +1225,7 @@ namespace System.Linq.Tests
         [InlineData(new[] { 1, 2, 3, 5, 8, 13 }, 1, int.MaxValue, 2, 13)] // Regression test: The max index is precisely int.MaxValue.
         [InlineData(new[] { 1, 2, 3, 5, 8, 13 }, 0, 2, 1, 2)]
         [InlineData(new[] { 1, 2, 3, 5, 8, 13 }, 500, 2, 0, 0)]
-        [InlineData(new int[] {  }, 10, 8, 0, 0)]
+        [InlineData(new int[] { }, 10, 8, 0, 0)]
         public void FirstAndLastOfLazySkipTakeChain(
             int[] source,
             int skip,
@@ -1944,7 +1944,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_DoNotThrowException()
         {
-            Func<int[]> source = () => new int[] {  };
+            Func<int[]> source = () => new int[] { };
 
             // Multiple elements in the middle.
             Assert.Empty(source().Take(^9..5));
@@ -1996,7 +1996,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_DoNotThrowException_NotList()
         {
-            int[] source = {  };
+            int[] source = { };
 
             // Multiple elements in the middle.
             Assert.Empty(ForceNotCollection(source).Take(^9..5));
@@ -2048,7 +2048,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_DoNotThrowException_ListPartition()
         {
-            int[] source = {  };
+            int[] source = { };
 
             // Multiple elements in the middle.
             Assert.Empty(ListPartitionOrEmpty(source).Take(^9..5));
@@ -2100,7 +2100,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_DoNotThrowException_EnumerablePartition()
         {
-            int[] source = {  };
+            int[] source = { };
 
             // Multiple elements in the middle.
             Assert.Empty(EnumerablePartitionOrEmpty(source).Take(^9..5));

@@ -57,7 +57,7 @@ namespace System.Memory.Tests.SequenceReader
         public void PastEmptySegments()
         {
             ReadOnlySequence<byte> bytes = SequenceFactory.Create(
-                new byte[][] { new byte[] { 0 }, new byte[] {  }, new byte[] {  }, new byte[] {  } }
+                new byte[][] { new byte[] { 0 }, new byte[] { }, new byte[] { }, new byte[] { } }
             );
 
             SequenceReader<byte> reader = new SequenceReader<byte>(bytes);

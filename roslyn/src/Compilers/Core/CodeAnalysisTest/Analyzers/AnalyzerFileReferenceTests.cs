@@ -731,7 +731,7 @@ public class Generator : ISourceGenerator
             }
         }
 
-        [DiagnosticAnalyzer(LanguageNames.VisualBasic, new string[] {  })]
+        [DiagnosticAnalyzer(LanguageNames.VisualBasic, new string[] { })]
         public class TestAnalyzerVB : DiagnosticAnalyzer
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics

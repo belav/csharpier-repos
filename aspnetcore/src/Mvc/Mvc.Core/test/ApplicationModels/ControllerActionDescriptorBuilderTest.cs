@@ -20,12 +20,12 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             var applicationModel = new ApplicationModel();
             var controller = new ControllerModel(
                 typeof(TestController).GetTypeInfo(),
-                new List<object>() {  }
+                new List<object>() { }
             );
 
             var propertyInfo = controller.ControllerType.AsType().GetProperty("BoundProperty");
             controller.ControllerProperties.Add(
-                new PropertyModel(propertyInfo, new List<object>() {  })
+                new PropertyModel(propertyInfo, new List<object>() { })
                 {
                     BindingInfo = BindingInfo.GetBindingInfo(
                         new object[] { new FromQueryAttribute() }
@@ -37,7 +37,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             controller.ControllerProperties.Add(
                 new PropertyModel(
                     controller.ControllerType.AsType().GetProperty("UnboundProperty"),
-                    new List<object>() {  }
+                    new List<object>() { }
                 )
             );
 
@@ -45,7 +45,7 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
             applicationModel.Controllers.Add(controller);
 
             var methodInfo = typeof(TestController).GetMethod(nameof(TestController.SomeAction));
-            var actionModel = new ActionModel(methodInfo, new List<object>() {  });
+            var actionModel = new ActionModel(methodInfo, new List<object>() { });
             actionModel.Selectors.Add(new SelectorModel());
             actionModel.Controller = controller;
             controller.Actions.Add(actionModel);
@@ -73,13 +73,13 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             var controller = new ControllerModel(
                 typeof(TestController).GetTypeInfo(),
-                new List<object>() {  }
+                new List<object>() { }
             );
             controller.Application = applicationModel;
             applicationModel.Controllers.Add(controller);
 
             var methodInfo = typeof(TestController).GetMethod(nameof(TestController.SomeAction));
-            var actionModel = new ActionModel(methodInfo, new List<object>() {  });
+            var actionModel = new ActionModel(methodInfo, new List<object>() { });
             actionModel.Selectors.Add(new SelectorModel());
             actionModel.Controller = controller;
             controller.Actions.Add(actionModel);
@@ -100,14 +100,14 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             var controller = new ControllerModel(
                 typeof(TestController).GetTypeInfo(),
-                new List<object>() {  }
+                new List<object>() { }
             );
             controller.Application = applicationModel;
             controller.Properties["test"] = "controller";
             applicationModel.Controllers.Add(controller);
 
             var methodInfo = typeof(TestController).GetMethod(nameof(TestController.SomeAction));
-            var actionModel = new ActionModel(methodInfo, new List<object>() {  });
+            var actionModel = new ActionModel(methodInfo, new List<object>() { });
             actionModel.Selectors.Add(new SelectorModel());
             actionModel.Controller = controller;
             controller.Actions.Add(actionModel);
@@ -128,14 +128,14 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels
 
             var controller = new ControllerModel(
                 typeof(TestController).GetTypeInfo(),
-                new List<object>() {  }
+                new List<object>() { }
             );
             controller.Application = applicationModel;
             controller.Properties["test"] = "controller";
             applicationModel.Controllers.Add(controller);
 
             var methodInfo = typeof(TestController).GetMethod(nameof(TestController.SomeAction));
-            var actionModel = new ActionModel(methodInfo, new List<object>() {  });
+            var actionModel = new ActionModel(methodInfo, new List<object>() { });
             actionModel.Selectors.Add(new SelectorModel());
             actionModel.Controller = controller;
             actionModel.Properties["test"] = "action";

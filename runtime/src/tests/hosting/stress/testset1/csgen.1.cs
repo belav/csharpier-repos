@@ -146,7 +146,7 @@ public class AA<TA, TB> where TA : IComparable
                     long[,][,][][,] local22 = (new long[115u, 83u][,][][,]);
                     for (App.m_shFwd10 = App.m_shFwd10; App.m_bFwd1; App.m_ushFwd8++)
                     {
-                        char[][][,,] local23 = new char[][][,,] {  };
+                        char[][][,,] local23 = new char[][][,,] { };
                         TestEnum[,,][,][,,,][] local24 = (new TestEnum[29u, 90u, 44u][,][,,,][]);
                         object[][] local25 = new object[][]
                         {
@@ -275,7 +275,7 @@ public struct BB
                                     {
                                         Array[] local44 = (new Array[100u]);
                                         int local45 = 17;
-                                        BB[][,][,][][,][] local46 = new BB[][,][,][][,][] {  };
+                                        BB[][,][,][][,][] local46 = new BB[][,][,][][,][] { };
                                         local43 = local43;
                                     }
                                     catch (Exception)

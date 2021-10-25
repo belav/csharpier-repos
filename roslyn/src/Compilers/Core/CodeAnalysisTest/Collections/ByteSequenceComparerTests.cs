@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Collections.UnitTests
         [Fact]
         public void Equals1()
         {
-            Assert.True(ByteSequenceComparer.Equals(new byte[] {  }, new byte[] {  }));
+            Assert.True(ByteSequenceComparer.Equals(new byte[] { }, new byte[] { }));
             Assert.True(ByteSequenceComparer.Equals(new byte[] { 1 }, new byte[] { 1 }));
             Assert.False(ByteSequenceComparer.Equals(new byte[] { 1 }, new byte[] { 2 }));
             Assert.True(ByteSequenceComparer.Equals(new byte[] { 1, 2 }, new byte[] { 1, 2 }));
@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis.Collections.UnitTests
         [Fact]
         public void Equals2()
         {
-            Assert.True(ByteSequenceComparer.Equals(new byte[] {  }, 0, new byte[] {  }, 0, 0));
-            Assert.True(ByteSequenceComparer.Equals(new byte[] { 1 }, 0, new byte[] {  }, 0, 0));
+            Assert.True(ByteSequenceComparer.Equals(new byte[] { }, 0, new byte[] { }, 0, 0));
+            Assert.True(ByteSequenceComparer.Equals(new byte[] { 1 }, 0, new byte[] { }, 0, 0));
             Assert.True(ByteSequenceComparer.Equals(new byte[] { 1 }, 1, new byte[] { 1 }, 1, 0));
             Assert.True(ByteSequenceComparer.Equals(new byte[] { 1 }, 0, new byte[] { 1 }, 0, 1));
             Assert.False(ByteSequenceComparer.Equals(new byte[] { 1 }, 0, new byte[] { 2 }, 0, 1));
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Collections.UnitTests
             Assert.False(ByteSequenceComparer.Equals(b, 0, b, 1, 1));
 
             Assert.False(ByteSequenceComparer.Equals(null, b));
-            Assert.False(ByteSequenceComparer.Equals(null, new byte[] {  }));
+            Assert.False(ByteSequenceComparer.Equals(null, new byte[] { }));
             Assert.True(ByteSequenceComparer.Equals(null, null));
         }
     }

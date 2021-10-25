@@ -1172,8 +1172,8 @@ namespace AutoMapper.IntegrationTests
                                 Brand = new Brand { Owners = { new Owner { Name = "Owner" } } }
                             }
                         },
-                        new ProductReview { Product = new Product { Brand = new Brand {  } } },
-                        new ProductReview { Product = new Product {  } }
+                        new ProductReview { Product = new Product { Brand = new Brand { } } },
+                        new ProductReview { Product = new Product { } }
                     }
                 );
             }

@@ -289,7 +289,7 @@ namespace System.Data.Tests
                 null,
                 () =>
                 {
-                    DataTableReader reader = new DataTableReader(new DataTable[] {  });
+                    DataTableReader reader = new DataTableReader(new DataTable[] { });
                     try
                     {
                         reader.Read();

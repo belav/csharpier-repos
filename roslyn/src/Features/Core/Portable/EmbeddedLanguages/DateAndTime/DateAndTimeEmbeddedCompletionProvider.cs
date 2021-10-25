@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             .WithFilterCharacterRule(
                 CharacterSetModificationRule.Create(
                     CharacterSetModificationKind.Replace,
-                    new char[] {  }
+                    new char[] { }
                 )
             );
 

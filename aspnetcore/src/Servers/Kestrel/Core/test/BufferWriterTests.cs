@@ -98,7 +98,7 @@ namespace System.IO.Pipelines.Tests
         public void CanWriteEmpty()
         {
             BufferWriter<PipeWriter> writer = new BufferWriter<PipeWriter>(Pipe.Writer);
-            var array = new byte[] {  };
+            var array = new byte[] { };
 
             writer.Write(array);
             writer.Write(new Span<byte>(array, 0, array.Length));
@@ -157,7 +157,7 @@ namespace System.IO.Pipelines.Tests
             writer.Ensure(10);
             Assert.True(writer.Span.Length > 10);
             Assert.Equal(0, writer.BytesCommitted);
-            Assert.Equal(new byte[] {  }, Read());
+            Assert.Equal(new byte[] { }, Read());
         }
 
         [Fact]
@@ -166,7 +166,7 @@ namespace System.IO.Pipelines.Tests
             int initialLength = Pipe.Writer.GetMemory().Length;
             BufferWriter<PipeWriter> writer = new BufferWriter<PipeWriter>(Pipe.Writer);
             Assert.Equal(initialLength, writer.Span.Length);
-            Assert.Equal(new byte[] {  }, Read());
+            Assert.Equal(new byte[] { }, Read());
         }
 
         [Fact]

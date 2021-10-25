@@ -23,7 +23,7 @@ namespace XmlFormattersWebSite.Controllers
 
         public IEnumerable<string> NonWrappedTypes_Empty()
         {
-            return new string[] {  };
+            return new string[] { };
         }
 
         public IEnumerable<Person> WrappedTypes()
@@ -37,7 +37,7 @@ namespace XmlFormattersWebSite.Controllers
 
         public IEnumerable<Person> WrappedTypes_Empty()
         {
-            return new Person[] {  };
+            return new Person[] { };
         }
 
         public IEnumerable<string> NonWrappedTypes_NullInstance()

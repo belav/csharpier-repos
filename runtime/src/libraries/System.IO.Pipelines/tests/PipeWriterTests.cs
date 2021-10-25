@@ -115,7 +115,7 @@ namespace System.IO.Pipelines.Tests
             Assert.True(span.Length >= 10);
             // 0 byte Flush would not complete the reader so we complete.
             Pipe.Writer.Complete();
-            Assert.Equal(new byte[] {  }, Read());
+            Assert.Equal(new byte[] { }, Read());
         }
 
         [Fact]

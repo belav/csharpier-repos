@@ -4004,7 +4004,7 @@ namespace System.Web.Mvc.Html.Test
 
         private static ViewDataDictionary<string> GetRadioButtonNestedAndUnsetViewData()
         {
-            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> {  };
+            ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel> { };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
 
             Expression<Func<FooBarModel, string>> containedExpression = m => m.foo;

@@ -25,8 +25,8 @@ namespace System.Reflection.Tests
             "EventProtected",
             "EventProtectedStatic"
         };
-        public static string[] InheritedEvents = new string[] {  };
-        public static string[] InheritedButHiddenEvents = new string[] {  };
+        public static string[] InheritedEvents = new string[] { };
+        public static string[] InheritedButHiddenEvents = new string[] { };
         public static string[] PublicEvents = new string[] { "EventPublic", "EventPublicStatic" };
 
         public event EventHandler EventPublic; // inherited
@@ -45,15 +45,15 @@ namespace System.Reflection.Tests
     {
         public static new int Members = 7;
         public static new int MembersEverything = 22;
-        public static new string[] DeclaredEvents = new string[] {  };
+        public static new string[] DeclaredEvents = new string[] { };
         public static new string[] InheritedEvents = new string[]
         {
             "EventPublic",
             "EventInternal",
             "EventProtected"
         };
-        public static new string[] InheritedButHiddenEvents = new string[] {  };
-        public static new string[] PublicEvents = new string[] {  };
+        public static new string[] InheritedButHiddenEvents = new string[] { };
+        public static new string[] PublicEvents = new string[] { };
     }
 
     public class EventTestSubClassWithNewEvents : EventTestSubClass

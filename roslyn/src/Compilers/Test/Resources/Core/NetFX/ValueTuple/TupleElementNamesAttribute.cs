@@ -57,7 +57,7 @@ namespace System.Runtime.CompilerServices
         /// </remarks>
         public TupleElementNamesAttribute()
         {
-            _transformNames = new string[] {  };
+            _transformNames = new string[] { };
         }
 
         /// <summary>

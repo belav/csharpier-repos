@@ -11,7 +11,7 @@ namespace System.SpanTests
         public static readonly TheoryData<(uint[] Array, uint Value, int ExpectedIndex)> s_casesUInt =
             new TheoryData<(uint[] Array, uint Value, int ExpectedIndex)>
             {
-                (new uint[] {  }, 0u, -1),
+                (new uint[] { }, 0u, -1),
                 (new uint[] { 1u }, 0u, -1),
                 (new uint[] { 1u }, 1u, 0),
                 (new uint[] { 1u }, 2u, -2),
@@ -27,7 +27,7 @@ namespace System.SpanTests
         public static readonly TheoryData<(double[] Array, double Value, int ExpectedIndex)> s_casesDouble =
             new TheoryData<(double[] Array, double Value, int ExpectedIndex)>
             {
-                (new double[] {  }, 0.0, -1),
+                (new double[] { }, 0.0, -1),
                 (new double[] { 1.0 }, 0.0, -1),
                 (new double[] { 1.0 }, 1.0, 0),
                 (new double[] { 1.0 }, 2.0, -2),
@@ -43,7 +43,7 @@ namespace System.SpanTests
         public static readonly TheoryData<(string[] Array, string Value, int ExpectedIndex)> s_casesString =
             new TheoryData<(string[] Array, string Value, int ExpectedIndex)>
             {
-                (new string[] {  }, "a", -1),
+                (new string[] { }, "a", -1),
                 (new string[] { "b" }, "a", -1),
                 (new string[] { "b" }, "b", 0),
                 (new string[] { "b" }, "c", -2),
@@ -96,17 +96,16 @@ namespace System.SpanTests
         public static void BinarySearch_NullComparableThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Span<int>(new int[] {  }).BinarySearch<int>(null)
+                () => new Span<int>(new int[] { }).BinarySearch<int>(null)
             );
             Assert.Throws<ArgumentNullException>(
-                () => new ReadOnlySpan<int>(new int[] {  }).BinarySearch<int>(null)
+                () => new ReadOnlySpan<int>(new int[] { }).BinarySearch<int>(null)
             );
             Assert.Throws<ArgumentNullException>(
-                () => new Span<int>(new int[] {  }).BinarySearch<int, IComparable<int>>(null)
+                () => new Span<int>(new int[] { }).BinarySearch<int, IComparable<int>>(null)
             );
             Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ReadOnlySpan<int>(new int[] {  }).BinarySearch<int, IComparable<int>>(null)
+                () => new ReadOnlySpan<int>(new int[] { }).BinarySearch<int, IComparable<int>>(null)
             );
         }
 
@@ -114,11 +113,11 @@ namespace System.SpanTests
         public static void BinarySearch_NullComparerThrows()
         {
             Assert.Throws<ArgumentNullException>(
-                () => new Span<int>(new int[] {  }).BinarySearch<int, IComparer<int>>(0, null)
+                () => new Span<int>(new int[] { }).BinarySearch<int, IComparer<int>>(0, null)
             );
             Assert.Throws<ArgumentNullException>(
                 () =>
-                    new ReadOnlySpan<int>(new int[] {  }).BinarySearch<int, IComparer<int>>(0, null)
+                    new ReadOnlySpan<int>(new int[] { }).BinarySearch<int, IComparer<int>>(0, null)
             );
         }
 

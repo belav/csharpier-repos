@@ -484,7 +484,7 @@ namespace System.Xml.Tests
         [Variation("Get empty string, valid offset and length = 1", Pri = 0)]
         public int Variation_13()
         {
-            char[] ach = new char[] {  };
+            char[] ach = new char[] { };
 
             try
             {

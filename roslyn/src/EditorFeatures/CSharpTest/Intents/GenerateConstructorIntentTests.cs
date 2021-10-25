@@ -162,7 +162,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
             OptionsCollection? options = null
         )
         {
-            return VerifyExpectedTextAsync(markup, new string[] {  }, expectedText, options);
+            return VerifyExpectedTextAsync(markup, new string[] { }, expectedText, options);
         }
 
         private static async Task VerifyExpectedTextAsync(

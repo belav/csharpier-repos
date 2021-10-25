@@ -4339,19 +4339,19 @@ class Program
                 VerifyBytes(
                     globalNamespace.GetMember<MethodSymbol>("Program.F").ReturnTypeWithAnnotations,
                     new byte[] { 0 },
-                    new byte[] {  },
+                    new byte[] { },
                     "void"
                 );
                 VerifyBytes(
                     globalNamespace.GetMember<FieldSymbol>("Program.F11").TypeWithAnnotations,
                     new byte[] { 0 },
-                    new byte[] {  },
+                    new byte[] { },
                     "int"
                 );
                 VerifyBytes(
                     globalNamespace.GetMember<FieldSymbol>("Program.F12").TypeWithAnnotations,
                     new byte[] { 0, 0 },
-                    new byte[] {  },
+                    new byte[] { },
                     "int?"
                 );
                 VerifyBytes(
@@ -4646,7 +4646,7 @@ class Program
                 VerifyBytes(
                     globalNamespace.GetMember<FieldSymbol>("Program.F0").TypeWithAnnotations,
                     new byte[] { 0 },
-                    new byte[] {  },
+                    new byte[] { },
                     "System.ValueTuple"
                 );
                 VerifyBytes(
@@ -4814,7 +4814,7 @@ class Program
                 VerifyBytes(
                     globalNamespace.GetMember<FieldSymbol>("Program.F11").TypeWithAnnotations,
                     new byte[] { 0 },
-                    new byte[] {  },
+                    new byte[] { },
                     "S0.S"
                 );
                 VerifyBytes(
@@ -4886,7 +4886,7 @@ class Program
                 VerifyBytes(
                     globalNamespace.GetMember<FieldSymbol>("Program.F31").TypeWithAnnotations,
                     new byte[] { 0 },
-                    new byte[] {  },
+                    new byte[] { },
                     "C0.S"
                 );
                 VerifyBytes(
@@ -5012,7 +5012,7 @@ class Program
                 VerifyBytes(
                     globalNamespace.GetMember<FieldSymbol>("Program.F2").TypeWithAnnotations,
                     new byte[] { 0 },
-                    new byte[] {  },
+                    new byte[] { },
                     "I0.E"
                 );
                 VerifyBytes(

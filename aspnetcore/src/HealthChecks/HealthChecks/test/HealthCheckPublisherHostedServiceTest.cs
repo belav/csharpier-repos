@@ -23,7 +23,7 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks
         public async Task StartAsync_WithoutPublishers_DoesNotStartTimer()
         {
             // Arrange
-            var publishers = new IHealthCheckPublisher[] {  };
+            var publishers = new IHealthCheckPublisher[] { };
 
             var service = CreateService(publishers);
 

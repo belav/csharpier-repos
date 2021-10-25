@@ -113,11 +113,11 @@ public class Program
         );
 
         s_InstStr = "";
-        numFailures += AssertEqual(ReturnsIntNoParams.Invoke(foo, new object[] {  }), 123);
+        numFailures += AssertEqual(ReturnsIntNoParams.Invoke(foo, new object[] { }), 123);
         numFailures += AssertEqual(s_InstStr, "StructAPITest`1[System.String] - ABC");
 
         s_InstStr = "";
-        numFailures += AssertEqual(ReturnNeedBufferNoParams.Invoke(foo, new object[] {  }), d);
+        numFailures += AssertEqual(ReturnNeedBufferNoParams.Invoke(foo, new object[] { }), d);
         numFailures += AssertEqual(s_InstStr, "StructAPITest`1[System.String] - ABC");
 
         s_InstStr = "";

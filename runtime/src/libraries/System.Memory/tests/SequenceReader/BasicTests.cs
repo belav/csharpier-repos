@@ -477,7 +477,7 @@ namespace System.Memory.Tests.SequenceReader
         public void TryPeekGoesToEndIfAllEmptySegments()
         {
             ReadOnlySequence<T> buffer = SequenceFactory.Create(
-                new[] { new T[] {  }, new T[] {  }, new T[] {  }, new T[] {  } }
+                new[] { new T[] { }, new T[] { }, new T[] { }, new T[] { } }
             );
             SequenceReader<T> reader = new SequenceReader<T>(buffer);
 
@@ -578,7 +578,7 @@ namespace System.Memory.Tests.SequenceReader
         public void WorksWithEmptyBuffer()
         {
             SequenceReader<T> reader = new SequenceReader<T>(
-                Factory.CreateWithContent(new T[] {  })
+                Factory.CreateWithContent(new T[] { })
             );
 
             Assert.Equal(0, reader.CurrentSpanIndex);
@@ -611,7 +611,7 @@ namespace System.Memory.Tests.SequenceReader
                 reader.TryRead(out _);
             }
 
-            T[] expected = end ? new T[] {  } : readableBuffer.Slice(takes).ToArray();
+            T[] expected = end ? new T[] { } : readableBuffer.Slice(takes).ToArray();
             Assert.Equal(expected, readableBuffer.Slice(reader.Position).ToArray());
         }
 

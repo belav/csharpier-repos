@@ -79,7 +79,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     DictionaryWrapper = new UnsupportedDictionaryWrapper()
                 };
-            wrapper.DictionaryWrapper[new int[,] {  }] = 1;
+            wrapper.DictionaryWrapper[new int[,] { }] = 1;
 
             // Without converter, we throw.
             Assert.Throws<NotSupportedException>(

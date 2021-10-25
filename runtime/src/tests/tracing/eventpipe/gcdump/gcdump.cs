@@ -60,7 +60,6 @@ namespace Tracing.Tests.EventSourceError
             ExpectedEventCount
         >()
         {
-
             // This space intentionally left blank
         };
 

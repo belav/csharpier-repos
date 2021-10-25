@@ -1221,7 +1221,7 @@ namespace System.Threading.Tasks.Tests
                 );
                 AssertExtensions.Throws<ArgumentException>(
                     "tasks",
-                    () => Task.Factory.ContinueWhenAll<int>(new Task[] {  }, finishedArray => 10)
+                    () => Task.Factory.ContinueWhenAll<int>(new Task[] { }, finishedArray => 10)
                 );
             }
 

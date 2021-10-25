@@ -43,7 +43,7 @@ namespace Castle.DynamicProxy.Tests
             var proxy =
                 (IInterfaceWithGenericMethodWithDependentConstraint)generator.CreateInterfaceProxyWithoutTarget(
                     type,
-                    new Type[] {  },
+                    new Type[] { },
                     interceptor
                 );
 
@@ -65,7 +65,7 @@ namespace Castle.DynamicProxy.Tests
             var proxy =
                 (IGenericInterfaceWithGenericMethodWithDependentConstraint<object>)generator.CreateInterfaceProxyWithoutTarget(
                     type,
-                    new Type[] {  },
+                    new Type[] { },
                     interceptor
                 );
 

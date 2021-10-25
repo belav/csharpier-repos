@@ -99,7 +99,7 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
                     new object[] { 10 },
                     "} Bonjour {HtmlEncode[[a]]}"
                 };
-                yield return new object[] { "}} Bonjour", new object[] {  }, "} Bonjour" };
+                yield return new object[] { "}} Bonjour", new object[] { }, "} Bonjour" };
                 yield return new object[]
                 {
                     "{{ {0} }}",
@@ -188,7 +188,7 @@ namespace Microsoft.AspNetCore.Mvc.Localization.Test
             stringLocalizer.Setup(s => s["Hello"]).Returns(localizedString);
 
             var htmlLocalizer = new HtmlLocalizer(stringLocalizer.Object);
-            var content = htmlLocalizer.GetHtml("Hello", new object[] {  });
+            var content = htmlLocalizer.GetHtml("Hello", new object[] { });
 
             // Act
             var exception = Assert.Throws<FormatException>(

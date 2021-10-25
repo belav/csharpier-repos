@@ -566,8 +566,8 @@ namespace System.Xml.Tests
         {
             XmlSchemaValidator val;
             XmlSchemaInfo info = new XmlSchemaInfo();
-            string[] keys = new string[] {  };
-            string[] keyrefs = new string[] {  };
+            string[] keys = new string[] { };
+            string[] keyrefs = new string[] { };
 
             switch (validity)
             {

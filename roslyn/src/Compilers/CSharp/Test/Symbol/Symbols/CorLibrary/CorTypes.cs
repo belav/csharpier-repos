@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
                 0
             ];
 
-            var knownMissingTypes = new HashSet<int>() {  };
+            var knownMissingTypes = new HashSet<int>() { };
 
             for (int i = 1; i <= (int)SpecialType.Count; i++)
             {

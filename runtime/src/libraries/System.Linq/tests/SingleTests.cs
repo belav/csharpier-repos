@@ -35,7 +35,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyIList()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<InvalidOperationException>(() => source.Single());
         }
@@ -85,7 +85,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySourceWithPredicate()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<InvalidOperationException>(() => source.Single(i => i % 2 == 0));
         }
@@ -162,7 +162,7 @@ namespace System.Linq.Tests
         [Fact]
         public void ThrowsOnNullPredicate()
         {
-            int[] source = {  };
+            int[] source = { };
             Func<int, bool> nullPredicate = null;
             AssertExtensions.Throws<ArgumentNullException>(
                 "predicate",

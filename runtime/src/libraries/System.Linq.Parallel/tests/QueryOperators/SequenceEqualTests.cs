@@ -82,7 +82,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SequenceEqualData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SequenceEqual_Longrunning(
@@ -140,7 +139,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SequenceEqualData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SequenceEqual_CustomComparator_Longrunning(
@@ -177,7 +175,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SequenceEqualUnequalSizeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SequenceEqual_UnequalSize_Longrunning(
@@ -214,7 +211,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SequenceEqualUnequalData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SequenceEqual_Unequal_Longrunning(

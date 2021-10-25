@@ -224,7 +224,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     ECParameters temp = p;
                     temp.Q.X = null;
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.X = new byte[] {  };
+                    temp.Q.X = new byte[] { };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
                     temp.Q.X = new byte[1] { 0x10 };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
@@ -235,7 +235,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     temp = p;
                     temp.Q.Y = null;
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.Y = new byte[] {  };
+                    temp.Q.Y = new byte[] { };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
                     temp.Q.Y = new byte[1] { 0x10 };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
@@ -246,7 +246,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     temp = p;
                     temp.Curve.A = null;
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.A = new byte[] {  };
+                    temp.Curve.A = new byte[] { };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
                     temp.Curve.A = new byte[1] { 0x10 };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
@@ -257,7 +257,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     temp = p;
                     temp.Curve.B = null;
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.B = new byte[] {  };
+                    temp.Curve.B = new byte[] { };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
                     temp.Curve.B = new byte[1] { 0x10 };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
@@ -268,13 +268,13 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     temp = p;
                     temp.Curve.Order = null;
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.Order = new byte[] {  };
+                    temp.Curve.Order = new byte[] { };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
 
                     temp = p;
                     temp.Curve.Prime = null;
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.Prime = new byte[] {  };
+                    temp.Curve.Prime = new byte[] { };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
                     temp.Curve.Prime = new byte[1] { 0x10 };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
@@ -301,7 +301,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     ECParameters temp = p;
                     temp.Q.X = null;
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.X = new byte[] {  };
+                    temp.Q.X = new byte[] { };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
                     temp.Q.X = new byte[1] { 0x10 };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
@@ -312,7 +312,7 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     temp = p;
                     temp.Q.Y = null;
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.Y = new byte[] {  };
+                    temp.Q.Y = new byte[] { };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
                     temp.Q.Y = new byte[1] { 0x10 };
                     Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));

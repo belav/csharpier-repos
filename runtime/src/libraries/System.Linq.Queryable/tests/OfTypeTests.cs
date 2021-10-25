@@ -10,7 +10,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            object[] source = {  };
+            object[] source = { };
             Assert.Empty(source.AsQueryable().OfType<int>());
         }
 

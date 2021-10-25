@@ -163,7 +163,7 @@ namespace TypeSystemTests
             DefType objectType = _testModule.Context.GetWellKnownType(WellKnownType.Object);
             MethodDesc finalizeMethod = objectType.GetMethod(
                 "Finalize",
-                new MethodSignature(MethodSignatureFlags.None, 0, _voidType, new TypeDesc[] {  })
+                new MethodSignature(MethodSignatureFlags.None, 0, _voidType, new TypeDesc[] { })
             );
 
             MethodDesc actualFinalizer =

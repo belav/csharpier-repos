@@ -21,7 +21,7 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void should_not_throw_InvalidOperationException()
         {
-            Person[] personArr = new Person[] {  };
+            Person[] personArr = new Person[] { };
             People people = new People(personArr);
             var pmc = Mapper.Map<People, List<PersonModel>>(people);
             pmc.ShouldNotBeNull();

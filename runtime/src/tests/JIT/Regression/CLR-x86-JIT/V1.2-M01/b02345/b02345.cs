@@ -39,7 +39,7 @@ public class AA
     public static byte[,] Static2()
     {
         AA.Static1();
-        while ((new bool[2u, 2u, 54u, 97u][,])[32, 9, 82, 40][new int[] {  }[31], Math.Sign(7)])
+        while ((new bool[2u, 2u, 54u, 97u][,])[32, 9, 82, 40][new int[] { }[31], Math.Sign(7)])
         {
             do
             {

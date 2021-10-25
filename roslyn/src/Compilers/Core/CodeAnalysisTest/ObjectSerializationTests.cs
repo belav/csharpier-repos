@@ -413,7 +413,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestEmptyArrayMember()
         {
-            TestRoundTripMember(new int[] {  });
+            TestRoundTripMember(new int[] { });
         }
 
         [Fact]
@@ -566,7 +566,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private void TestArrayValues<T>(T v1, T v2, T v3, T v4, T v5)
         {
             TestRoundTripValue((T[])null);
-            TestRoundTripValue(new T[] {  });
+            TestRoundTripValue(new T[] { });
             TestRoundTripValue(new T[] { v1 });
             TestRoundTripValue(new T[] { v1, v2 });
             TestRoundTripValue(new T[] { v1, v2, v3 });

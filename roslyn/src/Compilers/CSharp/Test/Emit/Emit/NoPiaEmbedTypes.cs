@@ -4935,7 +4935,7 @@ class UsePia
 }
 ";
 
-            DiagnosticDescription[] expected = {  };
+            DiagnosticDescription[] expected = { };
 
             System.Action<ModuleSymbol> metadataValidator = delegate(ModuleSymbol module)
             {

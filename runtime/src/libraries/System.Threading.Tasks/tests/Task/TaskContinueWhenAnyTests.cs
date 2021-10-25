@@ -855,7 +855,7 @@ namespace System.Threading.Tasks.Tests
 
                         AssertExtensions.Throws<ArgumentException>(
                             "tasks",
-                            () => Task.Factory.ContinueWhenAny(new Task<int>[] {  }, t => { })
+                            () => Task.Factory.ContinueWhenAny(new Task<int>[] { }, t => { })
                         );
 
                         //

@@ -125,7 +125,7 @@ class Program2
 "
             );
             VisualStudio.ErrorList.ShowErrorList();
-            var expectedContents = new ErrorListItem[] {  };
+            var expectedContents = new ErrorListItem[] { };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
@@ -157,7 +157,7 @@ class Program2
             VisualStudio.Editor.PlaceCaret("aa = aa", charsOffset: -1);
             VisualStudio.Editor.SendKeys(VirtualKey.Delete);
             VisualStudio.ErrorList.ShowErrorList();
-            expectedContents = new ErrorListItem[] {  };
+            expectedContents = new ErrorListItem[] { };
             actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
@@ -180,7 +180,7 @@ class Program2
 "
             );
             VisualStudio.ErrorList.ShowErrorList();
-            var expectedContents = new ErrorListItem[] {  };
+            var expectedContents = new ErrorListItem[] { };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),

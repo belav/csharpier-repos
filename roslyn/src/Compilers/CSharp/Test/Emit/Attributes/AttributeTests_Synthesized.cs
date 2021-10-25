@@ -460,7 +460,7 @@ class C
                             case "get_X":
                             case "Y":
                             case "get_Y":
-                                expected = new string[] {  };
+                                expected = new string[] { };
                                 break;
 
                             default:
@@ -636,7 +636,7 @@ public class C
                             case "System.Collections.Generic.IEnumerator<System.Int32>.Current":
                             case "MoveNext":
                                 AssertEx.SetEqual(
-                                    new string[] {  },
+                                    new string[] { },
                                     GetAttributeNames(member.GetAttributes())
                                 );
                                 break;
@@ -710,7 +710,7 @@ class C
 
                             case "MoveNext":
                                 AssertEx.SetEqual(
-                                    new string[] {  },
+                                    new string[] { },
                                     GetAttributeNames(member.GetAttributes())
                                 );
                                 break;

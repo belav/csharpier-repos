@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding
         public void ContainsPrefix_EmptyCollection_EmptyString_False()
         {
             // Arrange
-            var keys = new string[] {  };
+            var keys = new string[] { };
             var container = new PrefixContainer(keys);
 
             // Act

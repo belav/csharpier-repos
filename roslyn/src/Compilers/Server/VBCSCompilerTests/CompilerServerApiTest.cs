@@ -238,7 +238,7 @@ class Hello
                 new BuildRequest(
                     RequestLanguage.CSharpCompile,
                     "abc",
-                    new List<BuildRequest.Argument> {  }
+                    new List<BuildRequest.Argument> { }
                 )
             );
             Assert.Equal(BuildResponse.ResponseType.IncorrectHash, buildResponse.Type);

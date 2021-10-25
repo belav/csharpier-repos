@@ -49,7 +49,7 @@ namespace Microsoft.AspNetCore.Mvc
         public async Task ChallengeResult_ExecuteNoSchemes()
         {
             // Arrange
-            var result = new ChallengeResult(new string[] {  }, null);
+            var result = new ChallengeResult(new string[] { }, null);
 
             var auth = new Mock<IAuthenticationService>();
             var httpContext = new Mock<HttpContext>();

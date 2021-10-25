@@ -232,7 +232,7 @@ namespace Microsoft.AspNetCore.Routing
             var success = linkGenerator.TryProcessTemplate(
                 httpContext: httpContext,
                 endpoint: endpoint,
-                values: new RouteValueDictionary(new { color = new List<string> {  } }),
+                values: new RouteValueDictionary(new { color = new List<string> { } }),
                 ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
                 options: null,
                 result: out var result

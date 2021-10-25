@@ -467,8 +467,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
             "property,method,invalid",
             new object[] { SymbolKind.Property, MethodKind.Ordinary }
         )]
-        [InlineData("invalid", new object[] {  })]
-        [InlineData("", new object[] {  })]
+        [InlineData("invalid", new object[] { })]
+        [InlineData("", new object[] { })]
         [WorkItem(20907, "https://github.com/dotnet/roslyn/issues/20907")]
         public static void TestApplicableKindsParse(
             string specification,
@@ -539,8 +539,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
             "internal,protected,invalid",
             new[] { Accessibility.Internal, Accessibility.Protected }
         )]
-        [InlineData("invalid", new Accessibility[] {  })]
-        [InlineData("", new Accessibility[] {  })]
+        [InlineData("invalid", new Accessibility[] { })]
+        [InlineData("", new Accessibility[] { })]
         [WorkItem(20907, "https://github.com/dotnet/roslyn/issues/20907")]
         public static void TestApplicableAccessibilitiesParse(
             string specification,

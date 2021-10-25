@@ -74,20 +74,16 @@ namespace System.Reflection.Tests
         {
             get
             {
-                yield return new object[]
-                {
-                    "F1",
-                    new MarshalAsAttribute(UnmanagedType.BStr) {  },
-                };
+                yield return new object[] { "F1", new MarshalAsAttribute(UnmanagedType.BStr) { }, };
                 yield return new object[]
                 {
                     "F2",
-                    new MarshalAsAttribute(UnmanagedType.Currency) {  },
+                    new MarshalAsAttribute(UnmanagedType.Currency) { },
                 };
                 yield return new object[]
                 {
                     "F3",
-                    new MarshalAsAttribute(UnmanagedType.IDispatch) {  },
+                    new MarshalAsAttribute(UnmanagedType.IDispatch) { },
                 };
                 yield return new object[]
                 {
@@ -125,7 +121,7 @@ namespace System.Reflection.Tests
                 yield return new object[]
                 {
                     "F9",
-                    new MarshalAsAttribute(UnmanagedType.SafeArray) {  },
+                    new MarshalAsAttribute(UnmanagedType.SafeArray) { },
                 };
                 yield return new object[]
                 {

@@ -12,7 +12,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            int[] source = {  };
+            int[] source = { };
             Assert.Empty(source.AsQueryable().Distinct());
         }
 

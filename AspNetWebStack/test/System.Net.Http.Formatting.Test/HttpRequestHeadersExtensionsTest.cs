@@ -17,7 +17,7 @@ namespace System.Net.Http
                 // IEnumerable<string> inputCookies, string matchName, IEnumerable<string> expectedOuput
                 return new TheoryDataSet<string[], string, string[]>
                 {
-                    { new string[] {  }, "empty", new string[] {  } },
+                    { new string[] { }, "empty", new string[] { } },
                     {
                         new string[]
                         {
@@ -27,7 +27,7 @@ namespace System.Net.Http
                             "adxcs=si=0:1",
                         },
                         "nomatch",
-                        new string[] {  }
+                        new string[] { }
                     },
                     {
                         new string[]
@@ -72,7 +72,7 @@ namespace System.Net.Http
                             "MC0=1334766377159; MC1=GUID=e87574286c55d547b5a0b19fb27d57a4&HASH=2874&LV=20124&V=3&LU=1334766376863; MS0=7bbaad2a8316483c89bbd2ca4e96fcea; A=I&I=AxUFAAAAAACSCAAAHFNnP3xE7Uth5BCZZSiqZQ!!; MUID=20EC57A324256BF3039D54E520256B7D&TUID=1",
                         },
                         "MC",
-                        new string[] {  }
+                        new string[] { }
                     },
                 };
             }

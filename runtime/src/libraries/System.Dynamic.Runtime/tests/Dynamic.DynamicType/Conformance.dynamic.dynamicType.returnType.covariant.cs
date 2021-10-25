@@ -43,7 +43,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             get
             {
                 Test.Called = "base";
-                return new object[] {  };
+                return new object[] { };
             }
         }
 

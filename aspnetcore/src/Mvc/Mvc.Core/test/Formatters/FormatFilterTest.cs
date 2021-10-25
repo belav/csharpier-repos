@@ -42,7 +42,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             var resultExecutingContext = mockObjects.CreateResultExecutingContext();
             var resourceExecutingContext = mockObjects.CreateResourceExecutingContext(
-                new IFilterMetadata[] {  }
+                new IFilterMetadata[] { }
             );
 
             var filter = new FormatFilter(mockObjects.OptionsManager, NullLoggerFactory.Instance);
@@ -85,14 +85,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
 
             var resultExecutingContext = new ResultExecutingContext(
                 ac,
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 new ObjectResult("Hello!"),
                 controller: new object()
             );
 
             var resourceExecutingContext = new ResourceExecutingContext(
                 ac,
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 new List<IValueProviderFactory>()
             );
 
@@ -124,7 +124,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             var mockObjects = new MockObjects(format, place);
             var resultExecutingContext = mockObjects.CreateResultExecutingContext();
             var resourceExecutingContext = mockObjects.CreateResourceExecutingContext(
-                new IFilterMetadata[] {  }
+                new IFilterMetadata[] { }
             );
 
             mockObjects.MvcOptions.FormatterMappings.SetMediaTypeMappingForFormat(
@@ -152,7 +152,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Arrange
             var mockObjects = new MockObjects(format, place);
             var resourceExecutingContext = mockObjects.CreateResourceExecutingContext(
-                new IFilterMetadata[] {  }
+                new IFilterMetadata[] { }
             );
 
             var filter = new FormatFilter(mockObjects.OptionsManager, NullLoggerFactory.Instance);
@@ -171,7 +171,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Arrange
             var mockObjects = new MockObjects();
             var resourceExecutingContext = mockObjects.CreateResourceExecutingContext(
-                new IFilterMetadata[] {  }
+                new IFilterMetadata[] { }
             );
 
             var filter = new FormatFilter(mockObjects.OptionsManager, NullLoggerFactory.Instance);
@@ -215,7 +215,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void FormatFilter_LessSpecificThan_Produces()
         {
             // Arrange
-            var produces = new ProducesAttribute("application/xml;version=1", new string[] {  });
+            var produces = new ProducesAttribute("application/xml;version=1", new string[] { });
             var mockObjects = new MockObjects("xml", FormatSource.RouteData);
             var resourceExecutingContext = mockObjects.CreateResourceExecutingContext(
                 new IFilterMetadata[] { produces }
@@ -239,7 +239,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
         public void FormatFilter_MoreSpecificThan_Produces()
         {
             // Arrange
-            var produces = new ProducesAttribute("application/xml", new string[] {  });
+            var produces = new ProducesAttribute("application/xml", new string[] { });
             var mockObjects = new MockObjects("xml", FormatSource.RouteData);
             var resourceExecutingContext = mockObjects.CreateResourceExecutingContext(
                 new IFilterMetadata[] { produces }
@@ -300,7 +300,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             // Arrange
             var mockObjects = new MockObjects(format, place);
             var resourceExecutingContext = mockObjects.CreateResourceExecutingContext(
-                new IFilterMetadata[] {  }
+                new IFilterMetadata[] { }
             );
             var filter = new FormatFilter(mockObjects.OptionsManager, NullLoggerFactory.Instance);
 
@@ -376,14 +376,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             objectResult.ContentTypes.Add(new MediaTypeHeaderValue("application/foo"));
             var resultExecutingContext = new ResultExecutingContext(
                 actionContext,
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 objectResult,
                 controller: new object()
             );
 
             var resourceExecutingContext = new ResourceExecutingContext(
                 actionContext,
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 new List<IValueProviderFactory>()
             );
 
@@ -417,14 +417,14 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             );
             var resultExecutingContext = new ResultExecutingContext(
                 actionContext,
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 new ObjectResult("Hello!"),
                 controller: new object()
             );
 
             var resourceExecutingContext = new ResourceExecutingContext(
                 actionContext,
-                new IFilterMetadata[] {  },
+                new IFilterMetadata[] { },
                 new List<IValueProviderFactory>()
             );
 
@@ -473,7 +473,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters
             {
                 return new ResultExecutingContext(
                     MockActionContext,
-                    new IFilterMetadata[] {  },
+                    new IFilterMetadata[] { },
                     new ObjectResult("Some Value"),
                     controller: new object()
                 );

@@ -34,14 +34,14 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            int[] source = {  };
+            int[] source = { };
             Assert.Empty(source.Distinct());
         }
 
         [Fact]
         public void EmptySourceRunOnce()
         {
-            int[] source = {  };
+            int[] source = { };
             Assert.Empty(source.RunOnce().Distinct());
         }
 

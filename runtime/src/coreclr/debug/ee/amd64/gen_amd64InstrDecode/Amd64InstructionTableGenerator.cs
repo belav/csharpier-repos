@@ -807,7 +807,7 @@ namespace Amd64InstructionTableGenerator
 
                 if (!map.ContainsKey(suffix))
                 {
-                    map[suffix] = new List<Amd64InstructionSample>() {  };
+                    map[suffix] = new List<Amd64InstructionSample>() { };
                 }
                 map[suffix].Add(s);
 

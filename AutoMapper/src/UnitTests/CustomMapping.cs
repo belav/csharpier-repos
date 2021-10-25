@@ -599,7 +599,7 @@ namespace AutoMapper.UnitTests
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Destination>(new Source {  });
+            _destination = Mapper.Map<Destination>(new Source { });
         }
 
         [Fact]

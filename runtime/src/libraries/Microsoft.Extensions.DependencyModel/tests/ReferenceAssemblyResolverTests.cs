@@ -136,7 +136,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             var resolver = new ReferenceAssemblyPathResolver(
                 fileSystem,
                 ReferencePath,
-                new string[] {  }
+                new string[] { }
             );
             var result = resolver.TryResolveAssemblyPaths(library, assemblies);
 

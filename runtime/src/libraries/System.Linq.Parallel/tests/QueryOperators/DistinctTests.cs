@@ -102,7 +102,6 @@ namespace System.Linq.Parallel.Tests
             nameof(DistinctData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Distinct_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
@@ -154,7 +153,6 @@ namespace System.Linq.Parallel.Tests
             nameof(DistinctData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Distinct_NotPiplined_Longrunning(
@@ -187,7 +185,6 @@ namespace System.Linq.Parallel.Tests
             nameof(DistinctSourceMultipleData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Distinct_Unordered_SourceMultiple_Longrunning(
@@ -213,7 +210,6 @@ namespace System.Linq.Parallel.Tests
             nameof(DistinctSourceMultipleData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Distinct_SourceMultiple_Longrunning(

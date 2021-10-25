@@ -50,7 +50,7 @@ namespace Microsoft.AspNetCore.Routing
         public void ContainsDynamicEndpoint_DoesNotFindDynamicEndpoint_Empty()
         {
             // Arrange
-            var endpoints = new Endpoint[] {  };
+            var endpoints = new Endpoint[] { };
 
             // Act
             var result = TestMatcherPolicy.ContainsDynamicEndpoints(endpoints);

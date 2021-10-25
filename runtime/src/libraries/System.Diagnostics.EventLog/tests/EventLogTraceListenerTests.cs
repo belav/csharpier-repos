@@ -181,7 +181,7 @@ namespace System.Diagnostics.Tests
             {
                 new object[] { "this is", "an array with", "multiple", "strings" }
             };
-            yield return new object[] { new object[] {  } };
+            yield return new object[] { new object[] { } };
             yield return new object[] { new object[] { "only one string" } };
             yield return new object[] { null };
             yield return new object[] { new object[] { "one string + null", null } };
@@ -234,12 +234,12 @@ namespace System.Diagnostics.Tests
                 yield return new object[]
                 {
                     "This is a weird {0}{1}{2} format that but args length is 0",
-                    new object[] {  }
+                    new object[] { }
                 };
             }
 
-            yield return new object[] { string.Empty, new object[] {  } };
-            yield return new object[] { null, new object[] {  } };
+            yield return new object[] { string.Empty, new object[] { } };
+            yield return new object[] { null, new object[] { } };
             yield return new object[]
             {
                 string.Empty,

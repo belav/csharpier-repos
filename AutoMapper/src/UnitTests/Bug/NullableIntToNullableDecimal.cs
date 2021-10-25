@@ -61,7 +61,7 @@ namespace AutoMapper.UnitTests.Bug
 
         protected override void Because_of()
         {
-            var source = new Source {  };
+            var source = new Source { };
             _destination = Mapper.Map<Source, Destination>(source);
         }
 

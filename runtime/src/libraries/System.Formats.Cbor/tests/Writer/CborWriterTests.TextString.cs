@@ -28,7 +28,7 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new string[] {  }, "7fff")]
+        [InlineData(new string[] { }, "7fff")]
         [InlineData(new string[] { "" }, "7f60ff")]
         [InlineData(new string[] { "ab", "" }, "7f62616260ff")]
         [InlineData(new string[] { "ab", "bc", "" }, "7f62616262626360ff")]
@@ -44,7 +44,7 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new string[] {  }, "60")]
+        [InlineData(new string[] { }, "60")]
         [InlineData(new string[] { "" }, "60")]
         [InlineData(new string[] { "ab", "" }, "626162")]
         [InlineData(new string[] { "ab", "bc", "" }, "6461626263")]

@@ -219,7 +219,7 @@ namespace System.Collections.Immutable.Tests
 
         public static IEnumerable<object[]> CreateRangeWithSelectorData()
         {
-            yield return new object[] { new int[] {  }, new Func<int, int>(i => i) };
+            yield return new object[] { new int[] { }, new Func<int, int>(i => i) };
             yield return new object[] { new[] { 4, 5, 6, 7 }, new Func<int, float>(i => i + 0.5f) };
             yield return new object[] { new[] { 4, 5, 6, 7 }, new Func<int, int>(i => i + 1) };
         }
@@ -262,7 +262,7 @@ namespace System.Collections.Immutable.Tests
         {
             yield return new object[]
             {
-                new int[] {  },
+                new int[] { },
                 new Func<int, int, int>((x, y) => x + y),
                 0
             };
@@ -430,7 +430,7 @@ namespace System.Collections.Immutable.Tests
         {
             yield return new object[]
             {
-                new int[] {  },
+                new int[] { },
                 0,
                 0,
                 new Func<int, int, int>((x, y) => x + y),
@@ -583,7 +583,7 @@ namespace System.Collections.Immutable.Tests
 
         public static IEnumerable<object[]> CreateFromSliceData()
         {
-            yield return new object[] { new int[] {  }, 0, 0 };
+            yield return new object[] { new int[] { }, 0, 0 };
             yield return new object[] { new[] { 4, 5, 6, 7 }, 0, 2 };
             yield return new object[] { new[] { 4, 5, 6, 7 }, 1, 2 };
             yield return new object[] { new[] { 4, 5, 6, 7 }, 2, 2 };
@@ -1312,7 +1312,7 @@ namespace System.Collections.Immutable.Tests
 
         public static IEnumerable<object[]> AddData()
         {
-            yield return new object[] { new int[] {  }, new[] { 1 } };
+            yield return new object[] { new int[] { }, new[] { 1 } };
             yield return new object[] { new[] { 1, 2 }, new[] { 3 } };
             yield return new object[] { s_empty, Enumerable.Empty<int>() };
             yield return new object[] { s_empty, Enumerable.Range(1, 2) };
@@ -1366,7 +1366,7 @@ namespace System.Collections.Immutable.Tests
 
         public static IEnumerable<object[]> InsertData()
         {
-            yield return new object[] { new char[] {  }, 0, 'c' };
+            yield return new object[] { new char[] { }, 0, 'c' };
             yield return new object[] { new[] { 'c' }, 0, 'a' };
             yield return new object[] { new[] { 'c' }, 1, 'e' };
             yield return new object[] { new[] { 'a', 'c' }, 1, 'b' };
@@ -1718,7 +1718,7 @@ namespace System.Collections.Immutable.Tests
                                 comparer
                             },
                             new object[] { new[] { 1, 2, 3 }, new[] { 2 }, comparer },
-                            new object[] { s_empty, new int[] {  }, comparer },
+                            new object[] { s_empty, new int[] { }, comparer },
                             new object[] { new[] { 1, 2, 3 }, new[] { 2 }, comparer },
                             new object[] { new[] { 1, 2, 3 }, new[] { 1, 3, 5 }, comparer },
                             new object[]

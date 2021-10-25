@@ -68,7 +68,7 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
         [Theory]
         [InlineData(null)]
-        [InlineData(new object[] { new object[] {  } })]
+        [InlineData(new object[] { new object[] { } })]
         public void Ctor_ConstructorInfoArgumentMismatch_ThrowsArgumentException(object[] arguments)
         {
             ConstructorInfo ci = typeof(Uri).GetConstructor(new Type[] { typeof(string) });
@@ -95,7 +95,7 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
         [Theory]
         [InlineData(null)]
-        [InlineData(new object[] { new object[] {  } })]
+        [InlineData(new object[] { new object[] { } })]
         public void Ctor_FieldInfo_ICollection(object[] arguments)
         {
             FieldInfo fi = typeof(StaticField).GetField(nameof(StaticField.Field));
@@ -133,7 +133,7 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
         [Theory]
         [InlineData(null)]
-        [InlineData(new object[] { new object[] {  } })]
+        [InlineData(new object[] { new object[] { } })]
         public void Ctor_PropertyInfo_ICollection(object[] arguments)
         {
             PropertyInfo pi = typeof(StaticProperty).GetProperty(nameof(StaticProperty.Property));

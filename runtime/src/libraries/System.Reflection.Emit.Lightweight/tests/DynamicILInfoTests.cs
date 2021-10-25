@@ -18,7 +18,7 @@ namespace System.Reflection.Emit.Tests
             DynamicMethod dynamicMethod = new DynamicMethod(
                 nameof(HelloWorld),
                 typeof(string),
-                new Type[] {  },
+                new Type[] { },
                 typeof(DynamicILInfoTests),
                 false
             );
@@ -211,7 +211,7 @@ namespace System.Reflection.Emit.Tests
             DynamicMethod dynamicMethod = new DynamicMethod(
                 nameof(Mock),
                 typeof(Person),
-                new Type[] {  },
+                new Type[] { },
                 typeof(DynamicILInfoTests),
                 false
             );
@@ -364,7 +364,7 @@ namespace System.Reflection.Emit.Tests
             DynamicMethod dynamicMethod = new DynamicMethod(
                 nameof(SumInteger),
                 typeof(int),
-                new Type[] {  },
+                new Type[] { },
                 typeof(DynamicILInfoTests),
                 false
             );

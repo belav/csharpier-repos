@@ -576,7 +576,7 @@ namespace System.Web.Tests
                     new string[] { null },
                     new[] { new[] { "value", "bar" } }
                 },
-                new object[] { "", new string[] {  }, new string[][] {  } },
+                new object[] { "", new string[] { }, new string[][] { } },
                 new object[] { "=", new[] { "" }, new[] { new[] { "" } } },
                 new object[] { "&", new string[] { null }, new[] { new[] { "", "" } } },
                 new object[]

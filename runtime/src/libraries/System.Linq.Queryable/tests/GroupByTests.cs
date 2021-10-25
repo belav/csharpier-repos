@@ -115,7 +115,7 @@ namespace System.Linq.Tests
         public void EmptySource()
         {
             Assert.Empty(
-                new Record[] {  }
+                new Record[] { }
                     .AsQueryable()
                     .GroupBy(e => e.Name, e => e.Score, new AnagramEqualityComparer())
             );
@@ -376,7 +376,7 @@ namespace System.Linq.Tests
         public void EmptySourceWithResultSelector()
         {
             Assert.Empty(
-                new Record[] {  }
+                new Record[] { }
                     .AsQueryable()
                     .GroupBy(
                         e => e.Name,

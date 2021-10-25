@@ -109,7 +109,7 @@ namespace System.Memory.Tests.SequenceReader
             T[][] buffers;
             if (inputs.Length == 0)
             {
-                buffers = new[] { new T[] {  } };
+                buffers = new[] { new T[] { } };
             }
             else
             {

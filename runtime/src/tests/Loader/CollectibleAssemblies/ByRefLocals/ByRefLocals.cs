@@ -134,7 +134,7 @@ class Program
             "GetSpan",
             MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual,
             typeof(ReadOnlySpan<byte>),
-            new Type[] {  }
+            new Type[] { }
         );
         ILGenerator myMethodIL = mb.GetILGenerator();
         myMethodIL.Emit(OpCodes.Ldsflda, byRefAccessField);

@@ -57,7 +57,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Take_Unordered_Longrunning(int count, int take)
@@ -84,7 +83,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Take_Longrunning(
@@ -113,7 +111,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Take_Unordered_NotPipelined_Longrunning(int count, int take)
@@ -141,7 +138,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Take_NotPipelined_Longrunning(
@@ -204,7 +200,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_Unordered_Longrunning(int count, int take)
@@ -231,7 +226,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_Longrunning(
@@ -263,7 +257,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_Unordered_NotPipelined_Longrunning(int count, int take)
@@ -291,7 +284,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_NotPipelined_Longrunning(
@@ -323,7 +315,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_Indexed_Unordered_Longrunning(int count, int take)
@@ -354,7 +345,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_Indexed_Longrunning(
@@ -386,7 +376,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_Indexed_Unordered_NotPipelined_Longrunning(int count, int take)
@@ -417,7 +406,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_Indexed_NotPipelined_Longrunning(
@@ -443,7 +431,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_AllFalse_Longrunning(int count, int take)
@@ -472,7 +459,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_AllTrue_Longrunning(
@@ -505,7 +491,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeWhileData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_SomeTrue_Longrunning(
@@ -538,7 +523,6 @@ namespace System.Linq.Parallel.Tests
             nameof(TakeWhileData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void TakeWhile_SomeFalse_Longrunning(

@@ -1876,7 +1876,7 @@ public class Tests
 
     public static int test_0_constrained_eh()
     {
-        var s2 = new ConsStructThrow() {  };
+        var s2 = new ConsStructThrow() { };
         try
         {
             IFaceConstrained c = new ClassConstrained();

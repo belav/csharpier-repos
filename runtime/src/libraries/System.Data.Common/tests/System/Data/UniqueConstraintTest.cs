@@ -59,7 +59,7 @@ namespace System.Data.Tests
             Assert.Throws<NullReferenceException>(() => new UniqueConstraint((DataColumn)null));
 
             Assert.Throws<InvalidConstraintException>(
-                () => new UniqueConstraint(new DataColumn[] {  })
+                () => new UniqueConstraint(new DataColumn[] { })
             );
 
             DataTable dt = new DataTable("Table1");

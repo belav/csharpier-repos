@@ -26,7 +26,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void DoesNotThrowOn_EmptyCollections_NonWrappableElementTypes()
         {
             // Arrange
-            var numbers = new int[] {  };
+            var numbers = new int[] { };
             var delegatingEnumerable = new DelegatingEnumerable<int, int>(
                 numbers,
                 elementWrapperProvider: null
@@ -67,7 +67,7 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml
         public void DoesNotThrowOn_EmptyCollections_WrappableElementTypes()
         {
             // Arrange
-            var errors = new SerializableError[] {  };
+            var errors = new SerializableError[] { };
             var delegatingEnumerable = new DelegatingEnumerable<
                 SerializableErrorWrapper,
                 SerializableError

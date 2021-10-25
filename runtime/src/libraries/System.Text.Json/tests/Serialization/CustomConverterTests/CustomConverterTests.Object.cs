@@ -755,7 +755,7 @@ namespace System.Text.Json.Serialization.Tests
                 }
 
                 {
-                    var value = new int[] {  };
+                    var value = new int[] { };
 
                     string json = JsonSerializer.Serialize<object>(value, options);
                     Assert.Equal("[]", json);

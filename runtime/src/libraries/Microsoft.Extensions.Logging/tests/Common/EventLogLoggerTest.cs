@@ -303,7 +303,7 @@ namespace Microsoft.Extensions.Logging
                 () =>
                     new EventLogLogger(
                         null,
-                        new EventLogSettings() {  },
+                        new EventLogSettings() { },
                         new LoggerExternalScopeProvider()
                     )
             );

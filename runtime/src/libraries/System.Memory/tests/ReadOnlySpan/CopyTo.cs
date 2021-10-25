@@ -48,7 +48,7 @@ namespace System.SpanTests
         [Fact]
         public static void TryCopyToEmpty()
         {
-            int[] src = {  };
+            int[] src = { };
             int[] dst = { 99, 100, 101 };
 
             ReadOnlySpan<int> srcSpan = new ReadOnlySpan<int>(src);

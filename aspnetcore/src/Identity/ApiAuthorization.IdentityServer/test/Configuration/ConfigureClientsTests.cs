@@ -18,7 +18,7 @@ namespace Microsoft.AspNetCore.ApiAuthorization.IdentityServer.Configuration
         {
             // Arrange
             var config = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string> {  })
+                .AddInMemoryCollection(new Dictionary<string, string> { })
                 .Build();
 
             var resources = Array.Empty<ApiResource>();

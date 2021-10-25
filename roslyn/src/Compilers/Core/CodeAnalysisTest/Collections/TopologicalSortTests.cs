@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             int[][] successors = new int[][]
             {
-                /* 0 */new int[] {  }, // 0 has no successors
-                /* 1 */new int[] {  },
+                /* 0 */new int[] { }, // 0 has no successors
+                /* 1 */new int[] { },
                 /* 2 */new int[] { 3 },
                 /* 3 */new int[] { 1 },
                 /* 4 */new int[] { 0, 1, 0, 1 }, // tolerate duplicate edges
@@ -46,8 +46,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             string[][] successors = new string[][]
             {
-                /* 0 */new string[] {  }, // 0 has no successors
-                /* 1 */new string[] {  },
+                /* 0 */new string[] { }, // 0 has no successors
+                /* 1 */new string[] { },
                 /* 2 */new string[] { "3" },
                 /* 3 */new string[] { "1" },
                 /* 4 */new string[] { "0", "1" },
@@ -71,14 +71,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             int[][] successors = new int[][]
             {
-                /* 0 */new int[] {  },
+                /* 0 */new int[] { },
                 /* 1 */new int[] { 2, 4 },
-                /* 2 */new int[] {  },
+                /* 2 */new int[] { },
                 /* 3 */new int[] { 2, 5 },
                 /* 4 */new int[] { 2, 3 },
                 /* 5 */new int[] { 2, },
                 /* 6 */new int[] { 2, 7 },
-                /* 7 */new int[] {  }
+                /* 7 */new int[] { }
             };
 
             Func<int, IEnumerable<int>> succF = x => successors[x];
@@ -98,14 +98,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             int[][] successors = new int[][]
             {
-                /* 0 */new int[] {  },
+                /* 0 */new int[] { },
                 /* 1 */new int[] { 2, 4 },
-                /* 2 */new int[] {  },
+                /* 2 */new int[] { },
                 /* 3 */new int[] { 2, 5 },
                 /* 4 */new int[] { 2, 3 },
                 /* 5 */new int[] { 2, 1 },
                 /* 6 */new int[] { 2, 7 },
-                /* 7 */new int[] {  }
+                /* 7 */new int[] { }
             };
 
             // 1 -> 4 -> 3 -> 5 -> 1

@@ -10221,7 +10221,7 @@ public class C
 }";
 
             // Baseline without warning options (expect success)
-            int exitCode = GetExitCode(source, "a.cs", new String[] {  });
+            int exitCode = GetExitCode(source, "a.cs", new String[] { });
             Assert.Equal(0, exitCode);
 
             // The case with /warnaserror (expect to be success, since there will be no warning)
@@ -10250,7 +10250,7 @@ public class C
 }";
 
             // Baseline without warning options (expect success)
-            int exitCode = GetExitCode(source, "a.cs", new String[] {  });
+            int exitCode = GetExitCode(source, "a.cs", new String[] { });
             Assert.Equal(0, exitCode);
 
             // The case with /warnaserror (expect failure)
@@ -13802,7 +13802,7 @@ class C { }
 using System*
 ";
             var syntaxTree = SyntaxFactory.ParseSyntaxTree(sampleProgram, path: "filename.cs");
-            var comp = CreateCSharpCompiler(null, WorkingDirectory, new string[] {  });
+            var comp = CreateCSharpCompiler(null, WorkingDirectory, new string[] { });
             var text = comp.DiagnosticFormatter.Format(syntaxTree.GetDiagnostics().First());
             //Pull off the last segment of the current directory.
             var expectedPath = Path.GetDirectoryName(WorkingDirectory);

@@ -118,7 +118,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_Unordered_Longrunning(
@@ -158,7 +157,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_Longrunning(
@@ -194,7 +192,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_Unordered_NotPipelined_Longrunning(
@@ -231,7 +228,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_NotPipelined_Longrunning(
@@ -278,7 +274,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_Unordered_Distinct_Longrunning(
@@ -324,7 +319,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_Distinct_Longrunning(
@@ -371,7 +365,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_Unordered_Distinct_NotPipelined_Longrunning(
@@ -417,7 +410,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_Distinct_NotPipelined_Longrunning(
@@ -458,7 +450,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectSourceMultipleData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_Unordered_SourceMultiple_Longrunning(
@@ -495,7 +486,6 @@ namespace System.Linq.Parallel.Tests
             nameof(IntersectSourceMultipleData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Intersect_SourceMultiple_Longrunning(

@@ -305,7 +305,7 @@ class ArrBoundUnsigned
         const int Pass = 100;
         const int Fail = -1;
 
-        var empty = new int[] {  };
+        var empty = new int[] { };
         var arr = new int[] { 1, 42, 3000 };
 
         // i_LT_UN_len

@@ -55,7 +55,7 @@ namespace System.Net.Security.Tests
                 "protocol",
                 () =>
                 {
-                    new SslApplicationProtocol(new byte[] {  });
+                    new SslApplicationProtocol(new byte[] { });
                 }
             );
             AssertExtensions.Throws<ArgumentException>(

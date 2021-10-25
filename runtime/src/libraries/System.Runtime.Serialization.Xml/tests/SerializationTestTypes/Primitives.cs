@@ -958,7 +958,7 @@ namespace SerializationTestTypes
     {
         public Arrays()
         {
-            a1 = new int[] {  };
+            a1 = new int[] { };
             a2 = new int[] { 1 };
             a3 = new int[] { 1, 2, 3, 4 };
             a4 = new int[10000];
@@ -981,7 +981,7 @@ namespace SerializationTestTypes
     public class Array3
     {
         [DataMember]
-        public int[][] a1 = { new int[] { 1 }, new int[] {  } };
+        public int[][] a1 = { new int[] { 1 }, new int[] { } };
     }
 
     [DataContract]

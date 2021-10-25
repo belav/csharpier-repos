@@ -129,7 +129,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             string included = JsonConvert.SerializeObject(
                 movie,
                 Formatting.Indented,
-                new JsonSerializerSettings {  }
+                new JsonSerializerSettings { }
             );
 
             // {

@@ -542,7 +542,7 @@ public class ReliabilityFramework
                         ),
                         curTestSet.BvtCategory,
                         new Guid[] { buildGuid },
-                        new Guid[] {  }, // TODO: fill in environmental attributes
+                        new Guid[] { }, // TODO: fill in environmental attributes
                         false,
                         0,
                         "StressRun"

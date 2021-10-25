@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             var context = new DependencyContext(
                 new TargetInfo(".NETStandard,Version=v1.3", string.Empty, string.Empty, true),
                 compilationOptions: CompilationOptions.Default,
-                compileLibraries: new CompilationLibrary[] {  },
+                compileLibraries: new CompilationLibrary[] { },
                 runtimeLibraries: new[]
                 {
                     new RuntimeLibrary(
@@ -28,15 +28,15 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                         "1.0.0",
                         "hash",
                         new[] { new RuntimeAssetGroup(string.Empty, Path.Combine("lib", path)) },
-                        new RuntimeAssetGroup[] {  },
-                        new ResourceAssembly[] {  },
-                        new Dependency[] {  },
+                        new RuntimeAssetGroup[] { },
+                        new ResourceAssembly[] { },
+                        new Dependency[] { },
                         serviceable: false,
                         path: "PackagePath",
                         hashPath: "PackageHashPath"
                     )
                 },
-                runtimeGraph: new RuntimeFallbacks[] {  }
+                runtimeGraph: new RuntimeFallbacks[] { }
             );
 
             var assets = context.GetDefaultAssemblyNames();
@@ -114,7 +114,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                         "1.0.0",
                         "hash",
                         new[] { Path.Combine("ref", "netstandard1.3", "System.Banana.dll") },
-                        new Dependency[] {  },
+                        new Dependency[] { },
                         serviceable: false,
                         path: "PackagePath",
                         hashPath: "PackageHashPath"
@@ -178,8 +178,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                                 )
                             )
                         },
-                        new ResourceAssembly[] {  },
-                        new Dependency[] {  },
+                        new ResourceAssembly[] { },
+                        new Dependency[] { },
                         serviceable: false,
                         path: "PackagePath",
                         hashPath: "PackageHashPath"
@@ -284,7 +284,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 CompilationOptions.Default,
                 compilationLibraries,
                 runtimeLibraries,
-                new RuntimeFallbacks[] {  }
+                new RuntimeFallbacks[] { }
             );
 
             var contextRedist = new DependencyContext(
@@ -292,7 +292,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 CompilationOptions.Default,
                 compilationLibrariesRedist,
                 runtimeLibrariesRedist,
-                new RuntimeFallbacks[] {  }
+                new RuntimeFallbacks[] { }
             );
 
             var result = context.Merge(contextRedist);
@@ -331,7 +331,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 CompilationOptions.Default,
                 compilationLibraries,
                 runtimeLibraries,
-                new RuntimeFallbacks[] {  }
+                new RuntimeFallbacks[] { }
             );
 
             var contextRedist = new DependencyContext(
@@ -339,7 +339,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 CompilationOptions.Default,
                 compilationLibrariesRedist,
                 runtimeLibrariesRedist,
-                new RuntimeFallbacks[] {  }
+                new RuntimeFallbacks[] { }
             );
 
             var result = context.Merge(contextRedist);
@@ -396,8 +396,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 name,
                 "1.1.1",
                 "HASH",
-                new string[] {  },
-                new Dependency[] {  },
+                new string[] { },
+                new Dependency[] { },
                 false,
                 "path",
                 "hashPath"
@@ -411,10 +411,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 name,
                 "1.1.1",
                 "HASH",
-                new RuntimeAssetGroup[] {  },
-                new RuntimeAssetGroup[] {  },
-                new ResourceAssembly[] {  },
-                new Dependency[] {  },
+                new RuntimeAssetGroup[] { },
+                new RuntimeAssetGroup[] { },
+                new ResourceAssembly[] { },
+                new Dependency[] { },
                 false,
                 "path",
                 "hashPath"

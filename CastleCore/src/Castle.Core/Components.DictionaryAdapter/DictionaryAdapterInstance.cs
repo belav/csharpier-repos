@@ -154,6 +154,6 @@ namespace Castle.Components.DictionaryAdapter
             return properties;
         }
 
-        private static readonly IDictionaryInitializer[] NoInitializers = {  };
+        private static readonly IDictionaryInitializer[] NoInitializers = { };
     }
 }

@@ -271,7 +271,7 @@ class C
         public void CS1508_DuplicateManifestResourceIdentifier()
         {
             var c1 = CreateCompilation("");
-            Func<Stream> dataProvider = () => new MemoryStream(new byte[] {  });
+            Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
             var result = c1.Emit(
                 new MemoryStream(),
@@ -293,7 +293,7 @@ class C
         public void CS1508_DuplicateManifestResourceIdentifier_EmbeddedResource()
         {
             var c1 = CreateCompilation("");
-            Func<Stream> dataProvider = () => new MemoryStream(new byte[] {  });
+            Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
             var result = c1.Emit(
                 new MemoryStream(),
@@ -355,7 +355,7 @@ class C
                 references: new[] { MscorlibRef },
                 options: TestOptions.ReleaseDll
             );
-            Func<Stream> dataProvider = () => new MemoryStream(new byte[] {  });
+            Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
             var result = c1.Emit(
                 new MemoryStream(),
@@ -377,7 +377,7 @@ class C
         public void NoDuplicateManifestResourceFileNameDiagnosticForEmbeddedResources()
         {
             var c1 = CreateCompilation("");
-            Func<Stream> dataProvider = () => new MemoryStream(new byte[] {  });
+            Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
             var result = c1.Emit(
                 new MemoryStream(),
@@ -432,7 +432,7 @@ class C
         public void CS1508_CS7041_DuplicateManifestResourceDiagnostics()
         {
             var c1 = CreateCompilation("");
-            Func<Stream> dataProvider = () => new MemoryStream(new byte[] {  });
+            Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
             var result = c1.Emit(
                 new MemoryStream(),

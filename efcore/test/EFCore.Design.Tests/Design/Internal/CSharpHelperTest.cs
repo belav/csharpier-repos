@@ -150,7 +150,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         [ConditionalFact]
         public void Literal_works_when_empty_StringArray()
         {
-            var literal = new CSharpHelper(TypeMappingSource).Literal(new string[] {  });
+            var literal = new CSharpHelper(TypeMappingSource).Literal(new string[] { });
             Assert.Equal("new string[0]", literal);
         }
 
@@ -249,7 +249,7 @@ namespace Microsoft.EntityFrameworkCore.Design.Internal
         [InlineData(new[] { "ef-xplat.namespace" }, "efxplat.@namespace")]
         [InlineData(new[] { "#", "$" }, "_._")]
         [InlineData(new[] { "" }, "_")]
-        [InlineData(new string[] {  }, "_")]
+        [InlineData(new string[] { }, "_")]
         [InlineData(new string[] { null }, "_")]
         public void Namespace_works(string[] input, string excepted)
         {

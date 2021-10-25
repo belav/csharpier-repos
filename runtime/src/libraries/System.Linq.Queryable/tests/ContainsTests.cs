@@ -11,7 +11,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Empty()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.False(source.AsQueryable().Contains(6));
         }

@@ -771,7 +771,7 @@ namespace Microsoft.AspNetCore.Routing
             // Arrange
             var route = CreateRoute("{controller}/{action}");
             var context = CreateVirtualPathContext(
-                new { color = new List<string> {  } },
+                new { color = new List<string> { } },
                 new { controller = "Home", action = "Index" }
             );
 

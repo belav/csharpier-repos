@@ -279,7 +279,7 @@ build_metadata.Compile.ToRetrieve =
         {
             ITaskItem item1 = MSBuildUtil.CreateTaskItem(
                 "c:/file1.cs",
-                new Dictionary<string, string> {  }
+                new Dictionary<string, string> { }
             );
             ITaskItem item2 = MSBuildUtil.CreateTaskItem(
                 "c:/file1.cs",

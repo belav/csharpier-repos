@@ -687,7 +687,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<ArgumentOutOfRangeException>("index", () => source.ElementAt(1));
             Assert.Throws<ArgumentOutOfRangeException>("index", () => source.ElementAt(-1));
@@ -726,7 +726,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_ThrowsIListIndexerException()
         {
-            int[] source = {  };
+            int[] source = { };
             Assert.Throws<ArgumentOutOfRangeException>("index", () => source.ElementAt(-1));
             Assert.Throws<ArgumentOutOfRangeException>("index", () => source.ElementAt(^1));
             // ImmutableArray<T> implements IList<T>. ElementAt calls ImmutableArray<T>'s indexer, which throws IndexOutOfRangeException instead of ArgumentOutOfRangeException.
@@ -762,7 +762,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_NotList()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<ArgumentOutOfRangeException>(
                 "index",
@@ -816,7 +816,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_ListPartition()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<ArgumentOutOfRangeException>(
                 "index",
@@ -870,7 +870,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_EnumerablePartition()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<ArgumentOutOfRangeException>(
                 "index",
@@ -924,7 +924,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_Collection()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<ArgumentOutOfRangeException>(
                 "index",
@@ -978,7 +978,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_NonGenericCollection()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Throws<ArgumentOutOfRangeException>(
                 "index",

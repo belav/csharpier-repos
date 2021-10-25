@@ -1486,8 +1486,8 @@ namespace System.Text.Json.Serialization.Tests
         public class ClassWithNoGetter
         {
             string _myString = "";
-            int[] _myIntArray = new int[] {  };
-            List<int> _myIntList = new List<int> {  };
+            int[] _myIntArray = new int[] { };
+            List<int> _myIntList = new List<int> { };
 
             public string MyString
             {

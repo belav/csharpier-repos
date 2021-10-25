@@ -43,7 +43,7 @@ namespace System.Linq.Tests
         public void FirstSourceNull()
         {
             IQueryable<int> first = null;
-            int[] second = {  };
+            int[] second = { };
             AssertExtensions.Throws<ArgumentNullException>(
                 "source1",
                 () => first.SequenceEqual(second.AsQueryable())
@@ -57,7 +57,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SecondSourceNull()
         {
-            int[] first = {  };
+            int[] first = { };
             IQueryable<int> second = null;
             AssertExtensions.Throws<ArgumentNullException>(
                 "source2",

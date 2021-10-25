@@ -296,7 +296,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public async Task Match_EmptyHostList_MatchesAnyHost()
         {
             // Arrange
-            var endpoint = CreateEndpoint("/hello", hosts: new string[] {  });
+            var endpoint = CreateEndpoint("/hello", hosts: new string[] { });
 
             var matcher = CreateMatcher(endpoint);
             var httpContext = CreateContext("/hello", "contoso.com");

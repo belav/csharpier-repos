@@ -11,14 +11,14 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource()
         {
-            int[] data = {  };
+            int[] data = { };
             Assert.Equal(0, data.AsQueryable().LongCount());
         }
 
         [Fact]
         public void EmptySourceWithPredicate()
         {
-            int[] data = {  };
+            int[] data = { };
             Assert.Equal(0, data.AsQueryable().LongCount());
         }
 

@@ -376,7 +376,7 @@ namespace MonoTests.System.Runtime.Caching
             Assert.Throws<ArgumentException>(
                 () =>
                 {
-                    mc.CreateCacheEntryChangeMonitor(new string[] {  });
+                    mc.CreateCacheEntryChangeMonitor(new string[] { });
                 }
             );
 
@@ -1085,7 +1085,7 @@ namespace MonoTests.System.Runtime.Caching
             Assert.Throws<NotSupportedException>(
                 () =>
                 {
-                    mc.GetValues(new string[] {  }, "region");
+                    mc.GetValues(new string[] { }, "region");
                 }
             );
 
@@ -1096,7 +1096,7 @@ namespace MonoTests.System.Runtime.Caching
                 }
             );
 
-            IDictionary<string, object> value = mc.GetValues(new string[] {  });
+            IDictionary<string, object> value = mc.GetValues(new string[] { });
             Assert.Null(value);
 
             mc.Set("key1", "value1", null);

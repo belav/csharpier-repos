@@ -200,7 +200,7 @@ namespace System.MemoryTests
         public static IEnumerable<object[]> IdempotentValues =>
             new object[][]
             {
-                new object[1] { new Foo[] {  } },
+                new object[1] { new Foo[] { } },
                 new object[1] { new Foo[] { null, 1, 2, 3, null, 2, 1, null } }
             };
 
@@ -224,7 +224,7 @@ namespace System.MemoryTests
             ReadOnlySpan<Foo> ros = new ReadOnlySpan<Foo>(values).TrimStart(trim);
             Assert.True(System.Linq.Enumerable.SequenceEqual(expected, ros.ToArray()));
 
-            trim = new Foo[] {  };
+            trim = new Foo[] { };
 
             memory = new Memory<Foo>(values).TrimStart(trim);
             Assert.True(System.Linq.Enumerable.SequenceEqual(expected, memory.ToArray()));
@@ -259,7 +259,7 @@ namespace System.MemoryTests
             ReadOnlySpan<Foo> ros = new ReadOnlySpan<Foo>(values).TrimEnd(trim);
             Assert.True(System.Linq.Enumerable.SequenceEqual(expected, ros.ToArray()));
 
-            trim = new Foo[] {  };
+            trim = new Foo[] { };
 
             memory = new Memory<Foo>(values).TrimEnd(trim);
             Assert.True(System.Linq.Enumerable.SequenceEqual(expected, memory.ToArray()));
@@ -294,7 +294,7 @@ namespace System.MemoryTests
             ReadOnlySpan<Foo> ros = new ReadOnlySpan<Foo>(values).Trim(trim);
             Assert.True(System.Linq.Enumerable.SequenceEqual(expected, ros.ToArray()));
 
-            trim = new Foo[] {  };
+            trim = new Foo[] { };
 
             memory = new Memory<Foo>(values).Trim(trim);
             Assert.True(System.Linq.Enumerable.SequenceEqual(expected, memory.ToArray()));

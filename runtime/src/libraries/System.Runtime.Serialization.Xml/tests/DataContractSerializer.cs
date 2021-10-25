@@ -1868,7 +1868,7 @@ public static partial class DataContractSerializerTests
         {
             new int[][] { new int[] { 1 }, new int[] { 3 } },
             new int[][] { new int[] { 0 } },
-            new int[][] { new int[] {  } }
+            new int[][] { new int[] { } }
         };
         var actualJaggedIntegerArray2 =
             DataContractSerializerHelper.SerializeAndDeserialize<int[][][]>(
@@ -2779,7 +2779,7 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithExplicitIEnumerableImplementation()
     {
         TypeWithExplicitIEnumerableImplementation value =
-            new TypeWithExplicitIEnumerableImplementation {  };
+            new TypeWithExplicitIEnumerableImplementation { };
         value.Add("Foo");
         value.Add("Bar");
         var deserializedValue =
@@ -2798,7 +2798,7 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_TypeWithGenericDictionaryAsKnownType()
     {
-        TypeWithGenericDictionaryAsKnownType value = new TypeWithGenericDictionaryAsKnownType {  };
+        TypeWithGenericDictionaryAsKnownType value = new TypeWithGenericDictionaryAsKnownType { };
         value.Foo.Add(10, new Level() { Name = "Foo", LevelNo = 1 });
         value.Foo.Add(20, new Level() { Name = "Bar", LevelNo = 2 });
         var deserializedValue =

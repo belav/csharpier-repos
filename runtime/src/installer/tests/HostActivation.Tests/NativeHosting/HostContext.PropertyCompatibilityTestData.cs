@@ -46,7 +46,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             var list = new List<PropertyTestData[]>()
             {
                 // No additional properties
-                new PropertyTestData[] {  },
+                new PropertyTestData[] { },
                 // Match
                 new PropertyTestData[]
                 {

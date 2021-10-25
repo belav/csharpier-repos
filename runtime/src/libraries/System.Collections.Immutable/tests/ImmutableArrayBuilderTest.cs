@@ -742,7 +742,7 @@ namespace System.Collections.Immutable.Tests
             var builder = ImmutableArray.CreateBuilder<int>(initialCapacity: 10);
             builder.Capacity = 0;
             Assert.Equal(0, builder.Capacity);
-            Assert.Equal(new int[] {  }, builder.ToArray());
+            Assert.Equal(new int[] { }, builder.ToArray());
         }
 
         [Fact]

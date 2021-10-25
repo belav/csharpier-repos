@@ -67,7 +67,7 @@ namespace System.Web.WebPages.TestUtils
                     .GetType("System.Web.Compilation.PreStartInitStage")
                     .GetMember("DuringPreStartInit")[0]
             ).GetValue(null);
-            stage.SetValue(null, value, new object[] {  });
+            stage.SetValue(null, value, new object[] { });
             SetAppData();
             var env = new HostingEnvironment();
         }

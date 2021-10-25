@@ -60,14 +60,12 @@ namespace System.Linq.Parallel.Tests
             nameof(FirstUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(FirstData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void First_Longrunning(
@@ -102,14 +100,12 @@ namespace System.Linq.Parallel.Tests
             nameof(FirstUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(FirstData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void FirstOrDefault_Longrunning(
@@ -169,14 +165,12 @@ namespace System.Linq.Parallel.Tests
             nameof(FirstUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(FirstData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void First_NoMatch_Longrunning(
@@ -210,14 +204,12 @@ namespace System.Linq.Parallel.Tests
             nameof(FirstUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(FirstData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void FirstOrDefault_NoMatch_Longrunning(

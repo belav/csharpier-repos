@@ -45,7 +45,7 @@ namespace System.Net.Tests
 
         [Theory]
         [InlineData(null)]
-        [InlineData(new object[] { new string[0] {  } })]
+        [InlineData(new object[] { new string[0] { } })]
         public void ProtectionRealm_SetNullOrEmptyGet_ExpectNullValue(string[] protectionRealm)
         {
             Authorization authorization = new Authorization(null);

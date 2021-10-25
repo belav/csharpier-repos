@@ -224,7 +224,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Last()
         {
-            var roa = new int?[] {  }.AsImmutableOrNull();
+            var roa = new int?[] { }.AsImmutableOrNull();
             Assert.Throws<InvalidOperationException>(() => roa.Last());
             roa = new int?[] { 1, 2, 3 }.AsImmutableOrNull();
             Assert.Throws<InvalidOperationException>(() => roa.Last(i => i < 1));
@@ -234,7 +234,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void LastOrDefault()
         {
-            var roa = new int?[] {  }.AsImmutableOrNull();
+            var roa = new int?[] { }.AsImmutableOrNull();
             Assert.False(roa.LastOrDefault().HasValue);
             roa = new int?[] { 1, 2, 3 }.AsImmutableOrNull();
             Assert.False(roa.LastOrDefault(i => i < 1).HasValue);
@@ -244,7 +244,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void SingleOrDefault()
         {
-            var roa = new int?[] {  }.AsImmutableOrNull();
+            var roa = new int?[] { }.AsImmutableOrNull();
             Assert.False(roa.SingleOrDefault().HasValue);
             roa = new int?[] { 1 }.AsImmutableOrNull();
             Assert.Equal(1, roa.SingleOrDefault());

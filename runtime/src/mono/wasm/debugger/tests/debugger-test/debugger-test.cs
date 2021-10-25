@@ -137,7 +137,7 @@ public partial class Math
         public async System.Threading.Tasks.Task AsyncMethodNoReturn()
         {
             var ss = new SimpleStruct() { dt = new DateTime(2020, 1, 2, 3, 4, 5) };
-            var ss_arr = new SimpleStruct[] {  };
+            var ss_arr = new SimpleStruct[] { };
             //ss.gs.StringField = "field in GenericStruct";
 
             //Console.WriteLine ($"Using the struct: {ss.dt}, {ss.gs.StringField}, ss_arr: {ss_arr.Length}");

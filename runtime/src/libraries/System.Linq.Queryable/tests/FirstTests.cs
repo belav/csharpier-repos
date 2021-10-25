@@ -11,7 +11,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Empty()
         {
-            int[] source = {  };
+            int[] source = { };
             Assert.Throws<InvalidOperationException>(() => source.AsQueryable().First());
         }
 

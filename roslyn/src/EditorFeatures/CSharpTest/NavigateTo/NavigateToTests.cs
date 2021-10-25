@@ -1700,7 +1700,7 @@ class D
                 source,
                 async w =>
                 {
-                    var expecteditems = new List<NavigateToItem> {  };
+                    var expecteditems = new List<NavigateToItem> { };
 
                     var items = await _aggregator.GetItemsAsync("C.Q");
 
@@ -1809,7 +1809,7 @@ class D
                 source,
                 async w =>
                 {
-                    var expecteditems = new List<NavigateToItem> {  };
+                    var expecteditems = new List<NavigateToItem> { };
 
                     var items = await _aggregator.GetItemsAsync("F.F.B.B.Quux");
 
@@ -2144,7 +2144,7 @@ class D
             );
             _aggregator = new NavigateToTestAggregator(_provider);
 
-            VerifyNavigateToResultItems(new() {  }, await _aggregator.GetItemsAsync("Outer"));
+            VerifyNavigateToResultItems(new() { }, await _aggregator.GetItemsAsync("Outer"));
         }
 
         [Fact]

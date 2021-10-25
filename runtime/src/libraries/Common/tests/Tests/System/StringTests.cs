@@ -460,7 +460,7 @@ namespace System.Tests
 
         public static IEnumerable<object[]> Concat_Objects_TestData()
         {
-            yield return new object[] { new object[] {  }, "" };
+            yield return new object[] { new object[] { }, "" };
 
             yield return new object[] { new object[] { 1 }, "1" };
             yield return new object[] { new object[] { null }, "" };
@@ -5547,7 +5547,7 @@ namespace System.Tests
         }
 
         [Theory]
-        [InlineData("$$", new string[] {  }, 0, 0, "")]
+        [InlineData("$$", new string[] { }, 0, 0, "")]
         [InlineData("$$", new string[] { null }, 0, 1, "")]
         [InlineData("$$", new string[] { null, "Bar", null }, 0, 3, "$$Bar$$")]
         [InlineData("$$", new string[] { "", "", "" }, 0, 3, "$$$$")]
@@ -5639,7 +5639,7 @@ namespace System.Tests
 
         public static IEnumerable<object[]> Join_ObjectArray_TestData()
         {
-            yield return new object[] { "$$", new object[] {  }, "" };
+            yield return new object[] { "$$", new object[] { }, "" };
             yield return new object[] { "$$", new object[] { new ObjectWithNullToString() }, "" };
             yield return new object[] { "$$", new object[] { "Foo" }, "Foo" };
             yield return new object[]

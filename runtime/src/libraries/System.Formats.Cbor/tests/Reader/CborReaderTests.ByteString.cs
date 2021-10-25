@@ -49,7 +49,7 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new string[] {  }, "5fff")]
+        [InlineData(new string[] { }, "5fff")]
         [InlineData(new string[] { "" }, "5f40ff")]
         [InlineData(new string[] { "ab", "" }, "5f41ab40ff")]
         [InlineData(new string[] { "ab", "bc", "" }, "5f41ab41bc40ff")]

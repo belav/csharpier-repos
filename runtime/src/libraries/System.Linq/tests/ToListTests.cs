@@ -105,7 +105,7 @@ namespace System.Linq.Tests
         }
 
         [Theory]
-        [InlineData(new int[] {  }, new string[] {  })]
+        [InlineData(new int[] { }, new string[] { })]
         [InlineData(new int[] { 1 }, new string[] { "1" })]
         [InlineData(new int[] { 1, 2, 3 }, new string[] { "1", "2", "3" })]
         public void ToList_ArrayWhereSelect(int[] sourceIntegers, string[] convertedStrings)
@@ -141,7 +141,7 @@ namespace System.Linq.Tests
         }
 
         [Theory]
-        [InlineData(new int[] {  }, new string[] {  })]
+        [InlineData(new int[] { }, new string[] { })]
         [InlineData(new int[] { 1 }, new string[] { "1" })]
         [InlineData(new int[] { 1, 2, 3 }, new string[] { "1", "2", "3" })]
         public void ToList_ListWhereSelect(int[] sourceIntegers, string[] convertedStrings)
@@ -177,7 +177,7 @@ namespace System.Linq.Tests
         }
 
         [Theory]
-        [InlineData(new int[] {  }, new string[] {  })]
+        [InlineData(new int[] { }, new string[] { })]
         [InlineData(new int[] { 1 }, new string[] { "1" })]
         [InlineData(new int[] { 1, 2, 3 }, new string[] { "1", "2", "3" })]
         public void ToList_IListWhereSelect(int[] sourceIntegers, string[] convertedStrings)
@@ -237,7 +237,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SourceIsEmptyICollectionT()
         {
-            int[] source = {  };
+            int[] source = { };
 
             ICollection<int> collection = source as ICollection<int>;
 

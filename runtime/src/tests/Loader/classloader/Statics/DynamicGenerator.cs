@@ -40,7 +40,7 @@ public class DynamicGenerator<G> : IDynGen
         MethodInfo dm = null;
         if (useLCG)
         {
-            dm = new DynamicMethod("dmset", typeof(G), new Type[] {  }, typeof(Test).Module, true);
+            dm = new DynamicMethod("dmset", typeof(G), new Type[] { }, typeof(Test).Module, true);
             ilgen = ((DynamicMethod)dm).GetILGenerator();
         }
         else
@@ -49,7 +49,7 @@ public class DynamicGenerator<G> : IDynGen
                 "mset_" + mcount,
                 MethodAttributes.Public | MethodAttributes.Static,
                 typeof(G),
-                new Type[] {  }
+                new Type[] { }
             );
             ilgen = ((MethodBuilder)dm).GetILGenerator();
         }

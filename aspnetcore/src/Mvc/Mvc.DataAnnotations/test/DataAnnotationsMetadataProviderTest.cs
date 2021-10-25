@@ -1459,7 +1459,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var provider = CreateProvider();
 
-            var attributes = new Attribute[] {  };
+            var attributes = new Attribute[] { };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
             var context = new ValidationMetadataProviderContext(
@@ -1920,7 +1920,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations
             // Arrange
             var provider = CreateProvider();
 
-            var attributes = new Attribute[] {  };
+            var attributes = new Attribute[] { };
             var property = typeof(string).GetProperty(nameof(string.Length));
             var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
             var context = new BindingMetadataProviderContext(

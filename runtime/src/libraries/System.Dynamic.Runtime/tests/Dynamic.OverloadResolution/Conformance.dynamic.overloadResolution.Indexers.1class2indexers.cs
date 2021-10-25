@@ -1718,7 +1718,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
             get
             {
                 Target.Status = 3;
-                return new string[] {  };
+                return new string[] { };
             }
             set { Target.Status = 4; }
         }

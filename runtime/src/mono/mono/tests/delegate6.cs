@@ -14,7 +14,7 @@ public class T
     {
         T t = new T();
         Delegate o = Delegate.CreateDelegate(typeof(T.blah), t, "Test");
-        o.DynamicInvoke(new Object[] {  });
+        o.DynamicInvoke(new Object[] { });
     }
 }
 

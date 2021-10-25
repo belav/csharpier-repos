@@ -5457,7 +5457,7 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
                 DynamicMethod hello = new DynamicMethod(
                     "Hello",
                     typeof(int),
-                    new Type[] {  },
+                    new Type[] { },
                     typeof(string).Module
                 );
 
@@ -5466,7 +5466,7 @@ param2 (correct answer is 'local-param2-arg'): local-param2-arg
 
                 // Load into XslCompiledTransform
                 var xslt = new XslCompiledTransform();
-                xslt.Load(hello, new byte[] {  }, new Type[] {  });
+                xslt.Load(hello, new byte[] { }, new Type[] { });
 
                 // Run the transformation
                 Stream res = new MemoryStream();

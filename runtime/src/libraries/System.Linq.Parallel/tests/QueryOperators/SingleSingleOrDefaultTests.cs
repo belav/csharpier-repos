@@ -156,7 +156,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SingleSpecificData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Single_OneMatch_Longrunning(int count, int element)
@@ -182,7 +181,6 @@ namespace System.Linq.Parallel.Tests
             nameof(SingleSpecificData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void SingleOrDefault_OneMatch_Longrunning(int count, int element)

@@ -22,7 +22,7 @@ namespace System.Formats.Cbor.Tests
             "a56161614161626142616361436164614461656145"
         )]
         [InlineData(
-            new object[] { Map, "a", "A", -1, 2, new byte[] {  }, new byte[] { 1 } },
+            new object[] { Map, "a", "A", -1, 2, new byte[] { }, new byte[] { 1 } },
             "a3616161412002404101"
         )]
         public static void ReadMap_SimpleValues_HappyPath(
@@ -102,7 +102,7 @@ namespace System.Formats.Cbor.Tests
             "bf6161614161626142616361436164614461656145ff"
         )]
         [InlineData(
-            new object[] { Map, "a", "A", -1, 2, new byte[] {  }, new byte[] { 1 } },
+            new object[] { Map, "a", "A", -1, 2, new byte[] { }, new byte[] { 1 } },
             "bf616161412002404101ff"
         )]
         public static void ReadMap_IndefiniteLength_SimpleValues_HappyPath(

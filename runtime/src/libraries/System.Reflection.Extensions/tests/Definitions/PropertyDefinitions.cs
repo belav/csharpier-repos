@@ -28,9 +28,9 @@ namespace System.Reflection.Tests
             "ProIntprop3",
         };
 
-        public static string[] InheritedPropertyNames = new string[] {  };
+        public static string[] InheritedPropertyNames = new string[] { };
 
-        public static string[] InheritedButHiddenPropertyNames = new string[] {  };
+        public static string[] InheritedButHiddenPropertyNames = new string[] { };
 
         public static string[] PublicPropertyNames = new string[]
         {
@@ -244,8 +244,8 @@ namespace System.Reflection.Tests
         public static int MembersEverything = 22;
 
         public static string[] DeclaredPropertyNames = new string[] { "Item", "Item", "Item" };
-        public static string[] InheritedPropertyNames = new string[] {  };
-        public static string[] InheritedButHiddenPropertyNames = new string[] {  };
+        public static string[] InheritedPropertyNames = new string[] { };
+        public static string[] InheritedButHiddenPropertyNames = new string[] { };
         public static string[] PublicPropertyNames = new string[] { "Item", "Item", "Item" };
 
         public int this[int i]
@@ -303,8 +303,8 @@ namespace System.Reflection.Tests
             "prop3",
             "prop4"
         };
-        public static string[] InheritedPropertyNames = new string[] {  };
-        public static string[] InheritedButHiddenPropertyNames = new string[] {  };
+        public static string[] InheritedPropertyNames = new string[] { };
+        public static string[] InheritedButHiddenPropertyNames = new string[] { };
         public static string[] PublicPropertyNames = new string[] { "prop1" };
 
         public abstract string prop1 { get; set; }
@@ -325,8 +325,8 @@ namespace System.Reflection.Tests
             "prop3",
             "prop4"
         };
-        public static new string[] InheritedPropertyNames = new string[] {  };
-        public static new string[] InheritedButHiddenPropertyNames = new string[] {  };
+        public static new string[] InheritedPropertyNames = new string[] { };
+        public static new string[] InheritedButHiddenPropertyNames = new string[] { };
         public static new string[] PublicPropertyNames = new string[] { "prop1" };
 
         public override abstract string prop1 { get; set; }

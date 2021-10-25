@@ -32,7 +32,7 @@ namespace Microsoft.AspNetCore.ResponseCompression.Tests
                 new StreamResponseBodyFeature(new MemoryStream())
             );
 
-            stream.Write(new byte[] {  }, 0, 0);
+            stream.Write(new byte[] { }, 0, 0);
 
             Assert.Equal(expectedVaryHeader, httpContext.Response.Headers[HeaderNames.Vary]);
         }

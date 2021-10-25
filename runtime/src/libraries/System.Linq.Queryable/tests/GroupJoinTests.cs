@@ -87,7 +87,7 @@ namespace System.Linq.Tests
         [Fact]
         public void OuterEmptyInnerNonEmpty()
         {
-            CustomerRec[] outer = {  };
+            CustomerRec[] outer = { };
             OrderRec[] inner = new[]
             {
                 new OrderRec { orderID = 45321, custID = 98022, total = 50 },
@@ -133,7 +133,7 @@ namespace System.Linq.Tests
                     orderID = new int?[] { 93489 },
                     total = new int?[] { 45 }
                 },
-                new JoinRec { name = "Bob", orderID = new int?[] {  }, total = new int?[] {  } },
+                new JoinRec { name = "Bob", orderID = new int?[] { }, total = new int?[] { } },
                 new JoinRec
                 {
                     name = "Robert",
@@ -499,8 +499,8 @@ namespace System.Linq.Tests
             };
             JoinRec[] expected = new[]
             {
-                new JoinRec { name = "Tim", orderID = new int?[] {  }, total = new int?[] {  } },
-                new JoinRec { name = "Bob", orderID = new int?[] {  }, total = new int?[] {  } },
+                new JoinRec { name = "Tim", orderID = new int?[] { }, total = new int?[] { } },
+                new JoinRec { name = "Bob", orderID = new int?[] { }, total = new int?[] { } },
                 new JoinRec
                 {
                     name = "Robert",

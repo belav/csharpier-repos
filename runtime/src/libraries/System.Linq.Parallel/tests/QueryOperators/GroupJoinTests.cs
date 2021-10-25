@@ -125,7 +125,6 @@ namespace System.Linq.Parallel.Tests
             nameof(GroupJoinData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void GroupJoin_Longrunning(
@@ -220,7 +219,6 @@ namespace System.Linq.Parallel.Tests
             nameof(GroupJoinData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void GroupJoin_NotPipelined_Longrunning(
@@ -334,7 +332,6 @@ namespace System.Linq.Parallel.Tests
             nameof(GroupJoinMultipleData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void GroupJoin_Multiple_Longrunning(
@@ -406,7 +403,6 @@ namespace System.Linq.Parallel.Tests
             nameof(GroupJoinMultipleData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void GroupJoin_Multiple_LeftWithOrderingColisions_Longrunning(
@@ -530,7 +526,6 @@ namespace System.Linq.Parallel.Tests
             nameof(GroupJoinMultipleData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void GroupJoin_CustomComparator_Longrunning(
@@ -643,7 +638,6 @@ namespace System.Linq.Parallel.Tests
             nameof(GroupJoinMultipleData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void GroupJoin_CustomComparator_LeftWithOrderingColisions_Longrunning(

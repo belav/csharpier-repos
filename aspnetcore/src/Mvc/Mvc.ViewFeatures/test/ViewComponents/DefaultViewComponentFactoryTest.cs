@@ -14,7 +14,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         public void CreateViewComponent_ActivatesProperties_OnTheInstance()
         {
             // Arrange
-            var context = new ViewComponentContext {  };
+            var context = new ViewComponentContext { };
 
             var component = new ActivablePropertiesViewComponent();
             var activator = new Mock<IViewComponentActivator>();
@@ -38,7 +38,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         public void ReleaseViewComponent_CallsDispose_OnTheInstance()
         {
             // Arrange
-            var context = new ViewComponentContext {  };
+            var context = new ViewComponentContext { };
 
             var component = new ActivablePropertiesViewComponent();
 
@@ -60,7 +60,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         public async Task ReleaseViewComponentAsync_CallsDispose_OnTheInstance()
         {
             // Arrange
-            var context = new ViewComponentContext {  };
+            var context = new ViewComponentContext { };
 
             var component = new ActivablePropertiesViewComponent();
 
@@ -83,7 +83,7 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents
         public async Task ReleaseViewComponentAsync_CallsDisposeAsync_OnAsyncDisposableComponents()
         {
             // Arrange
-            var context = new ViewComponentContext {  };
+            var context = new ViewComponentContext { };
 
             var component = new AsyncDisposableViewComponent();
 

@@ -165,7 +165,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var replacements = new RouteEndpoint[3]
             {
                 CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata(), }),
-                CreateEndpoint($"new /B", metadata: new object[] {  }),
+                CreateEndpoint($"new /B", metadata: new object[] { }),
                 CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata(), }),
             };
 
@@ -217,7 +217,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var replacements = new RouteEndpoint[3]
             {
                 CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata(), }),
-                CreateEndpoint($"new /B", metadata: new object[] {  }),
+                CreateEndpoint($"new /B", metadata: new object[] { }),
                 CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata(), }),
             };
 
@@ -276,7 +276,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
             var replacements = new RouteEndpoint[3]
             {
                 CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata(), }),
-                CreateEndpoint($"new /B", metadata: new object[] {  }),
+                CreateEndpoint($"new /B", metadata: new object[] { }),
                 CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata(), }),
             };
 

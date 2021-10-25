@@ -134,7 +134,7 @@ namespace N1 {
                 assemblyName: "Test",
                 options: TestOptions.DebugExe,
                 syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text) },
-                references: new MetadataReference[] {  }
+                references: new MetadataReference[] { }
             );
             var compRef = new CSharpCompilationReference(comp1);
 
@@ -317,13 +317,13 @@ namespace NS.NS1 {
                 assemblyName: "Test1",
                 options: TestOptions.DebugExe,
                 syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text1) },
-                references: new MetadataReference[] {  }
+                references: new MetadataReference[] { }
             );
             var comp2 = CSharpCompilation.Create(
                 assemblyName: "Test2",
                 options: TestOptions.DebugExe,
                 syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text2) },
-                references: new MetadataReference[] {  }
+                references: new MetadataReference[] { }
             );
 
             var compRef1 = new CSharpCompilationReference(comp1);
@@ -393,7 +393,7 @@ namespace NS.NS1 {
             var comp = CSharpCompilation.Create(
                 assemblyName: "Test1",
                 syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text1) },
-                references: new MetadataReference[] {  }
+                references: new MetadataReference[] { }
             );
             var global = comp.GlobalNamespace; // throw
             var ns = global.GetMembers("N1").Single() as NamespaceSymbol;

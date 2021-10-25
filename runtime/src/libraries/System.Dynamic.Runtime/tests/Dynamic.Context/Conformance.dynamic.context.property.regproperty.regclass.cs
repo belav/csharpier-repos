@@ -60,7 +60,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
         public decimal[] myDecimalArr = new decimal[2];
         public dynamic myDynamic = new object();
         public float myFloat = 3f;
-        public float?[] myFloatNullArr = new float?[] {  };
+        public float?[] myFloatNullArr = new float?[] { };
         public MyClass myClass = new MyClass() { Field = 2 };
         public MyClass[] myClassArr = new MyClass[3];
         public MyEnum myEnum = MyEnum.First;

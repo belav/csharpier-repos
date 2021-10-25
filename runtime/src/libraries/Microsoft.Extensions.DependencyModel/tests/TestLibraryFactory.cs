@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public static readonly string DefaultType = "package";
         public static readonly string DefaultPackageName = "My.Package";
         public static readonly string DefaultVersion = "1.2.3.7";
-        public static readonly Dependency[] DefaultDependencies = {  };
+        public static readonly Dependency[] DefaultDependencies = { };
         public static readonly bool DefaultServiceable = true;
         public static readonly string DefaultPath = null;
         public static readonly string DefaultHashPath = null;
@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public static readonly string SecondAssembly = "My.PackageEx.dll";
         public static readonly string DefaultAssemblyPath = Path.Combine("ref", DefaultAssembly);
         public static readonly string SecondAssemblyPath = Path.Combine("ref", SecondAssembly);
-        public static readonly string[] EmptyAssemblies = {  };
+        public static readonly string[] EmptyAssemblies = { };
         public static readonly string[] DefaultAssemblies = { DefaultAssemblyPath };
         public static readonly string[] TwoAssemblies = { DefaultAssemblyPath, SecondAssemblyPath };
 

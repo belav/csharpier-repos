@@ -51,7 +51,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SourceEmpty()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Empty(source.OrderBy(e => e).ThenBy(e => e));
         }

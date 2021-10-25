@@ -12,7 +12,7 @@ namespace System.Formats.Cbor.Tests
         // Additional pairs generated using http://cbor.me/
 
         [Theory]
-        [InlineData(new object[] {  }, "80")]
+        [InlineData(new object[] { }, "80")]
         [InlineData(new object[] { 42 }, "81182a")]
         [InlineData(new object[] { 1, 2, 3 }, "83010203")]
         [InlineData(
@@ -67,7 +67,7 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new object[] { new object[] {  } }, "8180")]
+        [InlineData(new object[] { new object[] { } }, "8180")]
         [InlineData(
             new object[] { 1, new object[] { 2, 3 }, new object[] { 4, 5 } },
             "8301820203820405"
@@ -76,7 +76,7 @@ namespace System.Formats.Cbor.Tests
             new object[]
             {
                 "",
-                new object[] { new object[] {  }, new object[] { 1, new byte[] { 10 } } }
+                new object[] { new object[] { }, new object[] { 1, new byte[] { 10 } } }
             },
             "826082808201410a"
         )]
@@ -92,7 +92,7 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData(new object[] {  }, "9fff")]
+        [InlineData(new object[] { }, "9fff")]
         [InlineData(new object[] { 42 }, "9f182aff")]
         [InlineData(new object[] { 1, 2, 3 }, "9f010203ff")]
         [InlineData(

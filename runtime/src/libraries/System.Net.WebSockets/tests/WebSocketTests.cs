@@ -196,7 +196,7 @@ namespace System.Net.WebSockets.Tests
         }
 
         [Theory]
-        [InlineData(WebSocketState.Closed, new WebSocketState[] {  })]
+        [InlineData(WebSocketState.Closed, new WebSocketState[] { })]
         [InlineData(WebSocketState.Closed, new WebSocketState[] { WebSocketState.Open })]
         [InlineData(
             WebSocketState.Open,

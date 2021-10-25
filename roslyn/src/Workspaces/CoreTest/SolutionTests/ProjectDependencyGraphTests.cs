@@ -124,7 +124,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
         public void TestGetProjectsThatThisProjectTransitivelyDependsOn()
         {
-            VerifyTransitiveReferences(CreateSolutionFromReferenceMap("A"), "A", new string[] {  });
+            VerifyTransitiveReferences(CreateSolutionFromReferenceMap("A"), "A", new string[] { });
             VerifyTransitiveReferences(
                 CreateSolutionFromReferenceMap("B:A A"),
                 "B",
@@ -138,7 +138,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyTransitiveReferences(
                 CreateSolutionFromReferenceMap("C:B B:A A"),
                 "A",
-                new string[] {  }
+                new string[] { }
             );
         }
 
@@ -166,10 +166,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // but we will add the B -> C link last, to verify that when we add the B to C link we update the references of A.
 
             var solution = CreateSolutionFromReferenceMap("A B C D");
-            VerifyTransitiveReferences(solution, "A", new string[] {  });
-            VerifyTransitiveReferences(solution, "B", new string[] {  });
-            VerifyTransitiveReferences(solution, "C", new string[] {  });
-            VerifyTransitiveReferences(solution, "D", new string[] {  });
+            VerifyTransitiveReferences(solution, "A", new string[] { });
+            VerifyTransitiveReferences(solution, "B", new string[] { });
+            VerifyTransitiveReferences(solution, "C", new string[] { });
+            VerifyTransitiveReferences(solution, "D", new string[] { });
 
             solution = AddProjectReferences(solution, "A", new string[] { "B" });
             solution = AddProjectReferences(solution, "C", new string[] { "D" });
@@ -178,9 +178,9 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyDirectReferences(solution, "C", new string[] { "D" });
 
             VerifyTransitiveReferences(solution, "A", new string[] { "B" });
-            VerifyTransitiveReferences(solution, "B", new string[] {  });
+            VerifyTransitiveReferences(solution, "B", new string[] { });
             VerifyTransitiveReferences(solution, "C", new string[] { "D" });
-            VerifyTransitiveReferences(solution, "D", new string[] {  });
+            VerifyTransitiveReferences(solution, "D", new string[] { });
 
             solution = AddProjectReferences(solution, "B", new string[] { "C" });
 
@@ -189,7 +189,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyTransitiveReferences(solution, "A", new string[] { "B", "C", "D" });
             VerifyTransitiveReferences(solution, "B", new string[] { "C", "D" });
             VerifyTransitiveReferences(solution, "C", new string[] { "D" });
-            VerifyTransitiveReferences(solution, "D", new string[] {  });
+            VerifyTransitiveReferences(solution, "D", new string[] { });
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -228,7 +228,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             {
                 VerifyTransitiveReferences(solution, "A", new string[] { "B", "C" });
                 VerifyTransitiveReferences(solution, "B", new string[] { "C" });
-                VerifyTransitiveReferences(solution, "C", new string[] {  });
+                VerifyTransitiveReferences(solution, "C", new string[] { });
             }
 
             VerifyAllTransitiveReferences();
@@ -256,7 +256,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
                 SpecializedCollections.EmptyEnumerable<ProjectReference>()
             );
 
-            VerifyTransitiveReferences(solution, "A", new string[] {  });
+            VerifyTransitiveReferences(solution, "A", new string[] { });
 
             // At this point, we know the references for "A" (it's empty), but B and C's are still unknown.
             // At this point, we're also going to directly use the underlying project graph APIs;
@@ -303,8 +303,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
 
             solution = solution.AddProject(projectAInfo);
 
-            VerifyDirectReferences(solution, "A", new string[] {  });
-            VerifyTransitiveReferences(solution, "A", new string[] {  });
+            VerifyDirectReferences(solution, "A", new string[] { });
+            VerifyTransitiveReferences(solution, "A", new string[] { });
 
             solution = solution.AddProject(projectBId, "B", "B", LanguageNames.CSharp);
 
@@ -321,7 +321,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // and then add A referencing B and D in one call, to make sure that works.
 
             var solution = CreateSolutionFromReferenceMap("A B:C C D:E E");
-            VerifyTransitiveReferences(solution, "A", new string[] {  });
+            VerifyTransitiveReferences(solution, "A", new string[] { });
 
             solution = AddProjectReferences(solution, "A", new string[] { "B", "D" });
 
@@ -385,8 +385,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
                 Enumerable.Empty<ProjectReference>()
             );
 
-            VerifyDirectReferences(solution, "A", new string[] {  });
-            VerifyDirectReverseReferences(solution, "B", new string[] {  });
+            VerifyDirectReferences(solution, "A", new string[] { });
+            VerifyDirectReverseReferences(solution, "B", new string[] { });
         }
 
         #region GetProjectsThatTransitivelyDependOnThisProject
@@ -397,7 +397,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyReverseTransitiveReferences(
                 CreateSolutionFromReferenceMap("A"),
                 "A",
-                new string[] {  }
+                new string[] { }
             );
             VerifyReverseTransitiveReferences(
                 CreateSolutionFromReferenceMap("B:A A"),
@@ -412,7 +412,7 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyReverseTransitiveReferences(
                 CreateSolutionFromReferenceMap("C:B B:A A"),
                 "C",
-                new string[] {  }
+                new string[] { }
             );
             VerifyReverseTransitiveReferences(
                 CreateSolutionFromReferenceMap("D:C,B B:A C A"),
@@ -445,10 +445,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // but we will add the B -> C link last, to verify that when we add the B to C link we update the reverse references of D.
 
             var solution = CreateSolutionFromReferenceMap("A B C D");
-            VerifyReverseTransitiveReferences(solution, "A", new string[] {  });
-            VerifyReverseTransitiveReferences(solution, "B", new string[] {  });
-            VerifyReverseTransitiveReferences(solution, "C", new string[] {  });
-            VerifyReverseTransitiveReferences(solution, "D", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "A", new string[] { });
+            VerifyReverseTransitiveReferences(solution, "B", new string[] { });
+            VerifyReverseTransitiveReferences(solution, "C", new string[] { });
+            VerifyReverseTransitiveReferences(solution, "D", new string[] { });
 
             solution = AddProjectReferences(solution, "A", new string[] { "B" });
             solution = AddProjectReferences(solution, "C", new string[] { "D" });
@@ -456,16 +456,16 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyDirectReverseReferences(solution, "B", new string[] { "A" });
             VerifyDirectReverseReferences(solution, "D", new string[] { "C" });
 
-            VerifyReverseTransitiveReferences(solution, "A", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "A", new string[] { });
             VerifyReverseTransitiveReferences(solution, "B", new string[] { "A" });
-            VerifyReverseTransitiveReferences(solution, "C", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "C", new string[] { });
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "C" });
 
             solution = AddProjectReferences(solution, "B", new string[] { "C" });
 
             VerifyDirectReverseReferences(solution, "C", new string[] { "B" });
 
-            VerifyReverseTransitiveReferences(solution, "A", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "A", new string[] { });
             VerifyReverseTransitiveReferences(solution, "B", new string[] { "A" });
             VerifyReverseTransitiveReferences(solution, "C", new string[] { "A", "B" });
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "A", "B", "C" });
@@ -482,9 +482,9 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // all our caches, and asking for the reverse references of A will compute it again.
 
             var solution = CreateSolutionFromReferenceMap("A:B B C:D D");
-            VerifyReverseTransitiveReferences(solution, "A", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "A", new string[] { });
             VerifyReverseTransitiveReferences(solution, "B", new string[] { "A" });
-            VerifyReverseTransitiveReferences(solution, "C", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "C", new string[] { });
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "C" });
 
             solution = solution.WithProjectReferences(
@@ -508,13 +508,13 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyDirectReferences(solution, "A", new string[] { "B" });
             VerifyDirectReferences(solution, "B", new string[] { "C" });
             VerifyDirectReferences(solution, "C", new string[] { "D" });
-            VerifyDirectReferences(solution, "D", new string[] {  });
+            VerifyDirectReferences(solution, "D", new string[] { });
 
             solution = solution.RemoveProject(solution.GetProjectsByName("B").Single().Id);
 
-            VerifyDirectReferences(solution, "A", new string[] {  });
+            VerifyDirectReferences(solution, "A", new string[] { });
             VerifyDirectReferences(solution, "C", new string[] { "D" });
-            VerifyDirectReferences(solution, "D", new string[] {  });
+            VerifyDirectReferences(solution, "D", new string[] { });
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -530,13 +530,13 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyTransitiveReferences(solution, "A", new string[] { "B", "C", "D" });
             VerifyTransitiveReferences(solution, "B", new string[] { "C", "D" });
             VerifyTransitiveReferences(solution, "C", new string[] { "D" });
-            VerifyTransitiveReferences(solution, "D", new string[] {  });
+            VerifyTransitiveReferences(solution, "D", new string[] { });
 
             solution = solution.RemoveProject(solution.GetProjectsByName("B").Single().Id);
 
-            VerifyTransitiveReferences(solution, "A", new string[] {  });
+            VerifyTransitiveReferences(solution, "A", new string[] { });
             VerifyTransitiveReferences(solution, "C", new string[] { "D" });
-            VerifyTransitiveReferences(solution, "D", new string[] {  });
+            VerifyTransitiveReferences(solution, "D", new string[] { });
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Workspace)]
@@ -549,15 +549,15 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // and will then remove project B.
 
             var solution = CreateSolutionFromReferenceMap("A:B B:C C:D D");
-            VerifyDirectReverseReferences(solution, "A", new string[] {  });
+            VerifyDirectReverseReferences(solution, "A", new string[] { });
             VerifyDirectReverseReferences(solution, "B", new string[] { "A" });
             VerifyDirectReverseReferences(solution, "C", new string[] { "B" });
             VerifyDirectReverseReferences(solution, "D", new string[] { "C" });
 
             solution = solution.RemoveProject(solution.GetProjectsByName("B").Single().Id);
 
-            VerifyDirectReverseReferences(solution, "A", new string[] {  });
-            VerifyDirectReverseReferences(solution, "C", new string[] {  });
+            VerifyDirectReverseReferences(solution, "A", new string[] { });
+            VerifyDirectReverseReferences(solution, "C", new string[] { });
             VerifyDirectReverseReferences(solution, "D", new string[] { "C" });
         }
 
@@ -571,15 +571,15 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // and will then remove project B.
 
             var solution = CreateSolutionFromReferenceMap("A:B B:C C:D D");
-            VerifyReverseTransitiveReferences(solution, "A", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "A", new string[] { });
             VerifyReverseTransitiveReferences(solution, "B", new string[] { "A" });
             VerifyReverseTransitiveReferences(solution, "C", new string[] { "A", "B" });
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "A", "B", "C" });
 
             solution = solution.RemoveProject(solution.GetProjectsByName("B").Single().Id);
 
-            VerifyReverseTransitiveReferences(solution, "A", new string[] {  });
-            VerifyReverseTransitiveReferences(solution, "C", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "A", new string[] { });
+            VerifyReverseTransitiveReferences(solution, "C", new string[] { });
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "C" });
         }
 
@@ -711,19 +711,19 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             VerifyDirectReferences(solution, "A", new string[] { "B" });
             VerifyDirectReferences(solution, "B", new string[] { "C" });
             VerifyDirectReferences(solution, "C", new string[] { "D" });
-            VerifyDirectReferences(solution, "D", new string[] {  });
+            VerifyDirectReferences(solution, "D", new string[] { });
 
             VerifyTransitiveReferences(solution, "A", new string[] { "B", "C", "D" });
             VerifyTransitiveReferences(solution, "B", new string[] { "C", "D" });
             VerifyTransitiveReferences(solution, "C", new string[] { "D" });
-            VerifyTransitiveReferences(solution, "D", new string[] {  });
+            VerifyTransitiveReferences(solution, "D", new string[] { });
 
-            VerifyDirectReverseReferences(solution, "A", new string[] {  });
+            VerifyDirectReverseReferences(solution, "A", new string[] { });
             VerifyDirectReverseReferences(solution, "B", new string[] { "A" });
             VerifyDirectReverseReferences(solution, "C", new string[] { "B" });
             VerifyDirectReverseReferences(solution, "D", new string[] { "C" });
 
-            VerifyReverseTransitiveReferences(solution, "A", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "A", new string[] { });
             VerifyReverseTransitiveReferences(solution, "B", new string[] { "A" });
             VerifyReverseTransitiveReferences(solution, "C", new string[] { "A", "B" });
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "A", "B", "C" });
@@ -745,23 +745,23 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             Assert.NotSame(dependencyGraph, solution.State.GetProjectDependencyGraph());
 
             VerifyDirectReferences(solution, "A", new string[] { "B" });
-            VerifyDirectReferences(solution, "B", new string[] {  });
+            VerifyDirectReferences(solution, "B", new string[] { });
             VerifyDirectReferences(solution, "C", new string[] { "D" });
-            VerifyDirectReferences(solution, "D", new string[] {  });
+            VerifyDirectReferences(solution, "D", new string[] { });
 
             VerifyTransitiveReferences(solution, "A", new string[] { "B" });
-            VerifyTransitiveReferences(solution, "B", new string[] {  });
+            VerifyTransitiveReferences(solution, "B", new string[] { });
             VerifyTransitiveReferences(solution, "C", new string[] { "D" });
-            VerifyTransitiveReferences(solution, "D", new string[] {  });
+            VerifyTransitiveReferences(solution, "D", new string[] { });
 
-            VerifyDirectReverseReferences(solution, "A", new string[] {  });
+            VerifyDirectReverseReferences(solution, "A", new string[] { });
             VerifyDirectReverseReferences(solution, "B", new string[] { "A" });
-            VerifyDirectReverseReferences(solution, "C", new string[] {  });
+            VerifyDirectReverseReferences(solution, "C", new string[] { });
             VerifyDirectReverseReferences(solution, "D", new string[] { "C" });
 
-            VerifyReverseTransitiveReferences(solution, "A", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "A", new string[] { });
             VerifyReverseTransitiveReferences(solution, "B", new string[] { "A" });
-            VerifyReverseTransitiveReferences(solution, "C", new string[] {  });
+            VerifyReverseTransitiveReferences(solution, "C", new string[] { });
             VerifyReverseTransitiveReferences(solution, "D", new string[] { "C" });
         }
 

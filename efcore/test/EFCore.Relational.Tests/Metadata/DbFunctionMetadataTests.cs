@@ -191,7 +191,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
 
         private static readonly MethodInfo MethodImi = typeof(TestMethods).GetRuntimeMethod(
             nameof(TestMethods.MethodI),
-            new Type[] {  }
+            new Type[] { }
         );
 
         private static readonly MethodInfo MethodHmi = typeof(TestMethods)

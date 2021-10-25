@@ -93,7 +93,7 @@ End Namespace
             VisualStudio.Editor.PlaceCaret(" Comment", charsOffset: -2);
             VisualStudio.SendKeys.Send("F = 0");
             VisualStudio.ErrorList.ShowErrorList();
-            var expectedContents = new ErrorListItem[] {  };
+            var expectedContents = new ErrorListItem[] { };
             var actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),
@@ -125,7 +125,7 @@ End Namespace
             VisualStudio.Editor.PlaceCaret("FF = 0 ' Comment", charsOffset: -1);
             VisualStudio.Editor.SendKeys(VirtualKey.Delete);
             VisualStudio.ErrorList.ShowErrorList();
-            expectedContents = new ErrorListItem[] {  };
+            expectedContents = new ErrorListItem[] { };
             actualContents = VisualStudio.ErrorList.GetErrorListContents();
             AssertEx.EqualOrDiff(
                 string.Join<ErrorListItem>(Environment.NewLine, expectedContents),

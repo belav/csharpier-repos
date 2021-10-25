@@ -189,7 +189,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             var ctorBuilder = typeBuilder.DefineConstructor(
                 MethodAttributes.Public,
                 CallingConventions.Standard,
-                new Type[] {  }
+                new Type[] { }
             );
             var ilGenerator = ctorBuilder.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);

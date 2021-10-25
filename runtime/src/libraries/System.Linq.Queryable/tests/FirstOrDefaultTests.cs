@@ -11,7 +11,7 @@ namespace System.Linq.Tests
         [Fact]
         public void Empty()
         {
-            int[] source = {  };
+            int[] source = { };
 
             Assert.Equal(0, source.AsQueryable().FirstOrDefault());
         }
@@ -19,7 +19,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyDefault()
         {
-            int[] source = {  };
+            int[] source = { };
             int defaultValue = 5;
 
             Assert.Equal(defaultValue, source.AsQueryable().FirstOrDefault(defaultValue));

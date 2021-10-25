@@ -139,7 +139,6 @@ namespace System.Linq.Parallel.Tests
             nameof(ZipData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Zip_Longrunning(
@@ -223,7 +222,6 @@ namespace System.Linq.Parallel.Tests
             nameof(ZipData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Zip_NotPipelined_Longrunning(

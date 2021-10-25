@@ -441,7 +441,7 @@ namespace System.Text.Encodings.Tests
         [Theory]
         [InlineData(new byte[] { 0xF1 }, new byte[] { 0xF1 }, -1)]
         [InlineData(new byte[] { 0xF1 }, new byte[] { 0x80 }, -1)]
-        [InlineData(new byte[] { 0xF1, 0x80 }, new byte[] {  }, -2)]
+        [InlineData(new byte[] { 0xF1, 0x80 }, new byte[] { }, -2)]
         [InlineData(new byte[] { 0xF1, 0x80 }, new byte[] { 0x60 }, -2)]
         [InlineData(new byte[] { 0xF1, 0x80 }, new byte[] { 0x80 }, -2)]
         [InlineData(new byte[] { 0xF1, 0x80, 0x80 }, new byte[] { 0x60 }, -3)]

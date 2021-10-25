@@ -325,7 +325,7 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Formatters
         }
 
         [Theory]
-        [InlineData(new byte[] {  })]
+        [InlineData(new byte[] { })]
         [InlineData(new byte[] { 0x04, 0xAB, 0xCD, 0xEF })]
         [InlineData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0x07 })] // 2GB
         [InlineData(new byte[] { 0x80 })] // size is cut

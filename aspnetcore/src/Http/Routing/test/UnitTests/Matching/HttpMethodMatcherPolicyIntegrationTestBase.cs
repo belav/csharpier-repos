@@ -196,7 +196,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public async Task Match_EmptyMethodList_MatchesAnyHttpMethod()
         {
             // Arrange
-            var endpoint = CreateEndpoint("/hello", httpMethods: new string[] {  });
+            var endpoint = CreateEndpoint("/hello", httpMethods: new string[] { });
 
             var matcher = CreateMatcher(endpoint);
             var httpContext = CreateContext("/hello", "GET");
@@ -261,7 +261,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public async Task NotMatch_HttpMethod_WithAllMethodEndpoint_DoesNotReturn405()
         {
             // Arrange
-            var endpoint1 = CreateEndpoint("/{x:int}", httpMethods: new string[] {  });
+            var endpoint1 = CreateEndpoint("/{x:int}", httpMethods: new string[] { });
             var endpoint2 = CreateEndpoint("/hello", httpMethods: new string[] { "DELETE" });
 
             var matcher = CreateMatcher(endpoint1, endpoint2);
@@ -296,7 +296,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             // Arrange
             var endpoint1 = CreateEndpoint("/hello", httpMethods: new string[] { "GET", });
-            var endpoint2 = CreateEndpoint("/bar", httpMethods: new string[] {  });
+            var endpoint2 = CreateEndpoint("/bar", httpMethods: new string[] { });
 
             var matcher = CreateMatcher(endpoint1, endpoint2);
             var httpContext = CreateContext("/hello", "GET");
@@ -313,7 +313,7 @@ namespace Microsoft.AspNetCore.Routing.Matching
         {
             // Arrange
             var endpoint1 = CreateEndpoint("/{x}", httpMethods: new string[] { "GET", });
-            var endpoint2 = CreateEndpoint("/{x}", httpMethods: new string[] {  });
+            var endpoint2 = CreateEndpoint("/{x}", httpMethods: new string[] { });
 
             var matcher = CreateMatcher(endpoint1, endpoint2);
             var httpContext = CreateContext("/hello", "POST");

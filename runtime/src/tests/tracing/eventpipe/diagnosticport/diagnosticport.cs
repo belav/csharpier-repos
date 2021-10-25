@@ -459,7 +459,7 @@ namespace Tracing.Tests.DiagnosticPortValidation
                 bool result = true;
                 try
                 {
-                    result = await (Task<bool>)test.Invoke(null, new object[] {  });
+                    result = await (Task<bool>)test.Invoke(null, new object[] { });
                 }
                 catch (Exception e)
                 {

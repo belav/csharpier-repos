@@ -65,7 +65,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MinData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Min_Int_Longrunning(
@@ -115,7 +114,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MinData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Min_Long_Longrunning(
@@ -185,7 +183,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MinData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Min_Float_Longrunning(
@@ -281,7 +278,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MinData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Min_Double_Longrunning(
@@ -365,7 +361,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MinData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Min_Decimal_Longrunning(
@@ -429,7 +424,6 @@ namespace System.Linq.Parallel.Tests
             nameof(MinData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Min_Other_Longrunning(

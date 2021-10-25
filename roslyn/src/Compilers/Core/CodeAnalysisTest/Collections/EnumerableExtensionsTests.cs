@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void AsSingleton()
         {
-            Assert.Equal(0, new int[] {  }.AsSingleton());
+            Assert.Equal(0, new int[] { }.AsSingleton());
             Assert.Equal(1, new int[] { 1 }.AsSingleton());
             Assert.Equal(0, new int[] { 1, 2 }.AsSingleton());
 

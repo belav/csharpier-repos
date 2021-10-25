@@ -67,7 +67,7 @@ namespace System.IO.Tests
         public async Task EmptyStringCreatesFileAsync()
         {
             string path = GetTestFilePath();
-            await WriteAsync(path, new string[] {  });
+            await WriteAsync(path, new string[] { });
             Assert.True(File.Exists(path));
             Assert.Empty(await ReadAsync(path));
         }

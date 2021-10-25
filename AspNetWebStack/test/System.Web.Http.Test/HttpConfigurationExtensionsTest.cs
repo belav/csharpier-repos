@@ -67,7 +67,7 @@ namespace System.Net.Http
             {
                 new RoutePrefixAttribute("prefix")
             };
-            var routeProviders = new Collection<RouteAttribute>() {  };
+            var routeProviders = new Collection<RouteAttribute>() { };
             SetUpConfiguration(config, routePrefixes, routeProviders);
 
             // Act
@@ -87,7 +87,7 @@ namespace System.Net.Http
             {
                 new RoutePrefixAttribute("prefix")
             };
-            var routeProviders = new Collection<RouteAttribute>() {  };
+            var routeProviders = new Collection<RouteAttribute>() { };
             SetUpConfiguration(config, routePrefixes, routeProviders);
 
             // Act
@@ -169,7 +169,7 @@ namespace System.Net.Http
         {
             // Arrange
             var config = new HttpConfiguration();
-            var routePrefixes = new Collection<IRoutePrefix>() {  };
+            var routePrefixes = new Collection<IRoutePrefix>() { };
             var routeProviders = new Collection<RouteAttribute>() { new RouteAttribute("/get") };
             SetUpConfiguration(config, routePrefixes, routeProviders);
 
@@ -231,7 +231,7 @@ namespace System.Net.Http
         {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            var routePrefixes = new Collection<IRoutePrefix>() {  };
+            var routePrefixes = new Collection<IRoutePrefix>() { };
             var routeProviders = new Collection<RouteAttribute>()
             {
                 new RouteAttribute("get1") { Name = "one" },

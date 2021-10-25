@@ -1246,16 +1246,16 @@ namespace System.Data.Tests
 
             // 'columnNames' argument cannot be null.\r\nParameter name: columnNames
             Assert.Throws<ArgumentNullException>(() => view.ToTable(false, null));
-            DataTable newTable1 = view.ToTable(false, new string[] {  });
+            DataTable newTable1 = view.ToTable(false, new string[] { });
             Assert.Equal(10, newTable1.Rows.Count);
 
-            newTable1 = view.ToTable(true, new string[] {  });
+            newTable1 = view.ToTable(true, new string[] { });
             Assert.Equal(3, newTable1.Columns.Count);
             Assert.Equal(5, newTable1.Rows.Count);
 
             table.Rows.Add(new object[] { 1, 100, 100 });
 
-            newTable1 = view.ToTable(true, new string[] {  });
+            newTable1 = view.ToTable(true, new string[] { });
             Assert.Equal(3, newTable1.Columns.Count);
             Assert.Equal(6, newTable1.Rows.Count);
 

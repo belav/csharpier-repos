@@ -283,7 +283,7 @@ namespace System.SpanTests
             int idx = sp.LastIndexOfAny(values);
             Assert.Equal(-1, idx);
 
-            values = new ReadOnlySpan<int>(new int[] {  });
+            values = new ReadOnlySpan<int>(new int[] { });
             idx = sp.LastIndexOfAny(values);
             Assert.Equal(-1, idx);
         }
@@ -756,7 +756,7 @@ namespace System.SpanTests
             int idx = sp.LastIndexOfAny(values);
             Assert.Equal(-1, idx);
 
-            values = new ReadOnlySpan<string>(new string[] {  });
+            values = new ReadOnlySpan<string>(new string[] { });
             idx = sp.LastIndexOfAny(values);
             Assert.Equal(-1, idx);
         }

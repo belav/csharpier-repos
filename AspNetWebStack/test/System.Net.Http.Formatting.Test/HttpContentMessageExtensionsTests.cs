@@ -147,7 +147,7 @@ namespace System.Net.Http
             {
                 return new TheoryDataSet<HttpContent>
                 {
-                    new ByteArrayContent(new byte[] {  }),
+                    new ByteArrayContent(new byte[] { }),
                     new StringContent(String.Empty),
                     new StringContent(String.Empty, Encoding.UTF8, "application/http"),
                 };
@@ -264,7 +264,7 @@ namespace System.Net.Http
                 "content"
             );
             Assert.ThrowsArgument(
-                () => new ByteArrayContent(new byte[] {  }).ReadAsHttpRequestMessageAsync(),
+                () => new ByteArrayContent(new byte[] { }).ReadAsHttpRequestMessageAsync(),
                 "content"
             );
             Assert.ThrowsArgument(
@@ -335,7 +335,7 @@ namespace System.Net.Http
                 "content"
             );
             Assert.ThrowsArgument(
-                () => new ByteArrayContent(new byte[] {  }).ReadAsHttpResponseMessageAsync(),
+                () => new ByteArrayContent(new byte[] { }).ReadAsHttpResponseMessageAsync(),
                 "content"
             );
             Assert.ThrowsArgument(

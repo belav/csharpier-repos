@@ -465,7 +465,7 @@ namespace System.Text.Tests
                 new char[] { '\u0020' }, // U+0020
                 new char[] { '\u0061', '\u0080' }, // U+0061 and U+0080 (continues on next line)
                 new char[] { '\ud800' }, // U+10000 (continues on next line)
-                new char[] {  }, // empty segment, just to make sure we handle it correctly
+                new char[] { }, // empty segment, just to make sure we handle it correctly
                 new char[] { '\udc00', '\udbff' }, // (cont.) + U+10FFFF (continues on next line)
                 new char[] { '\udfff' }, // (cont.)
                 new char[] { '\ud800' }
@@ -555,7 +555,7 @@ namespace System.Text.Tests
                 new char[] { '\u0020' }, // U+0020
                 new char[] { '\u0061', '\u0080' }, // U+0061 and U+0080 (continues on next line)
                 new char[] { '\ud800' }, // U+10000 (continues on next line)
-                new char[] {  }, // empty segment, just to make sure we handle it correctly
+                new char[] { }, // empty segment, just to make sure we handle it correctly
                 new char[] { '\udc00', '\udbff' }, // (cont.) + U+10FFFF (continues on next line)
                 new char[] { '\udfff' }, // (cont.)
                 new char[] { '\ud800' }
@@ -660,7 +660,7 @@ namespace System.Text.Tests
                 new byte[] { 0x20 }, // U+0020
                 new byte[] { 0x61, 0xC2 }, // U+0061 and U+0080 (continues on next line)
                 new byte[] { 0x80, 0xED }, // (cont.) + U+D7FF (continues on next line)
-                new byte[] {  }, // empty segment, just to make sure we handle it correctly
+                new byte[] { }, // empty segment, just to make sure we handle it correctly
                 new byte[] { 0x9F, 0xBF, 0xF4, 0x80 }, // (cont.) + U+100000 (continues on next line)
                 new byte[] { 0x80, 0x80 }, // (cont.)
                 new byte[] { 0xC2 }
@@ -754,7 +754,7 @@ namespace System.Text.Tests
                 new byte[] { 0x20 }, // U+0020
                 new byte[] { 0x61, 0xC2 }, // U+0061 and U+0080 (continues on next line)
                 new byte[] { 0x80, 0xED }, // (cont.) + U+D7FF (continues on next line)
-                new byte[] {  }, // empty segment, just to make sure we handle it correctly
+                new byte[] { }, // empty segment, just to make sure we handle it correctly
                 new byte[] { 0x9F, 0xBF, 0xF4, 0x80 }, // (cont.) + U+100000 (continues on next line)
                 new byte[] { 0x80, 0x80 }, // (cont.)
                 new byte[] { 0xC2 }

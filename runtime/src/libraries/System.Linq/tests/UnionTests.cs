@@ -83,18 +83,18 @@ namespace System.Linq.Tests
         [Fact]
         public void BothEmpty()
         {
-            int[] first = {  };
-            int[] second = {  };
+            int[] first = { };
+            int[] second = { };
             Assert.Empty(first.Union(second));
         }
 
         [Fact]
         public void ManyEmpty()
         {
-            int[] first = {  };
-            int[] second = {  };
-            int[] third = {  };
-            int[] fourth = {  };
+            int[] first = { };
+            int[] second = { };
+            int[] third = { };
+            int[] fourth = { };
             Assert.Empty(first.Union(second).Union(third).Union(fourth));
         }
 
@@ -202,7 +202,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyWithNonEmpty()
         {
-            int[] first = {  };
+            int[] first = { };
             int[] second = { 2, 4, 5, 3, 2, 3, 9 };
             int[] expected = { 2, 4, 5, 3, 9 };
 
@@ -213,7 +213,7 @@ namespace System.Linq.Tests
         public void NonEmptyWithEmpty()
         {
             int[] first = { 2, 4, 5, 3, 2, 3, 9 };
-            int[] second = {  };
+            int[] second = { };
             int[] expected = { 2, 4, 5, 3, 9 };
 
             Assert.Equal(expected, first.Union(second));

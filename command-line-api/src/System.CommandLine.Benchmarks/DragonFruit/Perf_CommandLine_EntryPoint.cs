@@ -139,7 +139,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
         public async Task SearchForStartingPointUsingReflection() =>
             await System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
                 _testAssembly,
-                new string[] {  },
+                new string[] { },
                 null,
                 _testAssemblyXmlDocsFilePath,
                 _nullConsole
@@ -149,7 +149,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
         public async Task SearchForStartingPointWhenGivenEntryPointClass() =>
             await System.CommandLine.DragonFruit.CommandLine.ExecuteAssemblyAsync(
                 _testAssembly,
-                new string[] {  },
+                new string[] { },
                 "PerfTestApp.Program",
                 _testAssemblyXmlDocsFilePath,
                 _nullConsole

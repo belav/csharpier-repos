@@ -25,7 +25,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptyDefault()
         {
-            int[] source = {  };
+            int[] source = { };
             int defaultValue = 5;
             Assert.Equal(defaultValue, source.AsQueryable().SingleOrDefault(5));
         }
@@ -73,7 +73,7 @@ namespace System.Linq.Tests
         [Fact]
         public void ThrowsOnNullPredicate()
         {
-            int[] source = {  };
+            int[] source = { };
             Expression<Func<int, bool>> nullPredicate = null;
             AssertExtensions.Throws<ArgumentNullException>(
                 "predicate",

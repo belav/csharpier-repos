@@ -48,7 +48,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void PathAssemblyResolverWithNoPath()
         {
-            var resolver = new PathAssemblyResolver(new string[] {  });
+            var resolver = new PathAssemblyResolver(new string[] { });
             Assert.Throws<FileNotFoundException>(
                 () => new MetadataLoadContext(resolver, "mscorlib")
             );
@@ -57,7 +57,7 @@ namespace System.Reflection.Tests
         [Fact]
         public static void PathAssemblyResolverWithNoPathAndNoCoreAssemblyName()
         {
-            var resolver = new PathAssemblyResolver(new string[] {  });
+            var resolver = new PathAssemblyResolver(new string[] { });
             Assert.Throws<FileNotFoundException>(() => new MetadataLoadContext(resolver));
         }
 

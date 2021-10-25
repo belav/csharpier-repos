@@ -48,8 +48,8 @@ namespace System.Linq.Tests
         }
 
         [Theory]
-        [InlineData(new int[] {  }, new int[] {  }, new int[] {  })] // Both inputs are empty
-        [InlineData(new int[] {  }, new int[] { 2, 6, 4, 6, 2 }, new int[] { 2, 6, 4, 6, 2 })] // One is empty
+        [InlineData(new int[] { }, new int[] { }, new int[] { })] // Both inputs are empty
+        [InlineData(new int[] { }, new int[] { 2, 6, 4, 6, 2 }, new int[] { 2, 6, 4, 6, 2 })] // One is empty
         [InlineData(new int[] { 2, 3, 5, 9 }, new int[] { 8, 10 }, new int[] { 2, 3, 5, 9, 8, 10 })] // Neither side is empty
         public void PossiblyEmptyInputs(
             IEnumerable<int> first,
@@ -375,8 +375,8 @@ namespace System.Linq.Tests
             Assert.Equal(0, concatChain.Count()); // should not throw a StackOverflowException
             // ToArray needs the count as well, and the process of copying all of the collections
             // to the array should also not be recursive.
-            Assert.Equal(new int[] {  }, concatChain.ToArray());
-            Assert.Equal(new List<int> {  }, concatChain.ToList()); // ToList also gets the count beforehand
+            Assert.Equal(new int[] { }, concatChain.ToArray());
+            Assert.Equal(new List<int> { }, concatChain.ToList()); // ToList also gets the count beforehand
         }
 
         [Fact]

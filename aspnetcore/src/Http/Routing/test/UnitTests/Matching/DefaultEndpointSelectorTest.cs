@@ -17,8 +17,8 @@ namespace Microsoft.AspNetCore.Routing.Matching
         public async Task SelectAsync_NoCandidates_DoesNothing()
         {
             // Arrange
-            var endpoints = new RouteEndpoint[] {  };
-            var scores = new int[] {  };
+            var endpoints = new RouteEndpoint[] { };
+            var scores = new int[] { };
             var candidateSet = CreateCandidateSet(endpoints, scores);
 
             var httpContext = CreateContext();

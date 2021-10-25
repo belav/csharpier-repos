@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             // If we don't support the main change kind, then the other method should be called
             using var workspace = new CustomizedCanApplyWorkspace(
-                allowedKinds: new ApplyChangesKind[] {  },
+                allowedKinds: new ApplyChangesKind[] { },
                 canApplyCompilationOptions: (_, newCompilationOptions) =>
                     newCompilationOptions.MainTypeName == "Test"
             );
@@ -137,7 +137,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             // If we don't support the main change kind, then the other method should be called
             using var workspace = new CustomizedCanApplyWorkspace(
-                allowedKinds: new ApplyChangesKind[] {  },
+                allowedKinds: new ApplyChangesKind[] { },
                 canApplyCompilationOptions: (_, newCompilationOptions) =>
                     newCompilationOptions.MainTypeName == "Expected"
             );
@@ -188,7 +188,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             // If we don't support the main change kind, then the other method should be called
             using var workspace = new CustomizedCanApplyWorkspace(
-                allowedKinds: new ApplyChangesKind[] {  },
+                allowedKinds: new ApplyChangesKind[] { },
                 canApplyParseOptions: (_, newParseOptions) =>
                     newParseOptions.Features["Feature"] == "ExpectedValue"
             );
@@ -211,7 +211,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             // If we don't support the main change kind, then the other method should be called
             using var workspace = new CustomizedCanApplyWorkspace(
-                allowedKinds: new ApplyChangesKind[] {  },
+                allowedKinds: new ApplyChangesKind[] { },
                 canApplyParseOptions: (_, newParseOptions) =>
                     newParseOptions.Features["Feature"] == "ExpectedValue"
             );

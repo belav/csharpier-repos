@@ -1354,7 +1354,7 @@ namespace System.Tests
         public void ConvertAll()
         {
             int[] result = Array.ConvertAll(
-                new int[] {  },
+                new int[] { },
                 new Converter<int, int>(
                     i =>
                     {
@@ -1362,7 +1362,7 @@ namespace System.Tests
                     }
                 )
             );
-            Assert.Equal(new int[] {  }, result);
+            Assert.Equal(new int[] { }, result);
 
             string[] result2 = Array.ConvertAll(
                 new int[] { 1 },
@@ -1394,7 +1394,7 @@ namespace System.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "converter",
-                () => Array.ConvertAll<string, string>(new string[] {  }, null)
+                () => Array.ConvertAll<string, string>(new string[] { }, null)
             );
         }
 

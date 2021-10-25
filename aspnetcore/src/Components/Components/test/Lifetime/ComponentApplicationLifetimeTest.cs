@@ -117,7 +117,7 @@ namespace Microsoft.AspNetCore.Components
             );
             var renderer = new TestRenderer();
 
-            var sequence = new List<int> {  };
+            var sequence = new List<int> { };
 
             var tcs = new TaskCompletionSource();
             var tcs2 = new TaskCompletionSource();

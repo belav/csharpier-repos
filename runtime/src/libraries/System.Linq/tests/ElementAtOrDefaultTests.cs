@@ -384,7 +384,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency()
         {
-            int?[] source = {  };
+            int?[] source = { };
 
             Assert.Null(source.ElementAtOrDefault(1));
             Assert.Null(source.ElementAtOrDefault(-1));
@@ -405,7 +405,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_NotList()
         {
-            int?[] source = {  };
+            int?[] source = { };
 
             Assert.Null(ForceNotCollection(source).ElementAtOrDefault(1));
             Assert.Null(ForceNotCollection(source).ElementAtOrDefault(-1));
@@ -426,7 +426,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_ListPartition()
         {
-            int?[] source = {  };
+            int?[] source = { };
 
             Assert.Null(ListPartitionOrEmpty(source).ElementAtOrDefault(1));
             Assert.Null(ListPartitionOrEmpty(source).ElementAtOrDefault(-1));
@@ -447,7 +447,7 @@ namespace System.Linq.Tests
         [Fact]
         public void EmptySource_Consistency_EnumerablePartition()
         {
-            int?[] source = {  };
+            int?[] source = { };
 
             Assert.Null(EnumerablePartitionOrEmpty(source).ElementAtOrDefault(1));
             Assert.Null(EnumerablePartitionOrEmpty(source).ElementAtOrDefault(-1));

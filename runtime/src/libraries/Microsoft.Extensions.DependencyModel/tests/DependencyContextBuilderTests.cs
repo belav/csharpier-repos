@@ -42,8 +42,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             _defaultFramework = NuGetFramework.Parse("net451");
             return new DependencyContextBuilder(_referenceAssembliesPath).Build(
                 compilerOptions,
-                compilationExports ?? new LibraryExport[] {  },
-                runtimeExports ?? new LibraryExport[] {  },
+                compilationExports ?? new LibraryExport[] { },
+                runtimeExports ?? new LibraryExport[] { },
                 portable,
                 target ?? _defaultFramework,
                 runtime ?? string.Empty
@@ -507,7 +507,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 "PATH",
                 new LockFilePackageLibrary()
                 {
-                    Files = new string[] {  },
+                    Files = new string[] { },
                     IsServiceable = servicable ?? false,
                     Name = name ?? _defaultName,
                     Version = version ?? _defaultVersion,

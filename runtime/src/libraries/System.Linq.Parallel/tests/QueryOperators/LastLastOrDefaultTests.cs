@@ -59,14 +59,12 @@ namespace System.Linq.Parallel.Tests
             nameof(LastUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(LastData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Last_Longrunning(
@@ -100,14 +98,12 @@ namespace System.Linq.Parallel.Tests
             nameof(LastUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(LastData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void LastOrDefault_Longrunning(
@@ -167,14 +163,12 @@ namespace System.Linq.Parallel.Tests
             nameof(LastUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(LastData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void Last_NoMatch_Longrunning(
@@ -208,14 +202,12 @@ namespace System.Linq.Parallel.Tests
             nameof(LastUnorderedData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         [MemberData(
             nameof(LastData),
             new int[]
             { /* Sources.OuterLoopCount */
-
             }
         )]
         public static void LastOrDefault_NoMatch_Longrunning(

@@ -452,7 +452,7 @@ namespace System.Text.Encodings.Tests
         }
 
         [Theory]
-        [InlineData(new char[] { '\ud800' }, new char[] {  }, -1)]
+        [InlineData(new char[] { '\ud800' }, new char[] { }, -1)]
         [InlineData(new char[] { '\ud800' }, new char[] { 'x' }, -1)]
         [InlineData(new char[] { '\ud800' }, new char[] { '\ud800' }, -1)]
         [InlineData(new char[] { '\ud800' }, new char[] { '\udfff', '\udfff' }, 1)]

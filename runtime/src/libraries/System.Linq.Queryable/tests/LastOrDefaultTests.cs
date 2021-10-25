@@ -17,7 +17,7 @@ namespace System.Linq.Tests.LegacyTests
         [Fact]
         public void EmptyDefault()
         {
-            int[] source = {  };
+            int[] source = { };
             int defaultValue = 5;
             Assert.Equal(defaultValue, source.AsQueryable().LastOrDefault(defaultValue));
         }

@@ -269,7 +269,7 @@ namespace System.Linq.Expressions.Tests
                     Func<TestPrivateDefaultConstructor>
                 >(
                     Expression.New(typeof(TestPrivateDefaultConstructor)),
-                    new ParameterExpression[] {  }
+                    new ParameterExpression[] { }
                 );
                 return lambda.Compile(useInterpreter);
             }

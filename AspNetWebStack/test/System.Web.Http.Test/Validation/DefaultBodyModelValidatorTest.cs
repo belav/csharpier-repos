@@ -357,7 +357,7 @@ namespace System.Web.Http.Validation
         {
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
-                yield return new ValidationResult("Error1", new string[] {  });
+                yield return new ValidationResult("Error1", new string[] { });
                 yield return new ValidationResult("Error2", new[] { "Property1" });
                 yield return new ValidationResult("Error3", new[] { "Property2", "Property3" });
             }

@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 ? CreateWorkspaceWithRecoverableSyntaxTreesAndWeakCompilations()
                 : CreateWorkspace();
             var analyzerReference = new TestGeneratorReference(
-                new GenerateFileForEachAdditionalFileWithContentsCommented() {  }
+                new GenerateFileForEachAdditionalFileWithContentsCommented() { }
             );
             var project = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference);
@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace();
             var analyzerReference = new TestGeneratorReference(
-                new GenerateFileForEachAdditionalFileWithContentsCommented() {  }
+                new GenerateFileForEachAdditionalFileWithContentsCommented() { }
             );
             var project =
                 AddEmptyProject(workspace.CurrentSolution)
@@ -121,7 +121,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace();
             var analyzerReference = new TestGeneratorReference(
-                new GenerateFileForEachAdditionalFileWithContentsCommented() {  }
+                new GenerateFileForEachAdditionalFileWithContentsCommented() { }
             );
             var project =
                 AddEmptyProject(workspace.CurrentSolution)
